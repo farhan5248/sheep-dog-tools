@@ -1,9 +1,21 @@
-grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
-
-generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
-
-Model:
-	greetings+=Greeting*;
-	
-Greeting:
-	'Hello' name=ID '!';
+grammar org.example.domainmodel.Domainmodel with
+                                      org.eclipse.xtext.common.Terminals
+ 
+generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
+ 
+Domainmodel:
+    (elements+=Type)*;
+ 
+Type:
+    DataType | Entity;
+ 
+DataType:
+    'datatype' name=ID;
+ 
+Entity:
+    'entity' name=ID ('extends' superType=[Entity])? '{'
+        (features+=Feature)*
+    '}';
+ 
+Feature:
+    (many?='many')? name=ID ':' type=[Type];
