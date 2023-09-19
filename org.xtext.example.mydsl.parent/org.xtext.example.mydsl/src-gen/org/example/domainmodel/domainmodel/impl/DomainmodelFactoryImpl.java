@@ -66,6 +66,9 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
     switch (eClass.getClassifierID())
     {
       case DomainmodelPackage.DOMAINMODEL: return createDomainmodel();
+      case DomainmodelPackage.PACKAGE_DECLARATION: return createPackageDeclaration();
+      case DomainmodelPackage.ABSTRACT_ELEMENT: return createAbstractElement();
+      case DomainmodelPackage.IMPORT: return createImport();
       case DomainmodelPackage.TYPE: return createType();
       case DomainmodelPackage.DATA_TYPE: return createDataType();
       case DomainmodelPackage.ENTITY: return createEntity();
@@ -85,6 +88,42 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
   {
     DomainmodelImpl domainmodel = new DomainmodelImpl();
     return domainmodel;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public PackageDeclaration createPackageDeclaration()
+  {
+    PackageDeclarationImpl packageDeclaration = new PackageDeclarationImpl();
+    return packageDeclaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public AbstractElement createAbstractElement()
+  {
+    AbstractElementImpl abstractElement = new AbstractElementImpl();
+    return abstractElement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Import createImport()
+  {
+    ImportImpl import_ = new ImportImpl();
+    return import_;
   }
 
   /**

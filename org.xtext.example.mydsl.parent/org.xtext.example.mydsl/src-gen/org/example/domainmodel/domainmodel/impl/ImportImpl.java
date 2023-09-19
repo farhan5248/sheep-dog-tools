@@ -10,49 +10,49 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.example.domainmodel.domainmodel.DomainmodelPackage;
-import org.example.domainmodel.domainmodel.Type;
+import org.example.domainmodel.domainmodel.Import;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Type</b></em>'.
+ * An implementation of the model object '<em><b>Import</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.example.domainmodel.domainmodel.impl.TypeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.example.domainmodel.domainmodel.impl.ImportImpl#getImportedNamespace <em>Imported Namespace</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class TypeImpl extends AbstractElementImpl implements Type
+public class ImportImpl extends AbstractElementImpl implements Import
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The default value of the '{@link #getImportedNamespace() <em>Imported Namespace</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getImportedNamespace()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
+  protected static final String IMPORTED_NAMESPACE_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getImportedNamespace() <em>Imported Namespace</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getImportedNamespace()
    * @generated
    * @ordered
    */
-  protected String name = NAME_EDEFAULT;
+  protected String importedNamespace = IMPORTED_NAMESPACE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected TypeImpl()
+  protected ImportImpl()
   {
     super();
   }
@@ -65,7 +65,7 @@ public class TypeImpl extends AbstractElementImpl implements Type
   @Override
   protected EClass eStaticClass()
   {
-    return DomainmodelPackage.Literals.TYPE;
+    return DomainmodelPackage.Literals.IMPORT;
   }
 
   /**
@@ -74,9 +74,9 @@ public class TypeImpl extends AbstractElementImpl implements Type
    * @generated
    */
   @Override
-  public String getName()
+  public String getImportedNamespace()
   {
-    return name;
+    return importedNamespace;
   }
 
   /**
@@ -85,12 +85,12 @@ public class TypeImpl extends AbstractElementImpl implements Type
    * @generated
    */
   @Override
-  public void setName(String newName)
+  public void setImportedNamespace(String newImportedNamespace)
   {
-    String oldName = name;
-    name = newName;
+    String oldImportedNamespace = importedNamespace;
+    importedNamespace = newImportedNamespace;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, DomainmodelPackage.TYPE__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, DomainmodelPackage.IMPORT__IMPORTED_NAMESPACE, oldImportedNamespace, importedNamespace));
   }
 
   /**
@@ -103,8 +103,8 @@ public class TypeImpl extends AbstractElementImpl implements Type
   {
     switch (featureID)
     {
-      case DomainmodelPackage.TYPE__NAME:
-        return getName();
+      case DomainmodelPackage.IMPORT__IMPORTED_NAMESPACE:
+        return getImportedNamespace();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,8 +119,8 @@ public class TypeImpl extends AbstractElementImpl implements Type
   {
     switch (featureID)
     {
-      case DomainmodelPackage.TYPE__NAME:
-        setName((String)newValue);
+      case DomainmodelPackage.IMPORT__IMPORTED_NAMESPACE:
+        setImportedNamespace((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,8 +136,8 @@ public class TypeImpl extends AbstractElementImpl implements Type
   {
     switch (featureID)
     {
-      case DomainmodelPackage.TYPE__NAME:
-        setName(NAME_EDEFAULT);
+      case DomainmodelPackage.IMPORT__IMPORTED_NAMESPACE:
+        setImportedNamespace(IMPORTED_NAMESPACE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -153,8 +153,8 @@ public class TypeImpl extends AbstractElementImpl implements Type
   {
     switch (featureID)
     {
-      case DomainmodelPackage.TYPE__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case DomainmodelPackage.IMPORT__IMPORTED_NAMESPACE:
+        return IMPORTED_NAMESPACE_EDEFAULT == null ? importedNamespace != null : !IMPORTED_NAMESPACE_EDEFAULT.equals(importedNamespace);
     }
     return super.eIsSet(featureID);
   }
@@ -170,10 +170,10 @@ public class TypeImpl extends AbstractElementImpl implements Type
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (name: ");
-    result.append(name);
+    result.append(" (importedNamespace: ");
+    result.append(importedNamespace);
     result.append(')');
     return result.toString();
   }
 
-} //TypeImpl
+} //ImportImpl
