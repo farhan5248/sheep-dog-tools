@@ -8,5 +8,22 @@ Bundle-SymbolicName: cucumberxtexteditor; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase,
- org.eclipse.equinox.common;bundle-version="3.16.0"
+ org.eclipse.equinox.common;bundle-version="3.16.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
+Export-Package: mbt.parser.antlr,
+ mbt.scoping,
+ mbt.cucumber,
+ mbt.services,
+ mbt.cucumber.impl,
+ mbt.serializer,
+ mbt.cucumber.util,
+ mbt.parser.antlr.internal,
+ mbt.validation,
+ mbt.generator,
+ mbt
+Import-Package: org.apache.log4j
