@@ -4,48 +4,48 @@
 	<extension
 		point="org.eclipse.ui.editors">
 		<editor
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
 			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
 			default="true"
 			extensions="feature"
-			id="mbt.Cucumber"
+			id="org.farhan.Cucumber"
 			name="Cucumber Editor">
 		</editor>
 	</extension>
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
 			commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
 			<activeWhen>
 				<reference
-					definitionId="mbt.Cucumber.Editor.opened">
+					definitionId="org.farhan.Cucumber.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
 		<handler
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
-			commandId="mbt.Cucumber.validate">
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+			commandId="org.farhan.Cucumber.validate">
 			<activeWhen>
 				<reference
-					definitionId="mbt.Cucumber.Editor.opened">
+					definitionId="org.farhan.Cucumber.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
 		<!-- copy qualified name -->
 		<handler
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedNameHandler"
 			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName">
 			<activeWhen>
-				<reference definitionId="mbt.Cucumber.Editor.opened" />
+				<reference definitionId="org.farhan.Cucumber.Editor.opened" />
 			</activeWhen>
 		</handler>
 		<handler
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedNameHandler"
 			commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName">
 			<activeWhen>
 				<and>
-					<reference definitionId="mbt.Cucumber.XtextEditor.opened" />
+					<reference definitionId="org.farhan.Cucumber.XtextEditor.opened" />
 					<iterate>
 						<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
 					</iterate>
@@ -54,22 +54,22 @@
 		</handler>
 	</extension>
 	<extension point="org.eclipse.core.expressions.definitions">
-		<definition id="mbt.Cucumber.Editor.opened">
+		<definition id="org.farhan.Cucumber.Editor.opened">
 			<and>
 				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
 				<with variable="activeEditor">
 					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
-						value="mbt.Cucumber"
+						value="org.farhan.Cucumber"
 						forcePluginActivation="true"/>
 				</with>
 			</and>
 		</definition>
-		<definition id="mbt.Cucumber.XtextEditor.opened">
+		<definition id="org.farhan.Cucumber.XtextEditor.opened">
 			<and>
 				<reference definitionId="isXtextEditorActive"/>
 				<with variable="activeEditor">
 					<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
-						value="mbt.Cucumber"
+						value="org.farhan.Cucumber"
 						forcePluginActivation="true"/>
 				</with>
 			</and>
@@ -78,33 +78,33 @@
 	<extension
 			point="org.eclipse.ui.preferencePages">
 		<page
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-			id="mbt.Cucumber"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+			id="org.farhan.Cucumber"
 			name="Cucumber">
-			<keywordReference id="mbt.ui.keyword_Cucumber"/>
+			<keywordReference id="org.farhan.ui.keyword_Cucumber"/>
 		</page>
 		<page
-			category="mbt.Cucumber"
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-			id="mbt.Cucumber.coloring"
+			category="org.farhan.Cucumber"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+			id="org.farhan.Cucumber.coloring"
 			name="Syntax Coloring">
-			<keywordReference id="mbt.ui.keyword_Cucumber"/>
+			<keywordReference id="org.farhan.ui.keyword_Cucumber"/>
 		</page>
 		<page
-			category="mbt.Cucumber"
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
-			id="mbt.Cucumber.templates"
+			category="org.farhan.Cucumber"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+			id="org.farhan.Cucumber.templates"
 			name="Templates">
-			<keywordReference id="mbt.ui.keyword_Cucumber"/>
+			<keywordReference id="org.farhan.ui.keyword_Cucumber"/>
 		</page>
 	</extension>
 	<extension
 			point="org.eclipse.ui.propertyPages">
 		<page
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-			id="mbt.Cucumber"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+			id="org.farhan.Cucumber"
 			name="Cucumber">
-			<keywordReference id="mbt.ui.keyword_Cucumber"/>
+			<keywordReference id="org.farhan.ui.keyword_Cucumber"/>
 			<enabledWhen>
 				<adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
@@ -114,14 +114,14 @@
 	<extension
 		point="org.eclipse.ui.keywords">
 		<keyword
-			id="mbt.ui.keyword_Cucumber"
+			id="org.farhan.ui.keyword_Cucumber"
 			label="Cucumber"/>
 	</extension>
 	<extension
 		point="org.eclipse.ui.commands">
 		<command
 			description="Trigger expensive validation"
-			id="mbt.Cucumber.validate"
+			id="org.farhan.Cucumber.validate"
 			name="Validate">
 		</command>
 		<!-- copy qualified name -->
@@ -142,12 +142,12 @@
 		<menuContribution
 			locationURI="popup:#TextEditorContext?after=group.edit">
 			<command
-				commandId="mbt.Cucumber.validate"
+				commandId="org.farhan.Cucumber.validate"
 				style="push"
 				tooltip="Trigger expensive validation">
 				<visibleWhen checkEnabled="false">
 					<reference
-						definitionId="mbt.Cucumber.Editor.opened">
+						definitionId="org.farhan.Cucumber.Editor.opened">
 					</reference>
 				</visibleWhen>
 			</command>
@@ -157,7 +157,7 @@
 			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
 				style="push" tooltip="Copy Qualified Name">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="mbt.Cucumber.Editor.opened" />
+					<reference definitionId="org.farhan.Cucumber.Editor.opened" />
 				</visibleWhen>
 			</command>
 		</menuContribution>
@@ -165,7 +165,7 @@
 			<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
 				style="push" tooltip="Copy Qualified Name">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="mbt.Cucumber.Editor.opened" />
+					<reference definitionId="org.farhan.Cucumber.Editor.opened" />
 				</visibleWhen>
 			</command>
 		</menuContribution>
@@ -174,7 +174,7 @@
 				style="push" tooltip="Copy Qualified Name">
 				<visibleWhen checkEnabled="false">
 					<and>
-						<reference definitionId="mbt.Cucumber.XtextEditor.opened" />
+						<reference definitionId="org.farhan.Cucumber.XtextEditor.opened" />
 						<iterate>
 							<adapt type="org.eclipse.xtext.ui.editor.outline.IOutlineNode" />
 						</iterate>
@@ -187,7 +187,7 @@
 		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
 			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="mbt.Cucumber.Editor.opened">
+					<reference definitionId="org.farhan.Cucumber.Editor.opened">
 					</reference>
 				</visibleWhen>
 			</command>
@@ -195,11 +195,11 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 		<handler
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
 			commandId="org.eclipse.xtext.ui.editor.FindReferences">
 			<activeWhen>
 				<reference
-					definitionId="mbt.Cucumber.Editor.opened">
+					definitionId="org.farhan.Cucumber.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -208,7 +208,7 @@
 		<content-type
 			base-type="org.eclipse.core.runtime.text"
 			file-extensions="feature"
-			id="mbt.Cucumber.contenttype"
+			id="org.farhan.Cucumber.contenttype"
 			name="Cucumber File"
 			priority="normal">
 		</content-type>
@@ -217,17 +217,17 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="feature">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
 		<resourceServiceProvider
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
 			uriExtension="feature">
 		</resourceServiceProvider>
 	</extension>
-	<!-- marker definitions for mbt.Cucumber -->
+	<!-- marker definitions for org.farhan.Cucumber -->
 	<extension
 			id="cucumber.check.fast"
 			name="Cucumber Problem"
@@ -251,34 +251,34 @@
 	</extension>
 	<extension point="org.eclipse.ui.preferencePages">
 		<page
-			category="mbt.Cucumber"
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
-			id="mbt.Cucumber.validator.preferencePage"
+			category="org.farhan.Cucumber"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
+			id="org.farhan.Cucumber.validator.preferencePage"
 			name="Errors/Warnings">
-			<keywordReference id="mbt.ui.keyword_Cucumber"/>
+			<keywordReference id="org.farhan.ui.keyword_Cucumber"/>
 		</page>
 	</extension>
 	<extension point="org.eclipse.xtext.builder.participant">
 		<participant
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
 			fileExtensions="feature"/>
 	</extension>
 	<extension point="org.eclipse.ui.preferencePages">
 		<page
-			category="mbt.Cucumber"
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-			id="mbt.Cucumber.compiler.preferencePage"
+			category="org.farhan.Cucumber"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+			id="org.farhan.Cucumber.compiler.preferencePage"
 			name="Compiler">
-			<keywordReference id="mbt.ui.keyword_Cucumber"/>
+			<keywordReference id="org.farhan.ui.keyword_Cucumber"/>
 		</page>
 	</extension>
 	<extension point="org.eclipse.ui.propertyPages">
 		<page
-			category="mbt.Cucumber"
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-			id="mbt.Cucumber.compiler.propertyPage"
+			category="org.farhan.Cucumber"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+			id="org.farhan.Cucumber.compiler.propertyPage"
 			name="Compiler">
-			<keywordReference id="mbt.ui.keyword_Cucumber"/>
+			<keywordReference id="org.farhan.ui.keyword_Cucumber"/>
 			<enabledWhen>
 				<adapt type="org.eclipse.core.resources.IProject"/>
 			</enabledWhen>
@@ -289,20 +289,20 @@
 		<menuContribution locationURI="popup:#TextEditorContext?after=xtext.ui.openDeclaration">
 			<command
 				commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand"
-				id="mbt.Cucumber.OpenGeneratedCode"
+				id="org.farhan.Cucumber.OpenGeneratedCode"
 				style="push">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="mbt.Cucumber.Editor.opened" />
+					<reference definitionId="org.farhan.Cucumber.Editor.opened" />
 				</visibleWhen>
 			</command>
 		</menuContribution>
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 		<handler
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
 			commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand">
 			<activeWhen>
-				<reference definitionId="mbt.Cucumber.Editor.opened" />
+				<reference definitionId="org.farhan.Cucumber.Editor.opened" />
 			</activeWhen>
 		</handler>
 	</extension>
@@ -310,11 +310,11 @@
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
 			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
 			<activeWhen>
 				<reference
-					definitionId="mbt.Cucumber.Editor.opened">
+					definitionId="org.farhan.Cucumber.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -334,16 +334,16 @@
 				style="push"
 				tooltip="Open Quick Outline">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="mbt.Cucumber.Editor.opened"/>
+					<reference definitionId="org.farhan.Cucumber.Editor.opened"/>
 				</visibleWhen>
 			</command>
 		</menuContribution>
 	</extension>
-	<!-- quickfix marker resolution generator for mbt.Cucumber -->
+	<!-- quickfix marker resolution generator for org.farhan.Cucumber -->
 	<extension
 			point="org.eclipse.ui.ide.markerResolution">
 		<markerResolutionGenerator
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
 			markerType="cucumberxtexteditor.ui.cucumber.check.fast">
 			<attribute
 				name="FIXABLE_KEY"
@@ -351,7 +351,7 @@
 			</attribute>
 		</markerResolutionGenerator>
 		<markerResolutionGenerator
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
 			markerType="cucumberxtexteditor.ui.cucumber.check.normal">
 			<attribute
 				name="FIXABLE_KEY"
@@ -359,7 +359,7 @@
 			</attribute>
 		</markerResolutionGenerator>
 		<markerResolutionGenerator
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
 			markerType="cucumberxtexteditor.ui.cucumber.check.expensive">
 			<attribute
 				name="FIXABLE_KEY"
@@ -370,11 +370,11 @@
 	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
 			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
 			<activeWhen>
 				<reference
-					definitionId="mbt.Cucumber.Editor.opened">
+					definitionId="org.farhan.Cucumber.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -386,7 +386,7 @@
 				style="push">
 				<visibleWhen checkEnabled="false">
 					<reference
-						definitionId="mbt.Cucumber.Editor.opened">
+						definitionId="org.farhan.Cucumber.Editor.opened">
 					</reference>
 				</visibleWhen>
 			</command>
@@ -394,34 +394,34 @@
 	</extension>
 	<extension point="org.eclipse.ui.preferencePages">
 		<page
-			category="mbt.Cucumber"
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
-			id="mbt.Cucumber.refactoring"
+			category="org.farhan.Cucumber"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+			id="org.farhan.Cucumber.refactoring"
 			name="Refactoring">
-			<keywordReference id="mbt.ui.keyword_Cucumber"/>
+			<keywordReference id="org.farhan.ui.keyword_Cucumber"/>
 		</page>
 	</extension>
 	<extension point="org.eclipse.compare.contentViewers">
-		<viewer id="mbt.Cucumber.compare.contentViewers"
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+		<viewer id="org.farhan.Cucumber.compare.contentViewers"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="feature">
 		</viewer>
 		<contentTypeBinding
-			contentTypeId="mbt.Cucumber.contenttype"
-			contentViewerId="mbt.Cucumber.compare.contentViewers" />
+			contentTypeId="org.farhan.Cucumber.contenttype"
+			contentViewerId="org.farhan.Cucumber.compare.contentViewers" />
 	</extension>
 	<extension point="org.eclipse.compare.contentMergeViewers">
-		<viewer id="mbt.Cucumber.compare.contentMergeViewers"
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+		<viewer id="org.farhan.Cucumber.compare.contentMergeViewers"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
 			extensions="feature" label="Cucumber Compare">
 		</viewer>
 		<contentTypeBinding
-			contentTypeId="mbt.Cucumber.contenttype"
-			contentMergeViewerId="mbt.Cucumber.compare.contentMergeViewers" />
+			contentTypeId="org.farhan.Cucumber.contenttype"
+			contentMergeViewerId="org.farhan.Cucumber.compare.contentMergeViewers" />
 	</extension>
 	<extension point="org.eclipse.ui.editors.documentProviders">
-		<provider id="mbt.Cucumber.editors.documentProviders"
-			class="mbt.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+		<provider id="org.farhan.Cucumber.editors.documentProviders"
+			class="org.farhan.ui.CucumberExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
 			extensions="feature">
 		</provider>
 	</extension>

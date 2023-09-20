@@ -15,15 +15,15 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.common,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
-Export-Package: mbt.parser.antlr,
- mbt.scoping,
- mbt.cucumber,
- mbt.services,
- mbt.cucumber.impl,
- mbt.serializer,
- mbt.cucumber.util,
- mbt.parser.antlr.internal,
- mbt.validation,
- mbt.generator,
- mbt
+Export-Package: org.farhan.serializer,
+ org.farhan.cucumber.impl,
+ org.farhan.scoping,
+ org.farhan.services,
+ org.farhan.parser.antlr,
+ org.farhan.generator,
+ org.farhan,
+ org.farhan.validation,
+ org.farhan.cucumber.util,
+ org.farhan.parser.antlr.internal,
+ org.farhan.cucumber
 Import-Package: org.apache.log4j

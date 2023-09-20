@@ -8,12 +8,12 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import java.util.Collections;
 import java.util.Map;
-import mbt.CucumberRuntimeModule;
-import mbt.ui.CucumberUiModule;
 import org.apache.log4j.Logger;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
+import org.farhan.CucumberRuntimeModule;
+import org.farhan.ui.CucumberUiModule;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -23,7 +23,7 @@ import org.osgi.framework.BundleContext;
 public class CucumberxtexteditorActivator extends AbstractUIPlugin {
 
 	public static final String PLUGIN_ID = "cucumberxtexteditor.ui";
-	public static final String MBT_CUCUMBER = "mbt.Cucumber";
+	public static final String ORG_FARHAN_CUCUMBER = "org.farhan.Cucumber";
 	
 	private static final Logger logger = Logger.getLogger(CucumberxtexteditorActivator.class);
 	
@@ -73,14 +73,14 @@ public class CucumberxtexteditorActivator extends AbstractUIPlugin {
 	}
 	
 	protected com.google.inject.Module getRuntimeModule(String grammar) {
-		if (MBT_CUCUMBER.equals(grammar)) {
+		if (ORG_FARHAN_CUCUMBER.equals(grammar)) {
 			return new CucumberRuntimeModule();
 		}
 		throw new IllegalArgumentException(grammar);
 	}
 	
 	protected com.google.inject.Module getUiModule(String grammar) {
-		if (MBT_CUCUMBER.equals(grammar)) {
+		if (ORG_FARHAN_CUCUMBER.equals(grammar)) {
 			return new CucumberUiModule(this);
 		}
 		throw new IllegalArgumentException(grammar);

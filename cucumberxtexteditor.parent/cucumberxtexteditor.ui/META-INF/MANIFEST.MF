@@ -18,7 +18,7 @@ Require-Bundle: cucumberxtexteditor,
  org.eclipse.xtext.builder
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-17
-Export-Package: mbt.ui.contentassist,
- cucumberxtexteditor.ui.internal,
- mbt.ui.quickfix
+Export-Package: org.farhan.ui.quickfix,
+ org.farhan.ui.contentassist,
+ cucumberxtexteditor.ui.internal
 Bundle-Activator: cucumberxtexteditor.ui.internal.CucumberxtexteditorActivator
