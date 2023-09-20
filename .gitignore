@@ -1,6 +1,7 @@
 target
 bin
 release.properties
+**/*.xtendbin
 **/*.pdf
 **/*.doc
 **/*.docx
