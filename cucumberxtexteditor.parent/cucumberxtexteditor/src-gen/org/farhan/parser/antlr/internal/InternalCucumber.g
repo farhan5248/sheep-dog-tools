@@ -144,9 +144,28 @@ ruleFeature returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getFeatureAccess().getScenariosScenarioParserRuleCall_5_0());
+					newCompositeNode(grammarAccess.getFeatureAccess().getBackgroundBackgroundParserRuleCall_5_0());
 				}
-				lv_scenarios_5_0=ruleScenario
+				lv_background_5_0=ruleBackground
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getFeatureRule());
+					}
+					set(
+						$current,
+						"background",
+						lv_background_5_0,
+						"org.farhan.Cucumber.Background");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getFeatureAccess().getScenariosScenarioParserRuleCall_6_0());
+				}
+				lv_scenarios_6_0=ruleScenario
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getFeatureRule());
@@ -154,8 +173,88 @@ ruleFeature returns [EObject current=null]
 					add(
 						$current,
 						"scenarios",
-						lv_scenarios_5_0,
+						lv_scenarios_6_0,
 						"org.farhan.Cucumber.Scenario");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+	)
+;
+
+// Entry rule entryRuleBackground
+entryRuleBackground returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getBackgroundRule()); }
+	iv_ruleBackground=ruleBackground
+	{ $current=$iv_ruleBackground.current; }
+	EOF;
+
+// Rule Background
+ruleBackground returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='Background:'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getBackgroundAccess().getBackgroundKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getBackgroundAccess().getTitleSentenceParserRuleCall_1_0());
+				}
+				lv_title_1_0=ruleSentence
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getBackgroundRule());
+					}
+					set(
+						$current,
+						"title",
+						lv_title_1_0,
+						"org.farhan.Cucumber.Sentence");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getBackgroundAccess().getDescriptionDescriptionParserRuleCall_2_0());
+				}
+				lv_description_2_0=ruleDescription
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getBackgroundRule());
+					}
+					set(
+						$current,
+						"description",
+						lv_description_2_0,
+						"org.farhan.Cucumber.Description");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getBackgroundAccess().getStepsStepParserRuleCall_3_0());
+				}
+				lv_steps_3_0=ruleStep
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getBackgroundRule());
+					}
+					add(
+						$current,
+						"steps",
+						lv_steps_3_0,
+						"org.farhan.Cucumber.Step");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -502,6 +601,6 @@ RULE_WS : (' '|'\t')+;
 
 RULE_EOL : ('\r\n'|'\n')+;
 
-RULE_ID : ('a'..'z'|'A'..'Z'|'0'..'9')+;
+RULE_ID : ('a'..'z'|'A'..'Z'|'0'..'9'|'\'')+;
 
 RULE_WORD : RULE_WS RULE_ID;

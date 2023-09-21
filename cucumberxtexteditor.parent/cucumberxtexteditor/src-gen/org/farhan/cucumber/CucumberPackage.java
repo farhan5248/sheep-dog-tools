@@ -95,13 +95,22 @@ public interface CucumberPackage extends EPackage
   int FEATURE__DESCRIPTION = 2;
 
   /**
+   * The feature id for the '<em><b>Background</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FEATURE__BACKGROUND = 3;
+
+  /**
    * The feature id for the '<em><b>Scenarios</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FEATURE__SCENARIOS = 3;
+  int FEATURE__SCENARIOS = 4;
 
   /**
    * The number of structural features of the '<em>Feature</em>' class.
@@ -110,7 +119,53 @@ public interface CucumberPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FEATURE_FEATURE_COUNT = 4;
+  int FEATURE_FEATURE_COUNT = 5;
+
+  /**
+   * The meta object id for the '{@link org.farhan.cucumber.impl.BackgroundImpl <em>Background</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.farhan.cucumber.impl.BackgroundImpl
+   * @see org.farhan.cucumber.impl.CucumberPackageImpl#getBackground()
+   * @generated
+   */
+  int BACKGROUND = 1;
+
+  /**
+   * The feature id for the '<em><b>Title</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BACKGROUND__TITLE = 0;
+
+  /**
+   * The feature id for the '<em><b>Description</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BACKGROUND__DESCRIPTION = 1;
+
+  /**
+   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BACKGROUND__STEPS = 2;
+
+  /**
+   * The number of structural features of the '<em>Background</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BACKGROUND_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.farhan.cucumber.impl.ScenarioImpl <em>Scenario</em>}' class.
@@ -120,7 +175,7 @@ public interface CucumberPackage extends EPackage
    * @see org.farhan.cucumber.impl.CucumberPackageImpl#getScenario()
    * @generated
    */
-  int SCENARIO = 1;
+  int SCENARIO = 2;
 
   /**
    * The feature id for the '<em><b>Tags</b></em>' containment reference list.
@@ -175,7 +230,7 @@ public interface CucumberPackage extends EPackage
    * @see org.farhan.cucumber.impl.CucumberPackageImpl#getStep()
    * @generated
    */
-  int STEP = 2;
+  int STEP = 3;
 
   /**
    * The feature id for the '<em><b>Keyword</b></em>' attribute.
@@ -212,7 +267,7 @@ public interface CucumberPackage extends EPackage
    * @see org.farhan.cucumber.impl.CucumberPackageImpl#getDescription()
    * @generated
    */
-  int DESCRIPTION = 3;
+  int DESCRIPTION = 4;
 
   /**
    * The feature id for the '<em><b>Sentences</b></em>' attribute list.
@@ -240,7 +295,7 @@ public interface CucumberPackage extends EPackage
    * @see org.farhan.cucumber.impl.CucumberPackageImpl#getTag()
    * @generated
    */
-  int TAG = 4;
+  int TAG = 5;
 
   /**
    * The feature id for the '<em><b>Title</b></em>' attribute.
@@ -305,6 +360,17 @@ public interface CucumberPackage extends EPackage
   EReference getFeature_Description();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.farhan.cucumber.Feature#getBackground <em>Background</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Background</em>'.
+   * @see org.farhan.cucumber.Feature#getBackground()
+   * @see #getFeature()
+   * @generated
+   */
+  EReference getFeature_Background();
+
+  /**
    * Returns the meta object for the containment reference list '{@link org.farhan.cucumber.Feature#getScenarios <em>Scenarios</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -314,6 +380,49 @@ public interface CucumberPackage extends EPackage
    * @generated
    */
   EReference getFeature_Scenarios();
+
+  /**
+   * Returns the meta object for class '{@link org.farhan.cucumber.Background <em>Background</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Background</em>'.
+   * @see org.farhan.cucumber.Background
+   * @generated
+   */
+  EClass getBackground();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.farhan.cucumber.Background#getTitle <em>Title</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Title</em>'.
+   * @see org.farhan.cucumber.Background#getTitle()
+   * @see #getBackground()
+   * @generated
+   */
+  EAttribute getBackground_Title();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.farhan.cucumber.Background#getDescription <em>Description</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Description</em>'.
+   * @see org.farhan.cucumber.Background#getDescription()
+   * @see #getBackground()
+   * @generated
+   */
+  EReference getBackground_Description();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.farhan.cucumber.Background#getSteps <em>Steps</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Steps</em>'.
+   * @see org.farhan.cucumber.Background#getSteps()
+   * @see #getBackground()
+   * @generated
+   */
+  EReference getBackground_Steps();
 
   /**
    * Returns the meta object for class '{@link org.farhan.cucumber.Scenario <em>Scenario</em>}'.
@@ -501,12 +610,54 @@ public interface CucumberPackage extends EPackage
     EReference FEATURE__DESCRIPTION = eINSTANCE.getFeature_Description();
 
     /**
+     * The meta object literal for the '<em><b>Background</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FEATURE__BACKGROUND = eINSTANCE.getFeature_Background();
+
+    /**
      * The meta object literal for the '<em><b>Scenarios</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference FEATURE__SCENARIOS = eINSTANCE.getFeature_Scenarios();
+
+    /**
+     * The meta object literal for the '{@link org.farhan.cucumber.impl.BackgroundImpl <em>Background</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.farhan.cucumber.impl.BackgroundImpl
+     * @see org.farhan.cucumber.impl.CucumberPackageImpl#getBackground()
+     * @generated
+     */
+    EClass BACKGROUND = eINSTANCE.getBackground();
+
+    /**
+     * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BACKGROUND__TITLE = eINSTANCE.getBackground_Title();
+
+    /**
+     * The meta object literal for the '<em><b>Description</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference BACKGROUND__DESCRIPTION = eINSTANCE.getBackground_Description();
+
+    /**
+     * The meta object literal for the '<em><b>Steps</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference BACKGROUND__STEPS = eINSTANCE.getBackground_Steps();
 
     /**
      * The meta object literal for the '{@link org.farhan.cucumber.impl.ScenarioImpl <em>Scenario</em>}' class.

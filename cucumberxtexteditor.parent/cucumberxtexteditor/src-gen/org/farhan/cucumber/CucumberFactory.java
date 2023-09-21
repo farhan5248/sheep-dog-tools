@@ -33,6 +33,15 @@ public interface CucumberFactory extends EFactory
   Feature createFeature();
 
   /**
+   * Returns a new object of class '<em>Background</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Background</em>'.
+   * @generated
+   */
+  Background createBackground();
+
+  /**
    * Returns a new object of class '<em>Scenario</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

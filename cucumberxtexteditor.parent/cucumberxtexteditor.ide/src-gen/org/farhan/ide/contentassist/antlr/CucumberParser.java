@@ -33,6 +33,7 @@ public class CucumberParser extends AbstractContentAssistParser {
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, CucumberGrammarAccess grammarAccess) {
 			builder.put(grammarAccess.getStepAccess().getKeywordAlternatives_0_0(), "rule__Step__KeywordAlternatives_0_0");
 			builder.put(grammarAccess.getFeatureAccess().getGroup(), "rule__Feature__Group__0");
+			builder.put(grammarAccess.getBackgroundAccess().getGroup(), "rule__Background__Group__0");
 			builder.put(grammarAccess.getScenarioAccess().getGroup(), "rule__Scenario__Group__0");
 			builder.put(grammarAccess.getStepAccess().getGroup(), "rule__Step__Group__0");
 			builder.put(grammarAccess.getDescriptionAccess().getGroup(), "rule__Description__Group__0");
@@ -41,7 +42,11 @@ public class CucumberParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getFeatureAccess().getTagsAssignment_0(), "rule__Feature__TagsAssignment_0");
 			builder.put(grammarAccess.getFeatureAccess().getTitleAssignment_3(), "rule__Feature__TitleAssignment_3");
 			builder.put(grammarAccess.getFeatureAccess().getDescriptionAssignment_4(), "rule__Feature__DescriptionAssignment_4");
-			builder.put(grammarAccess.getFeatureAccess().getScenariosAssignment_5(), "rule__Feature__ScenariosAssignment_5");
+			builder.put(grammarAccess.getFeatureAccess().getBackgroundAssignment_5(), "rule__Feature__BackgroundAssignment_5");
+			builder.put(grammarAccess.getFeatureAccess().getScenariosAssignment_6(), "rule__Feature__ScenariosAssignment_6");
+			builder.put(grammarAccess.getBackgroundAccess().getTitleAssignment_1(), "rule__Background__TitleAssignment_1");
+			builder.put(grammarAccess.getBackgroundAccess().getDescriptionAssignment_2(), "rule__Background__DescriptionAssignment_2");
+			builder.put(grammarAccess.getBackgroundAccess().getStepsAssignment_3(), "rule__Background__StepsAssignment_3");
 			builder.put(grammarAccess.getScenarioAccess().getTagsAssignment_0(), "rule__Scenario__TagsAssignment_0");
 			builder.put(grammarAccess.getScenarioAccess().getTitleAssignment_3(), "rule__Scenario__TitleAssignment_3");
 			builder.put(grammarAccess.getScenarioAccess().getDescriptionAssignment_4(), "rule__Scenario__DescriptionAssignment_4");

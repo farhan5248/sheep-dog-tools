@@ -66,6 +66,7 @@ public class CucumberFactoryImpl extends EFactoryImpl implements CucumberFactory
     switch (eClass.getClassifierID())
     {
       case CucumberPackage.FEATURE: return createFeature();
+      case CucumberPackage.BACKGROUND: return createBackground();
       case CucumberPackage.SCENARIO: return createScenario();
       case CucumberPackage.STEP: return createStep();
       case CucumberPackage.DESCRIPTION: return createDescription();
@@ -85,6 +86,18 @@ public class CucumberFactoryImpl extends EFactoryImpl implements CucumberFactory
   {
     FeatureImpl feature = new FeatureImpl();
     return feature;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Background createBackground()
+  {
+    BackgroundImpl background = new BackgroundImpl();
+    return background;
   }
 
   /**

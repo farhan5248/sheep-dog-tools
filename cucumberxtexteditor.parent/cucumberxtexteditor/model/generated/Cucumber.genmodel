@@ -10,7 +10,13 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Feature/tags"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//Feature/title"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Feature/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Feature/background"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Feature/scenarios"/>
+    </genClasses>
+    <genClasses ecoreClass="Cucumber.ecore#//Background">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//Background/title"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Background/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Background/steps"/>
     </genClasses>
     <genClasses ecoreClass="Cucumber.ecore#//Scenario">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Scenario/tags"/>

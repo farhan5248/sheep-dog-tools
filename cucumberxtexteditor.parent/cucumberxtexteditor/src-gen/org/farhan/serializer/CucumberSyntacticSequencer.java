@@ -51,7 +51,7 @@ public class CucumberSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * terminal ID:
-	 * 	('a'..'z' | 'A'..'Z' | '0'..'9')+;
+	 * 	('a'..'z' | 'A'..'Z' | '0'..'9' | "'")+;
 	 */
 	protected String getIDToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)

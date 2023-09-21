@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.farhan.cucumber.Background;
 import org.farhan.cucumber.CucumberFactory;
 import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Description;
@@ -32,6 +33,13 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   private EClass featureEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass backgroundEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -173,9 +181,64 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EReference getFeature_Scenarios()
+  public EReference getFeature_Background()
   {
     return (EReference)featureEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getFeature_Scenarios()
+  {
+    return (EReference)featureEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getBackground()
+  {
+    return backgroundEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getBackground_Title()
+  {
+    return (EAttribute)backgroundEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getBackground_Description()
+  {
+    return (EReference)backgroundEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getBackground_Steps()
+  {
+    return (EReference)backgroundEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -345,7 +408,13 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
     createEReference(featureEClass, FEATURE__TAGS);
     createEAttribute(featureEClass, FEATURE__TITLE);
     createEReference(featureEClass, FEATURE__DESCRIPTION);
+    createEReference(featureEClass, FEATURE__BACKGROUND);
     createEReference(featureEClass, FEATURE__SCENARIOS);
+
+    backgroundEClass = createEClass(BACKGROUND);
+    createEAttribute(backgroundEClass, BACKGROUND__TITLE);
+    createEReference(backgroundEClass, BACKGROUND__DESCRIPTION);
+    createEReference(backgroundEClass, BACKGROUND__STEPS);
 
     scenarioEClass = createEClass(SCENARIO);
     createEReference(scenarioEClass, SCENARIO__TAGS);
@@ -399,7 +468,13 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
     initEReference(getFeature_Tags(), this.getTag(), null, "tags", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getFeature_Title(), ecorePackage.getEString(), "title", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFeature_Description(), this.getDescription(), null, "description", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFeature_Background(), this.getBackground(), null, "background", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFeature_Scenarios(), this.getScenario(), null, "scenarios", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(backgroundEClass, Background.class, "Background", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getBackground_Title(), ecorePackage.getEString(), "title", null, 0, 1, Background.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getBackground_Description(), this.getDescription(), null, "description", null, 0, 1, Background.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getBackground_Steps(), this.getStep(), null, "steps", null, 0, -1, Background.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(scenarioEClass, Scenario.class, "Scenario", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getScenario_Tags(), this.getTag(), null, "tags", null, 0, -1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

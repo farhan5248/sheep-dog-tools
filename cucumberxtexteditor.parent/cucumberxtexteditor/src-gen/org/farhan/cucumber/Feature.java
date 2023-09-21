@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.farhan.cucumber.Feature#getTags <em>Tags</em>}</li>
  *   <li>{@link org.farhan.cucumber.Feature#getTitle <em>Title</em>}</li>
  *   <li>{@link org.farhan.cucumber.Feature#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.farhan.cucumber.Feature#getBackground <em>Background</em>}</li>
  *   <li>{@link org.farhan.cucumber.Feature#getScenarios <em>Scenarios</em>}</li>
  * </ul>
  *
@@ -83,6 +84,28 @@ public interface Feature extends EObject
    * @generated
    */
   void setDescription(Description value);
+
+  /**
+   * Returns the value of the '<em><b>Background</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Background</em>' containment reference.
+   * @see #setBackground(Background)
+   * @see org.farhan.cucumber.CucumberPackage#getFeature_Background()
+   * @model containment="true"
+   * @generated
+   */
+  Background getBackground();
+
+  /**
+   * Sets the value of the '{@link org.farhan.cucumber.Feature#getBackground <em>Background</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Background</em>' containment reference.
+   * @see #getBackground()
+   * @generated
+   */
+  void setBackground(Background value);
 
   /**
    * Returns the value of the '<em><b>Scenarios</b></em>' containment reference list.

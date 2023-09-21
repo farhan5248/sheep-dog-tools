@@ -81,6 +81,11 @@ public class CucumberAdapterFactory extends AdapterFactoryImpl
         return createFeatureAdapter();
       }
       @Override
+      public Adapter caseBackground(Background object)
+      {
+        return createBackgroundAdapter();
+      }
+      @Override
       public Adapter caseScenario(Scenario object)
       {
         return createScenarioAdapter();
@@ -133,6 +138,21 @@ public class CucumberAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createFeatureAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.farhan.cucumber.Background <em>Background</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.cucumber.Background
+   * @generated
+   */
+  public Adapter createBackgroundAdapter()
   {
     return null;
   }

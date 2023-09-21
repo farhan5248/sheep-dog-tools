@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.farhan.cucumber.Background;
 import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Description;
 import org.farhan.cucumber.Feature;
@@ -36,6 +37,7 @@ import org.farhan.cucumber.Tag;
  *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getBackground <em>Background</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getScenarios <em>Scenarios</em>}</li>
  * </ul>
  *
@@ -82,6 +84,16 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
    * @ordered
    */
   protected Description description;
+
+  /**
+   * The cached value of the '{@link #getBackground() <em>Background</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getBackground()
+   * @generated
+   * @ordered
+   */
+  protected Background background;
 
   /**
    * The cached value of the '{@link #getScenarios() <em>Scenarios</em>}' containment reference list.
@@ -210,6 +222,56 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
    * @generated
    */
   @Override
+  public Background getBackground()
+  {
+    return background;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetBackground(Background newBackground, NotificationChain msgs)
+  {
+    Background oldBackground = background;
+    background = newBackground;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CucumberPackage.FEATURE__BACKGROUND, oldBackground, newBackground);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setBackground(Background newBackground)
+  {
+    if (newBackground != background)
+    {
+      NotificationChain msgs = null;
+      if (background != null)
+        msgs = ((InternalEObject)background).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.FEATURE__BACKGROUND, null, msgs);
+      if (newBackground != null)
+        msgs = ((InternalEObject)newBackground).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.FEATURE__BACKGROUND, null, msgs);
+      msgs = basicSetBackground(newBackground, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.FEATURE__BACKGROUND, newBackground, newBackground));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EList<Scenario> getScenarios()
   {
     if (scenarios == null)
@@ -233,6 +295,8 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
         return ((InternalEList<?>)getTags()).basicRemove(otherEnd, msgs);
       case CucumberPackage.FEATURE__DESCRIPTION:
         return basicSetDescription(null, msgs);
+      case CucumberPackage.FEATURE__BACKGROUND:
+        return basicSetBackground(null, msgs);
       case CucumberPackage.FEATURE__SCENARIOS:
         return ((InternalEList<?>)getScenarios()).basicRemove(otherEnd, msgs);
     }
@@ -255,6 +319,8 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
         return getTitle();
       case CucumberPackage.FEATURE__DESCRIPTION:
         return getDescription();
+      case CucumberPackage.FEATURE__BACKGROUND:
+        return getBackground();
       case CucumberPackage.FEATURE__SCENARIOS:
         return getScenarios();
     }
@@ -281,6 +347,9 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
         return;
       case CucumberPackage.FEATURE__DESCRIPTION:
         setDescription((Description)newValue);
+        return;
+      case CucumberPackage.FEATURE__BACKGROUND:
+        setBackground((Background)newValue);
         return;
       case CucumberPackage.FEATURE__SCENARIOS:
         getScenarios().clear();
@@ -309,6 +378,9 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
       case CucumberPackage.FEATURE__DESCRIPTION:
         setDescription((Description)null);
         return;
+      case CucumberPackage.FEATURE__BACKGROUND:
+        setBackground((Background)null);
+        return;
       case CucumberPackage.FEATURE__SCENARIOS:
         getScenarios().clear();
         return;
@@ -332,6 +404,8 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
         return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
       case CucumberPackage.FEATURE__DESCRIPTION:
         return description != null;
+      case CucumberPackage.FEATURE__BACKGROUND:
+        return background != null;
       case CucumberPackage.FEATURE__SCENARIOS:
         return scenarios != null && !scenarios.isEmpty();
     }

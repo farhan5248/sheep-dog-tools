@@ -14,6 +14,7 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
+import org.farhan.cucumber.Background;
 import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Description;
 import org.farhan.cucumber.Feature;
@@ -36,6 +37,9 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == CucumberPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case CucumberPackage.BACKGROUND:
+				sequence_Background(context, (Background) semanticObject); 
+				return; 
 			case CucumberPackage.DESCRIPTION:
 				sequence_Description(context, (Description) semanticObject); 
 				return; 
@@ -59,6 +63,20 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     Background returns Background
+	 *
+	 * Constraint:
+	 *     (title=Sentence description=Description steps+=Step*)
+	 * </pre>
+	 */
+	protected void sequence_Background(ISerializationContext context, Background semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
 	 *     Description returns Description
 	 *
 	 * Constraint:
@@ -76,7 +94,7 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Feature returns Feature
 	 *
 	 * Constraint:
-	 *     (tags+=Tag* title=Sentence description=Description scenarios+=Scenario*)
+	 *     (tags+=Tag* title=Sentence description=Description background=Background? scenarios+=Scenario*)
 	 * </pre>
 	 */
 	protected void sequence_Feature(ISerializationContext context, Feature semanticObject) {

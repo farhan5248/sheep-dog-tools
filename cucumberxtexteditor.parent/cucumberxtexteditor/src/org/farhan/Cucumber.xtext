@@ -7,8 +7,15 @@ Feature:
 	(tags+=Tag)* EOL
 	'Feature:' title=Sentence
 	description=Description
+	background=Background?
 	// this is a 0 or more list of Scenario
 	(scenarios+=Scenario)*;
+
+Background:
+	'Background:' title=Sentence
+	description=Description
+	// this is a 0 or more list of Step
+	(steps+=Step)*;
 
 Scenario:
 	(tags+=Tag)* EOL
@@ -40,7 +47,7 @@ terminal EOL:
 
 // .. needs the ecore import
 terminal ID:
-	('a'..'z' | 'A'..'Z' | '0'..'9')+;
+	('a'..'z' | 'A'..'Z' | '0'..'9' | "'")+;
 
 terminal WORD:
 	WS ID;

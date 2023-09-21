@@ -33,13 +33,16 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final RuleCall cTitleSentenceParserRuleCall_3_0 = (RuleCall)cTitleAssignment_3.eContents().get(0);
 		private final Assignment cDescriptionAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cDescriptionDescriptionParserRuleCall_4_0 = (RuleCall)cDescriptionAssignment_4.eContents().get(0);
-		private final Assignment cScenariosAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cScenariosScenarioParserRuleCall_5_0 = (RuleCall)cScenariosAssignment_5.eContents().get(0);
+		private final Assignment cBackgroundAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cBackgroundBackgroundParserRuleCall_5_0 = (RuleCall)cBackgroundAssignment_5.eContents().get(0);
+		private final Assignment cScenariosAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cScenariosScenarioParserRuleCall_6_0 = (RuleCall)cScenariosAssignment_6.eContents().get(0);
 		
 		//Feature:
 		//    (tags+=Tag)* EOL
 		//    'Feature:' title=Sentence
 		//    description=Description
+		//    background=Background?
 		//    // this is a 0 or more list of Scenario
 		//    (scenarios+=Scenario)*;
 		@Override public ParserRule getRule() { return rule; }
@@ -47,6 +50,7 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//(tags+=Tag)* EOL
 		//'Feature:' title=Sentence
 		//description=Description
+		//background=Background?
 		//// this is a 0 or more list of Scenario
 		//(scenarios+=Scenario)*
 		public Group getGroup() { return cGroup; }
@@ -75,12 +79,64 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//Description
 		public RuleCall getDescriptionDescriptionParserRuleCall_4_0() { return cDescriptionDescriptionParserRuleCall_4_0; }
 		
+		//background=Background?
+		public Assignment getBackgroundAssignment_5() { return cBackgroundAssignment_5; }
+		
+		//Background
+		public RuleCall getBackgroundBackgroundParserRuleCall_5_0() { return cBackgroundBackgroundParserRuleCall_5_0; }
+		
 		//// this is a 0 or more list of Scenario
 		//(scenarios+=Scenario)*
-		public Assignment getScenariosAssignment_5() { return cScenariosAssignment_5; }
+		public Assignment getScenariosAssignment_6() { return cScenariosAssignment_6; }
 		
 		//Scenario
-		public RuleCall getScenariosScenarioParserRuleCall_5_0() { return cScenariosScenarioParserRuleCall_5_0; }
+		public RuleCall getScenariosScenarioParserRuleCall_6_0() { return cScenariosScenarioParserRuleCall_6_0; }
+	}
+	public class BackgroundElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.Background");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cBackgroundKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cTitleAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTitleSentenceParserRuleCall_1_0 = (RuleCall)cTitleAssignment_1.eContents().get(0);
+		private final Assignment cDescriptionAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cDescriptionDescriptionParserRuleCall_2_0 = (RuleCall)cDescriptionAssignment_2.eContents().get(0);
+		private final Assignment cStepsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cStepsStepParserRuleCall_3_0 = (RuleCall)cStepsAssignment_3.eContents().get(0);
+		
+		//Background:
+		//    'Background:' title=Sentence
+		//    description=Description
+		//    // this is a 0 or more list of Step
+		//    (steps+=Step)*;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'Background:' title=Sentence
+		//description=Description
+		//// this is a 0 or more list of Step
+		//(steps+=Step)*
+		public Group getGroup() { return cGroup; }
+		
+		//'Background:'
+		public Keyword getBackgroundKeyword_0() { return cBackgroundKeyword_0; }
+		
+		//title=Sentence
+		public Assignment getTitleAssignment_1() { return cTitleAssignment_1; }
+		
+		//Sentence
+		public RuleCall getTitleSentenceParserRuleCall_1_0() { return cTitleSentenceParserRuleCall_1_0; }
+		
+		//description=Description
+		public Assignment getDescriptionAssignment_2() { return cDescriptionAssignment_2; }
+		
+		//Description
+		public RuleCall getDescriptionDescriptionParserRuleCall_2_0() { return cDescriptionDescriptionParserRuleCall_2_0; }
+		
+		//// this is a 0 or more list of Step
+		//(steps+=Step)*
+		public Assignment getStepsAssignment_3() { return cStepsAssignment_3; }
+		
+		//Step
+		public RuleCall getStepsStepParserRuleCall_3_0() { return cStepsStepParserRuleCall_3_0; }
 	}
 	public class ScenarioElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.Scenario");
@@ -266,6 +322,7 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	
 	
 	private final FeatureElements pFeature;
+	private final BackgroundElements pBackground;
 	private final ScenarioElements pScenario;
 	private final StepElements pStep;
 	private final DescriptionElements pDescription;
@@ -282,6 +339,7 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	public CucumberGrammarAccess(GrammarProvider grammarProvider) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.pFeature = new FeatureElements();
+		this.pBackground = new BackgroundElements();
 		this.pScenario = new ScenarioElements();
 		this.pStep = new StepElements();
 		this.pDescription = new DescriptionElements();
@@ -320,6 +378,7 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	//    (tags+=Tag)* EOL
 	//    'Feature:' title=Sentence
 	//    description=Description
+	//    background=Background?
 	//    // this is a 0 or more list of Scenario
 	//    (scenarios+=Scenario)*;
 	public FeatureElements getFeatureAccess() {
@@ -328,6 +387,19 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	
 	public ParserRule getFeatureRule() {
 		return getFeatureAccess().getRule();
+	}
+	
+	//Background:
+	//    'Background:' title=Sentence
+	//    description=Description
+	//    // this is a 0 or more list of Step
+	//    (steps+=Step)*;
+	public BackgroundElements getBackgroundAccess() {
+		return pBackground;
+	}
+	
+	public ParserRule getBackgroundRule() {
+		return getBackgroundAccess().getRule();
 	}
 	
 	//Scenario:
@@ -401,7 +473,7 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	
 	//// .. needs the ecore import
 	//terminal ID:
-	//    ('a'..'z' | 'A'..'Z' | '0'..'9')+;
+	//    ('a'..'z' | 'A'..'Z' | '0'..'9' | "'")+;
 	public TerminalRule getIDRule() {
 		return tID;
 	}
