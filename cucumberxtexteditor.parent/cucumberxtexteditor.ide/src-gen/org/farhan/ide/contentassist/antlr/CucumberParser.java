@@ -35,17 +35,20 @@ public class CucumberParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getFeatureAccess().getGroup(), "rule__Feature__Group__0");
 			builder.put(grammarAccess.getScenarioAccess().getGroup(), "rule__Scenario__Group__0");
 			builder.put(grammarAccess.getStepAccess().getGroup(), "rule__Step__Group__0");
+			builder.put(grammarAccess.getDescriptionAccess().getGroup(), "rule__Description__Group__0");
 			builder.put(grammarAccess.getTagAccess().getGroup(), "rule__Tag__Group__0");
 			builder.put(grammarAccess.getSentenceAccess().getGroup(), "rule__Sentence__Group__0");
 			builder.put(grammarAccess.getFeatureAccess().getTagsAssignment_0(), "rule__Feature__TagsAssignment_0");
 			builder.put(grammarAccess.getFeatureAccess().getTitleAssignment_3(), "rule__Feature__TitleAssignment_3");
-			builder.put(grammarAccess.getFeatureAccess().getScenariosAssignment_4(), "rule__Feature__ScenariosAssignment_4");
+			builder.put(grammarAccess.getFeatureAccess().getDescriptionAssignment_4(), "rule__Feature__DescriptionAssignment_4");
+			builder.put(grammarAccess.getFeatureAccess().getScenariosAssignment_5(), "rule__Feature__ScenariosAssignment_5");
 			builder.put(grammarAccess.getScenarioAccess().getTagsAssignment_0(), "rule__Scenario__TagsAssignment_0");
 			builder.put(grammarAccess.getScenarioAccess().getTitleAssignment_3(), "rule__Scenario__TitleAssignment_3");
-			builder.put(grammarAccess.getScenarioAccess().getStepsAssignment_4(), "rule__Scenario__StepsAssignment_4");
+			builder.put(grammarAccess.getScenarioAccess().getDescriptionAssignment_4(), "rule__Scenario__DescriptionAssignment_4");
+			builder.put(grammarAccess.getScenarioAccess().getStepsAssignment_5(), "rule__Scenario__StepsAssignment_5");
 			builder.put(grammarAccess.getStepAccess().getKeywordAssignment_0(), "rule__Step__KeywordAssignment_0");
 			builder.put(grammarAccess.getStepAccess().getTitleAssignment_1(), "rule__Step__TitleAssignment_1");
-			builder.put(grammarAccess.getDescriptionAccess().getSentencesAssignment(), "rule__Description__SentencesAssignment");
+			builder.put(grammarAccess.getDescriptionAccess().getSentencesAssignment_1(), "rule__Description__SentencesAssignment_1");
 			builder.put(grammarAccess.getTagAccess().getTitleAssignment_0(), "rule__Tag__TitleAssignment_0");
 		}
 	}

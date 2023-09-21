@@ -35,6 +35,7 @@ import org.farhan.cucumber.Tag;
  * <ul>
  *   <li>{@link org.farhan.cucumber.impl.ScenarioImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.ScenarioImpl#getTitle <em>Title</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.ScenarioImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.ScenarioImpl#getSteps <em>Steps</em>}</li>
  * </ul>
  *
@@ -53,14 +54,34 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
   protected EList<Tag> tags;
 
   /**
-   * The cached value of the '{@link #getTitle() <em>Title</em>}' containment reference.
+   * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getTitle()
    * @generated
    * @ordered
    */
-  protected Description title;
+  protected static final String TITLE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTitle()
+   * @generated
+   * @ordered
+   */
+  protected String title = TITLE_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDescription()
+   * @generated
+   * @ordered
+   */
+  protected Description description;
 
   /**
    * The cached value of the '{@link #getSteps() <em>Steps</em>}' containment reference list.
@@ -114,7 +135,7 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
    * @generated
    */
   @Override
-  public Description getTitle()
+  public String getTitle()
   {
     return title;
   }
@@ -124,13 +145,38 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTitle(Description newTitle, NotificationChain msgs)
+  @Override
+  public void setTitle(String newTitle)
   {
-    Description oldTitle = title;
+    String oldTitle = title;
     title = newTitle;
     if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.SCENARIO__TITLE, oldTitle, title));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Description getDescription()
+  {
+    return description;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetDescription(Description newDescription, NotificationChain msgs)
+  {
+    Description oldDescription = description;
+    description = newDescription;
+    if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CucumberPackage.SCENARIO__TITLE, oldTitle, newTitle);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CucumberPackage.SCENARIO__DESCRIPTION, oldDescription, newDescription);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -142,20 +188,20 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
    * @generated
    */
   @Override
-  public void setTitle(Description newTitle)
+  public void setDescription(Description newDescription)
   {
-    if (newTitle != title)
+    if (newDescription != description)
     {
       NotificationChain msgs = null;
-      if (title != null)
-        msgs = ((InternalEObject)title).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.SCENARIO__TITLE, null, msgs);
-      if (newTitle != null)
-        msgs = ((InternalEObject)newTitle).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.SCENARIO__TITLE, null, msgs);
-      msgs = basicSetTitle(newTitle, msgs);
+      if (description != null)
+        msgs = ((InternalEObject)description).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.SCENARIO__DESCRIPTION, null, msgs);
+      if (newDescription != null)
+        msgs = ((InternalEObject)newDescription).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.SCENARIO__DESCRIPTION, null, msgs);
+      msgs = basicSetDescription(newDescription, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.SCENARIO__TITLE, newTitle, newTitle));
+      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.SCENARIO__DESCRIPTION, newDescription, newDescription));
   }
 
   /**
@@ -185,8 +231,8 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
     {
       case CucumberPackage.SCENARIO__TAGS:
         return ((InternalEList<?>)getTags()).basicRemove(otherEnd, msgs);
-      case CucumberPackage.SCENARIO__TITLE:
-        return basicSetTitle(null, msgs);
+      case CucumberPackage.SCENARIO__DESCRIPTION:
+        return basicSetDescription(null, msgs);
       case CucumberPackage.SCENARIO__STEPS:
         return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
     }
@@ -207,6 +253,8 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
         return getTags();
       case CucumberPackage.SCENARIO__TITLE:
         return getTitle();
+      case CucumberPackage.SCENARIO__DESCRIPTION:
+        return getDescription();
       case CucumberPackage.SCENARIO__STEPS:
         return getSteps();
     }
@@ -229,7 +277,10 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
         getTags().addAll((Collection<? extends Tag>)newValue);
         return;
       case CucumberPackage.SCENARIO__TITLE:
-        setTitle((Description)newValue);
+        setTitle((String)newValue);
+        return;
+      case CucumberPackage.SCENARIO__DESCRIPTION:
+        setDescription((Description)newValue);
         return;
       case CucumberPackage.SCENARIO__STEPS:
         getSteps().clear();
@@ -253,7 +304,10 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
         getTags().clear();
         return;
       case CucumberPackage.SCENARIO__TITLE:
-        setTitle((Description)null);
+        setTitle(TITLE_EDEFAULT);
+        return;
+      case CucumberPackage.SCENARIO__DESCRIPTION:
+        setDescription((Description)null);
         return;
       case CucumberPackage.SCENARIO__STEPS:
         getSteps().clear();
@@ -275,11 +329,30 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
       case CucumberPackage.SCENARIO__TAGS:
         return tags != null && !tags.isEmpty();
       case CucumberPackage.SCENARIO__TITLE:
-        return title != null;
+        return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
+      case CucumberPackage.SCENARIO__DESCRIPTION:
+        return description != null;
       case CucumberPackage.SCENARIO__STEPS:
         return steps != null && !steps.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (title: ");
+    result.append(title);
+    result.append(')');
+    return result.toString();
   }
 
 } //ScenarioImpl

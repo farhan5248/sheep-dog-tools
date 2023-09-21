@@ -5,21 +5,24 @@ generate cucumber "http://www.farhan.org/Cucumber"
 
 Feature:
 	(tags+=Tag)* EOL
-	'Feature:' title=Description
+	'Feature:' title=Sentence
+	description=Description
 	// this is a 0 or more list of Scenario
 	(scenarios+=Scenario)*;
 
 Scenario:
 	(tags+=Tag)* EOL
-	'Scenario:' title=Description
+	'Scenario:' title=Sentence
+	description=Description
 	// this is a 0 or more list of Step
 	(steps+=Step)*;
 
 Step:
 	keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence;
 
+// make this optional
 Description:
-	(sentences+=Sentence)+;
+	{Description} (sentences+=Sentence)*;
 
 Tag:
 	title='@' ID WS?;

@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.farhan.cucumber.Scenario#getTags <em>Tags</em>}</li>
  *   <li>{@link org.farhan.cucumber.Scenario#getTitle <em>Title</em>}</li>
+ *   <li>{@link org.farhan.cucumber.Scenario#getDescription <em>Description</em>}</li>
  *   <li>{@link org.farhan.cucumber.Scenario#getSteps <em>Steps</em>}</li>
  * </ul>
  *
@@ -40,26 +41,48 @@ public interface Scenario extends EObject
   EList<Tag> getTags();
 
   /**
-   * Returns the value of the '<em><b>Title</b></em>' containment reference.
+   * Returns the value of the '<em><b>Title</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Title</em>' containment reference.
-   * @see #setTitle(Description)
+   * @return the value of the '<em>Title</em>' attribute.
+   * @see #setTitle(String)
    * @see org.farhan.cucumber.CucumberPackage#getScenario_Title()
-   * @model containment="true"
+   * @model
    * @generated
    */
-  Description getTitle();
+  String getTitle();
 
   /**
-   * Sets the value of the '{@link org.farhan.cucumber.Scenario#getTitle <em>Title</em>}' containment reference.
+   * Sets the value of the '{@link org.farhan.cucumber.Scenario#getTitle <em>Title</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Title</em>' containment reference.
+   * @param value the new value of the '<em>Title</em>' attribute.
    * @see #getTitle()
    * @generated
    */
-  void setTitle(Description value);
+  void setTitle(String value);
+
+  /**
+   * Returns the value of the '<em><b>Description</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Description</em>' containment reference.
+   * @see #setDescription(Description)
+   * @see org.farhan.cucumber.CucumberPackage#getScenario_Description()
+   * @model containment="true"
+   * @generated
+   */
+  Description getDescription();
+
+  /**
+   * Sets the value of the '{@link org.farhan.cucumber.Scenario#getDescription <em>Description</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Description</em>' containment reference.
+   * @see #getDescription()
+   * @generated
+   */
+  void setDescription(Description value);
 
   /**
    * Returns the value of the '<em><b>Steps</b></em>' containment reference list.

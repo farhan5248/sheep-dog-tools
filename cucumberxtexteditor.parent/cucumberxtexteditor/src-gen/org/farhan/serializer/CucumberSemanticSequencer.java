@@ -62,7 +62,7 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Description returns Description
 	 *
 	 * Constraint:
-	 *     sentences+=Sentence+
+	 *     sentences+=Sentence*
 	 * </pre>
 	 */
 	protected void sequence_Description(ISerializationContext context, Description semanticObject) {
@@ -76,7 +76,7 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Feature returns Feature
 	 *
 	 * Constraint:
-	 *     (tags+=Tag* title=Description scenarios+=Scenario*)
+	 *     (tags+=Tag* title=Sentence description=Description scenarios+=Scenario*)
 	 * </pre>
 	 */
 	protected void sequence_Feature(ISerializationContext context, Feature semanticObject) {
@@ -90,7 +90,7 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Scenario returns Scenario
 	 *
 	 * Constraint:
-	 *     (tags+=Tag* title=Description steps+=Step*)
+	 *     (tags+=Tag* title=Sentence description=Description steps+=Step*)
 	 * </pre>
 	 */
 	protected void sequence_Scenario(ISerializationContext context, Scenario semanticObject) {
