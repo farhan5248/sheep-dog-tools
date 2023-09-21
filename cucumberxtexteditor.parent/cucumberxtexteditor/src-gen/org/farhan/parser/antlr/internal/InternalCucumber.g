@@ -76,39 +76,23 @@ ruleFeature returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getFeatureAccess().getTagsTagParserRuleCall_0_0());
-				}
-				lv_tags_0_0=ruleTag
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getFeatureRule());
-					}
-					add(
-						$current,
-						"tags",
-						lv_tags_0_0,
-						"org.farhan.Cucumber.Tag");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)*
-		this_EOL_1=RULE_EOL
 		{
-			newLeafNode(this_EOL_1, grammarAccess.getFeatureAccess().getEOLTerminalRuleCall_1());
+			newCompositeNode(grammarAccess.getFeatureAccess().getTagsParserRuleCall_0());
 		}
-		otherlv_2='Feature:'
+		ruleTags
 		{
-			newLeafNode(otherlv_2, grammarAccess.getFeatureAccess().getFeatureKeyword_2());
+			afterParserOrEnumRuleCall();
+		}
+		otherlv_1='Feature:'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getFeatureAccess().getFeatureKeyword_1());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getFeatureAccess().getTitleSentenceParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getFeatureAccess().getTitleSentenceParserRuleCall_2_0());
 				}
-				lv_title_3_0=ruleSentence
+				lv_title_2_0=ruleSentence
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getFeatureRule());
@@ -116,7 +100,7 @@ ruleFeature returns [EObject current=null]
 					set(
 						$current,
 						"title",
-						lv_title_3_0,
+						lv_title_2_0,
 						"org.farhan.Cucumber.Sentence");
 					afterParserOrEnumRuleCall();
 				}
@@ -125,9 +109,9 @@ ruleFeature returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getFeatureAccess().getDescriptionDescriptionParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getFeatureAccess().getDescriptionDescriptionParserRuleCall_3_0());
 				}
-				lv_description_4_0=ruleDescription
+				lv_description_3_0=ruleDescription
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getFeatureRule());
@@ -135,7 +119,7 @@ ruleFeature returns [EObject current=null]
 					set(
 						$current,
 						"description",
-						lv_description_4_0,
+						lv_description_3_0,
 						"org.farhan.Cucumber.Description");
 					afterParserOrEnumRuleCall();
 				}
@@ -144,9 +128,9 @@ ruleFeature returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getFeatureAccess().getBackgroundBackgroundParserRuleCall_5_0());
+					newCompositeNode(grammarAccess.getFeatureAccess().getBackgroundBackgroundParserRuleCall_4_0());
 				}
-				lv_background_5_0=ruleBackground
+				lv_background_4_0=ruleBackground
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getFeatureRule());
@@ -154,7 +138,7 @@ ruleFeature returns [EObject current=null]
 					set(
 						$current,
 						"background",
-						lv_background_5_0,
+						lv_background_4_0,
 						"org.farhan.Cucumber.Background");
 					afterParserOrEnumRuleCall();
 				}
@@ -163,9 +147,9 @@ ruleFeature returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getFeatureAccess().getScenariosScenarioParserRuleCall_6_0());
+					newCompositeNode(grammarAccess.getFeatureAccess().getScenariosScenarioParserRuleCall_5_0());
 				}
-				lv_scenarios_6_0=ruleScenario
+				lv_scenarios_5_0=ruleScenario
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getFeatureRule());
@@ -173,7 +157,7 @@ ruleFeature returns [EObject current=null]
 					add(
 						$current,
 						"scenarios",
-						lv_scenarios_6_0,
+						lv_scenarios_5_0,
 						"org.farhan.Cucumber.Scenario");
 					afterParserOrEnumRuleCall();
 				}
@@ -278,39 +262,23 @@ ruleScenario returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getScenarioAccess().getTagsTagParserRuleCall_0_0());
-				}
-				lv_tags_0_0=ruleTag
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getScenarioRule());
-					}
-					add(
-						$current,
-						"tags",
-						lv_tags_0_0,
-						"org.farhan.Cucumber.Tag");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)*
-		this_EOL_1=RULE_EOL
 		{
-			newLeafNode(this_EOL_1, grammarAccess.getScenarioAccess().getEOLTerminalRuleCall_1());
+			newCompositeNode(grammarAccess.getScenarioAccess().getTagsParserRuleCall_0());
 		}
-		otherlv_2='Scenario:'
+		ruleTags
 		{
-			newLeafNode(otherlv_2, grammarAccess.getScenarioAccess().getScenarioKeyword_2());
+			afterParserOrEnumRuleCall();
+		}
+		otherlv_1='Scenario:'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getScenarioAccess().getScenarioKeyword_1());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getScenarioAccess().getTitleSentenceParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getScenarioAccess().getTitleSentenceParserRuleCall_2_0());
 				}
-				lv_title_3_0=ruleSentence
+				lv_title_2_0=ruleSentence
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getScenarioRule());
@@ -318,7 +286,7 @@ ruleScenario returns [EObject current=null]
 					set(
 						$current,
 						"title",
-						lv_title_3_0,
+						lv_title_2_0,
 						"org.farhan.Cucumber.Sentence");
 					afterParserOrEnumRuleCall();
 				}
@@ -327,9 +295,9 @@ ruleScenario returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getScenarioAccess().getDescriptionDescriptionParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getScenarioAccess().getDescriptionDescriptionParserRuleCall_3_0());
 				}
-				lv_description_4_0=ruleDescription
+				lv_description_3_0=ruleDescription
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getScenarioRule());
@@ -337,7 +305,7 @@ ruleScenario returns [EObject current=null]
 					set(
 						$current,
 						"description",
-						lv_description_4_0,
+						lv_description_3_0,
 						"org.farhan.Cucumber.Description");
 					afterParserOrEnumRuleCall();
 				}
@@ -346,9 +314,9 @@ ruleScenario returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getScenarioAccess().getStepsStepParserRuleCall_5_0());
+					newCompositeNode(grammarAccess.getScenarioAccess().getStepsStepParserRuleCall_4_0());
 				}
-				lv_steps_5_0=ruleStep
+				lv_steps_4_0=ruleStep
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getScenarioRule());
@@ -356,7 +324,7 @@ ruleScenario returns [EObject current=null]
 					add(
 						$current,
 						"steps",
-						lv_steps_5_0,
+						lv_steps_4_0,
 						"org.farhan.Cucumber.Step");
 					afterParserOrEnumRuleCall();
 				}
@@ -519,15 +487,15 @@ ruleDescription returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleTag
-entryRuleTag returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getTagRule()); }
-	iv_ruleTag=ruleTag
-	{ $current=$iv_ruleTag.current; }
+// Entry rule entryRuleTags
+entryRuleTags returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getTagsRule()); }
+	iv_ruleTags=ruleTags
+	{ $current=$iv_ruleTags.current.getText(); }
 	EOF;
 
-// Rule Tag
-ruleTag returns [EObject current=null]
+// Rule Tags
+ruleTags returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 @init {
 	enterRule();
 }
@@ -536,27 +504,21 @@ ruleTag returns [EObject current=null]
 }:
 	(
 		(
-			(
-				lv_title_0_0='@'
-				{
-					newLeafNode(lv_title_0_0, grammarAccess.getTagAccess().getTitleCommercialAtKeyword_0_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getTagRule());
-					}
-					setWithLastConsumed($current, "title", lv_title_0_0, "@");
-				}
-			)
-		)
-		this_ID_1=RULE_ID
-		{
-			newLeafNode(this_ID_1, grammarAccess.getTagAccess().getIDTerminalRuleCall_1());
-		}
-		(
-			this_WS_2=RULE_WS
+			this_TAG_0=RULE_TAG
 			{
-				newLeafNode(this_WS_2, grammarAccess.getTagAccess().getWSTerminalRuleCall_2());
+				$current.merge(this_TAG_0);
+			}
+			{
+				newLeafNode(this_TAG_0, grammarAccess.getTagsAccess().getTAGTerminalRuleCall_0());
+			}
+		)*
+		(
+			this_EOL_1=RULE_EOL
+			{
+				$current.merge(this_EOL_1);
+			}
+			{
+				newLeafNode(this_EOL_1, grammarAccess.getTagsAccess().getEOLTerminalRuleCall_1());
 			}
 		)?
 	)
@@ -587,22 +549,24 @@ ruleSentence returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
 				newLeafNode(this_WORD_0, grammarAccess.getSentenceAccess().getWORDTerminalRuleCall_0());
 			}
 		)+
-		this_EOL_1=RULE_EOL
-		{
-			$current.merge(this_EOL_1);
-		}
-		{
-			newLeafNode(this_EOL_1, grammarAccess.getSentenceAccess().getEOLTerminalRuleCall_1());
-		}
+		(
+			this_EOL_1=RULE_EOL
+			{
+				$current.merge(this_EOL_1);
+			}
+			{
+				newLeafNode(this_EOL_1, grammarAccess.getSentenceAccess().getEOLTerminalRuleCall_1());
+			}
+		)?
 	)
 ;
 
 RULE_WS : (' '|'\t')+;
 
-RULE_EOL : ('\r\n'|'\n')+;
+RULE_EOL : ('\r'|'\n')+;
 
-RULE_COMMENT : RULE_WS? '#' ~(('\n'|'\r'))*;
+RULE_COMMENT : '#' ~(('\r'|'\n'))* RULE_EOL;
 
-RULE_ID : ('a'..'z'|'A'..'Z'|'0'..'9'|'\'')+;
+RULE_WORD : ('a'..'z'|'A'..'Z'|'0'..'9'|'\'')+;
 
-RULE_WORD : RULE_WS RULE_ID;
+RULE_TAG : '@' RULE_WORD;

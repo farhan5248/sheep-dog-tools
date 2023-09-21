@@ -68,22 +68,13 @@ public interface CucumberPackage extends EPackage
   int FEATURE = 0;
 
   /**
-   * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FEATURE__TAGS = 0;
-
-  /**
    * The feature id for the '<em><b>Title</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FEATURE__TITLE = 1;
+  int FEATURE__TITLE = 0;
 
   /**
    * The feature id for the '<em><b>Description</b></em>' containment reference.
@@ -92,7 +83,7 @@ public interface CucumberPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FEATURE__DESCRIPTION = 2;
+  int FEATURE__DESCRIPTION = 1;
 
   /**
    * The feature id for the '<em><b>Background</b></em>' containment reference.
@@ -101,7 +92,7 @@ public interface CucumberPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FEATURE__BACKGROUND = 3;
+  int FEATURE__BACKGROUND = 2;
 
   /**
    * The feature id for the '<em><b>Scenarios</b></em>' containment reference list.
@@ -110,7 +101,7 @@ public interface CucumberPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FEATURE__SCENARIOS = 4;
+  int FEATURE__SCENARIOS = 3;
 
   /**
    * The number of structural features of the '<em>Feature</em>' class.
@@ -119,7 +110,7 @@ public interface CucumberPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FEATURE_FEATURE_COUNT = 5;
+  int FEATURE_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link org.farhan.cucumber.impl.BackgroundImpl <em>Background</em>}' class.
@@ -178,22 +169,13 @@ public interface CucumberPackage extends EPackage
   int SCENARIO = 2;
 
   /**
-   * The feature id for the '<em><b>Tags</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SCENARIO__TAGS = 0;
-
-  /**
    * The feature id for the '<em><b>Title</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SCENARIO__TITLE = 1;
+  int SCENARIO__TITLE = 0;
 
   /**
    * The feature id for the '<em><b>Description</b></em>' containment reference.
@@ -202,7 +184,7 @@ public interface CucumberPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SCENARIO__DESCRIPTION = 2;
+  int SCENARIO__DESCRIPTION = 1;
 
   /**
    * The feature id for the '<em><b>Steps</b></em>' containment reference list.
@@ -211,7 +193,7 @@ public interface CucumberPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SCENARIO__STEPS = 3;
+  int SCENARIO__STEPS = 2;
 
   /**
    * The number of structural features of the '<em>Scenario</em>' class.
@@ -220,7 +202,7 @@ public interface CucumberPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SCENARIO_FEATURE_COUNT = 4;
+  int SCENARIO_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.farhan.cucumber.impl.StepImpl <em>Step</em>}' class.
@@ -287,34 +269,6 @@ public interface CucumberPackage extends EPackage
    */
   int DESCRIPTION_FEATURE_COUNT = 1;
 
-  /**
-   * The meta object id for the '{@link org.farhan.cucumber.impl.TagImpl <em>Tag</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.farhan.cucumber.impl.TagImpl
-   * @see org.farhan.cucumber.impl.CucumberPackageImpl#getTag()
-   * @generated
-   */
-  int TAG = 5;
-
-  /**
-   * The feature id for the '<em><b>Title</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TAG__TITLE = 0;
-
-  /**
-   * The number of structural features of the '<em>Tag</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TAG_FEATURE_COUNT = 1;
-
 
   /**
    * Returns the meta object for class '{@link org.farhan.cucumber.Feature <em>Feature</em>}'.
@@ -325,17 +279,6 @@ public interface CucumberPackage extends EPackage
    * @generated
    */
   EClass getFeature();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.farhan.cucumber.Feature#getTags <em>Tags</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Tags</em>'.
-   * @see org.farhan.cucumber.Feature#getTags()
-   * @see #getFeature()
-   * @generated
-   */
-  EReference getFeature_Tags();
 
   /**
    * Returns the meta object for the attribute '{@link org.farhan.cucumber.Feature#getTitle <em>Title</em>}'.
@@ -435,17 +378,6 @@ public interface CucumberPackage extends EPackage
   EClass getScenario();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.farhan.cucumber.Scenario#getTags <em>Tags</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Tags</em>'.
-   * @see org.farhan.cucumber.Scenario#getTags()
-   * @see #getScenario()
-   * @generated
-   */
-  EReference getScenario_Tags();
-
-  /**
    * Returns the meta object for the attribute '{@link org.farhan.cucumber.Scenario#getTitle <em>Title</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -532,27 +464,6 @@ public interface CucumberPackage extends EPackage
   EAttribute getDescription_Sentences();
 
   /**
-   * Returns the meta object for class '{@link org.farhan.cucumber.Tag <em>Tag</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Tag</em>'.
-   * @see org.farhan.cucumber.Tag
-   * @generated
-   */
-  EClass getTag();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.farhan.cucumber.Tag#getTitle <em>Title</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Title</em>'.
-   * @see org.farhan.cucumber.Tag#getTitle()
-   * @see #getTag()
-   * @generated
-   */
-  EAttribute getTag_Title();
-
-  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -584,14 +495,6 @@ public interface CucumberPackage extends EPackage
      * @generated
      */
     EClass FEATURE = eINSTANCE.getFeature();
-
-    /**
-     * The meta object literal for the '<em><b>Tags</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference FEATURE__TAGS = eINSTANCE.getFeature_Tags();
 
     /**
      * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
@@ -670,14 +573,6 @@ public interface CucumberPackage extends EPackage
     EClass SCENARIO = eINSTANCE.getScenario();
 
     /**
-     * The meta object literal for the '<em><b>Tags</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SCENARIO__TAGS = eINSTANCE.getScenario_Tags();
-
-    /**
      * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -744,24 +639,6 @@ public interface CucumberPackage extends EPackage
      * @generated
      */
     EAttribute DESCRIPTION__SENTENCES = eINSTANCE.getDescription_Sentences();
-
-    /**
-     * The meta object literal for the '{@link org.farhan.cucumber.impl.TagImpl <em>Tag</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.farhan.cucumber.impl.TagImpl
-     * @see org.farhan.cucumber.impl.CucumberPackageImpl#getTag()
-     * @generated
-     */
-    EClass TAG = eINSTANCE.getTag();
-
-    /**
-     * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute TAG__TITLE = eINSTANCE.getTag_Title();
 
   }
 

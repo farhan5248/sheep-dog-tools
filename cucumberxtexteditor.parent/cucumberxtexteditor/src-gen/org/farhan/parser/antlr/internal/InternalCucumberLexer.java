@@ -13,15 +13,14 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalCucumberLexer extends Lexer {
     public static final int T__9=9;
-    public static final int RULE_ID=5;
-    public static final int RULE_EOL=4;
-    public static final int RULE_WS=6;
-    public static final int RULE_WORD=7;
+    public static final int RULE_EOL=5;
+    public static final int RULE_WS=7;
+    public static final int RULE_WORD=6;
     public static final int RULE_COMMENT=8;
+    public static final int RULE_TAG=4;
     public static final int T__15=15;
     public static final int T__16=16;
     public static final int T__17=17;
-    public static final int T__18=18;
     public static final int T__11=11;
     public static final int T__12=12;
     public static final int T__13=13;
@@ -230,35 +229,15 @@ public class InternalCucumberLexer extends Lexer {
     }
     // $ANTLR end "T__17"
 
-    // $ANTLR start "T__18"
-    public final void mT__18() throws RecognitionException {
-        try {
-            int _type = T__18;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:20:7: ( '@' )
-            // InternalCucumber.g:20:9: '@'
-            {
-            match('@'); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__18"
-
     // $ANTLR start "RULE_WS"
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:600:9: ( ( ' ' | '\\t' )+ )
-            // InternalCucumber.g:600:11: ( ' ' | '\\t' )+
+            // InternalCucumber.g:564:9: ( ( ' ' | '\\t' )+ )
+            // InternalCucumber.g:564:11: ( ' ' | '\\t' )+
             {
-            // InternalCucumber.g:600:11: ( ' ' | '\\t' )+
+            // InternalCucumber.g:564:11: ( ' ' | '\\t' )+
             int cnt1=0;
             loop1:
             do {
@@ -312,37 +291,34 @@ public class InternalCucumberLexer extends Lexer {
         try {
             int _type = RULE_EOL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:602:10: ( ( '\\r\\n' | '\\n' )+ )
-            // InternalCucumber.g:602:12: ( '\\r\\n' | '\\n' )+
+            // InternalCucumber.g:566:10: ( ( '\\r' | '\\n' )+ )
+            // InternalCucumber.g:566:12: ( '\\r' | '\\n' )+
             {
-            // InternalCucumber.g:602:12: ( '\\r\\n' | '\\n' )+
+            // InternalCucumber.g:566:12: ( '\\r' | '\\n' )+
             int cnt2=0;
             loop2:
             do {
-                int alt2=3;
+                int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( (LA2_0=='\r') ) {
+                if ( (LA2_0=='\n'||LA2_0=='\r') ) {
                     alt2=1;
-                }
-                else if ( (LA2_0=='\n') ) {
-                    alt2=2;
                 }
 
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalCucumber.g:602:13: '\\r\\n'
+            	    // InternalCucumber.g:
             	    {
-            	    match("\r\n"); 
-
+            	    if ( input.LA(1)=='\n'||input.LA(1)=='\r' ) {
+            	        input.consume();
 
             	    }
-            	    break;
-            	case 2 :
-            	    // InternalCucumber.g:602:20: '\\n'
-            	    {
-            	    match('\n'); 
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;}
+
 
             	    }
             	    break;
@@ -372,42 +348,24 @@ public class InternalCucumberLexer extends Lexer {
         try {
             int _type = RULE_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:604:14: ( ( RULE_WS )? '#' (~ ( ( '\\n' | '\\r' ) ) )* )
-            // InternalCucumber.g:604:16: ( RULE_WS )? '#' (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalCucumber.g:568:14: ( '#' (~ ( ( '\\r' | '\\n' ) ) )* RULE_EOL )
+            // InternalCucumber.g:568:16: '#' (~ ( ( '\\r' | '\\n' ) ) )* RULE_EOL
             {
-            // InternalCucumber.g:604:16: ( RULE_WS )?
-            int alt3=2;
-            int LA3_0 = input.LA(1);
-
-            if ( (LA3_0=='\t'||LA3_0==' ') ) {
-                alt3=1;
-            }
-            switch (alt3) {
-                case 1 :
-                    // InternalCucumber.g:604:16: RULE_WS
-                    {
-                    mRULE_WS(); 
-
-                    }
-                    break;
-
-            }
-
             match('#'); 
-            // InternalCucumber.g:604:29: (~ ( ( '\\n' | '\\r' ) ) )*
-            loop4:
+            // InternalCucumber.g:568:20: (~ ( ( '\\r' | '\\n' ) ) )*
+            loop3:
             do {
-                int alt4=2;
-                int LA4_0 = input.LA(1);
+                int alt3=2;
+                int LA3_0 = input.LA(1);
 
-                if ( ((LA4_0>='\u0000' && LA4_0<='\t')||(LA4_0>='\u000B' && LA4_0<='\f')||(LA4_0>='\u000E' && LA4_0<='\uFFFF')) ) {
-                    alt4=1;
+                if ( ((LA3_0>='\u0000' && LA3_0<='\t')||(LA3_0>='\u000B' && LA3_0<='\f')||(LA3_0>='\u000E' && LA3_0<='\uFFFF')) ) {
+                    alt3=1;
                 }
 
 
-                switch (alt4) {
+                switch (alt3) {
             	case 1 :
-            	    // InternalCucumber.g:604:29: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalCucumber.g:568:20: ~ ( ( '\\r' | '\\n' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -423,10 +381,11 @@ public class InternalCucumberLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop4;
+            	    break loop3;
                 }
             } while (true);
 
+            mRULE_EOL(); 
 
             }
 
@@ -438,27 +397,27 @@ public class InternalCucumberLexer extends Lexer {
     }
     // $ANTLR end "RULE_COMMENT"
 
-    // $ANTLR start "RULE_ID"
-    public final void mRULE_ID() throws RecognitionException {
+    // $ANTLR start "RULE_WORD"
+    public final void mRULE_WORD() throws RecognitionException {
         try {
-            int _type = RULE_ID;
+            int _type = RULE_WORD;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:606:9: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\'' )+ )
-            // InternalCucumber.g:606:11: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\'' )+
+            // InternalCucumber.g:570:11: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\'' )+ )
+            // InternalCucumber.g:570:13: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\'' )+
             {
-            // InternalCucumber.g:606:11: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\'' )+
-            int cnt5=0;
-            loop5:
+            // InternalCucumber.g:570:13: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\'' )+
+            int cnt4=0;
+            loop4:
             do {
-                int alt5=2;
-                int LA5_0 = input.LA(1);
+                int alt4=2;
+                int LA4_0 = input.LA(1);
 
-                if ( (LA5_0=='\''||(LA5_0>='0' && LA5_0<='9')||(LA5_0>='A' && LA5_0<='Z')||(LA5_0>='a' && LA5_0<='z')) ) {
-                    alt5=1;
+                if ( (LA4_0=='\''||(LA4_0>='0' && LA4_0<='9')||(LA4_0>='A' && LA4_0<='Z')||(LA4_0>='a' && LA4_0<='z')) ) {
+                    alt4=1;
                 }
 
 
-                switch (alt5) {
+                switch (alt4) {
             	case 1 :
             	    // InternalCucumber.g:
             	    {
@@ -476,12 +435,12 @@ public class InternalCucumberLexer extends Lexer {
             	    break;
 
             	default :
-            	    if ( cnt5 >= 1 ) break loop5;
+            	    if ( cnt4 >= 1 ) break loop4;
                         EarlyExitException eee =
-                            new EarlyExitException(5, input);
+                            new EarlyExitException(4, input);
                         throw eee;
                 }
-                cnt5++;
+                cnt4++;
             } while (true);
 
 
@@ -493,18 +452,18 @@ public class InternalCucumberLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "RULE_ID"
+    // $ANTLR end "RULE_WORD"
 
-    // $ANTLR start "RULE_WORD"
-    public final void mRULE_WORD() throws RecognitionException {
+    // $ANTLR start "RULE_TAG"
+    public final void mRULE_TAG() throws RecognitionException {
         try {
-            int _type = RULE_WORD;
+            int _type = RULE_TAG;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:608:11: ( RULE_WS RULE_ID )
-            // InternalCucumber.g:608:13: RULE_WS RULE_ID
+            // InternalCucumber.g:572:10: ( '@' RULE_WORD )
+            // InternalCucumber.g:572:12: '@' RULE_WORD
             {
-            mRULE_WS(); 
-            mRULE_ID(); 
+            match('@'); 
+            mRULE_WORD(); 
 
             }
 
@@ -514,13 +473,13 @@ public class InternalCucumberLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "RULE_WORD"
+    // $ANTLR end "RULE_TAG"
 
     public void mTokens() throws RecognitionException {
-        // InternalCucumber.g:1:8: ( T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | RULE_WS | RULE_EOL | RULE_COMMENT | RULE_ID | RULE_WORD )
-        int alt6=15;
-        alt6 = dfa6.predict(input);
-        switch (alt6) {
+        // InternalCucumber.g:1:8: ( T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | RULE_WS | RULE_EOL | RULE_COMMENT | RULE_WORD | RULE_TAG )
+        int alt5=14;
+        alt5 = dfa5.predict(input);
+        switch (alt5) {
             case 1 :
                 // InternalCucumber.g:1:10: T__9
                 {
@@ -585,44 +544,37 @@ public class InternalCucumberLexer extends Lexer {
                 }
                 break;
             case 10 :
-                // InternalCucumber.g:1:63: T__18
-                {
-                mT__18(); 
-
-                }
-                break;
-            case 11 :
-                // InternalCucumber.g:1:69: RULE_WS
+                // InternalCucumber.g:1:63: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 12 :
-                // InternalCucumber.g:1:77: RULE_EOL
+            case 11 :
+                // InternalCucumber.g:1:71: RULE_EOL
                 {
                 mRULE_EOL(); 
 
                 }
                 break;
-            case 13 :
-                // InternalCucumber.g:1:86: RULE_COMMENT
+            case 12 :
+                // InternalCucumber.g:1:80: RULE_COMMENT
                 {
                 mRULE_COMMENT(); 
 
                 }
                 break;
-            case 14 :
-                // InternalCucumber.g:1:99: RULE_ID
+            case 13 :
+                // InternalCucumber.g:1:93: RULE_WORD
                 {
-                mRULE_ID(); 
+                mRULE_WORD(); 
 
                 }
                 break;
-            case 15 :
-                // InternalCucumber.g:1:107: RULE_WORD
+            case 14 :
+                // InternalCucumber.g:1:103: RULE_TAG
                 {
-                mRULE_WORD(); 
+                mRULE_TAG(); 
 
                 }
                 break;
@@ -632,21 +584,21 @@ public class InternalCucumberLexer extends Lexer {
     }
 
 
-    protected DFA6 dfa6 = new DFA6(this);
-    static final String DFA6_eotS =
-        "\1\uffff\7\15\2\uffff\1\26\3\uffff\10\15\2\uffff\2\15\1\42\4\15\1\47\2\15\1\uffff\2\15\1\54\1\55\1\uffff\3\15\1\61\2\uffff\3\15\1\uffff\3\15\1\uffff\3\15\1\uffff\1\15\1\uffff";
-    static final String DFA6_eofS =
-        "\74\uffff";
-    static final String DFA6_minS =
-        "\1\11\1\145\1\141\1\143\1\151\2\150\1\156\2\uffff\1\11\3\uffff\1\141\1\143\1\164\1\145\1\166\2\145\1\144\2\uffff\1\164\1\153\1\47\1\156\1\145\2\156\1\47\1\165\1\147\1\uffff\1\141\1\156\2\47\1\uffff\3\162\1\47\2\uffff\1\145\1\157\1\151\1\uffff\1\72\1\165\1\157\1\uffff\1\156\1\72\1\144\1\uffff\1\72\1\uffff";
-    static final String DFA6_maxS =
-        "\1\172\1\145\1\165\1\143\1\151\2\150\1\156\2\uffff\1\172\3\uffff\1\141\1\143\1\164\1\145\1\166\2\145\1\144\2\uffff\1\164\1\153\1\172\1\156\1\145\2\156\1\172\1\165\1\147\1\uffff\1\141\1\156\2\172\1\uffff\3\162\1\172\2\uffff\1\145\1\157\1\151\1\uffff\1\72\1\165\1\157\1\uffff\1\156\1\72\1\144\1\uffff\1\72\1\uffff";
-    static final String DFA6_acceptS =
-        "\10\uffff\1\11\1\12\1\uffff\1\14\1\15\1\16\10\uffff\1\13\1\17\12\uffff\1\10\4\uffff\1\7\4\uffff\1\5\1\6\3\uffff\1\4\3\uffff\1\1\3\uffff\1\3\1\uffff\1\2";
-    static final String DFA6_specialS =
-        "\74\uffff}>";
-    static final String[] DFA6_transitionS = {
-            "\1\12\1\13\2\uffff\1\13\22\uffff\1\12\2\uffff\1\14\3\uffff\1\15\2\uffff\1\10\5\uffff\12\15\6\uffff\1\11\1\7\1\2\3\15\1\1\1\4\13\15\1\3\1\6\2\15\1\5\3\15\6\uffff\32\15",
+    protected DFA5 dfa5 = new DFA5(this);
+    static final String DFA5_eotS =
+        "\1\uffff\7\14\6\uffff\12\14\1\40\4\14\1\45\2\14\1\uffff\2\14\1\52\1\53\1\uffff\3\14\1\57\2\uffff\3\14\1\uffff\3\14\1\uffff\3\14\1\uffff\1\14\1\uffff";
+    static final String DFA5_eofS =
+        "\72\uffff";
+    static final String DFA5_minS =
+        "\1\11\1\145\1\141\1\143\1\151\2\150\1\156\6\uffff\1\141\1\143\1\164\1\145\1\166\2\145\1\144\1\164\1\153\1\47\1\156\1\145\2\156\1\47\1\165\1\147\1\uffff\1\141\1\156\2\47\1\uffff\3\162\1\47\2\uffff\1\145\1\157\1\151\1\uffff\1\72\1\165\1\157\1\uffff\1\156\1\72\1\144\1\uffff\1\72\1\uffff";
+    static final String DFA5_maxS =
+        "\1\172\1\145\1\165\1\143\1\151\2\150\1\156\6\uffff\1\141\1\143\1\164\1\145\1\166\2\145\1\144\1\164\1\153\1\172\1\156\1\145\2\156\1\172\1\165\1\147\1\uffff\1\141\1\156\2\172\1\uffff\3\162\1\172\2\uffff\1\145\1\157\1\151\1\uffff\1\72\1\165\1\157\1\uffff\1\156\1\72\1\144\1\uffff\1\72\1\uffff";
+    static final String DFA5_acceptS =
+        "\10\uffff\1\11\1\12\1\13\1\14\1\15\1\16\22\uffff\1\10\4\uffff\1\7\4\uffff\1\5\1\6\3\uffff\1\4\3\uffff\1\1\3\uffff\1\3\1\uffff\1\2";
+    static final String DFA5_specialS =
+        "\72\uffff}>";
+    static final String[] DFA5_transitionS = {
+            "\1\11\1\12\2\uffff\1\12\22\uffff\1\11\2\uffff\1\13\3\uffff\1\14\2\uffff\1\10\5\uffff\12\14\6\uffff\1\15\1\7\1\2\3\14\1\1\1\4\13\14\1\3\1\6\2\14\1\5\3\14\6\uffff\32\14",
             "\1\16",
             "\1\17\23\uffff\1\20",
             "\1\21",
@@ -656,10 +608,12 @@ public class InternalCucumberLexer extends Lexer {
             "\1\25",
             "",
             "",
-            "\1\12\26\uffff\1\12\2\uffff\1\14\3\uffff\1\27\10\uffff\12\27\7\uffff\32\27\6\uffff\32\27",
             "",
             "",
             "",
+            "",
+            "\1\26",
+            "\1\27",
             "\1\30",
             "\1\31",
             "\1\32",
@@ -668,77 +622,73 @@ public class InternalCucumberLexer extends Lexer {
             "\1\35",
             "\1\36",
             "\1\37",
-            "",
-            "",
-            "\1\40",
+            "\1\14\10\uffff\12\14\7\uffff\32\14\6\uffff\32\14",
             "\1\41",
-            "\1\15\10\uffff\12\15\7\uffff\32\15\6\uffff\32\15",
+            "\1\42",
             "\1\43",
             "\1\44",
-            "\1\45",
+            "\1\14\10\uffff\12\14\7\uffff\32\14\6\uffff\32\14",
             "\1\46",
-            "\1\15\10\uffff\12\15\7\uffff\32\15\6\uffff\32\15",
+            "\1\47",
+            "",
             "\1\50",
             "\1\51",
+            "\1\14\10\uffff\12\14\7\uffff\32\14\6\uffff\32\14",
+            "\1\14\10\uffff\12\14\7\uffff\32\14\6\uffff\32\14",
             "",
-            "\1\52",
-            "\1\53",
-            "\1\15\10\uffff\12\15\7\uffff\32\15\6\uffff\32\15",
-            "\1\15\10\uffff\12\15\7\uffff\32\15\6\uffff\32\15",
-            "",
+            "\1\54",
+            "\1\55",
             "\1\56",
-            "\1\57",
+            "\1\14\10\uffff\12\14\7\uffff\32\14\6\uffff\32\14",
+            "",
+            "",
             "\1\60",
-            "\1\15\10\uffff\12\15\7\uffff\32\15\6\uffff\32\15",
-            "",
-            "",
+            "\1\61",
             "\1\62",
+            "",
             "\1\63",
             "\1\64",
-            "",
             "\1\65",
+            "",
             "\1\66",
             "\1\67",
-            "",
             "\1\70",
-            "\1\71",
-            "\1\72",
             "",
-            "\1\73",
+            "\1\71",
             ""
     };
 
-    static final short[] DFA6_eot = DFA.unpackEncodedString(DFA6_eotS);
-    static final short[] DFA6_eof = DFA.unpackEncodedString(DFA6_eofS);
-    static final char[] DFA6_min = DFA.unpackEncodedStringToUnsignedChars(DFA6_minS);
-    static final char[] DFA6_max = DFA.unpackEncodedStringToUnsignedChars(DFA6_maxS);
-    static final short[] DFA6_accept = DFA.unpackEncodedString(DFA6_acceptS);
-    static final short[] DFA6_special = DFA.unpackEncodedString(DFA6_specialS);
-    static final short[][] DFA6_transition;
+    static final short[] DFA5_eot = DFA.unpackEncodedString(DFA5_eotS);
+    static final short[] DFA5_eof = DFA.unpackEncodedString(DFA5_eofS);
+    static final char[] DFA5_min = DFA.unpackEncodedStringToUnsignedChars(DFA5_minS);
+    static final char[] DFA5_max = DFA.unpackEncodedStringToUnsignedChars(DFA5_maxS);
+    static final short[] DFA5_accept = DFA.unpackEncodedString(DFA5_acceptS);
+    static final short[] DFA5_special = DFA.unpackEncodedString(DFA5_specialS);
+    static final short[][] DFA5_transition;
 
     static {
-        int numStates = DFA6_transitionS.length;
-        DFA6_transition = new short[numStates][];
+        int numStates = DFA5_transitionS.length;
+        DFA5_transition = new short[numStates][];
         for (int i=0; i<numStates; i++) {
-            DFA6_transition[i] = DFA.unpackEncodedString(DFA6_transitionS[i]);
+            DFA5_transition[i] = DFA.unpackEncodedString(DFA5_transitionS[i]);
         }
     }
 
-    class DFA6 extends DFA {
+    class DFA5 extends DFA {
 
-        public DFA6(BaseRecognizer recognizer) {
+        public DFA5(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 6;
-            this.eot = DFA6_eot;
-            this.eof = DFA6_eof;
-            this.min = DFA6_min;
-            this.max = DFA6_max;
-            this.accept = DFA6_accept;
-            this.special = DFA6_special;
-            this.transition = DFA6_transition;
+            this.decisionNumber = 5;
+            this.eot = DFA5_eot;
+            this.eof = DFA5_eof;
+            this.min = DFA5_min;
+            this.max = DFA5_max;
+            this.accept = DFA5_accept;
+            this.special = DFA5_special;
+            this.transition = DFA5_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | RULE_WS | RULE_EOL | RULE_COMMENT | RULE_ID | RULE_WORD );";
+            return "1:1: Tokens : ( T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | RULE_WS | RULE_EOL | RULE_COMMENT | RULE_WORD | RULE_TAG );";
         }
     }
  

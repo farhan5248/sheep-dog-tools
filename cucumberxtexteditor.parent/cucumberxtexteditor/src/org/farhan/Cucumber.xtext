@@ -1,10 +1,10 @@
-grammar org.farhan.Cucumber
+grammar org.farhan.Cucumber hidden(WS, COMMENT)
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 generate cucumber "http://www.farhan.org/Cucumber"
 
 Feature:
-	(tags+=Tag)* EOL
+	Tags
 	'Feature:' title=Sentence
 	description=Description
 	background=Background?
@@ -18,7 +18,7 @@ Background:
 	(steps+=Step)*;
 
 Scenario:
-	(tags+=Tag)* EOL
+	Tags
 	'Scenario:' title=Sentence
 	description=Description
 	// this is a 0 or more list of Step
@@ -31,28 +31,27 @@ Step:
 Description:
 	{Description} (sentences+=Sentence)*;
 
-Tag:
-	title='@' ID WS?;
+Tags:
+	TAG* EOL?;
 
 Sentence:
-	WORD+ EOL;
+	WORD+ EOL?;
 
-// This is leading whitespace
 terminal WS:
 	(' ' | '\t')+;
 
-// this is trailing whitespace
 terminal EOL:
-	('\r\n' | '\n')+;
+	('\r' | '\n')+;
 
-// Not in use currently
+// single line comment
 terminal COMMENT:
-	WS? '#' !('\n' | '\r')*;
+	'#' !('\r' | '\n')* EOL;
 
 // .. needs the ecore import
-terminal ID:
+// need to add punctuation and commas etc
+// this covers Given When Then and might create problems?
+terminal WORD:
 	('a'..'z' | 'A'..'Z' | '0'..'9' | "'")+;
 
-terminal WORD:
-	WS ID;
-
+terminal TAG:
+	'@' WORD;

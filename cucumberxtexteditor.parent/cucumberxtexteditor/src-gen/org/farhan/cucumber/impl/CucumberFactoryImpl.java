@@ -70,7 +70,6 @@ public class CucumberFactoryImpl extends EFactoryImpl implements CucumberFactory
       case CucumberPackage.SCENARIO: return createScenario();
       case CucumberPackage.STEP: return createStep();
       case CucumberPackage.DESCRIPTION: return createDescription();
-      case CucumberPackage.TAG: return createTag();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -134,18 +133,6 @@ public class CucumberFactoryImpl extends EFactoryImpl implements CucumberFactory
   {
     DescriptionImpl description = new DescriptionImpl();
     return description;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Tag createTag()
-  {
-    TagImpl tag = new TagImpl();
-    return tag;
   }
 
   /**

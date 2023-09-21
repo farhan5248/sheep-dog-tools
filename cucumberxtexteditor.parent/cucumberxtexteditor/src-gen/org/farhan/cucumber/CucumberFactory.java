@@ -69,15 +69,6 @@ public interface CucumberFactory extends EFactory
   Description createDescription();
 
   /**
-   * Returns a new object of class '<em>Tag</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Tag</em>'.
-   * @generated
-   */
-  Tag createTag();
-
-  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

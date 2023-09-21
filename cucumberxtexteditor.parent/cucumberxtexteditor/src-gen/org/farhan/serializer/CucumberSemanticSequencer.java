@@ -11,16 +11,13 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.serializer.ISerializationContext;
-import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
-import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.farhan.cucumber.Background;
 import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Description;
 import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
-import org.farhan.cucumber.Tag;
 import org.farhan.services.CucumberGrammarAccess;
 
 @SuppressWarnings("all")
@@ -51,9 +48,6 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 				return; 
 			case CucumberPackage.STEP:
 				sequence_Step(context, (Step) semanticObject); 
-				return; 
-			case CucumberPackage.TAG:
-				sequence_Tag(context, (Tag) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -94,7 +88,7 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Feature returns Feature
 	 *
 	 * Constraint:
-	 *     (tags+=Tag* title=Sentence description=Description background=Background? scenarios+=Scenario*)
+	 *     (title=Sentence description=Description background=Background? scenarios+=Scenario*)
 	 * </pre>
 	 */
 	protected void sequence_Feature(ISerializationContext context, Feature semanticObject) {
@@ -108,7 +102,7 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Scenario returns Scenario
 	 *
 	 * Constraint:
-	 *     (tags+=Tag* title=Sentence description=Description steps+=Step*)
+	 *     (title=Sentence description=Description steps+=Step*)
 	 * </pre>
 	 */
 	protected void sequence_Scenario(ISerializationContext context, Scenario semanticObject) {
@@ -137,26 +131,6 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 */
 	protected void sequence_Step(ISerializationContext context, Step semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     Tag returns Tag
-	 *
-	 * Constraint:
-	 *     title='@'
-	 * </pre>
-	 */
-	protected void sequence_Tag(ISerializationContext context, Tag semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, CucumberPackage.Literals.TAG__TITLE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CucumberPackage.Literals.TAG__TITLE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTagAccess().getTitleCommercialAtKeyword_0_0(), semanticObject.getTitle());
-		feeder.finish();
 	}
 	
 	
