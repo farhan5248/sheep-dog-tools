@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.farhan.cucumber.Scenario#getTags <em>Tags</em>}</li>
  *   <li>{@link org.farhan.cucumber.Scenario#getTitle <em>Title</em>}</li>
  *   <li>{@link org.farhan.cucumber.Scenario#getSteps <em>Steps</em>}</li>
  * </ul>
@@ -26,6 +27,18 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Scenario extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Tags</b></em>' containment reference list.
+   * The list contents are of type {@link org.farhan.cucumber.Tag}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Tags</em>' containment reference list.
+   * @see org.farhan.cucumber.CucumberPackage#getScenario_Tags()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Tag> getTags();
+
   /**
    * Returns the value of the '<em><b>Title</b></em>' containment reference.
    * <!-- begin-user-doc -->

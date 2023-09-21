@@ -114,13 +114,22 @@ public interface CucumberPackage extends EPackage
   int SCENARIO = 1;
 
   /**
+   * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCENARIO__TAGS = 0;
+
+  /**
    * The feature id for the '<em><b>Title</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SCENARIO__TITLE = 0;
+  int SCENARIO__TITLE = 1;
 
   /**
    * The feature id for the '<em><b>Steps</b></em>' containment reference list.
@@ -129,7 +138,7 @@ public interface CucumberPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SCENARIO__STEPS = 1;
+  int SCENARIO__STEPS = 2;
 
   /**
    * The number of structural features of the '<em>Scenario</em>' class.
@@ -138,7 +147,7 @@ public interface CucumberPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SCENARIO_FEATURE_COUNT = 2;
+  int SCENARIO_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.farhan.cucumber.impl.StepImpl <em>Step</em>}' class.
@@ -286,6 +295,17 @@ public interface CucumberPackage extends EPackage
    * @generated
    */
   EClass getScenario();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.farhan.cucumber.Scenario#getTags <em>Tags</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Tags</em>'.
+   * @see org.farhan.cucumber.Scenario#getTags()
+   * @see #getScenario()
+   * @generated
+   */
+  EReference getScenario_Tags();
 
   /**
    * Returns the meta object for the containment reference '{@link org.farhan.cucumber.Scenario#getTitle <em>Title</em>}'.
@@ -449,6 +469,14 @@ public interface CucumberPackage extends EPackage
      * @generated
      */
     EClass SCENARIO = eINSTANCE.getScenario();
+
+    /**
+     * The meta object literal for the '<em><b>Tags</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SCENARIO__TAGS = eINSTANCE.getScenario_Tags();
 
     /**
      * The meta object literal for the '<em><b>Title</b></em>' containment reference feature.

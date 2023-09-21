@@ -23,6 +23,7 @@ import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Description;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
+import org.farhan.cucumber.Tag;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,6 +33,7 @@ import org.farhan.cucumber.Step;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.farhan.cucumber.impl.ScenarioImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.ScenarioImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.ScenarioImpl#getSteps <em>Steps</em>}</li>
  * </ul>
@@ -40,6 +42,16 @@ import org.farhan.cucumber.Step;
  */
 public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenario
 {
+  /**
+   * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTags()
+   * @generated
+   * @ordered
+   */
+  protected EList<Tag> tags;
+
   /**
    * The cached value of the '{@link #getTitle() <em>Title</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -79,6 +91,21 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
   protected EClass eStaticClass()
   {
     return CucumberPackage.Literals.SCENARIO;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EList<Tag> getTags()
+  {
+    if (tags == null)
+    {
+      tags = new EObjectContainmentEList<Tag>(Tag.class, this, CucumberPackage.SCENARIO__TAGS);
+    }
+    return tags;
   }
 
   /**
@@ -156,6 +183,8 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
   {
     switch (featureID)
     {
+      case CucumberPackage.SCENARIO__TAGS:
+        return ((InternalEList<?>)getTags()).basicRemove(otherEnd, msgs);
       case CucumberPackage.SCENARIO__TITLE:
         return basicSetTitle(null, msgs);
       case CucumberPackage.SCENARIO__STEPS:
@@ -174,6 +203,8 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
   {
     switch (featureID)
     {
+      case CucumberPackage.SCENARIO__TAGS:
+        return getTags();
       case CucumberPackage.SCENARIO__TITLE:
         return getTitle();
       case CucumberPackage.SCENARIO__STEPS:
@@ -193,6 +224,10 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
   {
     switch (featureID)
     {
+      case CucumberPackage.SCENARIO__TAGS:
+        getTags().clear();
+        getTags().addAll((Collection<? extends Tag>)newValue);
+        return;
       case CucumberPackage.SCENARIO__TITLE:
         setTitle((Description)newValue);
         return;
@@ -214,6 +249,9 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
   {
     switch (featureID)
     {
+      case CucumberPackage.SCENARIO__TAGS:
+        getTags().clear();
+        return;
       case CucumberPackage.SCENARIO__TITLE:
         setTitle((Description)null);
         return;
@@ -234,6 +272,8 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
   {
     switch (featureID)
     {
+      case CucumberPackage.SCENARIO__TAGS:
+        return tags != null && !tags.isEmpty();
       case CucumberPackage.SCENARIO__TITLE:
         return title != null;
       case CucumberPackage.SCENARIO__STEPS:

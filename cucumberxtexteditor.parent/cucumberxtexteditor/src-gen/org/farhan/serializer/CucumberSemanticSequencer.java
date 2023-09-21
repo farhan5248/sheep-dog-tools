@@ -90,7 +90,7 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Scenario returns Scenario
 	 *
 	 * Constraint:
-	 *     (title=Description steps+=Step*)
+	 *     (tags+=Tag* title=Description steps+=Step*)
 	 * </pre>
 	 */
 	protected void sequence_Scenario(ISerializationContext context, Scenario semanticObject) {

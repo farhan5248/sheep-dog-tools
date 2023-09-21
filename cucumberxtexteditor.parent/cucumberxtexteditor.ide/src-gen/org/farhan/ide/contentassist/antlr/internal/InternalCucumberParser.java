@@ -1125,7 +1125,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
                 int alt4=2;
                 int LA4_0 = input.LA(1);
 
-                if ( (LA4_0==15) ) {
+                if ( (LA4_0==RULE_EOL||LA4_0==16) ) {
                     alt4=1;
                 }
 
@@ -1180,7 +1180,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
             // InternalCucumber.g:393:1: ( rule__Scenario__Group__0__Impl rule__Scenario__Group__1 )
             // InternalCucumber.g:394:2: rule__Scenario__Group__0__Impl rule__Scenario__Group__1
             {
-            pushFollow(FOLLOW_7);
+            pushFollow(FOLLOW_8);
             rule__Scenario__Group__0__Impl();
 
             state._fsp--;
@@ -1209,21 +1209,49 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__Group__0__Impl"
-    // InternalCucumber.g:401:1: rule__Scenario__Group__0__Impl : ( 'Scenario:' ) ;
+    // InternalCucumber.g:401:1: rule__Scenario__Group__0__Impl : ( ( rule__Scenario__TagsAssignment_0 )* ) ;
     public final void rule__Scenario__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:405:1: ( ( 'Scenario:' ) )
-            // InternalCucumber.g:406:1: ( 'Scenario:' )
+            // InternalCucumber.g:405:1: ( ( ( rule__Scenario__TagsAssignment_0 )* ) )
+            // InternalCucumber.g:406:1: ( ( rule__Scenario__TagsAssignment_0 )* )
             {
-            // InternalCucumber.g:406:1: ( 'Scenario:' )
-            // InternalCucumber.g:407:2: 'Scenario:'
+            // InternalCucumber.g:406:1: ( ( rule__Scenario__TagsAssignment_0 )* )
+            // InternalCucumber.g:407:2: ( rule__Scenario__TagsAssignment_0 )*
             {
-             before(grammarAccess.getScenarioAccess().getScenarioKeyword_0()); 
-            match(input,15,FOLLOW_2); 
-             after(grammarAccess.getScenarioAccess().getScenarioKeyword_0()); 
+             before(grammarAccess.getScenarioAccess().getTagsAssignment_0()); 
+            // InternalCucumber.g:408:2: ( rule__Scenario__TagsAssignment_0 )*
+            loop5:
+            do {
+                int alt5=2;
+                int LA5_0 = input.LA(1);
+
+                if ( (LA5_0==16) ) {
+                    alt5=1;
+                }
+
+
+                switch (alt5) {
+            	case 1 :
+            	    // InternalCucumber.g:408:3: rule__Scenario__TagsAssignment_0
+            	    {
+            	    pushFollow(FOLLOW_5);
+            	    rule__Scenario__TagsAssignment_0();
+
+            	    state._fsp--;
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop5;
+                }
+            } while (true);
+
+             after(grammarAccess.getScenarioAccess().getTagsAssignment_0()); 
 
             }
 
@@ -1284,31 +1312,21 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__Group__1__Impl"
-    // InternalCucumber.g:428:1: rule__Scenario__Group__1__Impl : ( ( rule__Scenario__TitleAssignment_1 ) ) ;
+    // InternalCucumber.g:428:1: rule__Scenario__Group__1__Impl : ( RULE_EOL ) ;
     public final void rule__Scenario__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:432:1: ( ( ( rule__Scenario__TitleAssignment_1 ) ) )
-            // InternalCucumber.g:433:1: ( ( rule__Scenario__TitleAssignment_1 ) )
+            // InternalCucumber.g:432:1: ( ( RULE_EOL ) )
+            // InternalCucumber.g:433:1: ( RULE_EOL )
             {
-            // InternalCucumber.g:433:1: ( ( rule__Scenario__TitleAssignment_1 ) )
-            // InternalCucumber.g:434:2: ( rule__Scenario__TitleAssignment_1 )
+            // InternalCucumber.g:433:1: ( RULE_EOL )
+            // InternalCucumber.g:434:2: RULE_EOL
             {
-             before(grammarAccess.getScenarioAccess().getTitleAssignment_1()); 
-            // InternalCucumber.g:435:2: ( rule__Scenario__TitleAssignment_1 )
-            // InternalCucumber.g:435:3: rule__Scenario__TitleAssignment_1
-            {
-            pushFollow(FOLLOW_2);
-            rule__Scenario__TitleAssignment_1();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getScenarioAccess().getTitleAssignment_1()); 
+             before(grammarAccess.getScenarioAccess().getEOLTerminalRuleCall_1()); 
+            match(input,RULE_EOL,FOLLOW_2); 
+             after(grammarAccess.getScenarioAccess().getEOLTerminalRuleCall_1()); 
 
             }
 
@@ -1331,17 +1349,22 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__Group__2"
-    // InternalCucumber.g:443:1: rule__Scenario__Group__2 : rule__Scenario__Group__2__Impl ;
+    // InternalCucumber.g:443:1: rule__Scenario__Group__2 : rule__Scenario__Group__2__Impl rule__Scenario__Group__3 ;
     public final void rule__Scenario__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:447:1: ( rule__Scenario__Group__2__Impl )
-            // InternalCucumber.g:448:2: rule__Scenario__Group__2__Impl
+            // InternalCucumber.g:447:1: ( rule__Scenario__Group__2__Impl rule__Scenario__Group__3 )
+            // InternalCucumber.g:448:2: rule__Scenario__Group__2__Impl rule__Scenario__Group__3
             {
-            pushFollow(FOLLOW_2);
+            pushFollow(FOLLOW_7);
             rule__Scenario__Group__2__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__Scenario__Group__3();
 
             state._fsp--;
 
@@ -1364,49 +1387,21 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__Group__2__Impl"
-    // InternalCucumber.g:454:1: rule__Scenario__Group__2__Impl : ( ( rule__Scenario__StepsAssignment_2 )* ) ;
+    // InternalCucumber.g:455:1: rule__Scenario__Group__2__Impl : ( 'Scenario:' ) ;
     public final void rule__Scenario__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:458:1: ( ( ( rule__Scenario__StepsAssignment_2 )* ) )
-            // InternalCucumber.g:459:1: ( ( rule__Scenario__StepsAssignment_2 )* )
+            // InternalCucumber.g:459:1: ( ( 'Scenario:' ) )
+            // InternalCucumber.g:460:1: ( 'Scenario:' )
             {
-            // InternalCucumber.g:459:1: ( ( rule__Scenario__StepsAssignment_2 )* )
-            // InternalCucumber.g:460:2: ( rule__Scenario__StepsAssignment_2 )*
+            // InternalCucumber.g:460:1: ( 'Scenario:' )
+            // InternalCucumber.g:461:2: 'Scenario:'
             {
-             before(grammarAccess.getScenarioAccess().getStepsAssignment_2()); 
-            // InternalCucumber.g:461:2: ( rule__Scenario__StepsAssignment_2 )*
-            loop5:
-            do {
-                int alt5=2;
-                int LA5_0 = input.LA(1);
-
-                if ( ((LA5_0>=8 && LA5_0<=13)) ) {
-                    alt5=1;
-                }
-
-
-                switch (alt5) {
-            	case 1 :
-            	    // InternalCucumber.g:461:3: rule__Scenario__StepsAssignment_2
-            	    {
-            	    pushFollow(FOLLOW_11);
-            	    rule__Scenario__StepsAssignment_2();
-
-            	    state._fsp--;
-
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop5;
-                }
-            } while (true);
-
-             after(grammarAccess.getScenarioAccess().getStepsAssignment_2()); 
+             before(grammarAccess.getScenarioAccess().getScenarioKeyword_2()); 
+            match(input,15,FOLLOW_2); 
+             after(grammarAccess.getScenarioAccess().getScenarioKeyword_2()); 
 
             }
 
@@ -1428,15 +1423,198 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
     // $ANTLR end "rule__Scenario__Group__2__Impl"
 
 
+    // $ANTLR start "rule__Scenario__Group__3"
+    // InternalCucumber.g:470:1: rule__Scenario__Group__3 : rule__Scenario__Group__3__Impl rule__Scenario__Group__4 ;
+    public final void rule__Scenario__Group__3() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalCucumber.g:474:1: ( rule__Scenario__Group__3__Impl rule__Scenario__Group__4 )
+            // InternalCucumber.g:475:2: rule__Scenario__Group__3__Impl rule__Scenario__Group__4
+            {
+            pushFollow(FOLLOW_11);
+            rule__Scenario__Group__3__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_2);
+            rule__Scenario__Group__4();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Scenario__Group__3"
+
+
+    // $ANTLR start "rule__Scenario__Group__3__Impl"
+    // InternalCucumber.g:482:1: rule__Scenario__Group__3__Impl : ( ( rule__Scenario__TitleAssignment_3 ) ) ;
+    public final void rule__Scenario__Group__3__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalCucumber.g:486:1: ( ( ( rule__Scenario__TitleAssignment_3 ) ) )
+            // InternalCucumber.g:487:1: ( ( rule__Scenario__TitleAssignment_3 ) )
+            {
+            // InternalCucumber.g:487:1: ( ( rule__Scenario__TitleAssignment_3 ) )
+            // InternalCucumber.g:488:2: ( rule__Scenario__TitleAssignment_3 )
+            {
+             before(grammarAccess.getScenarioAccess().getTitleAssignment_3()); 
+            // InternalCucumber.g:489:2: ( rule__Scenario__TitleAssignment_3 )
+            // InternalCucumber.g:489:3: rule__Scenario__TitleAssignment_3
+            {
+            pushFollow(FOLLOW_2);
+            rule__Scenario__TitleAssignment_3();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getScenarioAccess().getTitleAssignment_3()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Scenario__Group__3__Impl"
+
+
+    // $ANTLR start "rule__Scenario__Group__4"
+    // InternalCucumber.g:497:1: rule__Scenario__Group__4 : rule__Scenario__Group__4__Impl ;
+    public final void rule__Scenario__Group__4() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalCucumber.g:501:1: ( rule__Scenario__Group__4__Impl )
+            // InternalCucumber.g:502:2: rule__Scenario__Group__4__Impl
+            {
+            pushFollow(FOLLOW_2);
+            rule__Scenario__Group__4__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Scenario__Group__4"
+
+
+    // $ANTLR start "rule__Scenario__Group__4__Impl"
+    // InternalCucumber.g:508:1: rule__Scenario__Group__4__Impl : ( ( rule__Scenario__StepsAssignment_4 )* ) ;
+    public final void rule__Scenario__Group__4__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalCucumber.g:512:1: ( ( ( rule__Scenario__StepsAssignment_4 )* ) )
+            // InternalCucumber.g:513:1: ( ( rule__Scenario__StepsAssignment_4 )* )
+            {
+            // InternalCucumber.g:513:1: ( ( rule__Scenario__StepsAssignment_4 )* )
+            // InternalCucumber.g:514:2: ( rule__Scenario__StepsAssignment_4 )*
+            {
+             before(grammarAccess.getScenarioAccess().getStepsAssignment_4()); 
+            // InternalCucumber.g:515:2: ( rule__Scenario__StepsAssignment_4 )*
+            loop6:
+            do {
+                int alt6=2;
+                int LA6_0 = input.LA(1);
+
+                if ( ((LA6_0>=8 && LA6_0<=13)) ) {
+                    alt6=1;
+                }
+
+
+                switch (alt6) {
+            	case 1 :
+            	    // InternalCucumber.g:515:3: rule__Scenario__StepsAssignment_4
+            	    {
+            	    pushFollow(FOLLOW_12);
+            	    rule__Scenario__StepsAssignment_4();
+
+            	    state._fsp--;
+
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop6;
+                }
+            } while (true);
+
+             after(grammarAccess.getScenarioAccess().getStepsAssignment_4()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Scenario__Group__4__Impl"
+
+
     // $ANTLR start "rule__Step__Group__0"
-    // InternalCucumber.g:470:1: rule__Step__Group__0 : rule__Step__Group__0__Impl rule__Step__Group__1 ;
+    // InternalCucumber.g:524:1: rule__Step__Group__0 : rule__Step__Group__0__Impl rule__Step__Group__1 ;
     public final void rule__Step__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:474:1: ( rule__Step__Group__0__Impl rule__Step__Group__1 )
-            // InternalCucumber.g:475:2: rule__Step__Group__0__Impl rule__Step__Group__1
+            // InternalCucumber.g:528:1: ( rule__Step__Group__0__Impl rule__Step__Group__1 )
+            // InternalCucumber.g:529:2: rule__Step__Group__0__Impl rule__Step__Group__1
             {
             pushFollow(FOLLOW_7);
             rule__Step__Group__0__Impl();
@@ -1467,21 +1645,21 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Step__Group__0__Impl"
-    // InternalCucumber.g:482:1: rule__Step__Group__0__Impl : ( ( rule__Step__KeywordAssignment_0 ) ) ;
+    // InternalCucumber.g:536:1: rule__Step__Group__0__Impl : ( ( rule__Step__KeywordAssignment_0 ) ) ;
     public final void rule__Step__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:486:1: ( ( ( rule__Step__KeywordAssignment_0 ) ) )
-            // InternalCucumber.g:487:1: ( ( rule__Step__KeywordAssignment_0 ) )
+            // InternalCucumber.g:540:1: ( ( ( rule__Step__KeywordAssignment_0 ) ) )
+            // InternalCucumber.g:541:1: ( ( rule__Step__KeywordAssignment_0 ) )
             {
-            // InternalCucumber.g:487:1: ( ( rule__Step__KeywordAssignment_0 ) )
-            // InternalCucumber.g:488:2: ( rule__Step__KeywordAssignment_0 )
+            // InternalCucumber.g:541:1: ( ( rule__Step__KeywordAssignment_0 ) )
+            // InternalCucumber.g:542:2: ( rule__Step__KeywordAssignment_0 )
             {
              before(grammarAccess.getStepAccess().getKeywordAssignment_0()); 
-            // InternalCucumber.g:489:2: ( rule__Step__KeywordAssignment_0 )
-            // InternalCucumber.g:489:3: rule__Step__KeywordAssignment_0
+            // InternalCucumber.g:543:2: ( rule__Step__KeywordAssignment_0 )
+            // InternalCucumber.g:543:3: rule__Step__KeywordAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__Step__KeywordAssignment_0();
@@ -1514,14 +1692,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Step__Group__1"
-    // InternalCucumber.g:497:1: rule__Step__Group__1 : rule__Step__Group__1__Impl ;
+    // InternalCucumber.g:551:1: rule__Step__Group__1 : rule__Step__Group__1__Impl ;
     public final void rule__Step__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:501:1: ( rule__Step__Group__1__Impl )
-            // InternalCucumber.g:502:2: rule__Step__Group__1__Impl
+            // InternalCucumber.g:555:1: ( rule__Step__Group__1__Impl )
+            // InternalCucumber.g:556:2: rule__Step__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Step__Group__1__Impl();
@@ -1547,21 +1725,21 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Step__Group__1__Impl"
-    // InternalCucumber.g:508:1: rule__Step__Group__1__Impl : ( ( rule__Step__TitleAssignment_1 ) ) ;
+    // InternalCucumber.g:562:1: rule__Step__Group__1__Impl : ( ( rule__Step__TitleAssignment_1 ) ) ;
     public final void rule__Step__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:512:1: ( ( ( rule__Step__TitleAssignment_1 ) ) )
-            // InternalCucumber.g:513:1: ( ( rule__Step__TitleAssignment_1 ) )
+            // InternalCucumber.g:566:1: ( ( ( rule__Step__TitleAssignment_1 ) ) )
+            // InternalCucumber.g:567:1: ( ( rule__Step__TitleAssignment_1 ) )
             {
-            // InternalCucumber.g:513:1: ( ( rule__Step__TitleAssignment_1 ) )
-            // InternalCucumber.g:514:2: ( rule__Step__TitleAssignment_1 )
+            // InternalCucumber.g:567:1: ( ( rule__Step__TitleAssignment_1 ) )
+            // InternalCucumber.g:568:2: ( rule__Step__TitleAssignment_1 )
             {
              before(grammarAccess.getStepAccess().getTitleAssignment_1()); 
-            // InternalCucumber.g:515:2: ( rule__Step__TitleAssignment_1 )
-            // InternalCucumber.g:515:3: rule__Step__TitleAssignment_1
+            // InternalCucumber.g:569:2: ( rule__Step__TitleAssignment_1 )
+            // InternalCucumber.g:569:3: rule__Step__TitleAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__Step__TitleAssignment_1();
@@ -1594,16 +1772,16 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tag__Group__0"
-    // InternalCucumber.g:524:1: rule__Tag__Group__0 : rule__Tag__Group__0__Impl rule__Tag__Group__1 ;
+    // InternalCucumber.g:578:1: rule__Tag__Group__0 : rule__Tag__Group__0__Impl rule__Tag__Group__1 ;
     public final void rule__Tag__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:528:1: ( rule__Tag__Group__0__Impl rule__Tag__Group__1 )
-            // InternalCucumber.g:529:2: rule__Tag__Group__0__Impl rule__Tag__Group__1
+            // InternalCucumber.g:582:1: ( rule__Tag__Group__0__Impl rule__Tag__Group__1 )
+            // InternalCucumber.g:583:2: rule__Tag__Group__0__Impl rule__Tag__Group__1
             {
-            pushFollow(FOLLOW_12);
+            pushFollow(FOLLOW_13);
             rule__Tag__Group__0__Impl();
 
             state._fsp--;
@@ -1632,21 +1810,21 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tag__Group__0__Impl"
-    // InternalCucumber.g:536:1: rule__Tag__Group__0__Impl : ( ( rule__Tag__TitleAssignment_0 ) ) ;
+    // InternalCucumber.g:590:1: rule__Tag__Group__0__Impl : ( ( rule__Tag__TitleAssignment_0 ) ) ;
     public final void rule__Tag__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:540:1: ( ( ( rule__Tag__TitleAssignment_0 ) ) )
-            // InternalCucumber.g:541:1: ( ( rule__Tag__TitleAssignment_0 ) )
+            // InternalCucumber.g:594:1: ( ( ( rule__Tag__TitleAssignment_0 ) ) )
+            // InternalCucumber.g:595:1: ( ( rule__Tag__TitleAssignment_0 ) )
             {
-            // InternalCucumber.g:541:1: ( ( rule__Tag__TitleAssignment_0 ) )
-            // InternalCucumber.g:542:2: ( rule__Tag__TitleAssignment_0 )
+            // InternalCucumber.g:595:1: ( ( rule__Tag__TitleAssignment_0 ) )
+            // InternalCucumber.g:596:2: ( rule__Tag__TitleAssignment_0 )
             {
              before(grammarAccess.getTagAccess().getTitleAssignment_0()); 
-            // InternalCucumber.g:543:2: ( rule__Tag__TitleAssignment_0 )
-            // InternalCucumber.g:543:3: rule__Tag__TitleAssignment_0
+            // InternalCucumber.g:597:2: ( rule__Tag__TitleAssignment_0 )
+            // InternalCucumber.g:597:3: rule__Tag__TitleAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__Tag__TitleAssignment_0();
@@ -1679,16 +1857,16 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tag__Group__1"
-    // InternalCucumber.g:551:1: rule__Tag__Group__1 : rule__Tag__Group__1__Impl rule__Tag__Group__2 ;
+    // InternalCucumber.g:605:1: rule__Tag__Group__1 : rule__Tag__Group__1__Impl rule__Tag__Group__2 ;
     public final void rule__Tag__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:555:1: ( rule__Tag__Group__1__Impl rule__Tag__Group__2 )
-            // InternalCucumber.g:556:2: rule__Tag__Group__1__Impl rule__Tag__Group__2
+            // InternalCucumber.g:609:1: ( rule__Tag__Group__1__Impl rule__Tag__Group__2 )
+            // InternalCucumber.g:610:2: rule__Tag__Group__1__Impl rule__Tag__Group__2
             {
-            pushFollow(FOLLOW_13);
+            pushFollow(FOLLOW_14);
             rule__Tag__Group__1__Impl();
 
             state._fsp--;
@@ -1717,17 +1895,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tag__Group__1__Impl"
-    // InternalCucumber.g:563:1: rule__Tag__Group__1__Impl : ( RULE_ID ) ;
+    // InternalCucumber.g:617:1: rule__Tag__Group__1__Impl : ( RULE_ID ) ;
     public final void rule__Tag__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:567:1: ( ( RULE_ID ) )
-            // InternalCucumber.g:568:1: ( RULE_ID )
+            // InternalCucumber.g:621:1: ( ( RULE_ID ) )
+            // InternalCucumber.g:622:1: ( RULE_ID )
             {
-            // InternalCucumber.g:568:1: ( RULE_ID )
-            // InternalCucumber.g:569:2: RULE_ID
+            // InternalCucumber.g:622:1: ( RULE_ID )
+            // InternalCucumber.g:623:2: RULE_ID
             {
              before(grammarAccess.getTagAccess().getIDTerminalRuleCall_1()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -1754,14 +1932,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tag__Group__2"
-    // InternalCucumber.g:578:1: rule__Tag__Group__2 : rule__Tag__Group__2__Impl ;
+    // InternalCucumber.g:632:1: rule__Tag__Group__2 : rule__Tag__Group__2__Impl ;
     public final void rule__Tag__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:582:1: ( rule__Tag__Group__2__Impl )
-            // InternalCucumber.g:583:2: rule__Tag__Group__2__Impl
+            // InternalCucumber.g:636:1: ( rule__Tag__Group__2__Impl )
+            // InternalCucumber.g:637:2: rule__Tag__Group__2__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Tag__Group__2__Impl();
@@ -1787,29 +1965,29 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tag__Group__2__Impl"
-    // InternalCucumber.g:589:1: rule__Tag__Group__2__Impl : ( ( RULE_WS )? ) ;
+    // InternalCucumber.g:643:1: rule__Tag__Group__2__Impl : ( ( RULE_WS )? ) ;
     public final void rule__Tag__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:593:1: ( ( ( RULE_WS )? ) )
-            // InternalCucumber.g:594:1: ( ( RULE_WS )? )
+            // InternalCucumber.g:647:1: ( ( ( RULE_WS )? ) )
+            // InternalCucumber.g:648:1: ( ( RULE_WS )? )
             {
-            // InternalCucumber.g:594:1: ( ( RULE_WS )? )
-            // InternalCucumber.g:595:2: ( RULE_WS )?
+            // InternalCucumber.g:648:1: ( ( RULE_WS )? )
+            // InternalCucumber.g:649:2: ( RULE_WS )?
             {
              before(grammarAccess.getTagAccess().getWSTerminalRuleCall_2()); 
-            // InternalCucumber.g:596:2: ( RULE_WS )?
-            int alt6=2;
-            int LA6_0 = input.LA(1);
+            // InternalCucumber.g:650:2: ( RULE_WS )?
+            int alt7=2;
+            int LA7_0 = input.LA(1);
 
-            if ( (LA6_0==RULE_WS) ) {
-                alt6=1;
+            if ( (LA7_0==RULE_WS) ) {
+                alt7=1;
             }
-            switch (alt6) {
+            switch (alt7) {
                 case 1 :
-                    // InternalCucumber.g:596:3: RULE_WS
+                    // InternalCucumber.g:650:3: RULE_WS
                     {
                     match(input,RULE_WS,FOLLOW_2); 
 
@@ -1841,14 +2019,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Sentence__Group__0"
-    // InternalCucumber.g:605:1: rule__Sentence__Group__0 : rule__Sentence__Group__0__Impl rule__Sentence__Group__1 ;
+    // InternalCucumber.g:659:1: rule__Sentence__Group__0 : rule__Sentence__Group__0__Impl rule__Sentence__Group__1 ;
     public final void rule__Sentence__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:609:1: ( rule__Sentence__Group__0__Impl rule__Sentence__Group__1 )
-            // InternalCucumber.g:610:2: rule__Sentence__Group__0__Impl rule__Sentence__Group__1
+            // InternalCucumber.g:663:1: ( rule__Sentence__Group__0__Impl rule__Sentence__Group__1 )
+            // InternalCucumber.g:664:2: rule__Sentence__Group__0__Impl rule__Sentence__Group__1
             {
             pushFollow(FOLLOW_4);
             rule__Sentence__Group__0__Impl();
@@ -1879,24 +2057,24 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Sentence__Group__0__Impl"
-    // InternalCucumber.g:617:1: rule__Sentence__Group__0__Impl : ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) ) ;
+    // InternalCucumber.g:671:1: rule__Sentence__Group__0__Impl : ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) ) ;
     public final void rule__Sentence__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:621:1: ( ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) ) )
-            // InternalCucumber.g:622:1: ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) )
+            // InternalCucumber.g:675:1: ( ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) ) )
+            // InternalCucumber.g:676:1: ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) )
             {
-            // InternalCucumber.g:622:1: ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) )
-            // InternalCucumber.g:623:2: ( ( RULE_WORD ) ) ( ( RULE_WORD )* )
+            // InternalCucumber.g:676:1: ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) )
+            // InternalCucumber.g:677:2: ( ( RULE_WORD ) ) ( ( RULE_WORD )* )
             {
-            // InternalCucumber.g:623:2: ( ( RULE_WORD ) )
-            // InternalCucumber.g:624:3: ( RULE_WORD )
+            // InternalCucumber.g:677:2: ( ( RULE_WORD ) )
+            // InternalCucumber.g:678:3: ( RULE_WORD )
             {
              before(grammarAccess.getSentenceAccess().getWORDTerminalRuleCall_0()); 
-            // InternalCucumber.g:625:3: ( RULE_WORD )
-            // InternalCucumber.g:625:4: RULE_WORD
+            // InternalCucumber.g:679:3: ( RULE_WORD )
+            // InternalCucumber.g:679:4: RULE_WORD
             {
             match(input,RULE_WORD,FOLLOW_3); 
 
@@ -1906,24 +2084,24 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
             }
 
-            // InternalCucumber.g:628:2: ( ( RULE_WORD )* )
-            // InternalCucumber.g:629:3: ( RULE_WORD )*
+            // InternalCucumber.g:682:2: ( ( RULE_WORD )* )
+            // InternalCucumber.g:683:3: ( RULE_WORD )*
             {
              before(grammarAccess.getSentenceAccess().getWORDTerminalRuleCall_0()); 
-            // InternalCucumber.g:630:3: ( RULE_WORD )*
-            loop7:
+            // InternalCucumber.g:684:3: ( RULE_WORD )*
+            loop8:
             do {
-                int alt7=2;
-                int LA7_0 = input.LA(1);
+                int alt8=2;
+                int LA8_0 = input.LA(1);
 
-                if ( (LA7_0==RULE_WORD) ) {
-                    alt7=1;
+                if ( (LA8_0==RULE_WORD) ) {
+                    alt8=1;
                 }
 
 
-                switch (alt7) {
+                switch (alt8) {
             	case 1 :
-            	    // InternalCucumber.g:630:4: RULE_WORD
+            	    // InternalCucumber.g:684:4: RULE_WORD
             	    {
             	    match(input,RULE_WORD,FOLLOW_3); 
 
@@ -1931,7 +2109,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop7;
+            	    break loop8;
                 }
             } while (true);
 
@@ -1961,14 +2139,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Sentence__Group__1"
-    // InternalCucumber.g:639:1: rule__Sentence__Group__1 : rule__Sentence__Group__1__Impl ;
+    // InternalCucumber.g:693:1: rule__Sentence__Group__1 : rule__Sentence__Group__1__Impl ;
     public final void rule__Sentence__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:643:1: ( rule__Sentence__Group__1__Impl )
-            // InternalCucumber.g:644:2: rule__Sentence__Group__1__Impl
+            // InternalCucumber.g:697:1: ( rule__Sentence__Group__1__Impl )
+            // InternalCucumber.g:698:2: rule__Sentence__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Sentence__Group__1__Impl();
@@ -1994,17 +2172,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Sentence__Group__1__Impl"
-    // InternalCucumber.g:650:1: rule__Sentence__Group__1__Impl : ( RULE_EOL ) ;
+    // InternalCucumber.g:704:1: rule__Sentence__Group__1__Impl : ( RULE_EOL ) ;
     public final void rule__Sentence__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:654:1: ( ( RULE_EOL ) )
-            // InternalCucumber.g:655:1: ( RULE_EOL )
+            // InternalCucumber.g:708:1: ( ( RULE_EOL ) )
+            // InternalCucumber.g:709:1: ( RULE_EOL )
             {
-            // InternalCucumber.g:655:1: ( RULE_EOL )
-            // InternalCucumber.g:656:2: RULE_EOL
+            // InternalCucumber.g:709:1: ( RULE_EOL )
+            // InternalCucumber.g:710:2: RULE_EOL
             {
              before(grammarAccess.getSentenceAccess().getEOLTerminalRuleCall_1()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -2031,17 +2209,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__TagsAssignment_0"
-    // InternalCucumber.g:666:1: rule__Feature__TagsAssignment_0 : ( ruleTag ) ;
+    // InternalCucumber.g:720:1: rule__Feature__TagsAssignment_0 : ( ruleTag ) ;
     public final void rule__Feature__TagsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:670:1: ( ( ruleTag ) )
-            // InternalCucumber.g:671:2: ( ruleTag )
+            // InternalCucumber.g:724:1: ( ( ruleTag ) )
+            // InternalCucumber.g:725:2: ( ruleTag )
             {
-            // InternalCucumber.g:671:2: ( ruleTag )
-            // InternalCucumber.g:672:3: ruleTag
+            // InternalCucumber.g:725:2: ( ruleTag )
+            // InternalCucumber.g:726:3: ruleTag
             {
              before(grammarAccess.getFeatureAccess().getTagsTagParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -2072,17 +2250,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__TitleAssignment_3"
-    // InternalCucumber.g:681:1: rule__Feature__TitleAssignment_3 : ( ruleDescription ) ;
+    // InternalCucumber.g:735:1: rule__Feature__TitleAssignment_3 : ( ruleDescription ) ;
     public final void rule__Feature__TitleAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:685:1: ( ( ruleDescription ) )
-            // InternalCucumber.g:686:2: ( ruleDescription )
+            // InternalCucumber.g:739:1: ( ( ruleDescription ) )
+            // InternalCucumber.g:740:2: ( ruleDescription )
             {
-            // InternalCucumber.g:686:2: ( ruleDescription )
-            // InternalCucumber.g:687:3: ruleDescription
+            // InternalCucumber.g:740:2: ( ruleDescription )
+            // InternalCucumber.g:741:3: ruleDescription
             {
              before(grammarAccess.getFeatureAccess().getTitleDescriptionParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -2113,17 +2291,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__ScenariosAssignment_4"
-    // InternalCucumber.g:696:1: rule__Feature__ScenariosAssignment_4 : ( ruleScenario ) ;
+    // InternalCucumber.g:750:1: rule__Feature__ScenariosAssignment_4 : ( ruleScenario ) ;
     public final void rule__Feature__ScenariosAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:700:1: ( ( ruleScenario ) )
-            // InternalCucumber.g:701:2: ( ruleScenario )
+            // InternalCucumber.g:754:1: ( ( ruleScenario ) )
+            // InternalCucumber.g:755:2: ( ruleScenario )
             {
-            // InternalCucumber.g:701:2: ( ruleScenario )
-            // InternalCucumber.g:702:3: ruleScenario
+            // InternalCucumber.g:755:2: ( ruleScenario )
+            // InternalCucumber.g:756:3: ruleScenario
             {
              before(grammarAccess.getFeatureAccess().getScenariosScenarioParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -2153,26 +2331,67 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
     // $ANTLR end "rule__Feature__ScenariosAssignment_4"
 
 
-    // $ANTLR start "rule__Scenario__TitleAssignment_1"
-    // InternalCucumber.g:711:1: rule__Scenario__TitleAssignment_1 : ( ruleDescription ) ;
-    public final void rule__Scenario__TitleAssignment_1() throws RecognitionException {
+    // $ANTLR start "rule__Scenario__TagsAssignment_0"
+    // InternalCucumber.g:765:1: rule__Scenario__TagsAssignment_0 : ( ruleTag ) ;
+    public final void rule__Scenario__TagsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:715:1: ( ( ruleDescription ) )
-            // InternalCucumber.g:716:2: ( ruleDescription )
+            // InternalCucumber.g:769:1: ( ( ruleTag ) )
+            // InternalCucumber.g:770:2: ( ruleTag )
             {
-            // InternalCucumber.g:716:2: ( ruleDescription )
-            // InternalCucumber.g:717:3: ruleDescription
+            // InternalCucumber.g:770:2: ( ruleTag )
+            // InternalCucumber.g:771:3: ruleTag
             {
-             before(grammarAccess.getScenarioAccess().getTitleDescriptionParserRuleCall_1_0()); 
+             before(grammarAccess.getScenarioAccess().getTagsTagParserRuleCall_0_0()); 
+            pushFollow(FOLLOW_2);
+            ruleTag();
+
+            state._fsp--;
+
+             after(grammarAccess.getScenarioAccess().getTagsTagParserRuleCall_0_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Scenario__TagsAssignment_0"
+
+
+    // $ANTLR start "rule__Scenario__TitleAssignment_3"
+    // InternalCucumber.g:780:1: rule__Scenario__TitleAssignment_3 : ( ruleDescription ) ;
+    public final void rule__Scenario__TitleAssignment_3() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalCucumber.g:784:1: ( ( ruleDescription ) )
+            // InternalCucumber.g:785:2: ( ruleDescription )
+            {
+            // InternalCucumber.g:785:2: ( ruleDescription )
+            // InternalCucumber.g:786:3: ruleDescription
+            {
+             before(grammarAccess.getScenarioAccess().getTitleDescriptionParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
             ruleDescription();
 
             state._fsp--;
 
-             after(grammarAccess.getScenarioAccess().getTitleDescriptionParserRuleCall_1_0()); 
+             after(grammarAccess.getScenarioAccess().getTitleDescriptionParserRuleCall_3_0()); 
 
             }
 
@@ -2191,29 +2410,29 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end "rule__Scenario__TitleAssignment_1"
+    // $ANTLR end "rule__Scenario__TitleAssignment_3"
 
 
-    // $ANTLR start "rule__Scenario__StepsAssignment_2"
-    // InternalCucumber.g:726:1: rule__Scenario__StepsAssignment_2 : ( ruleStep ) ;
-    public final void rule__Scenario__StepsAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__Scenario__StepsAssignment_4"
+    // InternalCucumber.g:795:1: rule__Scenario__StepsAssignment_4 : ( ruleStep ) ;
+    public final void rule__Scenario__StepsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:730:1: ( ( ruleStep ) )
-            // InternalCucumber.g:731:2: ( ruleStep )
+            // InternalCucumber.g:799:1: ( ( ruleStep ) )
+            // InternalCucumber.g:800:2: ( ruleStep )
             {
-            // InternalCucumber.g:731:2: ( ruleStep )
-            // InternalCucumber.g:732:3: ruleStep
+            // InternalCucumber.g:800:2: ( ruleStep )
+            // InternalCucumber.g:801:3: ruleStep
             {
-             before(grammarAccess.getScenarioAccess().getStepsStepParserRuleCall_2_0()); 
+             before(grammarAccess.getScenarioAccess().getStepsStepParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
             ruleStep();
 
             state._fsp--;
 
-             after(grammarAccess.getScenarioAccess().getStepsStepParserRuleCall_2_0()); 
+             after(grammarAccess.getScenarioAccess().getStepsStepParserRuleCall_4_0()); 
 
             }
 
@@ -2232,25 +2451,25 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
         }
         return ;
     }
-    // $ANTLR end "rule__Scenario__StepsAssignment_2"
+    // $ANTLR end "rule__Scenario__StepsAssignment_4"
 
 
     // $ANTLR start "rule__Step__KeywordAssignment_0"
-    // InternalCucumber.g:741:1: rule__Step__KeywordAssignment_0 : ( ( rule__Step__KeywordAlternatives_0_0 ) ) ;
+    // InternalCucumber.g:810:1: rule__Step__KeywordAssignment_0 : ( ( rule__Step__KeywordAlternatives_0_0 ) ) ;
     public final void rule__Step__KeywordAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:745:1: ( ( ( rule__Step__KeywordAlternatives_0_0 ) ) )
-            // InternalCucumber.g:746:2: ( ( rule__Step__KeywordAlternatives_0_0 ) )
+            // InternalCucumber.g:814:1: ( ( ( rule__Step__KeywordAlternatives_0_0 ) ) )
+            // InternalCucumber.g:815:2: ( ( rule__Step__KeywordAlternatives_0_0 ) )
             {
-            // InternalCucumber.g:746:2: ( ( rule__Step__KeywordAlternatives_0_0 ) )
-            // InternalCucumber.g:747:3: ( rule__Step__KeywordAlternatives_0_0 )
+            // InternalCucumber.g:815:2: ( ( rule__Step__KeywordAlternatives_0_0 ) )
+            // InternalCucumber.g:816:3: ( rule__Step__KeywordAlternatives_0_0 )
             {
              before(grammarAccess.getStepAccess().getKeywordAlternatives_0_0()); 
-            // InternalCucumber.g:748:3: ( rule__Step__KeywordAlternatives_0_0 )
-            // InternalCucumber.g:748:4: rule__Step__KeywordAlternatives_0_0
+            // InternalCucumber.g:817:3: ( rule__Step__KeywordAlternatives_0_0 )
+            // InternalCucumber.g:817:4: rule__Step__KeywordAlternatives_0_0
             {
             pushFollow(FOLLOW_2);
             rule__Step__KeywordAlternatives_0_0();
@@ -2283,17 +2502,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Step__TitleAssignment_1"
-    // InternalCucumber.g:756:1: rule__Step__TitleAssignment_1 : ( ruleSentence ) ;
+    // InternalCucumber.g:825:1: rule__Step__TitleAssignment_1 : ( ruleSentence ) ;
     public final void rule__Step__TitleAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:760:1: ( ( ruleSentence ) )
-            // InternalCucumber.g:761:2: ( ruleSentence )
+            // InternalCucumber.g:829:1: ( ( ruleSentence ) )
+            // InternalCucumber.g:830:2: ( ruleSentence )
             {
-            // InternalCucumber.g:761:2: ( ruleSentence )
-            // InternalCucumber.g:762:3: ruleSentence
+            // InternalCucumber.g:830:2: ( ruleSentence )
+            // InternalCucumber.g:831:3: ruleSentence
             {
              before(grammarAccess.getStepAccess().getTitleSentenceParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -2324,17 +2543,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Description__SentencesAssignment"
-    // InternalCucumber.g:771:1: rule__Description__SentencesAssignment : ( ruleSentence ) ;
+    // InternalCucumber.g:840:1: rule__Description__SentencesAssignment : ( ruleSentence ) ;
     public final void rule__Description__SentencesAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:775:1: ( ( ruleSentence ) )
-            // InternalCucumber.g:776:2: ( ruleSentence )
+            // InternalCucumber.g:844:1: ( ( ruleSentence ) )
+            // InternalCucumber.g:845:2: ( ruleSentence )
             {
-            // InternalCucumber.g:776:2: ( ruleSentence )
-            // InternalCucumber.g:777:3: ruleSentence
+            // InternalCucumber.g:845:2: ( ruleSentence )
+            // InternalCucumber.g:846:3: ruleSentence
             {
              before(grammarAccess.getDescriptionAccess().getSentencesSentenceParserRuleCall_0()); 
             pushFollow(FOLLOW_2);
@@ -2365,21 +2584,21 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tag__TitleAssignment_0"
-    // InternalCucumber.g:786:1: rule__Tag__TitleAssignment_0 : ( ( '@' ) ) ;
+    // InternalCucumber.g:855:1: rule__Tag__TitleAssignment_0 : ( ( '@' ) ) ;
     public final void rule__Tag__TitleAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:790:1: ( ( ( '@' ) ) )
-            // InternalCucumber.g:791:2: ( ( '@' ) )
+            // InternalCucumber.g:859:1: ( ( ( '@' ) ) )
+            // InternalCucumber.g:860:2: ( ( '@' ) )
             {
-            // InternalCucumber.g:791:2: ( ( '@' ) )
-            // InternalCucumber.g:792:3: ( '@' )
+            // InternalCucumber.g:860:2: ( ( '@' ) )
+            // InternalCucumber.g:861:3: ( '@' )
             {
              before(grammarAccess.getTagAccess().getTitleCommercialAtKeyword_0_0()); 
-            // InternalCucumber.g:793:3: ( '@' )
-            // InternalCucumber.g:794:4: '@'
+            // InternalCucumber.g:862:3: ( '@' )
+            // InternalCucumber.g:863:4: '@'
             {
              before(grammarAccess.getTagAccess().getTitleCommercialAtKeyword_0_0()); 
             match(input,16,FOLLOW_2); 
@@ -2420,11 +2639,12 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000010002L});
     public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000004000L});
     public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000003F00L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000003F02L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000010010L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000010012L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000003F00L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000003F02L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000000040L});
 
 }

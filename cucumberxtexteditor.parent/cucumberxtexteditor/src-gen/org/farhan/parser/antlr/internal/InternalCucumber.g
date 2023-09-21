@@ -160,16 +160,39 @@ ruleScenario returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='Scenario:'
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getScenarioAccess().getTagsTagParserRuleCall_0_0());
+				}
+				lv_tags_0_0=ruleTag
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getScenarioRule());
+					}
+					add(
+						$current,
+						"tags",
+						lv_tags_0_0,
+						"org.farhan.Cucumber.Tag");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		this_EOL_1=RULE_EOL
 		{
-			newLeafNode(otherlv_0, grammarAccess.getScenarioAccess().getScenarioKeyword_0());
+			newLeafNode(this_EOL_1, grammarAccess.getScenarioAccess().getEOLTerminalRuleCall_1());
+		}
+		otherlv_2='Scenario:'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getScenarioAccess().getScenarioKeyword_2());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getScenarioAccess().getTitleDescriptionParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getScenarioAccess().getTitleDescriptionParserRuleCall_3_0());
 				}
-				lv_title_1_0=ruleDescription
+				lv_title_3_0=ruleDescription
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getScenarioRule());
@@ -177,7 +200,7 @@ ruleScenario returns [EObject current=null]
 					set(
 						$current,
 						"title",
-						lv_title_1_0,
+						lv_title_3_0,
 						"org.farhan.Cucumber.Description");
 					afterParserOrEnumRuleCall();
 				}
@@ -186,9 +209,9 @@ ruleScenario returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getScenarioAccess().getStepsStepParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getScenarioAccess().getStepsStepParserRuleCall_4_0());
 				}
-				lv_steps_2_0=ruleStep
+				lv_steps_4_0=ruleStep
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getScenarioRule());
@@ -196,7 +219,7 @@ ruleScenario returns [EObject current=null]
 					add(
 						$current,
 						"steps",
-						lv_steps_2_0,
+						lv_steps_4_0,
 						"org.farhan.Cucumber.Step");
 					afterParserOrEnumRuleCall();
 				}

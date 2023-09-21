@@ -184,7 +184,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EReference getScenario_Title()
+  public EReference getScenario_Tags()
   {
     return (EReference)scenarioEClass.getEStructuralFeatures().get(0);
   }
@@ -195,9 +195,20 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EReference getScenario_Steps()
+  public EReference getScenario_Title()
   {
     return (EReference)scenarioEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getScenario_Steps()
+  {
+    return (EReference)scenarioEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -314,6 +325,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
     createEReference(featureEClass, FEATURE__SCENARIOS);
 
     scenarioEClass = createEClass(SCENARIO);
+    createEReference(scenarioEClass, SCENARIO__TAGS);
     createEReference(scenarioEClass, SCENARIO__TITLE);
     createEReference(scenarioEClass, SCENARIO__STEPS);
 
@@ -365,6 +377,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
     initEReference(getFeature_Scenarios(), this.getScenario(), null, "scenarios", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(scenarioEClass, Scenario.class, "Scenario", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getScenario_Tags(), this.getTag(), null, "tags", null, 0, -1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getScenario_Title(), this.getDescription(), null, "title", null, 0, 1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getScenario_Steps(), this.getStep(), null, "steps", null, 0, -1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

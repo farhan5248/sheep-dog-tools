@@ -10,6 +10,7 @@ Feature:
 	(scenarios+=Scenario)*;
 
 Scenario:
+	(tags+=Tag)* EOL
 	'Scenario:' title=Description
 	// this is a 0 or more list of Step
 	(steps+=Step)*;

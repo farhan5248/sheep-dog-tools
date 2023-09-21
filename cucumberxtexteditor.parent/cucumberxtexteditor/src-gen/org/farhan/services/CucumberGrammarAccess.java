@@ -74,38 +74,52 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	public class ScenarioElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.Scenario");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cScenarioKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cTitleAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cTitleDescriptionParserRuleCall_1_0 = (RuleCall)cTitleAssignment_1.eContents().get(0);
-		private final Assignment cStepsAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cStepsStepParserRuleCall_2_0 = (RuleCall)cStepsAssignment_2.eContents().get(0);
+		private final Assignment cTagsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cTagsTagParserRuleCall_0_0 = (RuleCall)cTagsAssignment_0.eContents().get(0);
+		private final RuleCall cEOLTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Keyword cScenarioKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cTitleAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cTitleDescriptionParserRuleCall_3_0 = (RuleCall)cTitleAssignment_3.eContents().get(0);
+		private final Assignment cStepsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cStepsStepParserRuleCall_4_0 = (RuleCall)cStepsAssignment_4.eContents().get(0);
 		
 		//Scenario:
+		//    (tags+=Tag)* EOL
 		//    'Scenario:' title=Description
 		//    // this is a 0 or more list of Step
 		//    (steps+=Step)*;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//(tags+=Tag)* EOL
 		//'Scenario:' title=Description
 		//// this is a 0 or more list of Step
 		//(steps+=Step)*
 		public Group getGroup() { return cGroup; }
 		
+		//(tags+=Tag)*
+		public Assignment getTagsAssignment_0() { return cTagsAssignment_0; }
+		
+		//Tag
+		public RuleCall getTagsTagParserRuleCall_0_0() { return cTagsTagParserRuleCall_0_0; }
+		
+		//EOL
+		public RuleCall getEOLTerminalRuleCall_1() { return cEOLTerminalRuleCall_1; }
+		
 		//'Scenario:'
-		public Keyword getScenarioKeyword_0() { return cScenarioKeyword_0; }
+		public Keyword getScenarioKeyword_2() { return cScenarioKeyword_2; }
 		
 		//title=Description
-		public Assignment getTitleAssignment_1() { return cTitleAssignment_1; }
+		public Assignment getTitleAssignment_3() { return cTitleAssignment_3; }
 		
 		//Description
-		public RuleCall getTitleDescriptionParserRuleCall_1_0() { return cTitleDescriptionParserRuleCall_1_0; }
+		public RuleCall getTitleDescriptionParserRuleCall_3_0() { return cTitleDescriptionParserRuleCall_3_0; }
 		
 		//// this is a 0 or more list of Step
 		//(steps+=Step)*
-		public Assignment getStepsAssignment_2() { return cStepsAssignment_2; }
+		public Assignment getStepsAssignment_4() { return cStepsAssignment_4; }
 		
 		//Step
-		public RuleCall getStepsStepParserRuleCall_2_0() { return cStepsStepParserRuleCall_2_0; }
+		public RuleCall getStepsStepParserRuleCall_4_0() { return cStepsStepParserRuleCall_4_0; }
 	}
 	public class StepElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.Step");
@@ -286,6 +300,7 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//Scenario:
+	//    (tags+=Tag)* EOL
 	//    'Scenario:' title=Description
 	//    // this is a 0 or more list of Step
 	//    (steps+=Step)*;
