@@ -39,8 +39,7 @@ RowCell:
 
 DocString:
 	{DocString}
-	('"""' Sentence* '"""')
-	EOL;
+    '"""' EOL Sentence* '"""' EOL;
 
 // make this optional
 Description:

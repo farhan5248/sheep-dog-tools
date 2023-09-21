@@ -20,12 +20,12 @@ import org.farhan.services.CucumberGrammarAccess;
 public class CucumberSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected CucumberGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_DocString_SentenceParserRuleCall_1_1_a;
+	protected AbstractElementAlias match_DocString_SentenceParserRuleCall_3_a;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (CucumberGrammarAccess) access;
-		match_DocString_SentenceParserRuleCall_1_1_a = new TokenAlias(true, true, grammarAccess.getDocStringAccess().getSentenceParserRuleCall_1_1());
+		match_DocString_SentenceParserRuleCall_3_a = new TokenAlias(true, true, grammarAccess.getDocStringAccess().getSentenceParserRuleCall_3());
 	}
 	
 	@Override
@@ -75,8 +75,8 @@ public class CucumberSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_DocString_SentenceParserRuleCall_1_1_a.equals(syntax))
-				emit_DocString_SentenceParserRuleCall_1_1_a(semanticObject, getLastNavigableState(), syntaxNodes);
+			if (match_DocString_SentenceParserRuleCall_3_a.equals(syntax))
+				emit_DocString_SentenceParserRuleCall_3_a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -87,11 +87,11 @@ public class CucumberSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     Sentence*
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) '"""' (ambiguity) '"""' EOL (rule start)
+	 *     (rule start) '"""' EOL (ambiguity) '"""' EOL (rule start)
 	 
 	 * </pre>
 	 */
-	protected void emit_DocString_SentenceParserRuleCall_1_1_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_DocString_SentenceParserRuleCall_3_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

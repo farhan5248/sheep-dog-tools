@@ -324,40 +324,38 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.DocString");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cDocStringAction_0 = (Action)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Keyword cQuotationMarkQuotationMarkQuotationMarkKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final RuleCall cSentenceParserRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
-		private final Keyword cQuotationMarkQuotationMarkQuotationMarkKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
+		private final Keyword cQuotationMarkQuotationMarkQuotationMarkKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final RuleCall cEOLTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final RuleCall cSentenceParserRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
+		private final Keyword cQuotationMarkQuotationMarkQuotationMarkKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final RuleCall cEOLTerminalRuleCall_5 = (RuleCall)cGroup.eContents().get(5);
 		
 		//DocString:
 		//    {DocString}
-		//    ('"""' Sentence* '"""')
-		//    EOL;
+		//    '"""' EOL Sentence* '"""' EOL;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{DocString}
-		//('"""' Sentence* '"""')
-		//EOL
+		//'"""' EOL Sentence* '"""' EOL
 		public Group getGroup() { return cGroup; }
 		
 		//{DocString}
 		public Action getDocStringAction_0() { return cDocStringAction_0; }
 		
-		//('"""' Sentence* '"""')
-		public Group getGroup_1() { return cGroup_1; }
-		
 		//'"""'
-		public Keyword getQuotationMarkQuotationMarkQuotationMarkKeyword_1_0() { return cQuotationMarkQuotationMarkQuotationMarkKeyword_1_0; }
-		
-		//Sentence*
-		public RuleCall getSentenceParserRuleCall_1_1() { return cSentenceParserRuleCall_1_1; }
-		
-		//'"""'
-		public Keyword getQuotationMarkQuotationMarkQuotationMarkKeyword_1_2() { return cQuotationMarkQuotationMarkQuotationMarkKeyword_1_2; }
+		public Keyword getQuotationMarkQuotationMarkQuotationMarkKeyword_1() { return cQuotationMarkQuotationMarkQuotationMarkKeyword_1; }
 		
 		//EOL
 		public RuleCall getEOLTerminalRuleCall_2() { return cEOLTerminalRuleCall_2; }
+		
+		//Sentence*
+		public RuleCall getSentenceParserRuleCall_3() { return cSentenceParserRuleCall_3; }
+		
+		//'"""'
+		public Keyword getQuotationMarkQuotationMarkQuotationMarkKeyword_4() { return cQuotationMarkQuotationMarkQuotationMarkKeyword_4; }
+		
+		//EOL
+		public RuleCall getEOLTerminalRuleCall_5() { return cEOLTerminalRuleCall_5; }
 	}
 	public class DescriptionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.Description");
@@ -571,8 +569,7 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	
 	//DocString:
 	//    {DocString}
-	//    ('"""' Sentence* '"""')
-	//    EOL;
+	//    '"""' EOL Sentence* '"""' EOL;
 	public DocStringElements getDocStringAccess() {
 		return pDocString;
 	}

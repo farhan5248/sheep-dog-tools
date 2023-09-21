@@ -628,28 +628,30 @@ ruleDocString returns [EObject current=null]
 					$current);
 			}
 		)
-		(
-			otherlv_1='"""'
-			{
-				newLeafNode(otherlv_1, grammarAccess.getDocStringAccess().getQuotationMarkQuotationMarkQuotationMarkKeyword_1_0());
-			}
-			(
-				{
-					newCompositeNode(grammarAccess.getDocStringAccess().getSentenceParserRuleCall_1_1());
-				}
-				ruleSentence
-				{
-					afterParserOrEnumRuleCall();
-				}
-			)*
-			otherlv_3='"""'
-			{
-				newLeafNode(otherlv_3, grammarAccess.getDocStringAccess().getQuotationMarkQuotationMarkQuotationMarkKeyword_1_2());
-			}
-		)
-		this_EOL_4=RULE_EOL
+		otherlv_1='"""'
 		{
-			newLeafNode(this_EOL_4, grammarAccess.getDocStringAccess().getEOLTerminalRuleCall_2());
+			newLeafNode(otherlv_1, grammarAccess.getDocStringAccess().getQuotationMarkQuotationMarkQuotationMarkKeyword_1());
+		}
+		this_EOL_2=RULE_EOL
+		{
+			newLeafNode(this_EOL_2, grammarAccess.getDocStringAccess().getEOLTerminalRuleCall_2());
+		}
+		(
+			{
+				newCompositeNode(grammarAccess.getDocStringAccess().getSentenceParserRuleCall_3());
+			}
+			ruleSentence
+			{
+				afterParserOrEnumRuleCall();
+			}
+		)*
+		otherlv_4='"""'
+		{
+			newLeafNode(otherlv_4, grammarAccess.getDocStringAccess().getQuotationMarkQuotationMarkQuotationMarkKeyword_4());
+		}
+		this_EOL_5=RULE_EOL
+		{
+			newLeafNode(this_EOL_5, grammarAccess.getDocStringAccess().getEOLTerminalRuleCall_5());
 		}
 	)
 ;
