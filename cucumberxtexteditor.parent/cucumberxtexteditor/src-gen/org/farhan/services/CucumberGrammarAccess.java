@@ -24,38 +24,52 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	public class FeatureElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.Feature");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cFeatureKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cTitleAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cTitleDescriptionParserRuleCall_1_0 = (RuleCall)cTitleAssignment_1.eContents().get(0);
-		private final Assignment cScenariosAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cScenariosScenarioParserRuleCall_2_0 = (RuleCall)cScenariosAssignment_2.eContents().get(0);
+		private final Assignment cTagsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cTagsTagParserRuleCall_0_0 = (RuleCall)cTagsAssignment_0.eContents().get(0);
+		private final RuleCall cEOLTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Keyword cFeatureKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cTitleAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cTitleDescriptionParserRuleCall_3_0 = (RuleCall)cTitleAssignment_3.eContents().get(0);
+		private final Assignment cScenariosAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cScenariosScenarioParserRuleCall_4_0 = (RuleCall)cScenariosAssignment_4.eContents().get(0);
 		
 		//Feature:
+		//    (tags+=Tag)* EOL
 		//    'Feature:' title=Description
 		//    // this is a 0 or more list of Scenario
 		//    (scenarios+=Scenario)*;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//(tags+=Tag)* EOL
 		//'Feature:' title=Description
 		//// this is a 0 or more list of Scenario
 		//(scenarios+=Scenario)*
 		public Group getGroup() { return cGroup; }
 		
+		//(tags+=Tag)*
+		public Assignment getTagsAssignment_0() { return cTagsAssignment_0; }
+		
+		//Tag
+		public RuleCall getTagsTagParserRuleCall_0_0() { return cTagsTagParserRuleCall_0_0; }
+		
+		//EOL
+		public RuleCall getEOLTerminalRuleCall_1() { return cEOLTerminalRuleCall_1; }
+		
 		//'Feature:'
-		public Keyword getFeatureKeyword_0() { return cFeatureKeyword_0; }
+		public Keyword getFeatureKeyword_2() { return cFeatureKeyword_2; }
 		
 		//title=Description
-		public Assignment getTitleAssignment_1() { return cTitleAssignment_1; }
+		public Assignment getTitleAssignment_3() { return cTitleAssignment_3; }
 		
 		//Description
-		public RuleCall getTitleDescriptionParserRuleCall_1_0() { return cTitleDescriptionParserRuleCall_1_0; }
+		public RuleCall getTitleDescriptionParserRuleCall_3_0() { return cTitleDescriptionParserRuleCall_3_0; }
 		
 		//// this is a 0 or more list of Scenario
 		//(scenarios+=Scenario)*
-		public Assignment getScenariosAssignment_2() { return cScenariosAssignment_2; }
+		public Assignment getScenariosAssignment_4() { return cScenariosAssignment_4; }
 		
 		//Scenario
-		public RuleCall getScenariosScenarioParserRuleCall_2_0() { return cScenariosScenarioParserRuleCall_2_0; }
+		public RuleCall getScenariosScenarioParserRuleCall_4_0() { return cScenariosScenarioParserRuleCall_4_0; }
 	}
 	public class ScenarioElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.Scenario");
@@ -159,6 +173,33 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//Sentence
 		public RuleCall getSentencesSentenceParserRuleCall_0() { return cSentencesSentenceParserRuleCall_0; }
 	}
+	public class TagElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.Tag");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cTitleAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cTitleCommercialAtKeyword_0_0 = (Keyword)cTitleAssignment_0.eContents().get(0);
+		private final RuleCall cIDTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final RuleCall cWSTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		
+		//Tag:
+		//    title='@' ID WS?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//title='@' ID WS?
+		public Group getGroup() { return cGroup; }
+		
+		//title='@'
+		public Assignment getTitleAssignment_0() { return cTitleAssignment_0; }
+		
+		//'@'
+		public Keyword getTitleCommercialAtKeyword_0_0() { return cTitleCommercialAtKeyword_0_0; }
+		
+		//ID
+		public RuleCall getIDTerminalRuleCall_1() { return cIDTerminalRuleCall_1; }
+		
+		//WS?
+		public RuleCall getWSTerminalRuleCall_2() { return cWSTerminalRuleCall_2; }
+	}
 	public class SentenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.Sentence");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -184,10 +225,12 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	private final ScenarioElements pScenario;
 	private final StepElements pStep;
 	private final DescriptionElements pDescription;
+	private final TagElements pTag;
 	private final SentenceElements pSentence;
-	private final TerminalRule tWORD;
-	private final TerminalRule tEOL;
 	private final TerminalRule tWS;
+	private final TerminalRule tEOL;
+	private final TerminalRule tID;
+	private final TerminalRule tWORD;
 	
 	private final Grammar grammar;
 
@@ -198,10 +241,12 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		this.pScenario = new ScenarioElements();
 		this.pStep = new StepElements();
 		this.pDescription = new DescriptionElements();
+		this.pTag = new TagElements();
 		this.pSentence = new SentenceElements();
-		this.tWORD = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.WORD");
-		this.tEOL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.EOL");
 		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.WS");
+		this.tEOL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.EOL");
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.ID");
+		this.tWORD = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.WORD");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -228,6 +273,7 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 
 	
 	//Feature:
+	//    (tags+=Tag)* EOL
 	//    'Feature:' title=Description
 	//    // this is a 0 or more list of Scenario
 	//    (scenarios+=Scenario)*;
@@ -271,6 +317,16 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return getDescriptionAccess().getRule();
 	}
 	
+	//Tag:
+	//    title='@' ID WS?;
+	public TagElements getTagAccess() {
+		return pTag;
+	}
+	
+	public ParserRule getTagRule() {
+		return getTagAccess().getRule();
+	}
+	
 	//Sentence:
 	//    WORD+ EOL;
 	public SentenceElements getSentenceAccess() {
@@ -281,11 +337,11 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return getSentenceAccess().getRule();
 	}
 	
-	//// this needs the ecore import
-	//terminal WORD:
-	//    WS ('a'..'z' | 'A'..'Z' | '0'..'9')+;
-	public TerminalRule getWORDRule() {
-		return tWORD;
+	//// This is leading whitespace
+	//terminal WS:
+	//    (' ' | '\t')+;
+	public TerminalRule getWSRule() {
+		return tWS;
 	}
 	
 	//// this is trailing whitespace
@@ -295,10 +351,16 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return tEOL;
 	}
 	
-	//// This is leading whitespace
-	//terminal WS:
-	//    (' ' | '\t')+;
-	public TerminalRule getWSRule() {
-		return tWS;
+	//// .. needs the ecore import
+	//terminal ID:
+	//    ('a'..'z' | 'A'..'Z' | '0'..'9')+;
+	public TerminalRule getIDRule() {
+		return tID;
+	}
+	
+	//terminal WORD:
+	//    WS ID;
+	public TerminalRule getWORDRule() {
+		return tWORD;
 	}
 }

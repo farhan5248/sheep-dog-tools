@@ -7,6 +7,7 @@
   <genPackages prefix="Cucumber" basePackage="org.farhan" disposableProviderFactory="true"
       fileExtensions="feature" ecorePackage="Cucumber.ecore#/">
     <genClasses ecoreClass="Cucumber.ecore#//Feature">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Feature/tags"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Feature/title"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Feature/scenarios"/>
     </genClasses>
@@ -20,6 +21,9 @@
     </genClasses>
     <genClasses ecoreClass="Cucumber.ecore#//Description">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//Description/sentences"/>
+    </genClasses>
+    <genClasses ecoreClass="Cucumber.ecore#//Tag">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//Tag/title"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

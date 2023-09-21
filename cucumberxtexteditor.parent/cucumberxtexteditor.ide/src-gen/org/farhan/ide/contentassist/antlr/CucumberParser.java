@@ -35,14 +35,17 @@ public class CucumberParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getFeatureAccess().getGroup(), "rule__Feature__Group__0");
 			builder.put(grammarAccess.getScenarioAccess().getGroup(), "rule__Scenario__Group__0");
 			builder.put(grammarAccess.getStepAccess().getGroup(), "rule__Step__Group__0");
+			builder.put(grammarAccess.getTagAccess().getGroup(), "rule__Tag__Group__0");
 			builder.put(grammarAccess.getSentenceAccess().getGroup(), "rule__Sentence__Group__0");
-			builder.put(grammarAccess.getFeatureAccess().getTitleAssignment_1(), "rule__Feature__TitleAssignment_1");
-			builder.put(grammarAccess.getFeatureAccess().getScenariosAssignment_2(), "rule__Feature__ScenariosAssignment_2");
+			builder.put(grammarAccess.getFeatureAccess().getTagsAssignment_0(), "rule__Feature__TagsAssignment_0");
+			builder.put(grammarAccess.getFeatureAccess().getTitleAssignment_3(), "rule__Feature__TitleAssignment_3");
+			builder.put(grammarAccess.getFeatureAccess().getScenariosAssignment_4(), "rule__Feature__ScenariosAssignment_4");
 			builder.put(grammarAccess.getScenarioAccess().getTitleAssignment_1(), "rule__Scenario__TitleAssignment_1");
 			builder.put(grammarAccess.getScenarioAccess().getStepsAssignment_2(), "rule__Scenario__StepsAssignment_2");
 			builder.put(grammarAccess.getStepAccess().getKeywordAssignment_0(), "rule__Step__KeywordAssignment_0");
 			builder.put(grammarAccess.getStepAccess().getTitleAssignment_1(), "rule__Step__TitleAssignment_1");
 			builder.put(grammarAccess.getDescriptionAccess().getSentencesAssignment(), "rule__Description__SentencesAssignment");
+			builder.put(grammarAccess.getTagAccess().getTitleAssignment_0(), "rule__Tag__TitleAssignment_0");
 		}
 	}
 	

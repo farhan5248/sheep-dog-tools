@@ -4,6 +4,7 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 generate cucumber "http://www.farhan.org/Cucumber"
 
 Feature:
+	(tags+=Tag)* EOL
 	'Feature:' title=Description
 	// this is a 0 or more list of Scenario
 	(scenarios+=Scenario)*;
@@ -19,17 +20,23 @@ Step:
 Description:
 	(sentences+=Sentence)+;
 
+Tag:
+	title='@' ID WS?;
+
 Sentence:
 	WORD+ EOL;
 
-// this needs the ecore import
-terminal WORD:
-	WS ('a'..'z' | 'A'..'Z' | '0'..'9')+;
+// This is leading whitespace
+terminal WS:
+	(' ' | '\t')+;
 
 // this is trailing whitespace
 terminal EOL:
 	('\r\n' | '\n')+;
 
-// This is leading whitespace
-terminal WS:
-	(' ' | '\t')+;
+// .. needs the ecore import
+terminal ID:
+	('a'..'z' | 'A'..'Z' | '0'..'9')+;
+
+terminal WORD:
+	WS ID;
