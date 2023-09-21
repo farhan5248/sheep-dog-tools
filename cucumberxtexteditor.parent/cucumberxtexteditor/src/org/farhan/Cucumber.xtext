@@ -9,7 +9,7 @@ Feature:
 	description=Description
 	background=Background?
 	// this is a 0 or more list of Scenario
-	(scenarios+=Scenario)*;
+	(scenarios+=(Scenario|ScenarioOutline))*;
 
 Background:
 	'Background:' title=Sentence
@@ -24,6 +24,21 @@ Scenario:
 	// this is a 0 or more list of Step
 	(steps+=Step)*;
 
+ScenarioOutline:
+	Tags
+	'Scenario Outline:' title=Sentence
+	description=Description
+	// this is a 0 or more list of Step
+	(steps+=Step)*
+	(examples+=Example+);
+	
+Example:
+	Tags
+	'Examples:'
+	title=Sentence
+	description=Description
+	table=Table;	
+	
 Step:
 	keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence
 	(table=Table | text=DocString)?;
@@ -65,7 +80,7 @@ terminal COMMENT:
 // need to add punctuation and commas etc
 // this covers Given When Then and might create problems?
 terminal WORD:
-	('a'..'z' | 'A'..'Z' | '0'..'9' | "'")+;
+	!('@' | '|' | ' ' | '\t' | '\n' | '\r')+;
 
 terminal TAG:
 	'@' WORD;

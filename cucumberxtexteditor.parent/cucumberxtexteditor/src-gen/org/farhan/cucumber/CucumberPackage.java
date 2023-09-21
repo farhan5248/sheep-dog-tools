@@ -205,6 +205,107 @@ public interface CucumberPackage extends EPackage
   int SCENARIO_FEATURE_COUNT = 3;
 
   /**
+   * The meta object id for the '{@link org.farhan.cucumber.impl.ScenarioOutlineImpl <em>Scenario Outline</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.farhan.cucumber.impl.ScenarioOutlineImpl
+   * @see org.farhan.cucumber.impl.CucumberPackageImpl#getScenarioOutline()
+   * @generated
+   */
+  int SCENARIO_OUTLINE = 3;
+
+  /**
+   * The feature id for the '<em><b>Title</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCENARIO_OUTLINE__TITLE = 0;
+
+  /**
+   * The feature id for the '<em><b>Description</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCENARIO_OUTLINE__DESCRIPTION = 1;
+
+  /**
+   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCENARIO_OUTLINE__STEPS = 2;
+
+  /**
+   * The feature id for the '<em><b>Examples</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCENARIO_OUTLINE__EXAMPLES = 3;
+
+  /**
+   * The number of structural features of the '<em>Scenario Outline</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCENARIO_OUTLINE_FEATURE_COUNT = 4;
+
+  /**
+   * The meta object id for the '{@link org.farhan.cucumber.impl.ExampleImpl <em>Example</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.farhan.cucumber.impl.ExampleImpl
+   * @see org.farhan.cucumber.impl.CucumberPackageImpl#getExample()
+   * @generated
+   */
+  int EXAMPLE = 4;
+
+  /**
+   * The feature id for the '<em><b>Title</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXAMPLE__TITLE = 0;
+
+  /**
+   * The feature id for the '<em><b>Description</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXAMPLE__DESCRIPTION = 1;
+
+  /**
+   * The feature id for the '<em><b>Table</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXAMPLE__TABLE = 2;
+
+  /**
+   * The number of structural features of the '<em>Example</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXAMPLE_FEATURE_COUNT = 3;
+
+  /**
    * The meta object id for the '{@link org.farhan.cucumber.impl.StepImpl <em>Step</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -212,7 +313,7 @@ public interface CucumberPackage extends EPackage
    * @see org.farhan.cucumber.impl.CucumberPackageImpl#getStep()
    * @generated
    */
-  int STEP = 3;
+  int STEP = 5;
 
   /**
    * The feature id for the '<em><b>Keyword</b></em>' attribute.
@@ -267,7 +368,7 @@ public interface CucumberPackage extends EPackage
    * @see org.farhan.cucumber.impl.CucumberPackageImpl#getTable()
    * @generated
    */
-  int TABLE = 4;
+  int TABLE = 6;
 
   /**
    * The feature id for the '<em><b>Rows</b></em>' containment reference list.
@@ -295,7 +396,7 @@ public interface CucumberPackage extends EPackage
    * @see org.farhan.cucumber.impl.CucumberPackageImpl#getTableRow()
    * @generated
    */
-  int TABLE_ROW = 5;
+  int TABLE_ROW = 7;
 
   /**
    * The feature id for the '<em><b>Cells</b></em>' containment reference list.
@@ -323,7 +424,7 @@ public interface CucumberPackage extends EPackage
    * @see org.farhan.cucumber.impl.CucumberPackageImpl#getRowCell()
    * @generated
    */
-  int ROW_CELL = 6;
+  int ROW_CELL = 8;
 
   /**
    * The feature id for the '<em><b>Cell</b></em>' attribute.
@@ -351,7 +452,7 @@ public interface CucumberPackage extends EPackage
    * @see org.farhan.cucumber.impl.CucumberPackageImpl#getDocString()
    * @generated
    */
-  int DOC_STRING = 7;
+  int DOC_STRING = 9;
 
   /**
    * The number of structural features of the '<em>Doc String</em>' class.
@@ -370,7 +471,7 @@ public interface CucumberPackage extends EPackage
    * @see org.farhan.cucumber.impl.CucumberPackageImpl#getDescription()
    * @generated
    */
-  int DESCRIPTION = 8;
+  int DESCRIPTION = 10;
 
   /**
    * The feature id for the '<em><b>Sentences</b></em>' attribute list.
@@ -530,6 +631,103 @@ public interface CucumberPackage extends EPackage
    * @generated
    */
   EReference getScenario_Steps();
+
+  /**
+   * Returns the meta object for class '{@link org.farhan.cucumber.ScenarioOutline <em>Scenario Outline</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Scenario Outline</em>'.
+   * @see org.farhan.cucumber.ScenarioOutline
+   * @generated
+   */
+  EClass getScenarioOutline();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.farhan.cucumber.ScenarioOutline#getTitle <em>Title</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Title</em>'.
+   * @see org.farhan.cucumber.ScenarioOutline#getTitle()
+   * @see #getScenarioOutline()
+   * @generated
+   */
+  EAttribute getScenarioOutline_Title();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.farhan.cucumber.ScenarioOutline#getDescription <em>Description</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Description</em>'.
+   * @see org.farhan.cucumber.ScenarioOutline#getDescription()
+   * @see #getScenarioOutline()
+   * @generated
+   */
+  EReference getScenarioOutline_Description();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.farhan.cucumber.ScenarioOutline#getSteps <em>Steps</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Steps</em>'.
+   * @see org.farhan.cucumber.ScenarioOutline#getSteps()
+   * @see #getScenarioOutline()
+   * @generated
+   */
+  EReference getScenarioOutline_Steps();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.farhan.cucumber.ScenarioOutline#getExamples <em>Examples</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Examples</em>'.
+   * @see org.farhan.cucumber.ScenarioOutline#getExamples()
+   * @see #getScenarioOutline()
+   * @generated
+   */
+  EReference getScenarioOutline_Examples();
+
+  /**
+   * Returns the meta object for class '{@link org.farhan.cucumber.Example <em>Example</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Example</em>'.
+   * @see org.farhan.cucumber.Example
+   * @generated
+   */
+  EClass getExample();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.farhan.cucumber.Example#getTitle <em>Title</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Title</em>'.
+   * @see org.farhan.cucumber.Example#getTitle()
+   * @see #getExample()
+   * @generated
+   */
+  EAttribute getExample_Title();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.farhan.cucumber.Example#getDescription <em>Description</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Description</em>'.
+   * @see org.farhan.cucumber.Example#getDescription()
+   * @see #getExample()
+   * @generated
+   */
+  EReference getExample_Description();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.farhan.cucumber.Example#getTable <em>Table</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Table</em>'.
+   * @see org.farhan.cucumber.Example#getTable()
+   * @see #getExample()
+   * @generated
+   */
+  EReference getExample_Table();
 
   /**
    * Returns the meta object for class '{@link org.farhan.cucumber.Step <em>Step</em>}'.
@@ -811,6 +1009,82 @@ public interface CucumberPackage extends EPackage
      * @generated
      */
     EReference SCENARIO__STEPS = eINSTANCE.getScenario_Steps();
+
+    /**
+     * The meta object literal for the '{@link org.farhan.cucumber.impl.ScenarioOutlineImpl <em>Scenario Outline</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.farhan.cucumber.impl.ScenarioOutlineImpl
+     * @see org.farhan.cucumber.impl.CucumberPackageImpl#getScenarioOutline()
+     * @generated
+     */
+    EClass SCENARIO_OUTLINE = eINSTANCE.getScenarioOutline();
+
+    /**
+     * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SCENARIO_OUTLINE__TITLE = eINSTANCE.getScenarioOutline_Title();
+
+    /**
+     * The meta object literal for the '<em><b>Description</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SCENARIO_OUTLINE__DESCRIPTION = eINSTANCE.getScenarioOutline_Description();
+
+    /**
+     * The meta object literal for the '<em><b>Steps</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SCENARIO_OUTLINE__STEPS = eINSTANCE.getScenarioOutline_Steps();
+
+    /**
+     * The meta object literal for the '<em><b>Examples</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SCENARIO_OUTLINE__EXAMPLES = eINSTANCE.getScenarioOutline_Examples();
+
+    /**
+     * The meta object literal for the '{@link org.farhan.cucumber.impl.ExampleImpl <em>Example</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.farhan.cucumber.impl.ExampleImpl
+     * @see org.farhan.cucumber.impl.CucumberPackageImpl#getExample()
+     * @generated
+     */
+    EClass EXAMPLE = eINSTANCE.getExample();
+
+    /**
+     * The meta object literal for the '<em><b>Title</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EXAMPLE__TITLE = eINSTANCE.getExample_Title();
+
+    /**
+     * The meta object literal for the '<em><b>Description</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EXAMPLE__DESCRIPTION = eINSTANCE.getExample_Description();
+
+    /**
+     * The meta object literal for the '<em><b>Table</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EXAMPLE__TABLE = eINSTANCE.getExample_Table();
 
     /**
      * The meta object literal for the '{@link org.farhan.cucumber.impl.StepImpl <em>Step</em>}' class.

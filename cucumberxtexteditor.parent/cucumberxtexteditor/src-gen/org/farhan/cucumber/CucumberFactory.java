@@ -51,6 +51,24 @@ public interface CucumberFactory extends EFactory
   Scenario createScenario();
 
   /**
+   * Returns a new object of class '<em>Scenario Outline</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Scenario Outline</em>'.
+   * @generated
+   */
+  ScenarioOutline createScenarioOutline();
+
+  /**
+   * Returns a new object of class '<em>Example</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Example</em>'.
+   * @generated
+   */
+  Example createExample();
+
+  /**
    * Returns a new object of class '<em>Step</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

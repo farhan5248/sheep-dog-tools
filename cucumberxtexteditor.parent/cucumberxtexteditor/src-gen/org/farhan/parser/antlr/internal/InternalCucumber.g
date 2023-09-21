@@ -146,21 +146,39 @@ ruleFeature returns [EObject current=null]
 		)?
 		(
 			(
-				{
-					newCompositeNode(grammarAccess.getFeatureAccess().getScenariosScenarioParserRuleCall_5_0());
-				}
-				lv_scenarios_5_0=ruleScenario
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getFeatureRule());
+				(
+					{
+						newCompositeNode(grammarAccess.getFeatureAccess().getScenariosScenarioParserRuleCall_5_0_0());
 					}
-					add(
-						$current,
-						"scenarios",
-						lv_scenarios_5_0,
-						"org.farhan.Cucumber.Scenario");
-					afterParserOrEnumRuleCall();
-				}
+					lv_scenarios_5_1=ruleScenario
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getFeatureRule());
+						}
+						add(
+							$current,
+							"scenarios",
+							lv_scenarios_5_1,
+							"org.farhan.Cucumber.Scenario");
+						afterParserOrEnumRuleCall();
+					}
+					    |
+					{
+						newCompositeNode(grammarAccess.getFeatureAccess().getScenariosScenarioOutlineParserRuleCall_5_0_1());
+					}
+					lv_scenarios_5_2=ruleScenarioOutline
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getFeatureRule());
+						}
+						add(
+							$current,
+							"scenarios",
+							lv_scenarios_5_2,
+							"org.farhan.Cucumber.ScenarioOutline");
+						afterParserOrEnumRuleCall();
+					}
+				)
 			)
 		)*
 	)
@@ -330,6 +348,199 @@ ruleScenario returns [EObject current=null]
 				}
 			)
 		)*
+	)
+;
+
+// Entry rule entryRuleScenarioOutline
+entryRuleScenarioOutline returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getScenarioOutlineRule()); }
+	iv_ruleScenarioOutline=ruleScenarioOutline
+	{ $current=$iv_ruleScenarioOutline.current; }
+	EOF;
+
+// Rule ScenarioOutline
+ruleScenarioOutline returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getScenarioOutlineAccess().getTagsParserRuleCall_0());
+		}
+		ruleTags
+		{
+			afterParserOrEnumRuleCall();
+		}
+		otherlv_1='Scenario Outline:'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getScenarioOutlineAccess().getScenarioOutlineKeyword_1());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getScenarioOutlineAccess().getTitleSentenceParserRuleCall_2_0());
+				}
+				lv_title_2_0=ruleSentence
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getScenarioOutlineRule());
+					}
+					set(
+						$current,
+						"title",
+						lv_title_2_0,
+						"org.farhan.Cucumber.Sentence");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getScenarioOutlineAccess().getDescriptionDescriptionParserRuleCall_3_0());
+				}
+				lv_description_3_0=ruleDescription
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getScenarioOutlineRule());
+					}
+					set(
+						$current,
+						"description",
+						lv_description_3_0,
+						"org.farhan.Cucumber.Description");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getScenarioOutlineAccess().getStepsStepParserRuleCall_4_0());
+				}
+				lv_steps_4_0=ruleStep
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getScenarioOutlineRule());
+					}
+					add(
+						$current,
+						"steps",
+						lv_steps_4_0,
+						"org.farhan.Cucumber.Step");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getScenarioOutlineAccess().getExamplesExampleParserRuleCall_5_0());
+				}
+				lv_examples_5_0=ruleExample
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getScenarioOutlineRule());
+					}
+					add(
+						$current,
+						"examples",
+						lv_examples_5_0,
+						"org.farhan.Cucumber.Example");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)+
+	)
+;
+
+// Entry rule entryRuleExample
+entryRuleExample returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getExampleRule()); }
+	iv_ruleExample=ruleExample
+	{ $current=$iv_ruleExample.current; }
+	EOF;
+
+// Rule Example
+ruleExample returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getExampleAccess().getTagsParserRuleCall_0());
+		}
+		ruleTags
+		{
+			afterParserOrEnumRuleCall();
+		}
+		otherlv_1='Examples:'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getExampleAccess().getExamplesKeyword_1());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getExampleAccess().getTitleSentenceParserRuleCall_2_0());
+				}
+				lv_title_2_0=ruleSentence
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getExampleRule());
+					}
+					set(
+						$current,
+						"title",
+						lv_title_2_0,
+						"org.farhan.Cucumber.Sentence");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getExampleAccess().getDescriptionDescriptionParserRuleCall_3_0());
+				}
+				lv_description_3_0=ruleDescription
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getExampleRule());
+					}
+					set(
+						$current,
+						"description",
+						lv_description_3_0,
+						"org.farhan.Cucumber.Description");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getExampleAccess().getTableTableParserRuleCall_4_0());
+				}
+				lv_table_4_0=ruleTable
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getExampleRule());
+					}
+					set(
+						$current,
+						"table",
+						lv_table_4_0,
+						"org.farhan.Cucumber.Table");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
 	)
 ;
 
@@ -781,6 +992,6 @@ RULE_EOL : ('\r'|'\n')+;
 
 RULE_COMMENT : '#' ~(('\r'|'\n'))* RULE_EOL;
 
-RULE_WORD : ('a'..'z'|'A'..'Z'|'0'..'9'|'\'')+;
+RULE_WORD : ~(('@'|'|'|' '|'\t'|'\n'|'\r'))+;
 
 RULE_TAG : '@' RULE_WORD;

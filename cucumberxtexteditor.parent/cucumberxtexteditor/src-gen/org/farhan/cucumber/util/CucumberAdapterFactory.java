@@ -91,6 +91,16 @@ public class CucumberAdapterFactory extends AdapterFactoryImpl
         return createScenarioAdapter();
       }
       @Override
+      public Adapter caseScenarioOutline(ScenarioOutline object)
+      {
+        return createScenarioOutlineAdapter();
+      }
+      @Override
+      public Adapter caseExample(Example object)
+      {
+        return createExampleAdapter();
+      }
+      @Override
       public Adapter caseStep(Step object)
       {
         return createStepAdapter();
@@ -183,6 +193,36 @@ public class CucumberAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createScenarioAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.farhan.cucumber.ScenarioOutline <em>Scenario Outline</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.cucumber.ScenarioOutline
+   * @generated
+   */
+  public Adapter createScenarioOutlineAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.farhan.cucumber.Example <em>Example</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.cucumber.Example
+   * @generated
+   */
+  public Adapter createExampleAdapter()
   {
     return null;
   }

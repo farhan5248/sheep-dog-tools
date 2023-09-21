@@ -96,7 +96,7 @@ public interface Feature extends EObject
 
   /**
    * Returns the value of the '<em><b>Scenarios</b></em>' containment reference list.
-   * The list contents are of type {@link org.farhan.cucumber.Scenario}.
+   * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Scenarios</em>' containment reference list.
@@ -104,6 +104,6 @@ public interface Feature extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<Scenario> getScenarios();
+  EList<EObject> getScenarios();
 
 } // Feature

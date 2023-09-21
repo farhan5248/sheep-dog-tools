@@ -18,9 +18,11 @@ import org.farhan.cucumber.Background;
 import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Description;
 import org.farhan.cucumber.DocString;
+import org.farhan.cucumber.Example;
 import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.RowCell;
 import org.farhan.cucumber.Scenario;
+import org.farhan.cucumber.ScenarioOutline;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.Table;
 import org.farhan.cucumber.TableRow;
@@ -49,6 +51,9 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 			case CucumberPackage.DOC_STRING:
 				sequence_DocString(context, (DocString) semanticObject); 
 				return; 
+			case CucumberPackage.EXAMPLE:
+				sequence_Example(context, (Example) semanticObject); 
+				return; 
 			case CucumberPackage.FEATURE:
 				sequence_Feature(context, (Feature) semanticObject); 
 				return; 
@@ -57,6 +62,9 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 				return; 
 			case CucumberPackage.SCENARIO:
 				sequence_Scenario(context, (Scenario) semanticObject); 
+				return; 
+			case CucumberPackage.SCENARIO_OUTLINE:
+				sequence_ScenarioOutline(context, (ScenarioOutline) semanticObject); 
 				return; 
 			case CucumberPackage.STEP:
 				sequence_Step(context, (Step) semanticObject); 
@@ -117,10 +125,36 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     Example returns Example
+	 *
+	 * Constraint:
+	 *     (title=Sentence description=Description table=Table)
+	 * </pre>
+	 */
+	protected void sequence_Example(ISerializationContext context, Example semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, CucumberPackage.Literals.EXAMPLE__TITLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CucumberPackage.Literals.EXAMPLE__TITLE));
+			if (transientValues.isValueTransient(semanticObject, CucumberPackage.Literals.EXAMPLE__DESCRIPTION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CucumberPackage.Literals.EXAMPLE__DESCRIPTION));
+			if (transientValues.isValueTransient(semanticObject, CucumberPackage.Literals.EXAMPLE__TABLE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CucumberPackage.Literals.EXAMPLE__TABLE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getExampleAccess().getTitleSentenceParserRuleCall_2_0(), semanticObject.getTitle());
+		feeder.accept(grammarAccess.getExampleAccess().getDescriptionDescriptionParserRuleCall_3_0(), semanticObject.getDescription());
+		feeder.accept(grammarAccess.getExampleAccess().getTableTableParserRuleCall_4_0(), semanticObject.getTable());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
 	 *     Feature returns Feature
 	 *
 	 * Constraint:
-	 *     (title=Sentence description=Description background=Background? scenarios+=Scenario*)
+	 *     (title=Sentence description=Description background=Background? (scenarios+=Scenario | scenarios+=ScenarioOutline)*)
 	 * </pre>
 	 */
 	protected void sequence_Feature(ISerializationContext context, Feature semanticObject) {
@@ -145,6 +179,20 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getRowCellAccess().getCellVerticalLineKeyword_0_0(), semanticObject.getCell());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ScenarioOutline returns ScenarioOutline
+	 *
+	 * Constraint:
+	 *     (title=Sentence description=Description steps+=Step* examples+=Example+)
+	 * </pre>
+	 */
+	protected void sequence_ScenarioOutline(ISerializationContext context, ScenarioOutline semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

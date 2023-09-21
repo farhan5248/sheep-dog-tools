@@ -3,45 +3,36 @@
  */
 package org.farhan.cucumber.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.farhan.cucumber.Background;
 import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Description;
-import org.farhan.cucumber.Feature;
+import org.farhan.cucumber.Example;
+import org.farhan.cucumber.Table;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Feature</b></em>'.
+ * An implementation of the model object '<em><b>Example</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getTitle <em>Title</em>}</li>
- *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getBackground <em>Background</em>}</li>
- *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getScenarios <em>Scenarios</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.ExampleImpl#getTitle <em>Title</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.ExampleImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.ExampleImpl#getTable <em>Table</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
+public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
 {
   /**
    * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
@@ -74,31 +65,21 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
   protected Description description;
 
   /**
-   * The cached value of the '{@link #getBackground() <em>Background</em>}' containment reference.
+   * The cached value of the '{@link #getTable() <em>Table</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getBackground()
+   * @see #getTable()
    * @generated
    * @ordered
    */
-  protected Background background;
-
-  /**
-   * The cached value of the '{@link #getScenarios() <em>Scenarios</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getScenarios()
-   * @generated
-   * @ordered
-   */
-  protected EList<EObject> scenarios;
+  protected Table table;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected FeatureImpl()
+  protected ExampleImpl()
   {
     super();
   }
@@ -111,7 +92,7 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
   @Override
   protected EClass eStaticClass()
   {
-    return CucumberPackage.Literals.FEATURE;
+    return CucumberPackage.Literals.EXAMPLE;
   }
 
   /**
@@ -136,7 +117,7 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
     String oldTitle = title;
     title = newTitle;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.FEATURE__TITLE, oldTitle, title));
+      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.EXAMPLE__TITLE, oldTitle, title));
   }
 
   /**
@@ -161,7 +142,7 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
     description = newDescription;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CucumberPackage.FEATURE__DESCRIPTION, oldDescription, newDescription);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CucumberPackage.EXAMPLE__DESCRIPTION, oldDescription, newDescription);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -179,14 +160,14 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
     {
       NotificationChain msgs = null;
       if (description != null)
-        msgs = ((InternalEObject)description).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.FEATURE__DESCRIPTION, null, msgs);
+        msgs = ((InternalEObject)description).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.EXAMPLE__DESCRIPTION, null, msgs);
       if (newDescription != null)
-        msgs = ((InternalEObject)newDescription).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.FEATURE__DESCRIPTION, null, msgs);
+        msgs = ((InternalEObject)newDescription).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.EXAMPLE__DESCRIPTION, null, msgs);
       msgs = basicSetDescription(newDescription, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.FEATURE__DESCRIPTION, newDescription, newDescription));
+      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.EXAMPLE__DESCRIPTION, newDescription, newDescription));
   }
 
   /**
@@ -195,9 +176,9 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
    * @generated
    */
   @Override
-  public Background getBackground()
+  public Table getTable()
   {
-    return background;
+    return table;
   }
 
   /**
@@ -205,13 +186,13 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetBackground(Background newBackground, NotificationChain msgs)
+  public NotificationChain basicSetTable(Table newTable, NotificationChain msgs)
   {
-    Background oldBackground = background;
-    background = newBackground;
+    Table oldTable = table;
+    table = newTable;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CucumberPackage.FEATURE__BACKGROUND, oldBackground, newBackground);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CucumberPackage.EXAMPLE__TABLE, oldTable, newTable);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -223,35 +204,20 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
    * @generated
    */
   @Override
-  public void setBackground(Background newBackground)
+  public void setTable(Table newTable)
   {
-    if (newBackground != background)
+    if (newTable != table)
     {
       NotificationChain msgs = null;
-      if (background != null)
-        msgs = ((InternalEObject)background).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.FEATURE__BACKGROUND, null, msgs);
-      if (newBackground != null)
-        msgs = ((InternalEObject)newBackground).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.FEATURE__BACKGROUND, null, msgs);
-      msgs = basicSetBackground(newBackground, msgs);
+      if (table != null)
+        msgs = ((InternalEObject)table).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.EXAMPLE__TABLE, null, msgs);
+      if (newTable != null)
+        msgs = ((InternalEObject)newTable).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.EXAMPLE__TABLE, null, msgs);
+      msgs = basicSetTable(newTable, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.FEATURE__BACKGROUND, newBackground, newBackground));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<EObject> getScenarios()
-  {
-    if (scenarios == null)
-    {
-      scenarios = new EObjectContainmentEList<EObject>(EObject.class, this, CucumberPackage.FEATURE__SCENARIOS);
-    }
-    return scenarios;
+      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.EXAMPLE__TABLE, newTable, newTable));
   }
 
   /**
@@ -264,12 +230,10 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
   {
     switch (featureID)
     {
-      case CucumberPackage.FEATURE__DESCRIPTION:
+      case CucumberPackage.EXAMPLE__DESCRIPTION:
         return basicSetDescription(null, msgs);
-      case CucumberPackage.FEATURE__BACKGROUND:
-        return basicSetBackground(null, msgs);
-      case CucumberPackage.FEATURE__SCENARIOS:
-        return ((InternalEList<?>)getScenarios()).basicRemove(otherEnd, msgs);
+      case CucumberPackage.EXAMPLE__TABLE:
+        return basicSetTable(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -284,14 +248,12 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
   {
     switch (featureID)
     {
-      case CucumberPackage.FEATURE__TITLE:
+      case CucumberPackage.EXAMPLE__TITLE:
         return getTitle();
-      case CucumberPackage.FEATURE__DESCRIPTION:
+      case CucumberPackage.EXAMPLE__DESCRIPTION:
         return getDescription();
-      case CucumberPackage.FEATURE__BACKGROUND:
-        return getBackground();
-      case CucumberPackage.FEATURE__SCENARIOS:
-        return getScenarios();
+      case CucumberPackage.EXAMPLE__TABLE:
+        return getTable();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -301,24 +263,19 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case CucumberPackage.FEATURE__TITLE:
+      case CucumberPackage.EXAMPLE__TITLE:
         setTitle((String)newValue);
         return;
-      case CucumberPackage.FEATURE__DESCRIPTION:
+      case CucumberPackage.EXAMPLE__DESCRIPTION:
         setDescription((Description)newValue);
         return;
-      case CucumberPackage.FEATURE__BACKGROUND:
-        setBackground((Background)newValue);
-        return;
-      case CucumberPackage.FEATURE__SCENARIOS:
-        getScenarios().clear();
-        getScenarios().addAll((Collection<? extends EObject>)newValue);
+      case CucumberPackage.EXAMPLE__TABLE:
+        setTable((Table)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -334,17 +291,14 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
   {
     switch (featureID)
     {
-      case CucumberPackage.FEATURE__TITLE:
+      case CucumberPackage.EXAMPLE__TITLE:
         setTitle(TITLE_EDEFAULT);
         return;
-      case CucumberPackage.FEATURE__DESCRIPTION:
+      case CucumberPackage.EXAMPLE__DESCRIPTION:
         setDescription((Description)null);
         return;
-      case CucumberPackage.FEATURE__BACKGROUND:
-        setBackground((Background)null);
-        return;
-      case CucumberPackage.FEATURE__SCENARIOS:
-        getScenarios().clear();
+      case CucumberPackage.EXAMPLE__TABLE:
+        setTable((Table)null);
         return;
     }
     super.eUnset(featureID);
@@ -360,14 +314,12 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
   {
     switch (featureID)
     {
-      case CucumberPackage.FEATURE__TITLE:
+      case CucumberPackage.EXAMPLE__TITLE:
         return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
-      case CucumberPackage.FEATURE__DESCRIPTION:
+      case CucumberPackage.EXAMPLE__DESCRIPTION:
         return description != null;
-      case CucumberPackage.FEATURE__BACKGROUND:
-        return background != null;
-      case CucumberPackage.FEATURE__SCENARIOS:
-        return scenarios != null && !scenarios.isEmpty();
+      case CucumberPackage.EXAMPLE__TABLE:
+        return table != null;
     }
     return super.eIsSet(featureID);
   }
@@ -389,4 +341,4 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
     return result.toString();
   }
 
-} //FeatureImpl
+} //ExampleImpl
