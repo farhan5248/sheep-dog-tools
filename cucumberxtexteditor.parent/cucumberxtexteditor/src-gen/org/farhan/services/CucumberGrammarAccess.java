@@ -104,14 +104,14 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final Keyword cKeywordAndKeyword_0_0_3 = (Keyword)cKeywordAlternatives_0_0.eContents().get(3);
 		private final Keyword cKeywordButKeyword_0_0_4 = (Keyword)cKeywordAlternatives_0_0.eContents().get(4);
 		private final Keyword cKeywordAsteriskKeyword_0_0_5 = (Keyword)cKeywordAlternatives_0_0.eContents().get(5);
-		private final Assignment cDescriptionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cDescriptionDescriptionParserRuleCall_1_0 = (RuleCall)cDescriptionAssignment_1.eContents().get(0);
+		private final Assignment cTitleAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cTitleSentenceParserRuleCall_1_0 = (RuleCall)cTitleAssignment_1.eContents().get(0);
 		
 		//Step:
-		//    keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') description=Description;
+		//    keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') description=Description
+		//keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence
 		public Group getGroup() { return cGroup; }
 		
 		//keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*')
@@ -138,31 +138,45 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//'*'
 		public Keyword getKeywordAsteriskKeyword_0_0_5() { return cKeywordAsteriskKeyword_0_0_5; }
 		
-		//description=Description
-		public Assignment getDescriptionAssignment_1() { return cDescriptionAssignment_1; }
+		//title=Sentence
+		public Assignment getTitleAssignment_1() { return cTitleAssignment_1; }
 		
-		//Description
-		public RuleCall getDescriptionDescriptionParserRuleCall_1_0() { return cDescriptionDescriptionParserRuleCall_1_0; }
+		//Sentence
+		public RuleCall getTitleSentenceParserRuleCall_1_0() { return cTitleSentenceParserRuleCall_1_0; }
 	}
 	public class DescriptionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.Description");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cWORDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final RuleCall cWORDTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Assignment cSentencesAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cSentencesSentenceParserRuleCall_0 = (RuleCall)cSentencesAssignment.eContents().get(0);
 		
-		//// define sentence and description as collection of it
 		//Description:
-		//    WORD (WORD)*;
+		//    (sentences+=Sentence)+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//WORD (WORD)*
+		//(sentences+=Sentence)+
+		public Assignment getSentencesAssignment() { return cSentencesAssignment; }
+		
+		//Sentence
+		public RuleCall getSentencesSentenceParserRuleCall_0() { return cSentencesSentenceParserRuleCall_0; }
+	}
+	public class SentenceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.Sentence");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cWORDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final RuleCall cEOLTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		
+		//Sentence:
+		//    WORD+ EOL;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//WORD+ EOL
 		public Group getGroup() { return cGroup; }
 		
-		//WORD
+		//WORD+
 		public RuleCall getWORDTerminalRuleCall_0() { return cWORDTerminalRuleCall_0; }
 		
-		//(WORD)*
-		public RuleCall getWORDTerminalRuleCall_1() { return cWORDTerminalRuleCall_1; }
+		//EOL
+		public RuleCall getEOLTerminalRuleCall_1() { return cEOLTerminalRuleCall_1; }
 	}
 	
 	
@@ -170,7 +184,10 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	private final ScenarioElements pScenario;
 	private final StepElements pStep;
 	private final DescriptionElements pDescription;
+	private final SentenceElements pSentence;
 	private final TerminalRule tWORD;
+	private final TerminalRule tEOL;
+	private final TerminalRule tWS;
 	
 	private final Grammar grammar;
 
@@ -181,7 +198,10 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		this.pScenario = new ScenarioElements();
 		this.pStep = new StepElements();
 		this.pDescription = new DescriptionElements();
+		this.pSentence = new SentenceElements();
 		this.tWORD = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.WORD");
+		this.tEOL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.EOL");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.WS");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -232,7 +252,7 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//Step:
-	//    keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') description=Description;
+	//    keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence;
 	public StepElements getStepAccess() {
 		return pStep;
 	}
@@ -241,9 +261,8 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return getStepAccess().getRule();
 	}
 	
-	//// define sentence and description as collection of it
 	//Description:
-	//    WORD (WORD)*;
+	//    (sentences+=Sentence)+;
 	public DescriptionElements getDescriptionAccess() {
 		return pDescription;
 	}
@@ -252,10 +271,34 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return getDescriptionAccess().getRule();
 	}
 	
+	//Sentence:
+	//    WORD+ EOL;
+	public SentenceElements getSentenceAccess() {
+		return pSentence;
+	}
+	
+	public ParserRule getSentenceRule() {
+		return getSentenceAccess().getRule();
+	}
+	
 	//// this needs the ecore import
 	//terminal WORD:
-	//    ' ' ('a'..'z' | 'A'..'Z' | '0'..'9')+;
+	//    WS ('a'..'z' | 'A'..'Z' | '0'..'9')+;
 	public TerminalRule getWORDRule() {
 		return tWORD;
+	}
+	
+	//// this is trailing whitespace
+	//terminal EOL:
+	//    ('\r\n' | '\n')+;
+	public TerminalRule getEOLRule() {
+		return tEOL;
+	}
+	
+	//// This is leading whitespace
+	//terminal WS:
+	//    (' ' | '\t')+;
+	public TerminalRule getWSRule() {
+		return tWS;
 	}
 }

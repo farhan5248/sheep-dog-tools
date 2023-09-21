@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.farhan.cucumber.Step#getKeyword <em>Keyword</em>}</li>
- *   <li>{@link org.farhan.cucumber.Step#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.farhan.cucumber.Step#getTitle <em>Title</em>}</li>
  * </ul>
  *
  * @see org.farhan.cucumber.CucumberPackage#getStep()
@@ -47,25 +47,25 @@ public interface Step extends EObject
   void setKeyword(String value);
 
   /**
-   * Returns the value of the '<em><b>Description</b></em>' attribute.
+   * Returns the value of the '<em><b>Title</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Description</em>' attribute.
-   * @see #setDescription(String)
-   * @see org.farhan.cucumber.CucumberPackage#getStep_Description()
+   * @return the value of the '<em>Title</em>' attribute.
+   * @see #setTitle(String)
+   * @see org.farhan.cucumber.CucumberPackage#getStep_Title()
    * @model
    * @generated
    */
-  String getDescription();
+  String getTitle();
 
   /**
-   * Sets the value of the '{@link org.farhan.cucumber.Step#getDescription <em>Description</em>}' attribute.
+   * Sets the value of the '{@link org.farhan.cucumber.Step#getTitle <em>Title</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Description</em>' attribute.
-   * @see #getDescription()
+   * @param value the new value of the '<em>Title</em>' attribute.
+   * @see #getTitle()
    * @generated
    */
-  void setDescription(String value);
+  void setTitle(String value);
 
 } // Step

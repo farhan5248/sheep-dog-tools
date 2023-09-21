@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.farhan.cucumber.CucumberFactory;
 import org.farhan.cucumber.CucumberPackage;
+import org.farhan.cucumber.Description;
 import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
@@ -44,6 +45,13 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   private EClass stepEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass descriptionEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -124,9 +132,9 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EAttribute getFeature_Title()
+  public EReference getFeature_Title()
   {
-    return (EAttribute)featureEClass.getEStructuralFeatures().get(0);
+    return (EReference)featureEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -157,9 +165,9 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EAttribute getScenario_Title()
+  public EReference getScenario_Title()
   {
-    return (EAttribute)scenarioEClass.getEStructuralFeatures().get(0);
+    return (EReference)scenarioEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -201,9 +209,31 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EAttribute getStep_Description()
+  public EAttribute getStep_Title()
   {
     return (EAttribute)stepEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getDescription()
+  {
+    return descriptionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getDescription_Sentences()
+  {
+    return (EAttribute)descriptionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -238,16 +268,19 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
 
     // Create classes and their features
     featureEClass = createEClass(FEATURE);
-    createEAttribute(featureEClass, FEATURE__TITLE);
+    createEReference(featureEClass, FEATURE__TITLE);
     createEReference(featureEClass, FEATURE__SCENARIOS);
 
     scenarioEClass = createEClass(SCENARIO);
-    createEAttribute(scenarioEClass, SCENARIO__TITLE);
+    createEReference(scenarioEClass, SCENARIO__TITLE);
     createEReference(scenarioEClass, SCENARIO__STEPS);
 
     stepEClass = createEClass(STEP);
     createEAttribute(stepEClass, STEP__KEYWORD);
-    createEAttribute(stepEClass, STEP__DESCRIPTION);
+    createEAttribute(stepEClass, STEP__TITLE);
+
+    descriptionEClass = createEClass(DESCRIPTION);
+    createEAttribute(descriptionEClass, DESCRIPTION__SENTENCES);
   }
 
   /**
@@ -282,16 +315,19 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
 
     // Initialize classes and features; add operations and parameters
     initEClass(featureEClass, Feature.class, "Feature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getFeature_Title(), ecorePackage.getEString(), "title", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFeature_Title(), this.getDescription(), null, "title", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFeature_Scenarios(), this.getScenario(), null, "scenarios", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(scenarioEClass, Scenario.class, "Scenario", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getScenario_Title(), ecorePackage.getEString(), "title", null, 0, 1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getScenario_Title(), this.getDescription(), null, "title", null, 0, 1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getScenario_Steps(), this.getStep(), null, "steps", null, 0, -1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stepEClass, Step.class, "Step", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStep_Keyword(), ecorePackage.getEString(), "keyword", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getStep_Description(), ecorePackage.getEString(), "description", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getStep_Title(), ecorePackage.getEString(), "title", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(descriptionEClass, Description.class, "Description", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDescription_Sentences(), ecorePackage.getEString(), "sentences", null, 0, -1, Description.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

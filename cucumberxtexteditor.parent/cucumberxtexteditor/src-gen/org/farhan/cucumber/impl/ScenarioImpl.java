@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.farhan.cucumber.CucumberPackage;
+import org.farhan.cucumber.Description;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
 
@@ -40,24 +41,14 @@ import org.farhan.cucumber.Step;
 public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenario
 {
   /**
-   * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
+   * The cached value of the '{@link #getTitle() <em>Title</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getTitle()
    * @generated
    * @ordered
    */
-  protected static final String TITLE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTitle()
-   * @generated
-   * @ordered
-   */
-  protected String title = TITLE_EDEFAULT;
+  protected Description title;
 
   /**
    * The cached value of the '{@link #getSteps() <em>Steps</em>}' containment reference list.
@@ -96,7 +87,7 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
    * @generated
    */
   @Override
-  public String getTitle()
+  public Description getTitle()
   {
     return title;
   }
@@ -106,13 +97,38 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setTitle(String newTitle)
+  public NotificationChain basicSetTitle(Description newTitle, NotificationChain msgs)
   {
-    String oldTitle = title;
+    Description oldTitle = title;
     title = newTitle;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.SCENARIO__TITLE, oldTitle, title));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CucumberPackage.SCENARIO__TITLE, oldTitle, newTitle);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setTitle(Description newTitle)
+  {
+    if (newTitle != title)
+    {
+      NotificationChain msgs = null;
+      if (title != null)
+        msgs = ((InternalEObject)title).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.SCENARIO__TITLE, null, msgs);
+      if (newTitle != null)
+        msgs = ((InternalEObject)newTitle).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.SCENARIO__TITLE, null, msgs);
+      msgs = basicSetTitle(newTitle, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.SCENARIO__TITLE, newTitle, newTitle));
   }
 
   /**
@@ -140,6 +156,8 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
   {
     switch (featureID)
     {
+      case CucumberPackage.SCENARIO__TITLE:
+        return basicSetTitle(null, msgs);
       case CucumberPackage.SCENARIO__STEPS:
         return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
     }
@@ -176,7 +194,7 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
     switch (featureID)
     {
       case CucumberPackage.SCENARIO__TITLE:
-        setTitle((String)newValue);
+        setTitle((Description)newValue);
         return;
       case CucumberPackage.SCENARIO__STEPS:
         getSteps().clear();
@@ -197,7 +215,7 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
     switch (featureID)
     {
       case CucumberPackage.SCENARIO__TITLE:
-        setTitle(TITLE_EDEFAULT);
+        setTitle((Description)null);
         return;
       case CucumberPackage.SCENARIO__STEPS:
         getSteps().clear();
@@ -217,28 +235,11 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
     switch (featureID)
     {
       case CucumberPackage.SCENARIO__TITLE:
-        return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
+        return title != null;
       case CucumberPackage.SCENARIO__STEPS:
         return steps != null && !steps.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (title: ");
-    result.append(title);
-    result.append(')');
-    return result.toString();
   }
 
 } //ScenarioImpl

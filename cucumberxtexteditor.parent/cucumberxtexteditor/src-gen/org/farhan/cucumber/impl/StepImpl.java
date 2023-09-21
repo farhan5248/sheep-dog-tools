@@ -22,7 +22,7 @@ import org.farhan.cucumber.Step;
  * </p>
  * <ul>
  *   <li>{@link org.farhan.cucumber.impl.StepImpl#getKeyword <em>Keyword</em>}</li>
- *   <li>{@link org.farhan.cucumber.impl.StepImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.StepImpl#getTitle <em>Title</em>}</li>
  * </ul>
  *
  * @generated
@@ -50,24 +50,24 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
   protected String keyword = KEYWORD_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+   * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getDescription()
+   * @see #getTitle()
    * @generated
    * @ordered
    */
-  protected static final String DESCRIPTION_EDEFAULT = null;
+  protected static final String TITLE_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+   * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getDescription()
+   * @see #getTitle()
    * @generated
    * @ordered
    */
-  protected String description = DESCRIPTION_EDEFAULT;
+  protected String title = TITLE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -121,9 +121,9 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * @generated
    */
   @Override
-  public String getDescription()
+  public String getTitle()
   {
-    return description;
+    return title;
   }
 
   /**
@@ -132,12 +132,12 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * @generated
    */
   @Override
-  public void setDescription(String newDescription)
+  public void setTitle(String newTitle)
   {
-    String oldDescription = description;
-    description = newDescription;
+    String oldTitle = title;
+    title = newTitle;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.STEP__DESCRIPTION, oldDescription, description));
+      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.STEP__TITLE, oldTitle, title));
   }
 
   /**
@@ -152,8 +152,8 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
     {
       case CucumberPackage.STEP__KEYWORD:
         return getKeyword();
-      case CucumberPackage.STEP__DESCRIPTION:
-        return getDescription();
+      case CucumberPackage.STEP__TITLE:
+        return getTitle();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -171,8 +171,8 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
       case CucumberPackage.STEP__KEYWORD:
         setKeyword((String)newValue);
         return;
-      case CucumberPackage.STEP__DESCRIPTION:
-        setDescription((String)newValue);
+      case CucumberPackage.STEP__TITLE:
+        setTitle((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -191,8 +191,8 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
       case CucumberPackage.STEP__KEYWORD:
         setKeyword(KEYWORD_EDEFAULT);
         return;
-      case CucumberPackage.STEP__DESCRIPTION:
-        setDescription(DESCRIPTION_EDEFAULT);
+      case CucumberPackage.STEP__TITLE:
+        setTitle(TITLE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -210,8 +210,8 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
     {
       case CucumberPackage.STEP__KEYWORD:
         return KEYWORD_EDEFAULT == null ? keyword != null : !KEYWORD_EDEFAULT.equals(keyword);
-      case CucumberPackage.STEP__DESCRIPTION:
-        return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+      case CucumberPackage.STEP__TITLE:
+        return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
     }
     return super.eIsSet(featureID);
   }
@@ -229,8 +229,8 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (keyword: ");
     result.append(keyword);
-    result.append(", description: ");
-    result.append(description);
+    result.append(", title: ");
+    result.append(title);
     result.append(')');
     return result.toString();
   }

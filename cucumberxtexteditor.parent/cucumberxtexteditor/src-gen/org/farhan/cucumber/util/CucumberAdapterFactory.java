@@ -91,6 +91,11 @@ public class CucumberAdapterFactory extends AdapterFactoryImpl
         return createStepAdapter();
       }
       @Override
+      public Adapter caseDescription(Description object)
+      {
+        return createDescriptionAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -153,6 +158,21 @@ public class CucumberAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createStepAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.farhan.cucumber.Description <em>Description</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.cucumber.Description
+   * @generated
+   */
+  public Adapter createDescriptionAdapter()
   {
     return null;
   }

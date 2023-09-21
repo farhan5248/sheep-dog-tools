@@ -140,9 +140,41 @@ ruleDescription
 	}
 	:
 	(
-		{ before(grammarAccess.getDescriptionAccess().getGroup()); }
-		(rule__Description__Group__0)
-		{ after(grammarAccess.getDescriptionAccess().getGroup()); }
+		(
+			{ before(grammarAccess.getDescriptionAccess().getSentencesAssignment()); }
+			(rule__Description__SentencesAssignment)
+			{ after(grammarAccess.getDescriptionAccess().getSentencesAssignment()); }
+		)
+		(
+			{ before(grammarAccess.getDescriptionAccess().getSentencesAssignment()); }
+			(rule__Description__SentencesAssignment)*
+			{ after(grammarAccess.getDescriptionAccess().getSentencesAssignment()); }
+		)
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+// Entry rule entryRuleSentence
+entryRuleSentence
+:
+{ before(grammarAccess.getSentenceRule()); }
+	 ruleSentence
+{ after(grammarAccess.getSentenceRule()); } 
+	 EOF 
+;
+
+// Rule Sentence
+ruleSentence 
+	@init {
+		int stackSize = keepStackSize();
+	}
+	:
+	(
+		{ before(grammarAccess.getSentenceAccess().getGroup()); }
+		(rule__Sentence__Group__0)
+		{ after(grammarAccess.getSentenceAccess().getGroup()); }
 	)
 ;
 finally {
@@ -400,9 +432,9 @@ rule__Step__Group__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getStepAccess().getDescriptionAssignment_1()); }
-	(rule__Step__DescriptionAssignment_1)
-	{ after(grammarAccess.getStepAccess().getDescriptionAssignment_1()); }
+	{ before(grammarAccess.getStepAccess().getTitleAssignment_1()); }
+	(rule__Step__TitleAssignment_1)
+	{ after(grammarAccess.getStepAccess().getTitleAssignment_1()); }
 )
 ;
 finally {
@@ -410,53 +442,60 @@ finally {
 }
 
 
-rule__Description__Group__0
+rule__Sentence__Group__0
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__Description__Group__0__Impl
-	rule__Description__Group__1
+	rule__Sentence__Group__0__Impl
+	rule__Sentence__Group__1
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Description__Group__0__Impl
+rule__Sentence__Group__0__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getDescriptionAccess().getWORDTerminalRuleCall_0()); }
-	RULE_WORD
-	{ after(grammarAccess.getDescriptionAccess().getWORDTerminalRuleCall_0()); }
+	(
+		{ before(grammarAccess.getSentenceAccess().getWORDTerminalRuleCall_0()); }
+		(RULE_WORD)
+		{ after(grammarAccess.getSentenceAccess().getWORDTerminalRuleCall_0()); }
+	)
+	(
+		{ before(grammarAccess.getSentenceAccess().getWORDTerminalRuleCall_0()); }
+		(RULE_WORD)*
+		{ after(grammarAccess.getSentenceAccess().getWORDTerminalRuleCall_0()); }
+	)
 )
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Description__Group__1
+rule__Sentence__Group__1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
-	rule__Description__Group__1__Impl
+	rule__Sentence__Group__1__Impl
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Description__Group__1__Impl
+rule__Sentence__Group__1__Impl
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 (
-	{ before(grammarAccess.getDescriptionAccess().getWORDTerminalRuleCall_1()); }
-	(RULE_WORD)*
-	{ after(grammarAccess.getDescriptionAccess().getWORDTerminalRuleCall_1()); }
+	{ before(grammarAccess.getSentenceAccess().getEOLTerminalRuleCall_1()); }
+	RULE_EOL
+	{ after(grammarAccess.getSentenceAccess().getEOLTerminalRuleCall_1()); }
 )
 ;
 finally {
@@ -539,19 +578,38 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__Step__DescriptionAssignment_1
+rule__Step__TitleAssignment_1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getStepAccess().getDescriptionDescriptionParserRuleCall_1_0()); }
-		ruleDescription
-		{ after(grammarAccess.getStepAccess().getDescriptionDescriptionParserRuleCall_1_0()); }
+		{ before(grammarAccess.getStepAccess().getTitleSentenceParserRuleCall_1_0()); }
+		ruleSentence
+		{ after(grammarAccess.getStepAccess().getTitleSentenceParserRuleCall_1_0()); }
 	)
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-RULE_WORD : ' ' ('a'..'z'|'A'..'Z'|'0'..'9')+;
+rule__Description__SentencesAssignment
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getDescriptionAccess().getSentencesSentenceParserRuleCall_0()); }
+		ruleSentence
+		{ after(grammarAccess.getDescriptionAccess().getSentencesSentenceParserRuleCall_0()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+RULE_WORD : RULE_WS ('a'..'z'|'A'..'Z'|'0'..'9')+;
+
+RULE_EOL : ('\r\n'|'\n')+;
+
+fragment RULE_WS : (' '|'\t')+;

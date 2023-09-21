@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.farhan.cucumber.CucumberPackage;
+import org.farhan.cucumber.Description;
 import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Scenario;
 
@@ -40,24 +41,14 @@ import org.farhan.cucumber.Scenario;
 public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
 {
   /**
-   * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
+   * The cached value of the '{@link #getTitle() <em>Title</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getTitle()
    * @generated
    * @ordered
    */
-  protected static final String TITLE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTitle()
-   * @generated
-   * @ordered
-   */
-  protected String title = TITLE_EDEFAULT;
+  protected Description title;
 
   /**
    * The cached value of the '{@link #getScenarios() <em>Scenarios</em>}' containment reference list.
@@ -96,7 +87,7 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
    * @generated
    */
   @Override
-  public String getTitle()
+  public Description getTitle()
   {
     return title;
   }
@@ -106,13 +97,38 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setTitle(String newTitle)
+  public NotificationChain basicSetTitle(Description newTitle, NotificationChain msgs)
   {
-    String oldTitle = title;
+    Description oldTitle = title;
     title = newTitle;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.FEATURE__TITLE, oldTitle, title));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CucumberPackage.FEATURE__TITLE, oldTitle, newTitle);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setTitle(Description newTitle)
+  {
+    if (newTitle != title)
+    {
+      NotificationChain msgs = null;
+      if (title != null)
+        msgs = ((InternalEObject)title).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.FEATURE__TITLE, null, msgs);
+      if (newTitle != null)
+        msgs = ((InternalEObject)newTitle).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.FEATURE__TITLE, null, msgs);
+      msgs = basicSetTitle(newTitle, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.FEATURE__TITLE, newTitle, newTitle));
   }
 
   /**
@@ -140,6 +156,8 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
   {
     switch (featureID)
     {
+      case CucumberPackage.FEATURE__TITLE:
+        return basicSetTitle(null, msgs);
       case CucumberPackage.FEATURE__SCENARIOS:
         return ((InternalEList<?>)getScenarios()).basicRemove(otherEnd, msgs);
     }
@@ -176,7 +194,7 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
     switch (featureID)
     {
       case CucumberPackage.FEATURE__TITLE:
-        setTitle((String)newValue);
+        setTitle((Description)newValue);
         return;
       case CucumberPackage.FEATURE__SCENARIOS:
         getScenarios().clear();
@@ -197,7 +215,7 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
     switch (featureID)
     {
       case CucumberPackage.FEATURE__TITLE:
-        setTitle(TITLE_EDEFAULT);
+        setTitle((Description)null);
         return;
       case CucumberPackage.FEATURE__SCENARIOS:
         getScenarios().clear();
@@ -217,28 +235,11 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
     switch (featureID)
     {
       case CucumberPackage.FEATURE__TITLE:
-        return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
+        return title != null;
       case CucumberPackage.FEATURE__SCENARIOS:
         return scenarios != null && !scenarios.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (title: ");
-    result.append(title);
-    result.append(')');
-    return result.toString();
   }
 
 } //FeatureImpl

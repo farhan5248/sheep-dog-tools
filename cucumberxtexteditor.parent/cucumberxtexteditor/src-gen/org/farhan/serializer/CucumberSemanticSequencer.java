@@ -13,6 +13,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.farhan.cucumber.CucumberPackage;
+import org.farhan.cucumber.Description;
 import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
@@ -32,6 +33,9 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == CucumberPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case CucumberPackage.DESCRIPTION:
+				sequence_Description(context, (Description) semanticObject); 
+				return; 
 			case CucumberPackage.FEATURE:
 				sequence_Feature(context, (Feature) semanticObject); 
 				return; 
@@ -45,6 +49,20 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Description returns Description
+	 *
+	 * Constraint:
+	 *     sentences+=Sentence+
+	 * </pre>
+	 */
+	protected void sequence_Description(ISerializationContext context, Description semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
 	
 	/**
 	 * <pre>
@@ -89,7 +107,7 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *             keyword='But' | 
 	 *             keyword='*'
 	 *         ) 
-	 *         description=Description
+	 *         title=Sentence
 	 *     )
 	 * </pre>
 	 */

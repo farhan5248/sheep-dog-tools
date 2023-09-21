@@ -23,9 +23,13 @@ Sentence:
 	WORD+ EOL;
 
 // this needs the ecore import
-// use (' '|\t)+
 terminal WORD:
-	' ' ('a'..'z' | 'A'..'Z' | '0'..'9')+;
+	WS ('a'..'z' | 'A'..'Z' | '0'..'9')+;
 
+// this is trailing whitespace
 terminal EOL:
 	('\r\n' | '\n')+;
+
+// This is leading whitespace
+terminal WS:
+	(' ' | '\t')+;

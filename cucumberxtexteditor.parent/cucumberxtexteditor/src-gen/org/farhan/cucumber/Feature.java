@@ -27,26 +27,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface Feature extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Title</b></em>' attribute.
+   * Returns the value of the '<em><b>Title</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Title</em>' attribute.
-   * @see #setTitle(String)
+   * @return the value of the '<em>Title</em>' containment reference.
+   * @see #setTitle(Description)
    * @see org.farhan.cucumber.CucumberPackage#getFeature_Title()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getTitle();
+  Description getTitle();
 
   /**
-   * Sets the value of the '{@link org.farhan.cucumber.Feature#getTitle <em>Title</em>}' attribute.
+   * Sets the value of the '{@link org.farhan.cucumber.Feature#getTitle <em>Title</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Title</em>' attribute.
+   * @param value the new value of the '<em>Title</em>' containment reference.
    * @see #getTitle()
    * @generated
    */
-  void setTitle(String value);
+  void setTitle(Description value);
 
   /**
    * Returns the value of the '<em><b>Scenarios</b></em>' containment reference list.
