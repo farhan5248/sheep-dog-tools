@@ -25,7 +25,22 @@ Scenario:
 	(steps+=Step)*;
 
 Step:
-	keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence;
+	keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence
+	(table=Table | text=DocString)?;
+
+Table:
+	rows+=TableRow+;
+
+TableRow:
+	cells+=RowCell+ '|' EOL;
+
+RowCell:
+	cell='|' Sentence;
+
+DocString:
+	{DocString}
+	('"""' Sentence* '"""')
+	EOL;
 
 // make this optional
 Description:

@@ -60,6 +60,42 @@ public interface CucumberFactory extends EFactory
   Step createStep();
 
   /**
+   * Returns a new object of class '<em>Table</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Table</em>'.
+   * @generated
+   */
+  Table createTable();
+
+  /**
+   * Returns a new object of class '<em>Table Row</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Table Row</em>'.
+   * @generated
+   */
+  TableRow createTableRow();
+
+  /**
+   * Returns a new object of class '<em>Row Cell</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Row Cell</em>'.
+   * @generated
+   */
+  RowCell createRowCell();
+
+  /**
+   * Returns a new object of class '<em>Doc String</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Doc String</em>'.
+   * @generated
+   */
+  DocString createDocString();
+
+  /**
    * Returns a new object of class '<em>Description</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -195,12 +195,19 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final Keyword cKeywordAsteriskKeyword_0_0_5 = (Keyword)cKeywordAlternatives_0_0.eContents().get(5);
 		private final Assignment cTitleAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cTitleSentenceParserRuleCall_1_0 = (RuleCall)cTitleAssignment_1.eContents().get(0);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Assignment cTableAssignment_2_0 = (Assignment)cAlternatives_2.eContents().get(0);
+		private final RuleCall cTableTableParserRuleCall_2_0_0 = (RuleCall)cTableAssignment_2_0.eContents().get(0);
+		private final Assignment cTextAssignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
+		private final RuleCall cTextDocStringParserRuleCall_2_1_0 = (RuleCall)cTextAssignment_2_1.eContents().get(0);
 		
 		//Step:
-		//    keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence;
+		//    keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence
+		//    (table=Table | text=DocString)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence
+		//(table=Table | text=DocString)?
 		public Group getGroup() { return cGroup; }
 		
 		//keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*')
@@ -232,6 +239,125 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		
 		//Sentence
 		public RuleCall getTitleSentenceParserRuleCall_1_0() { return cTitleSentenceParserRuleCall_1_0; }
+		
+		//(table=Table | text=DocString)?
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+		
+		//table=Table
+		public Assignment getTableAssignment_2_0() { return cTableAssignment_2_0; }
+		
+		//Table
+		public RuleCall getTableTableParserRuleCall_2_0_0() { return cTableTableParserRuleCall_2_0_0; }
+		
+		//text=DocString
+		public Assignment getTextAssignment_2_1() { return cTextAssignment_2_1; }
+		
+		//DocString
+		public RuleCall getTextDocStringParserRuleCall_2_1_0() { return cTextDocStringParserRuleCall_2_1_0; }
+	}
+	public class TableElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.Table");
+		private final Assignment cRowsAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cRowsTableRowParserRuleCall_0 = (RuleCall)cRowsAssignment.eContents().get(0);
+		
+		//Table:
+		//    rows+=TableRow+;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//rows+=TableRow+
+		public Assignment getRowsAssignment() { return cRowsAssignment; }
+		
+		//TableRow
+		public RuleCall getRowsTableRowParserRuleCall_0() { return cRowsTableRowParserRuleCall_0; }
+	}
+	public class TableRowElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.TableRow");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cCellsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cCellsRowCellParserRuleCall_0_0 = (RuleCall)cCellsAssignment_0.eContents().get(0);
+		private final Keyword cVerticalLineKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final RuleCall cEOLTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		
+		//TableRow:
+		//    cells+=RowCell+ '|' EOL;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//cells+=RowCell+ '|' EOL
+		public Group getGroup() { return cGroup; }
+		
+		//cells+=RowCell+
+		public Assignment getCellsAssignment_0() { return cCellsAssignment_0; }
+		
+		//RowCell
+		public RuleCall getCellsRowCellParserRuleCall_0_0() { return cCellsRowCellParserRuleCall_0_0; }
+		
+		//'|'
+		public Keyword getVerticalLineKeyword_1() { return cVerticalLineKeyword_1; }
+		
+		//EOL
+		public RuleCall getEOLTerminalRuleCall_2() { return cEOLTerminalRuleCall_2; }
+	}
+	public class RowCellElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.RowCell");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cCellAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cCellVerticalLineKeyword_0_0 = (Keyword)cCellAssignment_0.eContents().get(0);
+		private final RuleCall cSentenceParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		
+		//RowCell:
+		//    cell='|' Sentence;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//cell='|' Sentence
+		public Group getGroup() { return cGroup; }
+		
+		//cell='|'
+		public Assignment getCellAssignment_0() { return cCellAssignment_0; }
+		
+		//'|'
+		public Keyword getCellVerticalLineKeyword_0_0() { return cCellVerticalLineKeyword_0_0; }
+		
+		//Sentence
+		public RuleCall getSentenceParserRuleCall_1() { return cSentenceParserRuleCall_1; }
+	}
+	public class DocStringElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.DocString");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cDocStringAction_0 = (Action)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cQuotationMarkQuotationMarkQuotationMarkKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final RuleCall cSentenceParserRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
+		private final Keyword cQuotationMarkQuotationMarkQuotationMarkKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
+		private final RuleCall cEOLTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		
+		//DocString:
+		//    {DocString}
+		//    ('"""' Sentence* '"""')
+		//    EOL;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{DocString}
+		//('"""' Sentence* '"""')
+		//EOL
+		public Group getGroup() { return cGroup; }
+		
+		//{DocString}
+		public Action getDocStringAction_0() { return cDocStringAction_0; }
+		
+		//('"""' Sentence* '"""')
+		public Group getGroup_1() { return cGroup_1; }
+		
+		//'"""'
+		public Keyword getQuotationMarkQuotationMarkQuotationMarkKeyword_1_0() { return cQuotationMarkQuotationMarkQuotationMarkKeyword_1_0; }
+		
+		//Sentence*
+		public RuleCall getSentenceParserRuleCall_1_1() { return cSentenceParserRuleCall_1_1; }
+		
+		//'"""'
+		public Keyword getQuotationMarkQuotationMarkQuotationMarkKeyword_1_2() { return cQuotationMarkQuotationMarkQuotationMarkKeyword_1_2; }
+		
+		//EOL
+		public RuleCall getEOLTerminalRuleCall_2() { return cEOLTerminalRuleCall_2; }
 	}
 	public class DescriptionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.Description");
@@ -301,6 +427,10 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	private final BackgroundElements pBackground;
 	private final ScenarioElements pScenario;
 	private final StepElements pStep;
+	private final TableElements pTable;
+	private final TableRowElements pTableRow;
+	private final RowCellElements pRowCell;
+	private final DocStringElements pDocString;
 	private final DescriptionElements pDescription;
 	private final TagsElements pTags;
 	private final SentenceElements pSentence;
@@ -319,6 +449,10 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		this.pBackground = new BackgroundElements();
 		this.pScenario = new ScenarioElements();
 		this.pStep = new StepElements();
+		this.pTable = new TableElements();
+		this.pTableRow = new TableRowElements();
+		this.pRowCell = new RowCellElements();
+		this.pDocString = new DocStringElements();
 		this.pDescription = new DescriptionElements();
 		this.pTags = new TagsElements();
 		this.pSentence = new SentenceElements();
@@ -395,13 +529,56 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//Step:
-	//    keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence;
+	//    keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence
+	//    (table=Table | text=DocString)?;
 	public StepElements getStepAccess() {
 		return pStep;
 	}
 	
 	public ParserRule getStepRule() {
 		return getStepAccess().getRule();
+	}
+	
+	//Table:
+	//    rows+=TableRow+;
+	public TableElements getTableAccess() {
+		return pTable;
+	}
+	
+	public ParserRule getTableRule() {
+		return getTableAccess().getRule();
+	}
+	
+	//TableRow:
+	//    cells+=RowCell+ '|' EOL;
+	public TableRowElements getTableRowAccess() {
+		return pTableRow;
+	}
+	
+	public ParserRule getTableRowRule() {
+		return getTableRowAccess().getRule();
+	}
+	
+	//RowCell:
+	//    cell='|' Sentence;
+	public RowCellElements getRowCellAccess() {
+		return pRowCell;
+	}
+	
+	public ParserRule getRowCellRule() {
+		return getRowCellAccess().getRule();
+	}
+	
+	//DocString:
+	//    {DocString}
+	//    ('"""' Sentence* '"""')
+	//    EOL;
+	public DocStringElements getDocStringAccess() {
+		return pDocString;
+	}
+	
+	public ParserRule getDocStringRule() {
+		return getDocStringAccess().getRule();
 	}
 	
 	//// make this optional

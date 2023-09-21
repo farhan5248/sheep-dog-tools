@@ -4,14 +4,18 @@
 package org.farhan.cucumber.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.farhan.cucumber.CucumberPackage;
+import org.farhan.cucumber.DocString;
 import org.farhan.cucumber.Step;
+import org.farhan.cucumber.Table;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,6 +27,8 @@ import org.farhan.cucumber.Step;
  * <ul>
  *   <li>{@link org.farhan.cucumber.impl.StepImpl#getKeyword <em>Keyword</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.StepImpl#getTitle <em>Title</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.StepImpl#getTable <em>Table</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.StepImpl#getText <em>Text</em>}</li>
  * </ul>
  *
  * @generated
@@ -68,6 +74,26 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * @ordered
    */
   protected String title = TITLE_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getTable() <em>Table</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTable()
+   * @generated
+   * @ordered
+   */
+  protected Table table;
+
+  /**
+   * The cached value of the '{@link #getText() <em>Text</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getText()
+   * @generated
+   * @ordered
+   */
+  protected DocString text;
 
   /**
    * <!-- begin-user-doc -->
@@ -146,6 +172,124 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * @generated
    */
   @Override
+  public Table getTable()
+  {
+    return table;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetTable(Table newTable, NotificationChain msgs)
+  {
+    Table oldTable = table;
+    table = newTable;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CucumberPackage.STEP__TABLE, oldTable, newTable);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setTable(Table newTable)
+  {
+    if (newTable != table)
+    {
+      NotificationChain msgs = null;
+      if (table != null)
+        msgs = ((InternalEObject)table).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.STEP__TABLE, null, msgs);
+      if (newTable != null)
+        msgs = ((InternalEObject)newTable).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.STEP__TABLE, null, msgs);
+      msgs = basicSetTable(newTable, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.STEP__TABLE, newTable, newTable));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public DocString getText()
+  {
+    return text;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetText(DocString newText, NotificationChain msgs)
+  {
+    DocString oldText = text;
+    text = newText;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CucumberPackage.STEP__TEXT, oldText, newText);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setText(DocString newText)
+  {
+    if (newText != text)
+    {
+      NotificationChain msgs = null;
+      if (text != null)
+        msgs = ((InternalEObject)text).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.STEP__TEXT, null, msgs);
+      if (newText != null)
+        msgs = ((InternalEObject)newText).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.STEP__TEXT, null, msgs);
+      msgs = basicSetText(newText, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.STEP__TEXT, newText, newText));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case CucumberPackage.STEP__TABLE:
+        return basicSetTable(null, msgs);
+      case CucumberPackage.STEP__TEXT:
+        return basicSetText(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
@@ -154,6 +298,10 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
         return getKeyword();
       case CucumberPackage.STEP__TITLE:
         return getTitle();
+      case CucumberPackage.STEP__TABLE:
+        return getTable();
+      case CucumberPackage.STEP__TEXT:
+        return getText();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -173,6 +321,12 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
         return;
       case CucumberPackage.STEP__TITLE:
         setTitle((String)newValue);
+        return;
+      case CucumberPackage.STEP__TABLE:
+        setTable((Table)newValue);
+        return;
+      case CucumberPackage.STEP__TEXT:
+        setText((DocString)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -194,6 +348,12 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
       case CucumberPackage.STEP__TITLE:
         setTitle(TITLE_EDEFAULT);
         return;
+      case CucumberPackage.STEP__TABLE:
+        setTable((Table)null);
+        return;
+      case CucumberPackage.STEP__TEXT:
+        setText((DocString)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -212,6 +372,10 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
         return KEYWORD_EDEFAULT == null ? keyword != null : !KEYWORD_EDEFAULT.equals(keyword);
       case CucumberPackage.STEP__TITLE:
         return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
+      case CucumberPackage.STEP__TABLE:
+        return table != null;
+      case CucumberPackage.STEP__TEXT:
+        return text != null;
     }
     return super.eIsSet(featureID);
   }

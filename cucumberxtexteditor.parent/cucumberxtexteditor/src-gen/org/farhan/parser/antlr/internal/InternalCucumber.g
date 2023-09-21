@@ -439,6 +439,218 @@ ruleStep returns [EObject current=null]
 				}
 			)
 		)
+		(
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getStepAccess().getTableTableParserRuleCall_2_0_0());
+					}
+					lv_table_2_0=ruleTable
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getStepRule());
+						}
+						set(
+							$current,
+							"table",
+							lv_table_2_0,
+							"org.farhan.Cucumber.Table");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getStepAccess().getTextDocStringParserRuleCall_2_1_0());
+					}
+					lv_text_3_0=ruleDocString
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getStepRule());
+						}
+						set(
+							$current,
+							"text",
+							lv_text_3_0,
+							"org.farhan.Cucumber.DocString");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+	)
+;
+
+// Entry rule entryRuleTable
+entryRuleTable returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getTableRule()); }
+	iv_ruleTable=ruleTable
+	{ $current=$iv_ruleTable.current; }
+	EOF;
+
+// Rule Table
+ruleTable returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getTableAccess().getRowsTableRowParserRuleCall_0());
+			}
+			lv_rows_0_0=ruleTableRow
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getTableRule());
+				}
+				add(
+					$current,
+					"rows",
+					lv_rows_0_0,
+					"org.farhan.Cucumber.TableRow");
+				afterParserOrEnumRuleCall();
+			}
+		)
+	)+
+;
+
+// Entry rule entryRuleTableRow
+entryRuleTableRow returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getTableRowRule()); }
+	iv_ruleTableRow=ruleTableRow
+	{ $current=$iv_ruleTableRow.current; }
+	EOF;
+
+// Rule TableRow
+ruleTableRow returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getTableRowAccess().getCellsRowCellParserRuleCall_0_0());
+				}
+				lv_cells_0_0=ruleRowCell
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getTableRowRule());
+					}
+					add(
+						$current,
+						"cells",
+						lv_cells_0_0,
+						"org.farhan.Cucumber.RowCell");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)+
+		otherlv_1='|'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getTableRowAccess().getVerticalLineKeyword_1());
+		}
+		this_EOL_2=RULE_EOL
+		{
+			newLeafNode(this_EOL_2, grammarAccess.getTableRowAccess().getEOLTerminalRuleCall_2());
+		}
+	)
+;
+
+// Entry rule entryRuleRowCell
+entryRuleRowCell returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getRowCellRule()); }
+	iv_ruleRowCell=ruleRowCell
+	{ $current=$iv_ruleRowCell.current; }
+	EOF;
+
+// Rule RowCell
+ruleRowCell returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_cell_0_0='|'
+				{
+					newLeafNode(lv_cell_0_0, grammarAccess.getRowCellAccess().getCellVerticalLineKeyword_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getRowCellRule());
+					}
+					setWithLastConsumed($current, "cell", lv_cell_0_0, "|");
+				}
+			)
+		)
+		{
+			newCompositeNode(grammarAccess.getRowCellAccess().getSentenceParserRuleCall_1());
+		}
+		ruleSentence
+		{
+			afterParserOrEnumRuleCall();
+		}
+	)
+;
+
+// Entry rule entryRuleDocString
+entryRuleDocString returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getDocStringRule()); }
+	iv_ruleDocString=ruleDocString
+	{ $current=$iv_ruleDocString.current; }
+	EOF;
+
+// Rule DocString
+ruleDocString returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getDocStringAccess().getDocStringAction_0(),
+					$current);
+			}
+		)
+		(
+			otherlv_1='"""'
+			{
+				newLeafNode(otherlv_1, grammarAccess.getDocStringAccess().getQuotationMarkQuotationMarkQuotationMarkKeyword_1_0());
+			}
+			(
+				{
+					newCompositeNode(grammarAccess.getDocStringAccess().getSentenceParserRuleCall_1_1());
+				}
+				ruleSentence
+				{
+					afterParserOrEnumRuleCall();
+				}
+			)*
+			otherlv_3='"""'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getDocStringAccess().getQuotationMarkQuotationMarkQuotationMarkKeyword_1_2());
+			}
+		)
+		this_EOL_4=RULE_EOL
+		{
+			newLeafNode(this_EOL_4, grammarAccess.getDocStringAccess().getEOLTerminalRuleCall_2());
+		}
 	)
 ;
 

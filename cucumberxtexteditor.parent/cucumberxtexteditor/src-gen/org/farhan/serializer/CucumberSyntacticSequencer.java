@@ -10,6 +10,8 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.farhan.services.CucumberGrammarAccess;
@@ -18,16 +20,42 @@ import org.farhan.services.CucumberGrammarAccess;
 public class CucumberSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected CucumberGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_DocString_SentenceParserRuleCall_1_1_a;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (CucumberGrammarAccess) access;
+		match_DocString_SentenceParserRuleCall_1_1_a = new TokenAlias(true, true, grammarAccess.getDocStringAccess().getSentenceParserRuleCall_1_1());
 	}
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
-		if (ruleCall.getRule() == grammarAccess.getTagsRule())
+		if (ruleCall.getRule() == grammarAccess.getEOLRule())
+			return getEOLToken(semanticObject, ruleCall, node);
+		else if (ruleCall.getRule() == grammarAccess.getSentenceRule())
+			return getSentenceToken(semanticObject, ruleCall, node);
+		else if (ruleCall.getRule() == grammarAccess.getTagsRule())
 			return getTagsToken(semanticObject, ruleCall, node);
+		return "";
+	}
+	
+	/**
+	 * terminal EOL:
+	 * 	('\r' | '\n')+;
+	 */
+	protected String getEOLToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "\r";
+	}
+	
+	/**
+	 * Sentence:
+	 * 	WORD+ EOL?;
+	 */
+	protected String getSentenceToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
 		return "";
 	}
 	
@@ -47,8 +75,24 @@ public class CucumberSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			acceptNodes(getLastNavigableState(), syntaxNodes);
+			if (match_DocString_SentenceParserRuleCall_1_1_a.equals(syntax))
+				emit_DocString_SentenceParserRuleCall_1_1_a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     Sentence*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) '"""' (ambiguity) '"""' EOL (rule start)
+	 
+	 * </pre>
+	 */
+	protected void emit_DocString_SentenceParserRuleCall_1_1_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
 }

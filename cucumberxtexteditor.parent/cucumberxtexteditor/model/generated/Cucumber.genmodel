@@ -25,7 +25,19 @@
     <genClasses ecoreClass="Cucumber.ecore#//Step">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//Step/keyword"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//Step/title"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Step/table"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Step/text"/>
     </genClasses>
+    <genClasses ecoreClass="Cucumber.ecore#//Table">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Table/rows"/>
+    </genClasses>
+    <genClasses ecoreClass="Cucumber.ecore#//TableRow">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//TableRow/cells"/>
+    </genClasses>
+    <genClasses ecoreClass="Cucumber.ecore#//RowCell">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//RowCell/cell"/>
+    </genClasses>
+    <genClasses ecoreClass="Cucumber.ecore#//DocString"/>
     <genClasses ecoreClass="Cucumber.ecore#//Description">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//Description/sentences"/>
     </genClasses>

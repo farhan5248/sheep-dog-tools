@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.farhan.cucumber.Step#getKeyword <em>Keyword</em>}</li>
  *   <li>{@link org.farhan.cucumber.Step#getTitle <em>Title</em>}</li>
+ *   <li>{@link org.farhan.cucumber.Step#getTable <em>Table</em>}</li>
+ *   <li>{@link org.farhan.cucumber.Step#getText <em>Text</em>}</li>
  * </ul>
  *
  * @see org.farhan.cucumber.CucumberPackage#getStep()
@@ -67,5 +69,49 @@ public interface Step extends EObject
    * @generated
    */
   void setTitle(String value);
+
+  /**
+   * Returns the value of the '<em><b>Table</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Table</em>' containment reference.
+   * @see #setTable(Table)
+   * @see org.farhan.cucumber.CucumberPackage#getStep_Table()
+   * @model containment="true"
+   * @generated
+   */
+  Table getTable();
+
+  /**
+   * Sets the value of the '{@link org.farhan.cucumber.Step#getTable <em>Table</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Table</em>' containment reference.
+   * @see #getTable()
+   * @generated
+   */
+  void setTable(Table value);
+
+  /**
+   * Returns the value of the '<em><b>Text</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Text</em>' containment reference.
+   * @see #setText(DocString)
+   * @see org.farhan.cucumber.CucumberPackage#getStep_Text()
+   * @model containment="true"
+   * @generated
+   */
+  DocString getText();
+
+  /**
+   * Sets the value of the '{@link org.farhan.cucumber.Step#getText <em>Text</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Text</em>' containment reference.
+   * @see #getText()
+   * @generated
+   */
+  void setText(DocString value);
 
 } // Step

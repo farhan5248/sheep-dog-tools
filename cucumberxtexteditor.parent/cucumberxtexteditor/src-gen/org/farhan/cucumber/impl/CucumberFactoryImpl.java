@@ -69,6 +69,10 @@ public class CucumberFactoryImpl extends EFactoryImpl implements CucumberFactory
       case CucumberPackage.BACKGROUND: return createBackground();
       case CucumberPackage.SCENARIO: return createScenario();
       case CucumberPackage.STEP: return createStep();
+      case CucumberPackage.TABLE: return createTable();
+      case CucumberPackage.TABLE_ROW: return createTableRow();
+      case CucumberPackage.ROW_CELL: return createRowCell();
+      case CucumberPackage.DOC_STRING: return createDocString();
       case CucumberPackage.DESCRIPTION: return createDescription();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -121,6 +125,54 @@ public class CucumberFactoryImpl extends EFactoryImpl implements CucumberFactory
   {
     StepImpl step = new StepImpl();
     return step;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Table createTable()
+  {
+    TableImpl table = new TableImpl();
+    return table;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public TableRow createTableRow()
+  {
+    TableRowImpl tableRow = new TableRowImpl();
+    return tableRow;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public RowCell createRowCell()
+  {
+    RowCellImpl rowCell = new RowCellImpl();
+    return rowCell;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public DocString createDocString()
+  {
+    DocStringImpl docString = new DocStringImpl();
+    return docString;
   }
 
   /**

@@ -1,3 +1,4 @@
+'"""'=19
 '*'=14
 'And'=12
 'Background:'=16
@@ -7,9 +8,10 @@
 'Scenario:'=17
 'Then'=11
 'When'=10
+'|'=18
 RULE_COMMENT=8
-RULE_EOL=5
-RULE_TAG=4
+RULE_EOL=4
+RULE_TAG=5
 RULE_WORD=6
 RULE_WS=7
 T__10=10
@@ -20,4 +22,6 @@ T__14=14
 T__15=15
 T__16=16
 T__17=17
+T__18=18
+T__19=19
 T__9=9

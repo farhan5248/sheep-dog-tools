@@ -96,6 +96,26 @@ public class CucumberAdapterFactory extends AdapterFactoryImpl
         return createStepAdapter();
       }
       @Override
+      public Adapter caseTable(Table object)
+      {
+        return createTableAdapter();
+      }
+      @Override
+      public Adapter caseTableRow(TableRow object)
+      {
+        return createTableRowAdapter();
+      }
+      @Override
+      public Adapter caseRowCell(RowCell object)
+      {
+        return createRowCellAdapter();
+      }
+      @Override
+      public Adapter caseDocString(DocString object)
+      {
+        return createDocStringAdapter();
+      }
+      @Override
       public Adapter caseDescription(Description object)
       {
         return createDescriptionAdapter();
@@ -178,6 +198,66 @@ public class CucumberAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createStepAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.farhan.cucumber.Table <em>Table</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.cucumber.Table
+   * @generated
+   */
+  public Adapter createTableAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.farhan.cucumber.TableRow <em>Table Row</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.cucumber.TableRow
+   * @generated
+   */
+  public Adapter createTableRowAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.farhan.cucumber.RowCell <em>Row Cell</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.cucumber.RowCell
+   * @generated
+   */
+  public Adapter createRowCellAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.farhan.cucumber.DocString <em>Doc String</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.cucumber.DocString
+   * @generated
+   */
+  public Adapter createDocStringAdapter()
   {
     return null;
   }

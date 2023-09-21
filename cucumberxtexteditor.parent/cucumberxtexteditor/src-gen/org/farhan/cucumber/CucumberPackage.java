@@ -233,13 +233,134 @@ public interface CucumberPackage extends EPackage
   int STEP__TITLE = 1;
 
   /**
+   * The feature id for the '<em><b>Table</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STEP__TABLE = 2;
+
+  /**
+   * The feature id for the '<em><b>Text</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STEP__TEXT = 3;
+
+  /**
    * The number of structural features of the '<em>Step</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STEP_FEATURE_COUNT = 2;
+  int STEP_FEATURE_COUNT = 4;
+
+  /**
+   * The meta object id for the '{@link org.farhan.cucumber.impl.TableImpl <em>Table</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.farhan.cucumber.impl.TableImpl
+   * @see org.farhan.cucumber.impl.CucumberPackageImpl#getTable()
+   * @generated
+   */
+  int TABLE = 4;
+
+  /**
+   * The feature id for the '<em><b>Rows</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TABLE__ROWS = 0;
+
+  /**
+   * The number of structural features of the '<em>Table</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TABLE_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.farhan.cucumber.impl.TableRowImpl <em>Table Row</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.farhan.cucumber.impl.TableRowImpl
+   * @see org.farhan.cucumber.impl.CucumberPackageImpl#getTableRow()
+   * @generated
+   */
+  int TABLE_ROW = 5;
+
+  /**
+   * The feature id for the '<em><b>Cells</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TABLE_ROW__CELLS = 0;
+
+  /**
+   * The number of structural features of the '<em>Table Row</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TABLE_ROW_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.farhan.cucumber.impl.RowCellImpl <em>Row Cell</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.farhan.cucumber.impl.RowCellImpl
+   * @see org.farhan.cucumber.impl.CucumberPackageImpl#getRowCell()
+   * @generated
+   */
+  int ROW_CELL = 6;
+
+  /**
+   * The feature id for the '<em><b>Cell</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROW_CELL__CELL = 0;
+
+  /**
+   * The number of structural features of the '<em>Row Cell</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROW_CELL_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.farhan.cucumber.impl.DocStringImpl <em>Doc String</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.farhan.cucumber.impl.DocStringImpl
+   * @see org.farhan.cucumber.impl.CucumberPackageImpl#getDocString()
+   * @generated
+   */
+  int DOC_STRING = 7;
+
+  /**
+   * The number of structural features of the '<em>Doc String</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DOC_STRING_FEATURE_COUNT = 0;
 
   /**
    * The meta object id for the '{@link org.farhan.cucumber.impl.DescriptionImpl <em>Description</em>}' class.
@@ -249,7 +370,7 @@ public interface CucumberPackage extends EPackage
    * @see org.farhan.cucumber.impl.CucumberPackageImpl#getDescription()
    * @generated
    */
-  int DESCRIPTION = 4;
+  int DESCRIPTION = 8;
 
   /**
    * The feature id for the '<em><b>Sentences</b></em>' attribute list.
@@ -443,6 +564,101 @@ public interface CucumberPackage extends EPackage
   EAttribute getStep_Title();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.farhan.cucumber.Step#getTable <em>Table</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Table</em>'.
+   * @see org.farhan.cucumber.Step#getTable()
+   * @see #getStep()
+   * @generated
+   */
+  EReference getStep_Table();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.farhan.cucumber.Step#getText <em>Text</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Text</em>'.
+   * @see org.farhan.cucumber.Step#getText()
+   * @see #getStep()
+   * @generated
+   */
+  EReference getStep_Text();
+
+  /**
+   * Returns the meta object for class '{@link org.farhan.cucumber.Table <em>Table</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Table</em>'.
+   * @see org.farhan.cucumber.Table
+   * @generated
+   */
+  EClass getTable();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.farhan.cucumber.Table#getRows <em>Rows</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Rows</em>'.
+   * @see org.farhan.cucumber.Table#getRows()
+   * @see #getTable()
+   * @generated
+   */
+  EReference getTable_Rows();
+
+  /**
+   * Returns the meta object for class '{@link org.farhan.cucumber.TableRow <em>Table Row</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Table Row</em>'.
+   * @see org.farhan.cucumber.TableRow
+   * @generated
+   */
+  EClass getTableRow();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.farhan.cucumber.TableRow#getCells <em>Cells</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Cells</em>'.
+   * @see org.farhan.cucumber.TableRow#getCells()
+   * @see #getTableRow()
+   * @generated
+   */
+  EReference getTableRow_Cells();
+
+  /**
+   * Returns the meta object for class '{@link org.farhan.cucumber.RowCell <em>Row Cell</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Row Cell</em>'.
+   * @see org.farhan.cucumber.RowCell
+   * @generated
+   */
+  EClass getRowCell();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.farhan.cucumber.RowCell#getCell <em>Cell</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Cell</em>'.
+   * @see org.farhan.cucumber.RowCell#getCell()
+   * @see #getRowCell()
+   * @generated
+   */
+  EAttribute getRowCell_Cell();
+
+  /**
+   * Returns the meta object for class '{@link org.farhan.cucumber.DocString <em>Doc String</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Doc String</em>'.
+   * @see org.farhan.cucumber.DocString
+   * @generated
+   */
+  EClass getDocString();
+
+  /**
    * Returns the meta object for class '{@link org.farhan.cucumber.Description <em>Description</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -621,6 +837,86 @@ public interface CucumberPackage extends EPackage
      * @generated
      */
     EAttribute STEP__TITLE = eINSTANCE.getStep_Title();
+
+    /**
+     * The meta object literal for the '<em><b>Table</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STEP__TABLE = eINSTANCE.getStep_Table();
+
+    /**
+     * The meta object literal for the '<em><b>Text</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STEP__TEXT = eINSTANCE.getStep_Text();
+
+    /**
+     * The meta object literal for the '{@link org.farhan.cucumber.impl.TableImpl <em>Table</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.farhan.cucumber.impl.TableImpl
+     * @see org.farhan.cucumber.impl.CucumberPackageImpl#getTable()
+     * @generated
+     */
+    EClass TABLE = eINSTANCE.getTable();
+
+    /**
+     * The meta object literal for the '<em><b>Rows</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TABLE__ROWS = eINSTANCE.getTable_Rows();
+
+    /**
+     * The meta object literal for the '{@link org.farhan.cucumber.impl.TableRowImpl <em>Table Row</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.farhan.cucumber.impl.TableRowImpl
+     * @see org.farhan.cucumber.impl.CucumberPackageImpl#getTableRow()
+     * @generated
+     */
+    EClass TABLE_ROW = eINSTANCE.getTableRow();
+
+    /**
+     * The meta object literal for the '<em><b>Cells</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TABLE_ROW__CELLS = eINSTANCE.getTableRow_Cells();
+
+    /**
+     * The meta object literal for the '{@link org.farhan.cucumber.impl.RowCellImpl <em>Row Cell</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.farhan.cucumber.impl.RowCellImpl
+     * @see org.farhan.cucumber.impl.CucumberPackageImpl#getRowCell()
+     * @generated
+     */
+    EClass ROW_CELL = eINSTANCE.getRowCell();
+
+    /**
+     * The meta object literal for the '<em><b>Cell</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ROW_CELL__CELL = eINSTANCE.getRowCell_Cell();
+
+    /**
+     * The meta object literal for the '{@link org.farhan.cucumber.impl.DocStringImpl <em>Doc String</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.farhan.cucumber.impl.DocStringImpl
+     * @see org.farhan.cucumber.impl.CucumberPackageImpl#getDocString()
+     * @generated
+     */
+    EClass DOC_STRING = eINSTANCE.getDocString();
 
     /**
      * The meta object literal for the '{@link org.farhan.cucumber.impl.DescriptionImpl <em>Description</em>}' class.

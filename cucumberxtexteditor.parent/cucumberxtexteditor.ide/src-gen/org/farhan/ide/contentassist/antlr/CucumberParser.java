@@ -32,10 +32,15 @@ public class CucumberParser extends AbstractContentAssistParser {
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, CucumberGrammarAccess grammarAccess) {
 			builder.put(grammarAccess.getStepAccess().getKeywordAlternatives_0_0(), "rule__Step__KeywordAlternatives_0_0");
+			builder.put(grammarAccess.getStepAccess().getAlternatives_2(), "rule__Step__Alternatives_2");
 			builder.put(grammarAccess.getFeatureAccess().getGroup(), "rule__Feature__Group__0");
 			builder.put(grammarAccess.getBackgroundAccess().getGroup(), "rule__Background__Group__0");
 			builder.put(grammarAccess.getScenarioAccess().getGroup(), "rule__Scenario__Group__0");
 			builder.put(grammarAccess.getStepAccess().getGroup(), "rule__Step__Group__0");
+			builder.put(grammarAccess.getTableRowAccess().getGroup(), "rule__TableRow__Group__0");
+			builder.put(grammarAccess.getRowCellAccess().getGroup(), "rule__RowCell__Group__0");
+			builder.put(grammarAccess.getDocStringAccess().getGroup(), "rule__DocString__Group__0");
+			builder.put(grammarAccess.getDocStringAccess().getGroup_1(), "rule__DocString__Group_1__0");
 			builder.put(grammarAccess.getDescriptionAccess().getGroup(), "rule__Description__Group__0");
 			builder.put(grammarAccess.getTagsAccess().getGroup(), "rule__Tags__Group__0");
 			builder.put(grammarAccess.getSentenceAccess().getGroup(), "rule__Sentence__Group__0");
@@ -51,6 +56,11 @@ public class CucumberParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getScenarioAccess().getStepsAssignment_4(), "rule__Scenario__StepsAssignment_4");
 			builder.put(grammarAccess.getStepAccess().getKeywordAssignment_0(), "rule__Step__KeywordAssignment_0");
 			builder.put(grammarAccess.getStepAccess().getTitleAssignment_1(), "rule__Step__TitleAssignment_1");
+			builder.put(grammarAccess.getStepAccess().getTableAssignment_2_0(), "rule__Step__TableAssignment_2_0");
+			builder.put(grammarAccess.getStepAccess().getTextAssignment_2_1(), "rule__Step__TextAssignment_2_1");
+			builder.put(grammarAccess.getTableAccess().getRowsAssignment(), "rule__Table__RowsAssignment");
+			builder.put(grammarAccess.getTableRowAccess().getCellsAssignment_0(), "rule__TableRow__CellsAssignment_0");
+			builder.put(grammarAccess.getRowCellAccess().getCellAssignment_0(), "rule__RowCell__CellAssignment_0");
 			builder.put(grammarAccess.getDescriptionAccess().getSentencesAssignment_1(), "rule__Description__SentencesAssignment_1");
 		}
 	}
