@@ -22,17 +22,18 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalCucumberParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_EOL", "RULE_ID", "RULE_WS", "RULE_WORD", "'Given'", "'When'", "'Then'", "'And'", "'But'", "'*'", "'Feature:'", "'Background:'", "'Scenario:'", "'@'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_EOL", "RULE_ID", "RULE_WS", "RULE_WORD", "RULE_COMMENT", "'Given'", "'When'", "'Then'", "'And'", "'But'", "'*'", "'Feature:'", "'Background:'", "'Scenario:'", "'@'"
     };
     public static final int T__9=9;
-    public static final int T__8=8;
     public static final int RULE_ID=5;
     public static final int RULE_EOL=4;
     public static final int RULE_WS=6;
     public static final int RULE_WORD=7;
+    public static final int RULE_COMMENT=8;
     public static final int T__15=15;
     public static final int T__16=16;
     public static final int T__17=17;
+    public static final int T__18=18;
     public static final int T__11=11;
     public static final int T__12=12;
     public static final int T__13=13;
@@ -624,32 +625,32 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
             // InternalCucumber.g:231:1: ( ( 'Given' ) | ( 'When' ) | ( 'Then' ) | ( 'And' ) | ( 'But' ) | ( '*' ) )
             int alt1=6;
             switch ( input.LA(1) ) {
-            case 8:
+            case 9:
                 {
                 alt1=1;
                 }
                 break;
-            case 9:
+            case 10:
                 {
                 alt1=2;
                 }
                 break;
-            case 10:
+            case 11:
                 {
                 alt1=3;
                 }
                 break;
-            case 11:
+            case 12:
                 {
                 alt1=4;
                 }
                 break;
-            case 12:
+            case 13:
                 {
                 alt1=5;
                 }
                 break;
-            case 13:
+            case 14:
                 {
                 alt1=6;
                 }
@@ -669,7 +670,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
                     // InternalCucumber.g:233:3: 'Given'
                     {
                      before(grammarAccess.getStepAccess().getKeywordGivenKeyword_0_0_0()); 
-                    match(input,8,FOLLOW_2); 
+                    match(input,9,FOLLOW_2); 
                      after(grammarAccess.getStepAccess().getKeywordGivenKeyword_0_0_0()); 
 
                     }
@@ -684,7 +685,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
                     // InternalCucumber.g:239:3: 'When'
                     {
                      before(grammarAccess.getStepAccess().getKeywordWhenKeyword_0_0_1()); 
-                    match(input,9,FOLLOW_2); 
+                    match(input,10,FOLLOW_2); 
                      after(grammarAccess.getStepAccess().getKeywordWhenKeyword_0_0_1()); 
 
                     }
@@ -699,7 +700,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
                     // InternalCucumber.g:245:3: 'Then'
                     {
                      before(grammarAccess.getStepAccess().getKeywordThenKeyword_0_0_2()); 
-                    match(input,10,FOLLOW_2); 
+                    match(input,11,FOLLOW_2); 
                      after(grammarAccess.getStepAccess().getKeywordThenKeyword_0_0_2()); 
 
                     }
@@ -714,7 +715,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
                     // InternalCucumber.g:251:3: 'And'
                     {
                      before(grammarAccess.getStepAccess().getKeywordAndKeyword_0_0_3()); 
-                    match(input,11,FOLLOW_2); 
+                    match(input,12,FOLLOW_2); 
                      after(grammarAccess.getStepAccess().getKeywordAndKeyword_0_0_3()); 
 
                     }
@@ -729,7 +730,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
                     // InternalCucumber.g:257:3: 'But'
                     {
                      before(grammarAccess.getStepAccess().getKeywordButKeyword_0_0_4()); 
-                    match(input,12,FOLLOW_2); 
+                    match(input,13,FOLLOW_2); 
                      after(grammarAccess.getStepAccess().getKeywordButKeyword_0_0_4()); 
 
                     }
@@ -744,7 +745,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
                     // InternalCucumber.g:263:3: '*'
                     {
                      before(grammarAccess.getStepAccess().getKeywordAsteriskKeyword_0_0_5()); 
-                    match(input,13,FOLLOW_2); 
+                    match(input,14,FOLLOW_2); 
                      after(grammarAccess.getStepAccess().getKeywordAsteriskKeyword_0_0_5()); 
 
                     }
@@ -827,7 +828,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( (LA2_0==17) ) {
+                if ( (LA2_0==18) ) {
                     alt2=1;
                 }
 
@@ -999,7 +1000,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
             // InternalCucumber.g:344:2: 'Feature:'
             {
              before(grammarAccess.getFeatureAccess().getFeatureKeyword_2()); 
-            match(input,14,FOLLOW_2); 
+            match(input,15,FOLLOW_2); 
              after(grammarAccess.getFeatureAccess().getFeatureKeyword_2()); 
 
             }
@@ -1248,7 +1249,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==15) ) {
+            if ( (LA3_0==16) ) {
                 alt3=1;
             }
             switch (alt3) {
@@ -1341,7 +1342,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
                 int alt4=2;
                 int LA4_0 = input.LA(1);
 
-                if ( (LA4_0==RULE_EOL||LA4_0==17) ) {
+                if ( (LA4_0==RULE_EOL||LA4_0==18) ) {
                     alt4=1;
                 }
 
@@ -1438,7 +1439,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
             // InternalCucumber.g:479:2: 'Background:'
             {
              before(grammarAccess.getBackgroundAccess().getBackgroundKeyword_0()); 
-            match(input,15,FOLLOW_2); 
+            match(input,16,FOLLOW_2); 
              after(grammarAccess.getBackgroundAccess().getBackgroundKeyword_0()); 
 
             }
@@ -1684,7 +1685,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
                 int alt5=2;
                 int LA5_0 = input.LA(1);
 
-                if ( ((LA5_0>=8 && LA5_0<=13)) ) {
+                if ( ((LA5_0>=9 && LA5_0<=14)) ) {
                     alt5=1;
                 }
 
@@ -1787,7 +1788,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
                 int alt6=2;
                 int LA6_0 = input.LA(1);
 
-                if ( (LA6_0==17) ) {
+                if ( (LA6_0==18) ) {
                     alt6=1;
                 }
 
@@ -1959,7 +1960,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
             // InternalCucumber.g:641:2: 'Scenario:'
             {
              before(grammarAccess.getScenarioAccess().getScenarioKeyword_2()); 
-            match(input,16,FOLLOW_2); 
+            match(input,17,FOLLOW_2); 
              after(grammarAccess.getScenarioAccess().getScenarioKeyword_2()); 
 
             }
@@ -2205,7 +2206,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
                 int alt7=2;
                 int LA7_0 = input.LA(1);
 
-                if ( ((LA7_0>=8 && LA7_0<=13)) ) {
+                if ( ((LA7_0>=9 && LA7_0<=14)) ) {
                     alt7=1;
                 }
 
@@ -3664,7 +3665,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
             // InternalCucumber.g:1214:4: '@'
             {
              before(grammarAccess.getTagAccess().getTitleCommercialAtKeyword_0_0()); 
-            match(input,17,FOLLOW_2); 
+            match(input,18,FOLLOW_2); 
              after(grammarAccess.getTagAccess().getTitleCommercialAtKeyword_0_0()); 
 
             }
@@ -3698,15 +3699,15 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000020002L});
-    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000008000L});
     public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000028010L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000020012L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000003F00L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000003F02L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000020010L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000050010L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000040012L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000007E00L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000007E02L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000040010L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000020000L});
     public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000000082L});
     public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000000040L});

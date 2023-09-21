@@ -330,6 +330,7 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	private final SentenceElements pSentence;
 	private final TerminalRule tWS;
 	private final TerminalRule tEOL;
+	private final TerminalRule tCOMMENT;
 	private final TerminalRule tID;
 	private final TerminalRule tWORD;
 	
@@ -347,6 +348,7 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		this.pSentence = new SentenceElements();
 		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.WS");
 		this.tEOL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.EOL");
+		this.tCOMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.COMMENT");
 		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.ID");
 		this.tWORD = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.WORD");
 	}
@@ -469,6 +471,13 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	//    ('\r\n' | '\n')+;
 	public TerminalRule getEOLRule() {
 		return tEOL;
+	}
+	
+	//// Not in use currently
+	//terminal COMMENT:
+	//    WS? '#' !('\n' | '\r')*;
+	public TerminalRule getCOMMENTRule() {
+		return tCOMMENT;
 	}
 	
 	//// .. needs the ecore import

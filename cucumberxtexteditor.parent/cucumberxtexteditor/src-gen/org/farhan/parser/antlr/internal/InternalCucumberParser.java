@@ -21,17 +21,18 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalCucumberParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_EOL", "RULE_ID", "RULE_WS", "RULE_WORD", "'Feature:'", "'Background:'", "'Scenario:'", "'Given'", "'When'", "'Then'", "'And'", "'But'", "'*'", "'@'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_EOL", "RULE_ID", "RULE_WS", "RULE_WORD", "RULE_COMMENT", "'Feature:'", "'Background:'", "'Scenario:'", "'Given'", "'When'", "'Then'", "'And'", "'But'", "'*'", "'@'"
     };
     public static final int T__9=9;
-    public static final int T__8=8;
     public static final int RULE_ID=5;
     public static final int RULE_EOL=4;
     public static final int RULE_WS=6;
     public static final int RULE_WORD=7;
+    public static final int RULE_COMMENT=8;
     public static final int T__15=15;
     public static final int T__16=16;
     public static final int T__17=17;
+    public static final int T__18=18;
     public static final int T__11=11;
     public static final int T__12=12;
     public static final int T__13=13;
@@ -148,7 +149,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==17) ) {
+                if ( (LA1_0==18) ) {
                     alt1=1;
                 }
 
@@ -195,7 +196,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_EOL_1, grammarAccess.getFeatureAccess().getEOLTerminalRuleCall_1());
             		
-            otherlv_2=(Token)match(input,8,FOLLOW_5); 
+            otherlv_2=(Token)match(input,9,FOLLOW_5); 
 
             			newLeafNode(otherlv_2, grammarAccess.getFeatureAccess().getFeatureKeyword_2());
             		
@@ -265,7 +266,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
             int alt2=2;
             int LA2_0 = input.LA(1);
 
-            if ( (LA2_0==9) ) {
+            if ( (LA2_0==10) ) {
                 alt2=1;
             }
             switch (alt2) {
@@ -309,7 +310,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                 int alt3=2;
                 int LA3_0 = input.LA(1);
 
-                if ( (LA3_0==RULE_EOL||LA3_0==17) ) {
+                if ( (LA3_0==RULE_EOL||LA3_0==18) ) {
                     alt3=1;
                 }
 
@@ -433,7 +434,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
             // InternalCucumber.g:200:2: (otherlv_0= 'Background:' ( (lv_title_1_0= ruleSentence ) ) ( (lv_description_2_0= ruleDescription ) ) ( (lv_steps_3_0= ruleStep ) )* )
             // InternalCucumber.g:201:3: otherlv_0= 'Background:' ( (lv_title_1_0= ruleSentence ) ) ( (lv_description_2_0= ruleDescription ) ) ( (lv_steps_3_0= ruleStep ) )*
             {
-            otherlv_0=(Token)match(input,9,FOLLOW_5); 
+            otherlv_0=(Token)match(input,10,FOLLOW_5); 
 
             			newLeafNode(otherlv_0, grammarAccess.getBackgroundAccess().getBackgroundKeyword_0());
             		
@@ -505,7 +506,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                 int alt4=2;
                 int LA4_0 = input.LA(1);
 
-                if ( ((LA4_0>=11 && LA4_0<=16)) ) {
+                if ( ((LA4_0>=12 && LA4_0<=17)) ) {
                     alt4=1;
                 }
 
@@ -638,7 +639,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                 int alt5=2;
                 int LA5_0 = input.LA(1);
 
-                if ( (LA5_0==17) ) {
+                if ( (LA5_0==18) ) {
                     alt5=1;
                 }
 
@@ -685,7 +686,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_EOL_1, grammarAccess.getScenarioAccess().getEOLTerminalRuleCall_1());
             		
-            otherlv_2=(Token)match(input,10,FOLLOW_5); 
+            otherlv_2=(Token)match(input,11,FOLLOW_5); 
 
             			newLeafNode(otherlv_2, grammarAccess.getScenarioAccess().getScenarioKeyword_2());
             		
@@ -757,7 +758,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                 int alt6=2;
                 int LA6_0 = input.LA(1);
 
-                if ( ((LA6_0>=11 && LA6_0<=16)) ) {
+                if ( ((LA6_0>=12 && LA6_0<=17)) ) {
                     alt6=1;
                 }
 
@@ -891,32 +892,32 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
             // InternalCucumber.g:386:5: (lv_keyword_0_1= 'Given' | lv_keyword_0_2= 'When' | lv_keyword_0_3= 'Then' | lv_keyword_0_4= 'And' | lv_keyword_0_5= 'But' | lv_keyword_0_6= '*' )
             int alt7=6;
             switch ( input.LA(1) ) {
-            case 11:
+            case 12:
                 {
                 alt7=1;
                 }
                 break;
-            case 12:
+            case 13:
                 {
                 alt7=2;
                 }
                 break;
-            case 13:
+            case 14:
                 {
                 alt7=3;
                 }
                 break;
-            case 14:
+            case 15:
                 {
                 alt7=4;
                 }
                 break;
-            case 15:
+            case 16:
                 {
                 alt7=5;
                 }
                 break;
-            case 16:
+            case 17:
                 {
                 alt7=6;
                 }
@@ -932,7 +933,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // InternalCucumber.g:387:6: lv_keyword_0_1= 'Given'
                     {
-                    lv_keyword_0_1=(Token)match(input,11,FOLLOW_5); 
+                    lv_keyword_0_1=(Token)match(input,12,FOLLOW_5); 
 
                     						newLeafNode(lv_keyword_0_1, grammarAccess.getStepAccess().getKeywordGivenKeyword_0_0_0());
                     					
@@ -948,7 +949,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // InternalCucumber.g:398:6: lv_keyword_0_2= 'When'
                     {
-                    lv_keyword_0_2=(Token)match(input,12,FOLLOW_5); 
+                    lv_keyword_0_2=(Token)match(input,13,FOLLOW_5); 
 
                     						newLeafNode(lv_keyword_0_2, grammarAccess.getStepAccess().getKeywordWhenKeyword_0_0_1());
                     					
@@ -964,7 +965,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                 case 3 :
                     // InternalCucumber.g:409:6: lv_keyword_0_3= 'Then'
                     {
-                    lv_keyword_0_3=(Token)match(input,13,FOLLOW_5); 
+                    lv_keyword_0_3=(Token)match(input,14,FOLLOW_5); 
 
                     						newLeafNode(lv_keyword_0_3, grammarAccess.getStepAccess().getKeywordThenKeyword_0_0_2());
                     					
@@ -980,7 +981,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                 case 4 :
                     // InternalCucumber.g:420:6: lv_keyword_0_4= 'And'
                     {
-                    lv_keyword_0_4=(Token)match(input,14,FOLLOW_5); 
+                    lv_keyword_0_4=(Token)match(input,15,FOLLOW_5); 
 
                     						newLeafNode(lv_keyword_0_4, grammarAccess.getStepAccess().getKeywordAndKeyword_0_0_3());
                     					
@@ -996,7 +997,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                 case 5 :
                     // InternalCucumber.g:431:6: lv_keyword_0_5= 'But'
                     {
-                    lv_keyword_0_5=(Token)match(input,15,FOLLOW_5); 
+                    lv_keyword_0_5=(Token)match(input,16,FOLLOW_5); 
 
                     						newLeafNode(lv_keyword_0_5, grammarAccess.getStepAccess().getKeywordButKeyword_0_0_4());
                     					
@@ -1012,7 +1013,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                 case 6 :
                     // InternalCucumber.g:442:6: lv_keyword_0_6= '*'
                     {
-                    lv_keyword_0_6=(Token)match(input,16,FOLLOW_5); 
+                    lv_keyword_0_6=(Token)match(input,17,FOLLOW_5); 
 
                     						newLeafNode(lv_keyword_0_6, grammarAccess.getStepAccess().getKeywordAsteriskKeyword_0_0_5());
                     					
@@ -1284,7 +1285,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
             // InternalCucumber.g:539:4: (lv_title_0_0= '@' )
             // InternalCucumber.g:540:5: lv_title_0_0= '@'
             {
-            lv_title_0_0=(Token)match(input,17,FOLLOW_13); 
+            lv_title_0_0=(Token)match(input,18,FOLLOW_13); 
 
             					newLeafNode(lv_title_0_0, grammarAccess.getTagAccess().getTitleCommercialAtKeyword_0_0());
             				
@@ -1472,15 +1473,15 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000020010L});
-    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000040010L});
+    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000200L});
     public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000020290L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000020212L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000020012L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x000000000001F880L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x000000000001F802L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000040490L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000040412L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000040012L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x000000000003F080L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x000000000003F002L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000000800L});
     public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000000082L});
     public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000000042L});

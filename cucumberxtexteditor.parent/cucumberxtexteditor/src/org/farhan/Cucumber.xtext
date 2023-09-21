@@ -45,9 +45,14 @@ terminal WS:
 terminal EOL:
 	('\r\n' | '\n')+;
 
+// Not in use currently
+terminal COMMENT:
+	WS? '#' !('\n' | '\r')*;
+
 // .. needs the ecore import
 terminal ID:
 	('a'..'z' | 'A'..'Z' | '0'..'9' | "'")+;
 
 terminal WORD:
 	WS ID;
+

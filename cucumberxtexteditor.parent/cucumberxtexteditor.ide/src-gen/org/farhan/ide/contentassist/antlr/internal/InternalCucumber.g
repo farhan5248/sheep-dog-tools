@@ -1226,6 +1226,8 @@ RULE_WS : (' '|'\t')+;
 
 RULE_EOL : ('\r\n'|'\n')+;
 
+RULE_COMMENT : RULE_WS? '#' ~(('\n'|'\r'))*;
+
 RULE_ID : ('a'..'z'|'A'..'Z'|'0'..'9'|'\'')+;
 
 RULE_WORD : RULE_WS RULE_ID;
