@@ -1,0 +1,86 @@
+grammar org.farhan.Cucumber hidden(WS, COMMENT)
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+generate cucumber "http://www.farhan.org/Cucumber"
+
+Feature:
+	Tags
+	'Feature:' title=Sentence
+	description=Description
+	background=Background?
+	// this is a 0 or more list of Scenario
+	(scenarios+=(Scenario|ScenarioOutline))*;
+
+Background:
+	'Background:' title=Sentence
+	description=Description
+	// this is a 0 or more list of Step
+	(steps+=Step)*;
+
+Scenario:
+	Tags
+	'Scenario:' title=Sentence
+	description=Description
+	// this is a 0 or more list of Step
+	(steps+=Step)*;
+
+ScenarioOutline:
+	Tags
+	'Scenario Outline:' title=Sentence
+	description=Description
+	// this is a 0 or more list of Step
+	(steps+=Step)*
+	(examples+=Example+);
+	
+Example:
+	Tags
+	'Examples:'
+	title=Sentence
+	description=Description
+	table=Table;	
+	
+Step:
+	keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence
+	(table=Table | text=DocString)?;
+
+Table:
+	rows+=TableRow+;
+
+TableRow:
+	cells+=RowCell+ '|' EOL;
+
+RowCell:
+	cell='|' Sentence;
+
+DocString:
+	{DocString}
+    '"""' EOL Sentence* '"""' EOL;
+
+// make this optional
+Description:
+	{Description} (sentences+=Sentence)*;
+
+Tags:
+	TAG* EOL?;
+
+Sentence:
+	WORD+ EOL?;
+
+terminal WS:
+	(' ' | '\t')+;
+
+terminal EOL:
+	('\r' | '\n')+;
+
+// single line comment
+terminal COMMENT:
+	'#' !('\r' | '\n')* EOL;
+
+// .. needs the ecore import
+// need to add punctuation and commas etc
+// this covers Given When Then and might create problems?
+terminal WORD:
+	!('@' | '|' | ' ' | '\t' | '\n' | '\r')+;
+
+terminal TAG:
+	'@' WORD;
