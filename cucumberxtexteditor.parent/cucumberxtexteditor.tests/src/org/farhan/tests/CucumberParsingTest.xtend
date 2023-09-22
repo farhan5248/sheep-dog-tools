@@ -18,28 +18,35 @@ import org.farhan.validation.CucumberValidator
 @ExtendWith(InjectionExtension)
 @InjectWith(CucumberInjectorProvider)
 class CucumberParsingTest {
-	@Inject
-	ParseHelper<Feature> parseHelper
 
-	@Inject ValidationTestHelper validationTestHelper
+	@Inject extension ParseHelper<Feature>
+
+	@Inject extension ValidationTestHelper
 
 	@Test
-	def void loadModel() {
-		val result = parseHelper.parse('''
+	def testValidModel() {
+		'''
 			Feature: Basic scenario Test
 			This tests basic feature file grammar
 			
 			Scenario: Demo of all keywords
-			Given the current state
-			When the input is sen
-			Then the state changes
-			And the output is blah
-			But this means nothing
-		''')
-		Assertions.assertNotNull(result)
-		val errors = result.eResource.errors
-		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+			Given The current state
+			When The input is sen
+			Then The state changes
+			And The output is blah
+			But This means nothing
+		'''.parse.assertNoIssues
 	}
 
+	@Test
+	def testNameStartsWithCapitalWarning() {
+		'''
+			Feature: basic scenario Test
+		'''.parse.assertWarning(
+			CucumberPackage.Literals.FEATURE,
+			CucumberValidator.INVALID_NAME,
+			"Name should start with a capital"
+		)
+	}
 
 }
