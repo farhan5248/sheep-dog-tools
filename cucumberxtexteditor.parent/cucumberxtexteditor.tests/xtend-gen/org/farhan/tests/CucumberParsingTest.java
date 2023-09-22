@@ -11,6 +11,7 @@ import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.testing.CompilationTestHelper;
 import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Feature;
 import org.farhan.validation.CucumberValidator;
@@ -28,6 +29,10 @@ public class CucumberParsingTest {
   @Inject
   @Extension
   private ValidationTestHelper _validationTestHelper;
+
+  @Inject
+  @Extension
+  private CompilationTestHelper _compilationTestHelper;
 
   @Test
   public void testValidModel() {
@@ -66,6 +71,27 @@ public class CucumberParsingTest {
         CucumberPackage.Literals.FEATURE, 
         CucumberValidator.INVALID_NAME, 
         "Name should start with a capital");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void test() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("Feature: basic scenario Test");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package temp;");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("public class basic scenario Test {");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this._compilationTestHelper.assertCompilesTo(_builder, _builder_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

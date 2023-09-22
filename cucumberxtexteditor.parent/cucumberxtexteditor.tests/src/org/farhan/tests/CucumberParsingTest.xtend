@@ -14,6 +14,7 @@ import org.junit.jupiter.api.^extension.ExtendWith
 import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.farhan.cucumber.CucumberPackage
 import org.farhan.validation.CucumberValidator
+import org.eclipse.xtext.xbase.testing.CompilationTestHelper
 
 @ExtendWith(InjectionExtension)
 @InjectWith(CucumberInjectorProvider)
@@ -23,8 +24,10 @@ class CucumberParsingTest {
 
 	@Inject extension ValidationTestHelper
 
+	@Inject extension CompilationTestHelper
+
 	@Test
-	def testValidModel() {
+	def testParser() {
 		'''
 			Feature: Basic scenario Test
 			This tests basic feature file grammar
@@ -39,7 +42,7 @@ class CucumberParsingTest {
 	}
 
 	@Test
-	def testNameStartsWithCapitalWarning() {
+	def testValidator() {
 		'''
 			Feature: basic scenario Test
 		'''.parse.assertWarning(
@@ -49,4 +52,16 @@ class CucumberParsingTest {
 		)
 	}
 
+	@Test
+	def testCompiler() {
+		'''
+			Feature: basic scenario Test
+		'''.assertCompilesTo('''
+			package temp;
+			
+			public class basic scenario Test {
+			
+			}
+		''')
+	}
 }
