@@ -87,10 +87,18 @@ public class CucumberSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case CucumberPackage.ABSTRACT_SCENARIO:
+      {
+        AbstractScenario abstractScenario = (AbstractScenario)theEObject;
+        T result = caseAbstractScenario(abstractScenario);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case CucumberPackage.SCENARIO:
       {
         Scenario scenario = (Scenario)theEObject;
         T result = caseScenario(scenario);
+        if (result == null) result = caseAbstractScenario(scenario);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -98,6 +106,7 @@ public class CucumberSwitch<T> extends Switch<T>
       {
         ScenarioOutline scenarioOutline = (ScenarioOutline)theEObject;
         T result = caseScenarioOutline(scenarioOutline);
+        if (result == null) result = caseAbstractScenario(scenarioOutline);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -182,6 +191,22 @@ public class CucumberSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseBackground(Background object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Abstract Scenario</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Abstract Scenario</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAbstractScenario(AbstractScenario object)
   {
     return null;
   }

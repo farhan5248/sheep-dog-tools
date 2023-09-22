@@ -5,42 +5,42 @@ generate cucumber "http://www.farhan.org/Cucumber"
 
 Feature:
 	Tags
-	'Feature:' title=Sentence
+	'Feature:' title=Sentence EOL?
 	description=Description
 	background=Background?
-	// this is a 0 or more list of Scenario
-	(scenarios+=(Scenario|ScenarioOutline))*;
+	(scenarios+=AbstractScenario)*;
 
 Background:
-	'Background:' title=Sentence
+	'Background:' title=Sentence EOL?
 	description=Description
-	// this is a 0 or more list of Step
 	(steps+=Step)*;
+
+AbstractScenario:
+	ScenarioOutline | Scenario;
 
 Scenario:
 	Tags
-	'Scenario:' title=Sentence
+	'Scenario:' title=Sentence EOL?
 	description=Description
-	// this is a 0 or more list of Step
 	(steps+=Step)*;
 
 ScenarioOutline:
 	Tags
-	'Scenario Outline:' title=Sentence
+	'Scenario Outline:' title=Sentence EOL?
 	description=Description
 	// this is a 0 or more list of Step
 	(steps+=Step)*
 	(examples+=Example+);
-	
+
 Example:
 	Tags
 	'Examples:'
-	title=Sentence
+	title=Sentence EOL?
 	description=Description
-	table=Table;	
-	
+	table=Table;
+
 Step:
-	keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence
+	keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence EOL?
 	(table=Table | text=DocString)?;
 
 Table:
@@ -54,17 +54,17 @@ RowCell:
 
 DocString:
 	{DocString}
-    '"""' EOL Sentence* '"""' EOL;
+	'"""' (Sentence | EOL)* '"""' EOL;
 
 // make this optional
 Description:
-	{Description} (sentences+=Sentence)*;
+	{Description} (sentences+=Sentence EOL?)*;
 
 Tags:
 	TAG* EOL?;
 
 Sentence:
-	WORD+ EOL?;
+	WORD+;
 
 terminal WS:
 	(' ' | '\t')+;
