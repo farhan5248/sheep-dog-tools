@@ -10,6 +10,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
 import org.eclipse.xtext.testing.util.ParseHelper;
+import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.farhan.cucumber.Feature;
@@ -24,11 +25,29 @@ public class CucumberParsingTest {
   @Inject
   private ParseHelper<Feature> parseHelper;
 
+  @Inject
+  private ValidationTestHelper validationTestHelper;
+
   @Test
   public void loadModel() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Hello Xtext!");
+      _builder.append("Feature: Basic scenario Test");
+      _builder.newLine();
+      _builder.append("This tests basic feature file grammar");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("Scenario: Demo of all keywords");
+      _builder.newLine();
+      _builder.append("Given the current state");
+      _builder.newLine();
+      _builder.append("When the input is sen");
+      _builder.newLine();
+      _builder.append("Then the state changes");
+      _builder.newLine();
+      _builder.append("And the output is blah");
+      _builder.newLine();
+      _builder.append("But this means nothing");
       _builder.newLine();
       final Feature result = this.parseHelper.parse(_builder);
       Assertions.assertNotNull(result);

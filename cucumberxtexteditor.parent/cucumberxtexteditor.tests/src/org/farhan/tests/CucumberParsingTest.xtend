@@ -11,20 +11,35 @@ import org.farhan.cucumber.Feature
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
+import org.farhan.cucumber.CucumberPackage
+import org.farhan.validation.CucumberValidator
 
 @ExtendWith(InjectionExtension)
 @InjectWith(CucumberInjectorProvider)
 class CucumberParsingTest {
 	@Inject
 	ParseHelper<Feature> parseHelper
-	
+
+	@Inject ValidationTestHelper validationTestHelper
+
 	@Test
 	def void loadModel() {
 		val result = parseHelper.parse('''
-			Hello Xtext!
+			Feature: Basic scenario Test
+			This tests basic feature file grammar
+			
+			Scenario: Demo of all keywords
+			Given the current state
+			When the input is sen
+			Then the state changes
+			And the output is blah
+			But this means nothing
 		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
 		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
 	}
+
+
 }
