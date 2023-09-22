@@ -5,7 +5,6 @@ package org.farhan.cucumber.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -13,17 +12,12 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.farhan.cucumber.CucumberPackage;
-import org.farhan.cucumber.Description;
 import org.farhan.cucumber.Example;
 import org.farhan.cucumber.ScenarioOutline;
-import org.farhan.cucumber.Step;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,56 +27,13 @@ import org.farhan.cucumber.Step;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cucumber.impl.ScenarioOutlineImpl#getTitle <em>Title</em>}</li>
- *   <li>{@link org.farhan.cucumber.impl.ScenarioOutlineImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link org.farhan.cucumber.impl.ScenarioOutlineImpl#getSteps <em>Steps</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.ScenarioOutlineImpl#getExamples <em>Examples</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ScenarioOutlineImpl extends MinimalEObjectImpl.Container implements ScenarioOutline
+public class ScenarioOutlineImpl extends AbstractScenarioImpl implements ScenarioOutline
 {
-  /**
-   * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTitle()
-   * @generated
-   * @ordered
-   */
-  protected static final String TITLE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTitle()
-   * @generated
-   * @ordered
-   */
-  protected String title = TITLE_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDescription()
-   * @generated
-   * @ordered
-   */
-  protected Description description;
-
-  /**
-   * The cached value of the '{@link #getSteps() <em>Steps</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getSteps()
-   * @generated
-   * @ordered
-   */
-  protected EList<Step> steps;
-
   /**
    * The cached value of the '{@link #getExamples() <em>Examples</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -120,96 +71,6 @@ public class ScenarioOutlineImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public String getTitle()
-  {
-    return title;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setTitle(String newTitle)
-  {
-    String oldTitle = title;
-    title = newTitle;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.SCENARIO_OUTLINE__TITLE, oldTitle, title));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Description getDescription()
-  {
-    return description;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetDescription(Description newDescription, NotificationChain msgs)
-  {
-    Description oldDescription = description;
-    description = newDescription;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CucumberPackage.SCENARIO_OUTLINE__DESCRIPTION, oldDescription, newDescription);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setDescription(Description newDescription)
-  {
-    if (newDescription != description)
-    {
-      NotificationChain msgs = null;
-      if (description != null)
-        msgs = ((InternalEObject)description).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.SCENARIO_OUTLINE__DESCRIPTION, null, msgs);
-      if (newDescription != null)
-        msgs = ((InternalEObject)newDescription).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.SCENARIO_OUTLINE__DESCRIPTION, null, msgs);
-      msgs = basicSetDescription(newDescription, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.SCENARIO_OUTLINE__DESCRIPTION, newDescription, newDescription));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<Step> getSteps()
-  {
-    if (steps == null)
-    {
-      steps = new EObjectContainmentEList<Step>(Step.class, this, CucumberPackage.SCENARIO_OUTLINE__STEPS);
-    }
-    return steps;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EList<Example> getExamples()
   {
     if (examples == null)
@@ -229,10 +90,6 @@ public class ScenarioOutlineImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case CucumberPackage.SCENARIO_OUTLINE__DESCRIPTION:
-        return basicSetDescription(null, msgs);
-      case CucumberPackage.SCENARIO_OUTLINE__STEPS:
-        return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
       case CucumberPackage.SCENARIO_OUTLINE__EXAMPLES:
         return ((InternalEList<?>)getExamples()).basicRemove(otherEnd, msgs);
     }
@@ -249,12 +106,6 @@ public class ScenarioOutlineImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case CucumberPackage.SCENARIO_OUTLINE__TITLE:
-        return getTitle();
-      case CucumberPackage.SCENARIO_OUTLINE__DESCRIPTION:
-        return getDescription();
-      case CucumberPackage.SCENARIO_OUTLINE__STEPS:
-        return getSteps();
       case CucumberPackage.SCENARIO_OUTLINE__EXAMPLES:
         return getExamples();
     }
@@ -272,16 +123,6 @@ public class ScenarioOutlineImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case CucumberPackage.SCENARIO_OUTLINE__TITLE:
-        setTitle((String)newValue);
-        return;
-      case CucumberPackage.SCENARIO_OUTLINE__DESCRIPTION:
-        setDescription((Description)newValue);
-        return;
-      case CucumberPackage.SCENARIO_OUTLINE__STEPS:
-        getSteps().clear();
-        getSteps().addAll((Collection<? extends Step>)newValue);
-        return;
       case CucumberPackage.SCENARIO_OUTLINE__EXAMPLES:
         getExamples().clear();
         getExamples().addAll((Collection<? extends Example>)newValue);
@@ -300,15 +141,6 @@ public class ScenarioOutlineImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case CucumberPackage.SCENARIO_OUTLINE__TITLE:
-        setTitle(TITLE_EDEFAULT);
-        return;
-      case CucumberPackage.SCENARIO_OUTLINE__DESCRIPTION:
-        setDescription((Description)null);
-        return;
-      case CucumberPackage.SCENARIO_OUTLINE__STEPS:
-        getSteps().clear();
-        return;
       case CucumberPackage.SCENARIO_OUTLINE__EXAMPLES:
         getExamples().clear();
         return;
@@ -326,33 +158,10 @@ public class ScenarioOutlineImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case CucumberPackage.SCENARIO_OUTLINE__TITLE:
-        return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
-      case CucumberPackage.SCENARIO_OUTLINE__DESCRIPTION:
-        return description != null;
-      case CucumberPackage.SCENARIO_OUTLINE__STEPS:
-        return steps != null && !steps.isEmpty();
       case CucumberPackage.SCENARIO_OUTLINE__EXAMPLES:
         return examples != null && !examples.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (title: ");
-    result.append(title);
-    result.append(')');
-    return result.toString();
   }
 
 } //ScenarioOutlineImpl

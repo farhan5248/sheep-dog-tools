@@ -321,10 +321,10 @@ public class InternalCucumberLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:989:9: ( ( ' ' | '\\t' )+ )
-            // InternalCucumber.g:989:11: ( ' ' | '\\t' )+
+            // InternalCucumber.g:1041:9: ( ( ' ' | '\\t' )+ )
+            // InternalCucumber.g:1041:11: ( ' ' | '\\t' )+
             {
-            // InternalCucumber.g:989:11: ( ' ' | '\\t' )+
+            // InternalCucumber.g:1041:11: ( ' ' | '\\t' )+
             int cnt1=0;
             loop1:
             do {
@@ -378,10 +378,10 @@ public class InternalCucumberLexer extends Lexer {
         try {
             int _type = RULE_EOL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:991:10: ( ( '\\r' | '\\n' )+ )
-            // InternalCucumber.g:991:12: ( '\\r' | '\\n' )+
+            // InternalCucumber.g:1043:10: ( ( '\\r' | '\\n' )+ )
+            // InternalCucumber.g:1043:12: ( '\\r' | '\\n' )+
             {
-            // InternalCucumber.g:991:12: ( '\\r' | '\\n' )+
+            // InternalCucumber.g:1043:12: ( '\\r' | '\\n' )+
             int cnt2=0;
             loop2:
             do {
@@ -435,11 +435,11 @@ public class InternalCucumberLexer extends Lexer {
         try {
             int _type = RULE_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:993:14: ( '#' (~ ( ( '\\r' | '\\n' ) ) )* RULE_EOL )
-            // InternalCucumber.g:993:16: '#' (~ ( ( '\\r' | '\\n' ) ) )* RULE_EOL
+            // InternalCucumber.g:1045:14: ( '#' (~ ( ( '\\r' | '\\n' ) ) )* RULE_EOL )
+            // InternalCucumber.g:1045:16: '#' (~ ( ( '\\r' | '\\n' ) ) )* RULE_EOL
             {
             match('#'); 
-            // InternalCucumber.g:993:20: (~ ( ( '\\r' | '\\n' ) ) )*
+            // InternalCucumber.g:1045:20: (~ ( ( '\\r' | '\\n' ) ) )*
             loop3:
             do {
                 int alt3=2;
@@ -452,7 +452,7 @@ public class InternalCucumberLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalCucumber.g:993:20: ~ ( ( '\\r' | '\\n' ) )
+            	    // InternalCucumber.g:1045:20: ~ ( ( '\\r' | '\\n' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -489,10 +489,10 @@ public class InternalCucumberLexer extends Lexer {
         try {
             int _type = RULE_WORD;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:995:11: ( (~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) ) )+ )
-            // InternalCucumber.g:995:13: (~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) ) )+
+            // InternalCucumber.g:1047:11: ( (~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) ) )+ )
+            // InternalCucumber.g:1047:13: (~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) ) )+
             {
-            // InternalCucumber.g:995:13: (~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) ) )+
+            // InternalCucumber.g:1047:13: (~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) ) )+
             int cnt4=0;
             loop4:
             do {
@@ -506,7 +506,7 @@ public class InternalCucumberLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalCucumber.g:995:13: ~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) )
+            	    // InternalCucumber.g:1047:13: ~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\b')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\u001F')||(input.LA(1)>='!' && input.LA(1)<='?')||(input.LA(1)>='A' && input.LA(1)<='{')||(input.LA(1)>='}' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -546,8 +546,8 @@ public class InternalCucumberLexer extends Lexer {
         try {
             int _type = RULE_TAG;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:997:10: ( '@' RULE_WORD )
-            // InternalCucumber.g:997:12: '@' RULE_WORD
+            // InternalCucumber.g:1049:10: ( '@' RULE_WORD )
+            // InternalCucumber.g:1049:12: '@' RULE_WORD
             {
             match('@'); 
             mRULE_WORD(); 

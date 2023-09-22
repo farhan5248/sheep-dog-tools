@@ -142,8 +142,8 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getExampleAccess().getTitleSentenceParserRuleCall_2_0(), semanticObject.getTitle());
-		feeder.accept(grammarAccess.getExampleAccess().getDescriptionDescriptionParserRuleCall_3_0(), semanticObject.getDescription());
-		feeder.accept(grammarAccess.getExampleAccess().getTableTableParserRuleCall_4_0(), semanticObject.getTable());
+		feeder.accept(grammarAccess.getExampleAccess().getDescriptionDescriptionParserRuleCall_4_0(), semanticObject.getDescription());
+		feeder.accept(grammarAccess.getExampleAccess().getTableTableParserRuleCall_5_0(), semanticObject.getTable());
 		feeder.finish();
 	}
 	
@@ -154,7 +154,7 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Feature returns Feature
 	 *
 	 * Constraint:
-	 *     (title=Sentence description=Description background=Background? (scenarios+=Scenario | scenarios+=ScenarioOutline)*)
+	 *     (title=Sentence description=Description background=Background? scenarios+=AbstractScenario*)
 	 * </pre>
 	 */
 	protected void sequence_Feature(ISerializationContext context, Feature semanticObject) {
@@ -185,6 +185,7 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     AbstractScenario returns ScenarioOutline
 	 *     ScenarioOutline returns ScenarioOutline
 	 *
 	 * Constraint:
@@ -199,6 +200,7 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     AbstractScenario returns Scenario
 	 *     Scenario returns Scenario
 	 *
 	 * Constraint:

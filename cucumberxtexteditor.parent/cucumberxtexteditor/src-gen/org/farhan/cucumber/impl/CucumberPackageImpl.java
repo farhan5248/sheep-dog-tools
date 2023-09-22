@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.Background;
 import org.farhan.cucumber.CucumberFactory;
 import org.farhan.cucumber.CucumberPackage;
@@ -45,6 +46,13 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   private EClass backgroundEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass abstractScenarioEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -276,42 +284,53 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
+  public EClass getAbstractScenario()
+  {
+    return abstractScenarioEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getAbstractScenario_Title()
+  {
+    return (EAttribute)abstractScenarioEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getAbstractScenario_Description()
+  {
+    return (EReference)abstractScenarioEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getAbstractScenario_Steps()
+  {
+    return (EReference)abstractScenarioEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getScenario()
   {
     return scenarioEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getScenario_Title()
-  {
-    return (EAttribute)scenarioEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getScenario_Description()
-  {
-    return (EReference)scenarioEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getScenario_Steps()
-  {
-    return (EReference)scenarioEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -331,42 +350,9 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EAttribute getScenarioOutline_Title()
-  {
-    return (EAttribute)scenarioOutlineEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getScenarioOutline_Description()
-  {
-    return (EReference)scenarioOutlineEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getScenarioOutline_Steps()
-  {
-    return (EReference)scenarioOutlineEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EReference getScenarioOutline_Examples()
   {
-    return (EReference)scenarioOutlineEClass.getEStructuralFeatures().get(3);
+    return (EReference)scenarioOutlineEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -609,15 +595,14 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
     createEReference(backgroundEClass, BACKGROUND__DESCRIPTION);
     createEReference(backgroundEClass, BACKGROUND__STEPS);
 
+    abstractScenarioEClass = createEClass(ABSTRACT_SCENARIO);
+    createEAttribute(abstractScenarioEClass, ABSTRACT_SCENARIO__TITLE);
+    createEReference(abstractScenarioEClass, ABSTRACT_SCENARIO__DESCRIPTION);
+    createEReference(abstractScenarioEClass, ABSTRACT_SCENARIO__STEPS);
+
     scenarioEClass = createEClass(SCENARIO);
-    createEAttribute(scenarioEClass, SCENARIO__TITLE);
-    createEReference(scenarioEClass, SCENARIO__DESCRIPTION);
-    createEReference(scenarioEClass, SCENARIO__STEPS);
 
     scenarioOutlineEClass = createEClass(SCENARIO_OUTLINE);
-    createEAttribute(scenarioOutlineEClass, SCENARIO_OUTLINE__TITLE);
-    createEReference(scenarioOutlineEClass, SCENARIO_OUTLINE__DESCRIPTION);
-    createEReference(scenarioOutlineEClass, SCENARIO_OUTLINE__STEPS);
     createEReference(scenarioOutlineEClass, SCENARIO_OUTLINE__EXAMPLES);
 
     exampleEClass = createEClass(EXAMPLE);
@@ -675,28 +660,29 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    scenarioEClass.getESuperTypes().add(this.getAbstractScenario());
+    scenarioOutlineEClass.getESuperTypes().add(this.getAbstractScenario());
 
     // Initialize classes and features; add operations and parameters
     initEClass(featureEClass, Feature.class, "Feature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getFeature_Title(), ecorePackage.getEString(), "title", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFeature_Description(), this.getDescription(), null, "description", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFeature_Background(), this.getBackground(), null, "background", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFeature_Scenarios(), ecorePackage.getEObject(), null, "scenarios", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFeature_Scenarios(), this.getAbstractScenario(), null, "scenarios", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(backgroundEClass, Background.class, "Background", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getBackground_Title(), ecorePackage.getEString(), "title", null, 0, 1, Background.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getBackground_Description(), this.getDescription(), null, "description", null, 0, 1, Background.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getBackground_Steps(), this.getStep(), null, "steps", null, 0, -1, Background.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(abstractScenarioEClass, AbstractScenario.class, "AbstractScenario", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAbstractScenario_Title(), ecorePackage.getEString(), "title", null, 0, 1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAbstractScenario_Description(), this.getDescription(), null, "description", null, 0, 1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAbstractScenario_Steps(), this.getStep(), null, "steps", null, 0, -1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(scenarioEClass, Scenario.class, "Scenario", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getScenario_Title(), ecorePackage.getEString(), "title", null, 0, 1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getScenario_Description(), this.getDescription(), null, "description", null, 0, 1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getScenario_Steps(), this.getStep(), null, "steps", null, 0, -1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(scenarioOutlineEClass, ScenarioOutline.class, "ScenarioOutline", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getScenarioOutline_Title(), ecorePackage.getEString(), "title", null, 0, 1, ScenarioOutline.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getScenarioOutline_Description(), this.getDescription(), null, "description", null, 0, 1, ScenarioOutline.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getScenarioOutline_Steps(), this.getStep(), null, "steps", null, 0, -1, ScenarioOutline.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getScenarioOutline_Examples(), this.getExample(), null, "examples", null, 0, -1, ScenarioOutline.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(exampleEClass, Example.class, "Example", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

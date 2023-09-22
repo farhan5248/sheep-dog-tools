@@ -42,6 +42,15 @@ public interface CucumberFactory extends EFactory
   Background createBackground();
 
   /**
+   * Returns a new object of class '<em>Abstract Scenario</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Abstract Scenario</em>'.
+   * @generated
+   */
+  AbstractScenario createAbstractScenario();
+
+  /**
    * Returns a new object of class '<em>Scenario</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

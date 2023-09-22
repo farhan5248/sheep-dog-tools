@@ -67,6 +67,7 @@ public class CucumberFactoryImpl extends EFactoryImpl implements CucumberFactory
     {
       case CucumberPackage.FEATURE: return createFeature();
       case CucumberPackage.BACKGROUND: return createBackground();
+      case CucumberPackage.ABSTRACT_SCENARIO: return createAbstractScenario();
       case CucumberPackage.SCENARIO: return createScenario();
       case CucumberPackage.SCENARIO_OUTLINE: return createScenarioOutline();
       case CucumberPackage.EXAMPLE: return createExample();
@@ -103,6 +104,18 @@ public class CucumberFactoryImpl extends EFactoryImpl implements CucumberFactory
   {
     BackgroundImpl background = new BackgroundImpl();
     return background;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public AbstractScenario createAbstractScenario()
+  {
+    AbstractScenarioImpl abstractScenario = new AbstractScenarioImpl();
+    return abstractScenario;
   }
 
   /**
