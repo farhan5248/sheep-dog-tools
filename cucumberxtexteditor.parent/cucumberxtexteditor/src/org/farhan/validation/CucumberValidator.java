@@ -3,23 +3,44 @@
  */
 package org.farhan.validation;
 
+import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.CheckType;
+import org.farhan.cucumber.CucumberPackage;
+import org.farhan.cucumber.Feature;
+import org.farhan.cucumber.Step;
 
 /**
- * This class contains custom validation rules. 
+ * This class contains custom validation rules.
  *
- * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
+ * See
+ * https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 public class CucumberValidator extends AbstractCucumberValidator {
-	
-//	public static final String INVALID_NAME = "invalidName";
-//
-//	@Check
-//	public void checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.getName().charAt(0))) {
-//			warning("Name should start with a capital",
-//					CucumberPackage.Literals.GREETING__NAME,
-//					INVALID_NAME);
-//		}
-//	}
-	
+
+	public static final String INVALID_NAME = "invalidName";
+
+	// This one is to check each step
+	@Check(CheckType.FAST)
+	public void checkStep(Step step) {
+		if (!Character.isUpperCase(step.getTitle().charAt(0))) {
+			warning("Step name should start with a capital", CucumberPackage.Literals.FEATURE__TITLE, INVALID_NAME);
+		}
+	}
+
+	// This one is to check each scenario
+	@Check(CheckType.NORMAL)
+	public void checkScenario(Step scenario) {
+		if (!Character.isUpperCase(scenario.getTitle().charAt(0))) {
+			warning("Scenario name should start with a capital", CucumberPackage.Literals.FEATURE__TITLE, INVALID_NAME);
+		}
+	}
+
+	// This one is to run the conversion to a UML model
+	@Check(CheckType.EXPENSIVE)
+	public void checkFeature(Feature feature) {
+		if (!Character.isUpperCase(feature.getTitle().charAt(0))) {
+			warning("Feature name should start with a capital", CucumberPackage.Literals.FEATURE__TITLE, INVALID_NAME);
+		}
+	}
+
 }
