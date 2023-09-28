@@ -4,8 +4,12 @@
 package org.farhan.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+import org.farhan.ui.syntaxcoloring.CucumberAntlrTokenToAttributeIdMapper;
 import org.farhan.ui.syntaxcoloring.CucumberHighlightingConfiguration;
+import org.farhan.ui.syntaxcoloring.CucumberSemanticHighlightingCalculator;
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
@@ -19,4 +23,14 @@ public class CucumberUiModule extends AbstractCucumberUiModule {
 	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
 		return CucumberHighlightingConfiguration.class;
 	}
+
+	public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
+		return CucumberAntlrTokenToAttributeIdMapper.class;
+	}
+
+	/*
+	 * public Class<? extends ISemanticHighlightingCalculator>
+	 * bindISemanticHighlightingCalculator() { return
+	 * CucumberSemanticHighlightingCalculator.class; }
+	 */
 }

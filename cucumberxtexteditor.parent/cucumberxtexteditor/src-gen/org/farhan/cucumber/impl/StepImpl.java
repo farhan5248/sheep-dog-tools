@@ -25,7 +25,6 @@ import org.farhan.cucumber.Table;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cucumber.impl.StepImpl#getKeyword <em>Keyword</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.StepImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.StepImpl#getTable <em>Table</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.StepImpl#getText <em>Text</em>}</li>
@@ -35,26 +34,6 @@ import org.farhan.cucumber.Table;
  */
 public class StepImpl extends MinimalEObjectImpl.Container implements Step
 {
-  /**
-   * The default value of the '{@link #getKeyword() <em>Keyword</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getKeyword()
-   * @generated
-   * @ordered
-   */
-  protected static final String KEYWORD_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getKeyword() <em>Keyword</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getKeyword()
-   * @generated
-   * @ordered
-   */
-  protected String keyword = KEYWORD_EDEFAULT;
-
   /**
    * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -114,31 +93,6 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
   protected EClass eStaticClass()
   {
     return CucumberPackage.Literals.STEP;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getKeyword()
-  {
-    return keyword;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setKeyword(String newKeyword)
-  {
-    String oldKeyword = keyword;
-    keyword = newKeyword;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.STEP__KEYWORD, oldKeyword, keyword));
   }
 
   /**
@@ -294,8 +248,6 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
   {
     switch (featureID)
     {
-      case CucumberPackage.STEP__KEYWORD:
-        return getKeyword();
       case CucumberPackage.STEP__TITLE:
         return getTitle();
       case CucumberPackage.STEP__TABLE:
@@ -316,9 +268,6 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
   {
     switch (featureID)
     {
-      case CucumberPackage.STEP__KEYWORD:
-        setKeyword((String)newValue);
-        return;
       case CucumberPackage.STEP__TITLE:
         setTitle((String)newValue);
         return;
@@ -342,9 +291,6 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
   {
     switch (featureID)
     {
-      case CucumberPackage.STEP__KEYWORD:
-        setKeyword(KEYWORD_EDEFAULT);
-        return;
       case CucumberPackage.STEP__TITLE:
         setTitle(TITLE_EDEFAULT);
         return;
@@ -368,8 +314,6 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
   {
     switch (featureID)
     {
-      case CucumberPackage.STEP__KEYWORD:
-        return KEYWORD_EDEFAULT == null ? keyword != null : !KEYWORD_EDEFAULT.equals(keyword);
       case CucumberPackage.STEP__TITLE:
         return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
       case CucumberPackage.STEP__TABLE:
@@ -391,9 +335,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (keyword: ");
-    result.append(keyword);
-    result.append(", title: ");
+    result.append(" (title: ");
     result.append(title);
     result.append(')');
     return result.toString();

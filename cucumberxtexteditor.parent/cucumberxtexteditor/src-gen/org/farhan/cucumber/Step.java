@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cucumber.Step#getKeyword <em>Keyword</em>}</li>
  *   <li>{@link org.farhan.cucumber.Step#getTitle <em>Title</em>}</li>
  *   <li>{@link org.farhan.cucumber.Step#getTable <em>Table</em>}</li>
  *   <li>{@link org.farhan.cucumber.Step#getText <em>Text</em>}</li>
@@ -26,28 +25,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Step extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Keyword</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Keyword</em>' attribute.
-   * @see #setKeyword(String)
-   * @see org.farhan.cucumber.CucumberPackage#getStep_Keyword()
-   * @model
-   * @generated
-   */
-  String getKeyword();
-
-  /**
-   * Sets the value of the '{@link org.farhan.cucumber.Step#getKeyword <em>Keyword</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Keyword</em>' attribute.
-   * @see #getKeyword()
-   * @generated
-   */
-  void setKeyword(String value);
-
   /**
    * Returns the value of the '<em><b>Title</b></em>' attribute.
    * <!-- begin-user-doc -->

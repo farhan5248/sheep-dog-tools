@@ -42,7 +42,7 @@ public class CucumberSemanticHighlightingCalculator extends DefaultSemanticHighl
 		for (Step step : steps) {
 			INode node = NodeModelUtils.getNode(step);
 			acceptor.addPosition(node.getOffset(), node.getText().trim().indexOf(" "),
-					CucumberHighlightingConfiguration.KEYWORD_ID);
+					CucumberHighlightingConfiguration.KEYWORD_GWT_ID);
 			if (step.eContainer() instanceof ScenarioOutline && step.getTitle() != null) {
 				this.provideHighlightingForPlaceholders(node.getText(), node, 0, acceptor);
 			}
@@ -55,7 +55,7 @@ public class CucumberSemanticHighlightingCalculator extends DefaultSemanticHighl
 		int stop = description.indexOf('>', start);
 		if (start > 0 && stop > 0 && description.charAt(start + 1) != ' ') {
 			acceptor.addPosition(node.getTotalOffset() + start, stop - start + 1,
-					CucumberHighlightingConfiguration.PARAMETER);
+					CucumberHighlightingConfiguration.PARAMETER_ID);
 			this.provideHighlightingForPlaceholders(description, node, stop + 1, acceptor);
 		}
 	}

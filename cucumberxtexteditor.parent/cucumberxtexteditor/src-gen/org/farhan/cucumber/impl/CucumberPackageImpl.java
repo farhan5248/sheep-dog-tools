@@ -416,7 +416,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EAttribute getStep_Keyword()
+  public EAttribute getStep_Title()
   {
     return (EAttribute)stepEClass.getEStructuralFeatures().get(0);
   }
@@ -427,20 +427,9 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EAttribute getStep_Title()
-  {
-    return (EAttribute)stepEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EReference getStep_Table()
   {
-    return (EReference)stepEClass.getEStructuralFeatures().get(2);
+    return (EReference)stepEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -451,7 +440,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
   @Override
   public EReference getStep_Text()
   {
-    return (EReference)stepEClass.getEStructuralFeatures().get(3);
+    return (EReference)stepEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -611,7 +600,6 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
     createEReference(exampleEClass, EXAMPLE__TABLE);
 
     stepEClass = createEClass(STEP);
-    createEAttribute(stepEClass, STEP__KEYWORD);
     createEAttribute(stepEClass, STEP__TITLE);
     createEReference(stepEClass, STEP__TABLE);
     createEReference(stepEClass, STEP__TEXT);
@@ -691,7 +679,6 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
     initEReference(getExample_Table(), this.getTable(), null, "table", null, 0, 1, Example.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stepEClass, Step.class, "Step", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getStep_Keyword(), ecorePackage.getEString(), "keyword", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getStep_Title(), ecorePackage.getEString(), "title", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getStep_Table(), this.getTable(), null, "table", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getStep_Text(), this.getDocString(), null, "text", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
