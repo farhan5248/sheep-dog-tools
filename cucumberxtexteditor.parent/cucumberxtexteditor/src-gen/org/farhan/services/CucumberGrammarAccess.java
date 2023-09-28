@@ -821,7 +821,6 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return tCOMMENT;
 	}
 	
-	//// .. needs the ecore import
 	//// need to add punctuation and commas etc
 	//// this covers Given When Then and might create problems?
 	//terminal WORD:
