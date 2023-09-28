@@ -54,7 +54,6 @@ public class CucumberFormatter extends AbstractJavaFormatter {
 	protected void format(Background background, IFormattableDocument doc) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references,
 		// etc.
-		System.out.println("Formatting the background");
 		doc.format(background.getDescription());
 		for (Step step : background.getSteps()) {
 			doc.format(step);
