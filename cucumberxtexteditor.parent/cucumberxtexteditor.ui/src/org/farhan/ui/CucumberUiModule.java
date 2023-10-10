@@ -28,9 +28,8 @@ public class CucumberUiModule extends AbstractCucumberUiModule {
 		return CucumberAntlrTokenToAttributeIdMapper.class;
 	}
 
-	/*
-	 * public Class<? extends ISemanticHighlightingCalculator>
-	 * bindISemanticHighlightingCalculator() { return
-	 * CucumberSemanticHighlightingCalculator.class; }
-	 */
+	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+		return CucumberSemanticHighlightingCalculator.class;
+	}
+
 }

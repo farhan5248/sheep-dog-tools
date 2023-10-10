@@ -26,7 +26,7 @@ public class CucumberHighlightingConfiguration implements IHighlightingConfigura
 		acceptor.acceptDefaultHighlighting(KEYWORD_GWT_ID, "Keyword GWT", keywordGivenWhenThenTextStyle());
 		acceptor.acceptDefaultHighlighting(COMMENT_ID, "Comment", commentTextStyle());
 		acceptor.acceptDefaultHighlighting(STRING_ID, "String", stringTextStyle());
-		acceptor.acceptDefaultHighlighting(PARAMETER_ID, "Parameter", stringTextStyle());
+		acceptor.acceptDefaultHighlighting(PARAMETER_ID, "Parameter", parameterTextStyle());
 		acceptor.acceptDefaultHighlighting(TAG_ID, "Tag", tagTextStyle());
 		acceptor.acceptDefaultHighlighting(DOC_ID, "Document", documentTextStyle());
 	}
