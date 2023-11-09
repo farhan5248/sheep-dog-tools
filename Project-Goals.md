@@ -29,4 +29,4 @@ Like you don't need to ask a developer to read the code to tell you what they sy
 How would I trust that it's trained well enough? 
 I'd keep increasing the number of test cases/ training data (thanks to an MBT tool) until the AI gets it right. 
 Also I'd first just use it as a massive knowledge base internally before putting it into production.
-Lastly, I'd run it in production along side the current system and just feed it data from the previous night.
+Lastly, I'd run it in production along side the current system and just feed it data from the previous night and compare the outputs.
