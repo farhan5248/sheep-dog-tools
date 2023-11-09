@@ -32,11 +32,12 @@ public class CucumberFormatter extends AbstractJavaFormatter {
 		ISemanticRegion titleRegion = regionFor(feature).feature(CucumberPackage.Literals.FEATURE__TITLE);
 
 		doc.prepend(titleRegion, it -> {
-			it.setSpace(" ");
+			it.oneSpace();
+			//it.noSpace();
+			//it.setSpace(" ");
 		});
 		doc.append(titleRegion, it -> {
 			it.noSpace();
-			// TODO add one new line
 		});
 
 		// doc.interior(begin, end, it -> { it.setNewLines(2); });
