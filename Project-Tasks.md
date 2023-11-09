@@ -1,10 +1,8 @@
 # Project Tasks
 
-- [ ] https://github.com/farhan5248/claims-adjudication-ai/issues/9
-
 This page describes the relationships between all the issues in the 4 Projects associated with this repo
 
-Let's assume a team is doing BDD, someone writes some feature files and someone else then codes the test automation.
+Let's assume a team is already doing BDD, someone writes some feature files and someone else then codes the test automation.
 What I'm explaining here is what I told my team are the reasons for adopting and learning the following.
 
 ## Language Engineering with Cucumber and Eclipse Xtext
@@ -14,11 +12,18 @@ What I'm explaining here is what I told my team are the reasons for adopting and
 If the feature files have a formal syntax, then you can generate code for test automation automatically. 
 MBT generates code and tests, but if you get this far, you can at least generate the code as manual testers in my QA team did.
 
+- [ ] [Restructure Xtext Project by changing the mwe file](https://github.com/farhan5248/claims-adjudication-ai/issues/14)
+- [ ] [Fix Xtext Editor Format](https://github.com/farhan5248/claims-adjudication-ai/issues/3)
+- [ ] [Fix Xtext Editor Warnings](https://github.com/farhan5248/claims-adjudication-ai/issues/2)
+
 ### Code Maintenance
 
 Before my team migrated to Cucumber, they were on Robot Framework and manually created the 2nd and 3rd layer page object files. 
 They wound up with duplicate keywords like "click the button", "click on the button", "click button" etc. 
 By controlling the grammar and deriving the 2nd and 3rd layer page object files, we eliminated problems like these and others I can't recall right now :P
+
+- [ ] [Xtext Compile code should trigger Java code creation using Java Parser](https://github.com/farhan5248/claims-adjudication-ai/issues/9)
+- [ ] [Xtext Validate code should trigger UML model creation using EMF](https://github.com/farhan5248/claims-adjudication-ai/issues/8)
 
 ### Deriving Graph Models
 
