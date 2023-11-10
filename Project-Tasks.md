@@ -12,18 +12,22 @@ What I'm explaining here is what I told my team are the reasons for adopting and
 If the feature files have a formal syntax, then you can generate code for test automation automatically. 
 MBT generates code and tests, but if you get this far, you can at least generate the code as manual testers in my QA team did once they started using Cucumber or even Robot Framework.
 
-- [ ] [Restructure Xtext Project by changing the mwe file](https://github.com/farhan5248/claims-adjudication-ai/issues/14)
-- [ ] [Fix Xtext Editor Format](https://github.com/farhan5248/claims-adjudication-ai/issues/3)
-- [ ] [Fix Xtext Editor Warnings](https://github.com/farhan5248/claims-adjudication-ai/issues/2)
+- [ ] [Change Xtext Editor Formatting to Match Eclipse Cucumber Plug-In](https://github.com/farhan5248/claims-adjudication-ai/issues/3)
+- [ ] [Fix Xtext Editor Build Warnings](https://github.com/farhan5248/claims-adjudication-ai/issues/2)
+- [ ] [Add Statement Validation for Given When Then Using Regular Expressions](https://github.com/farhan5248/claims-adjudication-ai/issues/16)
+- [ ] [Build Xtext Project As Maven Plug-in](https://github.com/farhan5248/claims-adjudication-ai/issues/15)
+- [ ] [Restructure Xtext Project to Standard Maven Structure](https://github.com/farhan5248/claims-adjudication-ai/issues/14)
+- [ ] [Move Statement Validation for Given When Then To Language Definition](https://github.com/farhan5248/claims-adjudication-ai/issues/17)
 
 ### Code Maintenance
 
 Before my team migrated to Cucumber, they were on Robot Framework and manually created the 2nd and 3rd layer page object files for a long time.
 They wound up with duplicate keywords like "click the button", "click on the button", "click button" etc. 
 By controlling the grammar and deriving the 2nd and 3rd layer page object files, we eliminated problems like these and others I can't recall right now :P
+This was basically supposed to be code completion. By seeing other keywords that already existed, they wouldn't make new ones.
 
-- [ ] [Xtext Compile code should trigger Java code creation using Java Parser](https://github.com/farhan5248/claims-adjudication-ai/issues/9)
 - [ ] [Xtext Validate code should trigger UML model creation using EMF](https://github.com/farhan5248/claims-adjudication-ai/issues/8)
+- [ ] [Xtext Compile code should trigger Java code creation using Java Parser](https://github.com/farhan5248/claims-adjudication-ai/issues/9)
 
 ### Deriving Graph Models
 
