@@ -1,0 +1,9 @@
+grammar org.farhan.cukefsm.CucumberFSM with org.eclipse.xtext.common.Terminals
+
+generate cucumberFSM "http://www.farhan.org/cukefsm/CucumberFSM"
+
+Model:
+	greetings+=Greeting*;
+	
+Greeting:
+	'Hello' name=ID '!';
