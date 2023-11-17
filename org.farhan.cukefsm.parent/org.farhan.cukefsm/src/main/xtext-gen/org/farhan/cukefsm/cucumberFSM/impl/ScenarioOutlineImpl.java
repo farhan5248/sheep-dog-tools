@@ -12,46 +12,44 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.farhan.cukefsm.cucumberFSM.CucumberFSMPackage;
-import org.farhan.cukefsm.cucumberFSM.Greeting;
-import org.farhan.cukefsm.cucumberFSM.Model;
+import org.farhan.cukefsm.cucumberFSM.Example;
+import org.farhan.cukefsm.cucumberFSM.ScenarioOutline;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Model</b></em>'.
+ * An implementation of the model object '<em><b>Scenario Outline</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cukefsm.cucumberFSM.impl.ModelImpl#getGreetings <em>Greetings</em>}</li>
+ *   <li>{@link org.farhan.cukefsm.cucumberFSM.impl.ScenarioOutlineImpl#getExamples <em>Examples</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ModelImpl extends MinimalEObjectImpl.Container implements Model
+public class ScenarioOutlineImpl extends AbstractScenarioImpl implements ScenarioOutline
 {
   /**
-   * The cached value of the '{@link #getGreetings() <em>Greetings</em>}' containment reference list.
+   * The cached value of the '{@link #getExamples() <em>Examples</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getGreetings()
+   * @see #getExamples()
    * @generated
    * @ordered
    */
-  protected EList<Greeting> greetings;
+  protected EList<Example> examples;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ModelImpl()
+  protected ScenarioOutlineImpl()
   {
     super();
   }
@@ -64,7 +62,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   @Override
   protected EClass eStaticClass()
   {
-    return CucumberFSMPackage.Literals.MODEL;
+    return CucumberFSMPackage.Literals.SCENARIO_OUTLINE;
   }
 
   /**
@@ -73,13 +71,13 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @generated
    */
   @Override
-  public EList<Greeting> getGreetings()
+  public EList<Example> getExamples()
   {
-    if (greetings == null)
+    if (examples == null)
     {
-      greetings = new EObjectContainmentEList<Greeting>(Greeting.class, this, CucumberFSMPackage.MODEL__GREETINGS);
+      examples = new EObjectContainmentEList<Example>(Example.class, this, CucumberFSMPackage.SCENARIO_OUTLINE__EXAMPLES);
     }
-    return greetings;
+    return examples;
   }
 
   /**
@@ -92,8 +90,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case CucumberFSMPackage.MODEL__GREETINGS:
-        return ((InternalEList<?>)getGreetings()).basicRemove(otherEnd, msgs);
+      case CucumberFSMPackage.SCENARIO_OUTLINE__EXAMPLES:
+        return ((InternalEList<?>)getExamples()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -108,8 +106,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case CucumberFSMPackage.MODEL__GREETINGS:
-        return getGreetings();
+      case CucumberFSMPackage.SCENARIO_OUTLINE__EXAMPLES:
+        return getExamples();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -125,9 +123,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case CucumberFSMPackage.MODEL__GREETINGS:
-        getGreetings().clear();
-        getGreetings().addAll((Collection<? extends Greeting>)newValue);
+      case CucumberFSMPackage.SCENARIO_OUTLINE__EXAMPLES:
+        getExamples().clear();
+        getExamples().addAll((Collection<? extends Example>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,8 +141,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case CucumberFSMPackage.MODEL__GREETINGS:
-        getGreetings().clear();
+      case CucumberFSMPackage.SCENARIO_OUTLINE__EXAMPLES:
+        getExamples().clear();
         return;
     }
     super.eUnset(featureID);
@@ -160,10 +158,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case CucumberFSMPackage.MODEL__GREETINGS:
-        return greetings != null && !greetings.isEmpty();
+      case CucumberFSMPackage.SCENARIO_OUTLINE__EXAMPLES:
+        return examples != null && !examples.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //ModelImpl
+} //ScenarioOutlineImpl

@@ -3,57 +3,50 @@
  */
 package org.farhan.cukefsm.cucumberFSM.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import java.util.Collection;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeEList;
+
 import org.farhan.cukefsm.cucumberFSM.CucumberFSMPackage;
-import org.farhan.cukefsm.cucumberFSM.Greeting;
+import org.farhan.cukefsm.cucumberFSM.Description;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Greeting</b></em>'.
+ * An implementation of the model object '<em><b>Description</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cukefsm.cucumberFSM.impl.GreetingImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.cukefsm.cucumberFSM.impl.DescriptionImpl#getSentences <em>Sentences</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeting
+public class DescriptionImpl extends MinimalEObjectImpl.Container implements Description
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getSentences() <em>Sentences</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getSentences()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
+  protected EList<String> sentences;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected GreetingImpl()
+  protected DescriptionImpl()
   {
     super();
   }
@@ -66,7 +59,7 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
   @Override
   protected EClass eStaticClass()
   {
-    return CucumberFSMPackage.Literals.GREETING;
+    return CucumberFSMPackage.Literals.DESCRIPTION;
   }
 
   /**
@@ -75,23 +68,13 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
    * @generated
    */
   @Override
-  public String getName()
+  public EList<String> getSentences()
   {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberFSMPackage.GREETING__NAME, oldName, name));
+    if (sentences == null)
+    {
+      sentences = new EDataTypeEList<String>(String.class, this, CucumberFSMPackage.DESCRIPTION__SENTENCES);
+    }
+    return sentences;
   }
 
   /**
@@ -104,8 +87,8 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
   {
     switch (featureID)
     {
-      case CucumberFSMPackage.GREETING__NAME:
-        return getName();
+      case CucumberFSMPackage.DESCRIPTION__SENTENCES:
+        return getSentences();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -115,13 +98,15 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case CucumberFSMPackage.GREETING__NAME:
-        setName((String)newValue);
+      case CucumberFSMPackage.DESCRIPTION__SENTENCES:
+        getSentences().clear();
+        getSentences().addAll((Collection<? extends String>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,8 +122,8 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
   {
     switch (featureID)
     {
-      case CucumberFSMPackage.GREETING__NAME:
-        setName(NAME_EDEFAULT);
+      case CucumberFSMPackage.DESCRIPTION__SENTENCES:
+        getSentences().clear();
         return;
     }
     super.eUnset(featureID);
@@ -154,8 +139,8 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
   {
     switch (featureID)
     {
-      case CucumberFSMPackage.GREETING__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case CucumberFSMPackage.DESCRIPTION__SENTENCES:
+        return sentences != null && !sentences.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -171,10 +156,10 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (name: ");
-    result.append(name);
+    result.append(" (sentences: ");
+    result.append(sentences);
     result.append(')');
     return result.toString();
   }
 
-} //GreetingImpl
+} //DescriptionImpl

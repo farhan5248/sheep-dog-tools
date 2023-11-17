@@ -7,7 +7,7 @@ import com.google.inject.Inject
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.extensions.InjectionExtension
 import org.eclipse.xtext.testing.util.ParseHelper
-import org.farhan.cukefsm.cucumberFSM.Model
+import org.farhan.cukefsm.cucumberFSM.Feature
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
@@ -16,12 +16,12 @@ import org.junit.jupiter.api.^extension.ExtendWith
 @InjectWith(CucumberFSMInjectorProvider)
 class CucumberFSMParsingTest {
 	@Inject
-	ParseHelper<Model> parseHelper
+	ParseHelper<Feature> parseHelper
 	
 	@Test
 	def void loadModel() {
 		val result = parseHelper.parse('''
-			Hello Xtext!
+			Feature: Hello World
 		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors

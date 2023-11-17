@@ -12,7 +12,7 @@ import org.eclipse.xtext.testing.extensions.InjectionExtension;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.farhan.cukefsm.cucumberFSM.Model;
+import org.farhan.cukefsm.cucumberFSM.Feature;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,15 +22,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @SuppressWarnings("all")
 public class CucumberFSMParsingTest {
   @Inject
-  private ParseHelper<Model> parseHelper;
+  private ParseHelper<Feature> parseHelper;
 
   @Test
   public void loadModel() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Hello Xtext!");
+      _builder.append("Feature: Hello World");
       _builder.newLine();
-      final Model result = this.parseHelper.parse(_builder);
+      final Feature result = this.parseHelper.parse(_builder);
       Assertions.assertNotNull(result);
       final EList<Resource.Diagnostic> errors = result.eResource().getErrors();
       boolean _isEmpty = errors.isEmpty();

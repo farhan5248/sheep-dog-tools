@@ -1,15 +1,69 @@
-grammar org.farhan.cukefsm.CucumberFSM 
+grammar org.farhan.cukefsm.CucumberFSM hidden(WS, COMMENT)
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
-
 generate cucumberFSM "http://www.farhan.org/cukefsm/CucumberFSM"
 
-Model:
-	greetings+=Greeting*;
-	
-Greeting:
-	'Hello' name=WORD '!';
-	
+Feature:
+	Tags
+	'Feature:' title=Sentence EOL?
+	description=Description
+	background=Background?
+	(scenarios+=AbstractScenario)*;
+
+Background:
+	'Background:' title=Sentence EOL?
+	description=Description
+	(steps+=Step)*;
+
+AbstractScenario:
+	ScenarioOutline | Scenario;
+
+Scenario:
+	Tags
+	'Scenario:' title=Sentence EOL?
+	description=Description
+	(steps+=Step)*;
+
+ScenarioOutline:
+	Tags
+	'Scenario Outline:' title=Sentence EOL?
+	description=Description
+	(steps+=Step)*
+	(examples+=Example+);
+
+Example:
+	Tags
+	'Examples:' title=Sentence EOL?
+	description=Description
+	table=Table;
+
+Step:
+	('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence EOL?
+	(table=Table | text=DocString)?;
+
+Table:
+	rows+=TableRow+;
+
+TableRow:
+	cells+=RowCell+ '|' EOL;
+
+RowCell:
+	cell='|' Sentence;
+
+DocString:
+	{DocString}
+	'"""' (Sentence | EOL)* '"""' EOL;
+
+// make this optional
+Description:
+	{Description} (sentences+=Sentence EOL?)*;
+
+Tags:
+	TAG* EOL?;
+
+Sentence:
+	WORD+;
+
 terminal WS:
 	(' ' | '\t')+;
 
@@ -26,4 +80,4 @@ terminal WORD:
 	!('@' | '|' | ' ' | '\t' | '\n' | '\r')+;
 
 terminal TAG:
-	'@' WORD;	
+	'@' WORD;

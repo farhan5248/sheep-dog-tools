@@ -10,6 +10,9 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
+import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.farhan.cukefsm.services.CucumberFSMGrammarAccess;
@@ -18,17 +21,70 @@ import org.farhan.cukefsm.services.CucumberFSMGrammarAccess;
 public class CucumberFSMSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected CucumberFSMGrammarAccess grammarAccess;
+	protected AbstractElementAlias match_Background_EOLTerminalRuleCall_2_q;
+	protected AbstractElementAlias match_Description_EOLTerminalRuleCall_1_1_q;
+	protected AbstractElementAlias match_DocString___EOLTerminalRuleCall_2_1_or_SentenceParserRuleCall_2_0__a;
+	protected AbstractElementAlias match_Example_EOLTerminalRuleCall_3_q;
+	protected AbstractElementAlias match_Feature_EOLTerminalRuleCall_3_q;
+	protected AbstractElementAlias match_ScenarioOutline_EOLTerminalRuleCall_3_q;
+	protected AbstractElementAlias match_Scenario_EOLTerminalRuleCall_3_q;
+	protected AbstractElementAlias match_Step_AndKeyword_0_3_or_AsteriskKeyword_0_5_or_ButKeyword_0_4_or_GivenKeyword_0_0_or_ThenKeyword_0_2_or_WhenKeyword_0_1;
+	protected AbstractElementAlias match_Step_EOLTerminalRuleCall_2_q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (CucumberFSMGrammarAccess) access;
+		match_Background_EOLTerminalRuleCall_2_q = new TokenAlias(false, true, grammarAccess.getBackgroundAccess().getEOLTerminalRuleCall_2());
+		match_Description_EOLTerminalRuleCall_1_1_q = new TokenAlias(false, true, grammarAccess.getDescriptionAccess().getEOLTerminalRuleCall_1_1());
+		match_DocString___EOLTerminalRuleCall_2_1_or_SentenceParserRuleCall_2_0__a = new AlternativeAlias(true, true, new TokenAlias(false, false, grammarAccess.getDocStringAccess().getEOLTerminalRuleCall_2_1()), new TokenAlias(false, false, grammarAccess.getDocStringAccess().getSentenceParserRuleCall_2_0()));
+		match_Example_EOLTerminalRuleCall_3_q = new TokenAlias(false, true, grammarAccess.getExampleAccess().getEOLTerminalRuleCall_3());
+		match_Feature_EOLTerminalRuleCall_3_q = new TokenAlias(false, true, grammarAccess.getFeatureAccess().getEOLTerminalRuleCall_3());
+		match_ScenarioOutline_EOLTerminalRuleCall_3_q = new TokenAlias(false, true, grammarAccess.getScenarioOutlineAccess().getEOLTerminalRuleCall_3());
+		match_Scenario_EOLTerminalRuleCall_3_q = new TokenAlias(false, true, grammarAccess.getScenarioAccess().getEOLTerminalRuleCall_3());
+		match_Step_AndKeyword_0_3_or_AsteriskKeyword_0_5_or_ButKeyword_0_4_or_GivenKeyword_0_0_or_ThenKeyword_0_2_or_WhenKeyword_0_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getStepAccess().getAndKeyword_0_3()), new TokenAlias(false, false, grammarAccess.getStepAccess().getAsteriskKeyword_0_5()), new TokenAlias(false, false, grammarAccess.getStepAccess().getButKeyword_0_4()), new TokenAlias(false, false, grammarAccess.getStepAccess().getGivenKeyword_0_0()), new TokenAlias(false, false, grammarAccess.getStepAccess().getThenKeyword_0_2()), new TokenAlias(false, false, grammarAccess.getStepAccess().getWhenKeyword_0_1()));
+		match_Step_EOLTerminalRuleCall_2_q = new TokenAlias(false, true, grammarAccess.getStepAccess().getEOLTerminalRuleCall_2());
 	}
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (ruleCall.getRule() == grammarAccess.getEOLRule())
+			return getEOLToken(semanticObject, ruleCall, node);
+		else if (ruleCall.getRule() == grammarAccess.getSentenceRule())
+			return getSentenceToken(semanticObject, ruleCall, node);
+		else if (ruleCall.getRule() == grammarAccess.getTagsRule())
+			return getTagsToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
+	/**
+	 * terminal EOL:
+	 * 	('\r' | '\n')+;
+	 */
+	protected String getEOLToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "\r";
+	}
+	
+	/**
+	 * Sentence:
+	 * 	WORD+;
+	 */
+	protected String getSentenceToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "";
+	}
+	
+	/**
+	 * Tags:
+	 * 	TAG* EOL?;
+	 */
+	protected String getTagsToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "";
+	}
 	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
@@ -36,8 +92,162 @@ public class CucumberFSMSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			acceptNodes(getLastNavigableState(), syntaxNodes);
+			if (match_Background_EOLTerminalRuleCall_2_q.equals(syntax))
+				emit_Background_EOLTerminalRuleCall_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Description_EOLTerminalRuleCall_1_1_q.equals(syntax))
+				emit_Description_EOLTerminalRuleCall_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_DocString___EOLTerminalRuleCall_2_1_or_SentenceParserRuleCall_2_0__a.equals(syntax))
+				emit_DocString___EOLTerminalRuleCall_2_1_or_SentenceParserRuleCall_2_0__a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Example_EOLTerminalRuleCall_3_q.equals(syntax))
+				emit_Example_EOLTerminalRuleCall_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Feature_EOLTerminalRuleCall_3_q.equals(syntax))
+				emit_Feature_EOLTerminalRuleCall_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_ScenarioOutline_EOLTerminalRuleCall_3_q.equals(syntax))
+				emit_ScenarioOutline_EOLTerminalRuleCall_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Scenario_EOLTerminalRuleCall_3_q.equals(syntax))
+				emit_Scenario_EOLTerminalRuleCall_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Step_AndKeyword_0_3_or_AsteriskKeyword_0_5_or_ButKeyword_0_4_or_GivenKeyword_0_0_or_ThenKeyword_0_2_or_WhenKeyword_0_1.equals(syntax))
+				emit_Step_AndKeyword_0_3_or_AsteriskKeyword_0_5_or_ButKeyword_0_4_or_GivenKeyword_0_0_or_ThenKeyword_0_2_or_WhenKeyword_0_1(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Step_EOLTerminalRuleCall_2_q.equals(syntax))
+				emit_Step_EOLTerminalRuleCall_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     EOL?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     title=Sentence (ambiguity) description=Description
+	 
+	 * </pre>
+	 */
+	protected void emit_Background_EOLTerminalRuleCall_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     EOL?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     sentences+=Sentence (ambiguity) (rule end)
+	 *     sentences+=Sentence (ambiguity) sentences+=Sentence
+	 
+	 * </pre>
+	 */
+	protected void emit_Description_EOLTerminalRuleCall_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     (Sentence | EOL)*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) '"""' (ambiguity) '"""' EOL (rule start)
+	 
+	 * </pre>
+	 */
+	protected void emit_DocString___EOLTerminalRuleCall_2_1_or_SentenceParserRuleCall_2_0__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     EOL?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     title=Sentence (ambiguity) description=Description
+	 
+	 * </pre>
+	 */
+	protected void emit_Example_EOLTerminalRuleCall_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     EOL?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     title=Sentence (ambiguity) description=Description
+	 
+	 * </pre>
+	 */
+	protected void emit_Feature_EOLTerminalRuleCall_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     EOL?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     title=Sentence (ambiguity) description=Description
+	 
+	 * </pre>
+	 */
+	protected void emit_ScenarioOutline_EOLTerminalRuleCall_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     EOL?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     title=Sentence (ambiguity) description=Description
+	 
+	 * </pre>
+	 */
+	protected void emit_Scenario_EOLTerminalRuleCall_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     (
+	  *         'Given' | 
+	  *         'When' | 
+	  *         'Then' | 
+	  *         'And' | 
+	  *         'But' | 
+	  *         '*'
+	  *     )
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) title=Sentence
+	 
+	 * </pre>
+	 */
+	protected void emit_Step_AndKeyword_0_3_or_AsteriskKeyword_0_5_or_ButKeyword_0_4_or_GivenKeyword_0_0_or_ThenKeyword_0_2_or_WhenKeyword_0_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     EOL?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     title=Sentence (ambiguity) (rule end)
+	 *     title=Sentence (ambiguity) table=Table
+	 *     title=Sentence (ambiguity) text=DocString
+	 
+	 * </pre>
+	 */
+	protected void emit_Step_EOLTerminalRuleCall_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
 }
