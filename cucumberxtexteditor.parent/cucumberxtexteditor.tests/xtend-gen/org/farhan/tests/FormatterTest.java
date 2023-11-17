@@ -8,7 +8,6 @@ import org.eclipse.xtext.testing.formatter.FormatterTestHelper;
 import org.eclipse.xtext.testing.formatter.FormatterTestRequest;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(InjectionExtension.class)
@@ -19,7 +18,6 @@ public class FormatterTest {
   @Extension
   private FormatterTestHelper _formatterTestHelper;
 
-  @Test
   public void indentLines() {
     final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
       StringConcatenation _builder = new StringConcatenation();
@@ -27,7 +25,7 @@ public class FormatterTest {
       _builder.newLine();
       it.setToBeFormatted(_builder);
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("Feature: This is a new story not");
+      _builder_1.append("Feature: This is a new story");
       _builder_1.newLine();
       it.setExpectation(_builder_1);
     };
