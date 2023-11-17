@@ -118,9 +118,9 @@ ruleGreeting returns [EObject current=null]
 		}
 		(
 			(
-				lv_name_1_0=RULE_ID
+				lv_name_1_0=RULE_WORD
 				{
-					newLeafNode(lv_name_1_0, grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0());
+					newLeafNode(lv_name_1_0, grammarAccess.getGreetingAccess().getNameWORDTerminalRuleCall_1_0());
 				}
 				{
 					if ($current==null) {
@@ -130,7 +130,7 @@ ruleGreeting returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_1_0,
-						"org.eclipse.xtext.common.Terminals.ID");
+						"org.farhan.cukefsm.CucumberFSM.WORD");
 				}
 			)
 		)
@@ -141,16 +141,12 @@ ruleGreeting returns [EObject current=null]
 	)
 ;
 
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+RULE_WS : (' '|'\t')+;
 
-RULE_INT : ('0'..'9')+;
+fragment RULE_EOL : ('\r'|'\n')+;
 
-RULE_STRING : ('"' ('\\' .|~(('\\'|'"')))* '"'|'\'' ('\\' .|~(('\\'|'\'')))* '\'');
+RULE_COMMENT : '#' ~(('\r'|'\n'))* RULE_EOL;
 
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
+RULE_WORD : ~(('@'|'|'|' '|'\t'|'\n'|'\r'))+;
 
-RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-RULE_WS : (' '|'\t'|'\r'|'\n')+;
-
-RULE_ANY_OTHER : .;
+RULE_TAG : '@' RULE_WORD;

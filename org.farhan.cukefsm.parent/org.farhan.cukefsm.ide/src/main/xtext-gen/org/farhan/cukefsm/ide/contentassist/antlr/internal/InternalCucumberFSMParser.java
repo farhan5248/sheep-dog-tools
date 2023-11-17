@@ -22,18 +22,16 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalCucumberFSMParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'Hello'", "'!'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_WORD", "RULE_WS", "RULE_EOL", "RULE_COMMENT", "RULE_TAG", "'Hello'", "'!'"
     };
-    public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
-    public static final int RULE_STRING=6;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int RULE_INT=5;
-    public static final int T__11=11;
-    public static final int RULE_ML_COMMENT=7;
-    public static final int T__12=12;
+    public static final int T__9=9;
+    public static final int RULE_WS=5;
+    public static final int RULE_EOL=6;
+    public static final int RULE_WORD=4;
+    public static final int RULE_COMMENT=7;
+    public static final int RULE_TAG=8;
     public static final int EOF=-1;
+    public static final int T__10=10;
 
     // delegates
     // delegators
@@ -120,7 +118,7 @@ public class InternalCucumberFSMParser extends AbstractInternalContentAssistPars
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==11) ) {
+                if ( (LA1_0==9) ) {
                     alt1=1;
                 }
 
@@ -294,7 +292,7 @@ public class InternalCucumberFSMParser extends AbstractInternalContentAssistPars
             // InternalCucumberFSM.g:120:2: 'Hello'
             {
              before(grammarAccess.getGreetingAccess().getHelloKeyword_0()); 
-            match(input,11,FOLLOW_2); 
+            match(input,9,FOLLOW_2); 
              after(grammarAccess.getGreetingAccess().getHelloKeyword_0()); 
 
             }
@@ -449,7 +447,7 @@ public class InternalCucumberFSMParser extends AbstractInternalContentAssistPars
             // InternalCucumberFSM.g:173:2: '!'
             {
              before(grammarAccess.getGreetingAccess().getExclamationMarkKeyword_2()); 
-            match(input,12,FOLLOW_2); 
+            match(input,10,FOLLOW_2); 
              after(grammarAccess.getGreetingAccess().getExclamationMarkKeyword_2()); 
 
             }
@@ -514,21 +512,21 @@ public class InternalCucumberFSMParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__Greeting__NameAssignment_1"
-    // InternalCucumberFSM.g:198:1: rule__Greeting__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalCucumberFSM.g:198:1: rule__Greeting__NameAssignment_1 : ( RULE_WORD ) ;
     public final void rule__Greeting__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumberFSM.g:202:1: ( ( RULE_ID ) )
-            // InternalCucumberFSM.g:203:2: ( RULE_ID )
+            // InternalCucumberFSM.g:202:1: ( ( RULE_WORD ) )
+            // InternalCucumberFSM.g:203:2: ( RULE_WORD )
             {
-            // InternalCucumberFSM.g:203:2: ( RULE_ID )
-            // InternalCucumberFSM.g:204:3: RULE_ID
+            // InternalCucumberFSM.g:203:2: ( RULE_WORD )
+            // InternalCucumberFSM.g:204:3: RULE_WORD
             {
-             before(grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_2); 
-             after(grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0()); 
+             before(grammarAccess.getGreetingAccess().getNameWORDTerminalRuleCall_1_0()); 
+            match(input,RULE_WORD,FOLLOW_2); 
+             after(grammarAccess.getGreetingAccess().getNameWORDTerminalRuleCall_1_0()); 
 
             }
 
@@ -556,8 +554,8 @@ public class InternalCucumberFSMParser extends AbstractInternalContentAssistPars
 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000802L});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000202L});
     public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000400L});
 
 }

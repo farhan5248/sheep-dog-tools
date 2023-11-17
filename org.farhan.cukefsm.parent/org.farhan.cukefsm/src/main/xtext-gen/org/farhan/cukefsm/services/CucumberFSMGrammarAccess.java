@@ -14,7 +14,6 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 import org.eclipse.xtext.service.AbstractElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
 
@@ -41,24 +40,24 @@ public class CucumberFSMGrammarAccess extends AbstractElementFinder.AbstractGram
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cHelloKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final RuleCall cNameWORDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cExclamationMarkKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Greeting:
-		//    'Hello' name=ID '!';
+		//    'Hello' name=WORD '!';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'Hello' name=ID '!'
+		//'Hello' name=WORD '!'
 		public Group getGroup() { return cGroup; }
 		
 		//'Hello'
 		public Keyword getHelloKeyword_0() { return cHelloKeyword_0; }
 		
-		//name=ID
+		//name=WORD
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		//WORD
+		public RuleCall getNameWORDTerminalRuleCall_1_0() { return cNameWORDTerminalRuleCall_1_0; }
 		
 		//'!'
 		public Keyword getExclamationMarkKeyword_2() { return cExclamationMarkKeyword_2; }
@@ -67,18 +66,24 @@ public class CucumberFSMGrammarAccess extends AbstractElementFinder.AbstractGram
 	
 	private final ModelElements pModel;
 	private final GreetingElements pGreeting;
+	private final TerminalRule tWS;
+	private final TerminalRule tEOL;
+	private final TerminalRule tCOMMENT;
+	private final TerminalRule tWORD;
+	private final TerminalRule tTAG;
 	
 	private final Grammar grammar;
-	
-	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
-	public CucumberFSMGrammarAccess(GrammarProvider grammarProvider,
-			TerminalsGrammarAccess gaTerminals) {
+	public CucumberFSMGrammarAccess(GrammarProvider grammarProvider) {
 		this.grammar = internalFindGrammar(grammarProvider);
-		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
 		this.pGreeting = new GreetingElements();
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.cukefsm.CucumberFSM.WS");
+		this.tEOL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.cukefsm.CucumberFSM.EOL");
+		this.tCOMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.cukefsm.CucumberFSM.COMMENT");
+		this.tWORD = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.cukefsm.CucumberFSM.WORD");
+		this.tTAG = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.cukefsm.CucumberFSM.TAG");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -102,10 +107,6 @@ public class CucumberFSMGrammarAccess extends AbstractElementFinder.AbstractGram
 		return grammar;
 	}
 	
-	
-	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
-		return gaTerminals;
-	}
 
 	
 	//Model:
@@ -119,7 +120,7 @@ public class CucumberFSMGrammarAccess extends AbstractElementFinder.AbstractGram
 	}
 	
 	//Greeting:
-	//    'Hello' name=ID '!';
+	//    'Hello' name=WORD '!';
 	public GreetingElements getGreetingAccess() {
 		return pGreeting;
 	}
@@ -128,41 +129,36 @@ public class CucumberFSMGrammarAccess extends AbstractElementFinder.AbstractGram
 		return getGreetingAccess().getRule();
 	}
 	
-	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-	public TerminalRule getIDRule() {
-		return gaTerminals.getIDRule();
-	}
-	
-	//terminal INT returns ecore::EInt: ('0'..'9')+;
-	public TerminalRule getINTRule() {
-		return gaTerminals.getINTRule();
-	}
-	
-	//terminal STRING:
-	//            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
-	//            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
-	//        ;
-	public TerminalRule getSTRINGRule() {
-		return gaTerminals.getSTRINGRule();
-	}
-	
-	//terminal ML_COMMENT : '/*' -> '*/';
-	public TerminalRule getML_COMMENTRule() {
-		return gaTerminals.getML_COMMENTRule();
-	}
-	
-	//terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
-	public TerminalRule getSL_COMMENTRule() {
-		return gaTerminals.getSL_COMMENTRule();
-	}
-	
-	//terminal WS         : (' '|'\t'|'\r'|'\n')+;
+	//terminal WS:
+	//    (' ' | '\t')+;
 	public TerminalRule getWSRule() {
-		return gaTerminals.getWSRule();
+		return tWS;
 	}
 	
-	//terminal ANY_OTHER: .;
-	public TerminalRule getANY_OTHERRule() {
-		return gaTerminals.getANY_OTHERRule();
+	//terminal EOL:
+	//    ('\r' | '\n')+;
+	public TerminalRule getEOLRule() {
+		return tEOL;
+	}
+	
+	//// single line comment
+	//terminal COMMENT:
+	//    '#' !('\r' | '\n')* EOL;
+	public TerminalRule getCOMMENTRule() {
+		return tCOMMENT;
+	}
+	
+	//// need to add punctuation and commas etc
+	//// this covers Given When Then and might create problems?
+	//terminal WORD:
+	//    !('@' | '|' | ' ' | '\t' | '\n' | '\r')+;
+	public TerminalRule getWORDRule() {
+		return tWORD;
+	}
+	
+	//terminal TAG:
+	//    '@' WORD;
+	public TerminalRule getTAGRule() {
+		return tTAG;
 	}
 }

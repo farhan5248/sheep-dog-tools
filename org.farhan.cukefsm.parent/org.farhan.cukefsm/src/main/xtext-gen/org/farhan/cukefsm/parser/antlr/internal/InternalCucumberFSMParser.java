@@ -21,18 +21,16 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalCucumberFSMParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'Hello'", "'!'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_WORD", "RULE_WS", "RULE_EOL", "RULE_COMMENT", "RULE_TAG", "'Hello'", "'!'"
     };
-    public static final int RULE_ID=4;
-    public static final int RULE_WS=9;
-    public static final int RULE_STRING=6;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int RULE_INT=5;
-    public static final int T__11=11;
-    public static final int RULE_ML_COMMENT=7;
-    public static final int T__12=12;
+    public static final int T__9=9;
+    public static final int RULE_WS=5;
+    public static final int RULE_EOL=6;
+    public static final int RULE_WORD=4;
+    public static final int RULE_COMMENT=7;
+    public static final int RULE_TAG=8;
     public static final int EOF=-1;
+    public static final int T__10=10;
 
     // delegates
     // delegators
@@ -130,7 +128,7 @@ public class InternalCucumberFSMParser extends AbstractInternalAntlrParser {
                 int alt1=2;
                 int LA1_0 = input.LA(1);
 
-                if ( (LA1_0==11) ) {
+                if ( (LA1_0==9) ) {
                     alt1=1;
                 }
 
@@ -229,7 +227,7 @@ public class InternalCucumberFSMParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleGreeting"
-    // InternalCucumberFSM.g:107:1: ruleGreeting returns [EObject current=null] : (otherlv_0= 'Hello' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '!' ) ;
+    // InternalCucumberFSM.g:107:1: ruleGreeting returns [EObject current=null] : (otherlv_0= 'Hello' ( (lv_name_1_0= RULE_WORD ) ) otherlv_2= '!' ) ;
     public final EObject ruleGreeting() throws RecognitionException {
         EObject current = null;
 
@@ -241,25 +239,25 @@ public class InternalCucumberFSMParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCucumberFSM.g:113:2: ( (otherlv_0= 'Hello' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '!' ) )
-            // InternalCucumberFSM.g:114:2: (otherlv_0= 'Hello' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '!' )
+            // InternalCucumberFSM.g:113:2: ( (otherlv_0= 'Hello' ( (lv_name_1_0= RULE_WORD ) ) otherlv_2= '!' ) )
+            // InternalCucumberFSM.g:114:2: (otherlv_0= 'Hello' ( (lv_name_1_0= RULE_WORD ) ) otherlv_2= '!' )
             {
-            // InternalCucumberFSM.g:114:2: (otherlv_0= 'Hello' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '!' )
-            // InternalCucumberFSM.g:115:3: otherlv_0= 'Hello' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '!'
+            // InternalCucumberFSM.g:114:2: (otherlv_0= 'Hello' ( (lv_name_1_0= RULE_WORD ) ) otherlv_2= '!' )
+            // InternalCucumberFSM.g:115:3: otherlv_0= 'Hello' ( (lv_name_1_0= RULE_WORD ) ) otherlv_2= '!'
             {
-            otherlv_0=(Token)match(input,11,FOLLOW_4); 
+            otherlv_0=(Token)match(input,9,FOLLOW_4); 
 
             			newLeafNode(otherlv_0, grammarAccess.getGreetingAccess().getHelloKeyword_0());
             		
-            // InternalCucumberFSM.g:119:3: ( (lv_name_1_0= RULE_ID ) )
-            // InternalCucumberFSM.g:120:4: (lv_name_1_0= RULE_ID )
+            // InternalCucumberFSM.g:119:3: ( (lv_name_1_0= RULE_WORD ) )
+            // InternalCucumberFSM.g:120:4: (lv_name_1_0= RULE_WORD )
             {
-            // InternalCucumberFSM.g:120:4: (lv_name_1_0= RULE_ID )
-            // InternalCucumberFSM.g:121:5: lv_name_1_0= RULE_ID
+            // InternalCucumberFSM.g:120:4: (lv_name_1_0= RULE_WORD )
+            // InternalCucumberFSM.g:121:5: lv_name_1_0= RULE_WORD
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_5); 
+            lv_name_1_0=(Token)match(input,RULE_WORD,FOLLOW_5); 
 
-            					newLeafNode(lv_name_1_0, grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0());
+            					newLeafNode(lv_name_1_0, grammarAccess.getGreetingAccess().getNameWORDTerminalRuleCall_1_0());
             				
 
             					if (current==null) {
@@ -269,7 +267,7 @@ public class InternalCucumberFSMParser extends AbstractInternalAntlrParser {
             						current,
             						"name",
             						lv_name_1_0,
-            						"org.eclipse.xtext.common.Terminals.ID");
+            						"org.farhan.cukefsm.CucumberFSM.WORD");
             				
 
             }
@@ -277,7 +275,7 @@ public class InternalCucumberFSMParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,12,FOLLOW_2); 
+            otherlv_2=(Token)match(input,10,FOLLOW_2); 
 
             			newLeafNode(otherlv_2, grammarAccess.getGreetingAccess().getExclamationMarkKeyword_2());
             		
@@ -309,8 +307,8 @@ public class InternalCucumberFSMParser extends AbstractInternalAntlrParser {
 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000802L});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000202L});
     public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000400L});
 
 }

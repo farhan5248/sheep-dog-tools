@@ -50,7 +50,7 @@ public class CucumberFSMSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     Greeting returns Greeting
 	 *
 	 * Constraint:
-	 *     name=ID
+	 *     name=WORD
 	 * </pre>
 	 */
 	protected void sequence_Greeting(ISerializationContext context, Greeting semanticObject) {
@@ -59,7 +59,7 @@ public class CucumberFSMSemanticSequencer extends AbstractDelegatingSemanticSequ
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CucumberFSMPackage.Literals.GREETING__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getGreetingAccess().getNameWORDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
