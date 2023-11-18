@@ -32,7 +32,7 @@ public class CucumberParser extends AbstractContentAssistParser {
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, CucumberGrammarAccess grammarAccess) {
 			builder.put(grammarAccess.getAbstractScenarioAccess().getAlternatives(), "rule__AbstractScenario__Alternatives");
-			builder.put(grammarAccess.getStepAccess().getKeywordAlternatives_0_0(), "rule__Step__KeywordAlternatives_0_0");
+			builder.put(grammarAccess.getStepAccess().getAlternatives_0(), "rule__Step__Alternatives_0");
 			builder.put(grammarAccess.getStepAccess().getAlternatives_3(), "rule__Step__Alternatives_3");
 			builder.put(grammarAccess.getDocStringAccess().getAlternatives_2(), "rule__DocString__Alternatives_2");
 			builder.put(grammarAccess.getFeatureAccess().getGroup(), "rule__Feature__Group__0");
@@ -64,7 +64,6 @@ public class CucumberParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getExampleAccess().getTitleAssignment_2(), "rule__Example__TitleAssignment_2");
 			builder.put(grammarAccess.getExampleAccess().getDescriptionAssignment_4(), "rule__Example__DescriptionAssignment_4");
 			builder.put(grammarAccess.getExampleAccess().getTableAssignment_5(), "rule__Example__TableAssignment_5");
-			builder.put(grammarAccess.getStepAccess().getKeywordAssignment_0(), "rule__Step__KeywordAssignment_0");
 			builder.put(grammarAccess.getStepAccess().getTitleAssignment_1(), "rule__Step__TitleAssignment_1");
 			builder.put(grammarAccess.getStepAccess().getTableAssignment_3_0(), "rule__Step__TableAssignment_3_0");
 			builder.put(grammarAccess.getStepAccess().getTextAssignment_3_1(), "rule__Step__TextAssignment_3_1");

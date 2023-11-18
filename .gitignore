@@ -1,6 +1,7 @@
 target
 bin
 release.properties
+**/*._trace
 **/*.xtextbin
 **/*.xtendbin
 **/*.pdf
@@ -9,10 +10,7 @@ release.properties
 **/*.zip
 **/*.log
 **/*.bak
-**/*.project
 **/*.pydevproject
-**/*.settings
-**/*.classpath
 **/*.class
 **/*.jar
 **/*.tar

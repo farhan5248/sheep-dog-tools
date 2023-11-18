@@ -33,7 +33,9 @@ Workflow {
 		language = StandardLanguage {
 			name = "org.farhan.Cucumber"
 			fileExtensions = "feature"
-
+			formatter = {
+				generateStub = true
+			}
 			serializer = {
 				generateStub = false
 			}

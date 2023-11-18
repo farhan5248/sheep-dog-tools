@@ -28,6 +28,7 @@ public class CucumberSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_Feature_EOLTerminalRuleCall_3_q;
 	protected AbstractElementAlias match_ScenarioOutline_EOLTerminalRuleCall_3_q;
 	protected AbstractElementAlias match_Scenario_EOLTerminalRuleCall_3_q;
+	protected AbstractElementAlias match_Step_AndKeyword_0_3_or_AsteriskKeyword_0_5_or_ButKeyword_0_4_or_GivenKeyword_0_0_or_ThenKeyword_0_2_or_WhenKeyword_0_1;
 	protected AbstractElementAlias match_Step_EOLTerminalRuleCall_2_q;
 	
 	@Inject
@@ -40,6 +41,7 @@ public class CucumberSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_Feature_EOLTerminalRuleCall_3_q = new TokenAlias(false, true, grammarAccess.getFeatureAccess().getEOLTerminalRuleCall_3());
 		match_ScenarioOutline_EOLTerminalRuleCall_3_q = new TokenAlias(false, true, grammarAccess.getScenarioOutlineAccess().getEOLTerminalRuleCall_3());
 		match_Scenario_EOLTerminalRuleCall_3_q = new TokenAlias(false, true, grammarAccess.getScenarioAccess().getEOLTerminalRuleCall_3());
+		match_Step_AndKeyword_0_3_or_AsteriskKeyword_0_5_or_ButKeyword_0_4_or_GivenKeyword_0_0_or_ThenKeyword_0_2_or_WhenKeyword_0_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getStepAccess().getAndKeyword_0_3()), new TokenAlias(false, false, grammarAccess.getStepAccess().getAsteriskKeyword_0_5()), new TokenAlias(false, false, grammarAccess.getStepAccess().getButKeyword_0_4()), new TokenAlias(false, false, grammarAccess.getStepAccess().getGivenKeyword_0_0()), new TokenAlias(false, false, grammarAccess.getStepAccess().getThenKeyword_0_2()), new TokenAlias(false, false, grammarAccess.getStepAccess().getWhenKeyword_0_1()));
 		match_Step_EOLTerminalRuleCall_2_q = new TokenAlias(false, true, grammarAccess.getStepAccess().getEOLTerminalRuleCall_2());
 	}
 	
@@ -104,6 +106,8 @@ public class CucumberSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_ScenarioOutline_EOLTerminalRuleCall_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Scenario_EOLTerminalRuleCall_3_q.equals(syntax))
 				emit_Scenario_EOLTerminalRuleCall_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Step_AndKeyword_0_3_or_AsteriskKeyword_0_5_or_ButKeyword_0_4_or_GivenKeyword_0_0_or_ThenKeyword_0_2_or_WhenKeyword_0_1.equals(syntax))
+				emit_Step_AndKeyword_0_3_or_AsteriskKeyword_0_5_or_ButKeyword_0_4_or_GivenKeyword_0_0_or_ThenKeyword_0_2_or_WhenKeyword_0_1(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_Step_EOLTerminalRuleCall_2_q.equals(syntax))
 				emit_Step_EOLTerminalRuleCall_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
@@ -206,6 +210,27 @@ public class CucumberSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * </pre>
 	 */
 	protected void emit_Scenario_EOLTerminalRuleCall_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     (
+	  *         'Given' | 
+	  *         'When' | 
+	  *         'Then' | 
+	  *         'And' | 
+	  *         'But' | 
+	  *         '*'
+	  *     )
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) title=Sentence
+	 
+	 * </pre>
+	 */
+	protected void emit_Step_AndKeyword_0_3_or_AsteriskKeyword_0_5_or_ButKeyword_0_4_or_GivenKeyword_0_0_or_ThenKeyword_0_2_or_WhenKeyword_0_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

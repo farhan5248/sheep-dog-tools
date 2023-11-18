@@ -362,22 +362,13 @@ public interface CucumberPackage extends EPackage
   int STEP = 6;
 
   /**
-   * The feature id for the '<em><b>Keyword</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STEP__KEYWORD = 0;
-
-  /**
    * The feature id for the '<em><b>Title</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STEP__TITLE = 1;
+  int STEP__TITLE = 0;
 
   /**
    * The feature id for the '<em><b>Table</b></em>' containment reference.
@@ -386,7 +377,7 @@ public interface CucumberPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STEP__TABLE = 2;
+  int STEP__TABLE = 1;
 
   /**
    * The feature id for the '<em><b>Text</b></em>' containment reference.
@@ -395,7 +386,7 @@ public interface CucumberPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STEP__TEXT = 3;
+  int STEP__TEXT = 2;
 
   /**
    * The number of structural features of the '<em>Step</em>' class.
@@ -404,7 +395,7 @@ public interface CucumberPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STEP_FEATURE_COUNT = 4;
+  int STEP_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.farhan.cucumber.impl.TableImpl <em>Table</em>}' class.
@@ -763,17 +754,6 @@ public interface CucumberPackage extends EPackage
   EClass getStep();
 
   /**
-   * Returns the meta object for the attribute '{@link org.farhan.cucumber.Step#getKeyword <em>Keyword</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Keyword</em>'.
-   * @see org.farhan.cucumber.Step#getKeyword()
-   * @see #getStep()
-   * @generated
-   */
-  EAttribute getStep_Keyword();
-
-  /**
    * Returns the meta object for the attribute '{@link org.farhan.cucumber.Step#getTitle <em>Title</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1104,14 +1084,6 @@ public interface CucumberPackage extends EPackage
      * @generated
      */
     EClass STEP = eINSTANCE.getStep();
-
-    /**
-     * The meta object literal for the '<em><b>Keyword</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute STEP__KEYWORD = eINSTANCE.getStep_Keyword();
 
     /**
      * The meta object literal for the '<em><b>Title</b></em>' attribute feature.

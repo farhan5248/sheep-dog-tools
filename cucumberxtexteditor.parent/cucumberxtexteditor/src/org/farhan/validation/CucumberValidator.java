@@ -7,6 +7,7 @@ import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Feature;
+import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
 
 /**
@@ -23,15 +24,15 @@ public class CucumberValidator extends AbstractCucumberValidator {
 	@Check(CheckType.FAST)
 	public void checkStep(Step step) {
 		if (!Character.isUpperCase(step.getTitle().charAt(0))) {
-			warning("Step name should start with a capital", CucumberPackage.Literals.FEATURE__TITLE, INVALID_NAME);
+			warning("Step name should start with a capital", CucumberPackage.Literals.STEP__TITLE, INVALID_NAME);
 		}
 	}
 
 	// This one is to check each scenario
 	@Check(CheckType.NORMAL)
-	public void checkScenario(Step scenario) {
+	public void checkScenario(Scenario scenario) {
 		if (!Character.isUpperCase(scenario.getTitle().charAt(0))) {
-			warning("Scenario name should start with a capital", CucumberPackage.Literals.FEATURE__TITLE, INVALID_NAME);
+			warning("Scenario name should start with a capital", CucumberPackage.Literals.ABSTRACT_SCENARIO__TITLE, INVALID_NAME);
 		}
 	}
 

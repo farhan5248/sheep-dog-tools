@@ -609,82 +609,42 @@ ruleStep returns [EObject current=null]
 }:
 	(
 		(
-			(
-				(
-					lv_keyword_0_1='Given'
-					{
-						newLeafNode(lv_keyword_0_1, grammarAccess.getStepAccess().getKeywordGivenKeyword_0_0_0());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getStepRule());
-						}
-						setWithLastConsumed($current, "keyword", lv_keyword_0_1, null);
-					}
-					    |
-					lv_keyword_0_2='When'
-					{
-						newLeafNode(lv_keyword_0_2, grammarAccess.getStepAccess().getKeywordWhenKeyword_0_0_1());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getStepRule());
-						}
-						setWithLastConsumed($current, "keyword", lv_keyword_0_2, null);
-					}
-					    |
-					lv_keyword_0_3='Then'
-					{
-						newLeafNode(lv_keyword_0_3, grammarAccess.getStepAccess().getKeywordThenKeyword_0_0_2());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getStepRule());
-						}
-						setWithLastConsumed($current, "keyword", lv_keyword_0_3, null);
-					}
-					    |
-					lv_keyword_0_4='And'
-					{
-						newLeafNode(lv_keyword_0_4, grammarAccess.getStepAccess().getKeywordAndKeyword_0_0_3());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getStepRule());
-						}
-						setWithLastConsumed($current, "keyword", lv_keyword_0_4, null);
-					}
-					    |
-					lv_keyword_0_5='But'
-					{
-						newLeafNode(lv_keyword_0_5, grammarAccess.getStepAccess().getKeywordButKeyword_0_0_4());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getStepRule());
-						}
-						setWithLastConsumed($current, "keyword", lv_keyword_0_5, null);
-					}
-					    |
-					lv_keyword_0_6='*'
-					{
-						newLeafNode(lv_keyword_0_6, grammarAccess.getStepAccess().getKeywordAsteriskKeyword_0_0_5());
-					}
-					{
-						if ($current==null) {
-							$current = createModelElement(grammarAccess.getStepRule());
-						}
-						setWithLastConsumed($current, "keyword", lv_keyword_0_6, null);
-					}
-				)
-			)
+			otherlv_0='Given'
+			{
+				newLeafNode(otherlv_0, grammarAccess.getStepAccess().getGivenKeyword_0_0());
+			}
+			    |
+			otherlv_1='When'
+			{
+				newLeafNode(otherlv_1, grammarAccess.getStepAccess().getWhenKeyword_0_1());
+			}
+			    |
+			otherlv_2='Then'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getStepAccess().getThenKeyword_0_2());
+			}
+			    |
+			otherlv_3='And'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getStepAccess().getAndKeyword_0_3());
+			}
+			    |
+			otherlv_4='But'
+			{
+				newLeafNode(otherlv_4, grammarAccess.getStepAccess().getButKeyword_0_4());
+			}
+			    |
+			otherlv_5='*'
+			{
+				newLeafNode(otherlv_5, grammarAccess.getStepAccess().getAsteriskKeyword_0_5());
+			}
 		)
 		(
 			(
 				{
 					newCompositeNode(grammarAccess.getStepAccess().getTitleSentenceParserRuleCall_1_0());
 				}
-				lv_title_1_0=ruleSentence
+				lv_title_6_0=ruleSentence
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getStepRule());
@@ -692,16 +652,16 @@ ruleStep returns [EObject current=null]
 					set(
 						$current,
 						"title",
-						lv_title_1_0,
+						lv_title_6_0,
 						"org.farhan.Cucumber.Sentence");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
 		(
-			this_EOL_2=RULE_EOL
+			this_EOL_7=RULE_EOL
 			{
-				newLeafNode(this_EOL_2, grammarAccess.getStepAccess().getEOLTerminalRuleCall_2());
+				newLeafNode(this_EOL_7, grammarAccess.getStepAccess().getEOLTerminalRuleCall_2());
 			}
 		)?
 		(
@@ -710,7 +670,7 @@ ruleStep returns [EObject current=null]
 					{
 						newCompositeNode(grammarAccess.getStepAccess().getTableTableParserRuleCall_3_0_0());
 					}
-					lv_table_3_0=ruleTable
+					lv_table_8_0=ruleTable
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getStepRule());
@@ -718,7 +678,7 @@ ruleStep returns [EObject current=null]
 						set(
 							$current,
 							"table",
-							lv_table_3_0,
+							lv_table_8_0,
 							"org.farhan.Cucumber.Table");
 						afterParserOrEnumRuleCall();
 					}
@@ -730,7 +690,7 @@ ruleStep returns [EObject current=null]
 					{
 						newCompositeNode(grammarAccess.getStepAccess().getTextDocStringParserRuleCall_3_1_0());
 					}
-					lv_text_4_0=ruleDocString
+					lv_text_9_0=ruleDocString
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getStepRule());
@@ -738,7 +698,7 @@ ruleStep returns [EObject current=null]
 						set(
 							$current,
 							"text",
-							lv_text_4_0,
+							lv_text_9_0,
 							"org.farhan.Cucumber.DocString");
 						afterParserOrEnumRuleCall();
 					}

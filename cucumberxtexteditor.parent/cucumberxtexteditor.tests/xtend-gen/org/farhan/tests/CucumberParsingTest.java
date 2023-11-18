@@ -35,7 +35,7 @@ public class CucumberParsingTest {
   private CompilationTestHelper _compilationTestHelper;
 
   @Test
-  public void testValidModel() {
+  public void testParser() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Feature: Basic scenario Test");
@@ -62,7 +62,7 @@ public class CucumberParsingTest {
   }
 
   @Test
-  public void testNameStartsWithCapitalWarning() {
+  public void testValidator() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Feature: basic scenario Test");
@@ -77,7 +77,7 @@ public class CucumberParsingTest {
   }
 
   @Test
-  public void test() {
+  public void testCompiler() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Feature: basic scenario Test");

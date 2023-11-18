@@ -223,7 +223,6 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//    Tags
 		//    'Scenario Outline:' title=Sentence EOL?
 		//    description=Description
-		//    // this is a 0 or more list of Step
 		//    (steps+=Step)*
 		//    (examples+=Example+);
 		@Override public ParserRule getRule() { return rule; }
@@ -231,7 +230,6 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//Tags
 		//'Scenario Outline:' title=Sentence EOL?
 		//description=Description
-		//// this is a 0 or more list of Step
 		//(steps+=Step)*
 		//(examples+=Example+)
 		public Group getGroup() { return cGroup; }
@@ -257,7 +255,6 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//Description
 		public RuleCall getDescriptionDescriptionParserRuleCall_4_0() { return cDescriptionDescriptionParserRuleCall_4_0; }
 		
-		//// this is a 0 or more list of Step
 		//(steps+=Step)*
 		public Assignment getStepsAssignment_5() { return cStepsAssignment_5; }
 		
@@ -285,15 +282,13 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		
 		//Example:
 		//    Tags
-		//    'Examples:'
-		//    title=Sentence EOL?
+		//    'Examples:' title=Sentence EOL?
 		//    description=Description
 		//    table=Table;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Tags
-		//'Examples:'
-		//title=Sentence EOL?
+		//'Examples:' title=Sentence EOL?
 		//description=Description
 		//table=Table
 		public Group getGroup() { return cGroup; }
@@ -328,14 +323,13 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	public class StepElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.Step");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cKeywordAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final Alternatives cKeywordAlternatives_0_0 = (Alternatives)cKeywordAssignment_0.eContents().get(0);
-		private final Keyword cKeywordGivenKeyword_0_0_0 = (Keyword)cKeywordAlternatives_0_0.eContents().get(0);
-		private final Keyword cKeywordWhenKeyword_0_0_1 = (Keyword)cKeywordAlternatives_0_0.eContents().get(1);
-		private final Keyword cKeywordThenKeyword_0_0_2 = (Keyword)cKeywordAlternatives_0_0.eContents().get(2);
-		private final Keyword cKeywordAndKeyword_0_0_3 = (Keyword)cKeywordAlternatives_0_0.eContents().get(3);
-		private final Keyword cKeywordButKeyword_0_0_4 = (Keyword)cKeywordAlternatives_0_0.eContents().get(4);
-		private final Keyword cKeywordAsteriskKeyword_0_0_5 = (Keyword)cKeywordAlternatives_0_0.eContents().get(5);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final Keyword cGivenKeyword_0_0 = (Keyword)cAlternatives_0.eContents().get(0);
+		private final Keyword cWhenKeyword_0_1 = (Keyword)cAlternatives_0.eContents().get(1);
+		private final Keyword cThenKeyword_0_2 = (Keyword)cAlternatives_0.eContents().get(2);
+		private final Keyword cAndKeyword_0_3 = (Keyword)cAlternatives_0.eContents().get(3);
+		private final Keyword cButKeyword_0_4 = (Keyword)cAlternatives_0.eContents().get(4);
+		private final Keyword cAsteriskKeyword_0_5 = (Keyword)cAlternatives_0.eContents().get(5);
 		private final Assignment cTitleAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cTitleSentenceParserRuleCall_1_0 = (RuleCall)cTitleAssignment_1.eContents().get(0);
 		private final RuleCall cEOLTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
@@ -346,37 +340,34 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final RuleCall cTextDocStringParserRuleCall_3_1_0 = (RuleCall)cTextAssignment_3_1.eContents().get(0);
 		
 		//Step:
-		//    keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence EOL?
+		//    ('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence EOL?
 		//    (table=Table | text=DocString)?;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence EOL?
+		//('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence EOL?
 		//(table=Table | text=DocString)?
 		public Group getGroup() { return cGroup; }
 		
-		//keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*')
-		public Assignment getKeywordAssignment_0() { return cKeywordAssignment_0; }
-		
 		//('Given' | 'When' | 'Then' | 'And' | 'But' | '*')
-		public Alternatives getKeywordAlternatives_0_0() { return cKeywordAlternatives_0_0; }
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
 		//'Given'
-		public Keyword getKeywordGivenKeyword_0_0_0() { return cKeywordGivenKeyword_0_0_0; }
+		public Keyword getGivenKeyword_0_0() { return cGivenKeyword_0_0; }
 		
 		//'When'
-		public Keyword getKeywordWhenKeyword_0_0_1() { return cKeywordWhenKeyword_0_0_1; }
+		public Keyword getWhenKeyword_0_1() { return cWhenKeyword_0_1; }
 		
 		//'Then'
-		public Keyword getKeywordThenKeyword_0_0_2() { return cKeywordThenKeyword_0_0_2; }
+		public Keyword getThenKeyword_0_2() { return cThenKeyword_0_2; }
 		
 		//'And'
-		public Keyword getKeywordAndKeyword_0_0_3() { return cKeywordAndKeyword_0_0_3; }
+		public Keyword getAndKeyword_0_3() { return cAndKeyword_0_3; }
 		
 		//'But'
-		public Keyword getKeywordButKeyword_0_0_4() { return cKeywordButKeyword_0_0_4; }
+		public Keyword getButKeyword_0_4() { return cButKeyword_0_4; }
 		
 		//'*'
-		public Keyword getKeywordAsteriskKeyword_0_0_5() { return cKeywordAsteriskKeyword_0_0_5; }
+		public Keyword getAsteriskKeyword_0_5() { return cAsteriskKeyword_0_5; }
 		
 		//title=Sentence
 		public Assignment getTitleAssignment_1() { return cTitleAssignment_1; }
@@ -694,7 +685,6 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	//    Tags
 	//    'Scenario Outline:' title=Sentence EOL?
 	//    description=Description
-	//    // this is a 0 or more list of Step
 	//    (steps+=Step)*
 	//    (examples+=Example+);
 	public ScenarioOutlineElements getScenarioOutlineAccess() {
@@ -707,8 +697,7 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	
 	//Example:
 	//    Tags
-	//    'Examples:'
-	//    title=Sentence EOL?
+	//    'Examples:' title=Sentence EOL?
 	//    description=Description
 	//    table=Table;
 	public ExampleElements getExampleAccess() {
@@ -720,7 +709,7 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//Step:
-	//    keyword=('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence EOL?
+	//    ('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence EOL?
 	//    (table=Table | text=DocString)?;
 	public StepElements getStepAccess() {
 		return pStep;
@@ -821,7 +810,6 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return tCOMMENT;
 	}
 	
-	//// .. needs the ecore import
 	//// need to add punctuation and commas etc
 	//// this covers Given When Then and might create problems?
 	//terminal WORD:

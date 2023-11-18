@@ -218,18 +218,7 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Step returns Step
 	 *
 	 * Constraint:
-	 *     (
-	 *         (
-	 *             keyword='Given' | 
-	 *             keyword='When' | 
-	 *             keyword='Then' | 
-	 *             keyword='And' | 
-	 *             keyword='But' | 
-	 *             keyword='*'
-	 *         ) 
-	 *         title=Sentence 
-	 *         (table=Table | text=DocString)?
-	 *     )
+	 *     (title=Sentence (table=Table | text=DocString)?)
 	 * </pre>
 	 */
 	protected void sequence_Step(ISerializationContext context, Step semanticObject) {
