@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
+import org.farhan.cucumber.Feature
 
 /**
  * Generates code from your model files on save.
@@ -16,10 +17,17 @@ import org.eclipse.xtext.generator.IGeneratorContext
 class CucumberGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
-//			resource.allContents
-//				.filter(Greeting)
-//				.map[name]
-//				.join(', '))
+		for (f : resource.allContents.toIterable.filter(Feature)) {
+			fsa.generateFile("temp/" + f.title + ".java", f.compile)
+		}
 	}
+
+	private def compile(Feature f) '''
+		package temp;
+		
+		public class «f.title» {
+		
+		}
+	'''
+
 }

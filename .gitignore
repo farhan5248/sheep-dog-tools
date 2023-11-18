@@ -1,6 +1,7 @@
 target
 bin
 release.properties
+**/*._trace
 **/*.xtextbin
 **/*.xtendbin
 **/*.pdf
