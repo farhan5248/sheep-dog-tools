@@ -25,6 +25,5 @@ Export-Package: org.farhan.serializer,
  org.farhan.validation,
  org.farhan.cucumber.util,
  org.farhan.parser.antlr.internal,
- org.farhan.cucumber,
- org.farhan.formatting2
+ org.farhan.cucumber
 Import-Package: org.apache.log4j

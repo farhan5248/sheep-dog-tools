@@ -11,49 +11,49 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.farhan.cucumber.CucumberPackage;
-import org.farhan.cucumber.RowCell;
+import org.farhan.cucumber.Greeting;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Row Cell</b></em>'.
+ * An implementation of the model object '<em><b>Greeting</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cucumber.impl.RowCellImpl#getCell <em>Cell</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.GreetingImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class RowCellImpl extends MinimalEObjectImpl.Container implements RowCell
+public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeting
 {
   /**
-   * The default value of the '{@link #getCell() <em>Cell</em>}' attribute.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCell()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected static final String CELL_EDEFAULT = null;
+  protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getCell() <em>Cell</em>}' attribute.
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCell()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected String cell = CELL_EDEFAULT;
+  protected String name = NAME_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected RowCellImpl()
+  protected GreetingImpl()
   {
     super();
   }
@@ -66,7 +66,7 @@ public class RowCellImpl extends MinimalEObjectImpl.Container implements RowCell
   @Override
   protected EClass eStaticClass()
   {
-    return CucumberPackage.Literals.ROW_CELL;
+    return CucumberPackage.Literals.GREETING;
   }
 
   /**
@@ -75,9 +75,9 @@ public class RowCellImpl extends MinimalEObjectImpl.Container implements RowCell
    * @generated
    */
   @Override
-  public String getCell()
+  public String getName()
   {
-    return cell;
+    return name;
   }
 
   /**
@@ -86,12 +86,12 @@ public class RowCellImpl extends MinimalEObjectImpl.Container implements RowCell
    * @generated
    */
   @Override
-  public void setCell(String newCell)
+  public void setName(String newName)
   {
-    String oldCell = cell;
-    cell = newCell;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.ROW_CELL__CELL, oldCell, cell));
+      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.GREETING__NAME, oldName, name));
   }
 
   /**
@@ -104,8 +104,8 @@ public class RowCellImpl extends MinimalEObjectImpl.Container implements RowCell
   {
     switch (featureID)
     {
-      case CucumberPackage.ROW_CELL__CELL:
-        return getCell();
+      case CucumberPackage.GREETING__NAME:
+        return getName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -120,8 +120,8 @@ public class RowCellImpl extends MinimalEObjectImpl.Container implements RowCell
   {
     switch (featureID)
     {
-      case CucumberPackage.ROW_CELL__CELL:
-        setCell((String)newValue);
+      case CucumberPackage.GREETING__NAME:
+        setName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,8 +137,8 @@ public class RowCellImpl extends MinimalEObjectImpl.Container implements RowCell
   {
     switch (featureID)
     {
-      case CucumberPackage.ROW_CELL__CELL:
-        setCell(CELL_EDEFAULT);
+      case CucumberPackage.GREETING__NAME:
+        setName(NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -154,8 +154,8 @@ public class RowCellImpl extends MinimalEObjectImpl.Container implements RowCell
   {
     switch (featureID)
     {
-      case CucumberPackage.ROW_CELL__CELL:
-        return CELL_EDEFAULT == null ? cell != null : !CELL_EDEFAULT.equals(cell);
+      case CucumberPackage.GREETING__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
   }
@@ -171,10 +171,10 @@ public class RowCellImpl extends MinimalEObjectImpl.Container implements RowCell
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (cell: ");
-    result.append(cell);
+    result.append(" (name: ");
+    result.append(name);
     result.append(')');
     return result.toString();
   }
 
-} //RowCellImpl
+} //GreetingImpl

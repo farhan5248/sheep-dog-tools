@@ -7,61 +7,24 @@ import com.google.inject.Inject
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.extensions.InjectionExtension
 import org.eclipse.xtext.testing.util.ParseHelper
-import org.farhan.cucumber.Feature
+import org.farhan.cucumber.Model
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
-import org.eclipse.xtext.testing.validation.ValidationTestHelper
-import org.farhan.cucumber.CucumberPackage
-import org.farhan.validation.CucumberValidator
-import org.eclipse.xtext.xbase.testing.CompilationTestHelper
 
 @ExtendWith(InjectionExtension)
 @InjectWith(CucumberInjectorProvider)
 class CucumberParsingTest {
-
-	@Inject extension ParseHelper<Feature>
-
-	@Inject extension ValidationTestHelper
-
-	@Inject extension CompilationTestHelper
-
+	@Inject
+	ParseHelper<Model> parseHelper
+	
 	@Test
-	def testParser() {
-		'''
-			Feature: Basic scenario Test
-			This tests basic feature file grammar
-			
-			Scenario: Demo of all keywords
-			Given The current state
-			When The input is sen
-			Then The state changes
-			And The output is blah
-			But This means nothing
-		'''.parse.assertNoIssues
-	}
-
-	@Test
-	def testValidator() {
-		'''
-			Feature: basic scenario Test
-		'''.parse.assertWarning(
-			CucumberPackage.Literals.FEATURE,
-			CucumberValidator.INVALID_NAME,
-			"Name should start with a capital"
-		)
-	}
-
-	@Test
-	def testCompiler() {
-		'''
-			Feature: basic scenario Test
-		'''.assertCompilesTo('''
-			package temp;
-			
-			public class basic scenario Test {
-			
-			}
+	def void loadModel() {
+		val result = parseHelper.parse('''
+			Hello Xtext!
 		''')
+		Assertions.assertNotNull(result)
+		val errors = result.eResource.errors
+		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
 	}
 }
