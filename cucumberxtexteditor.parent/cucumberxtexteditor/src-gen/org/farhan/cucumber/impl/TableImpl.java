@@ -18,40 +18,40 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.farhan.cucumber.CucumberPackage;
-import org.farhan.cucumber.Greeting;
-import org.farhan.cucumber.Model;
+import org.farhan.cucumber.Table;
+import org.farhan.cucumber.TableRow;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Model</b></em>'.
+ * An implementation of the model object '<em><b>Table</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cucumber.impl.ModelImpl#getGreetings <em>Greetings</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.TableImpl#getRows <em>Rows</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ModelImpl extends MinimalEObjectImpl.Container implements Model
+public class TableImpl extends MinimalEObjectImpl.Container implements Table
 {
   /**
-   * The cached value of the '{@link #getGreetings() <em>Greetings</em>}' containment reference list.
+   * The cached value of the '{@link #getRows() <em>Rows</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getGreetings()
+   * @see #getRows()
    * @generated
    * @ordered
    */
-  protected EList<Greeting> greetings;
+  protected EList<TableRow> rows;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ModelImpl()
+  protected TableImpl()
   {
     super();
   }
@@ -64,7 +64,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   @Override
   protected EClass eStaticClass()
   {
-    return CucumberPackage.Literals.MODEL;
+    return CucumberPackage.Literals.TABLE;
   }
 
   /**
@@ -73,13 +73,13 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @generated
    */
   @Override
-  public EList<Greeting> getGreetings()
+  public EList<TableRow> getRows()
   {
-    if (greetings == null)
+    if (rows == null)
     {
-      greetings = new EObjectContainmentEList<Greeting>(Greeting.class, this, CucumberPackage.MODEL__GREETINGS);
+      rows = new EObjectContainmentEList<TableRow>(TableRow.class, this, CucumberPackage.TABLE__ROWS);
     }
-    return greetings;
+    return rows;
   }
 
   /**
@@ -92,8 +92,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case CucumberPackage.MODEL__GREETINGS:
-        return ((InternalEList<?>)getGreetings()).basicRemove(otherEnd, msgs);
+      case CucumberPackage.TABLE__ROWS:
+        return ((InternalEList<?>)getRows()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -108,8 +108,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case CucumberPackage.MODEL__GREETINGS:
-        return getGreetings();
+      case CucumberPackage.TABLE__ROWS:
+        return getRows();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -125,9 +125,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case CucumberPackage.MODEL__GREETINGS:
-        getGreetings().clear();
-        getGreetings().addAll((Collection<? extends Greeting>)newValue);
+      case CucumberPackage.TABLE__ROWS:
+        getRows().clear();
+        getRows().addAll((Collection<? extends TableRow>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,8 +143,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case CucumberPackage.MODEL__GREETINGS:
-        getGreetings().clear();
+      case CucumberPackage.TABLE__ROWS:
+        getRows().clear();
         return;
     }
     super.eUnset(featureID);
@@ -160,10 +160,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case CucumberPackage.MODEL__GREETINGS:
-        return greetings != null && !greetings.isEmpty();
+      case CucumberPackage.TABLE__ROWS:
+        return rows != null && !rows.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //ModelImpl
+} //TableImpl

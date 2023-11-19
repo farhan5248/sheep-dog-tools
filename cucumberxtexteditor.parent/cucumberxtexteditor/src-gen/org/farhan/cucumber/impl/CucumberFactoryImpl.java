@@ -65,8 +65,18 @@ public class CucumberFactoryImpl extends EFactoryImpl implements CucumberFactory
   {
     switch (eClass.getClassifierID())
     {
-      case CucumberPackage.MODEL: return createModel();
-      case CucumberPackage.GREETING: return createGreeting();
+      case CucumberPackage.FEATURE: return createFeature();
+      case CucumberPackage.BACKGROUND: return createBackground();
+      case CucumberPackage.ABSTRACT_SCENARIO: return createAbstractScenario();
+      case CucumberPackage.SCENARIO: return createScenario();
+      case CucumberPackage.SCENARIO_OUTLINE: return createScenarioOutline();
+      case CucumberPackage.EXAMPLE: return createExample();
+      case CucumberPackage.STEP: return createStep();
+      case CucumberPackage.TABLE: return createTable();
+      case CucumberPackage.TABLE_ROW: return createTableRow();
+      case CucumberPackage.ROW_CELL: return createRowCell();
+      case CucumberPackage.DOC_STRING: return createDocString();
+      case CucumberPackage.DESCRIPTION: return createDescription();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -78,10 +88,10 @@ public class CucumberFactoryImpl extends EFactoryImpl implements CucumberFactory
    * @generated
    */
   @Override
-  public Model createModel()
+  public Feature createFeature()
   {
-    ModelImpl model = new ModelImpl();
-    return model;
+    FeatureImpl feature = new FeatureImpl();
+    return feature;
   }
 
   /**
@@ -90,10 +100,130 @@ public class CucumberFactoryImpl extends EFactoryImpl implements CucumberFactory
    * @generated
    */
   @Override
-  public Greeting createGreeting()
+  public Background createBackground()
   {
-    GreetingImpl greeting = new GreetingImpl();
-    return greeting;
+    BackgroundImpl background = new BackgroundImpl();
+    return background;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public AbstractScenario createAbstractScenario()
+  {
+    AbstractScenarioImpl abstractScenario = new AbstractScenarioImpl();
+    return abstractScenario;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Scenario createScenario()
+  {
+    ScenarioImpl scenario = new ScenarioImpl();
+    return scenario;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ScenarioOutline createScenarioOutline()
+  {
+    ScenarioOutlineImpl scenarioOutline = new ScenarioOutlineImpl();
+    return scenarioOutline;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Example createExample()
+  {
+    ExampleImpl example = new ExampleImpl();
+    return example;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Step createStep()
+  {
+    StepImpl step = new StepImpl();
+    return step;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Table createTable()
+  {
+    TableImpl table = new TableImpl();
+    return table;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public TableRow createTableRow()
+  {
+    TableRowImpl tableRow = new TableRowImpl();
+    return tableRow;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public RowCell createRowCell()
+  {
+    RowCellImpl rowCell = new RowCellImpl();
+    return rowCell;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public DocString createDocString()
+  {
+    DocStringImpl docString = new DocStringImpl();
+    return docString;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Description createDescription()
+  {
+    DescriptionImpl description = new DescriptionImpl();
+    return description;
   }
 
   /**

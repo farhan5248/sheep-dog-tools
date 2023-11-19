@@ -11,49 +11,49 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.farhan.cucumber.CucumberPackage;
-import org.farhan.cucumber.Greeting;
+import org.farhan.cucumber.RowCell;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Greeting</b></em>'.
+ * An implementation of the model object '<em><b>Row Cell</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cucumber.impl.GreetingImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.RowCellImpl#getCell <em>Cell</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeting
+public class RowCellImpl extends MinimalEObjectImpl.Container implements RowCell
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The default value of the '{@link #getCell() <em>Cell</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getCell()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
+  protected static final String CELL_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getCell() <em>Cell</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getCell()
    * @generated
    * @ordered
    */
-  protected String name = NAME_EDEFAULT;
+  protected String cell = CELL_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected GreetingImpl()
+  protected RowCellImpl()
   {
     super();
   }
@@ -66,7 +66,7 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
   @Override
   protected EClass eStaticClass()
   {
-    return CucumberPackage.Literals.GREETING;
+    return CucumberPackage.Literals.ROW_CELL;
   }
 
   /**
@@ -75,9 +75,9 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
    * @generated
    */
   @Override
-  public String getName()
+  public String getCell()
   {
-    return name;
+    return cell;
   }
 
   /**
@@ -86,12 +86,12 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
    * @generated
    */
   @Override
-  public void setName(String newName)
+  public void setCell(String newCell)
   {
-    String oldName = name;
-    name = newName;
+    String oldCell = cell;
+    cell = newCell;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.GREETING__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.ROW_CELL__CELL, oldCell, cell));
   }
 
   /**
@@ -104,8 +104,8 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
   {
     switch (featureID)
     {
-      case CucumberPackage.GREETING__NAME:
-        return getName();
+      case CucumberPackage.ROW_CELL__CELL:
+        return getCell();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -120,8 +120,8 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
   {
     switch (featureID)
     {
-      case CucumberPackage.GREETING__NAME:
-        setName((String)newValue);
+      case CucumberPackage.ROW_CELL__CELL:
+        setCell((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,8 +137,8 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
   {
     switch (featureID)
     {
-      case CucumberPackage.GREETING__NAME:
-        setName(NAME_EDEFAULT);
+      case CucumberPackage.ROW_CELL__CELL:
+        setCell(CELL_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -154,8 +154,8 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
   {
     switch (featureID)
     {
-      case CucumberPackage.GREETING__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case CucumberPackage.ROW_CELL__CELL:
+        return CELL_EDEFAULT == null ? cell != null : !CELL_EDEFAULT.equals(cell);
     }
     return super.eIsSet(featureID);
   }
@@ -171,10 +171,10 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (name: ");
-    result.append(name);
+    result.append(" (cell: ");
+    result.append(cell);
     result.append(')');
     return result.toString();
   }
 
-} //GreetingImpl
+} //RowCellImpl

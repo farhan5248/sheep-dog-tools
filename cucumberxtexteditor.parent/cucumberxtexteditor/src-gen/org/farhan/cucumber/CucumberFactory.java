@@ -24,22 +24,112 @@ public interface CucumberFactory extends EFactory
   CucumberFactory eINSTANCE = org.farhan.cucumber.impl.CucumberFactoryImpl.init();
 
   /**
-   * Returns a new object of class '<em>Model</em>'.
+   * Returns a new object of class '<em>Feature</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Model</em>'.
+   * @return a new object of class '<em>Feature</em>'.
    * @generated
    */
-  Model createModel();
+  Feature createFeature();
 
   /**
-   * Returns a new object of class '<em>Greeting</em>'.
+   * Returns a new object of class '<em>Background</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Greeting</em>'.
+   * @return a new object of class '<em>Background</em>'.
    * @generated
    */
-  Greeting createGreeting();
+  Background createBackground();
+
+  /**
+   * Returns a new object of class '<em>Abstract Scenario</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Abstract Scenario</em>'.
+   * @generated
+   */
+  AbstractScenario createAbstractScenario();
+
+  /**
+   * Returns a new object of class '<em>Scenario</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Scenario</em>'.
+   * @generated
+   */
+  Scenario createScenario();
+
+  /**
+   * Returns a new object of class '<em>Scenario Outline</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Scenario Outline</em>'.
+   * @generated
+   */
+  ScenarioOutline createScenarioOutline();
+
+  /**
+   * Returns a new object of class '<em>Example</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Example</em>'.
+   * @generated
+   */
+  Example createExample();
+
+  /**
+   * Returns a new object of class '<em>Step</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Step</em>'.
+   * @generated
+   */
+  Step createStep();
+
+  /**
+   * Returns a new object of class '<em>Table</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Table</em>'.
+   * @generated
+   */
+  Table createTable();
+
+  /**
+   * Returns a new object of class '<em>Table Row</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Table Row</em>'.
+   * @generated
+   */
+  TableRow createTableRow();
+
+  /**
+   * Returns a new object of class '<em>Row Cell</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Row Cell</em>'.
+   * @generated
+   */
+  RowCell createRowCell();
+
+  /**
+   * Returns a new object of class '<em>Doc String</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Doc String</em>'.
+   * @generated
+   */
+  DocString createDocString();
+
+  /**
+   * Returns a new object of class '<em>Description</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Description</em>'.
+   * @generated
+   */
+  Description createDescription();
 
   /**
    * Returns the package supported by this factory.
