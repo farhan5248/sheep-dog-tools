@@ -1,9 +1,9 @@
-#Cucumber Text Editor
+# Cucumber Text Editor
 
 These are the steps to create the project.
 They're just notes for now, I'll get back to them with more details later.
 
-# Create Xtext Project
+## Create Xtext Project
 
 You can follow the tutorial steps but if you want to just start coding to play around with this, I'd just do these steps first.
 
@@ -16,7 +16,7 @@ c. Extensions is feature since I want to associate those files with this editor
 4. click on Next
 5. Select Eclipse plug-in, Create Feature, Create Update Site, Maven for Preferred Build System
 
-# Add Customisations
+## Add Customisations
 
 These are all the files to change. Some notes:
 1. For the pom it's the group ID
@@ -50,7 +50,7 @@ cucumberxtexteditor.parent/cucumberxtexteditor.ui/src/org/farhan/ui/syntaxcolori
 cucumberxtexteditor.parent/cucumberxtexteditor.ui/src-gen/org/farhan/ui/AbstractCucumberUiModule.java
 cucumberxtexteditor.parent/cucumberxtexteditor.ui.tests/pom.xml
 
-# Test the setup
+## Test the setup
 
 There's two ways to do this, one within Eclipse when you're coding/debugging/testing etc and one via Maven 
 
