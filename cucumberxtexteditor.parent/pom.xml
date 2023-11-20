@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>cucumberxtexteditor</groupId>
+	<groupId>org.farhan</groupId>
 	<version>1.0.0-SNAPSHOT</version>
 	<artifactId>cucumberxtexteditor.parent</artifactId>
 	<packaging>pom</packaging>
@@ -25,6 +25,8 @@
 		<module>cucumberxtexteditor.ide</module>
 		<module>cucumberxtexteditor.ui</module>
 		<module>cucumberxtexteditor.target</module>
+		<module>cucumberxtexteditor.feature</module>
+		<module>cucumberxtexteditor.repository</module>
 		<module>cucumberxtexteditor.tests</module>
 		<module>cucumberxtexteditor.ui.tests</module>
 	</modules>
@@ -49,12 +51,45 @@
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>plugin-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>feature-source</id>
+						<goals>
+							<goal>feature-source</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>attach-p2-metadata</id>
+						<phase>package</phase>
+						<goals>
+							<goal>p2-metadata</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
 					<target>
 						<artifact>
-							<groupId>cucumberxtexteditor</groupId>
+							<groupId>org.farhan</groupId>
 							<artifactId>cucumberxtexteditor.target</artifactId>
 							<version>${project.version}</version>
 						</artifact>
