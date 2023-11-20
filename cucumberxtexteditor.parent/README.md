@@ -59,3 +59,45 @@ There's two ways to do this, one within Eclipse when you're coding/debugging/tes
 | Generate code | right click on the .xtext file, Run As > Generate Xtext Artifacts | mvn generate-sources |
 | Run tests | right click the .tests project > Run As > JUnit Plug-in Test | mvn test |
 | Test plug-in in Eclipse | right click the dsl (not postfix) project > Run As > Eclipse Application. It should start another Eclipse Instance | mvn install. The plug-in is in the repository directory, it's the zip file. Help > Install New Software > Add > Archive > Open  > Add > Select All > Finish |
+
+## Publish New Version
+
+The Maven release process doesn't touch the .feature or MANIFEST files so I make two commits for now to simulate that process
+
+These are the files to change
+
+cucumberxtexteditor.parent/pom.xml
+cucumberxtexteditor.parent/cucumberxtexteditor/pom.xml
+cucumberxtexteditor.parent/cucumberxtexteditor/META-INF/MANIFEST.MF
+cucumberxtexteditor.parent/cucumberxtexteditor.feature/feature.xml
+cucumberxtexteditor.parent/cucumberxtexteditor.feature/pom.xml
+cucumberxtexteditor.parent/cucumberxtexteditor.ide/pom.xml
+cucumberxtexteditor.parent/cucumberxtexteditor.ide/META-INF/MANIFEST.MF
+cucumberxtexteditor.parent/cucumberxtexteditor.repository/pom.xml
+cucumberxtexteditor.parent/cucumberxtexteditor.target/pom.xml
+cucumberxtexteditor.parent/cucumberxtexteditor.tests/pom.xml
+cucumberxtexteditor.parent/cucumberxtexteditor.tests/META-INF/MANIFEST.MF
+cucumberxtexteditor.parent/cucumberxtexteditor.ui/pom.xml
+cucumberxtexteditor.parent/cucumberxtexteditor.ui/META-INF/MANIFEST.MF
+cucumberxtexteditor.parent/cucumberxtexteditor.ui.tests/pom.xml
+cucumberxtexteditor.parent/cucumberxtexteditor.ui.tests/META-INF/MANIFEST.MF
+cucumberxtexteditor.parent/cucumberxtexteditor.web/pom.xml
+
+### Create Release Version
+
+Do search and replace for the following
+1. replace <version>1.0.0-SNAPSHOT</version> with <version>1.0.0</version> in pom.xml
+2. replace Bundle-Version: 1.0.0.qualifier with Bundle-Version: 1.0.0 in MANIFEST.MF
+3. replace version="1.0.0.qualifier" with version="1.0.0.qualifier" in feature.xml
+
+There should be 15 file changes in git. commit everything with this message "[maven-release-plugin] prepare release cucumberxtexteditor-1.0.0"
+create tag for cucumberxtexteditor-1.0.0
+
+### Create SNAPSHOT Version
+
+Do search and replace for the following
+1. replace <version>1.0.0</version> with <version>1.0.1-SNAPSHOT</version> in pom.xml
+2. replace Bundle-Version: 1.0.0 with Bundle-Version: 1.0.1.qualifier in MANIFEST.MF
+3. replace version="1.0.0" with version="1.0.1.qualifier" in feature.xml
+
+There should be 15 file changes in git. commit everything with this message "[maven-release-plugin] prepare for next development iteration"
