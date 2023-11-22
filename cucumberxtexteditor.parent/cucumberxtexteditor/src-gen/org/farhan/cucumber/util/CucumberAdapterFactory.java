@@ -106,6 +106,11 @@ public class CucumberAdapterFactory extends AdapterFactoryImpl
         return createExampleAdapter();
       }
       @Override
+      public Adapter caseDescription(Description object)
+      {
+        return createDescriptionAdapter();
+      }
+      @Override
       public Adapter caseStep(Step object)
       {
         return createStepAdapter();
@@ -131,9 +136,9 @@ public class CucumberAdapterFactory extends AdapterFactoryImpl
         return createDocStringAdapter();
       }
       @Override
-      public Adapter caseDescription(Description object)
+      public Adapter caseTag(Tag object)
       {
-        return createDescriptionAdapter();
+        return createTagAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -248,6 +253,21 @@ public class CucumberAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.farhan.cucumber.Description <em>Description</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.cucumber.Description
+   * @generated
+   */
+  public Adapter createDescriptionAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.farhan.cucumber.Step <em>Step</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -323,16 +343,16 @@ public class CucumberAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.farhan.cucumber.Description <em>Description</em>}'.
+   * Creates a new adapter for an object of class '{@link org.farhan.cucumber.Tag <em>Tag</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.farhan.cucumber.Description
+   * @see org.farhan.cucumber.Tag
    * @generated
    */
-  public Adapter createDescriptionAdapter()
+  public Adapter createTagAdapter()
   {
     return null;
   }

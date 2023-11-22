@@ -12,8 +12,9 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalCucumberLexer extends Lexer {
+    public static final int RULE_TAG_ID=5;
     public static final int RULE_WORD=6;
-    public static final int RULE_TAG=5;
+    public static final int RULE_SL_COMMENT=8;
     public static final int T__19=19;
     public static final int T__15=15;
     public static final int T__16=16;
@@ -28,7 +29,6 @@ public class InternalCucumberLexer extends Lexer {
     public static final int T__9=9;
     public static final int RULE_EOL=4;
     public static final int RULE_WS=7;
-    public static final int RULE_COMMENT=8;
     public static final int T__20=20;
     public static final int T__21=21;
 
@@ -321,10 +321,10 @@ public class InternalCucumberLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:1001:9: ( ( ' ' | '\\t' )+ )
-            // InternalCucumber.g:1001:11: ( ' ' | '\\t' )+
+            // InternalCucumber.g:1050:9: ( ( ' ' | '\\t' )+ )
+            // InternalCucumber.g:1050:11: ( ' ' | '\\t' )+
             {
-            // InternalCucumber.g:1001:11: ( ' ' | '\\t' )+
+            // InternalCucumber.g:1050:11: ( ' ' | '\\t' )+
             int cnt1=0;
             loop1:
             do {
@@ -378,10 +378,10 @@ public class InternalCucumberLexer extends Lexer {
         try {
             int _type = RULE_EOL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:1003:10: ( ( '\\r' | '\\n' )+ )
-            // InternalCucumber.g:1003:12: ( '\\r' | '\\n' )+
+            // InternalCucumber.g:1052:10: ( ( '\\r' | '\\n' )+ )
+            // InternalCucumber.g:1052:12: ( '\\r' | '\\n' )+
             {
-            // InternalCucumber.g:1003:12: ( '\\r' | '\\n' )+
+            // InternalCucumber.g:1052:12: ( '\\r' | '\\n' )+
             int cnt2=0;
             loop2:
             do {
@@ -430,16 +430,16 @@ public class InternalCucumberLexer extends Lexer {
     }
     // $ANTLR end "RULE_EOL"
 
-    // $ANTLR start "RULE_COMMENT"
-    public final void mRULE_COMMENT() throws RecognitionException {
+    // $ANTLR start "RULE_SL_COMMENT"
+    public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
-            int _type = RULE_COMMENT;
+            int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:1005:14: ( '#' (~ ( ( '\\r' | '\\n' ) ) )* RULE_EOL )
-            // InternalCucumber.g:1005:16: '#' (~ ( ( '\\r' | '\\n' ) ) )* RULE_EOL
+            // InternalCucumber.g:1054:17: ( '#' (~ ( ( '\\r' | '\\n' ) ) )* RULE_EOL )
+            // InternalCucumber.g:1054:19: '#' (~ ( ( '\\r' | '\\n' ) ) )* RULE_EOL
             {
             match('#'); 
-            // InternalCucumber.g:1005:20: (~ ( ( '\\r' | '\\n' ) ) )*
+            // InternalCucumber.g:1054:23: (~ ( ( '\\r' | '\\n' ) ) )*
             loop3:
             do {
                 int alt3=2;
@@ -452,7 +452,7 @@ public class InternalCucumberLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalCucumber.g:1005:20: ~ ( ( '\\r' | '\\n' ) )
+            	    // InternalCucumber.g:1054:23: ~ ( ( '\\r' | '\\n' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -482,17 +482,17 @@ public class InternalCucumberLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "RULE_COMMENT"
+    // $ANTLR end "RULE_SL_COMMENT"
 
     // $ANTLR start "RULE_WORD"
     public final void mRULE_WORD() throws RecognitionException {
         try {
             int _type = RULE_WORD;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:1007:11: ( (~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) ) )+ )
-            // InternalCucumber.g:1007:13: (~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) ) )+
+            // InternalCucumber.g:1056:11: ( (~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) ) )+ )
+            // InternalCucumber.g:1056:13: (~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) ) )+
             {
-            // InternalCucumber.g:1007:13: (~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) ) )+
+            // InternalCucumber.g:1056:13: (~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) ) )+
             int cnt4=0;
             loop4:
             do {
@@ -506,7 +506,7 @@ public class InternalCucumberLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalCucumber.g:1007:13: ~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) )
+            	    // InternalCucumber.g:1056:13: ~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\b')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\u001F')||(input.LA(1)>='!' && input.LA(1)<='?')||(input.LA(1)>='A' && input.LA(1)<='{')||(input.LA(1)>='}' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -541,13 +541,13 @@ public class InternalCucumberLexer extends Lexer {
     }
     // $ANTLR end "RULE_WORD"
 
-    // $ANTLR start "RULE_TAG"
-    public final void mRULE_TAG() throws RecognitionException {
+    // $ANTLR start "RULE_TAG_ID"
+    public final void mRULE_TAG_ID() throws RecognitionException {
         try {
-            int _type = RULE_TAG;
+            int _type = RULE_TAG_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:1009:10: ( '@' RULE_WORD )
-            // InternalCucumber.g:1009:12: '@' RULE_WORD
+            // InternalCucumber.g:1058:13: ( '@' RULE_WORD )
+            // InternalCucumber.g:1058:15: '@' RULE_WORD
             {
             match('@'); 
             mRULE_WORD(); 
@@ -560,10 +560,10 @@ public class InternalCucumberLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "RULE_TAG"
+    // $ANTLR end "RULE_TAG_ID"
 
     public void mTokens() throws RecognitionException {
-        // InternalCucumber.g:1:8: ( T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | RULE_WS | RULE_EOL | RULE_COMMENT | RULE_WORD | RULE_TAG )
+        // InternalCucumber.g:1:8: ( T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | RULE_WS | RULE_EOL | RULE_SL_COMMENT | RULE_WORD | RULE_TAG_ID )
         int alt5=18;
         alt5 = dfa5.predict(input);
         switch (alt5) {
@@ -673,23 +673,23 @@ public class InternalCucumberLexer extends Lexer {
                 }
                 break;
             case 16 :
-                // InternalCucumber.g:1:104: RULE_COMMENT
+                // InternalCucumber.g:1:104: RULE_SL_COMMENT
                 {
-                mRULE_COMMENT(); 
+                mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 17 :
-                // InternalCucumber.g:1:117: RULE_WORD
+                // InternalCucumber.g:1:120: RULE_WORD
                 {
                 mRULE_WORD(); 
 
                 }
                 break;
             case 18 :
-                // InternalCucumber.g:1:127: RULE_TAG
+                // InternalCucumber.g:1:130: RULE_TAG_ID
                 {
-                mRULE_TAG(); 
+                mRULE_TAG_ID(); 
 
                 }
                 break;
@@ -825,7 +825,7 @@ public class InternalCucumberLexer extends Lexer {
             this.transition = DFA5_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | RULE_WS | RULE_EOL | RULE_COMMENT | RULE_WORD | RULE_TAG );";
+            return "1:1: Tokens : ( T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | RULE_WS | RULE_EOL | RULE_SL_COMMENT | RULE_WORD | RULE_TAG_ID );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;

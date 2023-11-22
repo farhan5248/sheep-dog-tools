@@ -1,17 +1,17 @@
-grammar org.farhan.Cucumber hidden(WS, COMMENT)
+grammar org.farhan.Cucumber hidden(WS, SL_COMMENT)
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 generate cucumber "http://www.farhan.org/Cucumber"
 
 Feature:
-	Tags
-	'Feature:' title=Sentence EOL?
-	description=Description
-	background=Background?
+	(tag+=Tag+ EOL)?
+	'Feature:' title=Sentence EOL
+	(descriptions+=Description)*
+	(background=Background)?
 	(scenarios+=AbstractScenario)*;
 
 Background:
-	'Background:' title=Sentence EOL?
+	'Background:' title=Sentence EOL
 	description=Description
 	(steps+=Step)*;
 
@@ -19,23 +19,26 @@ AbstractScenario:
 	ScenarioOutline | Scenario;
 
 Scenario:
-	Tags
-	'Scenario:' title=Sentence EOL?
+	(tag+=Tag EOL)?
+	'Scenario:' title=Sentence EOL
 	description=Description
 	(steps+=Step)*;
 
 ScenarioOutline:
-	Tags
-	'Scenario Outline:' title=Sentence EOL?
+	(tag+=Tag EOL)?
+	'Scenario Outline:' title=Sentence EOL
 	description=Description
 	(steps+=Step)*
 	(examples+=Example+);
 
 Example:
-	Tags
-	'Examples:' title=Sentence EOL?
+	(tag+=Tag EOL)?
+	'Examples:' title=Sentence EOL
 	description=Description
 	table=Table;
+
+Description:
+	line=Sentence EOL;
 
 Step:
 	('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence EOL?
@@ -54,12 +57,8 @@ DocString:
 	{DocString}
 	'"""' (Sentence | EOL)* '"""' EOL;
 
-// make this optional
-Description:
-	{Description} (sentences+=Sentence EOL?)*;
-
-Tags:
-	TAG* EOL?;
+Tag:
+	tag=TAG_ID;
 
 Sentence:
 	WORD+;
@@ -71,7 +70,7 @@ terminal EOL:
 	('\r' | '\n')+;
 
 // single line comment
-terminal COMMENT:
+terminal SL_COMMENT:
 	'#' !('\r' | '\n')* EOL;
 
 // need to add punctuation and commas etc
@@ -79,5 +78,5 @@ terminal COMMENT:
 terminal WORD:
 	!('@' | '|' | ' ' | '\t' | '\n' | '\r')+;
 
-terminal TAG:
+terminal TAG_ID:
 	'@' WORD;

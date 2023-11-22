@@ -1,11 +1,16 @@
 package org.farhan.tests;
 
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.extensions.InjectionExtension;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.testing.CompilationTestHelper;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import com.google.inject.Inject;
 
+@ExtendWith(InjectionExtension.class)
+@InjectWith(CucumberInjectorProvider.class)
 public class CucumberCompilationTest {
 	@Inject
 	@Extension

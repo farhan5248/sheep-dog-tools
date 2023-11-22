@@ -16,8 +16,9 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.farhan.cucumber.Feature#getTag <em>Tag</em>}</li>
  *   <li>{@link org.farhan.cucumber.Feature#getTitle <em>Title</em>}</li>
- *   <li>{@link org.farhan.cucumber.Feature#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.farhan.cucumber.Feature#getDescriptions <em>Descriptions</em>}</li>
  *   <li>{@link org.farhan.cucumber.Feature#getBackground <em>Background</em>}</li>
  *   <li>{@link org.farhan.cucumber.Feature#getScenarios <em>Scenarios</em>}</li>
  * </ul>
@@ -28,6 +29,18 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Feature extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Tag</b></em>' containment reference list.
+   * The list contents are of type {@link org.farhan.cucumber.Tag}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Tag</em>' containment reference list.
+   * @see org.farhan.cucumber.CucumberPackage#getFeature_Tag()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Tag> getTag();
+
   /**
    * Returns the value of the '<em><b>Title</b></em>' attribute.
    * <!-- begin-user-doc -->
@@ -51,26 +64,16 @@ public interface Feature extends EObject
   void setTitle(String value);
 
   /**
-   * Returns the value of the '<em><b>Description</b></em>' containment reference.
+   * Returns the value of the '<em><b>Descriptions</b></em>' containment reference list.
+   * The list contents are of type {@link org.farhan.cucumber.Description}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Description</em>' containment reference.
-   * @see #setDescription(Description)
-   * @see org.farhan.cucumber.CucumberPackage#getFeature_Description()
+   * @return the value of the '<em>Descriptions</em>' containment reference list.
+   * @see org.farhan.cucumber.CucumberPackage#getFeature_Descriptions()
    * @model containment="true"
    * @generated
    */
-  Description getDescription();
-
-  /**
-   * Sets the value of the '{@link org.farhan.cucumber.Feature#getDescription <em>Description</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Description</em>' containment reference.
-   * @see #getDescription()
-   * @generated
-   */
-  void setDescription(Description value);
+  EList<Description> getDescriptions();
 
   /**
    * Returns the value of the '<em><b>Background</b></em>' containment reference.

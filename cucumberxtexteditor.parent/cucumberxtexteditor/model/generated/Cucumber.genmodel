@@ -7,8 +7,9 @@
   <genPackages prefix="Cucumber" basePackage="org.farhan" disposableProviderFactory="true"
       fileExtensions="feature" ecorePackage="Cucumber.ecore#/">
     <genClasses ecoreClass="Cucumber.ecore#//Feature">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Feature/tag"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//Feature/title"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Feature/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Feature/descriptions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Feature/background"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Feature/scenarios"/>
     </genClasses>
@@ -18,6 +19,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Background/steps"/>
     </genClasses>
     <genClasses ecoreClass="Cucumber.ecore#//AbstractScenario">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//AbstractScenario/tag"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//AbstractScenario/title"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//AbstractScenario/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//AbstractScenario/steps"/>
@@ -27,9 +29,13 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//ScenarioOutline/examples"/>
     </genClasses>
     <genClasses ecoreClass="Cucumber.ecore#//Example">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Example/tag"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//Example/title"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Example/description"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//Example/table"/>
+    </genClasses>
+    <genClasses ecoreClass="Cucumber.ecore#//Description">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//Description/line"/>
     </genClasses>
     <genClasses ecoreClass="Cucumber.ecore#//Step">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//Step/title"/>
@@ -46,8 +52,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//RowCell/cell"/>
     </genClasses>
     <genClasses ecoreClass="Cucumber.ecore#//DocString"/>
-    <genClasses ecoreClass="Cucumber.ecore#//Description">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//Description/sentences"/>
+    <genClasses ecoreClass="Cucumber.ecore#//Tag">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//Tag/tag"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

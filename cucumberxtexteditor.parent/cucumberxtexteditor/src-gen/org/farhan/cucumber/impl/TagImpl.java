@@ -11,49 +11,49 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.farhan.cucumber.CucumberPackage;
-import org.farhan.cucumber.Description;
+import org.farhan.cucumber.Tag;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Description</b></em>'.
+ * An implementation of the model object '<em><b>Tag</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cucumber.impl.DescriptionImpl#getLine <em>Line</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.TagImpl#getTag <em>Tag</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class DescriptionImpl extends MinimalEObjectImpl.Container implements Description
+public class TagImpl extends MinimalEObjectImpl.Container implements Tag
 {
   /**
-   * The default value of the '{@link #getLine() <em>Line</em>}' attribute.
+   * The default value of the '{@link #getTag() <em>Tag</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLine()
+   * @see #getTag()
    * @generated
    * @ordered
    */
-  protected static final String LINE_EDEFAULT = null;
+  protected static final String TAG_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getLine() <em>Line</em>}' attribute.
+   * The cached value of the '{@link #getTag() <em>Tag</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLine()
+   * @see #getTag()
    * @generated
    * @ordered
    */
-  protected String line = LINE_EDEFAULT;
+  protected String tag = TAG_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected DescriptionImpl()
+  protected TagImpl()
   {
     super();
   }
@@ -66,7 +66,7 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements Des
   @Override
   protected EClass eStaticClass()
   {
-    return CucumberPackage.Literals.DESCRIPTION;
+    return CucumberPackage.Literals.TAG;
   }
 
   /**
@@ -75,9 +75,9 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements Des
    * @generated
    */
   @Override
-  public String getLine()
+  public String getTag()
   {
-    return line;
+    return tag;
   }
 
   /**
@@ -86,12 +86,12 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements Des
    * @generated
    */
   @Override
-  public void setLine(String newLine)
+  public void setTag(String newTag)
   {
-    String oldLine = line;
-    line = newLine;
+    String oldTag = tag;
+    tag = newTag;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.DESCRIPTION__LINE, oldLine, line));
+      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.TAG__TAG, oldTag, tag));
   }
 
   /**
@@ -104,8 +104,8 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements Des
   {
     switch (featureID)
     {
-      case CucumberPackage.DESCRIPTION__LINE:
-        return getLine();
+      case CucumberPackage.TAG__TAG:
+        return getTag();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -120,8 +120,8 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements Des
   {
     switch (featureID)
     {
-      case CucumberPackage.DESCRIPTION__LINE:
-        setLine((String)newValue);
+      case CucumberPackage.TAG__TAG:
+        setTag((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,8 +137,8 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements Des
   {
     switch (featureID)
     {
-      case CucumberPackage.DESCRIPTION__LINE:
-        setLine(LINE_EDEFAULT);
+      case CucumberPackage.TAG__TAG:
+        setTag(TAG_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -154,8 +154,8 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements Des
   {
     switch (featureID)
     {
-      case CucumberPackage.DESCRIPTION__LINE:
-        return LINE_EDEFAULT == null ? line != null : !LINE_EDEFAULT.equals(line);
+      case CucumberPackage.TAG__TAG:
+        return TAG_EDEFAULT == null ? tag != null : !TAG_EDEFAULT.equals(tag);
     }
     return super.eIsSet(featureID);
   }
@@ -171,10 +171,10 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements Des
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (line: ");
-    result.append(line);
+    result.append(" (tag: ");
+    result.append(tag);
     result.append(')');
     return result.toString();
   }
 
-} //DescriptionImpl
+} //TagImpl

@@ -12,7 +12,7 @@ public class CucumberHighlightingConfiguration implements IHighlightingConfigura
 	public static final String DEFAULT_ID = "default";
 	public static final String KEYWORD_FSE_ID = "keywordfse";
 	public static final String KEYWORD_GWT_ID = "keywordgwt";
-	public static final String COMMENT_ID = "comment";
+	public static final String SL_COMMENT_ID = "comment";
 	public static final String STRING_ID = "string";
 	public static final String TAG_ID = "tag";
 	// TODO put parameter in language so that no semantic highlighting is needed?
@@ -24,7 +24,7 @@ public class CucumberHighlightingConfiguration implements IHighlightingConfigura
 		acceptor.acceptDefaultHighlighting(DEFAULT_ID, "Default", defaultTextStyle());
 		acceptor.acceptDefaultHighlighting(KEYWORD_FSE_ID, "Keyword FSE", keywordFeatureScenarioExamplesTextStyle());
 		acceptor.acceptDefaultHighlighting(KEYWORD_GWT_ID, "Keyword GWT", keywordGivenWhenThenTextStyle());
-		acceptor.acceptDefaultHighlighting(COMMENT_ID, "Comment", commentTextStyle());
+		acceptor.acceptDefaultHighlighting(SL_COMMENT_ID, "Comment", commentTextStyle());
 		acceptor.acceptDefaultHighlighting(STRING_ID, "String", stringTextStyle());
 		acceptor.acceptDefaultHighlighting(PARAMETER_ID, "Parameter", parameterTextStyle());
 		acceptor.acceptDefaultHighlighting(TAG_ID, "Tag", tagTextStyle());

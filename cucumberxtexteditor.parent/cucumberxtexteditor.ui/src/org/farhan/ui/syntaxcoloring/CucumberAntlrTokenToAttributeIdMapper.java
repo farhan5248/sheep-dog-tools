@@ -13,14 +13,14 @@ public class CucumberAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToA
 		switch (tokenName) {
 		case "RULE_EOL":
 			// nothing to do here
-		case "RULE_TAG":
+		case "RULE_TAG_ID":
 			return CucumberHighlightingConfiguration.TAG_ID;
 		case "RULE_WORD":
 			return CucumberHighlightingConfiguration.STRING_ID;
 		case "RULE_WS":
 			// nothing to do here
-		case "RULE_COMMENT":
-			return CucumberHighlightingConfiguration.COMMENT_ID;
+		case "RULE_SL_COMMENT":
+			return CucumberHighlightingConfiguration.SL_COMMENT_ID;
 
 		case "'Feature:'":
 			return CucumberHighlightingConfiguration.KEYWORD_FSE_ID;

@@ -3,8 +3,12 @@
  */
 package org.farhan.cucumber.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -12,10 +16,14 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Description;
 import org.farhan.cucumber.Example;
 import org.farhan.cucumber.Table;
+import org.farhan.cucumber.Tag;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,6 +33,7 @@ import org.farhan.cucumber.Table;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.farhan.cucumber.impl.ExampleImpl#getTag <em>Tag</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.ExampleImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.ExampleImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.ExampleImpl#getTable <em>Table</em>}</li>
@@ -34,6 +43,16 @@ import org.farhan.cucumber.Table;
  */
 public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
 {
+  /**
+   * The cached value of the '{@link #getTag() <em>Tag</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTag()
+   * @generated
+   * @ordered
+   */
+  protected EList<Tag> tag;
+
   /**
    * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -93,6 +112,21 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
   protected EClass eStaticClass()
   {
     return CucumberPackage.Literals.EXAMPLE;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EList<Tag> getTag()
+  {
+    if (tag == null)
+    {
+      tag = new EObjectContainmentEList<Tag>(Tag.class, this, CucumberPackage.EXAMPLE__TAG);
+    }
+    return tag;
   }
 
   /**
@@ -230,6 +264,8 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
   {
     switch (featureID)
     {
+      case CucumberPackage.EXAMPLE__TAG:
+        return ((InternalEList<?>)getTag()).basicRemove(otherEnd, msgs);
       case CucumberPackage.EXAMPLE__DESCRIPTION:
         return basicSetDescription(null, msgs);
       case CucumberPackage.EXAMPLE__TABLE:
@@ -248,6 +284,8 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
   {
     switch (featureID)
     {
+      case CucumberPackage.EXAMPLE__TAG:
+        return getTag();
       case CucumberPackage.EXAMPLE__TITLE:
         return getTitle();
       case CucumberPackage.EXAMPLE__DESCRIPTION:
@@ -263,11 +301,16 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
+      case CucumberPackage.EXAMPLE__TAG:
+        getTag().clear();
+        getTag().addAll((Collection<? extends Tag>)newValue);
+        return;
       case CucumberPackage.EXAMPLE__TITLE:
         setTitle((String)newValue);
         return;
@@ -291,6 +334,9 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
   {
     switch (featureID)
     {
+      case CucumberPackage.EXAMPLE__TAG:
+        getTag().clear();
+        return;
       case CucumberPackage.EXAMPLE__TITLE:
         setTitle(TITLE_EDEFAULT);
         return;
@@ -314,6 +360,8 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
   {
     switch (featureID)
     {
+      case CucumberPackage.EXAMPLE__TAG:
+        return tag != null && !tag.isEmpty();
       case CucumberPackage.EXAMPLE__TITLE:
         return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
       case CucumberPackage.EXAMPLE__DESCRIPTION:

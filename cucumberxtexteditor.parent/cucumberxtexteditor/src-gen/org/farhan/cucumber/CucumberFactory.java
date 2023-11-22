@@ -78,6 +78,15 @@ public interface CucumberFactory extends EFactory
   Example createExample();
 
   /**
+   * Returns a new object of class '<em>Description</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Description</em>'.
+   * @generated
+   */
+  Description createDescription();
+
+  /**
    * Returns a new object of class '<em>Step</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -123,13 +132,13 @@ public interface CucumberFactory extends EFactory
   DocString createDocString();
 
   /**
-   * Returns a new object of class '<em>Description</em>'.
+   * Returns a new object of class '<em>Tag</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Description</em>'.
+   * @return a new object of class '<em>Tag</em>'.
    * @generated
    */
-  Description createDescription();
+  Tag createTag();
 
   /**
    * Returns the package supported by this factory.

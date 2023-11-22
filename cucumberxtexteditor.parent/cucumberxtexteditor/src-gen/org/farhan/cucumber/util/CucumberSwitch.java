@@ -117,6 +117,13 @@ public class CucumberSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case CucumberPackage.DESCRIPTION:
+      {
+        Description description = (Description)theEObject;
+        T result = caseDescription(description);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case CucumberPackage.STEP:
       {
         Step step = (Step)theEObject;
@@ -152,10 +159,10 @@ public class CucumberSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case CucumberPackage.DESCRIPTION:
+      case CucumberPackage.TAG:
       {
-        Description description = (Description)theEObject;
-        T result = caseDescription(description);
+        Tag tag = (Tag)theEObject;
+        T result = caseTag(tag);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -260,6 +267,22 @@ public class CucumberSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Description</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Description</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDescription(Description object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Step</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -340,17 +363,17 @@ public class CucumberSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Description</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Tag</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Description</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Tag</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseDescription(Description object)
+  public T caseTag(Tag object)
   {
     return null;
   }

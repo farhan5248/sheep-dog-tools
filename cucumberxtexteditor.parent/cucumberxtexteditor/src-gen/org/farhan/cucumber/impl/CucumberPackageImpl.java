@@ -24,6 +24,7 @@ import org.farhan.cucumber.ScenarioOutline;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.Table;
 import org.farhan.cucumber.TableRow;
+import org.farhan.cucumber.Tag;
 
 /**
  * <!-- begin-user-doc -->
@@ -80,6 +81,13 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass descriptionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass stepEClass = null;
 
   /**
@@ -115,7 +123,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass descriptionEClass = null;
+  private EClass tagEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -196,9 +204,20 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
+  public EReference getFeature_Tag()
+  {
+    return (EReference)featureEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EAttribute getFeature_Title()
   {
-    return (EAttribute)featureEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)featureEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -207,18 +226,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EReference getFeature_Description()
-  {
-    return (EReference)featureEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getFeature_Background()
+  public EReference getFeature_Descriptions()
   {
     return (EReference)featureEClass.getEStructuralFeatures().get(2);
   }
@@ -229,9 +237,20 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EReference getFeature_Scenarios()
+  public EReference getFeature_Background()
   {
     return (EReference)featureEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getFeature_Scenarios()
+  {
+    return (EReference)featureEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -295,9 +314,20 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
+  public EReference getAbstractScenario_Tag()
+  {
+    return (EReference)abstractScenarioEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EAttribute getAbstractScenario_Title()
   {
-    return (EAttribute)abstractScenarioEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)abstractScenarioEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -308,7 +338,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
   @Override
   public EReference getAbstractScenario_Description()
   {
-    return (EReference)abstractScenarioEClass.getEStructuralFeatures().get(1);
+    return (EReference)abstractScenarioEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -319,7 +349,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
   @Override
   public EReference getAbstractScenario_Steps()
   {
-    return (EReference)abstractScenarioEClass.getEStructuralFeatures().get(2);
+    return (EReference)abstractScenarioEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -372,9 +402,20 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
+  public EReference getExample_Tag()
+  {
+    return (EReference)exampleEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EAttribute getExample_Title()
   {
-    return (EAttribute)exampleEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)exampleEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -385,7 +426,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
   @Override
   public EReference getExample_Description()
   {
-    return (EReference)exampleEClass.getEStructuralFeatures().get(1);
+    return (EReference)exampleEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -396,7 +437,29 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
   @Override
   public EReference getExample_Table()
   {
-    return (EReference)exampleEClass.getEStructuralFeatures().get(2);
+    return (EReference)exampleEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getDescription()
+  {
+    return descriptionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getDescription_Line()
+  {
+    return (EAttribute)descriptionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -526,9 +589,9 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EClass getDescription()
+  public EClass getTag()
   {
-    return descriptionEClass;
+    return tagEClass;
   }
 
   /**
@@ -537,9 +600,9 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EAttribute getDescription_Sentences()
+  public EAttribute getTag_Tag()
   {
-    return (EAttribute)descriptionEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)tagEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -574,8 +637,9 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
 
     // Create classes and their features
     featureEClass = createEClass(FEATURE);
+    createEReference(featureEClass, FEATURE__TAG);
     createEAttribute(featureEClass, FEATURE__TITLE);
-    createEReference(featureEClass, FEATURE__DESCRIPTION);
+    createEReference(featureEClass, FEATURE__DESCRIPTIONS);
     createEReference(featureEClass, FEATURE__BACKGROUND);
     createEReference(featureEClass, FEATURE__SCENARIOS);
 
@@ -585,6 +649,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
     createEReference(backgroundEClass, BACKGROUND__STEPS);
 
     abstractScenarioEClass = createEClass(ABSTRACT_SCENARIO);
+    createEReference(abstractScenarioEClass, ABSTRACT_SCENARIO__TAG);
     createEAttribute(abstractScenarioEClass, ABSTRACT_SCENARIO__TITLE);
     createEReference(abstractScenarioEClass, ABSTRACT_SCENARIO__DESCRIPTION);
     createEReference(abstractScenarioEClass, ABSTRACT_SCENARIO__STEPS);
@@ -595,9 +660,13 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
     createEReference(scenarioOutlineEClass, SCENARIO_OUTLINE__EXAMPLES);
 
     exampleEClass = createEClass(EXAMPLE);
+    createEReference(exampleEClass, EXAMPLE__TAG);
     createEAttribute(exampleEClass, EXAMPLE__TITLE);
     createEReference(exampleEClass, EXAMPLE__DESCRIPTION);
     createEReference(exampleEClass, EXAMPLE__TABLE);
+
+    descriptionEClass = createEClass(DESCRIPTION);
+    createEAttribute(descriptionEClass, DESCRIPTION__LINE);
 
     stepEClass = createEClass(STEP);
     createEAttribute(stepEClass, STEP__TITLE);
@@ -615,8 +684,8 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
 
     docStringEClass = createEClass(DOC_STRING);
 
-    descriptionEClass = createEClass(DESCRIPTION);
-    createEAttribute(descriptionEClass, DESCRIPTION__SENTENCES);
+    tagEClass = createEClass(TAG);
+    createEAttribute(tagEClass, TAG__TAG);
   }
 
   /**
@@ -653,8 +722,9 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
 
     // Initialize classes and features; add operations and parameters
     initEClass(featureEClass, Feature.class, "Feature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getFeature_Tag(), this.getTag(), null, "tag", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getFeature_Title(), ecorePackage.getEString(), "title", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFeature_Description(), this.getDescription(), null, "description", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFeature_Descriptions(), this.getDescription(), null, "descriptions", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFeature_Background(), this.getBackground(), null, "background", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFeature_Scenarios(), this.getAbstractScenario(), null, "scenarios", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -664,6 +734,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
     initEReference(getBackground_Steps(), this.getStep(), null, "steps", null, 0, -1, Background.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(abstractScenarioEClass, AbstractScenario.class, "AbstractScenario", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAbstractScenario_Tag(), this.getTag(), null, "tag", null, 0, -1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAbstractScenario_Title(), ecorePackage.getEString(), "title", null, 0, 1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAbstractScenario_Description(), this.getDescription(), null, "description", null, 0, 1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAbstractScenario_Steps(), this.getStep(), null, "steps", null, 0, -1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -674,9 +745,13 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
     initEReference(getScenarioOutline_Examples(), this.getExample(), null, "examples", null, 0, -1, ScenarioOutline.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(exampleEClass, Example.class, "Example", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getExample_Tag(), this.getTag(), null, "tag", null, 0, -1, Example.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getExample_Title(), ecorePackage.getEString(), "title", null, 0, 1, Example.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getExample_Description(), this.getDescription(), null, "description", null, 0, 1, Example.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getExample_Table(), this.getTable(), null, "table", null, 0, 1, Example.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(descriptionEClass, Description.class, "Description", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDescription_Line(), ecorePackage.getEString(), "line", null, 0, 1, Description.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stepEClass, Step.class, "Step", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStep_Title(), ecorePackage.getEString(), "title", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -694,8 +769,8 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
 
     initEClass(docStringEClass, DocString.class, "DocString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(descriptionEClass, Description.class, "Description", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getDescription_Sentences(), ecorePackage.getEString(), "sentences", null, 0, -1, Description.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(tagEClass, Tag.class, "Tag", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTag_Tag(), ecorePackage.getEString(), "tag", null, 0, 1, Tag.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

@@ -3,15 +3,17 @@
  */
 package org.farhan.formatting2;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.formatting2.AbstractJavaFormatter;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.Background;
 import org.farhan.cucumber.CucumberPackage;
+import org.farhan.cucumber.Description;
 import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Step;
+import org.farhan.cucumber.Tag;
 import org.farhan.services.CucumberGrammarAccess;
 
 import com.google.inject.Inject;
@@ -19,40 +21,88 @@ import com.google.inject.Inject;
 public class CucumberFormatter extends AbstractJavaFormatter {
 
 	@Inject
-	CucumberGrammarAccess grammarAccess;
+	CucumberGrammarAccess ga;
 
 	protected void format(Feature feature, IFormattableDocument doc) {
-		// TODO: format HiddenRegions around keywords, attributes, cross references,
-		// etc.
-		System.out.println("Formatting the feature file");
+		formatFeatureTags(feature, doc);
+		formatFeatureTitle(feature, doc);
+		formatFeatureDescription(feature, doc);
+	}
 
-		ISemanticRegion featureRegion = regionFor(feature)
-				.keyword(grammarAccess.getFeatureAccess().getFeatureKeyword_1());
-		// TODO add new lines to the region as a whole? Do this after formatting description
+	private void formatFeatureDescription(Feature feature, IFormattableDocument doc) {
+		EList<Description> descriptions = feature.getDescriptions();
+		for (Description d : descriptions) {
+			formatDescriptionLine(d, doc);
+		}
+	}
+
+	private void formatDescriptionLine(Description description, IFormattableDocument doc) {
+		ISemanticRegion descRegion = regionFor(description).feature(CucumberPackage.Literals.DESCRIPTION__LINE);
+		doc.prepend(descRegion, it -> {
+			//TODO this isn't working. just invoking prepend with an empty body removes leading spaces
+			it.setSpace("  ");
+		});
+		doc.append(descRegion, it -> {
+			it.noSpace();
+		});
+	}
+
+	private void formatFeatureTags(Feature feature, IFormattableDocument doc) {
+
+		// TODO rename getTag to getTags...
+		EList<Tag> tags = feature.getTag();
+		int tagsCnt = tags.size();
+
+		for (Tag tag : tags) {
+			formatTagTag(tag, doc);
+		}
+
+		if (tagsCnt > 0) {
+			// if it's the last or first
+			ISemanticRegion tagRegion = regionFor(tags.get(0)).feature(CucumberPackage.Literals.TAG__TAG);
+			doc.prepend(tagRegion, it -> {
+				it.highPriority();
+				it.noSpace();
+			});
+			tagRegion = regionFor(tags.get(tagsCnt - 1)).feature(CucumberPackage.Literals.TAG__TAG);
+			doc.append(tagRegion, it -> {
+				it.highPriority();
+				it.noSpace();
+			});
+		}
+	}
+
+	private void formatTagTag(Tag tag, IFormattableDocument doc) {
+
+		// Remove spaces before and after tags
+		ISemanticRegion tagRegion = regionFor(tag).feature(CucumberPackage.Literals.TAG__TAG);
+
+		doc.prepend(tagRegion, it -> {
+			it.setSpace(" ");
+		});
+		doc.append(tagRegion, it -> {
+			it.setSpace(" ");
+		});
+	}
+
+	private void formatFeatureTitle(Feature feature, IFormattableDocument doc) {
+
+		ISemanticRegion featureRegion = regionFor(feature).keyword(ga.getFeatureAccess().getFeatureKeyword_1());
+		doc.prepend(featureRegion, it -> {
+			it.noSpace();
+		});
+
 		ISemanticRegion titleRegion = regionFor(feature).feature(CucumberPackage.Literals.FEATURE__TITLE);
-
+		// Set a space before the title and remove any after
 		doc.prepend(titleRegion, it -> {
-			it.oneSpace();
-			//it.noSpace();
-			//it.setSpace(" ");
+			it.setSpace(" ");
 		});
 		doc.append(titleRegion, it -> {
 			it.noSpace();
 		});
-
-		// doc.interior(begin, end, it -> { it.setNewLines(2); });
-
-		// TODO indent this and leave two new lines after it
-		doc.format(feature.getDescription());
-		// TODO indent this and leave two new lines after it
-		doc.format(feature.getBackground());
-		for (AbstractScenario abstractScenario : feature.getScenarios()) {
-			// TODO indent this and leave two new lines after it
-			doc.format(abstractScenario);
-		}
 	}
 
-	protected void format(Background background, IFormattableDocument doc) {
+	private void formatBackground(Background background, IFormattableDocument doc) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references,
 		// etc.
 		doc.format(background.getDescription());
