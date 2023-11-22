@@ -49,6 +49,8 @@ Workflow {
 			}
 			junitSupport = {
 				junitVersion = "5"
+				generateXtendStub = false
+				skipXbaseTestingPackage = true
 			}
 		}
 	}
