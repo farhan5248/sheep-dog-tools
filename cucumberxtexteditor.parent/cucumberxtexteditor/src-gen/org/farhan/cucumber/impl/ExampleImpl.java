@@ -35,7 +35,7 @@ import org.farhan.cucumber.Tag;
  * <ul>
  *   <li>{@link org.farhan.cucumber.impl.ExampleImpl#getTag <em>Tag</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.ExampleImpl#getTitle <em>Title</em>}</li>
- *   <li>{@link org.farhan.cucumber.impl.ExampleImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.ExampleImpl#getDescriptions <em>Descriptions</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.ExampleImpl#getTable <em>Table</em>}</li>
  * </ul>
  *
@@ -74,14 +74,14 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
   protected String title = TITLE_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference.
+   * The cached value of the '{@link #getDescriptions() <em>Descriptions</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getDescription()
+   * @see #getDescriptions()
    * @generated
    * @ordered
    */
-  protected Description description;
+  protected EList<Description> descriptions;
 
   /**
    * The cached value of the '{@link #getTable() <em>Table</em>}' containment reference.
@@ -160,48 +160,13 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
    * @generated
    */
   @Override
-  public Description getDescription()
+  public EList<Description> getDescriptions()
   {
-    return description;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetDescription(Description newDescription, NotificationChain msgs)
-  {
-    Description oldDescription = description;
-    description = newDescription;
-    if (eNotificationRequired())
+    if (descriptions == null)
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CucumberPackage.EXAMPLE__DESCRIPTION, oldDescription, newDescription);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
+      descriptions = new EObjectContainmentEList<Description>(Description.class, this, CucumberPackage.EXAMPLE__DESCRIPTIONS);
     }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setDescription(Description newDescription)
-  {
-    if (newDescription != description)
-    {
-      NotificationChain msgs = null;
-      if (description != null)
-        msgs = ((InternalEObject)description).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.EXAMPLE__DESCRIPTION, null, msgs);
-      if (newDescription != null)
-        msgs = ((InternalEObject)newDescription).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.EXAMPLE__DESCRIPTION, null, msgs);
-      msgs = basicSetDescription(newDescription, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.EXAMPLE__DESCRIPTION, newDescription, newDescription));
+    return descriptions;
   }
 
   /**
@@ -266,8 +231,8 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
     {
       case CucumberPackage.EXAMPLE__TAG:
         return ((InternalEList<?>)getTag()).basicRemove(otherEnd, msgs);
-      case CucumberPackage.EXAMPLE__DESCRIPTION:
-        return basicSetDescription(null, msgs);
+      case CucumberPackage.EXAMPLE__DESCRIPTIONS:
+        return ((InternalEList<?>)getDescriptions()).basicRemove(otherEnd, msgs);
       case CucumberPackage.EXAMPLE__TABLE:
         return basicSetTable(null, msgs);
     }
@@ -288,8 +253,8 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
         return getTag();
       case CucumberPackage.EXAMPLE__TITLE:
         return getTitle();
-      case CucumberPackage.EXAMPLE__DESCRIPTION:
-        return getDescription();
+      case CucumberPackage.EXAMPLE__DESCRIPTIONS:
+        return getDescriptions();
       case CucumberPackage.EXAMPLE__TABLE:
         return getTable();
     }
@@ -314,8 +279,9 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
       case CucumberPackage.EXAMPLE__TITLE:
         setTitle((String)newValue);
         return;
-      case CucumberPackage.EXAMPLE__DESCRIPTION:
-        setDescription((Description)newValue);
+      case CucumberPackage.EXAMPLE__DESCRIPTIONS:
+        getDescriptions().clear();
+        getDescriptions().addAll((Collection<? extends Description>)newValue);
         return;
       case CucumberPackage.EXAMPLE__TABLE:
         setTable((Table)newValue);
@@ -340,8 +306,8 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
       case CucumberPackage.EXAMPLE__TITLE:
         setTitle(TITLE_EDEFAULT);
         return;
-      case CucumberPackage.EXAMPLE__DESCRIPTION:
-        setDescription((Description)null);
+      case CucumberPackage.EXAMPLE__DESCRIPTIONS:
+        getDescriptions().clear();
         return;
       case CucumberPackage.EXAMPLE__TABLE:
         setTable((Table)null);
@@ -364,8 +330,8 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
         return tag != null && !tag.isEmpty();
       case CucumberPackage.EXAMPLE__TITLE:
         return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
-      case CucumberPackage.EXAMPLE__DESCRIPTION:
-        return description != null;
+      case CucumberPackage.EXAMPLE__DESCRIPTIONS:
+        return descriptions != null && !descriptions.isEmpty();
       case CucumberPackage.EXAMPLE__TABLE:
         return table != null;
     }

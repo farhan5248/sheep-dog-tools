@@ -33,7 +33,7 @@ import org.farhan.cucumber.Step;
  * </p>
  * <ul>
  *   <li>{@link org.farhan.cucumber.impl.BackgroundImpl#getTitle <em>Title</em>}</li>
- *   <li>{@link org.farhan.cucumber.impl.BackgroundImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.BackgroundImpl#getDescriptions <em>Descriptions</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.BackgroundImpl#getSteps <em>Steps</em>}</li>
  * </ul>
  *
@@ -62,14 +62,14 @@ public class BackgroundImpl extends MinimalEObjectImpl.Container implements Back
   protected String title = TITLE_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference.
+   * The cached value of the '{@link #getDescriptions() <em>Descriptions</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getDescription()
+   * @see #getDescriptions()
    * @generated
    * @ordered
    */
-  protected Description description;
+  protected EList<Description> descriptions;
 
   /**
    * The cached value of the '{@link #getSteps() <em>Steps</em>}' containment reference list.
@@ -133,48 +133,13 @@ public class BackgroundImpl extends MinimalEObjectImpl.Container implements Back
    * @generated
    */
   @Override
-  public Description getDescription()
+  public EList<Description> getDescriptions()
   {
-    return description;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetDescription(Description newDescription, NotificationChain msgs)
-  {
-    Description oldDescription = description;
-    description = newDescription;
-    if (eNotificationRequired())
+    if (descriptions == null)
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CucumberPackage.BACKGROUND__DESCRIPTION, oldDescription, newDescription);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
+      descriptions = new EObjectContainmentEList<Description>(Description.class, this, CucumberPackage.BACKGROUND__DESCRIPTIONS);
     }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setDescription(Description newDescription)
-  {
-    if (newDescription != description)
-    {
-      NotificationChain msgs = null;
-      if (description != null)
-        msgs = ((InternalEObject)description).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.BACKGROUND__DESCRIPTION, null, msgs);
-      if (newDescription != null)
-        msgs = ((InternalEObject)newDescription).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.BACKGROUND__DESCRIPTION, null, msgs);
-      msgs = basicSetDescription(newDescription, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.BACKGROUND__DESCRIPTION, newDescription, newDescription));
+    return descriptions;
   }
 
   /**
@@ -202,8 +167,8 @@ public class BackgroundImpl extends MinimalEObjectImpl.Container implements Back
   {
     switch (featureID)
     {
-      case CucumberPackage.BACKGROUND__DESCRIPTION:
-        return basicSetDescription(null, msgs);
+      case CucumberPackage.BACKGROUND__DESCRIPTIONS:
+        return ((InternalEList<?>)getDescriptions()).basicRemove(otherEnd, msgs);
       case CucumberPackage.BACKGROUND__STEPS:
         return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
     }
@@ -222,8 +187,8 @@ public class BackgroundImpl extends MinimalEObjectImpl.Container implements Back
     {
       case CucumberPackage.BACKGROUND__TITLE:
         return getTitle();
-      case CucumberPackage.BACKGROUND__DESCRIPTION:
-        return getDescription();
+      case CucumberPackage.BACKGROUND__DESCRIPTIONS:
+        return getDescriptions();
       case CucumberPackage.BACKGROUND__STEPS:
         return getSteps();
     }
@@ -244,8 +209,9 @@ public class BackgroundImpl extends MinimalEObjectImpl.Container implements Back
       case CucumberPackage.BACKGROUND__TITLE:
         setTitle((String)newValue);
         return;
-      case CucumberPackage.BACKGROUND__DESCRIPTION:
-        setDescription((Description)newValue);
+      case CucumberPackage.BACKGROUND__DESCRIPTIONS:
+        getDescriptions().clear();
+        getDescriptions().addAll((Collection<? extends Description>)newValue);
         return;
       case CucumberPackage.BACKGROUND__STEPS:
         getSteps().clear();
@@ -268,8 +234,8 @@ public class BackgroundImpl extends MinimalEObjectImpl.Container implements Back
       case CucumberPackage.BACKGROUND__TITLE:
         setTitle(TITLE_EDEFAULT);
         return;
-      case CucumberPackage.BACKGROUND__DESCRIPTION:
-        setDescription((Description)null);
+      case CucumberPackage.BACKGROUND__DESCRIPTIONS:
+        getDescriptions().clear();
         return;
       case CucumberPackage.BACKGROUND__STEPS:
         getSteps().clear();
@@ -290,8 +256,8 @@ public class BackgroundImpl extends MinimalEObjectImpl.Container implements Back
     {
       case CucumberPackage.BACKGROUND__TITLE:
         return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
-      case CucumberPackage.BACKGROUND__DESCRIPTION:
-        return description != null;
+      case CucumberPackage.BACKGROUND__DESCRIPTIONS:
+        return descriptions != null && !descriptions.isEmpty();
       case CucumberPackage.BACKGROUND__STEPS:
         return steps != null && !steps.isEmpty();
     }

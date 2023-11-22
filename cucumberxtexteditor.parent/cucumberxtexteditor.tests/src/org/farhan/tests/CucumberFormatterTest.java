@@ -21,7 +21,7 @@ public class CucumberFormatterTest {
 		formatterTestHelper.assertFormatted(new Procedure1<FormatterTestRequest>() {
 			@Override
 			public void apply(FormatterTestRequest p) {
-				p.preferences(m -> m.put(FormatterPreferenceKeys.lineSeparator, "\n"));
+				p.preferences(m -> m.put(FormatterPreferenceKeys.lineSeparator, "\r\n"));
 				init.apply(p);
 			}
 		});
@@ -30,32 +30,32 @@ public class CucumberFormatterTest {
 	@Test
 	public void formatFeatureWithTitle() {
 		assertFormatted((FormatterTestRequest it) -> {
-			it.setToBeFormatted("  Feature:  Claims are adjudicated  \n");
-			it.setExpectation("Feature: Claims are adjudicated\n");
+			it.setToBeFormatted("  Feature:  Claims are adjudicated  \r\n");
+			it.setExpectation("Feature: Claims are adjudicated\r\n");
 		});
 	}
 
 	@Test
 	public void formatFeatureWithDescription() {
 		assertFormatted((FormatterTestRequest it) -> {
-			it.setToBeFormatted("Feature:  Claims are adjudicated  \n  Descriptive text 1  \n  Descriptive text 2  \n  Descriptive text 3  \n");
-			it.setExpectation("Feature: Claims are adjudicated\n  Descriptive text 1\n  Descriptive text 2\n  Descriptive text 3\n");
+			it.setToBeFormatted("Feature:  Claims are adjudicated  \r\n  Descriptive text 1  \r\n  Descriptive text 2  \r\n  Descriptive text 3  \r\n");
+			it.setExpectation("Feature: Claims are adjudicated\r\n  Descriptive text 1\r\n  Descriptive text 2\r\n  Descriptive text 3\r\n");
 		});
 	}
 
 	@Test
 	public void formatFeatureWithTagSingle() {
 		assertFormatted((FormatterTestRequest it) -> {
-			it.setToBeFormatted("  @tag  \r\nFeature: Claims are adjudicated\n");
-			it.setExpectation("@tag\r\nFeature: Claims are adjudicated\n");
+			it.setToBeFormatted("  @tag  \r\nFeature: Claims are adjudicated\r\n");
+			it.setExpectation("@tag\r\nFeature: Claims are adjudicated\r\n");
 		});
 	}
 
 	@Test
 	public void formatFeatureWithTagMultiple() {
 		assertFormatted((FormatterTestRequest it) -> {
-			it.setToBeFormatted("  @tag1    @tag2  \r\nFeature: Claims are adjudicated\n");
-			it.setExpectation("@tag1 @tag2\r\nFeature: Claims are adjudicated\n");
+			it.setToBeFormatted("  @tag1    @tag2  \r\nFeature: Claims are adjudicated\r\n");
+			it.setExpectation("@tag1 @tag2\r\nFeature: Claims are adjudicated\r\n");
 		});
 	}
 

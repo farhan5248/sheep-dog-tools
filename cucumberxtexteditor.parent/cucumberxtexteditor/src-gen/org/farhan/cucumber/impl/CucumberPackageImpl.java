@@ -204,7 +204,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EReference getFeature_Tag()
+  public EReference getFeature_Tags()
   {
     return (EReference)featureEClass.getEStructuralFeatures().get(0);
   }
@@ -281,7 +281,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EReference getBackground_Description()
+  public EReference getBackground_Descriptions()
   {
     return (EReference)backgroundEClass.getEStructuralFeatures().get(1);
   }
@@ -336,7 +336,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EReference getAbstractScenario_Description()
+  public EReference getAbstractScenario_Descriptions()
   {
     return (EReference)abstractScenarioEClass.getEStructuralFeatures().get(2);
   }
@@ -424,7 +424,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EReference getExample_Description()
+  public EReference getExample_Descriptions()
   {
     return (EReference)exampleEClass.getEStructuralFeatures().get(2);
   }
@@ -637,7 +637,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
 
     // Create classes and their features
     featureEClass = createEClass(FEATURE);
-    createEReference(featureEClass, FEATURE__TAG);
+    createEReference(featureEClass, FEATURE__TAGS);
     createEAttribute(featureEClass, FEATURE__TITLE);
     createEReference(featureEClass, FEATURE__DESCRIPTIONS);
     createEReference(featureEClass, FEATURE__BACKGROUND);
@@ -645,13 +645,13 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
 
     backgroundEClass = createEClass(BACKGROUND);
     createEAttribute(backgroundEClass, BACKGROUND__TITLE);
-    createEReference(backgroundEClass, BACKGROUND__DESCRIPTION);
+    createEReference(backgroundEClass, BACKGROUND__DESCRIPTIONS);
     createEReference(backgroundEClass, BACKGROUND__STEPS);
 
     abstractScenarioEClass = createEClass(ABSTRACT_SCENARIO);
     createEReference(abstractScenarioEClass, ABSTRACT_SCENARIO__TAG);
     createEAttribute(abstractScenarioEClass, ABSTRACT_SCENARIO__TITLE);
-    createEReference(abstractScenarioEClass, ABSTRACT_SCENARIO__DESCRIPTION);
+    createEReference(abstractScenarioEClass, ABSTRACT_SCENARIO__DESCRIPTIONS);
     createEReference(abstractScenarioEClass, ABSTRACT_SCENARIO__STEPS);
 
     scenarioEClass = createEClass(SCENARIO);
@@ -662,7 +662,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
     exampleEClass = createEClass(EXAMPLE);
     createEReference(exampleEClass, EXAMPLE__TAG);
     createEAttribute(exampleEClass, EXAMPLE__TITLE);
-    createEReference(exampleEClass, EXAMPLE__DESCRIPTION);
+    createEReference(exampleEClass, EXAMPLE__DESCRIPTIONS);
     createEReference(exampleEClass, EXAMPLE__TABLE);
 
     descriptionEClass = createEClass(DESCRIPTION);
@@ -722,7 +722,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
 
     // Initialize classes and features; add operations and parameters
     initEClass(featureEClass, Feature.class, "Feature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getFeature_Tag(), this.getTag(), null, "tag", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFeature_Tags(), this.getTag(), null, "tags", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getFeature_Title(), ecorePackage.getEString(), "title", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFeature_Descriptions(), this.getDescription(), null, "descriptions", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFeature_Background(), this.getBackground(), null, "background", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -730,13 +730,13 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
 
     initEClass(backgroundEClass, Background.class, "Background", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getBackground_Title(), ecorePackage.getEString(), "title", null, 0, 1, Background.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getBackground_Description(), this.getDescription(), null, "description", null, 0, 1, Background.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getBackground_Descriptions(), this.getDescription(), null, "descriptions", null, 0, -1, Background.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getBackground_Steps(), this.getStep(), null, "steps", null, 0, -1, Background.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(abstractScenarioEClass, AbstractScenario.class, "AbstractScenario", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAbstractScenario_Tag(), this.getTag(), null, "tag", null, 0, -1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAbstractScenario_Title(), ecorePackage.getEString(), "title", null, 0, 1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAbstractScenario_Description(), this.getDescription(), null, "description", null, 0, 1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAbstractScenario_Descriptions(), this.getDescription(), null, "descriptions", null, 0, -1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAbstractScenario_Steps(), this.getStep(), null, "steps", null, 0, -1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(scenarioEClass, Scenario.class, "Scenario", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -747,7 +747,7 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
     initEClass(exampleEClass, Example.class, "Example", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getExample_Tag(), this.getTag(), null, "tag", null, 0, -1, Example.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getExample_Title(), ecorePackage.getEString(), "title", null, 0, 1, Example.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getExample_Description(), this.getDescription(), null, "description", null, 0, 1, Example.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getExample_Descriptions(), this.getDescription(), null, "descriptions", null, 0, -1, Example.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getExample_Table(), this.getTable(), null, "table", null, 0, 1, Example.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(descriptionEClass, Description.class, "Description", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

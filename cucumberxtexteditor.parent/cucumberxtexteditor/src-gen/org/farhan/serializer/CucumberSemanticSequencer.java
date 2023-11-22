@@ -90,7 +90,7 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Background returns Background
 	 *
 	 * Constraint:
-	 *     (title=Sentence description=Description steps+=Step*)
+	 *     (title=Sentence descriptions+=Description* steps+=Step*)
 	 * </pre>
 	 */
 	protected void sequence_Background(ISerializationContext context, Background semanticObject) {
@@ -138,7 +138,7 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Example returns Example
 	 *
 	 * Constraint:
-	 *     (tag+=Tag? title=Sentence description=Description table=Table)
+	 *     (tag+=Tag? title=Sentence descriptions+=Description* table=Table)
 	 * </pre>
 	 */
 	protected void sequence_Example(ISerializationContext context, Example semanticObject) {
@@ -152,7 +152,7 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Feature returns Feature
 	 *
 	 * Constraint:
-	 *     (tag+=Tag* title=Sentence descriptions+=Description* background=Background? scenarios+=AbstractScenario*)
+	 *     (tags+=Tag* title=Sentence descriptions+=Description* background=Background? scenarios+=AbstractScenario*)
 	 * </pre>
 	 */
 	protected void sequence_Feature(ISerializationContext context, Feature semanticObject) {
@@ -187,7 +187,7 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     ScenarioOutline returns ScenarioOutline
 	 *
 	 * Constraint:
-	 *     (tag+=Tag? title=Sentence description=Description steps+=Step* examples+=Example+)
+	 *     (tag+=Tag? title=Sentence descriptions+=Description* steps+=Step* examples+=Example+)
 	 * </pre>
 	 */
 	protected void sequence_ScenarioOutline(ISerializationContext context, ScenarioOutline semanticObject) {
@@ -202,7 +202,7 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     Scenario returns Scenario
 	 *
 	 * Constraint:
-	 *     (tag+=Tag? title=Sentence description=Description steps+=Step*)
+	 *     (tag+=Tag? title=Sentence descriptions+=Description* steps+=Step*)
 	 * </pre>
 	 */
 	protected void sequence_Scenario(ISerializationContext context, Scenario semanticObject) {

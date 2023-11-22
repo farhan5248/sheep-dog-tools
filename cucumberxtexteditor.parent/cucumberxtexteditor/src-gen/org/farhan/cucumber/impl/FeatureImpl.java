@@ -34,7 +34,7 @@ import org.farhan.cucumber.Tag;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getTag <em>Tag</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getTitle <em>Title</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getDescriptions <em>Descriptions</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getBackground <em>Background</em>}</li>
@@ -46,14 +46,14 @@ import org.farhan.cucumber.Tag;
 public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
 {
   /**
-   * The cached value of the '{@link #getTag() <em>Tag</em>}' containment reference list.
+   * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTag()
+   * @see #getTags()
    * @generated
    * @ordered
    */
-  protected EList<Tag> tag;
+  protected EList<Tag> tags;
 
   /**
    * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
@@ -132,13 +132,13 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
    * @generated
    */
   @Override
-  public EList<Tag> getTag()
+  public EList<Tag> getTags()
   {
-    if (tag == null)
+    if (tags == null)
     {
-      tag = new EObjectContainmentEList<Tag>(Tag.class, this, CucumberPackage.FEATURE__TAG);
+      tags = new EObjectContainmentEList<Tag>(Tag.class, this, CucumberPackage.FEATURE__TAGS);
     }
-    return tag;
+    return tags;
   }
 
   /**
@@ -256,8 +256,8 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
   {
     switch (featureID)
     {
-      case CucumberPackage.FEATURE__TAG:
-        return ((InternalEList<?>)getTag()).basicRemove(otherEnd, msgs);
+      case CucumberPackage.FEATURE__TAGS:
+        return ((InternalEList<?>)getTags()).basicRemove(otherEnd, msgs);
       case CucumberPackage.FEATURE__DESCRIPTIONS:
         return ((InternalEList<?>)getDescriptions()).basicRemove(otherEnd, msgs);
       case CucumberPackage.FEATURE__BACKGROUND:
@@ -278,8 +278,8 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
   {
     switch (featureID)
     {
-      case CucumberPackage.FEATURE__TAG:
-        return getTag();
+      case CucumberPackage.FEATURE__TAGS:
+        return getTags();
       case CucumberPackage.FEATURE__TITLE:
         return getTitle();
       case CucumberPackage.FEATURE__DESCRIPTIONS:
@@ -303,9 +303,9 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
   {
     switch (featureID)
     {
-      case CucumberPackage.FEATURE__TAG:
-        getTag().clear();
-        getTag().addAll((Collection<? extends Tag>)newValue);
+      case CucumberPackage.FEATURE__TAGS:
+        getTags().clear();
+        getTags().addAll((Collection<? extends Tag>)newValue);
         return;
       case CucumberPackage.FEATURE__TITLE:
         setTitle((String)newValue);
@@ -335,8 +335,8 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
   {
     switch (featureID)
     {
-      case CucumberPackage.FEATURE__TAG:
-        getTag().clear();
+      case CucumberPackage.FEATURE__TAGS:
+        getTags().clear();
         return;
       case CucumberPackage.FEATURE__TITLE:
         setTitle(TITLE_EDEFAULT);
@@ -364,8 +364,8 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
   {
     switch (featureID)
     {
-      case CucumberPackage.FEATURE__TAG:
-        return tag != null && !tag.isEmpty();
+      case CucumberPackage.FEATURE__TAGS:
+        return tags != null && !tags.isEmpty();
       case CucumberPackage.FEATURE__TITLE:
         return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
       case CucumberPackage.FEATURE__DESCRIPTIONS:

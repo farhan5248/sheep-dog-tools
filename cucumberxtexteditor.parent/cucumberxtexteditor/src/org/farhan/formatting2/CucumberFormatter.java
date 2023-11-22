@@ -39,7 +39,8 @@ public class CucumberFormatter extends AbstractJavaFormatter {
 	private void formatDescriptionLine(Description description, IFormattableDocument doc) {
 		ISemanticRegion descRegion = regionFor(description).feature(CucumberPackage.Literals.DESCRIPTION__LINE);
 		doc.prepend(descRegion, it -> {
-			//TODO this isn't working. just invoking prepend with an empty body removes leading spaces
+			// TODO this isn't working. just invoking prepend with an empty body removes
+			// leading spaces
 			it.setSpace("  ");
 		});
 		doc.append(descRegion, it -> {
@@ -50,7 +51,7 @@ public class CucumberFormatter extends AbstractJavaFormatter {
 	private void formatFeatureTags(Feature feature, IFormattableDocument doc) {
 
 		// TODO rename getTag to getTags...
-		EList<Tag> tags = feature.getTag();
+		EList<Tag> tags = feature.getTags();
 		int tagsCnt = tags.size();
 
 		for (Tag tag : tags) {
@@ -101,15 +102,4 @@ public class CucumberFormatter extends AbstractJavaFormatter {
 			it.noSpace();
 		});
 	}
-
-	private void formatBackground(Background background, IFormattableDocument doc) {
-		// TODO: format HiddenRegions around keywords, attributes, cross references,
-		// etc.
-		doc.format(background.getDescription());
-		for (Step step : background.getSteps()) {
-			doc.format(step);
-		}
-	}
-
-	// TODO: implement for Scenario, ScenarioOutline, Example, Step, Table, TableRow
 }

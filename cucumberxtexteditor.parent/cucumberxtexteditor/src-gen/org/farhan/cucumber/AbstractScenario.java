@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.farhan.cucumber.AbstractScenario#getTag <em>Tag</em>}</li>
  *   <li>{@link org.farhan.cucumber.AbstractScenario#getTitle <em>Title</em>}</li>
- *   <li>{@link org.farhan.cucumber.AbstractScenario#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.farhan.cucumber.AbstractScenario#getDescriptions <em>Descriptions</em>}</li>
  *   <li>{@link org.farhan.cucumber.AbstractScenario#getSteps <em>Steps</em>}</li>
  * </ul>
  *
@@ -63,26 +63,16 @@ public interface AbstractScenario extends EObject
   void setTitle(String value);
 
   /**
-   * Returns the value of the '<em><b>Description</b></em>' containment reference.
+   * Returns the value of the '<em><b>Descriptions</b></em>' containment reference list.
+   * The list contents are of type {@link org.farhan.cucumber.Description}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Description</em>' containment reference.
-   * @see #setDescription(Description)
-   * @see org.farhan.cucumber.CucumberPackage#getAbstractScenario_Description()
+   * @return the value of the '<em>Descriptions</em>' containment reference list.
+   * @see org.farhan.cucumber.CucumberPackage#getAbstractScenario_Descriptions()
    * @model containment="true"
    * @generated
    */
-  Description getDescription();
-
-  /**
-   * Sets the value of the '{@link org.farhan.cucumber.AbstractScenario#getDescription <em>Description</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Description</em>' containment reference.
-   * @see #getDescription()
-   * @generated
-   */
-  void setDescription(Description value);
+  EList<Description> getDescriptions();
 
   /**
    * Returns the value of the '<em><b>Steps</b></em>' containment reference list.
