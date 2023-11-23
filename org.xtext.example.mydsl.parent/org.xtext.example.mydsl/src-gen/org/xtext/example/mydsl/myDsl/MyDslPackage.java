@@ -86,13 +86,115 @@ public interface MyDslPackage extends EPackage
   int MODEL__STATEMENTS = 1;
 
   /**
+   * The feature id for the '<em><b>Step Sets</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__STEP_SETS = 2;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 2;
+  int MODEL_FEATURE_COUNT = 3;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.stepSetImpl <em>step Set</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.stepSetImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getstepSet()
+   * @generated
+   */
+  int STEP_SET = 1;
+
+  /**
+   * The number of structural features of the '<em>step Set</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STEP_SET_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.BackgroundImpl <em>Background</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.BackgroundImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getBackground()
+   * @generated
+   */
+  int BACKGROUND = 2;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BACKGROUND__NAME = STEP_SET_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BACKGROUND__STATEMENTS = STEP_SET_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BACKGROUND__STEPS = STEP_SET_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Background</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BACKGROUND_FEATURE_COUNT = STEP_SET_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.StepImpl <em>Step</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.StepImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getStep()
+   * @generated
+   */
+  int STEP = 3;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STEP__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Step</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STEP_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.StatementImpl <em>Statement</em>}' class.
@@ -102,7 +204,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getStatement()
    * @generated
    */
-  int STATEMENT = 1;
+  int STATEMENT = 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -154,6 +256,91 @@ public interface MyDslPackage extends EPackage
    * @generated
    */
   EReference getModel_Statements();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Model#getStepSets <em>Step Sets</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Step Sets</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Model#getStepSets()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_StepSets();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.stepSet <em>step Set</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>step Set</em>'.
+   * @see org.xtext.example.mydsl.myDsl.stepSet
+   * @generated
+   */
+  EClass getstepSet();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Background <em>Background</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Background</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Background
+   * @generated
+   */
+  EClass getBackground();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.Background#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Background#getName()
+   * @see #getBackground()
+   * @generated
+   */
+  EAttribute getBackground_Name();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Background#getStatements <em>Statements</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Statements</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Background#getStatements()
+   * @see #getBackground()
+   * @generated
+   */
+  EReference getBackground_Statements();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Background#getSteps <em>Steps</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Steps</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Background#getSteps()
+   * @see #getBackground()
+   * @generated
+   */
+  EReference getBackground_Steps();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Step <em>Step</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Step</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Step
+   * @generated
+   */
+  EClass getStep();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.Step#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Step#getName()
+   * @see #getStep()
+   * @generated
+   */
+  EAttribute getStep_Name();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Statement <em>Statement</em>}'.
@@ -224,6 +411,76 @@ public interface MyDslPackage extends EPackage
      * @generated
      */
     EReference MODEL__STATEMENTS = eINSTANCE.getModel_Statements();
+
+    /**
+     * The meta object literal for the '<em><b>Step Sets</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__STEP_SETS = eINSTANCE.getModel_StepSets();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.stepSetImpl <em>step Set</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.stepSetImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getstepSet()
+     * @generated
+     */
+    EClass STEP_SET = eINSTANCE.getstepSet();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.BackgroundImpl <em>Background</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.BackgroundImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getBackground()
+     * @generated
+     */
+    EClass BACKGROUND = eINSTANCE.getBackground();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BACKGROUND__NAME = eINSTANCE.getBackground_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference BACKGROUND__STATEMENTS = eINSTANCE.getBackground_Statements();
+
+    /**
+     * The meta object literal for the '<em><b>Steps</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference BACKGROUND__STEPS = eINSTANCE.getBackground_Steps();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.StepImpl <em>Step</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.StepImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getStep()
+     * @generated
+     */
+    EClass STEP = eINSTANCE.getStep();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute STEP__NAME = eINSTANCE.getStep_Name();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.StatementImpl <em>Statement</em>}' class.

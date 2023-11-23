@@ -14,32 +14,31 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.xtext.example.mydsl.myDsl.Model;
+import org.xtext.example.mydsl.myDsl.Background;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.Statement;
-import org.xtext.example.mydsl.myDsl.stepSet;
+import org.xtext.example.mydsl.myDsl.Step;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Model</b></em>'.
+ * An implementation of the model object '<em><b>Background</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ModelImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ModelImpl#getStatements <em>Statements</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ModelImpl#getStepSets <em>Step Sets</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.BackgroundImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.BackgroundImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.BackgroundImpl#getSteps <em>Steps</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ModelImpl extends MinimalEObjectImpl.Container implements Model
+public class BackgroundImpl extends stepSetImpl implements Background
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -72,21 +71,21 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   protected EList<Statement> statements;
 
   /**
-   * The cached value of the '{@link #getStepSets() <em>Step Sets</em>}' containment reference list.
+   * The cached value of the '{@link #getSteps() <em>Steps</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStepSets()
+   * @see #getSteps()
    * @generated
    * @ordered
    */
-  protected EList<stepSet> stepSets;
+  protected EList<Step> steps;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ModelImpl()
+  protected BackgroundImpl()
   {
     super();
   }
@@ -99,7 +98,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.MODEL;
+    return MyDslPackage.Literals.BACKGROUND;
   }
 
   /**
@@ -124,7 +123,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.MODEL__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.BACKGROUND__NAME, oldName, name));
   }
 
   /**
@@ -137,7 +136,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     if (statements == null)
     {
-      statements = new EObjectContainmentEList<Statement>(Statement.class, this, MyDslPackage.MODEL__STATEMENTS);
+      statements = new EObjectContainmentEList<Statement>(Statement.class, this, MyDslPackage.BACKGROUND__STATEMENTS);
     }
     return statements;
   }
@@ -148,13 +147,13 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @generated
    */
   @Override
-  public EList<stepSet> getStepSets()
+  public EList<Step> getSteps()
   {
-    if (stepSets == null)
+    if (steps == null)
     {
-      stepSets = new EObjectContainmentEList<stepSet>(stepSet.class, this, MyDslPackage.MODEL__STEP_SETS);
+      steps = new EObjectContainmentEList<Step>(Step.class, this, MyDslPackage.BACKGROUND__STEPS);
     }
-    return stepSets;
+    return steps;
   }
 
   /**
@@ -167,10 +166,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__STATEMENTS:
+      case MyDslPackage.BACKGROUND__STATEMENTS:
         return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
-      case MyDslPackage.MODEL__STEP_SETS:
-        return ((InternalEList<?>)getStepSets()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.BACKGROUND__STEPS:
+        return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -185,12 +184,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__NAME:
+      case MyDslPackage.BACKGROUND__NAME:
         return getName();
-      case MyDslPackage.MODEL__STATEMENTS:
+      case MyDslPackage.BACKGROUND__STATEMENTS:
         return getStatements();
-      case MyDslPackage.MODEL__STEP_SETS:
-        return getStepSets();
+      case MyDslPackage.BACKGROUND__STEPS:
+        return getSteps();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -206,16 +205,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__NAME:
+      case MyDslPackage.BACKGROUND__NAME:
         setName((String)newValue);
         return;
-      case MyDslPackage.MODEL__STATEMENTS:
+      case MyDslPackage.BACKGROUND__STATEMENTS:
         getStatements().clear();
         getStatements().addAll((Collection<? extends Statement>)newValue);
         return;
-      case MyDslPackage.MODEL__STEP_SETS:
-        getStepSets().clear();
-        getStepSets().addAll((Collection<? extends stepSet>)newValue);
+      case MyDslPackage.BACKGROUND__STEPS:
+        getSteps().clear();
+        getSteps().addAll((Collection<? extends Step>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -231,14 +230,14 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__NAME:
+      case MyDslPackage.BACKGROUND__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case MyDslPackage.MODEL__STATEMENTS:
+      case MyDslPackage.BACKGROUND__STATEMENTS:
         getStatements().clear();
         return;
-      case MyDslPackage.MODEL__STEP_SETS:
-        getStepSets().clear();
+      case MyDslPackage.BACKGROUND__STEPS:
+        getSteps().clear();
         return;
     }
     super.eUnset(featureID);
@@ -254,12 +253,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__NAME:
+      case MyDslPackage.BACKGROUND__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case MyDslPackage.MODEL__STATEMENTS:
+      case MyDslPackage.BACKGROUND__STATEMENTS:
         return statements != null && !statements.isEmpty();
-      case MyDslPackage.MODEL__STEP_SETS:
-        return stepSets != null && !stepSets.isEmpty();
+      case MyDslPackage.BACKGROUND__STEPS:
+        return steps != null && !steps.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -281,4 +280,4 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     return result.toString();
   }
 
-} //ModelImpl
+} //BackgroundImpl

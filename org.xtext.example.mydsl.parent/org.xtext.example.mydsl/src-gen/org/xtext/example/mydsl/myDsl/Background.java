@@ -5,27 +5,25 @@ package org.xtext.example.mydsl.myDsl;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Model</b></em>'.
+ * A representation of the model object '<em><b>Background</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Model#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Model#getStatements <em>Statements</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Model#getStepSets <em>Step Sets</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Background#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Background#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Background#getSteps <em>Steps</em>}</li>
  * </ul>
  *
- * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getModel()
+ * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getBackground()
  * @model
  * @generated
  */
-public interface Model extends EObject
+public interface Background extends stepSet
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -33,14 +31,14 @@ public interface Model extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getModel_Name()
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getBackground_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Model#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Background#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -55,22 +53,22 @@ public interface Model extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Statements</em>' containment reference list.
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getModel_Statements()
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getBackground_Statements()
    * @model containment="true"
    * @generated
    */
   EList<Statement> getStatements();
 
   /**
-   * Returns the value of the '<em><b>Step Sets</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.stepSet}.
+   * Returns the value of the '<em><b>Steps</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.Step}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Step Sets</em>' containment reference list.
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getModel_StepSets()
+   * @return the value of the '<em>Steps</em>' containment reference list.
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getBackground_Steps()
    * @model containment="true"
    * @generated
    */
-  EList<stepSet> getStepSets();
+  EList<Step> getSteps();
 
-} // Model
+} // Background

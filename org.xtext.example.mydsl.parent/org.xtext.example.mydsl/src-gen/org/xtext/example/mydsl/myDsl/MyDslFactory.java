@@ -33,6 +33,33 @@ public interface MyDslFactory extends EFactory
   Model createModel();
 
   /**
+   * Returns a new object of class '<em>step Set</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>step Set</em>'.
+   * @generated
+   */
+  stepSet createstepSet();
+
+  /**
+   * Returns a new object of class '<em>Background</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Background</em>'.
+   * @generated
+   */
+  Background createBackground();
+
+  /**
+   * Returns a new object of class '<em>Step</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Step</em>'.
+   * @generated
+   */
+  Step createStep();
+
+  /**
    * Returns a new object of class '<em>Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

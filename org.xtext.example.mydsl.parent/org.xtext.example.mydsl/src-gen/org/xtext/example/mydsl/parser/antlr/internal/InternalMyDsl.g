@@ -122,6 +122,209 @@ ruleModel returns [EObject current=null]
 				}
 			)
 		)*
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getModelAccess().getStepSetsStepSetParserRuleCall_4_0());
+				}
+				lv_stepSets_4_0=rulestepSet
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getModelRule());
+					}
+					add(
+						$current,
+						"stepSets",
+						lv_stepSets_4_0,
+						"org.xtext.example.mydsl.MyDsl.stepSet");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+	)
+;
+
+// Entry rule entryRulestepSet
+entryRulestepSet returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getStepSetRule()); }
+	iv_rulestepSet=rulestepSet
+	{ $current=$iv_rulestepSet.current; }
+	EOF;
+
+// Rule stepSet
+rulestepSet returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	{
+		newCompositeNode(grammarAccess.getStepSetAccess().getBackgroundParserRuleCall());
+	}
+	this_Background_0=ruleBackground
+	{
+		$current = $this_Background_0.current;
+		afterParserOrEnumRuleCall();
+	}
+;
+
+// Entry rule entryRuleBackground
+entryRuleBackground returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getBackgroundRule()); }
+	iv_ruleBackground=ruleBackground
+	{ $current=$iv_ruleBackground.current; }
+	EOF;
+
+// Rule Background
+ruleBackground returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='Background:'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getBackgroundAccess().getBackgroundKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getBackgroundAccess().getNamePhraseParserRuleCall_1_0());
+				}
+				lv_name_1_0=rulePhrase
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getBackgroundRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.xtext.example.mydsl.MyDsl.Phrase");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		this_EOL_2=RULE_EOL
+		{
+			newLeafNode(this_EOL_2, grammarAccess.getBackgroundAccess().getEOLTerminalRuleCall_2());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getBackgroundAccess().getStatementsStatementParserRuleCall_3_0());
+				}
+				lv_statements_3_0=ruleStatement
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getBackgroundRule());
+					}
+					add(
+						$current,
+						"statements",
+						lv_statements_3_0,
+						"org.xtext.example.mydsl.MyDsl.Statement");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getBackgroundAccess().getStepsStepParserRuleCall_4_0());
+				}
+				lv_steps_4_0=ruleStep
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getBackgroundRule());
+					}
+					add(
+						$current,
+						"steps",
+						lv_steps_4_0,
+						"org.xtext.example.mydsl.MyDsl.Step");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+	)
+;
+
+// Entry rule entryRuleStep
+entryRuleStep returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getStepRule()); }
+	iv_ruleStep=ruleStep
+	{ $current=$iv_ruleStep.current; }
+	EOF;
+
+// Rule Step
+ruleStep returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			otherlv_0='Given'
+			{
+				newLeafNode(otherlv_0, grammarAccess.getStepAccess().getGivenKeyword_0_0());
+			}
+			    |
+			otherlv_1='When'
+			{
+				newLeafNode(otherlv_1, grammarAccess.getStepAccess().getWhenKeyword_0_1());
+			}
+			    |
+			otherlv_2='Then'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getStepAccess().getThenKeyword_0_2());
+			}
+			    |
+			otherlv_3='And'
+			{
+				newLeafNode(otherlv_3, grammarAccess.getStepAccess().getAndKeyword_0_3());
+			}
+			    |
+			otherlv_4='But'
+			{
+				newLeafNode(otherlv_4, grammarAccess.getStepAccess().getButKeyword_0_4());
+			}
+			    |
+			otherlv_5='*'
+			{
+				newLeafNode(otherlv_5, grammarAccess.getStepAccess().getAsteriskKeyword_0_5());
+			}
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getStepAccess().getNamePhraseParserRuleCall_1_0());
+				}
+				lv_name_6_0=rulePhrase
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getStepRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_6_0,
+						"org.xtext.example.mydsl.MyDsl.Phrase");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			this_EOL_7=RULE_EOL
+			{
+				newLeafNode(this_EOL_7, grammarAccess.getStepAccess().getEOLTerminalRuleCall_2());
+			}
+		)?
 	)
 ;
 

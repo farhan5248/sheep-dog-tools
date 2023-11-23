@@ -66,6 +66,9 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
     switch (eClass.getClassifierID())
     {
       case MyDslPackage.MODEL: return createModel();
+      case MyDslPackage.STEP_SET: return createstepSet();
+      case MyDslPackage.BACKGROUND: return createBackground();
+      case MyDslPackage.STEP: return createStep();
       case MyDslPackage.STATEMENT: return createStatement();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -82,6 +85,42 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     ModelImpl model = new ModelImpl();
     return model;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public stepSet createstepSet()
+  {
+    stepSetImpl stepSet = new stepSetImpl();
+    return stepSet;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Background createBackground()
+  {
+    BackgroundImpl background = new BackgroundImpl();
+    return background;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Step createStep()
+  {
+    StepImpl step = new StepImpl();
+    return step;
   }
 
   /**

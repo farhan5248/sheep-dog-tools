@@ -14,9 +14,11 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
+import org.xtext.example.mydsl.myDsl.Background;
 import org.xtext.example.mydsl.myDsl.Model;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.Statement;
+import org.xtext.example.mydsl.myDsl.Step;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess;
 
 @SuppressWarnings("all")
@@ -33,11 +35,17 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == MyDslPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case MyDslPackage.BACKGROUND:
+				sequence_Background(context, (Background) semanticObject); 
+				return; 
 			case MyDslPackage.MODEL:
 				sequence_Model(context, (Model) semanticObject); 
 				return; 
 			case MyDslPackage.STATEMENT:
 				sequence_Statement(context, (Statement) semanticObject); 
+				return; 
+			case MyDslPackage.STEP:
+				sequence_Step(context, (Step) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -47,10 +55,25 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     stepSet returns Background
+	 *     Background returns Background
+	 *
+	 * Constraint:
+	 *     (name=Phrase statements+=Statement* steps+=Step*)
+	 * </pre>
+	 */
+	protected void sequence_Background(ISerializationContext context, Background semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
 	 *     Model returns Model
 	 *
 	 * Constraint:
-	 *     (name=Phrase statements+=Statement*)
+	 *     (name=Phrase statements+=Statement* stepSets+=stepSet*)
 	 * </pre>
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
@@ -74,6 +97,26 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getStatementAccess().getNamePhraseParserRuleCall_0_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Step returns Step
+	 *
+	 * Constraint:
+	 *     name=Phrase
+	 * </pre>
+	 */
+	protected void sequence_Step(ISerializationContext context, Step semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.STEP__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.STEP__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getStepAccess().getNamePhraseParserRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	

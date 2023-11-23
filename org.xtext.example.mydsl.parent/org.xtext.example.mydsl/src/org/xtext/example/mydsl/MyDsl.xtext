@@ -5,7 +5,19 @@ generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
 
 Model:
 	'Feature:' name=Phrase EOL
-	statements+=Statement*;
+	statements+=Statement*
+	stepSets+=stepSet*;
+
+stepSet:
+	Background;
+
+Background:
+	'Background:' name=Phrase EOL
+	statements+=Statement*
+	steps+=Step*;
+
+Step:
+	('Given' | 'When' | 'Then' | 'And' | 'But' | '*') name=Phrase EOL?;
 
 Statement:
 	name=Phrase EOL;

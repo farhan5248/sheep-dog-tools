@@ -3,16 +3,23 @@
  */
 package org.xtext.example.mydsl.formatting2;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.AbstractJavaFormatter;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
-import org.eclipse.xtext.formatting2.ITextReplacerContext;
-import org.eclipse.xtext.formatting2.internal.AbstractTextReplacer;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ITextReplacement;
+import org.xtext.example.mydsl.myDsl.Background;
 import org.xtext.example.mydsl.myDsl.Model;
-import org.xtext.example.mydsl.myDsl.MyDslPackage.Literals;
 import org.xtext.example.mydsl.myDsl.Statement;
+import org.xtext.example.mydsl.myDsl.Step;
+import org.xtext.example.mydsl.myDsl.stepSet;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess;
+import org.xtext.example.mydsl.services.MyDslGrammarAccess.BackgroundElements;
+import org.xtext.example.mydsl.services.MyDslGrammarAccess.ModelElements;
+import org.xtext.example.mydsl.services.MyDslGrammarAccess.StatementElements;
+import org.xtext.example.mydsl.services.MyDslGrammarAccess.StepElements;
+import org.xtext.example.mydsl.services.MyDslGrammarAccess.StepSetElements;
 
 import com.google.inject.Inject;
 
@@ -21,75 +28,97 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 	@Inject
 	private MyDslGrammarAccess ga;
 
-	protected void format(Model model, IFormattableDocument doc) {
+	protected void format(Model m, IFormattableDocument doc) {
 
-		// TODO move all this code below into this method.
-		// Make methods for each token (keyword, assignment(feature=rulecall), rulecall)
-		doc.format(model);
+		ModelElements a = ga.getModelAccess();
 
-		// These are examples on how to access something between ''
-		ISemanticRegion modelKeyword;
-		// modelKeyword = regionFor(model).keyword("Feature:");
-		modelKeyword = regionFor(model).keyword(ga.getModelAccess().getFeatureKeyword_0());
-		doc.prepend(modelKeyword, it -> it.noSpace());
-		doc.append(modelKeyword, it -> it.setSpace(" "));
+		ModelFormatter.formatFeatureKeyword(getRegion(m, a.getFeatureKeyword_0()), doc);
+		// There's two types of assignments, = and += where the latter is a list
+		// This is an example of how to access an assignment of just one item.
+		// An assignment has 2 parts, the feature (name) and the ruleCall (Phrase)
+		// Together they make up an assignment.
+		// A ruleCall is anything that's in the xtext file with a :
+		// So a ruleCall can be a structure like thing with attributes or a terminal
+		ModelFormatter.formatNameRuleCall(getRegion(m, a.getNamePhraseParserRuleCall_1_0()), doc);
+		ModelFormatter.formatEOLRuleCall(getRegion(m, a.getEOLTerminalRuleCall_2()), doc);
+		for (Statement s : m.getStatements()) {
 
-		// These are examples on how to access something like name = Phrase
-		// name is the feature
-		// Phrase is a rule call since it references something else
-		// name with Phrase altogether is an assignment.
-		// All 3 reference the same region, which can be tested by triggering a
-		// ConflictingFormattingException
-		ISemanticRegion modelName;
-		ISemanticRegion modelName1 = regionFor(model).feature(Literals.MODEL__NAME);
-		ISemanticRegion modelName2 = regionFor(model).ruleCall(ga.getModelAccess().getNamePhraseParserRuleCall_1_0());
-		ISemanticRegion modelName3 = regionFor(model).assignment(ga.getModelAccess().getNameAssignment_1());
-		// doc.append(modelName1, it -> it.setSpace(" "));
-		// I prefer the ruleCall method for now
-		doc.append(modelName2, it -> it.noSpace());
-		// doc.append(modelName3, it -> it.newLine());
-
-		// These are examples on how to access something that's terminal
-		ISemanticRegion modelEOL = regionFor(model).ruleCall(ga.getModelAccess().getEOLTerminalRuleCall_2());
-		// This is an example of how to replace the actual text or in this case multiple
-		// new lines
-		doc.addReplacer(new AbstractTextReplacer(doc, modelEOL) {
-
-			@Override
-			public ITextReplacerContext createReplacements(ITextReplacerContext context) {
-				// replaceWith(getRegion().getText().toUpperCase())
-				context.addReplacement(getRegion().replaceWith("\r\n\r\n"));
-				return context;
-			}
-		});
-
-		// These are examples on how to access something with +=
-		// loop through the elements and then get the name
-		// the first approach is the following, loop through the elements
-		for (Statement statement : model.getStatements()) {
-			// regionFor statement works but not for name
-			// Like you can't do model.getName() and then pass that to regionFor.
-			// The reason being that name has no attributes.
-			regionFor(statement);
-
-			// TODO debug what's implementing this?
-			doc.format(statement);
-			// TODO This should be the same as the feature name attribute
-			// and EOL terminal.
+			ModelFormatter.setIndent(2);
+			doc.format(s);
 		}
-		// the second is this literals business, I think you can't loop through each
-		// element individually
-		// modelName = regionFor(model).feature(Literals.MODEL__STATEMENTS);
+		for (stepSet s : m.getStepSets()) {
 
-		// the third is probably the same as the second, you don't go through it
-		// individually
+			ModelFormatter.setIndent(2);
+			doc.format(s);
+		}
+	}
 
-		// the fourth is to get the assignment itself but again not sure you can go
-		// through it one at a time
+	// These are examples on how to access something with += loop through the
+	// elements and then get the name. The approach is the following, loop
+	// through the elements. Then invoke a formatter on the rule call like for name
+	// above. The 3 other approaches, feature, keyword and assignment throw
+	// exceptions in the regionFor method
+	// A note on the regionFor method. It works for statement works but not for
+	// name. Like you can't do model.getName() and then pass that to regionFor. The
+	// reason being that name has no attributes.
+	// This method, like the one for Model is invoked by doc.format like on line 74.
+	// What happens is that the doc.format method uses the reflection API to find
+	// this method
+	protected void format(Statement s, IFormattableDocument doc) {
 
-		// My conclusion then is to just use the rule approach again to handle indenting
-		// the whole area
+		StatementElements a = ga.getStatementAccess();
+		StatementFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_0_0()), doc);
+		StatementFormatter.formatEOLRuleCall(getRegion(s, a.getEOLTerminalRuleCall_1()), doc);
 
+	}
+
+	// This is an example of how to work with abstract types like stepSet which can
+	// be 3 different rule calls
+	protected void format(stepSet s, IFormattableDocument doc) {
+		if (s instanceof Background) {
+			doc.format((Background) s);
+		}
+	}
+
+	protected void format(Background b, IFormattableDocument doc) {
+
+		BackgroundElements a = ga.getBackgroundAccess();
+		BackgroundFormatter.formatBackgroundKeyword(getRegion(b, a.getBackgroundKeyword_0()), doc);
+		BackgroundFormatter.formatNameRuleCall(getRegion(b, a.getNamePhraseParserRuleCall_1_0()), doc);
+		BackgroundFormatter.formatEOLRuleCall(getRegion(b, a.getEOLTerminalRuleCall_2()), doc);
+		for (Statement s : b.getStatements()) {
+
+			BackgroundFormatter.setIndent(4);
+			doc.format(s);
+		}
+		for (Step s : b.getSteps()) {
+			BackgroundFormatter.setIndent(4);
+			doc.format(s);
+		}
+	}
+
+	protected void format(Step s, IFormattableDocument doc) {
+
+		StepElements a = ga.getStepAccess();
+		// TODO add instanceof to pick between 'Given' | 'When' | 'Then' | 'And' | 'But' | '*'
+		StepFormatter.formatAsteriskKeyword(getRegion(s, a.getAsteriskKeyword_0_5()), doc);
+		StepFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_1_0()), doc);
+		StepFormatter.formatEOLRuleCall(getRegion(s, a.getEOLTerminalRuleCall_2()), doc);
+	}
+
+	private ISemanticRegion getRegion(EObject eo, RuleCall ruleCall) {
+		// All 3 approaches below reference the same region, which can be tested by
+		// triggering a ConflictingFormattingException
+		// regionFor(model).feature(Literals.MODEL__NAME);
+		// regionFor(model).assignment(ga.getModelAccess().getNameAssignment_1());
+		// regionFor(model).ruleCall(ga.getModelAccess().getNamePhraseParserRuleCall_1_0());
+
+		return regionFor(eo).ruleCall(ruleCall);
+	}
+
+	private ISemanticRegion getRegion(EObject eo, Keyword keyword) {
+		// You can also search for the keyword using keyword("Feature:");
+		return regionFor(eo).keyword(keyword);
 	}
 
 }

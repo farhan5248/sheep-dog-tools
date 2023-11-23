@@ -31,10 +31,18 @@ public class MyDslParser extends AbstractContentAssistParser {
 		}
 		
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, MyDslGrammarAccess grammarAccess) {
+			builder.put(grammarAccess.getStepAccess().getAlternatives_0(), "rule__Step__Alternatives_0");
 			builder.put(grammarAccess.getModelAccess().getGroup(), "rule__Model__Group__0");
+			builder.put(grammarAccess.getBackgroundAccess().getGroup(), "rule__Background__Group__0");
+			builder.put(grammarAccess.getStepAccess().getGroup(), "rule__Step__Group__0");
 			builder.put(grammarAccess.getStatementAccess().getGroup(), "rule__Statement__Group__0");
 			builder.put(grammarAccess.getModelAccess().getNameAssignment_1(), "rule__Model__NameAssignment_1");
 			builder.put(grammarAccess.getModelAccess().getStatementsAssignment_3(), "rule__Model__StatementsAssignment_3");
+			builder.put(grammarAccess.getModelAccess().getStepSetsAssignment_4(), "rule__Model__StepSetsAssignment_4");
+			builder.put(grammarAccess.getBackgroundAccess().getNameAssignment_1(), "rule__Background__NameAssignment_1");
+			builder.put(grammarAccess.getBackgroundAccess().getStatementsAssignment_3(), "rule__Background__StatementsAssignment_3");
+			builder.put(grammarAccess.getBackgroundAccess().getStepsAssignment_4(), "rule__Background__StepsAssignment_4");
+			builder.put(grammarAccess.getStepAccess().getNameAssignment_1(), "rule__Step__NameAssignment_1");
 			builder.put(grammarAccess.getStatementAccess().getNameAssignment_0(), "rule__Statement__NameAssignment_0");
 		}
 	}

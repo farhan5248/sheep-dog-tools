@@ -9,6 +9,16 @@
     <genClasses ecoreClass="MyDsl.ecore#//Model">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Model/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Model/statements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Model/stepSets"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//stepSet"/>
+    <genClasses ecoreClass="MyDsl.ecore#//Background">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Background/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Background/statements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Background/steps"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//Step">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Step/name"/>
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//Statement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Statement/name"/>
