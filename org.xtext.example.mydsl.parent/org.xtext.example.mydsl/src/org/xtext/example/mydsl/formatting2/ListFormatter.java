@@ -20,7 +20,6 @@ public class ListFormatter extends Formatter {
 
 		if (isLast) {
 			replace(doc, iSR, "\r\n\r\n");
-			isLast = false;
 		} else {
 			replace(doc, iSR, "\r\n");
 		}

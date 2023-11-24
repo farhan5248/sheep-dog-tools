@@ -20,7 +20,6 @@ public class TagFormatter extends ListFormatter {
 
 		if (isLast) {
 			replace(doc, iSR, iSR.getText());
-			isLast = false;
 		} else {
 			replace(doc, iSR, iSR.getText() + " ");
 		}

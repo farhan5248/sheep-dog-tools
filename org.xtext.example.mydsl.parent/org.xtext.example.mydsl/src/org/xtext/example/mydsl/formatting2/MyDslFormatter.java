@@ -224,19 +224,18 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 			StatementFormatter.isLast(isLastElement(s, e.getStatements()));
 			StatementFormatter.setIndent(6);
 			doc.format(s);
-		}		
+		}
 		for (Row r : e.getRows()) {
 			RowFormatter.isLast(isLastElement(r, e.getRows()));
 			RowFormatter.isFirst(isFirstElement(r, e.getRows()));
-			StatementFormatter.setIndent(6);
+			RowFormatter.setIndent(6);
 			doc.format(r);
 		}
 	}
-	
+
 	protected void format(Row r, IFormattableDocument doc) {
+
 		RowElements a = ga.getRowAccess();
-
-
 		for (Cell c : r.getCells()) {
 			CellFormatter.isLast(isLastElement(c, r.getCells()));
 			CellFormatter.isFirst(isFirstElement(c, r.getCells()));
@@ -245,13 +244,12 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 		RowFormatter.formatVerticalLineKeyword(getRegion(r, a.getVerticalLineKeyword_1()), doc);
 		RowFormatter.formatEOL12RuleCall(getRegion(r, a.getEOLTerminalRuleCall_2()), doc);
 	}
-	
+
 	protected void format(Cell r, IFormattableDocument doc) {
 		CellElements a = ga.getCellAccess();
 		CellFormatter.formatVerticalLineKeyword(getRegion(r, a.getCellVerticalLineKeyword_0_0()), doc);
 		CellFormatter.formatNameRuleCall(getRegion(r, a.getNamePhraseParserRuleCall_1_0()), doc);
 	}
-
 
 	protected void format(Step s, IFormattableDocument doc) {
 		if (s instanceof Given) {
