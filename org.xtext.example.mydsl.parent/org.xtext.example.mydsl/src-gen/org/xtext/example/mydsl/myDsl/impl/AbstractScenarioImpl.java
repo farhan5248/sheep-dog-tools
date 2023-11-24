@@ -20,39 +20,27 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.xtext.example.mydsl.myDsl.AbstractScenario;
-import org.xtext.example.mydsl.myDsl.Model;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.Statement;
-import org.xtext.example.mydsl.myDsl.Tag;
+import org.xtext.example.mydsl.myDsl.Step;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Model</b></em>'.
+ * An implementation of the model object '<em><b>Abstract Scenario</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ModelImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ModelImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ModelImpl#getStatements <em>Statements</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ModelImpl#getAbstractScenarios <em>Abstract Scenarios</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.AbstractScenarioImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.AbstractScenarioImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.AbstractScenarioImpl#getSteps <em>Steps</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ModelImpl extends MinimalEObjectImpl.Container implements Model
+public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implements AbstractScenario
 {
-  /**
-   * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTags()
-   * @generated
-   * @ordered
-   */
-  protected EList<Tag> tags;
-
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -84,21 +72,21 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   protected EList<Statement> statements;
 
   /**
-   * The cached value of the '{@link #getAbstractScenarios() <em>Abstract Scenarios</em>}' containment reference list.
+   * The cached value of the '{@link #getSteps() <em>Steps</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAbstractScenarios()
+   * @see #getSteps()
    * @generated
    * @ordered
    */
-  protected EList<AbstractScenario> abstractScenarios;
+  protected EList<Step> steps;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ModelImpl()
+  protected AbstractScenarioImpl()
   {
     super();
   }
@@ -111,22 +99,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.MODEL;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<Tag> getTags()
-  {
-    if (tags == null)
-    {
-      tags = new EObjectContainmentEList<Tag>(Tag.class, this, MyDslPackage.MODEL__TAGS);
-    }
-    return tags;
+    return MyDslPackage.Literals.ABSTRACT_SCENARIO;
   }
 
   /**
@@ -151,7 +124,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.MODEL__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.ABSTRACT_SCENARIO__NAME, oldName, name));
   }
 
   /**
@@ -164,7 +137,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     if (statements == null)
     {
-      statements = new EObjectContainmentEList<Statement>(Statement.class, this, MyDslPackage.MODEL__STATEMENTS);
+      statements = new EObjectContainmentEList<Statement>(Statement.class, this, MyDslPackage.ABSTRACT_SCENARIO__STATEMENTS);
     }
     return statements;
   }
@@ -175,13 +148,13 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @generated
    */
   @Override
-  public EList<AbstractScenario> getAbstractScenarios()
+  public EList<Step> getSteps()
   {
-    if (abstractScenarios == null)
+    if (steps == null)
     {
-      abstractScenarios = new EObjectContainmentEList<AbstractScenario>(AbstractScenario.class, this, MyDslPackage.MODEL__ABSTRACT_SCENARIOS);
+      steps = new EObjectContainmentEList<Step>(Step.class, this, MyDslPackage.ABSTRACT_SCENARIO__STEPS);
     }
-    return abstractScenarios;
+    return steps;
   }
 
   /**
@@ -194,12 +167,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__TAGS:
-        return ((InternalEList<?>)getTags()).basicRemove(otherEnd, msgs);
-      case MyDslPackage.MODEL__STATEMENTS:
+      case MyDslPackage.ABSTRACT_SCENARIO__STATEMENTS:
         return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
-      case MyDslPackage.MODEL__ABSTRACT_SCENARIOS:
-        return ((InternalEList<?>)getAbstractScenarios()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.ABSTRACT_SCENARIO__STEPS:
+        return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -214,14 +185,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__TAGS:
-        return getTags();
-      case MyDslPackage.MODEL__NAME:
+      case MyDslPackage.ABSTRACT_SCENARIO__NAME:
         return getName();
-      case MyDslPackage.MODEL__STATEMENTS:
+      case MyDslPackage.ABSTRACT_SCENARIO__STATEMENTS:
         return getStatements();
-      case MyDslPackage.MODEL__ABSTRACT_SCENARIOS:
-        return getAbstractScenarios();
+      case MyDslPackage.ABSTRACT_SCENARIO__STEPS:
+        return getSteps();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -237,20 +206,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__TAGS:
-        getTags().clear();
-        getTags().addAll((Collection<? extends Tag>)newValue);
-        return;
-      case MyDslPackage.MODEL__NAME:
+      case MyDslPackage.ABSTRACT_SCENARIO__NAME:
         setName((String)newValue);
         return;
-      case MyDslPackage.MODEL__STATEMENTS:
+      case MyDslPackage.ABSTRACT_SCENARIO__STATEMENTS:
         getStatements().clear();
         getStatements().addAll((Collection<? extends Statement>)newValue);
         return;
-      case MyDslPackage.MODEL__ABSTRACT_SCENARIOS:
-        getAbstractScenarios().clear();
-        getAbstractScenarios().addAll((Collection<? extends AbstractScenario>)newValue);
+      case MyDslPackage.ABSTRACT_SCENARIO__STEPS:
+        getSteps().clear();
+        getSteps().addAll((Collection<? extends Step>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -266,17 +231,14 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__TAGS:
-        getTags().clear();
-        return;
-      case MyDslPackage.MODEL__NAME:
+      case MyDslPackage.ABSTRACT_SCENARIO__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case MyDslPackage.MODEL__STATEMENTS:
+      case MyDslPackage.ABSTRACT_SCENARIO__STATEMENTS:
         getStatements().clear();
         return;
-      case MyDslPackage.MODEL__ABSTRACT_SCENARIOS:
-        getAbstractScenarios().clear();
+      case MyDslPackage.ABSTRACT_SCENARIO__STEPS:
+        getSteps().clear();
         return;
     }
     super.eUnset(featureID);
@@ -292,14 +254,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__TAGS:
-        return tags != null && !tags.isEmpty();
-      case MyDslPackage.MODEL__NAME:
+      case MyDslPackage.ABSTRACT_SCENARIO__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case MyDslPackage.MODEL__STATEMENTS:
+      case MyDslPackage.ABSTRACT_SCENARIO__STATEMENTS:
         return statements != null && !statements.isEmpty();
-      case MyDslPackage.MODEL__ABSTRACT_SCENARIOS:
-        return abstractScenarios != null && !abstractScenarios.isEmpty();
+      case MyDslPackage.ABSTRACT_SCENARIO__STEPS:
+        return steps != null && !steps.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -321,4 +281,4 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     return result.toString();
   }
 
-} //ModelImpl
+} //AbstractScenarioImpl

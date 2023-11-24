@@ -5,26 +5,24 @@ package org.xtext.example.mydsl.myDsl.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
+import org.xtext.example.mydsl.myDsl.Given;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.stepSet;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>step Set</b></em>'.
+ * An implementation of the model object '<em><b>Given</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class stepSetImpl extends MinimalEObjectImpl.Container implements stepSet
+public class GivenImpl extends StepImpl implements Given
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected stepSetImpl()
+  protected GivenImpl()
   {
     super();
   }
@@ -37,7 +35,7 @@ public class stepSetImpl extends MinimalEObjectImpl.Container implements stepSet
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.STEP_SET;
+    return MyDslPackage.Literals.GIVEN;
   }
 
-} //stepSetImpl
+} //GivenImpl

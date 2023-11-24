@@ -33,13 +33,13 @@ public interface MyDslFactory extends EFactory
   Model createModel();
 
   /**
-   * Returns a new object of class '<em>step Set</em>'.
+   * Returns a new object of class '<em>Abstract Scenario</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>step Set</em>'.
+   * @return a new object of class '<em>Abstract Scenario</em>'.
    * @generated
    */
-  stepSet createstepSet();
+  AbstractScenario createAbstractScenario();
 
   /**
    * Returns a new object of class '<em>Background</em>'.
@@ -51,6 +51,24 @@ public interface MyDslFactory extends EFactory
   Background createBackground();
 
   /**
+   * Returns a new object of class '<em>Scenario</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Scenario</em>'.
+   * @generated
+   */
+  Scenario createScenario();
+
+  /**
+   * Returns a new object of class '<em>Scenario Outline</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Scenario Outline</em>'.
+   * @generated
+   */
+  ScenarioOutline createScenarioOutline();
+
+  /**
    * Returns a new object of class '<em>Step</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -60,6 +78,60 @@ public interface MyDslFactory extends EFactory
   Step createStep();
 
   /**
+   * Returns a new object of class '<em>Given</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Given</em>'.
+   * @generated
+   */
+  Given createGiven();
+
+  /**
+   * Returns a new object of class '<em>When</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>When</em>'.
+   * @generated
+   */
+  When createWhen();
+
+  /**
+   * Returns a new object of class '<em>Then</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Then</em>'.
+   * @generated
+   */
+  Then createThen();
+
+  /**
+   * Returns a new object of class '<em>And</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>And</em>'.
+   * @generated
+   */
+  And createAnd();
+
+  /**
+   * Returns a new object of class '<em>But</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>But</em>'.
+   * @generated
+   */
+  But createBut();
+
+  /**
+   * Returns a new object of class '<em>Asterisk</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Asterisk</em>'.
+   * @generated
+   */
+  Asterisk createAsterisk();
+
+  /**
    * Returns a new object of class '<em>Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -67,6 +139,15 @@ public interface MyDslFactory extends EFactory
    * @generated
    */
   Statement createStatement();
+
+  /**
+   * Returns a new object of class '<em>Tag</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Tag</em>'.
+   * @generated
+   */
+  Tag createTag();
 
   /**
    * Returns the package supported by this factory.

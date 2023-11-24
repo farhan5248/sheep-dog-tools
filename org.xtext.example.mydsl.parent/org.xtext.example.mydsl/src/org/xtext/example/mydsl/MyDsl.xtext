@@ -4,26 +4,63 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
 
 Model:
+	(tags+=Tag+ EOL)?
 	'Feature:' name=Phrase EOL
 	statements+=Statement*
-	stepSets+=stepSet*;
+	abstractScenarios+=AbstractScenario*;
 
-stepSet:
-	Background;
+// This has the side effect of allowing more than 1 Background.
+// Also it allows it to be anywhere, like at the begining or end.
+// I assume anyone using this editor knows that in Cucumber it just goes once at the top
+AbstractScenario:
+	Background | Scenario | ScenarioOutline;
 
 Background:
 	'Background:' name=Phrase EOL
 	statements+=Statement*
 	steps+=Step*;
 
+Scenario:
+	(tags+=Tag+ EOL)?
+	'Scenario:' name=Phrase EOL
+	statements+=Statement*
+	steps+=Step*;
+
+ScenarioOutline:
+	(tags+=Tag+ EOL)?
+	'Scenario Outline:' name=Phrase EOL
+	statements+=Statement*
+	steps+=Step*;
+
 Step:
-	('Given' | 'When' | 'Then' | 'And' | 'But' | '*') name=Phrase EOL?;
+	Given | When | Then | And | But | Asterisk;
+
+Given:
+	'Given' name=Phrase EOL?;
+
+When:
+	'When' name=Phrase EOL?;
+
+Then:
+	'Then' name=Phrase EOL?;
+
+And:
+	'And' name=Phrase EOL?;
+
+But:
+	'But' name=Phrase EOL?;
+
+Asterisk:
+	'*' name=Phrase EOL?;
 
 Statement:
 	name=Phrase EOL;
 
 Phrase:
 	ID+;
+
+Tag:
+	'@' name=ID;
 
 terminal ID:
 	'^'? ('a'..'z' | 'A'..'Z' | '_' | '.') ('a'..'z' | 'A'..'Z' | '_' | '.' | '0'..'9')*;

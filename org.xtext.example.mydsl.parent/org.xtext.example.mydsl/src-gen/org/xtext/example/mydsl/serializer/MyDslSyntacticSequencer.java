@@ -10,7 +10,6 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
-import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
@@ -21,14 +20,22 @@ import org.xtext.example.mydsl.services.MyDslGrammarAccess;
 public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected MyDslGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_Step_AndKeyword_0_3_or_AsteriskKeyword_0_5_or_ButKeyword_0_4_or_GivenKeyword_0_0_or_ThenKeyword_0_2_or_WhenKeyword_0_1;
-	protected AbstractElementAlias match_Step_EOLTerminalRuleCall_2_q;
+	protected AbstractElementAlias match_And_EOLTerminalRuleCall_2_q;
+	protected AbstractElementAlias match_Asterisk_EOLTerminalRuleCall_2_q;
+	protected AbstractElementAlias match_But_EOLTerminalRuleCall_2_q;
+	protected AbstractElementAlias match_Given_EOLTerminalRuleCall_2_q;
+	protected AbstractElementAlias match_Then_EOLTerminalRuleCall_2_q;
+	protected AbstractElementAlias match_When_EOLTerminalRuleCall_2_q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (MyDslGrammarAccess) access;
-		match_Step_AndKeyword_0_3_or_AsteriskKeyword_0_5_or_ButKeyword_0_4_or_GivenKeyword_0_0_or_ThenKeyword_0_2_or_WhenKeyword_0_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getStepAccess().getAndKeyword_0_3()), new TokenAlias(false, false, grammarAccess.getStepAccess().getAsteriskKeyword_0_5()), new TokenAlias(false, false, grammarAccess.getStepAccess().getButKeyword_0_4()), new TokenAlias(false, false, grammarAccess.getStepAccess().getGivenKeyword_0_0()), new TokenAlias(false, false, grammarAccess.getStepAccess().getThenKeyword_0_2()), new TokenAlias(false, false, grammarAccess.getStepAccess().getWhenKeyword_0_1()));
-		match_Step_EOLTerminalRuleCall_2_q = new TokenAlias(false, true, grammarAccess.getStepAccess().getEOLTerminalRuleCall_2());
+		match_And_EOLTerminalRuleCall_2_q = new TokenAlias(false, true, grammarAccess.getAndAccess().getEOLTerminalRuleCall_2());
+		match_Asterisk_EOLTerminalRuleCall_2_q = new TokenAlias(false, true, grammarAccess.getAsteriskAccess().getEOLTerminalRuleCall_2());
+		match_But_EOLTerminalRuleCall_2_q = new TokenAlias(false, true, grammarAccess.getButAccess().getEOLTerminalRuleCall_2());
+		match_Given_EOLTerminalRuleCall_2_q = new TokenAlias(false, true, grammarAccess.getGivenAccess().getEOLTerminalRuleCall_2());
+		match_Then_EOLTerminalRuleCall_2_q = new TokenAlias(false, true, grammarAccess.getThenAccess().getEOLTerminalRuleCall_2());
+		match_When_EOLTerminalRuleCall_2_q = new TokenAlias(false, true, grammarAccess.getWhenAccess().getEOLTerminalRuleCall_2());
 	}
 	
 	@Override
@@ -54,10 +61,18 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_Step_AndKeyword_0_3_or_AsteriskKeyword_0_5_or_ButKeyword_0_4_or_GivenKeyword_0_0_or_ThenKeyword_0_2_or_WhenKeyword_0_1.equals(syntax))
-				emit_Step_AndKeyword_0_3_or_AsteriskKeyword_0_5_or_ButKeyword_0_4_or_GivenKeyword_0_0_or_ThenKeyword_0_2_or_WhenKeyword_0_1(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_Step_EOLTerminalRuleCall_2_q.equals(syntax))
-				emit_Step_EOLTerminalRuleCall_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			if (match_And_EOLTerminalRuleCall_2_q.equals(syntax))
+				emit_And_EOLTerminalRuleCall_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Asterisk_EOLTerminalRuleCall_2_q.equals(syntax))
+				emit_Asterisk_EOLTerminalRuleCall_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_But_EOLTerminalRuleCall_2_q.equals(syntax))
+				emit_But_EOLTerminalRuleCall_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Given_EOLTerminalRuleCall_2_q.equals(syntax))
+				emit_Given_EOLTerminalRuleCall_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_Then_EOLTerminalRuleCall_2_q.equals(syntax))
+				emit_Then_EOLTerminalRuleCall_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_When_EOLTerminalRuleCall_2_q.equals(syntax))
+				emit_When_EOLTerminalRuleCall_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -65,21 +80,14 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * <pre>
 	 * Ambiguous syntax:
-	 *     (
-	  *         'Given' | 
-	  *         'When' | 
-	  *         'Then' | 
-	  *         'And' | 
-	  *         'But' | 
-	  *         '*'
-	  *     )
+	 *     EOL?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) name=Phrase
+	 *     name=Phrase (ambiguity) (rule end)
 	 
 	 * </pre>
 	 */
-	protected void emit_Step_AndKeyword_0_3_or_AsteriskKeyword_0_5_or_ButKeyword_0_4_or_GivenKeyword_0_0_or_ThenKeyword_0_2_or_WhenKeyword_0_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_And_EOLTerminalRuleCall_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -93,7 +101,63 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 
 	 * </pre>
 	 */
-	protected void emit_Step_EOLTerminalRuleCall_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Asterisk_EOLTerminalRuleCall_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     EOL?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     name=Phrase (ambiguity) (rule end)
+	 
+	 * </pre>
+	 */
+	protected void emit_But_EOLTerminalRuleCall_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     EOL?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     name=Phrase (ambiguity) (rule end)
+	 
+	 * </pre>
+	 */
+	protected void emit_Given_EOLTerminalRuleCall_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     EOL?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     name=Phrase (ambiguity) (rule end)
+	 
+	 * </pre>
+	 */
+	protected void emit_Then_EOLTerminalRuleCall_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     EOL?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     name=Phrase (ambiguity) (rule end)
+	 
+	 * </pre>
+	 */
+	protected void emit_When_EOLTerminalRuleCall_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

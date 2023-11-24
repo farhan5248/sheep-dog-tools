@@ -3,11 +3,7 @@ package org.xtext.example.mydsl.formatting2;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 
-public class StatementFormatter extends Formatter {
-
-	public static void formatEOLRuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
-		replace(doc, iSR, "\r\n");
-	}
+public class StatementFormatter extends ListFormatter {
 
 	public static void formatNameRuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
 
@@ -17,5 +13,14 @@ public class StatementFormatter extends Formatter {
 		doc.prepend(iSR, it -> it.noSpace());
 		doc.append(iSR, it -> it.noSpace());
 		replace(doc, iSR, getIndent() + iSR.getText());
+	}
+
+	public static void formatEOLRuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
+		if (isLast) {
+			replace(doc, iSR, "\r\n\r\n");
+			isLast = false;
+		} else {
+			replace(doc, iSR, "\r\n");
+		}
 	}
 }

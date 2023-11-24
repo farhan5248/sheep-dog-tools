@@ -66,10 +66,19 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
     switch (eClass.getClassifierID())
     {
       case MyDslPackage.MODEL: return createModel();
-      case MyDslPackage.STEP_SET: return createstepSet();
+      case MyDslPackage.ABSTRACT_SCENARIO: return createAbstractScenario();
       case MyDslPackage.BACKGROUND: return createBackground();
+      case MyDslPackage.SCENARIO: return createScenario();
+      case MyDslPackage.SCENARIO_OUTLINE: return createScenarioOutline();
       case MyDslPackage.STEP: return createStep();
+      case MyDslPackage.GIVEN: return createGiven();
+      case MyDslPackage.WHEN: return createWhen();
+      case MyDslPackage.THEN: return createThen();
+      case MyDslPackage.AND: return createAnd();
+      case MyDslPackage.BUT: return createBut();
+      case MyDslPackage.ASTERISK: return createAsterisk();
       case MyDslPackage.STATEMENT: return createStatement();
+      case MyDslPackage.TAG: return createTag();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -93,10 +102,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
-  public stepSet createstepSet()
+  public AbstractScenario createAbstractScenario()
   {
-    stepSetImpl stepSet = new stepSetImpl();
-    return stepSet;
+    AbstractScenarioImpl abstractScenario = new AbstractScenarioImpl();
+    return abstractScenario;
   }
 
   /**
@@ -117,6 +126,30 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
+  public Scenario createScenario()
+  {
+    ScenarioImpl scenario = new ScenarioImpl();
+    return scenario;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ScenarioOutline createScenarioOutline()
+  {
+    ScenarioOutlineImpl scenarioOutline = new ScenarioOutlineImpl();
+    return scenarioOutline;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Step createStep()
   {
     StepImpl step = new StepImpl();
@@ -129,10 +162,94 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
+  public Given createGiven()
+  {
+    GivenImpl given = new GivenImpl();
+    return given;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public When createWhen()
+  {
+    WhenImpl when = new WhenImpl();
+    return when;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Then createThen()
+  {
+    ThenImpl then = new ThenImpl();
+    return then;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public And createAnd()
+  {
+    AndImpl and = new AndImpl();
+    return and;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public But createBut()
+  {
+    ButImpl but = new ButImpl();
+    return but;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Asterisk createAsterisk()
+  {
+    AsteriskImpl asterisk = new AsteriskImpl();
+    return asterisk;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Statement createStatement()
   {
     StatementImpl statement = new StatementImpl();
     return statement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Tag createTag()
+  {
+    TagImpl tag = new TagImpl();
+    return tag;
   }
 
   /**

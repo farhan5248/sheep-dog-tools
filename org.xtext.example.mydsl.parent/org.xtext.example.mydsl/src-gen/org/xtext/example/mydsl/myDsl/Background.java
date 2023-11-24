@@ -3,72 +3,17 @@
  */
 package org.xtext.example.mydsl.myDsl;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Background</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Background#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Background#getStatements <em>Statements</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Background#getSteps <em>Steps</em>}</li>
- * </ul>
  *
  * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getBackground()
  * @model
  * @generated
  */
-public interface Background extends stepSet
+public interface Background extends AbstractScenario
 {
-  /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getBackground_Name()
-   * @model
-   * @generated
-   */
-  String getName();
-
-  /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Background#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
-  void setName(String value);
-
-  /**
-   * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.Statement}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Statements</em>' containment reference list.
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getBackground_Statements()
-   * @model containment="true"
-   * @generated
-   */
-  EList<Statement> getStatements();
-
-  /**
-   * Returns the value of the '<em><b>Steps</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.Step}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Steps</em>' containment reference list.
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getBackground_Steps()
-   * @model containment="true"
-   * @generated
-   */
-  EList<Step> getSteps();
-
 } // Background

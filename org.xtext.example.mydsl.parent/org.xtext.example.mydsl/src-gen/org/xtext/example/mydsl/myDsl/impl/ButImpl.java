@@ -5,24 +5,24 @@ package org.xtext.example.mydsl.myDsl.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.xtext.example.mydsl.myDsl.Background;
+import org.xtext.example.mydsl.myDsl.But;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Background</b></em>'.
+ * An implementation of the model object '<em><b>But</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class BackgroundImpl extends AbstractScenarioImpl implements Background
+public class ButImpl extends StepImpl implements But
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected BackgroundImpl()
+  protected ButImpl()
   {
     super();
   }
@@ -35,7 +35,7 @@ public class BackgroundImpl extends AbstractScenarioImpl implements Background
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.BACKGROUND;
+    return MyDslPackage.Literals.BUT;
   }
 
-} //BackgroundImpl
+} //ButImpl

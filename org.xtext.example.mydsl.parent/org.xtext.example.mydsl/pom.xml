@@ -126,4 +126,11 @@
 		</pluginManagement>
 	</build>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.farhan</groupId>
+			<artifactId>cucumberxtexteditor</artifactId>
+			<version>1.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>

@@ -7,21 +7,37 @@
   <genPackages prefix="MyDsl" basePackage="org.xtext.example.mydsl" disposableProviderFactory="true"
       fileExtensions="mydsl" ecorePackage="MyDsl.ecore#/">
     <genClasses ecoreClass="MyDsl.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Model/tags"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Model/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Model/statements"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Model/stepSets"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Model/abstractScenarios"/>
     </genClasses>
-    <genClasses ecoreClass="MyDsl.ecore#//stepSet"/>
-    <genClasses ecoreClass="MyDsl.ecore#//Background">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Background/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Background/statements"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Background/steps"/>
+    <genClasses ecoreClass="MyDsl.ecore#//AbstractScenario">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//AbstractScenario/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//AbstractScenario/statements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//AbstractScenario/steps"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//Background"/>
+    <genClasses ecoreClass="MyDsl.ecore#//Scenario">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Scenario/tags"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//ScenarioOutline">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//ScenarioOutline/tags"/>
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//Step">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Step/name"/>
     </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//Given"/>
+    <genClasses ecoreClass="MyDsl.ecore#//When"/>
+    <genClasses ecoreClass="MyDsl.ecore#//Then"/>
+    <genClasses ecoreClass="MyDsl.ecore#//And"/>
+    <genClasses ecoreClass="MyDsl.ecore#//But"/>
+    <genClasses ecoreClass="MyDsl.ecore#//Asterisk"/>
     <genClasses ecoreClass="MyDsl.ecore#//Statement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Statement/name"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//Tag">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Tag/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

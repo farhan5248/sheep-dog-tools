@@ -68,13 +68,22 @@ public interface MyDslPackage extends EPackage
   int MODEL = 0;
 
   /**
+   * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__TAGS = 0;
+
+  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__NAME = 0;
+  int MODEL__NAME = 1;
 
   /**
    * The feature id for the '<em><b>Statements</b></em>' containment reference list.
@@ -83,16 +92,16 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL__STATEMENTS = 1;
+  int MODEL__STATEMENTS = 2;
 
   /**
-   * The feature id for the '<em><b>Step Sets</b></em>' containment reference list.
+   * The feature id for the '<em><b>Abstract Scenarios</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__STEP_SETS = 2;
+  int MODEL__ABSTRACT_SCENARIOS = 3;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -101,26 +110,53 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 3;
+  int MODEL_FEATURE_COUNT = 4;
 
   /**
-   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.stepSetImpl <em>step Set</em>}' class.
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.AbstractScenarioImpl <em>Abstract Scenario</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.xtext.example.mydsl.myDsl.impl.stepSetImpl
-   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getstepSet()
+   * @see org.xtext.example.mydsl.myDsl.impl.AbstractScenarioImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAbstractScenario()
    * @generated
    */
-  int STEP_SET = 1;
+  int ABSTRACT_SCENARIO = 1;
 
   /**
-   * The number of structural features of the '<em>step Set</em>' class.
+   * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STEP_SET_FEATURE_COUNT = 0;
+  int ABSTRACT_SCENARIO__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_SCENARIO__STATEMENTS = 1;
+
+  /**
+   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_SCENARIO__STEPS = 2;
+
+  /**
+   * The number of structural features of the '<em>Abstract Scenario</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_SCENARIO_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.BackgroundImpl <em>Background</em>}' class.
@@ -139,7 +175,7 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BACKGROUND__NAME = STEP_SET_FEATURE_COUNT + 0;
+  int BACKGROUND__NAME = ABSTRACT_SCENARIO__NAME;
 
   /**
    * The feature id for the '<em><b>Statements</b></em>' containment reference list.
@@ -148,7 +184,7 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BACKGROUND__STATEMENTS = STEP_SET_FEATURE_COUNT + 1;
+  int BACKGROUND__STATEMENTS = ABSTRACT_SCENARIO__STATEMENTS;
 
   /**
    * The feature id for the '<em><b>Steps</b></em>' containment reference list.
@@ -157,7 +193,7 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BACKGROUND__STEPS = STEP_SET_FEATURE_COUNT + 2;
+  int BACKGROUND__STEPS = ABSTRACT_SCENARIO__STEPS;
 
   /**
    * The number of structural features of the '<em>Background</em>' class.
@@ -166,7 +202,117 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BACKGROUND_FEATURE_COUNT = STEP_SET_FEATURE_COUNT + 3;
+  int BACKGROUND_FEATURE_COUNT = ABSTRACT_SCENARIO_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.ScenarioImpl <em>Scenario</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.ScenarioImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getScenario()
+   * @generated
+   */
+  int SCENARIO = 3;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCENARIO__NAME = ABSTRACT_SCENARIO__NAME;
+
+  /**
+   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCENARIO__STATEMENTS = ABSTRACT_SCENARIO__STATEMENTS;
+
+  /**
+   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCENARIO__STEPS = ABSTRACT_SCENARIO__STEPS;
+
+  /**
+   * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCENARIO__TAGS = ABSTRACT_SCENARIO_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Scenario</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCENARIO_FEATURE_COUNT = ABSTRACT_SCENARIO_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.ScenarioOutlineImpl <em>Scenario Outline</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.ScenarioOutlineImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getScenarioOutline()
+   * @generated
+   */
+  int SCENARIO_OUTLINE = 4;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCENARIO_OUTLINE__NAME = ABSTRACT_SCENARIO__NAME;
+
+  /**
+   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCENARIO_OUTLINE__STATEMENTS = ABSTRACT_SCENARIO__STATEMENTS;
+
+  /**
+   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCENARIO_OUTLINE__STEPS = ABSTRACT_SCENARIO__STEPS;
+
+  /**
+   * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCENARIO_OUTLINE__TAGS = ABSTRACT_SCENARIO_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Scenario Outline</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCENARIO_OUTLINE_FEATURE_COUNT = ABSTRACT_SCENARIO_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.StepImpl <em>Step</em>}' class.
@@ -176,7 +322,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getStep()
    * @generated
    */
-  int STEP = 3;
+  int STEP = 5;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -197,6 +343,174 @@ public interface MyDslPackage extends EPackage
   int STEP_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.GivenImpl <em>Given</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.GivenImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getGiven()
+   * @generated
+   */
+  int GIVEN = 6;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GIVEN__NAME = STEP__NAME;
+
+  /**
+   * The number of structural features of the '<em>Given</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GIVEN_FEATURE_COUNT = STEP_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.WhenImpl <em>When</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.WhenImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getWhen()
+   * @generated
+   */
+  int WHEN = 7;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WHEN__NAME = STEP__NAME;
+
+  /**
+   * The number of structural features of the '<em>When</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WHEN_FEATURE_COUNT = STEP_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.ThenImpl <em>Then</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.ThenImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getThen()
+   * @generated
+   */
+  int THEN = 8;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int THEN__NAME = STEP__NAME;
+
+  /**
+   * The number of structural features of the '<em>Then</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int THEN_FEATURE_COUNT = STEP_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.AndImpl <em>And</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.AndImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAnd()
+   * @generated
+   */
+  int AND = 9;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AND__NAME = STEP__NAME;
+
+  /**
+   * The number of structural features of the '<em>And</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AND_FEATURE_COUNT = STEP_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.ButImpl <em>But</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.ButImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getBut()
+   * @generated
+   */
+  int BUT = 10;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUT__NAME = STEP__NAME;
+
+  /**
+   * The number of structural features of the '<em>But</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUT_FEATURE_COUNT = STEP_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.AsteriskImpl <em>Asterisk</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.AsteriskImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAsterisk()
+   * @generated
+   */
+  int ASTERISK = 11;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASTERISK__NAME = STEP__NAME;
+
+  /**
+   * The number of structural features of the '<em>Asterisk</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASTERISK_FEATURE_COUNT = STEP_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.StatementImpl <em>Statement</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -204,7 +518,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getStatement()
    * @generated
    */
-  int STATEMENT = 4;
+  int STATEMENT = 12;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -224,6 +538,34 @@ public interface MyDslPackage extends EPackage
    */
   int STATEMENT_FEATURE_COUNT = 1;
 
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.TagImpl <em>Tag</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.TagImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getTag()
+   * @generated
+   */
+  int TAG = 13;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TAG__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Tag</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TAG_FEATURE_COUNT = 1;
+
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Model <em>Model</em>}'.
@@ -234,6 +576,17 @@ public interface MyDslPackage extends EPackage
    * @generated
    */
   EClass getModel();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Model#getTags <em>Tags</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Tags</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Model#getTags()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_Tags();
 
   /**
    * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.Model#getName <em>Name</em>}'.
@@ -258,25 +611,58 @@ public interface MyDslPackage extends EPackage
   EReference getModel_Statements();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Model#getStepSets <em>Step Sets</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Model#getAbstractScenarios <em>Abstract Scenarios</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Step Sets</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Model#getStepSets()
+   * @return the meta object for the containment reference list '<em>Abstract Scenarios</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Model#getAbstractScenarios()
    * @see #getModel()
    * @generated
    */
-  EReference getModel_StepSets();
+  EReference getModel_AbstractScenarios();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.stepSet <em>step Set</em>}'.
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.AbstractScenario <em>Abstract Scenario</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>step Set</em>'.
-   * @see org.xtext.example.mydsl.myDsl.stepSet
+   * @return the meta object for class '<em>Abstract Scenario</em>'.
+   * @see org.xtext.example.mydsl.myDsl.AbstractScenario
    * @generated
    */
-  EClass getstepSet();
+  EClass getAbstractScenario();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.AbstractScenario#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.example.mydsl.myDsl.AbstractScenario#getName()
+   * @see #getAbstractScenario()
+   * @generated
+   */
+  EAttribute getAbstractScenario_Name();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.AbstractScenario#getStatements <em>Statements</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Statements</em>'.
+   * @see org.xtext.example.mydsl.myDsl.AbstractScenario#getStatements()
+   * @see #getAbstractScenario()
+   * @generated
+   */
+  EReference getAbstractScenario_Statements();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.AbstractScenario#getSteps <em>Steps</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Steps</em>'.
+   * @see org.xtext.example.mydsl.myDsl.AbstractScenario#getSteps()
+   * @see #getAbstractScenario()
+   * @generated
+   */
+  EReference getAbstractScenario_Steps();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Background <em>Background</em>}'.
@@ -289,37 +675,46 @@ public interface MyDslPackage extends EPackage
   EClass getBackground();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.Background#getName <em>Name</em>}'.
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Scenario <em>Scenario</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Background#getName()
-   * @see #getBackground()
+   * @return the meta object for class '<em>Scenario</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Scenario
    * @generated
    */
-  EAttribute getBackground_Name();
+  EClass getScenario();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Background#getStatements <em>Statements</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Scenario#getTags <em>Tags</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Statements</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Background#getStatements()
-   * @see #getBackground()
+   * @return the meta object for the containment reference list '<em>Tags</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Scenario#getTags()
+   * @see #getScenario()
    * @generated
    */
-  EReference getBackground_Statements();
+  EReference getScenario_Tags();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Background#getSteps <em>Steps</em>}'.
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.ScenarioOutline <em>Scenario Outline</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Steps</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Background#getSteps()
-   * @see #getBackground()
+   * @return the meta object for class '<em>Scenario Outline</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ScenarioOutline
    * @generated
    */
-  EReference getBackground_Steps();
+  EClass getScenarioOutline();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.ScenarioOutline#getTags <em>Tags</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Tags</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ScenarioOutline#getTags()
+   * @see #getScenarioOutline()
+   * @generated
+   */
+  EReference getScenarioOutline_Tags();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Step <em>Step</em>}'.
@@ -343,6 +738,66 @@ public interface MyDslPackage extends EPackage
   EAttribute getStep_Name();
 
   /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Given <em>Given</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Given</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Given
+   * @generated
+   */
+  EClass getGiven();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.When <em>When</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>When</em>'.
+   * @see org.xtext.example.mydsl.myDsl.When
+   * @generated
+   */
+  EClass getWhen();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Then <em>Then</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Then</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Then
+   * @generated
+   */
+  EClass getThen();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.And <em>And</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>And</em>'.
+   * @see org.xtext.example.mydsl.myDsl.And
+   * @generated
+   */
+  EClass getAnd();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.But <em>But</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>But</em>'.
+   * @see org.xtext.example.mydsl.myDsl.But
+   * @generated
+   */
+  EClass getBut();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Asterisk <em>Asterisk</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Asterisk</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Asterisk
+   * @generated
+   */
+  EClass getAsterisk();
+
+  /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Statement <em>Statement</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -362,6 +817,27 @@ public interface MyDslPackage extends EPackage
    * @generated
    */
   EAttribute getStatement_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Tag <em>Tag</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Tag</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Tag
+   * @generated
+   */
+  EClass getTag();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.Tag#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Tag#getName()
+   * @see #getTag()
+   * @generated
+   */
+  EAttribute getTag_Name();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -397,6 +873,14 @@ public interface MyDslPackage extends EPackage
     EClass MODEL = eINSTANCE.getModel();
 
     /**
+     * The meta object literal for the '<em><b>Tags</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__TAGS = eINSTANCE.getModel_Tags();
+
+    /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -413,22 +897,46 @@ public interface MyDslPackage extends EPackage
     EReference MODEL__STATEMENTS = eINSTANCE.getModel_Statements();
 
     /**
-     * The meta object literal for the '<em><b>Step Sets</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Abstract Scenarios</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference MODEL__STEP_SETS = eINSTANCE.getModel_StepSets();
+    EReference MODEL__ABSTRACT_SCENARIOS = eINSTANCE.getModel_AbstractScenarios();
 
     /**
-     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.stepSetImpl <em>step Set</em>}' class.
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.AbstractScenarioImpl <em>Abstract Scenario</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.xtext.example.mydsl.myDsl.impl.stepSetImpl
-     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getstepSet()
+     * @see org.xtext.example.mydsl.myDsl.impl.AbstractScenarioImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAbstractScenario()
      * @generated
      */
-    EClass STEP_SET = eINSTANCE.getstepSet();
+    EClass ABSTRACT_SCENARIO = eINSTANCE.getAbstractScenario();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ABSTRACT_SCENARIO__NAME = eINSTANCE.getAbstractScenario_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ABSTRACT_SCENARIO__STATEMENTS = eINSTANCE.getAbstractScenario_Statements();
+
+    /**
+     * The meta object literal for the '<em><b>Steps</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ABSTRACT_SCENARIO__STEPS = eINSTANCE.getAbstractScenario_Steps();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.BackgroundImpl <em>Background</em>}' class.
@@ -441,28 +949,40 @@ public interface MyDslPackage extends EPackage
     EClass BACKGROUND = eINSTANCE.getBackground();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.ScenarioImpl <em>Scenario</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.ScenarioImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getScenario()
      * @generated
      */
-    EAttribute BACKGROUND__NAME = eINSTANCE.getBackground_Name();
+    EClass SCENARIO = eINSTANCE.getScenario();
 
     /**
-     * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Tags</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference BACKGROUND__STATEMENTS = eINSTANCE.getBackground_Statements();
+    EReference SCENARIO__TAGS = eINSTANCE.getScenario_Tags();
 
     /**
-     * The meta object literal for the '<em><b>Steps</b></em>' containment reference list feature.
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.ScenarioOutlineImpl <em>Scenario Outline</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.ScenarioOutlineImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getScenarioOutline()
+     * @generated
+     */
+    EClass SCENARIO_OUTLINE = eINSTANCE.getScenarioOutline();
+
+    /**
+     * The meta object literal for the '<em><b>Tags</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference BACKGROUND__STEPS = eINSTANCE.getBackground_Steps();
+    EReference SCENARIO_OUTLINE__TAGS = eINSTANCE.getScenarioOutline_Tags();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.StepImpl <em>Step</em>}' class.
@@ -483,6 +1003,66 @@ public interface MyDslPackage extends EPackage
     EAttribute STEP__NAME = eINSTANCE.getStep_Name();
 
     /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.GivenImpl <em>Given</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.GivenImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getGiven()
+     * @generated
+     */
+    EClass GIVEN = eINSTANCE.getGiven();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.WhenImpl <em>When</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.WhenImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getWhen()
+     * @generated
+     */
+    EClass WHEN = eINSTANCE.getWhen();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.ThenImpl <em>Then</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.ThenImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getThen()
+     * @generated
+     */
+    EClass THEN = eINSTANCE.getThen();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.AndImpl <em>And</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.AndImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAnd()
+     * @generated
+     */
+    EClass AND = eINSTANCE.getAnd();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.ButImpl <em>But</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.ButImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getBut()
+     * @generated
+     */
+    EClass BUT = eINSTANCE.getBut();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.AsteriskImpl <em>Asterisk</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.AsteriskImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAsterisk()
+     * @generated
+     */
+    EClass ASTERISK = eINSTANCE.getAsterisk();
+
+    /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.StatementImpl <em>Statement</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -499,6 +1079,24 @@ public interface MyDslPackage extends EPackage
      * @generated
      */
     EAttribute STATEMENT__NAME = eINSTANCE.getStatement_Name();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.TagImpl <em>Tag</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.TagImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getTag()
+     * @generated
+     */
+    EClass TAG = eINSTANCE.getTag();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TAG__NAME = eINSTANCE.getTag_Name();
 
   }
 

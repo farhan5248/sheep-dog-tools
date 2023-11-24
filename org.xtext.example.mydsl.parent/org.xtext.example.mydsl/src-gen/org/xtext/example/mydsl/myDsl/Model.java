@@ -16,9 +16,10 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Model#getTags <em>Tags</em>}</li>
  *   <li>{@link org.xtext.example.mydsl.myDsl.Model#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.example.mydsl.myDsl.Model#getStatements <em>Statements</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Model#getStepSets <em>Step Sets</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Model#getAbstractScenarios <em>Abstract Scenarios</em>}</li>
  * </ul>
  *
  * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getModel()
@@ -27,6 +28,18 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Model extends EObject
 {
+  /**
+   * Returns the value of the '<em><b>Tags</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.Tag}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Tags</em>' containment reference list.
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getModel_Tags()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Tag> getTags();
+
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
@@ -62,15 +75,15 @@ public interface Model extends EObject
   EList<Statement> getStatements();
 
   /**
-   * Returns the value of the '<em><b>Step Sets</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.stepSet}.
+   * Returns the value of the '<em><b>Abstract Scenarios</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.AbstractScenario}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Step Sets</em>' containment reference list.
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getModel_StepSets()
+   * @return the value of the '<em>Abstract Scenarios</em>' containment reference list.
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getModel_AbstractScenarios()
    * @model containment="true"
    * @generated
    */
-  EList<stepSet> getStepSets();
+  EList<AbstractScenario> getAbstractScenarios();
 
 } // Model
