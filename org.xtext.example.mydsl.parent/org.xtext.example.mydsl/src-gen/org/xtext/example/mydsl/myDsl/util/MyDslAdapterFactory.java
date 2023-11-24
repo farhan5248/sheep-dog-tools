@@ -101,6 +101,21 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createScenarioOutlineAdapter();
       }
       @Override
+      public Adapter caseExample(Example object)
+      {
+        return createExampleAdapter();
+      }
+      @Override
+      public Adapter caseRow(Row object)
+      {
+        return createRowAdapter();
+      }
+      @Override
+      public Adapter caseCell(Cell object)
+      {
+        return createCellAdapter();
+      }
+      @Override
       public Adapter caseStep(Step object)
       {
         return createStepAdapter();
@@ -238,6 +253,51 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createScenarioOutlineAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Example <em>Example</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.Example
+   * @generated
+   */
+  public Adapter createExampleAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Row <em>Row</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.Row
+   * @generated
+   */
+  public Adapter createRowAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Cell <em>Cell</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.Cell
+   * @generated
+   */
+  public Adapter createCellAdapter()
   {
     return null;
   }

@@ -239,18 +239,22 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final RuleCall cStatementsStatementParserRuleCall_4_0 = (RuleCall)cStatementsAssignment_4.eContents().get(0);
 		private final Assignment cStepsAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cStepsStepParserRuleCall_5_0 = (RuleCall)cStepsAssignment_5.eContents().get(0);
+		private final Assignment cExamplesAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cExamplesExampleParserRuleCall_6_0 = (RuleCall)cExamplesAssignment_6.eContents().get(0);
 		
 		//ScenarioOutline:
 		//    (tags+=Tag+ EOL)?
 		//    'Scenario Outline:' name=Phrase EOL
 		//    statements+=Statement*
-		//    steps+=Step*;
+		//    steps+=Step*
+		//    examples+=Example+;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//(tags+=Tag+ EOL)?
 		//'Scenario Outline:' name=Phrase EOL
 		//statements+=Statement*
 		//steps+=Step*
+		//examples+=Example+
 		public Group getGroup() { return cGroup; }
 		
 		//(tags+=Tag+ EOL)?
@@ -288,6 +292,131 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		
 		//Step
 		public RuleCall getStepsStepParserRuleCall_5_0() { return cStepsStepParserRuleCall_5_0; }
+		
+		//examples+=Example+
+		public Assignment getExamplesAssignment_6() { return cExamplesAssignment_6; }
+		
+		//Example
+		public RuleCall getExamplesExampleParserRuleCall_6_0() { return cExamplesExampleParserRuleCall_6_0; }
+	}
+	public class ExampleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.Example");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
+		private final Assignment cTagsAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
+		private final RuleCall cTagsTagParserRuleCall_0_0_0 = (RuleCall)cTagsAssignment_0_0.eContents().get(0);
+		private final RuleCall cEOLTerminalRuleCall_0_1 = (RuleCall)cGroup_0.eContents().get(1);
+		private final Keyword cExamplesKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNamePhraseParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final RuleCall cEOLTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
+		private final Assignment cStatementsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cStatementsStatementParserRuleCall_4_0 = (RuleCall)cStatementsAssignment_4.eContents().get(0);
+		private final Assignment cRowsAssignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cRowsRowParserRuleCall_5_0 = (RuleCall)cRowsAssignment_5.eContents().get(0);
+		
+		//Example:
+		//    (tags+=Tag+ EOL)?
+		//    'Examples:' name=Phrase EOL
+		//    statements+=Statement*
+		//    rows+=Row+;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//(tags+=Tag+ EOL)?
+		//'Examples:' name=Phrase EOL
+		//statements+=Statement*
+		//rows+=Row+
+		public Group getGroup() { return cGroup; }
+		
+		//(tags+=Tag+ EOL)?
+		public Group getGroup_0() { return cGroup_0; }
+		
+		//tags+=Tag+
+		public Assignment getTagsAssignment_0_0() { return cTagsAssignment_0_0; }
+		
+		//Tag
+		public RuleCall getTagsTagParserRuleCall_0_0_0() { return cTagsTagParserRuleCall_0_0_0; }
+		
+		//EOL
+		public RuleCall getEOLTerminalRuleCall_0_1() { return cEOLTerminalRuleCall_0_1; }
+		
+		//'Examples:'
+		public Keyword getExamplesKeyword_1() { return cExamplesKeyword_1; }
+		
+		//name=Phrase
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		
+		//Phrase
+		public RuleCall getNamePhraseParserRuleCall_2_0() { return cNamePhraseParserRuleCall_2_0; }
+		
+		//EOL
+		public RuleCall getEOLTerminalRuleCall_3() { return cEOLTerminalRuleCall_3; }
+		
+		//statements+=Statement*
+		public Assignment getStatementsAssignment_4() { return cStatementsAssignment_4; }
+		
+		//Statement
+		public RuleCall getStatementsStatementParserRuleCall_4_0() { return cStatementsStatementParserRuleCall_4_0; }
+		
+		//rows+=Row+
+		public Assignment getRowsAssignment_5() { return cRowsAssignment_5; }
+		
+		//Row
+		public RuleCall getRowsRowParserRuleCall_5_0() { return cRowsRowParserRuleCall_5_0; }
+	}
+	public class RowElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.Row");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cCellsAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cCellsCellParserRuleCall_0_0 = (RuleCall)cCellsAssignment_0.eContents().get(0);
+		private final Keyword cVerticalLineKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final RuleCall cEOLTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		
+		//Row:
+		//    cells+=Cell+ '|' EOL;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//cells+=Cell+ '|' EOL
+		public Group getGroup() { return cGroup; }
+		
+		//cells+=Cell+
+		public Assignment getCellsAssignment_0() { return cCellsAssignment_0; }
+		
+		//Cell
+		public RuleCall getCellsCellParserRuleCall_0_0() { return cCellsCellParserRuleCall_0_0; }
+		
+		//'|'
+		public Keyword getVerticalLineKeyword_1() { return cVerticalLineKeyword_1; }
+		
+		//EOL
+		public RuleCall getEOLTerminalRuleCall_2() { return cEOLTerminalRuleCall_2; }
+	}
+	public class CellElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.Cell");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cCellAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cCellVerticalLineKeyword_0_0 = (Keyword)cCellAssignment_0.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNamePhraseParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		
+		//Cell:
+		//    cell='|' name=Phrase;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//cell='|' name=Phrase
+		public Group getGroup() { return cGroup; }
+		
+		//cell='|'
+		public Assignment getCellAssignment_0() { return cCellAssignment_0; }
+		
+		//'|'
+		public Keyword getCellVerticalLineKeyword_0_0() { return cCellVerticalLineKeyword_0_0; }
+		
+		//name=Phrase
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//Phrase
+		public RuleCall getNamePhraseParserRuleCall_1_0() { return cNamePhraseParserRuleCall_1_0; }
 	}
 	public class StepElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.Step");
@@ -550,6 +679,9 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	private final BackgroundElements pBackground;
 	private final ScenarioElements pScenario;
 	private final ScenarioOutlineElements pScenarioOutline;
+	private final ExampleElements pExample;
+	private final RowElements pRow;
+	private final CellElements pCell;
 	private final StepElements pStep;
 	private final GivenElements pGiven;
 	private final WhenElements pWhen;
@@ -575,6 +707,9 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		this.pBackground = new BackgroundElements();
 		this.pScenario = new ScenarioElements();
 		this.pScenarioOutline = new ScenarioOutlineElements();
+		this.pExample = new ExampleElements();
+		this.pRow = new RowElements();
+		this.pCell = new CellElements();
 		this.pStep = new StepElements();
 		this.pGiven = new GivenElements();
 		this.pWhen = new WhenElements();
@@ -669,13 +804,47 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	//    (tags+=Tag+ EOL)?
 	//    'Scenario Outline:' name=Phrase EOL
 	//    statements+=Statement*
-	//    steps+=Step*;
+	//    steps+=Step*
+	//    examples+=Example+;
 	public ScenarioOutlineElements getScenarioOutlineAccess() {
 		return pScenarioOutline;
 	}
 	
 	public ParserRule getScenarioOutlineRule() {
 		return getScenarioOutlineAccess().getRule();
+	}
+	
+	//Example:
+	//    (tags+=Tag+ EOL)?
+	//    'Examples:' name=Phrase EOL
+	//    statements+=Statement*
+	//    rows+=Row+;
+	public ExampleElements getExampleAccess() {
+		return pExample;
+	}
+	
+	public ParserRule getExampleRule() {
+		return getExampleAccess().getRule();
+	}
+	
+	//Row:
+	//    cells+=Cell+ '|' EOL;
+	public RowElements getRowAccess() {
+		return pRow;
+	}
+	
+	public ParserRule getRowRule() {
+		return getRowAccess().getRule();
+	}
+	
+	//Cell:
+	//    cell='|' name=Phrase;
+	public CellElements getCellAccess() {
+		return pCell;
+	}
+	
+	public ParserRule getCellRule() {
+		return getCellAccess().getRule();
 	}
 	
 	//Step:

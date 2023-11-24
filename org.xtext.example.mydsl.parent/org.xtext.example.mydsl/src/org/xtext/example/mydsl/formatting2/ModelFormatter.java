@@ -12,19 +12,4 @@ public class ModelFormatter extends Formatter {
 		doc.append(iSR, it -> it.setSpace(" "));
 	}
 
-	public static void formatNameRuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
-		doc.append(iSR, it -> it.noSpace());
-	}
-
-	public static void formatEOL1RuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
-		replace(doc, iSR, "\r\n");
-	}
-
-	// This is an example of how to access a terminal.
-	// It's also an example of how to replace the text in a ruleCall, in this case,
-	// replace multiple \r\n with just 2
-	public static void formatEOL2RuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
-		replace(doc, iSR, "\r\n\r\n");
-	}
-
 }

@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.xtext.example.mydsl.myDsl.Example;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.ScenarioOutline;
 import org.xtext.example.mydsl.myDsl.Tag;
@@ -28,6 +29,7 @@ import org.xtext.example.mydsl.myDsl.Tag;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ScenarioOutlineImpl#getTags <em>Tags</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ScenarioOutlineImpl#getExamples <em>Examples</em>}</li>
  * </ul>
  *
  * @generated
@@ -43,6 +45,16 @@ public class ScenarioOutlineImpl extends AbstractScenarioImpl implements Scenari
    * @ordered
    */
   protected EList<Tag> tags;
+
+  /**
+   * The cached value of the '{@link #getExamples() <em>Examples</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getExamples()
+   * @generated
+   * @ordered
+   */
+  protected EList<Example> examples;
 
   /**
    * <!-- begin-user-doc -->
@@ -86,12 +98,29 @@ public class ScenarioOutlineImpl extends AbstractScenarioImpl implements Scenari
    * @generated
    */
   @Override
+  public EList<Example> getExamples()
+  {
+    if (examples == null)
+    {
+      examples = new EObjectContainmentEList<Example>(Example.class, this, MyDslPackage.SCENARIO_OUTLINE__EXAMPLES);
+    }
+    return examples;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
     switch (featureID)
     {
       case MyDslPackage.SCENARIO_OUTLINE__TAGS:
         return ((InternalEList<?>)getTags()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.SCENARIO_OUTLINE__EXAMPLES:
+        return ((InternalEList<?>)getExamples()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -108,6 +137,8 @@ public class ScenarioOutlineImpl extends AbstractScenarioImpl implements Scenari
     {
       case MyDslPackage.SCENARIO_OUTLINE__TAGS:
         return getTags();
+      case MyDslPackage.SCENARIO_OUTLINE__EXAMPLES:
+        return getExamples();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -127,6 +158,10 @@ public class ScenarioOutlineImpl extends AbstractScenarioImpl implements Scenari
         getTags().clear();
         getTags().addAll((Collection<? extends Tag>)newValue);
         return;
+      case MyDslPackage.SCENARIO_OUTLINE__EXAMPLES:
+        getExamples().clear();
+        getExamples().addAll((Collection<? extends Example>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -144,6 +179,9 @@ public class ScenarioOutlineImpl extends AbstractScenarioImpl implements Scenari
       case MyDslPackage.SCENARIO_OUTLINE__TAGS:
         getTags().clear();
         return;
+      case MyDslPackage.SCENARIO_OUTLINE__EXAMPLES:
+        getExamples().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -160,6 +198,8 @@ public class ScenarioOutlineImpl extends AbstractScenarioImpl implements Scenari
     {
       case MyDslPackage.SCENARIO_OUTLINE__TAGS:
         return tags != null && !tags.isEmpty();
+      case MyDslPackage.SCENARIO_OUTLINE__EXAMPLES:
+        return examples != null && !examples.isEmpty();
     }
     return super.eIsSet(featureID);
   }

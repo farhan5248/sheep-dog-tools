@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.ScenarioOutline#getTags <em>Tags</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.ScenarioOutline#getExamples <em>Examples</em>}</li>
  * </ul>
  *
  * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getScenarioOutline()
@@ -34,5 +35,17 @@ public interface ScenarioOutline extends AbstractScenario
    * @generated
    */
   EList<Tag> getTags();
+
+  /**
+   * Returns the value of the '<em><b>Examples</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.Example}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Examples</em>' containment reference list.
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getScenarioOutline_Examples()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Example> getExamples();
 
 } // ScenarioOutline

@@ -306,13 +306,142 @@ public interface MyDslPackage extends EPackage
   int SCENARIO_OUTLINE__TAGS = ABSTRACT_SCENARIO_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Examples</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SCENARIO_OUTLINE__EXAMPLES = ABSTRACT_SCENARIO_FEATURE_COUNT + 1;
+
+  /**
    * The number of structural features of the '<em>Scenario Outline</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SCENARIO_OUTLINE_FEATURE_COUNT = ABSTRACT_SCENARIO_FEATURE_COUNT + 1;
+  int SCENARIO_OUTLINE_FEATURE_COUNT = ABSTRACT_SCENARIO_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.ExampleImpl <em>Example</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.ExampleImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getExample()
+   * @generated
+   */
+  int EXAMPLE = 5;
+
+  /**
+   * The feature id for the '<em><b>Tags</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXAMPLE__TAGS = 0;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXAMPLE__NAME = 1;
+
+  /**
+   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXAMPLE__STATEMENTS = 2;
+
+  /**
+   * The feature id for the '<em><b>Rows</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXAMPLE__ROWS = 3;
+
+  /**
+   * The number of structural features of the '<em>Example</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXAMPLE_FEATURE_COUNT = 4;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.RowImpl <em>Row</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.RowImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getRow()
+   * @generated
+   */
+  int ROW = 6;
+
+  /**
+   * The feature id for the '<em><b>Cells</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROW__CELLS = 0;
+
+  /**
+   * The number of structural features of the '<em>Row</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ROW_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.CellImpl <em>Cell</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.CellImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getCell()
+   * @generated
+   */
+  int CELL = 7;
+
+  /**
+   * The feature id for the '<em><b>Cell</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CELL__CELL = 0;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CELL__NAME = 1;
+
+  /**
+   * The number of structural features of the '<em>Cell</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CELL_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.StepImpl <em>Step</em>}' class.
@@ -322,7 +451,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getStep()
    * @generated
    */
-  int STEP = 5;
+  int STEP = 8;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -350,7 +479,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getGiven()
    * @generated
    */
-  int GIVEN = 6;
+  int GIVEN = 9;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -378,7 +507,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getWhen()
    * @generated
    */
-  int WHEN = 7;
+  int WHEN = 10;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -406,7 +535,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getThen()
    * @generated
    */
-  int THEN = 8;
+  int THEN = 11;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -434,7 +563,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAnd()
    * @generated
    */
-  int AND = 9;
+  int AND = 12;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -462,7 +591,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getBut()
    * @generated
    */
-  int BUT = 10;
+  int BUT = 13;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -490,7 +619,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAsterisk()
    * @generated
    */
-  int ASTERISK = 11;
+  int ASTERISK = 14;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -518,7 +647,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getStatement()
    * @generated
    */
-  int STATEMENT = 12;
+  int STATEMENT = 15;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -546,7 +675,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getTag()
    * @generated
    */
-  int TAG = 13;
+  int TAG = 16;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -715,6 +844,124 @@ public interface MyDslPackage extends EPackage
    * @generated
    */
   EReference getScenarioOutline_Tags();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.ScenarioOutline#getExamples <em>Examples</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Examples</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ScenarioOutline#getExamples()
+   * @see #getScenarioOutline()
+   * @generated
+   */
+  EReference getScenarioOutline_Examples();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Example <em>Example</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Example</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Example
+   * @generated
+   */
+  EClass getExample();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Example#getTags <em>Tags</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Tags</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Example#getTags()
+   * @see #getExample()
+   * @generated
+   */
+  EReference getExample_Tags();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.Example#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Example#getName()
+   * @see #getExample()
+   * @generated
+   */
+  EAttribute getExample_Name();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Example#getStatements <em>Statements</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Statements</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Example#getStatements()
+   * @see #getExample()
+   * @generated
+   */
+  EReference getExample_Statements();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Example#getRows <em>Rows</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Rows</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Example#getRows()
+   * @see #getExample()
+   * @generated
+   */
+  EReference getExample_Rows();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Row <em>Row</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Row</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Row
+   * @generated
+   */
+  EClass getRow();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.Row#getCells <em>Cells</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Cells</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Row#getCells()
+   * @see #getRow()
+   * @generated
+   */
+  EReference getRow_Cells();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Cell <em>Cell</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Cell</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Cell
+   * @generated
+   */
+  EClass getCell();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.Cell#getCell <em>Cell</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Cell</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Cell#getCell()
+   * @see #getCell()
+   * @generated
+   */
+  EAttribute getCell_Cell();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.Cell#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Cell#getName()
+   * @see #getCell()
+   * @generated
+   */
+  EAttribute getCell_Name();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Step <em>Step</em>}'.
@@ -983,6 +1230,100 @@ public interface MyDslPackage extends EPackage
      * @generated
      */
     EReference SCENARIO_OUTLINE__TAGS = eINSTANCE.getScenarioOutline_Tags();
+
+    /**
+     * The meta object literal for the '<em><b>Examples</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SCENARIO_OUTLINE__EXAMPLES = eINSTANCE.getScenarioOutline_Examples();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.ExampleImpl <em>Example</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.ExampleImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getExample()
+     * @generated
+     */
+    EClass EXAMPLE = eINSTANCE.getExample();
+
+    /**
+     * The meta object literal for the '<em><b>Tags</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EXAMPLE__TAGS = eINSTANCE.getExample_Tags();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EXAMPLE__NAME = eINSTANCE.getExample_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EXAMPLE__STATEMENTS = eINSTANCE.getExample_Statements();
+
+    /**
+     * The meta object literal for the '<em><b>Rows</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EXAMPLE__ROWS = eINSTANCE.getExample_Rows();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.RowImpl <em>Row</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.RowImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getRow()
+     * @generated
+     */
+    EClass ROW = eINSTANCE.getRow();
+
+    /**
+     * The meta object literal for the '<em><b>Cells</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ROW__CELLS = eINSTANCE.getRow_Cells();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.CellImpl <em>Cell</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.CellImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getCell()
+     * @generated
+     */
+    EClass CELL = eINSTANCE.getCell();
+
+    /**
+     * The meta object literal for the '<em><b>Cell</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CELL__CELL = eINSTANCE.getCell_Cell();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CELL__NAME = eINSTANCE.getCell_Name();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.StepImpl <em>Step</em>}' class.

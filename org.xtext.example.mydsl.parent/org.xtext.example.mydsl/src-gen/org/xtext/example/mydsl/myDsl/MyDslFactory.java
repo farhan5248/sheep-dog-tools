@@ -69,6 +69,33 @@ public interface MyDslFactory extends EFactory
   ScenarioOutline createScenarioOutline();
 
   /**
+   * Returns a new object of class '<em>Example</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Example</em>'.
+   * @generated
+   */
+  Example createExample();
+
+  /**
+   * Returns a new object of class '<em>Row</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Row</em>'.
+   * @generated
+   */
+  Row createRow();
+
+  /**
+   * Returns a new object of class '<em>Cell</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Cell</em>'.
+   * @generated
+   */
+  Cell createCell();
+
+  /**
    * Returns a new object of class '<em>Step</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

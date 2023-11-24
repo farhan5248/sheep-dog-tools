@@ -40,6 +40,10 @@ public class MyDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getScenarioAccess().getGroup_0(), "rule__Scenario__Group_0__0");
 			builder.put(grammarAccess.getScenarioOutlineAccess().getGroup(), "rule__ScenarioOutline__Group__0");
 			builder.put(grammarAccess.getScenarioOutlineAccess().getGroup_0(), "rule__ScenarioOutline__Group_0__0");
+			builder.put(grammarAccess.getExampleAccess().getGroup(), "rule__Example__Group__0");
+			builder.put(grammarAccess.getExampleAccess().getGroup_0(), "rule__Example__Group_0__0");
+			builder.put(grammarAccess.getRowAccess().getGroup(), "rule__Row__Group__0");
+			builder.put(grammarAccess.getCellAccess().getGroup(), "rule__Cell__Group__0");
 			builder.put(grammarAccess.getGivenAccess().getGroup(), "rule__Given__Group__0");
 			builder.put(grammarAccess.getWhenAccess().getGroup(), "rule__When__Group__0");
 			builder.put(grammarAccess.getThenAccess().getGroup(), "rule__Then__Group__0");
@@ -63,6 +67,14 @@ public class MyDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getScenarioOutlineAccess().getNameAssignment_2(), "rule__ScenarioOutline__NameAssignment_2");
 			builder.put(grammarAccess.getScenarioOutlineAccess().getStatementsAssignment_4(), "rule__ScenarioOutline__StatementsAssignment_4");
 			builder.put(grammarAccess.getScenarioOutlineAccess().getStepsAssignment_5(), "rule__ScenarioOutline__StepsAssignment_5");
+			builder.put(grammarAccess.getScenarioOutlineAccess().getExamplesAssignment_6(), "rule__ScenarioOutline__ExamplesAssignment_6");
+			builder.put(grammarAccess.getExampleAccess().getTagsAssignment_0_0(), "rule__Example__TagsAssignment_0_0");
+			builder.put(grammarAccess.getExampleAccess().getNameAssignment_2(), "rule__Example__NameAssignment_2");
+			builder.put(grammarAccess.getExampleAccess().getStatementsAssignment_4(), "rule__Example__StatementsAssignment_4");
+			builder.put(grammarAccess.getExampleAccess().getRowsAssignment_5(), "rule__Example__RowsAssignment_5");
+			builder.put(grammarAccess.getRowAccess().getCellsAssignment_0(), "rule__Row__CellsAssignment_0");
+			builder.put(grammarAccess.getCellAccess().getCellAssignment_0(), "rule__Cell__CellAssignment_0");
+			builder.put(grammarAccess.getCellAccess().getNameAssignment_1(), "rule__Cell__NameAssignment_1");
 			builder.put(grammarAccess.getGivenAccess().getNameAssignment_1(), "rule__Given__NameAssignment_1");
 			builder.put(grammarAccess.getWhenAccess().getNameAssignment_1(), "rule__When__NameAssignment_1");
 			builder.put(grammarAccess.getThenAccess().getNameAssignment_1(), "rule__Then__NameAssignment_1");

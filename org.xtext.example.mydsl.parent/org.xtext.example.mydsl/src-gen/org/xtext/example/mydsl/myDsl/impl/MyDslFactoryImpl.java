@@ -70,6 +70,9 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.BACKGROUND: return createBackground();
       case MyDslPackage.SCENARIO: return createScenario();
       case MyDslPackage.SCENARIO_OUTLINE: return createScenarioOutline();
+      case MyDslPackage.EXAMPLE: return createExample();
+      case MyDslPackage.ROW: return createRow();
+      case MyDslPackage.CELL: return createCell();
       case MyDslPackage.STEP: return createStep();
       case MyDslPackage.GIVEN: return createGiven();
       case MyDslPackage.WHEN: return createWhen();
@@ -142,6 +145,42 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     ScenarioOutlineImpl scenarioOutline = new ScenarioOutlineImpl();
     return scenarioOutline;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Example createExample()
+  {
+    ExampleImpl example = new ExampleImpl();
+    return example;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Row createRow()
+  {
+    RowImpl row = new RowImpl();
+    return row;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Cell createCell()
+  {
+    CellImpl cell = new CellImpl();
+    return cell;
   }
 
   /**

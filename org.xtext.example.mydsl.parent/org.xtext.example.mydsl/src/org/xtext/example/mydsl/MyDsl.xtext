@@ -30,7 +30,20 @@ ScenarioOutline:
 	(tags+=Tag+ EOL)?
 	'Scenario Outline:' name=Phrase EOL
 	statements+=Statement*
-	steps+=Step*;
+	steps+=Step*
+	examples+=Example+;
+
+Example:
+	(tags+=Tag+ EOL)?
+	'Examples:' name=Phrase EOL
+	statements+=Statement*
+	rows+=Row+;
+
+Row:
+	cells+=Cell+ '|' EOL;
+
+Cell:
+	cell='|' name=Phrase;
 
 Step:
 	Given | When | Then | And | But | Asterisk;

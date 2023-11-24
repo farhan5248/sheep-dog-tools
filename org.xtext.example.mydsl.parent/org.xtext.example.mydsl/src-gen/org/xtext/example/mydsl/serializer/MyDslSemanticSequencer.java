@@ -18,9 +18,12 @@ import org.xtext.example.mydsl.myDsl.And;
 import org.xtext.example.mydsl.myDsl.Asterisk;
 import org.xtext.example.mydsl.myDsl.Background;
 import org.xtext.example.mydsl.myDsl.But;
+import org.xtext.example.mydsl.myDsl.Cell;
+import org.xtext.example.mydsl.myDsl.Example;
 import org.xtext.example.mydsl.myDsl.Given;
 import org.xtext.example.mydsl.myDsl.Model;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
+import org.xtext.example.mydsl.myDsl.Row;
 import org.xtext.example.mydsl.myDsl.Scenario;
 import org.xtext.example.mydsl.myDsl.ScenarioOutline;
 import org.xtext.example.mydsl.myDsl.Statement;
@@ -55,11 +58,20 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 			case MyDslPackage.BUT:
 				sequence_But(context, (But) semanticObject); 
 				return; 
+			case MyDslPackage.CELL:
+				sequence_Cell(context, (Cell) semanticObject); 
+				return; 
+			case MyDslPackage.EXAMPLE:
+				sequence_Example(context, (Example) semanticObject); 
+				return; 
 			case MyDslPackage.GIVEN:
 				sequence_Given(context, (Given) semanticObject); 
 				return; 
 			case MyDslPackage.MODEL:
 				sequence_Model(context, (Model) semanticObject); 
+				return; 
+			case MyDslPackage.ROW:
+				sequence_Row(context, (Row) semanticObject); 
 				return; 
 			case MyDslPackage.SCENARIO:
 				sequence_Scenario(context, (Scenario) semanticObject); 
@@ -165,6 +177,43 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     Cell returns Cell
+	 *
+	 * Constraint:
+	 *     (cell='|' name=Phrase)
+	 * </pre>
+	 */
+	protected void sequence_Cell(ISerializationContext context, Cell semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.CELL__CELL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.CELL__CELL));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.CELL__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.CELL__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getCellAccess().getCellVerticalLineKeyword_0_0(), semanticObject.getCell());
+		feeder.accept(grammarAccess.getCellAccess().getNamePhraseParserRuleCall_1_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Example returns Example
+	 *
+	 * Constraint:
+	 *     (tags+=Tag* name=Phrase statements+=Statement* rows+=Row+)
+	 * </pre>
+	 */
+	protected void sequence_Example(ISerializationContext context, Example semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
 	 *     Step returns Given
 	 *     Given returns Given
 	 *
@@ -200,11 +249,25 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     Row returns Row
+	 *
+	 * Constraint:
+	 *     cells+=Cell+
+	 * </pre>
+	 */
+	protected void sequence_Row(ISerializationContext context, Row semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
 	 *     AbstractScenario returns ScenarioOutline
 	 *     ScenarioOutline returns ScenarioOutline
 	 *
 	 * Constraint:
-	 *     (tags+=Tag* name=Phrase statements+=Statement* steps+=Step*)
+	 *     (tags+=Tag* name=Phrase statements+=Statement* steps+=Step* examples+=Example+)
 	 * </pre>
 	 */
 	protected void sequence_ScenarioOutline(ISerializationContext context, ScenarioOutline semanticObject) {

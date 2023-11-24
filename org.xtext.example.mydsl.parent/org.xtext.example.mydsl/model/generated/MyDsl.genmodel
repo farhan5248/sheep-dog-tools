@@ -23,6 +23,20 @@
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//ScenarioOutline">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//ScenarioOutline/tags"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//ScenarioOutline/examples"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//Example">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Example/tags"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Example/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Example/statements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Example/rows"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//Row">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Row/cells"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//Cell">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Cell/cell"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Cell/name"/>
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//Step">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Step/name"/>
