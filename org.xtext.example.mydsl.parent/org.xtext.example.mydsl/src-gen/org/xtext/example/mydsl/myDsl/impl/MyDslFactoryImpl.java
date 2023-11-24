@@ -65,7 +65,7 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     switch (eClass.getClassifierID())
     {
-      case MyDslPackage.MODEL: return createModel();
+      case MyDslPackage.FEATURE: return createFeature();
       case MyDslPackage.ABSTRACT_SCENARIO: return createAbstractScenario();
       case MyDslPackage.BACKGROUND: return createBackground();
       case MyDslPackage.SCENARIO: return createScenario();
@@ -93,10 +93,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
-  public Model createModel()
+  public Feature createFeature()
   {
-    ModelImpl model = new ModelImpl();
-    return model;
+    FeatureImpl feature = new FeatureImpl();
+    return feature;
   }
 
   /**

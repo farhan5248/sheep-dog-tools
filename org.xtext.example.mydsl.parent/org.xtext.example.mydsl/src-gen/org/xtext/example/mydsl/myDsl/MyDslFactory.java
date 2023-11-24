@@ -24,13 +24,13 @@ public interface MyDslFactory extends EFactory
   MyDslFactory eINSTANCE = org.xtext.example.mydsl.myDsl.impl.MyDslFactoryImpl.init();
 
   /**
-   * Returns a new object of class '<em>Model</em>'.
+   * Returns a new object of class '<em>Feature</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Model</em>'.
+   * @return a new object of class '<em>Feature</em>'.
    * @generated
    */
-  Model createModel();
+  Feature createFeature();
 
   /**
    * Returns a new object of class '<em>Abstract Scenario</em>'.

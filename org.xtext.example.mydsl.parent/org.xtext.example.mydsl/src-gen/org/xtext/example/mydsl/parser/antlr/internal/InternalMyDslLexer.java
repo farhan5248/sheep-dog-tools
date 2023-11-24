@@ -319,10 +319,10 @@ public class InternalMyDslLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalMyDsl.g:1214:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '.' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '.' | '0' .. '9' )* )
-            // InternalMyDsl.g:1214:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '.' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '.' | '0' .. '9' )*
+            // InternalMyDsl.g:1328:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '.' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '.' | '0' .. '9' )* )
+            // InternalMyDsl.g:1328:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '.' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '.' | '0' .. '9' )*
             {
-            // InternalMyDsl.g:1214:11: ( '^' )?
+            // InternalMyDsl.g:1328:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -331,7 +331,7 @@ public class InternalMyDslLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalMyDsl.g:1214:11: '^'
+                    // InternalMyDsl.g:1328:11: '^'
                     {
                     match('^'); 
 
@@ -349,7 +349,7 @@ public class InternalMyDslLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalMyDsl.g:1214:44: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '.' | '0' .. '9' )*
+            // InternalMyDsl.g:1328:44: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '.' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -398,10 +398,10 @@ public class InternalMyDslLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalMyDsl.g:1216:9: ( ( ' ' | '\\t' )+ )
-            // InternalMyDsl.g:1216:11: ( ' ' | '\\t' )+
+            // InternalMyDsl.g:1330:9: ( ( ' ' | '\\t' )+ )
+            // InternalMyDsl.g:1330:11: ( ' ' | '\\t' )+
             {
-            // InternalMyDsl.g:1216:11: ( ' ' | '\\t' )+
+            // InternalMyDsl.g:1330:11: ( ' ' | '\\t' )+
             int cnt3=0;
             loop3:
             do {
@@ -455,11 +455,11 @@ public class InternalMyDslLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalMyDsl.g:1218:17: ( '#' (~ ( ( '\\r' | '\\n' ) ) )* RULE_EOL )
-            // InternalMyDsl.g:1218:19: '#' (~ ( ( '\\r' | '\\n' ) ) )* RULE_EOL
+            // InternalMyDsl.g:1332:17: ( '#' (~ ( ( '\\r' | '\\n' ) ) )* RULE_EOL )
+            // InternalMyDsl.g:1332:19: '#' (~ ( ( '\\r' | '\\n' ) ) )* RULE_EOL
             {
             match('#'); 
-            // InternalMyDsl.g:1218:23: (~ ( ( '\\r' | '\\n' ) ) )*
+            // InternalMyDsl.g:1332:23: (~ ( ( '\\r' | '\\n' ) ) )*
             loop4:
             do {
                 int alt4=2;
@@ -472,7 +472,7 @@ public class InternalMyDslLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalMyDsl.g:1218:23: ~ ( ( '\\r' | '\\n' ) )
+            	    // InternalMyDsl.g:1332:23: ~ ( ( '\\r' | '\\n' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -509,10 +509,10 @@ public class InternalMyDslLexer extends Lexer {
         try {
             int _type = RULE_EOL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalMyDsl.g:1220:10: ( ( '\\r\\n' )+ )
-            // InternalMyDsl.g:1220:12: ( '\\r\\n' )+
+            // InternalMyDsl.g:1334:10: ( ( '\\r\\n' )+ )
+            // InternalMyDsl.g:1334:12: ( '\\r\\n' )+
             {
-            // InternalMyDsl.g:1220:12: ( '\\r\\n' )+
+            // InternalMyDsl.g:1334:12: ( '\\r\\n' )+
             int cnt5=0;
             loop5:
             do {
@@ -526,7 +526,7 @@ public class InternalMyDslLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // InternalMyDsl.g:1220:12: '\\r\\n'
+            	    // InternalMyDsl.g:1334:12: '\\r\\n'
             	    {
             	    match("\r\n"); 
 

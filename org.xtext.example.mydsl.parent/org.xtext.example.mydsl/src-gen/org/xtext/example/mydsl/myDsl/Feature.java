@@ -9,24 +9,24 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Model</b></em>'.
+ * A representation of the model object '<em><b>Feature</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Model#getTags <em>Tags</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Model#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Model#getStatements <em>Statements</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Model#getAbstractScenarios <em>Abstract Scenarios</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Feature#getTags <em>Tags</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Feature#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Feature#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Feature#getAbstractScenarios <em>Abstract Scenarios</em>}</li>
  * </ul>
  *
- * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getModel()
+ * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getFeature()
  * @model
  * @generated
  */
-public interface Model extends EObject
+public interface Feature extends EObject
 {
   /**
    * Returns the value of the '<em><b>Tags</b></em>' containment reference list.
@@ -34,7 +34,7 @@ public interface Model extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Tags</em>' containment reference list.
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getModel_Tags()
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getFeature_Tags()
    * @model containment="true"
    * @generated
    */
@@ -46,14 +46,14 @@ public interface Model extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getModel_Name()
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getFeature_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Model#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Feature#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -68,7 +68,7 @@ public interface Model extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Statements</em>' containment reference list.
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getModel_Statements()
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getFeature_Statements()
    * @model containment="true"
    * @generated
    */
@@ -80,10 +80,10 @@ public interface Model extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Abstract Scenarios</em>' containment reference list.
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getModel_AbstractScenarios()
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getFeature_AbstractScenarios()
    * @model containment="true"
    * @generated
    */
   EList<AbstractScenario> getAbstractScenarios();
 
-} // Model
+} // Feature

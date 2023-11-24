@@ -17,8 +17,8 @@ import org.xtext.example.mydsl.myDsl.Background;
 import org.xtext.example.mydsl.myDsl.But;
 import org.xtext.example.mydsl.myDsl.Cell;
 import org.xtext.example.mydsl.myDsl.Example;
+import org.xtext.example.mydsl.myDsl.Feature;
 import org.xtext.example.mydsl.myDsl.Given;
-import org.xtext.example.mydsl.myDsl.Model;
 import org.xtext.example.mydsl.myDsl.MyDslFactory;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.Row;
@@ -43,7 +43,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass modelEClass = null;
+  private EClass featureEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -225,9 +225,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EClass getModel()
+  public EClass getFeature()
   {
-    return modelEClass;
+    return featureEClass;
   }
 
   /**
@@ -236,9 +236,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getModel_Tags()
+  public EReference getFeature_Tags()
   {
-    return (EReference)modelEClass.getEStructuralFeatures().get(0);
+    return (EReference)featureEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -247,9 +247,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EAttribute getModel_Name()
+  public EAttribute getFeature_Name()
   {
-    return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)featureEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -258,9 +258,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getModel_Statements()
+  public EReference getFeature_Statements()
   {
-    return (EReference)modelEClass.getEStructuralFeatures().get(2);
+    return (EReference)featureEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -269,9 +269,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getModel_AbstractScenarios()
+  public EReference getFeature_AbstractScenarios()
   {
-    return (EReference)modelEClass.getEStructuralFeatures().get(3);
+    return (EReference)featureEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -522,6 +522,17 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
+  public EReference getStep_Rows()
+  {
+    return (EReference)stepEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getGiven()
   {
     return givenEClass;
@@ -657,11 +668,11 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     isCreated = true;
 
     // Create classes and their features
-    modelEClass = createEClass(MODEL);
-    createEReference(modelEClass, MODEL__TAGS);
-    createEAttribute(modelEClass, MODEL__NAME);
-    createEReference(modelEClass, MODEL__STATEMENTS);
-    createEReference(modelEClass, MODEL__ABSTRACT_SCENARIOS);
+    featureEClass = createEClass(FEATURE);
+    createEReference(featureEClass, FEATURE__TAGS);
+    createEAttribute(featureEClass, FEATURE__NAME);
+    createEReference(featureEClass, FEATURE__STATEMENTS);
+    createEReference(featureEClass, FEATURE__ABSTRACT_SCENARIOS);
 
     abstractScenarioEClass = createEClass(ABSTRACT_SCENARIO);
     createEAttribute(abstractScenarioEClass, ABSTRACT_SCENARIO__NAME);
@@ -692,6 +703,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     stepEClass = createEClass(STEP);
     createEAttribute(stepEClass, STEP__NAME);
+    createEReference(stepEClass, STEP__ROWS);
 
     givenEClass = createEClass(GIVEN);
 
@@ -752,11 +764,11 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     asteriskEClass.getESuperTypes().add(this.getStep());
 
     // Initialize classes and features; add operations and parameters
-    initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getModel_Tags(), this.getTag(), null, "tags", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getModel_Statements(), this.getStatement(), null, "statements", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getModel_AbstractScenarios(), this.getAbstractScenario(), null, "abstractScenarios", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(featureEClass, Feature.class, "Feature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getFeature_Tags(), this.getTag(), null, "tags", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getFeature_Name(), ecorePackage.getEString(), "name", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFeature_Statements(), this.getStatement(), null, "statements", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFeature_AbstractScenarios(), this.getAbstractScenario(), null, "abstractScenarios", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(abstractScenarioEClass, AbstractScenario.class, "AbstractScenario", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAbstractScenario_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -787,6 +799,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     initEClass(stepEClass, Step.class, "Step", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStep_Name(), ecorePackage.getEString(), "name", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStep_Rows(), this.getRow(), null, "rows", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(givenEClass, Given.class, "Given", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

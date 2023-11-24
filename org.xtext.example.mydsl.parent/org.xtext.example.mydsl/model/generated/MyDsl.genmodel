@@ -6,11 +6,11 @@
     complianceLevel="11.0" copyrightFields="false" runtimeVersion="2.29">
   <genPackages prefix="MyDsl" basePackage="org.xtext.example.mydsl" disposableProviderFactory="true"
       fileExtensions="mydsl" ecorePackage="MyDsl.ecore#/">
-    <genClasses ecoreClass="MyDsl.ecore#//Model">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Model/tags"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Model/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Model/statements"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Model/abstractScenarios"/>
+    <genClasses ecoreClass="MyDsl.ecore#//Feature">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Feature/tags"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Feature/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Feature/statements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Feature/abstractScenarios"/>
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//AbstractScenario">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//AbstractScenario/name"/>
@@ -40,6 +40,7 @@
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//Step">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Step/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Step/rows"/>
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//Given"/>
     <genClasses ecoreClass="MyDsl.ecore#//When"/>

@@ -21,8 +21,8 @@ import org.eclipse.xtext.service.GrammarProvider;
 @Singleton
 public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarElementFinder {
 	
-	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.Model");
+	public class FeatureElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.Feature");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
 		private final Assignment cTagsAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
@@ -37,7 +37,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Assignment cAbstractScenariosAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cAbstractScenariosAbstractScenarioParserRuleCall_5_0 = (RuleCall)cAbstractScenariosAssignment_5.eContents().get(0);
 		
-		//Model:
+		//Feature:
 		//    (tags+=Tag+ EOL)?
 		//    'Feature:' name=Phrase EOL
 		//    statements+=Statement*
@@ -428,6 +428,8 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final RuleCall cButParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		private final RuleCall cAsteriskParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		
+		//// TODO once I can figure out how to identify which keyword is used in a regex alternatives list
+		//// then I'll combine all the GWTAB* keywords into the Step one
 		//Step:
 		//    Given | When | Then | And | But | Asterisk;
 		@Override public ParserRule getRule() { return rule; }
@@ -460,12 +462,16 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNamePhraseParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final RuleCall cEOLTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final Assignment cRowsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cRowsRowParserRuleCall_3_0 = (RuleCall)cRowsAssignment_3.eContents().get(0);
 		
 		//Given:
-		//    'Given' name=Phrase EOL?;
+		//    'Given' name=Phrase EOL?
+		//    rows+=Row*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'Given' name=Phrase EOL?
+		//rows+=Row*
 		public Group getGroup() { return cGroup; }
 		
 		//'Given'
@@ -479,6 +485,12 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		
 		//EOL?
 		public RuleCall getEOLTerminalRuleCall_2() { return cEOLTerminalRuleCall_2; }
+		
+		//rows+=Row*
+		public Assignment getRowsAssignment_3() { return cRowsAssignment_3; }
+		
+		//Row
+		public RuleCall getRowsRowParserRuleCall_3_0() { return cRowsRowParserRuleCall_3_0; }
 	}
 	public class WhenElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.When");
@@ -487,12 +499,16 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNamePhraseParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final RuleCall cEOLTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final Assignment cRowsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cRowsRowParserRuleCall_3_0 = (RuleCall)cRowsAssignment_3.eContents().get(0);
 		
 		//When:
-		//    'When' name=Phrase EOL?;
+		//    'When' name=Phrase EOL?
+		//    rows+=Row*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'When' name=Phrase EOL?
+		//rows+=Row*
 		public Group getGroup() { return cGroup; }
 		
 		//'When'
@@ -506,6 +522,12 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		
 		//EOL?
 		public RuleCall getEOLTerminalRuleCall_2() { return cEOLTerminalRuleCall_2; }
+		
+		//rows+=Row*
+		public Assignment getRowsAssignment_3() { return cRowsAssignment_3; }
+		
+		//Row
+		public RuleCall getRowsRowParserRuleCall_3_0() { return cRowsRowParserRuleCall_3_0; }
 	}
 	public class ThenElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.Then");
@@ -514,12 +536,16 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNamePhraseParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final RuleCall cEOLTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final Assignment cRowsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cRowsRowParserRuleCall_3_0 = (RuleCall)cRowsAssignment_3.eContents().get(0);
 		
 		//Then:
-		//    'Then' name=Phrase EOL?;
+		//    'Then' name=Phrase EOL?
+		//    rows+=Row*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'Then' name=Phrase EOL?
+		//rows+=Row*
 		public Group getGroup() { return cGroup; }
 		
 		//'Then'
@@ -533,6 +559,12 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		
 		//EOL?
 		public RuleCall getEOLTerminalRuleCall_2() { return cEOLTerminalRuleCall_2; }
+		
+		//rows+=Row*
+		public Assignment getRowsAssignment_3() { return cRowsAssignment_3; }
+		
+		//Row
+		public RuleCall getRowsRowParserRuleCall_3_0() { return cRowsRowParserRuleCall_3_0; }
 	}
 	public class AndElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.And");
@@ -541,12 +573,16 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNamePhraseParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final RuleCall cEOLTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final Assignment cRowsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cRowsRowParserRuleCall_3_0 = (RuleCall)cRowsAssignment_3.eContents().get(0);
 		
 		//And:
-		//    'And' name=Phrase EOL?;
+		//    'And' name=Phrase EOL?
+		//    rows+=Row*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'And' name=Phrase EOL?
+		//rows+=Row*
 		public Group getGroup() { return cGroup; }
 		
 		//'And'
@@ -560,6 +596,12 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		
 		//EOL?
 		public RuleCall getEOLTerminalRuleCall_2() { return cEOLTerminalRuleCall_2; }
+		
+		//rows+=Row*
+		public Assignment getRowsAssignment_3() { return cRowsAssignment_3; }
+		
+		//Row
+		public RuleCall getRowsRowParserRuleCall_3_0() { return cRowsRowParserRuleCall_3_0; }
 	}
 	public class ButElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.But");
@@ -568,12 +610,16 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNamePhraseParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final RuleCall cEOLTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final Assignment cRowsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cRowsRowParserRuleCall_3_0 = (RuleCall)cRowsAssignment_3.eContents().get(0);
 		
 		//But:
-		//    'But' name=Phrase EOL?;
+		//    'But' name=Phrase EOL?
+		//    rows+=Row*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'But' name=Phrase EOL?
+		//rows+=Row*
 		public Group getGroup() { return cGroup; }
 		
 		//'But'
@@ -587,6 +633,12 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		
 		//EOL?
 		public RuleCall getEOLTerminalRuleCall_2() { return cEOLTerminalRuleCall_2; }
+		
+		//rows+=Row*
+		public Assignment getRowsAssignment_3() { return cRowsAssignment_3; }
+		
+		//Row
+		public RuleCall getRowsRowParserRuleCall_3_0() { return cRowsRowParserRuleCall_3_0; }
 	}
 	public class AsteriskElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.Asterisk");
@@ -595,12 +647,16 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNamePhraseParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final RuleCall cEOLTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
+		private final Assignment cRowsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cRowsRowParserRuleCall_3_0 = (RuleCall)cRowsAssignment_3.eContents().get(0);
 		
 		//Asterisk:
-		//    '*' name=Phrase EOL?;
+		//    '*' name=Phrase EOL?
+		//    rows+=Row*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'*' name=Phrase EOL?
+		//rows+=Row*
 		public Group getGroup() { return cGroup; }
 		
 		//'*'
@@ -614,6 +670,12 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		
 		//EOL?
 		public RuleCall getEOLTerminalRuleCall_2() { return cEOLTerminalRuleCall_2; }
+		
+		//rows+=Row*
+		public Assignment getRowsAssignment_3() { return cRowsAssignment_3; }
+		
+		//Row
+		public RuleCall getRowsRowParserRuleCall_3_0() { return cRowsRowParserRuleCall_3_0; }
 	}
 	public class StatementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.Statement");
@@ -674,7 +736,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	
-	private final ModelElements pModel;
+	private final FeatureElements pFeature;
 	private final AbstractScenarioElements pAbstractScenario;
 	private final BackgroundElements pBackground;
 	private final ScenarioElements pScenario;
@@ -702,7 +764,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	@Inject
 	public MyDslGrammarAccess(GrammarProvider grammarProvider) {
 		this.grammar = internalFindGrammar(grammarProvider);
-		this.pModel = new ModelElements();
+		this.pFeature = new FeatureElements();
 		this.pAbstractScenario = new AbstractScenarioElements();
 		this.pBackground = new BackgroundElements();
 		this.pScenario = new ScenarioElements();
@@ -749,17 +811,17 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	
 
 	
-	//Model:
+	//Feature:
 	//    (tags+=Tag+ EOL)?
 	//    'Feature:' name=Phrase EOL
 	//    statements+=Statement*
 	//    abstractScenarios+=AbstractScenario*;
-	public ModelElements getModelAccess() {
-		return pModel;
+	public FeatureElements getFeatureAccess() {
+		return pFeature;
 	}
 	
-	public ParserRule getModelRule() {
-		return getModelAccess().getRule();
+	public ParserRule getFeatureRule() {
+		return getFeatureAccess().getRule();
 	}
 	
 	//// This has the side effect of allowing more than 1 Background.
@@ -847,6 +909,8 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		return getCellAccess().getRule();
 	}
 	
+	//// TODO once I can figure out how to identify which keyword is used in a regex alternatives list
+	//// then I'll combine all the GWTAB* keywords into the Step one
 	//Step:
 	//    Given | When | Then | And | But | Asterisk;
 	public StepElements getStepAccess() {
@@ -858,7 +922,8 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//Given:
-	//    'Given' name=Phrase EOL?;
+	//    'Given' name=Phrase EOL?
+	//    rows+=Row*;
 	public GivenElements getGivenAccess() {
 		return pGiven;
 	}
@@ -868,7 +933,8 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//When:
-	//    'When' name=Phrase EOL?;
+	//    'When' name=Phrase EOL?
+	//    rows+=Row*;
 	public WhenElements getWhenAccess() {
 		return pWhen;
 	}
@@ -878,7 +944,8 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//Then:
-	//    'Then' name=Phrase EOL?;
+	//    'Then' name=Phrase EOL?
+	//    rows+=Row*;
 	public ThenElements getThenAccess() {
 		return pThen;
 	}
@@ -888,7 +955,8 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//And:
-	//    'And' name=Phrase EOL?;
+	//    'And' name=Phrase EOL?
+	//    rows+=Row*;
 	public AndElements getAndAccess() {
 		return pAnd;
 	}
@@ -898,7 +966,8 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//But:
-	//    'But' name=Phrase EOL?;
+	//    'But' name=Phrase EOL?
+	//    rows+=Row*;
 	public ButElements getButAccess() {
 		return pBut;
 	}
@@ -908,7 +977,8 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//Asterisk:
-	//    '*' name=Phrase EOL?;
+	//    '*' name=Phrase EOL?
+	//    rows+=Row*;
 	public AsteriskElements getAsteriskAccess() {
 		return pAsterisk;
 	}

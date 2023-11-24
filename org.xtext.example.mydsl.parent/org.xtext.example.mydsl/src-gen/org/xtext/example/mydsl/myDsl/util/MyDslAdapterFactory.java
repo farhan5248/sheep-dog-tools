@@ -76,9 +76,9 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
     new MyDslSwitch<Adapter>()
     {
       @Override
-      public Adapter caseModel(Model object)
+      public Adapter caseFeature(Feature object)
       {
-        return createModelAdapter();
+        return createFeatureAdapter();
       }
       @Override
       public Adapter caseAbstractScenario(AbstractScenario object)
@@ -183,16 +183,16 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
 
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Model <em>Model</em>}'.
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Feature <em>Feature</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.xtext.example.mydsl.myDsl.Model
+   * @see org.xtext.example.mydsl.myDsl.Feature
    * @generated
    */
-  public Adapter createModelAdapter()
+  public Adapter createFeatureAdapter()
   {
     return null;
   }

@@ -20,28 +20,28 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.xtext.example.mydsl.myDsl.AbstractScenario;
-import org.xtext.example.mydsl.myDsl.Model;
+import org.xtext.example.mydsl.myDsl.Feature;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.Statement;
 import org.xtext.example.mydsl.myDsl.Tag;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Model</b></em>'.
+ * An implementation of the model object '<em><b>Feature</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ModelImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ModelImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ModelImpl#getStatements <em>Statements</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ModelImpl#getAbstractScenarios <em>Abstract Scenarios</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.FeatureImpl#getTags <em>Tags</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.FeatureImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.FeatureImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.FeatureImpl#getAbstractScenarios <em>Abstract Scenarios</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ModelImpl extends MinimalEObjectImpl.Container implements Model
+public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
 {
   /**
    * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference list.
@@ -98,7 +98,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ModelImpl()
+  protected FeatureImpl()
   {
     super();
   }
@@ -111,7 +111,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.MODEL;
+    return MyDslPackage.Literals.FEATURE;
   }
 
   /**
@@ -124,7 +124,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     if (tags == null)
     {
-      tags = new EObjectContainmentEList<Tag>(Tag.class, this, MyDslPackage.MODEL__TAGS);
+      tags = new EObjectContainmentEList<Tag>(Tag.class, this, MyDslPackage.FEATURE__TAGS);
     }
     return tags;
   }
@@ -151,7 +151,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.MODEL__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FEATURE__NAME, oldName, name));
   }
 
   /**
@@ -164,7 +164,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     if (statements == null)
     {
-      statements = new EObjectContainmentEList<Statement>(Statement.class, this, MyDslPackage.MODEL__STATEMENTS);
+      statements = new EObjectContainmentEList<Statement>(Statement.class, this, MyDslPackage.FEATURE__STATEMENTS);
     }
     return statements;
   }
@@ -179,7 +179,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     if (abstractScenarios == null)
     {
-      abstractScenarios = new EObjectContainmentEList<AbstractScenario>(AbstractScenario.class, this, MyDslPackage.MODEL__ABSTRACT_SCENARIOS);
+      abstractScenarios = new EObjectContainmentEList<AbstractScenario>(AbstractScenario.class, this, MyDslPackage.FEATURE__ABSTRACT_SCENARIOS);
     }
     return abstractScenarios;
   }
@@ -194,11 +194,11 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__TAGS:
+      case MyDslPackage.FEATURE__TAGS:
         return ((InternalEList<?>)getTags()).basicRemove(otherEnd, msgs);
-      case MyDslPackage.MODEL__STATEMENTS:
+      case MyDslPackage.FEATURE__STATEMENTS:
         return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
-      case MyDslPackage.MODEL__ABSTRACT_SCENARIOS:
+      case MyDslPackage.FEATURE__ABSTRACT_SCENARIOS:
         return ((InternalEList<?>)getAbstractScenarios()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -214,13 +214,13 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__TAGS:
+      case MyDslPackage.FEATURE__TAGS:
         return getTags();
-      case MyDslPackage.MODEL__NAME:
+      case MyDslPackage.FEATURE__NAME:
         return getName();
-      case MyDslPackage.MODEL__STATEMENTS:
+      case MyDslPackage.FEATURE__STATEMENTS:
         return getStatements();
-      case MyDslPackage.MODEL__ABSTRACT_SCENARIOS:
+      case MyDslPackage.FEATURE__ABSTRACT_SCENARIOS:
         return getAbstractScenarios();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -237,18 +237,18 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__TAGS:
+      case MyDslPackage.FEATURE__TAGS:
         getTags().clear();
         getTags().addAll((Collection<? extends Tag>)newValue);
         return;
-      case MyDslPackage.MODEL__NAME:
+      case MyDslPackage.FEATURE__NAME:
         setName((String)newValue);
         return;
-      case MyDslPackage.MODEL__STATEMENTS:
+      case MyDslPackage.FEATURE__STATEMENTS:
         getStatements().clear();
         getStatements().addAll((Collection<? extends Statement>)newValue);
         return;
-      case MyDslPackage.MODEL__ABSTRACT_SCENARIOS:
+      case MyDslPackage.FEATURE__ABSTRACT_SCENARIOS:
         getAbstractScenarios().clear();
         getAbstractScenarios().addAll((Collection<? extends AbstractScenario>)newValue);
         return;
@@ -266,16 +266,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__TAGS:
+      case MyDslPackage.FEATURE__TAGS:
         getTags().clear();
         return;
-      case MyDslPackage.MODEL__NAME:
+      case MyDslPackage.FEATURE__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case MyDslPackage.MODEL__STATEMENTS:
+      case MyDslPackage.FEATURE__STATEMENTS:
         getStatements().clear();
         return;
-      case MyDslPackage.MODEL__ABSTRACT_SCENARIOS:
+      case MyDslPackage.FEATURE__ABSTRACT_SCENARIOS:
         getAbstractScenarios().clear();
         return;
     }
@@ -292,13 +292,13 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case MyDslPackage.MODEL__TAGS:
+      case MyDslPackage.FEATURE__TAGS:
         return tags != null && !tags.isEmpty();
-      case MyDslPackage.MODEL__NAME:
+      case MyDslPackage.FEATURE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case MyDslPackage.MODEL__STATEMENTS:
+      case MyDslPackage.FEATURE__STATEMENTS:
         return statements != null && !statements.isEmpty();
-      case MyDslPackage.MODEL__ABSTRACT_SCENARIOS:
+      case MyDslPackage.FEATURE__ABSTRACT_SCENARIOS:
         return abstractScenarios != null && !abstractScenarios.isEmpty();
     }
     return super.eIsSet(featureID);
@@ -321,4 +321,4 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     return result.toString();
   }
 
-} //ModelImpl
+} //FeatureImpl

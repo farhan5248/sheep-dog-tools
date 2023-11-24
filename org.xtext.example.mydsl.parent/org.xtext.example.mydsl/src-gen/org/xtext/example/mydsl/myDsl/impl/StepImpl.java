@@ -3,14 +3,24 @@
  */
 package org.xtext.example.mydsl.myDsl.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
+import org.xtext.example.mydsl.myDsl.Row;
 import org.xtext.example.mydsl.myDsl.Step;
 
 /**
@@ -22,6 +32,7 @@ import org.xtext.example.mydsl.myDsl.Step;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.impl.StepImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.StepImpl#getRows <em>Rows</em>}</li>
  * </ul>
  *
  * @generated
@@ -47,6 +58,16 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getRows() <em>Rows</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRows()
+   * @generated
+   * @ordered
+   */
+  protected EList<Row> rows;
 
   /**
    * <!-- begin-user-doc -->
@@ -100,12 +121,45 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * @generated
    */
   @Override
+  public EList<Row> getRows()
+  {
+    if (rows == null)
+    {
+      rows = new EObjectContainmentEList<Row>(Row.class, this, MyDslPackage.STEP__ROWS);
+    }
+    return rows;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case MyDslPackage.STEP__ROWS:
+        return ((InternalEList<?>)getRows()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
     switch (featureID)
     {
       case MyDslPackage.STEP__NAME:
         return getName();
+      case MyDslPackage.STEP__ROWS:
+        return getRows();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -115,6 +169,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -122,6 +177,10 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
     {
       case MyDslPackage.STEP__NAME:
         setName((String)newValue);
+        return;
+      case MyDslPackage.STEP__ROWS:
+        getRows().clear();
+        getRows().addAll((Collection<? extends Row>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -140,6 +199,9 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
       case MyDslPackage.STEP__NAME:
         setName(NAME_EDEFAULT);
         return;
+      case MyDslPackage.STEP__ROWS:
+        getRows().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -156,6 +218,8 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
     {
       case MyDslPackage.STEP__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case MyDslPackage.STEP__ROWS:
+        return rows != null && !rows.isEmpty();
     }
     return super.eIsSet(featureID);
   }

@@ -84,6 +84,7 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=Phrase (ambiguity) (rule end)
+	 *     name=Phrase (ambiguity) rows+=Row
 	 
 	 * </pre>
 	 */
@@ -98,6 +99,7 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=Phrase (ambiguity) (rule end)
+	 *     name=Phrase (ambiguity) rows+=Row
 	 
 	 * </pre>
 	 */
@@ -112,6 +114,7 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=Phrase (ambiguity) (rule end)
+	 *     name=Phrase (ambiguity) rows+=Row
 	 
 	 * </pre>
 	 */
@@ -126,6 +129,7 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=Phrase (ambiguity) (rule end)
+	 *     name=Phrase (ambiguity) rows+=Row
 	 
 	 * </pre>
 	 */
@@ -140,6 +144,7 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=Phrase (ambiguity) (rule end)
+	 *     name=Phrase (ambiguity) rows+=Row
 	 
 	 * </pre>
 	 */
@@ -154,6 +159,7 @@ public class MyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=Phrase (ambiguity) (rule end)
+	 *     name=Phrase (ambiguity) rows+=Row
 	 
 	 * </pre>
 	 */

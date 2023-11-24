@@ -12,6 +12,7 @@ public class CellFormatter extends ListFormatter {
 	// Put this here to avoid mixing up nested lists like rows and cells
 	protected static boolean isLast;
 	protected static boolean isFirst;
+	protected static boolean isLastEOLDouble = true;
 
 	public static void isLast(boolean isLast) {
 		CellFormatter.isLast = isLast;

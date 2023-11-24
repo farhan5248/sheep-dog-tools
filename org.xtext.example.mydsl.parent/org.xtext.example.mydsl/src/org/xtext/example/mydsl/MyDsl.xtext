@@ -3,7 +3,7 @@ grammar org.xtext.example.mydsl.MyDsl hidden(WS, SL_COMMENT)
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
 
-Model:
+Feature:
 	(tags+=Tag+ EOL)?
 	'Feature:' name=Phrase EOL
 	statements+=Statement*
@@ -45,26 +45,34 @@ Row:
 Cell:
 	cell='|' name=Phrase;
 
+// TODO once I can figure out how to identify which keyword is used in a regex alternatives list
+// then I'll combine all the GWTAB* keywords into the Step one 
 Step:
 	Given | When | Then | And | But | Asterisk;
 
 Given:
-	'Given' name=Phrase EOL?;
+	'Given' name=Phrase EOL?
+	rows+=Row*;
 
 When:
-	'When' name=Phrase EOL?;
+	'When' name=Phrase EOL?
+	rows+=Row*;
 
 Then:
-	'Then' name=Phrase EOL?;
+	'Then' name=Phrase EOL?
+	rows+=Row*;
 
 And:
-	'And' name=Phrase EOL?;
+	'And' name=Phrase EOL?
+	rows+=Row*;
 
 But:
-	'But' name=Phrase EOL?;
+	'But' name=Phrase EOL?
+	rows+=Row*;
 
 Asterisk:
-	'*' name=Phrase EOL?;
+	'*' name=Phrase EOL?
+	rows+=Row*;
 
 Statement:
 	name=Phrase EOL;

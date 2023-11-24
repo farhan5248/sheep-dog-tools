@@ -20,8 +20,8 @@ import org.xtext.example.mydsl.myDsl.Background;
 import org.xtext.example.mydsl.myDsl.But;
 import org.xtext.example.mydsl.myDsl.Cell;
 import org.xtext.example.mydsl.myDsl.Example;
+import org.xtext.example.mydsl.myDsl.Feature;
 import org.xtext.example.mydsl.myDsl.Given;
-import org.xtext.example.mydsl.myDsl.Model;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.Row;
 import org.xtext.example.mydsl.myDsl.Scenario;
@@ -64,11 +64,11 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 			case MyDslPackage.EXAMPLE:
 				sequence_Example(context, (Example) semanticObject); 
 				return; 
+			case MyDslPackage.FEATURE:
+				sequence_Feature(context, (Feature) semanticObject); 
+				return; 
 			case MyDslPackage.GIVEN:
 				sequence_Given(context, (Given) semanticObject); 
-				return; 
-			case MyDslPackage.MODEL:
-				sequence_Model(context, (Model) semanticObject); 
 				return; 
 			case MyDslPackage.ROW:
 				sequence_Row(context, (Row) semanticObject); 
@@ -103,17 +103,11 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     And returns And
 	 *
 	 * Constraint:
-	 *     name=Phrase
+	 *     (name=Phrase rows+=Row*)
 	 * </pre>
 	 */
 	protected void sequence_And(ISerializationContext context, And semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.STEP__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.STEP__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAndAccess().getNamePhraseParserRuleCall_1_0(), semanticObject.getName());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -124,17 +118,11 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Asterisk returns Asterisk
 	 *
 	 * Constraint:
-	 *     name=Phrase
+	 *     (name=Phrase rows+=Row*)
 	 * </pre>
 	 */
 	protected void sequence_Asterisk(ISerializationContext context, Asterisk semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.STEP__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.STEP__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAsteriskAccess().getNamePhraseParserRuleCall_1_0(), semanticObject.getName());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -160,17 +148,11 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     But returns But
 	 *
 	 * Constraint:
-	 *     name=Phrase
+	 *     (name=Phrase rows+=Row*)
 	 * </pre>
 	 */
 	protected void sequence_But(ISerializationContext context, But semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.STEP__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.STEP__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getButAccess().getNamePhraseParserRuleCall_1_0(), semanticObject.getName());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -214,34 +196,28 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Step returns Given
-	 *     Given returns Given
+	 *     Feature returns Feature
 	 *
 	 * Constraint:
-	 *     name=Phrase
+	 *     (tags+=Tag* name=Phrase statements+=Statement* abstractScenarios+=AbstractScenario*)
 	 * </pre>
 	 */
-	protected void sequence_Given(ISerializationContext context, Given semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.STEP__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.STEP__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getGivenAccess().getNamePhraseParserRuleCall_1_0(), semanticObject.getName());
-		feeder.finish();
+	protected void sequence_Feature(ISerializationContext context, Feature semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Model returns Model
+	 *     Step returns Given
+	 *     Given returns Given
 	 *
 	 * Constraint:
-	 *     (tags+=Tag* name=Phrase statements+=Statement* abstractScenarios+=AbstractScenario*)
+	 *     (name=Phrase rows+=Row*)
 	 * </pre>
 	 */
-	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
+	protected void sequence_Given(ISerializationContext context, Given semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -337,17 +313,11 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Then returns Then
 	 *
 	 * Constraint:
-	 *     name=Phrase
+	 *     (name=Phrase rows+=Row*)
 	 * </pre>
 	 */
 	protected void sequence_Then(ISerializationContext context, Then semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.STEP__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.STEP__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getThenAccess().getNamePhraseParserRuleCall_1_0(), semanticObject.getName());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -358,17 +328,11 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     When returns When
 	 *
 	 * Constraint:
-	 *     name=Phrase
+	 *     (name=Phrase rows+=Row*)
 	 * </pre>
 	 */
 	protected void sequence_When(ISerializationContext context, When semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.STEP__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.STEP__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getWhenAccess().getNamePhraseParserRuleCall_1_0(), semanticObject.getName());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
