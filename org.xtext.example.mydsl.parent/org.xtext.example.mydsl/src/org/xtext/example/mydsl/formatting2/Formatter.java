@@ -5,8 +5,8 @@ import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 
 public class Formatter {
 
-	private static String indent = " ";
-	private static int indentCnt = 0;
+	protected static String indent = " ";
+	protected static int indentCnt = 0;
 
 	public static void setIndent(int indentCnt) {
 		Formatter.indentCnt = indentCnt;

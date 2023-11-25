@@ -70,10 +70,13 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.BACKGROUND: return createBackground();
       case MyDslPackage.SCENARIO: return createScenario();
       case MyDslPackage.SCENARIO_OUTLINE: return createScenarioOutline();
-      case MyDslPackage.EXAMPLE: return createExample();
+      case MyDslPackage.EXAMPLES: return createExamples();
+      case MyDslPackage.EXAMPLES_TABLE: return createExamplesTable();
+      case MyDslPackage.STEP_TABLE: return createStepTable();
       case MyDslPackage.ROW: return createRow();
       case MyDslPackage.CELL: return createCell();
       case MyDslPackage.STEP: return createStep();
+      case MyDslPackage.DOC_STRING: return createDocString();
       case MyDslPackage.GIVEN: return createGiven();
       case MyDslPackage.WHEN: return createWhen();
       case MyDslPackage.THEN: return createThen();
@@ -153,10 +156,34 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * @generated
    */
   @Override
-  public Example createExample()
+  public Examples createExamples()
   {
-    ExampleImpl example = new ExampleImpl();
-    return example;
+    ExamplesImpl examples = new ExamplesImpl();
+    return examples;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ExamplesTable createExamplesTable()
+  {
+    ExamplesTableImpl examplesTable = new ExamplesTableImpl();
+    return examplesTable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public StepTable createStepTable()
+  {
+    StepTableImpl stepTable = new StepTableImpl();
+    return stepTable;
   }
 
   /**
@@ -193,6 +220,18 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     StepImpl step = new StepImpl();
     return step;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public DocString createDocString()
+  {
+    DocStringImpl docString = new DocStringImpl();
+    return docString;
   }
 
   /**

@@ -9,24 +9,24 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Example</b></em>'.
+ * A representation of the model object '<em><b>Examples</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Example#getTags <em>Tags</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Example#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Example#getStatements <em>Statements</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Example#getRows <em>Rows</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Examples#getTags <em>Tags</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Examples#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Examples#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Examples#getTheExamplesTable <em>The Examples Table</em>}</li>
  * </ul>
  *
- * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getExample()
+ * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getExamples()
  * @model
  * @generated
  */
-public interface Example extends EObject
+public interface Examples extends EObject
 {
   /**
    * Returns the value of the '<em><b>Tags</b></em>' containment reference list.
@@ -34,7 +34,7 @@ public interface Example extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Tags</em>' containment reference list.
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getExample_Tags()
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getExamples_Tags()
    * @model containment="true"
    * @generated
    */
@@ -46,14 +46,14 @@ public interface Example extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getExample_Name()
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getExamples_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Example#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Examples#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -68,22 +68,32 @@ public interface Example extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Statements</em>' containment reference list.
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getExample_Statements()
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getExamples_Statements()
    * @model containment="true"
    * @generated
    */
   EList<Statement> getStatements();
 
   /**
-   * Returns the value of the '<em><b>Rows</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.Row}.
+   * Returns the value of the '<em><b>The Examples Table</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Rows</em>' containment reference list.
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getExample_Rows()
+   * @return the value of the '<em>The Examples Table</em>' containment reference.
+   * @see #setTheExamplesTable(ExamplesTable)
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getExamples_TheExamplesTable()
    * @model containment="true"
    * @generated
    */
-  EList<Row> getRows();
+  ExamplesTable getTheExamplesTable();
 
-} // Example
+  /**
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Examples#getTheExamplesTable <em>The Examples Table</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>The Examples Table</em>' containment reference.
+   * @see #getTheExamplesTable()
+   * @generated
+   */
+  void setTheExamplesTable(ExamplesTable value);
+
+} // Examples

@@ -69,13 +69,31 @@ public interface MyDslFactory extends EFactory
   ScenarioOutline createScenarioOutline();
 
   /**
-   * Returns a new object of class '<em>Example</em>'.
+   * Returns a new object of class '<em>Examples</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Example</em>'.
+   * @return a new object of class '<em>Examples</em>'.
    * @generated
    */
-  Example createExample();
+  Examples createExamples();
+
+  /**
+   * Returns a new object of class '<em>Examples Table</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Examples Table</em>'.
+   * @generated
+   */
+  ExamplesTable createExamplesTable();
+
+  /**
+   * Returns a new object of class '<em>Step Table</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Step Table</em>'.
+   * @generated
+   */
+  StepTable createStepTable();
 
   /**
    * Returns a new object of class '<em>Row</em>'.
@@ -103,6 +121,15 @@ public interface MyDslFactory extends EFactory
    * @generated
    */
   Step createStep();
+
+  /**
+   * Returns a new object of class '<em>Doc String</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Doc String</em>'.
+   * @generated
+   */
+  DocString createDocString();
 
   /**
    * Returns a new object of class '<em>Given</em>'.

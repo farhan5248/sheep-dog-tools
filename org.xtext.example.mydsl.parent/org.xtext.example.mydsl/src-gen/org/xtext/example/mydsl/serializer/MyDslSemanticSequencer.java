@@ -19,7 +19,9 @@ import org.xtext.example.mydsl.myDsl.Asterisk;
 import org.xtext.example.mydsl.myDsl.Background;
 import org.xtext.example.mydsl.myDsl.But;
 import org.xtext.example.mydsl.myDsl.Cell;
-import org.xtext.example.mydsl.myDsl.Example;
+import org.xtext.example.mydsl.myDsl.DocString;
+import org.xtext.example.mydsl.myDsl.Examples;
+import org.xtext.example.mydsl.myDsl.ExamplesTable;
 import org.xtext.example.mydsl.myDsl.Feature;
 import org.xtext.example.mydsl.myDsl.Given;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
@@ -27,6 +29,7 @@ import org.xtext.example.mydsl.myDsl.Row;
 import org.xtext.example.mydsl.myDsl.Scenario;
 import org.xtext.example.mydsl.myDsl.ScenarioOutline;
 import org.xtext.example.mydsl.myDsl.Statement;
+import org.xtext.example.mydsl.myDsl.StepTable;
 import org.xtext.example.mydsl.myDsl.Tag;
 import org.xtext.example.mydsl.myDsl.Then;
 import org.xtext.example.mydsl.myDsl.When;
@@ -61,8 +64,14 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 			case MyDslPackage.CELL:
 				sequence_Cell(context, (Cell) semanticObject); 
 				return; 
-			case MyDslPackage.EXAMPLE:
-				sequence_Example(context, (Example) semanticObject); 
+			case MyDslPackage.DOC_STRING:
+				sequence_DocString(context, (DocString) semanticObject); 
+				return; 
+			case MyDslPackage.EXAMPLES:
+				sequence_Examples(context, (Examples) semanticObject); 
+				return; 
+			case MyDslPackage.EXAMPLES_TABLE:
+				sequence_ExamplesTable(context, (ExamplesTable) semanticObject); 
 				return; 
 			case MyDslPackage.FEATURE:
 				sequence_Feature(context, (Feature) semanticObject); 
@@ -81,6 +90,9 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 				return; 
 			case MyDslPackage.STATEMENT:
 				sequence_Statement(context, (Statement) semanticObject); 
+				return; 
+			case MyDslPackage.STEP_TABLE:
+				sequence_StepTable(context, (StepTable) semanticObject); 
 				return; 
 			case MyDslPackage.TAG:
 				sequence_Tag(context, (Tag) semanticObject); 
@@ -103,7 +115,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     And returns And
 	 *
 	 * Constraint:
-	 *     (name=Phrase rows+=Row*)
+	 *     (name=Phrase (theStepTable=StepTable | theDocString=DocString)?)
 	 * </pre>
 	 */
 	protected void sequence_And(ISerializationContext context, And semanticObject) {
@@ -118,7 +130,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Asterisk returns Asterisk
 	 *
 	 * Constraint:
-	 *     (name=Phrase rows+=Row*)
+	 *     (name=Phrase (theStepTable=StepTable | theDocString=DocString)?)
 	 * </pre>
 	 */
 	protected void sequence_Asterisk(ISerializationContext context, Asterisk semanticObject) {
@@ -148,7 +160,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     But returns But
 	 *
 	 * Constraint:
-	 *     (name=Phrase rows+=Row*)
+	 *     (name=Phrase (theStepTable=StepTable | theDocString=DocString)?)
 	 * </pre>
 	 */
 	protected void sequence_But(ISerializationContext context, But semanticObject) {
@@ -182,13 +194,41 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Example returns Example
+	 *     DocString returns DocString
 	 *
 	 * Constraint:
-	 *     (tags+=Tag* name=Phrase statements+=Statement* rows+=Row+)
+	 *     statements+=Statement+
 	 * </pre>
 	 */
-	protected void sequence_Example(ISerializationContext context, Example semanticObject) {
+	protected void sequence_DocString(ISerializationContext context, DocString semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ExamplesTable returns ExamplesTable
+	 *
+	 * Constraint:
+	 *     rows+=Row+
+	 * </pre>
+	 */
+	protected void sequence_ExamplesTable(ISerializationContext context, ExamplesTable semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Examples returns Examples
+	 *
+	 * Constraint:
+	 *     (tags+=Tag* name=Phrase statements+=Statement* theExamplesTable=ExamplesTable)
+	 * </pre>
+	 */
+	protected void sequence_Examples(ISerializationContext context, Examples semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -214,7 +254,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Given returns Given
 	 *
 	 * Constraint:
-	 *     (name=Phrase rows+=Row*)
+	 *     (name=Phrase (theStepTable=StepTable | theDocString=DocString)?)
 	 * </pre>
 	 */
 	protected void sequence_Given(ISerializationContext context, Given semanticObject) {
@@ -243,7 +283,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     ScenarioOutline returns ScenarioOutline
 	 *
 	 * Constraint:
-	 *     (tags+=Tag* name=Phrase statements+=Statement* steps+=Step* examples+=Example+)
+	 *     (tags+=Tag* name=Phrase statements+=Statement* steps+=Step* examples+=Examples+)
 	 * </pre>
 	 */
 	protected void sequence_ScenarioOutline(ISerializationContext context, ScenarioOutline semanticObject) {
@@ -289,6 +329,20 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     StepTable returns StepTable
+	 *
+	 * Constraint:
+	 *     rows+=Row+
+	 * </pre>
+	 */
+	protected void sequence_StepTable(ISerializationContext context, StepTable semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
 	 *     Tag returns Tag
 	 *
 	 * Constraint:
@@ -313,7 +367,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Then returns Then
 	 *
 	 * Constraint:
-	 *     (name=Phrase rows+=Row*)
+	 *     (name=Phrase (theStepTable=StepTable | theDocString=DocString)?)
 	 * </pre>
 	 */
 	protected void sequence_Then(ISerializationContext context, Then semanticObject) {
@@ -328,7 +382,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     When returns When
 	 *
 	 * Constraint:
-	 *     (name=Phrase rows+=Row*)
+	 *     (name=Phrase (theStepTable=StepTable | theDocString=DocString)?)
 	 * </pre>
 	 */
 	protected void sequence_When(ISerializationContext context, When semanticObject) {

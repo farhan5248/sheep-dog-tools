@@ -19,29 +19,29 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.xtext.example.mydsl.myDsl.Example;
+import org.xtext.example.mydsl.myDsl.Examples;
+import org.xtext.example.mydsl.myDsl.ExamplesTable;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.Row;
 import org.xtext.example.mydsl.myDsl.Statement;
 import org.xtext.example.mydsl.myDsl.Tag;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Example</b></em>'.
+ * An implementation of the model object '<em><b>Examples</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ExampleImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ExampleImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ExampleImpl#getStatements <em>Statements</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ExampleImpl#getRows <em>Rows</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ExamplesImpl#getTags <em>Tags</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ExamplesImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ExamplesImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ExamplesImpl#getTheExamplesTable <em>The Examples Table</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
+public class ExamplesImpl extends MinimalEObjectImpl.Container implements Examples
 {
   /**
    * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference list.
@@ -84,21 +84,21 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
   protected EList<Statement> statements;
 
   /**
-   * The cached value of the '{@link #getRows() <em>Rows</em>}' containment reference list.
+   * The cached value of the '{@link #getTheExamplesTable() <em>The Examples Table</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRows()
+   * @see #getTheExamplesTable()
    * @generated
    * @ordered
    */
-  protected EList<Row> rows;
+  protected ExamplesTable theExamplesTable;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ExampleImpl()
+  protected ExamplesImpl()
   {
     super();
   }
@@ -111,7 +111,7 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.EXAMPLE;
+    return MyDslPackage.Literals.EXAMPLES;
   }
 
   /**
@@ -124,7 +124,7 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
   {
     if (tags == null)
     {
-      tags = new EObjectContainmentEList<Tag>(Tag.class, this, MyDslPackage.EXAMPLE__TAGS);
+      tags = new EObjectContainmentEList<Tag>(Tag.class, this, MyDslPackage.EXAMPLES__TAGS);
     }
     return tags;
   }
@@ -151,7 +151,7 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.EXAMPLE__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.EXAMPLES__NAME, oldName, name));
   }
 
   /**
@@ -164,7 +164,7 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
   {
     if (statements == null)
     {
-      statements = new EObjectContainmentEList<Statement>(Statement.class, this, MyDslPackage.EXAMPLE__STATEMENTS);
+      statements = new EObjectContainmentEList<Statement>(Statement.class, this, MyDslPackage.EXAMPLES__STATEMENTS);
     }
     return statements;
   }
@@ -175,13 +175,48 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
    * @generated
    */
   @Override
-  public EList<Row> getRows()
+  public ExamplesTable getTheExamplesTable()
   {
-    if (rows == null)
+    return theExamplesTable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetTheExamplesTable(ExamplesTable newTheExamplesTable, NotificationChain msgs)
+  {
+    ExamplesTable oldTheExamplesTable = theExamplesTable;
+    theExamplesTable = newTheExamplesTable;
+    if (eNotificationRequired())
     {
-      rows = new EObjectContainmentEList<Row>(Row.class, this, MyDslPackage.EXAMPLE__ROWS);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.EXAMPLES__THE_EXAMPLES_TABLE, oldTheExamplesTable, newTheExamplesTable);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return rows;
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setTheExamplesTable(ExamplesTable newTheExamplesTable)
+  {
+    if (newTheExamplesTable != theExamplesTable)
+    {
+      NotificationChain msgs = null;
+      if (theExamplesTable != null)
+        msgs = ((InternalEObject)theExamplesTable).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.EXAMPLES__THE_EXAMPLES_TABLE, null, msgs);
+      if (newTheExamplesTable != null)
+        msgs = ((InternalEObject)newTheExamplesTable).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.EXAMPLES__THE_EXAMPLES_TABLE, null, msgs);
+      msgs = basicSetTheExamplesTable(newTheExamplesTable, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.EXAMPLES__THE_EXAMPLES_TABLE, newTheExamplesTable, newTheExamplesTable));
   }
 
   /**
@@ -194,12 +229,12 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
   {
     switch (featureID)
     {
-      case MyDslPackage.EXAMPLE__TAGS:
+      case MyDslPackage.EXAMPLES__TAGS:
         return ((InternalEList<?>)getTags()).basicRemove(otherEnd, msgs);
-      case MyDslPackage.EXAMPLE__STATEMENTS:
+      case MyDslPackage.EXAMPLES__STATEMENTS:
         return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
-      case MyDslPackage.EXAMPLE__ROWS:
-        return ((InternalEList<?>)getRows()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.EXAMPLES__THE_EXAMPLES_TABLE:
+        return basicSetTheExamplesTable(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -214,14 +249,14 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
   {
     switch (featureID)
     {
-      case MyDslPackage.EXAMPLE__TAGS:
+      case MyDslPackage.EXAMPLES__TAGS:
         return getTags();
-      case MyDslPackage.EXAMPLE__NAME:
+      case MyDslPackage.EXAMPLES__NAME:
         return getName();
-      case MyDslPackage.EXAMPLE__STATEMENTS:
+      case MyDslPackage.EXAMPLES__STATEMENTS:
         return getStatements();
-      case MyDslPackage.EXAMPLE__ROWS:
-        return getRows();
+      case MyDslPackage.EXAMPLES__THE_EXAMPLES_TABLE:
+        return getTheExamplesTable();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -237,20 +272,19 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
   {
     switch (featureID)
     {
-      case MyDslPackage.EXAMPLE__TAGS:
+      case MyDslPackage.EXAMPLES__TAGS:
         getTags().clear();
         getTags().addAll((Collection<? extends Tag>)newValue);
         return;
-      case MyDslPackage.EXAMPLE__NAME:
+      case MyDslPackage.EXAMPLES__NAME:
         setName((String)newValue);
         return;
-      case MyDslPackage.EXAMPLE__STATEMENTS:
+      case MyDslPackage.EXAMPLES__STATEMENTS:
         getStatements().clear();
         getStatements().addAll((Collection<? extends Statement>)newValue);
         return;
-      case MyDslPackage.EXAMPLE__ROWS:
-        getRows().clear();
-        getRows().addAll((Collection<? extends Row>)newValue);
+      case MyDslPackage.EXAMPLES__THE_EXAMPLES_TABLE:
+        setTheExamplesTable((ExamplesTable)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -266,17 +300,17 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
   {
     switch (featureID)
     {
-      case MyDslPackage.EXAMPLE__TAGS:
+      case MyDslPackage.EXAMPLES__TAGS:
         getTags().clear();
         return;
-      case MyDslPackage.EXAMPLE__NAME:
+      case MyDslPackage.EXAMPLES__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case MyDslPackage.EXAMPLE__STATEMENTS:
+      case MyDslPackage.EXAMPLES__STATEMENTS:
         getStatements().clear();
         return;
-      case MyDslPackage.EXAMPLE__ROWS:
-        getRows().clear();
+      case MyDslPackage.EXAMPLES__THE_EXAMPLES_TABLE:
+        setTheExamplesTable((ExamplesTable)null);
         return;
     }
     super.eUnset(featureID);
@@ -292,14 +326,14 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
   {
     switch (featureID)
     {
-      case MyDslPackage.EXAMPLE__TAGS:
+      case MyDslPackage.EXAMPLES__TAGS:
         return tags != null && !tags.isEmpty();
-      case MyDslPackage.EXAMPLE__NAME:
+      case MyDslPackage.EXAMPLES__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case MyDslPackage.EXAMPLE__STATEMENTS:
+      case MyDslPackage.EXAMPLES__STATEMENTS:
         return statements != null && !statements.isEmpty();
-      case MyDslPackage.EXAMPLE__ROWS:
-        return rows != null && !rows.isEmpty();
+      case MyDslPackage.EXAMPLES__THE_EXAMPLES_TABLE:
+        return theExamplesTable != null;
     }
     return super.eIsSet(featureID);
   }
@@ -321,4 +355,4 @@ public class ExampleImpl extends MinimalEObjectImpl.Container implements Example
     return result.toString();
   }
 
-} //ExampleImpl
+} //ExamplesImpl

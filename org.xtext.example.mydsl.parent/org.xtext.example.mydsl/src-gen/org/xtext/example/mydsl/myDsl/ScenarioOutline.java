@@ -38,7 +38,7 @@ public interface ScenarioOutline extends AbstractScenario
 
   /**
    * Returns the value of the '<em><b>Examples</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.Example}.
+   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.Examples}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Examples</em>' containment reference list.
@@ -46,6 +46,6 @@ public interface ScenarioOutline extends AbstractScenario
    * @model containment="true"
    * @generated
    */
-  EList<Example> getExamples();
+  EList<Examples> getExamples();
 
 } // ScenarioOutline

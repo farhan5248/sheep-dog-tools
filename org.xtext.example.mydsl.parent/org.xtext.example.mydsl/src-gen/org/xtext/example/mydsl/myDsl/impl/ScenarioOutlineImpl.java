@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.xtext.example.mydsl.myDsl.Example;
+import org.xtext.example.mydsl.myDsl.Examples;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.ScenarioOutline;
 import org.xtext.example.mydsl.myDsl.Tag;
@@ -54,7 +54,7 @@ public class ScenarioOutlineImpl extends AbstractScenarioImpl implements Scenari
    * @generated
    * @ordered
    */
-  protected EList<Example> examples;
+  protected EList<Examples> examples;
 
   /**
    * <!-- begin-user-doc -->
@@ -98,11 +98,11 @@ public class ScenarioOutlineImpl extends AbstractScenarioImpl implements Scenari
    * @generated
    */
   @Override
-  public EList<Example> getExamples()
+  public EList<Examples> getExamples()
   {
     if (examples == null)
     {
-      examples = new EObjectContainmentEList<Example>(Example.class, this, MyDslPackage.SCENARIO_OUTLINE__EXAMPLES);
+      examples = new EObjectContainmentEList<Examples>(Examples.class, this, MyDslPackage.SCENARIO_OUTLINE__EXAMPLES);
     }
     return examples;
   }
@@ -160,7 +160,7 @@ public class ScenarioOutlineImpl extends AbstractScenarioImpl implements Scenari
         return;
       case MyDslPackage.SCENARIO_OUTLINE__EXAMPLES:
         getExamples().clear();
-        getExamples().addAll((Collection<? extends Example>)newValue);
+        getExamples().addAll((Collection<? extends Examples>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

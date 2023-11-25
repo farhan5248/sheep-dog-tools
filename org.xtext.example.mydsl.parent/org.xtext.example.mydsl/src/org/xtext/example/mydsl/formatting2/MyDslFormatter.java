@@ -16,7 +16,9 @@ import org.xtext.example.mydsl.myDsl.Asterisk;
 import org.xtext.example.mydsl.myDsl.Background;
 import org.xtext.example.mydsl.myDsl.But;
 import org.xtext.example.mydsl.myDsl.Cell;
-import org.xtext.example.mydsl.myDsl.Example;
+import org.xtext.example.mydsl.myDsl.DocString;
+import org.xtext.example.mydsl.myDsl.Examples;
+import org.xtext.example.mydsl.myDsl.ExamplesTable;
 import org.xtext.example.mydsl.myDsl.Feature;
 import org.xtext.example.mydsl.myDsl.Given;
 import org.xtext.example.mydsl.myDsl.Row;
@@ -24,6 +26,7 @@ import org.xtext.example.mydsl.myDsl.Scenario;
 import org.xtext.example.mydsl.myDsl.ScenarioOutline;
 import org.xtext.example.mydsl.myDsl.Statement;
 import org.xtext.example.mydsl.myDsl.Step;
+import org.xtext.example.mydsl.myDsl.StepTable;
 import org.xtext.example.mydsl.myDsl.Tag;
 import org.xtext.example.mydsl.myDsl.Then;
 import org.xtext.example.mydsl.myDsl.When;
@@ -33,7 +36,8 @@ import org.xtext.example.mydsl.services.MyDslGrammarAccess.AsteriskElements;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.BackgroundElements;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.ButElements;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.CellElements;
-import org.xtext.example.mydsl.services.MyDslGrammarAccess.ExampleElements;
+import org.xtext.example.mydsl.services.MyDslGrammarAccess.DocStringElements;
+import org.xtext.example.mydsl.services.MyDslGrammarAccess.ExamplesElements;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.FeatureElements;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.GivenElements;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.RowElements;
@@ -127,7 +131,7 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 			StepFormatter.isLast(isLastElement(s, b.getSteps()));
 			StepFormatter.setIndent(4);
 			// If the list of rows is empty, then use double EOL
-			StepFormatter.isLastEOLDouble(s.getRows().isEmpty());
+			StepFormatter.isLastEOLDouble(s.getTheStepTable() == null && s.getTheDocString() == null);
 			doc.format(s);
 		}
 	}
@@ -159,7 +163,7 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 			StepFormatter.isLast(isLastElement(s, b.getSteps()));
 			StepFormatter.setIndent(4);
 			// If the list of rows is empty, then use double EOL
-			StepFormatter.isLastEOLDouble(s.getRows().isEmpty());
+			StepFormatter.isLastEOLDouble(s.getTheStepTable() == null && s.getTheDocString() == null);
 			doc.format(s);
 		}
 	}
@@ -191,19 +195,19 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 			StepFormatter.isLast(isLastElement(s, b.getSteps()));
 			StepFormatter.setIndent(4);
 			// If the list of rows is empty, then use double EOL
-			StepFormatter.isLastEOLDouble(s.getRows().isEmpty());
+			StepFormatter.isLastEOLDouble(s.getTheStepTable() == null && s.getTheDocString() == null);
 			doc.format(s);
 		}
-		for (Example e : b.getExamples()) {
+		for (Examples e : b.getExamples()) {
 
 			ExampleFormatter.setIndent(4);
 			doc.format(e);
 		}
 	}
 
-	protected void format(Example e, IFormattableDocument doc) {
+	protected void format(Examples e, IFormattableDocument doc) {
 
-		ExampleElements a = ga.getExampleAccess();
+		ExamplesElements a = ga.getExamplesAccess();
 
 		if (!e.getTags().isEmpty()) {
 			for (Tag t : e.getTags()) {
@@ -223,10 +227,27 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 			StatementFormatter.isLastEOLDouble(true);
 			doc.format(s);
 		}
+		ExamplesTable theExamplesTable = e.getTheExamplesTable();
+		if (theExamplesTable != null) {
+			doc.format(theExamplesTable);
+		}
+	}
+
+	protected void format(ExamplesTable e, IFormattableDocument doc) {
 		for (Row r : e.getRows()) {
 			RowFormatter.isLast(isLastElement(r, e.getRows()));
 			RowFormatter.isFirst(isFirstElement(r, e.getRows()));
 			RowFormatter.isLastEOLDouble(true);
+			RowFormatter.setIndent(6);
+			doc.format(r);
+		}
+	}
+
+	protected void format(StepTable t, IFormattableDocument doc) {
+		for (Row r : t.getRows()) {
+			RowFormatter.isLast(isLastElement(r, t.getRows()));
+			RowFormatter.isFirst(isFirstElement(r, t.getRows()));
+			RowFormatter.isLastEOLDouble(StepFormatter.isLast);
 			RowFormatter.setIndent(6);
 			doc.format(r);
 		}
@@ -250,17 +271,34 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 		CellFormatter.formatNameRuleCall(getRegion(r, a.getNamePhraseParserRuleCall_1_0()), doc);
 	}
 
-	protected void format(Given s, IFormattableDocument doc) {
+	protected void format(DocString d, IFormattableDocument doc) {
+		DocStringElements a = ga.getDocStringAccess();
+		DocStringFormatter.formatEOL1RuleCall(getRegion(d, a.getEOLTerminalRuleCall_1()), doc);
+		DocStringFormatter.formatEOL12RuleCall(getRegion(d, a.getEOLTerminalRuleCall_4()), doc);
+		for (Statement s : d.getStatements()) {
+			StatementFormatter.isLast(isLastElement(s, d.getStatements()));
+			// TODO formatting these statements means the contents of the doc get modified
+			// The formatter should make sure there is a minimum of 10 perhaps? add a flag
+			StatementFormatter.setIndent(10, true);
+			StatementFormatter.isLastEOLDouble(false);
+			doc.format(s);
+		}
+	}
+
+	protected void format(Given g, IFormattableDocument doc) {
 		GivenElements a = ga.getGivenAccess();
-		GivenFormatter.formatGivenKeyword(getRegion(s, a.getGivenKeyword_0()), doc);
-		GivenFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_1_0()), doc);
-		GivenFormatter.formatEOL12RuleCall(getRegion(s, a.getEOLTerminalRuleCall_2()), doc);
-		for (Row r : s.getRows()) {
-			RowFormatter.isLast(isLastElement(r, s.getRows()));
-			RowFormatter.isFirst(isFirstElement(r, s.getRows()));
-			RowFormatter.isLastEOLDouble(StepFormatter.isLast);
-			RowFormatter.setIndent(6);
-			doc.format(r);
+		GivenFormatter.formatGivenKeyword(getRegion(g, a.getGivenKeyword_0()), doc);
+		GivenFormatter.formatNameRuleCall(getRegion(g, a.getNamePhraseParserRuleCall_1_0()), doc);
+		GivenFormatter.formatEOL12RuleCall(getRegion(g, a.getEOLTerminalRuleCall_2()), doc);
+		StepTable theTable = g.getTheStepTable();
+		if (theTable != null) {
+			doc.format(theTable);
+		}
+		DocString theDocString = g.getTheDocString();
+		if (theDocString != null) {
+			DocStringFormatter.isLastEOLDouble(StepFormatter.isLast);
+			DocStringFormatter.setIndent(6);
+			doc.format(theDocString);
 		}
 	}
 
@@ -269,12 +307,15 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 		WhenFormatter.formatWhenKeyword(getRegion(s, a.getWhenKeyword_0()), doc);
 		WhenFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_1_0()), doc);
 		WhenFormatter.formatEOL12RuleCall(getRegion(s, a.getEOLTerminalRuleCall_2()), doc);
-		for (Row r : s.getRows()) {
-			RowFormatter.isLast(isLastElement(r, s.getRows()));
-			RowFormatter.isFirst(isFirstElement(r, s.getRows()));
-			RowFormatter.isLastEOLDouble(StepFormatter.isLast);
-			RowFormatter.setIndent(6);
-			doc.format(r);
+		StepTable theTable = s.getTheStepTable();
+		if (theTable != null) {
+			doc.format(theTable);
+		}
+		DocString theDocString = s.getTheDocString();
+		if (theDocString != null) {
+			DocStringFormatter.isLastEOLDouble(StepFormatter.isLast);
+			DocStringFormatter.setIndent(6);
+			doc.format(theDocString);
 		}
 	}
 
@@ -283,12 +324,15 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 		ThenFormatter.formatThenKeyword(getRegion(s, a.getThenKeyword_0()), doc);
 		ThenFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_1_0()), doc);
 		ThenFormatter.formatEOL12RuleCall(getRegion(s, a.getEOLTerminalRuleCall_2()), doc);
-		for (Row r : s.getRows()) {
-			RowFormatter.isLast(isLastElement(r, s.getRows()));
-			RowFormatter.isFirst(isFirstElement(r, s.getRows()));
-			RowFormatter.isLastEOLDouble(StepFormatter.isLast);
-			RowFormatter.setIndent(6);
-			doc.format(r);
+		StepTable theTable = s.getTheStepTable();
+		if (theTable != null) {
+			doc.format(theTable);
+		}
+		DocString theDocString = s.getTheDocString();
+		if (theDocString != null) {
+			DocStringFormatter.isLastEOLDouble(StepFormatter.isLast);
+			DocStringFormatter.setIndent(6);
+			doc.format(theDocString);
 		}
 	}
 
@@ -297,12 +341,15 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 		AndFormatter.formatAndKeyword(getRegion(s, a.getAndKeyword_0()), doc);
 		AndFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_1_0()), doc);
 		AndFormatter.formatEOL12RuleCall(getRegion(s, a.getEOLTerminalRuleCall_2()), doc);
-		for (Row r : s.getRows()) {
-			RowFormatter.isLast(isLastElement(r, s.getRows()));
-			RowFormatter.isFirst(isFirstElement(r, s.getRows()));
-			RowFormatter.isLastEOLDouble(StepFormatter.isLast);
-			RowFormatter.setIndent(6);
-			doc.format(r);
+		StepTable theTable = s.getTheStepTable();
+		if (theTable != null) {
+			doc.format(theTable);
+		}
+		DocString theDocString = s.getTheDocString();
+		if (theDocString != null) {
+			DocStringFormatter.isLastEOLDouble(StepFormatter.isLast);
+			DocStringFormatter.setIndent(6);
+			doc.format(theDocString);
 		}
 	}
 
@@ -311,12 +358,15 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 		ButFormatter.formatButKeyword(getRegion(s, a.getButKeyword_0()), doc);
 		ButFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_1_0()), doc);
 		ButFormatter.formatEOL12RuleCall(getRegion(s, a.getEOLTerminalRuleCall_2()), doc);
-		for (Row r : s.getRows()) {
-			RowFormatter.isLast(isLastElement(r, s.getRows()));
-			RowFormatter.isFirst(isFirstElement(r, s.getRows()));
-			RowFormatter.isLastEOLDouble(StepFormatter.isLast);
-			RowFormatter.setIndent(6);
-			doc.format(r);
+		StepTable theTable = s.getTheStepTable();
+		if (theTable != null) {
+			doc.format(theTable);
+		}
+		DocString theDocString = s.getTheDocString();
+		if (theDocString != null) {
+			DocStringFormatter.isLastEOLDouble(StepFormatter.isLast);
+			DocStringFormatter.setIndent(6);
+			doc.format(theDocString);
 		}
 	}
 
@@ -326,12 +376,15 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 		AsteriskFormatter.formatAsteriskKeyword(getRegion(s, a.getAsteriskKeyword_0()), doc);
 		AsteriskFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_1_0()), doc);
 		AsteriskFormatter.formatEOL12RuleCall(getRegion(s, a.getEOLTerminalRuleCall_2()), doc);
-		for (Row r : s.getRows()) {
-			RowFormatter.isLast(isLastElement(r, s.getRows()));
-			RowFormatter.isFirst(isFirstElement(r, s.getRows()));
-			RowFormatter.isLastEOLDouble(StepFormatter.isLast);
-			RowFormatter.setIndent(6);
-			doc.format(r);
+		StepTable theTable = s.getTheStepTable();
+		if (theTable != null) {
+			doc.format(theTable);
+		}
+		DocString theDocString = s.getTheDocString();
+		if (theDocString != null) {
+			DocStringFormatter.isLastEOLDouble(StepFormatter.isLast);
+			DocStringFormatter.setIndent(6);
+			doc.format(theDocString);
 		}
 	}
 

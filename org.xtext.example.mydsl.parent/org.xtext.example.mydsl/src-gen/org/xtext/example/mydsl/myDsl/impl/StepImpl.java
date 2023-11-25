@@ -3,12 +3,8 @@
  */
 package org.xtext.example.mydsl.myDsl.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -16,12 +12,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.xtext.example.mydsl.myDsl.DocString;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.Row;
 import org.xtext.example.mydsl.myDsl.Step;
+import org.xtext.example.mydsl.myDsl.StepTable;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,7 +26,8 @@ import org.xtext.example.mydsl.myDsl.Step;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.impl.StepImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.StepImpl#getRows <em>Rows</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.StepImpl#getTheStepTable <em>The Step Table</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.StepImpl#getTheDocString <em>The Doc String</em>}</li>
  * </ul>
  *
  * @generated
@@ -60,14 +55,24 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getRows() <em>Rows</em>}' containment reference list.
+   * The cached value of the '{@link #getTheStepTable() <em>The Step Table</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRows()
+   * @see #getTheStepTable()
    * @generated
    * @ordered
    */
-  protected EList<Row> rows;
+  protected StepTable theStepTable;
+
+  /**
+   * The cached value of the '{@link #getTheDocString() <em>The Doc String</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTheDocString()
+   * @generated
+   * @ordered
+   */
+  protected DocString theDocString;
 
   /**
    * <!-- begin-user-doc -->
@@ -121,13 +126,98 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * @generated
    */
   @Override
-  public EList<Row> getRows()
+  public StepTable getTheStepTable()
   {
-    if (rows == null)
+    return theStepTable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetTheStepTable(StepTable newTheStepTable, NotificationChain msgs)
+  {
+    StepTable oldTheStepTable = theStepTable;
+    theStepTable = newTheStepTable;
+    if (eNotificationRequired())
     {
-      rows = new EObjectContainmentEList<Row>(Row.class, this, MyDslPackage.STEP__ROWS);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.STEP__THE_STEP_TABLE, oldTheStepTable, newTheStepTable);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return rows;
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setTheStepTable(StepTable newTheStepTable)
+  {
+    if (newTheStepTable != theStepTable)
+    {
+      NotificationChain msgs = null;
+      if (theStepTable != null)
+        msgs = ((InternalEObject)theStepTable).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.STEP__THE_STEP_TABLE, null, msgs);
+      if (newTheStepTable != null)
+        msgs = ((InternalEObject)newTheStepTable).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.STEP__THE_STEP_TABLE, null, msgs);
+      msgs = basicSetTheStepTable(newTheStepTable, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.STEP__THE_STEP_TABLE, newTheStepTable, newTheStepTable));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public DocString getTheDocString()
+  {
+    return theDocString;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetTheDocString(DocString newTheDocString, NotificationChain msgs)
+  {
+    DocString oldTheDocString = theDocString;
+    theDocString = newTheDocString;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.STEP__THE_DOC_STRING, oldTheDocString, newTheDocString);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setTheDocString(DocString newTheDocString)
+  {
+    if (newTheDocString != theDocString)
+    {
+      NotificationChain msgs = null;
+      if (theDocString != null)
+        msgs = ((InternalEObject)theDocString).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.STEP__THE_DOC_STRING, null, msgs);
+      if (newTheDocString != null)
+        msgs = ((InternalEObject)newTheDocString).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.STEP__THE_DOC_STRING, null, msgs);
+      msgs = basicSetTheDocString(newTheDocString, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.STEP__THE_DOC_STRING, newTheDocString, newTheDocString));
   }
 
   /**
@@ -140,8 +230,10 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
   {
     switch (featureID)
     {
-      case MyDslPackage.STEP__ROWS:
-        return ((InternalEList<?>)getRows()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.STEP__THE_STEP_TABLE:
+        return basicSetTheStepTable(null, msgs);
+      case MyDslPackage.STEP__THE_DOC_STRING:
+        return basicSetTheDocString(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -158,8 +250,10 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
     {
       case MyDslPackage.STEP__NAME:
         return getName();
-      case MyDslPackage.STEP__ROWS:
-        return getRows();
+      case MyDslPackage.STEP__THE_STEP_TABLE:
+        return getTheStepTable();
+      case MyDslPackage.STEP__THE_DOC_STRING:
+        return getTheDocString();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -169,7 +263,6 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -178,9 +271,11 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
       case MyDslPackage.STEP__NAME:
         setName((String)newValue);
         return;
-      case MyDslPackage.STEP__ROWS:
-        getRows().clear();
-        getRows().addAll((Collection<? extends Row>)newValue);
+      case MyDslPackage.STEP__THE_STEP_TABLE:
+        setTheStepTable((StepTable)newValue);
+        return;
+      case MyDslPackage.STEP__THE_DOC_STRING:
+        setTheDocString((DocString)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -199,8 +294,11 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
       case MyDslPackage.STEP__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case MyDslPackage.STEP__ROWS:
-        getRows().clear();
+      case MyDslPackage.STEP__THE_STEP_TABLE:
+        setTheStepTable((StepTable)null);
+        return;
+      case MyDslPackage.STEP__THE_DOC_STRING:
+        setTheDocString((DocString)null);
         return;
     }
     super.eUnset(featureID);
@@ -218,8 +316,10 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
     {
       case MyDslPackage.STEP__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case MyDslPackage.STEP__ROWS:
-        return rows != null && !rows.isEmpty();
+      case MyDslPackage.STEP__THE_STEP_TABLE:
+        return theStepTable != null;
+      case MyDslPackage.STEP__THE_DOC_STRING:
+        return theDocString != null;
     }
     return super.eIsSet(featureID);
   }

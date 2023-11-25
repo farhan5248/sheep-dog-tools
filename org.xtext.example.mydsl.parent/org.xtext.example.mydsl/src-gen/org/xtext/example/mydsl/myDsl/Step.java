@@ -3,8 +3,6 @@
  */
 package org.xtext.example.mydsl.myDsl;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -17,7 +15,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.Step#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Step#getRows <em>Rows</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Step#getTheStepTable <em>The Step Table</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Step#getTheDocString <em>The Doc String</em>}</li>
  * </ul>
  *
  * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getStep()
@@ -49,15 +48,47 @@ public interface Step extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Rows</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.Row}.
+   * Returns the value of the '<em><b>The Step Table</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Rows</em>' containment reference list.
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getStep_Rows()
+   * @return the value of the '<em>The Step Table</em>' containment reference.
+   * @see #setTheStepTable(StepTable)
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getStep_TheStepTable()
    * @model containment="true"
    * @generated
    */
-  EList<Row> getRows();
+  StepTable getTheStepTable();
+
+  /**
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Step#getTheStepTable <em>The Step Table</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>The Step Table</em>' containment reference.
+   * @see #getTheStepTable()
+   * @generated
+   */
+  void setTheStepTable(StepTable value);
+
+  /**
+   * Returns the value of the '<em><b>The Doc String</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>The Doc String</em>' containment reference.
+   * @see #setTheDocString(DocString)
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getStep_TheDocString()
+   * @model containment="true"
+   * @generated
+   */
+  DocString getTheDocString();
+
+  /**
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Step#getTheDocString <em>The Doc String</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>The Doc String</em>' containment reference.
+   * @see #getTheDocString()
+   * @generated
+   */
+  void setTheDocString(DocString value);
 
 } // Step

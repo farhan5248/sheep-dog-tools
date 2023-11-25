@@ -25,11 +25,17 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//ScenarioOutline/tags"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//ScenarioOutline/examples"/>
     </genClasses>
-    <genClasses ecoreClass="MyDsl.ecore#//Example">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Example/tags"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Example/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Example/statements"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Example/rows"/>
+    <genClasses ecoreClass="MyDsl.ecore#//Examples">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Examples/tags"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Examples/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Examples/statements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Examples/theExamplesTable"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//ExamplesTable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//ExamplesTable/rows"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//StepTable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//StepTable/rows"/>
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//Row">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Row/cells"/>
@@ -40,7 +46,11 @@
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//Step">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Step/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Step/rows"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Step/theStepTable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Step/theDocString"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//DocString">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//DocString/statements"/>
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//Given"/>
     <genClasses ecoreClass="MyDsl.ecore#//When"/>

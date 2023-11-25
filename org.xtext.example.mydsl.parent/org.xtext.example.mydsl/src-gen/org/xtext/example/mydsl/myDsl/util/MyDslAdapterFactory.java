@@ -101,9 +101,19 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createScenarioOutlineAdapter();
       }
       @Override
-      public Adapter caseExample(Example object)
+      public Adapter caseExamples(Examples object)
       {
-        return createExampleAdapter();
+        return createExamplesAdapter();
+      }
+      @Override
+      public Adapter caseExamplesTable(ExamplesTable object)
+      {
+        return createExamplesTableAdapter();
+      }
+      @Override
+      public Adapter caseStepTable(StepTable object)
+      {
+        return createStepTableAdapter();
       }
       @Override
       public Adapter caseRow(Row object)
@@ -119,6 +129,11 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseStep(Step object)
       {
         return createStepAdapter();
+      }
+      @Override
+      public Adapter caseDocString(DocString object)
+      {
+        return createDocStringAdapter();
       }
       @Override
       public Adapter caseGiven(Given object)
@@ -258,16 +273,46 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Example <em>Example</em>}'.
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Examples <em>Examples</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.xtext.example.mydsl.myDsl.Example
+   * @see org.xtext.example.mydsl.myDsl.Examples
    * @generated
    */
-  public Adapter createExampleAdapter()
+  public Adapter createExamplesAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.ExamplesTable <em>Examples Table</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.ExamplesTable
+   * @generated
+   */
+  public Adapter createExamplesTableAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.StepTable <em>Step Table</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.StepTable
+   * @generated
+   */
+  public Adapter createStepTableAdapter()
   {
     return null;
   }
@@ -313,6 +358,21 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createStepAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.DocString <em>Doc String</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.DocString
+   * @generated
+   */
+  public Adapter createDocStringAdapter()
   {
     return null;
   }

@@ -13,17 +13,17 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.xtext.example.mydsl.myDsl.Model;
+import org.xtext.example.mydsl.myDsl.Feature;
 
 @ExtendWith(InjectionExtension.class)
 @InjectWith(MyDslInjectorProvider.class)
 public class MyDslParsingTest {
 	@Inject
-	private ParseHelper<Model> parseHelper;
+	private ParseHelper<Feature> parseHelper;
 
 	@Test
 	public void loadModel() throws Exception {
-		Model result = parseHelper.parse("Feature: Xtext\r\nHello\r\nGoodbye\r\n");
+		Feature result = parseHelper.parse("Feature: Xtext\r\nHello\r\nGoodbye\r\n");
 		Assertions.assertNotNull(result);
 		List<Diagnostic> errors = result.eResource().getErrors();
 		Assertions.assertTrue(errors.isEmpty(), "Unexpected errors: " + IterableExtensions.join(errors, ", "));

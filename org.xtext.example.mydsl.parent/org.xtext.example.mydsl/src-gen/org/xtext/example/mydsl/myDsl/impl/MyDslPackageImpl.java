@@ -16,7 +16,9 @@ import org.xtext.example.mydsl.myDsl.Asterisk;
 import org.xtext.example.mydsl.myDsl.Background;
 import org.xtext.example.mydsl.myDsl.But;
 import org.xtext.example.mydsl.myDsl.Cell;
-import org.xtext.example.mydsl.myDsl.Example;
+import org.xtext.example.mydsl.myDsl.DocString;
+import org.xtext.example.mydsl.myDsl.Examples;
+import org.xtext.example.mydsl.myDsl.ExamplesTable;
 import org.xtext.example.mydsl.myDsl.Feature;
 import org.xtext.example.mydsl.myDsl.Given;
 import org.xtext.example.mydsl.myDsl.MyDslFactory;
@@ -26,6 +28,7 @@ import org.xtext.example.mydsl.myDsl.Scenario;
 import org.xtext.example.mydsl.myDsl.ScenarioOutline;
 import org.xtext.example.mydsl.myDsl.Statement;
 import org.xtext.example.mydsl.myDsl.Step;
+import org.xtext.example.mydsl.myDsl.StepTable;
 import org.xtext.example.mydsl.myDsl.Tag;
 import org.xtext.example.mydsl.myDsl.Then;
 import org.xtext.example.mydsl.myDsl.When;
@@ -78,7 +81,21 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass exampleEClass = null;
+  private EClass examplesEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass examplesTableEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass stepTableEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -100,6 +117,13 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   private EClass stepEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass docStringEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -390,9 +414,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EClass getExample()
+  public EClass getExamples()
   {
-    return exampleEClass;
+    return examplesEClass;
   }
 
   /**
@@ -401,9 +425,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getExample_Tags()
+  public EReference getExamples_Tags()
   {
-    return (EReference)exampleEClass.getEStructuralFeatures().get(0);
+    return (EReference)examplesEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -412,9 +436,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EAttribute getExample_Name()
+  public EAttribute getExamples_Name()
   {
-    return (EAttribute)exampleEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)examplesEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -423,9 +447,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getExample_Statements()
+  public EReference getExamples_Statements()
   {
-    return (EReference)exampleEClass.getEStructuralFeatures().get(2);
+    return (EReference)examplesEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -434,9 +458,53 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getExample_Rows()
+  public EReference getExamples_TheExamplesTable()
   {
-    return (EReference)exampleEClass.getEStructuralFeatures().get(3);
+    return (EReference)examplesEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getExamplesTable()
+  {
+    return examplesTableEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getExamplesTable_Rows()
+  {
+    return (EReference)examplesTableEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getStepTable()
+  {
+    return stepTableEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getStepTable_Rows()
+  {
+    return (EReference)stepTableEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -522,9 +590,42 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   @Override
-  public EReference getStep_Rows()
+  public EReference getStep_TheStepTable()
   {
     return (EReference)stepEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getStep_TheDocString()
+  {
+    return (EReference)stepEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getDocString()
+  {
+    return docStringEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getDocString_Statements()
+  {
+    return (EReference)docStringEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -688,11 +789,17 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     createEReference(scenarioOutlineEClass, SCENARIO_OUTLINE__TAGS);
     createEReference(scenarioOutlineEClass, SCENARIO_OUTLINE__EXAMPLES);
 
-    exampleEClass = createEClass(EXAMPLE);
-    createEReference(exampleEClass, EXAMPLE__TAGS);
-    createEAttribute(exampleEClass, EXAMPLE__NAME);
-    createEReference(exampleEClass, EXAMPLE__STATEMENTS);
-    createEReference(exampleEClass, EXAMPLE__ROWS);
+    examplesEClass = createEClass(EXAMPLES);
+    createEReference(examplesEClass, EXAMPLES__TAGS);
+    createEAttribute(examplesEClass, EXAMPLES__NAME);
+    createEReference(examplesEClass, EXAMPLES__STATEMENTS);
+    createEReference(examplesEClass, EXAMPLES__THE_EXAMPLES_TABLE);
+
+    examplesTableEClass = createEClass(EXAMPLES_TABLE);
+    createEReference(examplesTableEClass, EXAMPLES_TABLE__ROWS);
+
+    stepTableEClass = createEClass(STEP_TABLE);
+    createEReference(stepTableEClass, STEP_TABLE__ROWS);
 
     rowEClass = createEClass(ROW);
     createEReference(rowEClass, ROW__CELLS);
@@ -703,7 +810,11 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     stepEClass = createEClass(STEP);
     createEAttribute(stepEClass, STEP__NAME);
-    createEReference(stepEClass, STEP__ROWS);
+    createEReference(stepEClass, STEP__THE_STEP_TABLE);
+    createEReference(stepEClass, STEP__THE_DOC_STRING);
+
+    docStringEClass = createEClass(DOC_STRING);
+    createEReference(docStringEClass, DOC_STRING__STATEMENTS);
 
     givenEClass = createEClass(GIVEN);
 
@@ -782,13 +893,19 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     initEClass(scenarioOutlineEClass, ScenarioOutline.class, "ScenarioOutline", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getScenarioOutline_Tags(), this.getTag(), null, "tags", null, 0, -1, ScenarioOutline.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getScenarioOutline_Examples(), this.getExample(), null, "examples", null, 0, -1, ScenarioOutline.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getScenarioOutline_Examples(), this.getExamples(), null, "examples", null, 0, -1, ScenarioOutline.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(exampleEClass, Example.class, "Example", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getExample_Tags(), this.getTag(), null, "tags", null, 0, -1, Example.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getExample_Name(), ecorePackage.getEString(), "name", null, 0, 1, Example.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getExample_Statements(), this.getStatement(), null, "statements", null, 0, -1, Example.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getExample_Rows(), this.getRow(), null, "rows", null, 0, -1, Example.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(examplesEClass, Examples.class, "Examples", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getExamples_Tags(), this.getTag(), null, "tags", null, 0, -1, Examples.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getExamples_Name(), ecorePackage.getEString(), "name", null, 0, 1, Examples.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getExamples_Statements(), this.getStatement(), null, "statements", null, 0, -1, Examples.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getExamples_TheExamplesTable(), this.getExamplesTable(), null, "theExamplesTable", null, 0, 1, Examples.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(examplesTableEClass, ExamplesTable.class, "ExamplesTable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getExamplesTable_Rows(), this.getRow(), null, "rows", null, 0, -1, ExamplesTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(stepTableEClass, StepTable.class, "StepTable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getStepTable_Rows(), this.getRow(), null, "rows", null, 0, -1, StepTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(rowEClass, Row.class, "Row", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getRow_Cells(), this.getCell(), null, "cells", null, 0, -1, Row.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -799,7 +916,11 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     initEClass(stepEClass, Step.class, "Step", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStep_Name(), ecorePackage.getEString(), "name", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStep_Rows(), this.getRow(), null, "rows", null, 0, -1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStep_TheStepTable(), this.getStepTable(), null, "theStepTable", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStep_TheDocString(), this.getDocString(), null, "theDocString", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(docStringEClass, DocString.class, "DocString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getDocString_Statements(), this.getStatement(), null, "statements", null, 0, -1, DocString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(givenEClass, Given.class, "Given", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

@@ -111,10 +111,24 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.EXAMPLE:
+      case MyDslPackage.EXAMPLES:
       {
-        Example example = (Example)theEObject;
-        T result = caseExample(example);
+        Examples examples = (Examples)theEObject;
+        T result = caseExamples(examples);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.EXAMPLES_TABLE:
+      {
+        ExamplesTable examplesTable = (ExamplesTable)theEObject;
+        T result = caseExamplesTable(examplesTable);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.STEP_TABLE:
+      {
+        StepTable stepTable = (StepTable)theEObject;
+        T result = caseStepTable(stepTable);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -136,6 +150,13 @@ public class MyDslSwitch<T> extends Switch<T>
       {
         Step step = (Step)theEObject;
         T result = caseStep(step);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.DOC_STRING:
+      {
+        DocString docString = (DocString)theEObject;
+        T result = caseDocString(docString);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -286,17 +307,49 @@ public class MyDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Example</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Examples</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Example</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Examples</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseExample(Example object)
+  public T caseExamples(Examples object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Examples Table</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Examples Table</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseExamplesTable(ExamplesTable object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Step Table</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Step Table</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseStepTable(StepTable object)
   {
     return null;
   }
@@ -345,6 +398,22 @@ public class MyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseStep(Step object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Doc String</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Doc String</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDocString(DocString object)
   {
     return null;
   }

@@ -27,7 +27,8 @@ public class CellFormatter extends ListFormatter {
 		doc.append(iSR, it -> it.noSpace());
 
 		if (isFirst) {
-			replace(doc, iSR, getIndent() + iSR.getText() + " ");
+			// the first 4 spaces is to align with Given
+			replace(doc, iSR, getIndent() + "    " + iSR.getText() + " ");
 		} else {
 			replace(doc, iSR, " " + iSR.getText() + " ");
 		}

@@ -31,48 +31,55 @@ ScenarioOutline:
 	'Scenario Outline:' name=Phrase EOL
 	statements+=Statement*
 	steps+=Step*
-	examples+=Example+;
+	examples+=Examples+;
 
-Example:
+Examples:
 	(tags+=Tag+ EOL)?
 	'Examples:' name=Phrase EOL
 	statements+=Statement*
+	theExamplesTable=ExamplesTable;
+
+ExamplesTable:
 	rows+=Row+;
 
+StepTable:
+	rows+=Row+;
+	
 Row:
 	cells+=Cell+ '|' EOL;
 
 Cell:
 	cell='|' name=Phrase;
 
-// TODO once I can figure out how to identify which keyword is used in a regex alternatives list
-// then I'll combine all the GWTAB* keywords into the Step one 
 Step:
 	Given | When | Then | And | But | Asterisk;
 
+DocString:
+	'"""' EOL statements+=Statement+ '"""' EOL;
+
 Given:
-	'Given' name=Phrase EOL?
-	rows+=Row*;
+	'Given' name=Phrase EOL
+	(theStepTable=StepTable | theDocString=DocString)?;
 
 When:
-	'When' name=Phrase EOL?
-	rows+=Row*;
+	'When' name=Phrase EOL
+	(theStepTable=StepTable | theDocString=DocString)?;
 
 Then:
-	'Then' name=Phrase EOL?
-	rows+=Row*;
+	'Then' name=Phrase EOL
+	(theStepTable=StepTable | theDocString=DocString)?;
 
 And:
-	'And' name=Phrase EOL?
-	rows+=Row*;
+	'And' name=Phrase EOL
+	(theStepTable=StepTable | theDocString=DocString)?;
 
 But:
-	'But' name=Phrase EOL?
-	rows+=Row*;
+	'But' name=Phrase EOL
+	(theStepTable=StepTable | theDocString=DocString)?;
 
 Asterisk:
-	'*' name=Phrase EOL?
-	rows+=Row*;
+	'*' name=Phrase EOL
+	(theStepTable=StepTable | theDocString=DocString)?;
 
 Statement:
 	name=Phrase EOL;
@@ -84,7 +91,7 @@ Tag:
 	'@' name=ID;
 
 terminal ID:
-	'^'? ('a'..'z' | 'A'..'Z' | '_' | '.') ('a'..'z' | 'A'..'Z' | '_' | '.' | '0'..'9')*;
+	'^'? ('a'..'z' | 'A'..'Z' | '_' | '.' | '0'..'9')*;
 
 terminal WS:
 	(' ' | '\t')+;
