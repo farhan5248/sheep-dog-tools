@@ -1,5 +1,7 @@
 package org.xtext.example.mydsl.formatting2;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 
@@ -33,5 +35,17 @@ public class Formatter {
 	// replace multiple \r\n with just 2
 	public static void formatEOL2RuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
 		replace(doc, iSR, "\r\n\r\n");
+	}
+
+	@SuppressWarnings("rawtypes")
+	protected boolean isLastElement(EObject o, EList l) {
+		int lastIndex = l.size() - 1;
+		return o.equals(l.get(lastIndex));
+	}
+
+	@SuppressWarnings("rawtypes")
+	protected boolean isFirstElement(EObject o, EList l) {
+		int firstIndex = 0;
+		return o.equals(l.get(firstIndex));
 	}
 }

@@ -16,7 +16,6 @@ import org.xtext.example.mydsl.myDsl.Asterisk;
 import org.xtext.example.mydsl.myDsl.Background;
 import org.xtext.example.mydsl.myDsl.But;
 import org.xtext.example.mydsl.myDsl.Cell;
-import org.xtext.example.mydsl.myDsl.DocString;
 import org.xtext.example.mydsl.myDsl.Examples;
 import org.xtext.example.mydsl.myDsl.ExamplesTable;
 import org.xtext.example.mydsl.myDsl.Feature;
@@ -35,15 +34,12 @@ import org.xtext.example.mydsl.services.MyDslGrammarAccess.AndElements;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.AsteriskElements;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.BackgroundElements;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.ButElements;
-import org.xtext.example.mydsl.services.MyDslGrammarAccess.CellElements;
-import org.xtext.example.mydsl.services.MyDslGrammarAccess.DocStringElements;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.ExamplesElements;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.FeatureElements;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.GivenElements;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.RowElements;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.ScenarioElements;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.ScenarioOutlineElements;
-import org.xtext.example.mydsl.services.MyDslGrammarAccess.StatementElements;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.TagElements;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.ThenElements;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.WhenElements;
@@ -54,6 +50,13 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 
 	@Inject
 	private MyDslGrammarAccess ga;
+
+	protected void format(Tag t, IFormattableDocument doc) {
+	
+		TagElements a = ga.getTagAccess();
+		TagFormatter.formatFeatureKeyword(getRegion(t, a.getCommercialAtKeyword_0()), doc);
+		TagFormatter.formatNameRuleCall(getRegion(t, a.getNameIDTerminalRuleCall_1_0()), doc);
+	}
 
 	protected void format(Feature m, IFormattableDocument doc) {
 
@@ -77,40 +80,18 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 		FeatureFormatter.formatEOL2RuleCall(getRegion(m, a.getEOLTerminalRuleCall_3()), doc);
 		for (Statement s : m.getStatements()) {
 
-			StatementFormatter.isLast(isLastElement(s, m.getStatements()));
-			StatementFormatter.setIndent(2);
-			doc.format(s);
+			StatementFormatter formatter = new StatementFormatter(s);
+			formatter.isLast(isLastElement(s, m.getStatements()));
+			formatter.setIndent(2);
+			formatter.isLastEOLDouble(true);
+			formatter.format(doc, ga, this);
 		}
+
 		for (AbstractScenario s : m.getAbstractScenarios()) {
 
 			AbstractScenarioFormatter.setIndent(2);
 			doc.format(s);
 		}
-	}
-
-	protected void format(Tag t, IFormattableDocument doc) {
-
-		TagElements a = ga.getTagAccess();
-		TagFormatter.formatFeatureKeyword(getRegion(t, a.getCommercialAtKeyword_0()), doc);
-		TagFormatter.formatNameRuleCall(getRegion(t, a.getNameIDTerminalRuleCall_1_0()), doc);
-	}
-
-	// These are examples on how to access something with += loop through the
-	// elements and then get the name. The approach is the following, loop
-	// through the elements. Then invoke a formatter on the rule call like for name
-	// above. The 3 other approaches, feature, keyword and assignment throw
-	// exceptions in the regionFor method
-	// A note on the regionFor method. It works for statement works but not for
-	// name. Like you can't do model.getName() and then pass that to regionFor. The
-	// reason being that name has no attributes.
-	// This method, like the one for Model is invoked by doc.format like on line 74.
-	// What happens is that the doc.format method uses the reflection API to find
-	// this method
-	protected void format(Statement s, IFormattableDocument doc) {
-
-		StatementElements a = ga.getStatementAccess();
-		StatementFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_0_0()), doc);
-		StatementFormatter.formatEOL12RuleCall(getRegion(s, a.getEOLTerminalRuleCall_1()), doc);
 	}
 
 	protected void format(Background b, IFormattableDocument doc) {
@@ -121,11 +102,13 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 		BackgroundFormatter.formatEOL2RuleCall(getRegion(b, a.getEOLTerminalRuleCall_2()), doc);
 		for (Statement s : b.getStatements()) {
 
-			StatementFormatter.isLast(isLastElement(s, b.getStatements()));
-			StatementFormatter.setIndent(4);
-			StatementFormatter.isLastEOLDouble(true);
-			doc.format(s);
+			StatementFormatter formatter = new StatementFormatter(s);
+			formatter.isLast(isLastElement(s, b.getStatements()));
+			formatter.setIndent(4);
+			formatter.isLastEOLDouble(true);
+			formatter.format(doc, ga, this);
 		}
+
 		for (Step s : b.getSteps()) {
 
 			StepFormatter.isLast(isLastElement(s, b.getSteps()));
@@ -153,11 +136,13 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 		ScenarioFormatter.formatEOL2RuleCall(getRegion(b, a.getEOLTerminalRuleCall_3()), doc);
 		for (Statement s : b.getStatements()) {
 
-			StatementFormatter.isLast(isLastElement(s, b.getStatements()));
-			StatementFormatter.setIndent(4);
-			StatementFormatter.isLastEOLDouble(true);
-			doc.format(s);
+			StatementFormatter formatter = new StatementFormatter(s);
+			formatter.isLast(isLastElement(s, b.getStatements()));
+			formatter.setIndent(4);
+			formatter.isLastEOLDouble(true);
+			formatter.format(doc, ga, this);
 		}
+
 		for (Step s : b.getSteps()) {
 
 			StepFormatter.isLast(isLastElement(s, b.getSteps()));
@@ -185,11 +170,13 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 		ScenarioOutlineFormatter.formatEOL2RuleCall(getRegion(b, a.getEOLTerminalRuleCall_3()), doc);
 		for (Statement s : b.getStatements()) {
 
-			StatementFormatter.isLast(isLastElement(s, b.getStatements()));
-			StatementFormatter.setIndent(4);
-			StatementFormatter.isLastEOLDouble(true);
-			doc.format(s);
+			StatementFormatter formatter = new StatementFormatter(s);
+			formatter.isLast(isLastElement(s, b.getStatements()));
+			formatter.setIndent(4);
+			formatter.isLastEOLDouble(true);
+			formatter.format(doc, ga, this);
 		}
+
 		for (Step s : b.getSteps()) {
 
 			StepFormatter.isLast(isLastElement(s, b.getSteps()));
@@ -222,84 +209,28 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 		ExampleFormatter.formatEOL2RuleCall(getRegion(e, a.getEOLTerminalRuleCall_3()), doc);
 		for (Statement s : e.getStatements()) {
 
-			StatementFormatter.isLast(isLastElement(s, e.getStatements()));
-			StatementFormatter.setIndent(6);
-			StatementFormatter.isLastEOLDouble(true);
-			doc.format(s);
+			StatementFormatter formatter = new StatementFormatter(s);
+			formatter.isLast(isLastElement(s, e.getStatements()));
+			formatter.setIndent(6);
+			formatter.isLastEOLDouble(true);
+			formatter.format(doc, ga, this);
 		}
-		ExamplesTable theExamplesTable = e.getTheExamplesTable();
-		if (theExamplesTable != null) {
-			doc.format(theExamplesTable);
-		}
+		ExamplesTableFormatter formatter = new ExamplesTableFormatter(e.getTheExamplesTable());
+		formatter.format(doc, ga, this);
 	}
 
-	protected void format(ExamplesTable e, IFormattableDocument doc) {
-		for (Row r : e.getRows()) {
-			RowFormatter.isLast(isLastElement(r, e.getRows()));
-			RowFormatter.isFirst(isFirstElement(r, e.getRows()));
-			RowFormatter.isLastEOLDouble(true);
-			RowFormatter.setIndent(6);
-			doc.format(r);
-		}
-	}
-
-	protected void format(StepTable t, IFormattableDocument doc) {
-		for (Row r : t.getRows()) {
-			RowFormatter.isLast(isLastElement(r, t.getRows()));
-			RowFormatter.isFirst(isFirstElement(r, t.getRows()));
-			RowFormatter.isLastEOLDouble(StepFormatter.isLast);
-			RowFormatter.setIndent(6);
-			doc.format(r);
-		}
-	}
-
-	protected void format(Row r, IFormattableDocument doc) {
-
-		RowElements a = ga.getRowAccess();
-		for (Cell c : r.getCells()) {
-			CellFormatter.isLast(isLastElement(c, r.getCells()));
-			CellFormatter.isFirst(isFirstElement(c, r.getCells()));
-			doc.format(c);
-		}
-		RowFormatter.formatVerticalLineKeyword(getRegion(r, a.getVerticalLineKeyword_1()), doc);
-		RowFormatter.formatEOL12RuleCall(getRegion(r, a.getEOLTerminalRuleCall_2()), doc);
-	}
-
-	protected void format(Cell r, IFormattableDocument doc) {
-		CellElements a = ga.getCellAccess();
-		CellFormatter.formatVerticalLineKeyword(getRegion(r, a.getCellVerticalLineKeyword_0_0()), doc);
-		CellFormatter.formatNameRuleCall(getRegion(r, a.getNamePhraseParserRuleCall_1_0()), doc);
-	}
-
-	protected void format(DocString d, IFormattableDocument doc) {
-		DocStringElements a = ga.getDocStringAccess();
-		DocStringFormatter.formatEOL1RuleCall(getRegion(d, a.getEOLTerminalRuleCall_1()), doc);
-		DocStringFormatter.formatEOL12RuleCall(getRegion(d, a.getEOLTerminalRuleCall_4()), doc);
-		for (Statement s : d.getStatements()) {
-			StatementFormatter.isLast(isLastElement(s, d.getStatements()));
-			// TODO formatting these statements means the contents of the doc get modified
-			// The formatter should make sure there is a minimum of 10 perhaps? add a flag
-			StatementFormatter.setIndent(10, true);
-			StatementFormatter.isLastEOLDouble(false);
-			doc.format(s);
-		}
-	}
-
-	protected void format(Given g, IFormattableDocument doc) {
+	protected void format(Given s, IFormattableDocument doc) {
 		GivenElements a = ga.getGivenAccess();
-		GivenFormatter.formatGivenKeyword(getRegion(g, a.getGivenKeyword_0()), doc);
-		GivenFormatter.formatNameRuleCall(getRegion(g, a.getNamePhraseParserRuleCall_1_0()), doc);
-		GivenFormatter.formatEOL12RuleCall(getRegion(g, a.getEOLTerminalRuleCall_2()), doc);
-		StepTable theTable = g.getTheStepTable();
-		if (theTable != null) {
-			doc.format(theTable);
-		}
-		DocString theDocString = g.getTheDocString();
-		if (theDocString != null) {
-			DocStringFormatter.isLastEOLDouble(StepFormatter.isLast);
-			DocStringFormatter.setIndent(6);
-			doc.format(theDocString);
-		}
+		GivenFormatter.formatGivenKeyword(getRegion(s, a.getGivenKeyword_0()), doc);
+		GivenFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_1_0()), doc);
+		GivenFormatter.formatEOL12RuleCall(getRegion(s, a.getEOLTerminalRuleCall_2()), doc);
+		StepTableFormatter formatter = new StepTableFormatter(s.getTheStepTable());
+		formatter.format(doc, ga, this);
+		DocStringFormatter formatter2 = new DocStringFormatter(s.getTheDocString());
+		formatter2.setIndent(6);
+		formatter2.isEOLDouble(StepFormatter.isLast);
+		formatter2.format(doc, ga, this);
+
 	}
 
 	protected void format(When s, IFormattableDocument doc) {
@@ -307,16 +238,12 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 		WhenFormatter.formatWhenKeyword(getRegion(s, a.getWhenKeyword_0()), doc);
 		WhenFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_1_0()), doc);
 		WhenFormatter.formatEOL12RuleCall(getRegion(s, a.getEOLTerminalRuleCall_2()), doc);
-		StepTable theTable = s.getTheStepTable();
-		if (theTable != null) {
-			doc.format(theTable);
-		}
-		DocString theDocString = s.getTheDocString();
-		if (theDocString != null) {
-			DocStringFormatter.isLastEOLDouble(StepFormatter.isLast);
-			DocStringFormatter.setIndent(6);
-			doc.format(theDocString);
-		}
+		StepTableFormatter fStepTable = new StepTableFormatter(s.getTheStepTable());
+		fStepTable.format(doc, ga, this);
+		DocStringFormatter formatter = new DocStringFormatter(s.getTheDocString());
+		formatter.setIndent(6);
+		formatter.isEOLDouble(StepFormatter.isLast);
+		formatter.format(doc, ga, this);
 	}
 
 	protected void format(Then s, IFormattableDocument doc) {
@@ -324,16 +251,12 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 		ThenFormatter.formatThenKeyword(getRegion(s, a.getThenKeyword_0()), doc);
 		ThenFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_1_0()), doc);
 		ThenFormatter.formatEOL12RuleCall(getRegion(s, a.getEOLTerminalRuleCall_2()), doc);
-		StepTable theTable = s.getTheStepTable();
-		if (theTable != null) {
-			doc.format(theTable);
-		}
-		DocString theDocString = s.getTheDocString();
-		if (theDocString != null) {
-			DocStringFormatter.isLastEOLDouble(StepFormatter.isLast);
-			DocStringFormatter.setIndent(6);
-			doc.format(theDocString);
-		}
+		StepTableFormatter fStepTable = new StepTableFormatter(s.getTheStepTable());
+		fStepTable.format(doc, ga, this);
+		DocStringFormatter formatter = new DocStringFormatter(s.getTheDocString());
+		formatter.setIndent(6);
+		formatter.isEOLDouble(StepFormatter.isLast);
+		formatter.format(doc, ga, this);
 	}
 
 	protected void format(And s, IFormattableDocument doc) {
@@ -341,16 +264,12 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 		AndFormatter.formatAndKeyword(getRegion(s, a.getAndKeyword_0()), doc);
 		AndFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_1_0()), doc);
 		AndFormatter.formatEOL12RuleCall(getRegion(s, a.getEOLTerminalRuleCall_2()), doc);
-		StepTable theTable = s.getTheStepTable();
-		if (theTable != null) {
-			doc.format(theTable);
-		}
-		DocString theDocString = s.getTheDocString();
-		if (theDocString != null) {
-			DocStringFormatter.isLastEOLDouble(StepFormatter.isLast);
-			DocStringFormatter.setIndent(6);
-			doc.format(theDocString);
-		}
+		StepTableFormatter fStepTable = new StepTableFormatter(s.getTheStepTable());
+		fStepTable.format(doc, ga, this);
+		DocStringFormatter formatter = new DocStringFormatter(s.getTheDocString());
+		formatter.setIndent(6);
+		formatter.isEOLDouble(StepFormatter.isLast);
+		formatter.format(doc, ga, this);
 	}
 
 	protected void format(But s, IFormattableDocument doc) {
@@ -358,16 +277,12 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 		ButFormatter.formatButKeyword(getRegion(s, a.getButKeyword_0()), doc);
 		ButFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_1_0()), doc);
 		ButFormatter.formatEOL12RuleCall(getRegion(s, a.getEOLTerminalRuleCall_2()), doc);
-		StepTable theTable = s.getTheStepTable();
-		if (theTable != null) {
-			doc.format(theTable);
-		}
-		DocString theDocString = s.getTheDocString();
-		if (theDocString != null) {
-			DocStringFormatter.isLastEOLDouble(StepFormatter.isLast);
-			DocStringFormatter.setIndent(6);
-			doc.format(theDocString);
-		}
+		StepTableFormatter fStepTable = new StepTableFormatter(s.getTheStepTable());
+		fStepTable.format(doc, ga, this);
+		DocStringFormatter formatter = new DocStringFormatter(s.getTheDocString());
+		formatter.setIndent(6);
+		formatter.isEOLDouble(StepFormatter.isLast);
+		formatter.format(doc, ga, this);
 	}
 
 	protected void format(Asterisk s, IFormattableDocument doc) {
@@ -376,16 +291,12 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 		AsteriskFormatter.formatAsteriskKeyword(getRegion(s, a.getAsteriskKeyword_0()), doc);
 		AsteriskFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_1_0()), doc);
 		AsteriskFormatter.formatEOL12RuleCall(getRegion(s, a.getEOLTerminalRuleCall_2()), doc);
-		StepTable theTable = s.getTheStepTable();
-		if (theTable != null) {
-			doc.format(theTable);
-		}
-		DocString theDocString = s.getTheDocString();
-		if (theDocString != null) {
-			DocStringFormatter.isLastEOLDouble(StepFormatter.isLast);
-			DocStringFormatter.setIndent(6);
-			doc.format(theDocString);
-		}
+		StepTableFormatter fStepTable = new StepTableFormatter(s.getTheStepTable());
+		fStepTable.format(doc, ga, this);
+		DocStringFormatter formatter = new DocStringFormatter(s.getTheDocString());
+		formatter.setIndent(6);
+		formatter.isEOLDouble(StepFormatter.isLast);
+		formatter.format(doc, ga, this);
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -400,7 +311,7 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 		return o.equals(l.get(firstIndex));
 	}
 
-	private ISemanticRegion getRegion(EObject eo, RuleCall ruleCall) {
+	public ISemanticRegion getRegion(EObject eo, RuleCall ruleCall) {
 		// All 3 approaches below reference the same region, which can be tested by
 		// triggering a ConflictingFormattingException
 		// regionFor(model).feature(Literals.MODEL__NAME);
@@ -410,7 +321,7 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 		return regionFor(eo).ruleCall(ruleCall);
 	}
 
-	private ISemanticRegion getRegion(EObject eo, Keyword keyword) {
+	public ISemanticRegion getRegion(EObject eo, Keyword keyword) {
 		// You can also search for the keyword using keyword("Feature:");
 		return regionFor(eo).keyword(keyword);
 	}

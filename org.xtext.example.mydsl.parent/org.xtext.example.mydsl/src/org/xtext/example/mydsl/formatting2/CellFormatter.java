@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.xtext.example.mydsl.myDsl.Cell;
+import org.xtext.example.mydsl.services.MyDslGrammarAccess;
+import org.xtext.example.mydsl.services.MyDslGrammarAccess.CellElements;
 
 public class CellFormatter extends ListFormatter {
 
@@ -14,15 +17,28 @@ public class CellFormatter extends ListFormatter {
 	protected static boolean isFirst;
 	protected static boolean isLastEOLDouble = true;
 
-	public static void isLast(boolean isLast) {
+	private Cell theCell;
+
+	public CellFormatter(Cell theCell) {
+
+		this.theCell = theCell;
+	}
+
+	public void isLast(boolean isLast) {
 		CellFormatter.isLast = isLast;
 	}
 
-	public static void isFirst(boolean isFirst) {
+	public void isFirst(boolean isFirst) {
 		CellFormatter.isFirst = isFirst;
 	}
 
-	public static void formatVerticalLineKeyword(ISemanticRegion iSR, IFormattableDocument doc) {
+	public void format(IFormattableDocument doc, MyDslGrammarAccess ga, MyDslFormatter df) {
+		CellElements a = ga.getCellAccess();
+		formatVerticalLineKeyword(df.getRegion(theCell, a.getCellVerticalLineKeyword_0_0()), doc);
+		formatPhraseRuleCall(df.getRegion(theCell, a.getNamePhraseParserRuleCall_1_0()), doc);
+	}
+
+	private void formatVerticalLineKeyword(ISemanticRegion iSR, IFormattableDocument doc) {
 		doc.prepend(iSR, it -> it.noSpace());
 		doc.append(iSR, it -> it.noSpace());
 
@@ -34,7 +50,7 @@ public class CellFormatter extends ListFormatter {
 		}
 	}
 
-	public static void formatNameRuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
+	private void formatPhraseRuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
 		if (isFirst) {
 			if (RowFormatter.isFirst) {
 				cells = new ArrayList<ArrayList<ISemanticRegion>>();
@@ -51,7 +67,7 @@ public class CellFormatter extends ListFormatter {
 		}
 	}
 
-	private static void formatAllCells(IFormattableDocument doc) {
+	private void formatAllCells(IFormattableDocument doc) {
 		// go through list of list of iSR. first get the number of columns
 		// TODO this assumes that the table is valid, all rows have same number of cells
 		for (int i = 0; i < cells.get(0).size(); i++) {
