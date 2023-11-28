@@ -43,7 +43,7 @@ public class CellFormatter extends Formatter {
 
 		if (isFirst) {
 			// the first 4 spaces is to align with Given
-			replace(doc, iSR, getIndent() + "    " + iSR.getText() + " ");
+			replace(doc, iSR, getIndent() + iSR.getText() + " ");
 		} else {
 			replace(doc, iSR, " " + iSR.getText() + " ");
 		}

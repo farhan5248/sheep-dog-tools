@@ -61,11 +61,12 @@ public abstract class StepFormatter extends Formatter {
 		formatEOL12RuleCall(df.getRegion(theStep, getEOLRuleCall(a)), doc);
 		if (theStep.getTheStepTable() != null) {
 			StepTableFormatter formatter = new StepTableFormatter(theStep.getTheStepTable());
+			formatter.setIndent(10);
 			formatter.format(doc, ga, df);
 		}
 		if (theStep.getTheDocString() != null) {
 			DocStringFormatter formatter2 = new DocStringFormatter(theStep.getTheDocString());
-			formatter2.setIndent(6);
+			formatter2.setIndent(10);
 			formatter2.isEOLDouble(StepFormatter.isLast);
 			formatter2.format(doc, ga, df);
 		}

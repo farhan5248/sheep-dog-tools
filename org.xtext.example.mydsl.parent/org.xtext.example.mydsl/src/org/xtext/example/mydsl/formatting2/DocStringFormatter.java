@@ -16,9 +16,21 @@ public class DocStringFormatter extends Formatter {
 		this.theDocString = theDocString;
 	}
 
+	public void isEOLDouble(boolean isEOLDouble) {
+		DocStringFormatter.isEOLDouble = isEOLDouble;
+	}
+
+	public void formatKeyword(ISemanticRegion iSR, IFormattableDocument doc) {
+		doc.prepend(iSR, it -> it.noSpace());
+		doc.append(iSR, it -> it.noSpace());
+		replace(doc, iSR, getIndent() + iSR.getText());
+	}
+
 	public void format(IFormattableDocument doc, MyDslGrammarAccess ga, MyDslFormatter df) {
 		DocStringElements a = ga.getDocStringAccess();
+		formatKeyword(df.getRegion(theDocString, a.getQuotationMarkQuotationMarkQuotationMarkKeyword_0()), doc);
 		formatEOL1RuleCall(df.getRegion(theDocString, a.getEOLTerminalRuleCall_1()), doc);
+		formatKeyword(df.getRegion(theDocString, a.getQuotationMarkQuotationMarkQuotationMarkKeyword_3()), doc);
 		formatEOL12RuleCall(df.getRegion(theDocString, a.getEOLTerminalRuleCall_4()), doc);
 		for (Statement s : theDocString.getStatements()) {
 			StatementFormatter formatter = new StatementFormatter(s);
@@ -36,10 +48,6 @@ public class DocStringFormatter extends Formatter {
 		} else {
 			replace(doc, iSR, "\r\n");
 		}
-	}
-
-	public void isEOLDouble(boolean isEOLDouble) {
-		DocStringFormatter.isEOLDouble = isEOLDouble;
 	}
 
 }

@@ -23,7 +23,7 @@ public class StepTableFormatter extends Formatter {
 			formatter.isLast(isLastElement(r, theStepTable.getRows()));
 			formatter.isFirst(isFirstElement(r, theStepTable.getRows()));
 			formatter.isLastEOLDouble(StepFormatter.isLast);
-			formatter.setIndent(6);
+			formatter.setIndent(10);
 			formatter.format(doc, ga, df);
 		}
 	}

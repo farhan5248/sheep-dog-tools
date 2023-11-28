@@ -35,6 +35,7 @@ public class RowFormatter extends Formatter {
 		RowElements a = ga.getRowAccess();
 		for (Cell c : theRow.getCells()) {
 			CellFormatter formatter = new CellFormatter(c);
+			formatter.setIndent(10);
 			formatter.isLast(isLastElement(c, theRow.getCells()));
 			formatter.isFirst(isFirstElement(c, theRow.getCells()));
 			formatter.format(doc, ga, df);
