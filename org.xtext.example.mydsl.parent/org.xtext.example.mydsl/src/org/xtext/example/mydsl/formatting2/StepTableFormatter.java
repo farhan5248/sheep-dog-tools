@@ -18,15 +18,13 @@ public class StepTableFormatter extends Formatter {
 	}
 
 	public void format(IFormattableDocument doc, MyDslGrammarAccess ga, MyDslFormatter df) {
-		if (theStepTable != null) {
-			for (Row r : theStepTable.getRows()) {
-				RowFormatter formatter = new RowFormatter(r);
-				formatter.isLast(isLastElement(r, theStepTable.getRows()));
-				formatter.isFirst(isFirstElement(r, theStepTable.getRows()));
-				formatter.isLastEOLDouble(StepFormatter.isLast);
-				formatter.setIndent(6);
-				formatter.format(doc, ga, df);
-			}
+		for (Row r : theStepTable.getRows()) {
+			RowFormatter formatter = new RowFormatter(r);
+			formatter.isLast(isLastElement(r, theStepTable.getRows()));
+			formatter.isFirst(isFirstElement(r, theStepTable.getRows()));
+			formatter.isLastEOLDouble(StepFormatter.isLast);
+			formatter.setIndent(6);
+			formatter.format(doc, ga, df);
 		}
 	}
 

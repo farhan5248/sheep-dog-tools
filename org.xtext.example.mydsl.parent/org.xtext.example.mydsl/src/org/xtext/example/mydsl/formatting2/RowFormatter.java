@@ -7,7 +7,7 @@ import org.xtext.example.mydsl.myDsl.Row;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.RowElements;
 
-public class RowFormatter extends ListFormatter {
+public class RowFormatter extends Formatter {
 
 	protected static boolean isLast;
 	protected static boolean isFirst;

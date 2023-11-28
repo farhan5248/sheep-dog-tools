@@ -8,7 +8,7 @@ import org.xtext.example.mydsl.myDsl.Cell;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.CellElements;
 
-public class CellFormatter extends ListFormatter {
+public class CellFormatter extends Formatter {
 
 	private static ArrayList<ArrayList<ISemanticRegion>> cells;
 
@@ -20,7 +20,6 @@ public class CellFormatter extends ListFormatter {
 	private Cell theCell;
 
 	public CellFormatter(Cell theCell) {
-
 		this.theCell = theCell;
 	}
 
@@ -34,11 +33,11 @@ public class CellFormatter extends ListFormatter {
 
 	public void format(IFormattableDocument doc, MyDslGrammarAccess ga, MyDslFormatter df) {
 		CellElements a = ga.getCellAccess();
-		formatVerticalLineKeyword(df.getRegion(theCell, a.getCellVerticalLineKeyword_0_0()), doc);
+		formatKeyword(df.getRegion(theCell, a.getCellVerticalLineKeyword_0_0()), doc);
 		formatPhraseRuleCall(df.getRegion(theCell, a.getNamePhraseParserRuleCall_1_0()), doc);
 	}
 
-	private void formatVerticalLineKeyword(ISemanticRegion iSR, IFormattableDocument doc) {
+	private void formatKeyword(ISemanticRegion iSR, IFormattableDocument doc) {
 		doc.prepend(iSR, it -> it.noSpace());
 		doc.append(iSR, it -> it.noSpace());
 

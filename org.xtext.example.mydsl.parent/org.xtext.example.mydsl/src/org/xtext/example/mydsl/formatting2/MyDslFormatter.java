@@ -3,47 +3,14 @@
  */
 package org.xtext.example.mydsl.formatting2;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.AbstractJavaFormatter;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.xtext.example.mydsl.myDsl.AbstractScenario;
-import org.xtext.example.mydsl.myDsl.And;
-import org.xtext.example.mydsl.myDsl.Asterisk;
-import org.xtext.example.mydsl.myDsl.Background;
-import org.xtext.example.mydsl.myDsl.But;
-import org.xtext.example.mydsl.myDsl.Cell;
-import org.xtext.example.mydsl.myDsl.Examples;
-import org.xtext.example.mydsl.myDsl.ExamplesTable;
 import org.xtext.example.mydsl.myDsl.Feature;
-import org.xtext.example.mydsl.myDsl.Given;
-import org.xtext.example.mydsl.myDsl.Row;
-import org.xtext.example.mydsl.myDsl.Scenario;
-import org.xtext.example.mydsl.myDsl.ScenarioOutline;
-import org.xtext.example.mydsl.myDsl.Statement;
-import org.xtext.example.mydsl.myDsl.Step;
-import org.xtext.example.mydsl.myDsl.StepTable;
-import org.xtext.example.mydsl.myDsl.Tag;
-import org.xtext.example.mydsl.myDsl.Then;
-import org.xtext.example.mydsl.myDsl.When;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess;
-import org.xtext.example.mydsl.services.MyDslGrammarAccess.AndElements;
-import org.xtext.example.mydsl.services.MyDslGrammarAccess.AsteriskElements;
-import org.xtext.example.mydsl.services.MyDslGrammarAccess.BackgroundElements;
-import org.xtext.example.mydsl.services.MyDslGrammarAccess.ButElements;
-import org.xtext.example.mydsl.services.MyDslGrammarAccess.ExamplesElements;
-import org.xtext.example.mydsl.services.MyDslGrammarAccess.FeatureElements;
-import org.xtext.example.mydsl.services.MyDslGrammarAccess.GivenElements;
-import org.xtext.example.mydsl.services.MyDslGrammarAccess.RowElements;
-import org.xtext.example.mydsl.services.MyDslGrammarAccess.ScenarioElements;
-import org.xtext.example.mydsl.services.MyDslGrammarAccess.ScenarioOutlineElements;
-import org.xtext.example.mydsl.services.MyDslGrammarAccess.TagElements;
-import org.xtext.example.mydsl.services.MyDslGrammarAccess.ThenElements;
-import org.xtext.example.mydsl.services.MyDslGrammarAccess.WhenElements;
-
 import com.google.inject.Inject;
 
 public class MyDslFormatter extends AbstractJavaFormatter {
@@ -51,278 +18,26 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 	@Inject
 	private MyDslGrammarAccess ga;
 
-	protected void format(Tag t, IFormattableDocument doc) {
-	
-		TagElements a = ga.getTagAccess();
-		TagFormatter.formatFeatureKeyword(getRegion(t, a.getCommercialAtKeyword_0()), doc);
-		TagFormatter.formatNameRuleCall(getRegion(t, a.getNameIDTerminalRuleCall_1_0()), doc);
-	}
+	protected void format(Feature theFeature, IFormattableDocument doc) {
 
-	protected void format(Feature m, IFormattableDocument doc) {
-
-		FeatureElements a = ga.getFeatureAccess();
-
-		if (!m.getTags().isEmpty()) {
-			for (Tag t : m.getTags()) {
-				TagFormatter.isLast(isLastElement(t, m.getTags()));
-				doc.format(t);
-			}
-			FeatureFormatter.formatEOL1RuleCall(getRegion(m, a.getEOLTerminalRuleCall_0_1()), doc);
-		}
-		FeatureFormatter.formatFeatureKeyword(getRegion(m, a.getFeatureKeyword_1()), doc);
-		// There's two types of assignments, = and += where the latter is a list
-		// This is an example of how to access an assignment of just one item.
-		// An assignment has 2 parts, the feature (name) and the ruleCall (Phrase)
-		// Together they make up an assignment.
-		// A ruleCall is anything that's in the xtext file with a :
-		// So a ruleCall can be a structure like thing with attributes or a terminal
-		FeatureFormatter.formatNameRuleCall(getRegion(m, a.getNamePhraseParserRuleCall_2_0()), doc);
-		FeatureFormatter.formatEOL2RuleCall(getRegion(m, a.getEOLTerminalRuleCall_3()), doc);
-		for (Statement s : m.getStatements()) {
-
-			StatementFormatter formatter = new StatementFormatter(s);
-			formatter.isLast(isLastElement(s, m.getStatements()));
-			formatter.setIndent(2);
-			formatter.isLastEOLDouble(true);
-			formatter.format(doc, ga, this);
-		}
-
-		for (AbstractScenario s : m.getAbstractScenarios()) {
-
-			AbstractScenarioFormatter.setIndent(2);
-			doc.format(s);
-		}
-	}
-
-	protected void format(Background b, IFormattableDocument doc) {
-
-		BackgroundElements a = ga.getBackgroundAccess();
-		BackgroundFormatter.formatBackgroundKeyword(getRegion(b, a.getBackgroundKeyword_0()), doc);
-		BackgroundFormatter.formatNameRuleCall(getRegion(b, a.getNamePhraseParserRuleCall_1_0()), doc);
-		BackgroundFormatter.formatEOL2RuleCall(getRegion(b, a.getEOLTerminalRuleCall_2()), doc);
-		for (Statement s : b.getStatements()) {
-
-			StatementFormatter formatter = new StatementFormatter(s);
-			formatter.isLast(isLastElement(s, b.getStatements()));
-			formatter.setIndent(4);
-			formatter.isLastEOLDouble(true);
-			formatter.format(doc, ga, this);
-		}
-
-		for (Step s : b.getSteps()) {
-
-			StepFormatter.isLast(isLastElement(s, b.getSteps()));
-			StepFormatter.setIndent(4);
-			// If the list of rows is empty, then use double EOL
-			StepFormatter.isLastEOLDouble(s.getTheStepTable() == null && s.getTheDocString() == null);
-			doc.format(s);
-		}
-	}
-
-	protected void format(Scenario b, IFormattableDocument doc) {
-
-		ScenarioElements a = ga.getScenarioAccess();
-
-		if (!b.getTags().isEmpty()) {
-			for (Tag t : b.getTags()) {
-				TagFormatter.isLast(isLastElement(t, b.getTags()));
-				TagFormatter.isFirst(isFirstElement(t, b.getTags()));
-				doc.format(t);
-			}
-			ScenarioFormatter.formatEOL1RuleCall(getRegion(b, a.getEOLTerminalRuleCall_0_1()), doc);
-		}
-		ScenarioFormatter.formatScenarioKeyword(getRegion(b, a.getScenarioKeyword_1()), doc);
-		ScenarioFormatter.formatNameRuleCall(getRegion(b, a.getNamePhraseParserRuleCall_2_0()), doc);
-		ScenarioFormatter.formatEOL2RuleCall(getRegion(b, a.getEOLTerminalRuleCall_3()), doc);
-		for (Statement s : b.getStatements()) {
-
-			StatementFormatter formatter = new StatementFormatter(s);
-			formatter.isLast(isLastElement(s, b.getStatements()));
-			formatter.setIndent(4);
-			formatter.isLastEOLDouble(true);
-			formatter.format(doc, ga, this);
-		}
-
-		for (Step s : b.getSteps()) {
-
-			StepFormatter.isLast(isLastElement(s, b.getSteps()));
-			StepFormatter.setIndent(4);
-			// If the list of rows is empty, then use double EOL
-			StepFormatter.isLastEOLDouble(s.getTheStepTable() == null && s.getTheDocString() == null);
-			doc.format(s);
-		}
-	}
-
-	protected void format(ScenarioOutline b, IFormattableDocument doc) {
-
-		ScenarioOutlineElements a = ga.getScenarioOutlineAccess();
-
-		if (!b.getTags().isEmpty()) {
-			for (Tag t : b.getTags()) {
-				TagFormatter.isLast(isLastElement(t, b.getTags()));
-				TagFormatter.isFirst(isFirstElement(t, b.getTags()));
-				doc.format(t);
-			}
-			ScenarioOutlineFormatter.formatEOL1RuleCall(getRegion(b, a.getEOLTerminalRuleCall_0_1()), doc);
-		}
-		ScenarioOutlineFormatter.formatScenarioOutlineKeyword(getRegion(b, a.getScenarioOutlineKeyword_1()), doc);
-		ScenarioOutlineFormatter.formatNameRuleCall(getRegion(b, a.getNamePhraseParserRuleCall_2_0()), doc);
-		ScenarioOutlineFormatter.formatEOL2RuleCall(getRegion(b, a.getEOLTerminalRuleCall_3()), doc);
-		for (Statement s : b.getStatements()) {
-
-			StatementFormatter formatter = new StatementFormatter(s);
-			formatter.isLast(isLastElement(s, b.getStatements()));
-			formatter.setIndent(4);
-			formatter.isLastEOLDouble(true);
-			formatter.format(doc, ga, this);
-		}
-
-		for (Step s : b.getSteps()) {
-
-			StepFormatter.isLast(isLastElement(s, b.getSteps()));
-			StepFormatter.setIndent(4);
-			// If the list of rows is empty, then use double EOL
-			StepFormatter.isLastEOLDouble(s.getTheStepTable() == null && s.getTheDocString() == null);
-			doc.format(s);
-		}
-		for (Examples e : b.getExamples()) {
-
-			ExampleFormatter.setIndent(4);
-			doc.format(e);
-		}
-	}
-
-	protected void format(Examples e, IFormattableDocument doc) {
-
-		ExamplesElements a = ga.getExamplesAccess();
-
-		if (!e.getTags().isEmpty()) {
-			for (Tag t : e.getTags()) {
-				TagFormatter.isLast(isLastElement(t, e.getTags()));
-				TagFormatter.isFirst(isFirstElement(t, e.getTags()));
-				doc.format(t);
-			}
-			ExampleFormatter.formatEOL1RuleCall(getRegion(e, a.getEOLTerminalRuleCall_0_1()), doc);
-		}
-		ExampleFormatter.formatExampleKeyword(getRegion(e, a.getExamplesKeyword_1()), doc);
-		ExampleFormatter.formatNameRuleCall(getRegion(e, a.getNamePhraseParserRuleCall_2_0()), doc);
-		ExampleFormatter.formatEOL2RuleCall(getRegion(e, a.getEOLTerminalRuleCall_3()), doc);
-		for (Statement s : e.getStatements()) {
-
-			StatementFormatter formatter = new StatementFormatter(s);
-			formatter.isLast(isLastElement(s, e.getStatements()));
-			formatter.setIndent(6);
-			formatter.isLastEOLDouble(true);
-			formatter.format(doc, ga, this);
-		}
-		ExamplesTableFormatter formatter = new ExamplesTableFormatter(e.getTheExamplesTable());
+		FeatureFormatter formatter = new FeatureFormatter(theFeature);
 		formatter.format(doc, ga, this);
 	}
 
-	protected void format(Given s, IFormattableDocument doc) {
-		GivenElements a = ga.getGivenAccess();
-		GivenFormatter.formatGivenKeyword(getRegion(s, a.getGivenKeyword_0()), doc);
-		GivenFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_1_0()), doc);
-		GivenFormatter.formatEOL12RuleCall(getRegion(s, a.getEOLTerminalRuleCall_2()), doc);
-		StepTableFormatter formatter = new StepTableFormatter(s.getTheStepTable());
-		formatter.format(doc, ga, this);
-		DocStringFormatter formatter2 = new DocStringFormatter(s.getTheDocString());
-		formatter2.setIndent(6);
-		formatter2.isEOLDouble(StepFormatter.isLast);
-		formatter2.format(doc, ga, this);
-
-	}
-
-	protected void format(When s, IFormattableDocument doc) {
-		WhenElements a = ga.getWhenAccess();
-		WhenFormatter.formatWhenKeyword(getRegion(s, a.getWhenKeyword_0()), doc);
-		WhenFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_1_0()), doc);
-		WhenFormatter.formatEOL12RuleCall(getRegion(s, a.getEOLTerminalRuleCall_2()), doc);
-		StepTableFormatter fStepTable = new StepTableFormatter(s.getTheStepTable());
-		fStepTable.format(doc, ga, this);
-		DocStringFormatter formatter = new DocStringFormatter(s.getTheDocString());
-		formatter.setIndent(6);
-		formatter.isEOLDouble(StepFormatter.isLast);
-		formatter.format(doc, ga, this);
-	}
-
-	protected void format(Then s, IFormattableDocument doc) {
-		ThenElements a = ga.getThenAccess();
-		ThenFormatter.formatThenKeyword(getRegion(s, a.getThenKeyword_0()), doc);
-		ThenFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_1_0()), doc);
-		ThenFormatter.formatEOL12RuleCall(getRegion(s, a.getEOLTerminalRuleCall_2()), doc);
-		StepTableFormatter fStepTable = new StepTableFormatter(s.getTheStepTable());
-		fStepTable.format(doc, ga, this);
-		DocStringFormatter formatter = new DocStringFormatter(s.getTheDocString());
-		formatter.setIndent(6);
-		formatter.isEOLDouble(StepFormatter.isLast);
-		formatter.format(doc, ga, this);
-	}
-
-	protected void format(And s, IFormattableDocument doc) {
-		AndElements a = ga.getAndAccess();
-		AndFormatter.formatAndKeyword(getRegion(s, a.getAndKeyword_0()), doc);
-		AndFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_1_0()), doc);
-		AndFormatter.formatEOL12RuleCall(getRegion(s, a.getEOLTerminalRuleCall_2()), doc);
-		StepTableFormatter fStepTable = new StepTableFormatter(s.getTheStepTable());
-		fStepTable.format(doc, ga, this);
-		DocStringFormatter formatter = new DocStringFormatter(s.getTheDocString());
-		formatter.setIndent(6);
-		formatter.isEOLDouble(StepFormatter.isLast);
-		formatter.format(doc, ga, this);
-	}
-
-	protected void format(But s, IFormattableDocument doc) {
-		ButElements a = ga.getButAccess();
-		ButFormatter.formatButKeyword(getRegion(s, a.getButKeyword_0()), doc);
-		ButFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_1_0()), doc);
-		ButFormatter.formatEOL12RuleCall(getRegion(s, a.getEOLTerminalRuleCall_2()), doc);
-		StepTableFormatter fStepTable = new StepTableFormatter(s.getTheStepTable());
-		fStepTable.format(doc, ga, this);
-		DocStringFormatter formatter = new DocStringFormatter(s.getTheDocString());
-		formatter.setIndent(6);
-		formatter.isEOLDouble(StepFormatter.isLast);
-		formatter.format(doc, ga, this);
-	}
-
-	protected void format(Asterisk s, IFormattableDocument doc) {
-
-		AsteriskElements a = ga.getAsteriskAccess();
-		AsteriskFormatter.formatAsteriskKeyword(getRegion(s, a.getAsteriskKeyword_0()), doc);
-		AsteriskFormatter.formatNameRuleCall(getRegion(s, a.getNamePhraseParserRuleCall_1_0()), doc);
-		AsteriskFormatter.formatEOL12RuleCall(getRegion(s, a.getEOLTerminalRuleCall_2()), doc);
-		StepTableFormatter fStepTable = new StepTableFormatter(s.getTheStepTable());
-		fStepTable.format(doc, ga, this);
-		DocStringFormatter formatter = new DocStringFormatter(s.getTheDocString());
-		formatter.setIndent(6);
-		formatter.isEOLDouble(StepFormatter.isLast);
-		formatter.format(doc, ga, this);
-	}
-
-	@SuppressWarnings("rawtypes")
-	private boolean isLastElement(EObject o, EList l) {
-		int lastIndex = l.size() - 1;
-		return o.equals(l.get(lastIndex));
-	}
-
-	@SuppressWarnings("rawtypes")
-	private boolean isFirstElement(EObject o, EList l) {
-		int firstIndex = 0;
-		return o.equals(l.get(firstIndex));
-	}
+	// TODO move to Markdown
+	// All 3 approaches below reference the same region, which can be tested by
+	// triggering a ConflictingFormattingException
+	// regionFor(model).feature(Literals.MODEL__NAME);
+	// regionFor(model).assignment(ga.getModelAccess().getNameAssignment_1());
+	// regionFor(model).ruleCall(ga.getModelAccess().getNamePhraseParserRuleCall_1_0());
 
 	public ISemanticRegion getRegion(EObject eo, RuleCall ruleCall) {
-		// All 3 approaches below reference the same region, which can be tested by
-		// triggering a ConflictingFormattingException
-		// regionFor(model).feature(Literals.MODEL__NAME);
-		// regionFor(model).assignment(ga.getModelAccess().getNameAssignment_1());
-		// regionFor(model).ruleCall(ga.getModelAccess().getNamePhraseParserRuleCall_1_0());
-
 		return regionFor(eo).ruleCall(ruleCall);
 	}
 
+	// TODO move to Markdown
+	// You can also search for the keyword using keyword("Feature:");
 	public ISemanticRegion getRegion(EObject eo, Keyword keyword) {
-		// You can also search for the keyword using keyword("Feature:");
 		return regionFor(eo).keyword(keyword);
 	}
 }

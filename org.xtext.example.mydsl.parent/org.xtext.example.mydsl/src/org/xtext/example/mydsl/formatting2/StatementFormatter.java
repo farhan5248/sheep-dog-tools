@@ -6,7 +6,7 @@ import org.xtext.example.mydsl.myDsl.Statement;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.StatementElements;
 
-public class StatementFormatter extends ListFormatter {
+public class StatementFormatter extends Formatter {
 
 	protected static boolean isLast;
 	protected static boolean isLastEOLDouble = true;
@@ -19,16 +19,16 @@ public class StatementFormatter extends ListFormatter {
 	}
 
 	public void isLast(boolean isLast) {
-		this.isLast = isLast;
+		StatementFormatter.isLast = isLast;
 	}
 
 	public void isLastEOLDouble(boolean isEOLDouble) {
-		this.isLastEOLDouble = isEOLDouble;
+		StatementFormatter.isLastEOLDouble = isEOLDouble;
 	}
 
 	public void setIndent(int indentCnt, boolean isMinIndentCnt) {
-		this.isMinIndentCnt = isMinIndentCnt;
-		Formatter.setIndent(indentCnt);
+		StatementFormatter.isMinIndentCnt = isMinIndentCnt;
+		setIndent(indentCnt);
 	}
 
 	public void format(IFormattableDocument doc, MyDslGrammarAccess ga, MyDslFormatter df) {
