@@ -53,7 +53,7 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 	public void parseScenarioOutlineWithDescription() throws Exception {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario Outline: Submit a claim");
+		sb.append("Scenario Outline: Submit a claim\r\n");
 		sb.append("Basic EDI claim\r\n");
 		sb.append("Examples: Describe what this data is about\r\n");
 		sb.append("| Header1 | Header2 |\r\n");
@@ -64,7 +64,7 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 	public void parseScenarioOutlineWithMultilineDescription() throws Exception {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario Outline: Submit a claim");
+		sb.append("Scenario Outline: Submit a claim\r\n");
 		sb.append("Basic EDI claim\r\n");
 		sb.append("No deductible\r\n");
 		sb.append("Examples: Describe what this data is about\r\n");
@@ -76,7 +76,7 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 	public void parseScenarioOutlineWithoutDescriptionEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario Outline: Submit a claim");
+		sb.append("Scenario Outline: Submit a claim\r\n");
 		sb.append("Basic EDI claim");
 		assertErrors(sb);
 	}
@@ -85,7 +85,7 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 	public void parseScenarioOutlineWithSteps() throws Exception {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario Outline: Submit a claim");
+		sb.append("Scenario Outline: Submit a claim\r\n");
 		sb.append("Given do step one\r\n");
 		sb.append("When do step three\r\n");
 		sb.append("Examples: Describe what this data is about\r\n");
@@ -98,7 +98,7 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: This is a test feature\r\n");
 		sb.append("@tag1\r\n");
-		sb.append("Scenario Outline: Submit a claim");
+		sb.append("Scenario Outline: Submit a claim\r\n");
 		sb.append("Basic EDI claim\r\n");
 		sb.append("No deductible\r\n");
 		sb.append("Given do step one\r\n");

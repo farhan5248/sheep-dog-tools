@@ -12,6 +12,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @InjectWith(MyDslInjectorProvider.class)
 public class TagsParsingTest extends ParsingTest {
 
+	@Test
+	public void parseFeatureWithSingleTags() throws Exception {
+		StringBuilder sb = new StringBuilder();
+		sb.append("@tag1\r\n");
+		sb.append("Feature: This is a test feature\r\n");
+		assertNoErrors(sb);
+	}
 
 	@Test
 	public void parseFeatureWithMultipleTags() throws Exception {
@@ -28,4 +35,5 @@ public class TagsParsingTest extends ParsingTest {
 		sb.append("Feature: This is a test feature\r\n");
 		assertErrors(sb);
 	}
+
 }

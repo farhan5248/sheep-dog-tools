@@ -13,9 +13,10 @@ public abstract class StepFormatter extends Formatter {
 	// Put this here to avoid mixing up nested lists like steps and rows
 	// TODO this is duplicated code, maybe if it wasn't static, then there'd be no
 	// reason for duplication?
+	// TODO isLast has to be static for now for the StepTable code to know if it belongs to the last step
 	protected static boolean isLast;
-	protected static boolean isFirst;
-	protected static boolean isLastEOLDouble = true;
+	protected boolean isFirst;
+	protected boolean isLastEOLDouble = true;
 	protected Step theStep;
 
 	public StepFormatter(Step theStep) {
@@ -27,11 +28,11 @@ public abstract class StepFormatter extends Formatter {
 	}
 
 	public void isFirst(boolean isFirst) {
-		StepFormatter.isFirst = isFirst;
+		this.isFirst = isFirst;
 	}
 
 	public void isLastEOLDouble(boolean isEOLDouble) {
-		StepFormatter.isLastEOLDouble = isEOLDouble;
+		this.isLastEOLDouble = isEOLDouble;
 	}
 
 	protected void formatEOL12RuleCall(ISemanticRegion iSR, IFormattableDocument doc) {

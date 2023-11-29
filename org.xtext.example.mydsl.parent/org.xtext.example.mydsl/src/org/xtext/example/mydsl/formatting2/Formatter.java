@@ -7,15 +7,15 @@ import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 
 public class Formatter {
 
-	protected static String indent = " ";
-	protected static int indentCnt = 0;
+	protected String indent = " ";
+	protected int indentCnt = 0;
 
 	public void setIndent(int indentCnt) {
-		Formatter.indentCnt = indentCnt;
+		this.indentCnt = indentCnt;
 	}
 
 	public String getIndent() {
-		return Formatter.indent.repeat(indentCnt);
+		return indent.repeat(indentCnt);
 	}
 
 	protected void replace(IFormattableDocument doc, ISemanticRegion iSR, String replacement) {

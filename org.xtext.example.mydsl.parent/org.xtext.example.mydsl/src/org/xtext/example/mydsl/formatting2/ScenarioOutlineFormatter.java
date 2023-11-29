@@ -29,6 +29,7 @@ public class ScenarioOutlineFormatter extends AbstractScenarioFormatter {
 				TagFormatter formatter = new TagFormatter(t);
 				formatter.isLast(isLastElement(t, theScenarioOutline.getTags()));
 				formatter.isFirst(isFirstElement(t, theScenarioOutline.getTags()));
+				formatter.setIndent(2);
 				formatter.format(doc, ga, df);
 			}
 			formatEOL1RuleCall(

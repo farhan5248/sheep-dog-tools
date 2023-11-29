@@ -8,9 +8,9 @@ import org.xtext.example.mydsl.services.MyDslGrammarAccess.StatementElements;
 
 public class StatementFormatter extends Formatter {
 
-	protected static boolean isLast;
-	protected static boolean isLastEOLDouble = true;
-	private static boolean isMinIndentCnt = false;
+	protected boolean isLast;
+	protected boolean isLastEOLDouble = true;
+	private boolean isMinIndentCnt = false;
 
 	private Statement theStatement;
 
@@ -19,15 +19,15 @@ public class StatementFormatter extends Formatter {
 	}
 
 	public void isLast(boolean isLast) {
-		StatementFormatter.isLast = isLast;
+		this.isLast = isLast;
 	}
 
 	public void isLastEOLDouble(boolean isEOLDouble) {
-		StatementFormatter.isLastEOLDouble = isEOLDouble;
+		this.isLastEOLDouble = isEOLDouble;
 	}
 
 	public void setIndent(int indentCnt, boolean isMinIndentCnt) {
-		StatementFormatter.isMinIndentCnt = isMinIndentCnt;
+		this.isMinIndentCnt = isMinIndentCnt;
 		setIndent(indentCnt);
 	}
 

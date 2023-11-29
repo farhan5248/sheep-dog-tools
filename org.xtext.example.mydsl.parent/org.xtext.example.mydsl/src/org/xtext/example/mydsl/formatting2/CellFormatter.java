@@ -12,10 +12,9 @@ public class CellFormatter extends Formatter {
 
 	private static ArrayList<ArrayList<ISemanticRegion>> cells;
 
-	// Put this here to avoid mixing up nested lists like rows and cells
-	protected static boolean isLast;
-	protected static boolean isFirst;
-	protected static boolean isLastEOLDouble = true;
+	protected boolean isLast;
+	protected boolean isFirst;
+	protected boolean isLastEOLDouble = true;
 
 	private Cell theCell;
 
@@ -24,11 +23,11 @@ public class CellFormatter extends Formatter {
 	}
 
 	public void isLast(boolean isLast) {
-		CellFormatter.isLast = isLast;
+		this.isLast = isLast;
 	}
 
 	public void isFirst(boolean isFirst) {
-		CellFormatter.isFirst = isFirst;
+		this.isFirst = isFirst;
 	}
 
 	public void format(IFormattableDocument doc, MyDslGrammarAccess ga, MyDslFormatter df) {

@@ -7,9 +7,9 @@ import org.xtext.example.mydsl.services.MyDslGrammarAccess;
 
 public class StepTableFormatter extends Formatter {
 
-	protected static boolean isLast;
-	protected static boolean isFirst;
-	protected static boolean isLastEOLDouble = true;
+	protected boolean isLast;
+	protected boolean isFirst;
+	protected boolean isLastEOLDouble = true;
 
 	private StepTable theStepTable;
 

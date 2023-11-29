@@ -9,9 +9,11 @@ import org.xtext.example.mydsl.services.MyDslGrammarAccess.RowElements;
 
 public class RowFormatter extends Formatter {
 
+	// TODO isLast has to be static for now for the Cell code to know if it
+	// belongs to the last row
 	protected static boolean isLast;
 	protected static boolean isFirst;
-	protected static boolean isLastEOLDouble = true;
+	protected boolean isLastEOLDouble = true;
 
 	private Row theRow;
 
@@ -28,7 +30,7 @@ public class RowFormatter extends Formatter {
 	}
 
 	public void isLastEOLDouble(boolean isEOLDouble) {
-		RowFormatter.isLastEOLDouble = isEOLDouble;
+		this.isLastEOLDouble = isEOLDouble;
 	}
 
 	public void format(IFormattableDocument doc, MyDslGrammarAccess ga, MyDslFormatter df) {

@@ -30,6 +30,7 @@ public class ExampleFormatter extends Formatter {
 				TagFormatter formatter = new TagFormatter(t);
 				formatter.isLast(isLastElement(t, e.getTags()));
 				formatter.isFirst(isFirstElement(t, e.getTags()));
+				formatter.setIndent(4);
 				formatter.format(doc, ga, df);
 			}
 			formatEOL1RuleCall(df.getRegion(e, a.getEOLTerminalRuleCall_0_1()), doc);

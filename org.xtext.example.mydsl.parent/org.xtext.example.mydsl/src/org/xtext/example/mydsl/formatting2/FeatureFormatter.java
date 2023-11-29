@@ -46,6 +46,8 @@ public class FeatureFormatter extends Formatter {
 			for (Tag t : theFeature.getTags()) {
 				TagFormatter formatter = new TagFormatter(t);
 				formatter.isLast(isLastElement(t, theFeature.getTags()));
+				formatter.isFirst(isFirstElement(t, theFeature.getTags()));
+				formatter.setIndent(0);
 				formatter.format(doc, ga, df);
 			}
 			formatEOL1RuleCall(df.getRegion(theFeature, a.getEOLTerminalRuleCall_0_1()), doc);

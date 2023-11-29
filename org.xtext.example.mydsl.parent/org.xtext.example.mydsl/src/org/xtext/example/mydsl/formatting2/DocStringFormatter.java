@@ -9,7 +9,7 @@ import org.xtext.example.mydsl.services.MyDslGrammarAccess.DocStringElements;
 
 public class DocStringFormatter extends Formatter {
 
-	private static boolean isEOLDouble = true;
+	private boolean isEOLDouble = true;
 	private DocString theDocString;
 
 	public DocStringFormatter(DocString theDocString) {
@@ -17,7 +17,7 @@ public class DocStringFormatter extends Formatter {
 	}
 
 	public void isEOLDouble(boolean isEOLDouble) {
-		DocStringFormatter.isEOLDouble = isEOLDouble;
+		this.isEOLDouble = isEOLDouble;
 	}
 
 	public void formatKeyword(ISemanticRegion iSR, IFormattableDocument doc) {

@@ -8,8 +8,8 @@ import org.xtext.example.mydsl.services.MyDslGrammarAccess.TagElements;
 
 public class TagFormatter extends Formatter {
 
-	protected static boolean isLast;
-	protected static boolean isFirst;
+	protected boolean isLast;
+	protected boolean isFirst;
 	private Tag theTag;
 
 	public TagFormatter(Tag theTag) {
@@ -17,11 +17,11 @@ public class TagFormatter extends Formatter {
 	}
 
 	public void isLast(boolean isLast) {
-		TagFormatter.isLast = isLast;
+		this.isLast = isLast;
 	}
 
 	public void isFirst(boolean isFirst) {
-		TagFormatter.isFirst = isFirst;
+		this.isFirst = isFirst;
 	}
 
 	public void formatKeyword(ISemanticRegion iSR, IFormattableDocument doc) {
