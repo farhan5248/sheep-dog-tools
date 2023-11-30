@@ -9,32 +9,32 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Table</b></em>'.
+ * A representation of the model object '<em><b>Step Table</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cucumber.Table#getRows <em>Rows</em>}</li>
+ *   <li>{@link org.farhan.cucumber.StepTable#getRows <em>Rows</em>}</li>
  * </ul>
  *
- * @see org.farhan.cucumber.CucumberPackage#getTable()
+ * @see org.farhan.cucumber.CucumberPackage#getStepTable()
  * @model
  * @generated
  */
-public interface Table extends EObject
+public interface StepTable extends EObject
 {
   /**
    * Returns the value of the '<em><b>Rows</b></em>' containment reference list.
-   * The list contents are of type {@link org.farhan.cucumber.TableRow}.
+   * The list contents are of type {@link org.farhan.cucumber.Row}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Rows</em>' containment reference list.
-   * @see org.farhan.cucumber.CucumberPackage#getTable_Rows()
+   * @see org.farhan.cucumber.CucumberPackage#getStepTable_Rows()
    * @model containment="true"
    * @generated
    */
-  EList<TableRow> getRows();
+  EList<Row> getRows();
 
-} // Table
+} // StepTable

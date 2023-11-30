@@ -3,84 +3,20 @@
  */
 package org.farhan.cucumber.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.farhan.cucumber.Background;
 import org.farhan.cucumber.CucumberPackage;
-import org.farhan.cucumber.Description;
-import org.farhan.cucumber.Step;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Background</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * The following features are implemented:
- * </p>
- * <ul>
- *   <li>{@link org.farhan.cucumber.impl.BackgroundImpl#getTitle <em>Title</em>}</li>
- *   <li>{@link org.farhan.cucumber.impl.BackgroundImpl#getDescriptions <em>Descriptions</em>}</li>
- *   <li>{@link org.farhan.cucumber.impl.BackgroundImpl#getSteps <em>Steps</em>}</li>
- * </ul>
  *
  * @generated
  */
-public class BackgroundImpl extends MinimalEObjectImpl.Container implements Background
+public class BackgroundImpl extends AbstractScenarioImpl implements Background
 {
-  /**
-   * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTitle()
-   * @generated
-   * @ordered
-   */
-  protected static final String TITLE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTitle()
-   * @generated
-   * @ordered
-   */
-  protected String title = TITLE_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getDescriptions() <em>Descriptions</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDescriptions()
-   * @generated
-   * @ordered
-   */
-  protected EList<Description> descriptions;
-
-  /**
-   * The cached value of the '{@link #getSteps() <em>Steps</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getSteps()
-   * @generated
-   * @ordered
-   */
-  protected EList<Step> steps;
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -100,185 +36,6 @@ public class BackgroundImpl extends MinimalEObjectImpl.Container implements Back
   protected EClass eStaticClass()
   {
     return CucumberPackage.Literals.BACKGROUND;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getTitle()
-  {
-    return title;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setTitle(String newTitle)
-  {
-    String oldTitle = title;
-    title = newTitle;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.BACKGROUND__TITLE, oldTitle, title));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<Description> getDescriptions()
-  {
-    if (descriptions == null)
-    {
-      descriptions = new EObjectContainmentEList<Description>(Description.class, this, CucumberPackage.BACKGROUND__DESCRIPTIONS);
-    }
-    return descriptions;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<Step> getSteps()
-  {
-    if (steps == null)
-    {
-      steps = new EObjectContainmentEList<Step>(Step.class, this, CucumberPackage.BACKGROUND__STEPS);
-    }
-    return steps;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case CucumberPackage.BACKGROUND__DESCRIPTIONS:
-        return ((InternalEList<?>)getDescriptions()).basicRemove(otherEnd, msgs);
-      case CucumberPackage.BACKGROUND__STEPS:
-        return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Object eGet(int featureID, boolean resolve, boolean coreType)
-  {
-    switch (featureID)
-    {
-      case CucumberPackage.BACKGROUND__TITLE:
-        return getTitle();
-      case CucumberPackage.BACKGROUND__DESCRIPTIONS:
-        return getDescriptions();
-      case CucumberPackage.BACKGROUND__STEPS:
-        return getSteps();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @SuppressWarnings("unchecked")
-  @Override
-  public void eSet(int featureID, Object newValue)
-  {
-    switch (featureID)
-    {
-      case CucumberPackage.BACKGROUND__TITLE:
-        setTitle((String)newValue);
-        return;
-      case CucumberPackage.BACKGROUND__DESCRIPTIONS:
-        getDescriptions().clear();
-        getDescriptions().addAll((Collection<? extends Description>)newValue);
-        return;
-      case CucumberPackage.BACKGROUND__STEPS:
-        getSteps().clear();
-        getSteps().addAll((Collection<? extends Step>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void eUnset(int featureID)
-  {
-    switch (featureID)
-    {
-      case CucumberPackage.BACKGROUND__TITLE:
-        setTitle(TITLE_EDEFAULT);
-        return;
-      case CucumberPackage.BACKGROUND__DESCRIPTIONS:
-        getDescriptions().clear();
-        return;
-      case CucumberPackage.BACKGROUND__STEPS:
-        getSteps().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public boolean eIsSet(int featureID)
-  {
-    switch (featureID)
-    {
-      case CucumberPackage.BACKGROUND__TITLE:
-        return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
-      case CucumberPackage.BACKGROUND__DESCRIPTIONS:
-        return descriptions != null && !descriptions.isEmpty();
-      case CucumberPackage.BACKGROUND__STEPS:
-        return steps != null && !steps.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (title: ");
-    result.append(title);
-    result.append(')');
-    return result.toString();
   }
 
 } //BackgroundImpl

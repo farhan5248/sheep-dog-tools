@@ -5,78 +5,103 @@ generate cucumber "http://www.farhan.org/Cucumber"
 
 Feature:
 	(tags+=Tag+ EOL)?
-	'Feature:' title=Sentence EOL
-	descriptions+=Description*
-	background=Background?
-	scenarios+=AbstractScenario*;
+	'Feature:' name=Phrase EOL
+	statements+=Statement*
+	abstractScenarios+=AbstractScenario*;
+
+// This has the side effect of allowing more than 1 Background.
+// Also it allows it to be anywhere, like at the begining or end.
+// I assume anyone using this editor knows that in Cucumber it just goes once at the top
+// I'm doing it this way to make the formatting code simpler by having less duplication
+AbstractScenario:
+	Background | Scenario | ScenarioOutline;
 
 Background:
-	'Background:' title=Sentence EOL
-	descriptions+=Description*
+	'Background:' name=Phrase EOL
+	statements+=Statement*
 	steps+=Step*;
 
-AbstractScenario:
-	ScenarioOutline | Scenario;
-
 Scenario:
-	(tag+=Tag EOL)?
-	'Scenario:' title=Sentence EOL
-	descriptions+=Description*
+	(tags+=Tag+ EOL)?
+	'Scenario:' name=Phrase EOL
+	statements+=Statement*
 	steps+=Step*;
 
 ScenarioOutline:
-	(tag+=Tag EOL)?
-	'Scenario Outline:' title=Sentence EOL
-	descriptions+=Description*
+	(tags+=Tag+ EOL)?
+	'Scenario Outline:' name=Phrase EOL
+	statements+=Statement*
 	steps+=Step*
-	examples+=Example+;
+	examples+=Examples+;
 
-Example:
-	(tag+=Tag EOL)?
-	'Examples:' title=Sentence EOL
-	descriptions+=Description*
-	table=Table;
+Examples:
+	(tags+=Tag+ EOL)?
+	'Examples:' name=Phrase EOL
+	statements+=Statement*
+	theExamplesTable=ExamplesTable;
 
-Description:
-	line=Sentence EOL;
+ExamplesTable:
+	rows+=Row+;
+
+StepTable:
+	rows+=Row+;
+
+Row:
+	cells+=Cell+ '|' EOL;
+
+Cell:
+	cell='|' name=Phrase;
 
 Step:
-	('Given' | 'When' | 'Then' | 'And' | 'But' | '*') title=Sentence EOL?
-	(table=Table | text=DocString)?;
-
-Table:
-	rows+=TableRow+;
-
-TableRow:
-	cells+=RowCell+ '|' EOL;
-
-RowCell:
-	cell='|' Sentence;
+	Given | When | Then | And | But | Asterisk;
 
 DocString:
-	{DocString}
-	'"""' (Sentence | EOL)* '"""' EOL;
+	'"""' EOL
+	statements+=Statement+
+	'"""' EOL;
+
+Given:
+	'Given' name=Phrase EOL
+	(theStepTable=StepTable | theDocString=DocString)?;
+
+When:
+	'When' name=Phrase EOL
+	(theStepTable=StepTable | theDocString=DocString)?;
+
+Then:
+	'Then' name=Phrase EOL
+	(theStepTable=StepTable | theDocString=DocString)?;
+
+And:
+	'And' name=Phrase EOL
+	(theStepTable=StepTable | theDocString=DocString)?;
+
+But:
+	'But' name=Phrase EOL
+	(theStepTable=StepTable | theDocString=DocString)?;
+
+Asterisk:
+	'*' name=Phrase EOL
+	(theStepTable=StepTable | theDocString=DocString)?;
+
+Statement:
+	name=Phrase EOL;
+
+Phrase:
+	ID+;
 
 Tag:
-	tag=TAG_ID;
+	'@' name=ID;
 
-Sentence:
-	WORD+;
+terminal ID:
+	'^'? ('a'..'z' | 'A'..'Z' | '_' | '.' | '0'..'9')*;
 
 terminal WS:
 	(' ' | '\t')+;
-
-terminal EOL:
-	('\r' | '\n')+;
 
 // single line comment
 terminal SL_COMMENT:
 	'#' !('\r' | '\n')* EOL;
 
-// need to add punctuation and commas etc
-// this covers Given When Then and might create problems?
-terminal WORD:
-	!('@' | '|' | ' ' | '\t' | '\n' | '\r')+;
-
-terminal TAG_ID:
-	'@' WORD;
+terminal EOL:
+	('\r\n')+;

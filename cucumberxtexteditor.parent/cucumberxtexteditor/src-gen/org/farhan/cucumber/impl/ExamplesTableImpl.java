@@ -18,23 +18,23 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.farhan.cucumber.CucumberPackage;
-import org.farhan.cucumber.Table;
-import org.farhan.cucumber.TableRow;
+import org.farhan.cucumber.ExamplesTable;
+import org.farhan.cucumber.Row;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Table</b></em>'.
+ * An implementation of the model object '<em><b>Examples Table</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cucumber.impl.TableImpl#getRows <em>Rows</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.ExamplesTableImpl#getRows <em>Rows</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class TableImpl extends MinimalEObjectImpl.Container implements Table
+public class ExamplesTableImpl extends MinimalEObjectImpl.Container implements ExamplesTable
 {
   /**
    * The cached value of the '{@link #getRows() <em>Rows</em>}' containment reference list.
@@ -44,14 +44,14 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table
    * @generated
    * @ordered
    */
-  protected EList<TableRow> rows;
+  protected EList<Row> rows;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected TableImpl()
+  protected ExamplesTableImpl()
   {
     super();
   }
@@ -64,7 +64,7 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table
   @Override
   protected EClass eStaticClass()
   {
-    return CucumberPackage.Literals.TABLE;
+    return CucumberPackage.Literals.EXAMPLES_TABLE;
   }
 
   /**
@@ -73,11 +73,11 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table
    * @generated
    */
   @Override
-  public EList<TableRow> getRows()
+  public EList<Row> getRows()
   {
     if (rows == null)
     {
-      rows = new EObjectContainmentEList<TableRow>(TableRow.class, this, CucumberPackage.TABLE__ROWS);
+      rows = new EObjectContainmentEList<Row>(Row.class, this, CucumberPackage.EXAMPLES_TABLE__ROWS);
     }
     return rows;
   }
@@ -92,7 +92,7 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table
   {
     switch (featureID)
     {
-      case CucumberPackage.TABLE__ROWS:
+      case CucumberPackage.EXAMPLES_TABLE__ROWS:
         return ((InternalEList<?>)getRows()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -108,7 +108,7 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table
   {
     switch (featureID)
     {
-      case CucumberPackage.TABLE__ROWS:
+      case CucumberPackage.EXAMPLES_TABLE__ROWS:
         return getRows();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -125,9 +125,9 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table
   {
     switch (featureID)
     {
-      case CucumberPackage.TABLE__ROWS:
+      case CucumberPackage.EXAMPLES_TABLE__ROWS:
         getRows().clear();
-        getRows().addAll((Collection<? extends TableRow>)newValue);
+        getRows().addAll((Collection<? extends Row>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,7 +143,7 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table
   {
     switch (featureID)
     {
-      case CucumberPackage.TABLE__ROWS:
+      case CucumberPackage.EXAMPLES_TABLE__ROWS:
         getRows().clear();
         return;
     }
@@ -160,10 +160,10 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table
   {
     switch (featureID)
     {
-      case CucumberPackage.TABLE__ROWS:
+      case CucumberPackage.EXAMPLES_TABLE__ROWS:
         return rows != null && !rows.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //TableImpl
+} //ExamplesTableImpl

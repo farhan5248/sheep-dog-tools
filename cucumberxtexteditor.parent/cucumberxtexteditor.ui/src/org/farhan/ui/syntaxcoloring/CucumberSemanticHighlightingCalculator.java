@@ -22,10 +22,7 @@ public class CucumberSemanticHighlightingCalculator implements ISemanticHighligh
 			return;
 		}
 		Feature feature = (Feature) resource.getContents().get(0);
-		if (feature.getBackground() != null) {
-			provideHighlightingForSteps(feature.getBackground().getSteps(), acceptor);
-		}
-		for (Object child : feature.getScenarios()) {
+		for (Object child : feature.getAbstractScenarios()) {
 			if (child instanceof Scenario) {
 				Scenario scenario = (Scenario) child;
 				provideHighlightingForSteps(scenario.getSteps(), acceptor);
@@ -42,7 +39,7 @@ public class CucumberSemanticHighlightingCalculator implements ISemanticHighligh
 			INode node = NodeModelUtils.getNode(step);
 			acceptor.addPosition(node.getOffset(), node.getText().trim().indexOf(" "),
 					CucumberHighlightingConfiguration.KEYWORD_GWT_ID);
-			if (step.eContainer() instanceof ScenarioOutline && step.getTitle() != null) {
+			if (step.eContainer() instanceof ScenarioOutline && step.getName() != null) {
 				this.provideHighlightingForParameters(node.getText(), node, 0, acceptor);
 			}
 		}

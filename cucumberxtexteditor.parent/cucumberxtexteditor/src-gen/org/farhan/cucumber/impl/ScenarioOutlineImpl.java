@@ -16,8 +16,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.farhan.cucumber.CucumberPackage;
-import org.farhan.cucumber.Example;
+import org.farhan.cucumber.Examples;
 import org.farhan.cucumber.ScenarioOutline;
+import org.farhan.cucumber.Tag;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,6 +28,7 @@ import org.farhan.cucumber.ScenarioOutline;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.farhan.cucumber.impl.ScenarioOutlineImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.ScenarioOutlineImpl#getExamples <em>Examples</em>}</li>
  * </ul>
  *
@@ -35,6 +37,16 @@ import org.farhan.cucumber.ScenarioOutline;
 public class ScenarioOutlineImpl extends AbstractScenarioImpl implements ScenarioOutline
 {
   /**
+   * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTags()
+   * @generated
+   * @ordered
+   */
+  protected EList<Tag> tags;
+
+  /**
    * The cached value of the '{@link #getExamples() <em>Examples</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -42,7 +54,7 @@ public class ScenarioOutlineImpl extends AbstractScenarioImpl implements Scenari
    * @generated
    * @ordered
    */
-  protected EList<Example> examples;
+  protected EList<Examples> examples;
 
   /**
    * <!-- begin-user-doc -->
@@ -71,11 +83,26 @@ public class ScenarioOutlineImpl extends AbstractScenarioImpl implements Scenari
    * @generated
    */
   @Override
-  public EList<Example> getExamples()
+  public EList<Tag> getTags()
+  {
+    if (tags == null)
+    {
+      tags = new EObjectContainmentEList<Tag>(Tag.class, this, CucumberPackage.SCENARIO_OUTLINE__TAGS);
+    }
+    return tags;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EList<Examples> getExamples()
   {
     if (examples == null)
     {
-      examples = new EObjectContainmentEList<Example>(Example.class, this, CucumberPackage.SCENARIO_OUTLINE__EXAMPLES);
+      examples = new EObjectContainmentEList<Examples>(Examples.class, this, CucumberPackage.SCENARIO_OUTLINE__EXAMPLES);
     }
     return examples;
   }
@@ -90,6 +117,8 @@ public class ScenarioOutlineImpl extends AbstractScenarioImpl implements Scenari
   {
     switch (featureID)
     {
+      case CucumberPackage.SCENARIO_OUTLINE__TAGS:
+        return ((InternalEList<?>)getTags()).basicRemove(otherEnd, msgs);
       case CucumberPackage.SCENARIO_OUTLINE__EXAMPLES:
         return ((InternalEList<?>)getExamples()).basicRemove(otherEnd, msgs);
     }
@@ -106,6 +135,8 @@ public class ScenarioOutlineImpl extends AbstractScenarioImpl implements Scenari
   {
     switch (featureID)
     {
+      case CucumberPackage.SCENARIO_OUTLINE__TAGS:
+        return getTags();
       case CucumberPackage.SCENARIO_OUTLINE__EXAMPLES:
         return getExamples();
     }
@@ -123,9 +154,13 @@ public class ScenarioOutlineImpl extends AbstractScenarioImpl implements Scenari
   {
     switch (featureID)
     {
+      case CucumberPackage.SCENARIO_OUTLINE__TAGS:
+        getTags().clear();
+        getTags().addAll((Collection<? extends Tag>)newValue);
+        return;
       case CucumberPackage.SCENARIO_OUTLINE__EXAMPLES:
         getExamples().clear();
-        getExamples().addAll((Collection<? extends Example>)newValue);
+        getExamples().addAll((Collection<? extends Examples>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -141,6 +176,9 @@ public class ScenarioOutlineImpl extends AbstractScenarioImpl implements Scenari
   {
     switch (featureID)
     {
+      case CucumberPackage.SCENARIO_OUTLINE__TAGS:
+        getTags().clear();
+        return;
       case CucumberPackage.SCENARIO_OUTLINE__EXAMPLES:
         getExamples().clear();
         return;
@@ -158,6 +196,8 @@ public class ScenarioOutlineImpl extends AbstractScenarioImpl implements Scenari
   {
     switch (featureID)
     {
+      case CucumberPackage.SCENARIO_OUTLINE__TAGS:
+        return tags != null && !tags.isEmpty();
       case CucumberPackage.SCENARIO_OUTLINE__EXAMPLES:
         return examples != null && !examples.isEmpty();
     }

@@ -17,10 +17,9 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.farhan.cucumber.Feature#getTags <em>Tags</em>}</li>
- *   <li>{@link org.farhan.cucumber.Feature#getTitle <em>Title</em>}</li>
- *   <li>{@link org.farhan.cucumber.Feature#getDescriptions <em>Descriptions</em>}</li>
- *   <li>{@link org.farhan.cucumber.Feature#getBackground <em>Background</em>}</li>
- *   <li>{@link org.farhan.cucumber.Feature#getScenarios <em>Scenarios</em>}</li>
+ *   <li>{@link org.farhan.cucumber.Feature#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.cucumber.Feature#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.farhan.cucumber.Feature#getAbstractScenarios <em>Abstract Scenarios</em>}</li>
  * </ul>
  *
  * @see org.farhan.cucumber.CucumberPackage#getFeature()
@@ -42,71 +41,49 @@ public interface Feature extends EObject
   EList<Tag> getTags();
 
   /**
-   * Returns the value of the '<em><b>Title</b></em>' attribute.
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Title</em>' attribute.
-   * @see #setTitle(String)
-   * @see org.farhan.cucumber.CucumberPackage#getFeature_Title()
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see org.farhan.cucumber.CucumberPackage#getFeature_Name()
    * @model
    * @generated
    */
-  String getTitle();
+  String getName();
 
   /**
-   * Sets the value of the '{@link org.farhan.cucumber.Feature#getTitle <em>Title</em>}' attribute.
+   * Sets the value of the '{@link org.farhan.cucumber.Feature#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Title</em>' attribute.
-   * @see #getTitle()
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
    * @generated
    */
-  void setTitle(String value);
+  void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Descriptions</b></em>' containment reference list.
-   * The list contents are of type {@link org.farhan.cucumber.Description}.
+   * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
+   * The list contents are of type {@link org.farhan.cucumber.Statement}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Descriptions</em>' containment reference list.
-   * @see org.farhan.cucumber.CucumberPackage#getFeature_Descriptions()
+   * @return the value of the '<em>Statements</em>' containment reference list.
+   * @see org.farhan.cucumber.CucumberPackage#getFeature_Statements()
    * @model containment="true"
    * @generated
    */
-  EList<Description> getDescriptions();
+  EList<Statement> getStatements();
 
   /**
-   * Returns the value of the '<em><b>Background</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Background</em>' containment reference.
-   * @see #setBackground(Background)
-   * @see org.farhan.cucumber.CucumberPackage#getFeature_Background()
-   * @model containment="true"
-   * @generated
-   */
-  Background getBackground();
-
-  /**
-   * Sets the value of the '{@link org.farhan.cucumber.Feature#getBackground <em>Background</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Background</em>' containment reference.
-   * @see #getBackground()
-   * @generated
-   */
-  void setBackground(Background value);
-
-  /**
-   * Returns the value of the '<em><b>Scenarios</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Abstract Scenarios</b></em>' containment reference list.
    * The list contents are of type {@link org.farhan.cucumber.AbstractScenario}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Scenarios</em>' containment reference list.
-   * @see org.farhan.cucumber.CucumberPackage#getFeature_Scenarios()
+   * @return the value of the '<em>Abstract Scenarios</em>' containment reference list.
+   * @see org.farhan.cucumber.CucumberPackage#getFeature_AbstractScenarios()
    * @model containment="true"
    * @generated
    */
-  EList<AbstractScenario> getScenarios();
+  EList<AbstractScenario> getAbstractScenarios();
 
 } // Feature

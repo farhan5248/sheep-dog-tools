@@ -14,9 +14,9 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cucumber.Step#getTitle <em>Title</em>}</li>
- *   <li>{@link org.farhan.cucumber.Step#getTable <em>Table</em>}</li>
- *   <li>{@link org.farhan.cucumber.Step#getText <em>Text</em>}</li>
+ *   <li>{@link org.farhan.cucumber.Step#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.cucumber.Step#getTheStepTable <em>The Step Table</em>}</li>
+ *   <li>{@link org.farhan.cucumber.Step#getTheDocString <em>The Doc String</em>}</li>
  * </ul>
  *
  * @see org.farhan.cucumber.CucumberPackage#getStep()
@@ -26,69 +26,69 @@ import org.eclipse.emf.ecore.EObject;
 public interface Step extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Title</b></em>' attribute.
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Title</em>' attribute.
-   * @see #setTitle(String)
-   * @see org.farhan.cucumber.CucumberPackage#getStep_Title()
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see org.farhan.cucumber.CucumberPackage#getStep_Name()
    * @model
    * @generated
    */
-  String getTitle();
+  String getName();
 
   /**
-   * Sets the value of the '{@link org.farhan.cucumber.Step#getTitle <em>Title</em>}' attribute.
+   * Sets the value of the '{@link org.farhan.cucumber.Step#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Title</em>' attribute.
-   * @see #getTitle()
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
    * @generated
    */
-  void setTitle(String value);
+  void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Table</b></em>' containment reference.
+   * Returns the value of the '<em><b>The Step Table</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Table</em>' containment reference.
-   * @see #setTable(Table)
-   * @see org.farhan.cucumber.CucumberPackage#getStep_Table()
+   * @return the value of the '<em>The Step Table</em>' containment reference.
+   * @see #setTheStepTable(StepTable)
+   * @see org.farhan.cucumber.CucumberPackage#getStep_TheStepTable()
    * @model containment="true"
    * @generated
    */
-  Table getTable();
+  StepTable getTheStepTable();
 
   /**
-   * Sets the value of the '{@link org.farhan.cucumber.Step#getTable <em>Table</em>}' containment reference.
+   * Sets the value of the '{@link org.farhan.cucumber.Step#getTheStepTable <em>The Step Table</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Table</em>' containment reference.
-   * @see #getTable()
+   * @param value the new value of the '<em>The Step Table</em>' containment reference.
+   * @see #getTheStepTable()
    * @generated
    */
-  void setTable(Table value);
+  void setTheStepTable(StepTable value);
 
   /**
-   * Returns the value of the '<em><b>Text</b></em>' containment reference.
+   * Returns the value of the '<em><b>The Doc String</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Text</em>' containment reference.
-   * @see #setText(DocString)
-   * @see org.farhan.cucumber.CucumberPackage#getStep_Text()
+   * @return the value of the '<em>The Doc String</em>' containment reference.
+   * @see #setTheDocString(DocString)
+   * @see org.farhan.cucumber.CucumberPackage#getStep_TheDocString()
    * @model containment="true"
    * @generated
    */
-  DocString getText();
+  DocString getTheDocString();
 
   /**
-   * Sets the value of the '{@link org.farhan.cucumber.Step#getText <em>Text</em>}' containment reference.
+   * Sets the value of the '{@link org.farhan.cucumber.Step#getTheDocString <em>The Doc String</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Text</em>' containment reference.
-   * @see #getText()
+   * @param value the new value of the '<em>The Doc String</em>' containment reference.
+   * @see #getTheDocString()
    * @generated
    */
-  void setText(DocString value);
+  void setTheDocString(DocString value);
 
 } // Step

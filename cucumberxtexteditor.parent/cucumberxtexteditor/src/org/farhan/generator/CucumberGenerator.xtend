@@ -18,14 +18,14 @@ class CucumberGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		for (f : resource.allContents.toIterable.filter(Feature)) {
-			fsa.generateFile("temp/" + f.title + ".java", f.compile)
+			fsa.generateFile("temp/" + f.name + ".java", f.compile)
 		}
 	}
 
 	private def compile(Feature f) '''
 		package temp;
 		
-		public class «f.title» {
+		public class «f.name» {
 		
 		}
 	'''

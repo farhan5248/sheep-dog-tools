@@ -33,15 +33,6 @@ public interface CucumberFactory extends EFactory
   Feature createFeature();
 
   /**
-   * Returns a new object of class '<em>Background</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Background</em>'.
-   * @generated
-   */
-  Background createBackground();
-
-  /**
    * Returns a new object of class '<em>Abstract Scenario</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -49,6 +40,15 @@ public interface CucumberFactory extends EFactory
    * @generated
    */
   AbstractScenario createAbstractScenario();
+
+  /**
+   * Returns a new object of class '<em>Background</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Background</em>'.
+   * @generated
+   */
+  Background createBackground();
 
   /**
    * Returns a new object of class '<em>Scenario</em>'.
@@ -69,22 +69,49 @@ public interface CucumberFactory extends EFactory
   ScenarioOutline createScenarioOutline();
 
   /**
-   * Returns a new object of class '<em>Example</em>'.
+   * Returns a new object of class '<em>Examples</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Example</em>'.
+   * @return a new object of class '<em>Examples</em>'.
    * @generated
    */
-  Example createExample();
+  Examples createExamples();
 
   /**
-   * Returns a new object of class '<em>Description</em>'.
+   * Returns a new object of class '<em>Examples Table</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Description</em>'.
+   * @return a new object of class '<em>Examples Table</em>'.
    * @generated
    */
-  Description createDescription();
+  ExamplesTable createExamplesTable();
+
+  /**
+   * Returns a new object of class '<em>Step Table</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Step Table</em>'.
+   * @generated
+   */
+  StepTable createStepTable();
+
+  /**
+   * Returns a new object of class '<em>Row</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Row</em>'.
+   * @generated
+   */
+  Row createRow();
+
+  /**
+   * Returns a new object of class '<em>Cell</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Cell</em>'.
+   * @generated
+   */
+  Cell createCell();
 
   /**
    * Returns a new object of class '<em>Step</em>'.
@@ -96,33 +123,6 @@ public interface CucumberFactory extends EFactory
   Step createStep();
 
   /**
-   * Returns a new object of class '<em>Table</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Table</em>'.
-   * @generated
-   */
-  Table createTable();
-
-  /**
-   * Returns a new object of class '<em>Table Row</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Table Row</em>'.
-   * @generated
-   */
-  TableRow createTableRow();
-
-  /**
-   * Returns a new object of class '<em>Row Cell</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Row Cell</em>'.
-   * @generated
-   */
-  RowCell createRowCell();
-
-  /**
    * Returns a new object of class '<em>Doc String</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -130,6 +130,69 @@ public interface CucumberFactory extends EFactory
    * @generated
    */
   DocString createDocString();
+
+  /**
+   * Returns a new object of class '<em>Given</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Given</em>'.
+   * @generated
+   */
+  Given createGiven();
+
+  /**
+   * Returns a new object of class '<em>When</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>When</em>'.
+   * @generated
+   */
+  When createWhen();
+
+  /**
+   * Returns a new object of class '<em>Then</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Then</em>'.
+   * @generated
+   */
+  Then createThen();
+
+  /**
+   * Returns a new object of class '<em>And</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>And</em>'.
+   * @generated
+   */
+  And createAnd();
+
+  /**
+   * Returns a new object of class '<em>But</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>But</em>'.
+   * @generated
+   */
+  But createBut();
+
+  /**
+   * Returns a new object of class '<em>Asterisk</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Asterisk</em>'.
+   * @generated
+   */
+  Asterisk createAsterisk();
+
+  /**
+   * Returns a new object of class '<em>Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Statement</em>'.
+   * @generated
+   */
+  Statement createStatement();
 
   /**
    * Returns a new object of class '<em>Tag</em>'.

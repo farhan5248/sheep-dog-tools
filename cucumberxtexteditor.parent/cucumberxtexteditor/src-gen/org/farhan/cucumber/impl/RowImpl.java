@@ -3,57 +3,55 @@
  */
 package org.farhan.cucumber.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.farhan.cucumber.Cell;
 import org.farhan.cucumber.CucumberPackage;
-import org.farhan.cucumber.RowCell;
+import org.farhan.cucumber.Row;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Row Cell</b></em>'.
+ * An implementation of the model object '<em><b>Row</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cucumber.impl.RowCellImpl#getCell <em>Cell</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.RowImpl#getCells <em>Cells</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class RowCellImpl extends MinimalEObjectImpl.Container implements RowCell
+public class RowImpl extends MinimalEObjectImpl.Container implements Row
 {
   /**
-   * The default value of the '{@link #getCell() <em>Cell</em>}' attribute.
+   * The cached value of the '{@link #getCells() <em>Cells</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCell()
+   * @see #getCells()
    * @generated
    * @ordered
    */
-  protected static final String CELL_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getCell() <em>Cell</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getCell()
-   * @generated
-   * @ordered
-   */
-  protected String cell = CELL_EDEFAULT;
+  protected EList<Cell> cells;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected RowCellImpl()
+  protected RowImpl()
   {
     super();
   }
@@ -66,7 +64,7 @@ public class RowCellImpl extends MinimalEObjectImpl.Container implements RowCell
   @Override
   protected EClass eStaticClass()
   {
-    return CucumberPackage.Literals.ROW_CELL;
+    return CucumberPackage.Literals.ROW;
   }
 
   /**
@@ -75,9 +73,13 @@ public class RowCellImpl extends MinimalEObjectImpl.Container implements RowCell
    * @generated
    */
   @Override
-  public String getCell()
+  public EList<Cell> getCells()
   {
-    return cell;
+    if (cells == null)
+    {
+      cells = new EObjectContainmentEList<Cell>(Cell.class, this, CucumberPackage.ROW__CELLS);
+    }
+    return cells;
   }
 
   /**
@@ -86,12 +88,14 @@ public class RowCellImpl extends MinimalEObjectImpl.Container implements RowCell
    * @generated
    */
   @Override
-  public void setCell(String newCell)
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    String oldCell = cell;
-    cell = newCell;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.ROW_CELL__CELL, oldCell, cell));
+    switch (featureID)
+    {
+      case CucumberPackage.ROW__CELLS:
+        return ((InternalEList<?>)getCells()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -104,8 +108,8 @@ public class RowCellImpl extends MinimalEObjectImpl.Container implements RowCell
   {
     switch (featureID)
     {
-      case CucumberPackage.ROW_CELL__CELL:
-        return getCell();
+      case CucumberPackage.ROW__CELLS:
+        return getCells();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -115,13 +119,15 @@ public class RowCellImpl extends MinimalEObjectImpl.Container implements RowCell
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case CucumberPackage.ROW_CELL__CELL:
-        setCell((String)newValue);
+      case CucumberPackage.ROW__CELLS:
+        getCells().clear();
+        getCells().addAll((Collection<? extends Cell>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,8 +143,8 @@ public class RowCellImpl extends MinimalEObjectImpl.Container implements RowCell
   {
     switch (featureID)
     {
-      case CucumberPackage.ROW_CELL__CELL:
-        setCell(CELL_EDEFAULT);
+      case CucumberPackage.ROW__CELLS:
+        getCells().clear();
         return;
     }
     super.eUnset(featureID);
@@ -154,27 +160,10 @@ public class RowCellImpl extends MinimalEObjectImpl.Container implements RowCell
   {
     switch (featureID)
     {
-      case CucumberPackage.ROW_CELL__CELL:
-        return CELL_EDEFAULT == null ? cell != null : !CELL_EDEFAULT.equals(cell);
+      case CucumberPackage.ROW__CELLS:
+        return cells != null && !cells.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (cell: ");
-    result.append(cell);
-    result.append(')');
-    return result.toString();
-  }
-
-} //RowCellImpl
+} //RowImpl

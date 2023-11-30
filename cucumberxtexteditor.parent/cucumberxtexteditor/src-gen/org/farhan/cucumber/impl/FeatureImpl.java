@@ -20,10 +20,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.farhan.cucumber.AbstractScenario;
-import org.farhan.cucumber.Background;
 import org.farhan.cucumber.CucumberPackage;
-import org.farhan.cucumber.Description;
 import org.farhan.cucumber.Feature;
+import org.farhan.cucumber.Statement;
 import org.farhan.cucumber.Tag;
 
 /**
@@ -35,10 +34,9 @@ import org.farhan.cucumber.Tag;
  * </p>
  * <ul>
  *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getTitle <em>Title</em>}</li>
- *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getDescriptions <em>Descriptions</em>}</li>
- *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getBackground <em>Background</em>}</li>
- *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getScenarios <em>Scenarios</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.FeatureImpl#getAbstractScenarios <em>Abstract Scenarios</em>}</li>
  * </ul>
  *
  * @generated
@@ -56,54 +54,44 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
   protected EList<Tag> tags;
 
   /**
-   * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTitle()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected static final String TITLE_EDEFAULT = null;
+  protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTitle()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected String title = TITLE_EDEFAULT;
+  protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getDescriptions() <em>Descriptions</em>}' containment reference list.
+   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getDescriptions()
+   * @see #getStatements()
    * @generated
    * @ordered
    */
-  protected EList<Description> descriptions;
+  protected EList<Statement> statements;
 
   /**
-   * The cached value of the '{@link #getBackground() <em>Background</em>}' containment reference.
+   * The cached value of the '{@link #getAbstractScenarios() <em>Abstract Scenarios</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getBackground()
+   * @see #getAbstractScenarios()
    * @generated
    * @ordered
    */
-  protected Background background;
-
-  /**
-   * The cached value of the '{@link #getScenarios() <em>Scenarios</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getScenarios()
-   * @generated
-   * @ordered
-   */
-  protected EList<AbstractScenario> scenarios;
+  protected EList<AbstractScenario> abstractScenarios;
 
   /**
    * <!-- begin-user-doc -->
@@ -147,9 +135,9 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
    * @generated
    */
   @Override
-  public String getTitle()
+  public String getName()
   {
-    return title;
+    return name;
   }
 
   /**
@@ -158,12 +146,12 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
    * @generated
    */
   @Override
-  public void setTitle(String newTitle)
+  public void setName(String newName)
   {
-    String oldTitle = title;
-    title = newTitle;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.FEATURE__TITLE, oldTitle, title));
+      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.FEATURE__NAME, oldName, name));
   }
 
   /**
@@ -172,13 +160,13 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
    * @generated
    */
   @Override
-  public EList<Description> getDescriptions()
+  public EList<Statement> getStatements()
   {
-    if (descriptions == null)
+    if (statements == null)
     {
-      descriptions = new EObjectContainmentEList<Description>(Description.class, this, CucumberPackage.FEATURE__DESCRIPTIONS);
+      statements = new EObjectContainmentEList<Statement>(Statement.class, this, CucumberPackage.FEATURE__STATEMENTS);
     }
-    return descriptions;
+    return statements;
   }
 
   /**
@@ -187,63 +175,13 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
    * @generated
    */
   @Override
-  public Background getBackground()
+  public EList<AbstractScenario> getAbstractScenarios()
   {
-    return background;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetBackground(Background newBackground, NotificationChain msgs)
-  {
-    Background oldBackground = background;
-    background = newBackground;
-    if (eNotificationRequired())
+    if (abstractScenarios == null)
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CucumberPackage.FEATURE__BACKGROUND, oldBackground, newBackground);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
+      abstractScenarios = new EObjectContainmentEList<AbstractScenario>(AbstractScenario.class, this, CucumberPackage.FEATURE__ABSTRACT_SCENARIOS);
     }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setBackground(Background newBackground)
-  {
-    if (newBackground != background)
-    {
-      NotificationChain msgs = null;
-      if (background != null)
-        msgs = ((InternalEObject)background).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.FEATURE__BACKGROUND, null, msgs);
-      if (newBackground != null)
-        msgs = ((InternalEObject)newBackground).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.FEATURE__BACKGROUND, null, msgs);
-      msgs = basicSetBackground(newBackground, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.FEATURE__BACKGROUND, newBackground, newBackground));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<AbstractScenario> getScenarios()
-  {
-    if (scenarios == null)
-    {
-      scenarios = new EObjectContainmentEList<AbstractScenario>(AbstractScenario.class, this, CucumberPackage.FEATURE__SCENARIOS);
-    }
-    return scenarios;
+    return abstractScenarios;
   }
 
   /**
@@ -258,12 +196,10 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
     {
       case CucumberPackage.FEATURE__TAGS:
         return ((InternalEList<?>)getTags()).basicRemove(otherEnd, msgs);
-      case CucumberPackage.FEATURE__DESCRIPTIONS:
-        return ((InternalEList<?>)getDescriptions()).basicRemove(otherEnd, msgs);
-      case CucumberPackage.FEATURE__BACKGROUND:
-        return basicSetBackground(null, msgs);
-      case CucumberPackage.FEATURE__SCENARIOS:
-        return ((InternalEList<?>)getScenarios()).basicRemove(otherEnd, msgs);
+      case CucumberPackage.FEATURE__STATEMENTS:
+        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
+      case CucumberPackage.FEATURE__ABSTRACT_SCENARIOS:
+        return ((InternalEList<?>)getAbstractScenarios()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -280,14 +216,12 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
     {
       case CucumberPackage.FEATURE__TAGS:
         return getTags();
-      case CucumberPackage.FEATURE__TITLE:
-        return getTitle();
-      case CucumberPackage.FEATURE__DESCRIPTIONS:
-        return getDescriptions();
-      case CucumberPackage.FEATURE__BACKGROUND:
-        return getBackground();
-      case CucumberPackage.FEATURE__SCENARIOS:
-        return getScenarios();
+      case CucumberPackage.FEATURE__NAME:
+        return getName();
+      case CucumberPackage.FEATURE__STATEMENTS:
+        return getStatements();
+      case CucumberPackage.FEATURE__ABSTRACT_SCENARIOS:
+        return getAbstractScenarios();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -307,19 +241,16 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
         getTags().clear();
         getTags().addAll((Collection<? extends Tag>)newValue);
         return;
-      case CucumberPackage.FEATURE__TITLE:
-        setTitle((String)newValue);
+      case CucumberPackage.FEATURE__NAME:
+        setName((String)newValue);
         return;
-      case CucumberPackage.FEATURE__DESCRIPTIONS:
-        getDescriptions().clear();
-        getDescriptions().addAll((Collection<? extends Description>)newValue);
+      case CucumberPackage.FEATURE__STATEMENTS:
+        getStatements().clear();
+        getStatements().addAll((Collection<? extends Statement>)newValue);
         return;
-      case CucumberPackage.FEATURE__BACKGROUND:
-        setBackground((Background)newValue);
-        return;
-      case CucumberPackage.FEATURE__SCENARIOS:
-        getScenarios().clear();
-        getScenarios().addAll((Collection<? extends AbstractScenario>)newValue);
+      case CucumberPackage.FEATURE__ABSTRACT_SCENARIOS:
+        getAbstractScenarios().clear();
+        getAbstractScenarios().addAll((Collection<? extends AbstractScenario>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -338,17 +269,14 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
       case CucumberPackage.FEATURE__TAGS:
         getTags().clear();
         return;
-      case CucumberPackage.FEATURE__TITLE:
-        setTitle(TITLE_EDEFAULT);
+      case CucumberPackage.FEATURE__NAME:
+        setName(NAME_EDEFAULT);
         return;
-      case CucumberPackage.FEATURE__DESCRIPTIONS:
-        getDescriptions().clear();
+      case CucumberPackage.FEATURE__STATEMENTS:
+        getStatements().clear();
         return;
-      case CucumberPackage.FEATURE__BACKGROUND:
-        setBackground((Background)null);
-        return;
-      case CucumberPackage.FEATURE__SCENARIOS:
-        getScenarios().clear();
+      case CucumberPackage.FEATURE__ABSTRACT_SCENARIOS:
+        getAbstractScenarios().clear();
         return;
     }
     super.eUnset(featureID);
@@ -366,14 +294,12 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
     {
       case CucumberPackage.FEATURE__TAGS:
         return tags != null && !tags.isEmpty();
-      case CucumberPackage.FEATURE__TITLE:
-        return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
-      case CucumberPackage.FEATURE__DESCRIPTIONS:
-        return descriptions != null && !descriptions.isEmpty();
-      case CucumberPackage.FEATURE__BACKGROUND:
-        return background != null;
-      case CucumberPackage.FEATURE__SCENARIOS:
-        return scenarios != null && !scenarios.isEmpty();
+      case CucumberPackage.FEATURE__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case CucumberPackage.FEATURE__STATEMENTS:
+        return statements != null && !statements.isEmpty();
+      case CucumberPackage.FEATURE__ABSTRACT_SCENARIOS:
+        return abstractScenarios != null && !abstractScenarios.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -389,8 +315,8 @@ public class FeatureImpl extends MinimalEObjectImpl.Container implements Feature
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (title: ");
-    result.append(title);
+    result.append(" (name: ");
+    result.append(name);
     result.append(')');
     return result.toString();
   }

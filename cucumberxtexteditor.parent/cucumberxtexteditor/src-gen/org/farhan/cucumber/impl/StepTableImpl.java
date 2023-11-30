@@ -3,57 +3,55 @@
  */
 package org.farhan.cucumber.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.farhan.cucumber.CucumberPackage;
-import org.farhan.cucumber.Description;
+import org.farhan.cucumber.Row;
+import org.farhan.cucumber.StepTable;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Description</b></em>'.
+ * An implementation of the model object '<em><b>Step Table</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cucumber.impl.DescriptionImpl#getLine <em>Line</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.StepTableImpl#getRows <em>Rows</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class DescriptionImpl extends MinimalEObjectImpl.Container implements Description
+public class StepTableImpl extends MinimalEObjectImpl.Container implements StepTable
 {
   /**
-   * The default value of the '{@link #getLine() <em>Line</em>}' attribute.
+   * The cached value of the '{@link #getRows() <em>Rows</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLine()
+   * @see #getRows()
    * @generated
    * @ordered
    */
-  protected static final String LINE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getLine() <em>Line</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getLine()
-   * @generated
-   * @ordered
-   */
-  protected String line = LINE_EDEFAULT;
+  protected EList<Row> rows;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected DescriptionImpl()
+  protected StepTableImpl()
   {
     super();
   }
@@ -66,7 +64,7 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements Des
   @Override
   protected EClass eStaticClass()
   {
-    return CucumberPackage.Literals.DESCRIPTION;
+    return CucumberPackage.Literals.STEP_TABLE;
   }
 
   /**
@@ -75,9 +73,13 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements Des
    * @generated
    */
   @Override
-  public String getLine()
+  public EList<Row> getRows()
   {
-    return line;
+    if (rows == null)
+    {
+      rows = new EObjectContainmentEList<Row>(Row.class, this, CucumberPackage.STEP_TABLE__ROWS);
+    }
+    return rows;
   }
 
   /**
@@ -86,12 +88,14 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements Des
    * @generated
    */
   @Override
-  public void setLine(String newLine)
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    String oldLine = line;
-    line = newLine;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.DESCRIPTION__LINE, oldLine, line));
+    switch (featureID)
+    {
+      case CucumberPackage.STEP_TABLE__ROWS:
+        return ((InternalEList<?>)getRows()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -104,8 +108,8 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements Des
   {
     switch (featureID)
     {
-      case CucumberPackage.DESCRIPTION__LINE:
-        return getLine();
+      case CucumberPackage.STEP_TABLE__ROWS:
+        return getRows();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -115,13 +119,15 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements Des
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case CucumberPackage.DESCRIPTION__LINE:
-        setLine((String)newValue);
+      case CucumberPackage.STEP_TABLE__ROWS:
+        getRows().clear();
+        getRows().addAll((Collection<? extends Row>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,8 +143,8 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements Des
   {
     switch (featureID)
     {
-      case CucumberPackage.DESCRIPTION__LINE:
-        setLine(LINE_EDEFAULT);
+      case CucumberPackage.STEP_TABLE__ROWS:
+        getRows().clear();
         return;
     }
     super.eUnset(featureID);
@@ -154,27 +160,10 @@ public class DescriptionImpl extends MinimalEObjectImpl.Container implements Des
   {
     switch (featureID)
     {
-      case CucumberPackage.DESCRIPTION__LINE:
-        return LINE_EDEFAULT == null ? line != null : !LINE_EDEFAULT.equals(line);
+      case CucumberPackage.STEP_TABLE__ROWS:
+        return rows != null && !rows.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (line: ");
-    result.append(line);
-    result.append(')');
-    return result.toString();
-  }
-
-} //DescriptionImpl
+} //StepTableImpl

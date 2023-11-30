@@ -3,19 +3,14 @@
  */
 package org.farhan.formatting2;
 
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.AbstractJavaFormatter;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.farhan.cucumber.AbstractScenario;
-import org.farhan.cucumber.Background;
-import org.farhan.cucumber.CucumberPackage;
-import org.farhan.cucumber.Description;
 import org.farhan.cucumber.Feature;
-import org.farhan.cucumber.Step;
-import org.farhan.cucumber.Tag;
 import org.farhan.services.CucumberGrammarAccess;
-
 import com.google.inject.Inject;
 
 public class CucumberFormatter extends AbstractJavaFormatter {
@@ -23,83 +18,27 @@ public class CucumberFormatter extends AbstractJavaFormatter {
 	@Inject
 	CucumberGrammarAccess ga;
 
-	protected void format(Feature feature, IFormattableDocument doc) {
-		formatFeatureTags(feature, doc);
-		formatFeatureTitle(feature, doc);
-		formatFeatureDescription(feature, doc);
+	protected void format(Feature theFeature, IFormattableDocument doc) {
+
+		FeatureFormatter formatter = new FeatureFormatter(theFeature);
+		formatter.setIndent(0);
+		formatter.format(doc, ga, this);
 	}
 
-	private void formatFeatureDescription(Feature feature, IFormattableDocument doc) {
-		EList<Description> descriptions = feature.getDescriptions();
-		for (Description d : descriptions) {
-			formatDescriptionLine(d, doc);
-		}
+	// TODO move to Markdown
+	// All 3 approaches below reference the same region, which can be tested by
+	// triggering a ConflictingFormattingException
+	// regionFor(model).feature(Literals.MODEL__NAME);
+	// regionFor(model).assignment(ga.getModelAccess().getNameAssignment_1());
+	// regionFor(model).ruleCall(ga.getModelAccess().getNamePhraseParserRuleCall_1_0());
+
+	public ISemanticRegion getRegion(EObject eo, RuleCall ruleCall) {
+		return regionFor(eo).ruleCall(ruleCall);
 	}
 
-	private void formatDescriptionLine(Description description, IFormattableDocument doc) {
-		ISemanticRegion descRegion = regionFor(description).feature(CucumberPackage.Literals.DESCRIPTION__LINE);
-		doc.prepend(descRegion, it -> {
-			// TODO this isn't working. just invoking prepend with an empty body removes
-			// leading spaces
-			it.setSpace("  ");
-		});
-		doc.append(descRegion, it -> {
-			it.noSpace();
-		});
-	}
-
-	private void formatFeatureTags(Feature feature, IFormattableDocument doc) {
-
-		// TODO rename getTag to getTags...
-		EList<Tag> tags = feature.getTags();
-		int tagsCnt = tags.size();
-
-		for (Tag tag : tags) {
-			formatTagTag(tag, doc);
-		}
-
-		if (tagsCnt > 0) {
-			// if it's the last or first
-			ISemanticRegion tagRegion = regionFor(tags.get(0)).feature(CucumberPackage.Literals.TAG__TAG);
-			doc.prepend(tagRegion, it -> {
-				it.highPriority();
-				it.noSpace();
-			});
-			tagRegion = regionFor(tags.get(tagsCnt - 1)).feature(CucumberPackage.Literals.TAG__TAG);
-			doc.append(tagRegion, it -> {
-				it.highPriority();
-				it.noSpace();
-			});
-		}
-	}
-
-	private void formatTagTag(Tag tag, IFormattableDocument doc) {
-
-		// Remove spaces before and after tags
-		ISemanticRegion tagRegion = regionFor(tag).feature(CucumberPackage.Literals.TAG__TAG);
-
-		doc.prepend(tagRegion, it -> {
-			it.setSpace(" ");
-		});
-		doc.append(tagRegion, it -> {
-			it.setSpace(" ");
-		});
-	}
-
-	private void formatFeatureTitle(Feature feature, IFormattableDocument doc) {
-
-		ISemanticRegion featureRegion = regionFor(feature).keyword(ga.getFeatureAccess().getFeatureKeyword_1());
-		doc.prepend(featureRegion, it -> {
-			it.noSpace();
-		});
-
-		ISemanticRegion titleRegion = regionFor(feature).feature(CucumberPackage.Literals.FEATURE__TITLE);
-		// Set a space before the title and remove any after
-		doc.prepend(titleRegion, it -> {
-			it.setSpace(" ");
-		});
-		doc.append(titleRegion, it -> {
-			it.noSpace();
-		});
+	// TODO move to Markdown
+	// You can also search for the keyword using keyword("Feature:");
+	public ISemanticRegion getRegion(EObject eo, Keyword keyword) {
+		return regionFor(eo).keyword(keyword);
 	}
 }

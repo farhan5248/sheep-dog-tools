@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cucumber.Tag#getTag <em>Tag</em>}</li>
+ *   <li>{@link org.farhan.cucumber.Tag#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see org.farhan.cucumber.CucumberPackage#getTag()
@@ -24,25 +24,25 @@ import org.eclipse.emf.ecore.EObject;
 public interface Tag extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Tag</b></em>' attribute.
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Tag</em>' attribute.
-   * @see #setTag(String)
-   * @see org.farhan.cucumber.CucumberPackage#getTag_Tag()
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see org.farhan.cucumber.CucumberPackage#getTag_Name()
    * @model
    * @generated
    */
-  String getTag();
+  String getName();
 
   /**
-   * Sets the value of the '{@link org.farhan.cucumber.Tag#getTag <em>Tag</em>}' attribute.
+   * Sets the value of the '{@link org.farhan.cucumber.Tag#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Tag</em>' attribute.
-   * @see #getTag()
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
    * @generated
    */
-  void setTag(String value);
+  void setName(String value);
 
 } // Tag

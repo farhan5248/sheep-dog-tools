@@ -24,8 +24,8 @@ public class CucumberGenerator extends AbstractGenerator {
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     Iterable<Feature> _filter = Iterables.<Feature>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Feature.class);
     for (final Feature f : _filter) {
-      String _title = f.getTitle();
-      String _plus = ("temp/" + _title);
+      String _name = f.getName();
+      String _plus = ("temp/" + _name);
       String _plus_1 = (_plus + ".java");
       fsa.generateFile(_plus_1, this.compile(f));
     }
@@ -37,8 +37,8 @@ public class CucumberGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
-    String _title = f.getTitle();
-    _builder.append(_title);
+    String _name = f.getName();
+    _builder.append(_name);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.newLine();

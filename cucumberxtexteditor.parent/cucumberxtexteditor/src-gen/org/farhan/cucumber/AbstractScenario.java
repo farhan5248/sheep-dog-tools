@@ -16,9 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cucumber.AbstractScenario#getTag <em>Tag</em>}</li>
- *   <li>{@link org.farhan.cucumber.AbstractScenario#getTitle <em>Title</em>}</li>
- *   <li>{@link org.farhan.cucumber.AbstractScenario#getDescriptions <em>Descriptions</em>}</li>
+ *   <li>{@link org.farhan.cucumber.AbstractScenario#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.cucumber.AbstractScenario#getStatements <em>Statements</em>}</li>
  *   <li>{@link org.farhan.cucumber.AbstractScenario#getSteps <em>Steps</em>}</li>
  * </ul>
  *
@@ -29,50 +28,38 @@ import org.eclipse.emf.ecore.EObject;
 public interface AbstractScenario extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Tag</b></em>' containment reference list.
-   * The list contents are of type {@link org.farhan.cucumber.Tag}.
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Tag</em>' containment reference list.
-   * @see org.farhan.cucumber.CucumberPackage#getAbstractScenario_Tag()
-   * @model containment="true"
-   * @generated
-   */
-  EList<Tag> getTag();
-
-  /**
-   * Returns the value of the '<em><b>Title</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Title</em>' attribute.
-   * @see #setTitle(String)
-   * @see org.farhan.cucumber.CucumberPackage#getAbstractScenario_Title()
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see org.farhan.cucumber.CucumberPackage#getAbstractScenario_Name()
    * @model
    * @generated
    */
-  String getTitle();
+  String getName();
 
   /**
-   * Sets the value of the '{@link org.farhan.cucumber.AbstractScenario#getTitle <em>Title</em>}' attribute.
+   * Sets the value of the '{@link org.farhan.cucumber.AbstractScenario#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Title</em>' attribute.
-   * @see #getTitle()
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
    * @generated
    */
-  void setTitle(String value);
+  void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Descriptions</b></em>' containment reference list.
-   * The list contents are of type {@link org.farhan.cucumber.Description}.
+   * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
+   * The list contents are of type {@link org.farhan.cucumber.Statement}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Descriptions</em>' containment reference list.
-   * @see org.farhan.cucumber.CucumberPackage#getAbstractScenario_Descriptions()
+   * @return the value of the '<em>Statements</em>' containment reference list.
+   * @see org.farhan.cucumber.CucumberPackage#getAbstractScenario_Statements()
    * @model containment="true"
    * @generated
    */
-  EList<Description> getDescriptions();
+  EList<Statement> getStatements();
 
   /**
    * Returns the value of the '<em><b>Steps</b></em>' containment reference list.

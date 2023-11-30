@@ -23,24 +23,24 @@ public class CucumberValidator extends AbstractCucumberValidator {
 	// This one is to check each step
 	@Check(CheckType.FAST)
 	public void checkStep(Step step) {
-		if (!Character.isUpperCase(step.getTitle().charAt(0))) {
-			warning("Step name should start with a capital", CucumberPackage.Literals.STEP__TITLE, INVALID_NAME);
+		if (!Character.isUpperCase(step.getName().charAt(0))) {
+			warning("Step name should start with a capital", CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
 		}
 	}
 
 	// This one is to check each scenario
 	@Check(CheckType.NORMAL)
 	public void checkScenario(Scenario scenario) {
-		if (!Character.isUpperCase(scenario.getTitle().charAt(0))) {
-			warning("Scenario name should start with a capital", CucumberPackage.Literals.ABSTRACT_SCENARIO__TITLE, INVALID_NAME);
+		if (!Character.isUpperCase(scenario.getName().charAt(0))) {
+			warning("Scenario name should start with a capital", CucumberPackage.Literals.ABSTRACT_SCENARIO__NAME, INVALID_NAME);
 		}
 	}
 
 	// This one is to run the conversion to a UML model
 	@Check(CheckType.EXPENSIVE)
 	public void checkFeature(Feature feature) {
-		if (!Character.isUpperCase(feature.getTitle().charAt(0))) {
-			warning("Feature name should start with a capital", CucumberPackage.Literals.FEATURE__TITLE, INVALID_NAME);
+		if (!Character.isUpperCase(feature.getName().charAt(0))) {
+			warning("Feature name should start with a capital", CucumberPackage.Literals.FEATURE__NAME, INVALID_NAME);
 		}
 	}
 
