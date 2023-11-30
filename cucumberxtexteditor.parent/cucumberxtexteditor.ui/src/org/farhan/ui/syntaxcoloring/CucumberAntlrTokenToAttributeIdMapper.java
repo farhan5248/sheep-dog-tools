@@ -10,7 +10,6 @@ public class CucumberAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToA
 			return CucumberHighlightingConfiguration.DEFAULT_ID;
 		}
 
-		System.out.println(tokenName);
 		switch (tokenName) {
 		case "RULE_EOL":
 			// nothing to do here
@@ -20,8 +19,6 @@ public class CucumberAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToA
 			// nothing to do here
 		case "RULE_SL_COMMENT":
 			return CucumberHighlightingConfiguration.SL_COMMENT_ID;
-		case "Tag":
-			return CucumberHighlightingConfiguration.TAG_ID;
 		case "'Feature:'":
 			return CucumberHighlightingConfiguration.KEYWORD_FSE_ID;
 		case "'Background:'":
@@ -48,6 +45,8 @@ public class CucumberAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToA
 			return CucumberHighlightingConfiguration.DEFAULT_ID;
 		case "'\"\"\"'":
 			return CucumberHighlightingConfiguration.DOC_ID;
+		case "'@'":
+			return CucumberHighlightingConfiguration.TAG_ID;
 		default:
 			return CucumberHighlightingConfiguration.DEFAULT_ID;
 		}

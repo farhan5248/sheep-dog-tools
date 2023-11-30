@@ -1571,7 +1571,7 @@ ruleTag returns [EObject current=null]
 	)
 ;
 
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_'|'.'|'0'..'9')*;
+RULE_ID : ('0'..'9'|'a'..'z'|'A'..'Z'|'_'|','|'.'|'<'|'>')*;
 
 RULE_WS : (' '|'\t')+;
 

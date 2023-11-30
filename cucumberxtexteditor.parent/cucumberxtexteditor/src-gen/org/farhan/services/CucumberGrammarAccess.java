@@ -1195,7 +1195,7 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//terminal ID:
-	//    '^'? ('a'..'z' | 'A'..'Z' | '_' | '.' | '0'..'9')*;
+	//    ('0'..'9' | 'a'..'z' | 'A'..'Z' | '_' | ',' | '.' | '<' | '>')*;
 	public TerminalRule getIDRule() {
 		return tID;
 	}
