@@ -13,15 +13,12 @@ public class CucumberAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToA
 		switch (tokenName) {
 		case "RULE_EOL":
 			// nothing to do here
-		case "RULE_TAG":
-			return CucumberHighlightingConfiguration.TAG_ID;
-		case "RULE_WORD":
+		case "RULE_ID":
 			return CucumberHighlightingConfiguration.STRING_ID;
 		case "RULE_WS":
 			// nothing to do here
-		case "RULE_COMMENT":
-			return CucumberHighlightingConfiguration.COMMENT_ID;
-
+		case "RULE_SL_COMMENT":
+			return CucumberHighlightingConfiguration.SL_COMMENT_ID;
 		case "'Feature:'":
 			return CucumberHighlightingConfiguration.KEYWORD_FSE_ID;
 		case "'Background:'":
@@ -32,7 +29,6 @@ public class CucumberAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToA
 			return CucumberHighlightingConfiguration.KEYWORD_FSE_ID;
 		case "'Examples:'":
 			return CucumberHighlightingConfiguration.KEYWORD_FSE_ID;
-
 		case "'Given'":
 			return CucumberHighlightingConfiguration.KEYWORD_GWT_ID;
 		case "'When'":
@@ -45,12 +41,12 @@ public class CucumberAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToA
 			return CucumberHighlightingConfiguration.KEYWORD_GWT_ID;
 		case "'*'":
 			return CucumberHighlightingConfiguration.KEYWORD_GWT_ID;
-
 		case "'|'":
 			return CucumberHighlightingConfiguration.DEFAULT_ID;
 		case "'\"\"\"'":
 			return CucumberHighlightingConfiguration.DOC_ID;
-
+		case "'@'":
+			return CucumberHighlightingConfiguration.TAG_ID;
 		default:
 			return CucumberHighlightingConfiguration.DEFAULT_ID;
 		}

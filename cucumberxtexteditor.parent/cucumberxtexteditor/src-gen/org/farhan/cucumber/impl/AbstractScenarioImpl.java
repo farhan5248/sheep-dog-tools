@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.CucumberPackage;
-import org.farhan.cucumber.Description;
+import org.farhan.cucumber.Statement;
 import org.farhan.cucumber.Step;
 
 /**
@@ -32,8 +32,8 @@ import org.farhan.cucumber.Step;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cucumber.impl.AbstractScenarioImpl#getTitle <em>Title</em>}</li>
- *   <li>{@link org.farhan.cucumber.impl.AbstractScenarioImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.AbstractScenarioImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.AbstractScenarioImpl#getStatements <em>Statements</em>}</li>
  *   <li>{@link org.farhan.cucumber.impl.AbstractScenarioImpl#getSteps <em>Steps</em>}</li>
  * </ul>
  *
@@ -42,34 +42,34 @@ import org.farhan.cucumber.Step;
 public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implements AbstractScenario
 {
   /**
-   * The default value of the '{@link #getTitle() <em>Title</em>}' attribute.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTitle()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected static final String TITLE_EDEFAULT = null;
+  protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getTitle() <em>Title</em>}' attribute.
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTitle()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected String title = TITLE_EDEFAULT;
+  protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference.
+   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getDescription()
+   * @see #getStatements()
    * @generated
    * @ordered
    */
-  protected Description description;
+  protected EList<Statement> statements;
 
   /**
    * The cached value of the '{@link #getSteps() <em>Steps</em>}' containment reference list.
@@ -108,9 +108,9 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
    * @generated
    */
   @Override
-  public String getTitle()
+  public String getName()
   {
-    return title;
+    return name;
   }
 
   /**
@@ -119,12 +119,12 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
    * @generated
    */
   @Override
-  public void setTitle(String newTitle)
+  public void setName(String newName)
   {
-    String oldTitle = title;
-    title = newTitle;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.ABSTRACT_SCENARIO__TITLE, oldTitle, title));
+      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.ABSTRACT_SCENARIO__NAME, oldName, name));
   }
 
   /**
@@ -133,48 +133,13 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
    * @generated
    */
   @Override
-  public Description getDescription()
+  public EList<Statement> getStatements()
   {
-    return description;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetDescription(Description newDescription, NotificationChain msgs)
-  {
-    Description oldDescription = description;
-    description = newDescription;
-    if (eNotificationRequired())
+    if (statements == null)
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CucumberPackage.ABSTRACT_SCENARIO__DESCRIPTION, oldDescription, newDescription);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
+      statements = new EObjectContainmentEList<Statement>(Statement.class, this, CucumberPackage.ABSTRACT_SCENARIO__STATEMENTS);
     }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setDescription(Description newDescription)
-  {
-    if (newDescription != description)
-    {
-      NotificationChain msgs = null;
-      if (description != null)
-        msgs = ((InternalEObject)description).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.ABSTRACT_SCENARIO__DESCRIPTION, null, msgs);
-      if (newDescription != null)
-        msgs = ((InternalEObject)newDescription).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CucumberPackage.ABSTRACT_SCENARIO__DESCRIPTION, null, msgs);
-      msgs = basicSetDescription(newDescription, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.ABSTRACT_SCENARIO__DESCRIPTION, newDescription, newDescription));
+    return statements;
   }
 
   /**
@@ -202,8 +167,8 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case CucumberPackage.ABSTRACT_SCENARIO__DESCRIPTION:
-        return basicSetDescription(null, msgs);
+      case CucumberPackage.ABSTRACT_SCENARIO__STATEMENTS:
+        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
       case CucumberPackage.ABSTRACT_SCENARIO__STEPS:
         return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
     }
@@ -220,10 +185,10 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case CucumberPackage.ABSTRACT_SCENARIO__TITLE:
-        return getTitle();
-      case CucumberPackage.ABSTRACT_SCENARIO__DESCRIPTION:
-        return getDescription();
+      case CucumberPackage.ABSTRACT_SCENARIO__NAME:
+        return getName();
+      case CucumberPackage.ABSTRACT_SCENARIO__STATEMENTS:
+        return getStatements();
       case CucumberPackage.ABSTRACT_SCENARIO__STEPS:
         return getSteps();
     }
@@ -241,11 +206,12 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case CucumberPackage.ABSTRACT_SCENARIO__TITLE:
-        setTitle((String)newValue);
+      case CucumberPackage.ABSTRACT_SCENARIO__NAME:
+        setName((String)newValue);
         return;
-      case CucumberPackage.ABSTRACT_SCENARIO__DESCRIPTION:
-        setDescription((Description)newValue);
+      case CucumberPackage.ABSTRACT_SCENARIO__STATEMENTS:
+        getStatements().clear();
+        getStatements().addAll((Collection<? extends Statement>)newValue);
         return;
       case CucumberPackage.ABSTRACT_SCENARIO__STEPS:
         getSteps().clear();
@@ -265,11 +231,11 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case CucumberPackage.ABSTRACT_SCENARIO__TITLE:
-        setTitle(TITLE_EDEFAULT);
+      case CucumberPackage.ABSTRACT_SCENARIO__NAME:
+        setName(NAME_EDEFAULT);
         return;
-      case CucumberPackage.ABSTRACT_SCENARIO__DESCRIPTION:
-        setDescription((Description)null);
+      case CucumberPackage.ABSTRACT_SCENARIO__STATEMENTS:
+        getStatements().clear();
         return;
       case CucumberPackage.ABSTRACT_SCENARIO__STEPS:
         getSteps().clear();
@@ -288,10 +254,10 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case CucumberPackage.ABSTRACT_SCENARIO__TITLE:
-        return TITLE_EDEFAULT == null ? title != null : !TITLE_EDEFAULT.equals(title);
-      case CucumberPackage.ABSTRACT_SCENARIO__DESCRIPTION:
-        return description != null;
+      case CucumberPackage.ABSTRACT_SCENARIO__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case CucumberPackage.ABSTRACT_SCENARIO__STATEMENTS:
+        return statements != null && !statements.isEmpty();
       case CucumberPackage.ABSTRACT_SCENARIO__STEPS:
         return steps != null && !steps.isEmpty();
     }
@@ -309,8 +275,8 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (title: ");
-    result.append(title);
+    result.append(" (name: ");
+    result.append(name);
     result.append(')');
     return result.toString();
   }

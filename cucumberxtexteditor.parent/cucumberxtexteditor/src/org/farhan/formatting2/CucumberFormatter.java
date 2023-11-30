@@ -3,63 +3,42 @@
  */
 package org.farhan.formatting2;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.AbstractJavaFormatter;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
-import org.farhan.cucumber.AbstractScenario;
-import org.farhan.cucumber.Background;
-import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Feature;
-import org.farhan.cucumber.Step;
 import org.farhan.services.CucumberGrammarAccess;
-
 import com.google.inject.Inject;
 
 public class CucumberFormatter extends AbstractJavaFormatter {
 
 	@Inject
-	CucumberGrammarAccess grammarAccess;
+	CucumberGrammarAccess ga;
 
-	protected void format(Feature feature, IFormattableDocument doc) {
-		// TODO: format HiddenRegions around keywords, attributes, cross references,
-		// etc.
-		System.out.println("Formatting the feature file");
+	protected void format(Feature theFeature, IFormattableDocument doc) {
 
-		ISemanticRegion featureRegion = regionFor(feature)
-				.keyword(grammarAccess.getFeatureAccess().getFeatureKeyword_1());
-		// TODO add new lines to the region as a whole? Do this after formatting description
-		ISemanticRegion titleRegion = regionFor(feature).feature(CucumberPackage.Literals.FEATURE__TITLE);
-
-		doc.prepend(titleRegion, it -> {
-			it.oneSpace();
-			//it.noSpace();
-			//it.setSpace(" ");
-		});
-		doc.append(titleRegion, it -> {
-			it.noSpace();
-		});
-
-		// doc.interior(begin, end, it -> { it.setNewLines(2); });
-
-		// TODO indent this and leave two new lines after it
-		doc.format(feature.getDescription());
-		// TODO indent this and leave two new lines after it
-		doc.format(feature.getBackground());
-		for (AbstractScenario abstractScenario : feature.getScenarios()) {
-			// TODO indent this and leave two new lines after it
-			doc.format(abstractScenario);
-		}
+		FeatureFormatter formatter = new FeatureFormatter(theFeature);
+		formatter.setIndent(0);
+		formatter.format(doc, ga, this);
 	}
 
-	protected void format(Background background, IFormattableDocument doc) {
-		// TODO: format HiddenRegions around keywords, attributes, cross references,
-		// etc.
-		doc.format(background.getDescription());
-		for (Step step : background.getSteps()) {
-			doc.format(step);
-		}
+	// TODO move to Markdown
+	// All 3 approaches below reference the same region, which can be tested by
+	// triggering a ConflictingFormattingException
+	// regionFor(model).feature(Literals.MODEL__NAME);
+	// regionFor(model).assignment(ga.getModelAccess().getNameAssignment_1());
+	// regionFor(model).ruleCall(ga.getModelAccess().getNamePhraseParserRuleCall_1_0());
+
+	public ISemanticRegion getRegion(EObject eo, RuleCall ruleCall) {
+		return regionFor(eo).ruleCall(ruleCall);
 	}
 
-	// TODO: implement for Scenario, ScenarioOutline, Example, Step, Table, TableRow
+	// TODO move to Markdown
+	// You can also search for the keyword using keyword("Feature:");
+	public ISemanticRegion getRegion(EObject eo, Keyword keyword) {
+		return regionFor(eo).keyword(keyword);
+	}
 }

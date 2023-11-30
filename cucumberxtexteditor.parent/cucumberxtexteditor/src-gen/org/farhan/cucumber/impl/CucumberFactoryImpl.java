@@ -66,17 +66,25 @@ public class CucumberFactoryImpl extends EFactoryImpl implements CucumberFactory
     switch (eClass.getClassifierID())
     {
       case CucumberPackage.FEATURE: return createFeature();
-      case CucumberPackage.BACKGROUND: return createBackground();
       case CucumberPackage.ABSTRACT_SCENARIO: return createAbstractScenario();
+      case CucumberPackage.BACKGROUND: return createBackground();
       case CucumberPackage.SCENARIO: return createScenario();
       case CucumberPackage.SCENARIO_OUTLINE: return createScenarioOutline();
-      case CucumberPackage.EXAMPLE: return createExample();
+      case CucumberPackage.EXAMPLES: return createExamples();
+      case CucumberPackage.EXAMPLES_TABLE: return createExamplesTable();
+      case CucumberPackage.STEP_TABLE: return createStepTable();
+      case CucumberPackage.ROW: return createRow();
+      case CucumberPackage.CELL: return createCell();
       case CucumberPackage.STEP: return createStep();
-      case CucumberPackage.TABLE: return createTable();
-      case CucumberPackage.TABLE_ROW: return createTableRow();
-      case CucumberPackage.ROW_CELL: return createRowCell();
       case CucumberPackage.DOC_STRING: return createDocString();
-      case CucumberPackage.DESCRIPTION: return createDescription();
+      case CucumberPackage.GIVEN: return createGiven();
+      case CucumberPackage.WHEN: return createWhen();
+      case CucumberPackage.THEN: return createThen();
+      case CucumberPackage.AND: return createAnd();
+      case CucumberPackage.BUT: return createBut();
+      case CucumberPackage.ASTERISK: return createAsterisk();
+      case CucumberPackage.STATEMENT: return createStatement();
+      case CucumberPackage.TAG: return createTag();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -100,10 +108,10 @@ public class CucumberFactoryImpl extends EFactoryImpl implements CucumberFactory
    * @generated
    */
   @Override
-  public Background createBackground()
+  public AbstractScenario createAbstractScenario()
   {
-    BackgroundImpl background = new BackgroundImpl();
-    return background;
+    AbstractScenarioImpl abstractScenario = new AbstractScenarioImpl();
+    return abstractScenario;
   }
 
   /**
@@ -112,10 +120,10 @@ public class CucumberFactoryImpl extends EFactoryImpl implements CucumberFactory
    * @generated
    */
   @Override
-  public AbstractScenario createAbstractScenario()
+  public Background createBackground()
   {
-    AbstractScenarioImpl abstractScenario = new AbstractScenarioImpl();
-    return abstractScenario;
+    BackgroundImpl background = new BackgroundImpl();
+    return background;
   }
 
   /**
@@ -148,10 +156,58 @@ public class CucumberFactoryImpl extends EFactoryImpl implements CucumberFactory
    * @generated
    */
   @Override
-  public Example createExample()
+  public Examples createExamples()
   {
-    ExampleImpl example = new ExampleImpl();
-    return example;
+    ExamplesImpl examples = new ExamplesImpl();
+    return examples;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ExamplesTable createExamplesTable()
+  {
+    ExamplesTableImpl examplesTable = new ExamplesTableImpl();
+    return examplesTable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public StepTable createStepTable()
+  {
+    StepTableImpl stepTable = new StepTableImpl();
+    return stepTable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Row createRow()
+  {
+    RowImpl row = new RowImpl();
+    return row;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Cell createCell()
+  {
+    CellImpl cell = new CellImpl();
+    return cell;
   }
 
   /**
@@ -172,42 +228,6 @@ public class CucumberFactoryImpl extends EFactoryImpl implements CucumberFactory
    * @generated
    */
   @Override
-  public Table createTable()
-  {
-    TableImpl table = new TableImpl();
-    return table;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public TableRow createTableRow()
-  {
-    TableRowImpl tableRow = new TableRowImpl();
-    return tableRow;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public RowCell createRowCell()
-  {
-    RowCellImpl rowCell = new RowCellImpl();
-    return rowCell;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public DocString createDocString()
   {
     DocStringImpl docString = new DocStringImpl();
@@ -220,10 +240,94 @@ public class CucumberFactoryImpl extends EFactoryImpl implements CucumberFactory
    * @generated
    */
   @Override
-  public Description createDescription()
+  public Given createGiven()
   {
-    DescriptionImpl description = new DescriptionImpl();
-    return description;
+    GivenImpl given = new GivenImpl();
+    return given;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public When createWhen()
+  {
+    WhenImpl when = new WhenImpl();
+    return when;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Then createThen()
+  {
+    ThenImpl then = new ThenImpl();
+    return then;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public And createAnd()
+  {
+    AndImpl and = new AndImpl();
+    return and;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public But createBut()
+  {
+    ButImpl but = new ButImpl();
+    return but;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Asterisk createAsterisk()
+  {
+    AsteriskImpl asterisk = new AsteriskImpl();
+    return asterisk;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Statement createStatement()
+  {
+    StatementImpl statement = new StatementImpl();
+    return statement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Tag createTag()
+  {
+    TagImpl tag = new TagImpl();
+    return tag;
   }
 
   /**
