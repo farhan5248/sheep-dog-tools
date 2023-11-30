@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<feature id="cucumberxtexteditor.feature"
-	label="Cucumber Feature "
-	version="1.0.2">
-	<plugin
-			id="cucumberxtexteditor"
-			download-size="0"
-			install-size="0"
-			version="0.0.0"
-			unpack="false"/>
-	<plugin
-			id="cucumberxtexteditor.ide"
-			download-size="0"
-			install-size="0"
-			version="0.0.0"
-			unpack="false"/>
-	<plugin
-			id="cucumberxtexteditor.ui"
-			download-size="0"
-			install-size="0"
-			version="0.0.0"
-			unpack="false"/>
+<feature
+      id="cucumberxtexteditor.feature"
+      label="Cucumber Feature "
+      version="1.0.2.qualifier">
+
+   <plugin
+         id="cucumberxtexteditor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="cucumberxtexteditor.ide"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="cucumberxtexteditor.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
