@@ -6,24 +6,27 @@ import org.xtext.example.mydsl.myDsl.Statement;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess.StatementElements;
 
+// TODO move this to Markdown
+// These are examples on how to access something with += loop through the
+// elements and then get the name. The approach is the following, loop
+// through the elements. Then invoke a formatter on the rule call like for name
+// above. The 3 other approaches, feature, keyword and assignment throw
+// exceptions in the regionFor method
+// A note on the regionFor method. It works for statement works but not for
+// name. Like you can't do model.getName() and then pass that to regionFor. The
+// reason being that name has no attributes.
+// This method, like the one for Model is invoked by doc.format like on line 74.
+// What happens is that the doc.format method uses the reflection API to find
+// this method
+
 public class StatementFormatter extends Formatter {
 
-	protected boolean isLast;
-	protected boolean isLastEOLDouble = true;
 	private boolean isMinIndentCnt = false;
 
 	private Statement theStatement;
 
 	public StatementFormatter(Statement theStatement) {
 		this.theStatement = theStatement;
-	}
-
-	public void isLast(boolean isLast) {
-		this.isLast = isLast;
-	}
-
-	public void isLastEOLDouble(boolean isEOLDouble) {
-		this.isLastEOLDouble = isEOLDouble;
 	}
 
 	public void setIndent(int indentCnt, boolean isMinIndentCnt) {
@@ -35,28 +38,6 @@ public class StatementFormatter extends Formatter {
 		StatementElements a = ga.getStatementAccess();
 		formatPhraseRuleCall(df.getRegion(theStatement, a.getNamePhraseParserRuleCall_0_0()), doc);
 		formatEOL12RuleCall(df.getRegion(theStatement, a.getEOLTerminalRuleCall_1()), doc);
-	}
-
-	// TODO move this to Markdown
-	// These are examples on how to access something with += loop through the
-	// elements and then get the name. The approach is the following, loop
-	// through the elements. Then invoke a formatter on the rule call like for name
-	// above. The 3 other approaches, feature, keyword and assignment throw
-	// exceptions in the regionFor method
-	// A note on the regionFor method. It works for statement works but not for
-	// name. Like you can't do model.getName() and then pass that to regionFor. The
-	// reason being that name has no attributes.
-	// This method, like the one for Model is invoked by doc.format like on line 74.
-	// What happens is that the doc.format method uses the reflection API to find
-	// this method
-
-	public void formatEOL12RuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
-
-		if (isLast && isLastEOLDouble) {
-			replace(doc, iSR, "\r\n\r\n");
-		} else {
-			replace(doc, iSR, "\r\n");
-		}
 	}
 
 	public void formatPhraseRuleCall(ISemanticRegion iSR, IFormattableDocument doc) {

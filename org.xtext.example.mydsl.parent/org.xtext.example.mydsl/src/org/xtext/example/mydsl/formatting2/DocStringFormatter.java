@@ -9,7 +9,6 @@ import org.xtext.example.mydsl.services.MyDslGrammarAccess.DocStringElements;
 
 public class DocStringFormatter extends Formatter {
 
-	private boolean isEOLDouble = true;
 	private DocString theDocString;
 
 	public DocStringFormatter(DocString theDocString) {
@@ -17,10 +16,10 @@ public class DocStringFormatter extends Formatter {
 	}
 
 	public void isEOLDouble(boolean isEOLDouble) {
-		this.isEOLDouble = isEOLDouble;
+		this.isLastEOLDouble = isEOLDouble;
 	}
 
-	public void formatKeyword(ISemanticRegion iSR, IFormattableDocument doc) {
+	protected void formatKeyword(ISemanticRegion iSR, IFormattableDocument doc) {
 		doc.prepend(iSR, it -> it.noSpace());
 		doc.append(iSR, it -> it.noSpace());
 		replace(doc, iSR, getIndent() + iSR.getText());
@@ -38,15 +37,6 @@ public class DocStringFormatter extends Formatter {
 			formatter.setIndent(10, true);
 			formatter.isLastEOLDouble(false);
 			formatter.format(doc, ga, df);
-		}
-	}
-
-	private void formatEOL12RuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
-
-		if (isEOLDouble) {
-			replace(doc, iSR, "\r\n\r\n");
-		} else {
-			replace(doc, iSR, "\r\n");
 		}
 	}
 

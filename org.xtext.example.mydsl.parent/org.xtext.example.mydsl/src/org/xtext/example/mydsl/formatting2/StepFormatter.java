@@ -13,35 +13,12 @@ public abstract class StepFormatter extends Formatter {
 	// Put this here to avoid mixing up nested lists like steps and rows
 	// TODO this is duplicated code, maybe if it wasn't static, then there'd be no
 	// reason for duplication?
-	// TODO isLast has to be static for now for the StepTable code to know if it belongs to the last step
-	protected static boolean isLast;
-	protected boolean isFirst;
-	protected boolean isLastEOLDouble = true;
+	// TODO isLast has to be static for now for the StepTable code to know if it
+	// belongs to the last step
 	protected Step theStep;
 
 	public StepFormatter(Step theStep) {
 		this.theStep = theStep;
-	}
-
-	public void isLast(boolean isLast) {
-		StepFormatter.isLast = isLast;
-	}
-
-	public void isFirst(boolean isFirst) {
-		this.isFirst = isFirst;
-	}
-
-	public void isLastEOLDouble(boolean isEOLDouble) {
-		this.isLastEOLDouble = isEOLDouble;
-	}
-
-	protected void formatEOL12RuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
-
-		if (isLast && isLastEOLDouble) {
-			replace(doc, iSR, "\r\n\r\n");
-		} else {
-			replace(doc, iSR, "\r\n");
-		}
 	}
 
 	protected abstract void formatKeyword(ISemanticRegion iSR, IFormattableDocument doc);
@@ -58,17 +35,18 @@ public abstract class StepFormatter extends Formatter {
 
 		AbstractParserRuleElementFinder a = getAccess(ga);
 		formatKeyword(df.getRegion(theStep, getKeyword(a)), doc);
-		formatNameRuleCall(df.getRegion(theStep, getPhraseRuleCall(a)), doc);
+		formatPhraseRuleCall(df.getRegion(theStep, getPhraseRuleCall(a)), doc);
 		formatEOL12RuleCall(df.getRegion(theStep, getEOLRuleCall(a)), doc);
 		if (theStep.getTheStepTable() != null) {
 			StepTableFormatter formatter = new StepTableFormatter(theStep.getTheStepTable());
 			formatter.setIndent(10);
+			formatter.isEOLDouble(isLast);
 			formatter.format(doc, ga, df);
 		}
 		if (theStep.getTheDocString() != null) {
 			DocStringFormatter formatter2 = new DocStringFormatter(theStep.getTheDocString());
 			formatter2.setIndent(10);
-			formatter2.isEOLDouble(StepFormatter.isLast);
+			formatter2.isEOLDouble(isLast);
 			formatter2.format(doc, ga, df);
 		}
 	}

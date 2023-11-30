@@ -12,6 +12,8 @@ public class CellFormatter extends Formatter {
 
 	private static ArrayList<ArrayList<ISemanticRegion>> cells;
 
+	// TODO this needs to be here to separate variables tracking the last row from
+	// last cell
 	protected boolean isLast;
 	protected boolean isFirst;
 	protected boolean isLastEOLDouble = true;
@@ -36,7 +38,7 @@ public class CellFormatter extends Formatter {
 		formatPhraseRuleCall(df.getRegion(theCell, a.getNamePhraseParserRuleCall_1_0()), doc);
 	}
 
-	private void formatKeyword(ISemanticRegion iSR, IFormattableDocument doc) {
+	protected void formatKeyword(ISemanticRegion iSR, IFormattableDocument doc) {
 		doc.prepend(iSR, it -> it.noSpace());
 		doc.append(iSR, it -> it.noSpace());
 
@@ -48,7 +50,7 @@ public class CellFormatter extends Formatter {
 		}
 	}
 
-	private void formatPhraseRuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
+	protected void formatPhraseRuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
 		if (isFirst) {
 			if (RowFormatter.isFirst) {
 				cells = new ArrayList<ArrayList<ISemanticRegion>>();

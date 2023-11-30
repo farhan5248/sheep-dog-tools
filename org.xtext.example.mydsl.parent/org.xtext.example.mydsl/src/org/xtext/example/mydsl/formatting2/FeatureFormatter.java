@@ -20,13 +20,6 @@ public class FeatureFormatter extends Formatter {
 		this.theFeature = theFeature;
 	}
 
-	// This is an example of how to access a keyword which is something between ''
-	// in the xtext file
-	public static void formatKeyword(ISemanticRegion iSR, IFormattableDocument doc) {
-		doc.prepend(iSR, it -> it.noSpace());
-		doc.append(iSR, it -> it.setSpace(" "));
-	}
-
 	private AbstractScenarioFormatter newAbstractScenarioFormatter(AbstractScenario s) {
 		if (s instanceof Background) {
 			return new BackgroundFormatter((Background) s);
@@ -59,7 +52,7 @@ public class FeatureFormatter extends Formatter {
 		// Together they make up an assignment.
 		// A ruleCall is anything that's in the xtext file with a :
 		// So a ruleCall can be a structure like thing with attributes or a terminal
-		formatNameRuleCall(df.getRegion(theFeature, a.getNamePhraseParserRuleCall_2_0()), doc);
+		formatPhraseRuleCall(df.getRegion(theFeature, a.getNamePhraseParserRuleCall_2_0()), doc);
 		formatEOL2RuleCall(df.getRegion(theFeature, a.getEOLTerminalRuleCall_3()), doc);
 		for (Statement s : theFeature.getStatements()) {
 

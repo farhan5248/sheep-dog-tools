@@ -7,11 +7,11 @@ import org.xtext.example.mydsl.services.MyDslGrammarAccess;
 
 public class StepTableFormatter extends Formatter {
 
-	protected boolean isLast;
-	protected boolean isFirst;
-	protected boolean isLastEOLDouble = true;
-
 	private StepTable theStepTable;
+
+	public void isEOLDouble(boolean isEOLDouble) {
+		this.isLastEOLDouble = isEOLDouble;
+	}
 
 	public StepTableFormatter(StepTable theStepTable) {
 		this.theStepTable = theStepTable;
@@ -22,7 +22,7 @@ public class StepTableFormatter extends Formatter {
 			RowFormatter formatter = new RowFormatter(r);
 			formatter.isLast(isLastElement(r, theStepTable.getRows()));
 			formatter.isFirst(isFirstElement(r, theStepTable.getRows()));
-			formatter.isLastEOLDouble(StepFormatter.isLast);
+			formatter.isLastEOLDouble(isLastEOLDouble);
 			formatter.setIndent(10);
 			formatter.format(doc, ga, df);
 		}

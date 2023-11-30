@@ -16,12 +16,6 @@ public class ExampleFormatter extends Formatter {
 		this.e = theExamples;
 	}
 
-	public void formatKeyword(ISemanticRegion iSR, IFormattableDocument doc) {
-		doc.prepend(iSR, it -> it.noSpace());
-		doc.append(iSR, it -> it.noSpace());
-		replace(doc, iSR, getIndent() + iSR.getText() + " ");
-	}
-
 	public void format(IFormattableDocument doc, MyDslGrammarAccess ga, MyDslFormatter df) {
 		ExamplesElements a = ga.getExamplesAccess();
 
@@ -36,7 +30,7 @@ public class ExampleFormatter extends Formatter {
 			formatEOL1RuleCall(df.getRegion(e, a.getEOLTerminalRuleCall_0_1()), doc);
 		}
 		formatKeyword(df.getRegion(e, a.getExamplesKeyword_1()), doc);
-		formatNameRuleCall(df.getRegion(e, a.getNamePhraseParserRuleCall_2_0()), doc);
+		formatPhraseRuleCall(df.getRegion(e, a.getNamePhraseParserRuleCall_2_0()), doc);
 		formatEOL2RuleCall(df.getRegion(e, a.getEOLTerminalRuleCall_3()), doc);
 		for (Statement s : e.getStatements()) {
 

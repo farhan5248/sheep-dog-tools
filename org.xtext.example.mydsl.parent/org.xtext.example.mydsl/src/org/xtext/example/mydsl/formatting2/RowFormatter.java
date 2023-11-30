@@ -11,26 +11,11 @@ public class RowFormatter extends Formatter {
 
 	// TODO isLast has to be static for now for the Cell code to know if it
 	// belongs to the last row
-	protected static boolean isLast;
-	protected static boolean isFirst;
-	protected boolean isLastEOLDouble = true;
 
 	private Row theRow;
 
 	public RowFormatter(Row Row) {
 		this.theRow = Row;
-	}
-
-	public void isLast(boolean isLast) {
-		RowFormatter.isLast = isLast;
-	}
-
-	public void isFirst(boolean isFirst) {
-		RowFormatter.isFirst = isFirst;
-	}
-
-	public void isLastEOLDouble(boolean isEOLDouble) {
-		this.isLastEOLDouble = isEOLDouble;
 	}
 
 	public void format(IFormattableDocument doc, MyDslGrammarAccess ga, MyDslFormatter df) {
@@ -42,20 +27,11 @@ public class RowFormatter extends Formatter {
 			formatter.isFirst(isFirstElement(c, theRow.getCells()));
 			formatter.format(doc, ga, df);
 		}
-		formatVerticalLineKeyword(df.getRegion(theRow, a.getVerticalLineKeyword_1()), doc);
+		formatKeyword(df.getRegion(theRow, a.getVerticalLineKeyword_1()), doc);
 		formatEOL12RuleCall(df.getRegion(theRow, a.getEOLTerminalRuleCall_2()), doc);
 	}
 
-	private void formatEOL12RuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
-
-		if (isLast && isLastEOLDouble) {
-			replace(doc, iSR, "\r\n\r\n");
-		} else {
-			replace(doc, iSR, "\r\n");
-		}
-	}
-
-	private void formatVerticalLineKeyword(ISemanticRegion iSR, IFormattableDocument doc) {
+	protected void formatKeyword(ISemanticRegion iSR, IFormattableDocument doc) {
 		doc.prepend(iSR, it -> it.noSpace());
 		doc.append(iSR, it -> it.noSpace());
 		replace(doc, iSR, " " + iSR.getText());

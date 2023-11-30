@@ -21,6 +21,7 @@ public class MyDslFormatter extends AbstractJavaFormatter {
 	protected void format(Feature theFeature, IFormattableDocument doc) {
 
 		FeatureFormatter formatter = new FeatureFormatter(theFeature);
+		formatter.setIndent(0);
 		formatter.format(doc, ga, this);
 	}
 

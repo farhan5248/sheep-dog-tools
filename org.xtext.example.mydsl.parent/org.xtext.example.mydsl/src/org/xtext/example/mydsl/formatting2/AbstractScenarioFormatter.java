@@ -42,12 +42,6 @@ public abstract class AbstractScenarioFormatter extends Formatter {
 		}
 	}
 
-	public void formatKeyword(ISemanticRegion iSR, IFormattableDocument doc) {
-		doc.prepend(iSR, it -> it.noSpace());
-		doc.append(iSR, it -> it.noSpace());
-		replace(doc, iSR, getIndent() + iSR.getText() + " ");
-	}
-
 	protected abstract AbstractParserRuleElementFinder getAccess(MyDslGrammarAccess ga);
 
 	protected abstract void formatTags(IFormattableDocument doc, MyDslGrammarAccess a, MyDslFormatter df);
@@ -64,7 +58,7 @@ public abstract class AbstractScenarioFormatter extends Formatter {
 		AbstractParserRuleElementFinder a = getAccess(ga);
 		formatTags(doc, ga, df);
 		formatKeyword(df.getRegion(theAbstractScenario, getKeyword(a)), doc);
-		formatNameRuleCall(df.getRegion(theAbstractScenario, getPhraseRuleCall(a)), doc);
+		formatPhraseRuleCall(df.getRegion(theAbstractScenario, getPhraseRuleCall(a)), doc);
 		formatEOL2RuleCall(df.getRegion(theAbstractScenario, getEOLRuleCall(a)), doc);
 		for (Statement s : theAbstractScenario.getStatements()) {
 			StatementFormatter formatter = new StatementFormatter(s);
