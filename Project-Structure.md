@@ -1,6 +1,6 @@
 # Project Structure
 
-# MDD as I was taught
+# MDD in Theory
 
 I was taught Model Driven Development in the context of a Waterfall methodology.
 [This](https://www.researchgate.net/publication/237697446_Model_Transformers_for_Test_Generation_from_System_Models) document from ResearchGate has a [diagram](https://www.researchgate.net/figure/Derivation-of-test-models_fig9_237697446) that I often refer to.
@@ -10,7 +10,7 @@ The diagram shows transformations between 6 sets of files. I put a simple descri
 | Set | Description |
 | --- | ------------|
 | PIM | Requirements, I'll capture these in some [BPM with Camunda](https://camunda.com/platform/modeler/) |
-| PSM | System code design, I'll use the [EMF UML API](https://download.eclipse.org/modeling/mdt/uml2/javadoc/5.5.0/)  |
+| PSM | System code design, I'll use the [EMF UML API](https://download.eclipse.org/modeling/mdt/uml2/javadoc/5.5.0/) but ideally there should be a REST api so that one is not dependent on Java if you're coding your micro-service in Python or doing some backend stuff in PL/SQL  |
 | System Code | The actual code deployed to production. I'll use [JHipster](https://www.jhipster.tech/) to generate some of the code from the UML model. I'll also transform the UML model into Python because I want more experience with it |
 | PIT | Test data selection criteria. These aren't the test cases. They're data selection rules used to create test data. I'm using [GraphWalker](https://graphwalker.github.io/) for this. I've previously used [Test Modeller](https://www.curiositysoftware.ie/test-modeller) before but Graphwalker is free. |
 | PST | Test code design. Same as the PSM, I'll use EMF and UML |
@@ -35,8 +35,10 @@ I'll demo it later but basically
 If you know what dependency injection is and have read the Cucumber for Java book then you'll understand what I mean by transforming the feature file data into a unit test or an integration test in 4 above. If not, I'll demo that here. 
 Also the book uses Java for both layers but what if you had multiple programming languages, that's why the model is used as an intermediary.
 
-# MDD as I practiced it
+# MDD in Practice
+
+Some of my practices around MDD are influenced by Scott Ambler and the [Agile Modelling](https://agilemodeling.com/) site. Been consulting that site since 2008. I'll probably have to revisit that site to review which of the practices I apply here.
 
 I've modified the diagram to take into account the testing pyramid or testing throughout the process instead of just at the end. In this view the PST has the top half of the testing pyramid test automation code. The PSM would have the bottom half for each component.
 
-![What is this](OSS MDD1.png)
+![What is this](https://github.com/farhan5248/claims-adjudication-ai/blob/main/OSS%20MDD1.png)

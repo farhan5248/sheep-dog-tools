@@ -69,7 +69,6 @@ public class CellFormatter extends Formatter {
 
 	private void formatAllCells(IFormattableDocument doc) {
 		// go through list of list of iSR. first get the number of columns
-		// TODO this assumes that the table is valid, all rows have same number of cells
 		for (int i = 0; i < cells.get(0).size(); i++) {
 			ArrayList<ISemanticRegion> col = new ArrayList<ISemanticRegion>();
 			int maxWidth = 0;

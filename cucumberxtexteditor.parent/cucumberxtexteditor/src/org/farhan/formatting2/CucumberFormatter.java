@@ -25,20 +25,12 @@ public class CucumberFormatter extends AbstractJavaFormatter {
 		formatter.format(doc, ga, this);
 	}
 
-	// TODO move to Markdown
-	// All 3 approaches below reference the same region, which can be tested by
-	// triggering a ConflictingFormattingException
-	// regionFor(model).feature(Literals.MODEL__NAME);
-	// regionFor(model).assignment(ga.getModelAccess().getNameAssignment_1());
-	// regionFor(model).ruleCall(ga.getModelAccess().getNamePhraseParserRuleCall_1_0());
-
 	public ISemanticRegion getRegion(EObject eo, RuleCall ruleCall) {
 		return regionFor(eo).ruleCall(ruleCall);
 	}
 
-	// TODO move to Markdown
-	// You can also search for the keyword using keyword("Feature:");
 	public ISemanticRegion getRegion(EObject eo, Keyword keyword) {
+		// You can also search for the keyword using keyword("Feature:");
 		return regionFor(eo).keyword(keyword);
 	}
 }

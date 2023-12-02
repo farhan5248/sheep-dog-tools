@@ -20,5 +20,4 @@ public class TextReplacer extends AbstractTextReplacer {
 		context.addReplacement(getRegion().replaceWith(replacement));
 		return context;
 	}
-
 }

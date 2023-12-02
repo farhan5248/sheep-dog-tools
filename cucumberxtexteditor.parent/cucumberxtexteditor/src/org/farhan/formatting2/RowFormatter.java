@@ -9,9 +9,6 @@ import org.farhan.services.CucumberGrammarAccess.RowElements;
 
 public class RowFormatter extends Formatter {
 
-	// TODO isLast has to be static for now for the Cell code to know if it
-	// belongs to the last row
-
 	private Row theRow;
 
 	public RowFormatter(Row Row) {

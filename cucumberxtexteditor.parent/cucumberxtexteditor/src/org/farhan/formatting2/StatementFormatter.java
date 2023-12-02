@@ -6,19 +6,6 @@ import org.farhan.cucumber.Statement;
 import org.farhan.services.CucumberGrammarAccess;
 import org.farhan.services.CucumberGrammarAccess.StatementElements;
 
-// TODO move this to Markdown
-// These are examples on how to access something with += loop through the
-// elements and then get the name. The approach is the following, loop
-// through the elements. Then invoke a formatter on the rule call like for name
-// above. The 3 other approaches, feature, keyword and assignment throw
-// exceptions in the regionFor method
-// A note on the regionFor method. It works for statement works but not for
-// name. Like you can't do model.getName() and then pass that to regionFor. The
-// reason being that name has no attributes.
-// This method, like the one for Model is invoked by doc.format like on line 74.
-// What happens is that the doc.format method uses the reflection API to find
-// this method
-
 public class StatementFormatter extends Formatter {
 
 	private boolean isMinIndentCnt = false;
@@ -50,10 +37,6 @@ public class StatementFormatter extends Formatter {
 		} else {
 			replace(doc, iSR, getIndent() + iSR.getText());
 		}
-		// TODO move to Markdown
-		// This double space is not taking effect, for now I'm using a text
-		// replacer. Remove the whitespace so that it doesn't add 2 spaces each time the
-		// formatter is called
 	}
 
 }

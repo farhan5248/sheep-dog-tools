@@ -9,6 +9,8 @@ public class Formatter {
 
 	protected String indent = " ";
 	protected int indentCnt = 0;
+	// TODO isLast has to be static for now for the Cell code to know if it
+	// belongs to the last Row
 	protected static boolean isLast;
 	protected static boolean isFirst;
 	protected boolean isLastEOLDouble = true;
@@ -65,10 +67,6 @@ public class Formatter {
 		replace(doc, iSR, "\r\n");
 	}
 
-	// TODO move to Markdown
-	// This is an example of how to access a terminal.
-	// It's also an example of how to replace the text in a ruleCall, in this case,
-	// replace multiple \r\n with just 2
 	protected void formatEOL2RuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
 		replace(doc, iSR, "\r\n\r\n");
 	}

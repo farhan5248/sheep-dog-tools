@@ -10,11 +10,6 @@ import org.farhan.services.CucumberGrammarAccess;
 
 public abstract class StepFormatter extends Formatter {
 
-	// Put this here to avoid mixing up nested lists like steps and rows
-	// TODO this is duplicated code, maybe if it wasn't static, then there'd be no
-	// reason for duplication?
-	// TODO isLast has to be static for now for the StepTable code to know if it
-	// belongs to the last step
 	protected Step theStep;
 
 	public StepFormatter(Step theStep) {

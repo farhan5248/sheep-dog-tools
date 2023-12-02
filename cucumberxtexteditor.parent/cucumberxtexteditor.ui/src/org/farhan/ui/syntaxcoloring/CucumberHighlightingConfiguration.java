@@ -8,14 +8,12 @@ import org.eclipse.xtext.ui.editor.utils.TextStyle;
 
 public class CucumberHighlightingConfiguration implements IHighlightingConfiguration {
 
-	// used in the CucumberAntlrTokenToAttributeIdMapper class
 	public static final String DEFAULT_ID = "default";
 	public static final String KEYWORD_FSE_ID = "keywordfse";
 	public static final String KEYWORD_GWT_ID = "keywordgwt";
 	public static final String SL_COMMENT_ID = "comment";
 	public static final String STRING_ID = "string";
 	public static final String TAG_ID = "tag";
-	// TODO put parameter in language so that no semantic highlighting is needed?
 	public static final String PARAMETER_ID = "parameter";
 	public static final String DOC_ID = "document";
 
