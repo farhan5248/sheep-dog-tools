@@ -60,6 +60,7 @@ public class StepFormattingTest extends FormattingTest {
 		sb.append("          Line1\r\n");
 		sb.append("          \"\"\"\r\n");
 		sb.append("\r\n");
+		assertNoErrors(sb);
 		return sb;
 	}
 
@@ -124,6 +125,7 @@ public class StepFormattingTest extends FormattingTest {
 			sb.append("          Line1\r\n");
 			sb.append("           \"\"\"\r\n");
 			sb.append("\r\n");
+			assertNoErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -181,6 +183,7 @@ public class StepFormattingTest extends FormattingTest {
 			sb.append(" Line1\r\n");
 			sb.append(" \"\"\"\r\n");
 			sb.append("\r\n");
+			assertNoErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -283,6 +286,7 @@ public class StepFormattingTest extends FormattingTest {
 			sb.append("          \"\"\"\r\n");
 			sb.append("\r\n");
 			sb.append("\r\n");
+			assertNoErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});

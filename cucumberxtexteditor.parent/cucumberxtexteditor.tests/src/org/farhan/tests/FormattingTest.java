@@ -7,7 +7,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.inject.Inject;
 
-public class FormattingTest {
+public class FormattingTest extends ParsingTest {
 	@Inject
 	protected FormatterTestHelper formatterTestHelper;
 

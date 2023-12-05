@@ -17,18 +17,25 @@ public class ParsingTest {
 	@Inject
 	protected ParseHelper<Feature> parseHelper;
 
-	@Inject
-	protected ValidationTestHelper validationTestHelper;
-
-	protected void assertNoErrors(StringBuilder sb) throws Exception {
-		Feature result = parseHelper.parse(sb.toString());
+	protected void assertNoErrors(StringBuilder sb) {
+		Feature result;
+		try {
+			result = parseHelper.parse(sb.toString());
+		} catch (Exception e) {
+			result = null;
+		}
 		Assertions.assertNotNull(result);
 		List<Diagnostic> errors = result.eResource().getErrors();
 		Assertions.assertTrue(errors.isEmpty(), "Unexpected errors: " + IterableExtensions.join(errors, ", "));
 	}
 
-	protected void assertErrors(StringBuilder sb) throws Exception {
-		Feature result = parseHelper.parse(sb.toString());
+	protected void assertErrors(StringBuilder sb) {
+		Feature result;
+		try {
+			result = parseHelper.parse(sb.toString());
+		} catch (Exception e) {
+			result = null;
+		}
 		Assertions.assertNotNull(result);
 		List<Diagnostic> errors = result.eResource().getErrors();
 		Assertions.assertTrue(!errors.isEmpty(), "There should be errors");

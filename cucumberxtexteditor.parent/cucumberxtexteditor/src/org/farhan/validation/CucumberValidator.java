@@ -52,8 +52,8 @@ public class CucumberValidator extends AbstractCucumberValidator {
 
 		// this applies to When
 		String transitionEgs = "The blah request is good\r\n" + "The blah request is bad\r\n"
-				+ "The blah request is sent with \r\n" + "The blah request is triggered with \r\n"
-				+ "The blah request is sent as follows \r\n" + "The blah request is triggered as follows";
+				+ "The blah request is sent with\r\n" + "The blah request is triggered with\r\n"
+				+ "The blah request is sent as follows\r\n" + "The blah request is triggered as follows";
 
 		String msg = "The state name and details are invalid. Examples:\n" + stateEgs
 				+ "The state name and details are invalid. Examples:\n" + transitionEgs;

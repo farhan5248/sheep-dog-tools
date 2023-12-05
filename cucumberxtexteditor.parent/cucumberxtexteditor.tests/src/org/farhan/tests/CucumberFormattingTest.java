@@ -117,6 +117,7 @@ public class CucumberFormattingTest extends FormattingTest {
 			sb.append("          |   data1 |   data2 |\r\n");
 			sb.append("\r\n");
 			sb.append("");
+			assertNoErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(sb.toString());
 		});

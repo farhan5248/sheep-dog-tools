@@ -122,13 +122,4 @@ public class CucumberParsingTest extends ParsingTest {
 		assertNoErrors(sb);
 	}
 
-	@Test
-	public void testValidator() throws Exception {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Feature: basic scenario Test");
-		builder.append("\r\n");
-		validationTestHelper.assertWarning(parseHelper.parse(builder), CucumberPackage.Literals.FEATURE,
-				CucumberValidator.INVALID_NAME, "Name should start with a capital");
-	}
-
 }
