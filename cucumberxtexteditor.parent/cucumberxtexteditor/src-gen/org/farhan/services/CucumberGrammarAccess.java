@@ -842,14 +842,14 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	public class PhraseElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.Phrase");
-		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
+		private final RuleCall cTEXT_LITERALParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//Phrase:
-		//    ID+;
+		//    TEXT_LITERAL+;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//ID+
-		public RuleCall getIDTerminalRuleCall() { return cIDTerminalRuleCall; }
+		//TEXT_LITERAL+
+		public RuleCall getTEXT_LITERALParserRuleCall() { return cTEXT_LITERALParserRuleCall; }
 	}
 	public class TagElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.Tag");
@@ -874,6 +874,33 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
+	public class TEXT_LITERALElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.TEXT_LITERAL");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cWORDTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cIDTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cSTRINGTerminalRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		
+		//TEXT_LITERAL:
+		//    WORD
+		//    | ID
+		//    | STRING;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//WORD
+		//| ID
+		//| STRING
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//WORD
+		public RuleCall getWORDTerminalRuleCall_0() { return cWORDTerminalRuleCall_0; }
+		
+		//ID
+		public RuleCall getIDTerminalRuleCall_1() { return cIDTerminalRuleCall_1; }
+		
+		//STRING
+		public RuleCall getSTRINGTerminalRuleCall_2() { return cSTRINGTerminalRuleCall_2; }
+	}
 	
 	
 	private final FeatureElements pFeature;
@@ -897,7 +924,10 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	private final StatementElements pStatement;
 	private final PhraseElements pPhrase;
 	private final TagElements pTag;
+	private final TEXT_LITERALElements pTEXT_LITERAL;
 	private final TerminalRule tID;
+	private final TerminalRule tWORD;
+	private final TerminalRule tSTRING;
 	private final TerminalRule tWS;
 	private final TerminalRule tSL_COMMENT;
 	private final TerminalRule tEOL;
@@ -928,7 +958,10 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		this.pStatement = new StatementElements();
 		this.pPhrase = new PhraseElements();
 		this.pTag = new TagElements();
+		this.pTEXT_LITERAL = new TEXT_LITERALElements();
 		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.ID");
+		this.tWORD = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.WORD");
+		this.tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.STRING");
 		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.WS");
 		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.SL_COMMENT");
 		this.tEOL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.Cucumber.EOL");
@@ -1175,7 +1208,7 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//Phrase:
-	//    ID+;
+	//    TEXT_LITERAL+;
 	public PhraseElements getPhraseAccess() {
 		return pPhrase;
 	}
@@ -1194,10 +1227,36 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return getTagAccess().getRule();
 	}
 	
+	//TEXT_LITERAL:
+	//    WORD
+	//    | ID
+	//    | STRING;
+	public TEXT_LITERALElements getTEXT_LITERALAccess() {
+		return pTEXT_LITERAL;
+	}
+	
+	public ParserRule getTEXT_LITERALRule() {
+		return getTEXT_LITERALAccess().getRule();
+	}
+	
 	//terminal ID:
-	//    ('0'..'9' | 'a'..'z' | 'A'..'Z' | '_' | ',' | '.' | '<' | '>')*;
+	//    ('0'..'9' | 'a'..'z' | 'A'..'Z' | '_' | '-' | '.')+;
 	public TerminalRule getIDRule() {
 		return tID;
+	}
+	
+	//terminal WORD:
+	//    !('@' | '|' | ' ' | '\t' | '\n' | '\r')
+	//    !(' ' | '\t' | '\n' | '\r')*;
+	public TerminalRule getWORDRule() {
+		return tWORD;
+	}
+	
+	//terminal STRING:
+	//    '"' ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '"' | "'" | '\\') | !('\\' | '"' | '\r' | '\n'))* '"' |
+	//    "'" ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '"' | "'" | '\\') | !('\\' | "'" | '\r' | '\n'))* "'";
+	public TerminalRule getSTRINGRule() {
+		return tSTRING;
 	}
 	
 	//terminal WS:

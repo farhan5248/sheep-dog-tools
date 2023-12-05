@@ -24,6 +24,7 @@ public class ScenarioFormattingTest extends FormattingTest {
 		sb.append("    Given do step one\r\n");
 		sb.append("     When do step three\r\n");
 		sb.append("\r\n");
+		assertNoErrors(sb);
 		return sb;
 	}
 
@@ -52,6 +53,7 @@ public class ScenarioFormattingTest extends FormattingTest {
 			sb.append("      Given do step one  \r\n");
 			sb.append("       When do step three  \r\n");
 			sb.append("\r\n");
+			assertNoErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -73,6 +75,7 @@ public class ScenarioFormattingTest extends FormattingTest {
 			sb.append("Given do step one\r\n");
 			sb.append("When do step three\r\n");
 			sb.append("\r\n");
+			assertNoErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -101,6 +104,7 @@ public class ScenarioFormattingTest extends FormattingTest {
 			sb.append("     When do step three\r\n");
 			sb.append("\r\n");
 			sb.append("\r\n");
+			assertNoErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});

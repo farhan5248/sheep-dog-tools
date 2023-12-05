@@ -88,13 +88,26 @@ Statement:
 	name=Phrase EOL;
 
 Phrase:
-	ID+;
+	TEXT_LITERAL+;
 
 Tag:
 	'@' name=ID;
 
+TEXT_LITERAL:
+	WORD
+	| ID
+	| STRING;
+
 terminal ID:
-	('0'..'9' | 'a'..'z' | 'A'..'Z' | '_' | ',' | '.' | '<' | '>')*;
+	('0'..'9' | 'a'..'z' | 'A'..'Z' | '_' | '-' | '.')+;
+
+terminal WORD:
+	!('@' | '|' | ' ' | '\t' | '\n' | '\r')
+	!(' ' | '\t' | '\n' | '\r')*;
+
+terminal STRING:
+	'"' ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '"' | "'" | '\\') | !('\\' | '"' | '\r' | '\n'))* '"' |
+	"'" ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '"' | "'" | '\\') | !('\\' | "'" | '\r' | '\n'))* "'";
 
 terminal WS:
 	(' ' | '\t')+;

@@ -5,6 +5,7 @@ package org.farhan.tests;
 
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
+import org.eclipse.xtext.testing.formatter.FormatterTestRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -26,6 +27,14 @@ public class TagsParsingTest extends ParsingTest {
 		sb.append("@tag1 @tag2 @tag3\r\n");
 		sb.append("Feature: This is a test feature\r\n");
 		assertNoErrors(sb);
+	}
+
+	@Test
+	public void parseFeatureWithInvalidTagNames() throws Exception {
+		StringBuilder sb = new StringBuilder();
+		sb.append("@tag1@tag2@tag3\r\n");
+		sb.append("Feature: This is a test feature\r\n");
+		assertErrors(sb);
 	}
 
 	@Test
