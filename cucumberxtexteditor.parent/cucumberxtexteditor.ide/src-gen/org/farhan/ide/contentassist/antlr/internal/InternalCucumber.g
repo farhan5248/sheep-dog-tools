@@ -555,14 +555,14 @@ rulePhrase
 	:
 	(
 		(
-			{ before(grammarAccess.getPhraseAccess().getIDTerminalRuleCall()); }
-			(RULE_ID)
-			{ after(grammarAccess.getPhraseAccess().getIDTerminalRuleCall()); }
+			{ before(grammarAccess.getPhraseAccess().getTEXT_LITERALParserRuleCall()); }
+			(ruleTEXT_LITERAL)
+			{ after(grammarAccess.getPhraseAccess().getTEXT_LITERALParserRuleCall()); }
 		)
 		(
-			{ before(grammarAccess.getPhraseAccess().getIDTerminalRuleCall()); }
-			(RULE_ID)*
-			{ after(grammarAccess.getPhraseAccess().getIDTerminalRuleCall()); }
+			{ before(grammarAccess.getPhraseAccess().getTEXT_LITERALParserRuleCall()); }
+			(ruleTEXT_LITERAL)*
+			{ after(grammarAccess.getPhraseAccess().getTEXT_LITERALParserRuleCall()); }
 		)
 	)
 ;
@@ -589,6 +589,31 @@ ruleTag
 		{ before(grammarAccess.getTagAccess().getGroup()); }
 		(rule__Tag__Group__0)
 		{ after(grammarAccess.getTagAccess().getGroup()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+// Entry rule entryRuleTEXT_LITERAL
+entryRuleTEXT_LITERAL
+:
+{ before(grammarAccess.getTEXT_LITERALRule()); }
+	 ruleTEXT_LITERAL
+{ after(grammarAccess.getTEXT_LITERALRule()); } 
+	 EOF 
+;
+
+// Rule TEXT_LITERAL
+ruleTEXT_LITERAL 
+	@init {
+		int stackSize = keepStackSize();
+	}
+	:
+	(
+		{ before(grammarAccess.getTEXT_LITERALAccess().getAlternatives()); }
+		(rule__TEXT_LITERAL__Alternatives)
+		{ after(grammarAccess.getTEXT_LITERALAccess().getAlternatives()); }
 	)
 ;
 finally {
@@ -787,6 +812,33 @@ rule__Asterisk__Alternatives_3
 		{ before(grammarAccess.getAsteriskAccess().getTheDocStringAssignment_3_1()); }
 		(rule__Asterisk__TheDocStringAssignment_3_1)
 		{ after(grammarAccess.getAsteriskAccess().getTheDocStringAssignment_3_1()); }
+	)
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__TEXT_LITERAL__Alternatives
+	@init {
+		int stackSize = keepStackSize();
+	}
+:
+	(
+		{ before(grammarAccess.getTEXT_LITERALAccess().getWORDTerminalRuleCall_0()); }
+		RULE_WORD
+		{ after(grammarAccess.getTEXT_LITERALAccess().getWORDTerminalRuleCall_0()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getTEXT_LITERALAccess().getIDTerminalRuleCall_1()); }
+		RULE_ID
+		{ after(grammarAccess.getTEXT_LITERALAccess().getIDTerminalRuleCall_1()); }
+	)
+	|
+	(
+		{ before(grammarAccess.getTEXT_LITERALAccess().getSTRINGTerminalRuleCall_2()); }
+		RULE_STRING
+		{ after(grammarAccess.getTEXT_LITERALAccess().getSTRINGTerminalRuleCall_2()); }
 	)
 ;
 finally {
@@ -3588,7 +3640,11 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-RULE_ID : ('0'..'9'|'a'..'z'|'A'..'Z'|'_'|','|'.'|'<'|'>')*;
+RULE_ID : ('0'..'9'|'a'..'z'|'A'..'Z'|'_'|'-'|'.')+;
+
+RULE_WORD : ~(('@'|'|'|' '|'\t'|'\n'|'\r')) ~((' '|'\t'|'\n'|'\r'))*;
+
+RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'"'|'\r'|'\n')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'\''|'\r'|'\n')))* '\'');
 
 RULE_WS : (' '|'\t')+;
 

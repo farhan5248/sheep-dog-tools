@@ -41,18 +41,6 @@ public class TagFormattingTest extends FormattingTest {
 	}
 
 	@Test
-	public void formatTagFewerSpaces() {
-
-		assertFormatted((FormatterTestRequest it) -> {
-			StringBuilder sb = new StringBuilder();
-			sb.append("@tag1@tag2@tag3\r\n");
-			sb.append("Feature: This is a test feature\r\n");
-			it.setToBeFormatted(sb.toString());
-			it.setExpectation(getExpected().toString());
-		});
-	}
-
-	@Test
 	public void formatTagMoreEOL() {
 
 		assertFormatted((FormatterTestRequest it) -> {

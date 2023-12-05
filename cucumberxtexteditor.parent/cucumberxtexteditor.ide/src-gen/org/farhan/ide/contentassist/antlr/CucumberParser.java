@@ -39,6 +39,7 @@ public class CucumberParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getAndAccess().getAlternatives_3(), "rule__And__Alternatives_3");
 			builder.put(grammarAccess.getButAccess().getAlternatives_3(), "rule__But__Alternatives_3");
 			builder.put(grammarAccess.getAsteriskAccess().getAlternatives_3(), "rule__Asterisk__Alternatives_3");
+			builder.put(grammarAccess.getTEXT_LITERALAccess().getAlternatives(), "rule__TEXT_LITERAL__Alternatives");
 			builder.put(grammarAccess.getFeatureAccess().getGroup(), "rule__Feature__Group__0");
 			builder.put(grammarAccess.getFeatureAccess().getGroup_0(), "rule__Feature__Group_0__0");
 			builder.put(grammarAccess.getBackgroundAccess().getGroup(), "rule__Background__Group__0");

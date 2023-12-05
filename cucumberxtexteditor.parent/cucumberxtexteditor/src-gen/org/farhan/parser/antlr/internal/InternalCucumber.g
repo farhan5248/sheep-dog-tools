@@ -1520,12 +1520,15 @@ rulePhrase returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	leaveRule();
 }:
 	(
-		this_ID_0=RULE_ID
 		{
-			$current.merge(this_ID_0);
+			newCompositeNode(grammarAccess.getPhraseAccess().getTEXT_LITERALParserRuleCall());
+		}
+		this_TEXT_LITERAL_0=ruleTEXT_LITERAL
+		{
+			$current.merge(this_TEXT_LITERAL_0);
 		}
 		{
-			newLeafNode(this_ID_0, grammarAccess.getPhraseAccess().getIDTerminalRuleCall());
+			afterParserOrEnumRuleCall();
 		}
 	)+
 ;
@@ -1571,7 +1574,53 @@ ruleTag returns [EObject current=null]
 	)
 ;
 
-RULE_ID : ('0'..'9'|'a'..'z'|'A'..'Z'|'_'|','|'.'|'<'|'>')*;
+// Entry rule entryRuleTEXT_LITERAL
+entryRuleTEXT_LITERAL returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getTEXT_LITERALRule()); }
+	iv_ruleTEXT_LITERAL=ruleTEXT_LITERAL
+	{ $current=$iv_ruleTEXT_LITERAL.current.getText(); }
+	EOF;
+
+// Rule TEXT_LITERAL
+ruleTEXT_LITERAL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		this_WORD_0=RULE_WORD
+		{
+			$current.merge(this_WORD_0);
+		}
+		{
+			newLeafNode(this_WORD_0, grammarAccess.getTEXT_LITERALAccess().getWORDTerminalRuleCall_0());
+		}
+		    |
+		this_ID_1=RULE_ID
+		{
+			$current.merge(this_ID_1);
+		}
+		{
+			newLeafNode(this_ID_1, grammarAccess.getTEXT_LITERALAccess().getIDTerminalRuleCall_1());
+		}
+		    |
+		this_STRING_2=RULE_STRING
+		{
+			$current.merge(this_STRING_2);
+		}
+		{
+			newLeafNode(this_STRING_2, grammarAccess.getTEXT_LITERALAccess().getSTRINGTerminalRuleCall_2());
+		}
+	)
+;
+
+RULE_ID : ('0'..'9'|'a'..'z'|'A'..'Z'|'_'|'-'|'.')+;
+
+RULE_WORD : ~(('@'|'|'|' '|'\t'|'\n'|'\r')) ~((' '|'\t'|'\n'|'\r'))*;
+
+RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'"'|'\r'|'\n')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'\''|'\r'|'\n')))* '\'');
 
 RULE_WS : (' '|'\t')+;
 
