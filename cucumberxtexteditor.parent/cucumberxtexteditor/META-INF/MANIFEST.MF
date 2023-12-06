@@ -6,6 +6,8 @@ Bundle-Vendor: My Company
 Bundle-Version: 1.0.2.qualifier
 Bundle-SymbolicName: cucumberxtexteditor; singleton:=true
 Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .,
+ lib/hello-world-0.0.1-SNAPSHOT.jar
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase,
  org.eclipse.equinox.common;bundle-version="3.16.0",
