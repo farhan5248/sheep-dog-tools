@@ -9,6 +9,7 @@ import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
+import org.farhan.greetings.HelloWorld;
 
 /**
  * This class contains custom validation rules.
@@ -89,9 +90,11 @@ public class CucumberValidator extends AbstractCucumberValidator {
 	// validation menu item is selected
 	@Check(CheckType.EXPENSIVE)
 	public void checkFeature(Feature feature) {
+		HelloWorld hw = new HelloWorld();
+		hw.greet();
+
 		if (!Character.isUpperCase(feature.getName().charAt(0))) {
 			warning("Feature name should start with a capital", CucumberPackage.Literals.FEATURE__NAME, INVALID_NAME);
 		}
 	}
-
 }
