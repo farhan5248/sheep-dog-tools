@@ -9,16 +9,12 @@ import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
-import org.farhan.greetings.HelloWorld;
+import org.farhan.validation.uml.UMLStuffDoer;
+import org.eclipse.uml2.uml.Model;
 
-/**
- * This class contains custom validation rules.
- *
- * See
- * https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
- */
 public class CucumberValidator extends AbstractCucumberValidator {
 
+	// Given an input/transition or response/state then response/state
 	private static final String OBJ_REGEX = "( .*)";
 	private static final String APP_REGEX = "( .*( application| service),)?";
 	private static final String STATE_NAME_REGEX = "The" + APP_REGEX + "(" + OBJ_REGEX;
@@ -26,6 +22,8 @@ public class CucumberValidator extends AbstractCucumberValidator {
 	private static final String STATE_REGEX = STATE_NAME_REGEX + STATE_DETAILS_REGEX;
 	public static final String INVALID_STATE = "invalidState";
 
+	// When request for next response/state
+	// TODO The (.*) is requested( for ( record| section))?
 	private static final String TRANSITION_NAME_REGEX = "(The (.*) request)";
 	private static final String TRANSITION_DETAILS_REGEX = "( is( sent| triggered| bad| good)( with| as follows)?)";
 	private static final String TRANSITION_REGEX = TRANSITION_NAME_REGEX + TRANSITION_DETAILS_REGEX;
@@ -90,11 +88,22 @@ public class CucumberValidator extends AbstractCucumberValidator {
 	// validation menu item is selected
 	@Check(CheckType.EXPENSIVE)
 	public void checkFeature(Feature feature) {
-		HelloWorld hw = new HelloWorld();
-		hw.greet();
+		// TODO validate that feature file name and feature name are the same.
 
 		if (!Character.isUpperCase(feature.getName().charAt(0))) {
 			warning("Feature name should start with a capital", CucumberPackage.Literals.FEATURE__NAME, INVALID_NAME);
 		}
+
+		// Make model
+		UMLStuffDoer usd = new UMLStuffDoer(feature);
+		try {
+			usd.makeUMLModel();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// Make java code
+		
 	}
+
 }
