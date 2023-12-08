@@ -10,7 +10,6 @@ import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
 import org.farhan.validation.uml.UMLStuffDoer;
-import org.eclipse.uml2.uml.Model;
 
 public class CucumberValidator extends AbstractCucumberValidator {
 
@@ -97,7 +96,7 @@ public class CucumberValidator extends AbstractCucumberValidator {
 		// Make model
 		UMLStuffDoer usd = new UMLStuffDoer(feature);
 		try {
-			usd.makeUMLModel();
+			//usd.makeUMLModel();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

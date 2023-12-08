@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="lib/common-2.5.0.v20221116-1811.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/ecore.xmi-2.36.0.v20231002-1156.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/ecore-2.35.0.v20230829-0934.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/javaparser-core-3.25.7.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/javaparser-symbol-solver-core-3.25.7.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/javassist-3.29.2-GA.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.uml2.uml.resources_5.5.0.v20221116-1811.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.core.runtime_3.15.0.v20180817-1401.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.emf.ecore_2.35.0.v20230829-0934.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.emf.ecore.xmi_2.36.0.v20231002-1156.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.emf.mapping.ecore2xml_2.12.0.v20230211-1150.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.uml2.common_2.5.0.v20221116-1811.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.uml2.types_2.5.0.v20221116-1811.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.uml2.uml_5.5.0.v20210228-1829.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/mapping.ecore2xml-2.12.0.v20230211-1150.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/runtime-3.15.0.v20180817-1401.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/types-2.5.0.v20221116-1811.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/uml.resources-5.5.0.v20221116-1811.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/uml-5.5.0.v20210228-1829.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
-			<attribute name="module" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
