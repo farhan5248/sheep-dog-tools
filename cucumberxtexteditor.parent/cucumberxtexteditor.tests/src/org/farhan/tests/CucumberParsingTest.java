@@ -5,8 +5,6 @@ package org.farhan.tests;
 
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
-import org.farhan.cucumber.CucumberPackage;
-import org.farhan.validation.CucumberValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
