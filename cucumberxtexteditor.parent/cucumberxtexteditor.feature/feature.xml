@@ -2,7 +2,7 @@
 <feature
       id="cucumberxtexteditor.feature"
       label="Cucumber Feature "
-      version="1.0.2">
+      version="1.0.3.qualifier">
 
    <plugin
          id="cucumberxtexteditor"
