@@ -5,29 +5,21 @@ package org.farhan.validation;
 
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
+import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Feature;
+import org.farhan.cucumber.Given;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
+import org.farhan.cucumber.Then;
+import org.farhan.cucumber.When;
+import org.farhan.graph.validation.EdgeValidator;
+import org.farhan.graph.validation.VerticeValidator;
 
 public class CucumberValidator extends AbstractCucumberValidator {
 
-	// Given an input/transition or response/state then response/state
-	private static final String OBJ_REGEX = "( .*)";
-	private static final String APP_REGEX = "( .*( application| service),)?";
-	private static final String STATE_NAME_REGEX = "The" + APP_REGEX + "(" + OBJ_REGEX;
-	private static final String STATE_DETAILS_REGEX = " is (empty|present|as follows))";
-	private static final String STATE_REGEX = STATE_NAME_REGEX + STATE_DETAILS_REGEX;
-	public static final String INVALID_STATE = "invalidState";
-
-	// When request for next response/state
-	// TODO The (.*) is requested( for ( record| section))?
-	private static final String TRANSITION_NAME_REGEX = "(The (.*) request)";
-	private static final String TRANSITION_DETAILS_REGEX = "( is( sent| triggered| bad| good)( with| as follows)?)";
-	private static final String TRANSITION_REGEX = TRANSITION_NAME_REGEX + TRANSITION_DETAILS_REGEX;
-	public static final String INVALID_TRANSITION = "invalidTransition";
-
 	public static final String INVALID_NAME = "invalidName";
+	public static final String INVALID_STEP_TYPE = "invalidStepType";
 
 	// Validate if the Step is a valid vertice with input or edge, FAST is when the
 	// file is modified
@@ -37,32 +29,24 @@ public class CucumberValidator extends AbstractCucumberValidator {
 		// TODO the quickfix here is to identify which regex is broken and put an
 		// example in place
 
-		// this applies to Given and Then
-		String stateEgs = "The blah application, something/something/something/Object is empty\r\n"
-				+ "The blah service, something/something/something/Object is empty\r\n"
-				+ "The something/something/something/Object is empty\r\n" + "\r\n"
-				+ "The blah application, something/something/something/Object is present\r\n"
-				+ "The blah service, something/something/something/Object is present\r\n"
-				+ "The something/something/something/Object is present\r\n" + "\r\n"
-				+ "The blah application, something/something/something/Object is as follows\r\n"
-				+ "The blah service, something/something/something/Object is as follows\r\n"
-				+ "The something/something/something/Object is as follows";
+		if ((step instanceof Given || step instanceof Then) && !VerticeValidator.isValid(step.getName())) {
+			error(VerticeValidator.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
+		} else if (step instanceof When && !EdgeValidator.isValid(step.getName())) {
+			error(EdgeValidator.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
+		} else {
+			error("Unknown step type, can't tell if this is a Given/Then or a When.",
+					CucumberPackage.Literals.STEP__NAME, INVALID_STEP_TYPE);
+		}
 
-		// this applies to When
-		String transitionEgs = "The blah request is good\r\n" + "The blah request is bad\r\n"
-				+ "The blah request is sent with\r\n" + "The blah request is triggered with\r\n"
-				+ "The blah request is sent as follows\r\n" + "The blah request is triggered as follows";
-
-		String msg = "The state name and details are invalid. Examples:\n" + stateEgs
-				+ "The state name and details are invalid. Examples:\n" + transitionEgs;
+		// TODO what about And, But, *.
+		AbstractScenario as = (AbstractScenario) step.eContainer();
+		// TODO assumes step 0 is never And. Check that as step validation
+		// Use something like this to determine if this is a GWT:
+		// as.getSteps().indexOf(step)
 
 		if (step.getTheStepTable() != null) {
 			// TODO Add table column row validation, each row should have the max number of
 			// columns
-		}
-
-		if (!step.getName().matches(STATE_REGEX) && !step.getName().matches(TRANSITION_REGEX)) {
-			error(msg, CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
 		}
 	}
 

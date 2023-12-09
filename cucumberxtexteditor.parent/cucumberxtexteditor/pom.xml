@@ -120,6 +120,7 @@
 									<groupId>org.farhan</groupId>
 									<artifactId>graph-validator</artifactId>
 									<version>0.0.1-SNAPSHOT</version>
+									<overWrite>true</overWrite>
 								</artifactItem>
 							</artifactItems>
 							<!-- other configurations here -->
