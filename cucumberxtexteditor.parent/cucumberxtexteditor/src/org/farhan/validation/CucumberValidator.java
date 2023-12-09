@@ -9,7 +9,6 @@ import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
-import org.farhan.validation.uml.UMLStuffDoer;
 
 public class CucumberValidator extends AbstractCucumberValidator {
 
@@ -30,7 +29,8 @@ public class CucumberValidator extends AbstractCucumberValidator {
 
 	public static final String INVALID_NAME = "invalidName";
 
-	// This one is to check each step, FAST is when the file is modified
+	// Validate if the Step is a valid vertice with input or edge, FAST is when the
+	// file is modified
 	@Check(CheckType.FAST)
 	public void checkStepName(Step step) {
 
@@ -66,7 +66,8 @@ public class CucumberValidator extends AbstractCucumberValidator {
 		}
 	}
 
-	// This one is to check each scenario, NORMAL is when the file is saved
+	// Validate if the Abstract Scenario is a valid path, NORMAL is when the file is
+	// saved
 	@Check(CheckType.NORMAL)
 	public void checkScenario(Scenario scenario) {
 
@@ -83,7 +84,7 @@ public class CucumberValidator extends AbstractCucumberValidator {
 		}
 	}
 
-	// This one is to run the conversion to a UML model, EXPENSIVE is when the
+	// Validate if the Feature is a valid graph, EXPENSIVE is when the
 	// validation menu item is selected
 	@Check(CheckType.EXPENSIVE)
 	public void checkFeature(Feature feature) {
@@ -93,16 +94,6 @@ public class CucumberValidator extends AbstractCucumberValidator {
 			warning("Feature name should start with a capital", CucumberPackage.Literals.FEATURE__NAME, INVALID_NAME);
 		}
 
-		// Make model
-		UMLStuffDoer usd = new UMLStuffDoer(feature);
-		try {
-			//usd.makeUMLModel();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// Make java code
-		
 	}
 
 }
