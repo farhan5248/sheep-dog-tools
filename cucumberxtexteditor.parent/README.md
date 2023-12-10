@@ -32,8 +32,8 @@ You can go over the files changes by the type of work.
 
 | Work |
 | ---- |
-| [Code Generation](Code-Generation.md) |
 | [Continuous Integration](Continuous-Integration.md) |
+| [Code Generation](Code-Generation.md) |
 | [Formatting](Formatting.md) |
 | [Validation](Validation.md) |
 | [Testing](Testing.md) |
