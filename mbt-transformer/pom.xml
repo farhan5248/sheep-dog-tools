@@ -3,11 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.farhan</groupId>
-	<artifactId>graph-validator</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Graph Validator</name>
-	<description>Validates vertice names, edge names, paths and graphs in .adoc
-		and .feature files.</description>
+	<artifactId>mbt-transformer</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>MBT Transformer</name>
+	<description>Use for validation and round trip engineering of code to models.</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -45,7 +44,6 @@
 		</plugins>
 	</build>
 
-
 	<reporting>
 		<plugins>
 			<plugin>
@@ -55,7 +53,6 @@
 			</plugin>
 		</plugins>
 	</reporting>
-
 
 	<dependencyManagement>
 		<dependencies>
