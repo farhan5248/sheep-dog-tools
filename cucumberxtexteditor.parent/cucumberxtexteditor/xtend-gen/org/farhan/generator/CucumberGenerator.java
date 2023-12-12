@@ -3,7 +3,6 @@
  */
 package org.farhan.generator;
 
-import com.google.common.collect.Iterables;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -22,7 +21,7 @@ import org.farhan.cucumber.Feature;
 public class CucumberGenerator extends AbstractGenerator {
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
-    Iterable<Feature> _filter = Iterables.<Feature>filter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Feature.class);
+    Iterable<Feature> _filter = <Feature>.Featurefilter(IteratorExtensions.<EObject>toIterable(resource.getAllContents()), Feature.class);
     for (final Feature f : _filter) {
       String _name = f.getName();
       String _plus = ("temp/" + _name);

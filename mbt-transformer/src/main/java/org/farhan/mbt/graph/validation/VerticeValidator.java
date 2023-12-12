@@ -1,4 +1,4 @@
-package org.farhan.graph.validation;
+package org.farhan.mbt.graph.validation;
 
 public class VerticeValidator {
 

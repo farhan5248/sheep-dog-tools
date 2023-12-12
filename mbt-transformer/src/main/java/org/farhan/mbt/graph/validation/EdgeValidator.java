@@ -1,4 +1,4 @@
-package org.farhan.graph.validation;
+package org.farhan.mbt.graph.validation;
 
 public class EdgeValidator {
 	// When request for next response/state

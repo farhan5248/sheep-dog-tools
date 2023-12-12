@@ -6,7 +6,8 @@
 	<artifactId>mbt-transformer</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>MBT Transformer</name>
-	<description>Use for validation and round trip engineering of code to models.</description>
+	<description>Use for validation and round trip engineering of code to
+		models.</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -74,6 +75,72 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.core</groupId>
+			<artifactId>runtime</artifactId>
+			<version>3.29.0.v20230726-0617</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>ecore</artifactId>
+			<version>2.35.0.v20230829-0934</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>ecore.xmi</artifactId>
+			<version>2.35.0.v20230801-1141</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>mapping.ecore2xml</artifactId>
+			<version>2.12.0.v20230211-1150</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>common</artifactId>
+			<version>2.29.0.v20230916-0637</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>xtext</artifactId>
+			<version>2.32.0.v20230827-1315</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.uml2</groupId>
+			<artifactId>common</artifactId>
+			<version>2.5.0.v20221116-1811</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.uml2</groupId>
+			<artifactId>types</artifactId>
+			<version>2.5.0.v20221116-1811</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.uml2</groupId>
+			<artifactId>uml.resources</artifactId>
+			<version>5.5.0.v20221116-1811</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.uml2</groupId>
+			<artifactId>uml</artifactId>
+			<version>5.5.0.v20210228-1829</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.javaparser</groupId>
+			<artifactId>javaparser-core</artifactId>
+			<version>3.25.7</version>
+		</dependency>
+		<dependency>
+			<groupId>org.farhan</groupId>
+			<artifactId>cucumberxtexteditor</artifactId>
+			<version>1.0.3-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>

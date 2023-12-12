@@ -1,0 +1,7 @@
+"C:\Users\Farhan\Downloads\org.eclipse.xtext_2.7.3.v201411190455.jar"
+
+"C:\Users\Farhan\eclipse-workspace-dsl\.metadata\.plugins\org.eclipse.pde.core\.bundle_pool\plugins\org.eclipse.xtext_2.32.0.v20230827-1315.jar"
+"C:\Users\Farhan\eclipse-workspace-dsl\.metadata\.plugins\org.eclipse.pde.core\.bundle_pool\plugins\org.eclipse.core.runtime_3.29.0.v20230726-0617.jar"
+"C:\Users\Farhan\eclipse-workspace-dsl\.metadata\.plugins\org.eclipse.pde.core\.bundle_pool\plugins\org.eclipse.emf.ecore.xmi_2.35.0.v20230801-1141.jar"
+
+mvn install:install-file -Dfile="C:\Users\Farhan\eclipse-workspace-dsl\.metadata\.plugins\org.eclipse.pde.core\.bundle_pool\plugins\org.eclipse.emf.ecore.xmi_2.35.0.v20230801-1141.jar" -DgroupId=org.eclipse.emf -DartifactId=ecore.xmi -Dversion=2.35.0.v20230801-1141 -Dpackaging=jar -DgeneratePom=true
