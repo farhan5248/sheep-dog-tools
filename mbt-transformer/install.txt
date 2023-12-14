@@ -3,5 +3,8 @@
 "C:\Users\Farhan\eclipse-workspace-dsl\.metadata\.plugins\org.eclipse.pde.core\.bundle_pool\plugins\org.eclipse.xtext_2.32.0.v20230827-1315.jar"
 "C:\Users\Farhan\eclipse-workspace-dsl\.metadata\.plugins\org.eclipse.pde.core\.bundle_pool\plugins\org.eclipse.core.runtime_3.29.0.v20230726-0617.jar"
 "C:\Users\Farhan\eclipse-workspace-dsl\.metadata\.plugins\org.eclipse.pde.core\.bundle_pool\plugins\org.eclipse.emf.ecore.xmi_2.35.0.v20230801-1141.jar"
+"C:\Users\Farhan\.p2\pool\plugins\org.antlr.runtime_3.2.0.v20220404-1927.jar"
+"C:\Users\Farhan\.p2\pool\plugins\org.eclipse.xtext.util_2.32.0.v20230827-1315.jar"
+"C:\Users\Farhan\.p2\pool\plugins\org.eclipse.equinox.common_3.18.100.v20230730-1117.jar"
 
-mvn install:install-file -Dfile="C:\Users\Farhan\eclipse-workspace-dsl\.metadata\.plugins\org.eclipse.pde.core\.bundle_pool\plugins\org.eclipse.emf.ecore.xmi_2.35.0.v20230801-1141.jar" -DgroupId=org.eclipse.emf -DartifactId=ecore.xmi -Dversion=2.35.0.v20230801-1141 -Dpackaging=jar -DgeneratePom=true
+mvn install:install-file -Dfile="C:\Users\Farhan\.p2\pool\plugins\org.eclipse.equinox.common_3.18.100.v20230730-1117.jar" -DgroupId=org.eclipse.equinox -DartifactId=common -Dversion=3.18.100.v20230730-1117 -Dpackaging=jar -DgeneratePom=true

@@ -14,7 +14,6 @@
 		<java.version>1.8</java.version>
 	</properties>
 
-
 	<build>
 		<plugins>
 			<plugin>
@@ -75,6 +74,7 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- Eclipse Common -->
 		<dependency>
 			<groupId>org.eclipse.core</groupId>
 			<artifactId>runtime</artifactId>
@@ -100,9 +100,25 @@
 			<artifactId>common</artifactId>
 			<version>2.29.0.v20230916-0637</version>
 		</dependency>
+		<!-- Eclipse Xtext -->
+		<dependency>
+			<groupId>org.eclipse.equinox</groupId>
+			<artifactId>common</artifactId>
+			<version>3.18.100.v20230730-1117</version>
+		</dependency>
+		<dependency>
+			<groupId>org.antlr</groupId>
+			<artifactId>runtime</artifactId>
+			<version>3.2.0.v20220404-1927</version>
+		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>xtext</artifactId>
+			<version>2.32.0.v20230827-1315</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>util</artifactId>
 			<version>2.32.0.v20230827-1315</version>
 		</dependency>
 		<dependency>
@@ -110,6 +126,7 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
+		<!-- Eclipse UML -->
 		<dependency>
 			<groupId>org.eclipse.uml2</groupId>
 			<artifactId>common</artifactId>
@@ -130,17 +147,20 @@
 			<artifactId>uml</artifactId>
 			<version>5.5.0.v20210228-1829</version>
 		</dependency>
+		<!-- GitHub Java -->
 		<dependency>
 			<groupId>com.github.javaparser</groupId>
 			<artifactId>javaparser-core</artifactId>
 			<version>3.25.7</version>
 		</dependency>
+		<!-- Farhan Cucumber -->
 		<dependency>
 			<groupId>org.farhan</groupId>
 			<artifactId>cucumberxtexteditor</artifactId>
 			<version>1.0.3-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- Cucumber -->
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>

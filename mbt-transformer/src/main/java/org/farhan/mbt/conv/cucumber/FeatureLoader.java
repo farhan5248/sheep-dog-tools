@@ -13,13 +13,6 @@ import org.farhan.cucumber.*;
 
 public class FeatureLoader {
 
-	public static void main(String[] args) throws IOException {
-
-		String content = "Feature: Functionality";
-		Feature feature = new FeatureLoader().loadModel(content);
-		System.out.println(feature.getName());
-	}
-
 	public Feature loadModel(String content) {
 
 		try {

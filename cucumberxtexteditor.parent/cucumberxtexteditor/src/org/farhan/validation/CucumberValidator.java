@@ -13,8 +13,8 @@ import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.Then;
 import org.farhan.cucumber.When;
-import org.farhan.graph.validation.EdgeValidator;
-import org.farhan.graph.validation.VerticeValidator;
+import org.farhan.mbt.graph.validation.EdgeValidator;
+import org.farhan.mbt.graph.validation.VerticeValidator;
 
 public class CucumberValidator extends AbstractCucumberValidator {
 
