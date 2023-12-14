@@ -8,11 +8,8 @@ import org.eclipse.xtext.validation.CheckType;
 import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Feature;
-import org.farhan.cucumber.Given;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
-import org.farhan.cucumber.Then;
-import org.farhan.cucumber.When;
 import org.farhan.mbt.graph.validation.EdgeValidator;
 import org.farhan.mbt.graph.validation.VerticeValidator;
 
@@ -29,16 +26,11 @@ public class CucumberValidator extends AbstractCucumberValidator {
 		// TODO the quickfix here is to identify which regex is broken and put an
 		// example in place
 
-		if ((step instanceof Given || step instanceof Then) && !VerticeValidator.isValid(step.getName())) {
+		if (!EdgeValidator.isValid(step.getName()) && !VerticeValidator.isValid(step.getName())) {
 			error(VerticeValidator.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
-		} else if (step instanceof When && !EdgeValidator.isValid(step.getName())) {
-			error(EdgeValidator.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
-		} else {
-			error("Unknown step type, can't tell if this is a Given/Then or a When.",
-					CucumberPackage.Literals.STEP__NAME, INVALID_STEP_TYPE);
 		}
 
-		// TODO what about And, But, *.
+		// TODO apply validation to Given/Then vs When
 		AbstractScenario as = (AbstractScenario) step.eContainer();
 		// TODO assumes step 0 is never And. Check that as step validation
 		// Use something like this to determine if this is a GWT:

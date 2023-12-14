@@ -14,17 +14,17 @@ public class ScenarioFormattingTest extends FormattingTest {
 	private StringBuilder getExpected() {
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("\r\n");
-		sb.append("  @tag1\r\n");
-		sb.append("  Scenario: Submit a claim\r\n");
-		sb.append("\r\n");
-		sb.append("    Basic EDI claim\r\n");
-		sb.append("    No deductible\r\n");
-		sb.append("\r\n");
-		sb.append("    Given do step one\r\n");
-		sb.append("     When do step three\r\n");
-		sb.append("\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("\n");
+		sb.append("  @tag1\n");
+		sb.append("  Scenario: Submit a claim\n");
+		sb.append("\n");
+		sb.append("    Basic EDI claim\n");
+		sb.append("    No deductible\n");
+		sb.append("\n");
+		sb.append("    Given do step one\n");
+		sb.append("     When do step three\n");
+		sb.append("\n");
 		assertNoErrors(sb);
 		return sb;
 	}
@@ -43,17 +43,17 @@ public class ScenarioFormattingTest extends FormattingTest {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
-			sb.append("  Feature:   This is a test feature  \r\n");
-			sb.append("\r\n");
-			sb.append("  @tag1  \r\n");
-			sb.append("    Scenario:   Submit a claim  \r\n");
-			sb.append("\r\n");
-			sb.append("      Basic EDI claim  \r\n");
-			sb.append("      No deductible  \r\n");
-			sb.append("\r\n");
-			sb.append("      Given do step one  \r\n");
-			sb.append("       When do step three  \r\n");
-			sb.append("\r\n");
+			sb.append("  Feature:   This is a test feature  \n");
+			sb.append("\n");
+			sb.append("  @tag1  \n");
+			sb.append("    Scenario:   Submit a claim  \n");
+			sb.append("\n");
+			sb.append("      Basic EDI claim  \n");
+			sb.append("      No deductible  \n");
+			sb.append("\n");
+			sb.append("      Given do step one  \n");
+			sb.append("       When do step three  \n");
+			sb.append("\n");
 			assertNoErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
@@ -65,17 +65,17 @@ public class ScenarioFormattingTest extends FormattingTest {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
-			sb.append("Feature: This is a test feature\r\n");
-			sb.append("\r\n");
-			sb.append("@tag1\r\n");
-			sb.append("Scenario: Submit a claim\r\n");
-			sb.append("\r\n");
-			sb.append("Basic EDI claim\r\n");
-			sb.append("No deductible\r\n");
-			sb.append("\r\n");
-			sb.append("Given do step one\r\n");
-			sb.append("When do step three\r\n");
-			sb.append("\r\n");
+			sb.append("Feature: This is a test feature\n");
+			sb.append("\n");
+			sb.append("@tag1\n");
+			sb.append("Scenario: Submit a claim\n");
+			sb.append("\n");
+			sb.append("Basic EDI claim\n");
+			sb.append("No deductible\n");
+			sb.append("\n");
+			sb.append("Given do step one\n");
+			sb.append("When do step three\n");
+			sb.append("\n");
 			assertNoErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
@@ -87,24 +87,24 @@ public class ScenarioFormattingTest extends FormattingTest {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
-			sb.append("Feature: This is a test feature\r\n");
-			sb.append("\r\n");
-			sb.append("\r\n");
-			sb.append("@tag1\r\n");
-			sb.append("\r\n");
+			sb.append("Feature: This is a test feature\n");
+			sb.append("\n");
+			sb.append("\n");
+			sb.append("@tag1\n");
+			sb.append("\n");
 			sb.append("  Scenario: Submit a claim");
-			sb.append("\r\n");
-			sb.append("\r\n");
-			sb.append("    Basic EDI claim\r\n");
-			sb.append("\r\n");
-			sb.append("    No deductible\r\n");
-			sb.append("\r\n");
-			sb.append("\r\n");
-			sb.append("    Given do step one\r\n");
-			sb.append("\r\n");
-			sb.append("     When do step three\r\n");
-			sb.append("\r\n");
-			sb.append("\r\n");
+			sb.append("\n");
+			sb.append("\n");
+			sb.append("    Basic EDI claim\n");
+			sb.append("\n");
+			sb.append("    No deductible\n");
+			sb.append("\n");
+			sb.append("\n");
+			sb.append("    Given do step one\n");
+			sb.append("\n");
+			sb.append("     When do step three\n");
+			sb.append("\n");
+			sb.append("\n");
 			assertNoErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());

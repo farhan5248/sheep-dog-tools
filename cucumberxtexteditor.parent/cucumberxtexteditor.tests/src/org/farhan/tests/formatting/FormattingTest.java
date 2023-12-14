@@ -16,7 +16,7 @@ public class FormattingTest extends ParsingTest {
 		formatterTestHelper.assertFormatted(new Procedure1<FormatterTestRequest>() {
 			@Override
 			public void apply(FormatterTestRequest p) {
-				p.preferences(m -> m.put(FormatterPreferenceKeys.lineSeparator, "\r\n"));
+				p.preferences(m -> m.put(FormatterPreferenceKeys.lineSeparator, "\n"));
 				init.apply(p);
 			}
 		});

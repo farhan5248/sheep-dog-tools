@@ -6,5 +6,6 @@
 "C:\Users\Farhan\.p2\pool\plugins\org.antlr.runtime_3.2.0.v20220404-1927.jar"
 "C:\Users\Farhan\.p2\pool\plugins\org.eclipse.xtext.util_2.32.0.v20230827-1315.jar"
 "C:\Users\Farhan\.p2\pool\plugins\org.eclipse.equinox.common_3.18.100.v20230730-1117.jar"
+"C:\Users\Farhan\Downloads\org.eclipse.uml2.uml.profile.standard_1.5.0.v20221116-1811.jar"
 
-mvn install:install-file -Dfile="C:\Users\Farhan\.p2\pool\plugins\org.eclipse.equinox.common_3.18.100.v20230730-1117.jar" -DgroupId=org.eclipse.equinox -DartifactId=common -Dversion=3.18.100.v20230730-1117 -Dpackaging=jar -DgeneratePom=true
+mvn install:install-file -Dfile="C:\Users\Farhan\Downloads\org.eclipse.uml2.uml.profile.standard_1.5.0.v20221116-1811.jar" -DgroupId=org.eclipse.uml2 -DartifactId=uml.profile.standard -Dversion=1.5.0.v20221116-1811 -Dpackaging=jar -DgeneratePom=true

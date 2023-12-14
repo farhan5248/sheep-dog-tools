@@ -16,14 +16,14 @@ public class FeatureParsingTest extends ParsingTest {
 	@Test
 	public void parseFeatureWithName() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
+		sb.append("Feature: This is a test feature\n");
 		assertNoErrors(sb);
 	}
 
 	@Test
 	public void parseFeatureWithoutName() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature:\r\n");
+		sb.append("Feature:\n");
 		assertErrors(sb);
 	}
 
@@ -37,24 +37,24 @@ public class FeatureParsingTest extends ParsingTest {
 	@Test
 	public void parseFeatureWithTags() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("@tag1\r\n");
-		sb.append("Feature: This is a test feature\r\n");
+		sb.append("@tag1\n");
+		sb.append("Feature: This is a test feature\n");
 		assertNoErrors(sb);
 	}
 
 	@Test
 	public void parseFeatureWithDescription() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("This is the description\r\n");
-		sb.append("This is the second line of the description\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("This is the description\n");
+		sb.append("This is the second line of the description\n");
 		assertNoErrors(sb);
 	}
 
 	@Test
 	public void parseFeatureWithoutDescriptionEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
+		sb.append("Feature: This is a test feature\n");
 		sb.append("This is the description");
 		assertErrors(sb);
 	}
@@ -62,10 +62,10 @@ public class FeatureParsingTest extends ParsingTest {
 	@Test
 	public void parseFeatureWithEverything() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("@tag1 @tag2 @tag3\r\n");
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("This is the description\r\n");
-		sb.append("This is the second line of the description\r\n");
+		sb.append("@tag1 @tag2 @tag3\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("This is the description\n");
+		sb.append("This is the second line of the description\n");
 		assertNoErrors(sb);
 	}
 

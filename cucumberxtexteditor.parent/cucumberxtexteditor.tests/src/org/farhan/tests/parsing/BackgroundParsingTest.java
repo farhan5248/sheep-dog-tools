@@ -16,15 +16,15 @@ public class BackgroundParsingTest extends ParsingTest {
 	@Test
 	public void parseBackgroundWithName() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Background: Setup a cardholder\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Background: Setup a cardholder\n");
 		assertNoErrors(sb);
 	}
 
 	@Test
 	public void parseBackgroundWithoutName() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
+		sb.append("Feature: This is a test feature\n");
 		sb.append("Background:");
 		assertErrors(sb);
 	}
@@ -32,7 +32,7 @@ public class BackgroundParsingTest extends ParsingTest {
 	@Test
 	public void parseBackgroundWithoutNameEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
+		sb.append("Feature: This is a test feature\n");
 		sb.append("Background: Setup a cardholder");
 		assertErrors(sb);
 	}
@@ -40,28 +40,28 @@ public class BackgroundParsingTest extends ParsingTest {
 	@Test
 	public void parseBackgroundWithDescription() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Background: Setup a cardholder\r\n");
-		sb.append("First setup a group\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Background: Setup a cardholder\n");
+		sb.append("First setup a group\n");
 		assertNoErrors(sb);
 	}
 
 	@Test
 	public void parseBackgroundWithMultilineDescription() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Background: Setup a cardholder\r\n");
-		sb.append("First setup a group\r\n");
-		sb.append("Next setup the cardholder\r\n");
-		sb.append("Next setup their family\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Background: Setup a cardholder\n");
+		sb.append("First setup a group\n");
+		sb.append("Next setup the cardholder\n");
+		sb.append("Next setup their family\n");
 		assertNoErrors(sb);
 	}
 
 	@Test
 	public void parseBackgroundWithoutDescriptionEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Background: Setup a cardholder\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Background: Setup a cardholder\n");
 		sb.append("First setup a group");
 		assertErrors(sb);
 	}
@@ -69,23 +69,23 @@ public class BackgroundParsingTest extends ParsingTest {
 	@Test
 	public void parseBackgroundWithSteps() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Background: Setup a cardholder\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("When do step three\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Background: Setup a cardholder\n");
+		sb.append("Given do step one\n");
+		sb.append("When do step three\n");
 		assertNoErrors(sb);
 	}
 
 	@Test
 	public void parseBackgroundWithEverything() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Background: Setup a cardholder\r\n");
-		sb.append("First setup a group\r\n");
-		sb.append("Next setup the cardholder\r\n");
-		sb.append("Next setup their family\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("When do step three\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Background: Setup a cardholder\n");
+		sb.append("First setup a group\n");
+		sb.append("Next setup the cardholder\n");
+		sb.append("Next setup their family\n");
+		sb.append("Given do step one\n");
+		sb.append("When do step three\n");
 		assertNoErrors(sb);
 	}
 }

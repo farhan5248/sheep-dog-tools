@@ -18,18 +18,18 @@ public class CucumberValidatingTest extends ValidatingTest {
 	@Test
 	public void validateStateAppEmpty() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: Name\r\n");
-		sb.append("Scenario: Name\r\n");
-		sb.append("The blah application, something/something/something/Object is empty\r\n");
+		sb.append("Feature: Name\n");
+		sb.append("Scenario: Name\n");
+		sb.append("The blah application, something/something/something/Object is empty\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
 	
 	@Test
 	public void validateStateSvcEmpty() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: Name\r\n");
-		sb.append("Scenario: Name\r\n");
-		sb.append("The blah service, something/something/something/Object is empty\r\n");
+		sb.append("Feature: Name\n");
+		sb.append("Scenario: Name\n");
+		sb.append("The blah service, something/something/something/Object is empty\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
 	
@@ -37,124 +37,124 @@ public class CucumberValidatingTest extends ValidatingTest {
 	@Test
 	public void validateStateEmpty() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: Name\r\n");
-		sb.append("Scenario: Name\r\n");
-		sb.append("The something/something/something/Object is empty\r\n");
+		sb.append("Feature: Name\n");
+		sb.append("Scenario: Name\n");
+		sb.append("The something/something/something/Object is empty\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
 	
 	@Test
 	public void validateStateAppPresent() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: Name\r\n");
-		sb.append("Scenario: Name\r\n");
-		sb.append("The blah application, something/something/something/Object is present\r\n");
+		sb.append("Feature: Name\n");
+		sb.append("Scenario: Name\n");
+		sb.append("The blah application, something/something/something/Object is present\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
 	
 	@Test
 	public void validateStateSvcPresent() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: Name\r\n");
-		sb.append("Scenario: Name\r\n");
-		sb.append("The blah service, something/something/something/Object is present\r\n");
+		sb.append("Feature: Name\n");
+		sb.append("Scenario: Name\n");
+		sb.append("The blah service, something/something/something/Object is present\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
 	
 	@Test
 	public void validateStatePresent() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: Name\r\n");
-		sb.append("Scenario: Name\r\n");
-		sb.append("The something/something/something/Object is present\r\n");
+		sb.append("Feature: Name\n");
+		sb.append("Scenario: Name\n");
+		sb.append("The something/something/something/Object is present\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
 	
 	@Test
 	public void validateStateAppFollows() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: Name\r\n");
-		sb.append("Scenario: Name\r\n");
-		sb.append("The blah application, something/something/something/Object is as follows\r\n");
+		sb.append("Feature: Name\n");
+		sb.append("Scenario: Name\n");
+		sb.append("The blah application, something/something/something/Object is as follows\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
 	
 	@Test
 	public void validateSvcAppFollows() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: Name\r\n");
-		sb.append("Scenario: Name\r\n");
-		sb.append("The blah service, something/something/something/Object is as follows\r\n");
+		sb.append("Feature: Name\n");
+		sb.append("Scenario: Name\n");
+		sb.append("The blah service, something/something/something/Object is as follows\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
 	
 	@Test
 	public void validateStateFollows() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: Name\r\n");
-		sb.append("Scenario: Name\r\n");
-		sb.append("The something/something/something/Object is as follows\r\n");
+		sb.append("Feature: Name\n");
+		sb.append("Scenario: Name\n");
+		sb.append("The something/something/something/Object is as follows\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
 	
 	@Test
 	public void validateTransitionGood() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: Name\r\n");
-		sb.append("Scenario: Name\r\n");
-		sb.append("The blah request is good\r\n");
+		sb.append("Feature: Name\n");
+		sb.append("Scenario: Name\n");
+		sb.append("The blah request is good\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
 	
 	@Test
 	public void validateTransitionBad() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: Name\r\n");
-		sb.append("Scenario: Name\r\n");
-		sb.append("The blah request is bad\r\n");
+		sb.append("Feature: Name\n");
+		sb.append("Scenario: Name\n");
+		sb.append("The blah request is bad\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
 	
 	@Test
 	public void validateTransitionSentWith() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: Name\r\n");
-		sb.append("Scenario: Name\r\n");
-		sb.append("The blah request is sent with\r\n");
+		sb.append("Feature: Name\n");
+		sb.append("Scenario: Name\n");
+		sb.append("The blah request is sent with\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
 	
 	@Test
 	public void validateTransitionTriggeredWith() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: Name\r\n");
-		sb.append("Scenario: Name\r\n");
-		sb.append("The blah request is triggered with\r\n");
+		sb.append("Feature: Name\n");
+		sb.append("Scenario: Name\n");
+		sb.append("The blah request is triggered with\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
 	
 	@Test
 	public void validateTransitionSentFollows() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: Name\r\n");
-		sb.append("Scenario: Name\r\n");
-		sb.append("The blah request is sent as follows\r\n");
+		sb.append("Feature: Name\n");
+		sb.append("Scenario: Name\n");
+		sb.append("The blah request is sent as follows\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
 	
 	@Test
 	public void validateTransitionTriggeredFollows() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: Name\r\n");
-		sb.append("Scenario: Name\r\n");
-		sb.append("Given: The blah request is triggered as follows\r\n");
+		sb.append("Feature: Name\n");
+		sb.append("Scenario: Name\n");
+		sb.append("Given: The blah request is triggered as follows\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
 	
 	@Test
 	public void validateCaptialStart() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: basic scenario Test\r\n");
+		sb.append("Feature: basic scenario Test\n");
 		validationTestHelper.assertWarning(parseHelper.parse(sb), CucumberPackage.Literals.FEATURE,
 				CucumberValidator.INVALID_NAME, "Name should start with a capital");
 	}

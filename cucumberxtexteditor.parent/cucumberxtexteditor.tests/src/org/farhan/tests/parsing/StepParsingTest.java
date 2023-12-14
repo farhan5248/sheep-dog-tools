@@ -16,31 +16,31 @@ public class StepParsingTest extends ParsingTest {
 	@Test
 	public void parseStepWithName() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario: Submit a drug claim\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("When do step three\r\n");
-		sb.append("Then do step four\r\n");
-		sb.append("And do step two\r\n");
-		sb.append("But do step five\r\n");
-		sb.append("* do step six\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario: Submit a drug claim\n");
+		sb.append("Given do step one\n");
+		sb.append("When do step three\n");
+		sb.append("Then do step four\n");
+		sb.append("And do step two\n");
+		sb.append("But do step five\n");
+		sb.append("* do step six\n");
 		assertNoErrors(sb);
 	}
 
 	@Test
 	public void parseStepWithoutName() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario: Submit a drug claim\r\n");
-		sb.append("Given\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario: Submit a drug claim\n");
+		sb.append("Given\n");
 		assertErrors(sb);
 	}
 
 	@Test
 	public void parseStepWithoutNameEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario: Submit a drug claim\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario: Submit a drug claim\n");
 		sb.append("Given do step one");
 		assertErrors(sb);
 	}
@@ -48,30 +48,30 @@ public class StepParsingTest extends ParsingTest {
 	@Test
 	public void parseStepWithTable() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario: Submit a drug claim\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("| Header1 | Header2 |\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario: Submit a drug claim\n");
+		sb.append("Given do step one\n");
+		sb.append("| Header1 | Header2 |\n");
 		assertNoErrors(sb);
 	}
 
 	@Test
 	public void parseStepWithMultirowTable() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario: Submit a drug claim\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("| Header1 | Header2 |\r\n");
-		sb.append("|   data1 |   data2 |\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario: Submit a drug claim\n");
+		sb.append("Given do step one\n");
+		sb.append("| Header1 | Header2 |\n");
+		sb.append("|   data1 |   data2 |\n");
 		assertNoErrors(sb);
 	}
 
 	@Test
 	public void parseStepWithoutTableEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario: Submit a drug claim\r\n");
-		sb.append("Given do step one\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario: Submit a drug claim\n");
+		sb.append("Given do step one\n");
 		sb.append("| Header1 | Header2 |");
 		assertErrors(sb);
 	}
@@ -79,37 +79,37 @@ public class StepParsingTest extends ParsingTest {
 	@Test
 	public void parseStepWithDocString() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario: Submit a drug claim\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("\"\"\"\r\n");
-		sb.append("Line1\r\n");
-		sb.append("\"\"\"\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario: Submit a drug claim\n");
+		sb.append("Given do step one\n");
+		sb.append("\"\"\"\n");
+		sb.append("Line1\n");
+		sb.append("\"\"\"\n");
 		assertNoErrors(sb);
 	}
 
 	@Test
 	public void parseStepWithMultilineDocString() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario: Submit a drug claim\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("\"\"\"\r\n");
-		sb.append("Line1\r\n");
-		sb.append("Line2\r\n");
-		sb.append("Line3\r\n");
-		sb.append("\"\"\"\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario: Submit a drug claim\n");
+		sb.append("Given do step one\n");
+		sb.append("\"\"\"\n");
+		sb.append("Line1\n");
+		sb.append("Line2\n");
+		sb.append("Line3\n");
+		sb.append("\"\"\"\n");
 		assertNoErrors(sb);
 	}
 
 	@Test
 	public void parseStepWithoutDocStringEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario: Submit a drug claim\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("\"\"\"\r\n");
-		sb.append("Line1\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario: Submit a drug claim\n");
+		sb.append("Given do step one\n");
+		sb.append("\"\"\"\n");
+		sb.append("Line1\n");
 		sb.append("\"\"\"");
 		assertErrors(sb);
 	}
@@ -117,71 +117,71 @@ public class StepParsingTest extends ParsingTest {
 	@Test
 	public void parseStepWithDocStringEmpty() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario: Submit a drug claim\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("\"\"\"\r\n");
-		sb.append("\"\"\"\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario: Submit a drug claim\n");
+		sb.append("Given do step one\n");
+		sb.append("\"\"\"\n");
+		sb.append("\"\"\"\n");
 		assertErrors(sb);
 	}
 
 	@Test
 	public void parseStepWithDocStringIncomplete() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario: Submit a drug claim\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("\"\"\"\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario: Submit a drug claim\n");
+		sb.append("Given do step one\n");
+		sb.append("\"\"\"\n");
 		assertErrors(sb);
 	}
 
 	@Test
 	public void parseStepWithEverything() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario: Submit a drug claim\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("| Header1 | Header2 |\r\n");
-		sb.append("|   data1 |   data2 |\r\n");
-		sb.append("When do step three\r\n");
-		sb.append("| Header1 | Header2 |\r\n");
-		sb.append("|   data1 |   data2 |\r\n");
-		sb.append("Then do step four\r\n");
-		sb.append("| Header1 | Header2 |\r\n");
-		sb.append("|   data1 |   data2 |\r\n");
-		sb.append("And do step two\r\n");
-		sb.append("| Header1 | Header2 |\r\n");
-		sb.append("|   data1 |   data2 |\r\n");
-		sb.append("But do step five\r\n");
-		sb.append("| Header1 | Header2 |\r\n");
-		sb.append("|   data1 |   data2 |\r\n");
-		sb.append("* do step six\r\n");
-		sb.append("| Header1 | Header2 |\r\n");
-		sb.append("|   data1 |   data2 |\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("\"\"\"\r\n");
-		sb.append("Line1\r\n");
-		sb.append("\"\"\"\r\n");
-		sb.append("When do step three\r\n");
-		sb.append("\"\"\"\r\n");
-		sb.append("Line1\r\n");
-		sb.append("\"\"\"\r\n");
-		sb.append("Then do step four\r\n");
-		sb.append("\"\"\"\r\n");
-		sb.append("Line1\r\n");
-		sb.append("\"\"\"\r\n");
-		sb.append("And do step two\r\n");
-		sb.append("\"\"\"\r\n");
-		sb.append("Line1\r\n");
-		sb.append("\"\"\"\r\n");
-		sb.append("But do step five\r\n");
-		sb.append("\"\"\"\r\n");
-		sb.append("Line1\r\n");
-		sb.append("\"\"\"\r\n");
-		sb.append("* do step six\r\n");
-		sb.append("\"\"\"\r\n");
-		sb.append("Line1\r\n");
-		sb.append("\"\"\"\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario: Submit a drug claim\n");
+		sb.append("Given do step one\n");
+		sb.append("| Header1 | Header2 |\n");
+		sb.append("|   data1 |   data2 |\n");
+		sb.append("When do step three\n");
+		sb.append("| Header1 | Header2 |\n");
+		sb.append("|   data1 |   data2 |\n");
+		sb.append("Then do step four\n");
+		sb.append("| Header1 | Header2 |\n");
+		sb.append("|   data1 |   data2 |\n");
+		sb.append("And do step two\n");
+		sb.append("| Header1 | Header2 |\n");
+		sb.append("|   data1 |   data2 |\n");
+		sb.append("But do step five\n");
+		sb.append("| Header1 | Header2 |\n");
+		sb.append("|   data1 |   data2 |\n");
+		sb.append("* do step six\n");
+		sb.append("| Header1 | Header2 |\n");
+		sb.append("|   data1 |   data2 |\n");
+		sb.append("Given do step one\n");
+		sb.append("\"\"\"\n");
+		sb.append("Line1\n");
+		sb.append("\"\"\"\n");
+		sb.append("When do step three\n");
+		sb.append("\"\"\"\n");
+		sb.append("Line1\n");
+		sb.append("\"\"\"\n");
+		sb.append("Then do step four\n");
+		sb.append("\"\"\"\n");
+		sb.append("Line1\n");
+		sb.append("\"\"\"\n");
+		sb.append("And do step two\n");
+		sb.append("\"\"\"\n");
+		sb.append("Line1\n");
+		sb.append("\"\"\"\n");
+		sb.append("But do step five\n");
+		sb.append("\"\"\"\n");
+		sb.append("Line1\n");
+		sb.append("\"\"\"\n");
+		sb.append("* do step six\n");
+		sb.append("\"\"\"\n");
+		sb.append("Line1\n");
+		sb.append("\"\"\"\n");
 		assertNoErrors(sb);
 	}
 }

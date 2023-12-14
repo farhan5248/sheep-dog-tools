@@ -16,31 +16,31 @@ public class ExamplesParsingTest extends ParsingTest {
 	@Test
 	public void parseExamplesWithName() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario Outline: Submit a claim\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("Examples: Describe what this data is about\r\n");
-		sb.append("| Header1 | Header2 |\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario Outline: Submit a claim\n");
+		sb.append("Given do step one\n");
+		sb.append("Examples: Describe what this data is about\n");
+		sb.append("| Header1 | Header2 |\n");
 		assertNoErrors(sb);
 	}
 
 	@Test
 	public void parseExamplesWithoutName() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario Outline: Submit a claim\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("Examples:\r\n");
-		sb.append("| Header1 | Header2 |\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario Outline: Submit a claim\n");
+		sb.append("Given do step one\n");
+		sb.append("Examples:\n");
+		sb.append("| Header1 | Header2 |\n");
 		assertErrors(sb);
 	}
 
 	@Test
 	public void parseExamplesWithoutNameEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario Outline: Submit a claim\r\n");
-		sb.append("Given do step one\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario Outline: Submit a claim\n");
+		sb.append("Given do step one\n");
 		sb.append("Examples: Describe what this data is about");
 		assertErrors(sb);
 	}
@@ -48,47 +48,47 @@ public class ExamplesParsingTest extends ParsingTest {
 	@Test
 	public void parseExamplesWithTags() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario Outline: Submit a claim\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("@tag1\r\n");
-		sb.append("Examples: Describe what this data is about\r\n");
-		sb.append("| Header1 | Header2 |\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario Outline: Submit a claim\n");
+		sb.append("Given do step one\n");
+		sb.append("@tag1\n");
+		sb.append("Examples: Describe what this data is about\n");
+		sb.append("| Header1 | Header2 |\n");
 		assertNoErrors(sb);
 	}
 
 	@Test
 	public void parseExamplesWithDescription() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario Outline: Submit a claim\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("Examples: Describe what this data is about\r\n");
-		sb.append("Basic EDI claim\r\n");
-		sb.append("| Header1 | Header2 |\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario Outline: Submit a claim\n");
+		sb.append("Given do step one\n");
+		sb.append("Examples: Describe what this data is about\n");
+		sb.append("Basic EDI claim\n");
+		sb.append("| Header1 | Header2 |\n");
 		assertNoErrors(sb);
 	}
 
 	@Test
 	public void parseExamplesWithMultilineDescription() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario Outline: Submit a claim\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("Examples: Describe what this data is about\r\n");
-		sb.append("Basic EDI claim\r\n");
-		sb.append("No deductible\r\n");
-		sb.append("| Header1 | Header2 |\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario Outline: Submit a claim\n");
+		sb.append("Given do step one\n");
+		sb.append("Examples: Describe what this data is about\n");
+		sb.append("Basic EDI claim\n");
+		sb.append("No deductible\n");
+		sb.append("| Header1 | Header2 |\n");
 		assertNoErrors(sb);
 	}
 
 	@Test
 	public void parseExamplesWithoutDescriptionEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario Outline: Submit a claim\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("Examples: Describe what this data is about\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario Outline: Submit a claim\n");
+		sb.append("Given do step one\n");
+		sb.append("Examples: Describe what this data is about\n");
 		sb.append("Basic EDI claim");
 		assertErrors(sb);
 	}
@@ -96,30 +96,30 @@ public class ExamplesParsingTest extends ParsingTest {
 	@Test
 	public void parseExamplesWithRows() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario Outline: Submit a claim\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("Examples: Describe what this data is about\r\n");
-		sb.append("Basic EDI claim\r\n");
-		sb.append("| Header1 | Header2 |\r\n");
-		sb.append("|   data1 |   data2 |\r\n");
-		sb.append("|   data3 |   data4 |\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario Outline: Submit a claim\n");
+		sb.append("Given do step one\n");
+		sb.append("Examples: Describe what this data is about\n");
+		sb.append("Basic EDI claim\n");
+		sb.append("| Header1 | Header2 |\n");
+		sb.append("|   data1 |   data2 |\n");
+		sb.append("|   data3 |   data4 |\n");
 		assertNoErrors(sb);
 	}
 
 	@Test
 	public void parseExamplesWithEverything() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Feature: This is a test feature\r\n");
-		sb.append("Scenario Outline: Submit a claim\r\n");
-		sb.append("Given do step one\r\n");
-		sb.append("@tag1 @tag2\r\n");
-		sb.append("Examples: Describe what this data is about\r\n");
-		sb.append("Basic EDI claim\r\n");
-		sb.append("No deductible\r\n");
-		sb.append("| Header1 | Header2 |\r\n");
-		sb.append("|   data1 |   data2 |\r\n");
-		sb.append("|   data3 |   data4 |\r\n");
+		sb.append("Feature: This is a test feature\n");
+		sb.append("Scenario Outline: Submit a claim\n");
+		sb.append("Given do step one\n");
+		sb.append("@tag1 @tag2\n");
+		sb.append("Examples: Describe what this data is about\n");
+		sb.append("Basic EDI claim\n");
+		sb.append("No deductible\n");
+		sb.append("| Header1 | Header2 |\n");
+		sb.append("|   data1 |   data2 |\n");
+		sb.append("|   data3 |   data4 |\n");
 		assertNoErrors(sb);
 	}
 }

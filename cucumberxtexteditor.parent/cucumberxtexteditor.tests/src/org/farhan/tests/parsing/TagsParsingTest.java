@@ -16,32 +16,32 @@ public class TagsParsingTest extends ParsingTest {
 	@Test
 	public void parseFeatureWithSingleTags() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("@tag1\r\n");
-		sb.append("Feature: This is a test feature\r\n");
+		sb.append("@tag1\n");
+		sb.append("Feature: This is a test feature\n");
 		assertNoErrors(sb);
 	}
 
 	@Test
 	public void parseFeatureWithMultipleTags() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("@tag1 @tag2 @tag3\r\n");
-		sb.append("Feature: This is a test feature\r\n");
+		sb.append("@tag1 @tag2 @tag3\n");
+		sb.append("Feature: This is a test feature\n");
 		assertNoErrors(sb);
 	}
 
 	@Test
 	public void parseFeatureWithInvalidTagNames() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("@tag1@tag2@tag3\r\n");
-		sb.append("Feature: This is a test feature\r\n");
+		sb.append("@tag1@tag2@tag3\n");
+		sb.append("Feature: This is a test feature\n");
 		assertErrors(sb);
 	}
 
 	@Test
 	public void parseFeatureWithIncompleteTags() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("@\r\n");
-		sb.append("Feature: This is a test feature\r\n");
+		sb.append("@\n");
+		sb.append("Feature: This is a test feature\n");
 		assertErrors(sb);
 	}
 
