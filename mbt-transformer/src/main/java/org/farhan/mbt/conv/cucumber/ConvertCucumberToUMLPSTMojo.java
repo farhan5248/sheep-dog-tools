@@ -7,15 +7,6 @@ import org.farhan.conv.core.FirstLayerLinker;
 import org.farhan.conv.core.OtherLayerConverter;
 import org.farhan.conv.core.OtherLayerLinker;
 
-
-/**
- * Converts the Cucumber files into a UML file
- *
- * @author Farhan Sheikh
- * @goal convert-cucumber-umlpst
- * @phase generate-sources
- * @version $Id: $Id
- */
 public class ConvertCucumberToUMLPSTMojo extends ConversionMojo {
 
 	@Override

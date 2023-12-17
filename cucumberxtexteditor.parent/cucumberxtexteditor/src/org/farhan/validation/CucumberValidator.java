@@ -27,6 +27,7 @@ public class CucumberValidator extends AbstractCucumberValidator {
 		// example in place
 
 		if (!EdgeValidator.isValid(step.getName()) && !VerticeValidator.isValid(step.getName())) {
+			// TODO instead of this error message, give the parts breakdown to see what's missing
 			error(VerticeValidator.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
 		}
 

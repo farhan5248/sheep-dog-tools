@@ -8,9 +8,7 @@ public abstract class OtherLayerLinker extends LayerLinker {
 
 	@Override
 	protected void addNextLayerInteractionMessages(Interaction targetInteraction, Message m) {
-		// TODO reference 4th layer and call set attribute value or assert attribute
-		// value such as Inquiry.setElementValue(String xpath, String value)
-		// It's at this point that getNextLayerClassQualifiedName would be used
+
 	}
 
 	@Override

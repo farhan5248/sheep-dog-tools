@@ -24,8 +24,6 @@ public abstract class FirstLayerLinker extends LayerLinker {
 			} else if (VerticeValidator.isValid(m.getName())) {
 				createNextLayerInteractionMessagesFromFinalMessage(targetInteraction, m);
 			}
-		} else {
-			// If it's not the valid, don't create the body
 		}
 	}
 

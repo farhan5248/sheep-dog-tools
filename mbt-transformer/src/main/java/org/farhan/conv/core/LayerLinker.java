@@ -24,12 +24,10 @@ public abstract class LayerLinker {
 				for (String methodName : getNextLayerInteractionNamesfromMessage(m)) {
 					Interaction targetInteraction = InteractionFactory
 							.getInteractionWithAnnotation(getNextLayerClassFromMessage(m), methodName, annotationName);
-					// If the body is empty, then this interaction was just created
 					if (targetInteraction.getMessages().isEmpty() && targetInteraction.getOwnedParameters().isEmpty()) {
 						addNextLayerInteractionParameters(targetInteraction, m);
 						addNextLayerInteractionMessages(targetInteraction, m);
 					} else if (!targetInteraction.getMessages().isEmpty() && targetInteraction.getName().endsWith("AsFollows")){
-						// Even if the body is not empty, there might be new data table columns
 						addNextLayerInteractionParameters(targetInteraction, m);
 					}
 					m.setSignature(targetInteraction);

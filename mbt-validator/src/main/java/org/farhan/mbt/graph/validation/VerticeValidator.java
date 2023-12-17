@@ -1,17 +1,58 @@
 package org.farhan.mbt.graph.validation;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class VerticeValidator {
 
-	// Given an input/transition or response/state then response/state
-	private static final String OBJ_REGEX = "( .*)";
-	private static final String APP_REGEX = "( .*( application| service),)?";
-	private static final String STATE_NAME_REGEX = "The" + APP_REGEX + "(" + OBJ_REGEX;
-	private static final String STATE_DETAILS_REGEX = " is (empty|present|as follows))";
-	private static final String STATE_REGEX = STATE_NAME_REGEX + STATE_DETAILS_REGEX;
-	public static final String INVALID_STATE = "invalidState";
+	// The
+	// ( .*( application| service| project| plugin| batchjob),)?
+	// ( .*)( file| page| config| resource)
+	// (, (.*) section)?
+	// ( is| isn't)( empty| present| as follows)
 
-	public static boolean isValid(String name) {
-		return name.matches(STATE_REGEX);
+	// Given an input/transition or response/state then response/state
+	private static final String APP_REGEX = "(( .*)( application| service| project| plugin| batchjob),)?";
+	private static final String OBJ_REGEX = "( .*)( file| page| config| resource)";
+	private static final String SECTION_REGEX = "(, (.*) section)?";
+	private static final String DETAILS_REGEX = "(( is| isn't)( empty| present| as follows))";
+	private static final String VERTICE_REGEX = "The" + APP_REGEX + OBJ_REGEX + SECTION_REGEX + DETAILS_REGEX;
+	public static final String INVALID_VERTICE = "invalidVertice";
+
+	private static String getGroup(String text, int group) {
+		Matcher m = Pattern.compile(VERTICE_REGEX).matcher(text);
+		if (m.find()) {
+			return m.group(group).trim();
+		}
+		return null;
+	}
+
+	public static String getAppName(String text) {
+		return getGroup(text, 2);
+	}
+
+	public static String getAppType(String text) {
+		return getGroup(text, 3);
+	}
+
+	public static String getObjName(String text) {
+		return getGroup(text, 4);
+	}
+
+	public static String getObjType(String text) {
+		return getGroup(text, 5);
+	}
+	
+	public static String getSection(String text) {
+		return getGroup(text, 7);
+	}
+
+	public static String getDetails(String text) {
+		return getGroup(text, 8);
+	}
+
+	public static boolean isValid(String text) {
+		return text.matches(VERTICE_REGEX);
 	}
 
 	public static String getErrorMessage() {
@@ -30,5 +71,4 @@ public class VerticeValidator {
 
 		return msg;
 	}
-
 }

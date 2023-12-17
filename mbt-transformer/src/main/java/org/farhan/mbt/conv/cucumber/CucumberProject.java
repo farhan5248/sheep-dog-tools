@@ -1,5 +1,4 @@
-/*
- * */
+
 package org.farhan.mbt.conv.cucumber;
 
 import java.io.File;
@@ -7,16 +6,6 @@ import java.io.File;
 import org.farhan.conv.core.Project;
 import org.farhan.mbt.conv.uml.UMLNameTranslator;
 
-import com.github.javaparser.ast.ImportDeclaration;
-
-/**
- * <p>
- * CucumberProject class.
- * </p>
- *
- * @author t856673
- * @version $Id: $Id
- */
 public class CucumberProject extends Project {
 
 	public static File javaDir = new File(baseDir + "src/test/java/");
@@ -25,7 +14,6 @@ public class CucumberProject extends Project {
 		super();
 	}
 
-	// TODO should probably move to the JavaFile or Cucumber file etc
 	public static String convertCucumberPathToQualifiedName(String filePath) {
 		String qualifiedName = filePath.trim();
 		qualifiedName = qualifiedName.replace(".feature", "");
@@ -36,8 +24,6 @@ public class CucumberProject extends Project {
 		return qualifiedName;
 	}
 
-	// TODO should probably move to the JavaFile or Cucumber file etc. There should
-	// toQualifiedName in the RobotFileConverter
 	public static String convertJavaPathToQualifiedName(String pathName) {
 		String qualifiedName = pathName.trim();
 		qualifiedName = qualifiedName.replace(".java", "");
@@ -48,7 +34,6 @@ public class CucumberProject extends Project {
 		return qualifiedName;
 	}
 
-	// TODO should probably move to the JavaFile or Cucumber file etc
 	public static String convertQualifiedNameToCucumberPath(String qualifiedName) {
 		String pathName = qualifiedName;
 		pathName = pathName.replace("pst::interactions", "");

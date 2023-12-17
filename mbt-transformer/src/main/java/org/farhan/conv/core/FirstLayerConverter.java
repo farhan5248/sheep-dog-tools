@@ -82,8 +82,6 @@ public abstract class FirstLayerConverter extends LayerConverter {
 			setCurrentState(objectName);
 		} else if (Layer1Validator.isInitialStart(messageName) || Layer1Validator.isFinalStart(messageName)) {
 			if (Layer1Validator.isFinalStart(messageName)) {
-				// TODO make a Layer1Validator or something api for this. These group numbers
-				// should not be known outside the api
 				appType = Utilities.regexFind(FinalStepValidator.getRegex(), messageName, 3).trim();
 				appName = Utilities.regexFind(FinalStepValidator.getRegex(), messageName, 2).trim();
 			} else {

@@ -22,6 +22,7 @@ public class CucumberFeatureFile {
 		CucumberStandaloneSetup.doSetup();
 		Resource res = new ResourceSetImpl().getResource(uri, true);
 		theFeature = (Feature) res.getContents().get(0);
+		// TODO validate it or throw an exception
 	}
 
 }
