@@ -23,15 +23,10 @@ public abstract class LayerConverter {
 	protected void transformLayerFiles(ArrayList<File> layerFiles) throws Exception {
 
 		for (File aFile : layerFiles) {
-			try {
-				Class layerClass = convertToClass(aFile);
-				convertToImports(layerClass);
-				convertToAttributes(layerClass);
-				convertToBehaviours(layerClass);
-			} catch (Exception e) {
-				log.error(Utilities.getStackTraceAsString(e));
-				log.error("Problem transforming file: " + aFile.getAbsolutePath());
-			}
+			Class layerClass = convertToClass(aFile);
+			convertToImports(layerClass);
+			convertToAttributes(layerClass);
+			convertToBehaviours(layerClass);
 		}
 	}
 

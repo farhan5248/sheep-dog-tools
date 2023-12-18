@@ -17,8 +17,22 @@ public class PSTFileSteps extends UMLSteps {
 	}
 
 	@And("^The target/uml/pst.uml file, Class Comments section is as follows$")
-	public void ThePSTUMLFileProcessCommentsSectionIsAsFollows(DataTable dataTable) {
-
+	public void ThePSTUMLFileClassCommentsSectionIsAsFollows(DataTable dataTable) {
 		ClaimProjectFactory.get("PSTFile").assertAttributes(dataTable, "Class Comments");
+	}
+	
+	@And("^The target/uml/pst.uml file, Class Interactions section is as follows$")
+	public void ThePSTUMLFileClassInteractionsSectionIsAsFollows(DataTable dataTable) {
+		ClaimProjectFactory.get("PSTFile").assertAttributes(dataTable, "Class Interactions");
+	}
+
+	@And("^The target/uml/pst.uml file, Interaction Parameters section is as follows$")
+	public void ThePSTUMLFileInteractionParametersSectionIsAsFollows(DataTable dataTable) {
+		ClaimProjectFactory.get("PSTFile").assertAttributes(dataTable, "Interaction Parameters");
+	}
+	
+	@And("^The target/uml/pst.uml file, Interaction Comments section is as follows$")
+	public void ThePSTUMLFileInteractionCommentsSectionIsAsFollows(DataTable dataTable) {
+		ClaimProjectFactory.get("PSTFile").assertAttributes(dataTable, "Interaction Comments");
 	}
 }

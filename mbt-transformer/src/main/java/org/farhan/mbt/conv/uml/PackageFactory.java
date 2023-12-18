@@ -50,6 +50,14 @@ public class PackageFactory {
 				if (pe.getQualifiedName().toLowerCase().contentEquals(qualifiedName.toLowerCase())) {
 					return pe;
 				}
+				if (pe instanceof Class) {
+					Class c = (Class) pe;
+					for (Behavior b : c.getOwnedBehaviors()) {
+						if (b.getQualifiedName().toLowerCase().contentEquals(qualifiedName.toLowerCase())) {
+							return b;
+						}
+					}
+				}
 			}
 		}
 		return null;

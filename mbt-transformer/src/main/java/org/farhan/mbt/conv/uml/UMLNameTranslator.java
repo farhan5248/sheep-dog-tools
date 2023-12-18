@@ -17,12 +17,9 @@ public class UMLNameTranslator {
 			return currentClassName;
 		}
 		String newClassName = currentClassName;
-		newClassName = newClassName.replaceAll("(?i) - As of ((?!page|pop-up).)*", "");
 		newClassName = newClassName.replace("page", "Page");
 		newClassName = newClassName.replace("-", "");
-		if (!keepUnderscore) {
-			newClassName = newClassName.replace("_", "");
-		}
+		newClassName = newClassName.replace("_", "");
 		newClassName = newClassName.replace(" ", "");
 		newClassName = newClassName.replace("'", "");
 		newClassName = newClassName.replace("#", "");

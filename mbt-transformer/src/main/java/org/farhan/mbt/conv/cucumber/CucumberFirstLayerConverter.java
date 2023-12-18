@@ -1,7 +1,6 @@
 package org.farhan.mbt.conv.cucumber;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.EList;
@@ -17,7 +16,6 @@ import org.farhan.conv.validation.Layer1Validator;
 import org.farhan.conv.validation.OutputStepValidator;
 import org.farhan.conv.validation.TransitionStepValidator;
 import org.farhan.cucumber.AbstractScenario;
-import org.farhan.cucumber.Background;
 import org.farhan.cucumber.Row;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.ScenarioOutline;
@@ -84,8 +82,7 @@ public class CucumberFirstLayerConverter extends FirstLayerConverter {
 	@Override
 	protected Class convertToClass(File theFile) throws Exception {
 
-		// TODO create interface TPSFile and methods getFile and setFile so that this
-		// can be abstracted
+		// TODO 
 		aCucumberFile = new CucumberFeatureFile(theFile);
 		aCucumberFile.readFile();
 		// TODO use convertPathToQualifiedName
