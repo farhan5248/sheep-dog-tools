@@ -18,7 +18,7 @@ public class CucumberProject extends Project {
 		String qualifiedName = filePath.trim();
 		qualifiedName = qualifiedName.replace(".feature", "");
 		qualifiedName = qualifiedName.replace(File.separator, "::");
-		qualifiedName = qualifiedName.replace("cucumber::", "Tests::interactions::");
+		qualifiedName = qualifiedName.replace("cucumber::", "Tests::specs::");
 		qualifiedName = qualifiedName.split("(Tests)")[1];
 		qualifiedName = "pst" + qualifiedName;
 		return qualifiedName;
@@ -27,8 +27,8 @@ public class CucumberProject extends Project {
 	public static String convertJavaPathToQualifiedName(String pathName) {
 		String qualifiedName = pathName.trim();
 		qualifiedName = qualifiedName.replace(".java", "");
-		qualifiedName = qualifiedName.replace(getSecondLayerDir().getAbsolutePath(), "subsystems");
-		qualifiedName = qualifiedName.replace(getThirdLayerDir().getAbsolutePath(), "components");
+		qualifiedName = qualifiedName.replace(getSecondLayerDir().getAbsolutePath(), "stepdefs");
+		qualifiedName = qualifiedName.replace(getThirdLayerDir().getAbsolutePath(), "objects");
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::" + qualifiedName;
 		return qualifiedName;
@@ -36,7 +36,7 @@ public class CucumberProject extends Project {
 
 	public static String convertQualifiedNameToCucumberPath(String qualifiedName) {
 		String pathName = qualifiedName;
-		pathName = pathName.replace("pst::interactions", "");
+		pathName = pathName.replace("pst::specs", "");
 		pathName = pathName.replace("::", File.separator);
 		pathName = pathName + ".feature";
 		return pathName;
@@ -48,8 +48,8 @@ public class CucumberProject extends Project {
 		String pathName = qualifiedName;
 		String className = UMLNameTranslator.getName(qualifiedName);
 		pathName = pathName.replaceAll(className + "$", "").toLowerCase() + className;
-		pathName = pathName.replace("pst::subsystems", getSecondLayerDir().getAbsolutePath());
-		pathName = pathName.replace("pst::components", getThirdLayerDir().getAbsolutePath());
+		pathName = pathName.replace("pst::stepdefs", getSecondLayerDir().getAbsolutePath());
+		pathName = pathName.replace("pst::objects", getThirdLayerDir().getAbsolutePath());
 		pathName = pathName.replace("pst::common", getFourthLayerDir().getAbsolutePath());
 		// TODO this statement is temp hack to handle io and java package imports
 		pathName = pathName.replace("pst", javaDir.getAbsolutePath());
@@ -80,13 +80,13 @@ public class CucumberProject extends Project {
 	}
 
 	public static File getSecondLayerDir() {
-		File aFile = new File(baseDir + "src/test/java/org/farhan/subsystems/");
+		File aFile = new File(baseDir + "src/test/java/org/farhan/stepdefs/");
 		aFile.mkdirs();
 		return aFile;
 	}
 
 	public static File getThirdLayerDir() {
-		File aFile = new File(baseDir + "src/test/java/org/farhan/components/");
+		File aFile = new File(baseDir + "src/test/java/org/farhan/objects/");
 		aFile.mkdirs();
 		return aFile;
 	}

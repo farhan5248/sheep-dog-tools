@@ -1,45 +1,79 @@
 package org.farhan.conv.validation;
 
+import org.farhan.mbt.graph.validation.EdgeValidator;
+import org.farhan.mbt.graph.validation.VerticeValidator;
+
 public class Layer1Validator {
 
-	public static boolean isInputStart(String messageName) {
-		// TODO Auto-generated method stub
-		return false;
+	public static boolean validateStepText(String messageName) {
+		return VerticeValidator.isValid(messageName) || EdgeValidator.isValid(messageName);
 	}
 
-	public static boolean isOutputStart(String messageName) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public static boolean isTransitionStart(String messageName) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public static String getStepObjectName(String messageName) {
-		// TODO Auto-generated method stub
+	public static String getObjectName(String messageName) {
+		if (VerticeValidator.isVertice(messageName)) {
+			return VerticeValidator.getObjectName(messageName);
+		}
+		if (EdgeValidator.isEdge(messageName)) {
+			EdgeValidator.getObjectName(messageName);
+		}
 		return null;
 	}
 
-	public static String getStepObjectType(String messageName) {
-		// TODO Auto-generated method stub
+	public static String getObjectType(String messageName) {
+		if (VerticeValidator.isVertice(messageName)) {
+			return VerticeValidator.getObjectType(messageName);
+		}
+		if (EdgeValidator.isEdge(messageName)) {
+			EdgeValidator.getObjectType(messageName);
+		}
 		return null;
 	}
 
-	public static boolean isFinalStart(String messageName) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public static boolean isInitialStart(String messageName) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public static String validateStepText(String messageName) {
-		// TODO Auto-generated method stub
+	public static String getContainerName(String messageName) {
+		if (VerticeValidator.isVertice(messageName)) {
+			return VerticeValidator.getContainerName(messageName);
+		}
+		if (EdgeValidator.isEdge(messageName)) {
+			EdgeValidator.getContainerName(messageName);
+		}
 		return null;
+	}
+
+	public static String getContainerType(String messageName) {
+		if (VerticeValidator.isVertice(messageName)) {
+			return VerticeValidator.getContainerType(messageName);
+		}
+		if (EdgeValidator.isEdge(messageName)) {
+			EdgeValidator.getContainerType(messageName);
+		}
+		return null;
+	}
+
+	public static String getSection(String messageName) {
+		if (VerticeValidator.isVertice(messageName)) {
+			return VerticeValidator.getSection(messageName);
+		}
+		return null;
+	}
+
+	public static boolean isContainerStep(String messageName) {
+		if (VerticeValidator.isVertice(messageName)) {
+			return VerticeValidator.isContainerStep(messageName);
+		}
+		if (EdgeValidator.isEdge(messageName)) {
+			EdgeValidator.isContainerStep(messageName);
+		}
+		return false;
+	}
+
+	public static boolean isNegativeStep(String messageName) {
+		if (VerticeValidator.isVertice(messageName)) {
+			return VerticeValidator.isNegativeStep(messageName);
+		}
+		if (EdgeValidator.isEdge(messageName)) {
+			EdgeValidator.isNegativeStep(messageName);
+		}
+		return false;
 	}
 
 }

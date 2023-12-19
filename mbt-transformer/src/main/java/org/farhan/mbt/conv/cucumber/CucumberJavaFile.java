@@ -45,9 +45,9 @@ public class CucumberJavaFile {
 		javaClass.addType(javaClassType);
 		javaClassType.setName(CucumberProject.getJavaClassName(aClass.getName()));
 		javaClassType.setPublic(true);
-		if (aClass.getQualifiedName().contains("::subsystems::")) {
+		if (aClass.getQualifiedName().contains("::stepdefs::")) {
 			javaClassType.addExtendedType("BusinessProcessModelTasks");
-		} else if (aClass.getQualifiedName().contains("::components::")) {
+		} else if (aClass.getQualifiedName().contains("::objects::")) {
 			// TODO This should be done in the Java PST. Robot doesn't have inheritance so
 			// its PST doesn't capture this. Fix it later.
 			javaClassType.addExtendedType(UMLNameTranslator.getOtherLayerAppName(aClass.getQualifiedName()));
@@ -83,7 +83,7 @@ public class CucumberJavaFile {
 		Class aClass = (Class) anInteraction.getOwner();
 		MethodDeclaration aMethod = javaClassType.addMethod(getMethodName(anInteraction.getName(), true),
 				Keyword.PUBLIC);
-		if (aClass.getQualifiedName().contains("::subsystems::")) {
+		if (aClass.getQualifiedName().contains("::stepdefs::")) {
 			// Annotations
 			if (!anInteraction.getEAnnotations().isEmpty()) {
 				String annotationBody = anInteraction.getEAnnotations().get(0).getSource();
@@ -159,13 +159,13 @@ public class CucumberJavaFile {
 
 	private void convertFromUMLPSTImports(Class aClass) {
 		// add cucumber imports for second layer
-		if (aClass.getQualifiedName().contains("::subsystems::")) {
+		if (aClass.getQualifiedName().contains("::stepdefs::")) {
 			// TODO the UML model should create these
 			javaClass.addImport("io.cucumber.java.en.Given");
 			javaClass.addImport("io.cucumber.java.PendingException");
 			javaClass.addImport("io.cucumber.datatable.DataTable");
 			javaClass.addImport("org.farhan.common.BusinessProcessModelTasks");
-		} else if (aClass.getQualifiedName().contains("::components::")) {
+		} else if (aClass.getQualifiedName().contains("::objects::")) {
 			javaClass.addImport("java.util.HashMap");
 			javaClass.addImport("io.cucumber.java.PendingException");
 			javaClass.addImport(

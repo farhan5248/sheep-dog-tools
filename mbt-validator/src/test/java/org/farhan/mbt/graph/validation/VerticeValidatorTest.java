@@ -6,31 +6,43 @@ import org.junit.jupiter.api.Test;
 public class VerticeValidatorTest {
 
 	@Test
-	public void testGetAppName() {
+	public void testIsVertice() {
 		Assertions.assertTrue(
-				VerticeValidator.getAppName("The something1 application, something2 file, something3 section is empty")
-						.contentEquals("something1"));
+				VerticeValidator.isVertice("The something1 application, something2 file, something3 section is empty"));
+	}
+
+	@Test
+	public void testIsContainer() {
+		Assertions.assertTrue(VerticeValidator
+				.isContainerStep("The something1 application, something2 file, something3 section is empty"));
+	}
+
+	@Test
+	public void testGetAppName() {
+		Assertions.assertTrue(VerticeValidator
+				.getContainerName("The something1 application, something2 file, something3 section is empty")
+				.contentEquals("something1"));
 	}
 
 	@Test
 	public void testGetAppType() {
-		Assertions.assertTrue(
-				VerticeValidator.getAppType("The something1 application, something2 file, something3 section is empty")
-						.contentEquals("application"));
+		Assertions.assertTrue(VerticeValidator
+				.getContainerType("The something1 application, something2 file, something3 section is empty")
+				.contentEquals("application"));
 	}
 
 	@Test
 	public void testGetObjName() {
-		Assertions.assertTrue(
-				VerticeValidator.getObjName("The something1 application, something2 file, something3 section is empty")
-						.contentEquals("something2"));
+		Assertions.assertTrue(VerticeValidator
+				.getObjectName("The something1 application, something2 file, something3 section is empty")
+				.contentEquals("something2"));
 	}
 
 	@Test
 	public void testGetObjType() {
-		Assertions.assertTrue(
-				VerticeValidator.getObjType("The something1 application, something2 file, something3 section is empty")
-						.contentEquals("file"));
+		Assertions.assertTrue(VerticeValidator
+				.getObjectType("The something1 application, something2 file, something3 section is empty")
+				.contentEquals("file"));
 	}
 
 	@Test
@@ -60,6 +72,11 @@ public class VerticeValidatorTest {
 	@Test
 	public void testDetailsRegexAsFollows() {
 		Assertions.assertTrue(VerticeValidator.isValid("The something1 application, something2 file is as follows"));
+	}
+
+	@Test
+	public void testIsNegativeStep() {
+		Assertions.assertTrue(VerticeValidator.isValid("The something1 application, something2 file isn't empty"));
 	}
 
 	@Test

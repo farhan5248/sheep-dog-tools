@@ -32,12 +32,12 @@ public abstract class ConversionMojo {
 		otherLayerLinker = getOtherLayerLinker(theSystem);
 		Project.firstLayerFiles = firstLayerConverter.selectLayerFiles("");
 		firstLayerConverter.transformLayerFiles(Project.firstLayerFiles);
-		Project.secondLayerFiles = otherLayerConverter.selectLayerFiles(Project.firstLayerPackageName);
-		otherLayerConverter.transformLayerFiles(Project.secondLayerFiles);
-		firstLayerLinker.linkLayerFiles(Project.firstLayerPackageName);
-		Project.thirdLayerFiles = otherLayerConverter.selectLayerFiles(Project.secondLayerPackageName);
-		otherLayerConverter.transformLayerFiles(Project.thirdLayerFiles);
-		otherLayerLinker.linkLayerFiles(Project.secondLayerPackageName);
+		//Project.secondLayerFiles = otherLayerConverter.selectLayerFiles(Project.firstLayerPackageName);
+		//otherLayerConverter.transformLayerFiles(Project.secondLayerFiles);
+		//firstLayerLinker.linkLayerFiles(Project.firstLayerPackageName);
+		//Project.thirdLayerFiles = otherLayerConverter.selectLayerFiles(Project.secondLayerPackageName);
+		//otherLayerConverter.transformLayerFiles(Project.thirdLayerFiles);
+		//otherLayerLinker.linkLayerFiles(Project.secondLayerPackageName);
 		UMLProject.exportUMLFiles(theSystem, new File(Project.baseDir + Project.umlDir));
 	}
 

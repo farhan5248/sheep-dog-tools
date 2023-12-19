@@ -146,7 +146,7 @@ public class CucumberOtherLayerConverter extends OtherLayerConverter {
 				// This is done purposely so that I can discover new expressions
 				arg = e.asNameExpr().getNameAsString();
 			}
-			ArgumentFactory.getArgument(theMessage, arg, arg);
+			ArgumentFactory.getArgument(theMessage, arg);
 
 		}
 	}

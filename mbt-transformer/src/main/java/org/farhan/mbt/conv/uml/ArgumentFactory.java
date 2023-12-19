@@ -7,13 +7,12 @@ import org.eclipse.uml2.uml.ValueSpecification;
 
 public class ArgumentFactory {
 
-	public static ValueSpecification getArgument(Message aMessage, String name, String value) {
+	public static ValueSpecification getArgument(Message aMessage, String name) {
 		LiteralString ls = (LiteralString) aMessage.getArgument(name, null);
 		if (ls == null) {
 			ls = UMLFactory.eINSTANCE.createLiteralString();
 			ls = (LiteralString) aMessage.createArgument(name, null, ls.eClass());
 			ls.setName(name);
-			ls.setValue(value);
 		}
 		return ls;
 	}

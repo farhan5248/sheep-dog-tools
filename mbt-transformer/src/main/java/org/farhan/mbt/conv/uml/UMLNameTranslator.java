@@ -9,7 +9,7 @@ import org.farhan.conv.core.Utilities;
 // TODO deleted this class after moving out all the name translations to the converter classes
 public class UMLNameTranslator {
 
-	public static String filterClassName(String currentClassName, boolean keepUnderscore) {
+	public static String filterClassName(String currentClassName) {
 		if (currentClassName == null) {
 			return "";
 		}
@@ -17,20 +17,17 @@ public class UMLNameTranslator {
 			return currentClassName;
 		}
 		String newClassName = currentClassName;
-		newClassName = newClassName.replace("page", "Page");
 		newClassName = newClassName.replace("-", "");
 		newClassName = newClassName.replace("_", "");
 		newClassName = newClassName.replace(" ", "");
 		newClassName = newClassName.replace("'", "");
 		newClassName = newClassName.replace("#", "");
-
 		return newClassName;
 	}
 
 	public static String getOtherLayerAppName(String qualifiedName) {
 		// TODO maybe a split and split is faster than a regex?
-		String packageName = Utilities.regexFind("pst::components::([^:]+)", qualifiedName, 1,
-				"UnknownApplication");
+		String packageName = Utilities.regexFind("pst::objects::([^:]+)", qualifiedName, 1, "UnknownApplication");
 		// This name is in lower case but we need the upper case version so let's get it
 		// from the class name
 		String className = getName(qualifiedName);

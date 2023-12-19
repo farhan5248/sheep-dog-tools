@@ -6,30 +6,42 @@ import org.junit.jupiter.api.Test;
 public class EdgeValidatorTest {
 
 	@Test
+	public void testIsEdge() {
+		Assertions.assertTrue(
+				EdgeValidator.isEdge("The something1 application, something2 request is executed with"));
+	}
+	
+	@Test
+	public void testIsContainer() {
+		Assertions.assertTrue(
+				EdgeValidator.isContainerStep("The something1 application, something2 request is executed with"));
+	}
+
+	@Test
 	public void testGetAppName() {
-		Assertions
-				.assertTrue(EdgeValidator.getAppName("The something1 application, something2 request is executed with")
+		Assertions.assertTrue(
+				EdgeValidator.getContainerName("The something1 application, something2 request is executed with")
 						.contentEquals("something1"));
 	}
 
 	@Test
 	public void testGetAppType() {
-		Assertions
-				.assertTrue(EdgeValidator.getAppType("The something1 application, something2 request is executed with")
+		Assertions.assertTrue(
+				EdgeValidator.getContainerType("The something1 application, something2 request is executed with")
 						.contentEquals("application"));
 	}
 
 	@Test
 	public void testGetObjName() {
-		Assertions
-				.assertTrue(EdgeValidator.getObjName("The something1 application, something2 request is executed with")
+		Assertions.assertTrue(
+				EdgeValidator.getObjectName("The something1 application, something2 request is executed with")
 						.contentEquals("something2"));
 	}
 
 	@Test
 	public void testGetObjType() {
-		Assertions
-				.assertTrue(EdgeValidator.getObjType("The something1 application, something2 request is executed with")
+		Assertions.assertTrue(
+				EdgeValidator.getObjectType("The something1 application, something2 request is executed with")
 						.contentEquals("request"));
 	}
 
@@ -65,6 +77,11 @@ public class EdgeValidatorTest {
 		Assertions.assertTrue(EdgeValidator.isValid("The something1 application, something2 request is valid"));
 	}
 
+	@Test
+	public void testIsNegativeStep() {
+		Assertions.assertTrue(EdgeValidator.isNegativeStep("The something1 application, something2 request isn't executed"));
+	}
+	
 	@Test
 	public void testDetailsRegexIsntExecuted() {
 		Assertions.assertTrue(EdgeValidator.isValid("The something1 application, something2 request isn't executed"));

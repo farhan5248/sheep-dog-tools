@@ -1,8 +1,8 @@
-package org.farhan.steps.claimproject;
+package org.farhan.stepdefs.claimproject;
 
 import org.farhan.objects.claimproject.ClaimProjectFactory;
 import org.farhan.objects.claimproject.ProcessFile;
-import org.farhan.steps.common.FeatureSteps;
+import org.farhan.stepdefs.common.FeatureSteps;
 
 import io.cucumber.java.en.And;
 

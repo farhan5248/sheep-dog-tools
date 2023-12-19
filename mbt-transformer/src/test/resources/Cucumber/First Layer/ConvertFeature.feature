@@ -1,6 +1,5 @@
 Feature: Convert Feature
 
-  @convert-cucumber-umlpst
   Scenario: Convert Feature
     Given The claim project, src/test/cucumber/dept/process.feature file is as follows
       """
@@ -16,5 +15,5 @@ Feature: Convert Feature
     Then The claim project, target/uml/pst.uml file is present
     # Class Interactions, Interaction Comments, Interaction Messages
     And The target/uml/pst.uml file, Class Comments section is as follows
-      | Class Name                  | Comment                                                             |
-      | interactions::dept::process | This is the description\nThis is the second line of the description |
+      | Class Name           | Comment                                                             |
+      | specs::dept::process | This is the description\nThis is the second line of the description |

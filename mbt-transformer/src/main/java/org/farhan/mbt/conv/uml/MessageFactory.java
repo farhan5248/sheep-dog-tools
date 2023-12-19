@@ -28,13 +28,13 @@ public class MessageFactory {
 		MessageOccurrenceSpecification mosDst;
 
 		mosSrc = UMLFactory.eINSTANCE.createMessageOccurrenceSpecification();
-		mosSrc.setName(aTestOrKeywordStepName + "SendEvent");
+		mosSrc.setName("SendEvent");
 		mosSrc.setEnclosingInteraction(aTestOrKeyword);
 		mosSrc.setMessage(aMessage);
 		mosSrc.setCovered(thisLifeline);
 
 		mosDst = UMLFactory.eINSTANCE.createMessageOccurrenceSpecification();
-		mosDst.setName(aTestOrKeywordStepName + "ReceiveEvent");
+		mosDst.setName("ReceiveEvent");
 		mosDst.setEnclosingInteraction(aTestOrKeyword);
 		mosDst.setMessage(aMessage);
 		mosDst.setCovered(targetLifeline);
