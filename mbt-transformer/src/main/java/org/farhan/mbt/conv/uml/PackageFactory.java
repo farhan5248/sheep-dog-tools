@@ -9,6 +9,7 @@ import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.PackageableElement;
+import org.farhan.conv.core.Project;
 
 public class PackageFactory {
 
@@ -87,9 +88,9 @@ public class PackageFactory {
 		return classes;
 	}
 
-	public static ArrayList<Package> getApplicationsPackages(Model theSystem, String owningModelName) {
+	public static ArrayList<Package> getStepDefPackages(Model theSystem, String owningModelName) {
 		Model owningModel = (Model) theSystem.getMember(owningModelName);
-		Package components = (Package) owningModel.getPackagedElement("components");
+		Package components = (Package) owningModel.getPackagedElement(Project.secondLayerPackageName);
 		ArrayList<Package> thePackages = new ArrayList<Package>();
 		for (PackageableElement pe : components.getPackagedElements()) {
 			if (pe instanceof Package) {

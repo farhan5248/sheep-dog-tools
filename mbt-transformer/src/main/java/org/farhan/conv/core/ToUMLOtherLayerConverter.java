@@ -8,15 +8,15 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.ElementImport;
 import org.eclipse.uml2.uml.Package;
 import org.farhan.mbt.conv.uml.PackageFactory;
+import org.farhan.mbt.conv.uml.UMLProject;
 
-
-public abstract class OtherLayerConverter extends LayerConverter {
+public abstract class ToUMLOtherLayerConverter extends ToUMLLayerConverter {
 
 	@Override
-	final protected ArrayList<File> selectLayerFiles(String layer) {
+	final protected void selectLayerFiles(String layer) {
+		// TODO this isn't tested yet
 		ArrayList<File> layerFiles = new ArrayList<File>();
-		Package upperLayerPackage = PackageFactory.getPackageRecursively(theSystem,
-				"pst::" + layer);
+		Package upperLayerPackage = PackageFactory.getPackageRecursively(UMLProject.theSystem, "pst::" + layer);
 		if (upperLayerPackage != null) {
 			ArrayList<Class> upperLayerClasses = PackageFactory.getPackagedClasses(upperLayerPackage);
 			HashMap<String, Class> importedClasses = new HashMap<String, Class>();
@@ -35,6 +35,5 @@ public abstract class OtherLayerConverter extends LayerConverter {
 			}
 		}
 
-		return layerFiles;
 	}
 }

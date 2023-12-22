@@ -1,20 +1,16 @@
 package org.farhan.conv.core;
 
-import java.io.File;
-import java.util.ArrayList;
-
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.uml2.uml.Interaction;
 import org.farhan.conv.validation.Layer1Validator;
 
-public abstract class FirstLayerConverter extends LayerConverter {
+public abstract class ToUMLFirstLayerConverter extends ToUMLLayerConverter {
 
 	private StateMachine theMachine;
 
 	private class StateMachine {
 		String machineName;
 		String currentState;
-
 	}
 
 	void setFSMName(String machineName) {
@@ -33,25 +29,10 @@ public abstract class FirstLayerConverter extends LayerConverter {
 		return theMachine.currentState;
 	}
 
-	public FirstLayerConverter() {
+	public ToUMLFirstLayerConverter() {
 		super();
 		theMachine = new StateMachine();
 	}
-
-	@Override
-	final protected ArrayList<File> selectLayerFiles(String layer) throws Exception {
-		// I don't use the layer name here, it's only needed for lower layers to
-		// distinguish between them
-		Project.firstLayerFiles = Utilities.recursivelyListFiles(getLayerDir(), getLayerFileType());
-		for (int i = Project.firstLayerFiles.size() - 1; i >= 0; i--) {
-			if (!isFileSelected(Project.firstLayerFiles.get(i))) {
-				Project.firstLayerFiles.remove(i);
-			}
-		}
-		return Project.firstLayerFiles;
-	}
-
-	protected abstract boolean isFileSelected(File theFile) throws Exception;
 
 	protected void resetCurrentContainerObject() {
 		setFSMName("UnknownContainer");

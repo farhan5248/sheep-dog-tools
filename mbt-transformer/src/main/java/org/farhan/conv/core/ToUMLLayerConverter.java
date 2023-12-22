@@ -1,36 +1,26 @@
 package org.farhan.conv.core;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.apache.log4j.Logger;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
-import org.eclipse.uml2.uml.Model;
 
-public abstract class LayerConverter {
+public abstract class ToUMLLayerConverter {
 
-	Logger log;
-	protected Model theSystem;
+	protected abstract void selectLayerFiles(String layerSelectionCriteria) throws Exception;
 
-	protected abstract ArrayList<File> selectLayerFiles(String layer) throws Exception;
+	protected void transformLayerFiles(ArrayList<ConvertibleFile> layerFiles) throws Exception {
 
-	protected abstract File getLayerDir();
-
-	protected abstract String getLayerFileType();
-
-	protected void transformLayerFiles(ArrayList<File> layerFiles) throws Exception {
-
-		for (File aFile : layerFiles) {
-			Class layerClass = convertToClass(aFile);
+		for (ConvertibleFile layerFile : layerFiles) {
+			Class layerClass = convertToClass(layerFile);
 			convertToImports(layerClass);
 			convertToAttributes(layerClass);
 			convertToBehaviours(layerClass);
 		}
 	}
 
-	protected abstract Class convertToClass(File theFile) throws Exception;
+	protected abstract Class convertToClass(ConvertibleFile layerFile) throws Exception;
 
 	protected abstract void convertToImports(Class layerClass) throws Exception;
 
@@ -41,11 +31,11 @@ public abstract class LayerConverter {
 	protected abstract void convertToInteractionMessages(Interaction anInteraction, Collection<?> steps)
 			throws Exception;
 
-	protected abstract void convertToMessage(Interaction anInteraction, Object o);
+	protected abstract void convertToMessage(Interaction anInteraction, Object anObject) throws Exception;
 
 	protected abstract String convertClassQualifiedNameToPath(String qualifiedName);
 
-	protected abstract String convertPathToClassQualifiedName(String pathName);
+	protected abstract String convertAbsolutePathToQualifiedName(String pathName);
 
 	protected abstract String convertClassQualifiedNameToImport(String qualifiedName);
 

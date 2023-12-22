@@ -74,23 +74,10 @@ public class PSTFile extends UMLFile {
 		assertInteractionCommentValue(row.get("Interaction Name"), row.get("Comment"));
 	}
 
-	public void assertInteractionMessagesInteractionName(HashMap<String, String> row) {
-		assertInteractionNameExists(row.get("Interaction Name"));
-	}
-
-	public void assertInteractionMessagesMessage(HashMap<String, String> row) {
-		assertInteractionMessageValue(row.get("Interaction Name"), row.get("Message"));
-	}
-
-	public void assertInteractionMessagesArgumentName(HashMap<String, String> row) {
-		assertInteractionMessageArgumentNameExists(row.get("Interaction Name"), row.get("Message"),
-				row.get("Argument Name"));
-	}
-
 	public void assertInteractionAnnotationsInteractionName(HashMap<String, String> row) {
 		assertInteractionNameExists(row.get("Interaction Name"));
 	}
-	
+
 	public void assertInteractionAnnotationsAnnotationName(HashMap<String, String> row) {
 		assertInteractionAnnotationNameExists(row.get("Interaction Name"), row.get("Annotation Name"));
 	}
@@ -98,16 +85,6 @@ public class PSTFile extends UMLFile {
 	public void assertInteractionAnnotationsAnnotationDetail(HashMap<String, String> row) {
 		assertInteractionAnnotationDetailExists(row.get("Interaction Name"), row.get("Annotation Name"),
 				row.get("Annotation Detail"));
-	}
-
-	public void assertInteractionMessagesAnnotationName(HashMap<String, String> row) {
-		assertInteractionMessageAnnotationNameExists(row.get("Interaction Name"), row.get("Message"),
-				row.get("Annotation Name"));
-	}
-
-	public void assertInteractionMessagesAnnotationDetail(HashMap<String, String> row) {
-		assertInteractionMessageAnnotationDetailExists(row.get("Interaction Name"), row.get("Message"),
-				row.get("Annotation Name"), row.get("Annotation Detail"));
 	}
 
 	public void assertInteractionLifelinesInteractionName(HashMap<String, String> row) {
@@ -121,6 +98,29 @@ public class PSTFile extends UMLFile {
 	public void assertInteractionLifelinesLifelineRepresents(HashMap<String, String> row) {
 		assertInteractionLifelineRepresentsValue(row.get("Interaction Name"), row.get("Lifeline Name"),
 				row.get("Lifeline Represents"));
+	}
+
+	public void assertInteractionMessagesInteractionName(HashMap<String, String> row) {
+		assertInteractionNameExists(row.get("Interaction Name"));
+	}
+
+	public void assertInteractionMessagesMessage(HashMap<String, String> row) {
+		assertInteractionMessageValue(row.get("Interaction Name"), row.get("Message"));
+	}
+
+	public void assertInteractionMessagesArgumentName(HashMap<String, String> row) {
+		assertInteractionMessageArgumentNameExists(row.get("Interaction Name"), row.get("Message"),
+				row.get("Argument Name"));
+	}
+
+	public void assertInteractionMessagesAnnotationName(HashMap<String, String> row) {
+		assertInteractionMessageAnnotationNameExists(row.get("Interaction Name"), row.get("Message"),
+				row.get("Annotation Name"));
+	}
+
+	public void assertInteractionMessagesAnnotationDetail(HashMap<String, String> row) {
+		assertInteractionMessageAnnotationDetailExists(row.get("Interaction Name"), row.get("Message"),
+				row.get("Argument Name"), row.get("Annotation Detail"));
 	}
 
 	public void assertInteractionMessageOccurencesInteractionName(HashMap<String, String> row) {

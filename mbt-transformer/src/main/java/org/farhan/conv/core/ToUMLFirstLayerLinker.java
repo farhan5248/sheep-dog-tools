@@ -7,25 +7,25 @@ import org.farhan.conv.validation.Layer1Validator;
 import org.farhan.mbt.graph.validation.EdgeValidator;
 import org.farhan.mbt.graph.validation.VerticeValidator;
 
-public abstract class FirstLayerLinker extends LayerLinker {
+public abstract class ToUMLFirstLayerLinker extends ToUMLLayerLinker {
 
 	@Override
 	protected void addNextLayerInteractionMessages(Interaction targetInteraction, Message m) {
 
 		if (Layer1Validator.validateStepText(m.getName())) {
 
-			if (VerticeValidator.isValid(m.getName())) {
-				createNextLayerInteractionMessagesFromOutputMessage(targetInteraction, m);
-			} else if (EdgeValidator.isValid(m.getName())) {
-				createNextLayerInteractionMessagesFromTransitionMessage(targetInteraction, m);
+			if (VerticeValidator.isVertice(m.getName())) {
+				createNextLayerInteractionMessagesFromVerticeMessage(targetInteraction, m);
+			} else if (EdgeValidator.isEdge(m.getName())) {
+				createNextLayerInteractionMessagesFromEdgeMessage(targetInteraction, m);
 			}
 		}
 	}
 
-	protected abstract void createNextLayerInteractionMessagesFromOutputMessage(Interaction targetInteraction,
+	protected abstract void createNextLayerInteractionMessagesFromVerticeMessage(Interaction targetInteraction,
 			Message m);
 
-	protected abstract void createNextLayerInteractionMessagesFromTransitionMessage(Interaction targetInteraction,
+	protected abstract void createNextLayerInteractionMessagesFromEdgeMessage(Interaction targetInteraction,
 			Message m);
 
 	@Override

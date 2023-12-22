@@ -71,14 +71,8 @@ public class InteractionFactory extends PropertyFactory {
 		return getInteraction(theClass, messageName, add);
 	}
 
-	public static Interaction getInteractionWithAnnotation(Class theClass, String methodName, String annotationName) {
-		Interaction anInteraction = getInteraction(theClass, methodName, true);
-		if (annotationName != null && anInteraction.getEAnnotations().isEmpty()) {
-			anInteraction.createEAnnotation(annotationName);
-		}
-		return anInteraction;
-	}
 
+	// TODO remove the boolean and 
 	public static Interaction getInteraction(Class theClass, String interactionName, boolean add) {
 		Interaction anInteraction = (Interaction) theClass.getOwnedBehavior(interactionName);
 		if (anInteraction == null && add) {

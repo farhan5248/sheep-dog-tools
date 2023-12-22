@@ -1,6 +1,7 @@
 package org.farhan.mbt.conv.cucumber;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
@@ -9,8 +10,10 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.ElementImport;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
-import org.eclipse.uml2.uml.Model;
-import org.farhan.conv.core.FirstLayerConverter;
+import org.eclipse.uml2.uml.ValueSpecification;
+import org.farhan.conv.core.ToUMLFirstLayerConverter;
+import org.farhan.conv.core.Utilities;
+import org.farhan.conv.core.ConvertibleFile;
 import org.farhan.conv.core.Project;
 import org.farhan.conv.validation.Layer1Validator;
 import org.farhan.cucumber.AbstractScenario;
@@ -30,46 +33,61 @@ import org.farhan.mbt.conv.uml.InteractionFactory;
 import org.farhan.mbt.conv.uml.MessageFactory;
 import org.farhan.mbt.conv.uml.ParameterFactory;
 import org.farhan.mbt.conv.uml.UMLNameTranslator;
+import org.farhan.mbt.conv.uml.UMLProject;
 
-public class CucumberFirstLayerConverter extends FirstLayerConverter {
+public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 
 	private CucumberFeatureFile aCucumberFile;
 
-	public CucumberFirstLayerConverter(Model theSystem) {
-		this.theSystem = theSystem;
+	@Override
+	protected void selectLayerFiles(String layerSelectionCriteria) throws Exception {
+		// TODO this line below should be CucumberProject.getFirstLayerFiles
+		// that method will read the files, add it to its list and give a reference to
+		// that list
+		// The new CucumberFeatureFile(f) below will be taken care of in that method
+		// because its return type is ConvertibleFile
+		ArrayList<File> firstLayerFiles = Utilities.recursivelyListFiles(CucumberProject.getFirstLayerDir(),
+				CucumberProject.getFirstLayerFileType());
+
+		// All that's left then is to remove files not part of the criteria
+		for (int i = firstLayerFiles.size() - 1; i >= 0; i--) {
+			if (!isFileSelected(firstLayerFiles.get(i), layerSelectionCriteria)) {
+				firstLayerFiles.remove(i);
+			}
+		}
+
+		for (File f : firstLayerFiles) {
+			CucumberProject.firstLayerFiles.add(new CucumberFeatureFile(f));
+		}
 	}
 
-	@Override
-	protected File getLayerDir() {
-		return CucumberProject.getFirstLayerDir();
-	}
+	private boolean isFileSelected(File theFile, String layerSelectionCriteria) throws Exception {
 
-	@Override
-	protected String getLayerFileType() {
-		return ".feature";
-	}
-
-	@Override
-	protected boolean isFileSelected(File theFile) throws Exception {
-
+		// TODO this should also be in selectLayerFiles or
+		// CucumberProject.getFirstLayerFiles
 		CucumberFeatureFile aCucumberFile = new CucumberFeatureFile(theFile);
-		aCucumberFile.readFile();
+		aCucumberFile.read();
 
+		// Make a tag search method and then move this into selectLayerFiles and delete
+		// this method
+		// if isTagged(aCucumberFile.theFeature.getTags())
 		for (Tag t : aCucumberFile.theFeature.getTags()) {
-			if (t.getName().trim().contentEquals(Project.tags)) {
+			if (t.getName().trim().contentEquals(layerSelectionCriteria)) {
 				return true;
 			}
 		}
 		for (AbstractScenario a : aCucumberFile.theFeature.getAbstractScenarios()) {
 			if (a instanceof Scenario) {
+				// if isTagged(((Scenario) a).getTags())
 				for (Tag t : ((Scenario) a).getTags()) {
-					if (t.getName().trim().contentEquals(Project.tags)) {
+					if (t.getName().trim().contentEquals(layerSelectionCriteria)) {
 						return true;
 					}
 				}
 			} else if (a instanceof ScenarioOutline) {
+				// if isTagged(((ScenarioOutline) a).getTags())
 				for (Tag t : ((ScenarioOutline) a).getTags()) {
-					if (t.getName().trim().contentEquals(Project.tags)) {
+					if (t.getName().trim().contentEquals(layerSelectionCriteria)) {
 						return true;
 					}
 				}
@@ -79,13 +97,14 @@ public class CucumberFirstLayerConverter extends FirstLayerConverter {
 	}
 
 	@Override
-	protected Class convertToClass(File theFile) throws Exception {
+	protected Class convertToClass(ConvertibleFile theObject) throws Exception {
 
-		aCucumberFile = new CucumberFeatureFile(theFile);
-		aCucumberFile.readFile();
-		// TODO use convertPathToQualifiedName
-		String qualifiedName = convertPathToClassQualifiedName(theFile.getAbsolutePath());
-		Class layerClass = ClassFactory.getClass(theSystem, qualifiedName);
+		aCucumberFile = (CucumberFeatureFile) theObject;
+		aCucumberFile.read();
+		// TODO rename stuff like this abspath to qualiname etc
+		String qualifiedName = convertAbsolutePathToQualifiedName(aCucumberFile.getFile().getAbsolutePath());
+		// TODO remove UMLProject.theSystem from all the UML Factory methods
+		Class layerClass = ClassFactory.getClass(UMLProject.theSystem, qualifiedName);
 		return layerClass;
 	}
 
@@ -182,7 +201,7 @@ public class CucumberFirstLayerConverter extends FirstLayerConverter {
 		secondLayerClassName = "pst::" + Project.secondLayerPackageName + "::" + getFSMName() + "::"
 				+ secondLayerClassName;
 
-		Class importedClass = ClassFactory.getClassByMessage(theSystem, messageName, secondLayerClassName);
+		Class importedClass = ClassFactory.getClassByMessage(UMLProject.theSystem, messageName, secondLayerClassName);
 		ElementImport classImport = ElementImportFactory.getElementImportByAlias(owningClass, importedClass.getName());
 		if (classImport == null) {
 			classImport = ElementImportFactory.getElementImport(owningClass, secondLayerClassName);
@@ -192,8 +211,8 @@ public class CucumberFirstLayerConverter extends FirstLayerConverter {
 		// Add the data as annotations for now until I can use a loop in UML. The data
 		// is needed for round trip engineering to the Asciidoc files/graph model
 		if (cs.getTheStepTable() != null) {
-			ArgumentFactory.getArgument(theMessage, "dataTable");
-			EAnnotation a = theMessage.createEAnnotation("dataTable");
+			ValueSpecification vs = ArgumentFactory.getArgument(theMessage, "dataTable", "", true);
+			EAnnotation a = vs.createEAnnotation("dataTable");
 			EList<Row> rows = cs.getTheStepTable().getRows();
 			for (int i = 0; i < rows.size(); i++) {
 
@@ -207,8 +226,8 @@ public class CucumberFirstLayerConverter extends FirstLayerConverter {
 			}
 		}
 		if (cs.getTheDocString() != null) {
-			ArgumentFactory.getArgument(theMessage, "docString");
-			EAnnotation a = theMessage.createEAnnotation("docString");
+			ValueSpecification vs = ArgumentFactory.getArgument(theMessage, "docString", "", true);
+			EAnnotation a = vs.createEAnnotation("docString");
 			EList<Statement> lines = cs.getTheDocString().getStatements();
 
 			for (int i = 0; i < lines.size(); i++) {
@@ -231,7 +250,7 @@ public class CucumberFirstLayerConverter extends FirstLayerConverter {
 	}
 
 	@Override
-	protected String convertPathToClassQualifiedName(String pathName) {
+	protected String convertAbsolutePathToQualifiedName(String pathName) {
 		String qualifiedName = pathName.trim();
 		qualifiedName = qualifiedName.replace(".feature", "");
 		qualifiedName = qualifiedName.replace(CucumberProject.getFirstLayerDir().getAbsolutePath(), "");
@@ -259,5 +278,4 @@ public class CucumberFirstLayerConverter extends FirstLayerConverter {
 		}
 		return contents.trim();
 	}
-
 }

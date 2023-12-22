@@ -16,4 +16,5 @@ public class CucumberToUMLGoalSteps extends GoalSteps {
 		MBTTransformerPluginFactory.get("CucumberToUMLGoal").setAttributes(dataTable);
 		o.execute();
 	}
+
 }

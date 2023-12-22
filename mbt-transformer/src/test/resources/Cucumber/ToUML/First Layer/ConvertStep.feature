@@ -51,13 +51,13 @@ Feature: Convert Step
     Argument values are used for default values like in PL/SQL
 
     And The target/uml/pst.uml file, Interaction Messages section is as follows
-      | Interaction Name             | Message                                            | Annotation Name | Annotation Detail |
-      | specs::dept::process::Submit | The blah application, DataTable page is as follows | dataTable       | 0 -> h1 \|h2 \|   |
-      | specs::dept::process::Submit | The blah application, DataTable page is as follows | dataTable       | 1 -> v1 \|v2 \|   |
-      | specs::dept::process::Submit | The blah application, DataTable page is as follows | dataTable       | 2 -> v3 \|v4 \|   |
+      | Interaction Name             | Message                                            | Argument Name | Annotation Detail |
+      | specs::dept::process::Submit | The blah application, DataTable page is as follows | dataTable     | 0 -> h1 \|h2 \|   |
+      | specs::dept::process::Submit | The blah application, DataTable page is as follows | dataTable     | 1 -> v1 \|v2 \|   |
+      | specs::dept::process::Submit | The blah application, DataTable page is as follows | dataTable     | 2 -> v3 \|v4 \|   |
 
   Scenario: Parse Doc Strings
     And The target/uml/pst.uml file, Interaction Messages section is as follows
-      | Interaction Name             | Message                                            | Annotation Name | Annotation Detail |
-      | specs::dept::process::Submit | The blah application, DocString page is as follows | docString       | 0 -> text1        |
-      | specs::dept::process::Submit | The blah application, DocString page is as follows | docString       | 1 -> text2        |
+      | Interaction Name             | Message                                            | Argument Name | Annotation Detail |
+      | specs::dept::process::Submit | The blah application, DocString page is as follows | docString     | 0 -> text1        |
+      | specs::dept::process::Submit | The blah application, DocString page is as follows | docString     | 1 -> text2        |

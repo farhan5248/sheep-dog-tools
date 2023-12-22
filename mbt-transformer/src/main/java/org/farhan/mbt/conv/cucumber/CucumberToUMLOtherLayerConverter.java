@@ -1,6 +1,5 @@
 package org.farhan.mbt.conv.cucumber;
 
-import java.io.File;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -8,8 +7,8 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.ElementImport;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
-import org.eclipse.uml2.uml.Model;
-import org.farhan.conv.core.OtherLayerConverter;
+import org.farhan.conv.core.ConvertibleFile;
+import org.farhan.conv.core.ToUMLOtherLayerConverter;
 import org.farhan.mbt.conv.uml.ArgumentFactory;
 import org.farhan.mbt.conv.uml.ClassFactory;
 import org.farhan.mbt.conv.uml.CommentFactory;
@@ -17,6 +16,7 @@ import org.farhan.mbt.conv.uml.ElementImportFactory;
 import org.farhan.mbt.conv.uml.InteractionFactory;
 import org.farhan.mbt.conv.uml.MessageFactory;
 import org.farhan.mbt.conv.uml.ParameterFactory;
+import org.farhan.mbt.conv.uml.UMLProject;
 
 import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
@@ -30,30 +30,16 @@ import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import com.github.javaparser.ast.expr.StringLiteralExpr;
 import com.github.javaparser.ast.stmt.Statement;
 
-public class CucumberOtherLayerConverter extends OtherLayerConverter {
+public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 
 	private CucumberJavaFile aCucumberJavaFile;
 
-	public CucumberOtherLayerConverter(Model theSystem) {
-		this.theSystem = theSystem;
-	}
-
 	@Override
-	protected File getLayerDir() {
-		return CucumberProject.javaDir;
-	}
-
-	@Override
-	protected String getLayerFileType() {
-		return ".java";
-	}
-
-	@Override
-	protected Class convertToClass(File aFile) throws Exception {
-		aCucumberJavaFile = new CucumberJavaFile(aFile);
-		aCucumberJavaFile.readFile();
-		String qualifiedName = convertPathToClassQualifiedName(aFile.getAbsolutePath());
-		Class layerClass = ClassFactory.getClass(theSystem, qualifiedName);
+	protected Class convertToClass(ConvertibleFile layerFile) throws Exception {
+		aCucumberJavaFile = (CucumberJavaFile) layerFile;
+		aCucumberJavaFile.read();
+		String qualifiedName = convertAbsolutePathToQualifiedName(aCucumberJavaFile.getFile().getAbsolutePath());
+		Class layerClass = ClassFactory.getClass(UMLProject.theSystem, qualifiedName);
 		return layerClass;
 	}
 
@@ -127,7 +113,9 @@ public class CucumberOtherLayerConverter extends OtherLayerConverter {
 			// TODO this is a temp hack for displayKeyword in layer 2
 			qualifiedName = "pst::common::BusinessProcessModelTasks";
 		}
-		Class importedClass = ClassFactory.getClass(theSystem, qualifiedName);
+		// TODO, the Factory classes shouldn't need theSystem passed to each method,
+		// they should interact with the project collection managing methods directly
+		Class importedClass = ClassFactory.getClass(UMLProject.theSystem, qualifiedName);
 		Message theMessage = MessageFactory.getMessage(anInteraction, importedClass, mce.getName().asString());
 		for (Expression e : mce.getArguments()) {
 			// TODO make tests for these
@@ -146,19 +134,19 @@ public class CucumberOtherLayerConverter extends OtherLayerConverter {
 				// This is done purposely so that I can discover new expressions
 				arg = e.asNameExpr().getNameAsString();
 			}
-			ArgumentFactory.getArgument(theMessage, arg);
+			ArgumentFactory.getArgument(theMessage, arg, "", true);
 
 		}
 	}
 
 	@Override
 	protected String convertClassQualifiedNameToPath(String qualifiedName) {
-		return CucumberProject.convertQualifiedNameToJavaPath(qualifiedName);
+		return CucumberNameConverter.convertQualifiedNameToJavaPath(qualifiedName);
 	}
 
 	@Override
-	protected String convertPathToClassQualifiedName(String pathName) {
-		return CucumberProject.convertJavaPathToQualifiedName(pathName);
+	protected String convertAbsolutePathToQualifiedName(String pathName) {
+		return CucumberNameConverter.convertJavaPathToQualifiedName(pathName);
 	}
 
 	@Override

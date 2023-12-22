@@ -14,7 +14,7 @@ public class Layer1Validator {
 			return VerticeValidator.getObjectName(messageName);
 		}
 		if (EdgeValidator.isEdge(messageName)) {
-			EdgeValidator.getObjectName(messageName);
+			return EdgeValidator.getObjectName(messageName);
 		}
 		return null;
 	}
@@ -24,7 +24,7 @@ public class Layer1Validator {
 			return VerticeValidator.getObjectType(messageName);
 		}
 		if (EdgeValidator.isEdge(messageName)) {
-			EdgeValidator.getObjectType(messageName);
+			return EdgeValidator.getObjectType(messageName);
 		}
 		return null;
 	}
@@ -34,7 +34,7 @@ public class Layer1Validator {
 			return VerticeValidator.getContainerName(messageName);
 		}
 		if (EdgeValidator.isEdge(messageName)) {
-			EdgeValidator.getContainerName(messageName);
+			return EdgeValidator.getContainerName(messageName);
 		}
 		return null;
 	}
@@ -44,7 +44,7 @@ public class Layer1Validator {
 			return VerticeValidator.getContainerType(messageName);
 		}
 		if (EdgeValidator.isEdge(messageName)) {
-			EdgeValidator.getContainerType(messageName);
+			return EdgeValidator.getContainerType(messageName);
 		}
 		return null;
 	}
@@ -61,7 +61,7 @@ public class Layer1Validator {
 			return VerticeValidator.isContainerStep(messageName);
 		}
 		if (EdgeValidator.isEdge(messageName)) {
-			EdgeValidator.isContainerStep(messageName);
+			return EdgeValidator.isContainerStep(messageName);
 		}
 		return false;
 	}
@@ -71,7 +71,7 @@ public class Layer1Validator {
 			return VerticeValidator.isNegativeStep(messageName);
 		}
 		if (EdgeValidator.isEdge(messageName)) {
-			EdgeValidator.isNegativeStep(messageName);
+			return EdgeValidator.isNegativeStep(messageName);
 		}
 		return false;
 	}

@@ -40,8 +40,7 @@ public class ClassFactory {
 
 		for (Class c : PackageFactory.getPackagedClasses(nestingPackage)) {
 
-			Interaction anInteraction = InteractionFactory.getInteraction(c,
-					CucumberJavaFile.getMethodName(messageName, true), false);
+			Interaction anInteraction = InteractionFactory.getInteraction(c, messageName, false);
 			if (anInteraction != null) {
 				return c;
 			}
