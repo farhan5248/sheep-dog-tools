@@ -39,11 +39,11 @@ Feature: Convert Step Objects
       
       public class blahDataTablePage extends blah {
       
-          public static void assertToph1(HashMap<String, String> keyMap) {
+          public void assertToph1(HashMap<String, String> keyMap) {
               throw new PendingException();
           }
       
-          public static void assertToph2(HashMap<String, String> keyMap) {
+          public void assertToph2(HashMap<String, String> keyMap) {
               throw new PendingException();
           }
       }
@@ -61,7 +61,7 @@ Feature: Convert Step Objects
       
       public class blahDocStringPage extends blah {
       
-          public static void assertContent(String contents) {
+          public void assertContent(String contents) {
               throw new PendingException();
           }
       }
@@ -79,7 +79,7 @@ Feature: Convert Step Objects
       
       public class blahObjectPage extends blah {
       
-          public static void assertIsEmpty() {
+          public void assertIsEmpty() {
               throw new PendingException();
           }
       }
@@ -97,19 +97,19 @@ Feature: Convert Step Objects
       
       public class blah2JsonRequest extends blah2 {
       
-          public static void seti1(HashMap<String, String> keyMap) {
+          public void seti1(HashMap<String, String> keyMap) {
               throw new PendingException();
           }
       
-          public static void seti2(HashMap<String, String> keyMap) {
+          public void seti2(HashMap<String, String> keyMap) {
               throw new PendingException();
           }
       
-          public static void sendJsonRequest() {
+          public void sendJsonRequest() {
               throw new PendingException();
           }
       
-          public static void setIsInvalid() {
+          public void setIsInvalid() {
               throw new PendingException();
           }
       }

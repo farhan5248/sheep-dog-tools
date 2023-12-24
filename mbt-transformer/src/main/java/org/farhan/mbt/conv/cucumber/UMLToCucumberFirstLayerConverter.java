@@ -39,7 +39,7 @@ public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
 	}
 
 	@Override
-	protected void convertFromInteractionMessages(Interaction anInteraction, Collection<?> steps) throws Exception {
+	protected void convertFromInteractionMessages(Interaction anInteraction, Object stepList) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}

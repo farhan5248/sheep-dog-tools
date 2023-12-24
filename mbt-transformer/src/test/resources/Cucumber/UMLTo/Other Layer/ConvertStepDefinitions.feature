@@ -36,9 +36,9 @@ Feature: Convert Step Definitions
       import io.cucumber.java.en.Given;
       import io.cucumber.java.PendingException;
       import io.cucumber.datatable.DataTable;
-      import org.farhan.common.BusinessProcessModelTasks;
+      import org.farhan.common.TestSteps;
       
-      public class blahDataTablePageSteps extends BusinessProcessModelTasks {
+      public class blahDataTablePageSteps extends TestSteps {
       
           @Given("The blah application, DataTable page, Top section is as follows")
           public void theBlahApplicationDataTablePageTopSectionIsAsFollows(DataTable dataTable) {
@@ -56,9 +56,9 @@ Feature: Convert Step Definitions
       import io.cucumber.java.en.Given;
       import io.cucumber.java.PendingException;
       import io.cucumber.datatable.DataTable;
-      import org.farhan.common.BusinessProcessModelTasks;
+      import org.farhan.common.TestSteps;
       
-      public class blahDocStringPageSteps extends BusinessProcessModelTasks {
+      public class blahDocStringPageSteps extends TestSteps {
       
           @Given("The blah application, DocString page is as follows")
           public void theBlahApplicationDocStringPageIsAsFollows(String docString) {
@@ -76,9 +76,9 @@ Feature: Convert Step Definitions
       import io.cucumber.java.en.Given;
       import io.cucumber.java.PendingException;
       import io.cucumber.datatable.DataTable;
-      import org.farhan.common.BusinessProcessModelTasks;
+      import org.farhan.common.TestSteps;
       
-      public class blahObjectPageSteps extends BusinessProcessModelTasks {
+      public class blahObjectPageSteps extends TestSteps {
       
           @Given("The blah application, Object page is empty")
           public void theBlahApplicationObjectPageIsEmpty() {
@@ -96,9 +96,9 @@ Feature: Convert Step Definitions
       import io.cucumber.java.en.Given;
       import io.cucumber.java.PendingException;
       import io.cucumber.datatable.DataTable;
-      import org.farhan.common.BusinessProcessModelTasks;
+      import org.farhan.common.TestSteps;
       
-      public class blah2JsonRequestSteps extends BusinessProcessModelTasks {
+      public class blah2JsonRequestSteps extends TestSteps {
       
           @Given("The blah2 service, Json request is executed with")
           public void theBlah2ServiceJsonRequestIsExecutedWith(DataTable dataTable) {

@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
+import org.eclipse.uml2.uml.Message;
 
 public abstract class UMLToLayerConverter {
 
@@ -28,10 +29,10 @@ public abstract class UMLToLayerConverter {
 
 	protected abstract void convertFromBehaviours(Class layerClass) throws Exception;
 
-	protected abstract void convertFromInteractionMessages(Interaction anInteraction, Collection<?> steps)
+	protected abstract void convertFromInteractionMessages(Interaction anInteraction, Object stepList)
 			throws Exception;
 
-	protected abstract void convertFromMessage(Interaction anInteraction, Object anObject) throws Exception;
+	protected abstract void convertFromMessage(Message m, Object stepList) throws Exception;
 
 	protected abstract String convertClassQualifiedNameToPath(String qualifiedName);
 

@@ -1,0 +1,24 @@
+package org.farhan.objects.blah2;
+
+import java.util.HashMap;
+import io.cucumber.java.PendingException;
+import org.farhan.common.blah2;
+
+public class blah2JsonRequest extends blah2 {
+
+    public static void seti1(HashMap<String, String> keyMap) {
+        throw new PendingException();
+    }
+
+    public static void seti2(HashMap<String, String> keyMap) {
+        throw new PendingException();
+    }
+
+    public static void sendJsonRequest() {
+        throw new PendingException();
+    }
+
+    public static void setIsInvalid() {
+        throw new PendingException();
+    }
+}

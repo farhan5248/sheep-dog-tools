@@ -98,4 +98,16 @@ public class CucumberProject extends Project {
 		return ".java";
 	}
 
+	public static CucumberJavaFile getCucumberJavaFile(File file) throws Exception {
+		CucumberJavaFile aJavaFile = new CucumberJavaFile(file);
+		if (file.getAbsolutePath().contains(getSecondLayerDir().getName())) {
+			CucumberProject.getSecondLayerFiles().add(aJavaFile);
+		} else if (file.getAbsolutePath().contains(getThirdLayerDir().getName())) {
+			CucumberProject.getThirdLayerFiles().add(aJavaFile);
+		} else {
+			throw new Exception("Java files are only in layer 2 or 3");
+		}
+		return aJavaFile;
+	}
+
 }
