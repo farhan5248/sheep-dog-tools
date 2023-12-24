@@ -35,7 +35,7 @@ public class CucumberToUMLFirstLayerLinker extends ToUMLFirstLayerLinker {
 
 		for (ValueSpecification vs : m.getArguments()) {
 			LiteralString ls = (LiteralString) vs;
-			ParameterFactory.getParameter(targetInteraction, getVariableName(ls.getName()), "", "in");
+			ParameterFactory.getParameter(targetInteraction, ls.getName().replace(" ", ""), "", "in");
 		}
 	}
 

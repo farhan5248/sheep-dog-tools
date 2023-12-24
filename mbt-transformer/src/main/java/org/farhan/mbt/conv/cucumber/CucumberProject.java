@@ -6,11 +6,9 @@ import java.util.ArrayList;
 
 import org.farhan.mbt.conv.core.ConvertibleFile;
 import org.farhan.mbt.conv.core.Project;
+import org.farhan.mbt.conv.core.Utilities;
 
 public class CucumberProject extends Project {
-
-	// TODO The CucumberProject should manage creating new CucumberFeature or
-	// CucumberJava files
 
 	private static ArrayList<ConvertibleFile> firstLayerFiles;
 	private static ArrayList<ConvertibleFile> secondLayerFiles;
@@ -21,6 +19,14 @@ public class CucumberProject extends Project {
 	}
 
 	public static ArrayList<ConvertibleFile> getFirstLayerFiles() {
+		if (firstLayerFiles.isEmpty()) {
+			ArrayList<File> files = Utilities.recursivelyListFiles(getFirstLayerDir(), getFirstLayerFileType());
+			for (File f : files) {
+				CucumberFeatureFile cff = new CucumberFeatureFile(f);
+				firstLayerFiles.add(cff);
+				cff.read();
+			}
+		}
 		return firstLayerFiles;
 	}
 
@@ -41,6 +47,14 @@ public class CucumberProject extends Project {
 	}
 
 	public static ArrayList<ConvertibleFile> getSecondLayerFiles() {
+		if (secondLayerFiles.isEmpty()) {
+			ArrayList<File> files = Utilities.recursivelyListFiles(getSecondLayerDir(), getOtherLayerFileType());
+			for (File f : files) {
+				CucumberJavaFile cff = new CucumberJavaFile(f);
+				secondLayerFiles.add(cff);
+				cff.read();
+			}
+		}
 		return secondLayerFiles;
 	}
 
@@ -51,6 +65,14 @@ public class CucumberProject extends Project {
 	}
 
 	public static ArrayList<ConvertibleFile> getThirdLayerFiles() {
+		if (thirdLayerFiles.isEmpty()) {
+			ArrayList<File> files = Utilities.recursivelyListFiles(getThirdLayerDir(), getOtherLayerFileType());
+			for (File f : files) {
+				CucumberJavaFile cff = new CucumberJavaFile(f);
+				thirdLayerFiles.add(cff);
+				cff.read();
+			}
+		}
 		return thirdLayerFiles;
 	}
 
@@ -72,7 +94,7 @@ public class CucumberProject extends Project {
 		}
 	}
 
-	protected String getOtherLayerFileType() {
+	public static String getOtherLayerFileType() {
 		return ".java";
 	}
 

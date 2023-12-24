@@ -33,12 +33,12 @@ public abstract class ToUMLLayerConverter {
 
 	protected abstract void convertToMessage(Interaction anInteraction, Object anObject) throws Exception;
 
-	protected abstract String convertClassQualifiedNameToPath(String qualifiedName);
+	protected abstract String convertQualifiedNameToAbsolutePath(String qualifiedName);
 
 	protected abstract String convertAbsolutePathToQualifiedName(String pathName);
 
-	protected abstract String convertClassQualifiedNameToImport(String qualifiedName);
+	protected abstract String convertQualifiedNameToImportName(String qualifiedName);
 
-	protected abstract String convertImportToClassQualifiedName(String importName);
+	protected abstract String convertImportNameToQualifiedName(String importName);
 
 }

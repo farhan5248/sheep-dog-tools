@@ -25,6 +25,7 @@ public abstract class ToUMLLayerLinker {
 						addNextLayerInteractionMessages(nextLayerInteraction, m);
 					} else if (!nextLayerInteraction.getMessages().isEmpty()
 							&& nextLayerInteraction.getName().endsWith("AsFollows")) {
+						// TODO also check for executed with or the interaction's parameters
 						// This is done in case there are new fields referenced in the step
 						addNextLayerInteractionParameters(nextLayerInteraction, m);
 					}
@@ -42,20 +43,14 @@ public abstract class ToUMLLayerLinker {
 
 	protected abstract void addNextLayerInteractionMessages(Interaction targetInteraction, Message m);
 
+	protected abstract String getNextLayerClassQualifiedName(Interaction targetInteraction);
+
 	protected Class getNextLayerClassFromMessage(Message m) {
-		// get the target event, lifeline, property, imported class
 		MessageOccurrenceSpecification targetEvent = (MessageOccurrenceSpecification) m.getReceiveEvent();
 		Lifeline targetLifeline = targetEvent.getCovered();
 		Property targetProperty = (Property) targetLifeline.getRepresents();
 		Class targetClass = (Class) targetProperty.getType();
 		return targetClass;
 	}
-
-	// TODO getMethodName or something should be in this class
-	protected String getVariableName(String string) {
-		return string.replace(" ", "");
-	}
-
-	protected abstract String getNextLayerClassQualifiedName(Interaction targetInteraction);
 
 }

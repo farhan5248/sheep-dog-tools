@@ -12,30 +12,30 @@ import org.eclipse.uml2.uml.UMLFactory;
 
 public class MessageFactory {
 
-	public static Message getMessage(Interaction aTestOrKeyword, Class importedKeywordsClass,
+	public static Message getMessage(Interaction anInteraction, Class importedKeywordsClass,
 			String aTestOrKeywordStepName) {
-		Class owningClass = (Class) aTestOrKeyword.getOwner();
+		Class owningClass = (Class) anInteraction.getOwner();
 
 		Property thisProperty = PropertyFactory.getProperty(owningClass, "this", owningClass);
-		Lifeline thisLifeline = LifelineFactory.getLifeline(aTestOrKeyword, thisProperty);
+		Lifeline thisLifeline = LifelineFactory.getLifeline(anInteraction, thisProperty);
 
 		Property targetProperty = PropertyFactory.getProperty(owningClass, importedKeywordsClass.getName(),
 				importedKeywordsClass);
-		Lifeline targetLifeline = LifelineFactory.getLifeline(aTestOrKeyword, targetProperty);
+		Lifeline targetLifeline = LifelineFactory.getLifeline(anInteraction, targetProperty);
 
-		Message aMessage = aTestOrKeyword.createMessage(aTestOrKeywordStepName);
+		Message aMessage = anInteraction.createMessage(aTestOrKeywordStepName);
 		MessageOccurrenceSpecification mosSrc;
 		MessageOccurrenceSpecification mosDst;
 
 		mosSrc = UMLFactory.eINSTANCE.createMessageOccurrenceSpecification();
 		mosSrc.setName("SendEvent");
-		mosSrc.setEnclosingInteraction(aTestOrKeyword);
+		mosSrc.setEnclosingInteraction(anInteraction);
 		mosSrc.setMessage(aMessage);
 		mosSrc.setCovered(thisLifeline);
 
 		mosDst = UMLFactory.eINSTANCE.createMessageOccurrenceSpecification();
 		mosDst.setName("ReceiveEvent");
-		mosDst.setEnclosingInteraction(aTestOrKeyword);
+		mosDst.setEnclosingInteraction(anInteraction);
 		mosDst.setMessage(aMessage);
 		mosDst.setCovered(targetLifeline);
 

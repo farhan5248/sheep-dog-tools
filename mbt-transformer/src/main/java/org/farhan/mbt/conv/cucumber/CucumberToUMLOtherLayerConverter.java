@@ -52,7 +52,7 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 				CommentFactory.getComment(layerClass, comment.get().getContent());
 			}
 			for (ImportDeclaration i : aCucumberJavaFile.javaClass.getImports()) {
-				String anImportName = convertImportToClassQualifiedName(i.getNameAsString());
+				String anImportName = convertImportNameToQualifiedName(i.getNameAsString());
 				ElementImportFactory.getElementImport(layerClass, anImportName);
 			}
 		}
@@ -141,7 +141,7 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 	}
 
 	@Override
-	protected String convertClassQualifiedNameToPath(String qualifiedName) {
+	protected String convertQualifiedNameToAbsolutePath(String qualifiedName) {
 		return CucumberNameConverter.convertQualifiedNameToJavaPath(qualifiedName);
 	}
 
@@ -151,12 +151,12 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 	}
 
 	@Override
-	protected String convertClassQualifiedNameToImport(String qualifiedName) {
+	protected String convertQualifiedNameToImportName(String qualifiedName) {
 		return qualifiedName.replace("pst::", "org::farhan::").replace("::", ".");
 	}
 
 	@Override
-	protected String convertImportToClassQualifiedName(String importName) {
+	protected String convertImportNameToQualifiedName(String importName) {
 		return importName.replace(".", "::").replace("org::farhan::", "pst::");
 	}
 }

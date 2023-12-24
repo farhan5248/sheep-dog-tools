@@ -30,7 +30,7 @@ public abstract class ToUMLOtherLayerConverter extends ToUMLLayerConverter {
 
 				if (!c.getQualifiedName().contains("::io::cucumber::") && !c.getQualifiedName().contains("::common::")
 						&& !c.getQualifiedName().contains("::libraries::")) {
-					layerFiles.add(new File(convertClassQualifiedNameToPath(c.getQualifiedName())));
+					layerFiles.add(new File(convertQualifiedNameToAbsolutePath(c.getQualifiedName())));
 				}
 			}
 		}

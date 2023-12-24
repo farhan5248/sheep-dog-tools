@@ -12,6 +12,7 @@ import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.Background;
+import org.farhan.cucumber.Cell;
 import org.farhan.cucumber.Examples;
 import org.farhan.cucumber.Row;
 import org.farhan.cucumber.Scenario;
@@ -22,7 +23,6 @@ import org.farhan.cucumber.Tag;
 import org.farhan.mbt.conv.core.ConvertibleFile;
 import org.farhan.mbt.conv.core.Project;
 import org.farhan.mbt.conv.core.ToUMLFirstLayerConverter;
-import org.farhan.mbt.conv.core.Utilities;
 import org.farhan.mbt.conv.core.Validator;
 import org.farhan.mbt.conv.uml.AnnotationFactory;
 import org.farhan.mbt.conv.uml.ArgumentFactory;
@@ -41,69 +41,20 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 
 	@Override
 	protected void selectLayerFiles(String layerSelectionCriteria) throws Exception {
-		// TODO this line below should be CucumberProject.getFirstLayerFiles
-		// that method will read the files, add it to its list and give a reference to
-		// that list
-		// The new CucumberFeatureFile(f) below will be taken care of in that method
-		// because its return type is ConvertibleFile
-		ArrayList<File> firstLayerFiles = Utilities.recursivelyListFiles(CucumberProject.getFirstLayerDir(),
-				CucumberProject.getFirstLayerFileType());
 
-		// All that's left then is to remove files not part of the criteria
-		for (int i = firstLayerFiles.size() - 1; i >= 0; i--) {
-			if (!isFileSelected(firstLayerFiles.get(i), layerSelectionCriteria)) {
-				firstLayerFiles.remove(i);
+		ArrayList<ConvertibleFile> files = CucumberProject.getFirstLayerFiles();
+		for (int i = files.size() - 1; i >= 0; i--) {
+			if (!isFileSelected(files.get(i), layerSelectionCriteria)) {
+				files.remove(i);
 			}
 		}
-
-		for (File f : firstLayerFiles) {
-			CucumberProject.getFirstLayerFiles().add(new CucumberFeatureFile(f));
-		}
-	}
-
-	private boolean isFileSelected(File theFile, String layerSelectionCriteria) throws Exception {
-
-		// TODO this should also be in selectLayerFiles or
-		// CucumberProject.getFirstLayerFiles
-		CucumberFeatureFile aCucumberFile = new CucumberFeatureFile(theFile);
-		aCucumberFile.read();
-
-		// Make a tag search method and then move this into selectLayerFiles and delete
-		// this method
-		// if isTagged(aCucumberFile.theFeature.getTags())
-		for (Tag t : aCucumberFile.theFeature.getTags()) {
-			if (t.getName().trim().contentEquals(layerSelectionCriteria)) {
-				return true;
-			}
-		}
-		for (AbstractScenario a : aCucumberFile.theFeature.getAbstractScenarios()) {
-			if (a instanceof Scenario) {
-				// if isTagged(((Scenario) a).getTags())
-				for (Tag t : ((Scenario) a).getTags()) {
-					if (t.getName().trim().contentEquals(layerSelectionCriteria)) {
-						return true;
-					}
-				}
-			} else if (a instanceof ScenarioOutline) {
-				// if isTagged(((ScenarioOutline) a).getTags())
-				for (Tag t : ((ScenarioOutline) a).getTags()) {
-					if (t.getName().trim().contentEquals(layerSelectionCriteria)) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
 	}
 
 	@Override
 	protected Class convertToClass(ConvertibleFile theObject) throws Exception {
 
 		aCucumberFile = (CucumberFeatureFile) theObject;
-		aCucumberFile.read();
-		// TODO rename stuff like this abspath to qualiname etc
 		String qualifiedName = convertAbsolutePathToQualifiedName(aCucumberFile.getFile().getAbsolutePath());
-		// TODO remove UMLProject.theSystem from all the UML Factory methods
 		Class layerClass = ClassFactory.getClass(UMLProject.theSystem, qualifiedName);
 		return layerClass;
 	}
@@ -114,7 +65,7 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 
 	@Override
 	protected void convertToAttributes(Class layerClass) throws Exception {
-		CommentFactory.getComment(layerClass, statementsToString(aCucumberFile.theFeature.getStatements()));
+		CommentFactory.getComment(layerClass, convertStatementsToString(aCucumberFile.theFeature.getStatements()));
 	}
 
 	@Override
@@ -129,46 +80,22 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 			}
 
 			resetCurrentContainerObject();
-			Interaction anInteraction = InteractionFactory.getInteraction(layerClass, as.getName(), true);
-			anInteraction.setName(anInteraction.getName());
-			anInteraction.createOwnedComment().setBody(statementsToString(as.getStatements()));
+			Interaction anInteraction = createInteraction(layerClass, as);
 
 			if (as instanceof Scenario) {
-				Scenario aScenario = (Scenario) as;
-				// TODO I need to make Cucumber Factory set of classes to make things like
-				// getting data easier or just getting the tags
-				for (Tag a : aScenario.getTags()) {
-					ParameterFactory.getParameter(anInteraction, a.getName().replace("@", ""), "", "in");
-				}
+				Scenario s = (Scenario) as;
+				convertTagsToParameters(anInteraction, s.getTags());
 			}
-
 			// TODO apply example data to step data table
 			if (as instanceof ScenarioOutline) {
 				ScenarioOutline so = (ScenarioOutline) as;
-				for (Tag a : so.getTags()) {
-					ParameterFactory.getParameter(anInteraction, a.getName().replace("@", ""), "", "in");
-				}
-
-				for (Examples e : so.getExamples()) {
-					EAnnotation a = AnnotationFactory.getAnnotation(anInteraction, e.getName());
-					EList<Row> rows = e.getTheExamplesTable().getRows();
-					for (int i = 0; i < rows.size(); i++) {
-
-						String key = String.valueOf(i);
-						String value = "";
-						for (int j = 0; j < rows.get(i).getCells().size(); j++) {
-							value += rows.get(i).getCells().get(j).getName() + "|";
-						}
-						a.getDetails().put(key, value);
-					}
-				}
+				convertTagsToParameters(anInteraction, so.getTags());
+				convertExamplesToAnnotations(anInteraction, so);
 			}
-
 			// If there is a background, add its steps first
 			if (b != null) {
 				convertToInteractionMessages(anInteraction, b.getSteps());
 			}
-
 			convertToInteractionMessages(anInteraction, as.getSteps());
 		}
 	}
@@ -191,53 +118,14 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 
 	@Override
 	protected void convertToMessage(Interaction anInteraction, Object o) {
-		Step cs = (Step) o;
-		String messageName = cs.getName();
-		Class owningClass = (Class) anInteraction.getOwner();
-
-		String secondLayerClassName = "";
-		secondLayerClassName = UMLNameTranslator.filterClassName(getFSMName() + getFSMState() + "Steps");
-		secondLayerClassName = "pst::" + Project.secondLayerPackageName + "::" + getFSMName() + "::"
-				+ secondLayerClassName;
-
-		Class importedClass = ClassFactory.getClassByMessage(UMLProject.theSystem, messageName, secondLayerClassName);
-		ElementImport classImport = ElementImportFactory.getElementImportByAlias(owningClass, importedClass.getName());
-		if (classImport == null) {
-			classImport = ElementImportFactory.getElementImport(owningClass, secondLayerClassName);
-		}
-		Message theMessage = MessageFactory.getMessage(anInteraction, importedClass, messageName);
-
-		// Add the data as annotations for now until I can use a loop in UML. The data
-		// is needed for round trip engineering to the Asciidoc files/graph model
-		if (cs.getTheStepTable() != null) {
-			ValueSpecification vs = ArgumentFactory.getArgument(theMessage, "dataTable", "", true);
-			EAnnotation a = AnnotationFactory.getAnnotation(vs, "dataTable");
-			EList<Row> rows = cs.getTheStepTable().getRows();
-			for (int i = 0; i < rows.size(); i++) {
-
-				String key = String.valueOf(i);
-				String value = "";
-				for (int j = 0; j < rows.get(i).getCells().size(); j++) {
-					value += rows.get(i).getCells().get(j).getName() + " |";
-				}
-				a.getDetails().put(key, value);
-			}
-		}
-		if (cs.getTheDocString() != null) {
-			ValueSpecification vs = ArgumentFactory.getArgument(theMessage, "docString", "", true);
-			EAnnotation a = AnnotationFactory.getAnnotation(vs, "docString");
-			EList<Statement> lines = cs.getTheDocString().getStatements();
-
-			for (int i = 0; i < lines.size(); i++) {
-				String key = String.valueOf(i);
-				String value = lines.get(i).getName();
-				a.getDetails().put(key, value);
-			}
-		}
+		Step s = (Step) o;
+		Message theMessage = convertStepToMessage(anInteraction, s);
+		convertDataTableToArgument(s, theMessage);
+		convertDocStringToArgument(s, theMessage);
 	}
 
 	@Override
-	protected String convertClassQualifiedNameToPath(String qualifiedName) {
+	protected String convertQualifiedNameToAbsolutePath(String qualifiedName) {
 		String pathName = qualifiedName;
 		pathName = pathName.replace("pst::specs::", "");
 		pathName = pathName.replace("::", File.separator);
@@ -257,18 +145,122 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	}
 
 	@Override
-	protected String convertClassQualifiedNameToImport(String qualifiedName) {
+	protected String convertQualifiedNameToImportName(String qualifiedName) {
 		// first layer files have no explicit imports
 		return "";
 	}
 
 	@Override
-	protected String convertImportToClassQualifiedName(String path) {
+	protected String convertImportNameToQualifiedName(String path) {
 		// first layer files have no explicit imports
 		return null;
 	}
 
-	private String statementsToString(EList<Statement> eList) {
+	private void convertDocStringToArgument(Step s, Message theMessage) {
+		if (s.getTheDocString() != null) {
+			ValueSpecification vs = ArgumentFactory.getArgument(theMessage, "docString", "", true);
+			EList<Statement> lines = s.getTheDocString().getStatements();
+	
+			for (int i = 0; i < lines.size(); i++) {
+				AnnotationFactory.getAnnotation(vs, "docString", String.valueOf(i), lines.get(i).getName());
+			}
+		}
+	}
+
+	private void convertDataTableToArgument(Step s, Message theMessage) {
+		if (s.getTheStepTable() != null) {
+			ValueSpecification vs = ArgumentFactory.getArgument(theMessage, "dataTable", "", true);
+			EList<Row> rows = s.getTheStepTable().getRows();
+			for (int i = 0; i < rows.size(); i++) {
+	
+				String value = "";
+				for (int j = 0; j < rows.get(i).getCells().size(); j++) {
+					value += rows.get(i).getCells().get(j).getName() + " |";
+				}
+				AnnotationFactory.getAnnotation(vs, "dataTable", String.valueOf(i), value);
+			}
+		}
+	}
+
+	private Message convertStepToMessage(Interaction anInteraction, Step cs) {
+		String messageName = cs.getName();
+		Class owningClass = (Class) anInteraction.getOwner();
+		String secondLayerClassName = getSecondLayerClassName();
+		Class importedClass = ClassFactory.getClassByMessage(UMLProject.theSystem, messageName, secondLayerClassName);
+		ElementImport classImport = ElementImportFactory.getElementImportByAlias(owningClass, importedClass.getName());
+		if (classImport == null) {
+			classImport = ElementImportFactory.getElementImport(owningClass, secondLayerClassName);
+		}
+		Message theMessage = MessageFactory.getMessage(anInteraction, importedClass, messageName);
+		return theMessage;
+	}
+
+	private String getSecondLayerClassName() {
+		String secondLayerClassName = "";
+		secondLayerClassName = UMLNameTranslator.filterClassName(getFSMName() + getFSMState() + "Steps");
+		secondLayerClassName = "pst::" + Project.secondLayerPackageName + "::" + getFSMName() + "::"
+				+ secondLayerClassName;
+		return secondLayerClassName;
+	}
+
+	private boolean isFileSelected(ConvertibleFile convertibleFile, String layerSelectionCriteria) throws Exception {
+
+		aCucumberFile = (CucumberFeatureFile) convertibleFile;
+
+		if (isTagged(aCucumberFile.theFeature.getTags(), layerSelectionCriteria)) {
+			return true;
+		}
+		for (AbstractScenario a : aCucumberFile.theFeature.getAbstractScenarios()) {
+			if (a instanceof Scenario) {
+				if (isTagged(((Scenario) a).getTags(), layerSelectionCriteria)) {
+					return true;
+				}
+			} else if (a instanceof ScenarioOutline) {
+				if (isTagged(((ScenarioOutline) a).getTags(), layerSelectionCriteria)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean isTagged(EList<Tag> tags, String layerSelectionCriteria) {
+		for (Tag t : tags) {
+			if (t.getName().trim().contentEquals(layerSelectionCriteria)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void convertExamplesToAnnotations(Interaction anInteraction, ScenarioOutline so) {
+		for (Examples e : so.getExamples()) {
+			EList<Row> rows = e.getTheExamplesTable().getRows();
+			for (int i = 0; i < rows.size(); i++) {
+
+				String value = "";
+				for (int j = 0; j < rows.get(i).getCells().size(); j++) {
+					value += rows.get(i).getCells().get(j).getName() + "|";
+				}
+				AnnotationFactory.getAnnotation(anInteraction, e.getName(), String.valueOf(i), value);
+			}
+		}
+	}
+
+	private void convertTagsToParameters(Interaction anInteraction, EList<Tag> tags) {
+		for (Tag a : tags) {
+			ParameterFactory.getParameter(anInteraction, a.getName().replace("@", ""), "", "in");
+		}
+	}
+
+	private Interaction createInteraction(Class layerClass, AbstractScenario as) {
+		Interaction anInteraction = InteractionFactory.getInteraction(layerClass, as.getName(), true);
+		anInteraction.setName(anInteraction.getName());
+		anInteraction.createOwnedComment().setBody(convertStatementsToString(as.getStatements()));
+		return anInteraction;
+	}
+
+	private String convertStatementsToString(EList<Statement> eList) {
 		String contents = "";
 		for (Statement s : eList) {
 			contents += s.getName() + "\n";

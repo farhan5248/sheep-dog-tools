@@ -20,6 +20,7 @@ import org.farhan.mbt.conv.core.Project;
 
 public class UMLProject extends Project {
 
+	// TODO remove UMLProject.theSystem from all the UML Factory methods
 	public static Model theSystem;
 
 	public static void init() {

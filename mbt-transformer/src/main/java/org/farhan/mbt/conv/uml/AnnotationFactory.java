@@ -7,16 +7,30 @@ import org.eclipse.uml2.uml.ValueSpecification;
 public class AnnotationFactory {
 
 	public static EAnnotation getAnnotation(Interaction anInteraction, String name) {
-		return anInteraction.createEAnnotation(name);
+		EAnnotation a = anInteraction.getEAnnotation(name);
+		if (a == null) {
+			a = anInteraction.createEAnnotation(name);
+		}
+		return a;
 	}
 
 	public static EAnnotation getAnnotation(ValueSpecification argument, String name) {
-		return argument.createEAnnotation(name);
+		EAnnotation a = argument.getEAnnotation(name);
+		if (a == null) {
+			a = argument.createEAnnotation(name);
+		}
+		return a;
+	}
+
+	public static EAnnotation getAnnotation(Interaction anInteraction, String name, String key, String value) {
+		EAnnotation a = getAnnotation(anInteraction, name);
+		a.getDetails().put(key, value);
+		return a;
 	}
 
 	public static EAnnotation getAnnotation(ValueSpecification vs, String name, String key, String value) {
 		EAnnotation a = getAnnotation(vs, name);
-		a.getDetails().put("0", value);
+		a.getDetails().put(key, value);
 		return a;
 	}
 

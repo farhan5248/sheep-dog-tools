@@ -6,7 +6,7 @@ import java.util.TreeMap;
 
 import org.farhan.mbt.conv.core.Utilities;
 
-// TODO deleted this class after moving out all the name translations to the converter classes
+// TODO delete this class after moving out all the name translations to the converter classes
 public class UMLNameTranslator {
 
 	public static String filterClassName(String currentClassName) {
