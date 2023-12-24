@@ -18,6 +18,10 @@ public class PSTFile extends UMLFile {
 		super.assertExists();
 	}
 
+	public void assertClassClassName(HashMap<String, String> row) {
+		assertClassExists(row.get("Class Name"));
+	}
+
 	public void assertClassCommentsClassName(HashMap<String, String> row) {
 		assertClassExists(row.get("Class Name"));
 	}
@@ -63,7 +67,7 @@ public class PSTFile extends UMLFile {
 	}
 
 	public void assertInteractionParametersParameterName(HashMap<String, String> row) {
-		assertInteractionParameterNameValue(row.get("Interaction Name"), row.get("Parameter Name"));
+		assertInteractionParameterNameExists(row.get("Interaction Name"), row.get("Parameter Name"));
 	}
 
 	public void assertInteractionCommentsInteractionName(HashMap<String, String> row) {

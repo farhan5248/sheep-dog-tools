@@ -141,7 +141,7 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 
 		Class aClass = (Class) anInteraction.getOwner();
 		MethodDeclaration aMethod = aJavaFile.javaClass.getType(0).addMethod(anInteraction.getName(), Keyword.PUBLIC);
-		if (aClass.getQualifiedName().contains("::stepdefs::")) {
+		if (isSecondLayer(aClass)) {
 			// Annotations
 			if (!anInteraction.getEAnnotations().isEmpty()) {
 				String annotationBody = anInteraction.getEAnnotations().get(0).getSource();

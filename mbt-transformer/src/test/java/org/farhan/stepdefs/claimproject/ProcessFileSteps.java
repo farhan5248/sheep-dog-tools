@@ -11,6 +11,7 @@ public class ProcessFileSteps extends FeatureSteps {
 	@And("^The claim project, src/test/cucumber/dept/process.feature file is as follows$")
 	public void TheClaimProjectProcessFeatureFileIsAsFollows(String docString) {
 		ProcessFile o = (ProcessFile) ClaimProjectFactory.get("ProcessFile");
+		o.setBaseDir("claim");
 		o.setPath("src/test/cucumber/dept/process.feature");
 		o.setContents(docString);
 	}

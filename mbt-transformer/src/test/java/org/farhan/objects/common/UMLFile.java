@@ -48,7 +48,7 @@ public abstract class UMLFile extends FileObject {
 		Class theClass = (Class) PackageFactory.getPackagedElement(keyValue.get("model") + "::" + className,
 				UMLProject.theSystem);
 		Comment comment = CommentFactory.getComment(theClass, 0);
-		Assertions.assertTrue(comment != null, "Comment " + commentBody + " doesn't exist");
+		Assertions.assertTrue(comment != null, "Class " + className + " Comment " + commentBody + " doesn't exist");
 		Assertions.assertEquals(commentBody, comment.getBody());
 	}
 
@@ -56,35 +56,40 @@ public abstract class UMLFile extends FileObject {
 		Class theClass = (Class) PackageFactory.getPackagedElement(keyValue.get("model") + "::" + className,
 				UMLProject.theSystem);
 		ElementImport elementImport = ElementImportFactory.getElementImportByAlias(theClass, alias);
-		Assertions.assertTrue(elementImport != null, "Alias " + alias + " doesn't exist");
+		Assertions.assertTrue(elementImport != null, "Class " + className + " Alias " + alias + " doesn't exist");
 	}
 
 	protected void assertClassImportedElementValue(String className, String importedElement) {
 		Class theClass = (Class) PackageFactory.getPackagedElement(keyValue.get("model") + "::" + className,
 				UMLProject.theSystem);
 		ElementImport elementImport = ElementImportFactory.getElementImport(theClass, importedElement);
-		Assertions.assertTrue(elementImport != null, "Imported Element " + importedElement + " doesn't exist");
+		Assertions.assertTrue(elementImport != null,
+				"Class " + className + " Imported Element " + importedElement + " doesn't exist");
 	}
 
 	protected void assertClassPropertyNameExists(String className, String propertyName) {
 		Class theClass = (Class) PackageFactory.getPackagedElement(keyValue.get("model") + "::" + className,
 				UMLProject.theSystem);
 		Property property = PropertyFactory.getProperty(theClass, propertyName);
-		Assertions.assertTrue(property != null, "Property Name " + propertyName + " doesn't exist");
+		Assertions.assertTrue(property != null,
+				"Class " + className + " Property Name " + propertyName + " doesn't exist");
 	}
 
 	protected void assertClassPropertyTypeValue(String className, String propertyName, String propertyType) {
 		Class theClass = (Class) PackageFactory.getPackagedElement(keyValue.get("model") + "::" + className,
 				UMLProject.theSystem);
 		Property property = PropertyFactory.getProperty(theClass, propertyName);
-		Assertions.assertTrue(property != null, "Property Name " + propertyName + " doesn't exist");
-		Assertions.assertEquals(propertyType, property.getType().getQualifiedName());
+		Assertions.assertTrue(property != null,
+				"Class " + className + " Property Name " + propertyName + " doesn't exist");
+		Assertions.assertEquals(propertyType, property.getType().getQualifiedName(),
+				"Class " + className + " Property Type " + propertyType + " doesn't match");
 	}
 
 	protected void assertInteractionNameExists(String className, String interactionName) {
 		Interaction interaction = (Interaction) PackageFactory.getPackagedElement(
 				keyValue.get("model") + "::" + className + "::" + interactionName, UMLProject.theSystem);
-		Assertions.assertTrue(interaction != null, "Interaction " + interactionName + " doesn't exist");
+		Assertions.assertTrue(interaction != null,
+				"Class " + className + " Interaction " + interactionName + " doesn't exist");
 	}
 
 	protected void assertInteractionNameExists(String interactionName) {
@@ -93,18 +98,25 @@ public abstract class UMLFile extends FileObject {
 		Assertions.assertTrue(interaction != null, "Interaction " + interactionName + " doesn't exist");
 	}
 
-	protected void assertInteractionParameterNameValue(String interactionName, String parameterName) {
+	protected void assertInteractionParameterNameExists(String interactionName, String parameterName) {
 		Interaction interaction = (Interaction) PackageFactory
 				.getPackagedElement(keyValue.get("model") + "::" + interactionName, UMLProject.theSystem);
-		Parameter parameter = ParameterFactory.getParameter(interaction, parameterName);
-		Assertions.assertTrue(parameter != null, "Parameter " + parameterName + " doesn't exist");
+		if (parameterName.contentEquals("has none")) {
+			Assertions.assertTrue(interaction.getOwnedParameters().isEmpty(),
+					"Interaction " + interaction + " has parameters");
+		} else {
+			Parameter parameter = ParameterFactory.getParameter(interaction, parameterName);
+			Assertions.assertTrue(parameter != null,
+					"Interaction " + interactionName + " Parameter " + parameterName + " doesn't exist");
+		}
 	}
 
 	protected void assertInteractionCommentValue(String interactionName, String commentBody) {
 		Interaction interaction = (Interaction) PackageFactory
 				.getPackagedElement(keyValue.get("model") + "::" + interactionName, UMLProject.theSystem);
 		Comment comment = CommentFactory.getComment(interaction, 0);
-		Assertions.assertTrue(comment != null, "Comment " + commentBody + " doesn't exist");
+		Assertions.assertTrue(comment != null,
+				"Interaction " + interactionName + " Comment " + commentBody + " doesn't exist");
 		Assertions.assertEquals(commentBody, comment.getBody());
 	}
 
@@ -118,7 +130,8 @@ public abstract class UMLFile extends FileObject {
 				break;
 			}
 		}
-		Assertions.assertTrue(annotation != null, "Annotation " + annotationName + " doesn't exist");
+		Assertions.assertTrue(annotation != null,
+				"Interaction " + interactionName + " Annotation " + annotationName + " doesn't exist");
 	}
 
 	protected void assertInteractionAnnotationDetailExists(String interactionName, String annotationName,
@@ -140,14 +153,16 @@ public abstract class UMLFile extends FileObject {
 				break;
 			}
 		}
-		Assertions.assertTrue(detail != null, "Annotation Detail " + annotationDetail + " doesn't exist");
+		Assertions.assertTrue(detail != null, "Interaction " + interactionName + " Annotation " + annotationName
+				+ " Annotation Detail " + annotationDetail + " doesn't exist");
 	}
 
 	protected void assertInteractionLifelineExists(String interactionName, String lifelineName) {
 		Interaction interaction = (Interaction) PackageFactory
 				.getPackagedElement(keyValue.get("model") + "::" + interactionName, UMLProject.theSystem);
 		Lifeline lifeline = LifelineFactory.getLifeline(interaction, lifelineName);
-		Assertions.assertTrue(lifeline != null, "Lifeline " + lifelineName + " doesn't exist");
+		Assertions.assertTrue(lifeline != null,
+				"Interaction " + interactionName + " Lifeline " + lifelineName + " doesn't exist");
 	}
 
 	protected void assertInteractionLifelineRepresentsValue(String interactionName, String lifelineName,
@@ -156,7 +171,8 @@ public abstract class UMLFile extends FileObject {
 				.getPackagedElement(keyValue.get("model") + "::" + interactionName, UMLProject.theSystem);
 		Lifeline lifeline = LifelineFactory.getLifeline(interaction, lifelineName);
 		ConnectableElement represents = lifeline.getRepresents();
-		Assertions.assertTrue(represents != null, "Lifeline Represents " + lifelineName + " doesn't exist");
+		Assertions.assertTrue(represents != null, "Interaction " + interactionName + " Lifeline " + lifelineName
+				+ " Lifeline Represents " + lifelineName + " doesn't exist");
 		Assertions.assertEquals(lifelineRepresents, represents.getQualifiedName());
 	}
 
@@ -167,7 +183,8 @@ public abstract class UMLFile extends FileObject {
 		MessageOccurrenceSpecification messageOccurence = MessageFactory.getMessageOccurence(interaction,
 				messageOccurenceName);
 		Lifeline covered = messageOccurence.getCovered(lifelineCovered);
-		Assertions.assertTrue(covered != null, "Lifeline Covered " + lifelineCovered + " doesn't exist");
+		Assertions.assertTrue(covered != null, "Interaction " + interactionName + " Message Occurence "
+				+ messageOccurenceName + " Lifeline Covered " + lifelineCovered + " doesn't exist");
 		Assertions.assertEquals(lifelineCovered, covered.getName());
 	}
 
@@ -175,7 +192,8 @@ public abstract class UMLFile extends FileObject {
 		Interaction interaction = (Interaction) PackageFactory
 				.getPackagedElement(keyValue.get("model") + "::" + interactionName, UMLProject.theSystem);
 		Message message = MessageFactory.getMessage(interaction, messageName);
-		Assertions.assertTrue(message != null, "Message " + messageName + " doesn't exist");
+		Assertions.assertTrue(message != null,
+				"Interaction " + interactionName + " Message " + messageName + " doesn't exist");
 	}
 
 	protected void assertInteractionMessageArgumentNameExists(String interactionName, String messageName,
@@ -184,7 +202,8 @@ public abstract class UMLFile extends FileObject {
 				.getPackagedElement(keyValue.get("model") + "::" + interactionName, UMLProject.theSystem);
 		Message message = MessageFactory.getMessage(interaction, messageName);
 		ValueSpecification vs = ArgumentFactory.getArgument(message, argumentName, "", false);
-		Assertions.assertTrue(vs != null, "Argument Name " + argumentName + " doesn't exist");
+		Assertions.assertTrue(vs != null, "Interaction " + interactionName + " Message " + messageName
+				+ " Argument Name " + argumentName + " doesn't exist");
 	}
 
 	protected void assertInteractionMessageAnnotationNameExists(String interactionName, String messageName,
@@ -199,7 +218,8 @@ public abstract class UMLFile extends FileObject {
 				break;
 			}
 		}
-		Assertions.assertTrue(annotation != null, "Annotation " + annotationName + " doesn't exist");
+		Assertions.assertTrue(annotation != null, "Interaction " + interactionName + " Message " + messageName
+				+ " Annotation " + annotationName + " doesn't exist");
 	}
 
 	protected void assertInteractionMessageAnnotationDetailExists(String interactionName, String messageName,
@@ -225,7 +245,8 @@ public abstract class UMLFile extends FileObject {
 				break;
 			}
 		}
-		Assertions.assertTrue(detail != null, "Annotation Detail " + annotationDetail + " doesn't exist");
+		Assertions.assertTrue(detail != null, "Interaction " + interactionName + " Message " + messageName
+				+ " Argument Name " + argumentName + " Annotation Detail " + annotationDetail + " doesn't exist");
 	}
 
 	protected void assertInteractionMessageOccurenceExists(String interactionName, String messageOccurenceName) {
@@ -233,6 +254,7 @@ public abstract class UMLFile extends FileObject {
 				.getPackagedElement(keyValue.get("model") + "::" + interactionName, UMLProject.theSystem);
 		MessageOccurrenceSpecification messageOccurence = MessageFactory.getMessageOccurence(interaction,
 				messageOccurenceName);
-		Assertions.assertTrue(messageOccurence != null, "Message Occurence " + messageOccurenceName + " doesn't exist");
+		Assertions.assertTrue(messageOccurence != null,
+				"Interaction " + interactionName + " Message Occurence " + messageOccurenceName + " doesn't exist");
 	}
 }

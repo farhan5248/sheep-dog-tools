@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
-import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.conv.core.ToUMLOtherLayerLinker;
 import org.farhan.mbt.conv.uml.ArgumentFactory;
+import org.farhan.mbt.conv.uml.InteractionFactory;
 import org.farhan.mbt.conv.uml.ParameterFactory;
 
 public class CucumberToUMLOtherLayerLinker extends ToUMLOtherLayerLinker {
@@ -67,6 +67,11 @@ public class CucumberToUMLOtherLayerLinker extends ToUMLOtherLayerLinker {
 		if (vs != null) {
 			ParameterFactory.getParameter(targetInteraction, "contents", "", "in");
 		}
+	}
+
+	@Override
+	protected Interaction addNextLayerInteraction(String methodName, Message m) {
+		return InteractionFactory.getInteraction(getNextLayerClassFromMessage(m), methodName, true);
 	}
 
 }

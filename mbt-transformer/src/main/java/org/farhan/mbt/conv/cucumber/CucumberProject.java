@@ -15,19 +15,19 @@ public class CucumberProject extends Project {
 	public static ArrayList<ConvertibleFile> thirdLayerFiles;
 
 	public static File getSecondLayerDir() {
-		File aFile = new File(baseDir + "src/test/java/org/farhan/stepdefs/");
+		File aFile = new File(baseDir + "src/test/java/org/farhan/" + secondLayerPackageName + "/");
 		aFile.mkdirs();
 		return aFile;
 	}
 
 	public static File getThirdLayerDir() {
-		File aFile = new File(baseDir + "src/test/java/org/farhan/objects/");
+		File aFile = new File(baseDir + "src/test/java/org/farhan/" + thirdLayerPackageName + "/");
 		aFile.mkdirs();
 		return aFile;
 	}
 
 	public static File getFourthLayerDir() {
-		File aFile = new File(baseDir + "src/test/java/org/farhan/common/");
+		File aFile = new File(baseDir + "src/test/java/org/farhan/" + fourthLayerPackageName + "/");
 		aFile.mkdirs();
 		return aFile;
 	}

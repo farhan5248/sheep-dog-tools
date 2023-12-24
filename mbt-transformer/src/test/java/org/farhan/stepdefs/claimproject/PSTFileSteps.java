@@ -13,10 +13,16 @@ public class PSTFileSteps extends UMLSteps {
 	public void TheClaimProjectPSTUMLFileIsPresent() {
 
 		PSTFile o = (PSTFile) ClaimProjectFactory.get("PSTFile");
+		o.setBaseDir("claim");
 		o.setPath("target/uml/pst.uml");
 		o.assertExists();
 	}
 
+	@And("^The target/uml/pst.uml file, Class section is as follows$")
+	public void ThePSTUMLFileClassSectionIsAsFollows(DataTable dataTable) {
+		ClaimProjectFactory.get("PSTFile").assertAttributes(dataTable, "Class");
+	}
+	
 	@And("^The target/uml/pst.uml file, Class Comments section is as follows$")
 	public void ThePSTUMLFileClassCommentsSectionIsAsFollows(DataTable dataTable) {
 		ClaimProjectFactory.get("PSTFile").assertAttributes(dataTable, "Class Comments");

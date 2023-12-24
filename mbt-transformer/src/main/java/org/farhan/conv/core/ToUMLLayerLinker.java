@@ -8,7 +8,6 @@ import org.eclipse.uml2.uml.Lifeline;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.MessageOccurrenceSpecification;
 import org.eclipse.uml2.uml.Property;
-import org.farhan.mbt.conv.uml.InteractionFactory;
 import org.farhan.mbt.conv.uml.PackageFactory;
 import org.farhan.mbt.conv.uml.UMLProject;
 
@@ -19,9 +18,9 @@ public abstract class ToUMLLayerLinker {
 		for (Interaction i : layerInteractions) {
 			for (Message m : i.getMessages()) {
 				for (String methodName : getNextLayerInteractionNamesfromMessage(m)) {
-					Interaction nextLayerInteraction = InteractionFactory.getInteraction(getNextLayerClassFromMessage(m),
-							methodName, true);
-					if (nextLayerInteraction.getMessages().isEmpty() && nextLayerInteraction.getOwnedParameters().isEmpty()) {
+					Interaction nextLayerInteraction = addNextLayerInteraction(methodName, m);
+					if (nextLayerInteraction.getMessages().isEmpty()
+							&& nextLayerInteraction.getOwnedParameters().isEmpty()) {
 						addNextLayerInteractionParameters(nextLayerInteraction, m);
 						addNextLayerInteractionMessages(nextLayerInteraction, m);
 					} else if (!nextLayerInteraction.getMessages().isEmpty()
@@ -34,6 +33,8 @@ public abstract class ToUMLLayerLinker {
 			}
 		}
 	}
+
+	protected abstract Interaction addNextLayerInteraction(String methodName, Message m);
 
 	protected abstract ArrayList<String> getNextLayerInteractionNamesfromMessage(Message m);
 

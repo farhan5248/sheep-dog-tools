@@ -37,8 +37,8 @@ public class CucumberNameConverter {
 	public static String convertJavaPathToQualifiedName(String pathName) {
 		String qualifiedName = pathName.trim();
 		qualifiedName = qualifiedName.replace(".java", "");
-		qualifiedName = qualifiedName.replace(CucumberProject.getSecondLayerDir().getAbsolutePath(), "stepdefs");
-		qualifiedName = qualifiedName.replace(CucumberProject.getThirdLayerDir().getAbsolutePath(), "objects");
+		qualifiedName = qualifiedName.replace(CucumberProject.getSecondLayerDir().getAbsolutePath(), Project.secondLayerPackageName);
+		qualifiedName = qualifiedName.replace(CucumberProject.getThirdLayerDir().getAbsolutePath(), Project.thirdLayerPackageName);
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::" + qualifiedName;
 		return qualifiedName;

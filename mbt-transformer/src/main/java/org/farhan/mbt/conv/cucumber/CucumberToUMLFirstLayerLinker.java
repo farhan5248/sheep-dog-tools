@@ -4,18 +4,17 @@ import java.util.ArrayList;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
-import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.conv.core.ToUMLFirstLayerLinker;
 import org.farhan.conv.core.Utilities;
 import org.farhan.conv.validation.Layer1Validator;
 import org.farhan.mbt.conv.uml.ArgumentFactory;
 import org.farhan.mbt.conv.uml.ClassFactory;
+import org.farhan.mbt.conv.uml.InteractionFactory;
 import org.farhan.mbt.conv.uml.MessageFactory;
 import org.farhan.mbt.conv.uml.ParameterFactory;
 import org.farhan.mbt.conv.uml.UMLProject;
@@ -54,15 +53,15 @@ public class CucumberToUMLFirstLayerLinker extends ToUMLFirstLayerLinker {
 		}
 	}
 
-	private void createInputOutputMessage(Interaction targetInteraction, Message m, String prefix) {
+	private void createInputOutputMessage(Interaction nextLayerInteraction, Message m, String prefix) {
 
-		Class layer3Class = ClassFactory.getClass(UMLProject.theSystem,
-				getNextLayerClassQualifiedName(targetInteraction));
+		Class nextLayerClass = ClassFactory.getClass(UMLProject.theSystem,
+				getNextLayerClassQualifiedName(nextLayerInteraction));
 		if (getFirstArgument(m).contentEquals("docString") || getFirstArgument(m).contentEquals("dataTable")) {
 
 			String methodName = prefix + "Attributes";
-			Message nextLayerMessage = MessageFactory.getMessage(targetInteraction, layer3Class, methodName);
-			ArgumentFactory.getArgument(nextLayerMessage, "object", layer3Class.getName(), true);
+			Message nextLayerMessage = MessageFactory.getMessage(nextLayerInteraction, nextLayerClass, methodName);
+			ArgumentFactory.getArgument(nextLayerMessage, "object", nextLayerClass.getName(), true);
 			if (getFirstArgument(m).contentEquals("docString")) {
 				ArgumentFactory.getArgument(nextLayerMessage, "contents", "docString", true);
 			} else {
@@ -85,35 +84,36 @@ public class CucumberToUMLFirstLayerLinker extends ToUMLFirstLayerLinker {
 		} else {
 
 			String attributeName = "";
-			// TODO maybe get the actual status like empty etc, so make getDetailStatus
 			if (VerticeValidator.isVertice(m.getName())) {
 				attributeName = VerticeValidator.getDetails(m.getName());
 			} else {
 				attributeName = EdgeValidator.getDetails(m.getName());
 			}
-			String variableName = getVariableName(attributeName);
 			String methodName = CucumberNameConverter.getMethodName(prefix + StringUtils.capitalize(attributeName),
 					true);
-			Message nextLayerMessage = MessageFactory.getMessage(targetInteraction, layer3Class, methodName);
-			ArgumentFactory.getArgument(nextLayerMessage, variableName, Utilities.toLowerCamelCase(variableName), true);
+			MessageFactory.getMessage(nextLayerInteraction, nextLayerClass, methodName);
+			// ArgumentFactory.getArgument(nextLayerMessage, variableName, Utilities.toLowerCamelCase(variableName), true);
 		}
 	}
 
 	@Override
 	protected void createNextLayerInteractionMessagesFromEdgeMessage(Interaction targetInteraction, Message m) {
-		String pageObject = Layer1Validator.getObjectName(m.getName());
-		pageObject = Utilities.toUpperCamelCase(pageObject);
 
-		String methodName = "send" + pageObject;
-		if (!methodName.endsWith("Request")) {
-			methodName += "Request";
-		}
+		createInputOutputMessage(targetInteraction, m, "set");
+
+		String objectName = Utilities.toUpperCamelCase(Layer1Validator.getObjectName(m.getName()));
+		String objectType = StringUtils.capitalize(Layer1Validator.getObjectType(m.getName()));
+		String methodName = "send" + objectName + objectType;
 
 		Class layer3Class = ClassFactory.getClass(UMLProject.theSystem,
 				getNextLayerClassQualifiedName(targetInteraction));
 		MessageFactory.getMessage(targetInteraction, layer3Class, methodName);
 
-		createInputOutputMessage(targetInteraction, m, "set");
-
 	}
+	
+	@Override
+	protected Interaction addNextLayerInteraction(String methodName, Message m) {
+		return InteractionFactory.getInteraction(getNextLayerClassFromMessage(m), methodName, true, m.getName());
+	}
+
 }
