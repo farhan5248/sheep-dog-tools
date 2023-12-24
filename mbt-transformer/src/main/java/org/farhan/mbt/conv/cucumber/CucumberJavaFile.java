@@ -1,27 +1,8 @@
 package org.farhan.mbt.conv.cucumber;
 
 import java.io.File;
-import java.util.ArrayList;
-
-import org.eclipse.uml2.uml.Behavior;
-import org.eclipse.uml2.uml.Class;
-import org.eclipse.uml2.uml.Comment;
-import org.eclipse.uml2.uml.ElementImport;
-import org.eclipse.uml2.uml.Interaction;
-import org.eclipse.uml2.uml.LiteralString;
-import org.eclipse.uml2.uml.Message;
-import org.eclipse.uml2.uml.Parameter;
-import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.conv.core.ConvertibleFile;
-import org.farhan.conv.core.Utilities;
-import org.farhan.mbt.conv.uml.ParameterFactory;
-import org.farhan.mbt.conv.uml.UMLNameTranslator;
-
+import org.farhan.mbt.conv.core.ConvertibleFile;
 import com.github.javaparser.ast.CompilationUnit;
-import com.github.javaparser.ast.Modifier.Keyword;
-import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
-import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.utils.SourceRoot;
 
 public class CucumberJavaFile implements ConvertibleFile {

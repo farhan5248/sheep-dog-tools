@@ -5,8 +5,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.farhan.CucumberStandaloneSetup;
-import org.farhan.conv.core.ConvertibleFile;
 import org.farhan.cucumber.Feature;
+import org.farhan.mbt.conv.core.ConvertibleFile;
 
 public class CucumberFeatureFile implements ConvertibleFile {
 

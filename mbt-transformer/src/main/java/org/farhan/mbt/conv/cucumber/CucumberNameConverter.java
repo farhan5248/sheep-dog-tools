@@ -2,8 +2,8 @@ package org.farhan.mbt.conv.cucumber;
 
 import java.io.File;
 
-import org.farhan.conv.core.Project;
-import org.farhan.conv.core.Utilities;
+import org.farhan.mbt.conv.core.Project;
+import org.farhan.mbt.conv.core.Utilities;
 
 public class CucumberNameConverter {
 

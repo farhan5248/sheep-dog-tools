@@ -9,7 +9,7 @@ import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.PackageableElement;
-import org.farhan.conv.core.Project;
+import org.farhan.mbt.conv.core.Project;
 
 public class PackageFactory {
 

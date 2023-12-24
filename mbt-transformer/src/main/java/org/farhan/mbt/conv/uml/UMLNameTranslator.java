@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import org.farhan.conv.core.Utilities;
+import org.farhan.mbt.conv.core.Utilities;
 
 // TODO deleted this class after moving out all the name translations to the converter classes
 public class UMLNameTranslator {

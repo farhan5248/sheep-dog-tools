@@ -1,4 +1,4 @@
-package org.farhan.conv.core;
+package org.farhan.mbt.conv.core;
 
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;

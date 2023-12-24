@@ -1,6 +1,5 @@
 package org.farhan.mbt.conv.uml;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,9 +16,9 @@ import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.PackageableElement;
 import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
-import org.farhan.conv.core.Project;
+import org.farhan.mbt.conv.core.Project;
 
-public class UMLProject {
+public class UMLProject extends Project {
 
 	public static Model theSystem;
 
@@ -27,7 +26,8 @@ public class UMLProject {
 		theSystem = ModelFactory.getModel("pst");
 	}
 
-	public static ArrayList<Class> getPackageClasses(Package nestingPackage) {
+	private static ArrayList<Class> getPackageClasses(Package nestingPackage) {
+		// TODO make it private and wrap with getLayerClasses
 		Class aClass;
 		ArrayList<Class> theClasses = new ArrayList<Class>();
 		for (PackageableElement pe : nestingPackage.getPackagedElements()) {
@@ -43,8 +43,7 @@ public class UMLProject {
 	}
 
 	public static Model readFiles() throws IOException {
-		File umlDir = new File(Project.baseDir + Project.umlDir);
-		URI uri = URI.createFileURI(umlDir.getAbsolutePath()).appendSegment(theSystem.getName())
+		URI uri = URI.createFileURI(getUmlDir().getAbsolutePath()).appendSegment(theSystem.getName())
 				.appendFileExtension(UMLResource.FILE_EXTENSION);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		UMLResourcesUtil.init(resourceSet);
@@ -56,9 +55,9 @@ public class UMLProject {
 		return theSystem;
 	}
 
-	public static void writeFiles(File umlDir) throws Exception {
+	public static void writeFiles() throws Exception {
 
-		URI uri = URI.createFileURI(umlDir.getAbsolutePath()).appendSegment(theSystem.getName())
+		URI uri = URI.createFileURI(getUmlDir().getAbsolutePath()).appendSegment(theSystem.getName())
 				.appendFileExtension(UMLResource.FILE_EXTENSION);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		UMLResourcesUtil.init(resourceSet);
@@ -69,15 +68,15 @@ public class UMLProject {
 		resource.save(options);
 	}
 
-	public static ArrayList<?> getFirstLayerClasses() {
+	public static ArrayList<Class> getFirstLayerClasses() {
 		return getPackageClasses(theSystem.getNestedPackage(Project.firstLayerPackageName));
 	}
 
-	public static ArrayList<?> getSecondLayerClasses() {
+	public static ArrayList<Class> getSecondLayerClasses() {
 		return getPackageClasses(theSystem.getNestedPackage(Project.secondLayerPackageName));
 	}
 
-	public static ArrayList<?> getThirdLayerClasses() {
+	public static ArrayList<Class> getThirdLayerClasses() {
 		return getPackageClasses(theSystem.getNestedPackage(Project.thirdLayerPackageName));
 	}
 

@@ -12,9 +12,9 @@ import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.conv.core.Project;
-import org.farhan.conv.core.UMLToOtherLayerConverter;
-import org.farhan.conv.core.Utilities;
+import org.farhan.mbt.conv.core.Project;
+import org.farhan.mbt.conv.core.UMLToOtherLayerConverter;
+import org.farhan.mbt.conv.core.Utilities;
 import org.farhan.mbt.conv.uml.PackageFactory;
 import org.farhan.mbt.conv.uml.ParameterFactory;
 import org.farhan.mbt.conv.uml.UMLNameTranslator;
@@ -43,9 +43,9 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 		String path = CucumberNameConverter.convertQualifiedNameToJavaPath(layerClass.getQualifiedName());
 		aJavaFile = new CucumberJavaFile(new File(path));
 		if (isSecondLayer(layerClass)) {
-			CucumberProject.secondLayerFiles.add(aJavaFile);
+			CucumberProject.getSecondLayerFiles().add(aJavaFile);
 		} else if (isThirdLayer(layerClass)) {
-			CucumberProject.thirdLayerFiles.add(aJavaFile);
+			CucumberProject.getThirdLayerFiles().add(aJavaFile);
 		} else {
 			throw new Exception("Java files are only in layer 2 or 3");
 		}

@@ -13,7 +13,7 @@ import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.Operation;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.UMLFactory;
-import org.farhan.conv.core.Utilities;
+import org.farhan.mbt.conv.core.Utilities;
 
 public class InteractionFactory extends PropertyFactory {
 
@@ -74,7 +74,7 @@ public class InteractionFactory extends PropertyFactory {
 			LifelineFactory.getLifeline(anInteraction, aProperty);
 		}
 		if (!annotationName.isEmpty()) {
-			anInteraction.createEAnnotation(annotationName);
+			AnnotationFactory.getAnnotation(anInteraction, annotationName);
 		}
 
 		return anInteraction;

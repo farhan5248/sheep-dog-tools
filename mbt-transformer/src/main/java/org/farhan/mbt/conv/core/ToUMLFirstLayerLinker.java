@@ -1,9 +1,8 @@
-package org.farhan.conv.core;
+package org.farhan.mbt.conv.core;
 
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
-import org.farhan.conv.validation.Layer1Validator;
 import org.farhan.mbt.graph.validation.EdgeValidator;
 import org.farhan.mbt.graph.validation.VerticeValidator;
 
@@ -12,7 +11,7 @@ public abstract class ToUMLFirstLayerLinker extends ToUMLLayerLinker {
 	@Override
 	protected void addNextLayerInteractionMessages(Interaction targetInteraction, Message m) {
 
-		if (Layer1Validator.validateStepText(m.getName())) {
+		if (Validator.validateStepText(m.getName())) {
 
 			if (VerticeValidator.isVertice(m.getName())) {
 				createNextLayerInteractionMessagesFromVerticeMessage(targetInteraction, m);

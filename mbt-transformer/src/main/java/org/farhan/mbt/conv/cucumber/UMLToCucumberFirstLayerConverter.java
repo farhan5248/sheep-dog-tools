@@ -5,7 +5,7 @@ import java.util.Collection;
 
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
-import org.farhan.conv.core.UMLToFirstLayerConverter;
+import org.farhan.mbt.conv.core.UMLToFirstLayerConverter;
 
 public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
 
@@ -73,7 +73,4 @@ public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-
 }

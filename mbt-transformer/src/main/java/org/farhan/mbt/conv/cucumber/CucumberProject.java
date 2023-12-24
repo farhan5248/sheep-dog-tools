@@ -4,26 +4,28 @@ package org.farhan.mbt.conv.cucumber;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.farhan.conv.core.ConvertibleFile;
-import org.farhan.conv.core.Project;
+import org.farhan.mbt.conv.core.ConvertibleFile;
+import org.farhan.mbt.conv.core.Project;
 
 public class CucumberProject extends Project {
 
-	// TODO make getters for these like in UML project
-	public static ArrayList<ConvertibleFile> firstLayerFiles;
-	public static ArrayList<ConvertibleFile> secondLayerFiles;
-	public static ArrayList<ConvertibleFile> thirdLayerFiles;
+	// TODO The CucumberProject should manage creating new CucumberFeature or
+	// CucumberJava files
 
-	public static File getSecondLayerDir() {
-		File aFile = new File(baseDir + "src/test/java/org/farhan/" + secondLayerPackageName + "/");
-		aFile.mkdirs();
-		return aFile;
+	private static ArrayList<ConvertibleFile> firstLayerFiles;
+	private static ArrayList<ConvertibleFile> secondLayerFiles;
+	private static ArrayList<ConvertibleFile> thirdLayerFiles;
+
+	public static File getFirstLayerDir() {
+		return new File(baseDir + "src/test/cucumber/");
 	}
 
-	public static File getThirdLayerDir() {
-		File aFile = new File(baseDir + "src/test/java/org/farhan/" + thirdLayerPackageName + "/");
-		aFile.mkdirs();
-		return aFile;
+	public static ArrayList<ConvertibleFile> getFirstLayerFiles() {
+		return firstLayerFiles;
+	}
+
+	public static String getFirstLayerFileType() {
+		return ".feature";
 	}
 
 	public static File getFourthLayerDir() {
@@ -32,8 +34,30 @@ public class CucumberProject extends Project {
 		return aFile;
 	}
 
-	public static File getFirstLayerDir() {
-		return new File(baseDir + "src/test/cucumber/");
+	public static File getSecondLayerDir() {
+		File aFile = new File(baseDir + "src/test/java/org/farhan/" + secondLayerPackageName + "/");
+		aFile.mkdirs();
+		return aFile;
+	}
+
+	public static ArrayList<ConvertibleFile> getSecondLayerFiles() {
+		return secondLayerFiles;
+	}
+
+	public static File getThirdLayerDir() {
+		File aFile = new File(baseDir + "src/test/java/org/farhan/" + thirdLayerPackageName + "/");
+		aFile.mkdirs();
+		return aFile;
+	}
+
+	public static ArrayList<ConvertibleFile> getThirdLayerFiles() {
+		return thirdLayerFiles;
+	}
+
+	public static void init() {
+		firstLayerFiles = new ArrayList<ConvertibleFile>();
+		secondLayerFiles = new ArrayList<ConvertibleFile>();
+		thirdLayerFiles = new ArrayList<ConvertibleFile>();
 	}
 
 	public static void writeFiles() {
@@ -48,17 +72,8 @@ public class CucumberProject extends Project {
 		}
 	}
 
-	public static String getFirstLayerFileType() {
-		return ".feature";
-	}
-
 	protected String getOtherLayerFileType() {
 		return ".java";
 	}
 
-	public static void init() {
-		firstLayerFiles = new ArrayList<ConvertibleFile>();
-		secondLayerFiles = new ArrayList<ConvertibleFile>();
-		thirdLayerFiles = new ArrayList<ConvertibleFile>();
-	}
 }

@@ -6,7 +6,7 @@ import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.conv.core.ToUMLOtherLayerLinker;
+import org.farhan.mbt.conv.core.ToUMLOtherLayerLinker;
 import org.farhan.mbt.conv.uml.ArgumentFactory;
 import org.farhan.mbt.conv.uml.InteractionFactory;
 import org.farhan.mbt.conv.uml.ParameterFactory;

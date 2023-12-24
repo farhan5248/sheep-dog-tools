@@ -4,18 +4,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.ElementImport;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.conv.core.ToUMLFirstLayerConverter;
-import org.farhan.conv.core.Utilities;
-import org.farhan.conv.core.ConvertibleFile;
-import org.farhan.conv.core.Project;
-import org.farhan.conv.validation.Layer1Validator;
 import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.Background;
 import org.farhan.cucumber.Examples;
@@ -25,6 +19,12 @@ import org.farhan.cucumber.ScenarioOutline;
 import org.farhan.cucumber.Statement;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.Tag;
+import org.farhan.mbt.conv.core.ConvertibleFile;
+import org.farhan.mbt.conv.core.Project;
+import org.farhan.mbt.conv.core.ToUMLFirstLayerConverter;
+import org.farhan.mbt.conv.core.Utilities;
+import org.farhan.mbt.conv.core.Validator;
+import org.farhan.mbt.conv.uml.AnnotationFactory;
 import org.farhan.mbt.conv.uml.ArgumentFactory;
 import org.farhan.mbt.conv.uml.ClassFactory;
 import org.farhan.mbt.conv.uml.CommentFactory;
@@ -57,7 +57,7 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 		}
 
 		for (File f : firstLayerFiles) {
-			CucumberProject.firstLayerFiles.add(new CucumberFeatureFile(f));
+			CucumberProject.getFirstLayerFiles().add(new CucumberFeatureFile(f));
 		}
 	}
 
@@ -150,17 +150,16 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 				}
 
 				for (Examples e : so.getExamples()) {
-					EAnnotation a = anInteraction.createEAnnotation(e.getName());
+					EAnnotation a = AnnotationFactory.getAnnotation(anInteraction, e.getName());
 					EList<Row> rows = e.getTheExamplesTable().getRows();
 					for (int i = 0; i < rows.size(); i++) {
 
-						EMap<String, String> m = a.getDetails();
 						String key = String.valueOf(i);
 						String value = "";
 						for (int j = 0; j < rows.get(i).getCells().size(); j++) {
 							value += rows.get(i).getCells().get(j).getName() + "|";
 						}
-						m.put(key, value);
+						a.getDetails().put(key, value);
 					}
 				}
 			}
@@ -180,7 +179,7 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 		for (Object o : steps) {
 			Step cs = (Step) o;
 			String messageName = cs.getName();
-			if (Layer1Validator.validateStepText(messageName)) {
+			if (Validator.validateStepText(messageName)) {
 				setCurrentMachineAndState(messageName);
 				convertToMessage(anInteraction, cs);
 
@@ -212,29 +211,27 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 		// is needed for round trip engineering to the Asciidoc files/graph model
 		if (cs.getTheStepTable() != null) {
 			ValueSpecification vs = ArgumentFactory.getArgument(theMessage, "dataTable", "", true);
-			EAnnotation a = vs.createEAnnotation("dataTable");
+			EAnnotation a = AnnotationFactory.getAnnotation(vs, "dataTable");
 			EList<Row> rows = cs.getTheStepTable().getRows();
 			for (int i = 0; i < rows.size(); i++) {
 
-				EMap<String, String> m = a.getDetails();
 				String key = String.valueOf(i);
 				String value = "";
 				for (int j = 0; j < rows.get(i).getCells().size(); j++) {
 					value += rows.get(i).getCells().get(j).getName() + " |";
 				}
-				m.put(key, value);
+				a.getDetails().put(key, value);
 			}
 		}
 		if (cs.getTheDocString() != null) {
 			ValueSpecification vs = ArgumentFactory.getArgument(theMessage, "docString", "", true);
-			EAnnotation a = vs.createEAnnotation("docString");
+			EAnnotation a = AnnotationFactory.getAnnotation(vs, "docString");
 			EList<Statement> lines = cs.getTheDocString().getStatements();
 
 			for (int i = 0; i < lines.size(); i++) {
-				EMap<String, String> m = a.getDetails();
 				String key = String.valueOf(i);
 				String value = lines.get(i).getName();
-				m.put(key, value);
+				a.getDetails().put(key, value);
 			}
 		}
 	}

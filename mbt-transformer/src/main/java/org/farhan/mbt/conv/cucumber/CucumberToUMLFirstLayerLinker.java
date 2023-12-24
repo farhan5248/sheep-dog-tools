@@ -1,17 +1,16 @@
 package org.farhan.mbt.conv.cucumber;
 
 import java.util.ArrayList;
-import java.util.Map.Entry;
-
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.conv.core.ToUMLFirstLayerLinker;
-import org.farhan.conv.core.Utilities;
-import org.farhan.conv.validation.Layer1Validator;
+import org.farhan.mbt.conv.core.ToUMLFirstLayerLinker;
+import org.farhan.mbt.conv.core.Utilities;
+import org.farhan.mbt.conv.core.Validator;
+import org.farhan.mbt.conv.uml.AnnotationFactory;
 import org.farhan.mbt.conv.uml.ArgumentFactory;
 import org.farhan.mbt.conv.uml.ClassFactory;
 import org.farhan.mbt.conv.uml.InteractionFactory;
@@ -66,18 +65,18 @@ public class CucumberToUMLFirstLayerLinker extends ToUMLFirstLayerLinker {
 				ArgumentFactory.getArgument(nextLayerMessage, "contents", "docString", true);
 			} else {
 				ValueSpecification vs = ArgumentFactory.getArgument(nextLayerMessage, "keyMap", "dataTable", true);
-				Entry<String, String> attributes = m.getArguments().get(0).getEAnnotation("dataTable").getDetails()
-						.get(0);
-				vs.createEAnnotation("keyMap").getDetails().put("0", attributes.getValue());
+				String annotationDetailValue = m.getArguments().get(0).getEAnnotation("dataTable").getDetails()
+						.getFirst().getValue();
+				AnnotationFactory.getAnnotation(vs, "keyMap", "0", annotationDetailValue);
 
 				// TODO wrap up these chunks in private methods
-				String section = Layer1Validator.getSection(m.getName());
+				String section = Validator.getSection(m.getName());
 				if (section == null) {
 					section = "";
 				}
 				ArgumentFactory.getArgument(nextLayerMessage, "section", "\"" + section + "\"", true);
 			}
-			if (Layer1Validator.isNegativeStep(m.getName())) {
+			if (Validator.isNegativeStep(m.getName())) {
 				ArgumentFactory.getArgument(nextLayerMessage, "negativeTest", "true", true);
 			}
 
@@ -92,7 +91,8 @@ public class CucumberToUMLFirstLayerLinker extends ToUMLFirstLayerLinker {
 			String methodName = CucumberNameConverter.getMethodName(prefix + StringUtils.capitalize(attributeName),
 					true);
 			MessageFactory.getMessage(nextLayerInteraction, nextLayerClass, methodName);
-			// ArgumentFactory.getArgument(nextLayerMessage, variableName, Utilities.toLowerCamelCase(variableName), true);
+			// ArgumentFactory.getArgument(nextLayerMessage, variableName,
+			// Utilities.toLowerCamelCase(variableName), true);
 		}
 	}
 
@@ -101,8 +101,8 @@ public class CucumberToUMLFirstLayerLinker extends ToUMLFirstLayerLinker {
 
 		createInputOutputMessage(targetInteraction, m, "set");
 
-		String objectName = Utilities.toUpperCamelCase(Layer1Validator.getObjectName(m.getName()));
-		String objectType = StringUtils.capitalize(Layer1Validator.getObjectType(m.getName()));
+		String objectName = Utilities.toUpperCamelCase(Validator.getObjectName(m.getName()));
+		String objectType = StringUtils.capitalize(Validator.getObjectType(m.getName()));
 		String methodName = "send" + objectName + objectType;
 
 		Class layer3Class = ClassFactory.getClass(UMLProject.theSystem,
@@ -110,7 +110,7 @@ public class CucumberToUMLFirstLayerLinker extends ToUMLFirstLayerLinker {
 		MessageFactory.getMessage(targetInteraction, layer3Class, methodName);
 
 	}
-	
+
 	@Override
 	protected Interaction addNextLayerInteraction(String methodName, Message m) {
 		return InteractionFactory.getInteraction(getNextLayerClassFromMessage(m), methodName, true, m.getName());

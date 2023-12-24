@@ -1,6 +1,6 @@
 package org.farhan.objects.mbttransformerplugin;
 
-import org.farhan.conv.core.Utilities;
+import org.farhan.mbt.conv.core.Utilities;
 import org.farhan.mbt.conv.cucumber.ConvertUMLToCucumberPSTMojo;
 import org.farhan.objects.common.GoalObject;
 import org.junit.jupiter.api.Assertions;

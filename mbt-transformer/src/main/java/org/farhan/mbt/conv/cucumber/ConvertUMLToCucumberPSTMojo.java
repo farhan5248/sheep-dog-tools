@@ -1,13 +1,11 @@
 package org.farhan.mbt.conv.cucumber;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import org.eclipse.uml2.uml.Class;
-import org.farhan.conv.core.Project;
-import org.farhan.conv.core.UMLToConversionMojo;
-import org.farhan.conv.core.UMLToFirstLayerConverter;
-import org.farhan.conv.core.UMLToOtherLayerConverter;
-import org.farhan.conv.core.Utilities;
+import org.farhan.mbt.conv.core.UMLToConversionMojo;
+import org.farhan.mbt.conv.core.UMLToFirstLayerConverter;
+import org.farhan.mbt.conv.core.UMLToOtherLayerConverter;
+import org.farhan.mbt.conv.core.Utilities;
 import org.farhan.mbt.conv.uml.UMLProject;
 
 public class ConvertUMLToCucumberPSTMojo extends UMLToConversionMojo {
@@ -24,34 +22,36 @@ public class ConvertUMLToCucumberPSTMojo extends UMLToConversionMojo {
 
 	@Override
 	protected ArrayList<Class> getFirstLayerClasses() {
-		return getClasses(Project.firstLayerPackageName);
+		try {
+			UMLProject.readFiles();
+		} catch (Exception e) {
+			System.out.println(Utilities.getStackTraceAsString(e));
+		}
+		return UMLProject.getFirstLayerClasses();
 	}
 
 	@Override
 	protected ArrayList<Class> getSecondLayerClasses() {
-		return getClasses(Project.secondLayerPackageName);
+		try {
+			UMLProject.readFiles();
+		} catch (Exception e) {
+			System.out.println(Utilities.getStackTraceAsString(e));
+		}
+		return UMLProject.getSecondLayerClasses();
 	}
 
 	@Override
 	protected ArrayList<Class> getThirdLayerClasses() {
-		return getClasses(Project.thirdLayerPackageName);
-	}
-
-	private ArrayList<Class> getClasses(String packageName) {
-		ArrayList<Class> layerClasses = null;
 		try {
 			UMLProject.readFiles();
-			//TODO replace with UMLProject.getFirstLayerClasses etc
-			layerClasses = UMLProject.getPackageClasses(UMLProject.theSystem.getNestedPackage(packageName));
-		} catch (IOException e) {
+		} catch (Exception e) {
 			System.out.println(Utilities.getStackTraceAsString(e));
 		}
-		return layerClasses;
+		return UMLProject.getThirdLayerClasses();
 	}
 
 	@Override
 	protected void writeFiles() throws Exception {
-		// TODO make writeFiles and readFiles for Projects consistent
 		CucumberProject.writeFiles();
 	}
 

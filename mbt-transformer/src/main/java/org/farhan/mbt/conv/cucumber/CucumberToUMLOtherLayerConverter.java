@@ -7,8 +7,9 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.ElementImport;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
-import org.farhan.conv.core.ConvertibleFile;
-import org.farhan.conv.core.ToUMLOtherLayerConverter;
+import org.farhan.mbt.conv.core.ConvertibleFile;
+import org.farhan.mbt.conv.core.ToUMLOtherLayerConverter;
+import org.farhan.mbt.conv.uml.AnnotationFactory;
 import org.farhan.mbt.conv.uml.ArgumentFactory;
 import org.farhan.mbt.conv.uml.ClassFactory;
 import org.farhan.mbt.conv.uml.CommentFactory;
@@ -76,7 +77,7 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 				}
 				anInteraction.createOwnedComment().setBody(body);
 				if (md.getAnnotations().size() > 0) {
-					anInteraction.createEAnnotation(md.getAnnotation(0).toString());
+					AnnotationFactory.getAnnotation(anInteraction, md.getAnnotation(0).toString());
 				}
 				for (Parameter p : md.getParameters()) {
 					ParameterFactory.getParameter(anInteraction, p.getNameAsString(), "", "in");

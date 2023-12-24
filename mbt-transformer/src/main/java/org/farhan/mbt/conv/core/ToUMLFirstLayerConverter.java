@@ -1,8 +1,7 @@
-package org.farhan.conv.core;
+package org.farhan.mbt.conv.core;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.uml2.uml.Interaction;
-import org.farhan.conv.validation.Layer1Validator;
 
 public abstract class ToUMLFirstLayerConverter extends ToUMLLayerConverter {
 
@@ -42,13 +41,13 @@ public abstract class ToUMLFirstLayerConverter extends ToUMLLayerConverter {
 	protected void setCurrentMachineAndState(String messageName) throws Exception {
 		// the actual object name might have delimiters indicating folder or menu
 		// structure
-		String[] objectParts = Layer1Validator.getObjectName(messageName).split("/");
+		String[] objectParts = Validator.getObjectName(messageName).split("/");
 		// Capitalize the first letter of the type
-		String objectType = StringUtils.capitalize(Layer1Validator.getObjectType(messageName));
+		String objectType = StringUtils.capitalize(Validator.getObjectType(messageName));
 		setFSMState(objectParts[objectParts.length - 1] + objectType);
 
-		if (Layer1Validator.isContainerStep(messageName)) {
-			setFSMName(Layer1Validator.getContainerName(messageName));
+		if (Validator.isContainerStep(messageName)) {
+			setFSMName(Validator.getContainerName(messageName));
 		}
 	}
 

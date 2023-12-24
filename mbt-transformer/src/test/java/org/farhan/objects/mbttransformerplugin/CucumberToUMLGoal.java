@@ -2,8 +2,8 @@ package org.farhan.objects.mbttransformerplugin;
 
 import java.util.HashMap;
 
-import org.farhan.conv.core.Project;
-import org.farhan.conv.core.Utilities;
+import org.farhan.mbt.conv.core.Project;
+import org.farhan.mbt.conv.core.Utilities;
 import org.farhan.mbt.conv.cucumber.ConvertCucumberToUMLPSTMojo;
 import org.farhan.objects.common.GoalObject;
 import org.junit.jupiter.api.Assertions;

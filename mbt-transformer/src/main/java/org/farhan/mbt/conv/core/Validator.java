@@ -1,9 +1,9 @@
-package org.farhan.conv.validation;
+package org.farhan.mbt.conv.core;
 
 import org.farhan.mbt.graph.validation.EdgeValidator;
 import org.farhan.mbt.graph.validation.VerticeValidator;
 
-public class Layer1Validator {
+public class Validator {
 
 	public static boolean validateStepText(String messageName) {
 		return VerticeValidator.isValid(messageName) || EdgeValidator.isValid(messageName);
