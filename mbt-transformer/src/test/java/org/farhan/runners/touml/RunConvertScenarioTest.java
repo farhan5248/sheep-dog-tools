@@ -1,4 +1,4 @@
-package org.farhan.runners;
+package org.farhan.runners.touml;
 
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;

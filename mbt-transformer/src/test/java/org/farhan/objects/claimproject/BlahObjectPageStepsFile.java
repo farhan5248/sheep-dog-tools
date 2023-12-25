@@ -1,6 +1,6 @@
 package org.farhan.objects.claimproject;
 
-import org.farhan.objects.common.JavaFile;
+import org.farhan.common.objects.JavaFile;
 
 public class BlahObjectPageStepsFile extends JavaFile {
 

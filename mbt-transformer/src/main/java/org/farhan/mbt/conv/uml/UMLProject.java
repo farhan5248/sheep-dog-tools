@@ -12,8 +12,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Model;
-import org.eclipse.uml2.uml.Package;
-import org.eclipse.uml2.uml.PackageableElement;
 import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 import org.farhan.mbt.conv.core.Project;
@@ -25,22 +23,10 @@ public class UMLProject extends Project {
 
 	public static void init() {
 		theSystem = ModelFactory.getModel("pst");
-	}
+		PackageFactory.addPackage(theSystem, UMLProject.firstLayerPackageName);
+		PackageFactory.addPackage(theSystem, UMLProject.secondLayerPackageName);
+		PackageFactory.addPackage(theSystem, UMLProject.thirdLayerPackageName);
 
-	private static ArrayList<Class> getPackageClasses(Package nestingPackage) {
-		// TODO make it private and wrap with getLayerClasses
-		Class aClass;
-		ArrayList<Class> theClasses = new ArrayList<Class>();
-		for (PackageableElement pe : nestingPackage.getPackagedElements()) {
-
-			if (pe instanceof Class) {
-				aClass = (Class) pe;
-				theClasses.add(aClass);
-			} else if (pe instanceof Package) {
-				theClasses.addAll(getPackageClasses((Package) pe));
-			}
-		}
-		return theClasses;
 	}
 
 	public static Model readFiles() throws IOException {
@@ -70,15 +56,15 @@ public class UMLProject extends Project {
 	}
 
 	public static ArrayList<Class> getFirstLayerClasses() {
-		return getPackageClasses(theSystem.getNestedPackage(Project.firstLayerPackageName));
+		return PackageFactory.getPackagedClasses(theSystem.getNestedPackage(Project.firstLayerPackageName));
 	}
 
 	public static ArrayList<Class> getSecondLayerClasses() {
-		return getPackageClasses(theSystem.getNestedPackage(Project.secondLayerPackageName));
+		return PackageFactory.getPackagedClasses(theSystem.getNestedPackage(Project.secondLayerPackageName));
 	}
 
 	public static ArrayList<Class> getThirdLayerClasses() {
-		return getPackageClasses(theSystem.getNestedPackage(Project.thirdLayerPackageName));
+		return PackageFactory.getPackagedClasses(theSystem.getNestedPackage(Project.thirdLayerPackageName));
 	}
 
 }

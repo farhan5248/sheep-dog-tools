@@ -1,8 +1,8 @@
 package org.farhan.stepdefs.claimproject;
 
+import org.farhan.common.stepdefs.UMLSteps;
 import org.farhan.objects.claimproject.ClaimProjectFactory;
 import org.farhan.objects.claimproject.PSTFile;
-import org.farhan.stepdefs.common.UMLSteps;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;

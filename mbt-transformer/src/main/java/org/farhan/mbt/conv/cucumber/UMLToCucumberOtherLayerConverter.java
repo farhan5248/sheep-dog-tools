@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import org.eclipse.uml2.uml.Behavior;
 import org.eclipse.uml2.uml.Class;
-import org.eclipse.uml2.uml.Comment;
+import org.eclipse.uml2.uml.ElementImport;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
@@ -15,7 +15,7 @@ import org.farhan.mbt.conv.core.UMLToOtherLayerConverter;
 import org.farhan.mbt.conv.core.Utilities;
 import org.farhan.mbt.conv.uml.PackageFactory;
 import org.farhan.mbt.conv.uml.ParameterFactory;
-import org.farhan.mbt.conv.uml.UMLNameTranslator;
+import org.farhan.mbt.conv.uml.UMLNameConverter;
 import org.farhan.mbt.conv.uml.UMLProject;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier.Keyword;
@@ -47,7 +47,7 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 			javaClassType.addExtendedType("TestSteps");
 		} else {
 			// TODO UMLNameTranslator must be a mess by now...
-			javaClassType.addExtendedType(UMLNameTranslator.getOtherLayerAppName(layerClass.getQualifiedName()));
+			javaClassType.addExtendedType(UMLNameConverter.getOtherLayerAppName(layerClass.getQualifiedName()));
 		}
 		aJavaFile.javaClass.setPackageDeclaration(convertJavaPathToJavaPackage(removeJavaClassFromJavaPath(path)));
 		convertComments(layerClass);
@@ -55,8 +55,15 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 
 	@Override
 	protected void convertFromImports(Class layerClass) throws Exception {
+		for (ElementImport ei : layerClass.getElementImports()) {
+			String qualifiedName = ei.getImportedElement().getQualifiedName();
+			String javaPath = CucumberNameConverter.convertQualifiedNameToJavaPath(qualifiedName);
+			String packageName = convertJavaPathToJavaPackage(javaPath).replace("pst.", "");
+			aJavaFile.javaClass.addImport(packageName);
+		}
 		if (isSecondLayer(layerClass)) {
-			// TODO maybe add these when the UML model is being created?
+			// TODO add these when the UML model is being created so that only the loop of
+			// imports is used
 			aJavaFile.javaClass.addImport("io.cucumber.java.en.Given");
 			aJavaFile.javaClass.addImport("io.cucumber.java.PendingException");
 			aJavaFile.javaClass.addImport("io.cucumber.datatable.DataTable");
@@ -65,7 +72,7 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 			aJavaFile.javaClass.addImport("java.util.HashMap");
 			aJavaFile.javaClass.addImport("io.cucumber.java.PendingException");
 			aJavaFile.javaClass.addImport(
-					"org.farhan.common." + UMLNameTranslator.getOtherLayerAppName(layerClass.getQualifiedName()));
+					"org.farhan.common." + UMLNameConverter.getOtherLayerAppName(layerClass.getQualifiedName()));
 		}
 	}
 

@@ -1,4 +1,4 @@
-package org.farhan.runners;
+package org.farhan.runners.touml;
 
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
@@ -10,8 +10,8 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("Cucumber/ToUML/First Layer/ConvertScenarioOutline.feature")
+@SelectClasspathResource("Cucumber/ToUML/Other Layer/ConvertStepDefinitions.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
-public class RunConvertScenarioOutlineTest {
+public class RunConvertStepDefinitionsTest {
 }

@@ -8,6 +8,7 @@ public class ElementImportFactory {
 	public static ElementImport getElementImport(Class aClass, String qualifiedName) {
 		ElementImport anElementImport;
 		for (ElementImport ei : aClass.getElementImports()) {
+			// TODO remove the lowercase
 			if (ei.getImportedElement().getQualifiedName().toLowerCase().contentEquals(qualifiedName.toLowerCase())) {
 				return ei;
 			}

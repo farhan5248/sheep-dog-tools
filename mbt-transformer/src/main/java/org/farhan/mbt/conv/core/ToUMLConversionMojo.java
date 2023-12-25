@@ -36,12 +36,12 @@ public abstract class ToUMLConversionMojo {
 		firstLayerLinker = getFirstLayerLinker();
 		otherLayerLinker = getOtherLayerLinker();
 		// TODO this should be the tag
-		firstLayerConverter.selectLayerFiles(Project.tags);
+		firstLayerConverter.selectLayerFiles(Project.firstLayerPackageName);
 		firstLayerConverter.transformLayerFiles(getFirstLayerFiles());
-		otherLayerConverter.selectLayerFiles(Project.firstLayerPackageName);
+		otherLayerConverter.selectLayerFiles(Project.secondLayerPackageName);
 		otherLayerConverter.transformLayerFiles(getSecondLayerFiles());
 		firstLayerLinker.linkLayerFiles(Project.firstLayerPackageName);
-		otherLayerConverter.selectLayerFiles(Project.secondLayerPackageName);
+		otherLayerConverter.selectLayerFiles(Project.thirdLayerPackageName);
 		otherLayerConverter.transformLayerFiles(getThirdLayerFiles());
 		otherLayerLinker.linkLayerFiles(Project.secondLayerPackageName);
 		writeFiles();

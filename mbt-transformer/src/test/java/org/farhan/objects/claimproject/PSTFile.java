@@ -1,7 +1,8 @@
 package org.farhan.objects.claimproject;
 
 import java.util.HashMap;
-import org.farhan.objects.common.UMLFile;
+
+import org.farhan.common.objects.UMLFile;
 
 public class PSTFile extends UMLFile {
 

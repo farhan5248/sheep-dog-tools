@@ -1,4 +1,4 @@
-package org.farhan.objects.common;
+package org.farhan.common.objects;
 
 import java.io.File;
 

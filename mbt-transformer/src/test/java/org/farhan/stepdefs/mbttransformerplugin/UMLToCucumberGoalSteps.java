@@ -1,8 +1,8 @@
 package org.farhan.stepdefs.mbttransformerplugin;
 
+import org.farhan.common.stepdefs.GoalSteps;
 import org.farhan.objects.mbttransformerplugin.MBTTransformerPluginFactory;
 import org.farhan.objects.mbttransformerplugin.UMLToCucumberGoal;
-import org.farhan.stepdefs.common.GoalSteps;
 
 import io.cucumber.java.en.And;
 

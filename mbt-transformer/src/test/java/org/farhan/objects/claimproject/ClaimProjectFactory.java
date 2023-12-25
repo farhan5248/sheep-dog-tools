@@ -1,6 +1,6 @@
 package org.farhan.objects.claimproject;
 
-import org.farhan.objects.common.TestObject;
+import org.farhan.common.objects.TestObject;
 
 public class ClaimProjectFactory {
 

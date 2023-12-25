@@ -30,7 +30,7 @@ import org.farhan.mbt.conv.uml.ElementImportFactory;
 import org.farhan.mbt.conv.uml.InteractionFactory;
 import org.farhan.mbt.conv.uml.MessageFactory;
 import org.farhan.mbt.conv.uml.ParameterFactory;
-import org.farhan.mbt.conv.uml.UMLNameTranslator;
+import org.farhan.mbt.conv.uml.UMLNameConverter;
 import org.farhan.mbt.conv.uml.UMLProject;
 
 public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
@@ -38,12 +38,12 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	private CucumberFeatureFile aCucumberFile;
 
 	@Override
-	protected void selectLayerFiles(String layerSelectionCriteria) throws Exception {
+	protected void selectLayerFiles(String layer) throws Exception {
 
-		ArrayList<ConvertibleFile> files = CucumberProject.getFirstLayerFiles();
-		for (int i = files.size() - 1; i >= 0; i--) {
-			if (!isFileSelected(files.get(i), layerSelectionCriteria)) {
-				files.remove(i);
+		ArrayList<ConvertibleFile> layerFiles = CucumberProject.getFirstLayerFiles();
+		for (int i = layerFiles.size() - 1; i >= 0; i--) {
+			if (!isFileSelected(layerFiles.get(i), Project.tags)) {
+				layerFiles.remove(i);
 			}
 		}
 	}
@@ -54,16 +54,12 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 		aCucumberFile = (CucumberFeatureFile) theObject;
 		String qualifiedName = convertAbsolutePathToQualifiedName(aCucumberFile.getFile().getAbsolutePath());
 		Class layerClass = ClassFactory.getClass(UMLProject.theSystem, qualifiedName);
+		CommentFactory.getComment(layerClass, convertStatementsToString(aCucumberFile.theFeature.getStatements()));
 		return layerClass;
 	}
 
 	@Override
 	protected void convertToImports(Class layerClass) throws Exception {
-	}
-
-	@Override
-	protected void convertToAttributes(Class layerClass) throws Exception {
-		CommentFactory.getComment(layerClass, convertStatementsToString(aCucumberFile.theFeature.getStatements()));
 	}
 
 	@Override
@@ -158,7 +154,7 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 		if (s.getTheDocString() != null) {
 			ValueSpecification vs = ArgumentFactory.getArgument(theMessage, "docString", "", true);
 			EList<Statement> lines = s.getTheDocString().getStatements();
-	
+
 			for (int i = 0; i < lines.size(); i++) {
 				AnnotationFactory.getAnnotation(vs, "docString", String.valueOf(i), lines.get(i).getName());
 			}
@@ -170,7 +166,7 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 			ValueSpecification vs = ArgumentFactory.getArgument(theMessage, "dataTable", "", true);
 			EList<Row> rows = s.getTheStepTable().getRows();
 			for (int i = 0; i < rows.size(); i++) {
-	
+
 				String value = "";
 				for (int j = 0; j < rows.get(i).getCells().size(); j++) {
 					value += rows.get(i).getCells().get(j).getName() + " |";
@@ -195,7 +191,7 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 
 	private String getSecondLayerClassName() {
 		String secondLayerClassName = "";
-		secondLayerClassName = UMLNameTranslator.filterClassName(getFSMName() + getFSMState() + "Steps");
+		secondLayerClassName = UMLNameConverter.filterClassName(getFSMName() + getFSMState() + "Steps");
 		secondLayerClassName = "pst::" + Project.secondLayerPackageName + "::" + getFSMName() + "::"
 				+ secondLayerClassName;
 		return secondLayerClassName;

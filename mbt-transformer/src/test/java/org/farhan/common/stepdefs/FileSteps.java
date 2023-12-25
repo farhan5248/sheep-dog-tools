@@ -1,4 +1,4 @@
-package org.farhan.stepdefs.common;
+package org.farhan.common.stepdefs;
 
 import java.io.File;
 

@@ -1,6 +1,5 @@
 Feature: Convert Step Definitions
 
-  # TODO read in layer 2 java files and specify how they're merged
   Background: Create a feature file
     Given The claim project, src/test/cucumber/dept/process.feature file is as follows
       """
@@ -48,8 +47,8 @@ Feature: Convert Step Definitions
 
   Scenario: Non existing UML interaction annotation creation
     And The target/uml/pst.uml file, Interaction Annotations section is as follows
-      | Interaction Name                                                         | Annotation Name                            |
-      | stepdefs::blah::blahObjectPageSteps::theBlahApplicationObjectPageIsEmpty | The blah application, Object page is empty |
+      | Interaction Name                                                         | Annotation Name                                      |
+      | stepdefs::blah::blahObjectPageSteps::theBlahApplicationObjectPageIsEmpty | @Given("The blah application, Object page is empty") |
 
   Scenario: Non existing UML interaction parameter creation
     And The target/uml/pst.uml file, Interaction Parameters section is as follows

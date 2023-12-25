@@ -2,14 +2,12 @@ package org.farhan.mbt.conv.uml;
 
 import java.util.ArrayList;
 
-import org.eclipse.uml2.uml.Activity;
 import org.eclipse.uml2.uml.Behavior;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.PackageableElement;
-import org.farhan.mbt.conv.core.Project;
 
 public class PackageFactory {
 
@@ -64,18 +62,6 @@ public class PackageFactory {
 		return null;
 	}
 
-	public static ArrayList<Activity> getPackagedActivities(Package aPackage) {
-		ArrayList<Activity> activities = new ArrayList<Activity>();
-		for (PackageableElement pe : aPackage.getPackagedElements()) {
-			if (pe instanceof Activity) {
-				activities.add((Activity) pe);
-			} else if (pe instanceof Package) {
-				activities.addAll(getPackagedActivities((Package) pe));
-			}
-		}
-		return activities;
-	}
-
 	public static ArrayList<Class> getPackagedClasses(Package aPackage) {
 		ArrayList<Class> classes = new ArrayList<Class>();
 		for (PackageableElement pe : aPackage.getPackagedElements()) {
@@ -86,19 +72,6 @@ public class PackageFactory {
 			}
 		}
 		return classes;
-	}
-
-	public static ArrayList<Package> getStepDefPackages(Model theSystem, String owningModelName) {
-		Model owningModel = (Model) theSystem.getMember(owningModelName);
-		Package components = (Package) owningModel.getPackagedElement(Project.secondLayerPackageName);
-		ArrayList<Package> thePackages = new ArrayList<Package>();
-		for (PackageableElement pe : components.getPackagedElements()) {
-			if (pe instanceof Package) {
-				Package aPackage = (Package) pe;
-				thePackages.add(aPackage);
-			}
-		}
-		return thePackages;
 	}
 
 	public static ArrayList<Interaction> getPackagedInteractions(Model theSystem, String layer) {

@@ -1,8 +1,8 @@
 package org.farhan.objects.mbttransformerplugin;
 
+import org.farhan.common.objects.GoalObject;
 import org.farhan.mbt.conv.core.Utilities;
 import org.farhan.mbt.conv.cucumber.ConvertUMLToCucumberPSTMojo;
-import org.farhan.objects.common.GoalObject;
 import org.junit.jupiter.api.Assertions;
 
 public class UMLToCucumberGoal extends GoalObject {

@@ -19,7 +19,7 @@ public class ClassFactory {
 			// First create the package structure
 			Package owningPackage = PackageFactory.addPackageRecursively(nestingPackage, qualifiedName);
 			// Then create the class
-			theClass = owningPackage.createOwnedClass(UMLNameTranslator.getName(qualifiedName), false);
+			theClass = owningPackage.createOwnedClass(UMLNameConverter.getName(qualifiedName), false);
 		}
 		return theClass;
 	}

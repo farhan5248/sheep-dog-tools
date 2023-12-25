@@ -29,7 +29,7 @@ Feature: Convert Step Objects
     And The mbt-transformer plugin, uml-to-cucumber goal is executed
 
   Scenario: Non existing Java class creation with vertice data tables
-    Then The claim project, src/test/java/org/farhan/objects/blah/blahDataTablePage.java file is as follows
+    Then The claim project, src/test/java/org/farhan/objects/blah/blahDataTablePage.java file will be as follows
       """
       package org.farhan.objects.blah;
       
@@ -51,7 +51,7 @@ Feature: Convert Step Objects
       """    
 
   Scenario: Non existing Java class creation with vertice doc strings
-    Then The claim project, src/test/java/org/farhan/objects/blah/blahDocStringPage.java file is as follows
+    Then The claim project, src/test/java/org/farhan/objects/blah/blahDocStringPage.java file will be as follows
       """
       package org.farhan.objects.blah;
       
@@ -69,7 +69,7 @@ Feature: Convert Step Objects
       """
       
   Scenario: Non existing Java class creation with vertice details
-    Then The claim project, src/test/java/org/farhan/objects/blah/blahObjectPage.java file is as follows
+    Then The claim project, src/test/java/org/farhan/objects/blah/blahObjectPage.java file will be as follows
       """
       package org.farhan.objects.blah;
       
@@ -87,7 +87,7 @@ Feature: Convert Step Objects
       """
 
   Scenario: Non existing Java class creation with edge details
-    Then The claim project, src/test/java/org/farhan/objects/blah2/blah2JsonRequest.java file is as follows
+    Then The claim project, src/test/java/org/farhan/objects/blah2/blah2JsonRequest.java file will be as follows
       """
       package org.farhan.objects.blah2;
       

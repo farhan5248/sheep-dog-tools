@@ -15,7 +15,6 @@ public abstract class ToUMLLayerConverter {
 		for (ConvertibleFile layerFile : layerFiles) {
 			Class layerClass = convertToClass(layerFile);
 			convertToImports(layerClass);
-			convertToAttributes(layerClass);
 			convertToBehaviours(layerClass);
 		}
 	}
@@ -23,8 +22,6 @@ public abstract class ToUMLLayerConverter {
 	protected abstract Class convertToClass(ConvertibleFile layerFile) throws Exception;
 
 	protected abstract void convertToImports(Class layerClass) throws Exception;
-
-	protected abstract void convertToAttributes(Class layerClass) throws Exception;
 
 	protected abstract void convertToBehaviours(Class layerClass) throws Exception;
 
