@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
@@ -27,13 +28,15 @@
 				<configuration>
 					<mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>
 					<arguments>
-						<argument>/${project.basedir}/src/org/xtext/example/mydsl/GenerateMyDsl.mwe2</argument>
+						<argument>
+							/${project.basedir}/src/org/xtext/example/mydsl/GenerateMyDsl.mwe2</argument>
 						<argument>-p</argument>
 						<argument>rootPath=/${project.basedir}/..</argument>
 					</arguments>
 					<classpathScope>compile</classpathScope>
 					<includePluginDependencies>true</includePluginDependencies>
-					<cleanupDaemonThreads>false</cleanupDaemonThreads><!-- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=475098#c3 -->
+					<cleanupDaemonThreads>false</cleanupDaemonThreads><!-- see
+					https://bugs.eclipse.org/bugs/show_bug.cgi?id=475098#c3 -->
 				</configuration>
 				<dependencies>
 					<dependency>
@@ -47,38 +50,43 @@
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>
 			</plugin>
-	
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
 				<configuration>
 					<filesets combine.children="append">
 						<fileset>
-							<directory>${basedir}/../org.xtext.example.mydsl/src-gen/</directory>
+							<directory>
+								${basedir}/../org.xtext.example.mydsl/src-gen/</directory>
 							<includes>
 								<include>**/*</include>
 							</includes>
 						</fileset>
 						<fileset>
-							<directory>${basedir}/../org.xtext.example.mydsl.tests/src-gen/</directory>
+							<directory>
+								${basedir}/../org.xtext.example.mydsl.tests/src-gen/</directory>
 							<includes>
 								<include>**/*</include>
 							</includes>
 						</fileset>
 						<fileset>
-							<directory>${basedir}/../org.xtext.example.mydsl.ide/src-gen/</directory>
+							<directory>
+								${basedir}/../org.xtext.example.mydsl.ide/src-gen/</directory>
 							<includes>
 								<include>**/*</include>
 							</includes>
 						</fileset>
 						<fileset>
-							<directory>${basedir}/../org.xtext.example.mydsl.ui/src-gen/</directory>
+							<directory>
+								${basedir}/../org.xtext.example.mydsl.ui/src-gen/</directory>
 							<includes>
 								<include>**/*</include>
 							</includes>
 						</fileset>
 						<fileset>
-							<directory>${basedir}/../org.xtext.example.mydsl.ui.tests/src-gen/</directory>
+							<directory>
+								${basedir}/../org.xtext.example.mydsl.ui.tests/src-gen/</directory>
 							<includes>
 								<include>**/*</include>
 							</includes>
@@ -126,11 +134,5 @@
 		</pluginManagement>
 	</build>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.farhan</groupId>
-			<artifactId>cucumberxtexteditor</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
-		</dependency>
-	</dependencies>
+
 </project>

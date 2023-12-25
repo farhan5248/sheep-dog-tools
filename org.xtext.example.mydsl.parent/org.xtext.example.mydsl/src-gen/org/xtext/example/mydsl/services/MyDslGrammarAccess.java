@@ -96,6 +96,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		//// This has the side effect of allowing more than 1 Background.
 		//// Also it allows it to be anywhere, like at the begining or end.
 		//// I assume anyone using this editor knows that in Cucumber it just goes once at the top
+		//// I'm doing it this way to make the formatting code simpler by having less duplication
 		//AbstractScenario:
 		//    Background | Scenario | ScenarioOutline;
 		@Override public ParserRule getRule() { return rule; }
@@ -494,10 +495,14 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 		private final RuleCall cEOLTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
 		
 		//DocString:
-		//    '"""' EOL statements+=Statement+ '"""' EOL;
+		//    '"""' EOL
+		//    statements+=Statement+
+		//    '"""' EOL;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'"""' EOL statements+=Statement+ '"""' EOL
+		//'"""' EOL
+		//statements+=Statement+
+		//'"""' EOL
 		public Group getGroup() { return cGroup; }
 		
 		//'"""'
@@ -968,6 +973,7 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	//// This has the side effect of allowing more than 1 Background.
 	//// Also it allows it to be anywhere, like at the begining or end.
 	//// I assume anyone using this editor knows that in Cucumber it just goes once at the top
+	//// I'm doing it this way to make the formatting code simpler by having less duplication
 	//AbstractScenario:
 	//    Background | Scenario | ScenarioOutline;
 	public AbstractScenarioElements getAbstractScenarioAccess() {
@@ -1081,7 +1087,9 @@ public class MyDslGrammarAccess extends AbstractElementFinder.AbstractGrammarEle
 	}
 	
 	//DocString:
-	//    '"""' EOL statements+=Statement+ '"""' EOL;
+	//    '"""' EOL
+	//    statements+=Statement+
+	//    '"""' EOL;
 	public DocStringElements getDocStringAccess() {
 		return pDocString;
 	}

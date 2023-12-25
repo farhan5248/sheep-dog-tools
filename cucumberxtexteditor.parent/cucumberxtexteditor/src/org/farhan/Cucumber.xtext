@@ -110,11 +110,11 @@ terminal STRING:
 	"'" ('\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '"' | "'" | '\\') | !('\\' | "'" | '\r' | '\n'))* "'";
 
 terminal WS:
-	(' ' | '\t')+;
+	(' ' | '\t' | '\r')+;
 
 // single line comment
 terminal SL_COMMENT:
-	'#' !('\r' | '\n')* EOL;
+	'#' !('\n')* EOL;
 
 terminal EOL:
-	('\r\n')+;
+	('\n')+;

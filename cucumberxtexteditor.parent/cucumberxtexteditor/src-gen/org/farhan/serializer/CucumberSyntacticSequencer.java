@@ -33,12 +33,12 @@ public class CucumberSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * terminal EOL:
-	 * 	('\r\n')+;
+	 * 	('\n')+;
 	 */
 	protected String getEOLToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
 			return getTokenText(node);
-		return "\r\n";
+		return "\n";
 	}
 	
 	@Override

@@ -5,70 +5,46 @@ package org.farhan.validation;
 
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
+import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
+import org.farhan.mbt.graph.validation.EdgeValidator;
+import org.farhan.mbt.graph.validation.VerticeValidator;
 
-/**
- * This class contains custom validation rules.
- *
- * See
- * https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
- */
 public class CucumberValidator extends AbstractCucumberValidator {
 
-	private static final String OBJ_REGEX = "( .*)";
-	private static final String APP_REGEX = "( .*( application| service),)?";
-	private static final String STATE_NAME_REGEX = "The" + APP_REGEX + "(" + OBJ_REGEX;
-	private static final String STATE_DETAILS_REGEX = " is (empty|present|as follows))";
-	private static final String STATE_REGEX = STATE_NAME_REGEX + STATE_DETAILS_REGEX;
-	public static final String INVALID_STATE = "invalidState";
-
-	private static final String TRANSITION_NAME_REGEX = "(The (.*) request)";
-	private static final String TRANSITION_DETAILS_REGEX = "( is( sent| triggered| bad| good)( with| as follows)?)";
-	private static final String TRANSITION_REGEX = TRANSITION_NAME_REGEX + TRANSITION_DETAILS_REGEX;
-	public static final String INVALID_TRANSITION = "invalidTransition";
-
 	public static final String INVALID_NAME = "invalidName";
+	public static final String INVALID_STEP_TYPE = "invalidStepType";
 
-	// This one is to check each step, FAST is when the file is modified
+	// Validate if the Step is a valid vertice with input or edge, FAST is when the
+	// file is modified
 	@Check(CheckType.FAST)
 	public void checkStepName(Step step) {
 
 		// TODO the quickfix here is to identify which regex is broken and put an
 		// example in place
 
-		// this applies to Given and Then
-		String stateEgs = "The blah application, something/something/something/Object is empty\r\n"
-				+ "The blah service, something/something/something/Object is empty\r\n"
-				+ "The something/something/something/Object is empty\r\n" + "\r\n"
-				+ "The blah application, something/something/something/Object is present\r\n"
-				+ "The blah service, something/something/something/Object is present\r\n"
-				+ "The something/something/something/Object is present\r\n" + "\r\n"
-				+ "The blah application, something/something/something/Object is as follows\r\n"
-				+ "The blah service, something/something/something/Object is as follows\r\n"
-				+ "The something/something/something/Object is as follows";
+		if (!EdgeValidator.isValid(step.getName()) && !VerticeValidator.isValid(step.getName())) {
+			// TODO instead of this error message, give the parts breakdown to see what's missing
+			error(VerticeValidator.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
+		}
 
-		// this applies to When
-		String transitionEgs = "The blah request is good\r\n" + "The blah request is bad\r\n"
-				+ "The blah request is sent with\r\n" + "The blah request is triggered with\r\n"
-				+ "The blah request is sent as follows\r\n" + "The blah request is triggered as follows";
-
-		String msg = "The state name and details are invalid. Examples:\n" + stateEgs
-				+ "The state name and details are invalid. Examples:\n" + transitionEgs;
+		// TODO apply validation to Given/Then vs When
+		AbstractScenario as = (AbstractScenario) step.eContainer();
+		// TODO assumes step 0 is never And. Check that as step validation
+		// Use something like this to determine if this is a GWT:
+		// as.getSteps().indexOf(step)
 
 		if (step.getTheStepTable() != null) {
 			// TODO Add table column row validation, each row should have the max number of
 			// columns
 		}
-
-		if (!step.getName().matches(STATE_REGEX) && !step.getName().matches(TRANSITION_REGEX)) {
-			error(msg, CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
-		}
 	}
 
-	// This one is to check each scenario, NORMAL is when the file is saved
+	// Validate if the Abstract Scenario is a valid path, NORMAL is when the file is
+	// saved
 	@Check(CheckType.NORMAL)
 	public void checkScenario(Scenario scenario) {
 
@@ -85,13 +61,16 @@ public class CucumberValidator extends AbstractCucumberValidator {
 		}
 	}
 
-	// This one is to run the conversion to a UML model, EXPENSIVE is when the
+	// Validate if the Feature is a valid graph, EXPENSIVE is when the
 	// validation menu item is selected
 	@Check(CheckType.EXPENSIVE)
 	public void checkFeature(Feature feature) {
+		// TODO validate that feature file name and feature name are the same.
+
 		if (!Character.isUpperCase(feature.getName().charAt(0))) {
 			warning("Feature name should start with a capital", CucumberPackage.Literals.FEATURE__NAME, INVALID_NAME);
 		}
+
 	}
 
 }

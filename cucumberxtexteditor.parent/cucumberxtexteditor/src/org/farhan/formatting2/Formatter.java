@@ -64,11 +64,11 @@ public class Formatter {
 	}
 
 	protected void formatEOL1RuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
-		replace(doc, iSR, "\r\n");
+		replace(doc, iSR, "\n");
 	}
 
 	protected void formatEOL2RuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
-		replace(doc, iSR, "\r\n\r\n");
+		replace(doc, iSR, "\n\n");
 	}
 
 	protected void formatEOL12RuleCall(ISemanticRegion iSR, IFormattableDocument doc) {

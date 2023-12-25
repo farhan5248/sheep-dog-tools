@@ -1,0 +1,12 @@
+package org.farhan.objects.blah;
+
+import java.util.HashMap;
+import io.cucumber.java.PendingException;
+import org.farhan.common.blah;
+
+public class blahObjectPage extends blah {
+
+    public void assertIsInvalid() {
+        throw new PendingException();
+    }
+}

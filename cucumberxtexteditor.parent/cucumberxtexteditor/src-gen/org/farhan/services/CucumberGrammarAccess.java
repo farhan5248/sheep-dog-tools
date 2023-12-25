@@ -1260,20 +1260,20 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//terminal WS:
-	//    (' ' | '\t')+;
+	//    (' ' | '\t' | '\r')+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	}
 	
 	//// single line comment
 	//terminal SL_COMMENT:
-	//    '#' !('\r' | '\n')* EOL;
+	//    '#' !('\n')* EOL;
 	public TerminalRule getSL_COMMENTRule() {
 		return tSL_COMMENT;
 	}
 	
 	//terminal EOL:
-	//    ('\r\n')+;
+	//    ('\n')+;
 	public TerminalRule getEOLRule() {
 		return tEOL;
 	}

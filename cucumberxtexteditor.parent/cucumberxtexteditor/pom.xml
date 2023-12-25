@@ -1,10 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.farhan</groupId>
 		<artifactId>cucumberxtexteditor.parent</artifactId>
-		<version>1.0.2-SNAPSHOT</version>
+		<version>1.0.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>cucumberxtexteditor</artifactId>
 	<packaging>eclipse-plugin</packaging>
@@ -49,7 +50,6 @@
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-clean-plugin</artifactId>
@@ -57,44 +57,78 @@
 					<filesets combine.children="append">
 						<fileset>
 							<directory>
-								${basedir}/../cucumberxtexteditor/src-gen/</directory>
+								${project.basedir}/../cucumberxtexteditor/src-gen/</directory>
 							<includes>
 								<include>**/*</include>
 							</includes>
 						</fileset>
 						<fileset>
 							<directory>
-								${basedir}/../cucumberxtexteditor.tests/src-gen/</directory>
+								${project.basedir}/../cucumberxtexteditor.tests/src-gen/</directory>
 							<includes>
 								<include>**/*</include>
 							</includes>
 						</fileset>
 						<fileset>
 							<directory>
-								${basedir}/../cucumberxtexteditor.ide/src-gen/</directory>
+								${project.basedir}/../cucumberxtexteditor.ide/src-gen/</directory>
 							<includes>
 								<include>**/*</include>
 							</includes>
 						</fileset>
 						<fileset>
 							<directory>
-								${basedir}/../cucumberxtexteditor.ui/src-gen/</directory>
+								${project.basedir}/../cucumberxtexteditor.ui/src-gen/</directory>
 							<includes>
 								<include>**/*</include>
 							</includes>
 						</fileset>
 						<fileset>
 							<directory>
-								${basedir}/../cucumberxtexteditor.ui.tests/src-gen/</directory>
+								${project.basedir}/../cucumberxtexteditor.ui.tests/src-gen/</directory>
 							<includes>
 								<include>**/*</include>
 							</includes>
 						</fileset>
 						<fileset>
-							<directory>${basedir}/model/generated/</directory>
+							<directory>
+								${project.basedir}/../cucumberxtexteditor/lib/</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
+						</fileset>
+						<fileset>
+							<directory>${project.basedir}/model/generated/</directory>
 						</fileset>
 					</filesets>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.6.1</version>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.farhan</groupId>
+									<artifactId>mbt-validator</artifactId>
+									<version>1.0-SNAPSHOT</version>
+									<overWrite>true</overWrite>
+								</artifactItem>
+							</artifactItems>
+							<!-- other configurations here -->
+							<outputDirectory>
+								${project.basedir}/../cucumberxtexteditor/lib/</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 		<pluginManagement>
@@ -132,5 +166,11 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
+	<dependencies>
+		<dependency>
+			<groupId>org.farhan</groupId>
+			<artifactId>mbt-validator</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>
