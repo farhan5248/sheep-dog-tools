@@ -8,15 +8,23 @@ import org.junit.jupiter.api.Assertions;
 
 public abstract class FileObject extends TestObject {
 
-	public void setBaseDir(String project) {
+	@Override
+	public FileObject execute() {
+		// TODO this doesn't make sense to be here, will refactor later
+		return null;
+	}
+
+	public FileObject setBaseDir(String project) {
 		Project.baseDir = "target/src-gen/" + project + "/";
+		return this;
 	}
 
-	public void setPath(String path) {
+	public FileObject setPath(String path) {
 		keyValue.put("path", path);
+		return this;
 	}
 
-	public void assertExists() {
+	public FileObject assertExists() {
 
 		try {
 			File theFile = new File(Project.baseDir + keyValue.get("path"));
@@ -24,9 +32,10 @@ public abstract class FileObject extends TestObject {
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step");
 		}
+		return this;
 	}
 
-	public void setContents(String docString) {
+	public FileObject setContents(String docString) {
 
 		try {
 			File aFile = new File(Project.baseDir + keyValue.get("path"));
@@ -34,9 +43,10 @@ public abstract class FileObject extends TestObject {
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step");
 		}
+		return this;
 	}
 
-	public void assertContents(String docString) {
+	public FileObject assertContents(String docString) {
 		try {
 			File aFile = new File(Project.baseDir + keyValue.get("path"));
 			String contents = Utilities.readFile(aFile);
@@ -44,5 +54,6 @@ public abstract class FileObject extends TestObject {
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step");
 		}
+		return this;
 	}
 }

@@ -1,12 +1,25 @@
-package org.farhan.objects.blah;
+package org.farhan.stepdefs.blah;
 
-import java.util.HashMap;
-import io.cucumber.java.PendingException;
-import org.farhan.common.blah;
+import io.cucumber.java.en.Given;
+import io.cucumber.datatable.DataTable;
+import org.farhan.common.TestSteps;
+import org.farhan.common.objects.BlahFactory;
+import org.farhan.common.stepdefs.TestSteps;
 
-public class blahObjectPage extends blah {
+public class BlahObjectPageSteps extends TestSteps {
 
-    public void assertIsInvalid() {
-        throw new PendingException();
+    @Given("The blah application, Object page is invalid")
+    public void theBlahApplicationObjectPageIsInvalid() {
+        BlahFactory.get("BlahObjectPage").assertIsInvalid();
+    }
+
+    @Given("The blah application, Object page, Top section is as follows")
+    public void theBlahApplicationObjectPageTopSectionIsAsFollows(DataTable dataTable) {
+        BlahFactory.get("BlahObjectPage").assertAttributes(dataTable, "Top");
+    }
+
+    @Given("The blah application, Object page is empty")
+    public void theBlahApplicationObjectPageIsEmpty() {
+        BlahFactory.get("BlahObjectPage").assertIsEmpty();
     }
 }

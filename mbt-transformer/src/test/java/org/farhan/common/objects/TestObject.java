@@ -15,31 +15,34 @@ public abstract class TestObject {
 	protected Map<String, String> keyValue = new HashMap<String, String>();
 	protected Object object;
 
-	public void assertAttributes(DataTable dataTable) {
-		processAttributes(dataTable, "assert", "", false);
+	public abstract TestObject execute();
+
+	public TestObject assertAttributes(DataTable dataTable) {
+		return processAttributes(dataTable, "assert", "", false);
 	}
 
-	public void setAttributes(DataTable dataTable) {
-		processAttributes(dataTable, "set", "", false);
+	public TestObject setAttributes(DataTable dataTable) {
+		return processAttributes(dataTable, "set", "", false);
 	}
 
-	public void assertAttributes(DataTable dataTable, String sectionName) {
-		processAttributes(dataTable, "assert", sectionName, false);
+	public TestObject assertAttributes(DataTable dataTable, String sectionName) {
+		return processAttributes(dataTable, "assert", sectionName, false);
 	}
 
-	public void setAttributes(DataTable dataTable, String sectionName) {
-		processAttributes(dataTable, "set", sectionName, false);
+	public TestObject setAttributes(DataTable dataTable, String sectionName) {
+		return processAttributes(dataTable, "set", sectionName, false);
 	}
 
-	public void assertAttributes(DataTable dataTable, String sectionName, boolean negativeTest) {
-		processAttributes(dataTable, "assert", sectionName, negativeTest);
+	public TestObject assertAttributes(DataTable dataTable, String sectionName, boolean negativeTest) {
+		return processAttributes(dataTable, "assert", sectionName, negativeTest);
 	}
 
-	public void setAttributes(DataTable dataTable, String sectionName, boolean negativeTest) {
-		processAttributes(dataTable, "set", sectionName, negativeTest);
+	public TestObject setAttributes(DataTable dataTable, String sectionName, boolean negativeTest) {
+		return processAttributes(dataTable, "set", sectionName, negativeTest);
 	}
 
-	private void processAttributes(DataTable dataTable, String operation, String sectionName, boolean negativeTest) {
+	private TestObject processAttributes(DataTable dataTable, String operation, String sectionName,
+			boolean negativeTest) {
 		List<List<String>> data = dataTable.asLists();
 
 		// TODO Remember to have Parameter/Value table vs multi-column header table
@@ -54,21 +57,24 @@ public abstract class TestObject {
 			}
 			try {
 				if (negativeTest) {
-					object.getClass().getMethod(operation + cleanName(sectionName) + "Exists", HashMap.class).invoke(object, row);
+					object.getClass().getMethod(operation + cleanName(sectionName) + "Exists", HashMap.class)
+							.invoke(object, row);
 
 				} else {
 					for (int j = 0; j < data.get(i).size(); j++) {
-						object.getClass().getMethod(operation + cleanName(sectionName) + cleanName(headers.get(j)), HashMap.class)
-								.invoke(object, row);
+						object.getClass().getMethod(operation + cleanName(sectionName) + cleanName(headers.get(j)),
+								HashMap.class).invoke(object, row);
 					}
 				}
 			} catch (Exception e) {
 				Assertions.fail(Utilities.getStackTraceAsString(e));
 			}
 		}
+		return this;
 	}
 
 	private String cleanName(String name) {
 		return name.replaceAll("[ \\-\\(\\)/]", "");
 	}
+
 }

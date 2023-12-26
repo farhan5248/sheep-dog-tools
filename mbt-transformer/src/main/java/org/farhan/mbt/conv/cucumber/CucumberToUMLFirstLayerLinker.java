@@ -81,7 +81,6 @@ public class CucumberToUMLFirstLayerLinker extends ToUMLFirstLayerLinker {
 
 			String methodName = prefix + "Attributes";
 			Message nextLayerMessage = MessageFactory.getMessage(nextLayerInteraction, nextLayerClass, methodName);
-			ArgumentFactory.getArgument(nextLayerMessage, "object", nextLayerClass.getName(), true);
 			if (getFirstArgument(m).contentEquals("docString")) {
 				ArgumentFactory.getArgument(nextLayerMessage, "contents", "docString", true);
 			} else {

@@ -1,6 +1,15 @@
-package org.farhan.objects.claimproject;
+package org.farhan.common.objects;
 
-import org.farhan.common.objects.TestObject;
+import org.farhan.objects.claimproject.Blah2JsonRequestFile;
+import org.farhan.objects.claimproject.Blah2JsonRequestStepsFile;
+import org.farhan.objects.claimproject.BlahDataTablePageFile;
+import org.farhan.objects.claimproject.BlahDataTablePageStepsFile;
+import org.farhan.objects.claimproject.BlahDocStringPageFile;
+import org.farhan.objects.claimproject.BlahDocStringsPageStepsFile;
+import org.farhan.objects.claimproject.BlahObjectPageFile;
+import org.farhan.objects.claimproject.BlahObjectPageStepsFile;
+import org.farhan.objects.claimproject.PSTFile;
+import org.farhan.objects.claimproject.ProcessFile;
 
 public class ClaimProjectFactory {
 
@@ -16,7 +25,7 @@ public class ClaimProjectFactory {
 	private static BlahDocStringPageFile blahDocStringPageFile;
 	private static BlahObjectPageFile blahObjectPageFile;
 
-	public static TestObject get(String className) {
+	public static FileObject get(String className) {
 		if (className.contentEquals("PSTFile")) {
 			if (pstFile == null) {
 				pstFile = new PSTFile();

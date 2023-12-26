@@ -2,6 +2,7 @@ package org.farhan.objects.claimproject;
 
 import java.util.HashMap;
 
+import org.farhan.common.objects.FileObject;
 import org.farhan.common.objects.UMLFile;
 
 public class PSTFile extends UMLFile {
@@ -10,135 +11,166 @@ public class PSTFile extends UMLFile {
 		object = this;
 	}
 
-	public void setPath(String path) {
+	public FileObject setPath(String path) {
 		keyValue.put("path", path);
+		return this;
 	}
 
-	public void assertExists() {
+	public FileObject assertExists() {
 		keyValue.put("model", "pst");
 		super.assertExists();
+		return this;
 	}
 
-	public void assertClassClassName(HashMap<String, String> row) {
+	public FileObject assertClassClassName(HashMap<String, String> row) {
 		assertClassExists(row.get("Class Name"));
+		return this;
 	}
 
-	public void assertClassCommentsClassName(HashMap<String, String> row) {
+	public FileObject assertClassCommentsClassName(HashMap<String, String> row) {
 		assertClassExists(row.get("Class Name"));
+		return this;
 	}
 
-	public void assertClassCommentsComment(HashMap<String, String> row) {
+	public FileObject assertClassCommentsComment(HashMap<String, String> row) {
 		assertClassCommentValue(row.get("Class Name"), row.get("Comment"));
+		return this;
 	}
 
-	public void assertClassElementImportsClassName(HashMap<String, String> row) {
+	public FileObject assertClassElementImportsClassName(HashMap<String, String> row) {
 		assertClassExists(row.get("Class Name"));
+		return this;
 	}
 
-	public void assertClassElementImportsAlias(HashMap<String, String> row) {
+	public FileObject assertClassElementImportsAlias(HashMap<String, String> row) {
 		assertClassAliasValue(row.get("Class Name"), row.get("Alias"));
+		return this;
 	}
 
-	public void assertClassElementImportsImportedElement(HashMap<String, String> row) {
+	public FileObject assertClassElementImportsImportedElement(HashMap<String, String> row) {
 		assertClassImportedElementValue(row.get("Class Name"), row.get("Imported Element"));
+		return this;
 	}
 
-	public void assertClassPropertiesClassName(HashMap<String, String> row) {
+	public FileObject assertClassPropertiesClassName(HashMap<String, String> row) {
 		assertClassExists(row.get("Class Name"));
+		return this;
 	}
 
-	public void assertClassPropertiesPropertyName(HashMap<String, String> row) {
+	public FileObject assertClassPropertiesPropertyName(HashMap<String, String> row) {
 		assertClassPropertyNameExists(row.get("Class Name"), row.get("Property Name"));
+		return this;
 	}
 
-	public void assertClassPropertiesPropertyType(HashMap<String, String> row) {
+	public FileObject assertClassPropertiesPropertyType(HashMap<String, String> row) {
 		assertClassPropertyTypeValue(row.get("Class Name"), row.get("Property Name"), row.get("Property Type"));
+		return this;
 	}
 
-	public void assertClassInteractionsClassName(HashMap<String, String> row) {
+	public FileObject assertClassInteractionsClassName(HashMap<String, String> row) {
 		assertClassExists(row.get("Class Name"));
+		return this;
 	}
 
-	public void assertClassInteractionsInteractionName(HashMap<String, String> row) {
+	public FileObject assertClassInteractionsInteractionName(HashMap<String, String> row) {
 		assertInteractionNameExists(row.get("Class Name"), row.get("Interaction Name"));
+		return this;
 	}
 
-	public void assertInteractionParametersInteractionName(HashMap<String, String> row) {
+	public FileObject assertInteractionParametersInteractionName(HashMap<String, String> row) {
 		assertInteractionNameExists(row.get("Interaction Name"));
+		return this;
 	}
 
-	public void assertInteractionParametersParameterName(HashMap<String, String> row) {
+	public FileObject assertInteractionParametersParameterName(HashMap<String, String> row) {
 		assertInteractionParameterNameExists(row.get("Interaction Name"), row.get("Parameter Name"));
+		return this;
 	}
 
-	public void assertInteractionCommentsInteractionName(HashMap<String, String> row) {
+	public FileObject assertInteractionCommentsInteractionName(HashMap<String, String> row) {
 		assertInteractionNameExists(row.get("Interaction Name"));
+		return this;
 	}
 
-	public void assertInteractionCommentsComment(HashMap<String, String> row) {
+	public FileObject assertInteractionCommentsComment(HashMap<String, String> row) {
 		assertInteractionCommentValue(row.get("Interaction Name"), row.get("Comment"));
+		return this;
 	}
 
-	public void assertInteractionAnnotationsInteractionName(HashMap<String, String> row) {
+	public FileObject assertInteractionAnnotationsInteractionName(HashMap<String, String> row) {
 		assertInteractionNameExists(row.get("Interaction Name"));
+		return this;
 	}
 
-	public void assertInteractionAnnotationsAnnotationName(HashMap<String, String> row) {
+	public FileObject assertInteractionAnnotationsAnnotationName(HashMap<String, String> row) {
 		assertInteractionAnnotationNameExists(row.get("Interaction Name"), row.get("Annotation Name"));
+		return this;
 	}
 
-	public void assertInteractionAnnotationsAnnotationDetail(HashMap<String, String> row) {
+	public FileObject assertInteractionAnnotationsAnnotationDetail(HashMap<String, String> row) {
 		assertInteractionAnnotationDetailExists(row.get("Interaction Name"), row.get("Annotation Name"),
 				row.get("Annotation Detail"));
+		return this;
 	}
 
-	public void assertInteractionLifelinesInteractionName(HashMap<String, String> row) {
+	public FileObject assertInteractionLifelinesInteractionName(HashMap<String, String> row) {
 		assertInteractionNameExists(row.get("Interaction Name"));
+		return this;
 	}
 
-	public void assertInteractionLifelinesLifelineName(HashMap<String, String> row) {
+	public FileObject assertInteractionLifelinesLifelineName(HashMap<String, String> row) {
 		assertInteractionLifelineExists(row.get("Interaction Name"), row.get("Lifeline Name"));
+		return this;
 	}
 
-	public void assertInteractionLifelinesLifelineRepresents(HashMap<String, String> row) {
+	public FileObject assertInteractionLifelinesLifelineRepresents(HashMap<String, String> row) {
 		assertInteractionLifelineRepresentsValue(row.get("Interaction Name"), row.get("Lifeline Name"),
 				row.get("Lifeline Represents"));
+		return this;
 	}
 
-	public void assertInteractionMessagesInteractionName(HashMap<String, String> row) {
+	public FileObject assertInteractionMessagesInteractionName(HashMap<String, String> row) {
 		assertInteractionNameExists(row.get("Interaction Name"));
+		return this;
 	}
 
-	public void assertInteractionMessagesMessage(HashMap<String, String> row) {
+	public FileObject assertInteractionMessagesMessage(HashMap<String, String> row) {
 		assertInteractionMessageValue(row.get("Interaction Name"), row.get("Message"));
+		return this;
 	}
 
-	public void assertInteractionMessagesArgumentName(HashMap<String, String> row) {
+	public FileObject assertInteractionMessagesArgumentName(HashMap<String, String> row) {
 		assertInteractionMessageArgumentNameExists(row.get("Interaction Name"), row.get("Message"),
 				row.get("Argument Name"));
+		return this;
 	}
 
-	public void assertInteractionMessagesAnnotationName(HashMap<String, String> row) {
+	public FileObject assertInteractionMessagesAnnotationName(HashMap<String, String> row) {
 		assertInteractionMessageAnnotationNameExists(row.get("Interaction Name"), row.get("Message"),
 				row.get("Annotation Name"));
+		return this;
 	}
 
-	public void assertInteractionMessagesAnnotationDetail(HashMap<String, String> row) {
+	public FileObject assertInteractionMessagesAnnotationDetail(HashMap<String, String> row) {
 		assertInteractionMessageAnnotationDetailExists(row.get("Interaction Name"), row.get("Message"),
 				row.get("Argument Name"), row.get("Annotation Detail"));
+		return this;
 	}
 
-	public void assertInteractionMessageOccurencesInteractionName(HashMap<String, String> row) {
+	public FileObject assertInteractionMessageOccurencesInteractionName(HashMap<String, String> row) {
 		assertInteractionNameExists(row.get("Interaction Name"));
+		return this;
 	}
 
-	public void assertInteractionMessageOccurencesMessageOccurence(HashMap<String, String> row) {
+	public FileObject assertInteractionMessageOccurencesMessageOccurence(HashMap<String, String> row) {
 		assertInteractionMessageOccurenceExists(row.get("Interaction Name"), row.get("Message Occurence"));
+		return this;
 	}
 
-	public void assertInteractionMessageOccurencesLifelineCovered(HashMap<String, String> row) {
+	public FileObject assertInteractionMessageOccurencesLifelineCovered(HashMap<String, String> row) {
 		assertInteractionLifelineCoveredValue(row.get("Interaction Name"), row.get("Message Occurence"),
 				row.get("Lifeline Covered"));
+		return this;
 	}
 
 }

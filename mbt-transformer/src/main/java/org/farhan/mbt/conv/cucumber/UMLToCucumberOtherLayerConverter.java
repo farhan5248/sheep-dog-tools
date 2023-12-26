@@ -2,6 +2,8 @@ package org.farhan.mbt.conv.cucumber;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.uml2.uml.Behavior;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.ElementImport;
@@ -56,18 +58,25 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 	@Override
 	protected void convertFromImports(Class layerClass) throws Exception {
 		for (ElementImport ei : layerClass.getElementImports()) {
-			String qualifiedName = ei.getImportedElement().getQualifiedName();
-			String javaPath = CucumberNameConverter.convertQualifiedNameToJavaPath(qualifiedName);
-			String packageName = convertJavaPathToJavaPackage(javaPath).replace("pst.", "");
-			aJavaFile.javaClass.addImport(packageName);
+			Class importedClass = (Class) ei.getImportedElement();
+			String qualifiedName = importedClass.getQualifiedName();
+			// If a third layer class is being referenced from the second layer, use its
+			// factory instead
+			if (isThirdLayer(importedClass)) {
+				String factoryName = getFactoryName(qualifiedName);
+				aJavaFile.javaClass.addImport("org.farhan.common.objects." + factoryName);
+			} else {
+				String javaPath = CucumberNameConverter.convertQualifiedNameToJavaPath(qualifiedName);
+				String packageName = convertJavaPathToJavaPackage(javaPath).replace("pst.", "");
+				aJavaFile.javaClass.addImport(packageName);
+			}
 		}
 		if (isSecondLayer(layerClass)) {
 			// TODO add these when the UML model is being created so that only the loop of
 			// imports is used
 			aJavaFile.javaClass.addImport("io.cucumber.java.en.Given");
-			aJavaFile.javaClass.addImport("io.cucumber.java.PendingException");
 			aJavaFile.javaClass.addImport("io.cucumber.datatable.DataTable");
-			aJavaFile.javaClass.addImport("org.farhan.common.TestSteps");
+			aJavaFile.javaClass.addImport("org.farhan.common.stepdefs.TestSteps");
 		} else if (isThirdLayer(layerClass)) {
 			aJavaFile.javaClass.addImport("java.util.HashMap");
 			aJavaFile.javaClass.addImport("io.cucumber.java.PendingException");
@@ -105,13 +114,14 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 	@Override
 	protected void convertFromInteractionMessages(Interaction anInteraction, Object stepList) throws Exception {
 		BlockStmt body = (BlockStmt) stepList;
-		if (anInteraction.getMessages().size() == 0) {
-			body.addStatement("throw new PendingException();");
-		} else {
-
+		if (isSecondLayer((Class) anInteraction.getOwner())) {
 			for (Message m : anInteraction.getMessages()) {
+				// TODO this needs to first set the factory and then keep appending methods to
+				// it. Don't create the factory in convertFromMessage again and again.
 				convertFromMessage(m, body);
 			}
+		} else {
+			body.addStatement("throw new PendingException();");
 		}
 	}
 
@@ -120,10 +130,10 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 		BlockStmt body = (BlockStmt) aStepList;
 		String step = ";";
 		Interaction nextLayerMethod = (Interaction) m.getSignature();
-		String resource;
 		if (nextLayerMethod != null) {
-			resource = ((Class) nextLayerMethod.getOwner()).getName();
-			step = resource + "." + m.getName();
+			Class className = (Class) nextLayerMethod.getOwner();
+			String factoryName = getFactoryName(className.getQualifiedName());
+			step = factoryName + ".get(\"" + className.getName() + "\")." + m.getName();
 		}
 		step += "(";
 		for (ValueSpecification vs : m.getArguments()) {
@@ -157,6 +167,14 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 	protected String convertImportToClassQualifiedName(String importName) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	private String getFactoryName(String qualifiedName) {
+		String factoryName = qualifiedName;
+		factoryName = factoryName.replace("pst::objects::", "");
+		factoryName = factoryName.split("::")[0];
+		factoryName = StringUtils.capitalize(factoryName) + "Factory";
+		return factoryName;
 	}
 
 	private void convertAnnotation(Interaction anInteraction, MethodDeclaration aMethod) {

@@ -15,12 +15,11 @@ Feature: Convert Step Definitions
       package org.farhan.stepdefs.blah;
       
       import io.cucumber.java.en.Given;
-      import io.cucumber.java.PendingException;
       import io.cucumber.datatable.DataTable;
       import org.farhan.common.TestSteps;
-      import org.farhan.common.BlahFactory;
+      import org.farhan.common.objects.BlahFactory;
       
-      public class blahObjectPageSteps extends TestSteps {
+      public class BlahObjectPageSteps extends TestSteps {
       
           @Given("The blah application, Object page is invalid")
           public void theBlahApplicationObjectPageIsInvalid() {
@@ -39,33 +38,33 @@ Feature: Convert Step Definitions
       | tag1 |
     And The mbt-transformer plugin, uml-to-cucumber goal is executed
 
+  @debug
   Scenario: Existing Java methods are preserved
     Then The claim project, src/test/java/org/farhan/stepdefs/blah/blahObjectPageSteps.java file will be as follows
       """
       package org.farhan.stepdefs.blah;
       
       import io.cucumber.java.en.Given;
-      import io.cucumber.java.PendingException;
       import io.cucumber.datatable.DataTable;
       import org.farhan.common.TestSteps;
-      import org.farhan.common.BlahFactory;
-      import org.farhan.objects.blah.blahObjectPage;
+      import org.farhan.common.objects.BlahFactory;
+      import org.farhan.common.stepdefs.TestSteps;
       
-      public class blahObjectPageSteps extends TestSteps {
+      public class BlahObjectPageSteps extends TestSteps {
       
           @Given("The blah application, Object page is invalid")
           public void theBlahApplicationObjectPageIsInvalid() {
-              BlahFactory.assertIsInvalid();
+              BlahFactory.get("BlahObjectPage").assertIsInvalid();
           }
       
           @Given("The blah application, Object page, Top section is as follows")
           public void theBlahApplicationObjectPageTopSectionIsAsFollows(DataTable dataTable) {
-              BlahFactory.assertAttributes(dataTable, "Top");
+              BlahFactory.get("BlahObjectPage").assertAttributes(dataTable, "Top");
           }
       
           @Given("The blah application, Object page is empty")
           public void theBlahApplicationObjectPageIsEmpty() {
-              blahObjectPage.assertIsEmpty();
+              BlahFactory.get("BlahObjectPage").assertIsEmpty();
           }
       }
       

@@ -33,17 +33,16 @@ Feature: Convert Step Definitions
       """
       package org.farhan.stepdefs.blah;
       
-      import org.farhan.objects.blah.blahDataTablePage;
+      import org.farhan.common.objects.BlahFactory;
       import io.cucumber.java.en.Given;
-      import io.cucumber.java.PendingException;
       import io.cucumber.datatable.DataTable;
-      import org.farhan.common.TestSteps;
+      import org.farhan.common.stepdefs.TestSteps;
       
-      public class blahDataTablePageSteps extends TestSteps {
+      public class BlahDataTablePageSteps extends TestSteps {
       
           @Given("The blah application, DataTable page, Top section is as follows")
           public void theBlahApplicationDataTablePageTopSectionIsAsFollows(DataTable dataTable) {
-              blahDataTablePage.assertAttributes(blahDataTablePage, dataTable, "Top");
+              BlahFactory.get("BlahDataTablePage").assertAttributes(dataTable, "Top");
           }
       }
       
@@ -54,17 +53,16 @@ Feature: Convert Step Definitions
       """
       package org.farhan.stepdefs.blah;
       
-      import org.farhan.objects.blah.blahDocStringPage;
+      import org.farhan.common.objects.BlahFactory;
       import io.cucumber.java.en.Given;
-      import io.cucumber.java.PendingException;
       import io.cucumber.datatable.DataTable;
-      import org.farhan.common.TestSteps;
+      import org.farhan.common.stepdefs.TestSteps;
       
-      public class blahDocStringPageSteps extends TestSteps {
+      public class BlahDocStringPageSteps extends TestSteps {
       
           @Given("The blah application, DocString page is as follows")
           public void theBlahApplicationDocStringPageIsAsFollows(String docString) {
-              blahDocStringPage.assertAttributes(blahDocStringPage, docString);
+              BlahFactory.get("BlahDocStringPage").assertAttributes(docString);
           }
       }
       
@@ -75,20 +73,19 @@ Feature: Convert Step Definitions
       """
       package org.farhan.stepdefs.blah;
       
-      import org.farhan.objects.blah.blahObjectPage;
+      import org.farhan.common.objects.BlahFactory;
       import io.cucumber.java.en.Given;
-      import io.cucumber.java.PendingException;
       import io.cucumber.datatable.DataTable;
-      import org.farhan.common.TestSteps;
+      import org.farhan.common.stepdefs.TestSteps;
       
-      public class blahObjectPageSteps extends TestSteps {
+      public class BlahObjectPageSteps extends TestSteps {
       
           @Given("The blah application, Object page is empty")
           public void theBlahApplicationObjectPageIsEmpty() {
-              blahObjectPage.assertIsEmpty();
+              BlahFactory.get("BlahObjectPage").assertIsEmpty();
           }
       }
-      
+            
       """    
 
   Scenario: Non existing Java class creation with edge details
@@ -96,24 +93,23 @@ Feature: Convert Step Definitions
       """
       package org.farhan.stepdefs.blah2;
       
-      import org.farhan.objects.blah2.blah2JsonRequest;
+      import org.farhan.common.objects.Blah2Factory;
       import io.cucumber.java.en.Given;
-      import io.cucumber.java.PendingException;
       import io.cucumber.datatable.DataTable;
-      import org.farhan.common.TestSteps;
+      import org.farhan.common.stepdefs.TestSteps;
       
-      public class blah2JsonRequestSteps extends TestSteps {
+      public class Blah2JsonRequestSteps extends TestSteps {
       
           @Given("The blah2 service, Json request is executed with")
           public void theBlah2ServiceJsonRequestIsExecutedWith(DataTable dataTable) {
-              blah2JsonRequest.setAttributes(blah2JsonRequest, dataTable, "");
-              blah2JsonRequest.sendJsonRequest();
+              Blah2Factory.get("Blah2JsonRequest").setAttributes(dataTable, "");
+              Blah2Factory.get("Blah2JsonRequest").sendJsonRequest();
           }
       
           @Given("The blah2 service, Json request is invalid")
           public void theBlah2ServiceJsonRequestIsInvalid() {
-              blah2JsonRequest.setIsInvalid();
-              blah2JsonRequest.sendJsonRequest();
+              Blah2Factory.get("Blah2JsonRequest").setIsInvalid();
+              Blah2Factory.get("Blah2JsonRequest").sendJsonRequest();
           }
       }
       

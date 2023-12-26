@@ -1,5 +1,5 @@
 package org.farhan.common.objects;
 
-public class JavaFile extends FileObject {
+public abstract class JavaFile extends FileObject {
 
 }

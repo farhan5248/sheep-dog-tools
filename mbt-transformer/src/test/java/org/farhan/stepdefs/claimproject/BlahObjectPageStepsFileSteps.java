@@ -1,26 +1,20 @@
 package org.farhan.stepdefs.claimproject;
 
-import org.farhan.common.stepdefs.JavaSteps;
-import org.farhan.objects.claimproject.BlahObjectPageStepsFile;
-import org.farhan.objects.claimproject.ClaimProjectFactory;
+import org.farhan.common.objects.ClaimProjectFactory;
+import org.farhan.common.stepdefs.TestSteps;
+import io.cucumber.java.en.Given;
 
-import io.cucumber.java.en.And;
+public class BlahObjectPageStepsFileSteps extends TestSteps {
 
-public class BlahObjectPageStepsFileSteps extends JavaSteps {
-
-	@And("^The claim project, src/test/java/org/farhan/stepdefs/blah/blahObjectPageSteps.java file will be as follows$")
+	@Given("^The claim project, src/test/java/org/farhan/stepdefs/blah/blahObjectPageSteps.java file will be as follows$")
 	public void TheClaimProjectBlahObjectPageStepsJavaFileWillBeAsFollows(String docString) {
-		BlahObjectPageStepsFile o = (BlahObjectPageStepsFile) ClaimProjectFactory.get("BlahObjectPageStepsFile");
-		o.setBaseDir("claim");
-		o.setPath("src/test/java/org/farhan/stepdefs/blah/blahObjectPageSteps.java");
-		o.assertContents(docString);
+		ClaimProjectFactory.get("BlahObjectPageStepsFile").setBaseDir("claim")
+				.setPath("src/test/java/org/farhan/stepdefs/blah/blahObjectPageSteps.java").assertContents(docString);
 	}
 
-	@And("^The claim project, src/test/java/org/farhan/stepdefs/blah/blahObjectPageSteps.java file is as follows$")
+	@Given("^The claim project, src/test/java/org/farhan/stepdefs/blah/blahObjectPageSteps.java file is as follows$")
 	public void TheClaimProjectBlahObjectPageStepsJavaFileIsAsFollows(String docString) {
-		BlahObjectPageStepsFile o = (BlahObjectPageStepsFile) ClaimProjectFactory.get("BlahObjectPageStepsFile");
-		o.setBaseDir("claim");
-		o.setPath("src/test/java/org/farhan/stepdefs/blah/blahObjectPageSteps.java");
-		o.setContents(docString);
+		ClaimProjectFactory.get("BlahObjectPageStepsFile").setBaseDir("claim")
+				.setPath("src/test/java/org/farhan/stepdefs/blah/blahObjectPageSteps.java").setContents(docString);
 	}
 }

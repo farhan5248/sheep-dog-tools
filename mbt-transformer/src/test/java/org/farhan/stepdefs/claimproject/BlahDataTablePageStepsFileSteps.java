@@ -1,18 +1,15 @@
 package org.farhan.stepdefs.claimproject;
 
-import org.farhan.common.stepdefs.JavaSteps;
-import org.farhan.objects.claimproject.BlahDataTablePageStepsFile;
-import org.farhan.objects.claimproject.ClaimProjectFactory;
+import org.farhan.common.objects.ClaimProjectFactory;
+import org.farhan.common.stepdefs.TestSteps;
+import io.cucumber.java.en.Given;
 
-import io.cucumber.java.en.And;
+public class BlahDataTablePageStepsFileSteps extends TestSteps {
 
-public class BlahDataTablePageStepsFileSteps extends JavaSteps {
-
-	@And("^The claim project, src/test/java/org/farhan/stepdefs/blah/blahDataTablePageSteps.java file will be as follows$")
+	@Given("^The claim project, src/test/java/org/farhan/stepdefs/blah/blahDataTablePageSteps.java file will be as follows$")
 	public void TheClaimProjectBlahDataTablePageStepsJavaFileIsAsFollows(String docString) {
-		BlahDataTablePageStepsFile o = (BlahDataTablePageStepsFile) ClaimProjectFactory.get("BlahDataTablePageStepsFile");
-		o.setBaseDir("claim");
-		o.setPath("src/test/java/org/farhan/stepdefs/blah/blahDataTablePageSteps.java");
-		o.assertContents(docString);
+		ClaimProjectFactory.get("BlahDataTablePageStepsFile").setBaseDir("claim")
+				.setPath("src/test/java/org/farhan/stepdefs/blah/blahDataTablePageSteps.java")
+				.assertContents(docString);
 	}
 }

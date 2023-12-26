@@ -35,19 +35,19 @@ Feature: Convert Scenario
   Scenario: Scenario step
     And The target/uml/pst.uml file, Class Element Imports section is as follows
       | Class Name           | Alias               | Imported Element                         |
-      | specs::dept::process | blahObjectPageSteps | pst::stepdefs::blah::blahObjectPageSteps |
+      | specs::dept::process | blahObjectPageSteps | pst::stepdefs::blah::BlahObjectPageSteps |
     And The target/uml/pst.uml file, Class Properties section is as follows
       | Class Name           | Property Name       | Property Type                            |
       | specs::dept::process | this                | pst::specs::dept::process                |
-      | specs::dept::process | blahObjectPageSteps | pst::stepdefs::blah::blahObjectPageSteps |
+      | specs::dept::process | BlahObjectPageSteps | pst::stepdefs::blah::BlahObjectPageSteps |
     And The target/uml/pst.uml file, Interaction Messages section is as follows
       | Interaction Name             | Message                                              |
       | specs::dept::process::Submit | The blah application, something/Object page is empty |
     And The target/uml/pst.uml file, Interaction Lifelines section is as follows
       | Interaction Name             | Lifeline Name       | Lifeline Represents                            |
       | specs::dept::process::Submit | this                | pst::specs::dept::process::this                |
-      | specs::dept::process::Submit | blahObjectPageSteps | pst::specs::dept::process::blahObjectPageSteps |
+      | specs::dept::process::Submit | BlahObjectPageSteps | pst::specs::dept::process::BlahObjectPageSteps |
     And The target/uml/pst.uml file, Interaction Message Occurences section is as follows
       | Interaction Name             | Message Occurence | Lifeline Covered    |
       | specs::dept::process::Submit | SendEvent         | this                |
-      | specs::dept::process::Submit | ReceiveEvent      | blahObjectPageSteps |
+      | specs::dept::process::Submit | ReceiveEvent      | BlahObjectPageSteps |

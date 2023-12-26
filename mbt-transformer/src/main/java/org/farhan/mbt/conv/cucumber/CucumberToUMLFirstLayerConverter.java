@@ -21,6 +21,7 @@ import org.farhan.cucumber.Tag;
 import org.farhan.mbt.conv.core.ConvertibleFile;
 import org.farhan.mbt.conv.core.Project;
 import org.farhan.mbt.conv.core.ToUMLFirstLayerConverter;
+import org.farhan.mbt.conv.core.Utilities;
 import org.farhan.mbt.conv.core.Validator;
 import org.farhan.mbt.conv.uml.AnnotationFactory;
 import org.farhan.mbt.conv.uml.ArgumentFactory;
@@ -192,8 +193,8 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	private String getSecondLayerClassName() {
 		String secondLayerClassName = "";
 		secondLayerClassName = UMLNameConverter.filterClassName(getFSMName() + getFSMState() + "Steps");
-		secondLayerClassName = "pst::" + Project.secondLayerPackageName + "::" + getFSMName() + "::"
-				+ secondLayerClassName;
+		secondLayerClassName = "pst::" + Project.secondLayerPackageName + "::"
+				+ Utilities.toLowerCamelCase(getFSMName()) + "::" + secondLayerClassName;
 		return secondLayerClassName;
 	}
 

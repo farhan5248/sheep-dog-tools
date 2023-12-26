@@ -1,5 +1,5 @@
 package org.farhan.common.objects;
 
-public class GoalObject extends TestObject {
+public abstract class GoalObject extends TestObject {
 
 }

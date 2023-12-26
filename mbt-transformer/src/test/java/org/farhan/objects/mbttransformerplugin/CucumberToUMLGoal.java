@@ -20,7 +20,7 @@ public class CucumberToUMLGoal extends GoalObject {
 		Project.tags = row.get("Tags");
 	}
 
-	public void execute() {
+	public CucumberToUMLGoal execute() {
 
 		try {
 			ConvertCucumberToUMLPSTMojo mojo = new ConvertCucumberToUMLPSTMojo();
@@ -28,6 +28,7 @@ public class CucumberToUMLGoal extends GoalObject {
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
 		}
+		return this;
 	}
 
 }

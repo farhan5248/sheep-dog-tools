@@ -1,20 +1,16 @@
 package org.farhan.stepdefs.mbttransformerplugin;
 
-import org.farhan.common.stepdefs.GoalSteps;
-import org.farhan.objects.mbttransformerplugin.CucumberToUMLGoal;
-import org.farhan.objects.mbttransformerplugin.MBTTransformerPluginFactory;
-
+import org.farhan.common.objects.MBTTransformerPluginFactory;
+import org.farhan.common.stepdefs.TestSteps;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 
-public class CucumberToUMLGoalSteps extends GoalSteps {
+public class CucumberToUMLGoalSteps extends TestSteps {
 
-	@And("^The mbt-transformer plugin, cucumber-to-uml goal is executed with$")
+	@Given("^The mbt-transformer plugin, cucumber-to-uml goal is executed with$")
 	public void TheMbtTransformerPluginCucumberToUmlGoalIsExecutedWith(DataTable dataTable) {
 
-		CucumberToUMLGoal o = (CucumberToUMLGoal) MBTTransformerPluginFactory.get("CucumberToUMLGoal");
-		MBTTransformerPluginFactory.get("CucumberToUMLGoal").setAttributes(dataTable);
-		o.execute();
+		MBTTransformerPluginFactory.get("CucumberToUMLGoal").setAttributes(dataTable).execute();
 	}
 
 }
