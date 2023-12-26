@@ -2,9 +2,8 @@ package org.farhan.stepdefs.blah;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.datatable.DataTable;
-import org.farhan.common.TestSteps;
-import org.farhan.common.objects.BlahFactory;
 import org.farhan.common.stepdefs.TestSteps;
+import org.farhan.common.objects.BlahFactory;
 
 public class BlahObjectPageSteps extends TestSteps {
 

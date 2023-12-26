@@ -83,6 +83,8 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 			aJavaFile.javaClass.addImport(
 					"org.farhan.common." + UMLNameConverter.getOtherLayerAppName(layerClass.getQualifiedName()));
 		}
+		
+		System.out.println();
 	}
 
 	@Override
@@ -93,7 +95,6 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 	@Override
 	protected void convertFromBehaviours(Class layerClass) throws Exception {
 		for (Behavior aBehavior : layerClass.getOwnedBehaviors()) {
-
 			if (aBehavior instanceof Interaction) {
 				Interaction anInteraction = (Interaction) aBehavior;
 				if (!anInteraction.getName().endsWith("Attributes")) {
@@ -171,7 +172,8 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 
 	private String getFactoryName(String qualifiedName) {
 		String factoryName = qualifiedName;
-		factoryName = factoryName.replace("pst::objects::", "");
+		factoryName = factoryName
+				.replace(UMLProject.theSystem.getName() + "::" + UMLProject.thirdLayerPackageName + "::", "");
 		factoryName = factoryName.split("::")[0];
 		factoryName = StringUtils.capitalize(factoryName) + "Factory";
 		return factoryName;

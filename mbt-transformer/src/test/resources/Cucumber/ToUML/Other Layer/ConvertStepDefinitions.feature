@@ -10,13 +10,13 @@ Feature: Convert Step Definitions
       
           Given The blah application, Object page is empty
       """
-    And The claim project, src/test/java/org/farhan/stepdefs/blah/blahObjectPageSteps.java file is as follows
+    And The claim project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is as follows
       """
       package org.farhan.stepdefs.blah;
       
       import io.cucumber.java.en.Given;
       import io.cucumber.datatable.DataTable;
-      import org.farhan.common.TestSteps;
+      import org.farhan.common.stepdefs.TestSteps;
       import org.farhan.common.objects.BlahFactory;
       
       public class BlahObjectPageSteps extends TestSteps {
@@ -40,15 +40,14 @@ Feature: Convert Step Definitions
 
   @debug
   Scenario: Existing Java methods are preserved
-    Then The claim project, src/test/java/org/farhan/stepdefs/blah/blahObjectPageSteps.java file will be as follows
+    Then The claim project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be as follows
       """
       package org.farhan.stepdefs.blah;
       
       import io.cucumber.java.en.Given;
       import io.cucumber.datatable.DataTable;
-      import org.farhan.common.TestSteps;
-      import org.farhan.common.objects.BlahFactory;
       import org.farhan.common.stepdefs.TestSteps;
+      import org.farhan.common.objects.BlahFactory;
       
       public class BlahObjectPageSteps extends TestSteps {
       

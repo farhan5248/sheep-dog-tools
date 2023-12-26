@@ -54,8 +54,13 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 			}
 
 			for (ImportDeclaration i : aCucumberJavaFile.javaClass.getImports()) {
-				String anImportName = convertImportNameToQualifiedName(i.getNameAsString());
-				ElementImport ei = ElementImportFactory.getElementImport(layerClass, anImportName);
+				i.getNameAsString();
+				if (!i.getNameAsString().endsWith("Factory")) {
+					// Don't include the factory import because it's a detail of dependency
+					// injection is implemented
+					String anImportName = convertImportNameToQualifiedName(i.getNameAsString());
+					ElementImportFactory.getElementImport(layerClass, anImportName);
+				}
 			}
 		}
 	}
@@ -99,13 +104,14 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 	protected void convertToMessage(Interaction anInteraction, Object o) {
 		MethodCallExpr mce = (MethodCallExpr) o;
 		Class owningClass = (Class) anInteraction.getOwner();
-		// get the factory class
-		String importAlias = mce.getChildNodes().getFirst().getChildNodes().getFirst().toString();
-		// get the factory class import statement
-		ElementImport classImport = ElementImportFactory.getElementImportByAlias(owningClass, importAlias);
-		// get the full name
-		String qualifiedName = classImport.getImportedElement().getQualifiedName();
-		// get the class from the next layer
+		// TODO change this, don't store how the DI is achieved in the UML model
+		// TODO When creating the ElementImport, for now I'm assuming the class is
+		// directly under the app package name and not anywhere else. In the future make
+		// the search smarter and look through all the classes in the package. That will
+		// also assume that the class name is unique
+
+		String qualifiedName = getObjectQualifiedNameFromFactory(mce);
+		ElementImportFactory.getElementImport(owningClass, qualifiedName);
 		Class importedClass = ClassFactory.getClass(UMLProject.theSystem, qualifiedName);
 		Message theMessage = MessageFactory.getMessage(anInteraction, importedClass, mce.getName().asString());
 		mce.getArguments();
@@ -129,6 +135,18 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 			// value as the name
 			ArgumentFactory.getArgument(theMessage, arg, arg, true);
 		}
+	}
+
+	private String getObjectQualifiedNameFromFactory(MethodCallExpr mce) {
+		// Get the app name from the factory class
+		String appName = mce.getChildNodes().getFirst().getChildNodes().getFirst().toString().replace("Factory", "")
+				.toLowerCase();
+		// get the object name from the argument of the factory class
+		String objectName = mce.getChildNodes().getFirst().getChildNodes().getLast().toString().replace("\"", "");
+		// make the qualified name
+		String qualifiedName = UMLProject.theSystem.getName() + "::" + UMLProject.thirdLayerPackageName + "::" + appName
+				+ "::" + objectName;
+		return qualifiedName;
 	}
 
 	@Override

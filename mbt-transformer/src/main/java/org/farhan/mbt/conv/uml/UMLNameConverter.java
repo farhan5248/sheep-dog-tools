@@ -27,7 +27,9 @@ public class UMLNameConverter {
 
 	public static String getOtherLayerAppName(String qualifiedName) {
 		// TODO maybe a split and split is faster than a regex?
-		String packageName = Utilities.regexFind("pst::objects::([^:]+)", qualifiedName, 1, "UnknownApplication");
+		String packageName = Utilities.regexFind(
+				UMLProject.theSystem.getName() + "::" + UMLProject.thirdLayerPackageName + "::([^:]+)", qualifiedName,
+				1, "UnknownApplication");
 		// This name is in lower case but we need the upper case version so let's get it
 		// from the class name
 		String className = getName(qualifiedName);

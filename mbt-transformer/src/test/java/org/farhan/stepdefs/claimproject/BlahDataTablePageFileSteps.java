@@ -6,9 +6,9 @@ import io.cucumber.java.en.Given;
 
 public class BlahDataTablePageFileSteps extends TestSteps {
 
-	@Given("^The claim project, src/test/java/org/farhan/objects/blah/blahDataTablePage.java file will be as follows$")
+	@Given("^The claim project, src/test/java/org/farhan/objects/blah/BlahDataTablePage.java file will be as follows$")
 	public void TheClaimProjectBlahDataTablePageStepsJavaFileIsAsFollows(String docString) {
 		ClaimProjectFactory.get("BlahDataTablePageFile").setBaseDir("claim")
-				.setPath("src/test/java/org/farhan/objects/blah/blahDataTablePage.java").assertContents(docString);
+				.setPath("src/test/java/org/farhan/objects/blah/BlahDataTablePage.java").assertContents(docString);
 	}
 }

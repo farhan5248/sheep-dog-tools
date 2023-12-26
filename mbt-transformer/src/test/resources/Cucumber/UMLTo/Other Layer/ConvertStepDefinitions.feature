@@ -29,7 +29,7 @@ Feature: Convert Step Definitions
     And The mbt-transformer plugin, uml-to-cucumber goal is executed
 
   Scenario: Non existing Java class creation with vertice data tables
-    Then The claim project, src/test/java/org/farhan/stepdefs/blah/blahDataTablePageSteps.java file will be as follows
+    Then The claim project, src/test/java/org/farhan/stepdefs/blah/BlahDataTablePageSteps.java file will be as follows
       """
       package org.farhan.stepdefs.blah;
       
@@ -49,7 +49,7 @@ Feature: Convert Step Definitions
       """    
 
   Scenario: Non existing Java class creation with vertice doc strings
-    Then The claim project, src/test/java/org/farhan/stepdefs/blah/blahDocStringPageSteps.java file will be as follows
+    Then The claim project, src/test/java/org/farhan/stepdefs/blah/BlahDocStringPageSteps.java file will be as follows
       """
       package org.farhan.stepdefs.blah;
       
@@ -69,7 +69,7 @@ Feature: Convert Step Definitions
       """   
       
   Scenario: Non existing Java class creation with vertice details
-    Then The claim project, src/test/java/org/farhan/stepdefs/blah/blahObjectPageSteps.java file will be as follows
+    Then The claim project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be as follows
       """
       package org.farhan.stepdefs.blah;
       
@@ -85,11 +85,11 @@ Feature: Convert Step Definitions
               BlahFactory.get("BlahObjectPage").assertIsEmpty();
           }
       }
-            
+      
       """    
 
   Scenario: Non existing Java class creation with edge details
-    Then The claim project, src/test/java/org/farhan/stepdefs/blah2/blah2JsonRequestSteps.java file will be as follows
+    Then The claim project, src/test/java/org/farhan/stepdefs/blah2/Blah2JsonRequestSteps.java file will be as follows
       """
       package org.farhan.stepdefs.blah2;
       

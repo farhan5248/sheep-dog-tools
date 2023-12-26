@@ -29,15 +29,15 @@ Feature: Convert Step Objects
     And The mbt-transformer plugin, uml-to-cucumber goal is executed
 
   Scenario: Non existing Java class creation with vertice data tables
-    Then The claim project, src/test/java/org/farhan/objects/blah/blahDataTablePage.java file will be as follows
+    Then The claim project, src/test/java/org/farhan/objects/blah/BlahDataTablePage.java file will be as follows
       """
       package org.farhan.objects.blah;
       
       import java.util.HashMap;
       import io.cucumber.java.PendingException;
-      import org.farhan.common.blah;
+      import org.farhan.common.Blah;
       
-      public class blahDataTablePage extends blah {
+      public class BlahDataTablePage extends Blah {
       
           public void assertToph1(HashMap<String, String> keyMap) {
               throw new PendingException();
@@ -51,15 +51,15 @@ Feature: Convert Step Objects
       """    
 
   Scenario: Non existing Java class creation with vertice doc strings
-    Then The claim project, src/test/java/org/farhan/objects/blah/blahDocStringPage.java file will be as follows
+    Then The claim project, src/test/java/org/farhan/objects/blah/BlahDocStringPage.java file will be as follows
       """
       package org.farhan.objects.blah;
       
       import java.util.HashMap;
       import io.cucumber.java.PendingException;
-      import org.farhan.common.blah;
+      import org.farhan.common.Blah;
       
-      public class blahDocStringPage extends blah {
+      public class BlahDocStringPage extends Blah {
       
           public void assertContent(String contents) {
               throw new PendingException();
@@ -69,15 +69,15 @@ Feature: Convert Step Objects
       """
       
   Scenario: Non existing Java class creation with vertice details
-    Then The claim project, src/test/java/org/farhan/objects/blah/blahObjectPage.java file will be as follows
+    Then The claim project, src/test/java/org/farhan/objects/blah/BlahObjectPage.java file will be as follows
       """
       package org.farhan.objects.blah;
       
       import java.util.HashMap;
       import io.cucumber.java.PendingException;
-      import org.farhan.common.blah;
+      import org.farhan.common.Blah;
       
-      public class blahObjectPage extends blah {
+      public class BlahObjectPage extends Blah {
       
           public void assertIsEmpty() {
               throw new PendingException();
@@ -87,15 +87,15 @@ Feature: Convert Step Objects
       """
 
   Scenario: Non existing Java class creation with edge details
-    Then The claim project, src/test/java/org/farhan/objects/blah2/blah2JsonRequest.java file will be as follows
+    Then The claim project, src/test/java/org/farhan/objects/blah2/Blah2JsonRequest.java file will be as follows
       """
       package org.farhan.objects.blah2;
       
       import java.util.HashMap;
       import io.cucumber.java.PendingException;
-      import org.farhan.common.blah2;
+      import org.farhan.common.Blah2;
       
-      public class blah2JsonRequest extends blah2 {
+      public class Blah2JsonRequest extends Blah2 {
       
           public void seti1(HashMap<String, String> keyMap) {
               throw new PendingException();
