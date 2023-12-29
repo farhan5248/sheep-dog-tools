@@ -18,7 +18,12 @@ public class EdgeValidator {
 	private static String getGroup(String text, int group) {
 		Matcher m = Pattern.compile(EDGE_REGEX).matcher(text);
 		if (m.find()) {
-			return m.group(group).trim();
+			String temp = m.group(group);
+			if (temp != null) {
+				return temp.trim();
+			} else {
+				return "";
+			}
 		}
 		return null;
 	}
@@ -28,11 +33,21 @@ public class EdgeValidator {
 	}
 
 	public static boolean isContainerStep(String text) {
-		return getContainerName(text) != null;
+		String temp = getContainerName(text);
+		if (temp != null) {
+			return !temp.isEmpty();
+		} else {
+			return false;
+		}
 	}
 
 	public static boolean isEdge(String text) {
-		return getObjectType(text) != null;
+		String temp = getObjectType(text);
+		if (temp != null) {
+			return !temp.isEmpty();
+		} else {
+			return false;
+		}
 	}
 
 	public static String getContainerName(String text) {

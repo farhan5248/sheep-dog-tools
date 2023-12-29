@@ -105,7 +105,7 @@ Feature: Convert Step Objects
               throw new PendingException();
           }
       
-          public void sendJsonRequest() {
+          public void execute() {
               throw new PendingException();
           }
       

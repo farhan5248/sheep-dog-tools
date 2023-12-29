@@ -12,7 +12,18 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 public class Utilities {
+
+	public static String removeDelimiterAndCapitalize(String text, String delimiter) {
+		String[] nameParts = text.split(delimiter);
+		text = "";
+		for (String s : nameParts) {
+			text += StringUtils.capitalize(s);
+		}
+		return text;
+	}
 
 	public static ArrayList<File> recursivelyListFilesAndDirectories(File aDir, String extension) {
 		ArrayList<File> theFiles = new ArrayList<File>();

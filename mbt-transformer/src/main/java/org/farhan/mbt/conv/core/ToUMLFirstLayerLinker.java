@@ -12,7 +12,6 @@ public abstract class ToUMLFirstLayerLinker extends ToUMLLayerLinker {
 	protected void addNextLayerInteractionMessages(Interaction targetInteraction, Message m) {
 
 		if (Validator.validateStepText(m.getName())) {
-
 			if (VerticeValidator.isVertice(m.getName())) {
 				createNextLayerInteractionMessagesFromVerticeMessage(targetInteraction, m);
 			} else if (EdgeValidator.isEdge(m.getName())) {

@@ -1,4 +1,4 @@
-Feature: Convert Step Definitions
+Feature: Create Step Definitions
 
   Background: Create a feature file
     Given The claim project, src/test/cucumber/dept/process.feature file is as follows
@@ -48,7 +48,7 @@ Feature: Convert Step Definitions
   Scenario: Non existing UML interaction annotation creation
     And The target/uml/pst.uml file, Interaction Annotations section is as follows
       | Interaction Name                                                         | Annotation Name                                      |
-      | stepdefs::blah::blahObjectPageSteps::theBlahApplicationObjectPageIsEmpty | @Given("The blah application, Object page is empty") |
+      | stepdefs::blah::blahObjectPageSteps::theBlahApplicationObjectPageIsEmpty | @Given("^The blah application, Object page is empty$") |
 
   Scenario: Non existing UML interaction parameter creation
     And The target/uml/pst.uml file, Interaction Parameters section is as follows
@@ -65,9 +65,9 @@ Feature: Convert Step Definitions
       | stepdefs::blah::blahObjectPageSteps::theBlahApplicationObjectPageIsEmpty                     | assertIsEmpty    |
       | stepdefs::blah::blahDataTablePageSteps::theBlahApplicationDataTablePageTopSectionIsAsFollows | assertAttributes |
       | stepdefs::blah::blahDocStringPageSteps::theBlahApplicationDocStringPageIsAsFollows           | assertAttributes |
-      | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsExecutedWith             | sendJsonRequest  |
+      | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsExecutedWith             | execute          |
       | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsExecutedWith             | setAttributes    |
-      | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsInvalid                  | sendJsonRequest  |
+      | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsInvalid                  | execute          |
       | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsInvalid                  | setIsInvalid     |
 
   Scenario: Non existing UML interaction messages argument creation

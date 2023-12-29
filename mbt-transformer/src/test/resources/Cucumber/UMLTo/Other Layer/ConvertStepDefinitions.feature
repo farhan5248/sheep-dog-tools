@@ -40,7 +40,7 @@ Feature: Convert Step Definitions
       
       public class BlahDataTablePageSteps extends TestSteps {
       
-          @Given("The blah application, DataTable page, Top section is as follows")
+          @Given("^The blah application, DataTable page, Top section is as follows$")
           public void theBlahApplicationDataTablePageTopSectionIsAsFollows(DataTable dataTable) {
               BlahFactory.get("BlahDataTablePage").assertAttributes(dataTable, "Top");
           }
@@ -60,7 +60,7 @@ Feature: Convert Step Definitions
       
       public class BlahDocStringPageSteps extends TestSteps {
       
-          @Given("The blah application, DocString page is as follows")
+          @Given("^The blah application, DocString page is as follows$")
           public void theBlahApplicationDocStringPageIsAsFollows(String docString) {
               BlahFactory.get("BlahDocStringPage").assertAttributes(docString);
           }
@@ -80,7 +80,7 @@ Feature: Convert Step Definitions
       
       public class BlahObjectPageSteps extends TestSteps {
       
-          @Given("The blah application, Object page is empty")
+          @Given("^The blah application, Object page is empty$")
           public void theBlahApplicationObjectPageIsEmpty() {
               BlahFactory.get("BlahObjectPage").assertIsEmpty();
           }
@@ -100,16 +100,16 @@ Feature: Convert Step Definitions
       
       public class Blah2JsonRequestSteps extends TestSteps {
       
-          @Given("The blah2 service, Json request is executed with")
+          @Given("^The blah2 service, Json request is executed with$")
           public void theBlah2ServiceJsonRequestIsExecutedWith(DataTable dataTable) {
               Blah2Factory.get("Blah2JsonRequest").setAttributes(dataTable, "");
-              Blah2Factory.get("Blah2JsonRequest").sendJsonRequest();
+              Blah2Factory.get("Blah2JsonRequest").execute();
           }
       
-          @Given("The blah2 service, Json request is invalid")
+          @Given("^The blah2 service, Json request is invalid$")
           public void theBlah2ServiceJsonRequestIsInvalid() {
               Blah2Factory.get("Blah2JsonRequest").setIsInvalid();
-              Blah2Factory.get("Blah2JsonRequest").sendJsonRequest();
+              Blah2Factory.get("Blah2JsonRequest").execute();
           }
       }
       

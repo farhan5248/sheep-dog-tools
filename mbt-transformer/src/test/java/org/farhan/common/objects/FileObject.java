@@ -3,7 +3,6 @@ package org.farhan.common.objects;
 import java.io.File;
 
 import org.farhan.mbt.conv.core.Project;
-import org.farhan.mbt.conv.core.Utilities;
 import org.junit.jupiter.api.Assertions;
 
 public abstract class FileObject extends TestObject {
@@ -24,7 +23,7 @@ public abstract class FileObject extends TestObject {
 		return this;
 	}
 
-	public FileObject assertExists() {
+	public FileObject assertIsPresent() {
 
 		try {
 			File theFile = new File(Project.baseDir + keyValue.get("path"));
@@ -35,25 +34,4 @@ public abstract class FileObject extends TestObject {
 		return this;
 	}
 
-	public FileObject setContents(String docString) {
-
-		try {
-			File aFile = new File(Project.baseDir + keyValue.get("path"));
-			Utilities.writeFile(aFile, docString);
-		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step");
-		}
-		return this;
-	}
-
-	public FileObject assertContents(String docString) {
-		try {
-			File aFile = new File(Project.baseDir + keyValue.get("path"));
-			String contents = Utilities.readFile(aFile);
-			Assertions.assertEquals(docString, contents.replaceAll("\r", ""));
-		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step");
-		}
-		return this;
-	}
 }

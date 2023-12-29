@@ -21,12 +21,12 @@ Feature: Convert Step Definitions
       
       public class BlahObjectPageSteps extends TestSteps {
       
-          @Given("The blah application, Object page is invalid")
+          @Given("^The blah application, Object page is invalid$")
           public void theBlahApplicationObjectPageIsInvalid() {
               BlahFactory.get("BlahObjectPage").assertIsInvalid();
           }
 
-          @Given("The blah application, Object page, Top section is as follows")
+          @Given("^The blah application, Object page, Top section is as follows$")
           public void theBlahApplicationObjectPageTopSectionIsAsFollows(DataTable dataTable) {
               BlahFactory.get("BlahObjectPage").assertAttributes(dataTable, "Top");
           }
@@ -38,7 +38,6 @@ Feature: Convert Step Definitions
       | tag1 |
     And The mbt-transformer plugin, uml-to-cucumber goal is executed
 
-  @debug
   Scenario: Existing Java methods are preserved
     Then The claim project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be as follows
       """
@@ -51,17 +50,17 @@ Feature: Convert Step Definitions
       
       public class BlahObjectPageSteps extends TestSteps {
       
-          @Given("The blah application, Object page is invalid")
+          @Given("^The blah application, Object page is invalid$")
           public void theBlahApplicationObjectPageIsInvalid() {
               BlahFactory.get("BlahObjectPage").assertIsInvalid();
           }
       
-          @Given("The blah application, Object page, Top section is as follows")
+          @Given("^The blah application, Object page, Top section is as follows$")
           public void theBlahApplicationObjectPageTopSectionIsAsFollows(DataTable dataTable) {
               BlahFactory.get("BlahObjectPage").assertAttributes(dataTable, "Top");
           }
       
-          @Given("The blah application, Object page is empty")
+          @Given("^The blah application, Object page is empty$")
           public void theBlahApplicationObjectPageIsEmpty() {
               BlahFactory.get("BlahObjectPage").assertIsEmpty();
           }

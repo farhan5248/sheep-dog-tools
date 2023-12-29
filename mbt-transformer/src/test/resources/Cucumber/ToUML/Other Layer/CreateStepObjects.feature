@@ -1,4 +1,4 @@
-Feature: Convert Step Objects
+Feature: Create Step Objects
 
   # TODO read in layer 3 java files and specify how they're merged
   Background: Create a feature file
@@ -46,7 +46,7 @@ Feature: Convert Step Objects
       | objects::blah::blahDocStringPage | assertContent    |
       | objects::blah2::blah2JsonRequest | seti1            |
       | objects::blah2::blah2JsonRequest | seti2            |
-      | objects::blah2::blah2JsonRequest | sendJsonRequest  |
+      | objects::blah2::blah2JsonRequest | execute          |
       | objects::blah2::blah2JsonRequest | setIsInvalid     |
 
   Scenario: Non existing UML interaction parameter creation
@@ -58,5 +58,5 @@ Feature: Convert Step Objects
       | objects::blah::blahDocStringPage::assertContent   | contents       |
       | objects::blah2::blah2JsonRequest::seti1           | keyMap         |
       | objects::blah2::blah2JsonRequest::seti2           | keyMap         |
-      | objects::blah2::blah2JsonRequest::sendJsonRequest | has none       |
+      | objects::blah2::blah2JsonRequest::execute         | has none       |
       | objects::blah2::blah2JsonRequest::setIsInvalid    | has none       |

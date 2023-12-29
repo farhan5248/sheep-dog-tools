@@ -37,11 +37,21 @@ public class VerticeValidator {
 	}
 
 	public static boolean isContainerStep(String text) {
-		return getContainerName(text) != null;
+		String temp = getContainerName(text);
+		if (temp != null) {
+			return !temp.isEmpty();
+		} else {
+			return false;
+		}
 	}
 
 	public static boolean isVertice(String text) {
-		return getObjectType(text) != null;
+		String temp = getObjectType(text);
+		if (temp != null) {
+			return !temp.isEmpty();
+		} else {
+			return false;
+		}
 	}
 
 	public static String getContainerName(String text) {

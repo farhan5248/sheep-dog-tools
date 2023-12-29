@@ -83,8 +83,6 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 			aJavaFile.javaClass.addImport(
 					"org.farhan.common." + UMLNameConverter.getOtherLayerAppName(layerClass.getQualifiedName()));
 		}
-		
-		System.out.println();
 	}
 
 	@Override

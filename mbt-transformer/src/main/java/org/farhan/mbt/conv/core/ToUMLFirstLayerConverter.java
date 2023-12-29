@@ -14,10 +14,16 @@ public abstract class ToUMLFirstLayerConverter extends ToUMLLayerConverter {
 
 	void setFSMName(String machineName) {
 		theMachine.machineName = Utilities.toUpperCamelCase(machineName);
+		theMachine.machineName = Utilities.removeDelimiterAndCapitalize(theMachine.machineName, "\\.");
+		theMachine.machineName = Utilities.removeDelimiterAndCapitalize(theMachine.machineName, "\\-");
 	}
 
 	protected void setFSMState(String currentState) {
 		theMachine.currentState = Utilities.toUpperCamelCase(currentState);
+		// If the object is a file with a period, remove it and make the first letter
+		// upper case
+		theMachine.currentState = Utilities.removeDelimiterAndCapitalize(theMachine.currentState, "\\.");
+		theMachine.currentState = Utilities.removeDelimiterAndCapitalize(theMachine.currentState, "\\-");
 	}
 
 	public String getFSMName() {

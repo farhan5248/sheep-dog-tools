@@ -27,9 +27,9 @@ import org.junit.jupiter.api.Assertions;
 
 public abstract class UMLFile extends FileObject {
 
-	public FileObject assertExists() {
+	public FileObject assertIsPresent() {
 
-		super.assertExists();
+		super.assertIsPresent();
 		try {
 			UMLProject.init();
 			UMLProject.readFiles();
