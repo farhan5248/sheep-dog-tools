@@ -41,6 +41,8 @@ public class CucumberToUMLFirstLayerLinker extends ToUMLFirstLayerLinker {
 
 	@Override
 	protected void createNextLayerInteractionMessagesFromVerticeMessage(Interaction targetInteraction, Message m) {
+		// TODO distinguish between "is" vs "will be" in the message. assert applies to
+		// will be, set is for is
 		createInputOutputMessage(targetInteraction, m, "assert");
 	}
 
@@ -48,14 +50,9 @@ public class CucumberToUMLFirstLayerLinker extends ToUMLFirstLayerLinker {
 	protected void createNextLayerInteractionMessagesFromEdgeMessage(Interaction targetInteraction, Message m) {
 
 		createInputOutputMessage(targetInteraction, m, "set");
-		String objectName = Validator.getObjectName(m.getName());
-		objectName = Utilities.removeDelimiterAndCapitalize(Validator.getObjectName(m.getName()), "\\.");
-		objectName = Utilities.removeDelimiterAndCapitalize(Validator.getObjectName(m.getName()), "\\-");
-		String objectType = StringUtils.capitalize(Validator.getObjectType(m.getName()));
-		String methodName = "execute";// + objectName + objectType;
 		Class layer3Class = ClassFactory.getClass(UMLProject.theSystem,
 				getNextLayerClassQualifiedName(targetInteraction));
-		MessageFactory.getMessage(targetInteraction, layer3Class, methodName);
+		MessageFactory.getMessage(targetInteraction, layer3Class, "execute");
 	}
 
 	@Override
