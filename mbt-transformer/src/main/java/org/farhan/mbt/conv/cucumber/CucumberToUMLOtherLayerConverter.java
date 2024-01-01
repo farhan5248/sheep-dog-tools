@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Optional;
 
 import org.eclipse.uml2.uml.Class;
-import org.eclipse.uml2.uml.ElementImport;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.farhan.mbt.conv.core.ConvertibleFile;

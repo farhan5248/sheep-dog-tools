@@ -13,7 +13,7 @@ Feature: Convert Step Objects
                 | i1 | i2 |
                 | v5 | v6 |
           Given The blah2 service, Json request is invalid
-          Given The blah application, DataTable page, Top section is as follows
+          Given The blah application, DataTable page, Top section will be as follows
                 | h1 | h2 |
                 | v1 | v2 |
                 | v3 | v4 |
@@ -61,7 +61,7 @@ Feature: Convert Step Objects
       
       public class BlahDocStringPage extends Blah {
       
-          public void assertContent(String contents) {
+          public void setContent(String contents) {
               throw new PendingException();
           }
       }
@@ -79,7 +79,7 @@ Feature: Convert Step Objects
       
       public class BlahObjectPage extends Blah {
       
-          public void assertIsEmpty() {
+          public void setIsEmpty() {
               throw new PendingException();
           }
       }

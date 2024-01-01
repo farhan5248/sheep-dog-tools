@@ -16,56 +16,45 @@ public abstract class TestObject {
 
 	protected Map<String, String> keyValue = new HashMap<String, String>();
 
-	public abstract TestObject execute();
+	public abstract void execute();
 
-	public TestObject setAttributes(String docString) {
-
-		try {
-			File aFile = new File(Project.baseDir + keyValue.get("path"));
-			Utilities.writeFile(aFile, docString);
-		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step");
-		}
-		return this;
+	public void setAttributes(String docString) {
+		// TODO make this like the others after making a method that dynamically finds
+		// the setContent or assertContent methods when passed in a String instead of a
+		// data table
 	}
 
-	public TestObject assertAttributes(String docString) {
-		try {
-			File aFile = new File(Project.baseDir + keyValue.get("path"));
-			String contents = Utilities.readFile(aFile);
-			Assertions.assertEquals(docString, contents.replaceAll("\r", ""));
-		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step");
-		}
-		return this;
+	public void assertAttributes(String docString) {
+		// TODO make this like the others after making a method that dynamically finds
+		// the setContent or assertContent methods when passed in a String instead of a
+		// data table
 	}
 
-	public TestObject assertAttributes(DataTable dataTable) {
-		return processAttributes(dataTable, "assert", "", false);
+	public void assertAttributes(DataTable dataTable) {
+		processAttributes(dataTable, "assert", "", false);
 	}
 
-	public TestObject setAttributes(DataTable dataTable) {
-		return processAttributes(dataTable, "set", "", false);
+	public void setAttributes(DataTable dataTable) {
+		processAttributes(dataTable, "set", "", false);
 	}
 
-	public TestObject assertAttributes(DataTable dataTable, String sectionName) {
-		return processAttributes(dataTable, "assert", sectionName, false);
+	public void assertAttributes(DataTable dataTable, String sectionName) {
+		processAttributes(dataTable, "assert", sectionName, false);
 	}
 
-	public TestObject setAttributes(DataTable dataTable, String sectionName) {
-		return processAttributes(dataTable, "set", sectionName, false);
+	public void setAttributes(DataTable dataTable, String sectionName) {
+		processAttributes(dataTable, "set", sectionName, false);
 	}
 
-	public TestObject assertAttributes(DataTable dataTable, String sectionName, boolean negativeTest) {
-		return processAttributes(dataTable, "assert", sectionName, negativeTest);
+	public void assertAttributes(DataTable dataTable, String sectionName, boolean negativeTest) {
+		processAttributes(dataTable, "assert", sectionName, negativeTest);
 	}
 
-	public TestObject setAttributes(DataTable dataTable, String sectionName, boolean negativeTest) {
-		return processAttributes(dataTable, "set", sectionName, negativeTest);
+	public void setAttributes(DataTable dataTable, String sectionName, boolean negativeTest) {
+		processAttributes(dataTable, "set", sectionName, negativeTest);
 	}
 
-	private TestObject processAttributes(DataTable dataTable, String operation, String sectionName,
-			boolean negativeTest) {
+	private void processAttributes(DataTable dataTable, String operation, String sectionName, boolean negativeTest) {
 		List<List<String>> data = dataTable.asLists();
 
 		// TODO Remember to have Parameter/Value table vs multi-column header table
@@ -93,7 +82,6 @@ public abstract class TestObject {
 				Assertions.fail(Utilities.getStackTraceAsString(e));
 			}
 		}
-		return this;
 	}
 
 	private String cleanName(String name) {

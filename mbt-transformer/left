@@ -1,21 +1,24 @@
-package org.farhan.stepdefs.blah2;
+package org.farhan.stepdefs.blah;
 
-import org.farhan.common.objects.Blah2Factory;
 import io.cucumber.java.en.Given;
 import io.cucumber.datatable.DataTable;
 import org.farhan.common.stepdefs.TestSteps;
+import org.farhan.common.objects.BlahFactory;
 
-public class Blah2JsonRequestSteps extends TestSteps {
+public class BlahObjectPageSteps extends TestSteps {
 
-    @Given("^The blah2 service, Json request is executed with$")
-    public void theBlah2ServiceJsonRequestIsExecutedWith(DataTable dataTable) {
-        Blah2Factory.get("Blah2JsonRequest").setAttributes(dataTable, "");
-        Blah2Factory.get("Blah2JsonRequest").sendJsonRequest();
+    @Given("^The blah application, Object page is invalid$")
+    public void theBlahApplicationObjectPageIsInvalid() {
+        BlahFactory.get("BlahObjectPage").assertIsInvalid();
     }
 
-    @Given("^The blah2 service, Json request is invalid$")
-    public void theBlah2ServiceJsonRequestIsInvalid() {
-        Blah2Factory.get("Blah2JsonRequest").setIsInvalid();
-        Blah2Factory.get("Blah2JsonRequest").sendJsonRequest();
+    @Given("^The blah application, Object page, Top section is as follows$")
+    public void theBlahApplicationObjectPageTopSectionIsAsFollows(DataTable dataTable) {
+        BlahFactory.get("BlahObjectPage").assertAttributes(dataTable, "Top");
+    }
+
+    @Given("^The blah application, Object page is empty$")
+    public void theBlahApplicationObjectPageIsEmpty() {
+        BlahFactory.get("BlahObjectPage").assertIsEmpty();
     }
 }

@@ -41,9 +41,15 @@ public class CucumberToUMLFirstLayerLinker extends ToUMLFirstLayerLinker {
 
 	@Override
 	protected void createNextLayerInteractionMessagesFromVerticeMessage(Interaction targetInteraction, Message m) {
-		// TODO distinguish between "is" vs "will be" in the message. assert applies to
-		// will be, set is for is
-		createInputOutputMessage(targetInteraction, m, "assert");
+
+		String text = VerticeValidator.getDetails(m.getName());
+		if (text.startsWith("will be") || text.startsWith("won't be")) {
+			createInputOutputMessage(targetInteraction, m, "assert");
+		} else if (text.startsWith("is") || text.startsWith("isn't")) {
+			createInputOutputMessage(targetInteraction, m, "set");
+		} else {
+			// TODO throw an exception but generally the text should be valid by this point
+		}
 	}
 
 	@Override

@@ -7,63 +7,64 @@ import io.cucumber.java.en.Given;
 
 public class ClaimPstUmlFileSteps extends TestSteps {
 
-	@Given("^The claim project, target/uml/pst.uml file is present$")
-	public void theClaimProjectTargetUmlPstUmlFileIsPresent() {
-		ClaimFactory.get("ClaimPstUmlFile").assertIsPresent();
+	@Given("^The claim project, target/uml/pst.uml file will be present$")
+	public void theClaimProjectTargetUmlPstUmlFileWillBePresent() {
+		ClaimFactory.get("ClaimPstUmlFile").assertWillBePresent();
 	}
 
-	@Given("^The target/uml/pst.uml file, Class section is as follows$")
-	public void ThePSTUMLFileClassSectionIsAsFollows(DataTable dataTable) {
+	@Given("^The target/uml/pst.uml file, Class section will be as follows$")
+	public void theTargetUmlPstUmlFileClassSectionWillBeAsFollows(DataTable dataTable) {
 		ClaimFactory.get("ClaimPstUmlFile").assertAttributes(dataTable, "Class");
 	}
 
-	@Given("^The target/uml/pst.uml file, Class Comments section is as follows$")
-	public void ThePSTUMLFileClassCommentsSectionIsAsFollows(DataTable dataTable) {
+	@Given("^The target/uml/pst.uml file, Class Comments section will be as follows$")
+	public void theTargetUmlPstUmlFileClassCommentsSectionWillBeAsFollows(DataTable dataTable) {
 		ClaimFactory.get("ClaimPstUmlFile").assertAttributes(dataTable, "Class Comments");
 	}
 
-	@Given("^The target/uml/pst.uml file, Class Element Imports section is as follows$")
-	public void ThePSTUMLFileClassElementImportsSectionIsAsFollows(DataTable dataTable) {
+	@Given("^The target/uml/pst.uml file, Class Element Imports section will be as follows$")
+	public void theTargetUmlPstUmlFileClassElementImportsSectionWillBeAsFollows(DataTable dataTable) {
 		ClaimFactory.get("ClaimPstUmlFile").assertAttributes(dataTable, "Class Element Imports");
 	}
 
-	@Given("^The target/uml/pst.uml file, Class Properties section is as follows$")
-	public void ThePSTUMLFileClassPropertiesSectionIsAsFollows(DataTable dataTable) {
+	@Given("^The target/uml/pst.uml file, Class Properties section will be as follows$")
+	public void theTargetUmlPstUmlFileClassPropertiesSectionWillBeAsFollows(DataTable dataTable) {
 		ClaimFactory.get("ClaimPstUmlFile").assertAttributes(dataTable, "Class Properties");
 	}
 
-	@Given("^The target/uml/pst.uml file, Class Interactions section is as follows$")
-	public void ThePSTUMLFileClassInteractionsSectionIsAsFollows(DataTable dataTable) {
+	@Given("^The target/uml/pst.uml file, Class Interactions section will be as follows$")
+	public void theTargetUmlPstUmlFileClassInteractionsSectionWillBeAsFollows(DataTable dataTable) {
 		ClaimFactory.get("ClaimPstUmlFile").assertAttributes(dataTable, "Class Interactions");
 	}
 
-	@Given("^The target/uml/pst.uml file, Interaction Parameters section is as follows$")
-	public void ThePSTUMLFileInteractionParametersSectionIsAsFollows(DataTable dataTable) {
+	@Given("^The target/uml/pst.uml file, Interaction Parameters section will be as follows$")
+	public void theTargetUmlPstUmlFileInteractionParametersSectionWillBeAsFollows(DataTable dataTable) {
 		ClaimFactory.get("ClaimPstUmlFile").assertAttributes(dataTable, "Interaction Parameters");
 	}
 
-	@Given("^The target/uml/pst.uml file, Interaction Annotations section is as follows$")
-	public void ThePSTUMLFileInteractionAnnotationsSectionIsAsFollows(DataTable dataTable) {
+	@Given("^The target/uml/pst.uml file, Interaction Annotations section will be as follows$")
+	public void theTargetUmlPstUmlFileInteractionAnnotationsSectionWillBeAsFollows(DataTable dataTable) {
 		ClaimFactory.get("ClaimPstUmlFile").assertAttributes(dataTable, "Interaction Annotations");
 	}
 
-	@Given("^The target/uml/pst.uml file, Interaction Comments section is as follows$")
-	public void ThePSTUMLFileInteractionCommentsSectionIsAsFollows(DataTable dataTable) {
+	@Given("^The target/uml/pst.uml file, Interaction Comments section will be as follows$")
+	public void theTargetUmlPstUmlFileInteractionCommentsSectionWillBeAsFollows(DataTable dataTable) {
 		ClaimFactory.get("ClaimPstUmlFile").assertAttributes(dataTable, "Interaction Comments");
 	}
 
-	@Given("^The target/uml/pst.uml file, Interaction Messages section is as follows$")
-	public void theTargetUmlPstUmlFileInteractionMessagesSectionIsAsFollows(DataTable dataTable) {
+	@Given("^The target/uml/pst.uml file, Interaction Messages section will be as follows$")
+	public void theTargetUmlPstUmlFileInteractionMessagesSectionWillBeAsFollows(DataTable dataTable) {
 		ClaimFactory.get("ClaimPstUmlFile").assertAttributes(dataTable, "Interaction Messages");
 	}
 
-	@Given("^The target/uml/pst.uml file, Interaction Lifelines section is as follows$")
-	public void ThePSTUMLFileInteractionLifelinesSectionIsAsFollows(DataTable dataTable) {
+	@Given("^The target/uml/pst.uml file, Interaction Lifelines section will be as follows$")
+	public void theTargetUmlPstUmlFileInteractionLifelinesSectionWillBeAsFollows(DataTable dataTable) {
 		ClaimFactory.get("ClaimPstUmlFile").assertAttributes(dataTable, "Interaction Lifelines");
 	}
 
-	@Given("^The target/uml/pst.uml file, Interaction Message Occurences section is as follows$")
-	public void ThePSTUMLFileInteractionMessageOccurencesSectionIsAsFollows(DataTable dataTable) {
+	@Given("^The target/uml/pst.uml file, Interaction Message Occurences section will be as follows$")
+	public void theTargetUmlPstUmlFileInteractionMessageOccurencesSectionWillBeAsFollows(DataTable dataTable) {
 		ClaimFactory.get("ClaimPstUmlFile").assertAttributes(dataTable, "Interaction Message Occurences");
 	}
+
 }

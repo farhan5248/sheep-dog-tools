@@ -85,6 +85,16 @@ public class VerticeValidatorTest {
 	}
 
 	@Test
+	public void testDetailsRegexWill() {
+		Assertions.assertTrue(VerticeValidator.isValid("The something1 application, something2 file will be empty"));
+	}
+
+	@Test
+	public void testDetailsRegexWont() {
+		Assertions.assertTrue(VerticeValidator.isValid("The something1 application, something2 file won't be empty"));
+	}
+
+	@Test
 	public void testSectionRegex() {
 		Assertions.assertTrue(
 				VerticeValidator.isValid("The something1 application, something2 file, something3 section is empty"));

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Assertions;
 
 public class UMLToCucumberGoal extends GoalObject {
 
-	public UMLToCucumberGoal execute() {
+	public void execute() {
 
 		try {
 			ConvertUMLToCucumberPSTMojo mojo = new ConvertUMLToCucumberPSTMojo();
@@ -15,6 +15,5 @@ public class UMLToCucumberGoal extends GoalObject {
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
 		}
-		return this;
 	}
 }

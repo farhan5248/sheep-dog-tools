@@ -88,6 +88,16 @@ public class EdgeValidatorTest {
 	}
 
 	@Test
+	public void testDetailsRegexWillExecuted() {
+		Assertions.assertTrue(EdgeValidator.isValid("The something1 application, something2 request will be executed"));
+	}
+
+	@Test
+	public void testDetailsRegexWontExecuted() {
+		Assertions.assertTrue(EdgeValidator.isValid("The something1 application, something2 request won't be executed"));
+	}
+
+	@Test
 	public void testObjectRegexGoal() {
 		Assertions.assertTrue(EdgeValidator.isValid("The something1 application, something2 goal is executed"));
 	}

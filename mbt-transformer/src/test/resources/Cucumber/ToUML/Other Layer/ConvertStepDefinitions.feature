@@ -26,7 +26,7 @@ Feature: Convert Step Definitions
               BlahFactory.get("BlahObjectPage").assertIsInvalid();
           }
 
-          @Given("^The blah application, Object page, Top section is as follows$")
+          @Given("^The blah application, Object page, Top section will be as follows$")
           public void theBlahApplicationObjectPageTopSectionIsAsFollows(DataTable dataTable) {
               BlahFactory.get("BlahObjectPage").assertAttributes(dataTable, "Top");
           }
@@ -55,14 +55,14 @@ Feature: Convert Step Definitions
               BlahFactory.get("BlahObjectPage").assertIsInvalid();
           }
       
-          @Given("^The blah application, Object page, Top section is as follows$")
+          @Given("^The blah application, Object page, Top section will be as follows$")
           public void theBlahApplicationObjectPageTopSectionIsAsFollows(DataTable dataTable) {
               BlahFactory.get("BlahObjectPage").assertAttributes(dataTable, "Top");
           }
       
           @Given("^The blah application, Object page is empty$")
           public void theBlahApplicationObjectPageIsEmpty() {
-              BlahFactory.get("BlahObjectPage").assertIsEmpty();
+              BlahFactory.get("BlahObjectPage").setIsEmpty();
           }
       }
       

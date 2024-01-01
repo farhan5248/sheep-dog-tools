@@ -15,7 +15,7 @@ public class VerticeValidator {
 	private static final String CONTAINER_REGEX = "(( .*)( application| service| project| plugin| batchjob),)?";
 	private static final String OBJECT_REGEX = "( .*)( file| page| config| resource)";
 	private static final String SECTION_REGEX = "(, (.*) section)?";
-	private static final String DETAILS_REGEX = "(( is| isn't)( empty| present| as follows| valid))";
+	private static final String DETAILS_REGEX = "(( is| isn't| will be| won't be)( empty| present| as follows| valid))";
 	private static final String VERTICE_REGEX = "The" + CONTAINER_REGEX + OBJECT_REGEX + SECTION_REGEX + DETAILS_REGEX;
 	public static final String INVALID_VERTICE = "invalidVertice";
 

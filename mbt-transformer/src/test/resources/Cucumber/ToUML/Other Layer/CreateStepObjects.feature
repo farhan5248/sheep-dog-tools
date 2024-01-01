@@ -14,7 +14,7 @@ Feature: Create Step Objects
                 | i1 | i2 |
                 | v5 | v6 |
           Given The blah2 service, Json request is invalid
-          Given The blah application, DataTable page, Top section is as follows
+          Given The blah application, DataTable page, Top section will be as follows
                 | h1 | h2 |
                 | v1 | v2 |
                 | v3 | v4 |
@@ -27,10 +27,10 @@ Feature: Create Step Objects
     When The mbt-transformer plugin, cucumber-to-uml goal is executed with
       | Tags |
       | tag1 |
-    Then The claim project, target/uml/pst.uml file is present
+    Then The claim project, target/uml/pst.uml file will be present
 
   Scenario: Non existing UML class creation
-    And The target/uml/pst.uml file, Class section is as follows
+    And The target/uml/pst.uml file, Class section will be as follows
       | Class Name                       |
       | objects::blah::blahObjectPage    |
       | objects::blah::blahDataTablePage |
@@ -38,25 +38,25 @@ Feature: Create Step Objects
       | objects::blah2::blah2JsonRequest |
 
   Scenario: Non existing UML interaction creation
-    And The target/uml/pst.uml file, Class Interactions section is as follows
+    And The target/uml/pst.uml file, Class Interactions section will be as follows
       | Class Name                       | Interaction Name |
-      | objects::blah::blahObjectPage    | assertIsEmpty    |
+      | objects::blah::blahObjectPage    | setIsEmpty       |
       | objects::blah::blahDataTablePage | assertToph1      |
       | objects::blah::blahDataTablePage | assertToph2      |
-      | objects::blah::blahDocStringPage | assertContent    |
+      | objects::blah::blahDocStringPage | setContent       |
       | objects::blah2::blah2JsonRequest | seti1            |
       | objects::blah2::blah2JsonRequest | seti2            |
       | objects::blah2::blah2JsonRequest | execute          |
       | objects::blah2::blah2JsonRequest | setIsInvalid     |
 
   Scenario: Non existing UML interaction parameter creation
-    And The target/uml/pst.uml file, Interaction Parameters section is as follows
-      | Interaction Name                                  | Parameter Name |
-      | objects::blah::blahObjectPage::assertIsEmpty      | has none       |
-      | objects::blah::blahDataTablePage::assertToph1     | keyMap         |
-      | objects::blah::blahDataTablePage::assertToph2     | keyMap         |
-      | objects::blah::blahDocStringPage::assertContent   | contents       |
-      | objects::blah2::blah2JsonRequest::seti1           | keyMap         |
-      | objects::blah2::blah2JsonRequest::seti2           | keyMap         |
-      | objects::blah2::blah2JsonRequest::execute         | has none       |
-      | objects::blah2::blah2JsonRequest::setIsInvalid    | has none       |
+    And The target/uml/pst.uml file, Interaction Parameters section will be as follows
+      | Interaction Name                               | Parameter Name |
+      | objects::blah::blahObjectPage::setIsEmpty      | has none       |
+      | objects::blah::blahDataTablePage::assertToph1  | keyMap         |
+      | objects::blah::blahDataTablePage::assertToph2  | keyMap         |
+      | objects::blah::blahDocStringPage::setContent   | contents       |
+      | objects::blah2::blah2JsonRequest::seti1        | keyMap         |
+      | objects::blah2::blah2JsonRequest::seti2        | keyMap         |
+      | objects::blah2::blah2JsonRequest::execute      | has none       |
+      | objects::blah2::blah2JsonRequest::setIsInvalid | has none       |

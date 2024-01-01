@@ -13,7 +13,7 @@ Feature: Convert Step Definitions
                 | i1 | i2 |
                 | v5 | v6 |
           Given The blah2 service, Json request is invalid
-          Given The blah application, DataTable page, Top section is as follows
+          Given The blah application, DataTable page, Top section will be as follows
                 | h1 | h2 |
                 | v1 | v2 |
                 | v3 | v4 |
@@ -40,8 +40,8 @@ Feature: Convert Step Definitions
       
       public class BlahDataTablePageSteps extends TestSteps {
       
-          @Given("^The blah application, DataTable page, Top section is as follows$")
-          public void theBlahApplicationDataTablePageTopSectionIsAsFollows(DataTable dataTable) {
+          @Given("^The blah application, DataTable page, Top section will be as follows$")
+          public void theBlahApplicationDataTablePageTopSectionWillBeAsFollows(DataTable dataTable) {
               BlahFactory.get("BlahDataTablePage").assertAttributes(dataTable, "Top");
           }
       }
@@ -62,7 +62,7 @@ Feature: Convert Step Definitions
       
           @Given("^The blah application, DocString page is as follows$")
           public void theBlahApplicationDocStringPageIsAsFollows(String docString) {
-              BlahFactory.get("BlahDocStringPage").assertAttributes(docString);
+              BlahFactory.get("BlahDocStringPage").setAttributes(docString);
           }
       }
       
@@ -82,7 +82,7 @@ Feature: Convert Step Definitions
       
           @Given("^The blah application, Object page is empty$")
           public void theBlahApplicationObjectPageIsEmpty() {
-              BlahFactory.get("BlahObjectPage").assertIsEmpty();
+              BlahFactory.get("BlahObjectPage").setIsEmpty();
           }
       }
       

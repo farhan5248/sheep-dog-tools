@@ -3,7 +3,6 @@ package org.farhan.objects.mbttransformer;
 import java.util.HashMap;
 
 import org.farhan.common.objects.GoalObject;
-import org.farhan.common.objects.TestObject;
 import org.farhan.mbt.conv.core.Project;
 import org.farhan.mbt.conv.core.Utilities;
 import org.farhan.mbt.conv.cucumber.ConvertCucumberToUMLPSTMojo;
@@ -18,14 +17,13 @@ public class MbtTransformerCucumberToUmlGoal extends GoalObject {
 	}
 
 	@Override
-	public TestObject execute() {
+	public void execute() {
 		try {
 			ConvertCucumberToUMLPSTMojo mojo = new ConvertCucumberToUMLPSTMojo();
 			mojo.mojoGoal();
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
 		}
-		return this;
 	}
 
 }

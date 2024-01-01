@@ -22,23 +22,23 @@ Feature: Convert Scenario Outline
     When The mbt-transformer plugin, cucumber-to-uml goal is executed with
       | Tags |
       | tag1 |
-    Then The claim project, target/uml/pst.uml file is present
+    Then The claim project, target/uml/pst.uml file will be present
 
   Scenario: Examples title
-    And The target/uml/pst.uml file, Interaction Annotations section is as follows
+    And The target/uml/pst.uml file, Interaction Annotations section will be as follows
       | Interaction Name             | Annotation Name |
       | specs::dept::process::Submit | Examples 1      |
       | specs::dept::process::Submit | Examples 2      |
 
   Scenario: Scenario Outline tags
   # Need to test Scenario Outline Example tags
-    And The target/uml/pst.uml file, Interaction Parameters section is as follows
+    And The target/uml/pst.uml file, Interaction Parameters section will be as follows
       | Interaction Name             | Parameter Name |
       | specs::dept::process::Submit | tag1           |
       
   Scenario: Examples data
   # Scenario Example data applied to data table for MBT, not needed for code generation      
-    And The target/uml/pst.uml file, Interaction Annotations section is as follows
+    And The target/uml/pst.uml file, Interaction Annotations section will be as follows
       | Interaction Name             | Annotation Name | Annotation Detail |
       | specs::dept::process::Submit | Examples 1      | 0 -> h3\|h4\|   |
       | specs::dept::process::Submit | Examples 1      | 1 -> v31\|v41\| |

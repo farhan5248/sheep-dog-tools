@@ -11,7 +11,7 @@ public class EdgeValidator {
 	// ( is| isn't)( executed| sent| triggered| invalid| valid)( with)?
 	protected static final String CONTAINER_REGEX = "(( .*)( application| service| project| plugin| batchjob),)?";
 	private static final String OBJECT_REGEX = "(.*)( request| goal)";
-	private static final String DETAILS_REGEX = "(( is| isn't)( executed| sent| triggered| invalid| valid)( with)?)";
+	private static final String DETAILS_REGEX = "(( is| isn't| will be| won't be)( executed| sent| triggered| invalid| valid)( with)?)";
 	private static final String EDGE_REGEX = "The" + CONTAINER_REGEX + OBJECT_REGEX + DETAILS_REGEX;
 	public static final String INVALID_EDGE = "invalidEdge";
 
