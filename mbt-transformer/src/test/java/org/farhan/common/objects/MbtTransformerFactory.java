@@ -1,13 +1,13 @@
 package org.farhan.common.objects;
 
 import org.farhan.objects.mbttransformer.MbtTransformerCucumberToUmlGoal;
-import org.farhan.objects.mbttransformer.UMLToCucumberGoal;
+import org.farhan.objects.mbttransformer.MbtTransformerUmlToCucumberGoal;
 
 public class MbtTransformerFactory {
 
 	// TODO make this a map of all objects later and then use a DI framework
 	private static MbtTransformerCucumberToUmlGoal cucumberToUMLGoal;
-	private static UMLToCucumberGoal UMLTocucumberGoal;
+	private static MbtTransformerUmlToCucumberGoal UMLTocucumberGoal;
 
 	public static GoalObject get(String className) {
 		if (className.contentEquals("MbtTransformerCucumberToUmlGoal")) {
@@ -17,7 +17,7 @@ public class MbtTransformerFactory {
 			return cucumberToUMLGoal;
 		} else if (className.contentEquals("UmlToCucumberGoal")) {
 			if (UMLTocucumberGoal == null) {
-				UMLTocucumberGoal = new UMLToCucumberGoal();
+				UMLTocucumberGoal = new MbtTransformerUmlToCucumberGoal();
 			}
 			return UMLTocucumberGoal;
 		}

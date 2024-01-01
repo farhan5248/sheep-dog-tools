@@ -1,7 +1,7 @@
 Feature: Convert Step Objects
 
   Background: Create a feature file
-    Given The claim project, src/test/cucumber/dept/process.feature file is as follows
+    Given The claim project, src/test/resources/Cucumber/dept/process.feature file is as follows
       """
       Feature: This is a test feature
       

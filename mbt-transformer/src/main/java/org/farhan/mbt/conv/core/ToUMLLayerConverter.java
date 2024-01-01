@@ -13,6 +13,8 @@ public abstract class ToUMLLayerConverter {
 	protected void transformLayerFiles(ArrayList<ConvertibleFile> layerFiles) throws Exception {
 
 		for (ConvertibleFile layerFile : layerFiles) {
+			// TODO replace this with a logger
+			System.out.println(layerFile.getFile().getAbsolutePath());
 			Class layerClass = convertToClass(layerFile);
 			convertToImports(layerClass);
 			convertToBehaviours(layerClass);

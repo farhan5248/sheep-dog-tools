@@ -1,7 +1,7 @@
 Feature: Convert Feature
 
   Scenario: Convert Feature
-    Given The claim project, src/test/cucumber/dept/process.feature file is as follows
+    Given The claim project, src/test/resources/Cucumber/dept/process.feature file is as follows
       """
       @tag1 @tag2 @tag3
       Feature: This is a test feature

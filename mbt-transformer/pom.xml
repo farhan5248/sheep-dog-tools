@@ -17,6 +17,11 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.farhan</groupId>
+				<artifactId>mbt-maven-plugin</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.11.0</version>
@@ -163,7 +168,6 @@
 			<groupId>org.farhan</groupId>
 			<artifactId>cucumberxtexteditor</artifactId>
 			<version>1.0.3-SNAPSHOT</version>
-			<scope>provided</scope>
 		</dependency>
 		<!-- Cucumber -->
 		<dependency>

@@ -44,6 +44,8 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 		ArrayList<ConvertibleFile> layerFiles = CucumberProject.getFirstLayerFiles();
 		for (int i = layerFiles.size() - 1; i >= 0; i--) {
 			if (!isFileSelected(layerFiles.get(i), Project.tags)) {
+				// TODO replace this with a logger
+				System.out.println("Removing from first layer:" + layerFiles.get(i).getFile().getAbsolutePath());
 				layerFiles.remove(i);
 			}
 		}

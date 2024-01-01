@@ -57,11 +57,4 @@ public abstract class ToUMLFirstLayerConverter extends ToUMLLayerConverter {
 		}
 	}
 
-	protected void mergeComment(Interaction anInteraction, int index, String newComment) {
-		if (anInteraction.getOwnedComments().size() >= index) {
-			String oldComment = anInteraction.getOwnedComments().get(index).getBody();
-			anInteraction.getOwnedComments().get(index).unsetBody();
-			anInteraction.getOwnedComments().get(index).setBody(oldComment + "\n\n" + newComment);
-		}
-	}
 }

@@ -15,7 +15,8 @@ public class CucumberProject extends Project {
 	private static ArrayList<ConvertibleFile> thirdLayerFiles;
 
 	public static File getFirstLayerDir() {
-		return new File(baseDir + "src/test/cucumber/");
+		// TODO don't hard code this and figure out where else it's hardcoded
+		return new File(baseDir + "src/test/resources/Cucumber/");
 	}
 
 	public static ArrayList<ConvertibleFile> getFirstLayerFiles() {

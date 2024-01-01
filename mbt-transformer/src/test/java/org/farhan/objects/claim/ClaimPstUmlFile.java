@@ -4,135 +4,129 @@ import java.util.HashMap;
 import org.farhan.common.objects.UMLFile;
 
 public class ClaimPstUmlFile extends UMLFile {
-	public void setPath(String path) {
-		keyValue.put("path", path);
-	}
 
-	public void assertWillBePresent() {
-		keyValue.put("model", "pst");
-		super.assertWillBePresent();
-	}
+    public void setPath(String path) {
+        keyValue.put("path", path);
+    }
 
-	public void assertClassClassName(HashMap<String, String> keyMap) {
-		assertClassExists(keyMap.get("Class Name"));
-	}
+    public void assertWillBePresent() {
+        keyValue.put("model", "pst");
+        super.assertWillBePresent();
+    }
 
-	public void assertClassCommentsClassName(HashMap<String, String> keyMap) {
-		assertClassExists(keyMap.get("Class Name"));
-	}
+    public void assertClassClassName(HashMap<String, String> keyMap) {
+        assertClassExists(keyMap.get("Class Name"));
+    }
 
-	public void assertClassCommentsComment(HashMap<String, String> keyMap) {
-		assertClassCommentValue(keyMap.get("Class Name"), keyMap.get("Comment"));
-	}
+    public void assertClassCommentsClassName(HashMap<String, String> keyMap) {
+        assertClassExists(keyMap.get("Class Name"));
+    }
 
-	public void assertClassElementImportsClassName(HashMap<String, String> keyMap) {
-		assertClassExists(keyMap.get("Class Name"));
-	}
+    public void assertClassCommentsComment(HashMap<String, String> keyMap) {
+        assertClassCommentValue(keyMap.get("Class Name"), keyMap.get("Comment"));
+    }
 
-	public void assertClassElementImportsAlias(HashMap<String, String> keyMap) {
-		assertClassAliasValue(keyMap.get("Class Name"), keyMap.get("Alias"));
-	}
+    public void assertClassElementImportsClassName(HashMap<String, String> keyMap) {
+        assertClassExists(keyMap.get("Class Name"));
+    }
 
-	public void assertClassElementImportsImportedElement(HashMap<String, String> keyMap) {
-		assertClassImportedElementValue(keyMap.get("Class Name"), keyMap.get("Imported Element"));
-	}
+    public void assertClassElementImportsAlias(HashMap<String, String> keyMap) {
+        assertClassAliasValue(keyMap.get("Class Name"), keyMap.get("Alias"));
+    }
 
-	public void assertClassPropertiesClassName(HashMap<String, String> keyMap) {
-		assertClassExists(keyMap.get("Class Name"));
-	}
+    public void assertClassElementImportsImportedElement(HashMap<String, String> keyMap) {
+        assertClassImportedElementValue(keyMap.get("Class Name"), keyMap.get("Imported Element"));
+    }
 
-	public void assertClassPropertiesPropertyName(HashMap<String, String> keyMap) {
-		assertClassPropertyNameExists(keyMap.get("Class Name"), keyMap.get("Property Name"));
-	}
+    public void assertClassPropertiesClassName(HashMap<String, String> keyMap) {
+        assertClassExists(keyMap.get("Class Name"));
+    }
 
-	public void assertClassPropertiesPropertyType(HashMap<String, String> keyMap) {
-		assertClassPropertyTypeValue(keyMap.get("Class Name"), keyMap.get("Property Name"),
-				keyMap.get("Property Type"));
-	}
+    public void assertClassPropertiesPropertyName(HashMap<String, String> keyMap) {
+        assertClassPropertyNameExists(keyMap.get("Class Name"), keyMap.get("Property Name"));
+    }
 
-	public void assertClassInteractionsClassName(HashMap<String, String> keyMap) {
-		assertClassExists(keyMap.get("Class Name"));
-	}
+    public void assertClassPropertiesPropertyType(HashMap<String, String> keyMap) {
+        assertClassPropertyTypeValue(keyMap.get("Class Name"), keyMap.get("Property Name"), keyMap.get("Property Type"));
+    }
 
-	public void assertClassInteractionsInteractionName(HashMap<String, String> keyMap) {
-		assertInteractionNameExists(keyMap.get("Class Name"), keyMap.get("Interaction Name"));
-	}
+    public void assertClassInteractionsClassName(HashMap<String, String> keyMap) {
+        assertClassExists(keyMap.get("Class Name"));
+    }
 
-	public void assertInteractionParametersInteractionName(HashMap<String, String> keyMap) {
-		assertInteractionNameExists(keyMap.get("Interaction Name"));
-	}
+    public void assertClassInteractionsInteractionName(HashMap<String, String> keyMap) {
+        assertInteractionNameExists(keyMap.get("Class Name"), keyMap.get("Interaction Name"));
+    }
 
-	public void assertInteractionParametersParameterName(HashMap<String, String> keyMap) {
-		assertInteractionParameterNameExists(keyMap.get("Interaction Name"), keyMap.get("Parameter Name"));
-	}
+    public void assertInteractionParametersInteractionName(HashMap<String, String> keyMap) {
+        assertInteractionNameExists(keyMap.get("Interaction Name"));
+    }
 
-	public void assertInteractionCommentsInteractionName(HashMap<String, String> keyMap) {
-		assertInteractionNameExists(keyMap.get("Interaction Name"));
-	}
+    public void assertInteractionParametersParameterName(HashMap<String, String> keyMap) {
+        assertInteractionParameterNameExists(keyMap.get("Interaction Name"), keyMap.get("Parameter Name"));
+    }
 
-	public void assertInteractionCommentsComment(HashMap<String, String> keyMap) {
-		assertInteractionCommentValue(keyMap.get("Interaction Name"), keyMap.get("Comment"));
-	}
+    public void assertInteractionCommentsInteractionName(HashMap<String, String> keyMap) {
+        assertInteractionNameExists(keyMap.get("Interaction Name"));
+    }
 
-	public void assertInteractionAnnotationsInteractionName(HashMap<String, String> keyMap) {
-		assertInteractionNameExists(keyMap.get("Interaction Name"));
-	}
+    public void assertInteractionCommentsComment(HashMap<String, String> keyMap) {
+        assertInteractionCommentValue(keyMap.get("Interaction Name"), keyMap.get("Comment"));
+    }
 
-	public void assertInteractionAnnotationsAnnotationName(HashMap<String, String> keyMap) {
-		assertInteractionAnnotationNameExists(keyMap.get("Interaction Name"), keyMap.get("Annotation Name"));
-	}
+    public void assertInteractionAnnotationsInteractionName(HashMap<String, String> keyMap) {
+        assertInteractionNameExists(keyMap.get("Interaction Name"));
+    }
 
-	public void assertInteractionAnnotationsAnnotationDetail(HashMap<String, String> keyMap) {
-		assertInteractionAnnotationDetailExists(keyMap.get("Interaction Name"), keyMap.get("Annotation Name"),
-				keyMap.get("Annotation Detail"));
-	}
+    public void assertInteractionAnnotationsAnnotationName(HashMap<String, String> keyMap) {
+        assertInteractionAnnotationNameExists(keyMap.get("Interaction Name"), keyMap.get("Annotation Name"));
+    }
 
-	public void assertInteractionLifelinesInteractionName(HashMap<String, String> keyMap) {
-		assertInteractionNameExists(keyMap.get("Interaction Name"));
-	}
+    public void assertInteractionAnnotationsAnnotationDetail(HashMap<String, String> keyMap) {
+        assertInteractionAnnotationDetailExists(keyMap.get("Interaction Name"), keyMap.get("Annotation Name"), keyMap.get("Annotation Detail"));
+    }
 
-	public void assertInteractionLifelinesLifelineName(HashMap<String, String> keyMap) {
-		assertInteractionLifelineExists(keyMap.get("Interaction Name"), keyMap.get("Lifeline Name"));
-	}
+    public void assertInteractionLifelinesInteractionName(HashMap<String, String> keyMap) {
+        assertInteractionNameExists(keyMap.get("Interaction Name"));
+    }
 
-	public void assertInteractionLifelinesLifelineRepresents(HashMap<String, String> keyMap) {
-		assertInteractionLifelineRepresentsValue(keyMap.get("Interaction Name"), keyMap.get("Lifeline Name"),
-				keyMap.get("Lifeline Represents"));
-	}
+    public void assertInteractionLifelinesLifelineName(HashMap<String, String> keyMap) {
+        assertInteractionLifelineExists(keyMap.get("Interaction Name"), keyMap.get("Lifeline Name"));
+    }
 
-	public void assertInteractionMessagesInteractionName(HashMap<String, String> keyMap) {
-		assertInteractionNameExists(keyMap.get("Interaction Name"));
-	}
+    public void assertInteractionLifelinesLifelineRepresents(HashMap<String, String> keyMap) {
+        assertInteractionLifelineRepresentsValue(keyMap.get("Interaction Name"), keyMap.get("Lifeline Name"), keyMap.get("Lifeline Represents"));
+    }
 
-	public void assertInteractionMessagesMessage(HashMap<String, String> keyMap) {
-		assertInteractionMessageValue(keyMap.get("Interaction Name"), keyMap.get("Message"));
-	}
+    public void assertInteractionMessagesInteractionName(HashMap<String, String> keyMap) {
+        assertInteractionNameExists(keyMap.get("Interaction Name"));
+    }
 
-	public void assertInteractionMessagesArgumentName(HashMap<String, String> keyMap) {
-		assertInteractionMessageArgumentNameExists(keyMap.get("Interaction Name"), keyMap.get("Message"),
-				keyMap.get("Argument Name"));
-	}
+    public void assertInteractionMessagesMessage(HashMap<String, String> keyMap) {
+        assertInteractionMessageValue(keyMap.get("Interaction Name"), keyMap.get("Message"));
+    }
 
-	public void assertInteractionMessagesAnnotationName(HashMap<String, String> keyMap) {
-		assertInteractionMessageAnnotationNameExists(keyMap.get("Interaction Name"), keyMap.get("Message"),
-				keyMap.get("Annotation Name"));
-	}
+    public void assertInteractionMessagesArgumentName(HashMap<String, String> keyMap) {
+        assertInteractionMessageArgumentNameExists(keyMap.get("Interaction Name"), keyMap.get("Message"), keyMap.get("Argument Name"));
+    }
 
-	public void assertInteractionMessagesAnnotationDetail(HashMap<String, String> keyMap) {
-		assertInteractionMessageAnnotationDetailExists(keyMap.get("Interaction Name"), keyMap.get("Message"),
-				keyMap.get("Argument Name"), keyMap.get("Annotation Detail"));
-	}
+    public void assertInteractionMessagesAnnotationName(HashMap<String, String> keyMap) {
+        assertInteractionMessageAnnotationNameExists(keyMap.get("Interaction Name"), keyMap.get("Message"), keyMap.get("Annotation Name"));
+    }
 
-	public void assertInteractionMessageOccurencesInteractionName(HashMap<String, String> keyMap) {
-		assertInteractionNameExists(keyMap.get("Interaction Name"));
-	}
+    public void assertInteractionMessagesAnnotationDetail(HashMap<String, String> keyMap) {
+        assertInteractionMessageAnnotationDetailExists(keyMap.get("Interaction Name"), keyMap.get("Message"), keyMap.get("Argument Name"), keyMap.get("Annotation Detail"));
+    }
 
-	public void assertInteractionMessageOccurencesMessageOccurence(HashMap<String, String> keyMap) {
-		assertInteractionMessageOccurenceExists(keyMap.get("Interaction Name"), keyMap.get("Message Occurence"));
-	}
+    public void assertInteractionMessageOccurencesInteractionName(HashMap<String, String> keyMap) {
+        assertInteractionNameExists(keyMap.get("Interaction Name"));
+    }
 
-	public void assertInteractionMessageOccurencesLifelineCovered(HashMap<String, String> keyMap) {
-		assertInteractionLifelineCoveredValue(keyMap.get("Interaction Name"), keyMap.get("Message Occurence"),
-				keyMap.get("Lifeline Covered"));
-	}
+    public void assertInteractionMessageOccurencesMessageOccurence(HashMap<String, String> keyMap) {
+        assertInteractionMessageOccurenceExists(keyMap.get("Interaction Name"), keyMap.get("Message Occurence"));
+    }
+
+    public void assertInteractionMessageOccurencesLifelineCovered(HashMap<String, String> keyMap) {
+        assertInteractionLifelineCoveredValue(keyMap.get("Interaction Name"), keyMap.get("Message Occurence"), keyMap.get("Lifeline Covered"));
+    }
 }

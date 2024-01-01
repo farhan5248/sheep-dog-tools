@@ -2,7 +2,7 @@ Feature: Create Step Objects
 
   # TODO read in layer 3 java files and specify how they're merged
   Background: Create a feature file
-    Given The claim project, src/test/cucumber/dept/process.feature file is as follows
+    Given The claim project, src/test/resources/Cucumber/dept/process.feature file is as follows
       """
       Feature: This is a test feature
       

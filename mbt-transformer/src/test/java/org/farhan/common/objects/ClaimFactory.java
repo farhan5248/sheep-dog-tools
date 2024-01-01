@@ -40,7 +40,7 @@ public class ClaimFactory {
 			if (processFile == null) {
 				processFile = new ClaimProcessFeatureFile();
 				processFile.setBaseDir("claim");
-				processFile.setPath("src/test/cucumber/dept/process.feature");
+				processFile.setPath("src/test/resources/Cucumber/dept/process.feature");
 			}
 			return processFile;
 		}

@@ -7,10 +7,9 @@ import io.cucumber.java.en.Given;
 
 public class MbtTransformerCucumberToUmlGoalSteps extends TestSteps {
 
-	@Given("^The mbt-transformer plugin, cucumber-to-uml goal is executed with$")
-	public void TheMbtTransformerPluginCucumberToUmlGoalIsExecutedWith(DataTable dataTable) {
-        MbtTransformerFactory.get("MbtTransformerCucumberToUmlGoal").setAttributes(dataTable, "");
+    @Given("^The mbt-transformer plugin, cucumber-to-uml goal is executed with$")
+    public void theMbtTransformerPluginCucumberToUmlGoalIsExecutedWith(DataTable dataTable) {
+    	MbtTransformerFactory.get("MbtTransformerCucumberToUmlGoal").setAttributes(dataTable, "");
         MbtTransformerFactory.get("MbtTransformerCucumberToUmlGoal").execute();
-	}
-	
+    }
 }

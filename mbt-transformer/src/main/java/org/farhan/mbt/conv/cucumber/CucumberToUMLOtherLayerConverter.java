@@ -7,6 +7,7 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.farhan.mbt.conv.core.ConvertibleFile;
+import org.farhan.mbt.conv.core.Project;
 import org.farhan.mbt.conv.core.ToUMLOtherLayerConverter;
 import org.farhan.mbt.conv.uml.AnnotationFactory;
 import org.farhan.mbt.conv.uml.ArgumentFactory;
@@ -99,6 +100,15 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 		}
 	}
 
+	// TODO this is a duplicate method from UMLToCucumberOtherLayerConverter.
+	private boolean isSecondLayer(Class layerClass) {
+		if (layerClass.getQualifiedName().contains("::" + Project.secondLayerPackageName + "::")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	@Override
 	protected void convertToMessage(Interaction anInteraction, Object o) {
 		MethodCallExpr mce = (MethodCallExpr) o;
@@ -109,31 +119,36 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 		// the search smarter and look through all the classes in the package. That will
 		// also assume that the class name is unique
 
-		String qualifiedName = getObjectQualifiedNameFromFactory(mce);
-		ElementImportFactory.getElementImport(owningClass, qualifiedName);
-		Class importedClass = ClassFactory.getClass(UMLProject.theSystem, qualifiedName);
-		Message theMessage = MessageFactory.getMessage(anInteraction, importedClass, mce.getName().asString());
-		mce.getArguments();
-		for (Expression e : mce.getArguments()) {
-			String arg = "";
-			if (e instanceof NameExpr) {
-				arg = e.asNameExpr().getNameAsString();
-			} else if (e instanceof StringLiteralExpr) {
-				arg = "\"" + e.asStringLiteralExpr().asString().replace("\"", "\\\"") + "\"";
-			} else if (e instanceof BinaryExpr) {
-				arg = e.asBinaryExpr().toString();
-			} else if (e instanceof ObjectCreationExpr) {
-				arg = e.asObjectCreationExpr().toString();
-			} else if (e instanceof MethodCallExpr) {
-				arg = e.asMethodCallExpr().toString();
-			} else {
-				// TODO throw an exception to find new expressions
-				arg = e.asNameExpr().getNameAsString();
+		if (isSecondLayer(owningClass)) {
+			String qualifiedName = getObjectQualifiedNameFromFactory(mce);
+			ElementImportFactory.getElementImport(owningClass, qualifiedName);
+			Class importedClass = ClassFactory.getClass(UMLProject.theSystem, qualifiedName);
+			Message theMessage = MessageFactory.getMessage(anInteraction, importedClass, mce.getName().asString());
+			mce.getArguments();
+			for (Expression e : mce.getArguments()) {
+				String arg = "";
+				if (e instanceof NameExpr) {
+					arg = e.asNameExpr().getNameAsString();
+				} else if (e instanceof StringLiteralExpr) {
+					arg = "\"" + e.asStringLiteralExpr().asString().replace("\"", "\\\"") + "\"";
+				} else if (e instanceof BinaryExpr) {
+					arg = e.asBinaryExpr().toString();
+				} else if (e instanceof ObjectCreationExpr) {
+					arg = e.asObjectCreationExpr().toString();
+				} else if (e instanceof MethodCallExpr) {
+					arg = e.asMethodCallExpr().toString();
+				} else {
+					// TODO throw an exception to find new expressions
+					arg = e.asNameExpr().getNameAsString();
+				}
+				// when reading java source, the name of the arguments isn't known so I use the
+				// value as the name
+				ArgumentFactory.getArgument(theMessage, arg, arg, true);
 			}
-			// when reading java source, the name of the arguments isn't known so I use the
-			// value as the name
-			ArgumentFactory.getArgument(theMessage, arg, arg, true);
+		} else {
+			// TODO handle layer 3 java code
 		}
+
 	}
 
 	private String getObjectQualifiedNameFromFactory(MethodCallExpr mce) {
