@@ -46,6 +46,34 @@
 			<unit id="io.github.classgraph" version="4.8.149.v20220915-0556"/>
 			<repository location="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2023-09"/>
 		</location>
+		<location includeDependencyDepth="infinite" includeDependencyScopes="compile" includeSource="true" label="helloworld" missingManifest="generate" type="Maven">
+
+			<feature id="HelloWorld" version="1.0.0.qualifier">
+
+   
+
+   
+
+   
+				<description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+				<copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+				<license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+			</feature>
+			<dependencies>
+				<dependency>
+					<groupId>org.farhan</groupId>
+					<artifactId>hello-world</artifactId>
+					<version>0.0.1-SNAPSHOT</version>
+					<type>jar</type>
+				</dependency>
+			</dependencies>
+		</location>
 	</locations>
 	<implicitDependencies>
 		<plugin id="wrapped.org.farhan.hello-world"/>
