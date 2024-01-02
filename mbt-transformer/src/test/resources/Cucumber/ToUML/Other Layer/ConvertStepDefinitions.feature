@@ -1,7 +1,7 @@
 Feature: Convert Step Definitions
 
   Background: Create a feature file
-    Given The claim project, src/test/resources/Cucumber/dept/process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/Cucumber/dept/process.feature file is as follows
       """
       Feature: This is a test feature
       
@@ -10,7 +10,7 @@ Feature: Convert Step Definitions
       
           Given The blah application, Object page is empty
       """
-    And The claim project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is as follows
+    And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is as follows
       """
       package org.farhan.stepdefs.blah;
       
@@ -39,7 +39,7 @@ Feature: Convert Step Definitions
     And The mbt-transformer plugin, uml-to-cucumber goal is executed
 
   Scenario: Existing Java methods are preserved
-    Then The claim project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be as follows
+    Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be as follows
       """
       package org.farhan.stepdefs.blah;
       

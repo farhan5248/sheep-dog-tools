@@ -1,7 +1,7 @@
 Feature: Convert Scenario
 
   Background: Create a feature file
-    Given The claim project, src/test/resources/Cucumber/dept/process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/Cucumber/dept/process.feature file is as follows
       """
       Feature: This is a test feature
       
@@ -15,7 +15,7 @@ Feature: Convert Scenario
     When The mbt-transformer plugin, cucumber-to-uml goal is executed with
       | Tags |
       | tag1 |
-    Then The claim project, target/uml/pst.uml file will be present
+    Then The mbt-transformer plugin, target/uml/pst.uml file will be present
 
   Scenario: Scenario title
     And The target/uml/pst.uml file, Class Interactions section will be as follows

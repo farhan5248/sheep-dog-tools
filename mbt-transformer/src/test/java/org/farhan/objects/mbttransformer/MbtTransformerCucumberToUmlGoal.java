@@ -2,13 +2,13 @@ package org.farhan.objects.mbttransformer;
 
 import java.util.HashMap;
 
-import org.farhan.common.objects.GoalObject;
+import org.farhan.common.objects.MbtTransformer;
 import org.farhan.mbt.conv.core.Project;
 import org.farhan.mbt.conv.core.Utilities;
 import org.farhan.mbt.conv.cucumber.ConvertCucumberToUMLPSTMojo;
 import org.junit.jupiter.api.Assertions;
 
-public class MbtTransformerCucumberToUmlGoal extends GoalObject {
+public class MbtTransformerCucumberToUmlGoal extends MbtTransformer {
 
 	public void setTags(HashMap<String, String> keyMap) {
 		// TODO I should probably pass the tags to the mojoGoal to keep it simple? It an
@@ -17,7 +17,8 @@ public class MbtTransformerCucumberToUmlGoal extends GoalObject {
 	}
 
 	@Override
-	public void execute() {
+	public void transition() {
+		// TODO make this runGoal("ConvertCucumberToUMLPSTMojo");
 		try {
 			ConvertCucumberToUMLPSTMojo mojo = new ConvertCucumberToUMLPSTMojo();
 			mojo.mojoGoal();

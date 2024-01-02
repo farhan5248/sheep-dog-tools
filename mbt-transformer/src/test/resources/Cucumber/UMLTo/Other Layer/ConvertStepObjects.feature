@@ -1,7 +1,7 @@
 Feature: Convert Step Objects
 
   Background: Create a feature file
-    Given The claim project, src/test/resources/Cucumber/dept/process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/Cucumber/dept/process.feature file is as follows
       """
       Feature: This is a test feature
       
@@ -29,7 +29,7 @@ Feature: Convert Step Objects
     And The mbt-transformer plugin, uml-to-cucumber goal is executed
 
   Scenario: Non existing Java class creation with vertice data tables
-    Then The claim project, src/test/java/org/farhan/objects/blah/BlahDataTablePage.java file will be as follows
+    Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/BlahDataTablePage.java file will be as follows
       """
       package org.farhan.objects.blah;
       
@@ -51,7 +51,7 @@ Feature: Convert Step Objects
       """    
 
   Scenario: Non existing Java class creation with vertice doc strings
-    Then The claim project, src/test/java/org/farhan/objects/blah/BlahDocStringPage.java file will be as follows
+    Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/BlahDocStringPage.java file will be as follows
       """
       package org.farhan.objects.blah;
       
@@ -69,7 +69,7 @@ Feature: Convert Step Objects
       """
       
   Scenario: Non existing Java class creation with vertice details
-    Then The claim project, src/test/java/org/farhan/objects/blah/BlahObjectPage.java file will be as follows
+    Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/BlahObjectPage.java file will be as follows
       """
       package org.farhan.objects.blah;
       
@@ -87,7 +87,7 @@ Feature: Convert Step Objects
       """
 
   Scenario: Non existing Java class creation with edge details
-    Then The claim project, src/test/java/org/farhan/objects/blah2/Blah2JsonRequest.java file will be as follows
+    Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah2/Blah2JsonRequest.java file will be as follows
       """
       package org.farhan.objects.blah2;
       

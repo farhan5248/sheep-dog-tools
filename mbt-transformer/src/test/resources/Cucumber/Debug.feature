@@ -1,7 +1,7 @@
 Feature: Temp
 
   Background: Create a feature file
-    Given The claim project, src/test/resources/Cucumber/dept/process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/Cucumber/dept/process.feature file is as follows
       """
       text  
       """
@@ -12,7 +12,7 @@ Feature: Temp
 
   @debug
   Scenario: Java code is generated
-    Then The claim project, src/test/resources/Cucumber/dept/process.feature file is as follows
+    Then The mbt-transformer plugin, src/test/resources/Cucumber/dept/process.feature file is as follows
       """
       text 
       """

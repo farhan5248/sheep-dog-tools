@@ -6,12 +6,7 @@ import org.farhan.mbt.conv.core.Project;
 import org.farhan.mbt.conv.core.Utilities;
 import org.junit.jupiter.api.Assertions;
 
-public abstract class FileObject extends TestObject {
-
-	@Override
-	public void execute() {
-		// TODO this doesn't make sense to be here, will refactor later
-	}
+public abstract class FileObject extends GraphModelObject {
 
 	public void setBaseDir(String project) {
 		Project.baseDir = "target/src-gen/" + project + "/";
@@ -21,7 +16,7 @@ public abstract class FileObject extends TestObject {
 		keyValue.put("path", path);
 	}
 
-	public void assertWillBePresent() {
+	public void assertFileExists() {
 
 		try {
 			File theFile = new File(Project.baseDir + keyValue.get("path"));
@@ -29,16 +24,6 @@ public abstract class FileObject extends TestObject {
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step");
 		}
-	}
-
-	public void setAttributes(String docString) {
-		// TODO delete this after adding bodies to the versions in TestObject
-		setContent(docString);
-	}
-
-	public void assertAttributes(String docString) {
-		// TODO delete this after adding bodies to the versions in TestObject
-		assertContent(docString);
 	}
 
 	public void setContent(String docString) {
