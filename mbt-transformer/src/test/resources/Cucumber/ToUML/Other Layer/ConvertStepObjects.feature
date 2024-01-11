@@ -24,8 +24,8 @@ Feature: Convert Step Objects
               throw new PendingException();
           }
       }
-      
-      """      
+
+      """
     When The mbt-transformer plugin, cucumber-to-uml goal is executed with
       | Tags |
       | tag1 |
@@ -50,5 +50,5 @@ Feature: Convert Step Objects
               throw new PendingException();
           }
       }
-      
-      """   
+
+      """
