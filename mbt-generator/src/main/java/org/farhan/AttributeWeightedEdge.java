@@ -13,6 +13,7 @@ public class AttributeWeightedEdge extends DefaultWeightedEdge {
 	public AttributeWeightedEdge(String label) {
 		attributes = new HashMap<String, String>();
 		attributes.put("label", label);
+		attributes.put("tag", "");
 	}
 
 	public void addAttribute(String key, String value) {
@@ -28,7 +29,7 @@ public class AttributeWeightedEdge extends DefaultWeightedEdge {
 		attributes.put("tag", tag);
 	}
 
-	public String getTag(String tag) {
+	public String getTag() {
 		return attributes.get("tag");
 	}
 

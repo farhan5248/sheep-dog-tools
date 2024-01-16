@@ -1,4 +1,4 @@
-package org.farhan;
+package org.farhan.demo;
 
 import com.mxgraph.layout.*;
 import com.mxgraph.swing.*;
@@ -15,7 +15,7 @@ import java.awt.*;
  *
  */
 @SuppressWarnings("removal")
-public class JGraphXAdapterDemo extends JApplet {
+public class JGraphXDemo extends JApplet {
 	private static final long serialVersionUID = 2202072534703043194L;
 
 	private static final Dimension DEFAULT_SIZE = new Dimension(530, 320);
@@ -29,7 +29,7 @@ public class JGraphXAdapterDemo extends JApplet {
 	 * @param args command line arguments
 	 */
 	public static void main(String[] args) {
-		JGraphXAdapterDemo applet = new JGraphXAdapterDemo();
+		JGraphXDemo applet = new JGraphXDemo();
 		applet.init();
 
 		JFrame frame = new JFrame();

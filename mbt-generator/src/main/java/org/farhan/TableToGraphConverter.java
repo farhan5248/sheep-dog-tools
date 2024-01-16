@@ -28,8 +28,6 @@ public class TableToGraphConverter {
 		for (int i = 1; i < table.size(); i++) {
 			createStartEdge(g, vertices, table.get(i));
 
-			// TODO this assumes a table with at least two columns
-			AttributeVertex prevVertice = vertices.get(1);
 			for (int j = 0; j < vertices.size() - 1; j++) {
 				String label = table.get(i).get(j);
 				if (!label.isEmpty()) {
@@ -38,7 +36,6 @@ public class TableToGraphConverter {
 			}
 			// TODO this assumes the last column isn't blank
 			createEndEdge(g, vertices, table.get(i));
-
 		}
 		return g;
 	}

@@ -20,15 +20,31 @@ public class PathGenerator {
 			for (AttributeWeightedEdge e : edges) {
 				pathsFromChild = getAllPaths(g, g.getEdgeTarget(e));
 				for (AttributePath p : pathsFromChild) {
-					p.add(0, g.getEdgeTarget(e).getLabel());
-					p.add(0, e.getLabel());
+					p.add(0, g.getEdgeTarget(e));
+					p.add(0, e);
 					if (vertice.getLabel().contentEquals(GraphHelper.getStartVertice(g).getLabel())) {
-						p.add(0, vertice.getLabel());
+						p.add(0, vertice);
 					}
 				}
 				pathsFromVertice.addAll(pathsFromChild);
 			}
 			return pathsFromVertice;
 		}
+	}
+
+	public static ArrayList<AttributePath> getTaggedPaths(
+			DirectedWeightedPseudograph<AttributeVertex, AttributeWeightedEdge> g, AttributeVertex vertice,
+			String tag) {
+		ArrayList<AttributePath> pathsFromVertice = getAllPaths(g, vertice);
+
+		for (int i = pathsFromVertice.size() - 1; i >= 0; i--) {
+
+			AttributePath path = pathsFromVertice.get(i);
+			if (!path.contains(tag)) {
+				pathsFromVertice.remove(i);
+			}
+		}
+
+		return pathsFromVertice;
 	}
 }

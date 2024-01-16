@@ -15,7 +15,7 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR LGPL-2.1-or-later
  */
-package org.farhan;
+package org.farhan.demo;
 
 import org.jgrapht.*;
 import org.jgrapht.graph.*;
@@ -32,8 +32,8 @@ import java.util.*;
  *
  * @author Barak Naveh
  */
-public final class HelloJGraphT {
-	private HelloJGraphT() {
+public final class JGraphTDemo {
+	private JGraphTDemo() {
 	} // ensure non-instantiability.
 
 	/**

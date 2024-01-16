@@ -1,12 +1,11 @@
 package org.farhan;
 
 import java.util.ArrayList;
-import java.util.Set;
 import org.jgrapht.graph.DirectedWeightedPseudograph;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class TableToGraphTest {
+class TableToGraphConverterTest {
 
 	@Test
 	/**
@@ -33,15 +32,10 @@ class TableToGraphTest {
 		DirectedWeightedPseudograph<AttributeVertex, AttributeWeightedEdge> g = TableToGraphConverter
 				.createGraphFromTable(table);
 		System.out.println(g.toString());
-
-		ArrayList<AttributePath> paths = PathGenerator.getAllPaths(g, GraphHelper.getStartVertice(g));
-		for (AttributePath p : paths) {
-			System.out.println(p.toString());
-		}
-
-		Assertions.assertEquals(1, paths.size());
-		Assertions.assertEquals("start ->  -> insurer -> 5 -> group -> 10 -> certificate -> 15 -> end",
-				paths.getFirst().toString());
+		Assertions.assertEquals(
+				"([start, end, insurer, group, certificate],"
+						+ " [=(start,insurer), 5=(insurer,group), 10=(group,certificate), 15=(certificate,end)])",
+				g.toString());
 	}
 
 	@Test
@@ -76,16 +70,9 @@ class TableToGraphTest {
 		DirectedWeightedPseudograph<AttributeVertex, AttributeWeightedEdge> g = TableToGraphConverter
 				.createGraphFromTable(table);
 		System.out.println(g.toString());
-
-		ArrayList<AttributePath> paths = PathGenerator.getAllPaths(g, GraphHelper.getStartVertice(g));
-		for (AttributePath p : paths) {
-			System.out.println(p.toString());
-		}
-		Assertions.assertEquals(2, paths.size());
-		Assertions.assertEquals("start ->  -> insurer -> 5 -> group -> 10 -> certificate -> 15 -> end",
-				paths.getFirst().toString());
-		Assertions.assertEquals("start ->  -> insurer -> 5 -> group -> 10 -> certificate -> 12 -> end",
-				paths.getLast().toString());
+		Assertions.assertEquals("([start, end, insurer, group, certificate],"
+				+ " [=(start,insurer), 5=(insurer,group), 10=(group,certificate), 15=(certificate,end), 12=(certificate,end)])",
+				g.toString());
 	}
 
 	@Test
@@ -120,16 +107,9 @@ class TableToGraphTest {
 		DirectedWeightedPseudograph<AttributeVertex, AttributeWeightedEdge> g = TableToGraphConverter
 				.createGraphFromTable(table);
 		System.out.println(g.toString());
-
-		ArrayList<AttributePath> paths = PathGenerator.getAllPaths(g, GraphHelper.getStartVertice(g));
-		for (AttributePath p : paths) {
-			System.out.println(p.toString());
-		}
-		Assertions.assertEquals(8, paths.size());
-		Assertions.assertEquals("start ->  -> insurer -> 5 -> group -> 10 -> certificate -> 15 -> end",
-				paths.getFirst().toString());
-		Assertions.assertEquals("start ->  -> insurer -> 4 -> group -> 8 -> certificate -> 12 -> end",
-				paths.getLast().toString());
+		Assertions.assertEquals("([start, end, insurer, group, certificate],"
+				+ " [=(start,insurer), 5=(insurer,group), 10=(group,certificate), 15=(certificate,end), 4=(insurer,group), 8=(group,certificate), 12=(certificate,end)])",
+				g.toString());
 	}
 
 }
