@@ -3,12 +3,10 @@ package org.farhan;
 import java.util.ArrayList;
 import java.util.Set;
 
-import org.jgrapht.graph.DirectedWeightedPseudograph;
-
 public class PathGenerator {
 
-	public static ArrayList<AttributePath> getAllPaths(
-			DirectedWeightedPseudograph<AttributeVertex, AttributeWeightedEdge> g, AttributeVertex vertice) {
+	public static ArrayList<AttributePath> getAllPaths(MBTGraph<AttributeVertex, AttributeWeightedEdge> g,
+			AttributeVertex vertice) {
 		ArrayList<AttributePath> pathsFromVertice = new ArrayList<AttributePath>();
 		ArrayList<AttributePath> pathsFromChild;
 		Set<AttributeWeightedEdge> edges = g.outgoingEdgesOf(vertice);
@@ -22,7 +20,7 @@ public class PathGenerator {
 				for (AttributePath p : pathsFromChild) {
 					p.add(0, g.getEdgeTarget(e));
 					p.add(0, e);
-					if (vertice.getLabel().contentEquals(GraphHelper.getStartVertice(g).getLabel())) {
+					if (vertice.getLabel().contentEquals(g.getStartVertice().getLabel())) {
 						p.add(0, vertice);
 					}
 				}
@@ -32,9 +30,8 @@ public class PathGenerator {
 		}
 	}
 
-	public static ArrayList<AttributePath> getTaggedPaths(
-			DirectedWeightedPseudograph<AttributeVertex, AttributeWeightedEdge> g, AttributeVertex vertice,
-			String tag) {
+	public static ArrayList<AttributePath> getTaggedPaths(MBTGraph<AttributeVertex, AttributeWeightedEdge> g,
+			AttributeVertex vertice, String tag) {
 		ArrayList<AttributePath> pathsFromVertice = getAllPaths(g, vertice);
 
 		for (int i = pathsFromVertice.size() - 1; i >= 0; i--) {

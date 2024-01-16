@@ -4,25 +4,27 @@ import java.util.HashMap;
 
 import org.jgrapht.graph.DefaultWeightedEdge;
 
-@SuppressWarnings("serial")
 public class AttributeWeightedEdge extends DefaultWeightedEdge {
 
-	private static final long serialVersionUID = -6681665149703952410L;
-	private HashMap<String, String> attributes;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5850254711369259654L;
+	private HashMap<String, Object> attributes;
 
 	public AttributeWeightedEdge(String label) {
-		attributes = new HashMap<String, String>();
+		attributes = new HashMap<String, Object>();
 		attributes.put("label", label);
 		attributes.put("tag", "");
 	}
 
-	public void addAttribute(String key, String value) {
+	public void addAttribute(String key, Object value) {
 		// the prefix is there to prevent an attribute matching tag or label
 		attributes.put("_" + key, value);
 	}
 
 	public String getAttribute(String key) {
-		return attributes.get("_" + key);
+		return attributes.get("_" + key).toString();
 	}
 
 	public void setTag(String tag) {
@@ -30,11 +32,11 @@ public class AttributeWeightedEdge extends DefaultWeightedEdge {
 	}
 
 	public String getTag() {
-		return attributes.get("tag");
+		return attributes.get("tag").toString();
 	}
 
 	public String getLabel() {
-		return attributes.get("label");
+		return attributes.get("label").toString();
 	}
 
 	@Override

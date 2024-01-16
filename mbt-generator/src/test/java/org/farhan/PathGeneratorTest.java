@@ -3,7 +3,6 @@ package org.farhan;
 import java.util.ArrayList;
 import java.util.Set;
 
-import org.jgrapht.graph.DirectedWeightedPseudograph;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -16,24 +15,12 @@ class PathGeneratorTest {
 	 */
 	void singleOutgoingEdgeFromAllVertices() {
 
-		ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
-		ArrayList<String> row;
-		// headers
-		row = new ArrayList<String>();
-		row.add("insurer");
-		row.add("group");
-		row.add("certificate");
-		table.add(row);
-		// row 1
-		row = new ArrayList<String>();
-		row.add("5");
-		row.add("10");
-		row.add("15");
-		table.add(row);
+		MBTTable table = new MBTTable("Set Object as follows");
+		table.addRow("insurer", "group", "certificate");
+		table.addRow("5", "10", "15");
 
-		DirectedWeightedPseudograph<AttributeVertex, AttributeWeightedEdge> g = TableToGraphConverter
-				.createGraphFromTable(table);
-		ArrayList<AttributePath> paths = PathGenerator.getAllPaths(g, GraphHelper.getStartVertice(g));
+		MBTGraph<AttributeVertex, AttributeWeightedEdge> g = TableToMBTGraphConverter.createFromMultipleColumns(table);
+		ArrayList<AttributePath> paths = PathGenerator.getAllPaths(g, g.getStartVertice());
 		for (AttributePath p : paths) {
 			System.out.println(p.toString());
 		}
@@ -50,30 +37,13 @@ class PathGeneratorTest {
 	 */
 	void multipleOutgoingEdgesFromOneVertice() {
 
-		ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
-		ArrayList<String> row;
-		// headers
-		row = new ArrayList<String>();
-		row.add("insurer");
-		row.add("group");
-		row.add("certificate");
-		table.add(row);
-		// row 1
-		row = new ArrayList<String>();
-		row.add("5");
-		row.add("10");
-		row.add("15");
-		table.add(row);
-		// row 2
-		row = new ArrayList<String>();
-		row.add("5");
-		row.add("10");
-		row.add("12");
-		table.add(row);
+		MBTTable table = new MBTTable("Set Object as follows");
+		table.addRow("insurer", "group", "certificate");
+		table.addRow("5", "10", "15");
+		table.addRow("5", "10", "12");
 
-		DirectedWeightedPseudograph<AttributeVertex, AttributeWeightedEdge> g = TableToGraphConverter
-				.createGraphFromTable(table);
-		ArrayList<AttributePath> paths = PathGenerator.getAllPaths(g, GraphHelper.getStartVertice(g));
+		MBTGraph<AttributeVertex, AttributeWeightedEdge> g = TableToMBTGraphConverter.createFromMultipleColumns(table);
+		ArrayList<AttributePath> paths = PathGenerator.getAllPaths(g, g.getStartVertice());
 		for (AttributePath p : paths) {
 			System.out.println(p.toString());
 		}
@@ -92,30 +62,13 @@ class PathGeneratorTest {
 	 */
 	void multipleOutgoingEdgesFromAllVertices() {
 
-		ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
-		ArrayList<String> row;
-		// headers
-		row = new ArrayList<String>();
-		row.add("insurer");
-		row.add("group");
-		row.add("certificate");
-		table.add(row);
-		// row 1
-		row = new ArrayList<String>();
-		row.add("5");
-		row.add("10");
-		row.add("15");
-		table.add(row);
-		// row 2
-		row = new ArrayList<String>();
-		row.add("4");
-		row.add("8");
-		row.add("12");
-		table.add(row);
+		MBTTable table = new MBTTable("Set Object as follows");
+		table.addRow("insurer", "group", "certificate");
+		table.addRow("5", "10", "15");
+		table.addRow("4", "8", "12");
 
-		DirectedWeightedPseudograph<AttributeVertex, AttributeWeightedEdge> g = TableToGraphConverter
-				.createGraphFromTable(table);
-		ArrayList<AttributePath> paths = PathGenerator.getAllPaths(g, GraphHelper.getStartVertice(g));
+		MBTGraph<AttributeVertex, AttributeWeightedEdge> g = TableToMBTGraphConverter.createFromMultipleColumns(table);
+		ArrayList<AttributePath> paths = PathGenerator.getAllPaths(g, g.getStartVertice());
 		for (AttributePath p : paths) {
 			System.out.println(p.toString());
 		}
@@ -146,29 +99,12 @@ class PathGeneratorTest {
 	 */
 	void taggedEdgesFromAllVertices() {
 
-		ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
-		ArrayList<String> row;
-		// headers
-		row = new ArrayList<String>();
-		row.add("insurer");
-		row.add("group");
-		row.add("certificate");
-		table.add(row);
-		// row 1
-		row = new ArrayList<String>();
-		row.add("5");
-		row.add("10");
-		row.add("15");
-		table.add(row);
-		// row 2
-		row = new ArrayList<String>();
-		row.add("4");
-		row.add("8");
-		row.add("12");
-		table.add(row);
+		MBTTable table = new MBTTable("Set Object as follows");
+		table.addRow("insurer", "group", "certificate");
+		table.addRow("5", "10", "15");
+		table.addRow("4", "8", "12");
 
-		DirectedWeightedPseudograph<AttributeVertex, AttributeWeightedEdge> g = TableToGraphConverter
-				.createGraphFromTable(table);
+		MBTGraph<AttributeVertex, AttributeWeightedEdge> g = TableToMBTGraphConverter.createFromMultipleColumns(table);
 		Set<AttributeWeightedEdge> edges = g.getAllEdges(new AttributeVertex("group"),
 				new AttributeVertex("certificate"));
 		for (AttributeWeightedEdge edge : edges) {
@@ -176,7 +112,7 @@ class PathGeneratorTest {
 				edge.setTag("tagged");
 			}
 		}
-		ArrayList<AttributePath> paths = PathGenerator.getTaggedPaths(g, GraphHelper.getStartVertice(g), "tagged");
+		ArrayList<AttributePath> paths = PathGenerator.getTaggedPaths(g, g.getStartVertice(), "tagged");
 		for (AttributePath p : paths) {
 			System.out.println(p.toString());
 		}
