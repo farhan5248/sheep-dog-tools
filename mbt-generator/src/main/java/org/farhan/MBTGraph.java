@@ -1,7 +1,5 @@
 package org.farhan;
 
-import java.util.ArrayList;
-
 import org.jgrapht.graph.DirectedWeightedPseudograph;
 
 public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
