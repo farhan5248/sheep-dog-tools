@@ -17,8 +17,8 @@ import org.farhan.mbt.conv.uml.InteractionFactory;
 import org.farhan.mbt.conv.uml.MessageFactory;
 import org.farhan.mbt.conv.uml.ParameterFactory;
 import org.farhan.mbt.conv.uml.UMLProject;
-import org.farhan.mbt.graph.validation.EdgeValidator;
-import org.farhan.mbt.graph.validation.VerticeValidator;
+import org.farhan.mbt.graph.validation.MBTEdgeValidator;
+import org.farhan.mbt.graph.validation.MBTVertexValidator;
 
 public class CucumberToUMLFirstLayerLinker extends ToUMLFirstLayerLinker {
 
@@ -42,7 +42,7 @@ public class CucumberToUMLFirstLayerLinker extends ToUMLFirstLayerLinker {
 	@Override
 	protected void createNextLayerInteractionMessagesFromVerticeMessage(Interaction targetInteraction, Message m) {
 
-		String text = VerticeValidator.getDetails(m.getName());
+		String text = MBTVertexValidator.getDetails(m.getName());
 		if (text.startsWith("will be") || text.startsWith("won't be")) {
 			createInputOutputMessage(targetInteraction, m, "assert");
 		} else if (text.startsWith("is") || text.startsWith("isn't")) {
@@ -106,10 +106,10 @@ public class CucumberToUMLFirstLayerLinker extends ToUMLFirstLayerLinker {
 		} else {
 
 			String attributeName = "";
-			if (VerticeValidator.isVertice(m.getName())) {
-				attributeName = VerticeValidator.getDetails(m.getName());
+			if (MBTVertexValidator.isVertice(m.getName())) {
+				attributeName = MBTVertexValidator.getDetails(m.getName());
 			} else {
-				attributeName = EdgeValidator.getDetails(m.getName());
+				attributeName = MBTEdgeValidator.getDetails(m.getName());
 			}
 			String methodName = CucumberNameConverter.getMethodName(prefix + StringUtils.capitalize(attributeName),
 					true);
