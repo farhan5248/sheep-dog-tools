@@ -1,5 +1,5 @@
 package org.farhan.mbt.graph.validation;
 
-public class PathValidator {
+public class MBTGraphValidator {
 
 }

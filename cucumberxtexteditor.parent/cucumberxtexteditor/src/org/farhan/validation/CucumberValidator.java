@@ -10,8 +10,8 @@ import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
-import org.farhan.mbt.graph.validation.EdgeValidator;
-import org.farhan.mbt.graph.validation.VerticeValidator;
+import org.farhan.mbt.graph.validation.MBTEdgeValidator;
+import org.farhan.mbt.graph.validation.MBTVertexValidator;
 
 public class CucumberValidator extends AbstractCucumberValidator {
 
@@ -26,9 +26,9 @@ public class CucumberValidator extends AbstractCucumberValidator {
 		// TODO the quickfix here is to identify which regex is broken and put an
 		// example in place
 
-		if (!EdgeValidator.isValid(step.getName()) && !VerticeValidator.isValid(step.getName())) {
+		if (!MBTEdgeValidator.isValid(step.getName()) && !MBTVertexValidator.isValid(step.getName())) {
 			// TODO instead of this error message, give the parts breakdown to see what's missing
-			error(VerticeValidator.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
+			error(MBTVertexValidator.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
 		}
 
 		// TODO apply validation to Given/Then vs When

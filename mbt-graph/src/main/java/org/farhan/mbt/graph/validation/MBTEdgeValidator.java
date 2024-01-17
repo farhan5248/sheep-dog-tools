@@ -3,7 +3,7 @@ package org.farhan.mbt.graph.validation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class EdgeValidator {
+public class MBTEdgeValidator {
 
 	// The
 	// ( .*( application| service| project| plugin| batchjob),)?

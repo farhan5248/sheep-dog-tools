@@ -3,7 +3,7 @@ package org.farhan.mbt.graph.validation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class VerticeValidator {
+public class MBTVertexValidator {
 
 	// The
 	// ( .*( application| service| project| plugin| batchjob),)?

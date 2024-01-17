@@ -6,8 +6,7 @@
 	<artifactId>mbt-transformer</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<name>MBT Transformer</name>
-	<description>Use for validation and round trip engineering of code to
-		models.</description>
+	<description>Transforms test cases to models and vice-versa</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

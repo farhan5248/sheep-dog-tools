@@ -3,8 +3,8 @@ package org.farhan.mbt.conv.core;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
-import org.farhan.mbt.graph.validation.EdgeValidator;
-import org.farhan.mbt.graph.validation.VerticeValidator;
+import org.farhan.mbt.graph.validation.MBTEdgeValidator;
+import org.farhan.mbt.graph.validation.MBTVertexValidator;
 
 public abstract class ToUMLFirstLayerLinker extends ToUMLLayerLinker {
 
@@ -12,9 +12,9 @@ public abstract class ToUMLFirstLayerLinker extends ToUMLLayerLinker {
 	protected void addNextLayerInteractionMessages(Interaction targetInteraction, Message m) {
 
 		if (Validator.validateStepText(m.getName())) {
-			if (VerticeValidator.isVertice(m.getName())) {
+			if (MBTVertexValidator.isVertice(m.getName())) {
 				createNextLayerInteractionMessagesFromVerticeMessage(targetInteraction, m);
-			} else if (EdgeValidator.isEdge(m.getName())) {
+			} else if (MBTEdgeValidator.isEdge(m.getName())) {
 				createNextLayerInteractionMessagesFromEdgeMessage(targetInteraction, m);
 			}
 		}
