@@ -4,13 +4,18 @@ import org.asciidoctor.Asciidoctor.Factory;
 import org.asciidoctor.Options;
 import org.asciidoctor.OptionsBuilder;
 import org.asciidoctor.ast.Author;
+import org.asciidoctor.ast.Block;
 import org.asciidoctor.ast.Document;
 import org.asciidoctor.ast.RevisionInfo;
+import org.asciidoctor.ast.Section;
 import org.asciidoctor.ast.StructuralNode;
 
 import java.io.File;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.asciidoctor.Asciidoctor;
 
 public class Demo {
@@ -21,19 +26,42 @@ public class Demo {
 	private static void readStructure() {
 
 		Asciidoctor asciidoctor = Factory.create();
-		Document adoc = asciidoctor.loadFile(new File("structure.adoc"), Options.builder().asMap());
+		Document adoc = asciidoctor.loadFile(new File("structure.adoc"), Options.builder().build());
+		for (StructuralNode block : adoc.getBlocks()) {
+			outputSection((Section) block);
+		}
+	}
 
-		for (StructuralNode part : adoc.getBlocks()) {
-			System.out.println(part.getTitle());
-			System.out.println("----");
-			System.out.println(part.getContent());
-			System.out.println("----");
+	private static void outputSection(Section section) {
+		System.out.println("----");
+		System.out.println(section.getTitle());
+		System.out.println(section.getLevel());
+		List<StructuralNode> blocks = section.getBlocks();
+		for (StructuralNode block : blocks) {
+			if (block instanceof Block) {
+				outputBlock((Block) block);
+			} else if (block instanceof Section) {
+				outputSection((Section) block);
+			}
+		}
+		System.out.println("----");
+	}
+
+	private static void outputBlock(Block block) {
+		ArrayList<String> lines = new ArrayList<String>();
+		for (String line : block.getLines()) {
+			System.out.println(line);
+			lines.add(line + line);
+		}
+		block.setLines(lines);
+		for (String line : block.getLines()) {
+			System.out.println(line);
 		}
 	}
 
 	private static void printDocHeader() {
 		Asciidoctor asciidoctor = Factory.create();
-		Document adoc = asciidoctor.loadFile(new File("header-sample.adoc"), Options.builder().asMap());
+		Document adoc = asciidoctor.loadFile(new File("header-sample.adoc"), Options.builder().build());
 
 		System.out.println(adoc.getDoctitle());
 
