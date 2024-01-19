@@ -1,6 +1,8 @@
 package org.farhan.mbt.graph.generation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import org.farhan.mbt.graph.MBTPath;
@@ -9,7 +11,6 @@ import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
 import org.farhan.mbt.graph.MBTTable;
 import org.farhan.mbt.graph.conversion.TableToMBTGraphConverter;
-import org.farhan.mbt.graph.generation.PathGenerator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -146,6 +147,35 @@ class PathGeneratorTest {
 		Assertions.assertEquals(
 				"(start) -> (start ->  -> ins) -> (ins) -> (ins -> 4 -> grp) -> (grp) -> (grp -> 8 -> crt) -> (crt) -> (crt -> 12 -> end) -> (end)",
 				paths.get(3).toString());
+	}
+
+	@Test
+	/**
+	 * TODO 
+	 */
+	void compoundPaths() {
+
+		ArrayList<String> list = new ArrayList<String>();
+		list.add("Step 1");
+		Map<String, ArrayList<String>> lists = new HashMap<String, ArrayList<String>>();
+		lists.put("Scenario name", list);
+
+		MBTTable fieldTable = new MBTTable("Step 1");
+		fieldTable.addRow("ins", "grp", "crt");
+		fieldTable.addRow("5", "10", "15");
+
+		MBTGraph<MBTVertex, MBTEdge> objectGraph = TableToMBTGraphConverter.createFromMultiList(lists, "Feature Name");
+		MBTGraph<MBTVertex, MBTEdge> fieldGraph = TableToMBTGraphConverter.createFromMultipleColumns(fieldTable);
+		MBTEdge edge = (MBTEdge) objectGraph.outgoingEdgesOf(objectGraph.getVertex("Step 1")).toArray()[0];
+		edge.setValue(fieldGraph);
+
+		ArrayList<MBTPath> paths = PathGenerator.getAllPaths(objectGraph, objectGraph.getStartVertex());
+		for (MBTPath p : paths) {
+			System.out.println(p.toString());
+		}
+		Assertions.assertEquals("(start) -> (start ->  -> Step 1) -> (Step 1) -> "
+				+ "(start) -> (start ->  -> ins) -> (ins) -> (ins -> 5 -> grp) -> (grp) -> (grp -> 10 -> crt) -> (crt) -> (crt -> 15 -> end) -> (end) -> "
+				+ "(end)", paths.get(0).toString());
 	}
 
 }

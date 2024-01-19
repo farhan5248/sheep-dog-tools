@@ -71,29 +71,4 @@ public class SectionToObjectGraphConverterTest {
 				g.toString());
 	}
 
-	@Test
-	/**
-	 * TODO 
-	 */
-	void linkObjectGraphToFieldGraph() {
-
-		ArrayList<String> list = new ArrayList<String>();
-		list.add("Step 1");
-		Map<String, ArrayList<String>> lists = new HashMap<String, ArrayList<String>>();
-		lists.put("Scenario name", list);
-
-		MBTTable fieldTable = new MBTTable("Step 1");
-		fieldTable.addRow("ins", "grp", "crt");
-		fieldTable.addRow("5", "10", "15");
-
-		MBTGraph<MBTVertex, MBTEdge> objectGraph = TableToMBTGraphConverter.createFromMultiList(lists, "Feature Name");
-		MBTGraph<MBTVertex, MBTEdge> fieldGraph = TableToMBTGraphConverter.createFromMultipleColumns(fieldTable);
-		MBTEdge edge = (MBTEdge) objectGraph.outgoingEdgesOf(objectGraph.getVertex("Step 1")).toArray()[0];
-		edge.setValue(fieldGraph);
-
-		System.out.println(edge.getValue().toString());
-		Assertions.assertEquals("Step 1 " + "([start, end, ins, grp, crt], "
-				+ "[start ->  -> ins=(start,ins), ins -> 5 -> grp=(ins,grp), grp -> 10 -> crt=(grp,crt), crt -> 15 -> end=(crt,end)])",
-				edge.getValue().toString());
-	}
 }
