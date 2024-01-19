@@ -17,7 +17,7 @@ public class MBTPath {
 	public String toString() {
 		String pathAsString = "";
 		for (Object verticeOrEdge : path) {
-			pathAsString += verticeOrEdge.toString() + " -> ";
+			pathAsString += "(" + verticeOrEdge.toString() + ")" + " -> ";
 		}
 		pathAsString = pathAsString.replaceAll(" -> $", "");
 		return pathAsString;

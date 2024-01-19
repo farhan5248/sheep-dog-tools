@@ -27,12 +27,13 @@ public class MBTEdge extends DefaultWeightedEdge {
 		return attributes.get("_" + key).toString();
 	}
 
-	public void setGraph(Object graph) {
-		attributes.put("graph", graph);
+	// I need a better name for this but it's either a graph or an expression
+	public void setValue(Object graph) {
+		attributes.put("value", graph);
 	}
 
-	public Object getGraph() {
-		return attributes.get("graph");
+	public Object getValue() {
+		return attributes.get("value");
 	}
 
 	public void setTag(String tag) {
@@ -43,13 +44,21 @@ public class MBTEdge extends DefaultWeightedEdge {
 		return attributes.get("tag").toString();
 	}
 
+	public void setLabel(String label) {
+		attributes.put("label", label);
+	}
+
 	public String getLabel() {
 		return attributes.get("label").toString();
 	}
 
 	@Override
 	public String toString() {
-		return getSource().toString() + " -> " + getLabel() + " -> " + getTarget().toString();
+		Object value = getValue();
+		if (value == null) {
+			value = "";
+		}
+		return getSource().toString() + " -> " + value + " -> " + getTarget().toString();
 	}
 
 	@Override

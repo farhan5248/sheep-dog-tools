@@ -1,6 +1,7 @@
 package org.farhan.mbt.graph.conversion;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
@@ -12,10 +13,8 @@ public class TableToMBTGraphConverter {
 	public static MBTGraph<MBTVertex, MBTEdge> createEmpty(String name) {
 		MBTGraph<MBTVertex, MBTEdge> g = new MBTGraph<>(MBTEdge.class);
 		g.setName(name);
-		// add start and end vertices
-		g.createVertex("start");
-		g.createVertex("end");
-
+		g.createStartVertex();
+		g.createEndVertex();
 		return g;
 	}
 
@@ -32,47 +31,41 @@ public class TableToMBTGraphConverter {
 
 		// go through each row and convert to edge
 		for (int i = 1; i < table.size(); i++) {
-			g.createStartEdge(vertices.getFirst());
+
+			g.createEdgeWithInput(g.getStartVertex(), vertices.getFirst(), "", "");
 
 			ArrayList<String> row = table.get(i);
 			for (int j = 0; j < vertices.size() - 1; j++) {
 				String label = row.get(j);
 				if (!label.isEmpty()) {
-					g.createEdge(vertices.get(j), vertices.get(j + 1), row.get(j), 1.0);
+					g.createEdgeWithInput(vertices.get(j), vertices.get(j + 1), row.get(j), row.get(j));
 				}
 			}
 			// TODO this assumes the last column isn't blank
-			g.createEndEdge(vertices.getLast(), row.get(row.size() - 1));
+			g.createEdgeWithInput(vertices.getLast(), g.getEndVertex(), row.getLast(), row.getLast());
 		}
 		return g;
 	}
 
-	public static MBTGraph<MBTVertex, MBTEdge> createFromSingleColumn(MBTTable table) {
+	public static MBTGraph<MBTVertex, MBTEdge> createFromMultiList(Map<String, ArrayList<String>> lists,
+			String listsName) {
+		MBTGraph<MBTVertex, MBTEdge> g = TableToMBTGraphConverter.createEmpty(listsName);
+		for (String listName : lists.keySet()) {
+			createFromList(g, lists.get(listName), listName);
+		}
+		return g;
+	}
 
-		MBTGraph<MBTVertex, MBTEdge> g = TableToMBTGraphConverter.createEmpty(table.getCaption());
-		// loop through all the rows as if they were sections in an adoc file
-		ArrayList<ArrayList<String>> rows = table.getRows();
-		TableToMBTGraphConverter.createFromEdge(g, g.getStartVertex().getLabel(), rows.getFirst().getFirst(), "", null);
-		for (int i = 0; i < rows.size() - 1; i++) {
+	public static void createFromList(MBTGraph<MBTVertex, MBTEdge> g, ArrayList<String> list, String name) {
+
+		g.createEdgeWithVertices(g.getStartVertex().getLabel(), list.getFirst(), "", null);
+		for (int i = 0; i < list.size() - 1; i++) {
 			// this step would probably be getting block title
-			String source = rows.get(i).getFirst();
-			String target = rows.get(i + 1).getFirst();
-			TableToMBTGraphConverter.createFromEdge(g, source, target, table.getCaption(), null);
+			String source = list.get(i);
+			String target = list.get(i + 1);
+			g.createEdgeWithVertices(source, target, name, null);
 		}
-		TableToMBTGraphConverter.createFromEdge(g, rows.getLast().getFirst(), g.getEndVertex().getLabel(),
-				table.getCaption(), null);
-		return g;
+		g.createEdgeWithVertices(list.getLast(), g.getEndVertex().getLabel(), name, null);
 	}
 
-	public static MBTEdge createFromEdge(MBTGraph<MBTVertex, MBTEdge> g, String sourceLabel, String targetLabel,
-			String edgeLabel, Object edgeInput) {
-
-		// TODO create method to create vertex if it doesn't exist, otherwise this
-		// object won't be added and the edge will point to an orphaned vertex
-		MBTVertex source = g.createVertex(sourceLabel);
-		MBTVertex target = g.createVertex(targetLabel);
-		MBTEdge edge = g.createEdge(source, target, edgeLabel, 1.0);
-		edge.setGraph(edgeInput);
-		return edge;
-	}
 }

@@ -25,50 +25,28 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 	}
 
 	public MBTVertex getStartVertex() {
-		for (V v : this.vertexSet()) {
-			MBTVertex av = (MBTVertex) v;
-			if (av.getLabel().contentEquals("start")) {
-				return av;
-			}
-		}
-		return null;
+		return getVertex("start");
 	}
 
 	public MBTVertex getEndVertex() {
-		for (V v : this.vertexSet()) {
-			MBTVertex av = (MBTVertex) v;
-			if (av.getLabel().contentEquals("end")) {
-				return av;
-			}
-		}
-		return null;
+		return getVertex("end");
 	}
 
 	public String toString() {
 		return name + " " + super.toString();
 	}
 
-	public void createStartEdge(MBTVertex vertex) {
-		MBTGraph<MBTVertex, MBTEdge> g = getThisGraph();
-		createEdge(g.getStartVertex(), vertex, "", 1.0);
+	public void createStartVertex() {
+		createVertex("start");
 	}
 
-	public void createEndEdge(MBTVertex vertex, String label) {
-		MBTGraph<MBTVertex, MBTEdge> g = getThisGraph();
-		createEdge(vertex, g.getEndVertex(), label, 1.0);
-	}
-
-	public MBTEdge createEdge(MBTVertex source, MBTVertex target, String label, double weight) {
-		MBTGraph<MBTVertex, MBTEdge> g = getThisGraph();
-		MBTEdge edge = new MBTEdge(label);
-		g.addEdge(source, target, edge);
-		g.setEdgeWeight(edge, weight);
-		return edge;
+	public void createEndVertex() {
+		createVertex("end");
 	}
 
 	public MBTVertex createVertex(String label) {
 		MBTGraph<MBTVertex, MBTEdge> g = getThisGraph();
-		
+
 		MBTVertex vertex = getVertex(label);
 		if (vertex == null) {
 			vertex = new MBTVertex(label);
@@ -85,6 +63,49 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 		} else {
 			return null;
 		}
+	}
+
+	public MBTEdge createEdgeWithVertices(String sourceLabel, String targetLabel, String edgeLabel, Object edgeInput) {
+		MBTGraph<MBTVertex, MBTEdge> g = getThisGraph();
+		// TODO create method to create vertex if it doesn't exist, otherwise this
+		// object won't be added and the edge will point to an orphaned vertex
+		MBTVertex source = g.createVertex(sourceLabel);
+		MBTVertex target = g.createVertex(targetLabel);
+		return createEdgeWithInput(source, target, edgeLabel, edgeInput);
+	}
+
+	public MBTEdge createEdgeWithInput(MBTVertex source, MBTVertex target, String edgeLabel, Object edgeInput) {
+		MBTGraph<MBTVertex, MBTEdge> g = getThisGraph();
+		String edgeInputAsString;
+		if (edgeInput == null) {
+			edgeInputAsString = "";
+		} else {
+			edgeInputAsString = edgeInput.toString();
+		}
+		MBTEdge edge = getEdgeByInput(source, target, edgeInputAsString);
+		if (edge == null) {
+			edge = new MBTEdge(edgeLabel);
+			g.addEdge(source, target, edge);
+			g.setEdgeWeight(edge, 1.0);
+			edge.setValue(edgeInput);
+		} else {
+			edge.setLabel(edge.getLabel() + "," + edgeLabel);
+		}
+		return edge;
+	}
+
+	public MBTEdge getEdgeByInput(MBTVertex source, MBTVertex target, String edgeInputAsString) {
+		MBTGraph<MBTVertex, MBTEdge> g = getThisGraph();
+		for (MBTEdge edge : g.getAllEdges(source, target)) {
+			Object edgeValue = edge.getValue();
+			if (edgeValue == null) {
+				edgeValue = "";
+			}
+			if (edgeValue.toString().contentEquals(edgeInputAsString)) {
+				return edge;
+			}
+		}
+		return null;
 	}
 
 	@SuppressWarnings("unchecked")
