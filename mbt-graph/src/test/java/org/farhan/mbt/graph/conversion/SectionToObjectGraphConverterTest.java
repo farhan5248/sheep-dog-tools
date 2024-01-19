@@ -1,6 +1,9 @@
 package org.farhan.mbt.graph.conversion;
 
 import org.farhan.mbt.graph.MBTVertex;
+
+import java.util.ArrayList;
+
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
 import org.farhan.mbt.graph.MBTTable;
@@ -13,20 +16,16 @@ public class SectionToObjectGraphConverterTest {
 	/**
 	 * 
 	 */
-	void multipleSectionsToGraph() {
+	void oneSectionOneVertexOneEdge() {
 
-		MBTTable objectTable = new MBTTable("Scenario name goes here");
-		objectTable.addRow("Step");
+		MBTTable objectTable = new MBTTable("Section name goes here");
 		objectTable.addRow("Send home page request");
-		objectTable.addRow("Send search request");
-		objectTable.addRow("Verify results");
 
-		MBTGraph<MBTVertex, MBTEdge> g = TableToMBTGraphConverter
-				.createFromSingleColumn(objectTable);
+		MBTGraph<MBTVertex, MBTEdge> g = TableToMBTGraphConverter.createFromSingleColumn(objectTable);
+
 		System.out.println(g.toString());
-		Assertions.assertEquals("Scenario name goes here "
-				+ "([start, end, Send home page request, Send search request, Verify results], "
-				+ "[=(start,Send home page request), Send search request=(Send search request,Verify results), Verify results=(Verify results,end)])",
+		Assertions.assertEquals("Section name goes here " + "([start, end, Send home page request], "
+				+ "[start ->  -> Send home page request=(start,Send home page request), Send home page request -> Section name goes here -> end=(Send home page request,end)])",
 				g.toString());
 	}
 
@@ -34,18 +33,19 @@ public class SectionToObjectGraphConverterTest {
 	/**
 	 * 
 	 */
-	void singleSectionToGraph() {
+	void oneSectionManyVertexOneEdge() {
 
-		MBTTable objectTable = new MBTTable("Scenario name goes here");
-		objectTable.addRow("Step");
-		objectTable.addRow("Send home page request");
+		MBTTable objectTable = new MBTTable("Section name");
+		objectTable.addRow("Step 1");
+		objectTable.addRow("Step 2");
+		objectTable.addRow("Step 3");
 
-		MBTGraph<MBTVertex, MBTEdge> g = TableToMBTGraphConverter
-				.createFromSingleColumn(objectTable);
+		MBTGraph<MBTVertex, MBTEdge> g = TableToMBTGraphConverter.createFromSingleColumn(objectTable);
+
 		System.out.println(g.toString());
-		Assertions.assertEquals(
-				"Scenario name goes here " + "([start, end, Send home page request], "
-						+ "[=(start,Send home page request), Send home page request=(Send home page request,end)])",
+		Assertions.assertEquals("Section name " + "([start, end, Step 1, Step 2, Step 3], "
+				+ "[start ->  -> Step 1=(start,Step 1), " + "Step 1 -> Section name -> Step 2=(Step 1,Step 2), "
+				+ "Step 2 -> Section name -> Step 3=(Step 2,Step 3), " + "Step 3 -> Section name -> end=(Step 3,end)])",
 				g.toString());
 	}
 
@@ -63,20 +63,17 @@ public class SectionToObjectGraphConverterTest {
 		fieldTable.addRow("insurer", "group", "certificate");
 		fieldTable.addRow("5", "10", "15");
 
-		MBTGraph<MBTVertex, MBTEdge> objectGraph = TableToMBTGraphConverter
-				.createFromSingleColumn(objectTable);
+		MBTGraph<MBTVertex, MBTEdge> objectGraph = TableToMBTGraphConverter.createFromSingleColumn(objectTable);
 
-		MBTGraph<MBTVertex, MBTEdge> fieldGraph = TableToMBTGraphConverter
-				.createFromMultipleColumns(fieldTable);
+		MBTGraph<MBTVertex, MBTEdge> fieldGraph = TableToMBTGraphConverter.createFromMultipleColumns(fieldTable);
 
-		MBTVertex vertice = objectGraph.vertexSet().stream()
-				.filter(step -> step.getLabel().contentEquals("Send home page request")).findAny().get();
+		MBTVertex vertice = objectGraph.getVertex("Send home page request");
 		vertice.addAttribute("graph", fieldGraph);
 
 		System.out.println(vertice.getAttribute("graph").toString());
-		Assertions.assertEquals(
-				"Send home page request " + "([start, end, insurer, group, certificate], "
-						+ "[=(start,insurer), 5=(insurer,group), 10=(group,certificate), 15=(certificate,end)])",
+		Assertions.assertEquals("Send home page request " + "([start, end, insurer, group, certificate], "
+				+ "[start ->  -> insurer=(start,insurer), " + "insurer -> 5 -> group=(insurer,group), "
+				+ "group -> 10 -> certificate=(group,certificate), " + "certificate -> 15 -> end=(certificate,end)])",
 				vertice.getAttribute("graph").toString());
 	}
 }

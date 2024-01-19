@@ -22,9 +22,9 @@ class TableToFieldGraphConverterTest {
 
 		MBTGraph<MBTVertex, MBTEdge> g = TableToMBTGraphConverter.createFromMultipleColumns(table);
 		System.out.println(g.toString());
-		Assertions.assertEquals(
-				"Set Object as follows " + "([start, end, insurer, group, certificate], "
-						+ "[=(start,insurer), 5=(insurer,group), 10=(group,certificate), 15=(certificate,end)])",
+		Assertions.assertEquals("Set Object as follows " + "([start, end, insurer, group, certificate], "
+				+ "[start ->  -> insurer=(start,insurer), " + "insurer -> 5 -> group=(insurer,group), "
+				+ "group -> 10 -> certificate=(group,certificate), " + "certificate -> 15 -> end=(certificate,end)])",
 				g.toString());
 	}
 
@@ -44,8 +44,9 @@ class TableToFieldGraphConverterTest {
 		MBTGraph<MBTVertex, MBTEdge> g = TableToMBTGraphConverter.createFromMultipleColumns(table);
 		System.out.println(g.toString());
 		Assertions.assertEquals("Set Object as follows " + "([start, end, insurer, group, certificate], "
-				+ "[=(start,insurer), 5=(insurer,group), 10=(group,certificate), 15=(certificate,end), 12=(certificate,end)])",
-				g.toString());
+				+ "[start ->  -> insurer=(start,insurer), " + "insurer -> 5 -> group=(insurer,group), "
+				+ "group -> 10 -> certificate=(group,certificate), " + "certificate -> 15 -> end=(certificate,end), "
+				+ "certificate -> 12 -> end=(certificate,end)])", g.toString());
 	}
 
 	@Test
@@ -64,8 +65,10 @@ class TableToFieldGraphConverterTest {
 		MBTGraph<MBTVertex, MBTEdge> g = TableToMBTGraphConverter.createFromMultipleColumns(table);
 		System.out.println(g.toString());
 		Assertions.assertEquals("Set Object as follows " + "([start, end, insurer, group, certificate], "
-				+ "[=(start,insurer), 5=(insurer,group), 10=(group,certificate), 15=(certificate,end), 4=(insurer,group), 8=(group,certificate), 12=(certificate,end)])",
-				g.toString());
+				+ "[start ->  -> insurer=(start,insurer), " + "insurer -> 5 -> group=(insurer,group), "
+				+ "group -> 10 -> certificate=(group,certificate), " + "certificate -> 15 -> end=(certificate,end), "
+				+ "insurer -> 4 -> group=(insurer,group), " + "group -> 8 -> certificate=(group,certificate), "
+				+ "certificate -> 12 -> end=(certificate,end)])", g.toString());
 	}
 
 }

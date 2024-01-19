@@ -27,7 +27,7 @@ class PathGeneratorTest {
 		table.addRow("5", "10", "15");
 
 		MBTGraph<MBTVertex, MBTEdge> g = TableToMBTGraphConverter.createFromMultipleColumns(table);
-		ArrayList<MBTPath> paths = PathGenerator.getAllPaths(g, g.getStartVertice());
+		ArrayList<MBTPath> paths = PathGenerator.getAllPaths(g, g.getStartVertex());
 		for (MBTPath p : paths) {
 			System.out.println(p.toString());
 		}
@@ -50,7 +50,7 @@ class PathGeneratorTest {
 		table.addRow("5", "10", "12");
 
 		MBTGraph<MBTVertex, MBTEdge> g = TableToMBTGraphConverter.createFromMultipleColumns(table);
-		ArrayList<MBTPath> paths = PathGenerator.getAllPaths(g, g.getStartVertice());
+		ArrayList<MBTPath> paths = PathGenerator.getAllPaths(g, g.getStartVertex());
 		for (MBTPath p : paths) {
 			System.out.println(p.toString());
 		}
@@ -75,7 +75,7 @@ class PathGeneratorTest {
 		table.addRow("4", "8", "12");
 
 		MBTGraph<MBTVertex, MBTEdge> g = TableToMBTGraphConverter.createFromMultipleColumns(table);
-		ArrayList<MBTPath> paths = PathGenerator.getAllPaths(g, g.getStartVertice());
+		ArrayList<MBTPath> paths = PathGenerator.getAllPaths(g, g.getStartVertex());
 		for (MBTPath p : paths) {
 			System.out.println(p.toString());
 		}
@@ -119,7 +119,7 @@ class PathGeneratorTest {
 				edge.setTag("tagged");
 			}
 		}
-		ArrayList<MBTPath> paths = PathGenerator.getTaggedPaths(g, g.getStartVertice(), "tagged");
+		ArrayList<MBTPath> paths = PathGenerator.getTaggedPaths(g, g.getStartVertex(), "tagged");
 		for (MBTPath p : paths) {
 			System.out.println(p.toString());
 		}

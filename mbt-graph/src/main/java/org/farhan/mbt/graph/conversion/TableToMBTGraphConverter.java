@@ -9,82 +9,70 @@ import org.farhan.mbt.graph.MBTVertex;
 
 public class TableToMBTGraphConverter {
 
+	public static MBTGraph<MBTVertex, MBTEdge> createEmpty(String name) {
+		MBTGraph<MBTVertex, MBTEdge> g = new MBTGraph<>(MBTEdge.class);
+		g.setName(name);
+		// add start and end vertices
+		g.createVertex("start");
+		g.createVertex("end");
+
+		return g;
+	}
+
 	public static MBTGraph<MBTVertex, MBTEdge> createFromMultipleColumns(MBTTable table) {
 
-		MBTGraph<MBTVertex, MBTEdge> g = new MBTGraph<>(MBTEdge.class);
-		g.setName(table.getCaption());
-
-		// add start and end vertices
-		g.addVertex(new MBTVertex("start"));
-		g.addVertex(new MBTVertex("end"));
+		MBTGraph<MBTVertex, MBTEdge> g = createEmpty(table.getCaption());
 
 		// get vertices from table
 		ArrayList<MBTVertex> vertices = new ArrayList<MBTVertex>();
 		// TODO validate the table has at least two rows
 		for (String h : table.get(0)) {
-			vertices.add(new MBTVertex(h));
-			g.addVertex(vertices.getLast());
+			vertices.add(g.createVertex(h));
 		}
 
 		// go through each row and convert to edge
 		for (int i = 1; i < table.size(); i++) {
-			createStartEdge(g, vertices);
+			g.createStartEdge(vertices.getFirst());
 
 			ArrayList<String> row = table.get(i);
 			for (int j = 0; j < vertices.size() - 1; j++) {
 				String label = row.get(j);
 				if (!label.isEmpty()) {
-					createNamedWeightedEdge(g, vertices.get(j), vertices.get(j + 1), row.get(j), 1.0);
+					g.createEdge(vertices.get(j), vertices.get(j + 1), row.get(j), 1.0);
 				}
 			}
 			// TODO this assumes the last column isn't blank
-			createEndEdge(g, vertices, row.get(row.size() - 1));
+			g.createEndEdge(vertices.getLast(), row.get(row.size() - 1));
 		}
 		return g;
 	}
 
 	public static MBTGraph<MBTVertex, MBTEdge> createFromSingleColumn(MBTTable table) {
 
-		MBTGraph<MBTVertex, MBTEdge> g = new MBTGraph<>(MBTEdge.class);
-		g.setName(table.getCaption());
-
-		// add start and end vertices
-		g.addVertex(new MBTVertex("start"));
-		g.addVertex(new MBTVertex("end"));
-
-		// get vertices from table
-		ArrayList<MBTVertex> vertices = new ArrayList<MBTVertex>();
-		// TODO validate the table has just one column
-		for (int i = 1; i < table.size(); i++) {
-			vertices.add(new MBTVertex(table.get(i).getFirst()));
-			g.addVertex(vertices.getLast());
+		MBTGraph<MBTVertex, MBTEdge> g = TableToMBTGraphConverter.createEmpty(table.getCaption());
+		// loop through all the rows as if they were sections in an adoc file
+		ArrayList<ArrayList<String>> rows = table.getRows();
+		TableToMBTGraphConverter.createFromEdge(g, g.getStartVertex().getLabel(), rows.getFirst().getFirst(), "", null);
+		for (int i = 0; i < rows.size() - 1; i++) {
+			// this step would probably be getting block title
+			String source = rows.get(i).getFirst();
+			String target = rows.get(i + 1).getFirst();
+			TableToMBTGraphConverter.createFromEdge(g, source, target, table.getCaption(), null);
 		}
-
-		createStartEdge(g, vertices);
-		// go through each row and convert to edge
-		for (int i = 1; i < vertices.size() - 1; i++) {
-			// TODO assuming no row is blank
-			createNamedWeightedEdge(g, vertices.get(i), vertices.get(i + 1), vertices.get(i).getLabel(), 1.0);
-		}
-		createEndEdge(g, vertices, vertices.get(vertices.size() - 1).getLabel());
+		TableToMBTGraphConverter.createFromEdge(g, rows.getLast().getFirst(), g.getEndVertex().getLabel(),
+				table.getCaption(), null);
 		return g;
 	}
 
-	private static void createStartEdge(MBTGraph<MBTVertex, MBTEdge> g,
-			ArrayList<MBTVertex> vertices) {
-		createNamedWeightedEdge(g, g.getStartVertice(), vertices.get(0), "", 1.0);
-	}
+	public static MBTEdge createFromEdge(MBTGraph<MBTVertex, MBTEdge> g, String sourceLabel, String targetLabel,
+			String edgeLabel, Object edgeInput) {
 
-	private static void createEndEdge(MBTGraph<MBTVertex, MBTEdge> g,
-			ArrayList<MBTVertex> vertices, String label) {
-		createNamedWeightedEdge(g, vertices.get(vertices.size() - 1), g.getEndVertice(), label, 1.0);
-	}
-
-	public static MBTEdge createNamedWeightedEdge(MBTGraph<MBTVertex, MBTEdge> g,
-			MBTVertex source, MBTVertex target, String label, double weight) {
-		MBTEdge edge = new MBTEdge(label);
-		g.addEdge(source, target, edge);
-		g.setEdgeWeight(edge, weight);
+		// TODO create method to create vertex if it doesn't exist, otherwise this
+		// object won't be added and the edge will point to an orphaned vertex
+		MBTVertex source = g.createVertex(sourceLabel);
+		MBTVertex target = g.createVertex(targetLabel);
+		MBTEdge edge = g.createEdge(source, target, edgeLabel, 1.0);
+		edge.setGraph(edgeInput);
 		return edge;
 	}
 }

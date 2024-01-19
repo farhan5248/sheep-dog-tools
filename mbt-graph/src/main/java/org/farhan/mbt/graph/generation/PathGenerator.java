@@ -25,7 +25,7 @@ public class PathGenerator {
 				for (MBTPath p : pathsFromChild) {
 					p.add(0, g.getEdgeTarget(e));
 					p.add(0, e);
-					if (vertice.getLabel().contentEquals(g.getStartVertice().getLabel())) {
+					if (vertice.getLabel().contentEquals(g.getStartVertex().getLabel())) {
 						p.add(0, vertice);
 					}
 				}

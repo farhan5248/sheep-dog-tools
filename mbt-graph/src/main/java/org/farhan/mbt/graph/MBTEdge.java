@@ -27,6 +27,14 @@ public class MBTEdge extends DefaultWeightedEdge {
 		return attributes.get("_" + key).toString();
 	}
 
+	public void setGraph(Object graph) {
+		attributes.put("graph", graph);
+	}
+
+	public Object getGraph() {
+		return attributes.get("graph");
+	}
+
 	public void setTag(String tag) {
 		attributes.put("tag", tag);
 	}
@@ -41,7 +49,7 @@ public class MBTEdge extends DefaultWeightedEdge {
 
 	@Override
 	public String toString() {
-		return getLabel();
+		return getSource().toString() + " -> " + getLabel() + " -> " + getTarget().toString();
 	}
 
 	@Override
