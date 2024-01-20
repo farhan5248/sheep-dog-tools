@@ -10,11 +10,68 @@ import org.farhan.mbt.graph.MBTVertex;
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
 import org.farhan.mbt.graph.MBTTable;
-import org.farhan.mbt.graph.conversion.TableToMBTGraphConverter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class PathGeneratorTest {
+
+	public static MBTGraph<MBTVertex, MBTEdge> createEmpty(String name) {
+		MBTGraph<MBTVertex, MBTEdge> g = new MBTGraph<>(MBTEdge.class);
+		g.setName(name);
+		g.createStartVertex();
+		g.createEndVertex();
+		return g;
+	}
+
+	public static MBTGraph<MBTVertex, MBTEdge> createFromMultipleColumns(MBTTable table) {
+
+		MBTGraph<MBTVertex, MBTEdge> g = createEmpty(table.getCaption());
+
+		// get vertices from table
+		ArrayList<MBTVertex> vertices = new ArrayList<MBTVertex>();
+		// TODO validate the table has at least two rows
+		for (String h : table.get(0)) {
+			vertices.add(g.createVertex(h));
+		}
+
+		// go through each row and convert to edge
+		for (int i = 1; i < table.size(); i++) {
+
+			g.createEdgeWithInput(g.getStartVertex(), vertices.getFirst(), "", "");
+
+			ArrayList<String> row = table.get(i);
+			for (int j = 0; j < vertices.size() - 1; j++) {
+				String label = row.get(j);
+				if (!label.isEmpty()) {
+					g.createEdgeWithInput(vertices.get(j), vertices.get(j + 1), row.get(j), row.get(j));
+				}
+			}
+			// TODO this assumes the last column isn't blank
+			g.createEdgeWithInput(vertices.getLast(), g.getEndVertex(), row.getLast(), row.getLast());
+		}
+		return g;
+	}
+
+	public static MBTGraph<MBTVertex, MBTEdge> createFromMultiList(Map<String, ArrayList<String>> lists,
+			String listsName) {
+		MBTGraph<MBTVertex, MBTEdge> g = createEmpty(listsName);
+		for (String listName : lists.keySet()) {
+			createFromList(g, lists.get(listName), listName);
+		}
+		return g;
+	}
+
+	public static void createFromList(MBTGraph<MBTVertex, MBTEdge> g, ArrayList<String> list, String name) {
+
+		g.createEdgeWithVertices(g.getStartVertex().getLabel(), list.getFirst(), "", null);
+		for (int i = 0; i < list.size() - 1; i++) {
+			// this step would probably be getting block title
+			String source = list.get(i);
+			String target = list.get(i + 1);
+			g.createEdgeWithVertices(source, target, name, null);
+		}
+		g.createEdgeWithVertices(list.getLast(), g.getEndVertex().getLabel(), name, null);
+	}
 
 	@Test
 	/**
@@ -27,7 +84,7 @@ class PathGeneratorTest {
 		table.addRow("ins", "grp", "crt");
 		table.addRow("5", "10", "15");
 
-		MBTGraph<MBTVertex, MBTEdge> g = TableToMBTGraphConverter.createFromMultipleColumns(table);
+		MBTGraph<MBTVertex, MBTEdge> g = createFromMultipleColumns(table);
 		ArrayList<MBTPath> paths = PathGenerator.getAllPaths(g, g.getStartVertex());
 		for (MBTPath p : paths) {
 			System.out.println(p.toString());
@@ -51,7 +108,7 @@ class PathGeneratorTest {
 		table.addRow("5", "10", "15");
 		table.addRow("5", "10", "12");
 
-		MBTGraph<MBTVertex, MBTEdge> g = TableToMBTGraphConverter.createFromMultipleColumns(table);
+		MBTGraph<MBTVertex, MBTEdge> g = createFromMultipleColumns(table);
 		ArrayList<MBTPath> paths = PathGenerator.getAllPaths(g, g.getStartVertex());
 		for (MBTPath p : paths) {
 			System.out.println(p.toString());
@@ -78,7 +135,7 @@ class PathGeneratorTest {
 		table.addRow("5", "10", "15");
 		table.addRow("4", "8", "12");
 
-		MBTGraph<MBTVertex, MBTEdge> g = TableToMBTGraphConverter.createFromMultipleColumns(table);
+		MBTGraph<MBTVertex, MBTEdge> g = createFromMultipleColumns(table);
 		ArrayList<MBTPath> paths = PathGenerator.getAllPaths(g, g.getStartVertex());
 		for (MBTPath p : paths) {
 			System.out.println(p.toString());
@@ -123,7 +180,7 @@ class PathGeneratorTest {
 		table.addRow("5", "10", "15");
 		table.addRow("4", "8", "12");
 
-		MBTGraph<MBTVertex, MBTEdge> g = TableToMBTGraphConverter.createFromMultipleColumns(table);
+		MBTGraph<MBTVertex, MBTEdge> g = createFromMultipleColumns(table);
 		Set<MBTEdge> edges = g.getAllEdges(new MBTVertex("grp"), new MBTVertex("crt"));
 		for (MBTEdge edge : edges) {
 			if (edge.getLabel().contentEquals("8")) {
@@ -164,8 +221,8 @@ class PathGeneratorTest {
 		fieldTable.addRow("ins", "grp", "crt");
 		fieldTable.addRow("5", "10", "15");
 
-		MBTGraph<MBTVertex, MBTEdge> objectGraph = TableToMBTGraphConverter.createFromMultiList(lists, "Feature Name");
-		MBTGraph<MBTVertex, MBTEdge> fieldGraph = TableToMBTGraphConverter.createFromMultipleColumns(fieldTable);
+		MBTGraph<MBTVertex, MBTEdge> objectGraph = createFromMultiList(lists, "Feature Name");
+		MBTGraph<MBTVertex, MBTEdge> fieldGraph = createFromMultipleColumns(fieldTable);
 		MBTEdge edge = (MBTEdge) objectGraph.outgoingEdgesOf(objectGraph.getVertex("Step 1")).toArray()[0];
 		edge.setValue(fieldGraph);
 

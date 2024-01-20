@@ -1,0 +1,13 @@
+= Feature Name
+
+== Scenario One
+
+=== Set Object as follows
+
+.Data table expressions
+[options="header"]
+|=======================
+|insurer |group |certificate
+|5       |10    |15
+|4       |8     |12
+|=======================

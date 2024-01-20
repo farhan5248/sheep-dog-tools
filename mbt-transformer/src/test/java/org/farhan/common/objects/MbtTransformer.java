@@ -14,15 +14,15 @@ import org.eclipse.uml2.uml.MessageOccurrenceSpecification;
 import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.mbt.conv.uml.ArgumentFactory;
-import org.farhan.mbt.conv.uml.CommentFactory;
-import org.farhan.mbt.conv.uml.ElementImportFactory;
-import org.farhan.mbt.conv.uml.PackageFactory;
-import org.farhan.mbt.conv.uml.ParameterFactory;
-import org.farhan.mbt.conv.uml.PropertyFactory;
-import org.farhan.mbt.conv.uml.LifelineFactory;
-import org.farhan.mbt.conv.uml.MessageFactory;
-import org.farhan.mbt.conv.uml.UMLProject;
+import org.farhan.mbt.uml.ArgumentFactory;
+import org.farhan.mbt.uml.CommentFactory;
+import org.farhan.mbt.uml.ElementImportFactory;
+import org.farhan.mbt.uml.LifelineFactory;
+import org.farhan.mbt.uml.MessageFactory;
+import org.farhan.mbt.uml.PackageFactory;
+import org.farhan.mbt.uml.ParameterFactory;
+import org.farhan.mbt.uml.PropertyFactory;
+import org.farhan.mbt.uml.UMLProject;
 import org.junit.jupiter.api.Assertions;
 
 public abstract class MbtTransformer extends FileObject {
