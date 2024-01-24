@@ -6,7 +6,7 @@ public class Project {
 
 	// TODO make getters and setters
 	public static String tags;
-	public static String baseDir;
+	public static String baseDir = "";
 	private static String umlDir = "target/uml/";
 
 	public static String firstLayerPackageName = "specs";
@@ -14,6 +14,7 @@ public class Project {
 	public static String thirdLayerPackageName = "objects";
 	public static String fourthLayerPackageName = "common";
 
+	// TODO move this from here to UML Project
 	public static File getUmlDir() {
 		return new File(baseDir + umlDir);
 	}

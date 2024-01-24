@@ -8,7 +8,7 @@ import org.farhan.mbt.core.UMLToOtherLayerConverter;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.uml.UMLProject;
 
-public class ConvertUMLToCucumberPSTMojo extends UMLToConversionMojo {
+public class ConvertUMLToCucumberMojo extends UMLToConversionMojo {
 
 	@Override
 	protected UMLToOtherLayerConverter getOtherLayerConverter() {

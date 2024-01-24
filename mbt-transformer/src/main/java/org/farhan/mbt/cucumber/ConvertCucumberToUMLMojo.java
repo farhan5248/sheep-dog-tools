@@ -10,7 +10,7 @@ import org.farhan.mbt.core.ToUMLOtherLayerConverter;
 import org.farhan.mbt.core.ToUMLOtherLayerLinker;
 import org.farhan.mbt.uml.UMLProject;
 
-public class ConvertCucumberToUMLPSTMojo extends ToUMLConversionMojo {
+public class ConvertCucumberToUMLMojo extends ToUMLConversionMojo {
 
 	@Override
 	protected ToUMLOtherLayerConverter getOtherLayerConverter() {

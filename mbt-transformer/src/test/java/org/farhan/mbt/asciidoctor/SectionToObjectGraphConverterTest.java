@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.farhan.mbt.asciidoctor.AdocToMBTGraphConverter;
+import org.farhan.mbt.asciidoctor.AsciiDoctorToGraphFirstLayerConverter;
+import org.farhan.mbt.core.Utilities;
+import org.farhan.mbt.graph.GraphProject;
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
 import org.junit.jupiter.api.Assertions;
@@ -19,11 +21,16 @@ public class SectionToObjectGraphConverterTest {
 	 * 
 	 */
 	void oneSectionOneVertexOneEdge() {
-
-		MBTGraph<MBTVertex, MBTEdge> g = AdocToMBTGraphConverter.createFromAdoc("oneSectionOneVertexOneEdge.adoc");
-		Assertions.assertEquals(
-				"Feature Name ([start, end, Step 1], [start ->  -> Step 1=(start,Step 1), Step 1 ->  -> end=(Step 1,end)])",
-				g.toString());
+		try {
+			AsciiDoctorToGraphFirstLayerConverter asciiDoctorToGraphFirstLayerConverter = new AsciiDoctorToGraphFirstLayerConverter();
+			asciiDoctorToGraphFirstLayerConverter.createFromAdoc("oneSectionOneVertexOneEdge.adoc");
+			MBTGraph<MBTVertex, MBTEdge> g = GraphProject.getFirstLayerGraphs().getFirst();
+			Assertions.assertEquals(
+					"Feature Name ([start, end, Step 1], [start ->  -> Step 1=(start,Step 1), Step 1 ->  -> end=(Step 1,end)])",
+					g.toString());
+		} catch (Exception e) {
+			Assertions.fail(Utilities.getStackTraceAsString(e));
+		}
 	}
 
 	@Test
@@ -32,9 +39,16 @@ public class SectionToObjectGraphConverterTest {
 	 */
 	void manySectionOneVertexOneEdge() {
 
-		MBTGraph<MBTVertex, MBTEdge> g = AdocToMBTGraphConverter.createFromAdoc("manySectionOneVertexOneEdge.adoc");
-		Assertions.assertEquals("Feature Name " + "([start, end, Step 1], "
-				+ "[start ->  -> Step 1=(start,Step 1), Step 1 ->  -> end=(Step 1,end)])", g.toString());
+		try {
+			AsciiDoctorToGraphFirstLayerConverter asciiDoctorToGraphFirstLayerConverter = new AsciiDoctorToGraphFirstLayerConverter();
+			asciiDoctorToGraphFirstLayerConverter.createFromAdoc("manySectionOneVertexOneEdge.adoc");
+			MBTGraph<MBTVertex, MBTEdge> g = GraphProject.getFirstLayerGraphs().getFirst();
+			Assertions.assertEquals("Feature Name " + "([start, end, Step 1], "
+					+ "[start ->  -> Step 1=(start,Step 1), Step 1 ->  -> end=(Step 1,end)])", g.toString());
+
+		} catch (Exception e) {
+			Assertions.fail(Utilities.getStackTraceAsString(e));
+		}
 	}
 
 	@Test
@@ -43,10 +57,16 @@ public class SectionToObjectGraphConverterTest {
 	 */
 	void oneSectionManyVertexOneEdge() {
 
-		MBTGraph<MBTVertex, MBTEdge> g = AdocToMBTGraphConverter.createFromAdoc("oneSectionManyVertexOneEdge.adoc");
-		Assertions.assertEquals("Feature Name " + "([start, end, Step 1, Step 2], "
-				+ "[start ->  -> Step 1=(start,Step 1), Step 1 ->  -> Step 2=(Step 1,Step 2), Step 2 ->  -> end=(Step 2,end)])",
-				g.toString());
+		try {
+			AsciiDoctorToGraphFirstLayerConverter asciiDoctorToGraphFirstLayerConverter = new AsciiDoctorToGraphFirstLayerConverter();
+			asciiDoctorToGraphFirstLayerConverter.createFromAdoc("oneSectionManyVertexOneEdge.adoc");
+			MBTGraph<MBTVertex, MBTEdge> g = GraphProject.getFirstLayerGraphs().getFirst();
+			Assertions.assertEquals("Feature Name " + "([start, end, Step 1, Step 2], "
+					+ "[start ->  -> Step 1=(start,Step 1), Step 1 ->  -> Step 2=(Step 1,Step 2), Step 2 ->  -> end=(Step 2,end)])",
+					g.toString());
+		} catch (Exception e) {
+			Assertions.fail(Utilities.getStackTraceAsString(e));
+		}
 	}
 
 }

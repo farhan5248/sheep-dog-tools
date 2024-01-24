@@ -9,3 +9,6 @@
 "C:\Users\Farhan\Downloads\org.eclipse.uml2.uml.profile.standard_1.5.0.v20221116-1811.jar"
 
 mvn install:install-file -Dfile="C:\Users\Farhan\Downloads\org.eclipse.uml2.uml.profile.standard_1.5.0.v20221116-1811.jar" -DgroupId=org.eclipse.uml2 -DartifactId=uml.profile.standard -Dversion=1.5.0.v20221116-1811 -Dpackaging=jar -DgeneratePom=true
+
+mvn org.farhan:mbt-maven-plugin:cucumber-to-uml -Dtag=debug
+mvn org.farhan:mbt-maven-plugin:uml-to-cucumber -Dtag=debug

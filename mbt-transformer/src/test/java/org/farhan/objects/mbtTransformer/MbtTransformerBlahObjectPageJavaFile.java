@@ -1,10 +1,11 @@
-package org.farhan.objects.mbttransformer;
+package org.farhan.objects.mbtTransformer;
 
 import java.util.HashMap;
 
 import org.farhan.common.objects.MbtTransformer;
 
-public class MbtTransformerBlahDocStringPageJavaFile extends MbtTransformer {
+public class MbtTransformerBlahObjectPageJavaFile extends MbtTransformer {
+	
 	public void setContent(HashMap<String, String> keyMap) {
 		setContent(keyMap.get("Content"));
 	}

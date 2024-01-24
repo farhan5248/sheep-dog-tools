@@ -2,43 +2,32 @@ package org.farhan.mbt.asciidoctor;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Options;
 import org.asciidoctor.Asciidoctor.Factory;
-import org.asciidoctor.ast.Block;
 import org.asciidoctor.ast.Cell;
 import org.asciidoctor.ast.Document;
 import org.asciidoctor.ast.Row;
 import org.asciidoctor.ast.Section;
 import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
+import org.farhan.mbt.core.ConvertibleFile;
+import org.farhan.mbt.core.Project;
+import org.farhan.mbt.core.ToGraphFirstLayerConverter;
+import org.farhan.mbt.graph.GraphProject;
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
-import org.farhan.mbt.graph.MBTTable;
 import org.farhan.mbt.graph.MBTVertex;
 
-public class AdocToMBTGraphConverter {
+public class AsciiDoctorToGraphFirstLayerConverter extends ToGraphFirstLayerConverter {
 
-	public static MBTGraph<MBTVertex, MBTEdge> createEmpty(String name) {
+	private AsciiDoctorAdocFile anAsciiDoctorFile;
+
+	public static MBTGraph<MBTVertex, MBTEdge> createEmptyGraph(String name) {
 		MBTGraph<MBTVertex, MBTEdge> g = new MBTGraph<>(MBTEdge.class);
 		g.setName(name);
 		g.createStartVertex();
 		g.createEndVertex();
-		return g;
-	}
-
-	public static MBTGraph<MBTVertex, MBTEdge> createFromAdoc(String fileName) {
-		Asciidoctor asciidoctor = Factory.create();
-		Document adoc = asciidoctor.loadFile(new File(fileName), Options.builder().build());
-		MBTGraph<MBTVertex, MBTEdge> g = createEmpty(adoc.getDoctitle());
-		for (StructuralNode block : adoc.getBlocks()) {
-			if (block instanceof Section) {
-				createFromSection(g, (Section) block);
-			}
-		}
 		return g;
 	}
 
@@ -68,7 +57,7 @@ public class AdocToMBTGraphConverter {
 		// loop through the blocks which are tables
 		for (StructuralNode block : step.getBlocks()) {
 			if (block instanceof Table) {
-				MBTGraph<MBTVertex, MBTEdge> g = createEmpty(step.getTitle());
+				MBTGraph<MBTVertex, MBTEdge> g = createEmptyGraph(step.getTitle());
 				Table table = (Table) block;
 				// get vertices from table
 				ArrayList<MBTVertex> vertices = new ArrayList<MBTVertex>();
@@ -98,6 +87,34 @@ public class AdocToMBTGraphConverter {
 			}
 		}
 
+	}
+
+	@Override
+	protected void selectLayerFiles(String layer) throws Exception {
+		// TODO this should be filterLayerFiles since it's removing files
+	}
+
+	@Override
+	protected void transformLayerFile(ConvertibleFile layerFile) throws Exception {
+		AsciiDoctorAdocFile theFile = (AsciiDoctorAdocFile) layerFile;
+		MBTGraph<MBTVertex, MBTEdge> g = createEmptyGraph(theFile.theDoc.getDoctitle());
+		for (StructuralNode block : theFile.theDoc.getBlocks()) {
+			if (block instanceof Section) {
+				createFromSection(g, (Section) block);
+			}
+		}
+		GraphProject.getFirstLayerGraphs().add(g);
+	}
+
+	public void createFromAdoc(String fileName) throws Exception {
+
+		GraphProject.init();
+		AsciiDoctorProject.init();
+		for (ConvertibleFile cf : AsciiDoctorProject.getFirstLayerFiles()) {
+			if (cf.getFile().getAbsolutePath().endsWith(fileName)) {
+				transformLayerFile(cf);
+			}
+		}
 	}
 
 }
