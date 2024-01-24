@@ -1,5 +1,0 @@
-= Feature Name
-
-== Scenario One
-
-=== Step 1

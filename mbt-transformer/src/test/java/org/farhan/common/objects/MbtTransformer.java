@@ -14,6 +14,10 @@ import org.eclipse.uml2.uml.MessageOccurrenceSpecification;
 import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.ValueSpecification;
+import org.farhan.mbt.graph.GraphProject;
+import org.farhan.mbt.graph.MBTEdge;
+import org.farhan.mbt.graph.MBTGraph;
+import org.farhan.mbt.graph.MBTVertex;
 import org.farhan.mbt.uml.ArgumentFactory;
 import org.farhan.mbt.uml.CommentFactory;
 import org.farhan.mbt.uml.ElementImportFactory;
@@ -26,6 +30,28 @@ import org.farhan.mbt.uml.UMLProject;
 import org.junit.jupiter.api.Assertions;
 
 public abstract class MbtTransformer extends FileObject {
+
+	protected void assertVerticesVertexNameExists(String vertexName) {
+		Assertions.assertEquals(1, GraphProject.getFirstLayerGraphs().size());
+		MBTGraph<MBTVertex, MBTEdge> g = GraphProject.getFirstLayerGraphs().getFirst();
+		Assertions.assertTrue(g.vertexSet().contains(new MBTVertex(vertexName)),
+				"Vertex " + vertexName + " doesn't exist");
+	}
+
+	protected void assertEdgesEdgeNameExists(String edgeName) {
+		Assertions.assertEquals(1, GraphProject.getFirstLayerGraphs().size());
+		MBTGraph<MBTVertex, MBTEdge> g = GraphProject.getFirstLayerGraphs().getFirst();
+		// TODO replace with g.edgeSet().contains(new MBTEdge(edgeName)) when moving
+		// graph code here
+		MBTEdge edge = null;
+		for (MBTEdge e : g.edgeSet()) {
+			if (edgeName.contentEquals(e.toString())) {
+				edge = e;
+				break;
+			}
+		}
+		Assertions.assertTrue(edge != null, "Edge " + edgeName + " doesn't exist");
+	}
 
 	public void assertModelExists() {
 

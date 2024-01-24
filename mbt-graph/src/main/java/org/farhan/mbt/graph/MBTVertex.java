@@ -31,7 +31,7 @@ public class MBTVertex {
 
 	@Override
 	public int hashCode() {
-		return getLabel().hashCode();
+		return toString().hashCode();
 	}
 
 	@Override

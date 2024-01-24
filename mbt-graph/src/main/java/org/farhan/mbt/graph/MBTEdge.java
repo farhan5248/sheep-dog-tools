@@ -63,7 +63,7 @@ public class MBTEdge extends DefaultWeightedEdge {
 
 	@Override
 	public int hashCode() {
-		return getLabel().hashCode();
+		return toString().hashCode();
 	}
 
 	@Override

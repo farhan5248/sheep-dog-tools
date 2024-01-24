@@ -1,5 +1,6 @@
 package org.farhan.common.objects;
 
+import org.farhan.objects.mbtTransformer.MbtTransformerAsciidoctorToGraphGoal;
 import org.farhan.objects.mbtTransformer.MbtTransformerBlah2JsonRequestJavaFile;
 import org.farhan.objects.mbtTransformer.MbtTransformerBlah2JsonRequestStepsJavaFile;
 import org.farhan.objects.mbtTransformer.MbtTransformerBlahDataTablePageJavaFile;
@@ -9,7 +10,9 @@ import org.farhan.objects.mbtTransformer.MbtTransformerBlahDocStringsPageStepsJa
 import org.farhan.objects.mbtTransformer.MbtTransformerBlahObjectPageJavaFile;
 import org.farhan.objects.mbtTransformer.MbtTransformerBlahObjectPageStepsJavaFile;
 import org.farhan.objects.mbtTransformer.MbtTransformerCucumberToUmlGoal;
+import org.farhan.objects.mbtTransformer.MbtTransformerProcessAdocFile;
 import org.farhan.objects.mbtTransformer.MbtTransformerProcessFeatureFile;
+import org.farhan.objects.mbtTransformer.MbtTransformerProcessGraphFile;
 import org.farhan.objects.mbtTransformer.MbtTransformerPstUmlFile;
 import org.farhan.objects.mbtTransformer.MbtTransformerUmlToCucumberGoal;
 
@@ -28,6 +31,9 @@ public class MbtTransformerFactory {
 	private static MbtTransformerBlahDataTablePageJavaFile blahDataTablePageFile;
 	private static MbtTransformerBlahDocStringPageJavaFile blahDocStringPageFile;
 	private static MbtTransformerBlahObjectPageJavaFile blahObjectPageFile;
+	private static MbtTransformerProcessAdocFile mbtTransformerProcessAdocFile;
+	private static MbtTransformerProcessGraphFile mbtTransformerProcessGraphFile;
+	private static MbtTransformerAsciidoctorToGraphGoal mbtTransformerAsciidoctorToGraphGoal;
 
 	public static GraphModelObject get(String className) {
 		if (className.contentEquals("MbtTransformerCucumberToUmlGoal")) {
@@ -124,6 +130,26 @@ public class MbtTransformerFactory {
 				blahObjectPageFile.setPath("src/test/java/org/farhan/objects/blah/BlahObjectPage.java");
 			}
 			return blahObjectPageFile;
+		}
+		if (className.contentEquals("MbtTransformerProcessAdocFile")) {
+			if (mbtTransformerProcessAdocFile == null) {
+				mbtTransformerProcessAdocFile = new MbtTransformerProcessAdocFile();
+				mbtTransformerProcessAdocFile.setBaseDir("mbt-transformer");
+				mbtTransformerProcessAdocFile.setPath("src/test/resources/AsciiDoc/Process.adoc");
+			}
+			return mbtTransformerProcessAdocFile;
+		}
+		if (className.contentEquals("MbtTransformerProcessGraphFile")) {
+			if (mbtTransformerProcessGraphFile == null) {
+				mbtTransformerProcessGraphFile = new MbtTransformerProcessGraphFile();
+			}
+			return mbtTransformerProcessGraphFile;
+		}
+		if (className.contentEquals("MbtTransformerAsciidoctorToGraphGoal")) {
+			if (mbtTransformerAsciidoctorToGraphGoal == null) {
+				mbtTransformerAsciidoctorToGraphGoal = new MbtTransformerAsciidoctorToGraphGoal();
+			}
+			return mbtTransformerAsciidoctorToGraphGoal;
 		}
 		return null;
 	}
