@@ -17,9 +17,9 @@ Feature: Convert Document
       | end         |
       | Step 1      |
     Then The Process.graph file, Edges section will be as follows
-      | Edge Name           |
-      | start ->  -> Step 1 |
-      | Step 1 ->  -> end   |
+      | Edge Name               |
+      | start -> null -> Step 1 |
+      | Step 1 -> null -> end   |
 
   Scenario: One Section Many Vertices One Edge
     Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
@@ -41,10 +41,10 @@ Feature: Convert Document
       | Step 1      |
       | Step 2      |
     Then The Process.graph file, Edges section will be as follows
-      | Edge Name            |
-      | start ->  -> Step 1  |
-      | Step 1 ->  -> Step 2 |
-      | Step 2 ->  -> end    |
+      | Edge Name                |
+      | start -> null -> Step 1  |
+      | Step 1 -> null -> Step 2 |
+      | Step 2 -> null -> end    |
 
   Scenario: Many Sections One Vertex One Edge
     Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
@@ -67,9 +67,9 @@ Feature: Convert Document
       | end         |
       | Step 1      |
     Then The Process.graph file, Edges section will be as follows
-      | Edge Name           |
-      | start ->  -> Step 1 |
-      | Step 1 ->  -> end   |
+      | Edge Name               |
+      | start -> null -> Step 1 |
+      | Step 1 -> null -> end   |
 
   Scenario: Single Outgoing Edge from All Vertices
     Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
@@ -96,11 +96,11 @@ Feature: Convert Document
       | Set Object as follows   | grp               |
       | Set Object as follows   | crt               |
     Then The Process.graph file, Edges Graph Edges section will be as follows
-      | Edge Source Vertex Name | Graph Edge Name  |
+      | Edge Source Vertex Name | Graph Edge Name      |
       | Set Object as follows   | start ->  -> ins |
-      | Set Object as follows   | ins -> 5 -> grp  |
-      | Set Object as follows   | grp -> 10 -> crt |
-      | Set Object as follows   | crt -> 15 -> end |
+      | Set Object as follows   | ins -> 5 -> grp      |
+      | Set Object as follows   | grp -> 10 -> crt     |
+      | Set Object as follows   | crt -> 15 -> end     |
 
   Scenario: Multiple Outgoing Edges From One Vertex
     Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
@@ -123,7 +123,7 @@ Feature: Convert Document
     Then The Process.graph file, Edges Graph Edges section will be as follows
       | Edge Source Vertex Name | Graph Edge Name  |
       | Set Object as follows   | crt -> 15 -> end |
-      | Set Object as follows   | crt -> 12 -> end |    
+      | Set Object as follows   | crt -> 12 -> end |
 
   Scenario: Multiple Outgoing Edges From All Vertex
     Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
@@ -144,12 +144,11 @@ Feature: Convert Document
       """
     When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
     Then The Process.graph file, Edges Graph Edges section will be as follows
-      | Edge Source Vertex Name | Graph Edge Name  |
+      | Edge Source Vertex Name | Graph Edge Name      |
       | Set Object as follows   | start ->  -> ins |
-      | Set Object as follows   | ins -> 5 -> grp  |
-      | Set Object as follows   | grp -> 10 -> crt |
-      | Set Object as follows   | crt -> 15 -> end |
-      | Set Object as follows   | ins -> 4 -> grp  |
-      | Set Object as follows   | grp -> 8 -> crt  |
-      | Set Object as follows   | crt -> 12 -> end |
-      
+      | Set Object as follows   | ins -> 5 -> grp      |
+      | Set Object as follows   | grp -> 10 -> crt     |
+      | Set Object as follows   | crt -> 15 -> end     |
+      | Set Object as follows   | ins -> 4 -> grp      |
+      | Set Object as follows   | grp -> 8 -> crt      |
+      | Set Object as follows   | crt -> 12 -> end     |

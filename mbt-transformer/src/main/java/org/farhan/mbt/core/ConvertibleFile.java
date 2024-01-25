@@ -7,8 +7,8 @@ public interface ConvertibleFile {
 	public void setFile(File theFile);
 
 	public File getFile();
-	
-	public void read();
-	
-	public void write();
+
+	public void read() throws Exception;
+
+	public void write() throws Exception;
 }

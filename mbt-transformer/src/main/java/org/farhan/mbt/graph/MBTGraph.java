@@ -33,7 +33,21 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 	}
 
 	public String toString() {
-		return name + " " + super.toString();
+		String text = "Graph";
+		text += "\n\tname:" + getName();
+		text += "\n\tvertices:";
+		for (V v : vertexSet()) {
+			for (String line : v.toString().split("\n")) {
+				text += "\n\t\t" + line;
+			}
+		}		
+		text += "\n\tedges:";
+		for (E e : edgeSet()) {
+			for (String line : e.toString().split("\n")) {
+				text += "\n\t\t" + line;
+			}
+		}		
+		return text;
 	}
 
 	public void createStartVertex() {

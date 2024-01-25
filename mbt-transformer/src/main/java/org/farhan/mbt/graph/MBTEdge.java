@@ -54,11 +54,25 @@ public class MBTEdge extends DefaultWeightedEdge {
 
 	@Override
 	public String toString() {
-		Object value = getValue();
-		if (value == null) {
-			value = "";
+
+		String text = "Edge";
+		text += "\n\tlabel:" + getLabel();
+		text += "\n\tsource:";
+		for (String line : getSource().toString().split("\n")) {
+			text += "\n\t\t" + line;
 		}
-		return getSource().toString() + " -> " + value + " -> " + getTarget().toString();
+		text += "\n\ttarget:";
+		for (String line : getTarget().toString().split("\n")) {
+			text += "\n\t\t" + line;
+		}
+		text += "\n\ttag:" + getTag();
+		text += "\n\tvalue:";
+		if (getValue() != null) {
+			for (String line : getValue().toString().split("\n")) {
+				text += "\n\t\t" + line;
+			}
+		}
+		return text;
 	}
 
 	@Override

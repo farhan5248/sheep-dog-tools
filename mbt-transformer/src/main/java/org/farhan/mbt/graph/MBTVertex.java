@@ -26,7 +26,9 @@ public class MBTVertex {
 
 	@Override
 	public String toString() {
-		return getLabel();
+		String text = "Vertex";
+		text += "\n\tlabel:" + getLabel();
+		return text;
 	}
 
 	@Override

@@ -17,6 +17,7 @@ import org.farhan.mbt.core.ConvertibleFile;
 import org.farhan.mbt.core.Project;
 import org.farhan.mbt.core.ToGraphFirstLayerConverter;
 import org.farhan.mbt.graph.GraphProject;
+import org.farhan.mbt.graph.GraphTextFile;
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
 import org.farhan.mbt.graph.MBTVertex;
@@ -105,7 +106,7 @@ public class AsciiDoctorToGraphFirstLayerConverter extends ToGraphFirstLayerConv
 				createFromSection(g, (Section) block);
 			}
 		}
-		GraphProject.getFirstLayerGraphs().add(g);
+		GraphProject.getFirstLayerGraphs().add(new GraphTextFile(g));
 	}
 
 	public void createFromAdoc(String fileName) throws Exception {
