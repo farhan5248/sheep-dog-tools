@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.farhan</groupId>
 		<artifactId>cucumberxtexteditor.parent</artifactId>
-		<version>1.4-SNAPSHOT</version>
+		<version>1.4.0</version>
 	</parent>
 	<artifactId>cucumberxtexteditor</artifactId>
 	<packaging>eclipse-plugin</packaging>
@@ -170,7 +170,7 @@
 		<dependency>
 			<groupId>org.farhan</groupId>
 			<artifactId>mbt-graph</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
 </project>
