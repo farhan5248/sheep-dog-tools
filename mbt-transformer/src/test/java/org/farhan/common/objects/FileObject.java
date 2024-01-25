@@ -2,8 +2,8 @@ package org.farhan.common.objects;
 
 import java.io.File;
 
-import org.farhan.mbt.conv.core.Project;
-import org.farhan.mbt.conv.core.Utilities;
+import org.farhan.mbt.core.Project;
+import org.farhan.mbt.core.Utilities;
 import org.junit.jupiter.api.Assertions;
 
 public abstract class FileObject extends GraphModelObject {

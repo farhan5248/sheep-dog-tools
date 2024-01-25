@@ -10,14 +10,14 @@ public class MBTPath {
 		path = new ArrayList<Object>();
 	}
 
-	public void add(int i, Object verticeOrEdge) {
-		path.add(i, verticeOrEdge);
+	public ArrayList<Object> getPath() {
+		return path;
 	}
 
 	public String toString() {
 		String pathAsString = "";
 		for (Object verticeOrEdge : path) {
-			pathAsString += verticeOrEdge.toString() + " -> ";
+			pathAsString += "(" + verticeOrEdge.toString() + ")" + " -> ";
 		}
 		pathAsString = pathAsString.replaceAll(" -> $", "");
 		return pathAsString;

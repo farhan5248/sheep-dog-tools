@@ -9,9 +9,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.settings.Settings;
-import org.farhan.mbt.conv.core.Project;
-import org.farhan.mbt.conv.core.Utilities;
-import org.farhan.mbt.conv.cucumber.ConvertCucumberToUMLPSTMojo;
+import org.farhan.mbt.cucumber.ConvertCucumberToUMLMojo;
 
 /**
  * Converts tagged Cucumber scenarios to a UML model using Eclipse Xtext and EMF
@@ -41,7 +39,7 @@ public class CucumberToUMLMojo extends AbstractMojo {
 	public void execute() throws MojoExecutionException {
 		getLog().info(tag);
 		try {
-			ConvertCucumberToUMLPSTMojo mojo = new ConvertCucumberToUMLPSTMojo();
+			ConvertCucumberToUMLMojo mojo = new ConvertCucumberToUMLMojo();
 			// TODO pass in tags to the mojo constructor
 			Project.tags = tag;
 			Project.baseDir = project.getBasedir().getAbsolutePath() + File.separator;

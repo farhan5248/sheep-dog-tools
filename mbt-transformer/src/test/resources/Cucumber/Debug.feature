@@ -1,88 +1,28 @@
+
 Feature: Temp
 
-  Background: Create a feature file
+  @debug
+  Scenario: Generate files
     Given The mbt-transformer plugin, src/test/resources/Cucumber/dept/process.feature file is as follows
       """
-      @initial
-      Feature: Convert Step Definitions
+      Feature: Convert Document
       
-        Background: Create a feature file
-          Given The claim project, src/test/cucumber/dept/process.feature file is as follows
-            \"\"\"  
-            text
-            \"\"\"  
-          When The mbt-transformer plugin, cucumber-to-uml goal is executed with
-            | Tags |
-            | tag1 |
-          And The mbt-transformer plugin, uml-to-cucumber goal is executed
+        @debug
+        Scenario: One Section One Vertex One Edge
+          Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
+            \"\"\"
+            Text
+            \"\"\"
+          When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
+          Then The Process.graph file, Edges Graph Vertices section will be as follows
+               | Edge Source Vertex Name                        | Graph Vertex Name |
+               | Set Object as follows ->  -> end | start       |
+          Then The Process.graph file, Edges Graph Edges section will be as follows
+               | Edge Source Vertex Name                        | Graph Edge Name        |
+               | Set Object as follows ->  -> end | start ->  -> ins |
       
-        Scenario: Non existing Java class creation with vertice data tables
-          Then The claim project, src/test/java/org/farhan/stepdefs/blah/BlahDataTablePageSteps.java file will be as follows
-            \"\"\"  
-            text
-            \"\"\"     
-      
-        Scenario: Non existing Java class creation with vertice doc strings
-          Then The claim project, src/test/java/org/farhan/stepdefs/blah/BlahDocStringPageSteps.java file will be as follows
-            \"\"\"  
-            text
-            \"\"\"   
-            
-        Scenario: Non existing Java class creation with vertice details
-          Then The claim project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be as follows
-            \"\"\"  
-            text
-            \"\"\"   
-      
-        Scenario: Non existing Java class creation with edge details
-          Then The claim project, src/test/java/org/farhan/stepdefs/blah2/Blah2JsonRequestSteps.java file will be as follows
-            \"\"\"  
-            text
-            \"\"\"   
       """
     When The mbt-transformer plugin, cucumber-to-uml goal is executed with
       | Tags    |
-      | initial |
+      | debug |
     And The mbt-transformer plugin, uml-to-cucumber goal is executed
-
-  @debug
-  Scenario: Java code is generated
-    Then The mbt-transformer plugin, src/test/resources/Cucumber/dept/process.feature file is as follows
-      """
-      @initial
-      Feature: Convert Step Definitions
-      
-        Background: Create a feature file
-          Given The claim project, src/test/cucumber/dept/process.feature file is as follows
-            \"\"\"  
-            text
-            \"\"\"  
-          When The mbt-transformer plugin, cucumber-to-uml goal is executed with
-            | Tags |
-            | tag1 |
-          And The mbt-transformer plugin, uml-to-cucumber goal is executed
-      
-        Scenario: Non existing Java class creation with vertice data tables
-          Then The claim project, src/test/java/org/farhan/stepdefs/blah/BlahDataTablePageSteps.java file will be as follows
-            \"\"\"  
-            text
-            \"\"\"     
-      
-        Scenario: Non existing Java class creation with vertice doc strings
-          Then The claim project, src/test/java/org/farhan/stepdefs/blah/BlahDocStringPageSteps.java file will be as follows
-            \"\"\"  
-            text
-            \"\"\"   
-            
-        Scenario: Non existing Java class creation with vertice details
-          Then The claim project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be as follows
-            \"\"\"  
-            text
-            \"\"\"   
-      
-        Scenario: Non existing Java class creation with edge details
-          Then The claim project, src/test/java/org/farhan/stepdefs/blah2/Blah2JsonRequestSteps.java file will be as follows
-            \"\"\"  
-            text
-            \"\"\"   
-      """
