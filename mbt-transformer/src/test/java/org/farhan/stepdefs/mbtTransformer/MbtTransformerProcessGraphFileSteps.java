@@ -15,4 +15,14 @@ public class MbtTransformerProcessGraphFileSteps {
     public void theProcessGraphFileEdgesSectionWillBeAsFollows(DataTable dataTable) {
         MbtTransformerFactory.get("MbtTransformerProcessGraphFile").assertInputOutputs(dataTable, "Edges");
     }
+    
+    @Given("^The Process.graph file, Edges Graph Vertices section will be as follows$")
+    public void theProcessGraphFileEdgesGraphVerticesSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("MbtTransformerProcessGraphFile").assertInputOutputs(dataTable, "Edges Graph Vertices");
+    }
+
+    @Given("^The Process.graph file, Edges Graph Edges section will be as follows$")
+    public void theProcessGraphFileEdgesGraphEdgesSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("MbtTransformerProcessGraphFile").assertInputOutputs(dataTable, "Edges Graph Edges");
+    }
 }

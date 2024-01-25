@@ -31,6 +31,23 @@ import org.junit.jupiter.api.Assertions;
 
 public abstract class MbtTransformer extends FileObject {
 
+	private MBTEdge getEdgeByString(MBTGraph<MBTVertex, MBTEdge> g, String edgeName) {
+		// TODO replace with g.edgeSet().contains(new MBTEdge(edgeName)) when moving
+		// graph code here
+		MBTEdge edge = null;
+		for (MBTEdge e : g.edgeSet()) {
+			if (edgeName.contentEquals(e.toString())) {
+				edge = e;
+				break;
+			}
+		}
+		return edge;
+	}
+
+	private MBTEdge getEdgeBySourceVertex(MBTGraph<MBTVertex, MBTEdge> g, String sourceVertex) {
+		return (MBTEdge) g.outgoingEdgesOf(g.getVertex(sourceVertex)).toArray()[0];
+	}
+
 	protected void assertVerticesVertexNameExists(String vertexName) {
 		Assertions.assertEquals(1, GraphProject.getFirstLayerGraphs().size());
 		MBTGraph<MBTVertex, MBTEdge> g = GraphProject.getFirstLayerGraphs().getFirst();
@@ -41,16 +58,27 @@ public abstract class MbtTransformer extends FileObject {
 	protected void assertEdgesEdgeNameExists(String edgeName) {
 		Assertions.assertEquals(1, GraphProject.getFirstLayerGraphs().size());
 		MBTGraph<MBTVertex, MBTEdge> g = GraphProject.getFirstLayerGraphs().getFirst();
-		// TODO replace with g.edgeSet().contains(new MBTEdge(edgeName)) when moving
-		// graph code here
-		MBTEdge edge = null;
-		for (MBTEdge e : g.edgeSet()) {
-			if (edgeName.contentEquals(e.toString())) {
-				edge = e;
-				break;
-			}
-		}
-		Assertions.assertTrue(edge != null, "Edge " + edgeName + " doesn't exist");
+		Assertions.assertTrue(getEdgeByString(g, edgeName) != null, "Edge " + edgeName + " doesn't exist");
+	}
+
+	protected void assertEdgesGraphEdgeNameExists(String sourceVertex, String graphEdgeName) {
+		Assertions.assertEquals(1, GraphProject.getFirstLayerGraphs().size());
+		MBTGraph<MBTVertex, MBTEdge> g = GraphProject.getFirstLayerGraphs().getFirst();
+		MBTEdge edge = getEdgeBySourceVertex(g, sourceVertex);
+		Assertions.assertTrue(edge != null, "Edge " + sourceVertex + " doesn't exist");
+		MBTGraph<MBTVertex, MBTEdge> g1 = (MBTGraph<MBTVertex, MBTEdge>) edge.getValue();
+		Assertions.assertTrue(getEdgeByString(g1, graphEdgeName) != null,
+				"Graph Edge " + graphEdgeName + " doesn't exist");
+	}
+
+	protected void assertEdgesGraphVertexNameExists(String sourceVertex, String graphVertexName) {
+		Assertions.assertEquals(1, GraphProject.getFirstLayerGraphs().size());
+		MBTGraph<MBTVertex, MBTEdge> g = GraphProject.getFirstLayerGraphs().getFirst();
+		MBTEdge edge = getEdgeBySourceVertex(g, sourceVertex);
+		Assertions.assertTrue(edge != null, "Edge " + sourceVertex + " doesn't exist");
+		MBTGraph<MBTVertex, MBTEdge> g1 = (MBTGraph<MBTVertex, MBTEdge>) edge.getValue();
+		Assertions.assertTrue(g1.vertexSet().contains(new MBTVertex(graphVertexName)),
+				"Vertex " + graphVertexName + " doesn't exist");
 	}
 
 	public void assertModelExists() {
