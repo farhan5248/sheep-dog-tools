@@ -13,6 +13,9 @@
 		<maven-plugin-tools.version>3.10.2</maven-plugin-tools.version>
 	</properties>
 
+	<scm>
+		<connection>scm:git:https://github.com/farhan5248/claims-adjudication-ai</connection>
+	</scm>
 
 	<dependencyManagement>
 		<dependencies>

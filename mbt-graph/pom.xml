@@ -13,6 +13,10 @@
 		<java.version>1.8</java.version>
 	</properties>
 
+	<scm>
+		<connection>scm:git:https://github.com/farhan5248/claims-adjudication-ai</connection>
+	</scm>
+	
 	<build>
 		<plugins>
 			<plugin>
