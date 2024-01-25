@@ -16,8 +16,12 @@ public class MBTPath {
 
 	public String toString() {
 		String pathAsString = "";
-		for (Object verticeOrEdge : path) {
-			pathAsString += "(" + verticeOrEdge.toString() + ")" + " -> ";
+		for (Object o : path) {
+			if (o instanceof MBTVertex) {
+				pathAsString += "(" + ((MBTVertex) o).getLabel() + ")" + " -> ";
+			} else {
+				pathAsString += "(" + ((MBTEdge) o).getLabel() + ")" + " -> ";
+			}
 		}
 		pathAsString = pathAsString.replaceAll(" -> $", "");
 		return pathAsString;

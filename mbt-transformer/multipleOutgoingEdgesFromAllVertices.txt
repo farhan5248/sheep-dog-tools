@@ -1,0 +1,97 @@
+Graph
+	name:Feature Name
+	vertices:
+		Vertex
+			label:start
+		Vertex
+			label:end
+		Vertex
+			label:Set Object as follows
+	edges:
+		Edge
+			label:
+			source:
+				Vertex
+					label:start
+			target:
+				Vertex
+					label:Set Object as follows
+			tag:
+			value:
+		Edge
+			label:Scenario One
+			source:
+				Vertex
+					label:Set Object as follows
+			target:
+				Vertex
+					label:end
+			tag:
+			value:
+				Graph
+					name:Set Object as follows
+					vertices:
+						Vertex
+							label:start
+						Vertex
+							label:end
+						Vertex
+							label:ins
+						Vertex
+							label:grp
+					edges:
+						Edge
+							label:
+							source:
+								Vertex
+									label:start
+							target:
+								Vertex
+									label:ins
+							tag:
+							value:
+								
+						Edge
+							label:5
+							source:
+								Vertex
+									label:ins
+							target:
+								Vertex
+									label:grp
+							tag:
+							value:
+								5
+						Edge
+							label:4
+							source:
+								Vertex
+									label:ins
+							target:
+								Vertex
+									label:grp
+							tag:
+							value:
+								4
+						Edge
+							label:10
+							source:
+								Vertex
+									label:grp
+							target:
+								Vertex
+									label:end
+							tag:
+							value:
+								10
+						Edge
+							label:8
+							source:
+								Vertex
+									label:grp
+							target:
+								Vertex
+									label:end
+							tag:
+							value:
+								8

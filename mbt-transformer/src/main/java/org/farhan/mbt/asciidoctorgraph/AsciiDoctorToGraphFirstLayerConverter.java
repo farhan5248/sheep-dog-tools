@@ -99,25 +99,13 @@ public class AsciiDoctorToGraphFirstLayerConverter extends ToGraphFirstLayerConv
 
 	@Override
 	protected void transformLayerFile(ConvertibleFile layerFile) throws Exception {
-		AsciiDoctorAdocFile theFile = (AsciiDoctorAdocFile) layerFile;
-		MBTGraph<MBTVertex, MBTEdge> g = createEmptyGraph(theFile.theDoc.getDoctitle());
-		for (StructuralNode block : theFile.theDoc.getBlocks()) {
+		anAsciiDoctorFile = (AsciiDoctorAdocFile) layerFile;
+		MBTGraph<MBTVertex, MBTEdge> g = createEmptyGraph(anAsciiDoctorFile.theDoc.getDoctitle());
+		for (StructuralNode block : anAsciiDoctorFile.theDoc.getBlocks()) {
 			if (block instanceof Section) {
 				createFromSection(g, (Section) block);
 			}
 		}
 		GraphProject.getFirstLayerGraphs().add(new GraphTextFile(g));
 	}
-
-	public void createFromAdoc(String fileName) throws Exception {
-
-		GraphProject.init();
-		AsciiDoctorProject.init();
-		for (ConvertibleFile cf : AsciiDoctorProject.getFirstLayerFiles()) {
-			if (cf.getFile().getAbsolutePath().endsWith(fileName)) {
-				transformLayerFile(cf);
-			}
-		}
-	}
-
 }

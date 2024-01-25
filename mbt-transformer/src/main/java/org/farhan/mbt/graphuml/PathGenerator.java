@@ -10,44 +10,49 @@ import org.farhan.mbt.graph.MBTVertex;
 
 public class PathGenerator {
 
-	public static ArrayList<MBTPath> getAllPaths(MBTGraph<MBTVertex, MBTEdge> g, MBTVertex vertice) {
-		ArrayList<MBTPath> pathsFromVertice = new ArrayList<MBTPath>();
-		Set<MBTEdge> edges = g.outgoingEdgesOf(vertice);
+	public static ArrayList<MBTPath> getAllPaths(MBTGraph<MBTVertex, MBTEdge> g, MBTVertex vertex) {
+		ArrayList<MBTPath> vertexPaths = new ArrayList<MBTPath>();
+		Set<MBTEdge> edges = g.outgoingEdgesOf(vertex);
 		if (edges.isEmpty()) {
 			// last node creates empty list and returns it
-			pathsFromVertice.add(new MBTPath());
-			return pathsFromVertice;
+			vertexPaths.add(new MBTPath());
+			return vertexPaths;
 		} else {
 			for (MBTEdge e : edges) {
-				ArrayList<MBTPath> pathsFromChild = getAllPaths(g, g.getEdgeTarget(e));
-				ArrayList<MBTPath> pathsFromEdge = getEdgePaths(e);
+				ArrayList<MBTPath> childPaths = getAllPaths(g, g.getEdgeTarget(e));
+				ArrayList<MBTPath> edgePaths = getEdgePaths(e);
+				combinePaths(g, e, vertex, vertexPaths, childPaths, edgePaths);
+			}
+			return vertexPaths;
+		}
+	}
 
-				for (MBTPath pc : pathsFromChild) {
+	private static void combinePaths(MBTGraph<MBTVertex, MBTEdge> g, MBTEdge e, MBTVertex vertex,
+			ArrayList<MBTPath> vertexPaths, ArrayList<MBTPath> childPaths, ArrayList<MBTPath> edgePaths) {
+		for (MBTPath pc : childPaths) {
 
-					if (pathsFromEdge.isEmpty()) {
-						pc.getPath().add(0, g.getEdgeTarget(e));
-						pc.getPath().add(0, e);
-						if (vertice.getLabel().contentEquals(g.getStartVertex().getLabel())) {
-							pc.getPath().add(0, vertice);
-						}
-						pathsFromVertice.add(pc);
-					} else {
-						for (MBTPath pe : pathsFromEdge) {
+			if (edgePaths.isEmpty()) {
+				pc.getPath().add(0, g.getEdgeTarget(e));
+				pc.getPath().add(0, e);
+				if (vertex.getLabel().contentEquals(g.getStartVertex().getLabel())) {
+					pc.getPath().add(0, vertex);
+				}
+				vertexPaths.add(pc);
+			} else {
+				for (MBTPath pe : edgePaths) {
 
-							MBTPath expandedPath = new MBTPath();
-							expandedPath.getPath().addAll(0, pc.getPath());
-							expandedPath.getPath().add(0, g.getEdgeTarget(e));
-							expandedPath.getPath().addAll(0, pe.getPath());
-							if (vertice.getLabel().contentEquals(g.getStartVertex().getLabel())) {
-								expandedPath.getPath().add(0, vertice);
-							}
-							pathsFromVertice.add(expandedPath);
-						}
+					MBTPath expandedPath = new MBTPath();
+					expandedPath.getPath().addAll(0, pc.getPath());
+					expandedPath.getPath().add(0, g.getEdgeTarget(e));
+					expandedPath.getPath().addAll(0, pe.getPath());
+					if (vertex.getLabel().contentEquals(g.getStartVertex().getLabel())) {
+						expandedPath.getPath().add(0, vertex);
 					}
+					vertexPaths.add(expandedPath);
 				}
 			}
-			return pathsFromVertice;
 		}
+
 	}
 
 	private static ArrayList<MBTPath> getEdgePaths(MBTEdge e) {
@@ -62,17 +67,4 @@ public class PathGenerator {
 
 	}
 
-	public static ArrayList<MBTPath> getTaggedPaths(MBTGraph<MBTVertex, MBTEdge> g, MBTVertex vertice, String tag) {
-		ArrayList<MBTPath> pathsFromVertice = getAllPaths(g, vertice);
-
-		for (int i = pathsFromVertice.size() - 1; i >= 0; i--) {
-
-			MBTPath path = pathsFromVertice.get(i);
-			if (!path.contains(tag)) {
-				pathsFromVertice.remove(i);
-			}
-		}
-
-		return pathsFromVertice;
-	}
 }

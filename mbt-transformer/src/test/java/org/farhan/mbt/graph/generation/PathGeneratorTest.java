@@ -8,8 +8,11 @@ import java.util.Set;
 
 import org.farhan.mbt.graph.MBTPath;
 import org.farhan.mbt.graph.MBTVertex;
+import org.farhan.mbt.graphuml.GraphToUMLFirstLayerConverter;
 import org.farhan.mbt.graphuml.PathGenerator;
+import org.farhan.mbt.uml.UMLProject;
 import org.farhan.mbt.core.Utilities;
+import org.farhan.mbt.graph.GraphProject;
 import org.farhan.mbt.graph.GraphTextFile;
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
@@ -77,15 +80,25 @@ class PathGeneratorTest {
 		g.createEdgeWithVertices(list.getLast(), g.getEndVertex().getLabel(), name, null);
 	}
 
-	@Test
-	void readFile() {
-		GraphTextFile gtf = new GraphTextFile(new File("Feature Name.txt"));
+	private GraphTextFile readFile(String name) {
+		GraphTextFile gtf = new GraphTextFile(new File(name));
 		try {
 			gtf.read();
-			System.out.println(gtf.theGraph.toString());
 		} catch (Exception e) {
 			System.out.println(Utilities.getStackTraceAsString(e));
 		}
+		return gtf;
+	}
+
+	private ArrayList<MBTPath> runConversion(GraphTextFile gtf) {
+		GraphToUMLFirstLayerConverter c = new GraphToUMLFirstLayerConverter();
+		try {
+			c.temp(gtf);
+			UMLProject.writeFiles();
+		} catch (Exception e) {
+			System.out.println(Utilities.getStackTraceAsString(e));
+		}
+		return c.paths;
 	}
 
 	@Test
@@ -95,18 +108,16 @@ class PathGeneratorTest {
 	 */
 	void singleOutgoingEdgeFromAllVertices() {
 
-		MBTTable table = new MBTTable("Set Object as follows");
-		table.addRow("ins", "grp", "crt");
-		table.addRow("5", "10", "15");
-
-		MBTGraph<MBTVertex, MBTEdge> g = createFromMultipleColumns(table);
-		ArrayList<MBTPath> paths = PathGenerator.getAllPaths(g, g.getStartVertex());
+		UMLProject.init();
+		GraphProject.init();
+		GraphTextFile gtf = readFile("target/Graphs/singleOutgoingEdgeFromAllVertices.txt");
+		ArrayList<MBTPath> paths = runConversion(gtf);
 		for (MBTPath p : paths) {
 			System.out.println(p.toString());
 		}
 		Assertions.assertEquals(1, paths.size());
 		Assertions.assertEquals(
-				"(start) -> (start ->  -> ins) -> (ins) -> (ins -> 5 -> grp) -> (grp) -> (grp -> 10 -> crt) -> (crt) -> (crt -> 15 -> end) -> (end)",
+				"(start) -> () -> (Set Object as follows) -> (start) -> () -> (ins) -> (5) -> (end) -> (end)",
 				paths.get(0).toString());
 	}
 
@@ -118,22 +129,19 @@ class PathGeneratorTest {
 	 */
 	void multipleOutgoingEdgesFromOneVertice() {
 
-		MBTTable table = new MBTTable("Set Object as follows");
-		table.addRow("ins", "grp", "crt");
-		table.addRow("5", "10", "15");
-		table.addRow("5", "10", "12");
-
-		MBTGraph<MBTVertex, MBTEdge> g = createFromMultipleColumns(table);
-		ArrayList<MBTPath> paths = PathGenerator.getAllPaths(g, g.getStartVertex());
+		UMLProject.init();
+		GraphProject.init();
+		GraphTextFile gtf = readFile("target/Graphs/multipleOutgoingEdgesFromOneVertice.txt");
+		ArrayList<MBTPath> paths = runConversion(gtf);
 		for (MBTPath p : paths) {
 			System.out.println(p.toString());
 		}
 		Assertions.assertEquals(2, paths.size());
 		Assertions.assertEquals(
-				"(start) -> (start ->  -> ins) -> (ins) -> (ins -> 5 -> grp) -> (grp) -> (grp -> 10 -> crt) -> (crt) -> (crt -> 15 -> end) -> (end)",
+				"(start) -> () -> (Set Object as follows) -> (start) -> () -> (ins) -> (5) -> (end) -> (end)",
 				paths.get(0).toString());
 		Assertions.assertEquals(
-				"(start) -> (start ->  -> ins) -> (ins) -> (ins -> 5 -> grp) -> (grp) -> (grp -> 10 -> crt) -> (crt) -> (crt -> 12 -> end) -> (end)",
+				"(start) -> () -> (Set Object as follows) -> (start) -> () -> (ins) -> (4) -> (end) -> (end)",
 				paths.get(1).toString());
 	}
 
@@ -145,109 +153,26 @@ class PathGeneratorTest {
 	 */
 	void multipleOutgoingEdgesFromAllVertices() {
 
-		MBTTable table = new MBTTable("Set Object as follows");
-		table.addRow("ins", "grp", "crt");
-		table.addRow("5", "10", "15");
-		table.addRow("4", "8", "12");
-
-		MBTGraph<MBTVertex, MBTEdge> g = createFromMultipleColumns(table);
-		ArrayList<MBTPath> paths = PathGenerator.getAllPaths(g, g.getStartVertex());
-		for (MBTPath p : paths) {
-			System.out.println(p.toString());
-		}
-		Assertions.assertEquals(8, paths.size());
-		Assertions.assertEquals(
-				"(start) -> (start ->  -> ins) -> (ins) -> (ins -> 5 -> grp) -> (grp) -> (grp -> 10 -> crt) -> (crt) -> (crt -> 15 -> end) -> (end)",
-				paths.get(0).toString());
-		Assertions.assertEquals(
-				"(start) -> (start ->  -> ins) -> (ins) -> (ins -> 5 -> grp) -> (grp) -> (grp -> 10 -> crt) -> (crt) -> (crt -> 12 -> end) -> (end)",
-				paths.get(1).toString());
-		Assertions.assertEquals(
-				"(start) -> (start ->  -> ins) -> (ins) -> (ins -> 5 -> grp) -> (grp) -> (grp -> 8 -> crt) -> (crt) -> (crt -> 15 -> end) -> (end)",
-				paths.get(2).toString());
-		Assertions.assertEquals(
-				"(start) -> (start ->  -> ins) -> (ins) -> (ins -> 5 -> grp) -> (grp) -> (grp -> 8 -> crt) -> (crt) -> (crt -> 12 -> end) -> (end)",
-				paths.get(3).toString());
-		Assertions.assertEquals(
-				"(start) -> (start ->  -> ins) -> (ins) -> (ins -> 4 -> grp) -> (grp) -> (grp -> 10 -> crt) -> (crt) -> (crt -> 15 -> end) -> (end)",
-				paths.get(4).toString());
-		Assertions.assertEquals(
-				"(start) -> (start ->  -> ins) -> (ins) -> (ins -> 4 -> grp) -> (grp) -> (grp -> 10 -> crt) -> (crt) -> (crt -> 12 -> end) -> (end)",
-				paths.get(5).toString());
-		Assertions.assertEquals(
-				"(start) -> (start ->  -> ins) -> (ins) -> (ins -> 4 -> grp) -> (grp) -> (grp -> 8 -> crt) -> (crt) -> (crt -> 15 -> end) -> (end)",
-				paths.get(6).toString());
-		Assertions.assertEquals(
-				"(start) -> (start ->  -> ins) -> (ins) -> (ins -> 4 -> grp) -> (grp) -> (grp -> 8 -> crt) -> (crt) -> (crt -> 12 -> end) -> (end)",
-				paths.get(7).toString());
-	}
-
-	@Test
-	/**
-	 * | ins | grp | crt |
-	 * |       5 |    10 |          15 |
-	 * |       4 |     8 |          12 |
-	 */
-	void taggedEdgesFromAllVertices() {
-
-		MBTTable table = new MBTTable("Set Object as follows");
-		table.addRow("ins", "grp", "crt");
-		table.addRow("5", "10", "15");
-		table.addRow("4", "8", "12");
-
-		MBTGraph<MBTVertex, MBTEdge> g = createFromMultipleColumns(table);
-		Set<MBTEdge> edges = g.getAllEdges(new MBTVertex("grp"), new MBTVertex("crt"));
-		for (MBTEdge edge : edges) {
-			if (edge.getLabel().contentEquals("8")) {
-				edge.setTag("tagged");
-			}
-		}
-		ArrayList<MBTPath> paths = PathGenerator.getTaggedPaths(g, g.getStartVertex(), "tagged");
+		UMLProject.init();
+		GraphProject.init();
+		GraphTextFile gtf = readFile("target/Graphs/multipleOutgoingEdgesFromAllVertices.txt");
+		ArrayList<MBTPath> paths = runConversion(gtf);
 		for (MBTPath p : paths) {
 			System.out.println(p.toString());
 		}
 		Assertions.assertEquals(4, paths.size());
 		Assertions.assertEquals(
-				"(start) -> (start ->  -> ins) -> (ins) -> (ins -> 5 -> grp) -> (grp) -> (grp -> 8 -> crt) -> (crt) -> (crt -> 15 -> end) -> (end)",
+				"(start) -> () -> (Set Object as follows) -> (start) -> () -> (ins) -> (5) -> (grp) -> (10) -> (end) -> (end)",
 				paths.get(0).toString());
 		Assertions.assertEquals(
-				"(start) -> (start ->  -> ins) -> (ins) -> (ins -> 5 -> grp) -> (grp) -> (grp -> 8 -> crt) -> (crt) -> (crt -> 12 -> end) -> (end)",
+				"(start) -> () -> (Set Object as follows) -> (start) -> () -> (ins) -> (5) -> (grp) -> (8) -> (end) -> (end)",
 				paths.get(1).toString());
 		Assertions.assertEquals(
-				"(start) -> (start ->  -> ins) -> (ins) -> (ins -> 4 -> grp) -> (grp) -> (grp -> 8 -> crt) -> (crt) -> (crt -> 15 -> end) -> (end)",
+				"(start) -> () -> (Set Object as follows) -> (start) -> () -> (ins) -> (4) -> (grp) -> (10) -> (end) -> (end)",
 				paths.get(2).toString());
 		Assertions.assertEquals(
-				"(start) -> (start ->  -> ins) -> (ins) -> (ins -> 4 -> grp) -> (grp) -> (grp -> 8 -> crt) -> (crt) -> (crt -> 12 -> end) -> (end)",
+				"(start) -> () -> (Set Object as follows) -> (start) -> () -> (ins) -> (4) -> (grp) -> (8) -> (end) -> (end)",
 				paths.get(3).toString());
-	}
-
-	@Test
-	/**
-	 * TODO 
-	 */
-	void compoundPaths() {
-
-		ArrayList<String> list = new ArrayList<String>();
-		list.add("Step 1");
-		Map<String, ArrayList<String>> lists = new HashMap<String, ArrayList<String>>();
-		lists.put("Scenario name", list);
-
-		MBTTable fieldTable = new MBTTable("Step 1");
-		fieldTable.addRow("ins", "grp", "crt");
-		fieldTable.addRow("5", "10", "15");
-
-		MBTGraph<MBTVertex, MBTEdge> objectGraph = createFromMultiList(lists, "Feature Name");
-		MBTGraph<MBTVertex, MBTEdge> fieldGraph = createFromMultipleColumns(fieldTable);
-		MBTEdge edge = (MBTEdge) objectGraph.outgoingEdgesOf(objectGraph.getVertex("Step 1")).toArray()[0];
-		edge.setValue(fieldGraph);
-
-		ArrayList<MBTPath> paths = PathGenerator.getAllPaths(objectGraph, objectGraph.getStartVertex());
-		for (MBTPath p : paths) {
-			System.out.println(p.toString());
-		}
-		Assertions.assertEquals("(start) -> (start ->  -> Step 1) -> (Step 1) -> "
-				+ "(start) -> (start ->  -> ins) -> (ins) -> (ins -> 5 -> grp) -> (grp) -> (grp -> 10 -> crt) -> (crt) -> (crt -> 15 -> end) -> (end) -> "
-				+ "(end)", paths.get(0).toString());
 	}
 
 }
