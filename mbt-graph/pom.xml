@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.farhan</groupId>
 	<artifactId>mbt-graph</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>MBT Graph Modeller</name>
 	<description>Models test cases using graphs</description>
 
@@ -13,7 +13,7 @@
 
 	<scm>
 		<connection>scm:git:https://github.com/farhan5248/claims-adjudication-ai</connection>
-	  <tag>mbt-graph-1.0</tag>
+	  <tag>HEAD</tag>
   </scm>
 	
 	<build>
