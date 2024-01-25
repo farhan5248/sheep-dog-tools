@@ -7,6 +7,7 @@ import org.eclipse.uml2.uml.Model;
 import org.farhan.mbt.core.ConvertibleFile;
 import org.farhan.mbt.core.Project;
 import org.farhan.mbt.core.Utilities;
+import org.farhan.mbt.cucumber.CucumberFeatureFile;
 
 public class GraphProject extends Project {
 
@@ -16,12 +17,22 @@ public class GraphProject extends Project {
 		return new File(baseDir + "target/Graphs/");
 	}
 	
+	public static String getFirstLayerFileType() {
+		return ".txt";
+	}
+	
 	public static void init() {
 		firstLayerGraphs = new ArrayList<GraphTextFile>();
 	}
 
-	public static Model readFiles() throws IOException {
-		return null;
+	public static void readFiles() throws Exception {
+		
+		ArrayList<File> files = Utilities.recursivelyListFiles(getFirstLayerDir(), getFirstLayerFileType());
+		for (File f : files) {
+			GraphTextFile gtf = new GraphTextFile(f);
+			firstLayerGraphs.add(gtf);
+			gtf.read();
+		}
 	}
 
 	public static void writeFiles() throws Exception {

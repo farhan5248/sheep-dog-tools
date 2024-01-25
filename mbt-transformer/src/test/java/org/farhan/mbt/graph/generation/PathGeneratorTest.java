@@ -1,5 +1,6 @@
 package org.farhan.mbt.graph.generation;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +9,8 @@ import java.util.Set;
 import org.farhan.mbt.graph.MBTPath;
 import org.farhan.mbt.graph.MBTVertex;
 import org.farhan.mbt.graphuml.PathGenerator;
+import org.farhan.mbt.core.Utilities;
+import org.farhan.mbt.graph.GraphTextFile;
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
 import org.farhan.mbt.graph.MBTTable;
@@ -72,6 +75,17 @@ class PathGeneratorTest {
 			g.createEdgeWithVertices(source, target, name, null);
 		}
 		g.createEdgeWithVertices(list.getLast(), g.getEndVertex().getLabel(), name, null);
+	}
+
+	@Test
+	void readFile() {
+		GraphTextFile gtf = new GraphTextFile(new File("Feature Name.txt"));
+		try {
+			gtf.read();
+			System.out.println(gtf.theGraph.toString());
+		} catch (Exception e) {
+			System.out.println(Utilities.getStackTraceAsString(e));
+		}
 	}
 
 	@Test

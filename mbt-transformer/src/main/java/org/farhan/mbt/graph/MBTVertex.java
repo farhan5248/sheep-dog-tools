@@ -11,6 +11,10 @@ public class MBTVertex {
 		attributes.put("label", label);
 	}
 
+	public void setLabel(String label) {
+		attributes.put("label", label);
+	}
+
 	public String getLabel() {
 		return (String) attributes.get("label");
 	}

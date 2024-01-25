@@ -12,13 +12,21 @@ public class GraphTextFile implements ConvertibleFile {
 
 	public GraphTextFile(MBTGraph<MBTVertex, MBTEdge> g) {
 		theGraph = g;
-		String fileName = GraphProject.getFirstLayerDir().getAbsolutePath() + File.separator + g.getName() + ".txt";
+		String fileName = GraphProject.getFirstLayerDir().getAbsolutePath() + File.separator + g.getName()
+				+ GraphProject.getFirstLayerFileType();
 		theFile = new File(fileName);
+	}
+
+	public GraphTextFile(File f) {
+		theGraph = new MBTGraph<MBTVertex, MBTEdge>(MBTEdge.class);
+		theGraph.setName(f.getName());
+		theFile = f;
 	}
 
 	@Override
 	public void setFile(File theFile) {
 		this.theFile = theFile;
+		theGraph.setName(theFile.getName());
 	}
 
 	@Override
@@ -27,16 +35,89 @@ public class GraphTextFile implements ConvertibleFile {
 	}
 
 	@Override
-	public void read() {
+	public void read() throws Exception {
 		if (theFile.exists()) {
 			// TODO in the future call the dot exporter code here
-			theGraph = readFile();
+			readTextFile();
 		}
 	}
 
-	private MBTGraph<MBTVertex, MBTEdge> readFile() {
-		// TODO Auto-generated method stub
-		return null;
+	private void readTextFile() throws Exception {
+		String lines = Utilities.readFile(theFile);
+		MBTGraph<MBTVertex, MBTEdge> lastGraph = null;
+		Object lastObject = null;
+		boolean isSource = true;
+		boolean isValue = false;
+		MBTVertex sourceVertex = null;
+		MBTVertex targetVertex = null;
+		for (String line : lines.split("\n")) {
+			if (line.startsWith("Graph")) {
+				lastGraph = new MBTGraph<MBTVertex, MBTEdge>(MBTEdge.class);
+				theGraph = lastGraph;
+			} else if (line.startsWith("\tname:")) {
+				lastGraph.setName(line.replace("\tname:", ""));
+			} else if (line.startsWith("\t\t\t\t\tname:")) {
+				lastGraph.setName(line.replace("\t\t\t\t\tname:", ""));
+			} else if (line.startsWith("\tvertices:")) {
+			} else if (line.startsWith("\t\t\t\t\tvertices:")) {
+			} else if (line.startsWith("\t\tVertex")) {
+				lastObject = new MBTVertex("");
+			} else if (line.startsWith("\t\t\t\t\t\tVertex")) {
+				lastObject = new MBTVertex("");
+			} else if (line.startsWith("\t\t\tlabel:") && lastObject instanceof MBTVertex) {
+				((MBTVertex) lastObject).setLabel(line.replace("\t\t\tlabel:", ""));
+				lastGraph.addVertex((MBTVertex) lastObject);
+			} else if (line.startsWith("\t\t\t\t\t\t\tlabel:") && lastObject instanceof MBTVertex) {
+				((MBTVertex) lastObject).setLabel(line.replace("\t\t\t\t\t\t\tlabel:", ""));
+				lastGraph.addVertex((MBTVertex) lastObject);
+			} else if (line.startsWith("\tedges:")) {
+			} else if (line.startsWith("\t\t\t\t\tedges:")) {
+			} else if (line.startsWith("\t\tEdge")) {
+				lastObject = new MBTEdge("");
+			} else if (line.startsWith("\t\t\t\t\t\tEdge")) {
+				lastObject = new MBTEdge("");
+			} else if (line.startsWith("\t\t\tlabel:") && lastObject instanceof MBTEdge) {
+				((MBTEdge) lastObject).setLabel(line.replace("\t\t\tlabel:", ""));
+			} else if (line.startsWith("\t\t\t\t\t\t\tlabel:") && lastObject instanceof MBTEdge) {
+				((MBTEdge) lastObject).setLabel(line.replace("\t\t\t\t\t\t\tlabel:", ""));
+			} else if (line.startsWith("\t\t\tsource:")) {
+				isSource = true;
+			} else if (line.startsWith("\t\t\t\t\t\t\tsource:")) {
+				isSource = true;
+			} else if (line.startsWith("\t\t\ttarget:")) {
+				isSource = false;
+			} else if (line.startsWith("\t\t\t\t\t\t\ttarget:")) {
+				isSource = false;
+			} else if (line.startsWith("\t\t\t\tVertex")) {
+			} else if (line.startsWith("\t\t\t\t\t\t\t\tVertex")) {
+			} else if (line.startsWith("\t\t\t\t\tlabel:") && lastObject instanceof MBTEdge && isSource) {
+				sourceVertex = lastGraph.getVertex(line.replace("\t\t\t\t\tlabel:", ""));
+			} else if (line.startsWith("\t\t\t\t\t\t\t\t\tlabel:") && lastObject instanceof MBTEdge && isSource) {
+				sourceVertex = lastGraph.getVertex(line.replace("\t\t\t\t\t\t\t\t\tlabel:", ""));
+			} else if (line.startsWith("\t\t\t\t\tlabel:") && lastObject instanceof MBTEdge && !isSource) {
+				targetVertex = lastGraph.getVertex(line.replace("\t\t\t\t\tlabel:", ""));
+				lastGraph.addEdge(sourceVertex, targetVertex, (MBTEdge) lastObject);
+			} else if (line.startsWith("\t\t\t\t\t\t\t\t\tlabel:") && lastObject instanceof MBTEdge && !isSource) {
+				targetVertex = lastGraph.getVertex(line.replace("\t\t\t\t\t\t\t\t\tlabel:", ""));
+				lastGraph.addEdge(sourceVertex, targetVertex, (MBTEdge) lastObject);
+			} else if (line.startsWith("\t\t\ttag:") && lastObject instanceof MBTEdge) {
+				((MBTEdge) lastObject).setTag(line.replace("\t\t\ttag:", ""));
+			} else if (line.startsWith("\t\t\t\t\t\t\ttag:") && lastObject instanceof MBTEdge) {
+				((MBTEdge) lastObject).setTag(line.replace("\t\t\t\t\t\t\ttag:", ""));
+			} else if (line.startsWith("\t\t\tvalue:") && lastObject instanceof MBTEdge) {
+				isValue = true;
+			} else if (line.startsWith("\t\t\t\t\t\t\tvalue:") && lastObject instanceof MBTEdge) {
+				isValue = true;
+			} else if (line.startsWith("\t\t\t\tGraph") && lastObject instanceof MBTEdge) {
+				isValue = false;
+				lastGraph = new MBTGraph<MBTVertex, MBTEdge>(MBTEdge.class);
+				((MBTEdge) lastObject).setValue(lastGraph);
+			} else if (isValue) {
+				isValue = false;
+				((MBTEdge) lastObject).setValue(line.trim());
+			}
+
+		}
 	}
 
 	@Override
