@@ -3,6 +3,7 @@ package org.farhan.mbt.cucumberuml;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 import org.eclipse.uml2.uml.Class;
@@ -136,7 +137,7 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 	}
 
 	@Override
-	protected void convertToInteractionMessages(Interaction anInteraction, Collection<?> steps) throws Exception {
+	protected void convertToInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception {
 		// TODO if there's already a body, don't add the java code to it, just do
 		// nothing
 		for (Object o : steps) {

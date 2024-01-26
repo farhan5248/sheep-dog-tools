@@ -11,7 +11,7 @@ Feature: Convert Scenario
       		Vertex
       			label:end
       		Vertex
-      			label:Set Object as follows
+      			label:The Search application, Home page is empty
       	edges:
       		Edge
       			label:
@@ -20,21 +20,21 @@ Feature: Convert Scenario
       					label:start
       			target:
       				Vertex
-      					label:Set Object as follows
+      					label:The Search application, Home page is empty
       			tag:
       			value:
       		Edge
       			label:Scenario One
       			source:
       				Vertex
-      					label:Set Object as follows
+      					label:The Search application, Home page is empty
       			target:
       				Vertex
       					label:end
       			tag:
       			value:
       				Graph
-      					name:Set Object as follows
+      					name:The Search application, Home page is empty
       					vertices:
       						Vertex
       							label:start
@@ -86,25 +86,22 @@ Feature: Convert Scenario
       | specs::Process | Scenario 0       |
       | specs::Process | Scenario 1       |
 
-  @debug
   Scenario: Scenario step
     And The target/uml/pst.uml file, Class Element Imports section will be as follows
-      | Class Name     | Alias               | Imported Element                         |
-      | specs::Process | blahObjectPageSteps | pst::stepdefs::blah::BlahObjectPageSteps |
-
-  Scenario: Scenario step
+      | Class Name     | Alias               | Imported Element                           |
+      | specs::Process | SearchHomePageSteps | pst::stepdefs::search::SearchHomePageSteps |
     And The target/uml/pst.uml file, Class Properties section will be as follows
-      | Class Name     | Property Name       | Property Type                            |
-      | specs::Process | this                | pst::specs::Process                      |
-      | specs::Process | BlahObjectPageSteps | pst::stepdefs::blah::BlahObjectPageSteps |
+      | Class Name     | Property Name       | Property Type                              |
+      | specs::Process | this                | pst::specs::Process                        |
+      | specs::Process | SearchHomePageSteps | pst::stepdefs::search::SearchHomePageSteps |
     And The target/uml/pst.uml file, Interaction Messages section will be as follows
-      | Interaction Name       | Message                                              |
-      | specs::Process::Submit | The blah application, something/Object page is empty |
+      | Interaction Name           | Message                                    |
+      | specs::Process::Scenario 0 | The Search application, Home page is empty |
     And The target/uml/pst.uml file, Interaction Lifelines section will be as follows
-      | Interaction Name       | Lifeline Name       | Lifeline Represents                      |
-      | specs::Process::Submit | this                | pst::specs::Process::this                |
-      | specs::Process::Submit | BlahObjectPageSteps | pst::specs::Process::BlahObjectPageSteps |
+      | Interaction Name           | Lifeline Name       | Lifeline Represents                      |
+      | specs::Process::Scenario 0 | this                | pst::specs::Process::this                |
+      | specs::Process::Scenario 0 | SearchHomePageSteps | pst::specs::Process::SearchHomePageSteps |
     And The target/uml/pst.uml file, Interaction Message Occurences section will be as follows
-      | Interaction Name       | Message Occurence | Lifeline Covered    |
-      | specs::Process::Submit | SendEvent         | this                |
-      | specs::Process::Submit | ReceiveEvent      | BlahObjectPageSteps |
+      | Interaction Name           | Message Occurence | Lifeline Covered    |
+      | specs::Process::Scenario 0 | SendEvent         | this                |
+      | specs::Process::Scenario 0 | ReceiveEvent      | SearchHomePageSteps |

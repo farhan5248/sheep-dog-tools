@@ -1,63 +1,86 @@
 Feature: Convert Step
 
-  Background: Create a feature file
-    Given The mbt-transformer plugin, src/test/resources/Cucumber/dept/process.feature file is as follows
-      """
-      Feature: This is a test feature
-      
-        @tag1
-        Scenario: Submit
-      
-          Given The blah application, Given1 page is empty
-           When The blah application, When1 page is empty
-           Then The blah application, Then1 page is empty
-            And The blah application, And1 page is empty
-            But The blah application, But1 page is empty
-              * The blah application, Asterisk page is empty
-          Given The blah application, DataTable page is as follows
-                | h1 | h2 |
-                | v1 | v2 |
-                | v3 | v4 |
-          Given The blah application, DocString page is as follows
-                \"\"\"
-                text1
-                text2
-                \"\"\"
-      """
-    When The mbt-transformer plugin, cucumber-to-uml goal is executed with
-      | Tags |
-      | tag1 |
-    Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-
-  Scenario: Parse Keywords
-    And The target/uml/pst.uml file, Interaction Messages section will be as follows
-      | Interaction Name             | Message                                      |
-      | specs::dept::process::Submit | The blah application, Given1 page is empty   |
-      | specs::dept::process::Submit | The blah application, When1 page is empty    |
-      | specs::dept::process::Submit | The blah application, Then1 page is empty    |
-      | specs::dept::process::Submit | The blah application, And1 page is empty     |
-      | specs::dept::process::Submit | The blah application, But1 page is empty     |
-      | specs::dept::process::Submit | The blah application, Asterisk page is empty |
-
-  Scenario: Parse Arguments
-    And The target/uml/pst.uml file, Interaction Messages section will be as follows
-      | Interaction Name             | Message                                            | Argument Name |
-      | specs::dept::process::Submit | The blah application, DocString page is as follows | docString     |
-      | specs::dept::process::Submit | The blah application, DataTable page is as follows | dataTable     |
-
   Scenario: Parse Data Tables
-    
-    Use annotations to store the multiple rows of data
-    Argument values are used for default values like in PL/SQL
-
+    Given The mbt-transformer plugin, target/Graphs/Process.txt file is as follows
+      """
+      Graph
+      	name:Process
+      	vertices:
+      		Vertex
+      			label:start
+      		Vertex
+      			label:end
+      		Vertex
+      			label:The Search application, Home page is empty
+      	edges:
+      		Edge
+      			label:
+      			source:
+      				Vertex
+      					label:start
+      			target:
+      				Vertex
+      					label:The Search application, Home page is empty
+      			tag:
+      			value:
+      		Edge
+      			label:Scenario One
+      			source:
+      				Vertex
+      					label:The Search application, Home page is empty
+      			target:
+      				Vertex
+      					label:end
+      			tag:
+      			value:
+      				Graph
+      					name:The Search application, Home page is empty
+      					vertices:
+      						Vertex
+      							label:start
+      						Vertex
+      							label:end
+      						Vertex
+      							label:ins
+      					edges:
+      						Edge
+      							label:
+      							source:
+      								Vertex
+      									label:start
+      							target:
+      								Vertex
+      									label:ins
+      							tag:
+      							value:
+      								
+      						Edge
+      							label:5
+      							source:
+      								Vertex
+      									label:ins
+      							target:
+      								Vertex
+      									label:end
+      							tag:
+      							value:
+      								5
+      						Edge
+      							label:4
+      							source:
+      								Vertex
+      									label:ins
+      							target:
+      								Vertex
+      									label:end
+      							tag:
+      							value:
+      								4
+      """
+    When The mbt-transformer plugin, graph-to-uml goal is executed
+    Then The mbt-transformer plugin, target/uml/pst.uml file will be present
     And The target/uml/pst.uml file, Interaction Messages section will be as follows
-      | Interaction Name             | Message                                            | Argument Name | Annotation Detail |
-      | specs::dept::process::Submit | The blah application, DataTable page is as follows | dataTable     | 0 -> h1 \|h2 \|   |
-      | specs::dept::process::Submit | The blah application, DataTable page is as follows | dataTable     | 1 -> v1 \|v2 \|   |
-      | specs::dept::process::Submit | The blah application, DataTable page is as follows | dataTable     | 2 -> v3 \|v4 \|   |
-
-  Scenario: Parse Doc Strings
-    And The target/uml/pst.uml file, Interaction Messages section will be as follows
-      | Interaction Name             | Message                                            | Argument Name | Annotation Detail |
-      | specs::dept::process::Submit | The blah application, DocString page is as follows | docString     | 0 -> text1        |
-      | specs::dept::process::Submit | The blah application, DocString page is as follows | docString     | 1 -> text2        |
+      | Interaction Name           | Message                                    | Argument Name | Annotation Detail |
+      | specs::Process::Scenario 0 | The Search application, Home page is empty | dataTable     | 0 -> ins \|       |
+      | specs::Process::Scenario 0 | The Search application, Home page is empty | dataTable     | 1 -> 5 \|         |
+      | specs::Process::Scenario 0 | The Search application, Home page is empty | dataTable     | 2 -> 4 \|         |

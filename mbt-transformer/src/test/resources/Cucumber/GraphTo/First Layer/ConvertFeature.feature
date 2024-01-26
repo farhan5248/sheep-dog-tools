@@ -11,7 +11,7 @@ Feature: Convert Feature
       		Vertex
       			label:end
       		Vertex
-      			label:Set Object as follows
+      			label:The Search application, Home page is empty
       	edges:
       		Edge
       			label:
@@ -20,14 +20,14 @@ Feature: Convert Feature
       					label:start
       			target:
       				Vertex
-      					label:Set Object as follows
+      					label:The Search application, Home page is empty
       			tag:
       			value:
       		Edge
       			label:Scenario One
       			source:
       				Vertex
-      					label:Set Object as follows
+      					label:The Search application, Home page is empty
       			target:
       				Vertex
       					label:end

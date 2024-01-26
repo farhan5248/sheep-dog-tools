@@ -1,7 +1,7 @@
 package org.farhan.mbt.core;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
@@ -27,7 +27,7 @@ public abstract class ToUMLLayerConverter {
 
 	protected abstract void convertToBehaviours(Class layerClass) throws Exception;
 
-	protected abstract void convertToInteractionMessages(Interaction anInteraction, Collection<?> steps)
+	protected abstract void convertToInteractionMessages(Interaction anInteraction, List<?> steps)
 			throws Exception;
 
 	protected abstract void convertToMessage(Interaction anInteraction, Object anObject) throws Exception;

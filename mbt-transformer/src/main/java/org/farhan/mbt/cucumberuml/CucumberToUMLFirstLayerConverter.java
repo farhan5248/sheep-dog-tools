@@ -2,7 +2,7 @@ package org.farhan.mbt.cucumberuml;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.ElementImport;
@@ -100,7 +100,7 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	}
 
 	@Override
-	protected void convertToInteractionMessages(Interaction anInteraction, Collection<?> steps) throws Exception {
+	protected void convertToInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception {
 
 		for (Object o : steps) {
 			Step cs = (Step) o;

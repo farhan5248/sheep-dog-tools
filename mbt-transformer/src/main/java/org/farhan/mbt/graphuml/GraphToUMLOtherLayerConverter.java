@@ -1,6 +1,7 @@
 package org.farhan.mbt.graphuml;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
@@ -28,7 +29,7 @@ public class GraphToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 	}
 
 	@Override
-	protected void convertToInteractionMessages(Interaction anInteraction, Collection<?> steps) throws Exception {
+	protected void convertToInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception {
 		// TODO Auto-generated method stub
 
 	}
