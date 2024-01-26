@@ -15,6 +15,7 @@ import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.mbt.graph.GraphProject;
+import org.farhan.mbt.graph.GraphTextFile;
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
 import org.farhan.mbt.graph.MBTVertex;
@@ -51,20 +52,23 @@ public abstract class MbtTransformer extends FileObject {
 
 	protected void assertVerticesVertexNameExists(String vertexName) {
 		Assertions.assertEquals(1, GraphProject.getFirstLayerGraphs().size());
-		MBTGraph<MBTVertex, MBTEdge> g = GraphProject.getFirstLayerGraphs().getFirst().theGraph;
+		GraphTextFile gtf = (GraphTextFile) GraphProject.getFirstLayerGraphs().getFirst();
+		MBTGraph<MBTVertex, MBTEdge> g = gtf.theGraph;
 		Assertions.assertTrue(g.vertexSet().contains(new MBTVertex(vertexName)),
 				"Vertex " + vertexName + " doesn't exist");
 	}
 
 	protected void assertEdgesEdgeNameExists(String edgeName) {
 		Assertions.assertEquals(1, GraphProject.getFirstLayerGraphs().size());
-		MBTGraph<MBTVertex, MBTEdge> g = GraphProject.getFirstLayerGraphs().getFirst().theGraph;
+		GraphTextFile gtf = (GraphTextFile) GraphProject.getFirstLayerGraphs().getFirst();
+		MBTGraph<MBTVertex, MBTEdge> g = gtf.theGraph;
 		Assertions.assertTrue(getEdgeByString(g, edgeName) != null, "Edge " + edgeName + " doesn't exist");
 	}
 
 	protected void assertEdgesGraphEdgeNameExists(String sourceVertex, String graphEdgeName) {
 		Assertions.assertEquals(1, GraphProject.getFirstLayerGraphs().size());
-		MBTGraph<MBTVertex, MBTEdge> g = GraphProject.getFirstLayerGraphs().getFirst().theGraph;
+		GraphTextFile gtf = (GraphTextFile) GraphProject.getFirstLayerGraphs().getFirst();
+		MBTGraph<MBTVertex, MBTEdge> g = gtf.theGraph;
 		MBTEdge edge = getEdgeBySourceVertex(g, sourceVertex);
 		Assertions.assertTrue(edge != null, "Edge " + sourceVertex + " doesn't exist");
 		MBTGraph<MBTVertex, MBTEdge> g1 = (MBTGraph<MBTVertex, MBTEdge>) edge.getValue();
@@ -74,7 +78,8 @@ public abstract class MbtTransformer extends FileObject {
 
 	protected void assertEdgesGraphVertexNameExists(String sourceVertex, String graphVertexName) {
 		Assertions.assertEquals(1, GraphProject.getFirstLayerGraphs().size());
-		MBTGraph<MBTVertex, MBTEdge> g = GraphProject.getFirstLayerGraphs().getFirst().theGraph;
+		GraphTextFile gtf = (GraphTextFile) GraphProject.getFirstLayerGraphs().getFirst();
+		MBTGraph<MBTVertex, MBTEdge> g = gtf.theGraph;
 		MBTEdge edge = getEdgeBySourceVertex(g, sourceVertex);
 		Assertions.assertTrue(edge != null, "Edge " + sourceVertex + " doesn't exist");
 		MBTGraph<MBTVertex, MBTEdge> g1 = (MBTGraph<MBTVertex, MBTEdge>) edge.getValue();

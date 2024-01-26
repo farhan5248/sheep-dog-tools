@@ -2,14 +2,10 @@ package org.farhan.mbt.graph.generation;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-
 import org.farhan.mbt.graph.MBTPath;
 import org.farhan.mbt.graph.MBTVertex;
 import org.farhan.mbt.graphuml.GraphToUMLFirstLayerConverter;
-import org.farhan.mbt.graphuml.PathGenerator;
 import org.farhan.mbt.uml.UMLProject;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.graph.GraphProject;

@@ -1,25 +1,21 @@
-
-Feature: Temp
+Feature: Debug
 
   @debug
   Scenario: Generate files
     Given The mbt-transformer plugin, src/test/resources/Cucumber/dept/process.feature file is as follows
       """
-      Feature: Convert Document
+      Feature: Convert Feature
       
-        @debug
-        Scenario: One Section One Vertex One Edge
-          Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
+        Scenario: Convert Feature
+          Given The mbt-transformer plugin, target/Graphs/Process.txt file is as follows
             \"\"\"
-            Text
+            text		
             \"\"\"
-          When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
-          Then The Process.graph file, Edges Graph Vertices section will be as follows
-               | Edge Source Vertex Name                        | Graph Vertex Name |
-               | Set Object as follows ->  -> end | start       |
-          Then The Process.graph file, Edges Graph Edges section will be as follows
-               | Edge Source Vertex Name                        | Graph Edge Name        |
-               | Set Object as follows ->  -> end | start ->  -> ins |
+          When The mbt-transformer plugin, graph-to-uml goal is executed
+          Then The mbt-transformer plugin, target/uml/pst.uml file will be present
+          And The target/uml/pst.uml file, Class section will be as follows
+            | Class Name           | 
+            | specs::dept::process | 
       
       """
     When The mbt-transformer plugin, cucumber-to-uml goal is executed with

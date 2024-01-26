@@ -42,7 +42,7 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 
 	@Override
 	protected void selectLayerFiles(String layer) throws Exception {
-		// TODO in the future select from dot files in the target directory by name
+		GraphProject.readFiles();
 	}
 
 	public void temp(ConvertibleFile theObject) throws Exception {
@@ -66,16 +66,15 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	protected void convertToBehaviours(Class layerClass) throws Exception {
 
 		paths = getAllPaths(aGraphTextFile.theGraph, aGraphTextFile.theGraph.getStartVertex());
-		// TODO generate paths here and then loop through them
-		/*
-		 * for (int i = 0; i < paths.size(); i++) {
-		 * 
-		 * resetCurrentContainerObject(); // TODO figure out names for this later, use a
-		 * counter for now Interaction anInteraction = createInteraction(layerClass,
-		 * String.valueOf(i)); // TODO think about adding tags by deriving them from the
-		 * edges // convertTagsToParameters(anInteraction, s.getTags());
-		 * convertToInteractionMessages(anInteraction, paths.get(i).getPath()); }
-		 */
+		for (int i = 0; i < paths.size(); i++) {
+			resetCurrentContainerObject();
+			// TODO figure out names for this later, use a counter for now
+			Interaction anInteraction = createInteraction(layerClass, "Scenario " + String.valueOf(i));
+			// TODO think about adding tags by deriving them from the edges
+			// convertTagsToParameters(anInteraction, s.getTags());
+			convertToInteractionMessages(anInteraction, paths.get(i).getPath());
+		}
+
 	}
 
 	@Override

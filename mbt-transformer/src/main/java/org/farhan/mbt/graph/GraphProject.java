@@ -11,7 +11,7 @@ import org.farhan.mbt.cucumber.CucumberFeatureFile;
 
 public class GraphProject extends Project {
 
-	private static ArrayList<GraphTextFile> firstLayerGraphs;
+	private static ArrayList<ConvertibleFile> firstLayerGraphs;
 
 	public static File getFirstLayerDir() {
 		return new File(baseDir + "target/Graphs/");
@@ -22,7 +22,7 @@ public class GraphProject extends Project {
 	}
 	
 	public static void init() {
-		firstLayerGraphs = new ArrayList<GraphTextFile>();
+		firstLayerGraphs = new ArrayList<ConvertibleFile>();
 	}
 
 	public static void readFiles() throws Exception {
@@ -45,23 +45,20 @@ public class GraphProject extends Project {
 		}
 	}
 
-	public static ArrayList<GraphTextFile> getFirstLayerGraphs() {
+	public static ArrayList<ConvertibleFile> getFirstLayerGraphs() {
 		return firstLayerGraphs;
 	}
 
 	public static ArrayList<ConvertibleFile> getFirstLayerFiles() {
-		// TODO return GraphDotFile
-		return null;
+		return firstLayerGraphs;
 	}
 
 	public static ArrayList<ConvertibleFile> getSecondLayerFiles() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<ConvertibleFile>();
 	}
 
 	public static ArrayList<ConvertibleFile> getThirdLayerFiles() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<ConvertibleFile>();
 	}
 
 }

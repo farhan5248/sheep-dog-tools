@@ -63,4 +63,10 @@ public class GraphToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 		return null;
 	}
 
+	@Override
+	protected void selectLayerFiles(String layerSelectionCriteria) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
