@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.farhan</groupId>
 		<artifactId>cucumberxtexteditor.parent</artifactId>
-		<version>1.6.0-SNAPSHOT</version>
+		<version>1.6.0</version>
 	</parent>
 	<artifactId>cucumberxtexteditor</artifactId>
 	<packaging>eclipse-plugin</packaging>
@@ -119,7 +119,7 @@
 								<artifactItem>
 									<groupId>org.farhan</groupId>
 									<artifactId>mbt-validator</artifactId>
-									<version>1.2-SNAPSHOT</version>
+									<version>1.2</version>
 									<overWrite>true</overWrite>
 								</artifactItem>
 							</artifactItems>
@@ -170,7 +170,7 @@
 		<dependency>
 			<groupId>org.farhan</groupId>
 			<artifactId>mbt-validator</artifactId>
-			<version>1.2-SNAPSHOT</version>
+			<version>1.2</version>
 		</dependency>
 	</dependencies>
 </project>
