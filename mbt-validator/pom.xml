@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.farhan</groupId>
 	<artifactId>mbt-validator</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<name>MBT Graph Modeller</name>
 	<description>Validates scenario steps</description>
 
@@ -13,7 +13,7 @@
 
 	<scm>
 		<connection>scm:git:https://github.com/farhan5248/claims-adjudication-ai</connection>
-	  <tag>HEAD</tag>
+	  <tag>mbt-validator-1.1</tag>
   </scm>
 	
 	<build>
