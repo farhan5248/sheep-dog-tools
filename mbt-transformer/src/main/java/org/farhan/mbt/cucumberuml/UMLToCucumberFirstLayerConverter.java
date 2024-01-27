@@ -10,33 +10,35 @@ public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
 
 	@Override
 	protected ArrayList<?> selectLayerClasses(String layer) throws Exception {
-		// TODO Auto-generated method stub
+		// TODO get the first layer classes from the UML package
 		return null;
 	}
 
 	@Override
 	protected void convertFromClass(Class layerClass) throws Exception {
-		// TODO Auto-generated method stub
+		// TODO feature name, statements from string
 	}
 
 	@Override
 	protected void convertFromImports(Class layerClass) throws Exception {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	protected void convertFromAttributes(Class layerClass) throws Exception {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	protected void convertFromBehaviours(Class layerClass) throws Exception {
-		// TODO Auto-generated method stub
+		// TODO there's no background or scenario outline, just scenario
+		// create scenario from interaction, name from name, statements from comments
+		// call convertFromInteractionMessages
 	}
 
 	@Override
 	protected void convertFromInteractionMessages(Interaction anInteraction, Object stepList) throws Exception {
-		// TODO Auto-generated method stub
+		// TODO loop through messages and create statements with * for now
+		// message name to step name, convertFromMessage
+		// message annotations to step data table, convertArgumentToDataTableF
 	}
 
 	@Override
@@ -47,24 +49,24 @@ public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
 
 	@Override
 	protected String convertPathToClassQualifiedName(String pathName) {
-		// TODO Auto-generated method stub
+		// TODO shouldn't be here
 		return null;
 	}
 
 	@Override
 	protected String convertClassQualifiedNameToImport(String qualifiedName) {
-		// TODO Auto-generated method stub
+		// TODO shouldn't be here
 		return null;
 	}
 
 	@Override
 	protected String convertImportToClassQualifiedName(String importName) {
-		// TODO Auto-generated method stub
+		// TODO shouldn't be here
 		return null;
 	}
 
 	@Override
-	protected void convertFromMessage(Message m, Object stepList) throws Exception {
+	protected void convertFromMessage(Message m, Object step) throws Exception {
 		// TODO Auto-generated method stub
 	}
 }

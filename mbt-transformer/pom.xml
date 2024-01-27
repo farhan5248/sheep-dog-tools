@@ -126,6 +126,17 @@
 			<version>2.32.0.v20230827-1315</version>
 		</dependency>
 		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>xbase.lib</artifactId>
+			<version>2.33.0.v20231121-0955</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>7.0.0</version>
+		</dependency>
+		<!-- Comments -->
+		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>

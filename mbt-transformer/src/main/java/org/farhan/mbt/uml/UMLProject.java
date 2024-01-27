@@ -33,8 +33,10 @@ public class UMLProject extends Project {
 		URI uri = URI.createFileURI(getUmlDir().getAbsolutePath()).appendSegment(theSystem.getName())
 				.appendFileExtension(UMLResource.FILE_EXTENSION);
 		ResourceSet resourceSet = new ResourceSetImpl();
+		// TODO test removing this or at least comment it out
 		UMLResourcesUtil.init(resourceSet);
 		Resource resource = resourceSet.getResource(uri, true);
+		// TODO why is this needed? The Xtext generated code doesn't use this
 		resource.load(Collections.EMPTY_MAP);
 		for (EObject e : resource.getContents()) {
 			theSystem = (Model) e;
@@ -50,6 +52,7 @@ public class UMLProject extends Project {
 		UMLResourcesUtil.init(resourceSet);
 		XMLResource resource = (XMLResource) resourceSet.createResource(uri);
 		resource.getContents().add(theSystem);
+		// Looks like I have this for interaction message signatures that point nowhere
 		HashMap<String, Object> options = new HashMap<String, Object>();
 		options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF, "true");
 		resource.save(options);
