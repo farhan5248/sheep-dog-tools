@@ -97,8 +97,7 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 				i++;
 			} else if (cs.contentEquals("end")) {
 				// if it's end, convert map to table, set isField to false, isKeyword to true
-				// convertDataTableToArgument((Step) steps.get(i),
-				// anInteraction.getMessages().getLast());
+				convertDataTableToArgument(dataTable, anInteraction.getMessages().getLast());
 				isField = false;
 				isKeyword = true;
 			} else if (isKeyword) {
@@ -110,12 +109,12 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 					throw new Exception("Step (" + cs + ") is not valid, use Xtext editor to correct it first. ");
 				}
 				// skip the next element since it's an edge
-				if (!getLabel(steps.get(i+1)).contentEquals("start")) {
+				if (!getLabel(steps.get(i + 1)).contentEquals("start")) {
 					i++;
 				}
 			} else if (isField) {
 				// if isField, then add map element for i and i+1, then i++
-				dataTable.put(cs, getLabel(steps.get(i+1)));
+				dataTable.put(cs, getLabel(steps.get(i + 1)));
 				i++;
 			}
 		}
@@ -175,19 +174,17 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 		return null;
 	}
 
-	private void convertDataTableToArgument(Step s, Message theMessage) {
-		if (s.getTheStepTable() != null) {
-			ValueSpecification vs = ArgumentFactory.getArgument(theMessage, "dataTable", "", true);
-			EList<Row> rows = s.getTheStepTable().getRows();
-			for (int i = 0; i < rows.size(); i++) {
+	private void convertDataTableToArgument(HashMap<String, String> dataTable, Message theMessage) {
+		ValueSpecification vs = ArgumentFactory.getArgument(theMessage, "dataTable", "", true);
 
-				String value = "";
-				for (int j = 0; j < rows.get(i).getCells().size(); j++) {
-					value += rows.get(i).getCells().get(j).getName() + " |";
-				}
-				AnnotationFactory.getAnnotation(vs, "dataTable", String.valueOf(i), value);
-			}
+		String headerRow = "";
+		String valueRow = "";
+		for (String columnName : dataTable.keySet()) {
+			headerRow += columnName + " |";
+			valueRow += dataTable.get(columnName) + " |";
 		}
+		AnnotationFactory.getAnnotation(vs, "dataTable", String.valueOf(0), headerRow);
+		AnnotationFactory.getAnnotation(vs, "dataTable", String.valueOf(1), valueRow);
 	}
 
 	private String getSecondLayerClassName() {

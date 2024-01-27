@@ -9,14 +9,14 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.settings.Settings;
-import org.farhan.mbt.cucumberuml.ConvertCucumberToUMLMojo;
+import org.farhan.mbt.graphuml.ConvertGraphToUMLMojo;
 
 /**
- * Converts tagged Cucumber scenarios to a UML model using Eclipse Xtext and EMF
+ * Converts Graph model paths to a UML model using Eclipse EMF
  *
  */
-@Mojo(name = "cucumber-to-uml", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
-public class CucumberToUMLMojo extends AbstractMojo {
+@Mojo(name = "graph-to-uml", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
+public class GraphToUMLMojo extends AbstractMojo {
 
 	/**
 	 * The Maven Project.
@@ -31,15 +31,15 @@ public class CucumberToUMLMojo extends AbstractMojo {
 	private Settings settings;
 
 	/**
-	 * The tag of the selected scenarios.
+	 * The tag of the selected paths.
 	 */
-	@Parameter(property = "cucumber-to-uml.tag", defaultValue = "debug")
+	@Parameter(property = "graph-to-uml.tag", defaultValue = "debug")
 	private String tag;
 
 	public void execute() throws MojoExecutionException {
 		getLog().info(tag);
 		try {
-			ConvertCucumberToUMLMojo mojo = new ConvertCucumberToUMLMojo();
+			ConvertGraphToUMLMojo mojo = new ConvertGraphToUMLMojo();
 			// TODO pass in tags to the mojo constructor
 			Project.tags = tag;
 			Project.baseDir = project.getBasedir().getAbsolutePath() + File.separator;

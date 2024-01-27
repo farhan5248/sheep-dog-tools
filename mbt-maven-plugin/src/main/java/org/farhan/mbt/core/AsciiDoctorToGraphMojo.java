@@ -9,14 +9,14 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.settings.Settings;
-import org.farhan.mbt.cucumberuml.ConvertCucumberToUMLMojo;
+import org.farhan.mbt.asciidoctorgraph.ConvertAsciiDoctorToGraphMojo;
 
 /**
- * Converts tagged Cucumber scenarios to a UML model using Eclipse Xtext and EMF
+ * Converts Graph model paths to a UML model using Eclipse EMF
  *
  */
-@Mojo(name = "cucumber-to-uml", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
-public class CucumberToUMLMojo extends AbstractMojo {
+@Mojo(name = "asciidoctor-to-graph", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
+public class AsciiDoctorToGraphMojo extends AbstractMojo {
 
 	/**
 	 * The Maven Project.
@@ -31,15 +31,15 @@ public class CucumberToUMLMojo extends AbstractMojo {
 	private Settings settings;
 
 	/**
-	 * The tag of the selected scenarios.
+	 * The tag of the selected edges.
 	 */
-	@Parameter(property = "cucumber-to-uml.tag", defaultValue = "debug")
+	@Parameter(property = "asciidoctor-to-graph.tag", defaultValue = "debug")
 	private String tag;
 
 	public void execute() throws MojoExecutionException {
 		getLog().info(tag);
 		try {
-			ConvertCucumberToUMLMojo mojo = new ConvertCucumberToUMLMojo();
+			ConvertAsciiDoctorToGraphMojo mojo = new ConvertAsciiDoctorToGraphMojo();
 			// TODO pass in tags to the mojo constructor
 			Project.tags = tag;
 			Project.baseDir = project.getBasedir().getAbsolutePath() + File.separator;

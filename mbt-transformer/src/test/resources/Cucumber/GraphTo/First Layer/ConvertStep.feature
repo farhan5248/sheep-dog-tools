@@ -83,4 +83,5 @@ Feature: Convert Step
       | Interaction Name           | Message                                    | Argument Name | Annotation Detail |
       | specs::Process::Scenario 0 | The Search application, Home page is empty | dataTable     | 0 -> ins \|       |
       | specs::Process::Scenario 0 | The Search application, Home page is empty | dataTable     | 1 -> 5 \|         |
-      | specs::Process::Scenario 0 | The Search application, Home page is empty | dataTable     | 2 -> 4 \|         |
+      | specs::Process::Scenario 1 | The Search application, Home page is empty | dataTable     | 0 -> ins \|       |
+      | specs::Process::Scenario 1 | The Search application, Home page is empty | dataTable     | 1 -> 4 \|         |

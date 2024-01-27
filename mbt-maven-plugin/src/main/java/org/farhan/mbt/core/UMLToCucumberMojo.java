@@ -9,7 +9,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.settings.Settings;
-import org.farhan.mbt.cucumber.ConvertUMLToCucumberMojo;
+import org.farhan.mbt.cucumberuml.ConvertUMLToCucumberMojo;
 
 /**
  * Converts tagged Cucumber scenarios to a UML model using Eclipse Xtext and EMF
