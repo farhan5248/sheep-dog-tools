@@ -42,7 +42,11 @@ public class AsciiDoctorProject extends Project {
 
 	public static void writeFiles() {
 		for (ConvertibleFile cf : firstLayerFiles) {
-			cf.write();
+			try {
+				cf.write();
+			} catch (Exception e) {
+				System.out.println(Utilities.getStackTraceAsString(e));
+			}
 		}
 	}
 

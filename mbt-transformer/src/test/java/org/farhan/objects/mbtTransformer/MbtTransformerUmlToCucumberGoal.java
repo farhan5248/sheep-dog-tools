@@ -2,7 +2,7 @@ package org.farhan.objects.mbtTransformer;
 
 import org.farhan.common.objects.MbtTransformer;
 import org.farhan.mbt.core.Utilities;
-import org.farhan.mbt.cucumber.ConvertUMLToCucumberMojo;
+import org.farhan.mbt.cucumberuml.ConvertUMLToCucumberMojo;
 import org.junit.jupiter.api.Assertions;
 
 public class MbtTransformerUmlToCucumberGoal extends MbtTransformer {

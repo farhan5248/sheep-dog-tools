@@ -10,9 +10,11 @@ import org.farhan.objects.mbtTransformer.MbtTransformerBlahDocStringsPageStepsJa
 import org.farhan.objects.mbtTransformer.MbtTransformerBlahObjectPageJavaFile;
 import org.farhan.objects.mbtTransformer.MbtTransformerBlahObjectPageStepsJavaFile;
 import org.farhan.objects.mbtTransformer.MbtTransformerCucumberToUmlGoal;
+import org.farhan.objects.mbtTransformer.MbtTransformerGraphToUmlGoal;
 import org.farhan.objects.mbtTransformer.MbtTransformerProcessAdocFile;
 import org.farhan.objects.mbtTransformer.MbtTransformerProcessFeatureFile;
 import org.farhan.objects.mbtTransformer.MbtTransformerProcessGraphFile;
+import org.farhan.objects.mbtTransformer.MbtTransformerProcessTxtFile;
 import org.farhan.objects.mbtTransformer.MbtTransformerPstUmlFile;
 import org.farhan.objects.mbtTransformer.MbtTransformerUmlToCucumberGoal;
 
@@ -34,6 +36,8 @@ public class MbtTransformerFactory {
 	private static MbtTransformerProcessAdocFile mbtTransformerProcessAdocFile;
 	private static MbtTransformerProcessGraphFile mbtTransformerProcessGraphFile;
 	private static MbtTransformerAsciidoctorToGraphGoal mbtTransformerAsciidoctorToGraphGoal;
+	private static MbtTransformerGraphToUmlGoal mbtTransformerGraphToUmlGoal;
+	private static MbtTransformerProcessTxtFile mbtTransformerProcessTxtFile;
 
 	public static GraphModelObject get(String className) {
 		if (className.contentEquals("MbtTransformerCucumberToUmlGoal")) {
@@ -151,7 +155,20 @@ public class MbtTransformerFactory {
 			}
 			return mbtTransformerAsciidoctorToGraphGoal;
 		}
+		if (className.contentEquals("MbtTransformerGraphToUmlGoal")) {
+			if (mbtTransformerGraphToUmlGoal == null) {
+				mbtTransformerGraphToUmlGoal = new MbtTransformerGraphToUmlGoal();
+			}
+			return mbtTransformerGraphToUmlGoal;
+		}
+		if (className.contentEquals("MbtTransformerProcessTxtFile")) {
+			if (mbtTransformerProcessTxtFile == null) {
+				mbtTransformerProcessTxtFile = new MbtTransformerProcessTxtFile();
+				mbtTransformerProcessTxtFile.setBaseDir("mbt-transformer");
+				mbtTransformerProcessTxtFile.setPath("target/Graphs/Process.txt");
+			}
+			return mbtTransformerProcessTxtFile;
+		}
 		return null;
 	}
-
 }

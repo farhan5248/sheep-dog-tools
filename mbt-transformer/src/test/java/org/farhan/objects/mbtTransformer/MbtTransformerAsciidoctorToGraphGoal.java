@@ -1,7 +1,7 @@
 package org.farhan.objects.mbtTransformer;
 
 import org.farhan.common.objects.MbtTransformer;
-import org.farhan.mbt.asciidoctor.ConvertAsciiDoctorToGraphMojo;
+import org.farhan.mbt.asciidoctorgraph.ConvertAsciiDoctorToGraphMojo;
 import org.farhan.mbt.core.Utilities;
 import org.junit.jupiter.api.Assertions;
 
