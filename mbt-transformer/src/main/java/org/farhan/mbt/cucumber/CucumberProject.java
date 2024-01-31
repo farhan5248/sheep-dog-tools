@@ -111,16 +111,26 @@ public class CucumberProject extends Project {
 		return ".java";
 	}
 
-	public static CucumberJavaFile getCucumberJavaFile(File file) throws Exception {
+	public static CucumberJavaFile createCucumberJavaFile(File file) throws Exception {
 		CucumberJavaFile aJavaFile = new CucumberJavaFile(file);
 		if (file.getAbsolutePath().contains(getSecondLayerDir().getName())) {
-			CucumberProject.getSecondLayerFiles().add(aJavaFile);
+			getSecondLayerFiles().add(aJavaFile);
 		} else if (file.getAbsolutePath().contains(getThirdLayerDir().getName())) {
-			CucumberProject.getThirdLayerFiles().add(aJavaFile);
+			getThirdLayerFiles().add(aJavaFile);
 		} else {
 			throw new Exception("Java files are only in layer 2 or 3");
 		}
 		return aJavaFile;
+	}
+
+	public static CucumberFeatureFile createCucumberFeatureFile(File file) throws Exception {
+		CucumberFeatureFile aFeatureFile = new CucumberFeatureFile(file);
+		if (file.getAbsolutePath().contains(getFirstLayerDir().getName())) {
+			getFirstLayerFiles().add(aFeatureFile);
+		} else {
+			throw new Exception("Feature files are only in layer 1");
+		}
+		return aFeatureFile;
 	}
 
 }

@@ -23,5 +23,4 @@ public class UmlToCukeTest {
 		cff.theFeature.getStatements().add(statement);
 		cff.write();
 	}
-
 }

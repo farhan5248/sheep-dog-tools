@@ -56,6 +56,8 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	@Override
 	protected Class convertToClass(ConvertibleFile theObject) throws Exception {
 
+		// TODO source and target files should be stored in this class, there's no need
+		// to pass them around.
 		aCucumberFile = (CucumberFeatureFile) theObject;
 		String qualifiedName = convertAbsolutePathToQualifiedName(aCucumberFile.getFile().getAbsolutePath());
 		Class layerClass = ClassFactory.getClass(UMLProject.theSystem, qualifiedName);
