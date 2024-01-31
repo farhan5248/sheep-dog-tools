@@ -42,7 +42,7 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 	@Override
 	protected void convertFromClass(Class layerClass) throws Exception {
 		String path = CucumberNameConverter.convertQualifiedNameToJavaPath(layerClass.getQualifiedName());
-		aJavaFile = CucumberProject.getCucumberJavaFile(new File(path));
+		aJavaFile = CucumberProject.createCucumberJavaFile(new File(path));
 		aJavaFile.javaClass = new CompilationUnit();
 		aJavaFile.javaClass.setStorage(aJavaFile.getFile().toPath());
 		aJavaFile.javaClass.addType(new ClassOrInterfaceDeclaration());

@@ -11,9 +11,9 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("Cucumber/UMLTo/Other Layer/ConvertStepObjects.feature")
+@SelectClasspathResource("Cucumber/UMLTo/First Layer/ConvertFeature.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
 //@IncludeTags("debug")
-public class RunConvertStepObjectsTest {
+public class RunConvertFeatureTest {
 }

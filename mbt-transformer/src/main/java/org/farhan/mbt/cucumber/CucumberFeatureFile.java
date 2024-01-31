@@ -1,12 +1,18 @@
 package org.farhan.mbt.cucumber;
 
 import java.io.File;
+import java.io.IOException;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.farhan.CucumberStandaloneSetup;
+import org.farhan.cucumber.CucumberFactory;
 import org.farhan.cucumber.Feature;
 import org.farhan.mbt.core.ConvertibleFile;
+
+import com.google.inject.Injector;
 
 public class CucumberFeatureFile implements ConvertibleFile {
 
@@ -16,6 +22,8 @@ public class CucumberFeatureFile implements ConvertibleFile {
 
 	public CucumberFeatureFile(File theFile) {
 		setFile(theFile);
+		theFeature = CucumberFactory.eINSTANCE.createFeature();
+		theFeature.setName(theFile.getName().replace(".feature", ""));
 	}
 
 	@Override
@@ -39,8 +47,16 @@ public class CucumberFeatureFile implements ConvertibleFile {
 
 	@Override
 	public void write() {
-		// TODO Auto-generated method stub
-
+		Injector injector = new CucumberStandaloneSetup().createInjectorAndDoEMFRegistration();
+		ResourceSet rs = injector.getInstance(ResourceSet.class);
+		URI uri = URI.createFileURI(theFile.getAbsolutePath());
+		Resource r = rs.createResource(uri);
+		r.getContents().add(theFeature);
+		try {
+			r.save(null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -7,7 +7,6 @@ import org.farhan.mbt.core.Utilities;
 
 public class CucumberNameConverter {
 
-	
 	// TODO refactor this and think about name translations and mapping code
 	// This should only be used when deriving layer 2 and 3 objects from layer 1
 	public static String getMethodName(String name, boolean keepNumbers) {
@@ -25,8 +24,7 @@ public class CucumberNameConverter {
 		newName = Utilities.toLowerCamelCase(newName);
 		return newName;
 	}
-	
-	
+
 	public static String convertCucumberPathToQualifiedName(String filePath) {
 		String qualifiedName = filePath.trim();
 		qualifiedName = qualifiedName.replace(".feature", "");
@@ -40,8 +38,10 @@ public class CucumberNameConverter {
 	public static String convertJavaPathToQualifiedName(String pathName) {
 		String qualifiedName = pathName.trim();
 		qualifiedName = qualifiedName.replace(".java", "");
-		qualifiedName = qualifiedName.replace(CucumberProject.getSecondLayerDir().getAbsolutePath(), Project.secondLayerPackageName);
-		qualifiedName = qualifiedName.replace(CucumberProject.getThirdLayerDir().getAbsolutePath(), Project.thirdLayerPackageName);
+		qualifiedName = qualifiedName.replace(CucumberProject.getSecondLayerDir().getAbsolutePath(),
+				Project.secondLayerPackageName);
+		qualifiedName = qualifiedName.replace(CucumberProject.getThirdLayerDir().getAbsolutePath(),
+				Project.thirdLayerPackageName);
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::" + qualifiedName;
 		return qualifiedName;
@@ -49,7 +49,8 @@ public class CucumberNameConverter {
 
 	public static String convertQualifiedNameToCucumberPath(String qualifiedName) {
 		String pathName = qualifiedName;
-		pathName = pathName.replace("pst::" + Project.firstLayerPackageName, "");
+		pathName = pathName.replace("pst::" + Project.firstLayerPackageName,
+				CucumberProject.getFirstLayerDir().getAbsolutePath());
 		pathName = pathName.replace("::", File.separator);
 		// TODO isn't feature defined somewhere else as getFileType? Maybe there should
 		// be get Layer 1 filetype, layer 2 filetype etc defined here
