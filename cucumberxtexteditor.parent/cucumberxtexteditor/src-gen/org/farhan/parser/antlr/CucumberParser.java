@@ -18,14 +18,13 @@ public class CucumberParser extends AbstractAntlrParser {
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_SL_COMMENT");
 	}
-	
 
 	@Override
 	protected InternalCucumberParser createParser(XtextTokenStream stream) {
 		return new InternalCucumberParser(stream, getGrammarAccess());
 	}
 
-	@Override 
+	@Override
 	protected String getDefaultRuleName() {
 		return "Feature";
 	}
