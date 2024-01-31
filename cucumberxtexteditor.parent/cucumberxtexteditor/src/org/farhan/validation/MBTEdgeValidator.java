@@ -9,11 +9,24 @@ public class MBTEdgeValidator {
 	// ( .*( application| service| project| plugin| batchjob),)?
 	// (.*)( request| goal)
 	// ( is| isn't)( executed| sent| triggered| invalid| valid)( with)?
-	protected static final String CONTAINER_REGEX = "(( .*)( application| service| project| plugin| batchjob),)?";
-	private static final String OBJECT_REGEX = "(.*)( request| goal)";
-	private static final String DETAILS_REGEX = "(( is| isn't| will be| won't be)( executed| sent| triggered| invalid| valid)( with)?)";
-	private static final String EDGE_REGEX = "The" + CONTAINER_REGEX + OBJECT_REGEX + DETAILS_REGEX;
+	private static final String NAME_REGEX = ".";
+	private static final String COMPONENT_REGEX = "(( " + NAME_REGEX
+			+ "*)( application| service| project| plugin| batchjob),)?";
+	private static final String OBJECT_REGEX = "( " + NAME_REGEX + "*)( request| goal)";
+	private static final String STATE_REGEX = "(( is| isn't| will be| won't be)( executed| sent| triggered| valid| invalid)( with)?)";
+	private static final String EDGE_REGEX = "The" + COMPONENT_REGEX + OBJECT_REGEX + STATE_REGEX;
 	public static final String INVALID_EDGE = "invalidEdge";
+
+	public static String getErrorMessage() {
+		// this applies to When
+		String rules = "\nThe component is: The(( .*)( application| service| project| plugin| batchjob),)?"
+				+ "\nThe object is: (.*)( request| goal)"
+				+ "\nThe state is: (( is| isn't| will be| won't be)( executed| sent| triggered| invalid| valid)( with)?)";
+
+		String msg = "This is an invalid statement. These are the rules:" + rules;
+
+		return msg;
+	}
 
 	private static String getGroup(String text, int group) {
 		Matcher m = Pattern.compile(EDGE_REGEX).matcher(text);
@@ -32,8 +45,8 @@ public class MBTEdgeValidator {
 		return getGroup(text, 7).contains("isn't");
 	}
 
-	public static boolean isContainerStep(String text) {
-		String temp = getContainerName(text);
+	public static boolean isComponentStep(String text) {
+		String temp = getComponentName(text);
 		if (temp != null) {
 			return !temp.isEmpty();
 		} else {
@@ -50,11 +63,20 @@ public class MBTEdgeValidator {
 		}
 	}
 
-	public static String getContainerName(String text) {
+	public static boolean hasAttachment(String text) {
+		String temp = getAttachment(text);
+		if (temp != null) {
+			return !temp.isEmpty();
+		} else {
+			return false;
+		}
+	}
+
+	public static String getComponentName(String text) {
 		return getGroup(text, 2);
 	}
 
-	public static String getContainerType(String text) {
+	public static String getComponentType(String text) {
 		return getGroup(text, 3);
 	}
 
@@ -66,23 +88,24 @@ public class MBTEdgeValidator {
 		return getGroup(text, 5);
 	}
 
-	public static String getDetails(String text) {
+	public static String getState(String text) {
 		return getGroup(text, 6);
 	}
 
-	public static boolean isValid(String text) {
+	public static String getStateModality(String text) {
+		return getGroup(text, 7);
+	}
 
+	public static String getStateType(String text) {
+		return getGroup(text, 8);
+	}
+
+	public static String getAttachment(String text) {
+		return getGroup(text, 9);
+	}
+
+	public static boolean isValid(String text) {
 		return text.matches(EDGE_REGEX);
 	}
 
-	public static String getErrorMessage() {
-		// this applies to When
-		String transitionEgs = "The blah request is good\r\n" + "The blah request is bad\r\n"
-				+ "The blah request is sent with\r\n" + "The blah request is triggered with\r\n"
-				+ "The blah request is sent as follows\r\n" + "The blah request is triggered as follows";
-
-		String msg = "The state name and details are invalid. Examples:\n" + transitionEgs;
-
-		return msg;
-	}
 }

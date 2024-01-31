@@ -8,126 +8,180 @@ public class VertexValidatorTest {
 
 	@Test
 	public void testIsVertice() {
-		Assertions.assertTrue(
-				MBTVertexValidator.isVertice("The something1 application, something2 file, something3 section is empty"));
+		Assertions.assertTrue(MBTVertexValidator
+				.isVertex("The Something1 application, Something2 file, Something3 section is empty"));
 	}
 
 	@Test
-	public void testIsContainer() {
+	public void testIsComponent() {
 		Assertions.assertTrue(MBTVertexValidator
-				.isContainerStep("The something1 application, something2 file, something3 section is empty"));
+				.isComponentStep("The Something1 application, Something2 file, Something3 section is empty"));
 	}
 
 	@Test
 	public void testGetAppName() {
 		Assertions.assertTrue(MBTVertexValidator
-				.getContainerName("The something1 application, something2 file, something3 section is empty")
-				.contentEquals("something1"));
+				.getComponentName("The Something1 application, Something2 file, Something3 section is empty")
+				.contentEquals("Something1"));
 	}
 
 	@Test
 	public void testGetAppType() {
 		Assertions.assertTrue(MBTVertexValidator
-				.getContainerType("The something1 application, something2 file, something3 section is empty")
+				.getComponentType("The Something1 application, Something2 file, Something3 section is empty")
 				.contentEquals("application"));
 	}
 
 	@Test
 	public void testGetObjName() {
 		Assertions.assertTrue(MBTVertexValidator
-				.getObjectName("The something1 application, something2 file, something3 section is empty")
-				.contentEquals("something2"));
+				.getObjectName("The Something1 application, Something2 file, Something3 section is empty")
+				.contentEquals("Something2"));
 	}
 
 	@Test
 	public void testGetObjType() {
 		Assertions.assertTrue(MBTVertexValidator
-				.getObjectType("The something1 application, something2 file, something3 section is empty")
+				.getObjectType("The Something1 application, Something2 file, Something3 section is empty")
 				.contentEquals("file"));
 	}
 
 	@Test
-	public void testGetSection() {
-		Assertions.assertTrue(
-				MBTVertexValidator.getSection("The something1 application, something2 file, something3 section is empty")
-						.contentEquals("something3"));
+	public void testGetDetailsName() {
+		Assertions.assertTrue(MBTVertexValidator
+				.getDetailsName("The Something1 application, Something2 file, Something3 section is empty")
+				.contentEquals("Something3"));
 	}
 
 	@Test
 	public void testGetDetails() {
+		Assertions.assertTrue(MBTVertexValidator
+				.getDetails("The Something1 application, Something2 file, Something3 section is empty")
+				.contentEquals(", Something3 section"));
+	}
+
+	@Test
+	public void testGetDetailsType() {
+		Assertions.assertTrue(MBTVertexValidator
+				.getDetailsType("The Something1 application, Something2 file, Something3 section is empty")
+				.contentEquals("section"));
+	}
+
+	@Test
+	public void testGetState() {
+		Assertions.assertTrue(MBTVertexValidator
+				.getState("The Something1 application, Something2 file, Something3 section is empty")
+				.contentEquals("is empty"));
+	}
+
+	
+	@Test
+	public void testGetStateModality() {
+		Assertions.assertTrue(MBTVertexValidator
+				.getStateModality("The Something1 application, Something2 file, Something3 section is empty")
+				.contentEquals("is"));
+	}
+
+	@Test
+	public void testGetStateType() {
+		Assertions.assertTrue(MBTVertexValidator
+				.getStateType("The Something1 application, Something2 file, Something3 section is empty")
+				.contentEquals("empty"));
+	}
+
+	@Test
+	public void testStateRegexIsEmpty() {
+		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 application, Something2 file is empty"));
+	}
+
+	@Test
+	public void testStateRegexIsPresent() {
+		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 application, Something2 file is present"));
+	}
+
+	@Test
+	public void testStateRegexAsFollows() {
+		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 application, Something2 file is as follows"));
+	}
+
+	@Test
+	public void testGetAttachment() {
 		Assertions.assertTrue(
-				MBTVertexValidator.getDetails("The something1 application, something2 file, something3 section is empty")
-						.contentEquals("is empty"));
-	}
-
-	@Test
-	public void testDetailsRegexIsEmpty() {
-		Assertions.assertTrue(MBTVertexValidator.isValid("The something1 application, something2 file is empty"));
-	}
-
-	@Test
-	public void testDetailsRegexIsPresent() {
-		Assertions.assertTrue(MBTVertexValidator.isValid("The something1 application, something2 file is present"));
-	}
-
-	@Test
-	public void testDetailsRegexAsFollows() {
-		Assertions.assertTrue(MBTVertexValidator.isValid("The something1 application, something2 file is as follows"));
+				MBTVertexValidator.getAttachment("The Something1 application, Something2 file is as follows")
+						.contentEquals("as follows"));
 	}
 
 	@Test
 	public void testIsNegativeStep() {
-		Assertions.assertTrue(MBTVertexValidator.isValid("The something1 application, something2 file isn't empty"));
+		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 application, Something2 file isn't empty"));
 	}
 
 	@Test
-	public void testDetailsRegexIsnt() {
-		Assertions.assertTrue(MBTVertexValidator.isValid("The something1 application, something2 file isn't empty"));
+	public void testStateRegexIsnt() {
+		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 application, Something2 file isn't empty"));
 	}
 
 	@Test
-	public void testDetailsRegexWill() {
-		Assertions.assertTrue(MBTVertexValidator.isValid("The something1 application, something2 file will be empty"));
+	public void testStateRegexWillBe() {
+		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 application, Something2 file will be empty"));
 	}
 
 	@Test
-	public void testDetailsRegexWont() {
-		Assertions.assertTrue(MBTVertexValidator.isValid("The something1 application, something2 file won't be empty"));
+	public void testStateRegexWontBe() {
+		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 application, Something2 file won't be empty"));
 	}
 
 	@Test
-	public void testSectionRegex() {
+	public void testDetailsRegexSection() {
 		Assertions.assertTrue(
-				MBTVertexValidator.isValid("The something1 application, something2 file, something3 section is empty"));
+				MBTVertexValidator.isValid("The Something1 application, Something2 file, Something3 section is empty"));
+	}
+
+	@Test
+	public void testDetailsRegexFragment() {
+		Assertions.assertTrue(MBTVertexValidator
+				.isValid("The Something1 application, Something2 file, Something3 fragment is empty"));
+	}
+
+	@Test
+	public void testDetailsRegexTable() {
+		Assertions.assertTrue(
+				MBTVertexValidator.isValid("The Something1 application, Something2 file, Something3 table is empty"));
+	}
+
+	@Test
+	public void testDetailsRegexSnippet() {
+		Assertions.assertTrue(
+				MBTVertexValidator.isValid("The Something1 application, Something2 file, Something3 snippet is empty"));
 	}
 
 	@Test
 	public void testObjectRegexPage() {
-		Assertions.assertTrue(MBTVertexValidator.isValid("The something1 application, something2 page is empty"));
+		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 application, Something2 page is empty"));
 	}
 
 	@Test
 	public void testObjectRegexConfig() {
-		Assertions.assertTrue(MBTVertexValidator.isValid("The something1 application, something2 config is empty"));
+		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 application, Something2 config is empty"));
 	}
 
 	@Test
 	public void testAppRegexService() {
-		Assertions.assertTrue(MBTVertexValidator.isValid("The something1 service, something2 file is empty"));
+		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 service, Something2 file is empty"));
 	}
 
 	@Test
 	public void testAppRegexProject() {
-		Assertions.assertTrue(MBTVertexValidator.isValid("The something1 project, something2 file is empty"));
+		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 project, Something2 file is empty"));
 	}
 
 	@Test
 	public void testAppRegexPlugin() {
-		Assertions.assertTrue(MBTVertexValidator.isValid("The something1 plugin, something2 file is empty"));
+		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 plugin, Something2 file is empty"));
 	}
 
 	@Test
 	public void testAppRegexBatchjob() {
-		Assertions.assertTrue(MBTVertexValidator.isValid("The something1 batchjob, something2 file is empty"));
+		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 batchjob, Something2 file is empty"));
 	}
 }

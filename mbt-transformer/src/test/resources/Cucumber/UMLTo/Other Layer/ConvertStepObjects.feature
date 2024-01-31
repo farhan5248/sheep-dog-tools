@@ -39,11 +39,11 @@ Feature: Convert Step Objects
       
       public class BlahDataTablePage extends Blah {
       
-          public void assertToph1(HashMap<String, String> keyMap) {
+          public void assertTopSectionh1(HashMap<String, String> keyMap) {
               throw new PendingException();
           }
       
-          public void assertToph2(HashMap<String, String> keyMap) {
+          public void assertTopSectionh2(HashMap<String, String> keyMap) {
               throw new PendingException();
           }
       }

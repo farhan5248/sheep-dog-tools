@@ -42,7 +42,7 @@ Feature: Convert Step Definitions
       
           @Given("^The blah application, DataTable page, Top section will be as follows$")
           public void theBlahApplicationDataTablePageTopSectionWillBeAsFollows(DataTable dataTable) {
-              BlahFactory.get("BlahDataTablePage").assertAttributes(dataTable, "Top");
+              BlahFactory.get("BlahDataTablePage").assertAttributes(dataTable, "TopSection");
           }
       }
       

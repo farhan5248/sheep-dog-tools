@@ -9,8 +9,6 @@ import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.mbt.cucumber.CucumberNameConverter;
-import org.farhan.mbt.graph.validation.MBTEdgeValidator;
-import org.farhan.mbt.graph.validation.MBTVertexValidator;
 import org.farhan.mbt.uml.AnnotationFactory;
 import org.farhan.mbt.uml.ArgumentFactory;
 import org.farhan.mbt.uml.ClassFactory;
@@ -18,6 +16,8 @@ import org.farhan.mbt.uml.InteractionFactory;
 import org.farhan.mbt.uml.MessageFactory;
 import org.farhan.mbt.uml.ParameterFactory;
 import org.farhan.mbt.uml.UMLProject;
+import org.farhan.validation.MBTEdgeValidator;
+import org.farhan.validation.MBTVertexValidator;
 
 public abstract class ToUMLFirstLayerLinker extends ToUMLLayerLinker {
 
@@ -35,7 +35,7 @@ public abstract class ToUMLFirstLayerLinker extends ToUMLLayerLinker {
 	protected void addNextLayerInteractionMessages(Interaction targetInteraction, Message m) {
 
 		if (Validator.validateStepText(m.getName())) {
-			if (MBTVertexValidator.isVertice(m.getName())) {
+			if (MBTVertexValidator.isVertex(m.getName())) {
 				createNextLayerInteractionMessagesFromVerticeMessage(targetInteraction, m);
 			} else if (MBTEdgeValidator.isEdge(m.getName())) {
 				createNextLayerInteractionMessagesFromEdgeMessage(targetInteraction, m);
@@ -45,7 +45,7 @@ public abstract class ToUMLFirstLayerLinker extends ToUMLLayerLinker {
 
 	protected void createNextLayerInteractionMessagesFromVerticeMessage(Interaction targetInteraction, Message m) {
 
-		String text = MBTVertexValidator.getDetails(m.getName());
+		String text = MBTVertexValidator.getStateModality(m.getName());
 		if (text.startsWith("will be") || text.startsWith("won't be")) {
 			createInputOutputMessage(targetInteraction, m, "assert");
 		} else if (text.startsWith("is") || text.startsWith("isn't")) {
@@ -104,8 +104,10 @@ public abstract class ToUMLFirstLayerLinker extends ToUMLLayerLinker {
 				AnnotationFactory.getAnnotation(vs, "keyMap", "0", annotationDetailValue);
 
 				// TODO wrap up these chunks in private methods
-				String section = Validator.getSection(m.getName());
-				if (section == null) {
+				String detailsName = MBTVertexValidator.getDetailsName(m.getName());
+				String detailsType = StringUtils.capitalize(MBTVertexValidator.getDetailsType(m.getName()));
+				String section = detailsName + detailsType;
+				if (section.contentEquals("nullnull")) {
 					section = "";
 				}
 				ArgumentFactory.getArgument(nextLayerMessage, "section", "\"" + section + "\"", true);
@@ -117,10 +119,10 @@ public abstract class ToUMLFirstLayerLinker extends ToUMLLayerLinker {
 		} else {
 
 			String attributeName = "";
-			if (MBTVertexValidator.isVertice(m.getName())) {
-				attributeName = MBTVertexValidator.getDetails(m.getName());
+			if (MBTVertexValidator.isVertex(m.getName())) {
+				attributeName = MBTVertexValidator.getState(m.getName());
 			} else {
-				attributeName = MBTEdgeValidator.getDetails(m.getName());
+				attributeName = MBTEdgeValidator.getState(m.getName());
 			}
 			String methodName = CucumberNameConverter.getMethodName(prefix + StringUtils.capitalize(attributeName),
 					true);

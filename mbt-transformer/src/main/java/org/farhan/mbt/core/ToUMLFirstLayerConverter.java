@@ -53,7 +53,7 @@ public abstract class ToUMLFirstLayerConverter extends ToUMLLayerConverter {
 		setFSMState(objectParts[objectParts.length - 1] + objectType);
 
 		if (Validator.isContainerStep(messageName)) {
-			setFSMName(StringUtils.capitalize(Validator.getContainerName(messageName)));
+			setFSMName(StringUtils.capitalize(Validator.getComponentName(messageName)));
 		}
 	}
 

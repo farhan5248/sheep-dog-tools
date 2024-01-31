@@ -1,7 +1,7 @@
 package org.farhan.mbt.core;
 
-import org.farhan.mbt.graph.validation.MBTEdgeValidator;
-import org.farhan.mbt.graph.validation.MBTVertexValidator;
+import org.farhan.validation.MBTEdgeValidator;
+import org.farhan.validation.MBTVertexValidator;
 
 public class Validator {
 
@@ -10,7 +10,8 @@ public class Validator {
 	}
 
 	public static String getObjectName(String messageName) {
-		if (MBTVertexValidator.isVertice(messageName)) {
+		// TODO move this to setCurrentMachineAndState
+		if (MBTVertexValidator.isVertex(messageName)) {
 			return MBTVertexValidator.getObjectName(messageName);
 		}
 		if (MBTEdgeValidator.isEdge(messageName)) {
@@ -20,7 +21,8 @@ public class Validator {
 	}
 
 	public static String getObjectType(String messageName) {
-		if (MBTVertexValidator.isVertice(messageName)) {
+		// TODO move this to setCurrentMachineAndState
+		if (MBTVertexValidator.isVertex(messageName)) {
 			return MBTVertexValidator.getObjectType(messageName);
 		}
 		if (MBTEdgeValidator.isEdge(messageName)) {
@@ -29,45 +31,29 @@ public class Validator {
 		return null;
 	}
 
-	public static String getContainerName(String messageName) {
-		if (MBTVertexValidator.isVertice(messageName)) {
-			return MBTVertexValidator.getContainerName(messageName);
+	public static String getComponentName(String messageName) {
+		// TODO move this to setCurrentMachineAndState
+		if (MBTVertexValidator.isVertex(messageName)) {
+			return MBTVertexValidator.getComponentName(messageName);
 		}
 		if (MBTEdgeValidator.isEdge(messageName)) {
-			return MBTEdgeValidator.getContainerName(messageName);
-		}
-		return null;
-	}
-
-	public static String getContainerType(String messageName) {
-		if (MBTVertexValidator.isVertice(messageName)) {
-			return MBTVertexValidator.getContainerType(messageName);
-		}
-		if (MBTEdgeValidator.isEdge(messageName)) {
-			return MBTEdgeValidator.getContainerType(messageName);
-		}
-		return null;
-	}
-
-	public static String getSection(String messageName) {
-		if (MBTVertexValidator.isVertice(messageName)) {
-			return MBTVertexValidator.getSection(messageName);
+			return MBTEdgeValidator.getComponentName(messageName);
 		}
 		return null;
 	}
 
 	public static boolean isContainerStep(String messageName) {
-		if (MBTVertexValidator.isVertice(messageName)) {
-			return MBTVertexValidator.isContainerStep(messageName);
+		if (MBTVertexValidator.isVertex(messageName)) {
+			return MBTVertexValidator.isComponentStep(messageName);
 		}
 		if (MBTEdgeValidator.isEdge(messageName)) {
-			return MBTEdgeValidator.isContainerStep(messageName);
+			return MBTEdgeValidator.isComponentStep(messageName);
 		}
 		return false;
 	}
 
 	public static boolean isNegativeStep(String messageName) {
-		if (MBTVertexValidator.isVertice(messageName)) {
+		if (MBTVertexValidator.isVertex(messageName)) {
 			return MBTVertexValidator.isNegativeStep(messageName);
 		}
 		if (MBTEdgeValidator.isEdge(messageName)) {

@@ -39,24 +39,24 @@ Feature: Create Step Objects
 
   Scenario: Non existing UML interaction creation
     And The target/uml/pst.uml file, Class Interactions section will be as follows
-      | Class Name                       | Interaction Name |
-      | objects::blah::blahObjectPage    | setIsEmpty       |
-      | objects::blah::blahDataTablePage | assertToph1      |
-      | objects::blah::blahDataTablePage | assertToph2      |
-      | objects::blah::blahDocStringPage | setContent       |
-      | objects::blah2::blah2JsonRequest | seti1            |
-      | objects::blah2::blah2JsonRequest | seti2            |
-      | objects::blah2::blah2JsonRequest | execute          |
-      | objects::blah2::blah2JsonRequest | setIsInvalid     |
+      | Class Name                       | Interaction Name   |
+      | objects::blah::blahObjectPage    | setIsEmpty         |
+      | objects::blah::blahDataTablePage | assertTopSectionh1 |
+      | objects::blah::blahDataTablePage | assertTopSectionh2 |
+      | objects::blah::blahDocStringPage | setContent         |
+      | objects::blah2::blah2JsonRequest | seti1              |
+      | objects::blah2::blah2JsonRequest | seti2              |
+      | objects::blah2::blah2JsonRequest | execute            |
+      | objects::blah2::blah2JsonRequest | setIsInvalid       |
 
   Scenario: Non existing UML interaction parameter creation
     And The target/uml/pst.uml file, Interaction Parameters section will be as follows
-      | Interaction Name                               | Parameter Name |
-      | objects::blah::blahObjectPage::setIsEmpty      | has none       |
-      | objects::blah::blahDataTablePage::assertToph1  | keyMap         |
-      | objects::blah::blahDataTablePage::assertToph2  | keyMap         |
-      | objects::blah::blahDocStringPage::setContent   | contents       |
-      | objects::blah2::blah2JsonRequest::seti1        | keyMap         |
-      | objects::blah2::blah2JsonRequest::seti2        | keyMap         |
-      | objects::blah2::blah2JsonRequest::execute      | has none       |
-      | objects::blah2::blah2JsonRequest::setIsInvalid | has none       |
+      | Interaction Name                                     | Parameter Name |
+      | objects::blah::blahObjectPage::setIsEmpty            | has none       |
+      | objects::blah::blahDataTablePage::assertTopSectionh1 | keyMap         |
+      | objects::blah::blahDataTablePage::assertTopSectionh2 | keyMap         |
+      | objects::blah::blahDocStringPage::setContent         | contents       |
+      | objects::blah2::blah2JsonRequest::seti1              | keyMap         |
+      | objects::blah2::blah2JsonRequest::seti2              | keyMap         |
+      | objects::blah2::blah2JsonRequest::execute            | has none       |
+      | objects::blah2::blah2JsonRequest::setIsInvalid       | has none       |

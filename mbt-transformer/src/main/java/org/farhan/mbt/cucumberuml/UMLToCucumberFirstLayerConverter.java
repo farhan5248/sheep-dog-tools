@@ -122,7 +122,6 @@ public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
 				Row row = CucumberFactory.eINSTANCE.createRow();
 				for (String rs : rowString.split(" \\|")) {
 					Cell cell = CucumberFactory.eINSTANCE.createCell();
-					cell.setCell("");
 					cell.setName(rs);
 					row.getCells().add(cell);
 				}
