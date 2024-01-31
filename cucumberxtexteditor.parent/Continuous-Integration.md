@@ -96,20 +96,20 @@ These are the files to change
 ### Create Release Version Commit
 
 Do search and replace for the following
-1. `<version>1.0.X-SNAPSHOT</version>` with `<version>1.0.X</version>` in `pom.xml`
-2. `Bundle-Version: 1.0.X.qualifier` with `Bundle-Version: 1.0.X` in `MANIFEST.MF`
-3. `version="1.0.X.qualifier"` with `version="1.0.X.qualifier"` in `feature.xml`
+1. `<version>1.X.0-SNAPSHOT</version>` with `<version>1.X.0</version>` in `pom.xml`
+2. `Bundle-Version: 1.X.0.qualifier` with `Bundle-Version: 1.X.0` in `MANIFEST.MF`
+3. `version="1.X.0.qualifier"` with `version="1.X.0.qualifier"` in `feature.xml`
 
 There should be 15 file changes in git. 
-Commit everything with this message `[maven-release-plugin] prepare release cucumberxtexteditor-1.0.0`
-Create a tag for `cucumberxtexteditor-1.0.X`.
+Commit everything with this message `[maven-release-plugin] prepare release cucumberxtexteditor-1.X.0`
+Create a tag for `cucumberxtexteditor-1.X.0`.
 
 ### Create SNAPSHOT Version Commit
 
 Do search and replace for the following
-1. `<version>1.0.X</version>` with `<version>1.0.X+1-SNAPSHOT</version>` in `pom.xml`
-2. `Bundle-Version: 1.0.X` with `Bundle-Version: 1.0.X+1.qualifier` in `MANIFEST.MF`
-3. `version="1.0.X"` with `version="1.0.X+1.qualifier"` in `feature.xml`
+1. `<version>1.X.0</version>` with `<version>1.X+1.0-SNAPSHOT</version>` in `pom.xml`
+2. `Bundle-Version: 1.X.0` with `Bundle-Version: 1.X+1.0.qualifier` in `MANIFEST.MF`
+3. `version="1.X.0"` with `version="1.X+1.0.qualifier"` in `feature.xml`
 
 There should be 15 file changes in git. 
 Commit everything with this message `[maven-release-plugin] prepare for next development iteration`.
