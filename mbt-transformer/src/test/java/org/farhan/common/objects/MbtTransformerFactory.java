@@ -69,6 +69,16 @@ public class MbtTransformerFactory {
 			}
 			return processFile;
 		}
+		if (className.contentEquals("MbtTransformerProcessFeatureFile")) {
+			if (processFile == null) {
+				processFile = new MbtTransformerProcessFeatureFile();
+				processFile.setBaseDir("mbt-transformer");
+				processFile.setPath("src/test/resources/Cucumber/Process.feature");
+			} else {
+				processFile.setPath("src/test/resources/Cucumber/Process.feature");
+			}
+			return processFile;
+		}
 		if (className.contentEquals("BlahDataTablePageStepsFile")) {
 			if (blahDataTablePageStepsFile == null) {
 				blahDataTablePageStepsFile = new MbtTransformerBlahDataTablePageStepsJavaFile();

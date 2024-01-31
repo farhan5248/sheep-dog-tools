@@ -1,8 +1,6 @@
 package org.farhan.mbt.core;
 
 import java.util.ArrayList;
-import java.util.Collection;
-
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;

@@ -23,7 +23,7 @@ public class CucumberFeatureFile implements ConvertibleFile {
 	public CucumberFeatureFile(File theFile) {
 		setFile(theFile);
 		theFeature = CucumberFactory.eINSTANCE.createFeature();
-		theFeature.setName(theFile.getName());
+		theFeature.setName(theFile.getName().replace(".feature", ""));
 	}
 
 	@Override

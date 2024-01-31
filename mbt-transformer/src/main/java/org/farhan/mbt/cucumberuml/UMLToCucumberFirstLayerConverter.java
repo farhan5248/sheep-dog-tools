@@ -8,7 +8,6 @@ import org.eclipse.emf.common.util.EMap;
 import org.eclipse.uml2.uml.Behavior;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
-import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.cucumber.Cell;
@@ -26,9 +25,6 @@ import org.farhan.mbt.uml.AnnotationFactory;
 import org.farhan.mbt.uml.ArgumentFactory;
 import org.farhan.mbt.uml.PackageFactory;
 import org.farhan.mbt.uml.UMLProject;
-
-import com.github.javaparser.ast.Modifier.Keyword;
-import com.github.javaparser.ast.body.MethodDeclaration;
 
 public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
 
@@ -88,6 +84,7 @@ public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
 				Interaction anInteraction = (Interaction) aBehavior;
 				Scenario aScenario = CucumberFactory.eINSTANCE.createScenario();
 				aScenario.setName(anInteraction.getName());
+				aFeatureFile.theFeature.getAbstractScenarios().add(aScenario);
 				// TODO this is for scenario outline data convertAnnotation(anInteraction,
 				// aMethod);
 				// TODO this is for scenario tags convertParameters(anInteraction, aMethod);
@@ -108,7 +105,7 @@ public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
 	@Override
 	protected void convertFromMessage(Message m, Object stepList) throws Exception {
 		EList<Step> steps = (EList<Step>) stepList;
-		Step step = CucumberFactory.eINSTANCE.createStep();
+		Step step = CucumberFactory.eINSTANCE.createAsterisk();
 		step.setName(m.getName());
 		steps.add(step);
 		convertDataTableFromArgument(m, step);
@@ -118,15 +115,19 @@ public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
 
 		ValueSpecification vs = ArgumentFactory.getArgument(m, "dataTable", "", true);
 		EMap<String, String> rows = AnnotationFactory.getAnnotation(vs, "dataTable").getDetails();
-		for (String rowId : rows.keySet()) {
-			String rowString = rows.get(rowId);
-			Row row = CucumberFactory.eINSTANCE.createRow();
-			for (String rs : rowString.split(" |")) {
-				Cell cell = CucumberFactory.eINSTANCE.createCell();
-				cell.setCell(rowString);
-				row.getCells().add(cell);
+		if (!rows.isEmpty()) {
+			step.setTheStepTable(CucumberFactory.eINSTANCE.createStepTable());
+			for (String rowId : rows.keySet()) {
+				String rowString = rows.get(rowId);
+				Row row = CucumberFactory.eINSTANCE.createRow();
+				for (String rs : rowString.split(" \\|")) {
+					Cell cell = CucumberFactory.eINSTANCE.createCell();
+					cell.setCell("");
+					cell.setName(rs);
+					row.getCells().add(cell);
+				}
+				step.getTheStepTable().getRows().add(row);
 			}
-			step.getTheStepTable().getRows().add(row);
 		}
 	}
 
