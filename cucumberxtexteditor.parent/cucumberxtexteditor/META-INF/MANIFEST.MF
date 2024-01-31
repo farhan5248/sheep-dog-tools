@@ -6,8 +6,7 @@ Bundle-Vendor: My Company
 Bundle-Version: 1.7.0.qualifier
 Bundle-SymbolicName: cucumberxtexteditor; singleton:=true
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: .,
- lib/mbt-validator-1.3-SNAPSHOT.jar
+Bundle-ClassPath: .
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase,
  org.eclipse.equinox.common;bundle-version="3.16.0",

@@ -2089,11 +2089,11 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCell"
-    // InternalCucumber.g:773:1: ruleCell returns [EObject current=null] : ( ( (lv_cell_0_0= '|' ) ) ( (lv_name_1_0= rulePhrase ) ) ) ;
+    // InternalCucumber.g:773:1: ruleCell returns [EObject current=null] : (otherlv_0= '|' ( (lv_name_1_0= rulePhrase ) ) ) ;
     public final EObject ruleCell() throws RecognitionException {
         EObject current = null;
 
-        Token lv_cell_0_0=null;
+        Token otherlv_0=null;
         AntlrDatatypeRuleToken lv_name_1_0 = null;
 
 
@@ -2101,39 +2101,21 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCucumber.g:779:2: ( ( ( (lv_cell_0_0= '|' ) ) ( (lv_name_1_0= rulePhrase ) ) ) )
-            // InternalCucumber.g:780:2: ( ( (lv_cell_0_0= '|' ) ) ( (lv_name_1_0= rulePhrase ) ) )
+            // InternalCucumber.g:779:2: ( (otherlv_0= '|' ( (lv_name_1_0= rulePhrase ) ) ) )
+            // InternalCucumber.g:780:2: (otherlv_0= '|' ( (lv_name_1_0= rulePhrase ) ) )
             {
-            // InternalCucumber.g:780:2: ( ( (lv_cell_0_0= '|' ) ) ( (lv_name_1_0= rulePhrase ) ) )
-            // InternalCucumber.g:781:3: ( (lv_cell_0_0= '|' ) ) ( (lv_name_1_0= rulePhrase ) )
+            // InternalCucumber.g:780:2: (otherlv_0= '|' ( (lv_name_1_0= rulePhrase ) ) )
+            // InternalCucumber.g:781:3: otherlv_0= '|' ( (lv_name_1_0= rulePhrase ) )
             {
-            // InternalCucumber.g:781:3: ( (lv_cell_0_0= '|' ) )
-            // InternalCucumber.g:782:4: (lv_cell_0_0= '|' )
+            otherlv_0=(Token)match(input,15,FOLLOW_5); 
+
+            			newLeafNode(otherlv_0, grammarAccess.getCellAccess().getVerticalLineKeyword_0());
+            		
+            // InternalCucumber.g:785:3: ( (lv_name_1_0= rulePhrase ) )
+            // InternalCucumber.g:786:4: (lv_name_1_0= rulePhrase )
             {
-            // InternalCucumber.g:782:4: (lv_cell_0_0= '|' )
-            // InternalCucumber.g:783:5: lv_cell_0_0= '|'
-            {
-            lv_cell_0_0=(Token)match(input,15,FOLLOW_5); 
-
-            					newLeafNode(lv_cell_0_0, grammarAccess.getCellAccess().getCellVerticalLineKeyword_0_0());
-            				
-
-            					if (current==null) {
-            						current = createModelElement(grammarAccess.getCellRule());
-            					}
-            					setWithLastConsumed(current, "cell", lv_cell_0_0, "|");
-            				
-
-            }
-
-
-            }
-
-            // InternalCucumber.g:795:3: ( (lv_name_1_0= rulePhrase ) )
-            // InternalCucumber.g:796:4: (lv_name_1_0= rulePhrase )
-            {
-            // InternalCucumber.g:796:4: (lv_name_1_0= rulePhrase )
-            // InternalCucumber.g:797:5: lv_name_1_0= rulePhrase
+            // InternalCucumber.g:786:4: (lv_name_1_0= rulePhrase )
+            // InternalCucumber.g:787:5: lv_name_1_0= rulePhrase
             {
 
             					newCompositeNode(grammarAccess.getCellAccess().getNamePhraseParserRuleCall_1_0());
@@ -2183,7 +2165,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleStep"
-    // InternalCucumber.g:818:1: entryRuleStep returns [EObject current=null] : iv_ruleStep= ruleStep EOF ;
+    // InternalCucumber.g:808:1: entryRuleStep returns [EObject current=null] : iv_ruleStep= ruleStep EOF ;
     public final EObject entryRuleStep() throws RecognitionException {
         EObject current = null;
 
@@ -2191,8 +2173,8 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalCucumber.g:818:45: (iv_ruleStep= ruleStep EOF )
-            // InternalCucumber.g:819:2: iv_ruleStep= ruleStep EOF
+            // InternalCucumber.g:808:45: (iv_ruleStep= ruleStep EOF )
+            // InternalCucumber.g:809:2: iv_ruleStep= ruleStep EOF
             {
              newCompositeNode(grammarAccess.getStepRule()); 
             pushFollow(FOLLOW_1);
@@ -2219,7 +2201,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStep"
-    // InternalCucumber.g:825:1: ruleStep returns [EObject current=null] : (this_Given_0= ruleGiven | this_When_1= ruleWhen | this_Then_2= ruleThen | this_And_3= ruleAnd | this_But_4= ruleBut | this_Asterisk_5= ruleAsterisk ) ;
+    // InternalCucumber.g:815:1: ruleStep returns [EObject current=null] : (this_Given_0= ruleGiven | this_When_1= ruleWhen | this_Then_2= ruleThen | this_And_3= ruleAnd | this_But_4= ruleBut | this_Asterisk_5= ruleAsterisk ) ;
     public final EObject ruleStep() throws RecognitionException {
         EObject current = null;
 
@@ -2240,10 +2222,10 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCucumber.g:831:2: ( (this_Given_0= ruleGiven | this_When_1= ruleWhen | this_Then_2= ruleThen | this_And_3= ruleAnd | this_But_4= ruleBut | this_Asterisk_5= ruleAsterisk ) )
-            // InternalCucumber.g:832:2: (this_Given_0= ruleGiven | this_When_1= ruleWhen | this_Then_2= ruleThen | this_And_3= ruleAnd | this_But_4= ruleBut | this_Asterisk_5= ruleAsterisk )
+            // InternalCucumber.g:821:2: ( (this_Given_0= ruleGiven | this_When_1= ruleWhen | this_Then_2= ruleThen | this_And_3= ruleAnd | this_But_4= ruleBut | this_Asterisk_5= ruleAsterisk ) )
+            // InternalCucumber.g:822:2: (this_Given_0= ruleGiven | this_When_1= ruleWhen | this_Then_2= ruleThen | this_And_3= ruleAnd | this_But_4= ruleBut | this_Asterisk_5= ruleAsterisk )
             {
-            // InternalCucumber.g:832:2: (this_Given_0= ruleGiven | this_When_1= ruleWhen | this_Then_2= ruleThen | this_And_3= ruleAnd | this_But_4= ruleBut | this_Asterisk_5= ruleAsterisk )
+            // InternalCucumber.g:822:2: (this_Given_0= ruleGiven | this_When_1= ruleWhen | this_Then_2= ruleThen | this_And_3= ruleAnd | this_But_4= ruleBut | this_Asterisk_5= ruleAsterisk )
             int alt23=6;
             switch ( input.LA(1) ) {
             case 17:
@@ -2285,7 +2267,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             switch (alt23) {
                 case 1 :
-                    // InternalCucumber.g:833:3: this_Given_0= ruleGiven
+                    // InternalCucumber.g:823:3: this_Given_0= ruleGiven
                     {
 
                     			newCompositeNode(grammarAccess.getStepAccess().getGivenParserRuleCall_0());
@@ -2303,7 +2285,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalCucumber.g:842:3: this_When_1= ruleWhen
+                    // InternalCucumber.g:832:3: this_When_1= ruleWhen
                     {
 
                     			newCompositeNode(grammarAccess.getStepAccess().getWhenParserRuleCall_1());
@@ -2321,7 +2303,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalCucumber.g:851:3: this_Then_2= ruleThen
+                    // InternalCucumber.g:841:3: this_Then_2= ruleThen
                     {
 
                     			newCompositeNode(grammarAccess.getStepAccess().getThenParserRuleCall_2());
@@ -2339,7 +2321,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalCucumber.g:860:3: this_And_3= ruleAnd
+                    // InternalCucumber.g:850:3: this_And_3= ruleAnd
                     {
 
                     			newCompositeNode(grammarAccess.getStepAccess().getAndParserRuleCall_3());
@@ -2357,7 +2339,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // InternalCucumber.g:869:3: this_But_4= ruleBut
+                    // InternalCucumber.g:859:3: this_But_4= ruleBut
                     {
 
                     			newCompositeNode(grammarAccess.getStepAccess().getButParserRuleCall_4());
@@ -2375,7 +2357,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // InternalCucumber.g:878:3: this_Asterisk_5= ruleAsterisk
+                    // InternalCucumber.g:868:3: this_Asterisk_5= ruleAsterisk
                     {
 
                     			newCompositeNode(grammarAccess.getStepAccess().getAsteriskParserRuleCall_5());
@@ -2415,7 +2397,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDocString"
-    // InternalCucumber.g:890:1: entryRuleDocString returns [EObject current=null] : iv_ruleDocString= ruleDocString EOF ;
+    // InternalCucumber.g:880:1: entryRuleDocString returns [EObject current=null] : iv_ruleDocString= ruleDocString EOF ;
     public final EObject entryRuleDocString() throws RecognitionException {
         EObject current = null;
 
@@ -2423,8 +2405,8 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalCucumber.g:890:50: (iv_ruleDocString= ruleDocString EOF )
-            // InternalCucumber.g:891:2: iv_ruleDocString= ruleDocString EOF
+            // InternalCucumber.g:880:50: (iv_ruleDocString= ruleDocString EOF )
+            // InternalCucumber.g:881:2: iv_ruleDocString= ruleDocString EOF
             {
              newCompositeNode(grammarAccess.getDocStringRule()); 
             pushFollow(FOLLOW_1);
@@ -2451,7 +2433,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDocString"
-    // InternalCucumber.g:897:1: ruleDocString returns [EObject current=null] : (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_statements_2_0= ruleStatement ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL ) ;
+    // InternalCucumber.g:887:1: ruleDocString returns [EObject current=null] : (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_statements_2_0= ruleStatement ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL ) ;
     public final EObject ruleDocString() throws RecognitionException {
         EObject current = null;
 
@@ -2466,11 +2448,11 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCucumber.g:903:2: ( (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_statements_2_0= ruleStatement ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL ) )
-            // InternalCucumber.g:904:2: (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_statements_2_0= ruleStatement ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL )
+            // InternalCucumber.g:893:2: ( (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_statements_2_0= ruleStatement ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL ) )
+            // InternalCucumber.g:894:2: (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_statements_2_0= ruleStatement ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL )
             {
-            // InternalCucumber.g:904:2: (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_statements_2_0= ruleStatement ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL )
-            // InternalCucumber.g:905:3: otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_statements_2_0= ruleStatement ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL
+            // InternalCucumber.g:894:2: (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_statements_2_0= ruleStatement ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL )
+            // InternalCucumber.g:895:3: otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_statements_2_0= ruleStatement ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL
             {
             otherlv_0=(Token)match(input,16,FOLLOW_6); 
 
@@ -2480,7 +2462,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_EOL_1, grammarAccess.getDocStringAccess().getEOLTerminalRuleCall_1());
             		
-            // InternalCucumber.g:913:3: ( (lv_statements_2_0= ruleStatement ) )+
+            // InternalCucumber.g:903:3: ( (lv_statements_2_0= ruleStatement ) )+
             int cnt24=0;
             loop24:
             do {
@@ -2494,10 +2476,10 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
                 switch (alt24) {
             	case 1 :
-            	    // InternalCucumber.g:914:4: (lv_statements_2_0= ruleStatement )
+            	    // InternalCucumber.g:904:4: (lv_statements_2_0= ruleStatement )
             	    {
-            	    // InternalCucumber.g:914:4: (lv_statements_2_0= ruleStatement )
-            	    // InternalCucumber.g:915:5: lv_statements_2_0= ruleStatement
+            	    // InternalCucumber.g:904:4: (lv_statements_2_0= ruleStatement )
+            	    // InternalCucumber.g:905:5: lv_statements_2_0= ruleStatement
             	    {
 
             	    					newCompositeNode(grammarAccess.getDocStringAccess().getStatementsStatementParserRuleCall_2_0());
@@ -2565,7 +2547,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleGiven"
-    // InternalCucumber.g:944:1: entryRuleGiven returns [EObject current=null] : iv_ruleGiven= ruleGiven EOF ;
+    // InternalCucumber.g:934:1: entryRuleGiven returns [EObject current=null] : iv_ruleGiven= ruleGiven EOF ;
     public final EObject entryRuleGiven() throws RecognitionException {
         EObject current = null;
 
@@ -2573,8 +2555,8 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalCucumber.g:944:46: (iv_ruleGiven= ruleGiven EOF )
-            // InternalCucumber.g:945:2: iv_ruleGiven= ruleGiven EOF
+            // InternalCucumber.g:934:46: (iv_ruleGiven= ruleGiven EOF )
+            // InternalCucumber.g:935:2: iv_ruleGiven= ruleGiven EOF
             {
              newCompositeNode(grammarAccess.getGivenRule()); 
             pushFollow(FOLLOW_1);
@@ -2601,7 +2583,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleGiven"
-    // InternalCucumber.g:951:1: ruleGiven returns [EObject current=null] : (otherlv_0= 'Given' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) ;
+    // InternalCucumber.g:941:1: ruleGiven returns [EObject current=null] : (otherlv_0= 'Given' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) ;
     public final EObject ruleGiven() throws RecognitionException {
         EObject current = null;
 
@@ -2618,21 +2600,21 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCucumber.g:957:2: ( (otherlv_0= 'Given' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) )
-            // InternalCucumber.g:958:2: (otherlv_0= 'Given' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
+            // InternalCucumber.g:947:2: ( (otherlv_0= 'Given' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) )
+            // InternalCucumber.g:948:2: (otherlv_0= 'Given' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
             {
-            // InternalCucumber.g:958:2: (otherlv_0= 'Given' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
-            // InternalCucumber.g:959:3: otherlv_0= 'Given' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
+            // InternalCucumber.g:948:2: (otherlv_0= 'Given' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
+            // InternalCucumber.g:949:3: otherlv_0= 'Given' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
             {
             otherlv_0=(Token)match(input,17,FOLLOW_5); 
 
             			newLeafNode(otherlv_0, grammarAccess.getGivenAccess().getGivenKeyword_0());
             		
-            // InternalCucumber.g:963:3: ( (lv_name_1_0= rulePhrase ) )
-            // InternalCucumber.g:964:4: (lv_name_1_0= rulePhrase )
+            // InternalCucumber.g:953:3: ( (lv_name_1_0= rulePhrase ) )
+            // InternalCucumber.g:954:4: (lv_name_1_0= rulePhrase )
             {
-            // InternalCucumber.g:964:4: (lv_name_1_0= rulePhrase )
-            // InternalCucumber.g:965:5: lv_name_1_0= rulePhrase
+            // InternalCucumber.g:954:4: (lv_name_1_0= rulePhrase )
+            // InternalCucumber.g:955:5: lv_name_1_0= rulePhrase
             {
 
             					newCompositeNode(grammarAccess.getGivenAccess().getNamePhraseParserRuleCall_1_0());
@@ -2663,7 +2645,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_EOL_2, grammarAccess.getGivenAccess().getEOLTerminalRuleCall_2());
             		
-            // InternalCucumber.g:986:3: ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
+            // InternalCucumber.g:976:3: ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
             int alt25=3;
             int LA25_0 = input.LA(1);
 
@@ -2675,13 +2657,13 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
             }
             switch (alt25) {
                 case 1 :
-                    // InternalCucumber.g:987:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
+                    // InternalCucumber.g:977:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
                     {
-                    // InternalCucumber.g:987:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
-                    // InternalCucumber.g:988:5: (lv_theStepTable_3_0= ruleStepTable )
+                    // InternalCucumber.g:977:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
+                    // InternalCucumber.g:978:5: (lv_theStepTable_3_0= ruleStepTable )
                     {
-                    // InternalCucumber.g:988:5: (lv_theStepTable_3_0= ruleStepTable )
-                    // InternalCucumber.g:989:6: lv_theStepTable_3_0= ruleStepTable
+                    // InternalCucumber.g:978:5: (lv_theStepTable_3_0= ruleStepTable )
+                    // InternalCucumber.g:979:6: lv_theStepTable_3_0= ruleStepTable
                     {
 
                     						newCompositeNode(grammarAccess.getGivenAccess().getTheStepTableStepTableParserRuleCall_3_0_0());
@@ -2712,13 +2694,13 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalCucumber.g:1007:4: ( (lv_theDocString_4_0= ruleDocString ) )
+                    // InternalCucumber.g:997:4: ( (lv_theDocString_4_0= ruleDocString ) )
                     {
-                    // InternalCucumber.g:1007:4: ( (lv_theDocString_4_0= ruleDocString ) )
-                    // InternalCucumber.g:1008:5: (lv_theDocString_4_0= ruleDocString )
+                    // InternalCucumber.g:997:4: ( (lv_theDocString_4_0= ruleDocString ) )
+                    // InternalCucumber.g:998:5: (lv_theDocString_4_0= ruleDocString )
                     {
-                    // InternalCucumber.g:1008:5: (lv_theDocString_4_0= ruleDocString )
-                    // InternalCucumber.g:1009:6: lv_theDocString_4_0= ruleDocString
+                    // InternalCucumber.g:998:5: (lv_theDocString_4_0= ruleDocString )
+                    // InternalCucumber.g:999:6: lv_theDocString_4_0= ruleDocString
                     {
 
                     						newCompositeNode(grammarAccess.getGivenAccess().getTheDocStringDocStringParserRuleCall_3_1_0());
@@ -2774,7 +2756,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleWhen"
-    // InternalCucumber.g:1031:1: entryRuleWhen returns [EObject current=null] : iv_ruleWhen= ruleWhen EOF ;
+    // InternalCucumber.g:1021:1: entryRuleWhen returns [EObject current=null] : iv_ruleWhen= ruleWhen EOF ;
     public final EObject entryRuleWhen() throws RecognitionException {
         EObject current = null;
 
@@ -2782,8 +2764,8 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalCucumber.g:1031:45: (iv_ruleWhen= ruleWhen EOF )
-            // InternalCucumber.g:1032:2: iv_ruleWhen= ruleWhen EOF
+            // InternalCucumber.g:1021:45: (iv_ruleWhen= ruleWhen EOF )
+            // InternalCucumber.g:1022:2: iv_ruleWhen= ruleWhen EOF
             {
              newCompositeNode(grammarAccess.getWhenRule()); 
             pushFollow(FOLLOW_1);
@@ -2810,7 +2792,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleWhen"
-    // InternalCucumber.g:1038:1: ruleWhen returns [EObject current=null] : (otherlv_0= 'When' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) ;
+    // InternalCucumber.g:1028:1: ruleWhen returns [EObject current=null] : (otherlv_0= 'When' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) ;
     public final EObject ruleWhen() throws RecognitionException {
         EObject current = null;
 
@@ -2827,21 +2809,21 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCucumber.g:1044:2: ( (otherlv_0= 'When' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) )
-            // InternalCucumber.g:1045:2: (otherlv_0= 'When' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
+            // InternalCucumber.g:1034:2: ( (otherlv_0= 'When' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) )
+            // InternalCucumber.g:1035:2: (otherlv_0= 'When' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
             {
-            // InternalCucumber.g:1045:2: (otherlv_0= 'When' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
-            // InternalCucumber.g:1046:3: otherlv_0= 'When' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
+            // InternalCucumber.g:1035:2: (otherlv_0= 'When' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
+            // InternalCucumber.g:1036:3: otherlv_0= 'When' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
             {
             otherlv_0=(Token)match(input,18,FOLLOW_5); 
 
             			newLeafNode(otherlv_0, grammarAccess.getWhenAccess().getWhenKeyword_0());
             		
-            // InternalCucumber.g:1050:3: ( (lv_name_1_0= rulePhrase ) )
-            // InternalCucumber.g:1051:4: (lv_name_1_0= rulePhrase )
+            // InternalCucumber.g:1040:3: ( (lv_name_1_0= rulePhrase ) )
+            // InternalCucumber.g:1041:4: (lv_name_1_0= rulePhrase )
             {
-            // InternalCucumber.g:1051:4: (lv_name_1_0= rulePhrase )
-            // InternalCucumber.g:1052:5: lv_name_1_0= rulePhrase
+            // InternalCucumber.g:1041:4: (lv_name_1_0= rulePhrase )
+            // InternalCucumber.g:1042:5: lv_name_1_0= rulePhrase
             {
 
             					newCompositeNode(grammarAccess.getWhenAccess().getNamePhraseParserRuleCall_1_0());
@@ -2872,7 +2854,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_EOL_2, grammarAccess.getWhenAccess().getEOLTerminalRuleCall_2());
             		
-            // InternalCucumber.g:1073:3: ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
+            // InternalCucumber.g:1063:3: ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
             int alt26=3;
             int LA26_0 = input.LA(1);
 
@@ -2884,13 +2866,13 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
             }
             switch (alt26) {
                 case 1 :
-                    // InternalCucumber.g:1074:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
+                    // InternalCucumber.g:1064:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
                     {
-                    // InternalCucumber.g:1074:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
-                    // InternalCucumber.g:1075:5: (lv_theStepTable_3_0= ruleStepTable )
+                    // InternalCucumber.g:1064:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
+                    // InternalCucumber.g:1065:5: (lv_theStepTable_3_0= ruleStepTable )
                     {
-                    // InternalCucumber.g:1075:5: (lv_theStepTable_3_0= ruleStepTable )
-                    // InternalCucumber.g:1076:6: lv_theStepTable_3_0= ruleStepTable
+                    // InternalCucumber.g:1065:5: (lv_theStepTable_3_0= ruleStepTable )
+                    // InternalCucumber.g:1066:6: lv_theStepTable_3_0= ruleStepTable
                     {
 
                     						newCompositeNode(grammarAccess.getWhenAccess().getTheStepTableStepTableParserRuleCall_3_0_0());
@@ -2921,13 +2903,13 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalCucumber.g:1094:4: ( (lv_theDocString_4_0= ruleDocString ) )
+                    // InternalCucumber.g:1084:4: ( (lv_theDocString_4_0= ruleDocString ) )
                     {
-                    // InternalCucumber.g:1094:4: ( (lv_theDocString_4_0= ruleDocString ) )
-                    // InternalCucumber.g:1095:5: (lv_theDocString_4_0= ruleDocString )
+                    // InternalCucumber.g:1084:4: ( (lv_theDocString_4_0= ruleDocString ) )
+                    // InternalCucumber.g:1085:5: (lv_theDocString_4_0= ruleDocString )
                     {
-                    // InternalCucumber.g:1095:5: (lv_theDocString_4_0= ruleDocString )
-                    // InternalCucumber.g:1096:6: lv_theDocString_4_0= ruleDocString
+                    // InternalCucumber.g:1085:5: (lv_theDocString_4_0= ruleDocString )
+                    // InternalCucumber.g:1086:6: lv_theDocString_4_0= ruleDocString
                     {
 
                     						newCompositeNode(grammarAccess.getWhenAccess().getTheDocStringDocStringParserRuleCall_3_1_0());
@@ -2983,7 +2965,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleThen"
-    // InternalCucumber.g:1118:1: entryRuleThen returns [EObject current=null] : iv_ruleThen= ruleThen EOF ;
+    // InternalCucumber.g:1108:1: entryRuleThen returns [EObject current=null] : iv_ruleThen= ruleThen EOF ;
     public final EObject entryRuleThen() throws RecognitionException {
         EObject current = null;
 
@@ -2991,8 +2973,8 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalCucumber.g:1118:45: (iv_ruleThen= ruleThen EOF )
-            // InternalCucumber.g:1119:2: iv_ruleThen= ruleThen EOF
+            // InternalCucumber.g:1108:45: (iv_ruleThen= ruleThen EOF )
+            // InternalCucumber.g:1109:2: iv_ruleThen= ruleThen EOF
             {
              newCompositeNode(grammarAccess.getThenRule()); 
             pushFollow(FOLLOW_1);
@@ -3019,7 +3001,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleThen"
-    // InternalCucumber.g:1125:1: ruleThen returns [EObject current=null] : (otherlv_0= 'Then' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) ;
+    // InternalCucumber.g:1115:1: ruleThen returns [EObject current=null] : (otherlv_0= 'Then' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) ;
     public final EObject ruleThen() throws RecognitionException {
         EObject current = null;
 
@@ -3036,21 +3018,21 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCucumber.g:1131:2: ( (otherlv_0= 'Then' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) )
-            // InternalCucumber.g:1132:2: (otherlv_0= 'Then' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
+            // InternalCucumber.g:1121:2: ( (otherlv_0= 'Then' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) )
+            // InternalCucumber.g:1122:2: (otherlv_0= 'Then' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
             {
-            // InternalCucumber.g:1132:2: (otherlv_0= 'Then' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
-            // InternalCucumber.g:1133:3: otherlv_0= 'Then' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
+            // InternalCucumber.g:1122:2: (otherlv_0= 'Then' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
+            // InternalCucumber.g:1123:3: otherlv_0= 'Then' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
             {
             otherlv_0=(Token)match(input,19,FOLLOW_5); 
 
             			newLeafNode(otherlv_0, grammarAccess.getThenAccess().getThenKeyword_0());
             		
-            // InternalCucumber.g:1137:3: ( (lv_name_1_0= rulePhrase ) )
-            // InternalCucumber.g:1138:4: (lv_name_1_0= rulePhrase )
+            // InternalCucumber.g:1127:3: ( (lv_name_1_0= rulePhrase ) )
+            // InternalCucumber.g:1128:4: (lv_name_1_0= rulePhrase )
             {
-            // InternalCucumber.g:1138:4: (lv_name_1_0= rulePhrase )
-            // InternalCucumber.g:1139:5: lv_name_1_0= rulePhrase
+            // InternalCucumber.g:1128:4: (lv_name_1_0= rulePhrase )
+            // InternalCucumber.g:1129:5: lv_name_1_0= rulePhrase
             {
 
             					newCompositeNode(grammarAccess.getThenAccess().getNamePhraseParserRuleCall_1_0());
@@ -3081,7 +3063,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_EOL_2, grammarAccess.getThenAccess().getEOLTerminalRuleCall_2());
             		
-            // InternalCucumber.g:1160:3: ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
+            // InternalCucumber.g:1150:3: ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
             int alt27=3;
             int LA27_0 = input.LA(1);
 
@@ -3093,13 +3075,13 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
             }
             switch (alt27) {
                 case 1 :
-                    // InternalCucumber.g:1161:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
+                    // InternalCucumber.g:1151:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
                     {
-                    // InternalCucumber.g:1161:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
-                    // InternalCucumber.g:1162:5: (lv_theStepTable_3_0= ruleStepTable )
+                    // InternalCucumber.g:1151:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
+                    // InternalCucumber.g:1152:5: (lv_theStepTable_3_0= ruleStepTable )
                     {
-                    // InternalCucumber.g:1162:5: (lv_theStepTable_3_0= ruleStepTable )
-                    // InternalCucumber.g:1163:6: lv_theStepTable_3_0= ruleStepTable
+                    // InternalCucumber.g:1152:5: (lv_theStepTable_3_0= ruleStepTable )
+                    // InternalCucumber.g:1153:6: lv_theStepTable_3_0= ruleStepTable
                     {
 
                     						newCompositeNode(grammarAccess.getThenAccess().getTheStepTableStepTableParserRuleCall_3_0_0());
@@ -3130,13 +3112,13 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalCucumber.g:1181:4: ( (lv_theDocString_4_0= ruleDocString ) )
+                    // InternalCucumber.g:1171:4: ( (lv_theDocString_4_0= ruleDocString ) )
                     {
-                    // InternalCucumber.g:1181:4: ( (lv_theDocString_4_0= ruleDocString ) )
-                    // InternalCucumber.g:1182:5: (lv_theDocString_4_0= ruleDocString )
+                    // InternalCucumber.g:1171:4: ( (lv_theDocString_4_0= ruleDocString ) )
+                    // InternalCucumber.g:1172:5: (lv_theDocString_4_0= ruleDocString )
                     {
-                    // InternalCucumber.g:1182:5: (lv_theDocString_4_0= ruleDocString )
-                    // InternalCucumber.g:1183:6: lv_theDocString_4_0= ruleDocString
+                    // InternalCucumber.g:1172:5: (lv_theDocString_4_0= ruleDocString )
+                    // InternalCucumber.g:1173:6: lv_theDocString_4_0= ruleDocString
                     {
 
                     						newCompositeNode(grammarAccess.getThenAccess().getTheDocStringDocStringParserRuleCall_3_1_0());
@@ -3192,7 +3174,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAnd"
-    // InternalCucumber.g:1205:1: entryRuleAnd returns [EObject current=null] : iv_ruleAnd= ruleAnd EOF ;
+    // InternalCucumber.g:1195:1: entryRuleAnd returns [EObject current=null] : iv_ruleAnd= ruleAnd EOF ;
     public final EObject entryRuleAnd() throws RecognitionException {
         EObject current = null;
 
@@ -3200,8 +3182,8 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalCucumber.g:1205:44: (iv_ruleAnd= ruleAnd EOF )
-            // InternalCucumber.g:1206:2: iv_ruleAnd= ruleAnd EOF
+            // InternalCucumber.g:1195:44: (iv_ruleAnd= ruleAnd EOF )
+            // InternalCucumber.g:1196:2: iv_ruleAnd= ruleAnd EOF
             {
              newCompositeNode(grammarAccess.getAndRule()); 
             pushFollow(FOLLOW_1);
@@ -3228,7 +3210,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAnd"
-    // InternalCucumber.g:1212:1: ruleAnd returns [EObject current=null] : (otherlv_0= 'And' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) ;
+    // InternalCucumber.g:1202:1: ruleAnd returns [EObject current=null] : (otherlv_0= 'And' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) ;
     public final EObject ruleAnd() throws RecognitionException {
         EObject current = null;
 
@@ -3245,21 +3227,21 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCucumber.g:1218:2: ( (otherlv_0= 'And' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) )
-            // InternalCucumber.g:1219:2: (otherlv_0= 'And' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
+            // InternalCucumber.g:1208:2: ( (otherlv_0= 'And' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) )
+            // InternalCucumber.g:1209:2: (otherlv_0= 'And' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
             {
-            // InternalCucumber.g:1219:2: (otherlv_0= 'And' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
-            // InternalCucumber.g:1220:3: otherlv_0= 'And' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
+            // InternalCucumber.g:1209:2: (otherlv_0= 'And' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
+            // InternalCucumber.g:1210:3: otherlv_0= 'And' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
             {
             otherlv_0=(Token)match(input,20,FOLLOW_5); 
 
             			newLeafNode(otherlv_0, grammarAccess.getAndAccess().getAndKeyword_0());
             		
-            // InternalCucumber.g:1224:3: ( (lv_name_1_0= rulePhrase ) )
-            // InternalCucumber.g:1225:4: (lv_name_1_0= rulePhrase )
+            // InternalCucumber.g:1214:3: ( (lv_name_1_0= rulePhrase ) )
+            // InternalCucumber.g:1215:4: (lv_name_1_0= rulePhrase )
             {
-            // InternalCucumber.g:1225:4: (lv_name_1_0= rulePhrase )
-            // InternalCucumber.g:1226:5: lv_name_1_0= rulePhrase
+            // InternalCucumber.g:1215:4: (lv_name_1_0= rulePhrase )
+            // InternalCucumber.g:1216:5: lv_name_1_0= rulePhrase
             {
 
             					newCompositeNode(grammarAccess.getAndAccess().getNamePhraseParserRuleCall_1_0());
@@ -3290,7 +3272,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_EOL_2, grammarAccess.getAndAccess().getEOLTerminalRuleCall_2());
             		
-            // InternalCucumber.g:1247:3: ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
+            // InternalCucumber.g:1237:3: ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
             int alt28=3;
             int LA28_0 = input.LA(1);
 
@@ -3302,13 +3284,13 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
             }
             switch (alt28) {
                 case 1 :
-                    // InternalCucumber.g:1248:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
+                    // InternalCucumber.g:1238:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
                     {
-                    // InternalCucumber.g:1248:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
-                    // InternalCucumber.g:1249:5: (lv_theStepTable_3_0= ruleStepTable )
+                    // InternalCucumber.g:1238:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
+                    // InternalCucumber.g:1239:5: (lv_theStepTable_3_0= ruleStepTable )
                     {
-                    // InternalCucumber.g:1249:5: (lv_theStepTable_3_0= ruleStepTable )
-                    // InternalCucumber.g:1250:6: lv_theStepTable_3_0= ruleStepTable
+                    // InternalCucumber.g:1239:5: (lv_theStepTable_3_0= ruleStepTable )
+                    // InternalCucumber.g:1240:6: lv_theStepTable_3_0= ruleStepTable
                     {
 
                     						newCompositeNode(grammarAccess.getAndAccess().getTheStepTableStepTableParserRuleCall_3_0_0());
@@ -3339,13 +3321,13 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalCucumber.g:1268:4: ( (lv_theDocString_4_0= ruleDocString ) )
+                    // InternalCucumber.g:1258:4: ( (lv_theDocString_4_0= ruleDocString ) )
                     {
-                    // InternalCucumber.g:1268:4: ( (lv_theDocString_4_0= ruleDocString ) )
-                    // InternalCucumber.g:1269:5: (lv_theDocString_4_0= ruleDocString )
+                    // InternalCucumber.g:1258:4: ( (lv_theDocString_4_0= ruleDocString ) )
+                    // InternalCucumber.g:1259:5: (lv_theDocString_4_0= ruleDocString )
                     {
-                    // InternalCucumber.g:1269:5: (lv_theDocString_4_0= ruleDocString )
-                    // InternalCucumber.g:1270:6: lv_theDocString_4_0= ruleDocString
+                    // InternalCucumber.g:1259:5: (lv_theDocString_4_0= ruleDocString )
+                    // InternalCucumber.g:1260:6: lv_theDocString_4_0= ruleDocString
                     {
 
                     						newCompositeNode(grammarAccess.getAndAccess().getTheDocStringDocStringParserRuleCall_3_1_0());
@@ -3401,7 +3383,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleBut"
-    // InternalCucumber.g:1292:1: entryRuleBut returns [EObject current=null] : iv_ruleBut= ruleBut EOF ;
+    // InternalCucumber.g:1282:1: entryRuleBut returns [EObject current=null] : iv_ruleBut= ruleBut EOF ;
     public final EObject entryRuleBut() throws RecognitionException {
         EObject current = null;
 
@@ -3409,8 +3391,8 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalCucumber.g:1292:44: (iv_ruleBut= ruleBut EOF )
-            // InternalCucumber.g:1293:2: iv_ruleBut= ruleBut EOF
+            // InternalCucumber.g:1282:44: (iv_ruleBut= ruleBut EOF )
+            // InternalCucumber.g:1283:2: iv_ruleBut= ruleBut EOF
             {
              newCompositeNode(grammarAccess.getButRule()); 
             pushFollow(FOLLOW_1);
@@ -3437,7 +3419,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleBut"
-    // InternalCucumber.g:1299:1: ruleBut returns [EObject current=null] : (otherlv_0= 'But' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) ;
+    // InternalCucumber.g:1289:1: ruleBut returns [EObject current=null] : (otherlv_0= 'But' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) ;
     public final EObject ruleBut() throws RecognitionException {
         EObject current = null;
 
@@ -3454,21 +3436,21 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCucumber.g:1305:2: ( (otherlv_0= 'But' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) )
-            // InternalCucumber.g:1306:2: (otherlv_0= 'But' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
+            // InternalCucumber.g:1295:2: ( (otherlv_0= 'But' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) )
+            // InternalCucumber.g:1296:2: (otherlv_0= 'But' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
             {
-            // InternalCucumber.g:1306:2: (otherlv_0= 'But' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
-            // InternalCucumber.g:1307:3: otherlv_0= 'But' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
+            // InternalCucumber.g:1296:2: (otherlv_0= 'But' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
+            // InternalCucumber.g:1297:3: otherlv_0= 'But' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
             {
             otherlv_0=(Token)match(input,21,FOLLOW_5); 
 
             			newLeafNode(otherlv_0, grammarAccess.getButAccess().getButKeyword_0());
             		
-            // InternalCucumber.g:1311:3: ( (lv_name_1_0= rulePhrase ) )
-            // InternalCucumber.g:1312:4: (lv_name_1_0= rulePhrase )
+            // InternalCucumber.g:1301:3: ( (lv_name_1_0= rulePhrase ) )
+            // InternalCucumber.g:1302:4: (lv_name_1_0= rulePhrase )
             {
-            // InternalCucumber.g:1312:4: (lv_name_1_0= rulePhrase )
-            // InternalCucumber.g:1313:5: lv_name_1_0= rulePhrase
+            // InternalCucumber.g:1302:4: (lv_name_1_0= rulePhrase )
+            // InternalCucumber.g:1303:5: lv_name_1_0= rulePhrase
             {
 
             					newCompositeNode(grammarAccess.getButAccess().getNamePhraseParserRuleCall_1_0());
@@ -3499,7 +3481,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_EOL_2, grammarAccess.getButAccess().getEOLTerminalRuleCall_2());
             		
-            // InternalCucumber.g:1334:3: ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
+            // InternalCucumber.g:1324:3: ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
             int alt29=3;
             int LA29_0 = input.LA(1);
 
@@ -3511,13 +3493,13 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
             }
             switch (alt29) {
                 case 1 :
-                    // InternalCucumber.g:1335:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
+                    // InternalCucumber.g:1325:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
                     {
-                    // InternalCucumber.g:1335:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
-                    // InternalCucumber.g:1336:5: (lv_theStepTable_3_0= ruleStepTable )
+                    // InternalCucumber.g:1325:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
+                    // InternalCucumber.g:1326:5: (lv_theStepTable_3_0= ruleStepTable )
                     {
-                    // InternalCucumber.g:1336:5: (lv_theStepTable_3_0= ruleStepTable )
-                    // InternalCucumber.g:1337:6: lv_theStepTable_3_0= ruleStepTable
+                    // InternalCucumber.g:1326:5: (lv_theStepTable_3_0= ruleStepTable )
+                    // InternalCucumber.g:1327:6: lv_theStepTable_3_0= ruleStepTable
                     {
 
                     						newCompositeNode(grammarAccess.getButAccess().getTheStepTableStepTableParserRuleCall_3_0_0());
@@ -3548,13 +3530,13 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalCucumber.g:1355:4: ( (lv_theDocString_4_0= ruleDocString ) )
+                    // InternalCucumber.g:1345:4: ( (lv_theDocString_4_0= ruleDocString ) )
                     {
-                    // InternalCucumber.g:1355:4: ( (lv_theDocString_4_0= ruleDocString ) )
-                    // InternalCucumber.g:1356:5: (lv_theDocString_4_0= ruleDocString )
+                    // InternalCucumber.g:1345:4: ( (lv_theDocString_4_0= ruleDocString ) )
+                    // InternalCucumber.g:1346:5: (lv_theDocString_4_0= ruleDocString )
                     {
-                    // InternalCucumber.g:1356:5: (lv_theDocString_4_0= ruleDocString )
-                    // InternalCucumber.g:1357:6: lv_theDocString_4_0= ruleDocString
+                    // InternalCucumber.g:1346:5: (lv_theDocString_4_0= ruleDocString )
+                    // InternalCucumber.g:1347:6: lv_theDocString_4_0= ruleDocString
                     {
 
                     						newCompositeNode(grammarAccess.getButAccess().getTheDocStringDocStringParserRuleCall_3_1_0());
@@ -3610,7 +3592,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAsterisk"
-    // InternalCucumber.g:1379:1: entryRuleAsterisk returns [EObject current=null] : iv_ruleAsterisk= ruleAsterisk EOF ;
+    // InternalCucumber.g:1369:1: entryRuleAsterisk returns [EObject current=null] : iv_ruleAsterisk= ruleAsterisk EOF ;
     public final EObject entryRuleAsterisk() throws RecognitionException {
         EObject current = null;
 
@@ -3618,8 +3600,8 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalCucumber.g:1379:49: (iv_ruleAsterisk= ruleAsterisk EOF )
-            // InternalCucumber.g:1380:2: iv_ruleAsterisk= ruleAsterisk EOF
+            // InternalCucumber.g:1369:49: (iv_ruleAsterisk= ruleAsterisk EOF )
+            // InternalCucumber.g:1370:2: iv_ruleAsterisk= ruleAsterisk EOF
             {
              newCompositeNode(grammarAccess.getAsteriskRule()); 
             pushFollow(FOLLOW_1);
@@ -3646,7 +3628,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAsterisk"
-    // InternalCucumber.g:1386:1: ruleAsterisk returns [EObject current=null] : (otherlv_0= '*' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) ;
+    // InternalCucumber.g:1376:1: ruleAsterisk returns [EObject current=null] : (otherlv_0= '*' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) ;
     public final EObject ruleAsterisk() throws RecognitionException {
         EObject current = null;
 
@@ -3663,21 +3645,21 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCucumber.g:1392:2: ( (otherlv_0= '*' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) )
-            // InternalCucumber.g:1393:2: (otherlv_0= '*' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
+            // InternalCucumber.g:1382:2: ( (otherlv_0= '*' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? ) )
+            // InternalCucumber.g:1383:2: (otherlv_0= '*' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
             {
-            // InternalCucumber.g:1393:2: (otherlv_0= '*' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
-            // InternalCucumber.g:1394:3: otherlv_0= '*' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
+            // InternalCucumber.g:1383:2: (otherlv_0= '*' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )? )
+            // InternalCucumber.g:1384:3: otherlv_0= '*' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
             {
             otherlv_0=(Token)match(input,22,FOLLOW_5); 
 
             			newLeafNode(otherlv_0, grammarAccess.getAsteriskAccess().getAsteriskKeyword_0());
             		
-            // InternalCucumber.g:1398:3: ( (lv_name_1_0= rulePhrase ) )
-            // InternalCucumber.g:1399:4: (lv_name_1_0= rulePhrase )
+            // InternalCucumber.g:1388:3: ( (lv_name_1_0= rulePhrase ) )
+            // InternalCucumber.g:1389:4: (lv_name_1_0= rulePhrase )
             {
-            // InternalCucumber.g:1399:4: (lv_name_1_0= rulePhrase )
-            // InternalCucumber.g:1400:5: lv_name_1_0= rulePhrase
+            // InternalCucumber.g:1389:4: (lv_name_1_0= rulePhrase )
+            // InternalCucumber.g:1390:5: lv_name_1_0= rulePhrase
             {
 
             					newCompositeNode(grammarAccess.getAsteriskAccess().getNamePhraseParserRuleCall_1_0());
@@ -3708,7 +3690,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_EOL_2, grammarAccess.getAsteriskAccess().getEOLTerminalRuleCall_2());
             		
-            // InternalCucumber.g:1421:3: ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
+            // InternalCucumber.g:1411:3: ( ( (lv_theStepTable_3_0= ruleStepTable ) ) | ( (lv_theDocString_4_0= ruleDocString ) ) )?
             int alt30=3;
             int LA30_0 = input.LA(1);
 
@@ -3720,13 +3702,13 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
             }
             switch (alt30) {
                 case 1 :
-                    // InternalCucumber.g:1422:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
+                    // InternalCucumber.g:1412:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
                     {
-                    // InternalCucumber.g:1422:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
-                    // InternalCucumber.g:1423:5: (lv_theStepTable_3_0= ruleStepTable )
+                    // InternalCucumber.g:1412:4: ( (lv_theStepTable_3_0= ruleStepTable ) )
+                    // InternalCucumber.g:1413:5: (lv_theStepTable_3_0= ruleStepTable )
                     {
-                    // InternalCucumber.g:1423:5: (lv_theStepTable_3_0= ruleStepTable )
-                    // InternalCucumber.g:1424:6: lv_theStepTable_3_0= ruleStepTable
+                    // InternalCucumber.g:1413:5: (lv_theStepTable_3_0= ruleStepTable )
+                    // InternalCucumber.g:1414:6: lv_theStepTable_3_0= ruleStepTable
                     {
 
                     						newCompositeNode(grammarAccess.getAsteriskAccess().getTheStepTableStepTableParserRuleCall_3_0_0());
@@ -3757,13 +3739,13 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalCucumber.g:1442:4: ( (lv_theDocString_4_0= ruleDocString ) )
+                    // InternalCucumber.g:1432:4: ( (lv_theDocString_4_0= ruleDocString ) )
                     {
-                    // InternalCucumber.g:1442:4: ( (lv_theDocString_4_0= ruleDocString ) )
-                    // InternalCucumber.g:1443:5: (lv_theDocString_4_0= ruleDocString )
+                    // InternalCucumber.g:1432:4: ( (lv_theDocString_4_0= ruleDocString ) )
+                    // InternalCucumber.g:1433:5: (lv_theDocString_4_0= ruleDocString )
                     {
-                    // InternalCucumber.g:1443:5: (lv_theDocString_4_0= ruleDocString )
-                    // InternalCucumber.g:1444:6: lv_theDocString_4_0= ruleDocString
+                    // InternalCucumber.g:1433:5: (lv_theDocString_4_0= ruleDocString )
+                    // InternalCucumber.g:1434:6: lv_theDocString_4_0= ruleDocString
                     {
 
                     						newCompositeNode(grammarAccess.getAsteriskAccess().getTheDocStringDocStringParserRuleCall_3_1_0());
@@ -3819,7 +3801,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleStatement"
-    // InternalCucumber.g:1466:1: entryRuleStatement returns [EObject current=null] : iv_ruleStatement= ruleStatement EOF ;
+    // InternalCucumber.g:1456:1: entryRuleStatement returns [EObject current=null] : iv_ruleStatement= ruleStatement EOF ;
     public final EObject entryRuleStatement() throws RecognitionException {
         EObject current = null;
 
@@ -3827,8 +3809,8 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalCucumber.g:1466:50: (iv_ruleStatement= ruleStatement EOF )
-            // InternalCucumber.g:1467:2: iv_ruleStatement= ruleStatement EOF
+            // InternalCucumber.g:1456:50: (iv_ruleStatement= ruleStatement EOF )
+            // InternalCucumber.g:1457:2: iv_ruleStatement= ruleStatement EOF
             {
              newCompositeNode(grammarAccess.getStatementRule()); 
             pushFollow(FOLLOW_1);
@@ -3855,7 +3837,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStatement"
-    // InternalCucumber.g:1473:1: ruleStatement returns [EObject current=null] : ( ( (lv_name_0_0= rulePhrase ) ) this_EOL_1= RULE_EOL ) ;
+    // InternalCucumber.g:1463:1: ruleStatement returns [EObject current=null] : ( ( (lv_name_0_0= rulePhrase ) ) this_EOL_1= RULE_EOL ) ;
     public final EObject ruleStatement() throws RecognitionException {
         EObject current = null;
 
@@ -3867,17 +3849,17 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCucumber.g:1479:2: ( ( ( (lv_name_0_0= rulePhrase ) ) this_EOL_1= RULE_EOL ) )
-            // InternalCucumber.g:1480:2: ( ( (lv_name_0_0= rulePhrase ) ) this_EOL_1= RULE_EOL )
+            // InternalCucumber.g:1469:2: ( ( ( (lv_name_0_0= rulePhrase ) ) this_EOL_1= RULE_EOL ) )
+            // InternalCucumber.g:1470:2: ( ( (lv_name_0_0= rulePhrase ) ) this_EOL_1= RULE_EOL )
             {
-            // InternalCucumber.g:1480:2: ( ( (lv_name_0_0= rulePhrase ) ) this_EOL_1= RULE_EOL )
-            // InternalCucumber.g:1481:3: ( (lv_name_0_0= rulePhrase ) ) this_EOL_1= RULE_EOL
+            // InternalCucumber.g:1470:2: ( ( (lv_name_0_0= rulePhrase ) ) this_EOL_1= RULE_EOL )
+            // InternalCucumber.g:1471:3: ( (lv_name_0_0= rulePhrase ) ) this_EOL_1= RULE_EOL
             {
-            // InternalCucumber.g:1481:3: ( (lv_name_0_0= rulePhrase ) )
-            // InternalCucumber.g:1482:4: (lv_name_0_0= rulePhrase )
+            // InternalCucumber.g:1471:3: ( (lv_name_0_0= rulePhrase ) )
+            // InternalCucumber.g:1472:4: (lv_name_0_0= rulePhrase )
             {
-            // InternalCucumber.g:1482:4: (lv_name_0_0= rulePhrase )
-            // InternalCucumber.g:1483:5: lv_name_0_0= rulePhrase
+            // InternalCucumber.g:1472:4: (lv_name_0_0= rulePhrase )
+            // InternalCucumber.g:1473:5: lv_name_0_0= rulePhrase
             {
 
             					newCompositeNode(grammarAccess.getStatementAccess().getNamePhraseParserRuleCall_0_0());
@@ -3931,7 +3913,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRulePhrase"
-    // InternalCucumber.g:1508:1: entryRulePhrase returns [String current=null] : iv_rulePhrase= rulePhrase EOF ;
+    // InternalCucumber.g:1498:1: entryRulePhrase returns [String current=null] : iv_rulePhrase= rulePhrase EOF ;
     public final String entryRulePhrase() throws RecognitionException {
         String current = null;
 
@@ -3939,8 +3921,8 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalCucumber.g:1508:46: (iv_rulePhrase= rulePhrase EOF )
-            // InternalCucumber.g:1509:2: iv_rulePhrase= rulePhrase EOF
+            // InternalCucumber.g:1498:46: (iv_rulePhrase= rulePhrase EOF )
+            // InternalCucumber.g:1499:2: iv_rulePhrase= rulePhrase EOF
             {
              newCompositeNode(grammarAccess.getPhraseRule()); 
             pushFollow(FOLLOW_1);
@@ -3967,7 +3949,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePhrase"
-    // InternalCucumber.g:1515:1: rulePhrase returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_TEXT_LITERAL_0= ruleTEXT_LITERAL )+ ;
+    // InternalCucumber.g:1505:1: rulePhrase returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_TEXT_LITERAL_0= ruleTEXT_LITERAL )+ ;
     public final AntlrDatatypeRuleToken rulePhrase() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -3978,10 +3960,10 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCucumber.g:1521:2: ( (this_TEXT_LITERAL_0= ruleTEXT_LITERAL )+ )
-            // InternalCucumber.g:1522:2: (this_TEXT_LITERAL_0= ruleTEXT_LITERAL )+
+            // InternalCucumber.g:1511:2: ( (this_TEXT_LITERAL_0= ruleTEXT_LITERAL )+ )
+            // InternalCucumber.g:1512:2: (this_TEXT_LITERAL_0= ruleTEXT_LITERAL )+
             {
-            // InternalCucumber.g:1522:2: (this_TEXT_LITERAL_0= ruleTEXT_LITERAL )+
+            // InternalCucumber.g:1512:2: (this_TEXT_LITERAL_0= ruleTEXT_LITERAL )+
             int cnt31=0;
             loop31:
             do {
@@ -3995,7 +3977,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
                 switch (alt31) {
             	case 1 :
-            	    // InternalCucumber.g:1523:3: this_TEXT_LITERAL_0= ruleTEXT_LITERAL
+            	    // InternalCucumber.g:1513:3: this_TEXT_LITERAL_0= ruleTEXT_LITERAL
             	    {
 
             	    			newCompositeNode(grammarAccess.getPhraseAccess().getTEXT_LITERALParserRuleCall());
@@ -4044,7 +4026,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTag"
-    // InternalCucumber.g:1537:1: entryRuleTag returns [EObject current=null] : iv_ruleTag= ruleTag EOF ;
+    // InternalCucumber.g:1527:1: entryRuleTag returns [EObject current=null] : iv_ruleTag= ruleTag EOF ;
     public final EObject entryRuleTag() throws RecognitionException {
         EObject current = null;
 
@@ -4052,8 +4034,8 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalCucumber.g:1537:44: (iv_ruleTag= ruleTag EOF )
-            // InternalCucumber.g:1538:2: iv_ruleTag= ruleTag EOF
+            // InternalCucumber.g:1527:44: (iv_ruleTag= ruleTag EOF )
+            // InternalCucumber.g:1528:2: iv_ruleTag= ruleTag EOF
             {
              newCompositeNode(grammarAccess.getTagRule()); 
             pushFollow(FOLLOW_1);
@@ -4080,7 +4062,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTag"
-    // InternalCucumber.g:1544:1: ruleTag returns [EObject current=null] : (otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // InternalCucumber.g:1534:1: ruleTag returns [EObject current=null] : (otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleTag() throws RecognitionException {
         EObject current = null;
 
@@ -4091,21 +4073,21 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCucumber.g:1550:2: ( (otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // InternalCucumber.g:1551:2: (otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalCucumber.g:1540:2: ( (otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalCucumber.g:1541:2: (otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // InternalCucumber.g:1551:2: (otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) ) )
-            // InternalCucumber.g:1552:3: otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) )
+            // InternalCucumber.g:1541:2: (otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalCucumber.g:1542:3: otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,23,FOLLOW_21); 
 
             			newLeafNode(otherlv_0, grammarAccess.getTagAccess().getCommercialAtKeyword_0());
             		
-            // InternalCucumber.g:1556:3: ( (lv_name_1_0= RULE_ID ) )
-            // InternalCucumber.g:1557:4: (lv_name_1_0= RULE_ID )
+            // InternalCucumber.g:1546:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalCucumber.g:1547:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalCucumber.g:1557:4: (lv_name_1_0= RULE_ID )
-            // InternalCucumber.g:1558:5: lv_name_1_0= RULE_ID
+            // InternalCucumber.g:1547:4: (lv_name_1_0= RULE_ID )
+            // InternalCucumber.g:1548:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_2); 
 
@@ -4150,7 +4132,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTEXT_LITERAL"
-    // InternalCucumber.g:1578:1: entryRuleTEXT_LITERAL returns [String current=null] : iv_ruleTEXT_LITERAL= ruleTEXT_LITERAL EOF ;
+    // InternalCucumber.g:1568:1: entryRuleTEXT_LITERAL returns [String current=null] : iv_ruleTEXT_LITERAL= ruleTEXT_LITERAL EOF ;
     public final String entryRuleTEXT_LITERAL() throws RecognitionException {
         String current = null;
 
@@ -4158,8 +4140,8 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalCucumber.g:1578:52: (iv_ruleTEXT_LITERAL= ruleTEXT_LITERAL EOF )
-            // InternalCucumber.g:1579:2: iv_ruleTEXT_LITERAL= ruleTEXT_LITERAL EOF
+            // InternalCucumber.g:1568:52: (iv_ruleTEXT_LITERAL= ruleTEXT_LITERAL EOF )
+            // InternalCucumber.g:1569:2: iv_ruleTEXT_LITERAL= ruleTEXT_LITERAL EOF
             {
              newCompositeNode(grammarAccess.getTEXT_LITERALRule()); 
             pushFollow(FOLLOW_1);
@@ -4186,7 +4168,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTEXT_LITERAL"
-    // InternalCucumber.g:1585:1: ruleTEXT_LITERAL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_WORD_0= RULE_WORD | this_ID_1= RULE_ID | this_STRING_2= RULE_STRING ) ;
+    // InternalCucumber.g:1575:1: ruleTEXT_LITERAL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_WORD_0= RULE_WORD | this_ID_1= RULE_ID | this_STRING_2= RULE_STRING ) ;
     public final AntlrDatatypeRuleToken ruleTEXT_LITERAL() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4198,10 +4180,10 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCucumber.g:1591:2: ( (this_WORD_0= RULE_WORD | this_ID_1= RULE_ID | this_STRING_2= RULE_STRING ) )
-            // InternalCucumber.g:1592:2: (this_WORD_0= RULE_WORD | this_ID_1= RULE_ID | this_STRING_2= RULE_STRING )
+            // InternalCucumber.g:1581:2: ( (this_WORD_0= RULE_WORD | this_ID_1= RULE_ID | this_STRING_2= RULE_STRING ) )
+            // InternalCucumber.g:1582:2: (this_WORD_0= RULE_WORD | this_ID_1= RULE_ID | this_STRING_2= RULE_STRING )
             {
-            // InternalCucumber.g:1592:2: (this_WORD_0= RULE_WORD | this_ID_1= RULE_ID | this_STRING_2= RULE_STRING )
+            // InternalCucumber.g:1582:2: (this_WORD_0= RULE_WORD | this_ID_1= RULE_ID | this_STRING_2= RULE_STRING )
             int alt32=3;
             switch ( input.LA(1) ) {
             case RULE_WORD:
@@ -4228,7 +4210,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             switch (alt32) {
                 case 1 :
-                    // InternalCucumber.g:1593:3: this_WORD_0= RULE_WORD
+                    // InternalCucumber.g:1583:3: this_WORD_0= RULE_WORD
                     {
                     this_WORD_0=(Token)match(input,RULE_WORD,FOLLOW_2); 
 
@@ -4241,7 +4223,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalCucumber.g:1601:3: this_ID_1= RULE_ID
+                    // InternalCucumber.g:1591:3: this_ID_1= RULE_ID
                     {
                     this_ID_1=(Token)match(input,RULE_ID,FOLLOW_2); 
 
@@ -4254,7 +4236,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalCucumber.g:1609:3: this_STRING_2= RULE_STRING
+                    // InternalCucumber.g:1599:3: this_STRING_2= RULE_STRING
                     {
                     this_STRING_2=(Token)match(input,RULE_STRING,FOLLOW_2); 
 

@@ -50,7 +50,7 @@ Row:
 	cells+=Cell+ '|' EOL;
 
 Cell:
-	cell='|' name=Phrase;
+	'|' name=Phrase;
 
 Step:
 	Given | When | Then | And | But | Asterisk;

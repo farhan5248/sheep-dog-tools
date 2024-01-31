@@ -34,7 +34,7 @@ public class CellFormatter extends Formatter {
 
 	public void format(IFormattableDocument doc, CucumberGrammarAccess ga, CucumberFormatter df) {
 		CellElements a = ga.getCellAccess();
-		formatKeyword(df.getRegion(theCell, a.getCellVerticalLineKeyword_0_0()), doc);
+		formatKeyword(df.getRegion(theCell, a.getVerticalLineKeyword_0()), doc);
 		formatPhraseRuleCall(df.getRegion(theCell, a.getNamePhraseParserRuleCall_1_0()), doc);
 	}
 

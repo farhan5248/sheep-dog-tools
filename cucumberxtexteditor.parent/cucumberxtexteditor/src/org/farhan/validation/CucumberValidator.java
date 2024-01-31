@@ -10,8 +10,6 @@ import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
-import org.farhan.mbt.graph.validation.MBTEdgeValidator;
-import org.farhan.mbt.graph.validation.MBTVertexValidator;
 
 public class CucumberValidator extends AbstractCucumberValidator {
 
