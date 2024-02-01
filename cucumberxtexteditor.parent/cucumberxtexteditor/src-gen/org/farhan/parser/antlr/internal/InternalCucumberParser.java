@@ -2433,7 +2433,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDocString"
-    // InternalCucumber.g:887:1: ruleDocString returns [EObject current=null] : (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_statements_2_0= ruleStatement ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL ) ;
+    // InternalCucumber.g:887:1: ruleDocString returns [EObject current=null] : (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_lines_2_0= ruleLine ) )* otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL ) ;
     public final EObject ruleDocString() throws RecognitionException {
         EObject current = null;
 
@@ -2441,51 +2441,50 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
         Token this_EOL_1=null;
         Token otherlv_3=null;
         Token this_EOL_4=null;
-        EObject lv_statements_2_0 = null;
+        EObject lv_lines_2_0 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalCucumber.g:893:2: ( (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_statements_2_0= ruleStatement ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL ) )
-            // InternalCucumber.g:894:2: (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_statements_2_0= ruleStatement ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL )
+            // InternalCucumber.g:893:2: ( (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_lines_2_0= ruleLine ) )* otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL ) )
+            // InternalCucumber.g:894:2: (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_lines_2_0= ruleLine ) )* otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL )
             {
-            // InternalCucumber.g:894:2: (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_statements_2_0= ruleStatement ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL )
-            // InternalCucumber.g:895:3: otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_statements_2_0= ruleStatement ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL
+            // InternalCucumber.g:894:2: (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_lines_2_0= ruleLine ) )* otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL )
+            // InternalCucumber.g:895:3: otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_lines_2_0= ruleLine ) )* otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL
             {
             otherlv_0=(Token)match(input,16,FOLLOW_6); 
 
             			newLeafNode(otherlv_0, grammarAccess.getDocStringAccess().getQuotationMarkQuotationMarkQuotationMarkKeyword_0());
             		
-            this_EOL_1=(Token)match(input,RULE_EOL,FOLLOW_5); 
+            this_EOL_1=(Token)match(input,RULE_EOL,FOLLOW_18); 
 
             			newLeafNode(this_EOL_1, grammarAccess.getDocStringAccess().getEOLTerminalRuleCall_1());
             		
-            // InternalCucumber.g:903:3: ( (lv_statements_2_0= ruleStatement ) )+
-            int cnt24=0;
+            // InternalCucumber.g:903:3: ( (lv_lines_2_0= ruleLine ) )*
             loop24:
             do {
                 int alt24=2;
                 int LA24_0 = input.LA(1);
 
-                if ( ((LA24_0>=RULE_ID && LA24_0<=RULE_STRING)) ) {
+                if ( (LA24_0==EOF||(LA24_0>=RULE_EOL && LA24_0<=RULE_STRING)) ) {
                     alt24=1;
                 }
 
 
                 switch (alt24) {
             	case 1 :
-            	    // InternalCucumber.g:904:4: (lv_statements_2_0= ruleStatement )
+            	    // InternalCucumber.g:904:4: (lv_lines_2_0= ruleLine )
             	    {
-            	    // InternalCucumber.g:904:4: (lv_statements_2_0= ruleStatement )
-            	    // InternalCucumber.g:905:5: lv_statements_2_0= ruleStatement
+            	    // InternalCucumber.g:904:4: (lv_lines_2_0= ruleLine )
+            	    // InternalCucumber.g:905:5: lv_lines_2_0= ruleLine
             	    {
 
-            	    					newCompositeNode(grammarAccess.getDocStringAccess().getStatementsStatementParserRuleCall_2_0());
+            	    					newCompositeNode(grammarAccess.getDocStringAccess().getLinesLineParserRuleCall_2_0());
             	    				
             	    pushFollow(FOLLOW_18);
-            	    lv_statements_2_0=ruleStatement();
+            	    lv_lines_2_0=ruleLine();
 
             	    state._fsp--;
 
@@ -2495,9 +2494,9 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
             	    					}
             	    					add(
             	    						current,
-            	    						"statements",
-            	    						lv_statements_2_0,
-            	    						"org.farhan.Cucumber.Statement");
+            	    						"lines",
+            	    						lv_lines_2_0,
+            	    						"org.farhan.Cucumber.Line");
             	    					afterParserOrEnumRuleCall();
             	    				
 
@@ -2508,12 +2507,8 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt24 >= 1 ) break loop24;
-                        EarlyExitException eee =
-                            new EarlyExitException(24, input);
-                        throw eee;
+            	    break loop24;
                 }
-                cnt24++;
             } while (true);
 
             otherlv_3=(Token)match(input,16,FOLLOW_6); 
@@ -4131,8 +4126,228 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleTag"
 
 
+    // $ANTLR start "entryRuleLine"
+    // InternalCucumber.g:1568:1: entryRuleLine returns [EObject current=null] : iv_ruleLine= ruleLine EOF ;
+    public final EObject entryRuleLine() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleLine = null;
+
+
+        try {
+            // InternalCucumber.g:1568:45: (iv_ruleLine= ruleLine EOF )
+            // InternalCucumber.g:1569:2: iv_ruleLine= ruleLine EOF
+            {
+             newCompositeNode(grammarAccess.getLineRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleLine=ruleLine();
+
+            state._fsp--;
+
+             current =iv_ruleLine; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleLine"
+
+
+    // $ANTLR start "ruleLine"
+    // InternalCucumber.g:1575:1: ruleLine returns [EObject current=null] : ( ( (lv_name_0_0= ruleLineBits ) ) this_EOL_1= RULE_EOL ) ;
+    public final EObject ruleLine() throws RecognitionException {
+        EObject current = null;
+
+        Token this_EOL_1=null;
+        AntlrDatatypeRuleToken lv_name_0_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalCucumber.g:1581:2: ( ( ( (lv_name_0_0= ruleLineBits ) ) this_EOL_1= RULE_EOL ) )
+            // InternalCucumber.g:1582:2: ( ( (lv_name_0_0= ruleLineBits ) ) this_EOL_1= RULE_EOL )
+            {
+            // InternalCucumber.g:1582:2: ( ( (lv_name_0_0= ruleLineBits ) ) this_EOL_1= RULE_EOL )
+            // InternalCucumber.g:1583:3: ( (lv_name_0_0= ruleLineBits ) ) this_EOL_1= RULE_EOL
+            {
+            // InternalCucumber.g:1583:3: ( (lv_name_0_0= ruleLineBits ) )
+            // InternalCucumber.g:1584:4: (lv_name_0_0= ruleLineBits )
+            {
+            // InternalCucumber.g:1584:4: (lv_name_0_0= ruleLineBits )
+            // InternalCucumber.g:1585:5: lv_name_0_0= ruleLineBits
+            {
+
+            					newCompositeNode(grammarAccess.getLineAccess().getNameLineBitsParserRuleCall_0_0());
+            				
+            pushFollow(FOLLOW_6);
+            lv_name_0_0=ruleLineBits();
+
+            state._fsp--;
+
+
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getLineRule());
+            					}
+            					set(
+            						current,
+            						"name",
+            						lv_name_0_0,
+            						"org.farhan.Cucumber.LineBits");
+            					afterParserOrEnumRuleCall();
+            				
+
+            }
+
+
+            }
+
+            this_EOL_1=(Token)match(input,RULE_EOL,FOLLOW_2); 
+
+            			newLeafNode(this_EOL_1, grammarAccess.getLineAccess().getEOLTerminalRuleCall_1());
+            		
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleLine"
+
+
+    // $ANTLR start "entryRuleLineBits"
+    // InternalCucumber.g:1610:1: entryRuleLineBits returns [String current=null] : iv_ruleLineBits= ruleLineBits EOF ;
+    public final String entryRuleLineBits() throws RecognitionException {
+        String current = null;
+
+        AntlrDatatypeRuleToken iv_ruleLineBits = null;
+
+
+        try {
+            // InternalCucumber.g:1610:48: (iv_ruleLineBits= ruleLineBits EOF )
+            // InternalCucumber.g:1611:2: iv_ruleLineBits= ruleLineBits EOF
+            {
+             newCompositeNode(grammarAccess.getLineBitsRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleLineBits=ruleLineBits();
+
+            state._fsp--;
+
+             current =iv_ruleLineBits.getText(); 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleLineBits"
+
+
+    // $ANTLR start "ruleLineBits"
+    // InternalCucumber.g:1617:1: ruleLineBits returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_TEXT_LITERAL_0= ruleTEXT_LITERAL )* ;
+    public final AntlrDatatypeRuleToken ruleLineBits() throws RecognitionException {
+        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+        AntlrDatatypeRuleToken this_TEXT_LITERAL_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalCucumber.g:1623:2: ( (this_TEXT_LITERAL_0= ruleTEXT_LITERAL )* )
+            // InternalCucumber.g:1624:2: (this_TEXT_LITERAL_0= ruleTEXT_LITERAL )*
+            {
+            // InternalCucumber.g:1624:2: (this_TEXT_LITERAL_0= ruleTEXT_LITERAL )*
+            loop32:
+            do {
+                int alt32=2;
+                int LA32_0 = input.LA(1);
+
+                if ( ((LA32_0>=RULE_ID && LA32_0<=RULE_STRING)) ) {
+                    alt32=1;
+                }
+
+
+                switch (alt32) {
+            	case 1 :
+            	    // InternalCucumber.g:1625:3: this_TEXT_LITERAL_0= ruleTEXT_LITERAL
+            	    {
+
+            	    			newCompositeNode(grammarAccess.getLineBitsAccess().getTEXT_LITERALParserRuleCall());
+            	    		
+            	    pushFollow(FOLLOW_20);
+            	    this_TEXT_LITERAL_0=ruleTEXT_LITERAL();
+
+            	    state._fsp--;
+
+
+            	    			current.merge(this_TEXT_LITERAL_0);
+            	    		
+
+            	    			afterParserOrEnumRuleCall();
+            	    		
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop32;
+                }
+            } while (true);
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleLineBits"
+
+
     // $ANTLR start "entryRuleTEXT_LITERAL"
-    // InternalCucumber.g:1568:1: entryRuleTEXT_LITERAL returns [String current=null] : iv_ruleTEXT_LITERAL= ruleTEXT_LITERAL EOF ;
+    // InternalCucumber.g:1639:1: entryRuleTEXT_LITERAL returns [String current=null] : iv_ruleTEXT_LITERAL= ruleTEXT_LITERAL EOF ;
     public final String entryRuleTEXT_LITERAL() throws RecognitionException {
         String current = null;
 
@@ -4140,8 +4355,8 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalCucumber.g:1568:52: (iv_ruleTEXT_LITERAL= ruleTEXT_LITERAL EOF )
-            // InternalCucumber.g:1569:2: iv_ruleTEXT_LITERAL= ruleTEXT_LITERAL EOF
+            // InternalCucumber.g:1639:52: (iv_ruleTEXT_LITERAL= ruleTEXT_LITERAL EOF )
+            // InternalCucumber.g:1640:2: iv_ruleTEXT_LITERAL= ruleTEXT_LITERAL EOF
             {
              newCompositeNode(grammarAccess.getTEXT_LITERALRule()); 
             pushFollow(FOLLOW_1);
@@ -4168,7 +4383,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTEXT_LITERAL"
-    // InternalCucumber.g:1575:1: ruleTEXT_LITERAL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_WORD_0= RULE_WORD | this_ID_1= RULE_ID | this_STRING_2= RULE_STRING ) ;
+    // InternalCucumber.g:1646:1: ruleTEXT_LITERAL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_WORD_0= RULE_WORD | this_ID_1= RULE_ID | this_STRING_2= RULE_STRING ) ;
     public final AntlrDatatypeRuleToken ruleTEXT_LITERAL() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4180,37 +4395,37 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCucumber.g:1581:2: ( (this_WORD_0= RULE_WORD | this_ID_1= RULE_ID | this_STRING_2= RULE_STRING ) )
-            // InternalCucumber.g:1582:2: (this_WORD_0= RULE_WORD | this_ID_1= RULE_ID | this_STRING_2= RULE_STRING )
+            // InternalCucumber.g:1652:2: ( (this_WORD_0= RULE_WORD | this_ID_1= RULE_ID | this_STRING_2= RULE_STRING ) )
+            // InternalCucumber.g:1653:2: (this_WORD_0= RULE_WORD | this_ID_1= RULE_ID | this_STRING_2= RULE_STRING )
             {
-            // InternalCucumber.g:1582:2: (this_WORD_0= RULE_WORD | this_ID_1= RULE_ID | this_STRING_2= RULE_STRING )
-            int alt32=3;
+            // InternalCucumber.g:1653:2: (this_WORD_0= RULE_WORD | this_ID_1= RULE_ID | this_STRING_2= RULE_STRING )
+            int alt33=3;
             switch ( input.LA(1) ) {
             case RULE_WORD:
                 {
-                alt32=1;
+                alt33=1;
                 }
                 break;
             case RULE_ID:
                 {
-                alt32=2;
+                alt33=2;
                 }
                 break;
             case RULE_STRING:
                 {
-                alt32=3;
+                alt33=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 32, 0, input);
+                    new NoViableAltException("", 33, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt32) {
+            switch (alt33) {
                 case 1 :
-                    // InternalCucumber.g:1583:3: this_WORD_0= RULE_WORD
+                    // InternalCucumber.g:1654:3: this_WORD_0= RULE_WORD
                     {
                     this_WORD_0=(Token)match(input,RULE_WORD,FOLLOW_2); 
 
@@ -4223,7 +4438,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalCucumber.g:1591:3: this_ID_1= RULE_ID
+                    // InternalCucumber.g:1662:3: this_ID_1= RULE_ID
                     {
                     this_ID_1=(Token)match(input,RULE_ID,FOLLOW_2); 
 
@@ -4236,7 +4451,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalCucumber.g:1599:3: this_STRING_2= RULE_STRING
+                    // InternalCucumber.g:1670:3: this_STRING_2= RULE_STRING
                     {
                     this_STRING_2=(Token)match(input,RULE_STRING,FOLLOW_2); 
 
@@ -4372,7 +4587,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000004000L});
     public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x00000000000080E0L});
     public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x00000000000080E2L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x00000000000100E0L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x00000000000100F0L});
     public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x00000000000180E2L});
     public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x00000000000000E2L});
     public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000000000020L});

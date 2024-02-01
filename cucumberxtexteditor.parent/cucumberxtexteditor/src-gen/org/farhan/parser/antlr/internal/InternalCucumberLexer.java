@@ -343,10 +343,10 @@ public class InternalCucumberLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:1609:9: ( ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '.' )+ )
-            // InternalCucumber.g:1609:11: ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '.' )+
+            // InternalCucumber.g:1680:9: ( ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '.' )+ )
+            // InternalCucumber.g:1680:11: ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '.' )+
             {
-            // InternalCucumber.g:1609:11: ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '.' )+
+            // InternalCucumber.g:1680:11: ( '0' .. '9' | 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '.' )+
             int cnt1=0;
             loop1:
             do {
@@ -400,8 +400,8 @@ public class InternalCucumberLexer extends Lexer {
         try {
             int _type = RULE_WORD;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:1611:11: (~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) ) (~ ( ( ' ' | '\\t' | '\\n' | '\\r' ) ) )* )
-            // InternalCucumber.g:1611:13: ~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) ) (~ ( ( ' ' | '\\t' | '\\n' | '\\r' ) ) )*
+            // InternalCucumber.g:1682:11: (~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) ) (~ ( ( ' ' | '\\t' | '\\n' | '\\r' ) ) )* )
+            // InternalCucumber.g:1682:13: ~ ( ( '@' | '|' | ' ' | '\\t' | '\\n' | '\\r' ) ) (~ ( ( ' ' | '\\t' | '\\n' | '\\r' ) ) )*
             {
             if ( (input.LA(1)>='\u0000' && input.LA(1)<='\b')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\u001F')||(input.LA(1)>='!' && input.LA(1)<='?')||(input.LA(1)>='A' && input.LA(1)<='{')||(input.LA(1)>='}' && input.LA(1)<='\uFFFF') ) {
                 input.consume();
@@ -412,7 +412,7 @@ public class InternalCucumberLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalCucumber.g:1611:45: (~ ( ( ' ' | '\\t' | '\\n' | '\\r' ) ) )*
+            // InternalCucumber.g:1682:45: (~ ( ( ' ' | '\\t' | '\\n' | '\\r' ) ) )*
             loop2:
             do {
                 int alt2=2;
@@ -425,7 +425,7 @@ public class InternalCucumberLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalCucumber.g:1611:45: ~ ( ( ' ' | '\\t' | '\\n' | '\\r' ) )
+            	    // InternalCucumber.g:1682:45: ~ ( ( ' ' | '\\t' | '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\b')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\u001F')||(input.LA(1)>='!' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -461,10 +461,10 @@ public class InternalCucumberLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:1613:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' | '\\r' | '\\n' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' | '\\r' | '\\n' ) ) )* '\\'' ) )
-            // InternalCucumber.g:1613:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' | '\\r' | '\\n' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' | '\\r' | '\\n' ) ) )* '\\'' )
+            // InternalCucumber.g:1684:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' | '\\r' | '\\n' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' | '\\r' | '\\n' ) ) )* '\\'' ) )
+            // InternalCucumber.g:1684:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' | '\\r' | '\\n' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' | '\\r' | '\\n' ) ) )* '\\'' )
             {
-            // InternalCucumber.g:1613:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' | '\\r' | '\\n' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' | '\\r' | '\\n' ) ) )* '\\'' )
+            // InternalCucumber.g:1684:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' | '\\r' | '\\n' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' | '\\r' | '\\n' ) ) )* '\\'' )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -482,10 +482,10 @@ public class InternalCucumberLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // InternalCucumber.g:1613:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' | '\\r' | '\\n' ) ) )* '\"'
+                    // InternalCucumber.g:1684:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' | '\\r' | '\\n' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalCucumber.g:1613:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' | '\\r' | '\\n' ) ) )*
+                    // InternalCucumber.g:1684:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' | '\\r' | '\\n' ) ) )*
                     loop3:
                     do {
                         int alt3=3;
@@ -501,7 +501,7 @@ public class InternalCucumberLexer extends Lexer {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // InternalCucumber.g:1613:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // InternalCucumber.g:1684:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -517,7 +517,7 @@ public class InternalCucumberLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalCucumber.g:1613:66: ~ ( ( '\\\\' | '\"' | '\\r' | '\\n' ) )
+                    	    // InternalCucumber.g:1684:66: ~ ( ( '\\\\' | '\"' | '\\r' | '\\n' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -542,10 +542,10 @@ public class InternalCucumberLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalCucumber.g:1613:96: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' | '\\r' | '\\n' ) ) )* '\\''
+                    // InternalCucumber.g:1684:96: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' | '\\r' | '\\n' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalCucumber.g:1613:101: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' | '\\r' | '\\n' ) ) )*
+                    // InternalCucumber.g:1684:101: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' | '\\r' | '\\n' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -561,7 +561,7 @@ public class InternalCucumberLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalCucumber.g:1613:102: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // InternalCucumber.g:1684:102: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -577,7 +577,7 @@ public class InternalCucumberLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalCucumber.g:1613:147: ~ ( ( '\\\\' | '\\'' | '\\r' | '\\n' ) )
+                    	    // InternalCucumber.g:1684:147: ~ ( ( '\\\\' | '\\'' | '\\r' | '\\n' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -620,10 +620,10 @@ public class InternalCucumberLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:1615:9: ( ( ' ' | '\\t' | '\\r' )+ )
-            // InternalCucumber.g:1615:11: ( ' ' | '\\t' | '\\r' )+
+            // InternalCucumber.g:1686:9: ( ( ' ' | '\\t' | '\\r' )+ )
+            // InternalCucumber.g:1686:11: ( ' ' | '\\t' | '\\r' )+
             {
-            // InternalCucumber.g:1615:11: ( ' ' | '\\t' | '\\r' )+
+            // InternalCucumber.g:1686:11: ( ' ' | '\\t' | '\\r' )+
             int cnt6=0;
             loop6:
             do {
@@ -677,11 +677,11 @@ public class InternalCucumberLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:1617:17: ( '#' (~ ( '\\n' ) )* RULE_EOL )
-            // InternalCucumber.g:1617:19: '#' (~ ( '\\n' ) )* RULE_EOL
+            // InternalCucumber.g:1688:17: ( '#' (~ ( '\\n' ) )* RULE_EOL )
+            // InternalCucumber.g:1688:19: '#' (~ ( '\\n' ) )* RULE_EOL
             {
             match('#'); 
-            // InternalCucumber.g:1617:23: (~ ( '\\n' ) )*
+            // InternalCucumber.g:1688:23: (~ ( '\\n' ) )*
             loop7:
             do {
                 int alt7=2;
@@ -694,7 +694,7 @@ public class InternalCucumberLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalCucumber.g:1617:23: ~ ( '\\n' )
+            	    // InternalCucumber.g:1688:23: ~ ( '\\n' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -731,10 +731,10 @@ public class InternalCucumberLexer extends Lexer {
         try {
             int _type = RULE_EOL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalCucumber.g:1619:10: ( ( '\\n' )+ )
-            // InternalCucumber.g:1619:12: ( '\\n' )+
+            // InternalCucumber.g:1690:10: ( ( '\\n' )+ )
+            // InternalCucumber.g:1690:12: ( '\\n' )+
             {
-            // InternalCucumber.g:1619:12: ( '\\n' )+
+            // InternalCucumber.g:1690:12: ( '\\n' )+
             int cnt8=0;
             loop8:
             do {
@@ -748,7 +748,7 @@ public class InternalCucumberLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalCucumber.g:1619:12: '\\n'
+            	    // InternalCucumber.g:1690:12: '\\n'
             	    {
             	    match('\n'); 
 

@@ -11,22 +11,22 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.farhan.cucumber.CucumberPackage;
-import org.farhan.cucumber.Tag;
+import org.farhan.cucumber.Line;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Tag</b></em>'.
+ * An implementation of the model object '<em><b>Line</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.cucumber.impl.TagImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.cucumber.impl.LineImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class TagImpl extends MinimalEObjectImpl.Container implements Tag
+public class LineImpl extends MinimalEObjectImpl.Container implements Line
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -53,7 +53,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag
    * <!-- end-user-doc -->
    * @generated
    */
-  protected TagImpl()
+  protected LineImpl()
   {
     super();
   }
@@ -66,7 +66,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag
   @Override
   protected EClass eStaticClass()
   {
-    return CucumberPackage.Literals.TAG;
+    return CucumberPackage.Literals.LINE;
   }
 
   /**
@@ -91,7 +91,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.TAG__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, CucumberPackage.LINE__NAME, oldName, name));
   }
 
   /**
@@ -104,7 +104,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag
   {
     switch (featureID)
     {
-      case CucumberPackage.TAG__NAME:
+      case CucumberPackage.LINE__NAME:
         return getName();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -120,7 +120,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag
   {
     switch (featureID)
     {
-      case CucumberPackage.TAG__NAME:
+      case CucumberPackage.LINE__NAME:
         setName((String)newValue);
         return;
     }
@@ -137,7 +137,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag
   {
     switch (featureID)
     {
-      case CucumberPackage.TAG__NAME:
+      case CucumberPackage.LINE__NAME:
         setName(NAME_EDEFAULT);
         return;
     }
@@ -154,7 +154,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag
   {
     switch (featureID)
     {
-      case CucumberPackage.TAG__NAME:
+      case CucumberPackage.LINE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
@@ -177,4 +177,4 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag
     return result.toString();
   }
 
-} //TagImpl
+} //LineImpl
