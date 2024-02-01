@@ -12,6 +12,7 @@ import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.Background;
 import org.farhan.cucumber.Examples;
+import org.farhan.cucumber.Line;
 import org.farhan.cucumber.Row;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.ScenarioOutline;
@@ -159,7 +160,7 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	private void convertDocStringToArgument(Step s, Message theMessage) {
 		if (s.getTheDocString() != null) {
 			ValueSpecification vs = ArgumentFactory.getArgument(theMessage, "docString", "", true);
-			EList<Statement> lines = s.getTheDocString().getStatements();
+			EList<Line> lines = s.getTheDocString().getLines();
 
 			for (int i = 0; i < lines.size(); i++) {
 				AnnotationFactory.getAnnotation(vs, "docString", String.valueOf(i), lines.get(i).getName());
