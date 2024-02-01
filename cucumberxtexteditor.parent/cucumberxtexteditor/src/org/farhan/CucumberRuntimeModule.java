@@ -4,7 +4,7 @@
 package org.farhan;
 
 import org.eclipse.xtext.parser.IParser;
-import org.farhan.parser.MyCucumberParser;
+import org.farhan.parser.antlr.internal.MyCucumberParser;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
