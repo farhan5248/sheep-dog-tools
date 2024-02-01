@@ -12,7 +12,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class MyCucumberLexer extends InternalCucumberLexer {
 
-	private static boolean isDocString = false;
+	private boolean isDocString = false;
 
 	public MyCucumberLexer() {
 	}
@@ -32,7 +32,7 @@ public class MyCucumberLexer extends InternalCucumberLexer {
 		if (tokenText == null) {
 			return t;
 		}
-		System.out.println("Handling Token >>>" + tokenText + "<<< " + t.getType());
+		//System.out.println("Handling Token >>>" + tokenText + "<<< " + t.getType());
 		if (!isDocString && tokenText.contentEquals("\"\"\"")) {
 			isDocString = true;
 		} else if (isDocString && tokenText.contentEquals("\"\"\"")) {
@@ -40,7 +40,7 @@ public class MyCucumberLexer extends InternalCucumberLexer {
 		} else if (isDocString && !tokenText.contentEquals("\"\"\"")) {
 			// TODO if the type is any of the keywords, change it to STRING
 			if (isKeyword(t.getType())) {
-				System.out.println("Changing Type >>>" + tokenText + "<<<");
+				//System.out.println("Changing Type >>>" + tokenText + "<<<");
 				t.setType(RULE_STRING);
 			}
 		}
@@ -86,6 +86,9 @@ public class MyCucumberLexer extends InternalCucumberLexer {
 			return true;
 		} else if (type == T__22) {
 			// *
+			return true;
+		} else if (type == T__23) {
+			// @
 			return true;
 		} else {
 			return false;

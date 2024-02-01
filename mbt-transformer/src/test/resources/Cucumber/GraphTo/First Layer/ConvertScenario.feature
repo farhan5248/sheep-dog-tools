@@ -80,13 +80,13 @@ Feature: Convert Scenario
     When The mbt-transformer plugin, graph-to-uml goal is executed
     Then The mbt-transformer plugin, target/uml/pst.uml file will be present
 
-  Scenario: Scenario title
+  Scenario: Test scenario title
     And The target/uml/pst.uml file, Class Interactions section will be as follows
       | Class Name     | Interaction Name |
       | specs::Process | Scenario 0       |
       | specs::Process | Scenario 1       |
 
-  Scenario: Scenario step
+  Scenario: Test scenario step
     And The target/uml/pst.uml file, Class Element Imports section will be as follows
       | Class Name     | Alias               | Imported Element                           |
       | specs::Process | SearchHomePageSteps | pst::stepdefs::search::SearchHomePageSteps |

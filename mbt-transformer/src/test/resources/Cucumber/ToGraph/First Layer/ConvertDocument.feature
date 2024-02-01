@@ -5,7 +5,7 @@ Feature: Convert Document
       """
       = Process
       
-      == Scenario One
+      == Story One
       
       === Step 1
 
@@ -26,7 +26,7 @@ Feature: Convert Document
       """
       = Feature Name
       
-      == Scenario name
+      == Story name
       
       === Step 1
       
@@ -51,11 +51,11 @@ Feature: Convert Document
       """
       = Feature Name
       
-      == Scenario 1
+      == Story 1
       
       === Step 1
       
-      == Scenario 2
+      == Story 2
       
       === Step 1
 
@@ -76,7 +76,7 @@ Feature: Convert Document
       """
       = Feature Name
       
-      == Scenario One
+      == Story One
       
       === Set Object as follows
       
@@ -107,7 +107,7 @@ Feature: Convert Document
       """
       = Feature Name
       
-      == Scenario One
+      == Story One
       
       === Set Object as follows
       
@@ -130,7 +130,7 @@ Feature: Convert Document
       """
       = Feature Name
       
-      == Scenario One
+      == Story One
       
       === Set Object as follows
       

@@ -30,7 +30,7 @@ Feature: Convert Scenario Outline
       | specs::dept::process::Submit | Examples 1      |
       | specs::dept::process::Submit | Examples 2      |
 
-  Scenario: Scenario Outline tags
+  Scenario: Test scenario Outline tags
   # Need to test Scenario Outline Example tags
     And The target/uml/pst.uml file, Interaction Parameters section will be as follows
       | Interaction Name             | Parameter Name |

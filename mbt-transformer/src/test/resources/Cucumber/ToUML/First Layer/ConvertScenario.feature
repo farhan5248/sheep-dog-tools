@@ -17,22 +17,22 @@ Feature: Convert Scenario
       | tag1 |
     Then The mbt-transformer plugin, target/uml/pst.uml file will be present
 
-  Scenario: Scenario title
+  Scenario: Test scenario title
     And The target/uml/pst.uml file, Class Interactions section will be as follows
       | Class Name           | Interaction Name |
       | specs::dept::process | Submit           |
 
-  Scenario: Scenario tags
+  Scenario: Test scenario tags
     And The target/uml/pst.uml file, Interaction Parameters section will be as follows
       | Interaction Name             | Parameter Name |
       | specs::dept::process::Submit | tag1           |
 
-  Scenario: Scenario description
+  Scenario: Test scenario description
     And The target/uml/pst.uml file, Interaction Comments section will be as follows
       | Interaction Name             | Comment         |
       | specs::dept::process::Submit | Basic EDI claim |
 
-  Scenario: Scenario step
+  Scenario: Test scenario step
     And The target/uml/pst.uml file, Class Element Imports section will be as follows
       | Class Name           | Alias               | Imported Element                         |
       | specs::dept::process | blahObjectPageSteps | pst::stepdefs::blah::BlahObjectPageSteps |
