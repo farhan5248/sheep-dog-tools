@@ -4,15 +4,15 @@ package org.farhan.mbt.cucumber;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.farhan.mbt.core.ConvertibleFile;
+import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Project;
 import org.farhan.mbt.core.Utilities;
 
 public class CucumberProject extends Project {
 
-	private static ArrayList<ConvertibleFile> firstLayerFiles;
-	private static ArrayList<ConvertibleFile> secondLayerFiles;
-	private static ArrayList<ConvertibleFile> thirdLayerFiles;
+	private static ArrayList<ConvertibleObject> firstLayerFiles;
+	private static ArrayList<ConvertibleObject> secondLayerFiles;
+	private static ArrayList<ConvertibleObject> thirdLayerFiles;
 
 	public static String getLayerFileType(String layer) {
 		if (layer.contentEquals(firstLayerPackageName)) {
@@ -35,9 +35,9 @@ public class CucumberProject extends Project {
 		return aFile;
 	}
 
-	public static ArrayList<ConvertibleFile> getLayerFiles(String layer) {
+	public static ArrayList<ConvertibleObject> getLayerFiles(String layer) {
 
-		ArrayList<ConvertibleFile> layerFiles = null;
+		ArrayList<ConvertibleObject> layerFiles = null;
 		if (layer.contentEquals(firstLayerPackageName)) {
 			layerFiles = firstLayerFiles;
 		} else if (layer.contentEquals(secondLayerPackageName)) {
@@ -53,7 +53,7 @@ public class CucumberProject extends Project {
 		return layerFiles;
 	}
 
-	public static void readFiles(String layer, ArrayList<ConvertibleFile> layerFiles) {
+	public static void readFiles(String layer, ArrayList<ConvertibleObject> layerFiles) {
 		ArrayList<File> files = Utilities.recursivelyListFiles(getLayerDir(layer), getLayerFileType(layer));
 		for (File f : files) {
 			try {
@@ -71,27 +71,27 @@ public class CucumberProject extends Project {
 	}
 
 	public static void init() {
-		firstLayerFiles = new ArrayList<ConvertibleFile>();
-		secondLayerFiles = new ArrayList<ConvertibleFile>();
-		thirdLayerFiles = new ArrayList<ConvertibleFile>();
+		firstLayerFiles = new ArrayList<ConvertibleObject>();
+		secondLayerFiles = new ArrayList<ConvertibleObject>();
+		thirdLayerFiles = new ArrayList<ConvertibleObject>();
 	}
 
 	public static void writeFiles() {
-		for (ConvertibleFile cf : firstLayerFiles) {
+		for (ConvertibleObject cf : firstLayerFiles) {
 			try {
 				cf.write();
 			} catch (Exception e) {
 				System.out.println(Utilities.getStackTraceAsString(e));
 			}
 		}
-		for (ConvertibleFile cf : secondLayerFiles) {
+		for (ConvertibleObject cf : secondLayerFiles) {
 			try {
 				cf.write();
 			} catch (Exception e) {
 				System.out.println(Utilities.getStackTraceAsString(e));
 			}
 		}
-		for (ConvertibleFile cf : thirdLayerFiles) {
+		for (ConvertibleObject cf : thirdLayerFiles) {
 			try {
 				cf.write();
 			} catch (Exception e) {

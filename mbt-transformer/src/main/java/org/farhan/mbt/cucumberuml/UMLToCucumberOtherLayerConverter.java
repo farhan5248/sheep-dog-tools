@@ -32,10 +32,20 @@ import com.github.javaparser.ast.stmt.BlockStmt;
 public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 
 	private CucumberJavaFile aJavaFile;
+	private String layer;
+
+	public UMLToCucumberOtherLayerConverter(String layer) {
+		this.layer = layer;
+	}
 
 	@Override
-	protected ArrayList<Class> selectLayerClasses(String layerSelectionCriteria) throws Exception {
-		return PackageFactory.getPackagedClasses(UMLProject.theSystem.getNestedPackage(layerSelectionCriteria));
+	protected String getLayer() {
+		return layer;
+	}
+
+	@Override
+	protected ArrayList<Class> selectLayerFiles() throws Exception {
+		return PackageFactory.getPackagedClasses(UMLProject.theSystem.getNestedPackage(getLayer()));
 	}
 
 	@Override
@@ -44,7 +54,7 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 	}
 
 	@Override
-	protected void convertFromClass(Class layerClass) throws Exception {
+	protected void convertObject(Class layerClass) throws Exception {
 		String path = CucumberNameConverter.convertQualifiedNameToJavaPath(layerClass.getQualifiedName());
 		aJavaFile = CucumberProject.createCucumberJavaFile(new File(path));
 		aJavaFile.javaClass = new CompilationUnit();

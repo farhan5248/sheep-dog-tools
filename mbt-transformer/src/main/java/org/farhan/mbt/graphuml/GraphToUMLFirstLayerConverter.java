@@ -15,7 +15,7 @@ import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.cucumber.Row;
 import org.farhan.cucumber.Statement;
 import org.farhan.cucumber.Step;
-import org.farhan.mbt.core.ConvertibleFile;
+import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Project;
 import org.farhan.mbt.core.ToUMLFirstLayerConverter;
 import org.farhan.mbt.core.Utilities;
@@ -39,22 +39,30 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 
 	private GraphTextFile aGraphTextFile;
 
-	// TODO delete after integrating with UML
-	public ArrayList<MBTPath> paths;
+	private String layer;
+
+	public GraphToUMLFirstLayerConverter(String layer) {
+		this.layer = layer;
+	}
 
 	@Override
-	protected void selectLayerFiles(String layer) throws Exception {
+	protected String getLayer() {
+		return layer;
+	}
+
+	@Override
+	protected void selectLayerFiles() throws Exception {
 		GraphProject.readFiles();
 	}
 
 	@Override
-	protected ArrayList<ConvertibleFile> getLayerFiles(String layer) {
+	protected ArrayList<ConvertibleObject> getLayerFiles(String layer) {
 		// TODO make a GraphDotFile
 		return GraphProject.getFirstLayerFiles();
 	}
 
 	@Override
-	protected Class convertToClass(ConvertibleFile theObject) throws Exception {
+	protected Class convertObject(ConvertibleObject theObject) throws Exception {
 
 		aGraphTextFile = (GraphTextFile) theObject;
 		String qualifiedName = convertAbsolutePathToQualifiedName(aGraphTextFile.getFile().getAbsolutePath());
@@ -69,7 +77,7 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	@Override
 	protected void convertToBehaviours(Class layerClass) throws Exception {
 
-		paths = getAllPaths(aGraphTextFile.theGraph, aGraphTextFile.theGraph.getStartVertex());
+		ArrayList<MBTPath> paths = getAllPaths(aGraphTextFile.theGraph, aGraphTextFile.theGraph.getStartVertex());
 		for (int i = 0; i < paths.size(); i++) {
 			resetCurrentContainerObject();
 			// TODO figure out names for this later, use a counter for now
@@ -258,4 +266,5 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 		return new ArrayList<MBTPath>();
 
 	}
+
 }

@@ -2,12 +2,12 @@ package org.farhan.mbt.cucumber;
 
 import java.io.File;
 
-import org.farhan.mbt.core.ConvertibleFile;
+import org.farhan.mbt.core.ConvertibleObject;
 
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.utils.SourceRoot;
 
-public class CucumberJavaFile implements ConvertibleFile {
+public class CucumberJavaFile implements ConvertibleObject {
 
 	private File theFile;
 	// TODO make this private later

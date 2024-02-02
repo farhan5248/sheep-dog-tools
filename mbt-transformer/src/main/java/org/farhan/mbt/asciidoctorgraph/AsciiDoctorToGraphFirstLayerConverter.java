@@ -1,20 +1,14 @@
 package org.farhan.mbt.asciidoctorgraph;
 
-import java.io.File;
 import java.util.ArrayList;
-import org.asciidoctor.Asciidoctor;
-import org.asciidoctor.Options;
-import org.asciidoctor.Asciidoctor.Factory;
 import org.asciidoctor.ast.Cell;
-import org.asciidoctor.ast.Document;
 import org.asciidoctor.ast.Row;
 import org.asciidoctor.ast.Section;
 import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocFile;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
-import org.farhan.mbt.core.ConvertibleFile;
-import org.farhan.mbt.core.Project;
+import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToGraphFirstLayerConverter;
 import org.farhan.mbt.graph.GraphProject;
 import org.farhan.mbt.graph.GraphTextFile;
@@ -25,6 +19,16 @@ import org.farhan.mbt.graph.MBTVertex;
 public class AsciiDoctorToGraphFirstLayerConverter extends ToGraphFirstLayerConverter {
 
 	private AsciiDoctorAdocFile anAsciiDoctorFile;
+	private String layer;
+
+	public AsciiDoctorToGraphFirstLayerConverter(String layer) {
+		this.layer = layer;
+	}
+
+	@Override
+	protected String getLayer() {
+		return layer;
+	}
 
 	public static MBTGraph<MBTVertex, MBTEdge> createEmptyGraph(String name) {
 		MBTGraph<MBTVertex, MBTEdge> g = new MBTGraph<>(MBTEdge.class);
@@ -42,7 +46,6 @@ public class AsciiDoctorToGraphFirstLayerConverter extends ToGraphFirstLayerConv
 				steps.add((Section) block);
 			}
 		}
-
 		g.createEdgeWithVertices(g.getStartVertex().getLabel(), steps.getFirst().getTitle(), "", null);
 		for (int i = 0; i < steps.size() - 1; i++) {
 			String source = steps.get(i).getTitle();
@@ -89,16 +92,15 @@ public class AsciiDoctorToGraphFirstLayerConverter extends ToGraphFirstLayerConv
 				inputs.setValue(g);
 			}
 		}
-
 	}
 
 	@Override
-	protected void selectLayerFiles(String layer) throws Exception {
+	protected void selectLayerFiles() throws Exception {
 		// TODO this should be filterLayerFiles since it's removing files
 	}
 
 	@Override
-	protected void transformLayerFile(ConvertibleFile layerFile) throws Exception {
+	protected void convertObject(ConvertibleObject layerFile) throws Exception {
 		anAsciiDoctorFile = (AsciiDoctorAdocFile) layerFile;
 		MBTGraph<MBTVertex, MBTEdge> g = createEmptyGraph(anAsciiDoctorFile.theDoc.getDoctitle());
 		for (StructuralNode block : anAsciiDoctorFile.theDoc.getBlocks()) {
@@ -110,7 +112,8 @@ public class AsciiDoctorToGraphFirstLayerConverter extends ToGraphFirstLayerConv
 	}
 
 	@Override
-	protected ArrayList<ConvertibleFile> getLayerFiles(String layer) {
+	protected ArrayList<ConvertibleObject> getLayerFiles(String layer) {
 		return AsciiDoctorProject.getLayerFiles(layer);
 	}
+
 }

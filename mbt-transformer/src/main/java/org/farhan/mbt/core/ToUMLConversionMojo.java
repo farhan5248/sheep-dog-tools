@@ -7,9 +7,7 @@ public abstract class ToUMLConversionMojo {
 	protected ToUMLFirstLayerConverter firstLayerConverter;
 	protected ToUMLOtherLayerConverter otherLayerConverter;
 
-	protected abstract ToUMLOtherLayerConverter getOtherLayerConverter();
-
-	protected abstract ToUMLFirstLayerConverter getFirstLayerConverter();
+	protected abstract ArrayList<ToUMLLayerConverter> getLayerConverters();
 
 	protected abstract void writeFiles() throws Exception;
 
@@ -17,17 +15,11 @@ public abstract class ToUMLConversionMojo {
 
 	public void mojoGoal() throws Exception {
 
-		// TODO remove linkers, to mimic forward engineering code of 3 layer transforms
 		initProjects();
-		firstLayerConverter = getFirstLayerConverter();
-		otherLayerConverter = getOtherLayerConverter();
-		// TODO this should be the tag
-		firstLayerConverter.selectLayerFiles(Project.firstLayerPackageName);
-		firstLayerConverter.transformLayerFiles(Project.firstLayerPackageName);
-		otherLayerConverter.selectLayerFiles(Project.secondLayerPackageName);
-		otherLayerConverter.transformLayerFiles(Project.secondLayerPackageName);
-		otherLayerConverter.selectLayerFiles(Project.thirdLayerPackageName);
-		otherLayerConverter.transformLayerFiles(Project.thirdLayerPackageName);
+		for (ToUMLLayerConverter c : getLayerConverters()) {
+			c.selectLayerFiles();
+			c.convertObjects();
+		}
 		writeFiles();
 	}
 }

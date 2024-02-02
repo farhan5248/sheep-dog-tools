@@ -2,10 +2,10 @@ package org.farhan.mbt.graph;
 
 import java.io.File;
 
-import org.farhan.mbt.core.ConvertibleFile;
+import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Utilities;
 
-public class GraphTextFile implements ConvertibleFile {
+public class GraphTextFile implements ConvertibleObject {
 
 	private File theFile;
 	public MBTGraph<MBTVertex, MBTEdge> theGraph;

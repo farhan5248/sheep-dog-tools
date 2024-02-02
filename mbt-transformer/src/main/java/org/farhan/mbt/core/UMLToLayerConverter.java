@@ -7,20 +7,22 @@ import org.eclipse.uml2.uml.Message;
 
 public abstract class UMLToLayerConverter {
 
-	protected abstract ArrayList<?> selectLayerClasses(String layer) throws Exception;
+	protected abstract ArrayList<?> selectLayerFiles() throws Exception;
+
+	protected abstract String getLayer();
 
 	protected abstract ArrayList<Class> getLayerClasses(String layer);
 
-	protected void transformLayerClasses(String layer) throws Exception {
-		for (Class layerClass : getLayerClasses(layer)) {
-			convertFromClass(layerClass);
+	protected void convertObjects() throws Exception {
+		for (Class layerClass : getLayerClasses(getLayer())) {
+			convertObject(layerClass);
 			convertFromImports(layerClass);
 			convertFromAttributes(layerClass);
 			convertFromBehaviours(layerClass);
 		}
 	}
 
-	protected abstract void convertFromClass(Class layerClass) throws Exception;
+	protected abstract void convertObject(Class layerClass) throws Exception;
 
 	protected abstract void convertFromImports(Class layerClass) throws Exception;
 

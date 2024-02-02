@@ -31,10 +31,20 @@ import org.farhan.mbt.uml.UMLProject;
 public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
 
 	private CucumberFeatureFile aFeatureFile;
+	private String layer;
+
+	public UMLToCucumberFirstLayerConverter(String layer) {
+		this.layer = layer;
+	}
 
 	@Override
-	protected ArrayList<?> selectLayerClasses(String layerSelectionCriteria) throws Exception {
-		return PackageFactory.getPackagedClasses(UMLProject.theSystem.getNestedPackage(layerSelectionCriteria));
+	protected String getLayer() {
+		return layer;
+	}
+
+	@Override
+	protected ArrayList<?> selectLayerFiles() throws Exception {
+		return PackageFactory.getPackagedClasses(UMLProject.theSystem.getNestedPackage(getLayer()));
 	}
 
 	@Override
@@ -43,7 +53,7 @@ public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
 	}
 
 	@Override
-	protected void convertFromClass(Class layerClass) throws Exception {
+	protected void convertObject(Class layerClass) throws Exception {
 		String path = convertClassQualifiedNameToPath(layerClass.getQualifiedName());
 		aFeatureFile = CucumberProject.createCucumberFeatureFile(new File(path));
 		convertComments(layerClass, aFeatureFile.theFeature);

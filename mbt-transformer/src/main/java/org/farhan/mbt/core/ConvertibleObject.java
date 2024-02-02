@@ -2,7 +2,7 @@ package org.farhan.mbt.core;
 
 import java.io.File;
 
-public interface ConvertibleFile {
+public interface ConvertibleObject {
 
 	public void setFile(File theFile);
 

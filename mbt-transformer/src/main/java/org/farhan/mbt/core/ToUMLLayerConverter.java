@@ -14,19 +14,21 @@ import org.farhan.mbt.uml.UMLProject;
 
 public abstract class ToUMLLayerConverter {
 
-	protected abstract void selectLayerFiles(String layer) throws Exception;
+	protected abstract void selectLayerFiles() throws Exception;
 
-	protected abstract ArrayList<ConvertibleFile> getLayerFiles(String layer);
+	protected abstract String getLayer();
 
-	protected void transformLayerFiles(String layer) throws Exception {
-		for (ConvertibleFile layerFile : getLayerFiles(layer)) {
-			Class layerClass = convertToClass(layerFile);
+	protected abstract ArrayList<ConvertibleObject> getLayerFiles(String layer);
+
+	protected void convertObjects() throws Exception {
+		for (ConvertibleObject layerFile : getLayerFiles(getLayer())) {
+			Class layerClass = convertObject(layerFile);
 			convertToImports(layerClass);
 			convertToBehaviours(layerClass);
 		}
 	}
 
-	protected abstract Class convertToClass(ConvertibleFile layerFile) throws Exception;
+	protected abstract Class convertObject(ConvertibleObject layerFile) throws Exception;
 
 	protected abstract void convertToImports(Class layerClass) throws Exception;
 

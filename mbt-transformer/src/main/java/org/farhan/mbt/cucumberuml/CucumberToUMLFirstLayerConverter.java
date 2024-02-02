@@ -19,7 +19,7 @@ import org.farhan.cucumber.ScenarioOutline;
 import org.farhan.cucumber.Statement;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.Tag;
-import org.farhan.mbt.core.ConvertibleFile;
+import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Project;
 import org.farhan.mbt.core.ToUMLFirstLayerConverter;
 import org.farhan.mbt.core.Utilities;
@@ -40,19 +40,28 @@ import org.farhan.mbt.uml.UMLProject;
 public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 
 	private CucumberFeatureFile aCucumberFile;
-
-	@Override
-	protected void transformLayerFiles(String layer) throws Exception {
-		super.transformLayerFiles(layer);
-		if (Project.firstLayerPackageName.contentEquals(layer)) {
-			linkLayerFiles(layer);
-		}
+	private String layer;
+	
+	public CucumberToUMLFirstLayerConverter(String layer) {
+		this.layer = layer;
 	}
 
 	@Override
-	protected void selectLayerFiles(String layer) throws Exception {
+	protected String getLayer() {
+		return layer;
+	}
+	
+	
+	@Override
+	protected void convertObjects() throws Exception {
+		super.convertObjects();
+		linkLayerFiles(getLayer());
+	}
 
-		ArrayList<ConvertibleFile> layerFiles = CucumberProject.getLayerFiles(CucumberProject.firstLayerPackageName);
+	@Override
+	protected void selectLayerFiles() throws Exception {
+
+		ArrayList<ConvertibleObject> layerFiles = CucumberProject.getLayerFiles(getLayer());
 		for (int i = layerFiles.size() - 1; i >= 0; i--) {
 			if (!isFileSelected(layerFiles.get(i), Project.tags)) {
 				// TODO replace this with a logger
@@ -63,12 +72,12 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	}
 
 	@Override
-	protected ArrayList<ConvertibleFile> getLayerFiles(String layer) {
+	protected ArrayList<ConvertibleObject> getLayerFiles(String layer) {
 		return CucumberProject.getLayerFiles(layer);
 	}
 
 	@Override
-	protected Class convertToClass(ConvertibleFile theObject) throws Exception {
+	protected Class convertObject(ConvertibleObject theObject) throws Exception {
 
 		// TODO source and target files should be stored in this class, there's no need
 		// to pass them around.
@@ -213,7 +222,7 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 		return secondLayerClassName;
 	}
 
-	private boolean isFileSelected(ConvertibleFile convertibleFile, String layerSelectionCriteria) throws Exception {
+	private boolean isFileSelected(ConvertibleObject convertibleFile, String layerSelectionCriteria) throws Exception {
 
 		aCucumberFile = (CucumberFeatureFile) convertibleFile;
 		if (isTagged(aCucumberFile.theFeature.getTags(), layerSelectionCriteria)) {

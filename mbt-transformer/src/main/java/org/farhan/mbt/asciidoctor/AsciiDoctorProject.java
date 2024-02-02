@@ -4,19 +4,19 @@ package org.farhan.mbt.asciidoctor;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.farhan.mbt.core.ConvertibleFile;
+import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Project;
 import org.farhan.mbt.core.Utilities;
 
 public class AsciiDoctorProject extends Project {
 
-	private static ArrayList<ConvertibleFile> firstLayerFiles;
+	private static ArrayList<ConvertibleObject> firstLayerFiles;
 
 	public static File getFirstLayerDir() {
 		return new File(baseDir + "src/test/resources/AsciiDoc/");
 	}
 
-	public static ArrayList<ConvertibleFile> getLayerFiles(String layer) {
+	public static ArrayList<ConvertibleObject> getLayerFiles(String layer) {
 		if (firstLayerFiles.isEmpty()) {
 			readFiles();
 		}
@@ -28,7 +28,7 @@ public class AsciiDoctorProject extends Project {
 	}
 
 	public static void init() {
-		firstLayerFiles = new ArrayList<ConvertibleFile>();
+		firstLayerFiles = new ArrayList<ConvertibleObject>();
 	}
 
 	public static void readFiles() {
@@ -41,7 +41,7 @@ public class AsciiDoctorProject extends Project {
 	}
 
 	public static void writeFiles() {
-		for (ConvertibleFile cf : firstLayerFiles) {
+		for (ConvertibleObject cf : firstLayerFiles) {
 			try {
 				cf.write();
 			} catch (Exception e) {

@@ -4,15 +4,17 @@ import java.util.ArrayList;
 
 public abstract class ToGraphLayerConverter {
 
-	protected abstract void selectLayerFiles(String layerSelectionCriteria) throws Exception;
+	protected abstract String getLayer();
 
-	protected abstract ArrayList<ConvertibleFile> getLayerFiles(String layer);
+	protected abstract void selectLayerFiles() throws Exception;
 
-	protected void transformLayerFiles(String layer) throws Exception {
-		for (ConvertibleFile layerFile : getLayerFiles(layer)) {
-			transformLayerFile(layerFile);
+	protected abstract ArrayList<ConvertibleObject> getLayerFiles(String layer);
+
+	protected void convertObjects() throws Exception {
+		for (ConvertibleObject layerFile : getLayerFiles(getLayer())) {
+			convertObject(layerFile);
 		}
 	}
 
-	protected abstract void transformLayerFile(ConvertibleFile layerFile) throws Exception;
+	protected abstract void convertObject(ConvertibleObject layerFile) throws Exception;
 }

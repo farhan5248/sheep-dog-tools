@@ -9,7 +9,7 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.ElementImport;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
-import org.farhan.mbt.core.ConvertibleFile;
+import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Project;
 import org.farhan.mbt.core.ToUMLOtherLayerConverter;
 import org.farhan.mbt.cucumber.CucumberJavaFile;
@@ -40,20 +40,30 @@ import com.github.javaparser.ast.stmt.Statement;
 public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 
 	private CucumberJavaFile aCucumberJavaFile;
+	private String layer;
+
+	public CucumberToUMLOtherLayerConverter(String layer) {
+		this.layer = layer;
+	}
 
 	@Override
-	protected void transformLayerFiles(String layer) throws Exception {
-		super.transformLayerFiles(layer);
-		if (Project.secondLayerPackageName.contentEquals(layer)) {
-			linkLayerFiles(layer);
+	protected String getLayer() {
+		return layer;
+	}
+
+	@Override
+	protected void convertObjects() throws Exception {
+		super.convertObjects();
+		if (Project.secondLayerPackageName.contentEquals(getLayer())) {
+			linkLayerFiles(getLayer());
 		}
 	}
 
 	@Override
-	final protected void selectLayerFiles(String layer) {
+	final protected void selectLayerFiles() {
 		ArrayList<Class> upperLayerClasses = null;
-		ArrayList<ConvertibleFile> layerFiles = null;
-		if (Project.secondLayerPackageName.contentEquals(layer)) {
+		ArrayList<ConvertibleObject> layerFiles = null;
+		if (Project.secondLayerPackageName.contentEquals(getLayer())) {
 			upperLayerClasses = UMLProject.getLayerClasses(Project.firstLayerPackageName);
 			// TODO this is inefficient, it's reading every file unnecessarily, move the
 			// call to read() here. The same applies to the first layer. Basically move file
@@ -80,18 +90,18 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 	}
 
 	@Override
-	protected ArrayList<ConvertibleFile> getLayerFiles(String layer) {
+	protected ArrayList<ConvertibleObject> getLayerFiles(String layer) {
 		return CucumberProject.getLayerFiles(layer);
 	}
 
-	private boolean isFileSelected(ConvertibleFile convertibleFile, HashMap<String, Class> layerClassShortList) {
+	private boolean isFileSelected(ConvertibleObject convertibleFile, HashMap<String, Class> layerClassShortList) {
 		CucumberJavaFile cjf = (CucumberJavaFile) convertibleFile;
 		String qName = CucumberNameConverter.convertJavaPathToQualifiedName(cjf.getFile().getAbsolutePath());
 		return layerClassShortList.containsKey(qName);
 	}
 
 	@Override
-	protected Class convertToClass(ConvertibleFile layerFile) throws Exception {
+	protected Class convertObject(ConvertibleObject layerFile) throws Exception {
 		aCucumberJavaFile = (CucumberJavaFile) layerFile;
 		String qualifiedName = convertAbsolutePathToQualifiedName(aCucumberJavaFile.getFile().getAbsolutePath());
 		Class layerClass = ClassFactory.getClass(UMLProject.theSystem, qualifiedName);
@@ -246,4 +256,5 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 			return "pst::" + qualifiedName;
 		}
 	}
+
 }

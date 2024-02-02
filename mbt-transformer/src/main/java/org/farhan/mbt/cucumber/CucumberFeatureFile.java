@@ -10,11 +10,11 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.farhan.CucumberStandaloneSetup;
 import org.farhan.cucumber.CucumberFactory;
 import org.farhan.cucumber.Feature;
-import org.farhan.mbt.core.ConvertibleFile;
+import org.farhan.mbt.core.ConvertibleObject;
 
 import com.google.inject.Injector;
 
-public class CucumberFeatureFile implements ConvertibleFile {
+public class CucumberFeatureFile implements ConvertibleObject {
 
 	private File theFile;
 	// TODO make this private later

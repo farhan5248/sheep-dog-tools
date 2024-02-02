@@ -5,9 +5,9 @@ import java.io.File;
 import org.asciidoctor.Options;
 import org.asciidoctor.Asciidoctor.Factory;
 import org.asciidoctor.ast.Document;
-import org.farhan.mbt.core.ConvertibleFile;
+import org.farhan.mbt.core.ConvertibleObject;
 
-public class AsciiDoctorAdocFile implements ConvertibleFile {
+public class AsciiDoctorAdocFile implements ConvertibleObject {
 
 	private File theFile;
 	public Document theDoc;
