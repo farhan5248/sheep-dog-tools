@@ -9,9 +9,10 @@ public abstract class UMLToLayerConverter {
 
 	protected abstract ArrayList<?> selectLayerClasses(String layer) throws Exception;
 
-	protected void transformLayerClasses(ArrayList<Class> firstLayerClasses) throws Exception {
+	protected abstract ArrayList<Class> getLayerClasses(String layer);
 
-		for (Class layerClass : firstLayerClasses) {
+	protected void transformLayerClasses(String layer) throws Exception {
+		for (Class layerClass : getLayerClasses(layer)) {
 			convertFromClass(layerClass);
 			convertFromImports(layerClass);
 			convertFromAttributes(layerClass);
@@ -27,8 +28,7 @@ public abstract class UMLToLayerConverter {
 
 	protected abstract void convertFromBehaviours(Class layerClass) throws Exception;
 
-	protected abstract void convertFromInteractionMessages(Interaction anInteraction, Object stepList)
-			throws Exception;
+	protected abstract void convertFromInteractionMessages(Interaction anInteraction, Object stepList) throws Exception;
 
 	protected abstract void convertFromMessage(Message m, Object stepList) throws Exception;
 

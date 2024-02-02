@@ -1,7 +1,6 @@
 package org.farhan.mbt.cucumberuml;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -43,20 +42,27 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 	private CucumberJavaFile aCucumberJavaFile;
 
 	@Override
+	protected void transformLayerFiles(String layer) throws Exception {
+		super.transformLayerFiles(layer);
+		if (Project.secondLayerPackageName.contentEquals(layer)) {
+			linkLayerFiles(layer);
+		}
+	}
+
+	@Override
 	final protected void selectLayerFiles(String layer) {
-		ArrayList<Class> upperLayerClasses;
-		ArrayList<ConvertibleFile> layerFiles;
-		if (UMLProject.secondLayerPackageName.contentEquals(layer)) {
-			upperLayerClasses = UMLProject.getFirstLayerClasses();
+		ArrayList<Class> upperLayerClasses = null;
+		ArrayList<ConvertibleFile> layerFiles = null;
+		if (Project.secondLayerPackageName.contentEquals(layer)) {
+			upperLayerClasses = UMLProject.getLayerClasses(Project.firstLayerPackageName);
 			// TODO this is inefficient, it's reading every file unnecessarily, move the
 			// call to read() here. The same applies to the first layer. Basically move file
 			// reading out of the project to the converters to be more selective
-			layerFiles = CucumberProject.getSecondLayerFiles();
-		} else {
-			upperLayerClasses = UMLProject.getSecondLayerClasses();
-			layerFiles = CucumberProject.getThirdLayerFiles();
+			layerFiles = CucumberProject.getLayerFiles(CucumberProject.secondLayerPackageName);
+		} else if (Project.thirdLayerPackageName.contentEquals(layer)) {
+			upperLayerClasses = UMLProject.getLayerClasses(Project.secondLayerPackageName);
+			layerFiles = CucumberProject.getLayerFiles(CucumberProject.thirdLayerPackageName);
 		}
-
 		// Instead of reading a file twice, make a short list to save time reading each
 		// file
 		HashMap<String, Class> layerClassShortList = new HashMap<String, Class>();
@@ -71,6 +77,11 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 				layerFiles.remove(i);
 			}
 		}
+	}
+
+	@Override
+	protected ArrayList<ConvertibleFile> getLayerFiles(String layer) {
+		return CucumberProject.getLayerFiles(layer);
 	}
 
 	private boolean isFileSelected(ConvertibleFile convertibleFile, HashMap<String, Class> layerClassShortList) {
@@ -96,7 +107,6 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 			if (comment.isPresent()) {
 				CommentFactory.getComment(layerClass, comment.get().getContent());
 			}
-
 			for (ImportDeclaration i : aCucumberJavaFile.javaClass.getImports()) {
 				i.getNameAsString();
 				if (!i.getNameAsString().endsWith("Factory")) {
@@ -167,7 +177,6 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 		// directly under the app package name and not anywhere else. In the future make
 		// the search smarter and look through all the classes in the package. That will
 		// also assume that the class name is unique
-
 		if (isSecondLayer(owningClass)) {
 			String qualifiedName = getObjectQualifiedNameFromFactory(mce);
 			ElementImportFactory.getElementImport(owningClass, qualifiedName);
@@ -197,7 +206,6 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 		} else {
 			// TODO handle layer 3 java code
 		}
-
 	}
 
 	private String getObjectQualifiedNameFromFactory(MethodCallExpr mce) {
@@ -224,11 +232,13 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 
 	@Override
 	protected String convertQualifiedNameToImportName(String qualifiedName) {
+		// TODO preserve org.farhan
 		return qualifiedName.replace("pst::", "org::farhan::").replace("::", ".");
 	}
 
 	@Override
 	protected String convertImportNameToQualifiedName(String importName) {
+		// TODO preserve org.farhan
 		String qualifiedName = importName.replace(".", "::");
 		if (qualifiedName.startsWith("org::farhan::")) {
 			return qualifiedName.replace("org::farhan::", "pst::");

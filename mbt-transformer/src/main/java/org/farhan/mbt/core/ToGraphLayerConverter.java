@@ -6,14 +6,13 @@ public abstract class ToGraphLayerConverter {
 
 	protected abstract void selectLayerFiles(String layerSelectionCriteria) throws Exception;
 
-	protected void transformLayerFiles(ArrayList<ConvertibleFile> layerFiles) throws Exception {
+	protected abstract ArrayList<ConvertibleFile> getLayerFiles(String layer);
 
-		for (ConvertibleFile layerFile : layerFiles) {
-			// TODO replace this with a logger
-			System.out.println(layerFile.getFile().getAbsolutePath());
+	protected void transformLayerFiles(String layer) throws Exception {
+		for (ConvertibleFile layerFile : getLayerFiles(layer)) {
 			transformLayerFile(layerFile);
 		}
 	}
-	
+
 	protected abstract void transformLayerFile(ConvertibleFile layerFile) throws Exception;
 }

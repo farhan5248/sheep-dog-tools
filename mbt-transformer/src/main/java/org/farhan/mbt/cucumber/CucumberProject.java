@@ -14,67 +14,60 @@ public class CucumberProject extends Project {
 	private static ArrayList<ConvertibleFile> secondLayerFiles;
 	private static ArrayList<ConvertibleFile> thirdLayerFiles;
 
-	public static File getFirstLayerDir() {
-		// TODO don't hard code this and figure out where else it's hardcoded
-		return new File(baseDir + "src/test/resources/Cucumber/");
-	}
-
-	public static ArrayList<ConvertibleFile> getFirstLayerFiles() {
-		if (firstLayerFiles.isEmpty()) {
-			ArrayList<File> files = Utilities.recursivelyListFiles(getFirstLayerDir(), getFirstLayerFileType());
-			for (File f : files) {
-				CucumberFeatureFile cff = new CucumberFeatureFile(f);
-				firstLayerFiles.add(cff);
-				cff.read();
-			}
+	public static String getLayerFileType(String layer) {
+		if (layer.contentEquals(firstLayerPackageName)) {
+			return ".feature";
+		} else {
+			return ".java";
 		}
-		return firstLayerFiles;
 	}
 
-	public static String getFirstLayerFileType() {
-		return ".feature";
-	}
-
-	public static File getFourthLayerDir() {
-		File aFile = new File(baseDir + "src/test/java/org/farhan/" + fourthLayerPackageName + "/");
+	public static File getLayerDir(String layer) {
+		File aFile = null;
+		if (layer.contentEquals(firstLayerPackageName)) {
+			aFile = new File(baseDir + "src/test/resources/Cucumber/");
+		} else if (layer.contentEquals(Project.secondLayerPackageName)) {
+			aFile = new File(baseDir + "src/test/java/org/farhan/" + secondLayerPackageName + "/");
+		} else if (layer.contentEquals(Project.thirdLayerPackageName)) {
+			aFile = new File(baseDir + "src/test/java/org/farhan/" + thirdLayerPackageName + "/");
+		}
 		aFile.mkdirs();
 		return aFile;
 	}
 
-	public static File getSecondLayerDir() {
-		File aFile = new File(baseDir + "src/test/java/org/farhan/" + secondLayerPackageName + "/");
-		aFile.mkdirs();
-		return aFile;
+	public static ArrayList<ConvertibleFile> getLayerFiles(String layer) {
+
+		ArrayList<ConvertibleFile> layerFiles = null;
+		if (layer.contentEquals(firstLayerPackageName)) {
+			layerFiles = firstLayerFiles;
+		} else if (layer.contentEquals(secondLayerPackageName)) {
+			layerFiles = secondLayerFiles;
+		} else if (layer.contentEquals(thirdLayerPackageName)) {
+			layerFiles = thirdLayerFiles;
+		}
+		if (layerFiles.isEmpty()) {
+			// TODO this shouldn't be here, selecting the files will know which to read,
+			// this reads everything which is unnecessary
+			readFiles(layer, layerFiles);
+		}
+		return layerFiles;
 	}
 
-	public static ArrayList<ConvertibleFile> getSecondLayerFiles() {
-		if (secondLayerFiles.isEmpty()) {
-			ArrayList<File> files = Utilities.recursivelyListFiles(getSecondLayerDir(), getOtherLayerFileType());
-			for (File f : files) {
-				CucumberJavaFile cff = new CucumberJavaFile(f);
-				secondLayerFiles.add(cff);
-				cff.read();
+	public static void readFiles(String layer, ArrayList<ConvertibleFile> layerFiles) {
+		ArrayList<File> files = Utilities.recursivelyListFiles(getLayerDir(layer), getLayerFileType(layer));
+		for (File f : files) {
+			try {
+				if (layer.contentEquals(firstLayerPackageName)) {
+					layerFiles.add(new CucumberFeatureFile(f));
+				} else {
+					layerFiles.add(new CucumberJavaFile(f));
+				}
+				layerFiles.getLast().read();
+			} catch (Exception e) {
+				// TODO handle this better, the override class throws an Exception. Why?
+				Utilities.getStackTraceAsString(e);
 			}
 		}
-		return secondLayerFiles;
-	}
-
-	public static File getThirdLayerDir() {
-		File aFile = new File(baseDir + "src/test/java/org/farhan/" + thirdLayerPackageName + "/");
-		aFile.mkdirs();
-		return aFile;
-	}
-
-	public static ArrayList<ConvertibleFile> getThirdLayerFiles() {
-		if (thirdLayerFiles.isEmpty()) {
-			ArrayList<File> files = Utilities.recursivelyListFiles(getThirdLayerDir(), getOtherLayerFileType());
-			for (File f : files) {
-				CucumberJavaFile cff = new CucumberJavaFile(f);
-				thirdLayerFiles.add(cff);
-				cff.read();
-			}
-		}
-		return thirdLayerFiles;
 	}
 
 	public static void init() {
@@ -107,16 +100,12 @@ public class CucumberProject extends Project {
 		}
 	}
 
-	public static String getOtherLayerFileType() {
-		return ".java";
-	}
-
 	public static CucumberJavaFile createCucumberJavaFile(File file) throws Exception {
 		CucumberJavaFile aJavaFile = new CucumberJavaFile(file);
-		if (file.getAbsolutePath().contains(getSecondLayerDir().getName())) {
-			getSecondLayerFiles().add(aJavaFile);
-		} else if (file.getAbsolutePath().contains(getThirdLayerDir().getName())) {
-			getThirdLayerFiles().add(aJavaFile);
+		if (file.getAbsolutePath().contains(getLayerDir(secondLayerPackageName).getName())) {
+			getLayerFiles(secondLayerPackageName).add(aJavaFile);
+		} else if (file.getAbsolutePath().contains(getLayerDir(thirdLayerPackageName).getName())) {
+			getLayerFiles(thirdLayerPackageName).add(aJavaFile);
 		} else {
 			throw new Exception("Java files are only in layer 2 or 3");
 		}
@@ -125,8 +114,8 @@ public class CucumberProject extends Project {
 
 	public static CucumberFeatureFile createCucumberFeatureFile(File file) throws Exception {
 		CucumberFeatureFile aFeatureFile = new CucumberFeatureFile(file);
-		if (file.getAbsolutePath().contains(getFirstLayerDir().getName())) {
-			getFirstLayerFiles().add(aFeatureFile);
+		if (file.getAbsolutePath().contains(getLayerDir(firstLayerPackageName).getName())) {
+			getLayerFiles(firstLayerPackageName).add(aFeatureFile);
 		} else {
 			throw new Exception("Feature files are only in layer 1");
 		}

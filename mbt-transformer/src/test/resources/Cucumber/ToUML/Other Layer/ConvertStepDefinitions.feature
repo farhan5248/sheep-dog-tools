@@ -43,12 +43,17 @@ Feature: Convert Step Definitions
       """
       package org.farhan.stepdefs.blah;
       
+      import org.farhan.common.objects.BlahFactory;
       import io.cucumber.java.en.Given;
       import io.cucumber.datatable.DataTable;
       import org.farhan.common.stepdefs.TestSteps;
-      import org.farhan.common.objects.BlahFactory;
       
       public class BlahObjectPageSteps extends TestSteps {
+      
+          @Given("^The blah application, Object page is empty$")
+          public void theBlahApplicationObjectPageIsEmpty() {
+              BlahFactory.get("BlahObjectPage").setIsEmpty();
+          }
       
           @Given("^The blah application, Object page is invalid$")
           public void theBlahApplicationObjectPageIsInvalid() {
@@ -58,11 +63,6 @@ Feature: Convert Step Definitions
           @Given("^The blah application, Object page, Top section will be as follows$")
           public void theBlahApplicationObjectPageTopSectionIsAsFollows(DataTable dataTable) {
               BlahFactory.get("BlahObjectPage").assertAttributes(dataTable, "Top");
-          }
-      
-          @Given("^The blah application, Object page is empty$")
-          public void theBlahApplicationObjectPageIsEmpty() {
-              BlahFactory.get("BlahObjectPage").setIsEmpty();
           }
       }
       

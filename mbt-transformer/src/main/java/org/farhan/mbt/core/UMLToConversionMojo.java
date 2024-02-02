@@ -1,8 +1,5 @@
 package org.farhan.mbt.core;
 
-import java.util.ArrayList;
-import org.eclipse.uml2.uml.Class;
-
 public abstract class UMLToConversionMojo {
 
 	protected UMLToFirstLayerConverter firstLayerConverter;
@@ -12,15 +9,9 @@ public abstract class UMLToConversionMojo {
 
 	protected abstract UMLToFirstLayerConverter getFirstLayerConverter();
 
-	protected abstract ArrayList<Class> getFirstLayerClasses();
-
-	protected abstract ArrayList<Class> getSecondLayerClasses();
-
-	protected abstract ArrayList<Class> getThirdLayerClasses();
-
 	protected abstract void writeFiles() throws Exception;
 
-	protected abstract void initProjects();
+	protected abstract void initProjects() throws Exception;
 
 	public void mojoGoal() throws Exception {
 
@@ -28,11 +19,11 @@ public abstract class UMLToConversionMojo {
 		firstLayerConverter = getFirstLayerConverter();
 		otherLayerConverter = getOtherLayerConverter();
 		firstLayerConverter.selectLayerClasses(Project.firstLayerPackageName);
-		firstLayerConverter.transformLayerClasses(getFirstLayerClasses());
+		firstLayerConverter.transformLayerClasses(Project.firstLayerPackageName);
 		otherLayerConverter.selectLayerClasses(Project.secondLayerPackageName);
-		otherLayerConverter.transformLayerClasses(getSecondLayerClasses());
+		otherLayerConverter.transformLayerClasses(Project.secondLayerPackageName);
 		otherLayerConverter.selectLayerClasses(Project.thirdLayerPackageName);
-		otherLayerConverter.transformLayerClasses(getThirdLayerClasses());
+		otherLayerConverter.transformLayerClasses(Project.thirdLayerPackageName);
 		writeFiles();
 	}
 

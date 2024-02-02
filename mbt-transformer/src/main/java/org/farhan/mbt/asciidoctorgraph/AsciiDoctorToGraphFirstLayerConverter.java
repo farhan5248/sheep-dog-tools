@@ -108,4 +108,9 @@ public class AsciiDoctorToGraphFirstLayerConverter extends ToGraphFirstLayerConv
 		}
 		GraphProject.getFirstLayerGraphs().add(new GraphTextFile(g));
 	}
+
+	@Override
+	protected ArrayList<ConvertibleFile> getLayerFiles(String layer) {
+		return AsciiDoctorProject.getLayerFiles(layer);
+	}
 }

@@ -1,7 +1,5 @@
 package org.farhan.mbt.core;
 
-import java.util.ArrayList;
-
 public abstract class ToGraphConversionMojo {
 
 	// TODO there aren't supposed to be linkers anymore and there should just be a
@@ -12,8 +10,6 @@ public abstract class ToGraphConversionMojo {
 
 	protected abstract ToGraphFirstLayerConverter getFirstLayerConverter();
 
-	protected abstract ArrayList<ConvertibleFile> getFirstLayerFiles();
-
 	protected abstract void writeFiles() throws Exception;
 
 	protected abstract void initProjects();
@@ -23,7 +19,7 @@ public abstract class ToGraphConversionMojo {
 		initProjects();
 		firstLayerConverter = getFirstLayerConverter();
 		firstLayerConverter.selectLayerFiles(Project.firstLayerPackageName);
-		firstLayerConverter.transformLayerFiles(getFirstLayerFiles());
+		firstLayerConverter.transformLayerFiles(Project.firstLayerPackageName);
 		writeFiles();
 	}
 }

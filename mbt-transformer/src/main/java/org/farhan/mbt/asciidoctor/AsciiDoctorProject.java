@@ -16,7 +16,7 @@ public class AsciiDoctorProject extends Project {
 		return new File(baseDir + "src/test/resources/AsciiDoc/");
 	}
 
-	public static ArrayList<ConvertibleFile> getFirstLayerFiles() {
+	public static ArrayList<ConvertibleFile> getLayerFiles(String layer) {
 		if (firstLayerFiles.isEmpty()) {
 			readFiles();
 		}

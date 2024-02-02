@@ -35,8 +35,12 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 
 	@Override
 	protected ArrayList<Class> selectLayerClasses(String layerSelectionCriteria) throws Exception {
-
 		return PackageFactory.getPackagedClasses(UMLProject.theSystem.getNestedPackage(layerSelectionCriteria));
+	}
+
+	@Override
+	protected ArrayList<Class> getLayerClasses(String layer) {
+		return UMLProject.getLayerClasses(layer);
 	}
 
 	@Override
@@ -69,7 +73,7 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 			if (isThirdLayer(importedClass)) {
 				String factoryName = getFactoryName(qualifiedName);
 				aJavaFile.javaClass.addImport("org.farhan.common.objects." + factoryName);
-			} else {
+			} else if (isSecondLayer(importedClass)) {
 				String javaPath = CucumberNameConverter.convertQualifiedNameToJavaPath(qualifiedName);
 				String packageName = convertJavaPathToJavaPackage(javaPath).replace("pst.", "");
 				aJavaFile.javaClass.addImport(packageName);
@@ -233,7 +237,7 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 	}
 
 	private boolean isSecondLayer(Class layerClass) {
-		if (layerClass.getQualifiedName().contains("::" + Project.secondLayerPackageName + "::")) {
+		if (layerClass.getQualifiedName().startsWith("pst::" + Project.secondLayerPackageName + "::")) {
 			return true;
 		} else {
 			return false;
@@ -241,7 +245,7 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 	}
 
 	private boolean isThirdLayer(Class layerClass) {
-		if (layerClass.getQualifiedName().contains("::" + Project.thirdLayerPackageName + "::")) {
+		if (layerClass.getQualifiedName().startsWith("pst::" + CucumberProject.thirdLayerPackageName + "::")) {
 			return true;
 		} else {
 			return false;
@@ -256,12 +260,13 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 
 		String importName = path;
 		importName = importName.replace(".java", "");
-		importName = importName.replace(CucumberProject.getFourthLayerDir().getAbsolutePath(),
-				"org.farhan." + Project.fourthLayerPackageName);
-		importName = importName.replace(CucumberProject.getThirdLayerDir().getAbsolutePath(),
-				"org.farhan." + Project.thirdLayerPackageName);
-		importName = importName.replace(CucumberProject.getSecondLayerDir().getAbsolutePath(),
-				"org.farhan." + Project.secondLayerPackageName);
+
+		importName = importName.replace(
+				CucumberProject.getLayerDir(CucumberProject.thirdLayerPackageName).getAbsolutePath(),
+				"org.farhan." + CucumberProject.thirdLayerPackageName);
+		importName = importName.replace(
+				CucumberProject.getLayerDir(CucumberProject.secondLayerPackageName).getAbsolutePath(),
+				"org.farhan." + CucumberProject.secondLayerPackageName);
 		importName = importName.replace(File.separator, ".");
 		return importName;
 	}

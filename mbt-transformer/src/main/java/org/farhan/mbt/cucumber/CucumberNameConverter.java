@@ -38,9 +38,11 @@ public class CucumberNameConverter {
 	public static String convertJavaPathToQualifiedName(String pathName) {
 		String qualifiedName = pathName.trim();
 		qualifiedName = qualifiedName.replace(".java", "");
-		qualifiedName = qualifiedName.replace(CucumberProject.getSecondLayerDir().getAbsolutePath(),
+		qualifiedName = qualifiedName.replace(
+				CucumberProject.getLayerDir(Project.secondLayerPackageName).getAbsolutePath(),
 				Project.secondLayerPackageName);
-		qualifiedName = qualifiedName.replace(CucumberProject.getThirdLayerDir().getAbsolutePath(),
+		qualifiedName = qualifiedName.replace(
+				CucumberProject.getLayerDir(Project.thirdLayerPackageName).getAbsolutePath(),
 				Project.thirdLayerPackageName);
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::" + qualifiedName;
@@ -50,7 +52,7 @@ public class CucumberNameConverter {
 	public static String convertQualifiedNameToCucumberPath(String qualifiedName) {
 		String pathName = qualifiedName;
 		pathName = pathName.replace("pst::" + Project.firstLayerPackageName,
-				CucumberProject.getFirstLayerDir().getAbsolutePath());
+				CucumberProject.getLayerDir(Project.firstLayerPackageName).getAbsolutePath());
 		pathName = pathName.replace("::", File.separator);
 		// TODO isn't feature defined somewhere else as getFileType? Maybe there should
 		// be get Layer 1 filetype, layer 2 filetype etc defined here
@@ -62,11 +64,9 @@ public class CucumberNameConverter {
 
 		String pathName = qualifiedName;
 		pathName = pathName.replace("pst::" + Project.secondLayerPackageName,
-				CucumberProject.getSecondLayerDir().getAbsolutePath());
+				CucumberProject.getLayerDir(Project.secondLayerPackageName).getAbsolutePath());
 		pathName = pathName.replace("pst::" + Project.thirdLayerPackageName,
-				CucumberProject.getThirdLayerDir().getAbsolutePath());
-		pathName = pathName.replace("pst::" + Project.fourthLayerPackageName,
-				CucumberProject.getFourthLayerDir().getAbsolutePath());
+				CucumberProject.getLayerDir(Project.thirdLayerPackageName).getAbsolutePath());
 		pathName = pathName.replace("::", File.separator);
 		pathName = pathName + ".java";
 		return pathName;

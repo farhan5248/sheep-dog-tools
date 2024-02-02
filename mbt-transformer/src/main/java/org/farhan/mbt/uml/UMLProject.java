@@ -1,6 +1,5 @@
 package org.farhan.mbt.uml;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -15,6 +14,7 @@ import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 import org.farhan.mbt.core.Project;
+import org.farhan.mbt.core.Utilities;
 
 public class UMLProject extends Project {
 
@@ -29,7 +29,7 @@ public class UMLProject extends Project {
 
 	}
 
-	public static Model readFiles() throws IOException {
+	public static Model readFiles() throws Exception {
 		URI uri = URI.createFileURI(getUmlDir().getAbsolutePath()).appendSegment(theSystem.getName())
 				.appendFileExtension(UMLResource.FILE_EXTENSION);
 		ResourceSet resourceSet = new ResourceSetImpl();
@@ -58,16 +58,15 @@ public class UMLProject extends Project {
 		resource.save(options);
 	}
 
-	public static ArrayList<Class> getFirstLayerClasses() {
-		return PackageFactory.getPackagedClasses(theSystem.getNestedPackage(Project.firstLayerPackageName));
-	}
-
-	public static ArrayList<Class> getSecondLayerClasses() {
-		return PackageFactory.getPackagedClasses(theSystem.getNestedPackage(Project.secondLayerPackageName));
-	}
-
-	public static ArrayList<Class> getThirdLayerClasses() {
-		return PackageFactory.getPackagedClasses(theSystem.getNestedPackage(Project.thirdLayerPackageName));
+	public static ArrayList<Class> getLayerClasses(String layer) {
+		if (layer.contentEquals(Project.firstLayerPackageName)) {
+			return PackageFactory.getPackagedClasses(theSystem.getNestedPackage(Project.firstLayerPackageName));
+		} else if (layer.contentEquals(Project.secondLayerPackageName)) {
+			return PackageFactory.getPackagedClasses(theSystem.getNestedPackage(Project.secondLayerPackageName));
+		} else if (layer.contentEquals(Project.thirdLayerPackageName)) {
+			return PackageFactory.getPackagedClasses(theSystem.getNestedPackage(Project.thirdLayerPackageName));
+		}
+		return null;
 	}
 
 }

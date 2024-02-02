@@ -17,7 +17,9 @@ import org.farhan.cucumber.Row;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Statement;
 import org.farhan.cucumber.Step;
+import org.farhan.mbt.core.Project;
 import org.farhan.mbt.core.UMLToFirstLayerConverter;
+import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberFeatureFile;
 import org.farhan.mbt.cucumber.CucumberNameConverter;
 import org.farhan.mbt.cucumber.CucumberProject;
@@ -33,6 +35,11 @@ public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
 	@Override
 	protected ArrayList<?> selectLayerClasses(String layerSelectionCriteria) throws Exception {
 		return PackageFactory.getPackagedClasses(UMLProject.theSystem.getNestedPackage(layerSelectionCriteria));
+	}
+
+	@Override
+	protected ArrayList<Class> getLayerClasses(String layer) {
+		return UMLProject.getLayerClasses(layer);
 	}
 
 	@Override

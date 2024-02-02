@@ -48,6 +48,12 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	}
 
 	@Override
+	protected ArrayList<ConvertibleFile> getLayerFiles(String layer) {
+		// TODO make a GraphDotFile
+		return GraphProject.getFirstLayerFiles();
+	}
+
+	@Override
 	protected Class convertToClass(ConvertibleFile theObject) throws Exception {
 
 		aGraphTextFile = (GraphTextFile) theObject;
@@ -72,7 +78,6 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 			// convertTagsToParameters(anInteraction, s.getTags());
 			convertToInteractionMessages(anInteraction, paths.get(i).getPath());
 		}
-
 	}
 
 	@Override
@@ -220,7 +225,6 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	private static void combinePaths(MBTGraph<MBTVertex, MBTEdge> g, MBTEdge e, MBTVertex vertex,
 			ArrayList<MBTPath> vertexPaths, ArrayList<MBTPath> childPaths, ArrayList<MBTPath> edgePaths) {
 		for (MBTPath pc : childPaths) {
-
 			if (edgePaths.isEmpty()) {
 				pc.getPath().add(0, g.getEdgeTarget(e));
 				pc.getPath().add(0, e);
@@ -242,11 +246,9 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 				}
 			}
 		}
-
 	}
 
 	private static ArrayList<MBTPath> getEdgePaths(MBTEdge e) {
-
 		if (e.getValue() != null) {
 			if (e.getValue() instanceof MBTGraph<?, ?>) {
 				MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) e.getValue();

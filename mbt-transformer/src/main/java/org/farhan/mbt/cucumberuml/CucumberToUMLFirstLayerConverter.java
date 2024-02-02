@@ -42,9 +42,17 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	private CucumberFeatureFile aCucumberFile;
 
 	@Override
+	protected void transformLayerFiles(String layer) throws Exception {
+		super.transformLayerFiles(layer);
+		if (Project.firstLayerPackageName.contentEquals(layer)) {
+			linkLayerFiles(layer);
+		}
+	}
+
+	@Override
 	protected void selectLayerFiles(String layer) throws Exception {
 
-		ArrayList<ConvertibleFile> layerFiles = CucumberProject.getFirstLayerFiles();
+		ArrayList<ConvertibleFile> layerFiles = CucumberProject.getLayerFiles(CucumberProject.firstLayerPackageName);
 		for (int i = layerFiles.size() - 1; i >= 0; i--) {
 			if (!isFileSelected(layerFiles.get(i), Project.tags)) {
 				// TODO replace this with a logger
@@ -52,6 +60,11 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 				layerFiles.remove(i);
 			}
 		}
+	}
+
+	@Override
+	protected ArrayList<ConvertibleFile> getLayerFiles(String layer) {
+		return CucumberProject.getLayerFiles(layer);
 	}
 
 	@Override
@@ -75,15 +88,12 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 
 		Background b = null;
 		for (AbstractScenario as : aCucumberFile.theFeature.getAbstractScenarios()) {
-
 			if (as instanceof Background) {
 				b = (Background) as;
 				continue;
 			}
-
 			resetCurrentContainerObject();
 			Interaction anInteraction = createInteraction(layerClass, as);
-
 			if (as instanceof Scenario) {
 				Scenario s = (Scenario) as;
 				convertTagsToParameters(anInteraction, s.getTags());
@@ -104,7 +114,6 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 
 	@Override
 	protected void convertToInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception {
-
 		for (Object o : steps) {
 			Step cs = (Step) o;
 			String messageName = cs.getName();
@@ -130,7 +139,7 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 		String pathName = qualifiedName;
 		pathName = pathName.replace("pst::specs::", "");
 		pathName = pathName.replace("::", File.separator);
-		pathName = CucumberProject.getFirstLayerDir().getAbsolutePath() + pathName;
+		pathName = CucumberProject.getLayerDir(CucumberProject.firstLayerPackageName).getAbsolutePath() + pathName;
 		pathName = pathName + ".feature";
 		return pathName;
 	}
@@ -139,7 +148,8 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	protected String convertAbsolutePathToQualifiedName(String pathName) {
 		String qualifiedName = pathName.trim();
 		qualifiedName = qualifiedName.replace(".feature", "");
-		qualifiedName = qualifiedName.replace(CucumberProject.getFirstLayerDir().getAbsolutePath(), "");
+		qualifiedName = qualifiedName
+				.replace(CucumberProject.getLayerDir(CucumberProject.firstLayerPackageName).getAbsolutePath(), "");
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::specs" + qualifiedName;
 		return qualifiedName;
@@ -161,7 +171,6 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 		if (s.getTheDocString() != null) {
 			ValueSpecification vs = ArgumentFactory.getArgument(theMessage, "docString", "", true);
 			EList<Line> lines = s.getTheDocString().getLines();
-
 			for (int i = 0; i < lines.size(); i++) {
 				AnnotationFactory.getAnnotation(vs, "docString", String.valueOf(i), lines.get(i).getName());
 			}
@@ -207,7 +216,6 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	private boolean isFileSelected(ConvertibleFile convertibleFile, String layerSelectionCriteria) throws Exception {
 
 		aCucumberFile = (CucumberFeatureFile) convertibleFile;
-
 		if (isTagged(aCucumberFile.theFeature.getTags(), layerSelectionCriteria)) {
 			return true;
 		}
