@@ -23,7 +23,8 @@ public class XtextReleaseGoal {
 		String nextVersion = "1.9.0";
 
 		// updateToRelease(currentVersion, currentVersion);
-		// Run git add and git commit 
+		// Run git add and git commit
+		// Run git tag
 		// Run mvn install
 		// updateToSnapshot(currentVersion, nextVersion);
 		// Run mvn install
@@ -102,47 +103,6 @@ public class XtextReleaseGoal {
 		return exceptionAsString;
 	}
 
-	private static String regexFind(String pattern, String text, int groupNumber, String defaultText) {
-		Pattern r = Pattern.compile(pattern);
-		Matcher m = r.matcher(text);
-		if (m.find()) {
-			if (m.group(groupNumber) != null) {
-				return m.group(groupNumber);
-			}
-		}
-		return defaultText;
-	}
-
-	private static String regexFind(String pattern, String text, int groupNumber) {
-		return regexFind(pattern, text, groupNumber, null);
-	}
-
-	private static String regexFindByName(String pattern, String text, String groupName) {
-		Pattern r = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
-		Matcher m = r.matcher(text);
-		if (m.find()) {
-			return m.group(groupName);
-		} else {
-			return null;
-		}
-	}
-
-	private static String regexFindAll(String pattern, String text, int group, String defaultText) {
-		Pattern r = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
-		Matcher m = r.matcher(text);
-		String allResults = "";
-		while (m.find()) {
-			if (m.group(group) != null) {
-				allResults += m.group(group);
-			}
-		}
-		if (allResults.isEmpty()) {
-			return defaultText;
-		} else {
-			return allResults;
-		}
-	}
-
 	private static void writeFile(File aFile, String content) throws Exception {
 		aFile.getParentFile().mkdirs();
 		PrintWriter aPrintWriter = new PrintWriter(aFile, StandardCharsets.UTF_8);
@@ -154,12 +114,5 @@ public class XtextReleaseGoal {
 	private static String readFile(File aFile) throws Exception {
 		String content = new String(Files.readAllBytes(Paths.get(aFile.toURI())), StandardCharsets.UTF_8);
 		return content;
-	}
-
-	private static void deleteDir(File dir, String extension) {
-		ArrayList<File> filesList = recursivelyListFilesAndDirectories(dir, extension);
-		for (File f : filesList) {
-			f.delete();
-		}
 	}
 }

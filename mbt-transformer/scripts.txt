@@ -13,3 +13,6 @@ mvn install:install-file -Dfile="C:\Users\Farhan\.p2\pool\plugins\org.eclipse.xt
 
 mvn org.farhan:mbt-maven-plugin:cucumber-to-uml -Dtag=debug
 mvn org.farhan:mbt-maven-plugin:uml-to-cucumber -Dtag=debug
+
+mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=false
+mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true
