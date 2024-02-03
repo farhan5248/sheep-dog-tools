@@ -6,12 +6,12 @@ public abstract class ToGraphLayerConverter {
 
 	protected abstract String getLayer();
 
-	protected abstract void selectLayerFiles() throws Exception;
+	protected abstract void selectLayerObjects() throws Exception;
 
-	protected abstract ArrayList<ConvertibleObject> getLayerFiles(String layer);
+	protected abstract ArrayList<ConvertibleObject> getLayerObjects(String layer);
 
 	protected void convertObjects() throws Exception {
-		for (ConvertibleObject layerFile : getLayerFiles(getLayer())) {
+		for (ConvertibleObject layerFile : getLayerObjects(getLayer())) {
 			convertObject(layerFile);
 		}
 	}

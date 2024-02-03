@@ -24,7 +24,7 @@ public class ConvertAsciiDoctorToGraphMojo extends ToGraphConversionMojo {
 	}
 
 	@Override
-	protected void writeFiles() throws Exception {
+	protected void save() throws Exception {
 		GraphProject.writeFiles();
 	}
 }

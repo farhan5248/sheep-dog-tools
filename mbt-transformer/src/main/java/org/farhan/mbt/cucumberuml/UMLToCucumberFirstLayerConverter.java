@@ -48,7 +48,7 @@ public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
 	}
 
 	@Override
-	protected ArrayList<Class> getLayerClasses(String layer) {
+	protected ArrayList<Class> getLayerObjects(String layer) {
 		return UMLProject.getLayerClasses(layer);
 	}
 
@@ -86,15 +86,15 @@ public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
 	}
 
 	@Override
-	protected void convertFromImports(Class layerClass) throws Exception {
+	protected void convertImports(Class layerClass) throws Exception {
 	}
 
 	@Override
-	protected void convertFromAttributes(Class layerClass) throws Exception {
+	protected void convertAttributes(Class layerClass) throws Exception {
 	}
 
 	@Override
-	protected void convertFromBehaviours(Class layerClass) throws Exception {
+	protected void convertBehaviours(Class layerClass) throws Exception {
 		// TODO there's no background or scenario outline, just scenario
 		for (Behavior aBehavior : layerClass.getOwnedBehaviors()) {
 			if (aBehavior instanceof Interaction) {
@@ -106,21 +106,21 @@ public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
 				// aMethod);
 				// TODO this is for scenario tags convertParameters(anInteraction, aMethod);
 				convertComments(anInteraction, aScenario);
-				convertFromInteractionMessages(anInteraction, aScenario.getSteps());
+				convertInteractionMessages(anInteraction, aScenario.getSteps());
 			}
 		}
 	}
 
 	@Override
-	protected void convertFromInteractionMessages(Interaction anInteraction, Object stepList) throws Exception {
+	protected void convertInteractionMessages(Interaction anInteraction, Object stepList) throws Exception {
 		// TODO loop through messages and create statements with * for now
 		for (Message m : anInteraction.getMessages()) {
-			convertFromMessage(m, stepList);
+			convertMessage(m, stepList);
 		}
 	}
 
 	@Override
-	protected void convertFromMessage(Message m, Object stepList) throws Exception {
+	protected void convertMessage(Message m, Object stepList) throws Exception {
 		EList<Step> steps = (EList<Step>) stepList;
 		Step step = CucumberFactory.eINSTANCE.createAsterisk();
 		step.setName(m.getName());

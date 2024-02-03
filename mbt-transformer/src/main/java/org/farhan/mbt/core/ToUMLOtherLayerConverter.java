@@ -1,26 +1,18 @@
 package org.farhan.mbt.core;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.eclipse.uml2.uml.Class;
-import org.eclipse.uml2.uml.ElementImport;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.mbt.cucumber.CucumberJavaFile;
 import org.farhan.mbt.cucumber.CucumberNameConverter;
-import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.ArgumentFactory;
 import org.farhan.mbt.uml.InteractionFactory;
 import org.farhan.mbt.uml.ParameterFactory;
-import org.farhan.mbt.uml.UMLProject;
 
 public abstract class ToUMLOtherLayerConverter extends ToUMLLayerConverter {
 
-	// linker
-	
 	@Override
 	protected void addNextLayerInteractionMessages(Interaction targetInteraction, Message m) {
 	}
@@ -37,7 +29,6 @@ public abstract class ToUMLOtherLayerConverter extends ToUMLLayerConverter {
 	protected ArrayList<String> getNextLayerInteractionNamesfromMessage(Message m) {
 		ArrayList<String> newTitles = new ArrayList<String>();
 		if (m.getName().startsWith("set") || m.getName().startsWith("assert")) {
-
 			if (m.getName().endsWith("Attributes")) {
 				String prefix = m.getName().replace("Attributes", "");
 
@@ -47,12 +38,10 @@ public abstract class ToUMLOtherLayerConverter extends ToUMLLayerConverter {
 				if (vs != null) {
 					sectionName = ((LiteralString) vs).getValue();
 				}
-
 				vs = ArgumentFactory.getArgument(m, "keyMap", "", false);
 				if (vs != null) {
 					// it's a data table
 					String[] attributes = vs.getEAnnotation("keyMap").getDetails().getFirst().getValue().split("\\|");
-
 					for (String a : attributes) {
 						// TODO validate data table headers to always start with a capital letter
 						newTitles.add(CucumberNameConverter.getMethodName(prefix + sectionName + a, true));
@@ -82,7 +71,6 @@ public abstract class ToUMLOtherLayerConverter extends ToUMLLayerConverter {
 		if (vs != null) {
 			ParameterFactory.getParameter(targetInteraction, "keyMap", "", "in");
 		}
-
 		vs = ArgumentFactory.getArgument(m, "contents", "", false);
 		if (vs != null) {
 			ParameterFactory.getParameter(targetInteraction, "contents", "", "in");

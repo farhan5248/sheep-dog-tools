@@ -26,7 +26,7 @@ public class ConvertCucumberToUMLMojo extends ToUMLConversionMojo {
 	}
 
 	@Override
-	protected void writeFiles() throws Exception {
+	protected void save() throws Exception {
 		UMLProject.writeFiles();
 	}
 

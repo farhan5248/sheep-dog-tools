@@ -14,30 +14,31 @@ import org.farhan.mbt.uml.UMLProject;
 
 public abstract class ToUMLLayerConverter {
 
-	protected abstract void selectLayerFiles() throws Exception;
+	protected abstract void selectLayerObjects() throws Exception;
 
 	protected abstract String getLayer();
 
-	protected abstract ArrayList<ConvertibleObject> getLayerFiles(String layer);
+	protected abstract ArrayList<ConvertibleObject> getLayerObjects(String layer);
 
 	protected void convertObjects() throws Exception {
-		for (ConvertibleObject layerFile : getLayerFiles(getLayer())) {
+		for (ConvertibleObject layerFile : getLayerObjects(getLayer())) {
 			Class layerClass = convertObject(layerFile);
-			convertToImports(layerClass);
-			convertToBehaviours(layerClass);
+			convertImports(layerClass);
+			convertBehaviours(layerClass);
 		}
 	}
 
 	protected abstract Class convertObject(ConvertibleObject layerFile) throws Exception;
 
-	protected abstract void convertToImports(Class layerClass) throws Exception;
+	protected abstract void convertImports(Class layerClass) throws Exception;
 
-	protected abstract void convertToBehaviours(Class layerClass) throws Exception;
+	protected abstract void convertBehaviours(Class layerClass) throws Exception;
 
-	protected abstract void convertToInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception;
+	protected abstract void convertInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception;
 
-	protected abstract void convertToMessage(Interaction anInteraction, Object anObject) throws Exception;
+	protected abstract void convertMessage(Interaction anInteraction, Object anObject) throws Exception;
 
+	// TODO review these four name converters
 	protected abstract String convertQualifiedNameToAbsolutePath(String qualifiedName);
 
 	protected abstract String convertAbsolutePathToQualifiedName(String pathName);

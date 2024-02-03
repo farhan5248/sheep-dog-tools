@@ -2,19 +2,14 @@ package org.farhan.mbt.graphuml;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.ElementImport;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.cucumber.Row;
-import org.farhan.cucumber.Statement;
-import org.farhan.cucumber.Step;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Project;
 import org.farhan.mbt.core.ToUMLFirstLayerConverter;
@@ -51,12 +46,12 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	}
 
 	@Override
-	protected void selectLayerFiles() throws Exception {
+	protected void selectLayerObjects() throws Exception {
 		GraphProject.readFiles();
 	}
 
 	@Override
-	protected ArrayList<ConvertibleObject> getLayerFiles(String layer) {
+	protected ArrayList<ConvertibleObject> getLayerObjects(String layer) {
 		// TODO make a GraphDotFile
 		return GraphProject.getFirstLayerFiles();
 	}
@@ -71,11 +66,11 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	}
 
 	@Override
-	protected void convertToImports(Class layerClass) throws Exception {
+	protected void convertImports(Class layerClass) throws Exception {
 	}
 
 	@Override
-	protected void convertToBehaviours(Class layerClass) throws Exception {
+	protected void convertBehaviours(Class layerClass) throws Exception {
 
 		ArrayList<MBTPath> paths = getAllPaths(aGraphTextFile.theGraph, aGraphTextFile.theGraph.getStartVertex());
 		for (int i = 0; i < paths.size(); i++) {
@@ -84,12 +79,12 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 			Interaction anInteraction = createInteraction(layerClass, "Scenario " + String.valueOf(i));
 			// TODO think about adding tags by deriving them from the edges
 			// convertTagsToParameters(anInteraction, s.getTags());
-			convertToInteractionMessages(anInteraction, paths.get(i).getPath());
+			convertInteractionMessages(anInteraction, paths.get(i).getPath());
 		}
 	}
 
 	@Override
-	protected void convertToInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception {
+	protected void convertInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception {
 
 		boolean isField = false;
 		boolean isKeyword = true;
@@ -117,7 +112,7 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 				// if isKeyword, then make it a step
 				if (Validator.validateStepText(cs)) {
 					setCurrentMachineAndState(cs);
-					convertToMessage(anInteraction, cs);
+					convertMessage(anInteraction, cs);
 				} else {
 					throw new Exception("Step (" + cs + ") is not valid, use Xtext editor to correct it first. ");
 				}
@@ -142,7 +137,7 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	}
 
 	@Override
-	protected void convertToMessage(Interaction anInteraction, Object o) {
+	protected void convertMessage(Interaction anInteraction, Object o) {
 		String s = (String) o;
 		String messageName = s;
 		Class owningClass = (Class) anInteraction.getOwner();

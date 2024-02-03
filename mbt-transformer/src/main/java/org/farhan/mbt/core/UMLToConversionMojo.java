@@ -4,12 +4,9 @@ import java.util.ArrayList;
 
 public abstract class UMLToConversionMojo {
 
-	protected UMLToFirstLayerConverter firstLayerConverter;
-	protected UMLToOtherLayerConverter otherLayerConverter;
-
 	protected abstract ArrayList<UMLToLayerConverter> getLayerConverters();
 
-	protected abstract void writeFiles() throws Exception;
+	protected abstract void save() throws Exception;
 
 	protected abstract void initProjects() throws Exception;
 
@@ -20,7 +17,7 @@ public abstract class UMLToConversionMojo {
 			c.selectLayerFiles();
 			c.convertObjects();
 		}
-		writeFiles();
+		save();
 	}
 
 }

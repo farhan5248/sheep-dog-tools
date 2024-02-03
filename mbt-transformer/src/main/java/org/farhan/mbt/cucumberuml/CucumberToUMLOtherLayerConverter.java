@@ -60,7 +60,7 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 	}
 
 	@Override
-	final protected void selectLayerFiles() {
+	final protected void selectLayerObjects() {
 		ArrayList<Class> upperLayerClasses = null;
 		ArrayList<ConvertibleObject> layerFiles = null;
 		if (Project.secondLayerPackageName.contentEquals(getLayer())) {
@@ -90,7 +90,7 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 	}
 
 	@Override
-	protected ArrayList<ConvertibleObject> getLayerFiles(String layer) {
+	protected ArrayList<ConvertibleObject> getLayerObjects(String layer) {
 		return CucumberProject.getLayerFiles(layer);
 	}
 
@@ -109,7 +109,7 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 	}
 
 	@Override
-	protected void convertToImports(Class layerClass) throws Exception {
+	protected void convertImports(Class layerClass) throws Exception {
 		if (aCucumberJavaFile.javaClass.getTypes().size() > 0) {
 			// Wrap this in CommentFactory.getComment. getComment should do nothing if the
 			// content is empty
@@ -130,7 +130,7 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 	}
 
 	@Override
-	protected void convertToBehaviours(Class layerClass) throws Exception {
+	protected void convertBehaviours(Class layerClass) throws Exception {
 		for (MethodDeclaration md : aCucumberJavaFile.javaClass.getType(0).getMethods()) {
 			// TODO determine if this interaction is empty
 			Interaction anInteraction = InteractionFactory.getInteraction(layerClass, md.getNameAsString(), true);
@@ -152,19 +152,19 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 				// TODO this should probably empty out the parameters if any exist
 				ParameterFactory.getParameter(anInteraction, p.getNameAsString(), "", "in");
 			}
-			convertToInteractionMessages(anInteraction, md.getBody().get().getStatements());
+			convertInteractionMessages(anInteraction, md.getBody().get().getStatements());
 		}
 	}
 
 	@Override
-	protected void convertToInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception {
+	protected void convertInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception {
 		// TODO if there's already a body, don't add the java code to it, just do
 		// nothing
 		for (Object o : steps) {
 			Statement s = (Statement) o;
 			if (s.getChildNodes().get(0) instanceof MethodCallExpr) {
 				MethodCallExpr mce = (MethodCallExpr) s.getChildNodes().get(0);
-				convertToMessage(anInteraction, mce);
+				convertMessage(anInteraction, mce);
 			}
 		}
 	}
@@ -179,7 +179,7 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 	}
 
 	@Override
-	protected void convertToMessage(Interaction anInteraction, Object o) {
+	protected void convertMessage(Interaction anInteraction, Object o) {
 		MethodCallExpr mce = (MethodCallExpr) o;
 		Class owningClass = (Class) anInteraction.getOwner();
 		// TODO change this, don't store how the DI is achieved in the UML model

@@ -23,7 +23,7 @@ public class ConvertUMLToCucumberMojo extends UMLToConversionMojo {
 	}
 
 	@Override
-	protected void writeFiles() throws Exception {
+	protected void save() throws Exception {
 		CucumberProject.writeFiles();
 	}
 

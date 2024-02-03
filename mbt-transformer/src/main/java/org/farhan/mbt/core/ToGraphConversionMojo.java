@@ -6,7 +6,7 @@ public abstract class ToGraphConversionMojo {
 
 	protected abstract ArrayList<ToGraphLayerConverter> getLayerConverters();
 
-	protected abstract void writeFiles() throws Exception;
+	protected abstract void save() throws Exception;
 
 	protected abstract void initProjects();
 
@@ -14,9 +14,9 @@ public abstract class ToGraphConversionMojo {
 
 		initProjects();
 		for (ToGraphLayerConverter c : getLayerConverters()) {
-			c.selectLayerFiles();
+			c.selectLayerObjects();
 			c.convertObjects();
 		}
-		writeFiles();
+		save();
 	}
 }

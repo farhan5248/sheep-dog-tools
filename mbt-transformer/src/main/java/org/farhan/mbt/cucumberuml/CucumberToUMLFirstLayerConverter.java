@@ -3,6 +3,8 @@ package org.farhan.mbt.cucumberuml;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.ElementImport;
@@ -50,8 +52,7 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	protected String getLayer() {
 		return layer;
 	}
-	
-	
+
 	@Override
 	protected void convertObjects() throws Exception {
 		super.convertObjects();
@@ -59,7 +60,7 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	}
 
 	@Override
-	protected void selectLayerFiles() throws Exception {
+	protected void selectLayerObjects() throws Exception {
 
 		ArrayList<ConvertibleObject> layerFiles = CucumberProject.getLayerFiles(getLayer());
 		for (int i = layerFiles.size() - 1; i >= 0; i--) {
@@ -72,7 +73,7 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	}
 
 	@Override
-	protected ArrayList<ConvertibleObject> getLayerFiles(String layer) {
+	protected ArrayList<ConvertibleObject> getLayerObjects(String layer) {
 		return CucumberProject.getLayerFiles(layer);
 	}
 
@@ -89,11 +90,11 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	}
 
 	@Override
-	protected void convertToImports(Class layerClass) throws Exception {
+	protected void convertImports(Class layerClass) throws Exception {
 	}
 
 	@Override
-	protected void convertToBehaviours(Class layerClass) throws Exception {
+	protected void convertBehaviours(Class layerClass) throws Exception {
 
 		Background b = null;
 		for (AbstractScenario as : aCucumberFile.theFeature.getAbstractScenarios()) {
@@ -115,20 +116,20 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 			}
 			// If there is a background, add its steps first
 			if (b != null) {
-				convertToInteractionMessages(anInteraction, b.getSteps());
+				convertInteractionMessages(anInteraction, b.getSteps());
 			}
-			convertToInteractionMessages(anInteraction, as.getSteps());
+			convertInteractionMessages(anInteraction, as.getSteps());
 		}
 	}
 
 	@Override
-	protected void convertToInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception {
+	protected void convertInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception {
 		for (Object o : steps) {
 			Step cs = (Step) o;
 			String messageName = cs.getName();
 			if (Validator.validateStepText(messageName)) {
 				setCurrentMachineAndState(messageName);
-				convertToMessage(anInteraction, cs);
+				convertMessage(anInteraction, cs);
 			} else {
 				throw new Exception("Step (" + cs.getName() + ") is not valid, use Xtext editor to correct it first. ");
 			}
@@ -136,7 +137,7 @@ public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	}
 
 	@Override
-	protected void convertToMessage(Interaction anInteraction, Object o) {
+	protected void convertMessage(Interaction anInteraction, Object o) {
 		Step s = (Step) o;
 		Message theMessage = convertStepToMessage(anInteraction, s);
 		convertDataTableToArgument(s, theMessage);

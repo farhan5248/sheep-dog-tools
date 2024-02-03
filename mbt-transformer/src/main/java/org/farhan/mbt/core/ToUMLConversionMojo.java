@@ -4,12 +4,9 @@ import java.util.ArrayList;
 
 public abstract class ToUMLConversionMojo {
 
-	protected ToUMLFirstLayerConverter firstLayerConverter;
-	protected ToUMLOtherLayerConverter otherLayerConverter;
-
 	protected abstract ArrayList<ToUMLLayerConverter> getLayerConverters();
 
-	protected abstract void writeFiles() throws Exception;
+	protected abstract void save() throws Exception;
 
 	protected abstract void initProjects();
 
@@ -17,9 +14,9 @@ public abstract class ToUMLConversionMojo {
 
 		initProjects();
 		for (ToUMLLayerConverter c : getLayerConverters()) {
-			c.selectLayerFiles();
+			c.selectLayerObjects();
 			c.convertObjects();
 		}
-		writeFiles();
+		save();
 	}
 }

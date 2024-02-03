@@ -95,7 +95,7 @@ public class AsciiDoctorToGraphFirstLayerConverter extends ToGraphFirstLayerConv
 	}
 
 	@Override
-	protected void selectLayerFiles() throws Exception {
+	protected void selectLayerObjects() throws Exception {
 		// TODO this should be filterLayerFiles since it's removing files
 	}
 
@@ -112,7 +112,7 @@ public class AsciiDoctorToGraphFirstLayerConverter extends ToGraphFirstLayerConv
 	}
 
 	@Override
-	protected ArrayList<ConvertibleObject> getLayerFiles(String layer) {
+	protected ArrayList<ConvertibleObject> getLayerObjects(String layer) {
 		return AsciiDoctorProject.getLayerFiles(layer);
 	}
 

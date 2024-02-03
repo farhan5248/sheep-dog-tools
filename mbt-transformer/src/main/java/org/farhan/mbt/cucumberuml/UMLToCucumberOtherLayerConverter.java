@@ -49,7 +49,7 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 	}
 
 	@Override
-	protected ArrayList<Class> getLayerClasses(String layer) {
+	protected ArrayList<Class> getLayerObjects(String layer) {
 		return UMLProject.getLayerClasses(layer);
 	}
 
@@ -74,7 +74,7 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 	}
 
 	@Override
-	protected void convertFromImports(Class layerClass) throws Exception {
+	protected void convertImports(Class layerClass) throws Exception {
 		for (ElementImport ei : layerClass.getElementImports()) {
 			Class importedClass = (Class) ei.getImportedElement();
 			String qualifiedName = importedClass.getQualifiedName();
@@ -104,12 +104,12 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 	}
 
 	@Override
-	protected void convertFromAttributes(Class layerClass) throws Exception {
+	protected void convertAttributes(Class layerClass) throws Exception {
 
 	}
 
 	@Override
-	protected void convertFromBehaviours(Class layerClass) throws Exception {
+	protected void convertBehaviours(Class layerClass) throws Exception {
 		for (Behavior aBehavior : layerClass.getOwnedBehaviors()) {
 			if (aBehavior instanceof Interaction) {
 				Interaction anInteraction = (Interaction) aBehavior;
@@ -122,20 +122,20 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 					}
 					convertParameters(anInteraction, aMethod);
 					convertComments(anInteraction, aMethod);
-					convertFromInteractionMessages(anInteraction, aMethod.createBody());
+					convertInteractionMessages(anInteraction, aMethod.createBody());
 				}
 			}
 		}
 	}
 
 	@Override
-	protected void convertFromInteractionMessages(Interaction anInteraction, Object stepList) throws Exception {
+	protected void convertInteractionMessages(Interaction anInteraction, Object stepList) throws Exception {
 		BlockStmt body = (BlockStmt) stepList;
 		if (isSecondLayer((Class) anInteraction.getOwner())) {
 			for (Message m : anInteraction.getMessages()) {
 				// TODO this needs to first set the factory and then keep appending methods to
 				// it. Don't create the factory in convertFromMessage again and again.
-				convertFromMessage(m, body);
+				convertMessage(m, body);
 			}
 		} else {
 			body.addStatement("throw new PendingException();");
@@ -143,7 +143,7 @@ public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
 	}
 
 	@Override
-	protected void convertFromMessage(Message m, Object aStepList) {
+	protected void convertMessage(Message m, Object aStepList) {
 		BlockStmt body = (BlockStmt) aStepList;
 		String step = ";";
 		Interaction nextLayerMethod = (Interaction) m.getSignature();
