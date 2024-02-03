@@ -36,8 +36,13 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 
 	private String layer;
 
-	public GraphToUMLFirstLayerConverter(String layer) {
+	GraphProject sourceProject;
+	UMLProject targetProject;
+
+	public GraphToUMLFirstLayerConverter(String layer, GraphProject sourceProject, UMLProject targetProject) {
 		this.layer = layer;
+		this.sourceProject = sourceProject;
+		this.targetProject = targetProject;
 	}
 
 	@Override
@@ -47,13 +52,13 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 
 	@Override
 	protected void selectLayerObjects() throws Exception {
-		GraphProject.readFiles();
+		sourceProject.load();
 	}
 
 	@Override
 	protected ArrayList<ConvertibleObject> getLayerObjects(String layer) {
 		// TODO make a GraphDotFile
-		return GraphProject.getFirstLayerFiles();
+		return sourceProject.getLayerObjects(sourceProject.firstLayerName);
 	}
 
 	@Override
@@ -61,7 +66,7 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 
 		aGraphTextFile = (GraphTextFile) theObject;
 		String qualifiedName = convertAbsolutePathToQualifiedName(aGraphTextFile.getFile().getAbsolutePath());
-		Class layerClass = ClassFactory.getClass(UMLProject.theSystem, qualifiedName);
+		Class layerClass = ClassFactory.getClass(targetProject.theSystem, qualifiedName);
 		return layerClass;
 	}
 
@@ -142,7 +147,8 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 		String messageName = s;
 		Class owningClass = (Class) anInteraction.getOwner();
 		String secondLayerClassName = getSecondLayerClassName();
-		Class importedClass = ClassFactory.getClassByMessage(UMLProject.theSystem, messageName, secondLayerClassName);
+		Class importedClass = ClassFactory.getClassByMessage(targetProject.theSystem, messageName,
+				secondLayerClassName);
 		ElementImport classImport = ElementImportFactory.getElementImportByAlias(owningClass, importedClass.getName());
 		if (classImport == null) {
 			classImport = ElementImportFactory.getElementImport(owningClass, secondLayerClassName);
@@ -155,16 +161,17 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 		String pathName = qualifiedName;
 		pathName = pathName.replace("pst::specs::", "");
 		pathName = pathName.replace("::", File.separator);
-		pathName = GraphProject.getFirstLayerDir().getAbsolutePath() + pathName;
-		pathName = pathName + ".txt";
+		pathName = sourceProject.getLayerDir(sourceProject.firstLayerName).getAbsolutePath() + pathName;
+		pathName = pathName + sourceProject.getLayerFileType(sourceProject.firstLayerName);
 		return pathName;
 	}
 
 	@Override
 	protected String convertAbsolutePathToQualifiedName(String pathName) {
 		String qualifiedName = pathName.trim();
-		qualifiedName = qualifiedName.replace(".txt", "");
-		qualifiedName = qualifiedName.replace(GraphProject.getFirstLayerDir().getAbsolutePath(), "");
+		qualifiedName = qualifiedName.replace(sourceProject.getLayerFileType(sourceProject.firstLayerName), "");
+		qualifiedName = qualifiedName.replace(sourceProject.getLayerDir(sourceProject.firstLayerName).getAbsolutePath(),
+				"");
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::specs" + qualifiedName;
 		return qualifiedName;
@@ -198,8 +205,8 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	private String getSecondLayerClassName() {
 		String secondLayerClassName = "";
 		secondLayerClassName = UMLNameConverter.filterClassName(getFSMName() + getFSMState() + "Steps");
-		secondLayerClassName = "pst::" + Project.secondLayerPackageName + "::"
-				+ Utilities.toLowerCamelCase(getFSMName()) + "::" + secondLayerClassName;
+		secondLayerClassName = "pst::" + sourceProject.secondLayerName + "::" + Utilities.toLowerCamelCase(getFSMName())
+				+ "::" + secondLayerClassName;
 		return secondLayerClassName;
 	}
 

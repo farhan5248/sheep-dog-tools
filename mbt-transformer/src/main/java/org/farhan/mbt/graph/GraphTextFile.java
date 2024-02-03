@@ -10,17 +10,12 @@ public class GraphTextFile implements ConvertibleObject {
 	private File theFile;
 	public MBTGraph<MBTVertex, MBTEdge> theGraph;
 
-	public GraphTextFile(MBTGraph<MBTVertex, MBTEdge> g) {
-		theGraph = g;
-		String fileName = GraphProject.getFirstLayerDir().getAbsolutePath() + File.separator + g.getName()
-				+ GraphProject.getFirstLayerFileType();
-		theFile = new File(fileName);
-	}
-
 	public GraphTextFile(File f) {
+		theFile = f;
 		theGraph = new MBTGraph<MBTVertex, MBTEdge>(MBTEdge.class);
 		theGraph.setName(f.getName());
-		theFile = f;
+		theGraph.createStartVertex();
+		theGraph.createEndVertex();
 	}
 
 	@Override
@@ -116,7 +111,6 @@ public class GraphTextFile implements ConvertibleObject {
 				isValue = false;
 				((MBTEdge) lastObject).setValue(line.trim());
 			}
-
 		}
 	}
 

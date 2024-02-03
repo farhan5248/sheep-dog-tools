@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Assertions;
 
 public abstract class FileObject extends GraphModelObject {
 
-	public void setBaseDir(String project) {
-		Project.baseDir = "target/src-gen/" + project + "/";
+	public void setBaseDir(String projectName) {
+		Project.baseDir = "target/src-gen/" + projectName + "/";
 	}
 
 	public void setPath(String path) {
@@ -17,7 +17,6 @@ public abstract class FileObject extends GraphModelObject {
 	}
 
 	public void assertFileExists() {
-
 		try {
 			File theFile = new File(Project.baseDir + keyValue.get("path"));
 			Assertions.assertTrue(theFile.exists(), "The file (" + theFile.getCanonicalPath() + ") isn't present");
@@ -27,7 +26,6 @@ public abstract class FileObject extends GraphModelObject {
 	}
 
 	public void setContent(String docString) {
-
 		try {
 			File aFile = new File(Project.baseDir + keyValue.get("path"));
 			Utilities.writeFile(aFile, docString);

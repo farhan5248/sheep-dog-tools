@@ -1,5 +1,6 @@
 package org.farhan.mbt.asciidoctorgraph;
 
+import java.io.File;
 import java.util.ArrayList;
 import org.asciidoctor.ast.Cell;
 import org.asciidoctor.ast.Row;
@@ -21,8 +22,14 @@ public class AsciiDoctorToGraphFirstLayerConverter extends ToGraphFirstLayerConv
 	private AsciiDoctorAdocFile anAsciiDoctorFile;
 	private String layer;
 
-	public AsciiDoctorToGraphFirstLayerConverter(String layer) {
+	AsciiDoctorProject sourceProject;
+	GraphProject targetProject;
+
+	public AsciiDoctorToGraphFirstLayerConverter(String layer, AsciiDoctorProject sourceProject,
+			GraphProject targetProject) {
 		this.layer = layer;
+		this.sourceProject = sourceProject;
+		this.targetProject = targetProject;
 	}
 
 	@Override
@@ -102,18 +109,24 @@ public class AsciiDoctorToGraphFirstLayerConverter extends ToGraphFirstLayerConv
 	@Override
 	protected void convertObject(ConvertibleObject layerFile) throws Exception {
 		anAsciiDoctorFile = (AsciiDoctorAdocFile) layerFile;
-		MBTGraph<MBTVertex, MBTEdge> g = createEmptyGraph(anAsciiDoctorFile.theDoc.getDoctitle());
+		GraphTextFile gtf = new GraphTextFile(new File(convertFullName()));
 		for (StructuralNode block : anAsciiDoctorFile.theDoc.getBlocks()) {
 			if (block instanceof Section) {
-				createFromSection(g, (Section) block);
+				createFromSection(gtf.theGraph, (Section) block);
 			}
 		}
-		GraphProject.getFirstLayerGraphs().add(new GraphTextFile(g));
+		// TODO the project should hide object creation and list management
+		targetProject.getLayerObjects(targetProject.firstLayerName).add(gtf);
+	}
+
+	private String convertFullName() {
+		return targetProject.getLayerDir(targetProject.firstLayerName).getAbsolutePath() + File.separator
+				+ anAsciiDoctorFile.getFile().getName().replace(sourceProject.getLayerFileType(sourceProject.firstLayerName), "") + targetProject.getLayerFileType(targetProject.firstLayerName);
 	}
 
 	@Override
 	protected ArrayList<ConvertibleObject> getLayerObjects(String layer) {
-		return AsciiDoctorProject.getLayerFiles(layer);
+		return sourceProject.getLayerObjects(layer);
 	}
 
 }

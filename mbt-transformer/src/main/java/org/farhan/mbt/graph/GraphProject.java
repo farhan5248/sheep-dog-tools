@@ -1,42 +1,43 @@
 package org.farhan.mbt.graph;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import org.eclipse.uml2.uml.Model;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Project;
 import org.farhan.mbt.core.Utilities;
-import org.farhan.mbt.cucumber.CucumberFeatureFile;
 
 public class GraphProject extends Project {
 
-	private static ArrayList<ConvertibleObject> firstLayerGraphs;
+	private ArrayList<ConvertibleObject> firstLayerObjects;
 
-	public static File getFirstLayerDir() {
-		return new File(baseDir + "target/Graphs/");
-	}
-	
-	public static String getFirstLayerFileType() {
-		return ".txt";
-	}
-	
-	public static void init() {
-		firstLayerGraphs = new ArrayList<ConvertibleObject>();
+	public GraphProject() {
+		firstLayerObjects = new ArrayList<ConvertibleObject>();
 	}
 
-	public static void readFiles() throws Exception {
-		
-		ArrayList<File> files = Utilities.recursivelyListFiles(getFirstLayerDir(), getFirstLayerFileType());
+	@Override
+	public File getLayerDir(String layer) {
+		File aFile = null;
+		aFile = new File(baseDir + "target/Graphs/");
+		aFile.mkdirs();
+		return aFile;
+	}
+
+	@Override
+	public void load() throws Exception {
+
+		ArrayList<File> files = Utilities.recursivelyListFiles(getLayerDir(firstLayerName),
+				getLayerFileType(firstLayerName));
+		firstLayerObjects.clear();
 		for (File f : files) {
 			GraphTextFile gtf = new GraphTextFile(f);
-			firstLayerGraphs.add(gtf);
+			firstLayerObjects.add(gtf);
 			gtf.read();
 		}
 	}
 
-	public static void writeFiles() throws Exception {
-		for (ConvertibleObject cf : firstLayerGraphs) {
+	@Override
+	public void save() throws Exception {
+		for (ConvertibleObject cf : firstLayerObjects) {
 			try {
 				cf.write();
 			} catch (Exception e) {
@@ -45,20 +46,21 @@ public class GraphProject extends Project {
 		}
 	}
 
-	public static ArrayList<ConvertibleObject> getFirstLayerGraphs() {
-		return firstLayerGraphs;
+	@Override
+	public String getLayerFileType(String layer) {
+		return ".graph";
 	}
 
-	public static ArrayList<ConvertibleObject> getFirstLayerFiles() {
-		return firstLayerGraphs;
-	}
-
-	public static ArrayList<ConvertibleObject> getSecondLayerFiles() {
-		return new ArrayList<ConvertibleObject>();
-	}
-
-	public static ArrayList<ConvertibleObject> getThirdLayerFiles() {
-		return new ArrayList<ConvertibleObject>();
+	@Override
+	public ArrayList<ConvertibleObject> getLayerObjects(String layer) {
+		if (firstLayerObjects.isEmpty()) {
+			try {
+				load();
+			} catch (Exception e) {
+				Utilities.getStackTraceAsString(e);
+			}
+		}
+		return firstLayerObjects;
 	}
 
 }

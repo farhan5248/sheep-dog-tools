@@ -1,5 +1,6 @@
 package org.farhan.mbt.uml;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -13,24 +14,42 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
+import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Project;
-import org.farhan.mbt.core.Utilities;
 
 public class UMLProject extends Project {
 
-	// TODO remove UMLProject.theSystem from all the UML Factory methods
-	public static Model theSystem;
+	private ArrayList<ConvertibleObject> firstLayerObjects;
+	private ArrayList<ConvertibleObject> secondLayerObjects;
+	private ArrayList<ConvertibleObject> thirdLayerObjects;
 
-	public static void init() {
+	// TODO remove theSystem from all the UML Factory methods
+	public Model theSystem;
+
+	public UMLProject() {
+		firstLayerObjects = new ArrayList<ConvertibleObject>();
+		secondLayerObjects = new ArrayList<ConvertibleObject>();
+		thirdLayerObjects = new ArrayList<ConvertibleObject>();
+
+		// TODO move this to writeFiles after maintaining the classes in the lists above
 		theSystem = ModelFactory.getModel("pst");
-		PackageFactory.addPackage(theSystem, UMLProject.firstLayerPackageName);
-		PackageFactory.addPackage(theSystem, UMLProject.secondLayerPackageName);
-		PackageFactory.addPackage(theSystem, UMLProject.thirdLayerPackageName);
+		theSystem.createNestedPackage(firstLayerName);
+		theSystem.createNestedPackage(secondLayerName);
+		theSystem.createNestedPackage(thirdLayerName);
 
 	}
 
-	public static Model readFiles() throws Exception {
-		URI uri = URI.createFileURI(getUmlDir().getAbsolutePath()).appendSegment(theSystem.getName())
+	@Override
+	public File getLayerDir(String layer) {
+		File aFile = null;
+		aFile = new File(baseDir + "target/uml/");
+		aFile.mkdirs();
+		return aFile;
+	}
+
+	@Override
+	public void load() throws Exception {
+		URI uri = URI.createFileURI(getLayerDir("").getAbsolutePath()).appendSegment(theSystem.getName())
 				.appendFileExtension(UMLResource.FILE_EXTENSION);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		// TODO test removing this or at least comment it out
@@ -41,12 +60,12 @@ public class UMLProject extends Project {
 		for (EObject e : resource.getContents()) {
 			theSystem = (Model) e;
 		}
-		return theSystem;
 	}
 
-	public static void writeFiles() throws Exception {
+	@Override
+	public void save() throws Exception {
 
-		URI uri = URI.createFileURI(getUmlDir().getAbsolutePath()).appendSegment(theSystem.getName())
+		URI uri = URI.createFileURI(getLayerDir("").getAbsolutePath()).appendSegment(theSystem.getName())
 				.appendFileExtension(UMLResource.FILE_EXTENSION);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		UMLResourcesUtil.init(resourceSet);
@@ -58,15 +77,34 @@ public class UMLProject extends Project {
 		resource.save(options);
 	}
 
-	public static ArrayList<Class> getLayerClasses(String layer) {
-		if (layer.contentEquals(Project.firstLayerPackageName)) {
-			return PackageFactory.getPackagedClasses(theSystem.getNestedPackage(Project.firstLayerPackageName));
-		} else if (layer.contentEquals(Project.secondLayerPackageName)) {
-			return PackageFactory.getPackagedClasses(theSystem.getNestedPackage(Project.secondLayerPackageName));
-		} else if (layer.contentEquals(Project.thirdLayerPackageName)) {
-			return PackageFactory.getPackagedClasses(theSystem.getNestedPackage(Project.thirdLayerPackageName));
+	// TODO merge this into getLayerObjects after creating UMLFile
+	public ArrayList<Class> getLayerClasses(String layer) {
+		if (layer.contentEquals(firstLayerName)) {
+			return PackageFactory.getPackagedClasses(theSystem.getNestedPackage(firstLayerName));
+		} else if (layer.contentEquals(secondLayerName)) {
+			return PackageFactory.getPackagedClasses(theSystem.getNestedPackage(secondLayerName));
+		} else if (layer.contentEquals(thirdLayerName)) {
+			return PackageFactory.getPackagedClasses(theSystem.getNestedPackage(thirdLayerName));
 		}
 		return null;
+	}
+
+	@Override
+	public String getLayerFileType(String layer) {
+		return ".uml";
+	}
+
+	@Override
+	public ArrayList<ConvertibleObject> getLayerObjects(String layer) {
+		ArrayList<ConvertibleObject> layerFiles = null;
+		if (layer.contentEquals(firstLayerName)) {
+			layerFiles = firstLayerObjects;
+		} else if (layer.contentEquals(secondLayerName)) {
+			layerFiles = secondLayerObjects;
+		} else if (layer.contentEquals(thirdLayerName)) {
+			layerFiles = thirdLayerObjects;
+		}
+		return layerFiles;
 	}
 
 }

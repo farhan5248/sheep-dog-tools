@@ -20,25 +20,7 @@ public class PackageFactory {
 		return owningPackage;
 	}
 
-	public static Package addPackageRecursively(Package nestingPackage, String qualifiedName) {
-		Package owningPackage = nestingPackage;
-		String[] qualifiedNameParts = qualifiedName.replace(nestingPackage.getQualifiedName() + "::", "").split("::");
-		for (int i = 0; i < qualifiedNameParts.length - 1; i++) {
-			owningPackage = addPackage(owningPackage, qualifiedNameParts[i]);
-		}
-		return owningPackage;
-	}
-
-	public static Package addPackage(Package nestingPackage, String name) {
-		Package thePackage = nestingPackage.getNestedPackage(name);
-		if (thePackage == null) {
-			thePackage = nestingPackage.createNestedPackage(name);
-		}
-		return thePackage;
-	}
-
 	public static PackageableElement getPackagedElement(String qualifiedName, Package nestingPackage) {
-
 		for (PackageableElement pe : nestingPackage.getPackagedElements()) {
 			if (pe instanceof Package) {
 				PackageableElement anElement = getPackagedElement(qualifiedName, (Package) pe);

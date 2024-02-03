@@ -7,9 +7,11 @@ import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.mbt.cucumber.CucumberNameConverter;
+import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.ArgumentFactory;
 import org.farhan.mbt.uml.InteractionFactory;
 import org.farhan.mbt.uml.ParameterFactory;
+import org.farhan.mbt.uml.UMLProject;
 
 public abstract class ToUMLOtherLayerConverter extends ToUMLLayerConverter {
 
@@ -21,8 +23,8 @@ public abstract class ToUMLOtherLayerConverter extends ToUMLLayerConverter {
 	protected String getNextLayerClassQualifiedName(Interaction targetInteraction) {
 
 		Class interactionOwner = (Class) targetInteraction.getOwner();
-		return interactionOwner.getQualifiedName()
-				.replace(Project.secondLayerPackageName, Project.thirdLayerPackageName).replace("Steps", "");
+		return interactionOwner.getQualifiedName().replace(targetProject.secondLayerName, targetProject.thirdLayerName)
+				.replace("Steps", "");
 	}
 
 	@Override

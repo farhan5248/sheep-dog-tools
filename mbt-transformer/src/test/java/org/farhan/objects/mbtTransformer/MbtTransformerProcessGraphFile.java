@@ -7,6 +7,14 @@ import io.cucumber.java.PendingException;
 
 public class MbtTransformerProcessGraphFile extends MbtTransformer {
 
+	public void setContent(HashMap<String, String> keyMap) {
+		setContent(keyMap.get("Content"));
+	}
+
+	public void assertPresent(HashMap<String, String> keyMap) {
+		assertGraphModelExists();
+	}
+
 	public void assertVerticesVertexName(HashMap<String, String> keyMap) {
 		assertVerticesVertexNameExists(keyMap.get("Vertex Name"));
 	}

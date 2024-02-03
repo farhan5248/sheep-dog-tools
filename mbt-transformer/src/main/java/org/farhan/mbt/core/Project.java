@@ -1,22 +1,29 @@
 package org.farhan.mbt.core;
 
 import java.io.File;
+import java.util.ArrayList;
 
-public class Project {
+public abstract class Project {
 
 	// TODO make getters and setters
-	public static String tags;
+	public static String tags = "";
 	public static String baseDir = "";
-	private static String umlDir = "target/uml/";
 
-	public static String firstLayerPackageName = "specs";
-	public static String secondLayerPackageName = "stepdefs";
-	public static String thirdLayerPackageName = "objects";
-	public static String fourthLayerPackageName = "common";
+	public String firstLayerName = "specs";
+	public String secondLayerName = "stepdefs";
+	public String thirdLayerName = "objects";
+	public String fourthLayerName = "common";
 
-	// TODO move this from here to UML Project
-	public static File getUmlDir() {
-		return new File(baseDir + umlDir);
-	}
+	public abstract File getLayerDir(String layer);
 
+	public abstract String getLayerFileType(String layer);
+
+	// TODO this method shouldn't read the files, that happens in select layer files
+	public abstract ArrayList<ConvertibleObject> getLayerObjects(String layer);
+
+	public abstract void save() throws Exception;
+
+	// TODO there shouldn't be a read files method in general since all reads happen
+	// in select layer files. At most this is needed for testing
+	public abstract void load() throws Exception;
 }

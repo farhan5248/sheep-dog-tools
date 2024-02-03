@@ -10,44 +10,53 @@ import org.farhan.mbt.core.Utilities;
 
 public class AsciiDoctorProject extends Project {
 
-	private static ArrayList<ConvertibleObject> firstLayerFiles;
+	private static ArrayList<ConvertibleObject> firstLayerObjects;
 
-	public static File getFirstLayerDir() {
-		return new File(baseDir + "src/test/resources/AsciiDoc/");
+	public AsciiDoctorProject() {
+		firstLayerObjects = new ArrayList<ConvertibleObject>();
 	}
 
-	public static ArrayList<ConvertibleObject> getLayerFiles(String layer) {
-		if (firstLayerFiles.isEmpty()) {
-			readFiles();
+	@Override
+	public File getLayerDir(String layer) {
+		File aFile = null;
+		aFile = new File(baseDir + "src/test/resources/AsciiDoc/");
+		aFile.mkdirs();
+		return aFile;
+	}
+
+	@Override
+	public ArrayList<ConvertibleObject> getLayerObjects(String layer) {
+		if (firstLayerObjects.isEmpty()) {
+			try {
+				load();
+			} catch (Exception e) {
+				Utilities.getStackTraceAsString(e);
+			}
 		}
-		return firstLayerFiles;
+		return firstLayerObjects;
 	}
 
-	private static String getFirstLayerFileType() {
-		return ".adoc";
-	}
-
-	public static void init() {
-		firstLayerFiles = new ArrayList<ConvertibleObject>();
-	}
-
-	public static void readFiles() {
-		ArrayList<File> files = Utilities.recursivelyListFiles(getFirstLayerDir(), getFirstLayerFileType());
+	@Override
+	public void load() throws Exception {
+		ArrayList<File> files = Utilities.recursivelyListFiles(getLayerDir(firstLayerName),
+				getLayerFileType(firstLayerName));
 		for (File f : files) {
 			AsciiDoctorAdocFile cff = new AsciiDoctorAdocFile(f);
-			firstLayerFiles.add(cff);
+			firstLayerObjects.add(cff);
 			cff.read();
 		}
 	}
 
-	public static void writeFiles() {
-		for (ConvertibleObject cf : firstLayerFiles) {
-			try {
-				cf.write();
-			} catch (Exception e) {
-				System.out.println(Utilities.getStackTraceAsString(e));
-			}
+	@Override
+	public void save() throws Exception {
+		for (ConvertibleObject cf : firstLayerObjects) {
+			cf.write();
 		}
+	}
+
+	@Override
+	public String getLayerFileType(String layer) {
+		return ".adoc";
 	}
 
 }

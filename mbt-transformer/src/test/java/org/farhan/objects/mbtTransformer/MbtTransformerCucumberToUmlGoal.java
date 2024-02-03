@@ -2,13 +2,13 @@ package org.farhan.objects.mbtTransformer;
 
 import java.util.HashMap;
 
-import org.farhan.common.objects.MbtTransformer;
+import org.farhan.common.objects.MbtTransformerGoal;
 import org.farhan.mbt.core.Project;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumberuml.ConvertCucumberToUMLMojo;
 import org.junit.jupiter.api.Assertions;
 
-public class MbtTransformerCucumberToUmlGoal extends MbtTransformer {
+public class MbtTransformerCucumberToUmlGoal extends MbtTransformerGoal {
 
 	public void setTags(HashMap<String, String> keyMap) {
 		// TODO I should probably pass the tags to the mojoGoal to keep it simple? It an

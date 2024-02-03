@@ -67,12 +67,11 @@ public abstract class ToUMLFirstLayerConverter extends ToUMLLayerConverter {
 		// Capitalize the first letter of the type
 		String objectType = StringUtils.capitalize(Validator.getObjectType(messageName));
 		setFSMState(objectParts[objectParts.length - 1] + objectType);
-
 		if (Validator.isContainerStep(messageName)) {
 			setFSMName(StringUtils.capitalize(Validator.getComponentName(messageName)));
 		}
 	}
-	
+
 	// TODO remove references to CucumberNameConverter
 
 	@Override
@@ -110,8 +109,8 @@ public abstract class ToUMLFirstLayerConverter extends ToUMLLayerConverter {
 	protected String getNextLayerClassQualifiedName(Interaction targetInteraction) {
 
 		Class interactionOwningClass = (Class) targetInteraction.getOwner();
-		return interactionOwningClass.getQualifiedName()
-				.replace(Project.secondLayerPackageName, Project.thirdLayerPackageName).replace("Steps", "");
+		return interactionOwningClass.getQualifiedName().replace(targetProject.secondLayerName, targetProject.thirdLayerName)
+				.replace("Steps", "");
 	}
 
 	@Override
@@ -132,14 +131,14 @@ public abstract class ToUMLFirstLayerConverter extends ToUMLLayerConverter {
 	protected void createNextLayerInteractionMessagesFromEdgeMessage(Interaction targetInteraction, Message m) {
 
 		createInputOutputMessage(targetInteraction, m, "set");
-		Class layer3Class = ClassFactory.getClass(UMLProject.theSystem,
+		Class layer3Class = ClassFactory.getClass(targetProject.theSystem,
 				getNextLayerClassQualifiedName(targetInteraction));
 		MessageFactory.getMessage(targetInteraction, layer3Class, "execute");
 	}
 
 	private void createInputOutputMessage(Interaction nextLayerInteraction, Message m, String prefix) {
 
-		Class nextLayerClass = ClassFactory.getClass(UMLProject.theSystem,
+		Class nextLayerClass = ClassFactory.getClass(targetProject.theSystem,
 				getNextLayerClassQualifiedName(nextLayerInteraction));
 		if (getFirstArgument(m).contentEquals("docString") || getFirstArgument(m).contentEquals("dataTable")) {
 

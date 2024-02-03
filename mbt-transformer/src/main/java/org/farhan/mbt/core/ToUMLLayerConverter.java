@@ -13,6 +13,8 @@ import org.farhan.mbt.uml.PackageFactory;
 import org.farhan.mbt.uml.UMLProject;
 
 public abstract class ToUMLLayerConverter {
+	
+	protected UMLProject targetProject;
 
 	protected abstract void selectLayerObjects() throws Exception;
 
@@ -48,7 +50,7 @@ public abstract class ToUMLLayerConverter {
 	protected abstract String convertImportNameToQualifiedName(String importName);
 
 	protected void linkLayerFiles(String layer) throws Exception {
-		ArrayList<Interaction> layerInteractions = PackageFactory.getPackagedInteractions(UMLProject.theSystem, layer);
+		ArrayList<Interaction> layerInteractions = PackageFactory.getPackagedInteractions(targetProject.theSystem, layer);
 		for (Interaction i : layerInteractions) {
 			for (Message m : i.getMessages()) {
 				for (String methodName : getNextLayerInteractionNamesfromMessage(m)) {

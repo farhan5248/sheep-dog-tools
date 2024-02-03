@@ -1,11 +1,11 @@
 package org.farhan.objects.mbtTransformer;
 
-import org.farhan.common.objects.MbtTransformer;
+import org.farhan.common.objects.MbtTransformerGoal;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.graphuml.ConvertGraphToUMLMojo;
 import org.junit.jupiter.api.Assertions;
 
-public class MbtTransformerGraphToUmlGoal extends MbtTransformer {
+public class MbtTransformerGraphToUmlGoal extends MbtTransformerGoal {
 
     public void transition() {
         try {

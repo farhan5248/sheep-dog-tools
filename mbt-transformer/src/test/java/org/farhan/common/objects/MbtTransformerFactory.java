@@ -14,7 +14,6 @@ import org.farhan.objects.mbtTransformer.MbtTransformerGraphToUmlGoal;
 import org.farhan.objects.mbtTransformer.MbtTransformerProcessAdocFile;
 import org.farhan.objects.mbtTransformer.MbtTransformerProcessFeatureFile;
 import org.farhan.objects.mbtTransformer.MbtTransformerProcessGraphFile;
-import org.farhan.objects.mbtTransformer.MbtTransformerProcessTxtFile;
 import org.farhan.objects.mbtTransformer.MbtTransformerPstUmlFile;
 import org.farhan.objects.mbtTransformer.MbtTransformerUmlToCucumberGoal;
 
@@ -37,7 +36,6 @@ public class MbtTransformerFactory {
 	private static MbtTransformerProcessGraphFile mbtTransformerProcessGraphFile;
 	private static MbtTransformerAsciidoctorToGraphGoal mbtTransformerAsciidoctorToGraphGoal;
 	private static MbtTransformerGraphToUmlGoal mbtTransformerGraphToUmlGoal;
-	private static MbtTransformerProcessTxtFile mbtTransformerProcessTxtFile;
 
 	public static GraphModelObject get(String className) {
 		if (className.contentEquals("MbtTransformerCucumberToUmlGoal")) {
@@ -156,6 +154,8 @@ public class MbtTransformerFactory {
 		if (className.contentEquals("MbtTransformerProcessGraphFile")) {
 			if (mbtTransformerProcessGraphFile == null) {
 				mbtTransformerProcessGraphFile = new MbtTransformerProcessGraphFile();
+				mbtTransformerProcessGraphFile.setBaseDir("mbt-transformer");
+				mbtTransformerProcessGraphFile.setPath("target/Graphs/Process.graph");
 			}
 			return mbtTransformerProcessGraphFile;
 		}
@@ -170,14 +170,6 @@ public class MbtTransformerFactory {
 				mbtTransformerGraphToUmlGoal = new MbtTransformerGraphToUmlGoal();
 			}
 			return mbtTransformerGraphToUmlGoal;
-		}
-		if (className.contentEquals("MbtTransformerProcessTxtFile")) {
-			if (mbtTransformerProcessTxtFile == null) {
-				mbtTransformerProcessTxtFile = new MbtTransformerProcessTxtFile();
-				mbtTransformerProcessTxtFile.setBaseDir("mbt-transformer");
-				mbtTransformerProcessTxtFile.setPath("target/Graphs/Process.txt");
-			}
-			return mbtTransformerProcessTxtFile;
 		}
 		return null;
 	}

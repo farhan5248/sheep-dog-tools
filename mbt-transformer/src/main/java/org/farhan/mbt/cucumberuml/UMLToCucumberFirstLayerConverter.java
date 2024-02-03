@@ -17,11 +17,8 @@ import org.farhan.cucumber.Row;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Statement;
 import org.farhan.cucumber.Step;
-import org.farhan.mbt.core.Project;
 import org.farhan.mbt.core.UMLToFirstLayerConverter;
-import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberFeatureFile;
-import org.farhan.mbt.cucumber.CucumberNameConverter;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.AnnotationFactory;
 import org.farhan.mbt.uml.ArgumentFactory;
@@ -33,8 +30,12 @@ public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
 	private CucumberFeatureFile aFeatureFile;
 	private String layer;
 
-	public UMLToCucumberFirstLayerConverter(String layer) {
+	CucumberProject targetProject;
+
+	public UMLToCucumberFirstLayerConverter(String layer, UMLProject sourceProject, CucumberProject targetProject) {
 		this.layer = layer;
+		this.sourceProject = sourceProject;
+		this.targetProject = targetProject;
 	}
 
 	@Override
@@ -44,18 +45,18 @@ public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
 
 	@Override
 	protected ArrayList<?> selectLayerFiles() throws Exception {
-		return PackageFactory.getPackagedClasses(UMLProject.theSystem.getNestedPackage(getLayer()));
+		return PackageFactory.getPackagedClasses(sourceProject.theSystem.getNestedPackage(getLayer()));
 	}
 
 	@Override
 	protected ArrayList<Class> getLayerObjects(String layer) {
-		return UMLProject.getLayerClasses(layer);
+		return sourceProject.getLayerClasses(layer);
 	}
 
 	@Override
 	protected void convertObject(Class layerClass) throws Exception {
 		String path = convertClassQualifiedNameToPath(layerClass.getQualifiedName());
-		aFeatureFile = CucumberProject.createCucumberFeatureFile(new File(path));
+		aFeatureFile = targetProject.createCucumberFeatureFile(new File(path));
 		convertComments(layerClass, aFeatureFile.theFeature);
 	}
 
@@ -149,7 +150,14 @@ public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
 
 	@Override
 	protected String convertClassQualifiedNameToPath(String qualifiedName) {
-		return CucumberNameConverter.convertQualifiedNameToCucumberPath(qualifiedName);
+		String pathName = qualifiedName;
+		pathName = pathName.replace("pst::" + targetProject.firstLayerName,
+				targetProject.getLayerDir(targetProject.firstLayerName).getAbsolutePath());
+		pathName = pathName.replace("::", File.separator);
+		// TODO isn't feature defined somewhere else as getFileType? Maybe there should
+		// be get Layer 1 filetype, layer 2 filetype etc defined here
+		pathName = pathName + ".feature";
+		return pathName;
 	}
 
 	@Override

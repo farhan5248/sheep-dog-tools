@@ -7,7 +7,7 @@ Feature: Debug
       Feature: Convert Feature
       
         Scenario: Convert Feature
-          Given The mbt-transformer plugin, target/Graphs/Process.txt file is as follows
+          Given The mbt-transformer plugin, target/Graphs/Process.graph file is as follows
             \"\"\"
             text		
             \"\"\"
