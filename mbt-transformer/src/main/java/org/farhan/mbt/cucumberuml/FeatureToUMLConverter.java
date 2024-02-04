@@ -36,7 +36,7 @@ import com.github.javaparser.ast.expr.ObjectCreationExpr;
 import com.github.javaparser.ast.expr.StringLiteralExpr;
 import com.github.javaparser.ast.stmt.Statement;
 
-public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
+public class FeatureToUMLConverter extends ToUMLOtherLayerConverter {
 
 	private CucumberJavaFile aCucumberJavaFile;
 	// TODO move this to the super class
@@ -44,7 +44,7 @@ public class CucumberToUMLOtherLayerConverter extends ToUMLOtherLayerConverter {
 
 	CucumberProject sourceProject;
 
-	public CucumberToUMLOtherLayerConverter(String layer, CucumberProject sourceProject, UMLProject targetProject) {
+	public FeatureToUMLConverter(String layer, CucumberProject sourceProject, UMLProject targetProject) {
 		this.layer = layer;
 		this.sourceProject = sourceProject;
 		this.targetProject = targetProject;

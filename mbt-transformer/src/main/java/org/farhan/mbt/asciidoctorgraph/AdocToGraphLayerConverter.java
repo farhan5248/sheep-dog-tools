@@ -17,7 +17,7 @@ import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
 import org.farhan.mbt.graph.MBTVertex;
 
-public class AsciiDoctorToGraphFirstLayerConverter extends ToGraphFirstLayerConverter {
+public class AdocToGraphLayerConverter extends ToGraphFirstLayerConverter {
 
 	private AsciiDoctorAdocFile anAsciiDoctorFile;
 	private String layer;
@@ -25,7 +25,7 @@ public class AsciiDoctorToGraphFirstLayerConverter extends ToGraphFirstLayerConv
 	AsciiDoctorProject sourceProject;
 	GraphProject targetProject;
 
-	public AsciiDoctorToGraphFirstLayerConverter(String layer, AsciiDoctorProject sourceProject,
+	public AdocToGraphLayerConverter(String layer, AsciiDoctorProject sourceProject,
 			GraphProject targetProject) {
 		this.layer = layer;
 		this.sourceProject = sourceProject;

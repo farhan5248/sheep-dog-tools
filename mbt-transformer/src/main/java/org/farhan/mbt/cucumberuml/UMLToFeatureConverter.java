@@ -25,14 +25,14 @@ import org.farhan.mbt.uml.ArgumentFactory;
 import org.farhan.mbt.uml.PackageFactory;
 import org.farhan.mbt.uml.UMLProject;
 
-public class UMLToCucumberFirstLayerConverter extends UMLToFirstLayerConverter {
+public class UMLToFeatureConverter extends UMLToFirstLayerConverter {
 
 	private CucumberFeatureFile aFeatureFile;
 	private String layer;
 
 	CucumberProject targetProject;
 
-	public UMLToCucumberFirstLayerConverter(String layer, UMLProject sourceProject, CucumberProject targetProject) {
+	public UMLToFeatureConverter(String layer, UMLProject sourceProject, CucumberProject targetProject) {
 		this.layer = layer;
 		this.sourceProject = sourceProject;
 		this.targetProject = targetProject;

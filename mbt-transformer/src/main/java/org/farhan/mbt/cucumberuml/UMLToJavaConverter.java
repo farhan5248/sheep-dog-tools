@@ -26,14 +26,14 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.BlockStmt;
 
-public class UMLToCucumberOtherLayerConverter extends UMLToOtherLayerConverter {
+public class UMLToJavaConverter extends UMLToOtherLayerConverter {
 
 	private CucumberJavaFile aJavaFile;
 	private String layer;
 
 	CucumberProject targetProject;
 
-	public UMLToCucumberOtherLayerConverter(String layer, UMLProject sourceProject, CucumberProject targetProject) {
+	public UMLToJavaConverter(String layer, UMLProject sourceProject, CucumberProject targetProject) {
 		this.layer = layer;
 		this.sourceProject = sourceProject;
 		this.targetProject = targetProject;

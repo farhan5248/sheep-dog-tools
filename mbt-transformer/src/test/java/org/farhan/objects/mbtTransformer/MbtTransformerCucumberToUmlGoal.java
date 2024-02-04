@@ -5,7 +5,7 @@ import java.util.HashMap;
 import org.farhan.common.objects.MbtTransformerGoal;
 import org.farhan.mbt.core.Project;
 import org.farhan.mbt.core.Utilities;
-import org.farhan.mbt.cucumberuml.ConvertCucumberToUMLMojo;
+import org.farhan.mbt.cucumberuml.ConvertCucumberToUML;
 import org.junit.jupiter.api.Assertions;
 
 public class MbtTransformerCucumberToUmlGoal extends MbtTransformerGoal {
@@ -20,7 +20,7 @@ public class MbtTransformerCucumberToUmlGoal extends MbtTransformerGoal {
 	public void transition() {
 		// TODO make this runGoal("ConvertCucumberToUMLPSTMojo");
 		try {
-			ConvertCucumberToUMLMojo mojo = new ConvertCucumberToUMLMojo();
+			ConvertCucumberToUML mojo = new ConvertCucumberToUML();
 			mojo.mojoGoal();
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));

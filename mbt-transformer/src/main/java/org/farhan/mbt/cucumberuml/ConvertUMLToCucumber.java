@@ -7,7 +7,7 @@ import org.farhan.mbt.core.UMLToLayerConverter;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.UMLProject;
 
-public class ConvertUMLToCucumberMojo extends UMLToConversionMojo {
+public class ConvertUMLToCucumber extends UMLToConversionMojo {
 
 	// TODO move these into the converters themselves, think about how to read the
 	// UML file before writing the next layer to it
@@ -18,11 +18,11 @@ public class ConvertUMLToCucumberMojo extends UMLToConversionMojo {
 	protected ArrayList<UMLToLayerConverter> getLayerConverters() {
 		ArrayList<UMLToLayerConverter> converters = new ArrayList<UMLToLayerConverter>();
 		converters
-				.add(new UMLToCucumberFirstLayerConverter(sourceProject.firstLayerName, sourceProject, targetProject));
+				.add(new UMLToFeatureConverter(sourceProject.firstLayerName, sourceProject, targetProject));
 		converters
-				.add(new UMLToCucumberOtherLayerConverter(sourceProject.secondLayerName, sourceProject, targetProject));
+				.add(new UMLToJavaConverter(sourceProject.secondLayerName, sourceProject, targetProject));
 		converters
-				.add(new UMLToCucumberOtherLayerConverter(sourceProject.thirdLayerName, sourceProject, targetProject));
+				.add(new UMLToJavaConverter(sourceProject.thirdLayerName, sourceProject, targetProject));
 		return converters;
 	}
 

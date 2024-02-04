@@ -30,7 +30,7 @@ import org.farhan.mbt.uml.MessageFactory;
 import org.farhan.mbt.uml.UMLNameConverter;
 import org.farhan.mbt.uml.UMLProject;
 
-public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
+public class GraphToUMLConverter extends ToUMLFirstLayerConverter {
 
 	private GraphTextFile aGraphTextFile;
 
@@ -39,7 +39,7 @@ public class GraphToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
 	GraphProject sourceProject;
 	UMLProject targetProject;
 
-	public GraphToUMLFirstLayerConverter(String layer, GraphProject sourceProject, UMLProject targetProject) {
+	public GraphToUMLConverter(String layer, GraphProject sourceProject, UMLProject targetProject) {
 		this.layer = layer;
 		this.sourceProject = sourceProject;
 		this.targetProject = targetProject;

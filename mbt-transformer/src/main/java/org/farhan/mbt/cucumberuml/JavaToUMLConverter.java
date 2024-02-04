@@ -37,14 +37,14 @@ import org.farhan.mbt.uml.ParameterFactory;
 import org.farhan.mbt.uml.UMLNameConverter;
 import org.farhan.mbt.uml.UMLProject;
 
-public class CucumberToUMLFirstLayerConverter extends ToUMLFirstLayerConverter {
+public class JavaToUMLConverter extends ToUMLFirstLayerConverter {
 
 	private CucumberFeatureFile aCucumberFile;
 	private String layer;
 
 	CucumberProject sourceProject;
 
-	public CucumberToUMLFirstLayerConverter(String layer, CucumberProject sourceProject, UMLProject targetProject) {
+	public JavaToUMLConverter(String layer, CucumberProject sourceProject, UMLProject targetProject) {
 		this.layer = layer;
 		this.sourceProject = sourceProject;
 		this.targetProject = targetProject;
