@@ -19,16 +19,16 @@ public abstract class ToUMLConverter {
 		theMachine = new StateMachine();
 	}
 
-	protected UMLProject targetProject;
+	protected UMLProject target;
 
-	protected abstract void selectLayerObjects() throws Exception;
+	protected abstract void selectObjects() throws Exception;
 
 	protected abstract String getLayer();
 
-	protected abstract ArrayList<ConvertibleObject> getLayerObjects(String layer);
+	protected abstract ArrayList<ConvertibleObject> getObjects(String layer);
 
 	protected void convertObjects() throws Exception {
-		for (ConvertibleObject layerFile : getLayerObjects(getLayer())) {
+		for (ConvertibleObject layerFile : getObjects(getLayer())) {
 			Class layerClass = convertObject(layerFile);
 			convertImports(layerClass);
 			convertBehaviours(layerClass);
@@ -46,7 +46,7 @@ public abstract class ToUMLConverter {
 	protected abstract void convertMessage(Interaction anInteraction, Object anObject) throws Exception;
 
 	protected void linkLayerFiles(String layer) throws Exception {
-		ArrayList<Interaction> layerInteractions = PackageFactory.getPackagedInteractions(targetProject.theSystem,
+		ArrayList<Interaction> layerInteractions = PackageFactory.getPackagedInteractions(target.theSystem,
 				layer);
 		for (Interaction i : layerInteractions) {
 			for (Message m : i.getMessages()) {
@@ -132,7 +132,7 @@ public abstract class ToUMLConverter {
 		}
 	}
 
-	protected abstract String convertFullName(String fullName);
+	protected abstract String convertObjectName(String fullName);
 
 	protected String getMethodName(String name, boolean keepNumbers) {
 		// remove arguments

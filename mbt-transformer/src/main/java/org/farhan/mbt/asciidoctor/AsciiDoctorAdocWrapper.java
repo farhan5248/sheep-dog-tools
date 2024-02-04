@@ -7,12 +7,12 @@ import org.asciidoctor.Asciidoctor.Factory;
 import org.asciidoctor.ast.Document;
 import org.farhan.mbt.core.ConvertibleObject;
 
-public class AsciiDoctorAdocFile implements ConvertibleObject {
+public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	private File theFile;
 	public Document theDoc;
 
-	public AsciiDoctorAdocFile(File theFile) {
+	public AsciiDoctorAdocWrapper(File theFile) {
 		setFile(theFile);
 	}
 

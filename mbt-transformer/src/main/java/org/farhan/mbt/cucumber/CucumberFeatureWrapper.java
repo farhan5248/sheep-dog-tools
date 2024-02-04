@@ -14,13 +14,13 @@ import org.farhan.mbt.core.ConvertibleObject;
 
 import com.google.inject.Injector;
 
-public class CucumberFeatureFile implements ConvertibleObject {
+public class CucumberFeatureWrapper implements ConvertibleObject {
 
 	private File theFile;
 	// TODO make this private later
 	public Feature theFeature;
 
-	public CucumberFeatureFile(File theFile) {
+	public CucumberFeatureWrapper(File theFile) {
 		setFile(theFile);
 		theFeature = CucumberFactory.eINSTANCE.createFeature();
 		theFeature.setName(theFile.getName().replace(".feature", ""));

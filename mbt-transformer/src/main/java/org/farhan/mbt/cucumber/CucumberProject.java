@@ -5,10 +5,10 @@ import java.io.File;
 import java.util.ArrayList;
 
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.Project;
+import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.Utilities;
 
-public class CucumberProject extends Project {
+public class CucumberProject extends ConvertibleProject {
 
 	private ArrayList<ConvertibleObject> firstLayerObjects;
 	private ArrayList<ConvertibleObject> secondLayerObjects;
@@ -21,7 +21,7 @@ public class CucumberProject extends Project {
 	}
 
 	@Override
-	public String getLayerFileType(String layer) {
+	public String getFileType(String layer) {
 		if (layer.contentEquals(firstLayerName)) {
 			return ".feature";
 		} else {
@@ -30,7 +30,7 @@ public class CucumberProject extends Project {
 	}
 
 	@Override
-	public File getLayerDir(String layer) {
+	public File getDir(String layer) {
 		File aFile = null;
 		if (layer.contentEquals(firstLayerName)) {
 			aFile = new File(baseDir + "src/test/resources/Cucumber/");
@@ -44,7 +44,7 @@ public class CucumberProject extends Project {
 	}
 
 	@Override
-	public ArrayList<ConvertibleObject> getLayerObjects(String layer) {
+	public ArrayList<ConvertibleObject> getObjects(String layer) {
 
 		ArrayList<ConvertibleObject> layerFiles = null;
 		if (layer.contentEquals(firstLayerName)) {
@@ -73,13 +73,13 @@ public class CucumberProject extends Project {
 
 	// TODO delete after moving reads to select layer objects
 	public void readFiles(String layer, ArrayList<ConvertibleObject> layerFiles) {
-		ArrayList<File> files = Utilities.recursivelyListFiles(getLayerDir(layer), getLayerFileType(layer));
+		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(layer), getFileType(layer));
 		for (File f : files) {
 			try {
 				if (layer.contentEquals(firstLayerName)) {
-					layerFiles.add(new CucumberFeatureFile(f));
+					layerFiles.add(new CucumberFeatureWrapper(f));
 				} else {
-					layerFiles.add(new CucumberJavaFile(f));
+					layerFiles.add(new JavaClassWrapper(f));
 				}
 				layerFiles.getLast().read();
 			} catch (Exception e) {
@@ -101,22 +101,22 @@ public class CucumberProject extends Project {
 		}
 	}
 
-	public CucumberJavaFile createCucumberJavaFile(File file) throws Exception {
-		CucumberJavaFile aJavaFile = new CucumberJavaFile(file);
-		if (file.getAbsolutePath().contains(getLayerDir(secondLayerName).getName())) {
-			getLayerObjects(secondLayerName).add(aJavaFile);
-		} else if (file.getAbsolutePath().contains(getLayerDir(thirdLayerName).getName())) {
-			getLayerObjects(thirdLayerName).add(aJavaFile);
+	public JavaClassWrapper createCucumberJavaFile(File file) throws Exception {
+		JavaClassWrapper aJavaFile = new JavaClassWrapper(file);
+		if (file.getAbsolutePath().contains(getDir(secondLayerName).getName())) {
+			getObjects(secondLayerName).add(aJavaFile);
+		} else if (file.getAbsolutePath().contains(getDir(thirdLayerName).getName())) {
+			getObjects(thirdLayerName).add(aJavaFile);
 		} else {
 			throw new Exception("Java files are only in layer 2 or 3");
 		}
 		return aJavaFile;
 	}
 
-	public CucumberFeatureFile createCucumberFeatureFile(File file) throws Exception {
-		CucumberFeatureFile aFeatureFile = new CucumberFeatureFile(file);
-		if (file.getAbsolutePath().contains(getLayerDir(firstLayerName).getName())) {
-			getLayerObjects(firstLayerName).add(aFeatureFile);
+	public CucumberFeatureWrapper createCucumberFeatureFile(File file) throws Exception {
+		CucumberFeatureWrapper aFeatureFile = new CucumberFeatureWrapper(file);
+		if (file.getAbsolutePath().contains(getDir(firstLayerName).getName())) {
+			getObjects(firstLayerName).add(aFeatureFile);
 		} else {
 			throw new Exception("Feature files are only in layer 1");
 		}

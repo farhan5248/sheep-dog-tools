@@ -14,8 +14,8 @@ import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToUMLGherkinConverter;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.core.Validator;
-import org.farhan.mbt.graph.GraphProject;
-import org.farhan.mbt.graph.GraphTextFile;
+import org.farhan.mbt.graph.JGraphTProject;
+import org.farhan.mbt.graph.JGraphTGraphWrapper;
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
 import org.farhan.mbt.graph.MBTPath;
@@ -30,17 +30,17 @@ import org.farhan.mbt.uml.UMLProject;
 
 public class GraphToUMLConverter extends ToUMLGherkinConverter {
 
-	private GraphTextFile aGraphTextFile;
+	private JGraphTGraphWrapper aGraphTextFile;
 
 	private String layer;
 
-	GraphProject sourceProject;
-	UMLProject targetProject;
+	JGraphTProject source;
+	UMLProject target;
 
-	public GraphToUMLConverter(String layer, GraphProject sourceProject, UMLProject targetProject) {
+	public GraphToUMLConverter(String layer, JGraphTProject source, UMLProject target) {
 		this.layer = layer;
-		this.sourceProject = sourceProject;
-		this.targetProject = targetProject;
+		this.source = source;
+		this.target = target;
 	}
 
 	@Override
@@ -49,22 +49,22 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	}
 
 	@Override
-	protected void selectLayerObjects() throws Exception {
-		sourceProject.load();
+	protected void selectObjects() throws Exception {
+		source.load();
 	}
 
 	@Override
-	protected ArrayList<ConvertibleObject> getLayerObjects(String layer) {
+	protected ArrayList<ConvertibleObject> getObjects(String layer) {
 		// TODO make a GraphDotFile
-		return sourceProject.getLayerObjects(sourceProject.firstLayerName);
+		return source.getObjects(source.firstLayerName);
 	}
 
 	@Override
 	protected Class convertObject(ConvertibleObject theObject) throws Exception {
 
-		aGraphTextFile = (GraphTextFile) theObject;
-		String qualifiedName = convertFullName(aGraphTextFile.getFile().getAbsolutePath());
-		Class layerClass = ClassFactory.getClass(targetProject.theSystem, qualifiedName);
+		aGraphTextFile = (JGraphTGraphWrapper) theObject;
+		String qualifiedName = convertObjectName(aGraphTextFile.getFile().getAbsolutePath());
+		Class layerClass = ClassFactory.getClass(target.theSystem, qualifiedName);
 		return layerClass;
 	}
 
@@ -145,7 +145,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		String messageName = s;
 		Class owningClass = (Class) anInteraction.getOwner();
 		String secondLayerClassName = getSecondLayerClassName();
-		Class importedClass = ClassFactory.getClassByMessage(targetProject.theSystem, messageName,
+		Class importedClass = ClassFactory.getClassByMessage(target.theSystem, messageName,
 				secondLayerClassName);
 		ElementImport classImport = ElementImportFactory.getElementImportByAlias(owningClass, importedClass.getName());
 		if (classImport == null) {
@@ -155,10 +155,10 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	}
 
 	@Override
-	protected String convertFullName(String fullName) {
+	protected String convertObjectName(String fullName) {
 		String qualifiedName = fullName.trim();
-		qualifiedName = qualifiedName.replace(sourceProject.getLayerFileType(sourceProject.firstLayerName), "");
-		qualifiedName = qualifiedName.replace(sourceProject.getLayerDir(sourceProject.firstLayerName).getAbsolutePath(),
+		qualifiedName = qualifiedName.replace(source.getFileType(source.firstLayerName), "");
+		qualifiedName = qualifiedName.replace(source.getDir(source.firstLayerName).getAbsolutePath(),
 				"");
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::specs" + qualifiedName;
@@ -181,7 +181,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	private String getSecondLayerClassName() {
 		String secondLayerClassName = "";
 		secondLayerClassName = convertNextLayerClassName(getFSMName() + getFSMState() + "Steps");
-		secondLayerClassName = "pst::" + sourceProject.secondLayerName + "::" + Utilities.toLowerCamelCase(getFSMName())
+		secondLayerClassName = "pst::" + source.secondLayerName + "::" + Utilities.toLowerCamelCase(getFSMName())
 				+ "::" + secondLayerClassName;
 		return secondLayerClassName;
 	}

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.farhan.mbt.core.Project;
+import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.uml.UMLProject;
 import org.junit.jupiter.api.Assertions;

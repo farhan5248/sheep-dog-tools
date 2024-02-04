@@ -8,7 +8,7 @@ import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.PackageableElement;
 import org.farhan.mbt.core.Utilities;
-import org.farhan.mbt.cucumber.CucumberJavaFile;
+import org.farhan.mbt.cucumber.JavaClassWrapper;
 
 public class ClassFactory {
 

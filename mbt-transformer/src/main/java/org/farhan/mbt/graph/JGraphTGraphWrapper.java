@@ -5,12 +5,12 @@ import java.io.File;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Utilities;
 
-public class GraphTextFile implements ConvertibleObject {
+public class JGraphTGraphWrapper implements ConvertibleObject {
 
 	private File theFile;
 	public MBTGraph<MBTVertex, MBTEdge> theGraph;
 
-	public GraphTextFile(File f) {
+	public JGraphTGraphWrapper(File f) {
 		theFile = f;
 		theGraph = new MBTGraph<MBTVertex, MBTEdge>(MBTEdge.class);
 		theGraph.setName(f.getName());

@@ -7,29 +7,27 @@ import org.asciidoctor.ast.Row;
 import org.asciidoctor.ast.Section;
 import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
-import org.farhan.mbt.asciidoctor.AsciiDoctorAdocFile;
+import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToGraphConverter;
-import org.farhan.mbt.graph.GraphProject;
-import org.farhan.mbt.graph.GraphTextFile;
+import org.farhan.mbt.graph.JGraphTProject;
+import org.farhan.mbt.graph.JGraphTGraphWrapper;
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
 import org.farhan.mbt.graph.MBTVertex;
 
-public class AdocToGraphLayerConverter extends ToGraphConverter {
+public class AdocToGraphConverter extends ToGraphConverter {
 
-	private AsciiDoctorAdocFile anAsciiDoctorFile;
+	private AsciiDoctorAdocWrapper anAsciiDoctorFile;
 	private String layer;
 
-	AsciiDoctorProject sourceProject;
-	GraphProject targetProject;
+	AsciiDoctorProject source;
 
-	public AdocToGraphLayerConverter(String layer, AsciiDoctorProject sourceProject,
-			GraphProject targetProject) {
+	public AdocToGraphConverter(String layer, AsciiDoctorProject source, JGraphTProject target) {
 		this.layer = layer;
-		this.sourceProject = sourceProject;
-		this.targetProject = targetProject;
+		this.source = source;
+		this.target = target;
 	}
 
 	@Override
@@ -102,31 +100,33 @@ public class AdocToGraphLayerConverter extends ToGraphConverter {
 	}
 
 	@Override
-	protected void selectLayerObjects() throws Exception {
+	protected void selectObjects() throws Exception {
 		// TODO this should be filterLayerFiles since it's removing files
 	}
 
 	@Override
 	protected void convertObject(ConvertibleObject layerFile) throws Exception {
-		anAsciiDoctorFile = (AsciiDoctorAdocFile) layerFile;
-		GraphTextFile gtf = new GraphTextFile(new File(convertFullName()));
+		anAsciiDoctorFile = (AsciiDoctorAdocWrapper) layerFile;
+		JGraphTGraphWrapper gtf = new JGraphTGraphWrapper(new File(convertObjectName(anAsciiDoctorFile.getFile().getName())));
 		for (StructuralNode block : anAsciiDoctorFile.theDoc.getBlocks()) {
 			if (block instanceof Section) {
 				createFromSection(gtf.theGraph, (Section) block);
 			}
 		}
 		// TODO the project should hide object creation and list management
-		targetProject.getLayerObjects(targetProject.firstLayerName).add(gtf);
-	}
-
-	private String convertFullName() {
-		return targetProject.getLayerDir(targetProject.firstLayerName).getAbsolutePath() + File.separator
-				+ anAsciiDoctorFile.getFile().getName().replace(sourceProject.getLayerFileType(sourceProject.firstLayerName), "") + targetProject.getLayerFileType(targetProject.firstLayerName);
+		target.getObjects(target.firstLayerName).add(gtf);
 	}
 
 	@Override
-	protected ArrayList<ConvertibleObject> getLayerObjects(String layer) {
-		return sourceProject.getLayerObjects(layer);
+	protected String convertObjectName(String fullName) {
+		return target.getDir(target.firstLayerName).getAbsolutePath() + File.separator
+				+ fullName.replace(source.getFileType(source.firstLayerName), "")
+				+ target.getFileType(target.firstLayerName);
+	}
+
+	@Override
+	protected ArrayList<ConvertibleObject> getObjects(String layer) {
+		return source.getObjects(layer);
 	}
 
 }

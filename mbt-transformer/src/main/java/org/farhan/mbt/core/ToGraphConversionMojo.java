@@ -14,7 +14,7 @@ public abstract class ToGraphConversionMojo {
 
 		initProjects();
 		for (ToGraphConverter c : getLayerConverters()) {
-			c.selectLayerObjects();
+			c.selectObjects();
 			c.convertObjects();
 		}
 		save();

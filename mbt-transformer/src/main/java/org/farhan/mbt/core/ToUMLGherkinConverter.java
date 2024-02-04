@@ -71,7 +71,7 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 
 		Class interactionOwningClass = (Class) targetInteraction.getOwner();
 		return interactionOwningClass.getQualifiedName()
-				.replace(targetProject.secondLayerName, targetProject.thirdLayerName).replace("Steps", "");
+				.replace(target.secondLayerName, target.thirdLayerName).replace("Steps", "");
 	}
 
 	@Override
@@ -92,14 +92,14 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 	protected void createNextLayerInteractionMessagesFromEdgeMessage(Interaction targetInteraction, Message m) {
 
 		createInputOutputMessage(targetInteraction, m, "set");
-		Class layer3Class = ClassFactory.getClass(targetProject.theSystem,
+		Class layer3Class = ClassFactory.getClass(target.theSystem,
 				getNextLayerClassQualifiedName(targetInteraction));
 		MessageFactory.getMessage(targetInteraction, layer3Class, "execute");
 	}
 
 	private void createInputOutputMessage(Interaction nextLayerInteraction, Message m, String prefix) {
 
-		Class nextLayerClass = ClassFactory.getClass(targetProject.theSystem,
+		Class nextLayerClass = ClassFactory.getClass(target.theSystem,
 				getNextLayerClassQualifiedName(nextLayerInteraction));
 		if (getFirstArgument(m).contentEquals("docString") || getFirstArgument(m).contentEquals("dataTable")) {
 

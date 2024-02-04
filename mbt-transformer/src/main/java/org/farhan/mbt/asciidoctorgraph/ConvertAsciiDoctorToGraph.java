@@ -5,28 +5,28 @@ import java.util.ArrayList;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ToGraphConversionMojo;
 import org.farhan.mbt.core.ToGraphConverter;
-import org.farhan.mbt.graph.GraphProject;
+import org.farhan.mbt.graph.JGraphTProject;
 
 public class ConvertAsciiDoctorToGraph extends ToGraphConversionMojo {
 
-	AsciiDoctorProject sourceProject;
-	GraphProject targetProject;
+	AsciiDoctorProject source;
+	JGraphTProject target;
 
 	@Override
 	protected ArrayList<ToGraphConverter> getLayerConverters() {
 		ArrayList<ToGraphConverter> converters = new ArrayList<ToGraphConverter>();
-		converters.add(new AdocToGraphLayerConverter(sourceProject.firstLayerName, sourceProject, targetProject));
+		converters.add(new AdocToGraphConverter(source.firstLayerName, source, target));
 		return converters;
 	}
 
 	@Override
 	protected void initProjects() {
-		sourceProject = new AsciiDoctorProject();
-		targetProject = new GraphProject();
+		source = new AsciiDoctorProject();
+		target = new JGraphTProject();
 	}
 
 	@Override
 	protected void save() throws Exception {
-		targetProject.save();
+		target.save();
 	}
 }

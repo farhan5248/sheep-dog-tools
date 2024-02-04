@@ -2,9 +2,9 @@ package org.farhan.mbt.core;
 
 import java.util.ArrayList;
 
-public abstract class UMLToConversionMojo {
+public abstract class ToCodeConversionMojo {
 
-	protected abstract ArrayList<UMLToConverter> getLayerConverters();
+	protected abstract ArrayList<ToCodeConverter> getLayerConverters();
 
 	protected abstract void save() throws Exception;
 
@@ -13,8 +13,8 @@ public abstract class UMLToConversionMojo {
 	public void mojoGoal() throws Exception {
 
 		initProjects();
-		for (UMLToConverter c : getLayerConverters()) {
-			c.selectLayerFiles();
+		for (ToCodeConverter c : getLayerConverters()) {
+			c.selectObjects();
 			c.convertObjects();
 		}
 		save();

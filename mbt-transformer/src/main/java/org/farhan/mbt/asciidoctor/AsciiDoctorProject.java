@@ -5,10 +5,10 @@ import java.io.File;
 import java.util.ArrayList;
 
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.Project;
+import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.Utilities;
 
-public class AsciiDoctorProject extends Project {
+public class AsciiDoctorProject extends ConvertibleProject {
 
 	private static ArrayList<ConvertibleObject> firstLayerObjects;
 
@@ -17,7 +17,7 @@ public class AsciiDoctorProject extends Project {
 	}
 
 	@Override
-	public File getLayerDir(String layer) {
+	public File getDir(String layer) {
 		File aFile = null;
 		aFile = new File(baseDir + "src/test/resources/AsciiDoc/");
 		aFile.mkdirs();
@@ -25,7 +25,7 @@ public class AsciiDoctorProject extends Project {
 	}
 
 	@Override
-	public ArrayList<ConvertibleObject> getLayerObjects(String layer) {
+	public ArrayList<ConvertibleObject> getObjects(String layer) {
 		if (firstLayerObjects.isEmpty()) {
 			try {
 				load();
@@ -38,10 +38,10 @@ public class AsciiDoctorProject extends Project {
 
 	@Override
 	public void load() throws Exception {
-		ArrayList<File> files = Utilities.recursivelyListFiles(getLayerDir(firstLayerName),
-				getLayerFileType(firstLayerName));
+		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(firstLayerName),
+				getFileType(firstLayerName));
 		for (File f : files) {
-			AsciiDoctorAdocFile cff = new AsciiDoctorAdocFile(f);
+			AsciiDoctorAdocWrapper cff = new AsciiDoctorAdocWrapper(f);
 			firstLayerObjects.add(cff);
 			cff.read();
 		}
@@ -55,7 +55,7 @@ public class AsciiDoctorProject extends Project {
 	}
 
 	@Override
-	public String getLayerFileType(String layer) {
+	public String getFileType(String layer) {
 		return ".adoc";
 	}
 

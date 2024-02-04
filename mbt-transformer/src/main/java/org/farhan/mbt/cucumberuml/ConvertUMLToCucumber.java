@@ -2,43 +2,43 @@ package org.farhan.mbt.cucumberuml;
 
 import java.util.ArrayList;
 
-import org.farhan.mbt.core.UMLToConversionMojo;
-import org.farhan.mbt.core.UMLToConverter;
+import org.farhan.mbt.core.ToCodeConversionMojo;
+import org.farhan.mbt.core.ToCodeConverter;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.UMLProject;
 
-public class ConvertUMLToCucumber extends UMLToConversionMojo {
+public class ConvertUMLToCucumber extends ToCodeConversionMojo {
 
 	// TODO move these into the converters themselves, think about how to read the
 	// UML file before writing the next layer to it
-	UMLProject sourceProject;
-	CucumberProject targetProject;
+	UMLProject source;
+	CucumberProject target;
 
 	@Override
-	protected ArrayList<UMLToConverter> getLayerConverters() {
-		ArrayList<UMLToConverter> converters = new ArrayList<UMLToConverter>();
+	protected ArrayList<ToCodeConverter> getLayerConverters() {
+		ArrayList<ToCodeConverter> converters = new ArrayList<ToCodeConverter>();
 		converters
-				.add(new UMLToFeatureConverter(sourceProject.firstLayerName, sourceProject, targetProject));
+				.add(new UMLToFeatureConverter(source.firstLayerName, source, target));
 		converters
-				.add(new UMLToJavaConverter(sourceProject.secondLayerName, sourceProject, targetProject));
+				.add(new UMLToJavaConverter(source.secondLayerName, source, target));
 		converters
-				.add(new UMLToJavaConverter(sourceProject.thirdLayerName, sourceProject, targetProject));
+				.add(new UMLToJavaConverter(source.thirdLayerName, source, target));
 		return converters;
 	}
 
 	@Override
 	protected void save() throws Exception {
-		targetProject.save();
+		target.save();
 	}
 
 	@Override
 	protected void initProjects() throws Exception {
 
-		sourceProject = new UMLProject();
-		targetProject = new CucumberProject();
+		source = new UMLProject();
+		target = new CucumberProject();
 
 		// TODO move this to select layer objects
-		sourceProject.load();
+		source.load();
 	}
 
 }

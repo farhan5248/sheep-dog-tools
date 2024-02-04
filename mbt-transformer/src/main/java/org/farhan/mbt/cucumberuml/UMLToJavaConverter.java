@@ -12,9 +12,9 @@ import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.mbt.core.UMLToConverter;
+import org.farhan.mbt.core.ToCodeConverter;
 import org.farhan.mbt.core.Utilities;
-import org.farhan.mbt.cucumber.CucumberJavaFile;
+import org.farhan.mbt.cucumber.JavaClassWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.PackageFactory;
 import org.farhan.mbt.uml.ParameterFactory;
@@ -26,17 +26,17 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.BlockStmt;
 
-public class UMLToJavaConverter extends UMLToConverter {
+public class UMLToJavaConverter extends ToCodeConverter {
 
-	private CucumberJavaFile aJavaFile;
+	private JavaClassWrapper aJavaFile;
 	private String layer;
 
-	CucumberProject targetProject;
+	CucumberProject target;
 
-	public UMLToJavaConverter(String layer, UMLProject sourceProject, CucumberProject targetProject) {
+	public UMLToJavaConverter(String layer, UMLProject source, CucumberProject target) {
 		this.layer = layer;
-		this.sourceProject = sourceProject;
-		this.targetProject = targetProject;
+		this.source = source;
+		this.target = target;
 	}
 
 	@Override
@@ -45,19 +45,19 @@ public class UMLToJavaConverter extends UMLToConverter {
 	}
 
 	@Override
-	protected ArrayList<Class> selectLayerFiles() throws Exception {
-		return PackageFactory.getPackagedClasses(sourceProject.theSystem.getNestedPackage(getLayer()));
+	protected ArrayList<Class> selectObjects() throws Exception {
+		return PackageFactory.getPackagedClasses(source.theSystem.getNestedPackage(getLayer()));
 	}
 
 	@Override
-	protected ArrayList<Class> getLayerObjects(String layer) {
-		return sourceProject.getLayerClasses(layer);
+	protected ArrayList<Class> getObjects(String layer) {
+		return source.getLayerClasses(layer);
 	}
 
 	@Override
 	protected void convertObject(Class layerClass) throws Exception {
-		String path = convertFullName(layerClass.getQualifiedName());
-		aJavaFile = targetProject.createCucumberJavaFile(new File(path));
+		String path = convertObjectName(layerClass.getQualifiedName());
+		aJavaFile = target.createCucumberJavaFile(new File(path));
 		aJavaFile.javaClass = new CompilationUnit();
 		aJavaFile.javaClass.setStorage(aJavaFile.getFile().toPath());
 		aJavaFile.javaClass.addType(new ClassOrInterfaceDeclaration());
@@ -87,7 +87,7 @@ public class UMLToJavaConverter extends UMLToConverter {
 				String factoryName = getFactoryName(qualifiedName);
 				aJavaFile.javaClass.addImport("org.farhan.common.objects." + factoryName);
 			} else if (isSecondLayer(importedClass)) {
-				String javaPath = convertFullName(qualifiedName);
+				String javaPath = convertObjectName(qualifiedName);
 				String packageName = convertJavaPathToJavaPackage(javaPath).replace("pst.", "");
 				aJavaFile.javaClass.addImport(packageName);
 			}
@@ -166,21 +166,21 @@ public class UMLToJavaConverter extends UMLToConverter {
 	}
 
 	@Override
-	protected String convertFullName(String fullName) {
+	protected String convertObjectName(String fullName) {
 		String pathName = fullName;
-		pathName = pathName.replace("pst::" + targetProject.secondLayerName,
-				targetProject.getLayerDir(targetProject.secondLayerName).getAbsolutePath());
-		pathName = pathName.replace("pst::" + targetProject.thirdLayerName,
-				targetProject.getLayerDir(targetProject.thirdLayerName).getAbsolutePath());
+		pathName = pathName.replace("pst::" + target.secondLayerName,
+				target.getDir(target.secondLayerName).getAbsolutePath());
+		pathName = pathName.replace("pst::" + target.thirdLayerName,
+				target.getDir(target.thirdLayerName).getAbsolutePath());
 		pathName = pathName.replace("::", File.separator);
-		pathName = pathName + targetProject.getLayerFileType(targetProject.secondLayerName);
+		pathName = pathName + target.getFileType(target.secondLayerName);
 		return pathName;
 	}
 
 	private String getFactoryName(String qualifiedName) {
 		String factoryName = qualifiedName;
 		factoryName = factoryName
-				.replace(sourceProject.theSystem.getName() + "::" + sourceProject.thirdLayerName + "::", "");
+				.replace(source.theSystem.getName() + "::" + source.thirdLayerName + "::", "");
 		factoryName = factoryName.split("::")[0];
 		factoryName = StringUtils.capitalize(factoryName) + "Factory";
 		return factoryName;
@@ -238,7 +238,7 @@ public class UMLToJavaConverter extends UMLToConverter {
 	}
 
 	private boolean isSecondLayer(Class layerClass) {
-		if (layerClass.getQualifiedName().startsWith("pst::" + targetProject.secondLayerName + "::")) {
+		if (layerClass.getQualifiedName().startsWith("pst::" + target.secondLayerName + "::")) {
 			return true;
 		} else {
 			return false;
@@ -246,7 +246,7 @@ public class UMLToJavaConverter extends UMLToConverter {
 	}
 
 	private boolean isThirdLayer(Class layerClass) {
-		if (layerClass.getQualifiedName().startsWith("pst::" + targetProject.thirdLayerName + "::")) {
+		if (layerClass.getQualifiedName().startsWith("pst::" + target.thirdLayerName + "::")) {
 			return true;
 		} else {
 			return false;
@@ -262,10 +262,10 @@ public class UMLToJavaConverter extends UMLToConverter {
 		String importName = path;
 		importName = importName.replace(".java", "");
 
-		importName = importName.replace(targetProject.getLayerDir(targetProject.thirdLayerName).getAbsolutePath(),
-				"org.farhan." + targetProject.thirdLayerName);
-		importName = importName.replace(targetProject.getLayerDir(targetProject.secondLayerName).getAbsolutePath(),
-				"org.farhan." + targetProject.secondLayerName);
+		importName = importName.replace(target.getDir(target.thirdLayerName).getAbsolutePath(),
+				"org.farhan." + target.thirdLayerName);
+		importName = importName.replace(target.getDir(target.secondLayerName).getAbsolutePath(),
+				"org.farhan." + target.secondLayerName);
 		importName = importName.replace(File.separator, ".");
 		return importName;
 	}

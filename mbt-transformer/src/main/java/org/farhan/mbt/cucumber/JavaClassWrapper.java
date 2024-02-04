@@ -7,13 +7,13 @@ import org.farhan.mbt.core.ConvertibleObject;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.utils.SourceRoot;
 
-public class CucumberJavaFile implements ConvertibleObject {
+public class JavaClassWrapper implements ConvertibleObject {
 
 	private File theFile;
 	// TODO make this private later
 	public CompilationUnit javaClass;
 
-	public CucumberJavaFile(File theFile) {
+	public JavaClassWrapper(File theFile) {
 		setFile(theFile);
 	}
 

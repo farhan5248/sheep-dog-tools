@@ -3,19 +3,19 @@ package org.farhan.mbt.graph;
 import java.io.File;
 import java.util.ArrayList;
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.Project;
+import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.Utilities;
 
-public class GraphProject extends Project {
+public class JGraphTProject extends ConvertibleProject {
 
 	private ArrayList<ConvertibleObject> firstLayerObjects;
 
-	public GraphProject() {
+	public JGraphTProject() {
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
 	}
 
 	@Override
-	public File getLayerDir(String layer) {
+	public File getDir(String layer) {
 		File aFile = null;
 		aFile = new File(baseDir + "target/Graphs/");
 		aFile.mkdirs();
@@ -25,11 +25,11 @@ public class GraphProject extends Project {
 	@Override
 	public void load() throws Exception {
 
-		ArrayList<File> files = Utilities.recursivelyListFiles(getLayerDir(firstLayerName),
-				getLayerFileType(firstLayerName));
+		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(firstLayerName),
+				getFileType(firstLayerName));
 		firstLayerObjects.clear();
 		for (File f : files) {
-			GraphTextFile gtf = new GraphTextFile(f);
+			JGraphTGraphWrapper gtf = new JGraphTGraphWrapper(f);
 			firstLayerObjects.add(gtf);
 			gtf.read();
 		}
@@ -47,12 +47,12 @@ public class GraphProject extends Project {
 	}
 
 	@Override
-	public String getLayerFileType(String layer) {
+	public String getFileType(String layer) {
 		return ".graph";
 	}
 
 	@Override
-	public ArrayList<ConvertibleObject> getLayerObjects(String layer) {
+	public ArrayList<ConvertibleObject> getObjects(String layer) {
 		if (firstLayerObjects.isEmpty()) {
 			try {
 				load();

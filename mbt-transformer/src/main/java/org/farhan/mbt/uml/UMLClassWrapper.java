@@ -4,7 +4,7 @@ import java.io.File;
 
 import org.farhan.mbt.core.ConvertibleObject;
 
-public class UMLClass implements ConvertibleObject {
+public class UMLClassWrapper implements ConvertibleObject {
 
 	@Override
 	public void setFile(File theFile) {

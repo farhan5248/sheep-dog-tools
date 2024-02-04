@@ -14,7 +14,7 @@ public abstract class ToUMLConversionMojo {
 
 		initProjects();
 		for (ToUMLConverter c : getLayerConverters()) {
-			c.selectLayerObjects();
+			c.selectObjects();
 			c.convertObjects();
 		}
 		save();

@@ -15,9 +15,9 @@ import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.Project;
+import org.farhan.mbt.core.ConvertibleProject;
 
-public class UMLProject extends Project {
+public class UMLProject extends ConvertibleProject {
 
 	private ArrayList<ConvertibleObject> firstLayerObjects;
 	private ArrayList<ConvertibleObject> secondLayerObjects;
@@ -40,7 +40,7 @@ public class UMLProject extends Project {
 	}
 
 	@Override
-	public File getLayerDir(String layer) {
+	public File getDir(String layer) {
 		File aFile = null;
 		aFile = new File(baseDir + "target/uml/");
 		aFile.mkdirs();
@@ -49,7 +49,7 @@ public class UMLProject extends Project {
 
 	@Override
 	public void load() throws Exception {
-		URI uri = URI.createFileURI(getLayerDir("").getAbsolutePath()).appendSegment(theSystem.getName())
+		URI uri = URI.createFileURI(getDir("").getAbsolutePath()).appendSegment(theSystem.getName())
 				.appendFileExtension(UMLResource.FILE_EXTENSION);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		// TODO test removing this or at least comment it out
@@ -65,7 +65,7 @@ public class UMLProject extends Project {
 	@Override
 	public void save() throws Exception {
 
-		URI uri = URI.createFileURI(getLayerDir("").getAbsolutePath()).appendSegment(theSystem.getName())
+		URI uri = URI.createFileURI(getDir("").getAbsolutePath()).appendSegment(theSystem.getName())
 				.appendFileExtension(UMLResource.FILE_EXTENSION);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		UMLResourcesUtil.init(resourceSet);
@@ -90,12 +90,12 @@ public class UMLProject extends Project {
 	}
 
 	@Override
-	public String getLayerFileType(String layer) {
+	public String getFileType(String layer) {
 		return ".uml";
 	}
 
 	@Override
-	public ArrayList<ConvertibleObject> getLayerObjects(String layer) {
+	public ArrayList<ConvertibleObject> getObjects(String layer) {
 		ArrayList<ConvertibleObject> layerFiles = null;
 		if (layer.contentEquals(firstLayerName)) {
 			layerFiles = firstLayerObjects;

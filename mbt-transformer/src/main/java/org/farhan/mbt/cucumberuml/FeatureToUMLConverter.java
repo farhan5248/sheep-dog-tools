@@ -24,7 +24,7 @@ import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToUMLGherkinConverter;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.core.Validator;
-import org.farhan.mbt.cucumber.CucumberFeatureFile;
+import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.AnnotationFactory;
 import org.farhan.mbt.uml.ArgumentFactory;
@@ -38,15 +38,15 @@ import org.farhan.mbt.uml.UMLProject;
 
 public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 
-	private CucumberFeatureFile aCucumberFile;
+	private CucumberFeatureWrapper aCucumberFile;
 	private String layer;
 
-	CucumberProject sourceProject;
+	CucumberProject source;
 
-	public FeatureToUMLConverter(String layer, CucumberProject sourceProject, UMLProject targetProject) {
+	public FeatureToUMLConverter(String layer, CucumberProject source, UMLProject target) {
 		this.layer = layer;
-		this.sourceProject = sourceProject;
-		this.targetProject = targetProject;
+		this.source = source;
+		this.target = target;
 	}
 
 	@Override
@@ -61,11 +61,11 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	}
 
 	@Override
-	protected void selectLayerObjects() throws Exception {
+	protected void selectObjects() throws Exception {
 
-		ArrayList<ConvertibleObject> layerFiles = sourceProject.getLayerObjects(getLayer());
+		ArrayList<ConvertibleObject> layerFiles = source.getObjects(getLayer());
 		for (int i = layerFiles.size() - 1; i >= 0; i--) {
-			if (!isFileSelected(layerFiles.get(i), sourceProject.tags)) {
+			if (!isFileSelected(layerFiles.get(i), source.tags)) {
 				// TODO replace this with a logger
 				System.out.println("Removing from first layer:" + layerFiles.get(i).getFile().getAbsolutePath());
 				layerFiles.remove(i);
@@ -74,8 +74,8 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	}
 
 	@Override
-	protected ArrayList<ConvertibleObject> getLayerObjects(String layer) {
-		return sourceProject.getLayerObjects(layer);
+	protected ArrayList<ConvertibleObject> getObjects(String layer) {
+		return source.getObjects(layer);
 	}
 
 	@Override
@@ -83,9 +83,9 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 
 		// TODO source and target files should be stored in this class, there's no need
 		// to pass them around.
-		aCucumberFile = (CucumberFeatureFile) theObject;
-		String qualifiedName = convertFullName(aCucumberFile.getFile().getAbsolutePath());
-		Class layerClass = ClassFactory.getClass(targetProject.theSystem, qualifiedName);
+		aCucumberFile = (CucumberFeatureWrapper) theObject;
+		String qualifiedName = convertObjectName(aCucumberFile.getFile().getAbsolutePath());
+		Class layerClass = ClassFactory.getClass(target.theSystem, qualifiedName);
 		CommentFactory.getComment(layerClass, convertStatementsToString(aCucumberFile.theFeature.getStatements()));
 		return layerClass;
 	}
@@ -146,10 +146,10 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	}
 
 	@Override
-	protected String convertFullName(String fullName) {
+	protected String convertObjectName(String fullName) {
 		String qualifiedName = fullName.trim();
-		qualifiedName = qualifiedName.replace(sourceProject.getLayerFileType(sourceProject.firstLayerName), "");
-		qualifiedName = qualifiedName.replace(sourceProject.getLayerDir(sourceProject.firstLayerName).getAbsolutePath(),
+		qualifiedName = qualifiedName.replace(source.getFileType(source.firstLayerName), "");
+		qualifiedName = qualifiedName.replace(source.getDir(source.firstLayerName).getAbsolutePath(),
 				"");
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::specs" + qualifiedName;
@@ -185,7 +185,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 		String messageName = cs.getName();
 		Class owningClass = (Class) anInteraction.getOwner();
 		String secondLayerClassName = getSecondLayerClassName();
-		Class importedClass = ClassFactory.getClassByMessage(targetProject.theSystem, messageName,
+		Class importedClass = ClassFactory.getClassByMessage(target.theSystem, messageName,
 				secondLayerClassName);
 		ElementImport classImport = ElementImportFactory.getElementImportByAlias(owningClass, importedClass.getName());
 		if (classImport == null) {
@@ -198,14 +198,14 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	private String getSecondLayerClassName() {
 		String secondLayerClassName = "";
 		secondLayerClassName = convertNextLayerClassName(getFSMName() + getFSMState() + "Steps");
-		secondLayerClassName = "pst::" + sourceProject.secondLayerName + "::" + Utilities.toLowerCamelCase(getFSMName())
+		secondLayerClassName = "pst::" + source.secondLayerName + "::" + Utilities.toLowerCamelCase(getFSMName())
 				+ "::" + secondLayerClassName;
 		return secondLayerClassName;
 	}
 
 	private boolean isFileSelected(ConvertibleObject convertibleFile, String layerSelectionCriteria) throws Exception {
 
-		aCucumberFile = (CucumberFeatureFile) convertibleFile;
+		aCucumberFile = (CucumberFeatureWrapper) convertibleFile;
 		if (isTagged(aCucumberFile.theFeature.getTags(), layerSelectionCriteria)) {
 			return true;
 		}
