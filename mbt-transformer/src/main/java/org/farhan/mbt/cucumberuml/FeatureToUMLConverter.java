@@ -2,17 +2,29 @@ package org.farhan.mbt.cucumberuml;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.ElementImport;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
+import org.eclipse.uml2.uml.ValueSpecification;
+import org.farhan.cucumber.AbstractScenario;
+import org.farhan.cucumber.Background;
+import org.farhan.cucumber.Examples;
+import org.farhan.cucumber.Line;
+import org.farhan.cucumber.Row;
+import org.farhan.cucumber.Scenario;
+import org.farhan.cucumber.ScenarioOutline;
+import org.farhan.cucumber.Statement;
+import org.farhan.cucumber.Step;
+import org.farhan.cucumber.Tag;
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.ToUMLOtherLayerConverter;
-import org.farhan.mbt.cucumber.CucumberJavaFile;
+import org.farhan.mbt.core.ToUMLGherkinConverter;
+import org.farhan.mbt.core.Utilities;
+import org.farhan.mbt.core.Validator;
+import org.farhan.mbt.cucumber.CucumberFeatureFile;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.AnnotationFactory;
 import org.farhan.mbt.uml.ArgumentFactory;
@@ -24,22 +36,9 @@ import org.farhan.mbt.uml.MessageFactory;
 import org.farhan.mbt.uml.ParameterFactory;
 import org.farhan.mbt.uml.UMLProject;
 
-import com.github.javaparser.ast.ImportDeclaration;
-import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.body.Parameter;
-import com.github.javaparser.ast.comments.Comment;
-import com.github.javaparser.ast.expr.BinaryExpr;
-import com.github.javaparser.ast.expr.Expression;
-import com.github.javaparser.ast.expr.MethodCallExpr;
-import com.github.javaparser.ast.expr.NameExpr;
-import com.github.javaparser.ast.expr.ObjectCreationExpr;
-import com.github.javaparser.ast.expr.StringLiteralExpr;
-import com.github.javaparser.ast.stmt.Statement;
+public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 
-public class FeatureToUMLConverter extends ToUMLOtherLayerConverter {
-
-	private CucumberJavaFile aCucumberJavaFile;
-	// TODO move this to the super class
+	private CucumberFeatureFile aCucumberFile;
 	private String layer;
 
 	CucumberProject sourceProject;
@@ -58,36 +57,17 @@ public class FeatureToUMLConverter extends ToUMLOtherLayerConverter {
 	@Override
 	protected void convertObjects() throws Exception {
 		super.convertObjects();
-		if (sourceProject.secondLayerName.contentEquals(getLayer())) {
-			linkLayerFiles(getLayer());
-		}
+		linkLayerFiles(getLayer());
 	}
 
 	@Override
-	final protected void selectLayerObjects() {
-		ArrayList<Class> upperLayerClasses = null;
-		ArrayList<ConvertibleObject> layerFiles = null;
-		if (sourceProject.secondLayerName.contentEquals(getLayer())) {
-			upperLayerClasses = targetProject.getLayerClasses(sourceProject.firstLayerName);
-			// TODO this is inefficient, it's reading every file unnecessarily, move the
-			// call to read() here. The same applies to the first layer. Basically move file
-			// reading out of the project to the converters to be more selective
-			layerFiles = sourceProject.getLayerObjects(sourceProject.secondLayerName);
-		} else if (sourceProject.thirdLayerName.contentEquals(layer)) {
-			upperLayerClasses = targetProject.getLayerClasses(sourceProject.secondLayerName);
-			layerFiles = sourceProject.getLayerObjects(sourceProject.thirdLayerName);
-		}
-		// Instead of reading a file twice, make a short list to save time reading each
-		// file
-		HashMap<String, Class> layerClassShortList = new HashMap<String, Class>();
-		for (Class c : upperLayerClasses) {
-			for (ElementImport ei : c.getElementImports()) {
-				Class importedClass = (Class) ei.getImportedElement();
-				layerClassShortList.put(importedClass.getQualifiedName(), importedClass);
-			}
-		}
+	protected void selectLayerObjects() throws Exception {
+
+		ArrayList<ConvertibleObject> layerFiles = sourceProject.getLayerObjects(getLayer());
 		for (int i = layerFiles.size() - 1; i >= 0; i--) {
-			if (!isFileSelected(layerFiles.get(i), layerClassShortList)) {
+			if (!isFileSelected(layerFiles.get(i), sourceProject.tags)) {
+				// TODO replace this with a logger
+				System.out.println("Removing from first layer:" + layerFiles.get(i).getFile().getAbsolutePath());
 				layerFiles.remove(i);
 			}
 		}
@@ -98,179 +78,192 @@ public class FeatureToUMLConverter extends ToUMLOtherLayerConverter {
 		return sourceProject.getLayerObjects(layer);
 	}
 
-	private boolean isFileSelected(ConvertibleObject convertibleFile, HashMap<String, Class> layerClassShortList) {
-		CucumberJavaFile cjf = (CucumberJavaFile) convertibleFile;
-		String qName = convertJavaPathToQualifiedName(cjf.getFile().getAbsolutePath());
-		return layerClassShortList.containsKey(qName);
-	}
-
 	@Override
-	protected Class convertObject(ConvertibleObject layerFile) throws Exception {
-		aCucumberJavaFile = (CucumberJavaFile) layerFile;
-		String qualifiedName = convertAbsolutePathToQualifiedName(aCucumberJavaFile.getFile().getAbsolutePath());
+	protected Class convertObject(ConvertibleObject theObject) throws Exception {
+
+		// TODO source and target files should be stored in this class, there's no need
+		// to pass them around.
+		aCucumberFile = (CucumberFeatureFile) theObject;
+		String qualifiedName = convertFullName(aCucumberFile.getFile().getAbsolutePath());
 		Class layerClass = ClassFactory.getClass(targetProject.theSystem, qualifiedName);
+		CommentFactory.getComment(layerClass, convertStatementsToString(aCucumberFile.theFeature.getStatements()));
 		return layerClass;
 	}
 
 	@Override
 	protected void convertImports(Class layerClass) throws Exception {
-		if (aCucumberJavaFile.javaClass.getTypes().size() > 0) {
-			// Wrap this in CommentFactory.getComment. getComment should do nothing if the
-			// content is empty
-			Optional<Comment> comment = aCucumberJavaFile.javaClass.getType(0).getComment();
-			if (comment.isPresent()) {
-				CommentFactory.getComment(layerClass, comment.get().getContent());
-			}
-			for (ImportDeclaration i : aCucumberJavaFile.javaClass.getImports()) {
-				i.getNameAsString();
-				if (!i.getNameAsString().endsWith("Factory")) {
-					// Don't include the factory import because it's a detail of dependency
-					// injection is implemented
-					String anImportName = convertImportNameToQualifiedName(i.getNameAsString());
-					ElementImportFactory.getElementImport(layerClass, anImportName);
-				}
-			}
-		}
 	}
 
 	@Override
 	protected void convertBehaviours(Class layerClass) throws Exception {
-		for (MethodDeclaration md : aCucumberJavaFile.javaClass.getType(0).getMethods()) {
-			// TODO determine if this interaction is empty
-			Interaction anInteraction = InteractionFactory.getInteraction(layerClass, md.getNameAsString(), true);
 
-			// Wrap this in CommentFactory.getComment. getComment should do nothing if the
-			// content is empty
-			String body;
-			if (md.getJavadocComment().isPresent()) {
-				body = md.getJavadocComment().get().getContent().replace(" * ", "");
-			} else {
-				body = "";
+		Background b = null;
+		for (AbstractScenario as : aCucumberFile.theFeature.getAbstractScenarios()) {
+			if (as instanceof Background) {
+				b = (Background) as;
+				continue;
 			}
-			// TODO this should replace the existing comment, not add more
-			anInteraction.createOwnedComment().setBody(body);
-			if (md.getAnnotations().size() > 0) {
-				AnnotationFactory.getAnnotation(anInteraction, md.getAnnotation(0).toString());
+			resetCurrentContainerObject();
+			Interaction anInteraction = createInteraction(layerClass, as);
+			if (as instanceof Scenario) {
+				Scenario s = (Scenario) as;
+				convertTagsToParameters(anInteraction, s.getTags());
 			}
-			for (Parameter p : md.getParameters()) {
-				// TODO this should probably empty out the parameters if any exist
-				ParameterFactory.getParameter(anInteraction, p.getNameAsString(), "", "in");
+			// TODO apply example data to step data table
+			if (as instanceof ScenarioOutline) {
+				ScenarioOutline so = (ScenarioOutline) as;
+				convertTagsToParameters(anInteraction, so.getTags());
+				convertExamplesToAnnotations(anInteraction, so);
 			}
-			convertInteractionMessages(anInteraction, md.getBody().get().getStatements());
+			// If there is a background, add its steps first
+			if (b != null) {
+				convertInteractionMessages(anInteraction, b.getSteps());
+			}
+			convertInteractionMessages(anInteraction, as.getSteps());
 		}
 	}
 
 	@Override
 	protected void convertInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception {
-		// TODO if there's already a body, don't add the java code to it, just do
-		// nothing
 		for (Object o : steps) {
-			Statement s = (Statement) o;
-			if (s.getChildNodes().get(0) instanceof MethodCallExpr) {
-				MethodCallExpr mce = (MethodCallExpr) s.getChildNodes().get(0);
-				convertMessage(anInteraction, mce);
+			Step cs = (Step) o;
+			String messageName = cs.getName();
+			if (Validator.validateStepText(messageName)) {
+				setCurrentMachineAndState(messageName);
+				convertMessage(anInteraction, cs);
+			} else {
+				throw new Exception("Step (" + cs.getName() + ") is not valid, use Xtext editor to correct it first. ");
 			}
-		}
-	}
-
-	// TODO this is a duplicate method from UMLToCucumberOtherLayerConverter.
-	private boolean isSecondLayer(Class layerClass) {
-		if (layerClass.getQualifiedName().contains("::" + sourceProject.secondLayerName + "::")) {
-			return true;
-		} else {
-			return false;
 		}
 	}
 
 	@Override
 	protected void convertMessage(Interaction anInteraction, Object o) {
-		MethodCallExpr mce = (MethodCallExpr) o;
-		Class owningClass = (Class) anInteraction.getOwner();
-		// TODO change this, don't store how the DI is achieved in the UML model
-		// TODO When creating the ElementImport, for now I'm assuming the class is
-		// directly under the app package name and not anywhere else. In the future make
-		// the search smarter and look through all the classes in the package. That will
-		// also assume that the class name is unique
-		if (isSecondLayer(owningClass)) {
-			String qualifiedName = getObjectQualifiedNameFromFactory(mce);
-			ElementImportFactory.getElementImport(owningClass, qualifiedName);
-			Class importedClass = ClassFactory.getClass(targetProject.theSystem, qualifiedName);
-			Message theMessage = MessageFactory.getMessage(anInteraction, importedClass, mce.getName().asString());
-			mce.getArguments();
-			for (Expression e : mce.getArguments()) {
-				String arg = "";
-				if (e instanceof NameExpr) {
-					arg = e.asNameExpr().getNameAsString();
-				} else if (e instanceof StringLiteralExpr) {
-					arg = "\"" + e.asStringLiteralExpr().asString().replace("\"", "\\\"") + "\"";
-				} else if (e instanceof BinaryExpr) {
-					arg = e.asBinaryExpr().toString();
-				} else if (e instanceof ObjectCreationExpr) {
-					arg = e.asObjectCreationExpr().toString();
-				} else if (e instanceof MethodCallExpr) {
-					arg = e.asMethodCallExpr().toString();
-				} else {
-					// TODO throw an exception to find new expressions
-					arg = e.asNameExpr().getNameAsString();
-				}
-				// when reading java source, the name of the arguments isn't known so I use the
-				// value as the name
-				ArgumentFactory.getArgument(theMessage, arg, arg, true);
-			}
-		} else {
-			// TODO handle layer 3 java code
-		}
-	}
-
-	private String getObjectQualifiedNameFromFactory(MethodCallExpr mce) {
-		// Get the app name from the factory class
-		String appName = mce.getChildNodes().getFirst().getChildNodes().getFirst().toString().replace("Factory", "")
-				.toLowerCase();
-		// get the object name from the argument of the factory class
-		String objectName = mce.getChildNodes().getFirst().getChildNodes().getLast().toString().replace("\"", "");
-		// make the qualified name
-		String qualifiedName = targetProject.theSystem.getName() + "::" + targetProject.thirdLayerName + "::" + appName
-				+ "::" + objectName;
-		return qualifiedName;
+		Step s = (Step) o;
+		Message theMessage = convertStepToMessage(anInteraction, s);
+		convertDataTableToArgument(s, theMessage);
+		convertDocStringToArgument(s, theMessage);
 	}
 
 	@Override
-	protected String convertQualifiedNameToAbsolutePath(String qualifiedName) {
-		return null;
-	}
-
-	@Override
-	protected String convertAbsolutePathToQualifiedName(String pathName) {
-		return convertJavaPathToQualifiedName(pathName);
-	}
-
-	@Override
-	protected String convertQualifiedNameToImportName(String qualifiedName) {
-		// TODO preserve org.farhan
-		return qualifiedName.replace("pst::", "org::farhan::").replace("::", ".");
-	}
-
-	@Override
-	protected String convertImportNameToQualifiedName(String importName) {
-		// TODO preserve org.farhan
-		String qualifiedName = importName.replace(".", "::");
-		if (qualifiedName.startsWith("org::farhan::")) {
-			return qualifiedName.replace("org::farhan::", "pst::");
-		} else {
-			return "pst::" + qualifiedName;
-		}
-	}
-
-	private String convertJavaPathToQualifiedName(String pathName) {
-		String qualifiedName = pathName.trim();
-		qualifiedName = qualifiedName.replace(".java", "");
-		qualifiedName = qualifiedName.replace(
-				sourceProject.getLayerDir(sourceProject.secondLayerName).getAbsolutePath(),
-				sourceProject.secondLayerName);
-		qualifiedName = qualifiedName.replace(sourceProject.getLayerDir(sourceProject.thirdLayerName).getAbsolutePath(),
-				sourceProject.thirdLayerName);
+	protected String convertFullName(String fullName) {
+		String qualifiedName = fullName.trim();
+		qualifiedName = qualifiedName.replace(sourceProject.getLayerFileType(sourceProject.firstLayerName), "");
+		qualifiedName = qualifiedName.replace(sourceProject.getLayerDir(sourceProject.firstLayerName).getAbsolutePath(),
+				"");
 		qualifiedName = qualifiedName.replace(File.separator, "::");
-		qualifiedName = "pst::" + qualifiedName;
+		qualifiedName = "pst::specs" + qualifiedName;
 		return qualifiedName;
+	}
+
+	private void convertDocStringToArgument(Step s, Message theMessage) {
+		if (s.getTheDocString() != null) {
+			ValueSpecification vs = ArgumentFactory.getArgument(theMessage, "docString", "", true);
+			EList<Line> lines = s.getTheDocString().getLines();
+			for (int i = 0; i < lines.size(); i++) {
+				AnnotationFactory.getAnnotation(vs, "docString", String.valueOf(i), lines.get(i).getName());
+			}
+		}
+	}
+
+	private void convertDataTableToArgument(Step s, Message theMessage) {
+		if (s.getTheStepTable() != null) {
+			ValueSpecification vs = ArgumentFactory.getArgument(theMessage, "dataTable", "", true);
+			EList<Row> rows = s.getTheStepTable().getRows();
+			for (int i = 0; i < rows.size(); i++) {
+
+				String value = "";
+				for (int j = 0; j < rows.get(i).getCells().size(); j++) {
+					value += rows.get(i).getCells().get(j).getName() + " |";
+				}
+				AnnotationFactory.getAnnotation(vs, "dataTable", String.valueOf(i), value);
+			}
+		}
+	}
+
+	private Message convertStepToMessage(Interaction anInteraction, Step cs) {
+		String messageName = cs.getName();
+		Class owningClass = (Class) anInteraction.getOwner();
+		String secondLayerClassName = getSecondLayerClassName();
+		Class importedClass = ClassFactory.getClassByMessage(targetProject.theSystem, messageName,
+				secondLayerClassName);
+		ElementImport classImport = ElementImportFactory.getElementImportByAlias(owningClass, importedClass.getName());
+		if (classImport == null) {
+			classImport = ElementImportFactory.getElementImport(owningClass, secondLayerClassName);
+		}
+		Message theMessage = MessageFactory.getMessage(anInteraction, importedClass, messageName);
+		return theMessage;
+	}
+
+	private String getSecondLayerClassName() {
+		String secondLayerClassName = "";
+		secondLayerClassName = convertNextLayerClassName(getFSMName() + getFSMState() + "Steps");
+		secondLayerClassName = "pst::" + sourceProject.secondLayerName + "::" + Utilities.toLowerCamelCase(getFSMName())
+				+ "::" + secondLayerClassName;
+		return secondLayerClassName;
+	}
+
+	private boolean isFileSelected(ConvertibleObject convertibleFile, String layerSelectionCriteria) throws Exception {
+
+		aCucumberFile = (CucumberFeatureFile) convertibleFile;
+		if (isTagged(aCucumberFile.theFeature.getTags(), layerSelectionCriteria)) {
+			return true;
+		}
+		for (AbstractScenario a : aCucumberFile.theFeature.getAbstractScenarios()) {
+			if (a instanceof Scenario) {
+				if (isTagged(((Scenario) a).getTags(), layerSelectionCriteria)) {
+					return true;
+				}
+			} else if (a instanceof ScenarioOutline) {
+				if (isTagged(((ScenarioOutline) a).getTags(), layerSelectionCriteria)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean isTagged(EList<Tag> tags, String layerSelectionCriteria) {
+		for (Tag t : tags) {
+			if (t.getName().trim().contentEquals(layerSelectionCriteria)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void convertExamplesToAnnotations(Interaction anInteraction, ScenarioOutline so) {
+		for (Examples e : so.getExamples()) {
+			EList<Row> rows = e.getTheExamplesTable().getRows();
+			for (int i = 0; i < rows.size(); i++) {
+
+				String value = "";
+				for (int j = 0; j < rows.get(i).getCells().size(); j++) {
+					value += rows.get(i).getCells().get(j).getName() + "|";
+				}
+				AnnotationFactory.getAnnotation(anInteraction, e.getName(), String.valueOf(i), value);
+			}
+		}
+	}
+
+	private void convertTagsToParameters(Interaction anInteraction, EList<Tag> tags) {
+		for (Tag a : tags) {
+			ParameterFactory.getParameter(anInteraction, a.getName().replace("@", ""), "", "in");
+		}
+	}
+
+	private Interaction createInteraction(Class layerClass, AbstractScenario as) {
+		Interaction anInteraction = InteractionFactory.getInteraction(layerClass, as.getName(), true);
+		anInteraction.setName(anInteraction.getName());
+		anInteraction.createOwnedComment().setBody(convertStatementsToString(as.getStatements()));
+		return anInteraction;
+	}
+
+	private String convertStatementsToString(EList<Statement> eList) {
+		String contents = "";
+		for (Statement s : eList) {
+			contents += s.getName() + "\n";
+		}
+		return contents.trim();
 	}
 }

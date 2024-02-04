@@ -8,77 +8,38 @@ import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.mbt.cucumber.CucumberNameConverter;
 import org.farhan.mbt.uml.AnnotationFactory;
 import org.farhan.mbt.uml.ArgumentFactory;
 import org.farhan.mbt.uml.ClassFactory;
 import org.farhan.mbt.uml.InteractionFactory;
 import org.farhan.mbt.uml.MessageFactory;
 import org.farhan.mbt.uml.ParameterFactory;
-import org.farhan.mbt.uml.UMLProject;
 import org.farhan.validation.MBTEdgeValidator;
 import org.farhan.validation.MBTVertexValidator;
 
-public abstract class ToUMLFirstLayerConverter extends ToUMLLayerConverter {
+public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 
-	private StateMachine theMachine;
-
-	private class StateMachine {
-		String machineName;
-		String currentState;
-	}
-
-	void setFSMName(String machineName) {
-		theMachine.machineName = Utilities.toUpperCamelCase(machineName);
-		theMachine.machineName = Utilities.removeDelimiterAndCapitalize(theMachine.machineName, "\\.");
-		theMachine.machineName = Utilities.removeDelimiterAndCapitalize(theMachine.machineName, "\\-");
-	}
-
-	protected void setFSMState(String currentState) {
-		theMachine.currentState = Utilities.toUpperCamelCase(currentState);
-		// If the object is a file with a period, remove it and make the first letter
-		// upper case
-		theMachine.currentState = Utilities.removeDelimiterAndCapitalize(theMachine.currentState, "\\.");
-		theMachine.currentState = Utilities.removeDelimiterAndCapitalize(theMachine.currentState, "\\-");
-	}
-
-	public String getFSMName() {
-		return theMachine.machineName;
-	}
-
-	public String getFSMState() {
-		return theMachine.currentState;
-	}
-
-	public ToUMLFirstLayerConverter() {
-		super();
-		theMachine = new StateMachine();
-	}
-
-	protected void resetCurrentContainerObject() {
-		setFSMName("UnknownContainer");
-		setFSMState("InitialState");
-	}
-
-	protected void setCurrentMachineAndState(String messageName) throws Exception {
-		// the actual object name might have delimiters indicating folder or menu
-		// structure
-		String[] objectParts = Validator.getObjectName(messageName).split("/");
-		// Capitalize the first letter of the type
-		String objectType = StringUtils.capitalize(Validator.getObjectType(messageName));
-		setFSMState(objectParts[objectParts.length - 1] + objectType);
-		if (Validator.isContainerStep(messageName)) {
-			setFSMName(StringUtils.capitalize(Validator.getComponentName(messageName)));
+	public static String convertNextLayerClassName(String currentClassName) {
+		if (currentClassName == null) {
+			return "";
 		}
+		if (currentClassName.startsWith("Common")) {
+			return currentClassName;
+		}
+		String newClassName = currentClassName;
+		newClassName = newClassName.replace("-", "");
+		newClassName = newClassName.replace("_", "");
+		newClassName = newClassName.replace(" ", "");
+		newClassName = newClassName.replace("'", "");
+		newClassName = newClassName.replace("#", "");
+		return newClassName;
 	}
-
-	// TODO remove references to CucumberNameConverter
 
 	@Override
 	protected ArrayList<String> getNextLayerInteractionNamesfromMessage(Message m) {
 		String newTitle = m.getName();
 		ArrayList<String> newTitles = new ArrayList<String>();
-		newTitles.add(CucumberNameConverter.getMethodName(newTitle, true));
+		newTitles.add(getMethodName(newTitle, true));
 		return newTitles;
 	}
 
@@ -109,8 +70,8 @@ public abstract class ToUMLFirstLayerConverter extends ToUMLLayerConverter {
 	protected String getNextLayerClassQualifiedName(Interaction targetInteraction) {
 
 		Class interactionOwningClass = (Class) targetInteraction.getOwner();
-		return interactionOwningClass.getQualifiedName().replace(targetProject.secondLayerName, targetProject.thirdLayerName)
-				.replace("Steps", "");
+		return interactionOwningClass.getQualifiedName()
+				.replace(targetProject.secondLayerName, targetProject.thirdLayerName).replace("Steps", "");
 	}
 
 	@Override
@@ -172,7 +133,7 @@ public abstract class ToUMLFirstLayerConverter extends ToUMLLayerConverter {
 			} else {
 				attributeName = MBTEdgeValidator.getState(m.getName());
 			}
-			String methodName = CucumberNameConverter.getMethodName(prefix + StringUtils.capitalize(attributeName),
+			String methodName = getMethodName(prefix + StringUtils.capitalize(attributeName),
 					true);
 			MessageFactory.getMessage(nextLayerInteraction, nextLayerClass, methodName);
 			// ArgumentFactory.getArgument(nextLayerMessage, variableName,

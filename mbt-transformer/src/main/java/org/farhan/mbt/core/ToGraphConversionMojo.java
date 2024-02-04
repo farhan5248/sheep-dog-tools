@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public abstract class ToGraphConversionMojo {
 
-	protected abstract ArrayList<ToGraphLayerConverter> getLayerConverters();
+	protected abstract ArrayList<ToGraphConverter> getLayerConverters();
 
 	protected abstract void save() throws Exception;
 
@@ -13,7 +13,7 @@ public abstract class ToGraphConversionMojo {
 	public void mojoGoal() throws Exception {
 
 		initProjects();
-		for (ToGraphLayerConverter c : getLayerConverters()) {
+		for (ToGraphConverter c : getLayerConverters()) {
 			c.selectLayerObjects();
 			c.convertObjects();
 		}

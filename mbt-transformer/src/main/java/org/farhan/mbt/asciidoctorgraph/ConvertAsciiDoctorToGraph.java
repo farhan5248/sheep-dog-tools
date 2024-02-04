@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ToGraphConversionMojo;
-import org.farhan.mbt.core.ToGraphLayerConverter;
+import org.farhan.mbt.core.ToGraphConverter;
 import org.farhan.mbt.graph.GraphProject;
 
 public class ConvertAsciiDoctorToGraph extends ToGraphConversionMojo {
@@ -13,8 +13,8 @@ public class ConvertAsciiDoctorToGraph extends ToGraphConversionMojo {
 	GraphProject targetProject;
 
 	@Override
-	protected ArrayList<ToGraphLayerConverter> getLayerConverters() {
-		ArrayList<ToGraphLayerConverter> converters = new ArrayList<ToGraphLayerConverter>();
+	protected ArrayList<ToGraphConverter> getLayerConverters() {
+		ArrayList<ToGraphConverter> converters = new ArrayList<ToGraphConverter>();
 		converters.add(new AdocToGraphLayerConverter(sourceProject.firstLayerName, sourceProject, targetProject));
 		return converters;
 	}

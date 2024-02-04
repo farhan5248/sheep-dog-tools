@@ -10,14 +10,14 @@ import org.asciidoctor.ast.Table;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocFile;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.ToGraphFirstLayerConverter;
+import org.farhan.mbt.core.ToGraphConverter;
 import org.farhan.mbt.graph.GraphProject;
 import org.farhan.mbt.graph.GraphTextFile;
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
 import org.farhan.mbt.graph.MBTVertex;
 
-public class AdocToGraphLayerConverter extends ToGraphFirstLayerConverter {
+public class AdocToGraphLayerConverter extends ToGraphConverter {
 
 	private AsciiDoctorAdocFile anAsciiDoctorFile;
 	private String layer;

@@ -3,7 +3,7 @@ package org.farhan.mbt.cucumberuml;
 import java.util.ArrayList;
 
 import org.farhan.mbt.core.UMLToConversionMojo;
-import org.farhan.mbt.core.UMLToLayerConverter;
+import org.farhan.mbt.core.UMLToConverter;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.UMLProject;
 
@@ -15,8 +15,8 @@ public class ConvertUMLToCucumber extends UMLToConversionMojo {
 	CucumberProject targetProject;
 
 	@Override
-	protected ArrayList<UMLToLayerConverter> getLayerConverters() {
-		ArrayList<UMLToLayerConverter> converters = new ArrayList<UMLToLayerConverter>();
+	protected ArrayList<UMLToConverter> getLayerConverters() {
+		ArrayList<UMLToConverter> converters = new ArrayList<UMLToConverter>();
 		converters
 				.add(new UMLToFeatureConverter(sourceProject.firstLayerName, sourceProject, targetProject));
 		converters

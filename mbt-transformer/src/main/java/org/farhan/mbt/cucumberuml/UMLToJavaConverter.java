@@ -12,7 +12,7 @@ import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.mbt.core.UMLToOtherLayerConverter;
+import org.farhan.mbt.core.UMLToConverter;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberJavaFile;
 import org.farhan.mbt.cucumber.CucumberProject;
@@ -26,7 +26,7 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.BlockStmt;
 
-public class UMLToJavaConverter extends UMLToOtherLayerConverter {
+public class UMLToJavaConverter extends UMLToConverter {
 
 	private CucumberJavaFile aJavaFile;
 	private String layer;
@@ -56,7 +56,7 @@ public class UMLToJavaConverter extends UMLToOtherLayerConverter {
 
 	@Override
 	protected void convertObject(Class layerClass) throws Exception {
-		String path = convertClassQualifiedNameToPath(layerClass.getQualifiedName());
+		String path = convertFullName(layerClass.getQualifiedName());
 		aJavaFile = targetProject.createCucumberJavaFile(new File(path));
 		aJavaFile.javaClass = new CompilationUnit();
 		aJavaFile.javaClass.setStorage(aJavaFile.getFile().toPath());
@@ -87,7 +87,7 @@ public class UMLToJavaConverter extends UMLToOtherLayerConverter {
 				String factoryName = getFactoryName(qualifiedName);
 				aJavaFile.javaClass.addImport("org.farhan.common.objects." + factoryName);
 			} else if (isSecondLayer(importedClass)) {
-				String javaPath = convertClassQualifiedNameToPath(qualifiedName);
+				String javaPath = convertFullName(qualifiedName);
 				String packageName = convertJavaPathToJavaPackage(javaPath).replace("pst.", "");
 				aJavaFile.javaClass.addImport(packageName);
 			}
@@ -166,33 +166,15 @@ public class UMLToJavaConverter extends UMLToOtherLayerConverter {
 	}
 
 	@Override
-	protected String convertClassQualifiedNameToPath(String qualifiedName) {
-		String pathName = qualifiedName;
+	protected String convertFullName(String fullName) {
+		String pathName = fullName;
 		pathName = pathName.replace("pst::" + targetProject.secondLayerName,
 				targetProject.getLayerDir(targetProject.secondLayerName).getAbsolutePath());
 		pathName = pathName.replace("pst::" + targetProject.thirdLayerName,
 				targetProject.getLayerDir(targetProject.thirdLayerName).getAbsolutePath());
 		pathName = pathName.replace("::", File.separator);
-		pathName = pathName + ".java";
+		pathName = pathName + targetProject.getLayerFileType(targetProject.secondLayerName);
 		return pathName;
-	}
-
-	@Override
-	protected String convertPathToClassQualifiedName(String pathName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected String convertClassQualifiedNameToImport(String qualifiedName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected String convertImportToClassQualifiedName(String importName) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	private String getFactoryName(String qualifiedName) {

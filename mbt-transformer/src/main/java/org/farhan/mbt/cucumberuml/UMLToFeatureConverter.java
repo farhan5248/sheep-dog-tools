@@ -17,7 +17,7 @@ import org.farhan.cucumber.Row;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Statement;
 import org.farhan.cucumber.Step;
-import org.farhan.mbt.core.UMLToFirstLayerConverter;
+import org.farhan.mbt.core.UMLToConverter;
 import org.farhan.mbt.cucumber.CucumberFeatureFile;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.AnnotationFactory;
@@ -25,7 +25,7 @@ import org.farhan.mbt.uml.ArgumentFactory;
 import org.farhan.mbt.uml.PackageFactory;
 import org.farhan.mbt.uml.UMLProject;
 
-public class UMLToFeatureConverter extends UMLToFirstLayerConverter {
+public class UMLToFeatureConverter extends UMLToConverter {
 
 	private CucumberFeatureFile aFeatureFile;
 	private String layer;
@@ -55,7 +55,7 @@ public class UMLToFeatureConverter extends UMLToFirstLayerConverter {
 
 	@Override
 	protected void convertObject(Class layerClass) throws Exception {
-		String path = convertClassQualifiedNameToPath(layerClass.getQualifiedName());
+		String path = convertFullName(layerClass.getQualifiedName());
 		aFeatureFile = targetProject.createCucumberFeatureFile(new File(path));
 		convertComments(layerClass, aFeatureFile.theFeature);
 	}
@@ -114,7 +114,6 @@ public class UMLToFeatureConverter extends UMLToFirstLayerConverter {
 
 	@Override
 	protected void convertInteractionMessages(Interaction anInteraction, Object stepList) throws Exception {
-		// TODO loop through messages and create statements with * for now
 		for (Message m : anInteraction.getMessages()) {
 			convertMessage(m, stepList);
 		}
@@ -123,6 +122,7 @@ public class UMLToFeatureConverter extends UMLToFirstLayerConverter {
 	@Override
 	protected void convertMessage(Message m, Object stepList) throws Exception {
 		EList<Step> steps = (EList<Step>) stepList;
+		// TODO change to Given When Then in the future
 		Step step = CucumberFactory.eINSTANCE.createAsterisk();
 		step.setName(m.getName());
 		steps.add(step);
@@ -149,33 +149,15 @@ public class UMLToFeatureConverter extends UMLToFirstLayerConverter {
 	}
 
 	@Override
-	protected String convertClassQualifiedNameToPath(String qualifiedName) {
-		String pathName = qualifiedName;
+	protected String convertFullName(String fullName) {
+		String pathName = fullName;
 		pathName = pathName.replace("pst::" + targetProject.firstLayerName,
 				targetProject.getLayerDir(targetProject.firstLayerName).getAbsolutePath());
 		pathName = pathName.replace("::", File.separator);
 		// TODO isn't feature defined somewhere else as getFileType? Maybe there should
 		// be get Layer 1 filetype, layer 2 filetype etc defined here
-		pathName = pathName + ".feature";
+		pathName = pathName + targetProject.getLayerFileType(targetProject.firstLayerName);
 		return pathName;
-	}
-
-	@Override
-	protected String convertPathToClassQualifiedName(String pathName) {
-		// TODO shouldn't be here
-		return null;
-	}
-
-	@Override
-	protected String convertClassQualifiedNameToImport(String qualifiedName) {
-		// TODO shouldn't be here
-		return null;
-	}
-
-	@Override
-	protected String convertImportToClassQualifiedName(String importName) {
-		// TODO shouldn't be here
-		return null;
 	}
 
 }

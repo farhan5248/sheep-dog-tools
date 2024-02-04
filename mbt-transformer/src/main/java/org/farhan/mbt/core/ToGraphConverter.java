@@ -2,7 +2,7 @@ package org.farhan.mbt.core;
 
 import java.util.ArrayList;
 
-public abstract class ToGraphLayerConverter {
+public abstract class ToGraphConverter {
 
 	protected abstract String getLayer();
 

@@ -3,6 +3,7 @@ package org.farhan.mbt.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Lifeline;
@@ -12,8 +13,12 @@ import org.eclipse.uml2.uml.Property;
 import org.farhan.mbt.uml.PackageFactory;
 import org.farhan.mbt.uml.UMLProject;
 
-public abstract class ToUMLLayerConverter {
-	
+public abstract class ToUMLConverter {
+
+	public ToUMLConverter() {
+		theMachine = new StateMachine();
+	}
+
 	protected UMLProject targetProject;
 
 	protected abstract void selectLayerObjects() throws Exception;
@@ -40,17 +45,9 @@ public abstract class ToUMLLayerConverter {
 
 	protected abstract void convertMessage(Interaction anInteraction, Object anObject) throws Exception;
 
-	// TODO review these four name converters
-	protected abstract String convertQualifiedNameToAbsolutePath(String qualifiedName);
-
-	protected abstract String convertAbsolutePathToQualifiedName(String pathName);
-
-	protected abstract String convertQualifiedNameToImportName(String qualifiedName);
-
-	protected abstract String convertImportNameToQualifiedName(String importName);
-
 	protected void linkLayerFiles(String layer) throws Exception {
-		ArrayList<Interaction> layerInteractions = PackageFactory.getPackagedInteractions(targetProject.theSystem, layer);
+		ArrayList<Interaction> layerInteractions = PackageFactory.getPackagedInteractions(targetProject.theSystem,
+				layer);
 		for (Interaction i : layerInteractions) {
 			for (Message m : i.getMessages()) {
 				for (String methodName : getNextLayerInteractionNamesfromMessage(m)) {
@@ -87,6 +84,70 @@ public abstract class ToUMLLayerConverter {
 		Property targetProperty = (Property) targetLifeline.getRepresents();
 		Class targetClass = (Class) targetProperty.getType();
 		return targetClass;
+	}
+
+	private StateMachine theMachine;
+
+	private class StateMachine {
+		String machineName;
+		String currentState;
+	}
+
+	void setFSMName(String machineName) {
+		theMachine.machineName = Utilities.toUpperCamelCase(machineName);
+		theMachine.machineName = Utilities.removeDelimiterAndCapitalize(theMachine.machineName, "\\.");
+		theMachine.machineName = Utilities.removeDelimiterAndCapitalize(theMachine.machineName, "\\-");
+	}
+
+	protected void setFSMState(String currentState) {
+		theMachine.currentState = Utilities.toUpperCamelCase(currentState);
+		// If the object is a file with a period, remove it and make the first letter
+		// upper case
+		theMachine.currentState = Utilities.removeDelimiterAndCapitalize(theMachine.currentState, "\\.");
+		theMachine.currentState = Utilities.removeDelimiterAndCapitalize(theMachine.currentState, "\\-");
+	}
+
+	public String getFSMName() {
+		return theMachine.machineName;
+	}
+
+	public String getFSMState() {
+		return theMachine.currentState;
+	}
+
+	protected void resetCurrentContainerObject() {
+		setFSMName("UnknownContainer");
+		setFSMState("InitialState");
+	}
+
+	protected void setCurrentMachineAndState(String messageName) throws Exception {
+		// the actual object name might have delimiters indicating folder or menu
+		// structure
+		String[] objectParts = Validator.getObjectName(messageName).split("/");
+		// Capitalize the first letter of the type
+		String objectType = StringUtils.capitalize(Validator.getObjectType(messageName));
+		setFSMState(objectParts[objectParts.length - 1] + objectType);
+		if (Validator.isContainerStep(messageName)) {
+			setFSMName(StringUtils.capitalize(Validator.getComponentName(messageName)));
+		}
+	}
+
+	protected abstract String convertFullName(String fullName);
+
+	protected String getMethodName(String name, boolean keepNumbers) {
+		// remove arguments
+		String newName = name;
+		newName = Utilities.removeDelimiterAndCapitalize(newName, "\\.");
+		newName = Utilities.removeDelimiterAndCapitalize(newName, "\\-");
+		newName = Utilities.removeDelimiterAndCapitalize(newName, "/");
+		newName = Utilities.removeDelimiterAndCapitalize(newName, " ");
+		newName = newName.replaceAll("[^a-zA-Z0-9]", "");
+		if (!keepNumbers) {
+			newName = newName.replaceAll("[^a-zA-Z]", "");
+		}
+		// change first character to lower case
+		newName = Utilities.toLowerCamelCase(newName);
+		return newName;
 	}
 
 }

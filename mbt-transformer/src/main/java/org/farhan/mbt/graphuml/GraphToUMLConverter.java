@@ -11,8 +11,7 @@ import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.Project;
-import org.farhan.mbt.core.ToUMLFirstLayerConverter;
+import org.farhan.mbt.core.ToUMLGherkinConverter;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.core.Validator;
 import org.farhan.mbt.graph.GraphProject;
@@ -27,10 +26,9 @@ import org.farhan.mbt.uml.ClassFactory;
 import org.farhan.mbt.uml.ElementImportFactory;
 import org.farhan.mbt.uml.InteractionFactory;
 import org.farhan.mbt.uml.MessageFactory;
-import org.farhan.mbt.uml.UMLNameConverter;
 import org.farhan.mbt.uml.UMLProject;
 
-public class GraphToUMLConverter extends ToUMLFirstLayerConverter {
+public class GraphToUMLConverter extends ToUMLGherkinConverter {
 
 	private GraphTextFile aGraphTextFile;
 
@@ -65,7 +63,7 @@ public class GraphToUMLConverter extends ToUMLFirstLayerConverter {
 	protected Class convertObject(ConvertibleObject theObject) throws Exception {
 
 		aGraphTextFile = (GraphTextFile) theObject;
-		String qualifiedName = convertAbsolutePathToQualifiedName(aGraphTextFile.getFile().getAbsolutePath());
+		String qualifiedName = convertFullName(aGraphTextFile.getFile().getAbsolutePath());
 		Class layerClass = ClassFactory.getClass(targetProject.theSystem, qualifiedName);
 		return layerClass;
 	}
@@ -153,40 +151,18 @@ public class GraphToUMLConverter extends ToUMLFirstLayerConverter {
 		if (classImport == null) {
 			classImport = ElementImportFactory.getElementImport(owningClass, secondLayerClassName);
 		}
-		Message theMessage = MessageFactory.getMessage(anInteraction, importedClass, messageName);
+		MessageFactory.getMessage(anInteraction, importedClass, messageName);
 	}
 
 	@Override
-	protected String convertQualifiedNameToAbsolutePath(String qualifiedName) {
-		String pathName = qualifiedName;
-		pathName = pathName.replace("pst::specs::", "");
-		pathName = pathName.replace("::", File.separator);
-		pathName = sourceProject.getLayerDir(sourceProject.firstLayerName).getAbsolutePath() + pathName;
-		pathName = pathName + sourceProject.getLayerFileType(sourceProject.firstLayerName);
-		return pathName;
-	}
-
-	@Override
-	protected String convertAbsolutePathToQualifiedName(String pathName) {
-		String qualifiedName = pathName.trim();
+	protected String convertFullName(String fullName) {
+		String qualifiedName = fullName.trim();
 		qualifiedName = qualifiedName.replace(sourceProject.getLayerFileType(sourceProject.firstLayerName), "");
 		qualifiedName = qualifiedName.replace(sourceProject.getLayerDir(sourceProject.firstLayerName).getAbsolutePath(),
 				"");
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::specs" + qualifiedName;
 		return qualifiedName;
-	}
-
-	@Override
-	protected String convertQualifiedNameToImportName(String qualifiedName) {
-		// first layer files have no explicit imports
-		return "";
-	}
-
-	@Override
-	protected String convertImportNameToQualifiedName(String path) {
-		// first layer files have no explicit imports
-		return null;
 	}
 
 	private void convertDataTableToArgument(HashMap<String, String> dataTable, Message theMessage) {
@@ -204,7 +180,7 @@ public class GraphToUMLConverter extends ToUMLFirstLayerConverter {
 
 	private String getSecondLayerClassName() {
 		String secondLayerClassName = "";
-		secondLayerClassName = UMLNameConverter.filterClassName(getFSMName() + getFSMState() + "Steps");
+		secondLayerClassName = convertNextLayerClassName(getFSMName() + getFSMState() + "Steps");
 		secondLayerClassName = "pst::" + sourceProject.secondLayerName + "::" + Utilities.toLowerCamelCase(getFSMName())
 				+ "::" + secondLayerClassName;
 		return secondLayerClassName;

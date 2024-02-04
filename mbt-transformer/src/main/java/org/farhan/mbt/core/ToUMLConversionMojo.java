@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public abstract class ToUMLConversionMojo {
 
-	protected abstract ArrayList<ToUMLLayerConverter> getLayerConverters();
+	protected abstract ArrayList<ToUMLConverter> getLayerConverters();
 
 	protected abstract void save() throws Exception;
 
@@ -13,7 +13,7 @@ public abstract class ToUMLConversionMojo {
 	public void mojoGoal() throws Exception {
 
 		initProjects();
-		for (ToUMLLayerConverter c : getLayerConverters()) {
+		for (ToUMLConverter c : getLayerConverters()) {
 			c.selectLayerObjects();
 			c.convertObjects();
 		}

@@ -6,10 +6,10 @@ import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.farhan.mbt.uml.UMLProject;
 
-public abstract class UMLToLayerConverter {
+public abstract class UMLToConverter {
 
 	protected UMLProject sourceProject;
-	
+
 	protected abstract ArrayList<?> selectLayerFiles() throws Exception;
 
 	protected abstract String getLayer();
@@ -37,13 +37,6 @@ public abstract class UMLToLayerConverter {
 
 	protected abstract void convertMessage(Message m, Object stepList) throws Exception;
 
-	// TODO while I think I need the two below, not sure I need the two below those
-	protected abstract String convertClassQualifiedNameToPath(String qualifiedName);
-
-	protected abstract String convertPathToClassQualifiedName(String pathName);
-
-	protected abstract String convertClassQualifiedNameToImport(String qualifiedName);
-
-	protected abstract String convertImportToClassQualifiedName(String importName);
+	protected abstract String convertFullName(String fullName);
 
 }
