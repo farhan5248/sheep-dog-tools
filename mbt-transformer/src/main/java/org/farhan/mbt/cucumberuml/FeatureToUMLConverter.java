@@ -66,8 +66,6 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 		ArrayList<ConvertibleObject> layerFiles = source.getObjects(getLayer());
 		for (int i = layerFiles.size() - 1; i >= 0; i--) {
 			if (!isFileSelected(layerFiles.get(i), source.tags)) {
-				// TODO replace this with a logger
-				System.out.println("Removing from first layer:" + layerFiles.get(i).getFile().getAbsolutePath());
 				layerFiles.remove(i);
 			}
 		}
@@ -149,8 +147,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	protected String convertObjectName(String fullName) {
 		String qualifiedName = fullName.trim();
 		qualifiedName = qualifiedName.replace(source.getFileType(source.firstLayerName), "");
-		qualifiedName = qualifiedName.replace(source.getDir(source.firstLayerName).getAbsolutePath(),
-				"");
+		qualifiedName = qualifiedName.replace(source.getDir(source.firstLayerName).getAbsolutePath(), "");
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::specs" + qualifiedName;
 		return qualifiedName;
@@ -185,8 +182,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 		String messageName = cs.getName();
 		Class owningClass = (Class) anInteraction.getOwner();
 		String secondLayerClassName = getSecondLayerClassName();
-		Class importedClass = ClassFactory.getClassByMessage(target.theSystem, messageName,
-				secondLayerClassName);
+		Class importedClass = ClassFactory.getClassByMessage(target.theSystem, messageName, secondLayerClassName);
 		ElementImport classImport = ElementImportFactory.getElementImportByAlias(owningClass, importedClass.getName());
 		if (classImport == null) {
 			classImport = ElementImportFactory.getElementImport(owningClass, secondLayerClassName);
@@ -198,8 +194,8 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	private String getSecondLayerClassName() {
 		String secondLayerClassName = "";
 		secondLayerClassName = convertNextLayerClassName(getFSMName() + getFSMState() + "Steps");
-		secondLayerClassName = "pst::" + source.secondLayerName + "::" + Utilities.toLowerCamelCase(getFSMName())
-				+ "::" + secondLayerClassName;
+		secondLayerClassName = "pst::" + source.secondLayerName + "::" + Utilities.toLowerCamelCase(getFSMName()) + "::"
+				+ secondLayerClassName;
 		return secondLayerClassName;
 	}
 

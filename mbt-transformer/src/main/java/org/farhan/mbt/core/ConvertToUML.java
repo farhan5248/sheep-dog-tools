@@ -2,13 +2,13 @@ package org.farhan.mbt.core;
 
 import java.util.ArrayList;
 
-public abstract class ToUMLConversionMojo {
+public abstract class ConvertToUML {
 
 	protected abstract ArrayList<ToUMLConverter> getLayerConverters();
 
 	protected abstract void save() throws Exception;
 
-	protected abstract void initProjects();
+	protected abstract void initProjects() throws Exception;
 
 	public void mojoGoal() throws Exception {
 

@@ -77,7 +77,8 @@ public class UMLProject extends ConvertibleProject {
 		resource.save(options);
 	}
 
-	// TODO merge this into getLayerObjects after creating UMLFile
+	// TODO move the code to load and initialise all the objects lists. Then this
+	// method just returns the specific object list
 	public ArrayList<Class> getLayerClasses(String layer) {
 		if (layer.contentEquals(firstLayerName)) {
 			return PackageFactory.getPackagedClasses(theSystem.getNestedPackage(firstLayerName));
@@ -97,14 +98,24 @@ public class UMLProject extends ConvertibleProject {
 	@Override
 	public ArrayList<ConvertibleObject> getObjects(String layer) {
 		ArrayList<ConvertibleObject> layerFiles = null;
-		if (layer.contentEquals(firstLayerName)) {
+		switch (layer) {
+		case firstLayerName:
 			layerFiles = firstLayerObjects;
-		} else if (layer.contentEquals(secondLayerName)) {
+			break;
+		case secondLayerName:
 			layerFiles = secondLayerObjects;
-		} else if (layer.contentEquals(thirdLayerName)) {
+			break;
+		case thirdLayerName:
 			layerFiles = thirdLayerObjects;
+			break;
 		}
 		return layerFiles;
+	}
+
+	@Override
+	public ConvertibleObject createObject(String name) {
+		// TODO move getClass code here. This only creates a class if one doesn't exist.
+		return null;
 	}
 
 }

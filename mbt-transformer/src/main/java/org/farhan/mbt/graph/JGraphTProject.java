@@ -25,13 +25,10 @@ public class JGraphTProject extends ConvertibleProject {
 	@Override
 	public void load() throws Exception {
 
-		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(firstLayerName),
-				getFileType(firstLayerName));
+		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(firstLayerName), getFileType(firstLayerName));
 		firstLayerObjects.clear();
 		for (File f : files) {
-			JGraphTGraphWrapper gtf = new JGraphTGraphWrapper(f);
-			firstLayerObjects.add(gtf);
-			gtf.read();
+			createObject(f.getAbsolutePath()).read();
 		}
 	}
 
@@ -53,14 +50,20 @@ public class JGraphTProject extends ConvertibleProject {
 
 	@Override
 	public ArrayList<ConvertibleObject> getObjects(String layer) {
-		if (firstLayerObjects.isEmpty()) {
-			try {
-				load();
-			} catch (Exception e) {
-				Utilities.getStackTraceAsString(e);
-			}
+		ArrayList<ConvertibleObject> layerFiles = null;
+		switch (layer) {
+		case firstLayerName:
+			layerFiles = firstLayerObjects;
+			break;
 		}
-		return firstLayerObjects;
+		return layerFiles;
+	}
+
+	@Override
+	public ConvertibleObject createObject(String name) {
+		JGraphTGraphWrapper gtf = new JGraphTGraphWrapper(new File(name));
+		firstLayerObjects.add(gtf);
+		return gtf;
 	}
 
 }

@@ -57,7 +57,7 @@ public class UMLToJavaConverter extends ToCodeConverter {
 	@Override
 	protected void convertObject(Class layerClass) throws Exception {
 		String path = convertObjectName(layerClass.getQualifiedName());
-		aJavaFile = target.createCucumberJavaFile(new File(path));
+		aJavaFile = (JavaClassWrapper) target.createObject(path);
 		aJavaFile.javaClass = new CompilationUnit();
 		aJavaFile.javaClass.setStorage(aJavaFile.getFile().toPath());
 		aJavaFile.javaClass.addType(new ClassOrInterfaceDeclaration());

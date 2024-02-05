@@ -2,16 +2,16 @@ package org.farhan.mbt.cucumberuml;
 
 import java.util.ArrayList;
 
-import org.farhan.mbt.core.ToUMLConversionMojo;
+import org.farhan.mbt.core.ConvertToUML;
 import org.farhan.mbt.core.ToUMLConverter;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.UMLProject;
 
-public class ConvertCucumberToUML extends ToUMLConversionMojo {
+public class ConvertCucumberToUML extends ConvertToUML {
 
 	CucumberProject source;
 	UMLProject target;
-	
+
 	@Override
 	protected ArrayList<ToUMLConverter> getLayerConverters() {
 		ArrayList<ToUMLConverter> converters = new ArrayList<ToUMLConverter>();
@@ -22,9 +22,14 @@ public class ConvertCucumberToUML extends ToUMLConversionMojo {
 	}
 
 	@Override
-	protected void initProjects() {
+	protected void initProjects() throws Exception {
 		source = new CucumberProject();
 		target = new UMLProject();
+		// TODO this is inefficient, it's reading every file unnecessarily, move the
+		// call to read() to selectObjects. The same applies to the first layer.
+		// Basically move file reading out of the project to the converters to be more
+		// selective
+		source.load();
 	}
 
 	@Override

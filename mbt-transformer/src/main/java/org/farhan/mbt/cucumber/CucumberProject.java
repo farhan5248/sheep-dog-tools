@@ -47,19 +47,16 @@ public class CucumberProject extends ConvertibleProject {
 	public ArrayList<ConvertibleObject> getObjects(String layer) {
 
 		ArrayList<ConvertibleObject> layerFiles = null;
-		if (layer.contentEquals(firstLayerName)) {
+		switch (layer) {
+		case firstLayerName:
 			layerFiles = firstLayerObjects;
-		} else if (layer.contentEquals(secondLayerName)) {
+			break;
+		case secondLayerName:
 			layerFiles = secondLayerObjects;
-		} else if (layer.contentEquals(thirdLayerName)) {
+			break;
+		case thirdLayerName:
 			layerFiles = thirdLayerObjects;
-		}
-		if (layerFiles.isEmpty()) {
-			try {
-				readFiles(layer, layerFiles);
-			} catch (Exception e) {
-				Utilities.getStackTraceAsString(e);
-			}
+			break;
 		}
 		return layerFiles;
 	}
@@ -72,16 +69,12 @@ public class CucumberProject extends ConvertibleProject {
 	}
 
 	// TODO delete after moving reads to select layer objects
-	public void readFiles(String layer, ArrayList<ConvertibleObject> layerFiles) {
+	private void readFiles(String layer, ArrayList<ConvertibleObject> layerFiles) {
+		layerFiles.clear();
 		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(layer), getFileType(layer));
 		for (File f : files) {
 			try {
-				if (layer.contentEquals(firstLayerName)) {
-					layerFiles.add(new CucumberFeatureWrapper(f));
-				} else {
-					layerFiles.add(new JavaClassWrapper(f));
-				}
-				layerFiles.getLast().read();
+				createObject(f.getAbsolutePath()).read();
 			} catch (Exception e) {
 				Utilities.getStackTraceAsString(e);
 			}
@@ -101,26 +94,22 @@ public class CucumberProject extends ConvertibleProject {
 		}
 	}
 
-	public JavaClassWrapper createCucumberJavaFile(File file) throws Exception {
-		JavaClassWrapper aJavaFile = new JavaClassWrapper(file);
-		if (file.getAbsolutePath().contains(getDir(secondLayerName).getName())) {
-			getObjects(secondLayerName).add(aJavaFile);
-		} else if (file.getAbsolutePath().contains(getDir(thirdLayerName).getName())) {
-			getObjects(thirdLayerName).add(aJavaFile);
-		} else {
-			throw new Exception("Java files are only in layer 2 or 3");
-		}
-		return aJavaFile;
-	}
-
-	public CucumberFeatureWrapper createCucumberFeatureFile(File file) throws Exception {
-		CucumberFeatureWrapper aFeatureFile = new CucumberFeatureWrapper(file);
+	@Override
+	public ConvertibleObject createObject(String name) {
+		File file = new File(name);
 		if (file.getAbsolutePath().contains(getDir(firstLayerName).getName())) {
-			getObjects(firstLayerName).add(aFeatureFile);
+			CucumberFeatureWrapper aConvertibleObject = new CucumberFeatureWrapper(file);
+			firstLayerObjects.add(aConvertibleObject);
+			return aConvertibleObject;
 		} else {
-			throw new Exception("Feature files are only in layer 1");
+			JavaClassWrapper aConvertibleObject = new JavaClassWrapper(file);
+			if (file.getAbsolutePath().contains(getDir(secondLayerName).getName())) {
+				secondLayerObjects.add(aConvertibleObject);
+			} else if (file.getAbsolutePath().contains(getDir(thirdLayerName).getName())) {
+				thirdLayerObjects.add(aConvertibleObject);
+			}
+			return aConvertibleObject;
 		}
-		return aFeatureFile;
 	}
 
 }

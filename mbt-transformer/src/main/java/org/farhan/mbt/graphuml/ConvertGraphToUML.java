@@ -2,12 +2,12 @@ package org.farhan.mbt.graphuml;
 
 import java.util.ArrayList;
 
-import org.farhan.mbt.core.ToUMLConversionMojo;
+import org.farhan.mbt.core.ConvertToUML;
 import org.farhan.mbt.core.ToUMLConverter;
 import org.farhan.mbt.graph.JGraphTProject;
 import org.farhan.mbt.uml.UMLProject;
 
-public class ConvertGraphToUML extends ToUMLConversionMojo {
+public class ConvertGraphToUML extends ConvertToUML {
 
 	JGraphTProject source;
 	UMLProject target;

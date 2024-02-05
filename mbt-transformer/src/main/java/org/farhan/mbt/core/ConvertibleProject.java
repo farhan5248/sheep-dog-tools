@@ -9,10 +9,10 @@ public abstract class ConvertibleProject {
 	public static String tags = "";
 	public static String baseDir = "";
 
-	public String firstLayerName = "specs";
-	public String secondLayerName = "stepdefs";
-	public String thirdLayerName = "objects";
-	public String fourthLayerName = "common";
+	public final String firstLayerName = "specs";
+	public final String secondLayerName = "stepdefs";
+	public final String thirdLayerName = "objects";
+	public final String fourthLayerName = "common";
 
 	public abstract File getDir(String layer);
 
@@ -26,4 +26,6 @@ public abstract class ConvertibleProject {
 	// TODO there shouldn't be a read files method in general since all reads happen
 	// in select layer files. At most this is needed for testing
 	public abstract void load() throws Exception;
+
+	public abstract ConvertibleObject createObject(String name);
 }

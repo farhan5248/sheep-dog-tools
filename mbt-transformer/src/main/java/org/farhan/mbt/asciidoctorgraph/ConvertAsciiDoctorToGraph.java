@@ -3,11 +3,11 @@ package org.farhan.mbt.asciidoctorgraph;
 import java.util.ArrayList;
 
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
-import org.farhan.mbt.core.ToGraphConversionMojo;
+import org.farhan.mbt.core.ConvertToGraph;
 import org.farhan.mbt.core.ToGraphConverter;
 import org.farhan.mbt.graph.JGraphTProject;
 
-public class ConvertAsciiDoctorToGraph extends ToGraphConversionMojo {
+public class ConvertAsciiDoctorToGraph extends ConvertToGraph {
 
 	AsciiDoctorProject source;
 	JGraphTProject target;
@@ -20,9 +20,10 @@ public class ConvertAsciiDoctorToGraph extends ToGraphConversionMojo {
 	}
 
 	@Override
-	protected void initProjects() {
+	protected void initProjects() throws Exception {
 		source = new AsciiDoctorProject();
 		target = new JGraphTProject();
+		source.load();
 	}
 
 	@Override

@@ -66,14 +66,11 @@ public class JavaToUMLConverter extends ToUMLConverter {
 	}
 
 	@Override
-	final protected void selectObjects() {
+	final protected void selectObjects() throws Exception {
 		ArrayList<Class> upperLayerClasses = null;
 		ArrayList<ConvertibleObject> layerFiles = null;
 		if (source.secondLayerName.contentEquals(getLayer())) {
 			upperLayerClasses = target.getLayerClasses(source.firstLayerName);
-			// TODO this is inefficient, it's reading every file unnecessarily, move the
-			// call to read() here. The same applies to the first layer. Basically move file
-			// reading out of the project to the converters to be more selective
 			layerFiles = source.getObjects(source.secondLayerName);
 		} else if (source.thirdLayerName.contentEquals(layer)) {
 			upperLayerClasses = target.getLayerClasses(source.secondLayerName);
@@ -231,8 +228,8 @@ public class JavaToUMLConverter extends ToUMLConverter {
 		// get the object name from the argument of the factory class
 		String objectName = mce.getChildNodes().getFirst().getChildNodes().getLast().toString().replace("\"", "");
 		// make the qualified name
-		String qualifiedName = target.theSystem.getName() + "::" + target.thirdLayerName + "::" + appName
-				+ "::" + objectName;
+		String qualifiedName = target.theSystem.getName() + "::" + target.thirdLayerName + "::" + appName + "::"
+				+ objectName;
 		return qualifiedName;
 	}
 
@@ -240,8 +237,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 	protected String convertObjectName(String fullName) {
 		String qualifiedName = fullName.trim();
 		qualifiedName = qualifiedName.replace(".java", "");
-		qualifiedName = qualifiedName.replace(
-				source.getDir(source.secondLayerName).getAbsolutePath(),
+		qualifiedName = qualifiedName.replace(source.getDir(source.secondLayerName).getAbsolutePath(),
 				source.secondLayerName);
 		qualifiedName = qualifiedName.replace(source.getDir(source.thirdLayerName).getAbsolutePath(),
 				source.thirdLayerName);

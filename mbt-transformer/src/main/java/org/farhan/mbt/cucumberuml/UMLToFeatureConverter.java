@@ -56,7 +56,7 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 	@Override
 	protected void convertObject(Class layerClass) throws Exception {
 		String path = convertObjectName(layerClass.getQualifiedName());
-		aFeatureFile = target.createCucumberFeatureFile(new File(path));
+		aFeatureFile = (CucumberFeatureWrapper) target.createObject(path);
 		convertComments(layerClass, aFeatureFile.theFeature);
 	}
 

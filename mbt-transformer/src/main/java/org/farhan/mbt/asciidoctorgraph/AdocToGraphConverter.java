@@ -35,15 +35,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		return layer;
 	}
 
-	public static MBTGraph<MBTVertex, MBTEdge> createEmptyGraph(String name) {
-		MBTGraph<MBTVertex, MBTEdge> g = new MBTGraph<>(MBTEdge.class);
-		g.setName(name);
-		g.createStartVertex();
-		g.createEndVertex();
-		return g;
-	}
-
-	private static void createFromSection(MBTGraph<MBTVertex, MBTEdge> g, Section scenario) {
+	private void createFromSection(MBTGraph<MBTVertex, MBTEdge> g, Section scenario) {
 
 		ArrayList<Section> steps = new ArrayList<Section>();
 		for (StructuralNode block : scenario.getBlocks()) {
@@ -63,51 +55,53 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		createFromTable(inputs, steps.getLast());
 	}
 
-	private static void createFromTable(MBTEdge inputs, Section step) {
+	private void createFromTable(MBTEdge inputs, Section step) {
 
 		// loop through the blocks which are tables
 		for (StructuralNode block : step.getBlocks()) {
 			if (block instanceof Table) {
-				MBTGraph<MBTVertex, MBTEdge> g = createEmptyGraph(step.getTitle());
+				// TODO this inner graph will have an associate file, so instead of saving the
+				// graph in one massive file, make it a pointer to the actual file for now
+				JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) target.createObject(convertObjectName(step.getTitle()));
 				Table table = (Table) block;
 				// get vertices from table
 				ArrayList<MBTVertex> vertices = new ArrayList<MBTVertex>();
 				// TODO validate the table has at least two rows
 				for (Row r : table.getHeader()) {
 					for (Cell c : r.getCells()) {
-						vertices.add(g.createVertex(c.getText()));
+						vertices.add(gtf.theGraph.createVertex(c.getText()));
 					}
 				}
 				// go through each row and convert to edge
 				for (int i = 0; i < table.getBody().size(); i++) {
 
-					g.createEdgeWithInput(g.getStartVertex(), vertices.getFirst(), "", "");
+					gtf.theGraph.createEdgeWithInput(gtf.theGraph.getStartVertex(), vertices.getFirst(), "", "");
 
 					Row row = table.getBody().get(i);
 					for (int j = 0; j < vertices.size() - 1; j++) {
 						String label = row.getCells().get(j).getText();
 						if (!label.isEmpty()) {
-							g.createEdgeWithInput(vertices.get(j), vertices.get(j + 1), label, label);
+							gtf.theGraph.createEdgeWithInput(vertices.get(j), vertices.get(j + 1), label, label);
 						}
 					}
 					// TODO this assumes the last column isn't blank
-					g.createEdgeWithInput(vertices.getLast(), g.getEndVertex(), row.getCells().getLast().getText(),
-							row.getCells().getLast().getText());
+					gtf.theGraph.createEdgeWithInput(vertices.getLast(), gtf.theGraph.getEndVertex(),
+							row.getCells().getLast().getText(), row.getCells().getLast().getText());
 				}
-				inputs.setValue(g);
+				inputs.setValue(gtf.theGraph);
 			}
 		}
 	}
 
 	@Override
 	protected void selectObjects() throws Exception {
-		// TODO this should be filterLayerFiles since it's removing files
 	}
 
 	@Override
 	protected void convertObject(ConvertibleObject layerFile) throws Exception {
 		anAsciiDoctorFile = (AsciiDoctorAdocWrapper) layerFile;
-		JGraphTGraphWrapper gtf = new JGraphTGraphWrapper(new File(convertObjectName(anAsciiDoctorFile.getFile().getName())));
+		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) target
+				.createObject(convertObjectName(anAsciiDoctorFile.getFile().getName()));
 		for (StructuralNode block : anAsciiDoctorFile.theDoc.getBlocks()) {
 			if (block instanceof Section) {
 				createFromSection(gtf.theGraph, (Section) block);

@@ -2,9 +2,9 @@ package org.farhan.mbt.core;
 
 import java.util.ArrayList;
 
-public abstract class ToCodeConversionMojo {
+public abstract class ConvertToGraph {
 
-	protected abstract ArrayList<ToCodeConverter> getLayerConverters();
+	protected abstract ArrayList<ToGraphConverter> getLayerConverters();
 
 	protected abstract void save() throws Exception;
 
@@ -13,11 +13,10 @@ public abstract class ToCodeConversionMojo {
 	public void mojoGoal() throws Exception {
 
 		initProjects();
-		for (ToCodeConverter c : getLayerConverters()) {
+		for (ToGraphConverter c : getLayerConverters()) {
 			c.selectObjects();
 			c.convertObjects();
 		}
 		save();
 	}
-
 }

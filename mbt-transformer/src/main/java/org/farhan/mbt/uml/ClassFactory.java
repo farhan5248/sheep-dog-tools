@@ -1,14 +1,9 @@
 package org.farhan.mbt.uml;
 
-import java.util.ArrayList;
-
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Package;
-import org.eclipse.uml2.uml.PackageableElement;
-import org.farhan.mbt.core.Utilities;
-import org.farhan.mbt.cucumber.JavaClassWrapper;
 
 public class ClassFactory {
 
@@ -41,18 +36,6 @@ public class ClassFactory {
 			thePackage = nestingPackage.createNestedPackage(name);
 		}
 		return thePackage;
-	}
-
-	public static ArrayList<Class> getClasses(Package nestingPackage) {
-		ArrayList<Class> classes = new ArrayList<Class>();
-		for (PackageableElement pe : nestingPackage.getPackagedElements()) {
-			if (pe instanceof Class) {
-				classes.add((Class) pe);
-			} else if (pe instanceof Package) {
-				classes.addAll(getClasses((Package) pe));
-			}
-		}
-		return classes;
 	}
 
 	public static Class getClassByMessage(Model nestingPackage, String messageName, String qualifiedName) {

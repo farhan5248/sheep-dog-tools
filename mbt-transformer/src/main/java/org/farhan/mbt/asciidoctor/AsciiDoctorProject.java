@@ -26,25 +26,30 @@ public class AsciiDoctorProject extends ConvertibleProject {
 
 	@Override
 	public ArrayList<ConvertibleObject> getObjects(String layer) {
-		if (firstLayerObjects.isEmpty()) {
-			try {
-				load();
-			} catch (Exception e) {
-				Utilities.getStackTraceAsString(e);
-			}
+		ArrayList<ConvertibleObject> layerFiles = null;
+		switch (layer) {
+		case firstLayerName:
+			layerFiles = firstLayerObjects;
+			break;
 		}
-		return firstLayerObjects;
+		return layerFiles;
 	}
 
 	@Override
 	public void load() throws Exception {
-		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(firstLayerName),
-				getFileType(firstLayerName));
+		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(firstLayerName), getFileType(firstLayerName));
+		firstLayerObjects.clear();
 		for (File f : files) {
-			AsciiDoctorAdocWrapper cff = new AsciiDoctorAdocWrapper(f);
-			firstLayerObjects.add(cff);
-			cff.read();
+			createObject(f.getAbsolutePath()).read();
 		}
+	}
+
+	@Override
+	public ConvertibleObject createObject(String name) {
+		File file = new File(name);
+		AsciiDoctorAdocWrapper cff = new AsciiDoctorAdocWrapper(file);
+		firstLayerObjects.add(cff);
+		return cff;
 	}
 
 	@Override

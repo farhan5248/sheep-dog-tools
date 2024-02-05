@@ -3,7 +3,6 @@ package org.farhan.stepdefs.blah;
 import org.farhan.common.objects.BlahFactory;
 import io.cucumber.java.en.Given;
 import io.cucumber.datatable.DataTable;
-import common.stepdefs.TestSteps;
 import org.farhan.common.stepdefs.TestSteps;
 
 public class BlahObjectPageSteps extends TestSteps {
@@ -16,10 +15,12 @@ public class BlahObjectPageSteps extends TestSteps {
     @Given("^The blah application, Object page is invalid$")
     public void theBlahApplicationObjectPageIsInvalid() {
         BlahFactory.get("BlahObjectPage").assertIsInvalid();
+        BlahFactory.get("BlahObjectPage").assertIsInvalid();
     }
 
     @Given("^The blah application, Object page, Top section will be as follows$")
     public void theBlahApplicationObjectPageTopSectionIsAsFollows(DataTable dataTable) {
+        BlahFactory.get("BlahObjectPage").assertAttributes(dataTable, "Top");
         BlahFactory.get("BlahObjectPage").assertAttributes(dataTable, "Top");
     }
 }
