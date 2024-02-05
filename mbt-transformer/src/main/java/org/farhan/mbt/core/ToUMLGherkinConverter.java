@@ -70,8 +70,8 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 	protected String getNextLayerClassQualifiedName(Interaction targetInteraction) {
 
 		Class interactionOwningClass = (Class) targetInteraction.getOwner();
-		return interactionOwningClass.getQualifiedName()
-				.replace(target.secondLayerName, target.thirdLayerName).replace("Steps", "");
+		return interactionOwningClass.getQualifiedName().replace(target.secondLayerName, target.thirdLayerName)
+				.replace("Steps", "");
 	}
 
 	@Override
@@ -92,8 +92,7 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 	protected void createNextLayerInteractionMessagesFromEdgeMessage(Interaction targetInteraction, Message m) {
 
 		createInputOutputMessage(targetInteraction, m, "set");
-		Class layer3Class = ClassFactory.getClass(target.theSystem,
-				getNextLayerClassQualifiedName(targetInteraction));
+		Class layer3Class = ClassFactory.getClass(target.theSystem, getNextLayerClassQualifiedName(targetInteraction));
 		MessageFactory.getMessage(targetInteraction, layer3Class, "execute");
 	}
 
@@ -133,8 +132,7 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 			} else {
 				attributeName = MBTEdgeValidator.getState(m.getName());
 			}
-			String methodName = getMethodName(prefix + StringUtils.capitalize(attributeName),
-					true);
+			String methodName = getMethodName(prefix + StringUtils.capitalize(attributeName), true);
 			MessageFactory.getMessage(nextLayerInteraction, nextLayerClass, methodName);
 			// ArgumentFactory.getArgument(nextLayerMessage, variableName,
 			// Utilities.toLowerCamelCase(variableName), true);

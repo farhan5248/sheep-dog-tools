@@ -15,6 +15,8 @@ import org.farhan.mbt.uml.UMLProject;
 
 public abstract class ToUMLConverter {
 
+	protected String layer;
+
 	public ToUMLConverter() {
 		theMachine = new StateMachine();
 	}
@@ -28,26 +30,26 @@ public abstract class ToUMLConverter {
 	protected abstract ArrayList<ConvertibleObject> getObjects(String layer);
 
 	protected void convertObjects() throws Exception {
-		for (ConvertibleObject layerFile : getObjects(getLayer())) {
-			Class layerClass = convertObject(layerFile);
-			convertImports(layerClass);
-			convertBehaviours(layerClass);
+		for (ConvertibleObject co : getObjects(getLayer())) {
+			convertObject(co);
+			convertImports(co);
+			convertBehaviours(co);
 		}
 	}
 
-	protected abstract Class convertObject(ConvertibleObject layerFile) throws Exception;
+	protected abstract void convertObject(ConvertibleObject layerFile) throws Exception;
 
-	protected abstract void convertImports(Class layerClass) throws Exception;
+	protected abstract void convertImports(ConvertibleObject layerClass) throws Exception;
 
-	protected abstract void convertBehaviours(Class layerClass) throws Exception;
+	protected abstract void convertBehaviours(ConvertibleObject layerClass) throws Exception;
 
+	// TODO change Interaction to Object
 	protected abstract void convertInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception;
 
 	protected abstract void convertMessage(Interaction anInteraction, Object anObject) throws Exception;
 
 	protected void linkLayerFiles(String layer) throws Exception {
-		ArrayList<Interaction> layerInteractions = PackageFactory.getPackagedInteractions(target.theSystem,
-				layer);
+		ArrayList<Interaction> layerInteractions = PackageFactory.getPackagedInteractions(target.theSystem, layer);
 		for (Interaction i : layerInteractions) {
 			for (Message m : i.getMessages()) {
 				for (String methodName : getNextLayerInteractionNamesfromMessage(m)) {

@@ -25,7 +25,7 @@ public class JGraphTProject extends ConvertibleProject {
 	@Override
 	public void load() throws Exception {
 
-		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(firstLayerName), getFileType(firstLayerName));
+		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(firstLayerName), getFileExt(firstLayerName));
 		firstLayerObjects.clear();
 		for (File f : files) {
 			createObject(f.getAbsolutePath()).read();
@@ -44,7 +44,7 @@ public class JGraphTProject extends ConvertibleProject {
 	}
 
 	@Override
-	public String getFileType(String layer) {
+	public String getFileExt(String layer) {
 		return ".graph";
 	}
 

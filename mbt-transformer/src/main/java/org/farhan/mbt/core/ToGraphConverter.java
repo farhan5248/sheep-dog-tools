@@ -15,12 +15,12 @@ public abstract class ToGraphConverter {
 	protected abstract ArrayList<ConvertibleObject> getObjects(String layer);
 
 	protected void convertObjects() throws Exception {
-		for (ConvertibleObject layerFile : getObjects(getLayer())) {
-			convertObject(layerFile);
+		for (ConvertibleObject co : getObjects(getLayer())) {
+			convertObject(co);
 		}
 	}
 
-	protected abstract void convertObject(ConvertibleObject layerFile) throws Exception;
+	protected abstract void convertObject(ConvertibleObject object) throws Exception;
 
 	protected abstract String convertObjectName(String fullName);
 

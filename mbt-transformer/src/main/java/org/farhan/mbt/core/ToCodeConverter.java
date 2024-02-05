@@ -1,7 +1,6 @@
 package org.farhan.mbt.core;
 
 import java.util.ArrayList;
-import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.farhan.mbt.uml.UMLProject;
@@ -14,24 +13,24 @@ public abstract class ToCodeConverter {
 
 	protected abstract String getLayer();
 
-	protected abstract ArrayList<Class> getObjects(String layer);
+	protected abstract ArrayList<ConvertibleObject> getObjects(String layer);
 
 	protected void convertObjects() throws Exception {
-		for (Class layerClass : getObjects(getLayer())) {
-			convertObject(layerClass);
-			convertImports(layerClass);
-			convertAttributes(layerClass);
-			convertBehaviours(layerClass);
+		for (ConvertibleObject co : getObjects(getLayer())) {
+			convertObject(co);
+			convertImports(co);
+			convertAttributes(co);
+			convertBehaviours(co);
 		}
 	}
 
-	protected abstract void convertObject(Class layerClass) throws Exception;
+	protected abstract void convertObject(ConvertibleObject co) throws Exception;
 
-	protected abstract void convertImports(Class layerClass) throws Exception;
+	protected abstract void convertImports(ConvertibleObject co) throws Exception;
 
-	protected abstract void convertAttributes(Class layerClass) throws Exception;
+	protected abstract void convertAttributes(ConvertibleObject co) throws Exception;
 
-	protected abstract void convertBehaviours(Class layerClass) throws Exception;
+	protected abstract void convertBehaviours(ConvertibleObject co) throws Exception;
 
 	protected abstract void convertInteractionMessages(Interaction anInteraction, Object stepList) throws Exception;
 

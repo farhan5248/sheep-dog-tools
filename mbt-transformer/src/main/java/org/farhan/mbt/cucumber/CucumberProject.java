@@ -21,7 +21,7 @@ public class CucumberProject extends ConvertibleProject {
 	}
 
 	@Override
-	public String getFileType(String layer) {
+	public String getFileExt(String layer) {
 		if (layer.contentEquals(firstLayerName)) {
 			return ".feature";
 		} else {
@@ -32,12 +32,16 @@ public class CucumberProject extends ConvertibleProject {
 	@Override
 	public File getDir(String layer) {
 		File aFile = null;
-		if (layer.contentEquals(firstLayerName)) {
+		switch (layer) {
+		case firstLayerName:
 			aFile = new File(baseDir + "src/test/resources/Cucumber/");
-		} else if (layer.contentEquals(secondLayerName)) {
+			break;
+		case secondLayerName:
 			aFile = new File(baseDir + "src/test/java/org/farhan/" + secondLayerName + "/");
-		} else if (layer.contentEquals(thirdLayerName)) {
+			break;
+		case thirdLayerName:
 			aFile = new File(baseDir + "src/test/java/org/farhan/" + thirdLayerName + "/");
+			break;
 		}
 		aFile.mkdirs();
 		return aFile;
@@ -46,32 +50,32 @@ public class CucumberProject extends ConvertibleProject {
 	@Override
 	public ArrayList<ConvertibleObject> getObjects(String layer) {
 
-		ArrayList<ConvertibleObject> layerFiles = null;
+		ArrayList<ConvertibleObject> layerObjects = null;
 		switch (layer) {
 		case firstLayerName:
-			layerFiles = firstLayerObjects;
+			layerObjects = firstLayerObjects;
 			break;
 		case secondLayerName:
-			layerFiles = secondLayerObjects;
+			layerObjects = secondLayerObjects;
 			break;
 		case thirdLayerName:
-			layerFiles = thirdLayerObjects;
+			layerObjects = thirdLayerObjects;
 			break;
 		}
-		return layerFiles;
+		return layerObjects;
 	}
 
 	@Override
 	public void load() throws Exception {
-		readFiles(firstLayerName, firstLayerObjects);
-		readFiles(secondLayerName, secondLayerObjects);
-		readFiles(thirdLayerName, thirdLayerObjects);
+		loadObjects(firstLayerName, firstLayerObjects);
+		loadObjects(secondLayerName, secondLayerObjects);
+		loadObjects(thirdLayerName, thirdLayerObjects);
 	}
 
 	// TODO delete after moving reads to select layer objects
-	private void readFiles(String layer, ArrayList<ConvertibleObject> layerFiles) {
+	private void loadObjects(String layer, ArrayList<ConvertibleObject> layerFiles) {
 		layerFiles.clear();
-		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(layer), getFileType(layer));
+		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(layer), getFileExt(layer));
 		for (File f : files) {
 			try {
 				createObject(f.getAbsolutePath()).read();

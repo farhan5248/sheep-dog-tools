@@ -19,7 +19,7 @@ import org.farhan.mbt.graph.MBTVertex;
 
 public class AdocToGraphConverter extends ToGraphConverter {
 
-	private AsciiDoctorAdocWrapper anAsciiDoctorFile;
+	private JGraphTGraphWrapper jgw;
 	private String layer;
 
 	AsciiDoctorProject source;
@@ -99,23 +99,23 @@ public class AdocToGraphConverter extends ToGraphConverter {
 
 	@Override
 	protected void convertObject(ConvertibleObject layerFile) throws Exception {
-		anAsciiDoctorFile = (AsciiDoctorAdocWrapper) layerFile;
-		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) target
-				.createObject(convertObjectName(anAsciiDoctorFile.getFile().getName()));
-		for (StructuralNode block : anAsciiDoctorFile.theDoc.getBlocks()) {
+		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) layerFile;
+		jgw = (JGraphTGraphWrapper) target
+				.createObject(convertObjectName(adaw.getFile().getName()));
+		for (StructuralNode block : adaw.theDoc.getBlocks()) {
 			if (block instanceof Section) {
-				createFromSection(gtf.theGraph, (Section) block);
+				createFromSection(jgw.theGraph, (Section) block);
 			}
 		}
 		// TODO the project should hide object creation and list management
-		target.getObjects(target.firstLayerName).add(gtf);
+		target.getObjects(target.firstLayerName).add(jgw);
 	}
 
 	@Override
 	protected String convertObjectName(String fullName) {
 		return target.getDir(target.firstLayerName).getAbsolutePath() + File.separator
-				+ fullName.replace(source.getFileType(source.firstLayerName), "")
-				+ target.getFileType(target.firstLayerName);
+				+ fullName.replace(source.getFileExt(source.firstLayerName), "")
+				+ target.getFileExt(target.firstLayerName);
 	}
 
 	@Override

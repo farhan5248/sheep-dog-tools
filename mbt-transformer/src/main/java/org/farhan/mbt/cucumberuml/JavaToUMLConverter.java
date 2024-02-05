@@ -24,6 +24,7 @@ import org.farhan.mbt.uml.ElementImportFactory;
 import org.farhan.mbt.uml.InteractionFactory;
 import org.farhan.mbt.uml.MessageFactory;
 import org.farhan.mbt.uml.ParameterFactory;
+import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 
 import com.github.javaparser.ast.ImportDeclaration;
@@ -40,11 +41,8 @@ import com.github.javaparser.ast.stmt.Statement;
 
 public class JavaToUMLConverter extends ToUMLConverter {
 
-	private JavaClassWrapper aCucumberJavaFile;
-	// TODO move this to the super class
-	private String layer;
-
-	CucumberProject source;
+	private UMLClassWrapper ucw;
+	private CucumberProject source;
 
 	public JavaToUMLConverter(String layer, CucumberProject source, UMLProject target) {
 		this.layer = layer;
@@ -67,20 +65,21 @@ public class JavaToUMLConverter extends ToUMLConverter {
 
 	@Override
 	final protected void selectObjects() throws Exception {
-		ArrayList<Class> upperLayerClasses = null;
+		ArrayList<ConvertibleObject> upperLayerClasses = null;
 		ArrayList<ConvertibleObject> layerFiles = null;
 		if (source.secondLayerName.contentEquals(getLayer())) {
-			upperLayerClasses = target.getLayerClasses(source.firstLayerName);
+			upperLayerClasses = target.getObjects(source.firstLayerName);
 			layerFiles = source.getObjects(source.secondLayerName);
 		} else if (source.thirdLayerName.contentEquals(layer)) {
-			upperLayerClasses = target.getLayerClasses(source.secondLayerName);
+			upperLayerClasses = target.getObjects(source.secondLayerName);
 			layerFiles = source.getObjects(source.thirdLayerName);
 		}
 		// Instead of reading a file twice, make a short list to save time reading each
 		// file
 		HashMap<String, Class> layerClassShortList = new HashMap<String, Class>();
-		for (Class c : upperLayerClasses) {
-			for (ElementImport ei : c.getElementImports()) {
+		for (ConvertibleObject co : upperLayerClasses) {
+			UMLClassWrapper c = (UMLClassWrapper) co;
+			for (ElementImport ei : c.theClass.getElementImports()) {
 				Class importedClass = (Class) ei.getImportedElement();
 				layerClassShortList.put(importedClass.getQualifiedName(), importedClass);
 			}
@@ -104,39 +103,40 @@ public class JavaToUMLConverter extends ToUMLConverter {
 	}
 
 	@Override
-	protected Class convertObject(ConvertibleObject layerFile) throws Exception {
-		aCucumberJavaFile = (JavaClassWrapper) layerFile;
-		String qualifiedName = convertObjectName(aCucumberJavaFile.getFile().getAbsolutePath());
-		Class layerClass = ClassFactory.getClass(target.theSystem, qualifiedName);
-		return layerClass;
+	protected void convertObject(ConvertibleObject layerFile) throws Exception {
+		JavaClassWrapper jcw = (JavaClassWrapper) layerFile;
+		String qualifiedName = convertObjectName(jcw.getFile().getAbsolutePath());
+		ucw = (UMLClassWrapper) target.createObject(qualifiedName);
 	}
 
 	@Override
-	protected void convertImports(Class layerClass) throws Exception {
-		if (aCucumberJavaFile.javaClass.getTypes().size() > 0) {
+	protected void convertImports(ConvertibleObject layerFile) throws Exception {
+		JavaClassWrapper jcw = (JavaClassWrapper) layerFile;
+		if (jcw.javaClass.getTypes().size() > 0) {
 			// Wrap this in CommentFactory.getComment. getComment should do nothing if the
 			// content is empty
-			Optional<Comment> comment = aCucumberJavaFile.javaClass.getType(0).getComment();
+			Optional<Comment> comment = jcw.javaClass.getType(0).getComment();
 			if (comment.isPresent()) {
-				CommentFactory.getComment(layerClass, comment.get().getContent());
+				CommentFactory.getComment(ucw.theClass, comment.get().getContent());
 			}
-			for (ImportDeclaration i : aCucumberJavaFile.javaClass.getImports()) {
+			for (ImportDeclaration i : jcw.javaClass.getImports()) {
 				i.getNameAsString();
 				if (!i.getNameAsString().endsWith("Factory")) {
 					// Don't include the factory import because it's a detail of dependency
 					// injection is implemented
 					String anImportName = convertImportNameToQualifiedName(i.getNameAsString());
-					ElementImportFactory.getElementImport(layerClass, anImportName);
+					ElementImportFactory.getElementImport(ucw.theClass, anImportName);
 				}
 			}
 		}
 	}
 
 	@Override
-	protected void convertBehaviours(Class layerClass) throws Exception {
-		for (MethodDeclaration md : aCucumberJavaFile.javaClass.getType(0).getMethods()) {
+	protected void convertBehaviours(ConvertibleObject layerFile) throws Exception {
+		JavaClassWrapper jcw = (JavaClassWrapper) layerFile;
+		for (MethodDeclaration md : jcw.javaClass.getType(0).getMethods()) {
 			// TODO determine if this interaction is empty
-			Interaction anInteraction = InteractionFactory.getInteraction(layerClass, md.getNameAsString(), true);
+			Interaction anInteraction = InteractionFactory.getInteraction(ucw.theClass, md.getNameAsString(), true);
 
 			// Wrap this in CommentFactory.getComment. getComment should do nothing if the
 			// content is empty

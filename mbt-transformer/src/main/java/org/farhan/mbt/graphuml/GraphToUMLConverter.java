@@ -26,16 +26,13 @@ import org.farhan.mbt.uml.ClassFactory;
 import org.farhan.mbt.uml.ElementImportFactory;
 import org.farhan.mbt.uml.InteractionFactory;
 import org.farhan.mbt.uml.MessageFactory;
+import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 
 public class GraphToUMLConverter extends ToUMLGherkinConverter {
 
-	private JGraphTGraphWrapper aGraphTextFile;
-
-	private String layer;
-
-	JGraphTProject source;
-	UMLProject target;
+	private UMLClassWrapper ucw;
+	private JGraphTProject source;
 
 	public GraphToUMLConverter(String layer, JGraphTProject source, UMLProject target) {
 		this.layer = layer;
@@ -60,26 +57,26 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	}
 
 	@Override
-	protected Class convertObject(ConvertibleObject theObject) throws Exception {
+	protected void convertObject(ConvertibleObject theObject) throws Exception {
 
-		aGraphTextFile = (JGraphTGraphWrapper) theObject;
-		String qualifiedName = convertObjectName(aGraphTextFile.getFile().getAbsolutePath());
-		Class layerClass = ClassFactory.getClass(target.theSystem, qualifiedName);
-		return layerClass;
+		JGraphTGraphWrapper jgw = (JGraphTGraphWrapper) theObject;
+		String qualifiedName = convertObjectName(jgw.getFile().getAbsolutePath());
+		ucw = (UMLClassWrapper) target.createObject(qualifiedName);
 	}
 
 	@Override
-	protected void convertImports(Class layerClass) throws Exception {
+	protected void convertImports(ConvertibleObject theObject) throws Exception {
 	}
 
 	@Override
-	protected void convertBehaviours(Class layerClass) throws Exception {
+	protected void convertBehaviours(ConvertibleObject theObject) throws Exception {
 
-		ArrayList<MBTPath> paths = getAllPaths(aGraphTextFile.theGraph, aGraphTextFile.theGraph.getStartVertex());
+		JGraphTGraphWrapper jgw = (JGraphTGraphWrapper) theObject;
+		ArrayList<MBTPath> paths = getAllPaths(jgw.theGraph, jgw.theGraph.getStartVertex());
 		for (int i = 0; i < paths.size(); i++) {
 			resetCurrentContainerObject();
 			// TODO figure out names for this later, use a counter for now
-			Interaction anInteraction = createInteraction(layerClass, "Scenario " + String.valueOf(i));
+			Interaction anInteraction = createInteraction(ucw.theClass, "Scenario " + String.valueOf(i));
 			// TODO think about adding tags by deriving them from the edges
 			// convertTagsToParameters(anInteraction, s.getTags());
 			convertInteractionMessages(anInteraction, paths.get(i).getPath());
@@ -145,8 +142,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		String messageName = s;
 		Class owningClass = (Class) anInteraction.getOwner();
 		String secondLayerClassName = getSecondLayerClassName();
-		Class importedClass = ClassFactory.getClassByMessage(target.theSystem, messageName,
-				secondLayerClassName);
+		Class importedClass = ClassFactory.getClassByMessage(target.theSystem, messageName, secondLayerClassName);
 		ElementImport classImport = ElementImportFactory.getElementImportByAlias(owningClass, importedClass.getName());
 		if (classImport == null) {
 			classImport = ElementImportFactory.getElementImport(owningClass, secondLayerClassName);
@@ -157,9 +153,8 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	@Override
 	protected String convertObjectName(String fullName) {
 		String qualifiedName = fullName.trim();
-		qualifiedName = qualifiedName.replace(source.getFileType(source.firstLayerName), "");
-		qualifiedName = qualifiedName.replace(source.getDir(source.firstLayerName).getAbsolutePath(),
-				"");
+		qualifiedName = qualifiedName.replace(source.getFileExt(source.firstLayerName), "");
+		qualifiedName = qualifiedName.replace(source.getDir(source.firstLayerName).getAbsolutePath(), "");
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::specs" + qualifiedName;
 		return qualifiedName;
@@ -181,8 +176,8 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	private String getSecondLayerClassName() {
 		String secondLayerClassName = "";
 		secondLayerClassName = convertNextLayerClassName(getFSMName() + getFSMState() + "Steps");
-		secondLayerClassName = "pst::" + source.secondLayerName + "::" + Utilities.toLowerCamelCase(getFSMName())
-				+ "::" + secondLayerClassName;
+		secondLayerClassName = "pst::" + source.secondLayerName + "::" + Utilities.toLowerCamelCase(getFSMName()) + "::"
+				+ secondLayerClassName;
 		return secondLayerClassName;
 	}
 

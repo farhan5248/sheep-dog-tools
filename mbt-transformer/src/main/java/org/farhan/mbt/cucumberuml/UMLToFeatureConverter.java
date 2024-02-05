@@ -17,12 +17,14 @@ import org.farhan.cucumber.Row;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Statement;
 import org.farhan.cucumber.Step;
+import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToCodeConverter;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.AnnotationFactory;
 import org.farhan.mbt.uml.ArgumentFactory;
 import org.farhan.mbt.uml.PackageFactory;
+import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 
 public class UMLToFeatureConverter extends ToCodeConverter {
@@ -49,15 +51,16 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 	}
 
 	@Override
-	protected ArrayList<Class> getObjects(String layer) {
-		return source.getLayerClasses(layer);
+	protected ArrayList<ConvertibleObject> getObjects(String layer) {
+		return source.getObjects(layer);
 	}
 
 	@Override
-	protected void convertObject(Class layerClass) throws Exception {
-		String path = convertObjectName(layerClass.getQualifiedName());
+	protected void convertObject(ConvertibleObject layerClass) throws Exception {
+		UMLClassWrapper ucw = (UMLClassWrapper) layerClass;
+		String path = convertObjectName(ucw.theClass.getQualifiedName());
 		aFeatureFile = (CucumberFeatureWrapper) target.createObject(path);
-		convertComments(layerClass, aFeatureFile.theFeature);
+		convertComments(ucw.theClass, aFeatureFile.theFeature);
 	}
 
 	private void convertComments(Class aClass, Feature aFeature) {
@@ -87,17 +90,18 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 	}
 
 	@Override
-	protected void convertImports(Class layerClass) throws Exception {
+	protected void convertImports(ConvertibleObject layerClass) throws Exception {
 	}
 
 	@Override
-	protected void convertAttributes(Class layerClass) throws Exception {
+	protected void convertAttributes(ConvertibleObject layerClass) throws Exception {
 	}
 
 	@Override
-	protected void convertBehaviours(Class layerClass) throws Exception {
+	protected void convertBehaviours(ConvertibleObject layerClass) throws Exception {
 		// TODO there's no background or scenario outline, just scenario
-		for (Behavior aBehavior : layerClass.getOwnedBehaviors()) {
+		UMLClassWrapper ucw = (UMLClassWrapper) layerClass;
+		for (Behavior aBehavior : ucw.theClass.getOwnedBehaviors()) {
 			if (aBehavior instanceof Interaction) {
 				Interaction anInteraction = (Interaction) aBehavior;
 				Scenario aScenario = CucumberFactory.eINSTANCE.createScenario();
@@ -156,7 +160,7 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 		pathName = pathName.replace("::", File.separator);
 		// TODO isn't feature defined somewhere else as getFileType? Maybe there should
 		// be get Layer 1 filetype, layer 2 filetype etc defined here
-		pathName = pathName + target.getFileType(target.firstLayerName);
+		pathName = pathName + target.getFileExt(target.firstLayerName);
 		return pathName;
 	}
 

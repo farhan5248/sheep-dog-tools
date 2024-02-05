@@ -34,14 +34,13 @@ import org.farhan.mbt.uml.ElementImportFactory;
 import org.farhan.mbt.uml.InteractionFactory;
 import org.farhan.mbt.uml.MessageFactory;
 import org.farhan.mbt.uml.ParameterFactory;
+import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 
 public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 
-	private CucumberFeatureWrapper aCucumberFile;
-	private String layer;
-
-	CucumberProject source;
+	private UMLClassWrapper ucw;
+	private CucumberProject source;
 
 	public FeatureToUMLConverter(String layer, CucumberProject source, UMLProject target) {
 		this.layer = layer;
@@ -77,32 +76,33 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	}
 
 	@Override
-	protected Class convertObject(ConvertibleObject theObject) throws Exception {
+	protected void convertObject(ConvertibleObject theObject) throws Exception {
 
 		// TODO source and target files should be stored in this class, there's no need
 		// to pass them around.
-		aCucumberFile = (CucumberFeatureWrapper) theObject;
-		String qualifiedName = convertObjectName(aCucumberFile.getFile().getAbsolutePath());
-		Class layerClass = ClassFactory.getClass(target.theSystem, qualifiedName);
-		CommentFactory.getComment(layerClass, convertStatementsToString(aCucumberFile.theFeature.getStatements()));
-		return layerClass;
+		CucumberFeatureWrapper cfw = (CucumberFeatureWrapper) theObject;
+		String qualifiedName = convertObjectName(cfw.getFile().getAbsolutePath());
+
+		ucw = (UMLClassWrapper) target.createObject(qualifiedName);
+		CommentFactory.getComment(ucw.theClass, convertStatementsToString(cfw.theFeature.getStatements()));
 	}
 
 	@Override
-	protected void convertImports(Class layerClass) throws Exception {
+	protected void convertImports(ConvertibleObject theObject) throws Exception {
 	}
 
 	@Override
-	protected void convertBehaviours(Class layerClass) throws Exception {
+	protected void convertBehaviours(ConvertibleObject theObject) throws Exception {
 
+		CucumberFeatureWrapper ufw = (CucumberFeatureWrapper) theObject;
 		Background b = null;
-		for (AbstractScenario as : aCucumberFile.theFeature.getAbstractScenarios()) {
+		for (AbstractScenario as : ufw.theFeature.getAbstractScenarios()) {
 			if (as instanceof Background) {
 				b = (Background) as;
 				continue;
 			}
 			resetCurrentContainerObject();
-			Interaction anInteraction = createInteraction(layerClass, as);
+			Interaction anInteraction = createInteraction(ucw.theClass, as);
 			if (as instanceof Scenario) {
 				Scenario s = (Scenario) as;
 				convertTagsToParameters(anInteraction, s.getTags());
@@ -146,7 +146,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	@Override
 	protected String convertObjectName(String fullName) {
 		String qualifiedName = fullName.trim();
-		qualifiedName = qualifiedName.replace(source.getFileType(source.firstLayerName), "");
+		qualifiedName = qualifiedName.replace(source.getFileExt(source.firstLayerName), "");
 		qualifiedName = qualifiedName.replace(source.getDir(source.firstLayerName).getAbsolutePath(), "");
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::specs" + qualifiedName;
@@ -201,11 +201,11 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 
 	private boolean isFileSelected(ConvertibleObject convertibleFile, String layerSelectionCriteria) throws Exception {
 
-		aCucumberFile = (CucumberFeatureWrapper) convertibleFile;
-		if (isTagged(aCucumberFile.theFeature.getTags(), layerSelectionCriteria)) {
+		CucumberFeatureWrapper ufw = (CucumberFeatureWrapper) convertibleFile;
+		if (isTagged(ufw.theFeature.getTags(), layerSelectionCriteria)) {
 			return true;
 		}
-		for (AbstractScenario a : aCucumberFile.theFeature.getAbstractScenarios()) {
+		for (AbstractScenario a : ufw.theFeature.getAbstractScenarios()) {
 			if (a instanceof Scenario) {
 				if (isTagged(((Scenario) a).getTags(), layerSelectionCriteria)) {
 					return true;

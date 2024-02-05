@@ -16,7 +16,7 @@ public abstract class ConvertibleProject {
 
 	public abstract File getDir(String layer);
 
-	public abstract String getFileType(String layer);
+	public abstract String getFileExt(String layer);
 
 	// TODO this method shouldn't read the files, that happens in select layer files
 	public abstract ArrayList<ConvertibleObject> getObjects(String layer);
