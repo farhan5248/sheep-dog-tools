@@ -15,9 +15,8 @@ import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToCodeConverter;
 import org.farhan.mbt.core.Utilities;
-import org.farhan.mbt.cucumber.JavaClassWrapper;
+import org.farhan.mbt.cucumber.CucumberJavaWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
-import org.farhan.mbt.uml.PackageFactory;
 import org.farhan.mbt.uml.ParameterFactory;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
@@ -30,7 +29,7 @@ import com.github.javaparser.ast.stmt.BlockStmt;
 
 public class UMLToJavaConverter extends ToCodeConverter {
 
-	private JavaClassWrapper aJavaFile;
+	private CucumberJavaWrapper aJavaFile;
 	private String layer;
 
 	CucumberProject target;
@@ -47,8 +46,8 @@ public class UMLToJavaConverter extends ToCodeConverter {
 	}
 
 	@Override
-	protected ArrayList<Class> selectObjects() throws Exception {
-		return PackageFactory.getPackagedClasses(source.theSystem.getNestedPackage(getLayer()));
+	protected void selectObjects() throws Exception {
+		source.loadObjects(layer);
 	}
 
 	@Override
@@ -60,7 +59,7 @@ public class UMLToJavaConverter extends ToCodeConverter {
 	protected void convertObject(ConvertibleObject co) throws Exception {
 		UMLClassWrapper ucw = (UMLClassWrapper) co;
 		String path = convertObjectName(ucw.theClass.getQualifiedName());
-		aJavaFile = (JavaClassWrapper) target.createObject(path);
+		aJavaFile = (CucumberJavaWrapper) target.createObject(path);
 		aJavaFile.javaClass = new CompilationUnit();
 		aJavaFile.javaClass.setStorage(aJavaFile.getFile().toPath());
 		aJavaFile.javaClass.addType(new ClassOrInterfaceDeclaration());
@@ -173,18 +172,18 @@ public class UMLToJavaConverter extends ToCodeConverter {
 	@Override
 	protected String convertObjectName(String fullName) {
 		String pathName = fullName;
-		pathName = pathName.replace("pst::" + target.secondLayerName,
-				target.getDir(target.secondLayerName).getAbsolutePath());
-		pathName = pathName.replace("pst::" + target.thirdLayerName,
-				target.getDir(target.thirdLayerName).getAbsolutePath());
+		pathName = pathName.replace("pst::" + target.SECOND_LAYER,
+				target.getDir(target.SECOND_LAYER).getAbsolutePath());
+		pathName = pathName.replace("pst::" + target.THIRD_LAYER,
+				target.getDir(target.THIRD_LAYER).getAbsolutePath());
 		pathName = pathName.replace("::", File.separator);
-		pathName = pathName + target.getFileExt(target.secondLayerName);
+		pathName = pathName + target.getFileExt(target.SECOND_LAYER);
 		return pathName;
 	}
 
 	private String getFactoryName(String qualifiedName) {
 		String factoryName = qualifiedName;
-		factoryName = factoryName.replace(source.theSystem.getName() + "::" + source.thirdLayerName + "::", "");
+		factoryName = factoryName.replace(source.theSystem.getName() + "::" + source.THIRD_LAYER + "::", "");
 		factoryName = factoryName.split("::")[0];
 		factoryName = StringUtils.capitalize(factoryName) + "Factory";
 		return factoryName;
@@ -242,7 +241,7 @@ public class UMLToJavaConverter extends ToCodeConverter {
 	}
 
 	private boolean isSecondLayer(Class layerClass) {
-		if (layerClass.getQualifiedName().startsWith("pst::" + target.secondLayerName + "::")) {
+		if (layerClass.getQualifiedName().startsWith("pst::" + target.SECOND_LAYER + "::")) {
 			return true;
 		} else {
 			return false;
@@ -250,7 +249,7 @@ public class UMLToJavaConverter extends ToCodeConverter {
 	}
 
 	private boolean isThirdLayer(Class layerClass) {
-		if (layerClass.getQualifiedName().startsWith("pst::" + target.thirdLayerName + "::")) {
+		if (layerClass.getQualifiedName().startsWith("pst::" + target.THIRD_LAYER + "::")) {
 			return true;
 		} else {
 			return false;
@@ -264,12 +263,12 @@ public class UMLToJavaConverter extends ToCodeConverter {
 	private String convertJavaPathToJavaPackage(String path) {
 
 		String importName = path;
-		importName = importName.replace(".java", "");
-
-		importName = importName.replace(target.getDir(target.thirdLayerName).getAbsolutePath(),
-				"org.farhan." + target.thirdLayerName);
-		importName = importName.replace(target.getDir(target.secondLayerName).getAbsolutePath(),
-				"org.farhan." + target.secondLayerName);
+		importName = importName.replace(target.getFileExt(layer), "");
+		// TODO if I keep org.farhan, then there's no need for these two lines.
+		importName = importName.replace(target.getDir(target.THIRD_LAYER).getAbsolutePath(),
+				"org.farhan." + target.THIRD_LAYER);
+		importName = importName.replace(target.getDir(target.SECOND_LAYER).getAbsolutePath(),
+				"org.farhan." + target.SECOND_LAYER);
 		importName = importName.replace(File.separator, ".");
 		return importName;
 	}

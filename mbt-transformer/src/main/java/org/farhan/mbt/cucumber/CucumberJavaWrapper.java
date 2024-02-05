@@ -7,13 +7,13 @@ import org.farhan.mbt.core.ConvertibleObject;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.utils.SourceRoot;
 
-public class JavaClassWrapper implements ConvertibleObject {
+public class CucumberJavaWrapper implements ConvertibleObject {
 
 	private File theFile;
 	// TODO make this private later
 	public CompilationUnit javaClass;
 
-	public JavaClassWrapper(File theFile) {
+	public CucumberJavaWrapper(File theFile) {
 		setFile(theFile);
 	}
 
@@ -28,7 +28,7 @@ public class JavaClassWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void read() {
+	public void load() {
 		if (theFile.exists()) {
 			// TODO delete these commented out lines if this all works
 			// new SourceRoot(CucumberProject.getSecondLayerDir().toPath());
@@ -40,7 +40,7 @@ public class JavaClassWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void write() {
+	public void save() {
 		File parentDir = theFile.getParentFile();
 		parentDir.mkdirs();
 		SourceRoot javaSrcDir = new SourceRoot(parentDir.toPath());

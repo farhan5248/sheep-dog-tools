@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.mbt.core.Utilities;
 
 public class AsciiDoctorProject extends ConvertibleProject {
 
@@ -28,20 +27,11 @@ public class AsciiDoctorProject extends ConvertibleProject {
 	public ArrayList<ConvertibleObject> getObjects(String layer) {
 		ArrayList<ConvertibleObject> layerFiles = null;
 		switch (layer) {
-		case firstLayerName:
+		case FIRST_LAYER:
 			layerFiles = firstLayerObjects;
 			break;
 		}
 		return layerFiles;
-	}
-
-	@Override
-	public void load() throws Exception {
-		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(firstLayerName), getFileExt(firstLayerName));
-		firstLayerObjects.clear();
-		for (File f : files) {
-			createObject(f.getAbsolutePath()).read();
-		}
 	}
 
 	@Override
@@ -55,7 +45,7 @@ public class AsciiDoctorProject extends ConvertibleProject {
 	@Override
 	public void save() throws Exception {
 		for (ConvertibleObject cf : firstLayerObjects) {
-			cf.write();
+			cf.save();
 		}
 	}
 

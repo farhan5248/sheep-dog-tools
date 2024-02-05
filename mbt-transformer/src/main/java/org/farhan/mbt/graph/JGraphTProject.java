@@ -23,20 +23,10 @@ public class JGraphTProject extends ConvertibleProject {
 	}
 
 	@Override
-	public void load() throws Exception {
-
-		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(firstLayerName), getFileExt(firstLayerName));
-		firstLayerObjects.clear();
-		for (File f : files) {
-			createObject(f.getAbsolutePath()).read();
-		}
-	}
-
-	@Override
 	public void save() throws Exception {
 		for (ConvertibleObject cf : firstLayerObjects) {
 			try {
-				cf.write();
+				cf.save();
 			} catch (Exception e) {
 				System.out.println(Utilities.getStackTraceAsString(e));
 			}
@@ -52,7 +42,7 @@ public class JGraphTProject extends ConvertibleProject {
 	public ArrayList<ConvertibleObject> getObjects(String layer) {
 		ArrayList<ConvertibleObject> layerFiles = null;
 		switch (layer) {
-		case firstLayerName:
+		case FIRST_LAYER:
 			layerFiles = firstLayerObjects;
 			break;
 		}

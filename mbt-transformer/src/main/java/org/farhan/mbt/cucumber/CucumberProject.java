@@ -22,7 +22,7 @@ public class CucumberProject extends ConvertibleProject {
 
 	@Override
 	public String getFileExt(String layer) {
-		if (layer.contentEquals(firstLayerName)) {
+		if (layer.contentEquals(FIRST_LAYER)) {
 			return ".feature";
 		} else {
 			return ".java";
@@ -33,14 +33,14 @@ public class CucumberProject extends ConvertibleProject {
 	public File getDir(String layer) {
 		File aFile = null;
 		switch (layer) {
-		case firstLayerName:
+		case FIRST_LAYER:
 			aFile = new File(baseDir + "src/test/resources/Cucumber/");
 			break;
-		case secondLayerName:
-			aFile = new File(baseDir + "src/test/java/org/farhan/" + secondLayerName + "/");
+		case SECOND_LAYER:
+			aFile = new File(baseDir + "src/test/java/org/farhan/" + SECOND_LAYER + "/");
 			break;
-		case thirdLayerName:
-			aFile = new File(baseDir + "src/test/java/org/farhan/" + thirdLayerName + "/");
+		case THIRD_LAYER:
+			aFile = new File(baseDir + "src/test/java/org/farhan/" + THIRD_LAYER + "/");
 			break;
 		}
 		aFile.mkdirs();
@@ -52,25 +52,19 @@ public class CucumberProject extends ConvertibleProject {
 
 		ArrayList<ConvertibleObject> layerObjects = null;
 		switch (layer) {
-		case firstLayerName:
+		case FIRST_LAYER:
 			layerObjects = firstLayerObjects;
 			break;
-		case secondLayerName:
+		case SECOND_LAYER:
 			layerObjects = secondLayerObjects;
 			break;
-		case thirdLayerName:
+		case THIRD_LAYER:
 			layerObjects = thirdLayerObjects;
 			break;
 		}
 		return layerObjects;
 	}
 
-	@Override
-	public void load() throws Exception {
-		loadObjects(firstLayerName, firstLayerObjects);
-		loadObjects(secondLayerName, secondLayerObjects);
-		loadObjects(thirdLayerName, thirdLayerObjects);
-	}
 
 	// TODO delete after moving reads to select layer objects
 	private void loadObjects(String layer, ArrayList<ConvertibleObject> layerFiles) {
@@ -78,7 +72,7 @@ public class CucumberProject extends ConvertibleProject {
 		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(layer), getFileExt(layer));
 		for (File f : files) {
 			try {
-				createObject(f.getAbsolutePath()).read();
+				createObject(f.getAbsolutePath()).load();
 			} catch (Exception e) {
 				Utilities.getStackTraceAsString(e);
 			}
@@ -88,28 +82,28 @@ public class CucumberProject extends ConvertibleProject {
 	@Override
 	public void save() throws Exception {
 		for (ConvertibleObject cf : firstLayerObjects) {
-			cf.write();
+			cf.save();
 		}
 		for (ConvertibleObject cf : secondLayerObjects) {
-			cf.write();
+			cf.save();
 		}
 		for (ConvertibleObject cf : thirdLayerObjects) {
-			cf.write();
+			cf.save();
 		}
 	}
 
 	@Override
 	public ConvertibleObject createObject(String name) {
 		File file = new File(name);
-		if (file.getAbsolutePath().contains(getDir(firstLayerName).getName())) {
+		if (file.getAbsolutePath().contains(getDir(FIRST_LAYER).getName())) {
 			CucumberFeatureWrapper aConvertibleObject = new CucumberFeatureWrapper(file);
 			firstLayerObjects.add(aConvertibleObject);
 			return aConvertibleObject;
 		} else {
-			JavaClassWrapper aConvertibleObject = new JavaClassWrapper(file);
-			if (file.getAbsolutePath().contains(getDir(secondLayerName).getName())) {
+			CucumberJavaWrapper aConvertibleObject = new CucumberJavaWrapper(file);
+			if (file.getAbsolutePath().contains(getDir(SECOND_LAYER).getName())) {
 				secondLayerObjects.add(aConvertibleObject);
-			} else if (file.getAbsolutePath().contains(getDir(thirdLayerName).getName())) {
+			} else if (file.getAbsolutePath().contains(getDir(THIRD_LAYER).getName())) {
 				thirdLayerObjects.add(aConvertibleObject);
 			}
 			return aConvertibleObject;

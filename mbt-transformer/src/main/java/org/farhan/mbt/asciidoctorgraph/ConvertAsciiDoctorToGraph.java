@@ -15,7 +15,7 @@ public class ConvertAsciiDoctorToGraph extends ConvertToGraph {
 	@Override
 	protected ArrayList<ToGraphConverter> getLayerConverters() {
 		ArrayList<ToGraphConverter> converters = new ArrayList<ToGraphConverter>();
-		converters.add(new AdocToGraphConverter(source.firstLayerName, source, target));
+		converters.add(new AdocToGraphConverter(source.FIRST_LAYER, source, target));
 		return converters;
 	}
 
@@ -23,7 +23,6 @@ public class ConvertAsciiDoctorToGraph extends ConvertToGraph {
 	protected void initProjects() throws Exception {
 		source = new AsciiDoctorProject();
 		target = new JGraphTProject();
-		source.load();
 	}
 
 	@Override

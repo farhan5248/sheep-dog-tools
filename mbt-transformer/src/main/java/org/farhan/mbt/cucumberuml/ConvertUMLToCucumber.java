@@ -17,12 +17,9 @@ public class ConvertUMLToCucumber extends ConvertToCode {
 	@Override
 	protected ArrayList<ToCodeConverter> getLayerConverters() {
 		ArrayList<ToCodeConverter> converters = new ArrayList<ToCodeConverter>();
-		converters
-				.add(new UMLToFeatureConverter(source.firstLayerName, source, target));
-		converters
-				.add(new UMLToJavaConverter(source.secondLayerName, source, target));
-		converters
-				.add(new UMLToJavaConverter(source.thirdLayerName, source, target));
+		converters.add(new UMLToFeatureConverter(source.FIRST_LAYER, source, target));
+		converters.add(new UMLToJavaConverter(source.SECOND_LAYER, source, target));
+		converters.add(new UMLToJavaConverter(source.THIRD_LAYER, source, target));
 		return converters;
 	}
 
@@ -36,7 +33,12 @@ public class ConvertUMLToCucumber extends ConvertToCode {
 
 		source = new UMLProject();
 		target = new CucumberProject();
+
+		// TODO temporarily need this until I figure out how to read the model file just
+		// once for multiple layers. Reading it multiple times risks overriding
+		// modifications to it
 		source.load();
+
 	}
 
 }

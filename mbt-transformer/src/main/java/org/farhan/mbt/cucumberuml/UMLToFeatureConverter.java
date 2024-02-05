@@ -23,7 +23,6 @@ import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.AnnotationFactory;
 import org.farhan.mbt.uml.ArgumentFactory;
-import org.farhan.mbt.uml.PackageFactory;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 
@@ -46,8 +45,8 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 	}
 
 	@Override
-	protected ArrayList<?> selectObjects() throws Exception {
-		return PackageFactory.getPackagedClasses(source.theSystem.getNestedPackage(getLayer()));
+	protected void selectObjects() throws Exception {
+		source.loadObjects(layer);
 	}
 
 	@Override
@@ -155,12 +154,12 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 	@Override
 	protected String convertObjectName(String fullName) {
 		String pathName = fullName;
-		pathName = pathName.replace("pst::" + target.firstLayerName,
-				target.getDir(target.firstLayerName).getAbsolutePath());
+		pathName = pathName.replace("pst::" + target.FIRST_LAYER,
+				target.getDir(target.FIRST_LAYER).getAbsolutePath());
 		pathName = pathName.replace("::", File.separator);
 		// TODO isn't feature defined somewhere else as getFileType? Maybe there should
 		// be get Layer 1 filetype, layer 2 filetype etc defined here
-		pathName = pathName + target.getFileExt(target.firstLayerName);
+		pathName = pathName + target.getFileExt(target.FIRST_LAYER);
 		return pathName;
 	}
 

@@ -31,7 +31,7 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void read() throws Exception {
+	public void load() throws Exception {
 		if (theFile.exists()) {
 			// TODO in the future call the dot exporter code here
 			readTextFile();
@@ -116,7 +116,7 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void write() throws Exception {
+	public void save() throws Exception {
 		String fileContents = theGraph.toString();
 		Utilities.writeFile(theFile, fileContents);
 	}

@@ -15,7 +15,7 @@ public class ConvertGraphToUML extends ConvertToUML {
 	@Override
 	protected ArrayList<ToUMLConverter> getLayerConverters() {
 		ArrayList<ToUMLConverter> converters = new ArrayList<ToUMLConverter>();
-		converters.add(new GraphToUMLConverter(source.firstLayerName, source, target));
+		converters.add(new GraphToUMLConverter(source.FIRST_LAYER, source, target));
 		return converters;
 	}
 

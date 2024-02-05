@@ -47,13 +47,19 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 
 	@Override
 	protected void selectObjects() throws Exception {
-		source.load();
+
+		ArrayList<File> files = Utilities.recursivelyListFiles(source.getDir(source.FIRST_LAYER),
+				source.getFileExt(source.FIRST_LAYER));
+		source.getObjects(source.FIRST_LAYER).clear();
+		for (File f : files) {
+			source.createObject(f.getAbsolutePath()).load();
+		}
 	}
 
 	@Override
 	protected ArrayList<ConvertibleObject> getObjects(String layer) {
 		// TODO make a GraphDotFile
-		return source.getObjects(source.firstLayerName);
+		return source.getObjects(source.FIRST_LAYER);
 	}
 
 	@Override
@@ -153,8 +159,8 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	@Override
 	protected String convertObjectName(String fullName) {
 		String qualifiedName = fullName.trim();
-		qualifiedName = qualifiedName.replace(source.getFileExt(source.firstLayerName), "");
-		qualifiedName = qualifiedName.replace(source.getDir(source.firstLayerName).getAbsolutePath(), "");
+		qualifiedName = qualifiedName.replace(source.getFileExt(source.FIRST_LAYER), "");
+		qualifiedName = qualifiedName.replace(source.getDir(source.FIRST_LAYER).getAbsolutePath(), "");
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::specs" + qualifiedName;
 		return qualifiedName;
@@ -176,7 +182,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	private String getSecondLayerClassName() {
 		String secondLayerClassName = "";
 		secondLayerClassName = convertNextLayerClassName(getFSMName() + getFSMState() + "Steps");
-		secondLayerClassName = "pst::" + source.secondLayerName + "::" + Utilities.toLowerCamelCase(getFSMName()) + "::"
+		secondLayerClassName = "pst::" + source.SECOND_LAYER + "::" + Utilities.toLowerCamelCase(getFSMName()) + "::"
 				+ secondLayerClassName;
 		return secondLayerClassName;
 	}

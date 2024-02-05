@@ -11,6 +11,7 @@ import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToGraphConverter;
+import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.graph.JGraphTProject;
 import org.farhan.mbt.graph.JGraphTGraphWrapper;
 import org.farhan.mbt.graph.MBTEdge;
@@ -95,27 +96,31 @@ public class AdocToGraphConverter extends ToGraphConverter {
 
 	@Override
 	protected void selectObjects() throws Exception {
+		ArrayList<File> files = Utilities.recursivelyListFiles(source.getDir(source.FIRST_LAYER),
+				source.getFileExt(source.FIRST_LAYER));
+		source.getObjects(source.FIRST_LAYER).clear();
+		for (File f : files) {
+			source.createObject(f.getAbsolutePath()).load();
+		}
 	}
 
 	@Override
 	protected void convertObject(ConvertibleObject layerFile) throws Exception {
 		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) layerFile;
-		jgw = (JGraphTGraphWrapper) target
-				.createObject(convertObjectName(adaw.getFile().getName()));
+		jgw = (JGraphTGraphWrapper) target.createObject(convertObjectName(adaw.getFile().getName()));
 		for (StructuralNode block : adaw.theDoc.getBlocks()) {
 			if (block instanceof Section) {
 				createFromSection(jgw.theGraph, (Section) block);
 			}
 		}
 		// TODO the project should hide object creation and list management
-		target.getObjects(target.firstLayerName).add(jgw);
+		target.getObjects(target.FIRST_LAYER).add(jgw);
 	}
 
 	@Override
 	protected String convertObjectName(String fullName) {
-		return target.getDir(target.firstLayerName).getAbsolutePath() + File.separator
-				+ fullName.replace(source.getFileExt(source.firstLayerName), "")
-				+ target.getFileExt(target.firstLayerName);
+		return target.getDir(target.FIRST_LAYER).getAbsolutePath() + File.separator
+				+ fullName.replace(source.getFileExt(source.FIRST_LAYER), "") + target.getFileExt(target.FIRST_LAYER);
 	}
 
 	@Override

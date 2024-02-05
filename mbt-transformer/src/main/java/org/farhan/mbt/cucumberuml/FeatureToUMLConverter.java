@@ -62,10 +62,11 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	@Override
 	protected void selectObjects() throws Exception {
 
-		ArrayList<ConvertibleObject> layerFiles = source.getObjects(getLayer());
-		for (int i = layerFiles.size() - 1; i >= 0; i--) {
-			if (!isFileSelected(layerFiles.get(i), source.tags)) {
-				layerFiles.remove(i);
+		ArrayList<File> files = Utilities.recursivelyListFiles(source.getDir(layer), source.getFileExt(layer));
+		for (File f : files) {
+			source.createObject(f.getAbsolutePath()).load();
+			if (!isFileSelected(source.getObjects(layer).getLast(), source.tags)) {
+				source.getObjects(layer).removeLast();
 			}
 		}
 	}
@@ -146,8 +147,8 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	@Override
 	protected String convertObjectName(String fullName) {
 		String qualifiedName = fullName.trim();
-		qualifiedName = qualifiedName.replace(source.getFileExt(source.firstLayerName), "");
-		qualifiedName = qualifiedName.replace(source.getDir(source.firstLayerName).getAbsolutePath(), "");
+		qualifiedName = qualifiedName.replace(source.getFileExt(source.FIRST_LAYER), "");
+		qualifiedName = qualifiedName.replace(source.getDir(source.FIRST_LAYER).getAbsolutePath(), "");
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::specs" + qualifiedName;
 		return qualifiedName;
@@ -194,7 +195,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	private String getSecondLayerClassName() {
 		String secondLayerClassName = "";
 		secondLayerClassName = convertNextLayerClassName(getFSMName() + getFSMState() + "Steps");
-		secondLayerClassName = "pst::" + source.secondLayerName + "::" + Utilities.toLowerCamelCase(getFSMName()) + "::"
+		secondLayerClassName = "pst::" + source.SECOND_LAYER + "::" + Utilities.toLowerCamelCase(getFSMName()) + "::"
 				+ secondLayerClassName;
 		return secondLayerClassName;
 	}

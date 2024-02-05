@@ -37,7 +37,7 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void read() {
+	public void load() {
 		URI uri = URI.createFileURI(theFile.getAbsolutePath());
 		CucumberStandaloneSetup.doSetup();
 		Resource res = new ResourceSetImpl().getResource(uri, true);
@@ -46,7 +46,7 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void write() {
+	public void save() {
 		Injector injector = new CucumberStandaloneSetup().createInjectorAndDoEMFRegistration();
 		ResourceSet rs = injector.getInstance(ResourceSet.class);
 		URI uri = URI.createFileURI(theFile.getAbsolutePath());

@@ -70,7 +70,7 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 	protected String getNextLayerClassQualifiedName(Interaction targetInteraction) {
 
 		Class interactionOwningClass = (Class) targetInteraction.getOwner();
-		return interactionOwningClass.getQualifiedName().replace(target.secondLayerName, target.thirdLayerName)
+		return interactionOwningClass.getQualifiedName().replace(target.SECOND_LAYER, target.THIRD_LAYER)
 				.replace("Steps", "");
 	}
 

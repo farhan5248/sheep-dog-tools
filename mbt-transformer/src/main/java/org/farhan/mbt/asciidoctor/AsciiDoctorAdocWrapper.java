@@ -27,14 +27,14 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void read() {
+	public void load() {
 		if (theFile.exists()) {
 			theDoc = Factory.create().loadFile(theFile, Options.builder().build());
 		}
 	}
 
 	@Override
-	public void write() {
+	public void save() {
 	}
 
 }

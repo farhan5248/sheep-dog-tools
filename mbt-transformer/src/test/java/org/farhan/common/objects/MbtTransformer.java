@@ -1,5 +1,6 @@
 package org.farhan.common.objects;
 
+import java.io.File;
 import java.util.Map.Entry;
 
 import org.eclipse.emf.ecore.EAnnotation;
@@ -15,6 +16,7 @@ import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.mbt.graph.JGraphTProject;
+import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.graph.JGraphTGraphWrapper;
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
@@ -34,11 +36,6 @@ public abstract class MbtTransformer extends FileObject {
 
 	protected JGraphTProject graphProject;
 	protected UMLProject umlProject;
-
-	public MbtTransformer() {
-		graphProject = new JGraphTProject();
-		umlProject = new UMLProject();
-	}
 
 	private MBTEdge getEdgeByString(MBTGraph<MBTVertex, MBTEdge> g, String edgeName) {
 		// TODO replace with g.edgeSet().contains(new MBTEdge(edgeName)) when moving
@@ -60,26 +57,32 @@ public abstract class MbtTransformer extends FileObject {
 	}
 
 	protected void assertVerticesVertexNameExists(String vertexName) {
-		// TODO temporarily commented out until I can distinguish parent from child graphs
-		//Assertions.assertEquals(1, graphProject.getObjects(graphProject.firstLayerName).size());
-		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) graphProject.getObjects(graphProject.firstLayerName).getFirst();
+		// TODO temporarily commented out until I can distinguish parent from child
+		// graphs
+		// Assertions.assertEquals(1,
+		// graphProject.getObjects(graphProject.firstLayerName).size());
+		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) graphProject.getObjects(graphProject.FIRST_LAYER).getFirst();
 		MBTGraph<MBTVertex, MBTEdge> g = gtf.theGraph;
 		Assertions.assertTrue(g.vertexSet().contains(new MBTVertex(vertexName)),
 				"Vertex " + vertexName + " doesn't exist");
 	}
 
 	protected void assertEdgesEdgeNameExists(String edgeName) {
-		// TODO temporarily commented out until I can distinguish parent from child graphs
-		//Assertions.assertEquals(1, graphProject.getObjects(graphProject.firstLayerName).size());
-		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) graphProject.getObjects(graphProject.firstLayerName).getFirst();
+		// TODO temporarily commented out until I can distinguish parent from child
+		// graphs
+		// Assertions.assertEquals(1,
+		// graphProject.getObjects(graphProject.firstLayerName).size());
+		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) graphProject.getObjects(graphProject.FIRST_LAYER).getFirst();
 		MBTGraph<MBTVertex, MBTEdge> g = gtf.theGraph;
 		Assertions.assertTrue(getEdgeByString(g, edgeName) != null, "Edge " + edgeName + " doesn't exist");
 	}
 
 	protected void assertEdgesGraphEdgeNameExists(String sourceVertex, String graphEdgeName) {
-		// TODO temporarily commented out until I can distinguish parent from child graphs
-		//Assertions.assertEquals(1, graphProject.getObjects(graphProject.firstLayerName).size());
-		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) graphProject.getObjects(graphProject.firstLayerName).getFirst();
+		// TODO temporarily commented out until I can distinguish parent from child
+		// graphs
+		// Assertions.assertEquals(1,
+		// graphProject.getObjects(graphProject.firstLayerName).size());
+		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) graphProject.getObjects(graphProject.FIRST_LAYER).getFirst();
 		MBTGraph<MBTVertex, MBTEdge> g = gtf.theGraph;
 		MBTEdge edge = getEdgeBySourceVertex(g, sourceVertex);
 		Assertions.assertTrue(edge != null, "Edge " + sourceVertex + " doesn't exist");
@@ -89,9 +92,11 @@ public abstract class MbtTransformer extends FileObject {
 	}
 
 	protected void assertEdgesGraphVertexNameExists(String sourceVertex, String graphVertexName) {
-		// TODO temporarily commented out until I can distinguish parent from child graphs
-		//Assertions.assertEquals(1, graphProject.getObjects(graphProject.firstLayerName).size());
-		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) graphProject.getObjects(graphProject.firstLayerName).getFirst();
+		// TODO temporarily commented out until I can distinguish parent from child
+		// graphs
+		// Assertions.assertEquals(1,
+		// graphProject.getObjects(graphProject.firstLayerName).size());
+		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) graphProject.getObjects(graphProject.FIRST_LAYER).getFirst();
 		MBTGraph<MBTVertex, MBTEdge> g = gtf.theGraph;
 		MBTEdge edge = getEdgeBySourceVertex(g, sourceVertex);
 		Assertions.assertTrue(edge != null, "Edge " + sourceVertex + " doesn't exist");
@@ -104,8 +109,10 @@ public abstract class MbtTransformer extends FileObject {
 		// TODO this is a temp hack until I review the test code and find a way to
 		// refresh the list of objects, my brain is fried for now
 		assertFileExists();
+		File f = new File(ConvertibleProject.baseDir + keyValue.get("path"));
 		try {
-			graphProject.load();
+			graphProject = new JGraphTProject();
+			graphProject.createObject(f.getAbsolutePath()).load();
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step");
 		}
@@ -117,7 +124,11 @@ public abstract class MbtTransformer extends FileObject {
 		// TODO After theSystem has a getter, remove this because that getter should
 		// initialise theSystem by reading the model
 		try {
+			umlProject = new UMLProject();
 			umlProject.load();
+			umlProject.loadObjects(umlProject.FIRST_LAYER);
+			umlProject.loadObjects(umlProject.SECOND_LAYER);
+			umlProject.loadObjects(umlProject.THIRD_LAYER);
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step");
 		}

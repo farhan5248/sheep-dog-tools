@@ -34,9 +34,9 @@ public class UMLProject extends ConvertibleProject {
 
 		// TODO move this to writeFiles after maintaining the classes in the lists above
 		theSystem = ModelFactory.getModel("pst");
-		theSystem.createNestedPackage(firstLayerName);
-		theSystem.createNestedPackage(secondLayerName);
-		theSystem.createNestedPackage(thirdLayerName);
+		theSystem.createNestedPackage(FIRST_LAYER);
+		theSystem.createNestedPackage(SECOND_LAYER);
+		theSystem.createNestedPackage(THIRD_LAYER);
 	}
 
 	@Override
@@ -47,7 +47,8 @@ public class UMLProject extends ConvertibleProject {
 		return aFile;
 	}
 
-	@Override
+	// TODO keep this temporarily for testing. Remove it after figuring out how to
+	// avoid it.
 	public void load() throws Exception {
 		URI uri = URI.createFileURI(getDir("").getAbsolutePath()).appendSegment(theSystem.getName())
 				.appendFileExtension(UMLResource.FILE_EXTENSION);
@@ -60,17 +61,14 @@ public class UMLProject extends ConvertibleProject {
 		for (EObject e : resource.getContents()) {
 			theSystem = (Model) e;
 		}
-		loadObjects(firstLayerName, firstLayerObjects);
-		loadObjects(secondLayerName, secondLayerObjects);
-		loadObjects(thirdLayerName, thirdLayerObjects);
 	}
 
-	private void loadObjects(String layer, ArrayList<ConvertibleObject> layerFiles) {
-		layerFiles.clear();
+	public void loadObjects(String layer) {
+		getObjects(layer).clear();
 		ArrayList<Class> objects = PackageFactory.getPackagedClasses(theSystem.getNestedPackage(layer));
 		for (Class c : objects) {
 			try {
-				createObject(c.getQualifiedName()).read();
+				createObject(c.getQualifiedName()).load();
 			} catch (Exception e) {
 				Utilities.getStackTraceAsString(e);
 			}
@@ -102,13 +100,13 @@ public class UMLProject extends ConvertibleProject {
 	public ArrayList<ConvertibleObject> getObjects(String layer) {
 		ArrayList<ConvertibleObject> layerObjects = null;
 		switch (layer) {
-		case firstLayerName:
+		case FIRST_LAYER:
 			layerObjects = firstLayerObjects;
 			break;
-		case secondLayerName:
+		case SECOND_LAYER:
 			layerObjects = secondLayerObjects;
 			break;
-		case thirdLayerName:
+		case THIRD_LAYER:
 			layerObjects = thirdLayerObjects;
 			break;
 		}
@@ -121,12 +119,12 @@ public class UMLProject extends ConvertibleProject {
 		// TODO in the future convert qualified name to path when each class is stored
 		// individually
 		Class theClass = ClassFactory.getClass(theSystem, name);
-		UMLClassWrapper cff = new UMLClassWrapper(theClass);
-		if (name.contains("::" + firstLayerName + "::")) {
+		UMLClassWrapper cff = new UMLClassWrapper(this, theClass);
+		if (name.contains("::" + FIRST_LAYER + "::")) {
 			firstLayerObjects.add(cff);
-		} else if (name.contains("::" + secondLayerName + "::")) {
+		} else if (name.contains("::" + SECOND_LAYER + "::")) {
 			secondLayerObjects.add(cff);
-		} else if (name.contains("::" + thirdLayerName + "::")) {
+		} else if (name.contains("::" + THIRD_LAYER + "::")) {
 			thirdLayerObjects.add(cff);
 		}
 		return cff;

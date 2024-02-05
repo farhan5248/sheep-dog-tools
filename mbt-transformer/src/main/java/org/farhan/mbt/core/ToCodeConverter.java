@@ -9,7 +9,7 @@ public abstract class ToCodeConverter {
 
 	protected UMLProject source;
 
-	protected abstract ArrayList<?> selectObjects() throws Exception;
+	protected abstract void selectObjects() throws Exception;
 
 	protected abstract String getLayer();
 
