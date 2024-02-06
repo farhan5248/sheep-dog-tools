@@ -17,7 +17,6 @@ import org.farhan.mbt.core.ToCodeConverter;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberJavaWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
-import org.farhan.mbt.uml.ParameterFactory;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 

@@ -31,10 +31,6 @@ public class MbtTransformerPstUmlFile extends MbtTransformer {
 		assertClassExists(keyMap.get("Class Name"));
 	}
 
-	public void assertClassElementImportsAlias(HashMap<String, String> keyMap) {
-		assertClassAliasValue(keyMap.get("Class Name"), keyMap.get("Alias"));
-	}
-
 	public void assertClassElementImportsImportedElement(HashMap<String, String> keyMap) {
 		assertClassImportedElementValue(keyMap.get("Class Name"), keyMap.get("Imported Element"));
 	}

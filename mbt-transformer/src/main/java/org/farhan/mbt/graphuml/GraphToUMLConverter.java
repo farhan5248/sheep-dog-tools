@@ -20,11 +20,6 @@ import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
 import org.farhan.mbt.graph.MBTPath;
 import org.farhan.mbt.graph.MBTVertex;
-import org.farhan.mbt.uml.AnnotationFactory;
-import org.farhan.mbt.uml.ArgumentFactory;
-import org.farhan.mbt.uml.ElementImportFactory;
-import org.farhan.mbt.uml.InteractionFactory;
-import org.farhan.mbt.uml.MessageFactory;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 
@@ -148,13 +143,10 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		Class owningClass = (Class) anInteraction.getOwner();
 		String secondLayerClassName = getSecondLayerClassName();
 		UMLClassWrapper ucwi = (UMLClassWrapper) target.createObject(secondLayerClassName);
-		Class importedClass = ucwi.theClass;
-		ElementImport classImport = ElementImportFactory.getElementImport(owningClass,
-				importedClass.getQualifiedName());
-		if (classImport == null) {
-			classImport = ElementImportFactory.createElementImport(owningClass, importedClass);
-		}
-		MessageFactory.getMessage(anInteraction, importedClass, messageName);
+		Class nextLayerClass = ucwi.theClass;
+		ElementImport classImport = createElementImport(owningClass, nextLayerClass);
+		owningClass.createOwnedAttribute(nextLayerClass.getName(), nextLayerClass);
+		getMessage(anInteraction, nextLayerClass, messageName);
 	}
 
 	@Override
@@ -168,7 +160,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	}
 
 	private void convertDataTableToArgument(HashMap<String, String> dataTable, Message theMessage) {
-		ValueSpecification vs = ArgumentFactory.getArgument(theMessage, "dataTable", "", true);
+		ValueSpecification vs = createArgument(theMessage, "dataTable", "", true);
 
 		String headerRow = "";
 		String valueRow = "";
@@ -176,8 +168,8 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 			headerRow += columnName + " |";
 			valueRow += dataTable.get(columnName) + " |";
 		}
-		AnnotationFactory.getAnnotation(vs, "dataTable", String.valueOf(0), headerRow);
-		AnnotationFactory.getAnnotation(vs, "dataTable", String.valueOf(1), valueRow);
+		createAnnotation(vs, "dataTable", String.valueOf(0), headerRow);
+		createAnnotation(vs, "dataTable", String.valueOf(1), valueRow);
 	}
 
 	private String getSecondLayerClassName() {
@@ -189,7 +181,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	}
 
 	private Interaction createInteraction(Class layerClass, String pathName) {
-		Interaction anInteraction = InteractionFactory.getInteraction(layerClass, pathName, true);
+		Interaction anInteraction = getInteraction(layerClass, pathName, true);
 		return anInteraction;
 	}
 

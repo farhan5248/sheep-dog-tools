@@ -34,8 +34,8 @@ Feature: Convert Scenario
 
   Scenario: Test scenario step
     And The target/uml/pst.uml file, Class Element Imports section will be as follows
-      | Class Name           | Alias               | Imported Element                         |
-      | specs::dept::process | BlahObjectPageSteps | pst::stepdefs::blah::BlahObjectPageSteps |
+      | Class Name           | Imported Element                         |
+      | specs::dept::process | pst::stepdefs::blah::BlahObjectPageSteps |
     And The target/uml/pst.uml file, Class Properties section will be as follows
       | Class Name           | Property Name       | Property Type                            |
       | specs::dept::process | this                | pst::specs::dept::process                |

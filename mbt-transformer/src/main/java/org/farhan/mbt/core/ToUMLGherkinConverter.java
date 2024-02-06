@@ -8,13 +8,7 @@ import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.mbt.uml.AnnotationFactory;
-import org.farhan.mbt.uml.ArgumentFactory;
-import org.farhan.mbt.uml.InteractionFactory;
-import org.farhan.mbt.uml.MessageFactory;
-import org.farhan.mbt.uml.ParameterFactory;
 import org.farhan.mbt.uml.UMLClassWrapper;
-import org.farhan.mbt.uml.UMLProject;
 import org.farhan.validation.MBTEdgeValidator;
 import org.farhan.validation.MBTVertexValidator;
 
@@ -79,42 +73,48 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 	protected Interaction addNextLayerInteraction(String methodName, Message m) {
 		// TODO this should be moved to the java code generation
 		String annotation = "@Given(\"^" + m.getName() + "$\")";
-		return InteractionFactory.getInteraction(getNextLayerClassFromMessage(m), methodName, true, annotation);
+		return getInteraction(getNextLayerClassFromMessage(m), methodName, true, annotation);
 	}
 
 	@Override
 	protected void addNextLayerInteractionParameters(Interaction targetInteraction, Message m) {
 		for (ValueSpecification vs : m.getArguments()) {
 			LiteralString ls = (LiteralString) vs;
-			ParameterFactory.getParameter(targetInteraction, ls.getName().replace(" ", ""), "", "in");
+			getParameter(targetInteraction, ls.getName().replace(" ", ""), "", "in");
 		}
 	}
 
 	protected void createNextLayerInteractionMessagesFromEdgeMessage(Interaction nextLayerInteraction, Message m) {
 
+		Class owningClass = (Class) nextLayerInteraction.getOwner();
 		createInputOutputMessage(nextLayerInteraction, m, "set");
 		String nextLayerName = getNextLayerClassQualifiedName(nextLayerInteraction);
 		UMLClassWrapper ucw = (UMLClassWrapper) target.createObject(nextLayerName);
 		Class nextLayerClass = ucw.theClass;
-		MessageFactory.getMessage(nextLayerInteraction, nextLayerClass, "execute");
+		createElementImport((Class) nextLayerInteraction.getOwner(), nextLayerClass);
+		owningClass.createOwnedAttribute(nextLayerClass.getName(), nextLayerClass);
+		getMessage(nextLayerInteraction, nextLayerClass, "execute");
 	}
 
 	private void createInputOutputMessage(Interaction nextLayerInteraction, Message m, String prefix) {
 
+		Class owningClass = (Class) nextLayerInteraction.getOwner();
 		String nextLayerName = getNextLayerClassQualifiedName(nextLayerInteraction);
 		UMLClassWrapper ucw = (UMLClassWrapper) target.createObject(nextLayerName);
 		Class nextLayerClass = ucw.theClass;
+		createElementImport(owningClass, nextLayerClass);
+		owningClass.createOwnedAttribute(nextLayerClass.getName(), nextLayerClass);
 		if (getFirstArgument(m).contentEquals("docString") || getFirstArgument(m).contentEquals("dataTable")) {
 
 			String methodName = prefix + "Attributes";
-			Message nextLayerMessage = MessageFactory.getMessage(nextLayerInteraction, nextLayerClass, methodName);
+			Message nextLayerMessage = getMessage(nextLayerInteraction, nextLayerClass, methodName);
 			if (getFirstArgument(m).contentEquals("docString")) {
-				ArgumentFactory.getArgument(nextLayerMessage, "contents", "docString", true);
+				createArgument(nextLayerMessage, "contents", "docString", true);
 			} else {
-				ValueSpecification vs = ArgumentFactory.getArgument(nextLayerMessage, "keyMap", "dataTable", true);
+				ValueSpecification vs = createArgument(nextLayerMessage, "keyMap", "dataTable", true);
 				String annotationDetailValue = m.getArguments().get(0).getEAnnotation("dataTable").getDetails()
 						.getFirst().getValue();
-				AnnotationFactory.getAnnotation(vs, "keyMap", "0", annotationDetailValue);
+				createAnnotation(vs, "keyMap", "0", annotationDetailValue);
 
 				// TODO wrap up these chunks in private methods
 				String detailsName = MBTVertexValidator.getDetailsName(m.getName());
@@ -123,10 +123,10 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 				if (section.contentEquals("nullnull")) {
 					section = "";
 				}
-				ArgumentFactory.getArgument(nextLayerMessage, "section", "\"" + section + "\"", true);
+				createArgument(nextLayerMessage, "section", "\"" + section + "\"", true);
 			}
 			if (Validator.isNegativeStep(m.getName())) {
-				ArgumentFactory.getArgument(nextLayerMessage, "negativeTest", "true", true);
+				createArgument(nextLayerMessage, "negativeTest", "true", true);
 			}
 		} else {
 
@@ -137,7 +137,7 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 				attributeName = MBTEdgeValidator.getState(m.getName());
 			}
 			String methodName = getMethodName(prefix + StringUtils.capitalize(attributeName), true);
-			MessageFactory.getMessage(nextLayerInteraction, nextLayerClass, methodName);
+			getMessage(nextLayerInteraction, nextLayerClass, methodName);
 			// ArgumentFactory.getArgument(nextLayerMessage, variableName,
 			// Utilities.toLowerCamelCase(variableName), true);
 		}

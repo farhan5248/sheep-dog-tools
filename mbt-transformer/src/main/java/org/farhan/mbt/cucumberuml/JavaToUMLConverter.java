@@ -17,12 +17,6 @@ import org.farhan.mbt.core.ToUMLConverter;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberJavaWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
-import org.farhan.mbt.uml.AnnotationFactory;
-import org.farhan.mbt.uml.ArgumentFactory;
-import org.farhan.mbt.uml.ElementImportFactory;
-import org.farhan.mbt.uml.InteractionFactory;
-import org.farhan.mbt.uml.MessageFactory;
-import org.farhan.mbt.uml.ParameterFactory;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 
@@ -124,7 +118,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 					// injection is implemented
 					String importedClassName = convertImportNameToQualifiedName(i.getNameAsString());
 					UMLClassWrapper ucwi = (UMLClassWrapper) target.createObject(importedClassName);
-					ElementImportFactory.getOrAddElementImport(ucw.theClass, ucwi.theClass);
+					createElementImport(ucw.theClass, ucwi.theClass);
 				}
 			}
 		}
@@ -135,7 +129,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 		CucumberJavaWrapper jcw = (CucumberJavaWrapper) layerFile;
 		for (MethodDeclaration md : jcw.javaClass.getType(0).getMethods()) {
 			// TODO determine if this interaction is empty
-			Interaction anInteraction = InteractionFactory.getInteraction(ucw.theClass, md.getNameAsString(), true);
+			Interaction anInteraction = getInteraction(ucw.theClass, md.getNameAsString(), true);
 
 			// Wrap this in CommentFactory.getComment. getComment should do nothing if the
 			// content is empty
@@ -148,11 +142,11 @@ public class JavaToUMLConverter extends ToUMLConverter {
 			// TODO this should replace the existing comment, not add more
 			anInteraction.createOwnedComment().setBody(body);
 			if (md.getAnnotations().size() > 0) {
-				AnnotationFactory.getAnnotation(anInteraction, md.getAnnotation(0).toString());
+				createAnnotation(anInteraction, md.getAnnotation(0).toString());
 			}
 			for (Parameter p : md.getParameters()) {
 				// TODO this should probably empty out the parameters if any exist
-				ParameterFactory.getParameter(anInteraction, p.getNameAsString(), "", "in");
+				getParameter(anInteraction, p.getNameAsString(), "", "in");
 			}
 			convertInteractionMessages(anInteraction, md.getBody().get().getStatements());
 		}
@@ -192,9 +186,10 @@ public class JavaToUMLConverter extends ToUMLConverter {
 		if (isSecondLayer(owningClass)) {
 			String qualifiedName = getObjectQualifiedNameFromFactory(mce);
 			UMLClassWrapper ucw = (UMLClassWrapper) target.createObject(qualifiedName);
-			Class importedClass = ucw.theClass;
-			ElementImportFactory.getOrAddElementImport(owningClass, importedClass);
-			Message theMessage = MessageFactory.getMessage(anInteraction, importedClass, mce.getName().asString());
+			Class nextLayerClass = ucw.theClass;
+			createElementImport(owningClass, nextLayerClass);
+			owningClass.createOwnedAttribute(nextLayerClass.getName(), nextLayerClass);
+			Message theMessage = getMessage(anInteraction, nextLayerClass, mce.getName().asString());
 			mce.getArguments();
 			for (Expression e : mce.getArguments()) {
 				String arg = "";
@@ -214,7 +209,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 				}
 				// when reading java source, the name of the arguments isn't known so I use the
 				// value as the name
-				ArgumentFactory.getArgument(theMessage, arg, arg, true);
+				createArgument(theMessage, arg, arg, true);
 			}
 		} else {
 			// TODO handle layer 3 java code
@@ -275,12 +270,12 @@ public class JavaToUMLConverter extends ToUMLConverter {
 				String prefix = m.getName().replace("Attributes", "");
 
 				ValueSpecification vs;
-				vs = ArgumentFactory.getArgument(m, "section", "", false);
+				vs = createArgument(m, "section", "", false);
 				String sectionName = "";
 				if (vs != null) {
 					sectionName = ((LiteralString) vs).getValue();
 				}
-				vs = ArgumentFactory.getArgument(m, "keyMap", "", false);
+				vs = createArgument(m, "keyMap", "", false);
 				if (vs != null) {
 					// it's a data table
 					String[] attributes = vs.getEAnnotation("keyMap").getDetails().getFirst().getValue().split("\\|");
@@ -309,19 +304,19 @@ public class JavaToUMLConverter extends ToUMLConverter {
 
 		ValueSpecification vs;
 
-		vs = ArgumentFactory.getArgument(m, "keyMap", "", false);
+		vs = createArgument(m, "keyMap", "", false);
 		if (vs != null) {
-			ParameterFactory.getParameter(targetInteraction, "keyMap", "", "in");
+			getParameter(targetInteraction, "keyMap", "", "in");
 		}
-		vs = ArgumentFactory.getArgument(m, "contents", "", false);
+		vs = createArgument(m, "contents", "", false);
 		if (vs != null) {
-			ParameterFactory.getParameter(targetInteraction, "contents", "", "in");
+			getParameter(targetInteraction, "contents", "", "in");
 		}
 	}
 
 	@Override
 	protected Interaction addNextLayerInteraction(String methodName, Message m) {
-		return InteractionFactory.getInteraction(getNextLayerClassFromMessage(m), methodName, true);
+		return getInteraction(getNextLayerClassFromMessage(m), methodName, true);
 	}
 
 }

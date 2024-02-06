@@ -72,7 +72,7 @@ public class UMLProject extends ConvertibleProject {
 
 	public void loadObjects(String layer) {
 		getObjects(layer).clear();
-		ArrayList<Class> objects = PackageFactory.getPackagedClasses(theSystem.getNestedPackage(layer));
+		ArrayList<Class> objects = getPackagedClasses(theSystem.getNestedPackage(layer));
 		for (Class c : objects) {
 			try {
 				createObject(c.getQualifiedName()).load();
@@ -80,6 +80,18 @@ public class UMLProject extends ConvertibleProject {
 				Utilities.getStackTraceAsString(e);
 			}
 		}
+	}
+
+	private ArrayList<Class> getPackagedClasses(Package aPackage) {
+		ArrayList<Class> classes = new ArrayList<Class>();
+		for (PackageableElement pe : aPackage.getPackagedElements()) {
+			if (pe instanceof Class) {
+				classes.add((Class) pe);
+			} else if (pe instanceof Package) {
+				classes.addAll(getPackagedClasses((Package) pe));
+			}
+		}
+		return classes;
 	}
 
 	@Override

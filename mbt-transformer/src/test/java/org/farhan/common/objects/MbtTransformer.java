@@ -10,8 +10,10 @@ import org.eclipse.uml2.uml.ConnectableElement;
 import org.eclipse.uml2.uml.ElementImport;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Lifeline;
+import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.MessageOccurrenceSpecification;
+import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.ValueSpecification;
@@ -21,11 +23,6 @@ import org.farhan.mbt.graph.JGraphTGraphWrapper;
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
 import org.farhan.mbt.graph.MBTVertex;
-import org.farhan.mbt.uml.ArgumentFactory;
-import org.farhan.mbt.uml.ElementImportFactory;
-import org.farhan.mbt.uml.MessageFactory;
-import org.farhan.mbt.uml.ParameterFactory;
-import org.farhan.mbt.uml.PropertyFactory;
 import org.farhan.mbt.uml.UMLProject;
 import org.junit.jupiter.api.Assertions;
 
@@ -147,19 +144,17 @@ public abstract class MbtTransformer extends FileObject {
 
 	}
 
-	protected void assertClassAliasValue(String className, String alias) {
-		Class theClass = (Class) umlProject.getPackagedElement(umlProject.theSystem.getName() + "::" + className,
-				umlProject.theSystem);
-		ElementImport elementImport = ElementImportFactory.getElementImportByAlias(theClass, alias);
-		Assertions.assertTrue(elementImport != null, "Class " + className + " Alias " + alias + " doesn't exist");
-
-	}
-
 	protected void assertClassImportedElementValue(String className, String importedElement) {
 		Class theClass = (Class) umlProject.getPackagedElement(umlProject.theSystem.getName() + "::" + className,
 				umlProject.theSystem);
-		ElementImport elementImport = ElementImportFactory.getOrAddElementImport(theClass,
-				(Class) umlProject.getPackagedElement(importedElement, umlProject.theSystem));
+		Class importedClass = (Class) umlProject.getPackagedElement(importedElement, umlProject.theSystem);
+		ElementImport elementImport = null;
+		for (ElementImport ei : theClass.getElementImports()) {
+			if (ei.getImportedElement().getQualifiedName().contentEquals(importedClass.getQualifiedName())) {
+				elementImport = ei;
+				break;
+			}
+		}
 		Assertions.assertTrue(elementImport != null,
 				"Class " + className + " Imported Element " + importedElement + " doesn't exist");
 
@@ -168,21 +163,19 @@ public abstract class MbtTransformer extends FileObject {
 	protected void assertClassPropertyNameExists(String className, String propertyName) {
 		Class theClass = (Class) umlProject.getPackagedElement(umlProject.theSystem.getName() + "::" + className,
 				umlProject.theSystem);
-		Property property = PropertyFactory.getProperty(theClass, propertyName);
+		Property property = getProperty(theClass, propertyName);
 		Assertions.assertTrue(property != null,
 				"Class " + className + " Property Name " + propertyName + " doesn't exist");
-
 	}
 
 	protected void assertClassPropertyTypeValue(String className, String propertyName, String propertyType) {
 		Class theClass = (Class) umlProject.getPackagedElement(umlProject.theSystem.getName() + "::" + className,
 				umlProject.theSystem);
-		Property property = PropertyFactory.getProperty(theClass, propertyName);
+		Property property = getProperty(theClass, propertyName);
 		Assertions.assertTrue(property != null,
 				"Class " + className + " Property Name " + propertyName + " doesn't exist");
 		Assertions.assertEquals(propertyType, property.getType().getQualifiedName(),
 				"Class " + className + " Property Type " + propertyType + " doesn't match");
-
 	}
 
 	protected void assertInteractionNameExists(String className, String interactionName) {
@@ -190,7 +183,15 @@ public abstract class MbtTransformer extends FileObject {
 				umlProject.theSystem.getName() + "::" + className + "::" + interactionName, umlProject.theSystem);
 		Assertions.assertTrue(interaction != null,
 				"Class " + className + " Interaction " + interactionName + " doesn't exist");
+	}
 
+	private Property getProperty(Class theClass, String name) {
+		for (Property p : theClass.getOwnedAttributes()) {
+			if (p.getName().contentEquals(name)) {
+				return p;
+			}
+		}
+		return null;
 	}
 
 	protected void assertInteractionNameExists(String interactionName) {
@@ -287,8 +288,7 @@ public abstract class MbtTransformer extends FileObject {
 			String lifelineCovered) {
 		Interaction interaction = (Interaction) umlProject
 				.getPackagedElement(umlProject.theSystem.getName() + "::" + interactionName, umlProject.theSystem);
-		MessageOccurrenceSpecification messageOccurence = MessageFactory.getMessageOccurence(interaction,
-				messageOccurenceName);
+		MessageOccurrenceSpecification messageOccurence = getMessageOccurence(interaction, messageOccurenceName);
 		Lifeline covered = messageOccurence.getCovered(lifelineCovered);
 		Assertions.assertTrue(covered != null, "Interaction " + interactionName + " Message Occurence "
 				+ messageOccurenceName + " Lifeline Covered " + lifelineCovered + " doesn't exist");
@@ -299,7 +299,7 @@ public abstract class MbtTransformer extends FileObject {
 	protected void assertInteractionMessageValue(String interactionName, String messageName) {
 		Interaction interaction = (Interaction) umlProject
 				.getPackagedElement(umlProject.theSystem.getName() + "::" + interactionName, umlProject.theSystem);
-		Message message = MessageFactory.getMessage(interaction, messageName);
+		Message message = getMessage(interaction, messageName);
 		Assertions.assertTrue(message != null,
 				"Interaction " + interactionName + " Message " + messageName + " doesn't exist");
 
@@ -309,8 +309,8 @@ public abstract class MbtTransformer extends FileObject {
 			String argumentName) {
 		Interaction interaction = (Interaction) umlProject
 				.getPackagedElement(umlProject.theSystem.getName() + "::" + interactionName, umlProject.theSystem);
-		Message message = MessageFactory.getMessage(interaction, messageName);
-		ValueSpecification vs = ArgumentFactory.getArgument(message, argumentName, "", false);
+		Message message = getMessage(interaction, messageName);
+		ValueSpecification vs = (LiteralString) message.getArgument(argumentName, null);
 		Assertions.assertTrue(vs != null, "Interaction " + interactionName + " Message " + messageName
 				+ " Argument Name " + argumentName + " doesn't exist");
 
@@ -320,7 +320,7 @@ public abstract class MbtTransformer extends FileObject {
 			String annotationName) {
 		Interaction interaction = (Interaction) umlProject
 				.getPackagedElement(umlProject.theSystem.getName() + "::" + interactionName, umlProject.theSystem);
-		Message message = MessageFactory.getMessage(interaction, messageName);
+		Message message = getMessage(interaction, messageName);
 		EAnnotation annotation = null;
 		for (EAnnotation e : message.getEAnnotations()) {
 			if (e.getSource().contentEquals(annotationName)) {
@@ -337,8 +337,8 @@ public abstract class MbtTransformer extends FileObject {
 			String argumentName, String annotationDetail) {
 		Interaction interaction = (Interaction) umlProject
 				.getPackagedElement(umlProject.theSystem.getName() + "::" + interactionName, umlProject.theSystem);
-		Message message = MessageFactory.getMessage(interaction, messageName);
-		ValueSpecification vs = ArgumentFactory.getArgument(message, argumentName, "", false);
+		Message message = getMessage(interaction, messageName);
+		ValueSpecification vs = (LiteralString) message.getArgument(argumentName, null);
 
 		// TODO make an AnnotationFactory
 		EAnnotation annotation = null;
@@ -364,11 +364,28 @@ public abstract class MbtTransformer extends FileObject {
 	protected void assertInteractionMessageOccurenceExists(String interactionName, String messageOccurenceName) {
 		Interaction interaction = (Interaction) umlProject
 				.getPackagedElement(umlProject.theSystem.getName() + "::" + interactionName, umlProject.theSystem);
-		MessageOccurrenceSpecification messageOccurence = MessageFactory.getMessageOccurence(interaction,
-				messageOccurenceName);
+		MessageOccurrenceSpecification messageOccurence = getMessageOccurence(interaction, messageOccurenceName);
 		Assertions.assertTrue(messageOccurence != null,
 				"Interaction " + interactionName + " Message Occurence " + messageOccurenceName + " doesn't exist");
 
+	}
+
+	protected Message getMessage(Interaction interaction, String name) {
+		for (NamedElement ne : interaction.getOwnedMembers()) {
+			if (ne.getName().contentEquals(name)) {
+				return (Message) ne;
+			}
+		}
+		return null;
+	}
+
+	protected MessageOccurrenceSpecification getMessageOccurence(Interaction interaction, String name) {
+		for (NamedElement ne : interaction.getOwnedMembers()) {
+			if (ne.getName().contentEquals(name)) {
+				return (MessageOccurrenceSpecification) ne;
+			}
+		}
+		return null;
 	}
 
 }

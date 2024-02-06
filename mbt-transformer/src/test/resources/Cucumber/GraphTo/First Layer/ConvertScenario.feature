@@ -88,8 +88,8 @@ Feature: Convert Scenario
 
   Scenario: Test scenario step
     And The target/uml/pst.uml file, Class Element Imports section will be as follows
-      | Class Name     | Alias               | Imported Element                           |
-      | specs::Process | SearchHomePageSteps | pst::stepdefs::search::SearchHomePageSteps |
+      | Class Name     | Imported Element                           |
+      | specs::Process | pst::stepdefs::search::SearchHomePageSteps |
     And The target/uml/pst.uml file, Class Properties section will be as follows
       | Class Name     | Property Name       | Property Type                              |
       | specs::Process | this                | pst::specs::Process                        |

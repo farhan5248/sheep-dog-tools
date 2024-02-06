@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.uml2.uml.Class;
-import org.eclipse.uml2.uml.ElementImport;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
@@ -26,12 +25,6 @@ import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.core.Validator;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
-import org.farhan.mbt.uml.AnnotationFactory;
-import org.farhan.mbt.uml.ArgumentFactory;
-import org.farhan.mbt.uml.ElementImportFactory;
-import org.farhan.mbt.uml.InteractionFactory;
-import org.farhan.mbt.uml.MessageFactory;
-import org.farhan.mbt.uml.ParameterFactory;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 
@@ -154,17 +147,17 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 
 	private void convertDocStringToArgument(Step s, Message theMessage) {
 		if (s.getTheDocString() != null) {
-			ValueSpecification vs = ArgumentFactory.getArgument(theMessage, "docString", "", true);
+			ValueSpecification vs = createArgument(theMessage, "docString", "", true);
 			EList<Line> lines = s.getTheDocString().getLines();
 			for (int i = 0; i < lines.size(); i++) {
-				AnnotationFactory.getAnnotation(vs, "docString", String.valueOf(i), lines.get(i).getName());
+				createAnnotation(vs, "docString", String.valueOf(i), lines.get(i).getName());
 			}
 		}
 	}
 
 	private void convertDataTableToArgument(Step s, Message theMessage) {
 		if (s.getTheStepTable() != null) {
-			ValueSpecification vs = ArgumentFactory.getArgument(theMessage, "dataTable", "", true);
+			ValueSpecification vs = createArgument(theMessage, "dataTable", "", true);
 			EList<Row> rows = s.getTheStepTable().getRows();
 			for (int i = 0; i < rows.size(); i++) {
 
@@ -172,7 +165,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 				for (int j = 0; j < rows.get(i).getCells().size(); j++) {
 					value += rows.get(i).getCells().get(j).getName() + " |";
 				}
-				AnnotationFactory.getAnnotation(vs, "dataTable", String.valueOf(i), value);
+				createAnnotation(vs, "dataTable", String.valueOf(i), value);
 			}
 		}
 	}
@@ -181,12 +174,10 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 		Class owningClass = (Class) anInteraction.getOwner();
 		String nextLayerName = getNextLayerClassName();
 		UMLClassWrapper ucwi = (UMLClassWrapper) target.createObject(nextLayerName);
-		Class importedClass = ucwi.theClass;
-		ElementImport classImport = ElementImportFactory.getElementImport(owningClass, nextLayerName);
-		if (classImport == null) {
-			classImport = ElementImportFactory.createElementImport(owningClass, importedClass);
-		}
-		Message theMessage = MessageFactory.getMessage(anInteraction, importedClass, step.getName());
+		Class nextLayerClass = ucwi.theClass;
+		createElementImport(owningClass, nextLayerClass);
+		owningClass.createOwnedAttribute(nextLayerClass.getName(), nextLayerClass);
+		Message theMessage = getMessage(anInteraction, nextLayerClass, step.getName());
 		return theMessage;
 	}
 
@@ -236,19 +227,19 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 				for (int j = 0; j < rows.get(i).getCells().size(); j++) {
 					value += rows.get(i).getCells().get(j).getName() + "|";
 				}
-				AnnotationFactory.getAnnotation(anInteraction, e.getName(), String.valueOf(i), value);
+				createAnnotation(anInteraction, e.getName(), String.valueOf(i), value);
 			}
 		}
 	}
 
 	private void convertTagsToParameters(Interaction anInteraction, EList<Tag> tags) {
 		for (Tag a : tags) {
-			ParameterFactory.getParameter(anInteraction, a.getName().replace("@", ""), "", "in");
+			getParameter(anInteraction, a.getName().replace("@", ""), "", "in");
 		}
 	}
 
 	private Interaction createInteraction(Class layerClass, AbstractScenario as) {
-		Interaction anInteraction = InteractionFactory.getInteraction(layerClass, as.getName(), true);
+		Interaction anInteraction = getInteraction(layerClass, as.getName(), true);
 		anInteraction.setName(anInteraction.getName());
 		anInteraction.createOwnedComment().setBody(convertStatementsToString(as.getStatements()));
 		return anInteraction;

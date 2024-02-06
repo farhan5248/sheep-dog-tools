@@ -8,6 +8,7 @@ import org.eclipse.emf.common.util.EMap;
 import org.eclipse.uml2.uml.Behavior;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
+import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.cucumber.Cell;
@@ -21,8 +22,6 @@ import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToCodeConverter;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
-import org.farhan.mbt.uml.AnnotationFactory;
-import org.farhan.mbt.uml.ArgumentFactory;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 
@@ -134,8 +133,12 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 
 	private void convertDataTableFromArgument(Message m, Step step) {
 
-		ValueSpecification vs = ArgumentFactory.getArgument(m, "dataTable", "", true);
-		EMap<String, String> rows = AnnotationFactory.getAnnotation(vs, "dataTable").getDetails();
+		ValueSpecification vs = (LiteralString) m.getArgument("dataTable", null);
+		if (vs == null) {
+			return;
+		}
+		
+		EMap<String, String> rows = vs.getEAnnotation("dataTable").getDetails();
 		if (!rows.isEmpty()) {
 			step.setTheStepTable(CucumberFactory.eINSTANCE.createStepTable());
 			for (String rowId : rows.keySet()) {
@@ -154,8 +157,7 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 	@Override
 	protected String convertObjectName(String fullName) {
 		String pathName = fullName;
-		pathName = pathName.replace("pst::" + target.FIRST_LAYER,
-				target.getDir(target.FIRST_LAYER).getAbsolutePath());
+		pathName = pathName.replace("pst::" + target.FIRST_LAYER, target.getDir(target.FIRST_LAYER).getAbsolutePath());
 		pathName = pathName.replace("::", File.separator);
 		// TODO isn't feature defined somewhere else as getFileType? Maybe there should
 		// be get Layer 1 filetype, layer 2 filetype etc defined here
