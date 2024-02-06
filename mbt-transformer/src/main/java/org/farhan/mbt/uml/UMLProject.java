@@ -30,7 +30,7 @@ public class UMLProject extends ConvertibleProject {
 	private ArrayList<ConvertibleObject> fourthLayerObjects;
 
 	// TODO remove theSystem from all the UML Factory methods
-	public static Model theSystem;
+	private Model theSystem;
 
 	public UMLProject() {
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
@@ -150,7 +150,8 @@ public class UMLProject extends ConvertibleProject {
 	private ConvertibleObject find(String name, ArrayList<ConvertibleObject> objects) {
 		for (ConvertibleObject co : objects) {
 			UMLClassWrapper ucw = (UMLClassWrapper) co;
-			if (ucw.theClass.getQualifiedName().contentEquals(name)) {
+			Class c = (Class) ucw.get();
+			if (c.getQualifiedName().contentEquals(name)) {
 				return ucw;
 			}
 		}
@@ -162,7 +163,7 @@ public class UMLProject extends ConvertibleProject {
 
 		// TODO in the future convert qualified name to path when each class is stored
 		// individually
-		Class theClass = (Class) getPackagedElement(name, theSystem);
+		Class theClass = (Class) getPackagedElement(name, null);
 		if (theClass == null) {
 			theClass = addClassWithPackages(name);
 		}
@@ -202,6 +203,9 @@ public class UMLProject extends ConvertibleProject {
 	}
 
 	public PackageableElement getPackagedElement(String qualifiedName, Package nestingPackage) {
+		if (nestingPackage == null) {
+			nestingPackage = theSystem;
+		}
 		for (PackageableElement pe : nestingPackage.getPackagedElements()) {
 			if (pe instanceof Package) {
 				PackageableElement anElement = getPackagedElement(qualifiedName, (Package) pe);

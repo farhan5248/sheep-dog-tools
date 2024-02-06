@@ -11,6 +11,7 @@ import org.eclipse.uml2.uml.ElementImport;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
+import org.eclipse.uml2.uml.Namespace;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToUMLConverter;
@@ -20,6 +21,7 @@ import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 
+import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.Parameter;
@@ -69,7 +71,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 		HashMap<String, Class> layerClassShortList = new HashMap<String, Class>();
 		for (ConvertibleObject co : prevLayerClasses) {
 			UMLClassWrapper c = (UMLClassWrapper) co;
-			for (ElementImport ei : c.theClass.getElementImports()) {
+			for (ElementImport ei : ((Class) c.get()).getElementImports()) {
 				Class importedClass = (Class) ei.getImportedElement();
 				layerClassShortList.put(importedClass.getQualifiedName(), importedClass);
 			}
@@ -104,21 +106,24 @@ public class JavaToUMLConverter extends ToUMLConverter {
 	@Override
 	protected void convertImports(ConvertibleObject layerFile) throws Exception {
 		CucumberJavaWrapper jcw = (CucumberJavaWrapper) layerFile;
-		if (jcw.javaClass.getTypes().size() > 0) {
+		CompilationUnit cu = (CompilationUnit) jcw.get();
+		Class c = (Class) ucw.get();
+		if (cu.getTypes().size() > 0) {
 			// Wrap this in CommentFactory.getComment. getComment should do nothing if the
 			// content is empty
-			Optional<Comment> comment = jcw.javaClass.getType(0).getComment();
+			Optional<Comment> comment = cu.getType(0).getComment();
 			if (comment.isPresent()) {
-				ucw.theClass.createOwnedComment().setBody(comment.get().getContent());
+				c.createOwnedComment().setBody(comment.get().getContent());
 			}
-			for (ImportDeclaration i : jcw.javaClass.getImports()) {
+			for (ImportDeclaration i : cu.getImports()) {
 				i.getNameAsString();
 				if (!i.getNameAsString().endsWith("Factory")) {
 					// Don't include the factory import because it's a detail of dependency
 					// injection is implemented
 					String importedClassName = convertImportNameToQualifiedName(i.getNameAsString());
 					UMLClassWrapper ucwi = (UMLClassWrapper) target.createObject(importedClassName);
-					createElementImport(ucw.theClass, ucwi.theClass);
+					Class ci = (Class) ucwi.get();
+					createElementImport(c, ci);
 				}
 			}
 		}
@@ -127,9 +132,9 @@ public class JavaToUMLConverter extends ToUMLConverter {
 	@Override
 	protected void convertBehaviours(ConvertibleObject layerFile) throws Exception {
 		CucumberJavaWrapper jcw = (CucumberJavaWrapper) layerFile;
-		for (MethodDeclaration md : jcw.javaClass.getType(0).getMethods()) {
+		for (MethodDeclaration md : ((CompilationUnit) jcw.get()).getType(0).getMethods()) {
 			// TODO determine if this interaction is empty
-			Interaction anInteraction = getInteraction(ucw.theClass, md.getNameAsString(), true);
+			Interaction anInteraction = getInteraction((Class) ucw.get(), md.getNameAsString(), true);
 
 			// Wrap this in CommentFactory.getComment. getComment should do nothing if the
 			// content is empty
@@ -186,7 +191,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 		if (isSecondLayer(owningClass)) {
 			String qualifiedName = getObjectQualifiedNameFromFactory(mce);
 			UMLClassWrapper ucw = (UMLClassWrapper) target.createObject(qualifiedName);
-			Class nextLayerClass = ucw.theClass;
+			Class nextLayerClass = (Class) ucw.get();
 			createElementImport(owningClass, nextLayerClass);
 			owningClass.createOwnedAttribute(nextLayerClass.getName(), nextLayerClass);
 			Message theMessage = getMessage(anInteraction, nextLayerClass, mce.getName().asString());
@@ -223,7 +228,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 		// get the object name from the argument of the factory class
 		String objectName = mce.getChildNodes().getFirst().getChildNodes().getLast().toString().replace("\"", "");
 		// make the qualified name
-		String qualifiedName = target.theSystem.getName() + "::" + target.THIRD_LAYER + "::" + appName + "::"
+		String qualifiedName = "pst" + "::" + target.THIRD_LAYER + "::" + appName + "::"
 				+ objectName;
 		return qualifiedName;
 	}

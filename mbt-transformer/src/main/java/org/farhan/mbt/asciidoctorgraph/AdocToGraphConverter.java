@@ -7,6 +7,7 @@ import org.asciidoctor.ast.Row;
 import org.asciidoctor.ast.Section;
 import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
+import org.asciidoctor.ast.Document;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
@@ -21,7 +22,6 @@ import org.farhan.mbt.graph.MBTVertex;
 public class AdocToGraphConverter extends ToGraphConverter {
 
 	private JGraphTGraphWrapper jgw;
-	private String layer;
 
 	AsciiDoctorProject source;
 
@@ -64,32 +64,33 @@ public class AdocToGraphConverter extends ToGraphConverter {
 				// TODO this inner graph will have an associate file, so instead of saving the
 				// graph in one massive file, make it a pointer to the actual file for now
 				JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) target.createObject(convertObjectName(step.getTitle()));
+				MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
 				Table table = (Table) block;
 				// get vertices from table
 				ArrayList<MBTVertex> vertices = new ArrayList<MBTVertex>();
 				// TODO validate the table has at least two rows
 				for (Row r : table.getHeader()) {
 					for (Cell c : r.getCells()) {
-						vertices.add(gtf.theGraph.createVertex(c.getText()));
+						vertices.add(tgt.createVertex(c.getText()));
 					}
 				}
 				// go through each row and convert to edge
 				for (int i = 0; i < table.getBody().size(); i++) {
 
-					gtf.theGraph.createEdgeWithInput(gtf.theGraph.getStartVertex(), vertices.getFirst(), "", "");
+					tgt.createEdgeWithInput(tgt.getStartVertex(), vertices.getFirst(), "", "");
 
 					Row row = table.getBody().get(i);
 					for (int j = 0; j < vertices.size() - 1; j++) {
 						String label = row.getCells().get(j).getText();
 						if (!label.isEmpty()) {
-							gtf.theGraph.createEdgeWithInput(vertices.get(j), vertices.get(j + 1), label, label);
+							tgt.createEdgeWithInput(vertices.get(j), vertices.get(j + 1), label, label);
 						}
 					}
 					// TODO this assumes the last column isn't blank
-					gtf.theGraph.createEdgeWithInput(vertices.getLast(), gtf.theGraph.getEndVertex(),
+					tgt.createEdgeWithInput(vertices.getLast(), tgt.getEndVertex(),
 							row.getCells().getLast().getText(), row.getCells().getLast().getText());
 				}
-				inputs.setValue(gtf.theGraph);
+				inputs.setValue(gtf.get());
 			}
 		}
 	}
@@ -107,10 +108,12 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	@Override
 	protected void convertObject(ConvertibleObject layerFile) throws Exception {
 		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) layerFile;
+		Document src = (Document) adaw.get();
 		jgw = (JGraphTGraphWrapper) target.createObject(convertObjectName(adaw.getFile().getName()));
-		for (StructuralNode block : adaw.theDoc.getBlocks()) {
+		MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) jgw.get();
+		for (StructuralNode block : src.getBlocks()) {
 			if (block instanceof Section) {
-				createFromSection(jgw.theGraph, (Section) block);
+				createFromSection(tgt, (Section) block);
 			}
 		}
 		// TODO the project should hide object creation and list management

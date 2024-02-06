@@ -16,8 +16,8 @@ import org.farhan.mbt.core.ConvertibleObject;
 
 public class UMLClassWrapper implements ConvertibleObject {
 
-	public Class theClass;
 	private File theFile;
+	private Class theClass;
 
 	// TODO these are probably needed until the System is moved in this class and
 	// eventually removed when each class has its own file
@@ -40,29 +40,24 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return theFile;
 	}
 
+	@Override
 	public void load() throws Exception {
 
 		// Only read the model file if it hasn't been loaded before. This will change
 		// when each class has its own model file
 		if (isNotLoaded) {
-			URI uri = URI.createFileURI(theFile.getAbsolutePath()).appendSegment(parentProject.theSystem.getName())
-					.appendFileExtension(UMLResource.FILE_EXTENSION);
-			ResourceSet resourceSet = new ResourceSetImpl();
-			// This is to load a UML model outside of Eclipse through Maven
-			UMLResourcesUtil.init(resourceSet);
-			Resource resource = resourceSet.getResource(uri, true);
-			// The EMPTY_MAP is passed since I have no options
-			resource.load(Collections.EMPTY_MAP);
-			for (EObject e : resource.getContents()) {
-				parentProject.theSystem = (Model) e;
-			}
-			isNotLoaded = false;
+			parentProject.load();
 		}
 	}
 
 	@Override
 	public void save() throws Exception {
 		// TODO This will be implemented once I put each UML class in its own .uml file
+	}
+
+	@Override
+	public Object get() {
+		return theClass;
 	}
 
 }

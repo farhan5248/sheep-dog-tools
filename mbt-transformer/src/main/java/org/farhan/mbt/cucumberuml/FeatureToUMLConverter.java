@@ -6,9 +6,11 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.uml2.uml.Class;
+import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
+import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.Background;
 import org.farhan.cucumber.Examples;
@@ -76,7 +78,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 		String qualifiedName = convertObjectName(cfw.getFile().getAbsolutePath());
 
 		ucw = (UMLClassWrapper) target.createObject(qualifiedName);
-		ucw.theClass.createOwnedComment().setBody(convertStatementsToString(cfw.theFeature.getStatements()));
+		((Class) ucw.get()).createOwnedComment().setBody(convertStatementsToString(((Feature) cfw.get()).getStatements()));
 	}
 
 	@Override
@@ -88,13 +90,13 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 
 		CucumberFeatureWrapper ufw = (CucumberFeatureWrapper) theObject;
 		Background b = null;
-		for (AbstractScenario as : ufw.theFeature.getAbstractScenarios()) {
+		for (AbstractScenario as : ((Feature) ufw.get()).getAbstractScenarios()) {
 			if (as instanceof Background) {
 				b = (Background) as;
 				continue;
 			}
 			resetCurrentContainerObject();
-			Interaction anInteraction = createInteraction(ucw.theClass, as);
+			Interaction anInteraction = createInteraction((Class) ucw.get(), as);
 			if (as instanceof Scenario) {
 				Scenario s = (Scenario) as;
 				convertTagsToParameters(anInteraction, s.getTags());
@@ -174,7 +176,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 		Class owningClass = (Class) anInteraction.getOwner();
 		String nextLayerName = getNextLayerClassName();
 		UMLClassWrapper ucwi = (UMLClassWrapper) target.createObject(nextLayerName);
-		Class nextLayerClass = ucwi.theClass;
+		Class nextLayerClass = (Class) ucwi.get();
 		createElementImport(owningClass, nextLayerClass);
 		owningClass.createOwnedAttribute(nextLayerClass.getName(), nextLayerClass);
 		Message theMessage = getMessage(anInteraction, nextLayerClass, step.getName());
@@ -192,10 +194,11 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	private boolean isFileSelected(ConvertibleObject convertibleFile, String layerSelectionCriteria) throws Exception {
 
 		CucumberFeatureWrapper ufw = (CucumberFeatureWrapper) convertibleFile;
-		if (isTagged(ufw.theFeature.getTags(), layerSelectionCriteria)) {
+		Feature f = (Feature) ufw.get();
+		if (isTagged(f.getTags(), layerSelectionCriteria)) {
 			return true;
 		}
-		for (AbstractScenario a : ufw.theFeature.getAbstractScenarios()) {
+		for (AbstractScenario a : f.getAbstractScenarios()) {
 			if (a instanceof Scenario) {
 				if (isTagged(((Scenario) a).getTags(), layerSelectionCriteria)) {
 					return true;

@@ -17,8 +17,7 @@ import com.google.inject.Injector;
 public class CucumberFeatureWrapper implements ConvertibleObject {
 
 	private File theFile;
-	// TODO make this private later
-	public Feature theFeature;
+	private Feature theFeature;
 
 	public CucumberFeatureWrapper(File theFile) {
 		setFile(theFile);
@@ -57,6 +56,11 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public Object get() {
+		return theFeature;
 	}
 
 }

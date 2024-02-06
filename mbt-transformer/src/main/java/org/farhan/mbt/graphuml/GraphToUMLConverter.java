@@ -72,11 +72,12 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	protected void convertBehaviours(ConvertibleObject theObject) throws Exception {
 
 		JGraphTGraphWrapper jgw = (JGraphTGraphWrapper) theObject;
-		ArrayList<MBTPath> paths = getAllPaths(jgw.theGraph, jgw.theGraph.getStartVertex());
+		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) jgw.get();
+		ArrayList<MBTPath> paths = getAllPaths(g, g.getStartVertex());
 		for (int i = 0; i < paths.size(); i++) {
 			resetCurrentContainerObject();
 			// TODO figure out names for this later, use a counter for now
-			Interaction anInteraction = createInteraction(ucw.theClass, "Scenario " + String.valueOf(i));
+			Interaction anInteraction = createInteraction((Class) ucw.get(), "Scenario " + String.valueOf(i));
 			// TODO think about adding tags by deriving them from the edges
 			// convertTagsToParameters(anInteraction, s.getTags());
 			convertInteractionMessages(anInteraction, paths.get(i).getPath());
@@ -143,7 +144,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		Class owningClass = (Class) anInteraction.getOwner();
 		String secondLayerClassName = getSecondLayerClassName();
 		UMLClassWrapper ucwi = (UMLClassWrapper) target.createObject(secondLayerClassName);
-		Class nextLayerClass = ucwi.theClass;
+		Class nextLayerClass = (Class) ucwi.get();
 		ElementImport classImport = createElementImport(owningClass, nextLayerClass);
 		owningClass.createOwnedAttribute(nextLayerClass.getName(), nextLayerClass);
 		getMessage(anInteraction, nextLayerClass, messageName);

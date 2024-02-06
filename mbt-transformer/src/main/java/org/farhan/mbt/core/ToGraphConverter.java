@@ -7,7 +7,8 @@ import org.farhan.mbt.graph.JGraphTProject;
 public abstract class ToGraphConverter {
 
 	protected JGraphTProject target;
-
+	protected String layer;
+	
 	protected abstract String getLayer();
 
 	protected abstract void selectObjects() throws Exception;

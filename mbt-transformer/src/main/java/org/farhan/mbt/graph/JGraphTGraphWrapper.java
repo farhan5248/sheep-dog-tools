@@ -8,8 +8,7 @@ import org.farhan.mbt.core.Utilities;
 public class JGraphTGraphWrapper implements ConvertibleObject {
 
 	private File theFile;
-	// TODO make getObject methods in ConvertibleObject
-	public MBTGraph<MBTVertex, MBTEdge> theGraph;
+	private MBTGraph<MBTVertex, MBTEdge> theGraph;
 
 	public JGraphTGraphWrapper(File f) {
 		theFile = f;
@@ -119,6 +118,11 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 	public void save() throws Exception {
 		String fileContents = theGraph.toString();
 		Utilities.writeFile(theFile, fileContents);
+	}
+
+	@Override
+	public Object get() {
+		return theGraph;
 	}
 
 }

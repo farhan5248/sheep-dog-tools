@@ -90,7 +90,7 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 		createInputOutputMessage(nextLayerInteraction, m, "set");
 		String nextLayerName = getNextLayerClassQualifiedName(nextLayerInteraction);
 		UMLClassWrapper ucw = (UMLClassWrapper) target.createObject(nextLayerName);
-		Class nextLayerClass = ucw.theClass;
+		Class nextLayerClass = (Class) ucw.get();
 		createElementImport((Class) nextLayerInteraction.getOwner(), nextLayerClass);
 		owningClass.createOwnedAttribute(nextLayerClass.getName(), nextLayerClass);
 		getMessage(nextLayerInteraction, nextLayerClass, "execute");
@@ -101,7 +101,7 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 		Class owningClass = (Class) nextLayerInteraction.getOwner();
 		String nextLayerName = getNextLayerClassQualifiedName(nextLayerInteraction);
 		UMLClassWrapper ucw = (UMLClassWrapper) target.createObject(nextLayerName);
-		Class nextLayerClass = ucw.theClass;
+		Class nextLayerClass = (Class) ucw.get();
 		createElementImport(owningClass, nextLayerClass);
 		owningClass.createOwnedAttribute(nextLayerClass.getName(), nextLayerClass);
 		if (getFirstArgument(m).contentEquals("docString") || getFirstArgument(m).contentEquals("dataTable")) {

@@ -10,7 +10,7 @@ import org.farhan.mbt.core.ConvertibleObject;
 public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	private File theFile;
-	public Document theDoc;
+	private Document theDoc;
 
 	public AsciiDoctorAdocWrapper(File theFile) {
 		setFile(theFile);
@@ -35,6 +35,11 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	@Override
 	public void save() {
+	}
+
+	@Override
+	public Object get() {
+		return theDoc;
 	}
 
 }

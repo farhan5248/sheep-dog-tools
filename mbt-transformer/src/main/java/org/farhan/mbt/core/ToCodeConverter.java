@@ -8,7 +8,8 @@ import org.farhan.mbt.uml.UMLProject;
 public abstract class ToCodeConverter {
 
 	protected UMLProject source;
-
+	protected String layer;
+	
 	protected abstract void selectObjects() throws Exception;
 
 	protected abstract String getLayer();

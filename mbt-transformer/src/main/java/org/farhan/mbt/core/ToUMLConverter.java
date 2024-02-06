@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Behavior;
+import org.eclipse.uml2.uml.BehavioredClassifier;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.ElementImport;
 import org.eclipse.uml2.uml.Interaction;
@@ -23,19 +24,17 @@ import org.farhan.mbt.uml.UMLProject;
 
 public abstract class ToUMLConverter {
 
-	private class StateMachine {
-		String currentState;
-		String machineName;
-	}
-
 	protected String layer;
-
 	protected UMLProject target;
-
 	private StateMachine theMachine;
 
 	public ToUMLConverter() {
 		theMachine = new StateMachine();
+	}
+
+	private class StateMachine {
+		String currentState;
+		String machineName;
 	}
 
 	protected abstract Interaction addNextLayerInteraction(String methodName, Message m);
@@ -186,7 +185,7 @@ public abstract class ToUMLConverter {
 		ArrayList<ConvertibleObject> objects = target.getObjects(layer);
 		for (ConvertibleObject co : objects) {
 			UMLClassWrapper ucw = (UMLClassWrapper) co;
-			for (Behavior b : ucw.theClass.getOwnedBehaviors()) {
+			for (Behavior b : ((Class) ucw.get()).getOwnedBehaviors()) {
 				Interaction i = (Interaction) b;
 				for (Message m : i.getMessages()) {
 					for (String methodName : getNextLayerInteractionNamesfromMessage(m)) {

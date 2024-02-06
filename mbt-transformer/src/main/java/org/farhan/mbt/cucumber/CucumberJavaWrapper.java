@@ -10,11 +10,11 @@ import com.github.javaparser.utils.SourceRoot;
 public class CucumberJavaWrapper implements ConvertibleObject {
 
 	private File theFile;
-	// TODO make this private later
-	public CompilationUnit javaClass;
+	private CompilationUnit javaClass;
 
 	public CucumberJavaWrapper(File theFile) {
 		setFile(theFile);
+		javaClass = new CompilationUnit();
 	}
 
 	@Override
@@ -46,6 +46,11 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		SourceRoot javaSrcDir = new SourceRoot(parentDir.toPath());
 		javaSrcDir.add(javaClass);
 		javaSrcDir.saveAll();
+	}
+
+	@Override
+	public Object get() {
+		return javaClass;
 	}
 
 }

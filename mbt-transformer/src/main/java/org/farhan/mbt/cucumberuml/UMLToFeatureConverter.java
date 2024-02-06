@@ -28,7 +28,6 @@ import org.farhan.mbt.uml.UMLProject;
 public class UMLToFeatureConverter extends ToCodeConverter {
 
 	private CucumberFeatureWrapper aFeatureFile;
-	private String layer;
 
 	CucumberProject target;
 
@@ -56,9 +55,10 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 	@Override
 	protected void convertObject(ConvertibleObject layerClass) throws Exception {
 		UMLClassWrapper ucw = (UMLClassWrapper) layerClass;
-		String path = convertObjectName(ucw.theClass.getQualifiedName());
+		Class c = (Class) ucw.get();
+		String path = convertObjectName(c.getQualifiedName());
 		aFeatureFile = (CucumberFeatureWrapper) target.createObject(path);
-		convertComments(ucw.theClass, aFeatureFile.theFeature);
+		convertComments(c, (Feature) aFeatureFile.get());
 	}
 
 	private void convertComments(Class aClass, Feature aFeature) {
@@ -99,12 +99,12 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 	protected void convertBehaviours(ConvertibleObject layerClass) throws Exception {
 		// TODO there's no background or scenario outline, just scenario
 		UMLClassWrapper ucw = (UMLClassWrapper) layerClass;
-		for (Behavior aBehavior : ucw.theClass.getOwnedBehaviors()) {
+		for (Behavior aBehavior : ((Class) ucw.get()).getOwnedBehaviors()) {
 			if (aBehavior instanceof Interaction) {
 				Interaction anInteraction = (Interaction) aBehavior;
 				Scenario aScenario = CucumberFactory.eINSTANCE.createScenario();
 				aScenario.setName(anInteraction.getName());
-				aFeatureFile.theFeature.getAbstractScenarios().add(aScenario);
+				((Feature) aFeatureFile.get()).getAbstractScenarios().add(aScenario);
 				// TODO this is for scenario outline data convertAnnotation(anInteraction,
 				// aMethod);
 				// TODO this is for scenario tags convertParameters(anInteraction, aMethod);
