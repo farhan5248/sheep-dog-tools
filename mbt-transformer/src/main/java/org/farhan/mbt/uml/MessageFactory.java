@@ -6,7 +6,6 @@ import org.eclipse.uml2.uml.Lifeline;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.MessageOccurrenceSpecification;
 import org.eclipse.uml2.uml.NamedElement;
-import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.UMLFactory;
 
@@ -17,11 +16,13 @@ public class MessageFactory {
 		Class owningClass = (Class) anInteraction.getOwner();
 
 		Property thisProperty = PropertyFactory.getProperty(owningClass, "this", owningClass);
-		Lifeline thisLifeline = LifelineFactory.getLifeline(anInteraction, thisProperty);
+		Lifeline thisLifeline = anInteraction.createLifeline(thisProperty.getName());
+		thisLifeline.setRepresents(thisProperty);
 
 		Property targetProperty = PropertyFactory.getProperty(owningClass, importedKeywordsClass.getName(),
 				importedKeywordsClass);
-		Lifeline targetLifeline = LifelineFactory.getLifeline(anInteraction, targetProperty);
+		Lifeline targetLifeline = anInteraction.createLifeline(targetProperty.getName());
+		targetLifeline.setRepresents(targetProperty);
 
 		Message aMessage = anInteraction.createMessage(aTestOrKeywordStepName);
 		MessageOccurrenceSpecification mosSrc;
@@ -46,7 +47,6 @@ public class MessageFactory {
 	}
 
 	public static Message getMessage(Interaction interaction, String name) {
-
 		for (NamedElement ne : interaction.getOwnedMembers()) {
 			if (ne.getName().contentEquals(name)) {
 				return (Message) ne;
@@ -54,9 +54,8 @@ public class MessageFactory {
 		}
 		return null;
 	}
-	
-	public static MessageOccurrenceSpecification getMessageOccurence(Interaction interaction, String name) {
 
+	public static MessageOccurrenceSpecification getMessageOccurence(Interaction interaction, String name) {
 		for (NamedElement ne : interaction.getOwnedMembers()) {
 			if (ne.getName().contentEquals(name)) {
 				return (MessageOccurrenceSpecification) ne;

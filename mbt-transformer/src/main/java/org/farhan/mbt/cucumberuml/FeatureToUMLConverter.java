@@ -28,8 +28,6 @@ import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.AnnotationFactory;
 import org.farhan.mbt.uml.ArgumentFactory;
-import org.farhan.mbt.uml.ClassFactory;
-import org.farhan.mbt.uml.CommentFactory;
 import org.farhan.mbt.uml.ElementImportFactory;
 import org.farhan.mbt.uml.InteractionFactory;
 import org.farhan.mbt.uml.MessageFactory;
@@ -85,7 +83,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 		String qualifiedName = convertObjectName(cfw.getFile().getAbsolutePath());
 
 		ucw = (UMLClassWrapper) target.createObject(qualifiedName);
-		CommentFactory.getComment(ucw.theClass, convertStatementsToString(cfw.theFeature.getStatements()));
+		ucw.theClass.createOwnedComment().setBody(convertStatementsToString(cfw.theFeature.getStatements()));
 	}
 
 	@Override
@@ -179,20 +177,20 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 		}
 	}
 
-	private Message convertStepToMessage(Interaction anInteraction, Step cs) {
-		String messageName = cs.getName();
+	private Message convertStepToMessage(Interaction anInteraction, Step step) {
 		Class owningClass = (Class) anInteraction.getOwner();
-		String secondLayerClassName = getSecondLayerClassName();
-		Class importedClass = ClassFactory.getClassByMessage(target.theSystem, messageName, secondLayerClassName);
-		ElementImport classImport = ElementImportFactory.getElementImportByAlias(owningClass, importedClass.getName());
+		String nextLayerName = getNextLayerClassName();
+		UMLClassWrapper ucwi = (UMLClassWrapper) target.createObject(nextLayerName);
+		Class importedClass = ucwi.theClass;
+		ElementImport classImport = ElementImportFactory.getElementImport(owningClass, nextLayerName);
 		if (classImport == null) {
-			classImport = ElementImportFactory.getElementImport(owningClass, secondLayerClassName);
+			classImport = ElementImportFactory.createElementImport(owningClass, importedClass);
 		}
-		Message theMessage = MessageFactory.getMessage(anInteraction, importedClass, messageName);
+		Message theMessage = MessageFactory.getMessage(anInteraction, importedClass, step.getName());
 		return theMessage;
 	}
 
-	private String getSecondLayerClassName() {
+	private String getNextLayerClassName() {
 		String secondLayerClassName = "";
 		secondLayerClassName = convertNextLayerClassName(getFSMName() + getFSMState() + "Steps");
 		secondLayerClassName = "pst::" + source.SECOND_LAYER + "::" + Utilities.toLowerCamelCase(getFSMName()) + "::"

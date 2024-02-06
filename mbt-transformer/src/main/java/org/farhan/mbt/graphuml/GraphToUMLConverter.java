@@ -22,7 +22,6 @@ import org.farhan.mbt.graph.MBTPath;
 import org.farhan.mbt.graph.MBTVertex;
 import org.farhan.mbt.uml.AnnotationFactory;
 import org.farhan.mbt.uml.ArgumentFactory;
-import org.farhan.mbt.uml.ClassFactory;
 import org.farhan.mbt.uml.ElementImportFactory;
 import org.farhan.mbt.uml.InteractionFactory;
 import org.farhan.mbt.uml.MessageFactory;
@@ -59,7 +58,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	@Override
 	protected ArrayList<ConvertibleObject> getObjects(String layer) {
 		// TODO make a GraphDotFile
-		return source.getObjects(source.FIRST_LAYER);
+		return source.getObjects(layer);
 	}
 
 	@Override
@@ -148,10 +147,12 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		String messageName = s;
 		Class owningClass = (Class) anInteraction.getOwner();
 		String secondLayerClassName = getSecondLayerClassName();
-		Class importedClass = ClassFactory.getClassByMessage(target.theSystem, messageName, secondLayerClassName);
-		ElementImport classImport = ElementImportFactory.getElementImportByAlias(owningClass, importedClass.getName());
+		UMLClassWrapper ucwi = (UMLClassWrapper) target.createObject(secondLayerClassName);
+		Class importedClass = ucwi.theClass;
+		ElementImport classImport = ElementImportFactory.getElementImport(owningClass,
+				importedClass.getQualifiedName());
 		if (classImport == null) {
-			classImport = ElementImportFactory.getElementImport(owningClass, secondLayerClassName);
+			classImport = ElementImportFactory.createElementImport(owningClass, importedClass);
 		}
 		MessageFactory.getMessage(anInteraction, importedClass, messageName);
 	}

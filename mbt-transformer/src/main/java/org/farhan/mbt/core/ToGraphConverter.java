@@ -12,6 +12,7 @@ public abstract class ToGraphConverter {
 
 	protected abstract void selectObjects() throws Exception;
 
+	// TODO change to getSource
 	protected abstract ArrayList<ConvertibleObject> getObjects(String layer);
 
 	protected void convertObjects() throws Exception {

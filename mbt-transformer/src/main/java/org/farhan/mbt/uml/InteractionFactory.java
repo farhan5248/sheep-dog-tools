@@ -71,7 +71,7 @@ public class InteractionFactory extends PropertyFactory {
 			anInteraction.setName(interactionName);
 			theClass.setClassifierBehavior(anInteraction);
 			Property aProperty = PropertyFactory.getProperty(theClass, "this", theClass);
-			LifelineFactory.getLifeline(anInteraction, aProperty);
+			anInteraction.createLifeline(aProperty.getName()).setRepresents(aProperty);
 		}
 		if (!annotationName.isEmpty()) {
 			AnnotationFactory.getAnnotation(anInteraction, annotationName);

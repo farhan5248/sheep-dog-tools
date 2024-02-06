@@ -13,6 +13,7 @@ public abstract class ToCodeConverter {
 
 	protected abstract String getLayer();
 
+	// TODO change to getSource
 	protected abstract ArrayList<ConvertibleObject> getObjects(String layer);
 
 	protected void convertObjects() throws Exception {

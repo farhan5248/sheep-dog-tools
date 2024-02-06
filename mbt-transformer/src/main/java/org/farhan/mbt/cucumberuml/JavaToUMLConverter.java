@@ -19,12 +19,9 @@ import org.farhan.mbt.cucumber.CucumberJavaWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.AnnotationFactory;
 import org.farhan.mbt.uml.ArgumentFactory;
-import org.farhan.mbt.uml.ClassFactory;
-import org.farhan.mbt.uml.CommentFactory;
 import org.farhan.mbt.uml.ElementImportFactory;
 import org.farhan.mbt.uml.InteractionFactory;
 import org.farhan.mbt.uml.MessageFactory;
-import org.farhan.mbt.uml.PackageFactory;
 import org.farhan.mbt.uml.ParameterFactory;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
@@ -118,15 +115,16 @@ public class JavaToUMLConverter extends ToUMLConverter {
 			// content is empty
 			Optional<Comment> comment = jcw.javaClass.getType(0).getComment();
 			if (comment.isPresent()) {
-				CommentFactory.getComment(ucw.theClass, comment.get().getContent());
+				ucw.theClass.createOwnedComment().setBody(comment.get().getContent());
 			}
 			for (ImportDeclaration i : jcw.javaClass.getImports()) {
 				i.getNameAsString();
 				if (!i.getNameAsString().endsWith("Factory")) {
 					// Don't include the factory import because it's a detail of dependency
 					// injection is implemented
-					String anImportName = convertImportNameToQualifiedName(i.getNameAsString());
-					ElementImportFactory.getElementImport(ucw.theClass, anImportName);
+					String importedClassName = convertImportNameToQualifiedName(i.getNameAsString());
+					UMLClassWrapper ucwi = (UMLClassWrapper) target.createObject(importedClassName);
+					ElementImportFactory.getOrAddElementImport(ucw.theClass, ucwi.theClass);
 				}
 			}
 		}
@@ -193,8 +191,9 @@ public class JavaToUMLConverter extends ToUMLConverter {
 		// also assume that the class name is unique
 		if (isSecondLayer(owningClass)) {
 			String qualifiedName = getObjectQualifiedNameFromFactory(mce);
-			ElementImportFactory.getElementImport(owningClass, qualifiedName);
-			Class importedClass = ClassFactory.getClass(target.theSystem, qualifiedName);
+			UMLClassWrapper ucw = (UMLClassWrapper) target.createObject(qualifiedName);
+			Class importedClass = ucw.theClass;
+			ElementImportFactory.getOrAddElementImport(owningClass, importedClass);
 			Message theMessage = MessageFactory.getMessage(anInteraction, importedClass, mce.getName().asString());
 			mce.getArguments();
 			for (Expression e : mce.getArguments()) {

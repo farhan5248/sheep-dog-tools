@@ -10,8 +10,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.uml2.uml.Behavior;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Model;
+import org.eclipse.uml2.uml.Package;
+import org.eclipse.uml2.uml.PackageableElement;
+import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 import org.farhan.mbt.core.ConvertibleObject;
@@ -23,6 +27,7 @@ public class UMLProject extends ConvertibleProject {
 	private ArrayList<ConvertibleObject> firstLayerObjects;
 	private ArrayList<ConvertibleObject> secondLayerObjects;
 	private ArrayList<ConvertibleObject> thirdLayerObjects;
+	private ArrayList<ConvertibleObject> fourthLayerObjects;
 
 	// TODO remove theSystem from all the UML Factory methods
 	public static Model theSystem;
@@ -31,9 +36,11 @@ public class UMLProject extends ConvertibleProject {
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
 		secondLayerObjects = new ArrayList<ConvertibleObject>();
 		thirdLayerObjects = new ArrayList<ConvertibleObject>();
+		fourthLayerObjects = new ArrayList<ConvertibleObject>();
 
 		// TODO move this to writeFiles after maintaining the classes in the lists above
-		theSystem = ModelFactory.getModel("pst");
+		theSystem = UMLFactory.eINSTANCE.createModel();
+		theSystem.setName("pst");
 		theSystem.createNestedPackage(FIRST_LAYER);
 		theSystem.createNestedPackage(SECOND_LAYER);
 		theSystem.createNestedPackage(THIRD_LAYER);
@@ -113,21 +120,96 @@ public class UMLProject extends ConvertibleProject {
 		return layerObjects;
 	}
 
+	// TODO after all Factory classes are deleted, check if this is needed for
+	// testing classes otherwise delete it
+	public ConvertibleObject getObject(String name) {
+		if (name.contains("::" + FIRST_LAYER + "::")) {
+			find(name, firstLayerObjects);
+		} else if (name.contains("::" + SECOND_LAYER + "::")) {
+			find(name, secondLayerObjects);
+		} else if (name.contains("::" + THIRD_LAYER + "::")) {
+			find(name, thirdLayerObjects);
+		} else {
+			find(name, fourthLayerObjects);
+		}
+		return null;
+	}
+
+	private ConvertibleObject find(String name, ArrayList<ConvertibleObject> objects) {
+		for (ConvertibleObject co : objects) {
+			UMLClassWrapper ucw = (UMLClassWrapper) co;
+			if (ucw.theClass.getQualifiedName().contentEquals(name)) {
+				return ucw;
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public ConvertibleObject createObject(String name) {
 
 		// TODO in the future convert qualified name to path when each class is stored
 		// individually
-		Class theClass = ClassFactory.getClass(theSystem, name);
-		UMLClassWrapper cff = new UMLClassWrapper(this, theClass);
-		if (name.contains("::" + FIRST_LAYER + "::")) {
-			firstLayerObjects.add(cff);
-		} else if (name.contains("::" + SECOND_LAYER + "::")) {
-			secondLayerObjects.add(cff);
-		} else if (name.contains("::" + THIRD_LAYER + "::")) {
-			thirdLayerObjects.add(cff);
+		Class theClass = (Class) getPackagedElement(name, theSystem);
+		if (theClass == null) {
+			theClass = addClassWithPackages(name);
 		}
-		return cff;
+		UMLClassWrapper ucw = new UMLClassWrapper(this, theClass);
+		if (name.contains("::" + FIRST_LAYER + "::")) {
+			firstLayerObjects.add(ucw);
+		} else if (name.contains("::" + SECOND_LAYER + "::")) {
+			secondLayerObjects.add(ucw);
+		} else if (name.contains("::" + THIRD_LAYER + "::")) {
+			thirdLayerObjects.add(ucw);
+		} else {
+			fourthLayerObjects.add(ucw);
+		}
+		return ucw;
 	}
 
+	private Class addClassWithPackages(String qualifiedName) {
+		Class theClass = null;
+		Package owningPackage = theSystem;
+		String[] qualifiedNameParts = qualifiedName.replace(theSystem.getQualifiedName() + "::", "").split("::");
+		for (int i = 0; i < qualifiedNameParts.length; i++) {
+			if (i == qualifiedNameParts.length - 1) {
+				theClass = owningPackage.createOwnedClass(qualifiedNameParts[i], false);
+			} else {
+				owningPackage = addPackage(owningPackage, qualifiedNameParts[i]);
+			}
+		}
+		return theClass;
+	}
+
+	private Package addPackage(Package nestingPackage, String name) {
+		Package thePackage = nestingPackage.getNestedPackage(name);
+		if (thePackage == null) {
+			thePackage = nestingPackage.createNestedPackage(name);
+		}
+		return thePackage;
+	}
+
+	public PackageableElement getPackagedElement(String qualifiedName, Package nestingPackage) {
+		for (PackageableElement pe : nestingPackage.getPackagedElements()) {
+			if (pe instanceof Package) {
+				PackageableElement anElement = getPackagedElement(qualifiedName, (Package) pe);
+				if (anElement != null) {
+					return anElement;
+				}
+			} else {
+				if (pe.getQualifiedName().toLowerCase().contentEquals(qualifiedName.toLowerCase())) {
+					return pe;
+				}
+				if (pe instanceof Class) {
+					Class c = (Class) pe;
+					for (Behavior b : c.getOwnedBehaviors()) {
+						if (b.getQualifiedName().toLowerCase().contentEquals(qualifiedName.toLowerCase())) {
+							return b;
+						}
+					}
+				}
+			}
+		}
+		return null;
+	}
 }

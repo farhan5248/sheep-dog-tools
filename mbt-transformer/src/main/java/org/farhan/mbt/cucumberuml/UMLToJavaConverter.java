@@ -174,8 +174,7 @@ public class UMLToJavaConverter extends ToCodeConverter {
 		String pathName = fullName;
 		pathName = pathName.replace("pst::" + target.SECOND_LAYER,
 				target.getDir(target.SECOND_LAYER).getAbsolutePath());
-		pathName = pathName.replace("pst::" + target.THIRD_LAYER,
-				target.getDir(target.THIRD_LAYER).getAbsolutePath());
+		pathName = pathName.replace("pst::" + target.THIRD_LAYER, target.getDir(target.THIRD_LAYER).getAbsolutePath());
 		pathName = pathName.replace("::", File.separator);
 		pathName = pathName + target.getFileExt(target.SECOND_LAYER);
 		return pathName;
@@ -198,7 +197,7 @@ public class UMLToJavaConverter extends ToCodeConverter {
 	}
 
 	private void convertParameters(Interaction anInteraction, MethodDeclaration aMethod) {
-		if (ParameterFactory.getParameter(anInteraction, "dataTable") != null) {
+		if (anInteraction.getOwnedParameter("dataTable", null) != null) {
 			aMethod.addParameter("DataTable", "dataTable");
 		} else {
 			for (String p : getParameters(anInteraction)) {

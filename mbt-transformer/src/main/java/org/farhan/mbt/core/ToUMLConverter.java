@@ -27,6 +27,7 @@ public abstract class ToUMLConverter {
 
 	protected abstract String getLayer();
 
+	// TODO change to getSource
 	protected abstract ArrayList<ConvertibleObject> getObjects(String layer);
 
 	protected void convertObjects() throws Exception {
@@ -49,6 +50,8 @@ public abstract class ToUMLConverter {
 	protected abstract void convertMessage(Interaction anInteraction, Object anObject) throws Exception;
 
 	protected void linkLayerFiles(String layer) throws Exception {
+		// TODO get packaged classes instead or use getObjects.
+		// Then for each object, get its interactions
 		ArrayList<Interaction> layerInteractions = PackageFactory.getPackagedInteractions(target.theSystem, layer);
 		for (Interaction i : layerInteractions) {
 			for (Message m : i.getMessages()) {

@@ -17,7 +17,4 @@ public class ParameterFactory {
 		return aParameter;
 	}
 
-	public static Parameter getParameter(Interaction interaction, String name) {
-		return interaction.getOwnedParameter(name, null);
-	}
 }

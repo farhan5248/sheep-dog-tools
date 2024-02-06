@@ -10,10 +10,11 @@ import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.mbt.uml.AnnotationFactory;
 import org.farhan.mbt.uml.ArgumentFactory;
-import org.farhan.mbt.uml.ClassFactory;
 import org.farhan.mbt.uml.InteractionFactory;
 import org.farhan.mbt.uml.MessageFactory;
 import org.farhan.mbt.uml.ParameterFactory;
+import org.farhan.mbt.uml.UMLClassWrapper;
+import org.farhan.mbt.uml.UMLProject;
 import org.farhan.validation.MBTEdgeValidator;
 import org.farhan.validation.MBTVertexValidator;
 
@@ -89,17 +90,20 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 		}
 	}
 
-	protected void createNextLayerInteractionMessagesFromEdgeMessage(Interaction targetInteraction, Message m) {
+	protected void createNextLayerInteractionMessagesFromEdgeMessage(Interaction nextLayerInteraction, Message m) {
 
-		createInputOutputMessage(targetInteraction, m, "set");
-		Class layer3Class = ClassFactory.getClass(target.theSystem, getNextLayerClassQualifiedName(targetInteraction));
-		MessageFactory.getMessage(targetInteraction, layer3Class, "execute");
+		createInputOutputMessage(nextLayerInteraction, m, "set");
+		String nextLayerName = getNextLayerClassQualifiedName(nextLayerInteraction);
+		UMLClassWrapper ucw = (UMLClassWrapper) target.createObject(nextLayerName);
+		Class nextLayerClass = ucw.theClass;
+		MessageFactory.getMessage(nextLayerInteraction, nextLayerClass, "execute");
 	}
 
 	private void createInputOutputMessage(Interaction nextLayerInteraction, Message m, String prefix) {
 
-		Class nextLayerClass = ClassFactory.getClass(target.theSystem,
-				getNextLayerClassQualifiedName(nextLayerInteraction));
+		String nextLayerName = getNextLayerClassQualifiedName(nextLayerInteraction);
+		UMLClassWrapper ucw = (UMLClassWrapper) target.createObject(nextLayerName);
+		Class nextLayerClass = ucw.theClass;
 		if (getFirstArgument(m).contentEquals("docString") || getFirstArgument(m).contentEquals("dataTable")) {
 
 			String methodName = prefix + "Attributes";
