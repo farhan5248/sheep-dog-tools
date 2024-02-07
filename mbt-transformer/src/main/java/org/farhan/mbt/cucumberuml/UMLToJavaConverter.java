@@ -28,29 +28,23 @@ import com.github.javaparser.ast.stmt.BlockStmt;
 
 public class UMLToJavaConverter extends ToCodeConverter {
 
-	private CucumberJavaWrapper cjw;
-
-	CucumberProject target;
+	private CucumberJavaWrapper tgtWrp;
+	private CucumberProject tgtPrj;
 
 	public UMLToJavaConverter(String layer, UMLProject source, CucumberProject target) {
 		this.layer = layer;
-		this.source = source;
-		this.target = target;
-	}
-
-	@Override
-	protected String getLayer() {
-		return layer;
+		this.srcPrj = source;
+		this.tgtPrj = target;
 	}
 
 	@Override
 	protected void selectObjects() throws Exception {
-		source.loadObjects(layer);
+		srcPrj.loadObjects(layer);
 	}
 
 	@Override
 	protected ArrayList<ConvertibleObject> getObjects(String layer) {
-		return source.getObjects(layer);
+		return srcPrj.getObjects(layer);
 	}
 
 	@Override
@@ -58,14 +52,14 @@ public class UMLToJavaConverter extends ToCodeConverter {
 		UMLClassWrapper ucw = (UMLClassWrapper) co;
 		Class c = (Class) ucw.get();
 		String path = convertObjectName(c.getQualifiedName());
-		cjw = (CucumberJavaWrapper) target.createObject(path);
-		CompilationUnit cu = (CompilationUnit) cjw.get();
-		cu.setStorage(cjw.getFile().toPath());
+		tgtWrp = (CucumberJavaWrapper) tgtPrj.createObject(path);
+		CompilationUnit cu = (CompilationUnit) tgtWrp.get();
+		cu.setStorage(tgtWrp.getFile().toPath());
 		cu.addType(new ClassOrInterfaceDeclaration());
 		ClassOrInterfaceDeclaration javaClassType = (ClassOrInterfaceDeclaration) cu.getType(0);
 		javaClassType.setName(c.getName());
 		javaClassType.setPublic(true);
-		if (isSecondLayer(c)) {
+		if (layer.contentEquals(srcPrj.SECOND_LAYER)) {
 			javaClassType.addExtendedType("TestSteps");
 		} else {
 			// TODO check that this works, maybe nearest package is better. Also this
@@ -81,28 +75,28 @@ public class UMLToJavaConverter extends ToCodeConverter {
 	protected void convertImports(ConvertibleObject co) throws Exception {
 		UMLClassWrapper ucw = (UMLClassWrapper) co;
 		Class c = (Class) ucw.get();
-		CompilationUnit cu = (CompilationUnit) cjw.get();
+		CompilationUnit cu = (CompilationUnit) tgtWrp.get();
 		for (ElementImport ei : c.getElementImports()) {
 			Class importedClass = (Class) ei.getImportedElement();
 			String qualifiedName = importedClass.getQualifiedName();
 			// If a third layer class is being referenced from the second layer, use its
 			// factory instead
-			if (isThirdLayer(importedClass)) {
+			if (importedClass.getQualifiedName().startsWith("pst::" + tgtPrj.THIRD_LAYER + "::")) {
 				String factoryName = getFactoryName(qualifiedName);
 				cu.addImport("org.farhan.common.objects." + factoryName);
-			} else if (isSecondLayer(importedClass)) {
-				String javaPath = convertObjectName(qualifiedName);
-				String packageName = convertJavaPathToJavaPackage(javaPath).replace("pst.", "");
-				cu.addImport(packageName);
+			} else if (importedClass.getQualifiedName().startsWith("pst::" + tgtPrj.SECOND_LAYER + "::")) {
+				String filePath = convertObjectName(qualifiedName);
+				String pkgPath = convertJavaPathToJavaPackage(filePath).replace("pst.", "");
+				cu.addImport(pkgPath);
 			}
 		}
-		if (isSecondLayer(c)) {
+		if (layer.contentEquals(srcPrj.SECOND_LAYER)) {
 			// TODO add these when the UML model is being created so that only the loop of
 			// imports is used
 			cu.addImport("io.cucumber.java.en.Given");
 			cu.addImport("io.cucumber.datatable.DataTable");
 			cu.addImport("org.farhan.common.stepdefs.TestSteps");
-		} else if (isThirdLayer(c)) {
+		} else if (layer.contentEquals(srcPrj.THIRD_LAYER)) {
 			cu.addImport("java.util.HashMap");
 			cu.addImport("io.cucumber.java.PendingException");
 			cu.addImport("org.farhan.common." + StringUtils.capitalize(c.getPackage().getName()));
@@ -110,28 +104,20 @@ public class UMLToJavaConverter extends ToCodeConverter {
 	}
 
 	@Override
-	protected void convertAttributes(ConvertibleObject co) throws Exception {
-
-	}
-
-	@Override
 	protected void convertBehaviours(ConvertibleObject co) throws Exception {
 		UMLClassWrapper ucw = (UMLClassWrapper) co;
 		Class c = (Class) ucw.get();
-		CompilationUnit cu = (CompilationUnit) cjw.get();
+		CompilationUnit cu = (CompilationUnit) tgtWrp.get();
 		for (Behavior aBehavior : c.getOwnedBehaviors()) {
-			if (aBehavior instanceof Interaction) {
-				Interaction anInteraction = (Interaction) aBehavior;
-				if (!anInteraction.getName().endsWith("Attributes")) {
-					Class aClass = (Class) anInteraction.getOwner();
-					MethodDeclaration aMethod = cu.getType(0).addMethod(anInteraction.getName(), Keyword.PUBLIC);
-					if (isSecondLayer(aClass)) {
-						convertAnnotation(anInteraction, aMethod);
-					}
-					convertParameters(anInteraction, aMethod);
-					convertComments(anInteraction, aMethod);
-					convertInteractionMessages(anInteraction, aMethod.createBody());
+			Interaction anInteraction = (Interaction) aBehavior;
+			if (!anInteraction.getName().endsWith("Attributes")) {
+				MethodDeclaration aMethod = cu.getType(0).addMethod(anInteraction.getName(), Keyword.PUBLIC);
+				if (layer.contentEquals(srcPrj.SECOND_LAYER)) {
+					convertAnnotation(anInteraction, aMethod);
 				}
+				convertParameters(anInteraction, aMethod);
+				convertComments(anInteraction, aMethod);
+				convertInteractionMessages(anInteraction, aMethod.createBody());
 			}
 		}
 	}
@@ -139,7 +125,7 @@ public class UMLToJavaConverter extends ToCodeConverter {
 	@Override
 	protected void convertInteractionMessages(Interaction anInteraction, Object stepList) throws Exception {
 		BlockStmt body = (BlockStmt) stepList;
-		if (isSecondLayer((Class) anInteraction.getOwner())) {
+		if (layer.contentEquals(srcPrj.SECOND_LAYER)) {
 			for (Message m : anInteraction.getMessages()) {
 				// TODO this needs to first set the factory and then keep appending methods to
 				// it. Don't create the factory in convertFromMessage again and again.
@@ -173,17 +159,17 @@ public class UMLToJavaConverter extends ToCodeConverter {
 	@Override
 	protected String convertObjectName(String fullName) {
 		String pathName = fullName;
-		pathName = pathName.replace("pst::" + target.SECOND_LAYER,
-				target.getDir(target.SECOND_LAYER).getAbsolutePath());
-		pathName = pathName.replace("pst::" + target.THIRD_LAYER, target.getDir(target.THIRD_LAYER).getAbsolutePath());
+		pathName = pathName.replace("pst::" + tgtPrj.SECOND_LAYER,
+				tgtPrj.getDir(tgtPrj.SECOND_LAYER).getAbsolutePath());
+		pathName = pathName.replace("pst::" + tgtPrj.THIRD_LAYER, tgtPrj.getDir(tgtPrj.THIRD_LAYER).getAbsolutePath());
 		pathName = pathName.replace("::", File.separator);
-		pathName = pathName + target.getFileExt(target.SECOND_LAYER);
+		pathName = pathName + tgtPrj.getFileExt(tgtPrj.SECOND_LAYER);
 		return pathName;
 	}
 
 	private String getFactoryName(String qualifiedName) {
 		String factoryName = qualifiedName;
-		factoryName = factoryName.replace("pst" + "::" + source.THIRD_LAYER + "::", "");
+		factoryName = factoryName.replace("pst" + "::" + srcPrj.THIRD_LAYER + "::", "");
 		factoryName = factoryName.split("::")[0];
 		factoryName = StringUtils.capitalize(factoryName) + "Factory";
 		return factoryName;
@@ -235,24 +221,8 @@ public class UMLToJavaConverter extends ToCodeConverter {
 		if (aClass.getOwnedComments().size() > 0) {
 			String comment = aClass.getOwnedComments().get(0).getBody();
 			if (!comment.isEmpty()) {
-				((CompilationUnit) cjw.get()).getType(0).setJavadocComment(comment);
+				((CompilationUnit) tgtWrp.get()).getType(0).setJavadocComment(comment);
 			}
-		}
-	}
-
-	private boolean isSecondLayer(Class layerClass) {
-		if (layerClass.getQualifiedName().startsWith("pst::" + target.SECOND_LAYER + "::")) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	private boolean isThirdLayer(Class layerClass) {
-		if (layerClass.getQualifiedName().startsWith("pst::" + target.THIRD_LAYER + "::")) {
-			return true;
-		} else {
-			return false;
 		}
 	}
 
@@ -263,12 +233,12 @@ public class UMLToJavaConverter extends ToCodeConverter {
 	private String convertJavaPathToJavaPackage(String path) {
 
 		String importName = path;
-		importName = importName.replace(target.getFileExt(layer), "");
-		// TODO if I keep org.farhan, then there's no need for these two lines.
-		importName = importName.replace(target.getDir(target.THIRD_LAYER).getAbsolutePath(),
-				"org.farhan." + target.THIRD_LAYER);
-		importName = importName.replace(target.getDir(target.SECOND_LAYER).getAbsolutePath(),
-				"org.farhan." + target.SECOND_LAYER);
+		importName = importName.replace(tgtPrj.getFileExt(layer), "");
+		// TODO Keep org.farhan, then there's no need for these two lines.
+		importName = importName.replace(tgtPrj.getDir(tgtPrj.THIRD_LAYER).getAbsolutePath(),
+				"org.farhan." + tgtPrj.THIRD_LAYER);
+		importName = importName.replace(tgtPrj.getDir(tgtPrj.SECOND_LAYER).getAbsolutePath(),
+				"org.farhan." + tgtPrj.SECOND_LAYER);
 		importName = importName.replace(File.separator, ".");
 		return importName;
 	}

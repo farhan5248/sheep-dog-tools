@@ -7,21 +7,21 @@ import org.farhan.mbt.uml.UMLProject;
 
 public abstract class ToCodeConverter {
 
-	protected UMLProject source;
 	protected String layer;
-	
+	protected UMLProject srcPrj;
+
 	protected abstract void selectObjects() throws Exception;
 
-	protected abstract String getLayer();
+	protected String getLayer() {
+		return layer;
+	}
 
-	// TODO change to getSource
 	protected abstract ArrayList<ConvertibleObject> getObjects(String layer);
 
 	protected void convertObjects() throws Exception {
 		for (ConvertibleObject co : getObjects(getLayer())) {
 			convertObject(co);
 			convertImports(co);
-			convertAttributes(co);
 			convertBehaviours(co);
 		}
 	}
@@ -29,8 +29,6 @@ public abstract class ToCodeConverter {
 	protected abstract void convertObject(ConvertibleObject co) throws Exception;
 
 	protected abstract void convertImports(ConvertibleObject co) throws Exception;
-
-	protected abstract void convertAttributes(ConvertibleObject co) throws Exception;
 
 	protected abstract void convertBehaviours(ConvertibleObject co) throws Exception;
 

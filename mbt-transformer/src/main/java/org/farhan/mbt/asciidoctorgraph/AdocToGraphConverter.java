@@ -21,22 +21,16 @@ import org.farhan.mbt.graph.MBTVertex;
 
 public class AdocToGraphConverter extends ToGraphConverter {
 
-	private JGraphTGraphWrapper jgw;
-
-	AsciiDoctorProject source;
+	private JGraphTGraphWrapper tgtWrp;
+	AsciiDoctorProject srcPrj;
 
 	public AdocToGraphConverter(String layer, AsciiDoctorProject source, JGraphTProject target) {
 		this.layer = layer;
-		this.source = source;
-		this.target = target;
+		this.srcPrj = source;
+		this.tgtPrj = target;
 	}
 
-	@Override
-	protected String getLayer() {
-		return layer;
-	}
-
-	private void createFromSection(MBTGraph<MBTVertex, MBTEdge> g, Section scenario) {
+	private void convertSections(MBTGraph<MBTVertex, MBTEdge> g, Section scenario) {
 
 		ArrayList<Section> steps = new ArrayList<Section>();
 		for (StructuralNode block : scenario.getBlocks()) {
@@ -49,86 +43,98 @@ public class AdocToGraphConverter extends ToGraphConverter {
 			String source = steps.get(i).getTitle();
 			String target = steps.get(i + 1).getTitle();
 			MBTEdge inputs = g.createEdgeWithVertices(source, target, scenario.getTitle(), null);
-			createFromTable(inputs, steps.get(i));
+			convertTableToGraph(inputs, steps.get(i));
 		}
 		MBTEdge inputs = g.createEdgeWithVertices(steps.getLast().getTitle(), g.getEndVertex().getLabel(),
 				scenario.getTitle(), null);
-		createFromTable(inputs, steps.getLast());
+		convertTableToGraph(inputs, steps.getLast());
 	}
 
-	private void createFromTable(MBTEdge inputs, Section step) {
+	private void convertTableToGraph(MBTEdge inputs, Section step) {
 
 		// loop through the blocks which are tables
 		for (StructuralNode block : step.getBlocks()) {
 			if (block instanceof Table) {
 				// TODO this inner graph will have an associate file, so instead of saving the
 				// graph in one massive file, make it a pointer to the actual file for now
-				JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) target.createObject(convertObjectName(step.getTitle()));
+				JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(step.getTitle()));
 				MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
 				Table table = (Table) block;
-				// get vertices from table
-				ArrayList<MBTVertex> vertices = new ArrayList<MBTVertex>();
-				// TODO validate the table has at least two rows
-				for (Row r : table.getHeader()) {
-					for (Cell c : r.getCells()) {
-						vertices.add(tgt.createVertex(c.getText()));
-					}
-				}
-				// go through each row and convert to edge
-				for (int i = 0; i < table.getBody().size(); i++) {
-
-					tgt.createEdgeWithInput(tgt.getStartVertex(), vertices.getFirst(), "", "");
-
-					Row row = table.getBody().get(i);
-					for (int j = 0; j < vertices.size() - 1; j++) {
-						String label = row.getCells().get(j).getText();
-						if (!label.isEmpty()) {
-							tgt.createEdgeWithInput(vertices.get(j), vertices.get(j + 1), label, label);
-						}
-					}
-					// TODO this assumes the last column isn't blank
-					tgt.createEdgeWithInput(vertices.getLast(), tgt.getEndVertex(),
-							row.getCells().getLast().getText(), row.getCells().getLast().getText());
-				}
+				ArrayList<MBTVertex> vertices = convertTableToVertices(table, tgt);
+				convertTableToEdges(table, tgt, vertices);
 				inputs.setValue(gtf.get());
 			}
 		}
 	}
 
+	private void convertTableToEdges(Table table, MBTGraph<MBTVertex, MBTEdge> tgt, ArrayList<MBTVertex> vertices) {
+		// go through each row and convert to edge
+		for (int i = 0; i < table.getBody().size(); i++) {
+
+			tgt.createEdgeWithInput(tgt.getStartVertex(), vertices.getFirst(), "", "");
+
+			Row row = table.getBody().get(i);
+			for (int j = 0; j < vertices.size() - 1; j++) {
+				String label = row.getCells().get(j).getText();
+				if (!label.isEmpty()) {
+					tgt.createEdgeWithInput(vertices.get(j), vertices.get(j + 1), label, label);
+				}
+			}
+			// TODO this assumes the last column isn't blank, check it
+			tgt.createEdgeWithInput(vertices.getLast(), tgt.getEndVertex(), row.getCells().getLast().getText(),
+					row.getCells().getLast().getText());
+		}
+	}
+
+	private ArrayList<MBTVertex> convertTableToVertices(Table table, MBTGraph<MBTVertex, MBTEdge> graph) {
+		ArrayList<MBTVertex> vertices = new ArrayList<MBTVertex>();
+		// TODO validate the table has at least two rows
+		for (Row r : table.getHeader()) {
+			for (Cell c : r.getCells()) {
+				vertices.add(graph.createVertex(c.getText()));
+			}
+		}
+		return vertices;
+	}
+
 	@Override
 	protected void selectObjects() throws Exception {
-		ArrayList<File> files = Utilities.recursivelyListFiles(source.getDir(source.FIRST_LAYER),
-				source.getFileExt(source.FIRST_LAYER));
-		source.getObjects(source.FIRST_LAYER).clear();
+		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(srcPrj.FIRST_LAYER),
+				srcPrj.getFileExt(srcPrj.FIRST_LAYER));
+		srcPrj.getObjects(srcPrj.FIRST_LAYER).clear();
 		for (File f : files) {
-			source.createObject(f.getAbsolutePath()).load();
+			srcPrj.createObject(f.getAbsolutePath()).load();
 		}
 	}
 
 	@Override
-	protected void convertObject(ConvertibleObject layerFile) throws Exception {
-		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) layerFile;
-		Document src = (Document) adaw.get();
-		jgw = (JGraphTGraphWrapper) target.createObject(convertObjectName(adaw.getFile().getName()));
-		MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) jgw.get();
-		for (StructuralNode block : src.getBlocks()) {
-			if (block instanceof Section) {
-				createFromSection(tgt, (Section) block);
-			}
-		}
-		// TODO the project should hide object creation and list management
-		target.getObjects(target.FIRST_LAYER).add(jgw);
+	protected void convertObject(ConvertibleObject object) throws Exception {
+		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) object;
+		tgtWrp = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(adaw.getFile().getName()));
+
 	}
 
 	@Override
 	protected String convertObjectName(String fullName) {
-		return target.getDir(target.FIRST_LAYER).getAbsolutePath() + File.separator
-				+ fullName.replace(source.getFileExt(source.FIRST_LAYER), "") + target.getFileExt(target.FIRST_LAYER);
+		return tgtPrj.getDir(tgtPrj.FIRST_LAYER).getAbsolutePath() + File.separator
+				+ fullName.replace(srcPrj.getFileExt(srcPrj.FIRST_LAYER), "") + tgtPrj.getFileExt(tgtPrj.FIRST_LAYER);
 	}
 
 	@Override
 	protected ArrayList<ConvertibleObject> getObjects(String layer) {
-		return source.getObjects(layer);
+		return srcPrj.getObjects(layer);
+	}
+
+	@Override
+	protected void convertElements(ConvertibleObject object) throws Exception {
+		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) object;
+		Document src = (Document) adaw.get();
+		MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
+		for (StructuralNode block : src.getBlocks()) {
+			if (block instanceof Section) {
+				convertSections(tgt, (Section) block);
+			}
+		}
 	}
 
 }

@@ -25,35 +25,30 @@ import org.farhan.mbt.uml.UMLProject;
 
 public class GraphToUMLConverter extends ToUMLGherkinConverter {
 
-	private UMLClassWrapper ucw;
-	private JGraphTProject source;
+	private UMLClassWrapper tgtWrp;
+	private JGraphTProject srcPrj;
 
 	public GraphToUMLConverter(String layer, JGraphTProject source, UMLProject target) {
 		this.layer = layer;
-		this.source = source;
-		this.target = target;
-	}
-
-	@Override
-	protected String getLayer() {
-		return layer;
+		this.srcPrj = source;
+		this.tgtPrj = target;
 	}
 
 	@Override
 	protected void selectObjects() throws Exception {
 
-		ArrayList<File> files = Utilities.recursivelyListFiles(source.getDir(source.FIRST_LAYER),
-				source.getFileExt(source.FIRST_LAYER));
-		source.getObjects(source.FIRST_LAYER).clear();
+		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(srcPrj.FIRST_LAYER),
+				srcPrj.getFileExt(srcPrj.FIRST_LAYER));
+		srcPrj.getObjects(srcPrj.FIRST_LAYER).clear();
 		for (File f : files) {
-			source.createObject(f.getAbsolutePath()).load();
+			srcPrj.createObject(f.getAbsolutePath()).load();
 		}
 	}
 
 	@Override
 	protected ArrayList<ConvertibleObject> getObjects(String layer) {
 		// TODO make a GraphDotFile
-		return source.getObjects(layer);
+		return srcPrj.getObjects(layer);
 	}
 
 	@Override
@@ -61,7 +56,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 
 		JGraphTGraphWrapper jgw = (JGraphTGraphWrapper) theObject;
 		String qualifiedName = convertObjectName(jgw.getFile().getAbsolutePath());
-		ucw = (UMLClassWrapper) target.createObject(qualifiedName);
+		tgtWrp = (UMLClassWrapper) tgtPrj.createObject(qualifiedName);
 	}
 
 	@Override
@@ -77,7 +72,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		for (int i = 0; i < paths.size(); i++) {
 			resetCurrentContainerObject();
 			// TODO figure out names for this later, use a counter for now
-			Interaction anInteraction = createInteraction((Class) ucw.get(), "Scenario " + String.valueOf(i));
+			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), "Scenario " + String.valueOf(i));
 			// TODO think about adding tags by deriving them from the edges
 			// convertTagsToParameters(anInteraction, s.getTags());
 			convertInteractionMessages(anInteraction, paths.get(i).getPath());
@@ -141,20 +136,15 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	protected void convertMessage(Interaction anInteraction, Object o) {
 		String s = (String) o;
 		String messageName = s;
-		Class owningClass = (Class) anInteraction.getOwner();
-		String secondLayerClassName = getSecondLayerClassName();
-		UMLClassWrapper ucwi = (UMLClassWrapper) target.createObject(secondLayerClassName);
-		Class nextLayerClass = (Class) ucwi.get();
-		ElementImport classImport = createElementImport(owningClass, nextLayerClass);
-		owningClass.createOwnedAttribute(nextLayerClass.getName(), nextLayerClass);
+		Class nextLayerClass = createClassImport(getSecondLayerClassName(), anInteraction);
 		getMessage(anInteraction, nextLayerClass, messageName);
 	}
 
 	@Override
 	protected String convertObjectName(String fullName) {
 		String qualifiedName = fullName.trim();
-		qualifiedName = qualifiedName.replace(source.getFileExt(source.FIRST_LAYER), "");
-		qualifiedName = qualifiedName.replace(source.getDir(source.FIRST_LAYER).getAbsolutePath(), "");
+		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(srcPrj.FIRST_LAYER), "");
+		qualifiedName = qualifiedName.replace(srcPrj.getDir(srcPrj.FIRST_LAYER).getAbsolutePath(), "");
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::specs" + qualifiedName;
 		return qualifiedName;
@@ -176,7 +166,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	private String getSecondLayerClassName() {
 		String secondLayerClassName = "";
 		secondLayerClassName = convertNextLayerClassName(getFSMName() + getFSMState() + "Steps");
-		secondLayerClassName = "pst::" + source.SECOND_LAYER + "::" + Utilities.toLowerCamelCase(getFSMName()) + "::"
+		secondLayerClassName = "pst::" + srcPrj.SECOND_LAYER + "::" + Utilities.toLowerCamelCase(getFSMName()) + "::"
 				+ secondLayerClassName;
 		return secondLayerClassName;
 	}
@@ -237,7 +227,6 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 			}
 		}
 		return new ArrayList<MBTPath>();
-
 	}
 
 }

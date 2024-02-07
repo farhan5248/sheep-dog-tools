@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Behavior;
-import org.eclipse.uml2.uml.BehavioredClassifier;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.ElementImport;
 import org.eclipse.uml2.uml.Interaction;
@@ -25,7 +24,7 @@ import org.farhan.mbt.uml.UMLProject;
 public abstract class ToUMLConverter {
 
 	protected String layer;
-	protected UMLProject target;
+	protected UMLProject tgtPrj;
 	private StateMachine theMachine;
 
 	public ToUMLConverter() {
@@ -52,17 +51,18 @@ public abstract class ToUMLConverter {
 
 	protected abstract void convertMessage(Interaction anInteraction, Object anObject) throws Exception;
 
-	protected abstract void convertObject(ConvertibleObject layerFile) throws Exception;
+	protected abstract void convertObject(ConvertibleObject object) throws Exception;
 
 	protected abstract String convertObjectName(String fullName);
 
-	protected abstract String getLayer();
+	protected String getLayer() {
+		return layer;
+	}
 
 	protected abstract String getNextLayerClassQualifiedName(Interaction targetInteraction);
 
 	protected abstract ArrayList<String> getNextLayerInteractionNamesfromMessage(Message m);
 
-	// TODO change to getSource
 	protected abstract ArrayList<ConvertibleObject> getObjects(String layer);
 
 	protected abstract void selectObjects() throws Exception;
@@ -122,39 +122,39 @@ public abstract class ToUMLConverter {
 	}
 
 	protected Message getMessage(Interaction anInteraction, Class nextLayerClass, String messageName) {
+
 		Class owningClass = (Class) anInteraction.getOwner();
-
-		// TODO turn each of these blocks into 2 methods
-		// 1
-		Property thisProperty = owningClass.getOwnedAttribute("this", owningClass);
-		Lifeline thisLifeline = anInteraction.createLifeline(thisProperty.getName());
-		thisLifeline.setRepresents(thisProperty);
-
-		Property targetProperty = owningClass.getOwnedAttribute(nextLayerClass.getName(), nextLayerClass);
-		Lifeline targetLifeline = anInteraction.createLifeline(targetProperty.getName());
-		targetLifeline.setRepresents(targetProperty);
+		Lifeline srcLifeline = createLifeline(owningClass, anInteraction, "this");
+		Lifeline tgtLifeline = createLifeline(nextLayerClass, anInteraction, nextLayerClass.getName());
 
 		Message aMessage = anInteraction.createMessage(messageName);
-		MessageOccurrenceSpecification mosSrc;
-		MessageOccurrenceSpecification mosDst;
-
-		// 2
-		mosSrc = UMLFactory.eINSTANCE.createMessageOccurrenceSpecification();
-		mosSrc.setName("SendEvent");
-		mosSrc.setEnclosingInteraction(anInteraction);
-		mosSrc.setMessage(aMessage);
-		mosSrc.setCovered(thisLifeline);
-
-		mosDst = UMLFactory.eINSTANCE.createMessageOccurrenceSpecification();
-		mosDst.setName("ReceiveEvent");
-		mosDst.setEnclosingInteraction(anInteraction);
-		mosDst.setMessage(aMessage);
-		mosDst.setCovered(targetLifeline);
+		MessageOccurrenceSpecification mosSrc = createMessageOccurrenceSpecification(anInteraction, aMessage,
+				srcLifeline, "SendEvent");
+		MessageOccurrenceSpecification mosDst = createMessageOccurrenceSpecification(anInteraction, aMessage,
+				tgtLifeline, "ReceiveEvent");
 
 		aMessage.setSendEvent(mosSrc);
 		aMessage.setReceiveEvent(mosDst);
 
 		return aMessage;
+	}
+
+	private MessageOccurrenceSpecification createMessageOccurrenceSpecification(Interaction anInteraction,
+			Message aMessage, Lifeline lifeline, String event) {
+		MessageOccurrenceSpecification mosSrc = UMLFactory.eINSTANCE.createMessageOccurrenceSpecification();
+		mosSrc.setName(event);
+		mosSrc.setEnclosingInteraction(anInteraction);
+		mosSrc.setMessage(aMessage);
+		mosSrc.setCovered(lifeline);
+		return mosSrc;
+	}
+
+	private Lifeline createLifeline(Class nextLayerClass, Interaction anInteraction, String name) {
+		Class owningClass = (Class) anInteraction.getOwner();
+		Property property = owningClass.getOwnedAttribute(name, nextLayerClass);
+		Lifeline lifeline = anInteraction.createLifeline(property.getName());
+		lifeline.setRepresents(property);
+		return lifeline;
 	}
 
 	protected String getMethodName(String name, boolean keepNumbers) {
@@ -175,14 +175,11 @@ public abstract class ToUMLConverter {
 
 	protected Class getNextLayerClassFromMessage(Message m) {
 		MessageOccurrenceSpecification targetEvent = (MessageOccurrenceSpecification) m.getReceiveEvent();
-		Lifeline targetLifeline = targetEvent.getCovered();
-		Property targetProperty = (Property) targetLifeline.getRepresents();
-		Class targetClass = (Class) targetProperty.getType();
-		return targetClass;
+		return (Class) targetEvent.getCovered().getRepresents().getType();
 	}
 
 	protected void linkLayerFiles(String layer) throws Exception {
-		ArrayList<ConvertibleObject> objects = target.getObjects(layer);
+		ArrayList<ConvertibleObject> objects = tgtPrj.getObjects(layer);
 		for (ConvertibleObject co : objects) {
 			UMLClassWrapper ucw = (UMLClassWrapper) co;
 			for (Behavior b : ((Class) ucw.get()).getOwnedBehaviors()) {
@@ -248,7 +245,7 @@ public abstract class ToUMLConverter {
 		return ls;
 	}
 
-	protected Parameter getParameter(Interaction anInteraction, String paramName, String defaultValue,
+	protected Parameter createParameter(Interaction anInteraction, String paramName, String defaultValue,
 			String direction) {
 		Parameter aParameter = anInteraction.getOwnedParameter(paramName, null);
 		if (aParameter == null) {
@@ -282,4 +279,12 @@ public abstract class ToUMLConverter {
 		return a;
 	}
 
+	protected Class createClassImport(String nextLayerClassName, Interaction nextLayerInteraction) {
+		UMLClassWrapper ucw = (UMLClassWrapper) tgtPrj.createObject(nextLayerClassName);
+		Class nextLayerClass = (Class) ucw.get();
+		Class owningClass = (Class) nextLayerInteraction.getOwner();
+		createElementImport(owningClass, nextLayerClass);
+		owningClass.createOwnedAttribute(nextLayerClass.getName(), nextLayerClass);
+		return nextLayerClass;
+	}
 }

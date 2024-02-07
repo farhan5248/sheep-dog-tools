@@ -8,7 +8,6 @@ import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.validation.MBTEdgeValidator;
 import org.farhan.validation.MBTVertexValidator;
 
@@ -65,7 +64,7 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 	protected String getNextLayerClassQualifiedName(Interaction targetInteraction) {
 
 		Class interactionOwningClass = (Class) targetInteraction.getOwner();
-		return interactionOwningClass.getQualifiedName().replace(target.SECOND_LAYER, target.THIRD_LAYER)
+		return interactionOwningClass.getQualifiedName().replace(tgtPrj.SECOND_LAYER, tgtPrj.THIRD_LAYER)
 				.replace("Steps", "");
 	}
 
@@ -80,30 +79,22 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 	protected void addNextLayerInteractionParameters(Interaction targetInteraction, Message m) {
 		for (ValueSpecification vs : m.getArguments()) {
 			LiteralString ls = (LiteralString) vs;
-			getParameter(targetInteraction, ls.getName().replace(" ", ""), "", "in");
+			createParameter(targetInteraction, ls.getName().replace(" ", ""), "", "in");
 		}
 	}
 
 	protected void createNextLayerInteractionMessagesFromEdgeMessage(Interaction nextLayerInteraction, Message m) {
 
-		Class owningClass = (Class) nextLayerInteraction.getOwner();
 		createInputOutputMessage(nextLayerInteraction, m, "set");
-		String nextLayerName = getNextLayerClassQualifiedName(nextLayerInteraction);
-		UMLClassWrapper ucw = (UMLClassWrapper) target.createObject(nextLayerName);
-		Class nextLayerClass = (Class) ucw.get();
-		createElementImport((Class) nextLayerInteraction.getOwner(), nextLayerClass);
-		owningClass.createOwnedAttribute(nextLayerClass.getName(), nextLayerClass);
+		Class nextLayerClass = createClassImport(getNextLayerClassQualifiedName(nextLayerInteraction),
+				nextLayerInteraction);
 		getMessage(nextLayerInteraction, nextLayerClass, "execute");
 	}
 
 	private void createInputOutputMessage(Interaction nextLayerInteraction, Message m, String prefix) {
 
-		Class owningClass = (Class) nextLayerInteraction.getOwner();
-		String nextLayerName = getNextLayerClassQualifiedName(nextLayerInteraction);
-		UMLClassWrapper ucw = (UMLClassWrapper) target.createObject(nextLayerName);
-		Class nextLayerClass = (Class) ucw.get();
-		createElementImport(owningClass, nextLayerClass);
-		owningClass.createOwnedAttribute(nextLayerClass.getName(), nextLayerClass);
+		Class nextLayerClass = createClassImport(getNextLayerClassQualifiedName(nextLayerInteraction),
+				nextLayerInteraction);
 		if (getFirstArgument(m).contentEquals("docString") || getFirstArgument(m).contentEquals("dataTable")) {
 
 			String methodName = prefix + "Attributes";
@@ -138,8 +129,6 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 			}
 			String methodName = getMethodName(prefix + StringUtils.capitalize(attributeName), true);
 			getMessage(nextLayerInteraction, nextLayerClass, methodName);
-			// ArgumentFactory.getArgument(nextLayerMessage, variableName,
-			// Utilities.toLowerCamelCase(variableName), true);
 		}
 	}
 

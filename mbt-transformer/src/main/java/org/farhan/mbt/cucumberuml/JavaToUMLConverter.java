@@ -11,7 +11,6 @@ import org.eclipse.uml2.uml.ElementImport;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
-import org.eclipse.uml2.uml.Namespace;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToUMLConverter;
@@ -36,24 +35,19 @@ import com.github.javaparser.ast.stmt.Statement;
 
 public class JavaToUMLConverter extends ToUMLConverter {
 
-	private UMLClassWrapper ucw;
-	private CucumberProject source;
+	private UMLClassWrapper tgtWrp;
+	private CucumberProject srcPrj;
 
 	public JavaToUMLConverter(String layer, CucumberProject source, UMLProject target) {
 		this.layer = layer;
-		this.source = source;
-		this.target = target;
-	}
-
-	@Override
-	protected String getLayer() {
-		return layer;
+		this.srcPrj = source;
+		this.tgtPrj = target;
 	}
 
 	@Override
 	protected void convertObjects() throws Exception {
 		super.convertObjects();
-		if (source.SECOND_LAYER.contentEquals(getLayer())) {
+		if (srcPrj.SECOND_LAYER.contentEquals(getLayer())) {
 			linkLayerFiles(getLayer());
 		}
 	}
@@ -61,10 +55,10 @@ public class JavaToUMLConverter extends ToUMLConverter {
 	@Override
 	final protected void selectObjects() throws Exception {
 		ArrayList<ConvertibleObject> prevLayerClasses = null;
-		if (source.SECOND_LAYER.contentEquals(getLayer())) {
-			prevLayerClasses = target.getObjects(source.FIRST_LAYER);
-		} else if (source.THIRD_LAYER.contentEquals(layer)) {
-			prevLayerClasses = target.getObjects(source.SECOND_LAYER);
+		if (srcPrj.SECOND_LAYER.contentEquals(getLayer())) {
+			prevLayerClasses = tgtPrj.getObjects(srcPrj.FIRST_LAYER);
+		} else if (srcPrj.THIRD_LAYER.contentEquals(layer)) {
+			prevLayerClasses = tgtPrj.getObjects(srcPrj.SECOND_LAYER);
 		}
 		// Instead of reading a file twice, make a short list to save time reading each
 		// file
@@ -76,18 +70,18 @@ public class JavaToUMLConverter extends ToUMLConverter {
 				layerClassShortList.put(importedClass.getQualifiedName(), importedClass);
 			}
 		}
-		ArrayList<File> files = Utilities.recursivelyListFiles(source.getDir(layer), source.getFileExt(layer));
+		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(layer), srcPrj.getFileExt(layer));
 		for (File f : files) {
-			source.createObject(f.getAbsolutePath()).load();
-			if (!isFileSelected(source.getObjects(layer).getLast(), layerClassShortList)) {
-				source.getObjects(layer).removeLast();
+			srcPrj.createObject(f.getAbsolutePath()).load();
+			if (!isFileSelected(srcPrj.getObjects(layer).getLast(), layerClassShortList)) {
+				srcPrj.getObjects(layer).removeLast();
 			}
 		}
 	}
 
 	@Override
 	protected ArrayList<ConvertibleObject> getObjects(String layer) {
-		return source.getObjects(layer);
+		return srcPrj.getObjects(layer);
 	}
 
 	private boolean isFileSelected(ConvertibleObject convertibleFile, HashMap<String, Class> layerClassShortList) {
@@ -100,14 +94,14 @@ public class JavaToUMLConverter extends ToUMLConverter {
 	protected void convertObject(ConvertibleObject layerFile) throws Exception {
 		CucumberJavaWrapper jcw = (CucumberJavaWrapper) layerFile;
 		String qualifiedName = convertObjectName(jcw.getFile().getAbsolutePath());
-		ucw = (UMLClassWrapper) target.createObject(qualifiedName);
+		tgtWrp = (UMLClassWrapper) tgtPrj.createObject(qualifiedName);
 	}
 
 	@Override
 	protected void convertImports(ConvertibleObject layerFile) throws Exception {
 		CucumberJavaWrapper jcw = (CucumberJavaWrapper) layerFile;
 		CompilationUnit cu = (CompilationUnit) jcw.get();
-		Class c = (Class) ucw.get();
+		Class c = (Class) tgtWrp.get();
 		if (cu.getTypes().size() > 0) {
 			// Wrap this in CommentFactory.getComment. getComment should do nothing if the
 			// content is empty
@@ -121,7 +115,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 					// Don't include the factory import because it's a detail of dependency
 					// injection is implemented
 					String importedClassName = convertImportNameToQualifiedName(i.getNameAsString());
-					UMLClassWrapper ucwi = (UMLClassWrapper) target.createObject(importedClassName);
+					UMLClassWrapper ucwi = (UMLClassWrapper) tgtPrj.createObject(importedClassName);
 					Class ci = (Class) ucwi.get();
 					createElementImport(c, ci);
 				}
@@ -134,10 +128,8 @@ public class JavaToUMLConverter extends ToUMLConverter {
 		CucumberJavaWrapper jcw = (CucumberJavaWrapper) layerFile;
 		for (MethodDeclaration md : ((CompilationUnit) jcw.get()).getType(0).getMethods()) {
 			// TODO determine if this interaction is empty
-			Interaction anInteraction = getInteraction((Class) ucw.get(), md.getNameAsString(), true);
+			Interaction anInteraction = getInteraction((Class) tgtWrp.get(), md.getNameAsString(), true);
 
-			// Wrap this in CommentFactory.getComment. getComment should do nothing if the
-			// content is empty
 			String body;
 			if (md.getJavadocComment().isPresent()) {
 				body = md.getJavadocComment().get().getContent().replace(" * ", "");
@@ -151,7 +143,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 			}
 			for (Parameter p : md.getParameters()) {
 				// TODO this should probably empty out the parameters if any exist
-				getParameter(anInteraction, p.getNameAsString(), "", "in");
+				createParameter(anInteraction, p.getNameAsString(), "", "in");
 			}
 			convertInteractionMessages(anInteraction, md.getBody().get().getStatements());
 		}
@@ -170,30 +162,16 @@ public class JavaToUMLConverter extends ToUMLConverter {
 		}
 	}
 
-	// TODO this is a duplicate method from UMLToCucumberOtherLayerConverter.
-	private boolean isSecondLayer(Class layerClass) {
-		if (layerClass.getQualifiedName().contains("::" + source.SECOND_LAYER + "::")) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	@Override
 	protected void convertMessage(Interaction anInteraction, Object o) {
 		MethodCallExpr mce = (MethodCallExpr) o;
-		Class owningClass = (Class) anInteraction.getOwner();
 		// TODO change this, don't store how the DI is achieved in the UML model
 		// TODO When creating the ElementImport, for now I'm assuming the class is
 		// directly under the app package name and not anywhere else. In the future make
 		// the search smarter and look through all the classes in the package. That will
 		// also assume that the class name is unique
-		if (isSecondLayer(owningClass)) {
-			String qualifiedName = getObjectQualifiedNameFromFactory(mce);
-			UMLClassWrapper ucw = (UMLClassWrapper) target.createObject(qualifiedName);
-			Class nextLayerClass = (Class) ucw.get();
-			createElementImport(owningClass, nextLayerClass);
-			owningClass.createOwnedAttribute(nextLayerClass.getName(), nextLayerClass);
+		if (layer.contentEquals(srcPrj.SECOND_LAYER)) {
+			Class nextLayerClass = createClassImport(getObjectQualifiedNameFromFactory(mce), anInteraction);
 			Message theMessage = getMessage(anInteraction, nextLayerClass, mce.getName().asString());
 			mce.getArguments();
 			for (Expression e : mce.getArguments()) {
@@ -228,8 +206,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 		// get the object name from the argument of the factory class
 		String objectName = mce.getChildNodes().getFirst().getChildNodes().getLast().toString().replace("\"", "");
 		// make the qualified name
-		String qualifiedName = "pst" + "::" + target.THIRD_LAYER + "::" + appName + "::"
-				+ objectName;
+		String qualifiedName = "pst" + "::" + tgtPrj.THIRD_LAYER + "::" + appName + "::" + objectName;
 		return qualifiedName;
 	}
 
@@ -237,9 +214,9 @@ public class JavaToUMLConverter extends ToUMLConverter {
 	protected String convertObjectName(String fullName) {
 		String qualifiedName = fullName.trim();
 		qualifiedName = qualifiedName.replace(".java", "");
-		qualifiedName = qualifiedName.replace(source.getDir(source.SECOND_LAYER).getAbsolutePath(),
-				source.SECOND_LAYER);
-		qualifiedName = qualifiedName.replace(source.getDir(source.THIRD_LAYER).getAbsolutePath(), source.THIRD_LAYER);
+		qualifiedName = qualifiedName.replace(srcPrj.getDir(srcPrj.SECOND_LAYER).getAbsolutePath(),
+				srcPrj.SECOND_LAYER);
+		qualifiedName = qualifiedName.replace(srcPrj.getDir(srcPrj.THIRD_LAYER).getAbsolutePath(), srcPrj.THIRD_LAYER);
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::" + qualifiedName;
 		return qualifiedName;
@@ -263,7 +240,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 	protected String getNextLayerClassQualifiedName(Interaction targetInteraction) {
 
 		Class interactionOwner = (Class) targetInteraction.getOwner();
-		return interactionOwner.getQualifiedName().replace(target.SECOND_LAYER, target.THIRD_LAYER).replace("Steps",
+		return interactionOwner.getQualifiedName().replace(tgtPrj.SECOND_LAYER, tgtPrj.THIRD_LAYER).replace("Steps",
 				"");
 	}
 
@@ -308,14 +285,13 @@ public class JavaToUMLConverter extends ToUMLConverter {
 	protected void addNextLayerInteractionParameters(Interaction targetInteraction, Message m) {
 
 		ValueSpecification vs;
-
 		vs = createArgument(m, "keyMap", "", false);
 		if (vs != null) {
-			getParameter(targetInteraction, "keyMap", "", "in");
+			createParameter(targetInteraction, "keyMap", "", "in");
 		}
 		vs = createArgument(m, "contents", "", false);
 		if (vs != null) {
-			getParameter(targetInteraction, "contents", "", "in");
+			createParameter(targetInteraction, "contents", "", "in");
 		}
 	}
 

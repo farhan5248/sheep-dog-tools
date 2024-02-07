@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.uml2.uml.Class;
-import org.eclipse.uml2.uml.Element;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
@@ -32,18 +31,13 @@ import org.farhan.mbt.uml.UMLProject;
 
 public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 
-	private UMLClassWrapper ucw;
-	private CucumberProject source;
+	private UMLClassWrapper tgtWrp;
+	private CucumberProject srcPrj;
 
 	public FeatureToUMLConverter(String layer, CucumberProject source, UMLProject target) {
 		this.layer = layer;
-		this.source = source;
-		this.target = target;
-	}
-
-	@Override
-	protected String getLayer() {
-		return layer;
+		this.srcPrj = source;
+		this.tgtPrj = target;
 	}
 
 	@Override
@@ -55,18 +49,18 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	@Override
 	protected void selectObjects() throws Exception {
 
-		ArrayList<File> files = Utilities.recursivelyListFiles(source.getDir(layer), source.getFileExt(layer));
+		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(layer), srcPrj.getFileExt(layer));
 		for (File f : files) {
-			source.createObject(f.getAbsolutePath()).load();
-			if (!isFileSelected(source.getObjects(layer).getLast(), source.tags)) {
-				source.getObjects(layer).removeLast();
+			srcPrj.createObject(f.getAbsolutePath()).load();
+			if (!isFileSelected(srcPrj.getObjects(layer).getLast(), srcPrj.tags)) {
+				srcPrj.getObjects(layer).removeLast();
 			}
 		}
 	}
 
 	@Override
 	protected ArrayList<ConvertibleObject> getObjects(String layer) {
-		return source.getObjects(layer);
+		return srcPrj.getObjects(layer);
 	}
 
 	@Override
@@ -77,8 +71,9 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 		CucumberFeatureWrapper cfw = (CucumberFeatureWrapper) theObject;
 		String qualifiedName = convertObjectName(cfw.getFile().getAbsolutePath());
 
-		ucw = (UMLClassWrapper) target.createObject(qualifiedName);
-		((Class) ucw.get()).createOwnedComment().setBody(convertStatementsToString(((Feature) cfw.get()).getStatements()));
+		tgtWrp = (UMLClassWrapper) tgtPrj.createObject(qualifiedName);
+		((Class) tgtWrp.get()).createOwnedComment()
+				.setBody(convertStatementsToString(((Feature) cfw.get()).getStatements()));
 	}
 
 	@Override
@@ -96,7 +91,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 				continue;
 			}
 			resetCurrentContainerObject();
-			Interaction anInteraction = createInteraction((Class) ucw.get(), as);
+			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), as);
 			if (as instanceof Scenario) {
 				Scenario s = (Scenario) as;
 				convertTagsToParameters(anInteraction, s.getTags());
@@ -140,8 +135,8 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	@Override
 	protected String convertObjectName(String fullName) {
 		String qualifiedName = fullName.trim();
-		qualifiedName = qualifiedName.replace(source.getFileExt(source.FIRST_LAYER), "");
-		qualifiedName = qualifiedName.replace(source.getDir(source.FIRST_LAYER).getAbsolutePath(), "");
+		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(srcPrj.FIRST_LAYER), "");
+		qualifiedName = qualifiedName.replace(srcPrj.getDir(srcPrj.FIRST_LAYER).getAbsolutePath(), "");
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::specs" + qualifiedName;
 		return qualifiedName;
@@ -173,12 +168,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	}
 
 	private Message convertStepToMessage(Interaction anInteraction, Step step) {
-		Class owningClass = (Class) anInteraction.getOwner();
-		String nextLayerName = getNextLayerClassName();
-		UMLClassWrapper ucwi = (UMLClassWrapper) target.createObject(nextLayerName);
-		Class nextLayerClass = (Class) ucwi.get();
-		createElementImport(owningClass, nextLayerClass);
-		owningClass.createOwnedAttribute(nextLayerClass.getName(), nextLayerClass);
+		Class nextLayerClass = createClassImport(getNextLayerClassName(), anInteraction);
 		Message theMessage = getMessage(anInteraction, nextLayerClass, step.getName());
 		return theMessage;
 	}
@@ -186,7 +176,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	private String getNextLayerClassName() {
 		String secondLayerClassName = "";
 		secondLayerClassName = convertNextLayerClassName(getFSMName() + getFSMState() + "Steps");
-		secondLayerClassName = "pst::" + source.SECOND_LAYER + "::" + Utilities.toLowerCamelCase(getFSMName()) + "::"
+		secondLayerClassName = "pst::" + srcPrj.SECOND_LAYER + "::" + Utilities.toLowerCamelCase(getFSMName()) + "::"
 				+ secondLayerClassName;
 		return secondLayerClassName;
 	}
@@ -237,7 +227,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 
 	private void convertTagsToParameters(Interaction anInteraction, EList<Tag> tags) {
 		for (Tag a : tags) {
-			getParameter(anInteraction, a.getName().replace("@", ""), "", "in");
+			createParameter(anInteraction, a.getName().replace("@", ""), "", "in");
 		}
 	}
 
