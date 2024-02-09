@@ -7,7 +7,7 @@ import io.cucumber.java.en.Given;
 public class MbtTransformerBlahDataTablePageJavaFileSteps {
 
     @Given("^The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/BlahDataTablePage.java file will be as follows$")
-    public void TheClaimProjectBlahDataTablePageStepsJavaFileIsAsFollows(String docString) {
-        MbtTransformerFactory.get("BlahDataTablePageFile").assertInputOutputs("Content", docString);
+    public void TheClaimProjectBlahDataTablePageJavaFileIsAsFollows(String docString) {
+        MbtTransformerFactory.get("MbtTransformerBlahDataTablePageJavaFile").assertInputOutputs("Content", docString);
     }
 }

@@ -9,8 +9,6 @@ import org.farhan.mbt.uml.UMLProject;
 
 public class ConvertUMLToCucumber extends ConvertToCode {
 
-	// TODO move these into the converters themselves, think about how to read the
-	// UML file before writing the next layer to it
 	UMLProject source;
 	CucumberProject target;
 

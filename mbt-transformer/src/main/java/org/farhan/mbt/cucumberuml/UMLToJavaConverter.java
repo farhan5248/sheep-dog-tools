@@ -59,12 +59,9 @@ public class UMLToJavaConverter extends ToCodeConverter {
 		ClassOrInterfaceDeclaration javaClassType = (ClassOrInterfaceDeclaration) cu.getType(0);
 		javaClassType.setName(c.getName());
 		javaClassType.setPublic(true);
-		if (layer.contentEquals(srcPrj.SECOND_LAYER)) {
-			javaClassType.addExtendedType("TestSteps");
-		} else {
-			// TODO check that this works, maybe nearest package is better. Also this
-			// assumes there's no other middle packages so make a method that gets that.
-			// Also update convertImports
+		if (!layer.contentEquals(srcPrj.SECOND_LAYER)) {
+			// TODO This assumes that the parent package is the application. This won't work
+			// if there are several child packages
 			javaClassType.addExtendedType(StringUtils.capitalize(c.getPackage().getName()));
 		}
 		cu.setPackageDeclaration(convertJavaPathToJavaPackage(removeJavaClassFromJavaPath(path)));
@@ -127,8 +124,6 @@ public class UMLToJavaConverter extends ToCodeConverter {
 		BlockStmt body = (BlockStmt) stepList;
 		if (layer.contentEquals(srcPrj.SECOND_LAYER)) {
 			for (Message m : anInteraction.getMessages()) {
-				// TODO this needs to first set the factory and then keep appending methods to
-				// it. Don't create the factory in convertFromMessage again and again.
 				convertMessage(m, body);
 			}
 		} else {
@@ -234,7 +229,6 @@ public class UMLToJavaConverter extends ToCodeConverter {
 
 		String importName = path;
 		importName = importName.replace(tgtPrj.getFileExt(layer), "");
-		// TODO Keep org.farhan, then there's no need for these two lines.
 		importName = importName.replace(tgtPrj.getDir(tgtPrj.THIRD_LAYER).getAbsolutePath(),
 				"org.farhan." + tgtPrj.THIRD_LAYER);
 		importName = importName.replace(tgtPrj.getDir(tgtPrj.SECOND_LAYER).getAbsolutePath(),

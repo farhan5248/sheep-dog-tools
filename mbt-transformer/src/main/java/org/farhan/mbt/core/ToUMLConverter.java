@@ -46,7 +46,6 @@ public abstract class ToUMLConverter {
 
 	protected abstract void convertImports(ConvertibleObject layerClass) throws Exception;
 
-	// TODO change Interaction to Object
 	protected abstract void convertInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception;
 
 	protected abstract void convertMessage(Interaction anInteraction, Object anObject) throws Exception;
@@ -102,13 +101,13 @@ public abstract class ToUMLConverter {
 		return theMachine.currentState;
 	}
 
-	protected Interaction getInteraction(Class theClass, String interactionName, boolean add) {
-		return getInteraction(theClass, interactionName, add, "");
+	protected Interaction createInteraction(Class theClass, String interactionName) {
+		return createInteraction(theClass, interactionName, "");
 	}
 
-	protected Interaction getInteraction(Class theClass, String interactionName, boolean add, String annotationName) {
+	protected Interaction createInteraction(Class theClass, String interactionName, String annotationName) {
 		Interaction anInteraction = (Interaction) theClass.getOwnedBehavior(interactionName);
-		if (anInteraction == null && add) {
+		if (anInteraction == null) {
 			anInteraction = UMLFactory.eINSTANCE.createInteraction();
 			anInteraction.setName(interactionName);
 			theClass.setClassifierBehavior(anInteraction);

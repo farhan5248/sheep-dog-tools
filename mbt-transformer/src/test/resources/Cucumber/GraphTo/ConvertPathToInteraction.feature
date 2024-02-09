@@ -83,7 +83,7 @@ Feature: Convert Path To Interaction
   Scenario: Convert paths to interactions
     And The target/uml/pst.uml file, Class Interactions section will be as follows
       | Class Name     | Interaction Name |
-      | specs::Process | Scenario 0       |
-      | specs::Process | Scenario 1       |
+      | specs::Process | Path 0           |
+      | specs::Process | Path 1           |
 
 

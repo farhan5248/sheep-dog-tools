@@ -81,8 +81,6 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 
 	public MBTEdge createEdgeWithVertices(String sourceLabel, String targetLabel, String edgeLabel, Object edgeInput) {
 		MBTGraph<MBTVertex, MBTEdge> g = getThisGraph();
-		// TODO create method to create vertex if it doesn't exist, otherwise this
-		// object won't be added and the edge will point to an orphaned vertex
 		MBTVertex source = g.createVertex(sourceLabel);
 		MBTVertex target = g.createVertex(targetLabel);
 		return createEdgeWithInput(source, target, edgeLabel, edgeInput);

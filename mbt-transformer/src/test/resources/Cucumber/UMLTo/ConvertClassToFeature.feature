@@ -85,13 +85,13 @@ Feature: Convert Class To Feature
       """
       Feature: Process
       
-        Scenario: Scenario 0
+        Scenario: Path 0
       
               * The Search application, Home page is empty
                 | ins |
                 |   5 |
       
-        Scenario: Scenario 1
+        Scenario: Path 1
       
               * The Search application, Home page is empty
                 | ins |

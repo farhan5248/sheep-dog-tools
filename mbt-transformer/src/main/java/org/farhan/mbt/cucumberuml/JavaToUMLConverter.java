@@ -127,8 +127,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 	protected void convertBehaviours(ConvertibleObject layerFile) throws Exception {
 		CucumberJavaWrapper jcw = (CucumberJavaWrapper) layerFile;
 		for (MethodDeclaration md : ((CompilationUnit) jcw.get()).getType(0).getMethods()) {
-			// TODO determine if this interaction is empty
-			Interaction anInteraction = getInteraction((Class) tgtWrp.get(), md.getNameAsString(), true);
+			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), md.getNameAsString());
 
 			String body;
 			if (md.getJavadocComment().isPresent()) {
@@ -136,13 +135,15 @@ public class JavaToUMLConverter extends ToUMLConverter {
 			} else {
 				body = "";
 			}
-			// TODO this should replace the existing comment, not add more
-			anInteraction.createOwnedComment().setBody(body);
+			if (anInteraction.getOwnedComments().size() > 0) {
+				anInteraction.getOwnedComments().getFirst().setBody(body);
+			} else {
+				anInteraction.createOwnedComment().setBody(body);
+			}
 			if (md.getAnnotations().size() > 0) {
 				createAnnotation(anInteraction, md.getAnnotation(0).toString());
 			}
 			for (Parameter p : md.getParameters()) {
-				// TODO this should probably empty out the parameters if any exist
 				createParameter(anInteraction, p.getNameAsString(), "", "in");
 			}
 			convertInteractionMessages(anInteraction, md.getBody().get().getStatements());
@@ -151,8 +152,14 @@ public class JavaToUMLConverter extends ToUMLConverter {
 
 	@Override
 	protected void convertInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception {
-		// TODO if there's already a body, don't add the java code to it, just do
-		// nothing
+
+		// Instead of appending new statements to an existing method body, remove them.
+		// Why would there be existing statements? That's because the UML model could
+		// have been reverse engineered and now we're refreshing it from updated feature
+		// files
+		if (!anInteraction.getOwnedBehaviors().isEmpty()) {
+			anInteraction.getOwnedBehaviors().clear();
+		}
 		for (Object o : steps) {
 			Statement s = (Statement) o;
 			if (s.getChildNodes().get(0) instanceof MethodCallExpr) {
@@ -165,7 +172,6 @@ public class JavaToUMLConverter extends ToUMLConverter {
 	@Override
 	protected void convertMessage(Interaction anInteraction, Object o) {
 		MethodCallExpr mce = (MethodCallExpr) o;
-		// TODO change this, don't store how the DI is achieved in the UML model
 		// TODO When creating the ElementImport, for now I'm assuming the class is
 		// directly under the app package name and not anywhere else. In the future make
 		// the search smarter and look through all the classes in the package. That will
@@ -187,7 +193,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 				} else if (e instanceof MethodCallExpr) {
 					arg = e.asMethodCallExpr().toString();
 				} else {
-					// TODO throw an exception to find new expressions
+					// Purposely do this to throw an exception to find new expressions
 					arg = e.asNameExpr().getNameAsString();
 				}
 				// when reading java source, the name of the arguments isn't known so I use the
@@ -223,13 +229,8 @@ public class JavaToUMLConverter extends ToUMLConverter {
 	}
 
 	protected String convertImportNameToQualifiedName(String importName) {
-		// TODO preserve org.farhan
 		String qualifiedName = importName.replace(".", "::");
-		if (qualifiedName.startsWith("org::farhan::")) {
-			return qualifiedName.replace("org::farhan::", "pst::");
-		} else {
-			return "pst::" + qualifiedName;
-		}
+		return "pst::" + qualifiedName;
 	}
 
 	@Override
@@ -297,7 +298,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 
 	@Override
 	protected Interaction addNextLayerInteraction(String methodName, Message m) {
-		return getInteraction(getNextLayerClassFromMessage(m), methodName, true);
+		return createInteraction(getNextLayerClassFromMessage(m), methodName);
 	}
 
 }

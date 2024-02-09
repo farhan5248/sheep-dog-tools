@@ -55,7 +55,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		// loop through the blocks which are tables
 		for (StructuralNode block : step.getBlocks()) {
 			if (block instanceof Table) {
-				// TODO this inner graph will have an associate file, so instead of saving the
+				// TODO this inner graph will have an associated file, so instead of saving the
 				// graph in one massive file, make it a pointer to the actual file for now
 				JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(step.getTitle()));
 				MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();

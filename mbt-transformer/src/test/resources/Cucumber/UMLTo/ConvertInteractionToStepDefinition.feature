@@ -1,7 +1,7 @@
 Feature: Convert Interaction To Step Definition
 
   Background: Create a feature file
-    Given The mbt-transformer plugin, src/test/resources/Cucumber/dept/process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/Cucumber/Process.feature file is as follows
       """
       Feature: This is a test feature
       
@@ -38,7 +38,7 @@ Feature: Convert Interaction To Step Definition
       import io.cucumber.datatable.DataTable;
       import org.farhan.common.stepdefs.TestSteps;
       
-      public class BlahDataTablePageSteps extends TestSteps {
+      public class BlahDataTablePageSteps {
       
           @Given("^The blah application, DataTable page, Top section will be as follows$")
           public void theBlahApplicationDataTablePageTopSectionWillBeAsFollows(DataTable dataTable) {
@@ -58,7 +58,7 @@ Feature: Convert Interaction To Step Definition
       import io.cucumber.datatable.DataTable;
       import org.farhan.common.stepdefs.TestSteps;
       
-      public class BlahDocStringPageSteps extends TestSteps {
+      public class BlahDocStringPageSteps {
       
           @Given("^The blah application, DocString page is as follows$")
           public void theBlahApplicationDocStringPageIsAsFollows(String docString) {
@@ -78,7 +78,7 @@ Feature: Convert Interaction To Step Definition
       import io.cucumber.datatable.DataTable;
       import org.farhan.common.stepdefs.TestSteps;
       
-      public class BlahObjectPageSteps extends TestSteps {
+      public class BlahObjectPageSteps {
       
           @Given("^The blah application, Object page is empty$")
           public void theBlahApplicationObjectPageIsEmpty() {
@@ -98,7 +98,7 @@ Feature: Convert Interaction To Step Definition
       import io.cucumber.datatable.DataTable;
       import org.farhan.common.stepdefs.TestSteps;
       
-      public class Blah2JsonRequestSteps extends TestSteps {
+      public class Blah2JsonRequestSteps {
       
           @Given("^The blah2 service, Json request is executed with$")
           public void theBlah2ServiceJsonRequestIsExecutedWith(DataTable dataTable) {

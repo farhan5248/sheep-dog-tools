@@ -30,11 +30,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	@Override
 	public void load() {
 		if (theFile.exists()) {
-			// TODO delete these commented out lines if this all works
-			// new SourceRoot(CucumberProject.getSecondLayerDir().toPath());
 			SourceRoot javaSrcDir = new SourceRoot(theFile.getParentFile().toPath());
-			// javaSrcDir.parse(convertJavaPathToJavaPackage(theFile.getAbsolutePath()),
-			// theFile.getName());
 			javaClass = javaSrcDir.parse("", theFile.getName());
 		}
 	}

@@ -1,7 +1,7 @@
 Feature: Convert Scenario Outline To Interaction
 
   Background: Create a feature file
-    Given The mbt-transformer plugin, src/test/resources/Cucumber/dept/process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/Cucumber/Process.feature file is as follows
       """
       Feature: This is a test feature
       
@@ -27,21 +27,21 @@ Feature: Convert Scenario Outline To Interaction
   Scenario: Convert title
     And The target/uml/pst.uml file, Interaction Annotations section will be as follows
       | Interaction Name             | Annotation Name |
-      | specs::dept::process::Submit | Examples 1      |
-      | specs::dept::process::Submit | Examples 2      |
+      | specs::Process::Submit | Examples 1      |
+      | specs::Process::Submit | Examples 2      |
 
   Scenario: Convert tag
   # Need to test Scenario Outline Example tags
     And The target/uml/pst.uml file, Interaction Parameters section will be as follows
       | Interaction Name             | Parameter Name |
-      | specs::dept::process::Submit | tag1           |
+      | specs::Process::Submit | tag1           |
 
   Scenario: Convert example data
   # Scenario Example data applied to data table for MBT, not needed for code generation      
     And The target/uml/pst.uml file, Interaction Annotations section will be as follows
       | Interaction Name             | Annotation Name | Annotation Detail |
-      | specs::dept::process::Submit | Examples 1      | 0 -> h3\|h4\|   |
-      | specs::dept::process::Submit | Examples 1      | 1 -> v31\|v41\| |
-      | specs::dept::process::Submit | Examples 2      | 0 -> h3\|h4\|   |
-      | specs::dept::process::Submit | Examples 2      | 1 -> v32\|v42\| |
+      | specs::Process::Submit | Examples 1      | 0 -> h3\|h4\|   |
+      | specs::Process::Submit | Examples 1      | 1 -> v31\|v41\| |
+      | specs::Process::Submit | Examples 2      | 0 -> h3\|h4\|   |
+      | specs::Process::Submit | Examples 2      | 1 -> v32\|v42\| |
 

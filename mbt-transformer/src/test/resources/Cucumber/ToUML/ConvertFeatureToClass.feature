@@ -1,7 +1,7 @@
 Feature: Convert Feature To Class
 
   Background: Create a feature file
-    Given The mbt-transformer plugin, src/test/resources/Cucumber/dept/process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/Cucumber/Process.feature file is as follows
       """
       @tag1 @tag2 @tag3
       Feature: This is a test feature
@@ -17,7 +17,7 @@ Feature: Convert Feature To Class
   Scenario: Create a class
     And The target/uml/pst.uml file, Class section will be as follows
       | Class Name           | 
-      | specs::dept::process | 
+      | specs::Process | 
     And The target/uml/pst.uml file, Class Comments section will be as follows
       | Class Name           | Comment                                                             |
-      | specs::dept::process | This is the description\nThis is the second line of the description |
+      | specs::Process | This is the description\nThis is the second line of the description |

@@ -47,7 +47,6 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 
 	@Override
 	protected ArrayList<ConvertibleObject> getObjects(String layer) {
-		// TODO make a GraphDotFile
 		return srcPrj.getObjects(layer);
 	}
 
@@ -72,7 +71,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		for (int i = 0; i < paths.size(); i++) {
 			resetCurrentContainerObject();
 			// TODO figure out names for this later, use a counter for now
-			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), "Scenario " + String.valueOf(i));
+			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), "Path " + String.valueOf(i));
 			// TODO think about adding tags by deriving them from the edges
 			// convertTagsToParameters(anInteraction, s.getTags());
 			convertInteractionMessages(anInteraction, paths.get(i).getPath());
@@ -169,11 +168,6 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		secondLayerClassName = "pst::" + srcPrj.SECOND_LAYER + "::" + Utilities.toLowerCamelCase(getFSMName()) + "::"
 				+ secondLayerClassName;
 		return secondLayerClassName;
-	}
-
-	private Interaction createInteraction(Class layerClass, String pathName) {
-		Interaction anInteraction = getInteraction(layerClass, pathName, true);
-		return anInteraction;
 	}
 
 	private static ArrayList<MBTPath> getAllPaths(MBTGraph<MBTVertex, MBTEdge> g, MBTVertex vertex) {

@@ -2,7 +2,7 @@ package org.farhan.mbt.core;
 
 import java.util.ArrayList;
 
-public abstract class ConvertToGraph {
+public abstract class ConvertToGraph implements MojoGoal {
 
 	protected abstract ArrayList<ToGraphConverter> getLayerConverters();
 

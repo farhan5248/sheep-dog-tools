@@ -66,8 +66,6 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	@Override
 	protected void convertObject(ConvertibleObject theObject) throws Exception {
 
-		// TODO source and target files should be stored in this class, there's no need
-		// to pass them around.
 		CucumberFeatureWrapper cfw = (CucumberFeatureWrapper) theObject;
 		String qualifiedName = convertObjectName(cfw.getFile().getAbsolutePath());
 
@@ -136,6 +134,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	protected String convertObjectName(String fullName) {
 		String qualifiedName = fullName.trim();
 		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(srcPrj.FIRST_LAYER), "");
+		// TODO this is removing org.farhan so change this and update all the tests so that the package name is not droppedF
 		qualifiedName = qualifiedName.replace(srcPrj.getDir(srcPrj.FIRST_LAYER).getAbsolutePath(), "");
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::specs" + qualifiedName;
@@ -232,7 +231,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	}
 
 	private Interaction createInteraction(Class layerClass, AbstractScenario as) {
-		Interaction anInteraction = getInteraction(layerClass, as.getName(), true);
+		Interaction anInteraction = createInteraction(layerClass, as.getName());
 		anInteraction.setName(anInteraction.getName());
 		anInteraction.createOwnedComment().setBody(convertStatementsToString(as.getStatements()));
 		return anInteraction;

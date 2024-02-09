@@ -2,7 +2,7 @@ package org.farhan.mbt.core;
 
 import java.util.ArrayList;
 
-public abstract class ConvertToUML {
+public abstract class ConvertToUML implements MojoGoal {
 
 	protected abstract ArrayList<ToUMLConverter> getLayerConverters();
 

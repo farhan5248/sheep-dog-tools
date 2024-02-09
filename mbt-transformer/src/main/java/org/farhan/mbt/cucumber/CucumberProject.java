@@ -65,20 +65,6 @@ public class CucumberProject extends ConvertibleProject {
 		return layerObjects;
 	}
 
-
-	// TODO delete after moving reads to select layer objects
-	private void loadObjects(String layer, ArrayList<ConvertibleObject> layerFiles) {
-		layerFiles.clear();
-		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(layer), getFileExt(layer));
-		for (File f : files) {
-			try {
-				createObject(f.getAbsolutePath()).load();
-			} catch (Exception e) {
-				Utilities.getStackTraceAsString(e);
-			}
-		}
-	}
-
 	@Override
 	public void save() throws Exception {
 		for (ConvertibleObject cf : firstLayerObjects) {

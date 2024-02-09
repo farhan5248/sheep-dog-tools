@@ -2,7 +2,7 @@ Feature: Debug
 
   @debug
   Scenario: Generate files
-    Given The mbt-transformer plugin, src/test/resources/Cucumber/dept/process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/Cucumber/Process.feature file is as follows
       """
       Feature: Convert Feature
       
@@ -15,7 +15,7 @@ Feature: Debug
           Then The mbt-transformer plugin, target/uml/pst.uml file will be present
           And The target/uml/pst.uml file, Class section will be as follows
             | Class Name           | 
-            | specs::dept::process | 
+            | specs::Process | 
       
       """
     When The mbt-transformer plugin, cucumber-to-uml goal is executed with

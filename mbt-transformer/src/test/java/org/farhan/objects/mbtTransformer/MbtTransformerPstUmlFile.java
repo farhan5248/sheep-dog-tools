@@ -7,7 +7,8 @@ import org.farhan.common.objects.MbtTransformer;
 public class MbtTransformerPstUmlFile extends MbtTransformer {
 
 	public void setPath(String path) {
-		// TODO this should be an attribute like Present etc so don't store this here
+		// TODO this should be an attribute like Present etc so don't store this here,
+		// then update the MbtTranformerFactory
 		keyValue.put("path", path);
 	}
 

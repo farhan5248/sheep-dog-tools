@@ -1,7 +1,7 @@
 Feature: Convert Background To Interaction
 
   Background: Create a feature file
-    Given The mbt-transformer plugin, src/test/resources/Cucumber/dept/process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/Cucumber/Process.feature file is as follows
       """
       Feature: This is a test feature
       
@@ -21,5 +21,5 @@ Feature: Convert Background To Interaction
   Scenario: Create background steps
     And The target/uml/pst.uml file, Interaction Messages section will be as follows
       | Interaction Name             | Message                                      |
-      | specs::dept::process::Submit | The blah1 application, Object1 page is valid |
-      | specs::dept::process::Submit | The blah2 application, Object2 page is empty |
+      | specs::Process::Submit | The blah1 application, Object1 page is valid |
+      | specs::Process::Submit | The blah2 application, Object2 page is empty |

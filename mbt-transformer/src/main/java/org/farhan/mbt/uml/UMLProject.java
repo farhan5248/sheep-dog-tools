@@ -29,7 +29,6 @@ public class UMLProject extends ConvertibleProject {
 	private ArrayList<ConvertibleObject> thirdLayerObjects;
 	private ArrayList<ConvertibleObject> fourthLayerObjects;
 
-	// TODO remove theSystem from all the UML Factory methods
 	private Model theSystem;
 
 	public UMLProject() {
@@ -54,8 +53,6 @@ public class UMLProject extends ConvertibleProject {
 		return aFile;
 	}
 
-	// TODO keep this temporarily for testing. Remove it after figuring out how to
-	// avoid it.
 	public void load() throws Exception {
 		URI uri = URI.createFileURI(getDir("").getAbsolutePath()).appendSegment(theSystem.getName())
 				.appendFileExtension(UMLResource.FILE_EXTENSION);
@@ -130,21 +127,6 @@ public class UMLProject extends ConvertibleProject {
 			break;
 		}
 		return layerObjects;
-	}
-
-	// TODO after all Factory classes are deleted, check if this is needed for
-	// testing classes otherwise delete it
-	public ConvertibleObject getObject(String name) {
-		if (name.contains("::" + FIRST_LAYER + "::")) {
-			find(name, firstLayerObjects);
-		} else if (name.contains("::" + SECOND_LAYER + "::")) {
-			find(name, secondLayerObjects);
-		} else if (name.contains("::" + THIRD_LAYER + "::")) {
-			find(name, thirdLayerObjects);
-		} else {
-			find(name, fourthLayerObjects);
-		}
-		return null;
 	}
 
 	private ConvertibleObject find(String name, ArrayList<ConvertibleObject> objects) {

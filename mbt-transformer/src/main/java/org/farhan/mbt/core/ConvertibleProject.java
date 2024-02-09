@@ -5,15 +5,13 @@ import java.util.ArrayList;
 
 public abstract class ConvertibleProject {
 
-	// TODO make getters and setters
+	// TODO this should be passed in from the mojo so remove this in the future.
 	public static String tags = "";
 	public static String baseDir = "";
 
 	public static final String FIRST_LAYER = "specs";
 	public static final String SECOND_LAYER = "stepdefs";
 	public static final String THIRD_LAYER = "objects";
-	// TODO mabye delete this?
-	public static final String FOURTH_LAYER = "common";
 
 	public abstract File getDir(String layer);
 

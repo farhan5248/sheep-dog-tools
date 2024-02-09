@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import org.farhan.common.objects.MbtTransformer;
 
-public class MbtTransformerBlahDocStringsPageStepsJavaFile extends MbtTransformer {
+public class MbtTransformerBlahDocStringPageStepsJavaFile extends MbtTransformer {
 	public void setContent(HashMap<String, String> keyMap) {
 		setContent(keyMap.get("Content"));
 	}

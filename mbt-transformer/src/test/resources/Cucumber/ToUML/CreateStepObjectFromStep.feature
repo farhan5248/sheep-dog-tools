@@ -2,7 +2,7 @@ Feature: Create Step Object From Step
 
   # TODO read in layer 3 java files and specify how they're merged
   Background: Create a feature file
-    Given The mbt-transformer plugin, src/test/resources/Cucumber/dept/process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/Cucumber/Process.feature file is as follows
       """
       Feature: This is a test feature
       

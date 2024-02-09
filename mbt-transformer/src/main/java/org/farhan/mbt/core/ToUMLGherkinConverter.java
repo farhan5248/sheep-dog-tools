@@ -70,9 +70,9 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 
 	@Override
 	protected Interaction addNextLayerInteraction(String methodName, Message m) {
-		// TODO this should be moved to the java code generation
+		// TODO this should be moved to the java code forward and reverse engineering
 		String annotation = "@Given(\"^" + m.getName() + "$\")";
-		return getInteraction(getNextLayerClassFromMessage(m), methodName, true, annotation);
+		return createInteraction(getNextLayerClassFromMessage(m), methodName, annotation);
 	}
 
 	@Override
@@ -107,7 +107,6 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 						.getFirst().getValue();
 				createAnnotation(vs, "keyMap", "0", annotationDetailValue);
 
-				// TODO wrap up these chunks in private methods
 				String detailsName = MBTVertexValidator.getDetailsName(m.getName());
 				String detailsType = StringUtils.capitalize(MBTVertexValidator.getDetailsType(m.getName()));
 				String section = detailsName + detailsType;

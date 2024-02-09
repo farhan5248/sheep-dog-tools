@@ -41,7 +41,7 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		CucumberStandaloneSetup.doSetup();
 		Resource res = new ResourceSetImpl().getResource(uri, true);
 		theFeature = (Feature) res.getContents().get(0);
-		// TODO validate it or throw an exception
+		// TODO validate it using the xtext api and throw the exception if it's invalid
 	}
 
 	@Override

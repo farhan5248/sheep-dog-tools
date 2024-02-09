@@ -8,6 +8,6 @@ public class MbtTransformerUmlToCucumberGoalSteps {
 
     @Given("^The mbt-transformer plugin, uml-to-cucumber goal is executed$")
 	public void theMbtTransformerPluginUmlToCucumberGoalIsExecuted() {
-		MbtTransformerFactory.get("UmlToCucumberGoal").transition();
+		MbtTransformerFactory.get("MbtTransformerUmlToCucumberGoal").transition();
     }
 }

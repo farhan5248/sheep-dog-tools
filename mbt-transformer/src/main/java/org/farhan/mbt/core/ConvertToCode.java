@@ -2,7 +2,7 @@ package org.farhan.mbt.core;
 
 import java.util.ArrayList;
 
-public abstract class ConvertToCode {
+public abstract class ConvertToCode implements MojoGoal{
 
 	protected abstract ArrayList<ToCodeConverter> getLayerConverters();
 
