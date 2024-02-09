@@ -110,7 +110,7 @@ public class UMLToJavaConverter extends ToCodeConverter {
 		CompilationUnit cu = (CompilationUnit) tgtWrp.get();
 		for (Behavior aBehavior : c.getOwnedBehaviors()) {
 			Interaction anInteraction = (Interaction) aBehavior;
-			if (!anInteraction.getName().endsWith("Attributes")) {
+			if (!anInteraction.getName().endsWith("InputOutputs")) {
 				MethodDeclaration aMethod = cu.getType(0).addMethod(anInteraction.getName(), Keyword.PUBLIC);
 				if (layer.contentEquals(srcPrj.SECOND_LAYER)) {
 					convertAnnotation(anInteraction, aMethod);

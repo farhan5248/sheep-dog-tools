@@ -42,7 +42,7 @@ Feature: Convert Interaction To Step Definition
       
           @Given("^The blah application, DataTable page, Top section will be as follows$")
           public void theBlahApplicationDataTablePageTopSectionWillBeAsFollows(DataTable dataTable) {
-              BlahFactory.get("BlahDataTablePage").assertAttributes(dataTable, "TopSection");
+              BlahFactory.get("BlahDataTablePage").assertInputOutputs(dataTable, "TopSection");
           }
       }
       
@@ -62,7 +62,7 @@ Feature: Convert Interaction To Step Definition
       
           @Given("^The blah application, DocString page is as follows$")
           public void theBlahApplicationDocStringPageIsAsFollows(String docString) {
-              BlahFactory.get("BlahDocStringPage").setAttributes(docString);
+              BlahFactory.get("BlahDocStringPage").setInputOutputs(docString);
           }
       }
       
@@ -102,17 +102,15 @@ Feature: Convert Interaction To Step Definition
       
           @Given("^The blah2 service, Json request is executed with$")
           public void theBlah2ServiceJsonRequestIsExecutedWith(DataTable dataTable) {
-              Blah2Factory.get("Blah2JsonRequest").setAttributes(dataTable, "");
-              Blah2Factory.get("Blah2JsonRequest").execute();
+              Blah2Factory.get("Blah2JsonRequest").setInputOutputs(dataTable, "");
+              Blah2Factory.get("Blah2JsonRequest").transition();
           }
       
           @Given("^The blah2 service, Json request is invalid$")
           public void theBlah2ServiceJsonRequestIsInvalid() {
               Blah2Factory.get("Blah2JsonRequest").setIsInvalid();
-              Blah2Factory.get("Blah2JsonRequest").execute();
+              Blah2Factory.get("Blah2JsonRequest").transition();
           }
       }
       
-      """    
-
-            
+      """

@@ -59,21 +59,31 @@ Feature: Create Step Definition From Step
       | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsExecutedWith                 | dataTable      |
       | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsInvalid                      | has none       |
 
-  Scenario: Create new interaction messages
+  Scenario Outline: Create new interaction messages
     And The target/uml/pst.uml file, Interaction Messages section will be as follows
+      | Interaction Name   | Message   |
+      | <Interaction Name> | <Message> |
+
+	Examples: blahObjectPageSteps
       | Interaction Name                                                                                 | Message          |
       | stepdefs::blah::blahObjectPageSteps::theBlahApplicationObjectPageIsEmpty                         | setIsEmpty       |
-      | stepdefs::blah::blahDataTablePageSteps::theBlahApplicationDataTablePageTopSectionWillBeAsFollows | assertAttributes |
-      | stepdefs::blah::blahDocStringPageSteps::theBlahApplicationDocStringPageWillBeAsFollows           | assertAttributes |
-      | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsExecutedWith                 | execute          |
-      | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsExecutedWith                 | setAttributes    |
-      | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsInvalid                      | execute          |
+
+	Examples: blahDataTablePageSteps
+      | Interaction Name                                                                                 | Message            |
+      | stepdefs::blah::blahDataTablePageSteps::theBlahApplicationDataTablePageTopSectionWillBeAsFollows | assertInputOutputs |
+      | stepdefs::blah::blahDocStringPageSteps::theBlahApplicationDocStringPageWillBeAsFollows           | assertInputOutputs |
+
+	Examples: blah2JsonRequestSteps
+      | Interaction Name                                                                                 | Message          |
+      | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsExecutedWith                 | transition       |
+      | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsExecutedWith                 | setInputOutputs  |
+      | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsInvalid                      | transition       |
       | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsInvalid                      | setIsInvalid     |
 
   Scenario: Create new interaction message annotations
     TODO Need to verify table headers as passed through to create layer 3 objects
 
     And The target/uml/pst.uml file, Interaction Messages section will be as follows
-      | Interaction Name                                                                                 | Message          | Argument Name | Annotation Detail |
-      | stepdefs::blah::blahDataTablePageSteps::theBlahApplicationDataTablePageTopSectionWillBeAsFollows | assertAttributes | keyMap        | 0 -> h1 \|h2 \|   |
-      | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsExecutedWith                 | setAttributes    | keyMap        | 0 -> i1 \|i2 \|   |
+      | Interaction Name                                                                                 | Message            | Argument Name | Annotation Detail |
+      | stepdefs::blah::blahDataTablePageSteps::theBlahApplicationDataTablePageTopSectionWillBeAsFollows | assertInputOutputs | keyMap        | 0 -> h1 \|h2 \|   |
+      | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsExecutedWith                 | setInputOutputs    | keyMap        | 0 -> i1 \|i2 \|   |

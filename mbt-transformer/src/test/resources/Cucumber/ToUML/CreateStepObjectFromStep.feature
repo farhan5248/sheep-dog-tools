@@ -46,7 +46,7 @@ Feature: Create Step Object From Step
       | objects::blah::blahDocStringPage | setContent         |
       | objects::blah2::blah2JsonRequest | seti1              |
       | objects::blah2::blah2JsonRequest | seti2              |
-      | objects::blah2::blah2JsonRequest | execute            |
+      | objects::blah2::blah2JsonRequest | transition         |
       | objects::blah2::blah2JsonRequest | setIsInvalid       |
 
   Scenario: Create new interaction parameters
@@ -58,5 +58,5 @@ Feature: Create Step Object From Step
       | objects::blah::blahDocStringPage::setContent         | contents       |
       | objects::blah2::blah2JsonRequest::seti1              | keyMap         |
       | objects::blah2::blah2JsonRequest::seti2              | keyMap         |
-      | objects::blah2::blah2JsonRequest::execute            | has none       |
+      | objects::blah2::blah2JsonRequest::transition         | has none       |
       | objects::blah2::blah2JsonRequest::setIsInvalid       | has none       |

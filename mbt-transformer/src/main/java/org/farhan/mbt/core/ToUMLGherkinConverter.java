@@ -88,7 +88,7 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 		createInputOutputMessage(nextLayerInteraction, m, "set");
 		Class nextLayerClass = createClassImport(getNextLayerClassQualifiedName(nextLayerInteraction),
 				nextLayerInteraction);
-		getMessage(nextLayerInteraction, nextLayerClass, "execute");
+		getMessage(nextLayerInteraction, nextLayerClass, "transition");
 	}
 
 	private void createInputOutputMessage(Interaction nextLayerInteraction, Message m, String prefix) {
@@ -97,7 +97,7 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 				nextLayerInteraction);
 		if (getFirstArgument(m).contentEquals("docString") || getFirstArgument(m).contentEquals("dataTable")) {
 
-			String methodName = prefix + "Attributes";
+			String methodName = prefix + "InputOutputs";
 			Message nextLayerMessage = getMessage(nextLayerInteraction, nextLayerClass, methodName);
 			if (getFirstArgument(m).contentEquals("docString")) {
 				createArgument(nextLayerMessage, "contents", "docString", true);

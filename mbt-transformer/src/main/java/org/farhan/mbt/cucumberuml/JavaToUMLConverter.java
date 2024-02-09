@@ -248,8 +248,8 @@ public class JavaToUMLConverter extends ToUMLConverter {
 	protected ArrayList<String> getNextLayerInteractionNamesfromMessage(Message m) {
 		ArrayList<String> newTitles = new ArrayList<String>();
 		if (m.getName().startsWith("set") || m.getName().startsWith("assert")) {
-			if (m.getName().endsWith("Attributes")) {
-				String prefix = m.getName().replace("Attributes", "");
+			if (m.getName().endsWith("InputOutputs")) {
+				String prefix = m.getName().replace("InputOutputs", "");
 
 				ValueSpecification vs;
 				vs = createArgument(m, "section", "", false);

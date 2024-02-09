@@ -67,7 +67,7 @@ Feature: Convert Interaction To Step Object
       }
       
       """
-      
+
   Scenario: Non existing Java class creation with vertice details
     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/BlahObjectPage.java file will be as follows
       """
@@ -105,7 +105,7 @@ Feature: Convert Interaction To Step Object
               throw new PendingException();
           }
       
-          public void execute() {
+          public void transition() {
               throw new PendingException();
           }
       
