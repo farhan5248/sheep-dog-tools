@@ -28,9 +28,9 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Clean the project
-      working-directory: ./mbt-transformer
+      working-directory: ./cucumberxtexteditor.parent
       run: mvn clean
     - name: Package the project
-      working-directory: ./mbt-transformer
+      working-directory: ./cucumberxtexteditor.parent
       run: mvn package
 
