@@ -31,6 +31,6 @@ jobs:
         cache: maven
     - name: Build and install Cucumber Xtext Editor
       working-directory: ./cucumberxtexteditor.parent
-      run: mvn --batch-mode deploy
+      run: mvn clean deploy
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
