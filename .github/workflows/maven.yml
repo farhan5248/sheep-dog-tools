@@ -27,10 +27,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Clean the project
+    - name: Build and install Cucumber Xtext Editor
       working-directory: ./cucumberxtexteditor.parent
-      run: mvn clean
-    - name: Package the project
-      working-directory: ./cucumberxtexteditor.parent
-      run: mvn package
+      run: mvn clean install
 
