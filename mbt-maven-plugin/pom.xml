@@ -22,6 +22,12 @@
 		<repository>
 			<id>github</id>
 			<url>https://maven.pkg.github.com/farhan5248/claims-adjudication-ai</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 	</distributionManagement>
 
