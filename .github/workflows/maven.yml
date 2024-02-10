@@ -29,5 +29,6 @@ jobs:
         cache: maven
     - name: Clean the project
       working-directory: ./mbt-transformer
-      run: mvn clean --file pom.xml
+      run: mvn clean
+      run: mvn package
 
