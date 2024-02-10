@@ -13,19 +13,6 @@
 		<tag>HEAD</tag>
 	</scm>
 
-	<repositories>
-		<repository>
-			<id>github</id>
-			<url>https://maven.pkg.github.com/farhan5248/claims-adjudication-ai</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
 	<distributionManagement>
 		<repository>
 			<id>github</id>
@@ -53,7 +40,7 @@
 		<systemProperties></systemProperties>
 		<additionalTestArguments></additionalTestArguments>
 	</properties>
-	
+
 	<modules>
 		<module>cucumberxtexteditor</module>
 		<module>cucumberxtexteditor.ide</module>
@@ -64,7 +51,7 @@
 		<module>cucumberxtexteditor.tests</module>
 		<module>cucumberxtexteditor.ui.tests</module>
 	</modules>
-	
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -76,7 +63,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -271,8 +258,18 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	
+
 	<repositories>
+		<repository>
+			<id>github</id>
+			<url>https://maven.pkg.github.com/farhan5248/claims-adjudication-ai</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
 		<repository>
 			<id>codehaus-snapshots</id>
 			<name>disable dead 'Codehaus Snapshots' repository, see
@@ -313,7 +310,7 @@
 			</snapshots>
 		</repository>
 	</repositories>
-	
+
 	<pluginRepositories>
 		<pluginRepository>
 			<id>codehaus-snapshots</id>
@@ -350,7 +347,7 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-	
+
 	<profiles>
 		<profile>
 			<id>macos</id>
