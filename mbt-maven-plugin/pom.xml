@@ -11,6 +11,8 @@
 
 	<properties>
 		<maven-plugin-tools.version>3.10.2</maven-plugin-tools.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>17</java.version>
 	</properties>
 
 	<scm>
@@ -117,39 +119,47 @@
 	</dependencies>
 
 	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>3.2.2</version>
-					<configuration>
-						<properties>
-							<!-- Work around. Surefire does not include enough
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.2.2</version>
+				<configuration>
+					<properties>
+						<!-- Work around. Surefire does not include enough
                              information to disambiguate between different
                              examples and scenarios. -->
-							<configurationParameters>
-								cucumber.junit-platform.naming-strategy=long
-							</configurationParameters>
-						</properties>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-plugin-plugin</artifactId>
-					<version>${maven-plugin-tools.version}</version>
-					<executions>
-						<execution>
-							<id>help-mojo</id>
-							<goals>
-								<!-- good practice is to generate help mojo for
+						<configurationParameters>
+							cucumber.junit-platform.naming-strategy=long
+						</configurationParameters>
+					</properties>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-plugin-plugin</artifactId>
+				<version>${maven-plugin-tools.version}</version>
+				<executions>
+					<execution>
+						<id>help-mojo</id>
+						<goals>
+							<!-- good practice is to generate help mojo for
 							plugin -->
-								<goal>helpmojo</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+							<goal>helpmojo</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 	</build>
 </project>
