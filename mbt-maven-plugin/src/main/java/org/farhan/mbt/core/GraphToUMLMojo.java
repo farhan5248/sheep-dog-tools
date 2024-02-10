@@ -9,7 +9,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.settings.Settings;
-import org.farhan.mbt.graphuml.ConvertGraphToUMLMojo;
+import org.farhan.mbt.graphuml.ConvertGraphToUML;
 
 /**
  * Converts Graph model paths to a UML model using Eclipse EMF
@@ -39,10 +39,10 @@ public class GraphToUMLMojo extends AbstractMojo {
 	public void execute() throws MojoExecutionException {
 		getLog().info(tag);
 		try {
-			ConvertGraphToUMLMojo mojo = new ConvertGraphToUMLMojo();
+			ConvertGraphToUML mojo = new ConvertGraphToUML();
 			// TODO pass in tags to the mojo constructor
-			Project.tags = tag;
-			Project.baseDir = project.getBasedir().getAbsolutePath() + File.separator;
+			ConvertibleProject.tags = tag;
+			ConvertibleProject.baseDir = project.getBasedir().getAbsolutePath() + File.separator;
 			mojo.mojoGoal();
 		} catch (Exception e) {
 			getLog().error(Utilities.getStackTraceAsString(e));
