@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.farhan</groupId>
@@ -6,6 +7,18 @@
 	<!-- TODO rename to mbt-path-editor after development done -->
 	<artifactId>cucumberxtexteditor.parent</artifactId>
 	<packaging>pom</packaging>
+
+	<scm>
+		<connection>scm:git:https://github.com/farhan5248/claims-adjudication-ai</connection>
+		<tag>HEAD</tag>
+	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<url>https://maven.pkg.github.com/farhan5248/claims-adjudication-ai</url>
+		</repository>
+	</distributionManagement>
 
 	<properties>
 		<xtextVersion>2.32.0</xtextVersion>
@@ -21,6 +34,7 @@
 		<systemProperties></systemProperties>
 		<additionalTestArguments></additionalTestArguments>
 	</properties>
+	
 	<modules>
 		<module>cucumberxtexteditor</module>
 		<module>cucumberxtexteditor.ide</module>
@@ -31,6 +45,7 @@
 		<module>cucumberxtexteditor.tests</module>
 		<module>cucumberxtexteditor.ui.tests</module>
 	</modules>
+	
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -42,6 +57,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -119,7 +135,8 @@
 								<id>org.eclipse.xtext.logging</id>
 								<versionRange>1.2.24</versionRange>
 							</requirement>
-							<!-- to get the org.eclipse.osgi.compatibility.state plugin if the target
+							<!-- to get the org.eclipse.osgi.compatibility.state
+							plugin if the target
 								platform is Luna or later. (backward compatible with kepler and previous
 								versions) see https://bugs.eclipse.org/bugs/show_bug.cgi?id=492149 -->
 							<requirement>
@@ -214,7 +231,8 @@
 						<useProjectSettings>false</useProjectSettings>
 					</configuration>
 				</plugin>
-				<!-- to skip running (and compiling) tests use commandline flag: -Dmaven.test.skip
+				<!-- to skip running (and compiling) tests use commandline flag:
+				-Dmaven.test.skip
 					To skip tests, but still compile them, use: -DskipTests
 					To allow all tests in a pom to pass/fail, use commandline flag: -fae (fail
 					at end) -->
@@ -223,8 +241,10 @@
 					<artifactId>tycho-surefire-plugin</artifactId>
 					<version>${tycho-version}</version>
 					<configuration>
-						<!-- THE FOLLOWING LINE MUST NOT BE BROKEN BY AUTOFORMATTING -->
-						<argLine>${platformSystemProperties} ${systemProperties} ${moduleProperties} ${additionalTestArguments}</argLine>
+						<!-- THE FOLLOWING LINE MUST NOT BE BROKEN BY
+						AUTOFORMATTING -->
+						<argLine>${platformSystemProperties} ${systemProperties}
+							${moduleProperties} ${additionalTestArguments}</argLine>
 						<failIfNoTests>false</failIfNoTests>
 						<useUIHarness>false</useUIHarness>
 					</configuration>
@@ -232,10 +252,12 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	
 	<repositories>
 		<repository>
 			<id>codehaus-snapshots</id>
-			<name>disable dead 'Codehaus Snapshots' repository, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478</name>
+			<name>disable dead 'Codehaus Snapshots' repository, see
+				https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478</name>
 			<url>http://nexus.codehaus.org/snapshots/</url>
 			<releases>
 				<enabled>false</enabled>
@@ -244,7 +266,8 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		<!-- This must be disabled explicitly, otherwise it is enabled by https://github.com/mojohaus/mojo-parent 
+		<!-- This must be disabled explicitly, otherwise it is enabled by
+		https://github.com/mojohaus/mojo-parent 
 			which is taken from exec-maven-plugin from at least version 1.6.0 -->
 		<repository>
 			<id>ossrh-snapshots</id>
@@ -271,10 +294,12 @@
 			</snapshots>
 		</repository>
 	</repositories>
+	
 	<pluginRepositories>
 		<pluginRepository>
 			<id>codehaus-snapshots</id>
-			<name>disable dead 'Codehaus Snapshots' repository, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478</name>
+			<name>disable dead 'Codehaus Snapshots' repository, see
+				https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478</name>
 			<url>http://nexus.codehaus.org/snapshots/</url>
 			<releases>
 				<enabled>false</enabled>
@@ -306,6 +331,7 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
+	
 	<profiles>
 		<profile>
 			<id>macos</id>
