@@ -30,5 +30,7 @@ jobs:
     - name: Clean the project
       working-directory: ./mbt-transformer
       run: mvn clean
+    - name: Package the project
+      working-directory: ./mbt-transformer
       run: mvn package
 
