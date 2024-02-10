@@ -48,7 +48,7 @@ Feature: Create Step Definition From Step
   Scenario: Create new interaction annotations
     And The target/uml/pst.uml file, Interaction Annotations section will be as follows
       | Interaction Name                                                         | Annotation Name                                        |
-      | stepdefs::blah::blahObjectPageSteps::theBlahApplicationObjectPageIsEmpty | Given("^The blah application, Object page is empty$") |
+      | stepdefs::blah::blahObjectPageSteps::theBlahApplicationObjectPageIsEmpty | @Given("^The blah application, Object page is empty$") |
 
   Scenario: Create new interaction parameters
     And The target/uml/pst.uml file, Interaction Parameters section will be as follows
