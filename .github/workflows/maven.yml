@@ -18,7 +18,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+      packages: write
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 17
@@ -29,5 +31,6 @@ jobs:
         cache: maven
     - name: Build and install Cucumber Xtext Editor
       working-directory: ./cucumberxtexteditor.parent
-      run: mvn clean install
-
+      run: mvn --batch-mode deploy
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
