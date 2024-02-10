@@ -16,3 +16,5 @@ mvn org.farhan:mbt-maven-plugin:uml-to-cucumber -Dtag=debug
 
 mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=false
 mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true
+
+mvn dependency:copy-dependencies -DoutputDirectory=target/dependency
