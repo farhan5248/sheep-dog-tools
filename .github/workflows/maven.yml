@@ -27,12 +27,8 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Display current working directory
-      run: pwd
-    - name: Change directory to the Maven project
-      run: cd mbt-transformer
     - name: Clean the project
-      run: mvn clean
+      run: mvn clean --file mbt-transformer/pom.xml
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
