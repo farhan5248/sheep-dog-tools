@@ -1,4 +1,4 @@
-package com.example.restservice;
+package org.farhan.adjudication;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

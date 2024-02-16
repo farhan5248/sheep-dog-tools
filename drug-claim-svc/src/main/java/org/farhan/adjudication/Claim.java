@@ -1,4 +1,4 @@
-package com.example.restservice;
+package org.farhan.adjudication;
 
 public record Claim(long id, String content) {
 }

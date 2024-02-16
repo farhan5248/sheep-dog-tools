@@ -1,4 +1,4 @@
-package com.example.restservice;
+package org.farhan.adjudication;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class GreetingController {
+public class ClaimController {
 
 	private static final String template = "Hello, %s!";
 	private final AtomicLong counter = new AtomicLong();
 
-	@GetMapping("/greeting")
-	public Claim greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+	@GetMapping("/claim")
+	public Claim claim(@RequestParam(value = "name", defaultValue = "World") String name) {
 		return new Claim(counter.incrementAndGet(), String.format(template, name));
 	}
 }
