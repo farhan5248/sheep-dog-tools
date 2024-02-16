@@ -10,5 +10,4 @@ class DemoTest {
 	void contextLoads() {
 		System.out.print("The test was run!\n");
 	}
-
 }
