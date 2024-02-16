@@ -174,7 +174,7 @@
 			<artifactId>guice</artifactId>
 			<version>7.0.0</version>
 		</dependency>
-		<!-- Comments -->
+		<!-- Common -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
