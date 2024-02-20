@@ -9,11 +9,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ClaimController {
 
-	private static final String template = "Hello, %s!";
-	private final AtomicLong counter = new AtomicLong();
-
+	// TODO rename to /adjudicate
 	@GetMapping("/claim")
-	public Claim claim(@RequestParam(value = "name", defaultValue = "World") String name) {
-		return new Claim(counter.incrementAndGet(), String.format(template, name));
+	public ClaimResponse claim(@RequestParam(value = "drugCost", defaultValue = "10.00") String drugCost,
+			@RequestParam(value = "family", defaultValue = "Sheikh") String family) {
+		// TODO the ClaimFactory maintains just one copy of ClaimRequest, remove that
+		// constraint later after analysing how the tests are impacted
+		ClaimRequest request = ClaimFactory.getClaim();
+		request.setDrugCost(drugCost);
+		request.setFamily(family);
+
+		ClaimEngine engine = new ClaimEngine(request);
+		ClaimResponse response = engine.process();
+		return response;
 	}
 }
