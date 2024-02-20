@@ -1,4 +1,4 @@
-package org.farhan.runners.umlto;
+package org.farhan.runners.umltocucumber;
 
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
@@ -11,7 +11,7 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("Cucumber/UMLTo/ConvertClassToFeature.feature")
+@SelectClasspathResource("Cucumber/UMLToCucumber/ConvertClassToFeature.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
 //@IncludeTags("debug")

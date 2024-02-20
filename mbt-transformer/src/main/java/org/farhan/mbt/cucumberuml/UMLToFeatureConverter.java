@@ -10,6 +10,7 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
+import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.cucumber.Cell;
 import org.farhan.cucumber.CucumberFactory;
@@ -18,8 +19,10 @@ import org.farhan.cucumber.Row;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Statement;
 import org.farhan.cucumber.Step;
+import org.farhan.cucumber.Tag;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToCodeConverter;
+import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.UMLClassWrapper;
@@ -52,7 +55,12 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 		Class c = (Class) ucw.get();
 		String path = convertObjectName(c.getQualifiedName());
 		tgtWrp = (CucumberFeatureWrapper) tgtPrj.createObject(path);
+		convertClassAnnotations(c, (Feature) tgtWrp.get());
 		convertComments(c, (Feature) tgtWrp.get());
+	}
+
+	private void convertClassAnnotations(Class c, Feature feature) {
+		feature.setName(c.getEAnnotations().getFirst().getSource());
 	}
 
 	private void convertComments(Class aClass, Feature aFeature) {
@@ -97,10 +105,18 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 				((Feature) tgtWrp.get()).getAbstractScenarios().add(aScenario);
 				// TODO this is for scenario outline data convertAnnotation(anInteraction,
 				// aMethod);
-				// TODO this is for scenario tags convertParameters(anInteraction, aMethod);
+				convertParameters(anInteraction, aScenario);
 				convertComments(anInteraction, aScenario);
 				convertInteractionMessages(anInteraction, aScenario.getSteps());
 			}
+		}
+	}
+
+	private void convertParameters(Interaction anInteraction, Scenario aScenario) {
+		for (Parameter p : anInteraction.getOwnedParameters()) {
+			Tag tag = CucumberFactory.eINSTANCE.createTag();
+			tag.setName(p.getName());
+			aScenario.getTags().add(tag);
 		}
 	}
 
@@ -114,8 +130,28 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 	@Override
 	protected void convertMessage(Message m, Object stepList) throws Exception {
 		EList<Step> steps = (EList<Step>) stepList;
-		// TODO change to Given When Then in the future
-		Step step = CucumberFactory.eINSTANCE.createAsterisk();
+		String keyword = m.getEAnnotations().getFirst().getSource();
+		Step step = null;
+		switch (keyword) {
+		case "Given":
+			step = CucumberFactory.eINSTANCE.createGiven();
+			break;
+		case "When":
+			step = CucumberFactory.eINSTANCE.createWhen();
+			break;
+		case "Then":
+			step = CucumberFactory.eINSTANCE.createThen();
+			break;
+		case "But":
+			step = CucumberFactory.eINSTANCE.createBut();
+			break;
+		case "And":
+			step = CucumberFactory.eINSTANCE.createAnd();
+			break;
+		case "Asterisk":
+			step = CucumberFactory.eINSTANCE.createAsterisk();
+			break;
+		}
 		step.setName(m.getName());
 		steps.add(step);
 		convertDataTableFromArgument(m, step);

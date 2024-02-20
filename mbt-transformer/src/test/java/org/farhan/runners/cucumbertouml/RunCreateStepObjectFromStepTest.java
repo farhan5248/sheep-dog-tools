@@ -1,4 +1,4 @@
-package org.farhan.runners.touml;
+package org.farhan.runners.cucumbertouml;
 
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
@@ -11,7 +11,7 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("Cucumber/ToUML/CreateStepObjectFromStep.feature")
+@SelectClasspathResource("Cucumber/CucumberToUML/CreateStepObjectFromStep.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
 //@IncludeTags("debug")

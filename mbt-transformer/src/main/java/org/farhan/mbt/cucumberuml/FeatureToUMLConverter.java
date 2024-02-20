@@ -4,11 +4,15 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
+import org.eclipse.xtext.impl.RuleCallImpl;
+import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
 import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.Background;
@@ -70,6 +74,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 		String qualifiedName = convertObjectName(cfw.getFile().getAbsolutePath());
 
 		tgtWrp = (UMLClassWrapper) tgtPrj.createObject(qualifiedName);
+		((Class) tgtWrp.get()).createEAnnotation(((Feature) cfw.get()).getName());
 		((Class) tgtWrp.get()).createOwnedComment()
 				.setBody(convertStatementsToString(((Feature) cfw.get()).getStatements()));
 	}
@@ -81,9 +86,9 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	@Override
 	protected void convertBehaviours(ConvertibleObject theObject) throws Exception {
 
-		CucumberFeatureWrapper ufw = (CucumberFeatureWrapper) theObject;
+		CucumberFeatureWrapper cfw = (CucumberFeatureWrapper) theObject;
 		Background b = null;
-		for (AbstractScenario as : ((Feature) ufw.get()).getAbstractScenarios()) {
+		for (AbstractScenario as : ((Feature) cfw.get()).getAbstractScenarios()) {
 			if (as instanceof Background) {
 				b = (Background) as;
 				continue;
@@ -126,15 +131,23 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	protected void convertMessage(Interaction anInteraction, Object o) {
 		Step s = (Step) o;
 		Message theMessage = convertStepToMessage(anInteraction, s);
+		convertKeywordToAnnotation(s, theMessage);
 		convertDataTableToArgument(s, theMessage);
 		convertDocStringToArgument(s, theMessage);
+	}
+
+	private void convertKeywordToAnnotation(Step s, Message theMessage) {
+		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) s.eAdapters().getFirst();
+		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
+		theMessage.createEAnnotation(rc.getRule().getName());
 	}
 
 	@Override
 	protected String convertObjectName(String fullName) {
 		String qualifiedName = fullName.trim();
 		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(srcPrj.FIRST_LAYER), "");
-		// TODO this is removing org.farhan so change this and update all the tests so that the package name is not droppedF
+		// TODO this is removing org.farhan so change this and update all the tests so
+		// that the package name is not droppedF
 		qualifiedName = qualifiedName.replace(srcPrj.getDir(srcPrj.FIRST_LAYER).getAbsolutePath(), "");
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::specs" + qualifiedName;

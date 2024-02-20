@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.uml2.uml.Class;
-import org.eclipse.uml2.uml.ElementImport;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
+import org.farhan.cucumber.Feature;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToUMLGherkinConverter;
 import org.farhan.mbt.core.Utilities;
@@ -56,6 +56,9 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		JGraphTGraphWrapper jgw = (JGraphTGraphWrapper) theObject;
 		String qualifiedName = convertObjectName(jgw.getFile().getAbsolutePath());
 		tgtWrp = (UMLClassWrapper) tgtPrj.createObject(qualifiedName);
+		((Class) tgtWrp.get())
+				.createEAnnotation(jgw.getFile().getName().replace(srcPrj.getFileExt(srcPrj.FIRST_LAYER), ""));
+
 	}
 
 	@Override
@@ -136,7 +139,8 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		String s = (String) o;
 		String messageName = s;
 		Class nextLayerClass = createClassImport(getSecondLayerClassName(), anInteraction);
-		getMessage(anInteraction, nextLayerClass, messageName);
+		Message theMessage = getMessage(anInteraction, nextLayerClass, messageName);
+		theMessage.createEAnnotation("Asterisk");
 	}
 
 	@Override

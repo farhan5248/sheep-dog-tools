@@ -182,26 +182,17 @@ public class UMLToJavaConverter extends ToCodeConverter {
 		if (anInteraction.getOwnedParameter("dataTable", null) != null) {
 			aMethod.addParameter("DataTable", "dataTable");
 		} else {
-			for (String p : getParameters(anInteraction)) {
-				if (p.contentEquals("keyMap")) {
-					aMethod.addParameter("HashMap<String, String>", Utilities.toLowerCamelCase(p));
+			for (Parameter p : anInteraction.getOwnedParameters()) {
+				if (p.getName().contentEquals("keyMap")) {
+					aMethod.addParameter("HashMap<String, String>", Utilities.toLowerCamelCase(p.getName()));
 				} else {
-					aMethod.addParameter("String", Utilities.toLowerCamelCase(p));
+					aMethod.addParameter("String", Utilities.toLowerCamelCase(p.getName()));
 				}
 			}
 		}
 	}
 
-	private ArrayList<String> getParameters(Interaction anInteraction) {
 
-		ArrayList<String> paramNames = new ArrayList<String>();
-		for (Parameter p : anInteraction.getOwnedParameters()) {
-			if (p.getDirection().toString().contentEquals("in")) {
-				paramNames.add(p.getName());
-			}
-		}
-		return paramNames;
-	}
 
 	private void convertComments(Interaction anInteraction, MethodDeclaration aMethod) {
 		if (anInteraction.getOwnedComments().size() > 0) {

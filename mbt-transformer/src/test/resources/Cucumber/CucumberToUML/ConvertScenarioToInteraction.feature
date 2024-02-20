@@ -19,35 +19,35 @@ Feature: Convert Scenario To Interaction
 
   Scenario: Convert scenario title
     And The target/uml/pst.uml file, Class Interactions section will be as follows
-      | Class Name           | Interaction Name |
+      | Class Name     | Interaction Name |
       | specs::Process | Submit           |
 
   Scenario: Convert scenario tags
     And The target/uml/pst.uml file, Interaction Parameters section will be as follows
-      | Interaction Name             | Parameter Name |
+      | Interaction Name       | Parameter Name |
       | specs::Process::Submit | tag1           |
 
   Scenario: Convert scenario description
     And The target/uml/pst.uml file, Interaction Comments section will be as follows
-      | Interaction Name             | Comment         |
+      | Interaction Name       | Comment         |
       | specs::Process::Submit | Basic EDI claim |
 
   Scenario: Convert scenario step
     And The target/uml/pst.uml file, Class Element Imports section will be as follows
-      | Class Name           | Imported Element                         |
+      | Class Name     | Imported Element                         |
       | specs::Process | pst::stepdefs::blah::BlahObjectPageSteps |
     And The target/uml/pst.uml file, Class Properties section will be as follows
-      | Class Name           | Property Name       | Property Type                            |
-      | specs::Process | this                | pst::specs::Process                |
+      | Class Name     | Property Name       | Property Type                            |
+      | specs::Process | this                | pst::specs::Process                      |
       | specs::Process | BlahObjectPageSteps | pst::stepdefs::blah::BlahObjectPageSteps |
     And The target/uml/pst.uml file, Interaction Messages section will be as follows
-      | Interaction Name             | Message                                              |
+      | Interaction Name       | Message                                              |
       | specs::Process::Submit | The blah application, something/Object page is empty |
     And The target/uml/pst.uml file, Interaction Lifelines section will be as follows
-      | Interaction Name             | Lifeline Name       | Lifeline Represents                            |
+      | Interaction Name       | Lifeline Name       | Lifeline Represents                      |
       | specs::Process::Submit | this                | pst::specs::Process::this                |
       | specs::Process::Submit | BlahObjectPageSteps | pst::specs::Process::BlahObjectPageSteps |
     And The target/uml/pst.uml file, Interaction Message Occurences section will be as follows
-      | Interaction Name             | Message Occurence | Lifeline Covered    |
+      | Interaction Name       | Message Occurence | Lifeline Covered    |
       | specs::Process::Submit | SendEvent         | this                |
       | specs::Process::Submit | ReceiveEvent      | BlahObjectPageSteps |
