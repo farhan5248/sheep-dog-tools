@@ -14,7 +14,7 @@ Feature: Create Step Object From Step
               Given The blah2 service, Json request is executed with
                     | i1 | i2 |
                     | v5 | v6 |
-              Given The blah2 service, Json request is invalid
+              Given The blah2 service, Json request is sent
               Given The blah application, DataTable page, Top section will be as follows
                     | h1 | h2 |
                     | v1 | v2 |
@@ -50,7 +50,6 @@ Feature: Create Step Object From Step
           |  objects::blah2::JsonRequest |              seti1 |
           |  objects::blah2::JsonRequest |              seti2 |
           |  objects::blah2::JsonRequest |         transition |
-          |  objects::blah2::JsonRequest |       setIsInvalid |
 
   Scenario: Create new interaction parameters
 
@@ -59,9 +58,8 @@ Feature: Create Step Object From Step
           |            objects::blah::ObjectPage::setIsEmpty |       has none |
           | objects::blah::DataTablePage::assertTopSectionh1 |         keyMap |
           | objects::blah::DataTablePage::assertTopSectionh2 |         keyMap |
-          |         objects::blah::DocStringPage::setContent |       contents |
+          |         objects::blah::DocStringPage::setContent |         keyMap |
           |               objects::blah2::JsonRequest::seti1 |         keyMap |
           |               objects::blah2::JsonRequest::seti2 |         keyMap |
           |          objects::blah2::JsonRequest::transition |       has none |
-          |        objects::blah2::JsonRequest::setIsInvalid |       has none |
 

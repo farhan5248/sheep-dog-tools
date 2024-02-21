@@ -13,7 +13,7 @@ Feature: Convert Interaction To Step Object
               Given The blah2 service, Json request is executed with
                     | i1 | i2 |
                     | v5 | v6 |
-              Given The blah2 service, Json request is invalid
+              Given The blah2 service, Json request is sent
               Given The blah application, DataTable page, Top section will be as follows
                     | h1 | h2 |
                     | v1 | v2 |
@@ -56,7 +56,7 @@ Feature: Convert Interaction To Step Object
           
           public interface DocStringPage {
           
-              public void setContent(String contents);
+              public void setContent(HashMap<String, String> keyMap);
           }
           
           """
@@ -91,8 +91,6 @@ Feature: Convert Interaction To Step Object
               public void seti2(HashMap<String, String> keyMap);
           
               public void transition();
-          
-              public void setIsInvalid();
           }
           
           """

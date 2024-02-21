@@ -24,7 +24,7 @@ public class MBTVertexValidator {
 	public static String getErrorMessage() {
 		// this applies to Given and Then
 		String rules = "\nThe component is: The(( .*)( application| service| project| plugin| batchjob),)?"
-				+ "\nThe object is: ( .*)( file| page| config| resource)"
+				+ "\nThe object is: ( .*)( file| page| config| response)"
 				+ "\nThe details are: (, (.*)( section| fragment| table| snippet))?"
 				+ "\nThe state is: (( is| isn't| will be| won't be)( empty| present| valid| invalid)?( as follows)?)";
 

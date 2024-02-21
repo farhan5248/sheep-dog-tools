@@ -154,7 +154,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	}
 
 	private void convertDataTableToArgument(HashMap<String, String> dataTable, Message theMessage) {
-		ValueSpecification vs = createArgument(theMessage, "dataTable", "", true);
+		ValueSpecification vs = createArgument(theMessage, "dataTable", "");
 
 		String headerRow = "";
 		String valueRow = "";

@@ -13,7 +13,7 @@ Feature: Create Step Definition From Step
               Given The blah2 service, Json request is executed with
                     | i1 | i2 |
                     | v5 | v6 |
-              Given The blah2 service, Json request is invalid
+              Given The blah2 service, Json request is sent
               Given The blah application, DataTable page, Top section will be as follows
                     | h1 | h2 |
                     | v1 | v2 |
@@ -46,7 +46,7 @@ Feature: Create Step Definition From Step
           | stepdefs::blah::blahDataTablePageSteps | theBlahApplicationDataTablePageTopSectionWillBeAsFollows |
           | stepdefs::blah::blahDocStringPageSteps |           theBlahApplicationDocStringPageWillBeAsFollows |
           | stepdefs::blah2::blah2JsonRequestSteps |                 theBlah2ServiceJsonRequestIsExecutedWith |
-          | stepdefs::blah2::blah2JsonRequestSteps |                      theBlah2ServiceJsonRequestIsInvalid |
+          | stepdefs::blah2::blah2JsonRequestSteps |                         theBlah2ServiceJsonRequestIsSent |
 
   Scenario: Create new interaction annotations
 
@@ -62,7 +62,7 @@ Feature: Create Step Definition From Step
           | stepdefs::blah::blahDataTablePageSteps::theBlahApplicationDataTablePageTopSectionWillBeAsFollows |      dataTable |
           |           stepdefs::blah::blahDocStringPageSteps::theBlahApplicationDocStringPageWillBeAsFollows |      docString |
           |                 stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsExecutedWith |      dataTable |
-          |                      stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsInvalid |       has none |
+          |                         stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsSent |       has none |
 
   Scenario Outline: Create new interaction messages
 
@@ -86,9 +86,9 @@ Feature: Create Step Definition From Step
           |                                                                 Interaction Name |         Message |
           | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsExecutedWith |      transition |
           | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsExecutedWith | setInputOutputs |
-          |      stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsInvalid |      transition |
-          |      stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsInvalid |    setIsInvalid |
+          |         stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsSent |      transition |
 
+  @debug
   Scenario: Create new interaction message annotations
 
     TODO Need to verify table headers as passed through to create layer 3 objects

@@ -13,7 +13,7 @@ Feature: Convert Interaction To Step Definition
               Given The blah2 service, Json request is executed with
                     | i1 | i2 |
                     | v5 | v6 |
-              Given The blah2 service, Json request is invalid
+              Given The blah2 service, Json request is sent
               Given The blah application, DataTable page, Top section will be as follows
                     | h1 | h2 |
                     | v1 | v2 |
@@ -63,7 +63,7 @@ Feature: Convert Interaction To Step Definition
           
               @Given("^The blah application, DocString page is as follows$")
               public void theBlahApplicationDocStringPageIsAsFollows(String docString) {
-                  BlahFactory.get("DocStringPage").setInputOutputs(docString);
+                  BlahFactory.get("DocStringPage").setInputOutputs("Content", docString);
               }
           }
           
@@ -107,9 +107,8 @@ Feature: Convert Interaction To Step Definition
                   Blah2Factory.get("JsonRequest").transition();
               }
           
-              @Given("^The blah2 service, Json request is invalid$")
-              public void theBlah2ServiceJsonRequestIsInvalid() {
-                  Blah2Factory.get("JsonRequest").setIsInvalid();
+              @Given("^The blah2 service, Json request is sent$")
+              public void theBlah2ServiceJsonRequestIsSent() {
                   Blah2Factory.get("JsonRequest").transition();
               }
           }

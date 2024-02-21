@@ -84,6 +84,11 @@
 					</properties>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.farhan</groupId>
+				<artifactId>mbt-maven-plugin</artifactId>
+				<version>1.4-SNAPSHOT</version>
+			</plugin>
 		</plugins>
 	</build>
 

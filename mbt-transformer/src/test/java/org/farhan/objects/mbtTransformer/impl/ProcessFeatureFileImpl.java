@@ -1,10 +1,12 @@
-package org.farhan.objects.mbtTransformer;
+package org.farhan.objects.mbtTransformer.impl;
 
 import java.util.HashMap;
 
-import org.farhan.common.MbtTransformer;
+import org.farhan.common.FileObject;
+import org.farhan.objects.mbtTransformer.ProcessFeatureFile;
 
-public class MbtTransformerBlahDocStringPageJavaFile extends MbtTransformer {
+public class ProcessFeatureFileImpl extends FileObject implements ProcessFeatureFile {
+
 	public void setContent(HashMap<String, String> keyMap) {
 		setContent(keyMap.get("Content"));
 	}

@@ -13,7 +13,7 @@ public class MBTEdgeValidator {
 	private static final String COMPONENT_REGEX = "(( " + NAME_REGEX
 			+ "*)( application| service| project| plugin| batchjob),)?";
 	private static final String OBJECT_REGEX = "( " + NAME_REGEX + "*)( request| goal)";
-	private static final String STATE_REGEX = "(( is| isn't| will be| won't be)( executed| sent| triggered| valid| invalid)( with)?)";
+	private static final String STATE_REGEX = "(( is| isn't| will be| won't be)( executed| sent| triggered)( with)?)";
 	private static final String EDGE_REGEX = "The" + COMPONENT_REGEX + OBJECT_REGEX + STATE_REGEX;
 	public static final String INVALID_EDGE = "invalidEdge";
 
@@ -21,7 +21,7 @@ public class MBTEdgeValidator {
 		// this applies to When
 		String rules = "\nThe component is: The(( .*)( application| service| project| plugin| batchjob),)?"
 				+ "\nThe object is: (.*)( request| goal)"
-				+ "\nThe state is: (( is| isn't| will be| won't be)( executed| sent| triggered| invalid| valid)( with)?)";
+				+ "\nThe state is: (( is| isn't| will be| won't be)( executed| sent| triggered)( with)?)";
 
 		String msg = "This is an invalid statement. These are the rules:" + rules;
 

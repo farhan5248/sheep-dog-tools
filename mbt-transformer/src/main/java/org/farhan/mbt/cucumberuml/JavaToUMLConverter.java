@@ -199,7 +199,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 				}
 				// when reading java source, the name of the arguments isn't known so I use the
 				// value as the name
-				createArgument(theMessage, arg, arg, true);
+				createArgument(theMessage, arg, arg);
 			}
 		} else {
 			// TODO handle layer 3 java code
@@ -254,12 +254,12 @@ public class JavaToUMLConverter extends ToUMLConverter {
 				String prefix = m.getName().replace("InputOutputs", "");
 
 				ValueSpecification vs;
-				vs = createArgument(m, "section", "", false);
+				vs = m.getArgument("section", null);
 				String sectionName = "";
 				if (vs != null) {
 					sectionName = ((LiteralString) vs).getValue();
 				}
-				vs = createArgument(m, "keyMap", "", false);
+				vs = m.getArgument("keyMap", null);
 				if (vs != null) {
 					// it's a data table
 					String[] attributes = vs.getEAnnotation("keyMap").getDetails().getFirst().getValue().split("\\|");
@@ -285,15 +285,8 @@ public class JavaToUMLConverter extends ToUMLConverter {
 
 	@Override
 	protected void addNextLayerInteractionParameters(Interaction targetInteraction, Message m) {
-
-		ValueSpecification vs;
-		vs = createArgument(m, "keyMap", "", false);
-		if (vs != null) {
+		if (!m.getArguments().isEmpty()) {
 			createParameter(targetInteraction, "keyMap", "", "in");
-		}
-		vs = createArgument(m, "contents", "", false);
-		if (vs != null) {
-			createParameter(targetInteraction, "contents", "", "in");
 		}
 	}
 

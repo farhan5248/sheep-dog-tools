@@ -111,8 +111,8 @@ public abstract class ToUMLConverter {
 			anInteraction = UMLFactory.eINSTANCE.createInteraction();
 			anInteraction.setName(interactionName);
 			theClass.setClassifierBehavior(anInteraction);
-			Property aProperty = theClass.createOwnedAttribute("this", theClass);
-			anInteraction.createLifeline(aProperty.getName()).setRepresents(aProperty);
+			Property aProperty = createOwnedAttribute(theClass, "this", theClass);
+			createLifeline(theClass, anInteraction, "this");
 		}
 		if (!annotationName.isEmpty()) {
 			createAnnotation(anInteraction, annotationName);
@@ -150,8 +150,11 @@ public abstract class ToUMLConverter {
 
 	private Lifeline createLifeline(Class nextLayerClass, Interaction anInteraction, String name) {
 		Class owningClass = (Class) anInteraction.getOwner();
-		Property property = owningClass.getOwnedAttribute(name, nextLayerClass);
-		Lifeline lifeline = anInteraction.createLifeline(property.getName());
+		Property property = createOwnedAttribute(owningClass, name, nextLayerClass);
+		Lifeline lifeline = anInteraction.getLifeline(property.getName());
+		if (lifeline == null) {
+			lifeline = anInteraction.createLifeline(property.getName());
+		}
 		lifeline.setRepresents(property);
 		return lifeline;
 	}
@@ -231,9 +234,9 @@ public abstract class ToUMLConverter {
 		theMachine.currentState = Utilities.removeDelimiterAndCapitalize(theMachine.currentState, "\\-");
 	}
 
-	protected ValueSpecification createArgument(Message aMessage, String name, String value, boolean add) {
+	protected ValueSpecification createArgument(Message aMessage, String name, String value) {
 		LiteralString ls = (LiteralString) aMessage.getArgument(name, null);
-		if (ls == null && add) {
+		if (ls == null) {
 			ls = UMLFactory.eINSTANCE.createLiteralString();
 			ls = (LiteralString) aMessage.createArgument(name, null, ls.eClass());
 			ls.setName(name);
@@ -281,7 +284,15 @@ public abstract class ToUMLConverter {
 		Class nextLayerClass = (Class) ucw.get();
 		Class owningClass = (Class) nextLayerInteraction.getOwner();
 		createElementImport(owningClass, nextLayerClass);
-		owningClass.createOwnedAttribute(nextLayerClass.getName(), nextLayerClass);
+		createOwnedAttribute(owningClass, nextLayerClass.getName(), nextLayerClass);
 		return nextLayerClass;
+	}
+
+	private Property createOwnedAttribute(Class owningClass, String name, Class nextLayerClass) {
+		Property property = owningClass.getOwnedAttribute(name, nextLayerClass);
+		if (property == null) {
+			property = owningClass.createOwnedAttribute(name, nextLayerClass);
+		}
+		return property;
 	}
 }

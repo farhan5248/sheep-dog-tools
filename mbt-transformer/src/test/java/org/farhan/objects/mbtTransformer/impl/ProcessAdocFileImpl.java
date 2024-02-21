@@ -1,12 +1,11 @@
-package org.farhan.objects.mbtTransformer;
+package org.farhan.objects.mbtTransformer.impl;
 
 import java.util.HashMap;
 
-import org.farhan.common.MbtTransformer;
+import org.farhan.common.FileObject;
+import org.farhan.objects.mbtTransformer.ProcessAdocFile;
 
-import io.cucumber.java.PendingException;
-
-public class MbtTransformerProcessAdocFile extends MbtTransformer {
+public class ProcessAdocFileImpl extends FileObject implements ProcessAdocFile {
 
 	public void setContent(HashMap<String, String> keyMap) {
 		setContent(keyMap.get("Content"));

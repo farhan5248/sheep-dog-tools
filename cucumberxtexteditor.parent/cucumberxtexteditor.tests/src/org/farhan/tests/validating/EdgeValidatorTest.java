@@ -8,10 +8,10 @@ public class EdgeValidatorTest {
 
 	@Test
 	public void testIsEdge() {
-		Assertions.assertTrue(
-				MBTEdgeValidator.isEdge("The Something1 application, Something2 request is executed with"));
+		Assertions
+				.assertTrue(MBTEdgeValidator.isEdge("The Something1 application, Something2 request is executed with"));
 	}
-	
+
 	@Test
 	public void testIsComponent() {
 		Assertions.assertTrue(
@@ -55,28 +55,29 @@ public class EdgeValidatorTest {
 
 	@Test
 	public void testGetStateModality() {
-		Assertions
-				.assertTrue(MBTEdgeValidator.getStateModality("The Something1 application, Something2 request is executed with")
+		Assertions.assertTrue(
+				MBTEdgeValidator.getStateModality("The Something1 application, Something2 request is executed with")
 						.contentEquals("is"));
 	}
-	
+
 	@Test
 	public void testGetStateType() {
-		Assertions
-				.assertTrue(MBTEdgeValidator.getStateType("The Something1 application, Something2 request is executed with")
+		Assertions.assertTrue(
+				MBTEdgeValidator.getStateType("The Something1 application, Something2 request is executed with")
 						.contentEquals("executed"));
 	}
-	
+
 	@Test
 	public void testGetAttachment() {
-		Assertions
-				.assertTrue(MBTEdgeValidator.getAttachment("The Something1 application, Something2 request is executed with")
+		Assertions.assertTrue(
+				MBTEdgeValidator.getAttachment("The Something1 application, Something2 request is executed with")
 						.contentEquals("with"));
 	}
 
 	@Test
 	public void testStateRegexWith() {
-		Assertions.assertTrue(MBTEdgeValidator.isValid("The Something1 application, Something2 request is executed with"));
+		Assertions.assertTrue(
+				MBTEdgeValidator.isValid("The Something1 application, Something2 request is executed with"));
 	}
 
 	@Test
@@ -90,33 +91,27 @@ public class EdgeValidatorTest {
 	}
 
 	@Test
-	public void testStateRegexIsInvalid() {
-		Assertions.assertTrue(MBTEdgeValidator.isValid("The Something1 application, Something2 request is invalid"));
-	}
-
-	@Test
-	public void testStateRegexIsValid() {
-		Assertions.assertTrue(MBTEdgeValidator.isValid("The Something1 application, Something2 request is valid"));
-	}
-
-	@Test
 	public void testIsNegativeStep() {
-		Assertions.assertTrue(MBTEdgeValidator.isNegativeStep("The Something1 application, Something2 request isn't executed"));
+		Assertions.assertTrue(
+				MBTEdgeValidator.isNegativeStep("The Something1 application, Something2 request isn't executed"));
 	}
-	
+
 	@Test
 	public void testStateRegexIsntExecuted() {
-		Assertions.assertTrue(MBTEdgeValidator.isValid("The Something1 application, Something2 request isn't executed"));
+		Assertions
+				.assertTrue(MBTEdgeValidator.isValid("The Something1 application, Something2 request isn't executed"));
 	}
 
 	@Test
 	public void testStateRegexWillBeExecuted() {
-		Assertions.assertTrue(MBTEdgeValidator.isValid("The Something1 application, Something2 request will be executed"));
+		Assertions.assertTrue(
+				MBTEdgeValidator.isValid("The Something1 application, Something2 request will be executed"));
 	}
 
 	@Test
 	public void testStateRegexWontBeExecuted() {
-		Assertions.assertTrue(MBTEdgeValidator.isValid("The Something1 application, Something2 request won't be executed"));
+		Assertions.assertTrue(
+				MBTEdgeValidator.isValid("The Something1 application, Something2 request won't be executed"));
 	}
 
 	@Test

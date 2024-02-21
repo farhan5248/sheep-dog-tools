@@ -14,7 +14,8 @@ public class MbtTransformerFactory {
 			if (classes.get(className) != null) {
 				return classes.get(className);
 			} else {
-				Class<?> gmoClass = Class.forName("org.farhan.objects.mbtTransformer." + className);
+				// TODO delete Impl after regenerating all the classes
+				Class<?> gmoClass = Class.forName("org.farhan.objects.mbtTransformer.impl." + className + "Impl");
 				if (className.endsWith("File")) {
 					FileObject foo = (FileObject) gmoClass.getConstructor().newInstance();
 					foo.setBaseDir("mbt-transformer");
@@ -50,13 +51,13 @@ public class MbtTransformerFactory {
 			foo.setPath("src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java");
 		} else if (className.endsWith("Blah2JsonRequestStepsJavaFile")) {
 			foo.setPath("src/test/java/org/farhan/stepdefs/blah2/Blah2JsonRequestSteps.java");
-		} else if (className.endsWith("Blah2JsonRequestJavaFile")) {
+		} else if (className.endsWith("JsonRequestJavaFile")) {
 			foo.setPath("src/test/java/org/farhan/objects/blah2/JsonRequest.java");
-		} else if (className.endsWith("BlahDataTablePageJavaFile")) {
+		} else if (className.endsWith("DataTablePageJavaFile")) {
 			foo.setPath("src/test/java/org/farhan/objects/blah/DataTablePage.java");
-		} else if (className.endsWith("BlahDocStringPageJavaFile")) {
+		} else if (className.endsWith("DocStringPageJavaFile")) {
 			foo.setPath("src/test/java/org/farhan/objects/blah/DocStringPage.java");
-		} else if (className.endsWith("BlahObjectPageJavaFile")) {
+		} else if (className.endsWith("ObjectPageJavaFile")) {
 			foo.setPath("src/test/java/org/farhan/objects/blah/ObjectPage.java");
 		} else if (className.endsWith("ProcessAdocFile")) {
 			foo.setPath("src/test/resources/AsciiDoc/Process.adoc");

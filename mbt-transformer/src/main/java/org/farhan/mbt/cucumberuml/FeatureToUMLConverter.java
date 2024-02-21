@@ -156,7 +156,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 
 	private void convertDocStringToArgument(Step s, Message theMessage) {
 		if (s.getTheDocString() != null) {
-			ValueSpecification vs = createArgument(theMessage, "docString", "", true);
+			ValueSpecification vs = createArgument(theMessage, "docString", "");
 			EList<Line> lines = s.getTheDocString().getLines();
 			for (int i = 0; i < lines.size(); i++) {
 				createAnnotation(vs, "docString", String.valueOf(i), lines.get(i).getName());
@@ -166,7 +166,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 
 	private void convertDataTableToArgument(Step s, Message theMessage) {
 		if (s.getTheStepTable() != null) {
-			ValueSpecification vs = createArgument(theMessage, "dataTable", "", true);
+			ValueSpecification vs = createArgument(theMessage, "dataTable", "");
 			EList<Row> rows = s.getTheStepTable().getRows();
 			for (int i = 0; i < rows.size(); i++) {
 
@@ -193,20 +193,20 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 		return secondLayerClassName;
 	}
 
-	private boolean isFileSelected(ConvertibleObject convertibleFile, String layerSelectionCriteria) throws Exception {
+	private boolean isFileSelected(ConvertibleObject convertibleFile, String tag) throws Exception {
 
 		CucumberFeatureWrapper ufw = (CucumberFeatureWrapper) convertibleFile;
 		Feature f = (Feature) ufw.get();
-		if (isTagged(f.getTags(), layerSelectionCriteria)) {
+		if (isTagged(f.getTags(), tag)) {
 			return true;
 		}
 		for (AbstractScenario a : f.getAbstractScenarios()) {
 			if (a instanceof Scenario) {
-				if (isTagged(((Scenario) a).getTags(), layerSelectionCriteria)) {
+				if (isTagged(((Scenario) a).getTags(), tag)) {
 					return true;
 				}
 			} else if (a instanceof ScenarioOutline) {
-				if (isTagged(((ScenarioOutline) a).getTags(), layerSelectionCriteria)) {
+				if (isTagged(((ScenarioOutline) a).getTags(), tag)) {
 					return true;
 				}
 			}
@@ -214,9 +214,12 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 		return false;
 	}
 
-	private boolean isTagged(EList<Tag> tags, String layerSelectionCriteria) {
+	private boolean isTagged(EList<Tag> tags, String tag) {
+		if (tag.isEmpty()) {
+			return true;
+		}
 		for (Tag t : tags) {
-			if (t.getName().trim().contentEquals(layerSelectionCriteria)) {
+			if (t.getName().trim().contentEquals(tag)) {
 				return true;
 			}
 		}

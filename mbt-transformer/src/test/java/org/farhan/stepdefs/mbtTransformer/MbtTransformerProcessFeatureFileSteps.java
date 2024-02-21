@@ -1,19 +1,18 @@
 package org.farhan.stepdefs.mbtTransformer;
 
-import io.cucumber.java.en.Given;
-
 import org.farhan.common.MbtTransformerFactory;
-import org.farhan.objects.mbtTransformer.MbtTransformerProcessFeatureFile;
+import io.cucumber.java.en.Given;
+import io.cucumber.datatable.DataTable;
 
 public class MbtTransformerProcessFeatureFileSteps {
 
-	@Given("^The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows$")
-	public void theClaimProjectSrcTestResourcesCucumberDeptProcessFeatureFileIsAsFollows(String docString) {
-		MbtTransformerFactory.get("MbtTransformerProcessFeatureFile").setInputOutputs("Content", docString);
-	}
+    @Given("^The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows$")
+    public void theMbtTransformerPluginSrcTestResourcesCucumberProcessFeatureFileIsAsFollows(String docString) {
+        MbtTransformerFactory.get("ProcessFeatureFile").setInputOutputs("Content", docString);
+    }
 
-	@Given("^The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be as follows$")
-	public void theClaimProjectSrcTestResourcesCucumberProcessFeatureFileWillBeAsFollows(String docString) {
-		MbtTransformerFactory.get("MbtTransformerProcessFeatureFile").assertInputOutputs("Content", docString);
-	}
+    @Given("^The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be as follows$")
+    public void theMbtTransformerPluginSrcTestResourcesCucumberProcessFeatureFileWillBeAsFollows(String docString) {
+        MbtTransformerFactory.get("ProcessFeatureFile").assertInputOutputs("Content", docString);
+    }
 }

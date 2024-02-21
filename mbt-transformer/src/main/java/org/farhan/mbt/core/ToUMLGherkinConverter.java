@@ -54,8 +54,8 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 		Class interactionOwningClass = (Class) targetInteraction.getOwner();
 		String newName = interactionOwningClass.getQualifiedName();
 		newName = newName.replace(tgtPrj.SECOND_LAYER, tgtPrj.THIRD_LAYER);
-		newName = newName.replace("Steps", "");
-		newName = newName.replace(getFactoryName(newName), "");
+		newName = newName.replaceAll("Steps$", "");
+		newName = newName.replaceFirst(getFactoryName(newName), "");
 		return newName;
 	}
 
@@ -108,9 +108,10 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 			String methodName = prefix + "InputOutputs";
 			Message nextLayerMessage = getMessage(nextLayerInteraction, nextLayerClass, methodName);
 			if (getFirstArgument(m).contentEquals("docString")) {
-				createArgument(nextLayerMessage, "contents", "docString", true);
+				createArgument(nextLayerMessage, "key", "\"Content\"");
+				createArgument(nextLayerMessage, "value", "docString");
 			} else {
-				ValueSpecification vs = createArgument(nextLayerMessage, "keyMap", "dataTable", true);
+				ValueSpecification vs = createArgument(nextLayerMessage, "keyMap", "dataTable");
 				String annotationDetailValue = m.getArguments().get(0).getEAnnotation("dataTable").getDetails()
 						.getFirst().getValue();
 				createAnnotation(vs, "keyMap", "0", annotationDetailValue);
@@ -121,21 +122,18 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 				if (section.contentEquals("nullnull")) {
 					section = "";
 				}
-				createArgument(nextLayerMessage, "section", "\"" + section + "\"", true);
+				section = section.replace(" ", "");
+				createArgument(nextLayerMessage, "section", "\"" + section + "\"");
 			}
 			if (Validator.isNegativeStep(m.getName())) {
-				createArgument(nextLayerMessage, "negativeTest", "true", true);
+				createArgument(nextLayerMessage, "negativeTest", "true");
 			}
 		} else {
-
-			String attributeName = "";
 			if (MBTVertexValidator.isVertex(m.getName())) {
-				attributeName = MBTVertexValidator.getState(m.getName());
-			} else {
-				attributeName = MBTEdgeValidator.getState(m.getName());
+				String attributeName = MBTVertexValidator.getState(m.getName());
+				String methodName = getMethodName(prefix + StringUtils.capitalize(attributeName), true);
+				getMessage(nextLayerInteraction, nextLayerClass, methodName);
 			}
-			String methodName = getMethodName(prefix + StringUtils.capitalize(attributeName), true);
-			getMessage(nextLayerInteraction, nextLayerClass, methodName);
 		}
 	}
 
