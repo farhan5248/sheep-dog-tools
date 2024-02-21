@@ -2,7 +2,7 @@ Feature: Debug
 
   @debug
   Scenario: Generate files
-    Given The mbt-transformer plugin, src/test/resources/Cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
       """
       Feature: Convert Feature
       

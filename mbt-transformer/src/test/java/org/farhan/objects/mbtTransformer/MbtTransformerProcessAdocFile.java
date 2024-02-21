@@ -1,8 +1,10 @@
 package org.farhan.objects.mbtTransformer;
 
 import java.util.HashMap;
+
+import org.farhan.common.MbtTransformer;
+
 import io.cucumber.java.PendingException;
-import org.farhan.common.objects.MbtTransformer;
 
 public class MbtTransformerProcessAdocFile extends MbtTransformer {
 

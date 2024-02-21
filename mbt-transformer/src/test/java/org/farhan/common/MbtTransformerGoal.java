@@ -1,4 +1,4 @@
-package org.farhan.common.objects;
+package org.farhan.common;
 
 import org.farhan.mbt.core.MojoGoal;
 import org.farhan.mbt.core.Utilities;

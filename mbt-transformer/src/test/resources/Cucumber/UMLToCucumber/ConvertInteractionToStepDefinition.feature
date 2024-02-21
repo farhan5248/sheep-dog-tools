@@ -1,7 +1,7 @@
 Feature: Convert Interaction To Step Definition
 
   Background: Create a feature file
-    Given The mbt-transformer plugin, src/test/resources/Cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
       """
       Feature: This is a test feature
       
@@ -33,10 +33,9 @@ Feature: Convert Interaction To Step Definition
       """
       package org.farhan.stepdefs.blah;
       
-      import org.farhan.common.objects.BlahFactory;
+      import org.farhan.common.BlahFactory;
       import io.cucumber.java.en.Given;
       import io.cucumber.datatable.DataTable;
-      import org.farhan.common.stepdefs.TestSteps;
       
       public class BlahDataTablePageSteps {
       
@@ -53,10 +52,9 @@ Feature: Convert Interaction To Step Definition
       """
       package org.farhan.stepdefs.blah;
       
-      import org.farhan.common.objects.BlahFactory;
+      import org.farhan.common.BlahFactory;
       import io.cucumber.java.en.Given;
       import io.cucumber.datatable.DataTable;
-      import org.farhan.common.stepdefs.TestSteps;
       
       public class BlahDocStringPageSteps {
       
@@ -73,10 +71,9 @@ Feature: Convert Interaction To Step Definition
       """
       package org.farhan.stepdefs.blah;
       
-      import org.farhan.common.objects.BlahFactory;
+      import org.farhan.common.BlahFactory;
       import io.cucumber.java.en.Given;
       import io.cucumber.datatable.DataTable;
-      import org.farhan.common.stepdefs.TestSteps;
       
       public class BlahObjectPageSteps {
       
@@ -93,10 +90,9 @@ Feature: Convert Interaction To Step Definition
       """
       package org.farhan.stepdefs.blah2;
       
-      import org.farhan.common.objects.Blah2Factory;
+      import org.farhan.common.Blah2Factory;
       import io.cucumber.java.en.Given;
       import io.cucumber.datatable.DataTable;
-      import org.farhan.common.stepdefs.TestSteps;
       
       public class Blah2JsonRequestSteps {
       

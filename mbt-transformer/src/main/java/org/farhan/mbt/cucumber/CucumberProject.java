@@ -34,7 +34,7 @@ public class CucumberProject extends ConvertibleProject {
 		File aFile = null;
 		switch (layer) {
 		case FIRST_LAYER:
-			aFile = new File(baseDir + "src/test/resources/Cucumber/");
+			aFile = new File(baseDir + "src/test/resources/cucumber/");
 			break;
 		case SECOND_LAYER:
 			aFile = new File(baseDir + "src/test/java/org/farhan/" + SECOND_LAYER + "/");

@@ -81,7 +81,7 @@ Feature: Convert Class To Feature
     And The mbt-transformer plugin, uml-to-cucumber goal is executed
 
   Scenario: Convert class to feature from graph
-    Then The mbt-transformer plugin, src/test/resources/Cucumber/Process.feature file will be as follows
+    Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be as follows
       """
       Feature: Process
       

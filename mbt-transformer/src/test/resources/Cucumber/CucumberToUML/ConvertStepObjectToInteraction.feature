@@ -1,7 +1,7 @@
 Feature: Convert Step Object To Interaction
 
   Background: Create a feature file
-    Given The mbt-transformer plugin, src/test/resources/Cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
       """
       Feature: This is a test feature
       

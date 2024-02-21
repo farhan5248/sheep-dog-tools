@@ -80,7 +80,7 @@ public class UMLToJavaConverter extends ToCodeConverter {
 			// factory instead
 			if (importedClass.getQualifiedName().startsWith("pst::" + tgtPrj.THIRD_LAYER + "::")) {
 				String factoryName = getFactoryName(qualifiedName);
-				cu.addImport("org.farhan.common.objects." + factoryName);
+				cu.addImport("org.farhan.common." + factoryName);
 			} else if (importedClass.getQualifiedName().startsWith("pst::" + tgtPrj.SECOND_LAYER + "::")) {
 				String filePath = convertObjectName(qualifiedName);
 				String pkgPath = convertJavaPathToJavaPackage(filePath).replace("pst.", "");
@@ -92,9 +92,9 @@ public class UMLToJavaConverter extends ToCodeConverter {
 			// imports is used
 			cu.addImport("io.cucumber.java.en.Given");
 			cu.addImport("io.cucumber.datatable.DataTable");
-			cu.addImport("org.farhan.common.stepdefs.TestSteps");
 		} else if (layer.contentEquals(srcPrj.THIRD_LAYER)) {
 			cu.addImport("java.util.HashMap");
+			// TODO remove pending exception when the third layer is an interface
 			cu.addImport("io.cucumber.java.PendingException");
 			cu.addImport("org.farhan.common." + StringUtils.capitalize(c.getPackage().getName()));
 		}

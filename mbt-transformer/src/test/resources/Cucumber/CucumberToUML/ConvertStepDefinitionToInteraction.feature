@@ -1,7 +1,7 @@
 Feature: Convert Step Definition To Interaction
 
   Background: Create a feature file
-    Given The mbt-transformer plugin, src/test/resources/Cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
       """
       Feature: This is a test feature
       
@@ -16,8 +16,7 @@ Feature: Convert Step Definition To Interaction
       
       import io.cucumber.java.en.Given;
       import io.cucumber.datatable.DataTable;
-      import org.farhan.common.stepdefs.TestSteps;
-      import org.farhan.common.objects.BlahFactory;
+      import org.farhan.common.BlahFactory;
       
       public class BlahObjectPageSteps {
       
@@ -43,10 +42,9 @@ Feature: Convert Step Definition To Interaction
       """
       package org.farhan.stepdefs.blah;
       
-      import org.farhan.common.objects.BlahFactory;
+      import org.farhan.common.BlahFactory;
       import io.cucumber.java.en.Given;
       import io.cucumber.datatable.DataTable;
-      import org.farhan.common.stepdefs.TestSteps;
       
       public class BlahObjectPageSteps {
       

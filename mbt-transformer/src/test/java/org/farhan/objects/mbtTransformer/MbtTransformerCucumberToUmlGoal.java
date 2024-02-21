@@ -2,7 +2,7 @@ package org.farhan.objects.mbtTransformer;
 
 import java.util.HashMap;
 
-import org.farhan.common.objects.MbtTransformerGoal;
+import org.farhan.common.MbtTransformerGoal;
 import org.farhan.mbt.core.ConvertibleProject;
 
 public class MbtTransformerCucumberToUmlGoal extends MbtTransformerGoal {

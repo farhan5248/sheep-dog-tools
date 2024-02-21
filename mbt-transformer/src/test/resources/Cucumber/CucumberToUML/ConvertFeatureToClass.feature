@@ -1,7 +1,7 @@
 Feature: Convert Feature To Class
 
   Background: Create a feature file
-    Given The mbt-transformer plugin, src/test/resources/Cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
       """
       @tag1 @tag2 @tag3
       Feature: This is a test feature

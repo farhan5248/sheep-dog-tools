@@ -1,4 +1,4 @@
-package org.farhan.common.objects;
+package org.farhan.common;
 
 public class GoalObject  extends GraphModelObject{
 

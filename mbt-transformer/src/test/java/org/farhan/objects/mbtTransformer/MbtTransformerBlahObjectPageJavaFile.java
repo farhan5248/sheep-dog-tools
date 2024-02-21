@@ -2,7 +2,7 @@ package org.farhan.objects.mbtTransformer;
 
 import java.util.HashMap;
 
-import org.farhan.common.objects.MbtTransformer;
+import org.farhan.common.MbtTransformer;
 
 public class MbtTransformerBlahObjectPageJavaFile extends MbtTransformer {
 	

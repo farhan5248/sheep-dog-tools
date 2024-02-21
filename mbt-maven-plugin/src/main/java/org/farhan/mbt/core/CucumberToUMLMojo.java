@@ -33,11 +33,11 @@ public class CucumberToUMLMojo extends AbstractMojo {
 	/**
 	 * The tag of the selected scenarios.
 	 */
-	@Parameter(property = "cucumber-to-uml.tag", defaultValue = "debug")
+	@Parameter(property = "tag", defaultValue = "debug")
 	private String tag;
 
 	public void execute() throws MojoExecutionException {
-		getLog().info(tag);
+		getLog().info("Converting tests with this tag: "+tag);
 		try {
 			ConvertCucumberToUML mojo = new ConvertCucumberToUML();
 			// TODO pass in tags to the mojo constructor

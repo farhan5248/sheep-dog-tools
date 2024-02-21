@@ -1,6 +1,6 @@
 package org.farhan.objects.mbtTransformer;
 
-import org.farhan.common.objects.MbtTransformerGoal;
+import org.farhan.common.MbtTransformerGoal;
 
 public class MbtTransformerAsciidoctorToGraphGoal extends MbtTransformerGoal {
 

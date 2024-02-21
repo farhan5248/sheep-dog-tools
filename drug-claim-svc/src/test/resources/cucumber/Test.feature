@@ -14,7 +14,7 @@ Feature: Adjudicate a claim
           |         10.0 |
 
   @unit @component
-  Scenario: Test 1
+  Scenario: Test 2
 
     Given The Admin application, Family page is as follows
           | Family |
