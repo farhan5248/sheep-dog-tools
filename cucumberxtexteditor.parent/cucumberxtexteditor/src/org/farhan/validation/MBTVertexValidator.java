@@ -15,7 +15,7 @@ public class MBTVertexValidator {
 	private static final String NAME_REGEX = ".";
 	private static final String COMPONENT_REGEX = "(( " + NAME_REGEX
 			+ "*)( application| service| project| plugin| batchjob),)?";
-	private static final String OBJECT_REGEX = "( " + NAME_REGEX + "*)( file| page| config| resource)";
+	private static final String OBJECT_REGEX = "( " + NAME_REGEX + "*)( file| page| config| response)";
 	private static final String DETAILS_REGEX = "(,( " + NAME_REGEX + "*)( section| fragment| table| snippet))?";
 	private static final String STATE_REGEX = "(( is| isn't| will be| won't be)( empty| present| valid| invalid)?( as follows)?)";
 	private static final String VERTEX_REGEX = "The" + COMPONENT_REGEX + OBJECT_REGEX + DETAILS_REGEX + STATE_REGEX;

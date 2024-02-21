@@ -166,6 +166,11 @@ public class VertexValidatorTest {
 	}
 
 	@Test
+	public void testObjectRegexResponse() {
+		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 application, Something2 response is empty"));
+	}
+
+	@Test
 	public void testAppRegexService() {
 		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 service, Something2 file is empty"));
 	}

@@ -23,25 +23,23 @@ public class CucumberValidator extends AbstractCucumberValidator {
 
 		// TODO the quickfix here is to identify which regex is broken and put an
 		// example in place
-
 		if (!MBTEdgeValidator.isValid(step.getName()) && !MBTVertexValidator.isValid(step.getName())) {
-			// TODO instead of this error message, give the parts breakdown to see what's missing
+			// TODO instead of this error message, give the parts breakdown to see what's
+			// missing
 			error(MBTVertexValidator.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
 		}
-
 		// TODO apply validation to Given/Then vs When
 		AbstractScenario as = (AbstractScenario) step.eContainer();
 		// TODO assumes step 0 is never And. Check that as step validation
 		// Use something like this to determine if this is a GWT:
 		// as.getSteps().indexOf(step)
-
 		if (step.getTheStepTable() != null) {
 			// TODO Add table column row validation, each row should have the max number of
 			// columns
 		}
 	}
 
-	// Validate if the Abstract Scenario is a valid path, NORMAL is when the file is
+    // Validate if the Abstract Scenario is a valid path, NORMAL is when the file is
 	// saved
 	@Check(CheckType.NORMAL)
 	public void checkScenario(Scenario scenario) {
@@ -52,7 +50,6 @@ public class CucumberValidator extends AbstractCucumberValidator {
 		// the keyword
 		// TODO also check that there's a sequence of GWT or G(G|A|B)*W(W|A|B)*T(T|A|B)*
 		// and not (G|W|T|A|B)*
-
 		if (!Character.isUpperCase(scenario.getName().charAt(0))) {
 			warning("Scenario name should start with a capital", CucumberPackage.Literals.ABSTRACT_SCENARIO__NAME,
 					INVALID_NAME);
@@ -64,11 +61,9 @@ public class CucumberValidator extends AbstractCucumberValidator {
 	@Check(CheckType.EXPENSIVE)
 	public void checkFeature(Feature feature) {
 		// TODO validate that feature file name and feature name are the same.
-
 		if (!Character.isUpperCase(feature.getName().charAt(0))) {
 			warning("Feature name should start with a capital", CucumberPackage.Literals.FEATURE__NAME, INVALID_NAME);
 		}
-
 	}
 
 }

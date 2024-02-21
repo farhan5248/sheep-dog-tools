@@ -34,7 +34,7 @@ public class MyCucumberLexer extends InternalCucumberLexer {
 		if (tokenText == null) {
 			return t;
 		}
-		System.out.println("Handling Token >>>" + tokenText + "<<< " + t.getType());
+		//System.out.println("Handling Token >>>" + tokenText + "<<< " + t.getType());
 
 		// This handles keywords in a docstring
 		if (!isDocString && tokenText.contentEquals("\"\"\"")) {
