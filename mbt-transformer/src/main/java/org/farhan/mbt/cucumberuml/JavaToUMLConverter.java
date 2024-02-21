@@ -112,7 +112,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 			for (ImportDeclaration i : cu.getImports()) {
 				i.getNameAsString();
 				if (!i.getNameAsString().endsWith("Factory")) {
-					// Don't include the factory import because it's a detail of dependency
+					// Don't include the factory import because it's a detail of how dependency
 					// injection is implemented
 					String importedClassName = convertImportNameToQualifiedName(i.getNameAsString());
 					UMLClassWrapper ucwi = (UMLClassWrapper) tgtPrj.createObject(importedClassName);
@@ -155,12 +155,11 @@ public class JavaToUMLConverter extends ToUMLConverter {
 	@Override
 	protected void convertInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception {
 
-		// Instead of appending new statements to an existing method body, remove them.
-		// Why would there be existing statements? That's because the UML model could
-		// have been reverse engineered and now we're refreshing it from updated feature
-		// files
+		// Instead of appending java file statements to an existing interaction body,
+		// skip them. Then when forward engineering and doing a git status, we'll see
+		// the UML changes
 		if (!anInteraction.getOwnedBehaviors().isEmpty()) {
-			anInteraction.getOwnedBehaviors().clear();
+			return;
 		}
 		for (Object o : steps) {
 			Statement s = (Statement) o;

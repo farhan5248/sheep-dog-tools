@@ -15,7 +15,7 @@ public abstract class GraphModelObjectFactory {
 				return classes.get(className);
 			} else {
 				Class<?> gmoClass = Class
-						.forName("org.farhan.objects." + packageName + "." + preOrPost + "." + className);
+						.forName("org.farhan.objects." + packageName + "." + preOrPost + "." + className + "Impl");
 				GraphModelObject gmo = (GraphModelObject) gmoClass.getConstructor().newInstance();
 				classes.put(className, gmo);
 				return gmo;

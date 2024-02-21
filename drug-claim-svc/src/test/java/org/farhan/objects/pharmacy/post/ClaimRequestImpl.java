@@ -7,9 +7,10 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import org.farhan.common.PharmacyPost;
+import org.farhan.objects.pharmacy.ClaimRequest;
 import org.junit.jupiter.api.Assertions;
 
-public class ClaimRequest extends PharmacyPost {
+public class ClaimRequestImpl extends PharmacyPost implements ClaimRequest {
 
 	public void setDrugCost(HashMap<String, String> keyMap) {
 		addParamter("Drug Cost", keyMap.get("Drug Cost"));

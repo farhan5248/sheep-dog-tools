@@ -55,14 +55,12 @@ public class UMLToJavaConverter extends ToCodeConverter {
 		tgtWrp = (CucumberJavaWrapper) tgtPrj.createObject(path);
 		CompilationUnit cu = (CompilationUnit) tgtWrp.get();
 		cu.setStorage(tgtWrp.getFile().toPath());
-		cu.addType(new ClassOrInterfaceDeclaration());
-		ClassOrInterfaceDeclaration javaClassType = (ClassOrInterfaceDeclaration) cu.getType(0);
+		ClassOrInterfaceDeclaration javaClassType = new ClassOrInterfaceDeclaration();
 		javaClassType.setName(c.getName());
 		javaClassType.setPublic(true);
-		if (!layer.contentEquals(srcPrj.SECOND_LAYER)) {
-			// TODO This assumes that the parent package is the application. This won't work
-			// if there are several child packages
-			javaClassType.addExtendedType(StringUtils.capitalize(c.getPackage().getName()));
+		cu.addType(javaClassType);
+		if (layer.contentEquals(srcPrj.THIRD_LAYER)) {
+			javaClassType.setInterface(true);
 		}
 		cu.setPackageDeclaration(convertJavaPathToJavaPackage(removeJavaClassFromJavaPath(path)));
 		convertComments(c);
@@ -81,10 +79,6 @@ public class UMLToJavaConverter extends ToCodeConverter {
 			if (importedClass.getQualifiedName().startsWith("pst::" + tgtPrj.THIRD_LAYER + "::")) {
 				String factoryName = getFactoryName(qualifiedName);
 				cu.addImport("org.farhan.common." + factoryName);
-			} else if (importedClass.getQualifiedName().startsWith("pst::" + tgtPrj.SECOND_LAYER + "::")) {
-				String filePath = convertObjectName(qualifiedName);
-				String pkgPath = convertJavaPathToJavaPackage(filePath).replace("pst.", "");
-				cu.addImport(pkgPath);
 			}
 		}
 		if (layer.contentEquals(srcPrj.SECOND_LAYER)) {
@@ -94,9 +88,6 @@ public class UMLToJavaConverter extends ToCodeConverter {
 			cu.addImport("io.cucumber.datatable.DataTable");
 		} else if (layer.contentEquals(srcPrj.THIRD_LAYER)) {
 			cu.addImport("java.util.HashMap");
-			// TODO remove pending exception when the third layer is an interface
-			cu.addImport("io.cucumber.java.PendingException");
-			cu.addImport("org.farhan.common." + StringUtils.capitalize(c.getPackage().getName()));
 		}
 	}
 
@@ -111,10 +102,12 @@ public class UMLToJavaConverter extends ToCodeConverter {
 				MethodDeclaration aMethod = cu.getType(0).addMethod(anInteraction.getName(), Keyword.PUBLIC);
 				if (layer.contentEquals(srcPrj.SECOND_LAYER)) {
 					convertAnnotation(anInteraction, aMethod);
+					convertInteractionMessages(anInteraction, aMethod.createBody());
+				} else {
+					aMethod.removeBody();
 				}
 				convertParameters(anInteraction, aMethod);
 				convertComments(anInteraction, aMethod);
-				convertInteractionMessages(anInteraction, aMethod.createBody());
 			}
 		}
 	}
@@ -126,8 +119,6 @@ public class UMLToJavaConverter extends ToCodeConverter {
 			for (Message m : anInteraction.getMessages()) {
 				convertMessage(m, body);
 			}
-		} else {
-			body.addStatement("throw new PendingException();");
 		}
 	}
 

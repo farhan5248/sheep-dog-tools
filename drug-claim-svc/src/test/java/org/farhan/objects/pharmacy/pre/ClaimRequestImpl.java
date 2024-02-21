@@ -5,8 +5,9 @@ import java.util.HashMap;
 import org.farhan.adjudication.ClaimEngine;
 import org.farhan.adjudication.ClaimFactory;
 import org.farhan.common.PharmacyPre;
+import org.farhan.objects.pharmacy.ClaimRequest;
 
-public class ClaimRequest extends PharmacyPre {
+public class ClaimRequestImpl extends PharmacyPre implements ClaimRequest {
 
 	public void setDrugCost(HashMap<String, String> keyMap) {
 		ClaimFactory.getClaim().setDrugCost(keyMap.get("Drug Cost"));

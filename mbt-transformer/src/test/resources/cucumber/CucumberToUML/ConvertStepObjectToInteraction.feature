@@ -15,14 +15,10 @@ Feature: Convert Step Object To Interaction
       package org.farhan.objects.blah;
       
       import java.util.HashMap;
-      import io.cucumber.java.PendingException;
-      import org.farhan.common.blah;
       
-      public class ObjectPage extends blah {
+      public interface ObjectPage {
       
-          public void assertIsInvalid() {
-              throw new PendingException();
-          }
+          public void assertIsInvalid();
       }
 
       """
@@ -37,18 +33,12 @@ Feature: Convert Step Object To Interaction
       package org.farhan.objects.blah;
       
       import java.util.HashMap;
-      import io.cucumber.java.PendingException;
-      import org.farhan.common.blah;
       
-      public class ObjectPage extends blah {
+      public interface ObjectPage {
       
-          public void assertIsInvalid() {
-              throw new PendingException();
-          }
+          public void assertIsInvalid();
       
-          public void assertIsEmpty() {
-              throw new PendingException();
-          }
+          public void assertIsEmpty();
       }
 
       """

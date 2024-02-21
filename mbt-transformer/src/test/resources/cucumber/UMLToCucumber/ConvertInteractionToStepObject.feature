@@ -34,18 +34,12 @@ Feature: Convert Interaction To Step Object
       package org.farhan.objects.blah;
       
       import java.util.HashMap;
-      import io.cucumber.java.PendingException;
-      import org.farhan.common.Blah;
       
-      public class DataTablePage extends Blah {
+      public interface DataTablePage {
       
-          public void assertTopSectionh1(HashMap<String, String> keyMap) {
-              throw new PendingException();
-          }
+          public void assertTopSectionh1(HashMap<String, String> keyMap);
       
-          public void assertTopSectionh2(HashMap<String, String> keyMap) {
-              throw new PendingException();
-          }
+          public void assertTopSectionh2(HashMap<String, String> keyMap);
       }
       
       """    
@@ -56,14 +50,10 @@ Feature: Convert Interaction To Step Object
       package org.farhan.objects.blah;
       
       import java.util.HashMap;
-      import io.cucumber.java.PendingException;
-      import org.farhan.common.Blah;
       
-      public class DocStringPage extends Blah {
+      public interface DocStringPage {
       
-          public void setContent(String contents) {
-              throw new PendingException();
-          }
+          public void setContent(String contents);
       }
       
       """
@@ -74,14 +64,10 @@ Feature: Convert Interaction To Step Object
       package org.farhan.objects.blah;
       
       import java.util.HashMap;
-      import io.cucumber.java.PendingException;
-      import org.farhan.common.Blah;
       
-      public class ObjectPage extends Blah {
+      public interface ObjectPage {
       
-          public void setIsEmpty() {
-              throw new PendingException();
-          }
+          public void setIsEmpty();
       }
       
       """
@@ -92,26 +78,16 @@ Feature: Convert Interaction To Step Object
       package org.farhan.objects.blah2;
       
       import java.util.HashMap;
-      import io.cucumber.java.PendingException;
-      import org.farhan.common.Blah2;
       
-      public class JsonRequest extends Blah2 {
+      public interface JsonRequest {
       
-          public void seti1(HashMap<String, String> keyMap) {
-              throw new PendingException();
-          }
+          public void seti1(HashMap<String, String> keyMap);
       
-          public void seti2(HashMap<String, String> keyMap) {
-              throw new PendingException();
-          }
+          public void seti2(HashMap<String, String> keyMap);
       
-          public void transition() {
-              throw new PendingException();
-          }
+          public void transition();
       
-          public void setIsInvalid() {
-              throw new PendingException();
-          }
+          public void setIsInvalid();
       }
       
       """    
