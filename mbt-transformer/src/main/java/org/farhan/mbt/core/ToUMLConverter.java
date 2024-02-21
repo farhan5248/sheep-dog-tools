@@ -190,9 +190,7 @@ public abstract class ToUMLConverter {
 								&& nextLayerInteraction.getOwnedParameters().isEmpty()) {
 							addNextLayerInteractionParameters(nextLayerInteraction, m);
 							addNextLayerInteractionMessages(nextLayerInteraction, m);
-						} else if (!nextLayerInteraction.getMessages().isEmpty()
-								&& (nextLayerInteraction.getName().endsWith("AsFollows")
-										|| nextLayerInteraction.getName().endsWith("With"))) {
+						} else if (!nextLayerInteraction.getMessages().isEmpty()) {
 							addNextLayerInteractionParameters(nextLayerInteraction, m);
 						}
 						m.setSignature(nextLayerInteraction);

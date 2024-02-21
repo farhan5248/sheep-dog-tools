@@ -41,7 +41,7 @@ Feature: Convert Interaction To Step Definition
       
           @Given("^The blah application, DataTable page, Top section will be as follows$")
           public void theBlahApplicationDataTablePageTopSectionWillBeAsFollows(DataTable dataTable) {
-              BlahFactory.get("BlahDataTablePage").assertInputOutputs(dataTable, "TopSection");
+              BlahFactory.get("DataTablePage").assertInputOutputs(dataTable, "TopSection");
           }
       }
       
@@ -60,7 +60,7 @@ Feature: Convert Interaction To Step Definition
       
           @Given("^The blah application, DocString page is as follows$")
           public void theBlahApplicationDocStringPageIsAsFollows(String docString) {
-              BlahFactory.get("BlahDocStringPage").setInputOutputs(docString);
+              BlahFactory.get("DocStringPage").setInputOutputs(docString);
           }
       }
       
@@ -79,7 +79,7 @@ Feature: Convert Interaction To Step Definition
       
           @Given("^The blah application, Object page is empty$")
           public void theBlahApplicationObjectPageIsEmpty() {
-              BlahFactory.get("BlahObjectPage").setIsEmpty();
+              BlahFactory.get("ObjectPage").setIsEmpty();
           }
       }
       
@@ -98,14 +98,14 @@ Feature: Convert Interaction To Step Definition
       
           @Given("^The blah2 service, Json request is executed with$")
           public void theBlah2ServiceJsonRequestIsExecutedWith(DataTable dataTable) {
-              Blah2Factory.get("Blah2JsonRequest").setInputOutputs(dataTable, "");
-              Blah2Factory.get("Blah2JsonRequest").transition();
+              Blah2Factory.get("JsonRequest").setInputOutputs(dataTable, "");
+              Blah2Factory.get("JsonRequest").transition();
           }
       
           @Given("^The blah2 service, Json request is invalid$")
           public void theBlah2ServiceJsonRequestIsInvalid() {
-              Blah2Factory.get("Blah2JsonRequest").setIsInvalid();
-              Blah2Factory.get("Blah2JsonRequest").transition();
+              Blah2Factory.get("JsonRequest").setIsInvalid();
+              Blah2Factory.get("JsonRequest").transition();
           }
       }
       

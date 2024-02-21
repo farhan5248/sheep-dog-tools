@@ -51,13 +51,13 @@ public class MbtTransformerFactory {
 		} else if (className.endsWith("Blah2JsonRequestStepsJavaFile")) {
 			foo.setPath("src/test/java/org/farhan/stepdefs/blah2/Blah2JsonRequestSteps.java");
 		} else if (className.endsWith("Blah2JsonRequestJavaFile")) {
-			foo.setPath("src/test/java/org/farhan/objects/blah2/Blah2JsonRequest.java");
+			foo.setPath("src/test/java/org/farhan/objects/blah2/JsonRequest.java");
 		} else if (className.endsWith("BlahDataTablePageJavaFile")) {
-			foo.setPath("src/test/java/org/farhan/objects/blah/BlahDataTablePage.java");
+			foo.setPath("src/test/java/org/farhan/objects/blah/DataTablePage.java");
 		} else if (className.endsWith("BlahDocStringPageJavaFile")) {
-			foo.setPath("src/test/java/org/farhan/objects/blah/BlahDocStringPage.java");
+			foo.setPath("src/test/java/org/farhan/objects/blah/DocStringPage.java");
 		} else if (className.endsWith("BlahObjectPageJavaFile")) {
-			foo.setPath("src/test/java/org/farhan/objects/blah/BlahObjectPage.java");
+			foo.setPath("src/test/java/org/farhan/objects/blah/ObjectPage.java");
 		} else if (className.endsWith("ProcessAdocFile")) {
 			foo.setPath("src/test/resources/AsciiDoc/Process.adoc");
 		} else if (className.endsWith("ProcessGraphFile")) {

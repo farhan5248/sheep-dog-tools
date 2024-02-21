@@ -192,8 +192,6 @@ public class UMLToJavaConverter extends ToCodeConverter {
 		}
 	}
 
-
-
 	private void convertComments(Interaction anInteraction, MethodDeclaration aMethod) {
 		if (anInteraction.getOwnedComments().size() > 0) {
 			String comment = anInteraction.getOwnedComments().get(0).getBody();

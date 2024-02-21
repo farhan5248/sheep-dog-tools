@@ -1,9 +1,0 @@
-Feature: Process
-
-  @tag1
-  Scenario: Submit
-
-    Basic EDI claim
-
-        * The blah application, something/Object page is empty
-

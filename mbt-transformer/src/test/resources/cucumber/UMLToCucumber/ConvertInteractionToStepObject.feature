@@ -29,7 +29,7 @@ Feature: Convert Interaction To Step Object
     And The mbt-transformer plugin, uml-to-cucumber goal is executed
 
   Scenario: Create new step object Java class for graph vertices
-    Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/BlahDataTablePage.java file will be as follows
+    Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/DataTablePage.java file will be as follows
       """
       package org.farhan.objects.blah;
       
@@ -37,7 +37,7 @@ Feature: Convert Interaction To Step Object
       import io.cucumber.java.PendingException;
       import org.farhan.common.Blah;
       
-      public class BlahDataTablePage extends Blah {
+      public class DataTablePage extends Blah {
       
           public void assertTopSectionh1(HashMap<String, String> keyMap) {
               throw new PendingException();
@@ -51,7 +51,7 @@ Feature: Convert Interaction To Step Object
       """    
 
   Scenario: Create new step object Java class for graph edges
-    Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/BlahDocStringPage.java file will be as follows
+    Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/DocStringPage.java file will be as follows
       """
       package org.farhan.objects.blah;
       
@@ -59,7 +59,7 @@ Feature: Convert Interaction To Step Object
       import io.cucumber.java.PendingException;
       import org.farhan.common.Blah;
       
-      public class BlahDocStringPage extends Blah {
+      public class DocStringPage extends Blah {
       
           public void setContent(String contents) {
               throw new PendingException();
@@ -69,7 +69,7 @@ Feature: Convert Interaction To Step Object
       """
 
   Scenario: Non existing Java class creation with vertice details
-    Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/BlahObjectPage.java file will be as follows
+    Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be as follows
       """
       package org.farhan.objects.blah;
       
@@ -77,7 +77,7 @@ Feature: Convert Interaction To Step Object
       import io.cucumber.java.PendingException;
       import org.farhan.common.Blah;
       
-      public class BlahObjectPage extends Blah {
+      public class ObjectPage extends Blah {
       
           public void setIsEmpty() {
               throw new PendingException();
@@ -87,7 +87,7 @@ Feature: Convert Interaction To Step Object
       """
 
   Scenario: Non existing Java class creation with edge details
-    Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah2/Blah2JsonRequest.java file will be as follows
+    Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah2/JsonRequest.java file will be as follows
       """
       package org.farhan.objects.blah2;
       
@@ -95,7 +95,7 @@ Feature: Convert Interaction To Step Object
       import io.cucumber.java.PendingException;
       import org.farhan.common.Blah2;
       
-      public class Blah2JsonRequest extends Blah2 {
+      public class JsonRequest extends Blah2 {
       
           public void seti1(HashMap<String, String> keyMap) {
               throw new PendingException();

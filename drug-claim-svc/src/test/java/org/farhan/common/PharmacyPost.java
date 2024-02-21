@@ -1,10 +1,9 @@
-package org.farhan.objects.pharmacy.post;
+package org.farhan.common;
 
 import org.apache.commons.text.CaseUtils;
 import org.farhan.adjudication.ClaimResponse;
-import org.farhan.common.GraphModelObject;
 
-public class Pharmacy extends GraphModelObject {
+public class PharmacyPost extends GraphModelObject {
 
 	protected static String url = "http://localhost:8887/claim?";
 	protected static String responseBody = "";

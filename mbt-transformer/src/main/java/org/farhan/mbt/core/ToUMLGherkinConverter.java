@@ -48,24 +48,20 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 		}
 	}
 
-	private void createNextLayerInteractionMessagesFromVerticeMessage(Interaction targetInteraction, Message m) {
-
-		String text = MBTVertexValidator.getStateModality(m.getName());
-		if (text.startsWith("will be") || text.startsWith("won't be")) {
-			createInputOutputMessage(targetInteraction, m, "assert");
-		} else if (text.startsWith("is") || text.startsWith("isn't")) {
-			createInputOutputMessage(targetInteraction, m, "set");
-		} else {
-			// TODO throw an exception but generally the text should be valid by this point
-		}
-	}
-
 	@Override
 	protected String getNextLayerClassQualifiedName(Interaction targetInteraction) {
 
 		Class interactionOwningClass = (Class) targetInteraction.getOwner();
-		return interactionOwningClass.getQualifiedName().replace(tgtPrj.SECOND_LAYER, tgtPrj.THIRD_LAYER)
-				.replace("Steps", "");
+		String newName = interactionOwningClass.getQualifiedName();
+		newName = newName.replace(tgtPrj.SECOND_LAYER, tgtPrj.THIRD_LAYER);
+		newName = newName.replace("Steps", "");
+		newName = newName.replace(getFactoryName(newName), "");
+		return newName;
+	}
+
+	private String getFactoryName(String qualifiedName) {
+		String[] nameParts = qualifiedName.split("::");
+		return StringUtils.capitalize(nameParts[nameParts.length - 2]);
 	}
 
 	@Override
@@ -83,7 +79,19 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 		}
 	}
 
-	protected void createNextLayerInteractionMessagesFromEdgeMessage(Interaction nextLayerInteraction, Message m) {
+	private void createNextLayerInteractionMessagesFromVerticeMessage(Interaction targetInteraction, Message m) {
+
+		String text = MBTVertexValidator.getStateModality(m.getName());
+		if (text.startsWith("will be") || text.startsWith("won't be")) {
+			createInputOutputMessage(targetInteraction, m, "assert");
+		} else if (text.startsWith("is") || text.startsWith("isn't")) {
+			createInputOutputMessage(targetInteraction, m, "set");
+		} else {
+			// TODO throw an exception but generally the text should be valid by this point
+		}
+	}
+
+	private void createNextLayerInteractionMessagesFromEdgeMessage(Interaction nextLayerInteraction, Message m) {
 
 		createInputOutputMessage(nextLayerInteraction, m, "set");
 		Class nextLayerClass = createClassImport(getNextLayerClassQualifiedName(nextLayerInteraction),

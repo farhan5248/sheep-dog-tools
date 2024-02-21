@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashMap;
 
-public class ClaimResource extends Pharmacy {
+import org.farhan.common.PharmacyPost;
+
+public class ClaimResource extends PharmacyPost {
 
 	public void assertPayProvider(HashMap<String, String> keyMap) {
 		// TODO use a json library to do this

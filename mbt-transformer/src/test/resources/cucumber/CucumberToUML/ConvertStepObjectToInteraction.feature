@@ -10,7 +10,7 @@ Feature: Convert Step Object To Interaction
       
           Given The blah application, Object page is empty
       """
-    And The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/blahObjectPage.java file is as follows
+    And The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file is as follows
       """
       package org.farhan.objects.blah;
       
@@ -18,7 +18,7 @@ Feature: Convert Step Object To Interaction
       import io.cucumber.java.PendingException;
       import org.farhan.common.blah;
       
-      public class blahObjectPage extends blah {
+      public class ObjectPage extends blah {
       
           public void assertIsInvalid() {
               throw new PendingException();
@@ -32,7 +32,7 @@ Feature: Convert Step Object To Interaction
     And The mbt-transformer plugin, uml-to-cucumber goal is executed
 
   Scenario: Existing Java step object methods are preserved
-    Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/blahObjectPage.java file will be as follows
+    Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be as follows
       """
       package org.farhan.objects.blah;
       
@@ -40,7 +40,7 @@ Feature: Convert Step Object To Interaction
       import io.cucumber.java.PendingException;
       import org.farhan.common.blah;
       
-      public class blahObjectPage extends blah {
+      public class ObjectPage extends blah {
       
           public void assertIsInvalid() {
               throw new PendingException();

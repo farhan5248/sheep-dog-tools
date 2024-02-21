@@ -21,7 +21,7 @@ public abstract class FileObject extends GraphModelObject {
 			File theFile = new File(ConvertibleProject.baseDir + keyValue.get("path"));
 			Assertions.assertTrue(theFile.exists(), "The file (" + theFile.getCanonicalPath() + ") isn't present");
 		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step");
+			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
 	}
 
@@ -30,7 +30,7 @@ public abstract class FileObject extends GraphModelObject {
 			File aFile = new File(ConvertibleProject.baseDir + keyValue.get("path"));
 			Utilities.writeFile(aFile, docString);
 		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step");
+			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
 	}
 
@@ -40,7 +40,7 @@ public abstract class FileObject extends GraphModelObject {
 			String contents = Utilities.readFile(aFile);
 			Assertions.assertEquals(docString, contents.replaceAll("\r", ""));
 		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step");
+			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
 	}
 

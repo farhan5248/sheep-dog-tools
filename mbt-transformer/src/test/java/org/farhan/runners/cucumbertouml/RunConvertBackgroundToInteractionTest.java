@@ -10,7 +10,7 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("Cucumber/CucumberToUML/ConvertBackgroundToInteraction.feature")
+@SelectClasspathResource("cucumber/CucumberToUML/ConvertBackgroundToInteraction.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
 public class RunConvertBackgroundToInteractionTest {

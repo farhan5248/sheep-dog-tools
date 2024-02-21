@@ -19,7 +19,24 @@ Feature: Convert Scenario To Interaction To Scenario
       
       
       """
-    When The mbt-transformer plugin, cucumber-to-uml goal is executed with
+    And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is as follows
+      """
+      package org.farhan.stepdefs.blah;
+      
+      import io.cucumber.java.en.Given;
+      import io.cucumber.datatable.DataTable;
+      import org.farhan.common.BlahFactory;
+      
+      public class BlahObjectPageSteps {
+      
+          @Given("^The blah application, something/Object page is empty$")
+          public void theBlahApplicationSomethingObjectPageIsEmpty() {
+              BlahFactory.get("ObjectPage").setIsEmpty();
+          }
+      }
+      
+      """ 
+   When The mbt-transformer plugin, cucumber-to-uml goal is executed with
       | Tags |
       | tag1 |
     And The mbt-transformer plugin, uml-to-cucumber goal is executed
@@ -43,3 +60,20 @@ Feature: Convert Scenario To Interaction To Scenario
       
       
       """
+      And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be as follows
+      """
+      package org.farhan.stepdefs.blah;
+      
+      import org.farhan.common.BlahFactory;
+      import io.cucumber.java.en.Given;
+      import io.cucumber.datatable.DataTable;
+      
+      public class BlahObjectPageSteps {
+      
+          @Given("^The blah application, something/Object page is empty$")
+          public void theBlahApplicationSomethingObjectPageIsEmpty() {
+              BlahFactory.get("ObjectPage").setIsEmpty();
+          }
+      }
+      
+      """ 

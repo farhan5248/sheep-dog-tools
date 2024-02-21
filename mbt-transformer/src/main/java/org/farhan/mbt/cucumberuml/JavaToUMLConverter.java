@@ -128,7 +128,9 @@ public class JavaToUMLConverter extends ToUMLConverter {
 		CucumberJavaWrapper jcw = (CucumberJavaWrapper) layerFile;
 		for (MethodDeclaration md : ((CompilationUnit) jcw.get()).getType(0).getMethods()) {
 			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), md.getNameAsString());
-
+			if (!anInteraction.getMessages().isEmpty()) {
+				continue;
+			}
 			String body;
 			if (md.getJavadocComment().isPresent()) {
 				body = md.getJavadocComment().get().getContent().replace(" * ", "");
