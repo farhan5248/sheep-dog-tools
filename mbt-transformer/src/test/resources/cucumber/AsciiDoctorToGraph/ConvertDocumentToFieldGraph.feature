@@ -5,11 +5,11 @@ Feature: Convert Document To Field Graph
     Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
           """
           = Feature Name
-
+          
           == Story One
-
+          
           === Set Object as follows
-
+          
           .Data table expressions
           [options="header"]
           |=============
@@ -38,11 +38,11 @@ Feature: Convert Document To Field Graph
     Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
           """
           = Feature Name
-
+          
           == Story One
-
+          
           === Set Object as follows
-
+          
           .Data table expressions
           [options="header"]
           |=============
@@ -63,11 +63,11 @@ Feature: Convert Document To Field Graph
     Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
           """
           = Feature Name
-
+          
           == Story One
-
+          
           === Set Object as follows
-
+          
           .Data table expressions
           [options="header"]
           |=============

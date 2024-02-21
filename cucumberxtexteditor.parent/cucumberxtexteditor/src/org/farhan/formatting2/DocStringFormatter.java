@@ -4,7 +4,6 @@ import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.farhan.cucumber.DocString;
 import org.farhan.cucumber.Line;
-import org.farhan.cucumber.Statement;
 import org.farhan.services.CucumberGrammarAccess;
 import org.farhan.services.CucumberGrammarAccess.DocStringElements;
 
@@ -33,11 +32,12 @@ public class DocStringFormatter extends Formatter {
 		formatKeyword(df.getRegion(theDocString, a.getQuotationMarkQuotationMarkQuotationMarkKeyword_3()), doc);
 		formatEOL12RuleCall(df.getRegion(theDocString, a.getEOLTerminalRuleCall_4()), doc);
 		for (Line s : theDocString.getLines()) {
-			LineFormatter formatter = new LineFormatter(s);
-			formatter.isLast(isLastElement(s, theDocString.getLines()));
-			formatter.setIndent(10, true);
-			formatter.isLastEOLDouble(false);
-			formatter.format(doc, ga, df);
+			// Lines in a Doc String shouldn't be automatically formatted
+			// LineFormatter formatter = new LineFormatter(s);
+			// formatter.isLast(isLastElement(s, theDocString.getLines()));
+			// formatter.setIndent(10);
+			// formatter.isLastEOLDouble(false);
+			// formatter.format(doc, ga, df);
 		}
 	}
 

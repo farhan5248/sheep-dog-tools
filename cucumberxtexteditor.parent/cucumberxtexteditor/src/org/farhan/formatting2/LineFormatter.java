@@ -8,34 +8,24 @@ import org.farhan.services.CucumberGrammarAccess.LineElements;
 
 public class LineFormatter extends Formatter {
 
-	private boolean isMinIndentCnt = false;
-
 	private Line theLine;
 
 	public LineFormatter(Line theLine) {
 		this.theLine = theLine;
 	}
 
-	public void setIndent(int indentCnt, boolean isMinIndentCnt) {
-		this.isMinIndentCnt = isMinIndentCnt;
-		setIndent(indentCnt);
-	}
-
 	public void format(IFormattableDocument doc, CucumberGrammarAccess ga, CucumberFormatter df) {
 		LineElements a = ga.getLineAccess();
 		formatLineBitsRuleCall(df.getRegion(theLine, a.getNameLineBitsParserRuleCall_0_0()), doc);
-		formatEOL12RuleCall(df.getRegion(theLine, a.getEOLTerminalRuleCall_1()), doc);
+		//formatEOL12RuleCall(df.getRegion(theLine, a.getEOLTerminalRuleCall_1()), doc);
 	}
 
 	public void formatLineBitsRuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
 
+		//System.out.println("Line: >>>" + iSR.getText() + "<<<");
 		int hiddenLength = iSR.getPreviousHiddenRegion().getText().length();
-		doc.prepend(iSR, it -> it.noSpace());
-		doc.append(iSR, it -> it.noSpace());
-		if (isMinIndentCnt && hiddenLength > getIndent().length()) {
-			replace(doc, iSR, indent.repeat(hiddenLength) + iSR.getText());
-		} else {
-			replace(doc, iSR, getIndent() + iSR.getText());
+		if (hiddenLength < getIndent().length() && iSR.getText().length() > 0) {
+			replace(doc, iSR, indent.repeat(indentCnt - hiddenLength) + iSR.getText());
 		}
 	}
 }
