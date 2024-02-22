@@ -83,7 +83,7 @@ Feature: Convert Interaction To Step Definition
           
               @Given("^The blah application, Object page is empty$")
               public void theBlahApplicationObjectPageIsEmpty() {
-                  BlahFactory.get("ObjectPage").setIsEmpty();
+                  BlahFactory.get("ObjectPage").setInputOutputs("Empty");
               }
           }
           
@@ -103,7 +103,7 @@ Feature: Convert Interaction To Step Definition
           
               @Given("^The blah2 service, Json request is executed with$")
               public void theBlah2ServiceJsonRequestIsExecutedWith(DataTable dataTable) {
-                  Blah2Factory.get("JsonRequest").setInputOutputs(dataTable, "");
+                  Blah2Factory.get("JsonRequest").setInputOutputs(dataTable);
                   Blah2Factory.get("JsonRequest").transition();
               }
           

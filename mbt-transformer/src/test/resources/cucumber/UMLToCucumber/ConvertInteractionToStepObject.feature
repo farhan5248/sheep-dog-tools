@@ -39,9 +39,9 @@ Feature: Convert Interaction To Step Object
           
           public interface DataTablePage {
           
-              public void assertTopSectionh1(HashMap<String, String> keyMap);
+              public void assertTopSectionH1(HashMap<String, String> keyMap);
           
-              public void assertTopSectionh2(HashMap<String, String> keyMap);
+              public void assertTopSectionH2(HashMap<String, String> keyMap);
           }
           
           """
@@ -71,7 +71,7 @@ Feature: Convert Interaction To Step Object
           
           public interface ObjectPage {
           
-              public void setIsEmpty();
+              public void setEmpty();
           }
           
           """
@@ -86,9 +86,9 @@ Feature: Convert Interaction To Step Object
           
           public interface JsonRequest {
           
-              public void seti1(HashMap<String, String> keyMap);
+              public void setI1(HashMap<String, String> keyMap);
           
-              public void seti2(HashMap<String, String> keyMap);
+              public void setI2(HashMap<String, String> keyMap);
           
               public void transition();
           }

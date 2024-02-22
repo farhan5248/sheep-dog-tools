@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.ElementImport;
 import org.eclipse.uml2.uml.Interaction;
@@ -129,6 +130,8 @@ public class JavaToUMLConverter extends ToUMLConverter {
 		for (MethodDeclaration md : ((CompilationUnit) jcw.get()).getType(0).getMethods()) {
 			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), md.getNameAsString());
 			if (!anInteraction.getMessages().isEmpty()) {
+				// If the body is already generated from a previous layer, don't override with
+				// what's on the file system
 				continue;
 			}
 			String body;
@@ -148,7 +151,10 @@ public class JavaToUMLConverter extends ToUMLConverter {
 			for (Parameter p : md.getParameters()) {
 				createParameter(anInteraction, p.getNameAsString(), "", "in");
 			}
-			convertInteractionMessages(anInteraction, md.getBody().get().getStatements());
+			// TODO this needs a test to demo how interfaces are reversed
+			if (md.getBody().isPresent()) {
+				convertInteractionMessages(anInteraction, md.getBody().get().getStatements());
+			}
 		}
 	}
 
@@ -250,34 +256,27 @@ public class JavaToUMLConverter extends ToUMLConverter {
 	protected ArrayList<String> getNextLayerInteractionNamesfromMessage(Message m) {
 		ArrayList<String> newTitles = new ArrayList<String>();
 		if (m.getName().startsWith("set") || m.getName().startsWith("assert")) {
-			if (m.getName().endsWith("InputOutputs")) {
-				String prefix = m.getName().replace("InputOutputs", "");
-
-				ValueSpecification vs;
-				vs = m.getArgument("section", null);
-				String sectionName = "";
-				if (vs != null) {
-					sectionName = ((LiteralString) vs).getValue();
-				}
-				vs = m.getArgument("keyMap", null);
-				if (vs != null) {
-					// it's a data table
-					String[] attributes = vs.getEAnnotation("keyMap").getDetails().getFirst().getValue().split("\\|");
-					for (String a : attributes) {
-						// TODO validate data table headers to always start with a capital letter
-						newTitles.add(getMethodName(prefix + sectionName + a, true));
-					}
-				} else {
-					// it's a doc string
-					newTitles.add(getMethodName(prefix + sectionName + "Content", true));
-				}
-			} else {
-				// TODO sections can be specified for setIsEmpty etc
-				// could be setIsEmpty or setIsInvalid
-				newTitles.add(m.getName());
+			String prefix = m.getName().replace("InputOutputs", "");
+			ValueSpecification vs;
+			vs = m.getArgument("section", null);
+			String sectionName = "";
+			if (vs != null) {
+				sectionName = ((LiteralString) vs).getValue();
 			}
-		} else {
-			// could be a send for a transition/edge
+			vs = m.getArgument("keyMap", null);
+			if (vs != null) {
+				// it's a data table
+				String[] attributes = vs.getEAnnotation("keyMap").getDetails().getFirst().getValue().split("\\|");
+				for (String a : attributes) {
+					newTitles.add(getMethodName(prefix + sectionName + StringUtils.capitalize(a), true));
+				}
+			}
+			vs = m.getArgument("key", null);
+			if (vs != null) {
+				LiteralString ls = (LiteralString) m.getArgument("key", null);
+				newTitles.add(getMethodName(prefix + sectionName + ls.getValue(), true));
+			}
+		} else if (m.getName().startsWith("transition")) {
 			newTitles.add(m.getName());
 		}
 		return newTitles;
@@ -285,7 +284,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 
 	@Override
 	protected void addNextLayerInteractionParameters(Interaction targetInteraction, Message m) {
-		if (!m.getArguments().isEmpty()) {
+		if (m.getArgument("keyMap", null) != null || m.getArgument("value", null) != null) {
 			createParameter(targetInteraction, "keyMap", "", "in");
 		}
 	}

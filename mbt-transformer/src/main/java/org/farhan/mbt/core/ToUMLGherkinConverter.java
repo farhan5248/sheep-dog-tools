@@ -103,37 +103,38 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 
 		Class nextLayerClass = createClassImport(getNextLayerClassQualifiedName(nextLayerInteraction),
 				nextLayerInteraction);
-		if (getFirstArgument(m).contentEquals("docString") || getFirstArgument(m).contentEquals("dataTable")) {
+		String methodName = prefix + "InputOutputs";
+		if (!getFirstArgument(m).contentEquals("docString") && !getFirstArgument(m).contentEquals("dataTable")
+				&& !MBTVertexValidator.isVertex(m.getName())) {
+			return;
+		}
+		Message nextLayerMessage = getMessage(nextLayerInteraction, nextLayerClass, methodName);
+		if (getFirstArgument(m).contentEquals("docString")) {
+			createArgument(nextLayerMessage, "key", "\"Content\"");
+			createArgument(nextLayerMessage, "value", "docString");
+		} else if (getFirstArgument(m).contentEquals("dataTable")) {
+			ValueSpecification vs = createArgument(nextLayerMessage, "keyMap", "dataTable");
 
-			String methodName = prefix + "InputOutputs";
-			Message nextLayerMessage = getMessage(nextLayerInteraction, nextLayerClass, methodName);
-			if (getFirstArgument(m).contentEquals("docString")) {
-				createArgument(nextLayerMessage, "key", "\"Content\"");
-				createArgument(nextLayerMessage, "value", "docString");
-			} else {
-				ValueSpecification vs = createArgument(nextLayerMessage, "keyMap", "dataTable");
-				String annotationDetailValue = m.getArguments().get(0).getEAnnotation("dataTable").getDetails()
-						.getFirst().getValue();
-				createAnnotation(vs, "keyMap", "0", annotationDetailValue);
-
-				String detailsName = MBTVertexValidator.getDetailsName(m.getName());
-				String detailsType = StringUtils.capitalize(MBTVertexValidator.getDetailsType(m.getName()));
-				String section = detailsName + detailsType;
-				if (section.contentEquals("nullnull")) {
-					section = "";
-				}
-				section = section.replace(" ", "");
-				createArgument(nextLayerMessage, "section", "\"" + section + "\"");
-			}
-			if (Validator.isNegativeStep(m.getName())) {
-				createArgument(nextLayerMessage, "negativeTest", "true");
-			}
-		} else {
-			if (MBTVertexValidator.isVertex(m.getName())) {
-				String attributeName = MBTVertexValidator.getState(m.getName());
-				String methodName = getMethodName(prefix + StringUtils.capitalize(attributeName), true);
-				getMessage(nextLayerInteraction, nextLayerClass, methodName);
-			}
+			// I need the data table as an annotation so that I can derive the layer 3
+			// method declarations
+			String annotationDetailValue = m.getArguments().get(0).getEAnnotation("dataTable").getDetails().getFirst()
+					.getValue();
+			createAnnotation(vs, "keyMap", "0", annotationDetailValue);
+		} else if (MBTVertexValidator.isVertex(m.getName())) {
+			String attributeName = StringUtils.capitalize(MBTVertexValidator.getStateType(m.getName()));
+			createArgument(nextLayerMessage, "key", "\"" + attributeName + "\"");
+		}
+		// Add section argument
+		String detailsName = MBTVertexValidator.getDetailsName(m.getName());
+		String detailsType = StringUtils.capitalize(MBTVertexValidator.getDetailsType(m.getName()));
+		String section = detailsName + detailsType;
+		if (!section.isEmpty() && !section.contentEquals("nullnull")) {
+			section = section.replace(" ", "");
+			createArgument(nextLayerMessage, "section", "\"" + section + "\"");
+		}
+		// Add negative argument
+		if (Validator.isNegativeStep(m.getName())) {
+			createArgument(nextLayerMessage, "negativeTest", "true");
 		}
 	}
 

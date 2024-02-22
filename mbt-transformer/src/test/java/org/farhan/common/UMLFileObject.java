@@ -103,7 +103,7 @@ public abstract class UMLFileObject extends FileObject {
 		Interaction interaction = (Interaction) umlProject.getPackagedElement("pst" + "::" + interactionName, null);
 		if (parameterName.contentEquals("has none")) {
 			Assertions.assertTrue(interaction.getOwnedParameters().isEmpty(),
-					"Interaction " + interaction + " has parameters");
+					"Interaction " + interactionName + " has parameters");
 		} else {
 			Parameter parameter = interaction.getOwnedParameter(parameterName, null);
 			Assertions.assertTrue(parameter != null,

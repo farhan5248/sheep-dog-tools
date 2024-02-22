@@ -43,23 +43,40 @@ Feature: Create Step Object From Step
 
       And The target/uml/pst.uml file, Class Interactions section will be as follows
           |                   Class Name |   Interaction Name |
-          |    objects::blah::ObjectPage |         setIsEmpty |
-          | objects::blah::DataTablePage | assertTopSectionh1 |
-          | objects::blah::DataTablePage | assertTopSectionh2 |
+          |    objects::blah::ObjectPage |           setEmpty |
+          | objects::blah::DataTablePage | assertTopSectionH1 |
+          | objects::blah::DataTablePage | assertTopSectionH2 |
           | objects::blah::DocStringPage |         setContent |
-          |  objects::blah2::JsonRequest |              seti1 |
-          |  objects::blah2::JsonRequest |              seti2 |
+          |  objects::blah2::JsonRequest |              setI1 |
+          |  objects::blah2::JsonRequest |              setI2 |
           |  objects::blah2::JsonRequest |         transition |
 
-  Scenario: Create new interaction parameters
+  Scenario Outline: Create new interaction parameters
 
       And The target/uml/pst.uml file, Interaction Parameters section will be as follows
+          |   Interaction Name |   Parameter Name |
+          | <Interaction Name> | <Parameter Name> |
+
+    Examples: Doc Strings
+
+          |                         Interaction Name | Parameter Name |
+          | objects::blah::DocStringPage::setContent |         keyMap |
+
+    Examples: Data Tables
+
           |                                 Interaction Name | Parameter Name |
-          |            objects::blah::ObjectPage::setIsEmpty |       has none |
-          | objects::blah::DataTablePage::assertTopSectionh1 |         keyMap |
-          | objects::blah::DataTablePage::assertTopSectionh2 |         keyMap |
-          |         objects::blah::DocStringPage::setContent |         keyMap |
-          |               objects::blah2::JsonRequest::seti1 |         keyMap |
-          |               objects::blah2::JsonRequest::seti2 |         keyMap |
-          |          objects::blah2::JsonRequest::transition |       has none |
+          | objects::blah::DataTablePage::assertTopSectionH1 |         keyMap |
+          | objects::blah::DataTablePage::assertTopSectionH2 |         keyMap |
+          |               objects::blah2::JsonRequest::setI1 |         keyMap |
+          |               objects::blah2::JsonRequest::setI2 |         keyMap |
+
+    Examples: Edge Transitions
+
+          |                        Interaction Name | Parameter Name |
+          | objects::blah2::JsonRequest::transition |       has none |
+
+    Examples: Vertex States
+
+          |                    Interaction Name | Parameter Name |
+          | objects::blah::ObjectPage::setEmpty |       has none |
 

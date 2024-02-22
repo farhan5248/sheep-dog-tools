@@ -72,8 +72,8 @@ Feature: Create Step Definition From Step
 
     Examples: blahObjectPageSteps
 
-          |                                                         Interaction Name |    Message |
-          | stepdefs::blah::blahObjectPageSteps::theBlahApplicationObjectPageIsEmpty | setIsEmpty |
+          |                                                         Interaction Name |         Message |
+          | stepdefs::blah::blahObjectPageSteps::theBlahApplicationObjectPageIsEmpty | setInputOutputs |
 
     Examples: blahDataTablePageSteps
 
@@ -88,7 +88,6 @@ Feature: Create Step Definition From Step
           | stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsExecutedWith | setInputOutputs |
           |         stepdefs::blah2::blah2JsonRequestSteps::theBlah2ServiceJsonRequestIsSent |      transition |
 
-  @debug
   Scenario: Create new interaction message annotations
 
     TODO Need to verify table headers as passed through to create layer 3 objects

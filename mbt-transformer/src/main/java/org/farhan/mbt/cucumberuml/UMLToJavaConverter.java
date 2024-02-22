@@ -77,8 +77,8 @@ public class UMLToJavaConverter extends ToCodeConverter {
 			// If a third layer class is being referenced from the second layer, use its
 			// factory instead
 			if (importedClass.getQualifiedName().startsWith("pst::" + tgtPrj.THIRD_LAYER + "::")) {
-				String factoryName = getFactoryName(qualifiedName);
-				cu.addImport("org.farhan.common." + factoryName);
+				String componentName = getComponentName(qualifiedName);
+				cu.addImport("org.farhan.common." + componentName + "Factory");
 			}
 		}
 		if (layer.contentEquals(srcPrj.SECOND_LAYER)) {
@@ -126,12 +126,10 @@ public class UMLToJavaConverter extends ToCodeConverter {
 	protected void convertMessage(Message m, Object aStepList) {
 		BlockStmt body = (BlockStmt) aStepList;
 		String step = ";";
-		Interaction nextLayerMethod = (Interaction) m.getSignature();
-		if (nextLayerMethod != null) {
-			Class className = (Class) nextLayerMethod.getOwner();
-			String factoryName = getFactoryName(className.getQualifiedName());
-			step = factoryName + ".get(\"" + className.getName() + "\")." + m.getName();
-		}
+		Class layer2Class = (Class) m.getOwner().getOwner();
+		String componentName = getComponentName(layer2Class.getQualifiedName());
+		String layer3ClassName = layer2Class.getName().replaceFirst(componentName, "").replaceFirst("Steps$", "");
+		step = componentName + "Factory" + ".get(\"" + layer3ClassName + "\")." + m.getName();
 		step += "(";
 		for (ValueSpecification vs : m.getArguments()) {
 			LiteralString ls = (LiteralString) vs;
@@ -153,11 +151,12 @@ public class UMLToJavaConverter extends ToCodeConverter {
 		return pathName;
 	}
 
-	private String getFactoryName(String qualifiedName) {
+	private String getComponentName(String qualifiedName) {
 		String factoryName = qualifiedName;
 		factoryName = factoryName.replace("pst" + "::" + srcPrj.THIRD_LAYER + "::", "");
+		factoryName = factoryName.replace("pst" + "::" + srcPrj.SECOND_LAYER + "::", "");
 		factoryName = factoryName.split("::")[0];
-		factoryName = StringUtils.capitalize(factoryName) + "Factory";
+		factoryName = StringUtils.capitalize(factoryName);
 		return factoryName;
 	}
 

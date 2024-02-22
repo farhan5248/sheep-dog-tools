@@ -32,7 +32,7 @@ Feature: Convert Scenario To Interaction To Scenario
           
               @Given("^The blah application, something/Object page is empty$")
               public void theBlahApplicationSomethingObjectPageIsEmpty() {
-                  BlahFactory.get("ObjectPage").setIsEmpty();
+                  BlahFactory.get("ObjectPage").setInputOutputs("Empty");
               }
           }
           
@@ -74,7 +74,7 @@ Feature: Convert Scenario To Interaction To Scenario
           
               @Given("^The blah application, something/Object page is empty$")
               public void theBlahApplicationSomethingObjectPageIsEmpty() {
-                  BlahFactory.get("ObjectPage").setIsEmpty();
+                  BlahFactory.get("ObjectPage").setInputOutputs("Empty");
               }
           }
           

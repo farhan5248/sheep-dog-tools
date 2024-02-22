@@ -23,12 +23,12 @@ Feature: Convert Step Definition To Interaction
           
               @Given("^The blah application, Object page is invalid$")
               public void theBlahApplicationObjectPageIsInvalid() {
-                  BlahFactory.get("ObjectPage").assertIsInvalid();
+                  BlahFactory.get("ObjectPage").setInputOutputs("Invalid");
               }
           
               @Given("^The blah application, Object page, Top section will be as follows$")
               public void theBlahApplicationObjectPageTopSectionIsAsFollows(DataTable dataTable) {
-                  BlahFactory.get("ObjectPage").assertAttributes(dataTable, "Top");
+                  BlahFactory.get("ObjectPage").assertInputOutputs(dataTable, "TopSection");
               }
           }
           
@@ -52,17 +52,17 @@ Feature: Convert Step Definition To Interaction
           
               @Given("^The blah application, Object page is empty$")
               public void theBlahApplicationObjectPageIsEmpty() {
-                  BlahFactory.get("ObjectPage").setIsEmpty();
+                  BlahFactory.get("ObjectPage").setInputOutputs("Empty");
               }
           
               @Given("^The blah application, Object page is invalid$")
               public void theBlahApplicationObjectPageIsInvalid() {
-                  BlahFactory.get("ObjectPage").assertIsInvalid();
+                  BlahFactory.get("ObjectPage").setInputOutputs("Invalid");
               }
           
               @Given("^The blah application, Object page, Top section will be as follows$")
               public void theBlahApplicationObjectPageTopSectionIsAsFollows(DataTable dataTable) {
-                  BlahFactory.get("ObjectPage").assertAttributes(dataTable, "Top");
+                  BlahFactory.get("ObjectPage").assertInputOutputs(dataTable, "TopSection");
               }
           }
           

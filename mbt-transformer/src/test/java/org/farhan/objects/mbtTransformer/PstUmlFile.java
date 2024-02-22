@@ -51,7 +51,7 @@ public interface PstUmlFile {
     public void assertInteractionMessagesSectionArgumentName(HashMap<String, String> keyMap);
 
     public void assertInteractionMessagesSectionInteractionName(HashMap<String, String> keyMap);
-    
+
     public void assertInteractionMessagesSectionMessage(HashMap<String, String> keyMap);
 
     public void assertInteractionParametersSectionInteractionName(HashMap<String, String> keyMap);

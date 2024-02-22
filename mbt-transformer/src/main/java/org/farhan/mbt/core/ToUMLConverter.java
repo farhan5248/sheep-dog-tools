@@ -196,7 +196,6 @@ public abstract class ToUMLConverter {
 						} else if (!nextLayerInteraction.getMessages().isEmpty()) {
 							addNextLayerInteractionParameters(nextLayerInteraction, m);
 						}
-						m.setSignature(nextLayerInteraction);
 					}
 				}
 			}
