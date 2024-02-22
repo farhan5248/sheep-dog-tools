@@ -167,7 +167,6 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 			ValueSpecification vs = createArgument(theMessage, "dataTable", "");
 			EList<Row> rows = s.getTheStepTable().getRows();
 			for (int i = 0; i < rows.size(); i++) {
-
 				String value = "";
 				for (int j = 0; j < rows.get(i).getCells().size(); j++) {
 					value += rows.get(i).getCells().get(j).getName() + " |";

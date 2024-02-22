@@ -189,13 +189,10 @@ public abstract class ToUMLConverter {
 				for (Message m : i.getMessages()) {
 					for (String methodName : getNextLayerInteractionNamesfromMessage(m)) {
 						Interaction nextLayerInteraction = addNextLayerInteraction(methodName, m);
-						if (nextLayerInteraction.getMessages().isEmpty()
-								&& nextLayerInteraction.getOwnedParameters().isEmpty()) {
-							addNextLayerInteractionParameters(nextLayerInteraction, m);
-							addNextLayerInteractionMessages(nextLayerInteraction, m);
-						} else if (!nextLayerInteraction.getMessages().isEmpty()) {
-							addNextLayerInteractionParameters(nextLayerInteraction, m);
-						}
+						// Regardless of whether this is a new interaction, running these two methods
+						// will merge in missing annotations or parameters etc
+						addNextLayerInteractionParameters(nextLayerInteraction, m);
+						addNextLayerInteractionMessages(nextLayerInteraction, m);
 					}
 				}
 			}

@@ -284,7 +284,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 
 	@Override
 	protected void addNextLayerInteractionParameters(Interaction targetInteraction, Message m) {
-		if (m.getArgument("keyMap", null) != null || m.getArgument("value", null) != null) {
+		if (!m.getArguments().isEmpty()) {
 			createParameter(targetInteraction, "keyMap", "", "in");
 		}
 	}

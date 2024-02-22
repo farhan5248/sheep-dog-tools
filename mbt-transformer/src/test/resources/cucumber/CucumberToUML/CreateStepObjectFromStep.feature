@@ -18,7 +18,12 @@ Feature: Create Step Object From Step
               Given The blah application, DataTable page, Top section will be as follows
                     | h1 | h2 |
                     | v1 | v2 |
-                    | v3 | v4 |
+              Given The blah application, DataTable page, Top section will be as follows
+                    | h1 | h2 | h3 |
+                    | v1 | v2 | v3 |
+              Given The blah application, DataTable page, Top section will be as follows
+                    | h4 |
+                    | v1 |
               Given The blah application, DocString page is as follows
                     \"\"\"
                     text1
@@ -46,6 +51,7 @@ Feature: Create Step Object From Step
           |    objects::blah::ObjectPage |           setEmpty |
           | objects::blah::DataTablePage | assertTopSectionH1 |
           | objects::blah::DataTablePage | assertTopSectionH2 |
+          | objects::blah::DataTablePage | assertTopSectionH3 |
           | objects::blah::DocStringPage |         setContent |
           |  objects::blah2::JsonRequest |              setI1 |
           |  objects::blah2::JsonRequest |              setI2 |
@@ -62,11 +68,14 @@ Feature: Create Step Object From Step
           |                         Interaction Name | Parameter Name |
           | objects::blah::DocStringPage::setContent |         keyMap |
 
+    @debug
     Examples: Data Tables
 
           |                                 Interaction Name | Parameter Name |
           | objects::blah::DataTablePage::assertTopSectionH1 |         keyMap |
           | objects::blah::DataTablePage::assertTopSectionH2 |         keyMap |
+          | objects::blah::DataTablePage::assertTopSectionH3 |         keyMap |
+          | objects::blah::DataTablePage::assertTopSectionH4 |         keyMap |
           |               objects::blah2::JsonRequest::setI1 |         keyMap |
           |               objects::blah2::JsonRequest::setI2 |         keyMap |
 
@@ -78,5 +87,5 @@ Feature: Create Step Object From Step
     Examples: Vertex States
 
           |                    Interaction Name | Parameter Name |
-          | objects::blah::ObjectPage::setEmpty |       has none |
+          | objects::blah::ObjectPage::setEmpty |         keyMap |
 

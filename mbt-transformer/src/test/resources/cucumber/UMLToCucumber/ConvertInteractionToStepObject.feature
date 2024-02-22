@@ -71,7 +71,7 @@ Feature: Convert Interaction To Step Object
           
           public interface ObjectPage {
           
-              public void setEmpty();
+              public void setEmpty(HashMap<String, String> keyMap);
           }
           
           """

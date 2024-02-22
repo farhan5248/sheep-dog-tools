@@ -8,6 +8,6 @@ public class AdminFamilyPageSteps {
 
     @Given("^The Admin application, Family page is as follows$")
     public void theAdminApplicationFamilyPageIsAsFollows(DataTable dataTable) {
-        AdminFactory.get("FamilyPage").setInputOutputs(dataTable, "");
+        AdminFactory.get("FamilyPage").setInputOutputs(dataTable);
     }
 }

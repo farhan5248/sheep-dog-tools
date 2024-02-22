@@ -9,7 +9,7 @@ Feature: Adjudicate a claim
      When The Pharmacy service, Claim request is sent with
           | Drug Cost | Family |
           |      20.0 | Sheikh |
-     Then The Claim resource will be as follows
+     Then The Claim response will be as follows
           | Pay Provider |
           |         10.0 |
 
@@ -22,7 +22,7 @@ Feature: Adjudicate a claim
      When The Pharmacy service, Claim request is sent with
           | Drug Cost | Family |
           |      30.0 | Sheikh |
-     Then The Claim resource will be as follows
+     Then The Claim response will be as follows
           | Pay Provider |
           |         15.0 |
 

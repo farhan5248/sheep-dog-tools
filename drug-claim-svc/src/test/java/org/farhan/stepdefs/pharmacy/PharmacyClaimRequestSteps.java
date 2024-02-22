@@ -8,7 +8,7 @@ public class PharmacyClaimRequestSteps {
 
     @Given("^The Pharmacy service, Claim request is sent with$")
     public void thePharmacyServiceClaimRequestIsSentWith(DataTable dataTable) {
-        PharmacyFactory.get("ClaimRequest").setInputOutputs(dataTable, "");
+        PharmacyFactory.get("ClaimRequest").setInputOutputs(dataTable);
         PharmacyFactory.get("ClaimRequest").transition();
     }
 }

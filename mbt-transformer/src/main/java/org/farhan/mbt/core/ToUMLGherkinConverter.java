@@ -3,6 +3,7 @@ package org.farhan.mbt.core;
 import java.util.ArrayList;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.LiteralString;
@@ -96,7 +97,9 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 		createInputOutputMessage(nextLayerInteraction, m, "set");
 		Class nextLayerClass = createClassImport(getNextLayerClassQualifiedName(nextLayerInteraction),
 				nextLayerInteraction);
-		getMessage(nextLayerInteraction, nextLayerClass, "transition");
+		if (nextLayerInteraction.getMessage("transition") == null) {
+			getMessage(nextLayerInteraction, nextLayerClass, "transition");
+		}
 	}
 
 	private void createInputOutputMessage(Interaction nextLayerInteraction, Message m, String prefix) {
@@ -108,7 +111,10 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 				&& !MBTVertexValidator.isVertex(m.getName())) {
 			return;
 		}
-		Message nextLayerMessage = getMessage(nextLayerInteraction, nextLayerClass, methodName);
+		Message nextLayerMessage = nextLayerInteraction.getMessage(methodName);
+		if (nextLayerMessage == null) {
+			nextLayerMessage = getMessage(nextLayerInteraction, nextLayerClass, methodName);
+		}
 		if (getFirstArgument(m).contentEquals("docString")) {
 			createArgument(nextLayerMessage, "key", "\"Content\"");
 			createArgument(nextLayerMessage, "value", "docString");
@@ -119,7 +125,20 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 			// method declarations
 			String annotationDetailValue = m.getArguments().get(0).getEAnnotation("dataTable").getDetails().getFirst()
 					.getValue();
-			createAnnotation(vs, "keyMap", "0", annotationDetailValue);
+			// This if statement is to handle merging annotations so that new fields are
+			// added
+			if (vs.getEAnnotation("keyMap") == null) {
+				createAnnotation(vs, "keyMap", "0", annotationDetailValue);
+			} else {
+				// First split the existing value by |
+				String fields = vs.getEAnnotation("keyMap").getDetails().getFirst().getValue();
+				// and remove it from annotationDetailValue
+				for (String f : fields.split("\\|")) {
+					annotationDetailValue = annotationDetailValue.replace(f + "|", "");
+				}
+				// Then append annotationDetailValue to the existing annotation
+				vs.getEAnnotation("keyMap").getDetails().getFirst().setValue(fields + annotationDetailValue);
+			}
 		} else if (MBTVertexValidator.isVertex(m.getName())) {
 			String attributeName = StringUtils.capitalize(MBTVertexValidator.getStateType(m.getName()));
 			createArgument(nextLayerMessage, "key", "\"" + attributeName + "\"");

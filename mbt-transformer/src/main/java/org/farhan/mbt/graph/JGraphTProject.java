@@ -25,11 +25,7 @@ public class JGraphTProject extends ConvertibleProject {
 	@Override
 	public void save() throws Exception {
 		for (ConvertibleObject cf : firstLayerObjects) {
-			try {
-				cf.save();
-			} catch (Exception e) {
-				System.out.println(Utilities.getStackTraceAsString(e));
-			}
+			cf.save();
 		}
 	}
 
