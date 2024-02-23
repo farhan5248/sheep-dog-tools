@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Assertions;
 
 public class MbtTransformerFactory {
 
-	private static HashMap<String, GraphModelObject> classes = new HashMap<String, GraphModelObject>();
+	private static HashMap<String, GraphTestObject> classes = new HashMap<String, GraphTestObject>();
 
-	public static GraphModelObject get(String className) {
+	public static GraphTestObject get(String className) {
 		try {
 			if (classes.get(className) != null) {
 				return classes.get(className);
@@ -25,7 +25,7 @@ public class MbtTransformerFactory {
 					classes.put(className, foo);
 					return foo;
 				} else if (className.endsWith("Goal")) {
-					GraphModelObject gmo = (GraphModelObject) gmoClass.getConstructor().newInstance();
+					GraphTestObject gmo = (GraphTestObject) gmoClass.getConstructor().newInstance();
 					classes.put(className, gmo);
 					return gmo;
 				} else {

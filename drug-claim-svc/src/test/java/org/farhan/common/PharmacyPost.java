@@ -3,7 +3,7 @@ package org.farhan.common;
 import org.apache.commons.text.CaseUtils;
 import org.farhan.adjudication.ClaimResponse;
 
-public class PharmacyPost extends GraphModelObject {
+public class PharmacyPost extends GraphTestObject {
 
 	protected static String url = "http://localhost:8887/claim?";
 	protected static String responseBody = "";

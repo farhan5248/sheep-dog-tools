@@ -1,8 +1,8 @@
 package org.farhan.common;
 
-public class AdminFactory extends GraphModelObjectFactory {
+public class AdminFactory extends GraphTestObjectFactory {
 
-	public static GraphModelObject get(String className) {
+	public static GraphTestObject get(String className) {
 		return get("admin", className);
 	}
 }

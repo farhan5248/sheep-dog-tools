@@ -1,6 +1,6 @@
 package org.farhan.runners;
 
-import org.farhan.common.GraphModelObjectFactory;
+import org.farhan.common.GraphTestObjectFactory;
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
 import org.junit.platform.suite.api.IncludeTags;
@@ -22,6 +22,6 @@ public class ClaimIT {
 
 	@BeforeAll
 	public static void before_or_after_all() {
-		GraphModelObjectFactory.setPre(false);
+		GraphTestObjectFactory.setPre(false);
 	}
 }

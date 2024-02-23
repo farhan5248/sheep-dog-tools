@@ -1,4 +1,4 @@
-package org.farhan.mbt.core;
+package org.farhan.mbt.maven;
 
 import java.io.File;
 
@@ -9,14 +9,18 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.settings.Settings;
-import org.farhan.mbt.graphuml.ConvertGraphToUML;
+import org.farhan.mbt.asciidoctorgraph.ConvertAsciiDoctorToGraph;
+import org.farhan.mbt.core.ConvertibleProject;
+import org.farhan.mbt.core.MojoGoal;
+import org.farhan.mbt.core.Utilities;
+import org.farhan.mbt.cucumberuml.ConvertCucumberToUML;
 
 /**
  * Converts Graph model paths to a UML model using Eclipse EMF
  *
  */
-@Mojo(name = "graph-to-uml", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
-public class GraphToUMLMojo extends AbstractMojo {
+@Mojo(name = "asciidoctor-to-graph", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
+public class AsciiDoctorToGraphMojo extends AbstractMojo {
 
 	/**
 	 * The Maven Project.
@@ -25,24 +29,20 @@ public class GraphToUMLMojo extends AbstractMojo {
 	protected MavenProject project;
 
 	/**
-	 * The Maven Settings.
+	 * The tag of the selected edges.
 	 */
-	@Parameter(defaultValue = "${settings}", readonly = true)
-	private Settings settings;
-
-	/**
-	 * The tag of the selected paths.
-	 */
-	@Parameter(property = "graph-to-uml.tag", defaultValue = "debug")
+	@Parameter(property = "asciidoctor-to-graph.tag", defaultValue = "")
 	private String tag;
 
 	public void execute() throws MojoExecutionException {
-		getLog().info(tag);
 		try {
-			ConvertGraphToUML mojo = new ConvertGraphToUML();
 			// TODO pass in tags to the mojo constructor
-			ConvertibleProject.tags = tag;
-			ConvertibleProject.baseDir = project.getBasedir().getAbsolutePath() + File.separator;
+			if (project != null) {
+				getLog().info("Converting tests with this tag: " + tag);
+				ConvertibleProject.tags = tag;
+				ConvertibleProject.baseDir = project.getBasedir().getAbsolutePath() + File.separator;
+			}
+			MojoGoal mojo = new ConvertAsciiDoctorToGraph();
 			mojo.mojoGoal();
 		} catch (Exception e) {
 			getLog().error(Utilities.getStackTraceAsString(e));

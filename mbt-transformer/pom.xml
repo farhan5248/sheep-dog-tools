@@ -12,7 +12,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>21</java.version>
 		<cucumberxtexteditor.version>1.9.0</cucumberxtexteditor.version>
-		<mbt-maven-plugin.version>1.5-SNAPSHOT</mbt-maven-plugin.version>
 	</properties>
 
 	<scm>
@@ -77,11 +76,6 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>versions-maven-plugin</artifactId>
 				<version>2.16.2</version>
-			</plugin>
-			<plugin>
-				<groupId>org.farhan</groupId>
-				<artifactId>mbt-maven-plugin</artifactId>
-				<version>${mbt-maven-plugin.version}</version>
 			</plugin>
 		</plugins>
 	</build>

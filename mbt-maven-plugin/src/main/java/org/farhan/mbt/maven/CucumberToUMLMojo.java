@@ -1,4 +1,4 @@
-package org.farhan.mbt.core;
+package org.farhan.mbt.maven;
 
 import java.io.File;
 
@@ -9,14 +9,18 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.settings.Settings;
-import org.farhan.mbt.cucumberuml.ConvertUMLToCucumber;
+import org.farhan.mbt.core.ConvertibleProject;
+import org.farhan.mbt.core.MojoGoal;
+import org.farhan.mbt.core.Utilities;
+import org.farhan.mbt.cucumberuml.ConvertCucumberToUML;
+import org.farhan.mbt.graphuml.ConvertGraphToUML;
 
 /**
  * Converts tagged Cucumber scenarios to a UML model using Eclipse Xtext and EMF
  *
  */
-@Mojo(name = "uml-to-cucumber", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
-public class UMLToCucumberMojo extends AbstractMojo {
+@Mojo(name = "cucumber-to-uml", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
+public class CucumberToUMLMojo extends AbstractMojo {
 
 	/**
 	 * The Maven Project.
@@ -25,25 +29,20 @@ public class UMLToCucumberMojo extends AbstractMojo {
 	protected MavenProject project;
 
 	/**
-	 * The Maven Settings.
+	 * The tag of the selected scenarios.
 	 */
-	@Parameter(defaultValue = "${settings}", readonly = true)
-	private Settings settings;
-
-	/**
-	 * The tag of the selected scenarios. TODO This goal validates that the elements
-	 * in the UML model are derived from scenarios with this tag
-	 */
-	@Parameter(property = "tag", defaultValue = "debug")
+	@Parameter(property = "tag", defaultValue = "")
 	private String tag;
 
 	public void execute() throws MojoExecutionException {
-		getLog().info("Converting tests with this tag: "+tag);
 		try {
-			ConvertUMLToCucumber mojo = new ConvertUMLToCucumber();
-			// TODO pass in tags and basedir to the mojo constructor
-			ConvertibleProject.tags = tag;
-			ConvertibleProject.baseDir = project.getBasedir().getAbsolutePath() + File.separator;
+			// TODO pass in tags to the mojo constructor
+			if (project != null) {
+				getLog().info("Converting tests with this tag: " + tag);
+				ConvertibleProject.tags = tag;
+				ConvertibleProject.baseDir = project.getBasedir().getAbsolutePath() + File.separator;
+			}
+			MojoGoal mojo = new ConvertCucumberToUML();
 			mojo.mojoGoal();
 		} catch (Exception e) {
 			getLog().error(Utilities.getStackTraceAsString(e));
