@@ -1,11 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.farhan</groupId>
 	<artifactId>mbt-maven-plugin</artifactId>
-	<version>1.4-SNAPSHOT</version>
+	<version>1.4</version>
 	<packaging>maven-plugin</packaging>
 	<name>MBT Maven Plugin</name>
 
@@ -14,12 +12,12 @@
 		<project.build.sourceEncoding>
 			UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
-		<mbt-transformer.version>1.5-SNAPSHOT</mbt-transformer.version>
+		<mbt-transformer.version>1.5</mbt-transformer.version>
 	</properties>
 
 	<scm>
 		<connection>scm:git:https://github.com/farhan5248/claims-adjudication-ai</connection>
-		<tag>HEAD</tag>
+		<tag>mbt-maven-plugin-1.4</tag>
 	</scm>
 
 	<repositories>
