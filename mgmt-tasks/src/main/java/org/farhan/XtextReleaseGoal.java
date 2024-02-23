@@ -8,8 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class XtextReleaseGoal {
@@ -19,8 +17,8 @@ public class XtextReleaseGoal {
 
 	public static void main(String[] args) {
 
-		String currentVersion = "1.8.0";
-		String nextVersion = "1.9.0";
+		String currentVersion = "1.9.0";
+		String nextVersion = "1.10.0";
 
 		// updateToRelease(currentVersion, currentVersion);
 		// Run git add and git commit
