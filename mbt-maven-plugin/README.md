@@ -1,31 +1,46 @@
-TODO
-remove project from COMPONENT_REGEX
-add job to OBJECT_REGEX
-remove config from OBJECT_REGEX
-add enabled, disabled, absent to STATE_REGEX
+# Usage Examples
+
+## Batch-Job and Plug-In examples
+
+### Vertex
+
+When modelled as a graph, the **vertex** are **file** objects.
+
+Object details are **fragment** or **snippet**. 
+
+Example endings
+* The Input.txt file isn't empty
+* The Input.txt file is invalid
+
+### Edge
+
+When modelled as a graph, the **edge** are **job** or **goal** objects.
+
+Edges are **executed** (manually) or **triggered** (automatically on a schedule). Input parameters are specified using **with** (goal tags or batch job parameters)
+
+Example endings
+* The do-it goal is executed with
+* The nightly job will be triggered
+* The nightly job won't be triggered
 
 
-batch-job and plug-in EXAMPLE
-vertice are file
-object details are fragment or snippet of file
-file isn't empty
-file is invalid
+## Web-App and Web-Service examples
 
-edges are job or goal respectively
-edges are executed (manually) or triggered (automatically) with (goal tags, batch job parameters)
-goal is executed
-job will be triggered
-job won't be triggered
+### Vertex
 
+When modelled as a graph, the **vertex** are **page** or **response** objects.
 
-web-apps and web-services EXAMPLE
-vertice are page or response
-object details are section or table
-page top section will be present
-page search button won't be enabled
+Object details are **section** or **table**. 
 
-edges are http request
-edges are sent (by browser or client) as follows (request parameters)
-request isn't sent (on time, then files are deleted)
+Example endings
+* The Home page top section will be present
+* The Home page search button won't be enabled
 
+### Edge
 
+When modelled as a graph, the **edge** are **request objects.
+
+Edges are **sent** (by browser or client) or **triggered** (automatically on a schedule). Input parameters are specified using **as follows** (request parameters)
+
+Example endings
+* The log-in request isn't sent (on time, then files are deleted)

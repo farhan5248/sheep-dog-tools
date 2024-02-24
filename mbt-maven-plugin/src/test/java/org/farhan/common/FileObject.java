@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Assertions;
 public abstract class FileObject extends GraphTestObject {
 
 	public void setComponent(String component) {
-		keyValue.put("component", component);
+		ConvertibleProject.baseDir = "target/src-gen/" + component + "/";
 	}
-	
+
 	public void setPath(String path) {
 		keyValue.put("path", ConvertibleProject.baseDir + path);
 	}

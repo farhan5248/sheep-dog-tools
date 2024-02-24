@@ -2,28 +2,35 @@ package org.farhan.common;
 
 import java.util.HashMap;
 
-import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.Utilities;
 import org.junit.jupiter.api.Assertions;
 
 public abstract class GraphTestObjectFactory {
 
+	private static String preOrPost = "pre";
 	private static HashMap<String, GraphTestObject> classes = new HashMap<String, GraphTestObject>();
 
-	public static GraphTestObject get(String componentName, String className) {
+	public static void setPre(boolean b) {
+		if (b) {
+			preOrPost = "pre";
+		} else {
+			preOrPost = "post";
+		}
+	}
+
+	public static GraphTestObject get(String packageName, String className) {
 		try {
 			if (classes.get(className) != null) {
 				return classes.get(className);
 			} else {
-				// TODO this should be set by the step definition, same like setPath
-				ConvertibleProject.baseDir = "target/src-gen/" + componentName + "/";
 				Class<?> gmoClass = Class
-						.forName("org.farhan.objects." + componentName + ".impl." + className + "Impl");
+						.forName("org.farhan.objects." + packageName + "." + preOrPost + "." + className + "Impl");
 				if (className.endsWith("File")) {
 					FileObject foo = (FileObject) gmoClass.getConstructor().newInstance();
-					// TODO delete this method after regenerating the test code with setPath as an
-					// attribute
-					setPath(className, foo);
+					// TODO this should be set by the step definition
+					// The step should call setComponent and setPath on the object just like
+					// set/assert and transition are called
+					setPathAndComponent(className, foo, packageName);
 					classes.put(className, foo);
 					return foo;
 				} else if (className.endsWith("Goal")) {
@@ -40,7 +47,8 @@ public abstract class GraphTestObjectFactory {
 		return null;
 	}
 
-	private static void setPath(String className, FileObject foo) {
+	private static void setPathAndComponent(String className, FileObject foo, String componentName) {
+		foo.setComponent(componentName);
 		if (className.endsWith("AcmeToolDoItGoalStepsJavaFile")) {
 			foo.setPath("src/test/java/org/farhan/stepdefs/acmeTool/AcmeToolDoItGoalSteps.java");
 		} else if (className.endsWith("AcmeToolInputTxtFileStepsJavaFile")) {

@@ -1,4 +1,4 @@
-package org.farhan.objects.mbtMavenPlugin.impl;
+package org.farhan.objects.mbtMavenPlugin.pre;
 
 import java.util.HashMap;
 
