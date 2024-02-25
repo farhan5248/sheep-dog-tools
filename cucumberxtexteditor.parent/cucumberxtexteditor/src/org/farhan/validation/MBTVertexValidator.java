@@ -12,21 +12,18 @@ public class MBTVertexValidator {
 	// ( is| isn't)( empty| present| as follows)
 
 	// Given an input/transition or response/state then response/state
-	private static final String NAME_REGEX = ".";
-	private static final String COMPONENT_REGEX = "(( " + NAME_REGEX
-			+ "*)( application| service| project| plugin| batchjob),)?";
-	private static final String OBJECT_REGEX = "( " + NAME_REGEX + "*)( file| page| config| response)";
-	private static final String DETAILS_REGEX = "(,( " + NAME_REGEX + "*)( section| fragment| table| snippet))?";
-	private static final String STATE_REGEX = "(( is| isn't| will be| won't be)( empty| present| valid| invalid)?( as follows)?)";
+	private static final String NAME_REGEX = "[^,]";
+	private static final String COMPONENT_REGEX = "(( " + NAME_REGEX + "+)( application| service| plugin| batchjob),)?";
+	private static final String OBJECT_REGEX = "( " + NAME_REGEX + "+)( file| page| response)";
+	private static final String DETAILS_REGEX = "(,( " + NAME_REGEX + "+)( section| fragment| table| snippet))?";
+	private static final String STATE_REGEX = "(( is| isn't| will be| won't be)( empty| present| absent| enabled| disabled| valid| invalid| uploaded| downloaded)?( as follows)?)";
 	private static final String VERTEX_REGEX = "The" + COMPONENT_REGEX + OBJECT_REGEX + DETAILS_REGEX + STATE_REGEX;
 	public static final String INVALID_VERTEX = "invalidVertex";
 
 	public static String getErrorMessage() {
 		// this applies to Given and Then
-		String rules = "\nThe component is: The(( .*)( application| service| project| plugin| batchjob),)?"
-				+ "\nThe object is: ( .*)( file| page| config| response)"
-				+ "\nThe details are: (, (.*)( section| fragment| table| snippet))?"
-				+ "\nThe state is: (( is| isn't| will be| won't be)( empty| present| valid| invalid)?( as follows)?)";
+		String rules = "\nThe component is: " + COMPONENT_REGEX + "\nThe object is: " + OBJECT_REGEX
+				+ "\nThe details are: " + DETAILS_REGEX + "\nThe state is: " + STATE_REGEX;
 
 		String msg = "This is an invalid statement. These are the rules:" + rules;
 
@@ -108,6 +105,7 @@ public class MBTVertexValidator {
 	public static String getState(String text) {
 		return getGroup(text, 9);
 	}
+
 	public static String getStateModality(String text) {
 		return getGroup(text, 10);
 	}

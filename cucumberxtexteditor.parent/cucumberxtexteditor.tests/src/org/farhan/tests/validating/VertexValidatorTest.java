@@ -100,6 +100,31 @@ public class VertexValidatorTest {
 	}
 
 	@Test
+	public void testStateRegexIsAbsent() {
+		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 application, Something2 file is absent"));
+	}
+
+	@Test
+	public void testStateRegexIsEnabled() {
+		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 application, Something2 file is enabled"));
+	}
+
+	@Test
+	public void testStateRegexIsDisabled() {
+		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 application, Something2 file is disabled"));
+	}
+
+	@Test
+	public void testStateRegexIsDownloaded() {
+		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 application, Something2 file is downloaded"));
+	}
+
+	@Test
+	public void testStateRegexIsUploaded() {
+		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 application, Something2 file is uploaded"));
+	}
+
+	@Test
 	public void testStateRegexAsFollows() {
 		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 application, Something2 file is as follows"));
 	}
@@ -161,11 +186,6 @@ public class VertexValidatorTest {
 	}
 
 	@Test
-	public void testObjectRegexConfig() {
-		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 application, Something2 config is empty"));
-	}
-
-	@Test
 	public void testObjectRegexResponse() {
 		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 application, Something2 response is empty"));
 	}
@@ -176,17 +196,12 @@ public class VertexValidatorTest {
 	}
 
 	@Test
-	public void testAppRegexProject() {
-		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 project, Something2 file is empty"));
-	}
-
-	@Test
-	public void testAppRegexPlugin() {
+	public void testAppRegexPlugIn() {
 		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 plugin, Something2 file is empty"));
 	}
 
 	@Test
-	public void testAppRegexBatchjob() {
+	public void testAppRegexBatchJob() {
 		Assertions.assertTrue(MBTVertexValidator.isValid("The Something1 batchjob, Something2 file is empty"));
 	}
 }

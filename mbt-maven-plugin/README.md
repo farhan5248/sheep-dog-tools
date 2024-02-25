@@ -24,7 +24,7 @@ Example endings
 * The nightly job won't be triggered
 
 
-## Web-App and Web-Service examples
+## Application and Service examples
 
 ### Vertex
 

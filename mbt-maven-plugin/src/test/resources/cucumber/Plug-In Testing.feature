@@ -1,3 +1,4 @@
+@plugin
 Feature: Plug-In Testing
 
   This feature covers having an input file, running the plugin, and verifying the output file.

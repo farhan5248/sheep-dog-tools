@@ -40,10 +40,16 @@ public class EdgeValidatorTest {
 	}
 
 	@Test
-	public void testGetObjType() {
+	public void testGetObjTypeRequest() {
 		Assertions.assertTrue(
 				MBTEdgeValidator.getObjectType("The Something1 application, Something2 request is executed with")
 						.contentEquals("request"));
+	}
+
+	@Test
+	public void testGetObjTypeJob() {
+		Assertions.assertTrue(MBTEdgeValidator
+				.getObjectType("The Something1 batchjob, Something2 job is executed with").contentEquals("job"));
 	}
 
 	@Test
@@ -125,18 +131,18 @@ public class EdgeValidatorTest {
 	}
 
 	@Test
-	public void testAppRegexProject() {
-		Assertions.assertTrue(MBTEdgeValidator.isValid("The Something1 project, Something2 request is sent"));
-	}
-
-	@Test
 	public void testAppRegexApplication() {
 		Assertions.assertTrue(MBTEdgeValidator.isValid("The Something1 application, Something2 request is sent"));
 	}
 
 	@Test
-	public void testAppRegexBatchjob() {
+	public void testAppRegexBatchJob() {
 		Assertions.assertTrue(MBTEdgeValidator.isValid("The Something1 batchjob, Something2 request is sent"));
+	}
+
+	@Test
+	public void testAppRegexPlugIn() {
+		Assertions.assertTrue(MBTEdgeValidator.isValid("The Something1 plugin, Something2 request is sent"));
 	}
 
 }

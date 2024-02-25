@@ -63,6 +63,22 @@ public abstract class GraphTestObjectFactory {
 			foo.setPath("src/test/java/org/farhan/objects/acmeTool/OutputTxtFile.java");
 		} else if (className.endsWith("PlugInTestingFeatureFile")) {
 			foo.setPath("src/test/resources/cucumber/Plug-In Testing.feature");
+		} else if (className.endsWith("OrdersTxtFileJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/objects/acme/OrdersTxtFile.java");
+		} else if (className.endsWith("AcmeOrdersTxtFileStepsJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/stepdefs/acme/AcmeOrdersTxtFileSteps.java");
+		} else if (className.endsWith("AcmeNightlyJobStepsJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/stepdefs/acme/AcmeNightlyJobSteps.java");
+		} else if (className.endsWith("AcmeReportingJobStepsJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/stepdefs/acme/AcmeReportingJobSteps.java");
+		} else if (className.endsWith("BatchJobTestingFeatureFile")) {
+			foo.setPath("src/test/resources/cucumber/Batch-Job Testing.feature");
+		} else if (className.endsWith("NightlyJobJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/objects/acme/NightlyJob.java");
+		} else if (className.endsWith("ReportingJobJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/objects/acme/ReportingJob.java");
+		} else {
+			Assertions.fail("Can't set the path for class " + className);
 		}
 	}
 }
