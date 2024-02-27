@@ -1,4 +1,4 @@
-package org.farhan.objects.mbtTransformer.impl;
+package org.farhan.objects.mbtTransformer.pre;
 
 import org.farhan.common.GoalObject;
 import org.farhan.objects.mbtTransformer.GraphToUmlGoal;

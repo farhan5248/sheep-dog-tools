@@ -1,11 +1,11 @@
-package org.farhan.objects.mbtTransformer.impl;
+package org.farhan.objects.mbtTransformer.pre;
 
 import java.util.HashMap;
 
 import org.farhan.common.UMLFileObject;
-import org.farhan.objects.mbtTransformer.DataTablePageJavaFile;
+import org.farhan.objects.mbtTransformer.Blah2JsonRequestStepsJavaFile;
 
-public class DataTablePageJavaFileImpl extends UMLFileObject implements DataTablePageJavaFile {
+public class Blah2JsonRequestStepsJavaFileImpl extends UMLFileObject implements Blah2JsonRequestStepsJavaFile {
 	public void setContent(HashMap<String, String> keyMap) {
 		setContent(keyMap.get("Content"));
 	}

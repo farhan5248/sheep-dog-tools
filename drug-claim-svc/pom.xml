@@ -106,6 +106,13 @@
 			<artifactId>junit-jupiter</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- Need to dyanmically find classes -->
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>7.0.0</version>
+			<scope>test</scope>
+		</dependency>
 		<!-- Utilities -->
 		<dependency>
 			<groupId>commons-io</groupId>

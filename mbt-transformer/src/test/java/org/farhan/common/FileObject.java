@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Assertions;
 
 public abstract class FileObject extends GraphTestObject {
 
-	public void setBaseDir(String projectName) {
-		ConvertibleProject.baseDir = "target/src-gen/" + projectName + "/";
+	public void setComponent(String component) {
+		ConvertibleProject.baseDir = "target/src-gen/" + component + "/";
 	}
 
 	public void setPath(String path) {

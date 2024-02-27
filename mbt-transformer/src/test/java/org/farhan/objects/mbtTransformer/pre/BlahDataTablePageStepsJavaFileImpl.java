@@ -1,11 +1,11 @@
-package org.farhan.objects.mbtTransformer.impl;
+package org.farhan.objects.mbtTransformer.pre;
 
 import java.util.HashMap;
 
 import org.farhan.common.UMLFileObject;
-import org.farhan.objects.mbtTransformer.BlahDocStringPageStepsJavaFile;
+import org.farhan.objects.mbtTransformer.BlahDataTablePageStepsJavaFile;
 
-public class BlahDocStringPageStepsJavaFileImpl extends UMLFileObject implements BlahDocStringPageStepsJavaFile {
+public class BlahDataTablePageStepsJavaFileImpl extends UMLFileObject implements BlahDataTablePageStepsJavaFile {
 	public void setContent(HashMap<String, String> keyMap) {
 		setContent(keyMap.get("Content"));
 	}
@@ -13,5 +13,4 @@ public class BlahDocStringPageStepsJavaFileImpl extends UMLFileObject implements
 	public void assertContent(HashMap<String, String> keyMap) {
 		assertContent(keyMap.get("Content"));
 	}
-
 }

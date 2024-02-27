@@ -3,6 +3,10 @@
  */
 package org.farhan.tests.validating;
 
+import java.io.IOException;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
 import org.farhan.cucumber.CucumberPackage;
@@ -11,19 +15,35 @@ import org.farhan.validation.CucumberValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import com.google.common.reflect.ClassPath;
+import com.google.common.reflect.ClassPath.ClassInfo;
+
 @ExtendWith(InjectionExtension.class)
 @InjectWith(CucumberInjectorProvider.class)
 public class CucumberValidatingTest extends ValidatingTest {
 
+	public ClassInfo getClassInPackage(String rootPkg, String testObjName) throws IOException {
+
+		Set<ClassInfo> testObjs = ClassPath.from(ClassLoader.getSystemClassLoader()).getAllClasses();
+		for (ClassInfo testObj : testObjs) {
+			if (testObj.getName().endsWith(testObjName) && testObj.getName().startsWith(rootPkg)) {
+				return testObj;
+			}
+		}
+		return null;
+	}
+
 	@Test
 	public void validateStateAppEmpty() throws Exception {
+
+		ClassInfo testObj = getClassInPackage("org.farhan", "CucumberValidatingTest");
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: Name\n");
 		sb.append("Scenario: Name\n");
 		sb.append("The blah application, something/something/something/Object is empty\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
-	
+
 	@Test
 	public void validateStateSvcEmpty() throws Exception {
 		StringBuilder sb = new StringBuilder();
@@ -32,7 +52,6 @@ public class CucumberValidatingTest extends ValidatingTest {
 		sb.append("The blah service, something/something/something/Object is empty\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
-	
 
 	@Test
 	public void validateStateEmpty() throws Exception {
@@ -42,7 +61,7 @@ public class CucumberValidatingTest extends ValidatingTest {
 		sb.append("The something/something/something/Object is empty\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
-	
+
 	@Test
 	public void validateStateAppPresent() throws Exception {
 		StringBuilder sb = new StringBuilder();
@@ -51,7 +70,7 @@ public class CucumberValidatingTest extends ValidatingTest {
 		sb.append("The blah application, something/something/something/Object is present\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
-	
+
 	@Test
 	public void validateStateSvcPresent() throws Exception {
 		StringBuilder sb = new StringBuilder();
@@ -60,7 +79,7 @@ public class CucumberValidatingTest extends ValidatingTest {
 		sb.append("The blah service, something/something/something/Object is present\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
-	
+
 	@Test
 	public void validateStatePresent() throws Exception {
 		StringBuilder sb = new StringBuilder();
@@ -69,7 +88,7 @@ public class CucumberValidatingTest extends ValidatingTest {
 		sb.append("The something/something/something/Object is present\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
-	
+
 	@Test
 	public void validateStateAppFollows() throws Exception {
 		StringBuilder sb = new StringBuilder();
@@ -78,7 +97,7 @@ public class CucumberValidatingTest extends ValidatingTest {
 		sb.append("The blah application, something/something/something/Object is as follows\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
-	
+
 	@Test
 	public void validateSvcAppFollows() throws Exception {
 		StringBuilder sb = new StringBuilder();
@@ -87,7 +106,7 @@ public class CucumberValidatingTest extends ValidatingTest {
 		sb.append("The blah service, something/something/something/Object is as follows\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
-	
+
 	@Test
 	public void validateStateFollows() throws Exception {
 		StringBuilder sb = new StringBuilder();
@@ -96,7 +115,7 @@ public class CucumberValidatingTest extends ValidatingTest {
 		sb.append("The something/something/something/Object is as follows\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
-	
+
 	@Test
 	public void validateTransitionGood() throws Exception {
 		StringBuilder sb = new StringBuilder();
@@ -105,7 +124,7 @@ public class CucumberValidatingTest extends ValidatingTest {
 		sb.append("The blah request is good\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
-	
+
 	@Test
 	public void validateTransitionBad() throws Exception {
 		StringBuilder sb = new StringBuilder();
@@ -114,7 +133,7 @@ public class CucumberValidatingTest extends ValidatingTest {
 		sb.append("The blah request is bad\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
-	
+
 	@Test
 	public void validateTransitionSentWith() throws Exception {
 		StringBuilder sb = new StringBuilder();
@@ -123,7 +142,7 @@ public class CucumberValidatingTest extends ValidatingTest {
 		sb.append("The blah request is sent with\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
-	
+
 	@Test
 	public void validateTransitionTriggeredWith() throws Exception {
 		StringBuilder sb = new StringBuilder();
@@ -132,7 +151,7 @@ public class CucumberValidatingTest extends ValidatingTest {
 		sb.append("The blah request is triggered with\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
-	
+
 	@Test
 	public void validateTransitionSentFollows() throws Exception {
 		StringBuilder sb = new StringBuilder();
@@ -141,7 +160,7 @@ public class CucumberValidatingTest extends ValidatingTest {
 		sb.append("The blah request is sent as follows\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
-	
+
 	@Test
 	public void validateTransitionTriggeredFollows() throws Exception {
 		StringBuilder sb = new StringBuilder();
@@ -150,7 +169,7 @@ public class CucumberValidatingTest extends ValidatingTest {
 		sb.append("Given: The blah request is triggered as follows\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
-	
+
 	@Test
 	public void validateCaptialStart() throws Exception {
 		StringBuilder sb = new StringBuilder();

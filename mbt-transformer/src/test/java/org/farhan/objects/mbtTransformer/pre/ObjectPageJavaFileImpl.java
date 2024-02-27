@@ -1,12 +1,12 @@
-package org.farhan.objects.mbtTransformer.impl;
+package org.farhan.objects.mbtTransformer.pre;
 
 import java.util.HashMap;
 
-import org.farhan.common.FileObject;
-import org.farhan.objects.mbtTransformer.ProcessAdocFile;
+import org.farhan.common.UMLFileObject;
+import org.farhan.objects.mbtTransformer.ObjectPageJavaFile;
 
-public class ProcessAdocFileImpl extends FileObject implements ProcessAdocFile {
-
+public class ObjectPageJavaFileImpl extends UMLFileObject implements ObjectPageJavaFile {
+	
 	public void setContent(HashMap<String, String> keyMap) {
 		setContent(keyMap.get("Content"));
 	}
