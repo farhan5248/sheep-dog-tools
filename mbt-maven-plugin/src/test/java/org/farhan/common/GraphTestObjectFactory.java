@@ -87,6 +87,24 @@ public abstract class GraphTestObjectFactory {
 			foo.setPath("src/test/java/org/farhan/objects/acme/NightlyJob.java");
 		} else if (className.endsWith("ReportingJobJavaFile")) {
 			foo.setPath("src/test/java/org/farhan/objects/acme/ReportingJob.java");
+		} else if (className.endsWith("ApplicationTestingFeatureFile")) {
+			foo.setPath("src/test/resources/cucumber/Application Testing.feature");
+		} else if (className.endsWith("AccountDetailsPageJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/objects/acme/AccountDetailsPage.java");
+		} else if (className.endsWith("AccountSearchRequestJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/objects/acme/AccountSearchRequest.java");
+		} else if (className.endsWith("AcmeAccountDetailsPageStepsJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/stepdefs/acme/AcmeAccountDetailsPageSteps.java");
+		} else if (className.endsWith("AcmeAccountSearchRequestStepsJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/stepdefs/acme/AcmeAccountSearchRequestSteps.java");
+		} else if (className.endsWith("AcmeHomePageStepsJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/stepdefs/acme/AcmeHomePageSteps.java");
+		} else if (className.endsWith("AcmeLogInRequestStepsJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/stepdefs/acme/AcmeLogInRequestSteps.java");
+		} else if (className.endsWith("HomePageJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/objects/acme/HomePage.java");
+		} else if (className.endsWith("LogInRequestJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/objects/acme/LogInRequest.java");
 		} else {
 			Assertions.fail("Can't set the path for class " + className);
 		}
