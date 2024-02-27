@@ -8,15 +8,16 @@ Feature: Convert Scenario To Interaction To Scenario
           Feature: This is a feature
           
             Background: Setup
+          
               Given The blah application, something/Object page is as follows
                     \"\"\"
-                    Text 1
-                    
-                    Text 2
+                    Text 1 
+                     
+                    Text 2 
                     \"\"\"
           
             @tag1
-            Scenario: Submit
+            Scenario: Submit One
           
               Basic EDI claim
           
@@ -25,6 +26,17 @@ Feature: Convert Scenario To Interaction To Scenario
                 But The blah application, something/Object page is empty
                 And The blah application, something/Object page is empty
                   * The blah application, something/Object page is empty
+          
+            Scenario Outline: Submit Several
+          
+              Given The blah application, DataTable page is as follows
+                    |   h1 |   h2 |
+                    | <h3> | <h4> |
+          
+              Examples: Data Set
+          
+                    |  h3 |  h4 |
+                    | v31 | v41 |
           
           
           """
@@ -67,7 +79,7 @@ Feature: Convert Scenario To Interaction To Scenario
                     \"\"\"
           
             @tag1
-            Scenario: Submit
+            Scenario: Submit One
           
               Basic EDI claim
           
@@ -76,6 +88,17 @@ Feature: Convert Scenario To Interaction To Scenario
                 But The blah application, something/Object page is empty
                 And The blah application, something/Object page is empty
                   * The blah application, something/Object page is empty
+          
+            Scenario Outline: Submit Several
+          
+              Given The blah application, DataTable page is as follows
+                    |   h1 |   h2 |
+                    | <h3> | <h4> |
+          
+              Examples: Data Set
+          
+                    |  h3 |  h4 |
+                    | v31 | v41 |
           
           
           """

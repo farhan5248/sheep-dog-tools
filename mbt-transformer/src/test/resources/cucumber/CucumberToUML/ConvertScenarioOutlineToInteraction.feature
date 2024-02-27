@@ -34,7 +34,6 @@ Feature: Convert Scenario Outline To Interaction
 
   Scenario: Convert tag
 
-# Need to test Scenario Outline Example tags
       And The target/uml/pst.uml file, Interaction Parameters section will be as follows
           |       Interaction Name | Parameter Name |
           | specs::Process::Submit |           tag1 |

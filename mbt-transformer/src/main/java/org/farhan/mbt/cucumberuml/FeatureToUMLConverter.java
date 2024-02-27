@@ -234,9 +234,9 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 
 	private void convertExamplesToAnnotations(Interaction anInteraction, ScenarioOutline so) {
 		for (Examples e : so.getExamples()) {
+			// TODO save example tags
 			EList<Row> rows = e.getTheExamplesTable().getRows();
 			for (int i = 0; i < rows.size(); i++) {
-
 				String value = "";
 				for (int j = 0; j < rows.get(i).getCells().size(); j++) {
 					value += rows.get(i).getCells().get(j).getName() + "|";

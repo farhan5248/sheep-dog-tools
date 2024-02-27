@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Behavior;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
@@ -16,10 +17,12 @@ import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.cucumber.Background;
 import org.farhan.cucumber.Cell;
 import org.farhan.cucumber.CucumberFactory;
+import org.farhan.cucumber.Examples;
 import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Line;
 import org.farhan.cucumber.Row;
 import org.farhan.cucumber.Scenario;
+import org.farhan.cucumber.ScenarioOutline;
 import org.farhan.cucumber.Statement;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.Tag;
@@ -112,33 +115,59 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 		for (Behavior aBehavior : ((Class) ucw.get()).getOwnedBehaviors()) {
 			if (aBehavior instanceof Interaction) {
 				Interaction anInteraction = (Interaction) aBehavior;
-				
 				if (anInteraction.getEAnnotation("background") != null) {
-					Background background = CucumberFactory.eINSTANCE.createBackground();
-					background.setName(anInteraction.getName());
-					((Feature) tgtWrp.get()).getAbstractScenarios().add(background);
-					convertComments(anInteraction, background.getStatements());
-					convertInteractionMessages(anInteraction, background.getSteps());
+					Background as = CucumberFactory.eINSTANCE.createBackground();
+					as.setName(anInteraction.getName());
+					((Feature) tgtWrp.get()).getAbstractScenarios().add(as);
+					convertComments(anInteraction, as.getStatements());
+					convertInteractionMessages(anInteraction, as.getSteps());
+				} else if (!anInteraction.getEAnnotations().isEmpty()) {
+					ScenarioOutline as = CucumberFactory.eINSTANCE.createScenarioOutline();
+					as.setName(anInteraction.getName());
+					((Feature) tgtWrp.get()).getAbstractScenarios().add(as);
+					convertComments(anInteraction, as.getStatements());
+					convertInteractionMessages(anInteraction, as.getSteps());
+					convertParameters(anInteraction, as.getTags());
+					convertAnnotation(anInteraction, as.getExamples());
 				} else {
-					// TODO if there are annotations, make this a scenario outline
-					// TODO this is for scenario outline data convertAnnotation(anInteraction,
-					// aMethod);
-					Scenario aScenario = CucumberFactory.eINSTANCE.createScenario();
-					aScenario.setName(anInteraction.getName());
-					((Feature) tgtWrp.get()).getAbstractScenarios().add(aScenario);
-					convertParameters(anInteraction, aScenario);
-					convertComments(anInteraction, aScenario.getStatements());
-					convertInteractionMessages(anInteraction, aScenario.getSteps());
+					Scenario as = CucumberFactory.eINSTANCE.createScenario();
+					as.setName(anInteraction.getName());
+					((Feature) tgtWrp.get()).getAbstractScenarios().add(as);
+					convertComments(anInteraction, as.getStatements());
+					convertInteractionMessages(anInteraction, as.getSteps());
+					convertParameters(anInteraction, as.getTags());
 				}
 			}
 		}
 	}
 
-	private void convertParameters(Interaction anInteraction, Scenario aScenario) {
+	private void convertAnnotation(Interaction anInteraction, EList<Examples> examples) {
+		for (int i = 0; i < anInteraction.getEAnnotations().size(); i++) {
+			EAnnotation exampleAnnotations = anInteraction.getEAnnotations().get(i);
+			Examples examplesSection = CucumberFactory.eINSTANCE.createExamples();
+			examplesSection.setName(exampleAnnotations.getSource());
+			examples.add(examplesSection);
+			examplesSection.setTheExamplesTable(CucumberFactory.eINSTANCE.createExamplesTable());
+			// get the details
+			for (int j = 0; j < exampleAnnotations.getDetails().size(); j++) {
+				Entry<String, String> rowAnnotation = exampleAnnotations.getDetails().get(j);
+				Row row = CucumberFactory.eINSTANCE.createRow();
+				examplesSection.getTheExamplesTable().getRows().add(row);
+				String[] cells = rowAnnotation.getValue().split("\\|");
+				for (int k = 0; k < cells.length; k++) {
+					Cell cell = CucumberFactory.eINSTANCE.createCell();
+					cell.setName(cells[k]);
+					row.getCells().add(cell);
+				}
+			}
+		}
+	}
+
+	private void convertParameters(Interaction anInteraction, EList<Tag> tags) {
 		for (Parameter p : anInteraction.getOwnedParameters()) {
 			Tag tag = CucumberFactory.eINSTANCE.createTag();
 			tag.setName(p.getName());
-			aScenario.getTags().add(tag);
+			tags.add(tag);
 		}
 	}
 
@@ -207,8 +236,8 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 		EMap<String, String> rows = vs.getEAnnotation("dataTable").getDetails();
 		if (!rows.isEmpty()) {
 			step.setTheStepTable(CucumberFactory.eINSTANCE.createStepTable());
-			for (String rowId : rows.keySet()) {
-				String rowString = rows.get(rowId);
+			for (int i=0; i< rows.keySet().size(); i++) {
+				String rowString = rows.get(i).getValue();
 				Row row = CucumberFactory.eINSTANCE.createRow();
 				for (String rs : rowString.split(" \\|")) {
 					Cell cell = CucumberFactory.eINSTANCE.createCell();

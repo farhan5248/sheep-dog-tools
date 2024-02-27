@@ -1,6 +1,5 @@
 Feature: Create Step Object From Step
 
-# TODO read in layer 3 java files and specify how they're merged
   Background: Create a feature file
 
     Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
@@ -68,7 +67,6 @@ Feature: Create Step Object From Step
           |                         Interaction Name | Parameter Name |
           | objects::blah::DocStringPage::setContent |         keyMap |
 
-    @debug
     Examples: Data Tables
 
           |                                 Interaction Name | Parameter Name |
