@@ -2,8 +2,12 @@ package org.farhan.mbt.cucumberuml;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.uml2.uml.Behavior;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.ElementImport;
@@ -96,7 +100,7 @@ public class UMLToJavaConverter extends ToCodeConverter {
 		UMLClassWrapper ucw = (UMLClassWrapper) co;
 		Class c = (Class) ucw.get();
 		CompilationUnit cu = (CompilationUnit) tgtWrp.get();
-		for (Behavior aBehavior : c.getOwnedBehaviors()) {
+		for (Behavior aBehavior : getSortedBehaviors(c.getOwnedBehaviors())) {
 			Interaction anInteraction = (Interaction) aBehavior;
 			if (!anInteraction.getName().endsWith("InputOutputs")) {
 				MethodDeclaration aMethod = cu.getType(0).addMethod(anInteraction.getName(), Keyword.PUBLIC);
@@ -110,6 +114,20 @@ public class UMLToJavaConverter extends ToCodeConverter {
 				convertComments(anInteraction, aMethod);
 			}
 		}
+	}
+
+	private EList<Behavior> getSortedBehaviors(EList<Behavior> ownedBehaviors) {
+		// sort the behaviors before writing the file so that git comparisons are easier
+		Map<String, Behavior> sortedBehaviors = new TreeMap<String, Behavior>();
+		for (int i = ownedBehaviors.size() - 1; i >= 0; i--) {
+			Behavior aBehavior = ownedBehaviors.get(i);
+			sortedBehaviors.put(aBehavior.getName(), aBehavior);
+			ownedBehaviors.remove(i);
+		}
+		for (Entry<String, Behavior> entry : sortedBehaviors.entrySet()) {
+			ownedBehaviors.add(entry.getValue());
+		}
+		return ownedBehaviors;
 	}
 
 	@Override
