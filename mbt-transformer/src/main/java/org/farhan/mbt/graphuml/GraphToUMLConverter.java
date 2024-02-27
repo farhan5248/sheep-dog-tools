@@ -56,9 +56,8 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		JGraphTGraphWrapper jgw = (JGraphTGraphWrapper) theObject;
 		String qualifiedName = convertObjectName(jgw.getFile().getAbsolutePath());
 		tgtWrp = (UMLClassWrapper) tgtPrj.createObject(qualifiedName);
-		((Class) tgtWrp.get())
-				.createEAnnotation(jgw.getFile().getName().replace(srcPrj.getFileExt(srcPrj.FIRST_LAYER), ""));
-
+		String name = jgw.getFile().getName().replace(srcPrj.getFileExt(srcPrj.FIRST_LAYER), "");
+		createAnnotation((Class) tgtWrp.get(), "title", name);
 	}
 
 	@Override
@@ -72,7 +71,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) jgw.get();
 		ArrayList<MBTPath> paths = getAllPaths(g, g.getStartVertex());
 		for (int i = 0; i < paths.size(); i++) {
-			resetCurrentContainerObject();
+			resetCurrentMachineAndState();
 			// TODO figure out names for this later, use a counter for now
 			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), "Path " + String.valueOf(i));
 			// TODO think about adding tags by deriving them from the edges

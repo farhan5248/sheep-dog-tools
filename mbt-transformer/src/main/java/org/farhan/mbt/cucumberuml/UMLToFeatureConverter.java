@@ -2,6 +2,7 @@ package org.farhan.mbt.cucumberuml;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Map.Entry;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
@@ -12,9 +13,11 @@ import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.ValueSpecification;
+import org.farhan.cucumber.Background;
 import org.farhan.cucumber.Cell;
 import org.farhan.cucumber.CucumberFactory;
 import org.farhan.cucumber.Feature;
+import org.farhan.cucumber.Line;
 import org.farhan.cucumber.Row;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Statement;
@@ -22,7 +25,6 @@ import org.farhan.cucumber.Step;
 import org.farhan.cucumber.Tag;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToCodeConverter;
-import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.UMLClassWrapper;
@@ -56,34 +58,44 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 		String path = convertObjectName(c.getQualifiedName());
 		tgtWrp = (CucumberFeatureWrapper) tgtPrj.createObject(path);
 		convertClassAnnotations(c, (Feature) tgtWrp.get());
-		convertComments(c, (Feature) tgtWrp.get());
+		convertComments(c, ((Feature) tgtWrp.get()).getStatements());
 	}
 
 	private void convertClassAnnotations(Class c, Feature feature) {
-		feature.setName(c.getEAnnotations().getFirst().getSource());
+		// The first is the title
+		feature.setName(c.getEAnnotations().getFirst().getDetails().get(0).getKey());
+
+		// the last is the tags
+		if (c.getEAnnotations().size() == 2) {
+			for (Entry<String, String> t : c.getEAnnotations().getLast().getDetails()) {
+				Tag tag = CucumberFactory.eINSTANCE.createTag();
+				tag.setName(t.getKey());
+				feature.getTags().add(tag);
+			}
+		}
 	}
 
-	private void convertComments(Class aClass, Feature aFeature) {
+	private void convertComments(Class aClass, EList<Statement> statements) {
 		if (aClass.getOwnedComments().size() > 0) {
 			String comment = aClass.getOwnedComments().get(0).getBody();
 			if (!comment.isEmpty()) {
 				for (String line : comment.split("\n")) {
 					Statement s = CucumberFactory.eINSTANCE.createStatement();
 					s.setName(line);
-					aFeature.getStatements().add(s);
+					statements.add(s);
 				}
 			}
 		}
 	}
 
-	private void convertComments(Interaction anInteraction, Scenario aScenario) {
+	private void convertComments(Interaction anInteraction, EList<Statement> statements) {
 		if (anInteraction.getOwnedComments().size() > 0) {
 			String comment = anInteraction.getOwnedComments().get(0).getBody();
 			if (!comment.isEmpty()) {
 				for (String line : comment.split("\n")) {
 					Statement s = CucumberFactory.eINSTANCE.createStatement();
 					s.setName(line);
-					aScenario.getStatements().add(s);
+					statements.add(s);
 				}
 			}
 		}
@@ -95,19 +107,29 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 
 	@Override
 	protected void convertBehaviours(ConvertibleObject layerClass) throws Exception {
-		// TODO there's no background or scenario outline, just scenario for now
+		// TODO there's no scenario outline, just scenario for now
 		UMLClassWrapper ucw = (UMLClassWrapper) layerClass;
 		for (Behavior aBehavior : ((Class) ucw.get()).getOwnedBehaviors()) {
 			if (aBehavior instanceof Interaction) {
 				Interaction anInteraction = (Interaction) aBehavior;
-				Scenario aScenario = CucumberFactory.eINSTANCE.createScenario();
-				aScenario.setName(anInteraction.getName());
-				((Feature) tgtWrp.get()).getAbstractScenarios().add(aScenario);
-				// TODO this is for scenario outline data convertAnnotation(anInteraction,
-				// aMethod);
-				convertParameters(anInteraction, aScenario);
-				convertComments(anInteraction, aScenario);
-				convertInteractionMessages(anInteraction, aScenario.getSteps());
+				
+				if (anInteraction.getEAnnotation("background") != null) {
+					Background background = CucumberFactory.eINSTANCE.createBackground();
+					background.setName(anInteraction.getName());
+					((Feature) tgtWrp.get()).getAbstractScenarios().add(background);
+					convertComments(anInteraction, background.getStatements());
+					convertInteractionMessages(anInteraction, background.getSteps());
+				} else {
+					// TODO if there are annotations, make this a scenario outline
+					// TODO this is for scenario outline data convertAnnotation(anInteraction,
+					// aMethod);
+					Scenario aScenario = CucumberFactory.eINSTANCE.createScenario();
+					aScenario.setName(anInteraction.getName());
+					((Feature) tgtWrp.get()).getAbstractScenarios().add(aScenario);
+					convertParameters(anInteraction, aScenario);
+					convertComments(anInteraction, aScenario.getStatements());
+					convertInteractionMessages(anInteraction, aScenario.getSteps());
+				}
 			}
 		}
 	}
@@ -155,6 +177,25 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 		step.setName(m.getName());
 		steps.add(step);
 		convertDataTableFromArgument(m, step);
+		convertDocStringFromArgument(m, step);
+	}
+
+	private void convertDocStringFromArgument(Message m, Step step) {
+		ValueSpecification vs = (LiteralString) m.getArgument("docString", null);
+		if (vs == null) {
+			return;
+		}
+		EMap<String, String> lines = vs.getEAnnotation("docString").getDetails();
+		if (!lines.isEmpty()) {
+			step.setTheDocString(CucumberFactory.eINSTANCE.createDocString());
+			for (int i = 0; i < lines.size(); i++) {
+				Line line = CucumberFactory.eINSTANCE.createLine();
+				// I'm not sure why only 9 leading spaces are needed instead of 10 and why a
+				// trailing space gets added automatically
+				line.setName("         " + lines.get(i).getValue());
+				step.getTheDocString().getLines().add(line);
+			}
+		}
 	}
 
 	private void convertDataTableFromArgument(Message m, Step step) {

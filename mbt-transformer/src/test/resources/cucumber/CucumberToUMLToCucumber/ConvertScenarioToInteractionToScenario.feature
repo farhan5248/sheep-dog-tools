@@ -4,14 +4,22 @@ Feature: Convert Scenario To Interaction To Scenario
 
     Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
           """
+          @tag2 @tag3
           Feature: This is a feature
+          
+            Background: Setup
+              Given The blah application, something/Object page is as follows
+                    \"\"\"
+                    Text 1
+                    
+                    Text 2
+                    \"\"\"
           
             @tag1
             Scenario: Submit
           
               Basic EDI claim
           
-              Given The blah application, something/Object page is empty
                When The blah application, something/Object page is empty
                Then The blah application, something/Object page is empty
                 But The blah application, something/Object page is empty
@@ -46,14 +54,23 @@ Feature: Convert Scenario To Interaction To Scenario
 
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be as follows
           """
+          @tag2 @tag3
           Feature: This is a feature
+          
+            Background: Setup
+          
+              Given The blah application, something/Object page is as follows
+                    \"\"\"
+                    Text 1 
+                     
+                    Text 2 
+                    \"\"\"
           
             @tag1
             Scenario: Submit
           
               Basic EDI claim
           
-              Given The blah application, something/Object page is empty
                When The blah application, something/Object page is empty
                Then The blah application, something/Object page is empty
                 But The blah application, something/Object page is empty
@@ -61,7 +78,7 @@ Feature: Convert Scenario To Interaction To Scenario
                   * The blah application, something/Object page is empty
           
           
-              """
+          """
       And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be as follows
           """
           package org.farhan.stepdefs.blah;
@@ -71,6 +88,11 @@ Feature: Convert Scenario To Interaction To Scenario
           import io.cucumber.datatable.DataTable;
           
           public class BlahObjectPageSteps {
+          
+              @Given("^The blah application, something/Object page is as follows$")
+              public void theBlahApplicationSomethingObjectPageIsAsFollows(String docString) {
+                  BlahFactory.get("ObjectPage").setInputOutputs("Content", docString);
+              }
           
               @Given("^The blah application, something/Object page is empty$")
               public void theBlahApplicationSomethingObjectPageIsEmpty() {

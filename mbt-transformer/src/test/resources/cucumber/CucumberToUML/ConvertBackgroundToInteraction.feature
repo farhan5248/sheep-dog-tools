@@ -11,7 +11,8 @@ Feature: Convert Background To Interaction
           
             @tag1
             Scenario: Submit
-              And The blah2 application, Object2 page is empty
+              And The Object2 page is empty
+              And The blah2 application, Object3 page is empty
           
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed with
@@ -23,6 +24,7 @@ Feature: Convert Background To Interaction
 
       And The target/uml/pst.uml file, Interaction Messages section will be as follows
           |       Interaction Name |                                      Message |
-          | specs::Process::Submit | The blah1 application, Object1 page is valid |
-          | specs::Process::Submit | The blah2 application, Object2 page is empty |
+          |  specs::Process::Setup | The blah1 application, Object1 page is valid |
+          | specs::Process::Submit |                    The Object2 page is empty |
+          | specs::Process::Submit | The blah2 application, Object3 page is empty |
 

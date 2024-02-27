@@ -26,14 +26,18 @@ public abstract class ToUMLConverter {
 	protected String layer;
 	protected UMLProject tgtPrj;
 	private StateMachine theMachine;
+	// TODO this is a hack, the whole StateMachine thing needs to be revisited not
+	// to mention the length of this class.
+	private StateMachine backgroundMachine;
 
 	public ToUMLConverter() {
 		theMachine = new StateMachine();
+		backgroundMachine = new StateMachine();
 	}
 
 	private class StateMachine {
-		String currentState;
-		String machineName;
+		String currentState = "";
+		String machineName = "";
 	}
 
 	protected abstract Interaction addNextLayerInteraction(String methodName, Message m);
@@ -199,9 +203,20 @@ public abstract class ToUMLConverter {
 		}
 	}
 
-	protected void resetCurrentContainerObject() {
-		setFSMName("UnknownContainer");
-		setFSMState("InitialState");
+	protected void resetCurrentMachineAndState() {
+		
+		if (backgroundMachine.machineName.isEmpty()) {
+			setFSMName("UnknownContainer");
+			setFSMState("InitialState");
+		} else {
+			setFSMName(backgroundMachine.machineName);
+			setFSMState(backgroundMachine.currentState);
+		}
+	}
+
+	protected void saveCurrentMachineAndState() {
+		backgroundMachine.machineName = theMachine.machineName;
+		backgroundMachine.currentState = theMachine.currentState;
 	}
 
 	protected void setCurrentMachineAndState(String messageName) throws Exception {
@@ -256,6 +271,17 @@ public abstract class ToUMLConverter {
 		EAnnotation a = anInteraction.getEAnnotation(name);
 		if (a == null) {
 			a = anInteraction.createEAnnotation(name);
+		}
+		return a;
+	}
+
+	protected EAnnotation createAnnotation(Class className, String name, String key) {
+		EAnnotation a = className.getEAnnotation(name);
+		if (a == null) {
+			a = className.createEAnnotation(name);
+		}
+		if (!key.isEmpty()) {
+			a.getDetails().put(key, "");
 		}
 		return a;
 	}

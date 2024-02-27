@@ -70,11 +70,14 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 
 		CucumberFeatureWrapper cfw = (CucumberFeatureWrapper) theObject;
 		String qualifiedName = convertObjectName(cfw.getFile().getAbsolutePath());
-
 		tgtWrp = (UMLClassWrapper) tgtPrj.createObject(qualifiedName);
-		((Class) tgtWrp.get()).createEAnnotation(((Feature) cfw.get()).getName());
-		((Class) tgtWrp.get()).createOwnedComment()
-				.setBody(convertStatementsToString(((Feature) cfw.get()).getStatements()));
+
+		Feature feature = (Feature) cfw.get();
+		createAnnotation((Class) tgtWrp.get(), "title", feature.getName());
+		for (Tag t : feature.getTags()) {
+			createAnnotation((Class) tgtWrp.get(), "tags", t.getName());
+		}
+		((Class) tgtWrp.get()).createOwnedComment().setBody(convertStatementsToString(feature.getStatements()));
 	}
 
 	@Override
@@ -87,27 +90,29 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 		CucumberFeatureWrapper cfw = (CucumberFeatureWrapper) theObject;
 		Background b = null;
 		for (AbstractScenario as : ((Feature) cfw.get()).getAbstractScenarios()) {
+			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), as);
+			resetCurrentMachineAndState();
 			if (as instanceof Background) {
 				b = (Background) as;
-				continue;
+				// If there is a background, add its steps first so that the component is
+				// correctly identified
+				convertInteractionMessages(anInteraction, as.getSteps());
+				saveCurrentMachineAndState();
+				// Make a note that this interaction is a background
+				createAnnotation(anInteraction, "background");
+			} else {
+				if (as instanceof Scenario) {
+					Scenario s = (Scenario) as;
+					convertTagsToParameters(anInteraction, s.getTags());
+				}
+				// TODO apply example data to step data table
+				if (as instanceof ScenarioOutline) {
+					ScenarioOutline so = (ScenarioOutline) as;
+					convertTagsToParameters(anInteraction, so.getTags());
+					convertExamplesToAnnotations(anInteraction, so);
+				}
+				convertInteractionMessages(anInteraction, as.getSteps());
 			}
-			resetCurrentContainerObject();
-			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), as);
-			if (as instanceof Scenario) {
-				Scenario s = (Scenario) as;
-				convertTagsToParameters(anInteraction, s.getTags());
-			}
-			// TODO apply example data to step data table
-			if (as instanceof ScenarioOutline) {
-				ScenarioOutline so = (ScenarioOutline) as;
-				convertTagsToParameters(anInteraction, so.getTags());
-				convertExamplesToAnnotations(anInteraction, so);
-			}
-			// If there is a background, add its steps first
-			if (b != null) {
-				convertInteractionMessages(anInteraction, b.getSteps());
-			}
-			convertInteractionMessages(anInteraction, as.getSteps());
 		}
 	}
 
@@ -157,7 +162,11 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 			ValueSpecification vs = createArgument(theMessage, "docString", "");
 			EList<Line> lines = s.getTheDocString().getLines();
 			for (int i = 0; i < lines.size(); i++) {
-				createAnnotation(vs, "docString", String.valueOf(i), lines.get(i).getName());
+				String line = "";
+				if (lines.get(i).getName() != null) {
+					line = lines.get(i).getName();
+				}
+				createAnnotation(vs, "docString", String.valueOf(i), line);
 			}
 		}
 	}
