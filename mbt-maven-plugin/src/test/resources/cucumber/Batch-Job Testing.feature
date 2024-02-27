@@ -16,8 +16,8 @@ Feature: Batch-Job Testing
               Given The acme batchjob, batchjobuser/inbox/Orders.txt file isn't empty
                 But The Orders.txt file is invalid
                When The Orders.txt file is uploaded
-               Then The nightly job won't be triggered
-                But The reporting job will be triggered
+               Then The nightly job won't be triggered at midnight
+                But The reporting job will be triggered at 7 am
           """
      When The cucumber-to-uml goal is executed
       And The uml-to-cucumber goal is executed
@@ -61,8 +61,8 @@ Feature: Batch-Job Testing
           
           public class AcmeNightlyJobSteps {
           
-              @Given("^The nightly job won't be triggered$")
-              public void theNightlyJobWontBeTriggered() {
+              @Given("^The nightly job won't be triggered at midnight$")
+              public void theNightlyJobWontBeTriggeredAtMidnight() {
                   AcmeFactory.get("NightlyJob").transition();
               }
           }
@@ -78,8 +78,8 @@ Feature: Batch-Job Testing
           
           public class AcmeReportingJobSteps {
           
-              @Given("^The reporting job will be triggered$")
-              public void theReportingJobWillBeTriggered() {
+              @Given("^The reporting job will be triggered at 7 am$")
+              public void theReportingJobWillBeTriggeredAt7Am() {
                   AcmeFactory.get("ReportingJob").transition();
               }
           }

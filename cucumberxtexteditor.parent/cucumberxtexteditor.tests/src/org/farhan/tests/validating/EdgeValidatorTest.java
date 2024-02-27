@@ -48,8 +48,8 @@ public class EdgeValidatorTest {
 
 	@Test
 	public void testGetObjTypeJob() {
-		Assertions.assertTrue(MBTEdgeValidator
-				.getObjectType("The Something1 batchjob, Something2 job is executed with").contentEquals("job"));
+		Assertions.assertTrue(MBTEdgeValidator.getObjectType("The Something1 batchjob, Something2 job is executed with")
+				.contentEquals("job"));
 	}
 
 	@Test
@@ -78,6 +78,13 @@ public class EdgeValidatorTest {
 		Assertions.assertTrue(
 				MBTEdgeValidator.getAttachment("The Something1 application, Something2 request is executed with")
 						.contentEquals("with"));
+	}
+
+	@Test
+	public void testGetTime() {
+		Assertions.assertTrue(
+				MBTEdgeValidator.getTime("The Something1 application, Something2 request is executed on time")
+						.contentEquals("on time"));
 	}
 
 	@Test
@@ -143,6 +150,43 @@ public class EdgeValidatorTest {
 	@Test
 	public void testAppRegexPlugIn() {
 		Assertions.assertTrue(MBTEdgeValidator.isValid("The Something1 plugin, Something2 request is sent"));
+	}
+
+	@Test
+	public void testTimeRegexAt() {
+		Assertions.assertTrue(MBTEdgeValidator.isValid("The Something1 plugin, Something2 request is sent at noon"));
+	}
+
+	@Test
+	public void testTimeRegexBefore() {
+		Assertions.assertTrue(
+				MBTEdgeValidator.isValid("The Something1 plugin, Something2 request is sent before midday"));
+	}
+
+	@Test
+	public void testTimeRegexAfter() {
+		Assertions.assertTrue(
+				MBTEdgeValidator.isValid("The Something1 plugin, Something2 request is sent after the next day"));
+	}
+
+	@Test
+	public void testTimeRegexIn() {
+		Assertions.assertTrue(MBTEdgeValidator.isValid("The Something1 plugin, Something2 request is sent in 5 years"));
+	}
+
+	@Test
+	public void testTimeRegexEarly() {
+		Assertions.assertTrue(MBTEdgeValidator.isValid("The Something1 plugin, Something2 request is sent early"));
+	}
+
+	@Test
+	public void testTimeRegexLate() {
+		Assertions.assertTrue(MBTEdgeValidator.isValid("The Something1 plugin, Something2 request is sent late"));
+	}
+
+	@Test
+	public void testTimeRegexOnTime() {
+		Assertions.assertTrue(MBTEdgeValidator.isValid("The Something1 plugin, Something2 request is sent on time"));
 	}
 
 }

@@ -13,14 +13,13 @@ public class MBTEdgeValidator {
 	private static final String COMPONENT_REGEX = "(( " + NAME_REGEX + "+)( application| service| plugin| batchjob),)?";
 	private static final String OBJECT_REGEX = "( " + NAME_REGEX + "+)( request| goal| job)";
 	private static final String STATE_REGEX = "(( is| isn't| will be| won't be)( executed| sent| triggered)( with)?)";
-	private static final String EDGE_REGEX = "The" + COMPONENT_REGEX + OBJECT_REGEX + STATE_REGEX;
+	private static final String TIME_REGEX = "( early| late| on time|( at| before| after| in)(.*))?";
+	private static final String EDGE_REGEX = "The" + COMPONENT_REGEX + OBJECT_REGEX + STATE_REGEX + TIME_REGEX;
 	public static final String INVALID_EDGE = "invalidEdge";
 
 	public static String getErrorMessage() {
-		// this applies to When
 		String rules = "\nThe component is: " + COMPONENT_REGEX + "\nThe object is: " + OBJECT_REGEX
-				+ "\nThe state is: " + STATE_REGEX;
-
+				+ "\nThe state is: " + STATE_REGEX + "\nThe time is: " + TIME_REGEX;
 		String msg = "This is an invalid statement. These are the rules:" + rules;
 
 		return msg;
@@ -100,6 +99,10 @@ public class MBTEdgeValidator {
 
 	public static String getAttachment(String text) {
 		return getGroup(text, 9);
+	}
+
+	public static String getTime(String text) {
+		return getGroup(text, 10);
 	}
 
 	public static boolean isValid(String text) {
