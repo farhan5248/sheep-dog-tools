@@ -43,6 +43,8 @@ Feature: Convert Interaction To Step Definition
           
               @Given("^The blah application, DataTable page, Top section will be as follows$")
               public void theBlahApplicationDataTablePageTopSectionWillBeAsFollows(DataTable dataTable) {
+                  BlahFactory.get("DataTablePage").setComponent("blah");
+                  BlahFactory.get("DataTablePage").setPath("DataTable");
                   BlahFactory.get("DataTablePage").assertInputOutputs(dataTable, "TopSection");
               }
           }
@@ -63,6 +65,8 @@ Feature: Convert Interaction To Step Definition
           
               @Given("^The blah application, DocString page is as follows$")
               public void theBlahApplicationDocStringPageIsAsFollows(String docString) {
+                  BlahFactory.get("DocStringPage").setComponent("blah");
+                  BlahFactory.get("DocStringPage").setPath("DocString");
                   BlahFactory.get("DocStringPage").setInputOutputs("Content", docString);
               }
           }
@@ -83,6 +87,8 @@ Feature: Convert Interaction To Step Definition
           
               @Given("^The blah application, Object page is empty$")
               public void theBlahApplicationObjectPageIsEmpty() {
+                  BlahFactory.get("ObjectPage").setComponent("blah");
+                  BlahFactory.get("ObjectPage").setPath("Object");
                   BlahFactory.get("ObjectPage").setInputOutputs("Empty");
               }
           }
@@ -103,12 +109,16 @@ Feature: Convert Interaction To Step Definition
           
               @Given("^The blah2 service, Json request is executed with$")
               public void theBlah2ServiceJsonRequestIsExecutedWith(DataTable dataTable) {
+                  Blah2Factory.get("JsonRequest").setComponent("blah2");
+                  Blah2Factory.get("JsonRequest").setPath("Json");
                   Blah2Factory.get("JsonRequest").setInputOutputs(dataTable);
                   Blah2Factory.get("JsonRequest").transition();
               }
           
               @Given("^The blah2 service, Json request is sent$")
               public void theBlah2ServiceJsonRequestIsSent() {
+                  Blah2Factory.get("JsonRequest").setComponent("blah2");
+                  Blah2Factory.get("JsonRequest").setPath("Json");
                   Blah2Factory.get("JsonRequest").transition();
               }
           }

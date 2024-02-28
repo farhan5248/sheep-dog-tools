@@ -36,16 +36,22 @@ Feature: Batch-Job Testing
           
               @Given("^The acme batchjob, batchjobuser/inbox/Orders.txt file isn't empty$")
               public void theAcmeBatchjobBatchjobuserInboxOrdersTxtFileIsntEmpty() {
+                  AcmeFactory.get("OrdersTxtFile").setComponent("acme");
+                  AcmeFactory.get("OrdersTxtFile").setPath("batchjobuser/inbox/Orders.txt");
                   AcmeFactory.get("OrdersTxtFile").setInputOutputs("");
               }
           
               @Given("^The Orders.txt file is invalid$")
               public void theOrdersTxtFileIsInvalid() {
+                  AcmeFactory.get("OrdersTxtFile").setComponent("acme");
+                  AcmeFactory.get("OrdersTxtFile").setPath("Orders.txt");
                   AcmeFactory.get("OrdersTxtFile").setInputOutputs("Invalid");
               }
           
               @Given("^The Orders.txt file is uploaded$")
               public void theOrdersTxtFileIsUploaded() {
+                  AcmeFactory.get("OrdersTxtFile").setComponent("acme");
+                  AcmeFactory.get("OrdersTxtFile").setPath("Orders.txt");
                   AcmeFactory.get("OrdersTxtFile").setInputOutputs("Uploaded");
               }
           }
@@ -63,6 +69,8 @@ Feature: Batch-Job Testing
           
               @Given("^The nightly job won't be triggered at midnight$")
               public void theNightlyJobWontBeTriggeredAtMidnight() {
+                  AcmeFactory.get("NightlyJob").setComponent("acme");
+                  AcmeFactory.get("NightlyJob").setPath("nightly");
                   AcmeFactory.get("NightlyJob").transition();
               }
           }
@@ -80,6 +88,8 @@ Feature: Batch-Job Testing
           
               @Given("^The reporting job will be triggered at 7 am$")
               public void theReportingJobWillBeTriggeredAt7Am() {
+                  AcmeFactory.get("ReportingJob").setComponent("acme");
+                  AcmeFactory.get("ReportingJob").setPath("reporting");
                   AcmeFactory.get("ReportingJob").transition();
               }
           }

@@ -4,7 +4,7 @@ import org.farhan.mbt.core.MojoGoal;
 import org.farhan.mbt.core.Utilities;
 import org.junit.jupiter.api.Assertions;
 
-public class GoalObject extends GraphTestObject {
+public abstract class GoalObject extends GraphTestObject {
 	protected void runGoal(String goal) {
 		try {
 			Class<?> mojoClass = Class.forName(goal);

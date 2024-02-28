@@ -8,6 +8,8 @@ public class MbtMavenPluginAcmeAccountDetailsPageStepsJavaFileSteps {
 
     @Given("^The src/test/java/org/farhan/stepdefs/acme/AcmeAccountDetailsPageSteps.java file will be as follows$")
     public void theSrcTestJavaOrgFarhanStepdefsAcmeAcmeAccountDetailsPageStepsJavaFileWillBeAsFollows(String docString) {
+        MbtMavenPluginFactory.get("AcmeAccountDetailsPageStepsJavaFile").setComponent("mbt-maven-plugin");
+        MbtMavenPluginFactory.get("AcmeAccountDetailsPageStepsJavaFile").setPath("src/test/java/org/farhan/stepdefs/acme/AcmeAccountDetailsPageSteps.java");
         MbtMavenPluginFactory.get("AcmeAccountDetailsPageStepsJavaFile").assertInputOutputs("Content", docString);
     }
 }

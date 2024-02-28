@@ -43,11 +43,15 @@ Feature: Plug-In Testing
           
               @Given("^The acme-tool plugin, src/test/resources/cucumber/Input.txt file is as follows$")
               public void theAcmeToolPluginSrcTestResourcesCucumberInputTxtFileIsAsFollows(String docString) {
+                  AcmeToolFactory.get("InputTxtFile").setComponent("acme-tool");
+                  AcmeToolFactory.get("InputTxtFile").setPath("src/test/resources/cucumber/Input.txt");
                   AcmeToolFactory.get("InputTxtFile").setInputOutputs("Content", docString);
               }
           
               @Given("^The Input.txt file is valid$")
               public void theInputTxtFileIsValid() {
+                  AcmeToolFactory.get("InputTxtFile").setComponent("acme-tool");
+                  AcmeToolFactory.get("InputTxtFile").setPath("Input.txt");
                   AcmeToolFactory.get("InputTxtFile").setInputOutputs("Valid");
               }
           }
@@ -65,6 +69,8 @@ Feature: Plug-In Testing
           
               @Given("^The do-it goal is executed with$")
               public void theDoItGoalIsExecutedWith(DataTable dataTable) {
+                  AcmeToolFactory.get("DoItGoal").setComponent("acme-tool");
+                  AcmeToolFactory.get("DoItGoal").setPath("do-it");
                   AcmeToolFactory.get("DoItGoal").setInputOutputs(dataTable);
                   AcmeToolFactory.get("DoItGoal").transition();
               }
@@ -83,11 +89,15 @@ Feature: Plug-In Testing
           
               @Given("^The Output.txt file, Results table will be as follows$")
               public void theOutputTxtFileResultsTableWillBeAsFollows(DataTable dataTable) {
+                  AcmeToolFactory.get("OutputTxtFile").setComponent("acme-tool");
+                  AcmeToolFactory.get("OutputTxtFile").setPath("Output.txt");
                   AcmeToolFactory.get("OutputTxtFile").assertInputOutputs(dataTable, "ResultsTable");
               }
           
               @Given("^The target/Output.txt file will be present$")
               public void theTargetOutputTxtFileWillBePresent() {
+                  AcmeToolFactory.get("OutputTxtFile").setComponent("acme-tool");
+                  AcmeToolFactory.get("OutputTxtFile").setPath("target/Output.txt");
                   AcmeToolFactory.get("OutputTxtFile").assertInputOutputs("Present");
               }
           }

@@ -38,6 +38,7 @@ public abstract class ToUMLConverter {
 	private class StateMachine {
 		String currentState = "";
 		String machineName = "";
+		String componentName = "";
 	}
 
 	protected abstract Interaction addNextLayerInteraction(String methodName, Message m);
@@ -95,6 +96,10 @@ public abstract class ToUMLConverter {
 			}
 		}
 		return null;
+	}
+
+	public String getFSMComponent() {
+		return theMachine.componentName;
 	}
 
 	public String getFSMName() {
@@ -204,17 +209,17 @@ public abstract class ToUMLConverter {
 	}
 
 	protected void resetCurrentMachineAndState() {
-		
 		if (backgroundMachine.machineName.isEmpty()) {
 			setFSMName("UnknownContainer");
 			setFSMState("InitialState");
 		} else {
-			setFSMName(backgroundMachine.machineName);
+			setFSMName(backgroundMachine.componentName);
 			setFSMState(backgroundMachine.currentState);
 		}
 	}
 
 	protected void saveCurrentMachineAndState() {
+		backgroundMachine.componentName = theMachine.componentName;
 		backgroundMachine.machineName = theMachine.machineName;
 		backgroundMachine.currentState = theMachine.currentState;
 	}
@@ -227,12 +232,13 @@ public abstract class ToUMLConverter {
 		String objectType = StringUtils.capitalize(Validator.getObjectType(messageName));
 		setFSMState(objectParts[objectParts.length - 1] + objectType);
 		if (Validator.isContainerStep(messageName)) {
-			setFSMName(StringUtils.capitalize(Validator.getComponentName(messageName)));
+			setFSMName(Validator.getComponentName(messageName));
 		}
 	}
 
-	void setFSMName(String machineName) {
-		theMachine.machineName = Utilities.toUpperCamelCase(machineName);
+	void setFSMName(String componentName) {
+		theMachine.componentName = componentName;
+		theMachine.machineName = Utilities.toUpperCamelCase(componentName);
 		theMachine.machineName = Utilities.removeDelimiterAndCapitalize(theMachine.machineName, "\\.");
 		theMachine.machineName = Utilities.removeDelimiterAndCapitalize(theMachine.machineName, "\\-");
 	}
@@ -283,6 +289,15 @@ public abstract class ToUMLConverter {
 		if (!key.isEmpty()) {
 			a.getDetails().put(key, "");
 		}
+		return a;
+	}
+
+	protected EAnnotation createAnnotation(Message aMessage, String name, String key, String value) {
+		EAnnotation a = aMessage.getEAnnotation(name);
+		if (a == null) {
+			a = aMessage.createEAnnotation(name);
+		}
+		a.getDetails().put(key, value);
 		return a;
 	}
 

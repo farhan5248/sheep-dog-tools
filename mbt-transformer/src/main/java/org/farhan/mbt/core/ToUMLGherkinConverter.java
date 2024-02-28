@@ -3,7 +3,6 @@ package org.farhan.mbt.core;
 import java.util.ArrayList;
 
 import org.apache.commons.lang3.StringUtils;
-import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.LiteralString;
@@ -39,12 +38,16 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 	}
 
 	@Override
-	protected void addNextLayerInteractionMessages(Interaction targetInteraction, Message m) {
+	protected void addNextLayerInteractionMessages(Interaction nextLayerInteraction, Message m) {
+
+		createSetComponentMessage(nextLayerInteraction, m);
+		createSetPathMessage(nextLayerInteraction, m);
 		if (Validator.validateStepText(m.getName())) {
 			if (MBTVertexValidator.isVertex(m.getName())) {
-				createNextLayerInteractionMessagesFromVerticeMessage(targetInteraction, m);
+				createVerticeInputOutputMessage(nextLayerInteraction, m);
 			} else if (MBTEdgeValidator.isEdge(m.getName())) {
-				createNextLayerInteractionMessagesFromEdgeMessage(targetInteraction, m);
+				createEdgeInputOutputMessage(nextLayerInteraction, m);
+				createEdgeTransitionMessage(nextLayerInteraction, m);
 			}
 		}
 	}
@@ -58,11 +61,6 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 		newName = newName.replaceAll("Steps$", "");
 		newName = newName.replaceFirst(getFactoryName(newName), "");
 		return newName;
-	}
-
-	private String getFactoryName(String qualifiedName) {
-		String[] nameParts = qualifiedName.split("::");
-		return StringUtils.capitalize(nameParts[nameParts.length - 2]);
 	}
 
 	@Override
@@ -80,26 +78,56 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 		}
 	}
 
-	private void createNextLayerInteractionMessagesFromVerticeMessage(Interaction targetInteraction, Message m) {
+	private String getFactoryName(String qualifiedName) {
+		String[] nameParts = qualifiedName.split("::");
+		return StringUtils.capitalize(nameParts[nameParts.length - 2]);
+	}
+
+	private void createSetComponentMessage(Interaction nextLayerInteraction, Message m) {
+		Class nextLayerClass = createClassImport(getNextLayerClassQualifiedName(nextLayerInteraction),
+				nextLayerInteraction);
+		if (nextLayerInteraction.getMessage("setComponent") == null) {
+			Message nextLayerMessage = getMessage(nextLayerInteraction, nextLayerClass, "setComponent");
+			createArgument(nextLayerMessage, "component",
+					"\"" + m.getEAnnotation("Step").getDetails().get("Component") + "\"");
+		}
+	}
+
+	private void createSetPathMessage(Interaction nextLayerInteraction, Message m) {
+		Class nextLayerClass = createClassImport(getNextLayerClassQualifiedName(nextLayerInteraction),
+				nextLayerInteraction);
+		if (nextLayerInteraction.getMessage("setPath") == null) {
+			Message nextLayerMessage = getMessage(nextLayerInteraction, nextLayerClass, "setPath");
+			createArgument(nextLayerMessage, "path",
+					"\"" + m.getEAnnotation("Step").getDetails().get("Path") + "\"");
+		}
+	}
+
+	private void createVerticeInputOutputMessage(Interaction targetInteraction, Message m) {
 
 		String text = MBTVertexValidator.getStateModality(m.getName());
-		if (text.startsWith("will be") || text.startsWith("won't be")) {
-			createInputOutputMessage(targetInteraction, m, "assert");
-		} else if (text.startsWith("is") || text.startsWith("isn't")) {
-			createInputOutputMessage(targetInteraction, m, "set");
+		if (text.endsWith("be")) {
+			if (text.startsWith("will")) {
+				createInputOutputMessage(targetInteraction, m, "assert");
+			} else {
+				// TODO handle won't as a negative
+				createInputOutputMessage(targetInteraction, m, "assert");
+			}
+		} else if (text.startsWith("is")) {
+			if (text.endsWith("n't")) {
+				// TODO handle won't as a negative
+				createInputOutputMessage(targetInteraction, m, "set");
+			} else {
+				createInputOutputMessage(targetInteraction, m, "set");
+			}
 		} else {
 			// TODO throw an exception but generally the text should be valid by this point
 		}
 	}
 
-	private void createNextLayerInteractionMessagesFromEdgeMessage(Interaction nextLayerInteraction, Message m) {
+	private void createEdgeInputOutputMessage(Interaction nextLayerInteraction, Message m) {
 
 		createInputOutputMessage(nextLayerInteraction, m, "set");
-		Class nextLayerClass = createClassImport(getNextLayerClassQualifiedName(nextLayerInteraction),
-				nextLayerInteraction);
-		if (nextLayerInteraction.getMessage("transition") == null) {
-			getMessage(nextLayerInteraction, nextLayerClass, "transition");
-		}
 	}
 
 	private void createInputOutputMessage(Interaction nextLayerInteraction, Message m, String prefix) {
@@ -140,6 +168,7 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 				vs.getEAnnotation("keyMap").getDetails().getFirst().setValue(fields + annotationDetailValue);
 			}
 		} else if (MBTVertexValidator.isVertex(m.getName())) {
+			// Add state argument
 			String attributeName = StringUtils.capitalize(MBTVertexValidator.getStateType(m.getName()));
 			createArgument(nextLayerMessage, "key", "\"" + attributeName + "\"");
 		}
@@ -154,6 +183,15 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 		// Add negative argument
 		if (Validator.isNegativeStep(m.getName())) {
 			createArgument(nextLayerMessage, "negativeTest", "true");
+		}
+	}
+
+	private void createEdgeTransitionMessage(Interaction nextLayerInteraction, Message m) {
+		Class nextLayerClass = createClassImport(getNextLayerClassQualifiedName(nextLayerInteraction),
+				nextLayerInteraction);
+		if (nextLayerInteraction.getMessage("transition") == null) {
+			// TODO handle negative like isn't sent
+			getMessage(nextLayerInteraction, nextLayerClass, "transition");
 		}
 	}
 

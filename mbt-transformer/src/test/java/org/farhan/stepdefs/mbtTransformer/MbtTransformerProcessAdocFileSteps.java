@@ -8,6 +8,8 @@ public class MbtTransformerProcessAdocFileSteps {
 
     @Given("^The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows$")
     public void theMbtTransformerPluginSrcTestResourcesAsciiDocProcessAdocFileIsAsFollows(String docString) {
+        MbtTransformerFactory.get("ProcessAdocFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessAdocFile").setPath("src/test/resources/AsciiDoc/Process.adoc");
         MbtTransformerFactory.get("ProcessAdocFile").setInputOutputs("Content", docString);
     }
 }

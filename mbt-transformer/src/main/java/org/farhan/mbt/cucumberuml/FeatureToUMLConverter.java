@@ -30,6 +30,8 @@ import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
+import org.farhan.validation.MBTEdgeValidator;
+import org.farhan.validation.MBTVertexValidator;
 
 public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 
@@ -90,7 +92,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 		CucumberFeatureWrapper cfw = (CucumberFeatureWrapper) theObject;
 		Background b = null;
 		for (AbstractScenario as : ((Feature) cfw.get()).getAbstractScenarios()) {
-			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), as);
+			Interaction anInteraction = convertScenarioToInteraction((Class) tgtWrp.get(), as);
 			resetCurrentMachineAndState();
 			if (as instanceof Background) {
 				b = (Background) as;
@@ -135,14 +137,11 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 		Step s = (Step) o;
 		Message theMessage = convertStepToMessage(anInteraction, s);
 		convertKeywordToAnnotation(s, theMessage);
+		// Some steps don't specify the component, it's determined by looking at
+		// previous steps.
+		convertTextToAnnotation(s, theMessage);
 		convertDataTableToArgument(s, theMessage);
 		convertDocStringToArgument(s, theMessage);
-	}
-
-	private void convertKeywordToAnnotation(Step s, Message theMessage) {
-		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) s.eAdapters().getFirst();
-		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
-		theMessage.createEAnnotation(rc.getRule().getName());
 	}
 
 	@Override
@@ -155,6 +154,50 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::specs" + qualifiedName;
 		return qualifiedName;
+	}
+
+	private String convertStatementsToString(EList<Statement> eList) {
+		String contents = "";
+		for (Statement s : eList) {
+			contents += s.getName() + "\n";
+		}
+		return contents.trim();
+	}
+
+	private Interaction convertScenarioToInteraction(Class layerClass, AbstractScenario as) {
+		Interaction anInteraction = createInteraction(layerClass, as.getName());
+		anInteraction.setName(anInteraction.getName());
+		anInteraction.createOwnedComment().setBody(convertStatementsToString(as.getStatements()));
+		return anInteraction;
+	}
+
+	private void convertTagsToParameters(Interaction anInteraction, EList<Tag> tags) {
+		for (Tag a : tags) {
+			createParameter(anInteraction, a.getName().replace("@", ""), "", "in");
+		}
+	}
+
+	private void convertKeywordToAnnotation(Step s, Message theMessage) {
+		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) s.eAdapters().getFirst();
+		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
+		createAnnotation(theMessage, "Step", "Keyword", rc.getRule().getName());
+	}
+
+	private void convertTextToAnnotation(Step s, Message m) {
+		createAnnotation(m, "Step", "Component", getFSMComponent());
+		// TODO similar to the FSM component, keep track of the object and use its full
+		// path
+		if (MBTVertexValidator.isVertex(m.getName())) {
+			createAnnotation(m, "Step", "Path", MBTVertexValidator.getObjectName(m.getName()));
+		} else if (MBTEdgeValidator.isEdge(m.getName())) {
+			createAnnotation(m, "Step", "Path", MBTEdgeValidator.getObjectName(m.getName()));
+		}
+	}
+
+	private Message convertStepToMessage(Interaction anInteraction, Step step) {
+		Class nextLayerClass = createClassImport(getNextLayerClassName(), anInteraction);
+		Message theMessage = getMessage(anInteraction, nextLayerClass, step.getName());
+		return theMessage;
 	}
 
 	private void convertDocStringToArgument(Step s, Message theMessage) {
@@ -185,10 +228,18 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 		}
 	}
 
-	private Message convertStepToMessage(Interaction anInteraction, Step step) {
-		Class nextLayerClass = createClassImport(getNextLayerClassName(), anInteraction);
-		Message theMessage = getMessage(anInteraction, nextLayerClass, step.getName());
-		return theMessage;
+	private void convertExamplesToAnnotations(Interaction anInteraction, ScenarioOutline so) {
+		for (Examples e : so.getExamples()) {
+			// TODO save example tags
+			EList<Row> rows = e.getTheExamplesTable().getRows();
+			for (int i = 0; i < rows.size(); i++) {
+				String value = "";
+				for (int j = 0; j < rows.get(i).getCells().size(); j++) {
+					value += rows.get(i).getCells().get(j).getName() + "|";
+				}
+				createAnnotation(anInteraction, e.getName(), String.valueOf(i), value);
+			}
+		}
 	}
 
 	private String getNextLayerClassName() {
@@ -230,40 +281,5 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 			}
 		}
 		return false;
-	}
-
-	private void convertExamplesToAnnotations(Interaction anInteraction, ScenarioOutline so) {
-		for (Examples e : so.getExamples()) {
-			// TODO save example tags
-			EList<Row> rows = e.getTheExamplesTable().getRows();
-			for (int i = 0; i < rows.size(); i++) {
-				String value = "";
-				for (int j = 0; j < rows.get(i).getCells().size(); j++) {
-					value += rows.get(i).getCells().get(j).getName() + "|";
-				}
-				createAnnotation(anInteraction, e.getName(), String.valueOf(i), value);
-			}
-		}
-	}
-
-	private void convertTagsToParameters(Interaction anInteraction, EList<Tag> tags) {
-		for (Tag a : tags) {
-			createParameter(anInteraction, a.getName().replace("@", ""), "", "in");
-		}
-	}
-
-	private Interaction createInteraction(Class layerClass, AbstractScenario as) {
-		Interaction anInteraction = createInteraction(layerClass, as.getName());
-		anInteraction.setName(anInteraction.getName());
-		anInteraction.createOwnedComment().setBody(convertStatementsToString(as.getStatements()));
-		return anInteraction;
-	}
-
-	private String convertStatementsToString(EList<Statement> eList) {
-		String contents = "";
-		for (Statement s : eList) {
-			contents += s.getName() + "\n";
-		}
-		return contents.trim();
 	}
 }

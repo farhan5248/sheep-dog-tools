@@ -9,11 +9,8 @@ import org.junit.jupiter.api.Assertions;
 public abstract class FileObject extends GraphTestObject {
 
 	public void setComponent(String component) {
+		super.setComponent(component);
 		ConvertibleProject.baseDir = "target/src-gen/" + component + "/";
-	}
-
-	public void setPath(String path) {
-		keyValue.put("path", path);
 	}
 
 	public void assertFileExists() {
@@ -43,5 +40,4 @@ public abstract class FileObject extends GraphTestObject {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
 	}
-
 }

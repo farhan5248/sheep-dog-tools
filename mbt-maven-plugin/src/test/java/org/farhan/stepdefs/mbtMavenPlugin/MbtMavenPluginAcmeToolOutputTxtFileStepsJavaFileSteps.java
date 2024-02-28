@@ -8,6 +8,8 @@ public class MbtMavenPluginAcmeToolOutputTxtFileStepsJavaFileSteps {
 
     @Given("^The src/test/java/org/farhan/stepdefs/acmeTool/AcmeToolOutputTxtFileSteps.java file will be as follows$")
     public void theSrcTestJavaOrgFarhanStepdefsAcmeToolAcmeToolOutputTxtFileStepsJavaFileWillBeAsFollows(String docString) {
+        MbtMavenPluginFactory.get("AcmeToolOutputTxtFileStepsJavaFile").setComponent("mbt-maven-plugin");
+        MbtMavenPluginFactory.get("AcmeToolOutputTxtFileStepsJavaFile").setPath("src/test/java/org/farhan/stepdefs/acmeTool/AcmeToolOutputTxtFileSteps.java");
         MbtMavenPluginFactory.get("AcmeToolOutputTxtFileStepsJavaFile").assertInputOutputs("Content", docString);
     }
 }

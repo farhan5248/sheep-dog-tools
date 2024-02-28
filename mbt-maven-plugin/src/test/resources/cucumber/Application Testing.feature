@@ -35,6 +35,8 @@ Feature: Application Testing
           
               @Given("^The Account Details page, Claims History table won't be present$")
               public void theAccountDetailsPageClaimsHistoryTableWontBePresent() {
+                  AcmeFactory.get("AccountDetailsPage").setComponent("acme");
+                  AcmeFactory.get("AccountDetailsPage").setPath("Account Details");
                   AcmeFactory.get("AccountDetailsPage").assertInputOutputs("Present", "ClaimsHistoryTable");
               }
           }
@@ -52,6 +54,8 @@ Feature: Application Testing
           
               @Given("^The Account Search request is sent with$")
               public void theAccountSearchRequestIsSentWith(DataTable dataTable) {
+                  AcmeFactory.get("AccountSearchRequest").setComponent("acme");
+                  AcmeFactory.get("AccountSearchRequest").setPath("Account Search");
                   AcmeFactory.get("AccountSearchRequest").setInputOutputs(dataTable);
                   AcmeFactory.get("AccountSearchRequest").transition();
               }
@@ -70,6 +74,8 @@ Feature: Application Testing
           
               @Given("^The Home page, Account Search section is present$")
               public void theHomePageAccountSearchSectionIsPresent() {
+                  AcmeFactory.get("HomePage").setComponent("acme");
+                  AcmeFactory.get("HomePage").setPath("Home");
                   AcmeFactory.get("HomePage").setInputOutputs("Present", "AccountSearchSection");
               }
           }
@@ -87,6 +93,8 @@ Feature: Application Testing
           
               @Given("^The acme application, Log-In request is sent with$")
               public void theAcmeApplicationLogInRequestIsSentWith(DataTable dataTable) {
+                  AcmeFactory.get("LogInRequest").setComponent("acme");
+                  AcmeFactory.get("LogInRequest").setPath("Log-In");
                   AcmeFactory.get("LogInRequest").setInputOutputs(dataTable);
                   AcmeFactory.get("LogInRequest").transition();
               }

@@ -44,7 +44,7 @@ public class MBTVertexValidator {
 	}
 
 	public static boolean isNegativeStep(String text) {
-		return getGroup(text, 7).contains("isn't");
+		return getGroup(text, 7).contains("isn't") || getGroup(text, 7).contains("won't be");
 	}
 
 	public static boolean isComponentStep(String text) {

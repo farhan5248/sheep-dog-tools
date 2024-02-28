@@ -139,7 +139,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		String messageName = s;
 		Class nextLayerClass = createClassImport(getSecondLayerClassName(), anInteraction);
 		Message theMessage = getMessage(anInteraction, nextLayerClass, messageName);
-		theMessage.createEAnnotation("Asterisk");
+		createAnnotation(theMessage, "Step", "Keyword", "Asterisk");
 	}
 
 	@Override

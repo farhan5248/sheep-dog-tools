@@ -12,6 +12,14 @@ import io.cucumber.datatable.DataTable;
 public abstract class GraphTestObject {
 	protected Map<String, String> keyValue = new HashMap<String, String>();
 
+	public void setComponent(String component) {
+		keyValue.put("component", component);
+	}
+
+	public void setPath(String path) {
+		keyValue.put("path", path);
+	}
+
 	public void transition() {
 	}
 

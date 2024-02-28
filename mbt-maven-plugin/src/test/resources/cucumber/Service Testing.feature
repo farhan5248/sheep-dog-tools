@@ -37,6 +37,8 @@ Feature: Service Testing
           
               @Given("^The Admin service, Family Details response is as follows$")
               public void theAdminServiceFamilyDetailsResponseIsAsFollows(DataTable dataTable) {
+                  AdminFactory.get("FamilyDetailsResponse").setComponent("Admin");
+                  AdminFactory.get("FamilyDetailsResponse").setPath("Family Details");
                   AdminFactory.get("FamilyDetailsResponse").setInputOutputs(dataTable);
               }
           }
@@ -54,6 +56,8 @@ Feature: Service Testing
           
               @Given("^The Pharmacy service, Claim request is sent with$")
               public void thePharmacyServiceClaimRequestIsSentWith(DataTable dataTable) {
+                  PharmacyFactory.get("ClaimRequest").setComponent("Pharmacy");
+                  PharmacyFactory.get("ClaimRequest").setPath("Claim");
                   PharmacyFactory.get("ClaimRequest").setInputOutputs(dataTable);
                   PharmacyFactory.get("ClaimRequest").transition();
               }
@@ -72,6 +76,8 @@ Feature: Service Testing
           
               @Given("^The Claim response will be as follows$")
               public void theClaimResponseWillBeAsFollows(DataTable dataTable) {
+                  PharmacyFactory.get("ClaimResponse").setComponent("Pharmacy");
+                  PharmacyFactory.get("ClaimResponse").setPath("Claim");
                   PharmacyFactory.get("ClaimResponse").assertInputOutputs(dataTable);
               }
           }
@@ -89,6 +95,8 @@ Feature: Service Testing
           
               @Given("^The nightly payment request will be triggered at midnight$")
               public void theNightlyPaymentRequestWillBeTriggeredAtMidnight() {
+                  PharmacyFactory.get("NightlyPaymentRequest").setComponent("Pharmacy");
+                  PharmacyFactory.get("NightlyPaymentRequest").setPath("nightly payment");
                   PharmacyFactory.get("NightlyPaymentRequest").transition();
               }
           }

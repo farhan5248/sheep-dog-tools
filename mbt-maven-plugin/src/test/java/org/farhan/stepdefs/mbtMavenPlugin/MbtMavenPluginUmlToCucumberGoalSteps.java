@@ -8,6 +8,8 @@ public class MbtMavenPluginUmlToCucumberGoalSteps {
 
     @Given("^The uml-to-cucumber goal is executed$")
     public void theUmlToCucumberGoalIsExecuted() {
+        MbtMavenPluginFactory.get("UmlToCucumberGoal").setComponent("mbt-maven-plugin");
+        MbtMavenPluginFactory.get("UmlToCucumberGoal").setPath("uml-to-cucumber");
         MbtMavenPluginFactory.get("UmlToCucumberGoal").transition();
     }
 }

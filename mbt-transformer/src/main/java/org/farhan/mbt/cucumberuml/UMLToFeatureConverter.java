@@ -181,7 +181,7 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 	@Override
 	protected void convertMessage(Message m, Object stepList) throws Exception {
 		EList<Step> steps = (EList<Step>) stepList;
-		String keyword = m.getEAnnotations().getFirst().getSource();
+		String keyword = m.getEAnnotation("Step").getDetails().get("Keyword");
 		Step step = null;
 		switch (keyword) {
 		case "Given":
@@ -236,7 +236,7 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 		EMap<String, String> rows = vs.getEAnnotation("dataTable").getDetails();
 		if (!rows.isEmpty()) {
 			step.setTheStepTable(CucumberFactory.eINSTANCE.createStepTable());
-			for (int i=0; i< rows.keySet().size(); i++) {
+			for (int i = 0; i < rows.keySet().size(); i++) {
 				String rowString = rows.get(i).getValue();
 				Row row = CucumberFactory.eINSTANCE.createRow();
 				for (String rs : rowString.split(" \\|")) {
