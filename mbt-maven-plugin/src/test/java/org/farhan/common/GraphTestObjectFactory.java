@@ -105,6 +105,24 @@ public abstract class GraphTestObjectFactory {
 			foo.setPath("src/test/java/org/farhan/objects/acme/HomePage.java");
 		} else if (className.endsWith("LogInRequestJavaFile")) {
 			foo.setPath("src/test/java/org/farhan/objects/acme/LogInRequest.java");
+		} else if (className.endsWith("ServiceTestingFeatureFile")) {
+			foo.setPath("src/test/resources/cucumber/Service Testing.feature");
+		} else if (className.endsWith("AdminFamilyDetailsResponseStepsJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/stepdefs/admin/AdminFamilyDetailsResponseSteps.java");
+		} else if (className.endsWith("PharmacyClaimRequestStepsJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/stepdefs/pharmacy/PharmacyClaimRequestSteps.java");
+		} else if (className.endsWith("PharmacyClaimResponseStepsJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/stepdefs/pharmacy/PharmacyClaimResponseSteps.java");
+		} else if (className.endsWith("PharmacyNightlyPaymentRequestStepsJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/stepdefs/pharmacy/PharmacyNightlyPaymentRequestSteps.java");
+		} else if (className.endsWith("FamilyDetailsResponseJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/objects/admin/FamilyDetailsResponse.java");
+		} else if (className.endsWith("ClaimRequestJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/objects/pharmacy/ClaimRequest.java");
+		} else if (className.endsWith("ClaimResponseJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/objects/pharmacy/ClaimResponse.java");
+		} else if (className.endsWith("NightlyPaymentRequestJavaFile")) {
+			foo.setPath("src/test/java/org/farhan/objects/pharmacy/NightlyPaymentRequest.java");
 		} else {
 			Assertions.fail("Can't set the path for class " + className);
 		}
