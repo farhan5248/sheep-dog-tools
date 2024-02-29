@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.farhan</groupId>
 	<artifactId>mbt-transformer</artifactId>
-	<version>1.7</version>
+	<version>1.8-SNAPSHOT</version>
 	<name>MBT Transformer</name>
 	<description>Transforms test cases to models and vice-versa</description>
 
@@ -14,7 +14,7 @@
 
 	<scm>
 		<connection>scm:git:https://github.com/farhan5248/claims-adjudication-ai</connection>
-		<tag>mbt-transformer-1.7</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<repositories>
