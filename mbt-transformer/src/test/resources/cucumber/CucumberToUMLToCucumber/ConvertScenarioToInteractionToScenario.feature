@@ -11,9 +11,9 @@ Feature: Convert Scenario To Interaction To Scenario
           
               Given The blah application, something/Object page is as follows
                     \"\"\"
-                    Text 1 
+                     Text 1
                      
-                    Text 2 
+                     Text 2
                     \"\"\"
           
             @tag1
@@ -75,9 +75,9 @@ Feature: Convert Scenario To Interaction To Scenario
           
               Given The blah application, something/Object page is as follows
                     \"\"\"
-                    Text 1 
-                     
-                    Text 2 
+                     Text 1
+                    
+                     Text 2
                     \"\"\"
           
             @tag1

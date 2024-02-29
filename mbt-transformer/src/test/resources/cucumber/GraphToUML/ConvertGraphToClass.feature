@@ -34,7 +34,7 @@ Feature: Convert Graph To Class
           					label:end
           			tag:
           			value:
-          				
+          
           """
      When The mbt-transformer plugin, graph-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present

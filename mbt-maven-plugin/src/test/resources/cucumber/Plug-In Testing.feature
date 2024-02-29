@@ -135,7 +135,6 @@ Feature: Plug-In Testing
           
           """
       And The src/test/java/org/farhan/objects/acmeTool/OutputTxtFile.java file will be as follows
-
           """
           package org.farhan.objects.acmeTool;
           
@@ -150,4 +149,3 @@ Feature: Plug-In Testing
           
           """
 
-          

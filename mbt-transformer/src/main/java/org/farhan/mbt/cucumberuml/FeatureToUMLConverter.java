@@ -204,10 +204,11 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 		if (s.getTheDocString() != null) {
 			ValueSpecification vs = createArgument(theMessage, "docString", "");
 			EList<Line> lines = s.getTheDocString().getLines();
+			String indent = "          ";
 			for (int i = 0; i < lines.size(); i++) {
 				String line = "";
 				if (lines.get(i).getName() != null) {
-					line = lines.get(i).getName();
+					line = lines.get(i).getName().replaceFirst(indent, "").stripTrailing();
 				}
 				createAnnotation(vs, "docString", String.valueOf(i), line);
 			}

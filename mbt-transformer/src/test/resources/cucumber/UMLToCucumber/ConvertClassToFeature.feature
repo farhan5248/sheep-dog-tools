@@ -54,7 +54,7 @@ Feature: Convert Class To Feature
           									label:ins
           							tag:
           							value:
-          								
+          
           						Edge
           							label:5
           							source:

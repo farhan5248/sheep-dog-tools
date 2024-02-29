@@ -54,7 +54,7 @@ Feature: Convert Vertex Or Edge To Message
           									label:ins
           							tag:
           							value:
-          								
+          
           						Edge
           							label:5
           							source:

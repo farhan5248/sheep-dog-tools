@@ -54,7 +54,7 @@ Feature: Convert Path To Interaction
           									label:ins
           							tag:
           							value:
-          								
+          
           						Edge
           							label:5
           							source:

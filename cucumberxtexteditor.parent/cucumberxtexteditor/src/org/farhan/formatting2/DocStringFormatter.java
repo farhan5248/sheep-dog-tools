@@ -32,12 +32,11 @@ public class DocStringFormatter extends Formatter {
 		formatKeyword(df.getRegion(theDocString, a.getQuotationMarkQuotationMarkQuotationMarkKeyword_3()), doc);
 		formatEOL12RuleCall(df.getRegion(theDocString, a.getEOLTerminalRuleCall_4()), doc);
 		for (Line s : theDocString.getLines()) {
-			// Lines in a Doc String shouldn't be automatically formatted
-			// LineFormatter formatter = new LineFormatter(s);
-			// formatter.isLast(isLastElement(s, theDocString.getLines()));
-			// formatter.setIndent(10);
-			// formatter.isLastEOLDouble(false);
-			// formatter.format(doc, ga, df);
+			LineFormatter formatter = new LineFormatter(s);
+			formatter.isLast(isLastElement(s, theDocString.getLines()));
+			formatter.setIndent(10);
+			formatter.isLastEOLDouble(false);
+			formatter.format(doc, ga, df);
 		}
 	}
 

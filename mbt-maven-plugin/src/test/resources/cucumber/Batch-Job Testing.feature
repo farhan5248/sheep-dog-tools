@@ -127,7 +127,6 @@ Feature: Batch-Job Testing
           
           """
       And The src/test/java/org/farhan/objects/acme/ReportingJob.java file will be as follows
-
           """
           package org.farhan.objects.acme;
           
@@ -140,4 +139,3 @@ Feature: Batch-Job Testing
           
           """
 
-          

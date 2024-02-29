@@ -16,15 +16,22 @@ public class LineFormatter extends Formatter {
 
 	public void format(IFormattableDocument doc, CucumberGrammarAccess ga, CucumberFormatter df) {
 		LineElements a = ga.getLineAccess();
-		formatLineBitsRuleCall(df.getRegion(theLine, a.getNameLineBitsParserRuleCall_0_0()), doc);
-		//formatEOL12RuleCall(df.getRegion(theLine, a.getEOLTerminalRuleCall_1()), doc);
+		// formatLineBitsRuleCall(df.getRegion(theLine,
+		// a.getNameLineBitsParserRuleCall_0_0()), doc);
+		formatEOL1RuleCall(df.getRegion(theLine, a.getEOLTerminalRuleCall_1()), doc);
+	}
+
+	protected void formatEOL1RuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
+		doc.prepend(iSR, it -> it.noSpace());
 	}
 
 	public void formatLineBitsRuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
 
-		//System.out.println("Line: >>>" + iSR.getText() + "<<<");
+		// System.out.println("Line: >>>" + iSR.getText() + "<<<");
 		int hiddenLength = iSR.getPreviousHiddenRegion().getText().length();
-		if (hiddenLength < getIndent().length() && iSR.getText().length() > 0) {
+		doc.prepend(iSR, it -> it.noSpace());
+		doc.append(iSR, it -> it.noSpace());
+		if (hiddenLength <= getIndent().length() && iSR.getText().length() > 0) {
 			replace(doc, iSR, indent.repeat(indentCnt - hiddenLength) + iSR.getText());
 		}
 	}

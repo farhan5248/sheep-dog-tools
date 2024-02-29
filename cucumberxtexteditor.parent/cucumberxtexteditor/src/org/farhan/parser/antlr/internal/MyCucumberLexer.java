@@ -13,7 +13,8 @@ import java.util.ArrayList;
 public class MyCucumberLexer extends InternalCucumberLexer {
 
 	private boolean isDocString = false;
-	private boolean lastTokenHasNewLine = true;
+	private int docStringIndent = 0;
+	private boolean lastTokenIsEOL = true;
 	private boolean isTagLine = false;
 
 	public MyCucumberLexer() {
@@ -34,12 +35,11 @@ public class MyCucumberLexer extends InternalCucumberLexer {
 		if (tokenText == null) {
 			return t;
 		}
-		// System.out.println("Handling Token >>>" + tokenText + "<<< " + t.getType());
 		docStringHandler(t);
 		if (isKeyword(t.getType())) {
 			keywordHandler(t);
 		} else if (t.getType() == 0) {
-			unknownHandler(t);
+			keywordErrorHandler(t);
 		} else {
 			textHandler(t);
 		}
@@ -47,26 +47,26 @@ public class MyCucumberLexer extends InternalCucumberLexer {
 	}
 
 	private void textHandler(Token t) {
-		if (t.getText().contains("\n")) {
-			lastTokenHasNewLine = true;
+		if (t.getType() == RULE_EOL) {
+			lastTokenIsEOL = true;
 			// we're leaving the tag line
 			isTagLine = false;
 		} else {
-			if (t.getText().replace(" ", "").length() == 0) {
+			if (t.getType() == RULE_WS) {
 				// if it's all whitespace (and not Scenario O) ignore the whitespace
 			} else {
-				lastTokenHasNewLine = false;
+				lastTokenIsEOL = false;
 			}
 		}
 	}
 
-	private void unknownHandler(Token t) {
+	private void keywordErrorHandler(Token t) {
 		// if it begins with "Scenario " but isn't Scenario Outline: then change
 		// it's type to RULE_STRING
 		if (t.getText().startsWith("Scenario ") && !t.getText().contentEquals("Scenario Outline:")) {
 			t.setType(RULE_STRING);
 		}
-		lastTokenHasNewLine = false;
+		lastTokenIsEOL = false;
 	}
 
 	private void keywordHandler(Token t) {
@@ -77,7 +77,7 @@ public class MyCucumberLexer extends InternalCucumberLexer {
 			// the | can occur multiple times on one line. It's not always
 			// preceded by new lines. This is escaped with \
 		} else {
-			if (lastTokenHasNewLine) {
+			if (lastTokenIsEOL) {
 				// this is an actual keyword
 				if (t.getType() == 23) {
 					// if it's an @
@@ -91,18 +91,41 @@ public class MyCucumberLexer extends InternalCucumberLexer {
 				}
 			}
 		}
-		lastTokenHasNewLine = false;
+		lastTokenIsEOL = false;
 	}
 
 	private void docStringHandler(Token t) {
 		if (!isDocString && t.getText().contentEquals("\"\"\"")) {
 			isDocString = true;
+		} else if (!isDocString && !t.getText().contentEquals("\"\"\"")) {
+			// The last token before the docstring should be the whitespace so we'll use
+			// that as the default white space for the entire docstring
+			docStringIndent = t.getText().length();
+			//System.out.println("Setting the indent to: " + docStringIndent);
 		} else if (isDocString && t.getText().contentEquals("\"\"\"")) {
 			isDocString = false;
 		} else if (isDocString && !t.getText().contentEquals("\"\"\"")) {
-			if (isKeyword(t.getType())) {
+			if (t.getType() != RULE_EOL && !isLeadingWhiteSpace(t)) {
+				//System.out.println("Converting Token >>>" + t.getText() + "<<< " + t.getType());
+				// The length check is there so that the whitespace before the closing """ isn't
+				// ignored. When it's ignored, it looks like there's a line bit without an EOL
+				// before the closing """ which is a syntax error
 				t.setType(RULE_STRING);
+			} else {
+				//System.out.println("Ignoring Token >>>" + t.getText() + "<<< " + t.getType());
 			}
+		}
+	}
+
+	private boolean isLeadingWhiteSpace(Token t) {
+		if (t.getType() != RULE_WS) {
+			return false;
+		} else if (!lastTokenIsEOL) {
+			return false;
+		} else if (t.getText().length() > docStringIndent) {
+			return false;
+		} else {
+			return true;
 		}
 	}
 

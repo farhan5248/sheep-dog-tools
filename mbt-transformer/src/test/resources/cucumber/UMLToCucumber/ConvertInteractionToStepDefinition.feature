@@ -23,7 +23,7 @@ Feature: Convert Interaction To Step Definition
                     text1
                     text2
                     \"\"\"
-              """
+          """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed with
           | Tags |
           | tag1 |
