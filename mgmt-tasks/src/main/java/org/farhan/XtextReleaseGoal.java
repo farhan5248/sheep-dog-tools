@@ -17,8 +17,8 @@ public class XtextReleaseGoal {
 
 	public static void main(String[] args) {
 
-		String currentVersion = "1.10.0";
-		String nextVersion = "1.11.0";
+		String currentVersion = "1.11.0";
+		String nextVersion = "1.12.0";
 
 		// updateToRelease(currentVersion, currentVersion);
 		// Run git add and git commit
