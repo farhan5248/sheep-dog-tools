@@ -8,6 +8,7 @@ public class PharmacyClaimResponseSteps {
 
     @Given("^The Claim response will be as follows$")
     public void theClaimResponseWillBeAsFollows(DataTable dataTable) {
+        PharmacyFactory.create("ClaimResponse");
         PharmacyFactory.get("ClaimResponse").setComponent("Pharmacy");
         PharmacyFactory.get("ClaimResponse").setPath("Claim");
         PharmacyFactory.get("ClaimResponse").assertInputOutputs(dataTable);

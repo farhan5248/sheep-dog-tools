@@ -13,4 +13,16 @@ public class ClaimResponseImpl extends PharmacyPost implements ClaimResponse {
 		// TODO use a json library to do this
 		assertEquals("{\"payProvider\":\"" + keyMap.get("Pay Provider") + "\"}", responseBody);
 	}
+
+	@Override
+	public void assertOutOfPocket(HashMap<String, String> keyMap) {
+		// TODO use a json library to do this
+		assertEquals("{\"outOfPocket\":\"" + keyMap.get("Out Of Pocket") + "\"}", responseBody);
+	}
+
+	@Override
+	public void assertPlanPays(HashMap<String, String> keyMap) {
+		// TODO use a json library to do this
+		assertEquals("{\"planPays\":\"" + keyMap.get("Plan Pays") + "\"}", responseBody);
+	}
 }

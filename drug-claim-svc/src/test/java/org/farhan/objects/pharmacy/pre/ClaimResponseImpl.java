@@ -9,7 +9,18 @@ import org.farhan.objects.pharmacy.ClaimResponse;
 
 public class ClaimResponseImpl extends PharmacyPre implements ClaimResponse {
 
+	@Override
 	public void assertPayProvider(HashMap<String, String> keyMap) {
 		assertEquals(keyMap.get("Pay Provider"), response.payProvider());
+	}
+
+	@Override
+	public void assertOutOfPocket(HashMap<String, String> keyMap) {
+		assertEquals(keyMap.get("Out Of Pocket"), response.outOfPocket());
+	}
+
+	@Override
+	public void assertPlanPays(HashMap<String, String> keyMap) {
+		assertEquals(keyMap.get("Plan Pays"), response.planPays());
 	}
 }

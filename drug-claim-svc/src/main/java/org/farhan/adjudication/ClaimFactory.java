@@ -9,7 +9,13 @@ public class ClaimFactory {
 			theClaim = new ClaimRequest();
 		} else {
 			// Do nothing for now
+			// TODO this needs to be reset each time the step is called otherwise previous
+			// request values are passed into the next scenario
 		}
 		return theClaim;
+	}
+
+	public static void reset() {
+		theClaim = null;
 	}
 }

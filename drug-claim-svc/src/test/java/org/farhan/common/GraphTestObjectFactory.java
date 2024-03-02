@@ -33,18 +33,23 @@ public abstract class GraphTestObjectFactory {
 		return null;
 	}
 
+	public static GraphTestObject create(String packageName, String className) {
+		try {
+			Class<?> gmoClass = getClassInPackage(packageName, className);
+			GraphTestObject gmo = (GraphTestObject) gmoClass.getConstructor().newInstance();
+			classes.put(className, gmo);
+			return gmo;
+		} catch (Exception e) {
+			Assertions.fail("There was an error creating class: " + packageName + "." + className);
+		}
+		return null;
+	}
+
 	public static GraphTestObject get(String packageName, String className) {
 		try {
-			if (classes.get(className) != null) {
-				return classes.get(className);
-			} else {
-				Class<?> gmoClass = getClassInPackage(packageName, className);
-				GraphTestObject gmo = (GraphTestObject) gmoClass.getConstructor().newInstance();
-				classes.put(className, gmo);
-				return gmo;
-			}
+			return classes.get(className);
 		} catch (Exception e) {
-			Assertions.fail("There was an error creating class\n");
+			Assertions.fail("There was an error getting class: " + packageName + "." + className);
 		}
 		return null;
 	}
