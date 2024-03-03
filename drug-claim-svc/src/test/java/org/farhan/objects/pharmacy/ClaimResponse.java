@@ -6,8 +6,6 @@ public interface ClaimResponse {
 
     public void assertOutOfPocket(HashMap<String, String> keyMap);
 
-    public void assertPayProvider(HashMap<String, String> keyMap);
-
     public void assertPlanPays(HashMap<String, String> keyMap);
 
     public void assertRejectMessage(HashMap<String, String> keyMap);

@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 public interface ClaimRequest {
 
+    public void setCertificate(HashMap<String, String> keyMap);
+
     public void setCoInsurance(HashMap<String, String> keyMap);
 
     public void setCoPayment(HashMap<String, String> keyMap);

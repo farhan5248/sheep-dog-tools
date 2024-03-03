@@ -1,4 +1,4 @@
-package org.farhan.adjudication;
+package org.farhan.adjudication.pharmacy;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +18,8 @@ public class ClaimController {
 			@RequestParam(value = "dispenseFee", defaultValue = "0.0") String dispenseFee,
 			@RequestParam(value = "maximum", defaultValue = "1000.0") String maximum,
 			@RequestParam(value = "din") String din,
-			@RequestParam(value = "provider") String provider) {
+			@RequestParam(value = "provider") String provider,
+			@RequestParam(value = "certificate") String certificate) {
 		ClaimRequest request = new ClaimRequest();
 		request.setDrugCost(drugCost);
 		request.setFamily(family);
@@ -29,6 +30,7 @@ public class ClaimController {
 		request.setMaximum(maximum);
 		request.setDIN(din);
 		request.setProvider(provider);
+		request.setCertificate(certificate);
 		ClaimEngine engine = new ClaimEngine(request);
 		ClaimResponse response = engine.process();
 		return response;

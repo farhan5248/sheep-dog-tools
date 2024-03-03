@@ -20,9 +20,12 @@ Feature: Co-Payment
       And The Admin application, Provider page is as follows
           | Provider |
           | 12345678 |
+      And The Admin application, Member page is as follows
+          | Certificate |
+          |   123456789 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Co-Payment | Co-Insurance | Deductible |  DIN |  Provider |
-          |     100.0 |        0.0 |         80.0 |       10.0 | 2345 |  12345678 |
+          | Drug Cost | Co-Payment | Co-Insurance | Deductible |  DIN | Provider | Certificate |
+          |     100.0 |        0.0 |         80.0 |       10.0 | 2345 | 12345678 |   123456789 |
      Then The Claim response will be as follows
           | Out Of Pocket | Plan Pays |
           |          28.0 |      72.0 |
@@ -36,9 +39,12 @@ Feature: Co-Payment
       And The Admin application, Provider page is as follows
           | Provider |
           | 12345678 |
+      And The Admin application, Member page is as follows
+          | Certificate |
+          |   123456789 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Co-Payment | Co-Insurance | Deductible |  DIN | Provider |
-          |     100.0 |       10.0 |         80.0 |       10.0 | 2345 | 12345678 |
+          | Drug Cost | Co-Payment | Co-Insurance | Deductible |  DIN | Provider | Certificate |
+          |     100.0 |       10.0 |         80.0 |       10.0 | 2345 | 12345678 |   123456789 |
      Then The Claim response will be as follows
           | Out Of Pocket | Plan Pays |
           |          38.0 |      62.0 |
@@ -52,9 +58,12 @@ Feature: Co-Payment
       And The Admin application, Provider page is as follows
           | Provider |
           | 12345678 |
+      And The Admin application, Member page is as follows
+          | Certificate |
+          |   123456789 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Co-Payment | Co-Insurance | Deductible |  DIN | Provider |
-          |     100.0 |      110.0 |         80.0 |       10.0 | 2345 | 12345678 |
+          | Drug Cost | Co-Payment | Co-Insurance | Deductible |  DIN | Provider | Certificate |
+          |     100.0 |      110.0 |         80.0 |       10.0 | 2345 | 12345678 |   123456789 |
      Then The Claim response will be as follows
           | Out Of Pocket | Plan Pays |
           |         100.0 |       0.0 |

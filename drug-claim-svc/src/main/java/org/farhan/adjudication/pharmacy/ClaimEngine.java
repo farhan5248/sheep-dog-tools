@@ -1,4 +1,11 @@
-package org.farhan.adjudication;
+package org.farhan.adjudication.pharmacy;
+
+import org.farhan.adjudication.admin.Drug;
+import org.farhan.adjudication.admin.DrugFactory;
+import org.farhan.adjudication.admin.Member;
+import org.farhan.adjudication.admin.MemberFactory;
+import org.farhan.adjudication.admin.Provider;
+import org.farhan.adjudication.admin.ProviderFactory;
 
 public class ClaimEngine {
 
@@ -15,14 +22,19 @@ public class ClaimEngine {
 		if (provider == null) {
 			processError("Unknown Provider");
 		} else {
-			Drug din = DrugFactory.get(request.getDIN());
-			if (din == null) {
-				processError("Unknown DIN");
+			Member member = MemberFactory.get(request.getCertificate());
+			if (member == null) {
+				processError("Unknown Certificate");
 			} else {
-				if (Math.abs(din.getDrugCost() - request.getDrugCost()) <= 0.01) {
-					process("No Problems");
+				Drug din = DrugFactory.get(request.getDIN());
+				if (din == null) {
+					processError("Unknown DIN");
 				} else {
-					process("Different Cost");
+					if (Math.abs(din.getDrugCost() - request.getDrugCost()) <= 0.01) {
+						process("No Problems");
+					} else {
+						process("Different Cost");
+					}
 				}
 			}
 		}

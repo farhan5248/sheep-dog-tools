@@ -2,7 +2,7 @@ package org.farhan.objects.admin.pre;
 
 import java.util.HashMap;
 
-import org.farhan.adjudication.DrugFactory;
+import org.farhan.adjudication.admin.DrugFactory;
 import org.farhan.common.AdminPre;
 import org.farhan.objects.admin.DINPage;
 

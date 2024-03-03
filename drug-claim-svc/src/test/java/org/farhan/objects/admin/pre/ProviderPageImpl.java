@@ -2,7 +2,7 @@ package org.farhan.objects.admin.pre;
 
 import java.util.HashMap;
 
-import org.farhan.adjudication.ProviderFactory;
+import org.farhan.adjudication.admin.ProviderFactory;
 import org.farhan.common.AdminPre;
 import org.farhan.objects.admin.ProviderPage;
 

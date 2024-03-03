@@ -52,4 +52,9 @@ public class ClaimRequestImpl extends PharmacyPost implements ClaimRequest {
 	public void setProvider(HashMap<String, String> keyMap) {
 		addParamter("provider", keyMap.get("Provider"));
 	}
+
+	@Override
+	public void setCertificate(HashMap<String, String> keyMap) {
+		addParamter("certificate", keyMap.get("Certificate"));
+	}
 }

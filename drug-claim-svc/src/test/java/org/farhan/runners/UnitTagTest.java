@@ -1,6 +1,8 @@
 package org.farhan.runners;
 
-import org.farhan.adjudication.DrugFactory;
+import org.farhan.adjudication.admin.DrugFactory;
+import org.farhan.adjudication.admin.MemberFactory;
+import org.farhan.adjudication.admin.ProviderFactory;
 import org.farhan.common.GraphTestObjectFactory;
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
@@ -31,5 +33,7 @@ public class UnitTagTest {
 	public static void before() {
 		GraphTestObjectFactory.reset();
 		DrugFactory.reset();
+		ProviderFactory.reset();
+		MemberFactory.reset();
 	}
 }

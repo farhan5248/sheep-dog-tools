@@ -1,4 +1,4 @@
-package org.farhan.adjudication;
+package org.farhan.adjudication.admin;
 
 import java.util.TreeMap;
 
@@ -14,8 +14,8 @@ public class ProviderFactory {
 		}
 	}
 
-	public static Provider get(String din) {
-		return providerList.get(din);
+	public static Provider get(String provider) {
+		return providerList.get(provider);
 	}
 
 	public static void reset() {

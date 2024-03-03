@@ -10,11 +10,6 @@ import org.farhan.objects.pharmacy.ClaimResponse;
 
 public class ClaimResponseImpl extends PharmacyPost implements ClaimResponse {
 
-	// TODO use a json library to do this
-	public void assertPayProvider(HashMap<String, String> keyMap) {
-		assertTrue(responseBody.contains("\"payProvider\":\"" + keyMap.get("Pay Provider") + "\""), responseBody);
-	}
-
 	@Override
 	public void assertOutOfPocket(HashMap<String, String> keyMap) {
 		assertTrue(responseBody.contains("\"outOfPocket\":\"" + keyMap.get("Out Of Pocket") + "\""), responseBody);

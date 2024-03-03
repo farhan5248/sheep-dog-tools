@@ -1,10 +1,12 @@
-package org.farhan.adjudication;
+package org.farhan.adjudication.pharmacy;
 
-// TODO replace class with record
+import org.farhan.adjudication.admin.Member;
+import org.farhan.adjudication.admin.MemberFactory;
+
 public class ClaimRequest {
 
 	private double theDrugCost = 0.0;
-	private Family theFamily = null;
+	private Member theFamily = null;
 	private double theCoInsurance = 0.0;
 	private double theDeductible = 0.0;
 	private double theCoPayment = 0.0;
@@ -12,13 +14,14 @@ public class ClaimRequest {
 	private double theMaximum = 200.0;
 	private String theDIN = "";
 	private String theProvider = "";
+	private String theCertificate = "";
 
 	public void setDrugCost(String drugCost) {
 		theDrugCost = Double.valueOf(drugCost);
 	}
 
 	public void setFamily(String family) {
-		theFamily = FamilyFactory.get(family);
+		theFamily = MemberFactory.get(family);
 	}
 
 	public double getDrugCost() {
@@ -79,5 +82,13 @@ public class ClaimRequest {
 
 	public String getProvider() {
 		return theProvider;
+	}
+
+	public String getCertificate() {
+		return theCertificate;
+	}
+
+	public void setCertificate(String certificate) {
+		theCertificate = certificate;
 	}
 }

@@ -2,18 +2,18 @@ package org.farhan.objects.pharmacy.pre;
 
 import java.util.HashMap;
 
-import org.farhan.adjudication.ClaimEngine;
+import org.farhan.adjudication.pharmacy.ClaimEngine;
 import org.farhan.common.PharmacyPre;
 import org.farhan.objects.pharmacy.ClaimRequest;
 
 public class ClaimRequestImpl extends PharmacyPre implements ClaimRequest {
 
-	private static org.farhan.adjudication.ClaimRequest theClaim = null;
+	private static org.farhan.adjudication.pharmacy.ClaimRequest theClaim = null;
 
 	// Before each scenario, this and other Impl objects are cleared so that should
 	// reset it once per scenario
 	public ClaimRequestImpl() {
-		theClaim = new org.farhan.adjudication.ClaimRequest();
+		theClaim = new org.farhan.adjudication.pharmacy.ClaimRequest();
 	}
 
 	@Override
@@ -60,5 +60,10 @@ public class ClaimRequestImpl extends PharmacyPre implements ClaimRequest {
 	@Override
 	public void setProvider(HashMap<String, String> keyMap) {
 		theClaim.setProvider(keyMap.get("Provider"));
+	}
+
+	@Override
+	public void setCertificate(HashMap<String, String> keyMap) {
+		theClaim.setCertificate(keyMap.get("Certificate"));
 	}
 }

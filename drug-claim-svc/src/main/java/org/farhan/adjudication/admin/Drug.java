@@ -1,4 +1,4 @@
-package org.farhan.adjudication;
+package org.farhan.adjudication.admin;
 
 public class Drug {
 
