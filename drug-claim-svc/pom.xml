@@ -203,14 +203,14 @@
 								farhan5248/${project.artifactId}</name>
 							<run>
 								<ports>
-									<port>8887:8080</port>
+									<port>8080:8080</port>
 								</ports>
 								<wait>
 									<http>
 										<url>
-											http://localhost:8887/claim</url>
+											http://localhost:8080/drug?din=9999</url>
 									</http>
-									<time>10000</time>
+									<time>60000</time>
 								</wait>
 							</run>
 						</image>

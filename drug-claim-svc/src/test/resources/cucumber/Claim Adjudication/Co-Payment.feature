@@ -14,12 +14,12 @@ Feature: Co-Payment
   @unit
   Scenario: No Co-Payment
 
-    Given The Admin application, Family page is as follows
-          | Family |
-          | Sheikh |
+    Given The Admin application, DIN page is as follows
+          |  DIN | Drug Cost |
+          | 2345 |     100.0 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Co-Payment | Co-Insurance | Deductible |
-          |     100.0 |        0.0 |         80.0 |       10.0 |
+          | Drug Cost | Co-Payment | Co-Insurance | Deductible |  DIN |
+          |     100.0 |        0.0 |         80.0 |       10.0 | 2345 |
      Then The Claim response will be as follows
           | Out Of Pocket | Plan Pays |
           |          28.0 |      72.0 |
@@ -27,12 +27,12 @@ Feature: Co-Payment
   @unit
   Scenario: Low Co-Payment
 
-    Given The Admin application, Family page is as follows
-          | Family |
-          | Sheikh |
+    Given The Admin application, DIN page is as follows
+          |  DIN | Drug Cost |
+          | 2345 |     100.0 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Co-Payment | Co-Insurance | Deductible |
-          |     100.0 |       10.0 |         80.0 |       10.0 |
+          | Drug Cost | Co-Payment | Co-Insurance | Deductible |  DIN |
+          |     100.0 |       10.0 |         80.0 |       10.0 | 2345 |
      Then The Claim response will be as follows
           | Out Of Pocket | Plan Pays |
           |          38.0 |      62.0 |
@@ -40,12 +40,12 @@ Feature: Co-Payment
   @unit @component
   Scenario: High Co-Payment
 
-    Given The Admin application, Family page is as follows
-          | Family |
-          | Sheikh |
+    Given The Admin application, DIN page is as follows
+          |  DIN | Drug Cost |
+          | 2345 |     100.0 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Co-Payment | Co-Insurance | Deductible |
-          |     100.0 |      110.0 |         80.0 |       10.0 |
+          | Drug Cost | Co-Payment | Co-Insurance | Deductible |  DIN |
+          |     100.0 |      110.0 |         80.0 |       10.0 | 2345 |
      Then The Claim response will be as follows
           | Out Of Pocket | Plan Pays |
           |         100.0 |       0.0 |

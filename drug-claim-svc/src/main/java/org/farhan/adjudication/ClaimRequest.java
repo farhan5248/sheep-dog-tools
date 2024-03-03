@@ -10,7 +10,7 @@ public class ClaimRequest {
 	private double theCoPayment = 0.0;
 	private double theDispenseFee = 0.0;
 	private double theMaximum = 200.0;
-	private int theDIN = 2345;
+	private String theDIN = "";
 
 	public void setDrugCost(String drugCost) {
 		theDrugCost = Double.valueOf(drugCost);
@@ -65,10 +65,10 @@ public class ClaimRequest {
 	}
 
 	public void setDIN(String din) {
-		theDIN = Integer.valueOf(din);
+		theDIN = din;
 	}
 
-	public int getDIN() {
+	public String getDIN() {
 		return theDIN;
 	}
 }

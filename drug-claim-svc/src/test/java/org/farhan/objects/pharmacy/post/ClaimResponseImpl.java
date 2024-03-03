@@ -1,6 +1,7 @@
 package org.farhan.objects.pharmacy.post;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 
@@ -11,21 +12,21 @@ public class ClaimResponseImpl extends PharmacyPost implements ClaimResponse {
 
 	// TODO use a json library to do this
 	public void assertPayProvider(HashMap<String, String> keyMap) {
-		assertEquals("{\"payProvider\":\"" + keyMap.get("Pay Provider") + "\"}", responseBody);
+		assertTrue(responseBody.contains("\"payProvider\":\"" + keyMap.get("Pay Provider") + "\""), responseBody);
 	}
 
 	@Override
 	public void assertOutOfPocket(HashMap<String, String> keyMap) {
-		assertEquals("{\"outOfPocket\":\"" + keyMap.get("Out Of Pocket") + "\"}", responseBody);
+		assertTrue(responseBody.contains("\"outOfPocket\":\"" + keyMap.get("Out Of Pocket") + "\""), responseBody);
 	}
 
 	@Override
 	public void assertPlanPays(HashMap<String, String> keyMap) {
-		assertEquals("{\"planPays\":\"" + keyMap.get("Plan Pays") + "\"}", responseBody);
+		assertTrue(responseBody.contains("\"planPays\":\"" + keyMap.get("Plan Pays") + "\""), responseBody);
 	}
 
 	@Override
 	public void assertRejectMessage(HashMap<String, String> keyMap) {
-		assertEquals("{\"rejectMessage\":\"" + keyMap.get("Reject Message") + "\"}", responseBody);
+		assertTrue(responseBody.contains("\"rejectMessage\":\"" + keyMap.get("Reject Message") + "\""), responseBody);
 	}
 }

@@ -8,12 +8,12 @@ Feature: Maximum
   @unit
   Scenario: No Maximum
 
-    Given The Admin application, Family page is as follows
-          | Family |
-          | Sheikh |
+    Given The Admin application, DIN page is as follows
+          |  DIN | Drug Cost |
+          | 2345 |     100.0 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Deductible | Co-Insurance | Maximum |
-          |     100.0 |       10.0 |         80.0 |     0.0 |
+          | Drug Cost | Deductible | Co-Insurance | Maximum |  DIN |
+          |     100.0 |       10.0 |         80.0 |     0.0 | 2345 |
      Then The Claim response will be as follows
           | Out Of Pocket | Plan Pays |
           |          20.0 |      80.0 |
@@ -23,12 +23,12 @@ Feature: Maximum
 
     The maximum is less than the deductible so only $5 out of the $10 will count
 
-    Given The Admin application, Family page is as follows
-          | Family |
-          | Sheikh |
+    Given The Admin application, DIN page is as follows
+          |  DIN | Drug Cost |
+          | 2345 |     100.0 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Deductible | Co-Insurance | Maximum |
-          |     100.0 |       10.0 |         80.0 |     5.0 |
+          | Drug Cost | Deductible | Co-Insurance | Maximum |  DIN |
+          |     100.0 |       10.0 |         80.0 |     5.0 | 2345 |
      Then The Claim response will be as follows
           | Out Of Pocket | Plan Pays |
           |          24.0 |      76.0 |
@@ -36,12 +36,12 @@ Feature: Maximum
   @unit @component
   Scenario: High Maximum
 
-    Given The Admin application, Family page is as follows
-          | Family |
-          | Sheikh |
+    Given The Admin application, DIN page is as follows
+          |  DIN | Drug Cost |
+          | 2345 |     100.0 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Deductible | Co-Insurance | Maximum |
-          |     100.0 |       10.0 |         80.0 |    15.0 |
+          | Drug Cost | Deductible | Co-Insurance | Maximum |  DIN |
+          |     100.0 |       10.0 |         80.0 |    15.0 | 2345 |
      Then The Claim response will be as follows
           | Out Of Pocket | Plan Pays |
           |          28.0 |      72.0 |

@@ -7,15 +7,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ClaimController {
 
-	// TODO rename to /adjudicate
+	// TODO is there a better way to specify an object and have its attributes
+	// converted to parameters rather than me specifying each one?
 	@GetMapping("/claim")
 	public ClaimResponse claim(@RequestParam(value = "drugCost", defaultValue = "10.00") String drugCost,
-			@RequestParam(value = "family", defaultValue = "Sheikh") String family) {
-		// TODO the ClaimFactory maintains just one copy of ClaimRequest, remove that
-		// constraint later after analysing how the tests are impacted
+			@RequestParam(value = "family", defaultValue = "Sheikh") String family,
+			@RequestParam(value = "coinsurance") String coInsurance,
+			@RequestParam(value = "deductible") String deductible,
+			@RequestParam(value = "copayment", defaultValue = "0.0") String coPayment,
+			@RequestParam(value = "dispenseFee", defaultValue = "0.0") String dispenseFee,
+			@RequestParam(value = "maximum", defaultValue = "1000.0") String maximum, @RequestParam(value = "din") String din) {
 		ClaimRequest request = new ClaimRequest();
 		request.setDrugCost(drugCost);
 		request.setFamily(family);
+		request.setCoInsurance(coInsurance);
+		request.setDeductible(deductible);
+		request.setCoPayment(coPayment);
+		request.setDispenseFee(dispenseFee);
+		request.setMaximum(maximum);
+		request.setDIN(din);
 		ClaimEngine engine = new ClaimEngine(request);
 		ClaimResponse response = engine.process();
 		return response;

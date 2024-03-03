@@ -44,7 +44,7 @@ public class ClaimRequestImpl extends PharmacyPre implements ClaimRequest {
 
 	@Override
 	public void setDispenseFee(HashMap<String, String> keyMap) {
-		theClaim.setDispenseFee(keyMap.get("Dispense-Fee"));
+		theClaim.setDispenseFee(keyMap.get("Dispense Fee"));
 	}
 
 	@Override

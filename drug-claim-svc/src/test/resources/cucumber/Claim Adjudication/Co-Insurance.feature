@@ -13,12 +13,12 @@ Feature: Co-Insurance
   @unit
   Scenario: No Co-Insurance
 
-    Given The Admin application, Family page is as follows
-          | Family |
-          | Sheikh |
+    Given The Admin application, DIN page is as follows
+          |  DIN | Drug Cost |
+          | 2345 |     100.0 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Co-Insurance | Deductible |
-          |     100.0 |          0.0 |       10.0 |
+          | Drug Cost | Co-Insurance | Deductible |  DIN |
+          |     100.0 |          0.0 |       10.0 | 2345 |
      Then The Claim response will be as follows
           | Out Of Pocket | Plan Pays |
           |         100.0 |       0.0 |
@@ -26,12 +26,12 @@ Feature: Co-Insurance
   @unit
   Scenario: Low Co-Insurance
 
-    Given The Admin application, Family page is as follows
-          | Family |
-          | Sheikh |
+    Given The Admin application, DIN page is as follows
+          |  DIN | Drug Cost |
+          | 2345 |     100.0 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Co-Insurance | Deductible |
-          |     100.0 |         50.0 |       10.0 |
+          | Drug Cost | Co-Insurance | Deductible |  DIN |
+          |     100.0 |         50.0 |       10.0 | 2345 |
      Then The Claim response will be as follows
           | Out Of Pocket | Plan Pays |
           |          55.0 |      45.0 |
@@ -39,12 +39,12 @@ Feature: Co-Insurance
   @unit @component
   Scenario: High Co-Insurance
 
-    Given The Admin application, Family page is as follows
-          | Family |
-          | Sheikh |
+    Given The Admin application, DIN page is as follows
+          |  DIN | Drug Cost |
+          | 2345 |     100.0 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Co-Insurance | Deductible |
-          |     100.0 |        100.0 |       10.0 |
+          | Drug Cost | Co-Insurance | Deductible |  DIN |
+          |     100.0 |        100.0 |       10.0 | 2345 |
      Then The Claim response will be as follows
           | Out Of Pocket | Plan Pays |
           |          10.0 |      90.0 |
