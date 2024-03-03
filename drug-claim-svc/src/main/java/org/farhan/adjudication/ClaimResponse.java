@@ -1,5 +1,5 @@
 package org.farhan.adjudication;
 
-public record ClaimResponse(String payProvider, String outOfPocket, String planPays) {
+public record ClaimResponse(String payProvider, String outOfPocket, String planPays, String rejectMessage) {
 
 }

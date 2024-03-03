@@ -8,9 +8,15 @@ public interface ClaimRequest {
 
     public void setCoPayment(HashMap<String, String> keyMap);
 
+    public void setDIN(HashMap<String, String> keyMap);
+
     public void setDeductible(HashMap<String, String> keyMap);
 
+    public void setDispenseFee(HashMap<String, String> keyMap);
+
     public void setDrugCost(HashMap<String, String> keyMap);
+
+    public void setMaximum(HashMap<String, String> keyMap);
 
     public void transition();
 }

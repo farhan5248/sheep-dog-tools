@@ -6,7 +6,6 @@ import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import org.farhan.adjudication.ClaimFactory;
 import org.farhan.common.PharmacyPost;
 import org.farhan.objects.pharmacy.ClaimRequest;
 import org.junit.jupiter.api.Assertions;
@@ -46,5 +45,20 @@ public class ClaimRequestImpl extends PharmacyPost implements ClaimRequest {
 	@Override
 	public void setCoPayment(HashMap<String, String> keyMap) {
 		addParamter("CoPayment", keyMap.get("Co-Payment"));
+	}
+
+	@Override
+	public void setDispenseFee(HashMap<String, String> keyMap) {
+		addParamter("DispenseFee", keyMap.get("Dispense-Fee"));
+	}
+
+	@Override
+	public void setMaximum(HashMap<String, String> keyMap) {
+		addParamter("Maximum", keyMap.get("Maximum"));
+	}
+
+	@Override
+	public void setDIN(HashMap<String, String> keyMap) {
+		addParamter("DIN", keyMap.get("DIN"));
 	}
 }

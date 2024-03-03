@@ -23,4 +23,9 @@ public class ClaimResponseImpl extends PharmacyPre implements ClaimResponse {
 	public void assertPlanPays(HashMap<String, String> keyMap) {
 		assertEquals(keyMap.get("Plan Pays"), response.planPays());
 	}
+
+	@Override
+	public void assertRejectMessage(HashMap<String, String> keyMap) {
+		assertEquals(keyMap.get("Reject Message"), response.rejectMessage());
+	}
 }

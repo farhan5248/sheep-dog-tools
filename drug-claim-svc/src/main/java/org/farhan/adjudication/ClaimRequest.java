@@ -8,6 +8,9 @@ public class ClaimRequest {
 	private double theCoInsurance = 0.0;
 	private double theDeductible = 0.0;
 	private double theCoPayment = 0.0;
+	private double theDispenseFee = 0.0;
+	private double theMaximum = 200.0;
+	private int theDIN = 2345;
 
 	public void setDrugCost(String drugCost) {
 		theDrugCost = Double.valueOf(drugCost);
@@ -43,5 +46,29 @@ public class ClaimRequest {
 
 	public double getCoPayment() {
 		return theCoPayment;
+	}
+
+	public void setDispenseFee(String dispenseFee) {
+		theDispenseFee = Double.valueOf(dispenseFee);
+	}
+
+	public double getDispenseFee() {
+		return theDispenseFee;
+	}
+
+	public void setMaximum(String maximum) {
+		theMaximum = Double.valueOf(maximum);
+	}
+
+	public double getMaximum() {
+		return theMaximum;
+	}
+
+	public void setDIN(String din) {
+		theDIN = Integer.valueOf(din);
+	}
+
+	public int getDIN() {
+		return theDIN;
 	}
 }

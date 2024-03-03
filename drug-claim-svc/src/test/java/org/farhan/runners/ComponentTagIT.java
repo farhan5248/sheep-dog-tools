@@ -1,6 +1,5 @@
 package org.farhan.runners;
 
-import org.farhan.adjudication.ClaimFactory;
 import org.farhan.common.GraphTestObjectFactory;
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
@@ -20,7 +19,7 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
 @IncludeTags("component")
-public class ClaimEngineIT {
+public class ComponentTagIT {
 
 	@BeforeAll
 	public static void beforeAll() {
@@ -29,6 +28,6 @@ public class ClaimEngineIT {
 
 	@Before
 	public static void before() {
-		ClaimFactory.reset();
+		GraphTestObjectFactory.reset();
 	}
 }

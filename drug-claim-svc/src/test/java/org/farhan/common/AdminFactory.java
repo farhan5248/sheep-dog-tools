@@ -6,7 +6,4 @@ public class AdminFactory extends GraphTestObjectFactory {
 		return get("admin", className);
 	}
 
-	public static GraphTestObject create(String className) {
-		return create("admin", className);
-	}
 }

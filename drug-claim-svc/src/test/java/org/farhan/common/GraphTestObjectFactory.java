@@ -10,8 +10,12 @@ import com.google.common.reflect.ClassPath.ClassInfo;
 
 public abstract class GraphTestObjectFactory {
 
-	private static String preOrPost = "pre";
-	private static HashMap<String, GraphTestObject> classes = new HashMap<String, GraphTestObject>();
+	private static String preOrPost = "";
+	private static HashMap<String, GraphTestObject> classes = null;
+
+	public static void reset() {
+		classes = new HashMap<String, GraphTestObject>();
+	}
 
 	public static void setPre(boolean b) {
 		if (b) {
@@ -33,21 +37,16 @@ public abstract class GraphTestObjectFactory {
 		return null;
 	}
 
-	public static GraphTestObject create(String packageName, String className) {
-		try {
-			Class<?> gmoClass = getClassInPackage(packageName, className);
-			GraphTestObject gmo = (GraphTestObject) gmoClass.getConstructor().newInstance();
-			classes.put(className, gmo);
-			return gmo;
-		} catch (Exception e) {
-			Assertions.fail("There was an error creating class: " + packageName + "." + className);
-		}
-		return null;
-	}
-
 	public static GraphTestObject get(String packageName, String className) {
 		try {
-			return classes.get(className);
+			if (classes.get(className) != null) {
+				return classes.get(className);
+			} else {
+				Class<?> gmoClass = getClassInPackage(packageName, className);
+				GraphTestObject gmo = (GraphTestObject) gmoClass.getConstructor().newInstance();
+				classes.put(className, gmo);
+				return gmo;
+			}
 		} catch (Exception e) {
 			Assertions.fail("There was an error getting class: " + packageName + "." + className);
 		}

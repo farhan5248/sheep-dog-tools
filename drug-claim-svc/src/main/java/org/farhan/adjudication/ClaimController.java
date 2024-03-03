@@ -13,7 +13,7 @@ public class ClaimController {
 			@RequestParam(value = "family", defaultValue = "Sheikh") String family) {
 		// TODO the ClaimFactory maintains just one copy of ClaimRequest, remove that
 		// constraint later after analysing how the tests are impacted
-		ClaimRequest request = ClaimFactory.getClaim();
+		ClaimRequest request = new ClaimRequest();
 		request.setDrugCost(drugCost);
 		request.setFamily(family);
 		ClaimEngine engine = new ClaimEngine(request);
