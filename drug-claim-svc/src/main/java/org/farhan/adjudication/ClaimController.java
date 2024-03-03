@@ -16,7 +16,9 @@ public class ClaimController {
 			@RequestParam(value = "deductible") String deductible,
 			@RequestParam(value = "copayment", defaultValue = "0.0") String coPayment,
 			@RequestParam(value = "dispenseFee", defaultValue = "0.0") String dispenseFee,
-			@RequestParam(value = "maximum", defaultValue = "1000.0") String maximum, @RequestParam(value = "din") String din) {
+			@RequestParam(value = "maximum", defaultValue = "1000.0") String maximum,
+			@RequestParam(value = "din") String din,
+			@RequestParam(value = "provider") String provider) {
 		ClaimRequest request = new ClaimRequest();
 		request.setDrugCost(drugCost);
 		request.setFamily(family);
@@ -26,6 +28,7 @@ public class ClaimController {
 		request.setDispenseFee(dispenseFee);
 		request.setMaximum(maximum);
 		request.setDIN(din);
+		request.setProvider(provider);
 		ClaimEngine engine = new ClaimEngine(request);
 		ClaimResponse response = engine.process();
 		return response;

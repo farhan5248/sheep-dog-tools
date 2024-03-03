@@ -11,6 +11,7 @@ public class ClaimRequest {
 	private double theDispenseFee = 0.0;
 	private double theMaximum = 200.0;
 	private String theDIN = "";
+	private String theProvider = "";
 
 	public void setDrugCost(String drugCost) {
 		theDrugCost = Double.valueOf(drugCost);
@@ -70,5 +71,13 @@ public class ClaimRequest {
 
 	public String getDIN() {
 		return theDIN;
+	}
+
+	public void setProvider(String provider) {
+		theProvider = provider;
+	}
+
+	public String getProvider() {
+		return theProvider;
 	}
 }

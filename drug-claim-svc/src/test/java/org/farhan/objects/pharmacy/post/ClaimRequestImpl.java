@@ -47,4 +47,9 @@ public class ClaimRequestImpl extends PharmacyPost implements ClaimRequest {
 	public void setDIN(HashMap<String, String> keyMap) {
 		addParamter("din", keyMap.get("DIN"));
 	}
+
+	@Override
+	public void setProvider(HashMap<String, String> keyMap) {
+		addParamter("provider", keyMap.get("Provider"));
+	}
 }

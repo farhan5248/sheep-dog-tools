@@ -11,19 +11,20 @@ public class ClaimEngine {
 
 	public ClaimResponse process() {
 
-		// Calculation
-		// TODO remove this check and use the DINFactory to get the DIN record. If it
-		// returns null then reject it. For each of the 3 alternatives make a separate
-		// method that sets the response which this methods returns.
-		Drug din = DrugFactory.get(request.getDIN());
-		if (din != null) {
-			if (Math.abs(din.getDrugCost() - request.getDrugCost()) <= 0.01) {
-				process("No Problems");
-			} else {
-				process("Different Cost");
-			}
+		Provider provider = ProviderFactory.get(request.getProvider());
+		if (provider == null) {
+			processError("Unknown Provider");
 		} else {
-			processUnknownDIN();
+			Drug din = DrugFactory.get(request.getDIN());
+			if (din == null) {
+				processError("Unknown DIN");
+			} else {
+				if (Math.abs(din.getDrugCost() - request.getDrugCost()) <= 0.01) {
+					process("No Problems");
+				} else {
+					process("Different Cost");
+				}
+			}
 		}
 		return response;
 	}
@@ -62,9 +63,8 @@ public class ClaimEngine {
 		response = new ClaimResponse(payProvider, outOfPocket, planPays, rejectMessage);
 	}
 
-	private void processUnknownDIN() {
+	private void processError(String rejectMessage) {
 		double totalAmount = request.getDrugCost() + request.getDispenseFee();
-		String rejectMessage = "Unknown DIN";
 		String planPays = Double.toString(0);
 		String outOfPocket = Double.toString(totalAmount - Double.valueOf(planPays));
 		String payProvider = outOfPocket;

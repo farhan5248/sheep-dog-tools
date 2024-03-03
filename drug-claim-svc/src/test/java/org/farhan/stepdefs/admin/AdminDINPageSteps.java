@@ -6,10 +6,10 @@ import io.cucumber.datatable.DataTable;
 
 public class AdminDINPageSteps {
 
-	@Given("^The Admin application, DIN page is as follows$")
-	public void theAdminApplicationDINPageIsAsFollows(DataTable dataTable) {
-		AdminFactory.get("DINPage").setComponent("Admin");
-		AdminFactory.get("DINPage").setPath("DIN");
-		AdminFactory.get("DINPage").setInputOutputs(dataTable);
-	}
+    @Given("^The Admin application, DIN page is as follows$")
+    public void theAdminApplicationDINPageIsAsFollows(DataTable dataTable) {
+        AdminFactory.get("DINPage").setComponent("Admin");
+        AdminFactory.get("DINPage").setPath("DIN");
+        AdminFactory.get("DINPage").setInputOutputs(dataTable);
+    }
 }

@@ -18,5 +18,7 @@ public interface ClaimRequest {
 
     public void setMaximum(HashMap<String, String> keyMap);
 
+    public void setProvider(HashMap<String, String> keyMap);
+
     public void transition();
 }

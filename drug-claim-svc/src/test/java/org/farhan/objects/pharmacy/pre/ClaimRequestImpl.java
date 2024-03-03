@@ -56,4 +56,9 @@ public class ClaimRequestImpl extends PharmacyPre implements ClaimRequest {
 	public void setDIN(HashMap<String, String> keyMap) {
 		theClaim.setDIN(keyMap.get("DIN"));
 	}
+
+	@Override
+	public void setProvider(HashMap<String, String> keyMap) {
+		theClaim.setProvider(keyMap.get("Provider"));
+	}
 }

@@ -17,9 +17,12 @@ Feature: Deductible
     Given The Admin application, DIN page is as follows
           |  DIN | Drug Cost |
           | 2345 |     100.0 |
+      And The Admin application, Provider page is as follows
+          | Provider |
+          | 12345678 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Deductible | Co-Insurance |  DIN |
-          |     100.0 |        0.0 |         80.0 | 2345 |
+          | Drug Cost | Deductible | Co-Insurance |  DIN |  Provider |
+          |     100.0 |        0.0 |         80.0 | 2345 |  12345678 |
      Then The Claim response will be as follows
           | Out Of Pocket | Plan Pays |
           |          20.0 |      80.0 |
@@ -30,9 +33,12 @@ Feature: Deductible
     Given The Admin application, DIN page is as follows
           |  DIN | Drug Cost |
           | 2345 |     100.0 |
+      And The Admin application, Provider page is as follows
+          | Provider |
+          | 12345678 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Deductible | Co-Insurance |  DIN |
-          |     100.0 |       10.0 |         80.0 | 2345 |
+          | Drug Cost | Deductible | Co-Insurance |  DIN | Provider |
+          |     100.0 |       10.0 |         80.0 | 2345 | 12345678 |
      Then The Claim response will be as follows
           | Out Of Pocket | Plan Pays |
           |          28.0 |      72.0 |
@@ -43,9 +49,12 @@ Feature: Deductible
     Given The Admin application, DIN page is as follows
           |  DIN | Drug Cost |
           | 2345 |     100.0 |
+      And The Admin application, Provider page is as follows
+          | Provider |
+          | 12345678 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Deductible | Co-Insurance |  DIN |
-          |     100.0 |      100.0 |         80.0 | 2345 |
+          | Drug Cost | Deductible | Co-Insurance |  DIN |  Provider |
+          |     100.0 |      100.0 |         80.0 | 2345 |  12345678 |
      Then The Claim response will be as follows
           | Out Of Pocket | Plan Pays |
           |         100.0 |       0.0 |
