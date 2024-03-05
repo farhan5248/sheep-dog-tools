@@ -27,7 +27,7 @@ import org.farhan.mbt.graph.MBTVertex;
 public class AdocToGraphConverter extends ToGraphConverter {
 
 	private JGraphTGraphWrapper tgtWrp;
-	AsciiDoctorProject srcPrj;
+	private AsciiDoctorProject srcPrj;
 
 	public AdocToGraphConverter(String layer, AsciiDoctorProject source, JGraphTProject target) {
 		this.layer = layer;
@@ -49,7 +49,6 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	protected void convertObject(ConvertibleObject object) throws Exception {
 		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) object;
 		tgtWrp = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(adaw.getFile().getName()));
-
 	}
 
 	@Override
@@ -71,6 +70,9 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		for (StructuralNode block : src.getBlocks()) {
 			if (block instanceof Section) {
 				convertSections(tgt, (Section) block);
+			} else if (block instanceof Block) {
+				tgt.setTag(getSectionAttributes(block));
+				tgt.setDescription(getSectionText(block));
 			}
 		}
 	}
@@ -87,8 +89,8 @@ public class AdocToGraphConverter extends ToGraphConverter {
 				}
 			} else if (block instanceof Table) {
 				// So this is a hack to reduce code changes for now. Not sure if this will come
-				// back to bite me in the ***. What I did learn is that I can read an empty adoc
-				// file and then dynamically create the sections :)
+				// back to bite me. What I did learn is that I can read an empty adoc file and
+				// then dynamically create the sections :)
 				steps.getLast().getBlocks().add(block);
 			}
 		}
@@ -110,7 +112,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		edge.setDescription(getSectionText(scenario));
 	}
 
-	private String getSectionAttributes(Section scenario) {
+	private String getSectionAttributes(StructuralNode scenario) {
 		Map<String, Object> attrs = scenario.getAttributes();
 		String tags = (String) attrs.get("tags");
 		if (tags == null) {
@@ -120,7 +122,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		}
 	}
 
-	private String getSectionText(Section scenario) {
+	private String getSectionText(StructuralNode scenario) {
 		String text = "";
 		for (StructuralNode block : scenario.getBlocks()) {
 			if (block instanceof Block) {

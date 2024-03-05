@@ -6,9 +6,6 @@ import org.jgrapht.graph.DefaultWeightedEdge;
 
 public class MBTEdge extends DefaultWeightedEdge {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5850254711369259654L;
 	private HashMap<String, Object> attributes;
 
@@ -16,6 +13,7 @@ public class MBTEdge extends DefaultWeightedEdge {
 		attributes = new HashMap<String, Object>();
 		setLabel(label);
 		setTag("");
+		setValue("");
 		setDescription("");
 	}
 
@@ -28,13 +26,21 @@ public class MBTEdge extends DefaultWeightedEdge {
 		return attributes.get("_" + key).toString();
 	}
 
-	// I need a better name for this but it's either a graph or an expression
+	// TODO make a dedicated setGraph method
 	public void setValue(Object graph) {
 		attributes.put("value", graph);
 	}
 
 	public Object getValue() {
 		return attributes.get("value");
+	}
+
+	public void setDescription(String description) {
+		attributes.put("description", description);
+	}
+
+	public String getDescription() {
+		return attributes.get("description").toString();
 	}
 
 	public void setTag(String tag) {
@@ -58,6 +64,13 @@ public class MBTEdge extends DefaultWeightedEdge {
 
 		String text = "Edge";
 		text += "\n\tlabel:" + getLabel();
+		text += "\n\ttag:" + getTag();
+		text += "\n\tdescription:";
+		if (getDescription() != null) {
+			for (String line : getDescription().toString().split("\n")) {
+				text += "\n\t\t" + line;
+			}
+		}
 		text += "\n\tsource:";
 		for (String line : getSource().toString().split("\n")) {
 			text += "\n\t\t" + line;
@@ -66,16 +79,9 @@ public class MBTEdge extends DefaultWeightedEdge {
 		for (String line : getTarget().toString().split("\n")) {
 			text += "\n\t\t" + line;
 		}
-		text += "\n\ttag:" + getTag();
 		text += "\n\tvalue:";
 		if (getValue() != null) {
 			for (String line : getValue().toString().split("\n")) {
-				text += "\n\t\t" + line;
-			}
-		}
-		text += "\n\tdescription:";
-		if (getDescription() != null) {
-			for (String line : getDescription().split("\n")) {
 				text += "\n\t\t" + line;
 			}
 		}
@@ -91,13 +97,4 @@ public class MBTEdge extends DefaultWeightedEdge {
 	public boolean equals(Object o) {
 		return toString().equals(o.toString());
 	}
-
-	public void setDescription(String description) {
-		attributes.put("description", description);
-	}
-
-	public String getDescription() {
-		return attributes.get("description").toString();
-	}
-
 }

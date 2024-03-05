@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.mbt.core.Utilities;
 
 public class JGraphTProject extends ConvertibleProject {
 

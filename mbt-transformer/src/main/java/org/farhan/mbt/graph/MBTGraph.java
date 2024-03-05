@@ -1,5 +1,6 @@
 package org.farhan.mbt.graph;
 
+import java.util.HashMap;
 import java.util.Optional;
 
 import org.jgrapht.graph.DirectedWeightedPseudograph;
@@ -10,18 +11,38 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 	 * 
 	 */
 	private static final long serialVersionUID = 6896363596798655076L;
-	private String name;
+
+	private HashMap<String, Object> attributes;
 
 	public MBTGraph(Class<? extends E> edgeClass) {
 		super(edgeClass);
+		attributes = new HashMap<String, Object>();
+		setTag("");
+		setDescription("");
 	}
 
-	public String getName() {
-		return name;
+	public String getLabel() {
+		return attributes.get("label").toString();
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setLabel(String label) {
+		attributes.put("label", label);
+	}
+
+	public void setTag(String tag) {
+		attributes.put("tag", tag);
+	}
+
+	public String getTag() {
+		return attributes.get("tag").toString();
+	}
+
+	public void setDescription(String description) {
+		attributes.put("description", description);
+	}
+
+	public String getDescription() {
+		return attributes.get("description").toString();
 	}
 
 	public MBTVertex getStartVertex() {
@@ -34,19 +55,26 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 
 	public String toString() {
 		String text = "Graph";
-		text += "\n\tname:" + getName();
+		text += "\n\tname:" + getLabel();
+		text += "\n\ttag:" + getTag();
+		text += "\n\tdescription:";
+		if (getDescription() != null) {
+			for (String line : getDescription().toString().split("\n")) {
+				text += "\n\t\t" + line;
+			}
+		}
 		text += "\n\tvertices:";
 		for (V v : vertexSet()) {
 			for (String line : v.toString().split("\n")) {
 				text += "\n\t\t" + line;
 			}
-		}		
+		}
 		text += "\n\tedges:";
 		for (E e : edgeSet()) {
 			for (String line : e.toString().split("\n")) {
 				text += "\n\t\t" + line;
 			}
-		}		
+		}
 		return text;
 	}
 

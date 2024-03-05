@@ -13,7 +13,8 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 	public JGraphTGraphWrapper(File f) {
 		theFile = f;
 		theGraph = new MBTGraph<MBTVertex, MBTEdge>(MBTEdge.class);
-		theGraph.setName(f.getName());
+		// TODO get the file extension from the project?
+		theGraph.setLabel(f.getName().replace(".graph", ""));
 		theGraph.createStartVertex();
 		theGraph.createEndVertex();
 	}
@@ -21,7 +22,7 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 	@Override
 	public void setFile(File theFile) {
 		this.theFile = theFile;
-		theGraph.setName(theFile.getName());
+		theGraph.setLabel(theFile.getName());
 	}
 
 	@Override
@@ -42,6 +43,7 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 		Object lastObject = null;
 		boolean isSource = true;
 		boolean isValue = false;
+		boolean isDescription = false;
 		MBTVertex sourceVertex = null;
 		MBTVertex targetVertex = null;
 		for (String line : lines.split("\n")) {
@@ -49,9 +51,9 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 				lastGraph = new MBTGraph<MBTVertex, MBTEdge>(MBTEdge.class);
 				theGraph = lastGraph;
 			} else if (line.startsWith("\tname:")) {
-				lastGraph.setName(line.replace("\tname:", ""));
+				lastGraph.setLabel(line.replace("\tname:", ""));
 			} else if (line.startsWith("\t\t\t\t\tname:")) {
-				lastGraph.setName(line.replace("\t\t\t\t\tname:", ""));
+				lastGraph.setLabel(line.replace("\t\t\t\t\tname:", ""));
 			} else if (line.startsWith("\tvertices:")) {
 			} else if (line.startsWith("\t\t\t\t\tvertices:")) {
 			} else if (line.startsWith("\t\tVertex")) {
@@ -94,14 +96,24 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 			} else if (line.startsWith("\t\t\t\t\t\t\t\t\tlabel:") && lastObject instanceof MBTEdge && !isSource) {
 				targetVertex = lastGraph.getVertex(line.replace("\t\t\t\t\t\t\t\t\tlabel:", ""));
 				lastGraph.addEdge(sourceVertex, targetVertex, (MBTEdge) lastObject);
+			} else if (line.startsWith("\ttag:")) {
+				lastGraph.setTag(line.replace("\ttag:", ""));
 			} else if (line.startsWith("\t\t\ttag:") && lastObject instanceof MBTEdge) {
 				((MBTEdge) lastObject).setTag(line.replace("\t\t\ttag:", ""));
 			} else if (line.startsWith("\t\t\t\t\t\t\ttag:") && lastObject instanceof MBTEdge) {
 				((MBTEdge) lastObject).setTag(line.replace("\t\t\t\t\t\t\ttag:", ""));
+			} else if (line.startsWith("\t\t\tdescription:") && lastObject instanceof MBTEdge) {
+				isValue = false;
+				isDescription = true;
+			} else if (line.startsWith("\t\t\t\t\t\t\tdescription:") && lastObject instanceof MBTEdge) {
+				isValue = false;
+				isDescription = true;
 			} else if (line.startsWith("\t\t\tvalue:") && lastObject instanceof MBTEdge) {
 				isValue = true;
+				isDescription = false;
 			} else if (line.startsWith("\t\t\t\t\t\t\tvalue:") && lastObject instanceof MBTEdge) {
 				isValue = true;
+				isDescription = false;
 			} else if (line.startsWith("\t\t\t\tGraph") && lastObject instanceof MBTEdge) {
 				isValue = false;
 				lastGraph = new MBTGraph<MBTVertex, MBTEdge>(MBTEdge.class);
@@ -109,6 +121,14 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 			} else if (isValue) {
 				isValue = false;
 				((MBTEdge) lastObject).setValue(line.trim());
+			} else if (isDescription) {
+				MBTEdge edge = (MBTEdge) lastObject;
+				String description = edge.getDescription();
+				if (description.isEmpty()) {
+					edge.setDescription(line.trim());
+				} else {
+					edge.setDescription(description + "\n" + line.trim());
+				}
 			}
 		}
 	}
