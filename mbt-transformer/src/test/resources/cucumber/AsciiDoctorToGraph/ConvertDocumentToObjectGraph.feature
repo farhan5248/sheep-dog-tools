@@ -1,12 +1,19 @@
 Feature: Convert Document To Object Graph
 
+  @debug
   Scenario: Convert a section to a vertex each with a single edge
 
     Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
           """
           = Process 
           
+          [tags="tag1,tag2"]
           == Story One
+          
+          Description of story.
+          Line 2 of the story.
+          
+          Line after space.
           
           * Step 1
           """

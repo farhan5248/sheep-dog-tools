@@ -2,6 +2,9 @@ package org.farhan.mbt.asciidoctorgraph;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Map;
+
+import org.asciidoctor.ast.Block;
 import org.asciidoctor.ast.Cell;
 import org.asciidoctor.ast.Row;
 import org.asciidoctor.ast.Section;
@@ -32,6 +35,46 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		this.tgtPrj = target;
 	}
 
+	@Override
+	protected void selectObjects() throws Exception {
+		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(srcPrj.FIRST_LAYER),
+				srcPrj.getFileExt(srcPrj.FIRST_LAYER));
+		srcPrj.getObjects(srcPrj.FIRST_LAYER).clear();
+		for (File f : files) {
+			srcPrj.createObject(f.getAbsolutePath()).load();
+		}
+	}
+
+	@Override
+	protected void convertObject(ConvertibleObject object) throws Exception {
+		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) object;
+		tgtWrp = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(adaw.getFile().getName()));
+
+	}
+
+	@Override
+	protected String convertObjectName(String fullName) {
+		return tgtPrj.getDir(tgtPrj.FIRST_LAYER).getAbsolutePath() + File.separator
+				+ fullName.replace(srcPrj.getFileExt(srcPrj.FIRST_LAYER), "") + tgtPrj.getFileExt(tgtPrj.FIRST_LAYER);
+	}
+
+	@Override
+	protected ArrayList<ConvertibleObject> getObjects(String layer) {
+		return srcPrj.getObjects(layer);
+	}
+
+	@Override
+	protected void convertElements(ConvertibleObject object) throws Exception {
+		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) object;
+		Document src = (Document) adaw.get();
+		MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
+		for (StructuralNode block : src.getBlocks()) {
+			if (block instanceof Section) {
+				convertSections(tgt, (Section) block);
+			}
+		}
+	}
+
 	private void convertSections(MBTGraph<MBTVertex, MBTEdge> g, Section scenario) {
 
 		ArrayList<ListItem> steps = new ArrayList<ListItem>();
@@ -50,15 +93,44 @@ public class AdocToGraphConverter extends ToGraphConverter {
 			}
 		}
 		g.createEdgeWithVertices(g.getStartVertex().getLabel(), steps.getFirst().getText(), "", null);
-		for (int i = 0; i < steps.size() - 1; i++) {
+		MBTEdge edge = null;
+		for (int i = 0; i < steps.size(); i++) {
 			String source = steps.get(i).getText();
-			String target = steps.get(i + 1).getText();
-			MBTEdge inputs = g.createEdgeWithVertices(source, target, scenario.getTitle(), null);
-			convertTableToGraph(inputs, steps.get(i));
+			String target;
+			if (i == steps.size() - 1) {
+				target = g.getEndVertex().getLabel();
+			} else {
+				target = steps.get(i + 1).getText();
+			}
+			edge = g.createEdgeWithVertices(source, target, scenario.getTitle(), null);
+			convertTableToGraph(edge, steps.get(i));
 		}
-		MBTEdge inputs = g.createEdgeWithVertices(steps.getLast().getText(), g.getEndVertex().getLabel(),
-				scenario.getTitle(), null);
-		convertTableToGraph(inputs, steps.getLast());
+		edge.setLabel(scenario.getTitle());
+		edge.setTag(getSectionAttributes(scenario));
+		edge.setDescription(getSectionText(scenario));
+	}
+
+	private String getSectionAttributes(Section scenario) {
+		Map<String, Object> attrs = scenario.getAttributes();
+		String tags = (String) attrs.get("tags");
+		if (tags == null) {
+			return "";
+		} else {
+			return tags;
+		}
+	}
+
+	private String getSectionText(Section scenario) {
+		String text = "";
+		for (StructuralNode block : scenario.getBlocks()) {
+			if (block instanceof Block) {
+				text += "\n\n" + ((Block) block).getSource();
+			} else {
+				text = text.trim();
+				break;
+			}
+		}
+		return text;
 	}
 
 	private void convertTableToGraph(MBTEdge inputs, ListItem step) {
@@ -106,45 +178,5 @@ public class AdocToGraphConverter extends ToGraphConverter {
 			}
 		}
 		return vertices;
-	}
-
-	@Override
-	protected void selectObjects() throws Exception {
-		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(srcPrj.FIRST_LAYER),
-				srcPrj.getFileExt(srcPrj.FIRST_LAYER));
-		srcPrj.getObjects(srcPrj.FIRST_LAYER).clear();
-		for (File f : files) {
-			srcPrj.createObject(f.getAbsolutePath()).load();
-		}
-	}
-
-	@Override
-	protected void convertObject(ConvertibleObject object) throws Exception {
-		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) object;
-		tgtWrp = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(adaw.getFile().getName()));
-
-	}
-
-	@Override
-	protected String convertObjectName(String fullName) {
-		return tgtPrj.getDir(tgtPrj.FIRST_LAYER).getAbsolutePath() + File.separator
-				+ fullName.replace(srcPrj.getFileExt(srcPrj.FIRST_LAYER), "") + tgtPrj.getFileExt(tgtPrj.FIRST_LAYER);
-	}
-
-	@Override
-	protected ArrayList<ConvertibleObject> getObjects(String layer) {
-		return srcPrj.getObjects(layer);
-	}
-
-	@Override
-	protected void convertElements(ConvertibleObject object) throws Exception {
-		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) object;
-		Document src = (Document) adaw.get();
-		MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
-		for (StructuralNode block : src.getBlocks()) {
-			if (block instanceof Section) {
-				convertSections(tgt, (Section) block);
-			}
-		}
 	}
 }
