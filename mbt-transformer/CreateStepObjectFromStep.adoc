@@ -1,0 +1,51 @@
+= Create Step Object From Step [[debug]][[component]]
+
+Describe what's being tested here
+
+== Create a feature file [[background]]
+
+Describe what's being tested here
+
+* The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+----
+Feature: This is a test feature
+----
+
+* The mbt-transformer plugin, cucumber-to-uml goal is executed with
+|===
+| Tags
+
+| tag1
+|===          
+
+* The mbt-transformer plugin, target/uml/pst.uml file will be present
+
+== Create new classes
+
+Describe what's being tested here
+
+* The target/uml/pst.uml file, Class section will be as follows
+|===
+|                   Class Name 
+
+|    objects::blah::ObjectPage
+|===
+
+== Create new interaction parameters
+
+* The target/uml/pst.uml file, Interaction Parameters section will be as follows
+|===          
+|   Interaction Name |   Parameter Name 
+
+| <Interaction Name> | <Parameter Name> 
+|===
+
+== Doc Strings
+
+Describe what's being tested here
+
+|===
+|                         Interaction Name | Parameter Name 
+
+| objects::blah::DocStringPage::setContent |         keyMap 
+|===

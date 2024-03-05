@@ -9,7 +9,6 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.cucumber.Feature;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToUMLGherkinConverter;
 import org.farhan.mbt.core.Utilities;
@@ -69,7 +68,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 
 		JGraphTGraphWrapper jgw = (JGraphTGraphWrapper) theObject;
 		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) jgw.get();
-		ArrayList<MBTPath> paths = getAllPaths(g, g.getStartVertex());
+		ArrayList<MBTPath> paths = getPathsFromVertex(g, g.getStartVertex());
 		for (int i = 0; i < paths.size(); i++) {
 			resetCurrentMachineAndState();
 			// TODO figure out names for this later, use a counter for now
@@ -125,14 +124,6 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		}
 	}
 
-	private String getLabel(Object o) {
-		if (o instanceof MBTVertex) {
-			return ((MBTVertex) o).getLabel();
-		} else {
-			return ((MBTEdge) o).getLabel();
-		}
-	}
-
 	@Override
 	protected void convertMessage(Interaction anInteraction, Object o) {
 		String s = (String) o;
@@ -150,6 +141,14 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::specs" + qualifiedName;
 		return qualifiedName;
+	}
+
+	private String getLabel(Object o) {
+		if (o instanceof MBTVertex) {
+			return ((MBTVertex) o).getLabel();
+		} else {
+			return ((MBTEdge) o).getLabel();
+		}
 	}
 
 	private void convertDataTableToArgument(HashMap<String, String> dataTable, Message theMessage) {
@@ -173,33 +172,33 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		return secondLayerClassName;
 	}
 
-	private static ArrayList<MBTPath> getAllPaths(MBTGraph<MBTVertex, MBTEdge> g, MBTVertex vertex) {
-		ArrayList<MBTPath> vertexPaths = new ArrayList<MBTPath>();
+	private static ArrayList<MBTPath> getPathsFromVertex(MBTGraph<MBTVertex, MBTEdge> g, MBTVertex vertex) {
+		ArrayList<MBTPath> graphPaths = new ArrayList<MBTPath>();
 		Set<MBTEdge> edges = g.outgoingEdgesOf(vertex);
 		if (edges.isEmpty()) {
 			// last node creates empty list and returns it
-			vertexPaths.add(new MBTPath());
-			return vertexPaths;
+			graphPaths.add(new MBTPath());
+			return graphPaths;
 		} else {
 			for (MBTEdge e : edges) {
-				ArrayList<MBTPath> childPaths = getAllPaths(g, g.getEdgeTarget(e));
-				ArrayList<MBTPath> edgePaths = getEdgePaths(e);
-				combinePaths(g, e, vertex, vertexPaths, childPaths, edgePaths);
+				ArrayList<MBTPath> vertexPaths = getPathsFromVertex(g, g.getEdgeTarget(e));
+				ArrayList<MBTPath> edgePaths = getPathsFromEdge(e);
+				combinePaths(g, e, vertex, graphPaths, vertexPaths, edgePaths);
 			}
-			return vertexPaths;
+			return graphPaths;
 		}
 	}
 
 	private static void combinePaths(MBTGraph<MBTVertex, MBTEdge> g, MBTEdge e, MBTVertex vertex,
-			ArrayList<MBTPath> vertexPaths, ArrayList<MBTPath> childPaths, ArrayList<MBTPath> edgePaths) {
-		for (MBTPath pc : childPaths) {
+			ArrayList<MBTPath> graphPaths, ArrayList<MBTPath> vertexPaths, ArrayList<MBTPath> edgePaths) {
+		for (MBTPath pc : vertexPaths) {
 			if (edgePaths.isEmpty()) {
 				pc.getPath().add(0, g.getEdgeTarget(e));
 				pc.getPath().add(0, e);
 				if (vertex.getLabel().contentEquals(g.getStartVertex().getLabel())) {
 					pc.getPath().add(0, vertex);
 				}
-				vertexPaths.add(pc);
+				graphPaths.add(pc);
 			} else {
 				for (MBTPath pe : edgePaths) {
 
@@ -210,17 +209,17 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 					if (vertex.getLabel().contentEquals(g.getStartVertex().getLabel())) {
 						expandedPath.getPath().add(0, vertex);
 					}
-					vertexPaths.add(expandedPath);
+					graphPaths.add(expandedPath);
 				}
 			}
 		}
 	}
 
-	private static ArrayList<MBTPath> getEdgePaths(MBTEdge e) {
+	private static ArrayList<MBTPath> getPathsFromEdge(MBTEdge e) {
 		if (e.getValue() != null) {
 			if (e.getValue() instanceof MBTGraph<?, ?>) {
 				MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) e.getValue();
-				return getAllPaths(g, g.getStartVertex());
+				return getPathsFromVertex(g, g.getStartVertex());
 			}
 		}
 		return new ArrayList<MBTPath>();
