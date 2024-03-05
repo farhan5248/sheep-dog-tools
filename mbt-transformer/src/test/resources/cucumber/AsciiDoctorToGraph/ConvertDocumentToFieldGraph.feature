@@ -8,14 +8,13 @@ Feature: Convert Document To Field Graph
           
           == Story One
           
-          === Set Object as follows
+          * Set Object as follows
           
-          .Data table expressions
           [options="header"]
-          |=============
+          |===
           |ins |grp |crt
           |5   |10  |15
-          |=============
+          |===
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/Graphs/Process.graph file will be present
@@ -41,15 +40,14 @@ Feature: Convert Document To Field Graph
           
           == Story One
           
-          === Set Object as follows
+          * Set Object as follows
           
-          .Data table expressions
           [options="header"]
-          |=============
+          |===
           |ins |grp |crt
           |5   |10  |15
           |5   |10  |12
-          |=============
+          |===
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/Graphs/Process.graph file will be present
@@ -66,15 +64,14 @@ Feature: Convert Document To Field Graph
           
           == Story One
           
-          === Set Object as follows
+          * Set Object as follows
           
-          .Data table expressions
           [options="header"]
-          |=============
+          |===
           |ins |grp |crt
           |5   |10  |15
           |4   |8   |12
-          |=============
+          |===
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/Graphs/Process.graph file will be present

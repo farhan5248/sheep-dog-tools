@@ -8,6 +8,8 @@ import org.asciidoctor.ast.Section;
 import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
 import org.asciidoctor.ast.Document;
+import org.asciidoctor.ast.List;
+import org.asciidoctor.ast.ListItem;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
@@ -32,32 +34,41 @@ public class AdocToGraphConverter extends ToGraphConverter {
 
 	private void convertSections(MBTGraph<MBTVertex, MBTEdge> g, Section scenario) {
 
-		ArrayList<Section> steps = new ArrayList<Section>();
+		ArrayList<ListItem> steps = new ArrayList<ListItem>();
 		for (StructuralNode block : scenario.getBlocks()) {
-			if (block instanceof Section) {
-				steps.add((Section) block);
+			if (block instanceof List) {
+				List l = (List) block;
+				for (StructuralNode listItem : l.getItems()) {
+					ListItem li = (ListItem) listItem;
+					steps.add(li);
+				}
+			} else if (block instanceof Table) {
+				// So this is a hack to reduce code changes for now. Not sure if this will come
+				// back to bite me in the ***. What I did learn is that I can read an empty adoc
+				// file and then dynamically create the sections :)
+				steps.getLast().getBlocks().add(block);
 			}
 		}
-		g.createEdgeWithVertices(g.getStartVertex().getLabel(), steps.getFirst().getTitle(), "", null);
+		g.createEdgeWithVertices(g.getStartVertex().getLabel(), steps.getFirst().getText(), "", null);
 		for (int i = 0; i < steps.size() - 1; i++) {
-			String source = steps.get(i).getTitle();
-			String target = steps.get(i + 1).getTitle();
+			String source = steps.get(i).getText();
+			String target = steps.get(i + 1).getText();
 			MBTEdge inputs = g.createEdgeWithVertices(source, target, scenario.getTitle(), null);
 			convertTableToGraph(inputs, steps.get(i));
 		}
-		MBTEdge inputs = g.createEdgeWithVertices(steps.getLast().getTitle(), g.getEndVertex().getLabel(),
+		MBTEdge inputs = g.createEdgeWithVertices(steps.getLast().getText(), g.getEndVertex().getLabel(),
 				scenario.getTitle(), null);
 		convertTableToGraph(inputs, steps.getLast());
 	}
 
-	private void convertTableToGraph(MBTEdge inputs, Section step) {
+	private void convertTableToGraph(MBTEdge inputs, ListItem step) {
 
 		// loop through the blocks which are tables
 		for (StructuralNode block : step.getBlocks()) {
 			if (block instanceof Table) {
 				// TODO this inner graph will have an associated file, so instead of saving the
 				// graph in one massive file, make it a pointer to the actual file for now
-				JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(step.getTitle()));
+				JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(step.getText()));
 				MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
 				Table table = (Table) block;
 				ArrayList<MBTVertex> vertices = convertTableToVertices(table, tgt);
@@ -136,5 +147,4 @@ public class AdocToGraphConverter extends ToGraphConverter {
 			}
 		}
 	}
-
 }

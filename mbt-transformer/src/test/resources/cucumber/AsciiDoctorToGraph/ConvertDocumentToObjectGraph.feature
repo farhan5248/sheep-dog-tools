@@ -4,11 +4,11 @@ Feature: Convert Document To Object Graph
 
     Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
           """
-          = Process
+          = Process 
           
           == Story One
           
-          === Step 1
+          * Step 1
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/Graphs/Process.graph file will be present
@@ -30,9 +30,9 @@ Feature: Convert Document To Object Graph
           
           == Story name
           
-          === Step 1
+          * Step 1
           
-          === Step 2
+          * Step 2
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/Graphs/Process.graph file will be present
@@ -58,11 +58,11 @@ Feature: Convert Document To Object Graph
           
           == Story 1
           
-          === Step 1
+          * Step 1
           
           == Story 2
           
-          === Step 1
+          * Step 1
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/Graphs/Process.graph file will be present

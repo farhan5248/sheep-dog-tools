@@ -12,9 +12,10 @@ Feature: This is a test feature
 ----
 
 * The mbt-transformer plugin, cucumber-to-uml goal is executed with
+
+[options="header"]
 |===
 | Tags
-
 | tag1
 |===          
 
@@ -25,27 +26,29 @@ Feature: This is a test feature
 Describe what's being tested here
 
 * The target/uml/pst.uml file, Class section will be as follows
+
+[options="header"]
 |===
 |                   Class Name 
-
 |    objects::blah::ObjectPage
 |===
 
 == Create new interaction parameters
 
 * The target/uml/pst.uml file, Interaction Parameters section will be as follows
+
+[options="header"]
 |===          
 |   Interaction Name |   Parameter Name 
-
 | <Interaction Name> | <Parameter Name> 
 |===
 
-== Doc Strings
+=== Doc Strings
 
 Describe what's being tested here
 
+[options="header"]
 |===
 |                         Interaction Name | Parameter Name 
-
 | objects::blah::DocStringPage::setContent |         keyMap 
 |===
