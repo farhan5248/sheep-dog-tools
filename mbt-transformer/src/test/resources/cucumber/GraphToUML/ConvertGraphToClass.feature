@@ -6,6 +6,10 @@ Feature: Convert Graph To Class
           """
           Graph
           	name:Process
+          	tag:tag1,tag2
+          	description:
+          		Desc
+          		Line 2
           	vertices:
           		Vertex
           			label:start
@@ -16,23 +20,28 @@ Feature: Convert Graph To Class
           	edges:
           		Edge
           			label:
+          			tag:
+          			description:
+          				
           			source:
           				Vertex
           					label:start
           			target:
           				Vertex
           					label:The Search application, Home page is empty
-          			tag:
           			value:
           		Edge
-          			label:Scenario One
+          			label:Story One
+          			tag:tag1,tag2
+          			description:
+          				Desc
+          				Line 2
           			source:
           				Vertex
           					label:The Search application, Home page is empty
           			target:
           				Vertex
           					label:end
-          			tag:
           			value:
           
           """
@@ -44,4 +53,11 @@ Feature: Convert Graph To Class
       And The target/uml/pst.uml file, Class section will be as follows
           |     Class Name |
           | specs::Process |
+      And The target/uml/pst.uml file, Class Comments section will be as follows
+          |     Class Name |      Comment |
+          | specs::Process | Desc\nLine 2 |
+      And The target/uml/pst.uml file, Class Annotations section will be as follows
+          |     Class Name | Annotation Name | Annotation Detail |
+          | specs::Process |            tags |              tag1 |
+          | specs::Process |            tags |              tag2 |
 

@@ -163,4 +163,20 @@ public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 				keyMap.get("Annotation Detail"));
 	}
 
+	@Override
+	public void assertClassAnnotationsSectionAnnotationDetail(HashMap<String, String> keyMap) {
+		assertClassAnnotationDetailExists(keyMap.get("Class Name"), keyMap.get("Annotation Name"),
+				keyMap.get("Annotation Detail"));
+	}
+
+	@Override
+	public void assertClassAnnotationsSectionAnnotationName(HashMap<String, String> keyMap) {
+		assertClassAnnotationNameExists(keyMap.get("Class Name"), keyMap.get("Annotation Name"));
+	}
+
+	@Override
+	public void assertClassAnnotationsSectionClassName(HashMap<String, String> keyMap) {
+		assertClassExists(keyMap.get("Class Name"));
+	}
+
 }

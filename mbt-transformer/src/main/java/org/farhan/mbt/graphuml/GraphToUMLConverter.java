@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
+import org.farhan.cucumber.Tag;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToUMLGherkinConverter;
 import org.farhan.mbt.core.Utilities;
@@ -55,8 +58,13 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		JGraphTGraphWrapper jgw = (JGraphTGraphWrapper) theObject;
 		String qualifiedName = convertObjectName(jgw.getFile().getAbsolutePath());
 		tgtWrp = (UMLClassWrapper) tgtPrj.createObject(qualifiedName);
-		String name = jgw.getFile().getName().replace(srcPrj.getFileExt(srcPrj.FIRST_LAYER), "");
-		createAnnotation((Class) tgtWrp.get(), "title", name);
+		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) jgw.get();
+		createAnnotation((Class) tgtWrp.get(), "title", g.getLabel());
+		for (String t : g.getTag().split(",")) {
+			createAnnotation((Class) tgtWrp.get(), "tags", t);
+		}
+		((Class) tgtWrp.get()).createOwnedComment().setBody(g.getDescription());
+
 	}
 
 	@Override
@@ -71,11 +79,16 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		ArrayList<MBTPath> paths = getPathsFromVertex(g, g.getStartVertex());
 		for (int i = 0; i < paths.size(); i++) {
 			resetCurrentMachineAndState();
-			// TODO figure out names for this later, use a counter for now
-			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), "Path " + String.valueOf(i));
-			// TODO think about adding tags by deriving them from the edges
-			// convertTagsToParameters(anInteraction, s.getTags());
+			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), paths.get(i).getLabel());
+			anInteraction.createOwnedComment().setBody(paths.get(i).getDescription());
+			convertTagsToParameters(anInteraction, paths.get(i).getTags().split(","));
 			convertInteractionMessages(anInteraction, paths.get(i).getPath());
+		}
+	}
+
+	private void convertTagsToParameters(Interaction anInteraction, String[] tags) {
+		for (String t : tags) {
+			createParameter(anInteraction, t, "", "in");
 		}
 	}
 
@@ -176,12 +189,21 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		ArrayList<MBTPath> graphPaths = new ArrayList<MBTPath>();
 		Set<MBTEdge> edges = g.outgoingEdgesOf(vertex);
 		if (edges.isEmpty()) {
-			// last node creates empty list and returns it
 			graphPaths.add(new MBTPath());
 			return graphPaths;
 		} else {
 			for (MBTEdge e : edges) {
 				ArrayList<MBTPath> vertexPaths = getPathsFromVertex(g, g.getEdgeTarget(e));
+				// if this edge target vertex is the end vertex in the graph then it'll have the
+				// scenario info
+				if (g.getEdgeTarget(e).getLabel().contentEquals(g.getEndVertex().getLabel())) {
+					// TODO temp hack for now, when testing for scenario ordering and other RTE
+					// stuff consider creating the interaction instead at this point?
+					MBTPath path = vertexPaths.getLast();
+					path.setLabel(e.getLabel());
+					path.setTags(e.getTag());
+					path.setDescription(e.getDescription());
+				}
 				ArrayList<MBTPath> edgePaths = getPathsFromEdge(e);
 				combinePaths(g, e, vertex, graphPaths, vertexPaths, edgePaths);
 			}
@@ -191,19 +213,27 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 
 	private static void combinePaths(MBTGraph<MBTVertex, MBTEdge> g, MBTEdge e, MBTVertex vertex,
 			ArrayList<MBTPath> graphPaths, ArrayList<MBTPath> vertexPaths, ArrayList<MBTPath> edgePaths) {
-		for (MBTPath pc : vertexPaths) {
+		for (MBTPath vp : vertexPaths) {
 			if (edgePaths.isEmpty()) {
-				pc.getPath().add(0, g.getEdgeTarget(e));
-				pc.getPath().add(0, e);
+				vp.getPath().add(0, g.getEdgeTarget(e));
+				vp.getPath().add(0, e);
 				if (vertex.getLabel().contentEquals(g.getStartVertex().getLabel())) {
-					pc.getPath().add(0, vertex);
+					vp.getPath().add(0, vertex);
 				}
-				graphPaths.add(pc);
+				graphPaths.add(vp);
 			} else {
-				for (MBTPath pe : edgePaths) {
+				for (int i = 0; i < edgePaths.size(); i++) {
 
+					MBTPath pe = edgePaths.get(i);
 					MBTPath expandedPath = new MBTPath();
-					expandedPath.getPath().addAll(0, pc.getPath());
+					// TODO the use of i here is a temp measure. I forgot that multi-row Asciidoc
+					// tables create as many test cases. If I want multiple rows of data for one
+					// step, then I need to use merged cells but that's not ready yet. So for now to
+					// keep the names unique, I'm just adding the index
+					expandedPath.setLabel(vp.getLabel() + "." + i);
+					expandedPath.setTags(vp.getTags());
+					expandedPath.setDescription(vp.getDescription());
+					expandedPath.getPath().addAll(0, vp.getPath());
 					expandedPath.getPath().add(0, g.getEdgeTarget(e));
 					expandedPath.getPath().addAll(0, pe.getPath());
 					if (vertex.getLabel().contentEquals(g.getStartVertex().getLabel())) {

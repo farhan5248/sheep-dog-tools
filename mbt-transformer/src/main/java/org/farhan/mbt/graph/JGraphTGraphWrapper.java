@@ -102,10 +102,12 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 				((MBTEdge) lastObject).setTag(line.replace("\t\t\ttag:", ""));
 			} else if (line.startsWith("\t\t\t\t\t\t\ttag:") && lastObject instanceof MBTEdge) {
 				((MBTEdge) lastObject).setTag(line.replace("\t\t\t\t\t\t\ttag:", ""));
-			} else if (line.startsWith("\t\t\tdescription:") && lastObject instanceof MBTEdge) {
+			} else if (line.startsWith("\tdescription:")) {
+				isDescription = true;
+			} else if (line.startsWith("\t\t\tdescription:")) {
 				isValue = false;
 				isDescription = true;
-			} else if (line.startsWith("\t\t\t\t\t\t\tdescription:") && lastObject instanceof MBTEdge) {
+			} else if (line.startsWith("\t\t\t\t\t\t\tdescription:")) {
 				isValue = false;
 				isDescription = true;
 			} else if (line.startsWith("\t\t\tvalue:") && lastObject instanceof MBTEdge) {
@@ -122,12 +124,22 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 				isValue = false;
 				((MBTEdge) lastObject).setValue(line.trim());
 			} else if (isDescription) {
-				MBTEdge edge = (MBTEdge) lastObject;
-				String description = edge.getDescription();
-				if (description.isEmpty()) {
-					edge.setDescription(line.trim());
+				// if lastObject is null, it means this is the graph description
+				if (lastObject == null) {
+					String description = lastGraph.getDescription();
+					if (description.isEmpty()) {
+						lastGraph.setDescription(line.trim());
+					} else {
+						lastGraph.setDescription(description + "\n" + line.trim());
+					}
 				} else {
-					edge.setDescription(description + "\n" + line.trim());
+					MBTEdge edge = (MBTEdge) lastObject;
+					String description = edge.getDescription();
+					if (description.isEmpty()) {
+						edge.setDescription(line.trim());
+					} else {
+						edge.setDescription(description + "\n" + line.trim());
+					}
 				}
 			}
 		}

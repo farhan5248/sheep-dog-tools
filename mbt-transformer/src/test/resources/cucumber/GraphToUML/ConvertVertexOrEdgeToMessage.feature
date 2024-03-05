@@ -6,6 +6,10 @@ Feature: Convert Vertex Or Edge To Message
           """
           Graph
           	name:Process
+          	tag:tag1,tag2
+          	description:
+          		Desc
+          		Line 2
           	vertices:
           		Vertex
           			label:start
@@ -16,23 +20,27 @@ Feature: Convert Vertex Or Edge To Message
           	edges:
           		Edge
           			label:
+          			tag:
+          			description:
           			source:
           				Vertex
           					label:start
           			target:
           				Vertex
           					label:The Search application, Home page is empty
-          			tag:
           			value:
           		Edge
           			label:Scenario One
+          			tag:tag1,tag2
+          			description:
+          				Desc
+          				Line 2
           			source:
           				Vertex
           					label:The Search application, Home page is empty
           			target:
           				Vertex
           					label:end
-          			tag:
           			value:
           				Graph
           					name:The Search application, Home page is empty
@@ -97,23 +105,23 @@ Feature: Convert Vertex Or Edge To Message
   Scenario: Convert path element to interaction messages
 
       And The target/uml/pst.uml file, Interaction Messages section will be as follows
-          |       Interaction Name |                                    Message |
-          | specs::Process::Path 0 | The Search application, Home page is empty |
+          |               Interaction Name |                                    Message |
+          | specs::Process::Scenario One.0 | The Search application, Home page is empty |
       And The target/uml/pst.uml file, Interaction Lifelines section will be as follows
-          |       Interaction Name |       Lifeline Name |                      Lifeline Represents |
-          | specs::Process::Path 0 |                this |                pst::specs::Process::this |
-          | specs::Process::Path 0 | SearchHomePageSteps | pst::specs::Process::SearchHomePageSteps |
+          |               Interaction Name |       Lifeline Name |                      Lifeline Represents |
+          | specs::Process::Scenario One.0 |                this |                pst::specs::Process::this |
+          | specs::Process::Scenario One.0 | SearchHomePageSteps | pst::specs::Process::SearchHomePageSteps |
       And The target/uml/pst.uml file, Interaction Message Occurences section will be as follows
-          |       Interaction Name | Message Occurence |    Lifeline Covered |
-          | specs::Process::Path 0 |         SendEvent |                this |
-          | specs::Process::Path 0 |      ReceiveEvent | SearchHomePageSteps |
+          |               Interaction Name | Message Occurence |    Lifeline Covered |
+          | specs::Process::Scenario One.0 |         SendEvent |                this |
+          | specs::Process::Scenario One.0 |      ReceiveEvent | SearchHomePageSteps |
 
   Scenario: Convert path element to message annotations
 
       And The target/uml/pst.uml file, Interaction Messages section will be as follows
-          |       Interaction Name |                                    Message | Argument Name | Annotation Detail |
-          | specs::Process::Path 0 | The Search application, Home page is empty |     dataTable |       0 -> ins \| |
-          | specs::Process::Path 0 | The Search application, Home page is empty |     dataTable |         1 -> 5 \| |
-          | specs::Process::Path 1 | The Search application, Home page is empty |     dataTable |       0 -> ins \| |
-          | specs::Process::Path 1 | The Search application, Home page is empty |     dataTable |         1 -> 4 \| |
+          |               Interaction Name |                                    Message | Argument Name | Annotation Detail |
+          | specs::Process::Scenario One.0 | The Search application, Home page is empty |     dataTable |       0 -> ins \| |
+          | specs::Process::Scenario One.0 | The Search application, Home page is empty |     dataTable |         1 -> 5 \| |
+          | specs::Process::Scenario One.1 | The Search application, Home page is empty |     dataTable |       0 -> ins \| |
+          | specs::Process::Scenario One.1 | The Search application, Home page is empty |     dataTable |         1 -> 4 \| |
 

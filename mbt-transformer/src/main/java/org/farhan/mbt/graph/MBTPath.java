@@ -1,13 +1,16 @@
 package org.farhan.mbt.graph;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MBTPath {
 
+	private HashMap<String, Object> attributes;
 	private ArrayList<Object> path;
 
 	public MBTPath() {
 		path = new ArrayList<Object>();
+		attributes = new HashMap<String, Object>();
 	}
 
 	public ArrayList<Object> getPath() {
@@ -42,4 +45,27 @@ public class MBTPath {
 		return false;
 	}
 
+	public void setLabel(String label) {
+		attributes.put("label", label);
+	}
+
+	public void setTags(String tags) {
+		attributes.put("tags", tags);
+	}
+
+	public void setDescription(String description) {
+		attributes.put("description", description);
+	}
+
+	public String getLabel() {
+		return attributes.get("label").toString();
+	}
+
+	public String getTags() {
+		return attributes.get("tags").toString();
+	}
+
+	public String getDescription() {
+		return attributes.get("description").toString();
+	}
 }

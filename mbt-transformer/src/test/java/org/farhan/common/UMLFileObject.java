@@ -86,6 +86,21 @@ public abstract class UMLFileObject extends FileObject {
 				"Class " + className + " Property Type " + propertyType + " doesn't match");
 	}
 
+	protected void assertClassAnnotationNameExists(String className, String annotationName) {
+		Class theClass = (Class) umlProject.getPackagedElement("pst" + "::" + className, null);
+		EAnnotation annotation = getAnnotation(theClass, annotationName);
+		Assertions.assertTrue(annotation != null,
+				"Class " + className + " Annotation " + annotationName + " doesn't exist");
+	}
+
+	protected void assertClassAnnotationDetailExists(String className, String annotationName, String annotationDetail) {
+		Class theClass = (Class) umlProject.getPackagedElement("pst" + "::" + className, null);
+		EAnnotation annotation = getAnnotation(theClass, annotationName);
+		Entry<String, String> detail = getAnnotationDetail(annotation, annotationDetail);
+		Assertions.assertTrue(detail != null, "Class " + className + " Annotation " + annotationName
+				+ " Annotation Detail " + annotationDetail + " doesn't exist");
+	}
+
 	protected void assertInteractionNameExists(String className, String interactionName) {
 		Interaction interaction = (Interaction) umlProject
 				.getPackagedElement("pst" + "::" + className + "::" + interactionName, null);
@@ -125,24 +140,15 @@ public abstract class UMLFileObject extends FileObject {
 		EAnnotation annotation = getAnnotation(interaction, annotationName);
 		Assertions.assertTrue(annotation != null,
 				"Interaction " + interactionName + " Annotation " + annotationName + " doesn't exist");
-
 	}
 
 	protected void assertInteractionAnnotationDetailExists(String interactionName, String annotationName,
 			String annotationDetail) {
 		Interaction interaction = (Interaction) umlProject.getPackagedElement("pst" + "::" + interactionName, null);
 		EAnnotation annotation = getAnnotation(interaction, annotationName);
-		Entry<String, String> detail = null;
-		for (Entry<String, String> d : annotation.getDetails()) {
-			String e = d.getKey() + " -> " + d.getValue();
-			if (e.contentEquals(annotationDetail)) {
-				detail = d;
-				break;
-			}
-		}
+		Entry<String, String> detail = getAnnotationDetail(annotation, annotationDetail);
 		Assertions.assertTrue(detail != null, "Interaction " + interactionName + " Annotation " + annotationName
 				+ " Annotation Detail " + annotationDetail + " doesn't exist");
-
 	}
 
 	protected void assertInteractionLifelineExists(String interactionName, String lifelineName) {
@@ -150,7 +156,6 @@ public abstract class UMLFileObject extends FileObject {
 		Lifeline lifeline = interaction.getLifeline(lifelineName);
 		Assertions.assertTrue(lifeline != null,
 				"Interaction " + interactionName + " Lifeline " + lifelineName + " doesn't exist");
-
 	}
 
 	protected void assertInteractionLifelineRepresentsValue(String interactionName, String lifelineName,
@@ -241,6 +246,30 @@ public abstract class UMLFileObject extends FileObject {
 		Assertions.assertTrue(messageOccurence != null,
 				"Interaction " + interactionName + " Message Occurence " + messageOccurenceName + " doesn't exist");
 
+	}
+
+	private Entry<String, String> getAnnotationDetail(EAnnotation annotation, String annotationDetail) {
+		for (Entry<String, String> d : annotation.getDetails()) {
+			if (annotationDetail.contains(" -> ")) {
+				if (annotationDetail.contentEquals(d.getKey() + " -> " + d.getValue())) {
+					return d;
+				}
+			} else {
+				if (annotationDetail.contentEquals(d.getKey())) {
+					return d;
+				}
+			}
+		}
+		return null;
+	}
+
+	private EAnnotation getAnnotation(Class theClass, String annotationName) {
+		for (EAnnotation e : theClass.getEAnnotations()) {
+			if (e.getSource().contentEquals(annotationName)) {
+				return e;
+			}
+		}
+		return null;
 	}
 
 	private EAnnotation getAnnotation(Interaction interaction, String annotationName) {

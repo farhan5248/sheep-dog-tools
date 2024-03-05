@@ -67,11 +67,11 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) object;
 		Document src = (Document) adaw.get();
 		MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
+		tgt.setTag(getSectionAttributes(src));
 		for (StructuralNode block : src.getBlocks()) {
 			if (block instanceof Section) {
 				convertSections(tgt, (Section) block);
 			} else if (block instanceof Block) {
-				tgt.setTag(getSectionAttributes(block));
 				tgt.setDescription(getSectionText(block));
 			}
 		}
@@ -112,9 +112,8 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		edge.setDescription(getSectionText(scenario));
 	}
 
-	private String getSectionAttributes(StructuralNode scenario) {
-		Map<String, Object> attrs = scenario.getAttributes();
-		String tags = (String) attrs.get("tags");
+	private String getSectionAttributes(StructuralNode section) {
+		String tags = (String) section.getAttributes().get("tags");
 		if (tags == null) {
 			return "";
 		} else {
@@ -122,16 +121,16 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		}
 	}
 
-	private String getSectionText(StructuralNode scenario) {
+	private String getSectionText(StructuralNode section) {
 		String text = "";
-		for (StructuralNode block : scenario.getBlocks()) {
+		for (StructuralNode block : section.getBlocks()) {
 			if (block instanceof Block) {
 				text += "\n\n" + ((Block) block).getSource();
 			} else {
-				text = text.trim();
 				break;
 			}
 		}
+		text = text.trim();
 		return text;
 	}
 

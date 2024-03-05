@@ -13,6 +13,13 @@ public class MbtTransformerPstUmlFileSteps {
         MbtTransformerFactory.get("PstUmlFile").assertInputOutputs("Present");
     }
 
+    @Given("^The target/uml/pst.uml file, Class Annotations section will be as follows$")
+    public void theTargetUmlPstUmlFileClassAnnotationsSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("PstUmlFile").setPath("target/uml/pst.uml");
+        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "ClassAnnotationsSection");
+    }
+
     @Given("^The target/uml/pst.uml file, Class Comments section will be as follows$")
     public void theTargetUmlPstUmlFileClassCommentsSectionWillBeAsFollows(DataTable dataTable) {
         MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");

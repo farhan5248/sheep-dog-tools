@@ -6,6 +6,10 @@ Feature: Convert Path To Interaction
           """
           Graph
           	name:Process
+          	tag:tag1,tag2
+          	description:
+          		Desc
+          		Line 2
           	vertices:
           		Vertex
           			label:start
@@ -16,23 +20,27 @@ Feature: Convert Path To Interaction
           	edges:
           		Edge
           			label:
+          			tag:
+          			description:
           			source:
           				Vertex
           					label:start
           			target:
           				Vertex
           					label:The Search application, Home page is empty
-          			tag:
           			value:
           		Edge
-          			label:Scenario One
+          			label:Story One
+          			tag:tag1,tag2
+          			description:
+          				Desc
+          				Line 2
           			source:
           				Vertex
           					label:The Search application, Home page is empty
           			target:
           				Vertex
           					label:end
-          			tag:
           			value:
           				Graph
           					name:The Search application, Home page is empty
@@ -85,6 +93,19 @@ Feature: Convert Path To Interaction
 
       And The target/uml/pst.uml file, Class Interactions section will be as follows
           |     Class Name | Interaction Name |
-          | specs::Process |           Path 0 |
-          | specs::Process |           Path 1 |
+          | specs::Process |      Story One.0 |
+          | specs::Process |      Story One.1 |
+
+  Scenario: Convert scenario tags
+
+      And The target/uml/pst.uml file, Interaction Parameters section will be as follows
+          |            Interaction Name | Parameter Name |
+          | specs::Process::Story One.0 |           tag1 |
+          | specs::Process::Story One.0 |           tag2 |
+
+  Scenario: Convert scenario description
+
+      And The target/uml/pst.uml file, Interaction Comments section will be as follows
+          |            Interaction Name |      Comment |
+          | specs::Process::Story One.0 | Desc\nLine 2 |
 

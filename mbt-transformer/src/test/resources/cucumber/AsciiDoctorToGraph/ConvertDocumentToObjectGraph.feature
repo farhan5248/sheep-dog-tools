@@ -1,11 +1,10 @@
 Feature: Convert Document To Object Graph
 
-  @debug
   Scenario: Convert tags and description
 
     Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
           """
-          [tags="tag3"]
+          :tags: tag1,tag2
           = Process 
 
           Desc
@@ -22,8 +21,8 @@ Feature: Convert Document To Object Graph
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/Graphs/Process.graph file will be present
       And The Process.graph file, Graph section will be as follows
-          |   Label |  Tag |  Description |
-          | Process | tag3 | Desc\nLine 2 |
+          |   Label |       Tag |  Description |
+          | Process | tag1,tag2 | Desc\nLine 2 |
       And The Process.graph file, Edges section will be as follows
           |         Edge Name |     Label |       Tag |  Description |
           | Step 1 ->  -> end | Story One | tag1,tag2 | Desc\nLine 2 |

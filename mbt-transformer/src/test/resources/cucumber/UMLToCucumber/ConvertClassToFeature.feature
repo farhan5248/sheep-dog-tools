@@ -6,6 +6,10 @@ Feature: Convert Class To Feature
           """
           Graph
           	name:Process
+          	tag:tag1,tag2
+          	description:
+          		Desc
+          		Line 2
           	vertices:
           		Vertex
           			label:start
@@ -16,23 +20,27 @@ Feature: Convert Class To Feature
           	edges:
           		Edge
           			label:
+          			tag:
+          			description:
           			source:
           				Vertex
           					label:start
           			target:
           				Vertex
           					label:The Search application, Home page is empty
-          			tag:
           			value:
           		Edge
-          			label:Scenario One
+          			label:Story One
+          			tag:tag1,tag2
+          			description:
+          				Desc
+          				Line 2
           			source:
           				Vertex
           					label:The Search application, Home page is empty
           			target:
           				Vertex
           					label:end
-          			tag:
           			value:
           				Graph
           					name:The Search application, Home page is empty
@@ -85,15 +93,27 @@ Feature: Convert Class To Feature
 
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be as follows
           """
+          @tag1 @tag2
           Feature: Process
           
-            Scenario: Path 0
+            Desc
+            Line 2
+          
+            @tag1 @tag2
+            Scenario: Story One.0
+          
+              Desc
+              Line 2
           
                   * The Search application, Home page is empty
                     | ins |
                     |   5 |
           
-            Scenario: Path 1
+            @tag1 @tag2
+            Scenario: Story One.1
+          
+              Desc
+              Line 2
           
                   * The Search application, Home page is empty
                     | ins |

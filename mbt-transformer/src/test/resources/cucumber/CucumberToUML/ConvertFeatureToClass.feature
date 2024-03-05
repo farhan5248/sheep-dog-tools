@@ -4,7 +4,7 @@ Feature: Convert Feature To Class
 
     Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
           """
-          @tag1 @tag2 @tag3
+          @tag1 @tag2
           Feature: This is a test feature
             This is the description
             This is the second line of the description
@@ -23,4 +23,8 @@ Feature: Convert Feature To Class
       And The target/uml/pst.uml file, Class Comments section will be as follows
           |     Class Name |                                                             Comment |
           | specs::Process | This is the description\nThis is the second line of the description |
+      And The target/uml/pst.uml file, Class Annotations section will be as follows
+          |     Class Name | Annotation Name | Annotation Detail |
+          | specs::Process |            tags |              tag1 |
+          | specs::Process |            tags |              tag2 |
 
