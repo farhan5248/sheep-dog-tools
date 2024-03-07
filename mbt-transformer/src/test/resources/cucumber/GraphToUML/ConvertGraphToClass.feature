@@ -10,6 +10,14 @@ Feature: Convert Graph To Class
           	description:
           		Desc
           		Line 2
+          	paths:
+          		Path
+          			index:0
+          			name:Story One
+          			tag:tag1,tag2
+          			description:
+          				Desc
+          				Line 2
           	vertices:
           		Vertex
           			label:start
@@ -20,75 +28,112 @@ Feature: Convert Graph To Class
           	edges:
           		Edge
           			label:
-          			tag:
-          			description:
+          			tag:0
           			source:
           				Vertex
           					label:start
           			target:
           				Vertex
           					label:The Search application, Home page is empty
-          			value:
           		Edge
-          			label:Story One
-          			tag:tag1,tag2
-          			description:
-          				Desc
-          				Line 2
+          			label:
+          			tag:0
           			source:
           				Vertex
           					label:The Search application, Home page is empty
           			target:
           				Vertex
           					label:end
-          			value:
-          				The Search application, Home page is empty
           """
     Given The mbt-transformer plugin, target/Graphs/stepdefs/The Search application Home page is empty.graph file is as follows
           """
           Graph
           	name:The Search application, Home page is empty
+          	tag:
+          	description:
+          		
+          	paths:
           	vertices:
           		Vertex
           			label:start
           		Vertex
           			label:end
           		Vertex
-          			label:ins
+          			label:0 ins
+          		Vertex
+          			label:0 grp
+          		Vertex
+          			label:0 crt
+          		Vertex
+          			label:1 ins
+          		Vertex
+          			label:1 grp
+          		Vertex
+          			label:1 crt
           	edges:
           		Edge
           			label:
+          			tag:0
           			source:
           				Vertex
           					label:start
           			target:
           				Vertex
-          					label:ins
-          			tag:
-          			value:
-          
+          					label:0 ins
           		Edge
           			label:5
+          			tag:0
           			source:
           				Vertex
-          					label:ins
+          					label:0 ins
           			target:
           				Vertex
-          					label:end
-          			tag:
-          			value:
-          				5
+          					label:0 grp
+          		Edge
+          			label:10
+          			tag:0
+          			source:
+          				Vertex
+          					label:0 grp
+          			target:
+          				Vertex
+          					label:0 crt
+          		Edge
+          			label:15
+          			tag:0
+          			source:
+          				Vertex
+          					label:0 crt
+          			target:
+          				Vertex
+          					label:1 ins
           		Edge
           			label:4
+          			tag:0
           			source:
           				Vertex
-          					label:ins
+          					label:1 ins
+          			target:
+          				Vertex
+          					label:1 grp
+          		Edge
+          			label:8
+          			tag:0
+          			source:
+          				Vertex
+          					label:1 grp
+          			target:
+          				Vertex
+          					label:1 crt
+          		Edge
+          			label:12
+          			tag:0
+          			source:
+          				Vertex
+          					label:1 crt
           			target:
           				Vertex
           					label:end
-          			tag:
-          			value:
-          				4
           """
      When The mbt-transformer plugin, graph-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present

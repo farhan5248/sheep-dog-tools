@@ -1,3 +1,4 @@
+@debug
 Feature: Convert Vertex Or Edge To Message
 
   Background: Create a graph text file
@@ -6,9 +7,18 @@ Feature: Convert Vertex Or Edge To Message
           """
           Graph
           	name:Process
-          	tag:
+          	tag:tag1,tag2
           	description:
-          		
+          		Desc
+          		Line 2
+          	paths:
+          		Path
+          			index:0
+          			name:Story One
+          			tag:tag1,tag2
+          			description:
+          				Desc
+          				Line 2
           	vertices:
           		Vertex
           			label:start
@@ -19,9 +29,7 @@ Feature: Convert Vertex Or Edge To Message
           	edges:
           		Edge
           			label:
-          			tag:
-          			description:
-          				
+          			tag:0
           			source:
           				Vertex
           					label:start
@@ -29,10 +37,8 @@ Feature: Convert Vertex Or Edge To Message
           				Vertex
           					label:The Search application, Home page is empty
           		Edge
-          			label:Story One
-          			tag:
-          			description:
-          				
+          			label:
+          			tag:0
           			source:
           				Vertex
           					label:The Search application, Home page is empty
@@ -47,6 +53,7 @@ Feature: Convert Vertex Or Edge To Message
           	tag:
           	description:
           		
+          	paths:
           	vertices:
           		Vertex
           			label:start
@@ -55,13 +62,19 @@ Feature: Convert Vertex Or Edge To Message
           		Vertex
           			label:0 ins
           		Vertex
+          			label:0 grp
+          		Vertex
+          			label:0 crt
+          		Vertex
           			label:1 ins
+          		Vertex
+          			label:1 grp
+          		Vertex
+          			label:1 crt
           	edges:
           		Edge
           			label:
-          			tag:
-          			description:
-          				
+          			tag:0
           			source:
           				Vertex
           					label:start
@@ -69,24 +82,56 @@ Feature: Convert Vertex Or Edge To Message
           				Vertex
           					label:0 ins
           		Edge
-          			label:4
-          			tag:
-          			description:
-          				
+          			label:5
+          			tag:0
           			source:
           				Vertex
           					label:0 ins
           			target:
           				Vertex
+          					label:0 grp
+          		Edge
+          			label:10
+          			tag:0
+          			source:
+          				Vertex
+          					label:0 grp
+          			target:
+          				Vertex
+          					label:0 crt
+          		Edge
+          			label:15
+          			tag:0
+          			source:
+          				Vertex
+          					label:0 crt
+          			target:
+          				Vertex
           					label:1 ins
           		Edge
-          			label:5
-          			tag:
-          			description:
-          				
+          			label:4
+          			tag:0
           			source:
           				Vertex
           					label:1 ins
+          			target:
+          				Vertex
+          					label:1 grp
+          		Edge
+          			label:8
+          			tag:0
+          			source:
+          				Vertex
+          					label:1 grp
+          			target:
+          				Vertex
+          					label:1 crt
+          		Edge
+          			label:12
+          			tag:0
+          			source:
+          				Vertex
+          					label:1 crt
           			target:
           				Vertex
           					label:end
@@ -121,12 +166,11 @@ Feature: Convert Vertex Or Edge To Message
           | specs::Process::Story One |         SendEvent |                this |
           | specs::Process::Story One |      ReceiveEvent | SearchHomePageSteps |
 
-  @debug
   Scenario: Convert path element to message annotations
 
       And The target/uml/pst.uml file, Interaction Messages section will be as follows
-          |          Interaction Name |                                    Message | Argument Name | Annotation Detail |
-          | specs::Process::Story One | The Search application, Home page is empty |     dataTable |       0 -> ins \| |
-          | specs::Process::Story One | The Search application, Home page is empty |     dataTable |         1 -> 4 \| |
-          | specs::Process::Story One | The Search application, Home page is empty |     dataTable |         2 -> 5 \| |
+          |          Interaction Name |                                    Message | Argument Name |       Annotation Detail |
+          | specs::Process::Story One | The Search application, Home page is empty |     dataTable | 0 -> crt \|grp \|ins \| |
+          | specs::Process::Story One | The Search application, Home page is empty |     dataTable |     1 -> 15 \|10 \|5 \| |
+          | specs::Process::Story One | The Search application, Home page is empty |     dataTable |      2 -> 12 \|8 \|4 \| |
 

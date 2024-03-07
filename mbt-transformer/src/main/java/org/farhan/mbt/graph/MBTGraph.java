@@ -161,12 +161,16 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 		return (MBTGraph<MBTVertex, MBTEdge>) this;
 	}
 
-	public MBTPathInfo getPath(String pathName) {
+	public MBTPathInfo getPathInfo(String pathName) {
 		for (MBTPathInfo p : paths) {
 			if (p.getName().contentEquals(pathName)) {
 				return p;
 			}
 		}
 		return null;
+	}
+
+	public ArrayList<MBTPathInfo> getPathInfo() {
+		return paths;
 	}
 }

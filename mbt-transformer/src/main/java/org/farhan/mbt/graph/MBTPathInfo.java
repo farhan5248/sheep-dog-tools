@@ -64,4 +64,14 @@ public class MBTPathInfo {
 		}
 		return text;
 	}
+
+	public boolean isCoveredBy(MBTEdge e) {
+		String[] indices = e.getTag().split(",");
+		for (String i : indices) {
+			if (index.contentEquals(i)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

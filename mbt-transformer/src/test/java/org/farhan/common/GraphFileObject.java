@@ -101,20 +101,20 @@ public abstract class GraphFileObject extends FileObject {
 
 	protected void assertPathsNameExists(String pathName) {
 		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
-		MBTPathInfo path = g.getPath(pathName);
+		MBTPathInfo path = g.getPathInfo(pathName);
 		Assertions.assertTrue(path != null, "Path " + pathName + " doesn't exist");
 	}
 
 	protected void assertPathsDescription(String pathName, String description) {
 		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
-		MBTPathInfo path = g.getPath(pathName);
+		MBTPathInfo path = g.getPathInfo(pathName);
 		Assertions.assertTrue(path != null, "Path " + pathName + " doesn't exist");
 		Assertions.assertEquals(description, path.getDescription());
 	}
 
 	protected void assertPathsTag(String pathName, String tags) {
 		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
-		MBTPathInfo path = g.getPath(pathName);
+		MBTPathInfo path = g.getPathInfo(pathName);
 		Assertions.assertTrue(path != null, "Path " + pathName + " doesn't exist");
 		Assertions.assertEquals(tags, path.getTags());
 	}

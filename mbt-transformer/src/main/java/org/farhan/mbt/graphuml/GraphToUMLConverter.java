@@ -2,7 +2,6 @@ package org.farhan.mbt.graphuml;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
@@ -19,7 +18,6 @@ import org.farhan.mbt.graph.JGraphTProject;
 import org.farhan.mbt.graph.JGraphTGraphWrapper;
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
-import org.farhan.mbt.graph.MBTPath;
 import org.farhan.mbt.graph.MBTPathInfo;
 import org.farhan.mbt.graph.MBTVertex;
 import org.farhan.mbt.uml.UMLClassWrapper;
@@ -85,30 +83,13 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 
 		JGraphTGraphWrapper jgw = (JGraphTGraphWrapper) theObject;
 		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) jgw.get();
-
-		// TODO Loop through all the graph path info
-
-		// for each path info, search for a path covered by it, make a new method for
-		// this based on the getVertex and getEdge paths, basically only select edges
-		// that are covered
-		
-		// for each path returned, convert it into an interaction
-		
-		// Because each path is just a list, there's no need for MBTPath so delete it
-
-		ArrayList<MBTPath> paths = getVertexPaths(g, g.getStartVertex());
-		for (int i = 0; i < paths.size(); i++) {
+		for (MBTPathInfo pi : g.getPathInfo()) {
+			ArrayList<Object> p = getPath(g, g.getStartVertex(), pi);
 			resetCurrentMachineAndState();
-			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), paths.get(i).getLabel());
-			anInteraction.createOwnedComment().setBody(paths.get(i).getDescription());
-			convertTagsToParameters(anInteraction, paths.get(i).getTags().split(","));
-			convertInteractionMessages(anInteraction, paths.get(i).getPath());
-		}
-	}
-
-	private void convertTagsToParameters(Interaction anInteraction, String[] tags) {
-		for (String t : tags) {
-			createParameter(anInteraction, t, "", "in");
+			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), pi.getName());
+			anInteraction.createOwnedComment().setBody(pi.getDescription());
+			convertTagsToParameters(anInteraction, pi.getTags().split(","));
+			convertInteractionMessages(anInteraction, p);
 		}
 	}
 
@@ -176,6 +157,12 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		return qualifiedName;
 	}
 
+	private void convertTagsToParameters(Interaction anInteraction, String[] tags) {
+		for (String t : tags) {
+			createParameter(anInteraction, t, "", "in");
+		}
+	}
+
 	private String getLabel(Object o) {
 		if (o instanceof MBTVertex) {
 			return ((MBTVertex) o).getLabel();
@@ -197,19 +184,15 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		}
 		createAnnotation(vs, "dataTable", String.valueOf(0), row);
 
-		// Why dataTable.size? That's all the cells...
-		// It's because that's the max I'd have to iterate for without having to use an
-		// infinite loop with a potentially buggy end condition, while(true) + break
-		// just makes me nervous
 		int rowCnt = 0;
 		row = "";
 		for (String key : dataTable.keySet()) {
 			if (key.startsWith(String.valueOf(rowCnt))) {
-				row += dataTable.get(key).replaceFirst(String.valueOf(rowCnt), "") + " |";
+				row += dataTable.get(key) + " |";
 			} else {
 				createAnnotation(vs, "dataTable", String.valueOf(rowCnt + 1), row);
 				rowCnt++;
-				row = dataTable.get(key).replaceFirst(String.valueOf(rowCnt), "") + " |";
+				row = dataTable.get(key) + " |";
 			}
 		}
 		createAnnotation(vs, "dataTable", String.valueOf(rowCnt + 1), row);
@@ -223,60 +206,37 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		return secondLayerClassName;
 	}
 
-	private ArrayList<MBTPath> getVertexPaths(MBTGraph<MBTVertex, MBTEdge> g, MBTVertex vertex) {
-		ArrayList<MBTPath> graphPaths = new ArrayList<MBTPath>();
+	private ArrayList<Object> getPath(MBTGraph<MBTVertex, MBTEdge> g, MBTVertex vertex, MBTPathInfo pi) {
+
+		ArrayList<Object> path = null;
 		Set<MBTEdge> edges = g.outgoingEdgesOf(vertex);
 		if (edges.isEmpty()) {
-			graphPaths.add(new MBTPath());
-			return graphPaths;
+			path = new ArrayList<Object>();
+			path.add(vertex);
 		} else {
 			for (MBTEdge e : edges) {
-				ArrayList<MBTPath> vertexPaths = getVertexPaths(g, g.getEdgeTarget(e));
-				ArrayList<MBTPath> edgePaths = getEdgePaths(g.getEdgeSource(e).getLabel());
-				combinePaths(g, e, vertex, graphPaths, vertexPaths, edgePaths);
+				if (pi.isCoveredBy(e)) {
+					path = getPath(g, g.getEdgeTarget(e), pi);
+					MBTGraph<MBTVertex, MBTEdge> edgeGraph = getGraph(g.getEdgeSource(e).getLabel());
+					if (edgeGraph != null) {
+						ArrayList<Object> edgePath = getPath(edgeGraph, edgeGraph.getStartVertex(), pi);
+						path.addAll(0, edgePath);
+					}
+					path.add(0, e);
+					path.add(0, vertex);
+				}
 			}
-			return graphPaths;
 		}
+		return path;
 	}
 
-	private ArrayList<MBTPath> getEdgePaths(String graphName) {
+	private MBTGraph<MBTVertex, MBTEdge> getGraph(String graphName) {
 		for (Object o : srcPrj.getObjects(srcPrj.SECOND_LAYER)) {
 			MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) ((JGraphTGraphWrapper) o).get();
 			if (g.getLabel().contentEquals(graphName)) {
-				return getVertexPaths(g, g.getStartVertex());
+				return g;
 			}
 		}
-		return new ArrayList<MBTPath>();
+		return null;
 	}
-
-	private static void combinePaths(MBTGraph<MBTVertex, MBTEdge> g, MBTEdge e, MBTVertex vertex,
-			ArrayList<MBTPath> graphPaths, ArrayList<MBTPath> vertexPaths, ArrayList<MBTPath> edgePaths) {
-		for (MBTPath vp : vertexPaths) {
-			if (edgePaths.isEmpty()) {
-				vp.getPath().add(0, g.getEdgeTarget(e));
-				vp.getPath().add(0, e);
-				if (vertex.getLabel().contentEquals(g.getStartVertex().getLabel())) {
-					vp.getPath().add(0, vertex);
-				}
-				graphPaths.add(vp);
-			} else {
-				for (int i = 0; i < edgePaths.size(); i++) {
-
-					MBTPath pe = edgePaths.get(i);
-					MBTPath expandedPath = new MBTPath();
-					expandedPath.setLabel(vp.getLabel());
-					expandedPath.setTags(vp.getTags());
-					expandedPath.setDescription(vp.getDescription());
-					expandedPath.getPath().addAll(0, vp.getPath());
-					expandedPath.getPath().add(0, g.getEdgeTarget(e));
-					expandedPath.getPath().addAll(0, pe.getPath());
-					if (vertex.getLabel().contentEquals(g.getStartVertex().getLabel())) {
-						expandedPath.getPath().add(0, vertex);
-					}
-					graphPaths.add(expandedPath);
-				}
-			}
-		}
-	}
-
 }
