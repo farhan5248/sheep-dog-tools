@@ -1,5 +1,6 @@
 package org.farhan.mbt.graph;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -12,11 +13,13 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 	 */
 	private static final long serialVersionUID = 6896363596798655076L;
 
-	private HashMap<String, Object> attributes;
+	private HashMap<String, String> attributes;
+	private ArrayList<MBTPathInfo> paths;
 
 	public MBTGraph(Class<? extends E> edgeClass) {
 		super(edgeClass);
-		attributes = new HashMap<String, Object>();
+		attributes = new HashMap<String, String>();
+		paths = new ArrayList<MBTPathInfo>();
 		setTag("");
 		setDescription("");
 	}
@@ -27,6 +30,14 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 
 	public void setLabel(String label) {
 		attributes.put("label", label);
+	}
+
+	public void addPath(MBTPathInfo path) {
+		paths.add(path);
+	}
+
+	public void addPath(String id, String name, String tags, String description) {
+		paths.add(new MBTPathInfo(id, name, tags, description));
 	}
 
 	public void setTag(String tag) {
@@ -60,6 +71,12 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 		text += "\n\tdescription:";
 		if (getDescription() != null) {
 			for (String line : getDescription().toString().split("\n")) {
+				text += "\n\t\t" + line;
+			}
+		}
+		text += "\n\tpaths:";
+		for (MBTPathInfo p : paths) {
+			for (String line : p.toString().split("\n")) {
 				text += "\n\t\t" + line;
 			}
 		}
@@ -142,5 +159,14 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 	@SuppressWarnings("unchecked")
 	private MBTGraph<MBTVertex, MBTEdge> getThisGraph() {
 		return (MBTGraph<MBTVertex, MBTEdge>) this;
+	}
+
+	public MBTPathInfo getPath(String pathName) {
+		for (MBTPathInfo p : paths) {
+			if (p.getName().contentEquals(pathName)) {
+				return p;
+			}
+		}
+		return null;
 	}
 }

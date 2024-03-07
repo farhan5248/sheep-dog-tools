@@ -34,6 +34,13 @@ public class MbtTransformerProcessGraphFileSteps {
         MbtTransformerFactory.get("ProcessGraphFile").assertInputOutputs(dataTable, "GraphSection");
     }
 
+    @Given("^The Process.graph file, Paths section will be as follows$")
+    public void theProcessGraphFilePathsSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("ProcessGraphFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessGraphFile").setPath("Process.graph");
+        MbtTransformerFactory.get("ProcessGraphFile").assertInputOutputs(dataTable, "PathsSection");
+    }
+
     @Given("^The Process.graph file, Vertices section will be as follows$")
     public void theProcessGraphFileVerticesSectionWillBeAsFollows(DataTable dataTable) {
         MbtTransformerFactory.get("ProcessGraphFile").setComponent("mbt-transformer");

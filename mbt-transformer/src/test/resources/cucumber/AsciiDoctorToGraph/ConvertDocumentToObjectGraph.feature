@@ -22,11 +22,11 @@ Feature: Convert Document To Object Graph
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/Graphs/specs/Process.graph file will be present
       And The Process.graph file, Graph section will be as follows
-          |   Label |       Tag |  Description |
+          |    Name |       Tag |  Description |
           | Process | tag1,tag2 | Desc\nLine 2 |
-      And The Process.graph file, Edges section will be as follows
-          |                  Edge Name |     Label |                 Tag |  Description |
-          | Step 1 -> Story One -> end | Story One | Story One,tag1,tag2 | Desc\nLine 2 |
+      And The Process.graph file, Paths section will be as follows
+          |      Name |       Tag |  Description |
+          | Story One | tag1,tag2 | Desc\nLine 2 |
 
   Scenario: Convert a section to a vertex each with a single edge
 
@@ -46,9 +46,9 @@ Feature: Convert Document To Object Graph
           |         end |
           |      Step 1 |
       And The Process.graph file, Edges section will be as follows
-          |                  Edge Name |
-          |        start ->  -> Step 1 |
-          | Step 1 -> Story One -> end |
+          |           Edge Name |
+          | start ->  -> Step 1 |
+          |   Step 1 ->  -> end |
 
   Scenario: Convert multiple sections to multiple vertices each with a single edge
 
@@ -71,10 +71,10 @@ Feature: Convert Document To Object Graph
           |      Step 1 |
           |      Step 2 |
       And The Process.graph file, Edges section will be as follows
-          |                  Edge Name |
-          |        start ->  -> Step 1 |
-          |       Step 1 ->  -> Step 2 |
-          | Step 2 -> Story One -> end |
+          |            Edge Name |
+          |  start ->  -> Step 1 |
+          | Step 1 ->  -> Step 2 |
+          |    Step 2 ->  -> end |
 
   Scenario: Convert multiple sections to just one vertex and edge
 
@@ -100,7 +100,7 @@ Feature: Convert Document To Object Graph
           |         end |
           |      Step 1 |
       And The Process.graph file, Edges section will be as follows
-          |                  Edge Name |
-          |        start ->  -> Step 1 |
-          | Step 1 -> Story One -> end |
+          |           Edge Name |
+          | start ->  -> Step 1 |
+          |   Step 1 ->  -> end |
 

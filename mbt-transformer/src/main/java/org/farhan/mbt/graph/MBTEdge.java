@@ -13,15 +13,6 @@ public class MBTEdge extends DefaultWeightedEdge {
 		attributes = new HashMap<String, String>();
 		setLabel(label);
 		setTag("");
-		setDescription("");
-	}
-
-	public void setDescription(String description) {
-		attributes.put("description", description);
-	}
-
-	public String getDescription() {
-		return attributes.get("description").toString();
 	}
 
 	public void setTag(String tag) {
@@ -56,12 +47,6 @@ public class MBTEdge extends DefaultWeightedEdge {
 		String text = "Edge";
 		text += "\n\tlabel:" + getLabel();
 		text += "\n\ttag:" + getTag();
-		text += "\n\tdescription:";
-		if (getDescription() != null) {
-			for (String line : getDescription().toString().split("\n")) {
-				text += "\n\t\t" + line;
-			}
-		}
 		text += "\n\tsource:";
 		for (String line : getSource().toString().split("\n")) {
 			text += "\n\t\t" + line;

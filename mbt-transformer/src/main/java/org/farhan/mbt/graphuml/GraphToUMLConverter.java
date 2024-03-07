@@ -20,6 +20,7 @@ import org.farhan.mbt.graph.JGraphTGraphWrapper;
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
 import org.farhan.mbt.graph.MBTPath;
+import org.farhan.mbt.graph.MBTPathInfo;
 import org.farhan.mbt.graph.MBTVertex;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
@@ -84,9 +85,17 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 
 		JGraphTGraphWrapper jgw = (JGraphTGraphWrapper) theObject;
 		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) jgw.get();
-		// TODO this gets every possible path, instead get the list of tags from the
-		// start vertex, then loop through that list search only for paths that contain
-		// that tag
+
+		// TODO Loop through all the graph path info
+
+		// for each path info, search for a path covered by it, make a new method for
+		// this based on the getVertex and getEdge paths, basically only select edges
+		// that are covered
+		
+		// for each path returned, convert it into an interaction
+		
+		// Because each path is just a list, there's no need for MBTPath so delete it
+
 		ArrayList<MBTPath> paths = getVertexPaths(g, g.getStartVertex());
 		for (int i = 0; i < paths.size(); i++) {
 			resetCurrentMachineAndState();
@@ -223,16 +232,6 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		} else {
 			for (MBTEdge e : edges) {
 				ArrayList<MBTPath> vertexPaths = getVertexPaths(g, g.getEdgeTarget(e));
-				// if this edge target vertex is the end vertex in the graph then it'll have the
-				// scenario info
-				if (g.getEdgeTarget(e).getLabel().contentEquals(g.getEndVertex().getLabel())) {
-					// TODO temp hack for now, when testing for scenario ordering and other RTE
-					// stuff consider creating the interaction instead at this point?
-					MBTPath path = vertexPaths.getLast();
-					path.setLabel(e.getLabel());
-					path.setTags(e.getTag());
-					path.setDescription(e.getDescription());
-				}
 				ArrayList<MBTPath> edgePaths = getEdgePaths(g.getEdgeSource(e).getLabel());
 				combinePaths(g, e, vertex, graphPaths, vertexPaths, edgePaths);
 			}

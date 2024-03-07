@@ -51,38 +51,51 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 				theGraph = lastGraph;
 			} else if (line.startsWith("\tname:")) {
 				lastGraph.setLabel(line.replace("\tname:", ""));
+			} else if (line.startsWith("\ttag:")) {
+				lastGraph.setTag(line.replace("\ttag:", ""));
+			} else if (line.startsWith("\tdescription:")) {
+				isDescription = true;
+			} else if (line.startsWith("\tpaths:")) {
+				isDescription = false;
+			} else if (line.startsWith("\t\tPath")) {
+				isDescription = false;
+				lastObject = new MBTPathInfo();
+				lastGraph.addPath((MBTPathInfo) lastObject);
+			} else if (line.startsWith("\t\t\tindex:") && lastObject instanceof MBTPathInfo) {
+				((MBTPathInfo) lastObject).setIndex(line.replace("\t\t\tindex:", ""));
+			} else if (line.startsWith("\t\t\tname:") && lastObject instanceof MBTPathInfo) {
+				((MBTPathInfo) lastObject).setName(line.replace("\t\t\tname:", ""));
+			} else if (line.startsWith("\t\t\ttag:") && lastObject instanceof MBTPathInfo) {
+				((MBTPathInfo) lastObject).setTags(line.replace("\t\t\ttag:", ""));
+			} else if (line.startsWith("\t\t\tdescription:") && lastObject instanceof MBTPathInfo) {
+				isDescription = true;
 			} else if (line.startsWith("\tvertices:")) {
+				isDescription = false;
 			} else if (line.startsWith("\t\tVertex")) {
 				lastObject = new MBTVertex("");
 			} else if (line.startsWith("\t\t\tlabel:") && lastObject instanceof MBTVertex) {
 				((MBTVertex) lastObject).setLabel(line.replace("\t\t\tlabel:", ""));
 				lastGraph.addVertex((MBTVertex) lastObject);
 			} else if (line.startsWith("\tedges:")) {
+				isDescription = false;
 			} else if (line.startsWith("\t\tEdge")) {
 				lastObject = new MBTEdge("");
 			} else if (line.startsWith("\t\t\tlabel:") && lastObject instanceof MBTEdge) {
 				((MBTEdge) lastObject).setLabel(line.replace("\t\t\tlabel:", ""));
-			} else if (line.startsWith("\t\t\tsource:")) {
+			} else if (line.startsWith("\t\t\tsource:") && lastObject instanceof MBTEdge) {
 				isSource = true;
-			} else if (line.startsWith("\t\t\ttarget:")) {
+			} else if (line.startsWith("\t\t\ttarget:") && lastObject instanceof MBTEdge) {
 				isSource = false;
-			} else if (line.startsWith("\t\t\t\tVertex")) {
+			} else if (line.startsWith("\t\t\t\tVertex") && lastObject instanceof MBTEdge) {
 			} else if (line.startsWith("\t\t\t\t\tlabel:") && lastObject instanceof MBTEdge && isSource) {
 				sourceVertex = lastGraph.getVertex(line.replace("\t\t\t\t\tlabel:", ""));
 			} else if (line.startsWith("\t\t\t\t\tlabel:") && lastObject instanceof MBTEdge && !isSource) {
 				targetVertex = lastGraph.getVertex(line.replace("\t\t\t\t\tlabel:", ""));
 				lastGraph.addEdge(sourceVertex, targetVertex, (MBTEdge) lastObject);
-			} else if (line.startsWith("\ttag:")) {
-				lastGraph.setTag(line.replace("\ttag:", ""));
 			} else if (line.startsWith("\t\t\ttag:") && lastObject instanceof MBTEdge) {
 				((MBTEdge) lastObject).setTag(line.replace("\t\t\ttag:", ""));
-			} else if (line.startsWith("\tdescription:")) {
-				isDescription = true;
-			} else if (line.startsWith("\t\t\tdescription:")) {
-				isDescription = true;
-			} else if (line.startsWith("\t\t\tvalue:") && lastObject instanceof MBTEdge) {
-				isDescription = false;
 			} else if (isDescription) {
+
 				// if lastObject is null, it means this is the graph description
 				if (lastObject == null) {
 					String description = lastGraph.getDescription();
@@ -92,12 +105,12 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 						lastGraph.setDescription(description + "\n" + line.trim());
 					}
 				} else {
-					MBTEdge edge = (MBTEdge) lastObject;
-					String description = edge.getDescription();
+					MBTPathInfo path = (MBTPathInfo) lastObject;
+					String description = path.getDescription();
 					if (description.isEmpty()) {
-						edge.setDescription(line.trim());
+						path.setDescription(line.trim());
 					} else {
-						edge.setDescription(description + "\n" + line.trim());
+						path.setDescription(description + "\n" + line.trim());
 					}
 				}
 			}

@@ -28,32 +28,32 @@ public class ProcessGraphFileImpl extends GraphFileObject implements ProcessGrap
 	}
 
 	@Override
-	public void assertEdgesSectionDescription(HashMap<String, String> keyMap) {
-		assertEdgesDescription(keyMap.get("Edge Name"), keyMap.get("Description"));
-	}
-
-	@Override
-	public void assertEdgesSectionLabel(HashMap<String, String> keyMap) {
-		assertEdgesLabel(keyMap.get("Edge Name"), keyMap.get("Label"));
-	}
-
-	@Override
-	public void assertEdgesSectionTag(HashMap<String, String> keyMap) {
-		assertEdgesTag(keyMap.get("Edge Name"), keyMap.get("Tag"));
-	}
-
-	@Override
 	public void assertGraphSectionDescription(HashMap<String, String> keyMap) {
 		assertGraphDescription(keyMap.get("Description"));
 	}
 
 	@Override
-	public void assertGraphSectionLabel(HashMap<String, String> keyMap) {
-		assertGraphLabel(keyMap.get("Label"));
+	public void assertGraphSectionTag(HashMap<String, String> keyMap) {
+		assertGraphTag(keyMap.get("Tag"));
 	}
 
 	@Override
-	public void assertGraphSectionTag(HashMap<String, String> keyMap) {
-		assertGraphTag(keyMap.get("Tag"));
+	public void assertGraphSectionName(HashMap<String, String> keyMap) {
+		assertGraphName(keyMap.get("Name"));
+	}
+
+	@Override
+	public void assertPathsSectionDescription(HashMap<String, String> keyMap) {
+		assertPathsDescription(keyMap.get("Name"), keyMap.get("Description"));
+	}
+
+	@Override
+	public void assertPathsSectionName(HashMap<String, String> keyMap) {
+		assertPathsNameExists(keyMap.get("Name"));
+	}
+
+	@Override
+	public void assertPathsSectionTag(HashMap<String, String> keyMap) {
+		assertPathsTag(keyMap.get("Name"), keyMap.get("Tag"));
 	}
 }

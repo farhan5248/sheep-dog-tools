@@ -29,10 +29,16 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	private JGraphTGraphWrapper tgtWrp;
 	private AsciiDoctorProject srcPrj;
 
+	// This is used to assign each testcase/path/scenario/scenario outline example
+	// row with a unique ID which is then stored in the collection of path
+	// information in the graph
+	private int pathCnt;
+
 	public AdocToGraphConverter(String layer, AsciiDoctorProject source, JGraphTProject target) {
 		this.layer = layer;
 		this.srcPrj = source;
 		this.tgtPrj = target;
+		this.pathCnt = -1;
 	}
 
 	@Override
@@ -83,10 +89,11 @@ public class AdocToGraphConverter extends ToGraphConverter {
 
 	private void convertSections(MBTGraph<MBTVertex, MBTEdge> g, Section scenario) {
 
+		pathCnt++;
+		g.addPath(String.valueOf(pathCnt), scenario.getTitle(), getSectionAttributes(scenario),
+				getSectionText(scenario));
 		ArrayList<ListItem> steps = convertBlocksToSteps(scenario);
-
-		MBTEdge edge = null;
-		g.createEdgeWithVertices(g.getStartVertex().getLabel(), steps.getFirst().getText(), "", scenario.getTitle());
+		g.createEdgeWithVertices(g.getStartVertex().getLabel(), steps.getFirst().getText(), "", String.valueOf(pathCnt));
 		for (int i = 0; i < steps.size(); i++) {
 			String source = steps.get(i).getText();
 			String target;
@@ -95,13 +102,9 @@ public class AdocToGraphConverter extends ToGraphConverter {
 			} else {
 				target = steps.get(i + 1).getText();
 			}
-			edge = g.createEdgeWithVertices(source, target, "", scenario.getTitle());
+			g.createEdgeWithVertices(source, target, "", String.valueOf(pathCnt));
 			convertTableToGraph(steps.get(i), scenario.getTitle());
 		}
-		// TODO move these three to path attributes in graph
-		edge.setLabel(scenario.getTitle());
-		edge.setDescription(getSectionText(scenario));
-		edge.appendTag(getSectionAttributes(scenario));
 	}
 
 	private ArrayList<ListItem> convertBlocksToSteps(Section scenario) {
@@ -161,16 +164,16 @@ public class AdocToGraphConverter extends ToGraphConverter {
 								.createVertex(i + " " + table.getHeader().get(0).getCells().get(j).getText());
 						String newEdgeLabel = row.getCells().get(j).getText();
 						if (i == 0 && j == 0) {
-							fieldGraph.createEdge(lastVertex, newVertex, lastEdgeLabel, scenarioTitle);
+							fieldGraph.createEdge(lastVertex, newVertex, lastEdgeLabel, String.valueOf(pathCnt));
 						} else {
-							fieldGraph.createEdge(lastVertex, newVertex, lastEdgeLabel, scenarioTitle);
+							fieldGraph.createEdge(lastVertex, newVertex, lastEdgeLabel, String.valueOf(pathCnt));
 						}
 						lastVertex = newVertex;
 						lastEdgeLabel = newEdgeLabel;
 					}
 				}
 				// TODO this assumes the last column isn't blank, check it
-				fieldGraph.createEdge(lastVertex, fieldGraph.getEndVertex(), lastEdgeLabel, scenarioTitle);
+				fieldGraph.createEdge(lastVertex, fieldGraph.getEndVertex(), lastEdgeLabel, String.valueOf(pathCnt));
 			}
 		}
 	}
