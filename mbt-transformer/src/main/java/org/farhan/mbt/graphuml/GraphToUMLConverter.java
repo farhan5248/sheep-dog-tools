@@ -84,6 +84,9 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 
 		JGraphTGraphWrapper jgw = (JGraphTGraphWrapper) theObject;
 		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) jgw.get();
+		// TODO this gets every possible path, instead get the list of tags from the
+		// start vertex, then loop through that list search only for paths that contain
+		// that tag
 		ArrayList<MBTPath> paths = getVertexPaths(g, g.getStartVertex());
 		for (int i = 0; i < paths.size(); i++) {
 			resetCurrentMachineAndState();

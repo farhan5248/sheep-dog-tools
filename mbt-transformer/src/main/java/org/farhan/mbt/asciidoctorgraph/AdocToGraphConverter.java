@@ -83,23 +83,10 @@ public class AdocToGraphConverter extends ToGraphConverter {
 
 	private void convertSections(MBTGraph<MBTVertex, MBTEdge> g, Section scenario) {
 
-		ArrayList<ListItem> steps = new ArrayList<ListItem>();
-		for (StructuralNode block : scenario.getBlocks()) {
-			if (block instanceof List) {
-				List l = (List) block;
-				for (StructuralNode listItem : l.getItems()) {
-					ListItem li = (ListItem) listItem;
-					steps.add(li);
-				}
-			} else if (block instanceof Table) {
-				// So this is a hack to reduce code changes for now. Not sure if this will come
-				// back to bite me. What I did learn is that I can read an empty adoc file and
-				// then dynamically create the sections :)
-				steps.getLast().getBlocks().add(block);
-			}
-		}
-		g.createEdgeWithVertices(g.getStartVertex().getLabel(), steps.getFirst().getText(), "", "");
+		ArrayList<ListItem> steps = convertBlocksToSteps(scenario);
+
 		MBTEdge edge = null;
+		g.createEdgeWithVertices(g.getStartVertex().getLabel(), steps.getFirst().getText(), "", scenario.getTitle());
 		for (int i = 0; i < steps.size(); i++) {
 			String source = steps.get(i).getText();
 			String target;
@@ -108,12 +95,30 @@ public class AdocToGraphConverter extends ToGraphConverter {
 			} else {
 				target = steps.get(i + 1).getText();
 			}
-			edge = g.createEdgeWithVertices(source, target, scenario.getTitle(), "");
-			convertTableToGraph(edge, steps.get(i));
+			edge = g.createEdgeWithVertices(source, target, "", scenario.getTitle());
+			convertTableToGraph(steps.get(i), scenario.getTitle());
 		}
+		// TODO move these three to path attributes in graph
 		edge.setLabel(scenario.getTitle());
-		edge.setTag(getSectionAttributes(scenario));
 		edge.setDescription(getSectionText(scenario));
+		edge.appendTag(getSectionAttributes(scenario));
+	}
+
+	private ArrayList<ListItem> convertBlocksToSteps(Section scenario) {
+		ArrayList<ListItem> steps = new ArrayList<ListItem>();
+		for (StructuralNode block : scenario.getBlocks()) {
+			if (block instanceof List) {
+				for (StructuralNode step : ((List) block).getItems()) {
+					steps.add((ListItem) step);
+				}
+			} else if (block instanceof Table) {
+				// So this is a hack to reduce code changes for now. Not sure if this will come
+				// back to bite me. What I did learn is that I can read an empty adoc file and
+				// then dynamically create the sections :)
+				steps.getLast().getBlocks().add(block);
+			}
+		}
+		return steps;
 	}
 
 	private String getSectionAttributes(StructuralNode section) {
@@ -138,40 +143,36 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		return text;
 	}
 
-	private void convertTableToGraph(MBTEdge edge, ListItem step) {
+	private void convertTableToGraph(ListItem step, String scenarioTitle) {
 		for (StructuralNode block : step.getBlocks()) {
 			if (block instanceof Table) {
 				JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) tgtPrj
 						.createObject(convertObjectName(step.getText(), tgtPrj.SECOND_LAYER));
 				MBTGraph<MBTVertex, MBTEdge> fieldGraph = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
 				Table table = (Table) block;
-				convertTableToEdges(table, fieldGraph);
-			}
-		}
-	}
-
-	private void convertTableToEdges(Table table, MBTGraph<MBTVertex, MBTEdge> graph) {
-
-		MBTVertex lastVertex = graph.getStartVertex();
-		String lastEdgeLabel = "";
-		int rowCnt = table.getBody().size();
-		for (int i = 0; i < rowCnt; i++) {
-			Row row = table.getBody().get(i);
-			int cellCnt = row.getCells().size();
-			for (int j = 0; j < cellCnt; j++) {
-				MBTVertex newVertex = graph
-						.createVertex(i + " " + table.getHeader().get(0).getCells().get(j).getText());
-				String newEdgeLabel = row.getCells().get(j).getText();
-				if (i == 0 && j == 0) {
-					graph.createEdge(lastVertex, newVertex, lastEdgeLabel);
-				} else {
-					graph.createEdge(lastVertex, newVertex, lastEdgeLabel);
+				MBTVertex lastVertex = fieldGraph.getStartVertex();
+				String lastEdgeLabel = "";
+				int rowCnt = table.getBody().size();
+				for (int i = 0; i < rowCnt; i++) {
+					Row row = table.getBody().get(i);
+					int cellCnt = row.getCells().size();
+					for (int j = 0; j < cellCnt; j++) {
+						MBTVertex newVertex = fieldGraph
+								.createVertex(i + " " + table.getHeader().get(0).getCells().get(j).getText());
+						String newEdgeLabel = row.getCells().get(j).getText();
+						if (i == 0 && j == 0) {
+							fieldGraph.createEdge(lastVertex, newVertex, lastEdgeLabel, scenarioTitle);
+						} else {
+							fieldGraph.createEdge(lastVertex, newVertex, lastEdgeLabel, scenarioTitle);
+						}
+						lastVertex = newVertex;
+						lastEdgeLabel = newEdgeLabel;
+					}
 				}
-				lastVertex = newVertex;
-				lastEdgeLabel = newEdgeLabel;
+				// TODO this assumes the last column isn't blank, check it
+				fieldGraph.createEdge(lastVertex, fieldGraph.getEndVertex(), lastEdgeLabel, scenarioTitle);
 			}
 		}
-		// TODO this assumes the last column isn't blank, check it
-		graph.createEdge(lastVertex, graph.getEndVertex(), lastEdgeLabel);
 	}
+
 }

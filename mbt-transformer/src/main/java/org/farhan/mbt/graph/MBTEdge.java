@@ -16,15 +16,6 @@ public class MBTEdge extends DefaultWeightedEdge {
 		setDescription("");
 	}
 
-	public void addAttribute(String key, String value) {
-		// the prefix is there to prevent an attribute matching tag or label
-		attributes.put("_" + key, value);
-	}
-
-	public String getAttribute(String key) {
-		return attributes.get("_" + key).toString();
-	}
-
 	public void setDescription(String description) {
 		attributes.put("description", description);
 	}
@@ -35,6 +26,16 @@ public class MBTEdge extends DefaultWeightedEdge {
 
 	public void setTag(String tag) {
 		attributes.put("tag", tag);
+	}
+
+	public void appendTag(String tag) {
+		// TODO after saving path meta data, make this method private and move it to
+		// MBTGraph
+		if (getTag().isEmpty()) {
+			setTag(tag);
+		} else if (!getTag().contains(tag)) {
+			setTag(getTag() + "," + tag);
+		}
 	}
 
 	public String getTag() {

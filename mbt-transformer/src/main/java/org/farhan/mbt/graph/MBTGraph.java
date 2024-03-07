@@ -107,24 +107,24 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 		}
 	}
 
-	public MBTEdge createEdgeWithVertices(String sourceLabel, String targetLabel, String edgeLabel, String edgeInput) {
+	public MBTEdge createEdgeWithVertices(String sourceLabel, String targetLabel, String edgeLabel, String tag) {
 		MBTGraph<MBTVertex, MBTEdge> g = getThisGraph();
 		MBTVertex source = g.createVertex(sourceLabel);
 		MBTVertex target = g.createVertex(targetLabel);
-		return createEdge(source, target, edgeLabel);
+		return createEdge(source, target, edgeLabel, tag);
 	}
 
-	public MBTEdge createEdge(MBTVertex source, MBTVertex target, String edgeLabel) {
+	public MBTEdge createEdge(MBTVertex source, MBTVertex target, String edgeLabel, String tag) {
 		MBTGraph<MBTVertex, MBTEdge> g = getThisGraph();
 		MBTEdge edge = getEdgeByLabel(source, target, edgeLabel);
 		if (edge == null) {
 			edge = new MBTEdge(edgeLabel);
 			g.addEdge(source, target, edge);
 			g.setEdgeWeight(edge, 1.0);
+			edge.setTag(tag);
 		} else {
-			// TODO I think this is to maintain the list of paths/section/scenarios. Change
-			// it to a list of tags
-			edge.setLabel(edge.getLabel() + "," + edgeLabel);
+			edge.setLabel(edgeLabel);
+			edge.appendTag(tag);
 		}
 		return edge;
 	}
