@@ -1,3 +1,4 @@
+@debug
 Feature: Convert Document To Object Graph
 
   Scenario: Convert tags and description

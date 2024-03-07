@@ -114,14 +114,13 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 		return createEdgeWithInput(source, target, edgeLabel, edgeInput);
 	}
 
+	// TODO remove input and use the label in its place. If the section/scenario
+	// name is stored in it, then make a list for that and add that information
+	// there.
 	public MBTEdge createEdgeWithInput(MBTVertex source, MBTVertex target, String edgeLabel, Object edgeInput) {
 		MBTGraph<MBTVertex, MBTEdge> g = getThisGraph();
-		String edgeInputAsString;
-		if (edgeInput == null) {
-			edgeInputAsString = "";
-		} else {
-			edgeInputAsString = edgeInput.toString();
-		}
+		// TODO if this throw a null pointer, update the code that calls this
+		String edgeInputAsString = edgeInput.toString();
 		MBTEdge edge = getEdgeByInput(source, target, edgeInputAsString);
 		if (edge == null) {
 			edge = new MBTEdge(edgeLabel);
