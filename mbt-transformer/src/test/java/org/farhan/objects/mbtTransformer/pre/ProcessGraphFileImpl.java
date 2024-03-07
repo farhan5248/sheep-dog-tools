@@ -8,26 +8,6 @@ import org.farhan.objects.mbtTransformer.ProcessGraphFile;
 public class ProcessGraphFileImpl extends GraphFileObject implements ProcessGraphFile {
 
 	@Override
-	public void assertEdgesGraphEdgesSectionEdgeSourceVertexName(HashMap<String, String> keyMap) {
-		assertVerticesVertexNameExists(keyMap.get("Edge Source Vertex Name"));
-	}
-
-	@Override
-	public void assertEdgesGraphEdgesSectionGraphEdgeName(HashMap<String, String> keyMap) {
-		assertEdgesGraphEdgeNameExists(keyMap.get("Edge Source Vertex Name"), keyMap.get("Graph Edge Name"));
-	}
-
-	@Override
-	public void assertEdgesGraphVerticesSectionEdgeSourceVertexName(HashMap<String, String> keyMap) {
-		assertVerticesVertexNameExists(keyMap.get("Edge Source Vertex Name"));
-	}
-
-	@Override
-	public void assertEdgesGraphVerticesSectionGraphVertexName(HashMap<String, String> keyMap) {
-		assertEdgesGraphVertexNameExists(keyMap.get("Edge Source Vertex Name"), keyMap.get("Graph Vertex Name"));
-	}
-
-	@Override
 	public void assertEdgesSectionEdgeName(HashMap<String, String> keyMap) {
 		assertEdgesEdgeNameExists(keyMap.get("Edge Name"));
 	}

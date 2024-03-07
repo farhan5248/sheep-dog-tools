@@ -4,14 +4,6 @@ import java.util.HashMap;
 
 public interface ProcessGraphFile {
 
-    public void assertEdgesGraphEdgesSectionEdgeSourceVertexName(HashMap<String, String> keyMap);
-
-    public void assertEdgesGraphEdgesSectionGraphEdgeName(HashMap<String, String> keyMap);
-
-    public void assertEdgesGraphVerticesSectionEdgeSourceVertexName(HashMap<String, String> keyMap);
-
-    public void assertEdgesGraphVerticesSectionGraphVertexName(HashMap<String, String> keyMap);
-
     public void assertEdgesSectionDescription(HashMap<String, String> keyMap);
 
     public void assertEdgesSectionEdgeName(HashMap<String, String> keyMap);

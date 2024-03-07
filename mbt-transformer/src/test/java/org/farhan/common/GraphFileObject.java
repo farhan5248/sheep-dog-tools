@@ -1,8 +1,10 @@
 package org.farhan.common;
 
 import java.io.File;
+import java.util.ArrayList;
+
 import org.farhan.mbt.graph.JGraphTProject;
-import org.farhan.mbt.core.ConvertibleProject;
+import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.graph.JGraphTGraphWrapper;
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
@@ -11,7 +13,24 @@ import org.junit.jupiter.api.Assertions;
 
 public abstract class GraphFileObject extends FileObject {
 
-	protected JGraphTProject graphProject;
+	private JGraphTProject graphProject;
+
+	// TODO delete this method after making a map and a getter for each project
+	private MBTGraph<MBTVertex, MBTEdge> getGraph(String graphName) {
+		for (Object o : graphProject.getObjects(graphProject.FIRST_LAYER)) {
+			MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) ((JGraphTGraphWrapper) o).get();
+			if (g.getLabel().contentEquals(graphName.replace(".graph", ""))) {
+				return g;
+			}
+		}
+		for (Object o : graphProject.getObjects(graphProject.SECOND_LAYER)) {
+			MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) ((JGraphTGraphWrapper) o).get();
+			if (g.getLabel().contentEquals(graphName.replace(".graph", ""))) {
+				return g;
+			}
+		}
+		return null;
+	}
 
 	private MBTEdge getEdgeByString(MBTGraph<MBTVertex, MBTEdge> g, String edgeName) {
 		MBTEdge edge = null;
@@ -31,104 +50,89 @@ public abstract class GraphFileObject extends FileObject {
 	}
 
 	protected void assertVerticesVertexNameExists(String vertexName) {
-		// TODO temporarily commented out until I can distinguish parent from child
-		// graphs
-		// Assertions.assertEquals(1,
-		// graphProject.getObjects(graphProject.firstLayerName).size());
-		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) graphProject.getObjects(graphProject.FIRST_LAYER).getFirst();
-		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
+		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
 		Assertions.assertTrue(g.vertexSet().contains(new MBTVertex(vertexName)),
 				"Vertex " + vertexName + " doesn't exist");
 	}
 
 	protected void assertEdgesEdgeNameExists(String edgeName) {
-		// TODO temporarily commented out until I can distinguish parent from child
-		// graphs
-		// Assertions.assertEquals(1,
-		// graphProject.getObjects(graphProject.firstLayerName).size());
-		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) graphProject.getObjects(graphProject.FIRST_LAYER).getFirst();
-		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
+		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
 		Assertions.assertTrue(getEdgeByString(g, edgeName) != null, "Edge " + edgeName + " doesn't exist");
 	}
 
 	protected void assertEdgesGraphEdgeNameExists(String sourceVertex, String graphEdgeName) {
-		// TODO temporarily commented out until I can distinguish parent from child
-		// graphs
-		// Assertions.assertEquals(1,
-		// graphProject.getObjects(graphProject.firstLayerName).size());
-		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) graphProject.getObjects(graphProject.FIRST_LAYER).getFirst();
-		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
+		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
 		MBTEdge edge = getEdgeBySourceVertex(g, sourceVertex);
 		Assertions.assertTrue(edge != null, "Edge " + sourceVertex + " doesn't exist");
-		MBTGraph<MBTVertex, MBTEdge> g1 = (MBTGraph<MBTVertex, MBTEdge>) edge.getValue();
+		MBTGraph<MBTVertex, MBTEdge> g1 = getGraph(edge.getValue());
 		Assertions.assertTrue(getEdgeByString(g1, graphEdgeName) != null,
 				"Graph Edge " + graphEdgeName + " doesn't exist");
 	}
 
 	protected void assertEdgesGraphVertexNameExists(String sourceVertex, String graphVertexName) {
-		// TODO temporarily commented out until I can distinguish parent from child
-		// graphs
-		// Assertions.assertEquals(1,
-		// graphProject.getObjects(graphProject.firstLayerName).size());
-		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) graphProject.getObjects(graphProject.FIRST_LAYER).getFirst();
-		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
+		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
 		MBTEdge edge = getEdgeBySourceVertex(g, sourceVertex);
 		Assertions.assertTrue(edge != null, "Edge " + sourceVertex + " doesn't exist");
-		MBTGraph<MBTVertex, MBTEdge> g1 = (MBTGraph<MBTVertex, MBTEdge>) edge.getValue();
+		MBTGraph<MBTVertex, MBTEdge> g1 = getGraph(edge.getValue());
 		Assertions.assertTrue(g1.vertexSet().contains(new MBTVertex(graphVertexName)),
 				"Vertex " + graphVertexName + " doesn't exist");
 	}
 
 	protected void assertGraphModelExists() {
 		assertFileExists();
-		File f = new File(ConvertibleProject.baseDir + keyValue.get("path"));
 		try {
+			// TODO compare how the layers of feature and java files are read, this is ugly
 			graphProject = new JGraphTProject();
-			graphProject.createObject(f.getAbsolutePath()).load();
+			ArrayList<File> files = Utilities.recursivelyListFiles(graphProject.getDir(graphProject.FIRST_LAYER),
+					graphProject.getFileExt(graphProject.FIRST_LAYER));
+			graphProject.getObjects(graphProject.FIRST_LAYER).clear();
+			for (File f : files) {
+				graphProject.createObject(f.getAbsolutePath()).load();
+			}
+			files = Utilities.recursivelyListFiles(graphProject.getDir(graphProject.SECOND_LAYER),
+					graphProject.getFileExt(graphProject.SECOND_LAYER));
+			graphProject.getObjects(graphProject.SECOND_LAYER).clear();
+			for (File f : files) {
+				graphProject.createObject(f.getAbsolutePath()).load();
+			}
 		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step");
+			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
 		}
 	}
 
 	protected void assertEdgesDescription(String edgeName, String description) {
-		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) graphProject.getObjects(graphProject.FIRST_LAYER).getFirst();
-		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
+		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
 		MBTEdge edge = getEdgeByString(g, edgeName);
 		Assertions.assertTrue(edge != null, "Edge " + edgeName + " doesn't exist");
 		Assertions.assertEquals(description, edge.getDescription());
 	}
 
 	protected void assertEdgesLabel(String edgeName, String label) {
-		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) graphProject.getObjects(graphProject.FIRST_LAYER).getFirst();
-		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
+		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
 		MBTEdge edge = getEdgeByString(g, edgeName);
 		Assertions.assertTrue(edge != null, "Edge " + edgeName + " doesn't exist");
 		Assertions.assertEquals(label, edge.getLabel());
 	}
 
 	protected void assertEdgesTag(String edgeName, String tag) {
-		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) graphProject.getObjects(graphProject.FIRST_LAYER).getFirst();
-		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
+		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
 		MBTEdge edge = getEdgeByString(g, edgeName);
 		Assertions.assertTrue(edge != null, "Edge " + edgeName + " doesn't exist");
 		Assertions.assertEquals(tag, edge.getTag());
 	}
 
 	protected void assertGraphDescription(String description) {
-		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) graphProject.getObjects(graphProject.FIRST_LAYER).getFirst();
-		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
+		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
 		Assertions.assertEquals(description, g.getDescription());
 	}
 
 	protected void assertGraphLabel(String label) {
-		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) graphProject.getObjects(graphProject.FIRST_LAYER).getFirst();
-		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
+		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
 		Assertions.assertEquals(label, g.getLabel());
 	}
 
 	protected void assertGraphTag(String tag) {
-		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) graphProject.getObjects(graphProject.FIRST_LAYER).getFirst();
-		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
+		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
 		Assertions.assertEquals(tag, g.getTag());
 	}
 }

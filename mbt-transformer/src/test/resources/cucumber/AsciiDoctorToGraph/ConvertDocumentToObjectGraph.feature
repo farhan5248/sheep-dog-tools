@@ -20,7 +20,7 @@ Feature: Convert Document To Object Graph
           * Step 1
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
-     Then The mbt-transformer plugin, target/Graphs/Process.graph file will be present
+     Then The mbt-transformer plugin, target/Graphs/specs/Process.graph file will be present
       And The Process.graph file, Graph section will be as follows
           |   Label |       Tag |  Description |
           | Process | tag1,tag2 | Desc\nLine 2 |
@@ -39,7 +39,7 @@ Feature: Convert Document To Object Graph
           * Step 1
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
-     Then The mbt-transformer plugin, target/Graphs/Process.graph file will be present
+     Then The mbt-transformer plugin, target/Graphs/specs/Process.graph file will be present
       And The Process.graph file, Vertices section will be as follows
           | Vertex Name |
           |       start |
@@ -54,7 +54,7 @@ Feature: Convert Document To Object Graph
 
     Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
           """
-          = Feature Name
+          = Process
           
           == Story name
           
@@ -63,7 +63,7 @@ Feature: Convert Document To Object Graph
           * Step 2
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
-     Then The mbt-transformer plugin, target/Graphs/Process.graph file will be present
+     Then The mbt-transformer plugin, target/Graphs/specs/Process.graph file will be present
       And The Process.graph file, Vertices section will be as follows
           | Vertex Name |
           |       start |
@@ -82,7 +82,7 @@ Feature: Convert Document To Object Graph
 
     Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
           """
-          = Feature Name
+          = Process
           
           == Story 1
           
@@ -93,7 +93,7 @@ Feature: Convert Document To Object Graph
           * Step 1
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
-     Then The mbt-transformer plugin, target/Graphs/Process.graph file will be present
+     Then The mbt-transformer plugin, target/Graphs/specs/Process.graph file will be present
       And The Process.graph file, Vertices section will be as follows
           | Vertex Name |
           |       start |

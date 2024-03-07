@@ -6,12 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.cucumber.Tag;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToUMLGherkinConverter;
 import org.farhan.mbt.core.Utilities;
@@ -42,6 +40,14 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(srcPrj.FIRST_LAYER),
 				srcPrj.getFileExt(srcPrj.FIRST_LAYER));
 		srcPrj.getObjects(srcPrj.FIRST_LAYER).clear();
+		for (File f : files) {
+			srcPrj.createObject(f.getAbsolutePath()).load();
+		}
+		// TODO this is an instance of selecting from multiple layers, think about how
+		// that factors into the multilayer model. Perhaps remove first,second third and make a dynamic list of 1,2,3?
+		files = Utilities.recursivelyListFiles(srcPrj.getDir(srcPrj.SECOND_LAYER),
+				srcPrj.getFileExt(srcPrj.SECOND_LAYER));
+		srcPrj.getObjects(srcPrj.SECOND_LAYER).clear();
 		for (File f : files) {
 			srcPrj.createObject(f.getAbsolutePath()).load();
 		}
@@ -76,7 +82,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 
 		JGraphTGraphWrapper jgw = (JGraphTGraphWrapper) theObject;
 		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) jgw.get();
-		ArrayList<MBTPath> paths = getPathsFromVertex(g, g.getStartVertex());
+		ArrayList<MBTPath> paths = getVertexPaths(g, g.getStartVertex());
 		for (int i = 0; i < paths.size(); i++) {
 			resetCurrentMachineAndState();
 			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), paths.get(i).getLabel());
@@ -185,7 +191,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		return secondLayerClassName;
 	}
 
-	private static ArrayList<MBTPath> getPathsFromVertex(MBTGraph<MBTVertex, MBTEdge> g, MBTVertex vertex) {
+	private ArrayList<MBTPath> getVertexPaths(MBTGraph<MBTVertex, MBTEdge> g, MBTVertex vertex) {
 		ArrayList<MBTPath> graphPaths = new ArrayList<MBTPath>();
 		Set<MBTEdge> edges = g.outgoingEdgesOf(vertex);
 		if (edges.isEmpty()) {
@@ -193,7 +199,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 			return graphPaths;
 		} else {
 			for (MBTEdge e : edges) {
-				ArrayList<MBTPath> vertexPaths = getPathsFromVertex(g, g.getEdgeTarget(e));
+				ArrayList<MBTPath> vertexPaths = getVertexPaths(g, g.getEdgeTarget(e));
 				// if this edge target vertex is the end vertex in the graph then it'll have the
 				// scenario info
 				if (g.getEdgeTarget(e).getLabel().contentEquals(g.getEndVertex().getLabel())) {
@@ -204,11 +210,21 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 					path.setTags(e.getTag());
 					path.setDescription(e.getDescription());
 				}
-				ArrayList<MBTPath> edgePaths = getPathsFromEdge(e);
+				ArrayList<MBTPath> edgePaths = getEdgePaths(e.getValue());
 				combinePaths(g, e, vertex, graphPaths, vertexPaths, edgePaths);
 			}
 			return graphPaths;
 		}
+	}
+
+	private ArrayList<MBTPath> getEdgePaths(String graphName) {
+		for (Object o : srcPrj.getObjects(srcPrj.SECOND_LAYER)) {
+			MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) ((JGraphTGraphWrapper) o).get();
+			if (g.getLabel().contentEquals(graphName)) {
+				return getVertexPaths(g, g.getStartVertex());
+			}
+		}
+		return new ArrayList<MBTPath>();
 	}
 
 	private static void combinePaths(MBTGraph<MBTVertex, MBTEdge> g, MBTEdge e, MBTVertex vertex,
@@ -243,16 +259,6 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 				}
 			}
 		}
-	}
-
-	private static ArrayList<MBTPath> getPathsFromEdge(MBTEdge e) {
-		if (e.getValue() != null) {
-			if (e.getValue() instanceof MBTGraph<?, ?>) {
-				MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) e.getValue();
-				return getPathsFromVertex(g, g.getStartVertex());
-			}
-		}
-		return new ArrayList<MBTPath>();
 	}
 
 }

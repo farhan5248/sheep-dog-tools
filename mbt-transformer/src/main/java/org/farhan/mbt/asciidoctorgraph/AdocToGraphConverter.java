@@ -48,13 +48,17 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	@Override
 	protected void convertObject(ConvertibleObject object) throws Exception {
 		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) object;
-		tgtWrp = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(adaw.getFile().getName()));
+		Document src = (Document) adaw.get();
+		tgtWrp = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(src.getTitle()));
 	}
 
 	@Override
-	protected String convertObjectName(String fullName) {
-		return tgtPrj.getDir(tgtPrj.FIRST_LAYER).getAbsolutePath() + File.separator
-				+ fullName.replace(srcPrj.getFileExt(srcPrj.FIRST_LAYER), "") + tgtPrj.getFileExt(tgtPrj.FIRST_LAYER);
+	protected String convertObjectName(String documentTitle) {
+		return convertObjectName(documentTitle, tgtPrj.FIRST_LAYER);
+	}
+
+	private String convertObjectName(String documentTitle, String layer) {
+		return tgtPrj.getDir(layer).getAbsolutePath() + File.separator + documentTitle + tgtPrj.getFileExt(layer);
 	}
 
 	@Override
@@ -134,20 +138,15 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		return text;
 	}
 
-	private void convertTableToGraph(MBTEdge inputs, ListItem step) {
+	private void convertTableToGraph(MBTEdge edge, ListItem step) {
 		for (StructuralNode block : step.getBlocks()) {
 			if (block instanceof Table) {
-				JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(step.getText()));
+				JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) tgtPrj
+						.createObject(convertObjectName(step.getText(), tgtPrj.SECOND_LAYER));
 				MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
 				Table table = (Table) block;
 				convertTableToEdges(table, tgt);
-				// TODO this inner graph has a .graph file, so instead of saving this
-				// graph in one combined file, make this a pointer to the actual file rather
-				// than embedding its contents
-
-				// TODO instead of setting the graph, make a link to its start and end nodes.
-				// When doing this make sure the level of each node is set
-				inputs.setValue(gtf.get());
+				edge.setValue(tgt.getLabel());
 			}
 		}
 	}
@@ -161,12 +160,10 @@ public class AdocToGraphConverter extends ToGraphConverter {
 			Row row = table.getBody().get(i);
 			int cellCnt = row.getCells().size();
 			for (int j = 0; j < cellCnt; j++) {
-				// make a new vertex
 				MBTVertex newVertex = graph
 						.createVertex(i + " " + table.getHeader().get(0).getCells().get(j).getText());
 				String newEdgeLabel = row.getCells().get(j).getText();
 				if (i == 0 && j == 0) {
-					// first row first cell
 					graph.createEdgeWithInput(lastVertex, newVertex, lastEdgeLabel, lastEdgeLabel);
 				} else {
 					graph.createEdgeWithInput(lastVertex, newVertex, lastEdgeLabel, lastEdgeLabel);

@@ -1,0 +1,114 @@
+Graph
+	name:Set Object as follows
+	tag:
+	description:
+		
+	vertices:
+		Vertex
+			label:start
+		Vertex
+			label:end
+		Vertex
+			label:0 ins
+		Vertex
+			label:0 grp
+		Vertex
+			label:0 crt
+		Vertex
+			label:1 ins
+		Vertex
+			label:1 grp
+		Vertex
+			label:1 crt
+	edges:
+		Edge
+			label:
+			tag:
+			description:
+				
+			source:
+				Vertex
+					label:start
+			target:
+				Vertex
+					label:0 ins
+			value:
+				
+		Edge
+			label:5
+			tag:
+			description:
+				
+			source:
+				Vertex
+					label:0 ins
+			target:
+				Vertex
+					label:0 grp
+			value:
+				5
+		Edge
+			label:10
+			tag:
+			description:
+				
+			source:
+				Vertex
+					label:0 grp
+			target:
+				Vertex
+					label:0 crt
+			value:
+				10
+		Edge
+			label:15
+			tag:
+			description:
+				
+			source:
+				Vertex
+					label:0 crt
+			target:
+				Vertex
+					label:1 ins
+			value:
+				15
+		Edge
+			label:4
+			tag:
+			description:
+				
+			source:
+				Vertex
+					label:1 ins
+			target:
+				Vertex
+					label:1 grp
+			value:
+				4
+		Edge
+			label:8
+			tag:
+			description:
+				
+			source:
+				Vertex
+					label:1 grp
+			target:
+				Vertex
+					label:1 crt
+			value:
+				8
+		Edge
+			label:12
+			tag:
+			description:
+				
+			source:
+				Vertex
+					label:1 crt
+			target:
+				Vertex
+					label:end
+			value:
+				12

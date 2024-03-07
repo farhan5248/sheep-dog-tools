@@ -17,6 +17,7 @@ public abstract class ConvertibleProject {
 
 	public abstract String getFileExt(String layer);
 
+	// TODO this should probably be a sorted map so it's easy to find objects
 	public abstract ArrayList<ConvertibleObject> getObjects(String layer);
 
 	public abstract void save() throws Exception;

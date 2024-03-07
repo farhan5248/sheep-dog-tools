@@ -107,7 +107,7 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 		}
 	}
 
-	public MBTEdge createEdgeWithVertices(String sourceLabel, String targetLabel, String edgeLabel, Object edgeInput) {
+	public MBTEdge createEdgeWithVertices(String sourceLabel, String targetLabel, String edgeLabel, String edgeInput) {
 		MBTGraph<MBTVertex, MBTEdge> g = getThisGraph();
 		MBTVertex source = g.createVertex(sourceLabel);
 		MBTVertex target = g.createVertex(targetLabel);
@@ -117,17 +117,17 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 	// TODO remove input and use the label in its place. If the section/scenario
 	// name is stored in it, then make a list for that and add that information
 	// there.
-	public MBTEdge createEdgeWithInput(MBTVertex source, MBTVertex target, String edgeLabel, Object edgeInput) {
+	public MBTEdge createEdgeWithInput(MBTVertex source, MBTVertex target, String edgeLabel, String edgeInput) {
 		MBTGraph<MBTVertex, MBTEdge> g = getThisGraph();
-		// TODO if this throw a null pointer, update the code that calls this
-		String edgeInputAsString = edgeInput.toString();
-		MBTEdge edge = getEdgeByInput(source, target, edgeInputAsString);
+		MBTEdge edge = getEdgeByInput(source, target, edgeInput);
 		if (edge == null) {
 			edge = new MBTEdge(edgeLabel);
 			g.addEdge(source, target, edge);
 			g.setEdgeWeight(edge, 1.0);
 			edge.setValue(edgeInput);
 		} else {
+			// TODO I think this is to maintain the list of paths/section/scenarios. Change
+			// it to a list of tags
 			edge.setLabel(edge.getLabel() + "," + edgeLabel);
 		}
 		return edge;
@@ -136,10 +136,7 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 	public MBTEdge getEdgeByInput(MBTVertex source, MBTVertex target, String edgeInputAsString) {
 		MBTGraph<MBTVertex, MBTEdge> g = getThisGraph();
 		for (MBTEdge edge : g.getAllEdges(source, target)) {
-			Object edgeValue = edge.getValue();
-			if (edgeValue == null) {
-				edgeValue = "";
-			}
+			String edgeValue = edge.getValue();
 			if (edgeValue.toString().contentEquals(edgeInputAsString)) {
 				return edge;
 			}

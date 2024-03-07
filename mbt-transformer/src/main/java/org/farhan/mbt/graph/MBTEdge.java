@@ -7,17 +7,17 @@ import org.jgrapht.graph.DefaultWeightedEdge;
 public class MBTEdge extends DefaultWeightedEdge {
 
 	private static final long serialVersionUID = 5850254711369259654L;
-	private HashMap<String, Object> attributes;
+	private HashMap<String, String> attributes;
 
 	public MBTEdge(String label) {
-		attributes = new HashMap<String, Object>();
+		attributes = new HashMap<String, String>();
 		setLabel(label);
 		setTag("");
 		setValue("");
 		setDescription("");
 	}
 
-	public void addAttribute(String key, Object value) {
+	public void addAttribute(String key, String value) {
 		// the prefix is there to prevent an attribute matching tag or label
 		attributes.put("_" + key, value);
 	}
@@ -26,12 +26,11 @@ public class MBTEdge extends DefaultWeightedEdge {
 		return attributes.get("_" + key).toString();
 	}
 
-	// TODO make a dedicated setGraph method
-	public void setValue(Object graph) {
-		attributes.put("value", graph);
+	public void setValue(String value) {
+		attributes.put("value", value);
 	}
 
-	public Object getValue() {
+	public String getValue() {
 		return attributes.get("value");
 	}
 
@@ -81,7 +80,7 @@ public class MBTEdge extends DefaultWeightedEdge {
 		}
 		text += "\n\tvalue:";
 		if (getValue() != null) {
-			for (String line : getValue().toString().split("\n")) {
+			for (String line : getValue().split("\n")) {
 				text += "\n\t\t" + line;
 			}
 		}
