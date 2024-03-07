@@ -111,20 +111,16 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 		MBTGraph<MBTVertex, MBTEdge> g = getThisGraph();
 		MBTVertex source = g.createVertex(sourceLabel);
 		MBTVertex target = g.createVertex(targetLabel);
-		return createEdgeWithInput(source, target, edgeLabel, edgeInput);
+		return createEdge(source, target, edgeLabel);
 	}
 
-	// TODO remove input and use the label in its place. If the section/scenario
-	// name is stored in it, then make a list for that and add that information
-	// there.
-	public MBTEdge createEdgeWithInput(MBTVertex source, MBTVertex target, String edgeLabel, String edgeInput) {
+	public MBTEdge createEdge(MBTVertex source, MBTVertex target, String edgeLabel) {
 		MBTGraph<MBTVertex, MBTEdge> g = getThisGraph();
-		MBTEdge edge = getEdgeByInput(source, target, edgeInput);
+		MBTEdge edge = getEdgeByLabel(source, target, edgeLabel);
 		if (edge == null) {
 			edge = new MBTEdge(edgeLabel);
 			g.addEdge(source, target, edge);
 			g.setEdgeWeight(edge, 1.0);
-			edge.setValue(edgeInput);
 		} else {
 			// TODO I think this is to maintain the list of paths/section/scenarios. Change
 			// it to a list of tags
@@ -133,11 +129,10 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 		return edge;
 	}
 
-	public MBTEdge getEdgeByInput(MBTVertex source, MBTVertex target, String edgeInputAsString) {
+	public MBTEdge getEdgeByLabel(MBTVertex source, MBTVertex target, String edgeLabel) {
 		MBTGraph<MBTVertex, MBTEdge> g = getThisGraph();
 		for (MBTEdge edge : g.getAllEdges(source, target)) {
-			String edgeValue = edge.getValue();
-			if (edgeValue.toString().contentEquals(edgeInputAsString)) {
+			if (edge.getLabel().toString().contentEquals(edgeLabel)) {
 				return edge;
 			}
 		}

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
@@ -44,7 +45,8 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 			srcPrj.createObject(f.getAbsolutePath()).load();
 		}
 		// TODO this is an instance of selecting from multiple layers, think about how
-		// that factors into the multilayer model. Perhaps remove first,second third and make a dynamic list of 1,2,3?
+		// that factors into the multilayer model. Perhaps remove first,second third and
+		// make a dynamic list of 1,2,3?
 		files = Utilities.recursivelyListFiles(srcPrj.getDir(srcPrj.SECOND_LAYER),
 				srcPrj.getFileExt(srcPrj.SECOND_LAYER));
 		srcPrj.getObjects(srcPrj.SECOND_LAYER).clear();
@@ -103,7 +105,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 
 		boolean isField = false;
 		boolean isKeyword = true;
-		HashMap<String, String> dataTable = null;
+		TreeMap<String, String> dataTable = null;
 		// use loop with counters
 		// ignore 0, it's start
 		// ignore 1, it's blank edge
@@ -114,7 +116,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 			if (cs.contentEquals("start")) {
 				// if it's start, make empty map, set isField to true, is Keyword to false, skip
 				// empty edge
-				dataTable = new HashMap<String, String>();
+				dataTable = new TreeMap<String, String>();
 				isField = true;
 				isKeyword = false;
 				i++;
@@ -136,7 +138,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 					i++;
 				}
 			} else if (isField) {
-				// if isField, then add map element for i and i+1, then i++
+				// add map element for i and i+1, then i++
 				dataTable.put(cs, getLabel(steps.get(i + 1)));
 				i++;
 			}
@@ -170,17 +172,35 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		}
 	}
 
-	private void convertDataTableToArgument(HashMap<String, String> dataTable, Message theMessage) {
+	private void convertDataTableToArgument(TreeMap<String, String> dataTable, Message theMessage) {
 		ValueSpecification vs = createArgument(theMessage, "dataTable", "");
 
-		String headerRow = "";
-		String valueRow = "";
-		for (String columnName : dataTable.keySet()) {
-			headerRow += columnName + " |";
-			valueRow += dataTable.get(columnName) + " |";
+		String row = "";
+		for (String key : dataTable.keySet()) {
+			if (key.startsWith("0 ")) {
+				row += key.replaceFirst("0 ", "") + " |";
+			} else {
+				break;
+			}
 		}
-		createAnnotation(vs, "dataTable", String.valueOf(0), headerRow);
-		createAnnotation(vs, "dataTable", String.valueOf(1), valueRow);
+		createAnnotation(vs, "dataTable", String.valueOf(0), row);
+
+		// Why dataTable.size? That's all the cells...
+		// It's because that's the max I'd have to iterate for without having to use an
+		// infinite loop with a potentially buggy end condition, while(true) + break
+		// just makes me nervous
+		int rowCnt = 0;
+		row = "";
+		for (String key : dataTable.keySet()) {
+			if (key.startsWith(String.valueOf(rowCnt))) {
+				row += dataTable.get(key).replaceFirst(String.valueOf(rowCnt), "") + " |";
+			} else {
+				createAnnotation(vs, "dataTable", String.valueOf(rowCnt + 1), row);
+				rowCnt++;
+				row = dataTable.get(key).replaceFirst(String.valueOf(rowCnt), "") + " |";
+			}
+		}
+		createAnnotation(vs, "dataTable", String.valueOf(rowCnt + 1), row);
 	}
 
 	private String getSecondLayerClassName() {
@@ -210,7 +230,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 					path.setTags(e.getTag());
 					path.setDescription(e.getDescription());
 				}
-				ArrayList<MBTPath> edgePaths = getEdgePaths(e.getValue());
+				ArrayList<MBTPath> edgePaths = getEdgePaths(g.getEdgeSource(e).getLabel());
 				combinePaths(g, e, vertex, graphPaths, vertexPaths, edgePaths);
 			}
 			return graphPaths;
@@ -242,11 +262,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 
 					MBTPath pe = edgePaths.get(i);
 					MBTPath expandedPath = new MBTPath();
-					// TODO the use of i here is a temp measure. I forgot that multi-row Asciidoc
-					// tables create as many test cases. If I want multiple rows of data for one
-					// step, then I need to use merged cells but that's not ready yet. So for now to
-					// keep the names unique, I'm just adding the index
-					expandedPath.setLabel(vp.getLabel() + "." + i);
+					expandedPath.setLabel(vp.getLabel());
 					expandedPath.setTags(vp.getTags());
 					expandedPath.setDescription(vp.getDescription());
 					expandedPath.getPath().addAll(0, vp.getPath());

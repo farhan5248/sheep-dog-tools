@@ -42,7 +42,6 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 		MBTGraph<MBTVertex, MBTEdge> lastGraph = null;
 		Object lastObject = null;
 		boolean isSource = true;
-		boolean isValue = false;
 		boolean isDescription = false;
 		MBTVertex sourceVertex = null;
 		MBTVertex targetVertex = null;
@@ -80,14 +79,9 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 			} else if (line.startsWith("\tdescription:")) {
 				isDescription = true;
 			} else if (line.startsWith("\t\t\tdescription:")) {
-				isValue = false;
 				isDescription = true;
 			} else if (line.startsWith("\t\t\tvalue:") && lastObject instanceof MBTEdge) {
-				isValue = true;
 				isDescription = false;
-			} else if (isValue) {
-				isValue = false;
-				((MBTEdge) lastObject).setValue(line.trim());
 			} else if (isDescription) {
 				// if lastObject is null, it means this is the graph description
 				if (lastObject == null) {

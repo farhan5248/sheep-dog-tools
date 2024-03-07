@@ -25,8 +25,8 @@ Feature: Convert Document To Object Graph
           |   Label |       Tag |  Description |
           | Process | tag1,tag2 | Desc\nLine 2 |
       And The Process.graph file, Edges section will be as follows
-          |         Edge Name |     Label |       Tag |  Description |
-          | Step 1 ->  -> end | Story One | tag1,tag2 | Desc\nLine 2 |
+          |                  Edge Name |     Label |       Tag |  Description |
+          | Step 1 -> Story One -> end | Story One | tag1,tag2 | Desc\nLine 2 |
 
   Scenario: Convert a section to a vertex each with a single edge
 
@@ -46,9 +46,9 @@ Feature: Convert Document To Object Graph
           |         end |
           |      Step 1 |
       And The Process.graph file, Edges section will be as follows
-          |           Edge Name |
-          | start ->  -> Step 1 |
-          |   Step 1 ->  -> end |
+          |                  Edge Name |
+          |        start ->  -> Step 1 |
+          | Step 1 -> Story One -> end |
 
   Scenario: Convert multiple sections to multiple vertices each with a single edge
 
@@ -56,7 +56,7 @@ Feature: Convert Document To Object Graph
           """
           = Process
           
-          == Story name
+          == Story One
           
           * Step 1
           
@@ -71,10 +71,10 @@ Feature: Convert Document To Object Graph
           |      Step 1 |
           |      Step 2 |
       And The Process.graph file, Edges section will be as follows
-          |            Edge Name |
-          |  start ->  -> Step 1 |
-          | Step 1 ->  -> Step 2 |
-          |    Step 2 ->  -> end |
+          |                     Edge Name |
+          |           start ->  -> Step 1 |
+          | Step 1 -> Story One -> Step 2 |
+          |    Step 2 -> Story One -> end |
 
   Scenario: Convert multiple sections to just one vertex and edge
 
@@ -84,11 +84,11 @@ Feature: Convert Document To Object Graph
           """
           = Process
           
-          == Story 1
+          == Story One
           
           * Step 1
           
-          == Story 2
+          == Story Two
           
           * Step 1
           """
@@ -100,7 +100,8 @@ Feature: Convert Document To Object Graph
           |         end |
           |      Step 1 |
       And The Process.graph file, Edges section will be as follows
-          |           Edge Name |
-          | start ->  -> Step 1 |
-          |   Step 1 ->  -> end |
+          |                  Edge Name |
+# it doesn't make sense to have the comma, I guess issue 102 will resolve this
+          |       start -> , -> Step 1 |
+          | Step 1 -> Story One -> end |
 

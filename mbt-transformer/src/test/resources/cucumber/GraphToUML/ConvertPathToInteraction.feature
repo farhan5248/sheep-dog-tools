@@ -97,19 +97,18 @@ Feature: Convert Path To Interaction
 
       And The target/uml/pst.uml file, Class Interactions section will be as follows
           |     Class Name | Interaction Name |
-          | specs::Process |      Story One.0 |
-          | specs::Process |      Story One.1 |
+          | specs::Process |        Story One |
 
   Scenario: Convert scenario tags
 
       And The target/uml/pst.uml file, Interaction Parameters section will be as follows
-          |            Interaction Name | Parameter Name |
-          | specs::Process::Story One.0 |           tag1 |
-          | specs::Process::Story One.0 |           tag2 |
+          |          Interaction Name | Parameter Name |
+          | specs::Process::Story One |           tag1 |
+          | specs::Process::Story One |           tag2 |
 
   Scenario: Convert scenario description
 
       And The target/uml/pst.uml file, Interaction Comments section will be as follows
-          |            Interaction Name |      Comment |
-          | specs::Process::Story One.0 | Desc\nLine 2 |
+          |          Interaction Name |      Comment |
+          | specs::Process::Story One | Desc\nLine 2 |
 

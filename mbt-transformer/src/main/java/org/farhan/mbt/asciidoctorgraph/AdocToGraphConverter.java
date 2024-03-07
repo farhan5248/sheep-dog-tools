@@ -143,10 +143,9 @@ public class AdocToGraphConverter extends ToGraphConverter {
 			if (block instanceof Table) {
 				JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) tgtPrj
 						.createObject(convertObjectName(step.getText(), tgtPrj.SECOND_LAYER));
-				MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
+				MBTGraph<MBTVertex, MBTEdge> fieldGraph = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
 				Table table = (Table) block;
-				convertTableToEdges(table, tgt);
-				edge.setValue(tgt.getLabel());
+				convertTableToEdges(table, fieldGraph);
 			}
 		}
 	}
@@ -164,15 +163,15 @@ public class AdocToGraphConverter extends ToGraphConverter {
 						.createVertex(i + " " + table.getHeader().get(0).getCells().get(j).getText());
 				String newEdgeLabel = row.getCells().get(j).getText();
 				if (i == 0 && j == 0) {
-					graph.createEdgeWithInput(lastVertex, newVertex, lastEdgeLabel, lastEdgeLabel);
+					graph.createEdge(lastVertex, newVertex, lastEdgeLabel);
 				} else {
-					graph.createEdgeWithInput(lastVertex, newVertex, lastEdgeLabel, lastEdgeLabel);
+					graph.createEdge(lastVertex, newVertex, lastEdgeLabel);
 				}
 				lastVertex = newVertex;
 				lastEdgeLabel = newEdgeLabel;
 			}
 		}
 		// TODO this assumes the last column isn't blank, check it
-		graph.createEdgeWithInput(lastVertex, graph.getEndVertex(), lastEdgeLabel, lastEdgeLabel);
+		graph.createEdge(lastVertex, graph.getEndVertex(), lastEdgeLabel);
 	}
 }

@@ -6,10 +6,9 @@ Feature: Convert Vertex Or Edge To Message
           """
           Graph
           	name:Process
-          	tag:tag1,tag2
+          	tag:
           	description:
-          		Desc
-          		Line 2
+          		
           	vertices:
           		Vertex
           			label:start
@@ -22,73 +21,75 @@ Feature: Convert Vertex Or Edge To Message
           			label:
           			tag:
           			description:
+          				
           			source:
           				Vertex
           					label:start
           			target:
           				Vertex
           					label:The Search application, Home page is empty
-          			value:
           		Edge
           			label:Story One
-          			tag:tag1,tag2
+          			tag:
           			description:
-          				Desc
-          				Line 2
+          				
           			source:
           				Vertex
           					label:The Search application, Home page is empty
           			target:
           				Vertex
           					label:end
-          			value:
-          				The Search application, Home page is empty
           """
     Given The mbt-transformer plugin, target/Graphs/stepdefs/The Search application Home page is empty.graph file is as follows
           """
           Graph
           	name:The Search application, Home page is empty
+          	tag:
+          	description:
+          		
           	vertices:
           		Vertex
           			label:start
           		Vertex
           			label:end
           		Vertex
-          			label:ins
+          			label:0 ins
+          		Vertex
+          			label:1 ins
           	edges:
           		Edge
           			label:
+          			tag:
+          			description:
+          				
           			source:
           				Vertex
           					label:start
           			target:
           				Vertex
-          					label:ins
-          			tag:
-          			value:
-          
-          		Edge
-          			label:5
-          			source:
-          				Vertex
-          					label:ins
-          			target:
-          				Vertex
-          					label:end
-          			tag:
-          			value:
-          				5
+          					label:0 ins
           		Edge
           			label:4
+          			tag:
+          			description:
+          				
           			source:
           				Vertex
-          					label:ins
+          					label:0 ins
+          			target:
+          				Vertex
+          					label:1 ins
+          		Edge
+          			label:5
+          			tag:
+          			description:
+          				
+          			source:
+          				Vertex
+          					label:1 ins
           			target:
           				Vertex
           					label:end
-          			tag:
-          			value:
-          				4
           """
      When The mbt-transformer plugin, graph-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
@@ -109,23 +110,23 @@ Feature: Convert Vertex Or Edge To Message
   Scenario: Convert path element to interaction messages
 
       And The target/uml/pst.uml file, Interaction Messages section will be as follows
-          |            Interaction Name |                                    Message |
-          | specs::Process::Story One.0 | The Search application, Home page is empty |
+          |          Interaction Name |                                    Message |
+          | specs::Process::Story One | The Search application, Home page is empty |
       And The target/uml/pst.uml file, Interaction Lifelines section will be as follows
-          |            Interaction Name |       Lifeline Name |                      Lifeline Represents |
-          | specs::Process::Story One.0 |                this |                pst::specs::Process::this |
-          | specs::Process::Story One.0 | SearchHomePageSteps | pst::specs::Process::SearchHomePageSteps |
+          |          Interaction Name |       Lifeline Name |                      Lifeline Represents |
+          | specs::Process::Story One |                this |                pst::specs::Process::this |
+          | specs::Process::Story One | SearchHomePageSteps | pst::specs::Process::SearchHomePageSteps |
       And The target/uml/pst.uml file, Interaction Message Occurences section will be as follows
-          |            Interaction Name | Message Occurence |    Lifeline Covered |
-          | specs::Process::Story One.0 |         SendEvent |                this |
-          | specs::Process::Story One.0 |      ReceiveEvent | SearchHomePageSteps |
+          |          Interaction Name | Message Occurence |    Lifeline Covered |
+          | specs::Process::Story One |         SendEvent |                this |
+          | specs::Process::Story One |      ReceiveEvent | SearchHomePageSteps |
 
+  @debug
   Scenario: Convert path element to message annotations
 
       And The target/uml/pst.uml file, Interaction Messages section will be as follows
-          |            Interaction Name |                                    Message | Argument Name | Annotation Detail |
-          | specs::Process::Story One.0 | The Search application, Home page is empty |     dataTable |       0 -> ins \| |
-          | specs::Process::Story One.0 | The Search application, Home page is empty |     dataTable |         1 -> 5 \| |
-          | specs::Process::Story One.1 | The Search application, Home page is empty |     dataTable |       0 -> ins \| |
-          | specs::Process::Story One.1 | The Search application, Home page is empty |     dataTable |         1 -> 4 \| |
+          |          Interaction Name |                                    Message | Argument Name | Annotation Detail |
+          | specs::Process::Story One | The Search application, Home page is empty |     dataTable |       0 -> ins \| |
+          | specs::Process::Story One | The Search application, Home page is empty |     dataTable |         1 -> 4 \| |
+          | specs::Process::Story One | The Search application, Home page is empty |     dataTable |         2 -> 5 \| |
 
