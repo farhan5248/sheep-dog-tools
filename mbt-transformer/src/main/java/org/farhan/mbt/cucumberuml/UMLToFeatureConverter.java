@@ -55,8 +55,8 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 	}
 
 	@Override
-	protected void convertObject(ConvertibleObject layerClass) throws Exception {
-		UMLClassWrapper ucw = (UMLClassWrapper) layerClass;
+	protected void convertObject(ConvertibleObject theObject) throws Exception {
+		UMLClassWrapper ucw = (UMLClassWrapper) theObject;
 		Class c = (Class) ucw.get();
 		String path = convertObjectName(c.getQualifiedName());
 		tgtWrp = (CucumberFeatureWrapper) tgtPrj.createObject(path);
@@ -110,7 +110,6 @@ public class UMLToFeatureConverter extends ToCodeConverter {
 
 	@Override
 	protected void convertBehaviours(ConvertibleObject layerClass) throws Exception {
-		// TODO there's no scenario outline, just scenario for now
 		UMLClassWrapper ucw = (UMLClassWrapper) layerClass;
 		for (Behavior aBehavior : ((Class) ucw.get()).getOwnedBehaviors()) {
 			if (aBehavior instanceof Interaction) {

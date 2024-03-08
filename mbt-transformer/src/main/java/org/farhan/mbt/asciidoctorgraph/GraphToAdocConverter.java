@@ -7,12 +7,15 @@ import org.asciidoctor.ast.Row;
 import org.asciidoctor.ast.Section;
 import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
+import org.eclipse.uml2.uml.Interaction;
+import org.eclipse.uml2.uml.Message;
 import org.asciidoctor.ast.Document;
 import org.asciidoctor.ast.List;
 import org.asciidoctor.ast.ListItem;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.ToDocumentConverter;
 import org.farhan.mbt.core.ToGraphConverter;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.graph.JGraphTProject;
@@ -21,17 +24,14 @@ import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
 import org.farhan.mbt.graph.MBTVertex;
 
-public class AdocToGraphConverter extends ToGraphConverter {
+public class GraphToAdocConverter extends ToDocumentConverter {
 
-	private JGraphTGraphWrapper tgtWrp;
-	private AsciiDoctorProject srcPrj;
+	private AsciiDoctorAdocWrapper tgtWrp;
+	private JGraphTProject srcPrj;
 
-	// This is used to assign each testcase/path/scenario/scenario outline example
-	// row with a unique ID which is then stored in the collection of path
-	// information in the graph
 	private int pathCnt;
 
-	public AdocToGraphConverter(String layer, AsciiDoctorProject source, JGraphTProject target) {
+	public GraphToAdocConverter(String layer, JGraphTProject source, AsciiDoctorProject target) {
 		this.layer = layer;
 		this.srcPrj = source;
 		this.tgtPrj = target;
@@ -49,10 +49,10 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	}
 
 	@Override
-	protected void convertObject(ConvertibleObject theObject) throws Exception {
-		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) theObject;
-		Document src = (Document) adaw.get();
-		tgtWrp = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(src.getTitle()));
+	protected void convertObject(ConvertibleObject object) throws Exception {
+		JGraphTGraphWrapper adaw = (JGraphTGraphWrapper) object;
+		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
+		tgtWrp = (AsciiDoctorAdocWrapper) tgtPrj.createObject(convertObjectName(g.getName()));
 	}
 
 	@Override
@@ -163,14 +163,18 @@ public class AdocToGraphConverter extends ToGraphConverter {
 						MBTVertex newVertex = fieldGraph
 								.createVertex(i + " " + table.getHeader().get(0).getCells().get(j).getText());
 						String newEdgeLabel = row.getCells().get(j).getText();
-						fieldGraph.createEdge(lastVertex, newVertex, lastEdgeLabel, String.valueOf(pathCnt));
+						if (i == 0 && j == 0) {
+							fieldGraph.createEdge(lastVertex, newVertex, lastEdgeLabel, String.valueOf(pathCnt));
+						} else {
+							fieldGraph.createEdge(lastVertex, newVertex, lastEdgeLabel, String.valueOf(pathCnt));
+						}
 						lastVertex = newVertex;
 						lastEdgeLabel = newEdgeLabel;
 					}
 				}
+				// TODO this assumes the last column isn't blank, check it
 				fieldGraph.createEdge(lastVertex, fieldGraph.getEndVertex(), lastEdgeLabel, String.valueOf(pathCnt));
 			}
 		}
 	}
-
 }

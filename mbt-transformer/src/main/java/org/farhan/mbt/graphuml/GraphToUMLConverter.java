@@ -67,7 +67,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		tgtWrp = (UMLClassWrapper) tgtPrj.createObject(qualifiedName);
 		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) jgw.get();
 		createAnnotation((Class) tgtWrp.get(), "title", g.getName());
-		for (String t : g.getTag().split(",")) {
+		for (String t : g.getTags().split(",")) {
 			createAnnotation((Class) tgtWrp.get(), "tags", t);
 		}
 		((Class) tgtWrp.get()).createOwnedComment().setBody(g.getDescription());

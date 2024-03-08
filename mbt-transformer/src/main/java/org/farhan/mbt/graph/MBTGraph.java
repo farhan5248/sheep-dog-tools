@@ -20,7 +20,7 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 		super(edgeClass);
 		attributes = new HashMap<String, String>();
 		paths = new ArrayList<MBTPathInfo>();
-		setTag("");
+		setTags("");
 		setDescription("");
 	}
 
@@ -40,12 +40,12 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 		paths.add(new MBTPathInfo(id, name, tags, description));
 	}
 
-	public void setTag(String tag) {
-		attributes.put("tag", tag);
+	public void setTags(String tag) {
+		attributes.put("tags", tag);
 	}
 
-	public String getTag() {
-		return attributes.get("tag").toString();
+	public String getTags() {
+		return attributes.get("tags").toString();
 	}
 
 	public void setDescription(String description) {
@@ -67,7 +67,7 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 	public String toString() {
 		String text = "Graph";
 		text += "\n\tname:" + getName();
-		text += "\n\ttag:" + getTag();
+		text += "\n\ttag:" + getTags();
 		text += "\n\tdescription:";
 		if (getDescription() != null) {
 			for (String line : getDescription().toString().split("\n")) {

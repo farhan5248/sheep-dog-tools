@@ -131,6 +131,6 @@ public abstract class GraphFileObject extends FileObject {
 
 	protected void assertGraphTag(String tag) {
 		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
-		Assertions.assertEquals(tag, g.getTag());
+		Assertions.assertEquals(tag, g.getTags());
 	}
 }

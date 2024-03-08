@@ -48,7 +48,8 @@ public abstract class GraphTestObjectFactory {
 				}
 			}
 		} catch (Exception e) {
-			Assertions.fail("There was an error creating class\n");
+			Assertions
+					.fail("There was an error creating class for package, " + packageName + " in class, " + className);
 		}
 		return null;
 	}

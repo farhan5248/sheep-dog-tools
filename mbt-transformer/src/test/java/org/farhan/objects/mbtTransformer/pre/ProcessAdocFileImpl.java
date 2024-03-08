@@ -7,11 +7,14 @@ import org.farhan.objects.mbtTransformer.ProcessAdocFile;
 
 public class ProcessAdocFileImpl extends FileObject implements ProcessAdocFile {
 
+	@Override
+	public void assertContent(HashMap<String, String> keyMap) {
+		assertContent(keyMap.get("Content"));
+	}
+
+	@Override
 	public void setContent(HashMap<String, String> keyMap) {
 		setContent(keyMap.get("Content"));
 	}
 
-	public void assertContent(HashMap<String, String> keyMap) {
-		assertContent(keyMap.get("Content"));
-	}
 }

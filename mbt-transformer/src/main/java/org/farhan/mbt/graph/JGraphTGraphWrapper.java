@@ -52,7 +52,7 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 			} else if (line.startsWith("\tname:")) {
 				lastGraph.setName(line.replace("\tname:", ""));
 			} else if (line.startsWith("\ttag:")) {
-				lastGraph.setTag(line.replace("\ttag:", ""));
+				lastGraph.setTags(line.replace("\ttag:", ""));
 			} else if (line.startsWith("\tdescription:")) {
 				isDescription = true;
 			} else if (line.startsWith("\tpaths:")) {

@@ -1,7 +1,7 @@
 @debug
 Feature: Convert AsciiDoctor To Graph To Cucumber
 
-  Scenario: Create a feature file with one scenario
+  Scenario: Create a feature file from adoc file
 
     Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
           """
