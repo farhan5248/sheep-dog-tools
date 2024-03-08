@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 public interface ProcessGraphFile {
 
+    public void assertContent(HashMap<String, String> keyMap);
+
     public void assertEdgesSectionEdgeName(HashMap<String, String> keyMap);
 
     public void assertGraphSectionDescription(HashMap<String, String> keyMap);

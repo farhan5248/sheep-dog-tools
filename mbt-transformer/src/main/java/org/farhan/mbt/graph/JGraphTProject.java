@@ -61,15 +61,36 @@ public class JGraphTProject extends ConvertibleProject {
 
 	@Override
 	public ConvertibleObject createObject(String name) {
-
-		File file = new File(name);
-		JGraphTGraphWrapper gtf = new JGraphTGraphWrapper(new File(name.replace(",", "")));
-		if (file.getAbsolutePath().contains(getDir(FIRST_LAYER).getName())) {
-			firstLayerObjects.add(gtf);
-		} else {
-			secondLayerObjects.add(gtf);
+		JGraphTGraphWrapper jgw = getGraph(name);
+		if (jgw == null) {
+			File file = new File(name);
+			jgw = new JGraphTGraphWrapper(new File(name));
+			if (file.getAbsolutePath().contains(getDir(FIRST_LAYER).getName())) {
+				firstLayerObjects.add(jgw);
+			} else {
+				secondLayerObjects.add(jgw);
+			}
 		}
-		return gtf;
+		return jgw;
+	}
+
+	private JGraphTGraphWrapper getGraph(String fileName) {
+
+		// TODO this is an ugly hack, refactor it, there's similar code in the Converter
+		// classes
+
+		String layer = FIRST_LAYER;
+		if (fileName.contains(SECOND_LAYER)) {
+			layer = SECOND_LAYER;
+		}
+		for (Object o : getObjects(layer)) {
+
+			JGraphTGraphWrapper jgw = (JGraphTGraphWrapper) o;
+			if (jgw.getFile().getAbsolutePath().contentEquals(fileName)) {
+				return jgw;
+			}
+		}
+		return null;
 	}
 
 }

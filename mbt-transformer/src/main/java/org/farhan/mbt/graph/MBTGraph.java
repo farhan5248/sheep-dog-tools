@@ -24,12 +24,12 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 		setDescription("");
 	}
 
-	public String getLabel() {
-		return attributes.get("label").toString();
+	public String getName() {
+		return attributes.get("name").toString();
 	}
 
-	public void setLabel(String label) {
-		attributes.put("label", label);
+	public void setName(String label) {
+		attributes.put("name", label);
 	}
 
 	public void addPath(MBTPathInfo path) {
@@ -66,7 +66,7 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 
 	public String toString() {
 		String text = "Graph";
-		text += "\n\tname:" + getLabel();
+		text += "\n\tname:" + getName();
 		text += "\n\ttag:" + getTag();
 		text += "\n\tdescription:";
 		if (getDescription() != null) {

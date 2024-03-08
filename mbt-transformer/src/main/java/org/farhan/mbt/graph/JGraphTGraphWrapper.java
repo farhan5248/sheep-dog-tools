@@ -14,7 +14,7 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 		theFile = f;
 		theGraph = new MBTGraph<MBTVertex, MBTEdge>(MBTEdge.class);
 		// TODO get the file extension from the project?
-		theGraph.setLabel(f.getName().replace(".graph", ""));
+		theGraph.setName(f.getName().replace(".graph", ""));
 		theGraph.createStartVertex();
 		theGraph.createEndVertex();
 	}
@@ -22,7 +22,7 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 	@Override
 	public void setFile(File theFile) {
 		this.theFile = theFile;
-		theGraph.setLabel(theFile.getName());
+		theGraph.setName(theFile.getName());
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 				lastGraph = new MBTGraph<MBTVertex, MBTEdge>(MBTEdge.class);
 				theGraph = lastGraph;
 			} else if (line.startsWith("\tname:")) {
-				lastGraph.setLabel(line.replace("\tname:", ""));
+				lastGraph.setName(line.replace("\tname:", ""));
 			} else if (line.startsWith("\ttag:")) {
 				lastGraph.setTag(line.replace("\ttag:", ""));
 			} else if (line.startsWith("\tdescription:")) {

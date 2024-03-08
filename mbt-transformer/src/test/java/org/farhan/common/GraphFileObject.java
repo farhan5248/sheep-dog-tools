@@ -20,13 +20,13 @@ public abstract class GraphFileObject extends FileObject {
 	private MBTGraph<MBTVertex, MBTEdge> getGraph(String graphName) {
 		for (Object o : graphProject.getObjects(graphProject.FIRST_LAYER)) {
 			MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) ((JGraphTGraphWrapper) o).get();
-			if (g.getLabel().contentEquals(graphName.replace(".graph", ""))) {
+			if (g.getName().contentEquals(graphName.replace(".graph", ""))) {
 				return g;
 			}
 		}
 		for (Object o : graphProject.getObjects(graphProject.SECOND_LAYER)) {
 			MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) ((JGraphTGraphWrapper) o).get();
-			if (g.getLabel().contentEquals(graphName.replace(".graph", ""))) {
+			if (g.getName().contentEquals(graphName.replace(".graph", ""))) {
 				return g;
 			}
 		}
@@ -126,7 +126,7 @@ public abstract class GraphFileObject extends FileObject {
 
 	protected void assertGraphName(String label) {
 		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
-		Assertions.assertEquals(label, g.getLabel());
+		Assertions.assertEquals(label, g.getName());
 	}
 
 	protected void assertGraphTag(String tag) {

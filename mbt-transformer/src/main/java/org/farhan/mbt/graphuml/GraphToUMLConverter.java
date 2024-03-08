@@ -66,7 +66,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		String qualifiedName = convertObjectName(jgw.getFile().getAbsolutePath());
 		tgtWrp = (UMLClassWrapper) tgtPrj.createObject(qualifiedName);
 		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) jgw.get();
-		createAnnotation((Class) tgtWrp.get(), "title", g.getLabel());
+		createAnnotation((Class) tgtWrp.get(), "title", g.getName());
 		for (String t : g.getTag().split(",")) {
 			createAnnotation((Class) tgtWrp.get(), "tags", t);
 		}
@@ -233,7 +233,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	private MBTGraph<MBTVertex, MBTEdge> getGraph(String graphName) {
 		for (Object o : srcPrj.getObjects(srcPrj.SECOND_LAYER)) {
 			MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) ((JGraphTGraphWrapper) o).get();
-			if (g.getLabel().contentEquals(graphName)) {
+			if (g.getName().contentEquals(graphName)) {
 				return g;
 			}
 		}

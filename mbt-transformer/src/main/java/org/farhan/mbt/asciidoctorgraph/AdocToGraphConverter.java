@@ -2,10 +2,7 @@ package org.farhan.mbt.asciidoctorgraph;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Map;
-
 import org.asciidoctor.ast.Block;
-import org.asciidoctor.ast.Cell;
 import org.asciidoctor.ast.Row;
 import org.asciidoctor.ast.Section;
 import org.asciidoctor.ast.StructuralNode;
@@ -64,7 +61,8 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	}
 
 	private String convertObjectName(String documentTitle, String layer) {
-		return tgtPrj.getDir(layer).getAbsolutePath() + File.separator + documentTitle + tgtPrj.getFileExt(layer);
+		return tgtPrj.getDir(layer).getAbsolutePath() + File.separator + documentTitle.replace(",", "")
+				+ tgtPrj.getFileExt(layer);
 	}
 
 	@Override
@@ -77,23 +75,24 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) object;
 		Document src = (Document) adaw.get();
 		MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
-		tgt.setTag(getSectionAttributes(src));
+		tgt.setTag(convertSectionAttributesToTags(src));
 		for (StructuralNode block : src.getBlocks()) {
 			if (block instanceof Section) {
-				convertSections(tgt, (Section) block);
+				convertSectionsToScenarios(tgt, (Section) block);
 			} else if (block instanceof Block) {
-				tgt.setDescription(getSectionText(block));
+				tgt.setDescription(convertSectionTextToDescription(block));
 			}
 		}
 	}
 
-	private void convertSections(MBTGraph<MBTVertex, MBTEdge> g, Section scenario) {
+	private void convertSectionsToScenarios(MBTGraph<MBTVertex, MBTEdge> g, Section scenario) {
 
 		pathCnt++;
-		g.addPath(String.valueOf(pathCnt), scenario.getTitle(), getSectionAttributes(scenario),
-				getSectionText(scenario));
+		g.addPath(String.valueOf(pathCnt), scenario.getTitle(), convertSectionAttributesToTags(scenario),
+				convertSectionTextToDescription(scenario));
 		ArrayList<ListItem> steps = convertBlocksToSteps(scenario);
-		g.createEdgeWithVertices(g.getStartVertex().getLabel(), steps.getFirst().getText(), "", String.valueOf(pathCnt));
+		g.createEdgeWithVertices(g.getStartVertex().getLabel(), steps.getFirst().getText(), "",
+				String.valueOf(pathCnt));
 		for (int i = 0; i < steps.size(); i++) {
 			String source = steps.get(i).getText();
 			String target;
@@ -124,7 +123,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		return steps;
 	}
 
-	private String getSectionAttributes(StructuralNode section) {
+	private String convertSectionAttributesToTags(StructuralNode section) {
 		String tags = (String) section.getAttributes().get("tags");
 		if (tags == null) {
 			return "";
@@ -133,7 +132,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		}
 	}
 
-	private String getSectionText(StructuralNode section) {
+	private String convertSectionTextToDescription(StructuralNode section) {
 		String text = "";
 		for (StructuralNode block : section.getBlocks()) {
 			if (block instanceof Block) {
@@ -152,6 +151,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 				JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) tgtPrj
 						.createObject(convertObjectName(step.getText(), tgtPrj.SECOND_LAYER));
 				MBTGraph<MBTVertex, MBTEdge> fieldGraph = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
+				fieldGraph.setName(step.getText());
 				Table table = (Table) block;
 				MBTVertex lastVertex = fieldGraph.getStartVertex();
 				String lastEdgeLabel = "";

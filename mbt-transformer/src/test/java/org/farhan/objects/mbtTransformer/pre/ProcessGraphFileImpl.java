@@ -56,4 +56,9 @@ public class ProcessGraphFileImpl extends GraphFileObject implements ProcessGrap
 	public void assertPathsSectionTag(HashMap<String, String> keyMap) {
 		assertPathsTag(keyMap.get("Name"), keyMap.get("Tag"));
 	}
+
+	@Override
+	public void assertContent(HashMap<String, String> keyMap) {
+		assertContent(keyMap.get("Content"));
+	}
 }

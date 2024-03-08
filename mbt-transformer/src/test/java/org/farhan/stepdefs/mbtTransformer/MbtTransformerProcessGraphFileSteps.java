@@ -13,6 +13,13 @@ public class MbtTransformerProcessGraphFileSteps {
         MbtTransformerFactory.get("ProcessGraphFile").setInputOutputs("Content", docString);
     }
 
+    @Given("^The mbt-transformer plugin, target/Graphs/specs/Process.graph file will be as follows$")
+    public void theMbtTransformerPluginTargetGraphsSpecsProcessGraphFileWillBeAsFollows(String docString) {
+        MbtTransformerFactory.get("ProcessGraphFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessGraphFile").setPath("target/Graphs/specs/Process.graph");
+        MbtTransformerFactory.get("ProcessGraphFile").assertInputOutputs("Content", docString);
+    }
+
     @Given("^The mbt-transformer plugin, target/Graphs/specs/Process.graph file will be present$")
     public void theMbtTransformerPluginTargetGraphsSpecsProcessGraphFileWillBePresent() {
         MbtTransformerFactory.get("ProcessGraphFile").setComponent("mbt-transformer");

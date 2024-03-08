@@ -1,4 +1,5 @@
-Feature: Convert Scenario To Interaction To Scenario
+@debug
+Feature: Convert Cucumber To UML To Cucumber
 
   Background: Create a feature file
 
