@@ -2,14 +2,11 @@ package org.farhan.mbt.asciidoctorgraph;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Map;
+import java.util.Set;
 
 import org.asciidoctor.ast.Block;
-import org.asciidoctor.ast.Row;
 import org.asciidoctor.ast.Section;
-import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
-import org.asciidoctor.jruby.ast.impl.SectionImpl;
 import org.asciidoctor.jruby.extension.internal.JRubyProcessor;
 import org.asciidoctor.ast.Document;
 import org.asciidoctor.ast.List;
@@ -23,6 +20,7 @@ import org.farhan.mbt.graph.JGraphTProject;
 import org.farhan.mbt.graph.JGraphTGraphWrapper;
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
+import org.farhan.mbt.graph.MBTPathInfo;
 import org.farhan.mbt.graph.MBTVertex;
 
 public class GraphToAdocConverter extends ToDocumentConverter {
@@ -42,9 +40,19 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 
 	@Override
 	protected void selectObjects() throws Exception {
+		// TODO duplicate method from GraphToUMLConverter
 		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(srcPrj.FIRST_LAYER),
 				srcPrj.getFileExt(srcPrj.FIRST_LAYER));
 		srcPrj.getObjects(srcPrj.FIRST_LAYER).clear();
+		for (File f : files) {
+			srcPrj.createObject(f.getAbsolutePath()).load();
+		}
+		// TODO this is an instance of selecting from multiple layers, think about how
+		// that factors into the multilayer model. Perhaps remove first,second third and
+		// make a dynamic list of 1,2,3?
+		files = Utilities.recursivelyListFiles(srcPrj.getDir(srcPrj.SECOND_LAYER),
+				srcPrj.getFileExt(srcPrj.SECOND_LAYER));
+		srcPrj.getObjects(srcPrj.SECOND_LAYER).clear();
 		for (File f : files) {
 			srcPrj.createObject(f.getAbsolutePath()).load();
 		}
@@ -79,99 +87,90 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 
 	@Override
 	protected void convertElements(ConvertibleObject object) throws Exception {
+		JGraphTGraphWrapper adaw = (JGraphTGraphWrapper) object;
+		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) adaw.get();
+		Document theDoc = (Document) tgtWrp.get();
+		for (MBTPathInfo pi : g.getPathInfo()) {
 
-	}
+			Section section = jrp.createSection(theDoc);
+			theDoc.getBlocks().add(section);
+			section.setTitle(pi.getName());
+			section.getAttributes().put("tags", pi.getTags());
+			Block block = jrp.createBlock(section, "paragraph", pi.getDescription());
+			section.getBlocks().add(block);
 
-	private void convertSectionsToScenarios(MBTGraph<MBTVertex, MBTEdge> g, Section scenario) {
-
-		pathCnt++;
-		g.addPath(String.valueOf(pathCnt), scenario.getTitle(), convertSectionAttributesToTags(scenario),
-				convertSectionTextToDescription(scenario));
-		ArrayList<ListItem> steps = convertBlocksToSteps(scenario);
-		g.createEdgeWithVertices(g.getStartVertex().getLabel(), steps.getFirst().getText(), "",
-				String.valueOf(pathCnt));
-		for (int i = 0; i < steps.size(); i++) {
-			String source = steps.get(i).getText();
-			String target;
-			if (i == steps.size() - 1) {
-				target = g.getEndVertex().getLabel();
-			} else {
-				target = steps.get(i + 1).getText();
-			}
-			g.createEdgeWithVertices(source, target, "", String.valueOf(pathCnt));
-			convertTableToGraph(steps.get(i), scenario.getTitle());
-		}
-	}
-
-	private ArrayList<ListItem> convertBlocksToSteps(Section scenario) {
-		ArrayList<ListItem> steps = new ArrayList<ListItem>();
-		for (StructuralNode block : scenario.getBlocks()) {
-			if (block instanceof List) {
-				for (StructuralNode step : ((List) block).getItems()) {
-					steps.add((ListItem) step);
-				}
-			} else if (block instanceof Table) {
-				// So this is a hack to reduce code changes for now. Not sure if this will come
-				// back to bite me. What I did learn is that I can read an empty adoc file and
-				// then dynamically create the sections :)
-				steps.getLast().getBlocks().add(block);
-			}
-		}
-		return steps;
-	}
-
-	private String convertSectionAttributesToTags(StructuralNode section) {
-		String tags = (String) section.getAttributes().get("tags");
-		if (tags == null) {
-			return "";
-		} else {
-			return tags;
-		}
-	}
-
-	private String convertSectionTextToDescription(StructuralNode section) {
-		String text = "";
-		for (StructuralNode block : section.getBlocks()) {
-			if (block instanceof Block) {
-				text += "\n\n" + ((Block) block).getSource();
-			} else {
-				break;
-			}
-		}
-		text = text.trim();
-		return text;
-	}
-
-	private void convertTableToGraph(ListItem step, String scenarioTitle) {
-		for (StructuralNode block : step.getBlocks()) {
-			if (block instanceof Table) {
-				JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) tgtPrj
-						.createObject(convertObjectName(step.getText(), tgtPrj.SECOND_LAYER));
-				MBTGraph<MBTVertex, MBTEdge> fieldGraph = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
-				fieldGraph.setName(step.getText());
-				Table table = (Table) block;
-				MBTVertex lastVertex = fieldGraph.getStartVertex();
-				String lastEdgeLabel = "";
-				int rowCnt = table.getBody().size();
-				for (int i = 0; i < rowCnt; i++) {
-					Row row = table.getBody().get(i);
-					int cellCnt = row.getCells().size();
-					for (int j = 0; j < cellCnt; j++) {
-						MBTVertex newVertex = fieldGraph
-								.createVertex(i + " " + table.getHeader().get(0).getCells().get(j).getText());
-						String newEdgeLabel = row.getCells().get(j).getText();
-						if (i == 0 && j == 0) {
-							fieldGraph.createEdge(lastVertex, newVertex, lastEdgeLabel, String.valueOf(pathCnt));
-						} else {
-							fieldGraph.createEdge(lastVertex, newVertex, lastEdgeLabel, String.valueOf(pathCnt));
-						}
-						lastVertex = newVertex;
-						lastEdgeLabel = newEdgeLabel;
+			List list = jrp.createList(section, "olist");
+			section.getBlocks().add(list);
+			ArrayList<Object> p = getPath(g, g.getStartVertex(), pi);
+			for (Object o : p) {
+				if (o instanceof MBTVertex) {
+					MBTVertex v = (MBTVertex) o;
+					if (!v.getLabel().contentEquals(g.getStartVertex().getLabel())
+							&& !v.getLabel().contentEquals(g.getEndVertex().getLabel())) {
+						ListItem listItem = jrp.createListItem(list, getLabel(o));
+						list.getItems().add(listItem);
+					}
+				} else {
+					MBTEdge e = (MBTEdge) o;
+					MBTGraph<MBTVertex, MBTEdge> edgeGraph = getGraph(g.getEdgeSource(e).getLabel());
+					if (edgeGraph != null) {
+						ArrayList<Object> edgePath = getPath(edgeGraph, edgeGraph.getStartVertex(), pi);
+						ListItem listItem = (ListItem) list.getItems().getLast();
+						Table table = jrp.createTable(listItem);
+						listItem.getBlocks().add(table);
+						convertPathToTable(edgePath, table);
 					}
 				}
-				// TODO this assumes the last column isn't blank, check it
-				fieldGraph.createEdge(lastVertex, fieldGraph.getEndVertex(), lastEdgeLabel, String.valueOf(pathCnt));
 			}
+		}
+	}
+
+	private void convertPathToTable(ArrayList<Object> edgePath, Table table) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private ArrayList<Object> getPath(MBTGraph<MBTVertex, MBTEdge> g, MBTVertex vertex, MBTPathInfo pi) {
+
+		// TODO this is a duplicate method, instead of removing the Wrapper classes,
+		// perhaps all the UML/Graph stuff should go in there and there should be basic
+		// methods like create feature, scenario, step that manages the Class/Graph/Java
+		// code? I'll try that out in April.
+
+		ArrayList<Object> path = null;
+		Set<MBTEdge> edges = g.outgoingEdgesOf(vertex);
+		if (edges.isEmpty()) {
+			path = new ArrayList<Object>();
+			path.add(vertex);
+		} else {
+			for (MBTEdge e : edges) {
+				if (pi.isCoveredBy(e)) {
+					path = getPath(g, g.getEdgeTarget(e), pi);
+					path.add(0, e);
+					path.add(0, vertex);
+				}
+			}
+		}
+		return path;
+	}
+
+	private MBTGraph<MBTVertex, MBTEdge> getGraph(String graphName) {
+		// TODO This is a duplicate method like above
+		for (Object o : srcPrj.getObjects(srcPrj.SECOND_LAYER)) {
+			MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) ((JGraphTGraphWrapper) o).get();
+			if (g.getName().contentEquals(graphName)) {
+				return g;
+			}
+		}
+		return null;
+	}
+
+	private String getLabel(Object o) {
+		// TODO also a duplicate, maybe make a super type for label, name, tag etc?
+		if (o instanceof MBTVertex) {
+			return ((MBTVertex) o).getLabel();
+		} else {
+			return ((MBTEdge) o).getLabel();
 		}
 	}
 }

@@ -6,6 +6,11 @@ import org.asciidoctor.Options;
 import org.asciidoctor.Asciidoctor.Factory;
 import org.asciidoctor.ast.Block;
 import org.asciidoctor.ast.Document;
+import org.asciidoctor.ast.List;
+import org.asciidoctor.ast.ListItem;
+import org.asciidoctor.ast.Section;
+import org.asciidoctor.ast.StructuralNode;
+import org.asciidoctor.ast.Table;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Utilities;
 
@@ -47,12 +52,37 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		text += ":tags: " + theDoc.getAttribute("tags") + "\n";
 		text += "= " + theDoc.getTitle() + "\n";
 		text += "\n";
-		text += blockToText() + "\n";
+		text += ((Block) theDoc.getBlocks().getFirst()).getSource() + "\n";
+		for (int i = 1; i < theDoc.getBlocks().size(); i++) {
+			Section section = (Section) theDoc.getBlocks().get(i);
+			text += "\n";
+			text += "[tags=\"" + section.getAttribute("tags") + "\"]" + "\n";
+			text += "== " + section.getTitle() + "\n";
+			for (StructuralNode ssn : section.getBlocks()) {
+				if (ssn instanceof Block) {
+					Block b = (Block) ssn;
+					text += "\n";
+					text += b.getSource() + "\n";
+				} else if (ssn instanceof List) {
+					List l = (List) ssn;
+					text += "\n";
+					for (StructuralNode lsn : l.getItems()) {
+						ListItem li = (ListItem) lsn;
+						text += "* " + li.getText() + "\n";
+						for (StructuralNode lisn : li.getBlocks()) {
+							Table t = (Table) lisn;
+							text += "\n";
+							text += "[options=\"header\"]\n";
+							text += "|===\n";
+							// TODO get header, then loop through body
+							text += "|===\n";
+							text += "\n";
+						}
+					}
+				}
+			}
+		}
 		return text;
-	}
-
-	private String blockToText() {
-		return ((Block) theDoc.getBlocks().getFirst()).getSource();
 	}
 
 	@Override
