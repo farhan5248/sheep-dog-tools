@@ -43,112 +43,112 @@ Feature: Convert Cucumber To Graph To AsciiDoctor
       And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, target/Graphs/specs/Process.graph file will be as follows
           """
-Graph
-	name:Process
-	tag:tag1
-	description:
-		Desc 1
-	paths:
-		Path
-			index:0
-			name:Story One
-			tag:tag2
-			description:
-				Desc 2
-		Path
-			index:1
-			name:Story Two
-			tag:tag3
-			description:
-				Desc 3
-	vertices:
-		Vertex
-			label:start
-		Vertex
-			label:end
-		Vertex
-			label:The Search application, Login page is valid
-		Vertex
-			label:The Search application, Home page is as follows
-		Vertex
-			label:The Search application, Logout page is valid
-		Vertex
-			label:The Search application, Login page is invalid
-		Vertex
-			label:The Search application, Logout page is invalid
-	edges:
-		Edge
-			label:
-			tag:0
-			source:
-				Vertex
-					label:start
-			target:
-				Vertex
-					label:The Search application, Login page is valid
-		Edge
-			label:
-			tag:0
-			source:
-				Vertex
-					label:The Search application, Login page is valid
-			target:
-				Vertex
-					label:The Search application, Home page is as follows
-		Edge
-			label:
-			tag:0
-			source:
-				Vertex
-					label:The Search application, Home page is as follows
-			target:
-				Vertex
-					label:The Search application, Logout page is valid
-		Edge
-			label:
-			tag:0
-			source:
-				Vertex
-					label:The Search application, Logout page is valid
-			target:
-				Vertex
-					label:end
-		Edge
-			label:
-			tag:1
-			source:
-				Vertex
-					label:start
-			target:
-				Vertex
-					label:The Search application, Login page is invalid
-		Edge
-			label:
-			tag:1
-			source:
-				Vertex
-					label:The Search application, Login page is invalid
-			target:
-				Vertex
-					label:The Search application, Home page is as follows
-		Edge
-			label:
-			tag:1
-			source:
-				Vertex
-					label:The Search application, Home page is as follows
-			target:
-				Vertex
-					label:The Search application, Logout page is invalid
-		Edge
-			label:
-			tag:1
-			source:
-				Vertex
-					label:The Search application, Logout page is invalid
-			target:
-				Vertex
-					label:end
+          Graph
+          	name:Process
+          	tag:tag1
+          	description:
+          		Desc 1
+          	paths:
+          		Path
+          			index:0
+          			name:Story One
+          			tag:tag2
+          			description:
+          				Desc 2
+          		Path
+          			index:1
+          			name:Story Two
+          			tag:tag3
+          			description:
+          				Desc 3
+          	vertices:
+          		Vertex
+          			label:start
+          		Vertex
+          			label:end
+          		Vertex
+          			label:The Search application, Login page is valid
+          		Vertex
+          			label:The Search application, Home page is as follows
+          		Vertex
+          			label:The Search application, Logout page is valid
+          		Vertex
+          			label:The Search application, Login page is invalid
+          		Vertex
+          			label:The Search application, Logout page is invalid
+          	edges:
+          		Edge
+          			label:
+          			tag:0
+          			source:
+          				Vertex
+          					label:start
+          			target:
+          				Vertex
+          					label:The Search application, Login page is valid
+          		Edge
+          			label:
+          			tag:0
+          			source:
+          				Vertex
+          					label:The Search application, Login page is valid
+          			target:
+          				Vertex
+          					label:The Search application, Home page is as follows
+          		Edge
+          			label:
+          			tag:0
+          			source:
+          				Vertex
+          					label:The Search application, Home page is as follows
+          			target:
+          				Vertex
+          					label:The Search application, Logout page is valid
+          		Edge
+          			label:
+          			tag:0
+          			source:
+          				Vertex
+          					label:The Search application, Logout page is valid
+          			target:
+          				Vertex
+          					label:end
+          		Edge
+          			label:
+          			tag:1
+          			source:
+          				Vertex
+          					label:start
+          			target:
+          				Vertex
+          					label:The Search application, Login page is invalid
+          		Edge
+          			label:
+          			tag:1
+          			source:
+          				Vertex
+          					label:The Search application, Login page is invalid
+          			target:
+          				Vertex
+          					label:The Search application, Home page is as follows
+          		Edge
+          			label:
+          			tag:1
+          			source:
+          				Vertex
+          					label:The Search application, Home page is as follows
+          			target:
+          				Vertex
+          					label:The Search application, Logout page is invalid
+          		Edge
+          			label:
+          			tag:1
+          			source:
+          				Vertex
+          					label:The Search application, Logout page is invalid
+          			target:
+          				Vertex
+          					label:end
           """
       And The mbt-transformer plugin, target/Graphs/stepdefs/The Search application Home page is as follows.graph file will be as follows
           """

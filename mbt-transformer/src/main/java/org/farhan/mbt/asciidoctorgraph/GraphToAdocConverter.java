@@ -2,13 +2,15 @@ package org.farhan.mbt.asciidoctorgraph;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Map;
+
 import org.asciidoctor.ast.Block;
 import org.asciidoctor.ast.Row;
 import org.asciidoctor.ast.Section;
 import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
-import org.eclipse.uml2.uml.Interaction;
-import org.eclipse.uml2.uml.Message;
+import org.asciidoctor.jruby.ast.impl.SectionImpl;
+import org.asciidoctor.jruby.extension.internal.JRubyProcessor;
 import org.asciidoctor.ast.Document;
 import org.asciidoctor.ast.List;
 import org.asciidoctor.ast.ListItem;
@@ -16,7 +18,6 @@ import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToDocumentConverter;
-import org.farhan.mbt.core.ToGraphConverter;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.graph.JGraphTProject;
 import org.farhan.mbt.graph.JGraphTGraphWrapper;
@@ -28,7 +29,7 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 
 	private AsciiDoctorAdocWrapper tgtWrp;
 	private JGraphTProject srcPrj;
-
+	private JRubyProcessor jrp;
 	private int pathCnt;
 
 	public GraphToAdocConverter(String layer, JGraphTProject source, AsciiDoctorProject target) {
@@ -36,6 +37,7 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 		this.srcPrj = source;
 		this.tgtPrj = target;
 		this.pathCnt = -1;
+		this.jrp = new JRubyProcessor();
 	}
 
 	@Override
@@ -51,8 +53,13 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 	@Override
 	protected void convertObject(ConvertibleObject object) throws Exception {
 		JGraphTGraphWrapper adaw = (JGraphTGraphWrapper) object;
-		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
+		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) adaw.get();
 		tgtWrp = (AsciiDoctorAdocWrapper) tgtPrj.createObject(convertObjectName(g.getName()));
+		Document theDoc = (Document) tgtWrp.get();
+		theDoc.setTitle(g.getName());
+		theDoc.getAttributes().put("tags", g.getTags());
+		Block block = jrp.createBlock(theDoc, "paragraph", g.getDescription());
+		theDoc.getBlocks().add(block);
 	}
 
 	@Override
@@ -72,17 +79,7 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 
 	@Override
 	protected void convertElements(ConvertibleObject object) throws Exception {
-		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) object;
-		Document src = (Document) adaw.get();
-		MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
-		tgt.setTags(convertSectionAttributesToTags(src));
-		for (StructuralNode block : src.getBlocks()) {
-			if (block instanceof Section) {
-				convertSectionsToScenarios(tgt, (Section) block);
-			} else if (block instanceof Block) {
-				tgt.setDescription(convertSectionTextToDescription(block));
-			}
-		}
+
 	}
 
 	private void convertSectionsToScenarios(MBTGraph<MBTVertex, MBTEdge> g, Section scenario) {

@@ -53,6 +53,14 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) theObject;
 		Document src = (Document) adaw.get();
 		tgtWrp = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(src.getTitle()));
+		MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
+		tgt.setName(src.getTitle());
+		tgt.setTags(convertSectionAttributesToTags(src));
+		for (StructuralNode block : src.getBlocks()) {
+			if (!(block instanceof Section)) {
+				tgt.setDescription(convertSectionTextToDescription(block));
+			}
+		}
 	}
 
 	@Override
@@ -60,9 +68,16 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		return convertObjectName(documentTitle, tgtPrj.FIRST_LAYER);
 	}
 
-	private String convertObjectName(String documentTitle, String layer) {
-		return tgtPrj.getDir(layer).getAbsolutePath() + File.separator + documentTitle.replace(",", "")
-				+ tgtPrj.getFileExt(layer);
+	@Override
+	protected void convertElements(ConvertibleObject object) throws Exception {
+		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) object;
+		Document src = (Document) adaw.get();
+		MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
+		for (StructuralNode block : src.getBlocks()) {
+			if (block instanceof Section) {
+				convertSectionsToScenarios(tgt, (Section) block);
+			}
+		}
 	}
 
 	@Override
@@ -70,19 +85,9 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		return srcPrj.getObjects(layer);
 	}
 
-	@Override
-	protected void convertElements(ConvertibleObject object) throws Exception {
-		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) object;
-		Document src = (Document) adaw.get();
-		MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
-		tgt.setTags(convertSectionAttributesToTags(src));
-		for (StructuralNode block : src.getBlocks()) {
-			if (block instanceof Section) {
-				convertSectionsToScenarios(tgt, (Section) block);
-			} else if (block instanceof Block) {
-				tgt.setDescription(convertSectionTextToDescription(block));
-			}
-		}
+	private String convertObjectName(String documentTitle, String layer) {
+		return tgtPrj.getDir(layer).getAbsolutePath() + File.separator + documentTitle.replace(",", "")
+				+ tgtPrj.getFileExt(layer);
 	}
 
 	private void convertSectionsToScenarios(MBTGraph<MBTVertex, MBTEdge> g, Section scenario) {
