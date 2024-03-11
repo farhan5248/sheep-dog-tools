@@ -1,3 +1,4 @@
+@certificate
 Feature: Certificate
 
   Certificate is also known as card-holder or plan member.

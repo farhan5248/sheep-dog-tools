@@ -129,6 +129,7 @@ public class UMLToGraphConverter extends ToGraphConverter {
 			}
 			if (i == itr.getMessages().size() - 1) {
 				g.createEdgeWithVertices(m.getName(), g.getEndVertex().getLabel(), "", pi.getIndex());
+				convertTableToGraph(m, pi);
 			} else {
 				Message mNext = itr.getMessages().get(i + 1);
 				g.createEdgeWithVertices(m.getName(), mNext.getName(), "", pi.getIndex());

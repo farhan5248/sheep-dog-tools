@@ -1,4 +1,4 @@
-:tags: debug
+:tags: certificate
 = Certificate
 
 Certificate is also known as card-holder or plan member.
@@ -42,6 +42,13 @@ Certificate is also known as card-holder or plan member.
 
 * The Claim response will be as follows
 
+[options="header"]
+|===
+| Reject Message
+| Unknown Certificate
+|===
+
+
 [tags="unit"]
 == Known Certificate
 
@@ -80,3 +87,10 @@ Certificate is also known as card-holder or plan member.
 |===
 
 * The Claim response will be as follows
+
+[options="header"]
+|===
+| Reject Message
+| No Problems
+|===
+
