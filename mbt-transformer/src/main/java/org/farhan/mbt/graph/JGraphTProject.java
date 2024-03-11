@@ -20,10 +20,10 @@ public class JGraphTProject extends ConvertibleProject {
 		File aFile = null;
 		switch (layer) {
 		case FIRST_LAYER:
-			aFile = new File(baseDir + "target/Graphs/" + this.FIRST_LAYER + "/");
+			aFile = new File(baseDir + "target/graphs/" + this.FIRST_LAYER + "/");
 			break;
 		case SECOND_LAYER:
-			aFile = new File(baseDir + "target/Graphs/" + SECOND_LAYER + "/");
+			aFile = new File(baseDir + "target/graphs/" + SECOND_LAYER + "/");
 			break;
 		}
 		aFile.mkdirs();
@@ -86,7 +86,7 @@ public class JGraphTProject extends ConvertibleProject {
 		for (Object o : getObjects(layer)) {
 
 			JGraphTGraphWrapper jgw = (JGraphTGraphWrapper) o;
-			if (jgw.getFile().getAbsolutePath().contentEquals(fileName)) {
+			if (jgw.getFile().getPath().contentEquals(fileName)) {
 				return jgw;
 			}
 		}

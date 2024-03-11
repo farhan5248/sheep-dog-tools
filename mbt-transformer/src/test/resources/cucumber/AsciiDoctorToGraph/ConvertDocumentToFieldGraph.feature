@@ -3,7 +3,7 @@ Feature: Convert Document To Field Graph
 
   Scenario: Convert a table with one row
 
-    Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
           """
           = Process
           
@@ -18,8 +18,8 @@ Feature: Convert Document To Field Graph
           |===
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
-     Then The mbt-transformer plugin, target/Graphs/specs/Process.graph file will be present
-      And The mbt-transformer plugin, target/Graphs/stepdefs/Set Object as follows.graph file will be present
+     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
+      And The mbt-transformer plugin, target/graphs/stepdefs/Set Object as follows.graph file will be present
       And The Set Object as follows.graph file, Vertices section will be as follows
           | Vertex Name |
           |       start |
@@ -36,7 +36,7 @@ Feature: Convert Document To Field Graph
 
   Scenario: Convert a table with two rows
 
-    Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
           """
           = Process
           
@@ -52,8 +52,8 @@ Feature: Convert Document To Field Graph
           |===
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
-     Then The mbt-transformer plugin, target/Graphs/specs/Process.graph file will be present
-      And The mbt-transformer plugin, target/Graphs/stepdefs/Set Object as follows.graph file will be present
+     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
+      And The mbt-transformer plugin, target/graphs/stepdefs/Set Object as follows.graph file will be present
       And The Set Object as follows.graph file, Edges section will be as follows
           |           Edge Name |
           |  start ->  -> 0 ins |
@@ -62,7 +62,7 @@ Feature: Convert Document To Field Graph
 
   Scenario: Convert a table to a vertices each with multiple edges
 
-    Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
           """
           = Process
           
@@ -78,8 +78,8 @@ Feature: Convert Document To Field Graph
           |===
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
-     Then The mbt-transformer plugin, target/Graphs/specs/Process.graph file will be present
-      And The mbt-transformer plugin, target/Graphs/stepdefs/Set Object as follows.graph file will be present
+     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
+      And The mbt-transformer plugin, target/graphs/stepdefs/Set Object as follows.graph file will be present
       And The Set Object as follows.graph file, Edges section will be as follows
           |            Edge Name |
           |   start ->  -> 0 ins |

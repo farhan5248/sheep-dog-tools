@@ -3,7 +3,7 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
 
   Scenario: Create a feature file from adoc file
 
-    Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.adoc file is as follows
           """
           :tags: tag1
           = Process
@@ -46,7 +46,7 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
       And The mbt-transformer plugin, graph-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
-     Then The mbt-transformer plugin, target/Graphs/specs/Process.graph file will be as follows
+     Then The mbt-transformer plugin, target/graphs/specs/app/Process.graph file will be as follows
           """
           Graph
           	name:Process
@@ -155,7 +155,7 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           				Vertex
           					label:end
           """
-      And The mbt-transformer plugin, target/Graphs/stepdefs/When The Search application Home page is as follows.graph file will be as follows
+      And The mbt-transformer plugin, target/graphs/stepdefs/When The Search application Home page is as follows.graph file will be as follows
           """
           Graph
           	name:When The Search application, Home page is as follows
@@ -219,7 +219,7 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           				Vertex
           					label:end
           """
-     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be as follows
+     Then The mbt-transformer plugin, src/test/resources/cucumber/app/Process.feature file will be as follows
           """
           @tag1
           Feature: Process
@@ -250,4 +250,4 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           
           
           """
-      
+

@@ -52,7 +52,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	protected void convertObject(ConvertibleObject theObject) throws Exception {
 		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) theObject;
 		Document src = (Document) adaw.get();
-		tgtWrp = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(src.getTitle()));
+		tgtWrp = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(adaw.getFile().getAbsolutePath()));
 		MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
 		tgt.setName(src.getTitle());
 		tgt.setTags(convertSectionAttributesToTags(src));
@@ -61,11 +61,6 @@ public class AdocToGraphConverter extends ToGraphConverter {
 				tgt.setDescription(convertSectionTextToDescription(block));
 			}
 		}
-	}
-
-	@Override
-	protected String convertObjectName(String documentTitle) {
-		return convertObjectName(documentTitle, tgtPrj.FIRST_LAYER);
 	}
 
 	@Override
@@ -85,9 +80,19 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		return srcPrj.getObjects(layer);
 	}
 
-	private String convertObjectName(String documentTitle, String layer) {
-		return tgtPrj.getDir(layer).getAbsolutePath() + File.separator + documentTitle.replace(",", "")
-				+ tgtPrj.getFileExt(layer);
+	@Override
+	protected String convertObjectName(String fileName) {
+		return convertObjectName(fileName, tgtPrj.FIRST_LAYER);
+	}
+
+	private String convertObjectName(String fileName, String layer) {
+		// TODO make this a supertype method but with the additional delimiter parameter
+		// which can be :: or File.separator
+		String qualifiedName = fileName.replace(",", "");
+		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(layer), "");
+		qualifiedName = qualifiedName.replace(srcPrj.getDir(layer).getAbsolutePath() + File.separator, "");
+		qualifiedName = tgtPrj.getDir(layer) + File.separator + qualifiedName + tgtPrj.getFileExt(layer);
+		return qualifiedName;
 	}
 
 	private void convertSectionsToScenarios(MBTGraph<MBTVertex, MBTEdge> g, Section scenario) {

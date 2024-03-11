@@ -6,24 +6,24 @@ import io.cucumber.datatable.DataTable;
 
 public class MbtTransformerProcessGraphFileSteps {
 
-    @Given("^The mbt-transformer plugin, target/Graphs/specs/Process.graph file is as follows$")
-    public void theMbtTransformerPluginTargetGraphsSpecsProcessGraphFileIsAsFollows(String docString) {
+    @Given("^The mbt-transformer plugin, target/graphs/specs/app/Process.graph file will be as follows$")
+    public void theMbtTransformerPluginTargetGraphsSpecsAppProcessGraphFileWillBeAsFollows(String docString) {
         MbtTransformerFactory.get("ProcessGraphFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("ProcessGraphFile").setPath("target/Graphs/specs/Process.graph");
-        MbtTransformerFactory.get("ProcessGraphFile").setInputOutputs("Content", docString);
-    }
-
-    @Given("^The mbt-transformer plugin, target/Graphs/specs/Process.graph file will be as follows$")
-    public void theMbtTransformerPluginTargetGraphsSpecsProcessGraphFileWillBeAsFollows(String docString) {
-        MbtTransformerFactory.get("ProcessGraphFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("ProcessGraphFile").setPath("target/Graphs/specs/Process.graph");
+        MbtTransformerFactory.get("ProcessGraphFile").setPath("target/graphs/specs/app/Process.graph");
         MbtTransformerFactory.get("ProcessGraphFile").assertInputOutputs("Content", docString);
     }
 
-    @Given("^The mbt-transformer plugin, target/Graphs/specs/Process.graph file will be present$")
+    @Given("^The mbt-transformer plugin, target/graphs/specs/Process.graph file is as follows$")
+    public void theMbtTransformerPluginTargetGraphsSpecsProcessGraphFileIsAsFollows(String docString) {
+        MbtTransformerFactory.get("ProcessGraphFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessGraphFile").setPath("target/graphs/specs/Process.graph");
+        MbtTransformerFactory.get("ProcessGraphFile").setInputOutputs("Content", docString);
+    }
+
+    @Given("^The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present$")
     public void theMbtTransformerPluginTargetGraphsSpecsProcessGraphFileWillBePresent() {
         MbtTransformerFactory.get("ProcessGraphFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("ProcessGraphFile").setPath("target/Graphs/specs/Process.graph");
+        MbtTransformerFactory.get("ProcessGraphFile").setPath("target/graphs/specs/Process.graph");
         MbtTransformerFactory.get("ProcessGraphFile").assertInputOutputs("Present");
     }
 

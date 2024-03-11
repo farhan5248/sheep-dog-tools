@@ -3,7 +3,7 @@ Feature: Convert Path To Interaction
 
   Background: Create a graph text file
 
-    Given The mbt-transformer plugin, target/Graphs/specs/Process.graph file is as follows
+    Given The mbt-transformer plugin, target/graphs/specs/Process.graph file is as follows
           """
           Graph
           	name:Process
@@ -46,7 +46,7 @@ Feature: Convert Path To Interaction
           				Vertex
           					label:end
           """
-    Given The mbt-transformer plugin, target/Graphs/stepdefs/Given The Search application Home page is empty.graph file is as follows
+    Given The mbt-transformer plugin, target/graphs/stepdefs/Given The Search application Home page is empty.graph file is as follows
           """
           Graph
           	name:Given The Search application, Home page is empty

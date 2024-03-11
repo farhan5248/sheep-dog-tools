@@ -6,10 +6,10 @@ import io.cucumber.datatable.DataTable;
 
 public class MbtTransformerSetObjectAsFollowsGraphFileSteps {
 
-    @Given("^The mbt-transformer plugin, target/Graphs/stepdefs/Set Object as follows.graph file will be present$")
+    @Given("^The mbt-transformer plugin, target/graphs/stepdefs/Set Object as follows.graph file will be present$")
     public void theMbtTransformerPluginTargetGraphsStepdefsSetObjectAsFollowsGraphFileWillBePresent() {
         MbtTransformerFactory.get("SetObjectAsFollowsGraphFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("SetObjectAsFollowsGraphFile").setPath("target/Graphs/stepdefs/Set Object as follows.graph");
+        MbtTransformerFactory.get("SetObjectAsFollowsGraphFile").setPath("target/graphs/stepdefs/Set Object as follows.graph");
         MbtTransformerFactory.get("SetObjectAsFollowsGraphFile").assertInputOutputs("Present");
     }
 

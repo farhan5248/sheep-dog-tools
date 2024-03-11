@@ -32,13 +32,11 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 	private AsciiDoctorAdocWrapper tgtWrp;
 	private JGraphTProject srcPrj;
 	private JRubyProcessor jrp;
-	private int pathCnt;
 
 	public GraphToAdocConverter(String layer, JGraphTProject source, AsciiDoctorProject target) {
 		this.layer = layer;
 		this.srcPrj = source;
 		this.tgtPrj = target;
-		this.pathCnt = -1;
 		this.jrp = new JRubyProcessor();
 	}
 
@@ -66,7 +64,7 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 	protected void convertObject(ConvertibleObject object) throws Exception {
 		JGraphTGraphWrapper adaw = (JGraphTGraphWrapper) object;
 		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) adaw.get();
-		tgtWrp = (AsciiDoctorAdocWrapper) tgtPrj.createObject(convertObjectName(g.getName()));
+		tgtWrp = (AsciiDoctorAdocWrapper) tgtPrj.createObject(convertObjectName(adaw.getFile().getAbsolutePath()));
 		Document theDoc = (Document) tgtWrp.get();
 		theDoc.setTitle(g.getName());
 		theDoc.getAttributes().put("tags", g.getTags());
@@ -79,9 +77,12 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 		return convertObjectName(documentTitle, tgtPrj.FIRST_LAYER);
 	}
 
-	private String convertObjectName(String documentTitle, String layer) {
-		return tgtPrj.getDir(layer).getAbsolutePath() + File.separator + documentTitle.replace(",", "")
-				+ tgtPrj.getFileExt(layer);
+	private String convertObjectName(String fileName, String layer) {
+		String qualifiedName = fileName.replace(",", "");
+		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(layer), "");
+		qualifiedName = qualifiedName.replace(srcPrj.getDir(layer).getAbsolutePath(), "");
+		qualifiedName = tgtPrj.getDir(layer) + qualifiedName + tgtPrj.getFileExt(layer);
+		return qualifiedName;
 	}
 
 	@Override

@@ -3,7 +3,7 @@ Feature: Convert Document To Object Graph
 
   Scenario: Convert tags and description
 
-    Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
           """
           :tags: tag1,tag2
           = Process 
@@ -20,7 +20,7 @@ Feature: Convert Document To Object Graph
           * Step 1
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
-     Then The mbt-transformer plugin, target/Graphs/specs/Process.graph file will be present
+     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
       And The Process.graph file, Graph section will be as follows
           |    Name |       Tag |  Description |
           | Process | tag1,tag2 | Desc\nLine 2 |
@@ -30,7 +30,7 @@ Feature: Convert Document To Object Graph
 
   Scenario: Convert a section to a vertex each with a single edge
 
-    Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
           """
           = Process 
           
@@ -39,7 +39,7 @@ Feature: Convert Document To Object Graph
           * Step 1
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
-     Then The mbt-transformer plugin, target/Graphs/specs/Process.graph file will be present
+     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
       And The Process.graph file, Vertices section will be as follows
           | Vertex Name |
           |       start |
@@ -52,7 +52,7 @@ Feature: Convert Document To Object Graph
 
   Scenario: Convert multiple sections to multiple vertices each with a single edge
 
-    Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
           """
           = Process
           
@@ -63,7 +63,7 @@ Feature: Convert Document To Object Graph
           * Step 2
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
-     Then The mbt-transformer plugin, target/Graphs/specs/Process.graph file will be present
+     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
       And The Process.graph file, Vertices section will be as follows
           | Vertex Name |
           |       start |
@@ -80,7 +80,7 @@ Feature: Convert Document To Object Graph
 
     The goal here is to not have duplicate vertices or edges
 
-    Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
           """
           = Process
           
@@ -93,7 +93,7 @@ Feature: Convert Document To Object Graph
           * Step 1
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
-     Then The mbt-transformer plugin, target/Graphs/specs/Process.graph file will be present
+     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
       And The Process.graph file, Vertices section will be as follows
           | Vertex Name |
           |       start |
