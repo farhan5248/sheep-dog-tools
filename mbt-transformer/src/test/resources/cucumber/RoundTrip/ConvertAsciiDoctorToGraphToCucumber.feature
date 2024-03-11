@@ -6,8 +6,8 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
     Given The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file is as follows
           """
           :tags: tag1
-          = Process 
-
+          = Process
+          
           Desc 1
           
           [tags="tag2"]
@@ -15,32 +15,33 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           
           Desc 2
           
-          * The Search application, Login page is valid
-          * The Search application, Home page is as follows
+          * Given The Search application, Login page is valid
+          * When The Search application, Home page is as follows
           
           [options="header"]
           |===
-          |ins |grp 
-          |5   |10  
+          | grp| ins
+          | 10| 5
           |===
           
-          * The Search application, Logout page is valid
-
+          * Then The Search application, Logout page is valid
+          
           [tags="tag3"]
           == Story Two
           
           Desc 3
           
-          * The Search application, Login page is invalid
-          * The Search application, Home page is as follows
+          * Given The Search application, Login page is invalid
+          * When The Search application, Home page is as follows
           
           [options="header"]
           |===
-          |ins |grp 
-          |4   |8  
+          | grp| ins
+          | 8| 4
           |===
-
-          * The Search application, Logout page is invalid
+          
+          * Then The Search application, Logout page is invalid
+          
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
       And The mbt-transformer plugin, graph-to-uml goal is executed
@@ -71,15 +72,15 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           		Vertex
           			label:end
           		Vertex
-          			label:The Search application, Login page is valid
+          			label:Given The Search application, Login page is valid
           		Vertex
-          			label:The Search application, Home page is as follows
+          			label:When The Search application, Home page is as follows
           		Vertex
-          			label:The Search application, Logout page is valid
+          			label:Then The Search application, Logout page is valid
           		Vertex
-          			label:The Search application, Login page is invalid
+          			label:Given The Search application, Login page is invalid
           		Vertex
-          			label:The Search application, Logout page is invalid
+          			label:Then The Search application, Logout page is invalid
           	edges:
           		Edge
           			label:
@@ -89,31 +90,31 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           					label:start
           			target:
           				Vertex
-          					label:The Search application, Login page is valid
+          					label:Given The Search application, Login page is valid
           		Edge
           			label:
           			tag:0
           			source:
           				Vertex
-          					label:The Search application, Login page is valid
+          					label:Given The Search application, Login page is valid
           			target:
           				Vertex
-          					label:The Search application, Home page is as follows
+          					label:When The Search application, Home page is as follows
           		Edge
           			label:
           			tag:0
           			source:
           				Vertex
-          					label:The Search application, Home page is as follows
+          					label:When The Search application, Home page is as follows
           			target:
           				Vertex
-          					label:The Search application, Logout page is valid
+          					label:Then The Search application, Logout page is valid
           		Edge
           			label:
           			tag:0
           			source:
           				Vertex
-          					label:The Search application, Logout page is valid
+          					label:Then The Search application, Logout page is valid
           			target:
           				Vertex
           					label:end
@@ -125,39 +126,39 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           					label:start
           			target:
           				Vertex
-          					label:The Search application, Login page is invalid
+          					label:Given The Search application, Login page is invalid
           		Edge
           			label:
           			tag:1
           			source:
           				Vertex
-          					label:The Search application, Login page is invalid
+          					label:Given The Search application, Login page is invalid
           			target:
           				Vertex
-          					label:The Search application, Home page is as follows
+          					label:When The Search application, Home page is as follows
           		Edge
           			label:
           			tag:1
           			source:
           				Vertex
-          					label:The Search application, Home page is as follows
+          					label:When The Search application, Home page is as follows
           			target:
           				Vertex
-          					label:The Search application, Logout page is invalid
+          					label:Then The Search application, Logout page is invalid
           		Edge
           			label:
           			tag:1
           			source:
           				Vertex
-          					label:The Search application, Logout page is invalid
+          					label:Then The Search application, Logout page is invalid
           			target:
           				Vertex
           					label:end
           """
-      And The mbt-transformer plugin, target/Graphs/stepdefs/The Search application Home page is as follows.graph file will be as follows
+      And The mbt-transformer plugin, target/Graphs/stepdefs/When The Search application Home page is as follows.graph file will be as follows
           """
           Graph
-          	name:The Search application, Home page is as follows
+          	name:When The Search application, Home page is as follows
           	tag:
           	description:
           		
@@ -168,9 +169,9 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           		Vertex
           			label:end
           		Vertex
-          			label:0 ins
-          		Vertex
           			label:0 grp
+          		Vertex
+          			label:0 ins
           	edges:
           		Edge
           			label:
@@ -178,15 +179,6 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           			source:
           				Vertex
           					label:start
-          			target:
-          				Vertex
-          					label:0 ins
-          		Edge
-          			label:5
-          			tag:0
-          			source:
-          				Vertex
-          					label:0 ins
           			target:
           				Vertex
           					label:0 grp
@@ -198,22 +190,31 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           					label:0 grp
           			target:
           				Vertex
-          					label:end
+          					label:0 ins
           		Edge
-          			label:4
-          			tag:1
+          			label:5
+          			tag:0
           			source:
           				Vertex
           					label:0 ins
           			target:
           				Vertex
-          					label:0 grp
+          					label:end
           		Edge
           			label:8
           			tag:1
           			source:
           				Vertex
           					label:0 grp
+          			target:
+          				Vertex
+          					label:0 ins
+          		Edge
+          			label:4
+          			tag:1
+          			source:
+          				Vertex
+          					label:0 ins
           			target:
           				Vertex
           					label:end
@@ -230,22 +231,22 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           
               Desc 2
           
-                  * The Search application, Login page is valid
-                  * The Search application, Home page is as follows
+              Given The Search application, Login page is valid
+               When The Search application, Home page is as follows
                     | grp | ins |
                     |  10 |   5 |
-                  * The Search application, Logout page is valid
+               Then The Search application, Logout page is valid
           
             @tag3
             Scenario: Story Two
           
               Desc 3
           
-                  * The Search application, Login page is invalid
-                  * The Search application, Home page is as follows
+              Given The Search application, Login page is invalid
+               When The Search application, Home page is as follows
                     | grp | ins |
                     |   8 |   4 |
-                  * The Search application, Logout page is invalid
+               Then The Search application, Logout page is invalid
           
           
           """

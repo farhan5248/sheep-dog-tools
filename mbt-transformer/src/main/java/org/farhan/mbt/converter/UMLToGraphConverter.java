@@ -125,17 +125,23 @@ public class UMLToGraphConverter extends ToGraphConverter {
 		for (int i = 0; i < itr.getMessages().size(); i++) {
 			Message m = itr.getMessages().get(i);
 			if (i == 0) {
-				g.createEdgeWithVertices(g.getStartVertex().getLabel(), m.getName(), "", pi.getIndex());
+				g.createEdgeWithVertices(g.getStartVertex().getLabel(), getStepName(m), "", pi.getIndex());
 			}
 			if (i == itr.getMessages().size() - 1) {
-				g.createEdgeWithVertices(m.getName(), g.getEndVertex().getLabel(), "", pi.getIndex());
+				g.createEdgeWithVertices(getStepName(m), g.getEndVertex().getLabel(), "", pi.getIndex());
 				convertTableToGraph(m, pi);
 			} else {
 				Message mNext = itr.getMessages().get(i + 1);
-				g.createEdgeWithVertices(m.getName(), mNext.getName(), "", pi.getIndex());
+				g.createEdgeWithVertices(getStepName(m), getStepName(mNext), "", pi.getIndex());
 				convertTableToGraph(m, pi);
 			}
 		}
+	}
+
+	private String getStepName(Message m) {
+		String name = m.getName();
+		String keyword = m.getEAnnotation("Step").getDetails().get("Keyword");
+		return keyword + " " + name;
 	}
 
 	private void convertTableToGraph(Message m, MBTPathInfo pi) {
@@ -145,9 +151,9 @@ public class UMLToGraphConverter extends ToGraphConverter {
 			return;
 		}
 		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) tgtPrj
-				.createObject(convertObjectName(m.getName(), tgtPrj.SECOND_LAYER));
+				.createObject(convertObjectName(getStepName(m), tgtPrj.SECOND_LAYER));
 		MBTGraph<MBTVertex, MBTEdge> fieldGraph = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
-		fieldGraph.setName(m.getName());
+		fieldGraph.setName(getStepName(m));
 
 		EMap<String, String> table = vs.getEAnnotation("dataTable").getDetails();
 		MBTVertex lastVertex = fieldGraph.getStartVertex();

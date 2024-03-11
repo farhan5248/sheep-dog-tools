@@ -24,7 +24,7 @@ Feature: Convert Graph To Class
           		Vertex
           			label:end
           		Vertex
-          			label:The Search application, Home page is empty
+          			label:Given The Search application, Home page is empty
           	edges:
           		Edge
           			label:
@@ -34,21 +34,21 @@ Feature: Convert Graph To Class
           					label:start
           			target:
           				Vertex
-          					label:The Search application, Home page is empty
+          					label:Given The Search application, Home page is empty
           		Edge
           			label:
           			tag:0
           			source:
           				Vertex
-          					label:The Search application, Home page is empty
+          					label:Given The Search application, Home page is empty
           			target:
           				Vertex
           					label:end
           """
-    Given The mbt-transformer plugin, target/Graphs/stepdefs/The Search application Home page is empty.graph file is as follows
+    Given The mbt-transformer plugin, target/Graphs/stepdefs/Given The Search application Home page is empty.graph file is as follows
           """
           Graph
-          	name:The Search application, Home page is empty
+          	name:Given The Search application, Home page is empty
           	tag:
           	description:
           		

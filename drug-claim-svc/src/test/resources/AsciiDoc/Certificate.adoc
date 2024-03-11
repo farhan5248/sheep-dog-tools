@@ -8,7 +8,7 @@ Certificate is also known as card-holder or plan member.
 
 
 
-* The Admin application, DIN page is as follows
+* Given The Admin application, DIN page is as follows
 
 [options="header"]
 |===
@@ -16,7 +16,7 @@ Certificate is also known as card-holder or plan member.
 | 2345| 100.0
 |===
 
-* The Admin application, Provider page is as follows
+* And The Admin application, Provider page is as follows
 
 [options="header"]
 |===
@@ -24,7 +24,7 @@ Certificate is also known as card-holder or plan member.
 | 12345678
 |===
 
-* The Admin application, Member page is as follows
+* And The Admin application, Member page is as follows
 
 [options="header"]
 |===
@@ -32,7 +32,7 @@ Certificate is also known as card-holder or plan member.
 | 123456789
 |===
 
-* The Pharmacy service, Claim request is sent with
+* When The Pharmacy service, Claim request is sent with
 
 [options="header"]
 |===
@@ -40,7 +40,7 @@ Certificate is also known as card-holder or plan member.
 | 100.0| 10.0| 80.0| 2345| 12345678| 123456780
 |===
 
-* The Claim response will be as follows
+* Then The Claim response will be as follows
 
 [options="header"]
 |===
@@ -54,7 +54,7 @@ Certificate is also known as card-holder or plan member.
 
 
 
-* The Admin application, DIN page is as follows
+* Given The Admin application, DIN page is as follows
 
 [options="header"]
 |===
@@ -62,7 +62,7 @@ Certificate is also known as card-holder or plan member.
 | 2345| 100.0
 |===
 
-* The Admin application, Provider page is as follows
+* And The Admin application, Provider page is as follows
 
 [options="header"]
 |===
@@ -70,7 +70,7 @@ Certificate is also known as card-holder or plan member.
 | 12345678
 |===
 
-* The Admin application, Member page is as follows
+* And The Admin application, Member page is as follows
 
 [options="header"]
 |===
@@ -78,7 +78,7 @@ Certificate is also known as card-holder or plan member.
 | 123456789
 |===
 
-* The Pharmacy service, Claim request is sent with
+* When The Pharmacy service, Claim request is sent with
 
 [options="header"]
 |===
@@ -86,7 +86,7 @@ Certificate is also known as card-holder or plan member.
 | 100.0| 10.0| 80.0| 2345| 12345678| 123456789
 |===
 
-* The Claim response will be as follows
+* Then The Claim response will be as follows
 
 [options="header"]
 |===

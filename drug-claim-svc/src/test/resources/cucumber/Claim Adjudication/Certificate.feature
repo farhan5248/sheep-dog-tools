@@ -16,8 +16,8 @@ Feature: Certificate
           | Certificate |
           |   123456789 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Deductible | Co-Insurance |  DIN | Provider | Certificate |
-          |     100.0 |       10.0 |         80.0 | 2345 | 12345678 |   123456780 |
+          | Certificate | Co-Insurance |  DIN | Deductible | Drug Cost | Provider |
+          |   123456780 |         80.0 | 2345 |       10.0 |     100.0 | 12345678 |
      Then The Claim response will be as follows
           |      Reject Message |
           | Unknown Certificate |
@@ -35,8 +35,8 @@ Feature: Certificate
           | Certificate |
           |   123456789 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Deductible | Co-Insurance |  DIN | Provider | Certificate |
-          |     100.0 |       10.0 |         80.0 | 2345 | 12345678 |   123456789 |
+          | Certificate | Co-Insurance |  DIN | Deductible | Drug Cost | Provider |
+          |   123456789 |         80.0 | 2345 |       10.0 |     100.0 | 12345678 |
      Then The Claim response will be as follows
           | Reject Message |
           |    No Problems |

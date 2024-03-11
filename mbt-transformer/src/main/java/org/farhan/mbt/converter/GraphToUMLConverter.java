@@ -10,6 +10,9 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
+import org.eclipse.xtext.impl.RuleCallImpl;
+import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
+import org.farhan.cucumber.Step;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToUMLGherkinConverter;
 import org.farhan.mbt.core.Utilities;
@@ -120,9 +123,14 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 				isKeyword = true;
 			} else if (isKeyword) {
 				// if isKeyword, then make it a step
+				// strip out the Given When Then
+				String keyword = cs.split(" ")[0];
+				cs = cs.replaceFirst(keyword + " ", "");
 				if (Validator.validateStepText(cs)) {
 					setCurrentMachineAndState(cs);
 					convertMessage(anInteraction, cs);
+					Message m = anInteraction.getMessages().getLast();
+					createAnnotation(m, "Step", "Keyword", keyword);
 				} else {
 					throw new Exception("Step (" + cs + ") is not valid, use Xtext editor to correct it first. ");
 				}
@@ -144,7 +152,6 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		String messageName = s;
 		Class nextLayerClass = createClassImport(getSecondLayerClassName(), anInteraction);
 		Message theMessage = getMessage(anInteraction, nextLayerClass, messageName);
-		createAnnotation(theMessage, "Step", "Keyword", "Asterisk");
 	}
 
 	@Override
@@ -164,11 +171,13 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	}
 
 	private String getLabel(Object o) {
+		String label;
 		if (o instanceof MBTVertex) {
-			return ((MBTVertex) o).getLabel();
+			label = ((MBTVertex) o).getLabel();
 		} else {
-			return ((MBTEdge) o).getLabel();
+			label = ((MBTEdge) o).getLabel();
 		}
+		return label;
 	}
 
 	private void convertPathToDataTable(TreeMap<String, String> dataTable, Message theMessage) {
