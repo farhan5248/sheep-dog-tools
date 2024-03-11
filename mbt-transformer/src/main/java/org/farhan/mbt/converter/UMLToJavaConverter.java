@@ -48,6 +48,17 @@ public class UMLToJavaConverter extends ToCodeConverter {
 
 	@Override
 	protected ArrayList<ConvertibleObject> getObjects(String layer) {
+		if (!srcPrj.getObjects(layer).isEmpty()) {
+			UMLClassWrapper ucw = (UMLClassWrapper) srcPrj.getObjects(layer).getFirst();
+			Class c = (Class) ucw.get();
+			if (c.getOwnedBehaviors().isEmpty()) {
+				// if the class is empty, this model was created from a graph model. In that
+				// case, the existing java code is not reversed when creating the UML model.
+				// There might still be classes created to prevent the dangling reference errors
+				// but they'll be empty so we just skip this layer
+				return new ArrayList<ConvertibleObject>();
+			}
+		}
 		return srcPrj.getObjects(layer);
 	}
 
