@@ -217,7 +217,7 @@ Feature: Convert Cucumber To Graph To AsciiDoctor
      Then The mbt-transformer plugin, src/test/resources/AsciiDoc/Process.adoc file will be as follows
           """
           :tags: tag1
-          = Process 
+          = Process
           
           Desc 1
           
@@ -231,8 +231,8 @@ Feature: Convert Cucumber To Graph To AsciiDoctor
           
           [options="header"]
           |===
-          |ins |grp 
-          |5   |10  
+          | grp| ins
+          | 10| 5
           |===
           
           * The Search application, Logout page is valid
@@ -247,11 +247,12 @@ Feature: Convert Cucumber To Graph To AsciiDoctor
           
           [options="header"]
           |===
-          |ins |grp 
-          |4   |8  
+          | grp| ins
+          | 8| 4
           |===
           
           * The Search application, Logout page is invalid
+          
           """
 
       

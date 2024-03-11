@@ -1,0 +1,82 @@
+:tags: debug
+= Certificate
+
+Certificate is also known as card-holder or plan member.
+
+[tags="unit,component"]
+== Unknown Certificate
+
+
+
+* The Admin application, DIN page is as follows
+
+[options="header"]
+|===
+| DIN| Drug Cost
+| 2345| 100.0
+|===
+
+* The Admin application, Provider page is as follows
+
+[options="header"]
+|===
+| Provider
+| 12345678
+|===
+
+* The Admin application, Member page is as follows
+
+[options="header"]
+|===
+| Certificate
+| 123456789
+|===
+
+* The Pharmacy service, Claim request is sent with
+
+[options="header"]
+|===
+| Drug Cost| Deductible| Co-Insurance| DIN| Provider| Certificate
+| 100.0| 10.0| 80.0| 2345| 12345678| 123456780
+|===
+
+* The Claim response will be as follows
+
+[tags="unit"]
+== Known Certificate
+
+
+
+* The Admin application, DIN page is as follows
+
+[options="header"]
+|===
+| DIN| Drug Cost
+| 2345| 100.0
+|===
+
+* The Admin application, Provider page is as follows
+
+[options="header"]
+|===
+| Provider
+| 12345678
+|===
+
+* The Admin application, Member page is as follows
+
+[options="header"]
+|===
+| Certificate
+| 123456789
+|===
+
+* The Pharmacy service, Claim request is sent with
+
+[options="header"]
+|===
+| Drug Cost| Deductible| Co-Insurance| DIN| Provider| Certificate
+| 100.0| 10.0| 80.0| 2345| 12345678| 123456789
+|===
+
+* The Claim response will be as follows

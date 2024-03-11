@@ -1,4 +1,4 @@
-package org.farhan.mbt.graphuml;
+package org.farhan.mbt.converter;
 
 import java.io.File;
 import java.util.ArrayList;

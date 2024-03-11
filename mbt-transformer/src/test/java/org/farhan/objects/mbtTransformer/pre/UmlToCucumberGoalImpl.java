@@ -6,6 +6,6 @@ import org.farhan.objects.mbtTransformer.UmlToCucumberGoal;
 public class UmlToCucumberGoalImpl extends GoalObject implements UmlToCucumberGoal {
 
 	public void transition() {
-		runGoal("org.farhan.mbt.cucumberuml.ConvertUMLToCucumber");
+		runGoal("org.farhan.mbt.convert.ConvertUMLToCucumber");
 	}
 }

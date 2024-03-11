@@ -6,6 +6,6 @@ import org.farhan.objects.mbtTransformer.UmlToGraphGoal;
 public class UmlToGraphGoalImpl extends GoalObject implements UmlToGraphGoal {
 
 	public void transition() {
-		runGoal("org.farhan.mbt.graphuml.ConvertUMLToGraph");
+		runGoal("org.farhan.mbt.convert.ConvertUMLToGraph");
 	}
 }

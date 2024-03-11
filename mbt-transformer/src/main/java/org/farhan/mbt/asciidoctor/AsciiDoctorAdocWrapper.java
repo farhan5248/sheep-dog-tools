@@ -5,9 +5,11 @@ import java.io.File;
 import org.asciidoctor.Options;
 import org.asciidoctor.Asciidoctor.Factory;
 import org.asciidoctor.ast.Block;
+import org.asciidoctor.ast.Cell;
 import org.asciidoctor.ast.Document;
 import org.asciidoctor.ast.List;
 import org.asciidoctor.ast.ListItem;
+import org.asciidoctor.ast.Row;
 import org.asciidoctor.ast.Section;
 import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
@@ -74,7 +76,16 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 							text += "\n";
 							text += "[options=\"header\"]\n";
 							text += "|===\n";
-							// TODO get header, then loop through body
+							for (Cell c : t.getHeader().getFirst().getCells()) {
+								text += "| " + c.getText();
+							}
+							text += "\n";
+							for (Row r : t.getBody()) {
+								for (Cell c : r.getCells()) {
+									text += "| " + c.getText();
+								}
+								text += "\n";
+							}
 							text += "|===\n";
 							text += "\n";
 						}

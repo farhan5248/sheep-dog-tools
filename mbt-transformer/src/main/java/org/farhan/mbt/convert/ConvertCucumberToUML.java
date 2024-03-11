@@ -1,7 +1,9 @@
-package org.farhan.mbt.cucumberuml;
+package org.farhan.mbt.convert;
 
 import java.util.ArrayList;
 
+import org.farhan.mbt.converter.FeatureToUMLConverter;
+import org.farhan.mbt.converter.JavaToUMLConverter;
 import org.farhan.mbt.core.ConvertToUML;
 import org.farhan.mbt.core.ToUMLConverter;
 import org.farhan.mbt.cucumber.CucumberProject;

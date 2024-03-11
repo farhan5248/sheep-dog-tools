@@ -1,7 +1,8 @@
-package org.farhan.mbt.graphuml;
+package org.farhan.mbt.convert;
 
 import java.util.ArrayList;
 
+import org.farhan.mbt.converter.GraphToUMLConverter;
 import org.farhan.mbt.core.ConvertToUML;
 import org.farhan.mbt.core.ToUMLConverter;
 import org.farhan.mbt.graph.JGraphTProject;

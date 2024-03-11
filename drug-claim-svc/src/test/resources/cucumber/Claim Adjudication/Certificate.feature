@@ -1,4 +1,6 @@
-Feature: Provider
+Feature: Certificate
+
+  Certificate is also known as card-holder or plan member.
 
   @unit @component
   Scenario: Unknown Certificate

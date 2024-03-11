@@ -1,16 +1,20 @@
-package org.farhan.mbt.asciidoctorgraph;
+package org.farhan.mbt.converter;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Set;
 
 import org.asciidoctor.ast.Block;
+import org.asciidoctor.ast.Cell;
+import org.asciidoctor.ast.Column;
 import org.asciidoctor.ast.Section;
 import org.asciidoctor.ast.Table;
 import org.asciidoctor.jruby.extension.internal.JRubyProcessor;
+import org.eclipse.uml2.uml.ValueSpecification;
 import org.asciidoctor.ast.Document;
 import org.asciidoctor.ast.List;
 import org.asciidoctor.ast.ListItem;
+import org.asciidoctor.ast.Row;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
@@ -114,20 +118,62 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 					MBTEdge e = (MBTEdge) o;
 					MBTGraph<MBTVertex, MBTEdge> edgeGraph = getGraph(g.getEdgeSource(e).getLabel());
 					if (edgeGraph != null) {
-						ArrayList<Object> edgePath = getPath(edgeGraph, edgeGraph.getStartVertex(), pi);
 						ListItem listItem = (ListItem) list.getItems().getLast();
 						Table table = jrp.createTable(listItem);
 						listItem.getBlocks().add(table);
-						convertPathToTable(edgePath, table);
+						convertPathToTable(edgeGraph, table, pi);
 					}
 				}
 			}
 		}
 	}
 
-	private void convertPathToTable(ArrayList<Object> edgePath, Table table) {
-		// TODO Auto-generated method stub
-		
+	private void convertPathToTable(MBTGraph<MBTVertex, MBTEdge> g, Table table, MBTPathInfo pi) {
+
+		ArrayList<Object> edgePath = getPath(g, g.getStartVertex(), pi);
+
+		Row row = jrp.createTableRow(table);
+		table.getHeader().add(row);
+		int colCnt = 0;
+		for (Object o : edgePath) {
+			if (o instanceof MBTVertex) {
+				MBTVertex v = (MBTVertex) o;
+				if (v.getLabel().startsWith("0 ")) {
+					Column column = jrp.createTableColumn(table, colCnt);
+					table.getColumns().add(column);
+					Cell cell = jrp.createTableCell(column, v.getLabel().replaceFirst("0 ", ""));
+					row.getCells().add(cell);
+					colCnt++;
+				} else if (v.getLabel().startsWith("1 ")) {
+					break;
+				} else {
+					continue;
+				}
+			}
+		}
+		colCnt = table.getHeader().getFirst().getCells().size();
+		for (Object o : edgePath) {
+			if (o instanceof MBTVertex) {
+				MBTVertex v = (MBTVertex) o;
+				if (v.equals(g.getStartVertex())) {
+					continue;
+				}
+				if (colCnt < table.getHeader().getFirst().getCells().size()) {
+					colCnt++;
+				} else {
+					colCnt = 0;
+					row = jrp.createTableRow(table);
+					table.getBody().add(row);
+				}
+			} else {
+				MBTEdge e = (MBTEdge) o;
+				if (g.getEdgeSource(e).equals(g.getStartVertex())) {
+					continue;
+				}
+				Cell cell = jrp.createTableCell(table.getColumns().get(colCnt), e.getLabel());
+				row.getCells().add(cell);
+			}
+		}
 	}
 
 	private ArrayList<Object> getPath(MBTGraph<MBTVertex, MBTEdge> g, MBTVertex vertex, MBTPathInfo pi) {

@@ -6,6 +6,6 @@ import org.farhan.objects.mbtTransformer.AsciidoctorToGraphGoal;
 public class AsciidoctorToGraphGoalImpl extends GoalObject implements AsciidoctorToGraphGoal {
 
 	public void transition() {
-		runGoal("org.farhan.mbt.asciidoctorgraph.ConvertAsciiDoctorToGraph");
+		runGoal("org.farhan.mbt.convert.ConvertAsciiDoctorToGraph");
 	}
 }

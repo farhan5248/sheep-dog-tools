@@ -1,8 +1,9 @@
-package org.farhan.mbt.asciidoctorgraph;
+package org.farhan.mbt.convert;
 
 import java.util.ArrayList;
 
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
+import org.farhan.mbt.converter.GraphToAdocConverter;
 import org.farhan.mbt.core.ConvertToDocument;
 import org.farhan.mbt.core.ToDocumentConverter;
 import org.farhan.mbt.graph.JGraphTProject;

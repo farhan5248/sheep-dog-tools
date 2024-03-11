@@ -1,4 +1,4 @@
-package org.farhan.mbt.asciidoctorgraph;
+package org.farhan.mbt.converter;
 
 import java.io.File;
 import java.util.ArrayList;

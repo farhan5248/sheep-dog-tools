@@ -1,4 +1,4 @@
-package org.farhan.mbt.graphuml;
+package org.farhan.mbt.converter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -94,7 +94,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	}
 
 	@Override
-	protected void convertInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception {
+	protected void convertInteractionMessages(Interaction anInteraction, List<?> path) throws Exception {
 
 		boolean isField = false;
 		boolean isKeyword = true;
@@ -103,9 +103,9 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		// ignore 0, it's start
 		// ignore 1, it's blank edge
 		// ignore size -1, it's end
-		for (int i = 2; i < steps.size() - 1; i++) {
+		for (int i = 2; i < path.size() - 1; i++) {
 			// for each i
-			String cs = getLabel(steps.get(i));
+			String cs = getLabel(path.get(i));
 			if (cs.contentEquals("start")) {
 				// if it's start, make empty map, set isField to true, is Keyword to false, skip
 				// empty edge
@@ -115,7 +115,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 				i++;
 			} else if (cs.contentEquals("end")) {
 				// if it's end, convert map to table, set isField to false, isKeyword to true
-				convertDataTableToArgument(dataTable, anInteraction.getMessages().getLast());
+				convertPathToDataTable(dataTable, anInteraction.getMessages().getLast());
 				isField = false;
 				isKeyword = true;
 			} else if (isKeyword) {
@@ -127,12 +127,12 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 					throw new Exception("Step (" + cs + ") is not valid, use Xtext editor to correct it first. ");
 				}
 				// skip the next element since it's an edge
-				if (!getLabel(steps.get(i + 1)).contentEquals("start")) {
+				if (!getLabel(path.get(i + 1)).contentEquals("start")) {
 					i++;
 				}
 			} else if (isField) {
 				// add map element for i and i+1, then i++
-				dataTable.put(cs, getLabel(steps.get(i + 1)));
+				dataTable.put(cs, getLabel(path.get(i + 1)));
 				i++;
 			}
 		}
@@ -171,7 +171,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		}
 	}
 
-	private void convertDataTableToArgument(TreeMap<String, String> dataTable, Message theMessage) {
+	private void convertPathToDataTable(TreeMap<String, String> dataTable, Message theMessage) {
 		ValueSpecification vs = createArgument(theMessage, "dataTable", "");
 
 		String row = "";

@@ -8,15 +8,13 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
-import org.apache.maven.settings.Settings;
-import org.farhan.mbt.asciidoctorgraph.ConvertAsciiDoctorToGraph;
+import org.farhan.mbt.convert.ConvertAsciiDoctorToGraph;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.MojoGoal;
 import org.farhan.mbt.core.Utilities;
-import org.farhan.mbt.cucumberuml.ConvertCucumberToUML;
 
 /**
- * Converts Graph model paths to a UML model using Eclipse EMF
+ * Converts Ascii Doctor files to Graph model paths
  *
  */
 @Mojo(name = "asciidoctor-to-graph", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
@@ -31,7 +29,7 @@ public class AsciiDoctorToGraphMojo extends AbstractMojo {
 	/**
 	 * The tag of the selected edges.
 	 */
-	@Parameter(property = "asciidoctor-to-graph.tag", defaultValue = "")
+	@Parameter(property = "tag", defaultValue = "")
 	private String tag;
 
 	public void execute() throws MojoExecutionException {

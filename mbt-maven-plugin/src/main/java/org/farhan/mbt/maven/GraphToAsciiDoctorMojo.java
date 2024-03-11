@@ -8,17 +8,17 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
-import org.farhan.mbt.convert.ConvertGraphToUML;
+import org.farhan.mbt.convert.ConvertGraphToAsciiDoctor;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.MojoGoal;
 import org.farhan.mbt.core.Utilities;
 
 /**
- * Converts Graph model paths to a UML model using Eclipse EMF
+ * Converts Graph model paths to Ascii Doctor files
  *
  */
-@Mojo(name = "graph-to-uml", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
-public class GraphToUMLMojo extends AbstractMojo {
+@Mojo(name = "graph-to-asciidoctor", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
+public class GraphToAsciiDoctorMojo extends AbstractMojo {
 
 	/**
 	 * The Maven Project.
@@ -27,7 +27,7 @@ public class GraphToUMLMojo extends AbstractMojo {
 	protected MavenProject project;
 
 	/**
-	 * The tag of the selected paths.
+	 * The tag of the selected edges.
 	 */
 	@Parameter(property = "tag", defaultValue = "")
 	private String tag;
@@ -40,7 +40,7 @@ public class GraphToUMLMojo extends AbstractMojo {
 				ConvertibleProject.tags = tag;
 				ConvertibleProject.baseDir = project.getBasedir().getAbsolutePath() + File.separator;
 			}
-			MojoGoal mojo = new ConvertGraphToUML();
+			MojoGoal mojo = new ConvertGraphToAsciiDoctor();
 			mojo.mojoGoal();
 		} catch (Exception e) {
 			getLog().error(Utilities.getStackTraceAsString(e));
