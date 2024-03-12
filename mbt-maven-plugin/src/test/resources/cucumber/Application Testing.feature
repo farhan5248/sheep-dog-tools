@@ -21,7 +21,7 @@ Feature: Application Testing
      When The cucumber-to-uml goal is executed
       And The uml-to-cucumber goal is executed
 
-  Scenario: Create step definition files
+  Scenario: Create AcmeAccountDetailsPageSteps.java
 
      Then The src/test/java/org/farhan/stepdefs/acme/AcmeAccountDetailsPageSteps.java file will be as follows
           """
@@ -42,7 +42,10 @@ Feature: Application Testing
           }
           
           """
-      And The src/test/java/org/farhan/stepdefs/acme/AcmeAccountSearchRequestSteps.java file will be as follows
+
+  Scenario: Create AcmeAccountSearchRequestSteps.java
+
+     Then The src/test/java/org/farhan/stepdefs/acme/AcmeAccountSearchRequestSteps.java file will be as follows
           """
           package org.farhan.stepdefs.acme;
           
@@ -62,7 +65,10 @@ Feature: Application Testing
           }
           
           """
-      And The src/test/java/org/farhan/stepdefs/acme/AcmeHomePageSteps.java file will be as follows
+
+  Scenario: Create AcmeHomePageSteps.java
+
+     Then The src/test/java/org/farhan/stepdefs/acme/AcmeHomePageSteps.java file will be as follows
           """
           package org.farhan.stepdefs.acme;
           
@@ -81,7 +87,10 @@ Feature: Application Testing
           }
           
           """
-      And The src/test/java/org/farhan/stepdefs/acme/AcmeLogInRequestSteps.java file will be as follows
+
+  Scenario: Create AcmeLogInRequestSteps.java
+
+     Then The src/test/java/org/farhan/stepdefs/acme/AcmeLogInRequestSteps.java file will be as follows
           """
           package org.farhan.stepdefs.acme;
           
@@ -102,7 +111,7 @@ Feature: Application Testing
           
           """
 
-  Scenario: Create step object files
+  Scenario: Create AccountDetailsPage.java
 
      Then The src/test/java/org/farhan/objects/acme/AccountDetailsPage.java file will be as follows
           """
@@ -116,7 +125,10 @@ Feature: Application Testing
           }
           
           """
-      And The src/test/java/org/farhan/objects/acme/AccountSearchRequest.java file will be as follows
+
+  Scenario: Create AccountSearchRequest.java
+
+     Then The src/test/java/org/farhan/objects/acme/AccountSearchRequest.java file will be as follows
           """
           package org.farhan.objects.acme;
           
@@ -130,7 +142,10 @@ Feature: Application Testing
           }
           
           """
-      And The src/test/java/org/farhan/objects/acme/HomePage.java file will be as follows
+
+  Scenario: Create HomePage.java
+
+     Then The src/test/java/org/farhan/objects/acme/HomePage.java file will be as follows
           """
           package org.farhan.objects.acme;
           
@@ -142,7 +157,10 @@ Feature: Application Testing
           }
           
           """
-      And The src/test/java/org/farhan/objects/acme/LogInRequest.java file will be as follows
+
+  Scenario: Create LogInRequest.java
+
+     Then The src/test/java/org/farhan/objects/acme/LogInRequest.java file will be as follows
           """
           package org.farhan.objects.acme;
           

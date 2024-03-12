@@ -23,7 +23,7 @@ Feature: Service Testing
      When The cucumber-to-uml goal is executed
       And The uml-to-cucumber goal is executed
 
-  Scenario: Create step definition files
+  Scenario: Create AdminFamilyDetailsResponseSteps.java
 
      Then The src/test/java/org/farhan/stepdefs/admin/AdminFamilyDetailsResponseSteps.java file will be as follows
           """
@@ -44,7 +44,10 @@ Feature: Service Testing
           }
           
           """
-      And The src/test/java/org/farhan/stepdefs/pharmacy/PharmacyClaimRequestSteps.java file will be as follows
+
+  Scenario: Create PharmacyClaimRequestSteps.java
+
+     Then The src/test/java/org/farhan/stepdefs/pharmacy/PharmacyClaimRequestSteps.java file will be as follows
           """
           package org.farhan.stepdefs.pharmacy;
           
@@ -64,7 +67,10 @@ Feature: Service Testing
           }
           
           """
-      And The src/test/java/org/farhan/stepdefs/pharmacy/PharmacyClaimResponseSteps.java file will be as follows
+
+  Scenario: Create PharmacyClaimResponseSteps.java
+
+     Then The src/test/java/org/farhan/stepdefs/pharmacy/PharmacyClaimResponseSteps.java file will be as follows
           """
           package org.farhan.stepdefs.pharmacy;
           
@@ -83,7 +89,10 @@ Feature: Service Testing
           }
           
           """
-      And The src/test/java/org/farhan/stepdefs/pharmacy/PharmacyNightlyPaymentRequestSteps.java file will be as follows
+
+  Scenario: Create PharmacyNightlyPaymentRequestSteps.java
+
+     Then The src/test/java/org/farhan/stepdefs/pharmacy/PharmacyNightlyPaymentRequestSteps.java file will be as follows
           """
           package org.farhan.stepdefs.pharmacy;
           
@@ -103,7 +112,7 @@ Feature: Service Testing
           
           """
 
-  Scenario: Create step object files
+  Scenario: Create FamilyDetailsResponse.java
 
      Then The src/test/java/org/farhan/objects/admin/FamilyDetailsResponse.java file will be as follows
           """
@@ -119,7 +128,10 @@ Feature: Service Testing
           }
           
           """
-      And The src/test/java/org/farhan/objects/pharmacy/ClaimRequest.java file will be as follows
+
+  Scenario: Create ClaimRequest.java
+
+     Then The src/test/java/org/farhan/objects/pharmacy/ClaimRequest.java file will be as follows
           """
           package org.farhan.objects.pharmacy;
           
@@ -135,7 +147,10 @@ Feature: Service Testing
           }
           
           """
-      And The src/test/java/org/farhan/objects/pharmacy/ClaimResponse.java file will be as follows
+
+  Scenario: Create ClaimResponse.java
+
+     Then The src/test/java/org/farhan/objects/pharmacy/ClaimResponse.java file will be as follows
           """
           package org.farhan.objects.pharmacy;
           
@@ -147,7 +162,10 @@ Feature: Service Testing
           }
           
           """
-      And The src/test/java/org/farhan/objects/pharmacy/NightlyPaymentRequest.java file will be as follows
+
+  Scenario: Create NightlyPaymentRequest.java
+
+     Then The src/test/java/org/farhan/objects/pharmacy/NightlyPaymentRequest.java file will be as follows
           """
           package org.farhan.objects.pharmacy;
           

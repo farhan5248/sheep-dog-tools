@@ -22,7 +22,7 @@ Feature: Batch-Job Testing
      When The cucumber-to-uml goal is executed
       And The uml-to-cucumber goal is executed
 
-  Scenario: Create step definition files
+  Scenario: Create AcmeOrdersTxtFileSteps.java
 
      Then The src/test/java/org/farhan/stepdefs/acme/AcmeOrdersTxtFileSteps.java file will be as follows
           """
@@ -57,7 +57,10 @@ Feature: Batch-Job Testing
           }
           
           """
-      And The src/test/java/org/farhan/stepdefs/acme/AcmeNightlyJobSteps.java file will be as follows
+
+  Scenario: Create AcmeNightlyJobSteps.java
+
+     Then The src/test/java/org/farhan/stepdefs/acme/AcmeNightlyJobSteps.java file will be as follows
           """
           package org.farhan.stepdefs.acme;
           
@@ -76,7 +79,10 @@ Feature: Batch-Job Testing
           }
           
           """
-      And The src/test/java/org/farhan/stepdefs/acme/AcmeReportingJobSteps.java file will be as follows
+
+  Scenario: Create AcmeReportingJobSteps.java
+
+     Then The src/test/java/org/farhan/stepdefs/acme/AcmeReportingJobSteps.java file will be as follows
           """
           package org.farhan.stepdefs.acme;
           
@@ -96,7 +102,7 @@ Feature: Batch-Job Testing
           
           """
 
-  Scenario: Create step object files
+  Scenario: Create OrdersTxtFile.java
 
      Then The src/test/java/org/farhan/objects/acme/OrdersTxtFile.java file will be as follows
           """
@@ -114,7 +120,10 @@ Feature: Batch-Job Testing
           }
           
           """
-      And The src/test/java/org/farhan/objects/acme/NightlyJob.java file will be as follows
+
+  Scenario: Create NightlyJob.java
+
+     Then The src/test/java/org/farhan/objects/acme/NightlyJob.java file will be as follows
           """
           package org.farhan.objects.acme;
           
@@ -126,7 +135,10 @@ Feature: Batch-Job Testing
           }
           
           """
-      And The src/test/java/org/farhan/objects/acme/ReportingJob.java file will be as follows
+
+  Scenario: Create ReportingJob.java
+
+     Then The src/test/java/org/farhan/objects/acme/ReportingJob.java file will be as follows
           """
           package org.farhan.objects.acme;
           

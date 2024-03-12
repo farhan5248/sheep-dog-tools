@@ -29,7 +29,7 @@ Feature: Plug-In Testing
      When The cucumber-to-uml goal is executed
       And The uml-to-cucumber goal is executed
 
-  Scenario: Create step definition files
+  Scenario: Create AcmeToolInputTxtFileSteps.java
 
      Then The src/test/java/org/farhan/stepdefs/acmeTool/AcmeToolInputTxtFileSteps.java file will be as follows
           """
@@ -57,7 +57,10 @@ Feature: Plug-In Testing
           }
           
           """
-      And The src/test/java/org/farhan/stepdefs/acmeTool/AcmeToolDoItGoalSteps.java file will be as follows
+
+  Scenario: Create AcmeToolDoItGoalSteps.java
+
+     Then The src/test/java/org/farhan/stepdefs/acmeTool/AcmeToolDoItGoalSteps.java file will be as follows
           """
           package org.farhan.stepdefs.acmeTool;
           
@@ -77,7 +80,10 @@ Feature: Plug-In Testing
           }
           
           """
-      And The src/test/java/org/farhan/stepdefs/acmeTool/AcmeToolOutputTxtFileSteps.java file will be as follows
+
+  Scenario: Create AcmeToolOutputTxtFileSteps.java
+
+     Then The src/test/java/org/farhan/stepdefs/acmeTool/AcmeToolOutputTxtFileSteps.java file will be as follows
           """
           package org.farhan.stepdefs.acmeTool;
           
@@ -104,7 +110,7 @@ Feature: Plug-In Testing
           
           """
 
-  Scenario: Create step object files
+  Scenario: Create InputTxtFile.java
 
      Then The src/test/java/org/farhan/objects/acmeTool/InputTxtFile.java file will be as follows
           """
@@ -120,7 +126,10 @@ Feature: Plug-In Testing
           }
           
           """
-      And The src/test/java/org/farhan/objects/acmeTool/DoItGoal.java file will be as follows
+
+  Scenario: Create DoItGoal.java
+
+     Then The src/test/java/org/farhan/objects/acmeTool/DoItGoal.java file will be as follows
           """
           package org.farhan.objects.acmeTool;
           
@@ -134,7 +143,10 @@ Feature: Plug-In Testing
           }
           
           """
-      And The src/test/java/org/farhan/objects/acmeTool/OutputTxtFile.java file will be as follows
+
+  Scenario: Create OutputTxtFile.java
+
+     Then The src/test/java/org/farhan/objects/acmeTool/OutputTxtFile.java file will be as follows
           """
           package org.farhan.objects.acmeTool;
           
