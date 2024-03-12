@@ -1,0 +1,151 @@
+:tags: 
+= Deductible
+
+Amount paid out of pocket each year before any claims are paid.
+Need
+a field for drug cost
+a field for deductible
+a field for Co-Insurance
+a field for insurer pays
+a field for paid out of pocket
+No Deductible
+Middle Deductible
+High Deductible
+
+[tags="unit"]
+== No Deductible
+
+
+
+* Given The Admin application, DIN page is as follows
+
+[options="header"]
+|===
+| DIN| Drug Cost
+| 2345| 100.0
+|===
+
+* And The Admin application, Provider page is as follows
+
+[options="header"]
+|===
+| Provider
+| 12345678
+|===
+
+* And The Admin application, Member page is as follows
+
+[options="header"]
+|===
+| Certificate
+| 123456789
+|===
+
+* When The Pharmacy service, Claim request is sent with
+
+[options="header"]
+|===
+| Drug Cost| Deductible| Co-Insurance| DIN| Provider| Certificate
+| 100.0| 0.0| 80.0| 2345| 12345678| 123456789
+|===
+
+* Then The Claim response will be as follows
+
+[options="header"]
+|===
+| Out Of Pocket| Plan Pays
+| 20.0| 80.0
+|===
+
+
+[tags="unit"]
+== Low Deductible
+
+
+
+* Given The Admin application, DIN page is as follows
+
+[options="header"]
+|===
+| DIN| Drug Cost
+| 2345| 100.0
+|===
+
+* And The Admin application, Provider page is as follows
+
+[options="header"]
+|===
+| Provider
+| 12345678
+|===
+
+* And The Admin application, Member page is as follows
+
+[options="header"]
+|===
+| Certificate
+| 123456789
+|===
+
+* When The Pharmacy service, Claim request is sent with
+
+[options="header"]
+|===
+| Drug Cost| Deductible| Co-Insurance| DIN| Provider| Certificate
+| 100.0| 10.0| 80.0| 2345| 12345678| 123456789
+|===
+
+* Then The Claim response will be as follows
+
+[options="header"]
+|===
+| Out Of Pocket| Plan Pays
+| 28.0| 72.0
+|===
+
+
+[tags="unit,component"]
+== High Deductible
+
+
+
+* Given The Admin application, DIN page is as follows
+
+[options="header"]
+|===
+| DIN| Drug Cost
+| 2345| 100.0
+|===
+
+* And The Admin application, Provider page is as follows
+
+[options="header"]
+|===
+| Provider
+| 12345678
+|===
+
+* And The Admin application, Member page is as follows
+
+[options="header"]
+|===
+| Certificate
+| 123456789
+|===
+
+* When The Pharmacy service, Claim request is sent with
+
+[options="header"]
+|===
+| Drug Cost| Deductible| Co-Insurance| DIN| Provider| Certificate
+| 100.0| 100.0| 80.0| 2345| 12345678| 123456789
+|===
+
+* Then The Claim response will be as follows
+
+[options="header"]
+|===
+| Out Of Pocket| Plan Pays
+| 100.0| 0.0
+|===
+

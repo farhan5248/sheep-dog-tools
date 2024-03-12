@@ -30,11 +30,13 @@ public class UMLToGraphConverter extends ToGraphConverter {
 	// project?
 	private JGraphTGraphWrapper tgtWrp;
 	private UMLProject srcPrj;
+	private int pathCnt;
 
 	public UMLToGraphConverter(String layer, UMLProject source, JGraphTProject target) {
 		this.layer = layer;
 		this.srcPrj = source;
 		this.tgtPrj = target;
+		pathCnt = 0;
 	}
 
 	@Override
@@ -55,6 +57,39 @@ public class UMLToGraphConverter extends ToGraphConverter {
 		tgtWrp = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(c.getQualifiedName()));
 		convertClassAnnotationsToTags(c);
 		convertComments(c);
+	}
+
+	@Override
+	protected String convertObjectName(String fullName) {
+		String pathName = fullName;
+		pathName = pathName.replace("pst::" + tgtPrj.FIRST_LAYER, tgtPrj.getDir(tgtPrj.FIRST_LAYER).getAbsolutePath());
+		pathName = pathName.replace("::", File.separator);
+		pathName = pathName + tgtPrj.getFileExt(tgtPrj.FIRST_LAYER);
+		return pathName;
+	}
+
+	@Override
+	protected void convertElements(ConvertibleObject object) throws Exception {
+		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
+		UMLClassWrapper ucw = (UMLClassWrapper) object;
+		Class c = (Class) ucw.get();
+		for (int i = 0; i < c.getOwnedBehaviors().size(); i++) {
+			Interaction anInteraction = (Interaction) c.getOwnedBehaviors().get(i);
+			if (anInteraction.getEAnnotation("background") != null) {
+				// background
+			} else if (!anInteraction.getEAnnotations().isEmpty()) {
+				// outline examples
+			} else {
+				MBTPathInfo pi = new MBTPathInfo();
+				g.addPath(pi);
+				pi.setIndex(String.valueOf(pathCnt));
+				pi.setName(anInteraction.getName());
+				convertComments(anInteraction, pi);
+				convertParametersToTags(anInteraction, pi);
+				convertInteractionMessages(anInteraction, pi);
+				pathCnt++;
+			}
+		}
 	}
 
 	private void convertClassAnnotationsToTags(Class c) {
@@ -83,41 +118,9 @@ public class UMLToGraphConverter extends ToGraphConverter {
 		}
 	}
 
-	@Override
-	protected String convertObjectName(String fullName) {
-		String pathName = fullName;
-		pathName = pathName.replace("pst::" + tgtPrj.FIRST_LAYER, tgtPrj.getDir(tgtPrj.FIRST_LAYER).getAbsolutePath());
-		pathName = pathName.replace("::", File.separator);
-		pathName = pathName + tgtPrj.getFileExt(tgtPrj.FIRST_LAYER);
-		return pathName;
-	}
-
 	private String convertObjectName(String stepName, String layer) {
 		return tgtPrj.getDir(layer).getAbsolutePath() + File.separator + stepName.replace(",", "")
 				+ tgtPrj.getFileExt(layer);
-	}
-
-	@Override
-	protected void convertElements(ConvertibleObject object) throws Exception {
-		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
-		UMLClassWrapper ucw = (UMLClassWrapper) object;
-		Class c = (Class) ucw.get();
-		for (int i = 0; i < c.getOwnedBehaviors().size(); i++) {
-			Interaction anInteraction = (Interaction) c.getOwnedBehaviors().get(i);
-			if (anInteraction.getEAnnotation("background") != null) {
-
-			} else if (!anInteraction.getEAnnotations().isEmpty()) {
-
-			} else {
-				MBTPathInfo pi = new MBTPathInfo();
-				g.addPath(pi);
-				pi.setIndex(String.valueOf(i));
-				pi.setName(anInteraction.getName());
-				convertComments(anInteraction, pi);
-				convertParametersToTags(anInteraction, pi);
-				convertInteractionMessages(anInteraction, pi);
-			}
-		}
 	}
 
 	private void convertInteractionMessages(Interaction itr, MBTPathInfo pi) {

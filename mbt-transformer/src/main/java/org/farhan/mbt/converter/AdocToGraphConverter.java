@@ -35,7 +35,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		this.layer = layer;
 		this.srcPrj = source;
 		this.tgtPrj = target;
-		this.pathCnt = -1;
+		this.pathCnt = 0;
 	}
 
 	@Override
@@ -97,7 +97,6 @@ public class AdocToGraphConverter extends ToGraphConverter {
 
 	private void convertSectionsToScenarios(MBTGraph<MBTVertex, MBTEdge> g, Section scenario) {
 
-		pathCnt++;
 		g.addPath(String.valueOf(pathCnt), scenario.getTitle(), convertSectionAttributesToTags(scenario),
 				convertSectionTextToDescription(scenario));
 		ArrayList<ListItem> steps = convertBlocksToSteps(scenario);
@@ -114,6 +113,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 			g.createEdgeWithVertices(source, target, "", String.valueOf(pathCnt));
 			convertTableToGraph(steps.get(i), scenario.getTitle());
 		}
+		pathCnt++;
 	}
 
 	private ArrayList<ListItem> convertBlocksToSteps(Section scenario) {

@@ -1,0 +1,142 @@
+:tags: 
+= DIN
+
+
+
+[tags="unit,component"]
+== Unknown DIN
+
+
+
+* Given The Admin application, DIN page is as follows
+
+[options="header"]
+|===
+| DIN| Drug Cost
+| 2345| 90.0
+|===
+
+* And The Admin application, Provider page is as follows
+
+[options="header"]
+|===
+| Provider
+| 12345678
+|===
+
+* And The Admin application, Member page is as follows
+
+[options="header"]
+|===
+| Certificate
+| 123456789
+|===
+
+* When The Pharmacy service, Claim request is sent with
+
+[options="header"]
+|===
+| Drug Cost| Deductible| Co-Insurance| DIN| Provider| Certificate
+| 100.0| 10.0| 80.0| 1234| 12345678| 123456789
+|===
+
+* Then The Claim response will be as follows
+
+[options="header"]
+|===
+| Reject Message
+| Unknown DIN
+|===
+
+
+[tags="unit"]
+== Known DIN with different cost
+
+
+
+* Given The Admin application, DIN page is as follows
+
+[options="header"]
+|===
+| DIN| Drug Cost
+| 2345| 90.0
+|===
+
+* And The Admin application, Provider page is as follows
+
+[options="header"]
+|===
+| Provider
+| 12345678
+|===
+
+* And The Admin application, Member page is as follows
+
+[options="header"]
+|===
+| Certificate
+| 123456789
+|===
+
+* When The Pharmacy service, Claim request is sent with
+
+[options="header"]
+|===
+| Drug Cost| Deductible| Co-Insurance| DIN| Provider| Certificate
+| 100.0| 10.0| 80.0| 2345| 12345678| 123456789
+|===
+
+* Then The Claim response will be as follows
+
+[options="header"]
+|===
+| Reject Message
+| Different Cost
+|===
+
+
+[tags="unit"]
+== Known DIN with same cost
+
+
+
+* Given The Admin application, DIN page is as follows
+
+[options="header"]
+|===
+| DIN| Drug Cost
+| 2345| 100.0
+|===
+
+* And The Admin application, Provider page is as follows
+
+[options="header"]
+|===
+| Provider
+| 12345678
+|===
+
+* And The Admin application, Member page is as follows
+
+[options="header"]
+|===
+| Certificate
+| 123456789
+|===
+
+* When The Pharmacy service, Claim request is sent with
+
+[options="header"]
+|===
+| Drug Cost| Deductible| Co-Insurance| DIN| Provider| Certificate
+| 100.0| 10.0| 80.0| 2345| 12345678| 123456789
+|===
+
+* Then The Claim response will be as follows
+
+[options="header"]
+|===
+| Reject Message
+| No Problems
+|===
+

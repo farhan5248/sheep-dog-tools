@@ -23,8 +23,8 @@ Feature: Co-Insurance
           | Certificate |
           |   123456789 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Co-Insurance | Deductible |  DIN | Provider | Certificate |
-          |     100.0 |          0.0 |       10.0 | 2345 | 12345678 |   123456789 |
+          | Certificate | Co-Insurance |  DIN | Deductible | Drug Cost | Provider |
+          |   123456789 |          0.0 | 2345 |       10.0 |     100.0 | 12345678 |
      Then The Claim response will be as follows
           | Out Of Pocket | Plan Pays |
           |         100.0 |       0.0 |
@@ -42,8 +42,8 @@ Feature: Co-Insurance
           | Certificate |
           |   123456789 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Co-Insurance | Deductible |  DIN | Provider | Certificate |
-          |     100.0 |         50.0 |       10.0 | 2345 | 12345678 |   123456789 |
+          | Certificate | Co-Insurance |  DIN | Deductible | Drug Cost | Provider |
+          |   123456789 |         50.0 | 2345 |       10.0 |     100.0 | 12345678 |
      Then The Claim response will be as follows
           | Out Of Pocket | Plan Pays |
           |          55.0 |      45.0 |
@@ -61,8 +61,8 @@ Feature: Co-Insurance
           | Certificate |
           |   123456789 |
      When The Pharmacy service, Claim request is sent with
-          | Drug Cost | Co-Insurance | Deductible |  DIN | Provider | Certificate |
-          |     100.0 |        100.0 |       10.0 | 2345 | 12345678 |   123456789 |
+          | Certificate | Co-Insurance |  DIN | Deductible | Drug Cost | Provider |
+          |   123456789 |        100.0 | 2345 |       10.0 |     100.0 | 12345678 |
      Then The Claim response will be as follows
           | Out Of Pocket | Plan Pays |
           |          10.0 |      90.0 |

@@ -1,0 +1,147 @@
+:tags: 
+= Dispense Fee
+
+Sometimes this is included in the coverage but not always.
+Some insurers only cover the drug cost or if they do cover the dispense fee, it's a limited number of times.
+Modify these scenarios. Make a plan where the dispense fee
+- is covered
+- is covered but capped
+- is not covered
+
+[tags="unit"]
+== No Dispense Fee
+
+
+
+* Given The Admin application, DIN page is as follows
+
+[options="header"]
+|===
+| DIN| Drug Cost
+| 2345| 100.0
+|===
+
+* And The Admin application, Provider page is as follows
+
+[options="header"]
+|===
+| Provider
+| 12345678
+|===
+
+* And The Admin application, Member page is as follows
+
+[options="header"]
+|===
+| Certificate
+| 123456789
+|===
+
+* When The Pharmacy service, Claim request is sent with
+
+[options="header"]
+|===
+| Drug Cost| Deductible| Co-Insurance| Dispense Fee| DIN| Provider| Certificate
+| 100.0| 10.0| 80.0| 0.0| 2345| 12345678| 123456789
+|===
+
+* Then The Claim response will be as follows
+
+[options="header"]
+|===
+| Out Of Pocket| Plan Pays
+| 28.0| 72.0
+|===
+
+
+[tags="unit"]
+== Low Dispense Fee
+
+
+
+* Given The Admin application, DIN page is as follows
+
+[options="header"]
+|===
+| DIN| Drug Cost
+| 2345| 100.0
+|===
+
+* And The Admin application, Provider page is as follows
+
+[options="header"]
+|===
+| Provider
+| 12345678
+|===
+
+* And The Admin application, Member page is as follows
+
+[options="header"]
+|===
+| Certificate
+| 123456789
+|===
+
+* When The Pharmacy service, Claim request is sent with
+
+[options="header"]
+|===
+| Drug Cost| Deductible| Co-Insurance| Dispense Fee| DIN| Provider| Certificate
+| 100.0| 10.0| 80.0| 5.0| 2345| 12345678| 123456789
+|===
+
+* Then The Claim response will be as follows
+
+[options="header"]
+|===
+| Out Of Pocket| Plan Pays
+| 29.0| 76.0
+|===
+
+
+[tags="unit,component"]
+== High Dispense Fee
+
+
+
+* Given The Admin application, DIN page is as follows
+
+[options="header"]
+|===
+| DIN| Drug Cost
+| 2345| 100.0
+|===
+
+* And The Admin application, Provider page is as follows
+
+[options="header"]
+|===
+| Provider
+| 12345678
+|===
+
+* And The Admin application, Member page is as follows
+
+[options="header"]
+|===
+| Certificate
+| 123456789
+|===
+
+* When The Pharmacy service, Claim request is sent with
+
+[options="header"]
+|===
+| Drug Cost| Deductible| Co-Insurance| Dispense Fee| DIN| Provider| Certificate
+| 100.0| 10.0| 80.0| 15.0| 2345| 12345678| 123456789
+|===
+
+* Then The Claim response will be as follows
+
+[options="header"]
+|===
+| Out Of Pocket| Plan Pays
+| 31.0| 84.0
+|===
+
