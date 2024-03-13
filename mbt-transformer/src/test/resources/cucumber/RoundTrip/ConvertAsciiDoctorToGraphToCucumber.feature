@@ -37,7 +37,7 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           [options="header"]
           |===
           | grp| ins
-          | 8| 4
+          | 8| <ins>
           |===
           
           === Then The Search application, Logout page is invalid
@@ -45,6 +45,12 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           
           [tags="tag4",examples="true"]
           === Some data
+          
+          [options="header"]
+          |===
+          | ins
+          | 4
+          |===
           
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
@@ -62,12 +68,14 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           			index:0
           			name:Story One
           			tag:tag2
+          			parameters:
           			description:
           				Desc 2
           		Path
           			index:1
-          			name:Story Two
+          			name:Story Two/Some data/0
           			tag:tag3
+          			parameters:ins
           			description:
           				Desc 3
           	vertices:
@@ -252,9 +260,11 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
                     |   8 | <ins> |
                Then The Search application, Logout page is invalid
           
-             Examples: Some data
-             
-             | ins |
-             |   4 |
+              Examples: Some data
+          
+                    | ins |
+                    |   4 |
+          
+          
           """
 

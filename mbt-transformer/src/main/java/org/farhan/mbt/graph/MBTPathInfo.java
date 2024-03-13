@@ -1,24 +1,33 @@
 package org.farhan.mbt.graph;
 
+import java.util.TreeSet;
+
 public class MBTPathInfo {
 
 	private String description;
 	private String index;
 	private String name;
 	private String tags;
+	private String parameters;
 
 	public MBTPathInfo() {
 		this.index = "";
 		this.name = "";
 		this.tags = "";
 		this.description = "";
+		this.parameters = "";
 	}
 
-	public MBTPathInfo(String index, String name, String tags, String description) {
+	public MBTPathInfo(String index, String name, String tags, String description, String parameters) {
 		this.index = index;
 		this.name = name;
 		this.tags = tags;
 		this.description = description;
+		this.parameters = parameters;
+	}
+
+	public String getParameters() {
+		return parameters;
 	}
 
 	public String getDescription() {
@@ -37,6 +46,10 @@ public class MBTPathInfo {
 		return tags;
 	}
 
+	public void setParameters(String parameters) {
+		this.parameters = parameters;
+	}
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -58,6 +71,7 @@ public class MBTPathInfo {
 		text += "\n\tindex:" + index;
 		text += "\n\tname:" + name;
 		text += "\n\ttag:" + tags;
+		text += "\n\tparameters:" + parameters;
 		text += "\n\tdescription:";
 		for (String line : description.split("\n")) {
 			text += "\n\t\t" + line;

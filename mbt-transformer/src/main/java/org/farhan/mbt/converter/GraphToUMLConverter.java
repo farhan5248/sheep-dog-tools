@@ -6,13 +6,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.eclipse.xtext.impl.RuleCallImpl;
-import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
-import org.farhan.cucumber.Step;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToUMLGherkinConverter;
 import org.farhan.mbt.core.Utilities;
@@ -89,17 +87,71 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		for (MBTPathInfo pi : g.getPathInfo()) {
 			ArrayList<Object> p = getPath(g, g.getStartVertex(), pi);
 			resetCurrentMachineAndState();
-			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), pi.getName());
+			String[] nameParts = pi.getName().split("/");
+			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), nameParts[0]);
 			anInteraction.createOwnedComment().setBody(pi.getDescription());
 			convertTagsToParameters(anInteraction, pi.getTags().split(","));
+			TreeMap<String, String> exampleData = getExampleData(pi, p);
 			convertInteractionMessages(anInteraction, p);
+			if (!pi.getParameters().isEmpty()) {
+
+				EAnnotation exampleAnnotation = anInteraction.getEAnnotation(nameParts[1]);
+				if (exampleAnnotation == null) {
+					String value = "";
+					for (String e : exampleData.keySet()) {
+						value += e + "|";
+					}
+					exampleAnnotation = createAnnotation(anInteraction, nameParts[1], "0", value);
+				}
+				String value = "";
+				for (String e : exampleData.keySet()) {
+					value += exampleData.get(e) + "|";
+				}
+				createAnnotation(anInteraction, nameParts[1], String.valueOf(exampleAnnotation.getDetails().size()),
+						value);
+			}
 		}
+	}
+
+	private TreeMap<String, String> getExampleData(MBTPathInfo pi, List<?> path) {
+		TreeMap<String, String> exampleData = new TreeMap<String, String>();
+		if (pi.getParameters().isEmpty()) {
+			return exampleData;
+		}
+		for (String p : pi.getParameters().split(",")) {
+			exampleData.put(p, "");
+		}
+		boolean isField = false;
+		for (int i = 2; i < path.size() - 1; i++) {
+			String cs = getLabel(path.get(i));
+			if (cs.contentEquals("start")) {
+				isField = true;
+				i++;
+			} else if (cs.contentEquals("end")) {
+				isField = false;
+			} else if (!isField) {
+				if (!getLabel(path.get(i + 1)).contentEquals("start")) {
+					i++;
+				}
+			} else if (isField) {
+				// Strip out the row number
+				String key = cs.replaceFirst("[0-9]+ ", "");
+				if (exampleData.get(key) != null) {
+					// if the field name matches something then replace the value
+					exampleData.put(key, getLabel(path.get(i + 1)));
+					((MBTEdge) path.get(i + 1)).setLabel("<" + key + ">");
+				}
+				i++;
+			}
+		}
+		return exampleData;
 	}
 
 	@Override
 	protected void convertInteractionMessages(Interaction anInteraction, List<?> path) throws Exception {
 
 		boolean isField = false;
+		// TODO isKeyword is always the opposite of isField so remove it?
 		boolean isKeyword = true;
 		TreeMap<String, String> dataTable = null;
 		// use loop with counters
@@ -107,7 +159,6 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		// ignore 1, it's blank edge
 		// ignore size -1, it's end
 		for (int i = 2; i < path.size() - 1; i++) {
-			// for each i
 			String cs = getLabel(path.get(i));
 			if (cs.contentEquals("start")) {
 				// if it's start, make empty map, set isField to true, is Keyword to false, skip

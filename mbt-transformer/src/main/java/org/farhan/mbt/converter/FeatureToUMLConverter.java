@@ -107,7 +107,6 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 					Scenario s = (Scenario) as;
 					convertTagsToParameters(anInteraction, s.getTags());
 				}
-				// TODO apply example data to step data table
 				if (as instanceof ScenarioOutline) {
 					ScenarioOutline so = (ScenarioOutline) as;
 					convertTagsToParameters(anInteraction, so.getTags());

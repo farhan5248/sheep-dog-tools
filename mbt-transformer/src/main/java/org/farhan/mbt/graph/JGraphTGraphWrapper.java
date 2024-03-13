@@ -67,6 +67,8 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 				((MBTPathInfo) lastObject).setName(line.replace("\t\t\tname:", ""));
 			} else if (line.startsWith("\t\t\ttag:") && lastObject instanceof MBTPathInfo) {
 				((MBTPathInfo) lastObject).setTags(line.replace("\t\t\ttag:", ""));
+			} else if (line.startsWith("\t\t\tparameters:") && lastObject instanceof MBTPathInfo) {
+				((MBTPathInfo) lastObject).setParameters(line.replace("\t\t\tparameters:", ""));
 			} else if (line.startsWith("\t\t\tdescription:") && lastObject instanceof MBTPathInfo) {
 				isDescription = true;
 			} else if (line.startsWith("\tvertices:")) {

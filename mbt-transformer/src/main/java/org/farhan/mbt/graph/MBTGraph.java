@@ -3,6 +3,8 @@ package org.farhan.mbt.graph;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.jgrapht.graph.DirectedWeightedPseudograph;
 
@@ -36,8 +38,14 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 		paths.add(path);
 	}
 
-	public void addPath(String id, String name, String tags, String description) {
-		paths.add(new MBTPathInfo(id, name, tags, description));
+	public void addPath(String id, String name, String tags, String description, Set<String> parameters) {
+		TreeSet<String> sortedParameters = new TreeSet<String>();
+		sortedParameters.addAll(parameters);
+		String textParameters = "";
+		for (String p : sortedParameters) {
+			textParameters += "," + p;
+		}
+		paths.add(new MBTPathInfo(id, name, tags, description, textParameters.replaceFirst(",", "")));
 	}
 
 	public void setTags(String tag) {

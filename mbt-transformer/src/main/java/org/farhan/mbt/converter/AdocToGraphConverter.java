@@ -5,13 +5,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.asciidoctor.ast.Block;
+import org.asciidoctor.ast.Cell;
 import org.asciidoctor.ast.Row;
 import org.asciidoctor.ast.Section;
 import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
 import org.asciidoctor.ast.Document;
-import org.asciidoctor.ast.List;
-import org.asciidoctor.ast.ListItem;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
@@ -74,7 +73,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	protected void convertElements(ConvertibleObject object) throws Exception {
 		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) object;
 		Document src = (Document) adaw.get();
-		MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
+		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
 		for (StructuralNode block : src.getBlocks()) {
 			if (block instanceof Section) {
 				Section scenario = (Section) block;
@@ -83,15 +82,16 @@ public class AdocToGraphConverter extends ToGraphConverter {
 				String tags = convertSectionAttributesToTags(scenario);
 				String description = convertSectionTextToDescription(scenario);
 				if (examples.isEmpty()) {
-					convertSectionToPath(tgt, steps, scenario.getTitle(), tags, description,
+					convertSectionToPath(g, steps, scenario.getTitle(), tags, description,
 							new HashMap<String, String>());
 				} else {
 					for (Section example : examples) {
 						ArrayList<HashMap<String, String>> replacements = convertExamplesToMaps(example);
-						for (HashMap<String, String> map : replacements) {
-							// TODO, append map number to title, so use int i=0 etc
-							convertSectionToPath(tgt, steps, scenario.getTitle() + "/" + example.getTitle(), tags,
-									description, map);
+						for (int i = 0; i < replacements.size(); i++) {
+							convertSectionToPath(g, steps,
+									scenario.getTitle() + "/" + example.getTitle() + "/" + String.valueOf(i), tags,
+									description, replacements.get(i));
+
 						}
 					}
 				}
@@ -115,15 +115,10 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		return qualifiedName;
 	}
 
-	private ArrayList<HashMap<String, String>> convertExamplesToMaps(Section examples) {
-		// TODO loop through the section and convert the table into a list of maps
-		return new ArrayList<HashMap<String, String>>();
-	}
-
 	private void convertSectionToPath(MBTGraph<MBTVertex, MBTEdge> g, ArrayList<Section> steps, String title,
 			String tags, String description, HashMap<String, String> replacements) {
 
-		g.addPath(String.valueOf(pathCnt), title, tags, description);
+		g.addPath(String.valueOf(pathCnt), title, tags, description, replacements.keySet());
 		g.createEdgeWithVertices(g.getStartVertex().getLabel(), steps.getFirst().getTitle(), "",
 				String.valueOf(pathCnt));
 		for (int i = 0; i < steps.size(); i++) {
@@ -144,9 +139,9 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		ArrayList<Section> steps = new ArrayList<Section>();
 		for (StructuralNode block : scenario.getBlocks()) {
 			if (block instanceof Section) {
-				if (scenario.getAttributes().get("examples") != null && !skipExamples) {
+				if (block.getAttributes().get("examples") != null && !skipExamples) {
 					steps.add((Section) block);
-				} else if (scenario.getAttributes().get("examples") == null && skipExamples) {
+				} else if (block.getAttributes().get("examples") == null && skipExamples) {
 					steps.add((Section) block);
 				}
 			}
@@ -174,6 +169,30 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		}
 		text = text.trim();
 		return text;
+	}
+
+	private ArrayList<HashMap<String, String>> convertExamplesToMaps(Section examples) {
+		ArrayList<HashMap<String, String>> replacements = new ArrayList<HashMap<String, String>>();
+		for (StructuralNode block : examples.getBlocks()) {
+			if (block instanceof Table) {
+				Table table = (Table) block;
+				ArrayList<String> paramNames = new ArrayList<String>();
+				for (Cell cell : table.getHeader().getFirst().getCells()) {
+					paramNames.add(cell.getText());
+				}
+				int rowCnt = table.getBody().size();
+				for (int i = 0; i < rowCnt; i++) {
+					Row row = table.getBody().get(i);
+					HashMap<String, String> map = new HashMap<String, String>();
+					int cellCnt = row.getCells().size();
+					for (int j = 0; j < cellCnt; j++) {
+						map.put(paramNames.get(j), row.getCells().get(j).getText());
+					}
+					replacements.add(map);
+				}
+			}
+		}
+		return replacements;
 	}
 
 	private void convertTableToGraph(Section step, String scenarioTitle, HashMap<String, String> replacements) {
@@ -205,11 +224,11 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	}
 
 	private String replaceWithExampleData(HashMap<String, String> replacements, String text) {
-		if (text.startsWith("<")) {
+		if (text.startsWith("&lt;")) {
 			for (String key : replacements.keySet()) {
 				String value = replacements.get(key);
-				if (text.contentEquals("<" + value + ">")) {
-					return replacements.get(value);
+				if (text.contentEquals("&lt;" + key + "&gt;")) {
+					return replacements.get(key);
 				}
 			}
 		}

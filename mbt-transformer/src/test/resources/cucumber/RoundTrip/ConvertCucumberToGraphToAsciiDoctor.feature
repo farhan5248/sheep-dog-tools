@@ -53,12 +53,14 @@ Feature: Convert Cucumber To Graph To AsciiDoctor
           			index:0
           			name:Story One
           			tag:tag2
+          			parameters:
           			description:
           				Desc 2
           		Path
           			index:1
           			name:Story Two
           			tag:tag3
+          			parameters:
           			description:
           				Desc 3
           	vertices:
