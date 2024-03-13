@@ -77,18 +77,18 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		for (StructuralNode block : src.getBlocks()) {
 			if (block instanceof Section) {
 				Section scenario = (Section) block;
-				ArrayList<Section> steps = convertBlocksToSteps(scenario, true);
-				ArrayList<Section> examples = convertBlocksToSteps(scenario, false);
+				ArrayList<Section> steps = convertBlocksToSteps(scenario);
+				ArrayList<Section> examples = convertBlocksToExamples(scenario);
 				String tags = convertSectionAttributesToTags(scenario);
 				String description = convertSectionTextToDescription(scenario);
 				if (examples.isEmpty()) {
-					convertSectionToPath(g, steps, scenario.getTitle(), tags, description,
+					convertSectionBlocksToPath(g, steps, scenario.getTitle(), tags, description,
 							new HashMap<String, String>());
 				} else {
 					for (Section example : examples) {
 						ArrayList<HashMap<String, String>> replacements = convertExamplesToMaps(example);
 						for (int i = 0; i < replacements.size(); i++) {
-							convertSectionToPath(g, steps,
+							convertSectionBlocksToPath(g, steps,
 									scenario.getTitle() + "/" + example.getTitle() + "/" + String.valueOf(i), tags,
 									description, replacements.get(i));
 
@@ -115,7 +115,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		return qualifiedName;
 	}
 
-	private void convertSectionToPath(MBTGraph<MBTVertex, MBTEdge> g, ArrayList<Section> steps, String title,
+	private void convertSectionBlocksToPath(MBTGraph<MBTVertex, MBTEdge> g, ArrayList<Section> steps, String title,
 			String tags, String description, HashMap<String, String> replacements) {
 
 		g.addPath(String.valueOf(pathCnt), title, tags, description, replacements.keySet());
@@ -135,13 +135,23 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		pathCnt++;
 	}
 
-	private ArrayList<Section> convertBlocksToSteps(Section scenario, boolean skipExamples) {
+	private ArrayList<Section> convertBlocksToSteps(Section scenario) {
 		ArrayList<Section> steps = new ArrayList<Section>();
 		for (StructuralNode block : scenario.getBlocks()) {
 			if (block instanceof Section) {
-				if (block.getAttributes().get("examples") != null && !skipExamples) {
+				if (block.getAttributes().get("examples") == null) {
 					steps.add((Section) block);
-				} else if (block.getAttributes().get("examples") == null && skipExamples) {
+				}
+			}
+		}
+		return steps;
+	}
+
+	private ArrayList<Section> convertBlocksToExamples(Section scenario) {
+		ArrayList<Section> steps = new ArrayList<Section>();
+		for (StructuralNode block : scenario.getBlocks()) {
+			if (block instanceof Section) {
+				if (block.getAttributes().get("examples") != null) {
 					steps.add((Section) block);
 				}
 			}
@@ -224,10 +234,9 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	}
 
 	private String replaceWithExampleData(HashMap<String, String> replacements, String text) {
-		if (text.startsWith("&lt;")) {
+		if (text.startsWith("{")) {
 			for (String key : replacements.keySet()) {
-				String value = replacements.get(key);
-				if (text.contentEquals("&lt;" + key + "&gt;")) {
+				if (text.contentEquals("{" + key + "}")) {
 					return replacements.get(key);
 				}
 			}

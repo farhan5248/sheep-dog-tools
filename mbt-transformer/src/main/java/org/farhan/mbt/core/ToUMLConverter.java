@@ -47,11 +47,11 @@ public abstract class ToUMLConverter {
 
 	protected abstract void addNextLayerInteractionParameters(Interaction targetInteraction, Message m);
 
-	protected abstract void convertBehaviours(ConvertibleObject layerClass) throws Exception;
+	protected abstract void convertInteractions(ConvertibleObject layerClass) throws Exception;
 
 	protected abstract void convertImports(ConvertibleObject layerClass) throws Exception;
 
-	protected abstract void convertInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception;
+	protected abstract void convertMessages(Interaction anInteraction, List<?> steps) throws Exception;
 
 	protected abstract void convertMessage(Interaction anInteraction, Object anObject) throws Exception;
 
@@ -75,7 +75,7 @@ public abstract class ToUMLConverter {
 		for (ConvertibleObject co : getObjects(getLayer())) {
 			convertObject(co);
 			convertImports(co);
-			convertBehaviours(co);
+			convertInteractions(co);
 		}
 	}
 

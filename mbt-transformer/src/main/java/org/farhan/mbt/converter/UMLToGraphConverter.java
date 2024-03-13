@@ -2,10 +2,19 @@ package org.farhan.mbt.converter;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 
+import org.asciidoctor.ast.Cell;
 import org.asciidoctor.ast.Row;
+import org.asciidoctor.ast.Section;
+import org.asciidoctor.ast.StructuralNode;
+import org.asciidoctor.ast.Table;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.uml2.uml.Behavior;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.LiteralString;
@@ -73,23 +82,48 @@ public class UMLToGraphConverter extends ToGraphConverter {
 		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
 		UMLClassWrapper ucw = (UMLClassWrapper) object;
 		Class c = (Class) ucw.get();
-		for (int i = 0; i < c.getOwnedBehaviors().size(); i++) {
-			Interaction anInteraction = (Interaction) c.getOwnedBehaviors().get(i);
+		for (Behavior b : c.getOwnedBehaviors()) {
+			Interaction anInteraction = (Interaction) b;
+			EList<Message> steps = anInteraction.getMessages();
+			EList<EAnnotation> examples = anInteraction.getEAnnotations();
+			String tags = convertParametersToTags(anInteraction);
+			String description = convertCommentsToDescription(anInteraction);
 			if (anInteraction.getEAnnotation("background") != null) {
 				// background
-			} else if (!anInteraction.getEAnnotations().isEmpty()) {
-				// outline examples
+			} else if (anInteraction.getEAnnotations().isEmpty()) {
+				convertInteractionMessagesToPath(g, steps, anInteraction.getName(), tags, description,
+						new HashMap<String, String>());
 			} else {
-				MBTPathInfo pi = new MBTPathInfo();
-				g.addPath(pi);
-				pi.setIndex(String.valueOf(pathCnt));
-				pi.setName(anInteraction.getName());
-				convertComments(anInteraction, pi);
-				convertParametersToTags(anInteraction, pi);
-				convertInteractionMessages(anInteraction, pi);
-				pathCnt++;
+				for (EAnnotation example : examples) {
+					ArrayList<HashMap<String, String>> replacements = convertExamplesToMaps(example);
+					for (int i = 0; i < replacements.size(); i++) {
+						convertInteractionMessagesToPath(g, steps,
+								anInteraction.getName() + "/" + example.getSource() + "/" + String.valueOf(i), tags,
+								description, replacements.get(i));
+
+					}
+				}
 			}
 		}
+	}
+
+	private ArrayList<HashMap<String, String>> convertExamplesToMaps(EAnnotation examples) {
+		ArrayList<HashMap<String, String>> replacements = new ArrayList<HashMap<String, String>>();
+		ArrayList<String> paramNames = new ArrayList<String>();
+		for (String cell : examples.getDetails().getFirst().getValue().split("\\|")) {
+			paramNames.add(cell);
+		}
+		int rowCnt = examples.getDetails().size();
+		for (int i = 1; i < rowCnt; i++) {
+			String[] row = examples.getDetails().get(i).getValue().split("\\|");
+			HashMap<String, String> map = new HashMap<String, String>();
+			int cellCnt = row.length;
+			for (int j = 0; j < cellCnt; j++) {
+				map.put(paramNames.get(j), row[j]);
+			}
+			replacements.add(map);
+		}
+		return replacements;
 	}
 
 	private void convertClassAnnotationsToTags(Class c) {
@@ -123,22 +157,25 @@ public class UMLToGraphConverter extends ToGraphConverter {
 				+ tgtPrj.getFileExt(layer);
 	}
 
-	private void convertInteractionMessages(Interaction itr, MBTPathInfo pi) {
-		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
-		for (int i = 0; i < itr.getMessages().size(); i++) {
-			Message m = itr.getMessages().get(i);
+	private void convertInteractionMessagesToPath(MBTGraph<MBTVertex, MBTEdge> g, EList<Message> steps, String title,
+			String tags, String description, HashMap<String, String> replacements) {
+
+		g.addPath(String.valueOf(pathCnt), title, tags, description, replacements.keySet());
+		for (int i = 0; i < steps.size(); i++) {
+			Message m = steps.get(i);
 			if (i == 0) {
-				g.createEdgeWithVertices(g.getStartVertex().getLabel(), getStepName(m), "", pi.getIndex());
+				g.createEdgeWithVertices(g.getStartVertex().getLabel(), getStepName(m), "", String.valueOf(pathCnt));
 			}
-			if (i == itr.getMessages().size() - 1) {
-				g.createEdgeWithVertices(getStepName(m), g.getEndVertex().getLabel(), "", pi.getIndex());
-				convertTableToGraph(m, pi);
+			if (i == steps.size() - 1) {
+				g.createEdgeWithVertices(getStepName(m), g.getEndVertex().getLabel(), "", String.valueOf(pathCnt));
+				convertTableToGraph(m, title, replacements);
 			} else {
-				Message mNext = itr.getMessages().get(i + 1);
-				g.createEdgeWithVertices(getStepName(m), getStepName(mNext), "", pi.getIndex());
-				convertTableToGraph(m, pi);
+				Message mNext = steps.get(i + 1);
+				g.createEdgeWithVertices(getStepName(m), getStepName(mNext), "", String.valueOf(pathCnt));
+				convertTableToGraph(m, title, replacements);
 			}
 		}
+		pathCnt++;
 	}
 
 	private String getStepName(Message m) {
@@ -147,7 +184,7 @@ public class UMLToGraphConverter extends ToGraphConverter {
 		return keyword + " " + name;
 	}
 
-	private void convertTableToGraph(Message m, MBTPathInfo pi) {
+	private void convertTableToGraph(Message m, String scenarioTitle, HashMap<String, String> replacements) {
 
 		ValueSpecification vs = (LiteralString) m.getArgument("dataTable", null);
 		if (vs == null) {
@@ -172,31 +209,40 @@ public class UMLToGraphConverter extends ToGraphConverter {
 				int cellCnt = row.length;
 				for (int j = 0; j < cellCnt; j++) {
 					MBTVertex newVertex = fieldGraph.createVertex(i - 1 + " " + header[j]);
-					String newEdgeLabel = row[j];
-					fieldGraph.createEdge(lastVertex, newVertex, lastEdgeLabel, String.valueOf(pi.getIndex()));
+					String newEdgeLabel = replaceWithExampleData(replacements, row[j]);
+					fieldGraph.createEdge(lastVertex, newVertex, lastEdgeLabel, String.valueOf(pathCnt));
 					lastVertex = newVertex;
 					lastEdgeLabel = newEdgeLabel;
 				}
 			}
 		}
-		fieldGraph.createEdge(lastVertex, fieldGraph.getEndVertex(), lastEdgeLabel, String.valueOf(pi.getIndex()));
+		fieldGraph.createEdge(lastVertex, fieldGraph.getEndVertex(), lastEdgeLabel, String.valueOf(pathCnt));
 
 	}
 
-	private void convertParametersToTags(Interaction anInteraction, MBTPathInfo pi) {
-		for (Parameter p : anInteraction.getOwnedParameters()) {
-			if (pi.getTags().isEmpty()) {
-				pi.setTags(p.getName());
-			} else {
-				pi.setTags(pi.getTags() + "," + p.getName());
+	private String replaceWithExampleData(HashMap<String, String> replacements, String text) {
+		if (text.startsWith("<")) {
+			for (String key : replacements.keySet()) {
+				if (text.contentEquals("<" + key + ">")) {
+					return replacements.get(key);
+				}
 			}
 		}
+		return text;
 	}
 
-	private void convertComments(Interaction anInteraction, MBTPathInfo pi) {
-		if (anInteraction.getOwnedComments().size() > 0) {
-			String comment = anInteraction.getOwnedComments().get(0).getBody();
-			pi.setDescription(comment);
+	private String convertParametersToTags(Interaction anInteraction) {
+		String tags = "";
+		for (Parameter p : anInteraction.getOwnedParameters()) {
+			tags += "," + p.getName();
 		}
+		return tags.replaceFirst(",", "");
+	}
+
+	private String convertCommentsToDescription(Interaction anInteraction) {
+		if (anInteraction.getOwnedComments().size() > 0) {
+			return anInteraction.getOwnedComments().get(0).getBody();
+		}
+		return "";
 	}
 }

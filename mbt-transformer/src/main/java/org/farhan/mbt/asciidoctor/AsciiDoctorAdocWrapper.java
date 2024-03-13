@@ -51,41 +51,64 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	private String docToString() {
 		String text = "";
-		text += ":tags: " + theDoc.getAttribute("tags") + "\n";
+		if (theDoc.getAttribute("tags") != null) {
+			text += ":tags: " + theDoc.getAttribute("tags") + "\n";
+		}
 		text += "= " + theDoc.getTitle() + "\n";
-		text += "\n";
-		text += ((Block) theDoc.getBlocks().getFirst()).getSource() + "\n";
-		for (int i = 1; i < theDoc.getBlocks().size(); i++) {
-			Section section = (Section) theDoc.getBlocks().get(i);
-			text += "\n";
-			text += "[tags=\"" + section.getAttribute("tags") + "\"]" + "\n";
-			text += "== " + section.getTitle() + "\n";
-			for (StructuralNode ssn : section.getBlocks()) {
-				if (ssn instanceof Block) {
-					Block b = (Block) ssn;
-					text += "\n";
-					text += b.getSource() + "\n";
-					text += "\n";
-				} else if (ssn instanceof Section) {
-					Section step = (Section) ssn;
-					text += "=== " + step.getTitle() + "\n";
-					for (StructuralNode tsn : step.getBlocks()) {
-						Table t = (Table) tsn;
+		for (StructuralNode sn : theDoc.getBlocks()) {
+			if (sn instanceof Block) {
+				// feature description
+				Block b = (Block) sn;
+				text += "\n";
+				text += b.getSource() + "\n";
+			} else if (sn instanceof Section) {
+				// scenario
+				Section section = (Section) sn;
+				text += "\n";
+				if (section.getAttribute("tags") != null) {
+					text += "[tags=\"" + section.getAttribute("tags") + "\"]" + "\n";
+				}
+				text += "== " + section.getTitle() + "\n";
+				for (StructuralNode ssn : section.getBlocks()) {
+					if (ssn instanceof Block) {
+						// scenario description
+						Block b = (Block) ssn;
 						text += "\n";
-						text += "[options=\"header\"]\n";
-						text += "|===\n";
-						for (Cell c : t.getHeader().getFirst().getCells()) {
-							text += "| " + c.getText();
+						text += b.getSource() + "\n";
+					} else if (ssn instanceof Section) {
+						// scenario step or examples
+						Section step = (Section) ssn;
+						text += "\n";
+						if (step.getAttributes().size() > 0) {
+							text += "[";
+							if (step.getAttribute("tags") != null) {
+								text += "tags=\"" + step.getAttribute("tags") + "\",";
+							}
+							if (step.getAttribute("examples") != null) {
+								text += "examples=\"" + step.getAttribute("examples") + "\",";
+							}
+							text = text.replaceAll(",$", "");
+							text += "]\n";
 						}
-						text += "\n";
-						for (Row r : t.getBody()) {
-							for (Cell c : r.getCells()) {
+						text += "=== " + step.getTitle() + "\n";
+						for (StructuralNode tsn : step.getBlocks()) {
+							// step data table or examples data table
+							Table t = (Table) tsn;
+							text += "\n";
+							text += "[options=\"header\"]\n";
+							text += "|===\n";
+							for (Cell c : t.getHeader().getFirst().getCells()) {
 								text += "| " + c.getText();
 							}
 							text += "\n";
+							for (Row r : t.getBody()) {
+								for (Cell c : r.getCells()) {
+									text += "| " + c.getText();
+								}
+								text += "\n";
+							}
+							text += "|===\n";
 						}
-						text += "|===\n";
-						text += "\n";
 					}
 				}
 			}

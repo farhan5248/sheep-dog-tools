@@ -11,7 +11,7 @@ That's what I'm interpreting it as for now
 
 
 
-* Given The Admin application, DIN page is as follows
+=== Given The Admin application, DIN page is as follows
 
 [options="header"]
 |===
@@ -19,7 +19,7 @@ That's what I'm interpreting it as for now
 | 2345| 100.0
 |===
 
-* And The Admin application, Provider page is as follows
+=== And The Admin application, Provider page is as follows
 
 [options="header"]
 |===
@@ -27,7 +27,7 @@ That's what I'm interpreting it as for now
 | 12345678
 |===
 
-* And The Admin application, Member page is as follows
+=== And The Admin application, Member page is as follows
 
 [options="header"]
 |===
@@ -35,15 +35,15 @@ That's what I'm interpreting it as for now
 | 123456789
 |===
 
-* When The Pharmacy service, Claim request is sent with
+=== When The Pharmacy service, Claim request is sent with
 
 [options="header"]
 |===
-| Drug Cost| Deductible| Co-Insurance| Maximum| DIN| Provider| Certificate
-| 100.0| 10.0| 80.0| 0.0| 2345| 12345678| 123456789
+| Certificate| Co-Insurance| DIN| Deductible| Drug Cost| Maximum| Provider
+| 123456789| 80.0| 2345| 10.0| 100.0| 0.0| 12345678
 |===
 
-* Then The Claim response will be as follows
+=== Then The Claim response will be as follows
 
 [options="header"]
 |===
@@ -51,13 +51,12 @@ That's what I'm interpreting it as for now
 | 20.0| 80.0
 |===
 
-
 [tags="unit"]
 == Low Maximum
 
 The maximum is less than the deductible so only $5 out of the $10 will count
 
-* Given The Admin application, DIN page is as follows
+=== Given The Admin application, DIN page is as follows
 
 [options="header"]
 |===
@@ -65,7 +64,7 @@ The maximum is less than the deductible so only $5 out of the $10 will count
 | 2345| 100.0
 |===
 
-* And The Admin application, Provider page is as follows
+=== And The Admin application, Provider page is as follows
 
 [options="header"]
 |===
@@ -73,7 +72,7 @@ The maximum is less than the deductible so only $5 out of the $10 will count
 | 12345678
 |===
 
-* And The Admin application, Member page is as follows
+=== And The Admin application, Member page is as follows
 
 [options="header"]
 |===
@@ -81,15 +80,15 @@ The maximum is less than the deductible so only $5 out of the $10 will count
 | 123456789
 |===
 
-* When The Pharmacy service, Claim request is sent with
+=== When The Pharmacy service, Claim request is sent with
 
 [options="header"]
 |===
-| Drug Cost| Deductible| Co-Insurance| Maximum| DIN| Provider| Certificate
-| 100.0| 10.0| 80.0| 5.0| 2345| 12345678| 123456789
+| Certificate| Co-Insurance| DIN| Deductible| Drug Cost| Maximum| Provider
+| 123456789| 80.0| 2345| 10.0| 100.0| 5.0| 12345678
 |===
 
-* Then The Claim response will be as follows
+=== Then The Claim response will be as follows
 
 [options="header"]
 |===
@@ -97,13 +96,12 @@ The maximum is less than the deductible so only $5 out of the $10 will count
 | 24.0| 76.0
 |===
 
-
 [tags="unit,component"]
 == High Maximum
 
 
 
-* Given The Admin application, DIN page is as follows
+=== Given The Admin application, DIN page is as follows
 
 [options="header"]
 |===
@@ -111,7 +109,7 @@ The maximum is less than the deductible so only $5 out of the $10 will count
 | 2345| 100.0
 |===
 
-* And The Admin application, Provider page is as follows
+=== And The Admin application, Provider page is as follows
 
 [options="header"]
 |===
@@ -119,7 +117,7 @@ The maximum is less than the deductible so only $5 out of the $10 will count
 | 12345678
 |===
 
-* And The Admin application, Member page is as follows
+=== And The Admin application, Member page is as follows
 
 [options="header"]
 |===
@@ -127,19 +125,18 @@ The maximum is less than the deductible so only $5 out of the $10 will count
 | 123456789
 |===
 
-* When The Pharmacy service, Claim request is sent with
+=== When The Pharmacy service, Claim request is sent with
 
 [options="header"]
 |===
-| Drug Cost| Deductible| Co-Insurance| Maximum| DIN| Provider| Certificate
-| 100.0| 10.0| 80.0| 15.0| 2345| 12345678| 123456789
+| Certificate| Co-Insurance| DIN| Deductible| Drug Cost| Maximum| Provider
+| 123456789| 80.0| 2345| 10.0| 100.0| 15.0| 12345678
 |===
 
-* Then The Claim response will be as follows
+=== Then The Claim response will be as follows
 
 [options="header"]
 |===
 | Out Of Pocket| Plan Pays
 | 28.0| 72.0
 |===
-

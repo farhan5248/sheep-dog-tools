@@ -3,13 +3,16 @@ package org.farhan.mbt.converter;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.asciidoctor.ast.Block;
 import org.asciidoctor.ast.Cell;
 import org.asciidoctor.ast.Column;
 import org.asciidoctor.ast.Section;
+import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
 import org.asciidoctor.jruby.extension.internal.JRubyProcessor;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.asciidoctor.ast.Document;
 import org.asciidoctor.ast.Row;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
@@ -86,36 +89,129 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 		Document theDoc = (Document) tgtWrp.get();
 		for (MBTPathInfo pi : g.getPathInfo()) {
 
-			Section scenario = jrp.createSection(theDoc);
-			theDoc.getBlocks().add(scenario);
-			scenario.setTitle(pi.getName());
-			scenario.getAttributes().put("tags", pi.getTags());
-			Block description = jrp.createBlock(scenario, "paragraph", pi.getDescription());
-			scenario.getBlocks().add(description);
-
-			Section step;
 			ArrayList<Object> p = getPath(g, g.getStartVertex(), pi);
-			for (Object o : p) {
-				if (o instanceof MBTVertex) {
-					MBTVertex v = (MBTVertex) o;
-					if (!v.getLabel().contentEquals(g.getStartVertex().getLabel())
-							&& !v.getLabel().contentEquals(g.getEndVertex().getLabel())) {
-						step = jrp.createSection(scenario);
-						step.setTitle(getLabel(o));
-						scenario.getBlocks().add(step);
-					}
-				} else {
-					MBTEdge e = (MBTEdge) o;
-					MBTGraph<MBTVertex, MBTEdge> edgeGraph = getGraph(g.getEdgeSource(e).getLabel());
-					if (edgeGraph != null) {
-						step = (Section) scenario.getBlocks().getLast();
-						Table table = jrp.createTable(step);
-						step.getBlocks().add(table);
-						convertPathToTable(edgeGraph, table, pi);
+			String[] nameParts = pi.getName().split("/");
+			Section scenario = createChildSection(theDoc, nameParts[0]);
+			scenario.getBlocks().add(jrp.createBlock(scenario, "paragraph", pi.getDescription()));
+			scenario.getAttributes().put("tags", pi.getTags());
+			TreeMap<String, String> exampleData = getExampleData(pi, p, g);
+			convertSteps(scenario, p, g, pi);
+			if (!pi.getParameters().isEmpty()) {
+				addExampleData(pi, scenario, nameParts[1], exampleData);
+			}
+		}
+	}
+
+	private void addExampleData(MBTPathInfo pi, Section scenario, String exampleTitle,
+			TreeMap<String, String> exampleData) {
+		if (!pi.getParameters().isEmpty()) {
+
+			Section exampleSection = getSection(scenario, exampleTitle);
+			if (exampleSection == null) {
+				exampleSection = createChildSection(scenario, exampleTitle);
+				exampleSection.getAttributes().put("examples", "true");
+				Table table = jrp.createTable(exampleSection);
+				exampleSection.getBlocks().add(table);
+				Row row = jrp.createTableRow(table);
+				table.getHeader().add(row);
+				int colCnt = 0;
+				for (String e : exampleData.keySet()) {
+					Column column = jrp.createTableColumn(table, colCnt);
+					table.getColumns().add(column);
+					Cell cell = jrp.createTableCell(column, e.replaceFirst("0 ", ""));
+					row.getCells().add(cell);
+					colCnt++;
+				}
+			}
+			for (StructuralNode sn : exampleSection.getBlocks()) {
+				if (sn instanceof Table) {
+					Table table = (Table) sn;
+					Row row = jrp.createTableRow(table);
+					table.getBody().add(row);
+					int colCnt = 0;
+					for (String e : exampleData.keySet()) {
+						Cell cell = jrp.createTableCell(table.getColumns().get(colCnt), exampleData.get(e));
+						row.getCells().add(cell);
+						colCnt++;
 					}
 				}
 			}
 		}
+	}
+
+	private Section getSection(Section scenario, String exampleTitle) {
+		for (StructuralNode sn : scenario.getBlocks()) {
+			if (sn instanceof Section) {
+				Section s = (Section) sn;
+				if (s.getTitle().contentEquals(exampleTitle)) {
+					return (Section) s;
+				}
+			}
+		}
+		return null;
+	}
+
+	private TreeMap<String, String> getExampleData(MBTPathInfo pi, ArrayList<Object> path,
+			MBTGraph<MBTVertex, MBTEdge> g) {
+		TreeMap<String, String> exampleData = new TreeMap<String, String>();
+		if (pi.getParameters().isEmpty()) {
+			return exampleData;
+		}
+		for (String p : pi.getParameters().split(",")) {
+			exampleData.put(p, "");
+		}
+		for (Object o : path) {
+			if (o instanceof MBTEdge) {
+				MBTEdge e = (MBTEdge) o;
+				MBTGraph<MBTVertex, MBTEdge> edgeGraph = getGraph(g.getEdgeSource(e).getLabel());
+				if (edgeGraph != null) {
+					ArrayList<Object> edgePath = getPath(edgeGraph, edgeGraph.getStartVertex(), pi);
+					for (int i = 2; i < edgePath.size() - 1; i += 2) {
+						String cs = getLabel(edgePath.get(i));
+						// Strip out the row number
+						String key = cs.replaceFirst("[0-9]+ ", "");
+						if (exampleData.get(key) != null) {
+							// if the field name matches something then replace the value
+							exampleData.put(key, getLabel(edgePath.get(i + 1)));
+							((MBTEdge) edgePath.get(i + 1)).setLabel("{" + key + "}");
+						}
+					}
+				}
+			}
+		}
+		return exampleData;
+
+	}
+
+	private void convertSteps(Section scenario, ArrayList<Object> p, MBTGraph<MBTVertex, MBTEdge> g, MBTPathInfo pi) {
+		Section step;
+		for (Object o : p) {
+			if (o instanceof MBTVertex) {
+				MBTVertex v = (MBTVertex) o;
+				if (!v.getLabel().contentEquals(g.getStartVertex().getLabel())
+						&& !v.getLabel().contentEquals(g.getEndVertex().getLabel())) {
+					step = jrp.createSection(scenario);
+					step.setTitle(getLabel(o));
+					scenario.getBlocks().add(step);
+				}
+			} else {
+				MBTEdge e = (MBTEdge) o;
+				MBTGraph<MBTVertex, MBTEdge> edgeGraph = getGraph(g.getEdgeSource(e).getLabel());
+				if (edgeGraph != null) {
+					step = (Section) scenario.getBlocks().getLast();
+					Table table = jrp.createTable(step);
+					step.getBlocks().add(table);
+					convertPathToTable(edgeGraph, table, pi);
+				}
+			}
+		}
+	}
+
+	private Section createChildSection(StructuralNode owningSection, String name) {
+		Section ownedSection = jrp.createSection(owningSection);
+		owningSection.getBlocks().add(ownedSection);
+		ownedSection.setTitle(name);
+		return ownedSection;
 	}
 
 	private String convertObjectName(String fileName, String layer) {
@@ -127,9 +223,7 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 	}
 
 	private void convertPathToTable(MBTGraph<MBTVertex, MBTEdge> g, Table table, MBTPathInfo pi) {
-
 		ArrayList<Object> edgePath = getPath(g, g.getStartVertex(), pi);
-
 		Row row = jrp.createTableRow(table);
 		table.getHeader().add(row);
 		int colCnt = 0;

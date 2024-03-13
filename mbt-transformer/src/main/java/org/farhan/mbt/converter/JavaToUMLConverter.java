@@ -125,7 +125,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 	}
 
 	@Override
-	protected void convertBehaviours(ConvertibleObject layerFile) throws Exception {
+	protected void convertInteractions(ConvertibleObject layerFile) throws Exception {
 		CucumberJavaWrapper jcw = (CucumberJavaWrapper) layerFile;
 		for (MethodDeclaration md : ((CompilationUnit) jcw.get()).getType(0).getMethods()) {
 			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), md.getNameAsString());
@@ -153,13 +153,13 @@ public class JavaToUMLConverter extends ToUMLConverter {
 			}
 			// TODO this needs a test to demo how interfaces are reversed
 			if (md.getBody().isPresent()) {
-				convertInteractionMessages(anInteraction, md.getBody().get().getStatements());
+				convertMessages(anInteraction, md.getBody().get().getStatements());
 			}
 		}
 	}
 
 	@Override
-	protected void convertInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception {
+	protected void convertMessages(Interaction anInteraction, List<?> steps) throws Exception {
 
 		// Instead of appending java file statements to an existing interaction body,
 		// skip them. Then when forward engineering and doing a git status, we'll see

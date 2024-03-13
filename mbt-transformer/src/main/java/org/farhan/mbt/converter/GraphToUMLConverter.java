@@ -80,37 +80,106 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	}
 
 	@Override
-	protected void convertBehaviours(ConvertibleObject theObject) throws Exception {
+	protected void convertInteractions(ConvertibleObject theObject) throws Exception {
 
 		JGraphTGraphWrapper jgw = (JGraphTGraphWrapper) theObject;
 		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) jgw.get();
 		for (MBTPathInfo pi : g.getPathInfo()) {
-			ArrayList<Object> p = getPath(g, g.getStartVertex(), pi);
 			resetCurrentMachineAndState();
+			ArrayList<Object> p = getPath(g, g.getStartVertex(), pi);
 			String[] nameParts = pi.getName().split("/");
-			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), nameParts[0]);
-			anInteraction.createOwnedComment().setBody(pi.getDescription());
-			convertTagsToParameters(anInteraction, pi.getTags().split(","));
+			Interaction scenario = createInteraction((Class) tgtWrp.get(), nameParts[0]);
+			scenario.createOwnedComment().setBody(pi.getDescription());
+			convertTagsToParameters(scenario, pi.getTags().split(","));
 			TreeMap<String, String> exampleData = getExampleData(pi, p);
-			convertInteractionMessages(anInteraction, p);
-			if (!pi.getParameters().isEmpty()) {
-
-				EAnnotation exampleAnnotation = anInteraction.getEAnnotation(nameParts[1]);
-				if (exampleAnnotation == null) {
-					String value = "";
-					for (String e : exampleData.keySet()) {
-						value += e + "|";
-					}
-					exampleAnnotation = createAnnotation(anInteraction, nameParts[1], "0", value);
-				}
-				String value = "";
-				for (String e : exampleData.keySet()) {
-					value += exampleData.get(e) + "|";
-				}
-				createAnnotation(anInteraction, nameParts[1], String.valueOf(exampleAnnotation.getDetails().size()),
-						value);
+			convertMessages(scenario, p);
+			if (nameParts.length > 1) {
+				addExampleData(pi, scenario, nameParts[1], exampleData);
 			}
 		}
+	}
+
+	private void addExampleData(MBTPathInfo pi, Interaction scenario, String exampleTitle,
+			TreeMap<String, String> exampleData) {
+		if (!pi.getParameters().isEmpty()) {
+
+			EAnnotation exampleAnnotation = scenario.getEAnnotation(exampleTitle);
+			if (exampleAnnotation == null) {
+				String value = "";
+				for (String e : exampleData.keySet()) {
+					value += e + "|";
+				}
+				exampleAnnotation = createAnnotation(scenario, exampleTitle, "0", value);
+			}
+			String value = "";
+			for (String e : exampleData.keySet()) {
+				value += exampleData.get(e) + "|";
+			}
+			createAnnotation(scenario, exampleTitle, String.valueOf(exampleAnnotation.getDetails().size()), value);
+		}
+	}
+
+	@Override
+	protected void convertMessages(Interaction anInteraction, List<?> path) throws Exception {
+
+		boolean isField = false;
+		TreeMap<String, String> dataTable = null;
+		// use loop with counters
+		// ignore 0, it's start
+		// ignore 1, it's blank edge
+		// ignore size -1, it's end
+		for (int i = 2; i < path.size() - 1; i++) {
+			String cs = getLabel(path.get(i));
+			if (cs.contentEquals("start")) {
+				// if it's start, make empty map, set isField to true, is Keyword to false, skip
+				// empty edge
+				dataTable = new TreeMap<String, String>();
+				isField = true;
+				i++;
+			} else if (cs.contentEquals("end")) {
+				// if it's end, convert map to table, set isField to false, isKeyword to true
+				convertPathToDataTable(dataTable, anInteraction.getMessages().getLast());
+				isField = false;
+			} else if (!isField) {
+				// if isKeyword, then make it a step
+				// strip out the Given When Then
+				String keyword = cs.split(" ")[0];
+				cs = cs.replaceFirst(keyword + " ", "");
+				if (Validator.validateStepText(cs)) {
+					setCurrentMachineAndState(cs);
+					convertMessage(anInteraction, cs);
+					Message m = anInteraction.getMessages().getLast();
+					createAnnotation(m, "Step", "Keyword", keyword);
+				} else {
+					throw new Exception("Step (" + cs + ") is not valid, use Xtext editor to correct it first. ");
+				}
+				// skip the next element since it's an edge
+				if (!getLabel(path.get(i + 1)).contentEquals("start")) {
+					i++;
+				}
+			} else if (isField) {
+				dataTable.put(cs, getLabel(path.get(i + 1)));
+				i++;
+			}
+		}
+	}
+
+	@Override
+	protected void convertMessage(Interaction anInteraction, Object o) {
+		String s = (String) o;
+		String messageName = s;
+		Class nextLayerClass = createClassImport(getSecondLayerClassName(), anInteraction);
+		getMessage(anInteraction, nextLayerClass, messageName);
+	}
+
+	@Override
+	protected String convertObjectName(String fullName) {
+		String qualifiedName = fullName.trim();
+		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(srcPrj.FIRST_LAYER), "");
+		qualifiedName = qualifiedName.replace(srcPrj.getDir(srcPrj.FIRST_LAYER).getAbsolutePath(), "");
+		qualifiedName = qualifiedName.replace(File.separator, "::");
+		qualifiedName = "pst::specs" + qualifiedName;
+		return qualifiedName;
 	}
 
 	private TreeMap<String, String> getExampleData(MBTPathInfo pi, List<?> path) {
@@ -145,74 +214,6 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 			}
 		}
 		return exampleData;
-	}
-
-	@Override
-	protected void convertInteractionMessages(Interaction anInteraction, List<?> path) throws Exception {
-
-		boolean isField = false;
-		// TODO isKeyword is always the opposite of isField so remove it?
-		boolean isKeyword = true;
-		TreeMap<String, String> dataTable = null;
-		// use loop with counters
-		// ignore 0, it's start
-		// ignore 1, it's blank edge
-		// ignore size -1, it's end
-		for (int i = 2; i < path.size() - 1; i++) {
-			String cs = getLabel(path.get(i));
-			if (cs.contentEquals("start")) {
-				// if it's start, make empty map, set isField to true, is Keyword to false, skip
-				// empty edge
-				dataTable = new TreeMap<String, String>();
-				isField = true;
-				isKeyword = false;
-				i++;
-			} else if (cs.contentEquals("end")) {
-				// if it's end, convert map to table, set isField to false, isKeyword to true
-				convertPathToDataTable(dataTable, anInteraction.getMessages().getLast());
-				isField = false;
-				isKeyword = true;
-			} else if (isKeyword) {
-				// if isKeyword, then make it a step
-				// strip out the Given When Then
-				String keyword = cs.split(" ")[0];
-				cs = cs.replaceFirst(keyword + " ", "");
-				if (Validator.validateStepText(cs)) {
-					setCurrentMachineAndState(cs);
-					convertMessage(anInteraction, cs);
-					Message m = anInteraction.getMessages().getLast();
-					createAnnotation(m, "Step", "Keyword", keyword);
-				} else {
-					throw new Exception("Step (" + cs + ") is not valid, use Xtext editor to correct it first. ");
-				}
-				// skip the next element since it's an edge
-				if (!getLabel(path.get(i + 1)).contentEquals("start")) {
-					i++;
-				}
-			} else if (isField) {
-				// add map element for i and i+1, then i++
-				dataTable.put(cs, getLabel(path.get(i + 1)));
-				i++;
-			}
-		}
-	}
-
-	@Override
-	protected void convertMessage(Interaction anInteraction, Object o) {
-		String s = (String) o;
-		String messageName = s;
-		Class nextLayerClass = createClassImport(getSecondLayerClassName(), anInteraction);
-		Message theMessage = getMessage(anInteraction, nextLayerClass, messageName);
-	}
-
-	@Override
-	protected String convertObjectName(String fullName) {
-		String qualifiedName = fullName.trim();
-		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(srcPrj.FIRST_LAYER), "");
-		qualifiedName = qualifiedName.replace(srcPrj.getDir(srcPrj.FIRST_LAYER).getAbsolutePath(), "");
-		qualifiedName = qualifiedName.replace(File.separator, "::");
-		qualifiedName = "pst::specs" + qualifiedName;
-		return qualifiedName;
 	}
 
 	private void convertTagsToParameters(Interaction anInteraction, String[] tags) {

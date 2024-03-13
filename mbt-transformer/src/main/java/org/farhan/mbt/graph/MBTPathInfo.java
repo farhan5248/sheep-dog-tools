@@ -1,7 +1,5 @@
 package org.farhan.mbt.graph;
 
-import java.util.TreeSet;
-
 public class MBTPathInfo {
 
 	private String description;

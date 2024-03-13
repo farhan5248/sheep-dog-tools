@@ -37,13 +37,13 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           [options="header"]
           |===
           | grp| ins
-          | 8| <ins>
+          | 8| {ins}
           |===
           
           === Then The Search application, Logout page is invalid
           
           
-          [tags="tag4",examples="true"]
+          [examples="true"]
           === Some data
           
           [options="header"]

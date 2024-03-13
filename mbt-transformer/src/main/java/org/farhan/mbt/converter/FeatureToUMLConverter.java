@@ -87,7 +87,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	}
 
 	@Override
-	protected void convertBehaviours(ConvertibleObject theObject) throws Exception {
+	protected void convertInteractions(ConvertibleObject theObject) throws Exception {
 
 		CucumberFeatureWrapper cfw = (CucumberFeatureWrapper) theObject;
 		Background b = null;
@@ -98,7 +98,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 				b = (Background) as;
 				// If there is a background, add its steps first so that the component is
 				// correctly identified
-				convertInteractionMessages(anInteraction, as.getSteps());
+				convertMessages(anInteraction, as.getSteps());
 				saveCurrentMachineAndState();
 				// Make a note that this interaction is a background
 				createAnnotation(anInteraction, "background");
@@ -112,13 +112,13 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 					convertTagsToParameters(anInteraction, so.getTags());
 					convertExamplesToAnnotations(anInteraction, so);
 				}
-				convertInteractionMessages(anInteraction, as.getSteps());
+				convertMessages(anInteraction, as.getSteps());
 			}
 		}
 	}
 
 	@Override
-	protected void convertInteractionMessages(Interaction anInteraction, List<?> steps) throws Exception {
+	protected void convertMessages(Interaction anInteraction, List<?> steps) throws Exception {
 		for (Object o : steps) {
 			Step cs = (Step) o;
 			String messageName = cs.getName();

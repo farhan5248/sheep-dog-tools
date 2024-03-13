@@ -17,22 +17,27 @@ Feature: Convert Cucumber To Graph To AsciiDoctor
           
               Desc 2
           
-                  Given The Search application, Login page is valid
-                  When The Search application, Home page is as follows
+              Given The Search application, Login page is valid
+               When The Search application, Home page is as follows
                     | grp | ins |
                     |  10 |   5 |
-                  Then The Search application, Logout page is valid
+               Then The Search application, Logout page is valid
           
             @tag3
-            Scenario: Story Two
+            Scenario Outline: Story Two
           
               Desc 3
           
-                  Given The Search application, Login page is invalid
-                  When The Search application, Home page is as follows
-                    | grp | ins |
-                    |   8 |   4 |
-                  Then The Search application, Logout page is invalid
+              Given The Search application, Login page is invalid
+               When The Search application, Home page is as follows
+                    | grp |   ins |
+                    |   8 | <ins> |
+               Then The Search application, Logout page is invalid
+          
+              Examples: Some data
+          
+                    | ins |
+                    |   4 |
           
           
           """
@@ -58,9 +63,9 @@ Feature: Convert Cucumber To Graph To AsciiDoctor
           				Desc 2
           		Path
           			index:1
-          			name:Story Two
+          			name:Story Two/Some data/0
           			tag:tag3
-          			parameters:
+          			parameters:ins
           			description:
           				Desc 3
           	vertices:
@@ -229,6 +234,7 @@ Feature: Convert Cucumber To Graph To AsciiDoctor
           Desc 2
           
           === Given The Search application, Login page is valid
+          
           === When The Search application, Home page is as follows
           
           [options="header"]
@@ -245,15 +251,25 @@ Feature: Convert Cucumber To Graph To AsciiDoctor
           Desc 3
           
           === Given The Search application, Login page is invalid
+          
           === When The Search application, Home page is as follows
           
           [options="header"]
           |===
           | grp| ins
-          | 8| 4
+          | 8| {ins}
           |===
           
           === Then The Search application, Logout page is invalid
+          
+          [examples="true"]
+          === Some data
+          
+          [options="header"]
+          |===
+          | ins
+          | 4
+          |===
           
           """
 

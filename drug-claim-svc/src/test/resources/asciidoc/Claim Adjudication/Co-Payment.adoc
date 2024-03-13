@@ -17,7 +17,7 @@ High Deductible
 
 
 
-* Given The Admin application, DIN page is as follows
+=== Given The Admin application, DIN page is as follows
 
 [options="header"]
 |===
@@ -25,7 +25,7 @@ High Deductible
 | 2345| 100.0
 |===
 
-* And The Admin application, Provider page is as follows
+=== And The Admin application, Provider page is as follows
 
 [options="header"]
 |===
@@ -33,7 +33,7 @@ High Deductible
 | 12345678
 |===
 
-* And The Admin application, Member page is as follows
+=== And The Admin application, Member page is as follows
 
 [options="header"]
 |===
@@ -41,15 +41,15 @@ High Deductible
 | 123456789
 |===
 
-* When The Pharmacy service, Claim request is sent with
+=== When The Pharmacy service, Claim request is sent with
 
 [options="header"]
 |===
-| Drug Cost| Co-Payment| Co-Insurance| Deductible| DIN| Provider| Certificate
-| 100.0| 0.0| 80.0| 10.0| 2345| 12345678| 123456789
+| Certificate| Co-Insurance| Co-Payment| DIN| Deductible| Drug Cost| Provider
+| 123456789| 80.0| 0.0| 2345| 10.0| 100.0| 12345678
 |===
 
-* Then The Claim response will be as follows
+=== Then The Claim response will be as follows
 
 [options="header"]
 |===
@@ -57,13 +57,12 @@ High Deductible
 | 28.0| 72.0
 |===
 
-
 [tags="unit"]
 == Low Co-Payment
 
 
 
-* Given The Admin application, DIN page is as follows
+=== Given The Admin application, DIN page is as follows
 
 [options="header"]
 |===
@@ -71,7 +70,7 @@ High Deductible
 | 2345| 100.0
 |===
 
-* And The Admin application, Provider page is as follows
+=== And The Admin application, Provider page is as follows
 
 [options="header"]
 |===
@@ -79,7 +78,7 @@ High Deductible
 | 12345678
 |===
 
-* And The Admin application, Member page is as follows
+=== And The Admin application, Member page is as follows
 
 [options="header"]
 |===
@@ -87,15 +86,15 @@ High Deductible
 | 123456789
 |===
 
-* When The Pharmacy service, Claim request is sent with
+=== When The Pharmacy service, Claim request is sent with
 
 [options="header"]
 |===
-| Drug Cost| Co-Payment| Co-Insurance| Deductible| DIN| Provider| Certificate
-| 100.0| 10.0| 80.0| 10.0| 2345| 12345678| 123456789
+| Certificate| Co-Insurance| Co-Payment| DIN| Deductible| Drug Cost| Provider
+| 123456789| 80.0| 10.0| 2345| 10.0| 100.0| 12345678
 |===
 
-* Then The Claim response will be as follows
+=== Then The Claim response will be as follows
 
 [options="header"]
 |===
@@ -103,13 +102,12 @@ High Deductible
 | 38.0| 62.0
 |===
 
-
 [tags="unit,component"]
 == High Co-Payment
 
 
 
-* Given The Admin application, DIN page is as follows
+=== Given The Admin application, DIN page is as follows
 
 [options="header"]
 |===
@@ -117,7 +115,7 @@ High Deductible
 | 2345| 100.0
 |===
 
-* And The Admin application, Provider page is as follows
+=== And The Admin application, Provider page is as follows
 
 [options="header"]
 |===
@@ -125,7 +123,7 @@ High Deductible
 | 12345678
 |===
 
-* And The Admin application, Member page is as follows
+=== And The Admin application, Member page is as follows
 
 [options="header"]
 |===
@@ -133,19 +131,18 @@ High Deductible
 | 123456789
 |===
 
-* When The Pharmacy service, Claim request is sent with
+=== When The Pharmacy service, Claim request is sent with
 
 [options="header"]
 |===
-| Drug Cost| Co-Payment| Co-Insurance| Deductible| DIN| Provider| Certificate
-| 100.0| 110.0| 80.0| 10.0| 2345| 12345678| 123456789
+| Certificate| Co-Insurance| Co-Payment| DIN| Deductible| Drug Cost| Provider
+| 123456789| 80.0| 110.0| 2345| 10.0| 100.0| 12345678
 |===
 
-* Then The Claim response will be as follows
+=== Then The Claim response will be as follows
 
 [options="header"]
 |===
 | Out Of Pocket| Plan Pays
 | 100.0| 0.0
 |===
-
