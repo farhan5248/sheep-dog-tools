@@ -17,7 +17,7 @@ Feature: Convert Document To Object Graph
           Desc
           Line 2
           
-          * Step 1
+          === Step 1
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
@@ -36,7 +36,7 @@ Feature: Convert Document To Object Graph
           
           == Story One
           
-          * Step 1
+          === Step 1
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
@@ -58,9 +58,9 @@ Feature: Convert Document To Object Graph
           
           == Story One
           
-          * Step 1
+          === Step 1
           
-          * Step 2
+          === Step 2
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
@@ -86,11 +86,11 @@ Feature: Convert Document To Object Graph
           
           == Story One
           
-          * Step 1
+          === Step 1
           
           == Story Two
           
-          * Step 1
+          === Step 1
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present

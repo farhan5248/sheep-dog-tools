@@ -226,8 +226,8 @@ Feature: Convert Cucumber To Graph To AsciiDoctor
           
           Desc 2
           
-          * Given The Search application, Login page is valid
-          * When The Search application, Home page is as follows
+          === Given The Search application, Login page is valid
+          === When The Search application, Home page is as follows
           
           [options="header"]
           |===
@@ -235,15 +235,15 @@ Feature: Convert Cucumber To Graph To AsciiDoctor
           | 10| 5
           |===
           
-          * Then The Search application, Logout page is valid
+          === Then The Search application, Logout page is valid
           
           [tags="tag3"]
           == Story Two
           
           Desc 3
           
-          * Given The Search application, Login page is invalid
-          * When The Search application, Home page is as follows
+          === Given The Search application, Login page is invalid
+          === When The Search application, Home page is as follows
           
           [options="header"]
           |===
@@ -251,7 +251,7 @@ Feature: Convert Cucumber To Graph To AsciiDoctor
           | 8| 4
           |===
           
-          * Then The Search application, Logout page is invalid
+          === Then The Search application, Logout page is invalid
           
           """
 

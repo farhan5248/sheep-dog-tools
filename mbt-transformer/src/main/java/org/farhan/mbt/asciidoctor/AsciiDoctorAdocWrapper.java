@@ -65,30 +65,27 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 					Block b = (Block) ssn;
 					text += "\n";
 					text += b.getSource() + "\n";
-				} else if (ssn instanceof List) {
-					List l = (List) ssn;
 					text += "\n";
-					for (StructuralNode lsn : l.getItems()) {
-						ListItem li = (ListItem) lsn;
-						text += "* " + li.getText() + "\n";
-						for (StructuralNode lisn : li.getBlocks()) {
-							Table t = (Table) lisn;
-							text += "\n";
-							text += "[options=\"header\"]\n";
-							text += "|===\n";
-							for (Cell c : t.getHeader().getFirst().getCells()) {
+				} else if (ssn instanceof Section) {
+					Section step = (Section) ssn;
+					text += "=== " + step.getTitle() + "\n";
+					for (StructuralNode tsn : step.getBlocks()) {
+						Table t = (Table) tsn;
+						text += "\n";
+						text += "[options=\"header\"]\n";
+						text += "|===\n";
+						for (Cell c : t.getHeader().getFirst().getCells()) {
+							text += "| " + c.getText();
+						}
+						text += "\n";
+						for (Row r : t.getBody()) {
+							for (Cell c : r.getCells()) {
 								text += "| " + c.getText();
 							}
 							text += "\n";
-							for (Row r : t.getBody()) {
-								for (Cell c : r.getCells()) {
-									text += "| " + c.getText();
-								}
-								text += "\n";
-							}
-							text += "|===\n";
-							text += "\n";
 						}
+						text += "|===\n";
+						text += "\n";
 					}
 				}
 			}

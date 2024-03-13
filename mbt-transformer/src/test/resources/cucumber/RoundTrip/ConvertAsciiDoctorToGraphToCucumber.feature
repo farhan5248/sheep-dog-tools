@@ -15,8 +15,8 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           
           Desc 2
           
-          * Given The Search application, Login page is valid
-          * When The Search application, Home page is as follows
+          === Given The Search application, Login page is valid
+          === When The Search application, Home page is as follows
           
           [options="header"]
           |===
@@ -24,15 +24,15 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           | 10| 5
           |===
           
-          * Then The Search application, Logout page is valid
+          === Then The Search application, Logout page is valid
           
           [tags="tag3"]
           == Story Two
           
           Desc 3
           
-          * Given The Search application, Login page is invalid
-          * When The Search application, Home page is as follows
+          === Given The Search application, Login page is invalid
+          === When The Search application, Home page is as follows
           
           [options="header"]
           |===
@@ -40,7 +40,11 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           | 8| 4
           |===
           
-          * Then The Search application, Logout page is invalid
+          === Then The Search application, Logout page is invalid
+          
+          
+          [tags="tag4",examples="true"]
+          === Some data
           
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
@@ -238,16 +242,19 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
                Then The Search application, Logout page is valid
           
             @tag3
-            Scenario: Story Two
+            Scenario Outline: Story Two
           
               Desc 3
           
               Given The Search application, Login page is invalid
                When The Search application, Home page is as follows
-                    | grp | ins |
-                    |   8 |   4 |
+                    | grp |   ins |
+                    |   8 | <ins> |
                Then The Search application, Logout page is invalid
           
-          
+             Examples: Some data
+             
+             | ins |
+             |   4 |
           """
 

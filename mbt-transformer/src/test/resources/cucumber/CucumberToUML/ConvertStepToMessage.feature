@@ -1,3 +1,4 @@
+@debug
 Feature: Convert Step To Message
 
   Background: Create a feature file

@@ -2,6 +2,8 @@ package org.farhan.mbt.converter;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.asciidoctor.ast.Block;
 import org.asciidoctor.ast.Row;
 import org.asciidoctor.ast.Section;
@@ -49,6 +51,11 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	}
 
 	@Override
+	protected ArrayList<ConvertibleObject> getObjects(String layer) {
+		return srcPrj.getObjects(layer);
+	}
+
+	@Override
 	protected void convertObject(ConvertibleObject theObject) throws Exception {
 		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) theObject;
 		Document src = (Document) adaw.get();
@@ -70,18 +77,31 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
 		for (StructuralNode block : src.getBlocks()) {
 			if (block instanceof Section) {
-				convertSectionsToScenarios(tgt, (Section) block);
+				Section scenario = (Section) block;
+				ArrayList<Section> steps = convertBlocksToSteps(scenario, true);
+				ArrayList<Section> examples = convertBlocksToSteps(scenario, false);
+				String tags = convertSectionAttributesToTags(scenario);
+				String description = convertSectionTextToDescription(scenario);
+				if (examples.isEmpty()) {
+					convertSectionToPath(tgt, steps, scenario.getTitle(), tags, description,
+							new HashMap<String, String>());
+				} else {
+					for (Section example : examples) {
+						ArrayList<HashMap<String, String>> replacements = convertExamplesToMaps(example);
+						for (HashMap<String, String> map : replacements) {
+							// TODO, append map number to title, so use int i=0 etc
+							convertSectionToPath(tgt, steps, scenario.getTitle() + "/" + example.getTitle(), tags,
+									description, map);
+						}
+					}
+				}
 			}
 		}
 	}
 
 	@Override
-	protected ArrayList<ConvertibleObject> getObjects(String layer) {
-		return srcPrj.getObjects(layer);
-	}
-
-	@Override
 	protected String convertObjectName(String fileName) {
+		// TODO add the layer parameter to the super class method
 		return convertObjectName(fileName, tgtPrj.FIRST_LAYER);
 	}
 
@@ -95,39 +115,40 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		return qualifiedName;
 	}
 
-	private void convertSectionsToScenarios(MBTGraph<MBTVertex, MBTEdge> g, Section scenario) {
+	private ArrayList<HashMap<String, String>> convertExamplesToMaps(Section examples) {
+		// TODO loop through the section and convert the table into a list of maps
+		return new ArrayList<HashMap<String, String>>();
+	}
 
-		g.addPath(String.valueOf(pathCnt), scenario.getTitle(), convertSectionAttributesToTags(scenario),
-				convertSectionTextToDescription(scenario));
-		ArrayList<ListItem> steps = convertBlocksToSteps(scenario);
-		g.createEdgeWithVertices(g.getStartVertex().getLabel(), steps.getFirst().getText(), "",
+	private void convertSectionToPath(MBTGraph<MBTVertex, MBTEdge> g, ArrayList<Section> steps, String title,
+			String tags, String description, HashMap<String, String> replacements) {
+
+		g.addPath(String.valueOf(pathCnt), title, tags, description);
+		g.createEdgeWithVertices(g.getStartVertex().getLabel(), steps.getFirst().getTitle(), "",
 				String.valueOf(pathCnt));
 		for (int i = 0; i < steps.size(); i++) {
-			String source = steps.get(i).getText();
+			String source = steps.get(i).getTitle();
 			String target;
 			if (i == steps.size() - 1) {
 				target = g.getEndVertex().getLabel();
 			} else {
-				target = steps.get(i + 1).getText();
+				target = steps.get(i + 1).getTitle();
 			}
 			g.createEdgeWithVertices(source, target, "", String.valueOf(pathCnt));
-			convertTableToGraph(steps.get(i), scenario.getTitle());
+			convertTableToGraph(steps.get(i), title, replacements);
 		}
 		pathCnt++;
 	}
 
-	private ArrayList<ListItem> convertBlocksToSteps(Section scenario) {
-		ArrayList<ListItem> steps = new ArrayList<ListItem>();
+	private ArrayList<Section> convertBlocksToSteps(Section scenario, boolean skipExamples) {
+		ArrayList<Section> steps = new ArrayList<Section>();
 		for (StructuralNode block : scenario.getBlocks()) {
-			if (block instanceof List) {
-				for (StructuralNode step : ((List) block).getItems()) {
-					steps.add((ListItem) step);
+			if (block instanceof Section) {
+				if (scenario.getAttributes().get("examples") != null && !skipExamples) {
+					steps.add((Section) block);
+				} else if (scenario.getAttributes().get("examples") == null && skipExamples) {
+					steps.add((Section) block);
 				}
-			} else if (block instanceof Table) {
-				// So this is a hack to reduce code changes for now. Not sure if this will come
-				// back to bite me. What I did learn is that I can read an empty adoc file and
-				// then dynamically create the sections :)
-				steps.getLast().getBlocks().add(block);
 			}
 		}
 		return steps;
@@ -155,13 +176,13 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		return text;
 	}
 
-	private void convertTableToGraph(ListItem step, String scenarioTitle) {
+	private void convertTableToGraph(Section step, String scenarioTitle, HashMap<String, String> replacements) {
 		for (StructuralNode block : step.getBlocks()) {
 			if (block instanceof Table) {
 				JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) tgtPrj
-						.createObject(convertObjectName(step.getText(), tgtPrj.SECOND_LAYER));
+						.createObject(convertObjectName(step.getTitle(), tgtPrj.SECOND_LAYER));
 				MBTGraph<MBTVertex, MBTEdge> fieldGraph = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
-				fieldGraph.setName(step.getText());
+				fieldGraph.setName(step.getTitle());
 				Table table = (Table) block;
 				MBTVertex lastVertex = fieldGraph.getStartVertex();
 				String lastEdgeLabel = "";
@@ -172,7 +193,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 					for (int j = 0; j < cellCnt; j++) {
 						MBTVertex newVertex = fieldGraph
 								.createVertex(i + " " + table.getHeader().get(0).getCells().get(j).getText());
-						String newEdgeLabel = row.getCells().get(j).getText();
+						String newEdgeLabel = replaceWithExampleData(replacements, row.getCells().get(j).getText());
 						fieldGraph.createEdge(lastVertex, newVertex, lastEdgeLabel, String.valueOf(pathCnt));
 						lastVertex = newVertex;
 						lastEdgeLabel = newEdgeLabel;
@@ -181,6 +202,18 @@ public class AdocToGraphConverter extends ToGraphConverter {
 				fieldGraph.createEdge(lastVertex, fieldGraph.getEndVertex(), lastEdgeLabel, String.valueOf(pathCnt));
 			}
 		}
+	}
+
+	private String replaceWithExampleData(HashMap<String, String> replacements, String text) {
+		if (text.startsWith("<")) {
+			for (String key : replacements.keySet()) {
+				String value = replacements.get(key);
+				if (text.contentEquals("<" + value + ">")) {
+					return replacements.get(value);
+				}
+			}
+		}
+		return text;
 	}
 
 }

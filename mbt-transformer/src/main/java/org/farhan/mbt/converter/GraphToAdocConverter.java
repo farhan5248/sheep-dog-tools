@@ -10,10 +10,7 @@ import org.asciidoctor.ast.Column;
 import org.asciidoctor.ast.Section;
 import org.asciidoctor.ast.Table;
 import org.asciidoctor.jruby.extension.internal.JRubyProcessor;
-import org.eclipse.uml2.uml.ValueSpecification;
 import org.asciidoctor.ast.Document;
-import org.asciidoctor.ast.List;
-import org.asciidoctor.ast.ListItem;
 import org.asciidoctor.ast.Row;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
@@ -77,14 +74,6 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 		return convertObjectName(documentTitle, tgtPrj.FIRST_LAYER);
 	}
 
-	private String convertObjectName(String fileName, String layer) {
-		String qualifiedName = fileName.replace(",", "");
-		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(layer), "");
-		qualifiedName = qualifiedName.replace(srcPrj.getDir(layer).getAbsolutePath(), "");
-		qualifiedName = tgtPrj.getDir(layer) + qualifiedName + tgtPrj.getFileExt(layer);
-		return qualifiedName;
-	}
-
 	@Override
 	protected ArrayList<ConvertibleObject> getObjects(String layer) {
 		return srcPrj.getObjects(layer);
@@ -97,36 +86,44 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 		Document theDoc = (Document) tgtWrp.get();
 		for (MBTPathInfo pi : g.getPathInfo()) {
 
-			Section section = jrp.createSection(theDoc);
-			theDoc.getBlocks().add(section);
-			section.setTitle(pi.getName());
-			section.getAttributes().put("tags", pi.getTags());
-			Block block = jrp.createBlock(section, "paragraph", pi.getDescription());
-			section.getBlocks().add(block);
+			Section scenario = jrp.createSection(theDoc);
+			theDoc.getBlocks().add(scenario);
+			scenario.setTitle(pi.getName());
+			scenario.getAttributes().put("tags", pi.getTags());
+			Block description = jrp.createBlock(scenario, "paragraph", pi.getDescription());
+			scenario.getBlocks().add(description);
 
-			List list = jrp.createList(section, "olist");
-			section.getBlocks().add(list);
+			Section step;
 			ArrayList<Object> p = getPath(g, g.getStartVertex(), pi);
 			for (Object o : p) {
 				if (o instanceof MBTVertex) {
 					MBTVertex v = (MBTVertex) o;
 					if (!v.getLabel().contentEquals(g.getStartVertex().getLabel())
 							&& !v.getLabel().contentEquals(g.getEndVertex().getLabel())) {
-						ListItem listItem = jrp.createListItem(list, getLabel(o));
-						list.getItems().add(listItem);
+						step = jrp.createSection(scenario);
+						step.setTitle(getLabel(o));
+						scenario.getBlocks().add(step);
 					}
 				} else {
 					MBTEdge e = (MBTEdge) o;
 					MBTGraph<MBTVertex, MBTEdge> edgeGraph = getGraph(g.getEdgeSource(e).getLabel());
 					if (edgeGraph != null) {
-						ListItem listItem = (ListItem) list.getItems().getLast();
-						Table table = jrp.createTable(listItem);
-						listItem.getBlocks().add(table);
+						step = (Section) scenario.getBlocks().getLast();
+						Table table = jrp.createTable(step);
+						step.getBlocks().add(table);
 						convertPathToTable(edgeGraph, table, pi);
 					}
 				}
 			}
 		}
+	}
+
+	private String convertObjectName(String fileName, String layer) {
+		String qualifiedName = fileName.replace(",", "");
+		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(layer), "");
+		qualifiedName = qualifiedName.replace(srcPrj.getDir(layer).getAbsolutePath(), "");
+		qualifiedName = tgtPrj.getDir(layer) + qualifiedName + tgtPrj.getFileExt(layer);
+		return qualifiedName;
 	}
 
 	private void convertPathToTable(MBTGraph<MBTVertex, MBTEdge> g, Table table, MBTPathInfo pi) {

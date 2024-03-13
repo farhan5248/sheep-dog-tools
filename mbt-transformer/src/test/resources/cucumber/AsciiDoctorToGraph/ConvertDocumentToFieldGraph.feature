@@ -9,7 +9,7 @@ Feature: Convert Document To Field Graph
           
           == Story One
           
-          * Set Object as follows
+          === Set Object as follows
           
           [options="header"]
           |===
@@ -42,7 +42,7 @@ Feature: Convert Document To Field Graph
           
           == Story One
           
-          * Set Object as follows
+          === Set Object as follows
           
           [options="header"]
           |===
@@ -68,7 +68,7 @@ Feature: Convert Document To Field Graph
           
           == Story One
           
-          * Set Object as follows
+          === Set Object as follows
           
           [options="header"]
           |===
