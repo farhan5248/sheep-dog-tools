@@ -163,7 +163,6 @@ Feature: Convert Cucumber To Graph To AsciiDoctor
           	name:When The Search application, Home page is as follows
           	tag:
           	description:
-          		
           	paths:
           	vertices:
           		Vertex

@@ -78,8 +78,10 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 		text += "\n\ttag:" + getTags();
 		text += "\n\tdescription:";
 		if (getDescription() != null) {
-			for (String line : getDescription().toString().split("\n")) {
-				text += "\n\t\t" + line;
+			if (!getDescription().isEmpty()) {
+				for (String line : getDescription().toString().split("\n")) {
+					text += "\n\t\t" + line;
+				}
 			}
 		}
 		text += "\n\tpaths:";

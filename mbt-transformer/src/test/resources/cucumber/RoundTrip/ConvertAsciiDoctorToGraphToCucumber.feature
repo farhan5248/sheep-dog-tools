@@ -42,7 +42,6 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           
           === Then The Search application, Logout page is invalid
           
-          
           [examples="true"]
           === Some data
           
@@ -50,6 +49,16 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           |===
           | ins
           | 4
+          |===
+
+          [examples="true"]
+          === Dataset 2
+          
+          [options="header"]
+          |===
+          | ins
+          | 5
+          | 6
           |===
           
           """
@@ -74,6 +83,20 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           		Path
           			index:1
           			name:Story Two/Some data/0
+          			tag:tag3
+          			parameters:ins
+          			description:
+          				Desc 3
+          		Path
+          			index:2
+          			name:Story Two/Dataset 2/0
+          			tag:tag3
+          			parameters:ins
+          			description:
+          				Desc 3
+          		Path
+          			index:3
+          			name:Story Two/Dataset 2/1
           			tag:tag3
           			parameters:ins
           			description:
@@ -132,7 +155,7 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           					label:end
           		Edge
           			label:
-          			tag:1
+          			tag:1,2,3
           			source:
           				Vertex
           					label:start
@@ -141,7 +164,7 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           					label:Given The Search application, Login page is invalid
           		Edge
           			label:
-          			tag:1
+          			tag:1,2,3
           			source:
           				Vertex
           					label:Given The Search application, Login page is invalid
@@ -150,7 +173,7 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           					label:When The Search application, Home page is as follows
           		Edge
           			label:
-          			tag:1
+          			tag:1,2,3
           			source:
           				Vertex
           					label:When The Search application, Home page is as follows
@@ -159,7 +182,7 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           					label:Then The Search application, Logout page is invalid
           		Edge
           			label:
-          			tag:1
+          			tag:1,2,3
           			source:
           				Vertex
           					label:Then The Search application, Logout page is invalid
@@ -173,7 +196,6 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           	name:When The Search application, Home page is as follows
           	tag:
           	description:
-          		
           	paths:
           	vertices:
           		Vertex
@@ -187,7 +209,7 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           	edges:
           		Edge
           			label:
-          			tag:0,1
+          			tag:0,1,2,3
           			source:
           				Vertex
           					label:start
@@ -205,7 +227,7 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           					label:0 ins
           		Edge
           			label:5
-          			tag:0
+          			tag:0,2
           			source:
           				Vertex
           					label:0 ins
@@ -214,7 +236,7 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           					label:end
           		Edge
           			label:8
-          			tag:1
+          			tag:1,2,3
           			source:
           				Vertex
           					label:0 grp
@@ -224,6 +246,15 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           		Edge
           			label:4
           			tag:1
+          			source:
+          				Vertex
+          					label:0 ins
+          			target:
+          				Vertex
+          					label:end
+          		Edge
+          			label:6
+          			tag:3
           			source:
           				Vertex
           					label:0 ins
@@ -264,6 +295,12 @@ Feature: Convert AsciiDoctor To Graph To Cucumber
           
                     | ins |
                     |   4 |
+          
+              Examples: Dataset 2
+          
+                    | ins |
+                    |   5 |
+                    |   6 |
           
           
           """

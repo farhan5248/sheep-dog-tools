@@ -47,7 +47,7 @@ public class MBTPathInfo {
 	public void setParameters(String parameters) {
 		this.parameters = parameters;
 	}
-	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -71,8 +71,12 @@ public class MBTPathInfo {
 		text += "\n\ttag:" + tags;
 		text += "\n\tparameters:" + parameters;
 		text += "\n\tdescription:";
-		for (String line : description.split("\n")) {
-			text += "\n\t\t" + line;
+		if (getDescription() != null) {
+			if (!getDescription().isEmpty()) {
+				for (String line : description.split("\n")) {
+					text += "\n\t\t" + line;
+				}
+			}
 		}
 		return text;
 	}

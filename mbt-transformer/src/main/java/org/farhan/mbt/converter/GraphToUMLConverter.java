@@ -122,6 +122,10 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 	@Override
 	protected void convertMessages(Interaction anInteraction, List<?> path) throws Exception {
 
+		// for outlines, don't add messages if there's already a body
+		if (!anInteraction.getMessages().isEmpty()) {
+			return;
+		}
 		boolean isField = false;
 		TreeMap<String, String> dataTable = null;
 		// use loop with counters
