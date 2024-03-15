@@ -12,12 +12,12 @@ public abstract class ToGraphConverter {
 	protected String getLayer() {
 		return layer;
 	}
-	protected abstract void selectObjects() throws Exception;
+	protected abstract void selectSourceObjects() throws Exception;
 
-	protected abstract ArrayList<ConvertibleObject> getObjects(String layer);
+	protected abstract ArrayList<ConvertibleObject> getSourceObjects(String layer);
 
 	protected void convertObjects() throws Exception {
-		for (ConvertibleObject co : getObjects(getLayer())) {
+		for (ConvertibleObject co : getSourceObjects(getLayer())) {
 			convertObject(co);
 			convertElements(co);
 		}

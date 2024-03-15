@@ -42,12 +42,12 @@ public class UMLToGraphConverter extends ToGraphConverter {
 	}
 
 	@Override
-	protected void selectObjects() throws Exception {
+	protected void selectSourceObjects() throws Exception {
 		srcPrj.loadObjects(layer);
 	}
 
 	@Override
-	protected ArrayList<ConvertibleObject> getObjects(String layer) {
+	protected ArrayList<ConvertibleObject> getSourceObjects(String layer) {
 		return srcPrj.getObjects(layer);
 	}
 

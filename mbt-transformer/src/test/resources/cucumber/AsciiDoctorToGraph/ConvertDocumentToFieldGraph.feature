@@ -1,6 +1,37 @@
 @debug
 Feature: Convert Document To Field Graph
 
+  Scenario: Convert a delimited listing block
+
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
+          """
+          = Process
+          
+          == Story One
+          
+          === Set Object as follows
+          
+          ----
+          Text1  
+          ----
+          """
+     When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
+     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
+      And The mbt-transformer plugin, target/graphs/stepdefs/Set Object as follows.graph file will be present
+      And The Set Object as follows.graph file, Vertices section will be as follows
+          | Vertex Name |
+          |       start |
+          |         end |
+          |     Content |
+      And The Set Object as follows.graph file, Edges section will be as follows
+          |                                            Edge Name |
+          |                                 start ->  -> Content |
+          | Content -> file://Set Object as follows-0.txt -> end |
+      And The mbt-transformer plugin, target/graphs/resources/Set Object as follows-0.txt file will be as follows
+          """
+          Text1
+          """
+
   Scenario: Convert a table with one row
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
@@ -13,8 +44,8 @@ Feature: Convert Document To Field Graph
           
           [options="header"]
           |===
-          |ins |grp |crt
-          |5   |10  |15
+          |ins |grp 
+          |5   |10  
           |===
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
@@ -26,13 +57,11 @@ Feature: Convert Document To Field Graph
           |         end |
           |       0 ins |
           |       0 grp |
-          |       0 crt |
       And The Set Object as follows.graph file, Edges section will be as follows
-          |            Edge Name |
-          |   start ->  -> 0 ins |
-          |  0 ins -> 5 -> 0 grp |
-          | 0 grp -> 10 -> 0 crt |
-          |   0 crt -> 15 -> end |
+          |           Edge Name |
+          |  start ->  -> 0 ins |
+          | 0 ins -> 5 -> 0 grp |
+          |  0 grp -> 10 -> end |
 
   Scenario: Convert a table with two rows
 
@@ -60,7 +89,7 @@ Feature: Convert Document To Field Graph
           | 0 ins -> 4 -> 1 ins |
           |   1 ins -> 5 -> end |
 
-  Scenario: Convert a table to a vertices each with multiple edges
+  Scenario: Convert a table with multiple rows and columns
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
           """
@@ -72,9 +101,9 @@ Feature: Convert Document To Field Graph
           
           [options="header"]
           |===
-          |ins |grp |crt
-          |5   |10  |15
-          |4   |8   |12
+          |ins |grp 
+          |5   |10  
+          |4   |8   
           |===
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
@@ -84,9 +113,7 @@ Feature: Convert Document To Field Graph
           |            Edge Name |
           |   start ->  -> 0 ins |
           |  0 ins -> 5 -> 0 grp |
-          | 0 grp -> 10 -> 0 crt |
-          | 0 crt -> 15 -> 1 ins |
+          | 0 grp -> 10 -> 1 ins |
           |  1 ins -> 4 -> 1 grp |
-          |  1 grp -> 8 -> 1 crt |
-          |   1 crt -> 12 -> end |
+          |    1 grp -> 8 -> end |
 

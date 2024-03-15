@@ -4,15 +4,18 @@ import java.io.File;
 import java.util.ArrayList;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
+import org.farhan.mbt.core.Utilities;
 
 public class JGraphTProject extends ConvertibleProject {
 
 	private ArrayList<ConvertibleObject> firstLayerObjects;
 	private ArrayList<ConvertibleObject> secondLayerObjects;
+	private int fileCnt;
 
 	public JGraphTProject() {
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
 		secondLayerObjects = new ArrayList<ConvertibleObject>();
+		fileCnt = 0;
 	}
 
 	@Override
@@ -91,6 +94,18 @@ public class JGraphTProject extends ConvertibleProject {
 			}
 		}
 		return null;
+	}
+
+	public String createResource(String prefix, String content) {
+		String fileName = prefix + "-" + fileCnt + ".txt";
+		try {
+			File aFile = new File(baseDir + "target/graphs/resources/" + fileName);
+			Utilities.writeFile(aFile, content);
+			fileCnt++;
+		} catch (Exception e) {
+			// TODO Handle this during the exception handling review
+		}
+		return "file://" + fileName;
 	}
 
 }

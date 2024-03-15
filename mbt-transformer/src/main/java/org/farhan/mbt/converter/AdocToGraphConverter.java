@@ -11,6 +11,7 @@ import org.asciidoctor.ast.Section;
 import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
 import org.asciidoctor.ast.Document;
+import org.asciidoctor.ast.List;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
@@ -40,7 +41,12 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	}
 
 	@Override
-	protected void selectObjects() throws Exception {
+	protected ArrayList<ConvertibleObject> getSourceObjects(String layer) {
+		return srcPrj.getObjects(layer);
+	}
+
+	@Override
+	protected void selectSourceObjects() throws Exception {
 		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(srcPrj.FIRST_LAYER),
 				srcPrj.getFileExt(srcPrj.FIRST_LAYER));
 		srcPrj.getObjects(srcPrj.FIRST_LAYER).clear();
@@ -50,21 +56,16 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	}
 
 	@Override
-	protected ArrayList<ConvertibleObject> getObjects(String layer) {
-		return srcPrj.getObjects(layer);
-	}
-
-	@Override
 	protected void convertObject(ConvertibleObject theObject) throws Exception {
 		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) theObject;
 		Document src = (Document) adaw.get();
 		tgtWrp = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(adaw.getFile().getAbsolutePath()));
 		MBTGraph<MBTVertex, MBTEdge> tgt = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
 		tgt.setName(src.getTitle());
-		tgt.setTags(convertSectionAttributesToTags(src));
+		tgt.setTags(getTestCaseProperties(src));
 		for (StructuralNode block : src.getBlocks()) {
 			if (!(block instanceof Section)) {
-				tgt.setDescription(convertSectionTextToDescription(block));
+				tgt.setDescription(getTestCaseDecription(block));
 			}
 		}
 	}
@@ -78,12 +79,12 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		for (StructuralNode block : src.getBlocks()) {
 			if (block instanceof Section) {
 				Section scenario = (Section) block;
-				ArrayList<Section> steps = convertBlocksToSteps(scenario);
-				ArrayList<Section> examples = convertBlocksToExamples(scenario);
-				String tags = convertSectionAttributesToTags(scenario);
-				String description = convertSectionTextToDescription(scenario);
+				ArrayList<Section> steps = getTestStep(scenario);
+				ArrayList<Section> examples = getTestCaseData(scenario);
+				String tags = getTestCaseProperties(scenario);
+				String description = getTestCaseDecription(scenario);
 				if (examples.isEmpty()) {
-					convertSectionBlocksToPath(g, startVertex, steps, scenario.getTitle(), tags, description,
+					convertTestCase(g, startVertex, steps, scenario.getTitle(), tags, description,
 							new HashMap<String, String>());
 					if (scenario.getAttributes().get("background") != null) {
 						// backgrounds don't have tags so use that field for now
@@ -98,9 +99,9 @@ public class AdocToGraphConverter extends ToGraphConverter {
 					}
 				} else {
 					for (Section example : examples) {
-						ArrayList<HashMap<String, String>> replacements = convertExamplesToMaps(example);
+						ArrayList<HashMap<String, String>> replacements = convertTestCaseData(example);
 						for (int i = 0; i < replacements.size(); i++) {
-							convertSectionBlocksToPath(g, startVertex, steps,
+							convertTestCase(g, startVertex, steps,
 									scenario.getTitle() + "/" + example.getTitle() + "/" + String.valueOf(i), tags,
 									description, replacements.get(i));
 
@@ -127,73 +128,23 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		return qualifiedName;
 	}
 
-	private void convertSectionBlocksToPath(MBTGraph<MBTVertex, MBTEdge> g, MBTVertex startVertex,
-			ArrayList<Section> steps, String title, String tags, String description,
-			HashMap<String, String> replacements) {
+	private void convertTestCase(MBTGraph<MBTVertex, MBTEdge> g, MBTVertex startVertex, ArrayList<Section> steps,
+			String title, String tags, String description, HashMap<String, String> replacements) {
 
 		g.addPath(String.valueOf(pathCnt), title, tags, description, replacements.keySet());
-		g.createEdgeWithVertices(startVertex.getLabel(), steps.getFirst().getTitle(), "", String.valueOf(pathCnt));
-		for (int i = 0; i < steps.size(); i++) {
-			String source = steps.get(i).getTitle();
-			String target;
-			if (i == steps.size() - 1) {
-				target = g.getEndVertex().getLabel();
-			} else {
-				target = steps.get(i + 1).getTitle();
-			}
-			g.createEdgeWithVertices(source, target, "", String.valueOf(pathCnt));
-			convertTableToGraph(steps.get(i), title, replacements);
+		convertTestStep(g, startVertex.getLabel(), steps.getFirst().getTitle());
+		for (int i = 0; i < steps.size() - 1; i++) {
+			convertTestStep(g, steps.get(i).getTitle(), steps.get(i + 1).getTitle());
+			convertTestStepData(steps.get(i), title, replacements);
 		}
+		convertTestStep(g, steps.getLast().getTitle(), g.getEndVertex().getLabel());
+		convertTestStepData(steps.getLast(), title, replacements);
 		pathCnt++;
 	}
 
-	private ArrayList<Section> convertBlocksToSteps(Section scenario) {
-		ArrayList<Section> steps = new ArrayList<Section>();
-		for (StructuralNode block : scenario.getBlocks()) {
-			if (block instanceof Section) {
-				if (block.getAttributes().get("examples") == null) {
-					steps.add((Section) block);
-				}
-			}
-		}
-		return steps;
-	}
-
-	private ArrayList<Section> convertBlocksToExamples(Section scenario) {
-		ArrayList<Section> steps = new ArrayList<Section>();
-		for (StructuralNode block : scenario.getBlocks()) {
-			if (block instanceof Section) {
-				if (block.getAttributes().get("examples") != null) {
-					steps.add((Section) block);
-				}
-			}
-		}
-		return steps;
-	}
-
-	private String convertSectionAttributesToTags(StructuralNode section) {
-		String tags = (String) section.getAttributes().get("tags");
-		if (tags == null) {
-			return "";
-		} else {
-			return tags;
-		}
-	}
-
-	private String convertSectionTextToDescription(StructuralNode section) {
-		String text = "";
-		for (StructuralNode block : section.getBlocks()) {
-			if (block instanceof Block) {
-				text += "\n\n" + ((Block) block).getSource();
-			} else {
-				break;
-			}
-		}
-		text = text.trim();
-		return text;
-	}
-
-	private ArrayList<HashMap<String, String>> convertExamplesToMaps(Section examples) {
+	private ArrayList<HashMap<String, String>> convertTestCaseData(Section examples) {
+		// TODO put this inside getTestCaseData. All converters should return a list of
+		// maps like this or something consistent
 		ArrayList<HashMap<String, String>> replacements = new ArrayList<HashMap<String, String>>();
 		for (StructuralNode block : examples.getBlocks()) {
 			if (block instanceof Table) {
@@ -217,35 +168,119 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		return replacements;
 	}
 
-	private void convertTableToGraph(Section step, String scenarioTitle, HashMap<String, String> replacements) {
-		for (StructuralNode block : step.getBlocks()) {
-			if (block instanceof Table) {
-				JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) tgtPrj
-						.createObject(convertObjectName(step.getTitle(), tgtPrj.SECOND_LAYER));
-				MBTGraph<MBTVertex, MBTEdge> fieldGraph = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
-				fieldGraph.setName(step.getTitle());
-				Table table = (Table) block;
-				MBTVertex lastVertex = fieldGraph.getStartVertex();
-				String lastEdgeLabel = "";
-				int rowCnt = table.getBody().size();
-				for (int i = 0; i < rowCnt; i++) {
-					Row row = table.getBody().get(i);
-					int cellCnt = row.getCells().size();
-					for (int j = 0; j < cellCnt; j++) {
-						MBTVertex newVertex = fieldGraph
-								.createVertex(i + " " + table.getHeader().get(0).getCells().get(j).getText());
-						String newEdgeLabel = replaceWithExampleData(replacements, row.getCells().get(j).getText());
-						fieldGraph.createEdge(lastVertex, newVertex, lastEdgeLabel, String.valueOf(pathCnt));
-						lastVertex = newVertex;
-						lastEdgeLabel = newEdgeLabel;
+	private void convertTestStep(MBTGraph<MBTVertex, MBTEdge> g, String source, String target) {
+		g.createEdgeWithVertices(source, target, "", String.valueOf(pathCnt));
+	}
+
+	private void convertTestStepData(Section step, String scenarioTitle, HashMap<String, String> replacements) {
+		for (StructuralNode sn : step.getBlocks()) {
+			if (sn instanceof Table) {
+				Table table = (Table) sn;
+				MBTGraph<MBTVertex, MBTEdge> fieldGraph = createGraph(step.getTitle());
+				for (int i = 0; i < table.getBody().size(); i++) {
+					for (int j = 0; j < table.getBody().get(i).getCells().size(); j++) {
+						createTestStepData(fieldGraph, table, i, j, replacements);
 					}
 				}
-				fieldGraph.createEdge(lastVertex, fieldGraph.getEndVertex(), lastEdgeLabel, String.valueOf(pathCnt));
+				createTestStepData(fieldGraph, table, table.getBody().size() - 1,
+						table.getHeader().get(0).getCells().size(), replacements);
+			} else if (sn instanceof Block) {
+				Block block = (Block) sn;
+				MBTGraph<MBTVertex, MBTEdge> fieldGraph = createGraph(step.getTitle());
+				String fileName = tgtPrj.createResource(step.getTitle(), block.getSource());
+				createTestStepData(fieldGraph, "Content", fileName);
 			}
 		}
 	}
 
-	private String replaceWithExampleData(HashMap<String, String> replacements, String text) {
+	private void createTestStepData(MBTGraph<MBTVertex, MBTEdge> g, String vertexLabel, String edgeLabel) {
+		g.createEdge(g.getStartVertex(), g.createVertex(vertexLabel), "", String.valueOf(pathCnt));
+		g.createEdge(g.getVertex(vertexLabel), g.getEndVertex(), edgeLabel, String.valueOf(pathCnt));
+	}
+
+	private MBTEdge createTestStepData(MBTGraph<MBTVertex, MBTEdge> g, Table table, int rowNum, int colNum,
+			HashMap<String, String> replacements) {
+
+		MBTVertex lastVertex;
+		String lastEdgeLabel;
+		if (colNum == 0) {
+			if (rowNum == 0) {
+				lastVertex = g.getStartVertex();
+				lastEdgeLabel = "";
+			} else {
+				lastVertex = g.getVertex((rowNum - 1) + " " + table.getHeader().get(0).getCells().getLast().getText());
+				lastEdgeLabel = table.getBody().get(rowNum - 1).getCells().getLast().getText();
+			}
+		} else {
+			lastVertex = g.getVertex(rowNum + " " + table.getHeader().get(0).getCells().get(colNum - 1).getText());
+			lastEdgeLabel = table.getBody().get(rowNum).getCells().get(colNum - 1).getText();
+		}
+		lastEdgeLabel = replaceWithTestCaseData(replacements, lastEdgeLabel);
+		MBTVertex newVertex;
+		if (colNum == table.getHeader().get(0).getCells().size()) {
+			newVertex = g.getEndVertex();
+		} else {
+			newVertex = g.createVertex(rowNum + " " + table.getHeader().get(0).getCells().get(colNum).getText());
+
+		}
+		return g.createEdge(lastVertex, newVertex, lastEdgeLabel, String.valueOf(pathCnt));
+	}
+
+	private MBTGraph<MBTVertex, MBTEdge> createGraph(String title) {
+		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) tgtPrj
+				.createObject(convertObjectName(title, tgtPrj.SECOND_LAYER));
+		MBTGraph<MBTVertex, MBTEdge> fieldGraph = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
+		fieldGraph.setName(title);
+		return fieldGraph;
+	}
+
+	private ArrayList<Section> getTestCaseData(Section scenario) {
+		ArrayList<Section> steps = new ArrayList<Section>();
+		for (StructuralNode block : scenario.getBlocks()) {
+			if (block instanceof Section) {
+				if (block.getAttributes().get("examples") != null) {
+					steps.add((Section) block);
+				}
+			}
+		}
+		return steps;
+	}
+
+	private String getTestCaseProperties(StructuralNode section) {
+		String tags = (String) section.getAttributes().get("tags");
+		if (tags == null) {
+			return "";
+		} else {
+			return tags;
+		}
+	}
+
+	private String getTestCaseDecription(StructuralNode section) {
+		String text = "";
+		for (StructuralNode block : section.getBlocks()) {
+			if (block instanceof Block) {
+				text += "\n\n" + ((Block) block).getSource();
+			} else {
+				break;
+			}
+		}
+		text = text.trim();
+		return text;
+	}
+
+	private ArrayList<Section> getTestStep(Section testCase) {
+		ArrayList<Section> steps = new ArrayList<Section>();
+		for (StructuralNode testStep : testCase.getBlocks()) {
+			if (testStep instanceof Section) {
+				if (testStep.getAttributes().get("examples") == null) {
+					steps.add((Section) testStep);
+				}
+			}
+		}
+		return steps;
+	}
+
+	private String replaceWithTestCaseData(HashMap<String, String> replacements, String text) {
 		if (text.startsWith("{")) {
 			for (String key : replacements.keySet()) {
 				if (text.contentEquals("{" + key + "}")) {
