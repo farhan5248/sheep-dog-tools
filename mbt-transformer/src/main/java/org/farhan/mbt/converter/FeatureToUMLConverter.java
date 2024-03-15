@@ -100,7 +100,6 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 				// correctly identified
 				convertMessages(anInteraction, as.getSteps());
 				saveCurrentMachineAndState();
-				// Make a note that this interaction is a background
 				createAnnotation(anInteraction, "background");
 			} else {
 				if (as instanceof Scenario) {

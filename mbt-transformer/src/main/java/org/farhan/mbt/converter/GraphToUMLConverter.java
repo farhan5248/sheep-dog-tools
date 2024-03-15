@@ -84,9 +84,10 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 
 		JGraphTGraphWrapper jgw = (JGraphTGraphWrapper) theObject;
 		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) jgw.get();
+		MBTVertex startVertex = g.getStartVertex();
 		for (MBTPathInfo pi : g.getPathInfo()) {
 			resetCurrentMachineAndState();
-			ArrayList<Object> p = getPath(g, g.getStartVertex(), pi);
+			ArrayList<Object> p = getPath(g, startVertex, pi);
 			String[] nameParts = pi.getName().split("/");
 			Interaction scenario = createInteraction((Class) tgtWrp.get(), nameParts[0]);
 			scenario.createOwnedComment().setBody(pi.getDescription());
@@ -95,6 +96,11 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 			convertMessages(scenario, p);
 			if (nameParts.length > 1) {
 				addExampleData(pi, scenario, nameParts[1], exampleData);
+			}
+			if (pi.getTags().contentEquals("background")) {
+				saveCurrentMachineAndState();
+				createAnnotation(scenario, "background");
+				startVertex = (MBTVertex) p.getLast();
 			}
 		}
 	}
@@ -131,8 +137,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 		// use loop with counters
 		// ignore 0, it's start
 		// ignore 1, it's blank edge
-		// ignore size -1, it's end
-		for (int i = 2; i < path.size() - 1; i++) {
+		for (int i = 2; i < path.size(); i++) {
 			String cs = getLabel(path.get(i));
 			if (cs.contentEquals("start")) {
 				// if it's start, make empty map, set isField to true, is Keyword to false, skip
@@ -141,9 +146,15 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 				isField = true;
 				i++;
 			} else if (cs.contentEquals("end")) {
-				// if it's end, convert map to table, set isField to false, isKeyword to true
-				convertPathToDataTable(dataTable, anInteraction.getMessages().getLast());
-				isField = false;
+				if (dataTable != null) {
+					// if it's end, convert map to table, set isField to false, isKeyword to true
+					convertPathToDataTable(dataTable, anInteraction.getMessages().getLast());
+					isField = false;
+					dataTable = null;
+				} else {
+					// this is the end of the path so return
+					return;
+				}
 			} else if (!isField) {
 				// if isKeyword, then make it a step
 				// strip out the Given When Then
@@ -156,6 +167,10 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 					createAnnotation(m, "Step", "Keyword", keyword);
 				} else {
 					throw new Exception("Step (" + cs + ") is not valid, use Xtext editor to correct it first. ");
+				}
+				if ((i + 1) >= path.size()) {
+					// this is for backgrounds
+					continue;
 				}
 				// skip the next element since it's an edge
 				if (!getLabel(path.get(i + 1)).contentEquals("start")) {
@@ -222,7 +237,9 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 
 	private void convertTagsToParameters(Interaction anInteraction, String[] tags) {
 		for (String t : tags) {
-			createParameter(anInteraction, t, "", "in");
+			if (!t.contentEquals("background") && !t.isEmpty()) {
+				createParameter(anInteraction, t, "", "in");
+			}
 		}
 	}
 
@@ -290,6 +307,12 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 					path.add(0, e);
 					path.add(0, vertex);
 				}
+			}
+			// handle end of background path. In the future autodetect the background to
+			// avoid this
+			if (path == null) {
+				path = new ArrayList<Object>();
+				path.add(vertex);
 			}
 		}
 		return path;

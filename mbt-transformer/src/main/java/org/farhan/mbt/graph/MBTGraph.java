@@ -146,9 +146,9 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 		MBTEdge edge = getEdgeByLabel(source, target, edgeLabel);
 		if (edge == null) {
 			edge = new MBTEdge(edgeLabel);
-			g.addEdge(source, target, edge);
 			g.setEdgeWeight(edge, 1.0);
 			edge.setTag(tag);
+			g.addEdge(source, target, edge);
 		} else {
 			edge.setLabel(edgeLabel);
 			edge.appendTag(tag);

@@ -74,6 +74,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) object;
 		Document src = (Document) adaw.get();
 		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
+		MBTVertex startVertex = g.getStartVertex();
 		for (StructuralNode block : src.getBlocks()) {
 			if (block instanceof Section) {
 				Section scenario = (Section) block;
@@ -82,13 +83,24 @@ public class AdocToGraphConverter extends ToGraphConverter {
 				String tags = convertSectionAttributesToTags(scenario);
 				String description = convertSectionTextToDescription(scenario);
 				if (examples.isEmpty()) {
-					convertSectionBlocksToPath(g, steps, scenario.getTitle(), tags, description,
+					convertSectionBlocksToPath(g, startVertex, steps, scenario.getTitle(), tags, description,
 							new HashMap<String, String>());
+					if (scenario.getAttributes().get("background") != null) {
+						// backgrounds don't have tags so use that field for now
+						g.getPathInfo().getFirst().setTags("background");
+						// the only edge going into the end vertex is the last background element
+						MBTEdge edge = null;
+						for (MBTEdge e : g.incomingEdgesOf(g.getEndVertex())) {
+							startVertex = g.getEdgeSource(e);
+							edge = e;
+						}
+						g.removeEdge(edge);
+					}
 				} else {
 					for (Section example : examples) {
 						ArrayList<HashMap<String, String>> replacements = convertExamplesToMaps(example);
 						for (int i = 0; i < replacements.size(); i++) {
-							convertSectionBlocksToPath(g, steps,
+							convertSectionBlocksToPath(g, startVertex, steps,
 									scenario.getTitle() + "/" + example.getTitle() + "/" + String.valueOf(i), tags,
 									description, replacements.get(i));
 
@@ -115,12 +127,12 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		return qualifiedName;
 	}
 
-	private void convertSectionBlocksToPath(MBTGraph<MBTVertex, MBTEdge> g, ArrayList<Section> steps, String title,
-			String tags, String description, HashMap<String, String> replacements) {
+	private void convertSectionBlocksToPath(MBTGraph<MBTVertex, MBTEdge> g, MBTVertex startVertex,
+			ArrayList<Section> steps, String title, String tags, String description,
+			HashMap<String, String> replacements) {
 
 		g.addPath(String.valueOf(pathCnt), title, tags, description, replacements.keySet());
-		g.createEdgeWithVertices(g.getStartVertex().getLabel(), steps.getFirst().getTitle(), "",
-				String.valueOf(pathCnt));
+		g.createEdgeWithVertices(startVertex.getLabel(), steps.getFirst().getTitle(), "", String.valueOf(pathCnt));
 		for (int i = 0; i < steps.size(); i++) {
 			String source = steps.get(i).getTitle();
 			String target;
