@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
+import org.farhan.cucumber.Line;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToUMLGherkinConverter;
 import org.farhan.mbt.core.Utilities;
@@ -133,7 +135,7 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 			return;
 		}
 		boolean isField = false;
-		TreeMap<String, String> dataTable = null;
+		TreeMap<String, String> stepData = null;
 		// use loop with counters
 		// ignore 0, it's start
 		// ignore 1, it's blank edge
@@ -142,15 +144,19 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 			if (cs.contentEquals("start")) {
 				// if it's start, make empty map, set isField to true, is Keyword to false, skip
 				// empty edge
-				dataTable = new TreeMap<String, String>();
+				stepData = new TreeMap<String, String>();
 				isField = true;
 				i++;
 			} else if (cs.contentEquals("end")) {
-				if (dataTable != null) {
-					// if it's end, convert map to table, set isField to false, isKeyword to true
-					convertPathToDataTable(dataTable, anInteraction.getMessages().getLast());
+				if (stepData != null) {
+					if (stepData.get("Content") != null) {
+						convertPathToDocString(stepData, anInteraction.getMessages().getLast());
+					} else {
+						// if it's end, convert map to table, set isField to false, isKeyword to true
+						convertPathToDataTable(stepData, anInteraction.getMessages().getLast());
+					}
 					isField = false;
-					dataTable = null;
+					stepData = null;
 				} else {
 					// this is the end of the path so return
 					return;
@@ -177,9 +183,22 @@ public class GraphToUMLConverter extends ToUMLGherkinConverter {
 					i++;
 				}
 			} else if (isField) {
-				dataTable.put(cs, getLabel(path.get(i + 1)));
+				String label = getLabel(path.get(i + 1));
+				if (cs.contentEquals("Content")) {
+					label = srcPrj.getResource(label);
+				}
+				stepData.put(cs, label);
 				i++;
 			}
+		}
+	}
+
+	private void convertPathToDocString(TreeMap<String, String> stepData, Message theMessage) {
+
+		ValueSpecification vs = createArgument(theMessage, "docString", "");
+		String[] lines = stepData.get("Content").split("\n");
+		for (int i = 0; i < lines.length; i++) {
+			createAnnotation(vs, "docString", String.valueOf(i), lines[i]);
 		}
 	}
 

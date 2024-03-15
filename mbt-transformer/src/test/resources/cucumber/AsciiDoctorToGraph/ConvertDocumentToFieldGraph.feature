@@ -24,9 +24,9 @@ Feature: Convert Document To Field Graph
           |         end |
           |     Content |
       And The Set Object as follows.graph file, Edges section will be as follows
-          |                                            Edge Name |
-          |                                 start ->  -> Content |
-          | Content -> file://Set Object as follows-0.txt -> end |
+          |                                     Edge Name |
+          |                          start ->  -> Content |
+          | Content -> Set Object as follows-0.txt -> end |
       And The mbt-transformer plugin, target/graphs/resources/Set Object as follows-0.txt file will be as follows
           """
           Text1

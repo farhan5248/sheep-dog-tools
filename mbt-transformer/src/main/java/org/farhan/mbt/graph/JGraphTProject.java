@@ -105,7 +105,17 @@ public class JGraphTProject extends ConvertibleProject {
 		} catch (Exception e) {
 			// TODO Handle this during the exception handling review
 		}
-		return "file://" + fileName;
+		return fileName;
+	}
+
+	public String getResource(String fileName) {
+		try {
+			File aFile = new File(baseDir + "target/graphs/resources/" + fileName);
+			return Utilities.readFile(aFile);
+		} catch (Exception e) {
+			// TODO Handle this during the exception handling review
+		}
+		return null;
 	}
 
 }

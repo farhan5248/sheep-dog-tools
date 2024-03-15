@@ -64,13 +64,9 @@ Feature: Convert Vertex Or Edge To Message
           		Vertex
           			label:0 grp
           		Vertex
-          			label:0 crt
-          		Vertex
           			label:1 ins
           		Vertex
           			label:1 grp
-          		Vertex
-          			label:1 crt
           	edges:
           		Edge
           			label:
@@ -98,15 +94,6 @@ Feature: Convert Vertex Or Edge To Message
           					label:0 grp
           			target:
           				Vertex
-          					label:0 crt
-          		Edge
-          			label:15
-          			tag:0
-          			source:
-          				Vertex
-          					label:0 crt
-          			target:
-          				Vertex
           					label:1 ins
           		Edge
           			label:4
@@ -123,15 +110,6 @@ Feature: Convert Vertex Or Edge To Message
           			source:
           				Vertex
           					label:1 grp
-          			target:
-          				Vertex
-          					label:1 crt
-          		Edge
-          			label:12
-          			tag:0
-          			source:
-          				Vertex
-          					label:1 crt
           			target:
           				Vertex
           					label:end
@@ -169,8 +147,8 @@ Feature: Convert Vertex Or Edge To Message
   Scenario: Convert path element to message annotations
 
       And The target/uml/pst.uml file, Interaction Messages section will be as follows
-          |          Interaction Name |                                    Message | Argument Name |       Annotation Detail |
-          | specs::Process::Story One | The Search application, Home page is empty |     dataTable | 0 -> crt \|grp \|ins \| |
-          | specs::Process::Story One | The Search application, Home page is empty |     dataTable |     1 -> 15 \|10 \|5 \| |
-          | specs::Process::Story One | The Search application, Home page is empty |     dataTable |      2 -> 12 \|8 \|4 \| |
+          |          Interaction Name |                                    Message | Argument Name | Annotation Detail |
+          | specs::Process::Story One | The Search application, Home page is empty |     dataTable | 0 -> grp \|ins \| |
+          | specs::Process::Story One | The Search application, Home page is empty |     dataTable |    1 -> 10 \|5 \| |
+          | specs::Process::Story One | The Search application, Home page is empty |     dataTable |     2 -> 8 \|4 \| |
 
