@@ -12,7 +12,6 @@ import org.asciidoctor.ast.Section;
 import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
 import org.asciidoctor.jruby.extension.internal.JRubyProcessor;
-import org.eclipse.emf.ecore.EAnnotation;
 import org.asciidoctor.ast.Document;
 import org.asciidoctor.ast.Row;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
@@ -86,18 +85,25 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 	protected void convertElements(ConvertibleObject object) throws Exception {
 		JGraphTGraphWrapper adaw = (JGraphTGraphWrapper) object;
 		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) adaw.get();
+		MBTVertex startVertex = g.getStartVertex();
 		Document theDoc = (Document) tgtWrp.get();
 		for (MBTPathInfo pi : g.getPathInfo()) {
-
-			ArrayList<Object> p = getPath(g, g.getStartVertex(), pi);
+			ArrayList<Object> p = getPath(g, startVertex, pi);
 			String[] nameParts = pi.getName().split("/");
 			Section scenario = createChildSection(theDoc, nameParts[0]);
 			scenario.getBlocks().add(jrp.createBlock(scenario, "paragraph", pi.getDescription()));
-			scenario.getAttributes().put("tags", pi.getTags());
+			if (!pi.getTags().isEmpty()) {
+				scenario.getAttributes().put("tags", pi.getTags());
+			}
 			TreeMap<String, String> exampleData = getExampleData(pi, p, g);
-			convertSteps(scenario, p, g, pi);
+			convertSteps(scenario, p, g, pi, startVertex);
 			if (!pi.getParameters().isEmpty()) {
 				addExampleData(pi, scenario, nameParts[1], exampleData);
+			}
+			if (pi.getTags().contentEquals("background")) {
+				scenario.getAttributes().remove("tags");
+				scenario.getAttributes().put("background", "true");
+				startVertex = (MBTVertex) p.getLast();
 			}
 		}
 	}
@@ -183,12 +189,13 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 
 	}
 
-	private void convertSteps(Section scenario, ArrayList<Object> p, MBTGraph<MBTVertex, MBTEdge> g, MBTPathInfo pi) {
+	private void convertSteps(Section scenario, ArrayList<Object> p, MBTGraph<MBTVertex, MBTEdge> g, MBTPathInfo pi,
+			MBTVertex startVertex) {
 		Section step;
 		for (Object o : p) {
 			if (o instanceof MBTVertex) {
 				MBTVertex v = (MBTVertex) o;
-				if (!v.getLabel().contentEquals(g.getStartVertex().getLabel())
+				if (!v.getLabel().contentEquals(startVertex.getLabel())
 						&& !v.getLabel().contentEquals(g.getEndVertex().getLabel())) {
 					step = jrp.createSection(scenario);
 					step.setTitle(getLabel(o));
@@ -287,6 +294,12 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 					path.add(0, e);
 					path.add(0, vertex);
 				}
+			}
+			// handle end of background path. In the future autodetect the background to
+			// avoid this
+			if (path == null) {
+				path = new ArrayList<Object>();
+				path.add(vertex);
 			}
 		}
 		return path;

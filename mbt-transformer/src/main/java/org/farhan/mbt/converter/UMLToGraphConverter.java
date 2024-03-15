@@ -3,14 +3,8 @@ package org.farhan.mbt.converter;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map.Entry;
 
-import org.asciidoctor.ast.Cell;
-import org.asciidoctor.ast.Row;
-import org.asciidoctor.ast.Section;
-import org.asciidoctor.ast.StructuralNode;
-import org.asciidoctor.ast.Table;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -26,7 +20,6 @@ import org.farhan.mbt.core.ToGraphConverter;
 import org.farhan.mbt.graph.JGraphTProject;
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
-import org.farhan.mbt.graph.MBTPathInfo;
 import org.farhan.mbt.graph.MBTVertex;
 import org.farhan.mbt.graph.JGraphTGraphWrapper;
 import org.farhan.mbt.uml.UMLClassWrapper;
@@ -82,22 +75,32 @@ public class UMLToGraphConverter extends ToGraphConverter {
 		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) tgtWrp.get();
 		UMLClassWrapper ucw = (UMLClassWrapper) object;
 		Class c = (Class) ucw.get();
+		MBTVertex startVertex = g.getStartVertex();
 		for (Behavior b : c.getOwnedBehaviors()) {
 			Interaction anInteraction = (Interaction) b;
 			EList<Message> steps = anInteraction.getMessages();
 			EList<EAnnotation> examples = anInteraction.getEAnnotations();
 			String tags = convertParametersToTags(anInteraction);
 			String description = convertCommentsToDescription(anInteraction);
-			if (anInteraction.getEAnnotation("background") != null) {
-				// background
-			} else if (anInteraction.getEAnnotations().isEmpty()) {
-				convertInteractionMessagesToPath(g, steps, anInteraction.getName(), tags, description,
+			if (anInteraction.getEAnnotations().isEmpty() || anInteraction.getEAnnotation("background") != null) {
+				convertInteractionMessagesToPath(g, startVertex, steps, anInteraction.getName(), tags, description,
 						new HashMap<String, String>());
+				if (anInteraction.getEAnnotation("background") != null) {
+					// backgrounds don't have tags so use that field for now
+					g.getPathInfo().getFirst().setTags("background");
+					// the only edge going into the end vertex is the last background element
+					MBTEdge edge = null;
+					for (MBTEdge e : g.incomingEdgesOf(g.getEndVertex())) {
+						startVertex = g.getEdgeSource(e);
+						edge = e;
+					}
+					g.removeEdge(edge);
+				}
 			} else {
 				for (EAnnotation example : examples) {
 					ArrayList<HashMap<String, String>> replacements = convertExamplesToMaps(example);
 					for (int i = 0; i < replacements.size(); i++) {
-						convertInteractionMessagesToPath(g, steps,
+						convertInteractionMessagesToPath(g, startVertex, steps,
 								anInteraction.getName() + "/" + example.getSource() + "/" + String.valueOf(i), tags,
 								description, replacements.get(i));
 
@@ -157,14 +160,14 @@ public class UMLToGraphConverter extends ToGraphConverter {
 				+ tgtPrj.getFileExt(layer);
 	}
 
-	private void convertInteractionMessagesToPath(MBTGraph<MBTVertex, MBTEdge> g, EList<Message> steps, String title,
-			String tags, String description, HashMap<String, String> replacements) {
+	private void convertInteractionMessagesToPath(MBTGraph<MBTVertex, MBTEdge> g, MBTVertex startVertex,
+			EList<Message> steps, String title, String tags, String description, HashMap<String, String> replacements) {
 
 		g.addPath(String.valueOf(pathCnt), title, tags, description, replacements.keySet());
 		for (int i = 0; i < steps.size(); i++) {
 			Message m = steps.get(i);
 			if (i == 0) {
-				g.createEdgeWithVertices(g.getStartVertex().getLabel(), getStepName(m), "", String.valueOf(pathCnt));
+				g.createEdgeWithVertices(startVertex.getLabel(), getStepName(m), "", String.valueOf(pathCnt));
 			}
 			if (i == steps.size() - 1) {
 				g.createEdgeWithVertices(getStepName(m), g.getEndVertex().getLabel(), "", String.valueOf(pathCnt));

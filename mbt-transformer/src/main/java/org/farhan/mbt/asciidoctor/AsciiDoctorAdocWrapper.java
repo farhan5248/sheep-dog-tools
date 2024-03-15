@@ -59,22 +59,34 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 			if (sn instanceof Block) {
 				// feature description
 				Block b = (Block) sn;
-				text += "\n";
-				text += b.getSource() + "\n";
+				if (!b.getSource().isEmpty()) {
+					text += "\n";
+					text += b.getSource() + "\n";
+				}
 			} else if (sn instanceof Section) {
 				// scenario
 				Section section = (Section) sn;
 				text += "\n";
-				if (section.getAttribute("tags") != null) {
-					text += "[tags=\"" + section.getAttribute("tags") + "\"]" + "\n";
+				if (section.getAttributes().size() > 0) {
+					text += "[";
+					if (section.getAttribute("tags") != null) {
+						text += "tags=\"" + section.getAttribute("tags") + "\",";
+					}
+					if (section.getAttribute("background") != null) {
+						text += "background=\"" + section.getAttribute("background") + "\",";
+					}
+					text = text.replaceAll(",$", "");
+					text += "]\n";
 				}
 				text += "== " + section.getTitle() + "\n";
 				for (StructuralNode ssn : section.getBlocks()) {
 					if (ssn instanceof Block) {
 						// scenario description
 						Block b = (Block) ssn;
-						text += "\n";
-						text += b.getSource() + "\n";
+						if (!b.getSource().isEmpty()) {
+							text += "\n";
+							text += b.getSource() + "\n";
+						}
 					} else if (ssn instanceof Section) {
 						// scenario step or examples
 						Section step = (Section) ssn;
