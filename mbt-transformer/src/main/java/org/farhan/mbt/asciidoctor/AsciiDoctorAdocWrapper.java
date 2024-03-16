@@ -104,22 +104,33 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 						}
 						text += "=== " + step.getTitle() + "\n";
 						for (StructuralNode tsn : step.getBlocks()) {
-							// step data table or examples data table
-							Table t = (Table) tsn;
-							text += "\n";
-							text += "[options=\"header\"]\n";
-							text += "|===\n";
-							for (Cell c : t.getHeader().getFirst().getCells()) {
-								text += "| " + c.getText();
-							}
-							text += "\n";
-							for (Row r : t.getBody()) {
-								for (Cell c : r.getCells()) {
+							if (tsn instanceof Table) {
+								// step data table or examples data table
+								Table t = (Table) tsn;
+								text += "\n";
+								text += "[options=\"header\"]\n";
+								text += "|===\n";
+								for (Cell c : t.getHeader().getFirst().getCells()) {
 									text += "| " + c.getText();
 								}
 								text += "\n";
+								for (Row r : t.getBody()) {
+									for (Cell c : r.getCells()) {
+										text += "| " + c.getText();
+									}
+									text += "\n";
+								}
+								text += "|===\n";
+							} else if (tsn instanceof Block){
+								Block b = (Block) tsn;
+								if (b.getContext().contentEquals("listing")) {
+									// docstring
+									text += "\n";
+									text += "----\n";
+									text += b.getSource() + "\n";
+									text += "----\n";
+								}
 							}
-							text += "|===\n";
 						}
 					}
 				}

@@ -171,12 +171,12 @@ public class UMLToGraphConverter extends ToGraphConverter {
 			}
 			if (i == steps.size() - 1) {
 				g.createEdgeWithVertices(getStepName(m), g.getEndVertex().getLabel(), "", String.valueOf(pathCnt));
-				convertTableToGraph(m, title, replacements);
 			} else {
 				Message mNext = steps.get(i + 1);
 				g.createEdgeWithVertices(getStepName(m), getStepName(mNext), "", String.valueOf(pathCnt));
-				convertTableToGraph(m, title, replacements);
 			}
+			convertTableToGraph(m, title, replacements);
+			convertDocStringToGraph(m, title);
 		}
 		pathCnt++;
 	}
@@ -187,17 +187,39 @@ public class UMLToGraphConverter extends ToGraphConverter {
 		return keyword + " " + name;
 	}
 
+	private void convertDocStringToGraph(Message m, String title) {
+		ValueSpecification vs = (LiteralString) m.getArgument("docString", null);
+		if (vs == null) {
+			return;
+		}
+		EMap<String, String> docString = vs.getEAnnotation("docString").getDetails();
+		String content = "";
+		for (String lineNo : docString.keySet()) {
+			content += "\n" + docString.get(lineNo);
+		}
+		content = content.replaceFirst("\n", "");
+		String fileName = tgtPrj.createResource(getStepName(m), content);
+
+		MBTGraph<MBTVertex, MBTEdge> g = createGraph(getStepName(m));
+		g.createEdge(g.getStartVertex(), g.createVertex("Content"), "", String.valueOf(pathCnt));
+		g.createEdge(g.getVertex("Content"), g.getEndVertex(), fileName, String.valueOf(pathCnt));
+	}
+
+	private MBTGraph<MBTVertex, MBTEdge> createGraph(String title) {
+		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) tgtPrj
+				.createObject(convertObjectName(title, tgtPrj.SECOND_LAYER));
+		MBTGraph<MBTVertex, MBTEdge> fieldGraph = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
+		fieldGraph.setName(title);
+		return fieldGraph;
+	}
+
 	private void convertTableToGraph(Message m, String scenarioTitle, HashMap<String, String> replacements) {
 
 		ValueSpecification vs = (LiteralString) m.getArgument("dataTable", null);
 		if (vs == null) {
 			return;
 		}
-		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) tgtPrj
-				.createObject(convertObjectName(getStepName(m), tgtPrj.SECOND_LAYER));
-		MBTGraph<MBTVertex, MBTEdge> fieldGraph = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
-		fieldGraph.setName(getStepName(m));
-
+		MBTGraph<MBTVertex, MBTEdge> fieldGraph = createGraph(getStepName(m));
 		EMap<String, String> table = vs.getEAnnotation("dataTable").getDetails();
 		MBTVertex lastVertex = fieldGraph.getStartVertex();
 		String lastEdgeLabel = "";

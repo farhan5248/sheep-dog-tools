@@ -206,9 +206,15 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 				MBTGraph<MBTVertex, MBTEdge> edgeGraph = getGraph(g.getEdgeSource(e).getLabel());
 				if (edgeGraph != null) {
 					step = (Section) scenario.getBlocks().getLast();
-					Table table = jrp.createTable(step);
-					step.getBlocks().add(table);
-					convertPathToTable(edgeGraph, table, pi);
+					if (edgeGraph.getVertex("Content") != null) {
+						Block block = jrp.createBlock(step, "listing", "");
+						step.getBlocks().add(block);
+						convertPathToListing(edgeGraph, block, pi);
+					} else {
+						Table table = jrp.createTable(step);
+						step.getBlocks().add(table);
+						convertPathToTable(edgeGraph, table, pi);
+					}
 				}
 			}
 		}
@@ -227,6 +233,12 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 		qualifiedName = qualifiedName.replace(srcPrj.getDir(layer).getAbsolutePath(), "");
 		qualifiedName = tgtPrj.getDir(layer) + qualifiedName + tgtPrj.getFileExt(layer);
 		return qualifiedName;
+	}
+
+	private void convertPathToListing(MBTGraph<MBTVertex, MBTEdge> g, Block block, MBTPathInfo pi) {
+		ArrayList<Object> p = getPath(g, g.getStartVertex(), pi);
+		// the path will always be 5 elements: start, edge, Content, content, end
+		block.setSource(srcPrj.getResource(getLabel(p.get(3))));
 	}
 
 	private void convertPathToTable(MBTGraph<MBTVertex, MBTEdge> g, Table table, MBTPathInfo pi) {

@@ -11,7 +11,6 @@ import org.asciidoctor.ast.Section;
 import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
 import org.asciidoctor.ast.Document;
-import org.asciidoctor.ast.List;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;

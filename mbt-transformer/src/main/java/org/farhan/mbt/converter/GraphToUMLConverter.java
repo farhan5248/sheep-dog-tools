@@ -6,13 +6,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeMap;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.cucumber.Line;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToUMLGherkinConverter;
 import org.farhan.mbt.core.Utilities;

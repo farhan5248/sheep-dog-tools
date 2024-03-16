@@ -12,4 +12,9 @@ public class GivenTheDocStringPageIsAsFollowsGraphFileImpl extends FileObject im
 		setContent(keyMap.get("Content"));
 	}
 
+	@Override
+	public void assertContent(HashMap<String, String> keyMap) {
+		assertContent(keyMap.get("Content"));
+	}
+
 }

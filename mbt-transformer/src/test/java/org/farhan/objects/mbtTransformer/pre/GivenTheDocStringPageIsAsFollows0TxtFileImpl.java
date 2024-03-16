@@ -13,4 +13,9 @@ public class GivenTheDocStringPageIsAsFollows0TxtFileImpl extends FileObject
 		setContent(keyMap.get("Content"));
 	}
 
+	@Override
+	public void assertContent(HashMap<String, String> keyMap) {
+		assertContent(keyMap.get("Content"));
+	}
+
 }

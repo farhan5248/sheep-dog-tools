@@ -12,4 +12,11 @@ public class MbtTransformerGivenTheDocStringPageIsAsFollows0TxtFileSteps {
         MbtTransformerFactory.get("GivenTheDocStringPageIsAsFollows0TxtFile").setPath("target/graphs/resources/Given The DocString page is as follows-0.txt");
         MbtTransformerFactory.get("GivenTheDocStringPageIsAsFollows0TxtFile").setInputOutputs("Content", docString);
     }
+
+    @Given("^The mbt-transformer plugin, target/graphs/resources/Given The DocString page is as follows-0.txt file will be as follows$")
+    public void theMbtTransformerPluginTargetGraphsResourcesGivenTheDocStringPageIsAsFollows0TxtFileWillBeAsFollows(String docString) {
+        MbtTransformerFactory.get("GivenTheDocStringPageIsAsFollows0TxtFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("GivenTheDocStringPageIsAsFollows0TxtFile").setPath("target/graphs/resources/Given The DocString page is as follows-0.txt");
+        MbtTransformerFactory.get("GivenTheDocStringPageIsAsFollows0TxtFile").assertInputOutputs("Content", docString);
+    }
 }
