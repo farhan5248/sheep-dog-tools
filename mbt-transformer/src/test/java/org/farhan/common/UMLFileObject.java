@@ -1,6 +1,5 @@
 package org.farhan.common;
 
-import java.io.File;
 import java.util.Map.Entry;
 
 import org.eclipse.emf.ecore.EAnnotation;
@@ -17,12 +16,6 @@ import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.mbt.graph.JGraphTProject;
-import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.mbt.graph.JGraphTGraphWrapper;
-import org.farhan.mbt.graph.MBTEdge;
-import org.farhan.mbt.graph.MBTGraph;
-import org.farhan.mbt.graph.MBTVertex;
 import org.farhan.mbt.uml.UMLProject;
 import org.junit.jupiter.api.Assertions;
 
