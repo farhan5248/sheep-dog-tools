@@ -1,6 +1,8 @@
 package org.farhan.mbt.asciidoctor;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.asciidoctor.Options;
 import org.asciidoctor.Asciidoctor.Factory;
@@ -15,6 +17,7 @@ import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Utilities;
+import org.farhan.mbt.graph.MBTVertex;
 
 public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
@@ -121,7 +124,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 									text += "\n";
 								}
 								text += "|===\n";
-							} else if (tsn instanceof Block){
+							} else if (tsn instanceof Block) {
 								Block b = (Block) tsn;
 								if (b.getContext().contentEquals("listing")) {
 									// docstring
@@ -142,6 +145,102 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	@Override
 	public Object get() {
 		return theDoc;
+	}
+
+	public String getFeatureName() {
+		return theDoc.getTitle();
+	}
+
+	public String getFeatureDescription() {
+		for (StructuralNode block : theDoc.getBlocks()) {
+			if (!(block instanceof Section)) {
+				return getDescription(block);
+			}
+		}
+		return "";
+	}
+
+	public String getAbstractScenarioDescription(Section testCase) {
+		return getDescription(testCase);
+	}
+
+	public String getDescription(StructuralNode testCaseOrTestSuite) {
+		String text = "";
+		for (StructuralNode sn : testCaseOrTestSuite.getBlocks()) {
+			if (sn instanceof Block) {
+				text += "\n\n" + ((Block) sn).getSource();
+			} else {
+				break;
+			}
+		}
+		text = text.trim();
+		return text;
+	}
+
+	public ArrayList<Section> getAbstractScenarios() {
+		ArrayList<Section> testCases = new ArrayList<Section>();
+		for (StructuralNode sn : theDoc.getBlocks()) {
+			if (sn instanceof Section) {
+				testCases.add((Section) sn);
+			}
+		}
+		return testCases;
+	}
+
+	public ArrayList<Section> getSteps(Section testCase) {
+		ArrayList<Section> testSteps = new ArrayList<Section>();
+		for (StructuralNode sn : testCase.getBlocks()) {
+			if (sn instanceof Section) {
+				if (sn.getAttributes().get("examples") == null) {
+					testSteps.add((Section) sn);
+				}
+			}
+		}
+		return testSteps;
+	}
+
+	public ArrayList<Section> getExamples(Section testCase) {
+		ArrayList<Section> steps = new ArrayList<Section>();
+		for (StructuralNode sn : testCase.getBlocks()) {
+			if (sn instanceof Section) {
+				if (sn.getAttributes().get("examples") != null) {
+					steps.add((Section) sn);
+				}
+			}
+		}
+		return steps;
+	}
+
+	public String getFeatureTags() {
+		return getTags(theDoc);
+	}
+
+	public String getAbstractScenarioTags(Section testCase) {
+		return getTags(testCase);
+	}
+
+	public String getTags(StructuralNode testCaseOrTestSuite) {
+		String tags = (String) testCaseOrTestSuite.getAttributes().get("tags");
+		if (tags == null) {
+			return "";
+		} else {
+			return tags;
+		}
+	}
+
+	public boolean isScenarioOutline(Section abstractScenario) {
+		for (StructuralNode sn : abstractScenario.getBlocks()) {
+			if (sn instanceof Section) {
+				if (sn.getAttributes().get("examples") != null) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public boolean isBackground(Section abstractScenario) {
+		return abstractScenario.getAttributes().get("background") != null;
 	}
 
 }

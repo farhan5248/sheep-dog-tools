@@ -1,6 +1,8 @@
 package org.farhan.mbt.graph;
 
 import java.io.File;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Utilities;
@@ -128,6 +130,85 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 	@Override
 	public Object get() {
 		return theGraph;
+	}
+
+	public void setFeatureName(String name) {
+		theGraph.setName(name);
+	}
+
+	public void setFeatureTags(String tags) {
+		theGraph.setTags(tags);
+	}
+
+	public void setFeatureDescription(String description) {
+		theGraph.setDescription(description);
+	}
+
+	public MBTVertex getStartVertex() {
+		return theGraph.getStartVertex();
+	}
+
+	public void setAbstractScenarioName(MBTPathInfo abstractScenario, String name) {
+		abstractScenario.setName(name);
+	}
+
+	public void setAbstractScenarioTags(MBTPathInfo abstractScenario, String tags) {
+		abstractScenario.setTags(tags);
+	}
+
+	public void setAbstractScenarioDescription(MBTPathInfo abstractScenario, String description) {
+		abstractScenario.setDescription(description);
+	}
+
+	public void setAbstractScenarioOutlineParameters(MBTPathInfo abstractScenario, Set<String> outlineParameters) {
+		TreeSet<String> sortedParameters = new TreeSet<String>();
+		sortedParameters.addAll(outlineParameters);
+		String textParameters = "";
+		for (String p : sortedParameters) {
+			textParameters += "," + p;
+		}
+		abstractScenario.setParameters(textParameters.replaceFirst(",", ""));
+	}
+
+	public void createStep(String source, String target, int index) {
+		theGraph.createEdgeWithVertices(source, target, "", String.valueOf(index));
+	}
+
+	public MBTVertex getEndVertex() {
+		return theGraph.getEndVertex();
+	}
+
+	public void addAbstractScenario(MBTPathInfo abstractScenario) {
+		theGraph.addPath(abstractScenario);
+	}
+
+	public MBTPathInfo createAbstractScenario(int index) {
+		return new MBTPathInfo(String.valueOf(index));
+	}
+
+	public MBTVertex getBackgroundEndVertex() {
+		// the only edge going into the end vertex is the last background element
+		MBTEdge edge = null;
+		for (MBTEdge e : theGraph.incomingEdgesOf(theGraph.getEndVertex())) {
+			edge = e;
+		}
+		theGraph.removeEdge(edge);
+		return theGraph.getEdgeSource(edge);
+	}
+
+	public MBTPathInfo createBackground(int index) {
+		MBTPathInfo background = createAbstractScenario(index);
+		// backgrounds don't have tags so use that field for now
+		setAbstractScenarioTags(background, "background");
+		return background;
+	}
+
+	public MBTPathInfo createScenarioOutline(int index) {
+		return createAbstractScenario(index);
+	}
+
+	public MBTPathInfo createScenario(int index) {
+		return createAbstractScenario(index);
 	}
 
 }

@@ -24,6 +24,14 @@ public class MBTPathInfo {
 		this.parameters = parameters;
 	}
 
+	public MBTPathInfo(String index) {
+		this.index = index;
+		this.name = "";
+		this.tags = "";
+		this.description = "";
+		this.parameters = "";
+	}
+
 	public String getParameters() {
 		return parameters;
 	}

@@ -38,14 +38,17 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 		paths.add(path);
 	}
 
-	public void addPath(String id, String name, String tags, String description, Set<String> parameters) {
+	public MBTPathInfo addPath(String id, String name, String tags, String description, Set<String> outlineParameters) {
+		// TODO check if this is needed after refactoring UMLToGraphConverter
 		TreeSet<String> sortedParameters = new TreeSet<String>();
-		sortedParameters.addAll(parameters);
+		sortedParameters.addAll(outlineParameters);
 		String textParameters = "";
 		for (String p : sortedParameters) {
 			textParameters += "," + p;
 		}
-		paths.add(new MBTPathInfo(id, name, tags, description, textParameters.replaceFirst(",", "")));
+		MBTPathInfo path = new MBTPathInfo(id, name, tags, description, textParameters.replaceFirst(",", ""));
+		paths.add(path);
+		return path;
 	}
 
 	public void setTags(String tag) {
