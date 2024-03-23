@@ -22,14 +22,14 @@ public class MBTEdge extends DefaultWeightedEdge {
 	public void appendTag(String tag) {
 		// TODO after saving path meta data, make this method private and move it to
 		// MBTGraph
-		if (getTag().isEmpty()) {
+		if (getTags().isEmpty()) {
 			setTag(tag);
-		} else if (!getTag().contains(tag)) {
-			setTag(getTag() + "," + tag);
+		} else if (!getTags().contains(tag)) {
+			setTag(getTags() + "," + tag);
 		}
 	}
 
-	public String getTag() {
+	public String getTags() {
 		return attributes.get("tag").toString();
 	}
 
@@ -46,7 +46,7 @@ public class MBTEdge extends DefaultWeightedEdge {
 
 		String text = "Edge";
 		text += "\n\tlabel:" + getLabel();
-		text += "\n\ttag:" + getTag();
+		text += "\n\ttag:" + getTags();
 		text += "\n\tsource:";
 		for (String line : getSource().toString().split("\n")) {
 			text += "\n\t\t" + line;
@@ -58,13 +58,19 @@ public class MBTEdge extends DefaultWeightedEdge {
 		return text;
 	}
 
+	private String toID() {
+		MBTVertex source = (MBTVertex) getSource();
+		MBTVertex target = (MBTVertex) getTarget();
+		return source.getLabel() + getLabel() + target.getLabel();
+	}
+
 	@Override
 	public int hashCode() {
-		return toString().hashCode();
+		return toID().hashCode();
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		return toString().equals(o.toString());
+		return toID().equals(((MBTEdge) o).toID());
 	}
 }

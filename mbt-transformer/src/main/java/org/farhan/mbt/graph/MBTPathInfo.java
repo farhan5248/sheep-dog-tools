@@ -90,12 +90,23 @@ public class MBTPathInfo {
 	}
 
 	public boolean isCoveredBy(MBTEdge e) {
-		String[] indices = e.getTag().split(",");
+		String[] indices = e.getTags().split(",");
 		for (String i : indices) {
 			if (index.contentEquals(i)) {
 				return true;
 			}
 		}
 		return false;
+	}
+
+	public void removeCoverage(MBTEdge e) {
+		String[] indices = e.getTags().split(",");
+		String newTag = "";
+		for (String i : indices) {
+			if (!index.contentEquals(i)) {
+				newTag += "," + i;
+			}
+		}
+		e.setTag(newTag.replaceFirst(",", ""));
 	}
 }

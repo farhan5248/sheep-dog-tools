@@ -37,11 +37,11 @@ public class MBTVertex {
 
 	@Override
 	public int hashCode() {
-		return toString().hashCode();
+		return getLabel().hashCode();
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		return toString().equals(o.toString());
+		return getLabel().equals(((MBTVertex) o).getLabel());
 	}
 }

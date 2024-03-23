@@ -18,6 +18,8 @@ import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Utilities;
+import org.farhan.mbt.graph.MBTEdge;
+import org.farhan.mbt.graph.MBTGraph;
 import org.farhan.mbt.graph.MBTVertex;
 
 public class AsciiDoctorAdocWrapper implements ConvertibleObject {
@@ -306,6 +308,76 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	public Set<String> getScenarioOutlineParameters(HashMap<String, String> exampleRow) {
 		return exampleRow.keySet();
+	}
+
+	public String getStep(Section step) {
+		return step.getTitle();
+	}
+
+	public boolean hasDataTable(Section step) {
+		for (StructuralNode sn : step.getBlocks()) {
+			if (sn instanceof Table) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean hasDocString(Section step) {
+		for (StructuralNode sn : step.getBlocks()) {
+			if (sn instanceof Block) {
+				if (sn.getContext().contentEquals("listing")) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public String getDocString(Section step) {
+		for (StructuralNode sn : step.getBlocks()) {
+			if (sn instanceof Block) {
+				if (sn.getContext().contentEquals("listing")) {
+					Block block = (Block) sn;
+					return block.getSource();
+				}
+			}
+		}
+		return null;
+	}
+
+	public ArrayList<ArrayList<String>> getDataTable(Section step, HashMap<String, String> replacements) {
+		for (StructuralNode sn : step.getBlocks()) {
+			if (sn instanceof Table) {
+				Table table = (Table) sn;
+				ArrayList<ArrayList<String>> cellList = new ArrayList<ArrayList<String>>();
+				ArrayList<String> cell;
+				for (int i = 0; i < table.getBody().size(); i++) {
+					for (int j = 0; j < table.getBody().get(0).getCells().size(); j++) {
+						cell = new ArrayList<String>();
+						String header = i + " " + table.getHeader().getFirst().getCells().get(j).getText();
+						String value = replaceParameters(replacements,
+								table.getBody().get(i).getCells().get(j).getText());
+						cell.add(header);
+						cell.add(value);
+						cellList.add(cell);
+					}
+				}
+				return cellList;
+			}
+		}
+		return null;
+	}
+
+	private String replaceParameters(HashMap<String, String> replacements, String text) {
+		if (text.startsWith("{")) {
+			for (String key : replacements.keySet()) {
+				if (text.contentEquals("{" + key + "}")) {
+					return replacements.get(key);
+				}
+			}
+		}
+		return text;
 	}
 
 }
