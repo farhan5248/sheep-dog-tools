@@ -3,6 +3,7 @@ package org.farhan.mbt.asciidoctor;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 import org.asciidoctor.Options;
 import org.asciidoctor.Asciidoctor.Factory;
@@ -160,7 +161,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return "";
 	}
 
-	public String getAbstractScenarioDescription(Section testCase) {
+	public String getScenarioOutlineDescription(Section testCase) {
 		return getDescription(testCase);
 	}
 
@@ -177,7 +178,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return text;
 	}
 
-	public ArrayList<Section> getAbstractScenarios() {
+	public ArrayList<Section> getAbstractScenarioList() {
 		ArrayList<Section> testCases = new ArrayList<Section>();
 		for (StructuralNode sn : theDoc.getBlocks()) {
 			if (sn instanceof Section) {
@@ -187,7 +188,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return testCases;
 	}
 
-	public ArrayList<Section> getSteps(Section testCase) {
+	public ArrayList<Section> getStepList(Section testCase) {
 		ArrayList<Section> testSteps = new ArrayList<Section>();
 		for (StructuralNode sn : testCase.getBlocks()) {
 			if (sn instanceof Section) {
@@ -199,7 +200,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return testSteps;
 	}
 
-	public ArrayList<Section> getExamples(Section testCase) {
+	public ArrayList<Section> getExamplesList(Section testCase) {
 		ArrayList<Section> examples = new ArrayList<Section>();
 		for (StructuralNode sn : testCase.getBlocks()) {
 			if (sn instanceof Section) {
@@ -215,8 +216,8 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return getTags(theDoc);
 	}
 
-	public String getAbstractScenarioTags(Section testCase) {
-		return getTags(testCase);
+	public String getScenarioOutlineTags(Section abstractScenario) {
+		return getTags(abstractScenario);
 	}
 
 	public String getTags(StructuralNode testCaseOrTestSuite) {
@@ -241,6 +242,70 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	public boolean isBackground(Section abstractScenario) {
 		return abstractScenario.getAttributes().get("background") != null;
+	}
+
+	public String getName(Section abstractScenario) {
+		return abstractScenario.getTitle();
+	}
+
+	public String getBackgroundName(Section background) {
+		return getName(background);
+	}
+
+	public String getBackgroundDescription(Section background) {
+		return getDescription(background);
+	}
+
+	public String getScenarioName(Section scenario) {
+		return getName(scenario);
+	}
+
+	public String getScenarioTags(Section scenario) {
+		return getTags(scenario);
+	}
+
+	public String getScenarioDescription(Section scenario) {
+		return getDescription(scenario);
+	}
+
+	public String getScenarioOutlineName(Section scenarioOutline) {
+		return getName(scenarioOutline);
+	}
+
+	public String getExamplesName(Section example) {
+		return example.getTitle();
+	}
+
+	public String getExamplesRowName(int rowNum) {
+		return String.valueOf(rowNum);
+	}
+
+	public ArrayList<HashMap<String, String>> getExamplesRows(Section examples) {
+		ArrayList<HashMap<String, String>> rows = new ArrayList<HashMap<String, String>>();
+		for (StructuralNode block : examples.getBlocks()) {
+			if (block instanceof Table) {
+				Table table = (Table) block;
+				ArrayList<String> paramNames = new ArrayList<String>();
+				for (Cell cell : table.getHeader().getFirst().getCells()) {
+					paramNames.add(cell.getText());
+				}
+				int rowCnt = table.getBody().size();
+				for (int i = 0; i < rowCnt; i++) {
+					Row row = table.getBody().get(i);
+					HashMap<String, String> map = new HashMap<String, String>();
+					int cellCnt = row.getCells().size();
+					for (int j = 0; j < cellCnt; j++) {
+						map.put(paramNames.get(j), row.getCells().get(j).getText());
+					}
+					rows.add(map);
+				}
+			}
+		}
+		return rows;
+	}
+
+	public Set<String> getScenarioOutlineParameters(HashMap<String, String> exampleRow) {
+		return exampleRow.keySet();
 	}
 
 }

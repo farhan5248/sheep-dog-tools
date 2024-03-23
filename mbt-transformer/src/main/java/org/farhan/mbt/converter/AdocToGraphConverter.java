@@ -24,19 +24,48 @@ import org.farhan.mbt.graph.MBTVertex;
 
 public class AdocToGraphConverter extends ToGraphConverter {
 
-	private JGraphTGraphWrapper tgtObj;
-	private AsciiDoctorProject srcPrj;
-
 	// This is used to assign each testcase or testcase data
 	// row with a unique ID which is then stored in the collection of path
 	// information in the graph
 	private int pathCnt;
+	private AsciiDoctorProject srcPrj;
+
+	private JGraphTGraphWrapper tgtObj;
 
 	public AdocToGraphConverter(String layer, AsciiDoctorProject source, JGraphTProject target) {
 		this.layer = layer;
 		this.srcPrj = source;
 		this.tgtPrj = target;
 		this.pathCnt = 0;
+	}
+
+	@Override
+	protected void convertAbstractScenarios(ConvertibleObject object) throws Exception {
+		AsciiDoctorAdocWrapper srcObj = (AsciiDoctorAdocWrapper) object;
+		for (Section abstractScenario : srcObj.getAbstractScenarioList()) {
+			if (srcObj.isBackground(abstractScenario)) {
+				convertBackground(srcObj, abstractScenario);
+			} else if (srcObj.isScenarioOutline(abstractScenario)) {
+				convertScenarioOutline(srcObj, abstractScenario);
+			} else {
+				convertScenario(srcObj, abstractScenario);
+			}
+		}
+	}
+
+	@Override
+	protected void convertFeature(ConvertibleObject anObject) throws Exception {
+		AsciiDoctorAdocWrapper srcObj = (AsciiDoctorAdocWrapper) anObject;
+		tgtObj = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(srcObj.getFile().getAbsolutePath()));
+		tgtObj.setFeatureName(srcObj.getFeatureName());
+		tgtObj.setFeatureTags(srcObj.getFeatureTags());
+		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
+	}
+
+	@Override
+	protected String convertObjectName(String fileName) {
+		// TODO add the layer parameter to the super class method
+		return convertFeatureName(fileName, tgtPrj.FIRST_LAYER);
 	}
 
 	@Override
@@ -54,51 +83,42 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		}
 	}
 
-	@Override
-	protected void convertFeature(ConvertibleObject srcObj) throws Exception {
-		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) srcObj;
-		tgtObj = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(adaw.getFile().getAbsolutePath()));
-		tgtObj.setFeatureName(adaw.getFeatureName());
-		tgtObj.setFeatureTags(adaw.getFeatureTags());
-		tgtObj.setFeatureDescription(adaw.getFeatureDescription());
+	private void convertBackground(AsciiDoctorAdocWrapper srcObj, Section abstractScenario) {
+		MBTPathInfo background = tgtObj.createBackground(pathCnt);
+		tgtObj.setBackgroundName(background, srcObj.getBackgroundName(abstractScenario));
+		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
+		convertStepList(srcObj.getStepList(abstractScenario), new HashMap<String, String>());
+		tgtObj.addBackground(background);
 	}
 
-	@Override
-	protected void convertAbstractScenarios(ConvertibleObject object) throws Exception {
-		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) object;
-		for (Section abstractScenario : adaw.getAbstractScenarios()) {
-			// TODO push these three into createBackground, Scenario etc
-			ArrayList<Section> steps = adaw.getSteps(abstractScenario);
-			String tags = adaw.getAbstractScenarioTags(abstractScenario);
-			String description = adaw.getAbstractScenarioDescription(abstractScenario);
-			if (!adaw.isScenarioOutline(abstractScenario)) {
-				if (adaw.isBackground(abstractScenario)) {
-					convertBackground(steps, abstractScenario.getTitle(), description);
-				} else {
-					convertScenario(steps, abstractScenario.getTitle(), tags, description);
-				}
-			} else {
-				ArrayList<Section> examples = adaw.getExamples(abstractScenario);
-				for (Section example : examples) {
-					ArrayList<HashMap<String, String>> replacements = getTestCaseData(example);
-					for (int i = 0; i < replacements.size(); i++) {
-						convertScenarioOutline(steps,
-								abstractScenario.getTitle() + "/" + example.getTitle() + "/" + String.valueOf(i), tags,
-								description, replacements.get(i));
-
-					}
-				}
-			}
+	private void convertExamples(AsciiDoctorAdocWrapper srcObj, Section abstractScenario, Section examples) {
+		ArrayList<HashMap<String, String>> examplesRows = srcObj.getExamplesRows(examples);
+		for (int rowNum = 0; rowNum < examplesRows.size(); rowNum++) {
+			HashMap<String, String> examplesRow = examplesRows.get(rowNum);
+			convertExamplesRow(srcObj, abstractScenario, examples, examplesRow, rowNum);
 		}
 	}
 
-	@Override
-	protected String convertObjectName(String fileName) {
-		// TODO add the layer parameter to the super class method
-		return convertObjectName(fileName, tgtPrj.FIRST_LAYER);
+	private void convertExamplesRow(AsciiDoctorAdocWrapper srcObj, Section abstractScenario, Section example,
+			HashMap<String, String> examplesRow, int rowNum) {
+		// TODO have one named path (coverage) per example to save the name
+		// have multiple indices for each row
+		// TODO maybe pathCnt shouldn't be tracked here but in srcObj instead
+		MBTPathInfo scenarioOutline = tgtObj.createScenarioOutline(pathCnt);
+		tgtObj.setScenarioOutlineName(scenarioOutline, srcObj.getScenarioOutlineName(abstractScenario));
+		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
+		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
+		tgtObj.setScenarioOutlineParameters(scenarioOutline, srcObj.getScenarioOutlineParameters(examplesRow));
+
+		MBTPathInfo examples = tgtObj.createExamples(scenarioOutline);
+		tgtObj.setExamplesName(examples, srcObj.getExamplesName(example));
+		tgtObj.setExamplesRowName(tgtObj.createExamplesRow(examples), srcObj.getExamplesRowName(rowNum));
+
+		convertStepList(srcObj.getStepList(abstractScenario), examplesRow);
+		tgtObj.addScenarioOutline(scenarioOutline);
 	}
 
-	private String convertObjectName(String fileName, String layer) {
+	private String convertFeatureName(String fileName, String layer) {
 		// TODO make this a supertype method but with the additional delimiter parameter
 		// which can be :: or File.separator
 		String qualifiedName = fileName.replace(",", "");
@@ -108,83 +128,31 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		return qualifiedName;
 	}
 
-	private void convertBackground(ArrayList<Section> steps, String name, String description) {
-		MBTPathInfo background = tgtObj.createBackground(pathCnt);
-		// TODO rename these methods to setBackgroundName etc
-		tgtObj.setAbstractScenarioName(background, name);
-		tgtObj.setAbstractScenarioDescription(background, description);
-		convertSteps(steps, name, new HashMap<String, String>());
-		tgtObj.addBackground(background);
-	}
-
-	private void convertScenario(ArrayList<Section> steps, String name, String tags, String description) {
+	private void convertScenario(AsciiDoctorAdocWrapper srcObj, Section abstractScenario) {
 		MBTPathInfo scenario = tgtObj.createScenario(pathCnt);
-		// TODO rename these methods to setScenarioName etc
-		tgtObj.setAbstractScenarioName(scenario, name);
-		tgtObj.setAbstractScenarioDescription(scenario, description);
-		tgtObj.setAbstractScenarioTags(scenario, tags);
-		convertSteps(steps, name, new HashMap<String, String>());
-		tgtObj.addAbstractScenario(scenario);
+		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(abstractScenario));
+		tgtObj.setScenarioName(scenario, srcObj.getScenarioName(abstractScenario));
+		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(abstractScenario));
+		convertStepList(srcObj.getStepList(abstractScenario), new HashMap<String, String>());
+		tgtObj.addScenario(scenario);
 	}
 
-	private void convertScenarioOutline(ArrayList<Section> steps, String name, String tags, String description,
-			HashMap<String, String> outlineParameterReplacements) {
-		MBTPathInfo scenarioOutline = tgtObj.createScenarioOutline(pathCnt);
-		// TODO rename these methods to setScenarioOutlineName etc
-		tgtObj.setAbstractScenarioName(scenarioOutline, name);
-		tgtObj.setAbstractScenarioTags(scenarioOutline, tags);
-		tgtObj.setAbstractScenarioDescription(scenarioOutline, description);
-		tgtObj.setAbstractScenarioOutlineParameters(scenarioOutline, outlineParameterReplacements.keySet());
-		convertSteps(steps, name, outlineParameterReplacements);
-		tgtObj.addAbstractScenario(scenarioOutline);
-	}
-
-	private void convertSteps(ArrayList<Section> steps, String name,
-			HashMap<String, String> outlineParameterReplacements) {
-		convertStep(null, steps.getFirst().getTitle());
-		for (int i = 0; i < steps.size() - 1; i++) {
-			convertStep(steps.get(i).getTitle(), steps.get(i + 1).getTitle());
-			convertStepData(steps.get(i), name, outlineParameterReplacements);
+	private void convertScenarioOutline(AsciiDoctorAdocWrapper srcObj, Section abstractScenario) {
+		ArrayList<Section> examplesList = srcObj.getExamplesList(abstractScenario);
+		for (Section examples : examplesList) {
+			convertExamples(srcObj, abstractScenario, examples);
 		}
-		convertStep(steps.getLast().getTitle(), null);
-		convertStepData(steps.getLast(), name, outlineParameterReplacements);
-		pathCnt++;
-	}
-
-	private ArrayList<HashMap<String, String>> getTestCaseData(Section examples) {
-		// TODO put this inside getTestCaseData. All converters should return a list of
-		// maps like this or something consistent
-		ArrayList<HashMap<String, String>> replacements = new ArrayList<HashMap<String, String>>();
-		for (StructuralNode block : examples.getBlocks()) {
-			if (block instanceof Table) {
-				Table table = (Table) block;
-				ArrayList<String> paramNames = new ArrayList<String>();
-				for (Cell cell : table.getHeader().getFirst().getCells()) {
-					paramNames.add(cell.getText());
-				}
-				int rowCnt = table.getBody().size();
-				for (int i = 0; i < rowCnt; i++) {
-					Row row = table.getBody().get(i);
-					HashMap<String, String> map = new HashMap<String, String>();
-					int cellCnt = row.getCells().size();
-					for (int j = 0; j < cellCnt; j++) {
-						map.put(paramNames.get(j), row.getCells().get(j).getText());
-					}
-					replacements.add(0, map);
-				}
-			}
-		}
-		return replacements;
 	}
 
 	private void convertStep(String source, String target) {
 		tgtObj.createStep(source, target, pathCnt);
 	}
 
-	private void convertStepData(Section step, String scenarioTitle, HashMap<String, String> replacements) {
+	private void convertDataTable(Section step, HashMap<String, String> replacements) {
 		for (StructuralNode sn : step.getBlocks()) {
 			if (sn instanceof Table) {
 				Table table = (Table) sn;
+				// TODO move this inside tgtObj and srcObj
 				MBTGraph<MBTVertex, MBTEdge> fieldGraph = createGraph(step.getTitle());
 				for (int i = 0; i < table.getBody().size(); i++) {
 					for (int j = 0; j < table.getBody().get(i).getCells().size(); j++) {
@@ -194,15 +162,37 @@ public class AdocToGraphConverter extends ToGraphConverter {
 				createTestStepData(fieldGraph, table, table.getBody().size() - 1,
 						table.getHeader().get(0).getCells().size(), replacements);
 			} else if (sn instanceof Block) {
+				// TODO put this in convertDocString
 				Block block = (Block) sn;
 				MBTGraph<MBTVertex, MBTEdge> fieldGraph = createGraph(step.getTitle());
 				String fileName = tgtPrj.createResource(step.getTitle(), block.getSource());
-				createTestStepData(fieldGraph, "Content", fileName);
+				createDataTable(fieldGraph, "Content", fileName);
 			}
 		}
 	}
 
-	private void createTestStepData(MBTGraph<MBTVertex, MBTEdge> g, String vertexLabel, String edgeLabel) {
+	private void convertStepList(ArrayList<Section> steps, HashMap<String, String> outlineParameterReplacements) {
+		convertStep(null, steps.getFirst().getTitle());
+		for (int i = 0; i < steps.size() - 1; i++) {
+			convertStep(steps.get(i).getTitle(), steps.get(i + 1).getTitle());
+			convertDataTable(steps.get(i), outlineParameterReplacements);
+		}
+		convertStep(steps.getLast().getTitle(), null);
+		convertDataTable(steps.getLast(), outlineParameterReplacements);
+		pathCnt++;
+	}
+
+	private MBTGraph<MBTVertex, MBTEdge> createGraph(String title) {
+		// TODO move this inside tgtObj
+		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) tgtPrj
+				.createObject(convertFeatureName(title, tgtPrj.SECOND_LAYER));
+		MBTGraph<MBTVertex, MBTEdge> fieldGraph = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
+		fieldGraph.setName(title);
+		return fieldGraph;
+	}
+
+	private void createDataTable(MBTGraph<MBTVertex, MBTEdge> g, String vertexLabel, String edgeLabel) {
+		// TODO this won't be needed once the wrapper is managing the steps below
 		g.createEdge(g.getStartVertex(), g.createVertex(vertexLabel), "", String.valueOf(pathCnt));
 		g.createEdge(g.getVertex(vertexLabel), g.getEndVertex(), edgeLabel, String.valueOf(pathCnt));
 	}
@@ -233,14 +223,6 @@ public class AdocToGraphConverter extends ToGraphConverter {
 
 		}
 		return g.createEdge(lastVertex, newVertex, lastEdgeLabel, String.valueOf(pathCnt));
-	}
-
-	private MBTGraph<MBTVertex, MBTEdge> createGraph(String title) {
-		JGraphTGraphWrapper gtf = (JGraphTGraphWrapper) tgtPrj
-				.createObject(convertObjectName(title, tgtPrj.SECOND_LAYER));
-		MBTGraph<MBTVertex, MBTEdge> fieldGraph = (MBTGraph<MBTVertex, MBTEdge>) gtf.get();
-		fieldGraph.setName(title);
-		return fieldGraph;
 	}
 
 	private String replaceWithTestCaseData(HashMap<String, String> replacements, String text) {

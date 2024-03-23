@@ -12,6 +12,7 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 
 	private File theFile;
 	private MBTGraph<MBTVertex, MBTEdge> theGraph;
+	private MBTVertex backgroundEndVertex;
 
 	public JGraphTGraphWrapper(File f) {
 		theFile = f;
@@ -20,6 +21,7 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 		theGraph.setName(f.getName().replace(".graph", ""));
 		theGraph.createStartVertex();
 		theGraph.createEndVertex();
+		backgroundEndVertex = null;
 	}
 
 	@Override
@@ -145,19 +147,19 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 		theGraph.setDescription(description);
 	}
 
-	public void setAbstractScenarioName(MBTPathInfo abstractScenario, String name) {
+	public void setScenarioOutlineName(MBTPathInfo abstractScenario, String name) {
 		abstractScenario.setName(name);
 	}
 
-	public void setAbstractScenarioTags(MBTPathInfo abstractScenario, String tags) {
+	public void setScenarioOutlineTags(MBTPathInfo abstractScenario, String tags) {
 		abstractScenario.setTags(tags);
 	}
 
-	public void setAbstractScenarioDescription(MBTPathInfo abstractScenario, String description) {
+	public void setScenarioOutlineDescription(MBTPathInfo abstractScenario, String description) {
 		abstractScenario.setDescription(description);
 	}
 
-	public void setAbstractScenarioOutlineParameters(MBTPathInfo abstractScenario, Set<String> outlineParameters) {
+	public void setScenarioOutlineParameters(MBTPathInfo abstractScenario, Set<String> outlineParameters) {
 		TreeSet<String> sortedParameters = new TreeSet<String>();
 		sortedParameters.addAll(outlineParameters);
 		String textParameters = "";
@@ -168,13 +170,20 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 	}
 
 	public void createStep(String source, String target, int index) {
-		// TODO if source is null, use start vertex
-		// if target is null, use end vertex
-		// before using start vertex, check if the background end vertex is set
+		if (source == null) {
+			if (backgroundEndVertex == null) {
+				source = theGraph.getStartVertex().getLabel();
+			} else {
+				source = backgroundEndVertex.getLabel();
+			}
+		}
+		if (target == null) {
+			target = theGraph.getEndVertex().getLabel();
+		}
 		theGraph.createEdgeWithVertices(source, target, "", String.valueOf(index));
 	}
 
-	public void addAbstractScenario(MBTPathInfo abstractScenario) {
+	public void addScenarioOutline(MBTPathInfo abstractScenario) {
 		theGraph.addPath(abstractScenario);
 	}
 
@@ -185,7 +194,7 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 	public MBTPathInfo createBackground(int index) {
 		MBTPathInfo background = createAbstractScenario(index);
 		// backgrounds don't have tags so use that field for now
-		setAbstractScenarioTags(background, "background");
+		setScenarioOutlineTags(background, "background");
 		return background;
 	}
 
@@ -199,8 +208,6 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 
 	public void addBackground(MBTPathInfo background) {
 		theGraph.addPath(background);
-		// TODO this should be a waypoint in the future
-		// get the last vertex for the background
 		MBTEdge edge = null;
 		for (MBTEdge e : theGraph.incomingEdgesOf(theGraph.getEndVertex())) {
 			if (background.isCoveredBy(e)) {
@@ -208,19 +215,47 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 				break;
 			}
 		}
+		backgroundEndVertex = theGraph.getEdgeSource(edge);
 		theGraph.removeEdge(edge);
-		// get all the outgoing edges from start
-		ArrayList<MBTEdge> edges = new ArrayList<MBTEdge>();
-		edges.addAll(theGraph.outgoingEdgesOf(theGraph.getStartVertex()));
-		// for each edge,
-		for (int i = edges.size() - 1; i >= 0; i--) {
-			MBTEdge e = edges.get(i);
-			if (!theGraph.getEdgeSource(edge).equals(theGraph.getEdgeTarget(e))) {
-				// make a new one from background to its target
-				theGraph.createEdge(theGraph.getEdgeSource(edge), theGraph.getEdgeTarget(e), "", e.getTag());
-			}
-			theGraph.removeEdge(e);
-		}
 	}
 
+	public void setBackgroundName(MBTPathInfo background, String name) {
+		background.setName(name);
+	}
+
+	public void setBackgroundDescription(MBTPathInfo background, String description) {
+		background.setDescription(description);
+	}
+
+	public void setScenarioTags(MBTPathInfo scenario, String tags) {
+		scenario.setTags(tags);
+	}
+
+	public void setScenarioName(MBTPathInfo scenario, String name) {
+		scenario.setName(name);
+	}
+
+	public void setScenarioDescription(MBTPathInfo scenario, String description) {
+		scenario.setDescription(description);
+	}
+
+	public void addScenario(MBTPathInfo scenario) {
+		theGraph.addPath(scenario);
+	}
+
+	public MBTPathInfo createExamples(MBTPathInfo scenarioOutline) {
+		return scenarioOutline;
+	}
+
+	public void setExamplesName(MBTPathInfo examples, String name) {
+		examples.setName(examples.getName() + "/" + name);
+	}
+
+	public MBTPathInfo createExamplesRow(MBTPathInfo examples) {
+		return examples;
+	}
+
+	public void setExamplesRowName(MBTPathInfo examplesRow, String name) {
+		examplesRow.setName(examplesRow.getName() + "/" + name);
+	}
 }

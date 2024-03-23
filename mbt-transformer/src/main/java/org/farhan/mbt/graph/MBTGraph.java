@@ -183,6 +183,15 @@ public class MBTGraph<V, E> extends DirectedWeightedPseudograph<V, E> {
 		return null;
 	}
 
+	public MBTPathInfo getPathInfo(int index) {
+		for (MBTPathInfo p : paths) {
+			if (p.getIndex().contentEquals(String.valueOf(index))) {
+				return p;
+			}
+		}
+		return null;
+	}
+
 	public ArrayList<MBTPathInfo> getPathInfo() {
 		return paths;
 	}
