@@ -1,6 +1,7 @@
 package org.farhan.mbt.graph;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -144,10 +145,6 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 		theGraph.setDescription(description);
 	}
 
-	public MBTVertex getStartVertex() {
-		return theGraph.getStartVertex();
-	}
-
 	public void setAbstractScenarioName(MBTPathInfo abstractScenario, String name) {
 		abstractScenario.setName(name);
 	}
@@ -171,11 +168,10 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 	}
 
 	public void createStep(String source, String target, int index) {
+		// TODO if source is null, use start vertex
+		// if target is null, use end vertex
+		// before using start vertex, check if the background end vertex is set
 		theGraph.createEdgeWithVertices(source, target, "", String.valueOf(index));
-	}
-
-	public MBTVertex getEndVertex() {
-		return theGraph.getEndVertex();
 	}
 
 	public void addAbstractScenario(MBTPathInfo abstractScenario) {
@@ -184,16 +180,6 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 
 	public MBTPathInfo createAbstractScenario(int index) {
 		return new MBTPathInfo(String.valueOf(index));
-	}
-
-	public MBTVertex getBackgroundEndVertex() {
-		// the only edge going into the end vertex is the last background element
-		MBTEdge edge = null;
-		for (MBTEdge e : theGraph.incomingEdgesOf(theGraph.getEndVertex())) {
-			edge = e;
-		}
-		theGraph.removeEdge(edge);
-		return theGraph.getEdgeSource(edge);
 	}
 
 	public MBTPathInfo createBackground(int index) {
@@ -209,6 +195,32 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 
 	public MBTPathInfo createScenario(int index) {
 		return createAbstractScenario(index);
+	}
+
+	public void addBackground(MBTPathInfo background) {
+		theGraph.addPath(background);
+		// TODO this should be a waypoint in the future
+		// get the last vertex for the background
+		MBTEdge edge = null;
+		for (MBTEdge e : theGraph.incomingEdgesOf(theGraph.getEndVertex())) {
+			if (background.isCoveredBy(e)) {
+				edge = e;
+				break;
+			}
+		}
+		theGraph.removeEdge(edge);
+		// get all the outgoing edges from start
+		ArrayList<MBTEdge> edges = new ArrayList<MBTEdge>();
+		edges.addAll(theGraph.outgoingEdgesOf(theGraph.getStartVertex()));
+		// for each edge,
+		for (int i = edges.size() - 1; i >= 0; i--) {
+			MBTEdge e = edges.get(i);
+			if (!theGraph.getEdgeSource(edge).equals(theGraph.getEdgeTarget(e))) {
+				// make a new one from background to its target
+				theGraph.createEdge(theGraph.getEdgeSource(edge), theGraph.getEdgeTarget(e), "", e.getTag());
+			}
+			theGraph.removeEdge(e);
+		}
 	}
 
 }

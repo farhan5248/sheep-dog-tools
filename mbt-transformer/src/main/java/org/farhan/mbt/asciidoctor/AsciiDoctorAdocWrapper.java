@@ -200,15 +200,15 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	public ArrayList<Section> getExamples(Section testCase) {
-		ArrayList<Section> steps = new ArrayList<Section>();
+		ArrayList<Section> examples = new ArrayList<Section>();
 		for (StructuralNode sn : testCase.getBlocks()) {
 			if (sn instanceof Section) {
 				if (sn.getAttributes().get("examples") != null) {
-					steps.add((Section) sn);
+					examples.add((Section) sn);
 				}
 			}
 		}
-		return steps;
+		return examples;
 	}
 
 	public String getFeatureTags() {

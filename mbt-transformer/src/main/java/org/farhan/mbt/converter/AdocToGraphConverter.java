@@ -66,29 +66,23 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	@Override
 	protected void convertAbstractScenarios(ConvertibleObject object) throws Exception {
 		AsciiDoctorAdocWrapper adaw = (AsciiDoctorAdocWrapper) object;
-		MBTVertex startVertex = tgtObj.getStartVertex();
 		for (Section abstractScenario : adaw.getAbstractScenarios()) {
-			// TODO push these three into createBackground, Scenario etc, there shouldn't be
-			// any public AbstractScenario methods
+			// TODO push these three into createBackground, Scenario etc
 			ArrayList<Section> steps = adaw.getSteps(abstractScenario);
 			String tags = adaw.getAbstractScenarioTags(abstractScenario);
 			String description = adaw.getAbstractScenarioDescription(abstractScenario);
 			if (!adaw.isScenarioOutline(abstractScenario)) {
 				if (adaw.isBackground(abstractScenario)) {
-					convertBackground(startVertex, steps, abstractScenario.getTitle(), description);
-					// TODO this is a temp hack, this should be hidden in the wrapper. Save the
-					// background end vertex there in the add to list
-					startVertex = tgtObj.getBackgroundEndVertex();
-
+					convertBackground(steps, abstractScenario.getTitle(), description);
 				} else {
-					convertScenario(startVertex, steps, abstractScenario.getTitle(), tags, description);
+					convertScenario(steps, abstractScenario.getTitle(), tags, description);
 				}
 			} else {
 				ArrayList<Section> examples = adaw.getExamples(abstractScenario);
 				for (Section example : examples) {
 					ArrayList<HashMap<String, String>> replacements = getTestCaseData(example);
 					for (int i = 0; i < replacements.size(); i++) {
-						convertScenarioOutline(startVertex, steps,
+						convertScenarioOutline(steps,
 								abstractScenario.getTitle() + "/" + example.getTitle() + "/" + String.valueOf(i), tags,
 								description, replacements.get(i));
 
@@ -114,51 +108,46 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		return qualifiedName;
 	}
 
-	private void convertBackground(MBTVertex startVertex, ArrayList<Section> steps, String name, String description) {
+	private void convertBackground(ArrayList<Section> steps, String name, String description) {
 		MBTPathInfo background = tgtObj.createBackground(pathCnt);
 		// TODO rename these methods to setBackgroundName etc
 		tgtObj.setAbstractScenarioName(background, name);
 		tgtObj.setAbstractScenarioDescription(background, description);
-		convertSteps(startVertex, steps, name, new HashMap<String, String>());
-		// TODO make this addBackground and that's when to remove the last edge and save
-		// the last vertex
-		tgtObj.addAbstractScenario(background);
+		convertSteps(steps, name, new HashMap<String, String>());
+		tgtObj.addBackground(background);
 	}
 
-	private void convertScenario(MBTVertex startVertex, ArrayList<Section> steps, String name, String tags,
-			String description) {
+	private void convertScenario(ArrayList<Section> steps, String name, String tags, String description) {
 		MBTPathInfo scenario = tgtObj.createScenario(pathCnt);
 		// TODO rename these methods to setScenarioName etc
 		tgtObj.setAbstractScenarioName(scenario, name);
 		tgtObj.setAbstractScenarioDescription(scenario, description);
 		tgtObj.setAbstractScenarioTags(scenario, tags);
-		convertSteps(startVertex, steps, name, new HashMap<String, String>());
+		convertSteps(steps, name, new HashMap<String, String>());
 		tgtObj.addAbstractScenario(scenario);
 	}
 
-	private void convertScenarioOutline(MBTVertex startVertex, ArrayList<Section> steps, String name, String tags,
-			String description, HashMap<String, String> outlineParameterReplacements) {
+	private void convertScenarioOutline(ArrayList<Section> steps, String name, String tags, String description,
+			HashMap<String, String> outlineParameterReplacements) {
 		MBTPathInfo scenarioOutline = tgtObj.createScenarioOutline(pathCnt);
 		// TODO rename these methods to setScenarioOutlineName etc
 		tgtObj.setAbstractScenarioName(scenarioOutline, name);
 		tgtObj.setAbstractScenarioTags(scenarioOutline, tags);
 		tgtObj.setAbstractScenarioDescription(scenarioOutline, description);
 		tgtObj.setAbstractScenarioOutlineParameters(scenarioOutline, outlineParameterReplacements.keySet());
-		convertSteps(startVertex, steps, name, outlineParameterReplacements);
+		convertSteps(steps, name, outlineParameterReplacements);
 		tgtObj.addAbstractScenario(scenarioOutline);
 	}
 
-	private void convertSteps(MBTVertex startVertex, ArrayList<Section> steps, String name,
+	private void convertSteps(ArrayList<Section> steps, String name,
 			HashMap<String, String> outlineParameterReplacements) {
-		// TODO maybe all the graph start/end stuff should be hidden like it is for
-		// message occurence specification
-		convertStep(startVertex.getLabel(), steps.getFirst().getTitle());
+		convertStep(null, steps.getFirst().getTitle());
 		for (int i = 0; i < steps.size() - 1; i++) {
 			convertStep(steps.get(i).getTitle(), steps.get(i + 1).getTitle());
-			convertTestStepData(steps.get(i), name, outlineParameterReplacements);
+			convertStepData(steps.get(i), name, outlineParameterReplacements);
 		}
-		convertStep(steps.getLast().getTitle(), tgtObj.getEndVertex().getLabel());
-		convertTestStepData(steps.getLast(), name, outlineParameterReplacements);
+		convertStep(steps.getLast().getTitle(), null);
+		convertStepData(steps.getLast(), name, outlineParameterReplacements);
 		pathCnt++;
 	}
 
@@ -181,7 +170,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 					for (int j = 0; j < cellCnt; j++) {
 						map.put(paramNames.get(j), row.getCells().get(j).getText());
 					}
-					replacements.add(map);
+					replacements.add(0, map);
 				}
 			}
 		}
@@ -192,7 +181,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		tgtObj.createStep(source, target, pathCnt);
 	}
 
-	private void convertTestStepData(Section step, String scenarioTitle, HashMap<String, String> replacements) {
+	private void convertStepData(Section step, String scenarioTitle, HashMap<String, String> replacements) {
 		for (StructuralNode sn : step.getBlocks()) {
 			if (sn instanceof Table) {
 				Table table = (Table) sn;
