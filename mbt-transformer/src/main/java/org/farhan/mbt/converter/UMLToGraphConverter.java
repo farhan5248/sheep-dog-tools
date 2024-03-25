@@ -42,7 +42,7 @@ public class UMLToGraphConverter extends ToGraphConverter {
 	}
 
 	@Override
-	protected void selectFeatures() throws Exception {
+	protected void selectObjects() throws Exception {
 		srcPrj.loadObjects(layer);
 	}
 
@@ -52,7 +52,7 @@ public class UMLToGraphConverter extends ToGraphConverter {
 	}
 
 	@Override
-	protected void convertFeature(ConvertibleObject theObject) throws Exception {
+	protected void convertObject(ConvertibleObject theObject) throws Exception {
 
 		UMLClassWrapper ucw = (UMLClassWrapper) theObject;
 		Class c = (Class) ucw.get();

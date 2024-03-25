@@ -10,49 +10,34 @@ import org.asciidoctor.Asciidoctor.Factory;
 import org.asciidoctor.ast.Block;
 import org.asciidoctor.ast.Cell;
 import org.asciidoctor.ast.Document;
-import org.asciidoctor.ast.List;
-import org.asciidoctor.ast.ListItem;
 import org.asciidoctor.ast.Row;
 import org.asciidoctor.ast.Section;
 import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
+import org.asciidoctor.jruby.extension.internal.JRubyProcessor;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Utilities;
-import org.farhan.mbt.graph.MBTEdge;
-import org.farhan.mbt.graph.MBTGraph;
-import org.farhan.mbt.graph.MBTVertex;
 
 public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
-	private File theFile;
+	private JRubyProcessor jrp;
 	private Document theDoc;
+	private File theFile;
 
 	public AsciiDoctorAdocWrapper(File theFile) {
 		setFile(theFile);
 		theDoc = Factory.create().load("= " + theFile.getName(), Options.builder().build());
+		jrp = new JRubyProcessor();
 	}
 
-	@Override
-	public void setFile(File theFile) {
-		this.theFile = theFile;
+	public void addBackground(Section background) {
+		theDoc.getBlocks().add(background);
 	}
 
-	@Override
-	public File getFile() {
-		return theFile;
-	}
-
-	@Override
-	public void load() {
-		if (theFile.exists()) {
-			theDoc = Factory.create().loadFile(theFile, Options.builder().build());
-		}
-	}
-
-	@Override
-	public void save() throws Exception {
-		String fileContents = docToString();
-		Utilities.writeFile(theFile, fileContents);
+	public Section createBackground() {
+		Section background = jrp.createSection(theDoc);
+		background.getAttributes().put("background", "true");
+		return background;
 	}
 
 	private String docToString() {
@@ -150,21 +135,45 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return theDoc;
 	}
 
-	public String getFeatureName() {
-		return theDoc.getTitle();
-	}
-
-	public String getFeatureDescription() {
-		for (StructuralNode block : theDoc.getBlocks()) {
-			if (!(block instanceof Section)) {
-				return getDescription(block);
+	public ArrayList<Section> getAbstractScenarioList() {
+		ArrayList<Section> testCases = new ArrayList<Section>();
+		for (StructuralNode sn : theDoc.getBlocks()) {
+			if (sn instanceof Section) {
+				testCases.add((Section) sn);
 			}
 		}
-		return "";
+		return testCases;
 	}
 
-	public String getScenarioOutlineDescription(Section testCase) {
-		return getDescription(testCase);
+	public String getBackgroundDescription(Section background) {
+		return getDescription(background);
+	}
+
+	public String getBackgroundName(Section background) {
+		return getName(background);
+	}
+
+	public ArrayList<ArrayList<String>> getDataTable(Section step, HashMap<String, String> replacements) {
+		for (StructuralNode sn : step.getBlocks()) {
+			if (sn instanceof Table) {
+				Table table = (Table) sn;
+				ArrayList<ArrayList<String>> cellList = new ArrayList<ArrayList<String>>();
+				ArrayList<String> cell;
+				for (int i = 0; i < table.getBody().size(); i++) {
+					for (int j = 0; j < table.getBody().get(0).getCells().size(); j++) {
+						cell = new ArrayList<String>();
+						String header = i + " " + table.getHeader().getFirst().getCells().get(j).getText();
+						String value = replaceParameters(replacements,
+								table.getBody().get(i).getCells().get(j).getText());
+						cell.add(header);
+						cell.add(value);
+						cellList.add(cell);
+					}
+				}
+				return cellList;
+			}
+		}
+		return null;
 	}
 
 	public String getDescription(StructuralNode testCaseOrTestSuite) {
@@ -180,26 +189,16 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return text;
 	}
 
-	public ArrayList<Section> getAbstractScenarioList() {
-		ArrayList<Section> testCases = new ArrayList<Section>();
-		for (StructuralNode sn : theDoc.getBlocks()) {
-			if (sn instanceof Section) {
-				testCases.add((Section) sn);
-			}
-		}
-		return testCases;
-	}
-
-	public ArrayList<Section> getStepList(Section testCase) {
-		ArrayList<Section> testSteps = new ArrayList<Section>();
-		for (StructuralNode sn : testCase.getBlocks()) {
-			if (sn instanceof Section) {
-				if (sn.getAttributes().get("examples") == null) {
-					testSteps.add((Section) sn);
+	public String getDocString(Section step) {
+		for (StructuralNode sn : step.getBlocks()) {
+			if (sn instanceof Block) {
+				if (sn.getContext().contentEquals("listing")) {
+					Block block = (Block) sn;
+					return block.getSource();
 				}
 			}
 		}
-		return testSteps;
+		return null;
 	}
 
 	public ArrayList<Section> getExamplesList(Section testCase) {
@@ -212,66 +211,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 			}
 		}
 		return examples;
-	}
-
-	public String getFeatureTags() {
-		return getTags(theDoc);
-	}
-
-	public String getScenarioOutlineTags(Section abstractScenario) {
-		return getTags(abstractScenario);
-	}
-
-	public String getTags(StructuralNode testCaseOrTestSuite) {
-		String tags = (String) testCaseOrTestSuite.getAttributes().get("tags");
-		if (tags == null) {
-			return "";
-		} else {
-			return tags;
-		}
-	}
-
-	public boolean isScenarioOutline(Section abstractScenario) {
-		for (StructuralNode sn : abstractScenario.getBlocks()) {
-			if (sn instanceof Section) {
-				if (sn.getAttributes().get("examples") != null) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public boolean isBackground(Section abstractScenario) {
-		return abstractScenario.getAttributes().get("background") != null;
-	}
-
-	public String getName(Section abstractScenario) {
-		return abstractScenario.getTitle();
-	}
-
-	public String getBackgroundName(Section background) {
-		return getName(background);
-	}
-
-	public String getBackgroundDescription(Section background) {
-		return getDescription(background);
-	}
-
-	public String getScenarioName(Section scenario) {
-		return getName(scenario);
-	}
-
-	public String getScenarioTags(Section scenario) {
-		return getTags(scenario);
-	}
-
-	public String getScenarioDescription(Section scenario) {
-		return getDescription(scenario);
-	}
-
-	public String getScenarioOutlineName(Section scenarioOutline) {
-		return getName(scenarioOutline);
 	}
 
 	public String getExamplesName(Section example) {
@@ -306,12 +245,83 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return rows;
 	}
 
+	public String getFeatureDescription() {
+		for (StructuralNode block : theDoc.getBlocks()) {
+			if (!(block instanceof Section)) {
+				return getDescription(block);
+			}
+		}
+		return "";
+	}
+
+	public String getFeatureName() {
+		return theDoc.getTitle();
+	}
+
+	public String getFeatureTags() {
+		return getTags(theDoc);
+	}
+
+	@Override
+	public File getFile() {
+		return theFile;
+	}
+
+	public String getName(Section abstractScenario) {
+		return abstractScenario.getTitle();
+	}
+
+	public String getScenarioDescription(Section scenario) {
+		return getDescription(scenario);
+	}
+
+	public String getScenarioName(Section scenario) {
+		return getName(scenario);
+	}
+
+	public String getScenarioOutlineDescription(Section testCase) {
+		return getDescription(testCase);
+	}
+
+	public String getScenarioOutlineName(Section scenarioOutline) {
+		return getName(scenarioOutline);
+	}
+
 	public Set<String> getScenarioOutlineParameters(HashMap<String, String> exampleRow) {
 		return exampleRow.keySet();
 	}
 
+	public String getScenarioOutlineTags(Section abstractScenario) {
+		return getTags(abstractScenario);
+	}
+
+	public String getScenarioTags(Section scenario) {
+		return getTags(scenario);
+	}
+
 	public String getStep(Section step) {
 		return step.getTitle();
+	}
+
+	public ArrayList<Section> getStepList(Section testCase) {
+		ArrayList<Section> testSteps = new ArrayList<Section>();
+		for (StructuralNode sn : testCase.getBlocks()) {
+			if (sn instanceof Section) {
+				if (sn.getAttributes().get("examples") == null) {
+					testSteps.add((Section) sn);
+				}
+			}
+		}
+		return testSteps;
+	}
+
+	public String getTags(StructuralNode testCaseOrTestSuite) {
+		String tags = (String) testCaseOrTestSuite.getAttributes().get("tags");
+		if (tags == null) {
+			return "";
+		} else {
+			return tags;
+		}
 	}
 
 	public boolean hasDataTable(Section step) {
@@ -334,39 +344,26 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return false;
 	}
 
-	public String getDocString(Section step) {
-		for (StructuralNode sn : step.getBlocks()) {
-			if (sn instanceof Block) {
-				if (sn.getContext().contentEquals("listing")) {
-					Block block = (Block) sn;
-					return block.getSource();
-				}
-			}
-		}
-		return null;
+	public boolean isBackground(Section abstractScenario) {
+		return abstractScenario.getAttributes().get("background") != null;
 	}
 
-	public ArrayList<ArrayList<String>> getDataTable(Section step, HashMap<String, String> replacements) {
-		for (StructuralNode sn : step.getBlocks()) {
-			if (sn instanceof Table) {
-				Table table = (Table) sn;
-				ArrayList<ArrayList<String>> cellList = new ArrayList<ArrayList<String>>();
-				ArrayList<String> cell;
-				for (int i = 0; i < table.getBody().size(); i++) {
-					for (int j = 0; j < table.getBody().get(0).getCells().size(); j++) {
-						cell = new ArrayList<String>();
-						String header = i + " " + table.getHeader().getFirst().getCells().get(j).getText();
-						String value = replaceParameters(replacements,
-								table.getBody().get(i).getCells().get(j).getText());
-						cell.add(header);
-						cell.add(value);
-						cellList.add(cell);
-					}
+	public boolean isScenarioOutline(Section abstractScenario) {
+		for (StructuralNode sn : abstractScenario.getBlocks()) {
+			if (sn instanceof Section) {
+				if (sn.getAttributes().get("examples") != null) {
+					return true;
 				}
-				return cellList;
 			}
 		}
-		return null;
+		return false;
+	}
+
+	@Override
+	public void load() {
+		if (theFile.exists()) {
+			theDoc = Factory.create().loadFile(theFile, Options.builder().build());
+		}
 	}
 
 	private String replaceParameters(HashMap<String, String> replacements, String text) {
@@ -378,6 +375,55 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 			}
 		}
 		return text;
+	}
+
+	@Override
+	public void save() throws Exception {
+		String fileContents = docToString();
+		Utilities.writeFile(theFile, fileContents);
+	}
+
+	public void setBackgroundDescription(Section background, String backgroundDescription) {
+		background.getBlocks().add(jrp.createBlock(background, "paragraph", backgroundDescription));
+	}
+
+	public void setBackgroundName(Section background, String name) {
+		background.setTitle(name);
+	}
+
+	public void setFeatureDescription(String featureDescription) {
+		Block block = jrp.createBlock(theDoc, "paragraph", featureDescription);
+		theDoc.getBlocks().add(block);
+	}
+
+	public void setFeatureName(String featureName) {
+		theDoc.setTitle(featureName);
+	}
+
+	public void setFeatureTags(String featureTags) {
+		theDoc.getAttributes().put("tags", featureTags);
+	}
+
+	@Override
+	public void setFile(File theFile) {
+		this.theFile = theFile;
+	}
+
+	public void createStep(Section abstractScenario, String step) {
+		abstractScenario = jrp.createSection(theDoc);
+		abstractScenario.setTitle(step);
+		abstractScenario.getBlocks().add(abstractScenario);
+	}
+
+	public void createDocString(Section step, String content) {
+		Block docString = jrp.createBlock(step, "listing", "");
+		step.getBlocks().add(docString);
+		docString.setSource(content);
+	}
+
+	public void createDataTable(Section abstractScenario, ArrayList<ArrayList<String>> dataTableCellList) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

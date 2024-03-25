@@ -12,18 +12,18 @@ public abstract class ToGraphConverter {
 	protected String getLayer() {
 		return layer;
 	}
-	protected abstract void selectFeatures() throws Exception;
+	protected abstract void selectObjects() throws Exception;
 
 	protected abstract ArrayList<ConvertibleObject> getSourceObjects(String layer);
 
 	protected void convertObjects() throws Exception {
 		for (ConvertibleObject co : getSourceObjects(getLayer())) {
-			convertFeature(co);
+			convertObject(co);
 			convertAbstractScenarios(co);
 		}
 	}
 
-	protected abstract void convertFeature(ConvertibleObject object) throws Exception;
+	protected abstract void convertObject(ConvertibleObject object) throws Exception;
 
 	protected abstract void convertAbstractScenarios(ConvertibleObject object) throws Exception;
 

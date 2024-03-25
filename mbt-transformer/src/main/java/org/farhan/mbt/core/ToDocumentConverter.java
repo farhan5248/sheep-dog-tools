@@ -20,13 +20,13 @@ public abstract class ToDocumentConverter {
 	protected void convertObjects() throws Exception {
 		for (ConvertibleObject co : getObjects(getLayer())) {
 			convertObject(co);
-			convertElements(co);
+			convertAbstractScenarios(co);
 		}
 	}
 
 	protected abstract void convertObject(ConvertibleObject object) throws Exception;
 
-	protected abstract void convertElements(ConvertibleObject object) throws Exception;
+	protected abstract void convertAbstractScenarios(ConvertibleObject object) throws Exception;
 
 	protected abstract String convertObjectName(String fullName);
 }

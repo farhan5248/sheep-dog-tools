@@ -14,7 +14,7 @@ public abstract class ConvertToGraph implements MojoGoal {
 
 		initProjects();
 		for (ToGraphConverter c : getLayerConverters()) {
-			c.selectFeatures();
+			c.selectObjects();
 			c.convertObjects();
 		}
 		save();

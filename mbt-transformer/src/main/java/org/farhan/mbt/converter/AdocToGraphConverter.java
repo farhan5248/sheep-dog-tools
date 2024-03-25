@@ -16,25 +16,18 @@ import org.farhan.mbt.graph.MBTPathInfo;
 
 public class AdocToGraphConverter extends ToGraphConverter {
 
-	// This is used to assign each testcase or testcase data
-	// row with a unique ID which is then stored in the collection of path
-	// information in the graph
-	private int pathCnt;
-	private AsciiDoctorAdocWrapper srcObj;
-
 	private AsciiDoctorProject srcPrj;
+	private AsciiDoctorAdocWrapper srcObj;
 	private JGraphTGraphWrapper tgtObj;
 
 	public AdocToGraphConverter(String layer, AsciiDoctorProject source, JGraphTProject target) {
 		this.layer = layer;
 		this.srcPrj = source;
 		this.tgtPrj = target;
-		this.pathCnt = 0;
 	}
 
 	@Override
 	protected void convertAbstractScenarios(ConvertibleObject object) throws Exception {
-		AsciiDoctorAdocWrapper srcObj = (AsciiDoctorAdocWrapper) object;
 		for (Section abstractScenario : srcObj.getAbstractScenarioList()) {
 			if (srcObj.isBackground(abstractScenario)) {
 				convertBackground(abstractScenario);
@@ -47,7 +40,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	}
 
 	@Override
-	protected void convertFeature(ConvertibleObject anObject) throws Exception {
+	protected void convertObject(ConvertibleObject anObject) throws Exception {
 		srcObj = (AsciiDoctorAdocWrapper) anObject;
 		tgtObj = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(srcObj.getFile().getAbsolutePath()));
 		tgtObj.setFeatureName(srcObj.getFeatureName());
@@ -58,7 +51,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	@Override
 	protected String convertObjectName(String fileName) {
 		// TODO add the layer parameter to the super class method
-		return convertFeatureName(fileName, tgtPrj.FIRST_LAYER);
+		return convertObjectName(fileName, tgtPrj.FIRST_LAYER);
 	}
 
 	@Override
@@ -67,7 +60,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	}
 
 	@Override
-	protected void selectFeatures() throws Exception {
+	protected void selectObjects() throws Exception {
 		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(srcPrj.FIRST_LAYER),
 				srcPrj.getFileExt(srcPrj.FIRST_LAYER));
 		srcPrj.getObjects(srcPrj.FIRST_LAYER).clear();
@@ -77,33 +70,29 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	}
 
 	private void convertBackground(Section abstractScenario) {
-		MBTPathInfo background = tgtObj.createBackground(pathCnt);
+		MBTPathInfo background = tgtObj.createBackground();
 		tgtObj.setBackgroundName(background, srcObj.getBackgroundName(abstractScenario));
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
 		convertStepList(background, srcObj.getStepList(abstractScenario), new HashMap<String, String>());
 		tgtObj.addBackground(background);
 	}
 
-	private void convertDataTable(MBTPathInfo abstractScenario, Section step, HashMap<String, String> replacements) {
+	private void convertDataTable(MBTPathInfo abstractScenario, Section step, HashMap<String, String> examplesRow) {
 		String name = srcObj.getStep(step);
 		JGraphTGraphWrapper stepDefObj = (JGraphTGraphWrapper) tgtPrj
-				.createObject(convertFeatureName(name, tgtPrj.SECOND_LAYER));
+				.createObject(convertObjectName(name, tgtPrj.SECOND_LAYER));
 		stepDefObj.setStepDefinitionName(name);
-		ArrayList<ArrayList<String>> dataTableCellList = srcObj.getDataTable(step, replacements);
-		// TODO this should just create a datatable like a scenario and then add the
-		// attributes like steps. So add stepDefObj.createCell
-		tgtObj.createDataTable(stepDefObj, abstractScenario, dataTableCellList);
+		ArrayList<ArrayList<String>> dataTableCellList = srcObj.getDataTable(step, examplesRow);
+		stepDefObj.createDataTable(abstractScenario, dataTableCellList);
 	}
 
 	private void convertDocString(MBTPathInfo abstractScenario, Section step) {
 		String name = srcObj.getStep(step);
 		JGraphTGraphWrapper stepDefObj = (JGraphTGraphWrapper) tgtPrj
-				.createObject(convertFeatureName(name, tgtPrj.SECOND_LAYER));
+				.createObject(convertObjectName(name, tgtPrj.SECOND_LAYER));
 		stepDefObj.setStepDefinitionName(name);
 		String fileName = tgtPrj.createResource(name, srcObj.getDocString(step));
-		// TODO this should just create a docstring like a scenario and then add the
-		// attributes like steps. So add stepDefObj.createContent
-		tgtObj.createDocString(stepDefObj, abstractScenario, fileName);
+		stepDefObj.createDocString(abstractScenario, fileName);
 	}
 
 	private void convertExamples(Section abstractScenario, Section examples) {
@@ -116,10 +105,8 @@ public class AdocToGraphConverter extends ToGraphConverter {
 
 	private void convertExamplesRow(Section abstractScenario, Section example, HashMap<String, String> examplesRow,
 			int rowNum) {
-		// TODO have one named path (coverage) per example to save the name
-		// have multiple indices for each row
-		// TODO maybe pathCnt shouldn't be tracked here but in srcObj instead
-		MBTPathInfo scenarioOutline = tgtObj.createScenarioOutline(pathCnt);
+		// TODO maybe have one named path (coverage) per example
+		MBTPathInfo scenarioOutline = tgtObj.createScenarioOutline();
 		tgtObj.setScenarioOutlineName(scenarioOutline, srcObj.getScenarioOutlineName(abstractScenario));
 		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
 		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
@@ -133,7 +120,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		tgtObj.addScenarioOutline(scenarioOutline);
 	}
 
-	private String convertFeatureName(String fileName, String layer) {
+	private String convertObjectName(String fileName, String layer) {
 		// TODO make this a supertype method but with the additional delimiter parameter
 		// which can be :: or File.separator
 		String qualifiedName = fileName.replace(",", "");
@@ -144,7 +131,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	}
 
 	private void convertScenario(Section abstractScenario) {
-		MBTPathInfo scenario = tgtObj.createScenario(pathCnt);
+		MBTPathInfo scenario = tgtObj.createScenario();
 		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(abstractScenario));
 		tgtObj.setScenarioName(scenario, srcObj.getScenarioName(abstractScenario));
 		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(abstractScenario));
@@ -167,13 +154,12 @@ public class AdocToGraphConverter extends ToGraphConverter {
 			HashMap<String, String> examplesRow) {
 		for (Section step : stepList) {
 			convertStep(abstractScenario, step);
-			if (srcObj.hasDataTable(step)) {
-				convertDataTable(abstractScenario, step, examplesRow);
-			} else if (srcObj.hasDocString(step)) {
+			if (srcObj.hasDocString(step)) {
 				convertDocString(abstractScenario, step);
+			} else if (srcObj.hasDataTable(step)) {
+				convertDataTable(abstractScenario, step, examplesRow);
 			}
 		}
-		pathCnt++;
 	}
 
 }

@@ -118,4 +118,14 @@ public class JGraphTProject extends ConvertibleProject {
 		return null;
 	}
 
+	public JGraphTGraphWrapper getObject(String graphName, String layer) {
+		for (Object o : getObjects(layer)) {
+			MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) ((JGraphTGraphWrapper) o).get();
+			if (g.getName().contentEquals(graphName)) {
+				return (JGraphTGraphWrapper) o;
+			}
+		}
+		return null;
+	}
+
 }

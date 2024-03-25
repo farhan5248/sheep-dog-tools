@@ -2,14 +2,17 @@ package org.farhan.mbt.graph;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
 import java.util.TreeSet;
 
+import org.asciidoctor.ast.Section;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Utilities;
 
 public class JGraphTGraphWrapper implements ConvertibleObject {
 
+	private int pathCnt;
 	private MBTVertex backgroundEndVertex;
 	private File theFile;
 	private MBTGraph<MBTVertex, MBTEdge> theGraph;
@@ -21,6 +24,7 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 		theGraph.createStartVertex();
 		theGraph.createEndVertex();
 		backgroundEndVertex = null;
+		pathCnt = 0;
 	}
 
 	@Override
@@ -54,6 +58,7 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 
 	public void addBackground(MBTPathInfo background) {
 		theGraph.addPath(background);
+		pathCnt++;
 		MBTEdge edge = getLastCoveredEdge(background);
 		backgroundEndVertex = theGraph.getEdgeSource(edge);
 		// TODO this removes the data table associated with this edge.
@@ -63,10 +68,12 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 
 	public void addScenario(MBTPathInfo scenario) {
 		theGraph.addPath(scenario);
+		pathCnt++;
 	}
 
 	public void addScenarioOutline(MBTPathInfo abstractScenario) {
 		theGraph.addPath(abstractScenario);
+		pathCnt++;
 	}
 
 	public MBTPathInfo createAbstractScenario(int index) {
@@ -80,8 +87,8 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 		return abstractScenario;
 	}
 
-	public MBTPathInfo createBackground(int index) {
-		MBTPathInfo background = createAbstractScenario(index);
+	public MBTPathInfo createBackground() {
+		MBTPathInfo background = createAbstractScenario(pathCnt);
 		// backgrounds don't have tags so use that field for now
 		setScenarioOutlineTags(background, "background");
 		return background;
@@ -95,12 +102,12 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 		return examples;
 	}
 
-	public MBTPathInfo createScenario(int index) {
-		return createAbstractScenario(index);
+	public MBTPathInfo createScenario() {
+		return createAbstractScenario(pathCnt);
 	}
 
-	public MBTPathInfo createScenarioOutline(int index) {
-		return createAbstractScenario(index);
+	public MBTPathInfo createScenarioOutline() {
+		return createAbstractScenario(pathCnt);
 	}
 
 	public void createStep(MBTPathInfo abstractScenario, String name) {
@@ -274,27 +281,107 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 		scenario.setTags(tags);
 	}
 
-	public void createDocString(JGraphTGraphWrapper stepDefObj, MBTPathInfo abstractScenario, String fileName) {
-		// TODO stepDefObj shouldn't be referenced here
-		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) stepDefObj.get();
-		// TODO This should use addLastCoveredEdge
-		g.createEdge(g.getStartVertex(), g.createVertex("Content"), "", String.valueOf(abstractScenario.getIndex()));
-		g.createEdge(g.getVertex("Content"), g.getEndVertex(), fileName, String.valueOf(abstractScenario.getIndex()));
+	public void createDocString(MBTPathInfo abstractScenario, String fileName) {
+		theGraph.createEdgeWithVertices(theGraph.getStartVertex().getLabel(), theGraph.getEndVertex().getLabel(), "",
+				String.valueOf(abstractScenario.getIndex()));
+		addLastCoveredEdge(abstractScenario, "Content", fileName);
 	}
 
 	public void setStepDefinitionName(String name) {
 		theGraph.setName(name);
 	}
 
-	public void createDataTable(JGraphTGraphWrapper stepDefObj, MBTPathInfo abstractScenario,
-			ArrayList<ArrayList<String>> dataTableCellList) {
-		MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) stepDefObj.get();
-		g.createEdgeWithVertices(g.getStartVertex().getLabel(), g.getEndVertex().getLabel(), "",
+	public void createDataTable(MBTPathInfo abstractScenario, ArrayList<ArrayList<String>> dataTableCellList) {
+		theGraph.createEdgeWithVertices(theGraph.getStartVertex().getLabel(), theGraph.getEndVertex().getLabel(), "",
 				String.valueOf(abstractScenario.getIndex()));
 		for (ArrayList<String> cell : dataTableCellList) {
-			// TODO stepDefObj shouldn't be referenced here
-			stepDefObj.addLastCoveredEdge(abstractScenario, cell.get(0), cell.get(1));
+			addLastCoveredEdge(abstractScenario, cell.get(0), cell.get(1));
 		}
+	}
+
+	public String getFeatureName() {
+		return theGraph.getName();
+	}
+
+	public String getFeatureTags() {
+		return theGraph.getTags();
+	}
+
+	public String getFeatureDescription() {
+		return theGraph.getDescription();
+	}
+
+	public ArrayList<MBTPathInfo> getAbstractScenarioList() {
+		return theGraph.getPathInfo();
+	}
+
+	public boolean isBackground(MBTPathInfo abstractScenario) {
+		return abstractScenario.getTags().contentEquals("background");
+	}
+
+	public boolean isScenarioOutline(MBTPathInfo abstractScenario) {
+		return !abstractScenario.getParameters().isEmpty();
+	}
+
+	public String getBackgroundName(MBTPathInfo abstractScenario) {
+		return abstractScenario.getName();
+	}
+
+	public String getBackgroundDescription(MBTPathInfo abstractScenario) {
+		return abstractScenario.getDescription();
+	}
+
+	public ArrayList<Object> getStepList(MBTPathInfo abstractScenario) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ArrayList<MBTEdge> getStepList(MBTVertex vertex, MBTPathInfo abstractScenario) {
+		if (vertex == null) {
+			vertex = theGraph.getStartVertex();
+		}
+		ArrayList<MBTEdge> stepList = null;
+		Set<MBTEdge> edges = theGraph.outgoingEdgesOf(vertex);
+		for (MBTEdge e : edges) {
+			if (abstractScenario.isCoveredBy(e)) {
+				stepList = getStepList(theGraph.getEdgeTarget(e), abstractScenario);
+				if (vertex != null) {
+					stepList.add(0, e);
+				}
+			}
+		}
+		if (stepList == null) {
+			stepList = new ArrayList<MBTEdge>();
+		}
+		return stepList;
+	}
+
+	public boolean hasDataTable(MBTEdge step) {
+		// TODO update this after setting layer 1 graph edges to docString or dataTable
+		return true;
+	}
+
+	public boolean hasDocString(MBTEdge step) {
+		if (theGraph.getVertex("Content") != null) {
+			return true;
+		}
+		return false;
+	}
+
+	public String getStep(MBTEdge step) {
+		return theGraph.getEdgeSource(step).getLabel();
+	}
+
+	public String getDocString() {
+		for (MBTEdge e : theGraph.outgoingEdgesOf(theGraph.getVertex("Content"))) {
+			return e.getLabel();
+		}
+		return null;
+	}
+
+	public ArrayList<ArrayList<String>> getDataTable(MBTEdge step, MBTPathInfo abstractScenario) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
