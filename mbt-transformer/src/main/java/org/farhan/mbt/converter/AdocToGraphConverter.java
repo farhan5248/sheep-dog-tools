@@ -110,12 +110,12 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		tgtObj.setScenarioOutlineName(scenarioOutline, srcObj.getScenarioOutlineName(abstractScenario));
 		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
 		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
-		tgtObj.setScenarioOutlineParameters(scenarioOutline, srcObj.getScenarioOutlineParameters(examplesRow));
 
 		MBTPathInfo examples = tgtObj.createExamples(scenarioOutline);
 		tgtObj.setExamplesName(examples, srcObj.getExamplesName(example));
-		tgtObj.setExamplesRowName(tgtObj.createExamplesRow(examples), srcObj.getExamplesRowName(rowNum));
-
+		tgtObj.createExamplesTable(scenarioOutline, srcObj.getExamplesTable(examplesRow));
+		// TODO derive the rowNum by getting a count on all the existing rows
+		tgtObj.createExamplesRow(examples, rowNum);
 		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario), examplesRow);
 		tgtObj.addScenarioOutline(scenarioOutline);
 	}

@@ -9,6 +9,7 @@ import org.asciidoctor.Options;
 import org.asciidoctor.Asciidoctor.Factory;
 import org.asciidoctor.ast.Block;
 import org.asciidoctor.ast.Cell;
+import org.asciidoctor.ast.Column;
 import org.asciidoctor.ast.Document;
 import org.asciidoctor.ast.Row;
 import org.asciidoctor.ast.Section;
@@ -17,6 +18,8 @@ import org.asciidoctor.ast.Table;
 import org.asciidoctor.jruby.extension.internal.JRubyProcessor;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Utilities;
+import org.farhan.mbt.graph.MBTEdge;
+import org.farhan.mbt.graph.MBTPathInfo;
 
 public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
@@ -34,10 +37,86 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		theDoc.getBlocks().add(background);
 	}
 
+	public void addScenario(Section scenario) {
+		theDoc.getBlocks().add(scenario);
+	}
+
+	public void addScenarioOutline(Section scenarioOutline) {
+		theDoc.getBlocks().add(scenarioOutline);
+	}
+
 	public Section createBackground() {
 		Section background = jrp.createSection(theDoc);
 		background.getAttributes().put("background", "true");
 		return background;
+	}
+
+	public void createDataTable(Section step, ArrayList<ArrayList<String>> dataTableRowList) {
+		Table table = jrp.createTable(step);
+		step.getBlocks().add(table);
+
+		// header
+		Row row = jrp.createTableRow(table);
+		table.getHeader().add(row);
+		for (int i = 0; i < dataTableRowList.get(0).size(); i++) {
+			Column column = jrp.createTableColumn(table, i);
+			table.getColumns().add(column);
+			Cell cell = jrp.createTableCell(column, dataTableRowList.get(0).get(i));
+			row.getCells().add(cell);
+		}
+		// body
+		for (int i = 1; i < dataTableRowList.size(); i++) {
+			ArrayList<String> bodyRow = dataTableRowList.get(i);
+			row = jrp.createTableRow(table);
+			table.getBody().add(row);
+			for (int j = 0; j < bodyRow.size(); j++) {
+				Column column = table.getColumns().get(j);
+				Cell cell = jrp.createTableCell(column, bodyRow.get(j));
+				row.getCells().add(cell);
+			}
+		}
+	}
+
+	public void createDocString(Section step, String content) {
+		Block docString = jrp.createBlock(step, "listing", "");
+		step.getBlocks().add(docString);
+		docString.setSource(content);
+	}
+
+	public Section createExamples(Section scenarioOutline) {
+		Section examples = jrp.createSection(scenarioOutline);
+		scenarioOutline.getBlocks().add(examples);
+		return examples;
+	}
+
+	public void createExamplesRow(Section scenarioOutline, Section examples, HashMap<String, String> examplesRow) {
+		// TODO add a row to the body of the table in examples
+		Table table = (Table) sn;
+		Row row = jrp.createTableRow(table);
+		table.getBody().add(row);
+		int colCnt = 0;
+		for (String e : exampleData.keySet()) {
+			Cell cell = jrp.createTableCell(table.getColumns().get(colCnt), exampleData.get(e));
+
+			((MBTEdge) edgePath.get(i + 1)).setLabel("{" + key + "}");
+
+			row.getCells().add(cell);
+			colCnt++;
+		}
+	}
+
+	public Section createScenario() {
+		return jrp.createSection(theDoc);
+	}
+
+	public Section createScenarioOutline() {
+		return jrp.createSection(theDoc);
+	}
+
+	public void createStep(Section abstractScenario, String stepName) {
+		Section step = jrp.createSection(abstractScenario);
+		step.setTitle(stepName);
+		abstractScenario.getBlocks().add(step);
 	}
 
 	private String docToString() {
@@ -217,10 +296,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return example.getTitle();
 	}
 
-	public String getExamplesRowName(int rowNum) {
-		return String.valueOf(rowNum);
-	}
-
 	public ArrayList<HashMap<String, String>> getExamplesRows(Section examples) {
 		ArrayList<HashMap<String, String>> rows = new ArrayList<HashMap<String, String>>();
 		for (StructuralNode block : examples.getBlocks()) {
@@ -287,7 +362,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return getName(scenarioOutline);
 	}
 
-	public Set<String> getScenarioOutlineParameters(HashMap<String, String> exampleRow) {
+	public Set<String> getExamplesTable(HashMap<String, String> exampleRow) {
 		return exampleRow.keySet();
 	}
 
@@ -391,6 +466,10 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		background.setTitle(name);
 	}
 
+	public void setExamplesName(Section examples, String examplesName) {
+		examples.setTitle(examplesName);
+	}
+
 	public void setFeatureDescription(String featureDescription) {
 		Block block = jrp.createBlock(theDoc, "paragraph", featureDescription);
 		theDoc.getBlocks().add(block);
@@ -409,21 +488,43 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		this.theFile = theFile;
 	}
 
-	public void createStep(Section abstractScenario, String step) {
-		abstractScenario = jrp.createSection(theDoc);
-		abstractScenario.setTitle(step);
-		abstractScenario.getBlocks().add(abstractScenario);
+	public void setScenarioDescription(Section scenario, String scenarioDescription) {
+		scenario.getBlocks().add(jrp.createBlock(scenario, "paragraph", scenarioDescription));
 	}
 
-	public void createDocString(Section step, String content) {
-		Block docString = jrp.createBlock(step, "listing", "");
-		step.getBlocks().add(docString);
-		docString.setSource(content);
+	public void setScenarioName(Section scenario, String scenarioName) {
+		scenario.setTitle(scenarioName);
 	}
 
-	public void createDataTable(Section abstractScenario, ArrayList<ArrayList<String>> dataTableCellList) {
-		// TODO Auto-generated method stub
-		
+	public void setScenarioOutlineDescription(Section scenarioOutline, String scenarioOutlineDescription) {
+		scenarioOutline.getBlocks().add(jrp.createBlock(scenarioOutline, "paragraph", scenarioOutlineDescription));
+	}
+
+	public void setScenarioOutlineName(Section scenarioOutline, String scenarioOutlineName) {
+		scenarioOutline.setTitle(scenarioOutlineName);
+	}
+
+	public void setScenarioOutlineTags(Section scenarioOutline, String scenarioOutlineTags) {
+		scenarioOutline.getAttributes().put("tags", scenarioOutlineTags);
+	}
+
+	public void setScenarioTags(Section scenario, String scenarioTags) {
+		scenario.getAttributes().put("tags", scenarioTags);
+	}
+
+	public void createExamplesTable(Section examples, String examplesTable) {
+		Table table = jrp.createTable(examples);
+		examples.getBlocks().add(table);
+		Row row = jrp.createTableRow(table);
+		table.getHeader().add(row);
+		int colCnt = 0;
+		for (String e : examplesTable.split(",")) {
+			Column column = jrp.createTableColumn(table, colCnt);
+			table.getColumns().add(column);
+			Cell cell = jrp.createTableCell(column, e.replaceFirst("[0-9]+ ", ""));
+			row.getCells().add(cell);
+			colCnt++;
+		}
 	}
 
 }
