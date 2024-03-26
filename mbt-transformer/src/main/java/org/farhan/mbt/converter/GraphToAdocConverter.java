@@ -84,7 +84,7 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 
 	private void convertDataTable(Section step, MBTEdge stepSrc, MBTPathInfo abstractScenarioSrc) {
 		JGraphTGraphWrapper stepDefObj = srcPrj.getObject(srcObj.getStep(stepSrc), srcPrj.SECOND_LAYER);
-		ArrayList<ArrayList<String>> dataTableCellList = stepDefObj.getDataTable(abstractScenarioSrc);
+		ArrayList<ArrayList<String>> dataTableCellList = stepDefObj.getDataTable(abstractScenarioSrc, "{}");
 		tgtObj.createDataTable(step, dataTableCellList);
 	}
 
@@ -96,7 +96,7 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 
 	private String convertObjectName(String fileName, String layer) {
 		// TODO move to superclass
-		String qualifiedName = fileName.replace(",", "");
+		String qualifiedName = fileName.replace(",", "").trim();
 		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(layer), "");
 		qualifiedName = qualifiedName.replace(srcPrj.getDir(layer).getAbsolutePath(), "");
 		qualifiedName = tgtPrj.getDir(layer) + qualifiedName + tgtPrj.getFileExt(layer);
@@ -110,7 +110,6 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(abstractScenario));
 		convertStepList(scenario, srcObj.getStepList(null, abstractScenario), abstractScenario);
 		tgtObj.addScenario(scenario);
-
 	}
 
 	private void convertScenarioOutline(MBTPathInfo abstractScenario) {

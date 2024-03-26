@@ -47,9 +47,7 @@ public abstract class ToUMLConverter {
 
 	protected abstract void addNextLayerInteractionParameters(Interaction targetInteraction, Message m);
 
-	protected abstract void convertInteractions(ConvertibleObject layerClass) throws Exception;
-
-	protected abstract void convertImports(ConvertibleObject layerClass) throws Exception;
+	protected abstract void convertAbstractScenarios(ConvertibleObject layerClass) throws Exception;
 
 	protected abstract void convertMessages(Interaction anInteraction, List<?> steps) throws Exception;
 
@@ -74,8 +72,7 @@ public abstract class ToUMLConverter {
 	protected void convertObjects() throws Exception {
 		for (ConvertibleObject co : getObjects(getLayer())) {
 			convertObject(co);
-			convertImports(co);
-			convertInteractions(co);
+			convertAbstractScenarios(co);
 		}
 	}
 
@@ -224,7 +221,7 @@ public abstract class ToUMLConverter {
 		backgroundMachine.currentState = theMachine.currentState;
 	}
 
-	protected void setCurrentMachineAndState(String messageName) throws Exception {
+	protected void setCurrentMachineAndState(String messageName) {
 		// the actual object name might have delimiters indicating folder or menu
 		// structure
 		String[] objectParts = Validator.getObjectName(messageName).split("/");

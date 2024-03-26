@@ -25,7 +25,7 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 	}
 
 	private void addLastCoveredEdge(MBTPathInfo abstractScenario, String name, String edgeLabel) {
-	
+
 		MBTVertex newStep = theGraph.createVertex(name);
 		MBTEdge lastCoveredEdge = getLastCoveredEdge(abstractScenario);
 		theGraph.createEdgeWithVertices(theGraph.getEdgeSource(lastCoveredEdge).getLabel(), newStep.getLabel(),
@@ -144,7 +144,7 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 			} else if (line.startsWith("\t\t\ttag:") && lastObject instanceof MBTEdge) {
 				((MBTEdge) lastObject).setTag(line.replace("\t\t\ttag:", ""));
 			} else if (isDescription) {
-	
+
 				// if lastObject is null, it means this is the graph description
 				if (lastObject == null) {
 					String description = lastGraph.getDescription();
@@ -258,7 +258,7 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 		return abstractScenario.getName();
 	}
 
-	public ArrayList<ArrayList<String>> getDataTable(MBTPathInfo abstractScenario) {
+	public ArrayList<ArrayList<String>> getDataTable(MBTPathInfo abstractScenario, String delim) {
 		ArrayList<ArrayList<String>> dataTable = new ArrayList<ArrayList<String>>();
 		ArrayList<String> headerRow = new ArrayList<String>();
 		ArrayList<String> bodyRow = new ArrayList<String>();
@@ -280,7 +280,11 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 			String cellValue = e.getLabel();
 			for (String p : abstractScenario.getParameters().split(",")) {
 				if (p.contentEquals(headerRow.get(colCnt))) {
-					cellValue = "{" + headerRow.get(colCnt) + "}";
+					if (delim.contentEquals("{}")) {
+						cellValue = "{" + headerRow.get(colCnt) + "}";
+					} else {
+						cellValue = "<" + headerRow.get(colCnt) + ">";
+					}
 				}
 			}
 			bodyRow.add(cellValue);
@@ -327,6 +331,8 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 	}
 
 	public String getExamplesTable(MBTPathInfo examples) {
+		// TODO maybe this should be returning a list so other parts of the code to have
+		// to know how the graph delimits the tokens
 		return examples.getParameters();
 	}
 
@@ -364,11 +370,19 @@ public class JGraphTGraphWrapper implements ConvertibleObject {
 	}
 
 	public String getScenarioOutlineTags(MBTPathInfo abstractScenario) {
-		return abstractScenario.getTags();
+		return getTags(abstractScenario);
 	}
 
 	public String getScenarioTags(MBTPathInfo abstractScenario) {
-		return abstractScenario.getTags();
+		return getTags(abstractScenario);
+	}
+
+	private String getTags(MBTPathInfo abstractScenario) {
+		if (abstractScenario.getTags().contentEquals("background")) {
+			return "";
+		} else {
+			return abstractScenario.getTags();
+		}
 	}
 
 	public String getStep(MBTEdge step) {

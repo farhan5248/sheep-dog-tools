@@ -96,11 +96,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 		CucumberJavaWrapper jcw = (CucumberJavaWrapper) layerFile;
 		String qualifiedName = convertObjectName(jcw.getFile().getAbsolutePath());
 		tgtWrp = (UMLClassWrapper) tgtPrj.createObject(qualifiedName);
-	}
 
-	@Override
-	protected void convertImports(ConvertibleObject layerFile) throws Exception {
-		CucumberJavaWrapper jcw = (CucumberJavaWrapper) layerFile;
 		CompilationUnit cu = (CompilationUnit) jcw.get();
 		Class c = (Class) tgtWrp.get();
 		if (cu.getTypes().size() > 0) {
@@ -125,7 +121,7 @@ public class JavaToUMLConverter extends ToUMLConverter {
 	}
 
 	@Override
-	protected void convertInteractions(ConvertibleObject layerFile) throws Exception {
+	protected void convertAbstractScenarios(ConvertibleObject layerFile) throws Exception {
 		CucumberJavaWrapper jcw = (CucumberJavaWrapper) layerFile;
 		for (MethodDeclaration md : ((CompilationUnit) jcw.get()).getType(0).getMethods()) {
 			Interaction anInteraction = createInteraction((Class) tgtWrp.get(), md.getNameAsString());

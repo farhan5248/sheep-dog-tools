@@ -83,11 +83,7 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	}
 
 	@Override
-	protected void convertImports(ConvertibleObject theObject) throws Exception {
-	}
-
-	@Override
-	protected void convertInteractions(ConvertibleObject theObject) throws Exception {
+	protected void convertAbstractScenarios(ConvertibleObject theObject) throws Exception {
 
 		CucumberFeatureWrapper cfw = (CucumberFeatureWrapper) theObject;
 		Background b = null;
