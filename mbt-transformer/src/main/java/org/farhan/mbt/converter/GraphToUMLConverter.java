@@ -51,16 +51,6 @@ public class GraphToUMLConverter extends ToUMLConverter {
 		tgtObj.createDocString(step, content);
 	}
 
-	private void addExampleData(MBTPathInfo pi, Interaction scenario, String exampleTitle,
-			TreeMap<String, String> exampleData) {
-		EAnnotation exampleAnnotation = scenario.getEAnnotation(exampleTitle);
-		String value = "";
-		for (String e : exampleData.keySet()) {
-			value += exampleData.get(e) + "|";
-		}
-		createAnnotation(scenario, exampleTitle, String.valueOf(exampleAnnotation.getDetails().size()), value);
-	}
-
 	private void convertExamples(Interaction scenarioOutline, MBTPathInfo examplesSrc) {
 		EAnnotation examples = tgtObj.createExamples(scenarioOutline);
 		tgtObj.setExamplesName(examples, srcObj.getExamplesName(examplesSrc));

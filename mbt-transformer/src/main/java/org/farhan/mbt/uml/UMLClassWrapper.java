@@ -114,11 +114,11 @@ public class UMLClassWrapper implements ConvertibleObject {
 		}
 		createAnnotation(table, "dataTable", String.valueOf(0), row);
 		// body
-		row = "";
 		for (int i = 1; i < dataTableRowList.size(); i++) {
+			row = "";
 			ArrayList<String> bodyRow = dataTableRowList.get(i);
 			for (int j = 0; j < bodyRow.size(); j++) {
-				row += dataTableRowList.get(i).get(i) + " |";
+				row += dataTableRowList.get(i).get(j) + " |";
 			}
 			createAnnotation(table, "dataTable", String.valueOf(i), row);
 		}
@@ -138,32 +138,11 @@ public class UMLClassWrapper implements ConvertibleObject {
 			anInteraction = UMLFactory.eINSTANCE.createInteraction();
 			anInteraction.setName(interactionName);
 			theClass.setClassifierBehavior(anInteraction);
-			createOwnedAttribute(theClass, "this", theClass);
-			createLifeline(theClass, anInteraction, "this");
 		}
 		if (!annotationName.isEmpty()) {
 			createAnnotation(anInteraction, annotationName);
 		}
 		return anInteraction;
-	}
-
-	private Lifeline createLifeline(Class nextLayerClass, Interaction anInteraction, String name) {
-		Class owningClass = (Class) anInteraction.getOwner();
-		Property property = createOwnedAttribute(owningClass, name, nextLayerClass);
-		Lifeline lifeline = anInteraction.getLifeline(property.getName());
-		if (lifeline == null) {
-			lifeline = anInteraction.createLifeline(property.getName());
-		}
-		lifeline.setRepresents(property);
-		return lifeline;
-	}
-
-	private Property createOwnedAttribute(Class owningClass, String name, Class nextLayerClass) {
-		Property property = owningClass.getOwnedAttribute(name, nextLayerClass);
-		if (property == null) {
-			property = owningClass.createOwnedAttribute(name, nextLayerClass);
-		}
-		return property;
 	}
 
 	private Parameter createParameter(Interaction anInteraction, String paramName, String defaultValue,
@@ -188,8 +167,9 @@ public class UMLClassWrapper implements ConvertibleObject {
 	}
 
 	public Message createStep(Interaction abstractScenario, String stepName) {
-		Message step = abstractScenario.createMessage(stepName);
-		createAnnotation(step, "Step", "Keyword", stepName.split(" ")[0]);
+		String keyword = stepName.split(" ")[0];
+		Message step = abstractScenario.createMessage(stepName.replaceFirst(keyword + " ", ""));
+		createAnnotation(step, "Step", "Keyword", keyword);
 		return step;
 	}
 

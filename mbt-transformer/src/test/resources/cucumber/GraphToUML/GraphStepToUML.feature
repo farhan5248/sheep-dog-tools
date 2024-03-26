@@ -117,38 +117,17 @@ Feature: Graph Step To UML
      When The mbt-transformer plugin, graph-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
 
-  Scenario: Convert path element to class imports
-
-      And The target/uml/pst.uml file, Class Element Imports section will be as follows
-          |     Class Name |                           Imported Element |
-          | specs::Process | pst::stepdefs::search::SearchHomePageSteps |
-
-  Scenario: Convert path element to class attributes
-
-      And The target/uml/pst.uml file, Class Properties section will be as follows
-          |     Class Name |       Property Name |                              Property Type |
-          | specs::Process |                this |                        pst::specs::Process |
-          | specs::Process | SearchHomePageSteps | pst::stepdefs::search::SearchHomePageSteps |
-
   Scenario: Convert path element to interaction messages
 
       And The target/uml/pst.uml file, Interaction Messages section will be as follows
           |          Interaction Name |                                    Message |
           | specs::Process::Story One | The Search application, Home page is empty |
-      And The target/uml/pst.uml file, Interaction Lifelines section will be as follows
-          |          Interaction Name |       Lifeline Name |                      Lifeline Represents |
-          | specs::Process::Story One |                this |                pst::specs::Process::this |
-          | specs::Process::Story One | SearchHomePageSteps | pst::specs::Process::SearchHomePageSteps |
-      And The target/uml/pst.uml file, Interaction Message Occurences section will be as follows
-          |          Interaction Name | Message Occurence |    Lifeline Covered |
-          | specs::Process::Story One |         SendEvent |                this |
-          | specs::Process::Story One |      ReceiveEvent | SearchHomePageSteps |
 
   Scenario: Convert path element to message annotations
 
       And The target/uml/pst.uml file, Interaction Messages section will be as follows
           |          Interaction Name |                                    Message | Argument Name | Annotation Detail |
-          | specs::Process::Story One | The Search application, Home page is empty |     dataTable | 0 -> grp \|ins \| |
-          | specs::Process::Story One | The Search application, Home page is empty |     dataTable |    1 -> 10 \|5 \| |
-          | specs::Process::Story One | The Search application, Home page is empty |     dataTable |     2 -> 8 \|4 \| |
+          | specs::Process::Story One | The Search application, Home page is empty |     dataTable | 0 -> ins \|grp \| |
+          | specs::Process::Story One | The Search application, Home page is empty |     dataTable |    1 -> 5 \|10 \| |
+          | specs::Process::Story One | The Search application, Home page is empty |     dataTable |     2 -> 4 \|8 \| |
 
