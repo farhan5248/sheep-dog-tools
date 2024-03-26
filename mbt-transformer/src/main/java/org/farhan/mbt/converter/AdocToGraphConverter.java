@@ -96,7 +96,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 	}
 
 	private void convertExamples(Section abstractScenario, Section examples) {
-		ArrayList<HashMap<String, String>> examplesRows = srcObj.getExamplesRows(examples);
+		ArrayList<HashMap<String, String>> examplesRows = srcObj.getExamplesRowList(examples);
 		for (int rowNum = 0; rowNum < examplesRows.size(); rowNum++) {
 			HashMap<String, String> examplesRow = examplesRows.get(rowNum);
 			convertExamplesRow(abstractScenario, examples, examplesRow, rowNum);

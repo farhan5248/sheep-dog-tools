@@ -3,17 +3,7 @@ package org.farhan.mbt.converter;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
-import java.util.TreeMap;
-
-import org.asciidoctor.ast.Cell;
-import org.asciidoctor.ast.Column;
 import org.asciidoctor.ast.Section;
-import org.asciidoctor.ast.StructuralNode;
-import org.asciidoctor.ast.Table;
-import org.asciidoctor.jruby.extension.internal.JRubyProcessor;
-import org.asciidoctor.ast.Document;
-import org.asciidoctor.ast.Row;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
@@ -22,13 +12,10 @@ import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.graph.JGraphTProject;
 import org.farhan.mbt.graph.JGraphTGraphWrapper;
 import org.farhan.mbt.graph.MBTEdge;
-import org.farhan.mbt.graph.MBTGraph;
 import org.farhan.mbt.graph.MBTPathInfo;
-import org.farhan.mbt.graph.MBTVertex;
 
 public class GraphToAdocConverter extends ToDocumentConverter {
 
-	private JRubyProcessor jrp;
 	private JGraphTGraphWrapper srcObj;
 	private JGraphTProject srcPrj;
 	private AsciiDoctorAdocWrapper tgtObj;
@@ -37,7 +24,6 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 		this.layer = layer;
 		this.srcPrj = source;
 		this.tgtPrj = target;
-		this.jrp = new JRubyProcessor();
 	}
 
 	@Override
@@ -96,16 +82,16 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 		tgtObj.addBackground(background);
 	}
 
-	private void convertDataTable(Section abstractScenario, MBTEdge step, MBTPathInfo abstractScenarioSrc) {
-		JGraphTGraphWrapper stepDefObj = srcPrj.getObject(srcObj.getStep(step), srcPrj.SECOND_LAYER);
+	private void convertDataTable(Section step, MBTEdge stepSrc, MBTPathInfo abstractScenarioSrc) {
+		JGraphTGraphWrapper stepDefObj = srcPrj.getObject(srcObj.getStep(stepSrc), srcPrj.SECOND_LAYER);
 		ArrayList<ArrayList<String>> dataTableCellList = stepDefObj.getDataTable(abstractScenarioSrc);
-		tgtObj.createDataTable(abstractScenario, dataTableCellList);
+		tgtObj.createDataTable(step, dataTableCellList);
 	}
 
-	private void convertDocString(Section abstractScenario, MBTEdge step) {
-		JGraphTGraphWrapper stepDefObj = srcPrj.getObject(srcObj.getStep(step), srcPrj.SECOND_LAYER);
+	private void convertDocString(Section step, MBTEdge stepSrc) {
+		JGraphTGraphWrapper stepDefObj = srcPrj.getObject(srcObj.getStep(stepSrc), srcPrj.SECOND_LAYER);
 		String content = srcPrj.getResource(stepDefObj.getDocString());
-		tgtObj.createDocString(abstractScenario, content);
+		tgtObj.createDocString(step, content);
 	}
 
 	private String convertObjectName(String fileName, String layer) {
@@ -144,40 +130,51 @@ public class GraphToAdocConverter extends ToDocumentConverter {
 
 	private void convertExamples(Section scenarioOutline, MBTPathInfo examplesSrc) {
 		Section examples = tgtObj.createExamples(scenarioOutline);
-		tgtObj.createExamplesTable(examples, srcObj.getExamplesTable(examplesSrc));
 		tgtObj.setExamplesName(examples, srcObj.getExamplesName(examplesSrc));
+		tgtObj.createExamplesTable(examples, srcObj.getExamplesTable(examplesSrc));
 
-		ArrayList<HashMap<String, String>> examplesRows = srcObj.getExamplesRows(examplesSrc);
-		for (int rowNum = 0; rowNum < examplesRows.size(); rowNum++) {
-			HashMap<String, String> examplesRow = examplesRows.get(rowNum);
-			convertExamplesRow(scenarioOutline, examples, examplesRow);
+		HashMap<String, String> examplesRow = new HashMap<String, String>();
+		for (MBTEdge e : srcObj.getStepList(null, examplesSrc)) {
+			JGraphTGraphWrapper stepDefObj = srcPrj.getObject(srcObj.getStep(e), srcPrj.SECOND_LAYER);
+			// TODO as long as there are two separate graphs, this gets complicated.
+			// it's not the same as with the .feature and .java files because everything for
+			// the entire feature is in one file, same for UML class or .adoc file
+			// If two graphs will be maintained, then the wrappers should manage
+			// relationships with other layers so that in this case
+			// srcObj.getExamplesRowList can get all the rows
+			// TODO perhaps there needs to be a stereotype for the PathInfo (rename to
+			// coverage) with values such as background, outline, examplesRow. Then when
+			// getting the list of abstract scenarios, examplesRow is ignored
+			if (stepDefObj != null) {
+				examplesRow = stepDefObj.getExamplesRow(examplesSrc, examplesRow);
+			}
 		}
+		convertExamplesRow(scenarioOutline, examples, examplesRow);
 	}
 
 	private void convertExamplesRow(Section scenarioOutline, Section examples, HashMap<String, String> examplesRow) {
 		tgtObj.createExamplesRow(scenarioOutline, examples, examplesRow);
 	}
 
-	private void convertStep(Section abstractScenario, MBTEdge step) {
-		tgtObj.createStep(abstractScenario, srcObj.getStep(step));
+	private void convertStep(Section abstractScenario, MBTEdge stepSrc, MBTPathInfo abstractScenarioSrc) {
+		Section step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
+		// TODO remove this stepDefObj creation after putting the docstring/datatable
+		// label on the edge. Then that way the srcObj alone can tell if there's a
+		// docstring or data table
+		JGraphTGraphWrapper stepDefObj = srcPrj.getObject(srcObj.getStep(stepSrc), srcPrj.SECOND_LAYER);
+		if (stepDefObj != null) {
+			if (stepDefObj.hasDocString(stepSrc)) {
+				convertDocString(step, stepSrc);
+			} else if (stepDefObj.hasDataTable(stepSrc)) {
+				convertDataTable(step, stepSrc, abstractScenarioSrc);
+			}
+		}
 	}
 
 	private void convertStepList(Section abstractScenario, ArrayList<MBTEdge> stepList,
 			MBTPathInfo abstractScenarioSrc) {
 		for (MBTEdge step : stepList) {
-			convertStep(abstractScenario, step);
-			// TODO remove this stepDefObj creation after putting the docstring/datatable
-			// label on the edge. Then that way the srcObj alone can tell if there's a
-			// docstring or data table
-			JGraphTGraphWrapper stepDefObj = srcPrj.getObject(srcObj.getStep(step), srcPrj.SECOND_LAYER);
-			if (stepDefObj != null) {
-				if (stepDefObj.hasDocString(step)) {
-					convertDocString(abstractScenario, step);
-				} else if (stepDefObj.hasDataTable(step)) {
-					// TODO pass in the path info instead of the examplesRow
-					convertDataTable(abstractScenario, step, abstractScenarioSrc);
-				}
-			}
+			convertStep(abstractScenario, step, abstractScenarioSrc);
 		}
 	}
 }

@@ -18,8 +18,6 @@ import org.asciidoctor.ast.Table;
 import org.asciidoctor.jruby.extension.internal.JRubyProcessor;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Utilities;
-import org.farhan.mbt.graph.MBTEdge;
-import org.farhan.mbt.graph.MBTPathInfo;
 
 public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
@@ -31,92 +29,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		setFile(theFile);
 		theDoc = Factory.create().load("= " + theFile.getName(), Options.builder().build());
 		jrp = new JRubyProcessor();
-	}
-
-	public void addBackground(Section background) {
-		theDoc.getBlocks().add(background);
-	}
-
-	public void addScenario(Section scenario) {
-		theDoc.getBlocks().add(scenario);
-	}
-
-	public void addScenarioOutline(Section scenarioOutline) {
-		theDoc.getBlocks().add(scenarioOutline);
-	}
-
-	public Section createBackground() {
-		Section background = jrp.createSection(theDoc);
-		background.getAttributes().put("background", "true");
-		return background;
-	}
-
-	public void createDataTable(Section step, ArrayList<ArrayList<String>> dataTableRowList) {
-		Table table = jrp.createTable(step);
-		step.getBlocks().add(table);
-
-		// header
-		Row row = jrp.createTableRow(table);
-		table.getHeader().add(row);
-		for (int i = 0; i < dataTableRowList.get(0).size(); i++) {
-			Column column = jrp.createTableColumn(table, i);
-			table.getColumns().add(column);
-			Cell cell = jrp.createTableCell(column, dataTableRowList.get(0).get(i));
-			row.getCells().add(cell);
-		}
-		// body
-		for (int i = 1; i < dataTableRowList.size(); i++) {
-			ArrayList<String> bodyRow = dataTableRowList.get(i);
-			row = jrp.createTableRow(table);
-			table.getBody().add(row);
-			for (int j = 0; j < bodyRow.size(); j++) {
-				Column column = table.getColumns().get(j);
-				Cell cell = jrp.createTableCell(column, bodyRow.get(j));
-				row.getCells().add(cell);
-			}
-		}
-	}
-
-	public void createDocString(Section step, String content) {
-		Block docString = jrp.createBlock(step, "listing", "");
-		step.getBlocks().add(docString);
-		docString.setSource(content);
-	}
-
-	public Section createExamples(Section scenarioOutline) {
-		Section examples = jrp.createSection(scenarioOutline);
-		scenarioOutline.getBlocks().add(examples);
-		return examples;
-	}
-
-	public void createExamplesRow(Section scenarioOutline, Section examples, HashMap<String, String> examplesRow) {
-		// TODO add a row to the body of the table in examples
-		Table table = (Table) sn;
-		Row row = jrp.createTableRow(table);
-		table.getBody().add(row);
-		int colCnt = 0;
-		for (String e : exampleData.keySet()) {
-			Cell cell = jrp.createTableCell(table.getColumns().get(colCnt), exampleData.get(e));
-
-			((MBTEdge) edgePath.get(i + 1)).setLabel("{" + key + "}");
-
-			row.getCells().add(cell);
-			colCnt++;
-		}
-	}
-
-	public Section createScenario() {
-		return jrp.createSection(theDoc);
-	}
-
-	public Section createScenarioOutline() {
-		return jrp.createSection(theDoc);
-	}
-
-	public void createStep(Section abstractScenario, String stepName) {
-		Section step = jrp.createSection(abstractScenario);
-		step.setTitle(stepName);
-		abstractScenario.getBlocks().add(step);
 	}
 
 	private String docToString() {
@@ -209,6 +121,123 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return text;
 	}
 
+	private String replaceParameters(HashMap<String, String> replacements, String text) {
+		if (text.startsWith("{")) {
+			for (String key : replacements.keySet()) {
+				if (text.contentEquals("{" + key + "}")) {
+					return replacements.get(key);
+				}
+			}
+		}
+		return text;
+	}
+
+	public void addBackground(Section background) {
+		theDoc.getBlocks().add(background);
+	}
+
+	public void addScenario(Section scenario) {
+		theDoc.getBlocks().add(scenario);
+	}
+
+	public void addScenarioOutline(Section scenarioOutline) {
+		theDoc.getBlocks().add(scenarioOutline);
+	}
+
+	public Section createBackground() {
+		Section background = jrp.createSection(theDoc);
+		background.getAttributes().put("background", "true");
+		return background;
+	}
+
+	public void createDataTable(Section step, ArrayList<ArrayList<String>> dataTableRowList) {
+		Table table = jrp.createTable(step);
+		step.getBlocks().add(table);
+
+		// header
+		Row row = jrp.createTableRow(table);
+		table.getHeader().add(row);
+		for (int i = 0; i < dataTableRowList.get(0).size(); i++) {
+			Column column = jrp.createTableColumn(table, i);
+			table.getColumns().add(column);
+			Cell cell = jrp.createTableCell(column, dataTableRowList.get(0).get(i));
+			row.getCells().add(cell);
+		}
+		// body
+		for (int i = 1; i < dataTableRowList.size(); i++) {
+			ArrayList<String> bodyRow = dataTableRowList.get(i);
+			row = jrp.createTableRow(table);
+			table.getBody().add(row);
+			for (int j = 0; j < bodyRow.size(); j++) {
+				Column column = table.getColumns().get(j);
+				Cell cell = jrp.createTableCell(column, bodyRow.get(j));
+				row.getCells().add(cell);
+			}
+		}
+	}
+
+	public void createDocString(Section step, String content) {
+		Block docString = jrp.createBlock(step, "listing", "");
+		step.getBlocks().add(docString);
+		docString.setSource(content);
+	}
+
+	public Section createExamples(Section scenarioOutline) {
+		Section examples = jrp.createSection(scenarioOutline);
+		examples.getAttributes().put("examples", "true");
+		scenarioOutline.getBlocks().add(examples);
+		return examples;
+	}
+
+	public void createExamplesRow(Section scenarioOutline, Section examples, HashMap<String, String> examplesRow) {
+		Table table = null;
+		// TODO use filters for things like this
+		for (StructuralNode block : examples.getBlocks()) {
+			if (block instanceof Table) {
+				table = (Table) block;
+				break;
+			}
+		}
+		Row row = jrp.createTableRow(table);
+		table.getBody().add(row);
+		int colCnt = 0;
+		for (String e : examplesRow.keySet()) {
+			Cell cell = jrp.createTableCell(table.getColumns().get(colCnt), examplesRow.get(e));
+			row.getCells().add(cell);
+			colCnt++;
+		}
+	}
+
+	public void createExamplesTable(Section examples, String examplesTable) {
+		Table table = jrp.createTable(examples);
+		examples.getBlocks().add(table);
+		Row row = jrp.createTableRow(table);
+		table.getHeader().add(row);
+		int colCnt = 0;
+		for (String e : examplesTable.split(",")) {
+			Column column = jrp.createTableColumn(table, colCnt);
+			table.getColumns().add(column);
+			Cell cell = jrp.createTableCell(column, e.replaceFirst("[0-9]+ ", ""));
+			row.getCells().add(cell);
+			colCnt++;
+		}
+	}
+
+	public Section createScenario() {
+		return jrp.createSection(theDoc);
+	}
+
+	public Section createScenarioOutline() {
+		return jrp.createSection(theDoc);
+	}
+
+	public Section createStep(Section abstractScenario, String stepName) {
+		Section step = jrp.createSection(abstractScenario);
+		step.setTitle(stepName);
+		abstractScenario.getBlocks().add(step);
+		return step;
+	}
+
 	@Override
 	public Object get() {
 		return theDoc;
@@ -296,7 +325,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return example.getTitle();
 	}
 
-	public ArrayList<HashMap<String, String>> getExamplesRows(Section examples) {
+	public ArrayList<HashMap<String, String>> getExamplesRowList(Section examples) {
 		ArrayList<HashMap<String, String>> rows = new ArrayList<HashMap<String, String>>();
 		for (StructuralNode block : examples.getBlocks()) {
 			if (block instanceof Table) {
@@ -318,6 +347,10 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 			}
 		}
 		return rows;
+	}
+
+	public Set<String> getExamplesTable(HashMap<String, String> exampleRow) {
+		return exampleRow.keySet();
 	}
 
 	public String getFeatureDescription() {
@@ -360,10 +393,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	public String getScenarioOutlineName(Section scenarioOutline) {
 		return getName(scenarioOutline);
-	}
-
-	public Set<String> getExamplesTable(HashMap<String, String> exampleRow) {
-		return exampleRow.keySet();
 	}
 
 	public String getScenarioOutlineTags(Section abstractScenario) {
@@ -441,17 +470,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		}
 	}
 
-	private String replaceParameters(HashMap<String, String> replacements, String text) {
-		if (text.startsWith("{")) {
-			for (String key : replacements.keySet()) {
-				if (text.contentEquals("{" + key + "}")) {
-					return replacements.get(key);
-				}
-			}
-		}
-		return text;
-	}
-
 	@Override
 	public void save() throws Exception {
 		String fileContents = docToString();
@@ -480,7 +498,9 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	public void setFeatureTags(String featureTags) {
-		theDoc.getAttributes().put("tags", featureTags);
+		if (!featureTags.isEmpty()) {
+			theDoc.getAttributes().put("tags", featureTags);
+		}
 	}
 
 	@Override
@@ -505,25 +525,14 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	public void setScenarioOutlineTags(Section scenarioOutline, String scenarioOutlineTags) {
-		scenarioOutline.getAttributes().put("tags", scenarioOutlineTags);
+		if (!scenarioOutlineTags.isEmpty()) {
+			scenarioOutline.getAttributes().put("tags", scenarioOutlineTags);
+		}
 	}
 
 	public void setScenarioTags(Section scenario, String scenarioTags) {
-		scenario.getAttributes().put("tags", scenarioTags);
-	}
-
-	public void createExamplesTable(Section examples, String examplesTable) {
-		Table table = jrp.createTable(examples);
-		examples.getBlocks().add(table);
-		Row row = jrp.createTableRow(table);
-		table.getHeader().add(row);
-		int colCnt = 0;
-		for (String e : examplesTable.split(",")) {
-			Column column = jrp.createTableColumn(table, colCnt);
-			table.getColumns().add(column);
-			Cell cell = jrp.createTableCell(column, e.replaceFirst("[0-9]+ ", ""));
-			row.getCells().add(cell);
-			colCnt++;
+		if (!scenarioTags.isEmpty()) {
+			scenario.getAttributes().put("tags", scenarioTags);
 		}
 	}
 
