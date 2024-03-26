@@ -32,8 +32,7 @@ public class GraphToUMLConverter extends ToUMLConverter {
 	}
 
 	private void convertBackground(MBTPathInfo abstractScenario) {
-		Interaction background = tgtObj.createBackground();
-		tgtObj.setBackgroundName(background, srcObj.getBackgroundName(abstractScenario));
+		Interaction background = tgtObj.createBackground(srcObj.getBackgroundName(abstractScenario));
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
 		convertStepList(background, srcObj.getStepList(null, abstractScenario), abstractScenario);
 		tgtObj.addBackground(background);
@@ -52,8 +51,7 @@ public class GraphToUMLConverter extends ToUMLConverter {
 	}
 
 	private void convertExamples(Interaction scenarioOutline, MBTPathInfo examplesSrc) {
-		EAnnotation examples = tgtObj.createExamples(scenarioOutline);
-		tgtObj.setExamplesName(examples, srcObj.getExamplesName(examplesSrc));
+		EAnnotation examples = tgtObj.createExamples(scenarioOutline, srcObj.getExamplesName(examplesSrc));
 		tgtObj.createExamplesTable(examples, srcObj.getExamplesTable(examplesSrc));
 
 		HashMap<String, String> examplesRow = new HashMap<String, String>();
@@ -81,9 +79,8 @@ public class GraphToUMLConverter extends ToUMLConverter {
 	}
 
 	private void convertScenario(MBTPathInfo abstractScenario) {
-		Interaction scenario = tgtObj.createScenario();
+		Interaction scenario = tgtObj.createScenario(srcObj.getScenarioName(abstractScenario));
 		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(abstractScenario));
-		tgtObj.setScenarioName(scenario, srcObj.getScenarioName(abstractScenario));
 		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(abstractScenario));
 		convertStepList(scenario, srcObj.getStepList(null, abstractScenario), abstractScenario);
 		tgtObj.addScenario(scenario);
@@ -91,8 +88,7 @@ public class GraphToUMLConverter extends ToUMLConverter {
 
 	private void convertScenarioOutline(MBTPathInfo abstractScenario) {
 
-		Interaction scenarioOutline = tgtObj.createScenarioOutline();
-		tgtObj.setScenarioOutlineName(scenarioOutline, srcObj.getScenarioOutlineName(abstractScenario));
+		Interaction scenarioOutline = tgtObj.createScenarioOutline(srcObj.getScenarioOutlineName(abstractScenario));
 		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
 		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
 		convertStepList(scenarioOutline, srcObj.getStepList(null, abstractScenario), abstractScenario);
@@ -118,6 +114,11 @@ public class GraphToUMLConverter extends ToUMLConverter {
 
 	private void convertStepList(Interaction abstractScenario, ArrayList<MBTEdge> stepList,
 			MBTPathInfo abstractScenarioSrc) {
+
+		// TODO this is a temp hack until the PathInfo is changed
+		if (!abstractScenario.getMessages().isEmpty()) {
+			return;
+		}
 		for (MBTEdge step : stepList) {
 			convertStep(abstractScenario, step, abstractScenarioSrc);
 		}

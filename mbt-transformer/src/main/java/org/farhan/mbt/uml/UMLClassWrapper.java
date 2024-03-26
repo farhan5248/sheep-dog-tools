@@ -99,8 +99,8 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return ls;
 	}
 
-	public Interaction createBackground() {
-		Interaction scenario = createInteraction(theClass, "", "");
+	public Interaction createBackground(String name) {
+		Interaction scenario = createInteraction(theClass, name, "");
 		createAnnotation(scenario, "background");
 		return scenario;
 	}
@@ -156,13 +156,13 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return aParameter;
 	}
 
-	public Interaction createScenario() {
-		Interaction scenario = createInteraction(theClass, "", "");
+	public Interaction createScenario(String name) {
+		Interaction scenario = createInteraction(theClass, name, "");
 		return scenario;
 	}
 
-	public Interaction createScenarioOutline() {
-		Interaction scenario = createInteraction(theClass, "", "");
+	public Interaction createScenarioOutline(String name) {
+		Interaction scenario = createInteraction(theClass, name, "");
 		return scenario;
 	}
 
@@ -206,10 +206,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 		background.createOwnedComment().setBody(backgroundDescription);
 	}
 
-	public void setBackgroundName(Interaction background, String backgroundName) {
-		background.setName(backgroundName);
-	}
-
 	public void setFeatureDescription(String featureDescription) {
 		theClass.createOwnedComment().setBody(featureDescription);
 
@@ -234,16 +230,8 @@ public class UMLClassWrapper implements ConvertibleObject {
 		scenario.createOwnedComment().setBody(scenarioDescription);
 	}
 
-	public void setScenarioName(Interaction scenario, String scenarioName) {
-		scenario.setName(scenarioName);
-	}
-
 	public void setScenarioOutlineDescription(Interaction scenarioOutline, String scenarioOutlineDescription) {
 		scenarioOutline.createOwnedComment().setBody(scenarioOutlineDescription);
-	}
-
-	public void setScenarioOutlineName(Interaction scenarioOutline, String scenarioOutlineName) {
-		scenarioOutline.setName(scenarioOutlineName);
 	}
 
 	public void setScenarioOutlineTags(Interaction scenarioOutline, String scenarioOutlineTags) {
@@ -258,18 +246,14 @@ public class UMLClassWrapper implements ConvertibleObject {
 		}
 	}
 
-	public EAnnotation createExamples(Interaction scenarioOutline) {
-		return createAnnotation(scenarioOutline, "");
+	public EAnnotation createExamples(Interaction scenarioOutline, String name) {
+		return createAnnotation(scenarioOutline, name);
 	}
 
 	protected EAnnotation createAnnotation(Interaction anInteraction, String name, String key, String value) {
 		EAnnotation a = createAnnotation(anInteraction, name);
 		a.getDetails().put(key, value);
 		return a;
-	}
-
-	public void setExamplesName(EAnnotation examples, String examplesName) {
-		examples.setSource(examplesName);
 	}
 
 	public void createExamplesTable(EAnnotation examples, String examplesRow) {
