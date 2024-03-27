@@ -103,7 +103,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		}
 	}
 
-	private void convertExamplesRow(Section abstractScenario, Section example, HashMap<String, String> examplesRow,
+	private void convertExamplesRow(Section abstractScenario, Section examplesSrc, HashMap<String, String> examplesRow,
 			int rowNum) {
 		// TODO maybe have one named path (coverage) per example
 		MBTPathInfo scenarioOutline = tgtObj.createScenarioOutline();
@@ -112,7 +112,7 @@ public class AdocToGraphConverter extends ToGraphConverter {
 		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
 
 		MBTPathInfo examples = tgtObj.createExamples(scenarioOutline);
-		tgtObj.setExamplesName(examples, srcObj.getExamplesName(example));
+		tgtObj.setExamplesName(examples, srcObj.getExamplesName(examplesSrc));
 		tgtObj.createExamplesTable(scenarioOutline, srcObj.getExamplesTable(examplesRow));
 		// TODO derive the rowNum by getting a count on all the existing rows
 		tgtObj.createExamplesRow(examples, rowNum);

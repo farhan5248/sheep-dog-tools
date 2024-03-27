@@ -74,6 +74,15 @@ Feature: UML Background To Graph
           					label:Given The Search application, Login page is valid
           		Edge
           			label:
+          			tag:0
+          			source:
+          				Vertex
+          					label:Given The Search application, Login page is valid
+          			target:
+          				Vertex
+          					label:end
+          		Edge
+          			label:
           			tag:1
           			source:
           				Vertex

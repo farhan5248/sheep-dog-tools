@@ -2,14 +2,21 @@ package org.farhan.mbt.uml;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.asciidoctor.ast.Cell;
 import org.asciidoctor.ast.Column;
 import org.asciidoctor.ast.Row;
 import org.asciidoctor.ast.Section;
+import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
+import org.eclipse.uml2.uml.Behavior;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Lifeline;
@@ -21,6 +28,9 @@ import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.graph.MBTEdge;
+import org.farhan.mbt.graph.MBTGraph;
+import org.farhan.mbt.graph.MBTVertex;
 
 public class UMLClassWrapper implements ConvertibleObject {
 
@@ -67,6 +77,12 @@ public class UMLClassWrapper implements ConvertibleObject {
 		if (a == null) {
 			a = anInteraction.createEAnnotation(name);
 		}
+		return a;
+	}
+
+	protected EAnnotation createAnnotation(Interaction anInteraction, String name, String key, String value) {
+		EAnnotation a = createAnnotation(anInteraction, name);
+		a.getDetails().put(key, value);
 		return a;
 	}
 
@@ -132,6 +148,27 @@ public class UMLClassWrapper implements ConvertibleObject {
 		}
 	}
 
+	public EAnnotation createExamples(Interaction scenarioOutline, String name) {
+		return createAnnotation(scenarioOutline, name);
+	}
+
+	public void createExamplesRow(EAnnotation examples, HashMap<String, String> examplesRow) {
+		String value = "";
+		for (String e : examplesRow.keySet()) {
+			value += examplesRow.get(e) + "|";
+		}
+		examples.getDetails().put(String.valueOf(examples.getDetails().size()), value);
+
+	}
+
+	public void createExamplesTable(EAnnotation examples, String examplesRow) {
+		String value = "";
+		for (String e : examplesRow.split(",")) {
+			value += e + "|";
+		}
+		examples.getDetails().put("0", value);
+	}
+
 	private Interaction createInteraction(Class theClass, String interactionName, String annotationName) {
 		Interaction anInteraction = (Interaction) theClass.getOwnedBehavior(interactionName);
 		if (anInteraction == null) {
@@ -178,13 +215,208 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return theClass;
 	}
 
+	public ArrayList<Interaction> getAbstractScenarioList() {
+		ArrayList<Interaction> abstractScenarioList = new ArrayList<Interaction>();
+		for (Behavior b : theClass.getOwnedBehaviors()) {
+			abstractScenarioList.add((Interaction) b);
+		}
+		return abstractScenarioList;
+	}
+
+	public String getBackgroundDescription(Interaction abstractScenario) {
+		if (abstractScenario.getOwnedComments().size() > 0) {
+			return abstractScenario.getOwnedComments().get(0).getBody();
+		}
+		return "";
+	}
+
+	public String getBackgroundName(Interaction abstractScenario) {
+		return abstractScenario.getName();
+	}
+
+	public ArrayList<ArrayList<String>> getDataTable(Message step, HashMap<String, String> replacements) {
+		// TODO this should return a proper table and not this list of vertex-edge
+		// because details of vertices and edges should be in the Graph object wrapper
+		ValueSpecification vs = (LiteralString) step.getArgument("dataTable", null);
+		EMap<String, String> table = vs.getEAnnotation("dataTable").getDetails();
+		ArrayList<ArrayList<String>> cellList = new ArrayList<ArrayList<String>>();
+		String[] header = table.getFirst().getValue().split(" \\|");
+		for (int i = 1; i < table.keySet().size(); i++) {
+			String[] row = table.get(i).getValue().split(" \\|");
+			for (int j = 0; j < row.length; j++) {
+				ArrayList<String> cell = new ArrayList<String>();
+				String vertex = i - 1 + " " + header[j];
+				cell.add(vertex);
+				cell.add(replaceParameters(replacements, row[j]));
+				cellList.add(cell);
+			}
+		}
+		return cellList;
+	}
+
+	private String replaceParameters(HashMap<String, String> replacements, String text) {
+		if (text.startsWith("<")) {
+			for (String key : replacements.keySet()) {
+				if (text.contentEquals("<" + key + ">")) {
+					return replacements.get(key);
+				}
+			}
+		}
+		return text;
+	}
+
+	public String getDocString(Message step) {
+		ValueSpecification vs = (LiteralString) step.getArgument("docString", null);
+		EMap<String, String> docString = vs.getEAnnotation("docString").getDetails();
+		String content = "";
+		for (String lineNo : docString.keySet()) {
+			content += "\n" + docString.get(lineNo);
+		}
+		content = content.replaceFirst("\n", "");
+		return content;
+	}
+
+	public ArrayList<EAnnotation> getExamplesList(Interaction abstractScenario) {
+		ArrayList<EAnnotation> exampleList = new ArrayList<EAnnotation>();
+		exampleList.addAll(abstractScenario.getEAnnotations());
+		return exampleList;
+	}
+
+	public String getExamplesName(EAnnotation examples) {
+		return examples.getSource();
+	}
+
+	public ArrayList<HashMap<String, String>> getExamplesRowList(EAnnotation examples) {
+		ArrayList<HashMap<String, String>> examplesRowList = new ArrayList<HashMap<String, String>>();
+
+		ArrayList<String> paramNames = new ArrayList<String>();
+		for (String cell : examples.getDetails().getFirst().getValue().split("\\|")) {
+			paramNames.add(cell);
+		}
+		int rowCnt = examples.getDetails().size();
+		for (int i = 1; i < rowCnt; i++) {
+			String[] row = examples.getDetails().get(i).getValue().split("\\|");
+			HashMap<String, String> map = new HashMap<String, String>();
+			int cellCnt = row.length;
+			for (int j = 0; j < cellCnt; j++) {
+				map.put(paramNames.get(j), row[j]);
+			}
+			examplesRowList.add(map);
+		}
+		return examplesRowList;
+	}
+
+	public Set<String> getExamplesTable(HashMap<String, String> examplesRow) {
+		return examplesRow.keySet();
+	}
+
+	public String getFeatureDescription() {
+		if (theClass.getOwnedComments().size() > 0) {
+			return theClass.getOwnedComments().get(0).getBody();
+		}
+		return "";
+	}
+
+	public String getFeatureName() {
+		return theClass.getEAnnotations().getFirst().getDetails().get(0).getKey();
+	}
+
+	public String getFeatureTags() {
+		String tags = "";
+		if (theClass.getEAnnotations().size() == 2) {
+			for (Entry<String, String> t : theClass.getEAnnotations().getLast().getDetails()) {
+				if (tags.isEmpty()) {
+					tags = t.getKey();
+				} else {
+					tags += "," + t.getKey();
+				}
+			}
+		}
+		return tags;
+	}
+
 	@Override
 	public File getFile() {
 		return theFile;
 	}
 
+	public String getQualifiedName() {
+		// TODO make sure all wrappers have this instead of the getFile approach to
+		// getting the name. When returning a file name, remove the C:// whatever
+		return theClass.getQualifiedName();
+	}
+
+	public String getScenarioDescription(Interaction abstractScenario) {
+		if (abstractScenario.getOwnedComments().size() > 0) {
+			return abstractScenario.getOwnedComments().get(0).getBody();
+		}
+		return "";
+	}
+
+	public String getScenarioName(Interaction abstractScenario) {
+		return abstractScenario.getName();
+	}
+
+	public String getScenarioOutlineDescription(Interaction abstractScenario) {
+		if (abstractScenario.getOwnedComments().size() > 0) {
+			return abstractScenario.getOwnedComments().get(0).getBody();
+		}
+		return "";
+	}
+
+	public String getScenarioOutlineName(Interaction abstractScenario) {
+		return abstractScenario.getName();
+	}
+
+	private String getTags(Interaction abstractScenario) {
+		String tags = "";
+		for (Parameter p : abstractScenario.getOwnedParameters()) {
+			tags += "," + p.getName();
+		}
+		return tags.replaceFirst(",", "");
+	}
+
+	public String getScenarioOutlineTags(Interaction abstractScenario) {
+		return getTags(abstractScenario);
+	}
+
+	public String getScenarioTags(Interaction abstractScenario) {
+		return getTags(abstractScenario);
+	}
+
+	public String getStep(Message step) {
+		String name = step.getName();
+		String keyword = step.getEAnnotation("Step").getDetails().get("Keyword");
+		return keyword + " " + name;
+	}
+
+	public ArrayList<Message> getStepList(Interaction abstractScenario) {
+
+		ArrayList<Message> stepList = new ArrayList<Message>();
+		for (Message m : abstractScenario.getMessages()) {
+			stepList.add(m);
+		}
+		return stepList;
+	}
+
 	public String getStepName(Message step) {
 		return step.getName();
+	}
+
+	public boolean hasDataTable(Message step) {
+		return step.getArgument("dataTable", null) != null;
+	}
+
+	public boolean hasDocString(Message step) {
+		return step.getArgument("docString", null) != null;
+	}
+
+	public boolean isBackground(Interaction abstractScenario) {
+		return abstractScenario.getEAnnotation("background") != null;
+	}
+
+	public boolean isScenarioOutline(Interaction abstractScenario) {
+		return !abstractScenario.getEAnnotations().isEmpty() && abstractScenario.getEAnnotation("background") == null;
 	}
 
 	@Override
@@ -244,32 +476,5 @@ public class UMLClassWrapper implements ConvertibleObject {
 		for (String t : scenarioTags.split(",")) {
 			createParameter(scenario, t, "", "in");
 		}
-	}
-
-	public EAnnotation createExamples(Interaction scenarioOutline, String name) {
-		return createAnnotation(scenarioOutline, name);
-	}
-
-	protected EAnnotation createAnnotation(Interaction anInteraction, String name, String key, String value) {
-		EAnnotation a = createAnnotation(anInteraction, name);
-		a.getDetails().put(key, value);
-		return a;
-	}
-
-	public void createExamplesTable(EAnnotation examples, String examplesRow) {
-		String value = "";
-		for (String e : examplesRow.split(",")) {
-			value += e + "|";
-		}
-		examples.getDetails().put("0", value);
-	}
-
-	public void createExamplesRow(EAnnotation examples, HashMap<String, String> examplesRow) {
-		String value = "";
-		for (String e : examplesRow.keySet()) {
-			value += examplesRow.get(e) + "|";
-		}
-		examples.getDetails().put(String.valueOf(examples.getDetails().size()), value);
-
 	}
 }

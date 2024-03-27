@@ -270,11 +270,11 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 				for (int i = 0; i < table.getBody().size(); i++) {
 					for (int j = 0; j < table.getBody().get(0).getCells().size(); j++) {
 						cell = new ArrayList<String>();
-						String header = i + " " + table.getHeader().getFirst().getCells().get(j).getText();
-						String value = replaceParameters(replacements,
+						String vertex = i + " " + table.getHeader().getFirst().getCells().get(j).getText();
+						String edge = replaceParameters(replacements,
 								table.getBody().get(i).getCells().get(j).getText());
-						cell.add(header);
-						cell.add(value);
+						cell.add(vertex);
+						cell.add(edge);
 						cellList.add(cell);
 					}
 				}
@@ -349,8 +349,8 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return rows;
 	}
 
-	public Set<String> getExamplesTable(HashMap<String, String> exampleRow) {
-		return exampleRow.keySet();
+	public Set<String> getExamplesTable(HashMap<String, String> examplesRow) {
+		return examplesRow.keySet();
 	}
 
 	public String getFeatureDescription() {
