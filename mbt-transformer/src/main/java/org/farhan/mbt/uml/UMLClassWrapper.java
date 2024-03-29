@@ -163,6 +163,7 @@ public class UMLClassWrapper implements ConvertibleObject {
 
 	public void createExamplesTable(EAnnotation examples, String examplesRow) {
 		String value = "";
+		// TODO pass a list that doesn't need to be delimited
 		for (String e : examplesRow.split(",")) {
 			value += e + "|";
 		}

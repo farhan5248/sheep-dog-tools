@@ -2,9 +2,11 @@ package org.farhan.mbt.converter;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
@@ -28,6 +30,9 @@ import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.core.Validator;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
+import org.farhan.mbt.graph.JGraphTGraphWrapper;
+import org.farhan.mbt.graph.MBTEdge;
+import org.farhan.mbt.graph.MBTPathInfo;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 import org.farhan.validation.MBTEdgeValidator;
@@ -35,8 +40,9 @@ import org.farhan.validation.MBTVertexValidator;
 
 public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 
-	private UMLClassWrapper tgtWrp;
+	private CucumberFeatureWrapper srcObj;
 	private CucumberProject srcPrj;
+	private UMLClassWrapper tgtObj;
 
 	public FeatureToUMLConverter(String layer, CucumberProject source, UMLProject target) {
 		this.layer = layer;
@@ -45,9 +51,52 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	}
 
 	@Override
-	protected void convertObjects() throws Exception {
-		super.convertObjects();
-		linkLayerFiles(getLayer());
+	protected void convertAbstractScenarios(ConvertibleObject theObject) throws Exception {
+		for (AbstractScenario abstractScenario : srcObj.getAbstractScenarioList()) {
+			if (srcObj.isBackground(abstractScenario)) {
+				convertBackground(abstractScenario);
+			} else if (srcObj.isScenarioOutline(abstractScenario)) {
+				convertScenarioOutline(abstractScenario);
+			} else {
+				convertScenario(abstractScenario);
+			}
+		}
+	}
+
+	@Override
+	protected void convertMessage(Interaction anInteraction, Object o) {
+
+	}
+
+	@Override
+	protected void convertMessages(Interaction anInteraction, List<?> steps) throws Exception {
+
+	}
+
+	@Override
+	protected void convertObject(ConvertibleObject theObject) throws Exception {
+		srcObj = (CucumberFeatureWrapper) theObject;
+		tgtObj = (UMLClassWrapper) tgtPrj.createObject(convertObjectName(srcObj.getFile().getAbsolutePath()));
+		tgtObj.setFeatureName(srcObj.getFeatureName());
+		tgtObj.setFeatureTags(srcObj.getFeatureTags());
+		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
+	}
+
+	@Override
+	protected String convertObjectName(String fullName) {
+		String qualifiedName = fullName.trim();
+		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(srcPrj.FIRST_LAYER), "");
+		// TODO this is removing org.farhan so change this and update all the tests so
+		// that the package name is not dropped
+		qualifiedName = qualifiedName.replace(srcPrj.getDir(srcPrj.FIRST_LAYER).getAbsolutePath(), "");
+		qualifiedName = qualifiedName.replace(File.separator, "::");
+		qualifiedName = "pst::specs" + qualifiedName;
+		return qualifiedName;
+	}
+
+	@Override
+	protected ArrayList<ConvertibleObject> getObjects(String layer) {
+		return srcPrj.getObjects(layer);
 	}
 
 	@Override
@@ -60,189 +109,71 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 				srcPrj.getObjects(layer).removeLast();
 			}
 		}
+		// TODO add reading layer 2 and 3 files here
 	}
 
-	@Override
-	protected ArrayList<ConvertibleObject> getObjects(String layer) {
-		return srcPrj.getObjects(layer);
+	private void convertBackground(AbstractScenario abstractScenario) {
+		Interaction background = tgtObj.createBackground(srcObj.getBackgroundName(abstractScenario));
+		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
+		convertStepList(background, srcObj.getStepList(null, abstractScenario), abstractScenario);
+		tgtObj.addBackground(background);
 	}
 
-	@Override
-	protected void convertObject(ConvertibleObject theObject) throws Exception {
+	private void convertDataTable(Message step, Step stepSrc, AbstractScenario abstractScenarioSrc) {
+		tgtObj.createDataTable(step, srcObj.getDataTable(stepSrc));
+	}
 
-		CucumberFeatureWrapper cfw = (CucumberFeatureWrapper) theObject;
-		String qualifiedName = convertObjectName(cfw.getFile().getAbsolutePath());
-		tgtWrp = (UMLClassWrapper) tgtPrj.createObject(qualifiedName);
+	private void convertDocString(Message step, Step stepSrc) {
+		tgtObj.createDocString(step, srcObj.getDocString(stepSrc));
+	}
 
-		Feature feature = (Feature) cfw.get();
-		createAnnotation((Class) tgtWrp.get(), "title", feature.getName());
-		for (Tag t : feature.getTags()) {
-			createAnnotation((Class) tgtWrp.get(), "tags", t.getName());
+	private void convertScenario(AbstractScenario abstractScenario) {
+		Interaction scenario = tgtObj.createScenario(srcObj.getScenarioName(abstractScenario));
+		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(abstractScenario));
+		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(abstractScenario));
+		convertStepList(scenario, srcObj.getStepList(null, abstractScenario), abstractScenario);
+		tgtObj.addScenario(scenario);
+	}
+
+	private void convertScenarioOutline(AbstractScenario abstractScenario) {
+		Interaction scenarioOutline = tgtObj.createScenarioOutline(srcObj.getScenarioOutlineName(abstractScenario));
+		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
+		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
+		convertStepList(scenarioOutline, srcObj.getStepList(null, abstractScenario), abstractScenario);
+		EList<Examples> examplesList = srcObj.getExamplesList(abstractScenario);
+		for (Examples examples : examplesList) {
+			convertExamples(scenarioOutline, examples);
 		}
-		((Class) tgtWrp.get()).createOwnedComment().setBody(convertStatementsToString(feature.getStatements()));
+		tgtObj.addScenarioOutline(scenarioOutline);
 	}
 
-	@Override
-	protected void convertAbstractScenarios(ConvertibleObject theObject) throws Exception {
+	private void convertExamples(Interaction scenarioOutline, Examples examplesSrc) {
 
-		CucumberFeatureWrapper cfw = (CucumberFeatureWrapper) theObject;
-		Background b = null;
-		for (AbstractScenario as : ((Feature) cfw.get()).getAbstractScenarios()) {
-			Interaction anInteraction = convertScenarioToInteraction((Class) tgtWrp.get(), as);
-			resetCurrentMachineAndState();
-			if (as instanceof Background) {
-				b = (Background) as;
-				// If there is a background, add its steps first so that the component is
-				// correctly identified
-				convertMessages(anInteraction, as.getSteps());
-				saveCurrentMachineAndState();
-				createAnnotation(anInteraction, "background");
-			} else {
-				if (as instanceof Scenario) {
-					Scenario s = (Scenario) as;
-					convertTagsToParameters(anInteraction, s.getTags());
-				}
-				if (as instanceof ScenarioOutline) {
-					ScenarioOutline so = (ScenarioOutline) as;
-					convertTagsToParameters(anInteraction, so.getTags());
-					convertExamplesToAnnotations(anInteraction, so);
-				}
-				convertMessages(anInteraction, as.getSteps());
-			}
+		EAnnotation examples = tgtObj.createExamples(scenarioOutline, srcObj.getExamplesName(examplesSrc));
+		tgtObj.createExamplesTable(examples, srcObj.getExamplesTable(examplesSrc));
+		for (Row examplesRow : srcObj.getExamplesRowList(examplesSrc)) {
+			convertExamplesRow(examples, srcObj.getExamplesRow(examplesSrc, examplesRow));
 		}
 	}
 
-	@Override
-	protected void convertMessages(Interaction anInteraction, List<?> steps) throws Exception {
-		for (Object o : steps) {
-			Step cs = (Step) o;
-			String messageName = cs.getName();
-			if (Validator.validateStepText(messageName)) {
-				setCurrentMachineAndState(messageName);
-				convertMessage(anInteraction, cs);
-			} else {
-				throw new Exception("Step (" + cs.getName() + ") is not valid, use Xtext editor to correct it first. ");
-			}
+	private void convertExamplesRow(EAnnotation examples, HashMap<String, String> examplesRow) {
+		tgtObj.createExamplesRow(examples, examplesRow);
+	}
+
+	private void convertStep(Interaction abstractScenario, Step stepSrc, AbstractScenario abstractScenarioSrc) {
+		Message step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
+		if (srcObj.hasDocString(stepSrc)) {
+			convertDocString(step, stepSrc);
+		} else if (srcObj.hasDataTable(stepSrc)) {
+			convertDataTable(step, stepSrc, abstractScenarioSrc);
 		}
 	}
 
-	@Override
-	protected void convertMessage(Interaction anInteraction, Object o) {
-		Step s = (Step) o;
-		Message theMessage = convertStepToMessage(anInteraction, s);
-		convertKeywordToAnnotation(s, theMessage);
-		// Some steps don't specify the component, it's determined by looking at
-		// previous steps.
-		convertTextToAnnotation(s, theMessage);
-		convertDataTableToArgument(s, theMessage);
-		convertDocStringToArgument(s, theMessage);
-	}
-
-	@Override
-	protected String convertObjectName(String fullName) {
-		String qualifiedName = fullName.trim();
-		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(srcPrj.FIRST_LAYER), "");
-		// TODO this is removing org.farhan so change this and update all the tests so
-		// that the package name is not droppedF
-		qualifiedName = qualifiedName.replace(srcPrj.getDir(srcPrj.FIRST_LAYER).getAbsolutePath(), "");
-		qualifiedName = qualifiedName.replace(File.separator, "::");
-		qualifiedName = "pst::specs" + qualifiedName;
-		return qualifiedName;
-	}
-
-	private String convertStatementsToString(EList<Statement> eList) {
-		String contents = "";
-		for (Statement s : eList) {
-			contents += s.getName() + "\n";
+	private void convertStepList(Interaction abstractScenario, EList<Step> stepList,
+			AbstractScenario abstractScenarioSrc) {
+		for (Step step : stepList) {
+			convertStep(abstractScenario, step, abstractScenarioSrc);
 		}
-		return contents.trim();
-	}
-
-	private Interaction convertScenarioToInteraction(Class layerClass, AbstractScenario as) {
-		Interaction anInteraction = createInteraction(layerClass, as.getName());
-		anInteraction.setName(anInteraction.getName());
-		anInteraction.createOwnedComment().setBody(convertStatementsToString(as.getStatements()));
-		return anInteraction;
-	}
-
-	private void convertTagsToParameters(Interaction anInteraction, EList<Tag> tags) {
-		for (Tag a : tags) {
-			createParameter(anInteraction, a.getName().replace("@", ""), "", "in");
-		}
-	}
-
-	private void convertKeywordToAnnotation(Step s, Message theMessage) {
-		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) s.eAdapters().getFirst();
-		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
-		createAnnotation(theMessage, "Step", "Keyword", rc.getRule().getName());
-	}
-
-	private void convertTextToAnnotation(Step s, Message m) {
-		createAnnotation(m, "Step", "Component", getFSMComponent());
-		// TODO similar to the FSM component, keep track of the object and use its full
-		// path
-		if (MBTVertexValidator.isVertex(m.getName())) {
-			createAnnotation(m, "Step", "Path", MBTVertexValidator.getObjectName(m.getName()));
-		} else if (MBTEdgeValidator.isEdge(m.getName())) {
-			createAnnotation(m, "Step", "Path", MBTEdgeValidator.getObjectName(m.getName()));
-		}
-	}
-
-	private Message convertStepToMessage(Interaction anInteraction, Step step) {
-		Class nextLayerClass = createClassImport(getNextLayerClassName(), anInteraction);
-		Message theMessage = getMessage(anInteraction, nextLayerClass, step.getName());
-		return theMessage;
-	}
-
-	private void convertDocStringToArgument(Step s, Message theMessage) {
-		if (s.getTheDocString() != null) {
-			ValueSpecification vs = createArgument(theMessage, "docString", "");
-			EList<Line> lines = s.getTheDocString().getLines();
-			String indent = "          ";
-			for (int i = 0; i < lines.size(); i++) {
-				String line = "";
-				if (lines.get(i).getName() != null) {
-					line = lines.get(i).getName().replaceFirst(indent, "").stripTrailing();
-				}
-				createAnnotation(vs, "docString", String.valueOf(i), line);
-			}
-		}
-	}
-
-	private void convertDataTableToArgument(Step s, Message theMessage) {
-		if (s.getTheStepTable() != null) {
-			ValueSpecification vs = createArgument(theMessage, "dataTable", "");
-			EList<Row> rows = s.getTheStepTable().getRows();
-			for (int i = 0; i < rows.size(); i++) {
-				String value = "";
-				for (int j = 0; j < rows.get(i).getCells().size(); j++) {
-					value += rows.get(i).getCells().get(j).getName() + " |";
-				}
-				createAnnotation(vs, "dataTable", String.valueOf(i), value);
-			}
-		}
-	}
-
-	private void convertExamplesToAnnotations(Interaction anInteraction, ScenarioOutline so) {
-		for (Examples e : so.getExamples()) {
-			// TODO save example tags
-			EList<Row> rows = e.getTheExamplesTable().getRows();
-			for (int i = 0; i < rows.size(); i++) {
-				String value = "";
-				for (int j = 0; j < rows.get(i).getCells().size(); j++) {
-					value += rows.get(i).getCells().get(j).getName() + "|";
-				}
-				createAnnotation(anInteraction, e.getName(), String.valueOf(i), value);
-			}
-		}
-	}
-
-	private String getNextLayerClassName() {
-		String secondLayerClassName = "";
-		secondLayerClassName = convertNextLayerClassName(getFSMName() + getFSMState() + "Steps");
-		secondLayerClassName = "pst::" + srcPrj.SECOND_LAYER + "::" + Utilities.toLowerCamelCase(getFSMName()) + "::"
-				+ secondLayerClassName;
-		return secondLayerClassName;
 	}
 
 	private boolean isFileSelected(ConvertibleObject convertibleFile, String tag) throws Exception {

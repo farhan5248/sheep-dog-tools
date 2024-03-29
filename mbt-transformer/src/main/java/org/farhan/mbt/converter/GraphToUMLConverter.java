@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.TreeMap;
-
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
@@ -114,7 +112,6 @@ public class GraphToUMLConverter extends ToUMLConverter {
 
 	private void convertStepList(Interaction abstractScenario, ArrayList<MBTEdge> stepList,
 			MBTPathInfo abstractScenarioSrc) {
-
 		// TODO this is a temp hack until the PathInfo is changed
 		if (!abstractScenario.getMessages().isEmpty()) {
 			return;

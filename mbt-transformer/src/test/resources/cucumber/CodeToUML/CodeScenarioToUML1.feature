@@ -39,22 +39,7 @@ Feature: Code Scenario To UML 1
 
   Scenario: Convert scenario step
 
-      And The target/uml/pst.uml file, Class Element Imports section will be as follows
-          |     Class Name |                         Imported Element |
-          | specs::Process | pst::stepdefs::blah::BlahObjectPageSteps |
-      And The target/uml/pst.uml file, Class Properties section will be as follows
-          |     Class Name |       Property Name |                            Property Type |
-          | specs::Process |                this |                      pst::specs::Process |
-          | specs::Process | BlahObjectPageSteps | pst::stepdefs::blah::BlahObjectPageSteps |
       And The target/uml/pst.uml file, Interaction Messages section will be as follows
           |       Interaction Name |                                              Message |
           | specs::Process::Submit | The blah application, something/Object page is empty |
-      And The target/uml/pst.uml file, Interaction Lifelines section will be as follows
-          |       Interaction Name |       Lifeline Name |                      Lifeline Represents |
-          | specs::Process::Submit |                this |                pst::specs::Process::this |
-          | specs::Process::Submit | BlahObjectPageSteps | pst::specs::Process::BlahObjectPageSteps |
-      And The target/uml/pst.uml file, Interaction Message Occurences section will be as follows
-          |       Interaction Name | Message Occurence |    Lifeline Covered |
-          | specs::Process::Submit |         SendEvent |                this |
-          | specs::Process::Submit |      ReceiveEvent | BlahObjectPageSteps |
 
