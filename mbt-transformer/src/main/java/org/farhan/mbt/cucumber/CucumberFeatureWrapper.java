@@ -4,15 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.uml2.uml.Class;
-import org.eclipse.uml2.uml.Message;
-import org.eclipse.uml2.uml.ValueSpecification;
 import org.eclipse.xtext.impl.RuleCallImpl;
 import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
 import org.farhan.CucumberStandaloneSetup;
@@ -30,14 +26,12 @@ import org.farhan.cucumber.Statement;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.Tag;
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.graph.MBTPathInfo;
-
 import com.google.inject.Injector;
 
 public class CucumberFeatureWrapper implements ConvertibleObject {
 
-	private File theFile;
 	private Feature theFeature;
+	private File theFile;
 
 	public CucumberFeatureWrapper(File theFile) {
 		setFile(theFile);
@@ -45,14 +39,278 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		theFeature.setName(theFile.getName().replace(".feature", ""));
 	}
 
+	public void addBackground(Background background) {
+		theFeature.getAbstractScenarios().add(background);
+	}
+
+	public void addScenario(Scenario scenario) {
+		theFeature.getAbstractScenarios().add(scenario);
+	}
+
+	public void addScenarioOutline(ScenarioOutline scenarioOutline) {
+		theFeature.getAbstractScenarios().add(scenarioOutline);
+	}
+
+	private String convertStatementsToString(EList<Statement> eList) {
+		String contents = "";
+		for (Statement s : eList) {
+			contents += s.getName() + "\n";
+		}
+		return contents.trim();
+	}
+
+	public Background createBackground(String backgroundName) {
+		Background background = CucumberFactory.eINSTANCE.createBackground();
+		background.setName(backgroundName);
+		return background;
+	}
+
+	public void createDataTable(Step step, ArrayList<ArrayList<String>> dataTable) {
+		step.setTheStepTable(CucumberFactory.eINSTANCE.createStepTable());
+		for (ArrayList<String> srcRow : dataTable) {
+			Row row = CucumberFactory.eINSTANCE.createRow();
+			for (String srcCell : srcRow) {
+				Cell cell = CucumberFactory.eINSTANCE.createCell();
+				cell.setName(srcCell);
+				row.getCells().add(cell);
+			}
+			step.getTheStepTable().getRows().add(row);
+		}
+	}
+
+	public void createDocString(Step step, String docString) {
+		step.setTheDocString(CucumberFactory.eINSTANCE.createDocString());
+		for (String l : docString.split("\n")) {
+			Line line = CucumberFactory.eINSTANCE.createLine();
+			// TODO I think I fixed this, test it later
+			// I'm not sure why only 9 leading spaces are needed instead of 10 and why a
+			// trailing space gets added automatically
+			line.setName("         " + l);
+			step.getTheDocString().getLines().add(line);
+		}
+	}
+
+	public Examples createExamples(ScenarioOutline scenarioOutline, String examplesName) {
+		Examples examples = CucumberFactory.eINSTANCE.createExamples();
+		examples.setName(examplesName);
+		scenarioOutline.getExamples().add(examples);
+		return examples;
+	}
+
+	public void createExamplesRow(Examples examples, HashMap<String, String> examplesRow) {
+		Row row = CucumberFactory.eINSTANCE.createRow();
+		for (String srcCell : examplesRow.keySet()) {
+			Cell cell = CucumberFactory.eINSTANCE.createCell();
+			cell.setName(examplesRow.get(srcCell));
+			row.getCells().add(cell);
+		}
+		examples.getTheExamplesTable().getRows().add(row);
+	}
+
+	public void createExamplesTable(Examples examples, ArrayList<String> examplesTable) {
+		examples.setTheExamplesTable(CucumberFactory.eINSTANCE.createExamplesTable());
+		// TODO I think an empty table can be created but the headers shouldn't be added
+		// because there's no Xtext language element for Header vs Body like there is
+		// for adoc files.
+		Row row = CucumberFactory.eINSTANCE.createRow();
+		for (String srcCell : examplesTable) {
+			Cell cell = CucumberFactory.eINSTANCE.createCell();
+			cell.setName(srcCell);
+			row.getCells().add(cell);
+		}
+		examples.getTheExamplesTable().getRows().add(row);
+	}
+
+	public Scenario createScenario(String scenarioName) {
+		Scenario scenario = CucumberFactory.eINSTANCE.createScenario();
+		scenario.setName(scenarioName);
+		return scenario;
+	}
+
+	public ScenarioOutline createScenarioOutline(String scenarioOutlineName) {
+		ScenarioOutline scenarioOutline = CucumberFactory.eINSTANCE.createScenarioOutline();
+		scenarioOutline.setName(scenarioOutlineName);
+		return scenarioOutline;
+	}
+
+	public Step createStep(AbstractScenario abstractScenario, String name) {
+		String keyword = name.split(" ")[0];
+		Step step = null;
+		switch (keyword) {
+		case "Given":
+			step = CucumberFactory.eINSTANCE.createGiven();
+			break;
+		case "When":
+			step = CucumberFactory.eINSTANCE.createWhen();
+			break;
+		case "Then":
+			step = CucumberFactory.eINSTANCE.createThen();
+			break;
+		case "But":
+			step = CucumberFactory.eINSTANCE.createBut();
+			break;
+		case "And":
+			step = CucumberFactory.eINSTANCE.createAnd();
+			break;
+		case "Asterisk":
+			step = CucumberFactory.eINSTANCE.createAsterisk();
+			break;
+		}
+		step.setName(name.replaceFirst(keyword + " ", ""));
+		abstractScenario.getSteps().add(step);
+		return step;
+	}
+
 	@Override
-	public void setFile(File theFile) {
-		this.theFile = theFile;
+	public Object get() {
+		return theFeature;
+	}
+
+	public EList<AbstractScenario> getAbstractScenarioList() {
+		return theFeature.getAbstractScenarios();
+	}
+
+	public String getBackgroundDescription(AbstractScenario abstractScenario) {
+		return convertStatementsToString(abstractScenario.getStatements());
+	}
+
+	public String getBackgroundName(AbstractScenario abstractScenario) {
+		return abstractScenario.getName();
+	}
+
+	public ArrayList<ArrayList<String>> getDataTable(Step stepSrc) {
+		ArrayList<ArrayList<String>> dataTable = new ArrayList<ArrayList<String>>();
+		ArrayList<String> row;
+		for (Row r : stepSrc.getTheStepTable().getRows()) {
+			row = new ArrayList<String>();
+			for (Cell c : r.getCells()) {
+				row.add(c.getName());
+			}
+			dataTable.add(row);
+		}
+		return dataTable;
+	}
+
+	public String getDocString(Step stepSrc) {
+		String text = "";
+		String indent = "          ";
+		for (Line l : stepSrc.getTheDocString().getLines()) {
+			if (l.getName() != null) {
+				text += "\n" + l.getName().replaceFirst(indent, "").stripTrailing();
+			}
+		}
+		return text.replaceFirst("\n", "");
+	}
+
+	public EList<Examples> getExamplesList(AbstractScenario abstractScenario) {
+		ScenarioOutline scenarioOutline = (ScenarioOutline) abstractScenario;
+		return scenarioOutline.getExamples();
+	}
+
+	public String getExamplesName(Examples examples) {
+		return examples.getName();
+	}
+
+	public HashMap<String, String> getExamplesRow(Examples examples, Row examplesRow) {
+		HashMap<String, String> row = new HashMap<String, String>();
+		EList<Cell> header = examples.getTheExamplesTable().getRows().getFirst().getCells();
+		for (int i = 0; i < header.size(); i++) {
+			row.put(header.get(i).getName(), examplesRow.getCells().get(i).getName());
+		}
+		return row;
+	}
+
+	public ArrayList<Row> getExamplesRowList(Examples examples) {
+		ArrayList<Row> body = new ArrayList<Row>();
+		body.addAll(examples.getTheExamplesTable().getRows());
+		body.remove(0);
+		return body;
+	}
+
+	public String getExamplesTable(Examples examples) {
+		String header = "";
+		for (Cell c : examples.getTheExamplesTable().getRows().getFirst().getCells()) {
+			header += c.getName() + ",";
+		}
+		return header;
+	}
+
+	public String getFeatureDescription() {
+		return convertStatementsToString(theFeature.getStatements());
+	}
+
+	public String getFeatureName() {
+		return theFeature.getName();
+	}
+
+	public String getFeatureTags() {
+		return getTags(theFeature.getTags());
 	}
 
 	@Override
 	public File getFile() {
 		return theFile;
+	}
+
+	public String getScenarioDescription(AbstractScenario abstractScenario) {
+		return convertStatementsToString(abstractScenario.getStatements());
+	}
+
+	public String getScenarioName(AbstractScenario abstractScenario) {
+		return abstractScenario.getName();
+	}
+
+	public String getScenarioOutlineDescription(AbstractScenario abstractScenario) {
+		return convertStatementsToString(abstractScenario.getStatements());
+	}
+
+	public String getScenarioOutlineName(AbstractScenario abstractScenario) {
+		return abstractScenario.getName();
+	}
+
+	public String getScenarioOutlineTags(AbstractScenario abstractScenario) {
+		ScenarioOutline scenarioOutline = (ScenarioOutline) abstractScenario;
+		return getTags(scenarioOutline.getTags());
+	}
+
+	public String getScenarioTags(AbstractScenario abstractScenario) {
+		Scenario scenario = (Scenario) abstractScenario;
+		return getTags(scenario.getTags());
+	}
+
+	public String getStep(Step step) {
+		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) step.eAdapters().getFirst();
+		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
+		rc.getRule().getName();
+		return rc.getRule().getName() + " " + step.getName();
+	}
+
+	public EList<Step> getStepList(Object object, AbstractScenario abstractScenario) {
+		return abstractScenario.getSteps();
+	}
+
+	private String getTags(EList<Tag> tagList) {
+		String tags = "";
+		for (Tag t : tagList) {
+			tags += "," + t.getName().replace("@", "");
+		}
+		return tags.replaceFirst(",", "");
+	}
+
+	public boolean hasDataTable(Step step) {
+		return step.getTheStepTable() != null;
+	}
+
+	public boolean hasDocString(Step step) {
+		return step.getTheDocString() != null;
+	}
+
+	public boolean isBackground(AbstractScenario abstractScenario) {
+		return abstractScenario instanceof Background;
+	}
+
+	public boolean isScenarioOutline(AbstractScenario abstractScenario) {
+		return abstractScenario instanceof ScenarioOutline;
 	}
 
 	@Override
@@ -78,160 +336,69 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		}
 	}
 
+	public void setBackgroundDescription(Background background, String backgroundDescription) {
+		setDescription(background, backgroundDescription);
+	}
+
+	private void setDescription(AbstractScenario abstractScenario, String scenarioDescription) {
+		if (!scenarioDescription.isEmpty()) {
+			for (String line : scenarioDescription.split("\n")) {
+				Statement s = CucumberFactory.eINSTANCE.createStatement();
+				s.setName(line);
+				abstractScenario.getStatements().add(s);
+			}
+		}
+	}
+
+	public void setFeatureDescription(String featureDescription) {
+		if (!featureDescription.isEmpty()) {
+			for (String line : featureDescription.split("\n")) {
+				Statement s = CucumberFactory.eINSTANCE.createStatement();
+				s.setName(line);
+				theFeature.getStatements().add(s);
+			}
+		}
+	}
+
+	public void setFeatureName(String featureName) {
+		theFeature.setName(featureName);
+	}
+
+	public void setFeatureTags(String featureTags) {
+		setTags(theFeature.getTags(), featureTags);
+	}
+
 	@Override
-	public Object get() {
-		return theFeature;
+	public void setFile(File theFile) {
+		this.theFile = theFile;
 	}
 
-	public String getFeatureName() {
-		return theFeature.getName();
+	public void setScenarioDescription(Scenario scenario, String scenarioDescription) {
+		setDescription(scenario, scenarioDescription);
 	}
 
-	public String getFeatureTags() {
-		return getTags(theFeature.getTags());
+	public void setScenarioOutlineDescription(ScenarioOutline scenarioOutline, String scenarioOutlineDescription) {
+		setDescription(scenarioOutline, scenarioOutlineDescription);
 	}
 
-	public String getFeatureDescription() {
-		return convertStatementsToString(theFeature.getStatements());
+	public void setScenarioOutlineTags(ScenarioOutline scenarioOutline, String scenarioOutlineTags) {
+		setTags(scenarioOutline.getTags(), scenarioOutlineTags);
 	}
 
-	private String convertStatementsToString(EList<Statement> eList) {
-		String contents = "";
-		for (Statement s : eList) {
-			contents += s.getName() + "\n";
-		}
-		return contents.trim();
+	public void setScenarioTags(Scenario scenario, String scenarioTags) {
+		setTags(scenario.getTags(), scenarioTags);
 	}
 
-	public EList<AbstractScenario> getAbstractScenarioList() {
-		return theFeature.getAbstractScenarios();
-	}
-
-	public boolean isBackground(AbstractScenario abstractScenario) {
-		return abstractScenario instanceof Background;
-	}
-
-	public boolean isScenarioOutline(AbstractScenario abstractScenario) {
-		return abstractScenario instanceof ScenarioOutline;
-	}
-
-	public String getScenarioName(AbstractScenario abstractScenario) {
-		return abstractScenario.getName();
-	}
-
-	public String getScenarioTags(AbstractScenario abstractScenario) {
-		Scenario scenario = (Scenario) abstractScenario;
-		return getTags(scenario.getTags());
-	}
-
-	private String getTags(EList<Tag> tagList) {
-		String tags = "";
-		for (Tag t : tagList) {
-			tags += "," + t.getName().replace("@", "");
-		}
-		tags.replaceFirst(",", "");
-		return tags;
-	}
-
-	public String getScenarioDescription(AbstractScenario abstractScenario) {
-		return convertStatementsToString(abstractScenario.getStatements());
-	}
-
-	public EList<Step> getStepList(Object object, AbstractScenario abstractScenario) {
-		return abstractScenario.getSteps();
-	}
-
-	public String getStep(Step step) {
-		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) step.eAdapters().getFirst();
-		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
-		rc.getRule().getName();
-		return rc.getRule().getName() + " " + step.getName();
-	}
-
-	public String getDocString(Step stepSrc) {
-		String text = "";
-		String indent = "          ";
-		for (Line l : stepSrc.getTheDocString().getLines()) {
-			if (l.getName() != null) {
-				text += "\n" + l.getName().replaceFirst(indent, "").stripTrailing();
+	private void setTags(EList<Tag> tagList, String tags) {
+		// TODO this if statement is not needed if a list is passed in rather than a
+		// string
+		if (!tags.isEmpty()) {
+			for (String t : tags.split(",")) {
+				Tag tag = CucumberFactory.eINSTANCE.createTag();
+				tag.setName(t);
+				tagList.add(tag);
 			}
 		}
-		return text.replaceFirst("\n", "");
-	}
-
-	public ArrayList<ArrayList<String>> getDataTable(Step stepSrc) {
-		ArrayList<ArrayList<String>> dataTable = new ArrayList<ArrayList<String>>();
-		ArrayList<String> row;
-		for (Row r : stepSrc.getTheStepTable().getRows()) {
-			row = new ArrayList<String>();
-			for (Cell c : r.getCells()) {
-				row.add(c.getName());
-			}
-			dataTable.add(row);
-		}
-		return dataTable;
-	}
-
-	public String getBackgroundName(AbstractScenario abstractScenario) {
-		return abstractScenario.getName();
-	}
-
-	public String getBackgroundDescription(AbstractScenario abstractScenario) {
-		return convertStatementsToString(abstractScenario.getStatements());
-	}
-
-	public String getScenarioOutlineName(AbstractScenario abstractScenario) {
-		return abstractScenario.getName();
-	}
-
-	public String getScenarioOutlineTags(AbstractScenario abstractScenario) {
-		ScenarioOutline scenarioOutline = (ScenarioOutline) abstractScenario;
-		return getTags(scenarioOutline.getTags());
-	}
-
-	public String getScenarioOutlineDescription(AbstractScenario abstractScenario) {
-		return convertStatementsToString(abstractScenario.getStatements());
-	}
-
-	public EList<Examples> getExamplesList(AbstractScenario abstractScenario) {
-		ScenarioOutline scenarioOutline = (ScenarioOutline) abstractScenario;
-		return scenarioOutline.getExamples();
-	}
-
-	public String getExamplesName(Examples examples) {
-		return examples.getName();
-	}
-
-	public String getExamplesTable(Examples examples) {
-		String header = "";
-		for (Cell c : examples.getTheExamplesTable().getRows().getFirst().getCells()) {
-			header += c.getName() + ",";
-		}
-		return header;
-	}
-
-	public ArrayList<Row> getExamplesRowList(Examples examples) {
-		ArrayList<Row> body = new ArrayList<Row>();
-		body.addAll(examples.getTheExamplesTable().getRows());
-		body.remove(0);
-		return body;
-	}
-
-	public HashMap<String, String> getExamplesRow(Examples examples, Row examplesRow) {
-		HashMap<String, String> row = new HashMap<String, String>();
-		EList<Cell> header = examples.getTheExamplesTable().getRows().getFirst().getCells();
-		for (int i = 0; i < header.size(); i++) {
-			row.put(header.get(i).getName(), examplesRow.getCells().get(i).getName());
-		}
-		return row;
-	}
-
-	public boolean hasDocString(Step step) {
-		return step.getTheDocString() != null;
-	}
-
-	public boolean hasDataTable(Step step) {
-		return step.getTheStepTable() != null;
 	}
 
 }

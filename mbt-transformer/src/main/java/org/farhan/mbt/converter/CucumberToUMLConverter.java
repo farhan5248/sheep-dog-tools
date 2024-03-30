@@ -20,25 +20,21 @@ import org.farhan.cucumber.Tag;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToUMLGherkinConverter;
 import org.farhan.mbt.core.Utilities;
-import org.farhan.mbt.core.Validator;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
-import org.farhan.mbt.cucumber.CucumberJavaWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 
-public class FeatureToUMLConverter extends ToUMLGherkinConverter {
+public class CucumberToUMLConverter extends ToUMLGherkinConverter {
 
 	private CucumberFeatureWrapper srcObj;
 	private CucumberProject srcPrj;
 	private UMLClassWrapper tgtObj;
-	private String lastComponent;
 
-	public FeatureToUMLConverter(String layer, CucumberProject source, UMLProject target) {
+	public CucumberToUMLConverter(String layer, CucumberProject source, UMLProject target) {
 		this.layer = layer;
 		this.srcPrj = source;
 		this.tgtPrj = target;
-		lastComponent = "";
 	}
 
 	@Override
@@ -139,7 +135,6 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	}
 
 	private void convertExamples(Interaction scenarioOutline, Examples examplesSrc) {
-
 		EAnnotation examples = tgtObj.createExamples(scenarioOutline, srcObj.getExamplesName(examplesSrc));
 		tgtObj.createExamplesTable(examples, srcObj.getExamplesTable(examplesSrc));
 		for (Row examplesRow : srcObj.getExamplesRowList(examplesSrc)) {
@@ -164,14 +159,6 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 			AbstractScenario abstractScenarioSrc) {
 		for (Step step : stepList) {
 			convertStep(abstractScenario, step, abstractScenarioSrc);
-			// layer 2
-			String objectName = Validator.getObjectName(srcObj.getStep(step));
-			String componentName = Validator.getComponentName(srcObj.getStep(step));
-			if (componentName.isEmpty()) {
-				componentName = lastComponent;
-			}
-			CucumberJavaWrapper srcObj2 = (CucumberJavaWrapper) srcPrj.getObject(componentName, objectName,
-					srcPrj.SECOND_LAYER);
 		}
 	}
 

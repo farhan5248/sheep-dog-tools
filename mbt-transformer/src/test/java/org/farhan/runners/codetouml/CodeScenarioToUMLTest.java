@@ -11,9 +11,9 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("cucumber/CodeToUML/CodeScenarioToUML1.feature")
+@SelectClasspathResource("cucumber/CodeToUML/CodeScenarioToUML.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
 @IncludeTags("debug")
-public class CodeScenarioToUML1Test {
+public class CodeScenarioToUMLTest {
 }

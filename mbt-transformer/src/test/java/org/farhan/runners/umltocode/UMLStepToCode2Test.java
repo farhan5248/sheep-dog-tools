@@ -1,4 +1,4 @@
-package org.farhan.runners.codetouml;
+package org.farhan.runners.umltocode;
 
 import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
@@ -11,9 +11,9 @@ import org.junit.platform.suite.api.Suite;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("cucumber/CodeToUML/CodeStepToUML2.feature")
+@SelectClasspathResource("cucumber/UMLToCode/UMLStepToCode2.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
 @IncludeTags("debug")
-public class CodeStepToUML2Test {
+public class UMLStepToCode2Test {
 }

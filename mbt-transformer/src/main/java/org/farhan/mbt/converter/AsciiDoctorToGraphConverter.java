@@ -14,13 +14,13 @@ import org.farhan.mbt.graph.JGraphTProject;
 import org.farhan.mbt.graph.JGraphTGraphWrapper;
 import org.farhan.mbt.graph.MBTPathInfo;
 
-public class AdocToGraphConverter extends ToGraphConverter {
+public class AsciiDoctorToGraphConverter extends ToGraphConverter {
 
 	private AsciiDoctorProject srcPrj;
 	private AsciiDoctorAdocWrapper srcObj;
 	private JGraphTGraphWrapper tgtObj;
 
-	public AdocToGraphConverter(String layer, AsciiDoctorProject source, JGraphTProject target) {
+	public AsciiDoctorToGraphConverter(String layer, AsciiDoctorProject source, JGraphTProject target) {
 		this.layer = layer;
 		this.srcPrj = source;
 		this.tgtPrj = target;

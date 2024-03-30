@@ -3,7 +3,7 @@ package org.farhan.mbt.convert;
 import java.util.ArrayList;
 
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
-import org.farhan.mbt.converter.AdocToGraphConverter;
+import org.farhan.mbt.converter.AsciiDoctorToGraphConverter;
 import org.farhan.mbt.core.ConvertToGraph;
 import org.farhan.mbt.core.ToGraphConverter;
 import org.farhan.mbt.graph.JGraphTProject;
@@ -16,7 +16,7 @@ public class ConvertAsciiDoctorToGraph extends ConvertToGraph {
 	@Override
 	protected ArrayList<ToGraphConverter> getLayerConverters() {
 		ArrayList<ToGraphConverter> converters = new ArrayList<ToGraphConverter>();
-		converters.add(new AdocToGraphConverter(source.FIRST_LAYER, source, target));
+		converters.add(new AsciiDoctorToGraphConverter(source.FIRST_LAYER, source, target));
 		return converters;
 	}
 

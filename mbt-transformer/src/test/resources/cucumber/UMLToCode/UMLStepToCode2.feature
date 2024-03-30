@@ -1,7 +1,7 @@
 @debug
 Feature: Create Step Object From Step
 
-# TODO move doc strings to their own file, same for data tables, and the rest to the step feature file
+# TODO move to uml to code
 
   Background: Create a feature file
 

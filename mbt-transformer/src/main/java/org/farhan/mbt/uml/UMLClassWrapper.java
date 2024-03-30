@@ -2,35 +2,22 @@ package org.farhan.mbt.uml;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.asciidoctor.ast.Cell;
-import org.asciidoctor.ast.Column;
-import org.asciidoctor.ast.Row;
-import org.asciidoctor.ast.Section;
-import org.asciidoctor.ast.StructuralNode;
-import org.asciidoctor.ast.Table;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Behavior;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
-import org.eclipse.uml2.uml.Lifeline;
 import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.ParameterDirectionKind;
-import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.graph.MBTEdge;
-import org.farhan.mbt.graph.MBTGraph;
-import org.farhan.mbt.graph.MBTVertex;
 
 public class UMLClassWrapper implements ConvertibleObject {
 
@@ -235,6 +222,20 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return abstractScenario.getName();
 	}
 
+	public ArrayList<ArrayList<String>> getDataTable(Message stepSrc) {
+		ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
+		ArrayList<String> row;
+		ValueSpecification vs = (LiteralString) stepSrc.getArgument("dataTable", null);
+		for (Entry<String, String> r : vs.getEAnnotation("dataTable").getDetails()) {
+			row = new ArrayList<String>();
+			for (String cell : r.getValue().split(" \\|")) {
+				row.add(cell);
+			}
+			table.add(row);
+		}
+		return table;
+	}
+
 	public ArrayList<ArrayList<String>> getDataTable(Message step, HashMap<String, String> replacements) {
 		// TODO this should return a proper table and not this list of vertex-edge
 		// because details of vertices and edges should be in the Graph object wrapper
@@ -248,30 +249,20 @@ public class UMLClassWrapper implements ConvertibleObject {
 				ArrayList<String> cell = new ArrayList<String>();
 				String vertex = i - 1 + " " + header[j];
 				cell.add(vertex);
-				cell.add(replaceParameters(replacements, row[j]));
+				String edge = replaceParameters(replacements, row[j]);
+				cell.add(edge);
 				cellList.add(cell);
 			}
 		}
 		return cellList;
 	}
 
-	private String replaceParameters(HashMap<String, String> replacements, String text) {
-		if (text.startsWith("<")) {
-			for (String key : replacements.keySet()) {
-				if (text.contentEquals("<" + key + ">")) {
-					return replacements.get(key);
-				}
-			}
-		}
-		return text;
-	}
-
 	public String getDocString(Message step) {
 		ValueSpecification vs = (LiteralString) step.getArgument("docString", null);
 		EMap<String, String> docString = vs.getEAnnotation("docString").getDetails();
 		String content = "";
-		for (String lineNo : docString.keySet()) {
-			content += "\n" + docString.get(lineNo);
+		for (int i = 0; i < docString.keySet().size(); i++) {
+			content += "\n" + docString.get(i).getValue();
 		}
 		content = content.replaceFirst("\n", "");
 		return content;
@@ -288,8 +279,11 @@ public class UMLClassWrapper implements ConvertibleObject {
 	}
 
 	public ArrayList<HashMap<String, String>> getExamplesRowList(EAnnotation examples) {
+		// TODO this should just be a list of lists. Having the header for each row
+		// doesn't help. If the headers are needed to convert rows, pass the parent
+		// table
+		// Also there should be a getRow call to go with this
 		ArrayList<HashMap<String, String>> examplesRowList = new ArrayList<HashMap<String, String>>();
-
 		ArrayList<String> paramNames = new ArrayList<String>();
 		for (String cell : examples.getDetails().getFirst().getValue().split("\\|")) {
 			paramNames.add(cell);
@@ -307,7 +301,16 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return examplesRowList;
 	}
 
+	public ArrayList<String> getExamplesTable(EAnnotation examples) {
+		ArrayList<String> paramNames = new ArrayList<String>();
+		for (String cell : examples.getDetails().getFirst().getValue().split("\\|")) {
+			paramNames.add(cell);
+		}
+		return paramNames;
+	}
+
 	public Set<String> getExamplesTable(HashMap<String, String> examplesRow) {
+		// TODO this is convoluted because it's deriving the table from each row?
 		return examplesRow.keySet();
 	}
 
@@ -369,14 +372,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return abstractScenario.getName();
 	}
 
-	private String getTags(Interaction abstractScenario) {
-		String tags = "";
-		for (Parameter p : abstractScenario.getOwnedParameters()) {
-			tags += "," + p.getName();
-		}
-		return tags.replaceFirst(",", "");
-	}
-
 	public String getScenarioOutlineTags(Interaction abstractScenario) {
 		return getTags(abstractScenario);
 	}
@@ -392,7 +387,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 	}
 
 	public ArrayList<Message> getStepList(Interaction abstractScenario) {
-
 		ArrayList<Message> stepList = new ArrayList<Message>();
 		for (Message m : abstractScenario.getMessages()) {
 			stepList.add(m);
@@ -402,6 +396,14 @@ public class UMLClassWrapper implements ConvertibleObject {
 
 	public String getStepName(Message step) {
 		return step.getName();
+	}
+
+	private String getTags(Interaction abstractScenario) {
+		String tags = "";
+		for (Parameter p : abstractScenario.getOwnedParameters()) {
+			tags += "," + p.getName();
+		}
+		return tags.replaceFirst(",", "");
 	}
 
 	public boolean hasDataTable(Message step) {
@@ -430,6 +432,17 @@ public class UMLClassWrapper implements ConvertibleObject {
 		}
 	}
 
+	private String replaceParameters(HashMap<String, String> replacements, String text) {
+		if (text.startsWith("<")) {
+			for (String key : replacements.keySet()) {
+				if (text.contentEquals("<" + key + ">")) {
+					return replacements.get(key);
+				}
+			}
+		}
+		return text;
+	}
+
 	@Override
 	public void save() throws Exception {
 		// TODO This will be implemented once I put each UML class in its own .uml file
@@ -449,8 +462,12 @@ public class UMLClassWrapper implements ConvertibleObject {
 	}
 
 	public void setFeatureTags(String featureTags) {
-		for (String t : featureTags.split(",")) {
-			createAnnotation(theClass, "tags", t);
+		// TODO this if statement is not needed if a list is passed in rather than a
+		// string
+		if (!featureTags.isEmpty()) {
+			for (String t : featureTags.split(",")) {
+				createAnnotation(theClass, "tags", t);
+			}
 		}
 	}
 
@@ -468,14 +485,23 @@ public class UMLClassWrapper implements ConvertibleObject {
 	}
 
 	public void setScenarioOutlineTags(Interaction scenarioOutline, String scenarioOutlineTags) {
-		for (String t : scenarioOutlineTags.split(",")) {
-			createParameter(scenarioOutline, t, "", "in");
+		// TODO this if statement is not needed if a list is passed in rather than a
+		// string
+		if (!scenarioOutlineTags.isEmpty()) {
+			for (String t : scenarioOutlineTags.split(",")) {
+				createParameter(scenarioOutline, t, "", "in");
+			}
 		}
 	}
 
 	public void setScenarioTags(Interaction scenario, String scenarioTags) {
-		for (String t : scenarioTags.split(",")) {
-			createParameter(scenario, t, "", "in");
+		// TODO this if statement is not needed if a list is passed in rather than a
+		// string
+		if (!scenarioTags.isEmpty()) {
+			for (String t : scenarioTags.split(",")) {
+				createParameter(scenario, t, "", "in");
+			}
 		}
 	}
+
 }

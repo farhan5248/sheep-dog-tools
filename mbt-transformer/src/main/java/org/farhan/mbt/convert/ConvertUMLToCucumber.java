@@ -2,7 +2,7 @@ package org.farhan.mbt.convert;
 
 import java.util.ArrayList;
 
-import org.farhan.mbt.converter.UMLToFeatureConverter;
+import org.farhan.mbt.converter.UMLToCucumberConverter;
 import org.farhan.mbt.converter.UMLToJavaConverter;
 import org.farhan.mbt.core.ConvertToCode;
 import org.farhan.mbt.core.ToCodeConverter;
@@ -17,7 +17,7 @@ public class ConvertUMLToCucumber extends ConvertToCode {
 	@Override
 	protected ArrayList<ToCodeConverter> getLayerConverters() {
 		ArrayList<ToCodeConverter> converters = new ArrayList<ToCodeConverter>();
-		converters.add(new UMLToFeatureConverter(source.FIRST_LAYER, source, target));
+		converters.add(new UMLToCucumberConverter(source.FIRST_LAYER, source, target));
 		converters.add(new UMLToJavaConverter(source.SECOND_LAYER, source, target));
 		converters.add(new UMLToJavaConverter(source.THIRD_LAYER, source, target));
 		return converters;
