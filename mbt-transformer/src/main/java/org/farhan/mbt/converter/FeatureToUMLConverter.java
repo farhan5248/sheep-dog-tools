@@ -7,21 +7,14 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
-import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
-import org.eclipse.uml2.uml.ValueSpecification;
-import org.eclipse.xtext.impl.RuleCallImpl;
-import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
 import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.AbstractScenario;
-import org.farhan.cucumber.Background;
 import org.farhan.cucumber.Examples;
-import org.farhan.cucumber.Line;
 import org.farhan.cucumber.Row;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.ScenarioOutline;
-import org.farhan.cucumber.Statement;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.Tag;
 import org.farhan.mbt.core.ConvertibleObject;
@@ -29,25 +22,23 @@ import org.farhan.mbt.core.ToUMLGherkinConverter;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.core.Validator;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
+import org.farhan.mbt.cucumber.CucumberJavaWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
-import org.farhan.mbt.graph.JGraphTGraphWrapper;
-import org.farhan.mbt.graph.MBTEdge;
-import org.farhan.mbt.graph.MBTPathInfo;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
-import org.farhan.validation.MBTEdgeValidator;
-import org.farhan.validation.MBTVertexValidator;
 
 public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 
 	private CucumberFeatureWrapper srcObj;
 	private CucumberProject srcPrj;
 	private UMLClassWrapper tgtObj;
+	private String lastComponent;
 
 	public FeatureToUMLConverter(String layer, CucumberProject source, UMLProject target) {
 		this.layer = layer;
 		this.srcPrj = source;
 		this.tgtPrj = target;
+		lastComponent = "";
 	}
 
 	@Override
@@ -102,14 +93,14 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 	@Override
 	protected void selectObjects() throws Exception {
 
-		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(layer), srcPrj.getFileExt(layer));
+		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(srcPrj.FIRST_LAYER),
+				srcPrj.getFileExt(srcPrj.FIRST_LAYER));
 		for (File f : files) {
 			srcPrj.createObject(f.getAbsolutePath()).load();
-			if (!isFileSelected(srcPrj.getObjects(layer).getLast(), srcPrj.tags)) {
-				srcPrj.getObjects(layer).removeLast();
+			if (!isFileSelected(srcPrj.getObjects(srcPrj.FIRST_LAYER).getLast(), srcPrj.tags)) {
+				srcPrj.getObjects(srcPrj.FIRST_LAYER).removeLast();
 			}
 		}
-		// TODO add reading layer 2 and 3 files here
 	}
 
 	private void convertBackground(AbstractScenario abstractScenario) {
@@ -173,6 +164,14 @@ public class FeatureToUMLConverter extends ToUMLGherkinConverter {
 			AbstractScenario abstractScenarioSrc) {
 		for (Step step : stepList) {
 			convertStep(abstractScenario, step, abstractScenarioSrc);
+			// layer 2
+			String objectName = Validator.getObjectName(srcObj.getStep(step));
+			String componentName = Validator.getComponentName(srcObj.getStep(step));
+			if (componentName.isEmpty()) {
+				componentName = lastComponent;
+			}
+			CucumberJavaWrapper srcObj2 = (CucumberJavaWrapper) srcPrj.getObject(componentName, objectName,
+					srcPrj.SECOND_LAYER);
 		}
 	}
 

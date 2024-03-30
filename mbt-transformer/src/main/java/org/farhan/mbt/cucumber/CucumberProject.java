@@ -95,4 +95,18 @@ public class CucumberProject extends ConvertibleProject {
 		}
 	}
 
+	public ConvertibleObject getObject(String componentName, String objectName, String layer) {
+		if (layer.contentEquals(SECOND_LAYER)) {
+			String name = getDir(SECOND_LAYER) + "/" + componentName + "/" + objectName + ".java";
+			for (ConvertibleObject obj : secondLayerObjects) {
+				CucumberJavaWrapper cjw = (CucumberJavaWrapper) obj;
+				if (cjw.getFile().getAbsolutePath().contentEquals(name)) {
+					return cjw;
+				}
+			}
+			createObject(name);
+		}
+		return null;
+	}
+
 }

@@ -13,22 +13,6 @@ import org.farhan.validation.MBTVertexValidator;
 
 public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 
-	public static String convertNextLayerClassName(String currentClassName) {
-		if (currentClassName == null) {
-			return "";
-		}
-		if (currentClassName.startsWith("Common")) {
-			return currentClassName;
-		}
-		String newClassName = currentClassName;
-		newClassName = newClassName.replace("-", "");
-		newClassName = newClassName.replace("_", "");
-		newClassName = newClassName.replace(" ", "");
-		newClassName = newClassName.replace("'", "");
-		newClassName = newClassName.replace("#", "");
-		return newClassName;
-	}
-
 	@Override
 	protected ArrayList<String> getNextLayerInteractionNamesfromMessage(Message m) {
 		String newTitle = m.getName();
@@ -98,8 +82,7 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 				nextLayerInteraction);
 		if (nextLayerInteraction.getMessage("setPath") == null) {
 			Message nextLayerMessage = getMessage(nextLayerInteraction, nextLayerClass, "setPath");
-			createArgument(nextLayerMessage, "path",
-					"\"" + m.getEAnnotation("Step").getDetails().get("Path") + "\"");
+			createArgument(nextLayerMessage, "path", "\"" + m.getEAnnotation("Step").getDetails().get("Path") + "\"");
 		}
 	}
 
