@@ -106,20 +106,20 @@ public class CucumberProject extends ConvertibleProject {
 		File file = new File(name);
 		if (file.getAbsolutePath().startsWith(getDir(FIRST_LAYER).getAbsolutePath())) {
 			for (ConvertibleObject obj : firstLayerObjects) {
-				if (obj.getFile().getAbsolutePath().contentEquals(name)) {
+				if (obj.getFile().getAbsolutePath().contentEquals(file.getAbsolutePath())) {
 					return obj;
 				}
 			}
 		} else {
 			if (file.getAbsolutePath().startsWith(getDir(SECOND_LAYER).getAbsolutePath())) {
 				for (ConvertibleObject obj : secondLayerObjects) {
-					if (obj.getFile().getAbsolutePath().contentEquals(name)) {
+					if (obj.getFile().getAbsolutePath().contentEquals(file.getAbsolutePath())) {
 						return obj;
 					}
 				}
 			} else if (file.getAbsolutePath().startsWith(getDir(THIRD_LAYER).getAbsolutePath())) {
 				for (ConvertibleObject obj : thirdLayerObjects) {
-					if (obj.getFile().getAbsolutePath().contentEquals(name)) {
+					if (obj.getFile().getAbsolutePath().contentEquals(file.getAbsolutePath())) {
 						return obj;
 					}
 				}

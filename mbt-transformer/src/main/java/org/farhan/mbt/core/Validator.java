@@ -1,5 +1,6 @@
 package org.farhan.mbt.core;
 
+import org.apache.commons.lang3.StringUtils;
 import org.farhan.validation.MBTEdgeValidator;
 import org.farhan.validation.MBTVertexValidator;
 
@@ -12,10 +13,10 @@ public class Validator {
 	public static String getObjectName(String messageName) {
 		// TODO move this to setCurrentMachineAndState
 		if (MBTVertexValidator.isVertex(messageName)) {
-			return MBTVertexValidator.getObjectName(messageName);
+			return StringUtils.capitalize(MBTVertexValidator.getObjectName(messageName));
 		}
 		if (MBTEdgeValidator.isEdge(messageName)) {
-			return MBTEdgeValidator.getObjectName(messageName);
+			return StringUtils.capitalize(MBTEdgeValidator.getObjectName(messageName));
 		}
 		return null;
 	}
@@ -23,10 +24,10 @@ public class Validator {
 	public static String getObjectType(String messageName) {
 		// TODO move this to setCurrentMachineAndState
 		if (MBTVertexValidator.isVertex(messageName)) {
-			return MBTVertexValidator.getObjectType(messageName);
+			return StringUtils.capitalize(MBTVertexValidator.getObjectType(messageName));
 		}
 		if (MBTEdgeValidator.isEdge(messageName)) {
-			return MBTEdgeValidator.getObjectType(messageName);
+			return StringUtils.capitalize(MBTEdgeValidator.getObjectType(messageName));
 		}
 		return null;
 	}
@@ -34,10 +35,10 @@ public class Validator {
 	public static String getComponentName(String messageName) {
 		// TODO move this to setCurrentMachineAndState
 		if (MBTVertexValidator.isVertex(messageName)) {
-			return MBTVertexValidator.getComponentName(messageName);
+			return StringUtils.capitalize(MBTVertexValidator.getComponentName(messageName));
 		}
 		if (MBTEdgeValidator.isEdge(messageName)) {
-			return MBTEdgeValidator.getComponentName(messageName);
+			return StringUtils.capitalize(MBTEdgeValidator.getComponentName(messageName));
 		}
 		return null;
 	}

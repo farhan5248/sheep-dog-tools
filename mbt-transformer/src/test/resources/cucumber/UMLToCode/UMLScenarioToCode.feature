@@ -46,7 +46,7 @@ Feature: UML Scenario To Code
           
               @Given("^The blah application, DataTable page, Top section will be as follows$")
               public void theBlahApplicationDatatablePageTopSectionWillBeAsFollows(DataTable dataTable) {
-                  BlahFactory.get("DataTablePage").setComponent("blah");
+                  BlahFactory.get("DataTablePage").setComponent("Blah");
                   BlahFactory.get("DataTablePage").setPath("DataTable");
                   BlahFactory.get("DataTablePage").assertInputOutputs(dataTable, "TopSection");
               }

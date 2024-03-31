@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.CaseUtils;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
@@ -48,8 +49,14 @@ public class UMLToCucumberConverter extends ToCodeConverter {
 		tgtObj.addBackground(background);
 	}
 
-	private void convertDataTable(Step step, Message stepSrc) {
-		tgtObj.createDataTable(step, srcObj.getDataTable(stepSrc));
+	private void convertDataTable(Step step, Message srcStep) {
+		tgtObj.createDataTable(step, srcObj.getDataTable(srcStep));
+
+		// TODO perhaps tgtObj and srcObj shouldn't be class attributes. This is because
+		// when there are multiple layers and therefore multiple objects they should
+		// either all be passed or all be class attributes
+		CucumberJavaWrapper tgtObj2 = getTgtObj2(srcStep);
+		tgtObj2.createDataTable(srcObj.getStep(srcStep));
 	}
 
 	private void convertDocString(Step step, Message stepSrc) {
@@ -92,6 +99,7 @@ public class UMLToCucumberConverter extends ToCodeConverter {
 	private void convertStep(AbstractScenario abstractScenario, Message srcStep) {
 		Step tgtStep = tgtObj.createStep(abstractScenario, srcObj.getStep(srcStep));
 		MethodDeclaration tgtStep2 = getTgtObj2(srcStep).createStep(srcObj.getStep(srcStep));
+		// TODO create tgtStep3 for state such as isPresent etc
 		if (srcObj.hasDocString(srcStep)) {
 			convertDocString(tgtStep, srcStep);
 		} else if (srcObj.hasDataTable(srcStep)) {
@@ -106,16 +114,17 @@ public class UMLToCucumberConverter extends ToCodeConverter {
 		return tgtStepDefObj;
 	}
 
-	private String getStepDefName(String step) {
-		String objectName = Validator.getObjectName(step);
-		String objectType = Validator.getObjectType(step);
-		String componentName = Validator.getComponentName(step);
+	private String getStepDefName(String stepName) {
+		String objectName = Validator.getObjectName(stepName);
+		String objectType = Validator.getObjectType(stepName);
+		String componentName = Validator.getComponentName(stepName);
 		if (componentName.isEmpty()) {
 			componentName = lastComponent;
+		} else {
+			lastComponent = componentName;
 		}
-		// TODO replace all / with file separator
-		return tgtPrj.getDir(tgtPrj.SECOND_LAYER) + "/" + componentName + "/" + StringUtils.capitalize(componentName)
-				+ StringUtils.capitalize(objectName) + StringUtils.capitalize(objectType) + "Steps.java";
+		return tgtPrj.getDir(tgtPrj.SECOND_LAYER) + File.separator + CaseUtils.toCamelCase(componentName, false, ' ')
+				+ File.separator + componentName + objectName + objectType + "Steps.java";
 	}
 
 	private void convertStepList(AbstractScenario abstractScenario, ArrayList<Message> stepList,

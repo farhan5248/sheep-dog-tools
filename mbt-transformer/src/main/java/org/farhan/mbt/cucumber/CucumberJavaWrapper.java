@@ -1,16 +1,21 @@
 package org.farhan.mbt.cucumber;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.CaseUtils;
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.Utilities;
+import org.farhan.mbt.core.Validator;
+import org.farhan.validation.MBTVertexValidator;
 
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier.Keyword;
+import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.utils.SourceRoot;
 
 public class CucumberJavaWrapper implements ConvertibleObject {
@@ -30,29 +35,49 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	public MethodDeclaration createStep(String stepName) {
-		String keyword = stepName.split(" ")[0];
-		String annotation = stepName.replaceFirst(keyword + " ", "");
-		String name = getMethodName(annotation);
+		PackageDeclaration component = theJavaClass.getPackageDeclaration().get();
+		String componentName = StringUtils.capitalize(component.getName().getIdentifier());
+		String objectName = Validator.getObjectName(stepName);
+		String objectType = Validator.getObjectType(stepName);
+		addImports(componentName);
 
-		// TODO initialise the class if this is the first step being added
-		// TODO add the imports
-		if (name.startsWith("set") || name.startsWith("assert")) {
-			ClassOrInterfaceDeclaration javaClassType = (ClassOrInterfaceDeclaration) theJavaClass.getType(0);
-			javaClassType.setInterface(true);
-		} else {
-
-		}
-		List<MethodDeclaration> methods = theJavaClass.getType(0).getMethodsByName(name);
-		if (methods.isEmpty()) {
-			MethodDeclaration aMethod = theJavaClass.getType(0).addMethod(name, Keyword.PUBLIC);
-			if (name.startsWith("set") || name.startsWith("assert")) {
+		MethodDeclaration aMethod = getStep(stepName);
+		if (aMethod == null) {
+			aMethod = theJavaClass.getType(0).addMethod(getMethodName(stepName), Keyword.PUBLIC);
+			if (getMethodName(stepName).startsWith("set") || getMethodName(stepName).startsWith("assert")) {
+				// TODO this is not needed because it should be done in createDataTable or
+				// createDocString
+				ClassOrInterfaceDeclaration javaClassType = (ClassOrInterfaceDeclaration) theJavaClass.getType(0);
+				javaClassType.setInterface(true);
 				aMethod.removeBody();
 			} else {
+				String keyword = stepName.split(" ")[0];
+				String annotation = stepName.replaceFirst(keyword + " ", "");
 				aMethod.addSingleMemberAnnotation("Given", "\"^" + annotation + "$\"");
+				BlockStmt body = aMethod.createBody();
+				body.addStatement(componentName + "Factory" + ".get(\"" + objectName + objectType
+						+ "\").setComponent(\"" + componentName + "\");");
+				body.addStatement(componentName + "Factory" + ".get(\"" + objectName + objectType + "\").setPath(\""
+						+ objectName + "\");");
 			}
-			return aMethod;
+		}
+		return aMethod;
+	}
+
+	public MethodDeclaration getStep(String stepName) {
+		List<MethodDeclaration> methods = theJavaClass.getType(0).getMethodsByName(getMethodName(stepName));
+		if (methods.isEmpty()) {
+			return null;
 		} else {
 			return methods.getFirst();
+		}
+	}
+
+	private void addImports(String componentName) {
+		if (theJavaClass.getImports().isEmpty()) {
+			theJavaClass.addImport("org.farhan.common." + componentName + "Factory");
+			theJavaClass.addImport("io.cucumber.java.en.Given");
+			theJavaClass.addImport("io.cucumber.datatable.DataTable");
 		}
 	}
 
@@ -67,8 +92,10 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		return theFile;
 	}
 
-	private String getMethodName(String name) {
-		String newName = name;
+	private String getMethodName(String stepName) {
+		String keyword = stepName.split(" ")[0];
+		String annotation = stepName.replaceFirst(keyword + " ", "");
+		String newName = annotation;
 		newName = newName.replaceAll("\\.", "");
 		newName = newName.replaceAll("\\-", "");
 		newName = newName.replaceAll("/", "");
@@ -87,7 +114,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 
 	@Override
 	public void load() {
-		if (theFile.exists() && theJavaClass.getTypes() != null) {
+		if (theFile.exists() && theJavaClass.getTypes() == null) {
 			SourceRoot javaSrcDir = new SourceRoot(theFile.getParentFile().toPath());
 			theJavaClass = javaSrcDir.parse("", theFile.getName());
 		}
@@ -105,6 +132,49 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	@Override
 	public void setFile(File theFile) {
 		this.theFile = theFile;
+	}
+
+	public void createDataTable(String stepName) {
+
+		// method parameter
+		getStep(stepName).addParameter("DataTable", "dataTable");
+		// object
+		String objectName = Validator.getObjectName(stepName);
+		String objectType = Validator.getObjectType(stepName);
+		// section
+		String detailsName = MBTVertexValidator.getDetailsName(stepName);
+		String detailsType = StringUtils.capitalize(MBTVertexValidator.getDetailsType(stepName));
+		String section = detailsName + detailsType;
+		if (!section.isEmpty() && !section.contentEquals("nullnull")) {
+			section = ", \"" + section.replace(" ", "") + "\"";
+		} else {
+			section = "";
+		}
+		// component
+		PackageDeclaration component = theJavaClass.getPackageDeclaration().get();
+		String componentName = StringUtils.capitalize(component.getName().getIdentifier());
+		// modality
+		String text = MBTVertexValidator.getStateModality(stepName);
+		String modality = "";
+		if (text == null) {
+			modality = "set";
+		} else {
+			if (text.endsWith("be")) {
+				if (text.startsWith("will")) {
+					modality = "assert";
+				}
+			} else if (text.startsWith("is")) {
+				if (text.endsWith("n't")) {
+					modality = "set";
+				}
+			} else {
+				// TODO throw an exception but generally the text should be valid by this point
+			}
+		}
+		// add the step
+		String statement = componentName + "Factory" + ".get(\"" + objectName + objectType + "\")." + modality
+				+ "InputOutputs(dataTable" + section + ");";
+		getStep(stepName).getBody().get().addStatement(statement);
 	}
 
 }
