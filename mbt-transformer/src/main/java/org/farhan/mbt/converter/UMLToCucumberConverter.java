@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.CaseUtils;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
@@ -59,8 +58,10 @@ public class UMLToCucumberConverter extends ToCodeConverter {
 		tgtObj2.createDataTable(srcObj.getStep(srcStep));
 	}
 
-	private void convertDocString(Step step, Message stepSrc) {
-		tgtObj.createDocString(step, srcObj.getDocString(stepSrc));
+	private void convertDocString(Step step, Message srcStep) {
+		tgtObj.createDocString(step, srcObj.getDocString(srcStep));
+		CucumberJavaWrapper tgtObj2 = getTgtObj2(srcStep);
+		tgtObj2.createDocString(srcObj.getStep(srcStep));
 	}
 
 	private void convertExamples(ScenarioOutline scenarioOutline, EAnnotation examplesSrc) {
@@ -104,7 +105,7 @@ public class UMLToCucumberConverter extends ToCodeConverter {
 			convertDocString(tgtStep, srcStep);
 		} else if (srcObj.hasDataTable(srcStep)) {
 			convertDataTable(tgtStep, srcStep);
-		}
+		} 
 	}
 
 	private CucumberJavaWrapper getTgtObj2(Message srcStep) {

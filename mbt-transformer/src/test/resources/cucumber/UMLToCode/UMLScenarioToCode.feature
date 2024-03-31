@@ -1,6 +1,5 @@
+@debug
 Feature: UML Scenario To Code
-
-# TODO Split into language elements
 
   Background: Create a feature file
 
@@ -31,7 +30,6 @@ Feature: UML Scenario To Code
           | tag1 |
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
 
-@debug
   Scenario: Create new step definition Java class with a data table for graph vertices
 
      Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahDataTablePageSteps.java file will be as follows
@@ -67,8 +65,8 @@ Feature: UML Scenario To Code
           public class BlahDocStringPageSteps {
           
               @Given("^The blah application, DocString page is as follows$")
-              public void theBlahApplicationDocStringPageIsAsFollows(String docString) {
-                  BlahFactory.get("DocStringPage").setComponent("blah");
+              public void theBlahApplicationDocstringPageIsAsFollows(String docString) {
+                  BlahFactory.get("DocStringPage").setComponent("Blah");
                   BlahFactory.get("DocStringPage").setPath("DocString");
                   BlahFactory.get("DocStringPage").setInputOutputs("Content", docString);
               }
@@ -90,7 +88,7 @@ Feature: UML Scenario To Code
           
               @Given("^The blah application, Object page is empty$")
               public void theBlahApplicationObjectPageIsEmpty() {
-                  BlahFactory.get("ObjectPage").setComponent("blah");
+                  BlahFactory.get("ObjectPage").setComponent("Blah");
                   BlahFactory.get("ObjectPage").setPath("Object");
                   BlahFactory.get("ObjectPage").setInputOutputs("Empty");
               }
@@ -112,7 +110,7 @@ Feature: UML Scenario To Code
           
               @Given("^The blah2 service, Json request is executed with$")
               public void theBlah2ServiceJsonRequestIsExecutedWith(DataTable dataTable) {
-                  Blah2Factory.get("JsonRequest").setComponent("blah2");
+                  Blah2Factory.get("JsonRequest").setComponent("Blah2");
                   Blah2Factory.get("JsonRequest").setPath("Json");
                   Blah2Factory.get("JsonRequest").setInputOutputs(dataTable);
                   Blah2Factory.get("JsonRequest").transition();
@@ -120,7 +118,7 @@ Feature: UML Scenario To Code
           
               @Given("^The blah2 service, Json request is sent$")
               public void theBlah2ServiceJsonRequestIsSent() {
-                  Blah2Factory.get("JsonRequest").setComponent("blah2");
+                  Blah2Factory.get("JsonRequest").setComponent("Blah2");
                   Blah2Factory.get("JsonRequest").setPath("Json");
                   Blah2Factory.get("JsonRequest").transition();
               }
