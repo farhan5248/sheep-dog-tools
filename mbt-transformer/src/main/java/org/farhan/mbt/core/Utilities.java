@@ -115,7 +115,6 @@ public class Utilities {
 				allResults += m.group(group);
 			}
 		}
-
 		if (allResults.isEmpty()) {
 			return defaultText;
 		} else {
@@ -158,7 +157,6 @@ public class Utilities {
 	public static String pad(String stringToPad, String padding, int padSize, boolean leftJustified) {
 		String retString = stringToPad;
 		retString = retString.trim();
-
 		for (int t = retString.length(); t < padSize; t++) {
 			if (leftJustified) {
 				retString = retString + padding;
@@ -181,8 +179,7 @@ public class Utilities {
 	}
 
 	public static String toLowerCamelCase(String text) {
-		text = toUpperCamelCase(text);
-		return text.substring(0, 1).toLowerCase() + text.substring(1);
+		return toUpperCamelCase(text).substring(0, 1).toLowerCase() + text.substring(1);
 	}
 
 	public static String removeLastComma(String newTitle) {

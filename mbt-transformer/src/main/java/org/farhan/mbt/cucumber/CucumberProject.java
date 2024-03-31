@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
 
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+
 public class CucumberProject extends ConvertibleProject {
 
 	private ArrayList<ConvertibleObject> firstLayerObjects;
@@ -33,13 +35,13 @@ public class CucumberProject extends ConvertibleProject {
 		File aFile = null;
 		switch (layer) {
 		case FIRST_LAYER:
-			aFile = new File(baseDir + "src/test/resources/cucumber/");
+			aFile = new File(baseDir + "src/test/resources/cucumber");
 			break;
 		case SECOND_LAYER:
-			aFile = new File(baseDir + "src/test/java/org/farhan/" + SECOND_LAYER + "/");
+			aFile = new File(baseDir + "src/test/java/org/farhan/" + SECOND_LAYER);
 			break;
 		case THIRD_LAYER:
-			aFile = new File(baseDir + "src/test/java/org/farhan/" + THIRD_LAYER + "/");
+			aFile = new File(baseDir + "src/test/java/org/farhan/" + THIRD_LAYER);
 			break;
 		}
 		aFile.mkdirs();
@@ -79,32 +81,49 @@ public class CucumberProject extends ConvertibleProject {
 
 	@Override
 	public ConvertibleObject createObject(String name) {
+		ConvertibleObject aConvertibleObject = getObject(name);
+		if (aConvertibleObject != null) {
+			return aConvertibleObject;
+		}
+		// TODO the creatObject methods should be the only one appending the basedir
 		File file = new File(name);
-		if (file.getAbsolutePath().contains(getDir(FIRST_LAYER).getName())) {
-			CucumberFeatureWrapper aConvertibleObject = new CucumberFeatureWrapper(file);
+		if (file.getAbsolutePath().startsWith(getDir(FIRST_LAYER).getAbsolutePath())) {
+			aConvertibleObject = new CucumberFeatureWrapper(file);
 			firstLayerObjects.add(aConvertibleObject);
 			return aConvertibleObject;
 		} else {
-			CucumberJavaWrapper aConvertibleObject = new CucumberJavaWrapper(file);
-			if (file.getAbsolutePath().contains(getDir(SECOND_LAYER).getName())) {
+			aConvertibleObject = new CucumberJavaWrapper(file);
+			if (file.getAbsolutePath().startsWith(getDir(SECOND_LAYER).getAbsolutePath())) {
 				secondLayerObjects.add(aConvertibleObject);
-			} else if (file.getAbsolutePath().contains(getDir(THIRD_LAYER).getName())) {
+			} else if (file.getAbsolutePath().startsWith(getDir(THIRD_LAYER).getAbsolutePath())) {
 				thirdLayerObjects.add(aConvertibleObject);
 			}
 			return aConvertibleObject;
 		}
 	}
 
-	public ConvertibleObject getObject(String componentName, String objectName, String layer) {
-		if (layer.contentEquals(SECOND_LAYER)) {
-			String name = getDir(SECOND_LAYER) + "/" + componentName + "/" + objectName + ".java";
-			for (ConvertibleObject obj : secondLayerObjects) {
-				CucumberJavaWrapper cjw = (CucumberJavaWrapper) obj;
-				if (cjw.getFile().getAbsolutePath().contentEquals(name)) {
-					return cjw;
+	public ConvertibleObject getObject(String name) {
+		File file = new File(name);
+		if (file.getAbsolutePath().startsWith(getDir(FIRST_LAYER).getAbsolutePath())) {
+			for (ConvertibleObject obj : firstLayerObjects) {
+				if (obj.getFile().getAbsolutePath().contentEquals(name)) {
+					return obj;
 				}
 			}
-			createObject(name);
+		} else {
+			if (file.getAbsolutePath().startsWith(getDir(SECOND_LAYER).getAbsolutePath())) {
+				for (ConvertibleObject obj : secondLayerObjects) {
+					if (obj.getFile().getAbsolutePath().contentEquals(name)) {
+						return obj;
+					}
+				}
+			} else if (file.getAbsolutePath().startsWith(getDir(THIRD_LAYER).getAbsolutePath())) {
+				for (ConvertibleObject obj : thirdLayerObjects) {
+					if (obj.getFile().getAbsolutePath().contentEquals(name)) {
+						return obj;
+					}
+				}
+			}
 		}
 		return null;
 	}

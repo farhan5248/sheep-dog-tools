@@ -22,7 +22,7 @@ public abstract class ToCodeConverter {
 		for (ConvertibleObject co : getObjects(getLayer())) {
 			convertObject(co);
 			convertImports(co);
-			convertBehaviours(co);
+			convertAbstractScenarioList(co);
 		}
 	}
 
@@ -30,7 +30,7 @@ public abstract class ToCodeConverter {
 
 	protected abstract void convertImports(ConvertibleObject co) throws Exception;
 
-	protected abstract void convertBehaviours(ConvertibleObject co) throws Exception;
+	protected abstract void convertAbstractScenarioList(ConvertibleObject co) throws Exception;
 
 	protected abstract void convertInteractionMessages(Interaction anInteraction, Object stepList) throws Exception;
 

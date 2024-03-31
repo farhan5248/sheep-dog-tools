@@ -107,7 +107,7 @@ public class UMLToJavaConverter extends ToCodeConverter {
 	}
 
 	@Override
-	protected void convertBehaviours(ConvertibleObject co) throws Exception {
+	protected void convertAbstractScenarioList(ConvertibleObject co) throws Exception {
 		UMLClassWrapper ucw = (UMLClassWrapper) co;
 		Class c = (Class) ucw.get();
 		CompilationUnit cu = (CompilationUnit) tgtWrp.get();

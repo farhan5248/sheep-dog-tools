@@ -1,4 +1,3 @@
-@debug
 Feature: UML Scenario To Code
 
 # TODO Split into language elements
@@ -32,6 +31,7 @@ Feature: UML Scenario To Code
           | tag1 |
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
 
+@debug
   Scenario: Create new step definition Java class with a data table for graph vertices
 
      Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahDataTablePageSteps.java file will be as follows
@@ -45,7 +45,7 @@ Feature: UML Scenario To Code
           public class BlahDataTablePageSteps {
           
               @Given("^The blah application, DataTable page, Top section will be as follows$")
-              public void theBlahApplicationDataTablePageTopSectionWillBeAsFollows(DataTable dataTable) {
+              public void theBlahApplicationDatatablePageTopSectionWillBeAsFollows(DataTable dataTable) {
                   BlahFactory.get("DataTablePage").setComponent("blah");
                   BlahFactory.get("DataTablePage").setPath("DataTable");
                   BlahFactory.get("DataTablePage").assertInputOutputs(dataTable, "TopSection");

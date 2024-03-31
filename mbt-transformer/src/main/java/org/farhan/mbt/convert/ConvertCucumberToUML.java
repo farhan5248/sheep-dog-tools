@@ -3,7 +3,6 @@ package org.farhan.mbt.convert;
 import java.util.ArrayList;
 
 import org.farhan.mbt.converter.CucumberToUMLConverter;
-import org.farhan.mbt.converter.JavaToUMLConverter;
 import org.farhan.mbt.core.ConvertToUML;
 import org.farhan.mbt.core.ToUMLConverter;
 import org.farhan.mbt.cucumber.CucumberProject;
@@ -18,8 +17,6 @@ public class ConvertCucumberToUML extends ConvertToUML {
 	protected ArrayList<ToUMLConverter> getLayerConverters() {
 		ArrayList<ToUMLConverter> converters = new ArrayList<ToUMLConverter>();
 		converters.add(new CucumberToUMLConverter(source.FIRST_LAYER, source, target));
-		converters.add(new JavaToUMLConverter(source.SECOND_LAYER, source, target));
-		converters.add(new JavaToUMLConverter(source.THIRD_LAYER, source, target));
 		return converters;
 	}
 
