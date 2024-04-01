@@ -50,18 +50,17 @@ public class UMLToCucumberConverter extends ToCodeConverter {
 
 	private void convertDataTable(Step step, Message srcStep) {
 		tgtObj.createDataTable(step, srcObj.getDataTable(srcStep));
-
 		// TODO perhaps tgtObj and srcObj shouldn't be class attributes. This is because
 		// when there are multiple layers and therefore multiple objects they should
 		// either all be passed or all be class attributes
-		CucumberJavaWrapper tgtObj2 = getTgtObj2(srcStep);
-		tgtObj2.createDataTable(srcObj.getStep(srcStep));
+		getTgtObj2(srcStep).createDataTable(srcObj.getStep(srcStep), srcObj.getDataTable(srcStep));
+		getTgtObj3(srcStep).createDataTable(srcObj.getStep(srcStep), srcObj.getDataTable(srcStep));
 	}
 
 	private void convertDocString(Step step, Message srcStep) {
 		tgtObj.createDocString(step, srcObj.getDocString(srcStep));
-		CucumberJavaWrapper tgtObj2 = getTgtObj2(srcStep);
-		tgtObj2.createDocString(srcObj.getStep(srcStep));
+		getTgtObj2(srcStep).createDocString(srcObj.getStep(srcStep));
+		getTgtObj3(srcStep).createDocString(srcObj.getStep(srcStep));
 	}
 
 	private void convertExamples(ScenarioOutline scenarioOutline, EAnnotation examplesSrc) {
@@ -99,13 +98,20 @@ public class UMLToCucumberConverter extends ToCodeConverter {
 
 	private void convertStep(AbstractScenario abstractScenario, Message srcStep) {
 		Step tgtStep = tgtObj.createStep(abstractScenario, srcObj.getStep(srcStep));
-		MethodDeclaration tgtStep2 = getTgtObj2(srcStep).createStep(srcObj.getStep(srcStep));
-		// TODO create tgtStep3 for state such as isPresent etc
+		getTgtObj2(srcStep).createStep(srcObj.getStep(srcStep));
+		getTgtObj3(srcStep).createStep(srcObj.getStep(srcStep));
 		if (srcObj.hasDocString(srcStep)) {
 			convertDocString(tgtStep, srcStep);
 		} else if (srcObj.hasDataTable(srcStep)) {
 			convertDataTable(tgtStep, srcStep);
-		} 
+		}
+	}
+
+	private CucumberJavaWrapper getTgtObj3(Message srcStep) {
+		CucumberJavaWrapper tgtStepDefObj = (CucumberJavaWrapper) tgtPrj
+				.createObject(getStepObjName(srcObj.getStep(srcStep)));
+		tgtStepDefObj.load();
+		return tgtStepDefObj;
 	}
 
 	private CucumberJavaWrapper getTgtObj2(Message srcStep) {
@@ -113,6 +119,19 @@ public class UMLToCucumberConverter extends ToCodeConverter {
 				.createObject(getStepDefName(srcObj.getStep(srcStep)));
 		tgtStepDefObj.load();
 		return tgtStepDefObj;
+	}
+
+	private String getStepObjName(String stepName) {
+		String objectName = Validator.getObjectName(stepName);
+		String objectType = Validator.getObjectType(stepName);
+		String componentName = Validator.getComponentName(stepName);
+		if (componentName.isEmpty()) {
+			componentName = lastComponent;
+		} else {
+			lastComponent = componentName;
+		}
+		return tgtPrj.getDir(tgtPrj.THIRD_LAYER) + File.separator + CaseUtils.toCamelCase(componentName, false, ' ')
+				+ File.separator + objectName + objectType + ".java";
 	}
 
 	private String getStepDefName(String stepName) {

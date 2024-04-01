@@ -8,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.CaseUtils;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Validator;
-import org.farhan.validation.MBTEdgeValidator;
 import org.farhan.validation.MBTVertexValidator;
 
 import com.github.javaparser.ast.CompilationUnit;
@@ -33,90 +32,122 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		javaClassType.setPublic(true);
 		theJavaClass.addType(javaClassType);
 		theJavaClass.setPackageDeclaration(getPackageDeclaration());
+		if (isStepObj()) {
+			getType().setInterface(true);
+		}
+	}
+
+	private void addAnnotation(MethodDeclaration aMethod, String step) {
+		String keyword = getKeyword(step);
+		String stepName = getStepName(step, keyword);
+		aMethod.addSingleMemberAnnotation("Given", "\"^" + stepName + "$\"");
 	}
 
 	private void addImports(String componentName) {
 		if (theJavaClass.getImports().isEmpty()) {
-			theJavaClass.addImport("org.farhan.common." + componentName + "Factory");
-			theJavaClass.addImport("io.cucumber.java.en.Given");
-			theJavaClass.addImport("io.cucumber.datatable.DataTable");
+			if (isStepObj()) {
+				theJavaClass.addImport("java.util.HashMap");
+			} else {
+				theJavaClass.addImport("org.farhan.common." + componentName + "Factory");
+				theJavaClass.addImport("io.cucumber.java.en.Given");
+				theJavaClass.addImport("io.cucumber.datatable.DataTable");
+			}
 		}
 	}
 
-	
-	
-	private void addAttachmentStatement(String stepName, String arguments) {
-		// TODO be consistent about capitalize and toLowerCase. Validator needs to be
-		// renamed to something more appropriate. Then all methods like getSection or
-		// getComponentName should be moved there
-		String objectName = Validator.getObjectName(stepName);
-		String objectType = Validator.getObjectType(stepName);
-		String sectionName = getSection(stepName);
-		String componentName = getComponentName(stepName);
-		String modality = getSetAssert(stepName);
+	private void addStatementForAttachment(String step, String arguments) {
+		String objectName = Validator.getObjectName(step);
+		String objectType = Validator.getObjectType(step);
+		String sectionName = getSection(step);
+		String componentName = getComponentName(step);
+		String modality = getModality(step);
 		String statementName = componentName + "Factory" + ".get(\"" + objectName + objectType + "\")." + modality
 				+ "InputOutputs(" + arguments + sectionName + ");";
-		BlockStmt body = getStep(stepName).getBody().get();
+		BlockStmt body = getMethod(getMethodNameForStepDef(step)).getBody().get();
 		body.addStatement(statementName);
-		// this needs to be before transition so put a copy at position 2 and delete the
-		// ref at the end
+		// this needs to be before transition so
+		// put a copy at position 2 and delete the ref at the end
 		body.getStatements().add(2, body.getStatements().getLast().get());
 		body.getStatements().removeLast();
 	}
 
-	public void createDataTable(String stepName) {
-		getStep(stepName).addParameter("DataTable", "dataTable");
-		addAttachmentStatement(stepName, "dataTable");
+	private void addStatementForComponent(BlockStmt body, String componentName, String objectName, String objectType) {
+		body.addStatement(componentName + "Factory" + ".get(\"" + objectName + objectType + "\").setComponent(\""
+				+ componentName + "\");");
 	}
 
-	public void createDocString(String stepName) {
-		getStep(stepName).addParameter("String", "docString");
-		addAttachmentStatement(stepName, "\"Content\", docString");
+	private void addStatementForPath(BlockStmt body, String componentName, String objectName, String objectType) {
+		body.addStatement(componentName + "Factory" + ".get(\"" + objectName + objectType + "\").setPath(\""
+				+ objectName + "\");");
 	}
 
-	public MethodDeclaration createStep(String stepName) {
-		PackageDeclaration component = theJavaClass.getPackageDeclaration().get();
-		String componentName = StringUtils.capitalize(component.getName().getIdentifier());
-		String objectName = Validator.getObjectName(stepName);
-		String objectType = Validator.getObjectType(stepName);
+	private void addStatementForState(BlockStmt body, String step, String componentName, String objectName,
+			String objectType, String objectState) {
+		body.addStatement(componentName + "Factory" + ".get(\"" + objectName + objectType + "\").setInputOutputs(\""
+				+ objectState + "\");");
+	}
+
+	private void addStatementForTransition(BlockStmt body, String step, String componentName, String objectName,
+			String objectType) {
+		body.addStatement(componentName + "Factory" + ".get(\"" + objectName + objectType + "\").transition();");
+	}
+
+	public void createDataTable(String step, ArrayList<ArrayList<String>> dataTable) {
+		if (isStepObj()) {
+			String modality = getModality(step);
+			for (String columnName : dataTable.getFirst()) {
+				getMethod(modality + StringUtils.capitalize(columnName)).removeBody();
+			}
+		} else {
+			getMethod(getMethodNameForStepDef(step)).addParameter("DataTable", "dataTable");
+			addStatementForAttachment(step, "dataTable");
+		}
+	}
+
+	public void createDocString(String step) {
+		if (isStepObj()) {
+			String modality = getModality(step);
+			getMethod(modality + "Content").removeBody();
+		} else {
+			getMethod(getMethodNameForStepDef(step)).addParameter("String", "docString");
+			addStatementForAttachment(step, "\"Content\", docString");
+		}
+	}
+
+	public MethodDeclaration createStep(String step) {
+		String componentName = getComponentName(step);
+		String objectName = Validator.getObjectName(step);
+		String objectType = Validator.getObjectType(step);
+		String objectState = Validator.getObjectState(step);
+		String modality = getModality(step);
 		addImports(componentName);
-
-		MethodDeclaration aMethod = getStep(stepName);
-		if (aMethod == null) {
-			aMethod = theJavaClass.getType(0).addMethod(getMethodName(stepName), Keyword.PUBLIC);
-			if (getMethodName(stepName).startsWith("set") || getMethodName(stepName).startsWith("assert")) {
-				// TODO this is not needed because it should be done in createDataTable or
-				// createDocString
-				ClassOrInterfaceDeclaration javaClassType = (ClassOrInterfaceDeclaration) theJavaClass.getType(0);
-				javaClassType.setInterface(true);
+		if (isStepObj()) {
+			if (!Validator.isEdge(step) && Validator.getObjectAttachment(step).isEmpty()) {
+				MethodDeclaration aMethod = getMethod(modality + objectState);
 				aMethod.removeBody();
+				return aMethod;
 			} else {
-				String keyword = stepName.split(" ")[0];
-				String annotation = stepName.replaceFirst(keyword + " ", "");
-				aMethod.addSingleMemberAnnotation("Given", "\"^" + annotation + "$\"");
-				BlockStmt body = aMethod.createBody();
-
-				addAttachmentStatement(stepName, "dataTable");
-
-				body.addStatement(componentName + "Factory" + ".get(\"" + objectName + objectType
-						+ "\").setComponent(\"" + componentName + "\");");
-				body.addStatement(componentName + "Factory" + ".get(\"" + objectName + objectType + "\").setPath(\""
-						+ objectName + "\");");
-				String attachment = MBTVertexValidator.getAttachment(stepName);
-				if (attachment != null) {
-					if (attachment.isEmpty()) {
-						body.addStatement(componentName + "Factory" + ".get(\"" + objectName + objectType
-								+ "\").setInputOutputs(\""
-								+ StringUtils.capitalize(MBTVertexValidator.getStateType(stepName)) + "\");");
-					}
-				}
-				if (MBTEdgeValidator.isEdge(stepName)) {
-					body.addStatement(
-							componentName + "Factory" + ".get(\"" + objectName + objectType + "\").transition();");
+				// data table or doc string will cover this
+				return null;
+			}
+		} else {
+			MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(step));
+			addAnnotation(aMethod, step);
+			BlockStmt body = aMethod.getBody().get();
+			if (body.isEmpty()) {
+				body = aMethod.createBody();
+			}
+			addStatementForComponent(body, componentName, objectName, objectType);
+			addStatementForPath(body, componentName, objectName, objectType);
+			if (Validator.isEdge(step)) {
+				addStatementForTransition(body, step, componentName, objectName, objectType);
+			} else {
+				if (Validator.getObjectAttachment(step).isEmpty()) {
+					addStatementForState(body, step, componentName, objectName, objectType, objectState);
 				}
 			}
+			return aMethod;
 		}
-		return aMethod;
 	}
 
 	@Override
@@ -135,21 +166,51 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		return theFile;
 	}
 
-	private String getMethodName(String stepName) {
-		String keyword = stepName.split(" ")[0];
-		String annotation = stepName.replaceFirst(keyword + " ", "");
-		String newName = annotation;
-		// TODO fine a regex to remove all special characters or everthing that's not
-		// a-zA-Z0-9
-		newName = newName.replaceAll("\\.", "");
-		newName = newName.replaceAll("\\-", "");
-		newName = newName.replaceAll("/", "");
-		newName = newName.replaceAll(",", "");
-		newName = CaseUtils.toCamelCase(newName, false, ' ');
-		return newName;
+	private String getKeyword(String stepName) {
+		return stepName.split(" ")[0];
 	}
 
-	private String getSetAssert(String stepName) {
+	public MethodDeclaration getMethod(String methodName) {
+		List<MethodDeclaration> methods = getType().getMethodsByName(methodName);
+		if (methods.isEmpty()) {
+			return getType().addMethod(methodName, Keyword.PUBLIC);
+		} else {
+			return methods.getFirst();
+		}
+	}
+
+	private String getMethodNameForStepDef(String step) {
+		String methodName = step.replaceFirst(getKeyword(step) + " ", "");
+		// TODO fine a regex to remove all special characters or everthing that's not
+		// a-zA-Z0-9
+		methodName = methodName.replaceAll("\\.", "");
+		methodName = methodName.replaceAll("\\-", "");
+		methodName = methodName.replaceAll("/", "");
+		methodName = methodName.replaceAll(",", "");
+		methodName = CaseUtils.toCamelCase(methodName, false, ' ');
+		return methodName;
+	}
+
+	private String getPackageDeclaration() {
+		String packageName = theFile.getAbsolutePath()
+				.replaceAll("\\" + File.separator + "[^\\" + File.separator + "]*$", "");
+		packageName = packageName.replace(File.separator, ".");
+		// TODO use src.test.java instead of org.farhan.
+		packageName = packageName.replaceFirst("^.*org.farhan", "org.farhan");
+		return packageName;
+	}
+
+	private String getSection(String stepName) {
+		String section = Validator.getDetailsName(stepName) + Validator.getDetailsType(stepName);
+		if (!section.isEmpty() && !section.contentEquals("nullnull")) {
+			section = ", \"" + section.replace(" ", "") + "\"";
+		} else {
+			section = "";
+		}
+		return section;
+	}
+
+	private String getModality(String stepName) {
 		String text = MBTVertexValidator.getStateModality(stepName);
 		String modality = "";
 		if (text == null) {
@@ -166,33 +227,19 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		return modality;
 	}
 
-	private String getPackageDeclaration() {
-		String packageName = theFile.getAbsolutePath()
-				.replaceAll("\\" + File.separator + "[^\\" + File.separator + "]*$", "");
-		packageName = packageName.replace(File.separator, ".");
-		// TODO use src.test.java instead of org.farhan.
-		packageName = packageName.replaceFirst("^.*org.farhan", "org.farhan");
-		return packageName;
+	private String getStepName(String stepName, String keyword) {
+		return stepName.replaceFirst(keyword + " ", "");
 	}
 
-	private String getSection(String stepName) {
-		String detailsName = MBTVertexValidator.getDetailsName(stepName);
-		String detailsType = StringUtils.capitalize(MBTVertexValidator.getDetailsType(stepName));
-		String section = detailsName + detailsType;
-		if (!section.isEmpty() && !section.contentEquals("nullnull")) {
-			section = ", \"" + section.replace(" ", "") + "\"";
-		} else {
-			section = "";
-		}
-		return section;
+	private ClassOrInterfaceDeclaration getType() {
+		return (ClassOrInterfaceDeclaration) theJavaClass.getType(0);
 	}
 
-	public MethodDeclaration getStep(String stepName) {
-		List<MethodDeclaration> methods = theJavaClass.getType(0).getMethodsByName(getMethodName(stepName));
-		if (methods.isEmpty()) {
-			return null;
+	private boolean isStepObj() {
+		if (getType().getName().asString().endsWith("Steps")) {
+			return false;
 		} else {
-			return methods.getFirst();
+			return true;
 		}
 	}
 

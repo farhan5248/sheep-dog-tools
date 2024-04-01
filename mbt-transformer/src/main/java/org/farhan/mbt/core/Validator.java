@@ -6,61 +6,76 @@ import org.farhan.validation.MBTVertexValidator;
 
 public class Validator {
 
-	public static boolean validateStepText(String messageName) {
-		return MBTVertexValidator.isValid(messageName) || MBTEdgeValidator.isValid(messageName);
+	public static String getObjectAttachment(String stepName) {
+		if (MBTVertexValidator.isVertex(stepName)) {
+			return MBTVertexValidator.getAttachment(stepName);
+		} else {
+			return MBTEdgeValidator.getAttachment(stepName);
+		}
 	}
 
-	public static String getObjectName(String messageName) {
-		// TODO move this to setCurrentMachineAndState
-		if (MBTVertexValidator.isVertex(messageName)) {
-			return StringUtils.capitalize(MBTVertexValidator.getObjectName(messageName));
+	public static String getComponentName(String stepName) {
+		if (MBTVertexValidator.isVertex(stepName)) {
+			return StringUtils.capitalize(MBTVertexValidator.getComponentName(stepName));
+		} else {
+			return StringUtils.capitalize(MBTEdgeValidator.getComponentName(stepName));
 		}
-		if (MBTEdgeValidator.isEdge(messageName)) {
-			return StringUtils.capitalize(MBTEdgeValidator.getObjectName(messageName));
-		}
-		return null;
 	}
 
-	public static String getObjectType(String messageName) {
-		// TODO move this to setCurrentMachineAndState
-		if (MBTVertexValidator.isVertex(messageName)) {
-			return StringUtils.capitalize(MBTVertexValidator.getObjectType(messageName));
+	public static String getObjectName(String stepName) {
+		if (MBTVertexValidator.isVertex(stepName)) {
+			return StringUtils.capitalize(MBTVertexValidator.getObjectName(stepName));
+		} else {
+			return StringUtils.capitalize(MBTEdgeValidator.getObjectName(stepName));
 		}
-		if (MBTEdgeValidator.isEdge(messageName)) {
-			return StringUtils.capitalize(MBTEdgeValidator.getObjectType(messageName));
-		}
-		return null;
 	}
 
-	public static String getComponentName(String messageName) {
-		// TODO move this to setCurrentMachineAndState
-		if (MBTVertexValidator.isVertex(messageName)) {
-			return StringUtils.capitalize(MBTVertexValidator.getComponentName(messageName));
+	public static String getObjectState(String stepName) {
+		if (MBTVertexValidator.isVertex(stepName)) {
+			return StringUtils.capitalize(MBTVertexValidator.getStateType(stepName));
+		} else {
+			return StringUtils.capitalize(MBTEdgeValidator.getStateType(stepName));
 		}
-		if (MBTEdgeValidator.isEdge(messageName)) {
-			return StringUtils.capitalize(MBTEdgeValidator.getComponentName(messageName));
-		}
-		return null;
 	}
 
-	public static boolean isContainerStep(String messageName) {
-		if (MBTVertexValidator.isVertex(messageName)) {
-			return MBTVertexValidator.isComponentStep(messageName);
+	public static String getObjectType(String stepName) {
+		if (MBTVertexValidator.isVertex(stepName)) {
+			return StringUtils.capitalize(MBTVertexValidator.getObjectType(stepName));
+		} else {
+			return StringUtils.capitalize(MBTEdgeValidator.getObjectType(stepName));
 		}
-		if (MBTEdgeValidator.isEdge(messageName)) {
-			return MBTEdgeValidator.isComponentStep(messageName);
-		}
-		return false;
 	}
 
-	public static boolean isNegativeStep(String messageName) {
-		if (MBTVertexValidator.isVertex(messageName)) {
-			return MBTVertexValidator.isNegativeStep(messageName);
+	public static boolean isContainerStep(String stepName) {
+		if (MBTVertexValidator.isVertex(stepName)) {
+			return MBTVertexValidator.isComponentStep(stepName);
+		} else {
+			return MBTEdgeValidator.isComponentStep(stepName);
 		}
-		if (MBTEdgeValidator.isEdge(messageName)) {
-			return MBTEdgeValidator.isNegativeStep(messageName);
+	}
+
+	public static boolean isEdge(String stepName) {
+		return MBTEdgeValidator.isEdge(stepName);
+	}
+
+	public static boolean isNegativeStep(String stepName) {
+		if (MBTVertexValidator.isVertex(stepName)) {
+			return MBTVertexValidator.isNegativeStep(stepName);
+		} else {
+			return MBTEdgeValidator.isNegativeStep(stepName);
 		}
-		return false;
+	}
+
+	public static boolean validateStepText(String stepName) {
+		return MBTVertexValidator.isValid(stepName) || MBTEdgeValidator.isValid(stepName);
+	}
+
+	public static String getDetailsName(String stepName) {
+		return StringUtils.capitalize(MBTVertexValidator.getDetailsName(stepName));
+	}
+
+	public static String getDetailsType(String stepName) {
+		return StringUtils.capitalize(MBTVertexValidator.getDetailsType(stepName));
 	}
 
 }
