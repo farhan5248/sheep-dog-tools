@@ -116,14 +116,14 @@ Feature: Code To Code
           public class BlahObjectPageSteps {
           
               @Given("^The blah application, something/Object page is as follows$")
-              public void theBlahApplicationSomethingObjectPageIsAsFollows(String docString) {
+              public void theBlahApplicationSomethingobjectPageIsAsFollows(String docString) {
                   BlahFactory.get("ObjectPage").setComponent("Blah");
                   BlahFactory.get("ObjectPage").setPath("something/Object");
                   BlahFactory.get("ObjectPage").setInputOutputs("Content", docString);
               }
           
               @Given("^The blah application, something/Object page is empty$")
-              public void theBlahApplicationSomethingObjectPageIsEmpty() {
+              public void theBlahApplicationSomethingobjectPageIsEmpty() {
                   BlahFactory.get("ObjectPage").setComponent("Blah");
                   BlahFactory.get("ObjectPage").setPath("something/Object");
                   BlahFactory.get("ObjectPage").setInputOutputs("Empty");

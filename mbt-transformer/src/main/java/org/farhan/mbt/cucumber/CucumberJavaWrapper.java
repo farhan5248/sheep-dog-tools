@@ -40,7 +40,9 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	private void addAnnotation(MethodDeclaration aMethod, String step) {
 		String keyword = getKeyword(step);
 		String stepName = getStepName(step, keyword);
-		aMethod.addSingleMemberAnnotation("Given", "\"^" + stepName + "$\"");
+		if (aMethod.getAnnotations().isEmpty()) {
+			aMethod.addSingleMemberAnnotation("Given", "\"^" + stepName + "$\"");
+		}
 	}
 
 	private void addImports(String componentName) {
@@ -76,9 +78,10 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 				+ componentName + "\");");
 	}
 
-	private void addStatementForPath(BlockStmt body, String componentName, String objectName, String objectType) {
-		body.addStatement(componentName + "Factory" + ".get(\"" + objectName + objectType + "\").setPath(\""
-				+ objectName + "\");");
+	private void addStatementForPath(BlockStmt body, String componentName, String objectName, String objectType,
+			String object) {
+		body.addStatement(
+				componentName + "Factory" + ".get(\"" + objectName + objectType + "\").setPath(\"" + object + "\");");
 	}
 
 	private void addStatementForState(BlockStmt body, String step, String componentName, String objectName,
@@ -116,6 +119,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 
 	public MethodDeclaration createStep(String step) {
 		String componentName = getComponentName(step);
+		String object = Validator.getObject(step);
 		String objectName = Validator.getObjectName(step);
 		String objectType = Validator.getObjectType(step);
 		String objectState = Validator.getObjectState(step);
@@ -136,14 +140,14 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 			BlockStmt body = aMethod.getBody().get();
 			if (body.isEmpty()) {
 				body = aMethod.createBody();
-			}
-			addStatementForComponent(body, componentName, objectName, objectType);
-			addStatementForPath(body, componentName, objectName, objectType);
-			if (Validator.isEdge(step)) {
-				addStatementForTransition(body, step, componentName, objectName, objectType);
-			} else {
-				if (Validator.getObjectAttachment(step).isEmpty()) {
-					addStatementForState(body, step, componentName, objectName, objectType, objectState);
+				addStatementForComponent(body, componentName, objectName, objectType);
+				addStatementForPath(body, componentName, objectName, objectType, object);
+				if (Validator.isEdge(step)) {
+					addStatementForTransition(body, step, componentName, objectName, objectType);
+				} else {
+					if (Validator.getObjectAttachment(step).isEmpty()) {
+						addStatementForState(body, step, componentName, objectName, objectType, objectState);
+					}
 				}
 			}
 			return aMethod;

@@ -22,11 +22,21 @@ public class Validator {
 		}
 	}
 
+	public static String getObject(String stepName) {
+		if (MBTVertexValidator.isVertex(stepName)) {
+			return MBTVertexValidator.getObjectName(stepName);
+		} else {
+			return MBTEdgeValidator.getObjectName(stepName);
+		}
+	}
+
 	public static String getObjectName(String stepName) {
 		if (MBTVertexValidator.isVertex(stepName)) {
-			return StringUtils.capitalize(MBTVertexValidator.getObjectName(stepName));
+			String[] nameParts = StringUtils.capitalize(MBTVertexValidator.getObjectName(stepName)).split("/");
+			return nameParts[nameParts.length - 1];
 		} else {
-			return StringUtils.capitalize(MBTEdgeValidator.getObjectName(stepName));
+			String[] nameParts = StringUtils.capitalize(MBTEdgeValidator.getObjectName(stepName)).split("/");
+			return nameParts[nameParts.length - 1];
 		}
 	}
 
