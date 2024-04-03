@@ -121,8 +121,6 @@ public class UMLToCucumberConverter extends ToCodeConverter {
 
 	private String getStepObjName(String stepName) {
 		String objectName = Validator.getObjectName(stepName);
-		objectName = objectName.replaceAll("\\.", " ");
-		objectName = objectName.replaceAll("\\-", " ");
 		String objectType = Validator.getObjectType(stepName);
 		String componentName = Validator.getComponentName(stepName);
 		if (componentName.isEmpty()) {
@@ -131,13 +129,11 @@ public class UMLToCucumberConverter extends ToCodeConverter {
 			lastComponent = componentName;
 		}
 		return tgtPrj.getDir(tgtPrj.THIRD_LAYER) + File.separator + CaseUtils.toCamelCase(componentName, false, ' ')
-				+ File.separator + CaseUtils.toCamelCase(objectName, true, ' ') + objectType + ".java";
+				+ File.separator + objectName + objectType + ".java";
 	}
 
 	private String getStepDefName(String stepName) {
 		String objectName = Validator.getObjectName(stepName);
-		objectName = objectName.replaceAll("\\.", " ");
-		objectName = objectName.replaceAll("\\-", " ");
 		String objectType = Validator.getObjectType(stepName);
 		String componentName = Validator.getComponentName(stepName);
 		if (componentName.isEmpty()) {
@@ -146,8 +142,7 @@ public class UMLToCucumberConverter extends ToCodeConverter {
 			lastComponent = componentName;
 		}
 		return tgtPrj.getDir(tgtPrj.SECOND_LAYER) + File.separator + CaseUtils.toCamelCase(componentName, false, ' ')
-				+ File.separator + componentName + CaseUtils.toCamelCase(objectName, true, ' ') + objectType
-				+ "Steps.java";
+				+ File.separator + componentName + objectName + objectType + "Steps.java";
 	}
 
 	private void convertStepList(AbstractScenario abstractScenario, ArrayList<Message> stepList,

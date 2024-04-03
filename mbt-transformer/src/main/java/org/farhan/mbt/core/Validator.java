@@ -1,6 +1,7 @@
 package org.farhan.mbt.core;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.text.CaseUtils;
 import org.farhan.validation.MBTEdgeValidator;
 import org.farhan.validation.MBTVertexValidator;
 
@@ -15,11 +16,17 @@ public class Validator {
 	}
 
 	public static String getComponentName(String stepName) {
+		String[] nameParts;
 		if (MBTVertexValidator.isVertex(stepName)) {
-			return StringUtils.capitalize(MBTVertexValidator.getComponentName(stepName));
+			nameParts = MBTVertexValidator.getComponentName(stepName).split("/");
 		} else {
-			return StringUtils.capitalize(MBTEdgeValidator.getComponentName(stepName));
+			nameParts = MBTEdgeValidator.getComponentName(stepName).split("/");
 		}
+		String name = nameParts[nameParts.length - 1];
+		name = name.replaceAll("\\.", " ");
+		name = name.replaceAll("\\-", " ");
+		name = CaseUtils.toCamelCase(name, true, ' ');
+		return name;
 	}
 
 	public static String getObject(String stepName) {
@@ -31,13 +38,17 @@ public class Validator {
 	}
 
 	public static String getObjectName(String stepName) {
+		String[] nameParts;
 		if (MBTVertexValidator.isVertex(stepName)) {
-			String[] nameParts = MBTVertexValidator.getObjectName(stepName).split("/");
-			return StringUtils.capitalize(nameParts[nameParts.length - 1]);
+			nameParts = MBTVertexValidator.getObjectName(stepName).split("/");
 		} else {
-			String[] nameParts = MBTEdgeValidator.getObjectName(stepName).split("/");
-			return StringUtils.capitalize(nameParts[nameParts.length - 1]);
+			nameParts = MBTEdgeValidator.getObjectName(stepName).split("/");
 		}
+		String name = nameParts[nameParts.length - 1];
+		name = name.replaceAll("\\.", " ");
+		name = name.replaceAll("\\-", " ");
+		name = CaseUtils.toCamelCase(name, true, ' ');
+		return name;
 	}
 
 	public static String getObjectState(String stepName) {

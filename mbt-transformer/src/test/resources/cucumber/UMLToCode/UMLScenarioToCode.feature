@@ -44,9 +44,9 @@ Feature: UML Scenario To Code
           
               @Given("^The blah application, DataTable page, Top section will be as follows$")
               public void theBlahApplicationDatatablePageTopSectionWillBeAsFollows(DataTable dataTable) {
-                  BlahFactory.get("DataTablePage").setComponent("Blah");
-                  BlahFactory.get("DataTablePage").setPath("DataTable");
-                  BlahFactory.get("DataTablePage").assertInputOutputs(dataTable, "TopSection");
+                  BlahFactory.get("DatatablePage").setComponent("Blah");
+                  BlahFactory.get("DatatablePage").setPath("DataTable");
+                  BlahFactory.get("DatatablePage").assertInputOutputs(dataTable, "TopSection");
               }
           }
           
@@ -66,9 +66,9 @@ Feature: UML Scenario To Code
           
               @Given("^The blah application, DocString page is as follows$")
               public void theBlahApplicationDocstringPageIsAsFollows(String docString) {
-                  BlahFactory.get("DocStringPage").setComponent("Blah");
-                  BlahFactory.get("DocStringPage").setPath("DocString");
-                  BlahFactory.get("DocStringPage").setInputOutputs("Content", docString);
+                  BlahFactory.get("DocstringPage").setComponent("Blah");
+                  BlahFactory.get("DocstringPage").setPath("DocString");
+                  BlahFactory.get("DocstringPage").setInputOutputs("Content", docString);
               }
           }
           

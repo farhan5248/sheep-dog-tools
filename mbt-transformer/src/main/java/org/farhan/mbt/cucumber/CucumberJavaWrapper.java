@@ -36,6 +36,114 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		}
 	}
 
+	public void createDataTable(String step, ArrayList<ArrayList<String>> dataTable) {
+		String sectionName = Validator.getDetailsName(step) + Validator.getDetailsType(step);
+		if (isStepObj()) {
+			String modality = getModality(step);
+			for (String columnName : dataTable.getFirst()) {
+				getMethod(modality + sectionName + CaseUtils.toCamelCase(columnName, true, ' ')).removeBody()
+						.addParameter("HashMap<String, String>", "keyMap");
+			}
+		} else {
+			getMethod(getMethodNameForStepDef(step)).addParameter("DataTable", "dataTable");
+			addStatementForAttachment(step, "dataTable");
+		}
+	}
+
+	public void createDocString(String step) {
+		String sectionName = Validator.getDetailsName(step) + Validator.getDetailsType(step);
+		if (isStepObj()) {
+			String modality = getModality(step);
+			getMethod(modality + sectionName + "Content").removeBody().addParameter("HashMap<String, String>",
+					"keyMap");
+		} else {
+			getMethod(getMethodNameForStepDef(step)).addParameter("String", "docString");
+			addStatementForAttachment(step, "\"Content\", docString");
+		}
+	}
+
+	public MethodDeclaration createStep(String step) {
+		String componentName = getComponentName(step);
+		String object = Validator.getObject(step);
+		String objectName = Validator.getObjectName(step);
+		String objectType = Validator.getObjectType(step);
+		String sectionName = Validator.getDetailsName(step) + Validator.getDetailsType(step);
+		String objectState = Validator.getObjectState(step);
+		String modality = getModality(step);
+		addImports(componentName);
+		if (isStepObj()) {
+			if (!Validator.isEdge(step) && Validator.getObjectAttachment(step).isEmpty()) {
+				return getMethod(modality + sectionName.replace(" ", "") + objectState).removeBody()
+						.addParameter("HashMap<String, String>", "keyMap");
+			} else if (Validator.isEdge(step)) {
+				return getMethod("transition").removeBody();
+			} else {
+				// data table or doc string will cover this
+				return null;
+			}
+		} else {
+			MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(step));
+			addAnnotation(aMethod, step);
+			BlockStmt body = aMethod.getBody().get();
+			if (body.isEmpty()) {
+				body = aMethod.createBody();
+				addStatementForComponent(body, componentName, objectName, objectType);
+				addStatementForPath(body, componentName, objectName, objectType, object);
+				if (Validator.isEdge(step)) {
+					addStatementForTransition(body, step, componentName, objectName, objectType);
+				} else {
+					if (Validator.getObjectAttachment(step).isEmpty()) {
+						addStatementForState(body, step, componentName, objectName, objectType, objectState, modality,
+								getSectionArgument(step));
+					}
+				}
+			}
+			return aMethod;
+		}
+	}
+
+	@Override
+	public Object get() {
+		// TODO probably don't need this anymore
+		return theJavaClass;
+	}
+
+	@Override
+	public File getFile() {
+		return theFile;
+	}
+
+	public MethodDeclaration getMethod(String methodName) {
+		List<MethodDeclaration> methods = getType().getMethodsByName(methodName);
+		if (methods.isEmpty()) {
+			return getType().addMethod(methodName, Keyword.PUBLIC);
+		} else {
+			return methods.getFirst();
+		}
+	}
+
+	@Override
+	public void load() {
+		if (theFile.exists() && getType().getMethods().isEmpty()) {
+			SourceRoot javaSrcDir = new SourceRoot(theFile.getParentFile().toPath());
+			theJavaClass = javaSrcDir.parse("", theFile.getName());
+		}
+	}
+
+	@Override
+	public void save() {
+		File parentDir = theFile.getParentFile();
+		parentDir.mkdirs();
+		SourceRoot javaSrcDir = new SourceRoot(parentDir.toPath());
+		javaSrcDir.add(theJavaClass);
+		javaSrcDir.saveAll();
+	}
+
+	@Override
+	public void setFile(File theFile) {
+		this.theFile = theFile;
+	}
+
 	private void addAnnotation(MethodDeclaration aMethod, String step) {
 		String keyword = getKeyword(step);
 		String stepName = getStepName(step, keyword);
@@ -84,9 +192,9 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	private void addStatementForState(BlockStmt body, String step, String componentName, String objectName,
-			String objectType, String objectState) {
-		body.addStatement(componentName + "Factory" + ".get(\"" + objectName + objectType + "\").setInputOutputs(\""
-				+ objectState + "\");");
+			String objectType, String objectState, String modality, String section) {
+		body.addStatement(componentName + "Factory" + ".get(\"" + objectName + objectType + "\")." + modality
+				+ "InputOutputs(\"" + objectState + "\"" + section + ");");
 	}
 
 	private void addStatementForTransition(BlockStmt body, String step, String componentName, String objectName,
@@ -94,75 +202,16 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		body.addStatement(componentName + "Factory" + ".get(\"" + objectName + objectType + "\").transition();");
 	}
 
-	public void createDataTable(String step, ArrayList<ArrayList<String>> dataTable) {
-		String sectionName = Validator.getDetailsName(step) + Validator.getDetailsType(step);
-		if (isStepObj()) {
-			String modality = getModality(step);
-			for (String columnName : dataTable.getFirst()) {
-				getMethod(modality + sectionName + StringUtils.capitalize(columnName)).removeBody()
-						.addParameter("HashMap<String, String>", "keyMap");
-			}
-		} else {
-			getMethod(getMethodNameForStepDef(step)).addParameter("DataTable", "dataTable");
-			addStatementForAttachment(step, "dataTable");
-		}
-	}
-
-	public void createDocString(String step) {
-		String sectionName = Validator.getDetailsName(step) + Validator.getDetailsType(step);
-		if (isStepObj()) {
-			String modality = getModality(step);
-			getMethod(modality + sectionName + "Content").removeBody().addParameter("HashMap<String, String>",
-					"keyMap");
-		} else {
-			getMethod(getMethodNameForStepDef(step)).addParameter("String", "docString");
-			addStatementForAttachment(step, "\"Content\", docString");
-		}
-	}
-
-	public MethodDeclaration createStep(String step) {
-		String componentName = getComponentName(step);
-		String object = Validator.getObject(step);
-		String objectName = Validator.getObjectName(step);
-		String objectType = Validator.getObjectType(step);
-		String sectionName = Validator.getDetailsName(step) + Validator.getDetailsType(step);
-		String objectState = Validator.getObjectState(step);
-		String modality = getModality(step);
-		addImports(componentName);
-		if (isStepObj()) {
-			if (!Validator.isEdge(step) && Validator.getObjectAttachment(step).isEmpty()) {
-				return getMethod(modality + sectionName + objectState).removeBody()
-						.addParameter("HashMap<String, String>", "keyMap");
-			} else if (Validator.isEdge(step)) {
-				return getMethod("transition").removeBody();
-			} else {
-				// data table or doc string will cover this
-				return null;
-			}
-		} else {
-			MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(step));
-			addAnnotation(aMethod, step);
-			BlockStmt body = aMethod.getBody().get();
-			if (body.isEmpty()) {
-				body = aMethod.createBody();
-				addStatementForComponent(body, componentName, objectName, objectType);
-				addStatementForPath(body, componentName, objectName, objectType, object);
-				if (Validator.isEdge(step)) {
-					addStatementForTransition(body, step, componentName, objectName, objectType);
-				} else {
-					if (Validator.getObjectAttachment(step).isEmpty()) {
-						addStatementForState(body, step, componentName, objectName, objectType, objectState);
-					}
-				}
-			}
-			return aMethod;
-		}
-	}
-
-	@Override
-	public Object get() {
-		// TODO probably don't need this anymore
-		return theJavaClass;
+	private String cleanMethodName(String methodName) {
+		// TODO fine a regex to remove all special characters or everthing that's not
+		// a-zA-Z0-9
+		methodName = methodName.replaceAll("\\.", " ");
+		methodName = methodName.replaceAll("\\-", " ");
+		methodName = methodName.replaceAll("/", " ");
+		methodName = methodName.replaceAll(",", " ");
+		methodName = methodName.replaceAll("'", "");
+		methodName = CaseUtils.toCamelCase(methodName, false, ' ');
+		return methodName;
 	}
 
 	private String getComponentName(String stepName) {
@@ -170,53 +219,13 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		return StringUtils.capitalize(component.getName().getIdentifier());
 	}
 
-	@Override
-	public File getFile() {
-		return theFile;
-	}
-
 	private String getKeyword(String stepName) {
 		return stepName.split(" ")[0];
 	}
 
-	public MethodDeclaration getMethod(String methodName) {
-		List<MethodDeclaration> methods = getType().getMethodsByName(methodName);
-		if (methods.isEmpty()) {
-			return getType().addMethod(methodName, Keyword.PUBLIC);
-		} else {
-			return methods.getFirst();
-		}
-	}
-
 	private String getMethodNameForStepDef(String step) {
 		String methodName = step.replaceFirst(getKeyword(step) + " ", "");
-		// TODO fine a regex to remove all special characters or everthing that's not
-		// a-zA-Z0-9
-		methodName = methodName.replaceAll("\\.", " ");
-		methodName = methodName.replaceAll("\\-", " ");
-		methodName = methodName.replaceAll("/", " ");
-		methodName = methodName.replaceAll(",", " ");
-		methodName = CaseUtils.toCamelCase(methodName, false, ' ');
-		return methodName;
-	}
-
-	private String getPackageDeclaration() {
-		String packageName = theFile.getAbsolutePath()
-				.replaceAll("\\" + File.separator + "[^\\" + File.separator + "]*$", "");
-		packageName = packageName.replace(File.separator, ".");
-		// TODO use src.test.java instead of org.farhan.
-		packageName = packageName.replaceFirst("^.*org.farhan", "org.farhan");
-		return packageName;
-	}
-
-	private String getSectionArgument(String stepName) {
-		String section = Validator.getDetailsName(stepName) + Validator.getDetailsType(stepName);
-		if (!section.isEmpty()) {
-			section = ", \"" + section.replace(" ", "") + "\"";
-		} else {
-			section = "";
-		}
-		return section;
+		return cleanMethodName(methodName);
 	}
 
 	private String getModality(String stepName) {
@@ -236,6 +245,27 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		return modality;
 	}
 
+	private String getPackageDeclaration() {
+		String packageName = theFile.getAbsolutePath()
+				.replaceAll("\\" + File.separator + "[^\\" + File.separator + "]*$", "");
+		packageName = packageName.replace(File.separator, ".");
+		// TODO use src.test.java instead of org.farhan.
+		packageName = packageName.replaceFirst("^.*org.farhan", "org.farhan");
+		return packageName;
+	}
+
+	private String getSectionArgument(String stepName) {
+		// TODO make a Validator.getDetails to get both name and type and simplify the
+		// code to get the section
+		String section = Validator.getDetailsName(stepName) + Validator.getDetailsType(stepName);
+		if (!section.isEmpty()) {
+			section = ", \"" + section.replace(" ", "") + "\"";
+		} else {
+			section = "";
+		}
+		return section;
+	}
+
 	private String getStepName(String stepName, String keyword) {
 		return stepName.replaceFirst(keyword + " ", "");
 	}
@@ -250,28 +280,6 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		} else {
 			return true;
 		}
-	}
-
-	@Override
-	public void load() {
-		if (theFile.exists() && getType().getMethods().isEmpty()) {
-			SourceRoot javaSrcDir = new SourceRoot(theFile.getParentFile().toPath());
-			theJavaClass = javaSrcDir.parse("", theFile.getName());
-		}
-	}
-
-	@Override
-	public void save() {
-		File parentDir = theFile.getParentFile();
-		parentDir.mkdirs();
-		SourceRoot javaSrcDir = new SourceRoot(parentDir.toPath());
-		javaSrcDir.add(theJavaClass);
-		javaSrcDir.saveAll();
-	}
-
-	@Override
-	public void setFile(File theFile) {
-		this.theFile = theFile;
 	}
 
 }

@@ -139,11 +139,11 @@ Feature: Service Testing
           
           public interface ClaimRequest {
           
+              public void transition();
+          
               public void setDrugCost(HashMap<String, String> keyMap);
           
               public void setFamily(HashMap<String, String> keyMap);
-          
-              public void transition();
           }
           
           """

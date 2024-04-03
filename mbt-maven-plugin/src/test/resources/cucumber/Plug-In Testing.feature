@@ -33,9 +33,9 @@ Feature: Plug-In Testing
 
      Then The src/test/java/org/farhan/stepdefs/acmeTool/AcmeToolInputTxtFileSteps.java file will be as follows
           """
-          package org.farhan.stepdefs.acmeTool;
+          package org.farhan.stepdefs.acmetool;
           
-          import org.farhan.common.AcmeToolFactory;
+          import org.farhan.common.AcmetoolFactory;
           import io.cucumber.java.en.Given;
           import io.cucumber.datatable.DataTable;
           
@@ -43,16 +43,16 @@ Feature: Plug-In Testing
           
               @Given("^The acme-tool plugin, src/test/resources/cucumber/Input.txt file is as follows$")
               public void theAcmeToolPluginSrcTestResourcesCucumberInputTxtFileIsAsFollows(String docString) {
-                  AcmeToolFactory.get("InputTxtFile").setComponent("acme-tool");
-                  AcmeToolFactory.get("InputTxtFile").setPath("src/test/resources/cucumber/Input.txt");
-                  AcmeToolFactory.get("InputTxtFile").setInputOutputs("Content", docString);
+                  AcmetoolFactory.get("InputTxtFile").setComponent("Acmetool");
+                  AcmetoolFactory.get("InputTxtFile").setPath("src/test/resources/cucumber/Input.txt");
+                  AcmetoolFactory.get("InputTxtFile").setInputOutputs("Content", docString);
               }
           
               @Given("^The Input.txt file is valid$")
               public void theInputTxtFileIsValid() {
-                  AcmeToolFactory.get("InputTxtFile").setComponent("acme-tool");
-                  AcmeToolFactory.get("InputTxtFile").setPath("Input.txt");
-                  AcmeToolFactory.get("InputTxtFile").setInputOutputs("Valid");
+                  AcmetoolFactory.get("InputTxtFile").setComponent("Acmetool");
+                  AcmetoolFactory.get("InputTxtFile").setPath("Input.txt");
+                  AcmetoolFactory.get("InputTxtFile").setInputOutputs("Valid");
               }
           }
           
@@ -62,9 +62,9 @@ Feature: Plug-In Testing
 
      Then The src/test/java/org/farhan/stepdefs/acmeTool/AcmeToolDoItGoalSteps.java file will be as follows
           """
-          package org.farhan.stepdefs.acmeTool;
+          package org.farhan.stepdefs.acmetool;
           
-          import org.farhan.common.AcmeToolFactory;
+          import org.farhan.common.AcmetoolFactory;
           import io.cucumber.java.en.Given;
           import io.cucumber.datatable.DataTable;
           
@@ -72,10 +72,10 @@ Feature: Plug-In Testing
           
               @Given("^The do-it goal is executed with$")
               public void theDoItGoalIsExecutedWith(DataTable dataTable) {
-                  AcmeToolFactory.get("DoItGoal").setComponent("acme-tool");
-                  AcmeToolFactory.get("DoItGoal").setPath("do-it");
-                  AcmeToolFactory.get("DoItGoal").setInputOutputs(dataTable);
-                  AcmeToolFactory.get("DoItGoal").transition();
+                  AcmetoolFactory.get("DoItGoal").setComponent("Acmetool");
+                  AcmetoolFactory.get("DoItGoal").setPath("do-it");
+                  AcmetoolFactory.get("DoItGoal").setInputOutputs(dataTable);
+                  AcmetoolFactory.get("DoItGoal").transition();
               }
           }
           
@@ -85,26 +85,26 @@ Feature: Plug-In Testing
 
      Then The src/test/java/org/farhan/stepdefs/acmeTool/AcmeToolOutputTxtFileSteps.java file will be as follows
           """
-          package org.farhan.stepdefs.acmeTool;
+          package org.farhan.stepdefs.acmetool;
           
-          import org.farhan.common.AcmeToolFactory;
+          import org.farhan.common.AcmetoolFactory;
           import io.cucumber.java.en.Given;
           import io.cucumber.datatable.DataTable;
           
           public class AcmeToolOutputTxtFileSteps {
           
-              @Given("^The Output.txt file, Results table will be as follows$")
-              public void theOutputTxtFileResultsTableWillBeAsFollows(DataTable dataTable) {
-                  AcmeToolFactory.get("OutputTxtFile").setComponent("acme-tool");
-                  AcmeToolFactory.get("OutputTxtFile").setPath("Output.txt");
-                  AcmeToolFactory.get("OutputTxtFile").assertInputOutputs(dataTable, "ResultsTable");
-              }
-          
               @Given("^The target/Output.txt file will be present$")
               public void theTargetOutputTxtFileWillBePresent() {
-                  AcmeToolFactory.get("OutputTxtFile").setComponent("acme-tool");
-                  AcmeToolFactory.get("OutputTxtFile").setPath("target/Output.txt");
-                  AcmeToolFactory.get("OutputTxtFile").assertInputOutputs("Present");
+                  AcmetoolFactory.get("OutputTxtFile").setComponent("Acmetool");
+                  AcmetoolFactory.get("OutputTxtFile").setPath("target/Output.txt");
+                  AcmetoolFactory.get("OutputTxtFile").assertInputOutputs("Present");
+              }
+          
+              @Given("^The Output.txt file, Results table will be as follows$")
+              public void theOutputTxtFileResultsTableWillBeAsFollows(DataTable dataTable) {
+                  AcmetoolFactory.get("OutputTxtFile").setComponent("Acmetool");
+                  AcmetoolFactory.get("OutputTxtFile").setPath("Output.txt");
+                  AcmetoolFactory.get("OutputTxtFile").assertInputOutputs(dataTable, "ResultsTable");
               }
           }
           
@@ -114,7 +114,7 @@ Feature: Plug-In Testing
 
      Then The src/test/java/org/farhan/objects/acmeTool/InputTxtFile.java file will be as follows
           """
-          package org.farhan.objects.acmeTool;
+          package org.farhan.objects.acmetool;
           
           import java.util.HashMap;
           
@@ -131,15 +131,15 @@ Feature: Plug-In Testing
 
      Then The src/test/java/org/farhan/objects/acmeTool/DoItGoal.java file will be as follows
           """
-          package org.farhan.objects.acmeTool;
+          package org.farhan.objects.acmetool;
           
           import java.util.HashMap;
           
           public interface DoItGoal {
           
-              public void setParameters(HashMap<String, String> keyMap);
-          
               public void transition();
+          
+              public void setParameters(HashMap<String, String> keyMap);
           }
           
           """
@@ -148,7 +148,7 @@ Feature: Plug-In Testing
 
      Then The src/test/java/org/farhan/objects/acmeTool/OutputTxtFile.java file will be as follows
           """
-          package org.farhan.objects.acmeTool;
+          package org.farhan.objects.acmetool;
           
           import java.util.HashMap;
           
