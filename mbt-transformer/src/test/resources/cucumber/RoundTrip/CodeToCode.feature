@@ -109,24 +109,24 @@ Feature: Code To Code
           """
           package org.farhan.stepdefs.blah;
           
-          import org.farhan.common.BlahFactory;
           import io.cucumber.java.en.Given;
           import io.cucumber.datatable.DataTable;
+          import org.farhan.common.BlahFactory;
           
           public class BlahObjectPageSteps {
           
-              @Given("^The blah application, something/Object page is as follows$")
-              public void theBlahApplicationSomethingobjectPageIsAsFollows(String docString) {
-                  BlahFactory.get("ObjectPage").setComponent("Blah");
-                  BlahFactory.get("ObjectPage").setPath("something/Object");
-                  BlahFactory.get("ObjectPage").setInputOutputs("Content", docString);
-              }
-          
               @Given("^The blah application, something/Object page is empty$")
-              public void theBlahApplicationSomethingobjectPageIsEmpty() {
+              public void theBlahApplicationSomethingObjectPageIsEmpty() {
                   BlahFactory.get("ObjectPage").setComponent("Blah");
                   BlahFactory.get("ObjectPage").setPath("something/Object");
                   BlahFactory.get("ObjectPage").setInputOutputs("Empty");
+              }
+          
+              @Given("^The blah application, something/Object page is as follows$")
+              public void theBlahApplicationSomethingObjectPageIsAsFollows(String docString) {
+                  BlahFactory.get("ObjectPage").setComponent("Blah");
+                  BlahFactory.get("ObjectPage").setPath("something/Object");
+                  BlahFactory.get("ObjectPage").setInputOutputs("Content", docString);
               }
           }
           

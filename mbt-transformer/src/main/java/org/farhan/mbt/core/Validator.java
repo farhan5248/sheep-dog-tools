@@ -32,11 +32,11 @@ public class Validator {
 
 	public static String getObjectName(String stepName) {
 		if (MBTVertexValidator.isVertex(stepName)) {
-			String[] nameParts = StringUtils.capitalize(MBTVertexValidator.getObjectName(stepName)).split("/");
-			return nameParts[nameParts.length - 1];
+			String[] nameParts = MBTVertexValidator.getObjectName(stepName).split("/");
+			return StringUtils.capitalize(nameParts[nameParts.length - 1]);
 		} else {
-			String[] nameParts = StringUtils.capitalize(MBTEdgeValidator.getObjectName(stepName)).split("/");
-			return nameParts[nameParts.length - 1];
+			String[] nameParts = MBTEdgeValidator.getObjectName(stepName).split("/");
+			return StringUtils.capitalize(nameParts[nameParts.length - 1]);
 		}
 	}
 
@@ -81,11 +81,19 @@ public class Validator {
 	}
 
 	public static String getDetailsName(String stepName) {
-		return StringUtils.capitalize(MBTVertexValidator.getDetailsName(stepName));
+		String text = StringUtils.capitalize(MBTVertexValidator.getDetailsName(stepName));
+		if (text == null) {
+			text = "";
+		}
+		return text;
 	}
 
 	public static String getDetailsType(String stepName) {
-		return StringUtils.capitalize(MBTVertexValidator.getDetailsType(stepName));
+		String text = StringUtils.capitalize(MBTVertexValidator.getDetailsType(stepName));
+		if (text == null) {
+			text = "";
+		}
+		return text;
 	}
 
 }

@@ -3,7 +3,6 @@ package org.farhan.mbt.cucumber;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.CaseUtils;
 import org.farhan.mbt.core.ConvertibleObject;
@@ -60,7 +59,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	private void addStatementForAttachment(String step, String arguments) {
 		String objectName = Validator.getObjectName(step);
 		String objectType = Validator.getObjectType(step);
-		String sectionName = getSection(step);
+		String sectionName = getSectionArgument(step);
 		String componentName = getComponentName(step);
 		String modality = getModality(step);
 		String statementName = componentName + "Factory" + ".get(\"" + objectName + objectType + "\")." + modality
@@ -96,10 +95,12 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	public void createDataTable(String step, ArrayList<ArrayList<String>> dataTable) {
+		String sectionName = Validator.getDetailsName(step) + Validator.getDetailsType(step);
 		if (isStepObj()) {
 			String modality = getModality(step);
 			for (String columnName : dataTable.getFirst()) {
-				getMethod(modality + StringUtils.capitalize(columnName)).removeBody();
+				getMethod(modality + sectionName + StringUtils.capitalize(columnName)).removeBody()
+						.addParameter("HashMap<String, String>", "keyMap");
 			}
 		} else {
 			getMethod(getMethodNameForStepDef(step)).addParameter("DataTable", "dataTable");
@@ -108,9 +109,11 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	public void createDocString(String step) {
+		String sectionName = Validator.getDetailsName(step) + Validator.getDetailsType(step);
 		if (isStepObj()) {
 			String modality = getModality(step);
-			getMethod(modality + "Content").removeBody();
+			getMethod(modality + sectionName + "Content").removeBody().addParameter("HashMap<String, String>",
+					"keyMap");
 		} else {
 			getMethod(getMethodNameForStepDef(step)).addParameter("String", "docString");
 			addStatementForAttachment(step, "\"Content\", docString");
@@ -122,14 +125,16 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		String object = Validator.getObject(step);
 		String objectName = Validator.getObjectName(step);
 		String objectType = Validator.getObjectType(step);
+		String sectionName = Validator.getDetailsName(step) + Validator.getDetailsType(step);
 		String objectState = Validator.getObjectState(step);
 		String modality = getModality(step);
 		addImports(componentName);
 		if (isStepObj()) {
 			if (!Validator.isEdge(step) && Validator.getObjectAttachment(step).isEmpty()) {
-				MethodDeclaration aMethod = getMethod(modality + objectState);
-				aMethod.removeBody();
-				return aMethod;
+				return getMethod(modality + sectionName + objectState).removeBody()
+						.addParameter("HashMap<String, String>", "keyMap");
+			} else if (Validator.isEdge(step)) {
+				return getMethod("transition").removeBody();
 			} else {
 				// data table or doc string will cover this
 				return null;
@@ -187,10 +192,10 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		String methodName = step.replaceFirst(getKeyword(step) + " ", "");
 		// TODO fine a regex to remove all special characters or everthing that's not
 		// a-zA-Z0-9
-		methodName = methodName.replaceAll("\\.", "");
-		methodName = methodName.replaceAll("\\-", "");
-		methodName = methodName.replaceAll("/", "");
-		methodName = methodName.replaceAll(",", "");
+		methodName = methodName.replaceAll("\\.", " ");
+		methodName = methodName.replaceAll("\\-", " ");
+		methodName = methodName.replaceAll("/", " ");
+		methodName = methodName.replaceAll(",", " ");
 		methodName = CaseUtils.toCamelCase(methodName, false, ' ');
 		return methodName;
 	}
@@ -204,9 +209,9 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		return packageName;
 	}
 
-	private String getSection(String stepName) {
+	private String getSectionArgument(String stepName) {
 		String section = Validator.getDetailsName(stepName) + Validator.getDetailsType(stepName);
-		if (!section.isEmpty() && !section.contentEquals("nullnull")) {
+		if (!section.isEmpty()) {
 			section = ", \"" + section.replace(" ", "") + "\"";
 		} else {
 			section = "";
@@ -249,7 +254,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 
 	@Override
 	public void load() {
-		if (theFile.exists() && theJavaClass.getTypes() == null) {
+		if (theFile.exists() && getType().getMethods().isEmpty()) {
 			SourceRoot javaSrcDir = new SourceRoot(theFile.getParentFile().toPath());
 			theJavaClass = javaSrcDir.parse("", theFile.getName());
 		}

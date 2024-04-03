@@ -23,8 +23,6 @@ import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 
-import com.github.javaparser.ast.body.MethodDeclaration;
-
 public class UMLToCucumberConverter extends ToCodeConverter {
 
 	private UMLClassWrapper srcObj;
@@ -123,6 +121,8 @@ public class UMLToCucumberConverter extends ToCodeConverter {
 
 	private String getStepObjName(String stepName) {
 		String objectName = Validator.getObjectName(stepName);
+		objectName = objectName.replaceAll("\\.", " ");
+		objectName = objectName.replaceAll("\\-", " ");
 		String objectType = Validator.getObjectType(stepName);
 		String componentName = Validator.getComponentName(stepName);
 		if (componentName.isEmpty()) {
@@ -131,11 +131,13 @@ public class UMLToCucumberConverter extends ToCodeConverter {
 			lastComponent = componentName;
 		}
 		return tgtPrj.getDir(tgtPrj.THIRD_LAYER) + File.separator + CaseUtils.toCamelCase(componentName, false, ' ')
-				+ File.separator + objectName + objectType + ".java";
+				+ File.separator + CaseUtils.toCamelCase(objectName, true, ' ') + objectType + ".java";
 	}
 
 	private String getStepDefName(String stepName) {
 		String objectName = Validator.getObjectName(stepName);
+		objectName = objectName.replaceAll("\\.", " ");
+		objectName = objectName.replaceAll("\\-", " ");
 		String objectType = Validator.getObjectType(stepName);
 		String componentName = Validator.getComponentName(stepName);
 		if (componentName.isEmpty()) {
@@ -144,7 +146,8 @@ public class UMLToCucumberConverter extends ToCodeConverter {
 			lastComponent = componentName;
 		}
 		return tgtPrj.getDir(tgtPrj.SECOND_LAYER) + File.separator + CaseUtils.toCamelCase(componentName, false, ' ')
-				+ File.separator + componentName + objectName + objectType + "Steps.java";
+				+ File.separator + componentName + CaseUtils.toCamelCase(objectName, true, ' ') + objectType
+				+ "Steps.java";
 	}
 
 	private void convertStepList(AbstractScenario abstractScenario, ArrayList<Message> stepList,

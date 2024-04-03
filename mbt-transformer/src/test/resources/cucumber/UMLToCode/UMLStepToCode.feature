@@ -34,13 +34,13 @@ Feature: UML Step To Code
 
   Scenario: Create new step object Java class for graph vertices
 
-     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/DataTablePage.java file will be as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/DatatablePage.java file will be as follows
           """
           package org.farhan.objects.blah;
           
           import java.util.HashMap;
           
-          public interface DataTablePage {
+          public interface DatatablePage {
           
               public void assertTopSectionH1(HashMap<String, String> keyMap);
           
@@ -51,13 +51,13 @@ Feature: UML Step To Code
 
   Scenario: Create new step object Java class for graph edges
 
-     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/DocStringPage.java file will be as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/DocstringPage.java file will be as follows
           """
           package org.farhan.objects.blah;
           
           import java.util.HashMap;
           
-          public interface DocStringPage {
+          public interface DocstringPage {
           
               public void setContent(HashMap<String, String> keyMap);
           }
@@ -89,11 +89,11 @@ Feature: UML Step To Code
           
           public interface JsonRequest {
           
+              public void transition();
+          
               public void setI1(HashMap<String, String> keyMap);
           
               public void setI2(HashMap<String, String> keyMap);
-          
-              public void transition();
           }
           
           """
