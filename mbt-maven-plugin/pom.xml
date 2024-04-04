@@ -3,21 +3,21 @@
 
 	<groupId>org.farhan</groupId>
 	<artifactId>mbt-maven-plugin</artifactId>
-	<version>1.7-SNAPSHOT</version>
+	<version>1.7</version>
 	<packaging>maven-plugin</packaging>
 	<name>MBT Maven Plugin</name>
 
 	<properties>
-		<maven-plugin-tools.version>3.11.0</maven-plugin-tools.version>
+		<maven-plugin-tools.version>3.12.0</maven-plugin-tools.version>
 		<project.build.sourceEncoding>
 			UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
-		<mbt-transformer.version>1.8-SNAPSHOT</mbt-transformer.version>
+		<mbt-transformer.version>1.8</mbt-transformer.version>
 	</properties>
 
 	<scm>
 		<connection>scm:git:https://github.com/farhan5248/claims-adjudication-ai</connection>
-		<tag>HEAD</tag>
+		<tag>mbt-maven-plugin-1.7</tag>
 	</scm>
 
 	<repositories>
