@@ -224,12 +224,12 @@ public abstract class ToUMLConverter {
 	protected void setCurrentMachineAndState(String messageName) {
 		// the actual object name might have delimiters indicating folder or menu
 		// structure
-		String[] objectParts = Validator.getObjectName(messageName).split("/");
+		String[] objectParts = StepWrapper.getObjectName(messageName).split("/");
 		// Capitalize the first letter of the type
-		String objectType = StringUtils.capitalize(Validator.getObjectType(messageName));
+		String objectType = StringUtils.capitalize(StepWrapper.getObjectType(messageName));
 		setFSMState(objectParts[objectParts.length - 1] + objectType);
-		if (Validator.isContainerStep(messageName)) {
-			setFSMName(Validator.getComponentName(messageName));
+		if (StepWrapper.isContainerStep(messageName)) {
+			setFSMName(StepWrapper.getComponentName(messageName));
 		}
 	}
 

@@ -16,7 +16,8 @@ import org.farhan.cucumber.ScenarioOutline;
 import org.farhan.cucumber.Step;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ToCodeConverter;
-import org.farhan.mbt.core.Validator;
+import org.farhan.mbt.core.Utilities;
+import org.farhan.mbt.core.StepWrapper;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberJavaWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
@@ -120,29 +121,40 @@ public class UMLToCucumberConverter extends ToCodeConverter {
 	}
 
 	private String getStepObjName(String stepName) {
-		String objectName = Validator.getObjectName(stepName);
-		String objectType = Validator.getObjectType(stepName);
-		String componentName = Validator.getComponentName(stepName);
+		String objectName = getObjectName(stepName);
+		String objectType = Utilities.upperFirst(StepWrapper.getObjectType(stepName));
+		String componentName = StepWrapper.getComponentName(stepName);
 		if (componentName.isEmpty()) {
 			componentName = lastComponent;
 		} else {
 			lastComponent = componentName;
 		}
-		return tgtPrj.getDir(tgtPrj.THIRD_LAYER) + File.separator + CaseUtils.toCamelCase(componentName, false, ' ')
-				+ File.separator + objectName + objectType + ".java";
+		return tgtPrj.getDir(tgtPrj.THIRD_LAYER) + File.separator + componentName.toLowerCase() + File.separator
+				+ objectName + objectType + ".java";
 	}
 
 	private String getStepDefName(String stepName) {
-		String objectName = Validator.getObjectName(stepName);
-		String objectType = Validator.getObjectType(stepName);
-		String componentName = Validator.getComponentName(stepName);
+		String objectName = getObjectName(stepName);
+		String objectType = Utilities.upperFirst(StepWrapper.getObjectType(stepName));
+		String componentName = StepWrapper.getComponentName(stepName);
 		if (componentName.isEmpty()) {
 			componentName = lastComponent;
 		} else {
 			lastComponent = componentName;
 		}
-		return tgtPrj.getDir(tgtPrj.SECOND_LAYER) + File.separator + CaseUtils.toCamelCase(componentName, false, ' ')
-				+ File.separator + componentName + objectName + objectType + "Steps.java";
+		return tgtPrj.getDir(tgtPrj.SECOND_LAYER) + File.separator + componentName.toLowerCase() + File.separator
+				+ Utilities.upperFirst(componentName) + objectName + objectType + "Steps.java";
+	}
+
+	private String getObjectName(String step) {
+		String name = StepWrapper.getObjectName(step);
+		String nameParts[] = name.split("/");
+		name = nameParts[nameParts.length - 1];
+		name = Utilities.removeDelimiterAndCapitalize(name, "\\.");
+		name = Utilities.removeDelimiterAndCapitalize(name, "\\-");
+		name = Utilities.removeDelimiterAndCapitalize(name, " ");
+		name = Utilities.upperFirst(name);
+		return name;
 	}
 
 	private void convertStepList(AbstractScenario abstractScenario, ArrayList<Message> stepList,

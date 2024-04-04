@@ -16,44 +16,11 @@ import org.apache.commons.lang3.StringUtils;
 
 public class Utilities {
 
-	public static String removeDelimiterAndCapitalize(String text, String delimiter) {
-		String[] nameParts = text.split(delimiter);
-		text = "";
-		for (String s : nameParts) {
-			text += StringUtils.capitalize(s);
+	public static void deleteDir(File dir, String extension) {
+		ArrayList<File> filesList = Utilities.recursivelyListFilesAndDirectories(dir, extension);
+		for (File f : filesList) {
+			f.delete();
 		}
-		return text;
-	}
-
-	public static ArrayList<File> recursivelyListFilesAndDirectories(File aDir, String extension) {
-		ArrayList<File> theFiles = new ArrayList<File>();
-		if (aDir.exists()) {
-			for (String s : aDir.list()) {
-				File tempFile = new File(aDir.getAbsolutePath() + File.separator + s);
-				if (tempFile.isDirectory()) {
-					theFiles.addAll(recursivelyListFilesAndDirectories(tempFile, extension));
-					theFiles.add(tempFile);
-				} else if (tempFile.getAbsolutePath().toLowerCase().endsWith(extension.toLowerCase())) {
-					theFiles.add(tempFile);
-				}
-			}
-		}
-		return theFiles;
-	}
-
-	public static ArrayList<File> recursivelyListFiles(File aDir, String extension) {
-		ArrayList<File> theFiles = new ArrayList<File>();
-		if (aDir.exists()) {
-			for (String s : aDir.list()) {
-				File tempFile = new File(aDir.getAbsolutePath() + File.separator + s);
-				if (tempFile.isDirectory()) {
-					theFiles.addAll(recursivelyListFiles(tempFile, extension));
-				} else if (tempFile.getAbsolutePath().toLowerCase().endsWith(extension.toLowerCase())) {
-					theFiles.add(tempFile);
-				}
-			}
-		}
-		return theFiles;
 	}
 
 	public static Set<String> getNamedGroupCandidates(String regex) {
@@ -81,6 +48,71 @@ public class Utilities {
 		return exceptionAsString;
 	}
 
+	public static String pad(String stringToPad, String padding, int padSize, boolean leftJustified) {
+		String retString = stringToPad;
+		retString = retString.trim();
+		for (int t = retString.length(); t < padSize; t++) {
+			if (leftJustified) {
+				retString = retString + padding;
+			} else {
+				retString = padding + retString;
+			}
+		}
+		return retString;
+	}
+
+	public static String padLeft(String stringToPad, String padding, int padSize) {
+		return pad(stringToPad, padding, padSize, false);
+	}
+
+	public static String padRight(String stringToPad, String padding, int padSize) {
+		return pad(stringToPad, padding, padSize, true);
+	}
+
+	public static String padZeroes(String stringToPad, int padSize) {
+		return padLeft(stringToPad, "0", padSize);
+	}
+
+	public static String readFile(File aFile) throws Exception {
+		String content = new String(Files.readAllBytes(Paths.get(aFile.toURI())), StandardCharsets.UTF_8);
+		return content;
+	}
+
+	public static ArrayList<File> recursivelyListFiles(File aDir, String extension) {
+		ArrayList<File> theFiles = new ArrayList<File>();
+		if (aDir.exists()) {
+			for (String s : aDir.list()) {
+				File tempFile = new File(aDir.getAbsolutePath() + File.separator + s);
+				if (tempFile.isDirectory()) {
+					theFiles.addAll(recursivelyListFiles(tempFile, extension));
+				} else if (tempFile.getAbsolutePath().toLowerCase().endsWith(extension.toLowerCase())) {
+					theFiles.add(tempFile);
+				}
+			}
+		}
+		return theFiles;
+	}
+
+	public static ArrayList<File> recursivelyListFilesAndDirectories(File aDir, String extension) {
+		ArrayList<File> theFiles = new ArrayList<File>();
+		if (aDir.exists()) {
+			for (String s : aDir.list()) {
+				File tempFile = new File(aDir.getAbsolutePath() + File.separator + s);
+				if (tempFile.isDirectory()) {
+					theFiles.addAll(recursivelyListFilesAndDirectories(tempFile, extension));
+					theFiles.add(tempFile);
+				} else if (tempFile.getAbsolutePath().toLowerCase().endsWith(extension.toLowerCase())) {
+					theFiles.add(tempFile);
+				}
+			}
+		}
+		return theFiles;
+	}
+
+	public static String regexFind(String pattern, String text, int groupNumber) {
+		return regexFind(pattern, text, groupNumber, null);
+	}
+
 	public static String regexFind(String pattern, String text, int groupNumber, String defaultText) {
 		Pattern r = Pattern.compile(pattern);
 		Matcher m = r.matcher(text);
@@ -90,20 +122,6 @@ public class Utilities {
 			}
 		}
 		return defaultText;
-	}
-
-	public static String regexFind(String pattern, String text, int groupNumber) {
-		return regexFind(pattern, text, groupNumber, null);
-	}
-
-	public static String regexFindByName(String pattern, String text, String groupName) {
-		Pattern r = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
-		Matcher m = r.matcher(text);
-		if (m.find()) {
-			return m.group(groupName);
-		} else {
-			return null;
-		}
 	}
 
 	public static String regexFindAll(String pattern, String text, int group, String defaultText) {
@@ -122,49 +140,35 @@ public class Utilities {
 		}
 	}
 
-	public static void writeFile(File aFile, String content) throws Exception {
-		aFile.getParentFile().mkdirs();
-		PrintWriter aPrintWriter = new PrintWriter(aFile, StandardCharsets.UTF_8);
-		aPrintWriter.print(content);
-		aPrintWriter.flush();
-		aPrintWriter.close();
-	}
-
-	public static String readFile(File aFile) throws Exception {
-		String content = new String(Files.readAllBytes(Paths.get(aFile.toURI())), StandardCharsets.UTF_8);
-		return content;
-	}
-
-	public static void deleteDir(File dir, String extension) {
-		ArrayList<File> filesList = Utilities.recursivelyListFilesAndDirectories(dir, extension);
-		for (File f : filesList) {
-			f.delete();
+	public static String regexFindByName(String pattern, String text, String groupName) {
+		Pattern r = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
+		Matcher m = r.matcher(text);
+		if (m.find()) {
+			return m.group(groupName);
+		} else {
+			return null;
 		}
 	}
 
-	public static String padZeroes(String stringToPad, int padSize) {
-		return padLeft(stringToPad, "0", padSize);
-	}
-
-	public static String padLeft(String stringToPad, String padding, int padSize) {
-		return pad(stringToPad, padding, padSize, false);
-	}
-
-	public static String padRight(String stringToPad, String padding, int padSize) {
-		return pad(stringToPad, padding, padSize, true);
-	}
-
-	public static String pad(String stringToPad, String padding, int padSize, boolean leftJustified) {
-		String retString = stringToPad;
-		retString = retString.trim();
-		for (int t = retString.length(); t < padSize; t++) {
-			if (leftJustified) {
-				retString = retString + padding;
-			} else {
-				retString = padding + retString;
-			}
+	public static String removeDelimiterAndCapitalize(String text, String delimiter) {
+		String[] nameParts = text.split(delimiter);
+		text = "";
+		for (String s : nameParts) {
+			text += StringUtils.capitalize(s);
 		}
-		return retString;
+		return text;
+	}
+
+	public static String removeLastComma(String newTitle) {
+		StringBuilder sb = new StringBuilder(newTitle.trim());
+		if (!(sb.length() == 0) && sb.charAt(sb.length() - 1) == ',') {
+			sb.setCharAt(sb.length() - 1, Character.MIN_VALUE);
+		}
+		return sb.toString().trim();
+	}
+
+	public static String toLowerCamelCase(String text) {
+		return toUpperCamelCase(text).substring(0, 1).toLowerCase() + text.substring(1);
 	}
 
 	public static String toUpperCamelCase(String text) {
@@ -178,15 +182,25 @@ public class Utilities {
 		return sb.toString().replace(",", "");
 	}
 
-	public static String toLowerCamelCase(String text) {
-		return toUpperCamelCase(text).substring(0, 1).toLowerCase() + text.substring(1);
+	public static String upperFirst(String text) {
+		if (!text.isEmpty()) {
+			return text.substring(0, 1).toUpperCase() + text.substring(1);
+		}
+		return text;
 	}
 
-	public static String removeLastComma(String newTitle) {
-		StringBuilder sb = new StringBuilder(newTitle.trim());
-		if (!(sb.length() == 0) && sb.charAt(sb.length() - 1) == ',') {
-			sb.setCharAt(sb.length() - 1, Character.MIN_VALUE);
+	public static void writeFile(File aFile, String content) throws Exception {
+		aFile.getParentFile().mkdirs();
+		PrintWriter aPrintWriter = new PrintWriter(aFile, StandardCharsets.UTF_8);
+		aPrintWriter.print(content);
+		aPrintWriter.flush();
+		aPrintWriter.close();
+	}
+
+	public static String lowerFirst(String text) {
+		if (!text.isEmpty()) {
+			return text.substring(0, 1).toLowerCase() + text.substring(1);
 		}
-		return sb.toString().trim();
+		return text;
 	}
 }

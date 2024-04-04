@@ -26,7 +26,7 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 
 		createSetComponentMessage(nextLayerInteraction, m);
 		createSetPathMessage(nextLayerInteraction, m);
-		if (Validator.validateStepText(m.getName())) {
+		if (StepWrapper.validateStepText(m.getName())) {
 			if (MBTVertexValidator.isVertex(m.getName())) {
 				createVerticeInputOutputMessage(nextLayerInteraction, m);
 			} else if (MBTEdgeValidator.isEdge(m.getName())) {
@@ -164,7 +164,7 @@ public abstract class ToUMLGherkinConverter extends ToUMLConverter {
 			createArgument(nextLayerMessage, "section", "\"" + section + "\"");
 		}
 		// Add negative argument
-		if (Validator.isNegativeStep(m.getName())) {
+		if (StepWrapper.isNegativeStep(m.getName())) {
 			createArgument(nextLayerMessage, "negativeTest", "true");
 		}
 	}

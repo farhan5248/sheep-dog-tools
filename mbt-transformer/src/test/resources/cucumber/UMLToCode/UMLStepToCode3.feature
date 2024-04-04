@@ -48,14 +48,14 @@ Feature: UML Step To Code 3
           
               @Given("^The blah application, Object page is invalid$")
               public void theBlahApplicationObjectPageIsInvalid() {
-                  BlahFactory.get("ObjectPage").setComponent("Blah");
+                  BlahFactory.get("ObjectPage").setComponent("blah");
                   BlahFactory.get("ObjectPage").setPath("Object");
                   BlahFactory.get("ObjectPage").setInputOutputs("Invalid");
               }
           
               @Given("^The blah application, Object page, Top section will be as follows$")
               public void theBlahApplicationObjectPageTopSectionIsAsFollows(DataTable dataTable) {
-                  BlahFactory.get("ObjectPage").setComponent("Blah");
+                  BlahFactory.get("ObjectPage").setComponent("blah");
                   BlahFactory.get("ObjectPage").setPath("Object");
                   BlahFactory.get("ObjectPage").assertInputOutputs(dataTable, "TopSection");
               }
@@ -78,21 +78,21 @@ Feature: UML Step To Code 3
           
               @Given("^The blah application, Object page is invalid$")
               public void theBlahApplicationObjectPageIsInvalid() {
-                  BlahFactory.get("ObjectPage").setComponent("Blah");
+                  BlahFactory.get("ObjectPage").setComponent("blah");
                   BlahFactory.get("ObjectPage").setPath("Object");
                   BlahFactory.get("ObjectPage").setInputOutputs("Invalid");
               }
           
               @Given("^The blah application, Object page, Top section will be as follows$")
               public void theBlahApplicationObjectPageTopSectionIsAsFollows(DataTable dataTable) {
-                  BlahFactory.get("ObjectPage").setComponent("Blah");
+                  BlahFactory.get("ObjectPage").setComponent("blah");
                   BlahFactory.get("ObjectPage").setPath("Object");
                   BlahFactory.get("ObjectPage").assertInputOutputs(dataTable, "TopSection");
               }
           
               @Given("^The blah application, Object page is empty$")
               public void theBlahApplicationObjectPageIsEmpty() {
-                  BlahFactory.get("ObjectPage").setComponent("Blah");
+                  BlahFactory.get("ObjectPage").setComponent("blah");
                   BlahFactory.get("ObjectPage").setPath("Object");
                   BlahFactory.get("ObjectPage").setInputOutputs("Empty");
               }
