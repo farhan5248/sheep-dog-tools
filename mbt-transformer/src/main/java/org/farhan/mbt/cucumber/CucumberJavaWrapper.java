@@ -3,7 +3,6 @@ package org.farhan.mbt.cucumber;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.text.CaseUtils;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.StepWrapper;
 import org.farhan.mbt.core.Utilities;
@@ -11,7 +10,6 @@ import org.farhan.validation.MBTVertexValidator;
 
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier.Keyword;
-import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.BlockStmt;
@@ -21,6 +19,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 
 	private File theFile;
 	private CompilationUnit theJavaClass;
+	private static String lastComponent = "InitialComponent";
 
 	public CucumberJavaWrapper(File theFile) {
 		this.theFile = theFile;
@@ -115,7 +114,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		String setOrAssert = getSetOrAssert(step);
 		String sectionName = getSection(step);
 		for (String columnName : dataTable.getFirst()) {
-			getMethod(setOrAssert + sectionName + Utilities.upperFirst(columnName)).removeBody()
+			getMethod(setOrAssert + sectionName + Utilities.upperFirst(removeSpecialChars(columnName))).removeBody()
 					.addParameter("HashMap<String, String>", "keyMap");
 		}
 	}
@@ -180,7 +179,13 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	private String getCallForComponent(String step) {
-		return ".setComponent(\"" + StepWrapper.getComponentName(step) + "\")";
+		String name = StepWrapper.getComponentName(step);
+		if (name.isEmpty()) {
+			name = lastComponent;
+		} else {
+			lastComponent = name;
+		}
+		return ".setComponent(\"" + name + "\")";
 	}
 
 	private String getCallForFactory(String step) {
@@ -211,30 +216,30 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		return ".transition()";
 	}
 
-	private String getFactoryName(String stepName) {
-		return Utilities.upperFirst(theJavaClass.getPackageDeclaration().get().getName().getIdentifier()) + "Factory";
+	private String getFactoryName(String step) {
+		String name = StepWrapper.getComponentName(step);
+		if (name.isEmpty()) {
+			name = lastComponent;
+		} else {
+			lastComponent = name;
+		}
+		name = removeSpecialChars(name);
+		return Utilities.upperFirst(name) + "Factory";
 	}
 
 	private String getInterfaceName(String step) {
 		String name = StepWrapper.getObjectName(step);
 		String nameParts[] = name.split("/");
 		name = nameParts[nameParts.length - 1];
-		name = Utilities.removeDelimiterAndCapitalize(name, "\\.");
-		name = Utilities.removeDelimiterAndCapitalize(name, "\\-");
-		name = Utilities.removeDelimiterAndCapitalize(name, "/");
-		name = Utilities.removeDelimiterAndCapitalize(name, ",");
+		name = removeSpecialChars(name);
 		name = name + Utilities.upperFirst(StepWrapper.getObjectType(step));
 		return name;
 	}
 
 	private String getMethodNameForStepDef(String step) {
 		String name = step.replaceFirst(step.split(" ")[0] + " ", "");
-		name = Utilities.removeDelimiterAndCapitalize(name, "\\.");
-		name = Utilities.removeDelimiterAndCapitalize(name, "\\-");
-		name = Utilities.removeDelimiterAndCapitalize(name, "/");
-		name = Utilities.removeDelimiterAndCapitalize(name, ",");
-		name = Utilities.removeDelimiterAndCapitalize(name, "'");
-		name = Utilities.removeDelimiterAndCapitalize(name, " ");
+		name = removeSpecialChars(name);
+		name = name.replace("'", "");
 		name = Utilities.lowerFirst(name);
 		return name;
 	}
@@ -301,6 +306,15 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		} else {
 			return true;
 		}
+	}
+
+	private String removeSpecialChars(String text) {
+		text = Utilities.removeDelimiterAndCapitalize(text, " ");
+		text = Utilities.removeDelimiterAndCapitalize(text, "\\.");
+		text = Utilities.removeDelimiterAndCapitalize(text, "\\-");
+		text = Utilities.removeDelimiterAndCapitalize(text, "/");
+		text = Utilities.removeDelimiterAndCapitalize(text, ",");
+		return text;
 	}
 
 }

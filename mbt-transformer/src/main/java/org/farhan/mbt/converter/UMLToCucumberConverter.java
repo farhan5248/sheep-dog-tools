@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.apache.commons.text.CaseUtils;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
@@ -123,12 +122,7 @@ public class UMLToCucumberConverter extends ToCodeConverter {
 	private String getStepObjName(String stepName) {
 		String objectName = getObjectName(stepName);
 		String objectType = Utilities.upperFirst(StepWrapper.getObjectType(stepName));
-		String componentName = StepWrapper.getComponentName(stepName);
-		if (componentName.isEmpty()) {
-			componentName = lastComponent;
-		} else {
-			lastComponent = componentName;
-		}
+		String componentName = getComponentName(stepName);
 		return tgtPrj.getDir(tgtPrj.THIRD_LAYER) + File.separator + componentName.toLowerCase() + File.separator
 				+ objectName + objectType + ".java";
 	}
@@ -136,14 +130,22 @@ public class UMLToCucumberConverter extends ToCodeConverter {
 	private String getStepDefName(String stepName) {
 		String objectName = getObjectName(stepName);
 		String objectType = Utilities.upperFirst(StepWrapper.getObjectType(stepName));
-		String componentName = StepWrapper.getComponentName(stepName);
-		if (componentName.isEmpty()) {
-			componentName = lastComponent;
-		} else {
-			lastComponent = componentName;
-		}
+		String componentName = getComponentName(stepName);
 		return tgtPrj.getDir(tgtPrj.SECOND_LAYER) + File.separator + componentName.toLowerCase() + File.separator
 				+ Utilities.upperFirst(componentName) + objectName + objectType + "Steps.java";
+	}
+
+	private String getComponentName(String step) {
+		String name = StepWrapper.getComponentName(step);
+		if (name.isEmpty()) {
+			name = lastComponent;
+		} else {
+			name = Utilities.removeDelimiterAndCapitalize(name, "\\.");
+			name = Utilities.removeDelimiterAndCapitalize(name, "\\-");
+			name = Utilities.removeDelimiterAndCapitalize(name, " ");
+			lastComponent = name;
+		}
+		return name;
 	}
 
 	private String getObjectName(String step) {
