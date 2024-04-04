@@ -12,7 +12,7 @@
 		<project.build.sourceEncoding>
 			UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
-		<mbt-transformer.version>1.8</mbt-transformer.version>
+		<mbt-transformer.version>1.9-SNAPSHOT</mbt-transformer.version>
 	</properties>
 
 	<scm>
