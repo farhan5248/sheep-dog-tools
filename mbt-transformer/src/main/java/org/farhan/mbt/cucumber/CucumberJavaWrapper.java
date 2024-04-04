@@ -101,36 +101,56 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		this.theFile = theFile;
 	}
 
+	private void addParameter(MethodDeclaration aMethod, String type, String name) {
+		if (aMethod.getParameters().isEmpty()) {
+			aMethod.addParameter(type, name);
+		}
+	}
+
 	private void createDataTableForStepDef(String step) {
 		MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(step));
-		aMethod.addParameter("DataTable", "dataTable");
+		addParameter(aMethod, "DataTable", "dataTable");
 		BlockStmt body = aMethod.getBody().get();
-		body.addStatement(getCallForFactory(step) + getCallForInputOutputsForDataTable(step) + ";");
-		body.getStatements().add(2, body.getStatements().getLast().get());
-		body.getStatements().removeLast();
+		if (StepWrapper.isEdge(step) && body.getStatements().size() == 4
+				|| !StepWrapper.isEdge(step) && body.getStatements().size() == 3) {
+			return;
+		} else {
+			body.addStatement(getCallForFactory(step) + getCallForInputOutputsForDataTable(step) + ";");
+			body.getStatements().add(2, body.getStatements().getLast().get());
+			body.getStatements().removeLast();
+		}
 	}
 
 	private void createDataTableForStepObj(String step, ArrayList<ArrayList<String>> dataTable) {
 		String setOrAssert = getSetOrAssert(step);
 		String sectionName = getSection(step);
 		for (String columnName : dataTable.getFirst()) {
-			getMethod(setOrAssert + sectionName + Utilities.upperFirst(removeSpecialChars(columnName))).removeBody()
-					.addParameter("HashMap<String, String>", "keyMap");
+			MethodDeclaration aMethod = getMethod(
+					setOrAssert + sectionName + Utilities.upperFirst(removeSpecialChars(columnName)));
+			aMethod.removeBody();
+			addParameter(aMethod, "HashMap<String, String>", "keyMap");
 		}
 	}
 
 	private void createDocStringForStepDef(String step) {
 		MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(step));
-		aMethod.addParameter("String", "docString");
+		addParameter(aMethod, "String", "docString");
 		BlockStmt body = aMethod.getBody().get();
-		body.addStatement(getCallForFactory(step) + getCallForInputOutputsForDocString(step) + ";");
-		body.getStatements().add(2, body.getStatements().getLast().get());
-		body.getStatements().removeLast();
+		if (StepWrapper.isEdge(step) && body.getStatements().size() == 4
+				|| !StepWrapper.isEdge(step) && body.getStatements().size() == 3) {
+			return;
+		} else {
+			body.addStatement(getCallForFactory(step) + getCallForInputOutputsForDocString(step) + ";");
+			body.getStatements().add(2, body.getStatements().getLast().get());
+			body.getStatements().removeLast();
+		}
 	}
 
 	private void createDocStringForStepObj(String step) {
-		getMethod(getSetOrAssert(step) + getSection(step) + "Content").removeBody()
-				.addParameter("HashMap<String, String>", "keyMap");
+		MethodDeclaration aMethod = getMethod(getSetOrAssert(step) + getSection(step) + "Content");
+		aMethod.removeBody();
+		addParameter(aMethod, "HashMap<String, String>", "keyMap");
+
 	}
 
 	private MethodDeclaration createStepForStepDef(String step) {
@@ -168,8 +188,11 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 			theJavaClass.addImport("java.util.HashMap");
 		}
 		if (!StepWrapper.isEdge(step) && StepWrapper.getObjectAttachment(step).isEmpty()) {
-			return getMethod(getMethodNameForStepObj(step)).removeBody().addParameter("HashMap<String, String>",
-					"keyMap");
+			MethodDeclaration aMethod = getMethod(getMethodNameForStepObj(step));
+			aMethod.removeBody();
+			addParameter(aMethod, "HashMap<String, String>", "keyMap");
+			return aMethod;
+
 		} else if (StepWrapper.isEdge(step)) {
 			return getMethod("transition").removeBody();
 		} else {
