@@ -191,7 +191,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	public void createExamplesRow(Section scenarioOutline, Section examples, HashMap<String, String> examplesRow) {
 		Table table = null;
-		// TODO use filters for things like this
 		for (StructuralNode block : examples.getBlocks()) {
 			if (block instanceof Table) {
 				table = (Table) block;

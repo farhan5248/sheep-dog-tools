@@ -20,6 +20,8 @@ public interface PstUmlFile {
 
     public void assertClassSectionClassName(HashMap<String, String> keyMap);
 
+    public void assertInteractionAnnotationsSectionAnnotationDetail(HashMap<String, String> keyMap);
+
     public void assertInteractionAnnotationsSectionAnnotationName(HashMap<String, String> keyMap);
 
     public void assertInteractionAnnotationsSectionInteractionName(HashMap<String, String> keyMap);

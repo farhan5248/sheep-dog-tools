@@ -7,6 +7,22 @@ import org.farhan.objects.mbttransformer.PstUmlFile;
 
 public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 
+	@Override
+	public void assertClassAnnotationsSectionAnnotationDetail(HashMap<String, String> keyMap) {
+		assertClassAnnotationDetailExists(keyMap.get("Class Name"), keyMap.get("Annotation Name"),
+				keyMap.get("Annotation Detail"));
+	}
+
+	@Override
+	public void assertClassAnnotationsSectionAnnotationName(HashMap<String, String> keyMap) {
+		assertClassAnnotationNameExists(keyMap.get("Class Name"), keyMap.get("Annotation Name"));
+	}
+
+	@Override
+	public void assertClassAnnotationsSectionClassName(HashMap<String, String> keyMap) {
+		assertClassExists(keyMap.get("Class Name"));
+	}
+
 	public void assertClassClassName(HashMap<String, String> keyMap) {
 		assertClassExists(keyMap.get("Class Name"));
 	}
@@ -37,6 +53,12 @@ public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 	}
 
 	@Override
+	public void assertInteractionAnnotationsSectionAnnotationDetail(HashMap<String, String> keyMap) {
+		assertInteractionAnnotationDetailExists(keyMap.get("Interaction Name"), keyMap.get("Annotation Name"),
+				keyMap.get("Annotation Detail"));
+	}
+
+	@Override
 	public void assertInteractionAnnotationsSectionAnnotationName(HashMap<String, String> keyMap) {
 		assertInteractionAnnotationNameExists(keyMap.get("Interaction Name"), keyMap.get("Annotation Name"));
 	}
@@ -54,6 +76,18 @@ public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 	@Override
 	public void assertInteractionCommentsSectionInteractionName(HashMap<String, String> keyMap) {
 		assertInteractionNameExists(keyMap.get("Interaction Name"));
+	}
+
+	@Override
+	public void assertInteractionMessagesSectionAnnotationDetail(HashMap<String, String> keyMap) {
+		assertInteractionMessageAnnotationDetailExists(keyMap.get("Interaction Name"), keyMap.get("Message"),
+				keyMap.get("Argument Name"), keyMap.get("Annotation Detail"));
+	}
+
+	@Override
+	public void assertInteractionMessagesSectionArgumentName(HashMap<String, String> keyMap) {
+		assertInteractionMessageArgumentNameExists(keyMap.get("Interaction Name"), keyMap.get("Message"),
+				keyMap.get("Argument Name"));
 	}
 
 	@Override
@@ -85,34 +119,6 @@ public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 		// TODO this should be an attribute like Present etc so don't store this here,
 		// then update the MbtTranformerFactory
 		keyValue.put("path", path);
-	}
-
-	@Override
-	public void assertInteractionMessagesSectionAnnotationDetail(HashMap<String, String> keyMap) {
-		assertInteractionMessageAnnotationDetailExists(keyMap.get("Interaction Name"), keyMap.get("Message"),
-				keyMap.get("Argument Name"), keyMap.get("Annotation Detail"));
-	}
-
-	@Override
-	public void assertInteractionMessagesSectionArgumentName(HashMap<String, String> keyMap) {
-		assertInteractionMessageArgumentNameExists(keyMap.get("Interaction Name"), keyMap.get("Message"),
-				keyMap.get("Argument Name"));
-	}
-
-	@Override
-	public void assertClassAnnotationsSectionAnnotationDetail(HashMap<String, String> keyMap) {
-		assertClassAnnotationDetailExists(keyMap.get("Class Name"), keyMap.get("Annotation Name"),
-				keyMap.get("Annotation Detail"));
-	}
-
-	@Override
-	public void assertClassAnnotationsSectionAnnotationName(HashMap<String, String> keyMap) {
-		assertClassAnnotationNameExists(keyMap.get("Class Name"), keyMap.get("Annotation Name"));
-	}
-
-	@Override
-	public void assertClassAnnotationsSectionClassName(HashMap<String, String> keyMap) {
-		assertClassExists(keyMap.get("Class Name"));
 	}
 
 }

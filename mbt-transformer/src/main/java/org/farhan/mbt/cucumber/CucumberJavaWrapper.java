@@ -61,7 +61,6 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 
 	@Override
 	public Object get() {
-		// TODO probably don't need this anymore
 		return theJavaClass;
 	}
 

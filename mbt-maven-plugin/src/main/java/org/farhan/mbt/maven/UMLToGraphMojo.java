@@ -34,7 +34,6 @@ public class UMLToGraphMojo extends AbstractMojo {
 
 	public void execute() throws MojoExecutionException {
 		try {
-			// TODO pass in tags to the mojo constructor
 			if (project != null) {
 				getLog().info("Converting tests with this tag: " + tag);
 				ConvertibleProject.tags = tag;

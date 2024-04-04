@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
 
-import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
-
 public class CucumberProject extends ConvertibleProject {
 
 	private ArrayList<ConvertibleObject> firstLayerObjects;
@@ -85,7 +83,7 @@ public class CucumberProject extends ConvertibleProject {
 		if (aConvertibleObject != null) {
 			return aConvertibleObject;
 		}
-		// TODO the creatObject methods should be the only one appending the basedir
+		// TODO this method should be the only one appending the basedir
 		File file = new File(name);
 		if (file.getAbsolutePath().startsWith(getDir(FIRST_LAYER).getAbsolutePath())) {
 			aConvertibleObject = new CucumberFeatureWrapper(file);

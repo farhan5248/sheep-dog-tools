@@ -65,11 +65,9 @@ public class UMLProject extends ConvertibleProject {
 		for (EObject e : resource.getContents()) {
 			theSystem = (Model) e;
 		}
-	}
-
-	public void loadObjects(String layer) {
-		getObjects(layer).clear();
-		ArrayList<Class> objects = getPackagedClasses(theSystem.getNestedPackage(layer));
+		// TODO in the future the code above will be in the wrapper and the code below
+		// will be in the ConvertUMLTo class
+		ArrayList<Class> objects = getPackagedClasses(theSystem.getNestedPackage(FIRST_LAYER));
 		for (Class c : objects) {
 			try {
 				createObject(c.getQualifiedName()).load();
@@ -93,7 +91,6 @@ public class UMLProject extends ConvertibleProject {
 
 	@Override
 	public void save() throws Exception {
-
 		URI uri = URI.createFileURI(getDir("").getAbsolutePath()).appendSegment(theSystem.getName())
 				.appendFileExtension(getFileExt(""));
 		ResourceSet resourceSet = new ResourceSetImpl();

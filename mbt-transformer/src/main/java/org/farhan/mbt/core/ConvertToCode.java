@@ -2,9 +2,11 @@ package org.farhan.mbt.core;
 
 import java.util.ArrayList;
 
-public abstract class ConvertToCode implements MojoGoal{
+import org.farhan.mbt.cucumber.CucumberProject;
 
-	protected abstract ArrayList<ToCodeConverter> getLayerConverters();
+public abstract class ConvertToCode implements MojoGoal {
+
+	protected CucumberProject tgtPrj;
 
 	protected abstract void save() throws Exception;
 
@@ -13,11 +15,23 @@ public abstract class ConvertToCode implements MojoGoal{
 	public void mojoGoal() throws Exception {
 
 		initProjects();
-		for (ToCodeConverter c : getLayerConverters()) {
-			c.selectObjects();
-			c.convertObjects();
-		}
+		loadFeatures();
+		convertFeatures();
 		save();
 	}
+
+	protected abstract void convertFeature(ConvertibleObject co) throws Exception;
+
+	protected abstract String convertFeatureName(String fullName);
+
+	protected void convertFeatures() throws Exception {
+		for (ConvertibleObject co : getFeatures(tgtPrj.FIRST_LAYER)) {
+			convertFeature(co);
+		}
+	}
+
+	protected abstract ArrayList<ConvertibleObject> getFeatures(String layer);
+
+	protected abstract void loadFeatures() throws Exception;
 
 }

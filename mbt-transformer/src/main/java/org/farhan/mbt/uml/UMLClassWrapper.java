@@ -21,18 +21,12 @@ import org.farhan.mbt.core.ConvertibleObject;
 
 public class UMLClassWrapper implements ConvertibleObject {
 
-	private static boolean isNotLoaded;
-	// TODO these are probably needed until the System is moved in this class and
-	// eventually removed when each class has its own file
-	private UMLProject parentProject;
-
 	private Class theClass;
 	private File theFile;
 
 	public UMLClassWrapper(UMLProject umlProject, Class theClass) {
 		this.theClass = theClass;
 		theFile = umlProject.getDir("");
-		isNotLoaded = true;
 	}
 
 	public void addBackground(Interaction background) {
@@ -424,12 +418,7 @@ public class UMLClassWrapper implements ConvertibleObject {
 
 	@Override
 	public void load() throws Exception {
-
-		// Only read the model file if it hasn't been loaded before. This will change
-		// when each class has its own model file
-		if (isNotLoaded) {
-			parentProject.load();
-		}
+		// TODO does nothing for now until there is a uml file for each class
 	}
 
 	private String replaceParameters(HashMap<String, String> replacements, String text) {
