@@ -37,7 +37,7 @@ public class AdocFileObject extends FileObject {
 	}
 
 	protected void assertFeatureTags(String name, String tags) {
-		Assertions.assertEquals(name, wrapper.getFeatureName());
+		assertFeatureExists(name);
 		Assertions.assertEquals(tags, wrapper.getFeatureTags());
 	}
 

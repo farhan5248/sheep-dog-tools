@@ -47,7 +47,7 @@ public class ConvertCucumberToUML extends ConvertToUML {
 	private void convertBackground(AbstractScenario abstractScenario) {
 		Interaction background = tgtObj.createBackground(srcObj.getBackgroundName(abstractScenario));
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
-		convertStepList(background, srcObj.getStepList(null, abstractScenario), abstractScenario);
+		convertStepList(background, srcObj.getStepList(abstractScenario), abstractScenario);
 		tgtObj.addBackground(background);
 	}
 
@@ -94,7 +94,7 @@ public class ConvertCucumberToUML extends ConvertToUML {
 		Interaction scenario = tgtObj.createScenario(srcObj.getScenarioName(abstractScenario));
 		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(abstractScenario));
 		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(abstractScenario));
-		convertStepList(scenario, srcObj.getStepList(null, abstractScenario), abstractScenario);
+		convertStepList(scenario, srcObj.getStepList(abstractScenario), abstractScenario);
 		tgtObj.addScenario(scenario);
 	}
 
@@ -102,7 +102,7 @@ public class ConvertCucumberToUML extends ConvertToUML {
 		Interaction scenarioOutline = tgtObj.createScenarioOutline(srcObj.getScenarioOutlineName(abstractScenario));
 		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
 		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
-		convertStepList(scenarioOutline, srcObj.getStepList(null, abstractScenario), abstractScenario);
+		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario), abstractScenario);
 		EList<Examples> examplesList = srcObj.getExamplesList(abstractScenario);
 		for (Examples examples : examplesList) {
 			convertExamples(scenarioOutline, examples);

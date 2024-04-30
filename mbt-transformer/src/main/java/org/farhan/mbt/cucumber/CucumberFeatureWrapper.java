@@ -197,6 +197,8 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		for (Line l : stepSrc.getTheDocString().getLines()) {
 			if (l.getName() != null) {
 				text += "\n" + l.getName().replaceFirst(indent, "").stripTrailing();
+			} else {
+				text += "\n";
 			}
 		}
 		return text.replaceFirst("\n", "");
@@ -285,7 +287,7 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		return rc.getRule().getName() + " " + step.getName();
 	}
 
-	public EList<Step> getStepList(Object object, AbstractScenario abstractScenario) {
+	public EList<Step> getStepList(AbstractScenario abstractScenario) {
 		return abstractScenario.getSteps();
 	}
 

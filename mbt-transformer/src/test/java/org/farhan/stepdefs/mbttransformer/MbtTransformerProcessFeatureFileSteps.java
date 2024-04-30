@@ -33,4 +33,67 @@ public class MbtTransformerProcessFeatureFileSteps {
         MbtTransformerFactory.get("ProcessFeatureFile").setPath("src/test/resources/cucumber/Process.feature");
         MbtTransformerFactory.get("ProcessFeatureFile").assertInputOutputs("Content", docString);
     }
+
+    @Given("^The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present$")
+    public void theMbtTransformerPluginSrcTestResourcesCucumberProcessFeatureFileWillBePresent() {
+        MbtTransformerFactory.get("ProcessFeatureFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessFeatureFile").setPath("src/test/resources/cucumber/Process.feature");
+        MbtTransformerFactory.get("ProcessFeatureFile").assertInputOutputs("Present");
+    }
+
+    @Given("^The mbt-transformer plugin, Process.feature file, Feature section will be as follows$")
+    public void theMbtTransformerPluginProcessFeatureFileFeatureSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("ProcessFeatureFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessFeatureFile").setPath("Process.feature");
+        MbtTransformerFactory.get("ProcessFeatureFile").assertInputOutputs(dataTable, "FeatureSection");
+    }
+
+    @Given("^The mbt-transformer plugin, Process.feature file, Background Steps Doc String section will be as follows$")
+    public void theMbtTransformerPluginProcessFeatureFileBackgroundStepsDocStringSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("ProcessFeatureFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessFeatureFile").setPath("Process.feature");
+        MbtTransformerFactory.get("ProcessFeatureFile").assertInputOutputs(dataTable, "BackgroundStepsDocStringSection");
+    }
+
+    @Given("^The mbt-transformer plugin, Process.feature file, Scenarios section will be as follows$")
+    public void theMbtTransformerPluginProcessFeatureFileScenariosSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("ProcessFeatureFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessFeatureFile").setPath("Process.feature");
+        MbtTransformerFactory.get("ProcessFeatureFile").assertInputOutputs(dataTable, "ScenariosSection");
+    }
+
+    @Given("^The mbt-transformer plugin, Process.feature file, Scenarios Steps section will be as follows$")
+    public void theMbtTransformerPluginProcessFeatureFileScenariosStepsSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("ProcessFeatureFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessFeatureFile").setPath("Process.feature");
+        MbtTransformerFactory.get("ProcessFeatureFile").assertInputOutputs(dataTable, "ScenariosStepsSection");
+    }
+
+    @Given("^The mbt-transformer plugin, Process.feature file, Scenario Outline Steps section will be as follows$")
+    public void theMbtTransformerPluginProcessFeatureFileScenarioOutlineStepsSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("ProcessFeatureFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessFeatureFile").setPath("Process.feature");
+        MbtTransformerFactory.get("ProcessFeatureFile").assertInputOutputs(dataTable, "ScenarioOutlineStepsSection");
+    }
+
+    @Given("^The mbt-transformer plugin, Process.feature file, Scenario Outline Steps Data Table section will be as follows$")
+    public void theMbtTransformerPluginProcessFeatureFileScenarioOutlineStepsDataTableSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("ProcessFeatureFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessFeatureFile").setPath("Process.feature");
+        MbtTransformerFactory.get("ProcessFeatureFile").assertInputOutputs(dataTable, "ScenarioOutlineStepsDataTableSection");
+    }
+
+    @Given("^The mbt-transformer plugin, Process.feature file, Scenario Outline Steps Examples section will be as follows$")
+    public void theMbtTransformerPluginProcessFeatureFileScenarioOutlineStepsExamplesSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("ProcessFeatureFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessFeatureFile").setPath("Process.feature");
+        MbtTransformerFactory.get("ProcessFeatureFile").assertInputOutputs(dataTable, "ScenarioOutlineStepsExamplesSection");
+    }
+
+    @Given("^The mbt-transformer plugin, Process.feature file, Scenario Outline Examples Table section will be as follows$")
+    public void theMbtTransformerPluginProcessFeatureFileScenarioOutlineExamplesTableSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("ProcessFeatureFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessFeatureFile").setPath("Process.feature");
+        MbtTransformerFactory.get("ProcessFeatureFile").assertInputOutputs(dataTable, "ScenarioOutlineExamplesTableSection");
+    }
 }
