@@ -1,6 +1,11 @@
 package org.farhan.common;
 
+import java.util.ArrayList;
+
 import org.farhan.cucumber.AbstractScenario;
+import org.farhan.cucumber.Cell;
+import org.farhan.cucumber.Examples;
+import org.farhan.cucumber.Row;
 import org.farhan.cucumber.Step;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
@@ -13,14 +18,13 @@ public class FeatureFileObject extends FileObject {
 	protected CucumberFeatureWrapper wrapper;
 
 	protected void assertBackgroundExists(String name) {
-		AbstractScenario abstractScenario = wrapper.getAbstractScenarioList().getFirst();
+		AbstractScenario abstractScenario = getAbstractScenario(name);
 		Assertions.assertEquals(name, wrapper.getBackgroundName(abstractScenario));
 	}
 
 	protected void assertBackgroundStepDocString(String name, String stepName, String content) {
-		assertScenarioExists(name);
+		assertBackgroundStepExists(name, stepName);
 		Step step = getStep(name, stepName);
-		Assertions.assertTrue(step != null, "Step " + stepName + " doesn't exist");
 		Assertions.assertEquals(content, wrapper.getDocString(step));
 	}
 
@@ -49,49 +53,51 @@ public class FeatureFileObject extends FileObject {
 		Assertions.assertEquals(tags, wrapper.getFeatureTags());
 	}
 
-	protected void assertScenarioDescription(String string, String string2) {
-		// TODO Auto-generated method stub
-
+	protected void assertScenarioDescription(String name, String description) {
+		AbstractScenario abstractScenario = getAbstractScenario(name);
+		Assertions.assertEquals(description, wrapper.getScenarioDescription(abstractScenario));
 	}
 
-	protected void assertScenarioExists(String string) {
-		// TODO Auto-generated method stub
-
+	protected void assertScenarioExists(String name) {
+		AbstractScenario abstractScenario = getAbstractScenario(name);
+		Assertions.assertTrue(abstractScenario != null, "Scenario " + name + " doesn't exist");
 	}
 
-	protected void assertScenarioOutlineExamplesExists(String string) {
-		// TODO Auto-generated method stub
-
+	protected void assertScenarioOutlineExamplesExists(String name, String examplesName) {
+		assertScenarioOutlineExists(name);
+		Assertions.assertTrue(getExamples(name, examplesName) != null, "Examples " + examplesName + " doesn't exist");
 	}
 
-	protected void assertScenarioOutlineExamplesTableRowExists(String string, String string2, String string3) {
-		// TODO Auto-generated method stub
-
+	protected void assertScenarioOutlineExamplesTableRowExists(String name, String examplesName, String rowName) {
+		assertScenarioOutlineExamplesExists(name, examplesName);
+		Object row = getRow(getExamples(name, examplesName), rowName);
+		Assertions.assertTrue(row != null, "Row " + rowName + " doesn't exist");
 	}
 
-	protected void assertScenarioOutlineExists(String string) {
-		// TODO Auto-generated method stub
-
+	protected void assertScenarioOutlineExists(String name) {
+		AbstractScenario abstractScenario = getAbstractScenario(name);
+		Assertions.assertEquals(name, wrapper.getScenarioOutlineName(abstractScenario));
 	}
 
-	protected void assertScenarioOutlineStepDataTableRowExists(String string, String string2, String string3) {
-		// TODO Auto-generated method stub
-
+	protected void assertScenarioOutlineStepDataTableRowExists(String name, String stepName, String rowName) {
+		assertScenarioOutlineStepExists(name, stepName);
+		ArrayList<String> row = getRow(getStep(name, stepName), rowName);
+		Assertions.assertTrue(row != null, "Row " + rowName + " doesn't exist");
 	}
 
-	protected void assertScenarioOutlineStepExists(String string, String string2) {
-		// TODO Auto-generated method stub
-
+	protected void assertScenarioOutlineStepExists(String name, String stepName) {
+		assertScenarioOutlineExists(name);
+		Assertions.assertTrue(getStep(name, stepName) != null, "Step " + stepName + " doesn't exist");
 	}
 
-	protected void assertScenarioStepExists(String string, String string2) {
-		// TODO Auto-generated method stub
-
+	protected void assertScenarioStepExists(String name, String stepName) {
+		assertScenarioExists(name);
+		Assertions.assertTrue(getStep(name, stepName) != null, "Step " + stepName + " doesn't exist");
 	}
 
-	protected void assertScenarioTags(String string, String string2) {
-		// TODO Auto-generated method stub
-
+	protected void assertScenarioTags(String name, String tags) {
+		AbstractScenario abstractScenario = getAbstractScenario(name);
+		Assertions.assertEquals(tags, wrapper.getScenarioTags(abstractScenario));
 	}
 
 	private AbstractScenario getAbstractScenario(String name) {
@@ -107,6 +113,55 @@ public class FeatureFileObject extends FileObject {
 		for (Step s : wrapper.getStepList(getAbstractScenario(name))) {
 			if (wrapper.getStep(s).contentEquals(stepName)) {
 				return s;
+			}
+		}
+		return null;
+	}
+
+	private Examples getExamples(String name, String examplesName) {
+		for (Examples e : wrapper.getExamplesList(getAbstractScenario(name))) {
+			if (wrapper.getExamplesName(e).contentEquals(examplesName)) {
+				return e;
+			}
+		}
+		return null;
+	}
+
+	private String getRow(Examples examples, String rowName) {
+		rowName = rowName.replaceAll(" +", " ");
+		// TODO make table handling consistent, so use list of list and have one method
+		// return both header and body
+		String hString = "|";
+		for (String h : wrapper.getExamplesTable(examples).split(",")) {
+			hString += " " + h + " |";
+		}
+		if (hString.contentEquals(rowName)) {
+			// TODO this is a temp hack because the table header and body row types are not
+			// the same, fix that first then return Row.
+			// TODO make methods to test for existence in the main classes
+			return rowName;
+		}
+		for (Row r : wrapper.getExamplesRowList(examples)) {
+			String rString = "|";
+			for (Cell c : r.getCells()) {
+				rString += " " + c.getName() + " |";
+			}
+			if (rString.contentEquals(rowName)) {
+				return rowName;
+			}
+		}
+		return null;
+	}
+
+	private ArrayList<String> getRow(Step step, String rowName) {
+		rowName = rowName.replaceAll(" +", " ");
+		for (ArrayList<String> r : wrapper.getDataTable(step)) {
+			String rString = "|";
+			for (String c : r) {
+				rString += " " + c + " |";
+			}
+			if (rString.contentEquals(rowName)) {
+				return r;
 			}
 		}
 		return null;

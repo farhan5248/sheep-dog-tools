@@ -34,6 +34,11 @@ Feature: UML Step To Code
 
   Scenario: Create new step object Java class for graph vertices
 
+# Object: interface name, package, import
+# Field: method name, visibility, return type
+# Field: method parameters
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/DataTablePage.java file will be present
+      And The mbt-transformer plugin, DataTablePage.java file will be as follows
      Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/DataTablePage.java file will be as follows
           """
           package org.farhan.objects.blah;

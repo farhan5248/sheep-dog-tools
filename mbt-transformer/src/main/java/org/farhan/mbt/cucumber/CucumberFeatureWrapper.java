@@ -152,11 +152,11 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		case "And":
 			step = CucumberFactory.eINSTANCE.createAnd();
 			break;
-		case "Asterisk":
+		case "*":
 			step = CucumberFactory.eINSTANCE.createAsterisk();
 			break;
 		}
-		step.setName(name.replaceFirst(keyword + " ", ""));
+		step.setName(name.substring(keyword.length()));
 		abstractScenario.getSteps().add(step);
 		return step;
 	}
@@ -283,8 +283,11 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 	public String getStep(Step step) {
 		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) step.eAdapters().getFirst();
 		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
-		rc.getRule().getName();
-		return rc.getRule().getName() + " " + step.getName();
+		String keywordString = rc.getRule().getName();
+		if (keywordString.contentEquals("Asterisk")) {
+			keywordString = "*";
+		}
+		return keywordString + " " + step.getName();
 	}
 
 	public EList<Step> getStepList(AbstractScenario abstractScenario) {

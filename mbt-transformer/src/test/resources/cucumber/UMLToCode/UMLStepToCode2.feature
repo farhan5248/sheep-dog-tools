@@ -1,5 +1,5 @@
 @debug
-Feature: UML Scenario To Code
+Feature: UML Step To Code 2
 
   Background: Create a feature file
 
@@ -32,6 +32,9 @@ Feature: UML Scenario To Code
 
   Scenario: Create new step definition Java class with a data table for graph vertices
 
+	# Object: class name, package, import
+	# Step: method name, visibility, return type
+	# Step: method parameters
      Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahDataTablePageSteps.java file will be as follows
           """
           package org.farhan.stepdefs.blah;

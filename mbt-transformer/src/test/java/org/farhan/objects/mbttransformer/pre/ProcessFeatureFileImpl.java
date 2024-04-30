@@ -43,7 +43,7 @@ public class ProcessFeatureFileImpl extends FeatureFileObject implements Process
 
 	@Override
 	public void assertScenarioOutlineExamplesTableSectionExamples(HashMap<String, String> keyMap) {
-		assertScenarioOutlineExamplesExists(keyMap.get("Examples"));
+		assertScenarioOutlineExamplesExists(keyMap.get("Name"), keyMap.get("Examples"));
 	}
 
 	@Override

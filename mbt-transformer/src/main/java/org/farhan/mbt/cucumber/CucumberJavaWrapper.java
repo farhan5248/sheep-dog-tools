@@ -161,7 +161,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(step));
 		{
 			String keyword = step.split(" ")[0];
-			String stepName = step.replaceFirst(keyword + " ", "");
+			String stepName = step.substring(keyword.length());
 			if (aMethod.getAnnotations().isEmpty()) {
 				aMethod.addSingleMemberAnnotation("Given", "\"^" + stepName + "$\"");
 			}
@@ -259,7 +259,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	private String getMethodNameForStepDef(String step) {
-		String name = step.replaceFirst(step.split(" ")[0] + " ", "");
+		String name = step.substring(step.split(" ")[0].length());
 		name = removeSpecialChars(name);
 		name = name.replace("'", "");
 		name = Utilities.lowerFirst(name);
