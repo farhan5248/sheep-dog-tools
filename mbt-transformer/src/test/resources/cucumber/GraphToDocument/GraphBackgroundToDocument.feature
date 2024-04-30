@@ -96,23 +96,22 @@ Feature: Graph Background To Document
           					label:end
           """
      When The mbt-transformer plugin, graph-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be as follows
-          """
-          :tags: tag1
-          = Process
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+      And The mbt-transformer plugin, Process.adoc file, Feature section will be as follows
+          |    Name | Tags |
+          | Process | tag1 |
+      And The mbt-transformer plugin, Process.adoc file, Background section will be as follows
+          |     Name |
+          | Preamble |
+      And The mbt-transformer plugin, Process.adoc file, Background Steps section will be as follows
+          |     Name |                                              Step |
+          | Preamble | Given The Search application, Login page is valid |
+      And The mbt-transformer plugin, Process.adoc file, Scenarios section will be as follows
+          |      Name |
+          | Story One |
+          | Story Two |
+      And The mbt-transformer plugin, Process.adoc file, Scenarios Steps section will be as follows
+          |      Name |                                                Step |
+          | Story One | Then The Search application, Logout page is enabled |
+          | Story Two | Then The Search application, Logout page is present |
           
-          [background="true"]
-          == Preamble
-          
-          === Given The Search application, Login page is valid
-
-          == Story One
-          
-          === Then The Search application, Logout page is enabled
-          
-          == Story Two
-          
-          === Then The Search application, Logout page is present
-          
-          """
-

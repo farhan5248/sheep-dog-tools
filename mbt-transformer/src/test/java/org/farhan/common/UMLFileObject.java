@@ -37,7 +37,6 @@ public abstract class UMLFileObject extends FileObject {
 	protected void assertClassExists(String className) {
 		Class theClass = (Class) umlProject.getPackagedElement("pst" + "::" + className, null);
 		Assertions.assertTrue(theClass != null, "Class " + className + " doesn't exist");
-
 	}
 
 	protected void assertClassCommentValue(String className, String commentBody) {
@@ -45,7 +44,6 @@ public abstract class UMLFileObject extends FileObject {
 		Comment comment = theClass.getOwnedComments().get(0);
 		Assertions.assertTrue(comment != null, "Class " + className + " Comment " + commentBody + " doesn't exist");
 		Assertions.assertEquals(commentBody, comment.getBody());
-
 	}
 
 	protected void assertClassImportedElementValue(String className, String importedElement) {
@@ -60,7 +58,6 @@ public abstract class UMLFileObject extends FileObject {
 		}
 		Assertions.assertTrue(elementImport != null,
 				"Class " + className + " Imported Element " + importedElement + " doesn't exist");
-
 	}
 
 	protected void assertClassPropertyNameExists(String className, String propertyName) {

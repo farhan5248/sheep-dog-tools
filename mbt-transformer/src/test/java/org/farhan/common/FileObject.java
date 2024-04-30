@@ -8,15 +8,23 @@ import org.junit.jupiter.api.Assertions;
 
 public abstract class FileObject extends GraphTestObject {
 
+	protected File theFile = null;
+
 	public void setComponent(String component) {
 		super.setComponent(component);
 		ConvertibleProject.baseDir = "target/src-gen/" + component + "/";
 	}
 
+	private File getFile() {
+		if (theFile == null) {
+			theFile = new File(ConvertibleProject.baseDir + keyValue.get("path"));
+		}
+		return theFile;
+	}
+
 	public void assertFileExists() {
 		try {
-			File theFile = new File(ConvertibleProject.baseDir + keyValue.get("path"));
-			Assertions.assertTrue(theFile.exists(), "The file (" + theFile.getCanonicalPath() + ") isn't present");
+			Assertions.assertTrue(getFile().exists(), "The file (" + getFile().getCanonicalPath() + ") isn't present");
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
@@ -24,8 +32,7 @@ public abstract class FileObject extends GraphTestObject {
 
 	public void setContent(String docString) {
 		try {
-			File aFile = new File(ConvertibleProject.baseDir + keyValue.get("path"));
-			Utilities.writeFile(aFile, docString);
+			Utilities.writeFile(getFile(), docString);
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
@@ -33,8 +40,7 @@ public abstract class FileObject extends GraphTestObject {
 
 	public void assertContent(String docString) {
 		try {
-			File aFile = new File(ConvertibleProject.baseDir + keyValue.get("path"));
-			String contents = Utilities.readFile(aFile);
+			String contents = Utilities.readFile(getFile());
 			Assertions.assertEquals(docString, contents.replaceAll("\r", ""));
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));

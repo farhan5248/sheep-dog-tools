@@ -82,18 +82,8 @@ Feature: Graph DocString To Document
           text1
           """
      When The mbt-transformer plugin, graph-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be as follows
-          """
-          :tags: tag1
-          = Process
-          
-          == Submit
-          
-          === Given The DocString page is as follows
-          
-          ----
-          text1
-          ----
-          
-          """
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+      And The mbt-transformer plugin, Process.adoc file, Scenarios Steps Doc String section will be as follows
+          |   Name |                                   Step | Content |
+          | Submit | Given The DocString page is as follows |   text1 |
 

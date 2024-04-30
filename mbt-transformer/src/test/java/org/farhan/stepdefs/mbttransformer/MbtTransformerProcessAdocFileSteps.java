@@ -33,4 +33,60 @@ public class MbtTransformerProcessAdocFileSteps {
         MbtTransformerFactory.get("ProcessAdocFile").setPath("src/test/resources/asciidoc/Process.adoc");
         MbtTransformerFactory.get("ProcessAdocFile").assertInputOutputs("Content", docString);
     }
+
+    @Given("^The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present$")
+    public void theMbtTransformerPluginSrcTestResourcesAsciidocProcessAdocFileWillBePresent() {
+        MbtTransformerFactory.get("ProcessAdocFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessAdocFile").setPath("src/test/resources/asciidoc/Process.adoc");
+        MbtTransformerFactory.get("ProcessAdocFile").assertInputOutputs("Present");
+    }
+
+    @Given("^The mbt-transformer plugin, Process.adoc file, Feature section will be as follows$")
+    public void theMbtTransformerPluginProcessAdocFileFeatureSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("ProcessAdocFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessAdocFile").setPath("Process.adoc");
+        MbtTransformerFactory.get("ProcessAdocFile").assertInputOutputs(dataTable, "FeatureSection");
+    }
+
+    @Given("^The mbt-transformer plugin, Process.adoc file, Background section will be as follows$")
+    public void theMbtTransformerPluginProcessAdocFileBackgroundSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("ProcessAdocFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessAdocFile").setPath("Process.adoc");
+        MbtTransformerFactory.get("ProcessAdocFile").assertInputOutputs(dataTable, "BackgroundSection");
+    }
+
+    @Given("^The mbt-transformer plugin, Process.adoc file, Background Steps section will be as follows$")
+    public void theMbtTransformerPluginProcessAdocFileBackgroundStepsSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("ProcessAdocFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessAdocFile").setPath("Process.adoc");
+        MbtTransformerFactory.get("ProcessAdocFile").assertInputOutputs(dataTable, "BackgroundStepsSection");
+    }
+
+    @Given("^The mbt-transformer plugin, Process.adoc file, Scenarios section will be as follows$")
+    public void theMbtTransformerPluginProcessAdocFileScenariosSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("ProcessAdocFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessAdocFile").setPath("Process.adoc");
+        MbtTransformerFactory.get("ProcessAdocFile").assertInputOutputs(dataTable, "ScenariosSection");
+    }
+
+    @Given("^The mbt-transformer plugin, Process.adoc file, Scenarios Steps section will be as follows$")
+    public void theMbtTransformerPluginProcessAdocFileScenariosStepsSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("ProcessAdocFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessAdocFile").setPath("Process.adoc");
+        MbtTransformerFactory.get("ProcessAdocFile").assertInputOutputs(dataTable, "ScenariosStepsSection");
+    }
+
+    @Given("^The mbt-transformer plugin, Process.adoc file, Scenarios Steps Data Table section will be as follows$")
+    public void theMbtTransformerPluginProcessAdocFileScenariosStepsDataTableSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("ProcessAdocFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessAdocFile").setPath("Process.adoc");
+        MbtTransformerFactory.get("ProcessAdocFile").assertInputOutputs(dataTable, "ScenariosStepsDataTableSection");
+    }
+
+    @Given("^The mbt-transformer plugin, Process.adoc file, Scenarios Steps Doc String section will be as follows$")
+    public void theMbtTransformerPluginProcessAdocFileScenariosStepsDocStringSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("ProcessAdocFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessAdocFile").setPath("Process.adoc");
+        MbtTransformerFactory.get("ProcessAdocFile").assertInputOutputs(dataTable, "ScenariosStepsDocStringSection");
+    }
 }
