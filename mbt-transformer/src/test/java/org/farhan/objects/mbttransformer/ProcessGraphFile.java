@@ -25,4 +25,8 @@ public interface ProcessGraphFile {
     public void assertVerticesSectionVertexName(HashMap<String, String> keyMap);
 
     public void setContent(HashMap<String, String> keyMap);
+
+    public void assertPathsSectionIndex(HashMap<String, String> keyMap);
+
+    public void assertEdgesSectionTag(HashMap<String, String> keyMap);
 }

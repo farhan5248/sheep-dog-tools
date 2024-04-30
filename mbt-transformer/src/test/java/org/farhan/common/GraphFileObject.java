@@ -20,13 +20,13 @@ public abstract class GraphFileObject extends FileObject {
 	private MBTGraph<MBTVertex, MBTEdge> getGraph(String graphName) {
 		for (Object o : graphProject.getObjects(graphProject.FIRST_LAYER)) {
 			MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) ((JGraphTGraphWrapper) o).get();
-			if (g.getName().contentEquals(graphName.replace(".graph", ""))) {
+			if (g.getName().replace(",", "").contentEquals(graphName.replace(".graph", ""))) {
 				return g;
 			}
 		}
 		for (Object o : graphProject.getObjects(graphProject.SECOND_LAYER)) {
 			MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) ((JGraphTGraphWrapper) o).get();
-			if (g.getName().contentEquals(graphName.replace(".graph", ""))) {
+			if (g.getName().replace(",", "").contentEquals(graphName.replace(".graph", ""))) {
 				return g;
 			}
 		}
@@ -44,10 +44,6 @@ public abstract class GraphFileObject extends FileObject {
 		return null;
 	}
 
-	private MBTEdge getEdgeBySourceVertex(MBTGraph<MBTVertex, MBTEdge> g, String sourceVertex) {
-		return (MBTEdge) g.outgoingEdgesOf(g.getVertex(sourceVertex)).toArray()[0];
-	}
-
 	protected void assertVerticesVertexNameExists(String vertexName) {
 		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
 		Assertions.assertTrue(g.vertexSet().contains(new MBTVertex(vertexName)),
@@ -59,22 +55,11 @@ public abstract class GraphFileObject extends FileObject {
 		Assertions.assertTrue(getEdgeByString(g, edgeName) != null, "Edge " + edgeName + " doesn't exist");
 	}
 
-	protected void assertEdgesGraphEdgeNameExists(String sourceVertex, String graphEdgeName) {
+	protected void assertEdgesTag(String edgeName, String tags) {
 		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
-		MBTEdge edge = getEdgeBySourceVertex(g, sourceVertex);
-		Assertions.assertTrue(edge != null, "Edge " + sourceVertex + " doesn't exist");
-		MBTGraph<MBTVertex, MBTEdge> g1 = getGraph(edge.getLabel());
-		Assertions.assertTrue(getEdgeByString(g1, graphEdgeName) != null,
-				"Graph Edge " + graphEdgeName + " doesn't exist");
-	}
-
-	protected void assertEdgesGraphVertexNameExists(String sourceVertex, String graphVertexName) {
-		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
-		MBTEdge edge = getEdgeBySourceVertex(g, sourceVertex);
-		Assertions.assertTrue(edge != null, "Edge " + sourceVertex + " doesn't exist");
-		MBTGraph<MBTVertex, MBTEdge> g1 = getGraph(edge.getLabel());
-		Assertions.assertTrue(g1.vertexSet().contains(new MBTVertex(graphVertexName)),
-				"Vertex " + graphVertexName + " doesn't exist");
+		MBTEdge edge = getEdgeByString(g, edgeName);
+		Assertions.assertTrue(edge != null, "Edge " + edgeName + " doesn't exist");
+		Assertions.assertEquals(tags, edge.getTags());
 	}
 
 	protected void assertGraphModelExists() {
@@ -117,6 +102,13 @@ public abstract class GraphFileObject extends FileObject {
 		MBTPathInfo path = g.getPathInfo(pathName);
 		Assertions.assertTrue(path != null, "Path " + pathName + " doesn't exist");
 		Assertions.assertEquals(tags, path.getTags());
+	}
+
+	protected void assertPathsIndex(String pathName, String index) {
+		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
+		MBTPathInfo path = g.getPathInfo(pathName);
+		Assertions.assertTrue(path != null, "Path " + pathName + " doesn't exist");
+		Assertions.assertEquals(index, path.getIndex());
 	}
 
 	protected void assertGraphDescription(String description) {
