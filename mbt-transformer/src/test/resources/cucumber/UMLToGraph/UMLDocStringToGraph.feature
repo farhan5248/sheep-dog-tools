@@ -21,80 +21,16 @@ Feature: UML DocString To Graph
           | Tags |
           | tag1 |
       And The mbt-transformer plugin, uml-to-graph goal is executed
-     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be as follows
-          """
-          Graph
-          	name:Process
-          	tag:tag1
-          	description:
-          	paths:
-          		Path
-          			index:0
-          			name:Submit
-          			tag:
-          			parameters:
-          			description:
-          	vertices:
-          		Vertex
-          			label:start
-          		Vertex
-          			label:end
-          		Vertex
-          			label:Given The DocString page is as follows
-          	edges:
-          		Edge
-          			label:
-          			tag:0
-          			source:
-          				Vertex
-          					label:start
-          			target:
-          				Vertex
-          					label:Given The DocString page is as follows
-          		Edge
-          			label:
-          			tag:0
-          			source:
-          				Vertex
-          					label:Given The DocString page is as follows
-          			target:
-          				Vertex
-          					label:end
-          """
-      And The mbt-transformer plugin, target/graphs/stepdefs/Given The DocString page is as follows.graph file will be as follows
-          """
-          Graph
-          	name:Given The DocString page is as follows
-          	tag:
-          	description:
-          	paths:
-          	vertices:
-          		Vertex
-          			label:start
-          		Vertex
-          			label:end
-          		Vertex
-          			label:Content
-          	edges:
-          		Edge
-          			label:
-          			tag:0
-          			source:
-          				Vertex
-          					label:start
-          			target:
-          				Vertex
-          					label:Content
-          		Edge
-          			label:Given The DocString page is as follows-0.txt
-          			tag:0
-          			source:
-          				Vertex
-          					label:Content
-          			target:
-          				Vertex
-          					label:end
-          """
+     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
+      And The Process.graph file, Edges section will be as follows
+          |                                           Edge Name |
+          | start ->  -> Given The DocString page is as follows |
+          |   Given The DocString page is as follows ->  -> end |
+      And The mbt-transformer plugin, target/graphs/stepdefs/Given The DocString page is as follows.graph file will be present
+      And The Given The DocString page is as follows.graph file, Edges section will be as follows
+          |                                                      Edge Name |
+          |                                           start ->  -> Content |
+          | Content -> Given The DocString page is as follows-0.txt -> end |
       And The mbt-transformer plugin, target/graphs/resources/Given The DocString page is as follows-0.txt file will be as follows
           """
           text1

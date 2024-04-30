@@ -26,95 +26,20 @@ Feature: UML Background To Graph
           | Tags |
           | tag1 |
       And The mbt-transformer plugin, uml-to-graph goal is executed
-     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be as follows
-          """
-          Graph
-          	name:Process
-          	tag:tag1
-          	description:
-          	paths:
-          		Path
-          			index:0
-          			name:Preamble
-          			tag:background
-          			parameters:
-          			description:
-          		Path
-          			index:1
-          			name:Story One
-          			tag:
-          			parameters:
-          			description:
-          		Path
-          			index:2
-          			name:Story Two
-          			tag:
-          			parameters:
-          			description:
-          	vertices:
-          		Vertex
-          			label:start
-          		Vertex
-          			label:end
-          		Vertex
-          			label:Given The Search application, Login page is valid
-          		Vertex
-          			label:Then The Search application, Logout page is enabled
-          		Vertex
-          			label:Then The Search application, Logout page is present
-          	edges:
-          		Edge
-          			label:
-          			tag:0
-          			source:
-          				Vertex
-          					label:start
-          			target:
-          				Vertex
-          					label:Given The Search application, Login page is valid
-          		Edge
-          			label:
-          			tag:0
-          			source:
-          				Vertex
-          					label:Given The Search application, Login page is valid
-          			target:
-          				Vertex
-          					label:end
-          		Edge
-          			label:
-          			tag:1
-          			source:
-          				Vertex
-          					label:Given The Search application, Login page is valid
-          			target:
-          				Vertex
-          					label:Then The Search application, Logout page is enabled
-          		Edge
-          			label:
-          			tag:1
-          			source:
-          				Vertex
-          					label:Then The Search application, Logout page is enabled
-          			target:
-          				Vertex
-          					label:end
-          		Edge
-          			label:
-          			tag:2
-          			source:
-          				Vertex
-          					label:Given The Search application, Login page is valid
-          			target:
-          				Vertex
-          					label:Then The Search application, Logout page is present
-          		Edge
-          			label:
-          			tag:2
-          			source:
-          				Vertex
-          					label:Then The Search application, Logout page is present
-          			target:
-          				Vertex
-          					label:end
-          """
+     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
+      And The Process.graph file, Paths section will be as follows
+          |     Name |        Tag |
+          | Preamble | background |
+      And The Process.graph file, Paths section will be as follows
+          |      Name |
+          | Story One |
+          | Story Two |
+      And The Process.graph file, Edges section will be as follows
+          |                                                                                                    Edge Name |
+          |                                               start ->  -> Given The Search application, Login page is valid |
+          |                                                 Given The Search application, Login page is valid ->  -> end |
+          | Given The Search application, Login page is valid ->  -> Then The Search application, Logout page is enabled |
+          |                                               Then The Search application, Logout page is enabled ->  -> end |
+          | Given The Search application, Login page is valid ->  -> Then The Search application, Logout page is present |
+          |                                               Then The Search application, Logout page is present ->  -> end |
+
