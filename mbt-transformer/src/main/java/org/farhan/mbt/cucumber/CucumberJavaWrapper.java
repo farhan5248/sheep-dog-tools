@@ -338,5 +338,4 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		text = Utilities.removeDelimiterAndCapitalize(text, ",");
 		return text;
 	}
-
 }

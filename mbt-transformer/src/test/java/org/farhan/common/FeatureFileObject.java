@@ -14,8 +14,8 @@ import org.junit.jupiter.api.Assertions;
 
 public class FeatureFileObject extends FileObject {
 
-	protected CucumberProject project;
-	protected CucumberFeatureWrapper wrapper;
+	private CucumberProject project;
+	private CucumberFeatureWrapper wrapper;
 
 	protected void assertBackgroundExists(String name) {
 		AbstractScenario abstractScenario = getAbstractScenario(name);

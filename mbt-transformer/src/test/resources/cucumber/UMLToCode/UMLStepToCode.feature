@@ -1,8 +1,6 @@
 @debug
 Feature: UML Step To Code
 
-# TODO Split into language elements
-
   Background: Create a feature file
 
     Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
@@ -34,72 +32,57 @@ Feature: UML Step To Code
 
   Scenario: Create new step object Java class for graph vertices
 
-# Object: interface name, package, import
-# Field: method name, visibility, return type
-# Field: method parameters
      Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/DataTablePage.java file will be present
-      And The mbt-transformer plugin, DataTablePage.java file will be as follows
-     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/DataTablePage.java file will be as follows
-          """
-          package org.farhan.objects.blah;
-          
-          import java.util.HashMap;
-          
-          public interface DataTablePage {
-          
-              public void assertTopSectionH1(HashMap<String, String> keyMap);
-          
-              public void assertTopSectionH2(HashMap<String, String> keyMap);
-          }
-          
-          """
+      And The mbt-transformer plugin, DataTablePage.java file, Object section will be as follows
+          | Interface Name |                 Package |            Import |
+          |  DataTablePage | org.farhan.objects.blah | java.util.HashMap |
+      And The mbt-transformer plugin, DataTablePage.java file, Fields section will be as follows
+          |        Method Name | Visibility | Return Type |
+          | assertTopSectionH1 |     public |        void |
+          | assertTopSectionH2 |     public |        void |
+      And The mbt-transformer plugin, DataTablePage.java file, Fields section will be as follows
+          |        Method Name | Parameter Name |         Parameter Type |
+          | assertTopSectionH1 |         keyMap | HashMap<String,String> |
+          | assertTopSectionH2 |         keyMap | HashMap<String,String> |
 
   Scenario: Create new step object Java class for graph edges
 
-     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/DocStringPage.java file will be as follows
-          """
-          package org.farhan.objects.blah;
-          
-          import java.util.HashMap;
-          
-          public interface DocStringPage {
-          
-              public void setContent(HashMap<String, String> keyMap);
-          }
-          
-          """
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/DocStringPage.java file will be present
+      And The mbt-transformer plugin, DocStringPage.java file, Object section will be as follows
+          | Interface Name |                 Package |            Import |
+          |  DocStringPage | org.farhan.objects.blah | java.util.HashMap |
+      And The mbt-transformer plugin, DocStringPage.java file, Fields section will be as follows
+          | Method Name | Visibility | Return Type |
+          |  setContent |     public |        void |
+      And The mbt-transformer plugin, DocStringPage.java file, Fields section will be as follows
+          | Method Name | Parameter Name |         Parameter Type |
+          |  setContent |         keyMap | HashMap<String,String> |
 
   Scenario: Non existing Java class creation with vertice details
 
-     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be as follows
-          """
-          package org.farhan.objects.blah;
-          
-          import java.util.HashMap;
-          
-          public interface ObjectPage {
-          
-              public void setEmpty(HashMap<String, String> keyMap);
-          }
-          
-          """
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
+      And The mbt-transformer plugin, ObjectPage.java file, Object section will be as follows
+          | Interface Name |                 Package |            Import |
+          |     ObjectPage | org.farhan.objects.blah | java.util.HashMap |
+      And The mbt-transformer plugin, ObjectPage.java file, Fields section will be as follows
+          | Method Name | Visibility | Return Type |
+          |    setEmpty |     public |        void |
+      And The mbt-transformer plugin, ObjectPage.java file, Fields section will be as follows
+          | Method Name | Parameter Name |         Parameter Type |
+          |    setEmpty |         keyMap | HashMap<String,String> |
 
   Scenario: Non existing Java class creation with edge details
 
-     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah2/JsonRequest.java file will be as follows
-          """
-          package org.farhan.objects.blah2;
-          
-          import java.util.HashMap;
-          
-          public interface JsonRequest {
-          
-              public void transition();
-          
-              public void setI1(HashMap<String, String> keyMap);
-          
-              public void setI2(HashMap<String, String> keyMap);
-          }
-          
-          """
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah2/JsonRequest.java file will be present
+      And The mbt-transformer plugin, JsonRequest.java file, Object section will be as follows
+          | Interface Name |                  Package |            Import |
+          |    JsonRequest | org.farhan.objects.blah2 | java.util.HashMap |
+      And The mbt-transformer plugin, JsonRequest.java file, Fields section will be as follows
+          | Method Name | Visibility | Return Type |
+          |       setI1 |     public |        void |
+          |       setI2 |     public |        void |
+      And The mbt-transformer plugin, JsonRequest.java file, Fields section will be as follows
+          | Method Name | Parameter Name |         Parameter Type |
+          |       setI1 |         keyMap | HashMap<String,String> |
+          |       setI2 |         keyMap | HashMap<String,String> |
 
