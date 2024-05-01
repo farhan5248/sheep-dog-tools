@@ -25,7 +25,7 @@ public class AdocFileObject extends FileObject {
 		assertFileExists();
 		project = new AsciiDoctorProject();
 		try {
-			wrapper = (AsciiDoctorAdocWrapper) project.createObject(theFile.getAbsolutePath());
+			wrapper = (AsciiDoctorAdocWrapper) project.createObject(getFile().getAbsolutePath());
 			wrapper.load();
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));

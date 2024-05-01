@@ -19,4 +19,18 @@ public class MbtTransformerBlahObjectPageStepsJavaFileSteps {
         MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").setPath("src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java");
         MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").assertInputOutputs("Content", docString);
     }
+
+    @Given("^The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present$")
+    public void theMbtTransformerPluginSrcTestJavaOrgFarhanStepdefsBlahBlahObjectPageStepsJavaFileWillBePresent() {
+        MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").setPath("src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java");
+        MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").assertInputOutputs("Present");
+    }
+
+    @Given("^The mbt-transformer plugin, BlahObjectPageSteps.java file, Fields section will be as follows$")
+    public void theMbtTransformerPluginBlahObjectPageStepsJavaFileFieldsSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").setPath("BlahObjectPageSteps.java");
+        MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").assertInputOutputs(dataTable, "FieldsSection");
+    }
 }

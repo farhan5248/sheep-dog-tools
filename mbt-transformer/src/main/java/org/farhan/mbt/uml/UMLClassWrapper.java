@@ -187,7 +187,7 @@ public class UMLClassWrapper implements ConvertibleObject {
 
 	public Message createStep(Interaction abstractScenario, String stepName) {
 		String keyword = stepName.split(" ")[0];
-		Message step = abstractScenario.createMessage(stepName.substring(keyword.length()));
+		Message step = abstractScenario.createMessage(stepName.substring(keyword.length() + 1));
 		createAnnotation(step, "Step", "Keyword", keyword);
 		return step;
 	}

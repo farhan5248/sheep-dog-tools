@@ -30,102 +30,69 @@ Feature: UML Step To Code 2
           | tag1 |
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
 
+  Scenario: Common step def file parts
+
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahDataTablePageSteps.java file will be present
+      And The mbt-transformer plugin, BlahDataTablePageSteps.java file, Object section will be as follows
+          |         Interface Name |                  Package |
+          | BlahDataTablePageSteps | org.farhan.stepdefs.blah |
+      And The mbt-transformer plugin, BlahDataTablePageSteps.java file, Object section will be as follows
+          |                          Import |
+          |   org.farhan.common.BlahFactory |
+          |       io.cucumber.java.en.Given |
+          | io.cucumber.datatable.DataTable |
+      And The mbt-transformer plugin, BlahDataTablePageSteps.java file, Fields section will be as follows
+          |                                              Method Name | Visibility | Return Type |
+          | theBlahApplicationDataTablePageTopSectionWillBeAsFollows |     public |        void |
+      And The mbt-transformer plugin, BlahDataTablePageSteps.java file, Fields section will be as follows
+          |                                              Method Name |                                                                       Annotation |
+          | theBlahApplicationDataTablePageTopSectionWillBeAsFollows | @Given("^The blah application, DataTable page, Top section will be as follows$") |
+
   Scenario: Create new step definition Java class with a data table for graph vertices
 
-	# Object: class name, package, import
-	# Step: method name, visibility, return type
-	# Step: method parameters
-     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahDataTablePageSteps.java file will be as follows
-          """
-          package org.farhan.stepdefs.blah;
-          
-          import org.farhan.common.BlahFactory;
-          import io.cucumber.java.en.Given;
-          import io.cucumber.datatable.DataTable;
-          
-          public class BlahDataTablePageSteps {
-          
-              @Given("^The blah application, DataTable page, Top section will be as follows$")
-              public void theBlahApplicationDataTablePageTopSectionWillBeAsFollows(DataTable dataTable) {
-                  BlahFactory.get("DataTablePage").setComponent("blah");
-                  BlahFactory.get("DataTablePage").setPath("DataTable");
-                  BlahFactory.get("DataTablePage").assertInputOutputs(dataTable, "TopSection");
-              }
-          }
-          
-          """
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahDataTablePageSteps.java file will be present
+      And The mbt-transformer plugin, BlahDataTablePageSteps.java file, Fields section will be as follows
+          |                                              Method Name | Parameter Name | Parameter Type |
+          | theBlahApplicationDataTablePageTopSectionWillBeAsFollows |      dataTable |      DataTable |
+      And The mbt-transformer plugin, BlahDataTablePageSteps.java file, Fields section will be as follows
+          |                                              Method Name |                                                                     Statement |
+          | theBlahApplicationDataTablePageTopSectionWillBeAsFollows |                        BlahFactory.get("DataTablePage").setComponent("blah"); |
+          | theBlahApplicationDataTablePageTopSectionWillBeAsFollows |                        BlahFactory.get("DataTablePage").setPath("DataTable"); |
+          | theBlahApplicationDataTablePageTopSectionWillBeAsFollows | BlahFactory.get("DataTablePage").assertInputOutputs(dataTable, "TopSection"); |
 
   Scenario: Create new step definition Java class with a doc string for graph vertices
 
-     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahDocStringPageSteps.java file will be as follows
-          """
-          package org.farhan.stepdefs.blah;
-          
-          import org.farhan.common.BlahFactory;
-          import io.cucumber.java.en.Given;
-          import io.cucumber.datatable.DataTable;
-          
-          public class BlahDocStringPageSteps {
-          
-              @Given("^The blah application, DocString page is as follows$")
-              public void theBlahApplicationDocStringPageIsAsFollows(String docString) {
-                  BlahFactory.get("DocStringPage").setComponent("blah");
-                  BlahFactory.get("DocStringPage").setPath("DocString");
-                  BlahFactory.get("DocStringPage").setInputOutputs("Content", docString);
-              }
-          }
-          
-          """
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahDocStringPageSteps.java file will be present
+      And The mbt-transformer plugin, BlahDocStringPageSteps.java file, Fields section will be as follows
+          |                                Method Name | Parameter Name | Parameter Type |
+          | theBlahApplicationDocStringPageIsAsFollows |      docString |         String |
+      And The mbt-transformer plugin, BlahDocStringPageSteps.java file, Fields section will be as follows
+          |                                Method Name |                                                               Statement |
+          | theBlahApplicationDocStringPageIsAsFollows |                  BlahFactory.get("DocStringPage").setComponent("blah"); |
+          | theBlahApplicationDocStringPageIsAsFollows |                  BlahFactory.get("DocStringPage").setPath("DocString"); |
+          | theBlahApplicationDocStringPageIsAsFollows | BlahFactory.get("DocStringPage").setInputOutputs("Content", docString); |
 
   Scenario: Create new step definition Java class with no arguments for graph vertices
 
-     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be as follows
-          """
-          package org.farhan.stepdefs.blah;
-          
-          import org.farhan.common.BlahFactory;
-          import io.cucumber.java.en.Given;
-          import io.cucumber.datatable.DataTable;
-          
-          public class BlahObjectPageSteps {
-          
-              @Given("^The blah application, Object page is empty$")
-              public void theBlahApplicationObjectPageIsEmpty() {
-                  BlahFactory.get("ObjectPage").setComponent("blah");
-                  BlahFactory.get("ObjectPage").setPath("Object");
-                  BlahFactory.get("ObjectPage").setInputOutputs("Empty");
-              }
-          }
-          
-          """
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
+      And The mbt-transformer plugin, BlahObjectPageSteps.java file, Fields section will be as follows
+          |                         Method Name |                                               Statement |
+          | theBlahApplicationObjectPageIsEmpty |     BlahFactory.get("ObjectPage").setComponent("blah"); |
+          | theBlahApplicationObjectPageIsEmpty |        BlahFactory.get("ObjectPage").setPath("Object"); |
+          | theBlahApplicationObjectPageIsEmpty | BlahFactory.get("ObjectPage").setInputOutputs("Empty"); |
 
   Scenario: Create new step definition Java class for graph edges
 
-     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah2/Blah2JsonRequestSteps.java file will be as follows
-          """
-          package org.farhan.stepdefs.blah2;
-          
-          import org.farhan.common.Blah2Factory;
-          import io.cucumber.java.en.Given;
-          import io.cucumber.datatable.DataTable;
-          
-          public class Blah2JsonRequestSteps {
-          
-              @Given("^The blah2 service, Json request is executed with$")
-              public void theBlah2ServiceJsonRequestIsExecutedWith(DataTable dataTable) {
-                  Blah2Factory.get("JsonRequest").setComponent("blah2");
-                  Blah2Factory.get("JsonRequest").setPath("Json");
-                  Blah2Factory.get("JsonRequest").setInputOutputs(dataTable);
-                  Blah2Factory.get("JsonRequest").transition();
-              }
-          
-              @Given("^The blah2 service, Json request is sent$")
-              public void theBlah2ServiceJsonRequestIsSent() {
-                  Blah2Factory.get("JsonRequest").setComponent("blah2");
-                  Blah2Factory.get("JsonRequest").setPath("Json");
-                  Blah2Factory.get("JsonRequest").transition();
-              }
-          }
-          
-          """
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah2/Blah2JsonRequestSteps.java file will be present
+      And The mbt-transformer plugin, Blah2JsonRequestSteps.java file, Fields section will be as follows
+          |                              Method Name |                                                   Statement |
+          | theBlah2ServiceJsonRequestIsExecutedWith |      Blah2Factory.get("JsonRequest").setComponent("blah2"); |
+          | theBlah2ServiceJsonRequestIsExecutedWith |            Blah2Factory.get("JsonRequest").setPath("Json"); |
+          | theBlah2ServiceJsonRequestIsExecutedWith | Blah2Factory.get("JsonRequest").setInputOutputs(dataTable); |
+          | theBlah2ServiceJsonRequestIsExecutedWith |               Blah2Factory.get("JsonRequest").transition(); |
+      And The mbt-transformer plugin, Blah2JsonRequestSteps.java file, Fields section will be as follows
+          |                      Method Name |                                              Statement |
+          | theBlah2ServiceJsonRequestIsSent | Blah2Factory.get("JsonRequest").setComponent("blah2"); |
+          | theBlah2ServiceJsonRequestIsSent |       Blah2Factory.get("JsonRequest").setPath("Json"); |
+          | theBlah2ServiceJsonRequestIsSent |          Blah2Factory.get("JsonRequest").transition(); |
 

@@ -9,6 +9,8 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.expr.AnnotationExpr;
+import com.github.javaparser.ast.stmt.Statement;
 
 public class JavaFileObject extends FileObject {
 
@@ -53,7 +55,7 @@ public class JavaFileObject extends FileObject {
 		assertFileExists();
 		project = new CucumberProject();
 		try {
-			wrapper = (CucumberJavaWrapper) project.createObject(theFile.getAbsolutePath());
+			wrapper = (CucumberJavaWrapper) project.createObject(getFile().getAbsolutePath());
 			wrapper.load();
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
@@ -90,6 +92,35 @@ public class JavaFileObject extends FileObject {
 		assertMethodExists(methodName);
 		Assertions.assertEquals(parameterType,
 				getMethod(methodName).getParameterByName(parameterName).get().getTypeAsString());
+	}
 
+	protected void assertMethodAnnotationExists(String methodName, String annotation) {
+		assertMethodExists(methodName);
+		Assertions.assertTrue(getAnnotation(methodName, annotation) != null,
+				"Annotation " + annotation + " doesn't exist");
+	}
+
+	private AnnotationExpr getAnnotation(String methodName, String annotation) {
+		for (AnnotationExpr a : getMethod(methodName).getAnnotations()) {
+			if (a.toString().contentEquals(annotation)) {
+				return a;
+			}
+		}
+		return null;
+	}
+
+	protected void assertMethodStatementExists(String methodName, String statement) {
+		assertMethodExists(methodName);
+		Assertions.assertTrue(getStatement(methodName, statement) != null, "Statement " + statement + " doesn't exist");
+	}
+
+	private Statement getStatement(String methodName, String statement) {
+		for (Statement s : getMethod(methodName).getBody().get().getStatements()) {
+			s.toString();
+			if (s.toString().contentEquals(statement)) {
+				return s;
+			}
+		}
+		return null;
 	}
 }

@@ -37,7 +37,7 @@ public class FeatureFileObject extends FileObject {
 		assertFileExists();
 		project = new CucumberProject();
 		try {
-			wrapper = (CucumberFeatureWrapper) project.createObject(theFile.getAbsolutePath());
+			wrapper = (CucumberFeatureWrapper) project.createObject(getFile().getAbsolutePath());
 			wrapper.load();
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));

@@ -156,7 +156,7 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 			step = CucumberFactory.eINSTANCE.createAsterisk();
 			break;
 		}
-		step.setName(name.substring(keyword.length()));
+		step.setName(name.substring(keyword.length() + 1));
 		abstractScenario.getSteps().add(step);
 		return step;
 	}

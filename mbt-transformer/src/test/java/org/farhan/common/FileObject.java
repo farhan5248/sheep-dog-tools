@@ -8,21 +8,16 @@ import org.junit.jupiter.api.Assertions;
 
 public abstract class FileObject extends GraphTestObject {
 
-	protected File theFile = null;
-
 	public void setComponent(String component) {
 		super.setComponent(component);
 		ConvertibleProject.baseDir = "target/src-gen/" + component + "/";
 	}
 
-	private File getFile() {
-		if (theFile == null) {
-			theFile = new File(ConvertibleProject.baseDir + keyValue.get("path"));
-		}
-		return theFile;
+	protected File getFile() {
+		return new File(ConvertibleProject.baseDir + keyValue.get("path"));
 	}
 
-	public void assertFileExists() {
+	protected void assertFileExists() {
 		try {
 			Assertions.assertTrue(getFile().exists(), "The file (" + getFile().getCanonicalPath() + ") isn't present");
 		} catch (Exception e) {
@@ -30,7 +25,7 @@ public abstract class FileObject extends GraphTestObject {
 		}
 	}
 
-	public void setContent(String docString) {
+	protected void setContent(String docString) {
 		try {
 			Utilities.writeFile(getFile(), docString);
 		} catch (Exception e) {
@@ -38,7 +33,7 @@ public abstract class FileObject extends GraphTestObject {
 		}
 	}
 
-	public void assertContent(String docString) {
+	protected void assertContent(String docString) {
 		try {
 			String contents = Utilities.readFile(getFile());
 			Assertions.assertEquals(docString, contents.replaceAll("\r", ""));
