@@ -1,4 +1,5 @@
-@debug
+@debug @outline
+# break this up into smaller scenario
 Feature: UML Feature To Code
 
   Background: Create a graph text file

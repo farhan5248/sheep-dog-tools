@@ -1,4 +1,4 @@
-package org.farhan.objects.mbttransformer;
+package org.farhan.objects.mbttransformer.graph;
 
 import java.util.HashMap;
 

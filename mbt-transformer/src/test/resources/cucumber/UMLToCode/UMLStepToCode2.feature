@@ -1,4 +1,5 @@
-@debug
+@debug @outline
+# maybe no outline but separate scenarios
 Feature: UML Step To Code 2
 
   Background: Create a feature file

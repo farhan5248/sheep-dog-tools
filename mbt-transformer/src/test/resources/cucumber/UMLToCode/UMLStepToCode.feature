@@ -1,4 +1,4 @@
-@debug
+@debug @outline
 Feature: UML Step To Code
 
   Background: Create a feature file

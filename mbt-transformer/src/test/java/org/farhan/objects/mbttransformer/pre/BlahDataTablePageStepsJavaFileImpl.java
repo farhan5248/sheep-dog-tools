@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import org.farhan.common.JavaFileObject;
 import org.farhan.common.UMLFileObject;
-import org.farhan.objects.mbttransformer.BlahDataTablePageStepsJavaFile;
+import org.farhan.objects.mbttransformer.java.BlahDataTablePageStepsJavaFile;
 
 public class BlahDataTablePageStepsJavaFileImpl extends JavaFileObject implements BlahDataTablePageStepsJavaFile {
 

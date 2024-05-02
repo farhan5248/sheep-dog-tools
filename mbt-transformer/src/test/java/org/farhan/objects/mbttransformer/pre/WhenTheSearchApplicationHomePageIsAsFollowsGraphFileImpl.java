@@ -3,7 +3,7 @@ package org.farhan.objects.mbttransformer.pre;
 import java.util.HashMap;
 
 import org.farhan.common.GraphFileObject;
-import org.farhan.objects.mbttransformer.WhenTheSearchApplicationHomePageIsAsFollowsGraphFile;
+import org.farhan.objects.mbttransformer.graph.WhenTheSearchApplicationHomePageIsAsFollowsGraphFile;
 
 public class WhenTheSearchApplicationHomePageIsAsFollowsGraphFileImpl extends GraphFileObject
 		implements WhenTheSearchApplicationHomePageIsAsFollowsGraphFile {

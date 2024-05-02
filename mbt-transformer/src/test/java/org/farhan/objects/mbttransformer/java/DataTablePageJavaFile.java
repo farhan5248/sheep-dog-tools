@@ -1,8 +1,8 @@
-package org.farhan.objects.mbttransformer;
+package org.farhan.objects.mbttransformer.java;
 
 import java.util.HashMap;
 
-public interface DocStringPageJavaFile {
+public interface DataTablePageJavaFile {
 
     public void assertPresent(HashMap<String, String> keyMap);
 

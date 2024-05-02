@@ -3,7 +3,7 @@ package org.farhan.objects.mbttransformer.pre;
 import java.util.HashMap;
 
 import org.farhan.common.GraphFileObject;
-import org.farhan.objects.mbttransformer.GivenTheDocStringPageIsAsFollowsGraphFile;
+import org.farhan.objects.mbttransformer.graph.GivenTheDocStringPageIsAsFollowsGraphFile;
 
 public class GivenTheDocStringPageIsAsFollowsGraphFileImpl extends GraphFileObject
 		implements GivenTheDocStringPageIsAsFollowsGraphFile {

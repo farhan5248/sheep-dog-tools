@@ -3,7 +3,7 @@ package org.farhan.objects.mbttransformer.pre;
 import java.util.HashMap;
 
 import org.farhan.common.JavaFileObject;
-import org.farhan.objects.mbttransformer.Blah2JsonRequestStepsJavaFile;
+import org.farhan.objects.mbttransformer.java.Blah2JsonRequestStepsJavaFile;
 
 public class Blah2JsonRequestStepsJavaFileImpl extends JavaFileObject implements Blah2JsonRequestStepsJavaFile {
 

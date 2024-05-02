@@ -1,8 +1,8 @@
-package org.farhan.objects.mbttransformer;
+package org.farhan.objects.mbttransformer.java;
 
 import java.util.HashMap;
 
-public interface ObjectPageJavaFile {
+public interface DocStringPageJavaFile {
 
     public void assertPresent(HashMap<String, String> keyMap);
 
@@ -21,6 +21,4 @@ public interface ObjectPageJavaFile {
     public void assertFieldsSectionParameterName(HashMap<String, String> keyMap);
 
     public void assertFieldsSectionParameterType(HashMap<String, String> keyMap);
-
-    public void setContent(HashMap<String, String> keyMap);
 }

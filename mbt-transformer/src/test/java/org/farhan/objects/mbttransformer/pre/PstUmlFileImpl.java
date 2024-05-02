@@ -53,6 +53,12 @@ public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 	}
 
 	@Override
+	public void assertInteractionAnnotationsSectionAnnotationDetail(HashMap<String, String> keyMap) {
+		assertInteractionAnnotationDetailExists(keyMap.get("Interaction Name"), keyMap.get("Annotation Name"),
+				keyMap.get("Annotation Detail"));
+	}
+
+	@Override
 	public void assertInteractionAnnotationsSectionAnnotationName(HashMap<String, String> keyMap) {
 		assertInteractionAnnotationNameExists(keyMap.get("Interaction Name"), keyMap.get("Annotation Name"));
 	}

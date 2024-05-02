@@ -3,7 +3,7 @@ package org.farhan.objects.mbttransformer.pre;
 import java.util.HashMap;
 
 import org.farhan.common.JavaFileObject;
-import org.farhan.objects.mbttransformer.DataTablePageJavaFile;
+import org.farhan.objects.mbttransformer.java.DataTablePageJavaFile;
 
 public class DataTablePageJavaFileImpl extends JavaFileObject implements DataTablePageJavaFile {
 

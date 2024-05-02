@@ -1,4 +1,5 @@
-@debug
+@debug @outline
+# maybe no outline but two separate features, one for data table and one for docstring
 Feature: Convert Step To Message
 
   Background: Create a feature file

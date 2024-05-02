@@ -3,7 +3,7 @@ package org.farhan.objects.mbttransformer.pre;
 import java.util.HashMap;
 
 import org.farhan.common.FileObject;
-import org.farhan.objects.mbttransformer.SetObjectAsFollows0TxtFile;
+import org.farhan.objects.mbttransformer.graph.SetObjectAsFollows0TxtFile;
 
 public class SetObjectAsFollows0TxtFileImpl extends FileObject implements SetObjectAsFollows0TxtFile {
 
