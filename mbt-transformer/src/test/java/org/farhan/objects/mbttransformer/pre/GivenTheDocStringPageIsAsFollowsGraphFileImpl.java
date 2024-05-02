@@ -14,11 +14,6 @@ public class GivenTheDocStringPageIsAsFollowsGraphFileImpl extends GraphFileObje
 	}
 
 	@Override
-	public void assertContent(HashMap<String, String> keyMap) {
-		assertContent(keyMap.get("Content"));
-	}
-
-	@Override
 	public void assertPresent(HashMap<String, String> keyMap) {
 		assertObjectExists();
 	}

@@ -23,11 +23,6 @@ public class ProcessAdocFileImpl extends AdocFileObject implements ProcessAdocFi
 	}
 
 	@Override
-	public void assertContent(HashMap<String, String> keyMap) {
-		assertContent(keyMap.get("Content"));
-	}
-
-	@Override
 	public void assertFeatureSectionName(HashMap<String, String> keyMap) {
 		assertFeatureName(keyMap.get("Name"));
 	}

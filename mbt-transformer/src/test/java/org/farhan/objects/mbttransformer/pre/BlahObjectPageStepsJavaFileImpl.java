@@ -3,18 +3,12 @@ package org.farhan.objects.mbttransformer.pre;
 import java.util.HashMap;
 
 import org.farhan.common.JavaFileObject;
-import org.farhan.common.UMLFileObject;
 import org.farhan.objects.mbttransformer.BlahObjectPageStepsJavaFile;
 
 public class BlahObjectPageStepsJavaFileImpl extends JavaFileObject implements BlahObjectPageStepsJavaFile {
 
 	public void assertContent(HashMap<String, String> keyMap) {
 		assertContent(keyMap.get("Content"));
-	}
-
-	@Override
-	public void assertFieldsSectionAnnotation(HashMap<String, String> keyMap) {
-		assertMethodAnnotationExists(keyMap.get("Method Name"), keyMap.get("Annotation"));
 	}
 
 	@Override

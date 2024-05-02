@@ -6,13 +6,6 @@ import io.cucumber.datatable.DataTable;
 
 public class MbtTransformerDocStringPageJavaFileSteps {
 
-    @Given("^The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/DocStringPage.java file will be as follows$")
-    public void theMbtTransformerPluginSrcTestJavaOrgFarhanObjectsBlahDocStringPageJavaFileWillBeAsFollows(String docString) {
-        MbtTransformerFactory.get("DocStringPageJavaFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("DocStringPageJavaFile").setPath("src/test/java/org/farhan/objects/blah/DocStringPage.java");
-        MbtTransformerFactory.get("DocStringPageJavaFile").assertInputOutputs("Content", docString);
-    }
-
     @Given("^The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/DocStringPage.java file will be present$")
     public void theMbtTransformerPluginSrcTestJavaOrgFarhanObjectsBlahDocStringPageJavaFileWillBePresent() {
         MbtTransformerFactory.get("DocStringPageJavaFile").setComponent("mbt-transformer");

@@ -4,8 +4,6 @@ import java.util.HashMap;
 
 public interface BlahDataTablePageStepsJavaFile {
 
-    public void assertContent(HashMap<String, String> keyMap);
-
     public void assertPresent(HashMap<String, String> keyMap);
 
     public void assertObjectSectionInterfaceName(HashMap<String, String> keyMap);
@@ -20,11 +18,11 @@ public interface BlahDataTablePageStepsJavaFile {
 
     public void assertFieldsSectionReturnType(HashMap<String, String> keyMap);
 
+    public void assertFieldsSectionAnnotation(HashMap<String, String> keyMap);
+
     public void assertFieldsSectionParameterName(HashMap<String, String> keyMap);
 
     public void assertFieldsSectionParameterType(HashMap<String, String> keyMap);
-
-    public void assertFieldsSectionAnnotation(HashMap<String, String> keyMap);
 
     public void assertFieldsSectionStatement(HashMap<String, String> keyMap);
 }

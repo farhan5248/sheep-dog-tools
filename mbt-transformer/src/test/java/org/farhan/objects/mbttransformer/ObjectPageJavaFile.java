@@ -4,10 +4,6 @@ import java.util.HashMap;
 
 public interface ObjectPageJavaFile {
 
-    public void assertContent(HashMap<String, String> keyMap);
-
-    public void setContent(HashMap<String, String> keyMap);
-
     public void assertPresent(HashMap<String, String> keyMap);
 
     public void assertObjectSectionInterfaceName(HashMap<String, String> keyMap);
@@ -25,4 +21,6 @@ public interface ObjectPageJavaFile {
     public void assertFieldsSectionParameterName(HashMap<String, String> keyMap);
 
     public void assertFieldsSectionParameterType(HashMap<String, String> keyMap);
+
+    public void setContent(HashMap<String, String> keyMap);
 }

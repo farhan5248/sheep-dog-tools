@@ -6,32 +6,11 @@ import io.cucumber.datatable.DataTable;
 
 public class MbtTransformerProcessAdocFileSteps {
 
-    @Given("^The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.adoc file is as follows$")
-    public void theMbtTransformerPluginSrcTestResourcesAsciidocAppProcessAdocFileIsAsFollows(String docString) {
-        MbtTransformerFactory.get("ProcessAdocFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("ProcessAdocFile").setPath("src/test/resources/asciidoc/app/Process.adoc");
-        MbtTransformerFactory.get("ProcessAdocFile").setInputOutputs("Content", docString);
-    }
-
-    @Given("^The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.adoc file will be as follows$")
-    public void theMbtTransformerPluginSrcTestResourcesAsciidocAppProcessAdocFileWillBeAsFollows(String docString) {
-        MbtTransformerFactory.get("ProcessAdocFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("ProcessAdocFile").setPath("src/test/resources/asciidoc/app/Process.adoc");
-        MbtTransformerFactory.get("ProcessAdocFile").assertInputOutputs("Content", docString);
-    }
-
     @Given("^The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows$")
     public void theMbtTransformerPluginSrcTestResourcesAsciidocProcessAdocFileIsAsFollows(String docString) {
         MbtTransformerFactory.get("ProcessAdocFile").setComponent("mbt-transformer");
         MbtTransformerFactory.get("ProcessAdocFile").setPath("src/test/resources/asciidoc/Process.adoc");
         MbtTransformerFactory.get("ProcessAdocFile").setInputOutputs("Content", docString);
-    }
-
-    @Given("^The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be as follows$")
-    public void theMbtTransformerPluginSrcTestResourcesAsciidocProcessAdocFileWillBeAsFollows(String docString) {
-        MbtTransformerFactory.get("ProcessAdocFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("ProcessAdocFile").setPath("src/test/resources/asciidoc/Process.adoc");
-        MbtTransformerFactory.get("ProcessAdocFile").assertInputOutputs("Content", docString);
     }
 
     @Given("^The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present$")
@@ -74,13 +53,6 @@ public class MbtTransformerProcessAdocFileSteps {
         MbtTransformerFactory.get("ProcessAdocFile").setComponent("mbt-transformer");
         MbtTransformerFactory.get("ProcessAdocFile").setPath("Process.adoc");
         MbtTransformerFactory.get("ProcessAdocFile").assertInputOutputs(dataTable, "ScenariosStepsSection");
-    }
-
-    @Given("^The mbt-transformer plugin, Process.adoc file, Scenarios Steps Data Table section will be as follows$")
-    public void theMbtTransformerPluginProcessAdocFileScenariosStepsDataTableSectionWillBeAsFollows(DataTable dataTable) {
-        MbtTransformerFactory.get("ProcessAdocFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("ProcessAdocFile").setPath("Process.adoc");
-        MbtTransformerFactory.get("ProcessAdocFile").assertInputOutputs(dataTable, "ScenariosStepsDataTableSection");
     }
 
     @Given("^The mbt-transformer plugin, Process.adoc file, Scenarios Steps Doc String section will be as follows$")
