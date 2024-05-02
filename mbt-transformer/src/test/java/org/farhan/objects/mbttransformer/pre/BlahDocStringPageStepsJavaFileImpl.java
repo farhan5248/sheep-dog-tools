@@ -29,7 +29,7 @@ public class BlahDocStringPageStepsJavaFileImpl extends JavaFileObject implement
 
 	@Override
 	public void assertFieldsSectionParameterType(HashMap<String, String> keyMap) {
-		assertMethodParameterTypeIs(keyMap.get("Method Name"), keyMap.get("Parameter Name"),
+		assertMethodParameterType(keyMap.get("Method Name"), keyMap.get("Parameter Name"),
 				keyMap.get("Parameter Type"));
 	}
 

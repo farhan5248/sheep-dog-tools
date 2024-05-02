@@ -1,39 +1,75 @@
 package org.farhan.common;
 
-import java.io.File;
-import java.util.ArrayList;
-
 import org.farhan.mbt.graph.JGraphTProject;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.graph.JGraphTGraphWrapper;
 import org.farhan.mbt.graph.MBTEdge;
 import org.farhan.mbt.graph.MBTGraph;
-import org.farhan.mbt.graph.MBTPathInfo;
 import org.farhan.mbt.graph.MBTVertex;
 import org.junit.jupiter.api.Assertions;
 
 public abstract class GraphFileObject extends FileObject {
 
-	private JGraphTProject graphProject;
+	private JGraphTProject project;
+	private JGraphTGraphWrapper wrapper;
 
-	// TODO delete this method after making a map and a getter for each project
-	private MBTGraph<MBTVertex, MBTEdge> getGraph(String graphName) {
-		for (Object o : graphProject.getObjects(graphProject.FIRST_LAYER)) {
-			MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) ((JGraphTGraphWrapper) o).get();
-			if (g.getName().replace(",", "").contentEquals(graphName.replace(".graph", ""))) {
-				return g;
-			}
-		}
-		for (Object o : graphProject.getObjects(graphProject.SECOND_LAYER)) {
-			MBTGraph<MBTVertex, MBTEdge> g = (MBTGraph<MBTVertex, MBTEdge>) ((JGraphTGraphWrapper) o).get();
-			if (g.getName().replace(",", "").contentEquals(graphName.replace(".graph", ""))) {
-				return g;
-			}
-		}
-		return null;
+	protected void assertEdgesEdgeNameExists(String edgeName) {
+		Assertions.assertTrue(getEdge(getObject(), edgeName) != null, "Edge " + edgeName + " doesn't exist");
 	}
 
-	private MBTEdge getEdgeByString(MBTGraph<MBTVertex, MBTEdge> g, String edgeName) {
+	protected void assertEdgesTag(String edgeName, String tags) {
+		assertEdgesEdgeNameExists(edgeName);
+		Assertions.assertEquals(tags, getEdge(getObject(), edgeName).getTags());
+	}
+
+	protected void assertGraphDescription(String description) {
+		Assertions.assertEquals(description, getObject().getDescription());
+	}
+
+	protected void assertGraphName(String label) {
+		Assertions.assertEquals(label, getObject().getName());
+	}
+
+	protected void assertGraphTag(String tag) {
+		Assertions.assertEquals(tag, getObject().getTags());
+	}
+
+	protected void assertObjectExists() {
+		super.assertObjectExists();
+		project = new JGraphTProject();
+		try {
+			wrapper = (JGraphTGraphWrapper) project.createObject(getFile().getAbsolutePath());
+			wrapper.load();
+		} catch (Exception e) {
+			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
+		}
+	}
+
+	protected void assertPathsDescription(String pathName, String description) {
+		assertPathsNameExists(pathName);
+		Assertions.assertEquals(description, getObject().getPathInfo(pathName).getDescription());
+	}
+
+	protected void assertPathsIndex(String pathName, String index) {
+		assertPathsNameExists(pathName);
+		Assertions.assertEquals(index, getObject().getPathInfo(pathName).getIndex());
+	}
+
+	protected void assertPathsNameExists(String pathName) {
+		Assertions.assertTrue(getObject().getPathInfo(pathName) != null, "Path " + pathName + " doesn't exist");
+	}
+
+	protected void assertPathsTag(String pathName, String tags) {
+		assertPathsNameExists(pathName);
+		Assertions.assertEquals(tags, getObject().getPathInfo(pathName).getTags());
+	}
+
+	protected void assertVerticesVertexNameExists(String vertexName) {
+		Assertions.assertTrue(getObject().vertexSet().contains(new MBTVertex(vertexName)),
+				"Vertex " + vertexName + " doesn't exist");
+	}
+
+	private MBTEdge getEdge(MBTGraph<MBTVertex, MBTEdge> g, String edgeName) {
 		for (MBTEdge e : g.edgeSet()) {
 			String eString = g.getEdgeSource(e).getLabel() + " -> " + e.getLabel() + " -> "
 					+ g.getEdgeTarget(e).getLabel();
@@ -44,85 +80,7 @@ public abstract class GraphFileObject extends FileObject {
 		return null;
 	}
 
-	protected void assertVerticesVertexNameExists(String vertexName) {
-		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
-		Assertions.assertTrue(g.vertexSet().contains(new MBTVertex(vertexName)),
-				"Vertex " + vertexName + " doesn't exist");
-	}
-
-	protected void assertEdgesEdgeNameExists(String edgeName) {
-		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
-		Assertions.assertTrue(getEdgeByString(g, edgeName) != null, "Edge " + edgeName + " doesn't exist");
-	}
-
-	protected void assertEdgesTag(String edgeName, String tags) {
-		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
-		MBTEdge edge = getEdgeByString(g, edgeName);
-		Assertions.assertTrue(edge != null, "Edge " + edgeName + " doesn't exist");
-		Assertions.assertEquals(tags, edge.getTags());
-	}
-
-	protected void assertGraphModelExists() {
-		assertFileExists();
-		try {
-			// TODO compare how the layers of feature and java files are read, this is ugly
-			graphProject = new JGraphTProject();
-			ArrayList<File> files = Utilities.recursivelyListFiles(graphProject.getDir(graphProject.FIRST_LAYER),
-					graphProject.getFileExt(graphProject.FIRST_LAYER));
-			graphProject.getObjects(graphProject.FIRST_LAYER).clear();
-			for (File f : files) {
-				graphProject.createObject(f.getAbsolutePath()).load();
-			}
-			files = Utilities.recursivelyListFiles(graphProject.getDir(graphProject.SECOND_LAYER),
-					graphProject.getFileExt(graphProject.SECOND_LAYER));
-			graphProject.getObjects(graphProject.SECOND_LAYER).clear();
-			for (File f : files) {
-				graphProject.createObject(f.getAbsolutePath()).load();
-			}
-		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
-		}
-	}
-
-	protected void assertPathsNameExists(String pathName) {
-		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
-		MBTPathInfo path = g.getPathInfo(pathName);
-		Assertions.assertTrue(path != null, "Path " + pathName + " doesn't exist");
-	}
-
-	protected void assertPathsDescription(String pathName, String description) {
-		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
-		MBTPathInfo path = g.getPathInfo(pathName);
-		Assertions.assertTrue(path != null, "Path " + pathName + " doesn't exist");
-		Assertions.assertEquals(description, path.getDescription());
-	}
-
-	protected void assertPathsTag(String pathName, String tags) {
-		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
-		MBTPathInfo path = g.getPathInfo(pathName);
-		Assertions.assertTrue(path != null, "Path " + pathName + " doesn't exist");
-		Assertions.assertEquals(tags, path.getTags());
-	}
-
-	protected void assertPathsIndex(String pathName, String index) {
-		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
-		MBTPathInfo path = g.getPathInfo(pathName);
-		Assertions.assertTrue(path != null, "Path " + pathName + " doesn't exist");
-		Assertions.assertEquals(index, path.getIndex());
-	}
-
-	protected void assertGraphDescription(String description) {
-		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
-		Assertions.assertEquals(description, g.getDescription());
-	}
-
-	protected void assertGraphName(String label) {
-		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
-		Assertions.assertEquals(label, g.getName());
-	}
-
-	protected void assertGraphTag(String tag) {
-		MBTGraph<MBTVertex, MBTEdge> g = getGraph(keyValue.get("path"));
-		Assertions.assertEquals(tag, g.getTags());
+	private MBTGraph<MBTVertex, MBTEdge> getObject() {
+		return (MBTGraph<MBTVertex, MBTEdge>) wrapper.get();
 	}
 }

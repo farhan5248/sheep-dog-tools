@@ -14,7 +14,7 @@ public class ProcessGraphFileImpl extends GraphFileObject implements ProcessGrap
 
 	@Override
 	public void assertPresent(HashMap<String, String> keyMap) {
-		assertGraphModelExists();
+		assertObjectExists();
 	}
 
 	@Override

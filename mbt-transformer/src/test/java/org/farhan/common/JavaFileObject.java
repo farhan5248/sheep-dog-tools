@@ -18,41 +18,53 @@ public class JavaFileObject extends FileObject {
 	private CucumberJavaWrapper wrapper;
 
 	protected void assertImportExists(String importName) {
-		CompilationUnit cu = (CompilationUnit) wrapper.get();
-		ImportDeclaration importDeclaration = null;
-		for (ImportDeclaration id : cu.getImports()) {
-			id.getNameAsString();
-			if (id.getNameAsString().contentEquals(importName)) {
-				importDeclaration = id;
-				break;
-			}
-		}
-		Assertions.assertTrue(importDeclaration != null, "Import " + importName + " doesn't exist");
+		Assertions.assertTrue(getImport(importName) != null, "Import " + importName + " doesn't exist");
 	}
 
 	protected void assertInterfaceNameIs(String name) {
-		Assertions.assertEquals(name, getType().getNameAsString());
+		Assertions.assertEquals(name, getObject().getNameAsString());
+	}
+
+	protected void assertMethodAccessSpecifier(String methodName, String visibility) {
+		assertMethodExists(methodName);
+		Assertions.assertEquals(visibility, getMethod(methodName).getAccessSpecifier().asString());
+	}
+
+	protected void assertMethodAnnotationExists(String methodName, String annotation) {
+		assertMethodExists(methodName);
+		Assertions.assertTrue(getAnnotation(methodName, annotation) != null,
+				"Annotation " + annotation + " doesn't exist");
 	}
 
 	protected void assertMethodExists(String methodName) {
-		MethodDeclaration methodDeclaration = getMethod(methodName);
-		Assertions.assertTrue(methodDeclaration != null, "Method " + methodName + " doesn't exist");
+		Assertions.assertTrue(getMethod(methodName) != null, "Method " + methodName + " doesn't exist");
 	}
 
-	protected void assertMethodReturnTypeIs(String methodName, String returnType) {
+	protected void assertMethodParameterExists(String methodName, String parameterName) {
+		assertMethodExists(methodName);
+		Assertions.assertTrue(getMethod(methodName).getParameterByName(parameterName).get() != null,
+				"Parameter Name " + parameterName + " doesn't exist");
+	}
+
+	protected void assertMethodParameterType(String methodName, String parameterName, String parameterType) {
+		assertMethodExists(methodName);
+		Assertions.assertEquals(parameterType,
+				getMethod(methodName).getParameterByName(parameterName).get().getTypeAsString());
+	}
+
+	protected void assertMethodReturnType(String methodName, String returnType) {
 		assertMethodExists(methodName);
 		MethodDeclaration methodDeclaration = getMethod(methodName);
 		Assertions.assertEquals(returnType, methodDeclaration.getTypeAsString());
 	}
 
-	protected void assertMethodVisibilityIs(String methodName, String visibility) {
+	protected void assertMethodStatementExists(String methodName, String statement) {
 		assertMethodExists(methodName);
-		MethodDeclaration methodDeclaration = getMethod(methodName);
-		Assertions.assertEquals(visibility, methodDeclaration.getAccessSpecifier().asString());
+		Assertions.assertTrue(getStatement(methodName, statement) != null, "Statement " + statement + " doesn't exist");
 	}
 
 	protected void assertObjectExists() {
-		assertFileExists();
+		super.assertObjectExists();
 		project = new CucumberProject();
 		try {
 			wrapper = (CucumberJavaWrapper) project.createObject(getFile().getAbsolutePath());
@@ -62,42 +74,9 @@ public class JavaFileObject extends FileObject {
 		}
 	}
 
-	protected void assertPackageIs(String packageName) {
+	protected void assertPackage(String packageName) {
 		CompilationUnit cu = (CompilationUnit) wrapper.get();
-		cu.getPackageDeclaration();
 		Assertions.assertEquals(packageName, cu.getPackageDeclaration().get().getNameAsString());
-	}
-
-	private MethodDeclaration getMethod(String methodName) {
-		for (MethodDeclaration m : getType().getMethods()) {
-			if (m.getName().asString().contentEquals(methodName)) {
-				return m;
-			}
-		}
-		return null;
-	}
-
-	private ClassOrInterfaceDeclaration getType() {
-		CompilationUnit cu = (CompilationUnit) wrapper.get();
-		return (ClassOrInterfaceDeclaration) cu.getType(0);
-	}
-
-	protected void assertMethodParameterExists(String methodName, String parameterName) {
-		assertMethodExists(methodName);
-		Assertions.assertTrue(getMethod(methodName).getParameterByName(parameterName).get() != null,
-				"Parameter Name " + parameterName + " doesn't exist");
-	}
-
-	protected void assertMethodParameterTypeIs(String methodName, String parameterName, String parameterType) {
-		assertMethodExists(methodName);
-		Assertions.assertEquals(parameterType,
-				getMethod(methodName).getParameterByName(parameterName).get().getTypeAsString());
-	}
-
-	protected void assertMethodAnnotationExists(String methodName, String annotation) {
-		assertMethodExists(methodName);
-		Assertions.assertTrue(getAnnotation(methodName, annotation) != null,
-				"Annotation " + annotation + " doesn't exist");
 	}
 
 	private AnnotationExpr getAnnotation(String methodName, String annotation) {
@@ -109,9 +88,29 @@ public class JavaFileObject extends FileObject {
 		return null;
 	}
 
-	protected void assertMethodStatementExists(String methodName, String statement) {
-		assertMethodExists(methodName);
-		Assertions.assertTrue(getStatement(methodName, statement) != null, "Statement " + statement + " doesn't exist");
+	private ImportDeclaration getImport(String importName) {
+		CompilationUnit cu = (CompilationUnit) wrapper.get();
+		for (ImportDeclaration id : cu.getImports()) {
+			id.getNameAsString();
+			if (id.getNameAsString().contentEquals(importName)) {
+				return id;
+			}
+		}
+		return null;
+	}
+
+	private MethodDeclaration getMethod(String methodName) {
+		for (MethodDeclaration m : getObject().getMethods()) {
+			if (m.getName().asString().contentEquals(methodName)) {
+				return m;
+			}
+		}
+		return null;
+	}
+
+	private ClassOrInterfaceDeclaration getObject() {
+		CompilationUnit cu = (CompilationUnit) wrapper.get();
+		return (ClassOrInterfaceDeclaration) cu.getType(0);
 	}
 
 	private Statement getStatement(String methodName, String statement) {

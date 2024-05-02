@@ -44,18 +44,12 @@ public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 
 	@Override
 	public void assertClassInteractionsSectionInteractionName(HashMap<String, String> keyMap) {
-		assertInteractionNameExists(keyMap.get("Class Name"), keyMap.get("Interaction Name"));
+		assertClassInteractionExists(keyMap.get("Class Name"), keyMap.get("Interaction Name"));
 	}
 
 	@Override
 	public void assertClassSectionClassName(HashMap<String, String> keyMap) {
 		assertClassExists(keyMap.get("Class Name"));
-	}
-
-	@Override
-	public void assertInteractionAnnotationsSectionAnnotationDetail(HashMap<String, String> keyMap) {
-		assertInteractionAnnotationDetailExists(keyMap.get("Interaction Name"), keyMap.get("Annotation Name"),
-				keyMap.get("Annotation Detail"));
 	}
 
 	@Override
@@ -65,7 +59,7 @@ public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 
 	@Override
 	public void assertInteractionAnnotationsSectionInteractionName(HashMap<String, String> keyMap) {
-		assertInteractionNameExists(keyMap.get("Interaction Name"));
+		assertInteractionExists(keyMap.get("Interaction Name"));
 	}
 
 	@Override
@@ -75,7 +69,7 @@ public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 
 	@Override
 	public void assertInteractionCommentsSectionInteractionName(HashMap<String, String> keyMap) {
-		assertInteractionNameExists(keyMap.get("Interaction Name"));
+		assertInteractionExists(keyMap.get("Interaction Name"));
 	}
 
 	@Override
@@ -92,7 +86,7 @@ public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 
 	@Override
 	public void assertInteractionMessagesSectionInteractionName(HashMap<String, String> keyMap) {
-		assertInteractionNameExists(keyMap.get("Interaction Name"));
+		assertInteractionExists(keyMap.get("Interaction Name"));
 	}
 
 	@Override
@@ -102,7 +96,7 @@ public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 
 	@Override
 	public void assertInteractionParametersSectionInteractionName(HashMap<String, String> keyMap) {
-		assertInteractionNameExists(keyMap.get("Interaction Name"));
+		assertInteractionExists(keyMap.get("Interaction Name"));
 	}
 
 	@Override
@@ -112,7 +106,7 @@ public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 
 	@Override
 	public void assertPresent(HashMap<String, String> keyMap) {
-		assertModelExists();
+		assertObjectExists();
 	}
 
 	public void setPath(String path) {

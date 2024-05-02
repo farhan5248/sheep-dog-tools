@@ -9,17 +9,17 @@ public class ProcessAdocFileImpl extends AdocFileObject implements ProcessAdocFi
 
 	@Override
 	public void assertBackgroundSectionName(HashMap<String, String> keyMap) {
-		assertBackgroundExists(keyMap.get("Name"));
+		assertAbstractScenarioExists(keyMap.get("Name"));
 	}
 
 	@Override
 	public void assertBackgroundStepsSectionName(HashMap<String, String> keyMap) {
-		assertBackgroundExists(keyMap.get("Name"));
+		assertAbstractScenarioExists(keyMap.get("Name"));
 	}
 
 	@Override
 	public void assertBackgroundStepsSectionStep(HashMap<String, String> keyMap) {
-		assertBackgroundStepExists(keyMap.get("Name"), keyMap.get("Step"));
+		assertStepExists(keyMap.get("Name"), keyMap.get("Step"));
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class ProcessAdocFileImpl extends AdocFileObject implements ProcessAdocFi
 
 	@Override
 	public void assertFeatureSectionName(HashMap<String, String> keyMap) {
-		assertFeatureExists(keyMap.get("Name"));
+		assertFeatureName(keyMap.get("Name"));
 	}
 
 	@Override
@@ -39,22 +39,22 @@ public class ProcessAdocFileImpl extends AdocFileObject implements ProcessAdocFi
 
 	@Override
 	public void assertPresent(HashMap<String, String> keyMap) {
-		assertDocumentExists();
+		assertObjectExists();
 	}
 
 	@Override
 	public void assertScenariosSectionName(HashMap<String, String> keyMap) {
-		assertScenarioExists(keyMap.get("Name"));
+		assertAbstractScenarioExists(keyMap.get("Name"));
 	}
 
 	@Override
 	public void assertScenariosStepsSectionName(HashMap<String, String> keyMap) {
-		assertScenarioExists(keyMap.get("Name"));
+		assertAbstractScenarioExists(keyMap.get("Name"));
 	}
 
 	@Override
 	public void assertScenariosStepsSectionStep(HashMap<String, String> keyMap) {
-		assertScenarioStepExists(keyMap.get("Name"), keyMap.get("Step"));
+		assertStepExists(keyMap.get("Name"), keyMap.get("Step"));
 	}
 
 	@Override
@@ -64,17 +64,17 @@ public class ProcessAdocFileImpl extends AdocFileObject implements ProcessAdocFi
 
 	@Override
 	public void assertScenariosStepsDocStringSectionName(HashMap<String, String> keyMap) {
-		assertScenarioExists(keyMap.get("Name"));
+		assertAbstractScenarioExists(keyMap.get("Name"));
 	}
 
 	@Override
 	public void assertScenariosStepsDocStringSectionStep(HashMap<String, String> keyMap) {
-		assertScenarioStepExists(keyMap.get("Name"), keyMap.get("Step"));
+		assertStepExists(keyMap.get("Name"), keyMap.get("Step"));
 	}
 
 	@Override
 	public void assertScenariosStepsDocStringSectionContent(HashMap<String, String> keyMap) {
-		assertScenarioStepDocString(keyMap.get("Name"), keyMap.get("Step"), keyMap.get("Content"));
+		assertDocString(keyMap.get("Name"), keyMap.get("Step"), keyMap.get("Content"));
 	}
 
 }

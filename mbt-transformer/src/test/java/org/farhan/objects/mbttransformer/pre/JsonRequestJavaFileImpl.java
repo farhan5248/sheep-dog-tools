@@ -23,18 +23,18 @@ public class JsonRequestJavaFileImpl extends JavaFileObject implements JsonReque
 
 	@Override
 	public void assertFieldsSectionParameterType(HashMap<String, String> keyMap) {
-		assertMethodParameterTypeIs(keyMap.get("Method Name"), keyMap.get("Parameter Name"),
+		assertMethodParameterType(keyMap.get("Method Name"), keyMap.get("Parameter Name"),
 				keyMap.get("Parameter Type"));
 	}
 
 	@Override
 	public void assertFieldsSectionReturnType(HashMap<String, String> keyMap) {
-		assertMethodReturnTypeIs(keyMap.get("Method Name"), keyMap.get("Return Type"));
+		assertMethodReturnType(keyMap.get("Method Name"), keyMap.get("Return Type"));
 	}
 
 	@Override
 	public void assertFieldsSectionVisibility(HashMap<String, String> keyMap) {
-		assertMethodVisibilityIs(keyMap.get("Method Name"), keyMap.get("Visibility"));
+		assertMethodAccessSpecifier(keyMap.get("Method Name"), keyMap.get("Visibility"));
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class JsonRequestJavaFileImpl extends JavaFileObject implements JsonReque
 
 	@Override
 	public void assertObjectSectionPackage(HashMap<String, String> keyMap) {
-		assertPackageIs(keyMap.get("Package"));
+		assertPackage(keyMap.get("Package"));
 	}
 
 	@Override

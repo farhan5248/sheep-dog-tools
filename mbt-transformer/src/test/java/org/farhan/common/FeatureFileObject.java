@@ -17,24 +17,36 @@ public class FeatureFileObject extends FileObject {
 	private CucumberProject project;
 	private CucumberFeatureWrapper wrapper;
 
-	protected void assertBackgroundExists(String name) {
-		AbstractScenario abstractScenario = getAbstractScenario(name);
-		Assertions.assertEquals(name, wrapper.getBackgroundName(abstractScenario));
+	protected void assertAbstractScenarioDescription(String name, String description) {
+		Assertions.assertEquals(description, wrapper.getScenarioDescription(getAbstractScenario(name)));
 	}
 
-	protected void assertBackgroundStepDocString(String name, String stepName, String content) {
-		assertBackgroundStepExists(name, stepName);
+	protected void assertAbstractScenarioExists(String name) {
+		AbstractScenario abstractScenario = getAbstractScenario(name);
+		Assertions.assertTrue(abstractScenario != null, "Scenario " + name + " doesn't exist");
+	}
+
+	protected void assertAbstractScenarioTags(String name, String tags) {
+		AbstractScenario abstractScenario = getAbstractScenario(name);
+		Assertions.assertEquals(tags, wrapper.getScenarioTags(abstractScenario));
+	}
+
+	protected void assertDocString(String name, String stepName, String content) {
+		assertStepExists(name, stepName);
 		Step step = getStep(name, stepName);
 		Assertions.assertEquals(content, wrapper.getDocString(step));
 	}
 
-	protected void assertBackgroundStepExists(String name, String stepName) {
-		assertBackgroundExists(name);
-		Assertions.assertTrue(getStep(name, stepName) != null, "Step " + stepName + " doesn't exist");
+	protected void assertFeatureName(String name) {
+		Assertions.assertEquals(name, wrapper.getFeatureName());
 	}
 
-	protected void assertDocumentExists() {
-		assertFileExists();
+	protected void assertFeatureTags(String name, String tags) {
+		Assertions.assertEquals(tags, wrapper.getFeatureTags());
+	}
+
+	protected void assertObjectExists() {
+		super.assertObjectExists();
 		project = new CucumberProject();
 		try {
 			wrapper = (CucumberFeatureWrapper) project.createObject(getFile().getAbsolutePath());
@@ -44,74 +56,30 @@ public class FeatureFileObject extends FileObject {
 		}
 	}
 
-	protected void assertFeatureExists(String name) {
-		Assertions.assertEquals(name, wrapper.getFeatureName());
-	}
-
-	protected void assertFeatureTags(String name, String tags) {
-		assertFeatureExists(name);
-		Assertions.assertEquals(tags, wrapper.getFeatureTags());
-	}
-
-	protected void assertScenarioDescription(String name, String description) {
-		AbstractScenario abstractScenario = getAbstractScenario(name);
-		Assertions.assertEquals(description, wrapper.getScenarioDescription(abstractScenario));
-	}
-
-	protected void assertScenarioExists(String name) {
-		AbstractScenario abstractScenario = getAbstractScenario(name);
-		Assertions.assertTrue(abstractScenario != null, "Scenario " + name + " doesn't exist");
-	}
-
 	protected void assertScenarioOutlineExamplesExists(String name, String examplesName) {
-		assertScenarioOutlineExists(name);
+		assertAbstractScenarioExists(name);
 		Assertions.assertTrue(getExamples(name, examplesName) != null, "Examples " + examplesName + " doesn't exist");
 	}
 
 	protected void assertScenarioOutlineExamplesTableRowExists(String name, String examplesName, String rowName) {
 		assertScenarioOutlineExamplesExists(name, examplesName);
-		Object row = getRow(getExamples(name, examplesName), rowName);
-		Assertions.assertTrue(row != null, "Row " + rowName + " doesn't exist");
-	}
-
-	protected void assertScenarioOutlineExists(String name) {
-		AbstractScenario abstractScenario = getAbstractScenario(name);
-		Assertions.assertEquals(name, wrapper.getScenarioOutlineName(abstractScenario));
+		Assertions.assertTrue(getRow(getExamples(name, examplesName), rowName) != null,
+				"Row " + rowName + " doesn't exist");
 	}
 
 	protected void assertScenarioOutlineStepDataTableRowExists(String name, String stepName, String rowName) {
-		assertScenarioOutlineStepExists(name, stepName);
-		ArrayList<String> row = getRow(getStep(name, stepName), rowName);
-		Assertions.assertTrue(row != null, "Row " + rowName + " doesn't exist");
+		assertStepExists(name, stepName);
+		Assertions.assertTrue(getRow(getStep(name, stepName), rowName) != null, "Row " + rowName + " doesn't exist");
 	}
 
-	protected void assertScenarioOutlineStepExists(String name, String stepName) {
-		assertScenarioOutlineExists(name);
+	protected void assertStepExists(String name, String stepName) {
+		assertAbstractScenarioExists(name);
 		Assertions.assertTrue(getStep(name, stepName) != null, "Step " + stepName + " doesn't exist");
-	}
-
-	protected void assertScenarioStepExists(String name, String stepName) {
-		assertScenarioExists(name);
-		Assertions.assertTrue(getStep(name, stepName) != null, "Step " + stepName + " doesn't exist");
-	}
-
-	protected void assertScenarioTags(String name, String tags) {
-		AbstractScenario abstractScenario = getAbstractScenario(name);
-		Assertions.assertEquals(tags, wrapper.getScenarioTags(abstractScenario));
 	}
 
 	private AbstractScenario getAbstractScenario(String name) {
 		for (AbstractScenario s : wrapper.getAbstractScenarioList()) {
 			if (wrapper.getScenarioName(s).contentEquals(name)) {
-				return s;
-			}
-		}
-		return null;
-	}
-
-	private Step getStep(String name, String stepName) {
-		for (Step s : wrapper.getStepList(getAbstractScenario(name))) {
-			if (wrapper.getStep(s).contentEquals(stepName)) {
 				return s;
 			}
 		}
@@ -162,6 +130,15 @@ public class FeatureFileObject extends FileObject {
 			}
 			if (rString.contentEquals(rowName)) {
 				return r;
+			}
+		}
+		return null;
+	}
+
+	private Step getStep(String name, String stepName) {
+		for (Step s : wrapper.getStepList(getAbstractScenario(name))) {
+			if (wrapper.getStep(s).contentEquals(stepName)) {
+				return s;
 			}
 		}
 		return null;

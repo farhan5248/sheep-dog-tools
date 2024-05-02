@@ -20,7 +20,7 @@ public class GivenTheDocStringPageIsAsFollowsGraphFileImpl extends GraphFileObje
 
 	@Override
 	public void assertPresent(HashMap<String, String> keyMap) {
-		assertGraphModelExists();
+		assertObjectExists();
 	}
 
 	@Override

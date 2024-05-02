@@ -11,18 +11,26 @@ public class AdocFileObject extends FileObject {
 	private AsciiDoctorProject project;
 	private AsciiDoctorAdocWrapper wrapper;
 
-	protected void assertBackgroundExists(String name) {
-		Section abstractScenario = wrapper.getAbstractScenarioList().getFirst();
-		Assertions.assertEquals(name, wrapper.getBackgroundName(abstractScenario));
+	protected void assertAbstractScenarioExists(String name) {
+		Assertions.assertTrue(getAbstractScenario(name) != null, "Abstract Scenario " + name + " doesn't exist");
 	}
 
-	protected void assertBackgroundStepExists(String name, String stepName) {
-		assertBackgroundExists(name);
-		Assertions.assertTrue(getStep(name, stepName) != null, "Step " + stepName + " doesn't exist");
+	protected void assertDocString(String name, String stepName, String content) {
+		assertAbstractScenarioExists(name);
+		assertStepExists(name, stepName);
+		Assertions.assertEquals(content, wrapper.getDocString(getStep(name, stepName)));
 	}
 
-	protected void assertDocumentExists() {
-		assertFileExists();
+	protected void assertFeatureName(String name) {
+		Assertions.assertEquals(name, wrapper.getFeatureName());
+	}
+
+	protected void assertFeatureTags(String name, String tags) {
+		Assertions.assertEquals(tags, wrapper.getFeatureTags());
+	}
+
+	protected void assertObjectExists() {
+		super.assertObjectExists();
 		project = new AsciiDoctorProject();
 		try {
 			wrapper = (AsciiDoctorAdocWrapper) project.createObject(getFile().getAbsolutePath());
@@ -32,29 +40,8 @@ public class AdocFileObject extends FileObject {
 		}
 	}
 
-	protected void assertFeatureExists(String name) {
-		Assertions.assertEquals(name, wrapper.getFeatureName());
-	}
-
-	protected void assertFeatureTags(String name, String tags) {
-		assertFeatureExists(name);
-		Assertions.assertEquals(tags, wrapper.getFeatureTags());
-	}
-
-	protected void assertScenarioExists(String name) {
-		Section abstractScenario = getAbstractScenario(name);
-		Assertions.assertTrue(abstractScenario != null, "Scenario " + name + " doesn't exist");
-	}
-
-	protected void assertScenarioStepDocString(String name, String stepName, String content) {
-		assertScenarioExists(name);
-		Section step = getStep(name, stepName);
-		Assertions.assertTrue(step != null, "Step " + stepName + " doesn't exist");
-		Assertions.assertEquals(content, wrapper.getDocString(step));
-	}
-
-	protected void assertScenarioStepExists(String name, String stepName) {
-		assertScenarioExists(name);
+	protected void assertStepExists(String name, String stepName) {
+		assertAbstractScenarioExists(name);
 		Assertions.assertTrue(getStep(name, stepName) != null, "Step " + stepName + " doesn't exist");
 	}
 

@@ -15,7 +15,7 @@ public class WhenTheSearchApplicationHomePageIsAsFollowsGraphFileImpl extends Gr
 
 	@Override
 	public void assertPresent(HashMap<String, String> keyMap) {
-		assertGraphModelExists();
+		assertObjectExists();
 	}
 
 	@Override

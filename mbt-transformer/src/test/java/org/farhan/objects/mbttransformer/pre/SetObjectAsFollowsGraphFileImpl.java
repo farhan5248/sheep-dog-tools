@@ -9,7 +9,7 @@ public class SetObjectAsFollowsGraphFileImpl extends GraphFileObject implements 
 
 	@Override
 	public void assertPresent(HashMap<String, String> keyMap) {
-		assertGraphModelExists();
+		assertObjectExists();
 	}
 
 	@Override

@@ -17,7 +17,7 @@ public abstract class FileObject extends GraphTestObject {
 		return new File(ConvertibleProject.baseDir + keyValue.get("path"));
 	}
 
-	protected void assertFileExists() {
+	protected void assertObjectExists() {
 		try {
 			Assertions.assertTrue(getFile().exists(), "The file (" + getFile().getCanonicalPath() + ") isn't present");
 		} catch (Exception e) {
