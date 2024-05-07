@@ -1,7 +1,4 @@
-package org.farhan.runners.umltocode;
-
-import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
-import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
+package org.farhan.runners.codetouml;
 
 import org.farhan.common.GraphTestObjectFactory;
 import org.junit.platform.suite.api.ConfigurationParameter;
@@ -12,13 +9,16 @@ import org.junit.platform.suite.api.Suite;
 
 import io.cucumber.java.Before;
 
+import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
+import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
+
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("cucumber/UMLToCode/UMLStepToCode3.feature")
+@SelectClasspathResource("cucumber/CodeToUML/CodeExamplesTableToUML.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
 @IncludeTags("debug")
-public class UMLStepToCode3Test {
+public class CodeExamplesTableToUMLTest {
 
 	@Before
 	public static void before() {
