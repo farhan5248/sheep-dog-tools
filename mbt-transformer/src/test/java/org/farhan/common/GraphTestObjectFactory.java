@@ -11,6 +11,10 @@ public abstract class GraphTestObjectFactory {
 	private static String preOrPost = "pre";
 	private static HashMap<String, GraphTestObject> classes = new HashMap<String, GraphTestObject>();
 
+	public static void reset() {
+		classes = new HashMap<String, GraphTestObject>();
+	}
+
 	public static void setPre(boolean b) {
 		if (b) {
 			preOrPost = "pre";

@@ -3,7 +3,7 @@ package org.farhan.objects.mbttransformer.pre;
 import java.util.HashMap;
 
 import org.farhan.common.JavaFileObject;
-import org.farhan.objects.mbttransformer.java.ObjectPageJavaFile;
+import org.farhan.objects.mbttransformer.ObjectPageJavaFile;
 
 public class ObjectPageJavaFileImpl extends JavaFileObject implements ObjectPageJavaFile {
 

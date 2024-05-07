@@ -3,7 +3,7 @@ package org.farhan.objects.mbttransformer.pre;
 import java.util.HashMap;
 
 import org.farhan.common.GraphFileObject;
-import org.farhan.objects.mbttransformer.graph.GivenTheSearchApplicationHomePageIsEmptyGraphFile;
+import org.farhan.objects.mbttransformer.GivenTheSearchApplicationHomePageIsEmptyGraphFile;
 
 public class GivenTheSearchApplicationHomePageIsEmptyGraphFileImpl extends GraphFileObject
 		implements GivenTheSearchApplicationHomePageIsEmptyGraphFile {

@@ -5,11 +5,11 @@ Feature: Code Scenario Outline To UML
 
     Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
           """
-          Feature: This is a test feature
+          Feature: Process
           
             @tag1
             Scenario Outline: Submit
-              Given The blah application, DataTable page is as follows
+              Given The blah application, Object page is as follows
                 | h1   | h2   |
                 | <h3> | <h4> |
           
@@ -21,9 +21,7 @@ Feature: Code Scenario Outline To UML
                 | h3  | h4  |
                 | v32 | v42 |
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed with
-          | Tags |
-          | tag1 |
+     When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
 
   Scenario: Convert title

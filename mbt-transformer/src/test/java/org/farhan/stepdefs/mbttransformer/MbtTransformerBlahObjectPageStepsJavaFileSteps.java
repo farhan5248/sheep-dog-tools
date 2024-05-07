@@ -13,6 +13,13 @@ public class MbtTransformerBlahObjectPageStepsJavaFileSteps {
         MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").assertInputOutputs(dataTable, "FieldsSection");
     }
 
+    @Given("^The mbt-transformer plugin, BlahObjectPageSteps.java file, Object section will be as follows$")
+    public void theMbtTransformerPluginBlahObjectPageStepsJavaFileObjectSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").setPath("BlahObjectPageSteps.java");
+        MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").assertInputOutputs(dataTable, "ObjectSection");
+    }
+
     @Given("^The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is as follows$")
     public void theMbtTransformerPluginSrcTestJavaOrgFarhanStepdefsBlahBlahObjectPageStepsJavaFileIsAsFollows(String docString) {
         MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").setComponent("mbt-transformer");

@@ -9,7 +9,7 @@ Feature: Document Data Table To Graph
           
           == Story One
           
-          === Set Object as follows
+          === Given The DocString page is as follows
           
           ----
           Text1  
@@ -17,17 +17,17 @@ Feature: Document Data Table To Graph
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
-      And The mbt-transformer plugin, target/graphs/stepdefs/Set Object as follows.graph file will be present
-      And The Set Object as follows.graph file, Vertices section will be as follows
+      And The mbt-transformer plugin, target/graphs/stepdefs/Given The DocString page is as follows.graph file will be present
+      And The Given The DocString page is as follows.graph file, Vertices section will be as follows
           | Vertex Name |
           |       start |
           |         end |
           |     Content |
-      And The Set Object as follows.graph file, Edges section will be as follows
-          |                                     Edge Name |
-          |                          start ->  -> Content |
-          | Content -> Set Object as follows-0.txt -> end |
-      And The mbt-transformer plugin, target/graphs/resources/Set Object as follows-0.txt file will be as follows
+      And The Given The DocString page is as follows.graph file, Edges section will be as follows
+          |                                                      Edge Name |
+          |                                           start ->  -> Content |
+          | Content -> Given The DocString page is as follows-0.txt -> end |
+      And The mbt-transformer plugin, target/graphs/resources/Given The DocString page is as follows-0.txt file will be as follows
           """
           Text1
           """
@@ -40,7 +40,7 @@ Feature: Document Data Table To Graph
           
           == Story One
           
-          === Set Object as follows
+          === Given The DocString page is as follows
           
           [options="header"]
           |===
@@ -50,14 +50,14 @@ Feature: Document Data Table To Graph
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
-      And The mbt-transformer plugin, target/graphs/stepdefs/Set Object as follows.graph file will be present
-      And The Set Object as follows.graph file, Vertices section will be as follows
+      And The mbt-transformer plugin, target/graphs/stepdefs/Given The DocString page is as follows.graph file will be present
+      And The Given The DocString page is as follows.graph file, Vertices section will be as follows
           | Vertex Name |
           |       start |
           |         end |
           |       0 ins |
           |       0 grp |
-      And The Set Object as follows.graph file, Edges section will be as follows
+      And The Given The DocString page is as follows.graph file, Edges section will be as follows
           |           Edge Name |
           |  start ->  -> 0 ins |
           | 0 ins -> 5 -> 0 grp |
@@ -71,7 +71,7 @@ Feature: Document Data Table To Graph
           
           == Story One
           
-          === Set Object as follows
+          === Given The DocString page is as follows
           
           [options="header"]
           |===
@@ -82,8 +82,8 @@ Feature: Document Data Table To Graph
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
-      And The mbt-transformer plugin, target/graphs/stepdefs/Set Object as follows.graph file will be present
-      And The Set Object as follows.graph file, Edges section will be as follows
+      And The mbt-transformer plugin, target/graphs/stepdefs/Given The DocString page is as follows.graph file will be present
+      And The Given The DocString page is as follows.graph file, Edges section will be as follows
           |           Edge Name |
           |  start ->  -> 0 ins |
           | 0 ins -> 4 -> 1 ins |
@@ -97,7 +97,7 @@ Feature: Document Data Table To Graph
           
           == Story One
           
-          === Set Object as follows
+          === Given The DocString page is as follows
           
           [options="header"]
           |===
@@ -108,8 +108,8 @@ Feature: Document Data Table To Graph
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
-      And The mbt-transformer plugin, target/graphs/stepdefs/Set Object as follows.graph file will be present
-      And The Set Object as follows.graph file, Edges section will be as follows
+      And The mbt-transformer plugin, target/graphs/stepdefs/Given The DocString page is as follows.graph file will be present
+      And The Given The DocString page is as follows.graph file, Edges section will be as follows
           |            Edge Name |
           |   start ->  -> 0 ins |
           |  0 ins -> 5 -> 0 grp |
