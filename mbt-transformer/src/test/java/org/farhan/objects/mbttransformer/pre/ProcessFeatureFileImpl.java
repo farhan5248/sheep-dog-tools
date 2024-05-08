@@ -8,6 +8,16 @@ import org.farhan.objects.mbttransformer.ProcessFeatureFile;
 public class ProcessFeatureFileImpl extends FeatureFileObject implements ProcessFeatureFile {
 
 	@Override
+	public void assertBackgroundSectionDescription(HashMap<String, String> keyMap) {
+		assertAbstractScenarioDescription(keyMap.get("Name"), keyMap.get("Description"));
+	}
+
+	@Override
+	public void assertBackgroundSectionName(HashMap<String, String> keyMap) {
+		assertAbstractScenarioExists(keyMap.get("Name"));
+	}
+
+	@Override
 	public void assertBackgroundStepsDocStringSectionContent(HashMap<String, String> keyMap) {
 		assertDocString(keyMap.get("Name"), keyMap.get("Step"), keyMap.get("Content"));
 	}
@@ -19,6 +29,16 @@ public class ProcessFeatureFileImpl extends FeatureFileObject implements Process
 
 	@Override
 	public void assertBackgroundStepsDocStringSectionStep(HashMap<String, String> keyMap) {
+		assertStepExists(keyMap.get("Name"), keyMap.get("Step"));
+	}
+
+	@Override
+	public void assertBackgroundStepsSectionName(HashMap<String, String> keyMap) {
+		assertAbstractScenarioExists(keyMap.get("Name"));
+	}
+
+	@Override
+	public void assertBackgroundStepsSectionStep(HashMap<String, String> keyMap) {
 		assertStepExists(keyMap.get("Name"), keyMap.get("Step"));
 	}
 
@@ -54,6 +74,21 @@ public class ProcessFeatureFileImpl extends FeatureFileObject implements Process
 	@Override
 	public void assertScenarioOutlineExamplesTableSectionRow(HashMap<String, String> keyMap) {
 		assertScenarioOutlineExamplesTableRowExists(keyMap.get("Name"), keyMap.get("Examples"), keyMap.get("Row"));
+	}
+
+	@Override
+	public void assertScenarioOutlinesSectionDescription(HashMap<String, String> keyMap) {
+		assertAbstractScenarioDescription(keyMap.get("Name"), keyMap.get("Description"));
+	}
+
+	@Override
+	public void assertScenarioOutlinesSectionName(HashMap<String, String> keyMap) {
+		assertAbstractScenarioExists(keyMap.get("Name"));
+	}
+
+	@Override
+	public void assertScenarioOutlinesSectionTags(HashMap<String, String> keyMap) {
+		assertAbstractScenarioTags(keyMap.get("Name"), keyMap.get("Tags"));
 	}
 
 	@Override
@@ -93,6 +128,36 @@ public class ProcessFeatureFileImpl extends FeatureFileObject implements Process
 
 	@Override
 	public void assertScenariosStepsSectionStep(HashMap<String, String> keyMap) {
+		assertStepExists(keyMap.get("Name"), keyMap.get("Step"));
+	}
+
+	@Override
+	public void assertScenarioStepsDataTableSectionName(HashMap<String, String> keyMap) {
+		assertAbstractScenarioExists(keyMap.get("Name"));
+	}
+
+	@Override
+	public void assertScenarioStepsDataTableSectionRow(HashMap<String, String> keyMap) {
+		assertScenarioOutlineStepDataTableRowExists(keyMap.get("Name"), keyMap.get("Step"), keyMap.get("Row"));
+	}
+
+	@Override
+	public void assertScenarioStepsDataTableSectionStep(HashMap<String, String> keyMap) {
+		assertStepExists(keyMap.get("Name"), keyMap.get("Step"));
+	}
+
+	@Override
+	public void assertScenarioStepsDocStringSectionContent(HashMap<String, String> keyMap) {
+		assertDocString(keyMap.get("Name"), keyMap.get("Step"), keyMap.get("Content"));
+	}
+
+	@Override
+	public void assertScenarioStepsDocStringSectionName(HashMap<String, String> keyMap) {
+		assertAbstractScenarioExists(keyMap.get("Name"));
+	}
+
+	@Override
+	public void assertScenarioStepsDocStringSectionStep(HashMap<String, String> keyMap) {
 		assertStepExists(keyMap.get("Name"), keyMap.get("Step"));
 	}
 

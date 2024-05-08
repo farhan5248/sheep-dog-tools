@@ -17,6 +17,7 @@ Feature: Convert Step Table To UML
       And The target/uml/pst.uml file, Interaction Messages section will be as follows
           |       Interaction Name |                       Message | Argument Name | Annotation Detail |
           | specs::Process::Submit | The Object page is as follows |     dataTable |        0 -> h1 \| |
+          | specs::Process::Submit | The Object page is as follows |     dataTable |        1 -> v1 \| |
 
   Scenario: Two rows, two cells
 
@@ -61,3 +62,4 @@ Feature: Convert Step Table To UML
           | specs::Process::Submit | The Object page is as follows |     dataTable | 1 -> v1 \|v2 \|v3 \| |
           | specs::Process::Submit | The Object page is as follows |     dataTable | 2 -> v4 \|v5 \|v6 \| |
           | specs::Process::Submit | The Object page is as follows |     dataTable | 3 -> v7 \|v8 \|v9 \| |
+

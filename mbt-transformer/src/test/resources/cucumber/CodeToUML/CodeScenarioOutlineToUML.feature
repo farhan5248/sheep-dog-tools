@@ -20,15 +20,9 @@ Feature: Code Scenario Outline To UML
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
       And The target/uml/pst.uml file, Interaction Messages section will be as follows
-          |       Interaction Name |                       Message |
-          | specs::Process::Submit | The Object page is as follows |
-      And The target/uml/pst.uml file, Interaction Messages section will be as follows
           |       Interaction Name |                       Message | Argument Name | Annotation Detail |
           | specs::Process::Submit | The Object page is as follows |     dataTable |        0 -> h1 \| |
           | specs::Process::Submit | The Object page is as follows |     dataTable |      1 -> <h3> \| |
-      And The target/uml/pst.uml file, Interaction Annotations section will be as follows
-          |       Interaction Name | Annotation Name |
-          | specs::Process::Submit |      Examples 1 |
       And The target/uml/pst.uml file, Interaction Annotations section will be as follows
           |       Interaction Name | Annotation Name | Annotation Detail |
           | specs::Process::Submit |      Examples 1 |         0 -> h3\| |

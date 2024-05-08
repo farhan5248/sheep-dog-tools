@@ -20,7 +20,7 @@ Feature: UML Feature To Code
     Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
           """
           @tag1
-          Feature: This is a test feature
+          Feature: Process
             Desc line 1
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
@@ -35,7 +35,7 @@ Feature: UML Feature To Code
     Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
           """
           @tag1 @tag2
-          Feature: This is a test feature
+          Feature: Process
             Desc line 1
             Desc line 2
           """
@@ -51,7 +51,7 @@ Feature: UML Feature To Code
     Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
           """
           @tag1 @tag2 @tag3
-          Feature: This is a test feature
+          Feature: Process
             Desc line 1
             Desc line 2
             Desc line 3

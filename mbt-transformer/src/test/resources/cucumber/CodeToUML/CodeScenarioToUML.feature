@@ -13,9 +13,6 @@ Feature: Code Scenario To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Class Interactions section will be as follows
-          |     Class Name | Interaction Name |
-          | specs::Process |           Submit |
       And The target/uml/pst.uml file, Interaction Messages section will be as follows
           |       Interaction Name |                                               Message |
           | specs::Process::Submit | The blah application, something/Object1 page is empty |

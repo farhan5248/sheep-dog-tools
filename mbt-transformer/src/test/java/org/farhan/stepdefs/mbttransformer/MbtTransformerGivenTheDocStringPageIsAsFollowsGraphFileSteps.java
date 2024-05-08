@@ -15,7 +15,7 @@ public class MbtTransformerGivenTheDocStringPageIsAsFollowsGraphFileSteps {
 
     @Given("^The Given The DocString page is as follows.graph file, Vertices section will be as follows$")
     public void theGivenTheDocStringPageIsAsFollowsGraphFileVerticesSectionWillBeAsFollows(DataTable dataTable) {
-    	MbtTransformerFactory.get("GivenTheDocStringPageIsAsFollowsGraphFile").setComponent("InitialComponent");
+        MbtTransformerFactory.get("GivenTheDocStringPageIsAsFollowsGraphFile").setComponent("mbt-transformer");
         MbtTransformerFactory.get("GivenTheDocStringPageIsAsFollowsGraphFile").setPath("Given The DocString page is as follows.graph");
         MbtTransformerFactory.get("GivenTheDocStringPageIsAsFollowsGraphFile").assertInputOutputs(dataTable, "VerticesSection");
     }

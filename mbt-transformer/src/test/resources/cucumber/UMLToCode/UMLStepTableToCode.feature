@@ -1,7 +1,26 @@
 @debug
 Feature: UML Step Table To Code
 
-  Scenario: Step with data table
+  Scenario: One row, one cell
+
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+          """
+          Feature: Process
+          
+            Scenario: Submit
+              Given The Object page is as follows
+                    | h1 |
+                    | v1 |
+          """
+     When The mbt-transformer plugin, cucumber-to-uml goal is executed
+      And The mbt-transformer plugin, uml-to-cucumber goal is executed
+     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+      And The mbt-transformer plugin, Process.feature file, Scenario Steps Data Table section will be as follows
+          |   Name |                                Step |      Row |
+          | Submit | Given The Object page is as follows | \| h1 \| |
+          | Submit | Given The Object page is as follows | \| v1 \| |
+
+  Scenario: Two rows, two cells
 
     Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
           """
@@ -9,27 +28,45 @@ Feature: UML Step Table To Code
           
             Scenario: Submit
           
-              Given The blah application, Object page, Top section will be as follows
+              Given The Object page is as follows
                     | h1 | h2 |
                     | v1 | v2 |
                     | v3 | v4 |
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
-     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
-      And The mbt-transformer plugin, ObjectPage.java file, Object section will be as follows
-          | Interface Name |                 Package |            Import |
-          |     ObjectPage | org.farhan.objects.blah | java.util.HashMap |
-      And The mbt-transformer plugin, ObjectPage.java file, Fields section will be as follows
-          |        Method Name | Visibility | Return Type |
-          | assertTopSectionH1 |     public |        void |
-          | assertTopSectionH2 |     public |        void |
-      And The mbt-transformer plugin, ObjectPage.java file, Fields section will be as follows
-          |        Method Name | Parameter Name |         Parameter Type |
-          | assertTopSectionH1 |         keyMap | HashMap<String,String> |
-          | assertTopSectionH2 |         keyMap | HashMap<String,String> |
+     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+      And The mbt-transformer plugin, Process.feature file, Scenario Steps Data Table section will be as follows
+          |   Name |                                Step |            Row |
+          | Submit | Given The Object page is as follows | \| h1 \| h2 \| |
+          | Submit | Given The Object page is as follows | \| v1 \| v2 \| |
+          | Submit | Given The Object page is as follows | \| v3 \| v4 \| |
 
-  Scenario: Step with data table
+  Scenario: Three rows, three cells
+
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+          """
+          Feature: Process
+          
+            Scenario: Submit
+          
+              Given The Object page is as follows
+                    | h1 | h2 | h3 |
+                    | v1 | v2 | v3 |
+                    | v4 | v5 | v6 |
+                    | v7 | v8 | v9 |
+          """
+     When The mbt-transformer plugin, cucumber-to-uml goal is executed
+      And The mbt-transformer plugin, uml-to-cucumber goal is executed
+     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+      And The mbt-transformer plugin, Process.feature file, Scenario Steps Data Table section will be as follows
+          |   Name |                                Step |                  Row |
+          | Submit | Given The Object page is as follows | \| h1 \| h2 \| h3 \| |
+          | Submit | Given The Object page is as follows | \| v1 \| v2 \| v3 \| |
+          | Submit | Given The Object page is as follows | \| v4 \| v5 \| v6 \| |
+          | Submit | Given The Object page is as follows | \| v7 \| v8 \| v9 \| |
+
+  Scenario: Layer 2
 
     Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
           """
@@ -68,4 +105,31 @@ Feature: UML Step Table To Code
           | theBlahApplicationObjectPageTopSectionWillBeAsFollows |                           BlahFactory.get("ObjectPage").setPath("Object"); |
           | theBlahApplicationObjectPageTopSectionWillBeAsFollows | BlahFactory.get("ObjectPage").assertInputOutputs(dataTable, "TopSection"); |
 
+  Scenario: Layer 3
+
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+          """
+          Feature: Process
           
+            Scenario: Submit
+          
+              Given The blah application, Object page, Top section will be as follows
+                    | h1 | h2 |
+                    | v1 | v2 |
+                    | v3 | v4 |
+          """
+     When The mbt-transformer plugin, cucumber-to-uml goal is executed
+      And The mbt-transformer plugin, uml-to-cucumber goal is executed
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
+      And The mbt-transformer plugin, ObjectPage.java file, Object section will be as follows
+          | Interface Name |                 Package |            Import |
+          |     ObjectPage | org.farhan.objects.blah | java.util.HashMap |
+      And The mbt-transformer plugin, ObjectPage.java file, Fields section will be as follows
+          |        Method Name | Visibility | Return Type |
+          | assertTopSectionH1 |     public |        void |
+          | assertTopSectionH2 |     public |        void |
+      And The mbt-transformer plugin, ObjectPage.java file, Fields section will be as follows
+          |        Method Name | Parameter Name |         Parameter Type |
+          | assertTopSectionH1 |         keyMap | HashMap<String,String> |
+          | assertTopSectionH2 |         keyMap | HashMap<String,String> |
+

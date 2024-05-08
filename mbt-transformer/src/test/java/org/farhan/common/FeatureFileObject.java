@@ -6,6 +6,7 @@ import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.Cell;
 import org.farhan.cucumber.Examples;
 import org.farhan.cucumber.Row;
+import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
@@ -28,7 +29,11 @@ public class FeatureFileObject extends FileObject {
 
 	protected void assertAbstractScenarioTags(String name, String tags) {
 		AbstractScenario abstractScenario = getAbstractScenario(name);
-		Assertions.assertEquals(tags, wrapper.getScenarioTags(abstractScenario));
+		if (abstractScenario instanceof Scenario) {
+			Assertions.assertEquals(tags, wrapper.getScenarioTags(abstractScenario));
+		} else {
+			Assertions.assertEquals(tags, wrapper.getScenarioOutlineTags(abstractScenario));
+		}
 	}
 
 	protected void assertDocString(String name, String stepName, String content) {
