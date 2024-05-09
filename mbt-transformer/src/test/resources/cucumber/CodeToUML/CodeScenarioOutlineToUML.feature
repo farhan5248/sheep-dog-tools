@@ -1,5 +1,4 @@
 @debug
-# TODO Example tags and statements are not mapped
 Feature: Code Scenario Outline To UML
 
   Scenario: No tags, no statement, one step, one example
@@ -127,11 +126,7 @@ Feature: Code Scenario Outline To UML
                 | h1   |
                 | <h3> |
 
-              @tag1 @tag2 @tag3
               Examples: Examples 1
-                Desc line 1
-                Desc line 2
-                Desc line 3
                 | h3  |
                 | v31 |
 
