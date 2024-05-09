@@ -3,10 +3,10 @@ package org.farhan.objects.mbttransformer.pre;
 import java.util.HashMap;
 
 import org.farhan.common.GraphFileObject;
-import org.farhan.objects.mbttransformer.GivenTheDocStringPageIsAsFollowsGraphFile;
+import org.farhan.objects.mbttransformer.GivenTheObjectPageIsAsFollowsGraphFile;
 
-public class GivenTheDocStringPageIsAsFollowsGraphFileImpl extends GraphFileObject
-		implements GivenTheDocStringPageIsAsFollowsGraphFile {
+public class GivenTheObjectPageIsAsFollowsGraphFileImpl extends GraphFileObject
+		implements GivenTheObjectPageIsAsFollowsGraphFile {
 
 	@Override
 	public void assertEdgesSectionEdgeName(HashMap<String, String> keyMap) {

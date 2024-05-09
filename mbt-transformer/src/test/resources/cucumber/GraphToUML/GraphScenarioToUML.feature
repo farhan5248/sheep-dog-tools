@@ -1,31 +1,23 @@
 @debug
 Feature: Graph Scenario To UML
 
-  Background: Create a graph text file
+  Scenario: No tags, no statements, one step
 
     Given The mbt-transformer plugin, target/graphs/specs/Process.graph file is as follows
           """
           Graph
           	name:Process
-          	tag:tag1,tag2
-          	description:
-          		Desc
-          		Line 2
           	paths:
           		Path
           			index:0
-          			name:Story One
-          			tag:tag1,tag2
-          			description:
-          				Desc
-          				Line 2
+          			name:Submit
           	vertices:
           		Vertex
           			label:start
           		Vertex
           			label:end
           		Vertex
-          			label:Given The Search application, Home page is empty
+          			label:Given The blah application, something/Object1 page is empty
           	edges:
           		Edge
           			label:
@@ -35,126 +27,222 @@ Feature: Graph Scenario To UML
           					label:start
           			target:
           				Vertex
-          					label:Given The Search application, Home page is empty
+          					label:Given The blah application, something/Object1 page is empty
           		Edge
           			label:
           			tag:0
           			source:
           				Vertex
-          					label:Given The Search application, Home page is empty
-          			target:
-          				Vertex
-          					label:end
-          """
-    Given The mbt-transformer plugin, target/graphs/stepdefs/Given The Search application Home page is empty.graph file is as follows
-          """
-          Graph
-          	name:Given The Search application, Home page is empty
-          	tag:
-          	description:
-          		
-          	paths:
-          	vertices:
-          		Vertex
-          			label:start
-          		Vertex
-          			label:end
-          		Vertex
-          			label:0 ins
-          		Vertex
-          			label:0 grp
-          		Vertex
-          			label:0 crt
-          		Vertex
-          			label:1 ins
-          		Vertex
-          			label:1 grp
-          		Vertex
-          			label:1 crt
-          	edges:
-          		Edge
-          			label:
-          			tag:0
-          			source:
-          				Vertex
-          					label:start
-          			target:
-          				Vertex
-          					label:0 ins
-          		Edge
-          			label:5
-          			tag:0
-          			source:
-          				Vertex
-          					label:0 ins
-          			target:
-          				Vertex
-          					label:0 grp
-          		Edge
-          			label:10
-          			tag:0
-          			source:
-          				Vertex
-          					label:0 grp
-          			target:
-          				Vertex
-          					label:0 crt
-          		Edge
-          			label:15
-          			tag:0
-          			source:
-          				Vertex
-          					label:0 crt
-          			target:
-          				Vertex
-          					label:1 ins
-          		Edge
-          			label:4
-          			tag:0
-          			source:
-          				Vertex
-          					label:1 ins
-          			target:
-          				Vertex
-          					label:1 grp
-          		Edge
-          			label:8
-          			tag:0
-          			source:
-          				Vertex
-          					label:1 grp
-          			target:
-          				Vertex
-          					label:1 crt
-          		Edge
-          			label:12
-          			tag:0
-          			source:
-          				Vertex
-          					label:1 crt
+          					label:Given The blah application, something/Object1 page is empty
           			target:
           				Vertex
           					label:end
           """
      When The mbt-transformer plugin, graph-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
+      And The target/uml/pst.uml file, Interaction Messages section will be as follows
+          |       Interaction Name |                                               Message |
+          | specs::Process::Submit | The blah application, something/Object1 page is empty |
 
-  Scenario: Convert paths to interactions
+  Scenario: One tag, one statement, one step
 
-      And The target/uml/pst.uml file, Class Interactions section will be as follows
-          |     Class Name | Interaction Name |
-          | specs::Process |        Story One |
-
-  Scenario: Convert scenario tags
-
+    Given The mbt-transformer plugin, target/graphs/specs/Process.graph file is as follows
+          """
+          Graph
+          	name:Process
+          	paths:
+          		Path
+          			index:0
+          			name:Submit
+          			tag:tag1
+          			description:
+          				Desc line 1
+          	vertices:
+          		Vertex
+          			label:start
+          		Vertex
+          			label:end
+          		Vertex
+          			label:Given The blah application, something/Object1 page is empty
+          	edges:
+          		Edge
+          			label:
+          			tag:0
+          			source:
+          				Vertex
+          					label:start
+          			target:
+          				Vertex
+          					label:Given The blah application, something/Object1 page is empty
+          		Edge
+          			label:
+          			tag:0
+          			source:
+          				Vertex
+          					label:Given The blah application, something/Object1 page is empty
+          			target:
+          				Vertex
+          					label:end
+          """
+     When The mbt-transformer plugin, graph-to-uml goal is executed
+     Then The mbt-transformer plugin, target/uml/pst.uml file will be present
       And The target/uml/pst.uml file, Interaction Parameters section will be as follows
-          |          Interaction Name | Parameter Name |
-          | specs::Process::Story One |           tag1 |
-          | specs::Process::Story One |           tag2 |
-
-  Scenario: Convert scenario description
-
+          |       Interaction Name | Parameter Name |
+          | specs::Process::Submit |           tag1 |
       And The target/uml/pst.uml file, Interaction Comments section will be as follows
-          |          Interaction Name |      Comment |
-          | specs::Process::Story One | Desc\nLine 2 |
+          |       Interaction Name |     Comment |
+          | specs::Process::Submit | Desc line 1 |
+
+  Scenario Outline: Two tags, two statements, two steps
+
+    Given The mbt-transformer plugin, target/graphs/specs/Process.graph file is as follows
+          """
+          Graph
+          	name:Process
+          	paths:
+          		Path
+          			index:0
+          			name:Submit
+          			tag:tag1,tag2
+          			description:
+          				Desc line 1
+          				Desc line 2
+          	vertices:
+          		Vertex
+          			label:start
+          		Vertex
+          			label:end
+          		Vertex
+          			label:Given The blah application, something/Object1 page is empty
+          		Vertex
+          			label:Given The blah application, something/Object2 page is empty
+          	edges:
+          		Edge
+          			label:
+          			tag:0
+          			source:
+          				Vertex
+          					label:start
+          			target:
+          				Vertex
+          					label:Given The blah application, something/Object1 page is empty
+          		Edge
+          			label:
+          			tag:0
+          			source:
+          				Vertex
+          					label:Given The blah application, something/Object1 page is empty
+          			target:
+          				Vertex
+          					label:Given The blah application, something/Object2 page is empty
+          		Edge
+          			label:
+          			tag:0
+          			source:
+          				Vertex
+          					label:Given The blah application, something/Object2 page is empty
+          			target:
+          				Vertex
+          					label:end
+          """
+     When The mbt-transformer plugin, graph-to-uml goal is executed
+     Then The mbt-transformer plugin, target/uml/pst.uml file will be present
+      And The target/uml/pst.uml file, Interaction Parameters section will be as follows
+          |       Interaction Name | Parameter Name |
+          | specs::Process::Submit |     tag<Index> |
+      And The target/uml/pst.uml file, Interaction Comments section will be as follows
+          |       Interaction Name |                  Comment |
+          | specs::Process::Submit | Desc line 1\nDesc line 2 |
+      And The target/uml/pst.uml file, Interaction Messages section will be as follows
+          |       Interaction Name |                                                     Message |
+          | specs::Process::Submit | The blah application, something/Object<Index> page is empty |
+
+    Examples: Indices
+
+          | Index |
+          |     1 |
+          |     2 |
+
+  Scenario Outline: Three tags, three statements, three steps
+
+    Given The mbt-transformer plugin, target/graphs/specs/Process.graph file is as follows
+          """
+          Graph
+          	name:Process
+          	paths:
+          		Path
+          			index:0
+          			name:Submit
+          			tag:tag1,tag2,tag3
+          			description:
+          				Desc line 1
+          				Desc line 2
+          				Desc line 3
+          	vertices:
+          		Vertex
+          			label:start
+          		Vertex
+          			label:end
+          		Vertex
+          			label:Given The blah application, something/Object1 page is empty
+          		Vertex
+          			label:Given The blah application, something/Object2 page is empty
+          		Vertex
+          			label:Given The blah application, something/Object3 page is empty
+          	edges:
+          		Edge
+          			label:
+          			tag:0
+          			source:
+          				Vertex
+          					label:start
+          			target:
+          				Vertex
+          					label:Given The blah application, something/Object1 page is empty
+          		Edge
+          			label:
+          			tag:0
+          			source:
+          				Vertex
+          					label:Given The blah application, something/Object1 page is empty
+          			target:
+          				Vertex
+          					label:Given The blah application, something/Object2 page is empty
+          		Edge
+          			label:
+          			tag:0
+          			source:
+          				Vertex
+          					label:Given The blah application, something/Object2 page is empty
+          			target:
+          				Vertex
+          					label:Given The blah application, something/Object3 page is empty
+          		Edge
+          			label:
+          			tag:0
+          			source:
+          				Vertex
+          					label:Given The blah application, something/Object3 page is empty
+          			target:
+          				Vertex
+          					label:end
+          """
+     When The mbt-transformer plugin, graph-to-uml goal is executed
+     Then The mbt-transformer plugin, target/uml/pst.uml file will be present
+      And The target/uml/pst.uml file, Interaction Parameters section will be as follows
+          |       Interaction Name | Parameter Name |
+          | specs::Process::Submit |     tag<Index> |
+      And The target/uml/pst.uml file, Interaction Comments section will be as follows
+          |       Interaction Name |                               Comment |
+          | specs::Process::Submit | Desc line 1\nDesc line 2\nDesc line 3 |
+      And The target/uml/pst.uml file, Interaction Messages section will be as follows
+          |       Interaction Name |                                                     Message |
+          | specs::Process::Submit | The blah application, something/Object<Index> page is empty |
+
+    Examples: Indices
+
+          | Index |
+          |     1 |
+          |     2 |
+          |     3 |
 

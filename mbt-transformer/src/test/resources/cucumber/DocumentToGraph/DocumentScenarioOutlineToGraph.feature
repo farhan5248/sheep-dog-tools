@@ -10,7 +10,7 @@ Feature: Document Scenario Outline To Graph
           [tags="tag3"]
           == Story One
           
-          === Given The DocString page is as follows
+          === Given The Object page is as follows
           
           [options="header"]
           |===
@@ -46,11 +46,11 @@ Feature: Document Scenario Outline To Graph
           | Story One/Dataset 2/0 |     1 |
           | Story One/Dataset 2/1 |     2 |
       And The Process.graph file, Edges section will be as follows
-          |                                           Edge Name |   Tag |
-          | start ->  -> Given The DocString page is as follows | 0,1,2 |
-          |   Given The DocString page is as follows ->  -> end | 0,1,2 |
-      And The mbt-transformer plugin, target/graphs/stepdefs/Given The DocString page is as follows.graph file will be present
-      And The Given The DocString page is as follows.graph file, Edges section will be as follows
+          |                                        Edge Name |   Tag |
+          | start ->  -> Given The Object page is as follows | 0,1,2 |
+          |   Given The Object page is as follows ->  -> end | 0,1,2 |
+      And The mbt-transformer plugin, target/graphs/stepdefs/Given The Object page is as follows.graph file will be present
+      And The Given The Object page is as follows.graph file, Edges section will be as follows
           |           Edge Name |   Tag |
           |  start ->  -> 0 grp | 0,1,2 |
           | 0 grp -> 8 -> 0 ins | 0,1,2 |

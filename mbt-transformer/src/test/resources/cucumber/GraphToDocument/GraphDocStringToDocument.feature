@@ -22,7 +22,7 @@ Feature: Graph DocString To Document
           		Vertex
           			label:end
           		Vertex
-          			label:Given The DocString page is as follows
+          			label:Given The Object page is as follows
           	edges:
           		Edge
           			label:
@@ -32,21 +32,21 @@ Feature: Graph DocString To Document
           					label:start
           			target:
           				Vertex
-          					label:Given The DocString page is as follows
+          					label:Given The Object page is as follows
           		Edge
           			label:
           			tag:0
           			source:
           				Vertex
-          					label:Given The DocString page is as follows
+          					label:Given The Object page is as follows
           			target:
           				Vertex
           					label:end
           """
-      And The mbt-transformer plugin, target/graphs/stepdefs/Given The DocString page is as follows.graph file is as follows
+      And The mbt-transformer plugin, target/graphs/stepdefs/Given The Object page is as follows.graph file is as follows
           """
           Graph
-          	name:Given The DocString page is as follows
+          	name:Given The Object page is as follows
           	tag:
           	description:
           	paths:
@@ -68,7 +68,7 @@ Feature: Graph DocString To Document
           				Vertex
           					label:Content
           		Edge
-          			label:Given The DocString page is as follows-0.txt
+          			label:Given The Object page is as follows-0.txt
           			tag:0
           			source:
           				Vertex
@@ -77,7 +77,7 @@ Feature: Graph DocString To Document
           				Vertex
           					label:end
           """
-      And The mbt-transformer plugin, target/graphs/resources/Given The DocString page is as follows-0.txt file is as follows
+      And The mbt-transformer plugin, target/graphs/resources/Given The Object page is as follows-0.txt file is as follows
           """
           text1
           """
@@ -85,5 +85,5 @@ Feature: Graph DocString To Document
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Scenarios Steps Doc String section will be as follows
           |   Name |                                   Step | Content |
-          | Submit | Given The DocString page is as follows |   text1 |
+          | Submit | Given The Object page is as follows |   text1 |
 

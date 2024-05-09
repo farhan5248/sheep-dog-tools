@@ -2,7 +2,7 @@ package org.farhan.objects.mbttransformer;
 
 import java.util.HashMap;
 
-public interface GivenTheDocStringPageIsAsFollows0TxtFile {
+public interface GivenTheObjectPageIsAsFollows0TxtFile {
 
     public void setContent(HashMap<String, String> keyMap);
 

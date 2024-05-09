@@ -1,31 +1,33 @@
 @debug
 Feature: Graph Step To UML
 
-  Background: Create a graph text file
+  Scenario: Convert step keywords
 
     Given The mbt-transformer plugin, target/graphs/specs/Process.graph file is as follows
           """
           Graph
           	name:Process
-          	tag:tag1,tag2
-          	description:
-          		Desc
-          		Line 2
           	paths:
           		Path
           			index:0
-          			name:Story One
-          			tag:tag1,tag2
-          			description:
-          				Desc
-          				Line 2
+          			name:Submit
           	vertices:
           		Vertex
           			label:start
           		Vertex
           			label:end
           		Vertex
-          			label:Given The Search application, Home page is empty
+          			label:Given The Given page is empty
+          		Vertex
+          			label:Given The When page is empty
+          		Vertex
+          			label:Given The Then page is empty
+          		Vertex
+          			label:Given The But page is empty
+          		Vertex
+          			label:Given The And page is empty
+          		Vertex
+          			label:Given The Asterisk page is empty
           	edges:
           		Edge
           			label:
@@ -35,99 +37,70 @@ Feature: Graph Step To UML
           					label:start
           			target:
           				Vertex
-          					label:Given The Search application, Home page is empty
+          					label:Given The Given page is empty
           		Edge
           			label:
           			tag:0
           			source:
           				Vertex
-          					label:Given The Search application, Home page is empty
+          					label:Given The Given page is empty
           			target:
           				Vertex
-          					label:end
-          """
-    Given The mbt-transformer plugin, target/graphs/stepdefs/Given The Search application Home page is empty.graph file is as follows
-          """
-          Graph
-          	name:Given The Search application, Home page is empty
-          	tag:
-          	description:
-          		
-          	paths:
-          	vertices:
-          		Vertex
-          			label:start
-          		Vertex
-          			label:end
-          		Vertex
-          			label:0 ins
-          		Vertex
-          			label:0 grp
-          		Vertex
-          			label:1 ins
-          		Vertex
-          			label:1 grp
-          	edges:
+          					label:Given The When page is empty
           		Edge
           			label:
           			tag:0
           			source:
           				Vertex
-          					label:start
+          					label:Given The When page is empty
           			target:
           				Vertex
-          					label:0 ins
+          					label:Given The Then page is empty
           		Edge
-          			label:5
+          			label:
           			tag:0
           			source:
           				Vertex
-          					label:0 ins
+          					label:Given The Then page is empty
           			target:
           				Vertex
-          					label:0 grp
+          					label:Given The But page is empty
           		Edge
-          			label:10
+          			label:
           			tag:0
           			source:
           				Vertex
-          					label:0 grp
+          					label:Given The But page is empty
           			target:
           				Vertex
-          					label:1 ins
+          					label:Given The And page is empty
           		Edge
-          			label:4
+          			label:
           			tag:0
           			source:
           				Vertex
-          					label:1 ins
+          					label:Given The And page is empty
           			target:
           				Vertex
-          					label:1 grp
+          					label:Given The Asterisk page is empty
           		Edge
-          			label:8
+          			label:
           			tag:0
           			source:
           				Vertex
-          					label:1 grp
+          					label:Given The Asterisk page is empty
           			target:
           				Vertex
           					label:end
           """
      When The mbt-transformer plugin, graph-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-
-  Scenario: Convert path element to interaction messages
-
       And The target/uml/pst.uml file, Interaction Messages section will be as follows
-          |          Interaction Name |                                    Message |
-          | specs::Process::Story One | The Search application, Home page is empty |
-
-  Scenario: Convert path element to message annotations
-
-      And The target/uml/pst.uml file, Interaction Messages section will be as follows
-          |          Interaction Name |                                    Message | Argument Name | Annotation Detail |
-          | specs::Process::Story One | The Search application, Home page is empty |     dataTable | 0 -> ins \|grp \| |
-          | specs::Process::Story One | The Search application, Home page is empty |     dataTable |    1 -> 5 \|10 \| |
-          | specs::Process::Story One | The Search application, Home page is empty |     dataTable |     2 -> 4 \|8 \| |
+          |       Interaction Name |                    Message |
+          | specs::Process::Submit |    The Given page is empty |
+          | specs::Process::Submit |     The When page is empty |
+          | specs::Process::Submit |     The Then page is empty |
+          | specs::Process::Submit |      The And page is empty |
+          | specs::Process::Submit |      The But page is empty |
+          | specs::Process::Submit | The Asterisk page is empty |
 
