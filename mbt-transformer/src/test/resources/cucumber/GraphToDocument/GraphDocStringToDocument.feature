@@ -1,21 +1,16 @@
 @debug
 Feature: Graph DocString To Document
 
-  Scenario: Create an adoc file from feature file
+  Scenario: One line
 
     Given The mbt-transformer plugin, target/graphs/specs/Process.graph file is as follows
           """
           Graph
           	name:Process
-          	tag:tag1
-          	description:
           	paths:
           		Path
           			index:0
           			name:Submit
-          			tag:
-          			parameters:
-          			description:
           	vertices:
           		Vertex
           			label:start
@@ -25,7 +20,6 @@ Feature: Graph DocString To Document
           			label:Given The Object page is as follows
           	edges:
           		Edge
-          			label:
           			tag:0
           			source:
           				Vertex
@@ -34,7 +28,6 @@ Feature: Graph DocString To Document
           				Vertex
           					label:Given The Object page is as follows
           		Edge
-          			label:
           			tag:0
           			source:
           				Vertex
@@ -84,6 +77,6 @@ Feature: Graph DocString To Document
      When The mbt-transformer plugin, graph-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Scenarios Steps Doc String section will be as follows
-          |   Name |                                   Step | Content |
+          |   Name |                                Step | Content |
           | Submit | Given The Object page is as follows |   text1 |
 
