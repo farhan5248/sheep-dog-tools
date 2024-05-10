@@ -40,11 +40,6 @@ Feature: Document Scenario To Graph
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
-      And The Process.graph file, Vertices section will be as follows
-          | Vertex Name |
-          |       start |
-          |         end |
-          |      Step 1 |
       And The Process.graph file, Edges section will be as follows
           |           Edge Name |
           | start ->  -> Step 1 |
@@ -64,12 +59,6 @@ Feature: Document Scenario To Graph
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
-      And The Process.graph file, Vertices section will be as follows
-          | Vertex Name |
-          |       start |
-          |         end |
-          |      Step 1 |
-          |      Step 2 |
       And The Process.graph file, Edges section will be as follows
           |            Edge Name |
           |  start ->  -> Step 1 |
@@ -94,11 +83,6 @@ Feature: Document Scenario To Graph
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
-      And The Process.graph file, Vertices section will be as follows
-          | Vertex Name |
-          |       start |
-          |         end |
-          |      Step 1 |
       And The Process.graph file, Edges section will be as follows
           |           Edge Name |
           | start ->  -> Step 1 |

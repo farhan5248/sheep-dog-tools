@@ -13,7 +13,7 @@ Feature: UML Examples Table To Code
                 | <h1> |
 
               Examples: Examples 1
-                | h1  |
+                | h1 |
                 | v1 |
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed

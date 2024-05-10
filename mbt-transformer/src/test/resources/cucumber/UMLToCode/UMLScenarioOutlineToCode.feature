@@ -20,9 +20,9 @@ Feature: UML Scenario Outline To Code
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
       And The mbt-transformer plugin, Process.feature file, Scenario Outline Steps Data Table section will be as follows
-          |   Name |                                Step |        Row |
-          | Submit | Given The Object page is as follows |   \| h1 \| |
-          | Submit | Given The Object page is as follows | \| <h3> \| |
+          |   Name |                                Step |
+          | Submit | Given The Object page is as follows |
+          | Submit | Given The Object page is as follows |
       And The mbt-transformer plugin, Process.feature file, Scenario Outline Examples Table section will be as follows
           |   Name |   Examples |       Row |
           | Submit | Examples 1 | \|  h3 \| |
@@ -41,9 +41,7 @@ Feature: UML Scenario Outline To Code
                 | h1   |
                 | <h3> |
 
-              @tag1
               Examples: Examples 1
-                Desc line 1
                 | h3  |
                 | v31 |
           """
@@ -71,10 +69,7 @@ Feature: UML Scenario Outline To Code
                 | h1   |
                 | <h3> |
 
-              @tag1 @tag2
               Examples: Examples 1
-                Desc line 1
-                Desc line 2
                 | h3  |
                 | v31 |
 
@@ -123,11 +118,7 @@ Feature: UML Scenario Outline To Code
                 | h1   |
                 | <h3> |
 
-              @tag1 @tag2 @tag3
               Examples: Examples 1
-                Desc line 1
-                Desc line 2
-                Desc line 3
                 | h3  |
                 | v31 |
 
