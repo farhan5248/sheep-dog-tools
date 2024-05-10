@@ -72,7 +72,7 @@ public class FeatureFileObject extends FileObject {
 				"Row " + rowName + " doesn't exist");
 	}
 
-	protected void assertScenarioOutlineStepDataTableRowExists(String name, String stepName, String rowName) {
+	protected void assertAbstractScenarioStepDataTableRowExists(String name, String stepName, String rowName) {
 		assertStepExists(name, stepName);
 		Assertions.assertTrue(getRow(getStep(name, stepName), rowName) != null, "Row " + rowName + " doesn't exist");
 	}

@@ -92,17 +92,17 @@ public class ProcessFeatureFileImpl extends FeatureFileObject implements Process
 	}
 
 	@Override
-	public void assertScenarioOutlineStepsDataTableSectionName(HashMap<String, String> keyMap) {
+	public void assertScenarioOutlineStepsStepTableSectionName(HashMap<String, String> keyMap) {
 		assertAbstractScenarioExists(keyMap.get("Name"));
 	}
 
 	@Override
-	public void assertScenarioOutlineStepsDataTableSectionRow(HashMap<String, String> keyMap) {
-		assertScenarioOutlineStepDataTableRowExists(keyMap.get("Name"), keyMap.get("Step"), keyMap.get("Row"));
+	public void assertScenarioOutlineStepsStepTableSectionRow(HashMap<String, String> keyMap) {
+		assertAbstractScenarioStepDataTableRowExists(keyMap.get("Name"), keyMap.get("Step"), keyMap.get("Row"));
 	}
 
 	@Override
-	public void assertScenarioOutlineStepsDataTableSectionStep(HashMap<String, String> keyMap) {
+	public void assertScenarioOutlineStepsStepTableSectionStep(HashMap<String, String> keyMap) {
 		assertStepExists(keyMap.get("Name"), keyMap.get("Step"));
 	}
 
@@ -132,17 +132,17 @@ public class ProcessFeatureFileImpl extends FeatureFileObject implements Process
 	}
 
 	@Override
-	public void assertScenarioStepsDataTableSectionName(HashMap<String, String> keyMap) {
+	public void assertScenarioStepsStepTableSectionName(HashMap<String, String> keyMap) {
 		assertAbstractScenarioExists(keyMap.get("Name"));
 	}
 
 	@Override
-	public void assertScenarioStepsDataTableSectionRow(HashMap<String, String> keyMap) {
-		assertScenarioOutlineStepDataTableRowExists(keyMap.get("Name"), keyMap.get("Step"), keyMap.get("Row"));
+	public void assertScenarioStepsStepTableSectionRow(HashMap<String, String> keyMap) {
+		assertAbstractScenarioStepDataTableRowExists(keyMap.get("Name"), keyMap.get("Step"), keyMap.get("Row"));
 	}
 
 	@Override
-	public void assertScenarioStepsDataTableSectionStep(HashMap<String, String> keyMap) {
+	public void assertScenarioStepsStepTableSectionStep(HashMap<String, String> keyMap) {
 		assertStepExists(keyMap.get("Name"), keyMap.get("Step"));
 	}
 

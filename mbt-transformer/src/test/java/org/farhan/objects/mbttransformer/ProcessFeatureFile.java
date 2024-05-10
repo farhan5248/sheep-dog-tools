@@ -36,11 +36,11 @@ public interface ProcessFeatureFile {
 
     public void assertScenarioOutlinesSectionTags(HashMap<String, String> keyMap);
 
-    public void assertScenarioOutlineStepsDataTableSectionName(HashMap<String, String> keyMap);
+    public void assertScenarioOutlineStepsStepTableSectionName(HashMap<String, String> keyMap);
 
-    public void assertScenarioOutlineStepsDataTableSectionRow(HashMap<String, String> keyMap);
+    public void assertScenarioOutlineStepsStepTableSectionRow(HashMap<String, String> keyMap);
 
-    public void assertScenarioOutlineStepsDataTableSectionStep(HashMap<String, String> keyMap);
+    public void assertScenarioOutlineStepsStepTableSectionStep(HashMap<String, String> keyMap);
 
     public void assertScenariosSectionDescription(HashMap<String, String> keyMap);
 
@@ -52,11 +52,11 @@ public interface ProcessFeatureFile {
 
     public void assertScenariosStepsSectionStep(HashMap<String, String> keyMap);
 
-    public void assertScenarioStepsDataTableSectionName(HashMap<String, String> keyMap);
+    public void assertScenarioStepsStepTableSectionName(HashMap<String, String> keyMap);
 
-    public void assertScenarioStepsDataTableSectionRow(HashMap<String, String> keyMap);
+    public void assertScenarioStepsStepTableSectionRow(HashMap<String, String> keyMap);
 
-    public void assertScenarioStepsDataTableSectionStep(HashMap<String, String> keyMap);
+    public void assertScenarioStepsStepTableSectionStep(HashMap<String, String> keyMap);
 
     public void assertScenarioStepsDocStringSectionContent(HashMap<String, String> keyMap);
 
