@@ -1,9 +1,11 @@
 package org.farhan.common;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.asciidoctor.ast.Section;
 import org.farhan.cucumber.AbstractScenario;
+import org.farhan.cucumber.Examples;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
@@ -29,36 +31,10 @@ public class AdocFileObject extends FileObject {
 		Assertions.assertTrue(getRow(getStep(name, stepName), rowName) != null, "Row " + rowName + " doesn't exist");
 	}
 
-	private ArrayList<String> getRow(String step, String rowName) {
-		rowName = rowName.replaceAll(" +", " ");
-		for (ArrayList<String> r : wrapper.getDataTable(step)) {
-			String rString = "|";
-			for (String c : r) {
-				rString += " " + c + " |";
-			}
-			if (rString.contentEquals(rowName)) {
-				return r;
-			}
-		}
-		return null;
-	}
-	
 	protected void assertAbstractScenarioTags(String name, String tags) {
-		AbstractScenario abstractScenario = getAbstractScenario(name);
-		if (abstractScenario instanceof Scenario) {
-			Assertions.assertEquals(tags, wrapper.getScenarioTags(abstractScenario));
-		} else {
-			Assertions.assertEquals(tags, wrapper.getScenarioOutlineTags(abstractScenario));
-		}
-	}
-	
-	private AbstractScenario getAbstractScenario(String name) {
-		for (AbstractScenario s : wrapper.getAbstractScenarioList()) {
-			if (wrapper.getScenarioName(s).contentEquals(name)) {
-				return s;
-			}
-		}
-		return null;
+		Section abstractScenario = getAbstractScenario(name);
+		// TODO rename getScenarioTags to getAbstractScenarioTags
+		Assertions.assertEquals(tags, wrapper.getScenarioTags(abstractScenario));
 	}
 
 	protected void assertDocString(String name, String stepName, String content) {
@@ -86,9 +62,30 @@ public class AdocFileObject extends FileObject {
 		}
 	}
 
+	protected void assertScenarioOutlineExamplesExists(String name, String examplesName) {
+		assertAbstractScenarioExists(name);
+		Assertions.assertTrue(getExamples(name, examplesName) != null, "Examples " + examplesName + " doesn't exist");
+	}
+
+	protected void assertScenarioOutlineExamplesTableRowExists(String name, String examplesName, String rowName) {
+		assertScenarioOutlineExamplesExists(name, examplesName);
+		Assertions.assertTrue(getExamplesRow(getExamples(name, examplesName), rowName) != null,
+				"Row " + rowName + " doesn't exist");
+	}
+
+	
 	protected void assertStepExists(String name, String stepName) {
 		assertAbstractScenarioExists(name);
 		Assertions.assertTrue(getStep(name, stepName) != null, "Step " + stepName + " doesn't exist");
+	}
+
+	private Section getExamples(String name, String examplesName) {
+		for (Section e : wrapper.getExamplesList(getAbstractScenario(name))) {
+			if (wrapper.getExamplesName(e).contentEquals(examplesName)) {
+				return e;
+			}
+		}
+		return null;
 	}
 
 	private Section getAbstractScenario(String name) {
@@ -97,6 +94,48 @@ public class AdocFileObject extends FileObject {
 				return s;
 			}
 		}
+		return null;
+	}
+
+	private ArrayList<String> getRow(Section step, String rowName) {
+		rowName = rowName.replaceAll(" +", " ");
+		// TODO getDataTable is a mess, it's returning a list of cells as a pair of cell
+		// name and value. Change it to a list of rows
+		ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
+		ArrayList<String> row = new ArrayList<String>();
+		table.add(row);
+		for (ArrayList<String> pair : wrapper.getDataTable(step, new HashMap<String, String>())) {
+			if (pair.getFirst().startsWith("0")) {
+				row.add(pair.getFirst().split(" ")[1]);
+			} else {
+				break;
+			}
+		}
+		for (ArrayList<String> pair : wrapper.getDataTable(step, new HashMap<String, String>())) {
+			int rowNum = Integer.valueOf(pair.getFirst().split(" ")[0]);
+			if (rowNum + 1 == table.size()) {
+				row = new ArrayList<String>();
+				table.add(row);
+			} else {
+				row = table.get(rowNum + 1);
+			}
+			row.add(pair.getLast());
+		}
+		for (ArrayList<String> cellList : table) {
+			String rowCsv = "";
+			for (String cell : cellList) {
+				rowCsv += ", " + cell;
+			}
+			rowCsv = rowCsv.replaceFirst(", ", "");
+			if (rowCsv.contentEquals(rowName)) {
+				return cellList;
+			}
+		}
+		return null;
+	}
+
+	private ArrayList<String> getExamplesRow(Section examples, String rowName) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

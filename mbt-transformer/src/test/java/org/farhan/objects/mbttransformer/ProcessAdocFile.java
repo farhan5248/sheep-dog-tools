@@ -16,6 +16,12 @@ public interface ProcessAdocFile {
 
     public void assertPresent(HashMap<String, String> keyMap);
 
+    public void assertScenarioOutlineExamplesTableSectionExamples(HashMap<String, String> keyMap);
+
+    public void assertScenarioOutlineExamplesTableSectionName(HashMap<String, String> keyMap);
+
+    public void assertScenarioOutlineExamplesTableSectionRow(HashMap<String, String> keyMap);
+
     public void assertScenariosSectionDescription(HashMap<String, String> keyMap);
 
     public void assertScenariosSectionName(HashMap<String, String> keyMap);

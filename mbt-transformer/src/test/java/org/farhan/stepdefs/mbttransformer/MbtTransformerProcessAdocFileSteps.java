@@ -27,6 +27,13 @@ public class MbtTransformerProcessAdocFileSteps {
         MbtTransformerFactory.get("ProcessAdocFile").assertInputOutputs(dataTable, "FeatureSection");
     }
 
+    @Given("^The mbt-transformer plugin, Process.adoc file, Scenario Outline Examples Table section will be as follows$")
+    public void theMbtTransformerPluginProcessAdocFileScenarioOutlineExamplesTableSectionWillBeAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("ProcessAdocFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessAdocFile").setPath("Process.adoc");
+        MbtTransformerFactory.get("ProcessAdocFile").assertInputOutputs(dataTable, "ScenarioOutlineExamplesTableSection");
+    }
+
     @Given("^The mbt-transformer plugin, Process.adoc file, Scenarios section will be as follows$")
     public void theMbtTransformerPluginProcessAdocFileScenariosSectionWillBeAsFollows(DataTable dataTable) {
         MbtTransformerFactory.get("ProcessAdocFile").setComponent("mbt-transformer");

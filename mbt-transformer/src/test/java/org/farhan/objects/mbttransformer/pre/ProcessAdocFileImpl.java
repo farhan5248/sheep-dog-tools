@@ -38,6 +38,21 @@ public class ProcessAdocFileImpl extends AdocFileObject implements ProcessAdocFi
 	}
 
 	@Override
+	public void assertScenarioOutlineExamplesTableSectionExamples(HashMap<String, String> keyMap) {
+		assertScenarioOutlineExamplesExists(keyMap.get("Name"), keyMap.get("Examples"));
+	}
+
+	@Override
+	public void assertScenarioOutlineExamplesTableSectionName(HashMap<String, String> keyMap) {
+		assertAbstractScenarioExists(keyMap.get("Name"));
+	}
+
+	@Override
+	public void assertScenarioOutlineExamplesTableSectionRow(HashMap<String, String> keyMap) {
+		assertScenarioOutlineExamplesTableRowExists(keyMap.get("Name"), keyMap.get("Examples"), keyMap.get("Row"));
+	}
+
+	@Override
 	public void assertScenariosSectionDescription(HashMap<String, String> keyMap) {
 		assertAbstractScenarioDescription(keyMap.get("Name"), keyMap.get("Description"));
 	}
