@@ -1,6 +1,6 @@
-@debug
 Feature: Graph Examples Table To Document
 
+  @debug
   Scenario: One row, one cell
 
     Given The mbt-transformer plugin, target/graphs/specs/Process.graph file is as follows

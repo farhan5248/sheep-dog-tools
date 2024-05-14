@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.asciidoctor.ast.Section;
-import org.farhan.cucumber.AbstractScenario;
-import org.farhan.cucumber.Examples;
-import org.farhan.cucumber.Scenario;
-import org.farhan.cucumber.Step;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.Utilities;
@@ -73,7 +69,6 @@ public class AdocFileObject extends FileObject {
 				"Row " + rowName + " doesn't exist");
 	}
 
-	
 	protected void assertStepExists(String name, String stepName) {
 		assertAbstractScenarioExists(name);
 		Assertions.assertTrue(getStep(name, stepName) != null, "Step " + stepName + " doesn't exist");
@@ -135,7 +130,31 @@ public class AdocFileObject extends FileObject {
 	}
 
 	private ArrayList<String> getExamplesRow(Section examples, String rowName) {
-		// TODO Auto-generated method stub
+		wrapper.getExamplesRowList(examples);
+		ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
+		ArrayList<String> row = new ArrayList<String>();
+		table.add(row);
+		for (String key : wrapper.getExamplesRowList(examples).getFirst().keySet()) {
+			row.add(key);
+		}
+		for (HashMap<String, String> r : wrapper.getExamplesRowList(examples)) {
+
+			row = new ArrayList<String>();
+			table.add(row);
+			for (String c : r.values()) {
+				row.add(c);
+			}
+		}
+		for (ArrayList<String> cellList : table) {
+			String rowCsv = "";
+			for (String cell : cellList) {
+				rowCsv += ", " + cell;
+			}
+			rowCsv = rowCsv.replaceFirst(", ", "");
+			if (rowCsv.contentEquals(rowName)) {
+				return cellList;
+			}
+		}
 		return null;
 	}
 
