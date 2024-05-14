@@ -1,90 +1,97 @@
 @debug
 Feature: Document Scenario To Graph
 
-  Scenario: Convert tags and description
+  Scenario: No tags, no statements, one step
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
           """
-          :tags: tag1,tag2
-          = Process 
+          = Process
+          
+          == Submit
+          
+          === Given The Object1 page is empty
+          """
+     When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
+     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
+      And The Process.graph file, Edges section will be as follows
+          |                                    Edge Name |
+          | start ->  -> Given The Object1 page is empty |
+          |   Given The Object1 page is empty ->  -> end |
 
-          Desc
-          Line 2
+  Scenario: One tag, one statement, one step
+
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
+          """
+          = Process
+          
+          [tags="tag1"]
+          == Submit
+          
+          Desc line 1
+          
+          === Given The Object1 page is empty
+          """
+     When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
+     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
+      And The Process.graph file, Paths section will be as follows
+          |   Name |  Tag | Description |
+          | Submit | tag1 | Desc line 1 |
+
+  Scenario: Two tags, two statements, two steps
+
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
+          """
+          = Process
           
           [tags="tag1,tag2"]
-          == Story One
+          == Submit
           
-          Desc
-          Line 2
+          Desc line 1
+          Desc line 2
           
-          === Step 1
+          === Given The Object1 page is empty
+
+          === Given The Object2 page is empty
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
-      And The Process.graph file, Graph section will be as follows
-          |    Name |       Tag |  Description |
-          | Process | tag1,tag2 | Desc\nLine 2 |
       And The Process.graph file, Paths section will be as follows
-          |      Name |       Tag |  Description |
-          | Story One | tag1,tag2 | Desc\nLine 2 |
-
-  Scenario: Convert a section to a vertex each with a single edge
-
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
-          """
-          = Process 
-          
-          == Story One
-          
-          === Step 1
-          """
-     When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
-     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
+          |   Name |       Tag |              Description |
+          | Submit | tag1,tag2 | Desc line 1\nDesc line 2 |
       And The Process.graph file, Edges section will be as follows
-          |           Edge Name |
-          | start ->  -> Step 1 |
-          |   Step 1 ->  -> end |
+          |                                                              Edge Name |
+          |                           start ->  -> Given The Object1 page is empty |
+          | Given The Object1 page is empty ->  -> Given The Object2 page is empty |
+          |                             Given The Object2 page is empty ->  -> end |
 
-  Scenario: Convert multiple sections to multiple vertices each with a single edge
+  Scenario: Three tags, three statements, three steps
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
           """
           = Process
           
-          == Story One
+          [tags="tag1,tag2,tag3"]
+          == Submit
           
-          === Step 1
+          Desc line 1
+          Desc line 2
+          Desc line 3
           
-          === Step 2
+          === Given The Object1 page is empty
+
+          === Given The Object2 page is empty
+          
+          === Given The Object3 page is empty
           """
      When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
      Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
+      And The Process.graph file, Paths section will be as follows
+          |   Name |            Tag |                           Description |
+          | Submit | tag1,tag2,tag3 | Desc line 1\nDesc line 2\nDesc line 3 |
       And The Process.graph file, Edges section will be as follows
-          |            Edge Name |
-          |  start ->  -> Step 1 |
-          | Step 1 ->  -> Step 2 |
-          |    Step 2 ->  -> end |
-
-  Scenario: Convert multiple sections to just one vertex and edge
-
-    The goal here is to not have duplicate vertices or edges
-
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
-          """
-          = Process
-          
-          == Story One
-          
-          === Step 1
-          
-          == Story Two
-          
-          === Step 1
-          """
-     When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
-     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
-      And The Process.graph file, Edges section will be as follows
-          |           Edge Name |
-          | start ->  -> Step 1 |
-          |   Step 1 ->  -> end |
+          |                                                              Edge Name |
+          |                           start ->  -> Given The Object1 page is empty |
+          | Given The Object1 page is empty ->  -> Given The Object2 page is empty |
+          | Given The Object2 page is empty ->  -> Given The Object3 page is empty |
+          |                             Given The Object3 page is empty ->  -> end |
 
