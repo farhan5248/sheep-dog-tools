@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 public class XtextReleaseGoal {
 
 	private static File rootDir = new File(
-			"C:\\Users\\Farhan\\git\\claims-adjudication-ai\\cucumberxtexteditor.parent");
+			"C:\\Users\\Farhan\\git\\lean-sheep-dogs\\cucumberxtexteditor.parent");
 
 	public static void main(String[] args) {
 
-		String currentVersion = "1.12.0";
-		String nextVersion = "1.13.0";
+		String currentVersion = "1.13.0";
+		String nextVersion = "1.14.0";
 
 		// updateToRelease(currentVersion, currentVersion);
 		// Run git add and git commit
