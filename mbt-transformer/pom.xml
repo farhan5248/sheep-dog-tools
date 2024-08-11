@@ -2,14 +2,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.farhan</groupId>
 	<artifactId>mbt-transformer</artifactId>
-	<version>1.9-SNAPSHOT</version>
+	<version>1.10-SNAPSHOT</version>
 	<name>MBT Transformer</name>
 	<description>Transforms test cases to models and vice-versa</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>21</java.version>
-		<cucumberxtexteditor.version>1.13.0-SNAPSHOT</cucumberxtexteditor.version>
+		<cucumberxtexteditor.version>1.14.0-SNAPSHOT</cucumberxtexteditor.version>
 	</properties>
 
 	<scm>

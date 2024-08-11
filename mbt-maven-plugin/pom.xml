@@ -3,27 +3,27 @@
 
 	<groupId>org.farhan</groupId>
 	<artifactId>mbt-maven-plugin</artifactId>
-	<version>1.8-SNAPSHOT</version>
+	<version>1.9-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
 	<name>MBT Maven Plugin</name>
 
 	<properties>
-		<maven-plugin-tools.version>3.12.0</maven-plugin-tools.version>
+		<maven-plugin-tools.version>4.0.0-beta-1</maven-plugin-tools.version>
 		<project.build.sourceEncoding>
 			UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
-		<mbt-transformer.version>1.9-SNAPSHOT</mbt-transformer.version>
+		<mbt-transformer.version>1.10-SNAPSHOT</mbt-transformer.version>
 	</properties>
 
 	<scm>
-		<connection>scm:git:https://github.com/farhan5248/claims-adjudication-ai</connection>
+		<connection>scm:git:https://github.com/farhan5248/lean-sheep-dog-tools</connection>
 		<tag>HEAD</tag>
 	</scm>
 
 	<repositories>
 		<repository>
 			<id>github</id>
-			<url>https://maven.pkg.github.com/farhan5248/claims-adjudication-ai</url>
+			<url>https://maven.pkg.github.com/farhan5248/lean-sheep-dog-tools</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
@@ -36,7 +36,7 @@
 	<distributionManagement>
 		<repository>
 			<id>github</id>
-			<url>https://maven.pkg.github.com/farhan5248/claims-adjudication-ai</url>
+			<url>https://maven.pkg.github.com/farhan5248/lean-sheep-dog-tools</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
