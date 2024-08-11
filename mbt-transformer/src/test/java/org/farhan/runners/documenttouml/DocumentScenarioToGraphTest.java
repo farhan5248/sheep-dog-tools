@@ -1,4 +1,4 @@
-package org.farhan.runners.documenttograph;
+package org.farhan.runners.documenttouml;
 
 import org.farhan.common.GraphTestObjectFactory;
 import org.junit.platform.suite.api.ConfigurationParameter;
@@ -14,11 +14,11 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("cucumber/DocumentToGraph/DocumentDocStringToGraph.feature")
+@SelectClasspathResource("cucumber/DocumentToGraph/DocumentScenarioToGraph.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
 @IncludeTags("debug")
-public class DocumentDocStringToGraphTest {
+public class DocumentScenarioToGraphTest {
 
 	@Before
 	public static void before() {

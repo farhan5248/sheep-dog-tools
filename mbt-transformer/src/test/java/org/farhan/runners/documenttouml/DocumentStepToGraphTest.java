@@ -1,4 +1,4 @@
-package org.farhan.runners.documenttograph;
+package org.farhan.runners.documenttouml;
 
 import org.farhan.common.GraphTestObjectFactory;
 import org.junit.platform.suite.api.ConfigurationParameter;
