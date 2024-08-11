@@ -3,7 +3,7 @@
 
 	<groupId>org.farhan</groupId>
 	<artifactId>mbt-maven-plugin</artifactId>
-	<version>1.8</version>
+	<version>1.9-SNAPSHOT</version>
 	<packaging>maven-plugin</packaging>
 	<name>MBT Maven Plugin</name>
 
@@ -17,7 +17,7 @@
 
 	<scm>
 		<connection>scm:git:https://github.com/farhan5248/lean-sheep-dog-tools</connection>
-		<tag>mbt-maven-plugin-1.8</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<repositories>
