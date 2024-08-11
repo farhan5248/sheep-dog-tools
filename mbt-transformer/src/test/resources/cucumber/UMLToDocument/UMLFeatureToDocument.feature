@@ -1,5 +1,5 @@
 @debug
-Feature: UML Feature To Graph
+Feature: UML Feature To Document
 
   Scenario: No tags, no statements
 
@@ -9,8 +9,9 @@ Feature: UML Feature To Graph
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-graph goal is executed
-     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
-      And The Process.graph file, Graph section will be as follows
+      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+      And The mbt-transformer plugin, Process.adoc file, Feature section will be as follows
           |    Name |
           | Process |
 
@@ -24,10 +25,11 @@ Feature: UML Feature To Graph
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-graph goal is executed
-     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
-      And The Process.graph file, Graph section will be as follows
-          |    Name |  Tag | Description |
-          | Process | tag1 | Desc line 1 |
+      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+      And The mbt-transformer plugin, Process.adoc file, Feature section will be as follows
+          |    Name | Tags |
+          | Process | tag1 |
 
   Scenario: Two tags, two statements
 
@@ -40,10 +42,11 @@ Feature: UML Feature To Graph
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-graph goal is executed
-     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
-      And The Process.graph file, Graph section will be as follows
-          |    Name |       Tag |              Description |
-          | Process | tag1,tag2 | Desc line 1\nDesc line 2 |
+      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+      And The mbt-transformer plugin, Process.adoc file, Feature section will be as follows
+          |    Name |      Tags |
+          | Process | tag1,tag2 |
 
   Scenario: Three tags, three statements
 
@@ -57,8 +60,9 @@ Feature: UML Feature To Graph
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-graph goal is executed
-     Then The mbt-transformer plugin, target/graphs/specs/Process.graph file will be present
-      And The Process.graph file, Graph section will be as follows
-          |    Name |            Tag |                           Description |
-          | Process | tag1,tag2,tag3 | Desc line 1\nDesc line 2\nDesc line 3 |
+      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+      And The mbt-transformer plugin, Process.adoc file, Feature section will be as follows
+          |    Name |           Tags |
+          | Process | tag1,tag2,tag3 |
 

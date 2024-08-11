@@ -1,4 +1,4 @@
-package org.farhan.runners.umltograph;
+package org.farhan.runners.umltodocument;
 
 import org.farhan.common.GraphTestObjectFactory;
 import org.junit.platform.suite.api.ConfigurationParameter;
@@ -14,11 +14,11 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("cucumber/UMLToGraph/UMLFeatureToGraph.feature")
+@SelectClasspathResource("cucumber/UMLToDocument/UMLExamplesTableToDocument.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
 @IncludeTags("debug")
-public class UMLFeatureToGraphTest {
+public class UMLExamplesTableToDocumentTest {
 
 	@Before
 	public static void before() {
