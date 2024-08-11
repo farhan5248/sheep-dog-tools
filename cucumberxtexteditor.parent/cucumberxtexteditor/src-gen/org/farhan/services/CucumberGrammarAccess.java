@@ -93,9 +93,9 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final RuleCall cScenarioParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cScenarioOutlineParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
+		//// TODO add parameters to step, cell, line tokens
 		//// This has the side effect of allowing more than 1 Background.
 		//// Also it allows it to be anywhere, like at the begining or end.
-		//// I assume anyone using this editor knows that in Cucumber it just goes once at the top
 		//// I'm doing it this way to make the formatting code simpler by having less duplication
 		//AbstractScenario:
 		//    Background | Scenario | ScenarioOutline;
@@ -1037,9 +1037,9 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return getFeatureAccess().getRule();
 	}
 	
+	//// TODO add parameters to step, cell, line tokens
 	//// This has the side effect of allowing more than 1 Background.
 	//// Also it allows it to be anywhere, like at the begining or end.
-	//// I assume anyone using this editor knows that in Cucumber it just goes once at the top
 	//// I'm doing it this way to make the formatting code simpler by having less duplication
 	//AbstractScenario:
 	//    Background | Scenario | ScenarioOutline;
