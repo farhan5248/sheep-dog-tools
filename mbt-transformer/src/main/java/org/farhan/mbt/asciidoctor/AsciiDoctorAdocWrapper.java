@@ -260,26 +260,28 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return getName(background);
 	}
 
+	// TODO replacements is not needed anymore, delete it
 	public ArrayList<ArrayList<String>> getDataTable(Section step, HashMap<String, String> replacements) {
 		for (StructuralNode sn : step.getBlocks()) {
 			if (sn instanceof Table) {
 				Table table = (Table) sn;
-				ArrayList<ArrayList<String>> cellList = new ArrayList<ArrayList<String>>();
-				ArrayList<String> cell;
+				ArrayList<ArrayList<String>> dataTableRowList = new ArrayList<ArrayList<String>>();
+				ArrayList<String> cellList = new ArrayList<String>();
+				dataTableRowList.add(cellList);
+				for (Cell cell : table.getHeader().getFirst().getCells()) {
+					cellList.add(cell.getText());
+				}
 				for (int i = 0; i < table.getBody().size(); i++) {
-					for (int j = 0; j < table.getBody().get(0).getCells().size(); j++) {
-						cell = new ArrayList<String>();
-						String vertex = i + " " + table.getHeader().getFirst().getCells().get(j).getText();
-						String edge = replaceParameters(replacements,
-								table.getBody().get(i).getCells().get(j).getText());
-						cell.add(vertex);
-						cell.add(edge);
-						cellList.add(cell);
+					cellList = new ArrayList<String>();
+					dataTableRowList.add(cellList);
+					for (Cell cell : table.getBody().get(i).getCells()) {
+						cellList.add(cell.getText());
 					}
 				}
-				return cellList;
+				return dataTableRowList;
 			}
 		}
+		// TODO why not return an empty list? Test it out later
 		return null;
 	}
 
@@ -348,7 +350,8 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return rows;
 	}
 
-	public Set<String> getExamplesTable(HashMap<String, String> examplesRow) {
+	public Set<String> getExamplesTable(Section examples) {
+		HashMap<String, String> examplesRow = getExamplesRowList(examples).getFirst();
 		return examplesRow.keySet();
 	}
 

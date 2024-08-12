@@ -17,8 +17,7 @@ Feature: Document Step Table To UML
           |v1
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-uml goal is executed
+     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
       And The target/uml/pst.uml file, Interaction Messages section will be as follows
           |       Interaction Name |                       Message | Argument Name | Annotation Detail |
@@ -42,8 +41,7 @@ Feature: Document Step Table To UML
           |v3 |v4
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-uml goal is executed
+     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
       And The target/uml/pst.uml file, Interaction Messages section will be as follows
           |       Interaction Name |                       Message | Argument Name | Annotation Detail |
@@ -69,8 +67,7 @@ Feature: Document Step Table To UML
           |v7 |v8 |v9
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-uml goal is executed
+     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
       And The target/uml/pst.uml file, Interaction Messages section will be as follows
           |       Interaction Name |                       Message | Argument Name |    Annotation Detail |

@@ -142,10 +142,19 @@ public class UMLClassWrapper implements ConvertibleObject {
 
 	}
 
+	// TODO delete after deleting adoc to graph and graph to uml goals
 	public void createExamplesTable(EAnnotation examples, String examplesRow) {
 		String value = "";
 		// TODO pass a list that doesn't need to be delimited
 		for (String e : examplesRow.split(",")) {
+			value += e + "|";
+		}
+		examples.getDetails().put("0", value);
+	}	
+	
+	public void createExamplesTable(EAnnotation examples, Set<String> headerRow) {
+		String value = "";
+		for (String e : headerRow) {
 			value += e + "|";
 		}
 		examples.getDetails().put("0", value);

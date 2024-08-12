@@ -92,38 +92,18 @@ public class AdocFileObject extends FileObject {
 		return null;
 	}
 
-	private ArrayList<String> getRow(Section step, String rowName) {
-		rowName = rowName.replaceAll(" +", " ");
-		// TODO getDataTable is a mess, it's returning a list of cells as a pair of cell
-		// name and value. Change it to a list of rows
-		ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
-		ArrayList<String> row = new ArrayList<String>();
-		table.add(row);
-		for (ArrayList<String> pair : wrapper.getDataTable(step, new HashMap<String, String>())) {
-			if (pair.getFirst().startsWith("0")) {
-				row.add(pair.getFirst().split(" ")[1]);
-			} else {
-				break;
-			}
-		}
-		for (ArrayList<String> pair : wrapper.getDataTable(step, new HashMap<String, String>())) {
-			int rowNum = Integer.valueOf(pair.getFirst().split(" ")[0]);
-			if (rowNum + 1 == table.size()) {
-				row = new ArrayList<String>();
-				table.add(row);
-			} else {
-				row = table.get(rowNum + 1);
-			}
-			row.add(pair.getLast());
-		}
-		for (ArrayList<String> cellList : table) {
+	private ArrayList<String> getRow(Section step, String csvRow) {
+		csvRow = csvRow.replaceAll(" +", " ");
+		for (ArrayList<String> row : wrapper.getDataTable(step, null)) {
+			// convert it to csv
 			String rowCsv = "";
-			for (String cell : cellList) {
+			for (String cell : row) {
 				rowCsv += ", " + cell;
 			}
 			rowCsv = rowCsv.replaceFirst(", ", "");
-			if (rowCsv.contentEquals(rowName)) {
-				return cellList;
+			// if it matches, return it
+			if (rowCsv.contentEquals(csvRow)) {
+				return row;
 			}
 		}
 		return null;
