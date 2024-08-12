@@ -12,7 +12,7 @@ import io.cucumber.datatable.DataTable;
 
 // Anything that is an input, output, state or transition is a GraphModelObject. 
 // Right now the way I model stuff all the objects are either output ones or input+transition ones
-public abstract class GraphTestObject {
+public abstract class TestObject {
 
 	protected Map<String, String> keyValue = new HashMap<String, String>();
 

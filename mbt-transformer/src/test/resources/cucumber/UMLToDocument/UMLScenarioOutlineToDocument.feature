@@ -1,3 +1,4 @@
+@debug
 Feature: UML Scenario Outline To Document
 
   Scenario: No tags, no statement, one step, one example
@@ -16,8 +17,7 @@ Feature: UML Scenario Outline To Document
                 | v31 |
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Scenarios Steps section will be as follows
           |   Name |                                Step |
@@ -27,7 +27,6 @@ Feature: UML Scenario Outline To Document
           | Submit | Examples 1 |  h3 |
           | Submit | Examples 1 | v31 |
 
-@debug
   Scenario: One tag, one statement, one step, one example
 
     Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
@@ -46,8 +45,7 @@ Feature: UML Scenario Outline To Document
                 | v31 |
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Scenarios section will be as follows
           |   Name | Tags | Description |
@@ -79,8 +77,7 @@ Feature: UML Scenario Outline To Document
                 | v32 |
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Scenarios section will be as follows
           |   Name |      Tags |              Description |
@@ -130,8 +127,7 @@ Feature: UML Scenario Outline To Document
                 | v33 |
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Scenarios section will be as follows
           |   Name |           Tags |                           Description |
@@ -147,6 +143,6 @@ Feature: UML Scenario Outline To Document
           | Submit | Examples 1 | v31 |
           | Submit | Examples 2 |  h3 |
           | Submit | Examples 2 | v32 |
-          | Submit | Examples 2 |  h3 |
-          | Submit | Examples 2 | v33 |
+          | Submit | Examples 3 |  h3 |
+          | Submit | Examples 3 | v33 |
 

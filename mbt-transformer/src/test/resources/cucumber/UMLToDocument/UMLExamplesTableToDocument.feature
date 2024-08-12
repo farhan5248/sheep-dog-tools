@@ -1,6 +1,6 @@
+@debug
 Feature: UML Examples Table To Document
 
-@debug
   Scenario: One row, one cell
 
     Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
@@ -17,8 +17,7 @@ Feature: UML Examples Table To Document
                 | v1 |
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Scenario Outline Examples Table section will be as follows
           |   Name |   Examples | Row |
@@ -42,8 +41,7 @@ Feature: UML Examples Table To Document
                     | v3 | v4 |
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Scenario Outline Examples Table section will be as follows
           |   Name |   Examples |    Row |
@@ -69,8 +67,7 @@ Feature: UML Examples Table To Document
                     | v7 | v8 | v9 |
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Scenario Outline Examples Table section will be as follows
           |   Name |   Examples |        Row |

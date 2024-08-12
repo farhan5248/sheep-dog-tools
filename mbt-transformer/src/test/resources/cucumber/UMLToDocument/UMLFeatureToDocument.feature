@@ -8,8 +8,7 @@ Feature: UML Feature To Document
           Feature: Process
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Feature section will be as follows
           |    Name |
@@ -24,8 +23,7 @@ Feature: UML Feature To Document
             Desc line 1
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Feature section will be as follows
           |    Name | Tags |
@@ -41,8 +39,7 @@ Feature: UML Feature To Document
             Desc line 2
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Feature section will be as follows
           |    Name |      Tags |
@@ -59,8 +56,7 @@ Feature: UML Feature To Document
             Desc line 3
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Feature section will be as follows
           |    Name |           Tags |

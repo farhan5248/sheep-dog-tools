@@ -6,7 +6,7 @@ import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.Utilities;
 import org.junit.jupiter.api.Assertions;
 
-public abstract class FileObject extends GraphTestObject {
+public abstract class FileObject extends TestObject {
 
 	public void setComponent(String component) {
 		super.setComponent(component);

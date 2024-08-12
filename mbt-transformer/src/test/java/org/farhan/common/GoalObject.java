@@ -5,7 +5,7 @@ import org.farhan.mbt.core.MojoGoal;
 import org.farhan.mbt.core.Utilities;
 import org.junit.jupiter.api.Assertions;
 
-public abstract class GoalObject extends GraphTestObject {
+public abstract class GoalObject extends TestObject {
 
 	public GoalObject() {
 		ConvertibleProject.tags = "";

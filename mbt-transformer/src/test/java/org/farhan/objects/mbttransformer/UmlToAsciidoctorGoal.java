@@ -2,7 +2,7 @@ package org.farhan.objects.mbttransformer;
 
 import java.util.HashMap;
 
-public interface GraphToAsciidoctorGoal {
+public interface UmlToAsciidoctorGoal {
 
     public void transition();
 }

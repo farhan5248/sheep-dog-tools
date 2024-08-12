@@ -1,8 +1,8 @@
 package org.farhan.common;
 
-public class MbtTransformerFactory extends GraphTestObjectFactory {
+public class MbtTransformerFactory extends TestObjectFactory {
 
-	public static GraphTestObject get(String className) {
+	public static TestObject get(String className) {
 		return get("mbttransformer", className);
 	}
 }

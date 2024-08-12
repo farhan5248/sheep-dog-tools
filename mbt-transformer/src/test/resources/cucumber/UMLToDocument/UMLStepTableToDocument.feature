@@ -13,8 +13,7 @@ Feature: UML Step Table To Document
                     | v1 |
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Scenarios Steps Step Table section will be as follows
           |   Name |                                Step | Row |
@@ -35,8 +34,7 @@ Feature: UML Step Table To Document
                     | v3 | v4 |
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Scenarios Steps Step Table section will be as follows
           |   Name |                                Step |    Row |
@@ -59,8 +57,7 @@ Feature: UML Step Table To Document
                     | v7 | v8 | v9 |
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Scenarios Steps Step Table section will be as follows
           |   Name |                                Step |        Row |

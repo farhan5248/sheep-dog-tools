@@ -157,7 +157,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		// header
 		Row row = jrp.createTableRow(table);
 		table.getHeader().add(row);
-		for (int i = 0; i < dataTableRowList.get(0).size(); i++) {
+		for (int i = 0; i < dataTableRowList.getFirst().size(); i++) {
 			Column column = jrp.createTableColumn(table, i);
 			table.getColumns().add(column);
 			Cell cell = jrp.createTableCell(column, dataTableRowList.get(0).get(i));
@@ -189,7 +189,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return examples;
 	}
 
-	public void createExamplesRow(Section scenarioOutline, Section examples, HashMap<String, String> examplesRow) {
+	public void createExamplesRow(Section examples, HashMap<String, String> examplesRow) {
 		Table table = null;
 		for (StructuralNode block : examples.getBlocks()) {
 			if (block instanceof Table) {
@@ -207,13 +207,13 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		}
 	}
 
-	public void createExamplesTable(Section examples, String examplesTable) {
+	public void createExamplesTable(Section examples, ArrayList<String> examplesTable) {
 		Table table = jrp.createTable(examples);
 		examples.getBlocks().add(table);
 		Row row = jrp.createTableRow(table);
 		table.getHeader().add(row);
 		int colCnt = 0;
-		for (String e : examplesTable.split(",")) {
+		for (String e : examplesTable) {
 			Column column = jrp.createTableColumn(table, colCnt);
 			table.getColumns().add(column);
 			Cell cell = jrp.createTableCell(column, e.replaceFirst("[0-9]+ ", ""));

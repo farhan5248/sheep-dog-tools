@@ -16,8 +16,7 @@ Feature: UML Background To Document
           
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
 #      And The mbt-transformer plugin, Process.adoc file, Background  section will be as follows
 #          |  Name | Description |
@@ -43,8 +42,7 @@ Feature: UML Background To Document
           
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Background Steps section will be as follows
           |  Name |                            Step |
@@ -69,8 +67,7 @@ Feature: UML Background To Document
                Given The Object2 page is valid
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Background Steps section will be as follows
           |  Name |                            Step |
@@ -99,8 +96,7 @@ Feature: UML Background To Document
                Given The Object3 page is valid
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Background Steps section will be as follows
           |  Name |                            Step |
@@ -126,8 +122,7 @@ Feature: UML Background To Document
           
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Background Steps section will be as follows
           |  Name |                            Step |
@@ -153,8 +148,7 @@ Feature: UML Background To Document
           
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-graph goal is executed
-      And The mbt-transformer plugin, graph-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Background Steps section will be as follows
           |  Name |                            Step |

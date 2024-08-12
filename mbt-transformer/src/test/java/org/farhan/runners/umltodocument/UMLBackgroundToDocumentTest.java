@@ -1,6 +1,6 @@
 package org.farhan.runners.umltodocument;
 
-import org.farhan.common.GraphTestObjectFactory;
+import org.farhan.common.TestObjectFactory;
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
 import org.junit.platform.suite.api.IncludeTags;
@@ -22,6 +22,6 @@ public class UMLBackgroundToDocumentTest {
 
 	@Before
 	public static void before() {
-		GraphTestObjectFactory.reset();
+		TestObjectFactory.reset();
 	}
 }

@@ -6,13 +6,13 @@ import org.junit.jupiter.api.Assertions;
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
 
-public abstract class GraphTestObjectFactory {
+public abstract class TestObjectFactory {
 
 	private static String preOrPost = "pre";
-	private static HashMap<String, GraphTestObject> classes = new HashMap<String, GraphTestObject>();
+	private static HashMap<String, TestObject> classes = new HashMap<String, TestObject>();
 
 	public static void reset() {
-		classes = new HashMap<String, GraphTestObject>();
+		classes = new HashMap<String, TestObject>();
 	}
 
 	public static void setPre(boolean b) {
@@ -35,7 +35,7 @@ public abstract class GraphTestObjectFactory {
 		return null;
 	}
 
-	public static GraphTestObject get(String packageName, String className) {
+	public static TestObject get(String packageName, String className) {
 		try {
 			if (classes.get(className) != null) {
 				return classes.get(className);
@@ -46,7 +46,7 @@ public abstract class GraphTestObjectFactory {
 					classes.put(className, foo);
 					return foo;
 				} else {
-					GraphTestObject gmo = (GraphTestObject) gmoClass.getConstructor().newInstance();
+					TestObject gmo = (TestObject) gmoClass.getConstructor().newInstance();
 					classes.put(className, gmo);
 					return gmo;
 				}

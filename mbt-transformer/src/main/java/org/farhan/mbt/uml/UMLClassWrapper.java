@@ -240,8 +240,7 @@ public class UMLClassWrapper implements ConvertibleObject {
 	}
 
 	public ArrayList<ArrayList<String>> getDataTable(Message step, HashMap<String, String> replacements) {
-		// TODO this should return a proper table and not this list of vertex-edge
-		// because details of vertices and edges should be in the Graph object wrapper
+		// TODO delete after deleting graph goals
 		ValueSpecification vs = (LiteralString) step.getArgument("dataTable", null);
 		EMap<String, String> table = vs.getEAnnotation("dataTable").getDetails();
 		ArrayList<ArrayList<String>> cellList = new ArrayList<ArrayList<String>>();

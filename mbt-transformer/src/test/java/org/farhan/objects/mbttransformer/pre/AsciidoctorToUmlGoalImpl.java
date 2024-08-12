@@ -6,6 +6,6 @@ import org.farhan.objects.mbttransformer.AsciidoctorToUmlGoal;
 public class AsciidoctorToUmlGoalImpl extends GoalObject implements AsciidoctorToUmlGoal {
 
 	public void transition() {
-		runGoal("org.farhan.mbt.convert.ConvertAsciiDoctorToUml");
+		runGoal("org.farhan.mbt.convert.ConvertAsciidoctorToUml");
 	}
 }

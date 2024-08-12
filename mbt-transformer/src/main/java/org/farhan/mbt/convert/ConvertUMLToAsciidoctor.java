@@ -4,24 +4,24 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.asciidoctor.ast.Section;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
-import org.farhan.mbt.core.ConvertToGraph;
+import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
+import org.farhan.mbt.core.ConvertToDocument;
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.graph.JGraphTGraphWrapper;
-import org.farhan.mbt.graph.JGraphTProject;
-import org.farhan.mbt.graph.MBTPathInfo;
+import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 
-public class ConvertUMLToGraph extends ConvertToGraph {
+public class ConvertUMLToAsciidoctor extends ConvertToDocument {
 
 	private UMLClassWrapper srcObj;
 
 	private UMLProject srcPrj;
 
-	private JGraphTGraphWrapper tgtObj;
+	private AsciiDoctorAdocWrapper tgtObj;
 
 	protected void convertAbstractScenarioList() throws Exception {
 		for (Interaction abstractScenario : srcObj.getAbstractScenarioList()) {
@@ -36,59 +36,39 @@ public class ConvertUMLToGraph extends ConvertToGraph {
 	}
 
 	private void convertBackground(Interaction abstractScenario) {
-		MBTPathInfo background = tgtObj.createBackground();
+		Section background = tgtObj.createBackground();
 		tgtObj.setBackgroundName(background, srcObj.getBackgroundName(abstractScenario));
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
 		convertStepList(background, srcObj.getStepList(abstractScenario), new HashMap<String, String>());
 		tgtObj.addBackground(background);
 	}
 
-	private void convertDataTable(MBTPathInfo abstractScenario, Message step, HashMap<String, String> examplesRow) {
-		String name = srcObj.getStep(step);
-		JGraphTGraphWrapper stepDefObj = (JGraphTGraphWrapper) tgtPrj
-				.createObject(convertObjectName(name, tgtPrj.SECOND_LAYER));
-		stepDefObj.setStepDefinitionName(name);
-		ArrayList<ArrayList<String>> dataTableCellList = srcObj.getDataTable(step, examplesRow);
-		stepDefObj.createDataTable(abstractScenario, dataTableCellList);
+	private void convertDataTable(Section step, Message stepSrc, HashMap<String, String> examplesRow) {
+		tgtObj.createDataTable(step, srcObj.getDataTable(stepSrc));
 	}
 
-	private void convertDocString(MBTPathInfo abstractScenario, Message step) {
-		String name = srcObj.getStep(step);
-		JGraphTGraphWrapper stepDefObj = (JGraphTGraphWrapper) tgtPrj
-				.createObject(convertObjectName(name, tgtPrj.SECOND_LAYER));
-		stepDefObj.setStepDefinitionName(name);
-		String fileName = tgtPrj.createResource(name, srcObj.getDocString(step));
-		stepDefObj.createDocString(abstractScenario, fileName);
+	private void convertDocString(Section step, Message stepSrc) {
+		tgtObj.createDocString(step, srcObj.getDocString(stepSrc));
 	}
 
-	private void convertExamples(Interaction abstractScenario, EAnnotation examples) {
+	private void convertExamples(Section abstractScenario, EAnnotation examplesSrc) {
 
-		ArrayList<HashMap<String, String>> examplesRows = srcObj.getExamplesRowList(examples);
-		for (int rowNum = 0; rowNum < examplesRows.size(); rowNum++) {
-			HashMap<String, String> examplesRow = examplesRows.get(rowNum);
-			convertExamplesRow(abstractScenario, examples, examplesRow, rowNum);
+		Section examples = tgtObj.createExamples(abstractScenario);
+		tgtObj.setExamplesName(examples, srcObj.getExamplesName(examplesSrc));
+		tgtObj.createExamplesTable(examples, srcObj.getExamplesTable(examplesSrc));
+		for (HashMap<String, String> examplesRow : srcObj.getExamplesRowList(examplesSrc)) {
+			convertExamplesRow(examples, examplesRow);
 		}
 	}
 
-	private void convertExamplesRow(Interaction abstractScenario, EAnnotation examplesSrc,
-			HashMap<String, String> examplesRow, int rowNum) {
-		MBTPathInfo scenarioOutline = tgtObj.createScenarioOutline();
-		tgtObj.setScenarioOutlineName(scenarioOutline, srcObj.getScenarioOutlineName(abstractScenario));
-		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
-		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
-
-		MBTPathInfo examples = tgtObj.createExamples(scenarioOutline);
-		tgtObj.setExamplesName(examples, srcObj.getExamplesName(examplesSrc));
-		tgtObj.createExamplesTable(scenarioOutline, srcObj.getExamplesTable(examplesRow));
-		tgtObj.createExamplesRow(examples, rowNum);
-		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario), examplesRow);
-		tgtObj.addScenarioOutline(scenarioOutline);
+	private void convertExamplesRow(Section examples, HashMap<String, String> examplesRow) {
+		tgtObj.createExamplesRow(examples, examplesRow);
 	}
 
 	@Override
 	protected void convertFeature(ConvertibleObject anObject) throws Exception {
 		srcObj = (UMLClassWrapper) anObject;
-		tgtObj = (JGraphTGraphWrapper) tgtPrj.createObject(convertObjectName(srcObj.getQualifiedName()));
+		tgtObj = (AsciiDoctorAdocWrapper) tgtPrj.createObject(convertObjectName(srcObj.getQualifiedName()));
 		tgtObj.setFeatureName(srcObj.getFeatureName());
 		tgtObj.setFeatureTags(srcObj.getFeatureTags());
 		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
@@ -112,7 +92,7 @@ public class ConvertUMLToGraph extends ConvertToGraph {
 	}
 
 	private void convertScenario(Interaction abstractScenario) {
-		MBTPathInfo scenario = tgtObj.createScenario();
+		Section scenario = tgtObj.createScenario();
 		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(abstractScenario));
 		tgtObj.setScenarioName(scenario, srcObj.getScenarioName(abstractScenario));
 		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(abstractScenario));
@@ -121,25 +101,33 @@ public class ConvertUMLToGraph extends ConvertToGraph {
 	}
 
 	private void convertScenarioOutline(Interaction abstractScenario) {
+
+		Section scenarioOutline = tgtObj.createScenarioOutline();
+		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
+		tgtObj.setScenarioOutlineName(scenarioOutline, srcObj.getScenarioOutlineName(abstractScenario));
+		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
+		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario), new HashMap<String, String>());
+
 		ArrayList<EAnnotation> examplesList = srcObj.getExamplesList(abstractScenario);
 		for (EAnnotation examples : examplesList) {
-			convertExamples(abstractScenario, examples);
+			convertExamples(scenarioOutline, examples);
+		}
+		tgtObj.addScenarioOutline(scenarioOutline);
+	}
+
+	private void convertStep(Section abstractScenario, Message stepSrc) {
+		Section step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
+		if (srcObj.hasDocString(stepSrc)) {
+			convertDocString(step, stepSrc);
+		} else if (srcObj.hasDataTable(stepSrc)) {
+			convertDataTable(step, stepSrc, null);
 		}
 	}
 
-	private void convertStep(MBTPathInfo abstractScenario, Message step) {
-		tgtObj.createStep(abstractScenario, srcObj.getStep(step));
-	}
-
-	private void convertStepList(MBTPathInfo abstractScenario, ArrayList<Message> stepList,
+	private void convertStepList(Section abstractScenario, ArrayList<Message> stepList,
 			HashMap<String, String> examplesRow) {
 		for (Message step : stepList) {
 			convertStep(abstractScenario, step);
-			if (srcObj.hasDocString(step)) {
-				convertDocString(abstractScenario, step);
-			} else if (srcObj.hasDataTable(step)) {
-				convertDataTable(abstractScenario, step, examplesRow);
-			}
 		}
 	}
 
@@ -151,7 +139,7 @@ public class ConvertUMLToGraph extends ConvertToGraph {
 	@Override
 	protected void initProjects() throws Exception {
 		srcPrj = new UMLProject();
-		tgtPrj = new JGraphTProject();
+		tgtPrj = new AsciiDoctorProject();
 	}
 
 	@Override
