@@ -16,7 +16,7 @@ import org.farhan.mbt.core.ConvertToUML;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Utilities;
 
-public class ConvertAsciidoctorToUml extends ConvertToUML {
+public class ConvertAsciidoctorToUML extends ConvertToUML {
 
 	private AsciiDoctorAdocWrapper srcObj;
 

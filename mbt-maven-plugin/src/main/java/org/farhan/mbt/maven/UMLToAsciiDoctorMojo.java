@@ -8,17 +8,17 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
-import org.farhan.mbt.convert.ConvertAsciiDoctorToGraph;
+import org.farhan.mbt.convert.ConvertUMLToAsciidoctor;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.MojoGoal;
 import org.farhan.mbt.core.Utilities;
 
 /**
- * Converts Ascii Doctor files to Graph model paths
+ * Converts Graph model paths to Ascii Doctor files
  *
  */
-@Mojo(name = "asciidoctor-to-graph", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
-public class AsciiDoctorToGraphMojo extends AbstractMojo {
+@Mojo(name = "uml-to-asciidoctor", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
+public class UMLToAsciiDoctorMojo extends AbstractMojo {
 
 	/**
 	 * The Maven Project.
@@ -34,13 +34,12 @@ public class AsciiDoctorToGraphMojo extends AbstractMojo {
 
 	public void execute() throws MojoExecutionException {
 		try {
-			// TODO pass in tags to the mojo constructor
 			if (project != null) {
 				getLog().info("Converting tests with this tag: " + tag);
 				ConvertibleProject.tags = tag;
 				ConvertibleProject.baseDir = project.getBasedir().getAbsolutePath() + File.separator;
 			}
-			MojoGoal mojo = new ConvertAsciiDoctorToGraph();
+			MojoGoal mojo = new ConvertUMLToAsciidoctor();
 			mojo.mojoGoal();
 		} catch (Exception e) {
 			getLog().error(Utilities.getStackTraceAsString(e));
