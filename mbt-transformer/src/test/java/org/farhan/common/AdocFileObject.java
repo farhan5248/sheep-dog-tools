@@ -1,8 +1,6 @@
 package org.farhan.common;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.asciidoctor.ast.Section;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;

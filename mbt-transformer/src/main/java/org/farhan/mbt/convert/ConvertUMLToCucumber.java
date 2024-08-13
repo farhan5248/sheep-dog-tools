@@ -137,9 +137,8 @@ public class ConvertUMLToCucumber extends ConvertToCode {
 		if (name.isEmpty()) {
 			name = lastComponent;
 		} else {
-			name = Utilities.removeDelimiterAndCapitalize(name, "\\.");
-			name = Utilities.removeDelimiterAndCapitalize(name, "\\-");
-			name = Utilities.removeDelimiterAndCapitalize(name, " ");
+			name = name.replaceAll("\\-", "");
+			name = name.replaceAll(" ", "");
 			lastComponent = name;
 		}
 		return name;
@@ -206,6 +205,6 @@ public class ConvertUMLToCucumber extends ConvertToCode {
 	@Override
 	protected void loadFeatures() throws Exception {
 		srcPrj.load();
-		
+
 	}
 }
