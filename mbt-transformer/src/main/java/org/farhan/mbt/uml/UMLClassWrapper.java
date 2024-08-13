@@ -118,9 +118,9 @@ public class UMLClassWrapper implements ConvertibleObject {
 
 	}
 
-	public void createExamplesTable(EAnnotation examples, ArrayList<String> headerRow) {
+	public void createExamplesTable(EAnnotation examples, ArrayList<String> headers) {
 		String value = "";
-		for (String e : headerRow) {
+		for (String e : headers) {
 			value += e + "|";
 		}
 		examples.getDetails().put("0", value);

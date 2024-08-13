@@ -107,13 +107,13 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		examples.getTheExamplesTable().getRows().add(row);
 	}
 
-	public void createExamplesTable(Examples examples, ArrayList<String> examplesTable) {
+	public void createExamplesTable(Examples examples, ArrayList<String> headers) {
 		examples.setTheExamplesTable(CucumberFactory.eINSTANCE.createExamplesTable());
 		// TODO I think an empty table can be created but the headers shouldn't be added
 		// because there's no Xtext language element for Header vs Body like there is
 		// for adoc files.
 		Row row = CucumberFactory.eINSTANCE.createRow();
-		for (String srcCell : examplesTable) {
+		for (String srcCell : headers) {
 			Cell cell = CucumberFactory.eINSTANCE.createCell();
 			cell.setName(srcCell);
 			row.getCells().add(cell);

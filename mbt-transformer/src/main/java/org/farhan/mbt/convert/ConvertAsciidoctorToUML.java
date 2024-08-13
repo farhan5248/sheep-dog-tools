@@ -129,7 +129,7 @@ public class ConvertAsciidoctorToUML extends MojoGoal {
 
 	@Override
 	protected void loadFeatures() throws Exception {
-		srcPrj.load();
+		srcPrj.load(this.tags);
 	}
 
 	@Override

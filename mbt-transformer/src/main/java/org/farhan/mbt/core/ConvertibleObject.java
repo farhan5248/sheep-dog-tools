@@ -12,6 +12,6 @@ public interface ConvertibleObject {
 	public void load() throws Exception;
 
 	public void save() throws Exception;
-	
+
 	public Object get();
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public abstract class MojoGoal {
 
+	protected String tags = "";
+
 	protected abstract void convertFeature(ConvertibleObject co) throws Exception;
 
 	protected void convertFeatures() throws Exception {
@@ -18,7 +20,8 @@ public abstract class MojoGoal {
 
 	protected abstract void loadFeatures() throws Exception;
 
-	public void mojoGoal() throws Exception {
+	public void mojoGoal(String tags) throws Exception {
+		this.tags = tags;
 		initProjects();
 		loadFeatures();
 		convertFeatures();

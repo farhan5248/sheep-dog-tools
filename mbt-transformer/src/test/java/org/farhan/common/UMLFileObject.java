@@ -120,7 +120,7 @@ public abstract class UMLFileObject extends FileObject {
 		super.assertObjectExists();
 		try {
 			project = new UMLProject();
-			project.load();
+			project.load("");
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step");
 		}

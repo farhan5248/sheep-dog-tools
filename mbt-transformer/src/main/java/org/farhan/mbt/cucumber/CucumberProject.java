@@ -133,12 +133,12 @@ public class CucumberProject extends ConvertibleProject {
 		return null;
 	}
 
-	public void load() throws Exception {
+	public void load(String tags) throws Exception {
 		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(ConvertibleProject.FIRST_LAYER),
 				getFileExt(ConvertibleProject.FIRST_LAYER));
 		for (File f : files) {
 			createObject(f.getAbsolutePath()).load();
-			if (!isFileSelected(getObjects(ConvertibleProject.FIRST_LAYER).getLast(), ConvertibleProject.tags)) {
+			if (!isFileSelected(getObjects(ConvertibleProject.FIRST_LAYER).getLast(), tags)) {
 				getObjects(ConvertibleProject.FIRST_LAYER).removeLast();
 			}
 		}

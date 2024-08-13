@@ -27,8 +27,7 @@ public class AdocFileObject extends FileObject {
 
 	protected void assertAbstractScenarioTags(String name, String tags) {
 		Section abstractScenario = getAbstractScenario(name);
-		// TODO rename getScenarioTags to getAbstractScenarioTags
-		Assertions.assertEquals(tags, wrapper.getScenarioTags(abstractScenario));
+		Assertions.assertEquals(tags, wrapper.getAbstractScenarioTags(abstractScenario));
 	}
 
 	protected void assertDocString(String name, String stepName, String content) {

@@ -133,7 +133,7 @@ public class ConvertCucumberToUML extends MojoGoal {
 
 	@Override
 	protected void loadFeatures() throws Exception {
-		srcPrj.load();
+		srcPrj.load(this.tags);
 	}
 
 	@Override

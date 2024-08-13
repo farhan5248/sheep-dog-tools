@@ -55,7 +55,7 @@ public class AsciiDoctorProject extends ConvertibleProject {
 		return ".adoc";
 	}
 
-	public void load() throws Exception {
+	public void load(String tags) throws Exception {
 		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(ConvertibleProject.FIRST_LAYER),
 				getFileExt(ConvertibleProject.FIRST_LAYER));
 		getObjects(ConvertibleProject.FIRST_LAYER).clear();

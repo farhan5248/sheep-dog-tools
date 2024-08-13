@@ -53,7 +53,7 @@ public class UMLProject extends ConvertibleProject {
 		return aFile;
 	}
 
-	public void load() throws Exception {
+	public void load(String tags) throws Exception {
 		URI uri = URI.createFileURI(getDir("").getAbsolutePath()).appendSegment(theSystem.getName())
 				.appendFileExtension(UMLResource.FILE_EXTENSION);
 		ResourceSet resourceSet = new ResourceSetImpl();
