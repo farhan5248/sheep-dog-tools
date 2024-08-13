@@ -24,12 +24,12 @@ import org.farhan.mbt.uml.UMLProject;
 
 public class ConvertUMLToCucumber extends MojoGoal {
 
-	private UMLProject srcPrj;
-	private CucumberProject tgtPrj;
+	private String lastComponent = "InitialComponent";
 	private UMLClassWrapper srcObj;
+	private UMLProject srcPrj;
 	private CucumberFeatureWrapper tgtObj;
 
-	private String lastComponent = "InitialComponent";
+	private CucumberProject tgtPrj;
 
 	protected void convertAbstractScenarioList() throws Exception {
 		for (Interaction abstractScenario : srcObj.getAbstractScenarioList()) {
@@ -49,12 +49,6 @@ public class ConvertUMLToCucumber extends MojoGoal {
 		convertStepList(background, srcObj.getStepList(abstractScenario), abstractScenario);
 		tgtObj.addBackground(background);
 	};
-
-	private void convertStepTable(Step step, Message srcStep) {
-		tgtObj.createStepTable(step, srcObj.getStepTable(srcStep));
-		getTgtObj2(srcStep).createStepTable(srcObj.getStep(srcStep), srcObj.getStepTable(srcStep));
-		getTgtObj3(srcStep).createStepTable(srcObj.getStep(srcStep), srcObj.getStepTable(srcStep));
-	}
 
 	private void convertDocString(Step step, Message srcStep) {
 		tgtObj.createDocString(step, srcObj.getDocString(srcStep));
@@ -132,6 +126,12 @@ public class ConvertUMLToCucumber extends MojoGoal {
 		}
 	}
 
+	private void convertStepTable(Step step, Message srcStep) {
+		tgtObj.createStepTable(step, srcObj.getStepTable(srcStep));
+		getTgtObj2(srcStep).createStepTable(srcObj.getStep(srcStep), srcObj.getStepTable(srcStep));
+		getTgtObj3(srcStep).createStepTable(srcObj.getStep(srcStep), srcObj.getStepTable(srcStep));
+	}
+
 	private String getComponentName(String step) {
 		String name = StepWrapper.getComponentName(step);
 		if (name.isEmpty()) {
@@ -198,13 +198,13 @@ public class ConvertUMLToCucumber extends MojoGoal {
 	}
 
 	@Override
-	public void save() throws Exception {
-		tgtPrj.save();
-	}
-
-	@Override
 	protected void loadFeatures() throws Exception {
 		srcPrj.load();
 
+	}
+
+	@Override
+	public void save() throws Exception {
+		tgtPrj.save();
 	}
 }

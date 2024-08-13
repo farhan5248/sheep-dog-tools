@@ -18,8 +18,8 @@ import org.farhan.mbt.core.Utilities;
 public class ConvertAsciidoctorToUML extends MojoGoal {
 
 	private AsciiDoctorAdocWrapper srcObj;
-	private UMLClassWrapper tgtObj;
 	private AsciiDoctorProject srcPrj;
+	private UMLClassWrapper tgtObj;
 	private UMLProject tgtPrj;
 
 	protected void convertAbstractScenarioList() throws Exception {
@@ -39,11 +39,6 @@ public class ConvertAsciidoctorToUML extends MojoGoal {
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
 		convertStepList(background, srcObj.getStepList(abstractScenario));
 		tgtObj.addBackground(background);
-	}
-
-	private void convertStepTable(Message step, Section stepSrc) {
-		ArrayList<ArrayList<String>> stepTableRowList = srcObj.getStepTable(stepSrc);
-		tgtObj.createStepTable(step, stepTableRowList);
 	}
 
 	private void convertDocString(Message step, Section stepSrc) {
@@ -125,6 +120,11 @@ public class ConvertAsciidoctorToUML extends MojoGoal {
 		}
 	}
 
+	private void convertStepTable(Message step, Section stepSrc) {
+		ArrayList<ArrayList<String>> stepTableRowList = srcObj.getStepTable(stepSrc);
+		tgtObj.createStepTable(step, stepTableRowList);
+	}
+
 	@Override
 	protected ArrayList<ConvertibleObject> getFeatures(String layer) {
 		return srcPrj.getObjects(layer);
@@ -137,11 +137,6 @@ public class ConvertAsciidoctorToUML extends MojoGoal {
 	}
 
 	@Override
-	public void save() throws Exception {
-		tgtPrj.save();
-	}
-
-	@Override
 	protected void loadFeatures() throws Exception {
 		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(ConvertibleProject.FIRST_LAYER),
 				srcPrj.getFileExt(ConvertibleProject.FIRST_LAYER));
@@ -149,6 +144,11 @@ public class ConvertAsciidoctorToUML extends MojoGoal {
 		for (File f : files) {
 			srcPrj.createObject(f.getAbsolutePath()).load();
 		}
+	}
+
+	@Override
+	public void save() throws Exception {
+		tgtPrj.save();
 	}
 
 }

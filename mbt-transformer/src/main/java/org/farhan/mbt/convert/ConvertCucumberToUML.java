@@ -26,8 +26,8 @@ import org.farhan.mbt.uml.UMLProject;
 public class ConvertCucumberToUML extends MojoGoal {
 
 	private CucumberFeatureWrapper srcObj;
-	private UMLClassWrapper tgtObj;
 	private CucumberProject srcPrj;
+	private UMLClassWrapper tgtObj;
 	private UMLProject tgtPrj;
 
 	protected void convertAbstractScenarioList() throws Exception {
@@ -47,10 +47,6 @@ public class ConvertCucumberToUML extends MojoGoal {
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
 		convertStepList(background, srcObj.getStepList(abstractScenario), abstractScenario);
 		tgtObj.addBackground(background);
-	}
-
-	private void convertStepTable(Message step, Step stepSrc, AbstractScenario abstractScenarioSrc) {
-		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
 	}
 
 	private void convertDocString(Message step, Step stepSrc) {
@@ -124,6 +120,10 @@ public class ConvertCucumberToUML extends MojoGoal {
 		}
 	}
 
+	private void convertStepTable(Message step, Step stepSrc, AbstractScenario abstractScenarioSrc) {
+		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
+	}
+
 	@Override
 	protected ArrayList<ConvertibleObject> getFeatures(String layer) {
 		return srcPrj.getObjects(layer);
@@ -169,11 +169,6 @@ public class ConvertCucumberToUML extends MojoGoal {
 	}
 
 	@Override
-	public void save() throws Exception {
-		tgtPrj.save();
-	}
-
-	@Override
 	protected void loadFeatures() throws Exception {
 
 		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(ConvertibleProject.FIRST_LAYER),
@@ -184,6 +179,11 @@ public class ConvertCucumberToUML extends MojoGoal {
 				srcPrj.getObjects(ConvertibleProject.FIRST_LAYER).removeLast();
 			}
 		}
+	}
+
+	@Override
+	public void save() throws Exception {
+		tgtPrj.save();
 	}
 
 }
