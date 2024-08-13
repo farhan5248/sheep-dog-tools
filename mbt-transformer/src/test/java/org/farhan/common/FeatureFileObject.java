@@ -72,7 +72,7 @@ public class FeatureFileObject extends FileObject {
 				"Row " + rowName + " doesn't exist");
 	}
 
-	protected void assertAbstractScenarioStepDataTableRowExists(String name, String stepName, String rowName) {
+	protected void assertAbstractScenarioStepStepTableRowExists(String name, String stepName, String rowName) {
 		assertStepExists(name, stepName);
 		Assertions.assertTrue(getRow(getStep(name, stepName), rowName) != null, "Row " + rowName + " doesn't exist");
 	}
@@ -105,7 +105,7 @@ public class FeatureFileObject extends FileObject {
 		// TODO make table handling consistent, so use list of list and have one method
 		// return both header and body
 		String hString = "|";
-		for (String h : wrapper.getExamplesTable(examples).split(",")) {
+		for (String h : wrapper.getExamplesTable(examples)) {
 			hString += " " + h + " |";
 		}
 		if (hString.contentEquals(rowName)) {
@@ -128,7 +128,7 @@ public class FeatureFileObject extends FileObject {
 
 	private ArrayList<String> getRow(Step step, String rowName) {
 		rowName = rowName.replaceAll(" +", " ");
-		for (ArrayList<String> r : wrapper.getDataTable(step)) {
+		for (ArrayList<String> r : wrapper.getStepTable(step)) {
 			String rString = "|";
 			for (String c : r) {
 				rString += " " + c + " |";

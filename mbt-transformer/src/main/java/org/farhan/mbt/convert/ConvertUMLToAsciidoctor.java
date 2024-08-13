@@ -43,8 +43,8 @@ public class ConvertUMLToAsciidoctor extends ConvertToDocument {
 		tgtObj.addBackground(background);
 	}
 
-	private void convertDataTable(Section step, Message stepSrc, HashMap<String, String> examplesRow) {
-		tgtObj.createDataTable(step, srcObj.getDataTable(stepSrc));
+	private void convertStepTable(Section step, Message stepSrc, HashMap<String, String> examplesRow) {
+		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
 	}
 
 	private void convertDocString(Section step, Message stepSrc) {
@@ -119,8 +119,8 @@ public class ConvertUMLToAsciidoctor extends ConvertToDocument {
 		Section step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
 		if (srcObj.hasDocString(stepSrc)) {
 			convertDocString(step, stepSrc);
-		} else if (srcObj.hasDataTable(stepSrc)) {
-			convertDataTable(step, stepSrc, null);
+		} else if (srcObj.hasStepTable(stepSrc)) {
+			convertStepTable(step, stepSrc, null);
 		}
 	}
 

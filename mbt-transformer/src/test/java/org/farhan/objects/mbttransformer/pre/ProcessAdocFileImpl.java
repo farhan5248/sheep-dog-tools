@@ -99,7 +99,7 @@ public class ProcessAdocFileImpl extends AdocFileObject implements ProcessAdocFi
 
 	@Override
 	public void assertScenariosStepsStepTableSectionRow(HashMap<String, String> keyMap) {
-		assertAbstractScenarioStepDataTableRowExists(keyMap.get("Name"), keyMap.get("Step"), keyMap.get("Row"));
+		assertAbstractScenarioStepStepTableRowExists(keyMap.get("Name"), keyMap.get("Step"), keyMap.get("Row"));
 	}
 
 	@Override

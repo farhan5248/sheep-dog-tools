@@ -102,20 +102,20 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return scenario;
 	}
 
-	public void createDataTable(Message step, ArrayList<ArrayList<String>> dataTableRowList) {
+	public void createStepTable(Message step, ArrayList<ArrayList<String>> stepTableRowList) {
 		ValueSpecification table = createArgument(step, "dataTable", "");
 		// header
 		String row = "";
-		for (int i = 0; i < dataTableRowList.get(0).size(); i++) {
-			row += dataTableRowList.get(0).get(i) + " |";
+		for (int i = 0; i < stepTableRowList.get(0).size(); i++) {
+			row += stepTableRowList.get(0).get(i) + " |";
 		}
 		createAnnotation(table, "dataTable", String.valueOf(0), row);
 		// body
-		for (int i = 1; i < dataTableRowList.size(); i++) {
+		for (int i = 1; i < stepTableRowList.size(); i++) {
 			row = "";
-			ArrayList<String> bodyRow = dataTableRowList.get(i);
+			ArrayList<String> bodyRow = stepTableRowList.get(i);
 			for (int j = 0; j < bodyRow.size(); j++) {
-				row += dataTableRowList.get(i).get(j) + " |";
+				row += stepTableRowList.get(i).get(j) + " |";
 			}
 			createAnnotation(table, "dataTable", String.valueOf(i), row);
 		}
@@ -142,17 +142,7 @@ public class UMLClassWrapper implements ConvertibleObject {
 
 	}
 
-	// TODO delete after deleting adoc to graph and graph to uml goals
-	public void createExamplesTable(EAnnotation examples, String examplesRow) {
-		String value = "";
-		// TODO pass a list that doesn't need to be delimited
-		for (String e : examplesRow.split(",")) {
-			value += e + "|";
-		}
-		examples.getDetails().put("0", value);
-	}	
-	
-	public void createExamplesTable(EAnnotation examples, Set<String> headerRow) {
+	public void createExamplesTable(EAnnotation examples, ArrayList<String> headerRow) {
 		String value = "";
 		for (String e : headerRow) {
 			value += e + "|";
@@ -225,7 +215,7 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return abstractScenario.getName();
 	}
 
-	public ArrayList<ArrayList<String>> getDataTable(Message stepSrc) {
+	public ArrayList<ArrayList<String>> getStepTable(Message stepSrc) {
 		ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
 		ArrayList<String> row;
 		ValueSpecification vs = (LiteralString) stepSrc.getArgument("dataTable", null);
@@ -237,26 +227,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 			table.add(row);
 		}
 		return table;
-	}
-
-	public ArrayList<ArrayList<String>> getDataTable(Message step, HashMap<String, String> replacements) {
-		// TODO delete after deleting graph goals
-		ValueSpecification vs = (LiteralString) step.getArgument("dataTable", null);
-		EMap<String, String> table = vs.getEAnnotation("dataTable").getDetails();
-		ArrayList<ArrayList<String>> cellList = new ArrayList<ArrayList<String>>();
-		String[] header = table.getFirst().getValue().split(" \\|");
-		for (int i = 1; i < table.keySet().size(); i++) {
-			String[] row = table.get(i).getValue().split(" \\|");
-			for (int j = 0; j < row.length; j++) {
-				ArrayList<String> cell = new ArrayList<String>();
-				String vertex = i - 1 + " " + header[j];
-				cell.add(vertex);
-				String edge = replaceParameters(replacements, row[j]);
-				cell.add(edge);
-				cellList.add(cell);
-			}
-		}
-		return cellList;
 	}
 
 	public String getDocString(Message step) {
@@ -408,7 +378,7 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return tags.replaceFirst(",", "");
 	}
 
-	public boolean hasDataTable(Message step) {
+	public boolean hasStepTable(Message step) {
 		return step.getArgument("dataTable", null) != null;
 	}
 

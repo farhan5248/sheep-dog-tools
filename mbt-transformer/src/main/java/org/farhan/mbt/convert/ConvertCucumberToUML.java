@@ -51,8 +51,8 @@ public class ConvertCucumberToUML extends ConvertToUML {
 		tgtObj.addBackground(background);
 	}
 
-	private void convertDataTable(Message step, Step stepSrc, AbstractScenario abstractScenarioSrc) {
-		tgtObj.createDataTable(step, srcObj.getDataTable(stepSrc));
+	private void convertStepTable(Message step, Step stepSrc, AbstractScenario abstractScenarioSrc) {
+		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
 	}
 
 	private void convertDocString(Message step, Step stepSrc) {
@@ -114,8 +114,8 @@ public class ConvertCucumberToUML extends ConvertToUML {
 		Message step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
 		if (srcObj.hasDocString(stepSrc)) {
 			convertDocString(step, stepSrc);
-		} else if (srcObj.hasDataTable(stepSrc)) {
-			convertDataTable(step, stepSrc, abstractScenarioSrc);
+		} else if (srcObj.hasStepTable(stepSrc)) {
+			convertStepTable(step, stepSrc, abstractScenarioSrc);
 		}
 	}
 

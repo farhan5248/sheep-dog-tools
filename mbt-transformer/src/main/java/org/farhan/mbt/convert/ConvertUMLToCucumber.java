@@ -52,10 +52,10 @@ public class ConvertUMLToCucumber extends ConvertToCode {
 		tgtObj.addBackground(background);
 	};
 
-	private void convertDataTable(Step step, Message srcStep) {
-		tgtObj.createDataTable(step, srcObj.getDataTable(srcStep));
-		getTgtObj2(srcStep).createDataTable(srcObj.getStep(srcStep), srcObj.getDataTable(srcStep));
-		getTgtObj3(srcStep).createDataTable(srcObj.getStep(srcStep), srcObj.getDataTable(srcStep));
+	private void convertStepTable(Step step, Message srcStep) {
+		tgtObj.createStepTable(step, srcObj.getStepTable(srcStep));
+		getTgtObj2(srcStep).createStepTable(srcObj.getStep(srcStep), srcObj.getStepTable(srcStep));
+		getTgtObj3(srcStep).createStepTable(srcObj.getStep(srcStep), srcObj.getStepTable(srcStep));
 	}
 
 	private void convertDocString(Step step, Message srcStep) {
@@ -122,8 +122,8 @@ public class ConvertUMLToCucumber extends ConvertToCode {
 		getTgtObj3(srcStep).createStep(srcObj.getStep(srcStep));
 		if (srcObj.hasDocString(srcStep)) {
 			convertDocString(tgtStep, srcStep);
-		} else if (srcObj.hasDataTable(srcStep)) {
-			convertDataTable(tgtStep, srcStep);
+		} else if (srcObj.hasStepTable(srcStep)) {
+			convertStepTable(tgtStep, srcStep);
 		}
 	}
 

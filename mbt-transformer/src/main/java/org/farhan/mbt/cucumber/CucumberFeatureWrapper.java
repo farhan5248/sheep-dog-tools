@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -65,9 +67,9 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		return background;
 	}
 
-	public void createDataTable(Step step, ArrayList<ArrayList<String>> dataTable) {
+	public void createStepTable(Step step, ArrayList<ArrayList<String>> stepTableRowList) {
 		step.setTheStepTable(CucumberFactory.eINSTANCE.createStepTable());
-		for (ArrayList<String> srcRow : dataTable) {
+		for (ArrayList<String> srcRow : stepTableRowList) {
 			Row row = CucumberFactory.eINSTANCE.createRow();
 			for (String srcCell : srcRow) {
 				Cell cell = CucumberFactory.eINSTANCE.createCell();
@@ -178,17 +180,17 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		return abstractScenario.getName();
 	}
 
-	public ArrayList<ArrayList<String>> getDataTable(Step stepSrc) {
-		ArrayList<ArrayList<String>> dataTable = new ArrayList<ArrayList<String>>();
+	public ArrayList<ArrayList<String>> getStepTable(Step stepSrc) {
+		ArrayList<ArrayList<String>> stepTableRowList = new ArrayList<ArrayList<String>>();
 		ArrayList<String> row;
 		for (Row r : stepSrc.getTheStepTable().getRows()) {
 			row = new ArrayList<String>();
 			for (Cell c : r.getCells()) {
 				row.add(c.getName());
 			}
-			dataTable.add(row);
+			stepTableRowList.add(row);
 		}
-		return dataTable;
+		return stepTableRowList;
 	}
 
 	public String getDocString(Step stepSrc) {
@@ -229,10 +231,10 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		return body;
 	}
 
-	public String getExamplesTable(Examples examples) {
-		String header = "";
+	public ArrayList<String> getExamplesTable(Examples examples) {
+		ArrayList<String> header = new ArrayList<String>();
 		for (Cell c : examples.getTheExamplesTable().getRows().getFirst().getCells()) {
-			header += c.getName() + ",";
+			header.add(c.getName());
 		}
 		return header;
 	}
@@ -302,7 +304,7 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		return tags.replaceFirst(",", "");
 	}
 
-	public boolean hasDataTable(Step step) {
+	public boolean hasStepTable(Step step) {
 		return step.getTheStepTable() != null;
 	}
 

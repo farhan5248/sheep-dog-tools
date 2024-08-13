@@ -35,11 +35,11 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		}
 	}
 
-	public void createDataTable(String step, ArrayList<ArrayList<String>> dataTable) {
+	public void createStepTable(String step, ArrayList<ArrayList<String>> stepTableRowList) {
 		if (isStepObj()) {
-			createDataTableForStepObj(step, dataTable);
+			createStepTableForStepObj(step, stepTableRowList);
 		} else {
-			createDataTableForStepDef(step);
+			createStepTableForStepDef(step);
 		}
 	}
 
@@ -106,7 +106,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		}
 	}
 
-	private void createDataTableForStepDef(String step) {
+	private void createStepTableForStepDef(String step) {
 		MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(step));
 		addParameter(aMethod, "DataTable", "dataTable");
 		BlockStmt body = aMethod.getBody().get();
@@ -120,10 +120,10 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		}
 	}
 
-	private void createDataTableForStepObj(String step, ArrayList<ArrayList<String>> dataTable) {
+	private void createStepTableForStepObj(String step, ArrayList<ArrayList<String>> stepTableRowList) {
 		String setOrAssert = getSetOrAssert(step);
 		String sectionName = getSection(step);
-		for (String columnName : dataTable.getFirst()) {
+		for (String columnName : stepTableRowList.getFirst()) {
 			MethodDeclaration aMethod = getMethod(
 					setOrAssert + sectionName + Utilities.upperFirst(removeSpecialChars(columnName)));
 			aMethod.removeBody();

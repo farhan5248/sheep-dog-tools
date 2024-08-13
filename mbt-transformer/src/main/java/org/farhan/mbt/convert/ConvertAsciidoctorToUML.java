@@ -39,16 +39,13 @@ public class ConvertAsciidoctorToUML extends ConvertToUML {
 	private void convertBackground(Section abstractScenario) {
 		Interaction background = tgtObj.createBackground(srcObj.getBackgroundName(abstractScenario));
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
-		convertStepList(background, srcObj.getStepList(abstractScenario), new HashMap<String, String>());
+		convertStepList(background, srcObj.getStepList(abstractScenario));
 		tgtObj.addBackground(background);
 	}
 
-	// TODO there's no need for the examplesRow, this was only needed when creating
-	// the graph so remove it after deleting all Graph related code
-	// TODO DataTable should be called StepTable
-	private void convertDataTable(Message step, Section stepSrc, HashMap<String, String> examplesRow) {
-		ArrayList<ArrayList<String>> dataTableCellList = srcObj.getDataTable(stepSrc, examplesRow);
-		tgtObj.createDataTable(step, dataTableCellList);
+	private void convertStepTable(Message step, Section stepSrc) {
+		ArrayList<ArrayList<String>> stepTableRowList = srcObj.getStepTable(stepSrc);
+		tgtObj.createStepTable(step, stepTableRowList);
 	}
 
 	private void convertDocString(Message step, Section stepSrc) {
@@ -96,7 +93,7 @@ public class ConvertAsciidoctorToUML extends ConvertToUML {
 		Interaction scenario = tgtObj.createScenario(srcObj.getScenarioName(abstractScenario));
 		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(abstractScenario));
 		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(abstractScenario));
-		convertStepList(scenario, srcObj.getStepList(abstractScenario), new HashMap<String, String>());
+		convertStepList(scenario, srcObj.getStepList(abstractScenario));
 		tgtObj.addScenario(scenario);
 	}
 
@@ -105,7 +102,7 @@ public class ConvertAsciidoctorToUML extends ConvertToUML {
 		Interaction scenarioOutline = tgtObj.createScenarioOutline(srcObj.getScenarioOutlineName(abstractScenario));
 		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
 		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
-		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario), new HashMap<String, String>());
+		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario));
 
 		ArrayList<Section> examplesList = srcObj.getExamplesList(abstractScenario);
 		for (Section examples : examplesList) {
@@ -114,21 +111,19 @@ public class ConvertAsciidoctorToUML extends ConvertToUML {
 		tgtObj.addScenarioOutline(scenarioOutline);
 	}
 
-	private void convertStep(Interaction abstractScenario, Section stepSrc, HashMap<String, String> examplesRow) {
+	private void convertStep(Interaction abstractScenario, Section stepSrc) {
 		Message step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
 		if (srcObj.hasDocString(stepSrc)) {
-			// TODO pass in examplesRow here for parameters in docstrings
 			convertDocString(step, stepSrc);
 		}
-		if (srcObj.hasDataTable(stepSrc)) {
-			convertDataTable(step, stepSrc, examplesRow);
+		if (srcObj.hasStepTable(stepSrc)) {
+			convertStepTable(step, stepSrc);
 		}
 	}
 
-	private void convertStepList(Interaction abstractScenario, ArrayList<Section> stepList,
-			HashMap<String, String> examplesRow) {
+	private void convertStepList(Interaction abstractScenario, ArrayList<Section> stepList) {
 		for (Section step : stepList) {
-			convertStep(abstractScenario, step, examplesRow);
+			convertStep(abstractScenario, step);
 		}
 	}
 

@@ -133,7 +133,7 @@ public class ProcessFeatureFileImpl extends FeatureFileObject implements Process
 
 	@Override
 	public void assertScenarioStepsDataTableSectionRow(HashMap<String, String> keyMap) {
-		assertAbstractScenarioStepDataTableRowExists(keyMap.get("Name"), keyMap.get("Step"), keyMap.get("Row"));
+		assertAbstractScenarioStepStepTableRowExists(keyMap.get("Name"), keyMap.get("Step"), keyMap.get("Row"));
 	}
 
 	@Override

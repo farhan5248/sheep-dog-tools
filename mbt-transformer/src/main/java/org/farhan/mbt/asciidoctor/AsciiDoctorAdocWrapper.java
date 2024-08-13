@@ -3,8 +3,6 @@ package org.farhan.mbt.asciidoctor;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
-
 import org.asciidoctor.Options;
 import org.asciidoctor.Asciidoctor.Factory;
 import org.asciidoctor.ast.Block;
@@ -150,22 +148,22 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return background;
 	}
 
-	public void createDataTable(Section step, ArrayList<ArrayList<String>> dataTableRowList) {
+	public void createStepTable(Section step, ArrayList<ArrayList<String>> stepTableRowList) {
 		Table table = jrp.createTable(step);
 		step.getBlocks().add(table);
 
 		// header
 		Row row = jrp.createTableRow(table);
 		table.getHeader().add(row);
-		for (int i = 0; i < dataTableRowList.getFirst().size(); i++) {
+		for (int i = 0; i < stepTableRowList.getFirst().size(); i++) {
 			Column column = jrp.createTableColumn(table, i);
 			table.getColumns().add(column);
-			Cell cell = jrp.createTableCell(column, dataTableRowList.get(0).get(i));
+			Cell cell = jrp.createTableCell(column, stepTableRowList.get(0).get(i));
 			row.getCells().add(cell);
 		}
 		// body
-		for (int i = 1; i < dataTableRowList.size(); i++) {
-			ArrayList<String> bodyRow = dataTableRowList.get(i);
+		for (int i = 1; i < stepTableRowList.size(); i++) {
+			ArrayList<String> bodyRow = stepTableRowList.get(i);
 			row = jrp.createTableRow(table);
 			table.getBody().add(row);
 			for (int j = 0; j < bodyRow.size(); j++) {
@@ -260,25 +258,24 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return getName(background);
 	}
 
-	// TODO replacements is not needed anymore, delete it
-	public ArrayList<ArrayList<String>> getDataTable(Section step, HashMap<String, String> replacements) {
+	public ArrayList<ArrayList<String>> getStepTable(Section step) {
 		for (StructuralNode sn : step.getBlocks()) {
 			if (sn instanceof Table) {
 				Table table = (Table) sn;
-				ArrayList<ArrayList<String>> dataTableRowList = new ArrayList<ArrayList<String>>();
+				ArrayList<ArrayList<String>> stepTableRowList = new ArrayList<ArrayList<String>>();
 				ArrayList<String> cellList = new ArrayList<String>();
-				dataTableRowList.add(cellList);
+				stepTableRowList.add(cellList);
 				for (Cell cell : table.getHeader().getFirst().getCells()) {
 					cellList.add(cell.getText());
 				}
 				for (int i = 0; i < table.getBody().size(); i++) {
 					cellList = new ArrayList<String>();
-					dataTableRowList.add(cellList);
+					stepTableRowList.add(cellList);
 					for (Cell cell : table.getBody().get(i).getCells()) {
 						cellList.add(cell.getText());
 					}
 				}
-				return dataTableRowList;
+				return stepTableRowList;
 			}
 		}
 		// TODO why not return an empty list? Test it out later
@@ -350,9 +347,10 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return rows;
 	}
 
-	public Set<String> getExamplesTable(Section examples) {
-		HashMap<String, String> examplesRow = getExamplesRowList(examples).getFirst();
-		return examplesRow.keySet();
+	public ArrayList<String> getExamplesTable(Section examples) {
+		ArrayList<String> header = new ArrayList<String>();
+		header.addAll(getExamplesRowList(examples).getFirst().keySet());
+		return header;
 	}
 
 	public String getFeatureDescription() {
@@ -430,7 +428,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		}
 	}
 
-	public boolean hasDataTable(Section step) {
+	public boolean hasStepTable(Section step) {
 		for (StructuralNode sn : step.getBlocks()) {
 			if (sn instanceof Table) {
 				return true;

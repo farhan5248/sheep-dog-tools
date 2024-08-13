@@ -22,7 +22,7 @@ public class AdocFileObject extends FileObject {
 		Assertions.assertTrue(getAbstractScenario(name) != null, "Abstract Scenario " + name + " doesn't exist");
 	}
 
-	protected void assertAbstractScenarioStepDataTableRowExists(String name, String stepName, String rowName) {
+	protected void assertAbstractScenarioStepStepTableRowExists(String name, String stepName, String rowName) {
 		assertStepExists(name, stepName);
 		Assertions.assertTrue(getRow(getStep(name, stepName), rowName) != null, "Row " + rowName + " doesn't exist");
 	}
@@ -94,7 +94,7 @@ public class AdocFileObject extends FileObject {
 
 	private ArrayList<String> getRow(Section step, String csvRow) {
 		csvRow = csvRow.replaceAll(" +", " ");
-		for (ArrayList<String> row : wrapper.getDataTable(step, null)) {
+		for (ArrayList<String> row : wrapper.getStepTable(step)) {
 			// convert it to csv
 			String rowCsv = "";
 			for (String cell : row) {
