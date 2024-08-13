@@ -14,7 +14,6 @@ Feature: UML Feature To Code
           |    Name |
           | Process |
 
-# TODO feature statement
   Scenario: One tag, one statement
 
     Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
