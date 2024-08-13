@@ -48,9 +48,9 @@ Feature: Code Scenario Outline To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Parameters section will be as follows
-          |       Interaction Name | Parameter Name |
-          | specs::Process::Submit |           tag1 |
+      And The target/uml/pst.uml file, Interaction Annotations section will be as follows
+          |       Interaction Name | Annotation Name | Annotation Detail |
+          | specs::Process::Submit |            tags |              tag1 |
       And The target/uml/pst.uml file, Interaction Comments section will be as follows
           |       Interaction Name |     Comment |
           | specs::Process::Submit | Desc line 1 |
@@ -85,9 +85,9 @@ Feature: Code Scenario Outline To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Parameters section will be as follows
-          |       Interaction Name | Parameter Name |
-          | specs::Process::Submit |     tag<Index> |
+      And The target/uml/pst.uml file, Interaction Annotations section will be as follows
+          |       Interaction Name | Annotation Name | Annotation Detail |
+          | specs::Process::Submit |            tags |        tag<Index> |
       And The target/uml/pst.uml file, Interaction Comments section will be as follows
           |       Interaction Name |                  Comment |
           | specs::Process::Submit | Desc line 1\nDesc line 2 |
@@ -140,9 +140,9 @@ Feature: Code Scenario Outline To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Parameters section will be as follows
-          |       Interaction Name | Parameter Name |
-          | specs::Process::Submit |     tag<Index> |
+      And The target/uml/pst.uml file, Interaction Annotations section will be as follows
+          |       Interaction Name | Annotation Name | Annotation Detail |
+          | specs::Process::Submit |            tags |        tag<Index> |
       And The target/uml/pst.uml file, Interaction Comments section will be as follows
           |       Interaction Name |                               Comment |
           | specs::Process::Submit | Desc line 1\nDesc line 2\nDesc line 3 |

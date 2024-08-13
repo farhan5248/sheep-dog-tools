@@ -61,11 +61,4 @@ public class MbtTransformerPstUmlFileSteps {
         MbtTransformerFactory.get("PstUmlFile").setPath("target/uml/pst.uml");
         MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "InteractionMessagesSection");
     }
-
-    @Given("^The target/uml/pst.uml file, Interaction Parameters section will be as follows$")
-    public void theTargetUmlPstUmlFileInteractionParametersSectionWillBeAsFollows(DataTable dataTable) {
-        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("PstUmlFile").setPath("target/uml/pst.uml");
-        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "InteractionParametersSection");
-    }
 }

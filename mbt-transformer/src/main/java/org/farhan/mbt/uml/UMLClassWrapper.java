@@ -99,25 +99,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return scenario;
 	}
 
-	public void createStepTable(Message step, ArrayList<ArrayList<String>> stepTableRowList) {
-		ValueSpecification table = createArgument(step, "dataTable", "");
-		// header
-		String row = "";
-		for (int i = 0; i < stepTableRowList.get(0).size(); i++) {
-			row += stepTableRowList.get(0).get(i) + " |";
-		}
-		createAnnotation(table, "dataTable", String.valueOf(0), row);
-		// body
-		for (int i = 1; i < stepTableRowList.size(); i++) {
-			row = "";
-			ArrayList<String> bodyRow = stepTableRowList.get(i);
-			for (int j = 0; j < bodyRow.size(); j++) {
-				row += stepTableRowList.get(i).get(j) + " |";
-			}
-			createAnnotation(table, "dataTable", String.valueOf(i), row);
-		}
-	}
-
 	public void createDocString(Message step, String content) {
 		ValueSpecification vs = createArgument(step, "docString", "");
 		String[] lines = content.split("\n");
@@ -188,6 +169,25 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return step;
 	}
 
+	public void createStepTable(Message step, ArrayList<ArrayList<String>> stepTableRowList) {
+		ValueSpecification table = createArgument(step, "dataTable", "");
+		// header
+		String row = "";
+		for (int i = 0; i < stepTableRowList.get(0).size(); i++) {
+			row += stepTableRowList.get(0).get(i) + " |";
+		}
+		createAnnotation(table, "dataTable", String.valueOf(0), row);
+		// body
+		for (int i = 1; i < stepTableRowList.size(); i++) {
+			row = "";
+			ArrayList<String> bodyRow = stepTableRowList.get(i);
+			for (int j = 0; j < bodyRow.size(); j++) {
+				row += stepTableRowList.get(i).get(j) + " |";
+			}
+			createAnnotation(table, "dataTable", String.valueOf(i), row);
+		}
+	}
+
 	@Override
 	public Object get() {
 		return theClass;
@@ -212,20 +212,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return abstractScenario.getName();
 	}
 
-	public ArrayList<ArrayList<String>> getStepTable(Message stepSrc) {
-		ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
-		ArrayList<String> row;
-		ValueSpecification vs = (LiteralString) stepSrc.getArgument("dataTable", null);
-		for (Entry<String, String> r : vs.getEAnnotation("dataTable").getDetails()) {
-			row = new ArrayList<String>();
-			for (String cell : r.getValue().split(" \\|")) {
-				row.add(cell);
-			}
-			table.add(row);
-		}
-		return table;
-	}
-
 	public String getDocString(Message step) {
 		ValueSpecification vs = (LiteralString) step.getArgument("docString", null);
 		EMap<String, String> docString = vs.getEAnnotation("docString").getDetails();
@@ -239,7 +225,11 @@ public class UMLClassWrapper implements ConvertibleObject {
 
 	public ArrayList<EAnnotation> getExamplesList(Interaction abstractScenario) {
 		ArrayList<EAnnotation> exampleList = new ArrayList<EAnnotation>();
-		exampleList.addAll(abstractScenario.getEAnnotations());
+		for (EAnnotation a : abstractScenario.getEAnnotations()) {
+			if (!a.getSource().contentEquals("tags")) {
+				exampleList.add(a);
+			}
+		}
 		return exampleList;
 	}
 
@@ -358,20 +348,36 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return step.getName();
 	}
 
+	public ArrayList<ArrayList<String>> getStepTable(Message stepSrc) {
+		ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
+		ArrayList<String> row;
+		ValueSpecification vs = (LiteralString) stepSrc.getArgument("dataTable", null);
+		for (Entry<String, String> r : vs.getEAnnotation("dataTable").getDetails()) {
+			row = new ArrayList<String>();
+			for (String cell : r.getValue().split(" \\|")) {
+				row.add(cell);
+			}
+			table.add(row);
+		}
+		return table;
+	}
+
 	private String getTags(Interaction abstractScenario) {
 		String tags = "";
-		for (Parameter p : abstractScenario.getOwnedParameters()) {
-			tags += "," + p.getName();
+		if (abstractScenario.getEAnnotation("tags") != null) {
+			for (Entry<String, String> t : abstractScenario.getEAnnotation("tags").getDetails()) {
+				tags += "," + t.getKey();
+			}
 		}
 		return tags.replaceFirst(",", "");
 	}
 
-	public boolean hasStepTable(Message step) {
-		return step.getArgument("dataTable", null) != null;
-	}
-
 	public boolean hasDocString(Message step) {
 		return step.getArgument("docString", null) != null;
+	}
+
+	public boolean hasStepTable(Message step) {
+		return step.getArgument("dataTable", null) != null;
 	}
 
 	public boolean isBackground(Interaction abstractScenario) {
@@ -379,7 +385,13 @@ public class UMLClassWrapper implements ConvertibleObject {
 	}
 
 	public boolean isScenarioOutline(Interaction abstractScenario) {
-		return !abstractScenario.getEAnnotations().isEmpty() && abstractScenario.getEAnnotation("background") == null;
+		// if there's an annotation not called tags or background
+		for (EAnnotation a : abstractScenario.getEAnnotations()) {
+			if (!a.getSource().contentEquals("tags") && !a.getSource().contentEquals("background")) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -428,22 +440,20 @@ public class UMLClassWrapper implements ConvertibleObject {
 		scenarioOutline.createOwnedComment().setBody(scenarioOutlineDescription);
 	}
 
-	public void setScenarioOutlineTags(Interaction scenarioOutline, String scenarioOutlineTags) {
-		// TODO this if statement is not needed if a list is passed in rather than a
-		// string
-		if (!scenarioOutlineTags.isEmpty()) {
-			for (String t : scenarioOutlineTags.split(",")) {
-				createParameter(scenarioOutline, t, "", "in");
-			}
-		}
+	public void setScenarioOutlineTags(Interaction abstractScenario, String tags) {
+		setTags(abstractScenario, tags);
 	}
 
-	public void setScenarioTags(Interaction scenario, String scenarioTags) {
+	public void setScenarioTags(Interaction abstractScenario, String tags) {
+		setTags(abstractScenario, tags);
+	}
+
+	private void setTags(Interaction abstractScenario, String tags) {
 		// TODO this if statement is not needed if a list is passed in rather than a
 		// string
-		if (!scenarioTags.isEmpty()) {
-			for (String t : scenarioTags.split(",")) {
-				createParameter(scenario, t, "", "in");
+		if (!tags.isEmpty()) {
+			for (String t : tags.split(",")) {
+				createAnnotation(abstractScenario, "tags", t);
 			}
 		}
 	}

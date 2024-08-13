@@ -8,7 +8,6 @@ import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.NamedElement;
-import org.eclipse.uml2.uml.Parameter;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.mbt.uml.UMLProject;
 import org.junit.jupiter.api.Assertions;
@@ -115,19 +114,6 @@ public abstract class UMLFileObject extends FileObject {
 		Assertions.assertTrue(getMessage(getInteraction(interactionName), messageName) != null,
 				"Interaction " + interactionName + " Message " + messageName + " doesn't exist");
 
-	}
-
-	protected void assertInteractionParameterNameExists(String interactionName, String parameterName) {
-		assertInteractionExists(interactionName);
-		Interaction interaction = getInteraction(interactionName);
-		if (parameterName.contentEquals("has none")) {
-			Assertions.assertTrue(interaction.getOwnedParameters().isEmpty(),
-					"Interaction " + interactionName + " has parameters");
-		} else {
-			Parameter parameter = interaction.getOwnedParameter(parameterName, null);
-			Assertions.assertTrue(parameter != null,
-					"Interaction " + interactionName + " Parameter " + parameterName + " doesn't exist");
-		}
 	}
 
 	protected void assertObjectExists() {
