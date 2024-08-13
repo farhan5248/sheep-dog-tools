@@ -2,8 +2,6 @@ package org.farhan.mbt.convert;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.asciidoctor.ast.Section;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
@@ -56,12 +54,12 @@ public class ConvertAsciidoctorToUML extends ConvertToUML {
 
 		EAnnotation examples = tgtObj.createExamples(abstractScenario, srcObj.getExamplesName(examplesSrc));
 		tgtObj.createExamplesTable(examples, srcObj.getExamplesTable(examplesSrc));
-		for (HashMap<String, String> examplesRow : srcObj.getExamplesRowList(examplesSrc)) {
+		for (ArrayList<String> examplesRow : srcObj.getExamplesRowList(examplesSrc)) {
 			convertExamplesRow(examples, examplesRow);
 		}
 	}
 
-	private void convertExamplesRow(EAnnotation examples, HashMap<String, String> examplesRow) {
+	private void convertExamplesRow(EAnnotation examples, ArrayList<String> examplesRow) {
 		tgtObj.createExamplesRow(examples, examplesRow);
 	}
 

@@ -2,7 +2,6 @@ package org.farhan.mbt.convert;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.asciidoctor.ast.Section;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -39,11 +38,11 @@ public class ConvertUMLToAsciidoctor extends ConvertToDocument {
 		Section background = tgtObj.createBackground();
 		tgtObj.setBackgroundName(background, srcObj.getBackgroundName(abstractScenario));
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
-		convertStepList(background, srcObj.getStepList(abstractScenario), new HashMap<String, String>());
+		convertStepList(background, srcObj.getStepList(abstractScenario));
 		tgtObj.addBackground(background);
 	}
 
-	private void convertStepTable(Section step, Message stepSrc, HashMap<String, String> examplesRow) {
+	private void convertStepTable(Section step, Message stepSrc) {
 		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
 	}
 
@@ -56,12 +55,12 @@ public class ConvertUMLToAsciidoctor extends ConvertToDocument {
 		Section examples = tgtObj.createExamples(abstractScenario);
 		tgtObj.setExamplesName(examples, srcObj.getExamplesName(examplesSrc));
 		tgtObj.createExamplesTable(examples, srcObj.getExamplesTable(examplesSrc));
-		for (HashMap<String, String> examplesRow : srcObj.getExamplesRowList(examplesSrc)) {
+		for (ArrayList<String> examplesRow : srcObj.getExamplesRowList(examplesSrc)) {
 			convertExamplesRow(examples, examplesRow);
 		}
 	}
 
-	private void convertExamplesRow(Section examples, HashMap<String, String> examplesRow) {
+	private void convertExamplesRow(Section examples, ArrayList<String> examplesRow) {
 		tgtObj.createExamplesRow(examples, examplesRow);
 	}
 
@@ -83,20 +82,12 @@ public class ConvertUMLToAsciidoctor extends ConvertToDocument {
 		return pathName;
 	}
 
-	private String convertObjectName(String name, String layer) {
-		String qualifiedName = name.replace(",", "");
-		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(layer), "");
-		qualifiedName = qualifiedName.replace(srcPrj.getDir(layer).getAbsolutePath() + File.separator, "");
-		qualifiedName = tgtPrj.getDir(layer) + File.separator + qualifiedName + tgtPrj.getFileExt(layer);
-		return qualifiedName;
-	}
-
 	private void convertScenario(Interaction abstractScenario) {
 		Section scenario = tgtObj.createScenario();
 		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(abstractScenario));
 		tgtObj.setScenarioName(scenario, srcObj.getScenarioName(abstractScenario));
 		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(abstractScenario));
-		convertStepList(scenario, srcObj.getStepList(abstractScenario), new HashMap<String, String>());
+		convertStepList(scenario, srcObj.getStepList(abstractScenario));
 		tgtObj.addScenario(scenario);
 	}
 
@@ -106,7 +97,7 @@ public class ConvertUMLToAsciidoctor extends ConvertToDocument {
 		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
 		tgtObj.setScenarioOutlineName(scenarioOutline, srcObj.getScenarioOutlineName(abstractScenario));
 		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
-		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario), new HashMap<String, String>());
+		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario));
 
 		ArrayList<EAnnotation> examplesList = srcObj.getExamplesList(abstractScenario);
 		for (EAnnotation examples : examplesList) {
@@ -120,12 +111,11 @@ public class ConvertUMLToAsciidoctor extends ConvertToDocument {
 		if (srcObj.hasDocString(stepSrc)) {
 			convertDocString(step, stepSrc);
 		} else if (srcObj.hasStepTable(stepSrc)) {
-			convertStepTable(step, stepSrc, null);
+			convertStepTable(step, stepSrc);
 		}
 	}
 
-	private void convertStepList(Section abstractScenario, ArrayList<Message> stepList,
-			HashMap<String, String> examplesRow) {
+	private void convertStepList(Section abstractScenario, ArrayList<Message> stepList) {
 		for (Message step : stepList) {
 			convertStep(abstractScenario, step);
 		}

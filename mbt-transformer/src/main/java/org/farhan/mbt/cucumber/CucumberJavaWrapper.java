@@ -2,7 +2,6 @@ package org.farhan.mbt.cucumber;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.StepWrapper;
 import org.farhan.mbt.core.Utilities;
@@ -70,11 +69,10 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	public MethodDeclaration getMethod(String methodName) {
-		List<MethodDeclaration> methods = getType().getMethodsByName(methodName);
-		if (methods.isEmpty()) {
+		if (getType().getMethodsByName(methodName).isEmpty()) {
 			return getType().addMethod(methodName, Keyword.PUBLIC);
 		} else {
-			return methods.getFirst();
+			return getType().getMethodsByName(methodName).getFirst();
 		}
 	}
 

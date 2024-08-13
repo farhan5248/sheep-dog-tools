@@ -2,8 +2,6 @@ package org.farhan.mbt.convert;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
@@ -67,7 +65,7 @@ public class ConvertCucumberToUML extends ConvertToUML {
 		}
 	}
 
-	private void convertExamplesRow(EAnnotation examples, HashMap<String, String> examplesRow) {
+	private void convertExamplesRow(EAnnotation examples, ArrayList<String> examplesRow) {
 		tgtObj.createExamplesRow(examples, examplesRow);
 	}
 

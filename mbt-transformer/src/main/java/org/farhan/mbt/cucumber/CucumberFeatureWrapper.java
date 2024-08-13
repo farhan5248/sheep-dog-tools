@@ -3,9 +3,6 @@ package org.farhan.mbt.cucumber;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -99,11 +96,11 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		return examples;
 	}
 
-	public void createExamplesRow(Examples examples, HashMap<String, String> examplesRow) {
+	public void createExamplesRow(Examples examples, ArrayList<String> examplesRow) {
 		Row row = CucumberFactory.eINSTANCE.createRow();
-		for (String srcCell : examplesRow.keySet()) {
+		for (String srcCell : examplesRow) {
 			Cell cell = CucumberFactory.eINSTANCE.createCell();
-			cell.setName(examplesRow.get(srcCell));
+			cell.setName(srcCell);
 			row.getCells().add(cell);
 		}
 		examples.getTheExamplesTable().getRows().add(row);
@@ -215,11 +212,11 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		return examples.getName();
 	}
 
-	public HashMap<String, String> getExamplesRow(Examples examples, Row examplesRow) {
-		HashMap<String, String> row = new HashMap<String, String>();
+	public ArrayList<String> getExamplesRow(Examples examples, Row examplesRow) {
+		ArrayList<String> row = new ArrayList<String>();
 		EList<Cell> header = examples.getTheExamplesTable().getRows().getFirst().getCells();
 		for (int i = 0; i < header.size(); i++) {
-			row.put(header.get(i).getName(), examplesRow.getCells().get(i).getName());
+			row.add(examplesRow.getCells().get(i).getName());
 		}
 		return row;
 	}

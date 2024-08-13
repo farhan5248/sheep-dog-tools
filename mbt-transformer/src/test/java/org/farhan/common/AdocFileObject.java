@@ -114,14 +114,13 @@ public class AdocFileObject extends FileObject {
 		ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
 		ArrayList<String> row = new ArrayList<String>();
 		table.add(row);
-		for (String key : wrapper.getExamplesRowList(examples).getFirst().keySet()) {
-			row.add(key);
+		for (String colName : wrapper.getExamplesTable(examples)) {
+			row.add(colName);
 		}
-		for (HashMap<String, String> r : wrapper.getExamplesRowList(examples)) {
-
+		for (ArrayList<String> r : wrapper.getExamplesRowList(examples)) {
 			row = new ArrayList<String>();
 			table.add(row);
-			for (String c : r.values()) {
+			for (String c : r) {
 				row.add(c);
 			}
 		}

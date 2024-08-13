@@ -3,7 +3,6 @@ package org.farhan.common;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.farhan.mbt.core.Utilities;
 import org.junit.jupiter.api.Assertions;
@@ -14,7 +13,7 @@ import io.cucumber.datatable.DataTable;
 // Right now the way I model stuff all the objects are either output ones or input+transition ones
 public abstract class TestObject {
 
-	protected Map<String, String> keyValue = new HashMap<String, String>();
+	protected HashMap<String, String> keyValue = new HashMap<String, String>();
 
 	public void setComponent(String component) {
 		keyValue.put("component", component);

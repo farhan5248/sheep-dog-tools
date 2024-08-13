@@ -2,10 +2,7 @@ package org.farhan.mbt.uml;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map.Entry;
-import java.util.Set;
-
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Behavior;
@@ -133,10 +130,10 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return createAnnotation(scenarioOutline, name);
 	}
 
-	public void createExamplesRow(EAnnotation examples, HashMap<String, String> examplesRow) {
+	public void createExamplesRow(EAnnotation examples, ArrayList<String> examplesRow) {
 		String value = "";
-		for (String e : examplesRow.keySet()) {
-			value += examplesRow.get(e) + "|";
+		for (String e : examplesRow) {
+			value += e + "|";
 		}
 		examples.getDetails().put(String.valueOf(examples.getDetails().size()), value);
 
@@ -250,25 +247,21 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return examples.getSource();
 	}
 
-	public ArrayList<HashMap<String, String>> getExamplesRowList(EAnnotation examples) {
+	public ArrayList<ArrayList<String>> getExamplesRowList(EAnnotation examples) {
 		// TODO this should just be a list of lists. Having the header for each row
 		// doesn't help. If the headers are needed to convert rows, pass the parent
 		// table
 		// Also there should be a getRow call to go with this
-		ArrayList<HashMap<String, String>> examplesRowList = new ArrayList<HashMap<String, String>>();
-		ArrayList<String> paramNames = new ArrayList<String>();
-		for (String cell : examples.getDetails().getFirst().getValue().split("\\|")) {
-			paramNames.add(cell);
-		}
+		ArrayList<ArrayList<String>> examplesRowList = new ArrayList<ArrayList<String>>();
 		int rowCnt = examples.getDetails().size();
 		for (int i = 1; i < rowCnt; i++) {
 			String[] row = examples.getDetails().get(i).getValue().split("\\|");
-			HashMap<String, String> map = new HashMap<String, String>();
+			ArrayList<String> cellList = new ArrayList<String>();
 			int cellCnt = row.length;
 			for (int j = 0; j < cellCnt; j++) {
-				map.put(paramNames.get(j), row[j]);
+				cellList.add(row[j]);
 			}
-			examplesRowList.add(map);
+			examplesRowList.add(cellList);
 		}
 		return examplesRowList;
 	}
@@ -279,11 +272,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 			paramNames.add(cell);
 		}
 		return paramNames;
-	}
-
-	public Set<String> getExamplesTable(HashMap<String, String> examplesRow) {
-		// TODO this is convoluted because it's deriving the table from each row?
-		return examplesRow.keySet();
 	}
 
 	public String getFeatureDescription() {
@@ -397,17 +385,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 	@Override
 	public void load() throws Exception {
 		// TODO does nothing for now until there is a uml file for each class
-	}
-
-	private String replaceParameters(HashMap<String, String> replacements, String text) {
-		if (text.startsWith("<")) {
-			for (String key : replacements.keySet()) {
-				if (text.contentEquals("<" + key + ">")) {
-					return replacements.get(key);
-				}
-			}
-		}
-		return text;
 	}
 
 	@Override

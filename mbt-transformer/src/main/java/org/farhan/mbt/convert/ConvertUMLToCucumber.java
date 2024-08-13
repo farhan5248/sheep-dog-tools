@@ -2,8 +2,6 @@ package org.farhan.mbt.convert;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
@@ -67,12 +65,12 @@ public class ConvertUMLToCucumber extends ConvertToCode {
 	private void convertExamples(ScenarioOutline scenarioOutline, EAnnotation examplesSrc) {
 		Examples examples = tgtObj.createExamples(scenarioOutline, srcObj.getExamplesName(examplesSrc));
 		tgtObj.createExamplesTable(examples, srcObj.getExamplesTable(examplesSrc));
-		for (HashMap<String, String> examplesRow : srcObj.getExamplesRowList(examplesSrc)) {
+		for (ArrayList<String> examplesRow : srcObj.getExamplesRowList(examplesSrc)) {
 			convertExamplesRow(examples, examplesRow);
 		}
 	}
 
-	private void convertExamplesRow(Examples examples, HashMap<String, String> examplesRow) {
+	private void convertExamplesRow(Examples examples, ArrayList<String> examplesRow) {
 		tgtObj.createExamplesRow(examples, examplesRow);
 	}
 

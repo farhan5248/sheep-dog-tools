@@ -2,7 +2,6 @@ package org.farhan.mbt.asciidoctor;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import org.asciidoctor.Options;
 import org.asciidoctor.Asciidoctor.Factory;
 import org.asciidoctor.ast.Block;
@@ -119,17 +118,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return text;
 	}
 
-	private String replaceParameters(HashMap<String, String> replacements, String text) {
-		if (text.startsWith("{")) {
-			for (String key : replacements.keySet()) {
-				if (text.contentEquals("{" + key + "}")) {
-					return replacements.get(key);
-				}
-			}
-		}
-		return text;
-	}
-
 	public void addBackground(Section background) {
 		theDoc.getBlocks().add(background);
 	}
@@ -187,7 +175,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return examples;
 	}
 
-	public void createExamplesRow(Section examples, HashMap<String, String> examplesRow) {
+	public void createExamplesRow(Section examples, ArrayList<String> examplesRow) {
 		Table table = null;
 		for (StructuralNode block : examples.getBlocks()) {
 			if (block instanceof Table) {
@@ -198,8 +186,8 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		Row row = jrp.createTableRow(table);
 		table.getBody().add(row);
 		int colCnt = 0;
-		for (String e : examplesRow.keySet()) {
-			Cell cell = jrp.createTableCell(table.getColumns().get(colCnt), examplesRow.get(e));
+		for (String e : examplesRow) {
+			Cell cell = jrp.createTableCell(table.getColumns().get(colCnt), e);
 			row.getCells().add(cell);
 			colCnt++;
 		}
@@ -323,24 +311,18 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return example.getTitle();
 	}
 
-	public ArrayList<HashMap<String, String>> getExamplesRowList(Section examples) {
-		ArrayList<HashMap<String, String>> rows = new ArrayList<HashMap<String, String>>();
+	public ArrayList<ArrayList<String>> getExamplesRowList(Section examples) {
+		ArrayList<ArrayList<String>> rows = new ArrayList<ArrayList<String>>();
 		for (StructuralNode block : examples.getBlocks()) {
 			if (block instanceof Table) {
 				Table table = (Table) block;
-				ArrayList<String> paramNames = new ArrayList<String>();
-				for (Cell cell : table.getHeader().getFirst().getCells()) {
-					paramNames.add(cell.getText());
-				}
-				int rowCnt = table.getBody().size();
-				for (int i = 0; i < rowCnt; i++) {
-					Row row = table.getBody().get(i);
-					HashMap<String, String> map = new HashMap<String, String>();
-					int cellCnt = row.getCells().size();
-					for (int j = 0; j < cellCnt; j++) {
-						map.put(paramNames.get(j), row.getCells().get(j).getText());
+				ArrayList<String> cellList;
+				for (Row row : table.getBody()) {
+					cellList = new ArrayList<String>();
+					for (Cell cell : row.getCells()) {
+						cellList.add(cell.getText());
 					}
-					rows.add(map);
+					rows.add(cellList);
 				}
 			}
 		}
@@ -349,7 +331,14 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	public ArrayList<String> getExamplesTable(Section examples) {
 		ArrayList<String> header = new ArrayList<String>();
-		header.addAll(getExamplesRowList(examples).getFirst().keySet());
+		for (StructuralNode block : examples.getBlocks()) {
+			if (block instanceof Table) {
+				Table table = (Table) block;
+				for (Cell cell : table.getHeader().getFirst().getCells()) {
+					header.add(cell.getText());
+				}
+			}
+		}
 		return header;
 	}
 
