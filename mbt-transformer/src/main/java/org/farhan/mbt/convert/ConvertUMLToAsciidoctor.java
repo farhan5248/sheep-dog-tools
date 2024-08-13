@@ -8,19 +8,19 @@ import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
-import org.farhan.mbt.core.ConvertToDocument;
-import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
+import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.ConvertibleProject;
+import org.farhan.mbt.core.MojoGoal;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 
-public class ConvertUMLToAsciidoctor extends ConvertToDocument {
+public class ConvertUMLToAsciidoctor extends MojoGoal {
 
 	private UMLClassWrapper srcObj;
-
-	private UMLProject srcPrj;
-
 	private AsciiDoctorAdocWrapper tgtObj;
+	private UMLProject srcPrj;
+	private AsciiDoctorProject tgtPrj;
 
 	protected void convertAbstractScenarioList() throws Exception {
 		for (Interaction abstractScenario : srcObj.getAbstractScenarioList()) {
@@ -76,9 +76,9 @@ public class ConvertUMLToAsciidoctor extends ConvertToDocument {
 
 	protected String convertObjectName(String fullName) {
 		String pathName = fullName;
-		pathName = pathName.replace("pst::" + tgtPrj.FIRST_LAYER, tgtPrj.getDir(tgtPrj.FIRST_LAYER).getAbsolutePath());
+		pathName = pathName.replace("pst::" + ConvertibleProject.FIRST_LAYER, tgtPrj.getDir(ConvertibleProject.FIRST_LAYER).getAbsolutePath());
 		pathName = pathName.replace("::", File.separator);
-		pathName = pathName + tgtPrj.getFileExt(tgtPrj.FIRST_LAYER);
+		pathName = pathName + tgtPrj.getFileExt(ConvertibleProject.FIRST_LAYER);
 		return pathName;
 	}
 
@@ -127,13 +127,13 @@ public class ConvertUMLToAsciidoctor extends ConvertToDocument {
 	}
 
 	@Override
-	protected void initProjects() throws Exception {
+	public void initProjects() throws Exception {
 		srcPrj = new UMLProject();
 		tgtPrj = new AsciiDoctorProject();
 	}
 
 	@Override
-	protected void save() throws Exception {
+	public void save() throws Exception {
 		tgtPrj.save();
 	}
 

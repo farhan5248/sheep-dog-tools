@@ -10,17 +10,17 @@ import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
-import org.farhan.mbt.core.ConvertToUML;
 import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.ConvertibleProject;
+import org.farhan.mbt.core.MojoGoal;
 import org.farhan.mbt.core.Utilities;
 
-public class ConvertAsciidoctorToUML extends ConvertToUML {
+public class ConvertAsciidoctorToUML extends MojoGoal {
 
 	private AsciiDoctorAdocWrapper srcObj;
-
-	private AsciiDoctorProject srcPrj;
-
 	private UMLClassWrapper tgtObj;
+	private AsciiDoctorProject srcPrj;
+	private UMLProject tgtPrj;
 
 	protected void convertAbstractScenarioList() throws Exception {
 		for (Section abstractScenario : srcObj.getAbstractScenarioList()) {
@@ -75,7 +75,7 @@ public class ConvertAsciidoctorToUML extends ConvertToUML {
 
 	protected String convertObjectName(String fileName) {
 		// TODO add the layer parameter to the super class method
-		return convertObjectName(fileName, tgtPrj.FIRST_LAYER);
+		return convertObjectName(fileName, ConvertibleProject.FIRST_LAYER);
 	}
 
 	private String convertObjectName(String fileName, String layer) {
@@ -131,21 +131,21 @@ public class ConvertAsciidoctorToUML extends ConvertToUML {
 	}
 
 	@Override
-	protected void initProjects() throws Exception {
+	public void initProjects() throws Exception {
 		srcPrj = new AsciiDoctorProject();
 		tgtPrj = new UMLProject();
 	}
 
 	@Override
-	protected void save() throws Exception {
+	public void save() throws Exception {
 		tgtPrj.save();
 	}
 
 	@Override
 	protected void loadFeatures() throws Exception {
-		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(srcPrj.FIRST_LAYER),
-				srcPrj.getFileExt(srcPrj.FIRST_LAYER));
-		srcPrj.getObjects(srcPrj.FIRST_LAYER).clear();
+		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(ConvertibleProject.FIRST_LAYER),
+				srcPrj.getFileExt(ConvertibleProject.FIRST_LAYER));
+		srcPrj.getObjects(ConvertibleProject.FIRST_LAYER).clear();
 		for (File f : files) {
 			srcPrj.createObject(f.getAbsolutePath()).load();
 		}

@@ -126,17 +126,6 @@ public class UMLProject extends ConvertibleProject {
 		return layerObjects;
 	}
 
-	private ConvertibleObject find(String name, ArrayList<ConvertibleObject> objects) {
-		for (ConvertibleObject co : objects) {
-			UMLClassWrapper ucw = (UMLClassWrapper) co;
-			Class c = (Class) ucw.get();
-			if (c.getQualifiedName().contentEquals(name)) {
-				return ucw;
-			}
-		}
-		return null;
-	}
-
 	@Override
 	public ConvertibleObject createObject(String name) {
 

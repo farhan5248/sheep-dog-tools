@@ -10,8 +10,6 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
-import org.eclipse.uml2.uml.Parameter;
-import org.eclipse.uml2.uml.ParameterDirectionKind;
 import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.mbt.core.ConvertibleObject;
@@ -139,17 +137,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 			createAnnotation(anInteraction, annotationName);
 		}
 		return anInteraction;
-	}
-
-	private Parameter createParameter(Interaction anInteraction, String paramName, String defaultValue,
-			String direction) {
-		Parameter aParameter = anInteraction.getOwnedParameter(paramName, null);
-		if (aParameter == null) {
-			aParameter = anInteraction.createOwnedParameter(paramName, null);
-			aParameter.setDefault(defaultValue);
-			aParameter.setDirection(ParameterDirectionKind.getByName(direction));
-		}
-		return aParameter;
 	}
 
 	public Interaction createScenario(String name) {

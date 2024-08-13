@@ -14,21 +14,21 @@ import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.ScenarioOutline;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.Tag;
-import org.farhan.mbt.core.ConvertToUML;
 import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.ConvertibleProject;
+import org.farhan.mbt.core.MojoGoal;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 
-public class ConvertCucumberToUML extends ConvertToUML {
+public class ConvertCucumberToUML extends MojoGoal {
 
 	private CucumberFeatureWrapper srcObj;
-
-	private CucumberProject srcPrj;
-
 	private UMLClassWrapper tgtObj;
+	private CucumberProject srcPrj;
+	private UMLProject tgtPrj;
 
 	protected void convertAbstractScenarioList() throws Exception {
 		for (AbstractScenario abstractScenario : srcObj.getAbstractScenarioList()) {
@@ -81,8 +81,8 @@ public class ConvertCucumberToUML extends ConvertToUML {
 
 	protected String convertFeatureName(String fullName) {
 		String qualifiedName = fullName.trim();
-		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(srcPrj.FIRST_LAYER), "");
-		qualifiedName = qualifiedName.replace(srcPrj.getDir(srcPrj.FIRST_LAYER).getAbsolutePath(), "");
+		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(ConvertibleProject.FIRST_LAYER), "");
+		qualifiedName = qualifiedName.replace(srcPrj.getDir(ConvertibleProject.FIRST_LAYER).getAbsolutePath(), "");
 		qualifiedName = qualifiedName.replace(File.separator, "::");
 		qualifiedName = "pst::specs" + qualifiedName;
 		return qualifiedName;
@@ -130,7 +130,7 @@ public class ConvertCucumberToUML extends ConvertToUML {
 	}
 
 	@Override
-	protected void initProjects() throws Exception {
+	public void initProjects() throws Exception {
 		srcPrj = new CucumberProject();
 		tgtPrj = new UMLProject();
 	}
@@ -169,19 +169,19 @@ public class ConvertCucumberToUML extends ConvertToUML {
 	}
 
 	@Override
-	protected void save() throws Exception {
+	public void save() throws Exception {
 		tgtPrj.save();
 	}
 
 	@Override
 	protected void loadFeatures() throws Exception {
 
-		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(srcPrj.FIRST_LAYER),
-				srcPrj.getFileExt(srcPrj.FIRST_LAYER));
+		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(ConvertibleProject.FIRST_LAYER),
+				srcPrj.getFileExt(ConvertibleProject.FIRST_LAYER));
 		for (File f : files) {
 			srcPrj.createObject(f.getAbsolutePath()).load();
-			if (!isFileSelected(srcPrj.getObjects(srcPrj.FIRST_LAYER).getLast(), srcPrj.tags)) {
-				srcPrj.getObjects(srcPrj.FIRST_LAYER).removeLast();
+			if (!isFileSelected(srcPrj.getObjects(ConvertibleProject.FIRST_LAYER).getLast(), ConvertibleProject.tags)) {
+				srcPrj.getObjects(ConvertibleProject.FIRST_LAYER).removeLast();
 			}
 		}
 	}

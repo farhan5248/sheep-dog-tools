@@ -11,8 +11,9 @@ import org.farhan.cucumber.Examples;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.ScenarioOutline;
 import org.farhan.cucumber.Step;
-import org.farhan.mbt.core.ConvertToCode;
 import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.ConvertibleProject;
+import org.farhan.mbt.core.MojoGoal;
 import org.farhan.mbt.core.StepWrapper;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
@@ -21,15 +22,14 @@ import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 
-public class ConvertUMLToCucumber extends ConvertToCode {
-
-	private String lastComponent = "InitialComponent";
-
-	private UMLClassWrapper srcObj;
+public class ConvertUMLToCucumber extends MojoGoal {
 
 	private UMLProject srcPrj;
-
+	private CucumberProject tgtPrj;
+	private UMLClassWrapper srcObj;
 	private CucumberFeatureWrapper tgtObj;
+
+	private String lastComponent = "InitialComponent";
 
 	protected void convertAbstractScenarioList() throws Exception {
 		for (Interaction abstractScenario : srcObj.getAbstractScenarioList()) {
@@ -84,12 +84,12 @@ public class ConvertUMLToCucumber extends ConvertToCode {
 		convertAbstractScenarioList();
 	}
 
-	@Override
-	protected String convertFeatureName(String fullName) {
+	private String convertFeatureName(String fullName) {
 		String pathName = fullName;
-		pathName = pathName.replace("pst::" + tgtPrj.FIRST_LAYER, tgtPrj.getDir(tgtPrj.FIRST_LAYER).getAbsolutePath());
+		pathName = pathName.replace("pst::" + ConvertibleProject.FIRST_LAYER,
+				tgtPrj.getDir(ConvertibleProject.FIRST_LAYER).getAbsolutePath());
 		pathName = pathName.replace("::", File.separator);
-		pathName = pathName + tgtPrj.getFileExt(tgtPrj.FIRST_LAYER);
+		pathName = pathName + tgtPrj.getFileExt(ConvertibleProject.FIRST_LAYER);
 		return pathName;
 	}
 
@@ -164,16 +164,16 @@ public class ConvertUMLToCucumber extends ConvertToCode {
 		String objectName = getObjectName(stepName);
 		String objectType = Utilities.upperFirst(StepWrapper.getObjectType(stepName));
 		String componentName = getComponentName(stepName);
-		return tgtPrj.getDir(tgtPrj.SECOND_LAYER) + File.separator + componentName.toLowerCase() + File.separator
-				+ Utilities.upperFirst(componentName) + objectName + objectType + "Steps.java";
+		return tgtPrj.getDir(ConvertibleProject.SECOND_LAYER) + File.separator + componentName.toLowerCase()
+				+ File.separator + Utilities.upperFirst(componentName) + objectName + objectType + "Steps.java";
 	}
 
 	private String getStepObjName(String stepName) {
 		String objectName = getObjectName(stepName);
 		String objectType = Utilities.upperFirst(StepWrapper.getObjectType(stepName));
 		String componentName = getComponentName(stepName);
-		return tgtPrj.getDir(tgtPrj.THIRD_LAYER) + File.separator + componentName.toLowerCase() + File.separator
-				+ objectName + objectType + ".java";
+		return tgtPrj.getDir(ConvertibleProject.THIRD_LAYER) + File.separator + componentName.toLowerCase()
+				+ File.separator + objectName + objectType + ".java";
 	}
 
 	private CucumberJavaWrapper getTgtObj2(Message srcStep) {
@@ -191,14 +191,14 @@ public class ConvertUMLToCucumber extends ConvertToCode {
 	}
 
 	@Override
-	protected void initProjects() throws Exception {
+	public void initProjects() throws Exception {
 
 		srcPrj = new UMLProject();
 		tgtPrj = new CucumberProject();
 	}
 
 	@Override
-	protected void save() throws Exception {
+	public void save() throws Exception {
 		tgtPrj.save();
 	}
 
