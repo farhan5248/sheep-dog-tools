@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
+import org.farhan.mbt.core.Utilities;
 
 public class AsciiDoctorProject extends ConvertibleProject {
 
@@ -52,6 +53,15 @@ public class AsciiDoctorProject extends ConvertibleProject {
 	@Override
 	public String getFileExt(String layer) {
 		return ".adoc";
+	}
+
+	public void load() throws Exception {
+		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(ConvertibleProject.FIRST_LAYER),
+				getFileExt(ConvertibleProject.FIRST_LAYER));
+		getObjects(ConvertibleProject.FIRST_LAYER).clear();
+		for (File f : files) {
+			createObject(f.getAbsolutePath()).load();
+		}
 	}
 
 }

@@ -4,8 +4,15 @@ package org.farhan.mbt.cucumber;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.eclipse.emf.common.util.EList;
+import org.farhan.cucumber.AbstractScenario;
+import org.farhan.cucumber.Feature;
+import org.farhan.cucumber.Scenario;
+import org.farhan.cucumber.ScenarioOutline;
+import org.farhan.cucumber.Tag;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
+import org.farhan.mbt.core.Utilities;
 
 public class CucumberProject extends ConvertibleProject {
 
@@ -124,6 +131,50 @@ public class CucumberProject extends ConvertibleProject {
 			}
 		}
 		return null;
+	}
+
+	public void load() throws Exception {
+		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(ConvertibleProject.FIRST_LAYER),
+				getFileExt(ConvertibleProject.FIRST_LAYER));
+		for (File f : files) {
+			createObject(f.getAbsolutePath()).load();
+			if (!isFileSelected(getObjects(ConvertibleProject.FIRST_LAYER).getLast(), ConvertibleProject.tags)) {
+				getObjects(ConvertibleProject.FIRST_LAYER).removeLast();
+			}
+		}
+	}
+
+	private boolean isFileSelected(ConvertibleObject convertibleFile, String tag) throws Exception {
+
+		CucumberFeatureWrapper ufw = (CucumberFeatureWrapper) convertibleFile;
+		Feature f = (Feature) ufw.get();
+		if (isTagged(f.getTags(), tag)) {
+			return true;
+		}
+		for (AbstractScenario a : f.getAbstractScenarios()) {
+			if (a instanceof Scenario) {
+				if (isTagged(((Scenario) a).getTags(), tag)) {
+					return true;
+				}
+			} else if (a instanceof ScenarioOutline) {
+				if (isTagged(((ScenarioOutline) a).getTags(), tag)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean isTagged(EList<Tag> tags, String tag) {
+		if (tag.isEmpty()) {
+			return true;
+		}
+		for (Tag t : tags) {
+			if (t.getName().trim().contentEquals(tag)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

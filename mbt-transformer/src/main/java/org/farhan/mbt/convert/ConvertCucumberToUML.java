@@ -8,16 +8,11 @@ import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.Examples;
-import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Row;
-import org.farhan.cucumber.Scenario;
-import org.farhan.cucumber.ScenarioOutline;
 import org.farhan.cucumber.Step;
-import org.farhan.cucumber.Tag;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.MojoGoal;
-import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.UMLClassWrapper;
@@ -97,11 +92,12 @@ public class ConvertCucumberToUML extends MojoGoal {
 		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
 		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
 		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario), abstractScenario);
+		tgtObj.addScenarioOutline(scenarioOutline);
+
 		EList<Examples> examplesList = srcObj.getExamplesList(abstractScenario);
 		for (Examples examples : examplesList) {
 			convertExamples(scenarioOutline, examples);
 		}
-		tgtObj.addScenarioOutline(scenarioOutline);
 	}
 
 	private void convertStep(Interaction abstractScenario, Step stepSrc, AbstractScenario abstractScenarioSrc) {
@@ -135,50 +131,9 @@ public class ConvertCucumberToUML extends MojoGoal {
 		tgtPrj = new UMLProject();
 	}
 
-	private boolean isFileSelected(ConvertibleObject convertibleFile, String tag) throws Exception {
-
-		CucumberFeatureWrapper ufw = (CucumberFeatureWrapper) convertibleFile;
-		Feature f = (Feature) ufw.get();
-		if (isTagged(f.getTags(), tag)) {
-			return true;
-		}
-		for (AbstractScenario a : f.getAbstractScenarios()) {
-			if (a instanceof Scenario) {
-				if (isTagged(((Scenario) a).getTags(), tag)) {
-					return true;
-				}
-			} else if (a instanceof ScenarioOutline) {
-				if (isTagged(((ScenarioOutline) a).getTags(), tag)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	private boolean isTagged(EList<Tag> tags, String tag) {
-		if (tag.isEmpty()) {
-			return true;
-		}
-		for (Tag t : tags) {
-			if (t.getName().trim().contentEquals(tag)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	@Override
 	protected void loadFeatures() throws Exception {
-
-		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(ConvertibleProject.FIRST_LAYER),
-				srcPrj.getFileExt(ConvertibleProject.FIRST_LAYER));
-		for (File f : files) {
-			srcPrj.createObject(f.getAbsolutePath()).load();
-			if (!isFileSelected(srcPrj.getObjects(ConvertibleProject.FIRST_LAYER).getLast(), ConvertibleProject.tags)) {
-				srcPrj.getObjects(ConvertibleProject.FIRST_LAYER).removeLast();
-			}
-		}
+		srcPrj.load();
 	}
 
 	@Override

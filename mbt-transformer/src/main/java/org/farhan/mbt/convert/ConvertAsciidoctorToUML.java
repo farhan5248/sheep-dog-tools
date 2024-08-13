@@ -13,7 +13,6 @@ import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.MojoGoal;
-import org.farhan.mbt.core.Utilities;
 
 public class ConvertAsciidoctorToUML extends MojoGoal {
 
@@ -46,7 +45,6 @@ public class ConvertAsciidoctorToUML extends MojoGoal {
 	}
 
 	private void convertExamples(Interaction abstractScenario, Section examplesSrc) {
-
 		EAnnotation examples = tgtObj.createExamples(abstractScenario, srcObj.getExamplesName(examplesSrc));
 		tgtObj.createExamplesTable(examples, srcObj.getExamplesTable(examplesSrc));
 		for (ArrayList<String> examplesRow : srcObj.getExamplesRowList(examplesSrc)) {
@@ -59,26 +57,21 @@ public class ConvertAsciidoctorToUML extends MojoGoal {
 	}
 
 	@Override
-	protected void convertFeature(ConvertibleObject anObject) throws Exception {
-		srcObj = (AsciiDoctorAdocWrapper) anObject;
-		tgtObj = (UMLClassWrapper) tgtPrj.createObject(convertObjectName(srcObj.getFile().getAbsolutePath()));
+	protected void convertFeature(ConvertibleObject theObject) throws Exception {
+		srcObj = (AsciiDoctorAdocWrapper) theObject;
+		tgtObj = (UMLClassWrapper) tgtPrj.createObject(convertFeatureName(srcObj.getFile().getAbsolutePath()));
 		tgtObj.setFeatureName(srcObj.getFeatureName());
 		tgtObj.setFeatureTags(srcObj.getFeatureTags());
 		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
 		convertAbstractScenarioList();
 	}
 
-	protected String convertObjectName(String fileName) {
-		// TODO add the layer parameter to the super class method
-		return convertObjectName(fileName, ConvertibleProject.FIRST_LAYER);
-	}
-
-	private String convertObjectName(String fileName, String layer) {
-		String qualifiedName = fileName.replace(",", "").trim();
-		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(layer), "");
-		qualifiedName = qualifiedName.replace(srcPrj.getDir(layer).getAbsolutePath(), "");
+	protected String convertFeatureName(String fullName) {
+		String qualifiedName = fullName.replace(",", "").trim();
+		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(ConvertibleProject.FIRST_LAYER), "");
+		qualifiedName = qualifiedName.replace(srcPrj.getDir(ConvertibleProject.FIRST_LAYER).getAbsolutePath(), "");
 		qualifiedName = qualifiedName.replace(File.separator, "::");
-		qualifiedName = "pst::" + layer + qualifiedName;
+		qualifiedName = "pst::" + ConvertibleProject.FIRST_LAYER + qualifiedName;
 		return qualifiedName;
 	}
 
@@ -96,20 +89,19 @@ public class ConvertAsciidoctorToUML extends MojoGoal {
 		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
 		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
 		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario));
+		tgtObj.addScenarioOutline(scenarioOutline);
 
 		ArrayList<Section> examplesList = srcObj.getExamplesList(abstractScenario);
 		for (Section examples : examplesList) {
 			convertExamples(scenarioOutline, examples);
 		}
-		tgtObj.addScenarioOutline(scenarioOutline);
 	}
 
 	private void convertStep(Interaction abstractScenario, Section stepSrc) {
 		Message step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
 		if (srcObj.hasDocString(stepSrc)) {
 			convertDocString(step, stepSrc);
-		}
-		if (srcObj.hasStepTable(stepSrc)) {
+		} else if (srcObj.hasStepTable(stepSrc)) {
 			convertStepTable(step, stepSrc);
 		}
 	}
@@ -121,8 +113,7 @@ public class ConvertAsciidoctorToUML extends MojoGoal {
 	}
 
 	private void convertStepTable(Message step, Section stepSrc) {
-		ArrayList<ArrayList<String>> stepTableRowList = srcObj.getStepTable(stepSrc);
-		tgtObj.createStepTable(step, stepTableRowList);
+		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
 	}
 
 	@Override
@@ -138,12 +129,7 @@ public class ConvertAsciidoctorToUML extends MojoGoal {
 
 	@Override
 	protected void loadFeatures() throws Exception {
-		ArrayList<File> files = Utilities.recursivelyListFiles(srcPrj.getDir(ConvertibleProject.FIRST_LAYER),
-				srcPrj.getFileExt(ConvertibleProject.FIRST_LAYER));
-		srcPrj.getObjects(ConvertibleProject.FIRST_LAYER).clear();
-		for (File f : files) {
-			srcPrj.createObject(f.getAbsolutePath()).load();
-		}
+		srcPrj.load();
 	}
 
 	@Override

@@ -35,8 +35,7 @@ public class ConvertUMLToAsciidoctor extends MojoGoal {
 	}
 
 	private void convertBackground(Interaction abstractScenario) {
-		Section background = tgtObj.createBackground();
-		tgtObj.setBackgroundName(background, srcObj.getBackgroundName(abstractScenario));
+		Section background = tgtObj.createBackground(srcObj.getBackgroundName(abstractScenario));
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
 		convertStepList(background, srcObj.getStepList(abstractScenario));
 		tgtObj.addBackground(background);
@@ -48,8 +47,7 @@ public class ConvertUMLToAsciidoctor extends MojoGoal {
 
 	private void convertExamples(Section abstractScenario, EAnnotation examplesSrc) {
 
-		Section examples = tgtObj.createExamples(abstractScenario);
-		tgtObj.setExamplesName(examples, srcObj.getExamplesName(examplesSrc));
+		Section examples = tgtObj.createExamples(abstractScenario, srcObj.getExamplesName(examplesSrc));
 		tgtObj.createExamplesTable(examples, srcObj.getExamplesTable(examplesSrc));
 		for (ArrayList<String> examplesRow : srcObj.getExamplesRowList(examplesSrc)) {
 			convertExamplesRow(examples, examplesRow);
@@ -61,27 +59,27 @@ public class ConvertUMLToAsciidoctor extends MojoGoal {
 	}
 
 	@Override
-	protected void convertFeature(ConvertibleObject anObject) throws Exception {
-		srcObj = (UMLClassWrapper) anObject;
-		tgtObj = (AsciiDoctorAdocWrapper) tgtPrj.createObject(convertObjectName(srcObj.getQualifiedName()));
+	protected void convertFeature(ConvertibleObject theObject) throws Exception {
+		srcObj = (UMLClassWrapper) theObject;
+		tgtObj = (AsciiDoctorAdocWrapper) tgtPrj.createObject(convertFeatureName(srcObj.getQualifiedName()));
 		tgtObj.setFeatureName(srcObj.getFeatureName());
 		tgtObj.setFeatureTags(srcObj.getFeatureTags());
 		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
 		convertAbstractScenarioList();
 	}
 
-	protected String convertObjectName(String fullName) {
+	protected String convertFeatureName(String fullName) {
 		String pathName = fullName;
-		pathName = pathName.replace("pst::" + ConvertibleProject.FIRST_LAYER, tgtPrj.getDir(ConvertibleProject.FIRST_LAYER).getAbsolutePath());
+		pathName = pathName.replace("pst::" + ConvertibleProject.FIRST_LAYER,
+				tgtPrj.getDir(ConvertibleProject.FIRST_LAYER).getAbsolutePath());
 		pathName = pathName.replace("::", File.separator);
 		pathName = pathName + tgtPrj.getFileExt(ConvertibleProject.FIRST_LAYER);
 		return pathName;
 	}
 
 	private void convertScenario(Interaction abstractScenario) {
-		Section scenario = tgtObj.createScenario();
+		Section scenario = tgtObj.createScenario(srcObj.getScenarioName(abstractScenario));
 		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(abstractScenario));
-		tgtObj.setScenarioName(scenario, srcObj.getScenarioName(abstractScenario));
 		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(abstractScenario));
 		convertStepList(scenario, srcObj.getStepList(abstractScenario));
 		tgtObj.addScenario(scenario);
@@ -89,17 +87,16 @@ public class ConvertUMLToAsciidoctor extends MojoGoal {
 
 	private void convertScenarioOutline(Interaction abstractScenario) {
 
-		Section scenarioOutline = tgtObj.createScenarioOutline();
+		Section scenarioOutline = tgtObj.createScenarioOutline(srcObj.getScenarioOutlineName(abstractScenario));
 		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
-		tgtObj.setScenarioOutlineName(scenarioOutline, srcObj.getScenarioOutlineName(abstractScenario));
 		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
 		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario));
+		tgtObj.addScenarioOutline(scenarioOutline);
 
 		ArrayList<EAnnotation> examplesList = srcObj.getExamplesList(abstractScenario);
 		for (EAnnotation examples : examplesList) {
 			convertExamples(scenarioOutline, examples);
 		}
-		tgtObj.addScenarioOutline(scenarioOutline);
 	}
 
 	private void convertStep(Section abstractScenario, Message stepSrc) {

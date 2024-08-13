@@ -130,9 +130,10 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		theDoc.getBlocks().add(scenarioOutline);
 	}
 
-	public Section createBackground() {
+	public Section createBackground(String name) {
 		Section background = jrp.createSection(theDoc);
 		background.getAttributes().put("background", "true");
+		background.setTitle(name);
 		return background;
 	}
 
@@ -168,9 +169,10 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		docString.setSource(content);
 	}
 
-	public Section createExamples(Section scenarioOutline) {
+	public Section createExamples(Section scenarioOutline, String examplesName) {
 		Section examples = jrp.createSection(scenarioOutline);
 		examples.getAttributes().put("examples", "true");
+		examples.setTitle(examplesName);
 		scenarioOutline.getBlocks().add(examples);
 		return examples;
 	}
@@ -208,12 +210,16 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		}
 	}
 
-	public Section createScenario() {
-		return jrp.createSection(theDoc);
+	public Section createScenario(String scenarioName) {
+		Section scenario = jrp.createSection(theDoc);
+		scenario.setTitle(scenarioName);
+		return scenario;
 	}
 
-	public Section createScenarioOutline() {
-		return jrp.createSection(theDoc);
+	public Section createScenarioOutline(String scenarioName) {
+		Section scenario = jrp.createSection(theDoc);
+		scenario.setTitle(scenarioName);
+		return scenario;
 	}
 
 	public Section createStep(Section abstractScenario, String stepName) {

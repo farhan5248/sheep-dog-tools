@@ -48,7 +48,7 @@ public class ConvertUMLToCucumber extends MojoGoal {
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
 		convertStepList(background, srcObj.getStepList(abstractScenario), abstractScenario);
 		tgtObj.addBackground(background);
-	};
+	}
 
 	private void convertDocString(Step step, Message srcStep) {
 		tgtObj.createDocString(step, srcObj.getDocString(srcStep));
@@ -101,11 +101,12 @@ public class ConvertUMLToCucumber extends MojoGoal {
 		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
 		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
 		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario), abstractScenario);
+		tgtObj.addScenarioOutline(scenarioOutline);
+
 		ArrayList<EAnnotation> examplesList = srcObj.getExamplesList(abstractScenario);
 		for (EAnnotation examples : examplesList) {
 			convertExamples(scenarioOutline, examples);
 		}
-		tgtObj.addScenarioOutline(scenarioOutline);
 	}
 
 	private void convertStep(AbstractScenario abstractScenario, Message srcStep) {
@@ -200,7 +201,6 @@ public class ConvertUMLToCucumber extends MojoGoal {
 	@Override
 	protected void loadFeatures() throws Exception {
 		srcPrj.load();
-
 	}
 
 	@Override
