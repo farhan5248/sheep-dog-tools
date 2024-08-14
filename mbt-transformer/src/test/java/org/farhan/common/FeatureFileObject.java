@@ -102,21 +102,16 @@ public class FeatureFileObject extends FileObject {
 
 	private String getRow(Examples examples, String rowName) {
 		rowName = rowName.replaceAll(" +", " ");
-		// TODO make table handling consistent, so use list of list and have one method
-		// return both header and body
-		String hString = "|";
-		for (String h : wrapper.getExamplesTable(examples)) {
-			hString += " " + h + " |";
+		String rString = "|";
+		for (String header : wrapper.getExamplesTable(examples)) {
+			rString += " " + header + " |";
 		}
-		if (hString.contentEquals(rowName)) {
-			// TODO this is a temp hack because the table header and body row types are not
-			// the same, fix that first then return Row.
-			// TODO make methods to test for existence in the main classes
+		if (rString.contentEquals(rowName)) {
 			return rowName;
 		}
-		for (Row r : wrapper.getExamplesRowList(examples)) {
-			String rString = "|";
-			for (Cell c : r.getCells()) {
+		for (Row row : wrapper.getExamplesRowList(examples)) {
+			rString = "|";
+			for (Cell c : row.getCells()) {
 				rString += " " + c.getName() + " |";
 			}
 			if (rString.contentEquals(rowName)) {

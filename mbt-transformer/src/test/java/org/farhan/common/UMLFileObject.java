@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Assertions;
 public abstract class UMLFileObject extends FileObject {
 
 	private UMLProject project;
-	// TODO add wrapper after splitting each Class into its own uml file
 
 	protected void assertClassAnnotationDetailExists(String className, String annotationName, String annotationDetail) {
 		assertClassExists(className);
@@ -173,7 +172,6 @@ public abstract class UMLFileObject extends FileObject {
 	}
 
 	private Class getObject(String className) {
-		// TODO, in the future, the wrapper has the className
 		return (Class) project.getPackagedElement("pst" + "::" + className, null);
 	}
 
