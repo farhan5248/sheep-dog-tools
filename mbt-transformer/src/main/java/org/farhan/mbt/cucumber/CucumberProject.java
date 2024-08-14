@@ -90,7 +90,6 @@ public class CucumberProject extends ConvertibleProject {
 		if (aConvertibleObject != null) {
 			return aConvertibleObject;
 		}
-		// TODO this method should be the only one appending the basedir
 		File file = new File(name);
 		if (file.getAbsolutePath().startsWith(getDir(FIRST_LAYER).getAbsolutePath())) {
 			aConvertibleObject = new CucumberFeatureWrapper(file);

@@ -25,24 +25,14 @@ import org.farhan.mbt.core.Utilities;
 public class UMLProject extends ConvertibleProject {
 
 	private ArrayList<ConvertibleObject> firstLayerObjects;
-	private ArrayList<ConvertibleObject> secondLayerObjects;
-	private ArrayList<ConvertibleObject> thirdLayerObjects;
-	private ArrayList<ConvertibleObject> fourthLayerObjects;
 
 	private Model theSystem;
 
 	public UMLProject() {
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
-		secondLayerObjects = new ArrayList<ConvertibleObject>();
-		thirdLayerObjects = new ArrayList<ConvertibleObject>();
-		fourthLayerObjects = new ArrayList<ConvertibleObject>();
-
-		// TODO move this to writeFiles after maintaining the classes in the lists above
 		theSystem = UMLFactory.eINSTANCE.createModel();
 		theSystem.setName("pst");
 		theSystem.createNestedPackage(FIRST_LAYER);
-		theSystem.createNestedPackage(SECOND_LAYER);
-		theSystem.createNestedPackage(THIRD_LAYER);
 	}
 
 	@Override
@@ -65,8 +55,6 @@ public class UMLProject extends ConvertibleProject {
 		for (EObject e : resource.getContents()) {
 			theSystem = (Model) e;
 		}
-		// TODO in the future the code above will be in the wrapper and the code below
-		// will be in the ConvertUMLTo class
 		ArrayList<Class> objects = getPackagedClasses(theSystem.getNestedPackage(FIRST_LAYER));
 		for (Class c : objects) {
 			try {
@@ -111,40 +99,17 @@ public class UMLProject extends ConvertibleProject {
 
 	@Override
 	public ArrayList<ConvertibleObject> getObjects(String layer) {
-		ArrayList<ConvertibleObject> layerObjects = null;
-		switch (layer) {
-		case FIRST_LAYER:
-			layerObjects = firstLayerObjects;
-			break;
-		case SECOND_LAYER:
-			layerObjects = secondLayerObjects;
-			break;
-		case THIRD_LAYER:
-			layerObjects = thirdLayerObjects;
-			break;
-		}
-		return layerObjects;
+		return firstLayerObjects;
 	}
 
 	@Override
 	public ConvertibleObject createObject(String name) {
-
-		// TODO in the future convert qualified name to path when each class is stored
-		// individually
 		Class theClass = (Class) getPackagedElement(name, null);
 		if (theClass == null) {
 			theClass = addClassWithPackages(name);
 		}
 		UMLClassWrapper ucw = new UMLClassWrapper(this, theClass);
-		if (name.contains("::" + FIRST_LAYER + "::")) {
-			firstLayerObjects.add(ucw);
-		} else if (name.contains("::" + SECOND_LAYER + "::")) {
-			secondLayerObjects.add(ucw);
-		} else if (name.contains("::" + THIRD_LAYER + "::")) {
-			thirdLayerObjects.add(ucw);
-		} else {
-			fourthLayerObjects.add(ucw);
-		}
+		firstLayerObjects.add(ucw);
 		return ucw;
 	}
 
