@@ -8,6 +8,11 @@ import org.farhan.objects.mbttransformer.ProcessAdocFile;
 public class ProcessAdocFileImpl extends AdocFileObject implements ProcessAdocFile {
 
 	@Override
+	public void assertBackgroundSectionDescription(HashMap<String, String> keyMap) {
+		assertAbstractScenarioDescription(keyMap.get("Name"), keyMap.get("Description"));
+	}
+
+	@Override
 	public void assertBackgroundSectionName(HashMap<String, String> keyMap) {
 		assertAbstractScenarioExists(keyMap.get("Name"));
 	}
@@ -20,6 +25,11 @@ public class ProcessAdocFileImpl extends AdocFileObject implements ProcessAdocFi
 	@Override
 	public void assertBackgroundStepsSectionStep(HashMap<String, String> keyMap) {
 		assertStepExists(keyMap.get("Name"), keyMap.get("Step"));
+	}
+
+	@Override
+	public void assertContent(HashMap<String, String> keyMap) {
+		assertContent(keyMap.get("Content"));
 	}
 
 	@Override

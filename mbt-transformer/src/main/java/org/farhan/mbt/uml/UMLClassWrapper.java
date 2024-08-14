@@ -156,7 +156,7 @@ public class UMLClassWrapper implements ConvertibleObject {
 			row = "";
 			ArrayList<String> bodyRow = stepTableRowList.get(i);
 			for (int j = 0; j < bodyRow.size(); j++) {
-				row += stepTableRowList.get(i).get(j) + " |";
+				row += stepTableRowList.get(i).get(j).replace("{", "<").replace("}", ">") + " |";
 			}
 			createAnnotation(table, "dataTable", String.valueOf(i), row);
 		}

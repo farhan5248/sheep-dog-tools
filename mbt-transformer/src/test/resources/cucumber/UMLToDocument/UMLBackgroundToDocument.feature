@@ -18,9 +18,9 @@ Feature: UML Background To Document
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-#      And The mbt-transformer plugin, Process.adoc file, Background  section will be as follows
-#          |  Name | Description |
-#          | Setup | Desc line 1 |
+      And The mbt-transformer plugin, Process.adoc file, Background section will be as follows
+          |  Name | Description |
+          | Setup | Desc line 1 |
       And The mbt-transformer plugin, Process.adoc file, Background Steps section will be as follows
           |  Name |                            Step |
           | Setup | Given The Object0 page is valid |

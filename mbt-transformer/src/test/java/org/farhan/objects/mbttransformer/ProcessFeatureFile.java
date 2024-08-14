@@ -18,6 +18,8 @@ public interface ProcessFeatureFile {
 
     public void assertBackgroundStepsSectionStep(HashMap<String, String> keyMap);
 
+    public void assertContent(HashMap<String, String> keyMap);
+
     public void assertFeatureSectionName(HashMap<String, String> keyMap);
 
     public void assertFeatureSectionTags(HashMap<String, String> keyMap);

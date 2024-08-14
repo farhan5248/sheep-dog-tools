@@ -126,7 +126,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 			table.getBody().add(row);
 			for (int j = 0; j < bodyRow.size(); j++) {
 				Column column = table.getColumns().get(j);
-				Cell cell = jrp.createTableCell(column, bodyRow.get(j));
+				Cell cell = jrp.createTableCell(column, bodyRow.get(j).replace("<", "{").replace(">", "}"));
 				row.getCells().add(cell);
 			}
 		}

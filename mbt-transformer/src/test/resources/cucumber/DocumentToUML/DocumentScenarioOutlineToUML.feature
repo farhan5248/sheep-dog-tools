@@ -31,7 +31,7 @@ Feature: Document Scenario Outline To UML
       And The target/uml/pst.uml file, Interaction Messages section will be as follows
           |       Interaction Name |                       Message | Argument Name | Annotation Detail |
           | specs::Process::Submit | The Object page is as follows |     dataTable |        0 -> h1 \| |
-          | specs::Process::Submit | The Object page is as follows |     dataTable |      1 -> {h3} \| |
+          | specs::Process::Submit | The Object page is as follows |     dataTable |      1 -> <h3> \| |
       And The target/uml/pst.uml file, Interaction Annotations section will be as follows
           |       Interaction Name | Annotation Name | Annotation Detail |
           | specs::Process::Submit |      Examples 1 |         0 -> h3\| |

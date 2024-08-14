@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 public interface BlahObjectPageStepsJavaFile {
 
+    public void assertContent(HashMap<String, String> keyMap);
+
     public void assertFieldsSectionAnnotation(HashMap<String, String> keyMap);
 
     public void assertFieldsSectionMethodName(HashMap<String, String> keyMap);

@@ -4,11 +4,15 @@ import java.util.HashMap;
 
 public interface ProcessAdocFile {
 
+    public void assertBackgroundSectionDescription(HashMap<String, String> keyMap);
+
     public void assertBackgroundSectionName(HashMap<String, String> keyMap);
 
     public void assertBackgroundStepsSectionName(HashMap<String, String> keyMap);
 
     public void assertBackgroundStepsSectionStep(HashMap<String, String> keyMap);
+
+    public void assertContent(HashMap<String, String> keyMap);
 
     public void assertFeatureSectionName(HashMap<String, String> keyMap);
 
