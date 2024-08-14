@@ -245,15 +245,11 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return theClass.getEAnnotations().getFirst().getDetails().get(0).getKey();
 	}
 
-	public String getFeatureTags() {
-		String tags = "";
+	public ArrayList<String> getFeatureTags() {
+		ArrayList<String> tags = new ArrayList<String>();
 		if (theClass.getEAnnotations().size() == 2) {
 			for (Entry<String, String> t : theClass.getEAnnotations().getLast().getDetails()) {
-				if (tags.isEmpty()) {
-					tags = t.getKey();
-				} else {
-					tags += "," + t.getKey();
-				}
+				tags.add(t.getKey());
 			}
 		}
 		return tags;
@@ -290,11 +286,11 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return abstractScenario.getName();
 	}
 
-	public String getScenarioOutlineTags(Interaction abstractScenario) {
+	public ArrayList<String> getScenarioOutlineTags(Interaction abstractScenario) {
 		return getTags(abstractScenario);
 	}
 
-	public String getScenarioTags(Interaction abstractScenario) {
+	public ArrayList<String> getScenarioTags(Interaction abstractScenario) {
 		return getTags(abstractScenario);
 	}
 
@@ -330,14 +326,14 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return table;
 	}
 
-	private String getTags(Interaction abstractScenario) {
-		String tags = "";
+	private ArrayList<String> getTags(Interaction abstractScenario) {
+		ArrayList<String> tags = new ArrayList<String>();
 		if (abstractScenario.getEAnnotation("tags") != null) {
 			for (Entry<String, String> t : abstractScenario.getEAnnotation("tags").getDetails()) {
-				tags += "," + t.getKey();
+				tags.add(t.getKey());
 			}
 		}
-		return tags.replaceFirst(",", "");
+		return tags;
 	}
 
 	public boolean hasDocString(Message step) {

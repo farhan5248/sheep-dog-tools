@@ -492,9 +492,9 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		theDoc.setTitle(featureName);
 	}
 
-	public void setFeatureTags(String featureTags) {
+	public void setFeatureTags(ArrayList<String> featureTags) {
 		if (!featureTags.isEmpty()) {
-			theDoc.getAttributes().put("tags", featureTags);
+			theDoc.getAttributes().put("tags", Utilities.listAsCsv(featureTags));
 		}
 	}
 
@@ -519,15 +519,15 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		scenarioOutline.setTitle(scenarioOutlineName);
 	}
 
-	public void setScenarioOutlineTags(Section scenarioOutline, String scenarioOutlineTags) {
+	public void setScenarioOutlineTags(Section scenarioOutline, ArrayList<String> scenarioOutlineTags) {
 		if (!scenarioOutlineTags.isEmpty()) {
-			scenarioOutline.getAttributes().put("tags", scenarioOutlineTags);
+			scenarioOutline.getAttributes().put("tags", Utilities.listAsCsv(scenarioOutlineTags));
 		}
 	}
 
-	public void setScenarioTags(Section scenario, String scenarioTags) {
+	public void setScenarioTags(Section scenario, ArrayList<String> scenarioTags) {
 		if (!scenarioTags.isEmpty()) {
-			scenario.getAttributes().put("tags", scenarioTags);
+			scenario.getAttributes().put("tags", Utilities.listAsCsv(scenarioTags));
 		}
 	}
 }

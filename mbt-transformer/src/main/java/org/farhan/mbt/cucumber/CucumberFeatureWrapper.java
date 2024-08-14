@@ -58,7 +58,6 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		step.setTheDocString(CucumberFactory.eINSTANCE.createDocString());
 		for (String l : docString.split("\n")) {
 			Line line = CucumberFactory.eINSTANCE.createLine();
-			// TODO I think I fixed this, test it later
 			// I'm not sure why only 9 leading spaces are needed instead of 10 and why a
 			// trailing space gets added automatically
 			line.setName("         " + l);
@@ -85,9 +84,6 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 
 	public void createExamplesTable(Examples examples, ArrayList<String> headers) {
 		examples.setTheExamplesTable(CucumberFactory.eINSTANCE.createExamplesTable());
-		// TODO I think an empty table can be created but the headers shouldn't be added
-		// because there's no Xtext language element for Header vs Body like there is
-		// for adoc files.
 		Row row = CucumberFactory.eINSTANCE.createRow();
 		for (String srcCell : headers) {
 			Cell cell = CucumberFactory.eINSTANCE.createCell();
@@ -367,7 +363,7 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		theFeature.setName(featureName);
 	}
 
-	public void setFeatureTags(String featureTags) {
+	public void setFeatureTags(ArrayList<String> featureTags) {
 		setTags(theFeature.getTags(), featureTags);
 	}
 
@@ -384,19 +380,17 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		setDescription(scenarioOutline, scenarioOutlineDescription);
 	}
 
-	public void setScenarioOutlineTags(ScenarioOutline scenarioOutline, String scenarioOutlineTags) {
+	public void setScenarioOutlineTags(ScenarioOutline scenarioOutline, ArrayList<String> scenarioOutlineTags) {
 		setTags(scenarioOutline.getTags(), scenarioOutlineTags);
 	}
 
-	public void setScenarioTags(Scenario scenario, String scenarioTags) {
+	public void setScenarioTags(Scenario scenario, ArrayList<String> scenarioTags) {
 		setTags(scenario.getTags(), scenarioTags);
 	}
 
-	private void setTags(EList<Tag> tagList, String tags) {
-		// TODO this if statement is not needed if a list is passed in rather than a
-		// string
+	private void setTags(EList<Tag> tagList, ArrayList<String> tags) {
 		if (!tags.isEmpty()) {
-			for (String t : tags.split(",")) {
+			for (String t : tags) {
 				Tag tag = CucumberFactory.eINSTANCE.createTag();
 				tag.setName(t);
 				tagList.add(tag);
