@@ -319,12 +319,15 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void load() {
-		URI uri = URI.createFileURI(theFile.getAbsolutePath());
-		CucumberStandaloneSetup.doSetup();
-		Resource res = new ResourceSetImpl().getResource(uri, true);
-		theFeature = (Feature) res.getContents().get(0);
-		// TODO validate it using the xtext api and throw the exception if it's invalid
+	public void load() throws Exception {
+		try {
+			URI uri = URI.createFileURI(theFile.getAbsolutePath());
+			CucumberStandaloneSetup.doSetup();
+			Resource res = new ResourceSetImpl().getResource(uri, true);
+			theFeature = (Feature) res.getContents().get(0);
+		} catch (Exception e) {
+			throw new Exception("There was a problem loading file: " + theFile.getAbsolutePath());
+		}
 	}
 
 	@Override

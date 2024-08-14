@@ -43,14 +43,14 @@ public class ConvertUMLToCucumber extends MojoGoal {
 		}
 	}
 
-	private void convertBackground(Interaction abstractScenario) {
+	private void convertBackground(Interaction abstractScenario) throws Exception {
 		Background background = tgtObj.createBackground(srcObj.getBackgroundName(abstractScenario));
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
 		convertStepList(background, srcObj.getStepList(abstractScenario), abstractScenario);
 		tgtObj.addBackground(background);
 	}
 
-	private void convertDocString(Step step, Message srcStep) {
+	private void convertDocString(Step step, Message srcStep) throws Exception {
 		tgtObj.createDocString(step, srcObj.getDocString(srcStep));
 		getTgtObj2(srcStep).createDocString(srcObj.getStep(srcStep));
 		getTgtObj3(srcStep).createDocString(srcObj.getStep(srcStep));
@@ -87,7 +87,7 @@ public class ConvertUMLToCucumber extends MojoGoal {
 		return pathName;
 	}
 
-	private void convertScenario(Interaction srcScenario) {
+	private void convertScenario(Interaction srcScenario) throws Exception {
 		Scenario scenario = tgtObj.createScenario(srcObj.getScenarioName(srcScenario));
 		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(srcScenario));
 		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(srcScenario));
@@ -95,7 +95,7 @@ public class ConvertUMLToCucumber extends MojoGoal {
 		tgtObj.addScenario(scenario);
 	}
 
-	private void convertScenarioOutline(Interaction abstractScenario) {
+	private void convertScenarioOutline(Interaction abstractScenario) throws Exception {
 
 		ScenarioOutline scenarioOutline = tgtObj.createScenarioOutline(srcObj.getScenarioOutlineName(abstractScenario));
 		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
@@ -109,7 +109,7 @@ public class ConvertUMLToCucumber extends MojoGoal {
 		}
 	}
 
-	private void convertStep(AbstractScenario abstractScenario, Message srcStep) {
+	private void convertStep(AbstractScenario abstractScenario, Message srcStep) throws Exception {
 		Step tgtStep = tgtObj.createStep(abstractScenario, srcObj.getStep(srcStep));
 		getTgtObj2(srcStep).createStep(srcObj.getStep(srcStep));
 		getTgtObj3(srcStep).createStep(srcObj.getStep(srcStep));
@@ -121,13 +121,13 @@ public class ConvertUMLToCucumber extends MojoGoal {
 	}
 
 	private void convertStepList(AbstractScenario abstractScenario, ArrayList<Message> stepList,
-			Interaction srcScenario) {
+			Interaction srcScenario) throws Exception {
 		for (Message step : stepList) {
 			convertStep(abstractScenario, step);
 		}
 	}
 
-	private void convertStepTable(Step step, Message srcStep) {
+	private void convertStepTable(Step step, Message srcStep) throws Exception {
 		tgtObj.createStepTable(step, srcObj.getStepTable(srcStep));
 		getTgtObj2(srcStep).createStepTable(srcObj.getStep(srcStep), srcObj.getStepTable(srcStep));
 		getTgtObj3(srcStep).createStepTable(srcObj.getStep(srcStep), srcObj.getStepTable(srcStep));
@@ -177,14 +177,14 @@ public class ConvertUMLToCucumber extends MojoGoal {
 				+ File.separator + objectName + objectType + ".java";
 	}
 
-	private CucumberJavaWrapper getTgtObj2(Message srcStep) {
+	private CucumberJavaWrapper getTgtObj2(Message srcStep) throws Exception {
 		CucumberJavaWrapper tgtStepDefObj = (CucumberJavaWrapper) tgtPrj
 				.createObject(getStepDefName(srcObj.getStep(srcStep)));
 		tgtStepDefObj.load();
 		return tgtStepDefObj;
 	}
 
-	private CucumberJavaWrapper getTgtObj3(Message srcStep) {
+	private CucumberJavaWrapper getTgtObj3(Message srcStep) throws Exception {
 		CucumberJavaWrapper tgtStepDefObj = (CucumberJavaWrapper) tgtPrj
 				.createObject(getStepObjName(srcObj.getStep(srcStep)));
 		tgtStepDefObj.load();

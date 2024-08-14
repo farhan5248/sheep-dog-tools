@@ -383,12 +383,12 @@ public class UMLClassWrapper implements ConvertibleObject {
 
 	@Override
 	public void load() throws Exception {
-		// TODO does nothing for now until there is a uml file for each class
+		// Individual objects are not stored separately so this is not needed.
 	}
 
 	@Override
 	public void save() throws Exception {
-		// TODO This will be implemented once I put each UML class in its own .uml file
+		// Individual objects are not stored separately so this is not needed.
 	}
 
 	public void setBackgroundDescription(Interaction background, String backgroundDescription) {

@@ -78,10 +78,15 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void load() {
-		if (theFile.exists() && getType().getMethods().isEmpty()) {
-			SourceRoot javaSrcDir = new SourceRoot(theFile.getParentFile().toPath());
-			theJavaClass = javaSrcDir.parse("", theFile.getName());
+	public void load() throws Exception {
+		try {
+			// TODO why would this be called for a non existing file?
+			if (theFile.exists() && getType().getMethods().isEmpty()) {
+				SourceRoot javaSrcDir = new SourceRoot(theFile.getParentFile().toPath());
+				theJavaClass = javaSrcDir.parse("", theFile.getName());
+			}
+		} catch (Exception e) {
+			throw new Exception("There was a problem loading file: " + theFile.getAbsolutePath());
 		}
 	}
 

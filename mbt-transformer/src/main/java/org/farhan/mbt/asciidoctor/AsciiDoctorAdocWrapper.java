@@ -458,9 +458,13 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void load() {
-		if (theFile.exists()) {
-			theDoc = Factory.create().loadFile(theFile, Options.builder().build());
+	public void load() throws Exception {
+		try {
+			if (theFile.exists()) {
+				theDoc = Factory.create().loadFile(theFile, Options.builder().build());
+			}
+		} catch (Exception e) {
+			throw new Exception("There was a problem loading file: " + theFile.getAbsolutePath());
 		}
 	}
 
