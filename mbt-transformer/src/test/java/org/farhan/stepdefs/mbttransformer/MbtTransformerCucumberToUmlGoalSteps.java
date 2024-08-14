@@ -20,4 +20,11 @@ public class MbtTransformerCucumberToUmlGoalSteps {
         MbtTransformerFactory.get("CucumberToUmlGoal").setPath("cucumber-to-uml");
         MbtTransformerFactory.get("CucumberToUmlGoal").transition();
     }
+
+    @Given("^The cucumber-to-uml goal is executed$")
+    public void theCucumberToUmlGoalIsExecuted() {
+        MbtTransformerFactory.get("CucumberToUmlGoal").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("CucumberToUmlGoal").setPath("cucumber-to-uml");
+        MbtTransformerFactory.get("CucumberToUmlGoal").transition();
+    }
 }

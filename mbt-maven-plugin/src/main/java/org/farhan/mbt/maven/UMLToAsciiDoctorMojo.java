@@ -34,13 +34,12 @@ public class UMLToAsciiDoctorMojo extends AbstractMojo {
 
 	public void execute() throws MojoExecutionException {
 		try {
+			getLog().info("Converting tests with this tag: " + tag);
 			if (project != null) {
-				getLog().info("Converting tests with this tag: " + tag);
-				ConvertibleProject.tags = tag;
 				ConvertibleProject.baseDir = project.getBasedir().getAbsolutePath() + File.separator;
 			}
 			MojoGoal mojo = new ConvertUMLToAsciidoctor();
-			mojo.mojoGoal();
+			mojo.mojoGoal(tag);
 		} catch (Exception e) {
 			getLog().error(Utilities.getStackTraceAsString(e));
 			throw new MojoExecutionException(e);

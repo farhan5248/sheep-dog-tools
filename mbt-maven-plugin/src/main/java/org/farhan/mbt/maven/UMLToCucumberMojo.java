@@ -8,7 +8,6 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
-import org.apache.maven.settings.Settings;
 import org.farhan.mbt.convert.ConvertUMLToCucumber;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.MojoGoal;
@@ -36,13 +35,12 @@ public class UMLToCucumberMojo extends AbstractMojo {
 
 	public void execute() throws MojoExecutionException {
 		try {
+			getLog().info("Converting tests with this tag: " + tag);
 			if (project != null) {
-				getLog().info("Converting tests with this tag: " + tag);
-				ConvertibleProject.tags = tag;
 				ConvertibleProject.baseDir = project.getBasedir().getAbsolutePath() + File.separator;
 			}
 			MojoGoal mojo = new ConvertUMLToCucumber();
-			mojo.mojoGoal();
+			mojo.mojoGoal(tag);
 		} catch (Exception e) {
 			getLog().error(Utilities.getStackTraceAsString(e));
 			throw new MojoExecutionException(e);

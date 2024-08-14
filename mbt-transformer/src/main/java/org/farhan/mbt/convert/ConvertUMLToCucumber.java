@@ -123,8 +123,9 @@ public class ConvertUMLToCucumber extends MojoGoal {
 		if (name.isEmpty()) {
 			name = lastComponent;
 		} else {
-			name = name.replaceAll("\\-", "");
-			name = name.replaceAll(" ", "");
+			name = Utilities.removeDelimiterAndCapitalize(name, "\\.");
+			name = Utilities.removeDelimiterAndCapitalize(name, "\\-");
+			name = Utilities.removeDelimiterAndCapitalize(name, " ");
 			lastComponent = name;
 		}
 		return name;
