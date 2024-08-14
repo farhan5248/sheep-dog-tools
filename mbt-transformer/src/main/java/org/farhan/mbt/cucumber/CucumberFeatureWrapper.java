@@ -39,18 +39,6 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		theFeature.setName(theFile.getName().replace(".feature", ""));
 	}
 
-	public void addBackground(Background background) {
-		theFeature.getAbstractScenarios().add(background);
-	}
-
-	public void addScenario(Scenario scenario) {
-		theFeature.getAbstractScenarios().add(scenario);
-	}
-
-	public void addScenarioOutline(ScenarioOutline scenarioOutline) {
-		theFeature.getAbstractScenarios().add(scenarioOutline);
-	}
-
 	private String convertStatementsToString(EList<Statement> eList) {
 		String contents = "";
 		for (Statement s : eList) {
@@ -62,20 +50,8 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 	public Background createBackground(String backgroundName) {
 		Background background = CucumberFactory.eINSTANCE.createBackground();
 		background.setName(backgroundName);
+		theFeature.getAbstractScenarios().add(background);
 		return background;
-	}
-
-	public void createStepTable(Step step, ArrayList<ArrayList<String>> stepTableRowList) {
-		step.setTheStepTable(CucumberFactory.eINSTANCE.createStepTable());
-		for (ArrayList<String> srcRow : stepTableRowList) {
-			Row row = CucumberFactory.eINSTANCE.createRow();
-			for (String srcCell : srcRow) {
-				Cell cell = CucumberFactory.eINSTANCE.createCell();
-				cell.setName(srcCell);
-				row.getCells().add(cell);
-			}
-			step.getTheStepTable().getRows().add(row);
-		}
 	}
 
 	public void createDocString(Step step, String docString) {
@@ -124,12 +100,14 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 	public Scenario createScenario(String scenarioName) {
 		Scenario scenario = CucumberFactory.eINSTANCE.createScenario();
 		scenario.setName(scenarioName);
+		theFeature.getAbstractScenarios().add(scenario);
 		return scenario;
 	}
 
 	public ScenarioOutline createScenarioOutline(String scenarioOutlineName) {
 		ScenarioOutline scenarioOutline = CucumberFactory.eINSTANCE.createScenarioOutline();
 		scenarioOutline.setName(scenarioOutlineName);
+		theFeature.getAbstractScenarios().add(scenarioOutline);
 		return scenarioOutline;
 	}
 
@@ -161,6 +139,19 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		return step;
 	}
 
+	public void createStepTable(Step step, ArrayList<ArrayList<String>> stepTableRowList) {
+		step.setTheStepTable(CucumberFactory.eINSTANCE.createStepTable());
+		for (ArrayList<String> srcRow : stepTableRowList) {
+			Row row = CucumberFactory.eINSTANCE.createRow();
+			for (String srcCell : srcRow) {
+				Cell cell = CucumberFactory.eINSTANCE.createCell();
+				cell.setName(srcCell);
+				row.getCells().add(cell);
+			}
+			step.getTheStepTable().getRows().add(row);
+		}
+	}
+
 	@Override
 	public Object get() {
 		return theFeature;
@@ -176,19 +167,6 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 
 	public String getBackgroundName(AbstractScenario abstractScenario) {
 		return abstractScenario.getName();
-	}
-
-	public ArrayList<ArrayList<String>> getStepTable(Step stepSrc) {
-		ArrayList<ArrayList<String>> stepTableRowList = new ArrayList<ArrayList<String>>();
-		ArrayList<String> row;
-		for (Row r : stepSrc.getTheStepTable().getRows()) {
-			row = new ArrayList<String>();
-			for (Cell c : r.getCells()) {
-				row.add(c.getName());
-			}
-			stepTableRowList.add(row);
-		}
-		return stepTableRowList;
 	}
 
 	public String getDocString(Step stepSrc) {
@@ -245,13 +223,17 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		return theFeature.getName();
 	}
 
-	public String getFeatureTags() {
+	public ArrayList<String> getFeatureTags() {
 		return getTags(theFeature.getTags());
 	}
 
 	@Override
 	public File getFile() {
 		return theFile;
+	}
+
+	public String getFileName() {
+		return theFile.getAbsolutePath();
 	}
 
 	public String getScenarioDescription(AbstractScenario abstractScenario) {
@@ -270,12 +252,12 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		return abstractScenario.getName();
 	}
 
-	public String getScenarioOutlineTags(AbstractScenario abstractScenario) {
+	public ArrayList<String> getScenarioOutlineTags(AbstractScenario abstractScenario) {
 		ScenarioOutline scenarioOutline = (ScenarioOutline) abstractScenario;
 		return getTags(scenarioOutline.getTags());
 	}
 
-	public String getScenarioTags(AbstractScenario abstractScenario) {
+	public ArrayList<String> getScenarioTags(AbstractScenario abstractScenario) {
 		Scenario scenario = (Scenario) abstractScenario;
 		return getTags(scenario.getTags());
 	}
@@ -294,20 +276,33 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		return abstractScenario.getSteps();
 	}
 
-	private String getTags(EList<Tag> tagList) {
-		String tags = "";
-		for (Tag t : tagList) {
-			tags += "," + t.getName().replace("@", "");
+	public ArrayList<ArrayList<String>> getStepTable(Step stepSrc) {
+		ArrayList<ArrayList<String>> stepTableRowList = new ArrayList<ArrayList<String>>();
+		ArrayList<String> row;
+		for (Row r : stepSrc.getTheStepTable().getRows()) {
+			row = new ArrayList<String>();
+			for (Cell c : r.getCells()) {
+				row.add(c.getName());
+			}
+			stepTableRowList.add(row);
 		}
-		return tags.replaceFirst(",", "");
+		return stepTableRowList;
 	}
 
-	public boolean hasStepTable(Step step) {
-		return step.getTheStepTable() != null;
+	private ArrayList<String> getTags(EList<Tag> tagList) {
+		ArrayList<String> tags = new ArrayList<String>();
+		for (Tag t : tagList) {
+			tags.add(t.getName().replace("@", ""));
+		}
+		return tags;
 	}
 
 	public boolean hasDocString(Step step) {
 		return step.getTheDocString() != null;
+	}
+
+	public boolean hasStepTable(Step step) {
+		return step.getTheStepTable() != null;
 	}
 
 	public boolean isBackground(AbstractScenario abstractScenario) {
@@ -408,5 +403,4 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 			}
 		}
 	}
-
 }

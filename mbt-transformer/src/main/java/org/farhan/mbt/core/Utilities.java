@@ -91,4 +91,12 @@ public class Utilities {
 		}
 		return text;
 	}
+
+	public static Object listAsCsv(ArrayList<String> list) {
+		String csv = "";
+		for (String listItem : list) {
+			csv += "," + listItem;
+		}
+		return csv.replaceFirst(",", "");
+	}
 }

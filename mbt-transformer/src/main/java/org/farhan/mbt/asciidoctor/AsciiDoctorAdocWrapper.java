@@ -2,6 +2,8 @@ package org.farhan.mbt.asciidoctor;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.asciidoctor.Options;
 import org.asciidoctor.Asciidoctor.Factory;
 import org.asciidoctor.ast.Block;
@@ -28,22 +30,11 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		jrp = new JRubyProcessor();
 	}
 
-	public void addBackground(Section background) {
-		theDoc.getBlocks().add(background);
-	}
-
-	public void addScenario(Section scenario) {
-		theDoc.getBlocks().add(scenario);
-	}
-
-	public void addScenarioOutline(Section scenarioOutline) {
-		theDoc.getBlocks().add(scenarioOutline);
-	}
-
 	public Section createBackground(String name) {
 		Section background = jrp.createSection(theDoc);
 		background.getAttributes().put("background", "true");
 		background.setTitle(name);
+		theDoc.getBlocks().add(background);
 		return background;
 	}
 
@@ -97,13 +88,15 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	public Section createScenario(String scenarioName) {
 		Section scenario = jrp.createSection(theDoc);
 		scenario.setTitle(scenarioName);
+		theDoc.getBlocks().add(scenario);
 		return scenario;
 	}
 
 	public Section createScenarioOutline(String scenarioName) {
-		Section scenario = jrp.createSection(theDoc);
-		scenario.setTitle(scenarioName);
-		return scenario;
+		Section scenarioOutline = jrp.createSection(theDoc);
+		scenarioOutline.setTitle(scenarioName);
+		theDoc.getBlocks().add(scenarioOutline);
+		return scenarioOutline;
 	}
 
 	public Section createStep(Section abstractScenario, String stepName) {
@@ -261,13 +254,13 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return abstractScenario.getTitle();
 	}
 
-	public String getAbstractScenarioTags(StructuralNode testCaseOrTestSuite) {
+	public ArrayList<String> getAbstractScenarioTags(StructuralNode testCaseOrTestSuite) {
+		ArrayList<String> tagList = new ArrayList<String>();
 		String tags = (String) testCaseOrTestSuite.getAttributes().get("tags");
-		if (tags == null) {
-			return "";
-		} else {
-			return tags;
+		if (tags != null) {
+			tagList.addAll(Arrays.asList(tags.split(",")));
 		}
+		return tagList;
 	}
 
 	public String getBackgroundDescription(Section background) {
@@ -350,13 +343,17 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return theDoc.getTitle();
 	}
 
-	public String getFeatureTags() {
+	public ArrayList<String> getFeatureTags() {
 		return getAbstractScenarioTags(theDoc);
 	}
 
 	@Override
 	public File getFile() {
 		return theFile;
+	}
+
+	public String getFileName() {
+		return theFile.getAbsolutePath();
 	}
 
 	public String getScenarioDescription(Section scenario) {
@@ -375,11 +372,11 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return getAbstractScenarioName(scenarioOutline);
 	}
 
-	public String getScenarioOutlineTags(Section abstractScenario) {
+	public ArrayList<String> getScenarioOutlineTags(Section abstractScenario) {
 		return getAbstractScenarioTags(abstractScenario);
 	}
 
-	public String getScenarioTags(Section scenario) {
+	public ArrayList<String> getScenarioTags(Section scenario) {
 		return getAbstractScenarioTags(scenario);
 	}
 
@@ -533,5 +530,4 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 			scenario.getAttributes().put("tags", scenarioTags);
 		}
 	}
-
 }

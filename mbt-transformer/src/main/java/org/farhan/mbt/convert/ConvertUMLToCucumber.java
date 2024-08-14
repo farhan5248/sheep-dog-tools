@@ -26,10 +26,7 @@ public class ConvertUMLToCucumber extends MojoGoal {
 
 	private String lastComponent = "InitialComponent";
 	private UMLClassWrapper srcObj;
-	private UMLProject srcPrj;
 	private CucumberFeatureWrapper tgtObj;
-
-	private CucumberProject tgtPrj;
 
 	protected void convertAbstractScenarioList() throws Exception {
 		for (Interaction abstractScenario : srcObj.getAbstractScenarioList()) {
@@ -47,7 +44,6 @@ public class ConvertUMLToCucumber extends MojoGoal {
 		Background background = tgtObj.createBackground(srcObj.getBackgroundName(abstractScenario));
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
 		convertStepList(background, srcObj.getStepList(abstractScenario), abstractScenario);
-		tgtObj.addBackground(background);
 	}
 
 	private void convertDocString(Step step, Message srcStep) throws Exception {
@@ -71,20 +67,11 @@ public class ConvertUMLToCucumber extends MojoGoal {
 	@Override
 	protected void convertFeature(ConvertibleObject theObject) throws Exception {
 		srcObj = (UMLClassWrapper) theObject;
-		tgtObj = (CucumberFeatureWrapper) tgtPrj.createObject(convertFeatureName(srcObj.getQualifiedName()));
+		tgtObj = (CucumberFeatureWrapper) tgtPrj.createObject(convertQualifiedName(srcObj.getQualifiedName()));
 		tgtObj.setFeatureName(srcObj.getFeatureName());
 		tgtObj.setFeatureTags(srcObj.getFeatureTags());
 		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
 		convertAbstractScenarioList();
-	}
-
-	private String convertFeatureName(String fullName) {
-		String pathName = fullName;
-		pathName = pathName.replace("pst::" + ConvertibleProject.FIRST_LAYER,
-				tgtPrj.getDir(ConvertibleProject.FIRST_LAYER).getAbsolutePath());
-		pathName = pathName.replace("::", File.separator);
-		pathName = pathName + tgtPrj.getFileExt(ConvertibleProject.FIRST_LAYER);
-		return pathName;
 	}
 
 	private void convertScenario(Interaction srcScenario) throws Exception {
@@ -92,7 +79,6 @@ public class ConvertUMLToCucumber extends MojoGoal {
 		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(srcScenario));
 		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(srcScenario));
 		convertStepList(scenario, srcObj.getStepList(srcScenario), srcScenario);
-		tgtObj.addScenario(scenario);
 	}
 
 	private void convertScenarioOutline(Interaction abstractScenario) throws Exception {
@@ -101,7 +87,6 @@ public class ConvertUMLToCucumber extends MojoGoal {
 		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
 		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
 		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario), abstractScenario);
-		tgtObj.addScenarioOutline(scenarioOutline);
 
 		ArrayList<EAnnotation> examplesList = srcObj.getExamplesList(abstractScenario);
 		for (EAnnotation examples : examplesList) {

@@ -27,7 +27,7 @@ public class AdocFileObject extends FileObject {
 
 	protected void assertAbstractScenarioTags(String name, String tags) {
 		Section abstractScenario = getAbstractScenario(name);
-		Assertions.assertEquals(tags, wrapper.getAbstractScenarioTags(abstractScenario));
+		Assertions.assertEquals(tags, Utilities.listAsCsv(wrapper.getAbstractScenarioTags(abstractScenario)));
 	}
 
 	protected void assertDocString(String name, String stepName, String content) {
@@ -41,7 +41,7 @@ public class AdocFileObject extends FileObject {
 	}
 
 	protected void assertFeatureTags(String name, String tags) {
-		Assertions.assertEquals(tags, wrapper.getFeatureTags());
+		Assertions.assertEquals(tags, Utilities.listAsCsv(wrapper.getFeatureTags()));
 	}
 
 	protected void assertObjectExists() {

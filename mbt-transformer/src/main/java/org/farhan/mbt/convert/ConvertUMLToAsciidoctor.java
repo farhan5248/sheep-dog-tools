@@ -1,6 +1,5 @@
 package org.farhan.mbt.convert;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import org.asciidoctor.ast.Section;
@@ -10,7 +9,6 @@ import org.eclipse.uml2.uml.Message;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.MojoGoal;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
@@ -18,9 +16,7 @@ import org.farhan.mbt.uml.UMLProject;
 public class ConvertUMLToAsciidoctor extends MojoGoal {
 
 	private UMLClassWrapper srcObj;
-	private UMLProject srcPrj;
 	private AsciiDoctorAdocWrapper tgtObj;
-	private AsciiDoctorProject tgtPrj;
 
 	protected void convertAbstractScenarioList() throws Exception {
 		for (Interaction abstractScenario : srcObj.getAbstractScenarioList()) {
@@ -38,7 +34,6 @@ public class ConvertUMLToAsciidoctor extends MojoGoal {
 		Section background = tgtObj.createBackground(srcObj.getBackgroundName(abstractScenario));
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
 		convertStepList(background, srcObj.getStepList(abstractScenario));
-		tgtObj.addBackground(background);
 	}
 
 	private void convertDocString(Section step, Message stepSrc) {
@@ -61,20 +56,11 @@ public class ConvertUMLToAsciidoctor extends MojoGoal {
 	@Override
 	protected void convertFeature(ConvertibleObject theObject) throws Exception {
 		srcObj = (UMLClassWrapper) theObject;
-		tgtObj = (AsciiDoctorAdocWrapper) tgtPrj.createObject(convertFeatureName(srcObj.getQualifiedName()));
+		tgtObj = (AsciiDoctorAdocWrapper) tgtPrj.createObject(convertQualifiedName(srcObj.getQualifiedName()));
 		tgtObj.setFeatureName(srcObj.getFeatureName());
 		tgtObj.setFeatureTags(srcObj.getFeatureTags());
 		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
 		convertAbstractScenarioList();
-	}
-
-	protected String convertFeatureName(String fullName) {
-		String pathName = fullName;
-		pathName = pathName.replace("pst::" + ConvertibleProject.FIRST_LAYER,
-				tgtPrj.getDir(ConvertibleProject.FIRST_LAYER).getAbsolutePath());
-		pathName = pathName.replace("::", File.separator);
-		pathName = pathName + tgtPrj.getFileExt(ConvertibleProject.FIRST_LAYER);
-		return pathName;
 	}
 
 	private void convertScenario(Interaction abstractScenario) {
@@ -82,7 +68,6 @@ public class ConvertUMLToAsciidoctor extends MojoGoal {
 		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(abstractScenario));
 		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(abstractScenario));
 		convertStepList(scenario, srcObj.getStepList(abstractScenario));
-		tgtObj.addScenario(scenario);
 	}
 
 	private void convertScenarioOutline(Interaction abstractScenario) {
@@ -91,7 +76,6 @@ public class ConvertUMLToAsciidoctor extends MojoGoal {
 		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
 		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
 		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario));
-		tgtObj.addScenarioOutline(scenarioOutline);
 
 		ArrayList<EAnnotation> examplesList = srcObj.getExamplesList(abstractScenario);
 		for (EAnnotation examples : examplesList) {

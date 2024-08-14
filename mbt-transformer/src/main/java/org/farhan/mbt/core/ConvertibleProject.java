@@ -10,13 +10,15 @@ public abstract class ConvertibleProject {
 	public static final String SECOND_LAYER = "stepdefs";
 	public static final String THIRD_LAYER = "objects";
 
+	public abstract ConvertibleObject createObject(String name);
+
 	public abstract File getDir(String layer);
 
 	public abstract String getFileExt(String layer);
 
 	public abstract ArrayList<ConvertibleObject> getObjects(String layer);
 
-	public abstract void save() throws Exception;
+	public abstract void load(String tags) throws Exception;
 
-	public abstract ConvertibleObject createObject(String name);
+	public abstract void save() throws Exception;
 }

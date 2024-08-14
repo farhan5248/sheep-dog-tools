@@ -24,19 +24,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 		theFile = umlProject.getDir("");
 	}
 
-	public void addBackground(Interaction background) {
-		// TODO maybe this isn't needed, review why it's needed for adoc and graph files
-	}
-
-	public void addScenario(Interaction scenario) {
-		// TODO maybe this isn't needed, review why it's needed for adoc and graph files
-	}
-
-	public void addScenarioOutline(Interaction scenarioOutline) {
-		// TODO maybe this isn't needed, review why it's needed for adoc and graph files
-
-	}
-
 	private EAnnotation createAnnotation(Class className, String name, String key) {
 		EAnnotation a = className.getEAnnotation(name);
 		if (a == null) {
@@ -225,10 +212,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 	}
 
 	public ArrayList<ArrayList<String>> getExamplesRowList(EAnnotation examples) {
-		// TODO this should just be a list of lists. Having the header for each row
-		// doesn't help. If the headers are needed to convert rows, pass the parent
-		// table
-		// Also there should be a getRow call to go with this
 		ArrayList<ArrayList<String>> examplesRowList = new ArrayList<ArrayList<String>>();
 		int rowCnt = examples.getDetails().size();
 		for (int i = 1; i < rowCnt; i++) {
@@ -282,8 +265,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 	}
 
 	public String getQualifiedName() {
-		// TODO make sure all wrappers have this instead of the getFile approach to
-		// getting the name. When returning a file name, remove the C:// whatever
 		return theClass.getQualifiedName();
 	}
 
@@ -404,11 +385,9 @@ public class UMLClassWrapper implements ConvertibleObject {
 		createAnnotation(theClass, "title", featureName);
 	}
 
-	public void setFeatureTags(String featureTags) {
-		// TODO this if statement is not needed if a list is passed in rather than a
-		// string
+	public void setFeatureTags(ArrayList<String> featureTags) {
 		if (!featureTags.isEmpty()) {
-			for (String t : featureTags.split(",")) {
+			for (String t : featureTags) {
 				createAnnotation(theClass, "tags", t);
 			}
 		}
@@ -427,19 +406,17 @@ public class UMLClassWrapper implements ConvertibleObject {
 		scenarioOutline.createOwnedComment().setBody(scenarioOutlineDescription);
 	}
 
-	public void setScenarioOutlineTags(Interaction abstractScenario, String tags) {
+	public void setScenarioOutlineTags(Interaction abstractScenario, ArrayList<String> tags) {
 		setTags(abstractScenario, tags);
 	}
 
-	public void setScenarioTags(Interaction abstractScenario, String tags) {
+	public void setScenarioTags(Interaction abstractScenario, ArrayList<String> tags) {
 		setTags(abstractScenario, tags);
 	}
 
-	private void setTags(Interaction abstractScenario, String tags) {
-		// TODO this if statement is not needed if a list is passed in rather than a
-		// string
+	private void setTags(Interaction abstractScenario, ArrayList<String> tags) {
 		if (!tags.isEmpty()) {
-			for (String t : tags.split(",")) {
+			for (String t : tags) {
 				createAnnotation(abstractScenario, "tags", t);
 			}
 		}

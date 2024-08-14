@@ -30,9 +30,9 @@ public class FeatureFileObject extends FileObject {
 	protected void assertAbstractScenarioTags(String name, String tags) {
 		AbstractScenario abstractScenario = getAbstractScenario(name);
 		if (abstractScenario instanceof Scenario) {
-			Assertions.assertEquals(tags, wrapper.getScenarioTags(abstractScenario));
+			Assertions.assertEquals(tags, Utilities.listAsCsv(wrapper.getScenarioTags(abstractScenario)));
 		} else {
-			Assertions.assertEquals(tags, wrapper.getScenarioOutlineTags(abstractScenario));
+			Assertions.assertEquals(tags, Utilities.listAsCsv(wrapper.getScenarioOutlineTags(abstractScenario)));
 		}
 	}
 
@@ -47,7 +47,7 @@ public class FeatureFileObject extends FileObject {
 	}
 
 	protected void assertFeatureTags(String name, String tags) {
-		Assertions.assertEquals(tags, wrapper.getFeatureTags());
+		Assertions.assertEquals(tags, Utilities.listAsCsv(wrapper.getFeatureTags()));
 	}
 
 	protected void assertObjectExists() {

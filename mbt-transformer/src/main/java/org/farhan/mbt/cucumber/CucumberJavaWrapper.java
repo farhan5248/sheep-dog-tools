@@ -17,9 +17,9 @@ import com.github.javaparser.utils.SourceRoot;
 
 public class CucumberJavaWrapper implements ConvertibleObject {
 
+	private static String lastComponent = "InitialComponent";
 	private File theFile;
 	private CompilationUnit theJavaClass;
-	private static String lastComponent = "InitialComponent";
 
 	public CucumberJavaWrapper(File theFile) {
 		this.theFile = theFile;
@@ -35,11 +35,9 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		}
 	}
 
-	public void createStepTable(String step, ArrayList<ArrayList<String>> stepTableRowList) {
-		if (isStepObj()) {
-			createStepTableForStepObj(step, stepTableRowList);
-		} else {
-			createStepTableForStepDef(step);
+	private void addParameter(MethodDeclaration aMethod, String type, String name) {
+		if (aMethod.getParameters().isEmpty()) {
+			aMethod.addParameter(type, name);
 		}
 	}
 
@@ -48,90 +46,6 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 			createDocStringForStepObj(step);
 		} else {
 			createDocStringForStepDef(step);
-		}
-	}
-
-	public MethodDeclaration createStep(String step) {
-		if (isStepObj()) {
-			return createStepForStepObj(step);
-		} else {
-			return createStepForStepDef(step);
-		}
-	}
-
-	@Override
-	public Object get() {
-		return theJavaClass;
-	}
-
-	@Override
-	public File getFile() {
-		return theFile;
-	}
-
-	public MethodDeclaration getMethod(String methodName) {
-		if (getType().getMethodsByName(methodName).isEmpty()) {
-			return getType().addMethod(methodName, Keyword.PUBLIC);
-		} else {
-			return getType().getMethodsByName(methodName).getFirst();
-		}
-	}
-
-	@Override
-	public void load() throws Exception {
-		try {
-			// TODO why would this be called for a non existing file?
-			if (theFile.exists() && getType().getMethods().isEmpty()) {
-				SourceRoot javaSrcDir = new SourceRoot(theFile.getParentFile().toPath());
-				theJavaClass = javaSrcDir.parse("", theFile.getName());
-			}
-		} catch (Exception e) {
-			throw new Exception("There was a problem loading file: " + theFile.getAbsolutePath());
-		}
-	}
-
-	@Override
-	public void save() {
-		File parentDir = theFile.getParentFile();
-		parentDir.mkdirs();
-		SourceRoot javaSrcDir = new SourceRoot(parentDir.toPath());
-		javaSrcDir.add(theJavaClass);
-		javaSrcDir.saveAll();
-	}
-
-	@Override
-	public void setFile(File theFile) {
-		this.theFile = theFile;
-	}
-
-	private void addParameter(MethodDeclaration aMethod, String type, String name) {
-		if (aMethod.getParameters().isEmpty()) {
-			aMethod.addParameter(type, name);
-		}
-	}
-
-	private void createStepTableForStepDef(String step) {
-		MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(step));
-		addParameter(aMethod, "DataTable", "dataTable");
-		BlockStmt body = aMethod.getBody().get();
-		if (StepWrapper.isEdge(step) && body.getStatements().size() == 4
-				|| !StepWrapper.isEdge(step) && body.getStatements().size() == 3) {
-			return;
-		} else {
-			body.addStatement(getCallForFactory(step) + getCallForInputOutputsForDataTable(step) + ";");
-			body.getStatements().add(2, body.getStatements().getLast().get());
-			body.getStatements().removeLast();
-		}
-	}
-
-	private void createStepTableForStepObj(String step, ArrayList<ArrayList<String>> stepTableRowList) {
-		String setOrAssert = getSetOrAssert(step);
-		String sectionName = getSection(step);
-		for (String columnName : stepTableRowList.getFirst()) {
-			MethodDeclaration aMethod = getMethod(
-					setOrAssert + sectionName + Utilities.upperFirst(removeSpecialChars(columnName)));
-			aMethod.removeBody();
-			addParameter(aMethod, "HashMap<String, String>", "keyMap");
 		}
 	}
 
@@ -154,6 +68,14 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		aMethod.removeBody();
 		addParameter(aMethod, "HashMap<String, String>", "keyMap");
 
+	}
+
+	public MethodDeclaration createStep(String step) {
+		if (isStepObj()) {
+			return createStepForStepObj(step);
+		} else {
+			return createStepForStepDef(step);
+		}
 	}
 
 	private MethodDeclaration createStepForStepDef(String step) {
@@ -202,6 +124,44 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 			// data table or doc string will cover this
 			return null;
 		}
+	}
+
+	public void createStepTable(String step, ArrayList<ArrayList<String>> stepTableRowList) {
+		if (isStepObj()) {
+			createStepTableForStepObj(step, stepTableRowList);
+		} else {
+			createStepTableForStepDef(step);
+		}
+	}
+
+	private void createStepTableForStepDef(String step) {
+		MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(step));
+		addParameter(aMethod, "DataTable", "dataTable");
+		BlockStmt body = aMethod.getBody().get();
+		if (StepWrapper.isEdge(step) && body.getStatements().size() == 4
+				|| !StepWrapper.isEdge(step) && body.getStatements().size() == 3) {
+			return;
+		} else {
+			body.addStatement(getCallForFactory(step) + getCallForInputOutputsForDataTable(step) + ";");
+			body.getStatements().add(2, body.getStatements().getLast().get());
+			body.getStatements().removeLast();
+		}
+	}
+
+	private void createStepTableForStepObj(String step, ArrayList<ArrayList<String>> stepTableRowList) {
+		String setOrAssert = getSetOrAssert(step);
+		String sectionName = getSection(step);
+		for (String columnName : stepTableRowList.getFirst()) {
+			MethodDeclaration aMethod = getMethod(
+					setOrAssert + sectionName + Utilities.upperFirst(removeSpecialChars(columnName)));
+			aMethod.removeBody();
+			addParameter(aMethod, "HashMap<String, String>", "keyMap");
+		}
+	}
+
+	@Override
+	public Object get() {
+		return theJavaClass;
 	}
 
 	private String getCallForComponent(String step) {
@@ -253,6 +213,11 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		return Utilities.upperFirst(name) + "Factory";
 	}
 
+	@Override
+	public File getFile() {
+		return theFile;
+	}
+
 	private String getInterfaceName(String step) {
 		String name = StepWrapper.getObjectName(step);
 		String nameParts[] = name.split("/");
@@ -260,6 +225,14 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		name = removeSpecialChars(name);
 		name = name + Utilities.upperFirst(StepWrapper.getObjectType(step));
 		return name;
+	}
+
+	public MethodDeclaration getMethod(String methodName) {
+		if (getType().getMethodsByName(methodName).isEmpty()) {
+			return getType().addMethod(methodName, Keyword.PUBLIC);
+		} else {
+			return getType().getMethodsByName(methodName).getFirst();
+		}
 	}
 
 	private String getMethodNameForStepDef(String step) {
@@ -334,6 +307,19 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		}
 	}
 
+	@Override
+	public void load() throws Exception {
+		try {
+			// TODO why would this be called for a non existing file?
+			if (theFile.exists() && getType().getMethods().isEmpty()) {
+				SourceRoot javaSrcDir = new SourceRoot(theFile.getParentFile().toPath());
+				theJavaClass = javaSrcDir.parse("", theFile.getName());
+			}
+		} catch (Exception e) {
+			throw new Exception("There was a problem loading file: " + theFile.getAbsolutePath());
+		}
+	}
+
 	private String removeSpecialChars(String text) {
 		text = Utilities.removeDelimiterAndCapitalize(text, " ");
 		text = Utilities.removeDelimiterAndCapitalize(text, "\\.");
@@ -341,5 +327,19 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		text = Utilities.removeDelimiterAndCapitalize(text, "/");
 		text = Utilities.removeDelimiterAndCapitalize(text, ",");
 		return text;
+	}
+
+	@Override
+	public void save() {
+		File parentDir = theFile.getParentFile();
+		parentDir.mkdirs();
+		SourceRoot javaSrcDir = new SourceRoot(parentDir.toPath());
+		javaSrcDir.add(theJavaClass);
+		javaSrcDir.saveAll();
+	}
+
+	@Override
+	public void setFile(File theFile) {
+		this.theFile = theFile;
 	}
 }

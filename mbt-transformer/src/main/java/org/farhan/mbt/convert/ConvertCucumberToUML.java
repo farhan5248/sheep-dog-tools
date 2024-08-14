@@ -1,6 +1,5 @@
 package org.farhan.mbt.convert;
 
-import java.io.File;
 import java.util.ArrayList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
@@ -11,7 +10,6 @@ import org.farhan.cucumber.Examples;
 import org.farhan.cucumber.Row;
 import org.farhan.cucumber.Step;
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.MojoGoal;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
@@ -21,9 +19,7 @@ import org.farhan.mbt.uml.UMLProject;
 public class ConvertCucumberToUML extends MojoGoal {
 
 	private CucumberFeatureWrapper srcObj;
-	private CucumberProject srcPrj;
 	private UMLClassWrapper tgtObj;
-	private UMLProject tgtPrj;
 
 	protected void convertAbstractScenarioList() throws Exception {
 		for (AbstractScenario abstractScenario : srcObj.getAbstractScenarioList()) {
@@ -41,7 +37,6 @@ public class ConvertCucumberToUML extends MojoGoal {
 		Interaction background = tgtObj.createBackground(srcObj.getBackgroundName(abstractScenario));
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
 		convertStepList(background, srcObj.getStepList(abstractScenario), abstractScenario);
-		tgtObj.addBackground(background);
 	}
 
 	private void convertDocString(Message step, Step stepSrc) {
@@ -63,20 +58,11 @@ public class ConvertCucumberToUML extends MojoGoal {
 	@Override
 	protected void convertFeature(ConvertibleObject theObject) throws Exception {
 		srcObj = (CucumberFeatureWrapper) theObject;
-		tgtObj = (UMLClassWrapper) tgtPrj.createObject(convertFeatureName(srcObj.getFile().getAbsolutePath()));
+		tgtObj = (UMLClassWrapper) tgtPrj.createObject(convertFileName(srcObj.getFileName()));
 		tgtObj.setFeatureName(srcObj.getFeatureName());
 		tgtObj.setFeatureTags(srcObj.getFeatureTags());
 		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
 		convertAbstractScenarioList();
-	}
-
-	protected String convertFeatureName(String fullName) {
-		String qualifiedName = fullName.trim();
-		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(ConvertibleProject.FIRST_LAYER), "");
-		qualifiedName = qualifiedName.replace(srcPrj.getDir(ConvertibleProject.FIRST_LAYER).getAbsolutePath(), "");
-		qualifiedName = qualifiedName.replace(File.separator, "::");
-		qualifiedName = "pst::specs" + qualifiedName;
-		return qualifiedName;
 	}
 
 	private void convertScenario(AbstractScenario abstractScenario) {
@@ -84,7 +70,6 @@ public class ConvertCucumberToUML extends MojoGoal {
 		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(abstractScenario));
 		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(abstractScenario));
 		convertStepList(scenario, srcObj.getStepList(abstractScenario), abstractScenario);
-		tgtObj.addScenario(scenario);
 	}
 
 	private void convertScenarioOutline(AbstractScenario abstractScenario) {
@@ -92,7 +77,6 @@ public class ConvertCucumberToUML extends MojoGoal {
 		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
 		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
 		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario), abstractScenario);
-		tgtObj.addScenarioOutline(scenarioOutline);
 
 		EList<Examples> examplesList = srcObj.getExamplesList(abstractScenario);
 		for (Examples examples : examplesList) {
