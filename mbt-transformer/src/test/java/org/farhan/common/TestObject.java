@@ -81,8 +81,6 @@ public abstract class TestObject {
 	private void processInputOutputs(DataTable dataTable, String operation, String sectionName) {
 		List<List<String>> data = dataTable.asLists();
 
-		// TODO Remember to have Parameter/Value table vs multi-column header table.
-		// Make this a work item
 		ArrayList<String> headers = new ArrayList<String>();
 		for (String cell : data.get(0)) {
 			headers.add(cell);

@@ -106,8 +106,6 @@ public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 	}
 
 	public void setPath(String path) {
-		// TODO this should be an attribute like Present etc so don't store this here,
-		// then update the MbtTranformerFactory
 		keyValue.put("path", path);
 	}
 
