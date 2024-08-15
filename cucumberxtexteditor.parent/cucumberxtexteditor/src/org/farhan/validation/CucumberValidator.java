@@ -6,14 +6,17 @@ package org.farhan.validation;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.farhan.cucumber.AbstractScenario;
+import org.farhan.cucumber.Cell;
 import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
+import org.farhan.cucumber.StepTable;
 
 public class CucumberValidator extends AbstractCucumberValidator {
 
 	public static final String INVALID_NAME = "invalidName";
+	public static final String INVALID_HEADER = "invalidHeader";
 	public static final String INVALID_STEP_TYPE = "invalidStepType";
 
 	// Validate if the Step is a valid vertice with input or edge, FAST is when the
@@ -30,16 +33,22 @@ public class CucumberValidator extends AbstractCucumberValidator {
 		}
 		// TODO apply validation to Given/Then vs When
 		AbstractScenario as = (AbstractScenario) step.eContainer();
-		// TODO assumes step 0 is never And. Check that as step validation
-		// Use something like this to determine if this is a GWT:
-		// as.getSteps().indexOf(step)
-		if (step.getTheStepTable() != null) {
-			// TODO Add table column row validation, each row should have the max number of
-			// columns
+	}
+
+	@Check(CheckType.FAST)
+	public void checkStepTableName(StepTable stepTable) {
+		// TODO Add table column row validation, each row should have the max number of
+		// columns
+		// TODO make tests for this
+		for (Cell header : stepTable.getRows().get(0).getCells()) {
+			if (!Character.isUpperCase(header.getName().charAt(0))) {
+				warning("Table header names should start with a capital: " + header.getName(),
+						CucumberPackage.Literals.STEP_TABLE__ROWS, INVALID_HEADER, header.getName());
+			}
 		}
 	}
 
-    // Validate if the Abstract Scenario is a valid path, NORMAL is when the file is
+	// Validate if the Abstract Scenario is a valid path, NORMAL is when the file is
 	// saved
 	@Check(CheckType.NORMAL)
 	public void checkScenario(Scenario scenario) {

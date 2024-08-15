@@ -31,4 +31,19 @@ public class CucumberQuickfixProvider extends DefaultQuickfixProvider {
 		});
 	}
 
+	@Fix(CucumberValidator.INVALID_HEADER)
+	public void capitalizeStepTableName(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Capitalize step table name", "Capitalize the step table name.", "upcase.png",
+				new IModification() {
+					public void apply(IModificationContext context) throws BadLocationException {
+						IXtextDocument xtextDocument = context.getXtextDocument();
+						String oldHeader = issue.getData()[0];
+						String newHeader = oldHeader.substring(0, 1).toUpperCase() + oldHeader.substring(1);
+						String oldRow = xtextDocument.get(issue.getOffset(), issue.getLength());
+						String newRow = oldRow.replace(oldHeader, newHeader);
+						xtextDocument.replace(issue.getOffset(), issue.getLength(), newRow);
+					}
+				});
+	}
+
 }
