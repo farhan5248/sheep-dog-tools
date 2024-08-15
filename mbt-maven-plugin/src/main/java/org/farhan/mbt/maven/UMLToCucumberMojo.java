@@ -31,7 +31,7 @@ public class UMLToCucumberMojo extends AbstractMojo {
 	 * in the UML model are derived from scenarios with this tag
 	 */
 	@Parameter(property = "tag", defaultValue = "")
-	private String tag;
+	public String tag;
 
 	public void execute() throws MojoExecutionException {
 		try {
@@ -39,6 +39,7 @@ public class UMLToCucumberMojo extends AbstractMojo {
 			if (project != null) {
 				ConvertibleProject.baseDir = project.getBasedir().getAbsolutePath() + File.separator;
 			}
+			getLog().info("Converting tests in this directory: " + ConvertibleProject.baseDir);
 			MojoGoal mojo = new ConvertUMLToCucumber();
 			mojo.mojoGoal(tag);
 		} catch (Exception e) {

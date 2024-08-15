@@ -30,7 +30,7 @@ public class UMLToAsciiDoctorMojo extends AbstractMojo {
 	 * The tag of the selected edges.
 	 */
 	@Parameter(property = "tag", defaultValue = "")
-	private String tag;
+	public String tag;
 
 	public void execute() throws MojoExecutionException {
 		try {
@@ -38,6 +38,7 @@ public class UMLToAsciiDoctorMojo extends AbstractMojo {
 			if (project != null) {
 				ConvertibleProject.baseDir = project.getBasedir().getAbsolutePath() + File.separator;
 			}
+			getLog().info("Converting tests in this directory: " + ConvertibleProject.baseDir);
 			MojoGoal mojo = new ConvertUMLToAsciidoctor();
 			mojo.mojoGoal(tag);
 		} catch (Exception e) {
