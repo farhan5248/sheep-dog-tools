@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Automatic-Module-Name: cucumberxtexteditor
 Bundle-ManifestVersion: 2
 Bundle-Name: cucumberxtexteditor
-Bundle-Vendor: My Company
+Bundle-Vendor: Lean Sheep Dog
 Bundle-Version: 1.15.0.qualifier
 Bundle-SymbolicName: cucumberxtexteditor; singleton:=true
 Bundle-ActivationPolicy: lazy
@@ -16,16 +16,17 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.common,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-17
-Export-Package: org.farhan.serializer,
- org.farhan.cucumber.impl,
- org.farhan.scoping,
- org.farhan.services,
- org.farhan.parser.antlr,
- org.farhan.generator,
- org.farhan,
- org.farhan.validation,
- org.farhan.cucumber.util,
- org.farhan.parser.antlr.internal,
+Export-Package: org.farhan,
  org.farhan.cucumber,
- org.farhan.formatting2
+ org.farhan.cucumber.impl,
+ org.farhan.cucumber.util,
+ org.farhan.formatting2,
+ org.farhan.generator,
+ org.farhan.mbt.validation,
+ org.farhan.parser.antlr,
+ org.farhan.parser.antlr.internal,
+ org.farhan.scoping,
+ org.farhan.serializer,
+ org.farhan.services,
+ org.farhan.validation
 Import-Package: org.apache.log4j
