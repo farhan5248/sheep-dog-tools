@@ -85,7 +85,7 @@ public class CellFormatter extends Formatter {
 			for (int k = 0; k < col.size(); k++) {
 
 				doc.append(col.get(k), it -> it.noSpace());
-				replace(doc, col.get(k), String.format("%1$" + maxWidth + "s", col.get(k).getText()));
+				replace(doc, col.get(k), String.format("%1$-" + maxWidth + "s", col.get(k).getText()));
 			}
 		}
 	}

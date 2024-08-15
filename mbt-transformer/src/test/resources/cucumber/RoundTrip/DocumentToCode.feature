@@ -79,7 +79,7 @@ Feature: Document To Code
               Given The Search application, Login page is valid
                When The Search application, Home page is as follows
                     | grp | ins |
-                    |  10 |   5 |
+                    | 10  | 5   |
                Then The Search application, Logout page is valid
           
             @tag3
@@ -89,20 +89,20 @@ Feature: Document To Code
           
               Given The Search application, Login page is invalid
                When The Search application, Home page is as follows
-                    | grp |   ins |
-                    |   8 | <ins> |
+                    | grp | ins   |
+                    | 8   | <ins> |
                Then The Search application, Logout page is invalid
           
               Examples: Some data
           
                     | ins |
-                    |   4 |
+                    | 4   |
           
               Examples: Dataset 2
           
                     | ins |
-                    |   5 |
-                    |   6 |
+                    | 5   |
+                    | 6   |
           
           
           """

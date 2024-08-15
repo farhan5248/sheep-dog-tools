@@ -95,12 +95,12 @@ Feature: Code To Code
             Scenario Outline: Submit Several
           
               Given The blah application, DataTable page is as follows
-                    |   h1 |   h2 |
+                    | h1   | h2   |
                     | <h3> | <h4> |
           
               Examples: Data Set
           
-                    |  h3 |  h4 |
+                    | h3  | h4  |
                     | v31 | v41 |
           
           
