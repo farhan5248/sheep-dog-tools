@@ -13,14 +13,14 @@ import java.util.stream.Collectors;
 public class XtextReleaseGoal {
 
 	private static File rootDir = new File(
-			"C:\\Users\\Farhan\\git\\lean-sheep-dogs\\cucumberxtexteditor.parent");
+			"C:\\Users\\Farhan\\git\\lean-sheep-dog-tools\\cucumberxtexteditor.parent");
 
 	public static void main(String[] args) {
 
-		String currentVersion = "1.13.0";
-		String nextVersion = "1.14.0";
+		String currentVersion = "1.14.0";
+		String nextVersion = "1.15.0";
 
-		// updateToRelease(currentVersion, currentVersion);
+		updateToRelease(currentVersion, currentVersion);
 		// Run git add and git commit
 		// Run git tag
 		// Run mvn install
