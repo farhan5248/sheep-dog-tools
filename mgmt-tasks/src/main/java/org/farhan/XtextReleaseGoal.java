@@ -20,7 +20,7 @@ public class XtextReleaseGoal {
 		String currentVersion = "1.14.0";
 		String nextVersion = "1.15.0";
 
-		updateToRelease(currentVersion, currentVersion);
+		// updateToRelease(currentVersion, currentVersion);
 		// Run git add and git commit
 		// Run git tag
 		// Run mvn install
