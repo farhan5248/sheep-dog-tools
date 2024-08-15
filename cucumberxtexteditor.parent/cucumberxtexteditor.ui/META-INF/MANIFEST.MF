@@ -3,7 +3,7 @@ Automatic-Module-Name: cucumberxtexteditor.ui
 Bundle-ManifestVersion: 2
 Bundle-Name: cucumberxtexteditor.ui
 Bundle-Vendor: My Company
-Bundle-Version: 1.14.0
+Bundle-Version: 1.15.0.qualifier
 Bundle-SymbolicName: cucumberxtexteditor.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: cucumberxtexteditor,
