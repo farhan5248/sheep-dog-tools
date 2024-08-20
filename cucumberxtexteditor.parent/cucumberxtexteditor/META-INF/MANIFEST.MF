@@ -6,7 +6,10 @@ Bundle-Vendor: Lean Sheep Dog
 Bundle-Version: 1.16.0.qualifier
 Bundle-SymbolicName: cucumberxtexteditor; singleton:=true
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: .
+Bundle-ClassPath: .,
+ lib/asciidoctorj-2.5.11.jar,
+ lib/asciidoctorj-api-2.5.11.jar,
+ lib/sheep-dog-test-1.0-SNAPSHOT.jar
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase,
  org.eclipse.equinox.common;bundle-version="3.16.0",
@@ -22,7 +25,6 @@ Export-Package: org.farhan,
  org.farhan.cucumber.util,
  org.farhan.formatting2,
  org.farhan.generator,
- org.farhan.mbt.validation,
  org.farhan.parser.antlr,
  org.farhan.parser.antlr.internal,
  org.farhan.scoping,

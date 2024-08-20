@@ -3,8 +3,13 @@
  */
 package org.farhan;
 
+import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.parser.IParser;
+import org.farhan.generator.MyOutputConfigurationProvider;
 import org.farhan.parser.antlr.MyCucumberParser;
+
+import com.google.inject.Binder;
+import com.google.inject.Singleton;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -14,5 +19,11 @@ public class CucumberRuntimeModule extends AbstractCucumberRuntimeModule {
 	@Override
 	public Class<? extends IParser> bindIParser() {
 		return MyCucumberParser.class;
+	}
+
+	@Override
+	public void configure(Binder binder) {
+		super.configure(binder);
+		binder.bind(IOutputConfigurationProvider.class).to(MyOutputConfigurationProvider.class).in(Singleton.class);
 	}
 }

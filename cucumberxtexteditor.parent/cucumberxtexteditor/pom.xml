@@ -18,27 +18,36 @@
 				<version>3.6.1</version>
 				<executions>
 					<execution>
-						<id>unpack</id>
-						<phase>generate-sources</phase>
+						<id>copy</id>
+						<phase>initialize</phase>
 						<goals>
-							<goal>unpack</goal>
+							<goal>copy</goal>
 						</goals>
 						<configuration>
 							<artifactItems>
+								<!-- In the future, the sheep-dog-test-jar with
+								dependencies will be copied into lib -->
+								<artifactItem>
+									<groupId>org.asciidoctor</groupId>
+									<artifactId>asciidoctorj-api</artifactId>
+									<version>2.5.11</version>
+									<overWrite>true</overWrite>
+								</artifactItem>
+								<artifactItem>
+									<groupId>org.asciidoctor</groupId>
+									<artifactId>asciidoctorj</artifactId>
+									<version>2.5.11</version>
+									<overWrite>true</overWrite>
+								</artifactItem>
 								<artifactItem>
 									<groupId>org.farhan</groupId>
 									<artifactId>sheep-dog-test</artifactId>
 									<version>1.0-SNAPSHOT</version>
-									<classifier>sources</classifier>
 									<overWrite>true</overWrite>
-									<includes>
-										**/*.java
-									</includes>
-									<outputDirectory>
-										${project.basedir}/../cucumberxtexteditor/src/</outputDirectory>
 								</artifactItem>
 							</artifactItems>
-							<!-- other configurations here -->
+							<outputDirectory>
+								${project.basedir}/../cucumberxtexteditor/lib/</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
@@ -123,7 +132,7 @@
 						</fileset>
 						<fileset>
 							<directory>
-								${project.basedir}/../cucumberxtexteditor/src/org/farhan/mbt/</directory>
+								${project.basedir}/../cucumberxtexteditor/lib/</directory>
 							<includes>
 								<include>**/*</include>
 							</includes>

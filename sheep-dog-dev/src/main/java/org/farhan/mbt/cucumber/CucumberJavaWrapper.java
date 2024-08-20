@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.StepWrapper;
 import org.farhan.mbt.core.Utilities;
-import org.farhan.mbt.validation.MBTVertexValidator;
+import org.farhan.validation.MBTVertexValidator;
 
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier.Keyword;

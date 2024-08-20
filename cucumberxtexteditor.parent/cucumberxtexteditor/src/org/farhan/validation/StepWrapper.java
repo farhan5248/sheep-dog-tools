@@ -1,17 +1,20 @@
-package org.farhan.mbt.core;
+package org.farhan.validation;
 
-import org.farhan.validation.MBTEdgeValidator;
-import org.farhan.validation.MBTVertexValidator;
-
-// TODO move to cucumberxtexteditor
 public class StepWrapper {
-
 
 	public static String getObjectAttachment(String stepName) {
 		if (MBTVertexValidator.isVertex(stepName)) {
 			return MBTVertexValidator.getAttachment(stepName);
 		} else {
 			return MBTEdgeValidator.getAttachment(stepName);
+		}
+	}
+
+	public static String getComponentType(String stepName) {
+		if (MBTVertexValidator.isVertex(stepName)) {
+			return MBTVertexValidator.getComponentType(stepName);
+		} else {
+			return MBTEdgeValidator.getComponentType(stepName);
 		}
 	}
 
