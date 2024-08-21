@@ -5,6 +5,14 @@ package org.farhan.generator;
 
 import com.google.common.collect.Iterables;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -20,7 +28,12 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.farhan.CucumberStandaloneSetup;
 import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.Cell;
+import org.farhan.cucumber.CucumberFactory;
+import org.farhan.cucumber.Examples;
+import org.farhan.cucumber.ExamplesTable;
 import org.farhan.cucumber.Feature;
+import org.farhan.cucumber.Row;
+import org.farhan.cucumber.ScenarioOutline;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.StepTable;
 import org.farhan.validation.StepWrapper;
@@ -47,15 +60,45 @@ public class CucumberGenerator implements IGenerator2 {
 		Feature theFeature = (Feature) resource.getContents().get(0);
 		// TODO test if this code is called if the feature is invalid
 		for (AbstractScenario scenario : theFeature.getAbstractScenarios()) {
-			// TODO validatate that each scenario has at least one component
+			// TODO validatate that each scenario has at least one component. Part of this
+			// validation is checking the background
 			String component = "";
+			HashMap<String, String> objects = new HashMap<String, String>();
 			for (Step step : scenario.getSteps()) {
-				component = setComponent(step.getName(), component);
-				String object = setObject(step.getName());
+				component = getComponent(step.getName(), component);
+				String object = getObject(step.getName(), objects);
 				EList<Cell> header = getHeader(step);
-				FileGenerator.getContent(fsa, getObjectFilename(component, object), component, object, step.getName(),
-						header);
+				generateStepDef(fsa, component, object, step.getName(), header);
+			}
+		}
+	}
 
+	private String getComponent(String name, String previousComponent) {
+		String component = previousComponent;
+		if (!StepWrapper.getComponentName(name).isBlank()) {
+			component = StepWrapper.getComponentName(name) + " " + StepWrapper.getComponentType(name);
+		}
+		return component;
+	}
+
+	private String getObject(String name, HashMap<String, String> objects) {
+		String object = StepWrapper.getObjectName(name) + " " + StepWrapper.getObjectType(name);
+		// TODO add getObjectPath to StepWrapper.
+		// The (appname apptype, pathtoobject/)?objectname objecttype(, sectionname) is
+		// predicate
+		String[] objectParts = object.split("/");
+		String objectKey = objectParts[objectParts.length - 1];
+
+		String objectWithPath = objects.get(objectKey);
+		if (objectWithPath == null) {
+			objects.put(objectKey, object);
+			return object;
+		} else {
+			if (objectKey.contentEquals(object)) {
+				return objectWithPath;
+			} else {
+				objects.put(objectKey, object);
+				return object;
 			}
 		}
 	}
@@ -69,26 +112,108 @@ public class CucumberGenerator implements IGenerator2 {
 		}
 	}
 
-	private String setObject(String name) {
-		String object = "";
-		object = StepWrapper.getObjectName(name) + " " + StepWrapper.getObjectType(name);
-		return object;
-	}
-
-	private String setComponent(String name, String previousComponent) {
-		String component = previousComponent;
-		if (!StepWrapper.getComponentName(name).isBlank()) {
-			component = StepWrapper.getComponentName(name) + " " + StepWrapper.getComponentType(name);
+	private void generateStepDef(IFileSystemAccess2 fsa, String stepComponent, String stepObject, String stepName,
+			EList<Cell> headers) {
+		String fileName = stepComponent + "/" + stepObject + ".feature";
+		try {
+			Resource theResource = getOrCreateResource(fsa, fileName);
+			Feature theObject = getOrCreateObject(theResource, stepComponent, stepObject);
+			AbstractScenario theStepDef = getOrCreateStepDef(theObject, stepName, headers);
+			if (headers != null) {
+				getOrCreateExamples(theStepDef, headers);
+			}
+			theResource.save(null);
+		} catch (Exception e) {
+			System.out.println("There was a problem loading file: " + fileName);
+			System.out.println(getStackTraceAsString(e));
 		}
-		return component;
 	}
 
-	private String getObjectFilename(String component, String object) {
-		return component + "/" + object + ".feature";
+	private Resource getOrCreateResource(IFileSystemAccess2 fsa, String fileName) {
+		Resource res;
+		URI uri = fsa.getURI(fileName, MyOutputConfigurationProvider.DEFAULT_OUTPUT_ONCE);
+		if (fsa.isFile(fileName, MyOutputConfigurationProvider.DEFAULT_OUTPUT_ONCE)) {
+			res = new ResourceSetImpl().getResource(uri, true);
+		} else {
+			res = new ResourceSetImpl().createResource(uri);
+		}
+		return res;
 	}
 
-	private String getFeatureFileName(final Resource res) {
-		String name = res.getURI().lastSegment();
-		return StringExtensions.toFirstUpper(name.substring(0, name.indexOf(".")));
+	private Feature getOrCreateObject(Resource res, String component, String object) {
+
+		Feature theFeature;
+		if (!res.getContents().isEmpty()) {
+			theFeature = (Feature) res.getContents().get(0);
+		} else {
+			theFeature = CucumberFactory.eINSTANCE.createFeature();
+			theFeature.setName(object);
+			res.getContents().add(theFeature);
+		}
+		return theFeature;
+	}
+
+	private AbstractScenario getOrCreateStepDef(Feature theFeature, String stepName, EList<Cell> header) {
+		for (AbstractScenario stepDef : theFeature.getAbstractScenarios()) {
+			if (stepDef.getName().contentEquals(stepName)) {
+				return stepDef;
+			}
+		}
+		AbstractScenario theStepDef;
+		if (header != null) {
+			theStepDef = CucumberFactory.eINSTANCE.createScenarioOutline();
+		} else {
+			theStepDef = CucumberFactory.eINSTANCE.createScenario();
+		}
+		theStepDef.setName(stepName);
+		theFeature.getAbstractScenarios().add(theStepDef);
+		return theStepDef;
+	}
+
+	private Examples getOrCreateExamples(AbstractScenario theStepDef, EList<Cell> theStepDefParameters) {
+		ScenarioOutline so = (ScenarioOutline) theStepDef;
+		if (!so.getExamples().isEmpty()) {
+			String headersString = cellsToString(theStepDefParameters);
+			for (Examples parameters : so.getExamples()) {
+				String paramSetString = cellsToString(parameters.getTheExamplesTable().getRows().get(0).getCells());
+				if (headersString.contentEquals(paramSetString)) {
+					return parameters;
+				}
+			}
+		}
+		Examples parameters = CucumberFactory.eINSTANCE.createExamples();
+		parameters.setName(Integer.toString(so.getExamples().size() + 1));
+		so.getExamples().add(parameters);
+
+		ExamplesTable parametersTable = CucumberFactory.eINSTANCE.createExamplesTable();
+		parameters.setTheExamplesTable(parametersTable);
+
+		Row row = CucumberFactory.eINSTANCE.createRow();
+		parametersTable.getRows().add(row);
+		for (Cell srcCell : theStepDefParameters) {
+			Cell cell = CucumberFactory.eINSTANCE.createCell();
+			cell.setName(srcCell.getName());
+			row.getCells().add(cell);
+		}
+		return parameters;
+	}
+
+	private String cellsToString(EList<Cell> cells) {
+		String cellsAsString = "";
+		List<String> sortedCells = new ArrayList<String>();
+		for (Cell cell : cells) {
+			sortedCells.add(cell.getName());
+		}
+		Collections.sort(sortedCells);
+		for (String cell : sortedCells) {
+			cellsAsString += cell;
+		}
+		return cellsAsString;
+	}
+
+	private String getStackTraceAsString(Exception e) {
+		StringWriter sw = new StringWriter();
+		e.printStackTrace(new PrintWriter(sw));
+		return sw.toString();
 	}
 }

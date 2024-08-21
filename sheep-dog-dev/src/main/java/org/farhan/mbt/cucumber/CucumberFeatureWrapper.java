@@ -312,8 +312,8 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 	@Override
 	public void load() throws Exception {
 		try {
-			URI uri = URI.createFileURI(theFile.getAbsolutePath());
 			CucumberStandaloneSetup.doSetup();
+			URI uri = URI.createFileURI(theFile.getAbsolutePath());
 			Resource res = new ResourceSetImpl().getResource(uri, true);
 			theFeature = (Feature) res.getContents().get(0);
 		} catch (Exception e) {
@@ -323,15 +323,9 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 
 	@Override
 	public void save() {
-		// TODO consider replacing this
-		Injector injector = new CucumberStandaloneSetup().createInjectorAndDoEMFRegistration();
-		ResourceSet rs = injector.getInstance(ResourceSet.class);
 		URI uri = URI.createFileURI(theFile.getAbsolutePath());
-		// with this
-		// CucumberStandaloneSetup.doSetup();
-		// Resource res = new ResourceSetImpl().getResource(URI.createFileURI(fileName), true);
-		
-		Resource res = rs.createResource(uri);
+		CucumberStandaloneSetup.doSetup();
+		Resource res = new ResourceSetImpl().createResource(uri);
 		res.getContents().add(theFeature);
 		try {
 			res.save(null);
