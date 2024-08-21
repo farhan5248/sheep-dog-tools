@@ -19,8 +19,10 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.farhan.CucumberStandaloneSetup;
 import org.farhan.cucumber.AbstractScenario;
+import org.farhan.cucumber.Cell;
 import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Step;
+import org.farhan.cucumber.StepTable;
 import org.farhan.validation.StepWrapper;
 
 /**
@@ -42,21 +44,28 @@ public class CucumberGenerator implements IGenerator2 {
 	@Override
 	public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
 
-		String component = "";
-		String object = "";
-
 		Feature theFeature = (Feature) resource.getContents().get(0);
 		// TODO test if this code is called if the feature is invalid
 		for (AbstractScenario scenario : theFeature.getAbstractScenarios()) {
-			// TODO validatate that each scenario has at least one app
+			// TODO validatate that each scenario has at least one component
+			String component = "";
 			for (Step step : scenario.getSteps()) {
-				// TODO surround the step with try catch and maybe log an error?
 				component = setComponent(step.getName(), component);
-				object = setObject(step.getName());
-				fsa.generateFile(getObjectFilename(component, object),
-						MyOutputConfigurationProvider.DEFAULT_OUTPUT_ONCE, AdocFileGenerator.getContent(
-								getObjectFilename(component, object), component, object, step.getName(), ""));
+				String object = setObject(step.getName());
+				EList<Cell> header = getHeader(step);
+				FileGenerator.getContent(fsa, getObjectFilename(component, object), component, object, step.getName(),
+						header);
+
 			}
+		}
+	}
+
+	private EList<Cell> getHeader(Step step) {
+		StepTable stepTable = step.getTheStepTable();
+		if (stepTable != null) {
+			return stepTable.getRows().get(0).getCells();
+		} else {
+			return null;
 		}
 	}
 
@@ -75,7 +84,7 @@ public class CucumberGenerator implements IGenerator2 {
 	}
 
 	private String getObjectFilename(String component, String object) {
-		return component + "/" + object + ".adoc";
+		return component + "/" + object + ".feature";
 	}
 
 	private String getFeatureFileName(final Resource res) {
