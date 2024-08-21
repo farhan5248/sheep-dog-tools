@@ -54,8 +54,8 @@ public class CucumberGenerator implements IGenerator2 {
 				component = setComponent(step.getName(), component);
 				object = setObject(step.getName());
 				fsa.generateFile(getObjectFilename(component, object),
-						MyOutputConfigurationProvider.DEFAULT_OUTPUT_ONCE, AdocFileGenerator
-								.doGen(getObjectFilename(component, object), component, object, step.getName()));
+						MyOutputConfigurationProvider.DEFAULT_OUTPUT_ONCE, AdocFileGenerator.getContent(
+								getObjectFilename(component, object), component, object, step.getName(), ""));
 			}
 		}
 	}

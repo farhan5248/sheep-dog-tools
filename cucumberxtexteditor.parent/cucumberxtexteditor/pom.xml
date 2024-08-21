@@ -10,6 +10,15 @@
 	<artifactId>cucumberxtexteditor</artifactId>
 	<packaging>eclipse-plugin</packaging>
 
+
+	<dependencies>
+		<dependency>
+			<groupId>org.farhan</groupId>
+			<artifactId>sheep-dog-test</artifactId>
+			<version>1.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -21,31 +30,11 @@
 						<id>copy</id>
 						<phase>initialize</phase>
 						<goals>
-							<goal>copy</goal>
+							<goal>copy-dependencies</goal>
 						</goals>
 						<configuration>
-							<artifactItems>
-								<!-- In the future, the sheep-dog-test-jar with
-								dependencies will be copied into lib -->
-								<artifactItem>
-									<groupId>org.asciidoctor</groupId>
-									<artifactId>asciidoctorj-api</artifactId>
-									<version>2.5.11</version>
-									<overWrite>true</overWrite>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.asciidoctor</groupId>
-									<artifactId>asciidoctorj</artifactId>
-									<version>2.5.11</version>
-									<overWrite>true</overWrite>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.farhan</groupId>
-									<artifactId>sheep-dog-test</artifactId>
-									<version>1.0-SNAPSHOT</version>
-									<overWrite>true</overWrite>
-								</artifactItem>
-							</artifactItems>
+							<includeGroupIds>
+								org.farhan</includeGroupIds>
 							<outputDirectory>
 								${project.basedir}/../cucumberxtexteditor/lib/</outputDirectory>
 						</configuration>
