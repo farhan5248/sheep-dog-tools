@@ -11,6 +11,8 @@ public class MyOutputConfigurationProvider implements IOutputConfigurationProvid
 
 	public final static String DEFAULT_OUTPUT_ONCE = "DEFAULT_OUTPUT_ONCE";
 
+	public static OutputConfiguration onceOutput;
+
 	@Override
 	public Set<OutputConfiguration> getOutputConfigurations() {
 		HashSet<OutputConfiguration> set = new HashSet<OutputConfiguration>();
@@ -24,7 +26,7 @@ public class MyOutputConfigurationProvider implements IOutputConfigurationProvid
 		defaultOutput.setSetDerivedProperty(true);
 		set.add(defaultOutput);
 
-		OutputConfiguration onceOutput = new OutputConfiguration(DEFAULT_OUTPUT_ONCE);
+		onceOutput = new OutputConfiguration(DEFAULT_OUTPUT_ONCE);
 		onceOutput.setDescription("Output Folder (once)");
 		onceOutput.setOutputDirectory("./src-gen-once");
 		onceOutput.setOverrideExistingResources(false);

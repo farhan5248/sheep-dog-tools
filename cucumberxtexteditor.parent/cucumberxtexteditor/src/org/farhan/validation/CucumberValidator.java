@@ -3,24 +3,30 @@
  */
 package org.farhan.validation;
 
+import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
-import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.Cell;
 import org.farhan.cucumber.CucumberPackage;
 import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.StepTable;
+import org.farhan.generator.MyOutputConfigurationProvider;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 public class CucumberValidator extends AbstractCucumberValidator {
+
+	@Inject
+	private Provider<EclipseResourceFileSystemAccess2> fileAccessProvider;
 
 	public static final String INVALID_NAME = "invalidName";
 	public static final String INVALID_HEADER = "invalidHeader";
 	public static final String INVALID_STEP_TYPE = "invalidStepType";
+	public static final String MISSING_STEP_DEF = "invalidStepType";
 
-	// Validate if the Step is a valid vertice with input or edge, FAST is when the
-	// file is modified
+	// FAST is when the file is modified
 	@Check(CheckType.FAST)
 	public void checkStepName(Step step) {
 
@@ -30,9 +36,17 @@ public class CucumberValidator extends AbstractCucumberValidator {
 			// TODO instead of this error message, give the parts breakdown to see what's
 			// missing
 			error(MBTVertexValidator.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
+		} else {
+			// TODO if it's valid, then check if the the step def exists, if not call the
+			// generator in the quick fix
+			EclipseResourceFileSystemAccess2 fsa = fileAccessProvider.get();
+			String fileName = StepWrapper.getComponentName(step.getName()) + "/"
+					+ StepWrapper.getObjectName(step.getName()) + ".feature";
+			if (!fsa.isFile(fileName, MyOutputConfigurationProvider.DEFAULT_OUTPUT_ONCE)) {
+				warning("The step def doesn't exist", CucumberPackage.Literals.STEP__NAME, MISSING_STEP_DEF,
+						step.getName());
+			}
 		}
-		// TODO apply validation to Given/Then vs When
-		AbstractScenario as = (AbstractScenario) step.eContainer();
 	}
 
 	@Check(CheckType.FAST)
@@ -48,8 +62,7 @@ public class CucumberValidator extends AbstractCucumberValidator {
 		}
 	}
 
-	// Validate if the Abstract Scenario is a valid path, NORMAL is when the file is
-	// saved
+	// NORMAL is when the file is saved
 	@Check(CheckType.NORMAL)
 	public void checkScenario(Scenario scenario) {
 
@@ -65,8 +78,7 @@ public class CucumberValidator extends AbstractCucumberValidator {
 		}
 	}
 
-	// Validate if the Feature is a valid graph, EXPENSIVE is when the
-	// validation menu item is selected
+	// EXPENSIVE is when the validation menu item is selected
 	@Check(CheckType.EXPENSIVE)
 	public void checkFeature(Feature feature) {
 		// TODO validate that feature file name and feature name are the same.

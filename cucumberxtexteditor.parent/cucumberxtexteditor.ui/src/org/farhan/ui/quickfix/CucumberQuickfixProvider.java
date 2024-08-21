@@ -4,6 +4,7 @@
 package org.farhan.ui.quickfix;
 
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
@@ -11,7 +12,12 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
+import org.farhan.generator.StepDefGenerator;
 import org.farhan.validation.CucumberValidator;
+import org.farhan.validation.StepWrapper;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * Custom quickfixes.
@@ -19,6 +25,26 @@ import org.farhan.validation.CucumberValidator;
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#quick-fixes
  */
 public class CucumberQuickfixProvider extends DefaultQuickfixProvider {
+
+	@Inject
+	private Provider<EclipseResourceFileSystemAccess2> fileAccessProvider;
+
+	@Fix(CucumberValidator.MISSING_STEP_DEF)
+	public void generateStepDef(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Generate step def", "Generate step def.", "upcase.png", new IModification() {
+			public void apply(IModificationContext context) throws BadLocationException {
+				String stepName = issue.getData()[0];
+				EclipseResourceFileSystemAccess2 fsa = fileAccessProvider.get();
+				try {
+					StepDefGenerator.generate(fsa, StepWrapper.getComponentName(stepName),
+							StepWrapper.getObjectName(stepName), stepName, null);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	@Fix(CucumberValidator.INVALID_NAME)
 	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {

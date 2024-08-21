@@ -5,6 +5,7 @@ package org.farhan.generator;
 
 import com.google.common.collect.Iterables;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -23,6 +24,8 @@ import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.farhan.CucumberStandaloneSetup;
@@ -65,10 +68,20 @@ public class CucumberGenerator implements IGenerator2 {
 			String component = "";
 			HashMap<String, String> objects = new HashMap<String, String>();
 			for (Step step : scenario.getSteps()) {
-				component = getComponent(step.getName(), component);
-				String object = getObject(step.getName(), objects);
-				EList<Cell> header = getHeader(step);
-				generateStepDef(fsa, component, object, step.getName(), header);
+				try {
+					// TODO, this should be inside StepDefGenerator.generate because for any step,
+					// it should be able to figure out what the component name is or the path of the
+					// object like when called for a quick fix. In that case, it'll need to get
+					// access to the parent like so: AbstractScenario as = (AbstractScenario)
+					// step.eContainer();
+					component = getComponent(step.getName(), component);
+					String object = getObject(step.getName(), objects);
+					EList<Cell> header = getHeader(step);
+					StepDefGenerator.generate(fsa, component, object, step.getName(), header);
+				} catch (Exception e) {
+					System.out.println("There was a problem generating for step: " + step.getName());
+					System.out.println(getStackTraceAsString(e));
+				}
 			}
 		}
 	}
@@ -110,105 +123,6 @@ public class CucumberGenerator implements IGenerator2 {
 		} else {
 			return null;
 		}
-	}
-
-	private void generateStepDef(IFileSystemAccess2 fsa, String stepComponent, String stepObject, String stepName,
-			EList<Cell> headers) {
-		String fileName = stepComponent + "/" + stepObject + ".feature";
-		try {
-			Resource theResource = getOrCreateResource(fsa, fileName);
-			Feature theObject = getOrCreateObject(theResource, stepComponent, stepObject);
-			AbstractScenario theStepDef = getOrCreateStepDef(theObject, stepName, headers);
-			if (headers != null) {
-				getOrCreateExamples(theStepDef, headers);
-			}
-			theResource.save(null);
-		} catch (Exception e) {
-			System.out.println("There was a problem loading file: " + fileName);
-			System.out.println(getStackTraceAsString(e));
-		}
-	}
-
-	private Resource getOrCreateResource(IFileSystemAccess2 fsa, String fileName) {
-		Resource res;
-		URI uri = fsa.getURI(fileName, MyOutputConfigurationProvider.DEFAULT_OUTPUT_ONCE);
-		if (fsa.isFile(fileName, MyOutputConfigurationProvider.DEFAULT_OUTPUT_ONCE)) {
-			res = new ResourceSetImpl().getResource(uri, true);
-		} else {
-			res = new ResourceSetImpl().createResource(uri);
-		}
-		return res;
-	}
-
-	private Feature getOrCreateObject(Resource res, String component, String object) {
-
-		Feature theFeature;
-		if (!res.getContents().isEmpty()) {
-			theFeature = (Feature) res.getContents().get(0);
-		} else {
-			theFeature = CucumberFactory.eINSTANCE.createFeature();
-			theFeature.setName(object);
-			res.getContents().add(theFeature);
-		}
-		return theFeature;
-	}
-
-	private AbstractScenario getOrCreateStepDef(Feature theFeature, String stepName, EList<Cell> header) {
-		for (AbstractScenario stepDef : theFeature.getAbstractScenarios()) {
-			if (stepDef.getName().contentEquals(stepName)) {
-				return stepDef;
-			}
-		}
-		AbstractScenario theStepDef;
-		if (header != null) {
-			theStepDef = CucumberFactory.eINSTANCE.createScenarioOutline();
-		} else {
-			theStepDef = CucumberFactory.eINSTANCE.createScenario();
-		}
-		theStepDef.setName(stepName);
-		theFeature.getAbstractScenarios().add(theStepDef);
-		return theStepDef;
-	}
-
-	private Examples getOrCreateExamples(AbstractScenario theStepDef, EList<Cell> theStepDefParameters) {
-		ScenarioOutline so = (ScenarioOutline) theStepDef;
-		if (!so.getExamples().isEmpty()) {
-			String headersString = cellsToString(theStepDefParameters);
-			for (Examples parameters : so.getExamples()) {
-				String paramSetString = cellsToString(parameters.getTheExamplesTable().getRows().get(0).getCells());
-				if (headersString.contentEquals(paramSetString)) {
-					return parameters;
-				}
-			}
-		}
-		Examples parameters = CucumberFactory.eINSTANCE.createExamples();
-		parameters.setName(Integer.toString(so.getExamples().size() + 1));
-		so.getExamples().add(parameters);
-
-		ExamplesTable parametersTable = CucumberFactory.eINSTANCE.createExamplesTable();
-		parameters.setTheExamplesTable(parametersTable);
-
-		Row row = CucumberFactory.eINSTANCE.createRow();
-		parametersTable.getRows().add(row);
-		for (Cell srcCell : theStepDefParameters) {
-			Cell cell = CucumberFactory.eINSTANCE.createCell();
-			cell.setName(srcCell.getName());
-			row.getCells().add(cell);
-		}
-		return parameters;
-	}
-
-	private String cellsToString(EList<Cell> cells) {
-		String cellsAsString = "";
-		List<String> sortedCells = new ArrayList<String>();
-		for (Cell cell : cells) {
-			sortedCells.add(cell.getName());
-		}
-		Collections.sort(sortedCells);
-		for (String cell : sortedCells) {
-			cellsAsString += cell;
-		}
-		return cellsAsString;
 	}
 
 	private String getStackTraceAsString(Exception e) {
