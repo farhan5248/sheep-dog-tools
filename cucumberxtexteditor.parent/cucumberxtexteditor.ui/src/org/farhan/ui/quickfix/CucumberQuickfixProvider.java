@@ -3,11 +3,12 @@
  */
 package org.farhan.ui.quickfix;
 
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
-import org.eclipse.xtext.resource.DefaultFragmentProvider;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
@@ -16,10 +17,9 @@ import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
 import org.farhan.cucumber.Step;
+import org.farhan.generator.CucumberOutputConfigurationProvider;
 import org.farhan.generator.StepDefGenerator;
 import org.farhan.validation.CucumberValidator;
-import org.farhan.validation.StepWrapper;
-
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -33,24 +33,24 @@ public class CucumberQuickfixProvider extends DefaultQuickfixProvider {
 	@Inject
 	private Provider<EclipseResourceFileSystemAccess2> fileAccessProvider;
 
+	private EclipseResourceFileSystemAccess2 getFSA(Resource resource) {
+		EclipseResourceFileSystemAccess2 fsa = fileAccessProvider.get();
+		fsa.setOutputConfigurations(CucumberOutputConfigurationProvider.ocpMap);
+		fsa.setProject(ResourcesPlugin.getWorkspace().getRoot()
+				.getFile(new Path(resource.getURI().toPlatformString(true))).getProject());
+
+		return fsa;
+	}
+
 	@Fix(CucumberValidator.MISSING_STEP_DEF)
 	public void generateStepDef(final Issue issue, IssueResolutionAcceptor acceptor) {
-		// TODO use this URI to get the source step and the fsa and pass that to the
-		// generator
-		Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
-		Step step = (Step) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
 
 		acceptor.accept(issue, "Generate step def", "Generate step def.", "upcase.png", new IModification() {
 			public void apply(IModificationContext context) throws BadLocationException {
-				String stepName = issue.getData()[0];
-				EclipseResourceFileSystemAccess2 fsa = fileAccessProvider.get();
-				try {
-					StepDefGenerator.generate(fsa, StepWrapper.getComponentName(stepName),
-							StepWrapper.getObjectName(stepName), stepName, null);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
+				Step step = (Step) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
+				EclipseResourceFileSystemAccess2 fsa = getFSA(resource);
+				StepDefGenerator.generate(fsa, step);
 			}
 		});
 	}

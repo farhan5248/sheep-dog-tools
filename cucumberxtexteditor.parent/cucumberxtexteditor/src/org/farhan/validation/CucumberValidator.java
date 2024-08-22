@@ -22,7 +22,9 @@ import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.StepTable;
-import org.farhan.generator.MyOutputConfigurationProvider;
+import org.farhan.generator.CucumberOutputConfigurationProvider;
+import org.farhan.generator.StepDefGenerator;
+
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -36,6 +38,14 @@ public class CucumberValidator extends AbstractCucumberValidator {
 	public static final String INVALID_STEP_TYPE = "invalidStepType";
 	public static final String MISSING_STEP_DEF = "invalidStepType";
 
+	private EclipseResourceFileSystemAccess2 getFSA(Resource resource) {
+		EclipseResourceFileSystemAccess2 fsa = fileAccessProvider.get();
+		fsa.setOutputConfigurations(CucumberOutputConfigurationProvider.ocpMap);
+		fsa.setProject(ResourcesPlugin.getWorkspace().getRoot()
+				.getFile(new Path(resource.getURI().toPlatformString(true))).getProject());
+		return fsa;
+	}
+
 	// FAST is when the file is modified
 	@Check(CheckType.FAST)
 	public void checkStepName(Step step) {
@@ -47,47 +57,14 @@ public class CucumberValidator extends AbstractCucumberValidator {
 			// missing
 			error(MBTVertexValidator.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
 		} else {
-			// TODO if it's valid, then check if the the step def exists, if not call the
+			// if it's valid, then check if the the step def exists, if not call the
 			// generator in the quick fix
-			// TODO make a public get name from step in stepdefgenerator
-			String fileName = getComponent(step.getName()) + "/" + getObject(step.getName()) + ".feature";
 			EclipseResourceFileSystemAccess2 fsa = getFSA(step.eResource());
-			// TODO instead of isFile, call some keyword search method and if it can't find
-			// the keyword, it needs to give an error message explaining why like missing
-			// app or missing object etc
-			if (!fsa.isFile(fileName, MyOutputConfigurationProvider.DEFAULT_OUTPUT_ONCE)) {
-				warning("The step def doesn't exist in " + fileName, CucumberPackage.Literals.STEP__NAME,
-						MISSING_STEP_DEF, step.getName());
+			String problems = StepDefGenerator.getProblems(fsa, step);
+			if (!problems.isEmpty()) {
+				warning(problems, CucumberPackage.Literals.STEP__NAME, MISSING_STEP_DEF, step.getName());
 			}
 		}
-	}
-
-	private String getComponent(String name) {
-		// TODO move to StepDefGenerator
-		String component = "";
-		if (!StepWrapper.getComponentName(name).isBlank()) {
-			component = StepWrapper.getComponentName(name) + " " + StepWrapper.getComponentType(name);
-		}
-		return component;
-	}
-
-	private String getObject(String name) {
-		// TODO move to StepDefGenerator
-		String object = StepWrapper.getObjectName(name) + " " + StepWrapper.getObjectType(name);
-		return object;
-	}
-
-	private EclipseResourceFileSystemAccess2 getFSA(Resource resource) {
-		EclipseResourceFileSystemAccess2 fsa = fileAccessProvider.get();
-
-		// set the output configs
-		fsa.setOutputConfigurations(MyOutputConfigurationProvider.ocpMap);
-
-		// set the project
-		fsa.setProject(ResourcesPlugin.getWorkspace().getRoot()
-				.getFile(new Path(resource.getURI().toPlatformString(true))).getProject());
-
-		return fsa;
 	}
 
 	@Check(CheckType.FAST)

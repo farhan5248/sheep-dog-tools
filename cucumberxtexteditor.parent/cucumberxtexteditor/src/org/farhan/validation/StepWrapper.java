@@ -2,6 +2,14 @@ package org.farhan.validation;
 
 public class StepWrapper {
 
+	// TODO add getObjectPath to StepWrapper.
+	// The (appname apptype, pathtoobject/)?objectname objecttype(, sectionname) is
+	// predicate
+	
+	// TODO getObject
+	// TODO getComponent
+
+	
 	public static String getObjectAttachment(String stepName) {
 		if (MBTVertexValidator.isVertex(stepName)) {
 			return MBTVertexValidator.getAttachment(stepName);

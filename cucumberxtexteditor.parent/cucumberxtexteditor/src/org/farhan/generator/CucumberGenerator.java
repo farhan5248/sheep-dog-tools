@@ -63,72 +63,10 @@ public class CucumberGenerator implements IGenerator2 {
 		Feature theFeature = (Feature) resource.getContents().get(0);
 		// TODO test if this code is called if the feature is invalid
 		for (AbstractScenario scenario : theFeature.getAbstractScenarios()) {
-			// TODO validatate that each scenario has at least one component. Part of this
-			// validation is checking the background
-			String component = "";
 			HashMap<String, String> objects = new HashMap<String, String>();
 			for (Step step : scenario.getSteps()) {
-				try {
-					// TODO generate should just get an fsa and step.
-					// this should be inside StepDefGenerator.generate because for any step,
-					// it should be able to figure out what the component name is or the path of the
-					// object like when called for a quick fix. In that case, it'll need to get
-					// access to the parent like so: AbstractScenario as = (AbstractScenario)
-					// step.eContainer();
-					component = getComponent(step.getName(), component);
-					String object = getObject(step.getName(), objects);
-					EList<Cell> header = getHeader(step);
-					StepDefGenerator.generate(fsa, component, object, step.getName(), header);
-				} catch (Exception e) {
-					System.out.println("There was a problem generating for step: " + step.getName());
-					System.out.println(getStackTraceAsString(e));
-				}
+				StepDefGenerator.generate(fsa, step);
 			}
 		}
-	}
-
-	private String getComponent(String name, String previousComponent) {
-		String component = previousComponent;
-		if (!StepWrapper.getComponentName(name).isBlank()) {
-			component = StepWrapper.getComponentName(name) + " " + StepWrapper.getComponentType(name);
-		}
-		return component;
-	}
-
-	private String getObject(String name, HashMap<String, String> objects) {
-		String object = StepWrapper.getObjectName(name) + " " + StepWrapper.getObjectType(name);
-		// TODO add getObjectPath to StepWrapper.
-		// The (appname apptype, pathtoobject/)?objectname objecttype(, sectionname) is
-		// predicate
-		String[] objectParts = object.split("/");
-		String objectKey = objectParts[objectParts.length - 1];
-
-		String objectWithPath = objects.get(objectKey);
-		if (objectWithPath == null) {
-			objects.put(objectKey, object);
-			return object;
-		} else {
-			if (objectKey.contentEquals(object)) {
-				return objectWithPath;
-			} else {
-				objects.put(objectKey, object);
-				return object;
-			}
-		}
-	}
-
-	private EList<Cell> getHeader(Step step) {
-		StepTable stepTable = step.getTheStepTable();
-		if (stepTable != null) {
-			return stepTable.getRows().get(0).getCells();
-		} else {
-			return null;
-		}
-	}
-
-	private String getStackTraceAsString(Exception e) {
-		StringWriter sw = new StringWriter();
-		e.printStackTrace(new PrintWriter(sw));
-		return sw.toString();
 	}
 }

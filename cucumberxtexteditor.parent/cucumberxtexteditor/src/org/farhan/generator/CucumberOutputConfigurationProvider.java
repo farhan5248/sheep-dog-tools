@@ -8,9 +8,9 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.generator.OutputConfiguration;
 
-public class MyOutputConfigurationProvider implements IOutputConfigurationProvider {
+public class CucumberOutputConfigurationProvider implements IOutputConfigurationProvider {
 
-	public final static String DEFAULT_OUTPUT_ONCE = "DEFAULT_OUTPUT_ONCE";
+	public final static String STEP_DEFS = "STEP_DEFS";
 
 	@Override
 	public Set<OutputConfiguration> getOutputConfigurations() {
@@ -35,9 +35,9 @@ public class MyOutputConfigurationProvider implements IOutputConfigurationProvid
 		defaultOutput.setSetDerivedProperty(true);
 		ocpMap.put(defaultOutput.getName(), defaultOutput);
 
-		OutputConfiguration onceOutput = new OutputConfiguration(DEFAULT_OUTPUT_ONCE);
-		onceOutput.setDescription("Output Folder (once)");
-		onceOutput.setOutputDirectory("./src-gen-once");
+		OutputConfiguration onceOutput = new OutputConfiguration(STEP_DEFS);
+		onceOutput.setDescription("Step Definitions");
+		onceOutput.setOutputDirectory("./src-gen-step-defs");
 		onceOutput.setOverrideExistingResources(false);
 		onceOutput.setCreateOutputDirectory(true);
 		onceOutput.setCleanUpDerivedResources(false);
