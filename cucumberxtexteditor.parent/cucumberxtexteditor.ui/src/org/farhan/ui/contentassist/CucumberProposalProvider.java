@@ -3,10 +3,21 @@
  */
 package org.farhan.ui.contentassist;
 
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.farhan.cucumber.Given;
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
  * on how to customize the content assistant.
  */
 public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
+
+	public void completeGiven_Name(Given model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeGiven_Name(model, assignment, context, acceptor);
+		// compute the plain proposal
+		acceptor.accept(createCompletionProposal(model.getName() + "ID", context));
+	}
 }
