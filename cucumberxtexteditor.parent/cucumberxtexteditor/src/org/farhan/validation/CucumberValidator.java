@@ -3,7 +3,12 @@
  */
 package org.farhan.validation;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
+import org.eclipse.xtext.generator.IGenerator2;
+import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.farhan.cucumber.Cell;
@@ -40,6 +45,12 @@ public class CucumberValidator extends AbstractCucumberValidator {
 			// TODO if it's valid, then check if the the step def exists, if not call the
 			// generator in the quick fix
 			EclipseResourceFileSystemAccess2 fsa = fileAccessProvider.get();
+			
+			HashMap<String, OutputConfiguration> outputConfigs = new HashMap<String, OutputConfiguration>();
+			outputConfigs.put(MyOutputConfigurationProvider.DEFAULT_OUTPUT_ONCE, MyOutputConfigurationProvider.onceOutput);
+			fsa.setOutputConfigurations(outputConfigs);
+			// TODO set the project
+			
 			String fileName = StepWrapper.getComponentName(step.getName()) + "/"
 					+ StepWrapper.getObjectName(step.getName()) + ".feature";
 			if (!fsa.isFile(fileName, MyOutputConfigurationProvider.DEFAULT_OUTPUT_ONCE)) {

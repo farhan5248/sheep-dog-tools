@@ -4,6 +4,8 @@
 package org.farhan.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
@@ -32,4 +34,8 @@ public class CucumberUiModule extends AbstractCucumberUiModule {
 		return CucumberSemanticHighlightingCalculator.class;
 	}
 
+	
+	public Class<? extends IContextualOutputConfigurationProvider> bindIContextualOutputConfigurationProvider() {
+		return EclipseOutputConfigurationProvider.class;
+	}
 }
