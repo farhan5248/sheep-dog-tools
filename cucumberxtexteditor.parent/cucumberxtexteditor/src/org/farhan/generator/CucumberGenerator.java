@@ -69,7 +69,8 @@ public class CucumberGenerator implements IGenerator2 {
 			HashMap<String, String> objects = new HashMap<String, String>();
 			for (Step step : scenario.getSteps()) {
 				try {
-					// TODO, this should be inside StepDefGenerator.generate because for any step,
+					// TODO generate should just get an fsa and step.
+					// this should be inside StepDefGenerator.generate because for any step,
 					// it should be able to figure out what the component name is or the path of the
 					// object like when called for a quick fix. In that case, it'll need to get
 					// access to the parent like so: AbstractScenario as = (AbstractScenario)

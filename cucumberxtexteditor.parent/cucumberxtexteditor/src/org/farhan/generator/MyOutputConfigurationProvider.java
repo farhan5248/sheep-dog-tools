@@ -1,5 +1,6 @@
 package org.farhan.generator;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,12 +12,20 @@ public class MyOutputConfigurationProvider implements IOutputConfigurationProvid
 
 	public final static String DEFAULT_OUTPUT_ONCE = "DEFAULT_OUTPUT_ONCE";
 
-	public static OutputConfiguration onceOutput;
-
 	@Override
 	public Set<OutputConfiguration> getOutputConfigurations() {
-		HashSet<OutputConfiguration> set = new HashSet<OutputConfiguration>();
 
+		HashSet<OutputConfiguration> set = new HashSet<OutputConfiguration>();
+		createConfigs();
+		for (String name : ocpMap.keySet()) {
+			set.add(ocpMap.get(name));
+		}
+		return set;
+	}
+
+	public static HashMap<String, OutputConfiguration> ocpMap = new HashMap<String, OutputConfiguration>();
+
+	public static void createConfigs() {
 		OutputConfiguration defaultOutput = new OutputConfiguration(IFileSystemAccess.DEFAULT_OUTPUT);
 		defaultOutput.setDescription("Output Folder");
 		defaultOutput.setOutputDirectory("./src-gen");
@@ -24,9 +33,9 @@ public class MyOutputConfigurationProvider implements IOutputConfigurationProvid
 		defaultOutput.setCreateOutputDirectory(true);
 		defaultOutput.setCleanUpDerivedResources(true);
 		defaultOutput.setSetDerivedProperty(true);
-		set.add(defaultOutput);
+		ocpMap.put(defaultOutput.getName(), defaultOutput);
 
-		onceOutput = new OutputConfiguration(DEFAULT_OUTPUT_ONCE);
+		OutputConfiguration onceOutput = new OutputConfiguration(DEFAULT_OUTPUT_ONCE);
 		onceOutput.setDescription("Output Folder (once)");
 		onceOutput.setOutputDirectory("./src-gen-once");
 		onceOutput.setOverrideExistingResources(false);
@@ -34,8 +43,7 @@ public class MyOutputConfigurationProvider implements IOutputConfigurationProvid
 		onceOutput.setCleanUpDerivedResources(false);
 		// TODO maybe set this to false in the future
 		onceOutput.setSetDerivedProperty(true);
-		set.add(onceOutput);
-		return set;
+		ocpMap.put(onceOutput.getName(), onceOutput);
 	}
 
 }
