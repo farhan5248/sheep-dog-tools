@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeSet;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -20,6 +21,7 @@ import org.farhan.cucumber.CucumberFactory;
 import org.farhan.cucumber.Examples;
 import org.farhan.cucumber.ExamplesTable;
 import org.farhan.cucumber.Feature;
+import org.farhan.cucumber.Given;
 import org.farhan.cucumber.Row;
 import org.farhan.cucumber.ScenarioOutline;
 import org.farhan.cucumber.Step;
@@ -34,6 +36,20 @@ public class StepDefGenerator {
 		StringWriter sw = new StringWriter();
 		e.printStackTrace(new PrintWriter(sw));
 		System.out.println(sw.toString());
+	}
+
+	public static TreeSet<String> getPreviousObjects(Given step) {
+		AbstractScenario as = (AbstractScenario) step.eContainer();
+		TreeSet<String> previousObjects = new TreeSet<String>();
+		for (Step aStep : as.getSteps()) {
+			if (aStep.equals(step)) {
+				break;
+			} else {
+				String[] objectParts = getObject(aStep).split("/");
+				previousObjects.add(objectParts[objectParts.length - 1]);
+			}
+		}
+		return previousObjects;
 	}
 
 	public static String getProblems(EclipseResourceFileSystemAccess2 fsa, Step step) {
@@ -99,11 +115,16 @@ public class StepDefGenerator {
 		// Create a list of previous steps in reverse order
 		AbstractScenario as = (AbstractScenario) step.eContainer();
 		ArrayList<Step> previousSteps = new ArrayList<Step>();
+		String lastComponent = "Unknown service";
 		for (Step aStep : as.getSteps()) {
 			if (aStep.equals(step)) {
 				break;
 			} else {
 				previousSteps.add(0, aStep);
+				// keep track of the last component to assign to undeclared object components
+				if (!getComponent(aStep).isEmpty()) {
+					lastComponent = getComponent(aStep);
+				}
 			}
 		}
 		// search all previous steps for a more complete object path. While doing so,
@@ -128,20 +149,42 @@ public class StepDefGenerator {
 				if (!component.isEmpty() && object.contains("/")) {
 					break;
 				}
+			} else {
 			}
 		}
 		// TODO, in the future, get the background too if there is one and search there
 		// or throw an exception
-		return component + "/" + object;
+		if (component.isEmpty()) {
+			return lastComponent + "/" + object;
+		} else {
+			return component + "/" + object;
+		}
 	}
 
-	private static String getComponent(Step step) {
-		return (StepWrapper.getComponentName(step.getName()) + " " + StepWrapper.getComponentType(step.getName()))
-				.trim();
+	public static String getComponent(Step step) {
+		// TODO move to StepWrapper
+		String name = StepWrapper.getComponentName(step.getName());
+		if (name == null) {
+			name = "";
+		}
+		String type = StepWrapper.getComponentType(step.getName());
+		if (type == null) {
+			type = "";
+		}
+		return (name + " " + type).trim();
 	}
 
-	private static String getObject(Step step) {
-		return StepWrapper.getObjectName(step.getName()) + " " + StepWrapper.getObjectType(step.getName());
+	public static String getObject(Step step) {
+		// TODO move to StepWrapper		
+		String name = StepWrapper.getObjectName(step.getName());
+		if (name == null) {
+			name = "";
+		}
+		String type = StepWrapper.getObjectType(step.getName());
+		if (type == null) {
+			type = "";
+		}
+		return (name + " " + type).trim();
 	}
 
 	private static EList<Cell> getHeader(Step step) {

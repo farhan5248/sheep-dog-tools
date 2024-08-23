@@ -84,10 +84,8 @@ public class CucumberValidator extends AbstractCucumberValidator {
 	@Check(CheckType.NORMAL)
 	public void checkScenario(Scenario scenario) {
 
-		// TODO validate that state and transition validation are applied to Given/Then
-		// and When respectively
-		// For And, But and *, the last GWT should apply. The quickfix here is to change
-		// the keyword
+		// TODO the first step should have a component. If not, there should be a
+		// background for which this should also be true
 		// TODO also check that there's a sequence of GWT or G(G|A|B)*W(W|A|B)*T(T|A|B)*
 		// and not (G|W|T|A|B)*
 		if (!Character.isUpperCase(scenario.getName().charAt(0))) {

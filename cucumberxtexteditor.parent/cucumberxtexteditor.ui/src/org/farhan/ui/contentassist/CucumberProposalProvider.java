@@ -3,10 +3,29 @@
  */
 package org.farhan.ui.contentassist;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.TreeSet;
+
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.farhan.cucumber.Given;
+import org.farhan.cucumber.Step;
+import org.farhan.generator.CucumberOutputConfigurationProvider;
+import org.farhan.generator.StepDefGenerator;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
@@ -14,10 +33,66 @@ import org.farhan.cucumber.Given;
  */
 public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 
-	public void completeGiven_Name(Given model, Assignment assignment, ContentAssistContext context,
+	@Inject
+	private Provider<EclipseResourceFileSystemAccess2> fileAccessProvider;
+
+	private EclipseResourceFileSystemAccess2 getFSA(Resource resource) {
+		EclipseResourceFileSystemAccess2 fsa = fileAccessProvider.get();
+		fsa.setOutputConfigurations(CucumberOutputConfigurationProvider.ocpMap);
+		fsa.setProject(ResourcesPlugin.getWorkspace().getRoot()
+				.getFile(new Path(resource.getURI().toPlatformString(true))).getProject());
+
+		return fsa;
+	}
+
+	private static void logError(Exception e, String name) {
+		// TODO inject the logger instead
+		System.out.println("There was a problem listing directories for: " + name);
+		StringWriter sw = new StringWriter();
+		e.printStackTrace(new PrintWriter(sw));
+		System.out.println(sw.toString());
+	}
+
+	public void completeGiven_Name(Given step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeGiven_Name(model, assignment, context, acceptor);
-		// compute the plain proposal
-		acceptor.accept(createCompletionProposal(model.getName() + "ID", context));
+		super.completeGiven_Name(step, assignment, context, acceptor);
+		String component;
+		if (step.getName() == null) {
+			component = "";
+		} else {
+			component = StepDefGenerator.getComponent(step);
+		}
+		if (component.isEmpty()) {
+			// get a list of previous objects
+			TreeSet<String> previousObjects = StepDefGenerator.getPreviousObjects(step);
+			for (String previousObject : previousObjects) {
+				acceptor.accept(createCompletionProposal("The " + previousObject, context));
+			}
+			// get a list of applications
+			for (IResource stepDefComponent : getFolders(step, "")) {
+				acceptor.accept(createCompletionProposal("The " + stepDefComponent.getName() + ", ", context));
+			}
+		} else {
+			// get a list of objects
+			// TODO should this list objects only and objects with their paths?
+			// TODO replace the output directory from the path
+			for (IResource stepDefObject : getFolders(step, "/" + component)) {
+				acceptor.accept(createCompletionProposal(
+						"The " + component + ", " + stepDefObject.getProjectRelativePath(), context));
+			}
+		}
+	}
+
+	private IResource[] getFolders(Step step, String name) {
+		try {
+			IProject project = ResourcesPlugin.getWorkspace().getRoot()
+					.getFile(new Path(step.eResource().getURI().toPlatformString(true))).getProject();
+			IFolder folder = project.getFolder(CucumberOutputConfigurationProvider.ocpMap
+					.get(CucumberOutputConfigurationProvider.STEP_DEFS).getOutputDirectory() + name);
+			return folder.members();
+		} catch (CoreException e) {
+			logError(e, name);
+			return new IResource[] {};
+		}
 	}
 }
