@@ -52,10 +52,10 @@ public class CucumberValidator extends AbstractCucumberValidator {
 
 		// TODO the quickfix here is to identify which regex is broken and put an
 		// example in place
-		if (!MBTEdgeValidator.isValid(step.getName()) && !MBTVertexValidator.isValid(step.getName())) {
+		if (!StepValidator.isValid(step.getName())) {
 			// TODO instead of this error message, give the parts breakdown to see what's
 			// missing
-			error(MBTVertexValidator.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
+			error(StepValidator.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
 		} else {
 			// if it's valid, then check if the the step def exists, if not call the
 			// generator in the quick fix

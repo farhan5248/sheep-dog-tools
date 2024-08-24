@@ -6,8 +6,7 @@ Bundle-Vendor: Lean Sheep Dog
 Bundle-Version: 1.16.0.qualifier
 Bundle-SymbolicName: cucumberxtexteditor; singleton:=true
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: .,
- lib/sheep-dog-test-1.0-SNAPSHOT.jar
+Bundle-ClassPath: .
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase,
  org.eclipse.equinox.common;bundle-version="3.16.0",
