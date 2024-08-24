@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.validation.StepValidator;
-import org.farhan.validation.StepWrapper;
-
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier.Keyword;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
@@ -53,8 +51,8 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(step));
 		addParameter(aMethod, "String", "docString");
 		BlockStmt body = aMethod.getBody().get();
-		if (StepWrapper.isEdge(step) && body.getStatements().size() == 4
-				|| !StepWrapper.isEdge(step) && body.getStatements().size() == 3) {
+		if (StepValidator.isEdge(step) && body.getStatements().size() == 4
+				|| !StepValidator.isEdge(step) && body.getStatements().size() == 3) {
 			return;
 		} else {
 			body.addStatement(getCallForFactory(step) + getCallForInputOutputsForDocString(step) + ";");
@@ -97,10 +95,10 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 			body = aMethod.createBody();
 			body.addStatement(getCallForFactory(step) + getCallForComponent(step) + ";");
 			body.addStatement(getCallForFactory(step) + getCallForPath(step) + ";");
-			if (StepWrapper.isEdge(step)) {
+			if (StepValidator.isEdge(step)) {
 				body.addStatement(getCallForFactory(step) + getCallForTransition() + ";");
 			} else {
-				if (StepWrapper.getObjectAttachment(step).isEmpty()) {
+				if (StepValidator.getAttachment(step).isEmpty()) {
 					body.addStatement(getCallForFactory(step) + getCallForInputOutputsForState(step) + ";");
 				}
 			}
@@ -112,13 +110,13 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		if (theJavaClass.getImports().isEmpty()) {
 			theJavaClass.addImport("java.util.HashMap");
 		}
-		if (!StepWrapper.isEdge(step) && StepWrapper.getObjectAttachment(step).isEmpty()) {
+		if (!StepValidator.isEdge(step) && StepValidator.getAttachment(step).isEmpty()) {
 			MethodDeclaration aMethod = getMethod(getMethodNameForStepObj(step));
 			aMethod.removeBody();
 			addParameter(aMethod, "HashMap<String, String>", "keyMap");
 			return aMethod;
 
-		} else if (StepWrapper.isEdge(step)) {
+		} else if (StepValidator.isEdge(step)) {
 			return getMethod("transition").removeBody();
 		} else {
 			// data table or doc string will cover this
@@ -138,8 +136,8 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(step));
 		addParameter(aMethod, "DataTable", "dataTable");
 		BlockStmt body = aMethod.getBody().get();
-		if (StepWrapper.isEdge(step) && body.getStatements().size() == 4
-				|| !StepWrapper.isEdge(step) && body.getStatements().size() == 3) {
+		if (StepValidator.isEdge(step) && body.getStatements().size() == 4
+				|| !StepValidator.isEdge(step) && body.getStatements().size() == 3) {
 			return;
 		} else {
 			body.addStatement(getCallForFactory(step) + getCallForInputOutputsForDataTable(step) + ";");
@@ -166,7 +164,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	private String getCallForComponent(String step) {
-		String name = StepWrapper.getComponentName(step);
+		String name = StepValidator.getComponentName(step);
 		if (name.isEmpty()) {
 			name = lastComponent;
 		} else {
@@ -191,12 +189,12 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 
 	private String getCallForInputOutputsForState(String step) throws Exception {
 
-		return "." + getSetOrAssert(step) + "InputOutputs(\"" + Utilities.upperFirst(StepWrapper.getObjectState(step))
+		return "." + getSetOrAssert(step) + "InputOutputs(\"" + Utilities.upperFirst(StepValidator.getStateType(step))
 				+ "\"" + getSectionArg(step) + ")";
 	}
 
 	private String getCallForPath(String step) {
-		return ".setPath(\"" + StepWrapper.getObjectName(step) + "\")";
+		return ".setPath(\"" + StepValidator.getObjectName(step) + "\")";
 	}
 
 	private String getCallForTransition() {
@@ -204,7 +202,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	private String getFactoryName(String step) {
-		String name = StepWrapper.getComponentName(step);
+		String name = StepValidator.getComponentName(step);
 		if (name.isEmpty()) {
 			name = lastComponent;
 		} else {
@@ -220,11 +218,11 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	private String getInterfaceName(String step) {
-		String name = StepWrapper.getObjectName(step);
+		String name = StepValidator.getObjectName(step);
 		String nameParts[] = name.split("/");
 		name = nameParts[nameParts.length - 1];
 		name = removeSpecialChars(name);
-		name = name + Utilities.upperFirst(StepWrapper.getObjectType(step));
+		name = name + Utilities.upperFirst(StepValidator.getObjectType(step));
 		return name;
 	}
 
@@ -245,7 +243,8 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	private String getMethodNameForStepObj(String step) throws Exception {
-		return getSetOrAssert(step) + getSection(step) + Utilities.upperFirst(StepWrapper.getObjectState(step));
+		return getSetOrAssert(step) + getSection(step)
+				+ Utilities.removeDelimiterAndCapitalize(StepValidator.getStateType(step), " ");
 	}
 
 	private String getPackageDeclaration() {
@@ -257,8 +256,8 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	private String getSection(String step) {
-		String sectionName = StepWrapper.getDetailsName(step);
-		String sectionType = StepWrapper.getDetailsType(step);
+		String sectionName = StepValidator.getDetailsName(step);
+		String sectionType = StepValidator.getDetailsType(step);
 		if (sectionName == null) {
 			return "";
 		}

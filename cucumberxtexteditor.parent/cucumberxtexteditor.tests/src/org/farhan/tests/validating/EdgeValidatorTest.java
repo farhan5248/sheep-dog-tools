@@ -8,8 +8,7 @@ public class EdgeValidatorTest {
 
 	@Test
 	public void testIsEdge() {
-		Assertions
-				.assertTrue(StepValidator.isEdge("The Something1 application, Something2 request is executed with"));
+		Assertions.assertTrue(StepValidator.isEdge("The Something1 application, Something2 request is executed with"));
 	}
 
 	@Test
@@ -54,9 +53,8 @@ public class EdgeValidatorTest {
 
 	@Test
 	public void testGetState() {
-		Assertions
-				.assertTrue(StepValidator.getState("The Something1 application, Something2 request is executed with")
-						.contentEquals("is executed with"));
+		Assertions.assertTrue(StepValidator.getState("The Something1 application, Something2 request is executed with")
+				.contentEquals("is executed with"));
 	}
 
 	@Test
@@ -82,15 +80,14 @@ public class EdgeValidatorTest {
 
 	@Test
 	public void testGetTime() {
-		Assertions.assertTrue(
-				StepValidator.getTime("The Something1 application, Something2 request is executed on time")
+		Assertions
+				.assertTrue(StepValidator.getTime("The Something1 application, Something2 request is executed on time")
 						.contentEquals("on time"));
 	}
 
 	@Test
 	public void testStateRegexWith() {
-		Assertions.assertTrue(
-				StepValidator.isValid("The Something1 application, Something2 request is executed with"));
+		Assertions.assertTrue(StepValidator.isValid("The Something1 application, Something2 request is executed with"));
 	}
 
 	@Test
@@ -111,20 +108,18 @@ public class EdgeValidatorTest {
 
 	@Test
 	public void testStateRegexIsntExecuted() {
-		Assertions
-				.assertTrue(StepValidator.isValid("The Something1 application, Something2 request isn't executed"));
+		Assertions.assertTrue(StepValidator.isValid("The Something1 application, Something2 request isn't executed"));
 	}
 
 	@Test
 	public void testStateRegexWillBeExecuted() {
-		Assertions.assertTrue(
-				StepValidator.isValid("The Something1 application, Something2 request will be executed"));
+		Assertions.assertTrue(StepValidator.isValid("The Something1 application, Something2 request will be executed"));
 	}
 
 	@Test
 	public void testStateRegexWontBeExecuted() {
-		Assertions.assertTrue(
-				StepValidator.isValid("The Something1 application, Something2 request won't be executed"));
+		Assertions
+				.assertTrue(StepValidator.isValid("The Something1 application, Something2 request won't be executed"));
 	}
 
 	@Test
@@ -159,8 +154,7 @@ public class EdgeValidatorTest {
 
 	@Test
 	public void testTimeRegexBefore() {
-		Assertions.assertTrue(
-				StepValidator.isValid("The Something1 plugin, Something2 request is sent before midday"));
+		Assertions.assertTrue(StepValidator.isValid("The Something1 plugin, Something2 request is sent before midday"));
 	}
 
 	@Test

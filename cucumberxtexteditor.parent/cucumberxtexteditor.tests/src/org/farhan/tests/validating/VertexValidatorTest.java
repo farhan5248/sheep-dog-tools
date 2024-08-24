@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class VertexValidatorTest {
 
 	@Test
-	public void testIsVertice() {
+	public void testIsVertex() {
 		Assertions.assertTrue(
 				StepValidator.isVertex("The Something1 application, Something2 file, Something3 section is empty"));
 	}
@@ -125,13 +125,15 @@ public class VertexValidatorTest {
 
 	@Test
 	public void testStateRegexAsFollows() {
-		Assertions.assertTrue(StepValidator.isValid("The Something1 application, Something2 file is created as follows"));
+		Assertions
+				.assertTrue(StepValidator.isValid("The Something1 application, Something2 file is created as follows"));
 	}
 
 	@Test
 	public void testGetAttachment() {
-		Assertions.assertTrue(StepValidator.getAttachment("The Something1 application, Something2 file is created as follows")
-				.contentEquals("as follows"));
+		Assertions.assertTrue(
+				StepValidator.getAttachment("The Something1 application, Something2 file is created as follows")
+						.contentEquals("as follows"));
 	}
 
 	@Test

@@ -39,7 +39,6 @@ import org.farhan.cucumber.Row;
 import org.farhan.cucumber.ScenarioOutline;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.StepTable;
-import org.farhan.validation.StepWrapper;
 
 /**
  * Generates code from your model files on save.
@@ -61,7 +60,6 @@ public class CucumberGenerator implements IGenerator2 {
 	public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
 
 		Feature theFeature = (Feature) resource.getContents().get(0);
-		// TODO test if this code is called if the feature is invalid
 		for (AbstractScenario scenario : theFeature.getAbstractScenarios()) {
 			HashMap<String, String> objects = new HashMap<String, String>();
 			for (Step step : scenario.getSteps()) {

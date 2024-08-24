@@ -24,7 +24,7 @@ import org.farhan.cucumber.Row;
 import org.farhan.cucumber.ScenarioOutline;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.StepTable;
-import org.farhan.validation.StepWrapper;
+import org.farhan.validation.StepValidator;
 
 public class StepDefGenerator {
 
@@ -36,32 +36,6 @@ public class StepDefGenerator {
 		System.out.println(sw.toString());
 	}
 
-	public static String getComponent(Step step) {
-		// TODO move to StepWrapper
-		String name = StepWrapper.getComponentName(step.getName());
-		if (name == null) {
-			name = "";
-		}
-		String type = StepWrapper.getComponentType(step.getName());
-		if (type == null) {
-			type = "";
-		}
-		return (name + " " + type).trim();
-	}
-
-	public static String getObject(Step step) {
-		// TODO move to StepWrapper
-		String name = StepWrapper.getObjectName(step.getName());
-		if (name == null) {
-			name = "";
-		}
-		String type = StepWrapper.getObjectType(step.getName());
-		if (type == null) {
-			type = "";
-		}
-		return (name + " " + type).trim();
-	}
-
 	public static TreeSet<String> getPreviousObjects(Given step) {
 		AbstractScenario as = (AbstractScenario) step.eContainer();
 		TreeSet<String> previousObjects = new TreeSet<String>();
@@ -69,7 +43,7 @@ public class StepDefGenerator {
 			if (aStep.equals(step)) {
 				break;
 			} else {
-				String[] objectParts = getObject(aStep).split("/");
+				String[] objectParts = StepValidator.getObject(aStep.getName()).split("/");
 				previousObjects.add(objectParts[objectParts.length - 1]);
 			}
 		}
@@ -85,7 +59,7 @@ public class StepDefGenerator {
 			}
 			// check if the keyword exists
 			Resource theResource = getOrCreateResource(objectURI);
-			Feature theObject = getOrCreateObject(theResource, getObject(step));
+			Feature theObject = getOrCreateObject(theResource, StepValidator.getObject(step.getName()));
 			AbstractScenario theStepDef = getStepDef(theObject, step);
 			if (theStepDef == null) {
 				return "This object step definition doesn't exist for: " + objectURI.path();
@@ -105,11 +79,9 @@ public class StepDefGenerator {
 
 	public static void generate(Step step) {
 		try {
-			System.out.println("Generating this step: " + step.getName());
 			URI objectURI = getObjectURI(step);
-			System.out.println("Generating this URI: " + objectURI.path());
 			Resource theResource = getOrCreateResource(objectURI);
-			Feature theObject = getOrCreateObject(theResource, getObject(step));
+			Feature theObject = getOrCreateObject(theResource, StepValidator.getObject(step.getName()));
 			AbstractScenario theStepDef = getOrCreateStepDef(theObject, step);
 			EList<Cell> headers = getHeader(step);
 			if (headers != null) {
@@ -137,8 +109,8 @@ public class StepDefGenerator {
 	}
 
 	private static String getQualifiedName(Step step) {
-		String component = getComponent(step);
-		String object = getObject(step);
+		String component = StepValidator.getComponent(step.getName());
+		String object = StepValidator.getObject(step.getName());
 
 		// if there is a component and the object has a /, we're done
 		if (!component.isEmpty() && object.contains("/")) {
@@ -154,8 +126,8 @@ public class StepDefGenerator {
 			} else {
 				previousSteps.add(0, aStep);
 				// keep track of the last component to assign to undeclared object components
-				if (!getComponent(aStep).isEmpty()) {
-					lastComponent = getComponent(aStep);
+				if (!StepValidator.getComponent(aStep.getName()).isEmpty()) {
+					lastComponent = StepValidator.getComponent(aStep.getName());
 				}
 			}
 		}
@@ -165,8 +137,8 @@ public class StepDefGenerator {
 		String objectKey = objectParts[objectParts.length - 1];
 		for (Step previousStep : previousSteps) {
 			// if the step has a matching object
-			String previousObject = getObject(previousStep);
-			String previousComponent = getComponent(previousStep);
+			String previousObject = StepValidator.getObject(previousStep.getName());
+			String previousComponent = StepValidator.getComponent(previousStep.getName());
 			if (previousObject.endsWith(objectKey)) {
 
 				// if the object doesn't have / and the matching object does. Set it

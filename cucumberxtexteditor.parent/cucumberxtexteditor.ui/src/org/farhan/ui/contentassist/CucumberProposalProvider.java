@@ -20,6 +20,7 @@ import org.farhan.cucumber.Given;
 import org.farhan.cucumber.Step;
 import org.farhan.generator.CucumberOutputConfigurationProvider;
 import org.farhan.generator.StepDefGenerator;
+import org.farhan.validation.StepValidator;
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
@@ -42,7 +43,7 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 		if (step.getName() == null) {
 			component = "";
 		} else {
-			component = StepDefGenerator.getComponent(step);
+			component = StepValidator.getComponent(step.getName());
 		}
 		if (component.isEmpty()) {
 			// get a list of previous objects
@@ -56,11 +57,15 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 			}
 		} else {
 			// get a list of objects
-			// TODO should this list objects only and objects with their paths?
-			// TODO replace the output directory from the path
-			for (IResource stepDefObject : getFolders(step, "/" + component)) {
-				acceptor.accept(createCompletionProposal(
-						"The " + component + ", " + stepDefObject.getProjectRelativePath(), context));
+			// TODO should this list objects only and objects with their paths? Right now it
+			// does object with path
+			// TODO recursively search component directory for objects
+			for (IResource stepDefObjectResource : getFolders(step, "/" + component)) {
+
+				// ([^\/]+)\/([^\/]+)\/(.*).feature group 3
+				String stepDefObject = stepDefObjectResource.getProjectRelativePath().toString()
+						.split("/" + component + "/")[1].replace(".feature", "");
+				acceptor.accept(createCompletionProposal("The " + component + ", " + stepDefObject, context));
 			}
 		}
 	}
@@ -69,7 +74,8 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 		try {
 			IProject project = ResourcesPlugin.getWorkspace().getRoot()
 					.getFile(new Path(step.eResource().getURI().toPlatformString(true))).getProject();
-			IFolder folder = project.getFolder(CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory() + name);
+			IFolder folder = project
+					.getFolder(CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory() + name);
 			return folder.members();
 		} catch (CoreException e) {
 			logError(e, name);

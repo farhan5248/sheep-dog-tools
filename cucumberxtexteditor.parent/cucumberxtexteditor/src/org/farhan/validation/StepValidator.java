@@ -9,8 +9,8 @@ public class StepValidator {
 	private static final String COMPONENT_REGEX = "(( " + NAME_REGEX + "+)( application| service| plugin| batchjob),)?";
 	private static final String OBJECT_VERTEX_REGEX = "( file| page| response)"; // 6
 	private static final String OBJECT_EDGE_REGEX = "( request| goal| job)"; // 7
-	private static final String OBJECT_REGEX = "( " + NAME_REGEX + "+)(" + OBJECT_VERTEX_REGEX + "|" + OBJECT_EDGE_REGEX
-			+ ")";
+	private static final String OBJECT_REGEX = "(( " + NAME_REGEX + "+)(" + OBJECT_VERTEX_REGEX + "|" + OBJECT_EDGE_REGEX
+			+ "))";
 	private static final String DETAILS_REGEX = "(,( " + NAME_REGEX + "+)( section| fragment| table| snippet))?";
 	private static final String STATE_VERTEX_REGEX = "( empty| present| absent| enabled| disabled| valid| invalid| uploaded| downloaded| created)";
 	private static final String STATE_EDGE_REGEX = "( executed| sent| triggered)";
@@ -27,8 +27,8 @@ public class StepValidator {
 		return "This is an invalid statement. These are the rules:" + rules;
 	}
 
-	public static String getGroup(String text, int group) {
-		Matcher m = Pattern.compile(REGEX).matcher(text);
+	public static String getGroup(String regex, String text, int group) {
+		Matcher m = Pattern.compile(regex).matcher(text);
 		if (m.find()) {
 			String temp = m.group(group);
 			if (temp != null) {
@@ -40,6 +40,18 @@ public class StepValidator {
 		return "";
 	}
 
+	public static String getGroup(String text, int group) {
+		return getGroup(REGEX, text, group);
+	}
+
+	public static String getComponent(String text) {
+		return getGroup("The" + COMPONENT_REGEX, text, 1).replace(",", "");
+	}
+
+	public static String getObject(String text) {
+		return getGroup("The" + COMPONENT_REGEX + OBJECT_REGEX, text, 4);
+	}
+
 	public static boolean isNegativeStep(String text) {
 		return getGroup(text, 12).contains("isn't") || getGroup(text, 12).contains("won't be");
 	}
@@ -49,11 +61,11 @@ public class StepValidator {
 	}
 
 	public static boolean isEdge(String text) {
-		return !getGroup(text, 7).isEmpty();
+		return !getGroup(text, 8).isEmpty();
 	}
 
 	public static boolean isVertex(String text) {
-		return !getGroup(text, 6).isEmpty();
+		return !getGroup(text, 7).isEmpty();
 	}
 
 	public static boolean hasAttachment(String text) {
@@ -69,39 +81,39 @@ public class StepValidator {
 	}
 
 	public static String getObjectName(String text) {
-		return getGroup(text, 4);
-	}
-
-	public static String getObjectType(String text) {
 		return getGroup(text, 5);
 	}
 
-	public static String getDetails(String text) {
-		return getGroup(text, 8);
+	public static String getObjectType(String text) {
+		return getGroup(text, 6);
 	}
 
-	public static String getDetailsName(String text) {
+	public static String getDetails(String text) {
 		return getGroup(text, 9);
 	}
 
-	public static String getDetailsType(String text) {
+	public static String getDetailsName(String text) {
 		return getGroup(text, 10);
 	}
 
-	public static String getState(String text) {
+	public static String getDetailsType(String text) {
 		return getGroup(text, 11);
 	}
 
-	public static String getStateModality(String text) {
+	public static String getState(String text) {
 		return getGroup(text, 12);
 	}
 
-	public static String getStateType(String text) {
+	public static String getStateModality(String text) {
 		return getGroup(text, 13);
 	}
 
+	public static String getStateType(String text) {
+		return getGroup(text, 14);
+	}
+
 	public static String getAttachment(String text) {
-		return getGroup(text, 16);
+		return getGroup(text, 17);
 	}
 
 	public static boolean isValid(String text) {
@@ -109,7 +121,7 @@ public class StepValidator {
 	}
 
 	public static String getTime(String text) {
-		return getGroup(text, 17);
+		return getGroup(text, 18);
 	}
 
 }
