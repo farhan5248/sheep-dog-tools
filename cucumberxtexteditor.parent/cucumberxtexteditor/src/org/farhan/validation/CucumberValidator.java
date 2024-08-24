@@ -3,10 +3,6 @@
  */
 package org.farhan.validation;
 
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.farhan.cucumber.Cell;
@@ -15,29 +11,14 @@ import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.StepTable;
-import org.farhan.generator.CucumberOutputConfigurationProvider;
 import org.farhan.generator.StepDefGenerator;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-
 public class CucumberValidator extends AbstractCucumberValidator {
-
-	@Inject
-	private Provider<EclipseResourceFileSystemAccess2> fileAccessProvider;
 
 	public static final String INVALID_NAME = "invalidName";
 	public static final String INVALID_HEADER = "invalidHeader";
 	public static final String INVALID_STEP_TYPE = "invalidStepType";
 	public static final String MISSING_STEP_DEF = "invalidStepType";
-
-	private EclipseResourceFileSystemAccess2 getFSA(Resource resource) {
-		EclipseResourceFileSystemAccess2 fsa = fileAccessProvider.get();
-		fsa.setOutputConfigurations(CucumberOutputConfigurationProvider.ocpMap);
-		fsa.setProject(ResourcesPlugin.getWorkspace().getRoot()
-				.getFile(new Path(resource.getURI().toPlatformString(true))).getProject());
-		return fsa;
-	}
 
 	// FAST is when the file is modified
 	@Check(CheckType.FAST)
@@ -52,11 +33,7 @@ public class CucumberValidator extends AbstractCucumberValidator {
 		} else {
 			// if it's valid, then check if the the step def exists, if not call the
 			// generator in the quick fix
-			step.eResource().getURI().devicePath();// /resource/xtexttest/src/cucumber/CodeToUML/Test.feature
-			step.eResource().getURI().toPlatformString(true);//toPlatformString() returned	"/xtexttest/src/cucumber/CodeToUML/Test.feature" (id=205)	
-			step.eResource().getURI().toFileString();
-			EclipseResourceFileSystemAccess2 fsa = getFSA(step.eResource());
-			String problems = StepDefGenerator.getProblems(fsa, step);
+			String problems = StepDefGenerator.getProblems(step);
 			if (!problems.isEmpty()) {
 				warning(problems, CucumberPackage.Literals.STEP__NAME, MISSING_STEP_DEF, step.getName());
 			}

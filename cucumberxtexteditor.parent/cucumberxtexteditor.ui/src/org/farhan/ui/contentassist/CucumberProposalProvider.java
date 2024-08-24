@@ -5,7 +5,6 @@ package org.farhan.ui.contentassist;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
 import java.util.TreeSet;
 
 import org.eclipse.core.resources.IFolder;
@@ -14,9 +13,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.farhan.cucumber.Given;
@@ -24,26 +21,11 @@ import org.farhan.cucumber.Step;
 import org.farhan.generator.CucumberOutputConfigurationProvider;
 import org.farhan.generator.StepDefGenerator;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-
 /**
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
  * on how to customize the content assistant.
  */
 public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
-
-	@Inject
-	private Provider<EclipseResourceFileSystemAccess2> fileAccessProvider;
-
-	private EclipseResourceFileSystemAccess2 getFSA(Resource resource) {
-		EclipseResourceFileSystemAccess2 fsa = fileAccessProvider.get();
-		fsa.setOutputConfigurations(CucumberOutputConfigurationProvider.ocpMap);
-		fsa.setProject(ResourcesPlugin.getWorkspace().getRoot()
-				.getFile(new Path(resource.getURI().toPlatformString(true))).getProject());
-
-		return fsa;
-	}
 
 	private static void logError(Exception e, String name) {
 		// TODO inject the logger instead
@@ -87,8 +69,7 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 		try {
 			IProject project = ResourcesPlugin.getWorkspace().getRoot()
 					.getFile(new Path(step.eResource().getURI().toPlatformString(true))).getProject();
-			IFolder folder = project.getFolder(CucumberOutputConfigurationProvider.ocpMap
-					.get(CucumberOutputConfigurationProvider.STEP_DEFS).getOutputDirectory() + name);
+			IFolder folder = project.getFolder(CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory() + name);
 			return folder.members();
 		} catch (CoreException e) {
 			logError(e, name);

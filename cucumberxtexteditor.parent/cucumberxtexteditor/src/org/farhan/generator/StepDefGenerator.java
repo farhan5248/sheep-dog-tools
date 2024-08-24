@@ -12,7 +12,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.Cell;
@@ -37,6 +36,32 @@ public class StepDefGenerator {
 		System.out.println(sw.toString());
 	}
 
+	public static String getComponent(Step step) {
+		// TODO move to StepWrapper
+		String name = StepWrapper.getComponentName(step.getName());
+		if (name == null) {
+			name = "";
+		}
+		String type = StepWrapper.getComponentType(step.getName());
+		if (type == null) {
+			type = "";
+		}
+		return (name + " " + type).trim();
+	}
+
+	public static String getObject(Step step) {
+		// TODO move to StepWrapper
+		String name = StepWrapper.getObjectName(step.getName());
+		if (name == null) {
+			name = "";
+		}
+		String type = StepWrapper.getObjectType(step.getName());
+		if (type == null) {
+			type = "";
+		}
+		return (name + " " + type).trim();
+	}
+
 	public static TreeSet<String> getPreviousObjects(Given step) {
 		AbstractScenario as = (AbstractScenario) step.eContainer();
 		TreeSet<String> previousObjects = new TreeSet<String>();
@@ -51,25 +76,25 @@ public class StepDefGenerator {
 		return previousObjects;
 	}
 
-	public static String getProblems(IFileSystemAccess2 fsa, Step step) {
+	public static String getProblems(Step step) {
 		try {
 			// check if the object exists
-			String fileName = getQualifiedName(step) + ".feature";
-			if (!fsa.isFile(fileName, CucumberOutputConfigurationProvider.STEP_DEFS)) {
-				return "This object doesn't exist for: " + fileName;
+			URI objectURI = getObjectURI(step);
+			if (!(new ResourceSetImpl().getURIConverter().exists(objectURI, null))) {
+				return "This object doesn't exist for: " + objectURI.path();
 			}
 			// check if the keyword exists
-			Resource theResource = getOrCreateResource(fsa, fileName);
+			Resource theResource = getOrCreateResource(objectURI);
 			Feature theObject = getOrCreateObject(theResource, getObject(step));
 			AbstractScenario theStepDef = getStepDef(theObject, step);
 			if (theStepDef == null) {
-				return "This object step definition doesn't exist for: " + fileName;
+				return "This object step definition doesn't exist for: " + objectURI.path();
 			}
 			// check if the parameters exist
 			EList<Cell> headers = getHeader(step);
 			if (headers != null) {
 				if (getParameters(theStepDef, headers) == null) {
-					return "This object step definition parameter set doesn't exist for: " + fileName;
+					return "This object step definition parameter set doesn't exist for: " + objectURI.path();
 				}
 			}
 		} catch (Exception e) {
@@ -78,10 +103,10 @@ public class StepDefGenerator {
 		return "";
 	}
 
-	public static void generate(IFileSystemAccess2 fsa, Step step) {
+	public static void generate(Step step) {
 		try {
-			String fileName = getQualifiedName(step) + ".feature";
-			Resource theResource = getOrCreateResource(fsa, fileName);
+			URI objectURI = getObjectURI(step);
+			Resource theResource = getOrCreateResource(objectURI);
 			Feature theObject = getOrCreateObject(theResource, getObject(step));
 			AbstractScenario theStepDef = getOrCreateStepDef(theObject, step);
 			EList<Cell> headers = getHeader(step);
@@ -94,15 +119,19 @@ public class StepDefGenerator {
 		}
 	}
 
-	private static Resource getOrCreateResource(IFileSystemAccess2 fsa, String fileName) throws Exception {
-		URI uri = fsa.getURI(fileName, CucumberOutputConfigurationProvider.STEP_DEFS);
-		Resource theResource = new ResourceSetImpl().createResource(uri);
-		// TODO use this to check for file existence
-		new ResourceSetImpl().getURIConverter().exists(uri, null);
-		if (fsa.isFile(fileName, CucumberOutputConfigurationProvider.STEP_DEFS)) {
+	private static Resource getOrCreateResource(URI objectURI) throws Exception {
+		Resource theResource = new ResourceSetImpl().createResource(objectURI);
+		if (new ResourceSetImpl().getURIConverter().exists(objectURI, null)) {
 			theResource.load(new HashMap());
 		}
 		return theResource;
+	}
+
+	private static URI getObjectURI(Step step) {
+		String projectName = step.eResource().getURI().toPlatformString(false).split("/")[1];
+		String outputDir = CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory();
+		String fileName = getQualifiedName(step);
+		return URI.createPlatformResourceURI("/" + projectName + "/" + outputDir + "/" + fileName, true);
 	}
 
 	private static String getQualifiedName(Step step) {
@@ -111,7 +140,7 @@ public class StepDefGenerator {
 
 		// if there is a component and the object has a /, we're done
 		if (!component.isEmpty() && object.contains("/")) {
-			return component + "/" + object;
+			return component + "/" + object + ".feature";
 		}
 		// Create a list of previous steps in reverse order
 		AbstractScenario as = (AbstractScenario) step.eContainer();
@@ -156,36 +185,10 @@ public class StepDefGenerator {
 		// TODO, in the future, get the background too if there is one and search there
 		// or throw an exception
 		if (component.isEmpty()) {
-			return lastComponent + "/" + object;
+			return lastComponent + "/" + object + ".feature";
 		} else {
-			return component + "/" + object;
+			return component + "/" + object + ".feature";
 		}
-	}
-
-	public static String getComponent(Step step) {
-		// TODO move to StepWrapper
-		String name = StepWrapper.getComponentName(step.getName());
-		if (name == null) {
-			name = "";
-		}
-		String type = StepWrapper.getComponentType(step.getName());
-		if (type == null) {
-			type = "";
-		}
-		return (name + " " + type).trim();
-	}
-
-	public static String getObject(Step step) {
-		// TODO move to StepWrapper		
-		String name = StepWrapper.getObjectName(step.getName());
-		if (name == null) {
-			name = "";
-		}
-		String type = StepWrapper.getObjectType(step.getName());
-		if (type == null) {
-			type = "";
-		}
-		return (name + " " + type).trim();
 	}
 
 	private static EList<Cell> getHeader(Step step) {
@@ -291,4 +294,5 @@ public class StepDefGenerator {
 		}
 		return cellsAsString;
 	}
+
 }

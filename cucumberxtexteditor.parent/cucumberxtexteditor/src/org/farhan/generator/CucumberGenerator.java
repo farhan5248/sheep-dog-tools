@@ -65,7 +65,7 @@ public class CucumberGenerator implements IGenerator2 {
 		for (AbstractScenario scenario : theFeature.getAbstractScenarios()) {
 			HashMap<String, String> objects = new HashMap<String, String>();
 			for (Step step : scenario.getSteps()) {
-				StepDefGenerator.generate(fsa, step);
+				StepDefGenerator.generate(step);
 			}
 		}
 	}
