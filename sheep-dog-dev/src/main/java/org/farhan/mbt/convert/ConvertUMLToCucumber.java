@@ -14,13 +14,13 @@ import org.farhan.cucumber.Step;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.MojoGoal;
-import org.farhan.mbt.core.StepWrapper;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberJavaWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
+import org.farhan.validation.StepWrapper;
 
 public class ConvertUMLToCucumber extends MojoGoal {
 

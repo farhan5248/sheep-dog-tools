@@ -3,17 +3,10 @@
  */
 package org.farhan.validation;
 
-import java.util.HashMap;
-
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
-import org.eclipse.xtext.generator.OutputConfiguration;
-import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.farhan.cucumber.Cell;
@@ -59,6 +52,9 @@ public class CucumberValidator extends AbstractCucumberValidator {
 		} else {
 			// if it's valid, then check if the the step def exists, if not call the
 			// generator in the quick fix
+			step.eResource().getURI().devicePath();// /resource/xtexttest/src/cucumber/CodeToUML/Test.feature
+			step.eResource().getURI().toPlatformString(true);//toPlatformString() returned	"/xtexttest/src/cucumber/CodeToUML/Test.feature" (id=205)	
+			step.eResource().getURI().toFileString();
 			EclipseResourceFileSystemAccess2 fsa = getFSA(step.eResource());
 			String problems = StepDefGenerator.getProblems(fsa, step);
 			if (!problems.isEmpty()) {

@@ -12,7 +12,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.cucumber.AbstractScenario;
@@ -52,7 +51,7 @@ public class StepDefGenerator {
 		return previousObjects;
 	}
 
-	public static String getProblems(EclipseResourceFileSystemAccess2 fsa, Step step) {
+	public static String getProblems(IFileSystemAccess2 fsa, Step step) {
 		try {
 			// check if the object exists
 			String fileName = getQualifiedName(step) + ".feature";
@@ -98,6 +97,8 @@ public class StepDefGenerator {
 	private static Resource getOrCreateResource(IFileSystemAccess2 fsa, String fileName) throws Exception {
 		URI uri = fsa.getURI(fileName, CucumberOutputConfigurationProvider.STEP_DEFS);
 		Resource theResource = new ResourceSetImpl().createResource(uri);
+		// TODO use this to check for file existence
+		new ResourceSetImpl().getURIConverter().exists(uri, null);
 		if (fsa.isFile(fileName, CucumberOutputConfigurationProvider.STEP_DEFS)) {
 			theResource.load(new HashMap());
 		}

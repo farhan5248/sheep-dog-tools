@@ -4,9 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.StepWrapper;
 import org.farhan.mbt.core.Utilities;
-import org.farhan.validation.MBTVertexValidator;
+import org.farhan.validation.StepValidator;
+import org.farhan.validation.StepWrapper;
 
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier.Keyword;
@@ -279,9 +279,9 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	private String getSetOrAssert(String stepName) throws Exception {
-		String text = MBTVertexValidator.getStateModality(stepName);
+		String text = StepValidator.getStateModality(stepName);
 		String modality = "";
-		if (text == null) {
+		if (text.isEmpty()) {
 			modality = "set";
 		} else {
 			if (text.endsWith("be")) {
