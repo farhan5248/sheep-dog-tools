@@ -5,6 +5,7 @@ package org.farhan.ui.contentassist;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.TreeSet;
 
 import org.eclipse.core.resources.IFolder;
@@ -39,6 +40,7 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 	public void completeGiven_Name(Given step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeGiven_Name(step, assignment, context, acceptor);
+		// TODO if there's no object do the following
 		String component;
 		if (step.getName() == null) {
 			component = "";
@@ -52,15 +54,15 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 				acceptor.accept(createCompletionProposal("The " + previousObject, context));
 			}
 			// get a list of applications
-			for (IResource stepDefComponent : getFolders(step, "")) {
+			for (IResource stepDefComponent : getComponents(step)) {
 				acceptor.accept(createCompletionProposal("The " + stepDefComponent.getName() + ", ", context));
 			}
 		} else {
 			// get a list of objects
 			// TODO should this list objects only and objects with their paths? Right now it
 			// does object with path
-			// TODO recursively search component directory for objects
-			for (IResource stepDefObjectResource : getFolders(step, "/" + component)) {
+			for (IResource stepDefObjectResource : getComponentObjects(getProject(step).getFolder(
+					CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory() + "/" + component))) {
 
 				// ([^\/]+)\/([^\/]+)\/(.*).feature group 3
 				String stepDefObject = stepDefObjectResource.getProjectRelativePath().toString()
@@ -68,18 +70,39 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 				acceptor.accept(createCompletionProposal("The " + component + ", " + stepDefObject, context));
 			}
 		}
+		// TODO else if there's an object get a list of keywords for the suggestions
 	}
 
-	private IResource[] getFolders(Step step, String name) {
+	private IProject getProject(Step step) {
+		return ResourcesPlugin.getWorkspace().getRoot()
+				.getFile(new Path(step.eResource().getURI().toPlatformString(true))).getProject();
+
+	}
+
+	private IResource[] getComponents(Step step) {
 		try {
-			IProject project = ResourcesPlugin.getWorkspace().getRoot()
-					.getFile(new Path(step.eResource().getURI().toPlatformString(true))).getProject();
-			IFolder folder = project
-					.getFolder(CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory() + name);
+			IFolder folder = getProject(step)
+					.getFolder(CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory());
 			return folder.members();
 		} catch (CoreException e) {
-			logError(e, name);
-			return new IResource[] {};
+			logError(e, step.getName());
+			return null;
 		}
+	}
+
+	private ArrayList<IResource> getComponentObjects(IFolder folder) {
+		ArrayList<IResource> files = new ArrayList<IResource>();
+		try {
+			for (IResource r : folder.members()) {
+				if (r instanceof IFolder) {
+					files.addAll(getComponentObjects((IFolder) r));
+				} else {
+					files.add(r);
+				}
+			}
+		} catch (CoreException e) {
+			logError(e, folder.getName());
+		}
+		return files;
 	}
 }
