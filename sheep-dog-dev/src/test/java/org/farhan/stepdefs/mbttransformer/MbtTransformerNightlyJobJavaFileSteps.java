@@ -6,7 +6,7 @@ import io.cucumber.datatable.DataTable;
 
 public class MbtTransformerNightlyJobJavaFileSteps {
 
-    @Given("^The src/test/java/org/farhan/objects/acme/NightlyJob.java file will be as follows$")
+    @Given("^The src/test/java/org/farhan/objects/acme/NightlyJob.java file will be created as follows$")
     public void theSrcTestJavaOrgFarhanObjectsAcmeNightlyJobJavaFileWillBeAsFollows(String docString) {
         MbtTransformerFactory.get("NightlyJobJavaFile").setComponent("mbt-transformer");
         MbtTransformerFactory.get("NightlyJobJavaFile").setPath("src/test/java/org/farhan/objects/acme/NightlyJob.java");

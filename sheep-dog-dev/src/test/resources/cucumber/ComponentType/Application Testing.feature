@@ -3,7 +3,7 @@ Feature: Application Testing
 
   Background: Create a feature file
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Application Testing.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Application Testing.feature file is created as follows
           """
           Feature: Application Testing
           
@@ -23,7 +23,7 @@ Feature: Application Testing
 
   Scenario: Create AcmeAccountDetailsPageSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/acme/AcmeAccountDetailsPageSteps.java file will be as follows
+     Then The src/test/java/org/farhan/stepdefs/acme/AcmeAccountDetailsPageSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.acme;
           
@@ -45,7 +45,7 @@ Feature: Application Testing
 
   Scenario: Create AcmeAccountSearchRequestSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/acme/AcmeAccountSearchRequestSteps.java file will be as follows
+     Then The src/test/java/org/farhan/stepdefs/acme/AcmeAccountSearchRequestSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.acme;
           
@@ -68,7 +68,7 @@ Feature: Application Testing
 
   Scenario: Create AcmeHomePageSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/acme/AcmeHomePageSteps.java file will be as follows
+     Then The src/test/java/org/farhan/stepdefs/acme/AcmeHomePageSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.acme;
           
@@ -90,7 +90,7 @@ Feature: Application Testing
 
   Scenario: Create AcmeLogInRequestSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/acme/AcmeLogInRequestSteps.java file will be as follows
+     Then The src/test/java/org/farhan/stepdefs/acme/AcmeLogInRequestSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.acme;
           
@@ -113,7 +113,7 @@ Feature: Application Testing
 
   Scenario: Create AccountDetailsPage.java
 
-     Then The src/test/java/org/farhan/objects/acme/AccountDetailsPage.java file will be as follows
+     Then The src/test/java/org/farhan/objects/acme/AccountDetailsPage.java file will be created as follows
           """
           package org.farhan.objects.acme;
           
@@ -128,7 +128,7 @@ Feature: Application Testing
 
   Scenario: Create AccountSearchRequest.java
 
-     Then The src/test/java/org/farhan/objects/acme/AccountSearchRequest.java file will be as follows
+     Then The src/test/java/org/farhan/objects/acme/AccountSearchRequest.java file will be created as follows
           """
           package org.farhan.objects.acme;
           
@@ -145,7 +145,7 @@ Feature: Application Testing
 
   Scenario: Create HomePage.java
 
-     Then The src/test/java/org/farhan/objects/acme/HomePage.java file will be as follows
+     Then The src/test/java/org/farhan/objects/acme/HomePage.java file will be created as follows
           """
           package org.farhan.objects.acme;
           
@@ -160,7 +160,7 @@ Feature: Application Testing
 
   Scenario: Create LogInRequest.java
 
-     Then The src/test/java/org/farhan/objects/acme/LogInRequest.java file will be as follows
+     Then The src/test/java/org/farhan/objects/acme/LogInRequest.java file will be created as follows
           """
           package org.farhan.objects.acme;
           

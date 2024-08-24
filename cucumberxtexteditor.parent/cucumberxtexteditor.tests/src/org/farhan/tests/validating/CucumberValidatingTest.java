@@ -94,7 +94,7 @@ public class CucumberValidatingTest extends ValidatingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: Name\n");
 		sb.append("Scenario: Name\n");
-		sb.append("The blah application, something/something/something/Object is as follows\n");
+		sb.append("The blah application, something/something/something/Object is created as follows\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
 
@@ -103,7 +103,7 @@ public class CucumberValidatingTest extends ValidatingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: Name\n");
 		sb.append("Scenario: Name\n");
-		sb.append("The blah service, something/something/something/Object is as follows\n");
+		sb.append("The blah service, something/something/something/Object is created as follows\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
 
@@ -112,7 +112,7 @@ public class CucumberValidatingTest extends ValidatingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: Name\n");
 		sb.append("Scenario: Name\n");
-		sb.append("The something/something/something/Object is as follows\n");
+		sb.append("The something/something/something/Object is created as follows\n");
 		validationTestHelper.assertNoIssues(parseHelper.parse(sb));
 	}
 

@@ -3,19 +3,19 @@ Feature: Service Testing
 
   Background: Create a feature file
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Service Testing.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Service Testing.feature file is created as follows
           """
           Feature: Service Testing
           
             Scenario: Use a web-service
           
-              Given The Admin service, Family Details response is as follows
+              Given The Admin service, Family Details response is created as follows
                     | Family | Maximum |
                     | Sheikh |    10.0 |
                When The Pharmacy service, Claim request is sent with
                     | Drug Cost | Family |
                     |      20.0 | Sheikh |
-               Then The Claim response will be as follows
+               Then The Claim response will be created as follows
                     | Pay Provider |
                     |         10.0 |
                 And The nightly payment request will be triggered at midnight
@@ -25,7 +25,7 @@ Feature: Service Testing
 
   Scenario: Create AdminFamilyDetailsResponseSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/admin/AdminFamilyDetailsResponseSteps.java file will be as follows
+     Then The src/test/java/org/farhan/stepdefs/admin/AdminFamilyDetailsResponseSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.admin;
           
@@ -35,8 +35,8 @@ Feature: Service Testing
           
           public class AdminFamilyDetailsResponseSteps {
           
-              @Given("^The Admin service, Family Details response is as follows$")
-              public void theAdminServiceFamilyDetailsResponseIsAsFollows(DataTable dataTable) {
+              @Given("^The Admin service, Family Details response is created as follows$")
+              public void theAdminServiceFamilyDetailsResponseIsCreatedAsFollows(DataTable dataTable) {
                   AdminFactory.get("FamilyDetailsResponse").setComponent("Admin");
                   AdminFactory.get("FamilyDetailsResponse").setPath("Family Details");
                   AdminFactory.get("FamilyDetailsResponse").setInputOutputs(dataTable);
@@ -47,7 +47,7 @@ Feature: Service Testing
 
   Scenario: Create PharmacyClaimRequestSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/pharmacy/PharmacyClaimRequestSteps.java file will be as follows
+     Then The src/test/java/org/farhan/stepdefs/pharmacy/PharmacyClaimRequestSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.pharmacy;
           
@@ -70,7 +70,7 @@ Feature: Service Testing
 
   Scenario: Create PharmacyClaimResponseSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/pharmacy/PharmacyClaimResponseSteps.java file will be as follows
+     Then The src/test/java/org/farhan/stepdefs/pharmacy/PharmacyClaimResponseSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.pharmacy;
           
@@ -80,8 +80,8 @@ Feature: Service Testing
           
           public class PharmacyClaimResponseSteps {
           
-              @Given("^The Claim response will be as follows$")
-              public void theClaimResponseWillBeAsFollows(DataTable dataTable) {
+              @Given("^The Claim response will be created as follows$")
+              public void theClaimResponseWillBeCreatedAsFollows(DataTable dataTable) {
                   PharmacyFactory.get("ClaimResponse").setComponent("Pharmacy");
                   PharmacyFactory.get("ClaimResponse").setPath("Claim");
                   PharmacyFactory.get("ClaimResponse").assertInputOutputs(dataTable);
@@ -92,7 +92,7 @@ Feature: Service Testing
 
   Scenario: Create PharmacyNightlyPaymentRequestSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/pharmacy/PharmacyNightlyPaymentRequestSteps.java file will be as follows
+     Then The src/test/java/org/farhan/stepdefs/pharmacy/PharmacyNightlyPaymentRequestSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.pharmacy;
           
@@ -114,7 +114,7 @@ Feature: Service Testing
 
   Scenario: Create FamilyDetailsResponse.java
 
-     Then The src/test/java/org/farhan/objects/admin/FamilyDetailsResponse.java file will be as follows
+     Then The src/test/java/org/farhan/objects/admin/FamilyDetailsResponse.java file will be created as follows
           """
           package org.farhan.objects.admin;
           
@@ -131,7 +131,7 @@ Feature: Service Testing
 
   Scenario: Create ClaimRequest.java
 
-     Then The src/test/java/org/farhan/objects/pharmacy/ClaimRequest.java file will be as follows
+     Then The src/test/java/org/farhan/objects/pharmacy/ClaimRequest.java file will be created as follows
           """
           package org.farhan.objects.pharmacy;
           
@@ -150,7 +150,7 @@ Feature: Service Testing
 
   Scenario: Create ClaimResponse.java
 
-     Then The src/test/java/org/farhan/objects/pharmacy/ClaimResponse.java file will be as follows
+     Then The src/test/java/org/farhan/objects/pharmacy/ClaimResponse.java file will be created as follows
           """
           package org.farhan.objects.pharmacy;
           
@@ -165,7 +165,7 @@ Feature: Service Testing
 
   Scenario: Create NightlyPaymentRequest.java
 
-     Then The src/test/java/org/farhan/objects/pharmacy/NightlyPaymentRequest.java file will be as follows
+     Then The src/test/java/org/farhan/objects/pharmacy/NightlyPaymentRequest.java file will be created as follows
           """
           package org.farhan.objects.pharmacy;
           

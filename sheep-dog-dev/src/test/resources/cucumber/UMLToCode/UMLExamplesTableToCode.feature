@@ -3,12 +3,12 @@ Feature: UML Examples Table To Code
 
   Scenario: One row, one cell
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
             Scenario Outline: Submit
-              Given The Object page is as follows
+              Given The Object page is created as follows
                 | h1   |
                 | <h1> |
 
@@ -19,19 +19,19 @@ Feature: UML Examples Table To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file, Scenario Outline Examples Table section will be as follows
+      And The mbt-transformer plugin, Process.feature file, Scenario Outline Examples Table section will be created as follows
           |   Name |   Examples |      Row |
           | Submit | Examples 1 | \| h1 \| |
           | Submit | Examples 1 | \| v1 \| |
 
   Scenario: Two rows, two cells
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
             Scenario Outline: Submit
-              Given The Object page is as follows
+              Given The Object page is created as follows
                 | h1   | h2   |
                 | <h1> | <h2> |
 
@@ -43,7 +43,7 @@ Feature: UML Examples Table To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file, Scenario Outline Examples Table section will be as follows
+      And The mbt-transformer plugin, Process.feature file, Scenario Outline Examples Table section will be created as follows
           |   Name |   Examples |            Row |
           | Submit | Examples 1 | \| h1 \| h2 \| |
           | Submit | Examples 1 | \| v1 \| v2 \| |
@@ -51,12 +51,12 @@ Feature: UML Examples Table To Code
 
   Scenario: Three rows, three cells
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
             Scenario Outline: Submit
-              Given The Object page is as follows
+              Given The Object page is created as follows
                 | h1   | h2   | h3   |
                 | <h1> | <h2> | <h3> |
 
@@ -69,7 +69,7 @@ Feature: UML Examples Table To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file, Scenario Outline Examples Table section will be as follows
+      And The mbt-transformer plugin, Process.feature file, Scenario Outline Examples Table section will be created as follows
           |   Name |   Examples |                  Row |
           | Submit | Examples 1 | \| h1 \| h2 \| h3 \| |
           | Submit | Examples 1 | \| v1 \| v2 \| v3 \| |

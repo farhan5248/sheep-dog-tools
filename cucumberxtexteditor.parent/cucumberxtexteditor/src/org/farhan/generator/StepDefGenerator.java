@@ -105,7 +105,9 @@ public class StepDefGenerator {
 
 	public static void generate(Step step) {
 		try {
+			System.out.println("Generating this step: " + step.getName());
 			URI objectURI = getObjectURI(step);
+			System.out.println("Generating this URI: " + objectURI.path());
 			Resource theResource = getOrCreateResource(objectURI);
 			Feature theObject = getOrCreateObject(theResource, getObject(step));
 			AbstractScenario theStepDef = getOrCreateStepDef(theObject, step);

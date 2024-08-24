@@ -5,7 +5,7 @@ Feature: Code To Document
 
   Scenario: Create an adoc file from feature file
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/app/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/app/Process.feature file is created as follows
           """
           @tag1
           Feature: Process
@@ -18,7 +18,7 @@ Feature: Code To Document
               Desc 2
           
               Given The Search application, Login page is valid
-               When The Search application, Home page is as follows
+               When The Search application, Home page is created as follows
                     | grp | ins |
                     |  10 |   5 |
                Then The Search application, Logout page is valid
@@ -29,7 +29,7 @@ Feature: Code To Document
               Desc 3
           
               Given The Search application, Login page is invalid
-               When The Search application, Home page is as follows
+               When The Search application, Home page is created as follows
                     | grp |   ins |
                     |   8 | <ins> |
                Then The Search application, Logout page is invalid
@@ -45,7 +45,7 @@ Feature: Code To Document
           | Tags |
           | tag1 |
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.adoc file will be as follows
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.adoc file will be created as follows
           """
           :tags: tag1
           = Process
@@ -59,7 +59,7 @@ Feature: Code To Document
           
           === Given The Search application, Login page is valid
           
-          === When The Search application, Home page is as follows
+          === When The Search application, Home page is created as follows
           
           [options="header"]
           |===
@@ -76,7 +76,7 @@ Feature: Code To Document
           
           === Given The Search application, Login page is invalid
           
-          === When The Search application, Home page is as follows
+          === When The Search application, Home page is created as follows
           
           [options="header"]
           |===

@@ -6,7 +6,7 @@ import io.cucumber.datatable.DataTable;
 
 public class MbtTransformerAcmeToolInputTxtFileStepsJavaFileSteps {
 
-    @Given("^The src/test/java/org/farhan/stepdefs/acmetool/AcmeToolInputTxtFileSteps.java file will be as follows$")
+    @Given("^The src/test/java/org/farhan/stepdefs/acmetool/AcmeToolInputTxtFileSteps.java file will be created as follows$")
     public void theSrcTestJavaOrgFarhanStepdefsAcmetoolAcmeToolInputTxtFileStepsJavaFileWillBeAsFollows(String docString) {
         MbtTransformerFactory.get("AcmeToolInputTxtFileStepsJavaFile").setComponent("mbt-transformer");
         MbtTransformerFactory.get("AcmeToolInputTxtFileStepsJavaFile").setPath("src/test/java/org/farhan/stepdefs/acmetool/AcmeToolInputTxtFileSteps.java");

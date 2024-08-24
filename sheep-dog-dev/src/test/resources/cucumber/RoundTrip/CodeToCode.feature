@@ -3,14 +3,14 @@ Feature: Code To Code
 
   Background: Create a feature file
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           @tag2 @tag3
           Feature: This is a feature
           
             Background: Setup
           
-              Given The blah application, something/Object page is as follows
+              Given The blah application, something/Object page is created as follows
                     \"\"\"
                      Text 1
                      
@@ -30,7 +30,7 @@ Feature: Code To Code
           
             Scenario Outline: Submit Several
           
-              Given The blah application, DataTable page is as follows
+              Given The blah application, DataTable page is created as follows
                     |   h1 |   h2 |
                     | <h3> | <h4> |
           
@@ -41,7 +41,7 @@ Feature: Code To Code
           
           
           """
-      And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is as follows
+      And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows
           """
           package org.farhan.stepdefs.blah;
           
@@ -67,14 +67,14 @@ Feature: Code To Code
 
   Scenario: Convert class to feature from graph
 
-     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be as follows
+     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be created as follows
           """
           @tag2 @tag3
           Feature: This is a feature
           
             Background: Setup
           
-              Given The blah application, something/Object page is as follows
+              Given The blah application, something/Object page is created as follows
                     \"\"\"
                      Text 1
                     
@@ -94,7 +94,7 @@ Feature: Code To Code
           
             Scenario Outline: Submit Several
           
-              Given The blah application, DataTable page is as follows
+              Given The blah application, DataTable page is created as follows
                     | h1   | h2   |
                     | <h3> | <h4> |
           
@@ -105,7 +105,7 @@ Feature: Code To Code
           
           
           """
-      And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be as follows
+      And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.blah;
           
@@ -122,8 +122,8 @@ Feature: Code To Code
                   BlahFactory.get("ObjectPage").setInputOutputs("Empty");
               }
           
-              @Given("^The blah application, something/Object page is as follows$")
-              public void theBlahApplicationSomethingObjectPageIsAsFollows(String docString) {
+              @Given("^The blah application, something/Object page is created as follows$")
+              public void theBlahApplicationSomethingObjectPageIsCreatedAsFollows(String docString) {
                   BlahFactory.get("ObjectPage").setComponent("blah");
                   BlahFactory.get("ObjectPage").setPath("something/Object");
                   BlahFactory.get("ObjectPage").setInputOutputs("Content", docString);

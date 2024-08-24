@@ -3,7 +3,7 @@ Feature: UML Step To Code
 
   Background: Create a feature file
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -14,7 +14,7 @@ Feature: UML Step To Code
 
   Scenario: Convert step keywords
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -30,7 +30,7 @@ Feature: UML Step To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file, Scenarios Steps section will be as follows
+      And The mbt-transformer plugin, Process.feature file, Scenarios Steps section will be created as follows
           |   Name |                                     Step |
           | Submit | Given The something/Object page is empty |
           | Submit |  When The something/Object page is empty |
@@ -44,7 +44,7 @@ Feature: UML Step To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
-      And The mbt-transformer plugin, BlahObjectPageSteps.java file, Fields section will be as follows
+      And The mbt-transformer plugin, BlahObjectPageSteps.java file, Fields section will be created as follows
           |                         Method Name |                                               Statement |
           | theBlahApplicationObjectPageIsEmpty |     BlahFactory.get("ObjectPage").setComponent("blah"); |
           | theBlahApplicationObjectPageIsEmpty |        BlahFactory.get("ObjectPage").setPath("Object"); |
@@ -55,19 +55,19 @@ Feature: UML Step To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
-      And The mbt-transformer plugin, ObjectPage.java file, Object section will be as follows
+      And The mbt-transformer plugin, ObjectPage.java file, Object section will be created as follows
           | Interface Name |                 Package |            Import |
           |     ObjectPage | org.farhan.objects.blah | java.util.HashMap |
-      And The mbt-transformer plugin, ObjectPage.java file, Fields section will be as follows
+      And The mbt-transformer plugin, ObjectPage.java file, Fields section will be created as follows
           | Method Name | Visibility | Return Type |
           |    setEmpty |     public |        void |
-      And The mbt-transformer plugin, ObjectPage.java file, Fields section will be as follows
+      And The mbt-transformer plugin, ObjectPage.java file, Fields section will be created as follows
           | Method Name | Parameter Name |         Parameter Type |
           |    setEmpty |         keyMap | HashMap<String,String> |
 
   Scenario: Preserve existing java methods for layer 2
 
-      And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is as follows
+      And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows
           """
           package org.farhan.stepdefs.blah;
           
@@ -89,14 +89,14 @@ Feature: UML Step To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
-      And The mbt-transformer plugin, BlahObjectPageSteps.java file, Fields section will be as follows
+      And The mbt-transformer plugin, BlahObjectPageSteps.java file, Fields section will be created as follows
           |                           Method Name |
           | theBlahApplicationObjectPageIsInvalid |
           |   theBlahApplicationObjectPageIsEmpty |
 
   Scenario: Preserve existing java methods for layer 3
 
-      And The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file is as follows
+      And The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file is created as follows
           """
           package org.farhan.objects.blah;
           
@@ -111,7 +111,7 @@ Feature: UML Step To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
-      And The mbt-transformer plugin, ObjectPage.java file, Fields section will be as follows
+      And The mbt-transformer plugin, ObjectPage.java file, Fields section will be created as follows
           |     Method Name |
           | assertIsInvalid |
           |        setEmpty |

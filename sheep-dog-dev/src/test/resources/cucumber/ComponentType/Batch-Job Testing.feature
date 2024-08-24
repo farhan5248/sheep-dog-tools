@@ -7,7 +7,7 @@ Feature: Batch-Job Testing
 
   Background: Create a feature file
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Batch-Job Testing.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Batch-Job Testing.feature file is created as follows
           """
           Feature: Batch-Job Testing
           
@@ -24,7 +24,7 @@ Feature: Batch-Job Testing
 
   Scenario: Create AcmeOrdersTxtFileSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/acme/AcmeOrdersTxtFileSteps.java file will be as follows
+     Then The src/test/java/org/farhan/stepdefs/acme/AcmeOrdersTxtFileSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.acme;
           
@@ -38,7 +38,7 @@ Feature: Batch-Job Testing
               public void theAcmeBatchjobBatchjobuserInboxOrdersTxtFileIsntEmpty() {
                   AcmeFactory.get("OrdersTxtFile").setComponent("acme");
                   AcmeFactory.get("OrdersTxtFile").setPath("batchjobuser/inbox/Orders.txt");
-                  AcmeFactory.get("OrdersTxtFile").setInputOutputs("");
+                  AcmeFactory.get("OrdersTxtFile").setInputOutputs("Empty");
               }
           
               @Given("^The Orders.txt file is invalid$")
@@ -60,7 +60,7 @@ Feature: Batch-Job Testing
 
   Scenario: Create AcmeNightlyJobSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/acme/AcmeNightlyJobSteps.java file will be as follows
+     Then The src/test/java/org/farhan/stepdefs/acme/AcmeNightlyJobSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.acme;
           
@@ -82,7 +82,7 @@ Feature: Batch-Job Testing
 
   Scenario: Create AcmeReportingJobSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/acme/AcmeReportingJobSteps.java file will be as follows
+     Then The src/test/java/org/farhan/stepdefs/acme/AcmeReportingJobSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.acme;
           
@@ -104,7 +104,7 @@ Feature: Batch-Job Testing
 
   Scenario: Create OrdersTxtFile.java
 
-     Then The src/test/java/org/farhan/objects/acme/OrdersTxtFile.java file will be as follows
+     Then The src/test/java/org/farhan/objects/acme/OrdersTxtFile.java file will be created as follows
           """
           package org.farhan.objects.acme;
           
@@ -112,7 +112,7 @@ Feature: Batch-Job Testing
           
           public interface OrdersTxtFile {
           
-              public void set(HashMap<String, String> keyMap);
+              public void setEmpty(HashMap<String, String> keyMap);
           
               public void setInvalid(HashMap<String, String> keyMap);
           
@@ -123,7 +123,7 @@ Feature: Batch-Job Testing
 
   Scenario: Create NightlyJob.java
 
-     Then The src/test/java/org/farhan/objects/acme/NightlyJob.java file will be as follows
+     Then The src/test/java/org/farhan/objects/acme/NightlyJob.java file will be created as follows
           """
           package org.farhan.objects.acme;
           
@@ -138,7 +138,7 @@ Feature: Batch-Job Testing
 
   Scenario: Create ReportingJob.java
 
-     Then The src/test/java/org/farhan/objects/acme/ReportingJob.java file will be as follows
+     Then The src/test/java/org/farhan/objects/acme/ReportingJob.java file will be created as follows
           """
           package org.farhan.objects.acme;
           

@@ -3,7 +3,7 @@ Feature: Code Background To UML
 
   Scenario: No statement, one step, one scenario
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
 
@@ -16,14 +16,14 @@ Feature: Code Background To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Messages section will be as follows
+      And The target/uml/pst.uml file, Interaction Messages section will be created as follows
           | Interaction Name       | Message                   |
           | specs::Process::Setup  | The Object0 page is valid |
           | specs::Process::Submit | The Object1 page is valid |
 
   Scenario: One statement, one step, one scenario
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
 
@@ -37,13 +37,13 @@ Feature: Code Background To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Comments section will be as follows
+      And The target/uml/pst.uml file, Interaction Comments section will be created as follows
           | Interaction Name      | Comment     |
           | specs::Process::Setup | Desc line 1 |
 
   Scenario: One statement, one step, two scenarios
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
 
@@ -59,7 +59,7 @@ Feature: Code Background To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Messages section will be as follows
+      And The target/uml/pst.uml file, Interaction Messages section will be created as follows
           | Interaction Name         | Message                   |
           | specs::Process::Setup    | The Object0 page is valid |
           | specs::Process::Submit 1 | The Object1 page is valid |
@@ -67,7 +67,7 @@ Feature: Code Background To UML
 
   Scenario: One statement, one step, three scenarios
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
 
@@ -86,7 +86,7 @@ Feature: Code Background To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Messages section will be as follows
+      And The target/uml/pst.uml file, Interaction Messages section will be created as follows
           | Interaction Name         | Message                   |
           | specs::Process::Setup    | The Object0 page is valid |
           | specs::Process::Submit 1 | The Object1 page is valid |
@@ -95,7 +95,7 @@ Feature: Code Background To UML
 
   Scenario Outline: No statement, two steps, one scenario
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
 
@@ -109,7 +109,7 @@ Feature: Code Background To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Messages section will be as follows
+      And The target/uml/pst.uml file, Interaction Messages section will be created as follows
           | Interaction Name       | Message                         |
           | specs::Process::Setup  | The Object<Index> page is valid |
           | specs::Process::Submit | The Object page is valid        |
@@ -122,7 +122,7 @@ Feature: Code Background To UML
 
   Scenario Outline: No statement, three steps, one scenario
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
 
@@ -137,7 +137,7 @@ Feature: Code Background To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Messages section will be as follows
+      And The target/uml/pst.uml file, Interaction Messages section will be created as follows
           | Interaction Name       | Message                         |
           | specs::Process::Setup  | The Object<Index> page is valid |
           | specs::Process::Submit | The Object page is valid        |

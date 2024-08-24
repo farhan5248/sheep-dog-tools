@@ -7,8 +7,8 @@ public class StepValidator {
 
 	private static final String NAME_REGEX = "[^,]";
 	private static final String COMPONENT_REGEX = "(( " + NAME_REGEX + "+)( application| service| plugin| batchjob),)?";
-	private static final String OBJECT_VERTEX_REGEX = "( file| page| response)";
-	private static final String OBJECT_EDGE_REGEX = "( request| goal| job)";
+	private static final String OBJECT_VERTEX_REGEX = "( file| page| response)"; // 6
+	private static final String OBJECT_EDGE_REGEX = "( request| goal| job)"; // 7
 	private static final String OBJECT_REGEX = "( " + NAME_REGEX + "+)(" + OBJECT_VERTEX_REGEX + "|" + OBJECT_EDGE_REGEX
 			+ ")";
 	private static final String DETAILS_REGEX = "(,( " + NAME_REGEX + "+)( section| fragment| table| snippet))?";
@@ -22,7 +22,8 @@ public class StepValidator {
 
 	public static String getErrorMessage() {
 		String rules = "\nThe component is: " + COMPONENT_REGEX + "\nThe object is: " + OBJECT_REGEX
-				+ "\nThe details are: " + DETAILS_REGEX + "\nThe state is: " + STATE_REGEX;
+				+ "\nThe details are: " + DETAILS_REGEX + "\nThe state is: " + STATE_REGEX + "\nThe Time is: "
+				+ TIME_REGEX;
 		return "This is an invalid statement. These are the rules:" + rules;
 	}
 
@@ -48,11 +49,11 @@ public class StepValidator {
 	}
 
 	public static boolean isEdge(String text) {
-		return !getObjectType(text).isEmpty();
+		return !getGroup(text, 7).isEmpty();
 	}
 
 	public static boolean isVertex(String text) {
-		return !getObjectType(text).isEmpty();
+		return !getGroup(text, 6).isEmpty();
 	}
 
 	public static boolean hasAttachment(String text) {

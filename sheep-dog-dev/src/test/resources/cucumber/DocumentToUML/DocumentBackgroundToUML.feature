@@ -3,7 +3,7 @@ Feature: Document Background To UML
 
   Scenario: No statement, one step, one scenario
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
           """
           = Process
           
@@ -19,14 +19,14 @@ Feature: Document Background To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Messages section will be as follows
+      And The target/uml/pst.uml file, Interaction Messages section will be created as follows
           |       Interaction Name |                   Message |
           |  specs::Process::Setup | The Object0 page is valid |
           | specs::Process::Submit | The Object1 page is valid |
 
   Scenario: No statement, two steps, one scenario
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
           """
           = Process
           
@@ -42,7 +42,7 @@ Feature: Document Background To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Messages section will be as follows
+      And The target/uml/pst.uml file, Interaction Messages section will be created as follows
           |       Interaction Name |                   Message |
           |  specs::Process::Setup | The Object1 page is valid |
           |  specs::Process::Setup | The Object2 page is valid |
@@ -50,7 +50,7 @@ Feature: Document Background To UML
 
   Scenario: No statement, three steps, one scenario
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
           """
           = Process
           
@@ -67,7 +67,7 @@ Feature: Document Background To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Messages section will be as follows
+      And The target/uml/pst.uml file, Interaction Messages section will be created as follows
           |       Interaction Name |                   Message |
           |  specs::Process::Setup | The Object1 page is valid |
           |  specs::Process::Setup | The Object2 page is valid |
@@ -76,7 +76,7 @@ Feature: Document Background To UML
 
   Scenario: One statement, one step, one scenario
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
           """
           = Process
           
@@ -94,13 +94,13 @@ Feature: Document Background To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Comments section will be as follows
+      And The target/uml/pst.uml file, Interaction Comments section will be created as follows
           |      Interaction Name |     Comment |
           | specs::Process::Setup | Desc line 1 |
 
   Scenario: No statement, one step, two scenarios
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
           """
           = Process
           
@@ -119,7 +119,7 @@ Feature: Document Background To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Messages section will be as follows
+      And The target/uml/pst.uml file, Interaction Messages section will be created as follows
           |         Interaction Name |                   Message |
           |    specs::Process::Setup | The Object0 page is valid |
           | specs::Process::Submit 1 | The Object1 page is valid |
@@ -127,7 +127,7 @@ Feature: Document Background To UML
 
   Scenario: No statement, one step, three scenarios
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
           """
           = Process
           
@@ -150,7 +150,7 @@ Feature: Document Background To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Messages section will be as follows
+      And The target/uml/pst.uml file, Interaction Messages section will be created as follows
           |         Interaction Name |                   Message |
           |    specs::Process::Setup | The Object0 page is valid |
           | specs::Process::Submit 1 | The Object1 page is valid |

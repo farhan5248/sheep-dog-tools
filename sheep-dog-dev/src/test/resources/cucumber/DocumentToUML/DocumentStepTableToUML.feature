@@ -3,13 +3,13 @@ Feature: Document Step Table To UML
 
   Scenario: One row, one cell
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
           """
           = Process
           
           == Submit
           
-          === Given The Object page is as follows
+          === Given The Object page is created as follows
           
           [options="header"]
           |===
@@ -19,20 +19,20 @@ Feature: Document Step Table To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Messages section will be as follows
+      And The target/uml/pst.uml file, Interaction Messages section will be created as follows
           |       Interaction Name |                       Message | Argument Name | Annotation Detail |
-          | specs::Process::Submit | The Object page is as follows |     dataTable |        0 -> h1 \| |
-          | specs::Process::Submit | The Object page is as follows |     dataTable |        1 -> v1 \| |
+          | specs::Process::Submit | The Object page is created as follows |     dataTable |        0 -> h1 \| |
+          | specs::Process::Submit | The Object page is created as follows |     dataTable |        1 -> v1 \| |
 
   Scenario: Two rows, two cells
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
           """
           = Process
           
           == Submit
           
-          === Given The Object page is as follows
+          === Given The Object page is created as follows
           
           [options="header"]
           |===
@@ -43,21 +43,21 @@ Feature: Document Step Table To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Messages section will be as follows
+      And The target/uml/pst.uml file, Interaction Messages section will be created as follows
           |       Interaction Name |                       Message | Argument Name | Annotation Detail |
-          | specs::Process::Submit | The Object page is as follows |     dataTable |   0 -> h1 \|h2 \| |
-          | specs::Process::Submit | The Object page is as follows |     dataTable |   1 -> v1 \|v2 \| |
-          | specs::Process::Submit | The Object page is as follows |     dataTable |   2 -> v3 \|v4 \| |
+          | specs::Process::Submit | The Object page is created as follows |     dataTable |   0 -> h1 \|h2 \| |
+          | specs::Process::Submit | The Object page is created as follows |     dataTable |   1 -> v1 \|v2 \| |
+          | specs::Process::Submit | The Object page is created as follows |     dataTable |   2 -> v3 \|v4 \| |
 
   Scenario: Three rows, three cells
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
           """
           = Process
           
           == Submit
           
-          === Given The Object page is as follows
+          === Given The Object page is created as follows
           
           [options="header"]
           |===
@@ -69,10 +69,10 @@ Feature: Document Step Table To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Messages section will be as follows
+      And The target/uml/pst.uml file, Interaction Messages section will be created as follows
           |       Interaction Name |                       Message | Argument Name |    Annotation Detail |
-          | specs::Process::Submit | The Object page is as follows |     dataTable | 0 -> h1 \|h2 \|h3 \| |
-          | specs::Process::Submit | The Object page is as follows |     dataTable | 1 -> v1 \|v2 \|v3 \| |
-          | specs::Process::Submit | The Object page is as follows |     dataTable | 2 -> v4 \|v5 \|v6 \| |
-          | specs::Process::Submit | The Object page is as follows |     dataTable | 3 -> v7 \|v8 \|v9 \| |
+          | specs::Process::Submit | The Object page is created as follows |     dataTable | 0 -> h1 \|h2 \|h3 \| |
+          | specs::Process::Submit | The Object page is created as follows |     dataTable | 1 -> v1 \|v2 \|v3 \| |
+          | specs::Process::Submit | The Object page is created as follows |     dataTable | 2 -> v4 \|v5 \|v6 \| |
+          | specs::Process::Submit | The Object page is created as follows |     dataTable | 3 -> v7 \|v8 \|v9 \| |
 

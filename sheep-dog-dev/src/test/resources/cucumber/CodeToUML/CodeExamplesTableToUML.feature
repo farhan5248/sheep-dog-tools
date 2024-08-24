@@ -3,12 +3,12 @@ Feature: Code Examples Table To UML
 
   Scenario: One row, one cell
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
             Scenario Outline: Submit
-              Given The Object page is as follows
+              Given The Object page is created as follows
                 | h1   |
                 | <h1> |
 
@@ -18,19 +18,19 @@ Feature: Code Examples Table To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Annotations section will be as follows
+      And The target/uml/pst.uml file, Interaction Annotations section will be created as follows
           |       Interaction Name | Annotation Name | Annotation Detail |
           | specs::Process::Submit |      Examples 1 |         0 -> h1\| |
           | specs::Process::Submit |      Examples 1 |         1 -> v1\| |
 
   Scenario: Two rows, two cells
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
             Scenario Outline: Submit
-              Given The Object page is as follows
+              Given The Object page is created as follows
                 | h1   | h2   |
                 | <h1> | <h2> |
 
@@ -41,7 +41,7 @@ Feature: Code Examples Table To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Annotations section will be as follows
+      And The target/uml/pst.uml file, Interaction Annotations section will be created as follows
           |       Interaction Name | Annotation Name | Annotation Detail |
           | specs::Process::Submit |      Examples 1 |     0 -> h1\|h2\| |
           | specs::Process::Submit |      Examples 1 |     1 -> v1\|v2\| |
@@ -49,12 +49,12 @@ Feature: Code Examples Table To UML
 
   Scenario: Three rows, three cells
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
             Scenario Outline: Submit
-              Given The Object page is as follows
+              Given The Object page is created as follows
                 | h1   | h2   | h3   |
                 | <h1> | <h2> | <h3> |
 
@@ -66,7 +66,7 @@ Feature: Code Examples Table To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Annotations section will be as follows
+      And The target/uml/pst.uml file, Interaction Annotations section will be created as follows
           |       Interaction Name | Annotation Name | Annotation Detail |
           | specs::Process::Submit |      Examples 1 | 0 -> h1\|h2\|h3\| |
           | specs::Process::Submit |      Examples 1 | 1 -> v1\|v2\|v3\| |

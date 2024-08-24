@@ -6,7 +6,7 @@ import io.cucumber.datatable.DataTable;
 
 public class MbtTransformerPharmacyNightlyPaymentRequestStepsJavaFileSteps {
 
-    @Given("^The src/test/java/org/farhan/stepdefs/pharmacy/PharmacyNightlyPaymentRequestSteps.java file will be as follows$")
+    @Given("^The src/test/java/org/farhan/stepdefs/pharmacy/PharmacyNightlyPaymentRequestSteps.java file will be created as follows$")
     public void theSrcTestJavaOrgFarhanStepdefsPharmacyPharmacyNightlyPaymentRequestStepsJavaFileWillBeAsFollows(String docString) {
         MbtTransformerFactory.get("PharmacyNightlyPaymentRequestStepsJavaFile").setComponent("mbt-transformer");
         MbtTransformerFactory.get("PharmacyNightlyPaymentRequestStepsJavaFile").setPath("src/test/java/org/farhan/stepdefs/pharmacy/PharmacyNightlyPaymentRequestSteps.java");

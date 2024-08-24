@@ -3,20 +3,20 @@ Feature: UML Feature To Document
 
   Scenario: No tags, no statements
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-      And The mbt-transformer plugin, Process.adoc file, Feature section will be as follows
+      And The mbt-transformer plugin, Process.adoc file, Feature section will be created as follows
           |    Name |
           | Process |
 
   Scenario: One tag, one statement
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           @tag1
           Feature: Process
@@ -25,13 +25,13 @@ Feature: UML Feature To Document
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-      And The mbt-transformer plugin, Process.adoc file, Feature section will be as follows
+      And The mbt-transformer plugin, Process.adoc file, Feature section will be created as follows
           |    Name | Tags |
           | Process | tag1 |
 
   Scenario: Two tags, two statements
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           @tag1 @tag2
           Feature: Process
@@ -41,13 +41,13 @@ Feature: UML Feature To Document
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-      And The mbt-transformer plugin, Process.adoc file, Feature section will be as follows
+      And The mbt-transformer plugin, Process.adoc file, Feature section will be created as follows
           |    Name |      Tags |
           | Process | tag1,tag2 |
 
   Scenario: Three tags, three statements
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           @tag1 @tag2 @tag3
           Feature: Process
@@ -58,7 +58,7 @@ Feature: UML Feature To Document
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-      And The mbt-transformer plugin, Process.adoc file, Feature section will be as follows
+      And The mbt-transformer plugin, Process.adoc file, Feature section will be created as follows
           |    Name |           Tags |
           | Process | tag1,tag2,tag3 |
 

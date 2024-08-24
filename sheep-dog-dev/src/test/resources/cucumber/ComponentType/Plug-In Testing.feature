@@ -7,13 +7,13 @@ Feature: Plug-In Testing
 
   Background: Create a feature file
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Plug-In Testing.feature file is as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Plug-In Testing.feature file is created as follows
           """
           Feature: Plug-In Testing
           
             Scenario: Run a plug-in
           
-              Given The acme-tool plugin, src/test/resources/cucumber/Input.txt file is as follows
+              Given The acme-tool plugin, src/test/resources/cucumber/Input.txt file is created as follows
                     \"\"\"
                     Text
                     \"\"\"
@@ -22,7 +22,7 @@ Feature: Plug-In Testing
                     | Parameters |
                     |          1 |
                Then The target/Output.txt file will be present
-                And The Output.txt file, Results table will be as follows
+                And The Output.txt file, Results table will be created as follows
                     | Lines |
                     |  Text |
           """
@@ -31,7 +31,7 @@ Feature: Plug-In Testing
 
   Scenario: Create AcmeToolInputTxtFileSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/acmetool/AcmeToolInputTxtFileSteps.java file will be as follows
+     Then The src/test/java/org/farhan/stepdefs/acmetool/AcmeToolInputTxtFileSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.acmetool;
           
@@ -41,8 +41,8 @@ Feature: Plug-In Testing
           
           public class AcmeToolInputTxtFileSteps {
           
-              @Given("^The acme-tool plugin, src/test/resources/cucumber/Input.txt file is as follows$")
-              public void theAcmeToolPluginSrcTestResourcesCucumberInputTxtFileIsAsFollows(String docString) {
+              @Given("^The acme-tool plugin, src/test/resources/cucumber/Input.txt file is created as follows$")
+              public void theAcmeToolPluginSrcTestResourcesCucumberInputTxtFileIsCreatedAsFollows(String docString) {
                   AcmeToolFactory.get("InputTxtFile").setComponent("acme-tool");
                   AcmeToolFactory.get("InputTxtFile").setPath("src/test/resources/cucumber/Input.txt");
                   AcmeToolFactory.get("InputTxtFile").setInputOutputs("Content", docString);
@@ -60,7 +60,7 @@ Feature: Plug-In Testing
 
   Scenario: Create AcmeToolDoItGoalSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/acmetool/AcmeToolDoItGoalSteps.java file will be as follows
+     Then The src/test/java/org/farhan/stepdefs/acmetool/AcmeToolDoItGoalSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.acmetool;
           
@@ -83,7 +83,7 @@ Feature: Plug-In Testing
 
   Scenario: Create AcmeToolOutputTxtFileSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/acmetool/AcmeToolOutputTxtFileSteps.java file will be as follows
+     Then The src/test/java/org/farhan/stepdefs/acmetool/AcmeToolOutputTxtFileSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.acmetool;
           
@@ -100,8 +100,8 @@ Feature: Plug-In Testing
                   AcmeToolFactory.get("OutputTxtFile").assertInputOutputs("Present");
               }
           
-              @Given("^The Output.txt file, Results table will be as follows$")
-              public void theOutputTxtFileResultsTableWillBeAsFollows(DataTable dataTable) {
+              @Given("^The Output.txt file, Results table will be created as follows$")
+              public void theOutputTxtFileResultsTableWillBeCreatedAsFollows(DataTable dataTable) {
                   AcmeToolFactory.get("OutputTxtFile").setComponent("acme-tool");
                   AcmeToolFactory.get("OutputTxtFile").setPath("Output.txt");
                   AcmeToolFactory.get("OutputTxtFile").assertInputOutputs(dataTable, "ResultsTable");
@@ -112,7 +112,7 @@ Feature: Plug-In Testing
 
   Scenario: Create InputTxtFile.java
 
-     Then The src/test/java/org/farhan/objects/acmeTool/InputTxtFile.java file will be as follows
+     Then The src/test/java/org/farhan/objects/acmeTool/InputTxtFile.java file will be created as follows
           """
           package org.farhan.objects.acmetool;
           
@@ -129,7 +129,7 @@ Feature: Plug-In Testing
 
   Scenario: Create DoItGoal.java
 
-     Then The src/test/java/org/farhan/objects/acmeTool/DoItGoal.java file will be as follows
+     Then The src/test/java/org/farhan/objects/acmeTool/DoItGoal.java file will be created as follows
           """
           package org.farhan.objects.acmetool;
           
@@ -146,7 +146,7 @@ Feature: Plug-In Testing
 
   Scenario: Create OutputTxtFile.java
 
-     Then The src/test/java/org/farhan/objects/acmeTool/OutputTxtFile.java file will be as follows
+     Then The src/test/java/org/farhan/objects/acmeTool/OutputTxtFile.java file will be created as follows
           """
           package org.farhan.objects.acmetool;
           
