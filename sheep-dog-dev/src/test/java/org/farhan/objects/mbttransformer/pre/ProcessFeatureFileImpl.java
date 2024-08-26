@@ -18,21 +18,6 @@ public class ProcessFeatureFileImpl extends FeatureFileObject implements Process
 	}
 
 	@Override
-	public void assertBackgroundStepsDocStringSectionContent(HashMap<String, String> keyMap) {
-		assertDocString(keyMap.get("Name"), keyMap.get("Step"), keyMap.get("Content"));
-	}
-
-	@Override
-	public void assertBackgroundStepsDocStringSectionName(HashMap<String, String> keyMap) {
-		assertAbstractScenarioExists(keyMap.get("Name"));
-	}
-
-	@Override
-	public void assertBackgroundStepsDocStringSectionStep(HashMap<String, String> keyMap) {
-		assertStepExists(keyMap.get("Name"), keyMap.get("Step"));
-	}
-
-	@Override
 	public void assertBackgroundStepsSectionName(HashMap<String, String> keyMap) {
 		assertAbstractScenarioExists(keyMap.get("Name"));
 	}

@@ -38,16 +38,6 @@ public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 	}
 
 	@Override
-	public void assertClassInteractionsSectionClassName(HashMap<String, String> keyMap) {
-		assertClassExists(keyMap.get("Class Name"));
-	}
-
-	@Override
-	public void assertClassInteractionsSectionInteractionName(HashMap<String, String> keyMap) {
-		assertClassInteractionExists(keyMap.get("Class Name"), keyMap.get("Interaction Name"));
-	}
-
-	@Override
 	public void assertClassSectionClassName(HashMap<String, String> keyMap) {
 		assertClassExists(keyMap.get("Class Name"));
 	}

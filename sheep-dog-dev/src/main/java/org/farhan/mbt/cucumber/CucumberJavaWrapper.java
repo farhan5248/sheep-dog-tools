@@ -53,11 +53,13 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		BlockStmt body = aMethod.getBody().get();
 		if (StepValidator.isEdge(step) && body.getStatements().size() == 4
 				|| !StepValidator.isEdge(step) && body.getStatements().size() == 3) {
+			// 3rd or 4th can be transition step if it's edge or vertex
 			return;
 		} else {
 			body.addStatement(getCallForFactory(step) + getCallForInputOutputsForDocString(step) + ";");
 			body.getStatements().add(2, body.getStatements().getLast().get());
 			body.getStatements().removeLast();
+			return;
 		}
 	}
 
@@ -65,7 +67,6 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		MethodDeclaration aMethod = getMethod(getSetOrAssert(step) + getSection(step) + "Content");
 		aMethod.removeBody();
 		addParameter(aMethod, "HashMap<String, String>", "keyMap");
-
 	}
 
 	public MethodDeclaration createStep(String step) throws Exception {
