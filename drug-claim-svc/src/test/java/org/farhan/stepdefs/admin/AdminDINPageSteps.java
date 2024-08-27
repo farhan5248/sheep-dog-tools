@@ -6,7 +6,7 @@ import io.cucumber.datatable.DataTable;
 
 public class AdminDINPageSteps {
 
-    @Given("^The Admin application, DIN page is as follows$")
+    @Given("^The Admin application, DIN page is created as follows$")
     public void theAdminApplicationDINPageIsAsFollows(DataTable dataTable) {
         AdminFactory.get("DINPage").setComponent("Admin");
         AdminFactory.get("DINPage").setPath("DIN");

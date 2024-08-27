@@ -17,7 +17,7 @@ High Deductible
 
 
 
-=== Given The Admin application, DIN page is as follows
+=== Given The Admin application, DIN page is created as follows
 
 [options="header"]
 |===
@@ -25,7 +25,7 @@ High Deductible
 | 2345| 100.0
 |===
 
-=== And The Admin application, Provider page is as follows
+=== And The Admin application, Provider page is created as follows
 
 [options="header"]
 |===
@@ -33,7 +33,7 @@ High Deductible
 | 12345678
 |===
 
-=== And The Admin application, Member page is as follows
+=== And The Admin application, Member page is created as follows
 
 [options="header"]
 |===
@@ -49,7 +49,7 @@ High Deductible
 | 123456789| 80.0| 2345| 0.0| 100.0| 12345678
 |===
 
-=== Then The Claim response will be as follows
+=== Then The Claim response will be created as follows
 
 [options="header"]
 |===
@@ -62,7 +62,7 @@ High Deductible
 
 
 
-=== Given The Admin application, DIN page is as follows
+=== Given The Admin application, DIN page is created as follows
 
 [options="header"]
 |===
@@ -70,7 +70,7 @@ High Deductible
 | 2345| 100.0
 |===
 
-=== And The Admin application, Provider page is as follows
+=== And The Admin application, Provider page is created as follows
 
 [options="header"]
 |===
@@ -78,7 +78,7 @@ High Deductible
 | 12345678
 |===
 
-=== And The Admin application, Member page is as follows
+=== And The Admin application, Member page is created as follows
 
 [options="header"]
 |===
@@ -94,7 +94,7 @@ High Deductible
 | 123456789| 80.0| 2345| 10.0| 100.0| 12345678
 |===
 
-=== Then The Claim response will be as follows
+=== Then The Claim response will be created as follows
 
 [options="header"]
 |===
@@ -107,7 +107,7 @@ High Deductible
 
 
 
-=== Given The Admin application, DIN page is as follows
+=== Given The Admin application, DIN page is created as follows
 
 [options="header"]
 |===
@@ -115,7 +115,7 @@ High Deductible
 | 2345| 100.0
 |===
 
-=== And The Admin application, Provider page is as follows
+=== And The Admin application, Provider page is created as follows
 
 [options="header"]
 |===
@@ -123,7 +123,7 @@ High Deductible
 | 12345678
 |===
 
-=== And The Admin application, Member page is as follows
+=== And The Admin application, Member page is created as follows
 
 [options="header"]
 |===
@@ -139,7 +139,7 @@ High Deductible
 | 123456789| 80.0| 2345| 100.0| 100.0| 12345678
 |===
 
-=== Then The Claim response will be as follows
+=== Then The Claim response will be created as follows
 
 [options="header"]
 |===

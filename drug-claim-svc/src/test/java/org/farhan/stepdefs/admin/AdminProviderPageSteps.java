@@ -6,7 +6,7 @@ import io.cucumber.datatable.DataTable;
 
 public class AdminProviderPageSteps {
 
-    @Given("^The Admin application, Provider page is as follows$")
+    @Given("^The Admin application, Provider page is created as follows$")
     public void theAdminApplicationProviderPageIsAsFollows(DataTable dataTable) {
         AdminFactory.get("ProviderPage").setComponent("Admin");
         AdminFactory.get("ProviderPage").setPath("Provider");
