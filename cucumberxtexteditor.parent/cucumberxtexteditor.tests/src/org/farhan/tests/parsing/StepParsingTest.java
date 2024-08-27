@@ -122,7 +122,7 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("Given do step one\n");
 		sb.append("\"\"\"\n");
 		sb.append("\"\"\"\n");
-		assertNoErrors(sb);
+		assertErrors(sb);
 	}
 
 	// @Test

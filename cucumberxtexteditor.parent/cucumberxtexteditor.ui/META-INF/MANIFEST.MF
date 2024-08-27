@@ -17,7 +17,7 @@ Require-Bundle: cucumberxtexteditor,
  org.eclipse.compare,
  org.eclipse.xtext.builder
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-17
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: org.farhan.ui.quickfix,
  org.farhan.ui.contentassist,
  cucumberxtexteditor.ui.internal

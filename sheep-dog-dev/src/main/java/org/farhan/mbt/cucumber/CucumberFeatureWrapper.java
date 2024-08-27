@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.impl.RuleCallImpl;
 import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
+import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.CucumberStandaloneSetup;
 import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.Background;
@@ -55,9 +56,8 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		step.setTheDocString(CucumberFactory.eINSTANCE.createDocString());
 		for (String l : docString.split("\n")) {
 			Line line = CucumberFactory.eINSTANCE.createLine();
-			// I'm not sure why only 9 leading spaces are needed instead of 10 and why a
-			// trailing space gets added automatically
-			line.setName("         " + l);
+			// Add hidden text
+			line.setName("          " + l);
 			step.getTheDocString().getLines().add(line);
 		}
 	}
@@ -167,7 +167,8 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		String indent = "          ";
 		for (Line l : stepSrc.getTheDocString().getLines()) {
 			if (l.getName() != null) {
-				text += "\n" + l.getName().replaceFirst(indent, "").stripTrailing();
+				// TODO maybe there's no need to replace the indent
+				text += "\n" + l.getName().replaceFirst(indent, "");
 			} else {
 				text += "\n";
 			}
@@ -325,6 +326,7 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		Resource res = new ResourceSetImpl().createResource(uri);
 		res.getContents().add(theFeature);
 		try {
+			// res.save(SaveOptions.newBuilder().format().getOptions().toOptionsMap());
 			res.save(null);
 		} catch (IOException e) {
 			e.printStackTrace();

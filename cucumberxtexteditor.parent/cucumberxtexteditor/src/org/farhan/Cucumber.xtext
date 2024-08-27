@@ -57,7 +57,7 @@ Step:
 
 DocString:
 	'"""' EOL
-	lines+=Line*
+	lines+=Line+
 	'"""' EOL;
 
 Given:

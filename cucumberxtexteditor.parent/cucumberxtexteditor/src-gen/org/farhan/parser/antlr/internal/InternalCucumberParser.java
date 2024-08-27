@@ -2433,7 +2433,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDocString"
-    // InternalCucumber.g:887:1: ruleDocString returns [EObject current=null] : (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_lines_2_0= ruleLine ) )* otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL ) ;
+    // InternalCucumber.g:887:1: ruleDocString returns [EObject current=null] : (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_lines_2_0= ruleLine ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL ) ;
     public final EObject ruleDocString() throws RecognitionException {
         EObject current = null;
 
@@ -2448,11 +2448,11 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCucumber.g:893:2: ( (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_lines_2_0= ruleLine ) )* otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL ) )
-            // InternalCucumber.g:894:2: (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_lines_2_0= ruleLine ) )* otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL )
+            // InternalCucumber.g:893:2: ( (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_lines_2_0= ruleLine ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL ) )
+            // InternalCucumber.g:894:2: (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_lines_2_0= ruleLine ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL )
             {
-            // InternalCucumber.g:894:2: (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_lines_2_0= ruleLine ) )* otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL )
-            // InternalCucumber.g:895:3: otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_lines_2_0= ruleLine ) )* otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL
+            // InternalCucumber.g:894:2: (otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_lines_2_0= ruleLine ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL )
+            // InternalCucumber.g:895:3: otherlv_0= '\"\"\"' this_EOL_1= RULE_EOL ( (lv_lines_2_0= ruleLine ) )+ otherlv_3= '\"\"\"' this_EOL_4= RULE_EOL
             {
             otherlv_0=(Token)match(input,16,FOLLOW_6); 
 
@@ -2462,7 +2462,8 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(this_EOL_1, grammarAccess.getDocStringAccess().getEOLTerminalRuleCall_1());
             		
-            // InternalCucumber.g:903:3: ( (lv_lines_2_0= ruleLine ) )*
+            // InternalCucumber.g:903:3: ( (lv_lines_2_0= ruleLine ) )+
+            int cnt24=0;
             loop24:
             do {
                 int alt24=2;
@@ -2483,7 +2484,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             	    					newCompositeNode(grammarAccess.getDocStringAccess().getLinesLineParserRuleCall_2_0());
             	    				
-            	    pushFollow(FOLLOW_18);
+            	    pushFollow(FOLLOW_19);
             	    lv_lines_2_0=ruleLine();
 
             	    state._fsp--;
@@ -2507,8 +2508,12 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop24;
+            	    if ( cnt24 >= 1 ) break loop24;
+                        EarlyExitException eee =
+                            new EarlyExitException(24, input);
+                        throw eee;
                 }
+                cnt24++;
             } while (true);
 
             otherlv_3=(Token)match(input,16,FOLLOW_6); 
@@ -2636,7 +2641,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             }
 
-            this_EOL_2=(Token)match(input,RULE_EOL,FOLLOW_19); 
+            this_EOL_2=(Token)match(input,RULE_EOL,FOLLOW_20); 
 
             			newLeafNode(this_EOL_2, grammarAccess.getGivenAccess().getEOLTerminalRuleCall_2());
             		
@@ -2845,7 +2850,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             }
 
-            this_EOL_2=(Token)match(input,RULE_EOL,FOLLOW_19); 
+            this_EOL_2=(Token)match(input,RULE_EOL,FOLLOW_20); 
 
             			newLeafNode(this_EOL_2, grammarAccess.getWhenAccess().getEOLTerminalRuleCall_2());
             		
@@ -3054,7 +3059,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             }
 
-            this_EOL_2=(Token)match(input,RULE_EOL,FOLLOW_19); 
+            this_EOL_2=(Token)match(input,RULE_EOL,FOLLOW_20); 
 
             			newLeafNode(this_EOL_2, grammarAccess.getThenAccess().getEOLTerminalRuleCall_2());
             		
@@ -3263,7 +3268,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             }
 
-            this_EOL_2=(Token)match(input,RULE_EOL,FOLLOW_19); 
+            this_EOL_2=(Token)match(input,RULE_EOL,FOLLOW_20); 
 
             			newLeafNode(this_EOL_2, grammarAccess.getAndAccess().getEOLTerminalRuleCall_2());
             		
@@ -3472,7 +3477,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             }
 
-            this_EOL_2=(Token)match(input,RULE_EOL,FOLLOW_19); 
+            this_EOL_2=(Token)match(input,RULE_EOL,FOLLOW_20); 
 
             			newLeafNode(this_EOL_2, grammarAccess.getButAccess().getEOLTerminalRuleCall_2());
             		
@@ -3681,7 +3686,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             }
 
-            this_EOL_2=(Token)match(input,RULE_EOL,FOLLOW_19); 
+            this_EOL_2=(Token)match(input,RULE_EOL,FOLLOW_20); 
 
             			newLeafNode(this_EOL_2, grammarAccess.getAsteriskAccess().getEOLTerminalRuleCall_2());
             		
@@ -3977,7 +3982,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             	    			newCompositeNode(grammarAccess.getPhraseAccess().getTEXT_LITERALParserRuleCall());
             	    		
-            	    pushFollow(FOLLOW_20);
+            	    pushFollow(FOLLOW_21);
             	    this_TEXT_LITERAL_0=ruleTEXT_LITERAL();
 
             	    state._fsp--;
@@ -4074,7 +4079,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
             // InternalCucumber.g:1541:2: (otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) ) )
             // InternalCucumber.g:1542:3: otherlv_0= '@' ( (lv_name_1_0= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,23,FOLLOW_21); 
+            otherlv_0=(Token)match(input,23,FOLLOW_22); 
 
             			newLeafNode(otherlv_0, grammarAccess.getTagAccess().getCommercialAtKeyword_0());
             		
@@ -4307,7 +4312,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
             	    			newCompositeNode(grammarAccess.getLineBitsAccess().getTEXT_LITERALParserRuleCall());
             	    		
-            	    pushFollow(FOLLOW_20);
+            	    pushFollow(FOLLOW_21);
             	    this_TEXT_LITERAL_0=ruleTEXT_LITERAL();
 
             	    state._fsp--;
@@ -4587,9 +4592,10 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000004000L});
     public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x00000000000080E0L});
     public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x00000000000080E2L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x00000000000100F0L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x00000000000180E2L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x00000000000000E2L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x00000000000000F0L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x00000000000100F0L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x00000000000180E2L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x00000000000000E2L});
+    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000000000020L});
 
 }

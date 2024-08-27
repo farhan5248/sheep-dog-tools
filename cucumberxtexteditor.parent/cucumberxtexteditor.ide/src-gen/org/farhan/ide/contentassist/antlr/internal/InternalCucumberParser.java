@@ -6960,7 +6960,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
             // InternalCucumber.g:2132:1: ( rule__DocString__Group__1__Impl rule__DocString__Group__2 )
             // InternalCucumber.g:2133:2: rule__DocString__Group__1__Impl rule__DocString__Group__2
             {
-            pushFollow(FOLLOW_19);
+            pushFollow(FOLLOW_6);
             rule__DocString__Group__1__Impl();
 
             state._fsp--;
@@ -7064,20 +7064,42 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__DocString__Group__2__Impl"
-    // InternalCucumber.g:2167:1: rule__DocString__Group__2__Impl : ( ( rule__DocString__LinesAssignment_2 )* ) ;
+    // InternalCucumber.g:2167:1: rule__DocString__Group__2__Impl : ( ( ( rule__DocString__LinesAssignment_2 ) ) ( ( rule__DocString__LinesAssignment_2 )* ) ) ;
     public final void rule__DocString__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2171:1: ( ( ( rule__DocString__LinesAssignment_2 )* ) )
-            // InternalCucumber.g:2172:1: ( ( rule__DocString__LinesAssignment_2 )* )
+            // InternalCucumber.g:2171:1: ( ( ( ( rule__DocString__LinesAssignment_2 ) ) ( ( rule__DocString__LinesAssignment_2 )* ) ) )
+            // InternalCucumber.g:2172:1: ( ( ( rule__DocString__LinesAssignment_2 ) ) ( ( rule__DocString__LinesAssignment_2 )* ) )
             {
-            // InternalCucumber.g:2172:1: ( ( rule__DocString__LinesAssignment_2 )* )
-            // InternalCucumber.g:2173:2: ( rule__DocString__LinesAssignment_2 )*
+            // InternalCucumber.g:2172:1: ( ( ( rule__DocString__LinesAssignment_2 ) ) ( ( rule__DocString__LinesAssignment_2 )* ) )
+            // InternalCucumber.g:2173:2: ( ( rule__DocString__LinesAssignment_2 ) ) ( ( rule__DocString__LinesAssignment_2 )* )
+            {
+            // InternalCucumber.g:2173:2: ( ( rule__DocString__LinesAssignment_2 ) )
+            // InternalCucumber.g:2174:3: ( rule__DocString__LinesAssignment_2 )
             {
              before(grammarAccess.getDocStringAccess().getLinesAssignment_2()); 
-            // InternalCucumber.g:2174:2: ( rule__DocString__LinesAssignment_2 )*
+            // InternalCucumber.g:2175:3: ( rule__DocString__LinesAssignment_2 )
+            // InternalCucumber.g:2175:4: rule__DocString__LinesAssignment_2
+            {
+            pushFollow(FOLLOW_4);
+            rule__DocString__LinesAssignment_2();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getDocStringAccess().getLinesAssignment_2()); 
+
+            }
+
+            // InternalCucumber.g:2178:2: ( ( rule__DocString__LinesAssignment_2 )* )
+            // InternalCucumber.g:2179:3: ( rule__DocString__LinesAssignment_2 )*
+            {
+             before(grammarAccess.getDocStringAccess().getLinesAssignment_2()); 
+            // InternalCucumber.g:2180:3: ( rule__DocString__LinesAssignment_2 )*
             loop33:
             do {
                 int alt33=2;
@@ -7090,7 +7112,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
                 switch (alt33) {
             	case 1 :
-            	    // InternalCucumber.g:2174:3: rule__DocString__LinesAssignment_2
+            	    // InternalCucumber.g:2180:4: rule__DocString__LinesAssignment_2
             	    {
             	    pushFollow(FOLLOW_4);
             	    rule__DocString__LinesAssignment_2();
@@ -7113,6 +7135,9 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
             }
 
+
+            }
+
         }
         catch (RecognitionException re) {
             reportError(re);
@@ -7129,14 +7154,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__DocString__Group__3"
-    // InternalCucumber.g:2182:1: rule__DocString__Group__3 : rule__DocString__Group__3__Impl rule__DocString__Group__4 ;
+    // InternalCucumber.g:2189:1: rule__DocString__Group__3 : rule__DocString__Group__3__Impl rule__DocString__Group__4 ;
     public final void rule__DocString__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2186:1: ( rule__DocString__Group__3__Impl rule__DocString__Group__4 )
-            // InternalCucumber.g:2187:2: rule__DocString__Group__3__Impl rule__DocString__Group__4
+            // InternalCucumber.g:2193:1: ( rule__DocString__Group__3__Impl rule__DocString__Group__4 )
+            // InternalCucumber.g:2194:2: rule__DocString__Group__3__Impl rule__DocString__Group__4
             {
             pushFollow(FOLLOW_7);
             rule__DocString__Group__3__Impl();
@@ -7167,17 +7192,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__DocString__Group__3__Impl"
-    // InternalCucumber.g:2194:1: rule__DocString__Group__3__Impl : ( '\"\"\"' ) ;
+    // InternalCucumber.g:2201:1: rule__DocString__Group__3__Impl : ( '\"\"\"' ) ;
     public final void rule__DocString__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2198:1: ( ( '\"\"\"' ) )
-            // InternalCucumber.g:2199:1: ( '\"\"\"' )
+            // InternalCucumber.g:2205:1: ( ( '\"\"\"' ) )
+            // InternalCucumber.g:2206:1: ( '\"\"\"' )
             {
-            // InternalCucumber.g:2199:1: ( '\"\"\"' )
-            // InternalCucumber.g:2200:2: '\"\"\"'
+            // InternalCucumber.g:2206:1: ( '\"\"\"' )
+            // InternalCucumber.g:2207:2: '\"\"\"'
             {
              before(grammarAccess.getDocStringAccess().getQuotationMarkQuotationMarkQuotationMarkKeyword_3()); 
             match(input,16,FOLLOW_2); 
@@ -7204,14 +7229,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__DocString__Group__4"
-    // InternalCucumber.g:2209:1: rule__DocString__Group__4 : rule__DocString__Group__4__Impl ;
+    // InternalCucumber.g:2216:1: rule__DocString__Group__4 : rule__DocString__Group__4__Impl ;
     public final void rule__DocString__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2213:1: ( rule__DocString__Group__4__Impl )
-            // InternalCucumber.g:2214:2: rule__DocString__Group__4__Impl
+            // InternalCucumber.g:2220:1: ( rule__DocString__Group__4__Impl )
+            // InternalCucumber.g:2221:2: rule__DocString__Group__4__Impl
             {
             pushFollow(FOLLOW_2);
             rule__DocString__Group__4__Impl();
@@ -7237,17 +7262,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__DocString__Group__4__Impl"
-    // InternalCucumber.g:2220:1: rule__DocString__Group__4__Impl : ( RULE_EOL ) ;
+    // InternalCucumber.g:2227:1: rule__DocString__Group__4__Impl : ( RULE_EOL ) ;
     public final void rule__DocString__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2224:1: ( ( RULE_EOL ) )
-            // InternalCucumber.g:2225:1: ( RULE_EOL )
+            // InternalCucumber.g:2231:1: ( ( RULE_EOL ) )
+            // InternalCucumber.g:2232:1: ( RULE_EOL )
             {
-            // InternalCucumber.g:2225:1: ( RULE_EOL )
-            // InternalCucumber.g:2226:2: RULE_EOL
+            // InternalCucumber.g:2232:1: ( RULE_EOL )
+            // InternalCucumber.g:2233:2: RULE_EOL
             {
              before(grammarAccess.getDocStringAccess().getEOLTerminalRuleCall_4()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -7274,14 +7299,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__Group__0"
-    // InternalCucumber.g:2236:1: rule__Given__Group__0 : rule__Given__Group__0__Impl rule__Given__Group__1 ;
+    // InternalCucumber.g:2243:1: rule__Given__Group__0 : rule__Given__Group__0__Impl rule__Given__Group__1 ;
     public final void rule__Given__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2240:1: ( rule__Given__Group__0__Impl rule__Given__Group__1 )
-            // InternalCucumber.g:2241:2: rule__Given__Group__0__Impl rule__Given__Group__1
+            // InternalCucumber.g:2247:1: ( rule__Given__Group__0__Impl rule__Given__Group__1 )
+            // InternalCucumber.g:2248:2: rule__Given__Group__0__Impl rule__Given__Group__1
             {
             pushFollow(FOLLOW_6);
             rule__Given__Group__0__Impl();
@@ -7312,17 +7337,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__Group__0__Impl"
-    // InternalCucumber.g:2248:1: rule__Given__Group__0__Impl : ( 'Given' ) ;
+    // InternalCucumber.g:2255:1: rule__Given__Group__0__Impl : ( 'Given' ) ;
     public final void rule__Given__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2252:1: ( ( 'Given' ) )
-            // InternalCucumber.g:2253:1: ( 'Given' )
+            // InternalCucumber.g:2259:1: ( ( 'Given' ) )
+            // InternalCucumber.g:2260:1: ( 'Given' )
             {
-            // InternalCucumber.g:2253:1: ( 'Given' )
-            // InternalCucumber.g:2254:2: 'Given'
+            // InternalCucumber.g:2260:1: ( 'Given' )
+            // InternalCucumber.g:2261:2: 'Given'
             {
              before(grammarAccess.getGivenAccess().getGivenKeyword_0()); 
             match(input,17,FOLLOW_2); 
@@ -7349,14 +7374,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__Group__1"
-    // InternalCucumber.g:2263:1: rule__Given__Group__1 : rule__Given__Group__1__Impl rule__Given__Group__2 ;
+    // InternalCucumber.g:2270:1: rule__Given__Group__1 : rule__Given__Group__1__Impl rule__Given__Group__2 ;
     public final void rule__Given__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2267:1: ( rule__Given__Group__1__Impl rule__Given__Group__2 )
-            // InternalCucumber.g:2268:2: rule__Given__Group__1__Impl rule__Given__Group__2
+            // InternalCucumber.g:2274:1: ( rule__Given__Group__1__Impl rule__Given__Group__2 )
+            // InternalCucumber.g:2275:2: rule__Given__Group__1__Impl rule__Given__Group__2
             {
             pushFollow(FOLLOW_7);
             rule__Given__Group__1__Impl();
@@ -7387,21 +7412,21 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__Group__1__Impl"
-    // InternalCucumber.g:2275:1: rule__Given__Group__1__Impl : ( ( rule__Given__NameAssignment_1 ) ) ;
+    // InternalCucumber.g:2282:1: rule__Given__Group__1__Impl : ( ( rule__Given__NameAssignment_1 ) ) ;
     public final void rule__Given__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2279:1: ( ( ( rule__Given__NameAssignment_1 ) ) )
-            // InternalCucumber.g:2280:1: ( ( rule__Given__NameAssignment_1 ) )
+            // InternalCucumber.g:2286:1: ( ( ( rule__Given__NameAssignment_1 ) ) )
+            // InternalCucumber.g:2287:1: ( ( rule__Given__NameAssignment_1 ) )
             {
-            // InternalCucumber.g:2280:1: ( ( rule__Given__NameAssignment_1 ) )
-            // InternalCucumber.g:2281:2: ( rule__Given__NameAssignment_1 )
+            // InternalCucumber.g:2287:1: ( ( rule__Given__NameAssignment_1 ) )
+            // InternalCucumber.g:2288:2: ( rule__Given__NameAssignment_1 )
             {
              before(grammarAccess.getGivenAccess().getNameAssignment_1()); 
-            // InternalCucumber.g:2282:2: ( rule__Given__NameAssignment_1 )
-            // InternalCucumber.g:2282:3: rule__Given__NameAssignment_1
+            // InternalCucumber.g:2289:2: ( rule__Given__NameAssignment_1 )
+            // InternalCucumber.g:2289:3: rule__Given__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__Given__NameAssignment_1();
@@ -7434,14 +7459,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__Group__2"
-    // InternalCucumber.g:2290:1: rule__Given__Group__2 : rule__Given__Group__2__Impl rule__Given__Group__3 ;
+    // InternalCucumber.g:2297:1: rule__Given__Group__2 : rule__Given__Group__2__Impl rule__Given__Group__3 ;
     public final void rule__Given__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2294:1: ( rule__Given__Group__2__Impl rule__Given__Group__3 )
-            // InternalCucumber.g:2295:2: rule__Given__Group__2__Impl rule__Given__Group__3
+            // InternalCucumber.g:2301:1: ( rule__Given__Group__2__Impl rule__Given__Group__3 )
+            // InternalCucumber.g:2302:2: rule__Given__Group__2__Impl rule__Given__Group__3
             {
             pushFollow(FOLLOW_20);
             rule__Given__Group__2__Impl();
@@ -7472,17 +7497,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__Group__2__Impl"
-    // InternalCucumber.g:2302:1: rule__Given__Group__2__Impl : ( RULE_EOL ) ;
+    // InternalCucumber.g:2309:1: rule__Given__Group__2__Impl : ( RULE_EOL ) ;
     public final void rule__Given__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2306:1: ( ( RULE_EOL ) )
-            // InternalCucumber.g:2307:1: ( RULE_EOL )
+            // InternalCucumber.g:2313:1: ( ( RULE_EOL ) )
+            // InternalCucumber.g:2314:1: ( RULE_EOL )
             {
-            // InternalCucumber.g:2307:1: ( RULE_EOL )
-            // InternalCucumber.g:2308:2: RULE_EOL
+            // InternalCucumber.g:2314:1: ( RULE_EOL )
+            // InternalCucumber.g:2315:2: RULE_EOL
             {
              before(grammarAccess.getGivenAccess().getEOLTerminalRuleCall_2()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -7509,14 +7534,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__Group__3"
-    // InternalCucumber.g:2317:1: rule__Given__Group__3 : rule__Given__Group__3__Impl ;
+    // InternalCucumber.g:2324:1: rule__Given__Group__3 : rule__Given__Group__3__Impl ;
     public final void rule__Given__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2321:1: ( rule__Given__Group__3__Impl )
-            // InternalCucumber.g:2322:2: rule__Given__Group__3__Impl
+            // InternalCucumber.g:2328:1: ( rule__Given__Group__3__Impl )
+            // InternalCucumber.g:2329:2: rule__Given__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Given__Group__3__Impl();
@@ -7542,20 +7567,20 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__Group__3__Impl"
-    // InternalCucumber.g:2328:1: rule__Given__Group__3__Impl : ( ( rule__Given__Alternatives_3 )? ) ;
+    // InternalCucumber.g:2335:1: rule__Given__Group__3__Impl : ( ( rule__Given__Alternatives_3 )? ) ;
     public final void rule__Given__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2332:1: ( ( ( rule__Given__Alternatives_3 )? ) )
-            // InternalCucumber.g:2333:1: ( ( rule__Given__Alternatives_3 )? )
+            // InternalCucumber.g:2339:1: ( ( ( rule__Given__Alternatives_3 )? ) )
+            // InternalCucumber.g:2340:1: ( ( rule__Given__Alternatives_3 )? )
             {
-            // InternalCucumber.g:2333:1: ( ( rule__Given__Alternatives_3 )? )
-            // InternalCucumber.g:2334:2: ( rule__Given__Alternatives_3 )?
+            // InternalCucumber.g:2340:1: ( ( rule__Given__Alternatives_3 )? )
+            // InternalCucumber.g:2341:2: ( rule__Given__Alternatives_3 )?
             {
              before(grammarAccess.getGivenAccess().getAlternatives_3()); 
-            // InternalCucumber.g:2335:2: ( rule__Given__Alternatives_3 )?
+            // InternalCucumber.g:2342:2: ( rule__Given__Alternatives_3 )?
             int alt34=2;
             int LA34_0 = input.LA(1);
 
@@ -7564,7 +7589,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
             }
             switch (alt34) {
                 case 1 :
-                    // InternalCucumber.g:2335:3: rule__Given__Alternatives_3
+                    // InternalCucumber.g:2342:3: rule__Given__Alternatives_3
                     {
                     pushFollow(FOLLOW_2);
                     rule__Given__Alternatives_3();
@@ -7600,14 +7625,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__Group__0"
-    // InternalCucumber.g:2344:1: rule__When__Group__0 : rule__When__Group__0__Impl rule__When__Group__1 ;
+    // InternalCucumber.g:2351:1: rule__When__Group__0 : rule__When__Group__0__Impl rule__When__Group__1 ;
     public final void rule__When__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2348:1: ( rule__When__Group__0__Impl rule__When__Group__1 )
-            // InternalCucumber.g:2349:2: rule__When__Group__0__Impl rule__When__Group__1
+            // InternalCucumber.g:2355:1: ( rule__When__Group__0__Impl rule__When__Group__1 )
+            // InternalCucumber.g:2356:2: rule__When__Group__0__Impl rule__When__Group__1
             {
             pushFollow(FOLLOW_6);
             rule__When__Group__0__Impl();
@@ -7638,17 +7663,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__Group__0__Impl"
-    // InternalCucumber.g:2356:1: rule__When__Group__0__Impl : ( 'When' ) ;
+    // InternalCucumber.g:2363:1: rule__When__Group__0__Impl : ( 'When' ) ;
     public final void rule__When__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2360:1: ( ( 'When' ) )
-            // InternalCucumber.g:2361:1: ( 'When' )
+            // InternalCucumber.g:2367:1: ( ( 'When' ) )
+            // InternalCucumber.g:2368:1: ( 'When' )
             {
-            // InternalCucumber.g:2361:1: ( 'When' )
-            // InternalCucumber.g:2362:2: 'When'
+            // InternalCucumber.g:2368:1: ( 'When' )
+            // InternalCucumber.g:2369:2: 'When'
             {
              before(grammarAccess.getWhenAccess().getWhenKeyword_0()); 
             match(input,18,FOLLOW_2); 
@@ -7675,14 +7700,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__Group__1"
-    // InternalCucumber.g:2371:1: rule__When__Group__1 : rule__When__Group__1__Impl rule__When__Group__2 ;
+    // InternalCucumber.g:2378:1: rule__When__Group__1 : rule__When__Group__1__Impl rule__When__Group__2 ;
     public final void rule__When__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2375:1: ( rule__When__Group__1__Impl rule__When__Group__2 )
-            // InternalCucumber.g:2376:2: rule__When__Group__1__Impl rule__When__Group__2
+            // InternalCucumber.g:2382:1: ( rule__When__Group__1__Impl rule__When__Group__2 )
+            // InternalCucumber.g:2383:2: rule__When__Group__1__Impl rule__When__Group__2
             {
             pushFollow(FOLLOW_7);
             rule__When__Group__1__Impl();
@@ -7713,21 +7738,21 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__Group__1__Impl"
-    // InternalCucumber.g:2383:1: rule__When__Group__1__Impl : ( ( rule__When__NameAssignment_1 ) ) ;
+    // InternalCucumber.g:2390:1: rule__When__Group__1__Impl : ( ( rule__When__NameAssignment_1 ) ) ;
     public final void rule__When__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2387:1: ( ( ( rule__When__NameAssignment_1 ) ) )
-            // InternalCucumber.g:2388:1: ( ( rule__When__NameAssignment_1 ) )
+            // InternalCucumber.g:2394:1: ( ( ( rule__When__NameAssignment_1 ) ) )
+            // InternalCucumber.g:2395:1: ( ( rule__When__NameAssignment_1 ) )
             {
-            // InternalCucumber.g:2388:1: ( ( rule__When__NameAssignment_1 ) )
-            // InternalCucumber.g:2389:2: ( rule__When__NameAssignment_1 )
+            // InternalCucumber.g:2395:1: ( ( rule__When__NameAssignment_1 ) )
+            // InternalCucumber.g:2396:2: ( rule__When__NameAssignment_1 )
             {
              before(grammarAccess.getWhenAccess().getNameAssignment_1()); 
-            // InternalCucumber.g:2390:2: ( rule__When__NameAssignment_1 )
-            // InternalCucumber.g:2390:3: rule__When__NameAssignment_1
+            // InternalCucumber.g:2397:2: ( rule__When__NameAssignment_1 )
+            // InternalCucumber.g:2397:3: rule__When__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__When__NameAssignment_1();
@@ -7760,14 +7785,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__Group__2"
-    // InternalCucumber.g:2398:1: rule__When__Group__2 : rule__When__Group__2__Impl rule__When__Group__3 ;
+    // InternalCucumber.g:2405:1: rule__When__Group__2 : rule__When__Group__2__Impl rule__When__Group__3 ;
     public final void rule__When__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2402:1: ( rule__When__Group__2__Impl rule__When__Group__3 )
-            // InternalCucumber.g:2403:2: rule__When__Group__2__Impl rule__When__Group__3
+            // InternalCucumber.g:2409:1: ( rule__When__Group__2__Impl rule__When__Group__3 )
+            // InternalCucumber.g:2410:2: rule__When__Group__2__Impl rule__When__Group__3
             {
             pushFollow(FOLLOW_20);
             rule__When__Group__2__Impl();
@@ -7798,17 +7823,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__Group__2__Impl"
-    // InternalCucumber.g:2410:1: rule__When__Group__2__Impl : ( RULE_EOL ) ;
+    // InternalCucumber.g:2417:1: rule__When__Group__2__Impl : ( RULE_EOL ) ;
     public final void rule__When__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2414:1: ( ( RULE_EOL ) )
-            // InternalCucumber.g:2415:1: ( RULE_EOL )
+            // InternalCucumber.g:2421:1: ( ( RULE_EOL ) )
+            // InternalCucumber.g:2422:1: ( RULE_EOL )
             {
-            // InternalCucumber.g:2415:1: ( RULE_EOL )
-            // InternalCucumber.g:2416:2: RULE_EOL
+            // InternalCucumber.g:2422:1: ( RULE_EOL )
+            // InternalCucumber.g:2423:2: RULE_EOL
             {
              before(grammarAccess.getWhenAccess().getEOLTerminalRuleCall_2()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -7835,14 +7860,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__Group__3"
-    // InternalCucumber.g:2425:1: rule__When__Group__3 : rule__When__Group__3__Impl ;
+    // InternalCucumber.g:2432:1: rule__When__Group__3 : rule__When__Group__3__Impl ;
     public final void rule__When__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2429:1: ( rule__When__Group__3__Impl )
-            // InternalCucumber.g:2430:2: rule__When__Group__3__Impl
+            // InternalCucumber.g:2436:1: ( rule__When__Group__3__Impl )
+            // InternalCucumber.g:2437:2: rule__When__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__When__Group__3__Impl();
@@ -7868,20 +7893,20 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__Group__3__Impl"
-    // InternalCucumber.g:2436:1: rule__When__Group__3__Impl : ( ( rule__When__Alternatives_3 )? ) ;
+    // InternalCucumber.g:2443:1: rule__When__Group__3__Impl : ( ( rule__When__Alternatives_3 )? ) ;
     public final void rule__When__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2440:1: ( ( ( rule__When__Alternatives_3 )? ) )
-            // InternalCucumber.g:2441:1: ( ( rule__When__Alternatives_3 )? )
+            // InternalCucumber.g:2447:1: ( ( ( rule__When__Alternatives_3 )? ) )
+            // InternalCucumber.g:2448:1: ( ( rule__When__Alternatives_3 )? )
             {
-            // InternalCucumber.g:2441:1: ( ( rule__When__Alternatives_3 )? )
-            // InternalCucumber.g:2442:2: ( rule__When__Alternatives_3 )?
+            // InternalCucumber.g:2448:1: ( ( rule__When__Alternatives_3 )? )
+            // InternalCucumber.g:2449:2: ( rule__When__Alternatives_3 )?
             {
              before(grammarAccess.getWhenAccess().getAlternatives_3()); 
-            // InternalCucumber.g:2443:2: ( rule__When__Alternatives_3 )?
+            // InternalCucumber.g:2450:2: ( rule__When__Alternatives_3 )?
             int alt35=2;
             int LA35_0 = input.LA(1);
 
@@ -7890,7 +7915,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
             }
             switch (alt35) {
                 case 1 :
-                    // InternalCucumber.g:2443:3: rule__When__Alternatives_3
+                    // InternalCucumber.g:2450:3: rule__When__Alternatives_3
                     {
                     pushFollow(FOLLOW_2);
                     rule__When__Alternatives_3();
@@ -7926,14 +7951,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__Group__0"
-    // InternalCucumber.g:2452:1: rule__Then__Group__0 : rule__Then__Group__0__Impl rule__Then__Group__1 ;
+    // InternalCucumber.g:2459:1: rule__Then__Group__0 : rule__Then__Group__0__Impl rule__Then__Group__1 ;
     public final void rule__Then__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2456:1: ( rule__Then__Group__0__Impl rule__Then__Group__1 )
-            // InternalCucumber.g:2457:2: rule__Then__Group__0__Impl rule__Then__Group__1
+            // InternalCucumber.g:2463:1: ( rule__Then__Group__0__Impl rule__Then__Group__1 )
+            // InternalCucumber.g:2464:2: rule__Then__Group__0__Impl rule__Then__Group__1
             {
             pushFollow(FOLLOW_6);
             rule__Then__Group__0__Impl();
@@ -7964,17 +7989,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__Group__0__Impl"
-    // InternalCucumber.g:2464:1: rule__Then__Group__0__Impl : ( 'Then' ) ;
+    // InternalCucumber.g:2471:1: rule__Then__Group__0__Impl : ( 'Then' ) ;
     public final void rule__Then__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2468:1: ( ( 'Then' ) )
-            // InternalCucumber.g:2469:1: ( 'Then' )
+            // InternalCucumber.g:2475:1: ( ( 'Then' ) )
+            // InternalCucumber.g:2476:1: ( 'Then' )
             {
-            // InternalCucumber.g:2469:1: ( 'Then' )
-            // InternalCucumber.g:2470:2: 'Then'
+            // InternalCucumber.g:2476:1: ( 'Then' )
+            // InternalCucumber.g:2477:2: 'Then'
             {
              before(grammarAccess.getThenAccess().getThenKeyword_0()); 
             match(input,19,FOLLOW_2); 
@@ -8001,14 +8026,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__Group__1"
-    // InternalCucumber.g:2479:1: rule__Then__Group__1 : rule__Then__Group__1__Impl rule__Then__Group__2 ;
+    // InternalCucumber.g:2486:1: rule__Then__Group__1 : rule__Then__Group__1__Impl rule__Then__Group__2 ;
     public final void rule__Then__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2483:1: ( rule__Then__Group__1__Impl rule__Then__Group__2 )
-            // InternalCucumber.g:2484:2: rule__Then__Group__1__Impl rule__Then__Group__2
+            // InternalCucumber.g:2490:1: ( rule__Then__Group__1__Impl rule__Then__Group__2 )
+            // InternalCucumber.g:2491:2: rule__Then__Group__1__Impl rule__Then__Group__2
             {
             pushFollow(FOLLOW_7);
             rule__Then__Group__1__Impl();
@@ -8039,21 +8064,21 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__Group__1__Impl"
-    // InternalCucumber.g:2491:1: rule__Then__Group__1__Impl : ( ( rule__Then__NameAssignment_1 ) ) ;
+    // InternalCucumber.g:2498:1: rule__Then__Group__1__Impl : ( ( rule__Then__NameAssignment_1 ) ) ;
     public final void rule__Then__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2495:1: ( ( ( rule__Then__NameAssignment_1 ) ) )
-            // InternalCucumber.g:2496:1: ( ( rule__Then__NameAssignment_1 ) )
+            // InternalCucumber.g:2502:1: ( ( ( rule__Then__NameAssignment_1 ) ) )
+            // InternalCucumber.g:2503:1: ( ( rule__Then__NameAssignment_1 ) )
             {
-            // InternalCucumber.g:2496:1: ( ( rule__Then__NameAssignment_1 ) )
-            // InternalCucumber.g:2497:2: ( rule__Then__NameAssignment_1 )
+            // InternalCucumber.g:2503:1: ( ( rule__Then__NameAssignment_1 ) )
+            // InternalCucumber.g:2504:2: ( rule__Then__NameAssignment_1 )
             {
              before(grammarAccess.getThenAccess().getNameAssignment_1()); 
-            // InternalCucumber.g:2498:2: ( rule__Then__NameAssignment_1 )
-            // InternalCucumber.g:2498:3: rule__Then__NameAssignment_1
+            // InternalCucumber.g:2505:2: ( rule__Then__NameAssignment_1 )
+            // InternalCucumber.g:2505:3: rule__Then__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__Then__NameAssignment_1();
@@ -8086,14 +8111,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__Group__2"
-    // InternalCucumber.g:2506:1: rule__Then__Group__2 : rule__Then__Group__2__Impl rule__Then__Group__3 ;
+    // InternalCucumber.g:2513:1: rule__Then__Group__2 : rule__Then__Group__2__Impl rule__Then__Group__3 ;
     public final void rule__Then__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2510:1: ( rule__Then__Group__2__Impl rule__Then__Group__3 )
-            // InternalCucumber.g:2511:2: rule__Then__Group__2__Impl rule__Then__Group__3
+            // InternalCucumber.g:2517:1: ( rule__Then__Group__2__Impl rule__Then__Group__3 )
+            // InternalCucumber.g:2518:2: rule__Then__Group__2__Impl rule__Then__Group__3
             {
             pushFollow(FOLLOW_20);
             rule__Then__Group__2__Impl();
@@ -8124,17 +8149,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__Group__2__Impl"
-    // InternalCucumber.g:2518:1: rule__Then__Group__2__Impl : ( RULE_EOL ) ;
+    // InternalCucumber.g:2525:1: rule__Then__Group__2__Impl : ( RULE_EOL ) ;
     public final void rule__Then__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2522:1: ( ( RULE_EOL ) )
-            // InternalCucumber.g:2523:1: ( RULE_EOL )
+            // InternalCucumber.g:2529:1: ( ( RULE_EOL ) )
+            // InternalCucumber.g:2530:1: ( RULE_EOL )
             {
-            // InternalCucumber.g:2523:1: ( RULE_EOL )
-            // InternalCucumber.g:2524:2: RULE_EOL
+            // InternalCucumber.g:2530:1: ( RULE_EOL )
+            // InternalCucumber.g:2531:2: RULE_EOL
             {
              before(grammarAccess.getThenAccess().getEOLTerminalRuleCall_2()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -8161,14 +8186,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__Group__3"
-    // InternalCucumber.g:2533:1: rule__Then__Group__3 : rule__Then__Group__3__Impl ;
+    // InternalCucumber.g:2540:1: rule__Then__Group__3 : rule__Then__Group__3__Impl ;
     public final void rule__Then__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2537:1: ( rule__Then__Group__3__Impl )
-            // InternalCucumber.g:2538:2: rule__Then__Group__3__Impl
+            // InternalCucumber.g:2544:1: ( rule__Then__Group__3__Impl )
+            // InternalCucumber.g:2545:2: rule__Then__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Then__Group__3__Impl();
@@ -8194,20 +8219,20 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__Group__3__Impl"
-    // InternalCucumber.g:2544:1: rule__Then__Group__3__Impl : ( ( rule__Then__Alternatives_3 )? ) ;
+    // InternalCucumber.g:2551:1: rule__Then__Group__3__Impl : ( ( rule__Then__Alternatives_3 )? ) ;
     public final void rule__Then__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2548:1: ( ( ( rule__Then__Alternatives_3 )? ) )
-            // InternalCucumber.g:2549:1: ( ( rule__Then__Alternatives_3 )? )
+            // InternalCucumber.g:2555:1: ( ( ( rule__Then__Alternatives_3 )? ) )
+            // InternalCucumber.g:2556:1: ( ( rule__Then__Alternatives_3 )? )
             {
-            // InternalCucumber.g:2549:1: ( ( rule__Then__Alternatives_3 )? )
-            // InternalCucumber.g:2550:2: ( rule__Then__Alternatives_3 )?
+            // InternalCucumber.g:2556:1: ( ( rule__Then__Alternatives_3 )? )
+            // InternalCucumber.g:2557:2: ( rule__Then__Alternatives_3 )?
             {
              before(grammarAccess.getThenAccess().getAlternatives_3()); 
-            // InternalCucumber.g:2551:2: ( rule__Then__Alternatives_3 )?
+            // InternalCucumber.g:2558:2: ( rule__Then__Alternatives_3 )?
             int alt36=2;
             int LA36_0 = input.LA(1);
 
@@ -8216,7 +8241,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
             }
             switch (alt36) {
                 case 1 :
-                    // InternalCucumber.g:2551:3: rule__Then__Alternatives_3
+                    // InternalCucumber.g:2558:3: rule__Then__Alternatives_3
                     {
                     pushFollow(FOLLOW_2);
                     rule__Then__Alternatives_3();
@@ -8252,14 +8277,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__Group__0"
-    // InternalCucumber.g:2560:1: rule__And__Group__0 : rule__And__Group__0__Impl rule__And__Group__1 ;
+    // InternalCucumber.g:2567:1: rule__And__Group__0 : rule__And__Group__0__Impl rule__And__Group__1 ;
     public final void rule__And__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2564:1: ( rule__And__Group__0__Impl rule__And__Group__1 )
-            // InternalCucumber.g:2565:2: rule__And__Group__0__Impl rule__And__Group__1
+            // InternalCucumber.g:2571:1: ( rule__And__Group__0__Impl rule__And__Group__1 )
+            // InternalCucumber.g:2572:2: rule__And__Group__0__Impl rule__And__Group__1
             {
             pushFollow(FOLLOW_6);
             rule__And__Group__0__Impl();
@@ -8290,17 +8315,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__Group__0__Impl"
-    // InternalCucumber.g:2572:1: rule__And__Group__0__Impl : ( 'And' ) ;
+    // InternalCucumber.g:2579:1: rule__And__Group__0__Impl : ( 'And' ) ;
     public final void rule__And__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2576:1: ( ( 'And' ) )
-            // InternalCucumber.g:2577:1: ( 'And' )
+            // InternalCucumber.g:2583:1: ( ( 'And' ) )
+            // InternalCucumber.g:2584:1: ( 'And' )
             {
-            // InternalCucumber.g:2577:1: ( 'And' )
-            // InternalCucumber.g:2578:2: 'And'
+            // InternalCucumber.g:2584:1: ( 'And' )
+            // InternalCucumber.g:2585:2: 'And'
             {
              before(grammarAccess.getAndAccess().getAndKeyword_0()); 
             match(input,20,FOLLOW_2); 
@@ -8327,14 +8352,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__Group__1"
-    // InternalCucumber.g:2587:1: rule__And__Group__1 : rule__And__Group__1__Impl rule__And__Group__2 ;
+    // InternalCucumber.g:2594:1: rule__And__Group__1 : rule__And__Group__1__Impl rule__And__Group__2 ;
     public final void rule__And__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2591:1: ( rule__And__Group__1__Impl rule__And__Group__2 )
-            // InternalCucumber.g:2592:2: rule__And__Group__1__Impl rule__And__Group__2
+            // InternalCucumber.g:2598:1: ( rule__And__Group__1__Impl rule__And__Group__2 )
+            // InternalCucumber.g:2599:2: rule__And__Group__1__Impl rule__And__Group__2
             {
             pushFollow(FOLLOW_7);
             rule__And__Group__1__Impl();
@@ -8365,21 +8390,21 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__Group__1__Impl"
-    // InternalCucumber.g:2599:1: rule__And__Group__1__Impl : ( ( rule__And__NameAssignment_1 ) ) ;
+    // InternalCucumber.g:2606:1: rule__And__Group__1__Impl : ( ( rule__And__NameAssignment_1 ) ) ;
     public final void rule__And__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2603:1: ( ( ( rule__And__NameAssignment_1 ) ) )
-            // InternalCucumber.g:2604:1: ( ( rule__And__NameAssignment_1 ) )
+            // InternalCucumber.g:2610:1: ( ( ( rule__And__NameAssignment_1 ) ) )
+            // InternalCucumber.g:2611:1: ( ( rule__And__NameAssignment_1 ) )
             {
-            // InternalCucumber.g:2604:1: ( ( rule__And__NameAssignment_1 ) )
-            // InternalCucumber.g:2605:2: ( rule__And__NameAssignment_1 )
+            // InternalCucumber.g:2611:1: ( ( rule__And__NameAssignment_1 ) )
+            // InternalCucumber.g:2612:2: ( rule__And__NameAssignment_1 )
             {
              before(grammarAccess.getAndAccess().getNameAssignment_1()); 
-            // InternalCucumber.g:2606:2: ( rule__And__NameAssignment_1 )
-            // InternalCucumber.g:2606:3: rule__And__NameAssignment_1
+            // InternalCucumber.g:2613:2: ( rule__And__NameAssignment_1 )
+            // InternalCucumber.g:2613:3: rule__And__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__And__NameAssignment_1();
@@ -8412,14 +8437,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__Group__2"
-    // InternalCucumber.g:2614:1: rule__And__Group__2 : rule__And__Group__2__Impl rule__And__Group__3 ;
+    // InternalCucumber.g:2621:1: rule__And__Group__2 : rule__And__Group__2__Impl rule__And__Group__3 ;
     public final void rule__And__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2618:1: ( rule__And__Group__2__Impl rule__And__Group__3 )
-            // InternalCucumber.g:2619:2: rule__And__Group__2__Impl rule__And__Group__3
+            // InternalCucumber.g:2625:1: ( rule__And__Group__2__Impl rule__And__Group__3 )
+            // InternalCucumber.g:2626:2: rule__And__Group__2__Impl rule__And__Group__3
             {
             pushFollow(FOLLOW_20);
             rule__And__Group__2__Impl();
@@ -8450,17 +8475,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__Group__2__Impl"
-    // InternalCucumber.g:2626:1: rule__And__Group__2__Impl : ( RULE_EOL ) ;
+    // InternalCucumber.g:2633:1: rule__And__Group__2__Impl : ( RULE_EOL ) ;
     public final void rule__And__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2630:1: ( ( RULE_EOL ) )
-            // InternalCucumber.g:2631:1: ( RULE_EOL )
+            // InternalCucumber.g:2637:1: ( ( RULE_EOL ) )
+            // InternalCucumber.g:2638:1: ( RULE_EOL )
             {
-            // InternalCucumber.g:2631:1: ( RULE_EOL )
-            // InternalCucumber.g:2632:2: RULE_EOL
+            // InternalCucumber.g:2638:1: ( RULE_EOL )
+            // InternalCucumber.g:2639:2: RULE_EOL
             {
              before(grammarAccess.getAndAccess().getEOLTerminalRuleCall_2()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -8487,14 +8512,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__Group__3"
-    // InternalCucumber.g:2641:1: rule__And__Group__3 : rule__And__Group__3__Impl ;
+    // InternalCucumber.g:2648:1: rule__And__Group__3 : rule__And__Group__3__Impl ;
     public final void rule__And__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2645:1: ( rule__And__Group__3__Impl )
-            // InternalCucumber.g:2646:2: rule__And__Group__3__Impl
+            // InternalCucumber.g:2652:1: ( rule__And__Group__3__Impl )
+            // InternalCucumber.g:2653:2: rule__And__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__And__Group__3__Impl();
@@ -8520,20 +8545,20 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__Group__3__Impl"
-    // InternalCucumber.g:2652:1: rule__And__Group__3__Impl : ( ( rule__And__Alternatives_3 )? ) ;
+    // InternalCucumber.g:2659:1: rule__And__Group__3__Impl : ( ( rule__And__Alternatives_3 )? ) ;
     public final void rule__And__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2656:1: ( ( ( rule__And__Alternatives_3 )? ) )
-            // InternalCucumber.g:2657:1: ( ( rule__And__Alternatives_3 )? )
+            // InternalCucumber.g:2663:1: ( ( ( rule__And__Alternatives_3 )? ) )
+            // InternalCucumber.g:2664:1: ( ( rule__And__Alternatives_3 )? )
             {
-            // InternalCucumber.g:2657:1: ( ( rule__And__Alternatives_3 )? )
-            // InternalCucumber.g:2658:2: ( rule__And__Alternatives_3 )?
+            // InternalCucumber.g:2664:1: ( ( rule__And__Alternatives_3 )? )
+            // InternalCucumber.g:2665:2: ( rule__And__Alternatives_3 )?
             {
              before(grammarAccess.getAndAccess().getAlternatives_3()); 
-            // InternalCucumber.g:2659:2: ( rule__And__Alternatives_3 )?
+            // InternalCucumber.g:2666:2: ( rule__And__Alternatives_3 )?
             int alt37=2;
             int LA37_0 = input.LA(1);
 
@@ -8542,7 +8567,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
             }
             switch (alt37) {
                 case 1 :
-                    // InternalCucumber.g:2659:3: rule__And__Alternatives_3
+                    // InternalCucumber.g:2666:3: rule__And__Alternatives_3
                     {
                     pushFollow(FOLLOW_2);
                     rule__And__Alternatives_3();
@@ -8578,14 +8603,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__But__Group__0"
-    // InternalCucumber.g:2668:1: rule__But__Group__0 : rule__But__Group__0__Impl rule__But__Group__1 ;
+    // InternalCucumber.g:2675:1: rule__But__Group__0 : rule__But__Group__0__Impl rule__But__Group__1 ;
     public final void rule__But__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2672:1: ( rule__But__Group__0__Impl rule__But__Group__1 )
-            // InternalCucumber.g:2673:2: rule__But__Group__0__Impl rule__But__Group__1
+            // InternalCucumber.g:2679:1: ( rule__But__Group__0__Impl rule__But__Group__1 )
+            // InternalCucumber.g:2680:2: rule__But__Group__0__Impl rule__But__Group__1
             {
             pushFollow(FOLLOW_6);
             rule__But__Group__0__Impl();
@@ -8616,17 +8641,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__But__Group__0__Impl"
-    // InternalCucumber.g:2680:1: rule__But__Group__0__Impl : ( 'But' ) ;
+    // InternalCucumber.g:2687:1: rule__But__Group__0__Impl : ( 'But' ) ;
     public final void rule__But__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2684:1: ( ( 'But' ) )
-            // InternalCucumber.g:2685:1: ( 'But' )
+            // InternalCucumber.g:2691:1: ( ( 'But' ) )
+            // InternalCucumber.g:2692:1: ( 'But' )
             {
-            // InternalCucumber.g:2685:1: ( 'But' )
-            // InternalCucumber.g:2686:2: 'But'
+            // InternalCucumber.g:2692:1: ( 'But' )
+            // InternalCucumber.g:2693:2: 'But'
             {
              before(grammarAccess.getButAccess().getButKeyword_0()); 
             match(input,21,FOLLOW_2); 
@@ -8653,14 +8678,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__But__Group__1"
-    // InternalCucumber.g:2695:1: rule__But__Group__1 : rule__But__Group__1__Impl rule__But__Group__2 ;
+    // InternalCucumber.g:2702:1: rule__But__Group__1 : rule__But__Group__1__Impl rule__But__Group__2 ;
     public final void rule__But__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2699:1: ( rule__But__Group__1__Impl rule__But__Group__2 )
-            // InternalCucumber.g:2700:2: rule__But__Group__1__Impl rule__But__Group__2
+            // InternalCucumber.g:2706:1: ( rule__But__Group__1__Impl rule__But__Group__2 )
+            // InternalCucumber.g:2707:2: rule__But__Group__1__Impl rule__But__Group__2
             {
             pushFollow(FOLLOW_7);
             rule__But__Group__1__Impl();
@@ -8691,21 +8716,21 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__But__Group__1__Impl"
-    // InternalCucumber.g:2707:1: rule__But__Group__1__Impl : ( ( rule__But__NameAssignment_1 ) ) ;
+    // InternalCucumber.g:2714:1: rule__But__Group__1__Impl : ( ( rule__But__NameAssignment_1 ) ) ;
     public final void rule__But__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2711:1: ( ( ( rule__But__NameAssignment_1 ) ) )
-            // InternalCucumber.g:2712:1: ( ( rule__But__NameAssignment_1 ) )
+            // InternalCucumber.g:2718:1: ( ( ( rule__But__NameAssignment_1 ) ) )
+            // InternalCucumber.g:2719:1: ( ( rule__But__NameAssignment_1 ) )
             {
-            // InternalCucumber.g:2712:1: ( ( rule__But__NameAssignment_1 ) )
-            // InternalCucumber.g:2713:2: ( rule__But__NameAssignment_1 )
+            // InternalCucumber.g:2719:1: ( ( rule__But__NameAssignment_1 ) )
+            // InternalCucumber.g:2720:2: ( rule__But__NameAssignment_1 )
             {
              before(grammarAccess.getButAccess().getNameAssignment_1()); 
-            // InternalCucumber.g:2714:2: ( rule__But__NameAssignment_1 )
-            // InternalCucumber.g:2714:3: rule__But__NameAssignment_1
+            // InternalCucumber.g:2721:2: ( rule__But__NameAssignment_1 )
+            // InternalCucumber.g:2721:3: rule__But__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__But__NameAssignment_1();
@@ -8738,14 +8763,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__But__Group__2"
-    // InternalCucumber.g:2722:1: rule__But__Group__2 : rule__But__Group__2__Impl rule__But__Group__3 ;
+    // InternalCucumber.g:2729:1: rule__But__Group__2 : rule__But__Group__2__Impl rule__But__Group__3 ;
     public final void rule__But__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2726:1: ( rule__But__Group__2__Impl rule__But__Group__3 )
-            // InternalCucumber.g:2727:2: rule__But__Group__2__Impl rule__But__Group__3
+            // InternalCucumber.g:2733:1: ( rule__But__Group__2__Impl rule__But__Group__3 )
+            // InternalCucumber.g:2734:2: rule__But__Group__2__Impl rule__But__Group__3
             {
             pushFollow(FOLLOW_20);
             rule__But__Group__2__Impl();
@@ -8776,17 +8801,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__But__Group__2__Impl"
-    // InternalCucumber.g:2734:1: rule__But__Group__2__Impl : ( RULE_EOL ) ;
+    // InternalCucumber.g:2741:1: rule__But__Group__2__Impl : ( RULE_EOL ) ;
     public final void rule__But__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2738:1: ( ( RULE_EOL ) )
-            // InternalCucumber.g:2739:1: ( RULE_EOL )
+            // InternalCucumber.g:2745:1: ( ( RULE_EOL ) )
+            // InternalCucumber.g:2746:1: ( RULE_EOL )
             {
-            // InternalCucumber.g:2739:1: ( RULE_EOL )
-            // InternalCucumber.g:2740:2: RULE_EOL
+            // InternalCucumber.g:2746:1: ( RULE_EOL )
+            // InternalCucumber.g:2747:2: RULE_EOL
             {
              before(grammarAccess.getButAccess().getEOLTerminalRuleCall_2()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -8813,14 +8838,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__But__Group__3"
-    // InternalCucumber.g:2749:1: rule__But__Group__3 : rule__But__Group__3__Impl ;
+    // InternalCucumber.g:2756:1: rule__But__Group__3 : rule__But__Group__3__Impl ;
     public final void rule__But__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2753:1: ( rule__But__Group__3__Impl )
-            // InternalCucumber.g:2754:2: rule__But__Group__3__Impl
+            // InternalCucumber.g:2760:1: ( rule__But__Group__3__Impl )
+            // InternalCucumber.g:2761:2: rule__But__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__But__Group__3__Impl();
@@ -8846,20 +8871,20 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__But__Group__3__Impl"
-    // InternalCucumber.g:2760:1: rule__But__Group__3__Impl : ( ( rule__But__Alternatives_3 )? ) ;
+    // InternalCucumber.g:2767:1: rule__But__Group__3__Impl : ( ( rule__But__Alternatives_3 )? ) ;
     public final void rule__But__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2764:1: ( ( ( rule__But__Alternatives_3 )? ) )
-            // InternalCucumber.g:2765:1: ( ( rule__But__Alternatives_3 )? )
+            // InternalCucumber.g:2771:1: ( ( ( rule__But__Alternatives_3 )? ) )
+            // InternalCucumber.g:2772:1: ( ( rule__But__Alternatives_3 )? )
             {
-            // InternalCucumber.g:2765:1: ( ( rule__But__Alternatives_3 )? )
-            // InternalCucumber.g:2766:2: ( rule__But__Alternatives_3 )?
+            // InternalCucumber.g:2772:1: ( ( rule__But__Alternatives_3 )? )
+            // InternalCucumber.g:2773:2: ( rule__But__Alternatives_3 )?
             {
              before(grammarAccess.getButAccess().getAlternatives_3()); 
-            // InternalCucumber.g:2767:2: ( rule__But__Alternatives_3 )?
+            // InternalCucumber.g:2774:2: ( rule__But__Alternatives_3 )?
             int alt38=2;
             int LA38_0 = input.LA(1);
 
@@ -8868,7 +8893,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
             }
             switch (alt38) {
                 case 1 :
-                    // InternalCucumber.g:2767:3: rule__But__Alternatives_3
+                    // InternalCucumber.g:2774:3: rule__But__Alternatives_3
                     {
                     pushFollow(FOLLOW_2);
                     rule__But__Alternatives_3();
@@ -8904,14 +8929,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Asterisk__Group__0"
-    // InternalCucumber.g:2776:1: rule__Asterisk__Group__0 : rule__Asterisk__Group__0__Impl rule__Asterisk__Group__1 ;
+    // InternalCucumber.g:2783:1: rule__Asterisk__Group__0 : rule__Asterisk__Group__0__Impl rule__Asterisk__Group__1 ;
     public final void rule__Asterisk__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2780:1: ( rule__Asterisk__Group__0__Impl rule__Asterisk__Group__1 )
-            // InternalCucumber.g:2781:2: rule__Asterisk__Group__0__Impl rule__Asterisk__Group__1
+            // InternalCucumber.g:2787:1: ( rule__Asterisk__Group__0__Impl rule__Asterisk__Group__1 )
+            // InternalCucumber.g:2788:2: rule__Asterisk__Group__0__Impl rule__Asterisk__Group__1
             {
             pushFollow(FOLLOW_6);
             rule__Asterisk__Group__0__Impl();
@@ -8942,17 +8967,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Asterisk__Group__0__Impl"
-    // InternalCucumber.g:2788:1: rule__Asterisk__Group__0__Impl : ( '*' ) ;
+    // InternalCucumber.g:2795:1: rule__Asterisk__Group__0__Impl : ( '*' ) ;
     public final void rule__Asterisk__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2792:1: ( ( '*' ) )
-            // InternalCucumber.g:2793:1: ( '*' )
+            // InternalCucumber.g:2799:1: ( ( '*' ) )
+            // InternalCucumber.g:2800:1: ( '*' )
             {
-            // InternalCucumber.g:2793:1: ( '*' )
-            // InternalCucumber.g:2794:2: '*'
+            // InternalCucumber.g:2800:1: ( '*' )
+            // InternalCucumber.g:2801:2: '*'
             {
              before(grammarAccess.getAsteriskAccess().getAsteriskKeyword_0()); 
             match(input,22,FOLLOW_2); 
@@ -8979,14 +9004,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Asterisk__Group__1"
-    // InternalCucumber.g:2803:1: rule__Asterisk__Group__1 : rule__Asterisk__Group__1__Impl rule__Asterisk__Group__2 ;
+    // InternalCucumber.g:2810:1: rule__Asterisk__Group__1 : rule__Asterisk__Group__1__Impl rule__Asterisk__Group__2 ;
     public final void rule__Asterisk__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2807:1: ( rule__Asterisk__Group__1__Impl rule__Asterisk__Group__2 )
-            // InternalCucumber.g:2808:2: rule__Asterisk__Group__1__Impl rule__Asterisk__Group__2
+            // InternalCucumber.g:2814:1: ( rule__Asterisk__Group__1__Impl rule__Asterisk__Group__2 )
+            // InternalCucumber.g:2815:2: rule__Asterisk__Group__1__Impl rule__Asterisk__Group__2
             {
             pushFollow(FOLLOW_7);
             rule__Asterisk__Group__1__Impl();
@@ -9017,21 +9042,21 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Asterisk__Group__1__Impl"
-    // InternalCucumber.g:2815:1: rule__Asterisk__Group__1__Impl : ( ( rule__Asterisk__NameAssignment_1 ) ) ;
+    // InternalCucumber.g:2822:1: rule__Asterisk__Group__1__Impl : ( ( rule__Asterisk__NameAssignment_1 ) ) ;
     public final void rule__Asterisk__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2819:1: ( ( ( rule__Asterisk__NameAssignment_1 ) ) )
-            // InternalCucumber.g:2820:1: ( ( rule__Asterisk__NameAssignment_1 ) )
+            // InternalCucumber.g:2826:1: ( ( ( rule__Asterisk__NameAssignment_1 ) ) )
+            // InternalCucumber.g:2827:1: ( ( rule__Asterisk__NameAssignment_1 ) )
             {
-            // InternalCucumber.g:2820:1: ( ( rule__Asterisk__NameAssignment_1 ) )
-            // InternalCucumber.g:2821:2: ( rule__Asterisk__NameAssignment_1 )
+            // InternalCucumber.g:2827:1: ( ( rule__Asterisk__NameAssignment_1 ) )
+            // InternalCucumber.g:2828:2: ( rule__Asterisk__NameAssignment_1 )
             {
              before(grammarAccess.getAsteriskAccess().getNameAssignment_1()); 
-            // InternalCucumber.g:2822:2: ( rule__Asterisk__NameAssignment_1 )
-            // InternalCucumber.g:2822:3: rule__Asterisk__NameAssignment_1
+            // InternalCucumber.g:2829:2: ( rule__Asterisk__NameAssignment_1 )
+            // InternalCucumber.g:2829:3: rule__Asterisk__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__Asterisk__NameAssignment_1();
@@ -9064,14 +9089,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Asterisk__Group__2"
-    // InternalCucumber.g:2830:1: rule__Asterisk__Group__2 : rule__Asterisk__Group__2__Impl rule__Asterisk__Group__3 ;
+    // InternalCucumber.g:2837:1: rule__Asterisk__Group__2 : rule__Asterisk__Group__2__Impl rule__Asterisk__Group__3 ;
     public final void rule__Asterisk__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2834:1: ( rule__Asterisk__Group__2__Impl rule__Asterisk__Group__3 )
-            // InternalCucumber.g:2835:2: rule__Asterisk__Group__2__Impl rule__Asterisk__Group__3
+            // InternalCucumber.g:2841:1: ( rule__Asterisk__Group__2__Impl rule__Asterisk__Group__3 )
+            // InternalCucumber.g:2842:2: rule__Asterisk__Group__2__Impl rule__Asterisk__Group__3
             {
             pushFollow(FOLLOW_20);
             rule__Asterisk__Group__2__Impl();
@@ -9102,17 +9127,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Asterisk__Group__2__Impl"
-    // InternalCucumber.g:2842:1: rule__Asterisk__Group__2__Impl : ( RULE_EOL ) ;
+    // InternalCucumber.g:2849:1: rule__Asterisk__Group__2__Impl : ( RULE_EOL ) ;
     public final void rule__Asterisk__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2846:1: ( ( RULE_EOL ) )
-            // InternalCucumber.g:2847:1: ( RULE_EOL )
+            // InternalCucumber.g:2853:1: ( ( RULE_EOL ) )
+            // InternalCucumber.g:2854:1: ( RULE_EOL )
             {
-            // InternalCucumber.g:2847:1: ( RULE_EOL )
-            // InternalCucumber.g:2848:2: RULE_EOL
+            // InternalCucumber.g:2854:1: ( RULE_EOL )
+            // InternalCucumber.g:2855:2: RULE_EOL
             {
              before(grammarAccess.getAsteriskAccess().getEOLTerminalRuleCall_2()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -9139,14 +9164,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Asterisk__Group__3"
-    // InternalCucumber.g:2857:1: rule__Asterisk__Group__3 : rule__Asterisk__Group__3__Impl ;
+    // InternalCucumber.g:2864:1: rule__Asterisk__Group__3 : rule__Asterisk__Group__3__Impl ;
     public final void rule__Asterisk__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2861:1: ( rule__Asterisk__Group__3__Impl )
-            // InternalCucumber.g:2862:2: rule__Asterisk__Group__3__Impl
+            // InternalCucumber.g:2868:1: ( rule__Asterisk__Group__3__Impl )
+            // InternalCucumber.g:2869:2: rule__Asterisk__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Asterisk__Group__3__Impl();
@@ -9172,20 +9197,20 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Asterisk__Group__3__Impl"
-    // InternalCucumber.g:2868:1: rule__Asterisk__Group__3__Impl : ( ( rule__Asterisk__Alternatives_3 )? ) ;
+    // InternalCucumber.g:2875:1: rule__Asterisk__Group__3__Impl : ( ( rule__Asterisk__Alternatives_3 )? ) ;
     public final void rule__Asterisk__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2872:1: ( ( ( rule__Asterisk__Alternatives_3 )? ) )
-            // InternalCucumber.g:2873:1: ( ( rule__Asterisk__Alternatives_3 )? )
+            // InternalCucumber.g:2879:1: ( ( ( rule__Asterisk__Alternatives_3 )? ) )
+            // InternalCucumber.g:2880:1: ( ( rule__Asterisk__Alternatives_3 )? )
             {
-            // InternalCucumber.g:2873:1: ( ( rule__Asterisk__Alternatives_3 )? )
-            // InternalCucumber.g:2874:2: ( rule__Asterisk__Alternatives_3 )?
+            // InternalCucumber.g:2880:1: ( ( rule__Asterisk__Alternatives_3 )? )
+            // InternalCucumber.g:2881:2: ( rule__Asterisk__Alternatives_3 )?
             {
              before(grammarAccess.getAsteriskAccess().getAlternatives_3()); 
-            // InternalCucumber.g:2875:2: ( rule__Asterisk__Alternatives_3 )?
+            // InternalCucumber.g:2882:2: ( rule__Asterisk__Alternatives_3 )?
             int alt39=2;
             int LA39_0 = input.LA(1);
 
@@ -9194,7 +9219,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
             }
             switch (alt39) {
                 case 1 :
-                    // InternalCucumber.g:2875:3: rule__Asterisk__Alternatives_3
+                    // InternalCucumber.g:2882:3: rule__Asterisk__Alternatives_3
                     {
                     pushFollow(FOLLOW_2);
                     rule__Asterisk__Alternatives_3();
@@ -9230,14 +9255,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Statement__Group__0"
-    // InternalCucumber.g:2884:1: rule__Statement__Group__0 : rule__Statement__Group__0__Impl rule__Statement__Group__1 ;
+    // InternalCucumber.g:2891:1: rule__Statement__Group__0 : rule__Statement__Group__0__Impl rule__Statement__Group__1 ;
     public final void rule__Statement__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2888:1: ( rule__Statement__Group__0__Impl rule__Statement__Group__1 )
-            // InternalCucumber.g:2889:2: rule__Statement__Group__0__Impl rule__Statement__Group__1
+            // InternalCucumber.g:2895:1: ( rule__Statement__Group__0__Impl rule__Statement__Group__1 )
+            // InternalCucumber.g:2896:2: rule__Statement__Group__0__Impl rule__Statement__Group__1
             {
             pushFollow(FOLLOW_7);
             rule__Statement__Group__0__Impl();
@@ -9268,21 +9293,21 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Statement__Group__0__Impl"
-    // InternalCucumber.g:2896:1: rule__Statement__Group__0__Impl : ( ( rule__Statement__NameAssignment_0 ) ) ;
+    // InternalCucumber.g:2903:1: rule__Statement__Group__0__Impl : ( ( rule__Statement__NameAssignment_0 ) ) ;
     public final void rule__Statement__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2900:1: ( ( ( rule__Statement__NameAssignment_0 ) ) )
-            // InternalCucumber.g:2901:1: ( ( rule__Statement__NameAssignment_0 ) )
+            // InternalCucumber.g:2907:1: ( ( ( rule__Statement__NameAssignment_0 ) ) )
+            // InternalCucumber.g:2908:1: ( ( rule__Statement__NameAssignment_0 ) )
             {
-            // InternalCucumber.g:2901:1: ( ( rule__Statement__NameAssignment_0 ) )
-            // InternalCucumber.g:2902:2: ( rule__Statement__NameAssignment_0 )
+            // InternalCucumber.g:2908:1: ( ( rule__Statement__NameAssignment_0 ) )
+            // InternalCucumber.g:2909:2: ( rule__Statement__NameAssignment_0 )
             {
              before(grammarAccess.getStatementAccess().getNameAssignment_0()); 
-            // InternalCucumber.g:2903:2: ( rule__Statement__NameAssignment_0 )
-            // InternalCucumber.g:2903:3: rule__Statement__NameAssignment_0
+            // InternalCucumber.g:2910:2: ( rule__Statement__NameAssignment_0 )
+            // InternalCucumber.g:2910:3: rule__Statement__NameAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__Statement__NameAssignment_0();
@@ -9315,14 +9340,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Statement__Group__1"
-    // InternalCucumber.g:2911:1: rule__Statement__Group__1 : rule__Statement__Group__1__Impl ;
+    // InternalCucumber.g:2918:1: rule__Statement__Group__1 : rule__Statement__Group__1__Impl ;
     public final void rule__Statement__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2915:1: ( rule__Statement__Group__1__Impl )
-            // InternalCucumber.g:2916:2: rule__Statement__Group__1__Impl
+            // InternalCucumber.g:2922:1: ( rule__Statement__Group__1__Impl )
+            // InternalCucumber.g:2923:2: rule__Statement__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Statement__Group__1__Impl();
@@ -9348,17 +9373,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Statement__Group__1__Impl"
-    // InternalCucumber.g:2922:1: rule__Statement__Group__1__Impl : ( RULE_EOL ) ;
+    // InternalCucumber.g:2929:1: rule__Statement__Group__1__Impl : ( RULE_EOL ) ;
     public final void rule__Statement__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2926:1: ( ( RULE_EOL ) )
-            // InternalCucumber.g:2927:1: ( RULE_EOL )
+            // InternalCucumber.g:2933:1: ( ( RULE_EOL ) )
+            // InternalCucumber.g:2934:1: ( RULE_EOL )
             {
-            // InternalCucumber.g:2927:1: ( RULE_EOL )
-            // InternalCucumber.g:2928:2: RULE_EOL
+            // InternalCucumber.g:2934:1: ( RULE_EOL )
+            // InternalCucumber.g:2935:2: RULE_EOL
             {
              before(grammarAccess.getStatementAccess().getEOLTerminalRuleCall_1()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -9385,14 +9410,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tag__Group__0"
-    // InternalCucumber.g:2938:1: rule__Tag__Group__0 : rule__Tag__Group__0__Impl rule__Tag__Group__1 ;
+    // InternalCucumber.g:2945:1: rule__Tag__Group__0 : rule__Tag__Group__0__Impl rule__Tag__Group__1 ;
     public final void rule__Tag__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2942:1: ( rule__Tag__Group__0__Impl rule__Tag__Group__1 )
-            // InternalCucumber.g:2943:2: rule__Tag__Group__0__Impl rule__Tag__Group__1
+            // InternalCucumber.g:2949:1: ( rule__Tag__Group__0__Impl rule__Tag__Group__1 )
+            // InternalCucumber.g:2950:2: rule__Tag__Group__0__Impl rule__Tag__Group__1
             {
             pushFollow(FOLLOW_21);
             rule__Tag__Group__0__Impl();
@@ -9423,17 +9448,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tag__Group__0__Impl"
-    // InternalCucumber.g:2950:1: rule__Tag__Group__0__Impl : ( '@' ) ;
+    // InternalCucumber.g:2957:1: rule__Tag__Group__0__Impl : ( '@' ) ;
     public final void rule__Tag__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2954:1: ( ( '@' ) )
-            // InternalCucumber.g:2955:1: ( '@' )
+            // InternalCucumber.g:2961:1: ( ( '@' ) )
+            // InternalCucumber.g:2962:1: ( '@' )
             {
-            // InternalCucumber.g:2955:1: ( '@' )
-            // InternalCucumber.g:2956:2: '@'
+            // InternalCucumber.g:2962:1: ( '@' )
+            // InternalCucumber.g:2963:2: '@'
             {
              before(grammarAccess.getTagAccess().getCommercialAtKeyword_0()); 
             match(input,23,FOLLOW_2); 
@@ -9460,14 +9485,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tag__Group__1"
-    // InternalCucumber.g:2965:1: rule__Tag__Group__1 : rule__Tag__Group__1__Impl ;
+    // InternalCucumber.g:2972:1: rule__Tag__Group__1 : rule__Tag__Group__1__Impl ;
     public final void rule__Tag__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2969:1: ( rule__Tag__Group__1__Impl )
-            // InternalCucumber.g:2970:2: rule__Tag__Group__1__Impl
+            // InternalCucumber.g:2976:1: ( rule__Tag__Group__1__Impl )
+            // InternalCucumber.g:2977:2: rule__Tag__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Tag__Group__1__Impl();
@@ -9493,21 +9518,21 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tag__Group__1__Impl"
-    // InternalCucumber.g:2976:1: rule__Tag__Group__1__Impl : ( ( rule__Tag__NameAssignment_1 ) ) ;
+    // InternalCucumber.g:2983:1: rule__Tag__Group__1__Impl : ( ( rule__Tag__NameAssignment_1 ) ) ;
     public final void rule__Tag__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2980:1: ( ( ( rule__Tag__NameAssignment_1 ) ) )
-            // InternalCucumber.g:2981:1: ( ( rule__Tag__NameAssignment_1 ) )
+            // InternalCucumber.g:2987:1: ( ( ( rule__Tag__NameAssignment_1 ) ) )
+            // InternalCucumber.g:2988:1: ( ( rule__Tag__NameAssignment_1 ) )
             {
-            // InternalCucumber.g:2981:1: ( ( rule__Tag__NameAssignment_1 ) )
-            // InternalCucumber.g:2982:2: ( rule__Tag__NameAssignment_1 )
+            // InternalCucumber.g:2988:1: ( ( rule__Tag__NameAssignment_1 ) )
+            // InternalCucumber.g:2989:2: ( rule__Tag__NameAssignment_1 )
             {
              before(grammarAccess.getTagAccess().getNameAssignment_1()); 
-            // InternalCucumber.g:2983:2: ( rule__Tag__NameAssignment_1 )
-            // InternalCucumber.g:2983:3: rule__Tag__NameAssignment_1
+            // InternalCucumber.g:2990:2: ( rule__Tag__NameAssignment_1 )
+            // InternalCucumber.g:2990:3: rule__Tag__NameAssignment_1
             {
             pushFollow(FOLLOW_2);
             rule__Tag__NameAssignment_1();
@@ -9540,14 +9565,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Line__Group__0"
-    // InternalCucumber.g:2992:1: rule__Line__Group__0 : rule__Line__Group__0__Impl rule__Line__Group__1 ;
+    // InternalCucumber.g:2999:1: rule__Line__Group__0 : rule__Line__Group__0__Impl rule__Line__Group__1 ;
     public final void rule__Line__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:2996:1: ( rule__Line__Group__0__Impl rule__Line__Group__1 )
-            // InternalCucumber.g:2997:2: rule__Line__Group__0__Impl rule__Line__Group__1
+            // InternalCucumber.g:3003:1: ( rule__Line__Group__0__Impl rule__Line__Group__1 )
+            // InternalCucumber.g:3004:2: rule__Line__Group__0__Impl rule__Line__Group__1
             {
             pushFollow(FOLLOW_7);
             rule__Line__Group__0__Impl();
@@ -9578,21 +9603,21 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Line__Group__0__Impl"
-    // InternalCucumber.g:3004:1: rule__Line__Group__0__Impl : ( ( rule__Line__NameAssignment_0 ) ) ;
+    // InternalCucumber.g:3011:1: rule__Line__Group__0__Impl : ( ( rule__Line__NameAssignment_0 ) ) ;
     public final void rule__Line__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3008:1: ( ( ( rule__Line__NameAssignment_0 ) ) )
-            // InternalCucumber.g:3009:1: ( ( rule__Line__NameAssignment_0 ) )
+            // InternalCucumber.g:3015:1: ( ( ( rule__Line__NameAssignment_0 ) ) )
+            // InternalCucumber.g:3016:1: ( ( rule__Line__NameAssignment_0 ) )
             {
-            // InternalCucumber.g:3009:1: ( ( rule__Line__NameAssignment_0 ) )
-            // InternalCucumber.g:3010:2: ( rule__Line__NameAssignment_0 )
+            // InternalCucumber.g:3016:1: ( ( rule__Line__NameAssignment_0 ) )
+            // InternalCucumber.g:3017:2: ( rule__Line__NameAssignment_0 )
             {
              before(grammarAccess.getLineAccess().getNameAssignment_0()); 
-            // InternalCucumber.g:3011:2: ( rule__Line__NameAssignment_0 )
-            // InternalCucumber.g:3011:3: rule__Line__NameAssignment_0
+            // InternalCucumber.g:3018:2: ( rule__Line__NameAssignment_0 )
+            // InternalCucumber.g:3018:3: rule__Line__NameAssignment_0
             {
             pushFollow(FOLLOW_2);
             rule__Line__NameAssignment_0();
@@ -9625,14 +9650,14 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Line__Group__1"
-    // InternalCucumber.g:3019:1: rule__Line__Group__1 : rule__Line__Group__1__Impl ;
+    // InternalCucumber.g:3026:1: rule__Line__Group__1 : rule__Line__Group__1__Impl ;
     public final void rule__Line__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3023:1: ( rule__Line__Group__1__Impl )
-            // InternalCucumber.g:3024:2: rule__Line__Group__1__Impl
+            // InternalCucumber.g:3030:1: ( rule__Line__Group__1__Impl )
+            // InternalCucumber.g:3031:2: rule__Line__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Line__Group__1__Impl();
@@ -9658,17 +9683,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Line__Group__1__Impl"
-    // InternalCucumber.g:3030:1: rule__Line__Group__1__Impl : ( RULE_EOL ) ;
+    // InternalCucumber.g:3037:1: rule__Line__Group__1__Impl : ( RULE_EOL ) ;
     public final void rule__Line__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3034:1: ( ( RULE_EOL ) )
-            // InternalCucumber.g:3035:1: ( RULE_EOL )
+            // InternalCucumber.g:3041:1: ( ( RULE_EOL ) )
+            // InternalCucumber.g:3042:1: ( RULE_EOL )
             {
-            // InternalCucumber.g:3035:1: ( RULE_EOL )
-            // InternalCucumber.g:3036:2: RULE_EOL
+            // InternalCucumber.g:3042:1: ( RULE_EOL )
+            // InternalCucumber.g:3043:2: RULE_EOL
             {
              before(grammarAccess.getLineAccess().getEOLTerminalRuleCall_1()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -9695,17 +9720,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__TagsAssignment_0_0"
-    // InternalCucumber.g:3046:1: rule__Feature__TagsAssignment_0_0 : ( ruleTag ) ;
+    // InternalCucumber.g:3053:1: rule__Feature__TagsAssignment_0_0 : ( ruleTag ) ;
     public final void rule__Feature__TagsAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3050:1: ( ( ruleTag ) )
-            // InternalCucumber.g:3051:2: ( ruleTag )
+            // InternalCucumber.g:3057:1: ( ( ruleTag ) )
+            // InternalCucumber.g:3058:2: ( ruleTag )
             {
-            // InternalCucumber.g:3051:2: ( ruleTag )
-            // InternalCucumber.g:3052:3: ruleTag
+            // InternalCucumber.g:3058:2: ( ruleTag )
+            // InternalCucumber.g:3059:3: ruleTag
             {
              before(grammarAccess.getFeatureAccess().getTagsTagParserRuleCall_0_0_0()); 
             pushFollow(FOLLOW_2);
@@ -9736,17 +9761,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__NameAssignment_2"
-    // InternalCucumber.g:3061:1: rule__Feature__NameAssignment_2 : ( rulePhrase ) ;
+    // InternalCucumber.g:3068:1: rule__Feature__NameAssignment_2 : ( rulePhrase ) ;
     public final void rule__Feature__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3065:1: ( ( rulePhrase ) )
-            // InternalCucumber.g:3066:2: ( rulePhrase )
+            // InternalCucumber.g:3072:1: ( ( rulePhrase ) )
+            // InternalCucumber.g:3073:2: ( rulePhrase )
             {
-            // InternalCucumber.g:3066:2: ( rulePhrase )
-            // InternalCucumber.g:3067:3: rulePhrase
+            // InternalCucumber.g:3073:2: ( rulePhrase )
+            // InternalCucumber.g:3074:3: rulePhrase
             {
              before(grammarAccess.getFeatureAccess().getNamePhraseParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -9777,17 +9802,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__StatementsAssignment_4"
-    // InternalCucumber.g:3076:1: rule__Feature__StatementsAssignment_4 : ( ruleStatement ) ;
+    // InternalCucumber.g:3083:1: rule__Feature__StatementsAssignment_4 : ( ruleStatement ) ;
     public final void rule__Feature__StatementsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3080:1: ( ( ruleStatement ) )
-            // InternalCucumber.g:3081:2: ( ruleStatement )
+            // InternalCucumber.g:3087:1: ( ( ruleStatement ) )
+            // InternalCucumber.g:3088:2: ( ruleStatement )
             {
-            // InternalCucumber.g:3081:2: ( ruleStatement )
-            // InternalCucumber.g:3082:3: ruleStatement
+            // InternalCucumber.g:3088:2: ( ruleStatement )
+            // InternalCucumber.g:3089:3: ruleStatement
             {
              before(grammarAccess.getFeatureAccess().getStatementsStatementParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -9818,17 +9843,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__AbstractScenariosAssignment_5"
-    // InternalCucumber.g:3091:1: rule__Feature__AbstractScenariosAssignment_5 : ( ruleAbstractScenario ) ;
+    // InternalCucumber.g:3098:1: rule__Feature__AbstractScenariosAssignment_5 : ( ruleAbstractScenario ) ;
     public final void rule__Feature__AbstractScenariosAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3095:1: ( ( ruleAbstractScenario ) )
-            // InternalCucumber.g:3096:2: ( ruleAbstractScenario )
+            // InternalCucumber.g:3102:1: ( ( ruleAbstractScenario ) )
+            // InternalCucumber.g:3103:2: ( ruleAbstractScenario )
             {
-            // InternalCucumber.g:3096:2: ( ruleAbstractScenario )
-            // InternalCucumber.g:3097:3: ruleAbstractScenario
+            // InternalCucumber.g:3103:2: ( ruleAbstractScenario )
+            // InternalCucumber.g:3104:3: ruleAbstractScenario
             {
              before(grammarAccess.getFeatureAccess().getAbstractScenariosAbstractScenarioParserRuleCall_5_0()); 
             pushFollow(FOLLOW_2);
@@ -9859,17 +9884,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Background__NameAssignment_1"
-    // InternalCucumber.g:3106:1: rule__Background__NameAssignment_1 : ( rulePhrase ) ;
+    // InternalCucumber.g:3113:1: rule__Background__NameAssignment_1 : ( rulePhrase ) ;
     public final void rule__Background__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3110:1: ( ( rulePhrase ) )
-            // InternalCucumber.g:3111:2: ( rulePhrase )
+            // InternalCucumber.g:3117:1: ( ( rulePhrase ) )
+            // InternalCucumber.g:3118:2: ( rulePhrase )
             {
-            // InternalCucumber.g:3111:2: ( rulePhrase )
-            // InternalCucumber.g:3112:3: rulePhrase
+            // InternalCucumber.g:3118:2: ( rulePhrase )
+            // InternalCucumber.g:3119:3: rulePhrase
             {
              before(grammarAccess.getBackgroundAccess().getNamePhraseParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -9900,17 +9925,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Background__StatementsAssignment_3"
-    // InternalCucumber.g:3121:1: rule__Background__StatementsAssignment_3 : ( ruleStatement ) ;
+    // InternalCucumber.g:3128:1: rule__Background__StatementsAssignment_3 : ( ruleStatement ) ;
     public final void rule__Background__StatementsAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3125:1: ( ( ruleStatement ) )
-            // InternalCucumber.g:3126:2: ( ruleStatement )
+            // InternalCucumber.g:3132:1: ( ( ruleStatement ) )
+            // InternalCucumber.g:3133:2: ( ruleStatement )
             {
-            // InternalCucumber.g:3126:2: ( ruleStatement )
-            // InternalCucumber.g:3127:3: ruleStatement
+            // InternalCucumber.g:3133:2: ( ruleStatement )
+            // InternalCucumber.g:3134:3: ruleStatement
             {
              before(grammarAccess.getBackgroundAccess().getStatementsStatementParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -9941,17 +9966,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Background__StepsAssignment_4"
-    // InternalCucumber.g:3136:1: rule__Background__StepsAssignment_4 : ( ruleStep ) ;
+    // InternalCucumber.g:3143:1: rule__Background__StepsAssignment_4 : ( ruleStep ) ;
     public final void rule__Background__StepsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3140:1: ( ( ruleStep ) )
-            // InternalCucumber.g:3141:2: ( ruleStep )
+            // InternalCucumber.g:3147:1: ( ( ruleStep ) )
+            // InternalCucumber.g:3148:2: ( ruleStep )
             {
-            // InternalCucumber.g:3141:2: ( ruleStep )
-            // InternalCucumber.g:3142:3: ruleStep
+            // InternalCucumber.g:3148:2: ( ruleStep )
+            // InternalCucumber.g:3149:3: ruleStep
             {
              before(grammarAccess.getBackgroundAccess().getStepsStepParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -9982,17 +10007,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__TagsAssignment_0_0"
-    // InternalCucumber.g:3151:1: rule__Scenario__TagsAssignment_0_0 : ( ruleTag ) ;
+    // InternalCucumber.g:3158:1: rule__Scenario__TagsAssignment_0_0 : ( ruleTag ) ;
     public final void rule__Scenario__TagsAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3155:1: ( ( ruleTag ) )
-            // InternalCucumber.g:3156:2: ( ruleTag )
+            // InternalCucumber.g:3162:1: ( ( ruleTag ) )
+            // InternalCucumber.g:3163:2: ( ruleTag )
             {
-            // InternalCucumber.g:3156:2: ( ruleTag )
-            // InternalCucumber.g:3157:3: ruleTag
+            // InternalCucumber.g:3163:2: ( ruleTag )
+            // InternalCucumber.g:3164:3: ruleTag
             {
              before(grammarAccess.getScenarioAccess().getTagsTagParserRuleCall_0_0_0()); 
             pushFollow(FOLLOW_2);
@@ -10023,17 +10048,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__NameAssignment_2"
-    // InternalCucumber.g:3166:1: rule__Scenario__NameAssignment_2 : ( rulePhrase ) ;
+    // InternalCucumber.g:3173:1: rule__Scenario__NameAssignment_2 : ( rulePhrase ) ;
     public final void rule__Scenario__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3170:1: ( ( rulePhrase ) )
-            // InternalCucumber.g:3171:2: ( rulePhrase )
+            // InternalCucumber.g:3177:1: ( ( rulePhrase ) )
+            // InternalCucumber.g:3178:2: ( rulePhrase )
             {
-            // InternalCucumber.g:3171:2: ( rulePhrase )
-            // InternalCucumber.g:3172:3: rulePhrase
+            // InternalCucumber.g:3178:2: ( rulePhrase )
+            // InternalCucumber.g:3179:3: rulePhrase
             {
              before(grammarAccess.getScenarioAccess().getNamePhraseParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -10064,17 +10089,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__StatementsAssignment_4"
-    // InternalCucumber.g:3181:1: rule__Scenario__StatementsAssignment_4 : ( ruleStatement ) ;
+    // InternalCucumber.g:3188:1: rule__Scenario__StatementsAssignment_4 : ( ruleStatement ) ;
     public final void rule__Scenario__StatementsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3185:1: ( ( ruleStatement ) )
-            // InternalCucumber.g:3186:2: ( ruleStatement )
+            // InternalCucumber.g:3192:1: ( ( ruleStatement ) )
+            // InternalCucumber.g:3193:2: ( ruleStatement )
             {
-            // InternalCucumber.g:3186:2: ( ruleStatement )
-            // InternalCucumber.g:3187:3: ruleStatement
+            // InternalCucumber.g:3193:2: ( ruleStatement )
+            // InternalCucumber.g:3194:3: ruleStatement
             {
              before(grammarAccess.getScenarioAccess().getStatementsStatementParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -10105,17 +10130,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__StepsAssignment_5"
-    // InternalCucumber.g:3196:1: rule__Scenario__StepsAssignment_5 : ( ruleStep ) ;
+    // InternalCucumber.g:3203:1: rule__Scenario__StepsAssignment_5 : ( ruleStep ) ;
     public final void rule__Scenario__StepsAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3200:1: ( ( ruleStep ) )
-            // InternalCucumber.g:3201:2: ( ruleStep )
+            // InternalCucumber.g:3207:1: ( ( ruleStep ) )
+            // InternalCucumber.g:3208:2: ( ruleStep )
             {
-            // InternalCucumber.g:3201:2: ( ruleStep )
-            // InternalCucumber.g:3202:3: ruleStep
+            // InternalCucumber.g:3208:2: ( ruleStep )
+            // InternalCucumber.g:3209:3: ruleStep
             {
              before(grammarAccess.getScenarioAccess().getStepsStepParserRuleCall_5_0()); 
             pushFollow(FOLLOW_2);
@@ -10146,17 +10171,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__ScenarioOutline__TagsAssignment_0_0"
-    // InternalCucumber.g:3211:1: rule__ScenarioOutline__TagsAssignment_0_0 : ( ruleTag ) ;
+    // InternalCucumber.g:3218:1: rule__ScenarioOutline__TagsAssignment_0_0 : ( ruleTag ) ;
     public final void rule__ScenarioOutline__TagsAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3215:1: ( ( ruleTag ) )
-            // InternalCucumber.g:3216:2: ( ruleTag )
+            // InternalCucumber.g:3222:1: ( ( ruleTag ) )
+            // InternalCucumber.g:3223:2: ( ruleTag )
             {
-            // InternalCucumber.g:3216:2: ( ruleTag )
-            // InternalCucumber.g:3217:3: ruleTag
+            // InternalCucumber.g:3223:2: ( ruleTag )
+            // InternalCucumber.g:3224:3: ruleTag
             {
              before(grammarAccess.getScenarioOutlineAccess().getTagsTagParserRuleCall_0_0_0()); 
             pushFollow(FOLLOW_2);
@@ -10187,17 +10212,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__ScenarioOutline__NameAssignment_2"
-    // InternalCucumber.g:3226:1: rule__ScenarioOutline__NameAssignment_2 : ( rulePhrase ) ;
+    // InternalCucumber.g:3233:1: rule__ScenarioOutline__NameAssignment_2 : ( rulePhrase ) ;
     public final void rule__ScenarioOutline__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3230:1: ( ( rulePhrase ) )
-            // InternalCucumber.g:3231:2: ( rulePhrase )
+            // InternalCucumber.g:3237:1: ( ( rulePhrase ) )
+            // InternalCucumber.g:3238:2: ( rulePhrase )
             {
-            // InternalCucumber.g:3231:2: ( rulePhrase )
-            // InternalCucumber.g:3232:3: rulePhrase
+            // InternalCucumber.g:3238:2: ( rulePhrase )
+            // InternalCucumber.g:3239:3: rulePhrase
             {
              before(grammarAccess.getScenarioOutlineAccess().getNamePhraseParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -10228,17 +10253,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__ScenarioOutline__StatementsAssignment_4"
-    // InternalCucumber.g:3241:1: rule__ScenarioOutline__StatementsAssignment_4 : ( ruleStatement ) ;
+    // InternalCucumber.g:3248:1: rule__ScenarioOutline__StatementsAssignment_4 : ( ruleStatement ) ;
     public final void rule__ScenarioOutline__StatementsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3245:1: ( ( ruleStatement ) )
-            // InternalCucumber.g:3246:2: ( ruleStatement )
+            // InternalCucumber.g:3252:1: ( ( ruleStatement ) )
+            // InternalCucumber.g:3253:2: ( ruleStatement )
             {
-            // InternalCucumber.g:3246:2: ( ruleStatement )
-            // InternalCucumber.g:3247:3: ruleStatement
+            // InternalCucumber.g:3253:2: ( ruleStatement )
+            // InternalCucumber.g:3254:3: ruleStatement
             {
              before(grammarAccess.getScenarioOutlineAccess().getStatementsStatementParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -10269,17 +10294,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__ScenarioOutline__StepsAssignment_5"
-    // InternalCucumber.g:3256:1: rule__ScenarioOutline__StepsAssignment_5 : ( ruleStep ) ;
+    // InternalCucumber.g:3263:1: rule__ScenarioOutline__StepsAssignment_5 : ( ruleStep ) ;
     public final void rule__ScenarioOutline__StepsAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3260:1: ( ( ruleStep ) )
-            // InternalCucumber.g:3261:2: ( ruleStep )
+            // InternalCucumber.g:3267:1: ( ( ruleStep ) )
+            // InternalCucumber.g:3268:2: ( ruleStep )
             {
-            // InternalCucumber.g:3261:2: ( ruleStep )
-            // InternalCucumber.g:3262:3: ruleStep
+            // InternalCucumber.g:3268:2: ( ruleStep )
+            // InternalCucumber.g:3269:3: ruleStep
             {
              before(grammarAccess.getScenarioOutlineAccess().getStepsStepParserRuleCall_5_0()); 
             pushFollow(FOLLOW_2);
@@ -10310,17 +10335,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__ScenarioOutline__ExamplesAssignment_6"
-    // InternalCucumber.g:3271:1: rule__ScenarioOutline__ExamplesAssignment_6 : ( ruleExamples ) ;
+    // InternalCucumber.g:3278:1: rule__ScenarioOutline__ExamplesAssignment_6 : ( ruleExamples ) ;
     public final void rule__ScenarioOutline__ExamplesAssignment_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3275:1: ( ( ruleExamples ) )
-            // InternalCucumber.g:3276:2: ( ruleExamples )
+            // InternalCucumber.g:3282:1: ( ( ruleExamples ) )
+            // InternalCucumber.g:3283:2: ( ruleExamples )
             {
-            // InternalCucumber.g:3276:2: ( ruleExamples )
-            // InternalCucumber.g:3277:3: ruleExamples
+            // InternalCucumber.g:3283:2: ( ruleExamples )
+            // InternalCucumber.g:3284:3: ruleExamples
             {
              before(grammarAccess.getScenarioOutlineAccess().getExamplesExamplesParserRuleCall_6_0()); 
             pushFollow(FOLLOW_2);
@@ -10351,17 +10376,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__TagsAssignment_0_0"
-    // InternalCucumber.g:3286:1: rule__Examples__TagsAssignment_0_0 : ( ruleTag ) ;
+    // InternalCucumber.g:3293:1: rule__Examples__TagsAssignment_0_0 : ( ruleTag ) ;
     public final void rule__Examples__TagsAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3290:1: ( ( ruleTag ) )
-            // InternalCucumber.g:3291:2: ( ruleTag )
+            // InternalCucumber.g:3297:1: ( ( ruleTag ) )
+            // InternalCucumber.g:3298:2: ( ruleTag )
             {
-            // InternalCucumber.g:3291:2: ( ruleTag )
-            // InternalCucumber.g:3292:3: ruleTag
+            // InternalCucumber.g:3298:2: ( ruleTag )
+            // InternalCucumber.g:3299:3: ruleTag
             {
              before(grammarAccess.getExamplesAccess().getTagsTagParserRuleCall_0_0_0()); 
             pushFollow(FOLLOW_2);
@@ -10392,17 +10417,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__NameAssignment_2"
-    // InternalCucumber.g:3301:1: rule__Examples__NameAssignment_2 : ( rulePhrase ) ;
+    // InternalCucumber.g:3308:1: rule__Examples__NameAssignment_2 : ( rulePhrase ) ;
     public final void rule__Examples__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3305:1: ( ( rulePhrase ) )
-            // InternalCucumber.g:3306:2: ( rulePhrase )
+            // InternalCucumber.g:3312:1: ( ( rulePhrase ) )
+            // InternalCucumber.g:3313:2: ( rulePhrase )
             {
-            // InternalCucumber.g:3306:2: ( rulePhrase )
-            // InternalCucumber.g:3307:3: rulePhrase
+            // InternalCucumber.g:3313:2: ( rulePhrase )
+            // InternalCucumber.g:3314:3: rulePhrase
             {
              before(grammarAccess.getExamplesAccess().getNamePhraseParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -10433,17 +10458,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__StatementsAssignment_4"
-    // InternalCucumber.g:3316:1: rule__Examples__StatementsAssignment_4 : ( ruleStatement ) ;
+    // InternalCucumber.g:3323:1: rule__Examples__StatementsAssignment_4 : ( ruleStatement ) ;
     public final void rule__Examples__StatementsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3320:1: ( ( ruleStatement ) )
-            // InternalCucumber.g:3321:2: ( ruleStatement )
+            // InternalCucumber.g:3327:1: ( ( ruleStatement ) )
+            // InternalCucumber.g:3328:2: ( ruleStatement )
             {
-            // InternalCucumber.g:3321:2: ( ruleStatement )
-            // InternalCucumber.g:3322:3: ruleStatement
+            // InternalCucumber.g:3328:2: ( ruleStatement )
+            // InternalCucumber.g:3329:3: ruleStatement
             {
              before(grammarAccess.getExamplesAccess().getStatementsStatementParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -10474,17 +10499,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__TheExamplesTableAssignment_5"
-    // InternalCucumber.g:3331:1: rule__Examples__TheExamplesTableAssignment_5 : ( ruleExamplesTable ) ;
+    // InternalCucumber.g:3338:1: rule__Examples__TheExamplesTableAssignment_5 : ( ruleExamplesTable ) ;
     public final void rule__Examples__TheExamplesTableAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3335:1: ( ( ruleExamplesTable ) )
-            // InternalCucumber.g:3336:2: ( ruleExamplesTable )
+            // InternalCucumber.g:3342:1: ( ( ruleExamplesTable ) )
+            // InternalCucumber.g:3343:2: ( ruleExamplesTable )
             {
-            // InternalCucumber.g:3336:2: ( ruleExamplesTable )
-            // InternalCucumber.g:3337:3: ruleExamplesTable
+            // InternalCucumber.g:3343:2: ( ruleExamplesTable )
+            // InternalCucumber.g:3344:3: ruleExamplesTable
             {
              before(grammarAccess.getExamplesAccess().getTheExamplesTableExamplesTableParserRuleCall_5_0()); 
             pushFollow(FOLLOW_2);
@@ -10515,17 +10540,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__ExamplesTable__RowsAssignment"
-    // InternalCucumber.g:3346:1: rule__ExamplesTable__RowsAssignment : ( ruleRow ) ;
+    // InternalCucumber.g:3353:1: rule__ExamplesTable__RowsAssignment : ( ruleRow ) ;
     public final void rule__ExamplesTable__RowsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3350:1: ( ( ruleRow ) )
-            // InternalCucumber.g:3351:2: ( ruleRow )
+            // InternalCucumber.g:3357:1: ( ( ruleRow ) )
+            // InternalCucumber.g:3358:2: ( ruleRow )
             {
-            // InternalCucumber.g:3351:2: ( ruleRow )
-            // InternalCucumber.g:3352:3: ruleRow
+            // InternalCucumber.g:3358:2: ( ruleRow )
+            // InternalCucumber.g:3359:3: ruleRow
             {
              before(grammarAccess.getExamplesTableAccess().getRowsRowParserRuleCall_0()); 
             pushFollow(FOLLOW_2);
@@ -10556,17 +10581,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepTable__RowsAssignment"
-    // InternalCucumber.g:3361:1: rule__StepTable__RowsAssignment : ( ruleRow ) ;
+    // InternalCucumber.g:3368:1: rule__StepTable__RowsAssignment : ( ruleRow ) ;
     public final void rule__StepTable__RowsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3365:1: ( ( ruleRow ) )
-            // InternalCucumber.g:3366:2: ( ruleRow )
+            // InternalCucumber.g:3372:1: ( ( ruleRow ) )
+            // InternalCucumber.g:3373:2: ( ruleRow )
             {
-            // InternalCucumber.g:3366:2: ( ruleRow )
-            // InternalCucumber.g:3367:3: ruleRow
+            // InternalCucumber.g:3373:2: ( ruleRow )
+            // InternalCucumber.g:3374:3: ruleRow
             {
              before(grammarAccess.getStepTableAccess().getRowsRowParserRuleCall_0()); 
             pushFollow(FOLLOW_2);
@@ -10597,17 +10622,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Row__CellsAssignment_0"
-    // InternalCucumber.g:3376:1: rule__Row__CellsAssignment_0 : ( ruleCell ) ;
+    // InternalCucumber.g:3383:1: rule__Row__CellsAssignment_0 : ( ruleCell ) ;
     public final void rule__Row__CellsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3380:1: ( ( ruleCell ) )
-            // InternalCucumber.g:3381:2: ( ruleCell )
+            // InternalCucumber.g:3387:1: ( ( ruleCell ) )
+            // InternalCucumber.g:3388:2: ( ruleCell )
             {
-            // InternalCucumber.g:3381:2: ( ruleCell )
-            // InternalCucumber.g:3382:3: ruleCell
+            // InternalCucumber.g:3388:2: ( ruleCell )
+            // InternalCucumber.g:3389:3: ruleCell
             {
              before(grammarAccess.getRowAccess().getCellsCellParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -10638,17 +10663,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Cell__NameAssignment_1"
-    // InternalCucumber.g:3391:1: rule__Cell__NameAssignment_1 : ( rulePhrase ) ;
+    // InternalCucumber.g:3398:1: rule__Cell__NameAssignment_1 : ( rulePhrase ) ;
     public final void rule__Cell__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3395:1: ( ( rulePhrase ) )
-            // InternalCucumber.g:3396:2: ( rulePhrase )
+            // InternalCucumber.g:3402:1: ( ( rulePhrase ) )
+            // InternalCucumber.g:3403:2: ( rulePhrase )
             {
-            // InternalCucumber.g:3396:2: ( rulePhrase )
-            // InternalCucumber.g:3397:3: rulePhrase
+            // InternalCucumber.g:3403:2: ( rulePhrase )
+            // InternalCucumber.g:3404:3: rulePhrase
             {
              before(grammarAccess.getCellAccess().getNamePhraseParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -10679,17 +10704,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__DocString__LinesAssignment_2"
-    // InternalCucumber.g:3406:1: rule__DocString__LinesAssignment_2 : ( ruleLine ) ;
+    // InternalCucumber.g:3413:1: rule__DocString__LinesAssignment_2 : ( ruleLine ) ;
     public final void rule__DocString__LinesAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3410:1: ( ( ruleLine ) )
-            // InternalCucumber.g:3411:2: ( ruleLine )
+            // InternalCucumber.g:3417:1: ( ( ruleLine ) )
+            // InternalCucumber.g:3418:2: ( ruleLine )
             {
-            // InternalCucumber.g:3411:2: ( ruleLine )
-            // InternalCucumber.g:3412:3: ruleLine
+            // InternalCucumber.g:3418:2: ( ruleLine )
+            // InternalCucumber.g:3419:3: ruleLine
             {
              before(grammarAccess.getDocStringAccess().getLinesLineParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -10720,17 +10745,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__NameAssignment_1"
-    // InternalCucumber.g:3421:1: rule__Given__NameAssignment_1 : ( rulePhrase ) ;
+    // InternalCucumber.g:3428:1: rule__Given__NameAssignment_1 : ( rulePhrase ) ;
     public final void rule__Given__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3425:1: ( ( rulePhrase ) )
-            // InternalCucumber.g:3426:2: ( rulePhrase )
+            // InternalCucumber.g:3432:1: ( ( rulePhrase ) )
+            // InternalCucumber.g:3433:2: ( rulePhrase )
             {
-            // InternalCucumber.g:3426:2: ( rulePhrase )
-            // InternalCucumber.g:3427:3: rulePhrase
+            // InternalCucumber.g:3433:2: ( rulePhrase )
+            // InternalCucumber.g:3434:3: rulePhrase
             {
              before(grammarAccess.getGivenAccess().getNamePhraseParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -10761,17 +10786,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__TheStepTableAssignment_3_0"
-    // InternalCucumber.g:3436:1: rule__Given__TheStepTableAssignment_3_0 : ( ruleStepTable ) ;
+    // InternalCucumber.g:3443:1: rule__Given__TheStepTableAssignment_3_0 : ( ruleStepTable ) ;
     public final void rule__Given__TheStepTableAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3440:1: ( ( ruleStepTable ) )
-            // InternalCucumber.g:3441:2: ( ruleStepTable )
+            // InternalCucumber.g:3447:1: ( ( ruleStepTable ) )
+            // InternalCucumber.g:3448:2: ( ruleStepTable )
             {
-            // InternalCucumber.g:3441:2: ( ruleStepTable )
-            // InternalCucumber.g:3442:3: ruleStepTable
+            // InternalCucumber.g:3448:2: ( ruleStepTable )
+            // InternalCucumber.g:3449:3: ruleStepTable
             {
              before(grammarAccess.getGivenAccess().getTheStepTableStepTableParserRuleCall_3_0_0()); 
             pushFollow(FOLLOW_2);
@@ -10802,17 +10827,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__TheDocStringAssignment_3_1"
-    // InternalCucumber.g:3451:1: rule__Given__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
+    // InternalCucumber.g:3458:1: rule__Given__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
     public final void rule__Given__TheDocStringAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3455:1: ( ( ruleDocString ) )
-            // InternalCucumber.g:3456:2: ( ruleDocString )
+            // InternalCucumber.g:3462:1: ( ( ruleDocString ) )
+            // InternalCucumber.g:3463:2: ( ruleDocString )
             {
-            // InternalCucumber.g:3456:2: ( ruleDocString )
-            // InternalCucumber.g:3457:3: ruleDocString
+            // InternalCucumber.g:3463:2: ( ruleDocString )
+            // InternalCucumber.g:3464:3: ruleDocString
             {
              before(grammarAccess.getGivenAccess().getTheDocStringDocStringParserRuleCall_3_1_0()); 
             pushFollow(FOLLOW_2);
@@ -10843,17 +10868,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__NameAssignment_1"
-    // InternalCucumber.g:3466:1: rule__When__NameAssignment_1 : ( rulePhrase ) ;
+    // InternalCucumber.g:3473:1: rule__When__NameAssignment_1 : ( rulePhrase ) ;
     public final void rule__When__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3470:1: ( ( rulePhrase ) )
-            // InternalCucumber.g:3471:2: ( rulePhrase )
+            // InternalCucumber.g:3477:1: ( ( rulePhrase ) )
+            // InternalCucumber.g:3478:2: ( rulePhrase )
             {
-            // InternalCucumber.g:3471:2: ( rulePhrase )
-            // InternalCucumber.g:3472:3: rulePhrase
+            // InternalCucumber.g:3478:2: ( rulePhrase )
+            // InternalCucumber.g:3479:3: rulePhrase
             {
              before(grammarAccess.getWhenAccess().getNamePhraseParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -10884,17 +10909,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__TheStepTableAssignment_3_0"
-    // InternalCucumber.g:3481:1: rule__When__TheStepTableAssignment_3_0 : ( ruleStepTable ) ;
+    // InternalCucumber.g:3488:1: rule__When__TheStepTableAssignment_3_0 : ( ruleStepTable ) ;
     public final void rule__When__TheStepTableAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3485:1: ( ( ruleStepTable ) )
-            // InternalCucumber.g:3486:2: ( ruleStepTable )
+            // InternalCucumber.g:3492:1: ( ( ruleStepTable ) )
+            // InternalCucumber.g:3493:2: ( ruleStepTable )
             {
-            // InternalCucumber.g:3486:2: ( ruleStepTable )
-            // InternalCucumber.g:3487:3: ruleStepTable
+            // InternalCucumber.g:3493:2: ( ruleStepTable )
+            // InternalCucumber.g:3494:3: ruleStepTable
             {
              before(grammarAccess.getWhenAccess().getTheStepTableStepTableParserRuleCall_3_0_0()); 
             pushFollow(FOLLOW_2);
@@ -10925,17 +10950,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__TheDocStringAssignment_3_1"
-    // InternalCucumber.g:3496:1: rule__When__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
+    // InternalCucumber.g:3503:1: rule__When__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
     public final void rule__When__TheDocStringAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3500:1: ( ( ruleDocString ) )
-            // InternalCucumber.g:3501:2: ( ruleDocString )
+            // InternalCucumber.g:3507:1: ( ( ruleDocString ) )
+            // InternalCucumber.g:3508:2: ( ruleDocString )
             {
-            // InternalCucumber.g:3501:2: ( ruleDocString )
-            // InternalCucumber.g:3502:3: ruleDocString
+            // InternalCucumber.g:3508:2: ( ruleDocString )
+            // InternalCucumber.g:3509:3: ruleDocString
             {
              before(grammarAccess.getWhenAccess().getTheDocStringDocStringParserRuleCall_3_1_0()); 
             pushFollow(FOLLOW_2);
@@ -10966,17 +10991,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__NameAssignment_1"
-    // InternalCucumber.g:3511:1: rule__Then__NameAssignment_1 : ( rulePhrase ) ;
+    // InternalCucumber.g:3518:1: rule__Then__NameAssignment_1 : ( rulePhrase ) ;
     public final void rule__Then__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3515:1: ( ( rulePhrase ) )
-            // InternalCucumber.g:3516:2: ( rulePhrase )
+            // InternalCucumber.g:3522:1: ( ( rulePhrase ) )
+            // InternalCucumber.g:3523:2: ( rulePhrase )
             {
-            // InternalCucumber.g:3516:2: ( rulePhrase )
-            // InternalCucumber.g:3517:3: rulePhrase
+            // InternalCucumber.g:3523:2: ( rulePhrase )
+            // InternalCucumber.g:3524:3: rulePhrase
             {
              before(grammarAccess.getThenAccess().getNamePhraseParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -11007,17 +11032,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__TheStepTableAssignment_3_0"
-    // InternalCucumber.g:3526:1: rule__Then__TheStepTableAssignment_3_0 : ( ruleStepTable ) ;
+    // InternalCucumber.g:3533:1: rule__Then__TheStepTableAssignment_3_0 : ( ruleStepTable ) ;
     public final void rule__Then__TheStepTableAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3530:1: ( ( ruleStepTable ) )
-            // InternalCucumber.g:3531:2: ( ruleStepTable )
+            // InternalCucumber.g:3537:1: ( ( ruleStepTable ) )
+            // InternalCucumber.g:3538:2: ( ruleStepTable )
             {
-            // InternalCucumber.g:3531:2: ( ruleStepTable )
-            // InternalCucumber.g:3532:3: ruleStepTable
+            // InternalCucumber.g:3538:2: ( ruleStepTable )
+            // InternalCucumber.g:3539:3: ruleStepTable
             {
              before(grammarAccess.getThenAccess().getTheStepTableStepTableParserRuleCall_3_0_0()); 
             pushFollow(FOLLOW_2);
@@ -11048,17 +11073,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__TheDocStringAssignment_3_1"
-    // InternalCucumber.g:3541:1: rule__Then__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
+    // InternalCucumber.g:3548:1: rule__Then__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
     public final void rule__Then__TheDocStringAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3545:1: ( ( ruleDocString ) )
-            // InternalCucumber.g:3546:2: ( ruleDocString )
+            // InternalCucumber.g:3552:1: ( ( ruleDocString ) )
+            // InternalCucumber.g:3553:2: ( ruleDocString )
             {
-            // InternalCucumber.g:3546:2: ( ruleDocString )
-            // InternalCucumber.g:3547:3: ruleDocString
+            // InternalCucumber.g:3553:2: ( ruleDocString )
+            // InternalCucumber.g:3554:3: ruleDocString
             {
              before(grammarAccess.getThenAccess().getTheDocStringDocStringParserRuleCall_3_1_0()); 
             pushFollow(FOLLOW_2);
@@ -11089,17 +11114,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__NameAssignment_1"
-    // InternalCucumber.g:3556:1: rule__And__NameAssignment_1 : ( rulePhrase ) ;
+    // InternalCucumber.g:3563:1: rule__And__NameAssignment_1 : ( rulePhrase ) ;
     public final void rule__And__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3560:1: ( ( rulePhrase ) )
-            // InternalCucumber.g:3561:2: ( rulePhrase )
+            // InternalCucumber.g:3567:1: ( ( rulePhrase ) )
+            // InternalCucumber.g:3568:2: ( rulePhrase )
             {
-            // InternalCucumber.g:3561:2: ( rulePhrase )
-            // InternalCucumber.g:3562:3: rulePhrase
+            // InternalCucumber.g:3568:2: ( rulePhrase )
+            // InternalCucumber.g:3569:3: rulePhrase
             {
              before(grammarAccess.getAndAccess().getNamePhraseParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -11130,17 +11155,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__TheStepTableAssignment_3_0"
-    // InternalCucumber.g:3571:1: rule__And__TheStepTableAssignment_3_0 : ( ruleStepTable ) ;
+    // InternalCucumber.g:3578:1: rule__And__TheStepTableAssignment_3_0 : ( ruleStepTable ) ;
     public final void rule__And__TheStepTableAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3575:1: ( ( ruleStepTable ) )
-            // InternalCucumber.g:3576:2: ( ruleStepTable )
+            // InternalCucumber.g:3582:1: ( ( ruleStepTable ) )
+            // InternalCucumber.g:3583:2: ( ruleStepTable )
             {
-            // InternalCucumber.g:3576:2: ( ruleStepTable )
-            // InternalCucumber.g:3577:3: ruleStepTable
+            // InternalCucumber.g:3583:2: ( ruleStepTable )
+            // InternalCucumber.g:3584:3: ruleStepTable
             {
              before(grammarAccess.getAndAccess().getTheStepTableStepTableParserRuleCall_3_0_0()); 
             pushFollow(FOLLOW_2);
@@ -11171,17 +11196,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__TheDocStringAssignment_3_1"
-    // InternalCucumber.g:3586:1: rule__And__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
+    // InternalCucumber.g:3593:1: rule__And__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
     public final void rule__And__TheDocStringAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3590:1: ( ( ruleDocString ) )
-            // InternalCucumber.g:3591:2: ( ruleDocString )
+            // InternalCucumber.g:3597:1: ( ( ruleDocString ) )
+            // InternalCucumber.g:3598:2: ( ruleDocString )
             {
-            // InternalCucumber.g:3591:2: ( ruleDocString )
-            // InternalCucumber.g:3592:3: ruleDocString
+            // InternalCucumber.g:3598:2: ( ruleDocString )
+            // InternalCucumber.g:3599:3: ruleDocString
             {
              before(grammarAccess.getAndAccess().getTheDocStringDocStringParserRuleCall_3_1_0()); 
             pushFollow(FOLLOW_2);
@@ -11212,17 +11237,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__But__NameAssignment_1"
-    // InternalCucumber.g:3601:1: rule__But__NameAssignment_1 : ( rulePhrase ) ;
+    // InternalCucumber.g:3608:1: rule__But__NameAssignment_1 : ( rulePhrase ) ;
     public final void rule__But__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3605:1: ( ( rulePhrase ) )
-            // InternalCucumber.g:3606:2: ( rulePhrase )
+            // InternalCucumber.g:3612:1: ( ( rulePhrase ) )
+            // InternalCucumber.g:3613:2: ( rulePhrase )
             {
-            // InternalCucumber.g:3606:2: ( rulePhrase )
-            // InternalCucumber.g:3607:3: rulePhrase
+            // InternalCucumber.g:3613:2: ( rulePhrase )
+            // InternalCucumber.g:3614:3: rulePhrase
             {
              before(grammarAccess.getButAccess().getNamePhraseParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -11253,17 +11278,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__But__TheStepTableAssignment_3_0"
-    // InternalCucumber.g:3616:1: rule__But__TheStepTableAssignment_3_0 : ( ruleStepTable ) ;
+    // InternalCucumber.g:3623:1: rule__But__TheStepTableAssignment_3_0 : ( ruleStepTable ) ;
     public final void rule__But__TheStepTableAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3620:1: ( ( ruleStepTable ) )
-            // InternalCucumber.g:3621:2: ( ruleStepTable )
+            // InternalCucumber.g:3627:1: ( ( ruleStepTable ) )
+            // InternalCucumber.g:3628:2: ( ruleStepTable )
             {
-            // InternalCucumber.g:3621:2: ( ruleStepTable )
-            // InternalCucumber.g:3622:3: ruleStepTable
+            // InternalCucumber.g:3628:2: ( ruleStepTable )
+            // InternalCucumber.g:3629:3: ruleStepTable
             {
              before(grammarAccess.getButAccess().getTheStepTableStepTableParserRuleCall_3_0_0()); 
             pushFollow(FOLLOW_2);
@@ -11294,17 +11319,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__But__TheDocStringAssignment_3_1"
-    // InternalCucumber.g:3631:1: rule__But__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
+    // InternalCucumber.g:3638:1: rule__But__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
     public final void rule__But__TheDocStringAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3635:1: ( ( ruleDocString ) )
-            // InternalCucumber.g:3636:2: ( ruleDocString )
+            // InternalCucumber.g:3642:1: ( ( ruleDocString ) )
+            // InternalCucumber.g:3643:2: ( ruleDocString )
             {
-            // InternalCucumber.g:3636:2: ( ruleDocString )
-            // InternalCucumber.g:3637:3: ruleDocString
+            // InternalCucumber.g:3643:2: ( ruleDocString )
+            // InternalCucumber.g:3644:3: ruleDocString
             {
              before(grammarAccess.getButAccess().getTheDocStringDocStringParserRuleCall_3_1_0()); 
             pushFollow(FOLLOW_2);
@@ -11335,17 +11360,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Asterisk__NameAssignment_1"
-    // InternalCucumber.g:3646:1: rule__Asterisk__NameAssignment_1 : ( rulePhrase ) ;
+    // InternalCucumber.g:3653:1: rule__Asterisk__NameAssignment_1 : ( rulePhrase ) ;
     public final void rule__Asterisk__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3650:1: ( ( rulePhrase ) )
-            // InternalCucumber.g:3651:2: ( rulePhrase )
+            // InternalCucumber.g:3657:1: ( ( rulePhrase ) )
+            // InternalCucumber.g:3658:2: ( rulePhrase )
             {
-            // InternalCucumber.g:3651:2: ( rulePhrase )
-            // InternalCucumber.g:3652:3: rulePhrase
+            // InternalCucumber.g:3658:2: ( rulePhrase )
+            // InternalCucumber.g:3659:3: rulePhrase
             {
              before(grammarAccess.getAsteriskAccess().getNamePhraseParserRuleCall_1_0()); 
             pushFollow(FOLLOW_2);
@@ -11376,17 +11401,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Asterisk__TheStepTableAssignment_3_0"
-    // InternalCucumber.g:3661:1: rule__Asterisk__TheStepTableAssignment_3_0 : ( ruleStepTable ) ;
+    // InternalCucumber.g:3668:1: rule__Asterisk__TheStepTableAssignment_3_0 : ( ruleStepTable ) ;
     public final void rule__Asterisk__TheStepTableAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3665:1: ( ( ruleStepTable ) )
-            // InternalCucumber.g:3666:2: ( ruleStepTable )
+            // InternalCucumber.g:3672:1: ( ( ruleStepTable ) )
+            // InternalCucumber.g:3673:2: ( ruleStepTable )
             {
-            // InternalCucumber.g:3666:2: ( ruleStepTable )
-            // InternalCucumber.g:3667:3: ruleStepTable
+            // InternalCucumber.g:3673:2: ( ruleStepTable )
+            // InternalCucumber.g:3674:3: ruleStepTable
             {
              before(grammarAccess.getAsteriskAccess().getTheStepTableStepTableParserRuleCall_3_0_0()); 
             pushFollow(FOLLOW_2);
@@ -11417,17 +11442,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Asterisk__TheDocStringAssignment_3_1"
-    // InternalCucumber.g:3676:1: rule__Asterisk__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
+    // InternalCucumber.g:3683:1: rule__Asterisk__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
     public final void rule__Asterisk__TheDocStringAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3680:1: ( ( ruleDocString ) )
-            // InternalCucumber.g:3681:2: ( ruleDocString )
+            // InternalCucumber.g:3687:1: ( ( ruleDocString ) )
+            // InternalCucumber.g:3688:2: ( ruleDocString )
             {
-            // InternalCucumber.g:3681:2: ( ruleDocString )
-            // InternalCucumber.g:3682:3: ruleDocString
+            // InternalCucumber.g:3688:2: ( ruleDocString )
+            // InternalCucumber.g:3689:3: ruleDocString
             {
              before(grammarAccess.getAsteriskAccess().getTheDocStringDocStringParserRuleCall_3_1_0()); 
             pushFollow(FOLLOW_2);
@@ -11458,17 +11483,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Statement__NameAssignment_0"
-    // InternalCucumber.g:3691:1: rule__Statement__NameAssignment_0 : ( rulePhrase ) ;
+    // InternalCucumber.g:3698:1: rule__Statement__NameAssignment_0 : ( rulePhrase ) ;
     public final void rule__Statement__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3695:1: ( ( rulePhrase ) )
-            // InternalCucumber.g:3696:2: ( rulePhrase )
+            // InternalCucumber.g:3702:1: ( ( rulePhrase ) )
+            // InternalCucumber.g:3703:2: ( rulePhrase )
             {
-            // InternalCucumber.g:3696:2: ( rulePhrase )
-            // InternalCucumber.g:3697:3: rulePhrase
+            // InternalCucumber.g:3703:2: ( rulePhrase )
+            // InternalCucumber.g:3704:3: rulePhrase
             {
              before(grammarAccess.getStatementAccess().getNamePhraseParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -11499,17 +11524,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tag__NameAssignment_1"
-    // InternalCucumber.g:3706:1: rule__Tag__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalCucumber.g:3713:1: rule__Tag__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Tag__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3710:1: ( ( RULE_ID ) )
-            // InternalCucumber.g:3711:2: ( RULE_ID )
+            // InternalCucumber.g:3717:1: ( ( RULE_ID ) )
+            // InternalCucumber.g:3718:2: ( RULE_ID )
             {
-            // InternalCucumber.g:3711:2: ( RULE_ID )
-            // InternalCucumber.g:3712:3: RULE_ID
+            // InternalCucumber.g:3718:2: ( RULE_ID )
+            // InternalCucumber.g:3719:3: RULE_ID
             {
              before(grammarAccess.getTagAccess().getNameIDTerminalRuleCall_1_0()); 
             match(input,RULE_ID,FOLLOW_2); 
@@ -11536,17 +11561,17 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Line__NameAssignment_0"
-    // InternalCucumber.g:3721:1: rule__Line__NameAssignment_0 : ( ruleLineBits ) ;
+    // InternalCucumber.g:3728:1: rule__Line__NameAssignment_0 : ( ruleLineBits ) ;
     public final void rule__Line__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalCucumber.g:3725:1: ( ( ruleLineBits ) )
-            // InternalCucumber.g:3726:2: ( ruleLineBits )
+            // InternalCucumber.g:3732:1: ( ( ruleLineBits ) )
+            // InternalCucumber.g:3733:2: ( ruleLineBits )
             {
-            // InternalCucumber.g:3726:2: ( ruleLineBits )
-            // InternalCucumber.g:3727:3: ruleLineBits
+            // InternalCucumber.g:3733:2: ( ruleLineBits )
+            // InternalCucumber.g:3734:3: ruleLineBits
             {
              before(grammarAccess.getLineAccess().getNameLineBitsParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -11683,7 +11708,7 @@ public class InternalCucumberParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000FE4072L});
     public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000008070L});
     public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000000010070L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000000010000L});
     public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000000018000L});
     public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000000000020L});
 

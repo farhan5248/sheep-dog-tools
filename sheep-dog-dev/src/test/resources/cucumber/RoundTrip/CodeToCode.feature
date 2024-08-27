@@ -12,9 +12,9 @@ Feature: Code To Code
           
               Given The blah application, something/Object page is created as follows
                     \"\"\"
-                     Text 1
-                     
-                     Text 2
+                    Text 1
+                    
+                    Text 2
                     \"\"\"
           
             @tag1
@@ -73,9 +73,9 @@ Feature: Code To Code
           
               Given The blah application, something/Object page is created as follows
                     \"\"\"
-                     Text 1
+                    Text 1
                     
-                     Text 2
+                    Text 2
                     \"\"\"
           
             @tag1
