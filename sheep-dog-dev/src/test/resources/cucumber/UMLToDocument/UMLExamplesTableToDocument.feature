@@ -11,7 +11,7 @@ Feature: UML Examples Table To Document
               Given The Object page is created as follows
                 | h1   |
                 | <h1> |
-
+          
               Examples: Examples 1
                 | h1 |
                 | v1 |
@@ -20,9 +20,9 @@ Feature: UML Examples Table To Document
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Scenario Outline Examples Table section will be created as follows
-          |   Name |   Examples | Row |
-          | Submit | Examples 1 |  h1 |
-          | Submit | Examples 1 |  v1 |
+          | Name   | Examples   | Row |
+          | Submit | Examples 1 | h1  |
+          | Submit | Examples 1 | v1  |
 
   Scenario: Two rows, two cells
 
@@ -34,7 +34,7 @@ Feature: UML Examples Table To Document
               Given The Object page is created as follows
                 | h1   | h2   |
                 | <h1> | <h2> |
-
+          
               Examples: Examples 1
                     | h1 | h2 |
                     | v1 | v2 |
@@ -44,7 +44,7 @@ Feature: UML Examples Table To Document
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Scenario Outline Examples Table section will be created as follows
-          |   Name |   Examples |    Row |
+          | Name   | Examples   | Row    |
           | Submit | Examples 1 | h1, h2 |
           | Submit | Examples 1 | v1, v2 |
           | Submit | Examples 1 | v3, v4 |
@@ -59,7 +59,7 @@ Feature: UML Examples Table To Document
               Given The Object page is created as follows
                 | h1   | h2   | h3   |
                 | <h1> | <h2> | <h3> |
-
+          
               Examples: Examples 1
                     | h1 | h2 | h3 |
                     | v1 | v2 | v3 |
@@ -70,10 +70,9 @@ Feature: UML Examples Table To Document
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Scenario Outline Examples Table section will be created as follows
-          |   Name |   Examples |        Row |
+          | Name   | Examples   | Row        |
           | Submit | Examples 1 | h1, h2, h3 |
           | Submit | Examples 1 | v1, v2, v3 |
           | Submit | Examples 1 | v4, v5, v6 |
           | Submit | Examples 1 | v7, v8, v9 |
 
-          

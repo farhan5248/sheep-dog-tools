@@ -11,7 +11,7 @@ Feature: UML Feature To Document
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Feature section will be created as follows
-          |    Name |
+          | Name    |
           | Process |
 
   Scenario: One tag, one statement
@@ -26,7 +26,7 @@ Feature: UML Feature To Document
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Feature section will be created as follows
-          |    Name | Tags |
+          | Name    | Tags |
           | Process | tag1 |
 
   Scenario: Two tags, two statements
@@ -42,7 +42,7 @@ Feature: UML Feature To Document
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Feature section will be created as follows
-          |    Name |      Tags |
+          | Name    | Tags      |
           | Process | tag1,tag2 |
 
   Scenario: Three tags, three statements
@@ -59,6 +59,6 @@ Feature: UML Feature To Document
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Feature section will be created as follows
-          |    Name |           Tags |
+          | Name    | Tags           |
           | Process | tag1,tag2,tag3 |
 

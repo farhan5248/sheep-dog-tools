@@ -55,7 +55,6 @@ Feature: Batch-Job Testing
                   AcmeFactory.get("OrdersTxtFile").setInputOutputs("Uploaded");
               }
           }
-          
           """
 
   Scenario: Create AcmeNightlyJobSteps.java
@@ -77,7 +76,6 @@ Feature: Batch-Job Testing
                   AcmeFactory.get("NightlyJob").transition();
               }
           }
-          
           """
 
   Scenario: Create AcmeReportingJobSteps.java
@@ -99,7 +97,6 @@ Feature: Batch-Job Testing
                   AcmeFactory.get("ReportingJob").transition();
               }
           }
-          
           """
 
   Scenario: Create OrdersTxtFile.java
@@ -118,7 +115,6 @@ Feature: Batch-Job Testing
           
               public void setUploaded(HashMap<String, String> keyMap);
           }
-          
           """
 
   Scenario: Create NightlyJob.java
@@ -133,7 +129,6 @@ Feature: Batch-Job Testing
           
               public void transition();
           }
-          
           """
 
   Scenario: Create ReportingJob.java
@@ -148,6 +143,5 @@ Feature: Batch-Job Testing
           
               public void transition();
           }
-          
           """
 

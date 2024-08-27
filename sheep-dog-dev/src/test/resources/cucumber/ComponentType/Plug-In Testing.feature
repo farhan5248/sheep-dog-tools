@@ -55,7 +55,6 @@ Feature: Plug-In Testing
                   AcmeToolFactory.get("InputTxtFile").setInputOutputs("Valid");
               }
           }
-          
           """
 
   Scenario: Create AcmeToolDoItGoalSteps.java
@@ -78,7 +77,6 @@ Feature: Plug-In Testing
                   AcmeToolFactory.get("DoItGoal").transition();
               }
           }
-          
           """
 
   Scenario: Create AcmeToolOutputTxtFileSteps.java
@@ -107,7 +105,6 @@ Feature: Plug-In Testing
                   AcmeToolFactory.get("OutputTxtFile").assertInputOutputs(dataTable, "ResultsTable");
               }
           }
-          
           """
 
   Scenario: Create InputTxtFile.java
@@ -124,7 +121,6 @@ Feature: Plug-In Testing
           
               public void setValid(HashMap<String, String> keyMap);
           }
-          
           """
 
   Scenario: Create DoItGoal.java
@@ -141,7 +137,6 @@ Feature: Plug-In Testing
           
               public void setParameters(HashMap<String, String> keyMap);
           }
-          
           """
 
   Scenario: Create OutputTxtFile.java
@@ -158,6 +153,5 @@ Feature: Plug-In Testing
           
               public void assertResultsTableLines(HashMap<String, String> keyMap);
           }
-          
           """
 

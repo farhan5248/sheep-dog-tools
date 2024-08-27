@@ -50,7 +50,6 @@ Feature: Document To Code
           | ins
           | 4
           |===
-
           [examples="true"]
           === Dataset 2
           
@@ -60,7 +59,6 @@ Feature: Document To Code
           | 5
           | 6
           |===
-          
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
@@ -103,7 +101,5 @@ Feature: Document To Code
                     | ins |
                     | 5   |
                     | 6   |
-          
-          
           """
 

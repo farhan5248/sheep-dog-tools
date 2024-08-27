@@ -29,9 +29,9 @@ Feature: Document Examples Table To UML
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
       And The target/uml/pst.uml file, Interaction Annotations section will be created as follows
-          |       Interaction Name | Annotation Name | Annotation Detail |
-          | specs::Process::Submit |      Examples 1 |         0 -> h1\| |
-          | specs::Process::Submit |      Examples 1 |         1 -> v1\| |
+          | Interaction Name       | Annotation Name | Annotation Detail |
+          | specs::Process::Submit | Examples 1      | 0 -> h1\|         |
+          | specs::Process::Submit | Examples 1      | 1 -> v1\|         |
 
   Scenario: Two rows, two cells
 
@@ -62,10 +62,10 @@ Feature: Document Examples Table To UML
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
       And The target/uml/pst.uml file, Interaction Annotations section will be created as follows
-          |       Interaction Name | Annotation Name | Annotation Detail |
-          | specs::Process::Submit |      Examples 1 |     0 -> h1\|h2\| |
-          | specs::Process::Submit |      Examples 1 |     1 -> v1\|v2\| |
-          | specs::Process::Submit |      Examples 1 |     2 -> v3\|v4\| |
+          | Interaction Name       | Annotation Name | Annotation Detail |
+          | specs::Process::Submit | Examples 1      | 0 -> h1\|h2\|     |
+          | specs::Process::Submit | Examples 1      | 1 -> v1\|v2\|     |
+          | specs::Process::Submit | Examples 1      | 2 -> v3\|v4\|     |
 
   Scenario: Three rows, three cells
 
@@ -97,10 +97,9 @@ Feature: Document Examples Table To UML
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
       And The target/uml/pst.uml file, Interaction Annotations section will be created as follows
-          |       Interaction Name | Annotation Name | Annotation Detail |
-          | specs::Process::Submit |      Examples 1 | 0 -> h1\|h2\|h3\| |
-          | specs::Process::Submit |      Examples 1 | 1 -> v1\|v2\|v3\| |
-          | specs::Process::Submit |      Examples 1 | 2 -> v4\|v5\|v6\| |
-          | specs::Process::Submit |      Examples 1 | 3 -> v7\|v8\|v9\| |
+          | Interaction Name       | Annotation Name | Annotation Detail |
+          | specs::Process::Submit | Examples 1      | 0 -> h1\|h2\|h3\| |
+          | specs::Process::Submit | Examples 1      | 1 -> v1\|v2\|v3\| |
+          | specs::Process::Submit | Examples 1      | 2 -> v4\|v5\|v6\| |
+          | specs::Process::Submit | Examples 1      | 3 -> v7\|v8\|v9\| |
 
-          

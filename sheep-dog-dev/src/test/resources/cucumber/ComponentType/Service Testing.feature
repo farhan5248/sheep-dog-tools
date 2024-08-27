@@ -42,7 +42,6 @@ Feature: Service Testing
                   AdminFactory.get("FamilyDetailsResponse").setInputOutputs(dataTable);
               }
           }
-          
           """
 
   Scenario: Create PharmacyClaimRequestSteps.java
@@ -65,7 +64,6 @@ Feature: Service Testing
                   PharmacyFactory.get("ClaimRequest").transition();
               }
           }
-          
           """
 
   Scenario: Create PharmacyClaimResponseSteps.java
@@ -87,7 +85,6 @@ Feature: Service Testing
                   PharmacyFactory.get("ClaimResponse").assertInputOutputs(dataTable);
               }
           }
-          
           """
 
   Scenario: Create PharmacyNightlyPaymentRequestSteps.java
@@ -109,7 +106,6 @@ Feature: Service Testing
                   PharmacyFactory.get("NightlyPaymentRequest").transition();
               }
           }
-          
           """
 
   Scenario: Create FamilyDetailsResponse.java
@@ -126,7 +122,6 @@ Feature: Service Testing
           
               public void setMaximum(HashMap<String, String> keyMap);
           }
-          
           """
 
   Scenario: Create ClaimRequest.java
@@ -145,7 +140,6 @@ Feature: Service Testing
           
               public void setFamily(HashMap<String, String> keyMap);
           }
-          
           """
 
   Scenario: Create ClaimResponse.java
@@ -160,7 +154,6 @@ Feature: Service Testing
           
               public void assertPayProvider(HashMap<String, String> keyMap);
           }
-          
           """
 
   Scenario: Create NightlyPaymentRequest.java
@@ -175,6 +168,5 @@ Feature: Service Testing
           
               public void transition();
           }
-          
           """
 

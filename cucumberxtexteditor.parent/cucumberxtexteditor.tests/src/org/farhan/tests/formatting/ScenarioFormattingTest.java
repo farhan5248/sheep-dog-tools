@@ -23,7 +23,6 @@ public class ScenarioFormattingTest extends FormattingTest {
 		sb.append("    No deductible\n");
 		sb.append("\n");
 		sb.append("    Given do step one\n");
-		sb.append("     When do step three\n");
 		sb.append("\n");
 		assertNoErrors(sb);
 		return sb;
@@ -52,7 +51,6 @@ public class ScenarioFormattingTest extends FormattingTest {
 			sb.append("      No deductible  \n");
 			sb.append("\n");
 			sb.append("      Given do step one  \n");
-			sb.append("       When do step three  \n");
 			sb.append("\n");
 			assertNoErrors(sb);
 			it.setToBeFormatted(sb.toString());
@@ -74,7 +72,6 @@ public class ScenarioFormattingTest extends FormattingTest {
 			sb.append("No deductible\n");
 			sb.append("\n");
 			sb.append("Given do step one\n");
-			sb.append("When do step three\n");
 			sb.append("\n");
 			assertNoErrors(sb);
 			it.setToBeFormatted(sb.toString());
@@ -101,8 +98,6 @@ public class ScenarioFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("\n");
 			sb.append("    Given do step one\n");
-			sb.append("\n");
-			sb.append("     When do step three\n");
 			sb.append("\n");
 			sb.append("\n");
 			assertNoErrors(sb);

@@ -16,57 +16,17 @@ public class StepFormattingTest extends FormattingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: This is a test feature\n");
 		sb.append("\n");
-		sb.append("  Scenario: Submit a drug claim\n");
+		sb.append("  Scenario: Submit a claim\n");
 		sb.append("\n");
 		sb.append("    Given do step one\n");
-		sb.append("          | Header1 | Header2 |\n");
-		sb.append("          | data1   | data2   |\n");
 		sb.append("     When do step three\n");
-		sb.append("          | Header1 | Header2 |\n");
-		sb.append("          | data1   | data2   |\n");
-		sb.append("     Then do step four\n");
-		sb.append("          | Header1 | Header2 |\n");
-		sb.append("          | data1   | data2   |\n");
-		sb.append("      And do step two\n");
-		sb.append("          | Header1 | Header2 |\n");
-		sb.append("          | data1   | data2   |\n");
-		sb.append("      But do step five\n");
-		sb.append("          | Header1 | Header2 |\n");
-		sb.append("          | data1   | data2   |\n");
-		sb.append("        * do step six\n");
-		sb.append("          | Header1 | Header2 |\n");
-		sb.append("          | data1   | data2   |\n");
-		sb.append("    Given do step one\n");
-		sb.append("          \"\"\"\n");
-		sb.append("          Line1\n");
-		sb.append("          \"\"\"\n");
-		sb.append("     When do step three\n");
-		sb.append("          \"\"\"\n");
-		sb.append("          Line1\n");
-		sb.append("          \"\"\"\n");
-		sb.append("     Then do step four\n");
-		sb.append("          \"\"\"\n");
-		sb.append("          Line1\n");
-		sb.append("          \"\"\"\n");
-		sb.append("      And do step two\n");
-		sb.append("          \"\"\"\n");
-		sb.append("          Line1\n");
-		sb.append("          \"\"\"\n");
-		sb.append("      But do step five\n");
-		sb.append("          \"\"\"\n");
-		sb.append("          Line1\n");
-		sb.append("          \"\"\"\n");
-		sb.append("        * do step six\n");
-		sb.append("          \"\"\"\n");
-		sb.append("          Line1\n");
-		sb.append("          \"\"\"\n");
 		sb.append("\n");
 		assertNoErrors(sb);
 		return sb;
 	}
 
 	@Test
-	public void formatStepNoIssues() {
+	public void formatScenarioNoIssues() {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			it.setToBeFormatted(getExpected().toString());
@@ -75,56 +35,56 @@ public class StepFormattingTest extends FormattingTest {
 	}
 
 	@Test
-	public void formatStepMoreSpaces() {
+	public void formatScenarioMoreSpaces() {
+
+		assertFormatted((FormatterTestRequest it) -> {
+			StringBuilder sb = new StringBuilder();
+			sb.append("  Feature:   This is a test feature  \n");
+			sb.append("\n");
+			sb.append("    Scenario:   Submit a claim  \n");
+			sb.append("\n");
+			sb.append("      Given do step one  \n");
+			sb.append("       When do step three  \n");
+			sb.append("\n");
+			assertNoErrors(sb);
+			it.setToBeFormatted(sb.toString());
+			it.setExpectation(getExpected().toString());
+		});
+	}
+
+	@Test
+	public void formatScenarioFewerSpaces() {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
 			sb.append("Feature: This is a test feature\n");
 			sb.append("\n");
-			sb.append("  Scenario: Submit a drug claim\n");
+			sb.append("Scenario: Submit a claim\n");
 			sb.append("\n");
-			sb.append("     Given do step one\n");
-			sb.append("           |  Header1  |  Header2  | \n");
-			sb.append("           |    data1  |    data2  | \n");
-			sb.append("      When do step three\n");
-			sb.append("           |  Header1  |  Header2  | \n");
-			sb.append("           |    data1  |    data2  | \n");
-			sb.append("      Then do step four\n");
-			sb.append("           |  Header1  |  Header2  | \n");
-			sb.append("           |    data1  |    data2  | \n");
-			sb.append("       And do step two\n");
-			sb.append("           |  Header1  |  Header2  | \n");
-			sb.append("           |    data1  |    data2  | \n");
-			sb.append("       But do step five\n");
-			sb.append("           |  Header1  |  Header2  | \n");
-			sb.append("           |    data1  |    data2  | \n");
-			sb.append("         * do step six\n");
-			sb.append("           |  Header1  |  Header2  | \n");
-			sb.append("           |    data1  |    data2  | \n");
-			sb.append("     Given do step one\n");
-			sb.append("           \"\"\"\n");
-			sb.append("          Line1\n");
-			sb.append("           \"\"\"\n");
-			sb.append("      When do step three\n");
-			sb.append("           \"\"\"\n");
-			sb.append("          Line1\n");
-			sb.append("           \"\"\"\n");
-			sb.append("      Then do step four\n");
-			sb.append("           \"\"\"\n");
-			sb.append("          Line1\n");
-			sb.append("           \"\"\"\n");
-			sb.append("       And do step two\n");
-			sb.append("           \"\"\"\n");
-			sb.append("          Line1\n");
-			sb.append("           \"\"\"\n");
-			sb.append("       But do step five\n");
-			sb.append("           \"\"\"\n");
-			sb.append("          Line1\n");
-			sb.append("           \"\"\"\n");
-			sb.append("         * do step six\n");
-			sb.append("           \"\"\"\n");
-			sb.append("          Line1\n");
-			sb.append("           \"\"\"\n");
+			sb.append("Given do step one\n");
+			sb.append("When do step three\n");
+			sb.append("\n");
+			assertNoErrors(sb);
+			it.setToBeFormatted(sb.toString());
+			it.setExpectation(getExpected().toString());
+		});
+	}
+
+	@Test
+	public void formatScenarioMoreEOL() {
+
+		assertFormatted((FormatterTestRequest it) -> {
+			StringBuilder sb = new StringBuilder();
+			sb.append("Feature: This is a test feature\n");
+			sb.append("\n");
+			sb.append("\n");
+			sb.append("  Scenario: Submit a claim");
+			sb.append("\n");
+			sb.append("\n");
+			sb.append("    Given do step one\n");
+			sb.append("\n");
+			sb.append("     When do step three\n");
+			sb.append("\n");
 			sb.append("\n");
 			assertNoErrors(sb);
 			it.setToBeFormatted(sb.toString());

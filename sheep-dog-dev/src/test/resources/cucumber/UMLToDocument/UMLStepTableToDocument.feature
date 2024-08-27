@@ -16,9 +16,9 @@ Feature: UML Step Table To Document
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Scenarios Steps Step Table section will be created as follows
-          |   Name |                                Step | Row |
-          | Submit | Given The Object page is created as follows |  h1 |
-          | Submit | Given The Object page is created as follows |  v1 |
+          | Name   | Step                                        | Row |
+          | Submit | Given The Object page is created as follows | h1  |
+          | Submit | Given The Object page is created as follows | v1  |
 
   Scenario: Two rows, two cells
 
@@ -37,7 +37,7 @@ Feature: UML Step Table To Document
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Scenarios Steps Step Table section will be created as follows
-          |   Name |                                Step |    Row |
+          | Name   | Step                                        | Row    |
           | Submit | Given The Object page is created as follows | h1, h2 |
           | Submit | Given The Object page is created as follows | v1, v2 |
           | Submit | Given The Object page is created as follows | v3, v4 |
@@ -60,7 +60,7 @@ Feature: UML Step Table To Document
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file, Scenarios Steps Step Table section will be created as follows
-          |   Name |                                Step |        Row |
+          | Name   | Step                                        | Row        |
           | Submit | Given The Object page is created as follows | h1, h2, h3 |
           | Submit | Given The Object page is created as follows | v1, v2, v3 |
           | Submit | Given The Object page is created as follows | v4, v5, v6 |

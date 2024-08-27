@@ -38,8 +38,6 @@ Feature: Code To Document
           
                     | ins |
                     |   4 |
-          
-          
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed with
           | Tags |
@@ -94,6 +92,5 @@ Feature: Code To Document
           | ins
           | 4
           |===
-          
           """
 

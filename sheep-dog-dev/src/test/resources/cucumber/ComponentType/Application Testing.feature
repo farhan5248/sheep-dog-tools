@@ -40,7 +40,6 @@ Feature: Application Testing
                   AcmeFactory.get("AccountDetailsPage").assertInputOutputs("Present", "ClaimsHistoryTable");
               }
           }
-          
           """
 
   Scenario: Create AcmeAccountSearchRequestSteps.java
@@ -63,7 +62,6 @@ Feature: Application Testing
                   AcmeFactory.get("AccountSearchRequest").transition();
               }
           }
-          
           """
 
   Scenario: Create AcmeHomePageSteps.java
@@ -85,7 +83,6 @@ Feature: Application Testing
                   AcmeFactory.get("HomePage").setInputOutputs("Present", "AccountSearchSection");
               }
           }
-          
           """
 
   Scenario: Create AcmeLogInRequestSteps.java
@@ -108,7 +105,6 @@ Feature: Application Testing
                   AcmeFactory.get("LogInRequest").transition();
               }
           }
-          
           """
 
   Scenario: Create AccountDetailsPage.java
@@ -123,7 +119,6 @@ Feature: Application Testing
           
               public void assertClaimsHistoryTablePresent(HashMap<String, String> keyMap);
           }
-          
           """
 
   Scenario: Create AccountSearchRequest.java
@@ -140,7 +135,6 @@ Feature: Application Testing
           
               public void setPatient(HashMap<String, String> keyMap);
           }
-          
           """
 
   Scenario: Create HomePage.java
@@ -155,7 +149,6 @@ Feature: Application Testing
           
               public void setAccountSearchSectionPresent(HashMap<String, String> keyMap);
           }
-          
           """
 
   Scenario: Create LogInRequest.java
@@ -174,6 +167,5 @@ Feature: Application Testing
           
               public void setPassword(HashMap<String, String> keyMap);
           }
-          
           """
 

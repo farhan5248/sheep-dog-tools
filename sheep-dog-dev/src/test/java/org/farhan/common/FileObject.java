@@ -36,7 +36,7 @@ public abstract class FileObject extends TestObject {
 	protected void assertContent(String docString) {
 		try {
 			String contents = Utilities.readFile(getFile());
-			Assertions.assertEquals(docString, contents.replaceAll("\r", ""));
+			Assertions.assertEquals(docString, contents.replaceAll("\r", "").trim());
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}

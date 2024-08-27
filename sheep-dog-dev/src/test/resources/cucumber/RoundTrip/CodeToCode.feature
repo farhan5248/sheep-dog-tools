@@ -38,8 +38,6 @@ Feature: Code To Code
           
                     |  h3 |  h4 |
                     | v31 | v41 |
-          
-          
           """
       And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows
           """
@@ -58,7 +56,6 @@ Feature: Code To Code
                   BlahFactory.get("ObjectPage").setInputOutputs("Empty");
               }
           }
-          
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed with
           | Tags |
@@ -102,8 +99,6 @@ Feature: Code To Code
           
                     | h3  | h4  |
                     | v31 | v41 |
-          
-          
           """
       And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
           """
@@ -129,6 +124,5 @@ Feature: Code To Code
                   BlahFactory.get("ObjectPage").setInputOutputs("Content", docString);
               }
           }
-          
           """
 
