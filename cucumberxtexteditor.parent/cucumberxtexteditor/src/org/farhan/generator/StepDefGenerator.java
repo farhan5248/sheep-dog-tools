@@ -43,11 +43,33 @@ public class StepDefGenerator {
 			if (aStep.equals(step)) {
 				break;
 			} else {
-				String[] objectParts = StepValidator.getObject(aStep.getName()).split("/");
+				// TODO until the step definitions only keep the predicate, both the object
+				// alone and the object with its path need to be suggested so that the prefix
+				// matches
+				String object = StepValidator.getObject(aStep.getName());
+				previousObjects.add(object);
+				String[] objectParts = object.split("/");
 				previousObjects.add(objectParts[objectParts.length - 1]);
 			}
 		}
 		return previousObjects;
+	}
+
+	public static TreeSet<String> getObjectDefinitions(Given step) {
+		TreeSet<String> objectDefinitions = new TreeSet<String>();
+		URI objectURI = getObjectURI(step);
+		if (new ResourceSetImpl().getURIConverter().exists(objectURI, null)) {
+			try {
+				Resource theResource = getOrCreateResource(objectURI);
+				Feature theObject = getOrCreateObject(theResource, StepValidator.getObject(step.getName()));
+				for (AbstractScenario stepDef : theObject.getAbstractScenarios()) {
+					objectDefinitions.add(stepDef.getName());
+				}
+			} catch (Exception e) {
+				logError(e, step);
+			}
+		}
+		return objectDefinitions;
 	}
 
 	public static String getProblems(Step step) {
@@ -104,11 +126,11 @@ public class StepDefGenerator {
 	private static URI getObjectURI(Step step) {
 		String projectName = step.eResource().getURI().toPlatformString(false).split("/")[1];
 		String outputDir = CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory();
-		String fileName = getQualifiedName(step);
+		String fileName = getObjectQualifiedName(step);
 		return URI.createPlatformResourceURI("/" + projectName + "/" + outputDir + "/" + fileName, true);
 	}
 
-	private static String getQualifiedName(Step step) {
+	private static String getObjectQualifiedName(Step step) {
 		String component = StepValidator.getComponent(step.getName());
 		String object = StepValidator.getObject(step.getName());
 

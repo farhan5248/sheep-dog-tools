@@ -14,6 +14,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
@@ -40,37 +41,47 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 	public void completeGiven_Name(Given step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeGiven_Name(step, assignment, context, acceptor);
-		// TODO if there's no object do the following
 		String component;
+		String object;
 		if (step.getName() == null) {
 			component = "";
+			object = "";
 		} else {
 			component = StepValidator.getComponent(step.getName());
+			object = StepValidator.getObject(step.getName());
 		}
-		if (component.isEmpty()) {
-			// get a list of previous objects
-			TreeSet<String> previousObjects = StepDefGenerator.getPreviousObjects(step);
-			for (String previousObject : previousObjects) {
-				acceptor.accept(createCompletionProposal("The " + previousObject, context));
-			}
-			// get a list of applications
-			for (IResource stepDefComponent : getComponents(step)) {
-				acceptor.accept(createCompletionProposal("The " + stepDefComponent.getName() + ", ", context));
+		if (object.isEmpty()) {
+			// if there's no object do the following
+			if (component.isEmpty()) {
+				// get a list of previous objects
+				TreeSet<String> previousObjects = StepDefGenerator.getPreviousObjects(step);
+				for (String previousObject : previousObjects) {
+					acceptor.accept(createCompletionProposal("The " + previousObject, context));
+				}
+				// get a list of applications
+				for (IResource stepDefComponent : getComponents(step)) {
+					acceptor.accept(createCompletionProposal("The " + stepDefComponent.getName() + ", ", context));
+				}
+			} else {
+				// get a list of objects
+				for (IResource stepDefObjectResource : getComponentObjects(getProject(step).getFolder(
+						CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory() + "/" + component))) {
+
+					// ([^\/]+)\/([^\/]+)\/(.*).feature group 3
+					String stepDefObject = stepDefObjectResource.getProjectRelativePath().toString()
+							.split("/" + component + "/")[1].replace(".feature", "");
+					acceptor.accept(createCompletionProposal("The " + component + ", " + stepDefObject, stepDefObject,
+							null, context));
+				}
 			}
 		} else {
-			// get a list of objects
-			// TODO should this list objects only and objects with their paths? Right now it
-			// does object with path
-			for (IResource stepDefObjectResource : getComponentObjects(getProject(step).getFolder(
-					CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory() + "/" + component))) {
-
-				// ([^\/]+)\/([^\/]+)\/(.*).feature group 3
-				String stepDefObject = stepDefObjectResource.getProjectRelativePath().toString()
-						.split("/" + component + "/")[1].replace(".feature", "");
-				acceptor.accept(createCompletionProposal("The " + component + ", " + stepDefObject, context));
+			// else if there's an object get a list of keywords for the suggestions
+			for (String stepDef : StepDefGenerator.getObjectDefinitions(step)) {
+				// TODO maybe step defs shouldn't need the component and object parts, just the
+				// section and predicate
+				acceptor.accept(createCompletionProposal(stepDef, context));
 			}
 		}
-		// TODO else if there's an object get a list of keywords for the suggestions
 	}
 
 	private IProject getProject(Step step) {
@@ -79,6 +90,8 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 
 	}
 
+	// TODO change IResource to String
+	// TODO move to StepDefGenerator
 	private IResource[] getComponents(Step step) {
 		try {
 			IFolder folder = getProject(step)
@@ -90,6 +103,8 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 		}
 	}
 
+	// TODO change IResource to String
+	// TODO move to StepDefGenerator
 	private ArrayList<IResource> getComponentObjects(IFolder folder) {
 		ArrayList<IResource> files = new ArrayList<IResource>();
 		try {
