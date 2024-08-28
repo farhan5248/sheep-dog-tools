@@ -63,12 +63,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="lines" upperBound="-1"
         eType="#//Line" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Given" eSuperTypes="#//Step"/>
-  <eClassifiers xsi:type="ecore:EClass" name="When" eSuperTypes="#//Step"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Then" eSuperTypes="#//Step"/>
-  <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//Step"/>
-  <eClassifiers xsi:type="ecore:EClass" name="But" eSuperTypes="#//Step"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Asterisk" eSuperTypes="#//Step"/>
   <eClassifiers xsi:type="ecore:EClass" name="Statement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>

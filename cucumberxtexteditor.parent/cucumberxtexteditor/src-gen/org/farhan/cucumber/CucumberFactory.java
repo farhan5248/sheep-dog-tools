@@ -132,60 +132,6 @@ public interface CucumberFactory extends EFactory
   DocString createDocString();
 
   /**
-   * Returns a new object of class '<em>Given</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Given</em>'.
-   * @generated
-   */
-  Given createGiven();
-
-  /**
-   * Returns a new object of class '<em>When</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>When</em>'.
-   * @generated
-   */
-  When createWhen();
-
-  /**
-   * Returns a new object of class '<em>Then</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Then</em>'.
-   * @generated
-   */
-  Then createThen();
-
-  /**
-   * Returns a new object of class '<em>And</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>And</em>'.
-   * @generated
-   */
-  And createAnd();
-
-  /**
-   * Returns a new object of class '<em>But</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>But</em>'.
-   * @generated
-   */
-  But createBut();
-
-  /**
-   * Returns a new object of class '<em>Asterisk</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Asterisk</em>'.
-   * @generated
-   */
-  Asterisk createAsterisk();
-
-  /**
    * Returns a new object of class '<em>Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

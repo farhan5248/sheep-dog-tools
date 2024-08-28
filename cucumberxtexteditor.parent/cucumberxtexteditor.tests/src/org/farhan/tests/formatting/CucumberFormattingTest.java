@@ -43,9 +43,6 @@ public class CucumberFormattingTest extends FormattingTest {
 			sb.append("     Then do step four\n");
 			sb.append("          | Header1 | Header2 |\n");
 			sb.append("          | data1   | data2   |\n");
-			sb.append("      But do step five\n");
-			sb.append("          | Header1 | Header2 |\n");
-			sb.append("          | data1   | data2   |\n");
 			sb.append("        * do step six\n");
 			sb.append("          | Header1 | Header2 |\n");
 			sb.append("          | data1   | data2   |\n");
@@ -63,7 +60,6 @@ public class CucumberFormattingTest extends FormattingTest {
 			sb.append("      And do step two\n");
 			sb.append("     When do step three\n");
 			sb.append("     Then do step four\n");
-			sb.append("      But do step five\n");
 			sb.append("    Given do step six\n");
 			sb.append("          \"\"\"\n");
 			sb.append("              Line1\n");
@@ -80,7 +76,6 @@ public class CucumberFormattingTest extends FormattingTest {
 			sb.append("          | data1   | data2   |\n");
 			sb.append("     When do step three\n");
 			sb.append("     Then do step four\n");
-			sb.append("      But do step five\n");
 			sb.append("        * do step six\n");
 			sb.append("\n");
 			sb.append("    @tag1 @tag2 @tag3\n");
@@ -99,7 +94,6 @@ public class CucumberFormattingTest extends FormattingTest {
 			sb.append("      And do step two\n");
 			sb.append("     When do step three\n");
 			sb.append("     Then do step four\n");
-			sb.append("      But do step five\n");
 			sb.append("        * do step six\n");
 			sb.append("\n");
 			sb.append("    @tag1 @tag2 @tag3\n");

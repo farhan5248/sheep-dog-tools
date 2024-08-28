@@ -136,36 +136,6 @@ public class CucumberAdapterFactory extends AdapterFactoryImpl
         return createDocStringAdapter();
       }
       @Override
-      public Adapter caseGiven(Given object)
-      {
-        return createGivenAdapter();
-      }
-      @Override
-      public Adapter caseWhen(When object)
-      {
-        return createWhenAdapter();
-      }
-      @Override
-      public Adapter caseThen(Then object)
-      {
-        return createThenAdapter();
-      }
-      @Override
-      public Adapter caseAnd(And object)
-      {
-        return createAndAdapter();
-      }
-      @Override
-      public Adapter caseBut(But object)
-      {
-        return createButAdapter();
-      }
-      @Override
-      public Adapter caseAsterisk(Asterisk object)
-      {
-        return createAsteriskAdapter();
-      }
-      @Override
       public Adapter caseStatement(Statement object)
       {
         return createStatementAdapter();
@@ -378,96 +348,6 @@ public class CucumberAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createDocStringAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.farhan.cucumber.Given <em>Given</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.cucumber.Given
-   * @generated
-   */
-  public Adapter createGivenAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.farhan.cucumber.When <em>When</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.cucumber.When
-   * @generated
-   */
-  public Adapter createWhenAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.farhan.cucumber.Then <em>Then</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.cucumber.Then
-   * @generated
-   */
-  public Adapter createThenAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.farhan.cucumber.And <em>And</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.cucumber.And
-   * @generated
-   */
-  public Adapter createAndAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.farhan.cucumber.But <em>But</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.cucumber.But
-   * @generated
-   */
-  public Adapter createButAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.farhan.cucumber.Asterisk <em>Asterisk</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.cucumber.Asterisk
-   * @generated
-   */
-  public Adapter createAsteriskAdapter()
   {
     return null;
   }

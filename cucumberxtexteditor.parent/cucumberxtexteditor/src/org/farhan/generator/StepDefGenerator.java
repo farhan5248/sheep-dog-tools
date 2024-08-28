@@ -19,7 +19,6 @@ import org.farhan.cucumber.CucumberFactory;
 import org.farhan.cucumber.Examples;
 import org.farhan.cucumber.ExamplesTable;
 import org.farhan.cucumber.Feature;
-import org.farhan.cucumber.Given;
 import org.farhan.cucumber.Row;
 import org.farhan.cucumber.ScenarioOutline;
 import org.farhan.cucumber.Step;
@@ -36,7 +35,7 @@ public class StepDefGenerator {
 		System.out.println(sw.toString());
 	}
 
-	public static TreeSet<String> getPreviousObjects(Given step) {
+	public static TreeSet<String> getPreviousObjects(Step step) {
 		AbstractScenario as = (AbstractScenario) step.eContainer();
 		TreeSet<String> previousObjects = new TreeSet<String>();
 		for (Step aStep : as.getSteps()) {
@@ -55,7 +54,7 @@ public class StepDefGenerator {
 		return previousObjects;
 	}
 
-	public static TreeSet<String> getObjectDefinitions(Given step) {
+	public static TreeSet<String> getObjectDefinitions(Step step) {
 		TreeSet<String> objectDefinitions = new TreeSet<String>();
 		URI objectURI = getObjectURI(step);
 		if (new ResourceSetImpl().getURIConverter().exists(objectURI, null)) {

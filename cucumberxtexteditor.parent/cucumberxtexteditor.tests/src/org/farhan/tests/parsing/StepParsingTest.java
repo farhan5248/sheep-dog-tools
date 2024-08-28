@@ -22,7 +22,6 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("When do step three\n");
 		sb.append("Then do step four\n");
 		sb.append("And do step two\n");
-		sb.append("But do step five\n");
 		sb.append("* do step six\n");
 		assertNoErrors(sb);
 	}
@@ -154,9 +153,6 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("And do step two\n");
 		sb.append("| Header1 | Header2 |\n");
 		sb.append("|   data1 |   data2 |\n");
-		sb.append("But do step five\n");
-		sb.append("| Header1 | Header2 |\n");
-		sb.append("|   data1 |   data2 |\n");
 		sb.append("* do step six\n");
 		sb.append("| Header1 | Header2 |\n");
 		sb.append("|   data1 |   data2 |\n");
@@ -173,10 +169,6 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("Line1\n");
 		sb.append("\"\"\"\n");
 		sb.append("And do step two\n");
-		sb.append("\"\"\"\n");
-		sb.append("Line1\n");
-		sb.append("\"\"\"\n");
-		sb.append("But do step five\n");
 		sb.append("\"\"\"\n");
 		sb.append("Line1\n");
 		sb.append("\"\"\"\n");

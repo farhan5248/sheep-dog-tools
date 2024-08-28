@@ -53,36 +53,13 @@ Cell:
 	'|' name=Phrase;
 
 Step:
-	Given | When | Then | And | But | Asterisk;
+	('Given' | 'When' | 'Then' | 'And' | '*') name=Phrase EOL
+	(theStepTable=StepTable | theDocString=DocString)?;
 
 DocString:
 	'"""' EOL
 	lines+=Line+
 	'"""' EOL;
-
-Given:
-	'Given' name=Phrase EOL
-	(theStepTable=StepTable | theDocString=DocString)?;
-
-When:
-	'When' name=Phrase EOL
-	(theStepTable=StepTable | theDocString=DocString)?;
-
-Then:
-	'Then' name=Phrase EOL
-	(theStepTable=StepTable | theDocString=DocString)?;
-
-And:
-	'And' name=Phrase EOL
-	(theStepTable=StepTable | theDocString=DocString)?;
-
-But:
-	'But' name=Phrase EOL
-	(theStepTable=StepTable | theDocString=DocString)?;
-
-Asterisk:
-	'*' name=Phrase EOL
-	(theStepTable=StepTable | theDocString=DocString)?;
 
 Statement:
 	name=Phrase EOL;

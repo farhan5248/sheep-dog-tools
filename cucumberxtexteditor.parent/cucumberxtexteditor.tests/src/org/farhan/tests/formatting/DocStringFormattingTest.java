@@ -34,10 +34,6 @@ public class DocStringFormattingTest extends FormattingTest {
 		sb.append("          \"\"\"\n");
 		sb.append("          Line1\n");
 		sb.append("          \"\"\"\n");
-		sb.append("      But do step five\n");
-		sb.append("          \"\"\"\n");
-		sb.append("          Line1\n");
-		sb.append("          \"\"\"\n");
 		sb.append("        * do step six\n");
 		sb.append("          \"\"\"\n");
 		sb.append("          Line1\n");
@@ -78,10 +74,6 @@ public class DocStringFormattingTest extends FormattingTest {
 			sb.append("          Line1\n");
 			sb.append("           \"\"\"\n");
 			sb.append("       And do step two\n");
-			sb.append("           \"\"\"\n");
-			sb.append("          Line1\n");
-			sb.append("           \"\"\"\n");
-			sb.append("       But do step five\n");
 			sb.append("           \"\"\"\n");
 			sb.append("          Line1\n");
 			sb.append("           \"\"\"\n");

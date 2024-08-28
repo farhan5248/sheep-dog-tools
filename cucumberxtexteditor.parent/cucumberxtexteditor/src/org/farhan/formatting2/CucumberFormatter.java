@@ -4,6 +4,8 @@
 package org.farhan.formatting2;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.AbstractJavaFormatter;
@@ -32,5 +34,15 @@ public class CucumberFormatter extends AbstractJavaFormatter {
 	public ISemanticRegion getRegion(EObject eo, Keyword keyword) {
 		// You can also search for the keyword using keyword("Feature:");
 		return regionFor(eo).keyword(keyword);
+	}
+
+	public ISemanticRegion getRegion(EObject eo, Alternatives keywords) {
+		for (AbstractElement ae : keywords.getElements()) {
+			ISemanticRegion iSR = regionFor(eo).keyword((Keyword) ae);
+			if (iSR != null) {
+				return iSR;
+			}
+		}
+		return null;
 	}
 }

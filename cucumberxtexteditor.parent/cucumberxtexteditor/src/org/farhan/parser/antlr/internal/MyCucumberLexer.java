@@ -79,12 +79,12 @@ public class MyCucumberLexer extends InternalCucumberLexer {
 		} else {
 			if (lastTokenIsEOL) {
 				// this is an actual keyword
-				if (t.getType() == 23) {
+				if (t.getType() == 22) {
 					// if it's an @
 					isTagLine = true;
 				}
 			} else {
-				if (t.getType() == 23 && isTagLine) {
+				if (t.getType() == 22 && isTagLine) {
 					// if it's an @ and we're on a tag line, then treat it as a tag
 				} else {
 					t.setType(RULE_STRING);
@@ -101,18 +101,20 @@ public class MyCucumberLexer extends InternalCucumberLexer {
 			// The last token before the docstring should be the whitespace so we'll use
 			// that as the default white space for the entire docstring
 			docStringIndent = t.getText().length();
-			//System.out.println("Setting the indent to: " + docStringIndent);
+			// System.out.println("Setting the indent to: " + docStringIndent);
 		} else if (isDocString && t.getText().contentEquals("\"\"\"")) {
 			isDocString = false;
 		} else if (isDocString && !t.getText().contentEquals("\"\"\"")) {
 			if (t.getType() != RULE_EOL && !isLeadingWhiteSpace(t)) {
-				//System.out.println("Converting Token >>>" + t.getText() + "<<< " + t.getType());
+				// System.out.println("Converting Token >>>" + t.getText() + "<<< " +
+				// t.getType());
 				// The length check is there so that the whitespace before the closing """ isn't
 				// ignored. When it's ignored, it looks like there's a line bit without an EOL
 				// before the closing """ which is a syntax error
 				t.setType(RULE_STRING);
 			} else {
-				//System.out.println("Ignoring Token >>>" + t.getText() + "<<< " + t.getType());
+				// System.out.println("Ignoring Token >>>" + t.getText() + "<<< " +
+				// t.getType());
 			}
 		}
 	}
@@ -149,27 +151,24 @@ public class MyCucumberLexer extends InternalCucumberLexer {
 			// |
 			return true;
 		} else if (type == T__16) {
-			// """
-			return true;
-		} else if (type == T__17) {
 			// Given
 			return true;
-		} else if (type == T__18) {
+		} else if (type == T__17) {
 			// When
 			return true;
-		} else if (type == T__19) {
+		} else if (type == T__18) {
 			// Then
 			return true;
-		} else if (type == T__20) {
+		} else if (type == T__19) {
 			// And
 			return true;
-		} else if (type == T__21) {
-			// But
-			return true;
-		} else if (type == T__22) {
+		} else if (type == T__20) {
 			// *
 			return true;
-		} else if (type == T__23) {
+		} else if (type == T__21) {
+			// """
+			return true;
+		} else if (type == T__22) {
 			// @
 			return true;
 		} else {

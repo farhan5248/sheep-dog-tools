@@ -34,7 +34,6 @@ public class CucumberUiModule extends AbstractCucumberUiModule {
 		return CucumberSemanticHighlightingCalculator.class;
 	}
 
-	
 	public Class<? extends IContextualOutputConfigurationProvider> bindIContextualOutputConfigurationProvider() {
 		return EclipseOutputConfigurationProvider.class;
 	}

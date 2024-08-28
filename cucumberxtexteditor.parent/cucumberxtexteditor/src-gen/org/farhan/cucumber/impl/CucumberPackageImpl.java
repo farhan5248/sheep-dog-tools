@@ -11,10 +11,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.farhan.cucumber.AbstractScenario;
-import org.farhan.cucumber.And;
-import org.farhan.cucumber.Asterisk;
 import org.farhan.cucumber.Background;
-import org.farhan.cucumber.But;
 import org.farhan.cucumber.Cell;
 import org.farhan.cucumber.CucumberFactory;
 import org.farhan.cucumber.CucumberPackage;
@@ -22,7 +19,6 @@ import org.farhan.cucumber.DocString;
 import org.farhan.cucumber.Examples;
 import org.farhan.cucumber.ExamplesTable;
 import org.farhan.cucumber.Feature;
-import org.farhan.cucumber.Given;
 import org.farhan.cucumber.Line;
 import org.farhan.cucumber.Row;
 import org.farhan.cucumber.Scenario;
@@ -31,8 +27,6 @@ import org.farhan.cucumber.Statement;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.StepTable;
 import org.farhan.cucumber.Tag;
-import org.farhan.cucumber.Then;
-import org.farhan.cucumber.When;
 
 /**
  * <!-- begin-user-doc -->
@@ -125,48 +119,6 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   private EClass docStringEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass givenEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass whenEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass thenEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass andEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass butEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass asteriskEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -631,72 +583,6 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
    * @generated
    */
   @Override
-  public EClass getGiven()
-  {
-    return givenEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getWhen()
-  {
-    return whenEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getThen()
-  {
-    return thenEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getAnd()
-  {
-    return andEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getBut()
-  {
-    return butEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getAsterisk()
-  {
-    return asteriskEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getStatement()
   {
     return statementEClass;
@@ -834,18 +720,6 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
     docStringEClass = createEClass(DOC_STRING);
     createEReference(docStringEClass, DOC_STRING__LINES);
 
-    givenEClass = createEClass(GIVEN);
-
-    whenEClass = createEClass(WHEN);
-
-    thenEClass = createEClass(THEN);
-
-    andEClass = createEClass(AND);
-
-    butEClass = createEClass(BUT);
-
-    asteriskEClass = createEClass(ASTERISK);
-
     statementEClass = createEClass(STATEMENT);
     createEAttribute(statementEClass, STATEMENT__NAME);
 
@@ -888,12 +762,6 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
     backgroundEClass.getESuperTypes().add(this.getAbstractScenario());
     scenarioEClass.getESuperTypes().add(this.getAbstractScenario());
     scenarioOutlineEClass.getESuperTypes().add(this.getAbstractScenario());
-    givenEClass.getESuperTypes().add(this.getStep());
-    whenEClass.getESuperTypes().add(this.getStep());
-    thenEClass.getESuperTypes().add(this.getStep());
-    andEClass.getESuperTypes().add(this.getStep());
-    butEClass.getESuperTypes().add(this.getStep());
-    asteriskEClass.getESuperTypes().add(this.getStep());
 
     // Initialize classes and features; add operations and parameters
     initEClass(featureEClass, Feature.class, "Feature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -941,18 +809,6 @@ public class CucumberPackageImpl extends EPackageImpl implements CucumberPackage
 
     initEClass(docStringEClass, DocString.class, "DocString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getDocString_Lines(), this.getLine(), null, "lines", null, 0, -1, DocString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(givenEClass, Given.class, "Given", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(whenEClass, When.class, "When", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(thenEClass, Then.class, "Then", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(andEClass, And.class, "And", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(butEClass, But.class, "But", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(asteriskEClass, Asterisk.class, "Asterisk", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(statementEClass, Statement.class, "Statement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStatement_Name(), ecorePackage.getEString(), "name", null, 0, 1, Statement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -30,9 +30,6 @@ public class StepTableFormattingTest extends FormattingTest {
 		sb.append("      And do step two\n");
 		sb.append("          | Header1 | Header2 |\n");
 		sb.append("          | data1   | data2   |\n");
-		sb.append("      But do step five\n");
-		sb.append("          | Header1 | Header2 |\n");
-		sb.append("          | data1   | data2   |\n");
 		sb.append("        * do step six\n");
 		sb.append("          | Header1 | Header2 |\n");
 		sb.append("          | data1   | data2   |\n");
@@ -69,9 +66,6 @@ public class StepTableFormattingTest extends FormattingTest {
 			sb.append("           |  Header1  |  Header2  | \n");
 			sb.append("           |    data1  |    data2  | \n");
 			sb.append("       And do step two\n");
-			sb.append("           |  Header1  |  Header2  | \n");
-			sb.append("           |    data1  |    data2  | \n");
-			sb.append("       But do step five\n");
 			sb.append("           |  Header1  |  Header2  | \n");
 			sb.append("           |    data1  |    data2  | \n");
 			sb.append("         * do step six\n");

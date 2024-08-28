@@ -106,27 +106,7 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 
 	public Step createStep(AbstractScenario abstractScenario, String name) {
 		String keyword = name.split(" ")[0];
-		Step step = null;
-		switch (keyword) {
-		case "Given":
-			step = CucumberFactory.eINSTANCE.createGiven();
-			break;
-		case "When":
-			step = CucumberFactory.eINSTANCE.createWhen();
-			break;
-		case "Then":
-			step = CucumberFactory.eINSTANCE.createThen();
-			break;
-		case "But":
-			step = CucumberFactory.eINSTANCE.createBut();
-			break;
-		case "And":
-			step = CucumberFactory.eINSTANCE.createAnd();
-			break;
-		case "*":
-			step = CucumberFactory.eINSTANCE.createAsterisk();
-			break;
-		}
+		Step step = CucumberFactory.eINSTANCE.createStep();
 		step.setName(name.substring(keyword.length() + 1));
 		abstractScenario.getSteps().add(step);
 		return step;
