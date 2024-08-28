@@ -17,8 +17,13 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.farhan.cucumber.And;
+import org.farhan.cucumber.Asterisk;
+import org.farhan.cucumber.But;
 import org.farhan.cucumber.Given;
 import org.farhan.cucumber.Step;
+import org.farhan.cucumber.Then;
+import org.farhan.cucumber.When;
 import org.farhan.generator.CucumberOutputConfigurationProvider;
 import org.farhan.generator.StepDefGenerator;
 import org.farhan.validation.StepValidator;
@@ -29,6 +34,42 @@ import org.farhan.validation.StepValidator;
  */
 public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 
+	public void completeGiven_Name(Given step, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeGiven_Name(step, assignment, context, acceptor);
+		completeName(step, assignment, context, acceptor);
+	}
+	
+	public void completeWhen_Name(When step, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeWhen_Name(step, assignment, context, acceptor);
+		completeName(step, assignment, context, acceptor);
+	}
+	
+	public void completeThen_Name(Then step, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeThen_Name(step, assignment, context, acceptor);
+		completeName(step, assignment, context, acceptor);
+	}
+	
+	public void completeAnd_Name(And step, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeAnd_Name(step, assignment, context, acceptor);
+		completeName(step, assignment, context, acceptor);
+	}
+	
+	public void completeBut_Name(But step, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeBut_Name(step, assignment, context, acceptor);
+		completeName(step, assignment, context, acceptor);
+	}
+	
+	public void completeAsterisk_Name(Asterisk step, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeAsterisk_Name(step, assignment, context, acceptor);
+		completeName(step, assignment, context, acceptor);
+	}
+
 	private static void logError(Exception e, String name) {
 		// TODO inject the logger instead
 		System.out.println("There was a problem listing directories for: " + name);
@@ -37,9 +78,9 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 		System.out.println(sw.toString());
 	}
 
-	public void completeGiven_Name(Given step, Assignment assignment, ContentAssistContext context,
+	private void completeName(Step step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeGiven_Name(step, assignment, context, acceptor);
+
 		String component;
 		String object;
 		if (step.getName() == null) {
@@ -59,7 +100,7 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 				}
 				// get a list of applications
 				for (IResource stepDefComponent : getComponents(step)) {
-					acceptor.accept(createCompletionProposal("The " + stepDefComponent.getName() + ", ", context));
+					acceptor.accept(createCompletionProposal("The " + stepDefComponent.getName() + ",", context));
 				}
 			} else {
 				// get a list of objects
