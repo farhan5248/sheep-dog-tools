@@ -51,6 +51,12 @@
     <genClasses ecoreClass="Cucumber.ecore#//DocString">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Cucumber.ecore#//DocString/lines"/>
     </genClasses>
+    <genClasses ecoreClass="Cucumber.ecore#//Given"/>
+    <genClasses ecoreClass="Cucumber.ecore#//When"/>
+    <genClasses ecoreClass="Cucumber.ecore#//Then"/>
+    <genClasses ecoreClass="Cucumber.ecore#//And"/>
+    <genClasses ecoreClass="Cucumber.ecore#//But"/>
+    <genClasses ecoreClass="Cucumber.ecore#//Asterisk"/>
     <genClasses ecoreClass="Cucumber.ecore#//Statement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Cucumber.ecore#//Statement/name"/>
     </genClasses>

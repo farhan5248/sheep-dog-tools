@@ -77,6 +77,12 @@ public class CucumberFactoryImpl extends EFactoryImpl implements CucumberFactory
       case CucumberPackage.CELL: return createCell();
       case CucumberPackage.STEP: return createStep();
       case CucumberPackage.DOC_STRING: return createDocString();
+      case CucumberPackage.GIVEN: return createGiven();
+      case CucumberPackage.WHEN: return createWhen();
+      case CucumberPackage.THEN: return createThen();
+      case CucumberPackage.AND: return createAnd();
+      case CucumberPackage.BUT: return createBut();
+      case CucumberPackage.ASTERISK: return createAsterisk();
       case CucumberPackage.STATEMENT: return createStatement();
       case CucumberPackage.TAG: return createTag();
       case CucumberPackage.LINE: return createLine();
@@ -227,6 +233,78 @@ public class CucumberFactoryImpl extends EFactoryImpl implements CucumberFactory
   {
     DocStringImpl docString = new DocStringImpl();
     return docString;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Given createGiven()
+  {
+    GivenImpl given = new GivenImpl();
+    return given;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public When createWhen()
+  {
+    WhenImpl when = new WhenImpl();
+    return when;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Then createThen()
+  {
+    ThenImpl then = new ThenImpl();
+    return then;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public And createAnd()
+  {
+    AndImpl and = new AndImpl();
+    return and;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public But createBut()
+  {
+    ButImpl but = new ButImpl();
+    return but;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Asterisk createAsterisk()
+  {
+    AsteriskImpl asterisk = new AsteriskImpl();
+    return asterisk;
   }
 
   /**

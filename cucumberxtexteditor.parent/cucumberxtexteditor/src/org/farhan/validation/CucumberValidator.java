@@ -24,6 +24,10 @@ public class CucumberValidator extends AbstractCucumberValidator {
 	@Check(CheckType.FAST)
 	public void checkStepName(Step step) {
 
+		if (step.getName() == null) {
+			// If there's no name set, do nothing.
+			return;
+		}
 		// TODO the quickfix here is to identify which regex is broken and put an
 		// example in place
 		if (!StepValidator.isValid(step.getName())) {

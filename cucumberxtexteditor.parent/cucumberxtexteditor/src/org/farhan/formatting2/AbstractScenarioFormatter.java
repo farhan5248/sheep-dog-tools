@@ -3,10 +3,17 @@ package org.farhan.formatting2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractParserRuleElementFinder;
 import org.farhan.cucumber.AbstractScenario;
+import org.farhan.cucumber.And;
+import org.farhan.cucumber.Asterisk;
+import org.farhan.cucumber.But;
+import org.farhan.cucumber.Given;
 import org.farhan.cucumber.Statement;
 import org.farhan.cucumber.Step;
+import org.farhan.cucumber.Then;
+import org.farhan.cucumber.When;
 import org.farhan.services.CucumberGrammarAccess;
 
 public abstract class AbstractScenarioFormatter extends Formatter {
@@ -15,6 +22,24 @@ public abstract class AbstractScenarioFormatter extends Formatter {
 
 	public AbstractScenarioFormatter(AbstractScenario theAbstractScenario) {
 		this.theAbstractScenario = theAbstractScenario;
+	}
+
+	protected StepFormatter newStepFormatter(Step theStep) {
+		if (theStep instanceof Given) {
+			return new GivenFormatter((Given) theStep);
+		} else if (theStep instanceof When) {
+			return new WhenFormatter((When) theStep);
+		} else if (theStep instanceof Then) {
+			return new ThenFormatter((Then) theStep);
+		} else if (theStep instanceof And) {
+			return new AndFormatter((And) theStep);
+		} else if (theStep instanceof But) {
+			return new ButFormatter((But) theStep);
+		} else if (theStep instanceof Asterisk) {
+			return new AsteriskFormatter((Asterisk) theStep);
+		} else {
+			return null;
+		}
 	}
 
 	protected abstract AbstractParserRuleElementFinder getAccess(CucumberGrammarAccess ga);
@@ -43,7 +68,7 @@ public abstract class AbstractScenarioFormatter extends Formatter {
 			formatter.format(doc, ga, df);
 		}
 		for (Step s : theAbstractScenario.getSteps()) {
-			StepFormatter formatter = new StepFormatter(s);
+			StepFormatter formatter = newStepFormatter(s);
 			formatter.isLast(isLastElement(s, theAbstractScenario.getSteps()));
 			formatter.setIndent(4);
 			formatter.isLastEOLDouble(s.getTheStepTable() == null && s.getTheDocString() == null);

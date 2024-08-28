@@ -1,6 +1,5 @@
 package org.farhan.formatting2;
 
-import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
@@ -8,9 +7,8 @@ import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractParserRuleElementFinder;
 import org.farhan.cucumber.Step;
 import org.farhan.services.CucumberGrammarAccess;
-import org.farhan.services.CucumberGrammarAccess.StepElements;
 
-public class StepFormatter extends Formatter {
+public abstract class StepFormatter extends Formatter {
 
 	protected Step theStep;
 
@@ -18,27 +16,15 @@ public class StepFormatter extends Formatter {
 		this.theStep = theStep;
 	}
 
-	protected AbstractParserRuleElementFinder getAccess(CucumberGrammarAccess ga) {
-		return ga.getStepAccess();
-	}
+	protected abstract void formatKeyword(ISemanticRegion iSR, IFormattableDocument doc);
 
-	protected Alternatives getKeyword(AbstractParserRuleElementFinder a) {
-		return ((StepElements) a).getAlternatives_0();
-	}
+	protected abstract AbstractParserRuleElementFinder getAccess(CucumberGrammarAccess ga);
 
-	protected RuleCall getEOLRuleCall(AbstractParserRuleElementFinder a) {
-		return ((StepElements) a).getEOLTerminalRuleCall_2();
-	}
+	protected abstract Keyword getKeyword(AbstractParserRuleElementFinder a);
 
-	protected RuleCall getPhraseRuleCall(AbstractParserRuleElementFinder a) {
-		return ((StepElements) a).getNamePhraseParserRuleCall_1_0();
-	}
+	protected abstract RuleCall getEOLRuleCall(AbstractParserRuleElementFinder a);
 
-	protected void formatKeyword(ISemanticRegion iSR, IFormattableDocument doc) {
-		doc.prepend(iSR, it -> it.noSpace());
-		doc.append(iSR, it -> it.noSpace());
-		replace(doc, iSR, getIndent() + indent.repeat(5 - iSR.getText().length()) + iSR.getText() + " ");
-	}
+	protected abstract RuleCall getPhraseRuleCall(AbstractParserRuleElementFinder a);
 
 	public void format(IFormattableDocument doc, CucumberGrammarAccess ga, CucumberFormatter df) {
 

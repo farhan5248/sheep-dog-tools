@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.farhan.cucumber.Given;
 import org.farhan.cucumber.Step;
 import org.farhan.generator.CucumberOutputConfigurationProvider;
 import org.farhan.generator.StepDefGenerator;
@@ -36,9 +37,9 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 		System.out.println(sw.toString());
 	}
 
-	public void completeStep_Name(Step step, Assignment assignment, ContentAssistContext context,
+	public void completeGiven_Name(Given step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeStep_Name(step, assignment, context, acceptor);
+		super.completeGiven_Name(step, assignment, context, acceptor);
 		String component;
 		String object;
 		if (step.getName() == null) {

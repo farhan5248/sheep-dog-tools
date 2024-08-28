@@ -820,96 +820,59 @@ ruleStep returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		(
-			otherlv_0='Given'
-			{
-				newLeafNode(otherlv_0, grammarAccess.getStepAccess().getGivenKeyword_0_0());
-			}
-			    |
-			otherlv_1='When'
-			{
-				newLeafNode(otherlv_1, grammarAccess.getStepAccess().getWhenKeyword_0_1());
-			}
-			    |
-			otherlv_2='Then'
-			{
-				newLeafNode(otherlv_2, grammarAccess.getStepAccess().getThenKeyword_0_2());
-			}
-			    |
-			otherlv_3='And'
-			{
-				newLeafNode(otherlv_3, grammarAccess.getStepAccess().getAndKeyword_0_3());
-			}
-			    |
-			otherlv_4='*'
-			{
-				newLeafNode(otherlv_4, grammarAccess.getStepAccess().getAsteriskKeyword_0_4());
-			}
-		)
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getStepAccess().getNamePhraseParserRuleCall_1_0());
-				}
-				lv_name_5_0=rulePhrase
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getStepRule());
-					}
-					set(
-						$current,
-						"name",
-						lv_name_5_0,
-						"org.farhan.Cucumber.Phrase");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)
-		this_EOL_6=RULE_EOL
 		{
-			newLeafNode(this_EOL_6, grammarAccess.getStepAccess().getEOLTerminalRuleCall_2());
+			newCompositeNode(grammarAccess.getStepAccess().getGivenParserRuleCall_0());
 		}
-		(
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getStepAccess().getTheStepTableStepTableParserRuleCall_3_0_0());
-					}
-					lv_theStepTable_7_0=ruleStepTable
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getStepRule());
-						}
-						set(
-							$current,
-							"theStepTable",
-							lv_theStepTable_7_0,
-							"org.farhan.Cucumber.StepTable");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-			    |
-			(
-				(
-					{
-						newCompositeNode(grammarAccess.getStepAccess().getTheDocStringDocStringParserRuleCall_3_1_0());
-					}
-					lv_theDocString_8_0=ruleDocString
-					{
-						if ($current==null) {
-							$current = createModelElementForParent(grammarAccess.getStepRule());
-						}
-						set(
-							$current,
-							"theDocString",
-							lv_theDocString_8_0,
-							"org.farhan.Cucumber.DocString");
-						afterParserOrEnumRuleCall();
-					}
-				)
-			)
-		)?
+		this_Given_0=ruleGiven
+		{
+			$current = $this_Given_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getStepAccess().getWhenParserRuleCall_1());
+		}
+		this_When_1=ruleWhen
+		{
+			$current = $this_When_1.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getStepAccess().getThenParserRuleCall_2());
+		}
+		this_Then_2=ruleThen
+		{
+			$current = $this_Then_2.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getStepAccess().getAndParserRuleCall_3());
+		}
+		this_And_3=ruleAnd
+		{
+			$current = $this_And_3.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getStepAccess().getButParserRuleCall_4());
+		}
+		this_But_4=ruleBut
+		{
+			$current = $this_But_4.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getStepAccess().getAsteriskParserRuleCall_5());
+		}
+		this_Asterisk_5=ruleAsterisk
+		{
+			$current = $this_Asterisk_5.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 
@@ -964,6 +927,528 @@ ruleDocString returns [EObject current=null]
 		{
 			newLeafNode(this_EOL_4, grammarAccess.getDocStringAccess().getEOLTerminalRuleCall_4());
 		}
+	)
+;
+
+// Entry rule entryRuleGiven
+entryRuleGiven returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getGivenRule()); }
+	iv_ruleGiven=ruleGiven
+	{ $current=$iv_ruleGiven.current; }
+	EOF;
+
+// Rule Given
+ruleGiven returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='Given'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getGivenAccess().getGivenKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getGivenAccess().getNamePhraseParserRuleCall_1_0());
+				}
+				lv_name_1_0=rulePhrase
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getGivenRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.farhan.Cucumber.Phrase");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		this_EOL_2=RULE_EOL
+		{
+			newLeafNode(this_EOL_2, grammarAccess.getGivenAccess().getEOLTerminalRuleCall_2());
+		}
+		(
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getGivenAccess().getTheStepTableStepTableParserRuleCall_3_0_0());
+					}
+					lv_theStepTable_3_0=ruleStepTable
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getGivenRule());
+						}
+						set(
+							$current,
+							"theStepTable",
+							lv_theStepTable_3_0,
+							"org.farhan.Cucumber.StepTable");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getGivenAccess().getTheDocStringDocStringParserRuleCall_3_1_0());
+					}
+					lv_theDocString_4_0=ruleDocString
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getGivenRule());
+						}
+						set(
+							$current,
+							"theDocString",
+							lv_theDocString_4_0,
+							"org.farhan.Cucumber.DocString");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+	)
+;
+
+// Entry rule entryRuleWhen
+entryRuleWhen returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getWhenRule()); }
+	iv_ruleWhen=ruleWhen
+	{ $current=$iv_ruleWhen.current; }
+	EOF;
+
+// Rule When
+ruleWhen returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='When'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getWhenAccess().getWhenKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getWhenAccess().getNamePhraseParserRuleCall_1_0());
+				}
+				lv_name_1_0=rulePhrase
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getWhenRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.farhan.Cucumber.Phrase");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		this_EOL_2=RULE_EOL
+		{
+			newLeafNode(this_EOL_2, grammarAccess.getWhenAccess().getEOLTerminalRuleCall_2());
+		}
+		(
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getWhenAccess().getTheStepTableStepTableParserRuleCall_3_0_0());
+					}
+					lv_theStepTable_3_0=ruleStepTable
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getWhenRule());
+						}
+						set(
+							$current,
+							"theStepTable",
+							lv_theStepTable_3_0,
+							"org.farhan.Cucumber.StepTable");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getWhenAccess().getTheDocStringDocStringParserRuleCall_3_1_0());
+					}
+					lv_theDocString_4_0=ruleDocString
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getWhenRule());
+						}
+						set(
+							$current,
+							"theDocString",
+							lv_theDocString_4_0,
+							"org.farhan.Cucumber.DocString");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+	)
+;
+
+// Entry rule entryRuleThen
+entryRuleThen returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getThenRule()); }
+	iv_ruleThen=ruleThen
+	{ $current=$iv_ruleThen.current; }
+	EOF;
+
+// Rule Then
+ruleThen returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='Then'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getThenAccess().getThenKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getThenAccess().getNamePhraseParserRuleCall_1_0());
+				}
+				lv_name_1_0=rulePhrase
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getThenRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.farhan.Cucumber.Phrase");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		this_EOL_2=RULE_EOL
+		{
+			newLeafNode(this_EOL_2, grammarAccess.getThenAccess().getEOLTerminalRuleCall_2());
+		}
+		(
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getThenAccess().getTheStepTableStepTableParserRuleCall_3_0_0());
+					}
+					lv_theStepTable_3_0=ruleStepTable
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getThenRule());
+						}
+						set(
+							$current,
+							"theStepTable",
+							lv_theStepTable_3_0,
+							"org.farhan.Cucumber.StepTable");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getThenAccess().getTheDocStringDocStringParserRuleCall_3_1_0());
+					}
+					lv_theDocString_4_0=ruleDocString
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getThenRule());
+						}
+						set(
+							$current,
+							"theDocString",
+							lv_theDocString_4_0,
+							"org.farhan.Cucumber.DocString");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+	)
+;
+
+// Entry rule entryRuleAnd
+entryRuleAnd returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getAndRule()); }
+	iv_ruleAnd=ruleAnd
+	{ $current=$iv_ruleAnd.current; }
+	EOF;
+
+// Rule And
+ruleAnd returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='And'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getAndAccess().getAndKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getAndAccess().getNamePhraseParserRuleCall_1_0());
+				}
+				lv_name_1_0=rulePhrase
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getAndRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.farhan.Cucumber.Phrase");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		this_EOL_2=RULE_EOL
+		{
+			newLeafNode(this_EOL_2, grammarAccess.getAndAccess().getEOLTerminalRuleCall_2());
+		}
+		(
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getAndAccess().getTheStepTableStepTableParserRuleCall_3_0_0());
+					}
+					lv_theStepTable_3_0=ruleStepTable
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getAndRule());
+						}
+						set(
+							$current,
+							"theStepTable",
+							lv_theStepTable_3_0,
+							"org.farhan.Cucumber.StepTable");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getAndAccess().getTheDocStringDocStringParserRuleCall_3_1_0());
+					}
+					lv_theDocString_4_0=ruleDocString
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getAndRule());
+						}
+						set(
+							$current,
+							"theDocString",
+							lv_theDocString_4_0,
+							"org.farhan.Cucumber.DocString");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+	)
+;
+
+// Entry rule entryRuleBut
+entryRuleBut returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getButRule()); }
+	iv_ruleBut=ruleBut
+	{ $current=$iv_ruleBut.current; }
+	EOF;
+
+// Rule But
+ruleBut returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='But'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getButAccess().getButKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getButAccess().getNamePhraseParserRuleCall_1_0());
+				}
+				lv_name_1_0=rulePhrase
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getButRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.farhan.Cucumber.Phrase");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		this_EOL_2=RULE_EOL
+		{
+			newLeafNode(this_EOL_2, grammarAccess.getButAccess().getEOLTerminalRuleCall_2());
+		}
+		(
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getButAccess().getTheStepTableStepTableParserRuleCall_3_0_0());
+					}
+					lv_theStepTable_3_0=ruleStepTable
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getButRule());
+						}
+						set(
+							$current,
+							"theStepTable",
+							lv_theStepTable_3_0,
+							"org.farhan.Cucumber.StepTable");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getButAccess().getTheDocStringDocStringParserRuleCall_3_1_0());
+					}
+					lv_theDocString_4_0=ruleDocString
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getButRule());
+						}
+						set(
+							$current,
+							"theDocString",
+							lv_theDocString_4_0,
+							"org.farhan.Cucumber.DocString");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
+	)
+;
+
+// Entry rule entryRuleAsterisk
+entryRuleAsterisk returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getAsteriskRule()); }
+	iv_ruleAsterisk=ruleAsterisk
+	{ $current=$iv_ruleAsterisk.current; }
+	EOF;
+
+// Rule Asterisk
+ruleAsterisk returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='*'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getAsteriskAccess().getAsteriskKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getAsteriskAccess().getNamePhraseParserRuleCall_1_0());
+				}
+				lv_name_1_0=rulePhrase
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getAsteriskRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.farhan.Cucumber.Phrase");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		this_EOL_2=RULE_EOL
+		{
+			newLeafNode(this_EOL_2, grammarAccess.getAsteriskAccess().getEOLTerminalRuleCall_2());
+		}
+		(
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getAsteriskAccess().getTheStepTableStepTableParserRuleCall_3_0_0());
+					}
+					lv_theStepTable_3_0=ruleStepTable
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getAsteriskRule());
+						}
+						set(
+							$current,
+							"theStepTable",
+							lv_theStepTable_3_0,
+							"org.farhan.Cucumber.StepTable");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			    |
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getAsteriskAccess().getTheDocStringDocStringParserRuleCall_3_1_0());
+					}
+					lv_theDocString_4_0=ruleDocString
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getAsteriskRule());
+						}
+						set(
+							$current,
+							"theDocString",
+							lv_theDocString_4_0,
+							"org.farhan.Cucumber.DocString");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)?
 	)
 ;
 

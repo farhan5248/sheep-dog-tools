@@ -565,6 +565,282 @@ public interface CucumberPackage extends EPackage
   int DOC_STRING_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.farhan.cucumber.impl.GivenImpl <em>Given</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.farhan.cucumber.impl.GivenImpl
+   * @see org.farhan.cucumber.impl.CucumberPackageImpl#getGiven()
+   * @generated
+   */
+  int GIVEN = 12;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GIVEN__NAME = STEP__NAME;
+
+  /**
+   * The feature id for the '<em><b>The Step Table</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GIVEN__THE_STEP_TABLE = STEP__THE_STEP_TABLE;
+
+  /**
+   * The feature id for the '<em><b>The Doc String</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GIVEN__THE_DOC_STRING = STEP__THE_DOC_STRING;
+
+  /**
+   * The number of structural features of the '<em>Given</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GIVEN_FEATURE_COUNT = STEP_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.farhan.cucumber.impl.WhenImpl <em>When</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.farhan.cucumber.impl.WhenImpl
+   * @see org.farhan.cucumber.impl.CucumberPackageImpl#getWhen()
+   * @generated
+   */
+  int WHEN = 13;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WHEN__NAME = STEP__NAME;
+
+  /**
+   * The feature id for the '<em><b>The Step Table</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WHEN__THE_STEP_TABLE = STEP__THE_STEP_TABLE;
+
+  /**
+   * The feature id for the '<em><b>The Doc String</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WHEN__THE_DOC_STRING = STEP__THE_DOC_STRING;
+
+  /**
+   * The number of structural features of the '<em>When</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WHEN_FEATURE_COUNT = STEP_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.farhan.cucumber.impl.ThenImpl <em>Then</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.farhan.cucumber.impl.ThenImpl
+   * @see org.farhan.cucumber.impl.CucumberPackageImpl#getThen()
+   * @generated
+   */
+  int THEN = 14;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int THEN__NAME = STEP__NAME;
+
+  /**
+   * The feature id for the '<em><b>The Step Table</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int THEN__THE_STEP_TABLE = STEP__THE_STEP_TABLE;
+
+  /**
+   * The feature id for the '<em><b>The Doc String</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int THEN__THE_DOC_STRING = STEP__THE_DOC_STRING;
+
+  /**
+   * The number of structural features of the '<em>Then</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int THEN_FEATURE_COUNT = STEP_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.farhan.cucumber.impl.AndImpl <em>And</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.farhan.cucumber.impl.AndImpl
+   * @see org.farhan.cucumber.impl.CucumberPackageImpl#getAnd()
+   * @generated
+   */
+  int AND = 15;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AND__NAME = STEP__NAME;
+
+  /**
+   * The feature id for the '<em><b>The Step Table</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AND__THE_STEP_TABLE = STEP__THE_STEP_TABLE;
+
+  /**
+   * The feature id for the '<em><b>The Doc String</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AND__THE_DOC_STRING = STEP__THE_DOC_STRING;
+
+  /**
+   * The number of structural features of the '<em>And</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AND_FEATURE_COUNT = STEP_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.farhan.cucumber.impl.ButImpl <em>But</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.farhan.cucumber.impl.ButImpl
+   * @see org.farhan.cucumber.impl.CucumberPackageImpl#getBut()
+   * @generated
+   */
+  int BUT = 16;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUT__NAME = STEP__NAME;
+
+  /**
+   * The feature id for the '<em><b>The Step Table</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUT__THE_STEP_TABLE = STEP__THE_STEP_TABLE;
+
+  /**
+   * The feature id for the '<em><b>The Doc String</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUT__THE_DOC_STRING = STEP__THE_DOC_STRING;
+
+  /**
+   * The number of structural features of the '<em>But</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUT_FEATURE_COUNT = STEP_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.farhan.cucumber.impl.AsteriskImpl <em>Asterisk</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.farhan.cucumber.impl.AsteriskImpl
+   * @see org.farhan.cucumber.impl.CucumberPackageImpl#getAsterisk()
+   * @generated
+   */
+  int ASTERISK = 17;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASTERISK__NAME = STEP__NAME;
+
+  /**
+   * The feature id for the '<em><b>The Step Table</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASTERISK__THE_STEP_TABLE = STEP__THE_STEP_TABLE;
+
+  /**
+   * The feature id for the '<em><b>The Doc String</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASTERISK__THE_DOC_STRING = STEP__THE_DOC_STRING;
+
+  /**
+   * The number of structural features of the '<em>Asterisk</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASTERISK_FEATURE_COUNT = STEP_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link org.farhan.cucumber.impl.StatementImpl <em>Statement</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -572,7 +848,7 @@ public interface CucumberPackage extends EPackage
    * @see org.farhan.cucumber.impl.CucumberPackageImpl#getStatement()
    * @generated
    */
-  int STATEMENT = 12;
+  int STATEMENT = 18;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -600,7 +876,7 @@ public interface CucumberPackage extends EPackage
    * @see org.farhan.cucumber.impl.CucumberPackageImpl#getTag()
    * @generated
    */
-  int TAG = 13;
+  int TAG = 19;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -628,7 +904,7 @@ public interface CucumberPackage extends EPackage
    * @see org.farhan.cucumber.impl.CucumberPackageImpl#getLine()
    * @generated
    */
-  int LINE = 14;
+  int LINE = 20;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1012,6 +1288,66 @@ public interface CucumberPackage extends EPackage
   EReference getDocString_Lines();
 
   /**
+   * Returns the meta object for class '{@link org.farhan.cucumber.Given <em>Given</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Given</em>'.
+   * @see org.farhan.cucumber.Given
+   * @generated
+   */
+  EClass getGiven();
+
+  /**
+   * Returns the meta object for class '{@link org.farhan.cucumber.When <em>When</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>When</em>'.
+   * @see org.farhan.cucumber.When
+   * @generated
+   */
+  EClass getWhen();
+
+  /**
+   * Returns the meta object for class '{@link org.farhan.cucumber.Then <em>Then</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Then</em>'.
+   * @see org.farhan.cucumber.Then
+   * @generated
+   */
+  EClass getThen();
+
+  /**
+   * Returns the meta object for class '{@link org.farhan.cucumber.And <em>And</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>And</em>'.
+   * @see org.farhan.cucumber.And
+   * @generated
+   */
+  EClass getAnd();
+
+  /**
+   * Returns the meta object for class '{@link org.farhan.cucumber.But <em>But</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>But</em>'.
+   * @see org.farhan.cucumber.But
+   * @generated
+   */
+  EClass getBut();
+
+  /**
+   * Returns the meta object for class '{@link org.farhan.cucumber.Asterisk <em>Asterisk</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Asterisk</em>'.
+   * @see org.farhan.cucumber.Asterisk
+   * @generated
+   */
+  EClass getAsterisk();
+
+  /**
    * Returns the meta object for class '{@link org.farhan.cucumber.Statement <em>Statement</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1392,6 +1728,66 @@ public interface CucumberPackage extends EPackage
      * @generated
      */
     EReference DOC_STRING__LINES = eINSTANCE.getDocString_Lines();
+
+    /**
+     * The meta object literal for the '{@link org.farhan.cucumber.impl.GivenImpl <em>Given</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.farhan.cucumber.impl.GivenImpl
+     * @see org.farhan.cucumber.impl.CucumberPackageImpl#getGiven()
+     * @generated
+     */
+    EClass GIVEN = eINSTANCE.getGiven();
+
+    /**
+     * The meta object literal for the '{@link org.farhan.cucumber.impl.WhenImpl <em>When</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.farhan.cucumber.impl.WhenImpl
+     * @see org.farhan.cucumber.impl.CucumberPackageImpl#getWhen()
+     * @generated
+     */
+    EClass WHEN = eINSTANCE.getWhen();
+
+    /**
+     * The meta object literal for the '{@link org.farhan.cucumber.impl.ThenImpl <em>Then</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.farhan.cucumber.impl.ThenImpl
+     * @see org.farhan.cucumber.impl.CucumberPackageImpl#getThen()
+     * @generated
+     */
+    EClass THEN = eINSTANCE.getThen();
+
+    /**
+     * The meta object literal for the '{@link org.farhan.cucumber.impl.AndImpl <em>And</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.farhan.cucumber.impl.AndImpl
+     * @see org.farhan.cucumber.impl.CucumberPackageImpl#getAnd()
+     * @generated
+     */
+    EClass AND = eINSTANCE.getAnd();
+
+    /**
+     * The meta object literal for the '{@link org.farhan.cucumber.impl.ButImpl <em>But</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.farhan.cucumber.impl.ButImpl
+     * @see org.farhan.cucumber.impl.CucumberPackageImpl#getBut()
+     * @generated
+     */
+    EClass BUT = eINSTANCE.getBut();
+
+    /**
+     * The meta object literal for the '{@link org.farhan.cucumber.impl.AsteriskImpl <em>Asterisk</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.farhan.cucumber.impl.AsteriskImpl
+     * @see org.farhan.cucumber.impl.CucumberPackageImpl#getAsterisk()
+     * @generated
+     */
+    EClass ASTERISK = eINSTANCE.getAsterisk();
 
     /**
      * The meta object literal for the '{@link org.farhan.cucumber.impl.StatementImpl <em>Statement</em>}' class.
