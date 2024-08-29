@@ -6,7 +6,16 @@
 	<artifactId>sheep-dog-test</artifactId>
 	<version>1.1-SNAPSHOT</version>
 	<name>Lean Sheep Dog Tools for Testers</name>
-	<description>Transforms test cases to models and vice-versa</description>
+	<description>There's 4 reasons for this project
+		1. To demonstrate how to include a jar in an xtext jar.
+		2. To demonstrate how to pass on the jar through the xtext one into a
+		maven project.
+		3. Separate the core logic used between xtext projects to implement
+		content assist, validation and code generation.
+		4. To have BDD like tests using Cucumber for that logic. The aim of this
+		Git project is to make the bar to entry as low as possible for Xtext so
+		I'm avoiding the use of their own testing framework.
+	</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

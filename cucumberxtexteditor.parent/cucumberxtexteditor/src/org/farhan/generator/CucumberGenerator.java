@@ -39,6 +39,7 @@ import org.farhan.cucumber.Row;
 import org.farhan.cucumber.ScenarioOutline;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.StepTable;
+import org.farhan.helper.StepDefinitionHelper;
 
 /**
  * Generates code from your model files on save.
@@ -63,7 +64,7 @@ public class CucumberGenerator implements IGenerator2 {
 		for (AbstractScenario scenario : theFeature.getAbstractScenarios()) {
 			HashMap<String, String> objects = new HashMap<String, String>();
 			for (Step step : scenario.getSteps()) {
-				StepDefGenerator.generate(step);
+				StepDefinitionHelper.generate(step);
 			}
 		}
 	}

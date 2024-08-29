@@ -1,9 +1,9 @@
-package org.farhan.validation;
+package org.farhan.helper;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StepValidator {
+public class StepHelper {
 
 	private static final String NAME_REGEX = "[^,]";
 	private static final String COMPONENT_REGEX = "(( " + NAME_REGEX + "+)( application| service| plugin| batchjob),)?";

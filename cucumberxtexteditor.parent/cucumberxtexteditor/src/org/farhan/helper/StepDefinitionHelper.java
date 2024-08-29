@@ -1,4 +1,4 @@
-package org.farhan.generator;
+package org.farhan.helper;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -23,9 +23,9 @@ import org.farhan.cucumber.Row;
 import org.farhan.cucumber.ScenarioOutline;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.StepTable;
-import org.farhan.validation.StepValidator;
+import org.farhan.generator.CucumberOutputConfigurationProvider;
 
-public class StepDefGenerator {
+public class StepDefinitionHelper {
 
 	private static void logError(Exception e, Step step) {
 		// TODO inject the logger instead
@@ -45,7 +45,7 @@ public class StepDefGenerator {
 				// TODO until the step definitions only keep the predicate, both the object
 				// alone and the object with its path need to be suggested so that the prefix
 				// matches
-				String object = StepValidator.getObject(aStep.getName());
+				String object = StepHelper.getObject(aStep.getName());
 				previousObjects.add(object);
 				String[] objectParts = object.split("/");
 				previousObjects.add(objectParts[objectParts.length - 1]);
@@ -60,7 +60,7 @@ public class StepDefGenerator {
 		if (new ResourceSetImpl().getURIConverter().exists(objectURI, null)) {
 			try {
 				Resource theResource = getOrCreateResource(objectURI);
-				Feature theObject = getOrCreateObject(theResource, StepValidator.getObject(step.getName()));
+				Feature theObject = getOrCreateObject(theResource, StepHelper.getObject(step.getName()));
 				for (AbstractScenario stepDef : theObject.getAbstractScenarios()) {
 					objectDefinitions.add(stepDef.getName());
 				}
@@ -80,7 +80,7 @@ public class StepDefGenerator {
 			}
 			// check if the keyword exists
 			Resource theResource = getOrCreateResource(objectURI);
-			Feature theObject = getOrCreateObject(theResource, StepValidator.getObject(step.getName()));
+			Feature theObject = getOrCreateObject(theResource, StepHelper.getObject(step.getName()));
 			AbstractScenario theStepDef = getStepDef(theObject, step);
 			if (theStepDef == null) {
 				return "This object step definition doesn't exist for: " + objectURI.path();
@@ -102,7 +102,7 @@ public class StepDefGenerator {
 		try {
 			URI objectURI = getObjectURI(step);
 			Resource theResource = getOrCreateResource(objectURI);
-			Feature theObject = getOrCreateObject(theResource, StepValidator.getObject(step.getName()));
+			Feature theObject = getOrCreateObject(theResource, StepHelper.getObject(step.getName()));
 			AbstractScenario theStepDef = getOrCreateStepDef(theObject, step);
 			EList<Cell> headers = getHeader(step);
 			if (headers != null) {
@@ -130,8 +130,8 @@ public class StepDefGenerator {
 	}
 
 	private static String getObjectQualifiedName(Step step) {
-		String component = StepValidator.getComponent(step.getName());
-		String object = StepValidator.getObject(step.getName());
+		String component = StepHelper.getComponent(step.getName());
+		String object = StepHelper.getObject(step.getName());
 
 		// if there is a component and the object has a /, we're done
 		if (!component.isEmpty() && object.contains("/")) {
@@ -147,8 +147,8 @@ public class StepDefGenerator {
 			} else {
 				previousSteps.add(0, aStep);
 				// keep track of the last component to assign to undeclared object components
-				if (!StepValidator.getComponent(aStep.getName()).isEmpty()) {
-					lastComponent = StepValidator.getComponent(aStep.getName());
+				if (!StepHelper.getComponent(aStep.getName()).isEmpty()) {
+					lastComponent = StepHelper.getComponent(aStep.getName());
 				}
 			}
 		}
@@ -158,8 +158,8 @@ public class StepDefGenerator {
 		String objectKey = objectParts[objectParts.length - 1];
 		for (Step previousStep : previousSteps) {
 			// if the step has a matching object
-			String previousObject = StepValidator.getObject(previousStep.getName());
-			String previousComponent = StepValidator.getComponent(previousStep.getName());
+			String previousObject = StepHelper.getObject(previousStep.getName());
+			String previousComponent = StepHelper.getComponent(previousStep.getName());
 			if (previousObject.endsWith(objectKey)) {
 
 				// if the object doesn't have / and the matching object does. Set it

@@ -25,8 +25,8 @@ import org.farhan.cucumber.Step;
 import org.farhan.cucumber.Then;
 import org.farhan.cucumber.When;
 import org.farhan.generator.CucumberOutputConfigurationProvider;
-import org.farhan.generator.StepDefGenerator;
-import org.farhan.validation.StepValidator;
+import org.farhan.helper.StepDefinitionHelper;
+import org.farhan.helper.StepHelper;
 
 /**
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
@@ -87,14 +87,14 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 			component = "";
 			object = "";
 		} else {
-			component = StepValidator.getComponent(step.getName());
-			object = StepValidator.getObject(step.getName());
+			component = StepHelper.getComponent(step.getName());
+			object = StepHelper.getObject(step.getName());
 		}
 		if (object.isEmpty()) {
 			// if there's no object do the following
 			if (component.isEmpty()) {
 				// get a list of previous objects
-				TreeSet<String> previousObjects = StepDefGenerator.getPreviousObjects(step);
+				TreeSet<String> previousObjects = StepDefinitionHelper.getPreviousObjects(step);
 				for (String previousObject : previousObjects) {
 					acceptor.accept(createCompletionProposal("The " + previousObject, context));
 				}
@@ -116,7 +116,7 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 			}
 		} else {
 			// else if there's an object get a list of keywords for the suggestions
-			for (String stepDef : StepDefGenerator.getObjectDefinitions(step)) {
+			for (String stepDef : StepDefinitionHelper.getObjectDefinitions(step)) {
 				// TODO maybe step defs shouldn't need the component and object parts, just the
 				// section and predicate
 				acceptor.accept(createCompletionProposal(stepDef, context));

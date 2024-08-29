@@ -11,7 +11,8 @@ import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.StepTable;
-import org.farhan.generator.StepDefGenerator;
+import org.farhan.helper.StepDefinitionHelper;
+import org.farhan.helper.StepHelper;
 
 public class CucumberValidator extends AbstractCucumberValidator {
 
@@ -30,14 +31,14 @@ public class CucumberValidator extends AbstractCucumberValidator {
 		}
 		// TODO the quickfix here is to identify which regex is broken and put an
 		// example in place
-		if (!StepValidator.isValid(step.getName())) {
+		if (!StepHelper.isValid(step.getName())) {
 			// TODO instead of this error message, give the parts breakdown to see what's
 			// missing
-			error(StepValidator.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
+			error(StepHelper.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
 		} else {
 			// if it's valid, then check if the the step def exists, if not call the
 			// generator in the quick fix
-			String problems = StepDefGenerator.getProblems(step);
+			String problems = StepDefinitionHelper.getProblems(step);
 			if (!problems.isEmpty()) {
 				warning(problems, CucumberPackage.Literals.STEP__NAME, MISSING_STEP_DEF, step.getName());
 			}
