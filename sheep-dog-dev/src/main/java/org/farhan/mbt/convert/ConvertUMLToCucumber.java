@@ -20,7 +20,7 @@ import org.farhan.mbt.cucumber.CucumberJavaWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
-import org.farhan.validation.StepValidator;
+import org.farhan.helper.StepHelper;
 
 public class ConvertUMLToCucumber extends MojoGoal {
 
@@ -119,7 +119,7 @@ public class ConvertUMLToCucumber extends MojoGoal {
 	}
 
 	private String getComponentName(String step) {
-		String name = StepValidator.getComponentName(step);
+		String name = StepHelper.getComponentName(step);
 		if (name.isEmpty()) {
 			name = lastComponent;
 		} else {
@@ -137,7 +137,7 @@ public class ConvertUMLToCucumber extends MojoGoal {
 	}
 
 	private String getObjectName(String step) {
-		String name = StepValidator.getObjectName(step);
+		String name = StepHelper.getObjectName(step);
 		String nameParts[] = name.split("/");
 		name = nameParts[nameParts.length - 1];
 		name = Utilities.removeDelimiterAndCapitalize(name, "\\.");
@@ -149,7 +149,7 @@ public class ConvertUMLToCucumber extends MojoGoal {
 
 	private String getStepDefName(String stepName) {
 		String objectName = getObjectName(stepName);
-		String objectType = Utilities.upperFirst(StepValidator.getObjectType(stepName));
+		String objectType = Utilities.upperFirst(StepHelper.getObjectType(stepName));
 		String componentName = getComponentName(stepName);
 		return tgtPrj.getDir(ConvertibleProject.SECOND_LAYER) + File.separator + componentName.toLowerCase()
 				+ File.separator + Utilities.upperFirst(componentName) + objectName + objectType + "Steps.java";
@@ -157,7 +157,7 @@ public class ConvertUMLToCucumber extends MojoGoal {
 
 	private String getStepObjName(String stepName) {
 		String objectName = getObjectName(stepName);
-		String objectType = Utilities.upperFirst(StepValidator.getObjectType(stepName));
+		String objectType = Utilities.upperFirst(StepHelper.getObjectType(stepName));
 		String componentName = getComponentName(stepName);
 		return tgtPrj.getDir(ConvertibleProject.THIRD_LAYER) + File.separator + componentName.toLowerCase()
 				+ File.separator + objectName + objectType + ".java";
