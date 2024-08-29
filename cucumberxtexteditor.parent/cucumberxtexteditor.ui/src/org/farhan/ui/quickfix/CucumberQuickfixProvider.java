@@ -14,6 +14,7 @@ import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
 import org.farhan.cucumber.Step;
+import org.farhan.helper.FileAccessImpl;
 import org.farhan.helper.StepDefinitionHelper;
 import org.farhan.validation.CucumberValidator;
 
@@ -29,9 +30,10 @@ public class CucumberQuickfixProvider extends DefaultQuickfixProvider {
 
 		acceptor.accept(issue, "Generate step def", "Generate step def.", "upcase.png", new IModification() {
 			public void apply(IModificationContext context) throws BadLocationException {
+				FileAccessImpl fa = new FileAccessImpl();
 				Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
 				Step step = (Step) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
-				StepDefinitionHelper.generate(step);
+				StepDefinitionHelper.generate(fa, step);
 			}
 		});
 	}

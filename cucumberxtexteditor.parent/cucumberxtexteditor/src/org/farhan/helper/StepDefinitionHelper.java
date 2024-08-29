@@ -35,7 +35,7 @@ public class StepDefinitionHelper {
 		System.out.println(sw.toString());
 	}
 
-	public static TreeSet<String> getPreviousObjects(Step step) {
+	public static TreeSet<String> getPreviousObjects(FileAccessImpl fa, Step step) {
 		AbstractScenario as = (AbstractScenario) step.eContainer();
 		TreeSet<String> previousObjects = new TreeSet<String>();
 		for (Step aStep : as.getSteps()) {
@@ -54,7 +54,7 @@ public class StepDefinitionHelper {
 		return previousObjects;
 	}
 
-	public static TreeSet<String> getObjectDefinitions(Step step) {
+	public static TreeSet<String> getObjectDefinitions(FileAccessImpl fa, Step step) {
 		TreeSet<String> objectDefinitions = new TreeSet<String>();
 		URI objectURI = getObjectURI(step);
 		if (new ResourceSetImpl().getURIConverter().exists(objectURI, null)) {
@@ -71,7 +71,7 @@ public class StepDefinitionHelper {
 		return objectDefinitions;
 	}
 
-	public static String getProblems(Step step) {
+	public static String getProblems(FileAccessImpl fa, Step step) {
 		try {
 			// check if the object exists
 			URI objectURI = getObjectURI(step);
@@ -98,7 +98,7 @@ public class StepDefinitionHelper {
 		return "";
 	}
 
-	public static void generate(Step step) {
+	public static void generate(FileAccessImpl fa, Step step) {
 		try {
 			URI objectURI = getObjectURI(step);
 			Resource theResource = getOrCreateResource(objectURI);

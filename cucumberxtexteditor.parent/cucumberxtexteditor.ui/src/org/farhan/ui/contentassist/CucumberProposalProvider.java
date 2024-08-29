@@ -25,6 +25,7 @@ import org.farhan.cucumber.Step;
 import org.farhan.cucumber.Then;
 import org.farhan.cucumber.When;
 import org.farhan.generator.CucumberOutputConfigurationProvider;
+import org.farhan.helper.FileAccessImpl;
 import org.farhan.helper.StepDefinitionHelper;
 import org.farhan.helper.StepHelper;
 
@@ -81,6 +82,7 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 	private void completeName(Step step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 
+		FileAccessImpl fa = new FileAccessImpl();
 		String component;
 		String object;
 		if (step.getName() == null) {
@@ -94,7 +96,7 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 			// if there's no object do the following
 			if (component.isEmpty()) {
 				// get a list of previous objects
-				TreeSet<String> previousObjects = StepDefinitionHelper.getPreviousObjects(step);
+				TreeSet<String> previousObjects = StepDefinitionHelper.getPreviousObjects(fa, step);
 				for (String previousObject : previousObjects) {
 					acceptor.accept(createCompletionProposal("The " + previousObject, context));
 				}
@@ -116,7 +118,7 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 			}
 		} else {
 			// else if there's an object get a list of keywords for the suggestions
-			for (String stepDef : StepDefinitionHelper.getObjectDefinitions(step)) {
+			for (String stepDef : StepDefinitionHelper.getObjectDefinitions(fa, step)) {
 				// TODO maybe step defs shouldn't need the component and object parts, just the
 				// section and predicate
 				acceptor.accept(createCompletionProposal(stepDef, context));
