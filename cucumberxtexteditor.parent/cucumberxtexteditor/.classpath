@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="lib/sheep-dog-test-1.1-SNAPSHOT.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Farhan/git/lean-sheep-dog-tools/cucumberxtexteditor.parent/cucumberxtexteditor/lib/sheep-dog-test.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21">
 		<attributes>
 			<attribute name="module" value="true"/>

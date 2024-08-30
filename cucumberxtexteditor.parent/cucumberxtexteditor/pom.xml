@@ -10,12 +10,15 @@
 	<artifactId>cucumberxtexteditor</artifactId>
 	<packaging>eclipse-plugin</packaging>
 
+	<properties>
+		<sheep-dog-test.version>1.1-SNAPSHOT</sheep-dog-test.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.farhan</groupId>
 			<artifactId>sheep-dog-test</artifactId>
-			<version>1.1-SNAPSHOT</version>
+			<version>${sheep-dog-test.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -33,8 +36,8 @@
 							<goal>copy-dependencies</goal>
 						</goals>
 						<configuration>
-							<includeGroupIds>
-								org.farhan</includeGroupIds>
+							<stripVersion>true</stripVersion>
+							<includeGroupIds>org.farhan</includeGroupIds>
 							<outputDirectory>
 								${project.basedir}/../cucumberxtexteditor/lib/</outputDirectory>
 						</configuration>

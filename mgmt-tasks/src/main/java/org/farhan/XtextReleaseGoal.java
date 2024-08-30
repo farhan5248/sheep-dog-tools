@@ -12,35 +12,41 @@ import java.util.stream.Collectors;
 
 public class XtextReleaseGoal {
 
-	private static File rootDir = new File(
-			"C:\\Users\\Farhan\\git\\lean-sheep-dog-tools\\cucumberxtexteditor.parent");
+	private static File rootDir = new File("C:\\Users\\Farhan\\git\\lean-sheep-dog-tools\\cucumberxtexteditor.parent");
 
 	public static void main(String[] args) {
 
-		String currentVersion = "1.16.0";
-		String nextVersion = "1.17.0";
+		String currentVersion = "1.17.0";
+		String nextVersion = "1.18.0";
+		String currentSheepDogTestVersion = "1.1";
+		String nextSheepDogTestVersion = "1.2";
 
-		// updateToRelease(currentVersion, currentVersion);
+        // updateToRelease(currentVersion, currentSheepDogTestVersion);
+		// Run mvn install
 		// Run git add and git commit
 		// Run git tag
+		// updateToSnapshot(currentVersion, nextVersion, currentSheepDogTestVersion, nextSheepDogTestVersion);
 		// Run mvn install
-		// updateToSnapshot(currentVersion, nextVersion);
-		// Run mvn install
+		// Run git add and git commit
 	}
 
-	private static void updateToSnapshot(String currentVersion, String nextVersion) {
-		updateVersion("<version>", currentVersion + "</version>", nextVersion + "-SNAPSHOT</version>", "pom.xml");
-		updateVersion("Bundle-Version: ", currentVersion + "", nextVersion + ".qualifier", "MANIFEST.MF");
-		updateVersion("version=\"", currentVersion + "\"", nextVersion + ".qualifier\"", "feature.xml");
+	private static void updateToSnapshot(String cv, String nv, String csdtv, String nsdtv) {
+		updateVersion("<sheep-dog-test.version>", csdtv + "</sheep-dog-test.version>",
+				nsdtv + "-SNAPSHOT</sheep-dog-test.version>", "pom.xml");
+		updateVersion("<version>", cv + "</version>", nv + "-SNAPSHOT</version>", "pom.xml");
+		updateVersion("Bundle-Version: ", cv + "", nv + ".qualifier", "MANIFEST.MF");
+		updateVersion("version=\"", cv + "\"", nv + ".qualifier\"", "feature.xml");
 		System.out.println("[maven-release-plugin] prepare for next development iteration");
 	}
 
-	private static void updateToRelease(String currentVersion, String nextVersion) {
-		updateVersion("<version>", currentVersion + "-SNAPSHOT</version>", nextVersion + "</version>", "pom.xml");
-		updateVersion("Bundle-Version: ", currentVersion + ".qualifier", nextVersion + "", "MANIFEST.MF");
-		updateVersion("version=\"", currentVersion + ".qualifier\"", nextVersion + "\"", "feature.xml");
-		System.out.println("[maven-release-plugin] prepare release cucumberxtexteditor-" + nextVersion);
-		System.out.println("cucumberxtexteditor-" + nextVersion);
+	private static void updateToRelease(String cv, String csdtv) {
+		updateVersion("<sheep-dog-test.version>", csdtv + "-SNAPSHOT</sheep-dog-test.version>",
+				csdtv + "</sheep-dog-test.version>", "pom.xml");
+		updateVersion("<version>", cv + "-SNAPSHOT</version>", cv + "</version>", "pom.xml");
+		updateVersion("Bundle-Version: ", cv + ".qualifier", cv + "", "MANIFEST.MF");
+		updateVersion("version=\"", cv + ".qualifier\"", cv + "\"", "feature.xml");
+		System.out.println("[maven-release-plugin] prepare release cucumberxtexteditor-" + cv);
+		System.out.println("cucumberxtexteditor-" + cv);
 	}
 
 	private static void updateVersion(String start, String currentVersionEnd, String nextVersionEnd, String fileName) {
