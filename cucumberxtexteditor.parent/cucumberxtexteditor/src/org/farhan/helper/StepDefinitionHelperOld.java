@@ -12,20 +12,17 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.Cell;
 import org.farhan.cucumber.CucumberFactory;
 import org.farhan.cucumber.Examples;
-import org.farhan.cucumber.ExamplesTable;
 import org.farhan.cucumber.Feature;
-import org.farhan.cucumber.Row;
 import org.farhan.cucumber.ScenarioOutline;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.StepTable;
 import org.farhan.generator.CucumberOutputConfigurationProvider;
 
-public class StepDefinitionHelper {
+public class StepDefinitionHelperOld {
 
 	private static void logError(Exception e, Step step) {
 		// TODO inject the logger instead
@@ -35,7 +32,7 @@ public class StepDefinitionHelper {
 		System.out.println(sw.toString());
 	}
 
-	public static TreeSet<String> getPreviousObjects(FileAccessImpl fa, Step step) {
+	public static TreeSet<String> getPreviousObjects(Step step) {
 		AbstractScenario as = (AbstractScenario) step.eContainer();
 		TreeSet<String> previousObjects = new TreeSet<String>();
 		for (Step aStep : as.getSteps()) {
@@ -54,7 +51,7 @@ public class StepDefinitionHelper {
 		return previousObjects;
 	}
 
-	public static TreeSet<String> getObjectDefinitions(FileAccessImpl fa, Step step) {
+	public static TreeSet<String> getObjectDefinitions(Step step) {
 		TreeSet<String> objectDefinitions = new TreeSet<String>();
 		URI objectURI = getObjectURI(step);
 		if (new ResourceSetImpl().getURIConverter().exists(objectURI, null)) {
@@ -71,7 +68,7 @@ public class StepDefinitionHelper {
 		return objectDefinitions;
 	}
 
-	public static String getProblems(FileAccessImpl fa, Step step) {
+	public static String getProblems(Step step) {
 		try {
 			// check if the object exists
 			URI objectURI = getObjectURI(step);
@@ -96,22 +93,6 @@ public class StepDefinitionHelper {
 			logError(e, step);
 		}
 		return "";
-	}
-
-	public static void generate(FileAccessImpl fa, Step step) {
-		try {
-			URI objectURI = getObjectURI(step);
-			Resource theResource = getOrCreateResource(objectURI);
-			Feature theObject = getOrCreateObject(theResource, StepHelper.getObject(step.getName()));
-			AbstractScenario theStepDef = getOrCreateStepDef(theObject, step);
-			EList<Cell> headers = getHeader(step);
-			if (headers != null) {
-				getOrCreateParameters(theStepDef, headers);
-			}
-			theResource.save(SaveOptions.newBuilder().format().getOptions().toOptionsMap());
-		} catch (Exception e) {
-			logError(e, step);
-		}
 	}
 
 	private static Resource getOrCreateResource(URI objectURI) throws Exception {
@@ -217,24 +198,6 @@ public class StepDefinitionHelper {
 		return null;
 	}
 
-	private static AbstractScenario getOrCreateStepDef(Feature theObject, Step step) {
-		for (AbstractScenario stepDef : theObject.getAbstractScenarios()) {
-			if (stepDef.getName().contentEquals(step.getName())) {
-				return stepDef;
-			}
-		}
-		AbstractScenario theStepDef;
-		// TODO when using Step Definition keyword, allow 0 or more tables (Examples)
-		if (getHeader(step) != null) {
-			theStepDef = CucumberFactory.eINSTANCE.createScenarioOutline();
-		} else {
-			theStepDef = CucumberFactory.eINSTANCE.createScenario();
-		}
-		theStepDef.setName(step.getName());
-		theObject.getAbstractScenarios().add(theStepDef);
-		return theStepDef;
-	}
-
 	private static Examples getParameters(AbstractScenario theStepDef, EList<Cell> theStepDefParameters) {
 		ScenarioOutline so = (ScenarioOutline) theStepDef;
 		if (!so.getExamples().isEmpty()) {
@@ -247,34 +210,6 @@ public class StepDefinitionHelper {
 			}
 		}
 		return null;
-	}
-
-	private static Examples getOrCreateParameters(AbstractScenario theStepDef, EList<Cell> theStepDefParameters) {
-		ScenarioOutline so = (ScenarioOutline) theStepDef;
-		if (!so.getExamples().isEmpty()) {
-			String headersString = cellsToString(theStepDefParameters);
-			for (Examples parameters : so.getExamples()) {
-				String paramSetString = cellsToString(parameters.getTheExamplesTable().getRows().get(0).getCells());
-				if (headersString.contentEquals(paramSetString)) {
-					return parameters;
-				}
-			}
-		}
-		Examples parameters = CucumberFactory.eINSTANCE.createExamples();
-		parameters.setName(Integer.toString(so.getExamples().size() + 1));
-		so.getExamples().add(parameters);
-
-		ExamplesTable parametersTable = CucumberFactory.eINSTANCE.createExamplesTable();
-		parameters.setTheExamplesTable(parametersTable);
-
-		Row row = CucumberFactory.eINSTANCE.createRow();
-		parametersTable.getRows().add(row);
-		for (Cell srcCell : theStepDefParameters) {
-			Cell cell = CucumberFactory.eINSTANCE.createCell();
-			cell.setName(srcCell.getName());
-			row.getCells().add(cell);
-		}
-		return parameters;
 	}
 
 	private static String cellsToString(EList<Cell> cells) {

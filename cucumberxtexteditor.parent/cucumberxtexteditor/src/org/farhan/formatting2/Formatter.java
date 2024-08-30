@@ -9,7 +9,7 @@ public class Formatter {
 
 	protected String indent = " ";
 	protected int indentCnt = 0;
-	// TODO isLast has to be static for now for the Cell code to know if it
+	// isLast has to be static for now for the Cell code to know if it
 	// belongs to the last Row
 	protected static boolean isLast;
 	protected static boolean isFirst;

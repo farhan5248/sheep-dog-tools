@@ -12,7 +12,7 @@ public class CellFormatter extends Formatter {
 
 	private static ArrayList<ArrayList<ISemanticRegion>> cells;
 
-	// TODO this needs to be here to separate variables tracking the last row from
+	// this needs to be here to separate variables tracking the last row from
 	// last cell
 	protected boolean isLast;
 	protected boolean isFirst;

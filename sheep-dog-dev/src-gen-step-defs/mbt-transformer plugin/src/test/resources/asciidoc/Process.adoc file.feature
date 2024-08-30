@@ -1,24 +1,14 @@
 Feature: src/test/resources/asciidoc/Process.adoc file
 
-  Scenario: The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-
-  Scenario Outline: The mbt-transformer plugin, Process.adoc file, Feature section will be created as follows
-
-    Examples: 1
-
-          | Name |
-
-    Examples: 2
-
-          | Name | Tags |
-
   Scenario: The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
 
-  Scenario Outline: The mbt-transformer plugin, Process.adoc file, Scenario Outline Examples Table section will be created as follows
+  Scenario: The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+
+  Scenario Outline: The mbt-transformer plugin, Process.adoc file, Scenarios Steps Doc String section will be created as follows
 
     Examples: 1
 
-          | Name | Examples | Row |
+          | Name | Step | Content |
 
   Scenario Outline: The mbt-transformer plugin, Process.adoc file, Background section will be created as follows
 
@@ -38,21 +28,31 @@ Feature: src/test/resources/asciidoc/Process.adoc file
 
           | Name | Step |
 
+  Scenario Outline: The mbt-transformer plugin, Process.adoc file, Scenarios Steps Step Table section will be created as follows
+
+    Examples: 1
+
+          | Name | Step | Row |
+
   Scenario Outline: The mbt-transformer plugin, Process.adoc file, Scenarios section will be created as follows
 
     Examples: 1
 
           | Name | Tags | Description |
 
-  Scenario Outline: The mbt-transformer plugin, Process.adoc file, Scenarios Steps Doc String section will be created as follows
+  Scenario Outline: The mbt-transformer plugin, Process.adoc file, Scenario Outline Examples Table section will be created as follows
 
     Examples: 1
 
-          | Name | Step | Content |
+          | Name | Examples | Row |
 
-  Scenario Outline: The mbt-transformer plugin, Process.adoc file, Scenarios Steps Step Table section will be created as follows
+  Scenario Outline: The mbt-transformer plugin, Process.adoc file, Feature section will be created as follows
 
     Examples: 1
 
-          | Name | Step | Row |
+          | Name |
+
+    Examples: 2
+
+          | Name | Tags |
 

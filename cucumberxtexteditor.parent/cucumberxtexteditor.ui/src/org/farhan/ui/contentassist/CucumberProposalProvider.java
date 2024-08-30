@@ -25,12 +25,12 @@ import org.farhan.cucumber.Step;
 import org.farhan.cucumber.Then;
 import org.farhan.cucumber.When;
 import org.farhan.generator.CucumberOutputConfigurationProvider;
-import org.farhan.helper.FileAccessImpl;
-import org.farhan.helper.StepDefinitionHelper;
+import org.farhan.helper.StepDefinitionHelperOld;
 import org.farhan.helper.StepHelper;
 
 /**
- * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
+ * See
+ * https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#content-assist
  * on how to customize the content assistant.
  */
 public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
@@ -40,31 +40,31 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 		super.completeGiven_Name(step, assignment, context, acceptor);
 		completeName(step, assignment, context, acceptor);
 	}
-	
+
 	public void completeWhen_Name(When step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeWhen_Name(step, assignment, context, acceptor);
 		completeName(step, assignment, context, acceptor);
 	}
-	
+
 	public void completeThen_Name(Then step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeThen_Name(step, assignment, context, acceptor);
 		completeName(step, assignment, context, acceptor);
 	}
-	
+
 	public void completeAnd_Name(And step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeAnd_Name(step, assignment, context, acceptor);
 		completeName(step, assignment, context, acceptor);
 	}
-	
+
 	public void completeBut_Name(But step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeBut_Name(step, assignment, context, acceptor);
 		completeName(step, assignment, context, acceptor);
 	}
-	
+
 	public void completeAsterisk_Name(Asterisk step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeAsterisk_Name(step, assignment, context, acceptor);
@@ -82,7 +82,6 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 	private void completeName(Step step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 
-		FileAccessImpl fa = new FileAccessImpl();
 		String component;
 		String object;
 		if (step.getName() == null) {
@@ -96,7 +95,7 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 			// if there's no object do the following
 			if (component.isEmpty()) {
 				// get a list of previous objects
-				TreeSet<String> previousObjects = StepDefinitionHelper.getPreviousObjects(fa, step);
+				TreeSet<String> previousObjects = StepDefinitionHelperOld.getPreviousObjects(step);
 				for (String previousObject : previousObjects) {
 					acceptor.accept(createCompletionProposal("The " + previousObject, context));
 				}
@@ -118,7 +117,7 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 			}
 		} else {
 			// else if there's an object get a list of keywords for the suggestions
-			for (String stepDef : StepDefinitionHelper.getObjectDefinitions(fa, step)) {
+			for (String stepDef : StepDefinitionHelperOld.getObjectDefinitions(step)) {
 				// TODO maybe step defs shouldn't need the component and object parts, just the
 				// section and predicate
 				acceptor.accept(createCompletionProposal(stepDef, context));

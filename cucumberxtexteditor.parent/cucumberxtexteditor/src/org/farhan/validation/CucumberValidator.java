@@ -11,8 +11,7 @@ import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.StepTable;
-import org.farhan.helper.FileAccessImpl;
-import org.farhan.helper.StepDefinitionHelper;
+import org.farhan.helper.StepDefinitionHelperOld;
 import org.farhan.helper.StepHelper;
 
 public class CucumberValidator extends AbstractCucumberValidator {
@@ -39,8 +38,7 @@ public class CucumberValidator extends AbstractCucumberValidator {
 		} else {
 			// if it's valid, then check if the the step def exists, if not call the
 			// generator in the quick fix
-			FileAccessImpl fa = new FileAccessImpl();
-			String problems = StepDefinitionHelper.getProblems(fa, step);
+			String problems = StepDefinitionHelperOld.getProblems(step);
 			if (!problems.isEmpty()) {
 				warning(problems, CucumberPackage.Literals.STEP__NAME, MISSING_STEP_DEF, step.getName());
 			}
