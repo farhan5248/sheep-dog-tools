@@ -74,8 +74,8 @@ regionFor(model).ruleCall(ga.getModelAccess().getNamePhraseParserRuleCall_1_0())
 ## Formatting Hidden Regions
 
 This is for stuff you define as hidden like `hidden(WS, SL_COMMENT)`.
-The space/indent thing doesn't always work they way you want it.
-I couldn't figure out why but I suspect it's because some default is somehow kicking in because of how I've defined the language. 
+If you don't specify formatting for each element a default kicks in. 
+This is more noticeable when creating a file programmatically like when the UML model is transformed into a feature file.
 Anyways, what I basically do is strip out all the whitespace using the provided methods and then just tack on whitespace to the token themselves.
 
 ```java
@@ -91,6 +91,11 @@ public void formatPhraseRuleCall(ISemanticRegion iSR, IFormattableDocument doc) 
   }
 }
 ```
+
+Sometimes, the whitespace isn't where you expect it. 
+Like it can be in the hidden region or it can be part of the token.
+I experienced this with the `DocString` type I created. 
+The differences also occur when editing the file via the GUI vs the API (through Maven).
 
 ## Formatting Text Regions
 

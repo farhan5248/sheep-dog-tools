@@ -6,19 +6,7 @@
 cucumberxtexteditor/src/org/farhan/validation/CucumberValidator.java
 ```
 
-## Syntax Validation
+## Usage
 
-Validating that a vertex can be derived from a single statement.
-This is fast validation.
-
-
-## Semantic Validation
-
-Validating that a path can be derived from a single scenario or that a sub-graph can be derived from a feature file.
-This is normal validation
-
-
-## Layer Validation
-
-Validating that all the 2nd and 3rd layer Java objects exist.
-This is slow validation triggered by the `Validate` menu item.
+There's 3 types of checks, `FAST`, `NORMAL`, `EXPENSIVE`.
+They're triggered when the file is modified, when it's saved and when you select the `Validate` menu item respectively.

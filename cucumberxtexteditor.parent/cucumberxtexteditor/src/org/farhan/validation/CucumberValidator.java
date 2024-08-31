@@ -21,7 +21,6 @@ public class CucumberValidator extends AbstractCucumberValidator {
 	public static final String INVALID_STEP_TYPE = "invalidStepType";
 	public static final String MISSING_STEP_DEF = "invalidStepType";
 
-	// FAST is when the file is modified
 	@Check(CheckType.FAST)
 	public void checkStepName(Step step) {
 
@@ -58,7 +57,6 @@ public class CucumberValidator extends AbstractCucumberValidator {
 		}
 	}
 
-	// NORMAL is when the file is saved
 	@Check(CheckType.NORMAL)
 	public void checkScenario(Scenario scenario) {
 
@@ -72,7 +70,6 @@ public class CucumberValidator extends AbstractCucumberValidator {
 		}
 	}
 
-	// EXPENSIVE is when the validation menu item is selected
 	@Check(CheckType.EXPENSIVE)
 	public void checkFeature(Feature feature) {
 		// TODO validate that feature file name and feature name are the same.
