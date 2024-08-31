@@ -8,7 +8,7 @@ cucumberxtexteditor/src/org/farhan/validation/CucumberValidator.java
 
 ## Syntax Validation
 
-Validating that a vertice can be derived from a single statement.
+Validating that a vertex can be derived from a single statement.
 This is fast validation.
 
 

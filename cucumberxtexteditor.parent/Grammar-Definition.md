@@ -1,18 +1,4 @@
-# Code Generation
-
-## Initial Generated Files
-
-These get updated but I only update the `.mwe2` file and the `.xtext` file.
-
-```
-cucumberxtexteditor/src/org/farhan/Cucumber.xtext
-cucumberxtexteditor/src/org/farhan/GenerateCucumber.mwe2
-cucumberxtexteditor/src/org/farhan/generator/CucumberGenerator.xtend
-cucumberxtexteditor/src-gen/org/farhan/AbstractCucumberRuntimeModule.java
-cucumberxtexteditor/xtend-gen/org/farhan/generator/CucumberGenerator.java
-```
-
-## Defining Language Grammar
+# Grammar Definition
 
 There's keywords, terminals and types. You define types using keyword, terminals and types.
 
@@ -23,6 +9,7 @@ There's keywords, terminals and types. You define types using keyword, terminals
 When creating your `.xtext` file you need to keep an eye on the generated Java classes.
 Like I first tried having one `Step` keyword with `(Given|When|Then|And|But|*)` but then I didn't get a Java class per keyword, just one for `Step`.
 So I guess you have to balance that duplication in your `.xtext` file.
+The other reason for not having `(Given|When|Then|And|But|*)` is that when you create a feature file, the API automatically picks the keyword. In this case, it'll always pick `Given` and there's no simple way to override it that I know of currently.
 
 Types can be like interfaces or abstract classes like `Step` or `Abstract Scenario`.
 
