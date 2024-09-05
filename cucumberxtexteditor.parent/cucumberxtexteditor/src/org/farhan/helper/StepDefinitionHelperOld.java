@@ -120,16 +120,19 @@ public class StepDefinitionHelperOld {
 		}
 		// Create a list of previous steps in reverse order
 		AbstractScenario as = (AbstractScenario) step.eContainer();
-		ArrayList<Step> previousSteps = new ArrayList<Step>();
+		ArrayList<Step> previousValidSteps = new ArrayList<Step>();
 		String lastComponent = "Unknown service";
 		for (Step aStep : as.getSteps()) {
 			if (aStep.equals(step)) {
 				break;
 			} else {
-				previousSteps.add(0, aStep);
-				// keep track of the last component to assign to undeclared object components
-				if (!StepHelper.getComponent(aStep.getName()).isEmpty()) {
-					lastComponent = StepHelper.getComponent(aStep.getName());
+				if (aStep.getName() != null) {
+					previousValidSteps.add(0, aStep);
+					// keep track of the last component to assign to undeclared object components
+					if (!StepHelper.getComponent(aStep.getName()).isEmpty()) {
+						lastComponent = StepHelper.getComponent(aStep.getName());
+					}
+
 				}
 			}
 		}
@@ -137,7 +140,7 @@ public class StepDefinitionHelperOld {
 		// if the component is empty, set it
 		String[] objectParts = object.split("/");
 		String objectKey = objectParts[objectParts.length - 1];
-		for (Step previousStep : previousSteps) {
+		for (Step previousStep : previousValidSteps) {
 			// if the step has a matching object
 			String previousObject = StepHelper.getObject(previousStep.getName());
 			String previousComponent = StepHelper.getComponent(previousStep.getName());

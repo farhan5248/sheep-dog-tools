@@ -127,10 +127,13 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	}
 
 	public ArrayList<String> getSteps() {
+		// TODO rename to getPreviousSteps()
 		AbstractScenario as = (AbstractScenario) step.eContainer();
 		ArrayList<String> stepNames = new ArrayList<String>();
 		for (Step s : as.getSteps()) {
-			stepNames.add(s.getName());
+			if (s.getName() != null) {
+				stepNames.add(s.getName());
+			}
 		}
 		return stepNames;
 	}

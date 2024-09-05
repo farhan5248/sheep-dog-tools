@@ -24,22 +24,20 @@ public class CucumberValidator extends AbstractCucumberValidator {
 	@Check(CheckType.FAST)
 	public void checkStepName(Step step) {
 
-		if (step.getName() == null) {
-			// If there's no name set, do nothing.
-			return;
-		}
-		// TODO the quickfix here is to identify which regex is broken and put an
-		// example in place
-		if (!StepHelper.isValid(step.getName())) {
-			// TODO instead of this error message, give the parts breakdown to see what's
-			// missing
-			error(StepHelper.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
-		} else {
-			// if it's valid, then check if the the step def exists, if not call the
-			// generator in the quick fix
-			String problems = StepDefinitionHelperOld.getProblems(step);
-			if (!problems.isEmpty()) {
-				warning(problems, CucumberPackage.Literals.STEP__NAME, MISSING_STEP_DEF, step.getName());
+		if (step.getName() != null) {
+			// TODO the quickfix here is to identify which regex is broken and put an
+			// example in place
+			if (!StepHelper.isValid(step.getName())) {
+				// TODO instead of this error message, give the parts breakdown to see what's
+				// missing
+				error(StepHelper.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
+			} else {
+				// if it's valid, then check if the the step def exists, if not call the
+				// generator in the quick fix
+				String problems = StepDefinitionHelperOld.getProblems(step);
+				if (!problems.isEmpty()) {
+					warning(problems, CucumberPackage.Literals.STEP__NAME, MISSING_STEP_DEF, step.getName());
+				}
 			}
 		}
 	}
