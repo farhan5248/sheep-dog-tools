@@ -16,7 +16,8 @@ import org.farhan.cucumber.Given;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.Then;
 import org.farhan.cucumber.When;
-import org.farhan.helper.StepDefinitionHelperOld;
+import org.farhan.helper.LanguageAccessImpl;
+import org.farhan.helper.StepDefinitionHelper;
 
 /**
  * See
@@ -64,7 +65,7 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 	private void completeName(Step step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
-			for (Entry<String, String> p : StepDefinitionHelperOld.getProposals(step).entrySet()) {
+			for (Entry<String, String> p : StepDefinitionHelper.getProposals(new LanguageAccessImpl(step)).entrySet()) {
 				acceptor.accept(createCompletionProposal(p.getKey(), p.getValue(), null, context));
 			}
 		} catch (Exception e) {

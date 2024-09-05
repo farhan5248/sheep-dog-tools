@@ -3,6 +3,12 @@ package org.farhan.helper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -152,4 +158,44 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	public String getOutputName() {
 		return CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory();
 	}
+
+	public ArrayList<String> getProjectComponents() throws Exception {
+		IFolder folder = getProject()
+				.getFolder(CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory());
+		ArrayList<String> components = new ArrayList<String>();
+		for (IResource ir : folder.members()) {
+			components.add(ir.getName());
+		}
+		return components;
+	}
+
+	public ArrayList<String> getComponentObjects(String component) throws Exception {
+		IFolder folder = getProject()
+				.getFolder(CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory() + "/" + component);
+
+		ArrayList<String> components = new ArrayList<String>();
+		for (String stepDefObjectResource : getFolderResources(folder)) {
+			// ([^\/]+)\/([^\/]+)\/(.*).feature group 3
+			components.add(stepDefObjectResource.split("/" + component + "/")[1].replace(".feature", ""));
+		}
+		return components;
+	}
+
+	private static ArrayList<String> getFolderResources(IFolder folder) throws Exception {
+		ArrayList<String> files = new ArrayList<String>();
+		for (IResource r : folder.members()) {
+			if (r instanceof IFolder) {
+				files.addAll(getFolderResources((IFolder) r));
+			} else {
+				files.add(r.getProjectRelativePath().toString());
+			}
+		}
+		return files;
+	}
+
+	private IProject getProject() {
+		return ResourcesPlugin.getWorkspace().getRoot()
+				.getFile(new Path(step.eResource().getURI().toPlatformString(true))).getProject();
+	}
+
 }

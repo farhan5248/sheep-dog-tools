@@ -1,11 +1,16 @@
 package org.farhan.helper;
 
 import java.util.ArrayList;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
 public interface ILanguageAccess {
+
+	public ArrayList<String> getProjectComponents() throws Exception;
+
+	public ArrayList<String> getComponentObjects(String component) throws Exception;
 
 	public EObject addStepDefinition(EObject stepObject);
 

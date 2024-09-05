@@ -3,6 +3,8 @@
  */
 package org.farhan.validation;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.farhan.cucumber.Cell;
@@ -11,7 +13,8 @@ import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.StepTable;
-import org.farhan.helper.StepDefinitionHelperOld;
+import org.farhan.helper.LanguageAccessImpl;
+import org.farhan.helper.StepDefinitionHelper;
 import org.farhan.helper.StepHelper;
 
 public class CucumberValidator extends AbstractCucumberValidator {
@@ -20,6 +23,14 @@ public class CucumberValidator extends AbstractCucumberValidator {
 	public static final String INVALID_HEADER = "invalidHeader";
 	public static final String INVALID_STEP_TYPE = "invalidStepType";
 	public static final String MISSING_STEP_DEF = "invalidStepType";
+
+	private void logError(Exception e, String name) {
+		// TODO inject the logger instead
+		System.out.println("There was a problem listing directories for: " + name);
+		StringWriter sw = new StringWriter();
+		e.printStackTrace(new PrintWriter(sw));
+		System.out.println(sw.toString());
+	}
 
 	@Check(CheckType.FAST)
 	public void checkStepName(Step step) {
@@ -32,11 +43,15 @@ public class CucumberValidator extends AbstractCucumberValidator {
 				// missing
 				error(StepHelper.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
 			} else {
-				// if it's valid, then check if the the step def exists, if not call the
-				// generator in the quick fix
-				String problems = StepDefinitionHelperOld.getProblems(step);
-				if (!problems.isEmpty()) {
-					warning(problems, CucumberPackage.Literals.STEP__NAME, MISSING_STEP_DEF, step.getName());
+				try {
+					// if it's valid, then check if the the step def exists, if not call the
+					// generator in the quick fix
+					String problems = StepDefinitionHelper.getProblems(new LanguageAccessImpl(step));
+					if (!problems.isEmpty()) {
+						warning(problems, CucumberPackage.Literals.STEP__NAME, MISSING_STEP_DEF, step.getName());
+					}
+				} catch (Exception e) {
+					logError(e, step.getName());
 				}
 			}
 		}
