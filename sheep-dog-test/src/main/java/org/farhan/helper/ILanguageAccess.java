@@ -29,7 +29,7 @@ public interface ILanguageAccess {
 
 	public Resource getStepResource();
 
-	public ArrayList<String> getSteps();
+	public ArrayList<String> getPreviousSteps();
 
 	public boolean hasParameters(EObject stepDefinition);
 

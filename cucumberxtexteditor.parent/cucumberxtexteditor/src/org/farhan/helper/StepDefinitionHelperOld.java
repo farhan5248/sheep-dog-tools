@@ -6,8 +6,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -226,6 +233,80 @@ public class StepDefinitionHelperOld {
 			cellsAsString += cell;
 		}
 		return cellsAsString;
+	}
+
+	public static ArrayList<String> getComponentObjects(IFolder component) throws Exception {
+		ArrayList<String> components = new ArrayList<String>();
+		for (IResource stepDefObjectResource : getFolderResources(component)) {
+			// ([^\/]+)\/([^\/]+)\/(.*).feature group 3
+			components.add(
+					stepDefObjectResource.getProjectRelativePath().toString().split("/" + component.getName() + "/")[1]
+							.replace(".feature", ""));
+		}
+		return components;
+	}
+
+	private static ArrayList<IResource> getFolderResources(IFolder folder) throws Exception {
+		ArrayList<IResource> files = new ArrayList<IResource>();
+		for (IResource r : folder.members()) {
+			if (r instanceof IFolder) {
+				files.addAll(getFolderResources((IFolder) r));
+			} else {
+				files.add(r);
+			}
+		}
+		return files;
+	}
+
+	public static ArrayList<String> getComponents(IFolder project) throws Exception {
+		ArrayList<String> components = new ArrayList<String>();
+		for (IResource ir : project.members()) {
+			components.add(ir.getName());
+		}
+		return components;
+	}
+
+	public static TreeMap<String, String> getProposals(Step step) throws Exception {
+		TreeMap<String, String> proposals = new TreeMap<String, String>();
+		String component;
+		String object;
+		if (step.getName() == null) {
+			component = "";
+			object = "";
+		} else {
+			component = StepHelper.getComponent(step.getName());
+			object = StepHelper.getObject(step.getName());
+		}
+		if (object.isEmpty()) {
+			// if there's no object do the following
+			if (component.isEmpty()) {
+				for (String previousObject : getPreviousObjects(step)) {
+					proposals.put("The " + previousObject, "The " + previousObject);
+				}
+				IFolder folder = getProject(step)
+						.getFolder(CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory());
+				for (String stepDefComponent : getComponents(folder)) {
+					proposals.put("The " + stepDefComponent + ",", "The " + stepDefComponent + ",");
+				}
+			} else {
+				IFolder folder = getProject(step).getFolder(
+						CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory() + "/" + component);
+				for (String stepDefObject : getComponentObjects(folder)) {
+					proposals.put("The " + component + ", " + stepDefObject, stepDefObject);
+				}
+			}
+		} else {
+			// else if there's an object get a list of keywords for the suggestions
+			for (String stepDef : getObjectDefinitions(step)) {
+				proposals.put(stepDef, stepDef);
+			}
+		}
+		return proposals;
+	}
+
+	private static IProject getProject(Step step) {
+		return ResourcesPlugin.getWorkspace().getRoot()
+				.getFile(new Path(step.eResource().getURI().toPlatformString(true))).getProject();
 	}
 
 }

@@ -45,7 +45,7 @@ public class StepDefinitionHelper {
 		// Create a list of previous steps in reverse order
 		ArrayList<String> previousSteps = new ArrayList<String>();
 		String lastComponent = "Unknown service";
-		for (String aStep : la.getSteps()) {
+		for (String aStep : la.getPreviousSteps()) {
 			if (aStep.contentEquals(la.getStepName())) {
 				break;
 			} else {
