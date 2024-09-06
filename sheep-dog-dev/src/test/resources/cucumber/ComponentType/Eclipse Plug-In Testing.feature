@@ -1,4 +1,4 @@
-@debug @new
+@debug
 Feature: Eclipse Plug-In Testing
 
   Background: Create a feature file
