@@ -7,13 +7,13 @@ public class StepHelper {
 
 	private static final String NAME_REGEX = "[^,]";
 	private static final String COMPONENT_REGEX = "(( " + NAME_REGEX + "+)( application| service| plugin| batchjob),)?";
-	private static final String OBJECT_VERTEX_REGEX = "( file| page| response)"; // 6
-	private static final String OBJECT_EDGE_REGEX = "( request| goal| job)"; // 7
+	private static final String OBJECT_VERTEX_REGEX = "( file| page| response| dialog)"; // 6
+	private static final String OBJECT_EDGE_REGEX = "( request| goal| job| action)"; // 7
 	private static final String OBJECT_REGEX = "(( " + NAME_REGEX + "+)(" + OBJECT_VERTEX_REGEX + "|" + OBJECT_EDGE_REGEX
 			+ "))";
-	private static final String DETAILS_REGEX = "(,( " + NAME_REGEX + "+)( section| fragment| table| snippet))?";
-	private static final String STATE_VERTEX_REGEX = "( empty| present| absent| enabled| disabled| valid| invalid| uploaded| downloaded| created)";
-	private static final String STATE_EDGE_REGEX = "( executed| sent| triggered)";
+	private static final String DETAILS_REGEX = "(,( " + NAME_REGEX + "+)( section| fragment| table| snippet| list))?";
+	private static final String STATE_VERTEX_REGEX = "( empty| present| absent| enabled| disabled| valid| invalid| uploaded| downloaded| created| set| unset)";
+	private static final String STATE_EDGE_REGEX = "( executed| sent| triggered| performed)";
 	private static final String STATE_REGEX = "(( is| isn't| will be| won't be)(" + STATE_VERTEX_REGEX + "|"
 			+ STATE_EDGE_REGEX + ")( with| as follows)?)";
 	private static final String TIME_REGEX = "( early| late| on time|( at| before| after| in| on)(.*))?";

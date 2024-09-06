@@ -1,6 +1,5 @@
 package org.farhan.helper;
 
-import org.farhan.helper.StepHelper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,22 +13,22 @@ public class VertexValidatorTest {
 
 	@Test
 	public void testIsComponent() {
-		Assertions.assertTrue(StepHelper
-				.isComponentStep("The Something1 application, Something2 file, Something3 section is empty"));
+		Assertions.assertTrue(
+				StepHelper.isComponentStep("The Something1 application, Something2 file, Something3 section is empty"));
 	}
 
 	@Test
 	public void testGetAppName() {
-		Assertions.assertTrue(StepHelper
-				.getComponentName("The Something1 application, Something2 file, Something3 section is empty")
-				.contentEquals("Something1"));
+		Assertions.assertTrue(
+				StepHelper.getComponentName("The Something1 application, Something2 file, Something3 section is empty")
+						.contentEquals("Something1"));
 	}
 
 	@Test
 	public void testGetAppType() {
-		Assertions.assertTrue(StepHelper
-				.getComponentType("The Something1 application, Something2 file, Something3 section is empty")
-				.contentEquals("application"));
+		Assertions.assertTrue(
+				StepHelper.getComponentType("The Something1 application, Something2 file, Something3 section is empty")
+						.contentEquals("application"));
 	}
 
 	@Test
@@ -76,9 +75,9 @@ public class VertexValidatorTest {
 
 	@Test
 	public void testGetStateModality() {
-		Assertions.assertTrue(StepHelper
-				.getStateModality("The Something1 application, Something2 file, Something3 section is empty")
-				.contentEquals("is"));
+		Assertions.assertTrue(
+				StepHelper.getStateModality("The Something1 application, Something2 file, Something3 section is empty")
+						.contentEquals("is"));
 	}
 
 	@Test
@@ -86,6 +85,16 @@ public class VertexValidatorTest {
 		Assertions.assertTrue(
 				StepHelper.getStateType("The Something1 application, Something2 file, Something3 section is empty")
 						.contentEquals("empty"));
+	}
+
+	@Test
+	public void testStateRegexIsSet() {
+		Assertions.assertTrue(StepHelper.isValid("The Something1 application, Something2 file is set"));
+	}
+
+	@Test
+	public void testStateRegexIsUnset() {
+		Assertions.assertTrue(StepHelper.isValid("The Something1 application, Something2 file is unset"));
 	}
 
 	@Test
@@ -125,8 +134,7 @@ public class VertexValidatorTest {
 
 	@Test
 	public void testStateRegexAsFollows() {
-		Assertions
-				.assertTrue(StepHelper.isValid("The Something1 application, Something2 file is created as follows"));
+		Assertions.assertTrue(StepHelper.isValid("The Something1 application, Something2 file is created as follows"));
 	}
 
 	@Test
@@ -163,6 +171,12 @@ public class VertexValidatorTest {
 	}
 
 	@Test
+	public void testDetailsRegexList() {
+		Assertions.assertTrue(
+				StepHelper.isValid("The Something1 application, Something2 file, Something3 list is empty"));
+	}
+
+	@Test
 	public void testDetailsRegexFragment() {
 		Assertions.assertTrue(
 				StepHelper.isValid("The Something1 application, Something2 file, Something3 fragment is empty"));
@@ -183,6 +197,11 @@ public class VertexValidatorTest {
 	@Test
 	public void testObjectRegexPage() {
 		Assertions.assertTrue(StepHelper.isValid("The Something1 application, Something2 page is empty"));
+	}
+
+	@Test
+	public void testObjectRegexDialog() {
+		Assertions.assertTrue(StepHelper.isValid("The Something1 application, Something2 dialog is empty"));
 	}
 
 	@Test

@@ -33,15 +33,15 @@ public class EdgeValidatorTest {
 
 	@Test
 	public void testGetObjName() {
-		Assertions.assertTrue(
-				StepHelper.getObjectName("The Something1 application, Something2 request is executed with")
+		Assertions
+				.assertTrue(StepHelper.getObjectName("The Something1 application, Something2 request is executed with")
 						.contentEquals("Something2"));
 	}
 
 	@Test
 	public void testGetObjTypeRequest() {
-		Assertions.assertTrue(
-				StepHelper.getObjectType("The Something1 application, Something2 request is executed with")
+		Assertions
+				.assertTrue(StepHelper.getObjectType("The Something1 application, Something2 request is executed with")
 						.contentEquals("request"));
 	}
 
@@ -66,23 +66,21 @@ public class EdgeValidatorTest {
 
 	@Test
 	public void testGetStateType() {
-		Assertions.assertTrue(
-				StepHelper.getStateType("The Something1 application, Something2 request is executed with")
-						.contentEquals("executed"));
+		Assertions.assertTrue(StepHelper.getStateType("The Something1 application, Something2 request is executed with")
+				.contentEquals("executed"));
 	}
 
 	@Test
 	public void testGetAttachment() {
-		Assertions.assertTrue(
-				StepHelper.getAttachment("The Something1 application, Something2 request is executed with")
+		Assertions
+				.assertTrue(StepHelper.getAttachment("The Something1 application, Something2 request is executed with")
 						.contentEquals("with"));
 	}
 
 	@Test
 	public void testGetTime() {
-		Assertions
-				.assertTrue(StepHelper.getTime("The Something1 application, Something2 request is executed on time")
-						.contentEquals("on time"));
+		Assertions.assertTrue(StepHelper.getTime("The Something1 application, Something2 request is executed on time")
+				.contentEquals("on time"));
 	}
 
 	@Test
@@ -96,14 +94,19 @@ public class EdgeValidatorTest {
 	}
 
 	@Test
+	public void testStateRegexIsPerformed() {
+		Assertions.assertTrue(StepHelper.isValid("The Something1 application, Something2 file is performed"));
+	}
+
+	@Test
 	public void testStateRegexIsTriggered() {
 		Assertions.assertTrue(StepHelper.isValid("The Something1 application, Something2 request is triggered"));
 	}
 
 	@Test
 	public void testIsNegativeStep() {
-		Assertions.assertTrue(
-				StepHelper.isNegativeStep("The Something1 application, Something2 request isn't executed"));
+		Assertions
+				.assertTrue(StepHelper.isNegativeStep("The Something1 application, Something2 request isn't executed"));
 	}
 
 	@Test
@@ -118,13 +121,17 @@ public class EdgeValidatorTest {
 
 	@Test
 	public void testStateRegexWontBeExecuted() {
-		Assertions
-				.assertTrue(StepHelper.isValid("The Something1 application, Something2 request won't be executed"));
+		Assertions.assertTrue(StepHelper.isValid("The Something1 application, Something2 request won't be executed"));
 	}
 
 	@Test
 	public void testObjectRegexGoal() {
 		Assertions.assertTrue(StepHelper.isValid("The Something1 application, Something2 goal is executed"));
+	}
+
+	@Test
+	public void testObjectRegexAction() {
+		Assertions.assertTrue(StepHelper.isValid("The Something1 application, Something2 action is performed"));
 	}
 
 	@Test
@@ -159,8 +166,8 @@ public class EdgeValidatorTest {
 
 	@Test
 	public void testTimeRegexAfter() {
-		Assertions.assertTrue(
-				StepHelper.isValid("The Something1 plugin, Something2 request is sent after the next day"));
+		Assertions
+				.assertTrue(StepHelper.isValid("The Something1 plugin, Something2 request is sent after the next day"));
 	}
 
 	@Test
