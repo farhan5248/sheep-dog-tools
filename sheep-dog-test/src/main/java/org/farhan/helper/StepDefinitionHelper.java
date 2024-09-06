@@ -1,15 +1,9 @@
 package org.farhan.helper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
-
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 public class StepDefinitionHelper {
 
@@ -28,8 +22,8 @@ public class StepDefinitionHelper {
 			// if there's no object do the following
 			if (component.isEmpty()) {
 				for (String previousObject : getPreviousObjects(la)) {
-					// TODO Just The, has previous steps 
-					// TODO Just The, has no previous steps 
+					// TODO Just The, has previous steps
+					// TODO Just The, has no previous steps
 					proposals.put("The " + previousObject, "The " + previousObject);
 				}
 				for (String stepDefComponent : la.getProjectComponents()) {
@@ -55,43 +49,40 @@ public class StepDefinitionHelper {
 	}
 
 	public static void generate(ILanguageAccess la, Map<Object, Object> options) throws Exception {
-		URI objectURI = getObjectURI(la);
-		Resource theResource = getOrCreateResource(objectURI);
 		// TODO object doesn't exist
-		EObject theObject = getOrCreateObject(theResource, la);
+		Object thObject = la.getOrCreateStepObject(getObjectQualifiedName(la));
 		// TODO object exists but not keyword
-		EObject theStepDef = getOrCreateStepDef(theObject, la);
+		Object theStepDef = getOrCreateStepDef(thObject, la);
 		// TODO keyword exists but doesn't have parameter set
 		getOrCreateParameters(theStepDef, la);
-		theResource.save(options);
+		la.saveObject(thObject, options);
 	}
 
 	public static String getProblems(ILanguageAccess la) throws Exception {
-		// check if the object exists
-		URI objectURI = getObjectURI(la);
-		if (!(new ResourceSetImpl().getURIConverter().exists(objectURI, null))) {
+
+		String objectQualifiedName = getObjectQualifiedName(la);// check if the object exists
+		if (la.getStepObject(objectQualifiedName) == null) {
 			// TODO object doesn't exist
-			return "This object doesn't exist for: " + objectURI.path();
+			return "This object doesn't exist for: " + objectQualifiedName;
 		}
 		// check if the keyword exists
-		Resource theResource = getOrCreateResource(objectURI);
-		EObject theObject = getOrCreateObject(theResource, la);
-		EObject theStepDef = getStepDef(theObject, la);
+		Object thObject = la.getOrCreateStepObject(objectQualifiedName);
+		Object theStepDef = getStepDef(thObject, la);
 		if (theStepDef == null) {
 			// TODO object exists but not keyword
-			return "This object step definition doesn't exist for: " + objectURI.path();
+			return "This object step definition doesn't exist for: " + objectQualifiedName;
 		}
 		// check if the parameters exist
 		if (la.hasParameters(theStepDef)) {
 			String headersString = la.getHeaderString();
 			for (Object parameters : la.getParameters(theStepDef)) {
-				String paramSetString = la.getParametersString((EObject) parameters);
+				String paramSetString = la.getParametersString((Object) parameters);
 				if (headersString.contentEquals(paramSetString)) {
 					return "";
 				}
 			}
 			// TODO keyword exists but doesn't have parameter set
-			return "This object step definition parameter set doesn't exist for: " + objectURI.path();
+			return "This object step definition parameter set doesn't exist for: " + objectQualifiedName;
 		}
 		return "";
 	}
@@ -112,12 +103,11 @@ public class StepDefinitionHelper {
 
 	private static TreeSet<String> getObjectDefinitions(ILanguageAccess la) throws Exception {
 		TreeSet<String> objectDefinitions = new TreeSet<String>();
-		URI objectURI = getObjectURI(la);
-		if (new ResourceSetImpl().getURIConverter().exists(objectURI, null)) {
-			Resource theResource = getOrCreateResource(objectURI);
-			EObject theObject = getOrCreateObject(theResource, la);
-			for (Object stepDef : la.getStepDefinitions(theObject)) {
-				objectDefinitions.add(la.getStepDefinitionName((EObject) stepDef));
+		String objectQualifiedName = getObjectQualifiedName(la);
+		if (la.getStepObject(objectQualifiedName) != null) {
+			Object thObject = la.getOrCreateStepObject(objectQualifiedName);
+			for (Object stepDef : la.getStepDefinitions(thObject)) {
+				objectDefinitions.add(la.getStepDefinitionName((Object) stepDef));
 			}
 		}
 		return objectDefinitions;
@@ -179,26 +169,11 @@ public class StepDefinitionHelper {
 		}
 	}
 
-	private static URI getObjectURI(ILanguageAccess la) {
-		String projectName = la.getProjectName(la.getStepResource());
-		String outputDir = la.getOutputName();
-		String fileName = getObjectQualifiedName(la);
-		return URI.createPlatformResourceURI("/" + projectName + "/" + outputDir + "/" + fileName, true);
-	}
-
-	private static EObject getOrCreateObject(Resource res, ILanguageAccess la) {
-
-		if (res.getContents().isEmpty()) {
-			res.getContents().add(la.createStepObject());
-		}
-		return res.getContents().get(0);
-	}
-
-	private static void getOrCreateParameters(EObject theStepDef, ILanguageAccess la) {
+	private static void getOrCreateParameters(Object theStepDef, ILanguageAccess la) {
 		if (la.hasParameters(theStepDef)) {
 			String headersString = la.getHeaderString();
 			for (Object parameters : la.getParameters(theStepDef)) {
-				String paramSetString = la.getParametersString((EObject) parameters);
+				String paramSetString = la.getParametersString((Object) parameters);
 				if (headersString.contentEquals(paramSetString)) {
 					return;
 				}
@@ -207,28 +182,20 @@ public class StepDefinitionHelper {
 		la.createStepDefinitionParameters(theStepDef);
 	}
 
-	private static Resource getOrCreateResource(URI objectURI) throws Exception {
-		Resource theResource = new ResourceSetImpl().createResource(objectURI);
-		if (new ResourceSetImpl().getURIConverter().exists(objectURI, null)) {
-			theResource.load(new HashMap());
-		}
-		return theResource;
-	}
-
-	private static EObject getOrCreateStepDef(EObject theObject, ILanguageAccess la) {
-		Object stepDef = getStepDef(theObject, la);
+	private static Object getOrCreateStepDef(Object thObject, ILanguageAccess la) {
+		Object stepDef = getStepDef(thObject, la);
 		if (stepDef == null) {
-			return la.addStepDefinition(theObject);
+			return la.addStepDefinition(thObject);
 		} else {
-			return (EObject) stepDef;
+			return (Object) stepDef;
 		}
 	}
 
-	private static EObject getStepDef(EObject theObject, ILanguageAccess la) {
+	private static Object getStepDef(Object thObject, ILanguageAccess la) {
 
-		for (Object stepDef : la.getStepDefinitions(theObject)) {
-			if (la.getStepDefinitionName((EObject) stepDef).contentEquals(la.getStepName())) {
-				return (EObject) stepDef;
+		for (Object stepDef : la.getStepDefinitions(thObject)) {
+			if (la.getStepDefinitionName((Object) stepDef).contentEquals(la.getStepName())) {
+				return (Object) stepDef;
 			}
 		}
 		return null;

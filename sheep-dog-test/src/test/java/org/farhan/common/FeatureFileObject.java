@@ -1,9 +1,14 @@
 package org.farhan.common;
 
-import java.util.ArrayList;
-
-import org.junit.jupiter.api.Assertions;
-
 public class FeatureFileObject extends FileObject {
 
+	private static String stepName;
+
+	protected void addStep(String stepName) {
+		FeatureFileObject.stepName = stepName;
+	}
+
+	public static String getStep() {
+		return stepName;
+	}
 }

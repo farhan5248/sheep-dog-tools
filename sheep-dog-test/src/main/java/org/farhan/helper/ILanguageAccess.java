@@ -1,10 +1,8 @@
 package org.farhan.helper;
 
 import java.util.ArrayList;
-
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
+import java.util.List;
+import java.util.Map;
 
 public interface ILanguageAccess {
 
@@ -12,34 +10,36 @@ public interface ILanguageAccess {
 
 	public ArrayList<String> getComponentObjects(String component) throws Exception;
 
-	public EObject addStepDefinition(EObject stepObject);
+	public Object addStepDefinition(Object stepObject);
 
-	public void createStepDefinitionParameters(EObject stepDefinition);
+	public void createStepDefinitionParameters(Object stepDefinition);
 
-	public EObject createStepObject();
+	public Object createStepObject();
 
 	public String getHeaderString();
 
-	public EList<?> getParameters(EObject stepDefinition);
+	public List<?> getParameters(Object stepDefinition);
 
-	public String getParametersString(EObject parameters);
+	public String getParametersString(Object parameters);
 
-	public EObject getStep();
+	public Object getStep();
 
-	public String getStepDefinitionName(EObject stepDefinition);
+	public String getStepDefinitionName(Object stepDefinition);
 
-	public EList<?> getStepDefinitions(EObject stepObject);
+	public List<?> getStepDefinitions(Object stepObject);
 
 	public String getStepName();
 
-	public Resource getStepResource();
-
 	public ArrayList<String> getPreviousSteps();
 
-	public boolean hasParameters(EObject stepDefinition);
-
-	public String getProjectName(Resource stepResource);
+	public boolean hasParameters(Object stepDefinition);
 
 	public String getOutputName();
+
+	public Object getOrCreateStepObject(String objectQualifiedName) throws Exception;
+
+	public Object getStepObject(String objectQualifiedName) throws Exception;
+
+	public void saveObject(Object thObject, Map<Object, Object> options) throws Exception;
 
 }

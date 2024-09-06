@@ -2,7 +2,9 @@ package org.farhan.helper;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -10,8 +12,10 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.Cell;
 import org.farhan.cucumber.CucumberFactory;
@@ -33,7 +37,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		this.step = (Step) step;
 	}
 
-	public EObject addStepDefinition(EObject stepObject) {
+	public Object addStepDefinition(Object stepObject) {
 		AbstractScenario stepDefinition;
 		// TODO when using Step Definition keyword, allow 0 or more tables (Examples)
 		if (getHeader() != null) {
@@ -46,7 +50,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		return stepDefinition;
 	}
 
-	private String cellsToString(EList<Cell> cells) {
+	private String cellsToString(List<Cell> cells) {
 		String cellsAsString = "";
 		List<String> sortedCells = new ArrayList<String>();
 		for (Cell cell : cells) {
@@ -59,7 +63,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		return cellsAsString;
 	}
 
-	public void createStepDefinitionParameters(EObject stepDefinition) {
+	public void createStepDefinitionParameters(Object stepDefinition) {
 		if (stepDefinition instanceof Scenario) {
 			// This is temp hack while I hijack the feature file definition. I guess before
 			// I go to Adoc, I should update this language
@@ -83,13 +87,13 @@ public class LanguageAccessImpl implements ILanguageAccess {
 
 	}
 
-	public EObject createStepObject() {
+	public Object createStepObject() {
 		Feature theFeature = CucumberFactory.eINSTANCE.createFeature();
 		theFeature.setName(StepHelper.getObject(getStepName()));
 		return theFeature;
 	}
 
-	private EList<Cell> getHeader() {
+	private List<Cell> getHeader() {
 		StepTable stepTable = step.getTheStepTable();
 		if (stepTable != null) {
 			return stepTable.getRows().get(0).getCells();
@@ -102,25 +106,25 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		return cellsToString(getHeader());
 	}
 
-	public EList<?> getParameters(EObject stepDefinition) {
+	public List<?> getParameters(Object stepDefinition) {
 		ScenarioOutline so = (ScenarioOutline) stepDefinition;
 		return so.getExamples();
 	}
 
-	public String getParametersString(EObject parameters) {
+	public String getParametersString(Object parameters) {
 		Examples e = (Examples) parameters;
 		return cellsToString(e.getTheExamplesTable().getRows().get(0).getCells());
 	}
 
-	public EObject getStep() {
+	public Object getStep() {
 		return step;
 	}
 
-	public String getStepDefinitionName(EObject stepDefinition) {
+	public String getStepDefinitionName(Object stepDefinition) {
 		return ((AbstractScenario) stepDefinition).getName();
 	}
 
-	public EList<?> getStepDefinitions(EObject stepObject) {
+	public EList<?> getStepDefinitions(Object stepObject) {
 		return ((Feature) stepObject).getAbstractScenarios();
 	}
 
@@ -143,7 +147,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		return stepNames;
 	}
 
-	public boolean hasParameters(EObject stepDefinition) {
+	public boolean hasParameters(Object stepDefinition) {
 		if (stepDefinition instanceof Scenario) {
 			return false;
 		}
@@ -196,6 +200,41 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	private IProject getProject() {
 		return ResourcesPlugin.getWorkspace().getRoot()
 				.getFile(new Path(step.eResource().getURI().toPlatformString(true))).getProject();
+	}
+
+	@Override
+	public Object getOrCreateStepObject(String objectQualifiedName) throws Exception {
+		Object stepObject = getStepObject(objectQualifiedName);
+		if (stepObject != null) {
+			return stepObject;
+		} else {
+			Resource theResource = new ResourceSetImpl().createResource(getObjectURI(objectQualifiedName));
+			theResource.getContents().add((EObject) createStepObject());
+			return theResource.getContents().get(0);
+		}
+	}
+
+	@Override
+	public Object getStepObject(String objectQualifiedName) throws Exception {
+		Resource theResource = new ResourceSetImpl().createResource(getObjectURI(objectQualifiedName));
+		if (new ResourceSetImpl().getURIConverter().exists(theResource.getURI(), null)) {
+			theResource.load(new HashMap());
+			return theResource.getContents().get(0);
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public void saveObject(Object theObject, Map<Object, Object> options) throws Exception {
+		((EObject) theObject).eResource().save(options);
+	}
+
+	private URI getObjectURI(String objectQualifiedName) {
+		String projectName = getProjectName(getStepResource());
+		String outputDir = getOutputName();
+		String fileName = objectQualifiedName;
+		return URI.createPlatformResourceURI("/" + projectName + "/" + outputDir + "/" + fileName, true);
 	}
 
 }
