@@ -15,25 +15,16 @@ public abstract class TestObject {
 
 	protected HashMap<String, String> keyValue = new HashMap<String, String>();
 
-	public void setComponent(String component) {
-		keyValue.put("component", component);
+	public void assertInputOutputs(DataTable dataTable) {
+		processInputOutputs(dataTable, "assert", "");
 	}
 
-	public void setPath(String path) {
-		keyValue.put("path", path);
+	public void assertInputOutputs(DataTable dataTable, String sectionName) {
+		processInputOutputs(dataTable, "assert", sectionName);
 	}
 
-	public void transition() {
-	}
-
-	private String cleanName(String name) {
-		return name.replaceAll("[ \\-\\(\\)/]", "");
-	}
-
-	public void assertInputOutputs(String key, boolean negativeTest) {
-		HashMap<String, String> row = new HashMap<String, String>();
-		row.put(key, Boolean.toString(negativeTest));
-		processInputOutputs(row, "assert", "");
+	public void assertInputOutputs(DataTable dataTable, String sectionName, boolean negativeTest) {
+		processInputOutputs(dataTable, "assert", sectionName);
 	}
 
 	public void assertInputOutputs(String key) {
@@ -42,10 +33,10 @@ public abstract class TestObject {
 		processInputOutputs(row, "assert", "");
 	}
 
-	public void setInputOutputs(String key, String value) {
+	public void assertInputOutputs(String key, boolean negativeTest) {
 		HashMap<String, String> row = new HashMap<String, String>();
-		row.put(key, value);
-		processInputOutputs(row, "set", "");
+		row.put(key, Boolean.toString(negativeTest));
+		processInputOutputs(row, "assert", "");
 	}
 
 	public void assertInputOutputs(String key, String value) {
@@ -54,28 +45,8 @@ public abstract class TestObject {
 		processInputOutputs(row, "assert", "");
 	}
 
-	public void assertInputOutputs(DataTable dataTable) {
-		processInputOutputs(dataTable, "assert", "");
-	}
-
-	public void setInputOutputs(DataTable dataTable) {
-		processInputOutputs(dataTable, "set", "");
-	}
-
-	public void assertInputOutputs(DataTable dataTable, String sectionName) {
-		processInputOutputs(dataTable, "assert", sectionName);
-	}
-
-	public void setInputOutputs(DataTable dataTable, String sectionName) {
-		processInputOutputs(dataTable, "set", sectionName);
-	}
-
-	public void assertInputOutputs(DataTable dataTable, String sectionName, boolean negativeTest) {
-		processInputOutputs(dataTable, "assert", sectionName);
-	}
-
-	public void setInputOutputs(DataTable dataTable, String sectionName, boolean negativeTest) {
-		processInputOutputs(dataTable, "set", sectionName);
+	private String cleanName(String name) {
+		return name.replaceAll("[ \\-\\(\\)/]", "");
 	}
 
 	private void processInputOutputs(DataTable dataTable, String operation, String sectionName) {
@@ -103,5 +74,34 @@ public abstract class TestObject {
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
+	}
+
+	public void setComponent(String component) {
+		keyValue.put("component", component);
+	}
+
+	public void setInputOutputs(DataTable dataTable) {
+		processInputOutputs(dataTable, "set", "");
+	}
+
+	public void setInputOutputs(DataTable dataTable, String sectionName) {
+		processInputOutputs(dataTable, "set", sectionName);
+	}
+
+	public void setInputOutputs(DataTable dataTable, String sectionName, boolean negativeTest) {
+		processInputOutputs(dataTable, "set", sectionName);
+	}
+
+	public void setInputOutputs(String key, String value) {
+		HashMap<String, String> row = new HashMap<String, String>();
+		row.put(key, value);
+		processInputOutputs(row, "set", "");
+	}
+
+	public void setPath(String path) {
+		keyValue.put("path", path);
+	}
+
+	public void transition() {
 	}
 }

@@ -12,36 +12,20 @@ import io.cucumber.datatable.DataTable;
 // Right now the way I model stuff all the objects are either output ones or input+transition ones
 public abstract class TestObject {
 
+	static EclipseMock la = null;
+
 	protected HashMap<String, String> keyValue = new HashMap<String, String>();
 
-	static LanguageAccessMock la = null;
-
-	protected LanguageAccessMock getLA() {
-		if (la == null) {
-			la = new LanguageAccessMock();
-		}
-		return la;
+	public void assertInputOutputs(DataTable dataTable) {
+		processInputOutputs(dataTable, "assert", "");
 	}
 
-	public void setComponent(String component) {
-		keyValue.put("component", component);
+	public void assertInputOutputs(DataTable dataTable, String sectionName) {
+		processInputOutputs(dataTable, "assert", sectionName);
 	}
 
-	public void setPath(String path) {
-		keyValue.put("path", path);
-	}
-
-	public void transition() {
-	}
-
-	private String cleanName(String name) {
-		return name.replaceAll("[ \\-\\(\\)/]", "");
-	}
-
-	public void assertInputOutputs(String key, boolean negativeTest) {
-		HashMap<String, String> row = new HashMap<String, String>();
-		row.put(key, Boolean.toString(negativeTest));
-		processInputOutputs(row, "assert", "");
+	public void assertInputOutputs(DataTable dataTable, String sectionName, boolean negativeTest) {
+		processInputOutputs(dataTable, "assert", sectionName);
 	}
 
 	public void assertInputOutputs(String key) {
@@ -50,10 +34,10 @@ public abstract class TestObject {
 		processInputOutputs(row, "assert", "");
 	}
 
-	public void setInputOutputs(String key, String value) {
+	public void assertInputOutputs(String key, boolean negativeTest) {
 		HashMap<String, String> row = new HashMap<String, String>();
-		row.put(key, value);
-		processInputOutputs(row, "set", "");
+		row.put(key, Boolean.toString(negativeTest));
+		processInputOutputs(row, "assert", "");
 	}
 
 	public void assertInputOutputs(String key, String value) {
@@ -62,28 +46,23 @@ public abstract class TestObject {
 		processInputOutputs(row, "assert", "");
 	}
 
-	public void assertInputOutputs(DataTable dataTable) {
-		processInputOutputs(dataTable, "assert", "");
+	private String cleanName(String name) {
+		return name.replaceAll("[ \\-\\(\\)/]", "");
 	}
 
-	public void setInputOutputs(DataTable dataTable) {
-		processInputOutputs(dataTable, "set", "");
+	protected EclipseMock getLA() {
+		if (la == null) {
+			la = new EclipseMock();
+		}
+		return la;
 	}
 
-	public void assertInputOutputs(DataTable dataTable, String sectionName) {
-		processInputOutputs(dataTable, "assert", sectionName);
-	}
-
-	public void setInputOutputs(DataTable dataTable, String sectionName) {
-		processInputOutputs(dataTable, "set", sectionName);
-	}
-
-	public void assertInputOutputs(DataTable dataTable, String sectionName, boolean negativeTest) {
-		processInputOutputs(dataTable, "assert", sectionName);
-	}
-
-	public void setInputOutputs(DataTable dataTable, String sectionName, boolean negativeTest) {
-		processInputOutputs(dataTable, "set", sectionName);
+	protected String getSpecial(String key) {
+		if (key.contentEquals("empty")) {
+			return "";
+		} else {
+			return key;
+		}
 	}
 
 	private void processInputOutputs(DataTable dataTable, String operation, String sectionName) {
@@ -104,12 +83,49 @@ public abstract class TestObject {
 
 	private void processInputOutputs(HashMap<String, String> row, String operation, String sectionName) {
 		try {
-			for (String s : row.keySet()) {
-				this.getClass().getMethod(operation + cleanName(sectionName) + cleanName(s), HashMap.class).invoke(this,
-						row);
+			for (String fieldName : row.keySet()) {
+				this.getClass().getMethod(operation + cleanName(sectionName) + cleanName(fieldName), HashMap.class)
+						.invoke(this, row);
 			}
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
+	}
+
+	public void setComponent(String component) {
+		keyValue.put("component", component);
+	}
+
+	public void setInputOutputs(DataTable dataTable) {
+		processInputOutputs(dataTable, "set", "");
+	}
+
+	public void setInputOutputs(DataTable dataTable, String sectionName) {
+		processInputOutputs(dataTable, "set", sectionName);
+	}
+
+	public void setInputOutputs(DataTable dataTable, String sectionName, boolean negativeTest) {
+		processInputOutputs(dataTable, "set", sectionName);
+	}
+
+	public void setInputOutputs(String key, String value) {
+		HashMap<String, String> row = new HashMap<String, String>();
+		row.put(key, value);
+		processInputOutputs(row, "set", "");
+	}
+
+	public void setInputOutputs(String key) {
+		// TODO in the future, the value can be true/false for is present/valid etc when
+		// is vs isn't is used
+		HashMap<String, String> row = new HashMap<String, String>();
+		row.put(key, "true");
+		processInputOutputs(row, "set", "");
+	}
+
+	public void setPath(String path) {
+		keyValue.put("path", path);
+	}
+
+	public void transition() {
 	}
 }

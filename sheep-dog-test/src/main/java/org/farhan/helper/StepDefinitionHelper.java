@@ -19,13 +19,7 @@ public class StepDefinitionHelper {
 			object = StepHelper.getObject(la.getStepName());
 		}
 		if (object.isEmpty()) {
-			// if there's no object do the following
 			if (component.isEmpty()) {
-				for (String previousObject : getPreviousObjects(la)) {
-					// TODO Just The, has previous steps
-					// TODO Just The, has no previous steps
-					proposals.put("The " + previousObject, "The " + previousObject);
-				}
 				for (String stepDefComponent : la.getProjectComponents()) {
 					// TODO Just The, has existing component folders
 					// TODO Just The, has no existing component folders
@@ -36,6 +30,11 @@ public class StepDefinitionHelper {
 					// TODO Just The component, has existing object
 					proposals.put("The " + component + ", " + stepDefObject, stepDefObject);
 				}
+			}
+			for (String previousObject : getPreviousObjects(la)) {
+				// TODO Just The, has previous steps
+				// TODO Just The, has no previous steps
+				proposals.put("The " + previousObject, "The " + previousObject);
 			}
 		} else {
 			// else if there's an object get a list of keywords for the suggestions

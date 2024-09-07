@@ -3,7 +3,7 @@ package org.farhan.objects.xtext.pre;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.farhan.common.LanguageAccessMock;
+import org.farhan.common.EclipseMock;
 import org.farhan.common.TestObject;
 import org.farhan.common.Utilities;
 import org.farhan.objects.xtext.InputFileFeatureFile;
@@ -14,10 +14,23 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 	@Override
 	public void assertObjectName(HashMap<String, String> keyMap) {
 		try {
-			Assertions.assertNotNull(getLA().getStepObject(keyMap.get("Object Name")));
+			Assertions.assertNotNull(getLA().getStepObject(getSpecial("Object Name")));
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
+	}
+
+	@Override
+	public void assertParameters(HashMap<String, String> keyMap) {
+		try {
+			getLA().createStepObject(keyMap.get("Object Name"));
+			getLA().createStepDefinition(getSpecial(keyMap.get("Step Name")));
+			Assertions.assertTrue(getLA().getStepDefinitionParameters(getSpecial(keyMap.get("Step Name"))).toString()
+					.contains("[" + keyMap.get("Parameters") + "]"));
+		} catch (Exception e) {
+			Assertions.fail(Utilities.getStackTraceAsString(e));
+		}
+
 	}
 
 	@Override
@@ -27,7 +40,7 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 			Object stepObject = getLA().getStepObject(keyMap.get("Object Name"));
 			Assertions.assertNotNull(stepObject);
 			for (Object stepDef : getLA().getStepDefinitions(stepObject)) {
-				if (getLA().getStepDefinitionName((Object) stepDef).contentEquals(keyMap.get("Step Name"))) {
+				if (getLA().getStepDefinitionName((Object) stepDef).contentEquals(getSpecial(keyMap.get("Step Name")))) {
 					return;
 				}
 			}
@@ -47,22 +60,11 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 	}
 
 	@Override
-	public void setStepName(HashMap<String, String> keyMap) {
-		// TODO rename to StepDefinitionName
-		try {
-			getLA().createStepObject(keyMap.get("Object Name"));
-			getLA().createStepDefinition(keyMap.get("Step Name"));
-		} catch (Exception e) {
-			Assertions.fail(Utilities.getStackTraceAsString(e));
-		}
-	}
-
-	@Override
 	public void setParameters(HashMap<String, String> keyMap) {
 		try {
 			getLA().createStepObject(keyMap.get("Object Name"));
 			ArrayList<ArrayList<String>> stepDefinitionList = (ArrayList<ArrayList<String>>) getLA()
-					.createStepDefinition(keyMap.get("Step Name"));
+					.createStepDefinition(getSpecial(keyMap.get("Step Name")));
 			ArrayList<String> parameters = new ArrayList<String>();
 			parameters.add(keyMap.get("Parameters"));
 			stepDefinitionList.add(parameters);
@@ -72,15 +74,12 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 	}
 
 	@Override
-	public void assertParameters(HashMap<String, String> keyMap) {
+	public void setStepName(HashMap<String, String> keyMap) {
 		try {
 			getLA().createStepObject(keyMap.get("Object Name"));
-			getLA().createStepDefinition(keyMap.get("Step Name"));
-			Assertions.assertTrue(getLA().getStepDefinitionParameters(keyMap.get("Step Name")).toString()
-					.contains("[" + keyMap.get("Parameters") + "]"));
+			getLA().createStepDefinition(getSpecial(keyMap.get("Step Name")));
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
-
 	}
 }

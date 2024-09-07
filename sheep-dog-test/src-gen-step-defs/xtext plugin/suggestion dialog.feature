@@ -6,3 +6,5 @@ Feature: suggestion dialog
 
           | Suggestion Name | Suggestion |
 
+  Scenario: The suggestion dialog will be empty
+

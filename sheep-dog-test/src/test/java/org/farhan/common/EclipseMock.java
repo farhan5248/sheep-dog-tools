@@ -5,19 +5,27 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.farhan.helper.ILanguageAccess;
 
-public class LanguageAccessMock implements ILanguageAccess {
+public class EclipseMock implements ILanguageAccess {
 
 	private String validationMessage;
-	private String stepName = "";
-	private ArrayList<String> stepParameters = new ArrayList<String>();
-	// TODO make tests for this
-	private ArrayList<String> previousSteps = new ArrayList<String>();
-	private HashMap<String, ArrayList<ArrayList<String>>> stepObject = null;
+	private String stepName;
+	private ArrayList<String> stepParameters;
+	private ArrayList<String> previousSteps;
+	private HashMap<String, ArrayList<ArrayList<String>>> stepObject;
+	private TreeMap<String, String> proposalMap;
+	private ArrayList<String> components;
+	private ArrayList<String> componentObjects;
 
-	public LanguageAccessMock() {
+	public EclipseMock() {
+		stepName = "";
+		components = new ArrayList<String>();
+		componentObjects = new ArrayList<String>();
+		stepParameters = new ArrayList<String>();
+		previousSteps = new ArrayList<String>();
 	}
 
 	private String cellsToString(List<String> cells) {
@@ -60,9 +68,8 @@ public class LanguageAccessMock implements ILanguageAccess {
 	}
 
 	@Override
-	public ArrayList<String> getComponentObjects(String component) throws Exception {
-		// TODO Make a test that uses this
-		return null;
+	public ArrayList<String> getComponentObjects(String component) {
+		return componentObjects;
 	}
 
 	@Override
@@ -71,9 +78,8 @@ public class LanguageAccessMock implements ILanguageAccess {
 	}
 
 	@Override
-	public ArrayList<String> getProjectComponents() throws Exception {
-		// TODO Make test that uses this
-		return null;
+	public ArrayList<String> getProjectComponents() {
+		return components;
 	}
 
 	@Override
@@ -134,7 +140,12 @@ public class LanguageAccessMock implements ILanguageAccess {
 	}
 
 	public void setStepName(String stepName) {
-		this.stepName = stepName;
+		if (this.stepName.isEmpty()) {
+			this.stepName = stepName;
+		} else {
+			previousSteps.add(this.stepName);
+			this.stepName = stepName;
+		}
 	}
 
 	public void setStepParameters(String header) {
@@ -143,6 +154,14 @@ public class LanguageAccessMock implements ILanguageAccess {
 
 	public void setValidationMessage(String message) {
 		this.validationMessage = message;
+	}
+
+	public void setProposalList(TreeMap<String, String> proposalList) {
+		this.proposalMap = proposalList;
+	}
+
+	public TreeMap<String, String> getProposals() {
+		return proposalMap;
 	}
 
 }

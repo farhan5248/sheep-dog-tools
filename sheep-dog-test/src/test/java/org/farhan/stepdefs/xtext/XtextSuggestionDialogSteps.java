@@ -12,4 +12,11 @@ public class XtextSuggestionDialogSteps {
         XtextFactory.get("SuggestionDialog").setPath("suggestion");
         XtextFactory.get("SuggestionDialog").assertInputOutputs(dataTable);
     }
+
+    @Given("^The suggestion dialog will be empty$")
+    public void theSuggestionDialogWillBeEmpty() {
+        XtextFactory.get("SuggestionDialog").setComponent("xtext");
+        XtextFactory.get("SuggestionDialog").setPath("suggestion");
+        XtextFactory.get("SuggestionDialog").assertInputOutputs("Empty");
+    }
 }

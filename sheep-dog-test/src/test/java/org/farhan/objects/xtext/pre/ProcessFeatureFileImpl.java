@@ -8,7 +8,7 @@ import org.farhan.objects.xtext.ProcessFeatureFile;
 public class ProcessFeatureFileImpl extends TestObject implements ProcessFeatureFile {
 
 	public void setStepsSnippetStepName(HashMap<String, String> keyMap) {
-		getLA().setStepName(keyMap.get("Step Name"));
+		getLA().setStepName(getSpecial(keyMap.get("Step Name")));
 	}
 
 	@Override
