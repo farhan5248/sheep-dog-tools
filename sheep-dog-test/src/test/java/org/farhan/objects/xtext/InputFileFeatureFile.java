@@ -4,5 +4,8 @@ import java.util.HashMap;
 
 public interface InputFileFeatureFile {
 
-    public void assertContent(HashMap<String, String> keyMap);
+	public void assertObjectName(HashMap<String, String> keyMap);
+
+	public void assertStepName(HashMap<String, String> keyMap);
+
 }

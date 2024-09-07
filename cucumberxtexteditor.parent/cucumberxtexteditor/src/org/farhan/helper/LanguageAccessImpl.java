@@ -87,6 +87,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 
 	}
 
+	// TODO make private
 	public Object createStepObject() {
 		Feature theFeature = CucumberFactory.eINSTANCE.createFeature();
 		theFeature.setName(StepHelper.getObject(getStepName()));

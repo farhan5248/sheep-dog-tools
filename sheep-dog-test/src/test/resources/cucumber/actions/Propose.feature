@@ -1,5 +1,5 @@
 @debug
-Feature: Initial
+Feature: Propose
 
   Scenario: Suggestion
 

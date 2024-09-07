@@ -62,7 +62,6 @@ public class StepDefinitionHelper {
 
 		String objectQualifiedName = getObjectQualifiedName(la);// check if the object exists
 		if (la.getStepObject(objectQualifiedName) == null) {
-			// TODO object doesn't exist
 			return "This object doesn't exist for: " + objectQualifiedName;
 		}
 		// check if the keyword exists
@@ -124,6 +123,7 @@ public class StepDefinitionHelper {
 		// Create a list of previous steps in reverse order
 		ArrayList<String> previousSteps = new ArrayList<String>();
 		String lastComponent = "Unknown service";
+		// TODO move getPreviousSteps to this class and add getScenarioSteps to la
 		for (String aStep : la.getPreviousSteps()) {
 			if (aStep.contentEquals(la.getStepName())) {
 				break;
@@ -171,6 +171,7 @@ public class StepDefinitionHelper {
 
 	private static void getOrCreateParameters(Object theStepDef, ILanguageAccess la) {
 		if (la.hasParameters(theStepDef)) {
+			// TODO this should be getStepHeadersList and put ListToString here
 			String headersString = la.getHeaderString();
 			for (Object parameters : la.getParameters(theStepDef)) {
 				String paramSetString = la.getParametersString((Object) parameters);
@@ -182,12 +183,14 @@ public class StepDefinitionHelper {
 		la.createStepDefinitionParameters(theStepDef);
 	}
 
-	private static Object getOrCreateStepDef(Object thObject, ILanguageAccess la) {
-		Object stepDef = getStepDef(thObject, la);
+	private static Object getOrCreateStepDef(Object theObject, ILanguageAccess la) {
+		// TODO, shouldn't pass theObject since la will already know which step object
+		// the step refers to
+		Object stepDef = getStepDef(theObject, la);
 		if (stepDef == null) {
-			return la.addStepDefinition(thObject);
+			return la.addStepDefinition(theObject);
 		} else {
-			return (Object) stepDef;
+			return stepDef;
 		}
 	}
 

@@ -12,7 +12,8 @@ public abstract class ActionObject extends TestObject {
 						StepDefinitionHelper.getProblems(new LanguageAccessMock(FeatureFileObject.getStep())));
 			}
 			if (action.contentEquals("generate")) {
-				StepDefinitionHelper.generate(new LanguageAccessMock(FeatureFileObject.getStep()), null);
+				LanguageAccessMock la = new LanguageAccessMock(FeatureFileObject.getStep());
+				StepDefinitionHelper.generate(la, null);				
 			}
 
 		} catch (Exception e) {

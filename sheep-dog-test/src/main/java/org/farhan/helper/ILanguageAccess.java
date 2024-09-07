@@ -14,8 +14,6 @@ public interface ILanguageAccess {
 
 	public void createStepDefinitionParameters(Object stepDefinition);
 
-	public Object createStepObject();
-
 	public String getHeaderString();
 
 	public List<?> getParameters(Object stepDefinition);
