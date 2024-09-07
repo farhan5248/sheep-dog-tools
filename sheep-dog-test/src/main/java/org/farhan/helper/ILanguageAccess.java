@@ -10,15 +10,15 @@ public interface ILanguageAccess {
 
 	public ArrayList<String> getComponentObjects(String component) throws Exception;
 
-	public Object addStepDefinition(Object stepObject);
+	public Object createStepDefinition(Object stepObject);
 
 	public void createStepDefinitionParameters(Object stepDefinition);
 
-	public String getHeaderString();
+	public String getStepParametersString();
 
-	public List<?> getParameters(Object stepDefinition);
+	public List<?> getStepDefinitionParameters(Object stepDefinition);
 
-	public String getParametersString(Object parameters);
+	public String getStepDefinitionParametersString(Object parameters);
 
 	public Object getStep();
 
@@ -32,9 +32,7 @@ public interface ILanguageAccess {
 
 	public boolean hasParameters(Object stepDefinition);
 
-	public String getOutputName();
-
-	public Object getOrCreateStepObject(String objectQualifiedName) throws Exception;
+	public Object createStepObject(String objectQualifiedName) throws Exception;
 
 	public Object getStepObject(String objectQualifiedName) throws Exception;
 

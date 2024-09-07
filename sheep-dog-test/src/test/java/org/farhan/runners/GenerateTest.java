@@ -21,5 +21,6 @@ public class GenerateTest {
 	@BeforeAll
 	public static void before_or_after_all() {
 		TestObjectFactory.setPre(true);
+		TestObjectFactory.reset();
 	}
 }

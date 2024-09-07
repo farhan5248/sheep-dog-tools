@@ -65,7 +65,7 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 	private void completeName(Step step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
-			for (Entry<String, String> p : StepDefinitionHelper.getProposals(new LanguageAccessImpl(step)).entrySet()) {
+			for (Entry<String, String> p : StepDefinitionHelper.propose(new LanguageAccessImpl(step)).entrySet()) {
 				acceptor.accept(createCompletionProposal(p.getKey(), p.getValue(), null, context));
 			}
 		} catch (Exception e) {

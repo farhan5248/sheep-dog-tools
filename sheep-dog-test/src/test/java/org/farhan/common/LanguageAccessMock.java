@@ -10,26 +10,14 @@ import org.farhan.helper.ILanguageAccess;
 
 public class LanguageAccessMock implements ILanguageAccess {
 
-	private static String objectQualifiedName;
-	private static String stepDefinitionName;
-	private static String stepName = "";
-	private static ArrayList<String> stepHeaders = new ArrayList<String>();
-	private static ArrayList<String> previousSteps = new ArrayList<String>();
-	private static HashMap<String, ArrayList<ArrayList<String>>> stepObject = null;
-
-	public LanguageAccessMock(String stepName) {
-		LanguageAccessMock.stepName = stepName;
-	}
+	private String validationMessage;
+	private String stepName = "";
+	private ArrayList<String> stepParameters = new ArrayList<String>();
+	// TODO make tests for this
+	private ArrayList<String> previousSteps = new ArrayList<String>();
+	private HashMap<String, ArrayList<ArrayList<String>>> stepObject = null;
 
 	public LanguageAccessMock() {
-	}
-
-	@Override
-	public Object addStepDefinition(Object stepObject) {
-		// TODO rename to createStepDefinition
-		createStepDefinition(stepName);
-		LanguageAccessMock.stepDefinitionName = stepName;
-		return stepDefinitionName;
 	}
 
 	private String cellsToString(List<String> cells) {
@@ -45,32 +33,26 @@ public class LanguageAccessMock implements ILanguageAccess {
 		return cellsAsString;
 	}
 
+	@Override
+	public Object createStepDefinition(Object stepObject) {
+		createStepDefinition(stepName);
+		return stepName;
+	}
+
 	public Object createStepDefinition(String stepDefinitionName) {
-		if (LanguageAccessMock.stepObject.get(stepDefinitionName) == null) {
-			LanguageAccessMock.stepObject.put(stepDefinitionName, new ArrayList<ArrayList<String>>());
+		if (this.stepObject.get(stepDefinitionName) == null) {
+			this.stepObject.put(stepDefinitionName, new ArrayList<ArrayList<String>>());
 		}
-		return LanguageAccessMock.stepObject.get(stepDefinitionName);
+		return this.stepObject.get(stepDefinitionName);
 	}
 
 	@Override
 	public void createStepDefinitionParameters(Object stepDefinitionName) {
-		LanguageAccessMock.stepObject.get(stepDefinitionName).add(stepHeaders);
+		this.stepObject.get(stepDefinitionName).add(stepParameters);
 	}
 
 	@Override
-	public ArrayList<String> getComponentObjects(String component) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getHeaderString() {
-		return cellsToString(stepHeaders);
-	}
-
-	@Override
-	public Object getOrCreateStepObject(String objectQualifiedName) throws Exception {
-		LanguageAccessMock.objectQualifiedName = objectQualifiedName;
+	public Object createStepObject(String objectQualifiedName) throws Exception {
 		if (stepObject == null) {
 			stepObject = new HashMap<String, ArrayList<ArrayList<String>>>();
 		}
@@ -78,18 +60,9 @@ public class LanguageAccessMock implements ILanguageAccess {
 	}
 
 	@Override
-	public String getOutputName() {
-		return "src-gen-step-defs";
-	}
-
-	@Override
-	public List<?> getParameters(Object stepDefinition) {
-		return LanguageAccessMock.stepObject.get(stepDefinition.toString());
-	}
-
-	@Override
-	public String getParametersString(Object parameters) {
-		return cellsToString((ArrayList<String>) parameters);
+	public ArrayList<String> getComponentObjects(String component) throws Exception {
+		// TODO Make a test that uses this
+		return null;
 	}
 
 	@Override
@@ -99,7 +72,7 @@ public class LanguageAccessMock implements ILanguageAccess {
 
 	@Override
 	public ArrayList<String> getProjectComponents() throws Exception {
-		// TODO Auto-generated method stub
+		// TODO Make test that uses this
 		return null;
 	}
 
@@ -108,19 +81,25 @@ public class LanguageAccessMock implements ILanguageAccess {
 		return stepName;
 	}
 
-	public String getStepDefinitionName() {
-		return LanguageAccessMock.stepDefinitionName;
-	}
-
 	@Override
 	public String getStepDefinitionName(Object stepDefinition) {
 		return (String) stepDefinition;
 	}
 
 	@Override
+	public List<?> getStepDefinitionParameters(Object stepDefinition) {
+		return this.stepObject.get(stepDefinition.toString());
+	}
+
+	@Override
+	public String getStepDefinitionParametersString(Object parameters) {
+		return cellsToString((ArrayList<String>) parameters);
+	}
+
+	@Override
 	public List<?> getStepDefinitions(Object stepObject) {
 		ArrayList<String> stepDefinitionNames = new ArrayList<String>();
-		for (String name : LanguageAccessMock.stepObject.keySet()) {
+		for (String name : this.stepObject.keySet()) {
 			stepDefinitionNames.add(name);
 		}
 		return stepDefinitionNames;
@@ -136,25 +115,34 @@ public class LanguageAccessMock implements ILanguageAccess {
 		return stepObject;
 	}
 
-	public String getStepObjectName() {
-		return LanguageAccessMock.objectQualifiedName;
+	@Override
+	public String getStepParametersString() {
+		return cellsToString(stepParameters);
+	}
+
+	public String getValidationMessage() {
+		return this.validationMessage;
 	}
 
 	@Override
 	public boolean hasParameters(Object stepDefinition) {
-		return !LanguageAccessMock.stepObject.get(stepName).isEmpty();
+		return !this.stepObject.get(stepName).isEmpty();
 	}
 
 	@Override
 	public void saveObject(Object theObject, Map<Object, Object> options) throws Exception {
 	}
 
-	public void setStepHeaders(String header) {
-		LanguageAccessMock.stepHeaders.add(header);
+	public void setStepName(String stepName) {
+		this.stepName = stepName;
 	}
 
-	public void setStepName(String stepName) {
-		LanguageAccessMock.stepName = stepName;
+	public void setStepParameters(String header) {
+		this.stepParameters.add(header);
+	}
+
+	public void setValidationMessage(String message) {
+		this.validationMessage = message;
 	}
 
 }

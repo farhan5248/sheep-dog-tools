@@ -46,7 +46,7 @@ public class CucumberValidator extends AbstractCucumberValidator {
 				try {
 					// if it's valid, then check if the the step def exists, if not call the
 					// generator in the quick fix
-					String problems = StepDefinitionHelper.getProblems(new LanguageAccessImpl(step));
+					String problems = StepDefinitionHelper.validate(new LanguageAccessImpl(step));
 					if (!problems.isEmpty()) {
 						warning(problems, CucumberPackage.Literals.STEP__NAME, MISSING_STEP_DEF, step.getName());
 					}

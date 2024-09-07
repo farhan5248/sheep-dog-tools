@@ -7,7 +7,7 @@ import java.util.TreeSet;
 
 public class StepDefinitionHelper {
 
-	public static TreeMap<String, String> getProposals(ILanguageAccess la) throws Exception {
+	public static TreeMap<String, String> propose(ILanguageAccess la) throws Exception {
 		TreeMap<String, String> proposals = new TreeMap<String, String>();
 		String component;
 		String object;
@@ -49,34 +49,34 @@ public class StepDefinitionHelper {
 	}
 
 	public static void generate(ILanguageAccess la, Map<Object, Object> options) throws Exception {
-		Object theObject = la.getOrCreateStepObject(getObjectQualifiedName(la));
-		Object theStepDef = getOrCreateStepDef(theObject, la);
-		getOrCreateParameters(theStepDef, la);
-		la.saveObject(theObject, options);
+		Object stepObject = la.createStepObject(getStepObjectQualifiedName(la));
+		Object stepDefinition = createStepDefinition(stepObject, la);
+		createStepDefinitionParameters(stepDefinition, la);
+		la.saveObject(stepObject, options);
 	}
 
-	public static String getProblems(ILanguageAccess la) throws Exception {
+	public static String validate(ILanguageAccess la) throws Exception {
 
-		String objectQualifiedName = getObjectQualifiedName(la);// check if the object exists
-		if (la.getStepObject(objectQualifiedName) == null) {
-			return "This object doesn't exist for: " + objectQualifiedName;
+		String stepObjectQualifiedName = getStepObjectQualifiedName(la);// check if the object exists
+		if (la.getStepObject(stepObjectQualifiedName) == null) {
+			return "This object doesn't exist for: " + stepObjectQualifiedName;
 		}
 		// check if the keyword exists
-		Object theObject = la.getOrCreateStepObject(objectQualifiedName);
-		Object theStepDef = getStepDef(theObject, la);
+		Object stepObject = la.createStepObject(stepObjectQualifiedName);
+		Object theStepDef = getStepDefinition(stepObject, la);
 		if (theStepDef == null) {
-			return "This object step definition doesn't exist for: " + objectQualifiedName;
+			return "This object step definition doesn't exist for: " + stepObjectQualifiedName;
 		}
 		// check if the parameters exist
 		if (la.hasParameters(theStepDef)) {
-			String headersString = la.getHeaderString();
-			for (Object parameters : la.getParameters(theStepDef)) {
-				String paramSetString = la.getParametersString((Object) parameters);
+			String headersString = la.getStepParametersString();
+			for (Object parameters : la.getStepDefinitionParameters(theStepDef)) {
+				String paramSetString = la.getStepDefinitionParametersString((Object) parameters);
 				if (headersString.contentEquals(paramSetString)) {
 					return "";
 				}
 			}
-			return "This object step definition parameter set doesn't exist for: " + objectQualifiedName;
+			return "This object step definition parameter set doesn't exist for: " + stepObjectQualifiedName;
 		}
 		return "";
 	}
@@ -97,17 +97,17 @@ public class StepDefinitionHelper {
 
 	private static TreeSet<String> getObjectDefinitions(ILanguageAccess la) throws Exception {
 		TreeSet<String> objectDefinitions = new TreeSet<String>();
-		String objectQualifiedName = getObjectQualifiedName(la);
+		String objectQualifiedName = getStepObjectQualifiedName(la);
 		if (la.getStepObject(objectQualifiedName) != null) {
-			Object thObject = la.getOrCreateStepObject(objectQualifiedName);
-			for (Object stepDef : la.getStepDefinitions(thObject)) {
+			Object stepObject = la.createStepObject(objectQualifiedName);
+			for (Object stepDef : la.getStepDefinitions(stepObject)) {
 				objectDefinitions.add(la.getStepDefinitionName((Object) stepDef));
 			}
 		}
 		return objectDefinitions;
 	}
 
-	private static String getObjectQualifiedName(ILanguageAccess la) {
+	private static String getStepObjectQualifiedName(ILanguageAccess la) {
 		String component = StepHelper.getComponent(la.getStepName());
 		String object = StepHelper.getObject(la.getStepName());
 
@@ -164,12 +164,11 @@ public class StepDefinitionHelper {
 		}
 	}
 
-	private static void getOrCreateParameters(Object theStepDef, ILanguageAccess la) {
+	private static void createStepDefinitionParameters(Object theStepDef, ILanguageAccess la) {
 		if (la.hasParameters(theStepDef)) {
-			// TODO this should be getStepHeadersList and put ListToString here
-			String headersString = la.getHeaderString();
-			for (Object parameters : la.getParameters(theStepDef)) {
-				String paramSetString = la.getParametersString((Object) parameters);
+			String headersString = la.getStepParametersString();
+			for (Object parameters : la.getStepDefinitionParameters(theStepDef)) {
+				String paramSetString = la.getStepDefinitionParametersString((Object) parameters);
 				if (headersString.contentEquals(paramSetString)) {
 					return;
 				}
@@ -178,20 +177,17 @@ public class StepDefinitionHelper {
 		la.createStepDefinitionParameters(theStepDef);
 	}
 
-	private static Object getOrCreateStepDef(Object theObject, ILanguageAccess la) {
-		// TODO, shouldn't pass theObject since la will already know which step object
-		// the step refers to
-		Object stepDef = getStepDef(theObject, la);
+	private static Object createStepDefinition(Object stepObject, ILanguageAccess la) {
+		Object stepDef = getStepDefinition(stepObject, la);
 		if (stepDef == null) {
-			return la.addStepDefinition(theObject);
+			return la.createStepDefinition(stepObject);
 		} else {
 			return stepDef;
 		}
 	}
 
-	private static Object getStepDef(Object thObject, ILanguageAccess la) {
-
-		for (Object stepDef : la.getStepDefinitions(thObject)) {
+	private static Object getStepDefinition(Object stepObject, ILanguageAccess la) {
+		for (Object stepDef : la.getStepDefinitions(stepObject)) {
 			if (la.getStepDefinitionName((Object) stepDef).contentEquals(la.getStepName())) {
 				return (Object) stepDef;
 			}

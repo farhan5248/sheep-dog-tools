@@ -16,7 +16,7 @@ public abstract class TestObject {
 
 	static LanguageAccessMock la = null;
 
-	protected LanguageAccessMock getLanguageAccess() {
+	protected LanguageAccessMock getLA() {
 		if (la == null) {
 			la = new LanguageAccessMock();
 		}

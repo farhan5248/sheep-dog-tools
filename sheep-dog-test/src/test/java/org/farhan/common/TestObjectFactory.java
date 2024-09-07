@@ -41,15 +41,9 @@ public abstract class TestObjectFactory {
 				return classes.get(className);
 			} else {
 				Class<?> gmoClass = getClassInPackage(packageName, className);
-				if (className.endsWith("File")) {
-					FileObject foo = (FileObject) gmoClass.getConstructor().newInstance();
-					classes.put(className, foo);
-					return foo;
-				} else {
-					TestObject gmo = (TestObject) gmoClass.getConstructor().newInstance();
-					classes.put(className, gmo);
-					return gmo;
-				}
+				TestObject gmo = (TestObject) gmoClass.getConstructor().newInstance();
+				classes.put(className, gmo);
+				return gmo;
 			}
 		} catch (Exception e) {
 			Assertions
