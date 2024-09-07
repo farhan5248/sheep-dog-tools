@@ -12,11 +12,11 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("cucumber/actions/Propose.feature")
+@SelectClasspathResource("cucumber/actions/ProposePredicate.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
 @IncludeTags("debug")
-public class ProposeTest {
+public class ProposePredicateTest {
 
 	@BeforeAll
 	public static void before_or_after_all() {

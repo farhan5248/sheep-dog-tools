@@ -21,26 +21,19 @@ public class StepDefinitionHelper {
 		if (object.isEmpty()) {
 			if (component.isEmpty()) {
 				for (String stepDefComponent : la.getProjectComponents()) {
-					// TODO Just The, has existing component folders
-					// TODO Just The, has no existing component folders
 					proposals.put("The " + stepDefComponent + ",", "The " + stepDefComponent + ",");
 				}
 			} else {
 				for (String stepDefObject : la.getComponentObjects(component)) {
-					// TODO Just The component, has existing object
 					proposals.put("The " + component + ", " + stepDefObject, stepDefObject);
 				}
 			}
 			for (String previousObject : getPreviousObjects(la)) {
-				// TODO Just The, has previous steps
-				// TODO Just The, has no previous steps
 				proposals.put("The " + previousObject, "The " + previousObject);
 			}
 		} else {
 			// else if there's an object get a list of keywords for the suggestions
 			for (String stepDef : getObjectDefinitions(la)) {
-				// TODO component with object, has step def
-				// TODO object, has step def
 				proposals.put(stepDef, stepDef);
 			}
 		}

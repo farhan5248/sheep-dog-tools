@@ -1,5 +1,5 @@
 @debug
-Feature: Propose
+Feature: Propose Object
 
   Scenario: No object no component no previous no components
 

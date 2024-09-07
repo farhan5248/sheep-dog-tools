@@ -144,6 +144,7 @@ public class EclipseMock implements ILanguageAccess {
 			this.stepName = stepName;
 		} else {
 			previousSteps.add(this.stepName);
+			// TODO convert each step into a definition
 			this.stepName = stepName;
 		}
 	}
