@@ -7,7 +7,13 @@ import org.farhan.objects.xtext.ProcessFeatureFile;
 
 public class ProcessFeatureFileImpl extends FeatureFileObject implements ProcessFeatureFile {
 
-    public void setStepsSnippetStepName(HashMap<String, String> keyMap) {
-    	addStep(keyMap.get("Step Name"));
+	public void setStepsSnippetStepName(HashMap<String, String> keyMap) {
+		getLanguageAccess().setStepName(keyMap.get("Step Name"));
 	}
+
+	@Override
+	public void setStepsSnippetHeaders(HashMap<String, String> keyMap) {
+		getLanguageAccess().setStepHeaders(keyMap.get("Headers"));
+	}
+
 }

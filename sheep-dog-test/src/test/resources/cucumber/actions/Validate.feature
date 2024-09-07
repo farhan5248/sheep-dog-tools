@@ -1,3 +1,4 @@
+@debug
 Feature: Validate
 
   Scenario: This object doesn't exist validation
@@ -10,7 +11,6 @@ Feature: Validate
           | Message                                                          |
           | This object doesn't exist for: daily batchjob/Input file.feature |
 
-  @debug
   Scenario: This object step definition doesn't exist validation
 
     Given The xtext plugin, src/test/resources/cucumber/Process.feature file, steps snippet is created as follows

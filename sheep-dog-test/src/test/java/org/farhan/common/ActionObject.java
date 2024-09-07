@@ -8,12 +8,10 @@ public abstract class ActionObject extends TestObject {
 	protected void runAction(String action) {
 		try {
 			if (action.contentEquals("validate")) {
-				DialogObject.setMessage(
-						StepDefinitionHelper.getProblems(new LanguageAccessMock(FeatureFileObject.getStep())));
+				DialogObject.setMessage(StepDefinitionHelper.getProblems(getLanguageAccess()));
 			}
 			if (action.contentEquals("generate")) {
-				LanguageAccessMock la = new LanguageAccessMock(FeatureFileObject.getStep());
-				StepDefinitionHelper.generate(la, null);				
+				StepDefinitionHelper.generate(getLanguageAccess(), null);
 			}
 
 		} catch (Exception e) {

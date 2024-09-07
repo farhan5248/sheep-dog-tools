@@ -49,13 +49,10 @@ public class StepDefinitionHelper {
 	}
 
 	public static void generate(ILanguageAccess la, Map<Object, Object> options) throws Exception {
-		// TODO object doesn't exist
-		Object thObject = la.getOrCreateStepObject(getObjectQualifiedName(la));
-		// TODO object exists but not keyword
-		Object theStepDef = getOrCreateStepDef(thObject, la);
-		// TODO keyword exists but doesn't have parameter set
+		Object theObject = la.getOrCreateStepObject(getObjectQualifiedName(la));
+		Object theStepDef = getOrCreateStepDef(theObject, la);
 		getOrCreateParameters(theStepDef, la);
-		la.saveObject(thObject, options);
+		la.saveObject(theObject, options);
 	}
 
 	public static String getProblems(ILanguageAccess la) throws Exception {
@@ -65,10 +62,9 @@ public class StepDefinitionHelper {
 			return "This object doesn't exist for: " + objectQualifiedName;
 		}
 		// check if the keyword exists
-		Object thObject = la.getOrCreateStepObject(objectQualifiedName);
-		Object theStepDef = getStepDef(thObject, la);
+		Object theObject = la.getOrCreateStepObject(objectQualifiedName);
+		Object theStepDef = getStepDef(theObject, la);
 		if (theStepDef == null) {
-			// TODO object exists but not keyword
 			return "This object step definition doesn't exist for: " + objectQualifiedName;
 		}
 		// check if the parameters exist
@@ -80,7 +76,6 @@ public class StepDefinitionHelper {
 					return "";
 				}
 			}
-			// TODO keyword exists but doesn't have parameter set
 			return "This object step definition parameter set doesn't exist for: " + objectQualifiedName;
 		}
 		return "";

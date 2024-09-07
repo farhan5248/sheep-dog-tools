@@ -6,3 +6,7 @@ Feature: src/test/resources/cucumber/Process.feature file
 
           | Step Name |
 
+    Examples: 2
+
+          | Step Name | Headers |
+

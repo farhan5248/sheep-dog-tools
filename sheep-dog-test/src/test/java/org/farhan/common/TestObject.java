@@ -14,6 +14,15 @@ public abstract class TestObject {
 
 	protected HashMap<String, String> keyValue = new HashMap<String, String>();
 
+	static LanguageAccessMock la = null;
+
+	protected LanguageAccessMock getLanguageAccess() {
+		if (la == null) {
+			la = new LanguageAccessMock();
+		}
+		return la;
+	}
+
 	public void setComponent(String component) {
 		keyValue.put("component", component);
 	}
