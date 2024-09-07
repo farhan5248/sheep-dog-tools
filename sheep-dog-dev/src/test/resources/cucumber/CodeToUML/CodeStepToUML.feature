@@ -17,7 +17,7 @@ Feature: Code Step To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Messages section will be created as follows
+      And The target/uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                      |
           | specs::Process::Submit | The blah application, Given page is empty    |
           | specs::Process::Submit | The blah application, When page is empty     |

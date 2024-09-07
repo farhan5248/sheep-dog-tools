@@ -11,7 +11,7 @@ public class StepHelper {
 	private static final String OBJECT_EDGE_REGEX = "( request| goal| job| action)"; // 7
 	private static final String OBJECT_REGEX = "(( " + NAME_REGEX + "+)(" + OBJECT_VERTEX_REGEX + "|" + OBJECT_EDGE_REGEX
 			+ "))";
-	private static final String DETAILS_REGEX = "(,( " + NAME_REGEX + "+)( section| fragment| table| snippet| list))?";
+	private static final String DETAILS_REGEX = "(( " + NAME_REGEX + "+)( section| fragment| table| snippet| list))?";
 	private static final String STATE_VERTEX_REGEX = "( empty| present| absent| enabled| disabled| valid| invalid| uploaded| downloaded| created| set| unset)";
 	private static final String STATE_EDGE_REGEX = "( executed| sent| triggered| performed)";
 	private static final String STATE_REGEX = "(( is| isn't| will be| won't be)(" + STATE_VERTEX_REGEX + "|"

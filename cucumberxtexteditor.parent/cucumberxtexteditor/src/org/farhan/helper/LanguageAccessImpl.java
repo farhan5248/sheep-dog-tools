@@ -63,7 +63,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	}
 
 	@Override
-	public Object createStepDefinition(Object stepObject) {
+	public Object createStepDefinition(Object stepObject, String predicate) {
 		AbstractScenario stepDefinition;
 		// TODO when using Step Definition keyword, allow 0 or more tables (Examples)
 		if (getHeader() != null) {
@@ -71,7 +71,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		} else {
 			stepDefinition = CucumberFactory.eINSTANCE.createScenario();
 		}
-		stepDefinition.setName(step.getName());
+		stepDefinition.setName(predicate);
 		((Feature) stepObject).getAbstractScenarios().add(stepDefinition);
 		return stepDefinition;
 	}
@@ -241,4 +241,5 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	public void saveObject(Object theObject, Map<Object, Object> options) throws Exception {
 		((EObject) theObject).eResource().save(options);
 	}
+
 }

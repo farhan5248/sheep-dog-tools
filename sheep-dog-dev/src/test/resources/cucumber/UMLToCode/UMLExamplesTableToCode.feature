@@ -19,7 +19,7 @@ Feature: UML Examples Table To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file, Scenario Outline Examples Table section will be created as follows
+      And The mbt-transformer plugin, Process.feature file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row      |
           | Submit | Examples 1 | \| h1 \| |
           | Submit | Examples 1 | \| v1 \| |
@@ -43,7 +43,7 @@ Feature: UML Examples Table To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file, Scenario Outline Examples Table section will be created as follows
+      And The mbt-transformer plugin, Process.feature file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row            |
           | Submit | Examples 1 | \| h1 \| h2 \| |
           | Submit | Examples 1 | \| v1 \| v2 \| |
@@ -69,7 +69,7 @@ Feature: UML Examples Table To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file, Scenario Outline Examples Table section will be created as follows
+      And The mbt-transformer plugin, Process.feature file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row                  |
           | Submit | Examples 1 | \| h1 \| h2 \| h3 \| |
           | Submit | Examples 1 | \| v1 \| v2 \| v3 \| |

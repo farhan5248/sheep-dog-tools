@@ -1,4 +1,4 @@
 Feature: suggestion action
 
-  Scenario: The suggestion action is performed
+  Scenario: is performed
 

@@ -1,14 +1,14 @@
 Feature: src/test/java/org/farhan/objects/blah/ObjectPage.java file
 
-  Scenario: The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
+  Scenario: will be present
 
-  Scenario Outline: The mbt-transformer plugin, ObjectPage.java file, Object section will be created as follows
+  Scenario Outline: Object section will be created as follows
 
     Examples: 1
 
           | Interface Name | Package | Import |
 
-  Scenario Outline: The mbt-transformer plugin, ObjectPage.java file, Fields section will be created as follows
+  Scenario Outline: Fields section will be created as follows
 
     Examples: 1
 
@@ -22,5 +22,5 @@ Feature: src/test/java/org/farhan/objects/blah/ObjectPage.java file
 
           | Method Name |
 
-  Scenario: The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file is created as follows
+  Scenario: is created as follows
 

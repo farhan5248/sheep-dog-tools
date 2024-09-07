@@ -24,8 +24,8 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 	public void assertParameters(HashMap<String, String> keyMap) {
 		try {
 			getLA().createStepObject(keyMap.get("Object Name"));
-			getLA().createStepDefinition(getSpecial(keyMap.get("Step Name")));
-			Assertions.assertTrue(getLA().getStepDefinitionParameters(getSpecial(keyMap.get("Step Name"))).toString()
+			getLA().createStepDefinition(getSpecial(keyMap.get("Step Definition Name")));
+			Assertions.assertTrue(getLA().getStepDefinitionParameters(getSpecial(keyMap.get("Step Definition Name"))).toString()
 					.contains("[" + keyMap.get("Parameters") + "]"));
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
@@ -34,13 +34,12 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 	}
 
 	@Override
-	public void assertStepName(HashMap<String, String> keyMap) {
-		// TODO this should be step definition name
+	public void assertStepDefinitionName(HashMap<String, String> keyMap) {
 		try {
 			Object stepObject = getLA().getStepObject(keyMap.get("Object Name"));
 			Assertions.assertNotNull(stepObject);
 			for (Object stepDef : getLA().getStepDefinitions(stepObject)) {
-				if (getLA().getStepDefinitionName((Object) stepDef).contentEquals(getSpecial(keyMap.get("Step Name")))) {
+				if (getLA().getStepDefinitionName((Object) stepDef).contentEquals(getSpecial(keyMap.get("Step Definition Name")))) {
 					return;
 				}
 			}
@@ -64,7 +63,7 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 		try {
 			getLA().createStepObject(keyMap.get("Object Name"));
 			ArrayList<ArrayList<String>> stepDefinitionList = (ArrayList<ArrayList<String>>) getLA()
-					.createStepDefinition(getSpecial(keyMap.get("Step Name")));
+					.createStepDefinition(getSpecial(keyMap.get("Step Definition Name")));
 			ArrayList<String> parameters = new ArrayList<String>();
 			parameters.add(keyMap.get("Parameters"));
 			stepDefinitionList.add(parameters);
@@ -74,10 +73,10 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 	}
 
 	@Override
-	public void setStepName(HashMap<String, String> keyMap) {
+	public void setStepDefinitionName(HashMap<String, String> keyMap) {
 		try {
 			getLA().createStepObject(keyMap.get("Object Name"));
-			getLA().createStepDefinition(getSpecial(keyMap.get("Step Name")));
+			getLA().createStepDefinition(getSpecial(keyMap.get("Step Definition Name")));
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}

@@ -16,10 +16,10 @@ Feature: UML Background To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file, Background Steps section will be created as follows
+      And The mbt-transformer plugin, Process.feature file Background Steps section will be created as follows
           | Name  | Step                            |
           | Setup | Given The Object0 page is valid |
-      And The mbt-transformer plugin, Process.feature file, Scenarios Steps section will be created as follows
+      And The mbt-transformer plugin, Process.feature file Scenarios Steps section will be created as follows
           | Name   | Step                            |
           | Submit | Given The Object1 page is valid |
 
@@ -39,7 +39,7 @@ Feature: UML Background To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file, Background section will be created as follows
+      And The mbt-transformer plugin, Process.feature file Background section will be created as follows
           | Name  | Description |
           | Setup | Desc line 1 |
 
@@ -61,10 +61,10 @@ Feature: UML Background To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file, Background Steps section will be created as follows
+      And The mbt-transformer plugin, Process.feature file Background Steps section will be created as follows
           | Name  | Step                            |
           | Setup | Given The Object0 page is valid |
-      And The mbt-transformer plugin, Process.feature file, Scenarios Steps section will be created as follows
+      And The mbt-transformer plugin, Process.feature file Scenarios Steps section will be created as follows
           | Name     | Step                            |
           | Submit 1 | Given The Object1 page is valid |
           | Submit 2 | Given The Object2 page is valid |
@@ -90,10 +90,10 @@ Feature: UML Background To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file, Background Steps section will be created as follows
+      And The mbt-transformer plugin, Process.feature file Background Steps section will be created as follows
           | Name  | Step                            |
           | Setup | Given The Object0 page is valid |
-      And The mbt-transformer plugin, Process.feature file, Scenarios Steps section will be created as follows
+      And The mbt-transformer plugin, Process.feature file Scenarios Steps section will be created as follows
           | Name     | Step                            |
           | Submit 1 | Given The Object1 page is valid |
           | Submit 2 | Given The Object2 page is valid |
@@ -115,7 +115,7 @@ Feature: UML Background To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file, Background Steps section will be created as follows
+      And The mbt-transformer plugin, Process.feature file Background Steps section will be created as follows
           | Name  | Step                                  |
           | Setup | Given The Object<Index> page is valid |
 
@@ -142,7 +142,7 @@ Feature: UML Background To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file, Background Steps section will be created as follows
+      And The mbt-transformer plugin, Process.feature file Background Steps section will be created as follows
           | Name  | Step                                  |
           | Setup | Given The Object<Index> page is valid |
 

@@ -9,7 +9,7 @@ Feature: Code Feature To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Class section will be created as follows
+      And The target/uml/pst.uml file Class section will be created as follows
           | Class Name     |
           | specs::Process |
 
@@ -23,10 +23,10 @@ Feature: Code Feature To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Class Annotations section will be created as follows
+      And The target/uml/pst.uml file Class Annotations section will be created as follows
           | Class Name     | Annotation Name | Annotation Detail |
           | specs::Process | tags            | tag1              |
-      And The target/uml/pst.uml file, Class Comments section will be created as follows
+      And The target/uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment     |
           | specs::Process | Desc line 1 |
 
@@ -41,10 +41,10 @@ Feature: Code Feature To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Class Annotations section will be created as follows
+      And The target/uml/pst.uml file Class Annotations section will be created as follows
           | Class Name     | Annotation Name | Annotation Detail |
           | specs::Process | tags            | tag<Index>        |
-      And The target/uml/pst.uml file, Class Comments section will be created as follows
+      And The target/uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment                  |
           | specs::Process | Desc line 1\nDesc line 2 |
 
@@ -66,10 +66,10 @@ Feature: Code Feature To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Class Annotations section will be created as follows
+      And The target/uml/pst.uml file Class Annotations section will be created as follows
           | Class Name     | Annotation Name | Annotation Detail |
           | specs::Process | tags            | tag<Index>        |
-      And The target/uml/pst.uml file, Class Comments section will be created as follows
+      And The target/uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment                               |
           | specs::Process | Desc line 1\nDesc line 2\nDesc line 3 |
 

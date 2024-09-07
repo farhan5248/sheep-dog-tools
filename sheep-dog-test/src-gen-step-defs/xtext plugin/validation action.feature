@@ -1,4 +1,4 @@
 Feature: validation action
 
-  Scenario: The validation action is performed
+  Scenario: is performed
 

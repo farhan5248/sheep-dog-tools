@@ -8,82 +8,82 @@ public class VertexValidatorTest {
 	@Test
 	public void testIsVertex() {
 		Assertions.assertTrue(
-				StepHelper.isVertex("The Something1 application, Something2 file, Something3 section is empty"));
+				StepHelper.isVertex("The Something1 application, Something2 file Something3 section is empty"));
 	}
 
 	@Test
 	public void testIsComponent() {
 		Assertions.assertTrue(
-				StepHelper.isComponentStep("The Something1 application, Something2 file, Something3 section is empty"));
+				StepHelper.isComponentStep("The Something1 application, Something2 file Something3 section is empty"));
 	}
 
 	@Test
 	public void testGetAppName() {
 		Assertions.assertTrue(
-				StepHelper.getComponentName("The Something1 application, Something2 file, Something3 section is empty")
+				StepHelper.getComponentName("The Something1 application, Something2 file Something3 section is empty")
 						.contentEquals("Something1"));
 	}
 
 	@Test
 	public void testGetAppType() {
 		Assertions.assertTrue(
-				StepHelper.getComponentType("The Something1 application, Something2 file, Something3 section is empty")
+				StepHelper.getComponentType("The Something1 application, Something2 file Something3 section is empty")
 						.contentEquals("application"));
 	}
 
 	@Test
 	public void testGetObjName() {
 		Assertions.assertTrue(
-				StepHelper.getObjectName("The Something1 application, Something2 file, Something3 section is empty")
+				StepHelper.getObjectName("The Something1 application, Something2 file Something3 section is empty")
 						.contentEquals("Something2"));
 	}
 
 	@Test
 	public void testGetObjType() {
 		Assertions.assertTrue(
-				StepHelper.getObjectType("The Something1 application, Something2 file, Something3 section is empty")
+				StepHelper.getObjectType("The Something1 application, Something2 file Something3 section is empty")
 						.contentEquals("file"));
 	}
 
 	@Test
 	public void testGetDetailsName() {
 		Assertions.assertTrue(
-				StepHelper.getDetailsName("The Something1 application, Something2 file, Something3 section is empty")
+				StepHelper.getDetailsName("The Something1 application, Something2 file Something3 section is empty")
 						.contentEquals("Something3"));
 	}
 
 	@Test
 	public void testGetDetails() {
 		Assertions.assertTrue(
-				StepHelper.getDetails("The Something1 application, Something2 file, Something3 section is empty")
-						.contentEquals(", Something3 section"));
+				StepHelper.getDetails("The Something1 application, Something2 file Something3 section is empty")
+						.contentEquals("Something3 section"));
 	}
 
 	@Test
 	public void testGetDetailsType() {
 		Assertions.assertTrue(
-				StepHelper.getDetailsType("The Something1 application, Something2 file, Something3 section is empty")
+				StepHelper.getDetailsType("The Something1 application, Something2 file Something3 section is empty")
 						.contentEquals("section"));
 	}
 
 	@Test
 	public void testGetState() {
 		Assertions.assertTrue(
-				StepHelper.getState("The Something1 application, Something2 file, Something3 section is empty")
+				StepHelper.getState("The Something1 application, Something2 file Something3 section is empty")
 						.contentEquals("is empty"));
 	}
 
 	@Test
 	public void testGetStateModality() {
 		Assertions.assertTrue(
-				StepHelper.getStateModality("The Something1 application, Something2 file, Something3 section is empty")
+				StepHelper.getStateModality("The Something1 application, Something2 file Something3 section is empty")
 						.contentEquals("is"));
 	}
 
 	@Test
 	public void testGetStateType() {
 		Assertions.assertTrue(
-				StepHelper.getStateType("The Something1 application, Something2 file, Something3 section is empty")
+				StepHelper.getStateType("The Something1 application, Something2 file Something3 section is empty")
 						.contentEquals("empty"));
 	}
 
@@ -167,31 +167,31 @@ public class VertexValidatorTest {
 	@Test
 	public void testDetailsRegexSection() {
 		Assertions.assertTrue(
-				StepHelper.isValid("The Something1 application, Something2 file, Something3 section is empty"));
+				StepHelper.isValid("The Something1 application, Something2 file Something3 section is empty"));
 	}
 
 	@Test
 	public void testDetailsRegexList() {
-		Assertions.assertTrue(
-				StepHelper.isValid("The Something1 application, Something2 file, Something3 list is empty"));
+		Assertions
+				.assertTrue(StepHelper.isValid("The Something1 application, Something2 file Something3 list is empty"));
 	}
 
 	@Test
 	public void testDetailsRegexFragment() {
 		Assertions.assertTrue(
-				StepHelper.isValid("The Something1 application, Something2 file, Something3 fragment is empty"));
+				StepHelper.isValid("The Something1 application, Something2 file Something3 fragment is empty"));
 	}
 
 	@Test
 	public void testDetailsRegexTable() {
 		Assertions.assertTrue(
-				StepHelper.isValid("The Something1 application, Something2 file, Something3 table is empty"));
+				StepHelper.isValid("The Something1 application, Something2 file Something3 table is empty"));
 	}
 
 	@Test
 	public void testDetailsRegexSnippet() {
 		Assertions.assertTrue(
-				StepHelper.isValid("The Something1 application, Something2 file, Something3 snippet is empty"));
+				StepHelper.isValid("The Something1 application, Something2 file Something3 snippet is empty"));
 	}
 
 	@Test

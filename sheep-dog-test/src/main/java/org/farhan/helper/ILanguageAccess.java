@@ -10,7 +10,7 @@ public interface ILanguageAccess {
 
 	public ArrayList<String> getComponentObjects(String component) throws Exception;
 
-	public Object createStepDefinition(Object stepObject);
+	public Object createStepDefinition(Object stepObject, String predicate);
 
 	public void createStepDefinitionParameters(Object stepDefinition);
 

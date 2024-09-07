@@ -42,9 +42,9 @@ public class EclipseMock implements ILanguageAccess {
 	}
 
 	@Override
-	public Object createStepDefinition(Object stepObject) {
-		createStepDefinition(stepName);
-		return stepName;
+	public Object createStepDefinition(Object stepObject, String predicate) {
+		createStepDefinition(predicate);
+		return predicate;
 	}
 
 	public Object createStepDefinition(String stepDefinitionName) {
@@ -132,7 +132,7 @@ public class EclipseMock implements ILanguageAccess {
 
 	@Override
 	public boolean hasParameters(Object stepDefinition) {
-		return !this.stepObject.get(stepName).isEmpty();
+		return !this.stepObject.get(stepDefinition).isEmpty();
 	}
 
 	@Override

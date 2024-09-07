@@ -34,7 +34,12 @@ public class StepDefinitionHelper {
 		} else {
 			// else if there's an object get a list of keywords for the suggestions
 			for (String stepDef : getObjectDefinitions(la)) {
-				proposals.put(stepDef, stepDef);
+
+				if (component.isEmpty()) {
+					proposals.put("The " + object + " " + stepDef, stepDef);
+				} else {
+					proposals.put("The " + component + ", " + object + " " + stepDef, stepDef);
+				}
 			}
 		}
 		return proposals;
@@ -55,7 +60,7 @@ public class StepDefinitionHelper {
 		}
 		// check if the keyword exists
 		Object stepObject = la.createStepObject(stepObjectQualifiedName);
-		Object theStepDef = getStepDefinition(stepObject, la);
+		Object theStepDef = getStepDefinition(stepObject, getPredicate(la.getStepName()), la);
 		if (theStepDef == null) {
 			return "This object step definition doesn't exist for: " + stepObjectQualifiedName;
 		}
@@ -170,21 +175,33 @@ public class StepDefinitionHelper {
 	}
 
 	private static Object createStepDefinition(Object stepObject, ILanguageAccess la) {
-		Object stepDef = getStepDefinition(stepObject, la);
+		String predicate = getPredicate(la.getStepName());
+		Object stepDef = getStepDefinition(stepObject, predicate, la);
 		if (stepDef == null) {
-			return la.createStepDefinition(stepObject);
+			return la.createStepDefinition(stepObject, predicate);
 		} else {
 			return stepDef;
 		}
 	}
 
-	private static Object getStepDefinition(Object stepObject, ILanguageAccess la) {
+	private static Object getStepDefinition(Object stepObject, String predicate, ILanguageAccess la) {
 		for (Object stepDef : la.getStepDefinitions(stepObject)) {
-			if (la.getStepDefinitionName((Object) stepDef).contentEquals(la.getStepName())) {
+			if (la.getStepDefinitionName((Object) stepDef).contentEquals(predicate)) {
 				return (Object) stepDef;
 			}
 		}
 		return null;
+	}
+
+	private static String getPredicate(String stepName) {
+		String component = StepHelper.getComponent(stepName);
+		String stepObject = StepHelper.getObject(stepName);
+		String predicate = stepName;
+		predicate = predicate.replaceFirst("^The ", "").trim();
+		predicate = predicate.replaceFirst("^" + component + ", ", "").trim();
+		predicate = predicate.replaceFirst("^" + stepObject, "").trim();
+		predicate = predicate.replaceFirst("^, ", "").trim();
+		return predicate;
 	}
 
 }

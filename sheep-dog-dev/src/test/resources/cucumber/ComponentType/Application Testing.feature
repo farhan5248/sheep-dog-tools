@@ -12,11 +12,11 @@ Feature: Application Testing
               Given The acme application, Log-In request is sent with
                     |  User | Password |
                     | admin | 12345678 |
-                And The Home page, Account Search section is present
+                And The Home page Account Search section is present
                When The Account Search request is sent with
                     |   Patient |
                     | John Done |
-               Then The Account Details page, Claims History table won't be present
+               Then The Account Details page Claims History table won't be present
           """
      When The cucumber-to-uml goal is executed
       And The uml-to-cucumber goal is executed
@@ -33,7 +33,7 @@ Feature: Application Testing
           
           public class AcmeAccountDetailsPageSteps {
           
-              @Given("^The Account Details page, Claims History table won't be present$")
+              @Given("^The Account Details page Claims History table won't be present$")
               public void theAccountDetailsPageClaimsHistoryTableWontBePresent() {
                   AcmeFactory.get("AccountDetailsPage").setComponent("acme");
                   AcmeFactory.get("AccountDetailsPage").setPath("Account Details");
@@ -76,7 +76,7 @@ Feature: Application Testing
           
           public class AcmeHomePageSteps {
           
-              @Given("^The Home page, Account Search section is present$")
+              @Given("^The Home page Account Search section is present$")
               public void theHomePageAccountSearchSectionIsPresent() {
                   AcmeFactory.get("HomePage").setComponent("acme");
                   AcmeFactory.get("HomePage").setPath("Home");

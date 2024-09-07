@@ -13,7 +13,7 @@ Feature: Document Scenario To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Messages section will be created as follows
+      And The target/uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                   |
           | specs::Process::Submit | The Object1 page is empty |
 
@@ -32,10 +32,10 @@ Feature: Document Scenario To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Annotations section will be created as follows
+      And The target/uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | tags            | tag1              |
-      And The target/uml/pst.uml file, Interaction Comments section will be created as follows
+      And The target/uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name       | Comment     |
           | specs::Process::Submit | Desc line 1 |
 
@@ -56,14 +56,14 @@ Feature: Document Scenario To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Annotations section will be created as follows
+      And The target/uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | tags            | tag1              |
           | specs::Process::Submit | tags            | tag2              |
-      And The target/uml/pst.uml file, Interaction Comments section will be created as follows
+      And The target/uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name       | Comment                  |
           | specs::Process::Submit | Desc line 1\nDesc line 2 |
-      And The target/uml/pst.uml file, Interaction Messages section will be created as follows
+      And The target/uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                   |
           | specs::Process::Submit | The Object1 page is empty |
           | specs::Process::Submit | The Object2 page is empty |
@@ -88,15 +88,15 @@ Feature: Document Scenario To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file, Interaction Annotations section will be created as follows
+      And The target/uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | tags            | tag1              |
           | specs::Process::Submit | tags            | tag2              |
           | specs::Process::Submit | tags            | tag3              |
-      And The target/uml/pst.uml file, Interaction Comments section will be created as follows
+      And The target/uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name       | Comment                               |
           | specs::Process::Submit | Desc line 1\nDesc line 2\nDesc line 3 |
-      And The target/uml/pst.uml file, Interaction Messages section will be created as follows
+      And The target/uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                   |
           | specs::Process::Submit | The Object1 page is empty |
           | specs::Process::Submit | The Object2 page is empty |

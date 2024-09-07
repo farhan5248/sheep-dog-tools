@@ -22,7 +22,7 @@ Feature: Plug-In Testing
                     | Parameters |
                     |          1 |
                Then The target/Output.txt file will be present
-                And The Output.txt file, Results table will be created as follows
+                And The Output.txt file Results table will be created as follows
                     | Lines |
                     |  Text |
           """
@@ -98,7 +98,7 @@ Feature: Plug-In Testing
                   AcmeToolFactory.get("OutputTxtFile").assertInputOutputs("Present");
               }
           
-              @Given("^The Output.txt file, Results table will be created as follows$")
+              @Given("^The Output.txt file Results table will be created as follows$")
               public void theOutputTxtFileResultsTableWillBeCreatedAsFollows(DataTable dataTable) {
                   AcmeToolFactory.get("OutputTxtFile").setComponent("acme-tool");
                   AcmeToolFactory.get("OutputTxtFile").setPath("Output.txt");

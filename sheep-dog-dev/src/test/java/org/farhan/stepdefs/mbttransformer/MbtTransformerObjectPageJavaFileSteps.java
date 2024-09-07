@@ -13,14 +13,14 @@ public class MbtTransformerObjectPageJavaFileSteps {
         MbtTransformerFactory.get("ObjectPageJavaFile").assertInputOutputs("Present");
     }
 
-    @Given("^The mbt-transformer plugin, ObjectPage.java file, Object section will be created as follows$")
+    @Given("^The mbt-transformer plugin, ObjectPage.java file Object section will be created as follows$")
     public void theMbtTransformerPluginObjectPageJavaFileObjectSectionWillBeCreatedAsFollows(DataTable dataTable) {
         MbtTransformerFactory.get("ObjectPageJavaFile").setComponent("mbt-transformer");
         MbtTransformerFactory.get("ObjectPageJavaFile").setPath("ObjectPage.java");
         MbtTransformerFactory.get("ObjectPageJavaFile").assertInputOutputs(dataTable, "ObjectSection");
     }
 
-    @Given("^The mbt-transformer plugin, ObjectPage.java file, Fields section will be created as follows$")
+    @Given("^The mbt-transformer plugin, ObjectPage.java file Fields section will be created as follows$")
     public void theMbtTransformerPluginObjectPageJavaFileFieldsSectionWillBeCreatedAsFollows(DataTable dataTable) {
         MbtTransformerFactory.get("ObjectPageJavaFile").setComponent("mbt-transformer");
         MbtTransformerFactory.get("ObjectPageJavaFile").setPath("ObjectPage.java");

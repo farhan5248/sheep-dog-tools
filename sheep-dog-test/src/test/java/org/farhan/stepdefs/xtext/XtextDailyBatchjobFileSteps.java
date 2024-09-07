@@ -8,7 +8,7 @@ public class XtextDailyBatchjobFileSteps {
 
     @Given("^The src-gen-step-defs/daily batchjob file is present$")
     public void theSrcGenStepDefsDailyBatchjobFileIsPresent() {
-    	XtextFactory.get("DailyBatchjobFile").setComponent("xtext");
+        XtextFactory.get("DailyBatchjobFile").setComponent("xtext");
         XtextFactory.get("DailyBatchjobFile").setPath("src-gen-step-defs/daily batchjob");
         XtextFactory.get("DailyBatchjobFile").setInputOutputs("Present");
     }

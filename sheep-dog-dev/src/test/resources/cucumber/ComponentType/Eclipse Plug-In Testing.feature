@@ -9,7 +9,7 @@ Feature: Eclipse Plug-In Testing
           
             Scenario: Generation
           
-              Given The acmetool plugin, src/test/resources/cucumber/Process.feature file, steps snippet is created as follows
+              Given The acmetool plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
                     \"\"\"
                     Text
                     \"\"\"
@@ -116,7 +116,7 @@ Feature: Eclipse Plug-In Testing
           
           public class AcmetoolProcessFeatureFileSteps {
           
-              @Given("^The acmetool plugin, src/test/resources/cucumber/Process.feature file, steps snippet is created as follows$")
+              @Given("^The acmetool plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows$")
               public void theAcmetoolPluginSrcTestResourcesCucumberProcessFeatureFileStepsSnippetIsCreatedAsFollows(String docString) {
                   AcmetoolFactory.get("ProcessFeatureFile").setComponent("acmetool");
                   AcmetoolFactory.get("ProcessFeatureFile").setPath("src/test/resources/cucumber/Process.feature");

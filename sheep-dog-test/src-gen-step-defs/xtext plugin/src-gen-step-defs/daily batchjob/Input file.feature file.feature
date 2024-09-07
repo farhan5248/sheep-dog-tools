@@ -1,24 +1,22 @@
 Feature: src-gen-step-defs/daily batchjob/Input file.feature file
 
-  Scenario Outline: The src-gen-step-defs/daily batchjob/Input file.feature file will be created as follows
+  Scenario Outline: will be created as follows
 
     Examples: 1
 
-          | Object Name | Step Name |
+          | Object Name | Step Definition Name |
 
     Examples: 2
 
-          | Object Name | Step Name | Parameters |
+          | Object Name | Step Definition Name | Parameters |
 
-  Scenario: The src-gen-step-defs/daily batchjob/Input file.feature file is present
-
-  Scenario Outline: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
+  Scenario Outline: is created as follows
 
     Examples: 1
 
-          | Object Name | Step Name |
+          | Object Name | Step Definition Name |
 
     Examples: 2
 
-          | Object Name | Step Name | Parameters |
+          | Object Name | Step Definition Name | Parameters |
 
