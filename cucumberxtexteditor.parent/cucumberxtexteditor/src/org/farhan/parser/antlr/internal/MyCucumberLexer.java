@@ -73,18 +73,18 @@ public class MyCucumberLexer extends InternalCucumberLexer {
 		// This handles keywords not in a docstring
 		// If it's a identified as a keyword but doesn't have a new line on its left,
 		// then it should be a string
-		if (t.getType() == 15) {
+		if (t.getType() == 18) {
 			// the | can occur multiple times on one line. It's not always
 			// preceded by new lines. This is escaped with \
 		} else {
 			if (lastTokenIsEOL) {
 				// this is an actual keyword
-				if (t.getType() == 23) {
+				if (t.getType() == 26) {
 					// if it's an @
 					isTagLine = true;
 				}
 			} else {
-				if (t.getType() == 23 && isTagLine) {
+				if (t.getType() == 26 && isTagLine) {
 					// if it's an @ and we're on a tag line, then treat it as a tag
 				} else {
 					t.setType(RULE_STRING);
@@ -101,18 +101,20 @@ public class MyCucumberLexer extends InternalCucumberLexer {
 			// The last token before the docstring should be the whitespace so we'll use
 			// that as the default white space for the entire docstring
 			docStringIndent = t.getText().length();
-			//System.out.println("Setting the indent to: " + docStringIndent);
+			// System.out.println("Setting the indent to: " + docStringIndent);
 		} else if (isDocString && t.getText().contentEquals("\"\"\"")) {
 			isDocString = false;
 		} else if (isDocString && !t.getText().contentEquals("\"\"\"")) {
 			if (t.getType() != RULE_EOL && !isLeadingWhiteSpace(t)) {
-				//System.out.println("Converting Token >>>" + t.getText() + "<<< " + t.getType());
+				// System.out.println("Converting Token >>>" + t.getText() + "<<< " +
+				// t.getType());
 				// The length check is there so that the whitespace before the closing """ isn't
 				// ignored. When it's ignored, it looks like there's a line bit without an EOL
 				// before the closing """ which is a syntax error
 				t.setType(RULE_STRING);
 			} else {
-				//System.out.println("Ignoring Token >>>" + t.getText() + "<<< " + t.getType());
+				// System.out.println("Ignoring Token >>>" + t.getText() + "<<< " +
+				// t.getType());
 			}
 		}
 	}
@@ -131,45 +133,54 @@ public class MyCucumberLexer extends InternalCucumberLexer {
 
 	private boolean isKeyword(int type) {
 		if (type == T__10) {
-			// Feature:
+			// Object:
 			return true;
 		} else if (type == T__11) {
-			// Background:
+			// Definition
 			return true;
 		} else if (type == T__12) {
-			// Scenario:
+			// Parameters:
 			return true;
 		} else if (type == T__13) {
-			// Scenario Outline:
+			// Feature:
 			return true;
 		} else if (type == T__14) {
-			// Examples:
+			// Background:
 			return true;
 		} else if (type == T__15) {
-			// |
+			// Scenario:
 			return true;
 		} else if (type == T__16) {
-			// """
+			// Scenario Outline:
 			return true;
 		} else if (type == T__17) {
-			// Given
+			// Examples:
 			return true;
 		} else if (type == T__18) {
-			// When
+			// |
 			return true;
 		} else if (type == T__19) {
-			// Then
+			// \"\"\"
 			return true;
 		} else if (type == T__20) {
-			// And
+			// Given
 			return true;
 		} else if (type == T__21) {
-			// But
+			// When
 			return true;
 		} else if (type == T__22) {
-			// *
+			// Then
 			return true;
 		} else if (type == T__23) {
+			// And
+			return true;
+		} else if (type == T__24) {
+			// But
+			return true;
+		} else if (type == T__25) {
+			// *
+			return true;
+		} else if (type == T__26) {
 			// @
 			return true;
 		} else {

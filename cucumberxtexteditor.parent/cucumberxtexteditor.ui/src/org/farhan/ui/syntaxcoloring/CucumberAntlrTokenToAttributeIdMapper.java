@@ -19,6 +19,12 @@ public class CucumberAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToA
 			// nothing to do here
 		case "RULE_SL_COMMENT":
 			return CucumberHighlightingConfiguration.SL_COMMENT_ID;
+		case "'Object:'":
+			return CucumberHighlightingConfiguration.KEYWORD_OBJ_ID;
+		case "'Definition:'":
+			return CucumberHighlightingConfiguration.KEYWORD_OBJ_ID;
+		case "'Parameters:'":
+			return CucumberHighlightingConfiguration.KEYWORD_OBJ_ID;
 		case "'Feature:'":
 			return CucumberHighlightingConfiguration.KEYWORD_FSE_ID;
 		case "'Background:'":

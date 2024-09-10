@@ -16,10 +16,12 @@ public class CucumberHighlightingConfiguration implements IHighlightingConfigura
 	public static final String TAG_ID = "tag";
 	public static final String PARAMETER_ID = "parameter";
 	public static final String DOC_ID = "document";
+	public static final String KEYWORD_OBJ_ID = "keywordobj";
 
 	@Override
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
 		acceptor.acceptDefaultHighlighting(DEFAULT_ID, "Default", defaultTextStyle());
+		acceptor.acceptDefaultHighlighting(KEYWORD_OBJ_ID, "Keyword OBJ", keywordObjectTextStyle());
 		acceptor.acceptDefaultHighlighting(KEYWORD_FSE_ID, "Keyword FSE", keywordFeatureScenarioExamplesTextStyle());
 		acceptor.acceptDefaultHighlighting(KEYWORD_GWT_ID, "Keyword GWT", keywordGivenWhenThenTextStyle());
 		acceptor.acceptDefaultHighlighting(SL_COMMENT_ID, "Comment", commentTextStyle());
@@ -38,6 +40,13 @@ public class CucumberHighlightingConfiguration implements IHighlightingConfigura
 	public static TextStyle documentTextStyle() {
 		TextStyle textStyle = defaultTextStyle().copy();
 		textStyle.setColor(new RGB(64, 128, 64));
+		return textStyle;
+	}
+
+	public static TextStyle keywordObjectTextStyle() {
+		TextStyle textStyle = defaultTextStyle().copy();
+		textStyle.setColor(new RGB(0, 128, 0));
+		textStyle.setStyle(SWT.BOLD);
 		return textStyle;
 	}
 

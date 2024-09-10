@@ -10,6 +10,7 @@ import org.eclipse.xtext.formatting2.AbstractJavaFormatter;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.farhan.cucumber.Feature;
+import org.farhan.cucumber.StepObject;
 import org.farhan.services.CucumberGrammarAccess;
 import com.google.inject.Inject;
 
@@ -21,6 +22,13 @@ public class CucumberFormatter extends AbstractJavaFormatter {
 	protected void format(Feature theFeature, IFormattableDocument doc) {
 
 		FeatureFormatter formatter = new FeatureFormatter(theFeature);
+		formatter.setIndent(0);
+		formatter.format(doc, ga, this);
+	}
+	
+	protected void format(StepObject theStepObject, IFormattableDocument doc) {
+
+		StepObjectFormatter formatter = new StepObjectFormatter(theStepObject);
 		formatter.setIndent(0);
 		formatter.format(doc, ga, this);
 	}

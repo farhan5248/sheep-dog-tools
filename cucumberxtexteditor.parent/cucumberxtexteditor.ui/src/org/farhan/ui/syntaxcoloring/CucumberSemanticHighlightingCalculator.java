@@ -22,29 +22,33 @@ public class CucumberSemanticHighlightingCalculator implements ISemanticHighligh
 		if (resource == null || resource.getParseResult() == null || resource.getContents().size() <= 0) {
 			return;
 		}
-		Feature feature = (Feature) resource.getContents().get(0);
-		for (Tag tag : feature.getTags()) {
-			provideHighlightingForTags(tag, acceptor);
-		}
-		for (Object child : feature.getAbstractScenarios()) {
-			if (child instanceof Scenario) {
-				Scenario scenario = (Scenario) child;
-				provideHighlightingForSteps(scenario.getSteps(), acceptor);
-				for (Tag tag : scenario.getTags()) {
-					provideHighlightingForTags(tag, acceptor);
-				}
-			} else if (child instanceof ScenarioOutline) {
-				ScenarioOutline outline = (ScenarioOutline) child;
-				provideHighlightingForSteps(outline.getSteps(), acceptor);
-				for (Tag tag : outline.getTags()) {
-					provideHighlightingForTags(tag, acceptor);
-				}
-				for (Examples example : outline.getExamples()) {
-					for (Tag tag : example.getTags()) {
+		if (resource.getContents().get(0) instanceof Feature) {
+			Feature feature = (Feature) resource.getContents().get(0);
+			for (Tag tag : feature.getTags()) {
+				provideHighlightingForTags(tag, acceptor);
+			}
+			for (Object child : feature.getAbstractScenarios()) {
+				if (child instanceof Scenario) {
+					Scenario scenario = (Scenario) child;
+					provideHighlightingForSteps(scenario.getSteps(), acceptor);
+					for (Tag tag : scenario.getTags()) {
 						provideHighlightingForTags(tag, acceptor);
+					}
+				} else if (child instanceof ScenarioOutline) {
+					ScenarioOutline outline = (ScenarioOutline) child;
+					provideHighlightingForSteps(outline.getSteps(), acceptor);
+					for (Tag tag : outline.getTags()) {
+						provideHighlightingForTags(tag, acceptor);
+					}
+					for (Examples example : outline.getExamples()) {
+						for (Tag tag : example.getTags()) {
+							provideHighlightingForTags(tag, acceptor);
+						}
 					}
 				}
 			}
+		} else {
+			// Do step object
 		}
 	}
 
@@ -70,7 +74,6 @@ public class CucumberSemanticHighlightingCalculator implements ISemanticHighligh
 
 	private void provideHighlightingForTags(Tag tag, IHighlightedPositionAcceptor acceptor) {
 		INode node = NodeModelUtils.getNode(tag);
-		acceptor.addPosition(node.getTotalOffset(), node.getText().length(),
-				CucumberHighlightingConfiguration.TAG_ID);
+		acceptor.addPosition(node.getTotalOffset(), node.getText().length(), CucumberHighlightingConfiguration.TAG_ID);
 	}
 }

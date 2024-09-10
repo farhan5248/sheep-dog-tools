@@ -87,7 +87,7 @@ public class CucumberValidator extends AbstractCucumberValidator {
 	public void checkFeature(Feature feature) {
 		// TODO validate that feature file name and feature name are the same.
 		if (!Character.isUpperCase(feature.getName().charAt(0))) {
-			warning("Feature name should start with a capital", CucumberPackage.Literals.FEATURE__NAME, INVALID_NAME);
+			warning("Feature name should start with a capital", CucumberPackage.Literals.MODEL__NAME, INVALID_NAME);
 		}
 	}
 
