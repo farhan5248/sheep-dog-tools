@@ -8,3 +8,7 @@ Feature: suggestion dialog
 
           | Suggestion | Suggestion Name |
 
+    Examples: 2
+
+          | Suggestion | Suggestion Name | Suggestion Description |
+

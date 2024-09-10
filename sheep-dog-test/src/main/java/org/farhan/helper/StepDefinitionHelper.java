@@ -7,10 +7,11 @@ import java.util.TreeSet;
 
 public class StepDefinitionHelper {
 
-	public static TreeMap<String, String> propose(ILanguageAccess la) throws Exception {
-		TreeMap<String, String> proposals = new TreeMap<String, String>();
+	public static TreeMap<String, String[]> propose(ILanguageAccess la) throws Exception {
+		TreeMap<String, String[]> proposals = new TreeMap<String, String[]>();
 		String component;
 		String object;
+		String[] proposalDisplay;
 		if (la.getStepName() == null) {
 			component = "";
 			object = "";
@@ -21,24 +22,35 @@ public class StepDefinitionHelper {
 		if (object.isEmpty()) {
 			if (component.isEmpty()) {
 				for (String stepDefComponent : la.getProjectComponents()) {
-					proposals.put("The " + stepDefComponent + ",", "The " + stepDefComponent + ",");
+					proposalDisplay = new String[2];
+					proposalDisplay[0] = "The " + stepDefComponent + ",";
+					proposalDisplay[1] = proposalDisplay[0];
+					proposals.put("The " + stepDefComponent + ",", proposalDisplay);
 				}
 			} else {
 				for (String stepDefObject : la.getComponentObjects(component)) {
-					proposals.put("The " + component + ", " + stepDefObject, stepDefObject);
+					proposalDisplay = new String[2];
+					proposalDisplay[0] = stepDefObject;
+					proposalDisplay[1] = proposalDisplay[0];
+					proposals.put("The " + component + ", " + stepDefObject, proposalDisplay);
 				}
 			}
 			for (String previousObject : getPreviousObjects(la)) {
-				proposals.put("The " + previousObject, "The " + previousObject);
+				proposalDisplay = new String[2];
+				proposalDisplay[0] = "The " + previousObject;
+				proposalDisplay[1] = proposalDisplay[0];
+				proposals.put("The " + previousObject, proposalDisplay);
 			}
 		} else {
 			// else if there's an object get a list of keywords for the suggestions
-			for (String stepDef : getObjectDefinitions(la)) {
-
+			for (String[] stepDef : getObjectDefinitions(la)) {
+				proposalDisplay = new String[2];
+				proposalDisplay[0] = stepDef[0];
+				proposalDisplay[1] = stepDef[1];
 				if (component.isEmpty()) {
-					proposals.put("The " + object + " " + stepDef, stepDef);
+					proposals.put("The " + object + " " + stepDef[0], proposalDisplay);
 				} else {
-					proposals.put("The " + component + ", " + object + " " + stepDef, stepDef);
+					proposals.put("The " + component + ", " + object + " " + stepDef[0], proposalDisplay);
 				}
 			}
 		}
@@ -92,13 +104,17 @@ public class StepDefinitionHelper {
 		return previousObjects;
 	}
 
-	private static TreeSet<String> getObjectDefinitions(ILanguageAccess la) throws Exception {
-		TreeSet<String> objectDefinitions = new TreeSet<String>();
+	private static ArrayList<String[]> getObjectDefinitions(ILanguageAccess la) throws Exception {
+		ArrayList<String[]> objectDefinitions = new ArrayList<String[]>();
+		String[] stepDefinition;
 		String objectQualifiedName = getStepObjectQualifiedName(la);
 		if (la.getStepObject(objectQualifiedName) != null) {
 			Object stepObject = la.createStepObject(objectQualifiedName);
 			for (Object stepDef : la.getStepDefinitions(stepObject)) {
-				objectDefinitions.add(la.getStepDefinitionName((Object) stepDef));
+				stepDefinition = new String[2];
+				stepDefinition[0] = la.getStepDefinitionName((Object) stepDef);
+				stepDefinition[1] = la.getStepDefinitionDescription((Object) stepDef);
+				objectDefinitions.add(stepDefinition);
 			}
 		}
 		return objectDefinitions;

@@ -43,8 +43,8 @@ Feature: Propose Object
      When The suggestion action is performed
      Then The suggestion dialog will be set as follows
           | Suggestion          | Suggestion Name     |
-          | The daily batchjob, | The daily batchjob, |
           | The Input file      | The Input file      |
+          | The daily batchjob, | The daily batchjob, |
 
   Scenario: No object has component no previous no components
 

@@ -25,6 +25,7 @@ import org.farhan.cucumber.Feature;
 import org.farhan.cucumber.Row;
 import org.farhan.cucumber.Scenario;
 import org.farhan.cucumber.ScenarioOutline;
+import org.farhan.cucumber.Statement;
 import org.farhan.cucumber.Step;
 import org.farhan.cucumber.StepTable;
 import org.farhan.generator.CucumberOutputConfigurationProvider;
@@ -187,6 +188,19 @@ public class LanguageAccessImpl implements ILanguageAccess {
 
 	public String getStepDefinitionName(Object stepDefinition) {
 		return ((AbstractScenario) stepDefinition).getName();
+	}
+
+	@Override
+	public String getStepDefinitionDescription(Object stepDefinition) {
+
+		String description = "";
+		if (stepDefinition instanceof AbstractScenario) {
+			AbstractScenario as = (AbstractScenario) stepDefinition;
+			for (Statement s : as.getStatements()) {
+				description += s.getName() + "\n";
+			}
+		}
+		return description;
 	}
 
 	@Override

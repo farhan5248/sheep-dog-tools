@@ -6,35 +6,37 @@ import java.util.Map;
 
 public interface ILanguageAccess {
 
-	public ArrayList<String> getProjectComponents() throws Exception;
-
-	public ArrayList<String> getComponentObjects(String component) throws Exception;
-
 	public Object createStepDefinition(Object stepObject, String predicate);
 
 	public void createStepDefinitionParameters(Object stepDefinition);
 
-	public String getStepParametersString();
+	public Object createStepObject(String objectQualifiedName) throws Exception;
+
+	public ArrayList<String> getComponentObjects(String component) throws Exception;
+
+	public ArrayList<String> getPreviousSteps();
+
+	public ArrayList<String> getProjectComponents() throws Exception;
+
+	public Object getStep();
+
+	public String getStepDefinitionDescription(Object stepDefinition);
+
+	public String getStepDefinitionName(Object stepDefinition);
 
 	public List<?> getStepDefinitionParameters(Object stepDefinition);
 
 	public String getStepDefinitionParametersString(Object parameters);
 
-	public Object getStep();
-
-	public String getStepDefinitionName(Object stepDefinition);
-
 	public List<?> getStepDefinitions(Object stepObject);
 
 	public String getStepName();
 
-	public ArrayList<String> getPreviousSteps();
+	public Object getStepObject(String objectQualifiedName) throws Exception;
+
+	public String getStepParametersString();
 
 	public boolean hasParameters(Object stepDefinition);
-
-	public Object createStepObject(String objectQualifiedName) throws Exception;
-
-	public Object getStepObject(String objectQualifiedName) throws Exception;
 
 	public void saveObject(Object thObject, Map<Object, Object> options) throws Exception;
 

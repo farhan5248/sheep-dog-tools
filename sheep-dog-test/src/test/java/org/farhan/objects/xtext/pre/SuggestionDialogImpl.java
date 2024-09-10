@@ -10,7 +10,7 @@ public class SuggestionDialogImpl extends TestObject implements SuggestionDialog
 
 	@Override
 	public void assertSuggestionName(HashMap<String, String> keyMap) {
-		Assertions.assertEquals(keyMap.get("Suggestion Name"), getLA().getProposals().get(keyMap.get("Suggestion")));
+		Assertions.assertEquals(keyMap.get("Suggestion Name"), getLA().getProposals().get(keyMap.get("Suggestion"))[0]);
 	}
 
 	@Override
@@ -21,5 +21,11 @@ public class SuggestionDialogImpl extends TestObject implements SuggestionDialog
 	@Override
 	public void assertEmpty(HashMap<String, String> keyMap) {
 		Assertions.assertTrue(getLA().getProposals().isEmpty());
+	}
+
+	@Override
+	public void assertSuggestionDescription(HashMap<String, String> keyMap) {
+		Assertions.assertEquals(keyMap.get("Suggestion Description"),
+				getLA().getProposals().get(keyMap.get("Suggestion"))[1]);
 	}
 }

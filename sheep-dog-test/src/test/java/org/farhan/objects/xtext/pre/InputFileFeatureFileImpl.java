@@ -24,8 +24,8 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 	public void assertParameters(HashMap<String, String> keyMap) {
 		try {
 			getLA().createStepObject(keyMap.get("Object Name"));
-			getLA().createStepDefinition(getSpecial(keyMap.get("Step Definition Name")));
-			Assertions.assertTrue(getLA().getStepDefinitionParameters(getSpecial(keyMap.get("Step Definition Name"))).toString()
+			getLA().createStepDefinition(keyMap.get("Step Definition Name"));
+			Assertions.assertTrue(getLA().getStepDefinitionParameters(keyMap.get("Step Definition Name")).toString()
 					.contains("[" + keyMap.get("Parameters") + "]"));
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
@@ -39,7 +39,7 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 			Object stepObject = getLA().getStepObject(keyMap.get("Object Name"));
 			Assertions.assertNotNull(stepObject);
 			for (Object stepDef : getLA().getStepDefinitions(stepObject)) {
-				if (getLA().getStepDefinitionName((Object) stepDef).contentEquals(getSpecial(keyMap.get("Step Definition Name")))) {
+				if (getLA().getStepDefinitionName((Object) stepDef).contentEquals(keyMap.get("Step Definition Name"))) {
 					return;
 				}
 			}
@@ -63,7 +63,7 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 		try {
 			getLA().createStepObject(keyMap.get("Object Name"));
 			ArrayList<ArrayList<String>> stepDefinitionList = (ArrayList<ArrayList<String>>) getLA()
-					.createStepDefinition(getSpecial(keyMap.get("Step Definition Name")));
+					.createStepDefinition(keyMap.get("Step Definition Name"));
 			ArrayList<String> parameters = new ArrayList<String>();
 			parameters.add(keyMap.get("Parameters"));
 			stepDefinitionList.add(parameters);
@@ -76,7 +76,18 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 	public void setStepDefinitionName(HashMap<String, String> keyMap) {
 		try {
 			getLA().createStepObject(keyMap.get("Object Name"));
-			getLA().createStepDefinition(getSpecial(keyMap.get("Step Definition Name")));
+			getLA().createStepDefinition(keyMap.get("Step Definition Name"));
+		} catch (Exception e) {
+			Assertions.fail(Utilities.getStackTraceAsString(e));
+		}
+	}
+
+	@Override
+	public void setStepDefinitionDescription(HashMap<String, String> keyMap) {
+		try {
+			getLA().createStepObject(keyMap.get("Object Name"));
+			getLA().setStepDefinitionDescription(keyMap.get("Step Definition Name"),
+					keyMap.get("Step Definition Description"));
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}

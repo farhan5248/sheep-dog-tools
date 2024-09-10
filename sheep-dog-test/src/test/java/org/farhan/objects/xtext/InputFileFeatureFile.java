@@ -15,4 +15,6 @@ public interface InputFileFeatureFile {
     public void assertStepDefinitionName(HashMap<String, String> keyMap);
 
     public void setStepDefinitionName(HashMap<String, String> keyMap);
+
+    public void setStepDefinitionDescription(HashMap<String, String> keyMap);
 }

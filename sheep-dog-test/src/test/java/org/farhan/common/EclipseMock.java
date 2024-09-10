@@ -15,8 +15,9 @@ public class EclipseMock implements ILanguageAccess {
 	private String stepName;
 	private ArrayList<String> stepParameters;
 	private ArrayList<String> previousSteps;
+	private HashMap<String, String> stepDefinitionDescriptions;
 	private HashMap<String, ArrayList<ArrayList<String>>> stepObject;
-	private TreeMap<String, String> proposalMap;
+	private TreeMap<String, String[]> proposalMap;
 	private ArrayList<String> components;
 	private ArrayList<String> componentObjects;
 
@@ -26,6 +27,7 @@ public class EclipseMock implements ILanguageAccess {
 		componentObjects = new ArrayList<String>();
 		stepParameters = new ArrayList<String>();
 		previousSteps = new ArrayList<String>();
+		stepDefinitionDescriptions = new HashMap<String, String>();
 	}
 
 	private String cellsToString(List<String> cells) {
@@ -82,9 +84,18 @@ public class EclipseMock implements ILanguageAccess {
 		return components;
 	}
 
+	public TreeMap<String, String[]> getProposals() {
+		return proposalMap;
+	}
+
 	@Override
 	public Object getStep() {
 		return stepName;
+	}
+
+	@Override
+	public String getStepDefinitionDescription(Object stepDefinition) {
+		return stepDefinitionDescriptions.get(stepDefinition);
 	}
 
 	@Override
@@ -139,6 +150,14 @@ public class EclipseMock implements ILanguageAccess {
 	public void saveObject(Object theObject, Map<Object, Object> options) throws Exception {
 	}
 
+	public void setProposalList(TreeMap<String, String[]> proposalList) {
+		this.proposalMap = proposalList;
+	}
+
+	public void setStepDefinitionDescription(String stepDefinition, String description) {
+		stepDefinitionDescriptions.put(stepDefinition, description);
+	}
+
 	public void setStepName(String stepName) {
 		if (this.stepName.isEmpty()) {
 			this.stepName = stepName;
@@ -155,14 +174,6 @@ public class EclipseMock implements ILanguageAccess {
 
 	public void setValidationMessage(String message) {
 		this.validationMessage = message;
-	}
-
-	public void setProposalList(TreeMap<String, String> proposalList) {
-		this.proposalMap = proposalList;
-	}
-
-	public TreeMap<String, String> getProposals() {
-		return proposalMap;
 	}
 
 }

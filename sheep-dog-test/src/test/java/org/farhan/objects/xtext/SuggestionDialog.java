@@ -9,4 +9,6 @@ public interface SuggestionDialog {
     public void assertSuggestion(HashMap<String, String> keyMap);
 
     public void assertEmpty(HashMap<String, String> keyMap);
+
+    public void assertSuggestionDescription(HashMap<String, String> keyMap);
 }

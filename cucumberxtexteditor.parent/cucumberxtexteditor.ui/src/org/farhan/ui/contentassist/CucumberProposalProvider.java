@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Map.Entry;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.farhan.cucumber.And;
@@ -65,8 +66,10 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 	private void completeName(Step step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
-			for (Entry<String, String> p : StepDefinitionHelper.propose(new LanguageAccessImpl(step)).entrySet()) {
-				acceptor.accept(createCompletionProposal(p.getKey(), p.getValue(), null, context));
+			for (Entry<String, String[]> p : StepDefinitionHelper.propose(new LanguageAccessImpl(step)).entrySet()) {
+				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(p.getKey(), p.getValue()[0], null, context);
+				proposal.setAdditionalProposalInfo(p.getValue()[1]);
+				acceptor.accept(proposal);
 			}
 		} catch (Exception e) {
 			logError(e, step.getName());
