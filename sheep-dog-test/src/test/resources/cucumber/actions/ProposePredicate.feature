@@ -1,7 +1,7 @@
 @debug
 Feature: Propose Predicate
 
-  Scenario: no predicate no definition
+  Scenario: No predicate no definition
 
     Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
           | Step Name                      |
@@ -9,7 +9,7 @@ Feature: Propose Predicate
      When The suggestion action is performed
      Then The suggestion dialog will be empty
 
-  Scenario: no predicate has definition has description
+  Scenario: No predicate has definition has description
 
     Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
           | Step Name                      |
@@ -22,7 +22,7 @@ Feature: Propose Predicate
           | Suggestion                                | Suggestion Name | Suggestion Description |
           | The daily batchjob, Input file is present | is present      | Creates empty file     |
 
-  Scenario: has predicate no definition
+  Scenario: Has predicate no definition
 
     Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
           | Step Name                                 |
@@ -30,7 +30,7 @@ Feature: Propose Predicate
      When The suggestion action is performed
      Then The suggestion dialog will be empty
 
-  Scenario: has predicate has definition
+  Scenario: Has predicate has definition
 
     Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
           | Step Name                                 |
