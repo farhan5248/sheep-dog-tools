@@ -186,8 +186,8 @@ public class StepDefinitionHelper {
 					return;
 				}
 			}
+			la.createStepDefinitionParameters(theStepDef);
 		}
-		la.createStepDefinitionParameters(theStepDef);
 	}
 
 	private static Object createStepDefinition(Object stepObject, ILanguageAccess la) {

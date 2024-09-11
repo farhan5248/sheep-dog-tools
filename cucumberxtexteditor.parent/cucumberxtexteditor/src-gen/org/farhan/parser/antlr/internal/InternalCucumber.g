@@ -260,7 +260,7 @@ ruleStepDefinition returns [EObject current=null]
 					afterParserOrEnumRuleCall();
 				}
 			)
-		)+
+		)*
 	)
 ;
 

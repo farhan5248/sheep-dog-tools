@@ -1315,16 +1315,9 @@ rule__StepDefinition__Group__4__Impl
 	}
 :
 (
-	(
-		{ before(grammarAccess.getStepDefinitionAccess().getStepParametersAssignment_4()); }
-		(rule__StepDefinition__StepParametersAssignment_4)
-		{ after(grammarAccess.getStepDefinitionAccess().getStepParametersAssignment_4()); }
-	)
-	(
-		{ before(grammarAccess.getStepDefinitionAccess().getStepParametersAssignment_4()); }
-		(rule__StepDefinition__StepParametersAssignment_4)*
-		{ after(grammarAccess.getStepDefinitionAccess().getStepParametersAssignment_4()); }
-	)
+	{ before(grammarAccess.getStepDefinitionAccess().getStepParametersAssignment_4()); }
+	(rule__StepDefinition__StepParametersAssignment_4)*
+	{ after(grammarAccess.getStepDefinitionAccess().getStepParametersAssignment_4()); }
 )
 ;
 finally {

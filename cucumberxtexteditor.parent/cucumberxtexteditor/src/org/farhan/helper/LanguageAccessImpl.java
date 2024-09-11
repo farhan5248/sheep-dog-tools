@@ -19,18 +19,19 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.Cell;
 import org.farhan.cucumber.CucumberFactory;
-import org.farhan.cucumber.Examples;
-import org.farhan.cucumber.ExamplesTable;
-import org.farhan.cucumber.Feature;
+import org.farhan.cucumber.ParametersTable;
 import org.farhan.cucumber.Row;
-import org.farhan.cucumber.Scenario;
-import org.farhan.cucumber.ScenarioOutline;
 import org.farhan.cucumber.Statement;
 import org.farhan.cucumber.Step;
+import org.farhan.cucumber.StepDefinition;
+import org.farhan.cucumber.StepObject;
 import org.farhan.cucumber.StepTable;
+import org.farhan.cucumber.StepParameters;
 import org.farhan.generator.CucumberOutputConfigurationProvider;
 
 public class LanguageAccessImpl implements ILanguageAccess {
+
+	Step step;
 
 	private static ArrayList<String> getFolderResources(IFolder folder) throws Exception {
 		ArrayList<String> files = new ArrayList<String>();
@@ -43,8 +44,6 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		}
 		return files;
 	}
-
-	Step step;
 
 	public LanguageAccessImpl(Object step) {
 		this.step = (Step) step;
@@ -65,31 +64,23 @@ public class LanguageAccessImpl implements ILanguageAccess {
 
 	@Override
 	public Object createStepDefinition(Object stepObject, String predicate) {
-		AbstractScenario stepDefinition;
-		// TODO when using Step Definition keyword, allow 0 or more tables (Examples)
-		if (getHeader() != null) {
-			stepDefinition = CucumberFactory.eINSTANCE.createScenarioOutline();
-		} else {
-			stepDefinition = CucumberFactory.eINSTANCE.createScenario();
-		}
+		StepDefinition stepDefinition;
+		stepDefinition = CucumberFactory.eINSTANCE.createStepDefinition();
 		stepDefinition.setName(predicate);
-		((Feature) stepObject).getAbstractScenarios().add(stepDefinition);
+		((StepObject) stepObject).getStepDefinitions().add(stepDefinition);
 		return stepDefinition;
 	}
 
 	public void createStepDefinitionParameters(Object stepDefinition) {
-		if (stepDefinition instanceof Scenario) {
-			// This is temp hack while I hijack the feature file definition. I guess before
-			// I go to Adoc, I should update this language
-			return;
-		}
-		ScenarioOutline so = (ScenarioOutline) stepDefinition;
-		Examples parameters = CucumberFactory.eINSTANCE.createExamples();
-		parameters.setName(Integer.toString(so.getExamples().size() + 1));
-		so.getExamples().add(parameters);
+		// If the step doesn't have a step table, then don't do anything
 
-		ExamplesTable parametersTable = CucumberFactory.eINSTANCE.createExamplesTable();
-		parameters.setTheExamplesTable(parametersTable);
+		StepDefinition so = (StepDefinition) stepDefinition;
+		StepParameters parameters = CucumberFactory.eINSTANCE.createStepParameters();
+		parameters.setName(Integer.toString(so.getStepParameters().size() + 1));
+		so.getStepParameters().add(parameters);
+
+		ParametersTable parametersTable = CucumberFactory.eINSTANCE.createParametersTable();
+		parameters.setParametersTable(parametersTable);
 
 		Row row = CucumberFactory.eINSTANCE.createRow();
 		parametersTable.getRows().add(row);
@@ -98,14 +89,12 @@ public class LanguageAccessImpl implements ILanguageAccess {
 			cell.setName(srcCell.getName());
 			row.getCells().add(cell);
 		}
-
 	}
 
-	// TODO make private
-	public Object createStepObject() {
-		Feature theFeature = CucumberFactory.eINSTANCE.createFeature();
-		theFeature.setName(StepHelper.getObject(getStepName()));
-		return theFeature;
+	private Object createStepObject() {
+		StepObject stepObject = CucumberFactory.eINSTANCE.createStepObject();
+		stepObject.setName(StepHelper.getObject(getStepName()));
+		return stepObject;
 	}
 
 	@Override
@@ -186,16 +175,12 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		return step;
 	}
 
-	public String getStepDefinitionName(Object stepDefinition) {
-		return ((AbstractScenario) stepDefinition).getName();
-	}
-
 	@Override
 	public String getStepDefinitionDescription(Object stepDefinition) {
 
 		String description = "";
-		if (stepDefinition instanceof AbstractScenario) {
-			AbstractScenario as = (AbstractScenario) stepDefinition;
+		if (stepDefinition instanceof StepDefinition) {
+			StepDefinition as = (StepDefinition) stepDefinition;
 			for (Statement s : as.getStatements()) {
 				description += s.getName() + "\n";
 			}
@@ -203,20 +188,24 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		return description;
 	}
 
+	public String getStepDefinitionName(Object stepDefinition) {
+		return ((StepDefinition) stepDefinition).getName();
+	}
+
 	@Override
 	public List<?> getStepDefinitionParameters(Object stepDefinition) {
-		ScenarioOutline so = (ScenarioOutline) stepDefinition;
-		return so.getExamples();
+		StepDefinition so = (StepDefinition) stepDefinition;
+		return so.getStepParameters();
 	}
 
 	@Override
 	public String getStepDefinitionParametersString(Object parameters) {
-		Examples e = (Examples) parameters;
-		return cellsToString(e.getTheExamplesTable().getRows().get(0).getCells());
+		StepParameters e = (StepParameters) parameters;
+		return cellsToString(e.getParametersTable().getRows().get(0).getCells());
 	}
 
 	public EList<?> getStepDefinitions(Object stepObject) {
-		return ((Feature) stepObject).getAbstractScenarios();
+		return ((StepObject) stepObject).getStepDefinitions();
 	}
 
 	public String getStepName() {
@@ -244,11 +233,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	}
 
 	public boolean hasParameters(Object stepDefinition) {
-		if (stepDefinition instanceof Scenario) {
-			return false;
-		}
-		ScenarioOutline so = (ScenarioOutline) stepDefinition;
-		return !so.getExamples().isEmpty();
+		return (step.getTheStepTable() != null);
 	}
 
 	@Override

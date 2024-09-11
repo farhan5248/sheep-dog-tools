@@ -102,12 +102,12 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//StepDefinition:
 		//    'Definition:' name=Phrase EOL
 		//    statements+=Statement*
-		//    stepParameters+=StepParameters+;
+		//    stepParameters+=StepParameters*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'Definition:' name=Phrase EOL
 		//statements+=Statement*
-		//stepParameters+=StepParameters+
+		//stepParameters+=StepParameters*
 		public Group getGroup() { return cGroup; }
 		
 		//'Definition:'
@@ -128,7 +128,7 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//Statement
 		public RuleCall getStatementsStatementParserRuleCall_3_0() { return cStatementsStatementParserRuleCall_3_0; }
 		
-		//stepParameters+=StepParameters+
+		//stepParameters+=StepParameters*
 		public Assignment getStepParametersAssignment_4() { return cStepParametersAssignment_4; }
 		
 		//StepParameters
@@ -1234,7 +1234,7 @@ public class CucumberGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	//StepDefinition:
 	//    'Definition:' name=Phrase EOL
 	//    statements+=Statement*
-	//    stepParameters+=StepParameters+;
+	//    stepParameters+=StepParameters*;
 	public StepDefinitionElements getStepDefinitionAccess() {
 		return pStepDefinition;
 	}

@@ -476,7 +476,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStepDefinition"
-    // InternalCucumber.g:191:1: ruleStepDefinition returns [EObject current=null] : (otherlv_0= 'Definition:' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( (lv_statements_3_0= ruleStatement ) )* ( (lv_stepParameters_4_0= ruleStepParameters ) )+ ) ;
+    // InternalCucumber.g:191:1: ruleStepDefinition returns [EObject current=null] : (otherlv_0= 'Definition:' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( (lv_statements_3_0= ruleStatement ) )* ( (lv_stepParameters_4_0= ruleStepParameters ) )* ) ;
     public final EObject ruleStepDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -493,11 +493,11 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalCucumber.g:197:2: ( (otherlv_0= 'Definition:' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( (lv_statements_3_0= ruleStatement ) )* ( (lv_stepParameters_4_0= ruleStepParameters ) )+ ) )
-            // InternalCucumber.g:198:2: (otherlv_0= 'Definition:' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( (lv_statements_3_0= ruleStatement ) )* ( (lv_stepParameters_4_0= ruleStepParameters ) )+ )
+            // InternalCucumber.g:197:2: ( (otherlv_0= 'Definition:' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( (lv_statements_3_0= ruleStatement ) )* ( (lv_stepParameters_4_0= ruleStepParameters ) )* ) )
+            // InternalCucumber.g:198:2: (otherlv_0= 'Definition:' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( (lv_statements_3_0= ruleStatement ) )* ( (lv_stepParameters_4_0= ruleStepParameters ) )* )
             {
-            // InternalCucumber.g:198:2: (otherlv_0= 'Definition:' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( (lv_statements_3_0= ruleStatement ) )* ( (lv_stepParameters_4_0= ruleStepParameters ) )+ )
-            // InternalCucumber.g:199:3: otherlv_0= 'Definition:' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( (lv_statements_3_0= ruleStatement ) )* ( (lv_stepParameters_4_0= ruleStepParameters ) )+
+            // InternalCucumber.g:198:2: (otherlv_0= 'Definition:' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( (lv_statements_3_0= ruleStatement ) )* ( (lv_stepParameters_4_0= ruleStepParameters ) )* )
+            // InternalCucumber.g:199:3: otherlv_0= 'Definition:' ( (lv_name_1_0= rulePhrase ) ) this_EOL_2= RULE_EOL ( (lv_statements_3_0= ruleStatement ) )* ( (lv_stepParameters_4_0= ruleStepParameters ) )*
             {
             otherlv_0=(Token)match(input,11,FOLLOW_3); 
 
@@ -587,8 +587,7 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // InternalCucumber.g:245:3: ( (lv_stepParameters_4_0= ruleStepParameters ) )+
-            int cnt5=0;
+            // InternalCucumber.g:245:3: ( (lv_stepParameters_4_0= ruleStepParameters ) )*
             loop5:
             do {
                 int alt5=2;
@@ -633,12 +632,8 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt5 >= 1 ) break loop5;
-                        EarlyExitException eee =
-                            new EarlyExitException(5, input);
-                        throw eee;
+            	    break loop5;
                 }
-                cnt5++;
             } while (true);
 
 
@@ -5485,8 +5480,8 @@ public class InternalCucumberParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x00000000000008E0L});
     public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x00000000000008E2L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x00000000000010E0L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x00000000000010E2L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x00000000000010E2L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000001002L});
     public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x00000000000400E0L});
     public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x00000000000400E2L});
     public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000004000010L});

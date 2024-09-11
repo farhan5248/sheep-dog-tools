@@ -14,7 +14,7 @@ StepObject:
 StepDefinition:
 	'Definition:' name=Phrase EOL
 	statements+=Statement*
-	stepParameters+=StepParameters+;
+	stepParameters+=StepParameters*;
 
 StepParameters:
 	'Parameters:' name=Phrase EOL

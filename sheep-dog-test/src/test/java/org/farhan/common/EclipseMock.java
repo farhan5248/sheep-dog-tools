@@ -143,7 +143,7 @@ public class EclipseMock implements ILanguageAccess {
 
 	@Override
 	public boolean hasParameters(Object stepDefinition) {
-		return !this.stepObject.get(stepDefinition).isEmpty();
+		return !this.stepParameters.isEmpty();
 	}
 
 	@Override

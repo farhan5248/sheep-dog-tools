@@ -60,11 +60,13 @@ public class CucumberGenerator implements IGenerator2 {
 	@Override
 	public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
 
-		Feature theFeature = (Feature) resource.getContents().get(0);
-		for (AbstractScenario scenario : theFeature.getAbstractScenarios()) {
-			HashMap<String, String> objects = new HashMap<String, String>();
-			for (Step step : scenario.getSteps()) {
-				doGenerate(step);
+		if (resource.getContents().get(0) instanceof Feature) {
+			Feature theFeature = (Feature) resource.getContents().get(0);
+			for (AbstractScenario scenario : theFeature.getAbstractScenarios()) {
+				HashMap<String, String> objects = new HashMap<String, String>();
+				for (Step step : scenario.getSteps()) {
+					doGenerate(step);
+				}
 			}
 		}
 	}
