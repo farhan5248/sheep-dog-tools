@@ -20,7 +20,7 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 		sb.append("Scenario Outline: Submit a claim\n");
 		sb.append("Examples: Describe what this data is about\n");
 		sb.append("| Header1 | Header2 |\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -28,7 +28,7 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: This is a test feature\n");
 		sb.append("Scenario Outline:");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -36,7 +36,7 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: This is a test feature\n");
 		sb.append("Scenario Outline: Submit a claim");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -47,7 +47,7 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 		sb.append("Scenario Outline: Submit a claim\n");
 		sb.append("Examples: Describe what this data is about\n");
 		sb.append("| Header1 | Header2 |\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -58,7 +58,7 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 		sb.append("Basic EDI claim\n");
 		sb.append("Examples: Describe what this data is about\n");
 		sb.append("| Header1 | Header2 |\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -70,7 +70,7 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 		sb.append("No deductible\n");
 		sb.append("Examples: Describe what this data is about\n");
 		sb.append("| Header1 | Header2 |\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -79,7 +79,7 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 		sb.append("Feature: This is a test feature\n");
 		sb.append("Scenario Outline: Submit a claim\n");
 		sb.append("Basic EDI claim");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -91,7 +91,7 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 		sb.append("When do step three\n");
 		sb.append("Examples: Describe what this data is about\n");
 		sb.append("| Header1 | Header2 |\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -106,6 +106,6 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 		sb.append("When do step three\n");
 		sb.append("Examples: Describe what this data is about\n");
 		sb.append("| Header1 | Header2 |\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 }

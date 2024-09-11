@@ -21,7 +21,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		sb.append("Given do step one\n");
 		sb.append("Examples: Describe what this data is about\n");
 		sb.append("| Header1 | Header2 |\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -32,7 +32,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		sb.append("Given do step one\n");
 		sb.append("Examples:\n");
 		sb.append("| Header1 | Header2 |\n");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -42,7 +42,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		sb.append("Scenario Outline: Submit a claim\n");
 		sb.append("Given do step one\n");
 		sb.append("Examples: Describe what this data is about");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		sb.append("@tag1\n");
 		sb.append("Examples: Describe what this data is about\n");
 		sb.append("| Header1 | Header2 |\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -66,7 +66,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		sb.append("Examples: Describe what this data is about\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("| Header1 | Header2 |\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -79,7 +79,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
 		sb.append("| Header1 | Header2 |\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -90,7 +90,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		sb.append("Given do step one\n");
 		sb.append("Examples: Describe what this data is about\n");
 		sb.append("Basic EDI claim");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -104,7 +104,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		sb.append("| Header1 | Header2 |\n");
 		sb.append("|   data1 |   data2 |\n");
 		sb.append("|   data3 |   data4 |\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -120,6 +120,6 @@ public class ExamplesParsingTest extends ParsingTest {
 		sb.append("| Header1 | Header2 |\n");
 		sb.append("|   data1 |   data2 |\n");
 		sb.append("|   data3 |   data4 |\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 }

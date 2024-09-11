@@ -20,7 +20,7 @@ public class FeatureFormattingTest extends FormattingTest {
 		sb.append("  This is the description\n");
 		sb.append("  This is the second line of the description\n");
 		sb.append("\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 		return sb;
 	}
 
@@ -42,7 +42,7 @@ public class FeatureFormattingTest extends FormattingTest {
 			sb.append(" Feature:  This is a test feature \n");
 			sb.append(" This is the description \n");
 			sb.append(" This is the second line of the description \n");
-			assertNoErrors(sb);
+			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -57,7 +57,7 @@ public class FeatureFormattingTest extends FormattingTest {
 			sb.append("Feature: This is a test feature\n");
 			sb.append("This is the description\n");
 			sb.append("This is the second line of the description\n");
-			assertNoErrors(sb);
+			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -77,7 +77,7 @@ public class FeatureFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("  This is the second line of the description\n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});

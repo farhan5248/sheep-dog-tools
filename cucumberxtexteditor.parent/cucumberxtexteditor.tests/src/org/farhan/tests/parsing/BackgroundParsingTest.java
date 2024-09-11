@@ -18,7 +18,7 @@ public class BackgroundParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: This is a test feature\n");
 		sb.append("Background: Setup a cardholder\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -26,7 +26,7 @@ public class BackgroundParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: This is a test feature\n");
 		sb.append("Background:");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -34,7 +34,7 @@ public class BackgroundParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: This is a test feature\n");
 		sb.append("Background: Setup a cardholder");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -43,7 +43,7 @@ public class BackgroundParsingTest extends ParsingTest {
 		sb.append("Feature: This is a test feature\n");
 		sb.append("Background: Setup a cardholder\n");
 		sb.append("First setup a group\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class BackgroundParsingTest extends ParsingTest {
 		sb.append("First setup a group\n");
 		sb.append("Next setup the cardholder\n");
 		sb.append("Next setup their family\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -63,7 +63,7 @@ public class BackgroundParsingTest extends ParsingTest {
 		sb.append("Feature: This is a test feature\n");
 		sb.append("Background: Setup a cardholder\n");
 		sb.append("First setup a group");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -73,7 +73,7 @@ public class BackgroundParsingTest extends ParsingTest {
 		sb.append("Background: Setup a cardholder\n");
 		sb.append("Given do step one\n");
 		sb.append("When do step three\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -86,6 +86,6 @@ public class BackgroundParsingTest extends ParsingTest {
 		sb.append("Next setup their family\n");
 		sb.append("Given do step one\n");
 		sb.append("When do step three\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 }

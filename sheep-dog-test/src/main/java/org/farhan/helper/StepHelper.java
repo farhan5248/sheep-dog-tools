@@ -7,7 +7,7 @@ public class StepHelper {
 
 	private static final String NAME_REGEX = "[^,]";
 	private static final String COMPONENT_REGEX = "(( " + NAME_REGEX + "+)( application| service| plugin| batchjob),)?";
-	private static final String OBJECT_VERTEX_REGEX = "( file| page| response| dialog)"; // 6
+	private static final String OBJECT_VERTEX_REGEX = "( file| page| response| dialog| directory)"; // 6
 	private static final String OBJECT_EDGE_REGEX = "( request| goal| job| action)"; // 7
 	private static final String OBJECT_REGEX = "(( " + NAME_REGEX + "+)(" + OBJECT_VERTEX_REGEX + "|" + OBJECT_EDGE_REGEX
 			+ "))";

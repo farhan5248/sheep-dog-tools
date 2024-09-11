@@ -9,7 +9,7 @@ Model:
 StepObject:
 	'Object:' name=Phrase EOL
 	statements+=Statement*
-	stepDefinitions+=StepDefinition+;
+	stepDefinitions+=StepDefinition*;
 
 StepDefinition:
 	'Definition:' name=Phrase EOL

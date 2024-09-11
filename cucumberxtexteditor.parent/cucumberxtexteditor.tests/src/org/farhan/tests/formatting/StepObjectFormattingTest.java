@@ -19,7 +19,7 @@ public class StepObjectFormattingTest extends FormattingTest {
 		sb.append("  This is the description\n");
 		sb.append("  This is the second line of the description\n");
 		sb.append("\n");
-		assertNoErrors(sb);
+		assertNoStepObjectErrors(sb);
 		return sb;
 	}
 
@@ -40,7 +40,7 @@ public class StepObjectFormattingTest extends FormattingTest {
 			sb.append(" Object:  This is a test object \n");
 			sb.append(" This is the description \n");
 			sb.append(" This is the second line of the description \n");
-			assertNoErrors(sb);
+			assertNoStepObjectErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -54,7 +54,7 @@ public class StepObjectFormattingTest extends FormattingTest {
 			sb.append("Object: This is a test object\n");
 			sb.append("This is the description\n");
 			sb.append("This is the second line of the description\n");
-			assertNoErrors(sb);
+			assertNoStepObjectErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -72,7 +72,7 @@ public class StepObjectFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("  This is the second line of the description\n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoStepObjectErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});

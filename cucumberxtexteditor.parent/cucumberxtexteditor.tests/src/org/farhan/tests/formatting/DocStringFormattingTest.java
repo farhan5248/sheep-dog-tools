@@ -43,7 +43,7 @@ public class DocStringFormattingTest extends FormattingTest {
 		sb.append("          Line1\n");
 		sb.append("          \"\"\"\n");
 		sb.append("\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 		return sb;
 	}
 
@@ -90,7 +90,7 @@ public class DocStringFormattingTest extends FormattingTest {
 			sb.append("          Line1\n");
 			sb.append("           \"\"\"\n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});

@@ -24,7 +24,7 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("And do step two\n");
 		sb.append("But do step five\n");
 		sb.append("* do step six\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -33,7 +33,7 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("Feature: This is a test feature\n");
 		sb.append("Scenario: Submit a drug claim\n");
 		sb.append("Given\n");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -42,7 +42,7 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("Feature: This is a test feature\n");
 		sb.append("Scenario: Submit a drug claim\n");
 		sb.append("Given do step one");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -52,7 +52,7 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("Scenario: Submit a drug claim\n");
 		sb.append("Given do step one\n");
 		sb.append("| Header1 | Header2 |\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -63,7 +63,7 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("Given do step one\n");
 		sb.append("| Header1 | Header2 |\n");
 		sb.append("|   data1 |   data2 |\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -73,7 +73,7 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("Scenario: Submit a drug claim\n");
 		sb.append("Given do step one\n");
 		sb.append("| Header1 | Header2 |");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -85,7 +85,7 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("\"\"\"\n");
 		sb.append("Line1\n");
 		sb.append("\"\"\"\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -99,7 +99,7 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("Line2\n");
 		sb.append("Line3\n");
 		sb.append("\"\"\"\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -111,7 +111,7 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("\"\"\"\n");
 		sb.append("Line1\n");
 		sb.append("\"\"\"");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -122,7 +122,7 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("Given do step one\n");
 		sb.append("\"\"\"\n");
 		sb.append("\"\"\"\n");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	// @Test
@@ -134,7 +134,7 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("Scenario: Submit a drug claim\n");
 		sb.append("Given do step one\n");
 		sb.append("\"\"\"\n");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -184,6 +184,6 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("\"\"\"\n");
 		sb.append("Line1\n");
 		sb.append("\"\"\"\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 }

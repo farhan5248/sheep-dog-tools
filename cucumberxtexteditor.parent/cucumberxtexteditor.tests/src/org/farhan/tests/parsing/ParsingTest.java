@@ -6,6 +6,7 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.farhan.cucumber.Feature;
+import org.farhan.cucumber.StepObject;
 import org.junit.jupiter.api.Assertions;
 
 import com.google.inject.Inject;
@@ -13,12 +14,15 @@ import com.google.inject.Inject;
 public class ParsingTest {
 
 	@Inject
-	protected ParseHelper<Feature> parseHelper;
+	protected ParseHelper<Feature> parseFeatureHelper;
 
-	protected void assertNoErrors(StringBuilder sb) {
-		Feature result;
+	@Inject
+	protected ParseHelper<StepObject> parseStepObjectHelper;
+
+	protected void assertNoStepObjectErrors(StringBuilder sb) {
+		StepObject result;
 		try {
-			result = parseHelper.parse(sb.toString());
+			result = parseStepObjectHelper.parse(sb.toString());
 		} catch (Exception e) {
 			result = null;
 		}
@@ -27,10 +31,34 @@ public class ParsingTest {
 		Assertions.assertTrue(errors.isEmpty(), "Unexpected errors: " + IterableExtensions.join(errors, ", "));
 	}
 
-	protected void assertErrors(StringBuilder sb) {
+	protected void assertStepObjectErrors(StringBuilder sb) {
+		StepObject result;
+		try {
+			result = parseStepObjectHelper.parse(sb.toString());
+		} catch (Exception e) {
+			result = null;
+		}
+		Assertions.assertNotNull(result);
+		List<Diagnostic> errors = result.eResource().getErrors();
+		Assertions.assertTrue(!errors.isEmpty(), "There should be errors");
+	}
+
+	protected void assertNoFeatureErrors(StringBuilder sb) {
 		Feature result;
 		try {
-			result = parseHelper.parse(sb.toString());
+			result = parseFeatureHelper.parse(sb.toString());
+		} catch (Exception e) {
+			result = null;
+		}
+		Assertions.assertNotNull(result);
+		List<Diagnostic> errors = result.eResource().getErrors();
+		Assertions.assertTrue(errors.isEmpty(), "Unexpected errors: " + IterableExtensions.join(errors, ", "));
+	}
+
+	protected void assertFeatureErrors(StringBuilder sb) {
+		Feature result;
+		try {
+			result = parseFeatureHelper.parse(sb.toString());
 		} catch (Exception e) {
 			result = null;
 		}

@@ -399,7 +399,7 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     StepObject returns StepObject
 	 *
 	 * Constraint:
-	 *     (name=Phrase statements+=Statement* stepDefinitions+=StepDefinition+)
+	 *     (name=Phrase statements+=Statement* stepDefinitions+=StepDefinition*)
 	 * </pre>
 	 */
 	protected void sequence_StepObject(ISerializationContext context, StepObject semanticObject) {

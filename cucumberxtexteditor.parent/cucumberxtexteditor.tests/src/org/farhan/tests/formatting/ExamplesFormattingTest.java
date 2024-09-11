@@ -30,7 +30,7 @@ public class ExamplesFormattingTest extends FormattingTest {
 		sb.append("          | data1   | data2   |\n");
 		sb.append("          | data3   | data4   |\n");
 		sb.append("\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 		return sb;
 	}
 
@@ -64,7 +64,7 @@ public class ExamplesFormattingTest extends FormattingTest {
 			sb.append("            |     data1   |     data2   |  \n");
 			sb.append("            |     data3   |     data4   |  \n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -91,7 +91,7 @@ public class ExamplesFormattingTest extends FormattingTest {
 			sb.append("|data1 |data2 |\n");
 			sb.append("|data3 |data4 |\n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -128,7 +128,7 @@ public class ExamplesFormattingTest extends FormattingTest {
 			sb.append("          |   data3 |   data4 |\n");
 			sb.append("\n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});

@@ -17,21 +17,21 @@ public class FeatureParsingTest extends ParsingTest {
 	public void parseFeatureWithName() throws Exception {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: This is a test feature\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
 	public void parseFeatureWithoutName() throws Exception {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature:\n");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
 	public void parseFeatureWithoutNameEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: This is a test feature");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -39,7 +39,7 @@ public class FeatureParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("@tag1\n");
 		sb.append("Feature: This is a test feature\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -48,7 +48,7 @@ public class FeatureParsingTest extends ParsingTest {
 		sb.append("Feature: This is a test feature\n");
 		sb.append("This is the description\n");
 		sb.append("This is the second line of the description\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public class FeatureParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: This is a test feature\n");
 		sb.append("This is the description");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -66,7 +66,7 @@ public class FeatureParsingTest extends ParsingTest {
 		sb.append("Feature: This is a test feature\n");
 		sb.append("This is the description\n");
 		sb.append("This is the second line of the description\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 }

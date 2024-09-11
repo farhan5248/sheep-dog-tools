@@ -118,7 +118,7 @@ public class CucumberParsingTest extends ParsingTest {
 		sb.append("          |   data1 |   data2 |\n");
 		sb.append("\n");
 		sb.append("");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 }

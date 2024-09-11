@@ -24,7 +24,7 @@ public class ScenarioFormattingTest extends FormattingTest {
 		sb.append("\n");
 		sb.append("    Given do step one\n");
 		sb.append("\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 		return sb;
 	}
 
@@ -52,7 +52,7 @@ public class ScenarioFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("      Given do step one  \n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -73,7 +73,7 @@ public class ScenarioFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("Given do step one\n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -100,7 +100,7 @@ public class ScenarioFormattingTest extends FormattingTest {
 			sb.append("    Given do step one\n");
 			sb.append("\n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});

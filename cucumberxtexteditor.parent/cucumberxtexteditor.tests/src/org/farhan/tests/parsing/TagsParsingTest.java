@@ -18,7 +18,7 @@ public class TagsParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("@tag1\n");
 		sb.append("Feature: This is a test feature\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -26,7 +26,7 @@ public class TagsParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("@tag1 @tag2 @tag3\n");
 		sb.append("Feature: This is a test feature\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -34,7 +34,7 @@ public class TagsParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("@tag1@tag2@tag3\n");
 		sb.append("Feature: This is a test feature\n");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -42,7 +42,7 @@ public class TagsParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("@\n");
 		sb.append("Feature: This is a test feature\n");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 }

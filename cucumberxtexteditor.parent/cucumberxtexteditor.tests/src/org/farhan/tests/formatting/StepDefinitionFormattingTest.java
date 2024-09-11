@@ -25,7 +25,7 @@ public class StepDefinitionFormattingTest extends FormattingTest {
 		sb.append("\n");
 		sb.append("          | Header1 | Header2 |\n");
 		sb.append("\n");
-		assertNoErrors(sb);
+		assertNoStepObjectErrors(sb);
 		return sb;
 	}
 
@@ -54,7 +54,7 @@ public class StepDefinitionFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("            |   Header1   |   Header2   |  \n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoStepObjectErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -76,7 +76,7 @@ public class StepDefinitionFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("| Header1 | Header2 |\n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoStepObjectErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -103,7 +103,7 @@ public class StepDefinitionFormattingTest extends FormattingTest {
 			sb.append("          | Header1 | Header2 |\n");
 			sb.append("\n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoStepObjectErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});

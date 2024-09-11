@@ -37,7 +37,7 @@ public class StepTableFormattingTest extends FormattingTest {
 		sb.append("          | Header1 | Header2 |\n");
 		sb.append("          | data1   | data2   |\n");
 		sb.append("\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 		return sb;
 	}
 
@@ -78,7 +78,7 @@ public class StepTableFormattingTest extends FormattingTest {
 			sb.append("           |  Header1  |  Header2  | \n");
 			sb.append("           |    data1  |    data2  | \n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});

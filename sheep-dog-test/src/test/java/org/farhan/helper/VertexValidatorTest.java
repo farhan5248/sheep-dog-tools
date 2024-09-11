@@ -195,6 +195,11 @@ public class VertexValidatorTest {
 	}
 
 	@Test
+	public void testObjectRegexDirectory() {
+		Assertions.assertTrue(StepHelper.isValid("The Something1 application, Something2 directory is empty"));
+	}
+
+	@Test
 	public void testObjectRegexPage() {
 		Assertions.assertTrue(StepHelper.isValid("The Something1 application, Something2 page is empty"));
 	}

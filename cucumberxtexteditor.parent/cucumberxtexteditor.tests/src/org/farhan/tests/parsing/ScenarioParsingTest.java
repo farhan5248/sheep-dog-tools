@@ -18,7 +18,7 @@ public class ScenarioParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: This is a test feature\n");
 		sb.append("Scenario: Submit a claim\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -26,7 +26,7 @@ public class ScenarioParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: This is a test feature\n");
 		sb.append("Scenario:");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -34,7 +34,7 @@ public class ScenarioParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: This is a test feature\n");
 		sb.append("Scenario: Submit a claim");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -43,7 +43,7 @@ public class ScenarioParsingTest extends ParsingTest {
 		sb.append("Feature: This is a test feature\n");
 		sb.append("@tag1\n");
 		sb.append("Scenario: Submit a claim\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -52,7 +52,7 @@ public class ScenarioParsingTest extends ParsingTest {
 		sb.append("Feature: This is a test feature\n");
 		sb.append("Scenario: Submit a claim\n");
 		sb.append("Basic EDI claim\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -62,7 +62,7 @@ public class ScenarioParsingTest extends ParsingTest {
 		sb.append("Scenario: Submit a claim\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -71,7 +71,7 @@ public class ScenarioParsingTest extends ParsingTest {
 		sb.append("Feature: This is a test feature\n");
 		sb.append("Scenario: Submit a claim\n");
 		sb.append("Basic EDI claim");
-		assertErrors(sb);
+		assertFeatureErrors(sb);
 	}
 
 	@Test
@@ -81,7 +81,7 @@ public class ScenarioParsingTest extends ParsingTest {
 		sb.append("Scenario: Submit a claim\n");
 		sb.append("Given do step one\n");
 		sb.append("When do step three\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 
 	@Test
@@ -94,6 +94,6 @@ public class ScenarioParsingTest extends ParsingTest {
 		sb.append("No deductible\n");
 		sb.append("Given do step one\n");
 		sb.append("When do step three\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 	}
 }

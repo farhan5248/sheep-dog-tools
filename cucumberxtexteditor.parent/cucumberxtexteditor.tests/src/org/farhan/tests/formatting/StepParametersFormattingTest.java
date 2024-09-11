@@ -27,7 +27,7 @@ public class StepParametersFormattingTest extends FormattingTest {
 		sb.append("          | data1   | data2   |\n");
 		sb.append("          | data3   | data4   |\n");
 		sb.append("\n");
-		assertNoErrors(sb);
+		assertNoStepObjectErrors(sb);
 		return sb;
 	}
 
@@ -58,7 +58,7 @@ public class StepParametersFormattingTest extends FormattingTest {
 			sb.append("            |     data1   |     data2   |  \n");
 			sb.append("            |     data3   |     data4   |  \n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoStepObjectErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -82,7 +82,7 @@ public class StepParametersFormattingTest extends FormattingTest {
 			sb.append("|data1 |data2 |\n");
 			sb.append("|data3 |data4 |\n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoStepObjectErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -114,7 +114,7 @@ public class StepParametersFormattingTest extends FormattingTest {
 			sb.append("          |   data3 |   data4 |\n");
 			sb.append("\n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoStepObjectErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});

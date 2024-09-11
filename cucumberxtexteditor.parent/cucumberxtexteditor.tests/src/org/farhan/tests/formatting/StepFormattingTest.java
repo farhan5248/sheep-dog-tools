@@ -21,7 +21,7 @@ public class StepFormattingTest extends FormattingTest {
 		sb.append("    Given do step one\n");
 		sb.append("     When do step three\n");
 		sb.append("\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 		return sb;
 	}
 
@@ -46,7 +46,7 @@ public class StepFormattingTest extends FormattingTest {
 			sb.append("      Given do step one  \n");
 			sb.append("       When do step three  \n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -64,7 +64,7 @@ public class StepFormattingTest extends FormattingTest {
 			sb.append("Given do step one\n");
 			sb.append("When do step three\n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -86,7 +86,7 @@ public class StepFormattingTest extends FormattingTest {
 			sb.append("     When do step three\n");
 			sb.append("\n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});

@@ -17,7 +17,7 @@ public class TagFormattingTest extends FormattingTest {
 		sb.append("@tag1 @tag2 @tag3\n");
 		sb.append("Feature: This is a test feature\n");
 		sb.append("\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 		return sb;
 	}
 
@@ -37,7 +37,7 @@ public class TagFormattingTest extends FormattingTest {
 			StringBuilder sb = new StringBuilder();
 			sb.append("  @tag1  @tag2  @tag3 \n");
 			sb.append("Feature: This is a test feature\n");
-			assertNoErrors(sb);
+			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -51,7 +51,7 @@ public class TagFormattingTest extends FormattingTest {
 			sb.append("@tag1 @tag2 @tag3\n");
 			sb.append("\n");
 			sb.append("Feature: This is a test feature\n");
-			assertNoErrors(sb);
+			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});

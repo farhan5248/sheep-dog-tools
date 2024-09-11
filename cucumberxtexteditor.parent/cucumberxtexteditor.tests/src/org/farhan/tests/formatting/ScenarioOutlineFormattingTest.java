@@ -29,7 +29,7 @@ public class ScenarioOutlineFormattingTest extends FormattingTest {
 		sb.append("\n");
 		sb.append("          | Header1 | Header2 |\n");
 		sb.append("\n");
-		assertNoErrors(sb);
+		assertNoFeatureErrors(sb);
 		return sb;
 	}
 
@@ -62,7 +62,7 @@ public class ScenarioOutlineFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("            |   Header1   |   Header2   |  \n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -88,7 +88,7 @@ public class ScenarioOutlineFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("| Header1 | Header2 |\n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
@@ -121,7 +121,7 @@ public class ScenarioOutlineFormattingTest extends FormattingTest {
 			sb.append("          | Header1 | Header2 |\n");
 			sb.append("\n");
 			sb.append("\n");
-			assertNoErrors(sb);
+			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
 			it.setExpectation(getExpected().toString());
 		});
