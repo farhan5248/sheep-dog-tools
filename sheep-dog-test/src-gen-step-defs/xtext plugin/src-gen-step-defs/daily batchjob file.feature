@@ -1,4 +1,4 @@
-Feature: src-gen-step-defs/daily batchjob file
+Object: src-gen-step-defs/daily batchjob file
 
-  Scenario: is present
+  Definition: is present
 

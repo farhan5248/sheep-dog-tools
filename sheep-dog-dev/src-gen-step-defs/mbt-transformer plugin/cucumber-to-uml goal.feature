@@ -1,10 +1,10 @@
-Feature: cucumber-to-uml goal
+Object: cucumber-to-uml goal
 
-  Scenario: is executed
+  Definition: is executed
 
-  Scenario Outline: is executed with
+  Definition: is executed with
 
-    Examples: 1
+    Parameters: 1
 
           | Tags |
 

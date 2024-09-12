@@ -1,26 +1,26 @@
-Feature: src-gen-step-defs/daily batchjob/Input file.feature file
+Object: src-gen-step-defs/daily batchjob/Input file.feature file
 
-  Scenario Outline: is created as follows
+  Definition: will be created as follows
 
-    Examples: 1
+    Parameters: 1
 
           | Object Name | Step Definition Name |
 
-    Examples: 2
+    Parameters: 2
 
           | Object Name | Step Definition Name | Parameters |
 
-    Examples: 3
+  Definition: is created as follows
+
+    Parameters: 1
+
+          | Object Name | Step Definition Name |
+
+    Parameters: 2
+
+          | Object Name | Step Definition Name | Parameters |
+
+    Parameters: 3
 
           | Object Name | Step Definition Name | Step Definition Description |
-
-  Scenario Outline: will be created as follows
-
-    Examples: 1
-
-          | Object Name | Step Definition Name |
-
-    Examples: 2
-
-          | Object Name | Step Definition Name | Parameters |
 

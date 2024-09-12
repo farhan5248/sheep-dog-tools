@@ -1,26 +1,26 @@
-Feature: src/test/java/org/farhan/objects/blah/ObjectPage.java file
+Object: src/test/java/org/farhan/objects/blah/ObjectPage.java file
 
-  Scenario: will be present
+  Definition: will be present
 
-  Scenario Outline: Object section will be created as follows
+  Definition: Object section will be created as follows
 
-    Examples: 1
+    Parameters: 1
 
           | Interface Name | Package | Import |
 
-  Scenario Outline: Fields section will be created as follows
+  Definition: Fields section will be created as follows
 
-    Examples: 1
+    Parameters: 1
 
           | Method Name | Visibility | Return Type |
 
-    Examples: 2
+    Parameters: 2
 
           | Method Name | Parameter Name | Parameter Type |
 
-    Examples: 3
+    Parameters: 3
 
           | Method Name |
 
-  Scenario: is created as follows
+  Definition: is created as follows
 

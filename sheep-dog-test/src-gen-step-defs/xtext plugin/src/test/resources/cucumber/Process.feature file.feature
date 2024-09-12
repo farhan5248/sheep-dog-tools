@@ -1,12 +1,12 @@
-Feature: src/test/resources/cucumber/Process.feature file
+Object: src/test/resources/cucumber/Process.feature file
 
-  Scenario Outline: steps snippet is created as follows
+  Definition: steps snippet is created as follows
 
-    Examples: 1
+    Parameters: 1
 
           | Step Name |
 
-    Examples: 2
+    Parameters: 2
 
           | Step Name | Headers |
 

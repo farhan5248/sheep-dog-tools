@@ -1,4 +1,4 @@
-Feature: src/test/java/org/farhan/objects/pharmacy/NightlyPaymentRequest.java file
+Object: src/test/java/org/farhan/objects/pharmacy/NightlyPaymentRequest.java file
 
-  Scenario: will be created as follows
+  Definition: will be created as follows
 

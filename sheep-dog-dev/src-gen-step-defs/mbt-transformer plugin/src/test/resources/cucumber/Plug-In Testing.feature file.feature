@@ -1,4 +1,4 @@
-Feature: src/test/resources/cucumber/Plug-In Testing.feature file
+Object: src/test/resources/cucumber/Plug-In Testing.feature file
 
-  Scenario: is created as follows
+  Definition: is created as follows
 

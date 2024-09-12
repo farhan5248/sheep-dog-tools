@@ -1,58 +1,58 @@
-Feature: src/test/resources/asciidoc/Process.adoc file
+Object: src/test/resources/asciidoc/Process.adoc file
 
-  Scenario: is created as follows
+  Definition: is created as follows
 
-  Scenario: will be present
+  Definition: will be present
 
-  Scenario Outline: Scenarios Steps Doc String section will be created as follows
+  Definition: Scenarios Steps Doc String section will be created as follows
 
-    Examples: 1
+    Parameters: 1
 
           | Name | Step | Content |
 
-  Scenario Outline: Feature section will be created as follows
+  Definition: Background section will be created as follows
 
-    Examples: 1
-
-          | Name |
-
-    Examples: 2
-
-          | Name | Tags |
-
-  Scenario Outline: Scenarios Steps section will be created as follows
-
-    Examples: 1
-
-          | Name | Step |
-
-  Scenario Outline: Scenario Outline Examples Table section will be created as follows
-
-    Examples: 1
-
-          | Name | Examples | Row |
-
-  Scenario Outline: Scenarios section will be created as follows
-
-    Examples: 1
-
-          | Name | Tags | Description |
-
-  Scenario Outline: Scenarios Steps Step Table section will be created as follows
-
-    Examples: 1
-
-          | Name | Step | Row |
-
-  Scenario Outline: Background section will be created as follows
-
-    Examples: 1
+    Parameters: 1
 
           | Name | Description |
 
-  Scenario Outline: Background Steps section will be created as follows
+  Definition: Background Steps section will be created as follows
 
-    Examples: 1
+    Parameters: 1
 
           | Name | Step |
+
+  Definition: Scenarios Steps section will be created as follows
+
+    Parameters: 1
+
+          | Name | Step |
+
+  Definition: Feature section will be created as follows
+
+    Parameters: 1
+
+          | Name |
+
+    Parameters: 2
+
+          | Name | Tags |
+
+  Definition: Scenarios Steps Step Table section will be created as follows
+
+    Parameters: 1
+
+          | Name | Step | Row |
+
+  Definition: Scenario Outline Examples Table section will be created as follows
+
+    Parameters: 1
+
+          | Name | Examples | Row |
+
+  Definition: Scenarios section will be created as follows
+
+    Parameters: 1
+
+          | Name | Tags | Description |
 

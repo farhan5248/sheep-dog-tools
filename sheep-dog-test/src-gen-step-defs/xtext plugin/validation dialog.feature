@@ -1,10 +1,8 @@
-Feature: validation dialog
+Object: validation dialog
 
-  Scenario Outline: will be set as follows
+  Definition: will be set as follows
 
-    Displays the list of warnings or errors with the step
-
-    Examples: 1
+    Parameters: 1
 
           | Message |
 

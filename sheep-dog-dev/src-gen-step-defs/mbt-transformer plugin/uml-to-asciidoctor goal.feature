@@ -1,4 +1,4 @@
-Feature: uml-to-asciidoctor goal
+Object: uml-to-asciidoctor goal
 
-  Scenario: is executed
+  Definition: is executed
 

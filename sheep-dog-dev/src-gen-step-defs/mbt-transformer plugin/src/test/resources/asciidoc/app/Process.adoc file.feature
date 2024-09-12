@@ -1,6 +1,6 @@
-Feature: src/test/resources/asciidoc/app/Process.adoc file
+Object: src/test/resources/asciidoc/app/Process.adoc file
 
-  Scenario: will be created as follows
+  Definition: will be created as follows
 
-  Scenario: is created as follows
+  Definition: is created as follows
 

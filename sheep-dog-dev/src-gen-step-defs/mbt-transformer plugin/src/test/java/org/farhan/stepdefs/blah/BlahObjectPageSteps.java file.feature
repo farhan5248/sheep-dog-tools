@@ -1,40 +1,40 @@
-Feature: src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file
+Object: src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file
 
-  Scenario: is created as follows
+  Definition: will be present
 
-  Scenario: will be created as follows
+  Definition: Object section will be created as follows
 
-  Scenario: will be present
-
-  Scenario Outline: Fields section will be created as follows
-
-    Examples: 1
-
-          | Method Name | Parameter Name | Parameter Type |
-
-    Examples: 2
-
-          | Method Name | Statement |
-
-    Examples: 3
-
-          | Method Name |
-
-    Examples: 4
-
-          | Method Name | Visibility | Return Type |
-
-    Examples: 5
-
-          | Method Name | Annotation |
-
-  Scenario Outline: Object section will be created as follows
-
-    Examples: 1
+    Parameters: 1
 
           | Interface Name | Package |
 
-    Examples: 2
+    Parameters: 2
 
           | Import |
+
+  Definition: Fields section will be created as follows
+
+    Parameters: 1
+
+          | Method Name | Visibility | Return Type |
+
+    Parameters: 2
+
+          | Method Name | Annotation |
+
+    Parameters: 3
+
+          | Method Name | Parameter Name | Parameter Type |
+
+    Parameters: 4
+
+          | Method Name | Statement |
+
+    Parameters: 5
+
+          | Method Name |
+
+  Definition: is created as follows
+
+  Definition: will be created as follows
 

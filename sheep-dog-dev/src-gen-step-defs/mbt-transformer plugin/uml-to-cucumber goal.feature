@@ -1,4 +1,4 @@
-Feature: uml-to-cucumber goal
+Object: uml-to-cucumber goal
 
-  Scenario: is executed
+  Definition: is executed
 
