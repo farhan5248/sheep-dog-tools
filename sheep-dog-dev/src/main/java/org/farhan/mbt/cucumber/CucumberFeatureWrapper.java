@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.impl.RuleCallImpl;
 import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
-import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.CucumberStandaloneSetup;
 import org.farhan.cucumber.AbstractScenario;
 import org.farhan.cucumber.Background;

@@ -2,6 +2,8 @@ Object: src-gen-step-defs/daily batchjob/Input file.feature file
 
   Definition: will be created as follows
 
+    Creates a file with a step definition. Either the definition has parameters or not.
+
     Parameters: 1
 
           | Object Name | Step Definition Name |
