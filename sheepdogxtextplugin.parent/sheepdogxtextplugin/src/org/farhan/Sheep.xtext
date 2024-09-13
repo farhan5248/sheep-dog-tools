@@ -1,9 +1,0 @@
-grammar org.farhan.Sheep with org.eclipse.xtext.common.Terminals
-
-generate sheep "http://www.farhan.org/Sheep"
-
-Model:
-	greetings+=Greeting*;
-	
-Greeting:
-	'Hello' name=ID '!';
