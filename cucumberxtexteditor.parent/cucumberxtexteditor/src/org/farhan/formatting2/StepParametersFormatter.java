@@ -1,13 +1,9 @@
 package org.farhan.formatting2;
 
 import org.eclipse.xtext.formatting2.IFormattableDocument;
-import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.farhan.cucumber.Examples;
 import org.farhan.cucumber.Statement;
 import org.farhan.cucumber.StepParameters;
-import org.farhan.cucumber.Tag;
 import org.farhan.services.CucumberGrammarAccess;
-import org.farhan.services.CucumberGrammarAccess.ExamplesElements;
 import org.farhan.services.CucumberGrammarAccess.StepParametersElements;
 
 public class StepParametersFormatter extends Formatter {

@@ -5,8 +5,6 @@ package org.farhan.tests.validating;
 
 import java.io.IOException;
 import java.util.Set;
-import java.util.stream.Collectors;
-
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
 import org.farhan.cucumber.CucumberPackage;
@@ -36,7 +34,6 @@ public class CucumberValidatingTest extends ValidatingTest {
 	@Test
 	public void validateStateAppEmpty() throws Exception {
 
-		ClassInfo testObj = getClassInPackage("org.farhan", "CucumberValidatingTest");
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: Name\n");
 		sb.append("Scenario: Name\n");

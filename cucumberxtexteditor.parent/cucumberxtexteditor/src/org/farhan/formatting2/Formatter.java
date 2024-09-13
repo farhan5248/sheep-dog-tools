@@ -16,11 +16,11 @@ public class Formatter {
 	protected boolean isLastEOLDouble = true;
 
 	protected void isLast(boolean isLast) {
-		this.isLast = isLast;
+		Formatter.isLast = isLast;
 	}
 
 	protected void isFirst(boolean isFirst) {
-		this.isFirst = isFirst;
+		Formatter.isFirst = isFirst;
 	}
 
 	protected void isLastEOLDouble(boolean isEOLDouble) {

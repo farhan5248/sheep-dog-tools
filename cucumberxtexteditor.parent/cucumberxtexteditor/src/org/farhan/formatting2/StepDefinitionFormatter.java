@@ -1,18 +1,10 @@
 package org.farhan.formatting2;
 
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractParserRuleElementFinder;
-import org.farhan.cucumber.Examples;
-import org.farhan.cucumber.ScenarioOutline;
 import org.farhan.cucumber.Statement;
-import org.farhan.cucumber.Step;
 import org.farhan.cucumber.StepDefinition;
 import org.farhan.cucumber.StepParameters;
-import org.farhan.cucumber.Tag;
 import org.farhan.services.CucumberGrammarAccess;
-import org.farhan.services.CucumberGrammarAccess.ScenarioOutlineElements;
 import org.farhan.services.CucumberGrammarAccess.StepDefinitionElements;
 
 public class StepDefinitionFormatter extends Formatter {
