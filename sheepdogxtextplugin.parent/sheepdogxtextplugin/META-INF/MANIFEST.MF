@@ -8,5 +8,21 @@ Bundle-SymbolicName: sheepdogxtextplugin; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase,
- org.eclipse.equinox.common;bundle-version="3.16.0"
+ org.eclipse.equinox.common;bundle-version="3.16.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.36.0",
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-21
+Export-Package: org.farhan.serializer,
+ org.farhan.scoping,
+ org.farhan.services,
+ org.farhan.sheep,
+ org.farhan.sheep.impl,
+ org.farhan.parser.antlr,
+ org.farhan.sheep.util,
+ org.farhan.generator,
+ org.farhan,
+ org.farhan.validation,
+ org.farhan.parser.antlr.internal
+Import-Package: org.apache.log4j
