@@ -1,0 +1,9 @@
+grammar org.farhan.mbt.Cucumber with org.eclipse.xtext.common.Terminals
+
+generate cucumber "http://www.farhan.org/mbt/Cucumber"
+
+Model:
+	greetings+=Greeting*;
+	
+Greeting:
+	'Hello' name=ID '!';
