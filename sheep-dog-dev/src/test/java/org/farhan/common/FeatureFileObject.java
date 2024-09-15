@@ -2,12 +2,12 @@ package org.farhan.common;
 
 import java.util.ArrayList;
 
-import org.farhan.cucumber.AbstractScenario;
-import org.farhan.cucumber.Cell;
-import org.farhan.cucumber.Examples;
-import org.farhan.cucumber.Row;
-import org.farhan.cucumber.Scenario;
-import org.farhan.cucumber.Step;
+import org.farhan.mbt.cucumber.AbstractScenario;
+import org.farhan.mbt.cucumber.Cell;
+import org.farhan.mbt.cucumber.Examples;
+import org.farhan.mbt.cucumber.Row;
+import org.farhan.mbt.cucumber.Scenario;
+import org.farhan.mbt.cucumber.Step;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
