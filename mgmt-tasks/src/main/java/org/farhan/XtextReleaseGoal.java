@@ -12,12 +12,12 @@ import java.util.stream.Collectors;
 
 public class XtextReleaseGoal {
 
-	private static File rootDir = new File("C:\\Users\\Farhan\\git\\lean-sheep-dog-tools\\cucumberxtexteditor.parent");
+	private static File rootDir = new File("C:\\Users\\Farhan\\git\\lean-sheep-dog-tools\\sheepdogxtextcukeplugin.parent");
 
 	public static void main(String[] args) {
 
-		String currentVersion = "1.19.0";
-		String nextVersion = "1.20.0";
+		String currentVersion = "1.0.0";
+		String nextVersion = "1.1.0";
 		String currentSheepDogTestVersion = "1.3";
 		String nextSheepDogTestVersion = "1.4";
 
@@ -45,8 +45,8 @@ public class XtextReleaseGoal {
 		updateVersion("<version>", cv + "-SNAPSHOT</version>", cv + "</version>", "pom.xml");
 		updateVersion("Bundle-Version: ", cv + ".qualifier", cv + "", "MANIFEST.MF");
 		updateVersion("version=\"", cv + ".qualifier\"", cv + "\"", "feature.xml");
-		System.out.println("[maven-release-plugin] prepare release cucumberxtexteditor-" + cv);
-		System.out.println("cucumberxtexteditor-" + cv);
+		System.out.println("[maven-release-plugin] prepare release sheepdogxtextcukeplugin-" + cv);
+		System.out.println("sheepdogxtextcukeplugin-" + cv);
 	}
 
 	private static void updateVersion(String start, String currentVersionEnd, String nextVersionEnd, String fileName) {
