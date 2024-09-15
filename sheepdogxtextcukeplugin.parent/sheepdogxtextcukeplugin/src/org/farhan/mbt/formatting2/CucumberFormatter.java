@@ -5,16 +5,32 @@ package org.farhan.mbt.formatting2;
 
 import org.eclipse.xtext.formatting2.AbstractJavaFormatter;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
-import org.farhan.mbt.cucumber.Greeting;
-import org.farhan.mbt.cucumber.Model;
+import org.farhan.mbt.cucumber.Statement;
+import org.farhan.mbt.cucumber.StepDefinition;
+import org.farhan.mbt.cucumber.StepObject;
+import org.farhan.mbt.cucumber.StepParameters;
 
 public class CucumberFormatter extends AbstractJavaFormatter {
 
-	protected void format(Model model, IFormattableDocument doc) {
+	protected void format(StepObject stepObject, IFormattableDocument doc) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
-		for (Greeting greeting : model.getGreetings()) {
-			doc.format(greeting);
+		for (Statement statement : stepObject.getStatements()) {
+			doc.format(statement);
+		}
+		for (StepDefinition stepDefinition : stepObject.getStepDefinitions()) {
+			doc.format(stepDefinition);
+		}
+	}
+
+	protected void format(StepDefinition stepDefinition, IFormattableDocument doc) {
+		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
+		for (Statement statement : stepDefinition.getStatements()) {
+			doc.format(statement);
+		}
+		for (StepParameters stepParameters : stepDefinition.getStepParameters()) {
+			doc.format(stepParameters);
 		}
 	}
 	
+	// TODO: implement for StepParameters, ParametersTable, Feature, Background, Scenario, ScenarioOutline, Examples, ExamplesTable, StepTable, Row, DocString, Given, When, Then, And, But, Asterisk
 }

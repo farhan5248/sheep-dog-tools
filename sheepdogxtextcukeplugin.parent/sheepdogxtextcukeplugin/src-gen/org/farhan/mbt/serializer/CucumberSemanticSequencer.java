@@ -14,9 +14,30 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
+import org.farhan.mbt.cucumber.And;
+import org.farhan.mbt.cucumber.Asterisk;
+import org.farhan.mbt.cucumber.Background;
+import org.farhan.mbt.cucumber.But;
+import org.farhan.mbt.cucumber.Cell;
 import org.farhan.mbt.cucumber.CucumberPackage;
-import org.farhan.mbt.cucumber.Greeting;
-import org.farhan.mbt.cucumber.Model;
+import org.farhan.mbt.cucumber.DocString;
+import org.farhan.mbt.cucumber.Examples;
+import org.farhan.mbt.cucumber.ExamplesTable;
+import org.farhan.mbt.cucumber.Feature;
+import org.farhan.mbt.cucumber.Given;
+import org.farhan.mbt.cucumber.Line;
+import org.farhan.mbt.cucumber.ParametersTable;
+import org.farhan.mbt.cucumber.Row;
+import org.farhan.mbt.cucumber.Scenario;
+import org.farhan.mbt.cucumber.ScenarioOutline;
+import org.farhan.mbt.cucumber.Statement;
+import org.farhan.mbt.cucumber.StepDefinition;
+import org.farhan.mbt.cucumber.StepObject;
+import org.farhan.mbt.cucumber.StepParameters;
+import org.farhan.mbt.cucumber.StepTable;
+import org.farhan.mbt.cucumber.Tag;
+import org.farhan.mbt.cucumber.Then;
+import org.farhan.mbt.cucumber.When;
 import org.farhan.mbt.services.CucumberGrammarAccess;
 
 @SuppressWarnings("all")
@@ -33,11 +54,74 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == CucumberPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case CucumberPackage.GREETING:
-				sequence_Greeting(context, (Greeting) semanticObject); 
+			case CucumberPackage.AND:
+				sequence_And(context, (And) semanticObject); 
 				return; 
-			case CucumberPackage.MODEL:
-				sequence_Model(context, (Model) semanticObject); 
+			case CucumberPackage.ASTERISK:
+				sequence_Asterisk(context, (Asterisk) semanticObject); 
+				return; 
+			case CucumberPackage.BACKGROUND:
+				sequence_Background(context, (Background) semanticObject); 
+				return; 
+			case CucumberPackage.BUT:
+				sequence_But(context, (But) semanticObject); 
+				return; 
+			case CucumberPackage.CELL:
+				sequence_Cell(context, (Cell) semanticObject); 
+				return; 
+			case CucumberPackage.DOC_STRING:
+				sequence_DocString(context, (DocString) semanticObject); 
+				return; 
+			case CucumberPackage.EXAMPLES:
+				sequence_Examples(context, (Examples) semanticObject); 
+				return; 
+			case CucumberPackage.EXAMPLES_TABLE:
+				sequence_ExamplesTable(context, (ExamplesTable) semanticObject); 
+				return; 
+			case CucumberPackage.FEATURE:
+				sequence_Feature(context, (Feature) semanticObject); 
+				return; 
+			case CucumberPackage.GIVEN:
+				sequence_Given(context, (Given) semanticObject); 
+				return; 
+			case CucumberPackage.LINE:
+				sequence_Line(context, (Line) semanticObject); 
+				return; 
+			case CucumberPackage.PARAMETERS_TABLE:
+				sequence_ParametersTable(context, (ParametersTable) semanticObject); 
+				return; 
+			case CucumberPackage.ROW:
+				sequence_Row(context, (Row) semanticObject); 
+				return; 
+			case CucumberPackage.SCENARIO:
+				sequence_Scenario(context, (Scenario) semanticObject); 
+				return; 
+			case CucumberPackage.SCENARIO_OUTLINE:
+				sequence_ScenarioOutline(context, (ScenarioOutline) semanticObject); 
+				return; 
+			case CucumberPackage.STATEMENT:
+				sequence_Statement(context, (Statement) semanticObject); 
+				return; 
+			case CucumberPackage.STEP_DEFINITION:
+				sequence_StepDefinition(context, (StepDefinition) semanticObject); 
+				return; 
+			case CucumberPackage.STEP_OBJECT:
+				sequence_StepObject(context, (StepObject) semanticObject); 
+				return; 
+			case CucumberPackage.STEP_PARAMETERS:
+				sequence_StepParameters(context, (StepParameters) semanticObject); 
+				return; 
+			case CucumberPackage.STEP_TABLE:
+				sequence_StepTable(context, (StepTable) semanticObject); 
+				return; 
+			case CucumberPackage.TAG:
+				sequence_Tag(context, (Tag) semanticObject); 
+				return; 
+			case CucumberPackage.THEN:
+				sequence_Then(context, (Then) semanticObject); 
+				return; 
+			case CucumberPackage.WHEN:
+				sequence_When(context, (When) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -47,19 +131,79 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Greeting returns Greeting
+	 *     Step returns And
+	 *     And returns And
 	 *
 	 * Constraint:
-	 *     name=ID
+	 *     (name=Phrase (theStepTable=StepTable | theDocString=DocString)?)
 	 * </pre>
 	 */
-	protected void sequence_Greeting(ISerializationContext context, Greeting semanticObject) {
+	protected void sequence_And(ISerializationContext context, And semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Step returns Asterisk
+	 *     Asterisk returns Asterisk
+	 *
+	 * Constraint:
+	 *     (name=Phrase (theStepTable=StepTable | theDocString=DocString)?)
+	 * </pre>
+	 */
+	protected void sequence_Asterisk(ISerializationContext context, Asterisk semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     AbstractScenario returns Background
+	 *     Background returns Background
+	 *
+	 * Constraint:
+	 *     (name=Phrase statements+=Statement* steps+=Step*)
+	 * </pre>
+	 */
+	protected void sequence_Background(ISerializationContext context, Background semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Step returns But
+	 *     But returns But
+	 *
+	 * Constraint:
+	 *     (name=Phrase (theStepTable=StepTable | theDocString=DocString)?)
+	 * </pre>
+	 */
+	protected void sequence_But(ISerializationContext context, But semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Cell returns Cell
+	 *
+	 * Constraint:
+	 *     name=Phrase
+	 * </pre>
+	 */
+	protected void sequence_Cell(ISerializationContext context, Cell semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, CucumberPackage.Literals.GREETING__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CucumberPackage.Literals.GREETING__NAME));
+			if (transientValues.isValueTransient(semanticObject, CucumberPackage.Literals.CELL__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CucumberPackage.Literals.CELL__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getCellAccess().getNamePhraseParserRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
@@ -67,13 +211,276 @@ public class CucumberSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Model returns Model
+	 *     DocString returns DocString
 	 *
 	 * Constraint:
-	 *     greetings+=Greeting+
+	 *     lines+=Line+
 	 * </pre>
 	 */
-	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
+	protected void sequence_DocString(ISerializationContext context, DocString semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ExamplesTable returns ExamplesTable
+	 *
+	 * Constraint:
+	 *     rows+=Row+
+	 * </pre>
+	 */
+	protected void sequence_ExamplesTable(ISerializationContext context, ExamplesTable semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Examples returns Examples
+	 *
+	 * Constraint:
+	 *     (tags+=Tag* name=Phrase statements+=Statement* theExamplesTable=ExamplesTable)
+	 * </pre>
+	 */
+	protected void sequence_Examples(ISerializationContext context, Examples semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Model returns Feature
+	 *     Feature returns Feature
+	 *
+	 * Constraint:
+	 *     (tags+=Tag* name=Phrase statements+=Statement* abstractScenarios+=AbstractScenario*)
+	 * </pre>
+	 */
+	protected void sequence_Feature(ISerializationContext context, Feature semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Step returns Given
+	 *     Given returns Given
+	 *
+	 * Constraint:
+	 *     (name=Phrase (theStepTable=StepTable | theDocString=DocString)?)
+	 * </pre>
+	 */
+	protected void sequence_Given(ISerializationContext context, Given semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Line returns Line
+	 *
+	 * Constraint:
+	 *     name=LineBits
+	 * </pre>
+	 */
+	protected void sequence_Line(ISerializationContext context, Line semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, CucumberPackage.Literals.LINE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CucumberPackage.Literals.LINE__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getLineAccess().getNameLineBitsParserRuleCall_0_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ParametersTable returns ParametersTable
+	 *
+	 * Constraint:
+	 *     rows+=Row+
+	 * </pre>
+	 */
+	protected void sequence_ParametersTable(ISerializationContext context, ParametersTable semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Row returns Row
+	 *
+	 * Constraint:
+	 *     cells+=Cell+
+	 * </pre>
+	 */
+	protected void sequence_Row(ISerializationContext context, Row semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     AbstractScenario returns ScenarioOutline
+	 *     ScenarioOutline returns ScenarioOutline
+	 *
+	 * Constraint:
+	 *     (tags+=Tag* name=Phrase statements+=Statement* steps+=Step* examples+=Examples+)
+	 * </pre>
+	 */
+	protected void sequence_ScenarioOutline(ISerializationContext context, ScenarioOutline semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     AbstractScenario returns Scenario
+	 *     Scenario returns Scenario
+	 *
+	 * Constraint:
+	 *     (tags+=Tag* name=Phrase statements+=Statement* steps+=Step*)
+	 * </pre>
+	 */
+	protected void sequence_Scenario(ISerializationContext context, Scenario semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Statement returns Statement
+	 *
+	 * Constraint:
+	 *     name=Phrase
+	 * </pre>
+	 */
+	protected void sequence_Statement(ISerializationContext context, Statement semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, CucumberPackage.Literals.STATEMENT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CucumberPackage.Literals.STATEMENT__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getStatementAccess().getNamePhraseParserRuleCall_0_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     StepDefinition returns StepDefinition
+	 *
+	 * Constraint:
+	 *     (name=Phrase statements+=Statement* stepParameters+=StepParameters*)
+	 * </pre>
+	 */
+	protected void sequence_StepDefinition(ISerializationContext context, StepDefinition semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Model returns StepObject
+	 *     StepObject returns StepObject
+	 *
+	 * Constraint:
+	 *     (name=Phrase statements+=Statement* stepDefinitions+=StepDefinition*)
+	 * </pre>
+	 */
+	protected void sequence_StepObject(ISerializationContext context, StepObject semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     StepParameters returns StepParameters
+	 *
+	 * Constraint:
+	 *     (name=Phrase statements+=Statement* parametersTable=ParametersTable)
+	 * </pre>
+	 */
+	protected void sequence_StepParameters(ISerializationContext context, StepParameters semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     StepTable returns StepTable
+	 *
+	 * Constraint:
+	 *     rows+=Row+
+	 * </pre>
+	 */
+	protected void sequence_StepTable(ISerializationContext context, StepTable semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Tag returns Tag
+	 *
+	 * Constraint:
+	 *     name=ID
+	 * </pre>
+	 */
+	protected void sequence_Tag(ISerializationContext context, Tag semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, CucumberPackage.Literals.TAG__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, CucumberPackage.Literals.TAG__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getTagAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Step returns Then
+	 *     Then returns Then
+	 *
+	 * Constraint:
+	 *     (name=Phrase (theStepTable=StepTable | theDocString=DocString)?)
+	 * </pre>
+	 */
+	protected void sequence_Then(ISerializationContext context, Then semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Step returns When
+	 *     When returns When
+	 *
+	 * Constraint:
+	 *     (name=Phrase (theStepTable=StepTable | theDocString=DocString)?)
+	 * </pre>
+	 */
+	protected void sequence_When(ISerializationContext context, When semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

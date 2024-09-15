@@ -16,7 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.cucumber.Model#getGreetings <em>Greetings</em>}</li>
+ *   <li>{@link org.farhan.mbt.cucumber.Model#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.mbt.cucumber.Model#getStatements <em>Statements</em>}</li>
  * </ul>
  *
  * @see org.farhan.mbt.cucumber.CucumberPackage#getModel()
@@ -26,15 +27,37 @@ import org.eclipse.emf.ecore.EObject;
 public interface Model extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Greetings</b></em>' containment reference list.
-   * The list contents are of type {@link org.farhan.mbt.cucumber.Greeting}.
+   * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Greetings</em>' containment reference list.
-   * @see org.farhan.mbt.cucumber.CucumberPackage#getModel_Greetings()
+   * @return the value of the '<em>Name</em>' attribute.
+   * @see #setName(String)
+   * @see org.farhan.mbt.cucumber.CucumberPackage#getModel_Name()
+   * @model
+   * @generated
+   */
+  String getName();
+
+  /**
+   * Sets the value of the '{@link org.farhan.mbt.cucumber.Model#getName <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Name</em>' attribute.
+   * @see #getName()
+   * @generated
+   */
+  void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
+   * The list contents are of type {@link org.farhan.mbt.cucumber.Statement}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Statements</em>' containment reference list.
+   * @see org.farhan.mbt.cucumber.CucumberPackage#getModel_Statements()
    * @model containment="true"
    * @generated
    */
-  EList<Greeting> getGreetings();
+  EList<Statement> getStatements();
 
 } // Model
