@@ -4,6 +4,14 @@
 package org.farhan.mbt.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+import org.farhan.mbt.ui.syntaxcoloring.CucumberAntlrTokenToAttributeIdMapper;
+import org.farhan.mbt.ui.syntaxcoloring.CucumberHighlightingConfiguration;
+import org.farhan.mbt.ui.syntaxcoloring.CucumberSemanticHighlightingCalculator;
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
@@ -12,5 +20,21 @@ public class CucumberUiModule extends AbstractCucumberUiModule {
 
 	public CucumberUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
+	}
+
+	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return CucumberHighlightingConfiguration.class;
+	}
+
+	public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
+		return CucumberAntlrTokenToAttributeIdMapper.class;
+	}
+
+	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+		return CucumberSemanticHighlightingCalculator.class;
+	}
+
+	public Class<? extends IContextualOutputConfigurationProvider> bindIContextualOutputConfigurationProvider() {
+		return EclipseOutputConfigurationProvider.class;
 	}
 }
