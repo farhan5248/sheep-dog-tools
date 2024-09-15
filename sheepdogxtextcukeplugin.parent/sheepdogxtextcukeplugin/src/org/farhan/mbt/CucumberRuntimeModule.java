@@ -4,7 +4,9 @@
 package org.farhan.mbt;
 
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
+import org.eclipse.xtext.parser.IParser;
 import org.farhan.mbt.generator.CucumberOutputConfigurationProvider;
+import org.farhan.mbt.parser.antlr.MyCucumberParser;
 
 import com.google.inject.Binder;
 import com.google.inject.Singleton;
@@ -14,6 +16,11 @@ import com.google.inject.Singleton;
  * Equinox extension registry.
  */
 public class CucumberRuntimeModule extends AbstractCucumberRuntimeModule {
+
+	@Override
+	public Class<? extends IParser> bindIParser() {
+		return MyCucumberParser.class;
+	}
 
 	@Override
 	public void configure(Binder binder) {
