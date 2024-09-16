@@ -20,12 +20,13 @@ public class EclipseMock implements ILanguageAccess {
 	private HashMap<String, ArrayList<ArrayList<String>>> stepObject;
 	private TreeMap<String, String[]> proposalMap;
 	private ArrayList<String> components;
-	private ArrayList<String> componentObjects;
+	private ArrayList<String[]> componentObjects;
+	private String stepObjectDescription;
 
 	public EclipseMock() {
 		stepName = "";
 		components = new ArrayList<String>();
-		componentObjects = new ArrayList<String>();
+		componentObjects = new ArrayList<String[]>();
 		stepParameters = new ArrayList<String>();
 		allSteps = new ArrayList<String>();
 		backgroundSteps = new ArrayList<String>();
@@ -67,6 +68,11 @@ public class EclipseMock implements ILanguageAccess {
 	public Object createStepObject(String objectQualifiedName) throws Exception {
 		if (stepObject == null) {
 			stepObject = new HashMap<String, ArrayList<ArrayList<String>>>();
+			String[] stepObjectProposal = new String[2];
+			// [0] should be just the name
+			stepObjectProposal[0] = objectQualifiedName;
+			stepObjectProposal[1] = objectQualifiedName;
+			componentObjects.add(stepObjectProposal);
 		}
 		return stepObject;
 	}
@@ -82,7 +88,7 @@ public class EclipseMock implements ILanguageAccess {
 	}
 
 	@Override
-	public ArrayList<String> getComponentObjects(String component) {
+	public ArrayList<String[]> getComponentObjects(String component) {
 		return componentObjects;
 	}
 
@@ -189,6 +195,10 @@ public class EclipseMock implements ILanguageAccess {
 
 	public void setValidationMessage(String message) {
 		this.validationMessage = message;
+	}
+
+	public void setStepObjectDescription(String description) {
+		this.stepObjectDescription = description;
 	}
 
 }

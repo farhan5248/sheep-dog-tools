@@ -10,7 +10,7 @@ public class GenerationActionImpl extends TestObject implements GenerationAction
 
     public void transition() {
 		try {
-			StepDefinitionHelper.generate(getLA(), null);
+			StepDefinitionHelper.generate(getEclipseMock(), null);
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
 		}

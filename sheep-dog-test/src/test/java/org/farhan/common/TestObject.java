@@ -50,7 +50,7 @@ public abstract class TestObject {
 		return name.replaceAll("[ \\-\\(\\)/]", "");
 	}
 
-	protected EclipseMock getLA() {
+	protected EclipseMock getEclipseMock() {
 		if (la == null) {
 			la = new EclipseMock();
 		}

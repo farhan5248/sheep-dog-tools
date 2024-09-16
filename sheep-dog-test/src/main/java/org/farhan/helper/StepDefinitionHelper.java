@@ -3,7 +3,6 @@ package org.farhan.helper;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 public class StepDefinitionHelper {
 
@@ -11,6 +10,7 @@ public class StepDefinitionHelper {
 		TreeMap<String, String[]> proposals = new TreeMap<String, String[]>();
 		String component;
 		String object;
+		// suggestion name and doc
 		String[] proposalDisplay;
 		if (la.getStepName() == null) {
 			component = "";
@@ -21,29 +21,41 @@ public class StepDefinitionHelper {
 		}
 		if (object.isEmpty()) {
 			if (component.isEmpty()) {
+				// TODO rename to getFolder names and make a getProjectComponents method here
 				for (String stepDefComponent : la.getProjectComponents()) {
+					// replace with proposal class
 					proposalDisplay = new String[2];
-					proposalDisplay[0] = "The " + stepDefComponent + ",";
+					proposalDisplay[0] = stepDefComponent;
 					proposalDisplay[1] = proposalDisplay[0];
 					proposals.put("The " + stepDefComponent + ",", proposalDisplay);
 				}
 			} else {
-				for (String stepDefObject : la.getComponentObjects(component)) {
+				// TODO rename to getFile names and make a getComponentObjects method here
+				for (String[] stepDefObject : la.getComponentObjects(component)) {
 					proposalDisplay = new String[2];
-					proposalDisplay[0] = stepDefObject;
-					proposalDisplay[1] = proposalDisplay[0];
+					proposalDisplay[0] = stepDefObject[0];
+					proposalDisplay[1] = stepDefObject[1];
+					// use the qualifed name as the key
+					// Make a new Proposal class
+					// key is qualified name, Proposal is [key, replacement, display text, documentation]
+					// The replacement and display here has the path in the object since it's
+					// referenced the first time
 					proposals.put("The " + component + ", " + stepDefObject, proposalDisplay);
 				}
 			}
-			for (String previousObject : getPreviousObjects(la)) {
+			for (String[] previousObject : getPreviousObjects(la)) {
+				// Do as below
 				proposalDisplay = new String[2];
-				proposalDisplay[0] = "The " + previousObject;
-				proposalDisplay[1] = proposalDisplay[0];
-				proposals.put("The " + previousObject, proposalDisplay);
+				proposalDisplay[0] = previousObject[0];
+				proposalDisplay[1] = previousObject[1];
+				// The replacement and display here doesn't have the path because it's already
+				// specified in a previous step
+				proposals.put("The " + previousObject[0], proposalDisplay);
 			}
 		} else {
 			// else if there's an object get a list of keywords for the suggestions
 			for (String[] stepDef : getObjectDefinitions(la)) {
+				// replace with proposal class
 				proposalDisplay = new String[2];
 				proposalDisplay[0] = stepDef[0];
 				proposalDisplay[1] = stepDef[1];
@@ -90,20 +102,28 @@ public class StepDefinitionHelper {
 		return "";
 	}
 
-	private static TreeSet<String> getPreviousObjects(ILanguageAccess la) {
-		TreeSet<String> previousObjects = new TreeSet<String>();
+	private static ArrayList<String[]> getPreviousObjects(ILanguageAccess la) {
+
+		// Fix during Suggest an object only once when considering previous objects
+		// String[] objectParts = object.split("/");
+		// previousObjects.add(objectParts[objectParts.length - 1]);
+		// Use TreeMap of Proposals to handle duplicates
+
+		ArrayList<String[]> previousObjects = new ArrayList<String[]>();
+		String[] previousObject;
 
 		for (String stepName : la.getBackgroundSteps()) {
-			String object = StepHelper.getObject(stepName);
-			previousObjects.add(object);
+			previousObject = new String[2];
+			previousObject[0] = StepHelper.getObject(stepName);
+			previousObject[1] = "get qualified name";
+			previousObjects.add(previousObject);
 		}
 
 		for (String stepName : la.getPreviousSteps()) {
-			String object = StepHelper.getObject(stepName);
-			previousObjects.add(object);
-			// Fix during Suggest an object only once when considering previous objects
-			// String[] objectParts = object.split("/");
-			// previousObjects.add(objectParts[objectParts.length - 1]);
+			previousObject = new String[2];
+			previousObject[0] = StepHelper.getObject(stepName);
+			previousObject[1] = "get qualified name";
+			previousObjects.add(previousObject);
 		}
 		return previousObjects;
 	}

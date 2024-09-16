@@ -30,3 +30,7 @@ Object: src-gen-step-defs/daily batchjob/Input file.feature file
 
           | Object Name | Step Definition Name | Step Definition Description |
 
+    Parameters: 4
+
+          | Object Name | Object Description |
+

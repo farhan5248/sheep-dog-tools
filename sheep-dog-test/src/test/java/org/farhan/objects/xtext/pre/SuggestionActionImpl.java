@@ -10,7 +10,7 @@ public class SuggestionActionImpl extends TestObject implements SuggestionAction
 
 	public void transition() {
 		try {
-			getLA().setProposalList(StepDefinitionHelper.propose(getLA()));
+			getEclipseMock().setProposalList(StepDefinitionHelper.propose(getEclipseMock()));
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
 		}

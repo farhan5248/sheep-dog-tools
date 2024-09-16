@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Assertions;
 public class ScenarioValidationDialogImpl extends TestObject implements ScenarioValidationDialog {
 
 	public void assertMessage(HashMap<String, String> keyMap) {
-		Assertions.assertEquals(keyMap.get("Message"), getLA().getValidationMessage());
+		Assertions.assertEquals(keyMap.get("Message"), getEclipseMock().getValidationMessage());
 	}
 
 	@Override
 	public void assertEmpty(HashMap<String, String> keyMap) {
-		Assertions.assertTrue(getLA().getValidationMessage().isEmpty());
+		Assertions.assertTrue(getEclipseMock().getValidationMessage().isEmpty());
 	}
 }

@@ -14,7 +14,7 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 	@Override
 	public void assertObjectName(HashMap<String, String> keyMap) {
 		try {
-			Assertions.assertNotNull(getLA().getStepObject(getSpecial("Object Name")));
+			Assertions.assertNotNull(getEclipseMock().getStepObject(getSpecial("Object Name")));
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
@@ -23,9 +23,9 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 	@Override
 	public void assertParameters(HashMap<String, String> keyMap) {
 		try {
-			getLA().createStepObject(keyMap.get("Object Name"));
-			getLA().createStepDefinition(keyMap.get("Step Definition Name"));
-			Assertions.assertTrue(getLA().getStepDefinitionParameters(keyMap.get("Step Definition Name")).toString()
+			getEclipseMock().createStepObject(keyMap.get("Object Name"));
+			getEclipseMock().createStepDefinition(keyMap.get("Step Definition Name"));
+			Assertions.assertTrue(getEclipseMock().getStepDefinitionParameters(keyMap.get("Step Definition Name")).toString()
 					.contains("[" + keyMap.get("Parameters") + "]"));
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
@@ -36,10 +36,10 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 	@Override
 	public void assertStepDefinitionName(HashMap<String, String> keyMap) {
 		try {
-			Object stepObject = getLA().getStepObject(keyMap.get("Object Name"));
+			Object stepObject = getEclipseMock().getStepObject(keyMap.get("Object Name"));
 			Assertions.assertNotNull(stepObject);
-			for (Object stepDef : getLA().getStepDefinitions(stepObject)) {
-				if (getLA().getStepDefinitionName((Object) stepDef).contentEquals(keyMap.get("Step Definition Name"))) {
+			for (Object stepDef : getEclipseMock().getStepDefinitions(stepObject)) {
+				if (getEclipseMock().getStepDefinitionName((Object) stepDef).contentEquals(keyMap.get("Step Definition Name"))) {
 					return;
 				}
 			}
@@ -52,7 +52,7 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 	@Override
 	public void setObjectName(HashMap<String, String> keyMap) {
 		try {
-			getLA().createStepObject(keyMap.get("Object Name"));
+			getEclipseMock().createStepObject(keyMap.get("Object Name"));
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
@@ -61,8 +61,8 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 	@Override
 	public void setParameters(HashMap<String, String> keyMap) {
 		try {
-			getLA().createStepObject(keyMap.get("Object Name"));
-			ArrayList<ArrayList<String>> stepDefinitionList = (ArrayList<ArrayList<String>>) getLA()
+			getEclipseMock().createStepObject(keyMap.get("Object Name"));
+			ArrayList<ArrayList<String>> stepDefinitionList = (ArrayList<ArrayList<String>>) getEclipseMock()
 					.createStepDefinition(keyMap.get("Step Definition Name"));
 			ArrayList<String> parameters = new ArrayList<String>();
 			parameters.add(keyMap.get("Parameters"));
@@ -75,8 +75,8 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 	@Override
 	public void setStepDefinitionName(HashMap<String, String> keyMap) {
 		try {
-			getLA().createStepObject(keyMap.get("Object Name"));
-			getLA().createStepDefinition(keyMap.get("Step Definition Name"));
+			getEclipseMock().createStepObject(keyMap.get("Object Name"));
+			getEclipseMock().createStepDefinition(keyMap.get("Step Definition Name"));
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
@@ -85,9 +85,19 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 	@Override
 	public void setStepDefinitionDescription(HashMap<String, String> keyMap) {
 		try {
-			getLA().createStepObject(keyMap.get("Object Name"));
-			getLA().setStepDefinitionDescription(keyMap.get("Step Definition Name"),
+			getEclipseMock().createStepObject(keyMap.get("Object Name"));
+			getEclipseMock().setStepDefinitionDescription(keyMap.get("Step Definition Name"),
 					keyMap.get("Step Definition Description"));
+		} catch (Exception e) {
+			Assertions.fail(Utilities.getStackTraceAsString(e));
+		}
+	}
+
+	@Override
+	public void setObjectDescription(HashMap<String, String> keyMap) {
+		try {
+			getEclipseMock().createStepObject(keyMap.get("Object Name"));
+			getEclipseMock().setStepObjectDescription(keyMap.get("Object Description"));
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}

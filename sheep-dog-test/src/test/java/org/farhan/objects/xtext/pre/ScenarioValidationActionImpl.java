@@ -13,7 +13,7 @@ public class ScenarioValidationActionImpl extends TestObject implements Scenario
 
 	public void transition() {
 		try {
-			getLA().setValidationMessage(ScenarioHelper.validate(getLA()));
+			getEclipseMock().setValidationMessage(ScenarioHelper.validate(getEclipseMock()));
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
 		}
