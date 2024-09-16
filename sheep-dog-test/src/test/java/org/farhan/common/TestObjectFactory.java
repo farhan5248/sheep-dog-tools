@@ -27,7 +27,7 @@ public abstract class TestObjectFactory {
 
 		Set<ClassInfo> testObjs = ClassPath.from(ClassLoader.getSystemClassLoader()).getAllClasses();
 		for (ClassInfo testObj : testObjs) {
-			if (testObj.getName().endsWith(testObjName + "Impl")
+			if (testObj.getSimpleName().contentEquals(testObjName + "Impl")
 					&& testObj.getName().startsWith("org.farhan.objects." + rootPkg + "." + preOrPost)) {
 				return Class.forName(testObj.getName());
 			}

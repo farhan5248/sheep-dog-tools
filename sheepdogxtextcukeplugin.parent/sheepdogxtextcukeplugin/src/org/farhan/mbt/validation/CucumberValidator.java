@@ -7,13 +7,14 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
+import org.farhan.mbt.cucumber.AbstractScenario;
 import org.farhan.mbt.cucumber.Cell;
 import org.farhan.mbt.cucumber.CucumberPackage;
 import org.farhan.mbt.cucumber.Feature;
-import org.farhan.mbt.cucumber.Scenario;
 import org.farhan.mbt.cucumber.Step;
 import org.farhan.mbt.cucumber.StepTable;
 import org.farhan.helper.LanguageAccessImpl;
+import org.farhan.helper.ScenarioHelper;
 import org.farhan.helper.StepDefinitionHelper;
 import org.farhan.helper.StepHelper;
 
@@ -22,7 +23,8 @@ public class CucumberValidator extends AbstractCucumberValidator {
 	public static final String INVALID_NAME = "invalidName";
 	public static final String INVALID_HEADER = "invalidHeader";
 	public static final String INVALID_STEP_TYPE = "invalidStepType";
-	public static final String MISSING_STEP_DEF = "invalidStepType";
+	public static final String MISSING_STEP_DEF = "missingStepDefinition";
+	public static final String MISSING_COMPONENT = "missingInitialComponent";
 
 	private void logError(Exception e, String name) {
 		// TODO inject the logger instead
@@ -34,26 +36,34 @@ public class CucumberValidator extends AbstractCucumberValidator {
 
 	@Check(CheckType.FAST)
 	public void checkStepName(Step step) {
+		try {
+			if (step.getName() != null) {
+				// TODO the quickfix here is to identify which regex is broken and put an
+				// example in place
+				if (!StepHelper.isValid(step.getName())) {
+					// TODO instead of this error message, give the parts breakdown to see what's
+					// missing
+					error(StepHelper.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
+				} else {
+					String problems;
 
-		if (step.getName() != null) {
-			// TODO the quickfix here is to identify which regex is broken and put an
-			// example in place
-			if (!StepHelper.isValid(step.getName())) {
-				// TODO instead of this error message, give the parts breakdown to see what's
-				// missing
-				error(StepHelper.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
-			} else {
-				try {
-					// if it's valid, then check if the the step def exists, if not call the
-					// generator in the quick fix
-					String problems = StepDefinitionHelper.validate(new LanguageAccessImpl(step));
+					AbstractScenario as = (AbstractScenario) step.eContainer();
+					if (as.getSteps().getFirst().equals(step)) {
+						problems = ScenarioHelper.validate(new LanguageAccessImpl(step));
+						if (!problems.isEmpty()) {
+							error(problems, CucumberPackage.Literals.STEP__NAME, MISSING_COMPONENT);
+							return;
+						}
+					}
+
+					problems = StepDefinitionHelper.validate(new LanguageAccessImpl(step));
 					if (!problems.isEmpty()) {
 						warning(problems, CucumberPackage.Literals.STEP__NAME, MISSING_STEP_DEF, step.getName());
 					}
-				} catch (Exception e) {
-					logError(e, step.getName());
 				}
 			}
+		} catch (Exception e) {
+			logError(e, step.getName());
 		}
 	}
 
@@ -71,13 +81,8 @@ public class CucumberValidator extends AbstractCucumberValidator {
 	}
 
 	@Check(CheckType.NORMAL)
-	public void checkScenario(Scenario scenario) {
-
-		// TODO the first step should have a component. If not, there should be a
-		// background for which this should also be true
-		// TODO also check that there's a sequence of GWT or G(G|A|B)*W(W|A|B)*T(T|A|B)*
-		// and not (G|W|T|A|B)*
-		if (!Character.isUpperCase(scenario.getName().charAt(0))) {
+	public void checkScenario(AbstractScenario abstractScenario) {
+		if (!Character.isUpperCase(abstractScenario.getName().charAt(0))) {
 			warning("Scenario name should start with a capital", CucumberPackage.Literals.ABSTRACT_SCENARIO__NAME,
 					INVALID_NAME);
 		}

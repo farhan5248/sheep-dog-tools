@@ -45,8 +45,8 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		return files;
 	}
 
-	public LanguageAccessImpl(Object step) {
-		this.step = (Step) step;
+	public LanguageAccessImpl(Step step) {
+		this.step = step;
 	}
 
 	private String cellsToString(List<Cell> cells) {
@@ -109,6 +109,18 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		}
 	}
 
+	@Override
+	public ArrayList<String> getAllSteps() {
+		AbstractScenario as = (AbstractScenario) step.eContainer();
+		ArrayList<String> stepNames = new ArrayList<String>();
+		for (Step s : as.getSteps()) {
+			if (s.getName() != null) {
+				stepNames.add(s.getName());
+			}
+		}
+		return stepNames;
+	}
+
 	public ArrayList<String> getComponentObjects(String component) throws Exception {
 		IFolder folder = getProject()
 				.getFolder(CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory() + "/" + component);
@@ -146,7 +158,11 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		ArrayList<String> stepNames = new ArrayList<String>();
 		for (Step s : as.getSteps()) {
 			if (s.getName() != null) {
-				stepNames.add(s.getName());
+				if (s.equals(step)) {
+					break;
+				} else {
+					stepNames.add(s.getName());
+				}
 			}
 		}
 		return stepNames;

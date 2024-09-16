@@ -12,6 +12,8 @@ public interface ILanguageAccess {
 
 	public Object createStepObject(String objectQualifiedName) throws Exception;
 
+	public ArrayList<String> getAllSteps();
+
 	public ArrayList<String> getComponentObjects(String component) throws Exception;
 
 	public ArrayList<String> getPreviousSteps();
