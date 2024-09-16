@@ -15,6 +15,7 @@ public class EclipseMock implements ILanguageAccess {
 	private String stepName;
 	private ArrayList<String> stepParameters;
 	private ArrayList<String> allSteps;
+	private ArrayList<String> backgroundSteps;
 	private HashMap<String, String> stepDefinitionDescriptions;
 	private HashMap<String, ArrayList<ArrayList<String>>> stepObject;
 	private TreeMap<String, String[]> proposalMap;
@@ -27,6 +28,7 @@ public class EclipseMock implements ILanguageAccess {
 		componentObjects = new ArrayList<String>();
 		stepParameters = new ArrayList<String>();
 		allSteps = new ArrayList<String>();
+		backgroundSteps = new ArrayList<String>();
 		stepDefinitionDescriptions = new HashMap<String, String>();
 	}
 
@@ -67,6 +69,16 @@ public class EclipseMock implements ILanguageAccess {
 			stepObject = new HashMap<String, ArrayList<ArrayList<String>>>();
 		}
 		return stepObject;
+	}
+
+	@Override
+	public ArrayList<String> getAllSteps() {
+		return allSteps;
+	}
+
+	@Override
+	public ArrayList<String> getBackgroundSteps() {
+		return backgroundSteps;
 	}
 
 	@Override
@@ -162,9 +174,13 @@ public class EclipseMock implements ILanguageAccess {
 		stepDefinitionDescriptions.put(stepDefinition, description);
 	}
 
-	public void setStepName(String stepName) {
+	public void addStep(String stepName) {
 		this.stepName = stepName;
 		allSteps.add(this.stepName);
+	}
+
+	public void addBackgroundStep(String stepName) {
+		backgroundSteps.add(stepName);
 	}
 
 	public void setStepParameters(String header) {
@@ -173,11 +189,6 @@ public class EclipseMock implements ILanguageAccess {
 
 	public void setValidationMessage(String message) {
 		this.validationMessage = message;
-	}
-
-	@Override
-	public ArrayList<String> getAllSteps() {
-		return allSteps;
 	}
 
 }

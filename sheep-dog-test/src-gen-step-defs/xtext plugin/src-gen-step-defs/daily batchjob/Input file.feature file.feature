@@ -12,6 +12,10 @@ Object: src-gen-step-defs/daily batchjob/Input file.feature file
 
           | Object Name | Step Definition Name | Parameters |
 
+    Parameters: 3
+
+          | Step Definition Name |
+
   Definition: is created as follows
 
     Parameters: 1

@@ -1,6 +1,19 @@
 @debug
 Feature: Propose Object
 
+  Scenario: No object no component has previous in background
+
+    Given The xtext plugin, src/test/resources/cucumber/Process.feature file background steps snippet is created as follows
+          | Step Name                                 |
+          | The daily batchjob, Input file is present |
+      And The Process.feature file steps snippet is created as follows
+          | Step Name |
+          | empty     |
+     When The suggestion action is performed
+     Then The suggestion dialog will be set as follows
+          | Suggestion     | Suggestion Name |
+          | The Input file | The Input file  |
+
   Scenario: No object no component no previous no components
 
     TODO make this an outline with various steps like "The" or "The batchjob" etc

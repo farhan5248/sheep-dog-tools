@@ -92,14 +92,18 @@ public class StepDefinitionHelper {
 
 	private static TreeSet<String> getPreviousObjects(ILanguageAccess la) {
 		TreeSet<String> previousObjects = new TreeSet<String>();
-		for (String stepName : la.getPreviousSteps()) {
-			// TODO until the step definitions only keep the predicate, both the object
-			// alone and the object with its path need to be suggested so that the prefix
-			// matches
+
+		for (String stepName : la.getBackgroundSteps()) {
 			String object = StepHelper.getObject(stepName);
 			previousObjects.add(object);
-			String[] objectParts = object.split("/");
-			previousObjects.add(objectParts[objectParts.length - 1]);
+		}
+
+		for (String stepName : la.getPreviousSteps()) {
+			String object = StepHelper.getObject(stepName);
+			previousObjects.add(object);
+			// Fix during Suggest an object only once when considering previous objects
+			// String[] objectParts = object.split("/");
+			// previousObjects.add(objectParts[objectParts.length - 1]);
 		}
 		return previousObjects;
 	}
@@ -131,7 +135,6 @@ public class StepDefinitionHelper {
 		// Create a list of previous steps in reverse order
 		ArrayList<String> previousSteps = new ArrayList<String>();
 		String lastComponent = "Unknown service";
-		// TODO move getPreviousSteps to this class and add getScenarioSteps to la
 		for (String aStep : la.getPreviousSteps()) {
 			if (aStep.contentEquals(la.getStepName())) {
 				break;

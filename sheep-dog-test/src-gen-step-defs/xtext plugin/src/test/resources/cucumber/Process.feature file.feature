@@ -10,3 +10,9 @@ Object: src/test/resources/cucumber/Process.feature file
 
           | Step Name | Headers |
 
+  Definition: background steps snippet is created as follows
+
+    Parameters: 1
+
+          | Step Name |
+

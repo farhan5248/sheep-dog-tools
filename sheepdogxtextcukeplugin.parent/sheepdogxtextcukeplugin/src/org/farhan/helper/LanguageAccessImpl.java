@@ -17,8 +17,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.farhan.mbt.cucumber.AbstractScenario;
+import org.farhan.mbt.cucumber.Background;
 import org.farhan.mbt.cucumber.Cell;
 import org.farhan.mbt.cucumber.CucumberFactory;
+import org.farhan.mbt.cucumber.Feature;
 import org.farhan.mbt.cucumber.ParametersTable;
 import org.farhan.mbt.cucumber.Row;
 import org.farhan.mbt.cucumber.Statement;
@@ -255,6 +257,18 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	@Override
 	public void saveObject(Object theObject, Map<Object, Object> options) throws Exception {
 		((EObject) theObject).eResource().save(options);
+	}
+
+	@Override
+	public ArrayList<String> getBackgroundSteps() {
+		ArrayList<String> steps = new ArrayList<String>();
+		Feature feature = (Feature) step.eContainer().eContainer();
+		if (feature.getAbstractScenarios().getFirst() instanceof Background) {
+			for (Step s : feature.getAbstractScenarios().getFirst().getSteps()) {
+				steps.add(s.getName());
+			}
+		}
+		return steps;
 	}
 
 }

@@ -14,6 +14,8 @@ public interface ILanguageAccess {
 
 	public ArrayList<String> getAllSteps();
 
+	public ArrayList<String> getBackgroundSteps();
+
 	public ArrayList<String> getComponentObjects(String component) throws Exception;
 
 	public ArrayList<String> getPreviousSteps();

@@ -19,4 +19,11 @@ public class XtextInputFileFeatureFileSteps {
         XtextFactory.get("InputFileFeatureFile").setPath("src-gen-step-defs/daily batchjob/Input file.feature");
         XtextFactory.get("InputFileFeatureFile").setInputOutputs(dataTable);
     }
+
+    @Given("^The Input file.feature file will be created as follows$")
+    public void theInputFileFeatureFileWillBeCreatedAsFollows(DataTable dataTable) {
+        XtextFactory.get("InputFileFeatureFile").setComponent("xtext");
+        XtextFactory.get("InputFileFeatureFile").setPath("Input file.feature");
+        XtextFactory.get("InputFileFeatureFile").assertInputOutputs(dataTable);
+    }
 }

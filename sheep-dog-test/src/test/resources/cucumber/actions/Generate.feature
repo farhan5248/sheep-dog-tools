@@ -1,7 +1,7 @@
 @debug
 Feature: Generate
 
-  Scenario: This object doesn't exist creation
+  Scenario: The object doesn't exist
 
     Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
           | Step Name                                 |
@@ -11,7 +11,7 @@ Feature: Generate
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
 
-  Scenario: This object step definition doesn't exist creation
+  Scenario: The object step definition doesn't exist
 
     Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
           | Step Name                                 |
@@ -24,7 +24,7 @@ Feature: Generate
           | Object Name                       | Step Definition Name |
           | daily batchjob/Input file.feature | is present           |
 
-  Scenario: This object step definition parameter set doesn't exist creation
+  Scenario: The object step definition parameter set doesn't exist
 
     Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
           | Step Name                                 | Headers    |
