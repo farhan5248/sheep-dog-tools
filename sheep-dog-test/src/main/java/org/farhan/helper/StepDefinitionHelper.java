@@ -1,6 +1,7 @@
 package org.farhan.helper;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -23,6 +24,7 @@ public class StepDefinitionHelper {
 					proposals.put(proposal.getReplacement(), proposal);
 				}
 			} else {
+				// TODO get previous objects for this component
 				for (Proposal proposal : getComponentObjects(la, component)) {
 					proposals.put(proposal.getReplacement(), proposal);
 				}
@@ -104,24 +106,34 @@ public class StepDefinitionHelper {
 		return objectParts[objectParts.length - 1];
 	}
 
-	private static ArrayList<Proposal> getPreviousObjects(ILanguageAccess la) {
+	private static Collection<Proposal> getPreviousObjects(ILanguageAccess la) {
 
-		ArrayList<Proposal> previousObjects = new ArrayList<Proposal>();
+		TreeMap<String, Proposal> proposals = new TreeMap<String, Proposal>();
 		Proposal proposal;
 		ArrayList<Object> allSteps = new ArrayList<Object>();
 		allSteps.addAll(la.getBackgroundSteps());
 		allSteps.addAll(la.getPreviousSteps());
 
 		for (Object step : allSteps) {
+
+			// This suggestion is to make referring to the last fully qualified name less
+			// tedious. However it can only refer to the last object.
 			proposal = new Proposal();
 			proposal.setDisplay(getStepObjectWithoutPath(StepHelper.getObject(la.getStepName(step))));
-			// TODO after making language access independent of a specific step, use it to
-			// get the qualified name and then the step object
 			proposal.setDocumentation("Referred in: " + la.getStepName(step));
 			proposal.setReplacement("The " + proposal.getDisplay());
-			previousObjects.add(proposal);
+			proposals.put(proposal.getDisplay(), proposal);
+
+			// This proposal is to list the fully qualified name of an object in case two
+			// objects with the same simple name have different paths like a batch job file
+			// being moved between directories
+			proposal = new Proposal();
+			proposal.setDisplay(StepHelper.getObject(la.getStepName(step)));
+			proposal.setDocumentation("Referred in: " + la.getStepName(step));
+			proposal.setReplacement("The " + proposal.getDisplay());
+			proposals.put(proposal.getDisplay(), proposal);
 		}
-		return previousObjects;
+		return proposals.values();
 	}
 
 	private static ArrayList<Proposal> getObjectDefinitions(ILanguageAccess la) throws Exception {
