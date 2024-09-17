@@ -1,5 +1,5 @@
 @debug
-Feature: Validate
+Feature: Validate Warning
 
   Scenario: This object doesn't exist validation
 

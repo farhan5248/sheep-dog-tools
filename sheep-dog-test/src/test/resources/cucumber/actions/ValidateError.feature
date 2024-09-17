@@ -1,5 +1,5 @@
 @debug
-Feature: Validate
+Feature: Validate Error
 
   Scenario: No steps have a component
 
@@ -7,7 +7,9 @@ Feature: Validate
           | Step Name                    |
           | The Input file is present    |
           | The Input file is downloaded |
-     When The scenario validation action is performed
+     When The scenario validation action is performed as follows
+          | Selected Step |
+          | 1             |
      Then The scenario validation dialog will be set as follows
           | Message                              |
           | The first step must have a component |
@@ -18,7 +20,9 @@ Feature: Validate
           | Step Name                                    |
           | The Input file is present                    |
           | The daily batchjob, Input file is downloaded |
-     When The scenario validation action is performed
+     When The scenario validation action is performed as follows
+          | Selected Step |
+          | 1             |
      Then The scenario validation dialog will be set as follows
           | Message                              |
           | The first step must have a component |
@@ -29,6 +33,8 @@ Feature: Validate
           | Step Name                                 |
           | The daily batchjob, Input file is present |
           | The Input file is downloaded              |
-     When The scenario validation action is performed
+     When The scenario validation action is performed as follows
+          | Selected Step |
+          | 1             |
      Then The scenario validation dialog will be empty
 

@@ -12,11 +12,11 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("cucumber/actions/Validate.feature")
+@SelectClasspathResource("cucumber/actions/ValidateWarning.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
 @IncludeTags("debug")
-public class ValidateTest {
+public class ValidateWarningTest {
 
 	@BeforeAll
 	public static void before_or_after_all() {

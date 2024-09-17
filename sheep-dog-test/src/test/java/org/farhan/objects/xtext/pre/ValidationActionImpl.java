@@ -10,7 +10,7 @@ public class ValidationActionImpl extends TestObject implements ValidationAction
 
 	public void transition() {
 		try {
-			getEclipseMock().setValidationMessage(StepDefinitionHelper.validate(getEclipseMock()));
+			getEclipseMock().setValidationMessage(StepDefinitionHelper.validateWarning(getEclipseMock()));
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
 		}

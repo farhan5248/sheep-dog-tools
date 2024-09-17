@@ -14,7 +14,6 @@ import org.farhan.mbt.cucumber.Feature;
 import org.farhan.mbt.cucumber.Step;
 import org.farhan.mbt.cucumber.StepTable;
 import org.farhan.helper.LanguageAccessImpl;
-import org.farhan.helper.ScenarioHelper;
 import org.farhan.helper.StepDefinitionHelper;
 import org.farhan.helper.StepHelper;
 
@@ -38,25 +37,11 @@ public class CucumberValidator extends AbstractCucumberValidator {
 	public void checkStepName(Step step) {
 		try {
 			if (step.getName() != null) {
-				// TODO the quickfix here is to identify which regex is broken and put an
-				// example in place
-				if (!StepHelper.isValid(step.getName())) {
-					// TODO instead of this error message, give the parts breakdown to see what's
-					// missing
-					error(StepHelper.getErrorMessage(), CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
+				String problems = StepDefinitionHelper.validateError(new LanguageAccessImpl(step));
+				if (!problems.isEmpty()) {
+					error(problems, CucumberPackage.Literals.STEP__NAME, INVALID_NAME);
 				} else {
-					String problems;
-
-					AbstractScenario as = (AbstractScenario) step.eContainer();
-					if (as.getSteps().getFirst().equals(step)) {
-						problems = ScenarioHelper.validate(new LanguageAccessImpl(step));
-						if (!problems.isEmpty()) {
-							error(problems, CucumberPackage.Literals.STEP__NAME, MISSING_COMPONENT);
-							return;
-						}
-					}
-
-					problems = StepDefinitionHelper.validate(new LanguageAccessImpl(step));
+					problems = StepDefinitionHelper.validateWarning(new LanguageAccessImpl(step));
 					if (!problems.isEmpty()) {
 						warning(problems, CucumberPackage.Literals.STEP__NAME, MISSING_STEP_DEF, step.getName());
 					}

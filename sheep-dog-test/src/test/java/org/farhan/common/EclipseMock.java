@@ -212,4 +212,7 @@ public class EclipseMock implements ILanguageAccess {
 		return stepObjectDescription;
 	}
 
+	public void setStepSelection(String selection) {
+		this.stepName = (String) allSteps.get(Integer.valueOf(selection) - 1);
+	}
 }

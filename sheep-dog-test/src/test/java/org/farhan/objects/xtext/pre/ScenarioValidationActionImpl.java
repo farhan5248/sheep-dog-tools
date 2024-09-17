@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import org.farhan.common.TestObject;
 import org.farhan.common.Utilities;
-import org.farhan.helper.ScenarioHelper;
 import org.farhan.helper.StepDefinitionHelper;
 import org.farhan.objects.xtext.ScenarioValidationAction;
 import org.junit.jupiter.api.Assertions;
@@ -13,9 +12,14 @@ public class ScenarioValidationActionImpl extends TestObject implements Scenario
 
 	public void transition() {
 		try {
-			getEclipseMock().setValidationMessage(ScenarioHelper.validate(getEclipseMock()));
+			getEclipseMock().setValidationMessage(StepDefinitionHelper.validateError(getEclipseMock()));
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
 		}
+	}
+
+	@Override
+	public void setSelectedStep(HashMap<String, String> keyMap) {
+		getEclipseMock().setStepSelection(keyMap.get("Selected Step"));
 	}
 }

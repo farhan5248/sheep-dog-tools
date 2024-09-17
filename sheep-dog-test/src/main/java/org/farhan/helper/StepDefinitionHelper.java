@@ -9,12 +9,9 @@ public class StepDefinitionHelper {
 
 	public static TreeMap<String, Proposal> propose(ILanguageAccess la) throws Exception {
 		TreeMap<String, Proposal> proposals = new TreeMap<String, Proposal>();
-		String component;
-		String object;
-		if (la.getStepName() == null) {
-			component = "";
-			object = "";
-		} else {
+		String component = "";
+		String object = "";
+		if (la.getStepName() != null) {
 			component = StepHelper.getComponent(la.getStepName());
 			object = StepHelper.getObject(la.getStepName());
 		}
@@ -24,7 +21,6 @@ public class StepDefinitionHelper {
 					proposals.put(proposal.getReplacement(), proposal);
 				}
 			} else {
-				// TODO get previous objects for this component
 				for (Proposal proposal : getComponentObjects(la, component)) {
 					proposals.put(proposal.getReplacement(), proposal);
 				}
@@ -47,9 +43,23 @@ public class StepDefinitionHelper {
 		la.saveObject(stepObject, options);
 	}
 
-	public static String validate(ILanguageAccess la) throws Exception {
+	public static String validateError(ILanguageAccess la) throws Exception {
 
-		String stepObjectQualifiedName = getStepObjectQualifiedName(la);// check if the object exists
+		if (!StepHelper.isValid(la.getStepName())) {
+			return StepHelper.getErrorMessage();
+		} else {
+			if (la.getAllSteps().getFirst().equals(la.getStep())) {
+				if (StepHelper.getComponent(la.getStepName()).isEmpty()) {
+					return "The first step must have a component";
+				}
+			}
+		}
+		return "";
+	}
+
+	public static String validateWarning(ILanguageAccess la) throws Exception {
+
+		String stepObjectQualifiedName = getStepObjectQualifiedName(la);
 		if (la.getStepObject(stepObjectQualifiedName) == null) {
 			return "This object doesn't exist for: " + stepObjectQualifiedName;
 		}
@@ -93,7 +103,7 @@ public class StepDefinitionHelper {
 		Proposal proposal;
 		for (String fileName : la.getFilesRecursively(component)) {
 			proposal = new Proposal();
-			proposal.setDisplay(fileName.replace(component + "/", "").replace(".feature", ""));
+			proposal.setDisplay(fileName.replace(component + "/", "").replaceFirst(".feature$", ""));
 			proposal.setDocumentation(la.getStepObjectDescription(fileName));
 			proposal.setReplacement("The " + component + ", " + proposal.getDisplay());
 			proposals.add(proposal);
