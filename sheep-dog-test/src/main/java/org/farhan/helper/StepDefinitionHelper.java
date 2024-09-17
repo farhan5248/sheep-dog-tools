@@ -87,10 +87,6 @@ public class StepDefinitionHelper {
 
 	private static ArrayList<Proposal> getComponentObjects(ILanguageAccess la, String component) throws Exception {
 
-		// use the qualifed name as the key
-		// The replacement and display here has the path in the object since it's
-		// referenced the first time
-
 		ArrayList<Proposal> proposals = new ArrayList<Proposal>();
 		Proposal proposal;
 		for (String fileName : la.getFilesRecursively(component)) {
@@ -113,15 +109,16 @@ public class StepDefinitionHelper {
 		ArrayList<Proposal> previousObjects = new ArrayList<Proposal>();
 		Proposal proposal;
 
-		ArrayList<String> allSteps = new ArrayList<String>();
+		ArrayList<Object> allSteps = new ArrayList<Object>();
 		allSteps.addAll(la.getBackgroundSteps());
 		allSteps.addAll(la.getPreviousSteps());
 
-		for (String stepName : allSteps) {
+		for (Object step : allSteps) {
 			proposal = new Proposal();
-			proposal.setDisplay(getStepObjectWithoutPath(StepHelper.getObject(stepName)));
-			// TODO this needs the full qualified name of this object
-			proposal.setDocumentation(StepHelper.getObject(stepName));
+			proposal.setDisplay(getStepObjectWithoutPath(StepHelper.getObject(la.getStepName(step))));
+			// TODO after making language access independent of a specific step, use it to
+			// get the qualified name and then the step object
+			proposal.setDocumentation("Referred in: " + la.getStepName(step));
 			proposal.setReplacement("The " + proposal.getDisplay());
 			previousObjects.add(proposal);
 		}
@@ -135,7 +132,7 @@ public class StepDefinitionHelper {
 		String component = StepHelper.getComponent(la.getStepName());
 		String object = StepHelper.getObject(la.getStepName());
 		if (la.getStepObject(objectQualifiedName) != null) {
-			Object stepObject = la.createStepObject(objectQualifiedName);
+			Object stepObject = la.getStepObject(objectQualifiedName);
 			for (Object stepDef : la.getStepDefinitions(stepObject)) {
 				proposal = new Proposal();
 				proposal.setDisplay(la.getStepDefinitionName((Object) stepDef));
@@ -162,15 +159,11 @@ public class StepDefinitionHelper {
 		// Create a list of previous steps in reverse order
 		ArrayList<String> previousSteps = new ArrayList<String>();
 		String lastComponent = "Unknown service";
-		for (String aStep : la.getPreviousSteps()) {
-			if (aStep.contentEquals(la.getStepName())) {
-				break;
-			} else {
-				previousSteps.add(0, aStep);
-				// keep track of the last component to assign to undeclared object components
-				if (!StepHelper.getComponent(aStep).isEmpty()) {
-					lastComponent = StepHelper.getComponent(aStep);
-				}
+		for (Object aStep : la.getPreviousSteps()) {
+			previousSteps.add(0, la.getStepName(aStep));
+			// keep track of the last component to assign to undeclared object components
+			if (!StepHelper.getComponent(la.getStepName(aStep)).isEmpty()) {
+				lastComponent = StepHelper.getComponent(la.getStepName(aStep));
 			}
 		}
 		// search all previous steps for a more complete object path. While doing so,

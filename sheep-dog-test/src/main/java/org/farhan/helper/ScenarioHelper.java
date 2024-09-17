@@ -6,7 +6,7 @@ public class ScenarioHelper {
 
 	public static String validate(ILanguageAccess la) throws Exception {
 
-		if (StepHelper.getComponent(la.getAllSteps().getFirst()).isEmpty()) {
+		if (StepHelper.getComponent(la.getStepName(la.getAllSteps().getFirst())).isEmpty()) {
 			return "The first step must have a component";
 		} else {
 			return "";

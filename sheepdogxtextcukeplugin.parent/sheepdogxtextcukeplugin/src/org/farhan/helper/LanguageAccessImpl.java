@@ -112,24 +112,24 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	}
 
 	@Override
-	public ArrayList<String> getAllSteps() {
+	public ArrayList<Object> getAllSteps() {
 		AbstractScenario as = (AbstractScenario) step.eContainer();
-		ArrayList<String> stepNames = new ArrayList<String>();
+		ArrayList<Object> stepNames = new ArrayList<Object>();
 		for (Step s : as.getSteps()) {
 			if (s.getName() != null) {
-				stepNames.add(s.getName());
+				stepNames.add(s);
 			}
 		}
 		return stepNames;
 	}
 
 	@Override
-	public ArrayList<String> getBackgroundSteps() {
-		ArrayList<String> steps = new ArrayList<String>();
+	public ArrayList<Object> getBackgroundSteps() {
+		ArrayList<Object> steps = new ArrayList<Object>();
 		Feature feature = (Feature) step.eContainer().eContainer();
 		if (feature.getAbstractScenarios().getFirst() instanceof Background) {
 			for (Step s : feature.getAbstractScenarios().getFirst().getSteps()) {
-				steps.add(s.getName());
+				steps.add(s);
 			}
 		}
 		return steps;
@@ -154,7 +154,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		ArrayList<String> components = new ArrayList<String>();
 		for (String stepDefObjectResource : getFolderResources(folder)) {
 			// ([^\/]+)\/([^\/]+)\/(.*).feature group 3
-			components.add(stepDefObjectResource.replaceFirst("*" + component + "/", component + "/"));
+			components.add(stepDefObjectResource.replaceFirst(".*" + component + "/", component + "/"));
 		}
 		return components;
 	}
@@ -179,19 +179,19 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		return CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory();
 	}
 
-	public ArrayList<String> getPreviousSteps() {
+	public ArrayList<Object> getPreviousSteps() {
 		AbstractScenario as = (AbstractScenario) step.eContainer();
-		ArrayList<String> stepNames = new ArrayList<String>();
+		ArrayList<Object> steps = new ArrayList<Object>();
 		for (Step s : as.getSteps()) {
 			if (s.getName() != null) {
 				if (s.equals(step)) {
 					break;
 				} else {
-					stepNames.add(s.getName());
+					steps.add(s);
 				}
 			}
 		}
-		return stepNames;
+		return steps;
 	}
 
 	private IProject getProject() {
@@ -242,6 +242,11 @@ public class LanguageAccessImpl implements ILanguageAccess {
 
 	public String getStepName() {
 		return step.getName();
+	}
+
+	@Override
+	public String getStepName(Object step) {
+		return ((Step) step).getName();
 	}
 
 	@Override
