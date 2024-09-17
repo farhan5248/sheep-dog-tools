@@ -261,6 +261,16 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	}
 
 	@Override
+	public String getStepObjectDescription(String objectQualifiedName) throws Exception {
+		StepObject stepObject = (StepObject) getStepObject(objectQualifiedName);
+		String description = "";
+		for (Statement s : stepObject.getStatements()) {
+			description += s.getName() + "\n";
+		}
+		return description;
+	}
+
+	@Override
 	public String getStepParametersString() {
 		return cellsToString(getHeader());
 	}

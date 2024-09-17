@@ -92,7 +92,7 @@ public class StepDefinitionHelper {
 		for (String fileName : la.getFilesRecursively(component)) {
 			proposal = new Proposal();
 			proposal.setDisplay(fileName.replace(component + "/", "").replace(".feature", ""));
-			proposal.setDocumentation(fileName);
+			proposal.setDocumentation(la.getStepObjectDescription(fileName));
 			proposal.setReplacement("The " + component + ", " + proposal.getDisplay());
 			proposals.add(proposal);
 		}
@@ -108,7 +108,6 @@ public class StepDefinitionHelper {
 
 		ArrayList<Proposal> previousObjects = new ArrayList<Proposal>();
 		Proposal proposal;
-
 		ArrayList<Object> allSteps = new ArrayList<Object>();
 		allSteps.addAll(la.getBackgroundSteps());
 		allSteps.addAll(la.getPreviousSteps());

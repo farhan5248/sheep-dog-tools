@@ -16,11 +16,11 @@ public interface ILanguageAccess {
 
 	public ArrayList<Object> getBackgroundSteps();
 
+	public ArrayList<String> getFiles() throws Exception;
+
 	public ArrayList<String> getFilesRecursively(String component) throws Exception;
 
 	public ArrayList<Object> getPreviousSteps();
-
-	public ArrayList<String> getFiles() throws Exception;
 
 	public Object getStep();
 
@@ -39,6 +39,8 @@ public interface ILanguageAccess {
 	public String getStepName(Object step);
 
 	public Object getStepObject(String objectQualifiedName) throws Exception;
+
+	public String getStepObjectDescription(String fileName) throws Exception;
 
 	public String getStepParametersString();
 

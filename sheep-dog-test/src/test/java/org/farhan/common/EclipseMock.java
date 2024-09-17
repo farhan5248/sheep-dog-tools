@@ -207,4 +207,9 @@ public class EclipseMock implements ILanguageAccess {
 		this.stepObjectDescription = description;
 	}
 
+	@Override
+	public String getStepObjectDescription(String fileName) {
+		return stepObjectDescription;
+	}
+
 }
