@@ -15,6 +15,7 @@ import org.farhan.mbt.cucumber.Step;
 import org.farhan.mbt.cucumber.Then;
 import org.farhan.mbt.cucumber.When;
 import org.farhan.helper.LanguageAccessImpl;
+import org.farhan.helper.Proposal;
 import org.farhan.helper.StepDefinitionHelper;
 
 /**
@@ -63,11 +64,11 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 	private void completeName(Step step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
-			for (Entry<String, String[]> p : StepDefinitionHelper.propose(new LanguageAccessImpl(step)).entrySet()) {
+			for (Entry<String, Proposal> p : StepDefinitionHelper.propose(new LanguageAccessImpl(step)).entrySet()) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
-						p.getKey(), p.getValue()[0], null, context);
+						p.getValue().getReplacement(), p.getValue().getDisplay(), null, context);
 				if (proposal != null) {
-					proposal.setAdditionalProposalInfo(p.getValue()[1]);
+					proposal.setAdditionalProposalInfo(p.getValue().getDocumentation());
 					acceptor.accept(proposal);
 				} else {
 					// Don't know why this happens but this is here to avoid errors

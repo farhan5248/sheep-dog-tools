@@ -16,11 +16,11 @@ public interface ILanguageAccess {
 
 	public ArrayList<String> getBackgroundSteps();
 
-	public ArrayList<String[]> getComponentObjects(String component) throws Exception;
+	public ArrayList<String> getFilesRecursively(String component) throws Exception;
 
 	public ArrayList<String> getPreviousSteps();
 
-	public ArrayList<String> getProjectComponents() throws Exception;
+	public ArrayList<String> getFiles() throws Exception;
 
 	public Object getStep();
 

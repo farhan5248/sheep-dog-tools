@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.farhan.helper.ILanguageAccess;
+import org.farhan.helper.Proposal;
 
 public class EclipseMock implements ILanguageAccess {
 
@@ -18,15 +19,13 @@ public class EclipseMock implements ILanguageAccess {
 	private ArrayList<String> backgroundSteps;
 	private HashMap<String, String> stepDefinitionDescriptions;
 	private HashMap<String, ArrayList<ArrayList<String>>> stepObject;
-	private TreeMap<String, String[]> proposalMap;
-	private ArrayList<String> components;
-	private ArrayList<String[]> componentObjects;
+	private TreeMap<String, Proposal> proposalMap;
+	private ArrayList<String> componentObjects;
 	private String stepObjectDescription;
 
 	public EclipseMock() {
 		stepName = "";
-		components = new ArrayList<String>();
-		componentObjects = new ArrayList<String[]>();
+		componentObjects = new ArrayList<String>();
 		stepParameters = new ArrayList<String>();
 		allSteps = new ArrayList<String>();
 		backgroundSteps = new ArrayList<String>();
@@ -68,11 +67,7 @@ public class EclipseMock implements ILanguageAccess {
 	public Object createStepObject(String objectQualifiedName) throws Exception {
 		if (stepObject == null) {
 			stepObject = new HashMap<String, ArrayList<ArrayList<String>>>();
-			String[] stepObjectProposal = new String[2];
-			// [0] should be just the name
-			stepObjectProposal[0] = objectQualifiedName;
-			stepObjectProposal[1] = objectQualifiedName;
-			componentObjects.add(stepObjectProposal);
+			componentObjects.add(objectQualifiedName);
 		}
 		return stepObject;
 	}
@@ -88,7 +83,7 @@ public class EclipseMock implements ILanguageAccess {
 	}
 
 	@Override
-	public ArrayList<String[]> getComponentObjects(String component) {
+	public ArrayList<String> getFilesRecursively(String component) {
 		return componentObjects;
 	}
 
@@ -102,11 +97,17 @@ public class EclipseMock implements ILanguageAccess {
 	}
 
 	@Override
-	public ArrayList<String> getProjectComponents() {
-		return components;
+	public ArrayList<String> getFiles() {
+
+		// TODO this adds duplicates so change ArrayList to Collection in the interface
+		ArrayList<String> folders = new ArrayList<String>();
+		for (String stepObject : componentObjects) {
+			folders.add(stepObject.split("/")[0]);
+		}
+		return folders;
 	}
 
-	public TreeMap<String, String[]> getProposals() {
+	public TreeMap<String, Proposal> getProposals() {
 		return proposalMap;
 	}
 
@@ -172,7 +173,7 @@ public class EclipseMock implements ILanguageAccess {
 	public void saveObject(Object theObject, Map<Object, Object> options) throws Exception {
 	}
 
-	public void setProposalList(TreeMap<String, String[]> proposalList) {
+	public void setProposalList(TreeMap<String, Proposal> proposalList) {
 		this.proposalMap = proposalList;
 	}
 

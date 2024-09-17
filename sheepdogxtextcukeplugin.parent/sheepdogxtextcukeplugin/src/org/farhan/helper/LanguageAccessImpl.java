@@ -33,8 +33,6 @@ import org.farhan.mbt.generator.CucumberOutputConfigurationProvider;
 
 public class LanguageAccessImpl implements ILanguageAccess {
 
-	Step step;
-
 	private static ArrayList<String> getFolderResources(IFolder folder) throws Exception {
 		ArrayList<String> files = new ArrayList<String>();
 		for (IResource r : folder.members()) {
@@ -46,6 +44,8 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		}
 		return files;
 	}
+
+	Step step;
 
 	public LanguageAccessImpl(Step step) {
 		this.step = step;
@@ -123,14 +123,38 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		return stepNames;
 	}
 
-	public ArrayList<String> getComponentObjects(String component) throws Exception {
+	@Override
+	public ArrayList<String> getBackgroundSteps() {
+		ArrayList<String> steps = new ArrayList<String>();
+		Feature feature = (Feature) step.eContainer().eContainer();
+		if (feature.getAbstractScenarios().getFirst() instanceof Background) {
+			for (Step s : feature.getAbstractScenarios().getFirst().getSteps()) {
+				steps.add(s.getName());
+			}
+		}
+		return steps;
+	}
+
+	@Override
+	public ArrayList<String> getFiles() throws Exception {
+		IFolder folder = getProject()
+				.getFolder(CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory());
+		ArrayList<String> components = new ArrayList<String>();
+		for (IResource ir : folder.members()) {
+			components.add(ir.getName());
+		}
+		return components;
+	}
+
+	@Override
+	public ArrayList<String> getFilesRecursively(String component) throws Exception {
 		IFolder folder = getProject()
 				.getFolder(CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory() + "/" + component);
 
 		ArrayList<String> components = new ArrayList<String>();
 		for (String stepDefObjectResource : getFolderResources(folder)) {
 			// ([^\/]+)\/([^\/]+)\/(.*).feature group 3
-			components.add(stepDefObjectResource.split("/" + component + "/")[1].replace(".feature", ""));
+			components.add(stepDefObjectResource.replaceFirst("*" + component + "/", component + "/"));
 		}
 		return components;
 	}
@@ -173,16 +197,6 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	private IProject getProject() {
 		return ResourcesPlugin.getWorkspace().getRoot()
 				.getFile(new Path(step.eResource().getURI().toPlatformString(true))).getProject();
-	}
-
-	public ArrayList<String> getProjectComponents() throws Exception {
-		IFolder folder = getProject()
-				.getFolder(CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory());
-		ArrayList<String> components = new ArrayList<String>();
-		for (IResource ir : folder.members()) {
-			components.add(ir.getName());
-		}
-		return components;
 	}
 
 	private String getProjectName(Resource stepResource) {
@@ -257,18 +271,6 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	@Override
 	public void saveObject(Object theObject, Map<Object, Object> options) throws Exception {
 		((EObject) theObject).eResource().save(options);
-	}
-
-	@Override
-	public ArrayList<String> getBackgroundSteps() {
-		ArrayList<String> steps = new ArrayList<String>();
-		Feature feature = (Feature) step.eContainer().eContainer();
-		if (feature.getAbstractScenarios().getFirst() instanceof Background) {
-			for (Step s : feature.getAbstractScenarios().getFirst().getSteps()) {
-				steps.add(s.getName());
-			}
-		}
-		return steps;
 	}
 
 }
