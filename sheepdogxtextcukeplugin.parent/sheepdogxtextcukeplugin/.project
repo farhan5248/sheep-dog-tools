@@ -3,6 +3,7 @@
 	<name>sheepdogxtextcukeplugin</name>
 	<comment></comment>
 	<projects>
+		<project>sheep-dog-test</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

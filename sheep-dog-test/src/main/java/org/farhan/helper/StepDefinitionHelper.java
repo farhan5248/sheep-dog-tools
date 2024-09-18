@@ -15,9 +15,13 @@ public class StepDefinitionHelper {
 			component = StepHelper.getComponent(la.getStepName());
 			object = StepHelper.getObject(la.getStepName());
 		}
+		// TODO if the string is empty suggest "The "
 		if (object.isEmpty()) {
 			if (component.isEmpty()) {
 				for (Proposal proposal : getProjectComponents(la)) {
+					proposals.put(proposal.getReplacement(), proposal);
+				}
+				for (Proposal proposal : getComponentTypes(la)) {
 					proposals.put(proposal.getReplacement(), proposal);
 				}
 			} else {
@@ -31,6 +35,25 @@ public class StepDefinitionHelper {
 		} else {
 			for (Proposal proposal : getObjectDefinitions(la)) {
 				proposals.put(proposal.getReplacement(), proposal);
+			}
+		}
+		return proposals;
+	}
+
+	private static ArrayList<Proposal> getComponentTypes(ILanguageAccess la) {
+
+		ArrayList<Proposal> proposals = new ArrayList<Proposal>();
+		if (la.getStepName() != null) {
+			if (la.getStepName().startsWith("The ")) {
+				Proposal proposal;
+				for (String componentType : StepHelper.getComponentTypes()) {
+					proposal = new Proposal();
+					proposal.setDisplay(la.getStepName().replace("The ", "") + " " + componentType);
+					// TODO describe what's typically considered a batchjob or service etc
+					proposal.setDocumentation(componentType);
+					proposal.setReplacement(la.getStepName() + " " + componentType + ",");
+					proposals.add(proposal);
+				}
 			}
 		}
 		return proposals;

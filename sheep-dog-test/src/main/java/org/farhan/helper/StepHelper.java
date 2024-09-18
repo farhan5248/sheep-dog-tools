@@ -6,25 +6,35 @@ import java.util.regex.Pattern;
 public class StepHelper {
 
 	private static final String NAME_REGEX = "[^,]";
-	private static final String COMPONENT_REGEX = "(( " + NAME_REGEX + "+)( application| service| plugin| batchjob),)?";
 	private static final String OBJECT_VERTEX_REGEX = "( file| page| response| dialog| directory)"; // 6
 	private static final String OBJECT_EDGE_REGEX = "( request| goal| job| action)"; // 7
-	private static final String OBJECT_REGEX = "(( " + NAME_REGEX + "+)(" + OBJECT_VERTEX_REGEX + "|" + OBJECT_EDGE_REGEX
-			+ "))";
+	private static final String OBJECT_REGEX = "(( " + NAME_REGEX + "+)(" + OBJECT_VERTEX_REGEX + "|"
+			+ OBJECT_EDGE_REGEX + "))";
 	private static final String DETAILS_REGEX = "(( " + NAME_REGEX + "+)( section| fragment| table| snippet| list))?";
-	private static final String STATE_VERTEX_REGEX = "( empty| present| absent| enabled| disabled| valid| invalid| uploaded| downloaded| created| set| unset)";
-	private static final String STATE_EDGE_REGEX = "( executed| sent| triggered| performed)";
-	private static final String STATE_REGEX = "(( is| isn't| will be| won't be)(" + STATE_VERTEX_REGEX + "|"
-			+ STATE_EDGE_REGEX + ")( with| as follows)?)";
+	private static final String STATE_REGEX = "(( is| isn't| will be| won't be)( \\S+)( with| as follows)?)";
 	private static final String TIME_REGEX = "( early| late| on time|( at| before| after| in| on)(.*))?";
-	private static final String REGEX = "The" + COMPONENT_REGEX + OBJECT_REGEX + DETAILS_REGEX + STATE_REGEX
+	private static final String REGEX = "The" + getComponentRegex() + OBJECT_REGEX + DETAILS_REGEX + STATE_REGEX
 			+ TIME_REGEX;
 
 	public static String getErrorMessage() {
-		String rules = "\nThe component is: " + COMPONENT_REGEX + "\nThe object is: " + OBJECT_REGEX
+		String rules = "\nThe component is: " + getComponentRegex() + "\nThe object is: " + OBJECT_REGEX
 				+ "\nThe details are: " + DETAILS_REGEX + "\nThe state is: " + STATE_REGEX + "\nThe Time is: "
 				+ TIME_REGEX;
 		return "This is an invalid statement. These are the rules:" + rules;
+	}
+
+	public static String[] getComponentTypes() {
+		String[] componentTypes = { "application", "service", "plugin", "batchjob" };
+		return componentTypes;
+	}
+
+	private static String getComponentRegex() {
+		String componentRegex = "(( " + NAME_REGEX + "+)(";
+		for (String componentType : getComponentTypes()) {
+			componentRegex += " " + componentType + "|";
+		}
+		componentRegex = componentRegex.replaceAll("\\|$", "),)?");
+		return componentRegex;
 	}
 
 	public static String getGroup(String regex, String text, int group) {
@@ -45,11 +55,11 @@ public class StepHelper {
 	}
 
 	public static String getComponent(String text) {
-		return getGroup("The" + COMPONENT_REGEX, text, 1).replace(",", "");
+		return getGroup("The" + getComponentRegex(), text, 1).replace(",", "");
 	}
 
 	public static String getObject(String text) {
-		return getGroup("The" + COMPONENT_REGEX + OBJECT_REGEX, text, 4);
+		return getGroup("The" + getComponentRegex() + OBJECT_REGEX, text, 4);
 	}
 
 	public static boolean isNegativeStep(String text) {
@@ -113,7 +123,7 @@ public class StepHelper {
 	}
 
 	public static String getAttachment(String text) {
-		return getGroup(text, 17);
+		return getGroup(text, 15);
 	}
 
 	public static boolean isValid(String text) {
@@ -121,7 +131,7 @@ public class StepHelper {
 	}
 
 	public static String getTime(String text) {
-		return getGroup(text, 18);
+		return getGroup(text, 16);
 	}
 
 }

@@ -82,7 +82,7 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 
 	private void logError(Exception e, String name) {
 		// TODO inject the logger instead
-		System.out.println("There was a problem listing directories for: " + name);
+		System.out.println("There was an error listing proposals for: " + name);
 		StringWriter sw = new StringWriter();
 		e.printStackTrace(new PrintWriter(sw));
 		System.out.println(sw.toString());

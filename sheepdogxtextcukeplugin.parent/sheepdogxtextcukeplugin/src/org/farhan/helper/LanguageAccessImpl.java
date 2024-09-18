@@ -35,11 +35,13 @@ public class LanguageAccessImpl implements ILanguageAccess {
 
 	private static ArrayList<String> getFolderResources(IFolder folder) throws Exception {
 		ArrayList<String> files = new ArrayList<String>();
-		for (IResource r : folder.members()) {
-			if (r instanceof IFolder) {
-				files.addAll(getFolderResources((IFolder) r));
-			} else {
-				files.add(r.getProjectRelativePath().toString());
+		if (folder.exists()) {
+			for (IResource r : folder.members()) {
+				if (r instanceof IFolder) {
+					files.addAll(getFolderResources((IFolder) r));
+				} else {
+					files.add(r.getProjectRelativePath().toString());
+				}
 			}
 		}
 		return files;
