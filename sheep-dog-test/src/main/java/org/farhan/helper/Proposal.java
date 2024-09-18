@@ -2,9 +2,18 @@ package org.farhan.helper;
 
 public class Proposal {
 
-	private String replacement;
 	private String display;
 	private String documentation;
+	private String replacement;
+
+	public Proposal(String display, String documentation, String replacement) {
+		this.display = display;
+		this.documentation = documentation;
+		this.replacement = replacement;
+	}
+
+	public Proposal() {
+	}
 
 	public String getDisplay() {
 		return display;

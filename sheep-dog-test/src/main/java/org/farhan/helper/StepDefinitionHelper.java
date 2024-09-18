@@ -32,9 +32,32 @@ public class StepDefinitionHelper {
 			for (Proposal proposal : getPreviousObjects(la)) {
 				proposals.put(proposal.getReplacement(), proposal);
 			}
+			for (Proposal proposal : getObjectTypes(la)) {
+				proposals.put(proposal.getReplacement(), proposal);
+			}
 		} else {
 			for (Proposal proposal : getObjectDefinitions(la)) {
 				proposals.put(proposal.getReplacement(), proposal);
+			}
+		}
+		return proposals;
+	}
+
+	private static ArrayList<Proposal> getObjectTypes(ILanguageAccess la) {
+		ArrayList<Proposal> proposals = new ArrayList<Proposal>();
+		if (la.getStepName() != null) {
+			if (!la.getStepName().replaceFirst(".*,", "").isBlank()) {
+				Proposal proposal;
+				for (String type : StepHelper.getObjectVertexTypes()) {
+					proposal = new Proposal(la.getStepName().replaceFirst(".*, ", "") + " " + type, type,
+							la.getStepName() + " " + type);
+					proposals.add(proposal);
+				}
+				for (String type : StepHelper.getObjectEdgeTypes()) {
+					proposal = new Proposal(la.getStepName().replaceFirst(".*, ", "") + " " + type, type,
+							la.getStepName() + " " + type);
+					proposals.add(proposal);
+				}
 			}
 		}
 		return proposals;
@@ -46,12 +69,9 @@ public class StepDefinitionHelper {
 		if (la.getStepName() != null) {
 			if (la.getStepName().startsWith("The ")) {
 				Proposal proposal;
-				for (String componentType : StepHelper.getComponentTypes()) {
-					proposal = new Proposal();
-					proposal.setDisplay(la.getStepName().replace("The ", "") + " " + componentType);
-					// TODO describe what's typically considered a batchjob or service etc
-					proposal.setDocumentation(componentType);
-					proposal.setReplacement(la.getStepName() + " " + componentType + ",");
+				for (String type : StepHelper.getComponentTypes()) {
+					proposal = new Proposal(la.getStepName().replace("The ", "") + " " + type, type,
+							la.getStepName() + " " + type + ",");
 					proposals.add(proposal);
 				}
 			}

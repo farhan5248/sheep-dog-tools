@@ -6,35 +6,55 @@ import java.util.regex.Pattern;
 public class StepHelper {
 
 	private static final String NAME_REGEX = "[^,]";
-	private static final String OBJECT_VERTEX_REGEX = "( file| page| response| dialog| directory)"; // 6
-	private static final String OBJECT_EDGE_REGEX = "( request| goal| job| action)"; // 7
-	private static final String OBJECT_REGEX = "(( " + NAME_REGEX + "+)(" + OBJECT_VERTEX_REGEX + "|"
-			+ OBJECT_EDGE_REGEX + "))";
+	private static final String COMPONENT_REGEX = "(( " + NAME_REGEX + "+)" + getComponentRegex() + ",)?";
+	private static final String OBJECT_REGEX = "(( " + NAME_REGEX + "+)(" + getObjectVertexRegex() + "|"
+			+ getObjectEdgeRegex() + "))";
 	private static final String DETAILS_REGEX = "(( " + NAME_REGEX + "+)( section| fragment| table| snippet| list))?";
 	private static final String STATE_REGEX = "(( is| isn't| will be| won't be)( \\S+)( with| as follows)?)";
 	private static final String TIME_REGEX = "( early| late| on time|( at| before| after| in| on)(.*))?";
-	private static final String REGEX = "The" + getComponentRegex() + OBJECT_REGEX + DETAILS_REGEX + STATE_REGEX
+	private static final String REGEX = "The" + COMPONENT_REGEX + OBJECT_REGEX + DETAILS_REGEX + STATE_REGEX
 			+ TIME_REGEX;
 
 	public static String getErrorMessage() {
-		String rules = "\nThe component is: " + getComponentRegex() + "\nThe object is: " + OBJECT_REGEX
+		String rules = "\nThe component is: " + COMPONENT_REGEX + "\nThe object is: " + OBJECT_REGEX
 				+ "\nThe details are: " + DETAILS_REGEX + "\nThe state is: " + STATE_REGEX + "\nThe Time is: "
 				+ TIME_REGEX;
 		return "This is an invalid statement. These are the rules:" + rules;
 	}
 
+	public static String[] getObjectVertexTypes() {
+		String[] types = { "file", "page", "response", "dialog", "directory" };
+		return types;
+	}
+
+	public static String[] getObjectEdgeTypes() {
+		String[] types = { "request", "goal", "job", "action" };
+		return types;
+	}
+
 	public static String[] getComponentTypes() {
-		String[] componentTypes = { "application", "service", "plugin", "batchjob" };
-		return componentTypes;
+		String[] types = { "application", "service", "plugin", "batchjob" };
+		return types;
+	}
+
+	private static String getRegexFromTypes(String[] types) {
+		String regex = "(";
+		for (String componentType : types) {
+			regex += " " + componentType + "|";
+		}
+		return regex.replaceAll("\\|$", ")");
+	}
+
+	private static String getObjectVertexRegex() {
+		return getRegexFromTypes(getObjectVertexTypes());
+	}
+
+	private static String getObjectEdgeRegex() {
+		return getRegexFromTypes(getObjectEdgeTypes());
 	}
 
 	private static String getComponentRegex() {
-		String componentRegex = "(( " + NAME_REGEX + "+)(";
-		for (String componentType : getComponentTypes()) {
-			componentRegex += " " + componentType + "|";
-		}
-		componentRegex = componentRegex.replaceAll("\\|$", "),)?");
-		return componentRegex;
+		return getRegexFromTypes(getComponentTypes());
 	}
 
 	public static String getGroup(String regex, String text, int group) {
@@ -55,11 +75,11 @@ public class StepHelper {
 	}
 
 	public static String getComponent(String text) {
-		return getGroup("The" + getComponentRegex(), text, 1).replace(",", "");
+		return getGroup("The" + COMPONENT_REGEX, text, 1).replace(",", "");
 	}
 
 	public static String getObject(String text) {
-		return getGroup("The" + getComponentRegex() + OBJECT_REGEX, text, 4);
+		return getGroup("The" + COMPONENT_REGEX + OBJECT_REGEX, text, 4);
 	}
 
 	public static boolean isNegativeStep(String text) {
