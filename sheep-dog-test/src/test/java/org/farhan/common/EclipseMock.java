@@ -12,24 +12,39 @@ import org.farhan.helper.Proposal;
 
 public class EclipseMock implements ILanguageAccess {
 
+	// TODO when moving the adoc, redo this because it's definitely going to be hard
+	// to understand this 3 months from now when I return to this
+
 	private String validationMessage;
 	private String stepName;
 	private ArrayList<String> stepParameters;
 	private ArrayList<Object> allSteps;
 	private ArrayList<Object> backgroundSteps;
 	private HashMap<String, String> stepDefinitionDescriptions;
+	private String stepObjectName;
 	private HashMap<String, ArrayList<ArrayList<String>>> stepObject;
 	private TreeMap<String, Proposal> proposalMap;
 	private ArrayList<String> componentObjects;
 	private String stepObjectDescription;
+	private Object[] alternateObjects;
 
 	public EclipseMock() {
 		stepName = "";
+		stepObjectName = "";
 		componentObjects = new ArrayList<String>();
 		stepParameters = new ArrayList<String>();
 		allSteps = new ArrayList<Object>();
 		backgroundSteps = new ArrayList<Object>();
 		stepDefinitionDescriptions = new HashMap<String, String>();
+	}
+
+	public void addBackgroundStep(String stepName) {
+		backgroundSteps.add(stepName);
+	}
+
+	public void addStep(String stepName) {
+		this.stepName = stepName;
+		allSteps.add(this.stepName);
 	}
 
 	private String cellsToString(List<String> cells) {
@@ -66,8 +81,9 @@ public class EclipseMock implements ILanguageAccess {
 	@Override
 	public Object createStepObject(String objectQualifiedName) throws Exception {
 		if (stepObject == null) {
+			stepObjectName = objectQualifiedName;
 			stepObject = new HashMap<String, ArrayList<ArrayList<String>>>();
-			componentObjects.add(objectQualifiedName);
+			componentObjects.add(stepObjectName);
 		}
 		return stepObject;
 	}
@@ -77,9 +93,24 @@ public class EclipseMock implements ILanguageAccess {
 		return allSteps;
 	}
 
+	public Object[] getAlternateObjects() {
+		return this.alternateObjects;
+	}
+
 	@Override
 	public ArrayList<Object> getBackgroundSteps() {
 		return backgroundSteps;
+	}
+
+	@Override
+	public ArrayList<String> getFiles() {
+
+		// TODO this adds duplicates so change ArrayList to Collection in the interface
+		ArrayList<String> folders = new ArrayList<String>();
+		for (String stepObject : componentObjects) {
+			folders.add(stepObject.split("/")[0]);
+		}
+		return folders;
 	}
 
 	@Override
@@ -94,17 +125,6 @@ public class EclipseMock implements ILanguageAccess {
 			previousSteps.add(allSteps.get(i));
 		}
 		return previousSteps;
-	}
-
-	@Override
-	public ArrayList<String> getFiles() {
-
-		// TODO this adds duplicates so change ArrayList to Collection in the interface
-		ArrayList<String> folders = new ArrayList<String>();
-		for (String stepObject : componentObjects) {
-			folders.add(stepObject.split("/")[0]);
-		}
-		return folders;
 	}
 
 	public TreeMap<String, Proposal> getProposals() {
@@ -157,7 +177,16 @@ public class EclipseMock implements ILanguageAccess {
 
 	@Override
 	public Object getStepObject(String objectQualifiedName) throws Exception {
-		return stepObject;
+		if (objectQualifiedName.contentEquals(stepObjectName)) {
+			return stepObject;
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public String getStepObjectDescription(String fileName) {
+		return stepObjectDescription;
 	}
 
 	@Override
@@ -178,6 +207,10 @@ public class EclipseMock implements ILanguageAccess {
 	public void saveObject(Object theObject, Map<Object, Object> options) throws Exception {
 	}
 
+	public void setAlternateObjects(Object[] alternateObjects) {
+		this.alternateObjects = alternateObjects;
+	}
+
 	public void setProposalList(TreeMap<String, Proposal> proposalList) {
 		this.proposalMap = proposalList;
 	}
@@ -186,33 +219,19 @@ public class EclipseMock implements ILanguageAccess {
 		stepDefinitionDescriptions.put(stepDefinition, description);
 	}
 
-	public void addStep(String stepName) {
-		this.stepName = stepName;
-		allSteps.add(this.stepName);
-	}
-
-	public void addBackgroundStep(String stepName) {
-		backgroundSteps.add(stepName);
+	public void setStepObjectDescription(String description) {
+		this.stepObjectDescription = description;
 	}
 
 	public void setStepParameters(String header) {
 		this.stepParameters.add(header);
 	}
 
-	public void setValidationMessage(String message) {
-		this.validationMessage = message;
-	}
-
-	public void setStepObjectDescription(String description) {
-		this.stepObjectDescription = description;
-	}
-
-	@Override
-	public String getStepObjectDescription(String fileName) {
-		return stepObjectDescription;
-	}
-
 	public void setStepSelection(String selection) {
 		this.stepName = (String) allSteps.get(Integer.valueOf(selection) - 1);
+	}
+
+	public void setValidationMessage(String message) {
+		this.validationMessage = message;
 	}
 }

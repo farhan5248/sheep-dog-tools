@@ -5,6 +5,8 @@ package org.farhan.mbt.validation;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.farhan.mbt.cucumber.AbstractScenario;
@@ -15,7 +17,6 @@ import org.farhan.mbt.cucumber.Step;
 import org.farhan.mbt.cucumber.StepTable;
 import org.farhan.helper.LanguageAccessImpl;
 import org.farhan.helper.StepDefinitionHelper;
-import org.farhan.helper.StepHelper;
 
 public class CucumberValidator extends AbstractCucumberValidator {
 
@@ -43,13 +44,23 @@ public class CucumberValidator extends AbstractCucumberValidator {
 				} else {
 					problems = StepDefinitionHelper.validateWarning(new LanguageAccessImpl(step));
 					if (!problems.isEmpty()) {
-						warning(problems, CucumberPackage.Literals.STEP__NAME, MISSING_STEP_DEF, step.getName());
+						warning(problems, CucumberPackage.Literals.STEP__NAME, MISSING_STEP_DEF,
+								getAlternateObjects(new LanguageAccessImpl(step)));
 					}
 				}
 			}
 		} catch (Exception e) {
 			logError(e, step.getName());
 		}
+	}
+
+	public String[] getAlternateObjects(LanguageAccessImpl la) throws Exception {
+		Object[] alternateProposals = StepDefinitionHelper.getAlternateObjects(la);
+		String[] alternates = new String[alternateProposals.length];
+		for (int i = 0; i < alternates.length; i++) {
+			alternates[i] = alternateProposals[i].toString();
+		}
+		return alternates;
 	}
 
 	@Check(CheckType.FAST)

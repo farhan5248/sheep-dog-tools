@@ -59,7 +59,7 @@ Feature: Propose Step Constants
           | The blah plugin, blah file heading section is |
      When The suggestion action is performed
      Then The suggestion dialog will be set as follows
-          | Suggestion                                              | Suggestion Name | Suggestion Description |
+          | Suggestion                                            | Suggestion Name | Suggestion Description |
           | The blah plugin, blah file heading section is created | attribute name  | Specify created etc    |
 
   Scenario: State modality present no attribute
@@ -69,8 +69,8 @@ Feature: Propose Step Constants
           | The blah plugin, blah file is |
      When The suggestion action is performed
      Then The suggestion dialog will be set as follows
-          | Suggestion                              | Suggestion Name | Suggestion Description |
-          | The blah plugin, blah file is attribute | attribute name  | Specify created etc    |
+          | Suggestion                            | Suggestion Name | Suggestion Description |
+          | The blah plugin, blah file is created | attribute name  | Specify created etc    |
 
   Scenario: State modality present no attachments
 

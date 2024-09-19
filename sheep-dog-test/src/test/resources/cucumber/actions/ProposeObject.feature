@@ -121,6 +121,8 @@ Feature: Propose Object
 
   Scenario: Has object no component no previous has component objects
 
+    TODO the assertion should be that is present won't be suggested because this step has no component
+
     Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
           | Step Name      |
           | The Input file |
@@ -129,8 +131,8 @@ Feature: Propose Object
           | daily batchjob/Input file.feature | is present           |
      When The suggestion action is performed
      Then The suggestion dialog will be set as follows
-          | Suggestion                | Suggestion Name |
-          | The Input file is present | is present      |
+          | Suggestion        | Suggestion Name |
+          | The Input file is | is              |
 
   Scenario: Has object no component has previous no component objects
 

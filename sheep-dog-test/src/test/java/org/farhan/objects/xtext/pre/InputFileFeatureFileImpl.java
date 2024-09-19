@@ -3,7 +3,6 @@ package org.farhan.objects.xtext.pre;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.farhan.common.EclipseMock;
 import org.farhan.common.TestObject;
 import org.farhan.common.Utilities;
 import org.farhan.objects.xtext.InputFileFeatureFile;
@@ -14,7 +13,7 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 	@Override
 	public void assertObjectName(HashMap<String, String> keyMap) {
 		try {
-			Assertions.assertNotNull(getEclipseMock().getStepObject(getSpecial("Object Name")));
+			Assertions.assertNotNull(getEclipseMock().getStepObject(keyMap.get("Object Name")));
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
@@ -25,8 +24,8 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 		try {
 			getEclipseMock().createStepObject(keyMap.get("Object Name"));
 			getEclipseMock().createStepDefinition(keyMap.get("Step Definition Name"));
-			Assertions.assertTrue(getEclipseMock().getStepDefinitionParameters(keyMap.get("Step Definition Name")).toString()
-					.contains("[" + keyMap.get("Parameters") + "]"));
+			Assertions.assertTrue(getEclipseMock().getStepDefinitionParameters(keyMap.get("Step Definition Name"))
+					.toString().contains("[" + keyMap.get("Parameters") + "]"));
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));
 		}
@@ -39,7 +38,8 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 			Object stepObject = getEclipseMock().getStepObject(keyMap.get("Object Name"));
 			Assertions.assertNotNull(stepObject);
 			for (Object stepDef : getEclipseMock().getStepDefinitions(stepObject)) {
-				if (getEclipseMock().getStepDefinitionName((Object) stepDef).contentEquals(keyMap.get("Step Definition Name"))) {
+				if (getEclipseMock().getStepDefinitionName((Object) stepDef)
+						.contentEquals(keyMap.get("Step Definition Name"))) {
 					return;
 				}
 			}

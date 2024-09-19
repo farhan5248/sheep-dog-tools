@@ -23,20 +23,33 @@ import org.farhan.mbt.validation.CucumberValidator;
 public class CucumberQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(CucumberValidator.MISSING_STEP_DEF)
-	public void generateStepDef(final Issue issue, IssueResolutionAcceptor acceptor) {
+	public void createDefinition(final Issue issue, IssueResolutionAcceptor acceptor) {
 
-		acceptor.accept(issue, "Generate step def", "Generate step def.", "upcase.png", new IModification() {
-			public void apply(IModificationContext context) throws BadLocationException {
-				Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
-				Step step = (Step) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
-				CucumberGenerator.doGenerate(step);
-			}
-		});
+		acceptor.accept(issue, "Create definition", "Create a step definition in the step object", "upcase.png",
+				new IModification() {
+					public void apply(IModificationContext context) throws BadLocationException {
+						Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
+						Step step = (Step) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
+						CucumberGenerator.doGenerate(step);
+					}
+				});
+
+		for (String issueData : issue.getData()) {
+			acceptor.accept(issue, "Rename step object to: " + issueData, "Rename the step object to an existing one",
+					"upcase.png", new IModification() {
+						public void apply(IModificationContext context) throws BadLocationException {
+							Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
+							Step step = (Step) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
+							IXtextDocument xtextDocument = context.getXtextDocument();
+							xtextDocument.replace(issue.getOffset(), step.getName().length(), issueData);
+						}
+					});
+		}
 	}
 
 	@Fix(CucumberValidator.INVALID_NAME)
 	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, "Capitalize name", "Capitalize the name.", "upcase.png", new IModification() {
+		acceptor.accept(issue, "Capitalize name", "Capitalize the name", "upcase.png", new IModification() {
 			public void apply(IModificationContext context) throws BadLocationException {
 				IXtextDocument xtextDocument = context.getXtextDocument();
 				String firstLetter = xtextDocument.get(issue.getOffset(), 1);

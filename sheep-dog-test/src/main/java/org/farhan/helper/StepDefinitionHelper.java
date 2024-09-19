@@ -7,6 +7,25 @@ import java.util.TreeMap;
 
 public class StepDefinitionHelper {
 
+	public static Object[] getAlternateObjects(ILanguageAccess la) throws Exception {
+
+		// TODO change this to Proposal class for easier testing. The validator code has
+		// to convert this to a string anyways
+		String qualifiedName = getStepObjectQualifiedName(la);
+		String[] nameParts = qualifiedName.split("/");
+		String objectName = StepHelper.getObject(la.getStepName());
+		ArrayList<String> alternateNames = new ArrayList<String>();
+		for (String alternateName : la.getFilesRecursively(nameParts[0])) {
+			if (!alternateName.contentEquals(qualifiedName)
+					&& alternateName.endsWith(nameParts[nameParts.length - 1])) {
+				alternateName = alternateName.replaceFirst(".feature$", "");
+				alternateName = alternateName.replaceFirst(nameParts[0] + "/", "");
+				alternateNames.add(la.getStepName().replace(objectName, alternateName));
+			}
+		}
+		return alternateNames.toArray();
+	}
+
 	private static Object createStepDefinition(Object stepObject, ILanguageAccess la) {
 		String predicate = getPredicate(la.getStepName());
 		Object stepDef = getStepDefinition(stepObject, predicate, la);
@@ -110,8 +129,7 @@ public class StepDefinitionHelper {
 			} else {
 				if (la.getStepName().replace(upToModality, "").isBlank()) {
 					// TODO in the future get a list of words from existing definitions
-					proposals
-							.add(new Proposal("attribute name", "Specify created etc", la.getStepName() + " created"));
+					proposals.add(new Proposal("attribute name", "Specify created etc", la.getStepName() + " created"));
 				} else {
 					if (StepHelper.getAttachment(la.getStepName()).isBlank()) {
 						for (String type : StepHelper.getAttachmentTypes()) {
