@@ -1,7 +1,7 @@
 @debug
 Feature: Propose Step Constants
 
-  Scenario: Component Types
+  Scenario: Component types
 
     Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
           | Step Name |
@@ -11,7 +11,7 @@ Feature: Propose Step Constants
           | Suggestion            | Suggestion Name  |
           | The blah application, | blah application |
 
-  Scenario: Object Types
+  Scenario: Object types
 
     Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
           | Step Name             |
@@ -21,17 +21,58 @@ Feature: Propose Step Constants
           | Suggestion                 | Suggestion Name |
           | The blah plugin, blah file | blah file       |
 
-  Scenario: State Modality Absent
+  Scenario: State modality absent no details
 
     Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
           | Step Name                  |
           | The blah plugin, blah file |
      When The suggestion action is performed
      Then The suggestion dialog will be set as follows
-          | Suggestion                    | Suggestion Name |
-          | The blah plugin, blah file is | is              |
+          | Suggestion                         | Suggestion Name | Suggestion Description |
+          | The blah plugin, blah file is      | is              | is                     |
+          | The blah plugin, blah file details | details name    | Specify section etc    |
 
-  Scenario: State Modality Present no attachments
+  Scenario: State modality absent incomplete details
+
+    Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
+          | Step Name                          |
+          | The blah plugin, blah file heading |
+     When The suggestion action is performed
+     Then The suggestion dialog will be set as follows
+          | Suggestion                                 | Suggestion Name |
+          | The blah plugin, blah file heading section | section         |
+
+  Scenario: State modality absent has details
+
+    Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
+          | Step Name                                  |
+          | The blah plugin, blah file heading section |
+     When The suggestion action is performed
+     Then The suggestion dialog will be set as follows
+          | Suggestion                                    | Suggestion Name |
+          | The blah plugin, blah file heading section is | is              |
+
+  Scenario: State modality present has details
+
+    Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
+          | Step Name                                     |
+          | The blah plugin, blah file heading section is |
+     When The suggestion action is performed
+     Then The suggestion dialog will be set as follows
+          | Suggestion                                              | Suggestion Name | Suggestion Description |
+          | The blah plugin, blah file heading section is created | attribute name  | Specify created etc    |
+
+  Scenario: State modality present no attribute
+
+    Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
+          | Step Name                     |
+          | The blah plugin, blah file is |
+     When The suggestion action is performed
+     Then The suggestion dialog will be set as follows
+          | Suggestion                              | Suggestion Name | Suggestion Description |
+          | The blah plugin, blah file is attribute | attribute name  | Specify created etc    |
+
+  Scenario: State modality present no attachments
 
     Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
           | Step Name                             |
@@ -41,21 +82,11 @@ Feature: Propose Step Constants
           | Suggestion                                 | Suggestion Name |
           | The blah plugin, blah file is created with | with            |
 
-  Scenario: State Modality Present has attachments
+  Scenario: State modality present has attachments
 
     Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
           | Step Name                                  |
           | The blah plugin, blah file is created with |
      When The suggestion action is performed
      Then The suggestion dialog will be empty
-
-  Scenario: State Details
-
-    Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
-          | Step Name                          |
-          | The blah plugin, blah file heading |
-     When The suggestion action is performed
-     Then The suggestion dialog will be set as follows
-          | Suggestion                                       | Suggestion Name |
-          | The blah plugin, blah file heading section       | section      |
 

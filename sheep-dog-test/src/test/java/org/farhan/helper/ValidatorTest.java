@@ -50,17 +50,19 @@ public class ValidatorTest {
 	@Test
 	public void testHasModalityWithDetails() {
 		Assertions.assertTrue(
-				StepHelper.hasModality("The Something1 application, Something2 request Something3 section is"));
+				StepHelper.getUpToModality("The Something1 application, Something2 request Something3 section is")
+						.contentEquals("The Something1 application, Something2 request Something3 section is"));
 	}
 
 	@Test
 	public void testHasModalityWithoutDetails() {
-		Assertions.assertTrue(StepHelper.hasModality("The Something1 application, Something2 request is"));
+		Assertions.assertTrue(StepHelper.getUpToModality("The Something1 application, Something2 request is")
+				.contentEquals("The Something1 application, Something2 request is"));
 	}
 
 	@Test
 	public void testHasModalityEmpty() {
-		Assertions.assertFalse(StepHelper.hasModality("The Something1 application, Something2 request"));
+		Assertions.assertTrue(StepHelper.getUpToModality("The Something1 application, Something2 request").isEmpty());
 	}
 
 	@Test

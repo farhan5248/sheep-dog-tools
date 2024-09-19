@@ -266,8 +266,10 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	public String getStepObjectDescription(String objectQualifiedName) throws Exception {
 		StepObject stepObject = (StepObject) getStepObject(objectQualifiedName);
 		String description = "";
-		for (Statement s : stepObject.getStatements()) {
-			description += s.getName() + "\n";
+		if (stepObject != null) {
+			for (Statement s : stepObject.getStatements()) {
+				description += s.getName() + "\n";
+			}
 		}
 		return description;
 	}

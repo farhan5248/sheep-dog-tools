@@ -10,10 +10,15 @@ public class StepHelper {
 	private static final String OBJECT_REGEX = "(( " + NAME_REGEX + "+)(" + getObjectVertexRegex() + "|"
 			+ getObjectEdgeRegex() + "))";
 	private static final String DETAILS_REGEX = "(( " + NAME_REGEX + "+)" + getDetailRegex() + ")?";
-	private static final String STATE_REGEX = "(" + getStateModalityRegex() + "( \\S+)" + getAttachmentRegex() + "?)";
+	private static final String STATE_REGEX = "(" + getStateModalityRegex() + getStateAttributeRegex()
+			+ getAttachmentRegex() + "?)";
 	private static final String TIME_REGEX = "( early| late| on time|( at| before| after| in| on)(.*))?";
 	private static final String PREDICATE_REGEX = "(" + DETAILS_REGEX + STATE_REGEX + TIME_REGEX + ")";
 	private static final String REGEX = "The" + COMPONENT_REGEX + OBJECT_REGEX + PREDICATE_REGEX;
+
+	private static String getStateAttributeRegex() {
+		return "( \\S+)";
+	}
 
 	public static String getAttachment(String text) {
 		return getGroup(text, 16);
@@ -173,9 +178,8 @@ public class StepHelper {
 		return !getGroup("The" + COMPONENT_REGEX + OBJECT_REGEX + DETAILS_REGEX, text, 9).isBlank();
 	}
 
-	public static boolean hasModality(String text) {
-		return !getGroup("The" + COMPONENT_REGEX + OBJECT_REGEX + DETAILS_REGEX + getStateModalityRegex(), text, 12)
-				.isBlank();
+	public static String getUpToModality(String text) {
+		return getGroup("The" + COMPONENT_REGEX + OBJECT_REGEX + DETAILS_REGEX + getStateModalityRegex(), text, 0);
 	}
 
 	public static boolean isEdge(String text) {
