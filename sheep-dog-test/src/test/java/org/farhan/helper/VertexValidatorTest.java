@@ -14,7 +14,7 @@ public class VertexValidatorTest {
 	@Test
 	public void testIsComponent() {
 		Assertions.assertTrue(
-				StepHelper.isComponentStep("The Something1 application, Something2 file Something3 section is empty"));
+				StepHelper.hasComponent("The Something1 application, Something2 file Something3 section is empty"));
 	}
 
 	@Test

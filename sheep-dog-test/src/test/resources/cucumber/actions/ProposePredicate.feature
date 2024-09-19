@@ -7,7 +7,9 @@ Feature: Propose Predicate
           | Step Name                      |
           | The daily batchjob, Input file |
      When The suggestion action is performed
-     Then The suggestion dialog will be empty
+     Then The suggestion dialog will be set as follows
+          | Suggestion                        | Suggestion Name | Suggestion Description |
+          | The daily batchjob, Input file is | is              | is                     |
 
   Scenario: No predicate has definition has description
 
@@ -28,7 +30,9 @@ Feature: Propose Predicate
           | Step Name                                 |
           | The daily batchjob, Input file is present |
      When The suggestion action is performed
-     Then The suggestion dialog will be empty
+     Then The suggestion dialog will be set as follows
+          | Suggestion                                           | Suggestion Name |
+          | The daily batchjob, Input file is present as follows | as follows      |
 
   Scenario: Has predicate has definition
 

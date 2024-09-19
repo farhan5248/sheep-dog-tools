@@ -14,7 +14,7 @@ public class EdgeValidatorTest {
 	@Test
 	public void testIsComponent() {
 		Assertions.assertTrue(
-				StepHelper.isComponentStep("The Something1 application, Something2 request is executed with"));
+				StepHelper.hasComponent("The Something1 application, Something2 request is executed with"));
 	}
 
 	@Test

@@ -9,11 +9,66 @@ public class StepHelper {
 	private static final String COMPONENT_REGEX = "(( " + NAME_REGEX + "+)" + getComponentRegex() + ",)?";
 	private static final String OBJECT_REGEX = "(( " + NAME_REGEX + "+)(" + getObjectVertexRegex() + "|"
 			+ getObjectEdgeRegex() + "))";
-	private static final String DETAILS_REGEX = "(( " + NAME_REGEX + "+)( section| fragment| table| snippet| list))?";
-	private static final String STATE_REGEX = "(( is| isn't| will be| won't be)( \\S+)( with| as follows)?)";
+	private static final String DETAILS_REGEX = "(( " + NAME_REGEX + "+)" + getDetailRegex() + ")?";
+	private static final String STATE_REGEX = "(" + getStateModalityRegex() + "( \\S+)" + getAttachmentRegex() + "?)";
 	private static final String TIME_REGEX = "( early| late| on time|( at| before| after| in| on)(.*))?";
-	private static final String REGEX = "The" + COMPONENT_REGEX + OBJECT_REGEX + DETAILS_REGEX + STATE_REGEX
-			+ TIME_REGEX;
+	private static final String PREDICATE_REGEX = "(" + DETAILS_REGEX + STATE_REGEX + TIME_REGEX + ")";
+	private static final String REGEX = "The" + COMPONENT_REGEX + OBJECT_REGEX + PREDICATE_REGEX;
+
+	public static String getAttachment(String text) {
+		return getGroup(text, 16);
+	}
+
+	private static String getAttachmentRegex() {
+		return getRegexFromTypes(getAttachmentTypes());
+	}
+
+	public static String[] getAttachmentTypes() {
+		String[] types = { "with", "as follows" };
+		return types;
+	}
+
+	public static String getComponent(String text) {
+		return getGroup("The" + COMPONENT_REGEX, text, 1).replace(",", "");
+	}
+
+	public static String getComponentName(String text) {
+		return getGroup(text, 2);
+	}
+
+	private static String getComponentRegex() {
+		return getRegexFromTypes(getComponentTypes());
+	}
+
+	public static String getComponentType(String text) {
+		return getGroup(text, 3);
+	}
+
+	public static String[] getComponentTypes() {
+		String[] types = { "application", "service", "plugin", "batchjob" };
+		return types;
+	}
+
+	private static String getDetailRegex() {
+		return getRegexFromTypes(getDetailTypes());
+	}
+
+	public static String getDetails(String text) {
+		return getGroup(text, 10);
+	}
+
+	public static String getDetailsName(String text) {
+		return getGroup(text, 11);
+	}
+
+	public static String getDetailsType(String text) {
+		return getGroup(text, 12);
+	}
+
+	public static String[] getDetailTypes() {
+		String[] types = { "section", "fragment", "table", "snippet", "list" };
+		return types;
+	}
 
 	public static String getErrorMessage() {
 		String rules = "\nThe component is: " + COMPONENT_REGEX + "\nThe object is: " + OBJECT_REGEX
@@ -22,39 +77,8 @@ public class StepHelper {
 		return "This is an invalid statement. These are the rules:" + rules;
 	}
 
-	public static String[] getObjectVertexTypes() {
-		String[] types = { "file", "page", "response", "dialog", "directory" };
-		return types;
-	}
-
-	public static String[] getObjectEdgeTypes() {
-		String[] types = { "request", "goal", "job", "action" };
-		return types;
-	}
-
-	public static String[] getComponentTypes() {
-		String[] types = { "application", "service", "plugin", "batchjob" };
-		return types;
-	}
-
-	private static String getRegexFromTypes(String[] types) {
-		String regex = "(";
-		for (String componentType : types) {
-			regex += " " + componentType + "|";
-		}
-		return regex.replaceAll("\\|$", ")");
-	}
-
-	private static String getObjectVertexRegex() {
-		return getRegexFromTypes(getObjectVertexTypes());
-	}
-
-	private static String getObjectEdgeRegex() {
-		return getRegexFromTypes(getObjectEdgeTypes());
-	}
-
-	private static String getComponentRegex() {
-		return getRegexFromTypes(getComponentTypes());
+	public static String getGroup(String text, int group) {
+		return getGroup(REGEX, text, group);
 	}
 
 	public static String getGroup(String regex, String text, int group) {
@@ -70,44 +94,17 @@ public class StepHelper {
 		return "";
 	}
 
-	public static String getGroup(String text, int group) {
-		return getGroup(REGEX, text, group);
-	}
-
-	public static String getComponent(String text) {
-		return getGroup("The" + COMPONENT_REGEX, text, 1).replace(",", "");
-	}
-
 	public static String getObject(String text) {
 		return getGroup("The" + COMPONENT_REGEX + OBJECT_REGEX, text, 4);
 	}
 
-	public static boolean isNegativeStep(String text) {
-		return getGroup(text, 12).contains("isn't") || getGroup(text, 12).contains("won't be");
+	private static String getObjectEdgeRegex() {
+		return getRegexFromTypes(getObjectEdgeTypes());
 	}
 
-	public static boolean isComponentStep(String text) {
-		return !getComponentName(text).isEmpty();
-	}
-
-	public static boolean isEdge(String text) {
-		return !getGroup(text, 8).isEmpty();
-	}
-
-	public static boolean isVertex(String text) {
-		return !getGroup(text, 7).isEmpty();
-	}
-
-	public static boolean hasAttachment(String text) {
-		return !getAttachment(text).isEmpty();
-	}
-
-	public static String getComponentName(String text) {
-		return getGroup(text, 2);
-	}
-
-	public static String getComponentType(String text) {
-		return getGroup(text, 3);
+	public static String[] getObjectEdgeTypes() {
+		String[] types = { "request", "goal", "job", "action" };
+		return types;
 	}
 
 	public static String getObjectName(String text) {
@@ -118,40 +115,83 @@ public class StepHelper {
 		return getGroup(text, 6);
 	}
 
-	public static String getDetails(String text) {
-		return getGroup(text, 9);
+	private static String getObjectVertexRegex() {
+		return getRegexFromTypes(getObjectVertexTypes());
 	}
 
-	public static String getDetailsName(String text) {
-		return getGroup(text, 10);
+	public static String[] getObjectVertexTypes() {
+		String[] types = { "file", "page", "response", "dialog", "directory" };
+		return types;
 	}
 
-	public static String getDetailsType(String text) {
-		return getGroup(text, 11);
+	public static String getPredicate(String text) {
+		return getGroup("The" + COMPONENT_REGEX + OBJECT_REGEX + "(.*)", text, 9);
+	}
+
+	private static String getRegexFromTypes(String[] types) {
+		String regex = "(";
+		for (String componentType : types) {
+			regex += " " + componentType + "|";
+		}
+		return regex.replaceAll("\\|$", ")");
 	}
 
 	public static String getState(String text) {
-		return getGroup(text, 12);
-	}
-
-	public static String getStateModality(String text) {
 		return getGroup(text, 13);
 	}
 
-	public static String getStateType(String text) {
+	public static String getStateModality(String text) {
 		return getGroup(text, 14);
 	}
 
-	public static String getAttachment(String text) {
+	private static String getStateModalityRegex() {
+		return getRegexFromTypes(getStateModalityTypes());
+	}
+
+	public static String[] getStateModalityTypes() {
+		String[] types = { "is", "isn't", "will be", "won't be" };
+		return types;
+	}
+
+	public static String getStateType(String text) {
 		return getGroup(text, 15);
+	}
+
+	public static String getTime(String text) {
+		return getGroup(text, 17);
+	}
+
+	public static boolean hasAttachment(String text) {
+		return !getAttachment(text).isEmpty();
+	}
+
+	public static boolean hasComponent(String text) {
+		return !getComponentName(text).isEmpty();
+	}
+
+	public static boolean hasDetails(String text) {
+		return !getGroup("The" + COMPONENT_REGEX + OBJECT_REGEX + DETAILS_REGEX, text, 9).isBlank();
+	}
+
+	public static boolean hasModality(String text) {
+		return !getGroup("The" + COMPONENT_REGEX + OBJECT_REGEX + DETAILS_REGEX + getStateModalityRegex(), text, 12)
+				.isBlank();
+	}
+
+	public static boolean isEdge(String text) {
+		return !getGroup(text, 8).isEmpty();
+	}
+
+	public static boolean isNegativeStep(String text) {
+		return getGroup(text, 14).contains("isn't") || getGroup(text, 14).contains("won't be");
 	}
 
 	public static boolean isValid(String text) {
 		return text.matches(REGEX);
 	}
 
-	public static String getTime(String text) {
-		return getGroup(text, 16);
+	public static boolean isVertex(String text) {
+		return !getGroup(text, 7).isEmpty();
 	}
 
 }

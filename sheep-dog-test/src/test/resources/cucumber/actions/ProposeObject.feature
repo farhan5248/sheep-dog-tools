@@ -115,7 +115,9 @@ Feature: Propose Object
           | Step Name      |
           | The Input file |
      When The suggestion action is performed
-     Then The suggestion dialog will be empty
+     Then The suggestion dialog will be set as follows
+          | Suggestion        | Suggestion Name |
+          | The Input file is | is              |
 
   Scenario: Has object no component no previous has component objects
 
@@ -137,7 +139,9 @@ Feature: Propose Object
           | The daily batchjob, Input file is present |
           | The Input file                            |
      When The suggestion action is performed
-     Then The suggestion dialog will be empty
+     Then The suggestion dialog will be set as follows
+          | Suggestion        | Suggestion Name |
+          | The Input file is | is              |
 
   Scenario: Has object no component has previous has component objects
 
@@ -159,7 +163,9 @@ Feature: Propose Object
           | Step Name                      |
           | The daily batchjob, Input file |
      When The suggestion action is performed
-     Then The suggestion dialog will be empty
+     Then The suggestion dialog will be set as follows
+          | Suggestion                        | Suggestion Name |
+          | The daily batchjob, Input file is | is              |
 
   Scenario: Has object has component no previous has component objects
 
@@ -181,7 +187,9 @@ Feature: Propose Object
           | The daily batchjob, Input file is present |
           | The daily batchjob, Input file            |
      When The suggestion action is performed
-     Then The suggestion dialog will be empty
+     Then The suggestion dialog will be set as follows
+          | Suggestion                        | Suggestion Name |
+          | The daily batchjob, Input file is | is              |
 
   Scenario: Has object has component has previous has component objects
 

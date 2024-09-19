@@ -21,7 +21,7 @@ public class StepDefinitionHelper {
 				for (Proposal proposal : getProjectComponents(la)) {
 					proposals.put(proposal.getReplacement(), proposal);
 				}
-				for (Proposal proposal : getComponentTypes(la)) {
+				for (Proposal proposal : getComponentCompletions(la)) {
 					proposals.put(proposal.getReplacement(), proposal);
 				}
 			} else {
@@ -32,38 +32,70 @@ public class StepDefinitionHelper {
 			for (Proposal proposal : getPreviousObjects(la)) {
 				proposals.put(proposal.getReplacement(), proposal);
 			}
-			for (Proposal proposal : getObjectTypes(la)) {
+			for (Proposal proposal : getObjectCompletion(la)) {
 				proposals.put(proposal.getReplacement(), proposal);
 			}
 		} else {
 			for (Proposal proposal : getObjectDefinitions(la)) {
 				proposals.put(proposal.getReplacement(), proposal);
 			}
+			for (Proposal proposal : getObjectDefinitionCompletion(la)) {
+				proposals.put(proposal.getReplacement(), proposal);
+			}
 		}
 		return proposals;
 	}
 
-	private static ArrayList<Proposal> getObjectTypes(ILanguageAccess la) {
+	private static ArrayList<Proposal> getObjectDefinitionCompletion(ILanguageAccess la) {
 		ArrayList<Proposal> proposals = new ArrayList<Proposal>();
 		if (la.getStepName() != null) {
-			if (!la.getStepName().replaceFirst(".*,", "").isBlank()) {
-				Proposal proposal;
-				for (String type : StepHelper.getObjectVertexTypes()) {
-					proposal = new Proposal(la.getStepName().replaceFirst(".*, ", "") + " " + type, type,
-							la.getStepName() + " " + type);
-					proposals.add(proposal);
+			if (StepHelper.hasModality(la.getStepName())) {
+				if (StepHelper.getAttachment(la.getStepName()).isBlank()) {
+					// TODO also check that there's something after the modality
+					// TODO when suggesting a state name, the display is 'specify state name', the
+					// documentation provides examples like created/downloaded, the actual text is
+					// just the step itself
+					for (String type : StepHelper.getAttachmentTypes()) {
+						proposals.add(new Proposal(type, type, la.getStepName() + " " + type));
+					}
 				}
-				for (String type : StepHelper.getObjectEdgeTypes()) {
-					proposal = new Proposal(la.getStepName().replaceFirst(".*, ", "") + " " + type, type,
-							la.getStepName() + " " + type);
-					proposals.add(proposal);
+			} else {
+				// TODO also check that there's something after the object.
+				// If there is, suggest detail types
+				// If there isn't, suggest adding a detail name AND modality types
+				// TODO when suggesting a detail name, the display is 'specify part name', the
+				// documentation explains why, the actual text is just the step itself
+				for (String type : StepHelper.getStateModalityTypes()) {
+					proposals.add(new Proposal(type, type, la.getStepName() + " " + type));
+				}
+				if (!StepHelper.hasDetails(la.getStepName())) {
+					for (String type : StepHelper.getDetailTypes()) {
+						proposals.add(new Proposal(type, type, la.getStepName() + " " + type));
+					}
 				}
 			}
 		}
 		return proposals;
 	}
 
-	private static ArrayList<Proposal> getComponentTypes(ILanguageAccess la) {
+	private static ArrayList<Proposal> getObjectCompletion(ILanguageAccess la) {
+		ArrayList<Proposal> proposals = new ArrayList<Proposal>();
+		if (la.getStepName() != null) {
+			if (!la.getStepName().replaceFirst(".*,", "").isBlank()) {
+				for (String type : StepHelper.getObjectVertexTypes()) {
+					proposals.add(new Proposal(la.getStepName().replaceFirst(".*, ", "") + " " + type, type,
+							la.getStepName() + " " + type));
+				}
+				for (String type : StepHelper.getObjectEdgeTypes()) {
+					proposals.add(new Proposal(la.getStepName().replaceFirst(".*, ", "") + " " + type, type,
+							la.getStepName() + " " + type));
+				}
+			}
+		}
+		return proposals;
+	}
+
+	private static ArrayList<Proposal> getComponentCompletions(ILanguageAccess la) {
 
 		ArrayList<Proposal> proposals = new ArrayList<Proposal>();
 		if (la.getStepName() != null) {

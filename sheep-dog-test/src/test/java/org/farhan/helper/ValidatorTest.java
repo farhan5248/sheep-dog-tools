@@ -1,6 +1,5 @@
 package org.farhan.helper;
 
-import org.farhan.helper.StepHelper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -8,9 +7,8 @@ public class ValidatorTest {
 
 	@Test
 	public void testGetComponentObjectState() {
-		Assertions.assertTrue(
-				StepHelper.getComponent("The Something1 application, Something2 request is executed with")
-						.contentEquals("Something1 application"));
+		Assertions.assertTrue(StepHelper.getComponent("The Something1 application, Something2 request is executed with")
+				.contentEquals("Something1 application"));
 	}
 
 	@Test
@@ -42,4 +40,37 @@ public class ValidatorTest {
 		Assertions.assertTrue(StepHelper.getObject("The Something2 request").contentEquals("Something2 request"));
 	}
 
+	@Test
+	public void testGetPredicate() {
+		Assertions.assertTrue(StepHelper
+				.getPredicate("The Something1 application, Something2 request Something3 section is executed with")
+				.contentEquals("Something3 section is executed with"));
+	}
+
+	@Test
+	public void testHasModalityWithDetails() {
+		Assertions.assertTrue(
+				StepHelper.hasModality("The Something1 application, Something2 request Something3 section is"));
+	}
+
+	@Test
+	public void testHasModalityWithoutDetails() {
+		Assertions.assertTrue(StepHelper.hasModality("The Something1 application, Something2 request is"));
+	}
+
+	@Test
+	public void testHasModalityEmpty() {
+		Assertions.assertFalse(StepHelper.hasModality("The Something1 application, Something2 request"));
+	}
+
+	@Test
+	public void testHasDetailsEmpty() {
+		Assertions.assertFalse(StepHelper.hasDetails("The Something1 application, Something2 request"));
+	}
+
+	@Test
+	public void testHasDetails() {
+		Assertions
+				.assertTrue(StepHelper.hasDetails("The Something1 application, Something2 request something section"));
+	}
 }
