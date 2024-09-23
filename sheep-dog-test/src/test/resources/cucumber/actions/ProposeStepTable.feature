@@ -1,0 +1,43 @@
+@debug
+Feature: Propose Step Table
+
+  Scenario: Invalid step
+
+    Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
+          | Step Name                      |
+          | The daily batchjob, Input file |
+     When The step table proposal action is performed
+     Then The suggestion dialog will be empty
+
+  Scenario: Valid step but no object
+
+    Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
+          | Step Name                                            |
+          | The daily batchjob, Input file is created as follows |
+     When The step table proposal action is performed
+     Then The suggestion dialog will be empty
+
+  Scenario: Valid step has object but no definition
+
+    Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
+          | Step Name                                            |
+          | The daily batchjob, Input file is created as follows |
+      And The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
+          | Object Name                       | Step Definition Name |
+          | daily batchjob/Input file.feature | is present           |
+     When The step table proposal action is performed
+     Then The suggestion dialog will be empty
+
+  Scenario: Valid step has object has definition has parameters
+
+    Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
+          | Step Name                                            |
+          | The daily batchjob, Input file is created as follows |
+      And The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
+          | Object Name                       | Step Definition Name  | Parameters |
+          | daily batchjob/Input file.feature | is created as follows | H1         |
+     When The step table proposal action is performed
+     Then The suggestion dialog will be set as follows
+          | Suggestion | Suggestion Name |
+          | \| H1 \|   | \| H1 \|        |
+

@@ -54,16 +54,16 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	}
 
 	private String cellsToString(List<Cell> cells) {
-		String cellsAsString = "";
+		String cellsAsString = "| ";
 		List<String> sortedCells = new ArrayList<String>();
 		for (Cell cell : cells) {
 			sortedCells.add(cell.getName());
 		}
 		Collections.sort(sortedCells);
 		for (String cell : sortedCells) {
-			cellsAsString += cell;
+			cellsAsString += cell + " | ";
 		}
-		return cellsAsString;
+		return cellsAsString.trim();
 	}
 
 	@Override
@@ -164,7 +164,11 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	private List<Cell> getHeader() {
 		StepTable stepTable = step.getTheStepTable();
 		if (stepTable != null) {
-			return stepTable.getRows().get(0).getCells();
+			if (stepTable.getRows().size() > 0) {
+				return stepTable.getRows().get(0).getCells();
+			} else {
+				return null;
+			}
 		} else {
 			return null;
 		}
@@ -238,6 +242,16 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		return cellsToString(e.getParametersTable().getRows().get(0).getCells());
 	}
 
+	@Override
+	public String getStepDefinitionParametersStringUnsorted(Object parameters) {
+		StepParameters e = (StepParameters) parameters;
+		String cellsAsString = "| ";
+		for (Cell cell : e.getParametersTable().getRows().get(0).getCells()) {
+			cellsAsString += cell.getName() + " | ";
+		}
+		return cellsAsString.trim();
+	}
+
 	public EList<?> getStepDefinitions(Object stepObject) {
 		return ((StepObject) stepObject).getStepDefinitions();
 	}
@@ -284,7 +298,12 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	}
 
 	public boolean hasParameters(Object stepDefinition) {
-		return (step.getTheStepTable() != null);
+		if (step.getTheStepTable() != null) {
+			if (step.getTheStepTable().getRows().size() > 0) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override

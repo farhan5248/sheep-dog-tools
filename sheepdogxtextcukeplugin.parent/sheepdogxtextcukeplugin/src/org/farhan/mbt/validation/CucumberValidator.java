@@ -68,10 +68,14 @@ public class CucumberValidator extends AbstractCucumberValidator {
 		// TODO Add table column row validation, each row should have the max number of
 		// columns
 		// TODO make tests for this
-		for (Cell header : stepTable.getRows().get(0).getCells()) {
-			if (!Character.isUpperCase(header.getName().charAt(0))) {
-				warning("Table header names should start with a capital: " + header.getName(),
-						CucumberPackage.Literals.STEP_TABLE__ROWS, INVALID_HEADER, header.getName());
+		if (stepTable.getRows() != null) {
+			if (stepTable.getRows().size() > 0) {
+				for (Cell header : stepTable.getRows().get(0).getCells()) {
+					if (!Character.isUpperCase(header.getName().charAt(0))) {
+						warning("Table header names should start with a capital: " + header.getName(),
+								CucumberPackage.Literals.STEP_TABLE__ROWS, INVALID_HEADER, header.getName());
+					}
+				}
 			}
 		}
 	}

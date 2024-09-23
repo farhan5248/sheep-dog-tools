@@ -48,16 +48,16 @@ public class EclipseMock implements ILanguageAccess {
 	}
 
 	private String cellsToString(List<String> cells) {
-		String cellsAsString = "";
+		String cellsAsString = "| ";
 		List<String> sortedCells = new ArrayList<String>();
 		for (String cell : cells) {
 			sortedCells.add(cell);
 		}
 		Collections.sort(sortedCells);
 		for (String cell : sortedCells) {
-			cellsAsString += cell;
+			cellsAsString += cell + " | ";
 		}
-		return cellsAsString;
+		return cellsAsString.trim();
 	}
 
 	@Override
@@ -154,6 +154,15 @@ public class EclipseMock implements ILanguageAccess {
 	@Override
 	public String getStepDefinitionParametersString(Object parameters) {
 		return cellsToString((ArrayList<String>) parameters);
+	}
+
+	@Override
+	public String getStepDefinitionParametersStringUnsorted(Object parameters) {
+		String cellsAsString = "| ";
+		for (String cell : (ArrayList<String>) parameters) {
+			cellsAsString += cell + " | ";
+		}
+		return cellsAsString.trim();
 	}
 
 	@Override

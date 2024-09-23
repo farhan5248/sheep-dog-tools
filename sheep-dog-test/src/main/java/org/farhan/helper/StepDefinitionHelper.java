@@ -286,6 +286,29 @@ public class StepDefinitionHelper {
 		return objectParts[objectParts.length - 1];
 	}
 
+	public static TreeMap<String, Proposal> proposeStepTable(ILanguageAccess la) throws Exception {
+		TreeMap<String, Proposal> proposals = new TreeMap<String, Proposal>();
+		Proposal proposal;
+		if (StepHelper.isValid(la.getStepName())) {
+			String objectQualifiedName = getStepObjectQualifiedName(la);
+			Object stepObject = la.getStepObject(objectQualifiedName);
+			if (stepObject != null) {
+				Object stepDefinition = getStepDefinition(stepObject, getPredicate(la.getStepName()), la);
+				if (stepDefinition != null) {
+					for (Object parameters : la.getStepDefinitionParameters(stepDefinition)) {
+						String paramSetString = la.getStepDefinitionParametersStringUnsorted((Object) parameters);
+						proposal = new Proposal();
+						proposal.setDisplay(paramSetString);
+						proposal.setDocumentation(paramSetString);
+						proposal.setReplacement(paramSetString);
+						proposals.put(proposal.getReplacement(), proposal);
+					}
+				}
+			}
+		}
+		return proposals;
+	}
+
 	public static TreeMap<String, Proposal> propose(ILanguageAccess la) throws Exception {
 		TreeMap<String, Proposal> proposals = new TreeMap<String, Proposal>();
 		String component = "";
