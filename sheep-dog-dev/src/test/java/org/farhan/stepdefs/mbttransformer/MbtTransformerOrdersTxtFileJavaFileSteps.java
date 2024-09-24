@@ -6,8 +6,8 @@ import io.cucumber.datatable.DataTable;
 
 public class MbtTransformerOrdersTxtFileJavaFileSteps {
 
-    @Given("^The src/test/java/org/farhan/objects/acme/OrdersTxtFile.java file will be created as follows$")
-    public void theSrcTestJavaOrgFarhanObjectsAcmeOrdersTxtFileJavaFileWillBeCreatedAsFollows(String docString) {
+    @Given("^The mbt-transformer plugin, src/test/java/org/farhan/objects/acme/OrdersTxtFile.java file will be created as follows$")
+    public void theMbtTransformerPluginSrcTestJavaOrgFarhanObjectsAcmeOrdersTxtFileJavaFileWillBeCreatedAsFollows(String docString) {
         MbtTransformerFactory.get("OrdersTxtFileJavaFile").setComponent("mbt-transformer");
         MbtTransformerFactory.get("OrdersTxtFileJavaFile").setPath("src/test/java/org/farhan/objects/acme/OrdersTxtFile.java");
         MbtTransformerFactory.get("OrdersTxtFileJavaFile").assertInputOutputs("Content", docString);

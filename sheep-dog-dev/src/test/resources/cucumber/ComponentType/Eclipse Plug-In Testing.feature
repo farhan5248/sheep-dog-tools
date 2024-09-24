@@ -22,7 +22,7 @@ Feature: Eclipse Plug-In Testing
 
   Scenario: Create GuiAction.java
 
-     Then The src/test/java/org/farhan/objects/acmetool/GuiAction.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/acmetool/GuiAction.java file will be created as follows
           """
           package org.farhan.objects.acmetool;
           
@@ -36,7 +36,7 @@ Feature: Eclipse Plug-In Testing
 
   Scenario: Create GuiDialog.java
 
-     Then The src/test/java/org/farhan/objects/acmetool/GuiDialog.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/acmetool/GuiDialog.java file will be created as follows
           """
           package org.farhan.objects.acmetool;
           
@@ -50,7 +50,7 @@ Feature: Eclipse Plug-In Testing
 
   Scenario: Create ProcessFeatureFile.java
 
-     Then The src/test/java/org/farhan/objects/acmetool/ProcessFeatureFile.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/acmetool/ProcessFeatureFile.java file will be created as follows
           """
           package org.farhan.objects.acmetool;
           
@@ -64,7 +64,7 @@ Feature: Eclipse Plug-In Testing
 
   Scenario: Create AcmetoolGuiActionSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/acmetool/AcmetoolGuiActionSteps.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/acmetool/AcmetoolGuiActionSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.acmetool;
           
@@ -85,7 +85,7 @@ Feature: Eclipse Plug-In Testing
 
   Scenario: Create AcmetoolGuiDialogSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/acmetool/AcmetoolGuiDialogSteps.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/acmetool/AcmetoolGuiDialogSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.acmetool;
           
@@ -106,7 +106,7 @@ Feature: Eclipse Plug-In Testing
 
   Scenario: Create AcmetoolProcessFeatureFileSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/acmetool/AcmetoolProcessFeatureFileSteps.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/acmetool/AcmetoolProcessFeatureFileSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.acmetool;
           

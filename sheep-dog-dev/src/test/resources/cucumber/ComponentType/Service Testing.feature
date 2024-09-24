@@ -25,7 +25,7 @@ Feature: Service Testing
 
   Scenario: Create AdminFamilyDetailsResponseSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/admin/AdminFamilyDetailsResponseSteps.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/admin/AdminFamilyDetailsResponseSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.admin;
           
@@ -46,7 +46,7 @@ Feature: Service Testing
 
   Scenario: Create PharmacyClaimRequestSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/pharmacy/PharmacyClaimRequestSteps.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/pharmacy/PharmacyClaimRequestSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.pharmacy;
           
@@ -68,7 +68,7 @@ Feature: Service Testing
 
   Scenario: Create PharmacyClaimResponseSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/pharmacy/PharmacyClaimResponseSteps.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/pharmacy/PharmacyClaimResponseSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.pharmacy;
           
@@ -89,7 +89,7 @@ Feature: Service Testing
 
   Scenario: Create PharmacyNightlyPaymentRequestSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/pharmacy/PharmacyNightlyPaymentRequestSteps.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/pharmacy/PharmacyNightlyPaymentRequestSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.pharmacy;
           
@@ -110,7 +110,7 @@ Feature: Service Testing
 
   Scenario: Create FamilyDetailsResponse.java
 
-     Then The src/test/java/org/farhan/objects/admin/FamilyDetailsResponse.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/admin/FamilyDetailsResponse.java file will be created as follows
           """
           package org.farhan.objects.admin;
           
@@ -126,7 +126,7 @@ Feature: Service Testing
 
   Scenario: Create ClaimRequest.java
 
-     Then The src/test/java/org/farhan/objects/pharmacy/ClaimRequest.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/pharmacy/ClaimRequest.java file will be created as follows
           """
           package org.farhan.objects.pharmacy;
           
@@ -144,7 +144,7 @@ Feature: Service Testing
 
   Scenario: Create ClaimResponse.java
 
-     Then The src/test/java/org/farhan/objects/pharmacy/ClaimResponse.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/pharmacy/ClaimResponse.java file will be created as follows
           """
           package org.farhan.objects.pharmacy;
           
@@ -158,7 +158,7 @@ Feature: Service Testing
 
   Scenario: Create NightlyPaymentRequest.java
 
-     Then The src/test/java/org/farhan/objects/pharmacy/NightlyPaymentRequest.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/pharmacy/NightlyPaymentRequest.java file will be created as follows
           """
           package org.farhan.objects.pharmacy;
           

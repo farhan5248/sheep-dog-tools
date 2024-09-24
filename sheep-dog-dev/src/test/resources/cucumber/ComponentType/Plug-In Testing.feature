@@ -31,7 +31,7 @@ Feature: Plug-In Testing
 
   Scenario: Create AcmeToolInputTxtFileSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/acmetool/AcmeToolInputTxtFileSteps.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/acmetool/AcmeToolInputTxtFileSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.acmetool;
           
@@ -59,7 +59,7 @@ Feature: Plug-In Testing
 
   Scenario: Create AcmeToolDoItGoalSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/acmetool/AcmeToolDoItGoalSteps.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/acmetool/AcmeToolDoItGoalSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.acmetool;
           
@@ -81,7 +81,7 @@ Feature: Plug-In Testing
 
   Scenario: Create AcmeToolOutputTxtFileSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/acmetool/AcmeToolOutputTxtFileSteps.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/acmetool/AcmeToolOutputTxtFileSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.acmetool;
           
@@ -109,7 +109,7 @@ Feature: Plug-In Testing
 
   Scenario: Create InputTxtFile.java
 
-     Then The src/test/java/org/farhan/objects/acmeTool/InputTxtFile.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/acmeTool/InputTxtFile.java file will be created as follows
           """
           package org.farhan.objects.acmetool;
           
@@ -125,7 +125,7 @@ Feature: Plug-In Testing
 
   Scenario: Create DoItGoal.java
 
-     Then The src/test/java/org/farhan/objects/acmeTool/DoItGoal.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/acmeTool/DoItGoal.java file will be created as follows
           """
           package org.farhan.objects.acmetool;
           
@@ -141,7 +141,7 @@ Feature: Plug-In Testing
 
   Scenario: Create OutputTxtFile.java
 
-     Then The src/test/java/org/farhan/objects/acmeTool/OutputTxtFile.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/acmeTool/OutputTxtFile.java file will be created as follows
           """
           package org.farhan.objects.acmetool;
           

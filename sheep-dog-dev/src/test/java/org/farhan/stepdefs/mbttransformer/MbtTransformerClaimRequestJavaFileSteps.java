@@ -6,8 +6,8 @@ import io.cucumber.datatable.DataTable;
 
 public class MbtTransformerClaimRequestJavaFileSteps {
 
-    @Given("^The src/test/java/org/farhan/objects/pharmacy/ClaimRequest.java file will be created as follows$")
-    public void theSrcTestJavaOrgFarhanObjectsPharmacyClaimRequestJavaFileWillBeCreatedAsFollows(String docString) {
+    @Given("^The mbt-transformer plugin, src/test/java/org/farhan/objects/pharmacy/ClaimRequest.java file will be created as follows$")
+    public void theMbtTransformerPluginSrcTestJavaOrgFarhanObjectsPharmacyClaimRequestJavaFileWillBeCreatedAsFollows(String docString) {
         MbtTransformerFactory.get("ClaimRequestJavaFile").setComponent("mbt-transformer");
         MbtTransformerFactory.get("ClaimRequestJavaFile").setPath("src/test/java/org/farhan/objects/pharmacy/ClaimRequest.java");
         MbtTransformerFactory.get("ClaimRequestJavaFile").assertInputOutputs("Content", docString);

@@ -24,7 +24,7 @@ Feature: Batch-Job Testing
 
   Scenario: Create AcmeOrdersTxtFileSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/acme/AcmeOrdersTxtFileSteps.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/acme/AcmeOrdersTxtFileSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.acme;
           
@@ -59,7 +59,7 @@ Feature: Batch-Job Testing
 
   Scenario: Create AcmeNightlyJobSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/acme/AcmeNightlyJobSteps.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/acme/AcmeNightlyJobSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.acme;
           
@@ -80,7 +80,7 @@ Feature: Batch-Job Testing
 
   Scenario: Create AcmeReportingJobSteps.java
 
-     Then The src/test/java/org/farhan/stepdefs/acme/AcmeReportingJobSteps.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/acme/AcmeReportingJobSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.acme;
           
@@ -101,7 +101,7 @@ Feature: Batch-Job Testing
 
   Scenario: Create OrdersTxtFile.java
 
-     Then The src/test/java/org/farhan/objects/acme/OrdersTxtFile.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/acme/OrdersTxtFile.java file will be created as follows
           """
           package org.farhan.objects.acme;
           
@@ -119,7 +119,7 @@ Feature: Batch-Job Testing
 
   Scenario: Create NightlyJob.java
 
-     Then The src/test/java/org/farhan/objects/acme/NightlyJob.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/acme/NightlyJob.java file will be created as follows
           """
           package org.farhan.objects.acme;
           
@@ -133,7 +133,7 @@ Feature: Batch-Job Testing
 
   Scenario: Create ReportingJob.java
 
-     Then The src/test/java/org/farhan/objects/acme/ReportingJob.java file will be created as follows
+     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/acme/ReportingJob.java file will be created as follows
           """
           package org.farhan.objects.acme;
           

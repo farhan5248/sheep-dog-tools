@@ -14,26 +14,6 @@ Object: src/test/resources/cucumber/Process.feature file
 
           | Name | Tags |
 
-  Definition: Scenario Steps Data Table section will be created as follows
-
-    Parameters: 1
-
-          | Name | Step | Row |
-
-  Definition: Scenarios Steps section will be created as follows
-
-    Parameters: 1
-
-          | Name | Step |
-
-  Definition: Scenario Steps Doc String section will be created as follows
-
-    Parameters: 1
-
-          | Name | Step | Content |
-
-  Definition: will be created as follows
-
   Definition: Scenario Outline Examples Table section will be created as follows
 
     Parameters: 1
@@ -52,6 +32,12 @@ Object: src/test/resources/cucumber/Process.feature file
 
           | Name | Tags | Description |
 
+  Definition: Scenarios Steps section will be created as follows
+
+    Parameters: 1
+
+          | Name | Step |
+
   Definition: Scenarios section will be created as follows
 
     Parameters: 1
@@ -69,4 +55,18 @@ Object: src/test/resources/cucumber/Process.feature file
     Parameters: 1
 
           | Name | Description |
+
+  Definition: will be created as follows
+
+  Definition: Scenario Steps Doc String section will be created as follows
+
+    Parameters: 1
+
+          | Name | Step | Content |
+
+  Definition: Scenario Steps Data Table section will be created as follows
+
+    Parameters: 1
+
+          | Name | Step | Row |
 

@@ -6,8 +6,8 @@ import io.cucumber.datatable.DataTable;
 
 public class MbtTransformerDoItGoalJavaFileSteps {
 
-    @Given("^The src/test/java/org/farhan/objects/acmeTool/DoItGoal.java file will be created as follows$")
-    public void theSrcTestJavaOrgFarhanObjectsAcmeToolDoItGoalJavaFileWillBeCreatedAsFollows(String docString) {
+    @Given("^The mbt-transformer plugin, src/test/java/org/farhan/objects/acmeTool/DoItGoal.java file will be created as follows$")
+    public void theMbtTransformerPluginSrcTestJavaOrgFarhanObjectsAcmeToolDoItGoalJavaFileWillBeCreatedAsFollows(String docString) {
         MbtTransformerFactory.get("DoItGoalJavaFile").setComponent("mbt-transformer");
         MbtTransformerFactory.get("DoItGoalJavaFile").setPath("src/test/java/org/farhan/objects/acmeTool/DoItGoal.java");
         MbtTransformerFactory.get("DoItGoalJavaFile").assertInputOutputs("Content", docString);
