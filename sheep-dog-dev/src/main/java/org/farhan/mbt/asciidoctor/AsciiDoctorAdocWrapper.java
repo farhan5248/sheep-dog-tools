@@ -132,96 +132,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		}
 	}
 
-	private String docToString() {
-		String text = "";
-		if (theDoc.getAttribute("tags") != null) {
-			text += ":tags: " + theDoc.getAttribute("tags") + "\n";
-		}
-		text += "= " + theDoc.getTitle() + "\n";
-		for (StructuralNode sn : theDoc.getBlocks()) {
-			if (sn instanceof Block) {
-				// feature description
-				Block b = (Block) sn;
-				if (!b.getSource().isEmpty()) {
-					text += "\n";
-					text += b.getSource() + "\n";
-				}
-			} else if (sn instanceof Section) {
-				// scenario
-				Section section = (Section) sn;
-				text += "\n";
-				if (section.getAttributes().size() > 0) {
-					text += "[";
-					if (section.getAttribute("tags") != null) {
-						text += "tags=\"" + section.getAttribute("tags") + "\",";
-					}
-					if (section.getAttribute("background") != null) {
-						text += "background=\"" + section.getAttribute("background") + "\",";
-					}
-					text = text.replaceAll(",$", "");
-					text += "]\n";
-				}
-				text += "== " + section.getTitle() + "\n";
-				for (StructuralNode ssn : section.getBlocks()) {
-					if (ssn instanceof Block) {
-						// scenario description
-						Block b = (Block) ssn;
-						if (!b.getSource().isEmpty()) {
-							text += "\n";
-							text += b.getSource() + "\n";
-						}
-					} else if (ssn instanceof Section) {
-						// scenario step or examples
-						Section step = (Section) ssn;
-						text += "\n";
-						if (step.getAttributes().size() > 0) {
-							text += "[";
-							if (step.getAttribute("tags") != null) {
-								text += "tags=\"" + step.getAttribute("tags") + "\",";
-							}
-							if (step.getAttribute("examples") != null) {
-								text += "examples=\"" + step.getAttribute("examples") + "\",";
-							}
-							text = text.replaceAll(",$", "");
-							text += "]\n";
-						}
-						text += "=== " + step.getTitle() + "\n";
-						for (StructuralNode tsn : step.getBlocks()) {
-							if (tsn instanceof Table) {
-								// step data table or examples data table
-								Table t = (Table) tsn;
-								text += "\n";
-								text += "[options=\"header\"]\n";
-								text += "|===\n";
-								for (Cell c : t.getHeader().getFirst().getCells()) {
-									text += "| " + c.getText();
-								}
-								text += "\n";
-								for (Row r : t.getBody()) {
-									for (Cell c : r.getCells()) {
-										text += "| " + c.getText();
-									}
-									text += "\n";
-								}
-								text += "|===\n";
-							} else if (tsn instanceof Block) {
-								Block b = (Block) tsn;
-								if (b.getContext().contentEquals("listing")) {
-									// docstring
-									text += "\n";
-									text += "----\n";
-									text += b.getSource() + "\n";
-									text += "----\n";
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		return text;
-	}
-
 	@Override
 	public Object get() {
 		return theDoc;
@@ -236,8 +146,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 				break;
 			}
 		}
-		text = text.trim();
-		return text;
+		return text.trim();
 	}
 
 	public ArrayList<Section> getAbstractScenarioList() {
@@ -328,15 +237,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 			}
 		}
 		return header;
-	}
-
-	public String getFeatureDescription() {
-		for (StructuralNode block : theDoc.getBlocks()) {
-			if (!(block instanceof Section)) {
-				return getAbstractScenarioDescription(block);
-			}
-		}
-		return "";
 	}
 
 	public String getFeatureName() {
@@ -455,17 +355,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void load() throws Exception {
-		try {
-			if (theFile.exists()) {
-				theDoc = Factory.create().loadFile(theFile, Options.builder().build());
-			}
-		} catch (Exception e) {
-			throw new Exception("There was a problem loading file: " + theFile.getAbsolutePath());
-		}
-	}
-
-	@Override
 	public void save() throws Exception {
 		String fileContents = docToString();
 		Utilities.writeFile(theFile, fileContents);
@@ -483,9 +372,132 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		examples.setTitle(examplesName);
 	}
 
+	public String getFeatureDescription() {
+		String text = "";
+		if (theDoc.getBlocks().size() > 0) {
+			if (theDoc.getBlocks().getFirst().getContext().contentEquals("preamble")) {
+				StructuralNode preamble = theDoc.getBlocks().getFirst();
+				if (preamble.getBlocks().size() > 0) {
+					for (StructuralNode paragraph : preamble.getBlocks()) {
+						text += ((Block) paragraph).getSource() + "\n";
+					}
+				}
+			} else if (theDoc.getBlocks().getFirst().getContext().contentEquals("paragraph")) {
+				// when an adoc has no sections, there's no preamble created when it's read from
+				// the file
+				StructuralNode paragraph = theDoc.getBlocks().getFirst();
+				text += ((Block) paragraph).getSource() + "\n";
+			}
+		}
+		return text.replaceFirst("\n$", "");
+	}
+
 	public void setFeatureDescription(String featureDescription) {
-		Block block = jrp.createBlock(theDoc, "paragraph", featureDescription);
-		theDoc.getBlocks().add(block);
+		StructuralNode preamble = jrp.createBlock(theDoc, "preamble", "");
+		theDoc.getBlocks().add(preamble);
+		Block paragraph = jrp.createBlock(preamble, "paragraph", featureDescription);
+		preamble.getBlocks().add(paragraph);
+	}
+
+	@Override
+	public void load() throws Exception {
+		try {
+			if (theFile.exists()) {
+				theDoc = Factory.create().loadFile(theFile, Options.builder().build());
+				// used for debugging theDoc.getContent().toString();
+			}
+		} catch (Exception e) {
+			throw new Exception("There was a problem loading file: " + theFile.getAbsolutePath());
+		}
+	}
+
+	private String docToString() {
+		String text = "";
+		if (theDoc.getAttribute("tags") != null) {
+			text += ":tags: " + theDoc.getAttribute("tags") + "\n";
+		}
+		text += "= " + theDoc.getTitle() + "\n";
+		for (StructuralNode sn : theDoc.getBlocks()) {
+			if (sn.getContext().contentEquals("preamble")) {
+				// feature description
+				if (sn.getBlocks().size() > 0) {
+					text += "\n";
+					text += getFeatureDescription() + "\n";
+				}
+			} else {
+				// scenario
+				Section section = (Section) sn;
+				text += "\n";
+				if (section.getAttributes().size() > 0) {
+					text += "[";
+					if (section.getAttribute("tags") != null) {
+						text += "tags=\"" + section.getAttribute("tags") + "\",";
+					}
+					if (section.getAttribute("background") != null) {
+						text += "background=\"" + section.getAttribute("background") + "\",";
+					}
+					text = text.replaceAll(",$", "");
+					text += "]\n";
+				}
+				text += "== " + section.getTitle() + "\n";
+				for (StructuralNode ssn : section.getBlocks()) {
+					if (ssn instanceof Block) {
+						// scenario description
+						Block b = (Block) ssn;
+						if (!b.getSource().isEmpty()) {
+							text += "\n";
+							text += b.getSource() + "\n";
+						}
+					} else if (ssn instanceof Section) {
+						// scenario step or examples
+						Section step = (Section) ssn;
+						text += "\n";
+						if (step.getAttributes().size() > 0) {
+							text += "[";
+							if (step.getAttribute("tags") != null) {
+								text += "tags=\"" + step.getAttribute("tags") + "\",";
+							}
+							if (step.getAttribute("examples") != null) {
+								text += "examples=\"" + step.getAttribute("examples") + "\",";
+							}
+							text = text.replaceAll(",$", "");
+							text += "]\n";
+						}
+						text += "=== " + step.getTitle() + "\n";
+						for (StructuralNode tsn : step.getBlocks()) {
+							if (tsn instanceof Table) {
+								// step data table or examples data table
+								Table t = (Table) tsn;
+								text += "\n";
+								text += "[options=\"header\"]\n";
+								text += "|===\n";
+								for (Cell c : t.getHeader().getFirst().getCells()) {
+									text += "| " + c.getText();
+								}
+								text += "\n";
+								for (Row r : t.getBody()) {
+									for (Cell c : r.getCells()) {
+										text += "| " + c.getText();
+									}
+									text += "\n";
+								}
+								text += "|===\n";
+							} else if (tsn instanceof Block) {
+								Block b = (Block) tsn;
+								if (b.getContext().contentEquals("listing")) {
+									// docstring
+									text += "\n";
+									text += "----\n";
+									text += b.getSource() + "\n";
+									text += "----\n";
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return text;
 	}
 
 	public void setFeatureName(String featureName) {

@@ -16,6 +16,8 @@ public interface ProcessAdocFile {
 
     public void assertFeatureSectionName(HashMap<String, String> keyMap);
 
+    public void assertFeatureSectionStatements(HashMap<String, String> keyMap);
+
     public void assertFeatureSectionTags(HashMap<String, String> keyMap);
 
     public void assertPresent(HashMap<String, String> keyMap);

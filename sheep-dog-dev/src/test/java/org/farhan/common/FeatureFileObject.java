@@ -27,6 +27,11 @@ public class FeatureFileObject extends FileObject {
 		Assertions.assertTrue(abstractScenario != null, "Scenario " + name + " doesn't exist");
 	}
 
+	protected void assertAbstractScenarioStepStepTableRowExists(String name, String stepName, String rowName) {
+		assertStepExists(name, stepName);
+		Assertions.assertTrue(getRow(getStep(name, stepName), rowName) != null, "Row " + rowName + " doesn't exist");
+	}
+
 	protected void assertAbstractScenarioTags(String name, String tags) {
 		AbstractScenario abstractScenario = getAbstractScenario(name);
 		if (abstractScenario instanceof Scenario) {
@@ -44,6 +49,10 @@ public class FeatureFileObject extends FileObject {
 
 	protected void assertFeatureName(String name) {
 		Assertions.assertEquals(name, wrapper.getFeatureName());
+	}
+
+	protected void assertFeatureStatements(String name, String statements) {
+		Assertions.assertEquals(statements, wrapper.getFeatureDescription());
 	}
 
 	protected void assertFeatureTags(String name, String tags) {
@@ -70,11 +79,6 @@ public class FeatureFileObject extends FileObject {
 		assertScenarioOutlineExamplesExists(name, examplesName);
 		Assertions.assertTrue(getRow(getExamples(name, examplesName), rowName) != null,
 				"Row " + rowName + " doesn't exist");
-	}
-
-	protected void assertAbstractScenarioStepStepTableRowExists(String name, String stepName, String rowName) {
-		assertStepExists(name, stepName);
-		Assertions.assertTrue(getRow(getStep(name, stepName), rowName) != null, "Row " + rowName + " doesn't exist");
 	}
 
 	protected void assertStepExists(String name, String stepName) {

@@ -40,6 +40,10 @@ public class AdocFileObject extends FileObject {
 		Assertions.assertEquals(name, wrapper.getFeatureName());
 	}
 
+	protected void assertFeatureStatements(String name, String statements) {
+		Assertions.assertEquals(statements, wrapper.getFeatureDescription());
+	}
+
 	protected void assertFeatureTags(String name, String tags) {
 		Assertions.assertEquals(tags, Utilities.listAsCsv(wrapper.getFeatureTags()));
 	}
@@ -71,15 +75,6 @@ public class AdocFileObject extends FileObject {
 		Assertions.assertTrue(getStep(name, stepName) != null, "Step " + stepName + " doesn't exist");
 	}
 
-	private Section getExamples(String name, String examplesName) {
-		for (Section e : wrapper.getExamplesList(getAbstractScenario(name))) {
-			if (wrapper.getExamplesName(e).contentEquals(examplesName)) {
-				return e;
-			}
-		}
-		return null;
-	}
-
 	private Section getAbstractScenario(String name) {
 		for (Section s : wrapper.getAbstractScenarioList()) {
 			if (wrapper.getScenarioName(s).contentEquals(name)) {
@@ -89,18 +84,10 @@ public class AdocFileObject extends FileObject {
 		return null;
 	}
 
-	private ArrayList<String> getRow(Section step, String csvRow) {
-		csvRow = csvRow.replaceAll(" +", " ");
-		for (ArrayList<String> row : wrapper.getStepTable(step)) {
-			// convert it to csv
-			String rowCsv = "";
-			for (String cell : row) {
-				rowCsv += ", " + cell;
-			}
-			rowCsv = rowCsv.replaceFirst(", ", "");
-			// if it matches, return it
-			if (rowCsv.contentEquals(csvRow)) {
-				return row;
+	private Section getExamples(String name, String examplesName) {
+		for (Section e : wrapper.getExamplesList(getAbstractScenario(name))) {
+			if (wrapper.getExamplesName(e).contentEquals(examplesName)) {
+				return e;
 			}
 		}
 		return null;
@@ -129,6 +116,23 @@ public class AdocFileObject extends FileObject {
 			rowCsv = rowCsv.replaceFirst(", ", "");
 			if (rowCsv.contentEquals(rowName)) {
 				return cellList;
+			}
+		}
+		return null;
+	}
+
+	private ArrayList<String> getRow(Section step, String csvRow) {
+		csvRow = csvRow.replaceAll(" +", " ");
+		for (ArrayList<String> row : wrapper.getStepTable(step)) {
+			// convert it to csv
+			String rowCsv = "";
+			for (String cell : row) {
+				rowCsv += ", " + cell;
+			}
+			rowCsv = rowCsv.replaceFirst(", ", "");
+			// if it matches, return it
+			if (rowCsv.contentEquals(csvRow)) {
+				return row;
 			}
 		}
 		return null;

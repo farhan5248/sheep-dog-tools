@@ -37,6 +37,11 @@ public class ProcessFeatureFileImpl extends FeatureFileObject implements Process
 	}
 
 	@Override
+	public void assertFeatureSectionStatements(HashMap<String, String> keyMap) {
+		assertFeatureStatements(keyMap.get("Name"), keyMap.get("Statements"));
+	}
+
+	@Override
 	public void assertFeatureSectionTags(HashMap<String, String> keyMap) {
 		assertFeatureTags(keyMap.get("Name"), keyMap.get("Tags"));
 	}

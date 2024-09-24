@@ -4,16 +4,13 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Map.Entry;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.farhan.mbt.cucumber.And;
 import org.farhan.mbt.cucumber.Asterisk;
 import org.farhan.mbt.cucumber.But;
-import org.farhan.mbt.cucumber.Cell;
 import org.farhan.mbt.cucumber.Given;
 import org.farhan.mbt.cucumber.Row;
 import org.farhan.mbt.cucumber.Step;
@@ -34,24 +31,37 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 	public void completeGiven_TheStepTable(Given step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		super.completeGiven_TheStepTable(step, assignment, context, acceptor);
+		completeTheStepTable(step, assignment, context, acceptor);
+	}
 
-		try {
-			for (Entry<String, Proposal> p : StepDefinitionHelper.proposeStepTable(new LanguageAccessImpl(step))
-					.entrySet()) {
-				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
-						p.getValue().getReplacement(), p.getValue().getDisplay(), null, context);
-				if (proposal != null) {
-					proposal.setAdditionalProposalInfo(p.getValue().getDocumentation());
-					acceptor.accept(proposal);
-				} else {
-					// Don't know why this happens but this is here to avoid errors
-					continue;
-				}
-			}
-		} catch (Exception e) {
-			logError(e, step.getName());
-		}
+	public void completeWhen_TheStepTable(When step, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeWhen_TheStepTable(step, assignment, context, acceptor);
+		completeTheStepTable(step, assignment, context, acceptor);
+	}
 
+	public void completeThen_TheStepTable(Then step, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeThen_TheStepTable(step, assignment, context, acceptor);
+		completeTheStepTable(step, assignment, context, acceptor);
+	}
+
+	public void completeAnd_TheStepTable(And step, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeAnd_TheStepTable(step, assignment, context, acceptor);
+		completeTheStepTable(step, assignment, context, acceptor);
+	}
+
+	public void completeBut_TheStepTable(But step, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeBut_TheStepTable(step, assignment, context, acceptor);
+		completeTheStepTable(step, assignment, context, acceptor);
+	}
+
+	public void completeAsterisk_TheStepTable(Asterisk step, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.completeAsterisk_TheStepTable(step, assignment, context, acceptor);
+		completeTheStepTable(step, assignment, context, acceptor);
 	}
 
 	public void completeStepTable_Rows(StepTable stepTable, Assignment assignment, ContentAssistContext context,
@@ -101,6 +111,23 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 		completeName(step, assignment, context, acceptor);
 	}
 
+	private void completeTheStepTable(Step step, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		try {
+			for (Entry<String, Proposal> p : StepDefinitionHelper.proposeStepTable(new LanguageAccessImpl(step))
+					.entrySet()) {
+				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
+						p.getValue().getReplacement(), p.getValue().getDisplay(), null, context);
+				if (proposal != null) {
+					proposal.setAdditionalProposalInfo(p.getValue().getDocumentation());
+					acceptor.accept(proposal);
+				}
+			}
+		} catch (Exception e) {
+			logError(e, step.getName());
+		}
+	}
+
 	private void completeName(Step step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
@@ -111,9 +138,6 @@ public class CucumberProposalProvider extends AbstractCucumberProposalProvider {
 				if (proposal != null) {
 					proposal.setAdditionalProposalInfo(p.getValue().getDocumentation());
 					acceptor.accept(proposal);
-				} else {
-					// Don't know why this happens but this is here to avoid errors
-					continue;
 				}
 			}
 		} catch (Exception e) {

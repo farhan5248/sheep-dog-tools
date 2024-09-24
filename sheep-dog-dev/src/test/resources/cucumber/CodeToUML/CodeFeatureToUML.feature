@@ -30,7 +30,7 @@ Feature: Code Feature To UML
           | Class Name     | Comment     |
           | specs::Process | Desc line 1 |
 
-  Scenario Outline: Two tags, two statements
+  Scenario: Two tags, two statements
 
     Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
@@ -43,18 +43,13 @@ Feature: Code Feature To UML
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
       And The target/uml/pst.uml file Class Annotations section will be created as follows
           | Class Name     | Annotation Name | Annotation Detail |
-          | specs::Process | tags            | tag<Index>        |
+          | specs::Process | tags            | tag1              |
+          | specs::Process | tags            | tag2              |
       And The target/uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment                  |
           | specs::Process | Desc line 1\nDesc line 2 |
 
-    Examples: Indices
-
-          | Index |
-          | 1     |
-          | 2     |
-
-  Scenario Outline: Three tags, three statements
+  Scenario: Three tags, three statements
 
     Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
@@ -68,15 +63,10 @@ Feature: Code Feature To UML
      Then The mbt-transformer plugin, target/uml/pst.uml file will be present
       And The target/uml/pst.uml file Class Annotations section will be created as follows
           | Class Name     | Annotation Name | Annotation Detail |
-          | specs::Process | tags            | tag<Index>        |
+          | specs::Process | tags            | tag1              |
+          | specs::Process | tags            | tag2              |
+          | specs::Process | tags            | tag3              |
       And The target/uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment                               |
           | specs::Process | Desc line 1\nDesc line 2\nDesc line 3 |
-
-    Examples: Indices
-
-          | Index |
-          | 1     |
-          | 2     |
-          | 3     |
 

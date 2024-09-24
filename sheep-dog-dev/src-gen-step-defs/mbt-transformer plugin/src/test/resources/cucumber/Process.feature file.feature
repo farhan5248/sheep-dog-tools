@@ -4,6 +4,12 @@ Object: src/test/resources/cucumber/Process.feature file
 
   Definition: will be present
 
+  Definition: Scenario Steps Doc String section will be created as follows
+
+    Parameters: 1
+
+          | Name | Step | Content |
+
   Definition: Feature section will be created as follows
 
     Parameters: 1
@@ -12,7 +18,7 @@ Object: src/test/resources/cucumber/Process.feature file
 
     Parameters: 2
 
-          | Name | Tags |
+          | Name | Tags | Statements |
 
   Definition: Scenario Outline Examples Table section will be created as follows
 
@@ -20,17 +26,11 @@ Object: src/test/resources/cucumber/Process.feature file
 
           | Name | Examples | Row |
 
-  Definition: Scenario Outline Steps Data Table section will be created as follows
+  Definition: Scenario Steps Data Table section will be created as follows
 
     Parameters: 1
 
-          | Name | Step |
-
-  Definition: Scenario Outlines section will be created as follows
-
-    Parameters: 1
-
-          | Name | Tags | Description |
+          | Name | Step | Row |
 
   Definition: Scenarios Steps section will be created as follows
 
@@ -39,6 +39,20 @@ Object: src/test/resources/cucumber/Process.feature file
           | Name | Step |
 
   Definition: Scenarios section will be created as follows
+
+    Parameters: 1
+
+          | Name | Tags | Description |
+
+  Definition: will be created as follows
+
+  Definition: Scenario Outline Steps Data Table section will be created as follows
+
+    Parameters: 1
+
+          | Name | Step |
+
+  Definition: Scenario Outlines section will be created as follows
 
     Parameters: 1
 
@@ -55,18 +69,4 @@ Object: src/test/resources/cucumber/Process.feature file
     Parameters: 1
 
           | Name | Description |
-
-  Definition: will be created as follows
-
-  Definition: Scenario Steps Doc String section will be created as follows
-
-    Parameters: 1
-
-          | Name | Step | Content |
-
-  Definition: Scenario Steps Data Table section will be created as follows
-
-    Parameters: 1
-
-          | Name | Step | Row |
 

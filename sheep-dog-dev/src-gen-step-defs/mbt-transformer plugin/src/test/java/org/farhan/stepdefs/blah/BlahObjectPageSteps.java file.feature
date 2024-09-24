@@ -6,25 +6,23 @@ Object: src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file
 
     Parameters: 1
 
-          | Method Name | Statement |
+          | Method Name | Parameter Name | Parameter Type |
 
     Parameters: 2
 
-          | Method Name |
+          | Method Name | Statement |
 
     Parameters: 3
 
-          | Method Name | Parameter Name | Parameter Type |
+          | Method Name | Visibility | Return Type |
 
     Parameters: 4
 
-          | Method Name | Visibility | Return Type |
+          | Method Name | Annotation |
 
     Parameters: 5
 
-          | Method Name | Annotation |
-
-  Definition: is created as follows
+          | Method Name |
 
   Definition: Object section will be created as follows
 
@@ -35,6 +33,8 @@ Object: src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file
     Parameters: 2
 
           | Import |
+
+  Definition: is created as follows
 
   Definition: will be created as follows
 
