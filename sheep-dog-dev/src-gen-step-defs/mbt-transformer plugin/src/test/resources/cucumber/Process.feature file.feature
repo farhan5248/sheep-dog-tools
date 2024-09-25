@@ -2,55 +2,61 @@ Object: src/test/resources/cucumber/Process.feature file
 
   Definition: is created as follows
 
+  Definition: will be created as follows
+
   Definition: will be present
-
-  Definition: Scenario Steps Doc String section will be created as follows
-
-    Parameters: 1
-
-          | Name | Step | Content |
 
   Definition: Feature section will be created as follows
 
-    Parameters: 1
+    Parameters: Feature name
 
           | Name |
 
-    Parameters: 2
+    Parameters: Feature name, tag and description
+
+      TODO should rename statements to description
 
           | Name | Tags | Statements |
 
-  Definition: Scenario Outline Examples Table section will be created as follows
+  Definition: Background section will be created as follows
 
-    Parameters: 1
+    Parameters: Background name and description
 
-          | Name | Examples | Row |
+          | Name | Description |
 
-  Definition: Scenario Steps Data Table section will be created as follows
+  Definition: Background Steps section will be created as follows
 
-    Parameters: 1
+    Asserts that there is a background with the given name containing the step
 
-          | Name | Step | Row |
+    Parameters: Background name and step name
 
-  Definition: Scenarios Steps section will be created as follows
-
-    Parameters: 1
+      The name of the background though it's unnecessary since there's always just one and the unique step name.
 
           | Name | Step |
 
   Definition: Scenarios section will be created as follows
 
-    Parameters: 1
+    Parameters: Scenario name, tag and description
 
           | Name | Tags | Description |
 
-  Definition: will be created as follows
+  Definition: Scenarios Steps section will be created as follows
 
-  Definition: Scenario Outline Steps Data Table section will be created as follows
-
-    Parameters: 1
+    Parameters: Scenario name and step name
 
           | Name | Step |
+
+  Definition: Scenarios Steps Step Table section will be created as follows
+
+    Parameters: Scenario name, step name and a row
+
+          | Name | Step | Row |
+
+  Definition: Scenarios Steps Doc String section will be created as follows
+
+    Parameters: Scenario name, step name and all lines
+
+          | Name | Step | Content |
 
   Definition: Scenario Outlines section will be created as follows
 
@@ -58,15 +64,29 @@ Object: src/test/resources/cucumber/Process.feature file
 
           | Name | Tags | Description |
 
-  Definition: Background Steps section will be created as follows
+  Definition: Scenario Outline Examples Table section will be created as follows
+
+    Parameters: Scenario outline name, examples name and a row
+
+          | Name | Examples | Row |
+
+  Definition: Scenario Outline Steps Data Table section will be created as follows
+
+    TODO need a test for this with adoc files
 
     Parameters: 1
 
           | Name | Step |
 
-  Definition: Background section will be created as follows
+  Definition: Scenario Steps Doc String section will be created as follows
 
     Parameters: 1
 
-          | Name | Description |
+          | Name | Step | Content |
+
+  Definition: Scenario Steps Data Table section will be created as follows
+
+    Parameters: 1
+
+          | Name | Step | Row |
 
