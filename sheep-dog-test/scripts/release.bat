@@ -6,4 +6,5 @@ call mvn -B release:prepare -Dmaven.test.skip=true -DcheckModificationExcludeLis
 call mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true
 call git add pom.xml
 call git commit -m "Upgrading dependency versions"
+call mvn install -DskipTests
 cd scripts 
