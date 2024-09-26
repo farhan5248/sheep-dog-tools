@@ -16,10 +16,10 @@ public class XtextReleaseGoal {
 
 	public static void main(String[] args) {
 
-		String currentVersion = "1.0.0";
-		String nextVersion = "1.1.0";
-		String currentSheepDogTestVersion = "1.3";
-		String nextSheepDogTestVersion = "1.4";
+		String currentVersion = "1.1.0";
+		String nextVersion = "1.2.0";
+		String currentSheepDogTestVersion = "1.4";
+		String nextSheepDogTestVersion = "1.5";
 
         // updateToRelease(currentVersion, currentSheepDogTestVersion);
 		// Run mvn install
