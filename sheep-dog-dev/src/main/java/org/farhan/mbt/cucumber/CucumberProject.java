@@ -146,6 +146,7 @@ public class CucumberProject extends ConvertibleProject {
 	private boolean isFileSelected(ConvertibleObject convertibleFile, String tag) throws Exception {
 
 		CucumberFeatureWrapper ufw = (CucumberFeatureWrapper) convertibleFile;
+		// TODO use getFeatureTags and remove get()
 		Feature f = (Feature) ufw.get();
 		if (isTagged(f.getTags(), tag)) {
 			return true;

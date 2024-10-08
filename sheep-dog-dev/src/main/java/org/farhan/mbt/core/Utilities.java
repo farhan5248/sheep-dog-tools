@@ -11,24 +11,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public class Utilities {
 
-	public static void deleteDir(File dir, String extension) {
-		ArrayList<File> filesList = Utilities.recursivelyListFilesAndDirectories(dir, extension);
-		for (File f : filesList) {
-			f.delete();
-		}
-	}
-
-	public static String getStackTraceAsString(Exception e) {
-		StringWriter sw = new StringWriter();
-		e.printStackTrace(new PrintWriter(sw));
-		String exceptionAsString = sw.toString();
-		return exceptionAsString;
-	}
-
-	public static String readFile(File aFile) throws Exception {
-		String content = new String(Files.readAllBytes(Paths.get(aFile.toURI())), StandardCharsets.UTF_8);
-		return content;
-	}
+	// TODO Move the maven plugin implementation of ConvertibleProjectResource and
+	// put a copy in the test code
 
 	public static ArrayList<File> recursivelyListFiles(File aDir, String extension) {
 		ArrayList<File> theFiles = new ArrayList<File>();
@@ -45,6 +29,38 @@ public class Utilities {
 		return theFiles;
 	}
 
+	// TODO move to FileObject
+	public static String readFile(File aFile) throws Exception {
+		String content = new String(Files.readAllBytes(Paths.get(aFile.toURI())), StandardCharsets.UTF_8);
+		return content;
+	}
+
+	// TODO move to AsciiDoctorAdocWrapper and FileObject
+	public static void writeFile(File aFile, String content) throws Exception {
+		aFile.getParentFile().mkdirs();
+		PrintWriter aPrintWriter = new PrintWriter(aFile, StandardCharsets.UTF_8);
+		aPrintWriter.print(content);
+		aPrintWriter.flush();
+		aPrintWriter.close();
+	}
+
+	// TODO move to mojo superclass
+	public static String getStackTraceAsString(Exception e) {
+		StringWriter sw = new StringWriter();
+		e.printStackTrace(new PrintWriter(sw));
+		String exceptionAsString = sw.toString();
+		return exceptionAsString;
+	}
+
+	// TODO move to test class
+	public static void deleteDir(File dir, String extension) {
+		ArrayList<File> filesList = Utilities.recursivelyListFilesAndDirectories(dir, extension);
+		for (File f : filesList) {
+			f.delete();
+		}
+	}
+
+	// TODO move into deleteDir
 	public static ArrayList<File> recursivelyListFilesAndDirectories(File aDir, String extension) {
 		ArrayList<File> theFiles = new ArrayList<File>();
 		if (aDir.exists()) {
@@ -61,6 +77,8 @@ public class Utilities {
 		return theFiles;
 	}
 
+	// TODO move this to classes that use it.
+
 	public static String removeDelimiterAndCapitalize(String text, String delimiter) {
 		String[] nameParts = text.split(delimiter);
 		text = "";
@@ -75,14 +93,6 @@ public class Utilities {
 			return text.substring(0, 1).toUpperCase() + text.substring(1);
 		}
 		return text;
-	}
-
-	public static void writeFile(File aFile, String content) throws Exception {
-		aFile.getParentFile().mkdirs();
-		PrintWriter aPrintWriter = new PrintWriter(aFile, StandardCharsets.UTF_8);
-		aPrintWriter.print(content);
-		aPrintWriter.flush();
-		aPrintWriter.close();
 	}
 
 	public static String lowerFirst(String text) {
