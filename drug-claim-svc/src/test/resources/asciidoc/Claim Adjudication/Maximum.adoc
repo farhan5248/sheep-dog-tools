@@ -1,0 +1,142 @@
+:tags: 
+= Maximum
+
+Most the customer pays during the policy period, like a year.
+Once this max is reached the insurer pays 100%.
+Does this mean deductibles don't matter at that point, like is the maximum supposed to be a cap on deductibles?
+That's what I'm interpreting it as for now
+
+[tags="unit"]
+== No Maximum
+
+
+
+=== Given The Admin application, DIN page is created as follows
+
+[options="header"]
+|===
+| DIN| Drug Cost
+| 2345| 100.0
+|===
+
+=== And The Admin application, Provider page is created as follows
+
+[options="header"]
+|===
+| Provider
+| 12345678
+|===
+
+=== And The Admin application, Member page is created as follows
+
+[options="header"]
+|===
+| Certificate
+| 123456789
+|===
+
+=== When The Pharmacy service, Claim request is sent with
+
+[options="header"]
+|===
+| Certificate| Co-Insurance| DIN| Deductible| Drug Cost| Maximum| Provider
+| 123456789| 80.0| 2345| 10.0| 100.0| 0.0| 12345678
+|===
+
+=== Then The Claim response will be created as follows
+
+[options="header"]
+|===
+| Out Of Pocket| Plan Pays
+| 20.0| 80.0
+|===
+
+[tags="unit"]
+== Low Maximum
+
+The maximum is less than the deductible so only $5 out of the $10 will count
+
+=== Given The Admin application, DIN page is created as follows
+
+[options="header"]
+|===
+| DIN| Drug Cost
+| 2345| 100.0
+|===
+
+=== And The Admin application, Provider page is created as follows
+
+[options="header"]
+|===
+| Provider
+| 12345678
+|===
+
+=== And The Admin application, Member page is created as follows
+
+[options="header"]
+|===
+| Certificate
+| 123456789
+|===
+
+=== When The Pharmacy service, Claim request is sent with
+
+[options="header"]
+|===
+| Certificate| Co-Insurance| DIN| Deductible| Drug Cost| Maximum| Provider
+| 123456789| 80.0| 2345| 10.0| 100.0| 5.0| 12345678
+|===
+
+=== Then The Claim response will be created as follows
+
+[options="header"]
+|===
+| Out Of Pocket| Plan Pays
+| 24.0| 76.0
+|===
+
+[tags="unit,component"]
+== High Maximum
+
+
+
+=== Given The Admin application, DIN page is created as follows
+
+[options="header"]
+|===
+| DIN| Drug Cost
+| 2345| 100.0
+|===
+
+=== And The Admin application, Provider page is created as follows
+
+[options="header"]
+|===
+| Provider
+| 12345678
+|===
+
+=== And The Admin application, Member page is created as follows
+
+[options="header"]
+|===
+| Certificate
+| 123456789
+|===
+
+=== When The Pharmacy service, Claim request is sent with
+
+[options="header"]
+|===
+| Certificate| Co-Insurance| DIN| Deductible| Drug Cost| Maximum| Provider
+| 123456789| 80.0| 2345| 10.0| 100.0| 15.0| 12345678
+|===
+
+=== Then The Claim response will be created as follows
+
+[options="header"]
+|===
+| Out Of Pocket| Plan Pays
+| 28.0| 72.0
+|===

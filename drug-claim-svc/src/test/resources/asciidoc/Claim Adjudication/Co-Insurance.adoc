@@ -1,0 +1,147 @@
+:tags: 
+= Co-Insurance
+
+Coninsurance: Percentage of cost covered after paying the deductible.
+Need
+a field for drug cost
+a field for co-insurance
+a field for insurer pays
+a field for paid out of pocket
+No Deductible
+Middle Deductible
+High Deductible
+
+[tags="unit"]
+== No Co-Insurance
+
+
+
+=== Given The Admin application, DIN page is created as follows
+
+[options="header"]
+|===
+| DIN| Drug Cost
+| 2345| 100.0
+|===
+
+=== And The Admin application, Provider page is created as follows
+
+[options="header"]
+|===
+| Provider
+| 12345678
+|===
+
+=== And The Admin application, Member page is created as follows
+
+[options="header"]
+|===
+| Certificate
+| 123456789
+|===
+
+=== When The Pharmacy service, Claim request is sent with
+
+[options="header"]
+|===
+| Certificate| Co-Insurance| DIN| Deductible| Drug Cost| Provider
+| 123456789| 0.0| 2345| 10.0| 100.0| 12345678
+|===
+
+=== Then The Claim response will be created as follows
+
+[options="header"]
+|===
+| Out Of Pocket| Plan Pays
+| 100.0| 0.0
+|===
+
+[tags="unit"]
+== Low Co-Insurance
+
+
+
+=== Given The Admin application, DIN page is created as follows
+
+[options="header"]
+|===
+| DIN| Drug Cost
+| 2345| 100.0
+|===
+
+=== And The Admin application, Provider page is created as follows
+
+[options="header"]
+|===
+| Provider
+| 12345678
+|===
+
+=== And The Admin application, Member page is created as follows
+
+[options="header"]
+|===
+| Certificate
+| 123456789
+|===
+
+=== When The Pharmacy service, Claim request is sent with
+
+[options="header"]
+|===
+| Certificate| Co-Insurance| DIN| Deductible| Drug Cost| Provider
+| 123456789| 50.0| 2345| 10.0| 100.0| 12345678
+|===
+
+=== Then The Claim response will be created as follows
+
+[options="header"]
+|===
+| Out Of Pocket| Plan Pays
+| 55.0| 45.0
+|===
+
+[tags="unit,component"]
+== High Co-Insurance
+
+
+
+=== Given The Admin application, DIN page is created as follows
+
+[options="header"]
+|===
+| DIN| Drug Cost
+| 2345| 100.0
+|===
+
+=== And The Admin application, Provider page is created as follows
+
+[options="header"]
+|===
+| Provider
+| 12345678
+|===
+
+=== And The Admin application, Member page is created as follows
+
+[options="header"]
+|===
+| Certificate
+| 123456789
+|===
+
+=== When The Pharmacy service, Claim request is sent with
+
+[options="header"]
+|===
+| Certificate| Co-Insurance| DIN| Deductible| Drug Cost| Provider
+| 123456789| 100.0| 2345| 10.0| 100.0| 12345678
+|===
+
+=== Then The Claim response will be created as follows
+
+[options="header"]
+|===
+| Out Of Pocket| Plan Pays
+| 10.0| 90.0
+|===
