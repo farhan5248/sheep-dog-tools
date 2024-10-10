@@ -208,7 +208,7 @@
 								<wait>
 									<http>
 										<url>
-											http://localhost:8080/drug?din=9999</url>
+											http://localhost:8080/claimer</url>
 									</http>
 									<time>60000</time>
 								</wait>
