@@ -1,0 +1,1 @@
+C:\Users\Farhan\git\lean-sheep-dog-tools\drug-claim-svc>mvn clean pre-integration-test
