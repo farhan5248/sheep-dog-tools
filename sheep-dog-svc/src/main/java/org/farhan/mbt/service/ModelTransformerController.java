@@ -1,4 +1,4 @@
-package org.farhan.adjudication.pharmacy;
+package org.farhan.mbt.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ClaimController {
+public class ModelTransformerController {
 
-	@GetMapping("/claimer")
-	public ClaimResponse claimer(@RequestParam(value = "din", defaultValue = "9999") String din) {
-		return new ClaimResponse("", "", "", "");
+	@GetMapping("/initModel")
+	public ModelTransformerResponse initModel(@RequestParam(value = "tag", defaultValue = "debug") String tag) {
+		return new ModelTransformerResponse("target/uml.pst", "", "");
 	}
 
 	@PostMapping("/updateModel")
-	public ClaimResponse updateModel(@RequestParam(value = "fileName", defaultValue = "test.txt") String fileName,
+	public ModelTransformerResponse updateModel(@RequestParam(value = "fileName") String fileName,
 			@RequestBody String content) {
 
 		File test = new File("target/" + fileName);
@@ -34,16 +34,15 @@ public class ClaimController {
 			aPrintWriter.flush();
 			aPrintWriter.close();
 		} catch (IOException e) {
-			return new ClaimResponse(content, test.getAbsolutePath(), getStackTraceAsString(e), "");
+			return new ModelTransformerResponse(test.getAbsolutePath(), content, getStackTraceAsString(e));
 		}
-		return new ClaimResponse(content, test.getAbsolutePath(), "OK", "");
+		return new ModelTransformerResponse(test.getAbsolutePath(), content, "");
 	}
 
-	public static String getStackTraceAsString(Exception e) {
+	private String getStackTraceAsString(Exception e) {
 		StringWriter sw = new StringWriter();
 		e.printStackTrace(new PrintWriter(sw));
-		String exceptionAsString = sw.toString();
-		return exceptionAsString;
+		return sw.toString();
 	}
 
 }

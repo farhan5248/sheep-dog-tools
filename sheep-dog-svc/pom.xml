@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.farhan</groupId>
-	<artifactId>drug-claim-svc</artifactId>
+	<artifactId>sheep-dog-svc</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<name>Drug Claim Service</name>
+	<name>Sheep Dog Service</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -208,7 +208,7 @@
 								<wait>
 									<http>
 										<url>
-											http://localhost:8080/claimer</url>
+											http://localhost:8080/initModel</url>
 									</http>
 									<time>60000</time>
 								</wait>
