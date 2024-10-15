@@ -1,1 +1,19 @@
-C:\Users\Farhan\git\lean-sheep-dog-tools\drug-claim-svc>mvn clean pre-integration-test
+C:\Users\Farhan\git\lean-sheep-dog-tools\sheep-dog-svc>mvn clean pre-integration-test
+
+
+publish ports            -p/--publish
+set os variables         -e/--env
+delete after running     --rm
+start in background      -d/--detach
+allocate Interactive TTY -ti
+volume mount             -v
+
+docker image build --build-arg email=farhan.sheikh.5248@gmail.com -t farhan5248/sheep-dog-svc:latest .
+docker container run --name="sheep-dog-svc-lcl" --hostname="mbt.sheepdog.com" -v "C:\local_target:/docker_target" --rm -d -p 8080:8080 -e WHO="Farhan" farhan5248/sheep-dog-svc:latest
+docker container ls
+docker container stop sheep-dog-svc-lcl
+docker login
+docker image push farhan5248/sheep-dog-svc:latest
+
+
+docker container run --rm -ti ubuntu:latest /bin/bash
