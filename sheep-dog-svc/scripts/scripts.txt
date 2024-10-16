@@ -13,7 +13,6 @@ stop after					-t
 
 docker container create --name="sheep-dog-svc-lcl" --hostname="mbt.sheepdog.org" -v "C:\Users\Farhan\git\lean-sheep-dog-tools\sheep-dog-svc\target:/target" --rm -p 8080:8080 farhan5248/sheep-dog-svc:latest
 docker container run --name="sheep-dog-svc-lcl" --hostname="mbt.sheepdog.org" -v "C:\Users\Farhan\git\lean-sheep-dog-tools\sheep-dog-svc\target:/target" --rm -d -p 8080:8080 farhan5248/sheep-dog-svc:latest
-docker container run --rm -ti ubuntu:latest /bin/bash
 docker container ls -a
 docker container pause
 docker container unpause
@@ -21,6 +20,13 @@ docker container stop -t 25 sheep-dog-svc-lcl
 docker container kill
 docker container start --restart=on-failure:2 farhan5248/sheep-dog-svc:latest
 
+
+docker container run --rm -ti ubuntu:latest /bin/bash
+docker container run --rm -d -t ubuntu:latest /bin/bash
+docker container run --rm ubuntu:22.04 /bin/bash -c "/bin/cat /etc/passwd | wc -l"
+docker container exec -it condescending_chatelet /bin/bash
+docker container run --rm -d --name nginx-test --rm nginx:latest
+docker container logs nginx-test
 
 docker login
 docker image build --build-arg email=farhan.sheikh.5248@gmail.com -t farhan5248/sheep-dog-svc:latest .
