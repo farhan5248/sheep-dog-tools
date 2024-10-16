@@ -3,7 +3,7 @@ Feature: Code Step To UML
 
   Scenario: Convert step keywords
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -16,8 +16,8 @@ Feature: Code Step To UML
               * The blah application, Asterisk page is empty
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-     Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file Interaction Messages section will be created as follows
+     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+      And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                      |
           | specs::Process::Submit | The blah application, Given page is empty    |
           | specs::Process::Submit | The blah application, When page is empty     |

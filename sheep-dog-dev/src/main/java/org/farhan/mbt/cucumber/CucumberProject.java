@@ -1,15 +1,9 @@
-
 package org.farhan.mbt.cucumber;
 
 import java.io.File;
 import java.util.ArrayList;
 
 import org.eclipse.emf.common.util.EList;
-import org.farhan.mbt.cucumber.AbstractScenario;
-import org.farhan.mbt.cucumber.Feature;
-import org.farhan.mbt.cucumber.Scenario;
-import org.farhan.mbt.cucumber.ScenarioOutline;
-import org.farhan.mbt.cucumber.Tag;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.Utilities;
@@ -40,13 +34,13 @@ public class CucumberProject extends ConvertibleProject {
 		File aFile = null;
 		switch (layer) {
 		case FIRST_LAYER:
-			aFile = new File(baseDir + "src/test/resources/cucumber");
+			aFile = new File(baseDir + "target/mbt/resources/cucumber");
 			break;
 		case SECOND_LAYER:
-			aFile = new File(baseDir + "src/test/java/org/farhan/" + SECOND_LAYER);
+			aFile = new File(baseDir + "target/mbt/java/org/farhan/" + SECOND_LAYER);
 			break;
 		case THIRD_LAYER:
-			aFile = new File(baseDir + "src/test/java/org/farhan/" + THIRD_LAYER);
+			aFile = new File(baseDir + "target/mbt/java/org/farhan/" + THIRD_LAYER);
 			break;
 		}
 		aFile.mkdirs();

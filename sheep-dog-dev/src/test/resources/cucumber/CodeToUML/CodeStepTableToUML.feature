@@ -3,7 +3,7 @@ Feature: Convert Step Table To UML
 
   Scenario: One row, one cell
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -13,15 +13,15 @@ Feature: Convert Step Table To UML
                     | v1 |
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-     Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file Interaction Messages section will be created as follows
+     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+      And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                               | Argument Name | Annotation Detail |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 0 -> h1 \|        |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 1 -> v1 \|        |
 
   Scenario: Two rows, two cells
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -33,8 +33,8 @@ Feature: Convert Step Table To UML
                     | v3 | v4 |
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-     Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file Interaction Messages section will be created as follows
+     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+      And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                               | Argument Name | Annotation Detail |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 0 -> h1 \|h2 \|   |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 1 -> v1 \|v2 \|   |
@@ -42,7 +42,7 @@ Feature: Convert Step Table To UML
 
   Scenario: Three rows, three cells
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -55,8 +55,8 @@ Feature: Convert Step Table To UML
                     | v7 | v8 | v9 |
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-     Then The mbt-transformer plugin, target/uml/pst.uml file will be present
-      And The target/uml/pst.uml file Interaction Messages section will be created as follows
+     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+      And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                               | Argument Name | Annotation Detail    |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 0 -> h1 \|h2 \|h3 \| |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 1 -> v1 \|v2 \|v3 \| |

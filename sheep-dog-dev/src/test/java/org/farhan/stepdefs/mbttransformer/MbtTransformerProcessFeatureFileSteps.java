@@ -6,38 +6,38 @@ import io.cucumber.datatable.DataTable;
 
 public class MbtTransformerProcessFeatureFileSteps {
 
-    @Given("^The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows$")
-    public void theMbtTransformerPluginSrcTestResourcesCucumberProcessFeatureFileIsCreatedAsFollows(String docString) {
+    @Given("^The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows$")
+    public void theMbtTransformerPluginTargetMbtResourcesCucumberProcessFeatureFileIsCreatedAsFollows(String docString) {
         MbtTransformerFactory.get("ProcessFeatureFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("ProcessFeatureFile").setPath("src/test/resources/cucumber/Process.feature");
+        MbtTransformerFactory.get("ProcessFeatureFile").setPath("target/mbt/resources/cucumber/Process.feature");
         MbtTransformerFactory.get("ProcessFeatureFile").setInputOutputs("Content", docString);
     }
 
-    @Given("^The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be created as follows$")
-    public void theMbtTransformerPluginSrcTestResourcesCucumberProcessFeatureFileWillBeCreatedAsFollows(String docString) {
+    @Given("^The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file will be created as follows$")
+    public void theMbtTransformerPluginTargetMbtResourcesCucumberProcessFeatureFileWillBeCreatedAsFollows(String docString) {
         MbtTransformerFactory.get("ProcessFeatureFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("ProcessFeatureFile").setPath("src/test/resources/cucumber/Process.feature");
+        MbtTransformerFactory.get("ProcessFeatureFile").setPath("target/mbt/resources/cucumber/Process.feature");
         MbtTransformerFactory.get("ProcessFeatureFile").assertInputOutputs("Content", docString);
     }
 
-    @Given("^The mbt-transformer plugin, src/test/resources/cucumber/app/Process.feature file is created as follows$")
-    public void theMbtTransformerPluginSrcTestResourcesCucumberAppProcessFeatureFileIsCreatedAsFollows(String docString) {
+    @Given("^The mbt-transformer plugin, target/mbt/resources/cucumber/app/Process.feature file is created as follows$")
+    public void theMbtTransformerPluginTargetMbtResourcesCucumberAppProcessFeatureFileIsCreatedAsFollows(String docString) {
         MbtTransformerFactory.get("ProcessFeatureFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("ProcessFeatureFile").setPath("src/test/resources/cucumber/app/Process.feature");
+        MbtTransformerFactory.get("ProcessFeatureFile").setPath("target/mbt/resources/cucumber/app/Process.feature");
         MbtTransformerFactory.get("ProcessFeatureFile").setInputOutputs("Content", docString);
     }
 
-    @Given("^The mbt-transformer plugin, src/test/resources/cucumber/app/Process.feature file will be created as follows$")
-    public void theMbtTransformerPluginSrcTestResourcesCucumberAppProcessFeatureFileWillBeCreatedAsFollows(String docString) {
+    @Given("^The mbt-transformer plugin, target/mbt/resources/cucumber/app/Process.feature file will be created as follows$")
+    public void theMbtTransformerPluginTargetMbtResourcesCucumberAppProcessFeatureFileWillBeCreatedAsFollows(String docString) {
         MbtTransformerFactory.get("ProcessFeatureFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("ProcessFeatureFile").setPath("src/test/resources/cucumber/app/Process.feature");
+        MbtTransformerFactory.get("ProcessFeatureFile").setPath("target/mbt/resources/cucumber/app/Process.feature");
         MbtTransformerFactory.get("ProcessFeatureFile").assertInputOutputs("Content", docString);
     }
 
-    @Given("^The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present$")
-    public void theMbtTransformerPluginSrcTestResourcesCucumberProcessFeatureFileWillBePresent() {
+    @Given("^The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file will be present$")
+    public void theMbtTransformerPluginTargetMbtResourcesCucumberProcessFeatureFileWillBePresent() {
         MbtTransformerFactory.get("ProcessFeatureFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("ProcessFeatureFile").setPath("src/test/resources/cucumber/Process.feature");
+        MbtTransformerFactory.get("ProcessFeatureFile").setPath("target/mbt/resources/cucumber/Process.feature");
         MbtTransformerFactory.get("ProcessFeatureFile").assertInputOutputs("Present");
     }
 

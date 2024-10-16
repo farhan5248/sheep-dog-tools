@@ -6,24 +6,24 @@ import io.cucumber.datatable.DataTable;
 
 public class MbtTransformerBlahObjectPageStepsJavaFileSteps {
 
-    @Given("^The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows$")
-    public void theMbtTransformerPluginSrcTestJavaOrgFarhanStepdefsBlahBlahObjectPageStepsJavaFileIsCreatedAsFollows(String docString) {
+    @Given("^The mbt-transformer plugin, target/mbt/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows$")
+    public void theMbtTransformerPluginTargetMbtJavaOrgFarhanStepdefsBlahBlahObjectPageStepsJavaFileIsCreatedAsFollows(String docString) {
         MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").setPath("src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java");
+        MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").setPath("target/mbt/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java");
         MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").setInputOutputs("Content", docString);
     }
 
-    @Given("^The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows$")
-    public void theMbtTransformerPluginSrcTestJavaOrgFarhanStepdefsBlahBlahObjectPageStepsJavaFileWillBeCreatedAsFollows(String docString) {
+    @Given("^The mbt-transformer plugin, target/mbt/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows$")
+    public void theMbtTransformerPluginTargetMbtJavaOrgFarhanStepdefsBlahBlahObjectPageStepsJavaFileWillBeCreatedAsFollows(String docString) {
         MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").setPath("src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java");
+        MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").setPath("target/mbt/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java");
         MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").assertInputOutputs("Content", docString);
     }
 
-    @Given("^The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present$")
-    public void theMbtTransformerPluginSrcTestJavaOrgFarhanStepdefsBlahBlahObjectPageStepsJavaFileWillBePresent() {
+    @Given("^The mbt-transformer plugin, target/mbt/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present$")
+    public void theMbtTransformerPluginTargetMbtJavaOrgFarhanStepdefsBlahBlahObjectPageStepsJavaFileWillBePresent() {
         MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").setPath("src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java");
+        MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").setPath("target/mbt/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java");
         MbtTransformerFactory.get("BlahObjectPageStepsJavaFile").assertInputOutputs("Present");
     }
 

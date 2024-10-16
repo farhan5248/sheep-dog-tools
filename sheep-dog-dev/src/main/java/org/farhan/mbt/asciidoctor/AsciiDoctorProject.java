@@ -19,7 +19,7 @@ public class AsciiDoctorProject extends ConvertibleProject {
 	@Override
 	public File getDir(String layer) {
 		File aFile = null;
-		aFile = new File(baseDir + "src/test/resources/asciidoc/");
+		aFile = new File(baseDir + "target/mbt/resources/asciidoc/");
 		aFile.mkdirs();
 		return aFile;
 	}

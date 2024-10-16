@@ -3,7 +3,7 @@ Feature: UML Step Table To Document
 
   Scenario: One row, one cell
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -14,7 +14,7 @@ Feature: UML Step Table To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+     Then The mbt-transformer plugin, target/mbt/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file Scenarios Steps Step Table section will be created as follows
           | Name   | Step                                        | Row |
           | Submit | Given The Object page is created as follows | h1  |
@@ -22,7 +22,7 @@ Feature: UML Step Table To Document
 
   Scenario: Two rows, two cells
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -35,7 +35,7 @@ Feature: UML Step Table To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+     Then The mbt-transformer plugin, target/mbt/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file Scenarios Steps Step Table section will be created as follows
           | Name   | Step                                        | Row    |
           | Submit | Given The Object page is created as follows | h1, h2 |
@@ -44,7 +44,7 @@ Feature: UML Step Table To Document
 
   Scenario: Three rows, three cells
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -58,7 +58,7 @@ Feature: UML Step Table To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+     Then The mbt-transformer plugin, target/mbt/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file Scenarios Steps Step Table section will be created as follows
           | Name   | Step                                        | Row        |
           | Submit | Given The Object page is created as follows | h1, h2, h3 |

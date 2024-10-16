@@ -3,7 +3,7 @@ Feature: UML Step Table To Code
 
   Scenario: One row, one cell
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -14,7 +14,7 @@ Feature: UML Step Table To Code
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
-     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+     Then The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file will be present
       And The mbt-transformer plugin, Process.feature file Scenario Steps Data Table section will be created as follows
           | Name   | Step                                        | Row      |
           | Submit | Given The Object page is created as follows | \| h1 \| |
@@ -22,7 +22,7 @@ Feature: UML Step Table To Code
 
   Scenario: Two rows, two cells
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -35,7 +35,7 @@ Feature: UML Step Table To Code
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
-     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+     Then The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file will be present
       And The mbt-transformer plugin, Process.feature file Scenario Steps Data Table section will be created as follows
           | Name   | Step                                        | Row            |
           | Submit | Given The Object page is created as follows | \| h1 \| h2 \| |
@@ -44,7 +44,7 @@ Feature: UML Step Table To Code
 
   Scenario: Three rows, three cells
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -58,7 +58,7 @@ Feature: UML Step Table To Code
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
-     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+     Then The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file will be present
       And The mbt-transformer plugin, Process.feature file Scenario Steps Data Table section will be created as follows
           | Name   | Step                                        | Row                  |
           | Submit | Given The Object page is created as follows | \| h1 \| h2 \| h3 \| |
@@ -68,7 +68,7 @@ Feature: UML Step Table To Code
 
   Scenario: Layer 2
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -81,7 +81,7 @@ Feature: UML Step Table To Code
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
-     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
+     Then The mbt-transformer plugin, target/mbt/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
       And The mbt-transformer plugin, BlahObjectPageSteps.java file Object section will be created as follows
           | Interface Name      | Package                  |
           | BlahObjectPageSteps | org.farhan.stepdefs.blah |
@@ -107,7 +107,7 @@ Feature: UML Step Table To Code
 
   Scenario: Layer 3
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -120,10 +120,10 @@ Feature: UML Step Table To Code
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
-     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
+     Then The mbt-transformer plugin, target/mbt/java/org/farhan/objects/blah/ObjectPage.java file will be present
       And The mbt-transformer plugin, ObjectPage.java file Object section will be created as follows
-          | Interface Name | Package                 | 
-          | ObjectPage     | org.farhan.objects.blah | 
+          | Interface Name | Package                 |
+          | ObjectPage     | org.farhan.objects.blah |
       And The mbt-transformer plugin, ObjectPage.java file Object section will be created as follows
           | Import            |
           | java.util.HashMap |
