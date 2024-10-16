@@ -10,19 +10,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.impl.RuleCallImpl;
 import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
 import org.farhan.mbt.CucumberStandaloneSetup;
-import org.farhan.mbt.cucumber.AbstractScenario;
-import org.farhan.mbt.cucumber.Background;
-import org.farhan.mbt.cucumber.Cell;
-import org.farhan.mbt.cucumber.CucumberFactory;
-import org.farhan.mbt.cucumber.Examples;
-import org.farhan.mbt.cucumber.Feature;
-import org.farhan.mbt.cucumber.Line;
-import org.farhan.mbt.cucumber.Row;
-import org.farhan.mbt.cucumber.Scenario;
-import org.farhan.mbt.cucumber.ScenarioOutline;
-import org.farhan.mbt.cucumber.Statement;
-import org.farhan.mbt.cucumber.Step;
-import org.farhan.mbt.cucumber.Tag;
 import org.farhan.mbt.core.ConvertibleObject;
 
 public class CucumberFeatureWrapper implements ConvertibleObject {
@@ -309,7 +296,9 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 	@Override
 	public void load() throws Exception {
 		try {
+			// TODO move to the project init
 			CucumberStandaloneSetup.doSetup();
+
 			URI uri = URI.createFileURI(theFile.getAbsolutePath());
 			Resource res = new ResourceSetImpl().getResource(uri, true);
 			theFeature = (Feature) res.getContents().get(0);

@@ -96,9 +96,15 @@
 			<artifactId>sheep-dog-dev</artifactId>
 			<version>${sheep-dog-dev.version}</version>
 		</dependency>
+		<!-- Cucumber -->
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-junit-platform-engine</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
