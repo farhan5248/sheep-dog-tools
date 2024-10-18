@@ -4,8 +4,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Scanner;
-
-import org.apache.commons.text.CaseUtils;
 import org.junit.jupiter.api.Assertions;
 
 public class RestService extends GraphTestObject {

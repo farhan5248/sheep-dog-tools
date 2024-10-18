@@ -28,12 +28,13 @@ public abstract class MBTMojo extends AbstractMojo {
 
 	public void execute(MojoGoal mojo) throws MojoExecutionException {
 		try {
-			getLog().info("Converting tests with this tag: " + tag);
-			// TODO this should probably be mojo.getBaseDir instead of exposing ConvertibleProject.baseDir
+			// TODO this should probably be mojo.getBaseDir instead of exposing
+			// ConvertibleProject.baseDir
 			ConvertibleProject.baseDir = "target/mbt/";
 			for (File aFile : Utilities.recursivelyListFiles(srcDir, "")) {
 				mojo.addFile(aFile.getAbsolutePath().replace(srcDir.getAbsolutePath(), ""), Utilities.readFile(aFile));
 			}
+			getLog().info("Converting tests with this tag: " + tag);
 			// TODO rename mojoGoal to convert
 			mojo.mojoGoal(tag);
 			for (String fileName : mojo.getFileList()) {
