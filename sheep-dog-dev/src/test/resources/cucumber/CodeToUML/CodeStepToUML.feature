@@ -3,7 +3,7 @@ Feature: Code Step To UML
 
   Scenario: Convert step keywords
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           

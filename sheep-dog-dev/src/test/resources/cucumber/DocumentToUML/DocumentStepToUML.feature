@@ -3,7 +3,7 @@ Feature: Document Step To UML
 
   Scenario: Convert step keywords
 
-    Given The mbt-transformer plugin, target/mbt/resources/asciidoc/Process.adoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
           """
           = Process
           

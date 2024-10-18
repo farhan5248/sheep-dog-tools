@@ -3,7 +3,7 @@ Feature: Code Scenario Outline To UML
 
   Scenario: No tags, no statement, one step, one example
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -29,7 +29,7 @@ Feature: Code Scenario Outline To UML
 
   Scenario: One tag, one statement, one step, one example
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -57,7 +57,7 @@ Feature: Code Scenario Outline To UML
 
   Scenario Outline: Two tags, two statements, two steps, two examples
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -107,7 +107,7 @@ Feature: Code Scenario Outline To UML
 
   Scenario Outline: Three tags, three statements, three steps, three examples
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           

@@ -3,7 +3,7 @@ Feature: Convert Doc String To UML
 
   Scenario: One line
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -22,7 +22,7 @@ Feature: Convert Doc String To UML
 
   Scenario: Empty Lines
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           

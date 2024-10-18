@@ -50,4 +50,27 @@ public abstract class MojoGoal {
 		pathName = pathName + tgtPrj.getFileExt(ConvertibleProject.FIRST_LAYER);
 		return pathName;
 	}
+
+	public void addFile(String fileName, String contents) throws Exception {
+		Utilities.writeFile(new File(ConvertibleProject.baseDir + fileName), contents);
+	}
+
+	public ArrayList<String> getFileList() {
+		ArrayList<String> generatedFiles = new ArrayList<String>();
+		File baseDir = new File(ConvertibleProject.baseDir);
+		for (File aFile : Utilities.recursivelyListFiles(baseDir, ".java")) {
+			generatedFiles.add(aFile.getAbsolutePath().replace(baseDir.getAbsolutePath(), ""));
+		}
+		for (File aFile : Utilities.recursivelyListFiles(baseDir, ".feature")) {
+			generatedFiles.add(aFile.getAbsolutePath().replace(baseDir.getAbsolutePath(), ""));
+		}
+		for (File aFile : Utilities.recursivelyListFiles(baseDir, ".adoc")) {
+			generatedFiles.add(aFile.getAbsolutePath().replace(baseDir.getAbsolutePath(), ""));
+		}
+		return generatedFiles;
+	}
+
+	public String getFileContents(String fileName) throws Exception {
+		return Utilities.readFile(new File(ConvertibleProject.baseDir + fileName));
+	}
 }

@@ -3,7 +3,7 @@ Feature: Code Background To UML
 
   Scenario: No statement, one step, one scenario
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -22,7 +22,7 @@ Feature: Code Background To UML
 
   Scenario: One statement, one step, one scenario
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -41,7 +41,7 @@ Feature: Code Background To UML
 
   Scenario: One statement, one step, two scenarios
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -65,7 +65,7 @@ Feature: Code Background To UML
 
   Scenario: One statement, one step, three scenarios
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -93,7 +93,7 @@ Feature: Code Background To UML
 
   Scenario Outline: No statement, two steps, one scenario
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -119,7 +119,7 @@ Feature: Code Background To UML
 
   Scenario Outline: No statement, three steps, one scenario
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           

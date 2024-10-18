@@ -3,7 +3,7 @@ Feature: UML Background To Document
 
   Scenario: One statement, one step, one scenario
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -16,7 +16,7 @@ Feature: UML Background To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, target/mbt/resources/asciidoc/Process.adoc file will be present
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file Background section will be created as follows
           | Name  | Description |
           | Setup | Desc line 1 |
@@ -29,7 +29,7 @@ Feature: UML Background To Document
 
   Scenario: No statement, one step, one scenario
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -41,7 +41,7 @@ Feature: UML Background To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, target/mbt/resources/asciidoc/Process.adoc file will be present
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file Background Steps section will be created as follows
           | Name  | Step                            |
           | Setup | Given The Object0 page is valid |
@@ -51,7 +51,7 @@ Feature: UML Background To Document
 
   Scenario: No statement, one step, two scenarios
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -66,7 +66,7 @@ Feature: UML Background To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, target/mbt/resources/asciidoc/Process.adoc file will be present
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file Background Steps section will be created as follows
           | Name  | Step                            |
           | Setup | Given The Object0 page is valid |
@@ -77,7 +77,7 @@ Feature: UML Background To Document
 
   Scenario: No statement, one step, three scenarios
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -95,7 +95,7 @@ Feature: UML Background To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, target/mbt/resources/asciidoc/Process.adoc file will be present
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file Background Steps section will be created as follows
           | Name  | Step                            |
           | Setup | Given The Object0 page is valid |
@@ -107,7 +107,7 @@ Feature: UML Background To Document
 
   Scenario: No statement, two steps, one scenario
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -120,7 +120,7 @@ Feature: UML Background To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, target/mbt/resources/asciidoc/Process.adoc file will be present
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file Background Steps section will be created as follows
           | Name  | Step                            |
           | Setup | Given The Object1 page is valid |
@@ -131,7 +131,7 @@ Feature: UML Background To Document
 
   Scenario: No statement, three steps, one scenario
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -145,7 +145,7 @@ Feature: UML Background To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, target/mbt/resources/asciidoc/Process.adoc file will be present
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
       And The mbt-transformer plugin, Process.adoc file Background Steps section will be created as follows
           | Name  | Step                            |
           | Setup | Given The Object1 page is valid |

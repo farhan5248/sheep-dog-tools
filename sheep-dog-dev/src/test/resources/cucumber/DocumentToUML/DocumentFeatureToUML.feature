@@ -3,7 +3,7 @@ Feature: Document Feature To UML
 
   Scenario: No tags, no statements
 
-    Given The mbt-transformer plugin, target/mbt/resources/asciidoc/Process.adoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
           """
           = Process
           """
@@ -15,7 +15,7 @@ Feature: Document Feature To UML
 
   Scenario: One tag, one statement
 
-    Given The mbt-transformer plugin, target/mbt/resources/asciidoc/Process.adoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
           """
           :tags: tag1
           = Process
@@ -35,7 +35,7 @@ Feature: Document Feature To UML
 
   Scenario: Two tags, two statements
 
-    Given The mbt-transformer plugin, target/mbt/resources/asciidoc/Process.adoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
           """
           :tags: tag1,tag2
           = Process
@@ -57,7 +57,7 @@ Feature: Document Feature To UML
 
   Scenario: Three tags, three statements
 
-    Given The mbt-transformer plugin, target/mbt/resources/asciidoc/Process.adoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
           """
           :tags: tag1,tag2,tag3
           = Process

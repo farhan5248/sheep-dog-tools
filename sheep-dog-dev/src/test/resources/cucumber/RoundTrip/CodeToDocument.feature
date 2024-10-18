@@ -5,7 +5,7 @@ Feature: Code To Document
 
   Scenario: Create an adoc file from feature file
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/app/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/app/Process.feature file is created as follows
           """
           @tag1
           Feature: Process
@@ -43,7 +43,7 @@ Feature: Code To Document
           | Tags |
           | tag1 |
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, target/mbt/resources/asciidoc/app/Process.adoc file will be created as follows
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.adoc file will be created as follows
           """
           :tags: tag1
           = Process

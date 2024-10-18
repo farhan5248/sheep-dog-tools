@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 public abstract class ConvertibleProject {
 
+
+	// TODO change String to File
 	public static String baseDir = "";
 	public static final String FIRST_LAYER = "specs";
 	public static final String SECOND_LAYER = "stepdefs";

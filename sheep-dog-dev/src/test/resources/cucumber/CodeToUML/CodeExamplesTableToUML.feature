@@ -3,7 +3,7 @@ Feature: Code Examples Table To UML
 
   Scenario: One row, one cell
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -25,7 +25,7 @@ Feature: Code Examples Table To UML
 
   Scenario: Two rows, two cells
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -49,7 +49,7 @@ Feature: Code Examples Table To UML
 
   Scenario: Three rows, three cells
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           

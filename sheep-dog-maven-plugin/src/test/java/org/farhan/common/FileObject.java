@@ -2,7 +2,6 @@ package org.farhan.common;
 
 import java.io.File;
 
-import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.Utilities;
 import org.junit.jupiter.api.Assertions;
 
@@ -10,11 +9,10 @@ public abstract class FileObject extends TestObject {
 
 	public void setComponent(String component) {
 		super.setComponent(component);
-		ConvertibleProject.baseDir = "target/src-gen/" + component + "/";
 	}
 
 	protected File getFile() {
-		return new File(ConvertibleProject.baseDir + keyValue.get("path"));
+		return new File("target/src-gen/" + keyValue.get("component") + "/" + keyValue.get("path"));
 	}
 
 	protected void assertObjectExists() {

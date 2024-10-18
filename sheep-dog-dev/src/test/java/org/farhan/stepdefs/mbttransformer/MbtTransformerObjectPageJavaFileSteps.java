@@ -6,10 +6,10 @@ import io.cucumber.datatable.DataTable;
 
 public class MbtTransformerObjectPageJavaFileSteps {
 
-    @Given("^The mbt-transformer plugin, target/mbt/java/org/farhan/objects/blah/ObjectPage.java file will be present$")
-    public void theMbtTransformerPluginTargetMbtJavaOrgFarhanObjectsBlahObjectPageJavaFileWillBePresent() {
+    @Given("^The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present$")
+    public void theMbtTransformerPluginSrcTestJavaOrgFarhanObjectsBlahObjectPageJavaFileWillBePresent() {
         MbtTransformerFactory.get("ObjectPageJavaFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("ObjectPageJavaFile").setPath("target/mbt/java/org/farhan/objects/blah/ObjectPage.java");
+        MbtTransformerFactory.get("ObjectPageJavaFile").setPath("src/test/java/org/farhan/objects/blah/ObjectPage.java");
         MbtTransformerFactory.get("ObjectPageJavaFile").assertInputOutputs("Present");
     }
 
@@ -27,10 +27,10 @@ public class MbtTransformerObjectPageJavaFileSteps {
         MbtTransformerFactory.get("ObjectPageJavaFile").assertInputOutputs(dataTable, "FieldsSection");
     }
 
-    @Given("^The mbt-transformer plugin, target/mbt/java/org/farhan/objects/blah/ObjectPage.java file is created as follows$")
-    public void theMbtTransformerPluginTargetMbtJavaOrgFarhanObjectsBlahObjectPageJavaFileIsCreatedAsFollows(String docString) {
+    @Given("^The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file is created as follows$")
+    public void theMbtTransformerPluginSrcTestJavaOrgFarhanObjectsBlahObjectPageJavaFileIsCreatedAsFollows(String docString) {
         MbtTransformerFactory.get("ObjectPageJavaFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("ObjectPageJavaFile").setPath("target/mbt/java/org/farhan/objects/blah/ObjectPage.java");
+        MbtTransformerFactory.get("ObjectPageJavaFile").setPath("src/test/java/org/farhan/objects/blah/ObjectPage.java");
         MbtTransformerFactory.get("ObjectPageJavaFile").setInputOutputs("Content", docString);
     }
 }

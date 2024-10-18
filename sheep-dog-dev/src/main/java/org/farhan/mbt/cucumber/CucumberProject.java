@@ -34,13 +34,13 @@ public class CucumberProject extends ConvertibleProject {
 		File aFile = null;
 		switch (layer) {
 		case FIRST_LAYER:
-			aFile = new File(baseDir + "target/mbt/resources/cucumber");
+			aFile = new File(baseDir + "resources/cucumber");
 			break;
 		case SECOND_LAYER:
-			aFile = new File(baseDir + "target/mbt/java/org/farhan/" + SECOND_LAYER);
+			aFile = new File(baseDir + "java/org/farhan/" + SECOND_LAYER);
 			break;
 		case THIRD_LAYER:
-			aFile = new File(baseDir + "target/mbt/java/org/farhan/" + THIRD_LAYER);
+			aFile = new File(baseDir + "java/org/farhan/" + THIRD_LAYER);
 			break;
 		}
 		aFile.mkdirs();
@@ -85,15 +85,15 @@ public class CucumberProject extends ConvertibleProject {
 			return aConvertibleObject;
 		}
 		File file = new File(name);
-		if (file.getAbsolutePath().startsWith(getDir(FIRST_LAYER).getAbsolutePath())) {
+		if (file.getAbsolutePath().endsWith(getFileExt(FIRST_LAYER))) {
 			aConvertibleObject = new CucumberFeatureWrapper(file);
 			firstLayerObjects.add(aConvertibleObject);
 			return aConvertibleObject;
 		} else {
 			aConvertibleObject = new CucumberJavaWrapper(file);
-			if (file.getAbsolutePath().startsWith(getDir(SECOND_LAYER).getAbsolutePath())) {
+			if (file.getAbsolutePath().contains(SECOND_LAYER)) {
 				secondLayerObjects.add(aConvertibleObject);
-			} else if (file.getAbsolutePath().startsWith(getDir(THIRD_LAYER).getAbsolutePath())) {
+			} else {
 				thirdLayerObjects.add(aConvertibleObject);
 			}
 			return aConvertibleObject;

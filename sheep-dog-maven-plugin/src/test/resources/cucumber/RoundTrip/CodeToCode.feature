@@ -5,7 +5,7 @@ Feature: Code To Code
 
     The formatting of the data and example tables is intentionally different to make sure that the file is regenerated
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           @tag2 @tag3
           Feature: This is a feature
@@ -41,7 +41,7 @@ Feature: Code To Code
                     |  h3 |  h4 |
                     | v31 | v41 |
           """
-      And The mbt-transformer plugin, target/mbt/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows
+      And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows
           """
           package org.farhan.stepdefs.blah;
           
@@ -66,7 +66,7 @@ Feature: Code To Code
 
   Scenario: Convert class to feature from graph
 
-     Then The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file will be created as follows
+     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be created as follows
           """
           @tag2 @tag3
           Feature: This is a feature
@@ -102,7 +102,7 @@ Feature: Code To Code
                     | h3  | h4  |
                     | v31 | v41 |
           """
-      And The mbt-transformer plugin, target/mbt/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
+      And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.blah;
           

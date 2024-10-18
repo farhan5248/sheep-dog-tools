@@ -3,7 +3,7 @@ Feature: UML Scenario Outline To Code
 
   Scenario: No tags, no statement, one step, one example
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -18,7 +18,7 @@ Feature: UML Scenario Outline To Code
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
-     Then The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file will be present
+     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
       And The mbt-transformer plugin, Process.feature file Scenario Outline Steps Data Table section will be created as follows
           | Name   | Step                                        |
           | Submit | Given The Object page is created as follows |
@@ -30,7 +30,7 @@ Feature: UML Scenario Outline To Code
 
   Scenario: One tag, one statement, one step, one example
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -47,14 +47,14 @@ Feature: UML Scenario Outline To Code
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
-     Then The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file will be present
+     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
       And The mbt-transformer plugin, Process.feature file Scenario Outlines section will be created as follows
           | Name   | Tags | Description |
           | Submit | tag1 | Desc line 1 |
 
   Scenario Outline: Two tags, two statements, two steps, two examples
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -79,7 +79,7 @@ Feature: UML Scenario Outline To Code
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
-     Then The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file will be present
+     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
       And The mbt-transformer plugin, Process.feature file Scenario Outlines section will be created as follows
           | Name   | Tags      | Description              |
           | Submit | tag1,tag2 | Desc line 1\nDesc line 2 |
@@ -99,7 +99,7 @@ Feature: UML Scenario Outline To Code
 
   Scenario Outline: Three tags, three statements, three steps, three examples
 
-    Given The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -132,7 +132,7 @@ Feature: UML Scenario Outline To Code
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
-     Then The mbt-transformer plugin, target/mbt/resources/cucumber/Process.feature file will be present
+     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
       And The mbt-transformer plugin, Process.feature file Scenario Outlines section will be created as follows
           | Name   | Tags           | Description                           |
           | Submit | tag1,tag2,tag3 | Desc line 1\nDesc line 2\nDesc line 3 |
