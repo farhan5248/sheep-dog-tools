@@ -2,10 +2,10 @@ package org.farhan.objects.mbttransformer.pre;
 
 import java.util.HashMap;
 
-import org.farhan.common.FeatureFileObject;
+import org.farhan.common.FileObject;
 import org.farhan.objects.mbttransformer.ProcessFeatureFile;
 
-public class ProcessFeatureFileImpl extends FeatureFileObject implements ProcessFeatureFile {
+public class ProcessFeatureFileImpl extends FileObject implements ProcessFeatureFile {
 
 	@Override
 	public void assertContent(HashMap<String, String> keyMap) {

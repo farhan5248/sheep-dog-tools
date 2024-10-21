@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_Wytp4JArEe-lF-qYR17-aA" name="pst">
+  <packagedElement xmi:type="uml:Package" xmi:id="_Wytp4ZArEe-lF-qYR17-aA" name="specs">
+    <packagedElement xmi:type="uml:Class" xmi:id="_Wytp4pArEe-lF-qYR17-aA" name="Process" classifierBehavior="_WyuRFJArEe-lF-qYR17-aA">
+      <eAnnotations xmi:id="_WyuQ8JArEe-lF-qYR17-aA" source="title">
+        <details xmi:id="_WyuQ8ZArEe-lF-qYR17-aA" key="This is a feature" value=""/>
+      </eAnnotations>
+      <eAnnotations xmi:id="_WyuQ8pArEe-lF-qYR17-aA" source="tags">
+        <details xmi:id="_WyuQ85ArEe-lF-qYR17-aA" key="tag2" value=""/>
+        <details xmi:id="_WyuQ9JArEe-lF-qYR17-aA" key="tag3" value=""/>
+      </eAnnotations>
+      <ownedComment xmi:id="_WyuQ9ZArEe-lF-qYR17-aA">
+        <body></body>
+      </ownedComment>
+      <ownedBehavior xmi:type="uml:Interaction" xmi:id="_WyuQ9pArEe-lF-qYR17-aA" name="Setup">
+        <eAnnotations xmi:id="_WyuQ95ArEe-lF-qYR17-aA" source="background"/>
+        <ownedComment xmi:id="_WyuQ-JArEe-lF-qYR17-aA">
+          <body></body>
+        </ownedComment>
+        <message xmi:id="_WyuQ-ZArEe-lF-qYR17-aA" name="The blah application, something/Object page is created as follows">
+          <eAnnotations xmi:id="_WyuQ-pArEe-lF-qYR17-aA" source="Step">
+            <details xmi:id="_WyuQ-5ArEe-lF-qYR17-aA" key="Keyword" value="Given"/>
+          </eAnnotations>
+          <argument xmi:type="uml:LiteralString" xmi:id="_WyuQ_JArEe-lF-qYR17-aA" name="docString" value="">
+            <eAnnotations xmi:id="_WyuQ_ZArEe-lF-qYR17-aA" source="docString">
+              <details xmi:id="_WyuQ_pArEe-lF-qYR17-aA" key="0" value="Text 1"/>
+              <details xmi:id="_WyuQ_5ArEe-lF-qYR17-aA" key="1" value=""/>
+              <details xmi:id="_WyuRAJArEe-lF-qYR17-aA" key="2" value="Text 2"/>
+            </eAnnotations>
+          </argument>
+        </message>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:Interaction" xmi:id="_WyuRAZArEe-lF-qYR17-aA" name="Submit One">
+        <eAnnotations xmi:id="_WyuRApArEe-lF-qYR17-aA" source="tags">
+          <details xmi:id="_WyuRA5ArEe-lF-qYR17-aA" key="tag1" value=""/>
+        </eAnnotations>
+        <ownedComment xmi:id="_WyuRBJArEe-lF-qYR17-aA">
+          <body>Basic EDI claim</body>
+        </ownedComment>
+        <message xmi:id="_WyuRBZArEe-lF-qYR17-aA" name="The blah application, something/Object page is empty">
+          <eAnnotations xmi:id="_WyuRBpArEe-lF-qYR17-aA" source="Step">
+            <details xmi:id="_WyuRB5ArEe-lF-qYR17-aA" key="Keyword" value="When"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_WyuRCJArEe-lF-qYR17-aA" name="The blah application, something/Object page is empty">
+          <eAnnotations xmi:id="_WyuRCZArEe-lF-qYR17-aA" source="Step">
+            <details xmi:id="_WyuRCpArEe-lF-qYR17-aA" key="Keyword" value="Then"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_WyuRC5ArEe-lF-qYR17-aA" name="The blah application, something/Object page is empty">
+          <eAnnotations xmi:id="_WyuRDJArEe-lF-qYR17-aA" source="Step">
+            <details xmi:id="_WyuRDZArEe-lF-qYR17-aA" key="Keyword" value="But"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_WyuRDpArEe-lF-qYR17-aA" name="The blah application, something/Object page is empty">
+          <eAnnotations xmi:id="_WyuRD5ArEe-lF-qYR17-aA" source="Step">
+            <details xmi:id="_WyuREJArEe-lF-qYR17-aA" key="Keyword" value="And"/>
+          </eAnnotations>
+        </message>
+        <message xmi:id="_WyuREZArEe-lF-qYR17-aA" name="The blah application, something/Object page is empty">
+          <eAnnotations xmi:id="_WyuREpArEe-lF-qYR17-aA" source="Step">
+            <details xmi:id="_WyuRE5ArEe-lF-qYR17-aA" key="Keyword" value="*"/>
+          </eAnnotations>
+        </message>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:Interaction" xmi:id="_WyuRFJArEe-lF-qYR17-aA" name="Submit Several">
+        <eAnnotations xmi:id="_WyuRFZArEe-lF-qYR17-aA" source="Data Set">
+          <details xmi:id="_WyuRFpArEe-lF-qYR17-aA" key="0" value="h3|h4|"/>
+          <details xmi:id="_WyuRF5ArEe-lF-qYR17-aA" key="1" value="v31|v41|"/>
+        </eAnnotations>
+        <ownedComment xmi:id="_WyuRGJArEe-lF-qYR17-aA">
+          <body></body>
+        </ownedComment>
+        <message xmi:id="_WyuRGZArEe-lF-qYR17-aA" name="The blah application, DataTable page is created as follows">
+          <eAnnotations xmi:id="_WyuRGpArEe-lF-qYR17-aA" source="Step">
+            <details xmi:id="_WyuRG5ArEe-lF-qYR17-aA" key="Keyword" value="Given"/>
+          </eAnnotations>
+          <argument xmi:type="uml:LiteralString" xmi:id="_WyuRHJArEe-lF-qYR17-aA" name="dataTable" value="">
+            <eAnnotations xmi:id="_WyuRHZArEe-lF-qYR17-aA" source="dataTable">
+              <details xmi:id="_WyuRHpArEe-lF-qYR17-aA" key="0" value="h1 |h2 |"/>
+              <details xmi:id="_WyuRH5ArEe-lF-qYR17-aA" key="1" value="&lt;h3> |&lt;h4> |"/>
+            </eAnnotations>
+          </argument>
+        </message>
+      </ownedBehavior>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>

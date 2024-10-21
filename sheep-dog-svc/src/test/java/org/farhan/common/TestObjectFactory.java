@@ -2,27 +2,16 @@ package org.farhan.common;
 
 import java.util.HashMap;
 import java.util.Set;
-
 import org.junit.jupiter.api.Assertions;
-
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
 
-public abstract class GraphTestObjectFactory {
+public abstract class TestObjectFactory {
 
-	private static String preOrPost = "";
-	private static HashMap<String, GraphTestObject> classes = null;
+	private static HashMap<String, TestObject> classes = new HashMap<String, TestObject>();
 
-	public static void reset() {
-		classes = new HashMap<String, GraphTestObject>();
-	}
-
-	public static void setPre(boolean b) {
-		if (b) {
-			preOrPost = "pre";
-		} else {
-			preOrPost = "post";
-		}
+	public static void setup() {
+		classes = new HashMap<String, TestObject>();
 	}
 
 	public static Class<?> getClassInPackage(String rootPkg, String testObjName) throws Exception {
@@ -30,25 +19,26 @@ public abstract class GraphTestObjectFactory {
 		Set<ClassInfo> testObjs = ClassPath.from(ClassLoader.getSystemClassLoader()).getAllClasses();
 		for (ClassInfo testObj : testObjs) {
 			if (testObj.getName().endsWith(testObjName + "Impl")
-					&& testObj.getName().startsWith("org.farhan.objects." + rootPkg + "." + preOrPost)) {
+					&& testObj.getName().startsWith("org.farhan.objects." + rootPkg + "." + "impl")) {
 				return Class.forName(testObj.getName());
 			}
 		}
 		return null;
 	}
 
-	public static GraphTestObject get(String packageName, String className) {
+	public static TestObject get(String packageName, String className) {
 		try {
 			if (classes.get(className) != null) {
 				return classes.get(className);
 			} else {
 				Class<?> gmoClass = getClassInPackage(packageName, className);
-				GraphTestObject gmo = (GraphTestObject) gmoClass.getConstructor().newInstance();
+				TestObject gmo = (TestObject) gmoClass.getConstructor().newInstance();
 				classes.put(className, gmo);
 				return gmo;
 			}
 		} catch (Exception e) {
-			Assertions.fail("There was an error getting class: " + packageName + "." + className);
+			Assertions
+					.fail("There was an error creating class for package, " + packageName + " in class, " + className);
 		}
 		return null;
 	}

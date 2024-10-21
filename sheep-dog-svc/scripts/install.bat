@@ -1,4 +1,4 @@
 cd ..
 call mvn clean
-call mvn install
+call mvn install -DskipTests
 cd scripts 

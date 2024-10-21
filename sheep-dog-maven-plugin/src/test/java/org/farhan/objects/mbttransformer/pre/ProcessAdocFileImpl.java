@@ -2,10 +2,10 @@ package org.farhan.objects.mbttransformer.pre;
 
 import java.util.HashMap;
 
-import org.farhan.common.AdocFileObject;
+import org.farhan.common.FileObject;
 import org.farhan.objects.mbttransformer.ProcessAdocFile;
 
-public class ProcessAdocFileImpl extends AdocFileObject implements ProcessAdocFile {
+public class ProcessAdocFileImpl extends FileObject implements ProcessAdocFile {
 
 	@Override
 	public void assertContent(HashMap<String, String> keyMap) {

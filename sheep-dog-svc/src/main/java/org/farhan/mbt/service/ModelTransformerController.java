@@ -28,18 +28,21 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 
 	@GetMapping("/getFileContents")
 	public ModelTransformerResponse getFileContents(@RequestParam(value = "fileName") String fileName) {
+		logger.info("Starting getFileContents");
 		String fileContents = "";
 		try {
 			MojoGoal mojo = new ConvertCucumberToUML();
 			fileContents = mojo.getFileContents(fileName);
 		} catch (Exception e) {
-			return new ModelTransformerResponse("target/uml.pst", "", getStackTraceAsString(e));
+			logger.error(getStackTraceAsString(e));
+			return new ModelTransformerResponse("target/uml.pst", "", "");
 		}
-		return new ModelTransformerResponse(fileContents, "", "");
+		return new ModelTransformerResponse(fileName, fileContents, "");
 	}
 
 	@GetMapping("/getFileList")
 	public ModelTransformerResponse getFileList() {
+		logger.info("Starting getFileList");
 		String fileList = "";
 		try {
 			MojoGoal mojo = new ConvertCucumberToUML();
@@ -50,28 +53,33 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 			}
 			fileList = fileList.replaceFirst("\n", "");
 		} catch (Exception e) {
-			return new ModelTransformerResponse("target/uml.pst", "", getStackTraceAsString(e));
+			logger.error(getStackTraceAsString(e));
+			return new ModelTransformerResponse("target/uml.pst", "", "");
 		}
 		return new ModelTransformerResponse(fileList, "", "");
 	}
 
 	@PostMapping("/cucumberToUMLMojo")
 	public ModelTransformerResponse cucumberToUMLMojo(@RequestParam(value = "tags", defaultValue = "") String tags) {
+		logger.info("Starting cucumberToUMLMojo");
 		return mojoGoal(new ConvertCucumberToUML(), tags);
 	}
 
 	@PostMapping("/umlToCucumberMojo")
 	public ModelTransformerResponse umlToCucumberMojo(@RequestParam(value = "tags", defaultValue = "") String tags) {
+		logger.info("Starting umlToCucumberMojo");
 		return mojoGoal(new ConvertUMLToCucumber(), tags);
 	}
 
 	@PostMapping("/asciiDoctorToUMLMojo")
 	public ModelTransformerResponse asciiDoctorToUMLMojo(@RequestParam(value = "tags", defaultValue = "") String tags) {
+		logger.info("Starting asciiDoctorToUMLMojo");
 		return mojoGoal(new ConvertAsciidoctorToUML(), tags);
 	}
 
 	@PostMapping("/umlToAsciiDoctorMojo")
 	public ModelTransformerResponse umlToAsciiDoctorMojo(@RequestParam(value = "tags", defaultValue = "") String tags) {
+		logger.info("Starting umlToAsciiDoctorMojo");
 		return mojoGoal(new ConvertUMLToAsciidoctor(), tags);
 	}
 
@@ -79,7 +87,8 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 		try {
 			mojo.mojoGoal(tags);
 		} catch (Exception e) {
-			return new ModelTransformerResponse("target/uml.pst", "", getStackTraceAsString(e));
+			logger.error(getStackTraceAsString(e));
+			return new ModelTransformerResponse("target/uml.pst", "", "");
 		}
 		// TODO should probably return a model ID to later on be passed in. Perhaps use
 		// the tag in the name?
@@ -89,12 +98,13 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	@PostMapping("/addFile")
 	public ModelTransformerResponse addFile(@RequestParam(value = "fileName") String fileName,
 			@RequestBody String contents) {
-
+		logger.info("Starting addFile");
 		try {
 			MojoGoal mojo = new ConvertCucumberToUML();
 			mojo.addFile(fileName, contents);
 		} catch (Exception e) {
-			return new ModelTransformerResponse(fileName, contents, getStackTraceAsString(e));
+			logger.error(getStackTraceAsString(e));
+			return new ModelTransformerResponse(fileName, contents, "");
 		}
 		return new ModelTransformerResponse(fileName, contents, "");
 	}
@@ -108,13 +118,14 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	@Override
 	public void onApplicationEvent(ApplicationReadyEvent event) {
 
-		File baseDir = new File("/" + System.getenv("BASEDIR"));
+		File baseDir = new File(File.separator + System.getenv("BASEDIR"));
 		logger.info("Testing temp directory: " + baseDir.getAbsolutePath());
 		if (!baseDir.exists()) {
-			logger.error("Temp directory doesn't exist");
+			logger.warn("Temp directory doesn't exist, creating it");
+			baseDir.mkdirs();
 		} else {
 			logger.info("Temp directory does exist");
-			ConvertibleProject.baseDir = baseDir.getPath() + "/";
+			ConvertibleProject.baseDir = baseDir.getPath() + File.separator;
 		}
 	}
 

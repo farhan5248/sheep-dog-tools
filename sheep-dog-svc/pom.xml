@@ -170,6 +170,9 @@
 						<include>**/*IT</include>
 						<include>**/*IntegrationTest</include>
 					</includes>
+					<environmentVariables>
+						<START_APP>false</START_APP>
+					</environmentVariables>
 				</configuration>
 				<executions>
 					<execution>
@@ -197,7 +200,7 @@
 								<wait>
 									<http>
 										<url>
-											http://localhost:8080/initModel</url>
+											http://localhost:8080/getFileList</url>
 									</http>
 									<time>60000</time>
 								</wait>

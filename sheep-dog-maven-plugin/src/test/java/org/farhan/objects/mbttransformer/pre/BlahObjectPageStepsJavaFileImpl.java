@@ -2,10 +2,10 @@ package org.farhan.objects.mbttransformer.pre;
 
 import java.util.HashMap;
 
-import org.farhan.common.JavaFileObject;
+import org.farhan.common.FileObject;
 import org.farhan.objects.mbttransformer.BlahObjectPageStepsJavaFile;
 
-public class BlahObjectPageStepsJavaFileImpl extends JavaFileObject implements BlahObjectPageStepsJavaFile {
+public class BlahObjectPageStepsJavaFileImpl extends FileObject implements BlahObjectPageStepsJavaFile {
 
 	@Override
 	public void assertContent(HashMap<String, String> keyMap) {
