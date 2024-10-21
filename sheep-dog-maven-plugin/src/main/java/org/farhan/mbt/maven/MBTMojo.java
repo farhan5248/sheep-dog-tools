@@ -35,7 +35,6 @@ public abstract class MBTMojo extends AbstractMojo {
 				mojo.addFile(aFile.getAbsolutePath().replace(srcDir.getAbsolutePath(), ""), Utilities.readFile(aFile));
 			}
 			getLog().info("Converting tests with this tag: " + tag);
-			// TODO rename mojoGoal to convert
 			mojo.mojoGoal(tag);
 			for (String fileName : mojo.getFileList()) {
 				Utilities.writeFile(new File(srcDir.getAbsolutePath() + fileName), mojo.getFileContents(fileName));

@@ -3,7 +3,11 @@ package org.farhan.mbt.service;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+
+import org.farhan.mbt.convert.ConvertAsciidoctorToUML;
 import org.farhan.mbt.convert.ConvertCucumberToUML;
+import org.farhan.mbt.convert.ConvertUMLToAsciidoctor;
+import org.farhan.mbt.convert.ConvertUMLToCucumber;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.MojoGoal;
 import org.slf4j.Logger;
@@ -18,42 +22,81 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ModelTransformerController implements ApplicationListener<ApplicationReadyEvent> {
+	// TODO handle exceptions better in general
 
 	Logger logger = LoggerFactory.getLogger(ModelTransformerController.class);
-	// TODO share this between sessions or the tag will be lost?
-	MojoGoal mojo;
 
-	@GetMapping("/initModelFromCucumber")
-	public ModelTransformerResponse initModelFromCucumber(
-			@RequestParam(value = "tag", defaultValue = "debug") String tag) {
-		mojo = new ConvertCucumberToUML();
-		// TODO abstract this away into a method like in MBTMojo
+	@GetMapping("/getFileContents")
+	public ModelTransformerResponse getFileContents(@RequestParam(value = "fileName") String fileName) {
+		String fileContents = "";
 		try {
-			mojo.mojoGoal(tag);
+			MojoGoal mojo = new ConvertCucumberToUML();
+			fileContents = mojo.getFileContents(fileName);
+		} catch (Exception e) {
+			return new ModelTransformerResponse("target/uml.pst", "", getStackTraceAsString(e));
+		}
+		return new ModelTransformerResponse(fileContents, "", "");
+	}
+
+	@GetMapping("/getFileList")
+	public ModelTransformerResponse getFileList() {
+		String fileList = "";
+		try {
+			MojoGoal mojo = new ConvertCucumberToUML();
 			for (String fileName : mojo.getFileList()) {
 				// TODO append to a string list for now but later make a proper JSON object
-				// TODO add uml file to the list too?
 				logger.info("File name: " + fileName);
+				fileList += "\n" + fileName;
 			}
+			fileList = fileList.replaceFirst("\n", "");
+		} catch (Exception e) {
+			return new ModelTransformerResponse("target/uml.pst", "", getStackTraceAsString(e));
+		}
+		return new ModelTransformerResponse(fileList, "", "");
+	}
+
+	@PostMapping("/cucumberToUMLMojo")
+	public ModelTransformerResponse cucumberToUMLMojo(@RequestParam(value = "tags", defaultValue = "") String tags) {
+		return mojoGoal(new ConvertCucumberToUML(), tags);
+	}
+
+	@PostMapping("/umlToCucumberMojo")
+	public ModelTransformerResponse umlToCucumberMojo(@RequestParam(value = "tags", defaultValue = "") String tags) {
+		return mojoGoal(new ConvertUMLToCucumber(), tags);
+	}
+
+	@PostMapping("/asciiDoctorToUMLMojo")
+	public ModelTransformerResponse asciiDoctorToUMLMojo(@RequestParam(value = "tags", defaultValue = "") String tags) {
+		return mojoGoal(new ConvertAsciidoctorToUML(), tags);
+	}
+
+	@PostMapping("/umlToAsciiDoctorMojo")
+	public ModelTransformerResponse umlToAsciiDoctorMojo(@RequestParam(value = "tags", defaultValue = "") String tags) {
+		return mojoGoal(new ConvertUMLToAsciidoctor(), tags);
+	}
+
+	private ModelTransformerResponse mojoGoal(MojoGoal mojo, String tags) {
+		try {
+			mojo.mojoGoal(tags);
 		} catch (Exception e) {
 			return new ModelTransformerResponse("target/uml.pst", "", getStackTraceAsString(e));
 		}
 		// TODO should probably return a model ID to later on be passed in. Perhaps use
 		// the tag in the name?
-		return new ModelTransformerResponse("target/uml.pst", "", "Transformation complete");
+		return new ModelTransformerResponse("target/uml.pst", "", "");
 	}
 
-	@PostMapping("/updateModelFromCucumber")
-	public ModelTransformerResponse updateModelFromCucumber(@RequestParam(value = "fileName") String fileName,
-			@RequestBody String content) {
+	@PostMapping("/addFile")
+	public ModelTransformerResponse addFile(@RequestParam(value = "fileName") String fileName,
+			@RequestBody String contents) {
 
-		mojo = new ConvertCucumberToUML();
 		try {
-			mojo.addFile(fileName, content);
+			MojoGoal mojo = new ConvertCucumberToUML();
+			mojo.addFile(fileName, contents);
 		} catch (Exception e) {
-			return new ModelTransformerResponse(fileName, content, getStackTraceAsString(e));
+			return new ModelTransformerResponse(fileName, contents, getStackTraceAsString(e));
 		}
-		return new ModelTransformerResponse(fileName, content, "");
+		return new ModelTransformerResponse(fileName, contents, "");
 	}
 
 	private String getStackTraceAsString(Exception e) {
@@ -71,7 +114,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 			logger.error("Temp directory doesn't exist");
 		} else {
 			logger.info("Temp directory does exist");
-			ConvertibleProject.baseDir = baseDir.getPath();
+			ConvertibleProject.baseDir = baseDir.getPath() + "/";
 		}
 	}
 

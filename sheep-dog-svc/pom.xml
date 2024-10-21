@@ -91,6 +91,12 @@
 			<artifactId>sheep-dog-dev</artifactId>
 			<version>${sheep-dog-dev.version}</version>
 		</dependency>
+		<!-- Need to dyanmically find classes, should replace with Spring -->
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>7.0.0</version>
+		</dependency>
 		<!-- Cucumber -->
 		<dependency>
 			<groupId>io.cucumber</groupId>
@@ -110,13 +116,6 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<!-- Need to dyanmically find classes, should replace with Spring -->
-		<dependency>
-			<groupId>com.google.inject</groupId>
-			<artifactId>guice</artifactId>
-			<version>7.0.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
