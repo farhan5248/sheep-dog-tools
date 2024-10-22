@@ -4,5 +4,5 @@ import java.util.HashMap;
 
 public interface GenerationAction {
 
-    public void transition();
+	public void transition();
 }

@@ -6,17 +6,17 @@ import io.cucumber.datatable.DataTable;
 
 public class XtextSuggestionDialogSteps {
 
-    @Given("^The suggestion dialog will be empty$")
-    public void theSuggestionDialogWillBeEmpty() {
-        XtextFactory.get("SuggestionDialog").setComponent("xtext");
-        XtextFactory.get("SuggestionDialog").setPath("suggestion");
-        XtextFactory.get("SuggestionDialog").assertInputOutputs("Empty");
-    }
-
     @Given("^The suggestion dialog will be set as follows$")
     public void theSuggestionDialogWillBeSetAsFollows(DataTable dataTable) {
         XtextFactory.get("SuggestionDialog").setComponent("xtext");
         XtextFactory.get("SuggestionDialog").setPath("suggestion");
         XtextFactory.get("SuggestionDialog").assertInputOutputs(dataTable);
+    }
+
+    @Given("^The suggestion dialog will be empty$")
+    public void theSuggestionDialogWillBeEmpty() {
+        XtextFactory.get("SuggestionDialog").setComponent("xtext");
+        XtextFactory.get("SuggestionDialog").setPath("suggestion");
+        XtextFactory.get("SuggestionDialog").assertInputOutputs("Empty");
     }
 }

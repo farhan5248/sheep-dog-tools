@@ -6,11 +6,11 @@ import io.cucumber.datatable.DataTable;
 
 public class XtextInputFileFeatureFileSteps {
 
-    @Given("^The src-gen-step-defs/daily batchjob/app/Input file.feature file is created as follows$")
-    public void theSrcGenStepDefsDailyBatchjobAppInputFileFeatureFileIsCreatedAsFollows(DataTable dataTable) {
+    @Given("^The src-gen-step-defs/daily batchjob/Input file.feature file will be created as follows$")
+    public void theSrcGenStepDefsDailyBatchjobInputFileFeatureFileWillBeCreatedAsFollows(DataTable dataTable) {
         XtextFactory.get("InputFileFeatureFile").setComponent("xtext");
-        XtextFactory.get("InputFileFeatureFile").setPath("src-gen-step-defs/daily batchjob/app/Input file.feature");
-        XtextFactory.get("InputFileFeatureFile").setInputOutputs(dataTable);
+        XtextFactory.get("InputFileFeatureFile").setPath("src-gen-step-defs/daily batchjob/Input file.feature");
+        XtextFactory.get("InputFileFeatureFile").assertInputOutputs(dataTable);
     }
 
     @Given("^The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows$")
@@ -20,10 +20,10 @@ public class XtextInputFileFeatureFileSteps {
         XtextFactory.get("InputFileFeatureFile").setInputOutputs(dataTable);
     }
 
-    @Given("^The src-gen-step-defs/daily batchjob/Input file.feature file will be created as follows$")
-    public void theSrcGenStepDefsDailyBatchjobInputFileFeatureFileWillBeCreatedAsFollows(DataTable dataTable) {
+    @Given("^The src-gen-step-defs/daily batchjob/app/Input file.feature file is created as follows$")
+    public void theSrcGenStepDefsDailyBatchjobAppInputFileFeatureFileIsCreatedAsFollows(DataTable dataTable) {
         XtextFactory.get("InputFileFeatureFile").setComponent("xtext");
-        XtextFactory.get("InputFileFeatureFile").setPath("src-gen-step-defs/daily batchjob/Input file.feature");
-        XtextFactory.get("InputFileFeatureFile").assertInputOutputs(dataTable);
+        XtextFactory.get("InputFileFeatureFile").setPath("src-gen-step-defs/daily batchjob/app/Input file.feature");
+        XtextFactory.get("InputFileFeatureFile").setInputOutputs(dataTable);
     }
 }
