@@ -7,7 +7,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
-public class Handler {
+public class TestSteps {
 
 	private ConfigurableApplicationContext cac = null;
 
