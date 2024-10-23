@@ -160,7 +160,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	public String getAbstractScenarioName(Section abstractScenario) {
-		return abstractScenario.getTitle();
+		return cleanup(abstractScenario.getTitle());
 	}
 
 	public ArrayList<String> getAbstractScenarioTags(StructuralNode testCaseOrTestSuite) {
@@ -205,7 +205,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	public String getExamplesName(Section example) {
-		return example.getTitle();
+		return cleanup(example.getTitle());
 	}
 
 	public ArrayList<ArrayList<String>> getExamplesRowList(Section examples) {
@@ -217,7 +217,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 				for (Row row : table.getBody()) {
 					cellList = new ArrayList<String>();
 					for (Cell cell : row.getCells()) {
-						cellList.add(cell.getText());
+						cellList.add(cleanup(cell.getText()));
 					}
 					rows.add(cellList);
 				}
@@ -232,7 +232,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 			if (block instanceof Table) {
 				Table table = (Table) block;
 				for (Cell cell : table.getHeader().getFirst().getCells()) {
-					header.add(cell.getText());
+					header.add(cleanup(cell.getText()));
 				}
 			}
 		}
@@ -240,7 +240,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	public String getFeatureName() {
-		return theDoc.getTitle();
+		return cleanup(theDoc.getTitle());
 	}
 
 	public ArrayList<String> getFeatureTags() {
@@ -281,7 +281,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	public String getStep(Section step) {
-		return step.getTitle();
+		return cleanup(step.getTitle());
 	}
 
 	public ArrayList<Section> getStepList(Section testCase) {
@@ -304,13 +304,13 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 				ArrayList<String> cellList = new ArrayList<String>();
 				stepTableRowList.add(cellList);
 				for (Cell cell : table.getHeader().getFirst().getCells()) {
-					cellList.add(cell.getText());
+					cellList.add(cleanup(cell.getText()));
 				}
 				for (int i = 0; i < table.getBody().size(); i++) {
 					cellList = new ArrayList<String>();
 					stepTableRowList.add(cellList);
 					for (Cell cell : table.getBody().get(i).getCells()) {
-						cellList.add(cell.getText());
+						cellList.add(cleanup(cell.getText()));
 					}
 				}
 				return stepTableRowList;
@@ -411,12 +411,16 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		}
 	}
 
+	private String cleanup(String text) {
+		return text.replace("&#8217;", "'");
+	}
+
 	private String docToString() {
 		String text = "";
 		if (theDoc.getAttribute("tags") != null) {
 			text += ":tags: " + theDoc.getAttribute("tags") + "\n";
 		}
-		text += "= " + theDoc.getTitle() + "\n";
+		text += "= " + cleanup(theDoc.getTitle()) + "\n";
 		for (StructuralNode sn : theDoc.getBlocks()) {
 			if (sn.getContext().contentEquals("preamble")) {
 				// feature description
@@ -439,7 +443,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 					text = text.replaceAll(",$", "");
 					text += "]\n";
 				}
-				text += "== " + section.getTitle() + "\n";
+				text += "== " + cleanup(section.getTitle()) + "\n";
 				for (StructuralNode ssn : section.getBlocks()) {
 					if (ssn instanceof Block) {
 						// scenario description
@@ -463,7 +467,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 							text = text.replaceAll(",$", "");
 							text += "]\n";
 						}
-						text += "=== " + step.getTitle() + "\n";
+						text += "=== " + cleanup(step.getTitle()) + "\n";
 						for (StructuralNode tsn : step.getBlocks()) {
 							if (tsn instanceof Table) {
 								// step data table or examples data table
@@ -472,12 +476,12 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 								text += "[options=\"header\"]\n";
 								text += "|===\n";
 								for (Cell c : t.getHeader().getFirst().getCells()) {
-									text += "| " + c.getText();
+									text += "| " + cleanup(c.getText());
 								}
 								text += "\n";
 								for (Row r : t.getBody()) {
 									for (Cell c : r.getCells()) {
-										text += "| " + c.getText();
+										text += "| " + cleanup(c.getText());
 									}
 									text += "\n";
 								}
