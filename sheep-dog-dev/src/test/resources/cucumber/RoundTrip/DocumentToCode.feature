@@ -24,7 +24,13 @@ Feature: Document To Code
           | 10| 5
           |===
           
-          === Then The Search application, Logout page is valid
+          === Then The Search application, Logout page is created as follows
+          
+          ----
+            text1
+            
+            text2
+          ----
           
           [tags="tag3"]
           == Story Two
@@ -78,7 +84,12 @@ Feature: Document To Code
                When The Search application, Home page is created as follows
                     | grp | ins |
                     | 10  | 5   |
-               Then The Search application, Logout page is valid
+               Then The Search application, Logout page is created as follows
+                    \"\"\"
+                      text1
+                    
+                      text2
+                    \"\"\"
           
             @tag3
             Scenario Outline: Story Two

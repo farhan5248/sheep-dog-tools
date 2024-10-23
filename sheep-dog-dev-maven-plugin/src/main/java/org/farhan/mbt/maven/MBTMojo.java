@@ -31,7 +31,9 @@ public abstract class MBTMojo extends AbstractMojo {
 		getLog().info("tag: " + tag);
 		getLog().info("srcDir: " + srcDir);
 		try {
-			ConvertibleProject.baseDir = "target/mbt/";
+			if (ConvertibleProject.baseDir.isEmpty()) {
+				ConvertibleProject.baseDir = "target/mbt/";
+			}
 			for (File aFile : Utilities.recursivelyListFiles(srcDir, "")) {
 				String contents = Utilities.readFile(aFile);
 				getLog().debug("contents: " + contents);
