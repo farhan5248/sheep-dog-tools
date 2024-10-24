@@ -66,3 +66,22 @@ Feature: UML Step Table To Document
           | Submit | Given The Object page is created as follows | v4, v5, v6 |
           | Submit | Given The Object page is created as follows | v7, v8, v9 |
 
+  Scenario: Escaped cell data
+
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+          """
+          Feature: Process
+          
+            Scenario: Submit
+              Given The Object page is created as follows
+                    | h1       |
+                    | \| v1 \| |
+          """
+     When The mbt-transformer plugin, cucumber-to-uml goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+      And The mbt-transformer plugin, Process.adoc file Scenarios Steps Step Table section will be created as follows
+          | Name   | Step                                        | Row          |
+          | Submit | Given The Object page is created as follows | h1           |
+          | Submit | Given The Object page is created as follows | \\\| v1 \\\| |
+

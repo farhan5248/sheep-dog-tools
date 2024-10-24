@@ -136,3 +136,22 @@ Feature: UML Step Table To Code
           | assertTopSectionH1 | keyMap         | HashMap<String,String> |
           | assertTopSectionH2 | keyMap         | HashMap<String,String> |
 
+  Scenario: Escaped cell data
+
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+          """
+          Feature: Process
+          
+            Scenario: Submit
+              Given The Object page is created as follows
+                    | h1       |
+                    | \| v1 \| |
+          """
+     When The mbt-transformer plugin, cucumber-to-uml goal is executed
+      And The mbt-transformer plugin, uml-to-cucumber goal is executed
+     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+      And The mbt-transformer plugin, Process.feature file Scenario Steps Data Table section will be created as follows
+          | Name   | Step                                        | Row                |
+          | Submit | Given The Object page is created as follows | \| h1 \|           |
+          | Submit | Given The Object page is created as follows | \| \\\| v1 \\\| \| |
+
