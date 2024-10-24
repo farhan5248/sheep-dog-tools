@@ -1,0 +1,99 @@
+:tags: sheep-dog-dev
+= UML Feature To Document
+
+== No tags, no statements
+
+=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+
+----
+Feature: Process
+----
+
+=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+
+=== And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+
+=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+
+=== And The mbt-transformer plugin, Process.adoc file Feature section will be created as follows
+
+[options="header"]
+|===
+| Name
+| Process
+|===
+
+== One tag, one statement
+
+=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+
+----
+@tag1
+Feature: Process
+  Desc line 1
+----
+
+=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+
+=== And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+
+=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+
+=== And The mbt-transformer plugin, Process.adoc file Feature section will be created as follows
+
+[options="header"]
+|===
+| Name| Tags| Statements
+| Process| tag1| Desc line 1
+|===
+
+== Two tags, two statements
+
+=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+
+----
+@tag1 @tag2
+Feature: Process
+  Desc line 1
+  Desc line 2
+----
+
+=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+
+=== And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+
+=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+
+=== And The mbt-transformer plugin, Process.adoc file Feature section will be created as follows
+
+[options="header"]
+|===
+| Name| Tags| Statements
+| Process| tag1,tag2| Desc line 1\nDesc line 2
+|===
+
+== Three tags, three statements
+
+=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+
+----
+@tag1 @tag2 @tag3
+Feature: Process
+  Desc line 1
+  Desc line 2
+  Desc line 3
+----
+
+=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+
+=== And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+
+=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+
+=== And The mbt-transformer plugin, Process.adoc file Feature section will be created as follows
+
+[options="header"]
+|===
+| Name| Tags| Statements
+| Process| tag1,tag2,tag3| Desc line 1\nDesc line 2\nDesc line 3
+|===
