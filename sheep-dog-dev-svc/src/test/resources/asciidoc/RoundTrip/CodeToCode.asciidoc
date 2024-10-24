@@ -1,14 +1,36 @@
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
 :tags: debug
 = Code To Code
 
-
-
 [background="true"]
-== Create a feature file
+== Background: Create a feature file
 
 The formatting of the data and example tables is intentionally different to make sure that the file is regenerated
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+==== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+
+The purpose of this step is to create a basic `feature` file. 
+
+[NOTE]
+====
+Also steps should have 4 equal signs. 
+Examples should have 3.
+====
+
+TIP: It works!
+
+IMPORTANT: Asciidoctor is awesome, don't forget!
+
+CAUTION: Don't forget to add the `...-caption` document attributes in the header of the document on GitHub.
+
+WARNING: You have no reason not to use Asciidoctor.
 
 ----
 @tag2 @tag3
@@ -46,7 +68,7 @@ Feature: This is a feature
           | v31 | v41 |
 ----
 
-=== And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows
+==== And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows
 
 ----
 package org.farhan.stepdefs.blah;
@@ -66,7 +88,7 @@ public class BlahObjectPageSteps {
 }
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed with
+==== When The mbt-transformer plugin, cucumber-to-uml goal is executed with
 
 [options="header"]
 |===
@@ -74,11 +96,11 @@ public class BlahObjectPageSteps {
 | tag1
 |===
 
-=== And The mbt-transformer plugin, uml-to-cucumber goal is executed
+==== And The mbt-transformer plugin, uml-to-cucumber goal is executed
 
 == Convert class to feature from graph
 
-=== Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be created as follows
+==== Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be created as follows
 
 ----
 @tag2 @tag3
@@ -116,7 +138,7 @@ Feature: This is a feature
           | v31 | v41 |
 ----
 
-=== And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
+==== And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
 
 ----
 package org.farhan.stepdefs.blah;
