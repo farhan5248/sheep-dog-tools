@@ -22,18 +22,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ModelTransformerController implements ApplicationListener<ApplicationReadyEvent> {
-	// TODO handle exceptions better in general
 
 	Logger logger = LoggerFactory.getLogger(ModelTransformerController.class);
 
 	@GetMapping("/getFileContents")
-	public ModelTransformerResponse getFileContents(@RequestParam(value = "fileName") String fileName) {
+	public ModelTransformerResponse getFileContents(@RequestParam(value = "tags", defaultValue = "") String tags,
+			@RequestParam(value = "fileName") String fileName) {
 		logger.info("Starting getFileContents");
 		logger.info("fileName:" + fileName);
 		String fileContents = "";
 		ModelTransformerResponse mtr;
 		try {
-			MojoGoal mojo = new ConvertCucumberToUML();
+			MojoGoal mojo = new ConvertCucumberToUML(tags);
 			fileContents = mojo.getFileContents(fileName);
 			mtr = new ModelTransformerResponse(fileName, fileContents);
 		} catch (Exception e) {
@@ -46,12 +46,12 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	}
 
 	@GetMapping("/getFileList")
-	public ModelTransformerResponse getFileList() {
+	public ModelTransformerResponse getFileList(@RequestParam(value = "tags", defaultValue = "") String tags) {
 		logger.info("Starting getFileList");
 		String fileList = "";
 		ModelTransformerResponse mtr;
 		try {
-			MojoGoal mojo = new ConvertCucumberToUML();
+			MojoGoal mojo = new ConvertCucumberToUML(tags);
 			for (String fileName : mojo.getFileList()) {
 				// TODO append to a string list for now but later make a proper JSON object
 				fileList += "\n" + fileName;
@@ -71,7 +71,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	public ModelTransformerResponse cucumberToUMLMojo(@RequestParam(value = "tags", defaultValue = "") String tags) {
 		logger.info("Starting cucumberToUMLMojo");
 		logger.info("tags:" + tags);
-		ModelTransformerResponse mtr = mojoGoal(new ConvertCucumberToUML(), tags);
+		ModelTransformerResponse mtr = mojoGoal(new ConvertCucumberToUML(tags));
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending getFileContents");
 		return mtr;
@@ -81,7 +81,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	public ModelTransformerResponse umlToCucumberMojo(@RequestParam(value = "tags", defaultValue = "") String tags) {
 		logger.info("Starting umlToCucumberMojo");
 		logger.info("tags:" + tags);
-		ModelTransformerResponse mtr = mojoGoal(new ConvertUMLToCucumber(), tags);
+		ModelTransformerResponse mtr = mojoGoal(new ConvertUMLToCucumber(tags));
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending umlToCucumberMojo");
 		return mtr;
@@ -91,7 +91,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	public ModelTransformerResponse asciiDoctorToUMLMojo(@RequestParam(value = "tags", defaultValue = "") String tags) {
 		logger.info("Starting asciiDoctorToUMLMojo");
 		logger.info("tags:" + tags);
-		ModelTransformerResponse mtr = mojoGoal(new ConvertAsciidoctorToUML(), tags);
+		ModelTransformerResponse mtr = mojoGoal(new ConvertAsciidoctorToUML(tags));
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending asciiDoctorToUMLMojo");
 		return mtr;
@@ -101,15 +101,15 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	public ModelTransformerResponse umlToAsciiDoctorMojo(@RequestParam(value = "tags", defaultValue = "") String tags) {
 		logger.info("Starting umlToAsciiDoctorMojo");
 		logger.info("tags:" + tags);
-		ModelTransformerResponse mtr = mojoGoal(new ConvertUMLToAsciidoctor(), tags);
+		ModelTransformerResponse mtr = mojoGoal(new ConvertUMLToAsciidoctor(tags));
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending umlToAsciiDoctorMojo");
 		return mtr;
 	}
 
-	private ModelTransformerResponse mojoGoal(MojoGoal mojo, String tags) {
+	private ModelTransformerResponse mojoGoal(MojoGoal mojo) {
 		try {
-			mojo.mojoGoal(tags);
+			mojo.mojoGoal();
 		} catch (Exception e) {
 			logger.error(getStackTraceAsString(e));
 		}
@@ -117,13 +117,13 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	}
 
 	@PostMapping("/addFile")
-	public ModelTransformerResponse addFile(@RequestParam(value = "fileName") String fileName,
-			@RequestBody String contents) {
+	public ModelTransformerResponse addFile(@RequestParam(value = "tags", defaultValue = "") String tags,
+			@RequestParam(value = "fileName") String fileName, @RequestBody String contents) {
 		logger.info("Starting addFile");
 		logger.info("fileName:" + fileName);
 		ModelTransformerResponse mtr;
 		try {
-			MojoGoal mojo = new ConvertCucumberToUML();
+			MojoGoal mojo = new ConvertCucumberToUML(tags);
 			mojo.addFile(fileName, contents);
 			mtr = new ModelTransformerResponse(fileName, contents);
 		} catch (Exception e) {

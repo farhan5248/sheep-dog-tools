@@ -39,6 +39,7 @@ public abstract class MBTMojo extends AbstractMojo {
 				getLog().debug("contents: " + contents);
 				String fileName = aFile.getAbsolutePath().replace(srcDir.getAbsolutePath() + "\\", "").replace("\\",
 						"/");
+				parameters.put("tag", tag);
 				parameters.put("fileName", fileName);
 				Utilities.sendPostRequest(host + "addFile", parameters, contents);
 			}
@@ -47,12 +48,15 @@ public abstract class MBTMojo extends AbstractMojo {
 				parameters.put("tags", tag);
 			}
 			Utilities.sendPostRequest(host + mojo, parameters, "");
+			parameters = new TreeMap<String, String>();
+			parameters.put("tag", tag);
 			String fileList = Utilities.sendGetRequest(host + "getFileList", new TreeMap<String, String>())
 					.getString("fileName");
 			getLog().debug("fileList: " + fileList);
 			if (!fileList.isBlank()) {
 				parameters = new TreeMap<String, String>();
 				for (String fileName : fileList.split("\n")) {
+					parameters.put("tag", tag);
 					parameters.put("fileName", fileName);
 					String contents = Utilities.sendGetRequest(host + "getFileContents", parameters)
 							.getString("content");

@@ -39,7 +39,7 @@ public abstract class MBTMojo extends AbstractMojo {
 				getLog().debug("contents: " + contents);
 				mojo.addFile(aFile.getAbsolutePath().replace(srcDir.getAbsolutePath(), ""), contents);
 			}
-			mojo.mojoGoal(tag);
+			mojo.mojoGoal();
 			for (String fileName : mojo.getFileList()) {
 				String contents = mojo.getFileContents(fileName);
 				getLog().debug("contents: " + contents);

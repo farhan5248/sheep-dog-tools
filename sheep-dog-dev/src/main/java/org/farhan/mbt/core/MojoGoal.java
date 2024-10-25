@@ -9,6 +9,10 @@ public abstract class MojoGoal {
 	protected ConvertibleProject srcPrj;
 	protected ConvertibleProject tgtPrj;
 
+	public MojoGoal(String tags) {
+		this.tags = tags;
+	}
+
 	protected abstract void convertFeature(ConvertibleObject co) throws Exception;
 
 	protected void convertFeatures() throws Exception {
@@ -23,8 +27,7 @@ public abstract class MojoGoal {
 
 	protected abstract void loadFeatures() throws Exception;
 
-	public void mojoGoal(String tags) throws Exception {
-		this.tags = tags;
+	public void mojoGoal() throws Exception {
 		initProjects();
 		loadFeatures();
 		convertFeatures();

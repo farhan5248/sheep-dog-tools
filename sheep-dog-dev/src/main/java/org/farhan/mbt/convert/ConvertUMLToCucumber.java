@@ -24,6 +24,10 @@ import org.farhan.helper.StepHelper;
 
 public class ConvertUMLToCucumber extends MojoGoal {
 
+	public ConvertUMLToCucumber(String tags) {
+		super(tags);
+	}
+
 	private String lastComponent = "InitialComponent";
 	private UMLClassWrapper srcObj;
 	private CucumberFeatureWrapper tgtObj;

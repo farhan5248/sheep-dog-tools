@@ -18,6 +18,10 @@ import org.farhan.mbt.uml.UMLProject;
 
 public class ConvertCucumberToUML extends MojoGoal {
 
+	public ConvertCucumberToUML(String tags) {
+		super(tags);
+	}
+
 	private CucumberFeatureWrapper srcObj;
 	private UMLClassWrapper tgtObj;
 

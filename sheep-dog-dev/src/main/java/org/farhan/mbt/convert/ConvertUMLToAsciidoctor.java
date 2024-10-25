@@ -15,6 +15,10 @@ import org.farhan.mbt.uml.UMLProject;
 
 public class ConvertUMLToAsciidoctor extends MojoGoal {
 
+	public ConvertUMLToAsciidoctor(String tags) {
+		super(tags);
+	}
+
 	private UMLClassWrapper srcObj;
 	private AsciiDoctorAdocWrapper tgtObj;
 

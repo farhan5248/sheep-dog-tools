@@ -13,6 +13,6 @@ import org.farhan.mbt.convert.ConvertAsciidoctorToUML;
 public class AsciiDoctorToUMLMojo extends MBTMojo {
 
 	public void execute() throws MojoExecutionException {
-		super.execute(new ConvertAsciidoctorToUML());
+		super.execute(new ConvertAsciidoctorToUML(tag));
 	}
 }

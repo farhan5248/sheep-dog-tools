@@ -3,7 +3,6 @@ package org.farhan.mbt.cucumber;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.eclipse.emf.common.util.EList;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.Utilities;
