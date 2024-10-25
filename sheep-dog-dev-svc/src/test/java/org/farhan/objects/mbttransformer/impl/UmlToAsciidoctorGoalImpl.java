@@ -6,6 +6,6 @@ import org.farhan.objects.mbttransformer.UmlToAsciidoctorGoal;
 public class UmlToAsciidoctorGoalImpl extends RestService implements UmlToAsciidoctorGoal {
 
 	public void transition() {
-		sendPostRequest("umlToAsciiDoctorMojo", "");
+		runGoal("umlToAsciiDoctorMojo");
 	}
 }

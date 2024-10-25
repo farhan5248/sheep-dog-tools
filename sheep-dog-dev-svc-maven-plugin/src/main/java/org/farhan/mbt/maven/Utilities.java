@@ -47,14 +47,14 @@ public class Utilities {
 		return response;
 	}
 
-	public static JSONObject sendGetRequest(String resource, Map<String, String> parameters) throws Exception {
-		HttpURLConnection connection = createRequest(resource, parameters, "GET");
+	public static JSONObject sendGetRequest(String url, Map<String, String> parameters) throws Exception {
+		HttpURLConnection connection = createRequest(url, parameters, "GET");
 		return new JSONObject(sendRequest(connection));
 	}
 
-	public static void sendPostRequest(String resource, Map<String, String> parameters, String payload)
+	public static void sendPostRequest(String url, Map<String, String> parameters, String payload)
 			throws Exception {
-		HttpURLConnection connection = createRequest(resource, parameters, "POST");
+		HttpURLConnection connection = createRequest(url, parameters, "POST");
 		DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
 		wr.write(payload.getBytes(StandardCharsets.UTF_8));
 		sendRequest(connection);

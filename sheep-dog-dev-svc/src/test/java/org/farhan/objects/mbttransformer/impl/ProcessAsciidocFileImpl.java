@@ -9,13 +9,13 @@ public class ProcessAsciidocFileImpl extends RestService implements ProcessAscii
 
 	@Override
 	public void assertContent(HashMap<String, String> keyMap) {
-		addParamter("fileName", keyValue.get("path").replaceFirst("src/test/", ""));
+		addParameter("fileName", keyValue.get("path").replaceFirst("src/test/", ""));
 		assertContent("getFileContents", keyMap.get("Content"));
 	}
 
 	@Override
 	public void setContent(HashMap<String, String> keyMap) {
-		addParamter("fileName", keyValue.get("path").replaceFirst("src/test/", ""));
+		addParameter("fileName", keyValue.get("path").replaceFirst("src/test/", ""));
 		setContent("addFile", keyMap.get("Content"));
 	}
 }
