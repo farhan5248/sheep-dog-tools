@@ -57,11 +57,11 @@ public abstract class TestObject {
 		return la;
 	}
 
-	protected String getSpecial(String key) {
-		if (key.contentEquals("empty")) {
+	protected String getSpecial(String value) {
+		if (value.contentEquals("empty")) {
 			return "";
 		} else {
-			return key;
+			return value;
 		}
 	}
 

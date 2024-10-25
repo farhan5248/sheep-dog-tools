@@ -70,3 +70,25 @@ Feature: Code Feature To UML
           | Class Name     | Comment                               |
           | specs::Process | Desc line 1\nDesc line 2\nDesc line 3 |
 
+  Scenario: Selected tags
+
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+          """
+          @tag1
+          Feature: Process
+          """
+      And The mbt-transformer plugin, src/test/resources/cucumber/app/Process.feature file is created as follows
+          """
+          @tag2
+          Feature: Process
+          """
+     When The mbt-transformer plugin, cucumber-to-uml goal is executed with
+          | Tags |
+          | tag1 |
+     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+      And The target/mbt/uml/pst.uml file Class section will be created as follows
+          | Class Name     |
+          | specs::Process |
+      But The target/mbt/uml/pst.uml file Class section won't be created as follows
+          | Class Name          |
+          | specs::app::Process |

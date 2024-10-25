@@ -161,3 +161,36 @@ Feature: Code Scenario Outline To UML
           | 2     |
           | 3     |
 
+  Scenario: Selected tags
+
+    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+          """
+          Feature: Process
+          
+            @tag1
+            Scenario Outline: Submit
+              Given The Object1 page is empty
+          
+              Examples: Examples 1
+                | h3  |
+                | v31 |
+
+            @tag2
+            Scenario Outline: Submit2
+              Given The Object1 page is empty
+          
+              Examples: Examples 1
+                | h3  |
+                | v31 |
+          """
+     When The mbt-transformer plugin, cucumber-to-uml goal is executed with
+          | Tags |
+          | tag1 |
+     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+      And The target/mbt/uml/pst.uml file Interaction section will be created as follows
+          | Interaction Name       |
+          | specs::Process::Submit |
+      But The target/mbt/uml/pst.uml file Interaction section won't be created as follows
+          | Interaction Name        |
+          | specs::Process::Submit2 |
+

@@ -38,6 +38,10 @@ public abstract class UMLFileObject extends FileObject {
 		Assertions.assertTrue(getObject(className) != null, "Class " + className + " doesn't exist");
 	}
 
+	protected void assertClassNotExists(String className) {
+		Assertions.assertFalse(getObject(className) != null, "Class " + className + " does exist");
+	}
+
 	protected void assertClassInteractionExists(String className, String interactionName) {
 		assertClassExists(className);
 		Assertions.assertTrue(getObject(className).getOwnedBehavior(interactionName) != null,
@@ -69,7 +73,11 @@ public abstract class UMLFileObject extends FileObject {
 	protected void assertInteractionExists(String interactionName) {
 		Assertions.assertTrue(getInteraction(interactionName) != null,
 				"Interaction " + interactionName + " doesn't exist");
+	}
 
+	protected void assertInteractionNotExists(String interactionName) {
+		Assertions.assertFalse(getInteraction(interactionName) != null,
+				"Interaction " + interactionName + " does exist");
 	}
 
 	protected void assertInteractionMessageAnnotationDetailExists(String interactionName, String messageName,

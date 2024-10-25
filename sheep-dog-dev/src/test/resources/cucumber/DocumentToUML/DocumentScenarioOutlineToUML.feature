@@ -228,3 +228,48 @@ Feature: Document Scenario Outline To UML
           | 2     |
           | 3     |
 
+  Scenario: Selected tags
+
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+          """
+          = Process
+          
+          [tags="tag1"]
+          == Submit
+          
+          === Given The Object1 page is empty
+          
+          [examples="true"]
+          === Examples 1
+          
+          [options="header"]
+          |===
+          | h3
+          | v31
+          |===
+
+          [tags="tag2"]
+          == Submit2
+          
+          === Given The Object1 page is empty
+
+          [examples="true"]
+          === Examples 1
+          
+          [options="header"]
+          |===
+          | h3
+          | v31
+          |===
+          """
+     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
+          | Tags |
+          | tag1 |
+     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+      And The target/mbt/uml/pst.uml file Interaction section will be created as follows
+          | Interaction Name       |
+          | specs::Process::Submit |
+      But The target/mbt/uml/pst.uml file Interaction section won't be created as follows
+          | Interaction Name        |
+          | specs::Process::Submit2 |
+

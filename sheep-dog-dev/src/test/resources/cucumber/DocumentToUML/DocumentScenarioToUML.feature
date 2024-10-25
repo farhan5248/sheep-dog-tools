@@ -52,6 +52,7 @@ Feature: Document Scenario To UML
           Desc line 2
           
           === Given The Object1 page is empty
+          
           === Given The Object2 page is empty
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
@@ -82,6 +83,7 @@ Feature: Document Scenario To UML
           Desc line 3
           
           === Given The Object1 page is empty
+          
           === Given The Object2 page is empty
           
           === Given The Object3 page is empty
@@ -102,3 +104,29 @@ Feature: Document Scenario To UML
           | specs::Process::Submit | The Object2 page is empty |
           | specs::Process::Submit | The Object3 page is empty |
 
+  Scenario: Selected tags
+
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+          """
+          = Process
+          
+          [tags="tag1"]
+          == Submit
+          
+          === Given The Object1 page is empty
+          
+          [tags="tag2"]
+          == Submit2
+          
+          === Given The Object1 page is empty
+          """
+     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
+          | Tags |
+          | tag1 |
+     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+      And The target/mbt/uml/pst.uml file Interaction section will be created as follows
+          | Interaction Name       |
+          | specs::Process::Submit |
+      But The target/mbt/uml/pst.uml file Interaction section won't be created as follows
+          | Interaction Name        |
+          | specs::Process::Submit2 |

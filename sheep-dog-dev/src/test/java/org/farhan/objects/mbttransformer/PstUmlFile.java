@@ -35,4 +35,6 @@ public interface PstUmlFile {
     public void assertClassCommentsSectionClassName(HashMap<String, String> keyMap);
 
     public void assertClassCommentsSectionComment(HashMap<String, String> keyMap);
+
+    public void assertInteractionSectionInteractionName(HashMap<String, String> keyMap);
 }

@@ -54,4 +54,25 @@ public class MbtTransformerPstUmlFileSteps {
         MbtTransformerFactory.get("PstUmlFile").setPath("target/mbt/uml/pst.uml");
         MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "ClassCommentsSection");
     }
+
+    @Given("^The target/mbt/uml/pst.uml file Class section won't be created as follows$")
+    public void theTargetMbtUmlPstUmlFileClassSectionWontBeCreatedAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("PstUmlFile").setPath("target/mbt/uml/pst.uml");
+        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "ClassSection", true);
+    }
+
+    @Given("^The target/mbt/uml/pst.uml file Interaction section will be created as follows$")
+    public void theTargetMbtUmlPstUmlFileInteractionSectionWillBeCreatedAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("PstUmlFile").setPath("target/mbt/uml/pst.uml");
+        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "InteractionSection");
+    }
+
+    @Given("^The target/mbt/uml/pst.uml file Interaction section won't be created as follows$")
+    public void theTargetMbtUmlPstUmlFileInteractionSectionWontBeCreatedAsFollows(DataTable dataTable) {
+        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("PstUmlFile").setPath("target/mbt/uml/pst.uml");
+        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "InteractionSection");
+    }
 }

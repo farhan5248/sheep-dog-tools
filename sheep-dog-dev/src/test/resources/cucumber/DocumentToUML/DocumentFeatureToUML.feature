@@ -79,3 +79,25 @@ Feature: Document Feature To UML
           | Class Name     | Comment                               |
           | specs::Process | Desc line 1\nDesc line 2\nDesc line 3 |
 
+  Scenario: Selected tags
+
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+          """
+          :tags: tag1
+          = Process
+          """
+      And The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.adoc file is created as follows
+          """
+          :tags: tag2
+          = Process
+          """
+     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
+          | Tags |
+          | tag1 |
+     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+      And The target/mbt/uml/pst.uml file Class section will be created as follows
+          | Class Name     |
+          | specs::Process |
+      But The target/mbt/uml/pst.uml file Class section won't be created as follows
+          | Class Name          |
+          | specs::app::Process |

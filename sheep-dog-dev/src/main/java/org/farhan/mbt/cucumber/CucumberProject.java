@@ -21,11 +21,24 @@ public class CucumberProject extends ConvertibleProject {
 	}
 
 	@Override
-	public String getFileExt(String layer) {
-		if (layer.contentEquals(FIRST_LAYER)) {
-			return ".feature";
+	public ConvertibleObject createObject(String name) {
+		ConvertibleObject aConvertibleObject = getObject(name);
+		if (aConvertibleObject != null) {
+			return aConvertibleObject;
+		}
+		File file = new File(name);
+		if (file.getAbsolutePath().endsWith(getFileExt(FIRST_LAYER))) {
+			aConvertibleObject = new CucumberFeatureWrapper(file);
+			firstLayerObjects.add(aConvertibleObject);
+			return aConvertibleObject;
 		} else {
-			return ".java";
+			aConvertibleObject = new CucumberJavaWrapper(file);
+			if (file.getAbsolutePath().contains(SECOND_LAYER)) {
+				secondLayerObjects.add(aConvertibleObject);
+			} else {
+				thirdLayerObjects.add(aConvertibleObject);
+			}
+			return aConvertibleObject;
 		}
 	}
 
@@ -48,55 +61,11 @@ public class CucumberProject extends ConvertibleProject {
 	}
 
 	@Override
-	public ArrayList<ConvertibleObject> getObjects(String layer) {
-
-		ArrayList<ConvertibleObject> layerObjects = null;
-		switch (layer) {
-		case FIRST_LAYER:
-			layerObjects = firstLayerObjects;
-			break;
-		case SECOND_LAYER:
-			layerObjects = secondLayerObjects;
-			break;
-		case THIRD_LAYER:
-			layerObjects = thirdLayerObjects;
-			break;
-		}
-		return layerObjects;
-	}
-
-	@Override
-	public void save() throws Exception {
-		for (ConvertibleObject cf : firstLayerObjects) {
-			cf.save();
-		}
-		for (ConvertibleObject cf : secondLayerObjects) {
-			cf.save();
-		}
-		for (ConvertibleObject cf : thirdLayerObjects) {
-			cf.save();
-		}
-	}
-
-	@Override
-	public ConvertibleObject createObject(String name) {
-		ConvertibleObject aConvertibleObject = getObject(name);
-		if (aConvertibleObject != null) {
-			return aConvertibleObject;
-		}
-		File file = new File(name);
-		if (file.getAbsolutePath().endsWith(getFileExt(FIRST_LAYER))) {
-			aConvertibleObject = new CucumberFeatureWrapper(file);
-			firstLayerObjects.add(aConvertibleObject);
-			return aConvertibleObject;
+	public String getFileExt(String layer) {
+		if (layer.contentEquals(FIRST_LAYER)) {
+			return ".feature";
 		} else {
-			aConvertibleObject = new CucumberJavaWrapper(file);
-			if (file.getAbsolutePath().contains(SECOND_LAYER)) {
-				secondLayerObjects.add(aConvertibleObject);
-			} else {
-				thirdLayerObjects.add(aConvertibleObject);
-			}
-			return aConvertibleObject;
+			return ".java";
 		}
 	}
 
@@ -126,6 +95,56 @@ public class CucumberProject extends ConvertibleProject {
 		return null;
 	}
 
+	@Override
+	public ArrayList<ConvertibleObject> getObjects(String layer) {
+
+		ArrayList<ConvertibleObject> layerObjects = null;
+		switch (layer) {
+		case FIRST_LAYER:
+			layerObjects = firstLayerObjects;
+			break;
+		case SECOND_LAYER:
+			layerObjects = secondLayerObjects;
+			break;
+		case THIRD_LAYER:
+			layerObjects = thirdLayerObjects;
+			break;
+		}
+		return layerObjects;
+	}
+
+	private boolean isFileSelected(ConvertibleObject convertibleFile, String tag) throws Exception {
+
+		CucumberFeatureWrapper ufw = (CucumberFeatureWrapper) convertibleFile;
+		if (isTagged(ufw.getFeatureTags(), tag)) {
+			return true;
+		}
+		for (AbstractScenario a : ufw.getAbstractScenarioList()) {
+			if (ufw.isScenarioOutline(a)) {
+				if (isTagged(ufw.getScenarioOutlineTags(a), tag)) {
+					return true;
+				}
+			} else if (!ufw.isBackground(a)) {
+				if (isTagged(ufw.getScenarioTags(a), tag)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean isTagged(ArrayList<String> tags, String tag) {
+		if (tag.isEmpty()) {
+			return true;
+		}
+		for (String t : tags) {
+			if (t.trim().contentEquals(tag)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void load(String tags) throws Exception {
 		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(ConvertibleProject.FIRST_LAYER),
 				getFileExt(ConvertibleProject.FIRST_LAYER));
@@ -137,38 +156,17 @@ public class CucumberProject extends ConvertibleProject {
 		}
 	}
 
-	private boolean isFileSelected(ConvertibleObject convertibleFile, String tag) throws Exception {
-
-		CucumberFeatureWrapper ufw = (CucumberFeatureWrapper) convertibleFile;
-		// TODO use getFeatureTags and remove get()
-		Feature f = (Feature) ufw.get();
-		if (isTagged(f.getTags(), tag)) {
-			return true;
+	@Override
+	public void save() throws Exception {
+		for (ConvertibleObject cf : firstLayerObjects) {
+			cf.save();
 		}
-		for (AbstractScenario a : f.getAbstractScenarios()) {
-			if (a instanceof Scenario) {
-				if (isTagged(((Scenario) a).getTags(), tag)) {
-					return true;
-				}
-			} else if (a instanceof ScenarioOutline) {
-				if (isTagged(((ScenarioOutline) a).getTags(), tag)) {
-					return true;
-				}
-			}
+		for (ConvertibleObject cf : secondLayerObjects) {
+			cf.save();
 		}
-		return false;
-	}
-
-	private boolean isTagged(EList<Tag> tags, String tag) {
-		if (tag.isEmpty()) {
-			return true;
+		for (ConvertibleObject cf : thirdLayerObjects) {
+			cf.save();
 		}
-		for (Tag t : tags) {
-			if (t.getName().trim().contentEquals(tag)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 }

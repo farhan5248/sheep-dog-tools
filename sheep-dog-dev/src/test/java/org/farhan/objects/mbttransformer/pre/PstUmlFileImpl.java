@@ -23,6 +23,10 @@ public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 		assertClassExists(keyMap.get("Class Name"));
 	}
 
+	public void assertClassSectionClassNameNegative(HashMap<String, String> keyMap) {
+		assertClassNotExists(keyMap.get("Class Name"));
+	}
+
 	public void assertClassClassName(HashMap<String, String> keyMap) {
 		assertClassExists(keyMap.get("Class Name"));
 	}
@@ -97,6 +101,15 @@ public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 
 	public void setPath(String path) {
 		keyValue.put("path", path);
+	}
+
+	@Override
+	public void assertInteractionSectionInteractionName(HashMap<String, String> keyMap) {
+		assertInteractionExists(keyMap.get("Interaction Name"));
+	}
+
+	public void assertInteractionSectionInteractionNameNegative(HashMap<String, String> keyMap) {
+		assertInteractionNotExists(keyMap.get("Interaction Name"));
 	}
 
 }
