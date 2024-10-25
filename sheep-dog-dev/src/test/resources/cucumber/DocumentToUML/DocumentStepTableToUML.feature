@@ -3,7 +3,7 @@ Feature: Document Step Table To UML
 
   Scenario: One row, one cell
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Process
           
@@ -26,7 +26,7 @@ Feature: Document Step Table To UML
 
   Scenario: Two rows, two cells
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Process
           
@@ -51,7 +51,7 @@ Feature: Document Step Table To UML
 
   Scenario: Three rows, three cells
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Process
           
@@ -78,7 +78,7 @@ Feature: Document Step Table To UML
 
   Scenario: Escaped cell data
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Process
           

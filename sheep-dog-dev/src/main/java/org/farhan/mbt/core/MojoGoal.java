@@ -64,7 +64,7 @@ public abstract class MojoGoal {
 		for (File aFile : Utilities.recursivelyListFiles(baseDir, ".feature")) {
 			generatedFiles.add(aFile.getAbsolutePath().replace(baseDir.getAbsolutePath(), ""));
 		}
-		for (File aFile : Utilities.recursivelyListFiles(baseDir, ".adoc")) {
+		for (File aFile : Utilities.recursivelyListFiles(baseDir, ".asciidoc")) {
 			generatedFiles.add(aFile.getAbsolutePath().replace(baseDir.getAbsolutePath(), ""));
 		}
 		return generatedFiles;

@@ -3,7 +3,7 @@ Feature: Document To Code
 
   Scenario: Create a feature file from adoc file
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.adoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
           """
           :tags: tag1
           = Process

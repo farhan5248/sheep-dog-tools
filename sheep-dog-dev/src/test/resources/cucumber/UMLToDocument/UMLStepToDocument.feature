@@ -18,8 +18,8 @@ Feature: UML Step To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-      And The mbt-transformer plugin, Process.adoc file Scenarios Steps section will be created as follows
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                           |
           | Submit | Given The Object page is empty |
           | Submit | When The Object page is empty  |
@@ -40,8 +40,8 @@ Feature: UML Step To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-      And The mbt-transformer plugin, Process.adoc file Scenarios Steps section will be created as follows
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
           | Name     | Step                              |
           | Submit's | Given The Object page isn't empty |
 

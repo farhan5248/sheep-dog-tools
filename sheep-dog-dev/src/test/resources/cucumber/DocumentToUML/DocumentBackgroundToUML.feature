@@ -3,7 +3,7 @@ Feature: Document Background To UML
 
   Scenario: No statement, one step, one scenario
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Process
           
@@ -25,7 +25,7 @@ Feature: Document Background To UML
 
   Scenario: No statement, two steps, one scenario
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Process
           
@@ -49,7 +49,7 @@ Feature: Document Background To UML
 
   Scenario: No statement, three steps, one scenario
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Process
           
@@ -75,7 +75,7 @@ Feature: Document Background To UML
 
   Scenario: One statement, one step, one scenario
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Process
           
@@ -98,7 +98,7 @@ Feature: Document Background To UML
 
   Scenario: No statement, one step, two scenarios
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Process
           
@@ -125,7 +125,7 @@ Feature: Document Background To UML
 
   Scenario: No statement, one step, three scenarios
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Process
           

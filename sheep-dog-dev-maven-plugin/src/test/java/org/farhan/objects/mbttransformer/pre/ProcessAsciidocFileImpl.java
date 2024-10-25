@@ -3,9 +3,9 @@ package org.farhan.objects.mbttransformer.pre;
 import java.util.HashMap;
 
 import org.farhan.common.FileObject;
-import org.farhan.objects.mbttransformer.ProcessAdocFile;
+import org.farhan.objects.mbttransformer.ProcessAsciidocFile;
 
-public class ProcessAdocFileImpl extends FileObject implements ProcessAdocFile {
+public class ProcessAsciidocFileImpl extends FileObject implements ProcessAsciidocFile {
 
 	@Override
 	public void assertContent(HashMap<String, String> keyMap) {

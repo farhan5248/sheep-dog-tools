@@ -3,7 +3,7 @@
 
 == No tags, no statements
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Process
@@ -23,7 +23,7 @@
 
 == One tag, one statement
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 :tags: tag1
@@ -56,7 +56,7 @@ Desc line 1
 
 == Two tags, two statements
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 :tags: tag1,tag2
@@ -91,7 +91,7 @@ Desc line 2
 
 == Three tags, three statements
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 :tags: tag1,tag2,tag3
@@ -124,4 +124,46 @@ Desc line 3
 |===
 | Class Name| Comment
 | specs::Process| Desc line 1\nDesc line 2\nDesc line 3
+|===
+
+== Selected tags
+
+=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+
+----
+:tags: tag1
+= Process
+----
+
+=== And The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
+
+----
+:tags: tag2
+= Process
+----
+
+=== When The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
+
+[options="header"]
+|===
+| Tags
+| tag1
+|===
+
+=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+
+=== And The target/mbt/uml/pst.uml file Class section will be created as follows
+
+[options="header"]
+|===
+| Class Name
+| specs::Process
+|===
+
+=== But The target/mbt/uml/pst.uml file Class section won't be created as follows
+
+[options="header"]
+|===
+| Class Name
+| specs::app::Process
 |===

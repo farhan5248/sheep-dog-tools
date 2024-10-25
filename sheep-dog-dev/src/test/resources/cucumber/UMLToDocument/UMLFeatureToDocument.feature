@@ -9,8 +9,8 @@ Feature: UML Feature To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-      And The mbt-transformer plugin, Process.adoc file Feature section will be created as follows
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The mbt-transformer plugin, Process.asciidoc file Feature section will be created as follows
           | Name    |
           | Process |
 
@@ -24,8 +24,8 @@ Feature: UML Feature To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-      And The mbt-transformer plugin, Process.adoc file Feature section will be created as follows
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The mbt-transformer plugin, Process.asciidoc file Feature section will be created as follows
           | Name    | Tags | Statements  |
           | Process | tag1 | Desc line 1 |
 
@@ -40,8 +40,8 @@ Feature: UML Feature To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-      And The mbt-transformer plugin, Process.adoc file Feature section will be created as follows
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The mbt-transformer plugin, Process.asciidoc file Feature section will be created as follows
           | Name    | Tags      | Statements               |
           | Process | tag1,tag2 | Desc line 1\nDesc line 2 |
 
@@ -57,8 +57,8 @@ Feature: UML Feature To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-      And The mbt-transformer plugin, Process.adoc file Feature section will be created as follows
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The mbt-transformer plugin, Process.asciidoc file Feature section will be created as follows
           | Name    | Tags           | Statements                            |
           | Process | tag1,tag2,tag3 | Desc line 1\nDesc line 2\nDesc line 3 |
 

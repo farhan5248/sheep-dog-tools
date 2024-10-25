@@ -14,8 +14,8 @@ Feature: UML Step Table To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-      And The mbt-transformer plugin, Process.adoc file Scenarios Steps Step Table section will be created as follows
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps Step Table section will be created as follows
           | Name   | Step                                        | Row |
           | Submit | Given The Object page is created as follows | h1  |
           | Submit | Given The Object page is created as follows | v1  |
@@ -35,8 +35,8 @@ Feature: UML Step Table To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-      And The mbt-transformer plugin, Process.adoc file Scenarios Steps Step Table section will be created as follows
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps Step Table section will be created as follows
           | Name   | Step                                        | Row    |
           | Submit | Given The Object page is created as follows | h1, h2 |
           | Submit | Given The Object page is created as follows | v1, v2 |
@@ -58,8 +58,8 @@ Feature: UML Step Table To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-      And The mbt-transformer plugin, Process.adoc file Scenarios Steps Step Table section will be created as follows
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps Step Table section will be created as follows
           | Name   | Step                                        | Row        |
           | Submit | Given The Object page is created as follows | h1, h2, h3 |
           | Submit | Given The Object page is created as follows | v1, v2, v3 |
@@ -79,8 +79,8 @@ Feature: UML Step Table To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-      And The mbt-transformer plugin, Process.adoc file Scenarios Steps Step Table section will be created as follows
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps Step Table section will be created as follows
           | Name   | Step                                        | Row          |
           | Submit | Given The Object page is created as follows | h1           |
           | Submit | Given The Object page is created as follows | \\\| v1 \\\| |

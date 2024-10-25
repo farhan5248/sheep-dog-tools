@@ -2,7 +2,7 @@ package org.farhan.objects.mbttransformer;
 
 import java.util.HashMap;
 
-public interface ProcessAdocFile {
+public interface ProcessAsciidocFile {
 
     public void assertContent(HashMap<String, String> keyMap);
 

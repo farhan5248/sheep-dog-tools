@@ -8,8 +8,6 @@ import org.asciidoctor.ast.Section;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.Utilities;
-import org.farhan.mbt.cucumber.Scenario;
-import org.farhan.mbt.cucumber.ScenarioOutline;
 
 public class AsciiDoctorProject extends ConvertibleProject {
 
@@ -37,7 +35,7 @@ public class AsciiDoctorProject extends ConvertibleProject {
 
 	@Override
 	public String getFileExt(String layer) {
-		return ".adoc";
+		return ".asciidoc";
 	}
 
 	@Override

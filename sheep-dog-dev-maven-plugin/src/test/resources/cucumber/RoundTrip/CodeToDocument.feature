@@ -43,7 +43,7 @@ Feature: Code To Document
           | Tags |
           | tag1 |
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.adoc file will be created as follows
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows
           """
           :tags: tag1
           = Process

@@ -92,3 +92,4 @@ Feature: Code Feature To UML
       But The target/mbt/uml/pst.uml file Class section won't be created as follows
           | Class Name          |
           | specs::app::Process |
+

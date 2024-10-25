@@ -130,3 +130,4 @@ Feature: Code Scenario To UML
       But The target/mbt/uml/pst.uml file Interaction section won't be created as follows
           | Interaction Name        |
           | specs::Process::Submit2 |
+

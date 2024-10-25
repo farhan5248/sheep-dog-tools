@@ -18,11 +18,11 @@ Feature: UML Scenario Outline To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-      And The mbt-transformer plugin, Process.adoc file Scenarios Steps section will be created as follows
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                                        |
           | Submit | Given The Object page is created as follows |
-      And The mbt-transformer plugin, Process.adoc file Scenario Outline Examples Table section will be created as follows
+      And The mbt-transformer plugin, Process.asciidoc file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row |
           | Submit | Examples 1 | h3  |
           | Submit | Examples 1 | v31 |
@@ -46,8 +46,8 @@ Feature: UML Scenario Outline To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-      And The mbt-transformer plugin, Process.adoc file Scenarios section will be created as follows
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The mbt-transformer plugin, Process.asciidoc file Scenarios section will be created as follows
           | Name   | Tags | Description |
           | Submit | tag1 | Desc line 1 |
 
@@ -78,15 +78,15 @@ Feature: UML Scenario Outline To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-      And The mbt-transformer plugin, Process.adoc file Scenarios section will be created as follows
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The mbt-transformer plugin, Process.asciidoc file Scenarios section will be created as follows
           | Name   | Tags      | Description              |
           | Submit | tag1,tag2 | Desc line 1\nDesc line 2 |
-      And The mbt-transformer plugin, Process.adoc file Scenarios Steps section will be created as follows
+      And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                                         |
           | Submit | Given The Object1 page is created as follows |
           | Submit | Given The Object2 page is created as follows |
-      And The mbt-transformer plugin, Process.adoc file Scenario Outline Examples Table section will be created as follows
+      And The mbt-transformer plugin, Process.asciidoc file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row |
           | Submit | Examples 1 | h3  |
           | Submit | Examples 1 | v31 |
@@ -128,16 +128,16 @@ Feature: UML Scenario Outline To Document
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
-      And The mbt-transformer plugin, Process.adoc file Scenarios section will be created as follows
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The mbt-transformer plugin, Process.asciidoc file Scenarios section will be created as follows
           | Name   | Tags           | Description                           |
           | Submit | tag1,tag2,tag3 | Desc line 1\nDesc line 2\nDesc line 3 |
-      And The mbt-transformer plugin, Process.adoc file Scenarios Steps section will be created as follows
+      And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                                         |
           | Submit | Given The Object1 page is created as follows |
           | Submit | Given The Object2 page is created as follows |
           | Submit | Given The Object3 page is created as follows |
-      And The mbt-transformer plugin, Process.adoc file Scenario Outline Examples Table section will be created as follows
+      And The mbt-transformer plugin, Process.asciidoc file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row |
           | Submit | Examples 1 | h3  |
           | Submit | Examples 1 | v31 |

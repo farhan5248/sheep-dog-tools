@@ -3,7 +3,7 @@ Feature: Document DocString To UML
 
   Scenario: One line
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Process
           
