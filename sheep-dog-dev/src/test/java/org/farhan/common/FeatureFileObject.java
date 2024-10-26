@@ -61,7 +61,7 @@ public class FeatureFileObject extends FileObject {
 
 	protected void assertObjectExists() {
 		super.assertObjectExists();
-		project = new CucumberProject();
+		project = new CucumberProject("");
 		try {
 			wrapper = (CucumberFeatureWrapper) project.createObject(getFile().getAbsolutePath());
 			wrapper.load();

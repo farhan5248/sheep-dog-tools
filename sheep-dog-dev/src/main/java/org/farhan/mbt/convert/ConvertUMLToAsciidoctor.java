@@ -113,13 +113,13 @@ public class ConvertUMLToAsciidoctor extends MojoGoal {
 
 	@Override
 	public void initProjects() throws Exception {
-		srcPrj = new UMLProject();
-		tgtPrj = new AsciiDoctorProject();
+		srcPrj = new UMLProject(this.tags);
+		tgtPrj = new AsciiDoctorProject(this.tags);
 	}
 
 	@Override
 	protected void loadFeatures() throws Exception {
-		srcPrj.load(this.tags);
+		srcPrj.load();
 	}
 
 	@Override

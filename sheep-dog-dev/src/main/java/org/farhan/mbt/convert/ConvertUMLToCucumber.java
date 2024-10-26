@@ -184,13 +184,13 @@ public class ConvertUMLToCucumber extends MojoGoal {
 	@Override
 	public void initProjects() throws Exception {
 
-		srcPrj = new UMLProject();
-		tgtPrj = new CucumberProject();
+		srcPrj = new UMLProject(this.tags);
+		tgtPrj = new CucumberProject(this.tags);
 	}
 
 	@Override
 	protected void loadFeatures() throws Exception {
-		srcPrj.load(this.tags);
+		srcPrj.load();
 	}
 
 	@Override

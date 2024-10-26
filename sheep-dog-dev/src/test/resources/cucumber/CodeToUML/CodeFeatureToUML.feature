@@ -86,10 +86,10 @@ Feature: Code Feature To UML
           | Tags |
           | tag1 |
      Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
-      And The target/mbt/uml/pst.uml file Class section will be created as follows
+      And The target/mbt/tag1/uml/pst.uml file Class section will be created as follows
           | Class Name     |
           | specs::Process |
-      But The target/mbt/uml/pst.uml file Class section won't be created as follows
+      But The target/mbt/tag1/uml/pst.uml file Class section won't be created as follows
           | Class Name          |
           | specs::app::Process |
 

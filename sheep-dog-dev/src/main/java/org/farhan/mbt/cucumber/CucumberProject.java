@@ -13,10 +13,11 @@ public class CucumberProject extends ConvertibleProject {
 	private ArrayList<ConvertibleObject> secondLayerObjects;
 	private ArrayList<ConvertibleObject> thirdLayerObjects;
 
-	public CucumberProject() {
+	public CucumberProject(String tag) {
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
 		secondLayerObjects = new ArrayList<ConvertibleObject>();
 		thirdLayerObjects = new ArrayList<ConvertibleObject>();
+		this.tag = tag;
 	}
 
 	@Override
@@ -46,13 +47,13 @@ public class CucumberProject extends ConvertibleProject {
 		File aFile = null;
 		switch (layer) {
 		case FIRST_LAYER:
-			aFile = new File(baseDir + "resources/cucumber");
+			aFile = new File(baseDir + tag + "/" + "resources/cucumber");
 			break;
 		case SECOND_LAYER:
-			aFile = new File(baseDir + "java/org/farhan/" + SECOND_LAYER);
+			aFile = new File(baseDir + tag + "/" + "java/org/farhan/" + SECOND_LAYER);
 			break;
 		case THIRD_LAYER:
-			aFile = new File(baseDir + "java/org/farhan/" + THIRD_LAYER);
+			aFile = new File(baseDir + tag + "/" + "java/org/farhan/" + THIRD_LAYER);
 			break;
 		}
 		aFile.mkdirs();
@@ -144,12 +145,13 @@ public class CucumberProject extends ConvertibleProject {
 		return false;
 	}
 
-	public void load(String tags) throws Exception {
+	@Override
+	public void load() throws Exception {
 		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(ConvertibleProject.FIRST_LAYER),
 				getFileExt(ConvertibleProject.FIRST_LAYER));
 		for (File f : files) {
 			createObject(f.getAbsolutePath()).load();
-			if (!isFileSelected(getObjects(ConvertibleProject.FIRST_LAYER).getLast(), tags)) {
+			if (!isFileSelected(getObjects(ConvertibleProject.FIRST_LAYER).getLast(), this.tag)) {
 				getObjects(ConvertibleProject.FIRST_LAYER).removeLast();
 			}
 		}

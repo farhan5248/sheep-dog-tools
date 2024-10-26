@@ -55,12 +55,12 @@ public abstract class MojoGoal {
 	}
 
 	public void addFile(String fileName, String contents) throws Exception {
-		Utilities.writeFile(new File(ConvertibleProject.baseDir + fileName), contents);
+		Utilities.writeFile(new File(ConvertibleProject.baseDir + this.tags + "/" + fileName), contents);
 	}
 
 	public ArrayList<String> getFileList() {
 		ArrayList<String> generatedFiles = new ArrayList<String>();
-		File baseDir = new File(ConvertibleProject.baseDir);
+		File baseDir = new File(ConvertibleProject.baseDir + this.tags + "/");
 		for (File aFile : Utilities.recursivelyListFiles(baseDir, ".java")) {
 			generatedFiles.add(aFile.getAbsolutePath().replace(baseDir.getAbsolutePath(), ""));
 		}
@@ -74,6 +74,6 @@ public abstract class MojoGoal {
 	}
 
 	public String getFileContents(String fileName) throws Exception {
-		return Utilities.readFile(new File(ConvertibleProject.baseDir + fileName));
+		return Utilities.readFile(new File(ConvertibleProject.baseDir + this.tags + "/" + fileName));
 	}
 }

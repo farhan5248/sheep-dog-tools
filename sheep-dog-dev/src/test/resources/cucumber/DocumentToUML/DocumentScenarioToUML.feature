@@ -124,10 +124,10 @@ Feature: Document Scenario To UML
           | Tags |
           | tag1 |
      Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
-      And The target/mbt/uml/pst.uml file Interaction section will be created as follows
+      And The target/mbt/tag1/uml/pst.uml file Interaction section will be created as follows
           | Interaction Name       |
           | specs::Process::Submit |
-      But The target/mbt/uml/pst.uml file Interaction section won't be created as follows
+      But The target/mbt/tag1/uml/pst.uml file Interaction section won't be created as follows
           | Interaction Name        |
           | specs::Process::Submit2 |
 

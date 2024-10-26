@@ -28,22 +28,24 @@ public class UMLProject extends ConvertibleProject {
 
 	private Model theSystem;
 
-	public UMLProject() {
+	public UMLProject(String tag) {
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
 		theSystem = UMLFactory.eINSTANCE.createModel();
 		theSystem.setName("pst");
 		theSystem.createNestedPackage(FIRST_LAYER);
+		this.tag = tag;
 	}
 
 	@Override
 	public File getDir(String layer) {
 		File aFile = null;
-		aFile = new File(baseDir + "uml/");
+		aFile = new File(baseDir + tag + "/" + "uml/");
 		aFile.mkdirs();
 		return aFile;
 	}
 
-	public void load(String tags) throws Exception {
+	@Override
+	public void load() throws Exception {
 		URI uri = URI.createFileURI(getDir("").getAbsolutePath()).appendSegment(theSystem.getName())
 				.appendFileExtension(UMLResource.FILE_EXTENSION);
 		ResourceSet resourceSet = new ResourceSetImpl();

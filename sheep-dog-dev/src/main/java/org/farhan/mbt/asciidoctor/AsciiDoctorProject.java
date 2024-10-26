@@ -13,8 +13,9 @@ public class AsciiDoctorProject extends ConvertibleProject {
 
 	private static ArrayList<ConvertibleObject> firstLayerObjects;
 
-	public AsciiDoctorProject() {
+	public AsciiDoctorProject(String tag) {
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
+		this.tag = tag;
 	}
 
 	@Override
@@ -28,7 +29,7 @@ public class AsciiDoctorProject extends ConvertibleProject {
 	@Override
 	public File getDir(String layer) {
 		File aFile = null;
-		aFile = new File(baseDir + "resources/asciidoc/");
+		aFile = new File(baseDir + tag + "/" + "resources/asciidoc/");
 		aFile.mkdirs();
 		return aFile;
 	}
@@ -82,13 +83,13 @@ public class AsciiDoctorProject extends ConvertibleProject {
 	}
 
 	@Override
-	public void load(String tags) throws Exception {
+	public void load() throws Exception {
 		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(ConvertibleProject.FIRST_LAYER),
 				getFileExt(ConvertibleProject.FIRST_LAYER));
 		getObjects(ConvertibleProject.FIRST_LAYER).clear();
 		for (File f : files) {
 			createObject(f.getAbsolutePath()).load();
-			if (!isFileSelected(getObjects(ConvertibleProject.FIRST_LAYER).getLast(), tags)) {
+			if (!isFileSelected(getObjects(ConvertibleProject.FIRST_LAYER).getLast(), this.tag)) {
 				getObjects(ConvertibleProject.FIRST_LAYER).removeLast();
 			}
 		}

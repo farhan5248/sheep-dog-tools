@@ -66,7 +66,9 @@ Feature: Document To Code
           | 6
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
+          | Tags |
+          | tag1 |
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/app/Process.feature file will be created as follows
           """

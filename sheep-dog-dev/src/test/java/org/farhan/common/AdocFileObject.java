@@ -50,7 +50,7 @@ public class AdocFileObject extends FileObject {
 
 	protected void assertObjectExists() {
 		super.assertObjectExists();
-		project = new AsciiDoctorProject();
+		project = new AsciiDoctorProject("");
 		try {
 			wrapper = (AsciiDoctorAdocWrapper) project.createObject(getFile().getAbsolutePath());
 			wrapper.load();

@@ -65,7 +65,7 @@ public class JavaFileObject extends FileObject {
 
 	protected void assertObjectExists() {
 		super.assertObjectExists();
-		project = new CucumberProject();
+		project = new CucumberProject("");
 		try {
 			wrapper = (CucumberJavaWrapper) project.createObject(getFile().getAbsolutePath());
 			wrapper.load();
