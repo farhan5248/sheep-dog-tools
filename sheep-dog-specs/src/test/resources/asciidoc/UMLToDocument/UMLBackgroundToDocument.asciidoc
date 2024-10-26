@@ -20,9 +20,9 @@ Feature: Process
 
 === And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
 
-=== And The mbt-transformer plugin, Process.adoc file Background section will be created as follows
+=== And The mbt-transformer plugin, Process.asciidoc file Background section will be created as follows
 
 [options="header"]
 |===
@@ -30,7 +30,7 @@ Feature: Process
 | Setup| Desc line 1
 |===
 
-=== And The mbt-transformer plugin, Process.adoc file Background Steps section will be created as follows
+=== And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
 
 [options="header"]
 |===
@@ -38,7 +38,7 @@ Feature: Process
 | Setup| Given The Object0 page is valid
 |===
 
-=== And The mbt-transformer plugin, Process.adoc file Scenarios Steps section will be created as follows
+=== And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
 
 [options="header"]
 |===
@@ -64,9 +64,9 @@ Feature: Process
 
 === And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
 
-=== And The mbt-transformer plugin, Process.adoc file Background Steps section will be created as follows
+=== And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
 
 [options="header"]
 |===
@@ -74,7 +74,7 @@ Feature: Process
 | Setup| Given The Object0 page is valid
 |===
 
-=== And The mbt-transformer plugin, Process.adoc file Scenarios Steps section will be created as follows
+=== And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
 
 [options="header"]
 |===
@@ -103,9 +103,9 @@ Feature: Process
 
 === And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
 
-=== And The mbt-transformer plugin, Process.adoc file Background Steps section will be created as follows
+=== And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
 
 [options="header"]
 |===
@@ -113,7 +113,7 @@ Feature: Process
 | Setup| Given The Object0 page is valid
 |===
 
-=== And The mbt-transformer plugin, Process.adoc file Scenarios Steps section will be created as follows
+=== And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
 
 [options="header"]
 |===
@@ -146,9 +146,9 @@ Feature: Process
 
 === And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
 
-=== And The mbt-transformer plugin, Process.adoc file Background Steps section will be created as follows
+=== And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
 
 [options="header"]
 |===
@@ -156,7 +156,7 @@ Feature: Process
 | Setup| Given The Object0 page is valid
 |===
 
-=== And The mbt-transformer plugin, Process.adoc file Background Steps section will be created as follows
+=== And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
 
 [options="header"]
 |===
@@ -185,9 +185,9 @@ Feature: Process
 
 === And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
 
-=== And The mbt-transformer plugin, Process.adoc file Background Steps section will be created as follows
+=== And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
 
 [options="header"]
 |===
@@ -196,7 +196,7 @@ Feature: Process
 | Setup| Given The Object2 page is valid
 |===
 
-=== And The mbt-transformer plugin, Process.adoc file Scenarios Steps section will be created as follows
+=== And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
 
 [options="header"]
 |===
@@ -224,9 +224,9 @@ Feature: Process
 
 === And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file will be present
+=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
 
-=== And The mbt-transformer plugin, Process.adoc file Background Steps section will be created as follows
+=== And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
 
 [options="header"]
 |===
@@ -236,7 +236,7 @@ Feature: Process
 | Setup| Given The Object3 page is valid
 |===
 
-=== And The mbt-transformer plugin, Process.adoc file Scenarios Steps section will be created as follows
+=== And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
 
 [options="header"]
 |===

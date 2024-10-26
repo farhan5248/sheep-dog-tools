@@ -24,7 +24,13 @@ Feature: Document To Code
           | 10| 5
           |===
           
-          === Then The Search application, Logout page is valid
+          === Then The Search application, Logout page is created as follows
+          
+          ----
+            text1
+            
+            text2
+          ----
           
           [tags="tag3"]
           == Story Two
@@ -60,8 +66,12 @@ Feature: Document To Code
           | 6
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-cucumber goal is executed
+     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
+          | Tags |
+          | tag1 |
+      And The mbt-transformer plugin, uml-to-cucumber goal is executed with
+          | Tags |
+          | tag1 |
      Then The mbt-transformer plugin, src/test/resources/cucumber/app/Process.feature file will be created as follows
           """
           @tag1
@@ -78,7 +88,12 @@ Feature: Document To Code
                When The Search application, Home page is created as follows
                     | grp | ins |
                     | 10  | 5   |
-               Then The Search application, Logout page is valid
+               Then The Search application, Logout page is created as follows
+                    \"\"\"
+                      text1
+                    
+                      text2
+                    \"\"\"
           
             @tag3
             Scenario Outline: Story Two

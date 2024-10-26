@@ -21,7 +21,12 @@ Feature: Code To Document
                When The Search application, Home page is created as follows
                     | grp | ins |
                     |  10 |   5 |
-               Then The Search application, Logout page is valid
+               Then The Search application, Logout page is created as follows
+                    \"\"\"
+                      text1
+                      
+                      text2
+                    \"\"\"
           
             @tag3
             Scenario Outline: Story Two
@@ -42,7 +47,9 @@ Feature: Code To Document
      When The mbt-transformer plugin, cucumber-to-uml goal is executed with
           | Tags |
           | tag1 |
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed with
+          | Tags |
+          | tag1 |
      Then The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows
           """
           :tags: tag1
@@ -65,7 +72,13 @@ Feature: Code To Document
           | 10| 5
           |===
           
-          === Then The Search application, Logout page is valid
+          === Then The Search application, Logout page is created as follows
+          
+          ----
+            text1
+            
+            text2
+          ----
           
           [tags="tag3"]
           == Story Two

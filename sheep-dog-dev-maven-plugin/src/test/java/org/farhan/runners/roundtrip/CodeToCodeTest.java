@@ -19,9 +19,4 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
 @IncludeTags("debug")
 public class CodeToCodeTest {
-	
-	@Before
-	public static void before() {
-		TestObjectFactory.reset();
-	}
 }

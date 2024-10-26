@@ -69,7 +69,9 @@ Feature: Document To Code
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
           | Tags |
           | tag1 |
-      And The mbt-transformer plugin, uml-to-cucumber goal is executed
+      And The mbt-transformer plugin, uml-to-cucumber goal is executed with
+          | Tags |
+          | tag1 |
      Then The mbt-transformer plugin, src/test/resources/cucumber/app/Process.feature file will be created as follows
           """
           @tag1

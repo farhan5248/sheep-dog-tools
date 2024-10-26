@@ -1,5 +1,7 @@
 package org.farhan.objects.mbttransformer.pre;
 
+import java.util.HashMap;
+
 import org.farhan.common.GoalObject;
 import org.farhan.objects.mbttransformer.AsciidoctorToUmlGoal;
 
@@ -7,5 +9,10 @@ public class AsciidoctorToUmlGoalImpl extends GoalObject implements AsciidoctorT
 
 	public void transition() {
 		runGoal("org.farhan.mbt.maven.AsciiDoctorToUMLMojo");
+	}
+
+	@Override
+	public void setTags(HashMap<String, String> keyMap) {
+		keyValue.put("tags", keyMap.get("Tags"));
 	}
 }

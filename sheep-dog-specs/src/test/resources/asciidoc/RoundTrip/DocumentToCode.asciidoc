@@ -1,9 +1,11 @@
-:tags: sheep-dog-dev,sheep-dog-dev-maven-plugin,sheep-dog-dev-svc,sheep-dog-dev-svc-maven-plugin
+:tags: debug
 = Document To Code
+
+
 
 == Create a feature file from adoc file
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.adoc file is created as follows
+=== Given The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
 
 ----
 :tags: tag1
@@ -68,9 +70,21 @@ Desc 3
 |===
 ----
 
-=== When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
 
-=== And The mbt-transformer plugin, uml-to-cucumber goal is executed
+[options="header"]
+|===
+| Tags
+| tag1
+|===
+
+=== And The mbt-transformer plugin, uml-to-cucumber goal is executed with
+
+[options="header"]
+|===
+| Tags
+| tag1
+|===
 
 === Then The mbt-transformer plugin, src/test/resources/cucumber/app/Process.feature file will be created as follows
 

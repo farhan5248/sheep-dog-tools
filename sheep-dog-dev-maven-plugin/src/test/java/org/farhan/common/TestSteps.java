@@ -7,9 +7,10 @@ import org.farhan.mbt.core.Utilities;
 import io.cucumber.java.Before;
 
 public class TestSteps {
-	
+
 	@Before
-	public void deleteFiles() throws Exception {
+	public void before() {
 		Utilities.deleteDir(new File("target/src-gen/"), "");
+		TestObjectFactory.reset();
 	}
 }

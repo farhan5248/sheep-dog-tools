@@ -62,7 +62,9 @@ Feature: Code To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed with
           | Tags |
           | tag1 |
-      And The mbt-transformer plugin, uml-to-cucumber goal is executed
+      And The mbt-transformer plugin, uml-to-cucumber goal is executed with
+          | Tags |
+          | tag1 |
 
   Scenario: Feature file is preserved
 

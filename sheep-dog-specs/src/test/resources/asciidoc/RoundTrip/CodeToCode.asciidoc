@@ -114,7 +114,9 @@ Feature: This is a feature
           | v31 | v41 |
 ----
 
-=== And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
+== Java file is preserved
+
+=== Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
 
 ----
 package org.farhan.stepdefs.blah;

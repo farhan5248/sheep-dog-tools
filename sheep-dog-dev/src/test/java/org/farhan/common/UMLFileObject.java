@@ -126,11 +126,22 @@ public abstract class UMLFileObject extends FileObject {
 	protected void assertObjectExists() {
 		super.assertObjectExists();
 		try {
-			project = new UMLProject("");
+			// TODO in the future use guice or spring to inject the dependency
+			GoalObject theGoal = getGoalClass();
+			project = new UMLProject(theGoal.keyValue.get("tags"));
 			project.load();
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step");
 		}
+	}
+
+	private GoalObject getGoalClass() {
+		for (String name : TestObjectFactory.classes.keySet()) {
+			if (name.endsWith("ToUmlGoal")) {
+				return (GoalObject) TestObjectFactory.classes.get(name);
+			}
+		}
+		return null;
 	}
 
 	private EAnnotation getAnnotation(Class theClass, String annotationName) {

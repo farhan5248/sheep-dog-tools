@@ -9,7 +9,7 @@ public class UmlToCucumberGoalImpl extends GoalObject implements UmlToCucumberGo
 
 	@Override
 	public void setTags(HashMap<String, String> keyMap) {
-		this.tags = keyMap.get("Tags");
+		keyValue.put("tags", keyMap.get("Tags"));
 	}
 
 	public void transition() {

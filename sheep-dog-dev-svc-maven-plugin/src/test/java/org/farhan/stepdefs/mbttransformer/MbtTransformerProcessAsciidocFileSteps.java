@@ -19,4 +19,11 @@ public class MbtTransformerProcessAsciidocFileSteps {
         MbtTransformerFactory.get("ProcessAsciidocFile").setPath("src/test/resources/asciidoc/app/Process.asciidoc");
         MbtTransformerFactory.get("ProcessAsciidocFile").setInputOutputs("Content", docString);
     }
+
+    @Given("^The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows$")
+    public void theMbtTransformerPluginSrcTestResourcesAsciidocProcessAsciidocFileIsCreatedAsFollows(String docString) {
+        MbtTransformerFactory.get("ProcessAsciidocFile").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("ProcessAsciidocFile").setPath("src/test/resources/asciidoc/Process.asciidoc");
+        MbtTransformerFactory.get("ProcessAsciidocFile").setInputOutputs("Content", docString);
+    }
 }

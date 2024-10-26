@@ -8,7 +8,7 @@ import org.farhan.objects.mbttransformer.CucumberToUmlGoal;
 public class CucumberToUmlGoalImpl extends GoalObject implements CucumberToUmlGoal {
 
 	public void setTags(HashMap<String, String> keyMap) {
-		this.tags = keyMap.get("Tags");
+		keyValue.put("tags", keyMap.get("Tags"));
 	}
 
 	@Override

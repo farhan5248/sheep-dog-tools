@@ -3,7 +3,7 @@
 
 == No statement, one step, one scenario
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Process
@@ -33,7 +33,7 @@
 
 == No statement, two steps, one scenario
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Process
@@ -65,7 +65,7 @@
 
 == No statement, three steps, one scenario
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Process
@@ -99,7 +99,7 @@
 
 == One statement, one step, one scenario
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Process
@@ -130,7 +130,7 @@ Desc line 1
 
 == No statement, one step, two scenarios
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Process
@@ -165,7 +165,7 @@ Desc line 1
 
 == No statement, one step, three scenarios
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.adoc file is created as follows
+=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Process

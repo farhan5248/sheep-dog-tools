@@ -123,7 +123,7 @@ Feature: Code Scenario To UML
      When The mbt-transformer plugin, cucumber-to-uml goal is executed with
           | Tags |
           | tag1 |
-     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+     Then The mbt-transformer plugin, target/mbt/tag1/uml/pst.uml file will be present
       And The target/mbt/tag1/uml/pst.uml file Interaction section will be created as follows
           | Interaction Name       |
           | specs::Process::Submit |

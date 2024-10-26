@@ -9,14 +9,15 @@ import org.junit.jupiter.api.Assertions;
 
 public abstract class GoalObject extends TestObject {
 
-	protected String tags = "";
-
 	protected void runGoal(String goal) {
 		try {
+			if (keyValue.get("tags") == null) {
+				keyValue.put("tags", "");
+			}
 			Class<?> mojoClass = Class.forName(goal);
 			MBTMojo mojo = (MBTMojo) mojoClass.getConstructor().newInstance();
 			ConvertibleProject.baseDir = "target/src-gen/" + this.keyValue.get("component") + "/target/mbt/";
-			mojo.tag = tags;
+			mojo.tag = keyValue.get("tags");
 			mojo.srcDir = new File("target/src-gen/" + this.keyValue.get("component") + "/src/test/");
 			mojo.execute();
 		} catch (Exception e) {

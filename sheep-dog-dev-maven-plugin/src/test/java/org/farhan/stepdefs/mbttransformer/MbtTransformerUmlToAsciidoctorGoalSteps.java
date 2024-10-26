@@ -12,4 +12,12 @@ public class MbtTransformerUmlToAsciidoctorGoalSteps {
         MbtTransformerFactory.get("UmlToAsciidoctorGoal").setPath("uml-to-asciidoctor");
         MbtTransformerFactory.get("UmlToAsciidoctorGoal").transition();
     }
+
+    @Given("^The mbt-transformer plugin, uml-to-asciidoctor goal is executed with$")
+    public void theMbtTransformerPluginUmlToAsciidoctorGoalIsExecutedWith(DataTable dataTable) {
+        MbtTransformerFactory.get("UmlToAsciidoctorGoal").setComponent("mbt-transformer");
+        MbtTransformerFactory.get("UmlToAsciidoctorGoal").setPath("uml-to-asciidoctor");
+        MbtTransformerFactory.get("UmlToAsciidoctorGoal").setInputOutputs(dataTable);
+        MbtTransformerFactory.get("UmlToAsciidoctorGoal").transition();
+    }
 }

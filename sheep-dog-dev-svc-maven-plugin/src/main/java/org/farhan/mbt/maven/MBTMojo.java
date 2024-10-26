@@ -30,36 +30,30 @@ public abstract class MBTMojo extends AbstractMojo {
 		getLog().info("Starting execute");
 		getLog().info("tag: " + tag);
 		getLog().info("srcDir: " + srcDir);
-		TreeMap<String, String> parameters;
 		try {
-			parameters = new TreeMap<String, String>();
+			TreeMap<String, String> parameters = new TreeMap<String, String>();
+			if (!tag.isEmpty()) {
+				parameters.put("tags", tag);
+			}
 			// TODO only upload step libraries and interfaces, not every .java file
 			for (File aFile : Utilities.recursivelyListFiles(srcDir, "")) {
 				String contents = Utilities.readFile(aFile);
 				getLog().debug("contents: " + contents);
 				String fileName = aFile.getAbsolutePath().replace(srcDir.getAbsolutePath() + "\\", "").replace("\\",
 						"/");
-				parameters.put("tag", tag);
 				parameters.put("fileName", fileName);
 				Utilities.sendPostRequest(host + "addFile", parameters, contents);
-			}
-			parameters = new TreeMap<String, String>();
-			if (!tag.isEmpty()) {
-				parameters.put("tags", tag);
+				parameters.remove("fileName");
 			}
 			Utilities.sendPostRequest(host + mojo, parameters, "");
-			parameters = new TreeMap<String, String>();
-			parameters.put("tag", tag);
-			String fileList = Utilities.sendGetRequest(host + "getFileList", new TreeMap<String, String>())
-					.getString("fileName");
+			String fileList = Utilities.sendGetRequest(host + "getFileList", parameters).getString("fileName");
 			getLog().debug("fileList: " + fileList);
 			if (!fileList.isBlank()) {
-				parameters = new TreeMap<String, String>();
 				for (String fileName : fileList.split("\n")) {
-					parameters.put("tag", tag);
 					parameters.put("fileName", fileName);
 					String contents = Utilities.sendGetRequest(host + "getFileContents", parameters)
 							.getString("content");
+					parameters.remove("fileName");
 					getLog().debug("contents: " + contents);
 					Utilities.writeFile(new File(srcDir.getAbsolutePath() + "\\" + fileName), contents);
 				}

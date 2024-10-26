@@ -62,9 +62,11 @@ Feature: Code To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed with
           | Tags |
           | tag1 |
-      And The mbt-transformer plugin, uml-to-cucumber goal is executed
+      And The mbt-transformer plugin, uml-to-cucumber goal is executed with
+          | Tags |
+          | tag1 |
 
-  Scenario: Convert class to feature from graph
+  Scenario: Feature file is preserved
 
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be created as follows
           """
@@ -102,7 +104,10 @@ Feature: Code To Code
                     | h3  | h4  |
                     | v31 | v41 |
           """
-      And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
+
+  Scenario: Java file is preserved
+
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.blah;
           

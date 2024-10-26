@@ -9,7 +9,7 @@ import com.google.common.reflect.ClassPath.ClassInfo;
 public abstract class TestObjectFactory {
 
 	private static String preOrPost = "pre";
-	private static HashMap<String, TestObject> classes = new HashMap<String, TestObject>();
+	public static HashMap<String, TestObject> classes = new HashMap<String, TestObject>();
 
 	public static void reset() {
 		classes = new HashMap<String, TestObject>();
@@ -57,4 +57,5 @@ public abstract class TestObjectFactory {
 		}
 		return null;
 	}
+
 }

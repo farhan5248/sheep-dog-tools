@@ -8,7 +8,7 @@ import org.farhan.objects.mbttransformer.AsciidoctorToUmlGoal;
 public class AsciidoctorToUmlGoalImpl extends GoalObject implements AsciidoctorToUmlGoal {
 
 	public void setTags(HashMap<String, String> keyMap) {
-		this.tags = keyMap.get("Tags");
+		keyValue.put("tags", keyMap.get("Tags"));
 	}
 
 	public void transition() {

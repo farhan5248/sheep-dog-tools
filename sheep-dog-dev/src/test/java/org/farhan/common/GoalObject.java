@@ -8,12 +8,13 @@ import org.junit.jupiter.api.Assertions;
 
 public abstract class GoalObject extends TestObject {
 
-	protected String tags = "";
-
 	protected void runGoal(String goal) {
 		try {
+			if (keyValue.get("tags") == null) {
+				keyValue.put("tags", "");
+			}
 			Class<?> mojoClass = Class.forName(goal);
-			MojoGoal mojo = (MojoGoal) mojoClass.getConstructor(String.class).newInstance(tags);
+			MojoGoal mojo = (MojoGoal) mojoClass.getConstructor(String.class).newInstance(keyValue.get("tags"));
 			ConvertibleProject.baseDir = "target/src-gen/" + this.keyValue.get("component") + "/target/mbt/";
 			File srcDir = new File("target/src-gen/" + this.keyValue.get("component") + "/src/test/");
 			for (File aFile : Utilities.recursivelyListFiles(srcDir, "")) {
