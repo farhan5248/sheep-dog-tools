@@ -35,3 +35,21 @@ docker image push farhan5248/sheep-dog-svc:latest
 docker image ls
 docker image rm farhan5248/sheep-dog-svc:latest
 docker system prune
+
+
+docker compose config
+docker compose build
+docker compose up -d
+docker compose -p "sheep-dog-dev" up -d
+docker compose -f docker-compose-defaults.yaml up -d
+docker compose run --rm -d sheep-dog-dev-svc-lcl
+docker compose logs 
+docker compose top
+docker compose exec sheep-dog-svc-lcl /bin/sh
+docker compose start
+docker compose stop
+docker compose pause
+docker compose unpause
+docker compose down
+
+HUBOT_ROCKETCHAT_PASSWORD="a-b3tt3r-pw" docker compose -f docker-compose-env.yaml up -d

@@ -10,7 +10,6 @@ release.properties
 **/*.zip
 **/*.log
 **/*.bak
-**/*.pydevproject
 **/*.class
 **/*.jar
 **/*.tar
@@ -21,11 +20,4 @@ release.properties
 **/*.releaseBackup
 **/*.lnk
 **/*.idea
-**/libspecs/
-**/selenium*.png
-**/red.xml
-**/log.html
-**/report.html
-**/output*.xml
-**/*.extracted.csv
-**/*.pyc
+*.env
