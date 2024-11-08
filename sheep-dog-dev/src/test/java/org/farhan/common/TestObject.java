@@ -9,8 +9,6 @@ import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.datatable.DataTable;
 
-// Anything that is an input, output, state or transition is a graph object. 
-// Right now the way I model stuff all the objects are either output ones or input+transition ones
 public abstract class TestObject {
 
 	protected HashMap<String, String> keyValue = new HashMap<String, String>();

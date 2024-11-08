@@ -1,6 +1,5 @@
 package org.farhan.runners.umltodocument;
 
-import org.farhan.common.TestObjectFactory;
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.IncludeEngines;
 import org.junit.platform.suite.api.IncludeTags;
@@ -20,8 +19,4 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 @IncludeTags("debug")
 public class UMLStepToDocumentTest {
 
-	@Before
-	public static void before() {
-		TestObjectFactory.reset();
-	}
 }

@@ -234,7 +234,18 @@
 		</dependency>
 		<dependency>
 			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-guice</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-junit-platform-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>7.0.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

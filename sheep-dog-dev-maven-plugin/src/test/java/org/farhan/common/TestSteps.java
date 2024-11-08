@@ -11,6 +11,5 @@ public class TestSteps {
 	@Before
 	public void before() {
 		Utilities.deleteDir(new File("target/src-gen/"), "");
-		TestObjectFactory.reset();
 	}
 }

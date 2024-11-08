@@ -1,23 +1,36 @@
 package org.farhan.stepdefs.mbttransformer;
 
-import org.farhan.common.MbtTransformerFactory;
+import org.farhan.common.TestObject;
+import org.farhan.objects.mbttransformer.AsciidoctorToUmlGoal;
+
+import com.google.inject.Inject;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.guice.ScenarioScoped;
 
+@ScenarioScoped
 public class MbtTransformerAsciidoctorToUmlGoalSteps {
 
-    @Given("^The mbt-transformer plugin, asciidoctor-to-uml goal is executed$")
-    public void theMbtTransformerPluginAsciidoctorToUmlGoalIsExecuted() {
-        MbtTransformerFactory.get("AsciidoctorToUmlGoal").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("AsciidoctorToUmlGoal").setPath("asciidoctor-to-uml");
-        MbtTransformerFactory.get("AsciidoctorToUmlGoal").transition();
-    }
+	private TestObject object;
 
-    @Given("^The mbt-transformer plugin, asciidoctor-to-uml goal is executed with$")
-    public void theMbtTransformerPluginAsciidoctorToUmlGoalIsExecutedWith(DataTable dataTable) {
-        MbtTransformerFactory.get("AsciidoctorToUmlGoal").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("AsciidoctorToUmlGoal").setPath("asciidoctor-to-uml");
-        MbtTransformerFactory.get("AsciidoctorToUmlGoal").setInputOutputs(dataTable);
-        MbtTransformerFactory.get("AsciidoctorToUmlGoal").transition();
-    }
+	@Inject
+	public MbtTransformerAsciidoctorToUmlGoalSteps(AsciidoctorToUmlGoal object) {
+		this.object = (TestObject) object;
+	}
+
+	@Given("^The mbt-transformer plugin, asciidoctor-to-uml goal is executed$")
+	public void theMbtTransformerPluginAsciidoctorToUmlGoalIsExecuted() {
+		object.setComponent("mbt-transformer");
+		object.setPath("asciidoctor-to-uml");
+		object.transition();
+	}
+
+	@Given("^The mbt-transformer plugin, asciidoctor-to-uml goal is executed with$")
+	public void theMbtTransformerPluginAsciidoctorToUmlGoalIsExecutedWith(DataTable dataTable) {
+		object.setComponent("mbt-transformer");
+		object.setPath("asciidoctor-to-uml");
+		object.setInputOutputs(dataTable);
+		object.transition();
+	}
 }

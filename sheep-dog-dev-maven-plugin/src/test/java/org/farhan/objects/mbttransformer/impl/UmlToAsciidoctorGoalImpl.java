@@ -1,0 +1,20 @@
+package org.farhan.objects.mbttransformer.impl;
+
+import java.util.HashMap;
+
+import org.farhan.common.GoalObject;
+import org.farhan.objects.mbttransformer.UmlToAsciidoctorGoal;
+
+import io.cucumber.guice.ScenarioScoped;
+@ScenarioScoped
+public class UmlToAsciidoctorGoalImpl extends GoalObject implements UmlToAsciidoctorGoal {
+
+	public void transition() {
+		runGoal("org.farhan.mbt.maven.UMLToAsciiDoctorMojo");
+	}
+
+	@Override
+	public void setTags(HashMap<String, String> keyMap) {
+		keyValue.put("tags", keyMap.get("Tags"));
+	}
+}

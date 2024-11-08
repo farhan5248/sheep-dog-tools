@@ -12,7 +12,7 @@ import io.cucumber.datatable.DataTable;
 // Right now the way I model stuff all the objects are either output ones or input+transition ones
 public abstract class TestObject {
 
-	static EclipseMock la = null;
+	static EclipseImpl la = null;
 
 	protected HashMap<String, String> keyValue = new HashMap<String, String>();
 
@@ -50,9 +50,9 @@ public abstract class TestObject {
 		return name.replaceAll("[ \\-\\(\\)/]", "");
 	}
 
-	protected EclipseMock getEclipseMock() {
+	protected EclipseImpl getEclipseMock() {
 		if (la == null) {
-			la = new EclipseMock();
+			la = new EclipseImpl();
 		}
 		return la;
 	}

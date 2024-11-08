@@ -1,5 +1,6 @@
 package org.farhan.common;
 
+import java.util.Set;
 import java.util.Map.Entry;
 
 import org.eclipse.emf.ecore.EAnnotation;
@@ -11,6 +12,11 @@ import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.mbt.uml.UMLProject;
 import org.junit.jupiter.api.Assertions;
+
+import com.google.common.reflect.ClassPath;
+import com.google.common.reflect.ClassPath.ClassInfo;
+import com.google.inject.Injector;
+import com.google.inject.Key;
 
 public abstract class UMLFileObject extends FileObject {
 
@@ -126,19 +132,21 @@ public abstract class UMLFileObject extends FileObject {
 	protected void assertObjectExists() {
 		super.assertObjectExists();
 		try {
-			// TODO in the future use guice or spring to inject the dependency
-			GoalObject theGoal = getGoalClass();
-			project = new UMLProject(theGoal.keyValue.get("tags"));
+			project = new UMLProject(getGoalClass().keyValue.get("tags"));
 			project.load();
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step");
 		}
 	}
 
-	private GoalObject getGoalClass() {
-		for (String name : TestObjectFactory.classes.keySet()) {
-			if (name.endsWith("ToUmlGoal")) {
-				return (GoalObject) TestObjectFactory.classes.get(name);
+	private GoalObject getGoalClass() throws Exception {
+		for (Key<?> b : GuiceConfig.classes.getBindings().keySet()) {
+			if (b.getTypeLiteral().toString().endsWith("ToUmlGoal")
+					&& b.getTypeLiteral().toString().startsWith("org.farhan.objects.mbttransformer.")) {
+				GoalObject object = (GoalObject) GuiceConfig.classes.getInstance(b);
+				if (!object.keyValue.isEmpty()) {
+					return object;
+				}
 			}
 		}
 		return null;

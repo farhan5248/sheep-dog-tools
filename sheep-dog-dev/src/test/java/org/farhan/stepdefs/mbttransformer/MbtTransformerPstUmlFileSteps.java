@@ -1,113 +1,125 @@
 package org.farhan.stepdefs.mbttransformer;
 
-import org.farhan.common.MbtTransformerFactory;
+import org.farhan.common.TestObject;
+import org.farhan.objects.mbttransformer.PstUmlFile;
+import com.google.inject.Inject;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.guice.ScenarioScoped;
 
+@ScenarioScoped
 public class MbtTransformerPstUmlFileSteps {
+
+	private TestObject object;
+
+	@Inject
+	public MbtTransformerPstUmlFileSteps(PstUmlFile object) {
+		this.object = (TestObject) object;
+	}
 
     @Given("^The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present$")
     public void theMbtTransformerPluginTargetMbtUmlPstUmlFileWillBePresent() {
-        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("PstUmlFile").setPath("target/mbt/uml/pst.uml");
-        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs("Present");
+        object.setComponent("mbt-transformer");
+        object.setPath("target/mbt/uml/pst.uml");
+        object.assertInputOutputs("Present");
     }
 
     @Given("^The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows$")
     public void theTargetMbtUmlPstUmlFileInteractionMessagesSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("PstUmlFile").setPath("target/mbt/uml/pst.uml");
-        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "InteractionMessagesSection");
+        object.setComponent("mbt-transformer");
+        object.setPath("target/mbt/uml/pst.uml");
+        object.assertInputOutputs(dataTable, "InteractionMessagesSection");
     }
 
     @Given("^The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows$")
     public void theTargetMbtUmlPstUmlFileInteractionCommentsSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("PstUmlFile").setPath("target/mbt/uml/pst.uml");
-        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "InteractionCommentsSection");
+        object.setComponent("mbt-transformer");
+        object.setPath("target/mbt/uml/pst.uml");
+        object.assertInputOutputs(dataTable, "InteractionCommentsSection");
     }
 
     @Given("^The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows$")
     public void theTargetMbtUmlPstUmlFileInteractionAnnotationsSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("PstUmlFile").setPath("target/mbt/uml/pst.uml");
-        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "InteractionAnnotationsSection");
+        object.setComponent("mbt-transformer");
+        object.setPath("target/mbt/uml/pst.uml");
+        object.assertInputOutputs(dataTable, "InteractionAnnotationsSection");
     }
 
     @Given("^The target/mbt/uml/pst.uml file Class section will be created as follows$")
     public void theTargetMbtUmlPstUmlFileClassSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("PstUmlFile").setPath("target/mbt/uml/pst.uml");
-        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "ClassSection");
+        object.setComponent("mbt-transformer");
+        object.setPath("target/mbt/uml/pst.uml");
+        object.assertInputOutputs(dataTable, "ClassSection");
     }
 
     @Given("^The target/mbt/uml/pst.uml file Class Annotations section will be created as follows$")
     public void theTargetMbtUmlPstUmlFileClassAnnotationsSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("PstUmlFile").setPath("target/mbt/uml/pst.uml");
-        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "ClassAnnotationsSection");
+        object.setComponent("mbt-transformer");
+        object.setPath("target/mbt/uml/pst.uml");
+        object.assertInputOutputs(dataTable, "ClassAnnotationsSection");
     }
 
     @Given("^The target/mbt/uml/pst.uml file Class Comments section will be created as follows$")
     public void theTargetMbtUmlPstUmlFileClassCommentsSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("PstUmlFile").setPath("target/mbt/uml/pst.uml");
-        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "ClassCommentsSection");
+        object.setComponent("mbt-transformer");
+        object.setPath("target/mbt/uml/pst.uml");
+        object.assertInputOutputs(dataTable, "ClassCommentsSection");
     }
 
     @Given("^The target/mbt/uml/pst.uml file Class section won't be created as follows$")
     public void theTargetMbtUmlPstUmlFileClassSectionWontBeCreatedAsFollows(DataTable dataTable) {
-        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("PstUmlFile").setPath("target/mbt/uml/pst.uml");
-        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "ClassSection", true);
+        object.setComponent("mbt-transformer");
+        object.setPath("target/mbt/uml/pst.uml");
+        object.assertInputOutputs(dataTable, "ClassSection", true);
     }
 
     @Given("^The target/mbt/uml/pst.uml file Interaction section will be created as follows$")
     public void theTargetMbtUmlPstUmlFileInteractionSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("PstUmlFile").setPath("target/mbt/uml/pst.uml");
-        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "InteractionSection");
+        object.setComponent("mbt-transformer");
+        object.setPath("target/mbt/uml/pst.uml");
+        object.assertInputOutputs(dataTable, "InteractionSection");
     }
 
     @Given("^The target/mbt/uml/pst.uml file Interaction section won't be created as follows$")
     public void theTargetMbtUmlPstUmlFileInteractionSectionWontBeCreatedAsFollows(DataTable dataTable) {
-        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("PstUmlFile").setPath("target/mbt/uml/pst.uml");
-        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "InteractionSection");
+        object.setComponent("mbt-transformer");
+        object.setPath("target/mbt/uml/pst.uml");
+        object.assertInputOutputs(dataTable, "InteractionSection");
     }
 
     @Given("^The target/mbt/tag1/uml/pst.uml file Class section will be created as follows$")
     public void theTargetMbtTag1UmlPstUmlFileClassSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("PstUmlFile").setPath("target/mbt/tag1/uml/pst.uml");
-        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "ClassSection");
+        object.setComponent("mbt-transformer");
+        object.setPath("target/mbt/tag1/uml/pst.uml");
+        object.assertInputOutputs(dataTable, "ClassSection");
     }
 
     @Given("^The target/mbt/tag1/uml/pst.uml file Class section won't be created as follows$")
     public void theTargetMbtTag1UmlPstUmlFileClassSectionWontBeCreatedAsFollows(DataTable dataTable) {
-        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("PstUmlFile").setPath("target/mbt/tag1/uml/pst.uml");
-        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "ClassSection", true);
+        object.setComponent("mbt-transformer");
+        object.setPath("target/mbt/tag1/uml/pst.uml");
+        object.assertInputOutputs(dataTable, "ClassSection", true);
     }
 
     @Given("^The target/mbt/tag1/uml/pst.uml file Interaction section will be created as follows$")
     public void theTargetMbtTag1UmlPstUmlFileInteractionSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("PstUmlFile").setPath("target/mbt/tag1/uml/pst.uml");
-        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "InteractionSection");
+        object.setComponent("mbt-transformer");
+        object.setPath("target/mbt/tag1/uml/pst.uml");
+        object.assertInputOutputs(dataTable, "InteractionSection");
     }
 
     @Given("^The target/mbt/tag1/uml/pst.uml file Interaction section won't be created as follows$")
     public void theTargetMbtTag1UmlPstUmlFileInteractionSectionWontBeCreatedAsFollows(DataTable dataTable) {
-        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("PstUmlFile").setPath("target/mbt/tag1/uml/pst.uml");
-        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs(dataTable, "InteractionSection");
+        object.setComponent("mbt-transformer");
+        object.setPath("target/mbt/tag1/uml/pst.uml");
+        object.assertInputOutputs(dataTable, "InteractionSection");
     }
 
     @Given("^The mbt-transformer plugin, target/mbt/tag1/uml/pst.uml file will be present$")
     public void theMbtTransformerPluginTargetMbtTag1UmlPstUmlFileWillBePresent() {
-        MbtTransformerFactory.get("PstUmlFile").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("PstUmlFile").setPath("target/mbt/tag1/uml/pst.uml");
-        MbtTransformerFactory.get("PstUmlFile").assertInputOutputs("Present");
+        object.setComponent("mbt-transformer");
+        object.setPath("target/mbt/tag1/uml/pst.uml");
+        object.assertInputOutputs("Present");
     }
 }
