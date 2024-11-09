@@ -4,7 +4,12 @@ import java.util.HashMap;
 
 import org.farhan.common.FileObject;
 import org.farhan.objects.mbttransformer.ProcessAsciidocFile;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import static io.cucumber.spring.CucumberTestContext.SCOPE_CUCUMBER_GLUE;
 
+@Component
+@Scope(SCOPE_CUCUMBER_GLUE)
 public class ProcessAsciidocFileImpl extends FileObject implements ProcessAsciidocFile {
 
 	@Override

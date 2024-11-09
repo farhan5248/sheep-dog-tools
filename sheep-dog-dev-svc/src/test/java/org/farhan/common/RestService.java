@@ -12,10 +12,16 @@ import java.util.TreeMap;
 import org.json.*;
 import org.farhan.mbt.core.Utilities;
 import org.junit.jupiter.api.Assertions;
+import org.springframework.boot.test.web.server.LocalServerPort;
 
 public class RestService extends TestObject {
 
-	private String host = "http://localhost:8080/";
+	@LocalServerPort
+	private int port;
+
+	private String getHost() {
+		return "http://localhost:" + port + "/";
+	}
 
 	private HttpURLConnection createRequest(String url, Map<String, String> parameters, String method)
 			throws Exception {
@@ -49,12 +55,12 @@ public class RestService extends TestObject {
 	}
 
 	protected JSONObject sendGetRequest(String resource, Map<String, String> parameters) throws Exception {
-		HttpURLConnection connection = createRequest(host + resource, parameters, "GET");
+		HttpURLConnection connection = createRequest(getHost() + resource, parameters, "GET");
 		return new JSONObject(sendRequest(connection));
 	}
 
 	protected void sendPostRequest(String resource, Map<String, String> parameters, String payload) throws Exception {
-		HttpURLConnection connection = createRequest(host + resource, parameters, "POST");
+		HttpURLConnection connection = createRequest(getHost() + resource, parameters, "POST");
 		DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
 		wr.write(payload.getBytes(StandardCharsets.UTF_8));
 		sendRequest(connection);

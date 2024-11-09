@@ -31,6 +31,7 @@ public abstract class MBTMojo extends AbstractMojo {
 		getLog().info("tag: " + tag);
 		getLog().info("srcDir: " + srcDir);
 		try {
+			
 			TreeMap<String, String> parameters = new TreeMap<String, String>();
 			if (!tag.isEmpty()) {
 				parameters.put("tags", tag);

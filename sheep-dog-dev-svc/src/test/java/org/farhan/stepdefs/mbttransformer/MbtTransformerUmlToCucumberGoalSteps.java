@@ -1,23 +1,30 @@
 package org.farhan.stepdefs.mbttransformer;
 
-import org.farhan.common.MbtTransformerFactory;
+import org.farhan.common.TestObject;
+import org.farhan.objects.mbttransformer.UmlToCucumberGoal;
 import io.cucumber.java.en.Given;
 import io.cucumber.datatable.DataTable;
 
 public class MbtTransformerUmlToCucumberGoalSteps {
 
-    @Given("^The mbt-transformer plugin, uml-to-cucumber goal is executed$")
-    public void theMbtTransformerPluginUmlToCucumberGoalIsExecuted() {
-        MbtTransformerFactory.get("UmlToCucumberGoal").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("UmlToCucumberGoal").setPath("uml-to-cucumber");
-        MbtTransformerFactory.get("UmlToCucumberGoal").transition();
-    }
+	private TestObject object;
 
-    @Given("^The mbt-transformer plugin, uml-to-cucumber goal is executed with$")
-    public void theMbtTransformerPluginUmlToCucumberGoalIsExecutedWith(DataTable dataTable) {
-        MbtTransformerFactory.get("UmlToCucumberGoal").setComponent("mbt-transformer");
-        MbtTransformerFactory.get("UmlToCucumberGoal").setPath("uml-to-cucumber");
-        MbtTransformerFactory.get("UmlToCucumberGoal").setInputOutputs(dataTable);
-        MbtTransformerFactory.get("UmlToCucumberGoal").transition();
-    }
+	public MbtTransformerUmlToCucumberGoalSteps(UmlToCucumberGoal object) {
+		this.object = (TestObject) object;
+	}
+
+	@Given("^The mbt-transformer plugin, uml-to-cucumber goal is executed$")
+	public void theMbtTransformerPluginUmlToCucumberGoalIsExecuted() {
+		object.setComponent("mbt-transformer");
+		object.setPath("uml-to-cucumber");
+		object.transition();
+	}
+
+	@Given("^The mbt-transformer plugin, uml-to-cucumber goal is executed with$")
+	public void theMbtTransformerPluginUmlToCucumberGoalIsExecutedWith(DataTable dataTable) {
+		object.setComponent("mbt-transformer");
+		object.setPath("uml-to-cucumber");
+		object.setInputOutputs(dataTable);
+		object.transition();
+	}
 }
