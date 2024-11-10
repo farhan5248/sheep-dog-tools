@@ -89,12 +89,6 @@
 			<artifactId>sheep-dog-dev</artifactId>
 			<version>${sheep-dog-dev.version}</version>
 		</dependency>
-		<!-- Need to dyanmically find classes, should replace with Spring -->
-		<dependency>
-			<groupId>com.google.inject</groupId>
-			<artifactId>guice</artifactId>
-			<version>7.0.0</version>
-		</dependency>
 		<!-- Cucumber -->
 		<dependency>
 			<groupId>io.cucumber</groupId>

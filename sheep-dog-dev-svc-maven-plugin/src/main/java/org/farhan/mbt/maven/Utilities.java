@@ -1,64 +1,14 @@
 package org.farhan.mbt.maven;
 
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.Scanner;
-
-import org.json.JSONObject;
 
 public class Utilities {
-
-	private static HttpURLConnection createRequest(String url, Map<String, String> parameters, String method)
-			throws Exception {
-		for (String param : parameters.keySet()) {
-			if (url.contains("?")) {
-				url += "&";
-			} else {
-				url += "?";
-			}
-			url += param + "=" + parameters.get(param);
-		}
-		HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-		connection.setDoOutput(true);
-		connection.setInstanceFollowRedirects(false);
-		connection.setRequestProperty("Content-Type", "text/plain");
-		connection.setRequestProperty("charset", "utf-8");
-		connection.setRequestMethod(method);
-		return connection;
-	}
-
-	private static String sendRequest(HttpURLConnection connection) throws Exception {
-		connection.connect();
-		if (connection.getResponseCode() != 200) {
-			throw new Exception("Invalid response code: " + connection.getResponseCode());
-		}
-		Scanner scanner = new Scanner(connection.getInputStream());
-		String response = scanner.nextLine();
-		scanner.close();
-		return response;
-	}
-
-	public static JSONObject sendGetRequest(String url, Map<String, String> parameters) throws Exception {
-		HttpURLConnection connection = createRequest(url, parameters, "GET");
-		return new JSONObject(sendRequest(connection));
-	}
-
-	public static void sendPostRequest(String url, Map<String, String> parameters, String payload)
-			throws Exception {
-		HttpURLConnection connection = createRequest(url, parameters, "POST");
-		DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-		wr.write(payload.getBytes(StandardCharsets.UTF_8));
-		sendRequest(connection);
-	}
 
 	// TODO Move the maven plugin implementation of ConvertibleProjectResource and
 	// put a copy in the test code

@@ -1,98 +1,73 @@
 package org.farhan.common;
 
-import java.io.DataOutputStream;
 import java.io.File;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
-import java.util.Scanner;
 import java.util.TreeMap;
 
-import org.json.*;
 import org.farhan.mbt.core.Utilities;
+import org.farhan.mbt.service.ModelTransformerResponse;
 import org.junit.jupiter.api.Assertions;
-import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.client.RestTemplate;
 
 public class RestService extends TestObject {
 
-	@LocalServerPort
+	@Value("${server.port}")
 	private int port;
 
 	private String getHost() {
 		return "http://localhost:" + port + "/";
 	}
 
-	private HttpURLConnection createRequest(String url, Map<String, String> parameters, String method)
-			throws Exception {
-		for (String param : parameters.keySet()) {
-			if (url.contains("?")) {
-				url += "&";
-			} else {
-				url += "?";
-			}
-			url += param + "=" + parameters.get(param);
-		}
-		parameters = new TreeMap<String, String>();
-		HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-		connection.setDoOutput(true);
-		connection.setInstanceFollowRedirects(false);
-		connection.setRequestProperty("Content-Type", "text/plain");
-		connection.setRequestProperty("charset", "utf-8");
-		connection.setRequestMethod(method);
-		return connection;
+	private final RestTemplate restTemplate = new RestTemplate();
+
+	private void addFile(String tags, String fileName, String contents) {
+		TreeMap<String, String> parameters = new TreeMap<String, String>();
+		parameters.put("tags", tags);
+		parameters.put("fileName", fileName);
+		restTemplate.postForObject(getHost() + "addFile?tags={tags}&fileName={fileName}", contents,
+				ModelTransformerResponse.class, parameters);
 	}
 
-	private String sendRequest(HttpURLConnection connection) throws Exception {
-		connection.connect();
-		if (connection.getResponseCode() != 200) {
-			throw new Exception("Invalid response code: " + connection.getResponseCode());
-		}
-		Scanner scanner = new Scanner(connection.getInputStream());
-		String response = scanner.nextLine();
-		scanner.close();
-		return response;
+	private void runGoal(String tags, String goal) {
+		TreeMap<String, String> parameters = new TreeMap<String, String>();
+		parameters.put("tags", tags);
+		restTemplate.postForObject(getHost() + goal + "?tags={tags}", null, ModelTransformerResponse.class, parameters);
 	}
 
-	protected JSONObject sendGetRequest(String resource, Map<String, String> parameters) throws Exception {
-		HttpURLConnection connection = createRequest(getHost() + resource, parameters, "GET");
-		return new JSONObject(sendRequest(connection));
+	private String getFileList(String tags) {
+		TreeMap<String, String> parameters = new TreeMap<String, String>();
+		parameters.put("tags", tags);
+		return restTemplate
+				.getForObject(getHost() + "getFileList?tags={tags}", ModelTransformerResponse.class, parameters)
+				.fileName();
 	}
 
-	protected void sendPostRequest(String resource, Map<String, String> parameters, String payload) throws Exception {
-		HttpURLConnection connection = createRequest(getHost() + resource, parameters, "POST");
-		DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-		wr.write(payload.getBytes(StandardCharsets.UTF_8));
-		sendRequest(connection);
+	private String getFileContents(String tags, String fileName) {
+		TreeMap<String, String> parameters = new TreeMap<String, String>();
+		parameters.put("tags", tags);
+		parameters.put("fileName", fileName);
+		return restTemplate.getForObject(getHost() + "getFileContents?tags={tags}&fileName={fileName}",
+				ModelTransformerResponse.class, parameters).content();
 	}
 
 	protected void runGoal(String resource) {
 		try {
 			File srcDir = new File("target/src-gen/" + this.keyValue.get("component") + "/src/test/");
-			TreeMap<String, String> parameters = new TreeMap<String, String>();
 			if (keyValue.get("tags") == null) {
 				keyValue.put("tags", "");
 			}
-			if (!keyValue.get("tags").isEmpty()) {
-				parameters.put("tags", keyValue.get("tags"));
-			}
+
 			for (File aFile : Utilities.recursivelyListFiles(srcDir, "")) {
 				String contents = Utilities.readFile(aFile);
-				String fileName = aFile.getAbsolutePath().replace(srcDir.getAbsolutePath() + "\\", "").replace("\\",
-						"/");
-				parameters.put("fileName", fileName);
-				sendPostRequest("addFile", parameters, contents);
-				parameters.remove("fileName");
+				String fileName = aFile.getAbsolutePath().replace(srcDir.getAbsolutePath() + "\\", "");
+				addFile(keyValue.get("tags"), fileName.replace("\\", "/"), contents);
 			}
-			sendPostRequest(resource, parameters, "");
-			String fileList = sendGetRequest("getFileList", parameters).getString("fileName");
-			if (!fileList.isBlank()) {
-				for (String fileName : fileList.split("\n")) {
-					parameters.put("fileName", fileName.replace("\\", "/"));
-					String contents = sendGetRequest("getFileContents", parameters).getString("content");
-					parameters.remove("fileName");
-					Utilities.writeFile(new File(srcDir.getAbsolutePath() + "\\" + fileName), contents);
-				}
+
+			runGoal(keyValue.get("tags"), resource);
+
+			for (String fileName : getFileList(keyValue.get("tags")).split("\n")) {
+				String contents = getFileContents(keyValue.get("tags"), fileName.replace("\\", "/"));
+				Utilities.writeFile(new File(srcDir.getAbsolutePath() + "\\" + fileName), contents);
 			}
 		} catch (Exception e) {
 			Assertions.fail(Utilities.getStackTraceAsString(e));

@@ -15,6 +15,7 @@ public abstract class GoalObject extends TestObject {
 			Class<?> mojoClass = Class.forName(goal);
 			MBTMojo mojo = (MBTMojo) mojoClass.getConstructor().newInstance();
 			mojo.tag = keyValue.get("tags");
+			mojo.port = 8080;
 			mojo.srcDir = new File("target/src-gen/" + this.keyValue.get("component") + "/src/test/");
 			mojo.execute();
 		} catch (Exception e) {

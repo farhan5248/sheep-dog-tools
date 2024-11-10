@@ -73,7 +73,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 		logger.info("tags:" + tags);
 		ModelTransformerResponse mtr = mojoGoal(new ConvertCucumberToUML(tags));
 		logger.debug("response: " + mtr.toString());
-		logger.info("Ending getFileContents");
+		logger.info("Ending cucumberToUMLMojo");
 		return mtr;
 	}
 

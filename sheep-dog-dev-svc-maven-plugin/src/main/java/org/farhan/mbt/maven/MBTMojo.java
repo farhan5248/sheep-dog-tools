@@ -7,10 +7,10 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.client.RestTemplate;
 
 public abstract class MBTMojo extends AbstractMojo {
-
-	private String host = "http://localhost:8080/";
 
 	/**
 	 * The Maven Project.
@@ -26,38 +26,62 @@ public abstract class MBTMojo extends AbstractMojo {
 	@Parameter(property = "tag", defaultValue = "")
 	public String tag;
 
+	@Parameter(property = "port", defaultValue = "8080")
+	public int port;
+
+	private String getHost() {
+		return "http://localhost:" + port + "/";
+	}
+
+	private final RestTemplate restTemplate = new RestTemplate();
+
+	private void addFile(String tags, String fileName, String contents) {
+		TreeMap<String, String> parameters = new TreeMap<String, String>();
+		parameters.put("tags", tags);
+		parameters.put("fileName", fileName);
+		restTemplate.postForObject(getHost() + "addFile?tags={tags}&fileName={fileName}", contents,
+				ModelTransformerResponse.class, parameters);
+	}
+
+	private void runGoal(String tags, String goal) {
+		TreeMap<String, String> parameters = new TreeMap<String, String>();
+		parameters.put("tags", tags);
+		restTemplate.postForObject(getHost() + goal + "?tags={tags}", null, ModelTransformerResponse.class, parameters);
+	}
+
+	private String getFileList(String tags) {
+		TreeMap<String, String> parameters = new TreeMap<String, String>();
+		parameters.put("tags", tags);
+		return restTemplate
+				.getForObject(getHost() + "getFileList?tags={tags}", ModelTransformerResponse.class, parameters)
+				.fileName();
+	}
+
+	private String getFileContents(String tags, String fileName) {
+		TreeMap<String, String> parameters = new TreeMap<String, String>();
+		parameters.put("tags", tags);
+		parameters.put("fileName", fileName);
+		return restTemplate.getForObject(getHost() + "getFileContents?tags={tags}&fileName={fileName}",
+				org.farhan.mbt.maven.ModelTransformerResponse.class, parameters).content();
+	}
+
 	public void execute(String mojo) throws MojoExecutionException {
 		getLog().info("Starting execute");
 		getLog().info("tag: " + tag);
 		getLog().info("srcDir: " + srcDir);
 		try {
-			
-			TreeMap<String, String> parameters = new TreeMap<String, String>();
-			if (!tag.isEmpty()) {
-				parameters.put("tags", tag);
-			}
 			// TODO only upload step libraries and interfaces, not every .java file
 			for (File aFile : Utilities.recursivelyListFiles(srcDir, "")) {
 				String contents = Utilities.readFile(aFile);
-				getLog().debug("contents: " + contents);
-				String fileName = aFile.getAbsolutePath().replace(srcDir.getAbsolutePath() + "\\", "").replace("\\",
-						"/");
-				parameters.put("fileName", fileName);
-				Utilities.sendPostRequest(host + "addFile", parameters, contents);
-				parameters.remove("fileName");
+				String fileName = aFile.getAbsolutePath().replace(srcDir.getAbsolutePath() + "\\", "");
+				addFile(tag, fileName.replace("\\", "/"), contents);
 			}
-			Utilities.sendPostRequest(host + mojo, parameters, "");
-			String fileList = Utilities.sendGetRequest(host + "getFileList", parameters).getString("fileName");
-			getLog().debug("fileList: " + fileList);
-			if (!fileList.isBlank()) {
-				for (String fileName : fileList.split("\n")) {
-					parameters.put("fileName", fileName);
-					String contents = Utilities.sendGetRequest(host + "getFileContents", parameters)
-							.getString("content");
-					parameters.remove("fileName");
-					getLog().debug("contents: " + contents);
-					Utilities.writeFile(new File(srcDir.getAbsolutePath() + "\\" + fileName), contents);
-				}
+
+			runGoal(tag, mojo);
+
+			for (String fileName : getFileList(tag).split("\n")) {
+				String contents = getFileContents(tag, fileName.replace("\\", "/"));
+				Utilities.writeFile(new File(srcDir.getAbsolutePath() + "\\" + fileName), contents);
 			}
 		} catch (Exception e) {
 			getLog().error(Utilities.getStackTraceAsString(e));

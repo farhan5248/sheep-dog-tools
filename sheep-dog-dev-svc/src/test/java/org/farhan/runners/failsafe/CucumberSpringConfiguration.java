@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @ComponentScan(basePackages = "org.farhan")
 @EnableAutoConfiguration
-@ActiveProfiles("dev")
+@ActiveProfiles("failsafe")
 @CucumberContextConfiguration
 @SpringBootTest(classes = RestServiceApplication.class)
 public class CucumberSpringConfiguration {
