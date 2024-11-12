@@ -1,6 +1,6 @@
 package org.farhan.stepdefs.mbttransformer;
 
-import org.farhan.common.TestObject;
+import org.farhan.common.TestSteps;
 import org.farhan.objects.mbttransformer.UmlToAsciidoctorGoal;
 import com.google.inject.Inject;
 import io.cucumber.java.en.Given;
@@ -8,13 +8,11 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class MbtTransformerUmlToAsciidoctorGoalSteps {
-
-    private TestObject object;
+public class MbtTransformerUmlToAsciidoctorGoalSteps  extends TestSteps{
 
     @Inject
     public MbtTransformerUmlToAsciidoctorGoalSteps(UmlToAsciidoctorGoal object) {
-        this.object = (TestObject) object;
+    	super(object);
     }
 
     @Given("^The mbt-transformer plugin, uml-to-asciidoctor goal is executed$")

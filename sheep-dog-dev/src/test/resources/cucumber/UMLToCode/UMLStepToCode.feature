@@ -68,7 +68,7 @@ Feature: UML Step To Code
           | theBlahApplicationObjectPageIsEmpty | BlahFactory.get("ObjectPage").setPath("Object");        |
           | theBlahApplicationObjectPageIsEmpty | BlahFactory.get("ObjectPage").setInputOutputs("Empty"); |
 
-  Scenario: Create new java methods for layer 2 with Spring
+  Scenario: Create new java methods for layer 2 with DI
 
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber-spring goal is executed
@@ -88,6 +88,22 @@ Feature: UML Step To Code
           | theBlahApplicationObjectPageIsEmpty | object.setComponent("blah");     |
           | theBlahApplicationObjectPageIsEmpty | object.setPath("Object");        |
           | theBlahApplicationObjectPageIsEmpty | object.setInputOutputs("Empty"); |
+
+  Scenario: Create new java methods for layer 2 with DI annotation
+
+     When The mbt-transformer plugin, cucumber-to-uml goal is executed
+      And The mbt-transformer plugin, uml-to-cucumber-guice goal is executed
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
+      And The mbt-transformer plugin, BlahObjectPageSteps.java file Object section will be created as follows
+          | Import                           |
+          | com.google.inject.Inject         |
+          | io.cucumber.guice.ScenarioScoped |
+      And The mbt-transformer plugin, BlahObjectPageSteps.java file Object section will be created as follows
+          | Class Annotation |
+          | ScenarioScoped   |
+      And The mbt-transformer plugin, BlahObjectPageSteps.java file Object section will be created as follows
+          | Constructor Name    | Constructor Annotation |
+          | BlahObjectPageSteps | Inject                 |
 
   Scenario: Create new java methods for layer 3
 

@@ -140,10 +140,10 @@ public abstract class UMLFileObject extends FileObject {
 	}
 
 	private GoalObject getGoalClass() throws Exception {
-		for (Key<?> b : GuiceConfig.classes.getBindings().keySet()) {
+		for (Key<?> b : Config.classes.getBindings().keySet()) {
 			if (b.getTypeLiteral().toString().endsWith("ToUmlGoal")
 					&& b.getTypeLiteral().toString().startsWith("org.farhan.objects.mbttransformer.")) {
-				GoalObject object = (GoalObject) GuiceConfig.classes.getInstance(b);
+				GoalObject object = (GoalObject) Config.classes.getInstance(b);
 				if (!object.keyValue.isEmpty()) {
 					return object;
 				}

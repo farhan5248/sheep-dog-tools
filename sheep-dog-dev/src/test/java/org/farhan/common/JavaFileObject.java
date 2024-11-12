@@ -77,6 +77,17 @@ public class JavaFileObject extends FileObject {
 				"Statement " + statement + " doesn't exist");
 	}
 
+	protected void assertClassAnnotationExists(String annotation) {
+		Assertions.assertTrue(getObject().getAnnotationByName(annotation).get() != null,
+				"Class Annotation " + annotation + " doesn't exist");
+	}
+
+	protected void assertConstructorAnnotationExists(String constructorName, String annotation) {
+		assertConstructorExists(constructorName);
+		Assertions.assertTrue(getObject().getConstructors().getFirst().getAnnotationByName(annotation) != null,
+				"Constructor Annotation " + annotation + " doesn't exist");
+	}
+
 	protected void assertMethodStatementExists(String methodName, String statement) {
 		assertMethodExists(methodName);
 		Assertions.assertTrue(getStatement(methodName, statement) != null, "Statement " + statement + " doesn't exist");

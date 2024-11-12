@@ -2,7 +2,7 @@ package org.farhan.objects.mbttransformer;
 
 import java.util.HashMap;
 
-public interface UmlToCucumberSpringGoal {
+public interface UmlToCucumberGuiceGoal {
 
     public void transition();
 

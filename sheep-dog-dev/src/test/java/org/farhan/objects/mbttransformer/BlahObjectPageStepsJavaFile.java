@@ -37,4 +37,8 @@ public interface BlahObjectPageStepsJavaFile {
     public void assertObjectSectionConstructorName(HashMap<String, String> keyMap);
 
     public void assertObjectSectionStatement(HashMap<String, String> keyMap);
+
+    public void assertObjectSectionClassAnnotation(HashMap<String, String> keyMap);
+
+    public void assertObjectSectionConstructorAnnotation(HashMap<String, String> keyMap);
 }

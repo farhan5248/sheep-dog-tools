@@ -6,3 +6,5 @@ Object: cucumber-to-uml goal
 
           | Tags |
 
+  Definition: is executed
+

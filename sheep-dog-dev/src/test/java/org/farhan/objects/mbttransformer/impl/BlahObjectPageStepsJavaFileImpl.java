@@ -6,6 +6,7 @@ import org.farhan.common.JavaFileObject;
 import org.farhan.objects.mbttransformer.BlahObjectPageStepsJavaFile;
 
 import io.cucumber.guice.ScenarioScoped;
+
 @ScenarioScoped
 public class BlahObjectPageStepsJavaFileImpl extends JavaFileObject implements BlahObjectPageStepsJavaFile {
 
@@ -93,5 +94,14 @@ public class BlahObjectPageStepsJavaFileImpl extends JavaFileObject implements B
 		assertConstructorStatementExists(keyMap.get("Constructor Name"), keyMap.get("Statement"));
 	}
 
+	@Override
+	public void assertObjectSectionClassAnnotation(HashMap<String, String> keyMap) {
+		assertClassAnnotationExists(keyMap.get("Class Annotation"));
+	}
+
+	@Override
+	public void assertObjectSectionConstructorAnnotation(HashMap<String, String> keyMap) {
+		assertConstructorAnnotationExists(keyMap.get("Constructor Name"), keyMap.get("Constructor Annotation"));
+	}
 
 }

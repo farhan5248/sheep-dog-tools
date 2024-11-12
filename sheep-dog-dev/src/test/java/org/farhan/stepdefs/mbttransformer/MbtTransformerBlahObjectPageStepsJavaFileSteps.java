@@ -1,6 +1,6 @@
 package org.farhan.stepdefs.mbttransformer;
 
-import org.farhan.common.TestObject;
+import org.farhan.common.TestSteps;
 import org.farhan.objects.mbttransformer.BlahObjectPageStepsJavaFile;
 import com.google.inject.Inject;
 import io.cucumber.java.en.Given;
@@ -8,13 +8,11 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class MbtTransformerBlahObjectPageStepsJavaFileSteps {
-
-    private TestObject object;
+public class MbtTransformerBlahObjectPageStepsJavaFileSteps  extends TestSteps{
 
     @Inject
     public MbtTransformerBlahObjectPageStepsJavaFileSteps(BlahObjectPageStepsJavaFile object) {
-        this.object = (TestObject) object;
+    	super(object);
     }
 
     @Given("^The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows$")

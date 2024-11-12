@@ -1,6 +1,6 @@
 package org.farhan.stepdefs.mbttransformer;
 
-import org.farhan.common.TestObject;
+import org.farhan.common.TestSteps;
 import org.farhan.objects.mbttransformer.ProcessAsciidocFile;
 import com.google.inject.Inject;
 import io.cucumber.java.en.Given;
@@ -8,13 +8,11 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class MbtTransformerProcessAsciidocFileSteps {
-
-    private TestObject object;
+public class MbtTransformerProcessAsciidocFileSteps  extends TestSteps{
 
     @Inject
     public MbtTransformerProcessAsciidocFileSteps(ProcessAsciidocFile object) {
-        this.object = (TestObject) object;
+    	super(object);
     }
 
     @Given("^The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows$")

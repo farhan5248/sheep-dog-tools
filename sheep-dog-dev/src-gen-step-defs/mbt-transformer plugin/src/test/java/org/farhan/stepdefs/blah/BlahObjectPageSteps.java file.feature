@@ -58,3 +58,11 @@ Object: src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file
 
           | Constructor Name | Statement |
 
+    Parameters: 6
+
+          | Class Annotation |
+
+    Parameters: 7
+
+          | Constructor Name | Constructor Annotation |
+

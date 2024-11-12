@@ -1,4 +1,4 @@
-Object: uml-to-cucumber-spring goal
+Object: uml-to-cucumber-guice goal
 
   Definition: is executed
 
