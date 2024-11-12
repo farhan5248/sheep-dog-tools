@@ -32,7 +32,7 @@ public class CucumberProject extends ConvertibleProject {
 			firstLayerObjects.add(aConvertibleObject);
 			return aConvertibleObject;
 		} else {
-			aConvertibleObject = new CucumberJavaWrapper(file);
+			aConvertibleObject = createJavaWrapper(file);
 			if (file.getAbsolutePath().contains(SECOND_LAYER)) {
 				secondLayerObjects.add(aConvertibleObject);
 			} else {
@@ -40,6 +40,10 @@ public class CucumberProject extends ConvertibleProject {
 			}
 			return aConvertibleObject;
 		}
+	}
+
+	protected ConvertibleObject createJavaWrapper(File file) {
+		return new CucumberJavaWrapper(file);
 	}
 
 	@Override

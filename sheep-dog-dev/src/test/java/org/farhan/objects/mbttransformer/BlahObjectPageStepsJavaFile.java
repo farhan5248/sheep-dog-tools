@@ -29,4 +29,12 @@ public interface BlahObjectPageStepsJavaFile {
     public void assertFieldsSectionReturnType(HashMap<String, String> keyMap);
 
     public void assertFieldsSectionAnnotation(HashMap<String, String> keyMap);
+
+    public void assertObjectSectionClassName(HashMap<String, String> keyMap);
+
+    public void assertObjectSectionExtends(HashMap<String, String> keyMap);
+
+    public void assertObjectSectionConstructorName(HashMap<String, String> keyMap);
+
+    public void assertObjectSectionStatement(HashMap<String, String> keyMap);
 }

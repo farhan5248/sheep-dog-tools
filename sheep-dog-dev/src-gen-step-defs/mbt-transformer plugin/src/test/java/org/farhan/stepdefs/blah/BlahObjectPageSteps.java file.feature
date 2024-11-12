@@ -28,6 +28,14 @@ Object: src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file
 
           | Method Name | Annotation |
 
+    Parameters: 6
+
+          | Method Name | Annotation | Visibility | Return Type |
+
+    Parameters: 7
+
+          | Constructor Name | Statement |
+
   Definition: Object section will be created as follows
 
     Parameters: 1
@@ -37,4 +45,16 @@ Object: src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file
     Parameters: 2
 
           | Import |
+
+    Parameters: 3
+
+          | Class Name | Package |
+
+    Parameters: 4
+
+          | Extends |
+
+    Parameters: 5
+
+          | Constructor Name | Statement |
 

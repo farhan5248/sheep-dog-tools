@@ -1,16 +1,14 @@
 package org.farhan.stepdefs.mbttransformer;
 
-import org.farhan.common.TestObject;
+import org.farhan.common.TestSteps;
 import org.farhan.objects.mbttransformer.UmlToCucumberGoal;
 import io.cucumber.java.en.Given;
 import io.cucumber.datatable.DataTable;
 
-public class MbtTransformerUmlToCucumberGoalSteps {
-
-	private TestObject object;
+public class MbtTransformerUmlToCucumberGoalSteps extends TestSteps {
 
 	public MbtTransformerUmlToCucumberGoalSteps(UmlToCucumberGoal object) {
-		this.object = (TestObject) object;
+		super(object);
 	}
 
 	@Given("^The mbt-transformer plugin, uml-to-cucumber goal is executed$")

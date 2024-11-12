@@ -1,15 +1,13 @@
 package org.farhan.stepdefs.mbttransformer;
 
-import org.farhan.common.TestObject;
+import org.farhan.common.TestSteps;
 import org.farhan.objects.mbttransformer.ProcessFeatureFile;
 import io.cucumber.java.en.Given;
 
-public class MbtTransformerProcessFeatureFileSteps {
-
-	private TestObject object;
+public class MbtTransformerProcessFeatureFileSteps extends TestSteps {
 
 	public MbtTransformerProcessFeatureFileSteps(ProcessFeatureFile object) {
-		this.object = (TestObject) object;
+		super(object);
 	}
 
 	@Given("^The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows$")

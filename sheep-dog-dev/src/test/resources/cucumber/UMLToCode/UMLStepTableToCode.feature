@@ -83,19 +83,8 @@ Feature: UML Step Table To Code
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
       And The mbt-transformer plugin, BlahObjectPageSteps.java file Object section will be created as follows
-          | Interface Name      | Package                  |
-          | BlahObjectPageSteps | org.farhan.stepdefs.blah |
-      And The mbt-transformer plugin, BlahObjectPageSteps.java file Object section will be created as follows
           | Import                          |
-          | org.farhan.common.BlahFactory   |
-          | io.cucumber.java.en.Given       |
           | io.cucumber.datatable.DataTable |
-      And The mbt-transformer plugin, BlahObjectPageSteps.java file Fields section will be created as follows
-          | Method Name                                                  | Visibility | Return Type |
-          | theBlahApplicationObjectPageTopSectionWillBeCreatedAsFollows | public     | void        |
-      And The mbt-transformer plugin, BlahObjectPageSteps.java file Fields section will be created as follows
-          | Method Name                                                  | Annotation                                                                           |
-          | theBlahApplicationObjectPageTopSectionWillBeCreatedAsFollows | @Given("^The blah application, Object page Top section will be created as follows$") |
       And The mbt-transformer plugin, BlahObjectPageSteps.java file Fields section will be created as follows
           | Method Name                                                  | Parameter Name | Parameter Type |
           | theBlahApplicationObjectPageTopSectionWillBeCreatedAsFollows | dataTable      | DataTable      |

@@ -1,15 +1,13 @@
 package org.farhan.stepdefs.mbttransformer;
 
-import org.farhan.common.TestObject;
+import org.farhan.common.TestSteps;
 import org.farhan.objects.mbttransformer.BlahObjectPageStepsJavaFile;
 import io.cucumber.java.en.Given;
 
-public class MbtTransformerBlahObjectPageStepsJavaFileSteps {
-
-	private TestObject object;
+public class MbtTransformerBlahObjectPageStepsJavaFileSteps extends TestSteps {
 
 	public MbtTransformerBlahObjectPageStepsJavaFileSteps(BlahObjectPageStepsJavaFile object) {
-		this.object = (TestObject) object;
+		super(object);
 	}
 
 	@Given("^The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows$")

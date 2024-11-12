@@ -9,6 +9,7 @@ import org.farhan.objects.mbttransformer.ProcessFeatureFile;
 import org.farhan.objects.mbttransformer.PstUmlFile;
 import org.farhan.objects.mbttransformer.UmlToAsciidoctorGoal;
 import org.farhan.objects.mbttransformer.UmlToCucumberGoal;
+import org.farhan.objects.mbttransformer.UmlToCucumberSpringGoal;
 import org.farhan.objects.mbttransformer.impl.AsciidoctorToUmlGoalImpl;
 import org.farhan.objects.mbttransformer.impl.BlahObjectPageStepsJavaFileImpl;
 import org.farhan.objects.mbttransformer.impl.CucumberToUmlGoalImpl;
@@ -18,6 +19,7 @@ import org.farhan.objects.mbttransformer.impl.ProcessFeatureFileImpl;
 import org.farhan.objects.mbttransformer.impl.PstUmlFileImpl;
 import org.farhan.objects.mbttransformer.impl.UmlToAsciidoctorGoalImpl;
 import org.farhan.objects.mbttransformer.impl.UmlToCucumberGoalImpl;
+import org.farhan.objects.mbttransformer.impl.UmlToCucumberSpringGoalImpl;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -44,6 +46,7 @@ public final class GuiceConfig extends AbstractModule implements InjectorSource 
 		bind(PstUmlFile.class).to(PstUmlFileImpl.class);
 		bind(UmlToAsciidoctorGoal.class).to(UmlToAsciidoctorGoalImpl.class);
 		bind(UmlToCucumberGoal.class).to(UmlToCucumberGoalImpl.class);
+		bind(UmlToCucumberSpringGoal.class).to(UmlToCucumberSpringGoalImpl.class);
 	}
 
 	@Override

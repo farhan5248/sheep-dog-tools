@@ -73,4 +73,25 @@ public class BlahObjectPageStepsJavaFileImpl extends JavaFileObject implements B
 		setContent(keyMap.get("Content"));
 	}
 
+	@Override
+	public void assertObjectSectionClassName(HashMap<String, String> keyMap) {
+		assertClassNameIs(keyMap.get("Class Name"));
+	}
+
+	@Override
+	public void assertObjectSectionExtends(HashMap<String, String> keyMap) {
+		assertExtendsIs(keyMap.get("Extends"));
+	}
+
+	@Override
+	public void assertObjectSectionConstructorName(HashMap<String, String> keyMap) {
+		assertConstructorExists(keyMap.get("Constructor Name"));
+	}
+
+	@Override
+	public void assertObjectSectionStatement(HashMap<String, String> keyMap) {
+		assertConstructorStatementExists(keyMap.get("Constructor Name"), keyMap.get("Statement"));
+	}
+
+
 }

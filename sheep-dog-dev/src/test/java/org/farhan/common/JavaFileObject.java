@@ -21,6 +21,18 @@ public class JavaFileObject extends FileObject {
 		Assertions.assertTrue(getImport(importName) != null, "Import " + importName + " doesn't exist");
 	}
 
+	protected void assertExtendsIs(String name) {
+		Assertions.assertEquals(name, getObject().getExtendedTypes().getFirst().get().getNameAsString());
+	}
+
+	protected void assertConstructorExists(String name) {
+		Assertions.assertEquals(name, getObject().getConstructors().getFirst().getNameAsString());
+	}
+
+	protected void assertClassNameIs(String name) {
+		Assertions.assertEquals(name, getObject().getNameAsString());
+	}
+
 	protected void assertInterfaceNameIs(String name) {
 		Assertions.assertEquals(name, getObject().getNameAsString());
 	}
@@ -56,6 +68,13 @@ public class JavaFileObject extends FileObject {
 		assertMethodExists(methodName);
 		MethodDeclaration methodDeclaration = getMethod(methodName);
 		Assertions.assertEquals(returnType, methodDeclaration.getTypeAsString());
+	}
+
+	protected void assertConstructorStatementExists(String constructorName, String statement) {
+		assertConstructorExists(constructorName);
+		Assertions.assertEquals(statement,
+				getObject().getConstructors().getFirst().getBody().getStatement(0).toString(),
+				"Statement " + statement + " doesn't exist");
 	}
 
 	protected void assertMethodStatementExists(String methodName, String statement) {
@@ -114,6 +133,7 @@ public class JavaFileObject extends FileObject {
 	}
 
 	private Statement getStatement(String methodName, String statement) {
+
 		for (Statement s : getMethod(methodName).getBody().get().getStatements()) {
 			s.toString();
 			if (s.toString().contentEquals(statement)) {

@@ -3,7 +3,6 @@ package org.farhan.stepdefs.mbttransformer;
 import org.farhan.common.TestObject;
 import org.farhan.objects.mbttransformer.PstUmlFile;
 import com.google.inject.Inject;
-
 import io.cucumber.java.en.Given;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.guice.ScenarioScoped;
@@ -11,12 +10,12 @@ import io.cucumber.guice.ScenarioScoped;
 @ScenarioScoped
 public class MbtTransformerPstUmlFileSteps {
 
-	private TestObject object;
+    private TestObject object;
 
-	@Inject
-	public MbtTransformerPstUmlFileSteps(PstUmlFile object) {
-		this.object = (TestObject) object;
-	}
+    @Inject
+    public MbtTransformerPstUmlFileSteps(PstUmlFile object) {
+        this.object = (TestObject) object;
+    }
 
     @Given("^The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present$")
     public void theMbtTransformerPluginTargetMbtUmlPstUmlFileWillBePresent() {

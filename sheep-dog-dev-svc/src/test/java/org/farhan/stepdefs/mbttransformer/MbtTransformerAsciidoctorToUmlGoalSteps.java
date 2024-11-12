@@ -1,16 +1,14 @@
 package org.farhan.stepdefs.mbttransformer;
 
-import org.farhan.common.TestObject;
+import org.farhan.common.TestSteps;
 import org.farhan.objects.mbttransformer.AsciidoctorToUmlGoal;
 import io.cucumber.java.en.Given;
 import io.cucumber.datatable.DataTable;
 
-public class MbtTransformerAsciidoctorToUmlGoalSteps {
-
-	private TestObject object;
+public class MbtTransformerAsciidoctorToUmlGoalSteps extends TestSteps {
 
 	public MbtTransformerAsciidoctorToUmlGoalSteps(AsciidoctorToUmlGoal object) {
-		this.object = (TestObject) object;
+		super(object);
 	}
 
 	@Given("^The mbt-transformer plugin, asciidoctor-to-uml goal is executed$")

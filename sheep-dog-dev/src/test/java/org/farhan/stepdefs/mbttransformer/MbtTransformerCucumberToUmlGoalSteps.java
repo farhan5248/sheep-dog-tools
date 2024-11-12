@@ -3,7 +3,6 @@ package org.farhan.stepdefs.mbttransformer;
 import org.farhan.common.TestObject;
 import org.farhan.objects.mbttransformer.CucumberToUmlGoal;
 import com.google.inject.Inject;
-
 import io.cucumber.java.en.Given;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.guice.ScenarioScoped;
@@ -11,12 +10,13 @@ import io.cucumber.guice.ScenarioScoped;
 @ScenarioScoped
 public class MbtTransformerCucumberToUmlGoalSteps {
 
-	private TestObject object;
+    private TestObject object;
 
-	@Inject
-	public MbtTransformerCucumberToUmlGoalSteps(CucumberToUmlGoal object) {
-		this.object = (TestObject) object;
-	}
+    @Inject
+    public MbtTransformerCucumberToUmlGoalSteps(CucumberToUmlGoal object) {
+        this.object = (TestObject) object;
+    }
+
     @Given("^The mbt-transformer plugin, cucumber-to-uml goal is executed$")
     public void theMbtTransformerPluginCucumberToUmlGoalIsExecuted() {
         object.setComponent("mbt-transformer");

@@ -44,11 +44,50 @@ Feature: UML Step To Code
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
+      And The mbt-transformer plugin, BlahObjectPageSteps.java file Object section will be created as follows
+          | Class Name          | Package                  |
+          | BlahObjectPageSteps | org.farhan.stepdefs.blah |
+      And The mbt-transformer plugin, BlahObjectPageSteps.java file Object section will be created as follows
+          | Import                    |
+          | io.cucumber.java.en.Given |
+      And The mbt-transformer plugin, BlahObjectPageSteps.java file Fields section will be created as follows
+          | Method Name                         | Annotation                                             | Visibility | Return Type |
+          | theBlahApplicationObjectPageIsEmpty | @Given("^The blah application, Object page is empty$") | public     | void        |
+
+  Scenario: Create new java methods for layer 2 without DI
+
+     When The mbt-transformer plugin, cucumber-to-uml goal is executed
+      And The mbt-transformer plugin, uml-to-cucumber goal is executed
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
+      And The mbt-transformer plugin, BlahObjectPageSteps.java file Object section will be created as follows
+          | Import                        |
+          | org.farhan.common.BlahFactory |
       And The mbt-transformer plugin, BlahObjectPageSteps.java file Fields section will be created as follows
           | Method Name                         | Statement                                               |
           | theBlahApplicationObjectPageIsEmpty | BlahFactory.get("ObjectPage").setComponent("blah");     |
           | theBlahApplicationObjectPageIsEmpty | BlahFactory.get("ObjectPage").setPath("Object");        |
           | theBlahApplicationObjectPageIsEmpty | BlahFactory.get("ObjectPage").setInputOutputs("Empty"); |
+
+  Scenario: Create new java methods for layer 2 with Spring
+
+     When The mbt-transformer plugin, cucumber-to-uml goal is executed
+      And The mbt-transformer plugin, uml-to-cucumber-spring goal is executed
+     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
+      And The mbt-transformer plugin, BlahObjectPageSteps.java file Object section will be created as follows
+          | Extends   |
+          | TestSteps |
+      And The mbt-transformer plugin, BlahObjectPageSteps.java file Object section will be created as follows
+          | Import                             |
+          | org.farhan.common.TestSteps        |
+          | org.farhan.objects.blah.ObjectPage |
+      And The mbt-transformer plugin, BlahObjectPageSteps.java file Object section will be created as follows
+          | Constructor Name    | Statement      |
+          | BlahObjectPageSteps | super(object); |
+      And The mbt-transformer plugin, BlahObjectPageSteps.java file Fields section will be created as follows
+          | Method Name                         | Statement                        |
+          | theBlahApplicationObjectPageIsEmpty | object.setComponent("blah");     |
+          | theBlahApplicationObjectPageIsEmpty | object.setPath("Object");        |
+          | theBlahApplicationObjectPageIsEmpty | object.setInputOutputs("Empty"); |
 
   Scenario: Create new java methods for layer 3
 
