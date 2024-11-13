@@ -1,7 +1,6 @@
 package org.farhan.common;
 
 import java.io.File;
-
 import org.farhan.mbt.core.Utilities;
 import org.farhan.objects.mbttransformer.AsciidoctorToUmlGoal;
 import org.farhan.objects.mbttransformer.BlahObjectPageStepsJavaFile;
@@ -38,7 +37,7 @@ import io.cucumber.java.Before;
 public final class Config extends AbstractModule implements InjectorSource {
 
 	public static Injector classes;
-	
+
 	public static String getWorkingDir() {
 		return "target/src-gen/";
 	}
@@ -50,8 +49,6 @@ public final class Config extends AbstractModule implements InjectorSource {
 
 	@Override
 	protected void configure() {
-		// TODO get all interfaces in objects and then find the class and make this call
-		// so that each class doesn't have to be mapped this way
 		bind(AsciidoctorToUmlGoal.class).to(AsciidoctorToUmlGoalImpl.class);
 		bind(BlahObjectPageStepsJavaFile.class).to(BlahObjectPageStepsJavaFileImpl.class);
 		bind(CucumberToUmlGoal.class).to(CucumberToUmlGoalImpl.class);

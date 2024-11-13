@@ -52,21 +52,21 @@ public class RestService extends TestObject {
 
 	protected void runGoal(String resource) {
 		try {
-			File srcDir = new File("target/src-gen/" + this.keyValue.get("component") + "/src/test/");
-			if (keyValue.get("tags") == null) {
-				keyValue.put("tags", "");
+			File srcDir = new File("target/src-gen/" + this.attributes.get("component") + "/src/test/");
+			if (attributes.get("tags") == null) {
+				attributes.put("tags", "");
 			}
 
 			for (File aFile : Utilities.recursivelyListFiles(srcDir, "")) {
 				String contents = Utilities.readFile(aFile);
 				String fileName = aFile.getAbsolutePath().replace(srcDir.getAbsolutePath() + "\\", "");
-				addFile(keyValue.get("tags"), fileName.replace("\\", "/"), contents);
+				addFile(attributes.get("tags"), fileName.replace("\\", "/"), contents);
 			}
 
-			runGoal(keyValue.get("tags"), resource);
+			runGoal(attributes.get("tags"), resource);
 
-			for (String fileName : getFileList(keyValue.get("tags")).split("\n")) {
-				String contents = getFileContents(keyValue.get("tags"), fileName.replace("\\", "/"));
+			for (String fileName : getFileList(attributes.get("tags")).split("\n")) {
+				String contents = getFileContents(attributes.get("tags"), fileName.replace("\\", "/"));
 				Utilities.writeFile(new File(srcDir.getAbsolutePath() + "\\" + fileName), contents);
 			}
 		} catch (Exception e) {

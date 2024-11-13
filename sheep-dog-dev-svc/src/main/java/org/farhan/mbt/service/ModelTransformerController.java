@@ -15,6 +15,7 @@ import org.farhan.mbt.core.MojoGoal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationListener;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,8 +23,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@ConfigurationProperties(prefix = "sheepdog")
 @RestController
 public class ModelTransformerController implements ApplicationListener<ApplicationReadyEvent> {
+
+	private String baseDir;
+
+	public void setBaseDir(String baseDir) {
+		this.baseDir = baseDir.replace("/", File.separator);
+	}
 
 	Logger logger = LoggerFactory.getLogger(ModelTransformerController.class);
 
@@ -168,13 +176,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	@Override
 	public void onApplicationEvent(ApplicationReadyEvent event) {
 		logger.info("Starting onApplicationEvent");
-		// TODO turn this into a property instead of an environment variable
-		File baseDir = new File(File.separator + System.getenv("BASEDIR"));
-		if (!baseDir.exists()) {
-			baseDir.mkdirs();
-		} else {
-			ConvertibleProject.baseDir = baseDir.getPath() + File.separator;
-		}
+		ConvertibleProject.baseDir = this.baseDir;
 		logger.info("Ending onApplicationEvent");
 	}
 

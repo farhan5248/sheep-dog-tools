@@ -13,7 +13,7 @@ import io.cucumber.datatable.DataTable;
 // Right now the way I model stuff all the objects are either output ones or input+transition ones
 public abstract class TestObject {
 
-	protected HashMap<String, String> keyValue = new HashMap<String, String>();
+	protected HashMap<String, String> attributes = new HashMap<String, String>();
 
 	public void assertInputOutputs(DataTable dataTable) {
 		processInputOutputs(dataTable, "assert", "");
@@ -77,7 +77,7 @@ public abstract class TestObject {
 	}
 
 	public void setComponent(String component) {
-		keyValue.put("component", component);
+		attributes.put("component", component);
 	}
 
 	public void setInputOutputs(DataTable dataTable) {
@@ -99,7 +99,7 @@ public abstract class TestObject {
 	}
 
 	public void setPath(String path) {
-		keyValue.put("path", path);
+		attributes.put("path", path);
 	}
 
 	public void transition() {

@@ -1,9 +1,6 @@
 services:
   sheep-dog-dev-svc:
     hostname: mbt.sheepdog.org
-    build:
-      args:
-        basedir: sheep-dog-dev-svc/mbt
     image: farhan5248/sheep-dog-dev-svc:latest
     restart: unless-stopped
     volumes:

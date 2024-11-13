@@ -18,6 +18,6 @@ public class AsciidoctorToUmlGoalImpl extends GoalObject implements AsciidoctorT
 
 	@Override
 	public void setTags(HashMap<String, String> keyMap) {
-		keyValue.put("tags", keyMap.get("Tags"));
+		attributes.put("tags", keyMap.get("Tags"));
 	}
 }

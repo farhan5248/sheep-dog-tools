@@ -12,7 +12,7 @@ public abstract class FileObject extends TestObject {
 	}
 
 	protected File getFile() {
-		return new File("target/src-gen/" + keyValue.get("component") + "/" + keyValue.get("path"));
+		return new File("target/src-gen/" + attributes.get("component") + "/" + attributes.get("path"));
 	}
 
 	protected void assertObjectExists() {
