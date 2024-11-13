@@ -10,7 +10,7 @@ import io.cucumber.guice.ScenarioScoped;
 public class AsciidoctorToUmlGoalImpl extends GoalObject implements AsciidoctorToUmlGoal {
 
 	public void setTags(HashMap<String, String> keyMap) {
-		keyValue.put("tags", keyMap.get("Tags"));
+		attributes.put("tags", keyMap.get("Tags"));
 	}
 
 	public void transition() {

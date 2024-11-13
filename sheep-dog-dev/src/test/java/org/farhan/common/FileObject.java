@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Assertions;
 public abstract class FileObject extends TestObject {
 
 	public void setComponent(String component) {
-		keyValue.put("component", component);
+		attributes.put("component", component);
 	}
 
 	protected File getFile() {
-		return new File("target/src-gen/" + keyValue.get("component") + "/" + keyValue.get("path"));
+		return new File(Config.getWorkingDir() + attributes.get("component") + "/" + attributes.get("path"));
 	}
 
 	protected void assertObjectExists() {

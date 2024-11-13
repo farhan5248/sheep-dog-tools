@@ -34,6 +34,7 @@ public abstract class MBTMojo extends AbstractMojo {
 			if (ConvertibleProject.baseDir.isEmpty()) {
 				ConvertibleProject.baseDir = "target/mbt/";
 			}
+			// TODO this should only send the layer 1,2,3 files, not runners, common or impl
 			for (File aFile : Utilities.recursivelyListFiles(srcDir, "")) {
 				String contents = Utilities.readFile(aFile);
 				getLog().debug("contents: " + contents);

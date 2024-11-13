@@ -31,9 +31,13 @@ import io.cucumber.java.Before;
 
 public final class Config extends AbstractModule implements InjectorSource {
 
+	public static String getWorkingDir() {
+		return "target/src-gen/";
+	}
+
 	@Before
 	public void before() {
-		Utilities.deleteDir(new File("target/src-gen/"), "");
+		Utilities.deleteDir(new File(getWorkingDir()), "");
 	}
 
 	@Override

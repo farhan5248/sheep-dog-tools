@@ -10,13 +10,14 @@ public abstract class GoalObject extends TestObject {
 
 	protected void runGoal(String goal) {
 		try {
-			if (keyValue.get("tags") == null) {
-				keyValue.put("tags", "");
+			if (attributes.get("tags") == null) {
+				attributes.put("tags", "");
 			}
 			Class<?> mojoClass = Class.forName(goal);
-			MojoGoal mojo = (MojoGoal) mojoClass.getConstructor(String.class).newInstance(keyValue.get("tags"));
-			ConvertibleProject.baseDir = "target/src-gen/" + this.keyValue.get("component") + "/target/mbt/";
-			File srcDir = new File("target/src-gen/" + this.keyValue.get("component") + "/src/test/");
+			MojoGoal mojo = (MojoGoal) mojoClass.getConstructor(String.class).newInstance(attributes.get("tags"));
+			File srcDir = new File(Config.getWorkingDir() + attributes.get("component") + "/src/test/");
+			ConvertibleProject.baseDir = Config.getWorkingDir() + attributes.get("component") + "/target/mbt/";
+			
 			for (File aFile : Utilities.recursivelyListFiles(srcDir, "")) {
 				mojo.addFile(aFile.getAbsolutePath().replace(srcDir.getAbsolutePath(), ""), Utilities.readFile(aFile));
 			}

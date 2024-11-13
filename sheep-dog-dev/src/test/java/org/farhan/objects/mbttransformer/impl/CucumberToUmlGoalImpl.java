@@ -10,7 +10,7 @@ import io.cucumber.guice.ScenarioScoped;
 public class CucumberToUmlGoalImpl extends GoalObject implements CucumberToUmlGoal {
 
 	public void setTags(HashMap<String, String> keyMap) {
-		keyValue.put("tags", keyMap.get("Tags"));
+		attributes.put("tags", keyMap.get("Tags"));
 	}
 
 	@Override

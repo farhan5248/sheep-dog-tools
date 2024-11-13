@@ -11,7 +11,7 @@ public class UmlToCucumberSpringGoalImpl extends GoalObject implements UmlToCucu
 
 	@Override
 	public void setTags(HashMap<String, String> keyMap) {
-		keyValue.put("tags", keyMap.get("Tags"));
+		attributes.put("tags", keyMap.get("Tags"));
 	}
 
 	@Override

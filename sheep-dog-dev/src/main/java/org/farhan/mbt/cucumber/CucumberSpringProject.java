@@ -9,7 +9,7 @@ public class CucumberSpringProject extends CucumberProject {
 	public CucumberSpringProject(String tag) {
 		super(tag);
 	}
-	
+
 	@Override
 	protected ConvertibleObject createJavaWrapper(File file) {
 		return new CucumberSpringJavaWrapper(file);

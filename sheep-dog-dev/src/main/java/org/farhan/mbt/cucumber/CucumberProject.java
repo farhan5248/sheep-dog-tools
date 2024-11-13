@@ -9,9 +9,9 @@ import org.farhan.mbt.core.Utilities;
 
 public class CucumberProject extends ConvertibleProject {
 
-	private ArrayList<ConvertibleObject> firstLayerObjects;
-	private ArrayList<ConvertibleObject> secondLayerObjects;
-	private ArrayList<ConvertibleObject> thirdLayerObjects;
+	protected ArrayList<ConvertibleObject> firstLayerObjects;
+	protected ArrayList<ConvertibleObject> secondLayerObjects;
+	protected ArrayList<ConvertibleObject> thirdLayerObjects;
 
 	public CucumberProject(String tag) {
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
@@ -27,17 +27,17 @@ public class CucumberProject extends ConvertibleProject {
 			return aConvertibleObject;
 		}
 		File file = new File(name);
-		if (file.getAbsolutePath().endsWith(getFileExt(FIRST_LAYER))) {
-			aConvertibleObject = new CucumberFeatureWrapper(file);
-			firstLayerObjects.add(aConvertibleObject);
-			return aConvertibleObject;
-		} else {
+		if (!file.getAbsolutePath().endsWith(getFileExt(FIRST_LAYER))) {
 			aConvertibleObject = createJavaWrapper(file);
 			if (file.getAbsolutePath().contains(SECOND_LAYER)) {
 				secondLayerObjects.add(aConvertibleObject);
 			} else {
 				thirdLayerObjects.add(aConvertibleObject);
 			}
+			return aConvertibleObject;
+		} else {
+			aConvertibleObject = new CucumberFeatureWrapper(file);
+			firstLayerObjects.add(aConvertibleObject);
 			return aConvertibleObject;
 		}
 	}

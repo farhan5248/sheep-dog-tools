@@ -132,7 +132,7 @@ public abstract class UMLFileObject extends FileObject {
 	protected void assertObjectExists() {
 		super.assertObjectExists();
 		try {
-			project = new UMLProject(getGoalClass().keyValue.get("tags"));
+			project = new UMLProject(getGoalClass().attributes.get("tags"));
 			project.load();
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step");
@@ -144,7 +144,7 @@ public abstract class UMLFileObject extends FileObject {
 			if (b.getTypeLiteral().toString().endsWith("ToUmlGoal")
 					&& b.getTypeLiteral().toString().startsWith("org.farhan.objects.mbttransformer.")) {
 				GoalObject object = (GoalObject) Config.classes.getInstance(b);
-				if (!object.keyValue.isEmpty()) {
+				if (!object.attributes.isEmpty()) {
 					return object;
 				}
 			}

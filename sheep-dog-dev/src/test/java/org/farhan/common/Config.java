@@ -38,10 +38,14 @@ import io.cucumber.java.Before;
 public final class Config extends AbstractModule implements InjectorSource {
 
 	public static Injector classes;
+	
+	public static String getWorkingDir() {
+		return "target/src-gen/";
+	}
 
 	@Before
 	public void deleteFiles() throws Exception {
-		Utilities.deleteDir(new File("target/src-gen/"), "");
+		Utilities.deleteDir(new File(getWorkingDir()), "");
 	}
 
 	@Override
