@@ -8,6 +8,8 @@ import org.farhan.mbt.convert.ConvertAsciidoctorToUML;
 import org.farhan.mbt.convert.ConvertCucumberToUML;
 import org.farhan.mbt.convert.ConvertUMLToAsciidoctor;
 import org.farhan.mbt.convert.ConvertUMLToCucumber;
+import org.farhan.mbt.convert.ConvertUMLToCucumberGuice;
+import org.farhan.mbt.convert.ConvertUMLToCucumberSpring;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.MojoGoal;
 import org.slf4j.Logger;
@@ -87,6 +89,28 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 		return mtr;
 	}
 
+	@PostMapping("/umlToCucumberSpringMojo")
+	public ModelTransformerResponse umlToCucumberSpringMojo(
+			@RequestParam(value = "tags", defaultValue = "") String tags) {
+		logger.info("Starting umlToCucumberSpringMojo");
+		logger.info("tags:" + tags);
+		ModelTransformerResponse mtr = mojoGoal(new ConvertUMLToCucumberSpring(tags));
+		logger.debug("response: " + mtr.toString());
+		logger.info("Ending umlToCucumberSpringMojo");
+		return mtr;
+	}
+
+	@PostMapping("/umlToCucumberGuiceMojo")
+	public ModelTransformerResponse umlToCucumberGuiceMojo(
+			@RequestParam(value = "tags", defaultValue = "") String tags) {
+		logger.info("Starting umlToCucumberGuiceMojo");
+		logger.info("tags:" + tags);
+		ModelTransformerResponse mtr = mojoGoal(new ConvertUMLToCucumberGuice(tags));
+		logger.debug("response: " + mtr.toString());
+		logger.info("Ending umlToCucumberGuiceMojo");
+		return mtr;
+	}
+
 	@PostMapping("/asciiDoctorToUMLMojo")
 	public ModelTransformerResponse asciiDoctorToUMLMojo(@RequestParam(value = "tags", defaultValue = "") String tags) {
 		logger.info("Starting asciiDoctorToUMLMojo");
@@ -144,6 +168,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	@Override
 	public void onApplicationEvent(ApplicationReadyEvent event) {
 		logger.info("Starting onApplicationEvent");
+		// TODO turn this into a property instead of an environment variable
 		File baseDir = new File(File.separator + System.getenv("BASEDIR"));
 		if (!baseDir.exists()) {
 			baseDir.mkdirs();

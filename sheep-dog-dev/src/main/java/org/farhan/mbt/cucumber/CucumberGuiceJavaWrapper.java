@@ -32,7 +32,8 @@ public class CucumberGuiceJavaWrapper extends CucumberJavaWrapper {
 		} else {
 			lastComponent = name;
 		}
-		return "org.farhan.objects." + lastComponent + "." + getInterfaceName(step);
+		name = removeSpecialChars(name).toLowerCase();
+		return "org.farhan.objects." + name + "." + getInterfaceName(step);
 	}
 
 	protected String getCallForFactory(String step) {
