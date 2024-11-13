@@ -1,3 +1,4 @@
+@debug
 Feature: Dependency Injection
 
   Background: Create a feature file
@@ -12,7 +13,6 @@ Feature: Dependency Injection
               Given The blah application, Object page is empty
           """
 
-@debug
   Scenario: Spring Java file is generated
 
      When The mbt-transformer plugin, cucumber-to-uml goal is executed with
