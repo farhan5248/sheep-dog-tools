@@ -14,6 +14,7 @@ import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.MojoGoal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationListener;
@@ -27,13 +28,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ModelTransformerController implements ApplicationListener<ApplicationReadyEvent> {
 
+	Logger logger = LoggerFactory.getLogger(ModelTransformerController.class);
 	private String baseDir;
+	private final ModelRepository modelRepo;
+
+	@Autowired
+	public ModelTransformerController(ModelRepository modelRepo) {
+		this.modelRepo = modelRepo;
+	}
 
 	public void setBaseDir(String baseDir) {
 		this.baseDir = baseDir.replace("/", File.separator);
 	}
-
-	Logger logger = LoggerFactory.getLogger(ModelTransformerController.class);
 
 	@GetMapping("/getFileContents")
 	public ModelTransformerResponse getFileContents(@RequestParam(value = "tags", defaultValue = "") String tags,
@@ -157,6 +163,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 		try {
 			MojoGoal mojo = new ConvertCucumberToUML(tags);
 			mojo.addFile(fileName, contents);
+			modelRepo.save(new ModelSourceFile(tags, fileName, contents));
 			mtr = new ModelTransformerResponse(fileName, contents);
 		} catch (Exception e) {
 			logger.error(getStackTraceAsString(e));

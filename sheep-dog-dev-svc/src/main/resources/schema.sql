@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS Model_Source_Files (
+	tag VARCHAR(100) NULL,
+	file_name VARCHAR(100) NULL,
+	file_content CHARACTER VARYING NULL
+);

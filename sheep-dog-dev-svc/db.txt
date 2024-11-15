@@ -1,0 +1,12 @@
+docker run --name mbt-file-store -e MYSQL_ROOT_PASSWORD=mbt-pass -p 3307:3306 -d mysql:9.1.0
+
+CREATE TABLE mbt.Model_Source_Files (
+	tag VARCHAR(100) NULL,
+	file_name VARCHAR(100) NULL,
+	file_content TEXT NULL
+);
+
+SELECT
+	*
+from
+	mbt.Model_Source_Files msf ;
