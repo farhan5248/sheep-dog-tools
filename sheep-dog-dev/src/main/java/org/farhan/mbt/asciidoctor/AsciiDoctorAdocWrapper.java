@@ -16,6 +16,7 @@ import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
 import org.asciidoctor.jruby.extension.internal.JRubyProcessor;
 import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.FileAccessor;
 import org.farhan.mbt.core.Utilities;
 
 public class AsciiDoctorAdocWrapper implements ConvertibleObject {
@@ -358,9 +359,9 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void save() throws Exception {
+	public void save(FileAccessor fa) throws Exception {
 		String fileContents = docToString();
-		Utilities.writeFile(theFile, fileContents);
+		fa.writeFile(theFile, fileContents);
 	}
 
 	public void setBackgroundDescription(Section background, String backgroundDescription) {
@@ -403,11 +404,10 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void load() throws Exception {
+	public void load(FileAccessor fa) throws Exception {
 		try {
 			if (theFile.exists()) {
-				theDoc = Factory.create().loadFile(theFile, Options.builder().build());
-				// used for debugging theDoc.getContent().toString();
+				theDoc = Factory.create().load(fa.readFile(theFile), Options.builder().build());
 			}
 		} catch (Exception e) {
 			throw new Exception("There was a problem loading file: " + theFile.getAbsolutePath());

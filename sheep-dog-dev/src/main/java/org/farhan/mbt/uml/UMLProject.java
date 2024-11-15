@@ -1,11 +1,16 @@
 package org.farhan.mbt.uml;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -20,7 +25,7 @@ import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.mbt.core.Utilities;
+import org.farhan.mbt.core.FileAccessor;
 
 public class UMLProject extends ConvertibleProject {
 
@@ -28,7 +33,8 @@ public class UMLProject extends ConvertibleProject {
 
 	private Model theSystem;
 
-	public UMLProject(String tag) {
+	public UMLProject(String tag, FileAccessor fa) {
+		super(fa);
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
 		theSystem = UMLFactory.eINSTANCE.createModel();
 		theSystem.setName("pst");
@@ -48,22 +54,16 @@ public class UMLProject extends ConvertibleProject {
 	public void load() throws Exception {
 		URI uri = URI.createFileURI(getDir("").getAbsolutePath()).appendSegment(theSystem.getName())
 				.appendFileExtension(UMLResource.FILE_EXTENSION);
-		ResourceSet resourceSet = new ResourceSetImpl();
-		// This is to load a UML model outside of Eclipse through Maven
-		UMLResourcesUtil.init(resourceSet);
-		Resource resource = resourceSet.getResource(uri, true);
-		// The EMPTY_MAP is passed since I have no options
-		resource.load(Collections.EMPTY_MAP);
-		for (EObject e : resource.getContents()) {
-			theSystem = (Model) e;
-		}
+		// UMLResourcesUtil is to load a UML model outside of Eclipse through Maven
+		ResourceSet resourceSet = UMLResourcesUtil.init(new ResourceSetImpl());
+		Resource resource = resourceSet.createResource(uri);
+		InputStream content = new ByteArrayInputStream(
+				fa.readFile(new File(uri.toFileString())).getBytes(StandardCharsets.UTF_8));
+		resource.load(content, Collections.EMPTY_MAP);
+		theSystem = (Model) resource.getContents().getFirst();
 		ArrayList<Class> objects = getPackagedClasses(theSystem.getNestedPackage(FIRST_LAYER));
 		for (Class c : objects) {
-			try {
-				createObject(c.getQualifiedName()).load();
-			} catch (Exception e) {
-				Utilities.getStackTraceAsString(e);
-			}
+			createObject(c.getQualifiedName()).load(fa);
 		}
 	}
 
@@ -89,9 +89,11 @@ public class UMLProject extends ConvertibleProject {
 		resource.getContents().add(theSystem);
 		// Looks like I have this for interaction message signatures that point nowhere
 		// This option lets files get saved with referenced to non-existing objects
-		HashMap<String, Object> options = new HashMap<String, Object>();
+		Map<Object, Object> options = resource.getDefaultSaveOptions();
 		options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF, "true");
-		resource.save(options);
+		OutputStream os = new ByteArrayOutputStream();
+		resource.save(os, options);
+		fa.writeFile(new File(uri.toFileString()), os.toString());
 	}
 
 	@Override

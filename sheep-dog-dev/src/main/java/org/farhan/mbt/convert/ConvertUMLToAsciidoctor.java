@@ -9,14 +9,15 @@ import org.eclipse.uml2.uml.Message;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.FileAccessor;
 import org.farhan.mbt.core.MojoGoal;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 
 public class ConvertUMLToAsciidoctor extends MojoGoal {
 
-	public ConvertUMLToAsciidoctor(String tags) {
-		super(tags);
+	public ConvertUMLToAsciidoctor(String tags, FileAccessor fa) {
+		super(tags, fa);
 	}
 
 	private UMLClassWrapper srcObj;
@@ -113,12 +114,12 @@ public class ConvertUMLToAsciidoctor extends MojoGoal {
 
 	@Override
 	public void initProjects() throws Exception {
-		srcPrj = new UMLProject(this.tags);
-		tgtPrj = new AsciiDoctorProject(this.tags);
+		srcPrj = new UMLProject(this.tags, this.fa);
+		tgtPrj = new AsciiDoctorProject(this.tags, this.fa);
 	}
 
 	@Override
-	protected void loadFeatures() throws Exception {
+	protected void load() throws Exception {
 		srcPrj.load();
 	}
 

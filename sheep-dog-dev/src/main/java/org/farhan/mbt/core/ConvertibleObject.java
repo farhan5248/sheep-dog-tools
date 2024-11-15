@@ -4,14 +4,14 @@ import java.io.File;
 
 public interface ConvertibleObject {
 
-	// Remove this and do this in the constructor
+	// TODO remove get and setFile, get() should be enough
 	public void setFile(File theFile);
 
 	public File getFile();
 
-	public void load() throws Exception;
+	public void load(FileAccessor fa) throws Exception;
 
-	public void save() throws Exception;
+	public void save(FileAccessor fa) throws Exception;
 
 	public Object get();
 }

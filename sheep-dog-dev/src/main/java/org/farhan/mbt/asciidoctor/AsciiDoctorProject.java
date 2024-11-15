@@ -7,13 +7,14 @@ import java.util.ArrayList;
 import org.asciidoctor.ast.Section;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.mbt.core.Utilities;
+import org.farhan.mbt.core.FileAccessor;
 
 public class AsciiDoctorProject extends ConvertibleProject {
 
 	private static ArrayList<ConvertibleObject> firstLayerObjects;
 
-	public AsciiDoctorProject(String tag) {
+	public AsciiDoctorProject(String tag, FileAccessor fa) {
+		super(fa);
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
 		this.tag = tag;
 	}
@@ -84,11 +85,11 @@ public class AsciiDoctorProject extends ConvertibleProject {
 
 	@Override
 	public void load() throws Exception {
-		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(ConvertibleProject.FIRST_LAYER),
+		ArrayList<File> files = fa.recursivelyListFiles(getDir(ConvertibleProject.FIRST_LAYER),
 				getFileExt(ConvertibleProject.FIRST_LAYER));
 		getObjects(ConvertibleProject.FIRST_LAYER).clear();
 		for (File f : files) {
-			createObject(f.getAbsolutePath()).load();
+			createObject(f.getAbsolutePath()).load(fa);
 			if (!isFileSelected(getObjects(ConvertibleProject.FIRST_LAYER).getLast(), this.tag)) {
 				getObjects(ConvertibleProject.FIRST_LAYER).removeLast();
 			}
@@ -98,7 +99,7 @@ public class AsciiDoctorProject extends ConvertibleProject {
 	@Override
 	public void save() throws Exception {
 		for (ConvertibleObject cf : firstLayerObjects) {
-			cf.save();
+			cf.save(fa);
 		}
 	}
 

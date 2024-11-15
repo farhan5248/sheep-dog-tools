@@ -13,6 +13,7 @@ import org.farhan.mbt.cucumber.ScenarioOutline;
 import org.farhan.mbt.cucumber.Step;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
+import org.farhan.mbt.core.FileAccessor;
 import org.farhan.mbt.core.MojoGoal;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
@@ -24,8 +25,8 @@ import org.farhan.helper.StepHelper;
 
 public class ConvertUMLToCucumber extends MojoGoal {
 
-	public ConvertUMLToCucumber(String tags) {
-		super(tags);
+	public ConvertUMLToCucumber(String tags, FileAccessor fa) {
+		super(tags, fa);
 	}
 
 	protected String lastComponent = "InitialComponent";
@@ -170,26 +171,26 @@ public class ConvertUMLToCucumber extends MojoGoal {
 	protected CucumberJavaWrapper getTgtObj2(Message srcStep) throws Exception {
 		CucumberJavaWrapper tgtStepDefObj = (CucumberJavaWrapper) tgtPrj
 				.createObject(getStepDefName(srcObj.getStep(srcStep)));
-		tgtStepDefObj.load();
+		tgtStepDefObj.load(fa);
 		return tgtStepDefObj;
 	}
 
 	protected CucumberJavaWrapper getTgtObj3(Message srcStep) throws Exception {
 		CucumberJavaWrapper tgtStepDefObj = (CucumberJavaWrapper) tgtPrj
 				.createObject(getStepObjName(srcObj.getStep(srcStep)));
-		tgtStepDefObj.load();
+		tgtStepDefObj.load(fa);
 		return tgtStepDefObj;
 	}
 
 	@Override
 	public void initProjects() throws Exception {
 
-		srcPrj = new UMLProject(this.tags);
-		tgtPrj = new CucumberProject(this.tags);
+		srcPrj = new UMLProject(this.tags, this.fa);
+		tgtPrj = new CucumberProject(this.tags, this.fa);
 	}
 
 	@Override
-	protected void loadFeatures() throws Exception {
+	protected void load() throws Exception {
 		srcPrj.load();
 	}
 

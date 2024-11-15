@@ -1,17 +1,22 @@
 package org.farhan.mbt.cucumber;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.FileAccessor;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.helper.StepHelper;
+
+import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier.Keyword;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.BlockStmt;
-import com.github.javaparser.utils.SourceRoot;
 
 public class CucumberJavaWrapper implements ConvertibleObject {
 
@@ -238,11 +243,18 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		}
 	}
 
+	private String lowerFirst(String text) {
+		if (!text.isEmpty()) {
+			return text.substring(0, 1).toLowerCase() + text.substring(1);
+		}
+		return text;
+	}
+
 	protected String getMethodNameForStepDef(String step) {
 		String name = step.substring(step.split(" ")[0].length());
 		name = removeSpecialChars(name);
 		name = name.replace("'", "");
-		name = Utilities.lowerFirst(name);
+		name = lowerFirst(name);
 		return name;
 	}
 
@@ -311,11 +323,12 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void load() throws Exception {
+	public void load(FileAccessor fa) throws Exception {
 		try {
 			if (theFile.exists() && getType().getMethods().isEmpty()) {
-				SourceRoot javaSrcDir = new SourceRoot(theFile.getParentFile().toPath());
-				theJavaClass = javaSrcDir.parse("", theFile.getName());
+				InputStream content = new ByteArrayInputStream(
+						fa.readFile(theFile).getBytes(StandardCharsets.UTF_8));
+				theJavaClass = new JavaParser().parse(content).getResult().get();
 			}
 		} catch (Exception e) {
 			throw new Exception("There was a problem loading file: " + theFile.getAbsolutePath());
@@ -332,12 +345,8 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void save() {
-		File parentDir = theFile.getParentFile();
-		parentDir.mkdirs();
-		SourceRoot javaSrcDir = new SourceRoot(parentDir.toPath());
-		javaSrcDir.add(theJavaClass);
-		javaSrcDir.saveAll();
+	public void save(FileAccessor fa) throws Exception {
+		fa.writeFile(theFile, theJavaClass.toString());
 	}
 
 	@Override

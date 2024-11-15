@@ -11,6 +11,11 @@ public abstract class ConvertibleProject {
 	public static final String FIRST_LAYER = "specs";
 	public static final String SECOND_LAYER = "stepdefs";
 	public static final String THIRD_LAYER = "objects";
+	protected FileAccessor fa;
+
+	public ConvertibleProject(FileAccessor fa) {
+		this.fa = fa;
+	}
 
 	public abstract ConvertibleObject createObject(String name);
 

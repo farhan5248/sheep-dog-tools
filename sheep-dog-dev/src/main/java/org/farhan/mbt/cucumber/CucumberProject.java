@@ -3,9 +3,10 @@ package org.farhan.mbt.cucumber;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.farhan.mbt.CucumberStandaloneSetup;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.mbt.core.Utilities;
+import org.farhan.mbt.core.FileAccessor;
 
 public class CucumberProject extends ConvertibleProject {
 
@@ -13,7 +14,8 @@ public class CucumberProject extends ConvertibleProject {
 	protected ArrayList<ConvertibleObject> secondLayerObjects;
 	protected ArrayList<ConvertibleObject> thirdLayerObjects;
 
-	public CucumberProject(String tag) {
+	public CucumberProject(String tag, FileAccessor fa) {
+		super(fa);
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
 		secondLayerObjects = new ArrayList<ConvertibleObject>();
 		thirdLayerObjects = new ArrayList<ConvertibleObject>();
@@ -151,10 +153,12 @@ public class CucumberProject extends ConvertibleProject {
 
 	@Override
 	public void load() throws Exception {
-		ArrayList<File> files = Utilities.recursivelyListFiles(getDir(ConvertibleProject.FIRST_LAYER),
+
+		CucumberStandaloneSetup.doSetup();
+		ArrayList<File> files = fa.recursivelyListFiles(getDir(ConvertibleProject.FIRST_LAYER),
 				getFileExt(ConvertibleProject.FIRST_LAYER));
 		for (File f : files) {
-			createObject(f.getAbsolutePath()).load();
+			createObject(f.getAbsolutePath()).load(fa);
 			if (!isFileSelected(getObjects(ConvertibleProject.FIRST_LAYER).getLast(), this.tag)) {
 				getObjects(ConvertibleProject.FIRST_LAYER).removeLast();
 			}
@@ -164,13 +168,13 @@ public class CucumberProject extends ConvertibleProject {
 	@Override
 	public void save() throws Exception {
 		for (ConvertibleObject cf : firstLayerObjects) {
-			cf.save();
+			cf.save(fa);
 		}
 		for (ConvertibleObject cf : secondLayerObjects) {
-			cf.save();
+			cf.save(fa);
 		}
 		for (ConvertibleObject cf : thirdLayerObjects) {
-			cf.save();
+			cf.save(fa);
 		}
 	}
 

@@ -4,23 +4,19 @@ Object: src/test/resources/cucumber/Process.feature file
 
   Definition: will be present
 
-  Definition: Background Steps section will be created as follows
+  Definition: Scenario Steps Data Table section will be created as follows
 
     Parameters: 1
 
-          | Name | Step |
+          | Name | Step | Row |
 
-  Definition: Scenarios Steps section will be created as follows
+  Definition: will be created as follows
 
-    Parameters: 1
-
-          | Name | Step |
-
-  Definition: Background section will be created as follows
+  Definition: Scenario Steps Doc String section will be created as follows
 
     Parameters: 1
 
-          | Name | Description |
+          | Name | Step | Content |
 
   Definition: Feature section will be created as follows
 
@@ -31,8 +27,6 @@ Object: src/test/resources/cucumber/Process.feature file
     Parameters: 2
 
           | Name | Tags | Statements |
-
-  Definition: will be created as follows
 
   Definition: Scenario Outline Steps Data Table section will be created as follows
 
@@ -52,17 +46,23 @@ Object: src/test/resources/cucumber/Process.feature file
 
           | Name | Tags | Description |
 
-  Definition: Scenario Steps Doc String section will be created as follows
+  Definition: Background Steps section will be created as follows
 
     Parameters: 1
 
-          | Name | Step | Content |
+          | Name | Step |
 
-  Definition: Scenario Steps Data Table section will be created as follows
+  Definition: Scenarios Steps section will be created as follows
 
     Parameters: 1
 
-          | Name | Step | Row |
+          | Name | Step |
+
+  Definition: Background section will be created as follows
+
+    Parameters: 1
+
+          | Name | Description |
 
   Definition: Scenarios section will be created as follows
 

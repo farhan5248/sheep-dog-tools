@@ -1,16 +1,25 @@
 package org.farhan.mbt.cucumber;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.impl.RuleCallImpl;
 import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
+import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.mbt.CucumberStandaloneSetup;
 import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.FileAccessor;
 
 public class CucumberFeatureWrapper implements ConvertibleObject {
 
@@ -294,31 +303,28 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void load() throws Exception {
+	public void load(FileAccessor fa) throws Exception {
 		try {
-			// TODO move to the project init
-			CucumberStandaloneSetup.doSetup();
-
 			URI uri = URI.createFileURI(theFile.getAbsolutePath());
-			Resource res = new ResourceSetImpl().getResource(uri, true);
-			theFeature = (Feature) res.getContents().get(0);
+			Resource resource = new ResourceSetImpl().createResource(uri);
+			InputStream content = new ByteArrayInputStream(fa.readFile(theFile).getBytes(StandardCharsets.UTF_8));
+			resource.load(content, Collections.EMPTY_MAP);
+			theFeature = (Feature) resource.getContents().get(0);
 		} catch (Exception e) {
 			throw new Exception("There was a problem loading file: " + theFile.getAbsolutePath());
 		}
 	}
 
 	@Override
-	public void save() {
+	public void save(FileAccessor fa) throws Exception {
 		URI uri = URI.createFileURI(theFile.getAbsolutePath());
 		CucumberStandaloneSetup.doSetup();
-		Resource res = new ResourceSetImpl().createResource(uri);
-		res.getContents().add(theFeature);
-		try {
-			// res.save(SaveOptions.newBuilder().format().getOptions().toOptionsMap());
-			res.save(null);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Resource resource = new ResourceSetImpl().createResource(uri);
+		resource.getContents().add(theFeature);
+		Map<Object, Object> options = SaveOptions.newBuilder().format().getOptions().toOptionsMap();
+		OutputStream os = new ByteArrayOutputStream();
+		resource.save(os, options);
+		fa.writeFile(new File(uri.toFileString()), os.toString());
 	}
 
 	public void setBackgroundDescription(Background background, String backgroundDescription) {

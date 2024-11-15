@@ -8,9 +8,11 @@ public abstract class MojoGoal {
 	protected String tags = "";
 	protected ConvertibleProject srcPrj;
 	protected ConvertibleProject tgtPrj;
+	protected FileAccessor fa;
 
-	public MojoGoal(String tags) {
+	public MojoGoal(String tags, FileAccessor fa) {
 		this.tags = tags;
+		this.fa = fa;
 	}
 
 	protected abstract void convertFeature(ConvertibleObject co) throws Exception;
@@ -25,11 +27,11 @@ public abstract class MojoGoal {
 
 	protected abstract void initProjects() throws Exception;
 
-	protected abstract void loadFeatures() throws Exception;
+	protected abstract void load() throws Exception;
 
 	public void mojoGoal() throws Exception {
 		initProjects();
-		loadFeatures();
+		load();
 		convertFeatures();
 		save();
 	}
@@ -55,25 +57,25 @@ public abstract class MojoGoal {
 	}
 
 	public void addFile(String fileName, String contents) throws Exception {
-		Utilities.writeFile(new File(ConvertibleProject.baseDir + this.tags + "/" + fileName), contents);
+		fa.writeFile(new File(ConvertibleProject.baseDir + this.tags + "/" + fileName), contents);
 	}
 
 	public ArrayList<String> getFileList() {
 		ArrayList<String> generatedFiles = new ArrayList<String>();
 		File baseDir = new File(ConvertibleProject.baseDir + this.tags + "/");
-		for (File aFile : Utilities.recursivelyListFiles(baseDir, ".java")) {
+		for (File aFile : fa.recursivelyListFiles(baseDir, ".java")) {
 			generatedFiles.add(aFile.getAbsolutePath().replace(baseDir.getAbsolutePath(), ""));
 		}
-		for (File aFile : Utilities.recursivelyListFiles(baseDir, ".feature")) {
+		for (File aFile : fa.recursivelyListFiles(baseDir, ".feature")) {
 			generatedFiles.add(aFile.getAbsolutePath().replace(baseDir.getAbsolutePath(), ""));
 		}
-		for (File aFile : Utilities.recursivelyListFiles(baseDir, ".asciidoc")) {
+		for (File aFile : fa.recursivelyListFiles(baseDir, ".asciidoc")) {
 			generatedFiles.add(aFile.getAbsolutePath().replace(baseDir.getAbsolutePath(), ""));
 		}
 		return generatedFiles;
 	}
 
 	public String getFileContents(String fileName) throws Exception {
-		return Utilities.readFile(new File(ConvertibleProject.baseDir + this.tags + "/" + fileName));
+		return fa.readFile(new File(ConvertibleProject.baseDir + this.tags + "/" + fileName));
 	}
 }

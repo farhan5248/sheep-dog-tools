@@ -95,12 +95,12 @@ public class JavaFileObject extends FileObject {
 
 	protected void assertObjectExists() {
 		super.assertObjectExists();
-		project = new CucumberProject("");
+		project = new CucumberProject("", this);
 		try {
 			wrapper = (CucumberJavaWrapper) project.createObject(getFile().getAbsolutePath());
-			wrapper.load();
+			wrapper.load(this);
 		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
+			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
 		}
 	}
 

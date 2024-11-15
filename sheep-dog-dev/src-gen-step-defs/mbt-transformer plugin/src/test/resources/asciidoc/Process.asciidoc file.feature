@@ -4,23 +4,11 @@ Object: src/test/resources/asciidoc/Process.asciidoc file
 
   Definition: will be present
 
-  Definition: Scenario Outline Examples Table section will be created as follows
-
-    Parameters: 1
-
-          | Name | Examples | Row |
-
   Definition: Scenarios Steps section will be created as follows
 
     Parameters: 1
 
           | Name | Step |
-
-  Definition: Scenarios section will be created as follows
-
-    Parameters: 1
-
-          | Name | Tags | Description |
 
   Definition: Scenarios Steps Doc String section will be created as follows
 
@@ -37,6 +25,12 @@ Object: src/test/resources/asciidoc/Process.asciidoc file
     Parameters: 2
 
           | Name | Tags | Statements |
+
+  Definition: Scenarios section will be created as follows
+
+    Parameters: 1
+
+          | Name | Tags | Description |
 
   Definition: Scenarios Steps Step Table section will be created as follows
 
@@ -55,4 +49,10 @@ Object: src/test/resources/asciidoc/Process.asciidoc file
     Parameters: 1
 
           | Name | Step |
+
+  Definition: Scenario Outline Examples Table section will be created as follows
+
+    Parameters: 1
+
+          | Name | Examples | Row |
 

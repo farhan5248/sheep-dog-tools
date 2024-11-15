@@ -10,12 +10,13 @@ import org.farhan.mbt.uml.UMLProject;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.FileAccessor;
 import org.farhan.mbt.core.MojoGoal;
 
 public class ConvertAsciidoctorToUML extends MojoGoal {
 
-	public ConvertAsciidoctorToUML(String tags) {
-		super(tags);
+	public ConvertAsciidoctorToUML(String tags, FileAccessor fa) {
+		super(tags, fa);
 	}
 
 	private AsciiDoctorAdocWrapper srcObj;
@@ -111,12 +112,12 @@ public class ConvertAsciidoctorToUML extends MojoGoal {
 
 	@Override
 	public void initProjects() throws Exception {
-		srcPrj = new AsciiDoctorProject(this.tags);
-		tgtPrj = new UMLProject(this.tags);
+		srcPrj = new AsciiDoctorProject(this.tags, this.fa);
+		tgtPrj = new UMLProject(this.tags, this.fa);
 	}
 
 	@Override
-	protected void loadFeatures() throws Exception {
+	protected void load() throws Exception {
 		srcPrj.load();
 	}
 
