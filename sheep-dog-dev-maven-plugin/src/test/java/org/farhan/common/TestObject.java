@@ -1,10 +1,13 @@
 package org.farhan.common;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.farhan.mbt.core.Utilities;
+import org.farhan.mbt.core.FileAccessor;
+import org.farhan.mbt.maven.FileAccessorImpl;
 import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.datatable.DataTable;
@@ -14,6 +17,14 @@ import io.cucumber.datatable.DataTable;
 public abstract class TestObject {
 
 	protected HashMap<String, String> attributes = new HashMap<String, String>();
+	protected FileAccessor fa = new FileAccessorImpl();
+
+	public String getStackTraceAsString(Exception e) {
+		StringWriter sw = new StringWriter();
+		e.printStackTrace(new PrintWriter(sw));
+		String exceptionAsString = sw.toString();
+		return exceptionAsString;
+	}
 
 	public void assertInputOutputs(DataTable dataTable) {
 		processInputOutputs(dataTable, "assert", "");
@@ -72,7 +83,7 @@ public abstract class TestObject {
 						row);
 			}
 		} catch (Exception e) {
-			Assertions.fail(Utilities.getStackTraceAsString(e));
+			Assertions.fail(getStackTraceAsString(e));
 		}
 	}
 

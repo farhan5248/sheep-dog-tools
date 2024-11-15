@@ -13,6 +13,6 @@ import org.farhan.mbt.convert.ConvertUMLToCucumberSpring;
 public class UMLToCucumberSpringMojo extends MBTMojo {
 
 	public void execute() throws MojoExecutionException {
-		super.execute(new ConvertUMLToCucumberSpring(tag));
+		super.execute(new ConvertUMLToCucumberSpring(tag, fa));
 	}
 }

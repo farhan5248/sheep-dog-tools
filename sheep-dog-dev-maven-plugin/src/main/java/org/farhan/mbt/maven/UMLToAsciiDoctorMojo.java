@@ -13,6 +13,6 @@ import org.farhan.mbt.convert.ConvertUMLToAsciidoctor;
 public class UMLToAsciiDoctorMojo extends MBTMojo {
 
 	public void execute() throws MojoExecutionException {
-		super.execute(new ConvertUMLToAsciidoctor(tag));
+		super.execute(new ConvertUMLToAsciidoctor(tag, fa));
 	}
 }

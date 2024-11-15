@@ -13,6 +13,6 @@ import org.farhan.mbt.convert.ConvertUMLToCucumberGuice;
 public class UMLToCucumberGuiceMojo extends MBTMojo {
 
 	public void execute() throws MojoExecutionException {
-		super.execute(new ConvertUMLToCucumberGuice(tag));
+		super.execute(new ConvertUMLToCucumberGuice(tag, fa));
 	}
 }

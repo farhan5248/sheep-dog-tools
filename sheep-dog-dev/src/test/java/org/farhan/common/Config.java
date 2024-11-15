@@ -3,7 +3,6 @@ package org.farhan.common;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.farhan.mbt.core.Utilities;
 import org.farhan.objects.mbttransformer.AsciidoctorToUmlGoal;
 import org.farhan.objects.mbttransformer.BlahObjectPageStepsJavaFile;
 import org.farhan.objects.mbttransformer.CucumberToUmlGoal;
