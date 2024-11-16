@@ -46,7 +46,6 @@ public class UMLProject extends ConvertibleProject {
 	public File getDir(String layer) {
 		File aFile = null;
 		aFile = new File(baseDir + tag + "/" + "uml/");
-		aFile.mkdirs();
 		return aFile;
 	}
 

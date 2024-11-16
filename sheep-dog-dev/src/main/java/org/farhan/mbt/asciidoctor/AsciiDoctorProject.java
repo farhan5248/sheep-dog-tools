@@ -31,7 +31,6 @@ public class AsciiDoctorProject extends ConvertibleProject {
 	public File getDir(String layer) {
 		File aFile = null;
 		aFile = new File(baseDir + tag + "/" + "resources/asciidoc/");
-		aFile.mkdirs();
 		return aFile;
 	}
 

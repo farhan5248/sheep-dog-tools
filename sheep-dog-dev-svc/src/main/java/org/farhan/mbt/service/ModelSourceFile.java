@@ -2,25 +2,19 @@ package org.farhan.mbt.service;
 
 public class ModelSourceFile {
 
-	private String tag;
 	private String fileName;
 	private String fileContent;
 
-	public ModelSourceFile(String tag, String fileName, String fileContent) {
-		this.tag = tag;
+	public ModelSourceFile(String fileName, String fileContent) {
 		this.fileName = fileName;
 		this.fileContent = fileContent;
 	}
 
-	public Object getTag() {
-		return tag;
-	}
-
-	public Object getFileName() {
+	public String getFileName() {
 		return fileName;
 	}
 
-	public Object getFileContent() {
+	public String getFileContent() {
 		return fileContent;
 	}
 }

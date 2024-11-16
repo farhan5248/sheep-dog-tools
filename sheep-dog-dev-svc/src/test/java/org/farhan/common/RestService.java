@@ -3,7 +3,6 @@ package org.farhan.common;
 import java.io.File;
 import java.util.TreeMap;
 
-import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.service.ModelTransformerResponse;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,8 +56,8 @@ public class RestService extends TestObject {
 				attributes.put("tags", "");
 			}
 
-			for (File aFile : Utilities.recursivelyListFiles(srcDir, "")) {
-				String contents = Utilities.readFile(aFile);
+			for (File aFile : recursivelyListFiles(srcDir, "")) {
+				String contents = readFile(aFile);
 				String fileName = aFile.getAbsolutePath().replace(srcDir.getAbsolutePath() + "\\", "");
 				addFile(attributes.get("tags"), fileName.replace("\\", "/"), contents);
 			}
@@ -67,10 +66,10 @@ public class RestService extends TestObject {
 
 			for (String fileName : getFileList(attributes.get("tags")).split("\n")) {
 				String contents = getFileContents(attributes.get("tags"), fileName.replace("\\", "/"));
-				Utilities.writeFile(new File(srcDir.getAbsolutePath() + "\\" + fileName), contents);
+				writeFile(new File(srcDir.getAbsolutePath() + "\\" + fileName), contents);
 			}
 		} catch (Exception e) {
-			Assertions.fail(Utilities.getStackTraceAsString(e));
+			Assertions.fail(getStackTraceAsString(e));
 		}
 	}
 }

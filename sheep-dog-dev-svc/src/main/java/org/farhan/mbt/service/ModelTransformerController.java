@@ -11,6 +11,7 @@ import org.farhan.mbt.convert.ConvertUMLToCucumber;
 import org.farhan.mbt.convert.ConvertUMLToCucumberGuice;
 import org.farhan.mbt.convert.ConvertUMLToCucumberSpring;
 import org.farhan.mbt.core.ConvertibleProject;
+import org.farhan.mbt.core.FileAccessor;
 import org.farhan.mbt.core.MojoGoal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,11 +31,11 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 
 	Logger logger = LoggerFactory.getLogger(ModelTransformerController.class);
 	private String baseDir;
-	private final ModelRepository modelRepo;
+	private final FileAccessor fa;
 
 	@Autowired
-	public ModelTransformerController(ModelRepository modelRepo) {
-		this.modelRepo = modelRepo;
+	public ModelTransformerController(FileAccessor fa) {
+		this.fa = fa;
 	}
 
 	public void setBaseDir(String baseDir) {
@@ -49,7 +50,8 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 		String fileContents = "";
 		ModelTransformerResponse mtr;
 		try {
-			MojoGoal mojo = new ConvertCucumberToUML(tags);
+			// TODO move file stuff out of the mojo
+			MojoGoal mojo = new ConvertCucumberToUML(tags, fa);
 			fileContents = mojo.getFileContents(fileName);
 			mtr = new ModelTransformerResponse(fileName, fileContents);
 		} catch (Exception e) {
@@ -67,7 +69,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 		String fileList = "";
 		ModelTransformerResponse mtr;
 		try {
-			MojoGoal mojo = new ConvertCucumberToUML(tags);
+			MojoGoal mojo = new ConvertCucumberToUML(tags, fa);
 			for (String fileName : mojo.getFileList()) {
 				// TODO append to a string list for now but later make a proper JSON object
 				fileList += "\n" + fileName;
@@ -87,7 +89,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	public ModelTransformerResponse cucumberToUMLMojo(@RequestParam(value = "tags", defaultValue = "") String tags) {
 		logger.info("Starting cucumberToUMLMojo");
 		logger.info("tags:" + tags);
-		ModelTransformerResponse mtr = mojoGoal(new ConvertCucumberToUML(tags));
+		ModelTransformerResponse mtr = mojoGoal(new ConvertCucumberToUML(tags, fa));
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending cucumberToUMLMojo");
 		return mtr;
@@ -97,7 +99,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	public ModelTransformerResponse umlToCucumberMojo(@RequestParam(value = "tags", defaultValue = "") String tags) {
 		logger.info("Starting umlToCucumberMojo");
 		logger.info("tags:" + tags);
-		ModelTransformerResponse mtr = mojoGoal(new ConvertUMLToCucumber(tags));
+		ModelTransformerResponse mtr = mojoGoal(new ConvertUMLToCucumber(tags, fa));
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending umlToCucumberMojo");
 		return mtr;
@@ -108,7 +110,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 			@RequestParam(value = "tags", defaultValue = "") String tags) {
 		logger.info("Starting umlToCucumberSpringMojo");
 		logger.info("tags:" + tags);
-		ModelTransformerResponse mtr = mojoGoal(new ConvertUMLToCucumberSpring(tags));
+		ModelTransformerResponse mtr = mojoGoal(new ConvertUMLToCucumberSpring(tags, fa));
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending umlToCucumberSpringMojo");
 		return mtr;
@@ -119,7 +121,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 			@RequestParam(value = "tags", defaultValue = "") String tags) {
 		logger.info("Starting umlToCucumberGuiceMojo");
 		logger.info("tags:" + tags);
-		ModelTransformerResponse mtr = mojoGoal(new ConvertUMLToCucumberGuice(tags));
+		ModelTransformerResponse mtr = mojoGoal(new ConvertUMLToCucumberGuice(tags, fa));
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending umlToCucumberGuiceMojo");
 		return mtr;
@@ -129,7 +131,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	public ModelTransformerResponse asciiDoctorToUMLMojo(@RequestParam(value = "tags", defaultValue = "") String tags) {
 		logger.info("Starting asciiDoctorToUMLMojo");
 		logger.info("tags:" + tags);
-		ModelTransformerResponse mtr = mojoGoal(new ConvertAsciidoctorToUML(tags));
+		ModelTransformerResponse mtr = mojoGoal(new ConvertAsciidoctorToUML(tags, fa));
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending asciiDoctorToUMLMojo");
 		return mtr;
@@ -139,7 +141,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	public ModelTransformerResponse umlToAsciiDoctorMojo(@RequestParam(value = "tags", defaultValue = "") String tags) {
 		logger.info("Starting umlToAsciiDoctorMojo");
 		logger.info("tags:" + tags);
-		ModelTransformerResponse mtr = mojoGoal(new ConvertUMLToAsciidoctor(tags));
+		ModelTransformerResponse mtr = mojoGoal(new ConvertUMLToAsciidoctor(tags, fa));
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending umlToAsciiDoctorMojo");
 		return mtr;
@@ -161,9 +163,8 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 		logger.info("fileName:" + fileName);
 		ModelTransformerResponse mtr;
 		try {
-			MojoGoal mojo = new ConvertCucumberToUML(tags);
+			MojoGoal mojo = new ConvertCucumberToUML(tags, fa);
 			mojo.addFile(fileName, contents);
-			modelRepo.save(new ModelSourceFile(tags, fileName, contents));
 			mtr = new ModelTransformerResponse(fileName, contents);
 		} catch (Exception e) {
 			logger.error(getStackTraceAsString(e));

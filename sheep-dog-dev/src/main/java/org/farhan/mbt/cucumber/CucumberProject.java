@@ -62,7 +62,6 @@ public class CucumberProject extends ConvertibleProject {
 			aFile = new File(baseDir + tag + "/" + "java/org/farhan/" + THIRD_LAYER);
 			break;
 		}
-		aFile.mkdirs();
 		return aFile;
 	}
 
