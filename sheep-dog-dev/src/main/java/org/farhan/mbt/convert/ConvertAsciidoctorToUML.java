@@ -10,12 +10,12 @@ import org.farhan.mbt.uml.UMLProject;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.FileAccessor;
+import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.MojoGoal;
 
 public class ConvertAsciidoctorToUML extends MojoGoal {
 
-	public ConvertAsciidoctorToUML(String tags, FileAccessor fa) {
+	public ConvertAsciidoctorToUML(String tags, ObjectRepository fa) {
 		super(tags, fa);
 	}
 

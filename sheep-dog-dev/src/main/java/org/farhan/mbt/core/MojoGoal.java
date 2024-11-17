@@ -8,9 +8,9 @@ public abstract class MojoGoal {
 	protected String tags = "";
 	protected ConvertibleProject srcPrj;
 	protected ConvertibleProject tgtPrj;
-	protected FileAccessor fa;
+	protected ObjectRepository fa;
 
-	public MojoGoal(String tags, FileAccessor fa) {
+	public MojoGoal(String tags, ObjectRepository fa) {
 		this.tags = tags;
 		this.fa = fa;
 	}
@@ -57,25 +57,25 @@ public abstract class MojoGoal {
 	}
 
 	public void addFile(String fileName, String contents) throws Exception {
-		fa.writeFile(new File(ConvertibleProject.baseDir + this.tags + "/" + fileName), contents);
+		fa.put(new File(ConvertibleProject.baseDir + this.tags + "/" + fileName).getAbsolutePath(), contents);
 	}
 
 	public ArrayList<String> getFileList() {
 		ArrayList<String> generatedFiles = new ArrayList<String>();
-		File baseDir = new File(ConvertibleProject.baseDir + this.tags + "/");
-		for (File aFile : fa.recursivelyListFiles(baseDir, ".java")) {
-			generatedFiles.add(aFile.getAbsolutePath().replace(baseDir.getAbsolutePath(), ""));
+		String baseDir = new File(ConvertibleProject.baseDir + this.tags + "/").getAbsolutePath();
+		for (String aFile : fa.list(baseDir, ".java")) {
+			generatedFiles.add(aFile.replace(baseDir, ""));
 		}
-		for (File aFile : fa.recursivelyListFiles(baseDir, ".feature")) {
-			generatedFiles.add(aFile.getAbsolutePath().replace(baseDir.getAbsolutePath(), ""));
+		for (String aFile : fa.list(baseDir, ".feature")) {
+			generatedFiles.add(aFile.replace(baseDir, ""));
 		}
-		for (File aFile : fa.recursivelyListFiles(baseDir, ".asciidoc")) {
-			generatedFiles.add(aFile.getAbsolutePath().replace(baseDir.getAbsolutePath(), ""));
+		for (String aFile : fa.list(baseDir, ".asciidoc")) {
+			generatedFiles.add(aFile.replace(baseDir, ""));
 		}
 		return generatedFiles;
 	}
 
 	public String getFileContents(String fileName) throws Exception {
-		return fa.readFile(new File(ConvertibleProject.baseDir + this.tags + "/" + fileName));
+		return fa.get(new File(ConvertibleProject.baseDir + this.tags + "/" + fileName).getAbsolutePath());
 	}
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import org.farhan.mbt.CucumberStandaloneSetup;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.mbt.core.FileAccessor;
+import org.farhan.mbt.core.ObjectRepository;
 
 public class CucumberProject extends ConvertibleProject {
 
@@ -14,12 +14,12 @@ public class CucumberProject extends ConvertibleProject {
 	protected ArrayList<ConvertibleObject> secondLayerObjects;
 	protected ArrayList<ConvertibleObject> thirdLayerObjects;
 
-	public CucumberProject(String tag, FileAccessor fa) {
+	public CucumberProject(String tag, ObjectRepository fa) {
 		super(fa);
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
 		secondLayerObjects = new ArrayList<ConvertibleObject>();
 		thirdLayerObjects = new ArrayList<ConvertibleObject>();
-		this.tag = tag;
+		this.tags = tag;
 	}
 
 	@Override
@@ -53,13 +53,13 @@ public class CucumberProject extends ConvertibleProject {
 		File aFile = null;
 		switch (layer) {
 		case FIRST_LAYER:
-			aFile = new File(baseDir + tag + "/" + "resources/cucumber");
+			aFile = new File(baseDir + tags + "/" + "resources/cucumber");
 			break;
 		case SECOND_LAYER:
-			aFile = new File(baseDir + tag + "/" + "java/org/farhan/" + SECOND_LAYER);
+			aFile = new File(baseDir + tags + "/" + "java/org/farhan/" + SECOND_LAYER);
 			break;
 		case THIRD_LAYER:
-			aFile = new File(baseDir + tag + "/" + "java/org/farhan/" + THIRD_LAYER);
+			aFile = new File(baseDir + tags + "/" + "java/org/farhan/" + THIRD_LAYER);
 			break;
 		}
 		return aFile;
@@ -154,11 +154,11 @@ public class CucumberProject extends ConvertibleProject {
 	public void load() throws Exception {
 
 		CucumberStandaloneSetup.doSetup();
-		ArrayList<File> files = fa.recursivelyListFiles(getDir(ConvertibleProject.FIRST_LAYER),
+		ArrayList<String> files = fa.list(getDir(ConvertibleProject.FIRST_LAYER).getAbsolutePath(),
 				getFileExt(ConvertibleProject.FIRST_LAYER));
-		for (File f : files) {
-			createObject(f.getAbsolutePath()).load(fa);
-			if (!isFileSelected(getObjects(ConvertibleProject.FIRST_LAYER).getLast(), this.tag)) {
+		for (String f : files) {
+			createObject(f).load(fa);
+			if (!isFileSelected(getObjects(ConvertibleProject.FIRST_LAYER).getLast(), this.tags)) {
 				getObjects(ConvertibleProject.FIRST_LAYER).removeLast();
 			}
 		}

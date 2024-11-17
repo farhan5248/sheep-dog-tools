@@ -19,7 +19,7 @@ import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.mbt.CucumberStandaloneSetup;
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.FileAccessor;
+import org.farhan.mbt.core.ObjectRepository;
 
 public class CucumberFeatureWrapper implements ConvertibleObject {
 
@@ -303,11 +303,12 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void load(FileAccessor fa) throws Exception {
+	public void load(ObjectRepository fa) throws Exception {
 		try {
 			URI uri = URI.createFileURI(theFile.getAbsolutePath());
 			Resource resource = new ResourceSetImpl().createResource(uri);
-			InputStream content = new ByteArrayInputStream(fa.readFile(theFile).getBytes(StandardCharsets.UTF_8));
+			InputStream content = new ByteArrayInputStream(
+					fa.get(theFile.getAbsolutePath()).getBytes(StandardCharsets.UTF_8));
 			resource.load(content, Collections.EMPTY_MAP);
 			theFeature = (Feature) resource.getContents().get(0);
 		} catch (Exception e) {
@@ -316,7 +317,7 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void save(FileAccessor fa) throws Exception {
+	public void save(ObjectRepository fa) throws Exception {
 		URI uri = URI.createFileURI(theFile.getAbsolutePath());
 		CucumberStandaloneSetup.doSetup();
 		Resource resource = new ResourceSetImpl().createResource(uri);
@@ -324,7 +325,7 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		Map<Object, Object> options = SaveOptions.newBuilder().format().getOptions().toOptionsMap();
 		OutputStream os = new ByteArrayOutputStream();
 		resource.save(os, options);
-		fa.writeFile(new File(uri.toFileString()), os.toString());
+		fa.put(new File(uri.toFileString()).getAbsolutePath(), os.toString());
 	}
 
 	public void setBackgroundDescription(Background background, String backgroundDescription) {

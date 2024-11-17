@@ -7,13 +7,13 @@ public abstract class ConvertibleProject {
 
 	// TODO change String to File
 	public static String baseDir = "";
-	protected String tag = "";
+	protected String tags = "";
 	public static final String FIRST_LAYER = "specs";
 	public static final String SECOND_LAYER = "stepdefs";
 	public static final String THIRD_LAYER = "objects";
-	protected FileAccessor fa;
+	protected ObjectRepository fa;
 
-	public ConvertibleProject(FileAccessor fa) {
+	public ConvertibleProject(ObjectRepository fa) {
 		this.fa = fa;
 	}
 

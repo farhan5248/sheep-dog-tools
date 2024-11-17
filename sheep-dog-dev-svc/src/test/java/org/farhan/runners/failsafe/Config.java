@@ -4,8 +4,6 @@ import io.cucumber.java.Before;
 import io.cucumber.spring.CucumberContextConfiguration;
 
 import java.io.File;
-import java.util.ArrayList;
-
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.farhan.mbt.service.RestServiceApplication;
@@ -19,31 +17,22 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootTest(classes = RestServiceApplication.class)
 public class Config {
 
-	public void deleteDir(File dir, String extension) {
-		ArrayList<File> filesList = recursivelyListFilesAndDirectories(dir, extension);
-		for (File f : filesList) {
-			f.delete();
-		}
-	}
-
-	public ArrayList<File> recursivelyListFilesAndDirectories(File aDir, String extension) {
-		ArrayList<File> theFiles = new ArrayList<File>();
+	public void deleteDir(File aDir) {
 		if (aDir.exists()) {
 			for (String s : aDir.list()) {
-				File tempFile = new File(aDir.getAbsolutePath() + File.separator + s);
-				if (tempFile.isDirectory()) {
-					theFiles.addAll(recursivelyListFilesAndDirectories(tempFile, extension));
-					theFiles.add(tempFile);
-				} else if (tempFile.getAbsolutePath().toLowerCase().endsWith(extension.toLowerCase())) {
-					theFiles.add(tempFile);
+				File f = new File(aDir.getAbsolutePath() + File.separator + s);
+				if (f.isDirectory()) {
+					deleteDir(f);
 				}
+				f.delete();
 			}
 		}
-		return theFiles;
 	}
 
+	// TODO move this out of this class, it's not really config
 	@Before
 	public void before() {
-		deleteDir(new File("target/src-gen/"), "");
+		// TODO delete the database table contents before running
+		deleteDir(new File("target/src-gen/"));
 	}
 }

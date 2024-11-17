@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import org.asciidoctor.ast.Section;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.mbt.core.FileAccessor;
+import org.farhan.mbt.core.ObjectRepository;
 
 public class AsciiDoctorProject extends ConvertibleProject {
 
 	private static ArrayList<ConvertibleObject> firstLayerObjects;
 
-	public AsciiDoctorProject(String tag, FileAccessor fa) {
+	public AsciiDoctorProject(String tags, ObjectRepository fa) {
 		super(fa);
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
-		this.tag = tag;
+		this.tags = tags;
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class AsciiDoctorProject extends ConvertibleProject {
 	@Override
 	public File getDir(String layer) {
 		File aFile = null;
-		aFile = new File(baseDir + tag + "/" + "resources/asciidoc/");
+		aFile = new File(baseDir + tags + "/" + "resources/asciidoc/");
 		return aFile;
 	}
 
@@ -50,19 +50,19 @@ public class AsciiDoctorProject extends ConvertibleProject {
 		return layerFiles;
 	}
 
-	private boolean isFileSelected(ConvertibleObject convertibleFile, String tag) throws Exception {
+	private boolean isFileSelected(ConvertibleObject convertibleFile, String tags) throws Exception {
 
 		AsciiDoctorAdocWrapper ufw = (AsciiDoctorAdocWrapper) convertibleFile;
-		if (isTagged(ufw.getFeatureTags(), tag)) {
+		if (isTagged(ufw.getFeatureTags(), tags)) {
 			return true;
 		}
 		for (Section a : ufw.getAbstractScenarioList()) {
 			if (ufw.isScenarioOutline(a)) {
-				if (isTagged(ufw.getScenarioOutlineTags(a), tag)) {
+				if (isTagged(ufw.getScenarioOutlineTags(a), tags)) {
 					return true;
 				}
 			} else if (!ufw.isBackground(a)) {
-				if (isTagged(ufw.getScenarioTags(a), tag)) {
+				if (isTagged(ufw.getScenarioTags(a), tags)) {
 					return true;
 				}
 			}
@@ -71,7 +71,7 @@ public class AsciiDoctorProject extends ConvertibleProject {
 	}
 
 	private boolean isTagged(ArrayList<String> tags, String tag) {
-		if (tag.isEmpty()) {
+		if (tags.isEmpty()) {
 			return true;
 		}
 		for (String t : tags) {
@@ -84,12 +84,12 @@ public class AsciiDoctorProject extends ConvertibleProject {
 
 	@Override
 	public void load() throws Exception {
-		ArrayList<File> files = fa.recursivelyListFiles(getDir(ConvertibleProject.FIRST_LAYER),
+		ArrayList<String> files = fa.list(getDir(ConvertibleProject.FIRST_LAYER).getAbsolutePath(),
 				getFileExt(ConvertibleProject.FIRST_LAYER));
 		getObjects(ConvertibleProject.FIRST_LAYER).clear();
-		for (File f : files) {
-			createObject(f.getAbsolutePath()).load(fa);
-			if (!isFileSelected(getObjects(ConvertibleProject.FIRST_LAYER).getLast(), this.tag)) {
+		for (String f : files) {
+			createObject(f).load(fa);
+			if (!isFileSelected(getObjects(ConvertibleProject.FIRST_LAYER).getLast(), this.tags)) {
 				getObjects(ConvertibleProject.FIRST_LAYER).removeLast();
 			}
 		}

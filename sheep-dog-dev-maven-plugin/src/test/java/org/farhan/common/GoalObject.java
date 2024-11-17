@@ -16,7 +16,7 @@ public abstract class GoalObject extends TestObject {
 			Class<?> mojoClass = Class.forName(goal);
 			MBTMojo mojo = (MBTMojo) mojoClass.getConstructor().newInstance();
 			mojo.tag = attributes.get("tags");
-			mojo.srcDir = new File(Config.getWorkingDir() + attributes.get("component") + "/src/test/");
+			mojo.srcDir = new File(Config.getWorkingDir() + attributes.get("component") + "/src/test/").getAbsolutePath();
 			ConvertibleProject.baseDir = Config.getWorkingDir() + attributes.get("component") + "/target/mbt/";
 
 			mojo.execute();

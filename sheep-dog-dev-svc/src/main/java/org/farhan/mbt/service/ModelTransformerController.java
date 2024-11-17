@@ -11,7 +11,7 @@ import org.farhan.mbt.convert.ConvertUMLToCucumber;
 import org.farhan.mbt.convert.ConvertUMLToCucumberGuice;
 import org.farhan.mbt.convert.ConvertUMLToCucumberSpring;
 import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.mbt.core.FileAccessor;
+import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.MojoGoal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,10 +31,10 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 
 	Logger logger = LoggerFactory.getLogger(ModelTransformerController.class);
 	private String baseDir;
-	private final FileAccessor fa;
+	private final ObjectRepository fa;
 
 	@Autowired
-	public ModelTransformerController(FileAccessor fa) {
+	public ModelTransformerController(ObjectRepository fa) {
 		this.fa = fa;
 	}
 

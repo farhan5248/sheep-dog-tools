@@ -13,7 +13,7 @@ import org.farhan.mbt.cucumber.ScenarioOutline;
 import org.farhan.mbt.cucumber.Step;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.mbt.core.FileAccessor;
+import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.MojoGoal;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
@@ -25,7 +25,7 @@ import org.farhan.helper.StepHelper;
 
 public class ConvertUMLToCucumber extends MojoGoal {
 
-	public ConvertUMLToCucumber(String tags, FileAccessor fa) {
+	public ConvertUMLToCucumber(String tags, ObjectRepository fa) {
 		super(tags, fa);
 	}
 

@@ -8,7 +8,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.io.File;
 
-import org.farhan.common.Utilities;
+import org.farhan.mbt.maven.Utilities;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
@@ -21,6 +21,6 @@ public class Config {
 
 	@Before
 	public void before() {
-		Utilities.deleteDir(new File("target/src-gen/"), "");
+		Utilities.deleteDir(new File("target/src-gen/"));
 	}
 }

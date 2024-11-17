@@ -64,9 +64,12 @@ public class RestService extends TestObject {
 
 			runGoal(attributes.get("tags"), resource);
 
-			for (String fileName : getFileList(attributes.get("tags")).split("\n")) {
-				String contents = getFileContents(attributes.get("tags"), fileName.replace("\\", "/"));
-				writeFile(new File(srcDir.getAbsolutePath() + "\\" + fileName), contents);
+			String fileList = getFileList(attributes.get("tags"));
+			if (!fileList.isBlank()) {
+				for (String fileName : fileList.split("\n")) {
+					String contents = getFileContents(attributes.get("tags"), fileName.replace("\\", "/"));
+					writeFile(new File(srcDir.getAbsolutePath() + "\\" + fileName), contents);
+				}
 			}
 		} catch (Exception e) {
 			Assertions.fail(getStackTraceAsString(e));

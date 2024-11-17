@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import org.apache.commons.lang3.StringUtils;
 
 public class Utilities {
 
@@ -52,10 +53,15 @@ public class Utilities {
 	}
 
 	// TODO move to test class
-	public static void deleteDir(File dir, String extension) {
-		ArrayList<File> filesList = Utilities.recursivelyListFilesAndDirectories(dir, extension);
-		for (File f : filesList) {
-			f.delete();
+	public static void deleteDir(File aDir) {
+		if (aDir.exists()) {
+			for (String s : aDir.list()) {
+				File f = new File(aDir.getAbsolutePath() + File.separator + s);
+				if (f.isDirectory()) {
+					deleteDir(f);
+				}
+				f.delete();
+			}
 		}
 	}
 
@@ -74,5 +80,38 @@ public class Utilities {
 			}
 		}
 		return theFiles;
+	}
+
+	// TODO move this to classes that use it.
+
+	public static String removeDelimiterAndCapitalize(String text, String delimiter) {
+		String[] nameParts = text.split(delimiter);
+		text = "";
+		for (String s : nameParts) {
+			text += StringUtils.capitalize(s);
+		}
+		return text;
+	}
+
+	public static String upperFirst(String text) {
+		if (!text.isEmpty()) {
+			return text.substring(0, 1).toUpperCase() + text.substring(1);
+		}
+		return text;
+	}
+
+	public static String lowerFirst(String text) {
+		if (!text.isEmpty()) {
+			return text.substring(0, 1).toLowerCase() + text.substring(1);
+		}
+		return text;
+	}
+
+	public static Object listAsCsv(ArrayList<String> list) {
+		String csv = "";
+		for (String listItem : list) {
+			csv += "," + listItem;
+		}
+		return csv.replaceFirst(",", "");
 	}
 }

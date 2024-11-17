@@ -10,37 +10,46 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.farhan.mbt.core.FileAccessor;
+import org.farhan.mbt.core.ObjectRepository;
 import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.datatable.DataTable;
 
-public abstract class TestObject implements FileAccessor {
+public abstract class TestObject implements ObjectRepository {
 
 	protected HashMap<String, String> attributes = new HashMap<String, String>();
 
-	public ArrayList<File> recursivelyListFiles(File aDir, String extension) {
-		ArrayList<File> theFiles = new ArrayList<File>();
+	@Override
+	public ArrayList<String> list(String path, String extension) {
+		ArrayList<String> theFiles = new ArrayList<String>();
+		File aDir = new File(path);
 		if (aDir.exists()) {
 			for (String s : aDir.list()) {
 				File tempFile = new File(aDir.getAbsolutePath() + File.separator + s);
 				if (tempFile.isDirectory()) {
-					theFiles.addAll(recursivelyListFiles(tempFile, extension));
+					theFiles.addAll(list(tempFile.getAbsolutePath(), extension));
 				} else if (tempFile.getAbsolutePath().toLowerCase().endsWith(extension.toLowerCase())) {
-					theFiles.add(tempFile);
+					theFiles.add(tempFile.getAbsolutePath());
 				}
 			}
 		}
 		return theFiles;
 	}
 
-	public String readFile(File aFile) throws Exception {
-		return new String(Files.readAllBytes(Paths.get(aFile.toURI())), StandardCharsets.UTF_8);
+	@Override
+	public boolean contains(String path) {
+		return new File(path).exists();
 	}
 
-	public void writeFile(File aFile, String content) throws Exception {
-		aFile.getParentFile().mkdirs();
-		PrintWriter aPrintWriter = new PrintWriter(aFile, StandardCharsets.UTF_8);
+	@Override
+	public String get(String path) throws Exception {
+		return new String(Files.readAllBytes(Paths.get(new File(path).toURI())), StandardCharsets.UTF_8);
+	}
+
+	@Override
+	public void put(String path, String content) throws Exception {
+		new File(path).getParentFile().mkdirs();
+		PrintWriter aPrintWriter = new PrintWriter(new File(path), StandardCharsets.UTF_8);
 		aPrintWriter.print(content);
 		aPrintWriter.flush();
 		aPrintWriter.close();

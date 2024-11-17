@@ -10,7 +10,7 @@ import org.farhan.mbt.cucumber.Examples;
 import org.farhan.mbt.cucumber.Row;
 import org.farhan.mbt.cucumber.Step;
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.FileAccessor;
+import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.MojoGoal;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
@@ -19,7 +19,7 @@ import org.farhan.mbt.uml.UMLProject;
 
 public class ConvertCucumberToUML extends MojoGoal {
 
-	public ConvertCucumberToUML(String tags, FileAccessor fa) {
+	public ConvertCucumberToUML(String tags, ObjectRepository fa) {
 		super(tags, fa);
 	}
 

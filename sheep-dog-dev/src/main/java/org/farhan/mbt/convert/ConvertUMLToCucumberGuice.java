@@ -1,12 +1,12 @@
 package org.farhan.mbt.convert;
 
-import org.farhan.mbt.core.FileAccessor;
+import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.cucumber.CucumberGuiceProject;
 import org.farhan.mbt.uml.UMLProject;
 
 public class ConvertUMLToCucumberGuice extends ConvertUMLToCucumber {
 
-	public ConvertUMLToCucumberGuice(String tags, FileAccessor fa) {
+	public ConvertUMLToCucumberGuice(String tags, ObjectRepository fa) {
 		super(tags, fa);
 	}
 

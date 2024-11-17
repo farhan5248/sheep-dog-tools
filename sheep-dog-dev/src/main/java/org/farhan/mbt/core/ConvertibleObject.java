@@ -9,9 +9,9 @@ public interface ConvertibleObject {
 
 	public File getFile();
 
-	public void load(FileAccessor fa) throws Exception;
+	public void load(ObjectRepository fa) throws Exception;
 
-	public void save(FileAccessor fa) throws Exception;
+	public void save(ObjectRepository fa) throws Exception;
 
 	public Object get();
 }

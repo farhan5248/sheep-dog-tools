@@ -9,14 +9,14 @@ import org.eclipse.uml2.uml.Message;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.FileAccessor;
+import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.MojoGoal;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 
 public class ConvertUMLToAsciidoctor extends MojoGoal {
 
-	public ConvertUMLToAsciidoctor(String tags, FileAccessor fa) {
+	public ConvertUMLToAsciidoctor(String tags, ObjectRepository fa) {
 		super(tags, fa);
 	}
 

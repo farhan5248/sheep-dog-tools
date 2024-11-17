@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.FileAccessor;
+import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.helper.StepHelper;
 
@@ -323,11 +323,11 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void load(FileAccessor fa) throws Exception {
+	public void load(ObjectRepository fa) throws Exception {
 		try {
-			if (theFile.exists() && getType().getMethods().isEmpty()) {
+			if (fa.contains(theFile.getAbsolutePath()) && getType().getMethods().isEmpty()) {
 				InputStream content = new ByteArrayInputStream(
-						fa.readFile(theFile).getBytes(StandardCharsets.UTF_8));
+						fa.get(theFile.getAbsolutePath()).getBytes(StandardCharsets.UTF_8));
 				theJavaClass = new JavaParser().parse(content).getResult().get();
 			}
 		} catch (Exception e) {
@@ -345,8 +345,8 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void save(FileAccessor fa) throws Exception {
-		fa.writeFile(theFile, theJavaClass.toString());
+	public void save(ObjectRepository fa) throws Exception {
+		fa.put(theFile.getAbsolutePath(), theJavaClass.toString());
 	}
 
 	@Override

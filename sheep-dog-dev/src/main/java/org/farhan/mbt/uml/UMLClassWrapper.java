@@ -13,7 +13,7 @@ import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.ValueSpecification;
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.FileAccessor;
+import org.farhan.mbt.core.ObjectRepository;
 
 public class UMLClassWrapper implements ConvertibleObject {
 
@@ -360,12 +360,12 @@ public class UMLClassWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void load(FileAccessor fa) throws Exception {
+	public void load(ObjectRepository fa) throws Exception {
 		// Individual objects are not stored separately so this is not needed.
 	}
 
 	@Override
-	public void save(FileAccessor fa) throws Exception {
+	public void save(ObjectRepository fa) throws Exception {
 		// Individual objects are not stored separately so this is not needed.
 	}
 

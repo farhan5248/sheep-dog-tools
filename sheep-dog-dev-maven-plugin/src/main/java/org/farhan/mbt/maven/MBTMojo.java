@@ -7,7 +7,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.mbt.core.FileAccessor;
+import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.MojoGoal;
 
 public abstract class MBTMojo extends AbstractMojo {
@@ -18,7 +18,11 @@ public abstract class MBTMojo extends AbstractMojo {
 	@Parameter(defaultValue = "${project}", readonly = true)
 	public MavenProject project;
 
-	public File srcDir = new File("src/test/");
+	public String srcDir;
+
+	public MBTMojo() {
+		srcDir = new File("src/test/").getAbsolutePath();
+	}
 
 	/**
 	 * The tag of the selected edges.
@@ -26,7 +30,7 @@ public abstract class MBTMojo extends AbstractMojo {
 	@Parameter(property = "tag", defaultValue = "")
 	public String tag;
 
-	protected FileAccessor fa = new FileAccessorImpl();
+	protected ObjectRepository fa = new FileObjectRepository();
 
 	public void execute(MojoGoal mojo) throws MojoExecutionException {
 		getLog().info("Starting execute");
@@ -37,16 +41,18 @@ public abstract class MBTMojo extends AbstractMojo {
 				ConvertibleProject.baseDir = "target/mbt/";
 			}
 			// TODO this should only send the layer 1,2,3 files, not runners, common or impl
-			for (File aFile : fa.recursivelyListFiles(srcDir, "")) {
-				String contents = fa.readFile(aFile);
+			// TODO the files shouldn't be resent, make a flag to control if this needs to
+			// happen or the get below
+			for (String aFile : fa.list(srcDir, "")) {
+				String contents = fa.get(aFile);
 				getLog().debug("contents: " + contents);
-				mojo.addFile(aFile.getAbsolutePath().replace(srcDir.getAbsolutePath(), ""), contents);
+				mojo.addFile(aFile.replace(srcDir, ""), contents);
 			}
 			mojo.mojoGoal();
 			for (String fileName : mojo.getFileList()) {
 				String contents = mojo.getFileContents(fileName);
 				getLog().debug("contents: " + contents);
-				fa.writeFile(new File(srcDir.getAbsolutePath() + fileName), contents);
+				fa.put(srcDir + fileName, contents);
 			}
 		} catch (Exception e) {
 			throw new MojoExecutionException(e);

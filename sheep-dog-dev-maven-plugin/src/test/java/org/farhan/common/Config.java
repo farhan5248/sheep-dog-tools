@@ -36,32 +36,21 @@ public final class Config extends AbstractModule implements InjectorSource {
 		return "target/src-gen/";
 	}
 
-	public void deleteDir(File dir, String extension) {
-		ArrayList<File> filesList = recursivelyListFilesAndDirectories(dir, extension);
-		for (File f : filesList) {
-			f.delete();
-		}
-	}
-
-	public ArrayList<File> recursivelyListFilesAndDirectories(File aDir, String extension) {
-		ArrayList<File> theFiles = new ArrayList<File>();
+	public void deleteDir(File aDir) {
 		if (aDir.exists()) {
 			for (String s : aDir.list()) {
-				File tempFile = new File(aDir.getAbsolutePath() + File.separator + s);
-				if (tempFile.isDirectory()) {
-					theFiles.addAll(recursivelyListFilesAndDirectories(tempFile, extension));
-					theFiles.add(tempFile);
-				} else if (tempFile.getAbsolutePath().toLowerCase().endsWith(extension.toLowerCase())) {
-					theFiles.add(tempFile);
+				File f = new File(aDir.getAbsolutePath() + File.separator + s);
+				if (f.isDirectory()) {
+					deleteDir(f);
 				}
+				f.delete();
 			}
 		}
-		return theFiles;
 	}
 
 	@Before
 	public void before() {
-		deleteDir(new File(getWorkingDir()), "");
+		deleteDir(new File(getWorkingDir()));
 	}
 
 	@Override

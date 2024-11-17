@@ -25,7 +25,7 @@ import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.mbt.core.FileAccessor;
+import org.farhan.mbt.core.ObjectRepository;
 
 public class UMLProject extends ConvertibleProject {
 
@@ -33,19 +33,19 @@ public class UMLProject extends ConvertibleProject {
 
 	private Model theSystem;
 
-	public UMLProject(String tag, FileAccessor fa) {
+	public UMLProject(String tags, ObjectRepository fa) {
 		super(fa);
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
 		theSystem = UMLFactory.eINSTANCE.createModel();
 		theSystem.setName("pst");
 		theSystem.createNestedPackage(FIRST_LAYER);
-		this.tag = tag;
+		this.tags = tags;
 	}
 
 	@Override
 	public File getDir(String layer) {
 		File aFile = null;
-		aFile = new File(baseDir + tag + "/" + "uml/");
+		aFile = new File(baseDir + tags + "/" + "uml/");
 		return aFile;
 	}
 
@@ -57,7 +57,7 @@ public class UMLProject extends ConvertibleProject {
 		ResourceSet resourceSet = UMLResourcesUtil.init(new ResourceSetImpl());
 		Resource resource = resourceSet.createResource(uri);
 		InputStream content = new ByteArrayInputStream(
-				fa.readFile(new File(uri.toFileString())).getBytes(StandardCharsets.UTF_8));
+				fa.get(new File(uri.toFileString()).getAbsolutePath()).getBytes(StandardCharsets.UTF_8));
 		resource.load(content, Collections.EMPTY_MAP);
 		theSystem = (Model) resource.getContents().getFirst();
 		ArrayList<Class> objects = getPackagedClasses(theSystem.getNestedPackage(FIRST_LAYER));
@@ -92,7 +92,7 @@ public class UMLProject extends ConvertibleProject {
 		options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF, "true");
 		OutputStream os = new ByteArrayOutputStream();
 		resource.save(os, options);
-		fa.writeFile(new File(uri.toFileString()), os.toString());
+		fa.put(new File(uri.toFileString()).getAbsolutePath(), os.toString());
 	}
 
 	@Override
