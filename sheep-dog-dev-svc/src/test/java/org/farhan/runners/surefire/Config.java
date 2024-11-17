@@ -2,17 +2,12 @@ package org.farhan.runners.surefire;
 
 import io.cucumber.java.Before;
 import io.cucumber.spring.CucumberContextConfiguration;
-import jakarta.activation.DataSource;
-
 import java.io.File;
 import org.farhan.mbt.service.RestServiceApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 @ComponentScan(basePackages = "org.farhan")
 @EnableAutoConfiguration
@@ -31,11 +26,6 @@ public class Config {
 				f.delete();
 			}
 		}
-	}
-
-	@Bean
-	public DataSource dataSource() {
-		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).addScript("schema.sql").build();
 	}
 
 	@Before
