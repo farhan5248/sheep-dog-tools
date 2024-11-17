@@ -1,14 +1,17 @@
-package org.farhan.mbt.service;
+package org.farhan.common;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.farhan.mbt.core.ObjectRepository;
+import org.farhan.mbt.service.ModelSourceFile;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Profile("surefire")
 public class H2ObjectRepository implements ObjectRepository {
 
 	private JdbcTemplate jdbcTemplate;
