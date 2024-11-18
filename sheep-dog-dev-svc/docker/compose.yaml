@@ -1,11 +1,28 @@
 services:
-  sheep-dog-dev-svc:
-    hostname: mbt.sheepdog.org
-    image: farhan5248/sheep-dog-dev-svc:latest
+  sheep-dog-dev-db:
+    image: mysql:9.1.0
     restart: unless-stopped
-    volumes:
-      - C:\sheep-dog-dev-svc\mbt:/sheep-dog-dev-svc/mbt
+    environment:
+      MYSQL_ROOT_PASSWORD: mbt-pass
     ports:
-      - 8080:8080
+     - 3307:3306
     labels:
       stack.name: "sheep-dog-dev-stack"
+    networks:
+      - sheepdognet
+  sheep-dog-dev-svc:
+    image: farhan5248/sheep-dog-dev-svc:latest
+    restart: unless-stopped
+    depends_on:
+      - sheep-dog-dev-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://sheep-dog-dev-db:3306
+    ports:
+      - 8087:8080
+    labels:
+      stack.name: "sheep-dog-dev-stack"
+    networks:
+      - sheepdognet
+networks:
+  sheepdognet:
+    driver: bridge

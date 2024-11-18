@@ -236,19 +236,13 @@
 							<name>
 								farhan5248/${project.artifactId}</name>
 							<run>
-								<volumes>
-									<bind>
-										<volume>
-											${project.basedir}\target\src-gen:/sheep-dog-dev-svc/mbt</volume>
-									</bind>
-								</volumes>
 								<ports>
-									<port>8080:8080</port>
+									<port>8087:8080</port>
 								</ports>
 								<wait>
 									<http>
 										<url>
-											http://localhost:8080/getFileList</url>
+											http://localhost:8087/getFileList</url>
 									</http>
 									<time>60000</time>
 								</wait>

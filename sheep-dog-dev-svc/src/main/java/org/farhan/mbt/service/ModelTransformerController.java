@@ -16,6 +16,7 @@ import org.farhan.mbt.core.MojoGoal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationListener;
@@ -32,6 +33,9 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	Logger logger = LoggerFactory.getLogger(ModelTransformerController.class);
 	private String baseDir;
 	private final ObjectRepository fa;
+	
+	@Value("${spring.datasource.url}")
+	private String url;
 
 	@Autowired
 	public ModelTransformerController(ObjectRepository fa) {
@@ -184,6 +188,8 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	@Override
 	public void onApplicationEvent(ApplicationReadyEvent event) {
 		logger.info("Starting onApplicationEvent");
+		logger.info("baseDir:" + this.baseDir);
+		logger.info("spring.datasource.url:" + url);
 		ConvertibleProject.baseDir = this.baseDir;
 		logger.info("Ending onApplicationEvent");
 	}
