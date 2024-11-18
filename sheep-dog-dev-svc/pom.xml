@@ -165,7 +165,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.11.0</version>
 				<configuration>
 					<encoding>UTF-8</encoding>
 					<source>${java.version}</source>
@@ -175,7 +174,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.2.2</version>
 				<configuration>
 					<properties>
 						<!-- Work around. Surefire does not include enough
@@ -190,7 +188,6 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>versions-maven-plugin</artifactId>
-				<version>2.16.2</version>
 				<configuration>
 					<properties>
 						<property>
@@ -202,15 +199,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>3.2.2</version>
 				<configuration>
 					<includes>
 						<include>**/*IT</include>
 						<include>**/*IntegrationTest</include>
 					</includes>
-					<environmentVariables>
-						<START_APP>false</START_APP>
-					</environmentVariables>
 				</configuration>
 				<executions>
 					<execution>
@@ -230,42 +223,65 @@
 						<image>
 							<build>
 								<contextDir>${project.basedir}</contextDir>
-								<dockerFile>docker\Dockerfile</dockerFile>
+								<dockerFile>docker\springboot.dockerfile</dockerFile>
 							</build>
 							<alias>${project.artifactId}</alias>
-							<name>
-								farhan5248/${project.artifactId}</name>
-							<run>
-								<ports>
-									<port>8087:8080</port>
-								</ports>
-								<wait>
-									<http>
-										<url>
-											http://localhost:8087/getFileList</url>
-									</http>
-									<time>60000</time>
-								</wait>
-							</run>
+							<name>farhan5248/${project.artifactId}</name>
 						</image>
 					</images>
 				</configuration>
 				<executions>
 					<execution>
-						<id>start</id>
+						<id>build-image</id>
 						<phase>pre-integration-test</phase>
 						<goals>
 							<goal>build</goal>
-							<goal>start</goal>
 						</goals>
 					</execution>
 					<execution>
-						<id>stop</id>
-						<phase>post-integration-test</phase>
+						<id>push-image</id>
+						<phase>install</phase>
 						<goals>
-							<goal>stop</goal>
 							<goal>push</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>start-stack</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>docker</executable>
+							<arguments>
+								<argument>compose</argument>
+								<argument>up</argument>
+								<argument>-d</argument>
+							</arguments>
+							<workingDirectory>${project.basedir}/docker</workingDirectory>
+						</configuration>
+					</execution>
+					<execution>
+						<id>stop-stack</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>docker</executable>
+							<arguments>
+								<argument>compose</argument>
+								<argument>down</argument>
+							</arguments>
+							<workingDirectory>${project.basedir}/docker</workingDirectory>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

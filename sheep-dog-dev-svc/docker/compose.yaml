@@ -1,6 +1,6 @@
 services:
   sheep-dog-dev-db:
-    image: mysql:9.1.0
+    image: farhan5248/sheep-dog-dev-db:latest
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: mbt-pass
@@ -13,10 +13,16 @@ services:
   sheep-dog-dev-svc:
     image: farhan5248/sheep-dog-dev-svc:latest
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8087/getFileList"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     depends_on:
-      - sheep-dog-dev-db
+      sheep-dog-dev-db:
+        condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://sheep-dog-dev-db:3306
+      SPRING_DATASOURCE_URL: jdbc:mysql://sheep-dog-dev-db:3306/mbt
     ports:
       - 8087:8080
     labels:

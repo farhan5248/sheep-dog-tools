@@ -1,5 +1,6 @@
 package org.farhan.runners.failsafe;
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.spring.CucumberContextConfiguration;
 
@@ -9,6 +10,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.farhan.mbt.service.RestServiceApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @ComponentScan(basePackages = "org.farhan")
 @EnableAutoConfiguration
@@ -16,6 +18,12 @@ import org.springframework.context.annotation.ComponentScan;
 @CucumberContextConfiguration
 @SpringBootTest(classes = RestServiceApplication.class)
 public class Config {
+
+	private JdbcTemplate jdbcTemplate;
+
+	public Config(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
 
 	public void deleteDir(File aDir) {
 		if (aDir.exists()) {
@@ -29,10 +37,16 @@ public class Config {
 		}
 	}
 
-	// TODO move this out of this class, it's not really config
 	@Before
 	public void before() {
-		// TODO delete the database table contents before running
 		deleteDir(new File("target/src-gen/"));
+		jdbcTemplate.execute(
+				"CREATE TABLE IF NOT EXISTS Model_Source_Files ( file_name VARCHAR(200) NULL, file_content TEXT NULL );");
 	}
+
+	@After
+	public void after() {
+		jdbcTemplate.execute("DROP TABLE Model_Source_Files;");
+	}
+
 }
