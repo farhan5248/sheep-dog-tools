@@ -1,16 +1,13 @@
 package org.farhan.mbt.cucumber;
 
-import java.io.File;
-
 import org.farhan.helper.StepHelper;
-
 import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
 
 public class CucumberGuiceJavaWrapper extends CucumberJavaWrapper {
 
-	public CucumberGuiceJavaWrapper(File theFile) {
-		super(theFile);
+	public CucumberGuiceJavaWrapper(String thePath) {
+		super(thePath);
 		if (!isStepObj()) {
 			getType().addExtendedType("TestSteps");
 			theJavaClass.addImport("org.farhan.common.TestSteps");
@@ -18,7 +15,7 @@ public class CucumberGuiceJavaWrapper extends CucumberJavaWrapper {
 			getType().addMarkerAnnotation("ScenarioScoped");
 
 			ConstructorDeclaration constructor = getType().addConstructor(Modifier.Keyword.PUBLIC);
-			constructor.addAndGetParameter(theFile.getName().replace("Steps.java", ""), "object");
+			constructor.addAndGetParameter(thePath.replace("Steps.java", ""), "object");
 			constructor.createBody().addStatement("super(object);");
 			theJavaClass.addImport("com.google.inject.Inject");
 			constructor.addMarkerAnnotation("Inject");

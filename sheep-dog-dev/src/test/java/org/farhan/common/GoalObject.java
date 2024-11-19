@@ -1,32 +1,43 @@
 package org.farhan.common;
 
-import java.io.File;
-import org.farhan.mbt.core.ConvertibleProject;
+import java.util.ArrayList;
+
 import org.farhan.mbt.core.ObjectRepository;
-import org.farhan.mbt.core.MojoGoal;
+import org.farhan.mbt.core.Converter;
 import org.junit.jupiter.api.Assertions;
+
+import com.google.inject.Key;
 
 public abstract class GoalObject extends TestObject {
 
+	private ArrayList<FileObject> getFileClasses() throws Exception {
+		ArrayList<FileObject> files = new ArrayList<FileObject>();
+		for (Key<?> b : Config.classes.getBindings().keySet()) {
+			if (b.getTypeLiteral().toString().endsWith("File")
+					&& b.getTypeLiteral().toString().startsWith("org.farhan.objects.mbttransformer.")) {
+				FileObject object = (FileObject) Config.classes.getInstance(b);
+				if (object.attributes.get("content") != null) {
+					files.add(object);
+				}
+			}
+		}
+		return files;
+	}
+
 	protected void runGoal(String goal) {
 		try {
-			if (attributes.get("tags") == null) {
-				attributes.put("tags", "");
+			String tags = attributes.get("tags");
+			if (tags == null) {
+				tags = "";
 			}
 			Class<?> mojoClass = Class.forName(goal);
-			MojoGoal mojo = (MojoGoal) mojoClass.getConstructor(String.class, ObjectRepository.class)
-					.newInstance(attributes.get("tags"), this);
-			String srcDir = new File(Config.getWorkingDir() + attributes.get("component") + "/src/test/")
-					.getAbsolutePath();
-			ConvertibleProject.baseDir = Config.getWorkingDir() + attributes.get("component") + "/target/mbt/";
+			Converter mojo = (Converter) mojoClass.getConstructor(String.class, ObjectRepository.class)
+					.newInstance(tags, this);
 
-			for (String fileName : list(srcDir, "")) {
-				mojo.addFile(fileName.replace(srcDir, ""), get(fileName));
+			for (FileObject object : getFileClasses()) {
+				this.put(tags, object.attributes.get("path"), object.attributes.get("content"));
 			}
 			mojo.mojoGoal();
-			for (String fileName : mojo.getFileList()) {
-				put(srcDir + fileName, mojo.getFileContents(fileName));
-			}
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
 		}

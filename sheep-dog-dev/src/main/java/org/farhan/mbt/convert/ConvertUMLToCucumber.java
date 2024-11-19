@@ -1,6 +1,5 @@
 package org.farhan.mbt.convert;
 
-import java.io.File;
 import java.util.ArrayList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
@@ -14,7 +13,7 @@ import org.farhan.mbt.cucumber.Step;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.ObjectRepository;
-import org.farhan.mbt.core.MojoGoal;
+import org.farhan.mbt.core.Converter;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberJavaWrapper;
@@ -23,7 +22,7 @@ import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 import org.farhan.helper.StepHelper;
 
-public class ConvertUMLToCucumber extends MojoGoal {
+public class ConvertUMLToCucumber extends Converter {
 
 	public ConvertUMLToCucumber(String tags, ObjectRepository fa) {
 		super(tags, fa);
@@ -156,16 +155,16 @@ public class ConvertUMLToCucumber extends MojoGoal {
 		String objectName = getObjectName(stepName);
 		String objectType = Utilities.upperFirst(StepHelper.getObjectType(stepName));
 		String componentName = getComponentName(stepName);
-		return tgtPrj.getDir(ConvertibleProject.SECOND_LAYER) + File.separator + componentName.toLowerCase()
-				+ File.separator + Utilities.upperFirst(componentName) + objectName + objectType + "Steps.java";
+		return tgtPrj.getDir(ConvertibleProject.SECOND_LAYER) + "/" + componentName.toLowerCase()
+				+ "/" + Utilities.upperFirst(componentName) + objectName + objectType + "Steps.java";
 	}
 
 	protected String getStepObjName(String stepName) {
 		String objectName = getObjectName(stepName);
 		String objectType = Utilities.upperFirst(StepHelper.getObjectType(stepName));
 		String componentName = getComponentName(stepName);
-		return tgtPrj.getDir(ConvertibleProject.THIRD_LAYER) + File.separator + componentName.toLowerCase()
-				+ File.separator + objectName + objectType + ".java";
+		return tgtPrj.getDir(ConvertibleProject.THIRD_LAYER) + "/" + componentName.toLowerCase()
+				+ "/" + objectName + objectType + ".java";
 	}
 
 	protected CucumberJavaWrapper getTgtObj2(Message srcStep) throws Exception {

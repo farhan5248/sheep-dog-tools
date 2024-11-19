@@ -2,7 +2,6 @@ package org.farhan.mbt.cucumber;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
@@ -19,17 +18,19 @@ import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.mbt.CucumberStandaloneSetup;
 import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.ObjectRepository;
 
 public class CucumberFeatureWrapper implements ConvertibleObject {
 
 	private Feature theFeature;
-	private File theFile;
+	private String thePath;
 
-	public CucumberFeatureWrapper(File theFile) {
-		setFile(theFile);
+	public CucumberFeatureWrapper(String thePath) {
+		this.thePath = thePath;
+		String[] pathParts = thePath.split("/");
 		theFeature = CucumberFactory.eINSTANCE.createFeature();
-		theFeature.setName(theFile.getName().replace(".feature", ""));
+		theFeature.setName(pathParts[pathParts.length - 1].replace(".feature", ""));
 	}
 
 	private String convertStatementsToString(EList<Statement> eList) {
@@ -217,12 +218,12 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public File getFile() {
-		return theFile;
+	public String getPath() {
+		return thePath;
 	}
 
 	public String getFileName() {
-		return theFile.getAbsolutePath();
+		return thePath;
 	}
 
 	public String getScenarioDescription(AbstractScenario abstractScenario) {
@@ -305,27 +306,27 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 	@Override
 	public void load(ObjectRepository fa) throws Exception {
 		try {
-			URI uri = URI.createFileURI(theFile.getAbsolutePath());
+			URI uri = URI.createFileURI(thePath);
 			Resource resource = new ResourceSetImpl().createResource(uri);
 			InputStream content = new ByteArrayInputStream(
-					fa.get(theFile.getAbsolutePath()).getBytes(StandardCharsets.UTF_8));
+					fa.get(ConvertibleProject.tags, thePath).getBytes(StandardCharsets.UTF_8));
 			resource.load(content, Collections.EMPTY_MAP);
 			theFeature = (Feature) resource.getContents().get(0);
 		} catch (Exception e) {
-			throw new Exception("There was a problem loading file: " + theFile.getAbsolutePath());
+			throw new Exception("There was a problem loading file: " + thePath);
 		}
 	}
 
 	@Override
 	public void save(ObjectRepository fa) throws Exception {
-		URI uri = URI.createFileURI(theFile.getAbsolutePath());
+		URI uri = URI.createFileURI(thePath);
 		CucumberStandaloneSetup.doSetup();
 		Resource resource = new ResourceSetImpl().createResource(uri);
 		resource.getContents().add(theFeature);
 		Map<Object, Object> options = SaveOptions.newBuilder().format().getOptions().toOptionsMap();
 		OutputStream os = new ByteArrayOutputStream();
 		resource.save(os, options);
-		fa.put(new File(uri.toFileString()).getAbsolutePath(), os.toString());
+		fa.put(ConvertibleProject.tags, uri.toFileString(), os.toString());
 	}
 
 	public void setBackgroundDescription(Background background, String backgroundDescription) {
@@ -358,11 +359,6 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 
 	public void setFeatureTags(ArrayList<String> featureTags) {
 		setTags(theFeature.getTags(), featureTags);
-	}
-
-	@Override
-	public void setFile(File theFile) {
-		this.theFile = theFile;
 	}
 
 	public void setScenarioDescription(Scenario scenario, String scenarioDescription) {

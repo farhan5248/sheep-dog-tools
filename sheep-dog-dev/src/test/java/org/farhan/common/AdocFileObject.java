@@ -52,7 +52,7 @@ public class AdocFileObject extends FileObject {
 		super.assertObjectExists();
 		project = new AsciiDoctorProject("", this);
 		try {
-			wrapper = (AsciiDoctorAdocWrapper) project.createObject(getFile());
+			wrapper = (AsciiDoctorAdocWrapper) project.createObject(attributes.get("path"));
 			wrapper.load(this);
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));

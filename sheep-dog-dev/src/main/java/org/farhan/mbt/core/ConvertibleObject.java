@@ -1,13 +1,9 @@
 package org.farhan.mbt.core;
 
-import java.io.File;
-
 public interface ConvertibleObject {
 
-	// TODO remove get and setFile, get() should be enough
-	public void setFile(File theFile);
-
-	public File getFile();
+	// TODO only the cucumberproject uses this, remove it?
+	public String getPath();
 
 	public void load(ObjectRepository fa) throws Exception;
 

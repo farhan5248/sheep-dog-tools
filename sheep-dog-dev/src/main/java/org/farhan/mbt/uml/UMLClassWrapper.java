@@ -1,6 +1,5 @@
 package org.farhan.mbt.uml;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Map.Entry;
 import org.eclipse.emf.common.util.EMap;
@@ -18,11 +17,9 @@ import org.farhan.mbt.core.ObjectRepository;
 public class UMLClassWrapper implements ConvertibleObject {
 
 	private Class theClass;
-	private File theFile;
 
 	public UMLClassWrapper(UMLProject umlProject, Class theClass) {
 		this.theClass = theClass;
-		theFile = umlProject.getDir("");
 	}
 
 	private EAnnotation createAnnotation(Class className, String name, String key) {
@@ -257,8 +254,8 @@ public class UMLClassWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public File getFile() {
-		return theFile;
+	public String getPath() {
+		return null;
 	}
 
 	public String getQualifiedName() {
@@ -388,11 +385,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 				createAnnotation(theClass, "tags", t);
 			}
 		}
-	}
-
-	@Override
-	public void setFile(File theFile) {
-		this.theFile = theFile;
 	}
 
 	public void setScenarioDescription(Interaction scenario, String scenarioDescription) {

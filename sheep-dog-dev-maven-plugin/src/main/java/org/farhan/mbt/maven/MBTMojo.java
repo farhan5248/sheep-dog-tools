@@ -52,6 +52,7 @@ public abstract class MBTMojo extends AbstractMojo {
 			for (String fileName : mojo.getFileList()) {
 				String contents = mojo.getFileContents(fileName);
 				getLog().debug("contents: " + contents);
+				// TODO this should be a get from the repo and a local write
 				fa.put(srcDir + fileName, contents);
 			}
 		} catch (Exception e) {

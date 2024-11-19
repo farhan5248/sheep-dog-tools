@@ -2,7 +2,6 @@ package org.farhan.mbt.uml;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
@@ -39,25 +38,23 @@ public class UMLProject extends ConvertibleProject {
 		theSystem = UMLFactory.eINSTANCE.createModel();
 		theSystem.setName("pst");
 		theSystem.createNestedPackage(FIRST_LAYER);
-		this.tags = tags;
+		ConvertibleProject.tags = tags;
 	}
 
 	@Override
-	public File getDir(String layer) {
-		File aFile = null;
-		aFile = new File(baseDir + tags + "/" + "uml/");
-		return aFile;
+	public String getDir(String layer) {
+		return "uml/";
 	}
 
 	@Override
 	public void load() throws Exception {
-		URI uri = URI.createFileURI(getDir("").getAbsolutePath()).appendSegment(theSystem.getName())
+		URI uri = URI.createFileURI(getDir("")).appendSegment(theSystem.getName())
 				.appendFileExtension(UMLResource.FILE_EXTENSION);
 		// UMLResourcesUtil is to load a UML model outside of Eclipse through Maven
 		ResourceSet resourceSet = UMLResourcesUtil.init(new ResourceSetImpl());
 		Resource resource = resourceSet.createResource(uri);
-		InputStream content = new ByteArrayInputStream(
-				fa.get(new File(uri.toFileString()).getAbsolutePath()).getBytes(StandardCharsets.UTF_8));
+		InputStream content = new ByteArrayInputStream(fa
+				.get(ConvertibleProject.tags, uri.toFileString()).getBytes(StandardCharsets.UTF_8));
 		resource.load(content, Collections.EMPTY_MAP);
 		theSystem = (Model) resource.getContents().getFirst();
 		ArrayList<Class> objects = getPackagedClasses(theSystem.getNestedPackage(FIRST_LAYER));
@@ -80,8 +77,7 @@ public class UMLProject extends ConvertibleProject {
 
 	@Override
 	public void save() throws Exception {
-		URI uri = URI.createFileURI(getDir("").getAbsolutePath()).appendSegment(theSystem.getName())
-				.appendFileExtension(getFileExt(""));
+		URI uri = URI.createFileURI(getDir("")).appendSegment(theSystem.getName()).appendFileExtension(getFileExt(""));
 		ResourceSet resourceSet = new ResourceSetImpl();
 		UMLResourcesUtil.init(resourceSet);
 		XMLResource resource = (XMLResource) resourceSet.createResource(uri);
@@ -92,7 +88,7 @@ public class UMLProject extends ConvertibleProject {
 		options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF, "true");
 		OutputStream os = new ByteArrayOutputStream();
 		resource.save(os, options);
-		fa.put(new File(uri.toFileString()).getAbsolutePath(), os.toString());
+		fa.put(ConvertibleProject.tags, uri.toFileString(), os.toString());
 	}
 
 	@Override

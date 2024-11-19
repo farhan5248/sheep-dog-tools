@@ -1,6 +1,5 @@
 package org.farhan.mbt.asciidoctor;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -16,6 +15,7 @@ import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
 import org.asciidoctor.jruby.extension.internal.JRubyProcessor;
 import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.Utilities;
 
@@ -23,12 +23,12 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	private JRubyProcessor jrp;
 	private Document theDoc;
-	private File theFile;
+	private String thePath;
 
-	public AsciiDoctorAdocWrapper(File theFile) {
-		// TODO I probably don't need setFile in general
-		setFile(theFile);
-		theDoc = Factory.create().load("= " + theFile.getName(), Options.builder().build());
+	public AsciiDoctorAdocWrapper(String thePath) {
+		this.thePath = thePath;
+		String[] pathParts = thePath.split("/");
+		theDoc = Factory.create().load("= " + pathParts[pathParts.length - 1], Options.builder().build());
 		jrp = new JRubyProcessor();
 	}
 
@@ -253,12 +253,13 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public File getFile() {
-		return theFile;
+	public String getPath() {
+		return thePath;
 	}
 
 	public String getFileName() {
-		return theFile.getAbsolutePath();
+		// TODO this is a duplicate of getPath, delete it
+		return thePath;
 	}
 
 	public String getScenarioDescription(Section scenario) {
@@ -362,7 +363,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	@Override
 	public void save(ObjectRepository fa) throws Exception {
 		String fileContents = docToString();
-		fa.put(theFile.getAbsolutePath(), fileContents);
+		fa.put(ConvertibleProject.tags, thePath, fileContents);
 	}
 
 	public void setBackgroundDescription(Section background, String backgroundDescription) {
@@ -407,11 +408,11 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	@Override
 	public void load(ObjectRepository fa) throws Exception {
 		try {
-			if (fa.contains(theFile.getAbsolutePath())) {
-				theDoc = Factory.create().load(fa.get(theFile.getAbsolutePath()), Options.builder().build());
+			if (fa.contains(ConvertibleProject.tags, thePath)) {
+				theDoc = Factory.create().load(fa.get(ConvertibleProject.tags, thePath), Options.builder().build());
 			}
 		} catch (Exception e) {
-			throw new Exception("There was a problem loading file: " + theFile.getAbsolutePath());
+			throw new Exception("There was a problem loading file: " + thePath);
 		}
 	}
 
@@ -516,11 +517,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		if (!featureTags.isEmpty()) {
 			theDoc.getAttributes().put("tags", Utilities.listAsCsv(featureTags));
 		}
-	}
-
-	@Override
-	public void setFile(File theFile) {
-		this.theFile = theFile;
 	}
 
 	public void setScenarioDescription(Section scenario, String scenarioDescription) {

@@ -1,7 +1,6 @@
 
 package org.farhan.mbt.asciidoctor;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import org.asciidoctor.ast.Section;
@@ -16,22 +15,19 @@ public class AsciiDoctorProject extends ConvertibleProject {
 	public AsciiDoctorProject(String tags, ObjectRepository fa) {
 		super(fa);
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
-		this.tags = tags;
+		ConvertibleProject.tags = tags;
 	}
 
 	@Override
 	public ConvertibleObject createObject(String name) {
-		File file = new File(name);
-		AsciiDoctorAdocWrapper cff = new AsciiDoctorAdocWrapper(file);
+		AsciiDoctorAdocWrapper cff = new AsciiDoctorAdocWrapper(name);
 		firstLayerObjects.add(cff);
 		return cff;
 	}
 
 	@Override
-	public File getDir(String layer) {
-		File aFile = null;
-		aFile = new File(baseDir + tags + "/" + "resources/asciidoc/");
-		return aFile;
+	public String getDir(String layer) {
+		return "src/test/resources/asciidoc";
 	}
 
 	@Override
@@ -84,7 +80,7 @@ public class AsciiDoctorProject extends ConvertibleProject {
 
 	@Override
 	public void load() throws Exception {
-		ArrayList<String> files = fa.list(getDir(ConvertibleProject.FIRST_LAYER).getAbsolutePath(),
+		ArrayList<String> files = fa.list(ConvertibleProject.tags, getDir(ConvertibleProject.FIRST_LAYER),
 				getFileExt(ConvertibleProject.FIRST_LAYER));
 		getObjects(ConvertibleProject.FIRST_LAYER).clear();
 		for (String f : files) {

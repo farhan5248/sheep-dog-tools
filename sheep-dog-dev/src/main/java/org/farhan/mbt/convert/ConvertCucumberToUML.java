@@ -11,13 +11,13 @@ import org.farhan.mbt.cucumber.Row;
 import org.farhan.mbt.cucumber.Step;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ObjectRepository;
-import org.farhan.mbt.core.MojoGoal;
+import org.farhan.mbt.core.Converter;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 
-public class ConvertCucumberToUML extends MojoGoal {
+public class ConvertCucumberToUML extends Converter {
 
 	public ConvertCucumberToUML(String tags, ObjectRepository fa) {
 		super(tags, fa);

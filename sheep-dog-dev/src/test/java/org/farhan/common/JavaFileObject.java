@@ -1,6 +1,5 @@
 package org.farhan.common;
 
-import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberJavaWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.junit.jupiter.api.Assertions;
@@ -97,7 +96,7 @@ public class JavaFileObject extends FileObject {
 		super.assertObjectExists();
 		project = new CucumberProject("", this);
 		try {
-			wrapper = (CucumberJavaWrapper) project.createObject(getFile());
+			wrapper = (CucumberJavaWrapper) project.createObject(attributes.get("path"));
 			wrapper.load(this);
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));

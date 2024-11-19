@@ -63,7 +63,7 @@ public class FeatureFileObject extends FileObject {
 		super.assertObjectExists();
 		project = new CucumberProject("", this);
 		try {
-			wrapper = (CucumberFeatureWrapper) project.createObject(getFile());
+			wrapper = (CucumberFeatureWrapper) project.createObject(attributes.get("path"));
 			wrapper.load(this);
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));

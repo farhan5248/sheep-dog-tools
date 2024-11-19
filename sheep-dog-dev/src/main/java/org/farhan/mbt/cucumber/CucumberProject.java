@@ -1,6 +1,5 @@
 package org.farhan.mbt.cucumber;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import org.farhan.mbt.CucumberStandaloneSetup;
@@ -19,50 +18,46 @@ public class CucumberProject extends ConvertibleProject {
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
 		secondLayerObjects = new ArrayList<ConvertibleObject>();
 		thirdLayerObjects = new ArrayList<ConvertibleObject>();
-		this.tags = tag;
+		ConvertibleProject.tags = tag;
 	}
 
 	@Override
-	public ConvertibleObject createObject(String name) {
-		ConvertibleObject aConvertibleObject = getObject(name);
+	public ConvertibleObject createObject(String path) {
+		ConvertibleObject aConvertibleObject = getObject(path);
 		if (aConvertibleObject != null) {
 			return aConvertibleObject;
 		}
-		File file = new File(name);
-		if (!file.getAbsolutePath().endsWith(getFileExt(FIRST_LAYER))) {
-			aConvertibleObject = createJavaWrapper(file);
-			if (file.getAbsolutePath().contains(SECOND_LAYER)) {
+		if (!path.endsWith(getFileExt(FIRST_LAYER))) {
+			aConvertibleObject = createJavaWrapper(path);
+			if (path.contains(SECOND_LAYER)) {
 				secondLayerObjects.add(aConvertibleObject);
 			} else {
 				thirdLayerObjects.add(aConvertibleObject);
 			}
 			return aConvertibleObject;
 		} else {
-			aConvertibleObject = new CucumberFeatureWrapper(file);
+			aConvertibleObject = new CucumberFeatureWrapper(path);
 			firstLayerObjects.add(aConvertibleObject);
 			return aConvertibleObject;
 		}
 	}
 
-	protected ConvertibleObject createJavaWrapper(File file) {
-		return new CucumberJavaWrapper(file);
+	protected ConvertibleObject createJavaWrapper(String path) {
+		return new CucumberJavaWrapper(path);
 	}
 
 	@Override
-	public File getDir(String layer) {
-		File aFile = null;
+	public String getDir(String layer) {
 		switch (layer) {
 		case FIRST_LAYER:
-			aFile = new File(baseDir + tags + "/" + "resources/cucumber");
-			break;
+			return "src/test/resources/cucumber";
 		case SECOND_LAYER:
-			aFile = new File(baseDir + tags + "/" + "java/org/farhan/" + SECOND_LAYER);
-			break;
+			return "src/test/java/org/farhan/" + SECOND_LAYER;
 		case THIRD_LAYER:
-			aFile = new File(baseDir + tags + "/" + "java/org/farhan/" + THIRD_LAYER);
-			break;
+			return "src/test/java/org/farhan/" + THIRD_LAYER;
+		default:
+			return "";
 		}
-		return aFile;
 	}
 
 	@Override
@@ -75,23 +70,22 @@ public class CucumberProject extends ConvertibleProject {
 	}
 
 	public ConvertibleObject getObject(String name) {
-		File file = new File(name);
-		if (file.getAbsolutePath().startsWith(getDir(FIRST_LAYER).getAbsolutePath())) {
+		if (name.startsWith(getDir(FIRST_LAYER))) {
 			for (ConvertibleObject obj : firstLayerObjects) {
-				if (obj.getFile().getAbsolutePath().contentEquals(file.getAbsolutePath())) {
+				if (obj.getPath().contentEquals(name)) {
 					return obj;
 				}
 			}
 		} else {
-			if (file.getAbsolutePath().startsWith(getDir(SECOND_LAYER).getAbsolutePath())) {
+			if (name.startsWith(getDir(SECOND_LAYER))) {
 				for (ConvertibleObject obj : secondLayerObjects) {
-					if (obj.getFile().getAbsolutePath().contentEquals(file.getAbsolutePath())) {
+					if (obj.getPath().contentEquals(name)) {
 						return obj;
 					}
 				}
-			} else if (file.getAbsolutePath().startsWith(getDir(THIRD_LAYER).getAbsolutePath())) {
+			} else if (name.startsWith(getDir(THIRD_LAYER))) {
 				for (ConvertibleObject obj : thirdLayerObjects) {
-					if (obj.getFile().getAbsolutePath().contentEquals(file.getAbsolutePath())) {
+					if (obj.getPath().contentEquals(name)) {
 						return obj;
 					}
 				}
@@ -154,11 +148,11 @@ public class CucumberProject extends ConvertibleProject {
 	public void load() throws Exception {
 
 		CucumberStandaloneSetup.doSetup();
-		ArrayList<String> files = fa.list(getDir(ConvertibleProject.FIRST_LAYER).getAbsolutePath(),
+		ArrayList<String> files = fa.list(ConvertibleProject.tags, getDir(ConvertibleProject.FIRST_LAYER),
 				getFileExt(ConvertibleProject.FIRST_LAYER));
 		for (String f : files) {
 			createObject(f).load(fa);
-			if (!isFileSelected(getObjects(ConvertibleProject.FIRST_LAYER).getLast(), this.tags)) {
+			if (!isFileSelected(getObjects(ConvertibleProject.FIRST_LAYER).getLast(), tags)) {
 				getObjects(ConvertibleProject.FIRST_LAYER).removeLast();
 			}
 		}

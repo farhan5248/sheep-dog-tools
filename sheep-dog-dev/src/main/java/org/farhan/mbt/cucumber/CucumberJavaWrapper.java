@@ -1,12 +1,13 @@
 package org.farhan.mbt.cucumber;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.helper.StepHelper;
@@ -21,15 +22,16 @@ import com.github.javaparser.ast.stmt.BlockStmt;
 public class CucumberJavaWrapper implements ConvertibleObject {
 
 	protected static String lastComponent = "InitialComponent";
-	protected File theFile;
+	protected String thePath;
 	protected CompilationUnit theJavaClass;
 
-	public CucumberJavaWrapper(File theFile) {
-		this.theFile = theFile;
+	public CucumberJavaWrapper(String thePath) {
+		this.thePath = thePath;
 		theJavaClass = new CompilationUnit();
-		theJavaClass.setStorage(theFile.toPath());
+		theJavaClass.setStorage(Paths.get(thePath));
 		ClassOrInterfaceDeclaration javaClassType = new ClassOrInterfaceDeclaration();
-		javaClassType.setName(theFile.getName().replace(".java", ""));
+		String[] pathParts = thePath.split("/");
+		javaClassType.setName(pathParts[pathParts.length - 1].replace(".java", ""));
 		javaClassType.setPublic(true);
 		theJavaClass.addType(javaClassType);
 		theJavaClass.setPackageDeclaration(getPackageDeclaration());
@@ -222,8 +224,8 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public File getFile() {
-		return theFile;
+	public String getPath() {
+		return thePath;
 	}
 
 	protected String getInterfaceName(String step) {
@@ -264,9 +266,8 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	protected String getPackageDeclaration() {
-		String packageName = theFile.getAbsolutePath()
-				.replaceAll("\\" + File.separator + "[^\\" + File.separator + "]*$", "");
-		packageName = packageName.replace(File.separator, ".");
+		String packageName = thePath.replaceAll("\\" + "/" + "[^\\" + "/" + "]*$", "");
+		packageName = packageName.replace("/", ".");
 		packageName = packageName.replaceFirst("^.*org.farhan", "org.farhan");
 		return packageName;
 	}
@@ -325,13 +326,13 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	@Override
 	public void load(ObjectRepository fa) throws Exception {
 		try {
-			if (fa.contains(theFile.getAbsolutePath()) && getType().getMethods().isEmpty()) {
+			if (fa.contains(ConvertibleProject.tags, thePath) && getType().getMethods().isEmpty()) {
 				InputStream content = new ByteArrayInputStream(
-						fa.get(theFile.getAbsolutePath()).getBytes(StandardCharsets.UTF_8));
+						fa.get(ConvertibleProject.tags, thePath).getBytes(StandardCharsets.UTF_8));
 				theJavaClass = new JavaParser().parse(content).getResult().get();
 			}
 		} catch (Exception e) {
-			throw new Exception("There was a problem loading file: " + theFile.getAbsolutePath());
+			throw new Exception("There was a problem loading file: " + thePath);
 		}
 	}
 
@@ -346,11 +347,6 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 
 	@Override
 	public void save(ObjectRepository fa) throws Exception {
-		fa.put(theFile.getAbsolutePath(), theJavaClass.toString());
-	}
-
-	@Override
-	public void setFile(File theFile) {
-		this.theFile = theFile;
+		fa.put(ConvertibleProject.tags, thePath, theJavaClass.toString());
 	}
 }

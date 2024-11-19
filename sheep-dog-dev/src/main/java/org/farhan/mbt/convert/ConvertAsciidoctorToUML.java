@@ -11,9 +11,9 @@ import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ObjectRepository;
-import org.farhan.mbt.core.MojoGoal;
+import org.farhan.mbt.core.Converter;
 
-public class ConvertAsciidoctorToUML extends MojoGoal {
+public class ConvertAsciidoctorToUML extends Converter {
 
 	public ConvertAsciidoctorToUML(String tags, ObjectRepository fa) {
 		super(tags, fa);
