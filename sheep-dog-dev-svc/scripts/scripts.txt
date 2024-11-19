@@ -29,17 +29,21 @@ docker container run --rm -d --name nginx-test --rm nginx:latest
 docker container logs nginx-test
 
 
-docker login
+docker logs -f mycontainer
 
 docker image build -f mysql.dockerfile -t farhan5248/sheep-dog-dev-db:latest .
-docker run --name mbt-file-store -e MYSQL_ROOT_PASSWORD=mbt-pass -p 3306:3306 -d farhan5248/sheep-dog-dev-db:latest
+docker run --name sheep-dog-dev-db -e MYSQL_ROOT_PASSWORD=mbt-pass -p 3306:3306 -d farhan5248/sheep-dog-dev-db:latest
 
+docker run --detach --name sheep-dog-dev-mq -p 61616:61616 -p 8161:8161 --rm apache/activemq-artemis:latest-alpine
+docker run -e ARTEMIS_USER=artemis -e ARTEMIS_PASSWORD=artemis --name sheep-dog-dev-mq -it -p 61616:61616 -p 8161:8161 apache/activemq-artemis:latest-alpine
+docker run -it -p 61616:61616 -p 8161:8161 -v <broker folder on host>:/var/lib/artemis-instance apache/activemq-artemis:latest-alpine
+
+docker login
 docker image build --build-arg email=farhan.sheikh.5248@gmail.com -t farhan5248/sheep-dog-dev-svc:latest .
 docker image push farhan5248/sheep-dog-svc:latest
 docker image ls
 docker image rm farhan5248/sheep-dog-svc:latest
 docker system prune
-
 
 docker compose config
 docker compose build
@@ -55,5 +59,3 @@ docker compose stop
 docker compose pause
 docker compose unpause
 docker compose down
-
-HUBOT_ROCKETCHAT_PASSWORD="a-b3tt3r-pw" docker compose -f docker-compose-env.yaml up -d

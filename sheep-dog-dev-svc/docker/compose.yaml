@@ -10,6 +10,19 @@ services:
       stack.name: "sheep-dog-dev-stack"
     networks:
       - sheepdognet
+  sheep-dog-dev-mq:
+    image: apache/activemq-artemis:latest-alpine
+    restart: unless-stopped
+    environment:
+      ARTEMIS_USER: artemis
+      ARTEMIS_PASSWORD: artemis
+    ports:
+      - 61617:61616
+      - 8167:8161
+    labels:
+      stack.name: "sheep-dog-dev-stack"
+    networks:
+      - sheepdognet
   sheep-dog-dev-svc:
     image: farhan5248/sheep-dog-dev-svc:latest
     restart: unless-stopped
