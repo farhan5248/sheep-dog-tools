@@ -30,7 +30,7 @@ public class ProcessFeatureFileImpl extends FeatureFileObject implements Process
 	}
 
 	public void assertContent(HashMap<String, String> keyMap) {
-		assertContent("ToCucumberGoal", keyMap.get("Content"));
+		assertContent(keyMap.get("Content"));
 	}
 
 	@Override

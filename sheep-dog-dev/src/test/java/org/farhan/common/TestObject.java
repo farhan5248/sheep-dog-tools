@@ -21,9 +21,9 @@ public abstract class TestObject implements ObjectRepository {
 
 	protected HashMap<String, String> attributes = new HashMap<String, String>();
 
-	protected GoalObject getGoalClass(String endsWith) throws Exception {
+	protected GoalObject getGoalClass(String contains) throws Exception {
 		for (Key<?> b : Config.classes.getBindings().keySet()) {
-			if (b.getTypeLiteral().toString().endsWith(endsWith)
+			if (b.getTypeLiteral().toString().contains(contains)
 					&& b.getTypeLiteral().toString().startsWith("org.farhan.objects.mbttransformer.")) {
 				GoalObject object = (GoalObject) Config.classes.getInstance(b);
 				if (!object.attributes.isEmpty()) {
@@ -37,14 +37,14 @@ public abstract class TestObject implements ObjectRepository {
 	@Override
 	public ArrayList<String> list(String tags, String path, String extension) {
 		path = path.replaceAll("\\\\+", "/").replaceAll("/+", "/");
-		path = Config.getWorkingDir() + tags + "/" + path;
+		path = Config.getWorkingDir() + (tags.isEmpty() ? "" : tags + "/") + path;
 		ArrayList<String> theFiles = new ArrayList<String>();
 		File aDir = new File(path);
 		if (aDir.exists()) {
 			for (String s : aDir.list()) {
 				File aDirObj = new File(path + "/" + s);
 				String aDirObjPath = aDirObj.getPath().replaceAll("\\\\+", "/")
-						.replace(Config.getWorkingDir() + tags + "/", "");
+						.replace(Config.getWorkingDir() + (tags.isEmpty() ? "" : tags + "/"), "");
 				if (aDirObj.isDirectory()) {
 					theFiles.addAll(list(tags, aDirObjPath, extension));
 				} else if (aDirObj.getPath().toLowerCase().endsWith(extension.toLowerCase())) {

@@ -27,12 +27,12 @@ Feature: Document Scenario Outline To UML
           |===
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
-      And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+     Then The mbt-transformer plugin, uml/pst.uml file will be present
+      And The uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                               | Argument Name | Annotation Detail |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 0 -> h1 \|        |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 1 -> <h3> \|      |
-      And The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
+      And The uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | Examples 1      | 0 -> h3\|         |
           | specs::Process::Submit | Examples 1      | 1 -> v31\|        |
@@ -66,11 +66,11 @@ Feature: Document Scenario Outline To UML
           |===
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
-      And The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
+     Then The mbt-transformer plugin, uml/pst.uml file will be present
+      And The uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | tags            | tag1              |
-      And The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
+      And The uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name       | Comment     |
           | specs::Process::Submit | Desc line 1 |
 
@@ -121,17 +121,17 @@ Feature: Document Scenario Outline To UML
           |===
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
-      And The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
+     Then The mbt-transformer plugin, uml/pst.uml file will be present
+      And The uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | tags            | tag<Index>        |
-      And The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
+      And The uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name       | Comment                  |
           | specs::Process::Submit | Desc line 1\nDesc line 2 |
-      And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+      And The uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                      |
           | specs::Process::Submit | The Object<Index> page is created as follows |
-      And The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
+      And The uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name  | Annotation Detail |
           | specs::Process::Submit | Examples <Index> | 0 -> h3\|         |
           | specs::Process::Submit | Examples <Index> | 1 -> v3<Index>\|  |
@@ -206,17 +206,17 @@ Feature: Document Scenario Outline To UML
           |===
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
-      And The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
+     Then The mbt-transformer plugin, uml/pst.uml file will be present
+      And The uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | tags            | tag<Index>        |
-      And The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
+      And The uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name       | Comment                               |
           | specs::Process::Submit | Desc line 1\nDesc line 2\nDesc line 3 |
-      And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+      And The uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                      |
           | specs::Process::Submit | The Object<Index> page is created as follows |
-      And The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
+      And The uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name  | Annotation Detail |
           | specs::Process::Submit | Examples <Index> | 0 -> h3\|         |
           | specs::Process::Submit | Examples <Index> | 1 -> v3<Index>\|  |
@@ -265,11 +265,11 @@ Feature: Document Scenario Outline To UML
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
           | Tags |
           | tag1 |
-     Then The mbt-transformer plugin, target/mbt/tag1/uml/pst.uml file will be present
-      And The target/mbt/tag1/uml/pst.uml file Interaction section will be created as follows
+     Then The mbt-transformer plugin, uml/pst.uml file will be present
+      And The uml/pst.uml file Interaction section will be created as follows
           | Interaction Name       |
           | specs::Process::Submit |
-      But The target/mbt/tag1/uml/pst.uml file Interaction section won't be created as follows
+      But The uml/pst.uml file Interaction section won't be created as follows
           | Interaction Name        |
           | specs::Process::Submit2 |
 

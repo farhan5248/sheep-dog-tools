@@ -17,8 +17,8 @@ Feature: Document Background To UML
           === Given The Object1 page is valid
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
-      And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+     Then The mbt-transformer plugin, uml/pst.uml file will be present
+      And The uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                   |
           | specs::Process::Setup  | The Object0 page is valid |
           | specs::Process::Submit | The Object1 page is valid |
@@ -40,8 +40,8 @@ Feature: Document Background To UML
           === Given The Object page is valid
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
-      And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+     Then The mbt-transformer plugin, uml/pst.uml file will be present
+      And The uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                   |
           | specs::Process::Setup  | The Object1 page is valid |
           | specs::Process::Setup  | The Object2 page is valid |
@@ -65,8 +65,8 @@ Feature: Document Background To UML
           === Given The Object page is valid
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
-      And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+     Then The mbt-transformer plugin, uml/pst.uml file will be present
+      And The uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                   |
           | specs::Process::Setup  | The Object1 page is valid |
           | specs::Process::Setup  | The Object2 page is valid |
@@ -91,8 +91,8 @@ Feature: Document Background To UML
           === Given The Object1 page is valid
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
-      And The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
+     Then The mbt-transformer plugin, uml/pst.uml file will be present
+      And The uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name      | Comment     |
           | specs::Process::Setup | Desc line 1 |
 
@@ -116,8 +116,8 @@ Feature: Document Background To UML
           === Given The Object2 page is valid
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
-      And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+     Then The mbt-transformer plugin, uml/pst.uml file will be present
+      And The uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name         | Message                   |
           | specs::Process::Setup    | The Object0 page is valid |
           | specs::Process::Submit 1 | The Object1 page is valid |
@@ -147,8 +147,8 @@ Feature: Document Background To UML
           === Given The Object3 page is valid
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
-      And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+     Then The mbt-transformer plugin, uml/pst.uml file will be present
+      And The uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name         | Message                   |
           | specs::Process::Setup    | The Object0 page is valid |
           | specs::Process::Submit 1 | The Object1 page is valid |

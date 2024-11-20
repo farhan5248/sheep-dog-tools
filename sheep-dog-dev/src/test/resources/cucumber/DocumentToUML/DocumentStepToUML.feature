@@ -17,8 +17,8 @@ Feature: Document Step To UML
           ===     * The Asterisk page is empty
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
-      And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+     Then The mbt-transformer plugin, uml/pst.uml file will be present
+      And The uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                    |
           | specs::Process::Submit | The Given page is empty    |
           | specs::Process::Submit | The When page is empty     |

@@ -67,7 +67,7 @@ public class AsciiDoctorProject extends ConvertibleProject {
 	}
 
 	private boolean isTagged(ArrayList<String> tags, String tag) {
-		if (tags.isEmpty()) {
+		if (tag.isEmpty()) {
 			return true;
 		}
 		for (String t : tags) {

@@ -8,8 +8,8 @@ Feature: Code Feature To UML
           Feature: Process
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
-      And The target/mbt/uml/pst.uml file Class section will be created as follows
+     Then The mbt-transformer plugin, uml/pst.uml file will be present
+      And The uml/pst.uml file Class section will be created as follows
           | Class Name     |
           | specs::Process |
 
@@ -22,11 +22,11 @@ Feature: Code Feature To UML
             Desc line 1
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
-      And The target/mbt/uml/pst.uml file Class Annotations section will be created as follows
+     Then The mbt-transformer plugin, uml/pst.uml file will be present
+      And The uml/pst.uml file Class Annotations section will be created as follows
           | Class Name     | Annotation Name | Annotation Detail |
           | specs::Process | tags            | tag1              |
-      And The target/mbt/uml/pst.uml file Class Comments section will be created as follows
+      And The uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment     |
           | specs::Process | Desc line 1 |
 
@@ -40,12 +40,12 @@ Feature: Code Feature To UML
             Desc line 2
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
-      And The target/mbt/uml/pst.uml file Class Annotations section will be created as follows
+     Then The mbt-transformer plugin, uml/pst.uml file will be present
+      And The uml/pst.uml file Class Annotations section will be created as follows
           | Class Name     | Annotation Name | Annotation Detail |
           | specs::Process | tags            | tag1              |
           | specs::Process | tags            | tag2              |
-      And The target/mbt/uml/pst.uml file Class Comments section will be created as follows
+      And The uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment                  |
           | specs::Process | Desc line 1\nDesc line 2 |
 
@@ -60,13 +60,13 @@ Feature: Code Feature To UML
             Desc line 3
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
-     Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
-      And The target/mbt/uml/pst.uml file Class Annotations section will be created as follows
+     Then The mbt-transformer plugin, uml/pst.uml file will be present
+      And The uml/pst.uml file Class Annotations section will be created as follows
           | Class Name     | Annotation Name | Annotation Detail |
           | specs::Process | tags            | tag1              |
           | specs::Process | tags            | tag2              |
           | specs::Process | tags            | tag3              |
-      And The target/mbt/uml/pst.uml file Class Comments section will be created as follows
+      And The uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment                               |
           | specs::Process | Desc line 1\nDesc line 2\nDesc line 3 |
 
@@ -85,11 +85,11 @@ Feature: Code Feature To UML
      When The mbt-transformer plugin, cucumber-to-uml goal is executed with
           | Tags |
           | tag1 |
-     Then The mbt-transformer plugin, target/mbt/tag1/uml/pst.uml file will be present
-      And The target/mbt/tag1/uml/pst.uml file Class section will be created as follows
+     Then The mbt-transformer plugin, uml/pst.uml file will be present
+      And The uml/pst.uml file Class section will be created as follows
           | Class Name     |
           | specs::Process |
-      But The target/mbt/tag1/uml/pst.uml file Class section won't be created as follows
+      But The uml/pst.uml file Class section won't be created as follows
           | Class Name          |
           | specs::app::Process |
 

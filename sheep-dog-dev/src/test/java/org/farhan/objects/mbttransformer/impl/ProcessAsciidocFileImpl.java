@@ -6,6 +6,7 @@ import org.farhan.common.AdocFileObject;
 import org.farhan.objects.mbttransformer.ProcessAsciidocFile;
 
 import io.cucumber.guice.ScenarioScoped;
+
 @ScenarioScoped
 public class ProcessAsciidocFileImpl extends AdocFileObject implements ProcessAsciidocFile {
 
@@ -31,7 +32,7 @@ public class ProcessAsciidocFileImpl extends AdocFileObject implements ProcessAs
 
 	@Override
 	public void assertContent(HashMap<String, String> keyMap) {
-		assertContent("ToAsciidoctorGoal", keyMap.get("Content"));
+		assertContent(keyMap.get("Content"));
 	}
 
 	@Override

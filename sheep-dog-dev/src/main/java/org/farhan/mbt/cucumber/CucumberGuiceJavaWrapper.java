@@ -15,7 +15,8 @@ public class CucumberGuiceJavaWrapper extends CucumberJavaWrapper {
 			getType().addMarkerAnnotation("ScenarioScoped");
 
 			ConstructorDeclaration constructor = getType().addConstructor(Modifier.Keyword.PUBLIC);
-			constructor.addAndGetParameter(thePath.replace("Steps.java", ""), "object");
+			String[] pathParts = thePath.split("/");
+			constructor.addAndGetParameter(pathParts[pathParts.length - 1].replace("Steps.java", ""), "object");
 			constructor.createBody().addStatement("super(object);");
 			theJavaClass.addImport("com.google.inject.Inject");
 			constructor.addMarkerAnnotation("Inject");

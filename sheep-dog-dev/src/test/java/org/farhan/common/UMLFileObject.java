@@ -126,10 +126,10 @@ public abstract class UMLFileObject extends FileObject {
 	protected void assertObjectExists() {
 		super.assertObjectExists();
 		try {
-			project = new UMLProject(getGoalClass("ToUmlGoal").attributes.get("tags"), this);
+			project = new UMLProject("client", this);
 			project.load();
 		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step");
+			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
 		}
 	}
 
