@@ -11,7 +11,7 @@ import io.cucumber.guice.ScenarioScoped;
 public class BlahObjectPageStepsJavaFileImpl extends JavaFileObject implements BlahObjectPageStepsJavaFile {
 
 	public void assertContent(HashMap<String, String> keyMap) {
-		assertContent(keyMap.get("Content"));
+		assertContent("ToCucumberGoal", keyMap.get("Content"));
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public class ProcessAsciidocFileImpl extends AdocFileObject implements ProcessAs
 
 	@Override
 	public void assertContent(HashMap<String, String> keyMap) {
-		assertContent(keyMap.get("Content"));
+		assertContent("ToAsciidoctorGoal", keyMap.get("Content"));
 	}
 
 	@Override

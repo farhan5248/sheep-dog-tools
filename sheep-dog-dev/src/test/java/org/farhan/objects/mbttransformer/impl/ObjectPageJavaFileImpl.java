@@ -10,7 +10,7 @@ import io.cucumber.guice.ScenarioScoped;
 public class ObjectPageJavaFileImpl extends JavaFileObject implements ObjectPageJavaFile {
 
 	public void assertContent(HashMap<String, String> keyMap) {
-		assertContent(keyMap.get("Content"));
+		assertContent("ToCucumberGoal", keyMap.get("Content"));
 	}
 
 	@Override

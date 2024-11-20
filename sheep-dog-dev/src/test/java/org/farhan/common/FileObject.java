@@ -21,9 +21,9 @@ public abstract class FileObject extends TestObject {
 		}
 	}
 
-	protected void assertContent(String docString) {
+	protected void assertContent(String goalEndsWith, String docString) {
 		try {
-			String contents = get(getGoalClass("Goal").attributes.get("tags"), attributes.get("path"));
+			String contents = get(getGoalClass(goalEndsWith).attributes.get("tags"), attributes.get("path"));
 			Assertions.assertEquals(docString, contents.replaceAll("\r", "").trim());
 		} catch (Exception e) {
 			Assertions.fail(getStackTraceAsString(e));
