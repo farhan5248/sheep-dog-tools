@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.farhan.mbt.core.ObjectRepository;
-import org.farhan.mbt.maven.FileObjectRepository;
 import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.datatable.DataTable;
@@ -17,7 +15,6 @@ import io.cucumber.datatable.DataTable;
 public abstract class TestObject {
 
 	protected HashMap<String, String> attributes = new HashMap<String, String>();
-	protected ObjectRepository fa = new FileObjectRepository();
 
 	public String getStackTraceAsString(Exception e) {
 		StringWriter sw = new StringWriter();

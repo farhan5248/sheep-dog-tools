@@ -7,7 +7,6 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.client.RestTemplate;
 
 public abstract class MBTMojo extends AbstractMojo {
