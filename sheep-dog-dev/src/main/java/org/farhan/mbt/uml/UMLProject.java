@@ -53,13 +53,13 @@ public class UMLProject extends ConvertibleProject {
 		// UMLResourcesUtil is to load a UML model outside of Eclipse through Maven
 		ResourceSet resourceSet = UMLResourcesUtil.init(new ResourceSetImpl());
 		Resource resource = resourceSet.createResource(uri);
-		InputStream content = new ByteArrayInputStream(fa
-				.get(ConvertibleProject.tags, uri.toFileString()).getBytes(StandardCharsets.UTF_8));
+		InputStream content = new ByteArrayInputStream(
+				fa.get(tags, uri.toFileString()).getBytes(StandardCharsets.UTF_8));
 		resource.load(content, Collections.EMPTY_MAP);
 		theSystem = (Model) resource.getContents().getFirst();
 		ArrayList<Class> objects = getPackagedClasses(theSystem.getNestedPackage(FIRST_LAYER));
 		for (Class c : objects) {
-			createObject(c.getQualifiedName()).load(fa);
+			createObject(c.getQualifiedName());
 		}
 	}
 
@@ -88,7 +88,7 @@ public class UMLProject extends ConvertibleProject {
 		options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF, "true");
 		OutputStream os = new ByteArrayOutputStream();
 		resource.save(os, options);
-		fa.put(ConvertibleProject.tags, uri.toFileString(), os.toString());
+		fa.put(tags, uri.toFileString(), os.toString());
 	}
 
 	@Override

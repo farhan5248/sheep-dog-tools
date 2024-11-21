@@ -304,12 +304,14 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void load(ObjectRepository fa) throws Exception {
+	public void load(String text) throws Exception {
 		try {
+			if (text.isEmpty()) {
+				return;
+			}
 			URI uri = URI.createFileURI(thePath);
 			Resource resource = new ResourceSetImpl().createResource(uri);
-			InputStream content = new ByteArrayInputStream(
-					fa.get(ConvertibleProject.tags, thePath).getBytes(StandardCharsets.UTF_8));
+			InputStream content = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
 			resource.load(content, Collections.EMPTY_MAP);
 			theFeature = (Feature) resource.getContents().get(0);
 		} catch (Exception e) {
@@ -386,4 +388,5 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 			}
 		}
 	}
+
 }

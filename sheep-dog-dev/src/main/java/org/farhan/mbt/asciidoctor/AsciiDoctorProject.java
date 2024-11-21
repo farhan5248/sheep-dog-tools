@@ -19,8 +19,8 @@ public class AsciiDoctorProject extends ConvertibleProject {
 	}
 
 	@Override
-	public ConvertibleObject createObject(String name) {
-		AsciiDoctorAdocWrapper cff = new AsciiDoctorAdocWrapper(name);
+	public ConvertibleObject createObject(String path) throws Exception {
+		AsciiDoctorAdocWrapper cff = new AsciiDoctorAdocWrapper(path);
 		firstLayerObjects.add(cff);
 		return cff;
 	}
@@ -80,13 +80,12 @@ public class AsciiDoctorProject extends ConvertibleProject {
 
 	@Override
 	public void load() throws Exception {
-		ArrayList<String> files = fa.list(ConvertibleProject.tags, getDir(ConvertibleProject.FIRST_LAYER),
-				getFileExt(ConvertibleProject.FIRST_LAYER));
-		getObjects(ConvertibleProject.FIRST_LAYER).clear();
+		ArrayList<String> files = fa.list(tags, getDir(FIRST_LAYER), getFileExt(FIRST_LAYER));
+		getObjects(FIRST_LAYER).clear();
 		for (String f : files) {
-			createObject(f).load(fa);
-			if (!isFileSelected(getObjects(ConvertibleProject.FIRST_LAYER).getLast(), this.tags)) {
-				getObjects(ConvertibleProject.FIRST_LAYER).removeLast();
+			createObject(f).load(fa.get(tags, f));
+			if (!isFileSelected(getObjects(FIRST_LAYER).getLast(), tags)) {
+				getObjects(FIRST_LAYER).removeLast();
 			}
 		}
 	}

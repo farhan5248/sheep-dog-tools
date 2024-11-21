@@ -8,7 +8,8 @@ public abstract class ConvertibleProject {
 	public static final String SECOND_LAYER = "stepdefs";
 	public static final String THIRD_LAYER = "objects";
 
-	// TODO make these two private and handle all file read/writes through the project
+	// TODO make these two private and handle all file read/writes through the
+	// project
 	public static String tags = "";
 	protected ObjectRepository fa;
 
@@ -16,7 +17,7 @@ public abstract class ConvertibleProject {
 		this.fa = fa;
 	}
 
-	public abstract ConvertibleObject createObject(String name);
+	public abstract ConvertibleObject createObject(String name) throws Exception;
 
 	public abstract String getDir(String layer);
 

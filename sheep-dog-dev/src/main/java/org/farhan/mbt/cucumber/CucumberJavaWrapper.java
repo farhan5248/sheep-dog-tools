@@ -324,11 +324,13 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void load(ObjectRepository fa) throws Exception {
+	public void load(String text) throws Exception {
 		try {
-			if (fa.contains(ConvertibleProject.tags, thePath) && getType().getMethods().isEmpty()) {
-				InputStream content = new ByteArrayInputStream(
-						fa.get(ConvertibleProject.tags, thePath).getBytes(StandardCharsets.UTF_8));
+			if (text.isEmpty()) {
+				return;
+			}
+			if (getType().getMethods().isEmpty()) {
+				InputStream content = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
 				theJavaClass = new JavaParser().parse(content).getResult().get();
 			}
 		} catch (Exception e) {

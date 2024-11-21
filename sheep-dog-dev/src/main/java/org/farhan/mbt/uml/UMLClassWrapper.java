@@ -357,7 +357,7 @@ public class UMLClassWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void load(ObjectRepository fa) throws Exception {
+	public void load(String text) throws Exception {
 		// Individual objects are not stored separately so this is not needed.
 	}
 

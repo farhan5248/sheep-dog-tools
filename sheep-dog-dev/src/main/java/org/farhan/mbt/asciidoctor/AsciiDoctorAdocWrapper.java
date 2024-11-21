@@ -406,11 +406,12 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void load(ObjectRepository fa) throws Exception {
+	public void load(String text) throws Exception {
 		try {
-			if (fa.contains(ConvertibleProject.tags, thePath)) {
-				theDoc = Factory.create().load(fa.get(ConvertibleProject.tags, thePath), Options.builder().build());
+			if (text.isEmpty()) {
+				return;
 			}
+			theDoc = Factory.create().load(text, Options.builder().build());
 		} catch (Exception e) {
 			throw new Exception("There was a problem loading file: " + thePath);
 		}

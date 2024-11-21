@@ -155,30 +155,34 @@ public class ConvertUMLToCucumber extends Converter {
 		String objectName = getObjectName(stepName);
 		String objectType = Utilities.upperFirst(StepHelper.getObjectType(stepName));
 		String componentName = getComponentName(stepName);
-		return tgtPrj.getDir(ConvertibleProject.SECOND_LAYER) + "/" + componentName.toLowerCase()
-				+ "/" + Utilities.upperFirst(componentName) + objectName + objectType + "Steps.java";
+		return tgtPrj.getDir(ConvertibleProject.SECOND_LAYER) + "/" + componentName.toLowerCase() + "/"
+				+ Utilities.upperFirst(componentName) + objectName + objectType + "Steps.java";
 	}
 
 	protected String getStepObjName(String stepName) {
 		String objectName = getObjectName(stepName);
 		String objectType = Utilities.upperFirst(StepHelper.getObjectType(stepName));
 		String componentName = getComponentName(stepName);
-		return tgtPrj.getDir(ConvertibleProject.THIRD_LAYER) + "/" + componentName.toLowerCase()
-				+ "/" + objectName + objectType + ".java";
+		return tgtPrj.getDir(ConvertibleProject.THIRD_LAYER) + "/" + componentName.toLowerCase() + "/" + objectName
+				+ objectType + ".java";
 	}
 
 	protected CucumberJavaWrapper getTgtObj2(Message srcStep) throws Exception {
-		CucumberJavaWrapper tgtStepDefObj = (CucumberJavaWrapper) tgtPrj
-				.createObject(getStepDefName(srcObj.getStep(srcStep)));
-		tgtStepDefObj.load(fa);
+		String path = getStepDefName(srcObj.getStep(srcStep));
+		CucumberJavaWrapper tgtStepDefObj = (CucumberJavaWrapper) tgtPrj.createObject(path);
+		if (fa.contains(tags, path)) {
+			tgtStepDefObj.load(fa.get(tags, path));
+		}
 		return tgtStepDefObj;
 	}
 
 	protected CucumberJavaWrapper getTgtObj3(Message srcStep) throws Exception {
-		CucumberJavaWrapper tgtStepDefObj = (CucumberJavaWrapper) tgtPrj
-				.createObject(getStepObjName(srcObj.getStep(srcStep)));
-		tgtStepDefObj.load(fa);
-		return tgtStepDefObj;
+		String path = getStepObjName(srcObj.getStep(srcStep));
+		CucumberJavaWrapper tgtStepObj = (CucumberJavaWrapper) tgtPrj.createObject(path);
+		if (fa.contains(tags, path)) {
+			tgtStepObj.load(fa.get(tags, path));
+		}
+		return tgtStepObj;
 	}
 
 	@Override

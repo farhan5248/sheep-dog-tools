@@ -13,31 +13,31 @@ public class CucumberProject extends ConvertibleProject {
 	protected ArrayList<ConvertibleObject> secondLayerObjects;
 	protected ArrayList<ConvertibleObject> thirdLayerObjects;
 
-	public CucumberProject(String tag, ObjectRepository fa) {
+	public CucumberProject(String tags, ObjectRepository fa) {
 		super(fa);
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
 		secondLayerObjects = new ArrayList<ConvertibleObject>();
 		thirdLayerObjects = new ArrayList<ConvertibleObject>();
-		ConvertibleProject.tags = tag;
+		ConvertibleProject.tags = tags;
 	}
 
 	@Override
-	public ConvertibleObject createObject(String path) {
+	public ConvertibleObject createObject(String path) throws Exception {
 		ConvertibleObject aConvertibleObject = getObject(path);
 		if (aConvertibleObject != null) {
 			return aConvertibleObject;
-		}
-		if (!path.endsWith(getFileExt(FIRST_LAYER))) {
-			aConvertibleObject = createJavaWrapper(path);
-			if (path.contains(SECOND_LAYER)) {
-				secondLayerObjects.add(aConvertibleObject);
-			} else {
-				thirdLayerObjects.add(aConvertibleObject);
-			}
-			return aConvertibleObject;
 		} else {
-			aConvertibleObject = new CucumberFeatureWrapper(path);
-			firstLayerObjects.add(aConvertibleObject);
+			if (!path.endsWith(getFileExt(FIRST_LAYER))) {
+				aConvertibleObject = createJavaWrapper(path);
+				if (path.contains(SECOND_LAYER)) {
+					secondLayerObjects.add(aConvertibleObject);
+				} else {
+					thirdLayerObjects.add(aConvertibleObject);
+				}
+			} else {
+				aConvertibleObject = new CucumberFeatureWrapper(path);
+				firstLayerObjects.add(aConvertibleObject);
+			}
 			return aConvertibleObject;
 		}
 	}
@@ -148,12 +148,11 @@ public class CucumberProject extends ConvertibleProject {
 	public void load() throws Exception {
 
 		CucumberStandaloneSetup.doSetup();
-		ArrayList<String> files = fa.list(ConvertibleProject.tags, getDir(ConvertibleProject.FIRST_LAYER),
-				getFileExt(ConvertibleProject.FIRST_LAYER));
+		ArrayList<String> files = fa.list(tags, getDir(FIRST_LAYER), getFileExt(FIRST_LAYER));
 		for (String f : files) {
-			createObject(f).load(fa);
-			if (!isFileSelected(getObjects(ConvertibleProject.FIRST_LAYER).getLast(), tags)) {
-				getObjects(ConvertibleProject.FIRST_LAYER).removeLast();
+			createObject(f).load(fa.get(tags, f));
+			if (!isFileSelected(getObjects(FIRST_LAYER).getLast(), tags)) {
+				getObjects(FIRST_LAYER).removeLast();
 			}
 		}
 	}
