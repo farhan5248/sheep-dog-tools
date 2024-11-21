@@ -1,8 +1,6 @@
 package org.farhan.common;
 
-import java.io.File;
 import java.util.TreeMap;
-
 import org.farhan.mbt.service.ModelTransformerResponse;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,13 +11,17 @@ public class RestService extends TestObject {
 	@Value("${server.port}")
 	private int port;
 
+	public RestService() {
+		attributes.put("tags", "");
+	}
+
 	private String getHost() {
 		return "http://localhost:" + port + "/";
 	}
 
 	private final RestTemplate restTemplate = new RestTemplate();
 
-	private void addFile(String tags, String fileName, String contents) {
+	private void put(String tags, String fileName, String contents) {
 		TreeMap<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("tags", tags);
 		parameters.put("fileName", fileName);
@@ -27,21 +29,26 @@ public class RestService extends TestObject {
 				ModelTransformerResponse.class, parameters);
 	}
 
-	private void runGoal(String tags, String goal) {
+	private void mojoGoal(String tags, String goal) {
 		TreeMap<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("tags", tags);
 		restTemplate.postForObject(getHost() + goal + "?tags={tags}", null, ModelTransformerResponse.class, parameters);
 	}
 
-	private String getFileList(String tags) {
+	private String[] list(String tags, String dir) {
 		TreeMap<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("tags", tags);
-		return restTemplate
-				.getForObject(getHost() + "getFileList?tags={tags}", ModelTransformerResponse.class, parameters)
-				.fileName();
+		parameters.put("dir", dir);
+		String fileList = restTemplate.getForObject(getHost() + "getFileList?tags={tags}&dir={dir}",
+				ModelTransformerResponse.class, parameters).fileName();
+		if (!fileList.isBlank()) {
+			return fileList.split("\n");
+		} else {
+			return new String[0];
+		}
 	}
 
-	private String getFileContents(String tags, String fileName) {
+	private String get(String tags, String fileName) {
 		TreeMap<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("tags", tags);
 		parameters.put("fileName", fileName);
@@ -49,30 +56,28 @@ public class RestService extends TestObject {
 				ModelTransformerResponse.class, parameters).content();
 	}
 
-	protected void runGoal(String resource) {
+	protected void runGoal(String goal) {
+
+		SourceRepository sr = new SourceRepository();
+		String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/",
+				"src/test/java/org/farhan/objects/", "src/test/java/org/farhan/stepdefs/" };
+
 		try {
-			String baseDir = "target/src-gen/" + this.attributes.get("component") + "/";
-			if (attributes.get("tags") == null) {
-				attributes.put("tags", "");
-			}
-
-			for (File aFile : recursivelyListFiles(new File(baseDir + "src/test/"), "")) {
-				String contents = readFile(aFile);
-				String fileName = aFile.getAbsolutePath().replace(new File(baseDir).getAbsolutePath() + "\\", "");
-				addFile(attributes.get("tags"), fileName.replace("\\", "/"), contents);
-			}
-
-			runGoal(attributes.get("tags"), resource);
-
-			String fileList = getFileList(attributes.get("tags"));
-			if (!fileList.isBlank()) {
-				for (String fileName : fileList.split("\n")) {
-					// TODO temp hack for now
-					if (fileName.endsWith("pst.uml")) {
-						continue;
+			if (goal.endsWith("ToUML")) {
+				for (String dir : dirs) {
+					for (String fileName : sr.list(dir, "")) {
+						put(attributes.get("tags"), fileName.replace("\\", "/"), sr.get(fileName));
 					}
-					String contents = getFileContents(attributes.get("tags"), fileName.replace("\\", "/"));
-					writeFile(new File(baseDir + "\\" + fileName), contents);
+				}
+			}
+
+			mojoGoal(attributes.get("tags"), goal);
+
+			if (!goal.endsWith("ToUML")) {
+				for (String dir : dirs) {
+					for (String fileName : list(attributes.get("tags"), dir)) {
+						sr.put(fileName, get(attributes.get("tags"), fileName));
+					}
 				}
 			}
 		} catch (Exception e) {

@@ -1,19 +1,25 @@
 package org.farhan.common;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.farhan.mbt.maven.Utilities;
 import org.junit.jupiter.api.Assertions;
 
 import io.cucumber.datatable.DataTable;
 
-// Anything that is an input, output, state or transition is a GraphModelObject. 
-// Right now the way I model stuff all the objects are either output ones or input+transition ones
 public abstract class TestObject {
 
 	protected HashMap<String, String> attributes = new HashMap<String, String>();
+
+	public String getStackTraceAsString(Exception e) {
+		StringWriter sw = new StringWriter();
+		e.printStackTrace(new PrintWriter(sw));
+		String exceptionAsString = sw.toString();
+		return exceptionAsString;
+	}
 
 	public void assertInputOutputs(DataTable dataTable) {
 		processInputOutputs(dataTable, "assert", "");
@@ -72,7 +78,7 @@ public abstract class TestObject {
 						row);
 			}
 		} catch (Exception e) {
-			Assertions.fail(Utilities.getStackTraceAsString(e));
+			Assertions.fail(getStackTraceAsString(e));
 		}
 	}
 

@@ -1,24 +1,16 @@
 package org.farhan.common;
 
-import java.io.File;
-import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
+import org.farhan.mbt.maven.SourceRepository;
 import org.junit.jupiter.api.Assertions;
 
 public abstract class FileObject extends TestObject {
 
-	public void setComponent(String component) {
-		super.setComponent(component);
-	}
-
-	protected File getFile() {
-		return new File(Config.getWorkingDir() + attributes.get("path"));
-	}
+	protected SourceRepository sr = new SourceRepository();
 
 	protected void assertObjectExists() {
 		try {
-			Assertions.assertTrue(getFile().exists(), "The file (" + getFile() + ") isn't present");
+			Assertions.assertTrue(sr.contains(attributes.get("path")),
+					"The file (" + attributes.get("path") + ") isn't present");
 		} catch (Exception e) {
 			Assertions.fail(getStackTraceAsString(e));
 		}
@@ -26,11 +18,7 @@ public abstract class FileObject extends TestObject {
 
 	protected void setContent(String docString) {
 		try {
-			getFile().getParentFile().mkdirs();
-			PrintWriter aPrintWriter = new PrintWriter(getFile(), StandardCharsets.UTF_8);
-			aPrintWriter.print(docString);
-			aPrintWriter.flush();
-			aPrintWriter.close();
+			sr.put(attributes.get("path"), docString);
 		} catch (Exception e) {
 			Assertions.fail(getStackTraceAsString(e));
 		}
@@ -38,7 +26,7 @@ public abstract class FileObject extends TestObject {
 
 	protected void assertContent(String docString) {
 		try {
-			String contents = new String(Files.readAllBytes(getFile().toPath()), StandardCharsets.UTF_8);
+			String contents = sr.get(attributes.get("path"));
 			Assertions.assertEquals(docString, contents.replaceAll("\r", "").trim());
 		} catch (Exception e) {
 			Assertions.fail(getStackTraceAsString(e));

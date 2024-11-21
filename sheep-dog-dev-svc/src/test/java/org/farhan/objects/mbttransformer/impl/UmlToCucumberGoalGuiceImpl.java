@@ -13,7 +13,7 @@ import static io.cucumber.spring.CucumberTestContext.SCOPE_CUCUMBER_GLUE;
 public class UmlToCucumberGoalGuiceImpl extends RestService implements UmlToCucumberGuiceGoal {
 
 	public void transition() {
-		runGoal("umlToCucumberGuiceMojo");
+		runGoal("umlToCucumberGuice");
 	}
 
 	@Override

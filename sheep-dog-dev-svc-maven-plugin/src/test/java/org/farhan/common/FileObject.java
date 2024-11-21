@@ -1,42 +1,35 @@
 package org.farhan.common;
 
-import java.io.File;
-
-import org.farhan.mbt.maven.Utilities;
+import org.farhan.mbt.maven.SourceRepository;
 import org.junit.jupiter.api.Assertions;
 
 public abstract class FileObject extends TestObject {
 
-	public void setComponent(String component) {
-		super.setComponent(component);
-	}
-
-	protected File getFile() {
-		return new File("target/src-gen/" + attributes.get("component") + "/" + attributes.get("path"));
-	}
+	protected SourceRepository sr = new SourceRepository("target/src-gen");
 
 	protected void assertObjectExists() {
 		try {
-			Assertions.assertTrue(getFile().exists(), "The file (" + getFile().getCanonicalPath() + ") isn't present");
+			Assertions.assertTrue(sr.contains(attributes.get("path")),
+					"The file (" + attributes.get("path") + ") isn't present");
 		} catch (Exception e) {
-			Assertions.fail(Utilities.getStackTraceAsString(e));
+			Assertions.fail(getStackTraceAsString(e));
 		}
 	}
 
 	protected void setContent(String docString) {
 		try {
-			Utilities.writeFile(getFile(), docString);
+			sr.put(attributes.get("path"), docString);
 		} catch (Exception e) {
-			Assertions.fail(Utilities.getStackTraceAsString(e));
+			Assertions.fail(getStackTraceAsString(e));
 		}
 	}
 
 	protected void assertContent(String docString) {
 		try {
-			String contents = Utilities.readFile(getFile());
+			String contents = sr.get(attributes.get("path"));
 			Assertions.assertEquals(docString, contents.replaceAll("\r", "").trim());
 		} catch (Exception e) {
-			Assertions.fail(Utilities.getStackTraceAsString(e));
+			Assertions.fail(getStackTraceAsString(e));
 		}
 	}
 }

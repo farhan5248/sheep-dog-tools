@@ -14,6 +14,6 @@ import org.springframework.stereotype.Component;
 public class UMLToCucumberGuiceMojo extends MBTMojo {
 
 	public void execute() throws MojoExecutionException {
-		super.execute("umlToCucumberGuiceMojo");
+		super.execute("umlToCucumberGuice");
 	}
 }

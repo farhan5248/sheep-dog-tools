@@ -48,13 +48,12 @@ public class UMLProject extends ConvertibleProject {
 
 	@Override
 	public void load() throws Exception {
-		URI uri = URI.createFileURI(getDir("")).appendSegment(theSystem.getName())
-				.appendFileExtension(UMLResource.FILE_EXTENSION);
+		String path = getDir("") + theSystem.getName() + getFileExt("");
+		URI uri = URI.createFileURI(path);
 		// UMLResourcesUtil is to load a UML model outside of Eclipse through Maven
 		ResourceSet resourceSet = UMLResourcesUtil.init(new ResourceSetImpl());
 		Resource resource = resourceSet.createResource(uri);
-		InputStream content = new ByteArrayInputStream(
-				fa.get(tags, uri.toFileString()).getBytes(StandardCharsets.UTF_8));
+		InputStream content = new ByteArrayInputStream(fa.get(tags, path).getBytes(StandardCharsets.UTF_8));
 		resource.load(content, Collections.EMPTY_MAP);
 		theSystem = (Model) resource.getContents().getFirst();
 		ArrayList<Class> objects = getPackagedClasses(theSystem.getNestedPackage(FIRST_LAYER));
@@ -77,7 +76,8 @@ public class UMLProject extends ConvertibleProject {
 
 	@Override
 	public void save() throws Exception {
-		URI uri = URI.createFileURI(getDir("")).appendSegment(theSystem.getName()).appendFileExtension(getFileExt(""));
+		String path = getDir("") + theSystem.getName() + getFileExt("");
+		URI uri = URI.createFileURI(path);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		UMLResourcesUtil.init(resourceSet);
 		XMLResource resource = (XMLResource) resourceSet.createResource(uri);
@@ -88,12 +88,12 @@ public class UMLProject extends ConvertibleProject {
 		options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF, "true");
 		OutputStream os = new ByteArrayOutputStream();
 		resource.save(os, options);
-		fa.put(tags, uri.toFileString(), os.toString());
+		fa.put(tags, path, os.toString());
 	}
 
 	@Override
 	public String getFileExt(String layer) {
-		return UMLResource.FILE_EXTENSION;
+		return "." + UMLResource.FILE_EXTENSION;
 	}
 
 	@Override

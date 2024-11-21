@@ -18,6 +18,6 @@ public class CucumberToUmlGoalImpl extends RestService implements CucumberToUmlG
 
 	@Override
 	public void transition() {
-		runGoal("cucumberToUMLMojo");
+		runGoal("cucumberToUML");
 	}
 }

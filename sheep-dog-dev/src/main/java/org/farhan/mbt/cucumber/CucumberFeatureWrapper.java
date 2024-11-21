@@ -328,7 +328,7 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		Map<Object, Object> options = SaveOptions.newBuilder().format().getOptions().toOptionsMap();
 		OutputStream os = new ByteArrayOutputStream();
 		resource.save(os, options);
-		fa.put(ConvertibleProject.tags, uri.toFileString(), os.toString());
+		fa.put(ConvertibleProject.tags, thePath, os.toString());
 	}
 
 	public void setBackgroundDescription(Background background, String backgroundDescription) {

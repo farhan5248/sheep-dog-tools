@@ -19,6 +19,10 @@ public abstract class MBTMojo extends AbstractMojo {
 
 	public String baseDir = "";
 
+	public MBTMojo() {
+		baseDir = new File("").getAbsolutePath();
+	}
+
 	/**
 	 * The tag of the selected edges.
 	 */
@@ -34,7 +38,7 @@ public abstract class MBTMojo extends AbstractMojo {
 
 	private final RestTemplate restTemplate = new RestTemplate();
 
-	private void addFile(String tags, String fileName, String contents) {
+	private void put(String tags, String fileName, String contents) {
 		TreeMap<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("tags", tags);
 		parameters.put("fileName", fileName);
@@ -42,21 +46,26 @@ public abstract class MBTMojo extends AbstractMojo {
 				ModelTransformerResponse.class, parameters);
 	}
 
-	private void runGoal(String tags, String goal) {
+	private void mojoGoal(String tags, String goal) {
 		TreeMap<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("tags", tags);
 		restTemplate.postForObject(getHost() + goal + "?tags={tags}", null, ModelTransformerResponse.class, parameters);
 	}
 
-	private String getFileList(String tags) {
+	private String[] list(String tags, String dir) {
 		TreeMap<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("tags", tags);
-		return restTemplate
-				.getForObject(getHost() + "getFileList?tags={tags}", ModelTransformerResponse.class, parameters)
-				.fileName();
+		parameters.put("dir", dir);
+		String fileList = restTemplate.getForObject(getHost() + "getFileList?tags={tags}&dir={dir}",
+				ModelTransformerResponse.class, parameters).fileName();
+		if (!fileList.isBlank()) {
+			return fileList.split("\n");
+		} else {
+			return new String[0];
+		}
 	}
 
-	private String getFileContents(String tags, String fileName) {
+	private String get(String tags, String fileName) {
 		TreeMap<String, String> parameters = new TreeMap<String, String>();
 		parameters.put("tags", tags);
 		parameters.put("fileName", fileName);
@@ -64,26 +73,37 @@ public abstract class MBTMojo extends AbstractMojo {
 				org.farhan.mbt.maven.ModelTransformerResponse.class, parameters).content();
 	}
 
-	public void execute(String mojo) throws MojoExecutionException {
+	public void execute(String goal) throws MojoExecutionException {
 		getLog().info("Starting execute");
 		getLog().info("tag: " + tag);
 		getLog().info("baseDir: " + baseDir);
+
+		if (!baseDir.endsWith("/")) {
+			baseDir += "/";
+		}
+		SourceRepository sr = new SourceRepository(baseDir);
+		// TODO make these configurable Maven properties
+		String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/",
+				"src/test/java/org/farhan/objects/", "src/test/java/org/farhan/stepdefs/" };
 		try {
-			// TODO only upload step libraries and interfaces, not every .java file
-			for (File aFile : Utilities.recursivelyListFiles(new File(baseDir + "src/test/"), "")) {
-				String contents = Utilities.readFile(aFile);
-				String fileName = aFile.getAbsolutePath().replace(new File(baseDir).getAbsolutePath() + "\\", "");
-				addFile(tag, fileName.replace("\\", "/"), contents);
+			if (goal.endsWith("ToUML")) {
+				for (String dir : dirs) {
+					for (String fileName : sr.list(dir, "")) {
+						put(tag, fileName.replace("\\", "/"), sr.get(fileName));
+					}
+				}
 			}
 
-			runGoal(tag, mojo);
+			mojoGoal(tag, goal);
 
-			for (String fileName : getFileList(tag).split("\n")) {
-				String contents = getFileContents(tag, fileName.replace("\\", "/"));
-				Utilities.writeFile(new File(baseDir + "\\" + fileName), contents);
+			if (!goal.endsWith("ToUML")) {
+				for (String dir : dirs) {
+					for (String fileName : list(tag, dir)) {
+						sr.put(fileName, get(tag, fileName));
+					}
+				}
 			}
 		} catch (Exception e) {
-			getLog().error(Utilities.getStackTraceAsString(e));
 			throw new MojoExecutionException(e);
 		}
 		getLog().info("Ending execute");

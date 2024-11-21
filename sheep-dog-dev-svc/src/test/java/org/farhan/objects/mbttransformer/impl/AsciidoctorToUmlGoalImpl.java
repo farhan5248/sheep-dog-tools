@@ -13,7 +13,7 @@ import static io.cucumber.spring.CucumberTestContext.SCOPE_CUCUMBER_GLUE;
 public class AsciidoctorToUmlGoalImpl extends RestService implements AsciidoctorToUmlGoal {
 
 	public void transition() {
-		runGoal("asciiDoctorToUMLMojo");
+		runGoal("asciiDoctorToUML");
 	}
 
 	@Override

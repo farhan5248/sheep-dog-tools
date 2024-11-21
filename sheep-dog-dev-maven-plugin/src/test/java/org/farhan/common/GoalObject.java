@@ -5,11 +5,12 @@ import org.junit.jupiter.api.Assertions;
 
 public abstract class GoalObject extends TestObject {
 
+	public GoalObject() {
+		attributes.put("tags", "");
+	}
+
 	protected void runGoal(String goal) {
 		try {
-			if (attributes.get("tags") == null) {
-				attributes.put("tags", "");
-			}
 			Class<?> mojoClass = Class.forName(goal);
 			MBTMojo mojo = (MBTMojo) mojoClass.getConstructor().newInstance();
 			mojo.tags = attributes.get("tags");

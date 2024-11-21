@@ -47,11 +47,6 @@ public abstract class MBTMojo extends AbstractMojo {
 		String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/",
 				"src/test/java/org/farhan/objects/", "src/test/java/org/farhan/stepdefs/" };
 		try {
-
-			Class<?> mojoClass = Class.forName(goal);
-			Converter mojo = (Converter) mojoClass.getConstructor(String.class, ObjectRepository.class)
-					.newInstance(tags, or);
-
 			if (goal.endsWith("ToUML")) {
 				for (String dir : dirs) {
 					for (String fileName : sr.list(dir, "")) {
@@ -60,6 +55,9 @@ public abstract class MBTMojo extends AbstractMojo {
 				}
 			}
 
+			Class<?> mojoClass = Class.forName(goal);
+			Converter mojo = (Converter) mojoClass.getConstructor(String.class, ObjectRepository.class)
+					.newInstance(tags, or);
 			mojo.mojoGoal();
 
 			if (!goal.endsWith("ToUML")) {
