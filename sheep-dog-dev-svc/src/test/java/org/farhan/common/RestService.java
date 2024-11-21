@@ -51,14 +51,14 @@ public class RestService extends TestObject {
 
 	protected void runGoal(String resource) {
 		try {
-			File srcDir = new File("target/src-gen/" + this.attributes.get("component") + "/src/test/");
+			String baseDir = "target/src-gen/" + this.attributes.get("component") + "/";
 			if (attributes.get("tags") == null) {
 				attributes.put("tags", "");
 			}
 
-			for (File aFile : recursivelyListFiles(srcDir, "")) {
+			for (File aFile : recursivelyListFiles(new File(baseDir + "src/test/"), "")) {
 				String contents = readFile(aFile);
-				String fileName = aFile.getAbsolutePath().replace(srcDir.getAbsolutePath() + "\\", "");
+				String fileName = aFile.getAbsolutePath().replace(new File(baseDir).getAbsolutePath() + "\\", "");
 				addFile(attributes.get("tags"), fileName.replace("\\", "/"), contents);
 			}
 
@@ -67,8 +67,12 @@ public class RestService extends TestObject {
 			String fileList = getFileList(attributes.get("tags"));
 			if (!fileList.isBlank()) {
 				for (String fileName : fileList.split("\n")) {
+					// TODO temp hack for now
+					if (fileName.endsWith("pst.uml")) {
+						continue;
+					}
 					String contents = getFileContents(attributes.get("tags"), fileName.replace("\\", "/"));
-					writeFile(new File(srcDir.getAbsolutePath() + "\\" + fileName), contents);
+					writeFile(new File(baseDir + "\\" + fileName), contents);
 				}
 			}
 		} catch (Exception e) {

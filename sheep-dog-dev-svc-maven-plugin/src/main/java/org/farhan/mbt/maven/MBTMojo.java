@@ -17,7 +17,7 @@ public abstract class MBTMojo extends AbstractMojo {
 	@Parameter(defaultValue = "${project}", readonly = true)
 	public MavenProject project;
 
-	public File srcDir = new File("src/test/");
+	public String baseDir = "";
 
 	/**
 	 * The tag of the selected edges.
@@ -67,12 +67,12 @@ public abstract class MBTMojo extends AbstractMojo {
 	public void execute(String mojo) throws MojoExecutionException {
 		getLog().info("Starting execute");
 		getLog().info("tag: " + tag);
-		getLog().info("srcDir: " + srcDir);
+		getLog().info("baseDir: " + baseDir);
 		try {
 			// TODO only upload step libraries and interfaces, not every .java file
-			for (File aFile : Utilities.recursivelyListFiles(srcDir, "")) {
+			for (File aFile : Utilities.recursivelyListFiles(new File(baseDir + "src/test/"), "")) {
 				String contents = Utilities.readFile(aFile);
-				String fileName = aFile.getAbsolutePath().replace(srcDir.getAbsolutePath() + "\\", "");
+				String fileName = aFile.getAbsolutePath().replace(new File(baseDir).getAbsolutePath() + "\\", "");
 				addFile(tag, fileName.replace("\\", "/"), contents);
 			}
 
@@ -80,7 +80,7 @@ public abstract class MBTMojo extends AbstractMojo {
 
 			for (String fileName : getFileList(tag).split("\n")) {
 				String contents = getFileContents(tag, fileName.replace("\\", "/"));
-				Utilities.writeFile(new File(srcDir.getAbsolutePath() + "\\" + fileName), contents);
+				Utilities.writeFile(new File(baseDir + "\\" + fileName), contents);
 			}
 		} catch (Exception e) {
 			getLog().error(Utilities.getStackTraceAsString(e));

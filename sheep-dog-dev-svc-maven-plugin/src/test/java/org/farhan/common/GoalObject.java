@@ -1,7 +1,5 @@
 package org.farhan.common;
 
-import java.io.File;
-
 import org.farhan.mbt.maven.MBTMojo;
 import org.farhan.mbt.maven.Utilities;
 import org.junit.jupiter.api.Assertions;
@@ -17,7 +15,7 @@ public abstract class GoalObject extends TestObject {
 			mojo.tag = attributes.get("tags");
 			// TODO read from properties
 			mojo.port = 8087;
-			mojo.srcDir = new File("target/src-gen/" + this.attributes.get("component") + "/src/test/");
+			mojo.baseDir = "target/src-gen/" + this.attributes.get("component") + "/";
 			mojo.execute();
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
