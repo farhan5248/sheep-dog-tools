@@ -11,56 +11,59 @@ import org.farhan.mbt.core.ObjectRepository;
 
 public class FileObjectRepository implements ObjectRepository {
 
-	public String targetDir;
+	private final String BASEDIR;
 
-	public void setTargetDir(String baseDir) {
-		this.targetDir = baseDir + "target/";
+	public FileObjectRepository() {
+		BASEDIR = "target/src-gen/repo/";
+	}
+
+	public FileObjectRepository(String baseDir) {
+		BASEDIR = baseDir + "target/repo/";
 	}
 
 	@Override
 	public ArrayList<String> list(String tags, String path, String extension) {
-		path = path.replaceAll("\\\\+", "/").replaceAll("/+", "/");
-		path = targetDir + (tags.isEmpty() ? "" : tags + "/") + path;
-		ArrayList<String> theFiles = new ArrayList<String>();
-		File aDir = new File(path);
+		path = path.replaceAll("\\\\+", "/");
+		String root = BASEDIR + (tags.isEmpty() ? "" : tags + "/");
+		ArrayList<String> files = new ArrayList<String>();
+		File aDir = new File(root + path);
 		if (aDir.exists()) {
 			for (String s : aDir.list()) {
-				File aDirObj = new File(path + "/" + s);
-				String aDirObjPath = aDirObj.getPath().replaceAll("\\\\+", "/")
-						.replace(targetDir + (tags.isEmpty() ? "" : tags + "/"), "");
+				String aDirObjPath = (path + "/" + s);
+				File aDirObj = new File(root + aDirObjPath);
 				if (aDirObj.isDirectory()) {
-					theFiles.addAll(list(tags, aDirObjPath, extension));
-				} else if (aDirObj.getPath().toLowerCase().endsWith(extension.toLowerCase())) {
-					theFiles.add(aDirObjPath);
+					files.addAll(list(tags, aDirObjPath, extension));
+				} else if (aDirObjPath.toLowerCase().endsWith(extension.toLowerCase())) {
+					files.add(aDirObjPath);
 				}
 			}
 		}
-		return theFiles;
+		return files;
 	}
 
 	@Override
 	public boolean contains(String tags, String path) {
-		path = path.replaceAll("\\\\+", "/").replaceAll("/+", "/");
-		path = targetDir + (tags.isEmpty() ? "" : tags + "/") + path;
+		path = path.replaceAll("\\\\+", "/");
+		path = BASEDIR + tags + "/" + path;
 		return new File(path).exists();
 	}
 
 	@Override
 	public String get(String tags, String path) throws Exception {
-		path = path.replaceAll("\\\\+", "/").replaceAll("/+", "/");
-		path = targetDir + (tags.isEmpty() ? "" : tags + "/") + path;
+		path = path.replaceAll("\\\\+", "/");
+		path = BASEDIR + tags + "/" + path;
 		return new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
 	}
 
 	@Override
 	public void put(String tags, String path, String content) throws Exception {
-		path = path.replaceAll("\\\\+", "/").replaceAll("/+", "/");
-		path = targetDir + (tags.isEmpty() ? "" : tags + "/") + path;
+		path = path.replaceAll("\\\\+", "/");
+		path = BASEDIR + tags + "/" + path;
 		new File(path).getParentFile().mkdirs();
-		PrintWriter aPrintWriter = new PrintWriter(new File(path), StandardCharsets.UTF_8);
-		aPrintWriter.print(content);
-		aPrintWriter.flush();
-		aPrintWriter.close();
+		PrintWriter pw = new PrintWriter(path, StandardCharsets.UTF_8);
+		pw.write(content);
+		pw.flush();
+		pw.close();
 	}
 
 }

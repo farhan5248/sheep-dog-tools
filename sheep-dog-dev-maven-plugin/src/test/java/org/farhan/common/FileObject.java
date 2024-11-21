@@ -13,7 +13,7 @@ public abstract class FileObject extends TestObject {
 	}
 
 	protected File getFile() {
-		return new File(Config.getWorkingDir() + attributes.get("component") + "/" + attributes.get("path"));
+		return new File(Config.getWorkingDir() + attributes.get("path"));
 	}
 
 	protected void assertObjectExists() {

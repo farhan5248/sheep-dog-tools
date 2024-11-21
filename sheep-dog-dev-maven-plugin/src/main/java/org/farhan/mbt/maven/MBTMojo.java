@@ -31,40 +31,41 @@ public abstract class MBTMojo extends AbstractMojo {
 	 * The tag of the selected edges.
 	 */
 	@Parameter(property = "tag", defaultValue = "")
-	public String tag;
+	public String tags;
 
-	protected ObjectRepository fa = new FileObjectRepository();
-
-	public void execute(Converter mojo) throws MojoExecutionException {
+	public void execute(String goal) throws MojoExecutionException {
 		getLog().info("Starting execute");
-		getLog().info("tag: " + tag);
+		getLog().info("tag: " + tags);
 		getLog().info("baseDir: " + baseDir);
 
-		// TODO this is an ugly hack for now, clean it up later
-		((FileObjectRepository) fa).setTargetDir(baseDir);
+		if (!baseDir.endsWith("/")) {
+			baseDir += "/";
+		}
+		ObjectRepository or = new FileObjectRepository(baseDir);
+		SourceRepository sr = new SourceRepository(baseDir);
 		// TODO make these configurable Maven properties
 		String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/",
 				"src/test/java/org/farhan/objects/", "src/test/java/org/farhan/stepdefs/" };
 		try {
 
-			if (mojo.getClass().getName().endsWith("ToUML")) {
+			Class<?> mojoClass = Class.forName(goal);
+			Converter mojo = (Converter) mojoClass.getConstructor(String.class, ObjectRepository.class)
+					.newInstance(tags, or);
+
+			if (goal.endsWith("ToUML")) {
 				for (String dir : dirs) {
-					for (String path : list(new File(baseDir + dir))) {
-						String contents = get(new File(baseDir + path));
-						getLog().debug("contents: " + contents);
-						fa.put(tag, path.replace(baseDir, ""), contents);
+					for (String fileName : sr.list(dir, "")) {
+						or.put(tags, fileName, sr.get(fileName));
 					}
 				}
 			}
 
 			mojo.mojoGoal();
 
-			if (!mojo.getClass().getName().endsWith("ToUML")) {
+			if (!goal.endsWith("ToUML")) {
 				for (String dir : dirs) {
-					for (String path : fa.list(tag, dir, "")) {
-						String contents = fa.get(tag, path);
-						getLog().debug("contents: " + contents);
-						put(new File(baseDir + path), contents);
+					for (String fileName : or.list(tags, dir, "")) {
+						sr.put(fileName, or.get(tags, fileName));
 					}
 				}
 			}

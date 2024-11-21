@@ -1,4 +1,4 @@
-package org.farhan.common;
+package org.farhan.mbt.maven;
 
 import java.io.File;
 import java.io.PrintWriter;

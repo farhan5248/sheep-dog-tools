@@ -1,9 +1,6 @@
 package org.farhan.common;
 
 import org.farhan.mbt.core.ObjectRepository;
-
-import java.io.File;
-
 import org.farhan.mbt.core.Converter;
 import org.junit.jupiter.api.Assertions;
 
@@ -14,16 +11,16 @@ public abstract class GoalObject extends TestObject {
 	}
 
 	protected void runGoal(String goal) {
+		ObjectRepository or = new FileObjectRepository();
+		SourceRepository sr = new SourceRepository();
+		String tags = attributes.get("tags");
+		String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/",
+				"src/test/java/org/farhan/objects/", "src/test/java/org/farhan/stepdefs/" };
 		try {
-			ObjectRepository or = new FileObjectRepository();
-			SourceRepository sr = new SourceRepository();
-			String tags = attributes.get("tags");
+
 			Class<?> mojoClass = Class.forName(goal);
 			Converter mojo = (Converter) mojoClass.getConstructor(String.class, ObjectRepository.class)
 					.newInstance(tags, or);
-
-			String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/",
-					"src/test/java/org/farhan/objects/", "src/test/java/org/farhan/stepdefs/" };
 
 			if (goal.endsWith("ToUML")) {
 				for (String dir : dirs) {

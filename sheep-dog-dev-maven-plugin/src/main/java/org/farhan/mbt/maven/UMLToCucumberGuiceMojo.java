@@ -3,7 +3,6 @@ package org.farhan.mbt.maven;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
-import org.farhan.mbt.convert.ConvertUMLToCucumberGuice;
 
 /**
  * Converts tagged Cucumber scenarios to a UML model using Eclipse Xtext and EMF
@@ -13,6 +12,6 @@ import org.farhan.mbt.convert.ConvertUMLToCucumberGuice;
 public class UMLToCucumberGuiceMojo extends MBTMojo {
 
 	public void execute() throws MojoExecutionException {
-		super.execute(new ConvertUMLToCucumberGuice(tag, fa));
+		super.execute("org.farhan.mbt.convert.ConvertUMLToCucumberGuice");
 	}
 }

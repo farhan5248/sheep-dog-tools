@@ -1,7 +1,6 @@
 package org.farhan.common;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -16,6 +15,10 @@ public class FileObjectRepository implements ObjectRepository {
 
 	public FileObjectRepository() {
 		BASEDIR = "target/src-gen/repo/";
+	}
+
+	public FileObjectRepository(String baseDir) {
+		BASEDIR = baseDir + "target/repo/";
 	}
 
 	@Override
