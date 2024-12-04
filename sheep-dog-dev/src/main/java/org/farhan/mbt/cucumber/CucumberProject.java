@@ -22,14 +22,14 @@ public class CucumberProject extends ConvertibleProject {
 	}
 
 	@Override
-	public ConvertibleObject createObject(String path) throws Exception {
+	public ConvertibleObject createObject(String path) {
 		ConvertibleObject aConvertibleObject = getObject(path);
 		if (aConvertibleObject != null) {
 			return aConvertibleObject;
 		} else {
-			if (!path.endsWith(getFileExt(FIRST_LAYER))) {
+			if (!path.endsWith(getFileExt(TEST_CASES))) {
 				aConvertibleObject = createJavaWrapper(path);
-				if (path.contains(SECOND_LAYER)) {
+				if (path.contains(TEST_STEPS)) {
 					secondLayerObjects.add(aConvertibleObject);
 				} else {
 					thirdLayerObjects.add(aConvertibleObject);
@@ -49,12 +49,12 @@ public class CucumberProject extends ConvertibleProject {
 	@Override
 	public String getDir(String layer) {
 		switch (layer) {
-		case FIRST_LAYER:
+		case TEST_CASES:
 			return "src/test/resources/cucumber";
-		case SECOND_LAYER:
-			return "src/test/java/org/farhan/" + SECOND_LAYER;
-		case THIRD_LAYER:
-			return "src/test/java/org/farhan/" + THIRD_LAYER;
+		case TEST_STEPS:
+			return "src/test/java/org/farhan/" + TEST_STEPS;
+		case TEST_OBJECTS:
+			return "src/test/java/org/farhan/" + TEST_OBJECTS;
 		default:
 			return "";
 		}
@@ -62,7 +62,7 @@ public class CucumberProject extends ConvertibleProject {
 
 	@Override
 	public String getFileExt(String layer) {
-		if (layer.contentEquals(FIRST_LAYER)) {
+		if (layer.contentEquals(TEST_CASES)) {
 			return ".feature";
 		} else {
 			return ".java";
@@ -70,20 +70,20 @@ public class CucumberProject extends ConvertibleProject {
 	}
 
 	public ConvertibleObject getObject(String name) {
-		if (name.startsWith(getDir(FIRST_LAYER))) {
+		if (name.startsWith(getDir(TEST_CASES))) {
 			for (ConvertibleObject obj : firstLayerObjects) {
 				if (obj.getPath().contentEquals(name)) {
 					return obj;
 				}
 			}
 		} else {
-			if (name.startsWith(getDir(SECOND_LAYER))) {
+			if (name.startsWith(getDir(TEST_STEPS))) {
 				for (ConvertibleObject obj : secondLayerObjects) {
 					if (obj.getPath().contentEquals(name)) {
 						return obj;
 					}
 				}
-			} else if (name.startsWith(getDir(THIRD_LAYER))) {
+			} else if (name.startsWith(getDir(TEST_OBJECTS))) {
 				for (ConvertibleObject obj : thirdLayerObjects) {
 					if (obj.getPath().contentEquals(name)) {
 						return obj;
@@ -99,13 +99,13 @@ public class CucumberProject extends ConvertibleProject {
 
 		ArrayList<ConvertibleObject> layerObjects = null;
 		switch (layer) {
-		case FIRST_LAYER:
+		case TEST_CASES:
 			layerObjects = firstLayerObjects;
 			break;
-		case SECOND_LAYER:
+		case TEST_STEPS:
 			layerObjects = secondLayerObjects;
 			break;
-		case THIRD_LAYER:
+		case TEST_OBJECTS:
 			layerObjects = thirdLayerObjects;
 			break;
 		}
@@ -148,11 +148,11 @@ public class CucumberProject extends ConvertibleProject {
 	public void load() throws Exception {
 
 		CucumberStandaloneSetup.doSetup();
-		ArrayList<String> files = fa.list(tags, getDir(FIRST_LAYER), getFileExt(FIRST_LAYER));
+		ArrayList<String> files = fa.list(tags, getDir(TEST_CASES), getFileExt(TEST_CASES));
 		for (String f : files) {
-			createObject(f).load(fa.get(tags, f));
-			if (!isFileSelected(getObjects(FIRST_LAYER).getLast(), tags)) {
-				getObjects(FIRST_LAYER).removeLast();
+			createObject(f).parse(fa.get(tags, f));
+			if (!isFileSelected(getObjects(TEST_CASES).getLast(), tags)) {
+				getObjects(TEST_CASES).removeLast();
 			}
 		}
 	}

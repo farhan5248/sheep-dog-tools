@@ -42,6 +42,10 @@ Object: uml/pst.uml file
 
           | Interaction Name | Message |
 
+    Parameters: 3
+
+          | Interaction Name |
+
   Definition: Interaction Comments section will be created as follows
 
     Parameters: 1

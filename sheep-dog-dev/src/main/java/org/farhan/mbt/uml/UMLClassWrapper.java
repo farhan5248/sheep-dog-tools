@@ -141,6 +141,14 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return step;
 	}
 
+	public Interaction createStepDefinition(Interaction abstractScenario, String stepName) {
+		String keyword = stepName.split(" ")[0];
+		// TODO this should be an operation in the future?
+		Interaction stepDefinition = createInteraction(theClass, stepName.substring(keyword.length() + 1), "");
+		createAnnotation(stepDefinition, "StepDefinition", "Keyword", keyword);
+		return stepDefinition;
+	}
+
 	public void createStepTable(Message step, ArrayList<ArrayList<String>> stepTableRowList) {
 		ValueSpecification table = createArgument(step, "dataTable", "");
 		// header
@@ -163,6 +171,14 @@ public class UMLClassWrapper implements ConvertibleObject {
 	@Override
 	public Object get() {
 		return theClass;
+	}
+
+	public ArrayList<Interaction> getObjectStepList() {
+		ArrayList<Interaction> steps = new ArrayList<Interaction>();
+		for (Behavior b : theClass.getOwnedBehaviors()) {
+			steps.add((Interaction) b);
+		}
+		return steps;
 	}
 
 	public ArrayList<Interaction> getAbstractScenarioList() {
@@ -357,7 +373,7 @@ public class UMLClassWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void load(String text) throws Exception {
+	public void parse(String text) throws Exception {
 		// Individual objects are not stored separately so this is not needed.
 	}
 
@@ -409,6 +425,10 @@ public class UMLClassWrapper implements ConvertibleObject {
 				createAnnotation(abstractScenario, "tags", t);
 			}
 		}
+	}
+
+	public String getStepDefinition(Interaction stepDef) {
+		return stepDef.getName();
 	}
 
 }

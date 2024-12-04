@@ -29,15 +29,18 @@ import org.farhan.mbt.core.ObjectRepository;
 public class UMLProject extends ConvertibleProject {
 
 	private ArrayList<ConvertibleObject> firstLayerObjects;
+	private ArrayList<ConvertibleObject> testObjects;
 
 	private Model theSystem;
 
 	public UMLProject(String tags, ObjectRepository fa) {
 		super(fa);
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
+		testObjects = new ArrayList<ConvertibleObject>();
 		theSystem = UMLFactory.eINSTANCE.createModel();
 		theSystem.setName("pst");
-		theSystem.createNestedPackage(FIRST_LAYER);
+		theSystem.createNestedPackage(TEST_CASES);
+		theSystem.createNestedPackage(TEST_OBJECTS);
 		ConvertibleProject.tags = tags;
 	}
 
@@ -56,7 +59,11 @@ public class UMLProject extends ConvertibleProject {
 		InputStream content = new ByteArrayInputStream(fa.get(tags, path).getBytes(StandardCharsets.UTF_8));
 		resource.load(content, Collections.EMPTY_MAP);
 		theSystem = (Model) resource.getContents().getFirst();
-		ArrayList<Class> objects = getPackagedClasses(theSystem.getNestedPackage(FIRST_LAYER));
+		ArrayList<Class> objects = getPackagedClasses(theSystem.getNestedPackage(TEST_CASES));
+		for (Class c : objects) {
+			createObject(c.getQualifiedName());
+		}
+		objects = getPackagedClasses(theSystem.getNestedPackage(TEST_OBJECTS));
 		for (Class c : objects) {
 			createObject(c.getQualifiedName());
 		}
@@ -98,18 +105,45 @@ public class UMLProject extends ConvertibleProject {
 
 	@Override
 	public ArrayList<ConvertibleObject> getObjects(String layer) {
-		return firstLayerObjects;
+		if (layer.equalsIgnoreCase(TEST_CASES)) {
+			return firstLayerObjects;
+		} else if (layer.equalsIgnoreCase(TEST_OBJECTS)) {
+			return testObjects;
+		} else {
+			return null;
+		}
 	}
 
 	@Override
-	public ConvertibleObject createObject(String name) {
-		Class theClass = (Class) getPackagedElement(name, null);
+	public ConvertibleObject createObject(String qualifiedName) {
+		// TODO, everything passed in should be / and not ::
+		if (!qualifiedName.contains("::")) {
+			qualifiedName = convertFileName(qualifiedName);
+		}
+		Class theClass = (Class) getPackagedElement(qualifiedName, null);
 		if (theClass == null) {
-			theClass = addClassWithPackages(name);
+			theClass = addClassWithPackages(qualifiedName);
 		}
 		UMLClassWrapper ucw = new UMLClassWrapper(this, theClass);
-		firstLayerObjects.add(ucw);
+		// TODO check which layer to add it to
+		if (qualifiedName.startsWith("pst::" + TEST_CASES)) {
+			firstLayerObjects.add(ucw);
+		} else if (qualifiedName.startsWith("pst::" + TEST_OBJECTS)) {
+			testObjects.add(ucw);
+		} // TODO add testSteps collection
 		return ucw;
+	}
+
+	protected String convertFileName(String path) {
+		String qualifiedName = path.replace(",", "").trim();
+		if (path.contains(".")) {
+			qualifiedName = qualifiedName.replace("." + path.split("\\.")[1], "");
+		}
+		// TODO assuming all relative paths start with layer, but maybe it's
+		// src/test/layer?
+		qualifiedName = qualifiedName.replace("/", "::");
+		qualifiedName = "pst::" + qualifiedName;
+		return qualifiedName;
 	}
 
 	private Class addClassWithPackages(String qualifiedName) {

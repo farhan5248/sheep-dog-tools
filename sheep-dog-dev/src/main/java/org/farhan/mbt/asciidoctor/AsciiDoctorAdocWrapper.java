@@ -406,7 +406,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void load(String text) throws Exception {
+	public void parse(String text) throws Exception {
 		try {
 			if (text.isEmpty()) {
 				return;

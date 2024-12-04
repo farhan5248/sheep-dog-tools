@@ -94,10 +94,8 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		theJavaClass.addImport(getFactoryImport(step));
 		MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(step));
 		{
-			String keyword = step.split(" ")[0];
-			String stepName = step.substring(keyword.length() + 1);
 			if (aMethod.getAnnotations().isEmpty()) {
-				aMethod.addSingleMemberAnnotation("Given", "\"^" + stepName + "$\"");
+				aMethod.addSingleMemberAnnotation("Given", "\"^" + step + "$\"");
 			}
 		}
 		BlockStmt body = aMethod.getBody().get();
@@ -253,7 +251,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	protected String getMethodNameForStepDef(String step) {
-		String name = step.substring(step.split(" ")[0].length());
+		String name = step;
 		name = removeSpecialChars(name);
 		name = name.replace("'", "");
 		name = lowerFirst(name);
@@ -324,7 +322,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	@Override
-	public void load(String text) throws Exception {
+	public void parse(String text) throws Exception {
 		try {
 			if (text.isEmpty()) {
 				return;

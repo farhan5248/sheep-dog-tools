@@ -10,7 +10,10 @@ import org.farhan.mbt.cucumber.Examples;
 import org.farhan.mbt.cucumber.Row;
 import org.farhan.mbt.cucumber.Step;
 import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.ObjectRepository;
+import org.farhan.mbt.core.Utilities;
+import org.farhan.helper.StepHelper;
 import org.farhan.mbt.core.Converter;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
@@ -19,12 +22,13 @@ import org.farhan.mbt.uml.UMLProject;
 
 public class ConvertCucumberToUML extends Converter {
 
+	private CucumberFeatureWrapper srcObj;
+	private UMLClassWrapper tgtObj;
+	private String lastComponent = "InitialComponent";
+
 	public ConvertCucumberToUML(String tags, ObjectRepository fa) {
 		super(tags, fa);
 	}
-
-	private CucumberFeatureWrapper srcObj;
-	private UMLClassWrapper tgtObj;
 
 	protected void convertAbstractScenarioList() throws Exception {
 		for (AbstractScenario abstractScenario : srcObj.getAbstractScenarioList()) {
@@ -91,11 +95,48 @@ public class ConvertCucumberToUML extends Converter {
 
 	private void convertStep(Interaction abstractScenario, Step stepSrc, AbstractScenario abstractScenarioSrc) {
 		Message step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
+
+		UMLClassWrapper stpObj = (UMLClassWrapper) tgtPrj.createObject(getSteObjName(stepSrc.getName()));
+		stpObj.createStepDefinition(abstractScenario, srcObj.getStep(stepSrc));
+
 		if (srcObj.hasDocString(stepSrc)) {
 			convertDocString(step, stepSrc);
 		} else if (srcObj.hasStepTable(stepSrc)) {
 			convertStepTable(step, stepSrc, abstractScenarioSrc);
 		}
+	}
+
+	// TODO each converter needs its own object name converter?
+	private String getSteObjName(String stepName) {
+		String objectName = getObjectName(stepName);
+		String objectType = Utilities.upperFirst(StepHelper.getObjectType(stepName));
+		String componentName = getComponentName(stepName);
+		return ConvertibleProject.TEST_OBJECTS + "/" + componentName + "/" + objectName + objectType
+				+ ".java";
+	}
+
+	protected String getComponentName(String step) {
+		String name = StepHelper.getComponentName(step);
+		if (name.isEmpty()) {
+			name = lastComponent;
+		} else {
+			name = Utilities.removeDelimiterAndCapitalize(name, "\\.");
+			name = Utilities.removeDelimiterAndCapitalize(name, "\\-");
+			name = Utilities.removeDelimiterAndCapitalize(name, " ");
+			lastComponent = name;
+		}
+		return name;
+	}
+
+	private String getObjectName(String step) {
+		String name = StepHelper.getObjectName(step);
+		String nameParts[] = name.split("/");
+		name = nameParts[nameParts.length - 1];
+		name = Utilities.removeDelimiterAndCapitalize(name, "\\.");
+		name = Utilities.removeDelimiterAndCapitalize(name, "\\-");
+		name = Utilities.removeDelimiterAndCapitalize(name, " ");
+		name = Utilities.upperFirst(name);
+		return name;
 	}
 
 	private void convertStepList(Interaction abstractScenario, EList<Step> stepList,
