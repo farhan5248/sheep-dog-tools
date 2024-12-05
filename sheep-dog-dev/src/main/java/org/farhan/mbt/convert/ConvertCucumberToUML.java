@@ -50,6 +50,10 @@ public class ConvertCucumberToUML extends Converter {
 
 	private void convertDocString(Message step, Step stepSrc) {
 		tgtObj.createDocString(step, srcObj.getDocString(stepSrc));
+		
+		UMLClassWrapper stpObj = (UMLClassWrapper) tgtPrj.createObject(getStepObjName(stepSrc.getName()));
+		Interaction stepDef = stpObj.createStepDefinition(srcObj.getStep(stepSrc));
+		stpObj.createStepDefinitionParameter(stepDef, "Content");
 	}
 
 	private void convertExamples(Interaction scenarioOutline, Examples examplesSrc) {
@@ -96,8 +100,8 @@ public class ConvertCucumberToUML extends Converter {
 	private void convertStep(Interaction abstractScenario, Step stepSrc, AbstractScenario abstractScenarioSrc) {
 		Message step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
 
-		UMLClassWrapper stpObj = (UMLClassWrapper) tgtPrj.createObject(getSteObjName(stepSrc.getName()));
-		stpObj.createStepDefinition(abstractScenario, srcObj.getStep(stepSrc));
+		UMLClassWrapper stpObj = (UMLClassWrapper) tgtPrj.createObject(getStepObjName(stepSrc.getName()));
+		stpObj.createStepDefinition(srcObj.getStep(stepSrc));
 
 		if (srcObj.hasDocString(stepSrc)) {
 			convertDocString(step, stepSrc);
@@ -107,7 +111,7 @@ public class ConvertCucumberToUML extends Converter {
 	}
 
 	// TODO each converter needs its own object name converter?
-	private String getSteObjName(String stepName) {
+	private String getStepObjName(String stepName) {
 		String objectName = getObjectName(stepName);
 		String objectType = Utilities.upperFirst(StepHelper.getObjectType(stepName));
 		String componentName = getComponentName(stepName);

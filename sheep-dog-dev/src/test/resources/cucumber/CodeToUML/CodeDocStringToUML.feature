@@ -19,6 +19,9 @@ Feature: Convert Doc String To UML
       And The uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                               | Argument Name | Annotation Detail |
           | specs::Process::Submit | The Object page is created as follows | docString     | 0 -> text1        |
+      And The uml/pst.uml file Interaction Annotations section will be created as follows
+          | Interaction Name                                                             | Annotation Name | Annotation Detail |
+          | objects::InitialComponent::ObjectPage::The Object page is created as follows | parameters      | Content           |
 
   Scenario: Empty Lines
 

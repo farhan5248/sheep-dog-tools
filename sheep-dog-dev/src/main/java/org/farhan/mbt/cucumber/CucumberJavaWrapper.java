@@ -18,6 +18,7 @@ import com.github.javaparser.ast.Modifier.Keyword;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.BlockStmt;
+import com.github.javaparser.ast.stmt.Statement;
 
 public class CucumberJavaWrapper implements ConvertibleObject {
 
@@ -48,46 +49,28 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		}
 	}
 
-	public void createDocString(String step) throws Exception {
+	public void createStepDefinitionParameter(String step, String param) throws Exception {
 		if (isStepObj()) {
-			createDocStringForStepObj(step);
+			MethodDeclaration aMethod = getMethod(getSetOrAssert(step) + getSection(step) + "Content");
+			aMethod.removeBody();
+			addParameter(aMethod, "HashMap<String, String>", "keyMap");
 		} else {
-			createDocStringForStepDef(step);
+			MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(step));
+			addParameter(aMethod, "String", "docString");
+			BlockStmt body = aMethod.getBody().get();
+			String statement = getCallForFactory(step) + getCallForInputOutputsForDocString(step) + ";";
+			boolean hasStatement = false;
+			for (Statement s : body.getStatements()) {
+				if (s.toString().contentEquals(statement)) {
+					hasStatement = true;
+				}
+			}
+			if (!hasStatement) {
+				body.addStatement(statement);
+				body.getStatements().add(2, body.getStatements().getLast().get());
+				body.getStatements().removeLast();
+			}
 		}
-	}
-
-	protected void createDocStringForStepDef(String step) throws Exception {
-		MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(step));
-		addParameter(aMethod, "String", "docString");
-		BlockStmt body = aMethod.getBody().get();
-		if (StepHelper.isEdge(step) && body.getStatements().size() == 4
-				|| !StepHelper.isEdge(step) && body.getStatements().size() == 3) {
-			// 3rd or 4th can be transition step if it's edge or vertex
-			return;
-		} else {
-			body.addStatement(getCallForFactory(step) + getCallForInputOutputsForDocString(step) + ";");
-			body.getStatements().add(2, body.getStatements().getLast().get());
-			body.getStatements().removeLast();
-			return;
-		}
-	}
-
-	protected void createDocStringForStepObj(String step) throws Exception {
-		MethodDeclaration aMethod = getMethod(getSetOrAssert(step) + getSection(step) + "Content");
-		aMethod.removeBody();
-		addParameter(aMethod, "HashMap<String, String>", "keyMap");
-	}
-
-	public MethodDeclaration createStep(String step) throws Exception {
-		if (isStepObj()) {
-			return createStepForStepObj(step);
-		} else {
-			return createStepForStepDef(step);
-		}
-	}
-
-	protected String getFactoryImport(String step) {
-		return "org.farhan.common." + getFactoryName(step);
 	}
 
 	protected MethodDeclaration createStepForStepDef(String step) throws Exception {
@@ -114,6 +97,18 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		return aMethod;
 	}
 
+	public MethodDeclaration createStep(String step) throws Exception {
+		if (isStepObj()) {
+			return createStepForStepObj(step);
+		} else {
+			return createStepForStepDef(step);
+		}
+	}
+
+	protected String getFactoryImport(String step) {
+		return "org.farhan.common." + getFactoryName(step);
+	}
+
 	protected MethodDeclaration createStepForStepObj(String step) throws Exception {
 		if (theJavaClass.getImports().isEmpty()) {
 			theJavaClass.addImport("java.util.HashMap");
@@ -128,6 +123,8 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 			return getMethod("transition").removeBody();
 		} else {
 			// data table or doc string will cover this
+			// TODO rename this to createStepForStepObjWithoutAttachment. have the converter
+			// call either this or a docstring or datatable method
 			return null;
 		}
 	}

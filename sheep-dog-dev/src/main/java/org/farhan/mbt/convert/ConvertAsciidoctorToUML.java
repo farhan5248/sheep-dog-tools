@@ -7,20 +7,24 @@ import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
+import org.farhan.helper.StepHelper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.ObjectRepository;
+import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.core.Converter;
 
 public class ConvertAsciidoctorToUML extends Converter {
 
+	private AsciiDoctorAdocWrapper srcObj;
+	private UMLClassWrapper tgtObj;
+	private String lastComponent = "InitialComponent";
+
 	public ConvertAsciidoctorToUML(String tags, ObjectRepository fa) {
 		super(tags, fa);
 	}
-
-	private AsciiDoctorAdocWrapper srcObj;
-	private UMLClassWrapper tgtObj;
 
 	protected void convertAbstractScenarioList() throws Exception {
 		for (Section abstractScenario : srcObj.getAbstractScenarioList()) {
@@ -88,11 +92,49 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	private void convertStep(Interaction abstractScenario, Section stepSrc) {
 		Message step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
+
+		UMLClassWrapper stpObj = (UMLClassWrapper) tgtPrj.createObject(getStepObjName(stepSrc.getTitle()));
+		stpObj.createStepDefinition(srcObj.getStep(stepSrc));
+
 		if (srcObj.hasDocString(stepSrc)) {
 			convertDocString(step, stepSrc);
 		} else if (srcObj.hasStepTable(stepSrc)) {
 			convertStepTable(step, stepSrc);
 		}
+	}
+
+	// TODO these are duplicates of cuke to uml converter. Also in the future when
+	// there's a layer 2 for adoc this won't be needed. Instead the layer 2 will be
+	// read directly
+	private String getStepObjName(String stepName) {
+		String objectName = getObjectName(stepName);
+		String objectType = Utilities.upperFirst(StepHelper.getObjectType(stepName));
+		String componentName = getComponentName(stepName);
+		return ConvertibleProject.TEST_OBJECTS + "/" + componentName + "/" + objectName + objectType + ".adoc";
+	}
+
+	protected String getComponentName(String step) {
+		String name = StepHelper.getComponentName(step);
+		if (name.isEmpty()) {
+			name = lastComponent;
+		} else {
+			name = Utilities.removeDelimiterAndCapitalize(name, "\\.");
+			name = Utilities.removeDelimiterAndCapitalize(name, "\\-");
+			name = Utilities.removeDelimiterAndCapitalize(name, " ");
+			lastComponent = name;
+		}
+		return name;
+	}
+
+	private String getObjectName(String step) {
+		String name = StepHelper.getObjectName(step);
+		String nameParts[] = name.split("/");
+		name = nameParts[nameParts.length - 1];
+		name = Utilities.removeDelimiterAndCapitalize(name, "\\.");
+		name = Utilities.removeDelimiterAndCapitalize(name, "\\-");
+		name = Utilities.removeDelimiterAndCapitalize(name, " ");
+		name = Utilities.upperFirst(name);
+		return name;
 	}
 
 	private void convertStepList(Interaction abstractScenario, ArrayList<Section> stepList) {

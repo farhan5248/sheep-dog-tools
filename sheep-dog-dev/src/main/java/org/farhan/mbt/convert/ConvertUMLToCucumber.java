@@ -65,10 +65,6 @@ public class ConvertUMLToCucumber extends Converter {
 
 	protected void convertDocString(Step step, Message srcStep) throws Exception {
 		tgtObj.createDocString(step, srcObj.getDocString(srcStep));
-		String stepName = srcObj.getStep(srcStep);
-		stepName = stepName.substring(stepName.split(" ")[0].length() + 1);
-		getTgtObj2(stepName).createDocString(stepName);
-		getTgtObj3(stepName).createDocString(stepName);
 	}
 
 	protected void convertExamples(ScenarioOutline scenarioOutline, EAnnotation examplesSrc) {
@@ -110,12 +106,14 @@ public class ConvertUMLToCucumber extends Converter {
 			tgtObj.parse(fa.get(tags, path));
 		}
 
-		// TODO convert to convertStepDefinition
+		// TODO put this in a method called convertStepDefinition
 		for (Interaction i : srcObj.getObjectStepList()) {
-			tgtObj.createStep(srcObj.getStepDefinition(i));
+			// TODO rename createStep to createStepDefinition
+			tgtObj.createStep(srcObj.getStepDefinitionName(i));
+			for (String param : srcObj.getStepDefinitionParameterList(srcObj.getStepDefinitionName(i))) {
+				tgtObj.createStepDefinitionParameter(srcObj.getStepDefinitionName(i), param);
+			}
 		}
-
-		// TODO if the step has docstring or data table, convert StepDefinitionParameter
 	}
 
 	private void convertStepDefinition(ConvertibleObject theObject) throws Exception {
@@ -138,7 +136,10 @@ public class ConvertUMLToCucumber extends Converter {
 		}
 
 		for (Interaction i : srcObj.getObjectStepList()) {
-			tgtObj.createStep(srcObj.getStepDefinition(i));
+			tgtObj.createStep(srcObj.getStepDefinitionName(i));
+			for (String param : srcObj.getStepDefinitionParameterList(srcObj.getStepDefinitionName(i))) {
+				tgtObj.createStepDefinitionParameter(srcObj.getStepDefinitionName(i), param);
+			}
 		}
 	}
 
@@ -217,6 +218,7 @@ public class ConvertUMLToCucumber extends Converter {
 		return name;
 	}
 
+	// TODO combine these two methods if they're still needed
 	private String getStepDefName(String stepName) {
 		String objectName = getObjectName(stepName);
 		String objectType = Utilities.upperFirst(StepHelper.getObjectType(stepName));
@@ -233,12 +235,12 @@ public class ConvertUMLToCucumber extends Converter {
 				+ objectType + ".java";
 	}
 
-	protected CucumberJavaWrapper getTgtObj2(String stepName) throws Exception {
+	private CucumberJavaWrapper getTgtObj2(String stepName) throws Exception {
 		String path = getStepDefName(stepName);
 		return (CucumberJavaWrapper) ((CucumberProject) tgtPrj).getObject(path);
 	}
 
-	protected CucumberJavaWrapper getTgtObj3(String stepName) throws Exception {
+	private CucumberJavaWrapper getTgtObj3(String stepName) throws Exception {
 		String path = getStepObjName(stepName);
 		return (CucumberJavaWrapper) ((CucumberProject) tgtPrj).getObject(path);
 	}

@@ -141,10 +141,11 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return step;
 	}
 
-	public Interaction createStepDefinition(Interaction abstractScenario, String stepName) {
+	public Interaction createStepDefinition(String stepName) {
 		String keyword = stepName.split(" ")[0];
 		// TODO this should be an operation in the future?
 		Interaction stepDefinition = createInteraction(theClass, stepName.substring(keyword.length() + 1), "");
+		// TODO rename StepDefinition to something better
 		createAnnotation(stepDefinition, "StepDefinition", "Keyword", keyword);
 		return stepDefinition;
 	}
@@ -427,8 +428,27 @@ public class UMLClassWrapper implements ConvertibleObject {
 		}
 	}
 
-	public String getStepDefinition(Interaction stepDef) {
+	public String getStepDefinitionName(Interaction stepDef) {
 		return stepDef.getName();
+	}
+
+	public void createStepDefinitionParameter(Interaction stepDef, String parameterName) {
+		if (!parameterName.isEmpty()) {
+			// TODO maybe use UML parameters in the future?
+			createAnnotation(stepDef, "parameters", parameterName);
+		}
+	}
+
+	public ArrayList<String> getStepDefinitionParameterList(String stepDefinitionName) {
+
+		Interaction stepDefinition = createInteraction(theClass, stepDefinitionName, "");
+		ArrayList<String> parameters = new ArrayList<String>();
+		if (stepDefinition.getEAnnotation("parameters") != null) {
+			for (Entry<String, String> t : stepDefinition.getEAnnotation("parameters").getDetails()) {
+				parameters.add(t.getKey());
+			}
+		}
+		return parameters;
 	}
 
 }
