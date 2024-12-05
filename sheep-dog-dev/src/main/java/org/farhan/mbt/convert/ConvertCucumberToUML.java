@@ -24,6 +24,7 @@ public class ConvertCucumberToUML extends Converter {
 
 	private CucumberFeatureWrapper srcObj;
 	private UMLClassWrapper tgtObj;
+	private UMLClassWrapper tgtObj2;
 	private String lastComponent = "InitialComponent";
 
 	public ConvertCucumberToUML(String tags, ObjectRepository fa) {
@@ -50,10 +51,9 @@ public class ConvertCucumberToUML extends Converter {
 
 	private void convertDocString(Message step, Step stepSrc) {
 		tgtObj.createDocString(step, srcObj.getDocString(stepSrc));
-		
-		UMLClassWrapper stpObj = (UMLClassWrapper) tgtPrj.createObject(getStepObjName(stepSrc.getName()));
-		Interaction stepDef = stpObj.createStepDefinition(srcObj.getStep(stepSrc));
-		stpObj.createStepDefinitionParameter(stepDef, "Content");
+
+		Interaction stepDef = tgtObj2.createStepDefinition(srcObj.getStep(stepSrc));
+		tgtObj2.createStepDefinitionParameter(stepDef, "Content");
 	}
 
 	private void convertExamples(Interaction scenarioOutline, Examples examplesSrc) {
@@ -100,8 +100,11 @@ public class ConvertCucumberToUML extends Converter {
 	private void convertStep(Interaction abstractScenario, Step stepSrc, AbstractScenario abstractScenarioSrc) {
 		Message step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
 
-		UMLClassWrapper stpObj = (UMLClassWrapper) tgtPrj.createObject(getStepObjName(stepSrc.getName()));
-		stpObj.createStepDefinition(srcObj.getStep(stepSrc));
+		// TODO in the future, these two lines should be moved out of this method.
+		// Instead the 2nd layer of feature files should be parsed if feature files are
+		// being used instead of asciidoctor files
+		tgtObj2 = (UMLClassWrapper) tgtPrj.createObject(getStepObjName(stepSrc.getName()));
+		tgtObj2.createStepDefinition(srcObj.getStep(stepSrc));
 
 		if (srcObj.hasDocString(stepSrc)) {
 			convertDocString(step, stepSrc);
@@ -110,13 +113,20 @@ public class ConvertCucumberToUML extends Converter {
 		}
 	}
 
-	// TODO each converter needs its own object name converter?
-	private String getStepObjName(String stepName) {
-		String objectName = getObjectName(stepName);
-		String objectType = Utilities.upperFirst(StepHelper.getObjectType(stepName));
-		String componentName = getComponentName(stepName);
-		return ConvertibleProject.TEST_OBJECTS + "/" + componentName + "/" + objectName + objectType
-				+ ".java";
+	private void convertStepList(Interaction abstractScenario, EList<Step> stepList,
+			AbstractScenario abstractScenarioSrc) {
+		for (Step step : stepList) {
+			convertStep(abstractScenario, step, abstractScenarioSrc);
+		}
+	}
+
+	private void convertStepTable(Message step, Step stepSrc, AbstractScenario abstractScenarioSrc) {
+		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
+
+		Interaction stepDef = tgtObj2.createStepDefinition(srcObj.getStep(stepSrc));
+		for (String param : srcObj.getStepTable(stepSrc).getFirst()) {
+			tgtObj2.createStepDefinitionParameter(stepDef, param);
+		}
 	}
 
 	protected String getComponentName(String step) {
@@ -132,6 +142,11 @@ public class ConvertCucumberToUML extends Converter {
 		return name;
 	}
 
+	@Override
+	protected ArrayList<ConvertibleObject> getFeatures(String layer) {
+		return srcPrj.getObjects(layer);
+	}
+
 	private String getObjectName(String step) {
 		String name = StepHelper.getObjectName(step);
 		String nameParts[] = name.split("/");
@@ -143,20 +158,14 @@ public class ConvertCucumberToUML extends Converter {
 		return name;
 	}
 
-	private void convertStepList(Interaction abstractScenario, EList<Step> stepList,
-			AbstractScenario abstractScenarioSrc) {
-		for (Step step : stepList) {
-			convertStep(abstractScenario, step, abstractScenarioSrc);
-		}
-	}
-
-	private void convertStepTable(Message step, Step stepSrc, AbstractScenario abstractScenarioSrc) {
-		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
-	}
-
-	@Override
-	protected ArrayList<ConvertibleObject> getFeatures(String layer) {
-		return srcPrj.getObjects(layer);
+	// TODO each converter needs its own object name converter? If each step is a
+	// valid according to StepHelper, then when creating elements in the UML model,
+	// it should handle name conversions
+	private String getStepObjName(String stepName) {
+		String objectName = getObjectName(stepName);
+		String objectType = Utilities.upperFirst(StepHelper.getObjectType(stepName));
+		String componentName = getComponentName(stepName);
+		return ConvertibleProject.TEST_OBJECTS + "/" + componentName + "/" + objectName + objectType + ".java";
 	}
 
 	@Override

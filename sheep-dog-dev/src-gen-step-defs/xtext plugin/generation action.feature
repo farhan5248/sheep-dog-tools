@@ -1,4 +1,0 @@
-Object: generation action
-
-  Definition: is performed
-

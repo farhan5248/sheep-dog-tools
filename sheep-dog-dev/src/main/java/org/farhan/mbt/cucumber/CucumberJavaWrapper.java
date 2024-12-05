@@ -49,31 +49,15 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		}
 	}
 
-	public void createStepDefinitionParameter(String step, String param) throws Exception {
+	public MethodDeclaration createStepDefinition(String step) throws Exception {
 		if (isStepObj()) {
-			MethodDeclaration aMethod = getMethod(getSetOrAssert(step) + getSection(step) + "Content");
-			aMethod.removeBody();
-			addParameter(aMethod, "HashMap<String, String>", "keyMap");
+			return createStepDefinitionForStepObj(step);
 		} else {
-			MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(step));
-			addParameter(aMethod, "String", "docString");
-			BlockStmt body = aMethod.getBody().get();
-			String statement = getCallForFactory(step) + getCallForInputOutputsForDocString(step) + ";";
-			boolean hasStatement = false;
-			for (Statement s : body.getStatements()) {
-				if (s.toString().contentEquals(statement)) {
-					hasStatement = true;
-				}
-			}
-			if (!hasStatement) {
-				body.addStatement(statement);
-				body.getStatements().add(2, body.getStatements().getLast().get());
-				body.getStatements().removeLast();
-			}
+			return createStepDefinitionForStepDef(step);
 		}
 	}
 
-	protected MethodDeclaration createStepForStepDef(String step) throws Exception {
+	protected MethodDeclaration createStepDefinitionForStepDef(String step) throws Exception {
 		theJavaClass.addImport(getFactoryImport(step));
 		MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(step));
 		{
@@ -97,19 +81,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		return aMethod;
 	}
 
-	public MethodDeclaration createStep(String step) throws Exception {
-		if (isStepObj()) {
-			return createStepForStepObj(step);
-		} else {
-			return createStepForStepDef(step);
-		}
-	}
-
-	protected String getFactoryImport(String step) {
-		return "org.farhan.common." + getFactoryName(step);
-	}
-
-	protected MethodDeclaration createStepForStepObj(String step) throws Exception {
+	protected MethodDeclaration createStepDefinitionForStepObj(String step) throws Exception {
 		if (theJavaClass.getImports().isEmpty()) {
 			theJavaClass.addImport("java.util.HashMap");
 		}
@@ -126,41 +98,6 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 			// TODO rename this to createStepForStepObjWithoutAttachment. have the converter
 			// call either this or a docstring or datatable method
 			return null;
-		}
-	}
-
-	public void createStepTable(String step, ArrayList<ArrayList<String>> stepTableRowList) throws Exception {
-		if (isStepObj()) {
-			createStepTableForStepObj(step, stepTableRowList);
-		} else {
-			createStepTableForStepDef(step);
-		}
-	}
-
-	protected void createStepTableForStepDef(String step) throws Exception {
-		theJavaClass.addImport("io.cucumber.datatable.DataTable");
-		MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(step));
-		addParameter(aMethod, "DataTable", "dataTable");
-		BlockStmt body = aMethod.getBody().get();
-		if (StepHelper.isEdge(step) && body.getStatements().size() == 4
-				|| !StepHelper.isEdge(step) && body.getStatements().size() == 3) {
-			return;
-		} else {
-			body.addStatement(getCallForFactory(step) + getCallForInputOutputsForDataTable(step) + ";");
-			body.getStatements().add(2, body.getStatements().getLast().get());
-			body.getStatements().removeLast();
-		}
-	}
-
-	protected void createStepTableForStepObj(String step, ArrayList<ArrayList<String>> stepTableRowList)
-			throws Exception {
-		String setOrAssert = getSetOrAssert(step);
-		String sectionName = getSection(step);
-		for (String columnName : stepTableRowList.getFirst()) {
-			MethodDeclaration aMethod = getMethod(
-					setOrAssert + sectionName + Utilities.upperFirst(removeSpecialChars(columnName)));
-			aMethod.removeBody();
-			addParameter(aMethod, "HashMap<String, String>", "keyMap");
 		}
 	}
 
@@ -207,6 +144,10 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		return ".transition()";
 	}
 
+	protected String getFactoryImport(String step) {
+		return "org.farhan.common." + getFactoryName(step);
+	}
+
 	protected String getFactoryName(String step) {
 		String name = StepHelper.getComponentName(step);
 		if (name.isEmpty()) {
@@ -216,11 +157,6 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		}
 		name = removeSpecialChars(name);
 		return Utilities.upperFirst(name) + "Factory";
-	}
-
-	@Override
-	public String getPath() {
-		return thePath;
 	}
 
 	protected String getInterfaceName(String step) {
@@ -238,13 +174,6 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		} else {
 			return getType().getMethodsByName(methodName).getFirst();
 		}
-	}
-
-	private String lowerFirst(String text) {
-		if (!text.isEmpty()) {
-			return text.substring(0, 1).toLowerCase() + text.substring(1);
-		}
-		return text;
 	}
 
 	protected String getMethodNameForStepDef(String step) {
@@ -265,6 +194,11 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		packageName = packageName.replace("/", ".");
 		packageName = packageName.replaceFirst("^.*org.farhan", "org.farhan");
 		return packageName;
+	}
+
+	@Override
+	public String getPath() {
+		return thePath;
 	}
 
 	protected String getSection(String step) {
@@ -306,8 +240,23 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		return modality;
 	}
 
+	private Statement getStatement(BlockStmt body, String statement) {
+		for (Statement s : body.getStatements()) {
+			if (s.toString().contentEquals(statement)) {
+				return s;
+			}
+		}
+		return null;
+	}
+
 	protected ClassOrInterfaceDeclaration getType() {
 		return (ClassOrInterfaceDeclaration) theJavaClass.getType(0);
+	}
+
+	private boolean isDocString(String param) {
+		// TODO think of a better way of handling docstring vs table than relying on the
+		// presence of a field
+		return param.contentEquals("Content");
 	}
 
 	protected boolean isStepObj() {
@@ -316,6 +265,13 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		} else {
 			return true;
 		}
+	}
+
+	private String lowerFirst(String text) {
+		if (!text.isEmpty()) {
+			return text.substring(0, 1).toLowerCase() + text.substring(1);
+		}
+		return text;
 	}
 
 	@Override
@@ -345,5 +301,49 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	@Override
 	public void save(ObjectRepository fa) throws Exception {
 		fa.put(ConvertibleProject.tags, thePath, theJavaClass.toString());
+	}
+
+	public void setStepDefinitionParameters(String stepDefinitionName, ArrayList<String> paramList) throws Exception {
+		for (String param : paramList) {
+			if (isStepObj()) {
+				setStepDefinitionParametersForStepObj(stepDefinitionName, param);
+			} else {
+				setStepDefinitionParametersForStepDef(stepDefinitionName, param);
+			}
+		}
+	}
+
+	private void setStepDefinitionParametersForStepDef(String stepDefinitionName, String param) throws Exception {
+		MethodDeclaration aMethod;
+		aMethod = getMethod(getMethodNameForStepDef(stepDefinitionName));
+		BlockStmt body = aMethod.getBody().get();
+		String statement;
+		if (isDocString(param)) {
+			addParameter(aMethod, "String", "docString");
+			statement = getCallForFactory(stepDefinitionName) + getCallForInputOutputsForDocString(stepDefinitionName)
+					+ ";";
+		} else {
+			theJavaClass.addImport("io.cucumber.datatable.DataTable");
+			addParameter(aMethod, "DataTable", "dataTable");
+			statement = getCallForFactory(stepDefinitionName) + getCallForInputOutputsForDataTable(stepDefinitionName)
+					+ ";";
+		}
+		if (getStatement(body, statement) == null) {
+			body.addStatement(statement);
+			body.getStatements().add(2, body.getStatements().getLast().get());
+			body.getStatements().removeLast();
+		}
+	}
+
+	private void setStepDefinitionParametersForStepObj(String stepDefinitionName, String param) throws Exception {
+		MethodDeclaration aMethod;
+		if (isDocString(param)) {
+			aMethod = getMethod(getSetOrAssert(stepDefinitionName) + getSection(stepDefinitionName) + "Content");
+		} else {
+			aMethod = getMethod(getSetOrAssert(stepDefinitionName) + getSection(stepDefinitionName)
+					+ Utilities.upperFirst(removeSpecialChars(param)));
+		}
+		aMethod.removeBody();
+		addParameter(aMethod, "HashMap<String, String>", "keyMap");
 	}
 }

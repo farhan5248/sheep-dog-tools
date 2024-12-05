@@ -24,25 +24,14 @@ import org.farhan.helper.StepHelper;
 
 public class ConvertUMLToCucumber extends Converter {
 
-	public ConvertUMLToCucumber(String tags, ObjectRepository fa) {
-		super(tags, fa);
-	}
-
 	private String lastComponent = "InitialComponent";
+
 	private UMLClassWrapper srcObj;
 	private CucumberFeatureWrapper tgtObj;
+	private CucumberJavaWrapper tgtObj2;
 
-	// TODO temporarily overriding until incremental model updates are implemented
-	protected void convertFeatures() throws Exception {
-		for (ConvertibleObject co : srcPrj.getObjects(ConvertibleProject.TEST_OBJECTS)) {
-			convertStepObject(co);
-		}
-		for (ConvertibleObject co : srcPrj.getObjects(ConvertibleProject.TEST_OBJECTS)) {
-			convertStepDefinition(co);
-		}
-		for (ConvertibleObject co : getFeatures(ConvertibleProject.TEST_CASES)) {
-			convertFeature(co);
-		}
+	public ConvertUMLToCucumber(String tags, ObjectRepository fa) {
+		super(tags, fa);
 	}
 
 	protected void convertAbstractScenarioList() throws Exception {
@@ -89,57 +78,16 @@ public class ConvertUMLToCucumber extends Converter {
 		convertAbstractScenarioList();
 	}
 
-	private void convertStepObject(ConvertibleObject theObject) throws Exception {
-		srcObj = (UMLClassWrapper) theObject;
-
-		// TODO put this into step def name
-		String path = srcObj.getQualifiedName();
-		String componentName = path.split("::")[2];
-		path = path.replace("pst::" + ConvertibleProject.TEST_OBJECTS + "::" + componentName,
-				"::" + componentName.toLowerCase());
-		path = path.replace("::", "/");
-		path = tgtPrj.getDir(ConvertibleProject.TEST_OBJECTS) + path
-				+ tgtPrj.getFileExt(ConvertibleProject.TEST_OBJECTS);
-
-		CucumberJavaWrapper tgtObj = (CucumberJavaWrapper) tgtPrj.createObject(path);
-		if (fa.contains(tags, path)) {
-			tgtObj.parse(fa.get(tags, path));
+	// TODO temporarily overriding until incremental model updates are implemented
+	protected void convertFeatures() throws Exception {
+		for (ConvertibleObject co : srcPrj.getObjects(ConvertibleProject.TEST_OBJECTS)) {
+			convertObjectFields(co);
 		}
-
-		// TODO put this in a method called convertStepDefinition
-		for (Interaction i : srcObj.getObjectStepList()) {
-			// TODO rename createStep to createStepDefinition
-			tgtObj.createStep(srcObj.getStepDefinitionName(i));
-			for (String param : srcObj.getStepDefinitionParameterList(srcObj.getStepDefinitionName(i))) {
-				tgtObj.createStepDefinitionParameter(srcObj.getStepDefinitionName(i), param);
-			}
+		for (ConvertibleObject co : srcPrj.getObjects(ConvertibleProject.TEST_OBJECTS)) {
+			convertObjectSteps(co);
 		}
-	}
-
-	private void convertStepDefinition(ConvertibleObject theObject) throws Exception {
-		srcObj = (UMLClassWrapper) theObject;
-
-		// TODO put this into step def name
-		String path = srcObj.getQualifiedName();
-		String[] pathParts = path.split("::");
-		String componentName = pathParts[2];
-		String objectName = pathParts[pathParts.length - 1];
-		path = path.replace("pst::" + ConvertibleProject.TEST_OBJECTS + "::" + componentName,
-				"::" + componentName.toLowerCase());
-		path = path.replace(objectName, Utilities.upperFirst(componentName) + objectName + "Steps");
-		path = path.replace("::", "/");
-		path = tgtPrj.getDir(ConvertibleProject.TEST_STEPS) + path + tgtPrj.getFileExt(ConvertibleProject.TEST_STEPS);
-
-		CucumberJavaWrapper tgtObj = (CucumberJavaWrapper) tgtPrj.createObject(path);
-		if (fa.contains(tags, path)) {
-			tgtObj.parse(fa.get(tags, path));
-		}
-
-		for (Interaction i : srcObj.getObjectStepList()) {
-			tgtObj.createStep(srcObj.getStepDefinitionName(i));
-			for (String param : srcObj.getStepDefinitionParameterList(srcObj.getStepDefinitionName(i))) {
-				tgtObj.createStepDefinitionParameter(srcObj.getStepDefinitionName(i), param);
-			}
+		for (ConvertibleObject co : getFeatures(ConvertibleProject.TEST_CASES)) {
+			convertFeature(co);
 		}
 	}
 
@@ -172,6 +120,30 @@ public class ConvertUMLToCucumber extends Converter {
 		}
 	}
 
+	private void convertObjectSteps(ConvertibleObject theObject) throws Exception {
+		srcObj = (UMLClassWrapper) theObject;
+		String path = getPath(ConvertibleProject.TEST_STEPS);
+		tgtObj2 = (CucumberJavaWrapper) tgtPrj.createObject(path);
+		// TODO This is inconsistent. Here we're updating the java files but replacing
+		// the feature file. Perhaps the feature file should also be parsed and updated?
+		// This way if a developer adds some temp test cases, they're not lost
+		tgtObj2.parse(fa.contains(tags, path) ? fa.get(tags, path) : "");
+		convertStepDefinitionList();
+	}
+
+	private void convertStepDefinitionList() throws Exception {
+		for (Interaction stepDefinition : srcObj.getStepDefinitionList()) {
+			convertStepDefinition(stepDefinition);
+		}
+	}
+
+	private void convertStepDefinition(Interaction stepDefinition) throws Exception {
+		String stepDefinitionName = srcObj.getStepDefinitionName(stepDefinition);
+		tgtObj2.createStepDefinition(stepDefinitionName);
+		tgtObj2.setStepDefinitionParameters(stepDefinitionName,
+				srcObj.getStepDefinitionParameterList(stepDefinitionName));
+	}
+
 	protected void convertStepList(AbstractScenario abstractScenario, ArrayList<Message> stepList,
 			Interaction srcScenario) throws Exception {
 		for (Message step : stepList) {
@@ -179,14 +151,16 @@ public class ConvertUMLToCucumber extends Converter {
 		}
 	}
 
+	private void convertObjectFields(ConvertibleObject theObject) throws Exception {
+		srcObj = (UMLClassWrapper) theObject;
+		String path = getPath(ConvertibleProject.TEST_OBJECTS);
+		tgtObj2 = (CucumberJavaWrapper) tgtPrj.createObject(path);
+		tgtObj2.parse(fa.contains(tags, path) ? fa.get(tags, path) : "");
+		convertStepDefinitionList();
+	}
+
 	protected void convertStepTable(Step step, Message srcStep) throws Exception {
 		tgtObj.createStepTable(step, srcObj.getStepTable(srcStep));
-
-		String stepName = srcObj.getStep(srcStep);
-		stepName = stepName.substring(stepName.split(" ")[0].length() + 1);
-
-		getTgtObj2(stepName).createStepTable(stepName, srcObj.getStepTable(srcStep));
-		getTgtObj3(stepName).createStepTable(stepName, srcObj.getStepTable(srcStep));
 	}
 
 	protected String getComponentName(String step) {
@@ -207,42 +181,22 @@ public class ConvertUMLToCucumber extends Converter {
 		return srcPrj.getObjects(layer);
 	}
 
-	private String getObjectName(String step) {
-		String name = StepHelper.getObjectName(step);
-		String nameParts[] = name.split("/");
-		name = nameParts[nameParts.length - 1];
-		name = Utilities.removeDelimiterAndCapitalize(name, "\\.");
-		name = Utilities.removeDelimiterAndCapitalize(name, "\\-");
-		name = Utilities.removeDelimiterAndCapitalize(name, " ");
-		name = Utilities.upperFirst(name);
-		return name;
-	}
+	private String getPath(String layer) {
+		String path = srcObj.getQualifiedName();
+		String[] pathParts = path.split("::");
+		String componentName = pathParts[2];
+		path = path.replace("pst::" + ConvertibleProject.TEST_OBJECTS + "::" + componentName,
+				"::" + componentName.toLowerCase());
 
-	// TODO combine these two methods if they're still needed
-	private String getStepDefName(String stepName) {
-		String objectName = getObjectName(stepName);
-		String objectType = Utilities.upperFirst(StepHelper.getObjectType(stepName));
-		String componentName = getComponentName(stepName);
-		return tgtPrj.getDir(ConvertibleProject.TEST_STEPS) + "/" + componentName.toLowerCase() + "/"
-				+ Utilities.upperFirst(componentName) + objectName + objectType + "Steps.java";
-	}
+		if (layer.contentEquals(ConvertibleProject.TEST_STEPS)) {
+			String objectName = pathParts[pathParts.length - 1];
+			path = path.replace(objectName, Utilities.upperFirst(componentName) + objectName + "Steps");
+		}
 
-	private String getStepObjName(String stepName) {
-		String objectName = getObjectName(stepName);
-		String objectType = Utilities.upperFirst(StepHelper.getObjectType(stepName));
-		String componentName = getComponentName(stepName);
-		return tgtPrj.getDir(ConvertibleProject.TEST_OBJECTS) + "/" + componentName.toLowerCase() + "/" + objectName
-				+ objectType + ".java";
-	}
+		path = path.replace("::", "/");
+		path = tgtPrj.getDir(layer) + path + tgtPrj.getFileExt(layer);
 
-	private CucumberJavaWrapper getTgtObj2(String stepName) throws Exception {
-		String path = getStepDefName(stepName);
-		return (CucumberJavaWrapper) ((CucumberProject) tgtPrj).getObject(path);
-	}
-
-	private CucumberJavaWrapper getTgtObj3(String stepName) throws Exception {
-		String path = getStepObjName(stepName);
-		return (CucumberJavaWrapper) ((CucumberProject) tgtPrj).getObject(path);
+		return path;
 	}
 
 	@Override
