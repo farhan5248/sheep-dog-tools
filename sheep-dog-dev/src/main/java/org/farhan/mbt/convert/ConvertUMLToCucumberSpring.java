@@ -2,7 +2,6 @@ package org.farhan.mbt.convert;
 
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.cucumber.CucumberSpringProject;
-import org.farhan.mbt.uml.UMLProject;
 
 public class ConvertUMLToCucumberSpring extends ConvertUMLToCucumber {
 
@@ -12,7 +11,7 @@ public class ConvertUMLToCucumberSpring extends ConvertUMLToCucumber {
 
 	@Override
 	public void initProjects() throws Exception {
-		srcPrj = new UMLProject(this.tags, this.fa);
+		super.initProjects();
 		tgtPrj = new CucumberSpringProject(this.tags, this.fa);
 	}
 

@@ -4,13 +4,11 @@ import java.util.ArrayList;
 
 public abstract class ConvertibleProject {
 
-	public static final String TEST_CASES = "specs";
-	public static final String TEST_STEPS = "stepdefs";
-	public static final String TEST_OBJECTS = "objects";
+	public final String TEST_CASES = "specs";
+	public final String TEST_STEPS = "stepdefs";
+	public final String TEST_OBJECTS = "objects";
 	// TODO replace TEST_STEPS with OBJECT_STEPS and create OBJECT_FIELDS
 
-	// TODO make these two private and handle all file read/writes through the
-	// project
 	public static String tags = "";
 	protected ObjectRepository fa;
 

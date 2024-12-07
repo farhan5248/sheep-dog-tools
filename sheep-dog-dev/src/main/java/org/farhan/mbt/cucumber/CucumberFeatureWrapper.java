@@ -2,6 +2,7 @@ package org.farhan.mbt.cucumber;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
@@ -305,23 +306,20 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 
 	@Override
 	public void parse(String text) throws Exception {
-		try {
-			if (text.isEmpty()) {
-				return;
-			}
-			URI uri = URI.createFileURI(thePath);
-			Resource resource = new ResourceSetImpl().createResource(uri);
-			InputStream content = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
-			resource.load(content, Collections.EMPTY_MAP);
-			theFeature = (Feature) resource.getContents().get(0);
-		} catch (Exception e) {
-			throw new Exception("There was a problem loading file: " + thePath);
+		if (text.isEmpty()) {
+			return;
 		}
+		URI uri = URI.createFileURI(thePath);
+		Resource resource = new ResourceSetImpl().createResource(uri);
+		InputStream content = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
+		resource.load(content, Collections.EMPTY_MAP);
+		theFeature = (Feature) resource.getContents().get(0);
 	}
 
 	@Override
 	public void save(ObjectRepository fa) throws Exception {
 		URI uri = URI.createFileURI(thePath);
+		// TODO isn't this done in the initProjects?
 		CucumberStandaloneSetup.doSetup();
 		Resource resource = new ResourceSetImpl().createResource(uri);
 		resource.getContents().add(theFeature);
@@ -329,6 +327,22 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		OutputStream os = new ByteArrayOutputStream();
 		resource.save(os, options);
 		fa.put(ConvertibleProject.tags, thePath, os.toString());
+	}
+
+	public String toString() {
+		URI uri = URI.createFileURI(thePath);
+		// TODO isn't this done in the initProjects?
+		CucumberStandaloneSetup.doSetup();
+		Resource resource = new ResourceSetImpl().createResource(uri);
+		resource.getContents().add(theFeature);
+		Map<Object, Object> options = SaveOptions.newBuilder().format().getOptions().toOptionsMap();
+		OutputStream os = new ByteArrayOutputStream();
+		try {
+			resource.save(os, options);
+		} catch (IOException e) {
+			return null;
+		}
+		return os.toString();
 	}
 
 	public void setBackgroundDescription(Background background, String backgroundDescription) {

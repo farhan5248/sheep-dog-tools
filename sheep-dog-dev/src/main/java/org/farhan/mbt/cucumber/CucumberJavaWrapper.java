@@ -302,6 +302,10 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	public void save(ObjectRepository fa) throws Exception {
 		fa.put(ConvertibleProject.tags, thePath, theJavaClass.toString());
 	}
+	
+	public String toString() {
+		return theJavaClass.toString();
+	}
 
 	public void setStepDefinitionParameters(String stepDefinitionName, ArrayList<String> paramList) throws Exception {
 		for (String param : paramList) {

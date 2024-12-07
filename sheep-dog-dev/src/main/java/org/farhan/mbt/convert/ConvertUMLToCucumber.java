@@ -10,10 +10,9 @@ import org.farhan.mbt.cucumber.Examples;
 import org.farhan.mbt.cucumber.Scenario;
 import org.farhan.mbt.cucumber.ScenarioOutline;
 import org.farhan.mbt.cucumber.Step;
-import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.ObjectRepository;
-import org.farhan.mbt.core.Converter;
+import org.farhan.mbt.CucumberStandaloneSetup;
+import org.farhan.mbt.core.ConverterNew;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberJavaWrapper;
@@ -22,7 +21,7 @@ import org.farhan.mbt.uml.UMLClassWrapper;
 import org.farhan.mbt.uml.UMLProject;
 import org.farhan.helper.StepHelper;
 
-public class ConvertUMLToCucumber extends Converter {
+public class ConvertUMLToCucumber extends ConverterNew {
 
 	private String lastComponent = "InitialComponent";
 
@@ -68,29 +67,6 @@ public class ConvertUMLToCucumber extends Converter {
 		tgtObj.createExamplesRow(examples, examplesRow);
 	}
 
-	@Override
-	protected void convertFeature(ConvertibleObject theObject) throws Exception {
-		srcObj = (UMLClassWrapper) theObject;
-		tgtObj = (CucumberFeatureWrapper) tgtPrj.createObject(convertQualifiedName(srcObj.getQualifiedName()));
-		tgtObj.setFeatureName(srcObj.getFeatureName());
-		tgtObj.setFeatureTags(srcObj.getFeatureTags());
-		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
-		convertAbstractScenarioList();
-	}
-
-	// TODO temporarily overriding until incremental model updates are implemented
-	protected void convertFeatures() throws Exception {
-		for (ConvertibleObject co : srcPrj.getObjects(ConvertibleProject.TEST_OBJECTS)) {
-			convertObjectFields(co);
-		}
-		for (ConvertibleObject co : srcPrj.getObjects(ConvertibleProject.TEST_OBJECTS)) {
-			convertObjectSteps(co);
-		}
-		for (ConvertibleObject co : getFeatures(ConvertibleProject.TEST_CASES)) {
-			convertFeature(co);
-		}
-	}
-
 	protected void convertScenario(Interaction srcScenario) throws Exception {
 		Scenario scenario = tgtObj.createScenario(srcObj.getScenarioName(srcScenario));
 		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(srcScenario));
@@ -120,17 +96,6 @@ public class ConvertUMLToCucumber extends Converter {
 		}
 	}
 
-	private void convertObjectSteps(ConvertibleObject theObject) throws Exception {
-		srcObj = (UMLClassWrapper) theObject;
-		String path = getPath(ConvertibleProject.TEST_STEPS);
-		tgtObj2 = (CucumberJavaWrapper) tgtPrj.createObject(path);
-		// TODO This is inconsistent. Here we're updating the java files but replacing
-		// the feature file. Perhaps the feature file should also be parsed and updated?
-		// This way if a developer adds some temp test cases, they're not lost
-		tgtObj2.parse(fa.contains(tags, path) ? fa.get(tags, path) : "");
-		convertStepDefinitionList();
-	}
-
 	private void convertStepDefinitionList() throws Exception {
 		for (Interaction stepDefinition : srcObj.getStepDefinitionList()) {
 			convertStepDefinition(stepDefinition);
@@ -151,14 +116,6 @@ public class ConvertUMLToCucumber extends Converter {
 		}
 	}
 
-	private void convertObjectFields(ConvertibleObject theObject) throws Exception {
-		srcObj = (UMLClassWrapper) theObject;
-		String path = getPath(ConvertibleProject.TEST_OBJECTS);
-		tgtObj2 = (CucumberJavaWrapper) tgtPrj.createObject(path);
-		tgtObj2.parse(fa.contains(tags, path) ? fa.get(tags, path) : "");
-		convertStepDefinitionList();
-	}
-
 	protected void convertStepTable(Step step, Message srcStep) throws Exception {
 		tgtObj.createStepTable(step, srcObj.getStepTable(srcStep));
 	}
@@ -176,25 +133,19 @@ public class ConvertUMLToCucumber extends Converter {
 		return name;
 	}
 
-	@Override
-	protected ArrayList<ConvertibleObject> getFeatures(String layer) {
-		return srcPrj.getObjects(layer);
-	}
-
-	private String getPath(String layer) {
+	private String getPath(String tgtLayer) {
 		String path = srcObj.getQualifiedName();
 		String[] pathParts = path.split("::");
 		String componentName = pathParts[2];
-		path = path.replace("pst::" + ConvertibleProject.TEST_OBJECTS + "::" + componentName,
-				"::" + componentName.toLowerCase());
+		path = path.replace("pst::" + srcPrj.TEST_OBJECTS + "::" + componentName, "::" + componentName.toLowerCase());
 
-		if (layer.contentEquals(ConvertibleProject.TEST_STEPS)) {
+		if (tgtLayer.contentEquals(tgtPrj.TEST_STEPS)) {
 			String objectName = pathParts[pathParts.length - 1];
 			path = path.replace(objectName, Utilities.upperFirst(componentName) + objectName + "Steps");
 		}
 
 		path = path.replace("::", "/");
-		path = tgtPrj.getDir(layer) + path + tgtPrj.getFileExt(layer);
+		path = tgtPrj.getDir(tgtLayer) + path + tgtPrj.getFileExt(tgtLayer);
 
 		return path;
 	}
@@ -203,15 +154,53 @@ public class ConvertUMLToCucumber extends Converter {
 	public void initProjects() throws Exception {
 		srcPrj = new UMLProject(this.tags, this.fa);
 		tgtPrj = new CucumberProject(this.tags, this.fa);
+		CucumberStandaloneSetup.doSetup();
 	}
 
 	@Override
-	protected void load() throws Exception {
-		srcPrj.load();
+	public String convertObject(String tags, String path, String content) throws Exception {
+
+		if (path.startsWith(tgtPrj.getDir(tgtPrj.TEST_CASES))) {
+			return convertFeature(tags, path, content);
+		} else if (path.startsWith(tgtPrj.getDir(tgtPrj.TEST_STEPS))) {
+			return convertObjectSteps(tags, path, content);
+		} else {
+			return convertObjectFields(tags, path, content);
+		}
 	}
 
-	@Override
-	public void save() throws Exception {
-		tgtPrj.save();
+	private String convertFeature(String tags, String path, String content) throws Exception {
+
+		srcObj = (UMLClassWrapper) srcPrj.createObject(convertPath(path));
+
+		tgtObj = new CucumberFeatureWrapper(path);
+		tgtObj.parse(content);
+		tgtPrj.getObjects(tgtPrj.TEST_CASES).add(tgtObj);
+
+		tgtObj.setFeatureName(srcObj.getFeatureName());
+		tgtObj.setFeatureTags(srcObj.getFeatureTags());
+		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
+		convertAbstractScenarioList();
+		return tgtObj.toString();
+	}
+
+	private String convertObjectSteps(String tags, String path, String content) throws Exception {
+		srcObj = (UMLClassWrapper) srcPrj.createObject(convertPath(path));
+
+		tgtObj2 = new CucumberJavaWrapper(path);
+		tgtObj2.parse(content);
+		tgtPrj.getObjects(tgtPrj.TEST_STEPS).add(tgtObj2);
+		convertStepDefinitionList();
+		return tgtObj2.toString();
+	}
+
+	private String convertObjectFields(String tags, String path, String content) throws Exception {
+		srcObj = (UMLClassWrapper) srcPrj.createObject(convertPath(path));
+
+		tgtObj2 = new CucumberJavaWrapper(path);
+		tgtObj2.parse(content);
+		tgtPrj.getObjects(tgtPrj.TEST_OBJECTS).add(tgtObj2);
+		convertStepDefinitionList();
+		return tgtObj2.toString();
 	}
 }

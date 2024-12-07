@@ -14,9 +14,12 @@ import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.Utilities;
+import org.farhan.mbt.cucumber.AbstractScenario;
+import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.core.Converter;
+import org.farhan.mbt.core.ConverterNew;
 
-public class ConvertAsciidoctorToUML extends Converter {
+public class ConvertAsciidoctorToUML extends ConverterNew {
 
 	private AsciiDoctorAdocWrapper srcObj;
 	private UMLClassWrapper tgtObj;
@@ -61,13 +64,53 @@ public class ConvertAsciidoctorToUML extends Converter {
 	}
 
 	@Override
-	protected void convertFeature(ConvertibleObject theObject) throws Exception {
-		srcObj = (AsciiDoctorAdocWrapper) theObject;
-		tgtObj = (UMLClassWrapper) tgtPrj.createObject(convertFileName(srcObj.getFileName()));
-		tgtObj.setFeatureName(srcObj.getFeatureName());
-		tgtObj.setFeatureTags(srcObj.getFeatureTags());
-		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
-		convertAbstractScenarioList();
+	public String convertObject(String tags, String path, String content) throws Exception {
+		srcObj = new AsciiDoctorAdocWrapper(path);
+		srcObj.parse(content);
+		if (isFileSelected(srcObj, tags)) {
+			srcPrj.getObjects(srcPrj.TEST_CASES).add(srcObj);
+			tgtObj = (UMLClassWrapper) tgtPrj.createObject(convertPath(srcObj.getFileName()));
+			tgtObj.setFeatureName(srcObj.getFeatureName());
+			tgtObj.setFeatureTags(srcObj.getFeatureTags());
+			tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
+			convertAbstractScenarioList();
+			tgtPrj.save();
+		}
+		return "";
+	}
+
+	// TODO abstract away the Feature/Adoc specific stuff, perhaps make a SourceFile
+	// interfaces with Test case etc
+	private boolean isFileSelected(ConvertibleObject convertibleFile, String tags) throws Exception {
+
+		AsciiDoctorAdocWrapper ufw = (AsciiDoctorAdocWrapper) convertibleFile;
+		if (isTagged(ufw.getFeatureTags(), tags)) {
+			return true;
+		}
+		for (Section a : ufw.getAbstractScenarioList()) {
+			if (ufw.isScenarioOutline(a)) {
+				if (isTagged(ufw.getScenarioOutlineTags(a), tags)) {
+					return true;
+				}
+			} else if (!ufw.isBackground(a)) {
+				if (isTagged(ufw.getScenarioTags(a), tags)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean isTagged(ArrayList<String> tags, String tag) {
+		if (tag.isEmpty()) {
+			return true;
+		}
+		for (String t : tags) {
+			if (t.trim().contentEquals(tag)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void convertScenario(Section abstractScenario) {
@@ -110,7 +153,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		String objectName = getObjectName(stepName);
 		String objectType = Utilities.upperFirst(StepHelper.getObjectType(stepName));
 		String componentName = getComponentName(stepName);
-		return ConvertibleProject.TEST_OBJECTS + "/" + componentName + "/" + objectName + objectType + ".adoc";
+		return srcPrj.TEST_OBJECTS + "/" + componentName + "/" + objectName + objectType + ".adoc";
 	}
 
 	protected String getComponentName(String step) {
@@ -148,24 +191,9 @@ public class ConvertAsciidoctorToUML extends Converter {
 	}
 
 	@Override
-	protected ArrayList<ConvertibleObject> getFeatures(String layer) {
-		return srcPrj.getObjects(layer);
-	}
-
-	@Override
 	public void initProjects() throws Exception {
 		srcPrj = new AsciiDoctorProject(this.tags, this.fa);
 		tgtPrj = new UMLProject(this.tags, this.fa);
-	}
-
-	@Override
-	protected void load() throws Exception {
-		srcPrj.load();
-	}
-
-	@Override
-	public void save() throws Exception {
-		tgtPrj.save();
 	}
 
 }

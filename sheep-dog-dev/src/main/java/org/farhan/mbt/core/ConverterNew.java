@@ -2,42 +2,27 @@ package org.farhan.mbt.core;
 
 import java.util.ArrayList;
 
-public abstract class Converter {
+import org.farhan.mbt.cucumber.AbstractScenario;
+import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
+
+public abstract class ConverterNew {
 
 	protected String tags = "";
 	protected ConvertibleProject srcPrj;
 	protected ConvertibleProject tgtPrj;
 	protected ObjectRepository fa;
 
-	public Converter(String tags, ObjectRepository fa) {
+	public ConverterNew(String tags, ObjectRepository fa) {
 		this.tags = tags;
 		this.fa = fa;
 	}
 
-	protected abstract void convertFeature(ConvertibleObject co) throws Exception;
-
-	protected void convertFeatures() throws Exception {
-		for (ConvertibleObject co : getFeatures(srcPrj.TEST_CASES)) {
-			convertFeature(co);
-		}
-	}
-
-	protected abstract ArrayList<ConvertibleObject> getFeatures(String layer);
+	public abstract String convertObject(String tags, String path, String content) throws Exception;
 
 	public abstract void initProjects() throws Exception;
 
-	protected abstract void load() throws Exception;
-
-	public void convert() throws Exception {
-		initProjects();
-		load();
-		convertFeatures();
-		save();
-	}
-
-	protected abstract void save() throws Exception;
-
-	protected String convertFileName(String fullName) {
+	// TODO move these to UML Project
+	protected String convertPath(String fullName) {
 		String qualifiedName = fullName.replace(",", "").trim();
 		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(tgtPrj.TEST_CASES), "");
 		qualifiedName = qualifiedName.replace(srcPrj.getDir(tgtPrj.TEST_CASES), "");
@@ -48,6 +33,7 @@ public abstract class Converter {
 
 	protected String convertQualifiedName(String fullName) {
 		String pathName = fullName;
+		// This is only used in feature file to uml
 		pathName = pathName.replace("pst::" + srcPrj.TEST_CASES, tgtPrj.getDir(tgtPrj.TEST_CASES));
 		pathName = pathName.replace("::", "/");
 		pathName = pathName + tgtPrj.getFileExt(tgtPrj.TEST_CASES);

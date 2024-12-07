@@ -46,55 +46,12 @@ public class AsciiDoctorProject extends ConvertibleProject {
 		return layerFiles;
 	}
 
-	private boolean isFileSelected(ConvertibleObject convertibleFile, String tags) throws Exception {
-
-		AsciiDoctorAdocWrapper ufw = (AsciiDoctorAdocWrapper) convertibleFile;
-		if (isTagged(ufw.getFeatureTags(), tags)) {
-			return true;
-		}
-		for (Section a : ufw.getAbstractScenarioList()) {
-			if (ufw.isScenarioOutline(a)) {
-				if (isTagged(ufw.getScenarioOutlineTags(a), tags)) {
-					return true;
-				}
-			} else if (!ufw.isBackground(a)) {
-				if (isTagged(ufw.getScenarioTags(a), tags)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	private boolean isTagged(ArrayList<String> tags, String tag) {
-		if (tag.isEmpty()) {
-			return true;
-		}
-		for (String t : tags) {
-			if (t.trim().contentEquals(tag)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	@Override
 	public void load() throws Exception {
-		ArrayList<String> files = fa.list(tags, getDir(TEST_CASES), getFileExt(TEST_CASES));
-		getObjects(TEST_CASES).clear();
-		for (String f : files) {
-			createObject(f).parse(fa.get(tags, f));
-			if (!isFileSelected(getObjects(TEST_CASES).getLast(), tags)) {
-				getObjects(TEST_CASES).removeLast();
-			}
-		}
 	}
 
 	@Override
 	public void save() throws Exception {
-		for (ConvertibleObject cf : firstLayerObjects) {
-			cf.save(fa);
-		}
 	}
 
 }
