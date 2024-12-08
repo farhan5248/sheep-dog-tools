@@ -43,6 +43,7 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 	}
 
 	public Background createBackground(String backgroundName) {
+		deleteAbstractScenario(backgroundName);
 		Background background = CucumberFactory.eINSTANCE.createBackground();
 		background.setName(backgroundName);
 		theFeature.getAbstractScenarios().add(background);
@@ -88,13 +89,25 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 	}
 
 	public Scenario createScenario(String scenarioName) {
+		deleteAbstractScenario(scenarioName);
 		Scenario scenario = CucumberFactory.eINSTANCE.createScenario();
 		scenario.setName(scenarioName);
 		theFeature.getAbstractScenarios().add(scenario);
 		return scenario;
 	}
 
+	private void deleteAbstractScenario(String name) {
+		EList<AbstractScenario> list = theFeature.getAbstractScenarios();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getName().contentEquals(name)) {
+				list.remove(i);
+				return;
+			}
+		}
+	}
+
 	public ScenarioOutline createScenarioOutline(String scenarioOutlineName) {
+		deleteAbstractScenario(scenarioOutlineName);
 		ScenarioOutline scenarioOutline = CucumberFactory.eINSTANCE.createScenarioOutline();
 		scenarioOutline.setName(scenarioOutlineName);
 		theFeature.getAbstractScenarios().add(scenarioOutline);
@@ -361,6 +374,7 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 
 	public void setFeatureDescription(String featureDescription) {
 		if (!featureDescription.isEmpty()) {
+			theFeature.getStatements().clear();
 			for (String line : featureDescription.split("\n")) {
 				Statement s = CucumberFactory.eINSTANCE.createStatement();
 				s.setName(line);
@@ -395,6 +409,7 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 
 	private void setTags(EList<Tag> tagList, ArrayList<String> tags) {
 		if (!tags.isEmpty()) {
+			tagList.clear();
 			for (String t : tags) {
 				Tag tag = CucumberFactory.eINSTANCE.createTag();
 				tag.setName(t);

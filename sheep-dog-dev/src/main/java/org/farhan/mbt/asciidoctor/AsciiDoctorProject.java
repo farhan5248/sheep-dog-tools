@@ -3,7 +3,6 @@ package org.farhan.mbt.asciidoctor;
 
 import java.util.ArrayList;
 
-import org.asciidoctor.ast.Section;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.ObjectRepository;
@@ -21,6 +20,13 @@ public class AsciiDoctorProject extends ConvertibleProject {
 	@Override
 	public ConvertibleObject createObject(String path) {
 		AsciiDoctorAdocWrapper cff = new AsciiDoctorAdocWrapper(path);
+		try {
+			// TODO calculate an actual checksum for later
+			fa.put(tags, path, "sha checksum");
+		} catch (Exception e) {
+			// TODO do something better
+			return null;
+		}
 		firstLayerObjects.add(cff);
 		return cff;
 	}
@@ -52,6 +58,11 @@ public class AsciiDoctorProject extends ConvertibleProject {
 
 	@Override
 	public void save() throws Exception {
+	}
+
+	@Override
+	public void deleteObject(ConvertibleObject srcObj) {
+		firstLayerObjects.remove(srcObj);
 	}
 
 }

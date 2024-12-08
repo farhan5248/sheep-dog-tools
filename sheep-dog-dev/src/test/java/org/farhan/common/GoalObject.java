@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Assertions;
 public abstract class GoalObject extends TestObject {
 
 	protected String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/",
-			"src/test/java/org/farhan/objects/", "src/test/java/org/farhan/stepdefs/" };
+			"src/test/java/org/farhan/stepdefs/", "src/test/java/org/farhan/objects/" };
 	protected ObjectRepository or;
 	protected SourceRepository sr;
 	protected String tags;
@@ -66,7 +66,7 @@ public abstract class GoalObject extends TestObject {
 				}
 			} else {
 				for (int i = 0; i < 4; i++) {
-					for (String fileName : sr.list(dirs[i], "")) {
+					for (String fileName : or.list(tags, dirs[i], "")) {
 						String content = mojo.convertObject(tags, fileName, sr.get(fileName));
 						if (!content.isEmpty()) {
 							sr.put(fileName, content);

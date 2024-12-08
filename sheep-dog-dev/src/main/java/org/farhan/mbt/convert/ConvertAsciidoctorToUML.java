@@ -11,12 +11,8 @@ import org.farhan.helper.StepHelper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.Utilities;
-import org.farhan.mbt.cucumber.AbstractScenario;
-import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
-import org.farhan.mbt.core.Converter;
 import org.farhan.mbt.core.ConverterNew;
 
 public class ConvertAsciidoctorToUML extends ConverterNew {
@@ -65,16 +61,17 @@ public class ConvertAsciidoctorToUML extends ConverterNew {
 
 	@Override
 	public String convertObject(String tags, String path, String content) throws Exception {
-		srcObj = new AsciiDoctorAdocWrapper(path);
+		srcObj = (AsciiDoctorAdocWrapper) srcPrj.createObject(path);
 		srcObj.parse(content);
 		if (isFileSelected(srcObj, tags)) {
-			srcPrj.getObjects(srcPrj.TEST_CASES).add(srcObj);
-			tgtObj = (UMLClassWrapper) tgtPrj.createObject(convertPath(srcObj.getFileName()));
+			tgtObj = (UMLClassWrapper) tgtPrj.createObject(convertSrcPath(srcObj.getFileName()));
 			tgtObj.setFeatureName(srcObj.getFeatureName());
 			tgtObj.setFeatureTags(srcObj.getFeatureTags());
 			tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
 			convertAbstractScenarioList();
 			tgtPrj.save();
+		} else {
+			srcPrj.deleteObject(srcObj);
 		}
 		return "";
 	}
@@ -193,7 +190,9 @@ public class ConvertAsciidoctorToUML extends ConverterNew {
 	@Override
 	public void initProjects() throws Exception {
 		srcPrj = new AsciiDoctorProject(this.tags, this.fa);
+		srcPrj.load();
 		tgtPrj = new UMLProject(this.tags, this.fa);
+		tgtPrj.load();
 	}
 
 }

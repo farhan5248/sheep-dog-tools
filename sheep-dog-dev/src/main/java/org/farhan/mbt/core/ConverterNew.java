@@ -21,23 +21,36 @@ public abstract class ConverterNew {
 
 	public abstract void initProjects() throws Exception;
 
-	// TODO move these to UML Project
-	protected String convertPath(String fullName) {
-		String qualifiedName = fullName.replace(",", "").trim();
-		qualifiedName = qualifiedName.replace(srcPrj.getFileExt(tgtPrj.TEST_CASES), "");
-		qualifiedName = qualifiedName.replace(srcPrj.getDir(tgtPrj.TEST_CASES), "");
+	// TODO this is temp until I delete the second layer of feature files
+	protected String convertSrcPath(String path, String layer) {
+		return convertPath(path, srcPrj, tgtPrj, layer);
+	}
+
+	protected String convertSrcPath(String path) {
+		return convertPath(path, srcPrj, tgtPrj);
+	}
+
+	protected String convertTgtPath(String path) {
+		return convertPath(path, tgtPrj, srcPrj);
+	}
+
+	private String convertPath(String path, ConvertibleProject filesPrj, ConvertibleProject modelPrj) {
+		String layer = filesPrj.TEST_CASES;
+		if (path.startsWith(filesPrj.getDir(filesPrj.TEST_STEPS))) {
+			layer = filesPrj.TEST_STEPS;
+		}
+		if (path.startsWith(filesPrj.getDir(filesPrj.TEST_OBJECTS))) {
+			layer = filesPrj.TEST_OBJECTS;
+		}
+		return convertPath(path, filesPrj, modelPrj, layer);
+	}
+
+	private String convertPath(String path, ConvertibleProject filesPrj, ConvertibleProject modelPrj, String layer) {
+		String qualifiedName = path.replace(",", "").trim();
+		qualifiedName = qualifiedName.replace(filesPrj.getFileExt(layer), "");
+		qualifiedName = qualifiedName.replace(filesPrj.getDir(layer), "");
 		qualifiedName = qualifiedName.replace("/", "::");
-		qualifiedName = "pst::" + srcPrj.TEST_CASES + qualifiedName;
+		qualifiedName = "pst::" + layer + qualifiedName;
 		return qualifiedName;
 	}
-
-	protected String convertQualifiedName(String fullName) {
-		String pathName = fullName;
-		// This is only used in feature file to uml
-		pathName = pathName.replace("pst::" + srcPrj.TEST_CASES, tgtPrj.getDir(tgtPrj.TEST_CASES));
-		pathName = pathName.replace("::", "/");
-		pathName = pathName + tgtPrj.getFileExt(tgtPrj.TEST_CASES);
-		return pathName;
-	}
-
 }

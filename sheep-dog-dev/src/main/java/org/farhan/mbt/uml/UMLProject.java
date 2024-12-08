@@ -28,8 +28,10 @@ import org.farhan.mbt.core.ObjectRepository;
 
 public class UMLProject extends ConvertibleProject {
 
+	// TODO maybe just make one list and filter it by layer?
 	private ArrayList<ConvertibleObject> firstLayerObjects;
 	private ArrayList<ConvertibleObject> testObjects;
+	private ArrayList<ConvertibleObject> testSteps;
 
 	private Model theSystem;
 
@@ -37,6 +39,7 @@ public class UMLProject extends ConvertibleProject {
 		super(fa);
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
 		testObjects = new ArrayList<ConvertibleObject>();
+		testSteps = new ArrayList<ConvertibleObject>();
 		theSystem = UMLFactory.eINSTANCE.createModel();
 		theSystem.setName("pst");
 		theSystem.createNestedPackage(TEST_CASES);
@@ -52,20 +55,21 @@ public class UMLProject extends ConvertibleProject {
 	@Override
 	public void load() throws Exception {
 		String path = getDir("") + theSystem.getName() + getFileExt("");
-		URI uri = URI.createFileURI(path);
-		// UMLResourcesUtil is to load a UML model outside of Eclipse through Maven
-		ResourceSet resourceSet = UMLResourcesUtil.init(new ResourceSetImpl());
-		Resource resource = resourceSet.createResource(uri);
-		InputStream content = new ByteArrayInputStream(fa.get(tags, path).getBytes(StandardCharsets.UTF_8));
-		resource.load(content, Collections.EMPTY_MAP);
-		theSystem = (Model) resource.getContents().getFirst();
-		ArrayList<Class> objects = getPackagedClasses(theSystem.getNestedPackage(TEST_CASES));
-		for (Class c : objects) {
-			createObject(c.getQualifiedName());
-		}
-		objects = getPackagedClasses(theSystem.getNestedPackage(TEST_OBJECTS));
-		for (Class c : objects) {
-			createObject(c.getQualifiedName());
+		if (fa.contains(tags, path)) {
+			URI uri = URI.createFileURI(path);
+			ResourceSet resourceSet = UMLResourcesUtil.init(new ResourceSetImpl());
+			Resource resource = resourceSet.createResource(uri);
+			InputStream content = new ByteArrayInputStream(fa.get(tags, path).getBytes(StandardCharsets.UTF_8));
+			resource.load(content, Collections.EMPTY_MAP);
+			theSystem = (Model) resource.getContents().getFirst();
+			ArrayList<Class> objects = getPackagedClasses(theSystem.getNestedPackage(TEST_CASES));
+			for (Class c : objects) {
+				createObject(c.getQualifiedName());
+			}
+			objects = getPackagedClasses(theSystem.getNestedPackage(TEST_OBJECTS));
+			for (Class c : objects) {
+				createObject(c.getQualifiedName());
+			}
 		}
 	}
 
@@ -116,34 +120,20 @@ public class UMLProject extends ConvertibleProject {
 
 	@Override
 	public ConvertibleObject createObject(String qualifiedName) {
-		// TODO, everything passed in should be / and not ::
-		if (!qualifiedName.contains("::")) {
-			qualifiedName = convertFileName(qualifiedName);
-		}
+
 		Class theClass = (Class) getPackagedElement(qualifiedName, null);
 		if (theClass == null) {
 			theClass = addClassWithPackages(qualifiedName);
 		}
 		UMLClassWrapper ucw = new UMLClassWrapper(this, theClass);
-		// TODO check which layer to add it to
 		if (qualifiedName.startsWith("pst::" + TEST_CASES)) {
 			firstLayerObjects.add(ucw);
 		} else if (qualifiedName.startsWith("pst::" + TEST_OBJECTS)) {
 			testObjects.add(ucw);
-		} // TODO add testSteps collection
-		return ucw;
-	}
-
-	protected String convertFileName(String path) {
-		String qualifiedName = path.replace(",", "").trim();
-		if (path.contains(".")) {
-			qualifiedName = qualifiedName.replace("." + path.split("\\.")[1], "");
+		} else if (qualifiedName.startsWith("pst::" + TEST_STEPS)) {
+			testSteps.add(ucw);
 		}
-		// TODO assuming all relative paths start with layer, but maybe it's
-		// src/test/layer?
-		qualifiedName = qualifiedName.replace("/", "::");
-		qualifiedName = "pst::" + qualifiedName;
-		return qualifiedName;
+		return ucw;
 	}
 
 	private Class addClassWithPackages(String qualifiedName) {
@@ -193,5 +183,11 @@ public class UMLProject extends ConvertibleProject {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void deleteObject(ConvertibleObject srcObj) {
+		// TODO Auto-generated method stub
+		
 	}
 }

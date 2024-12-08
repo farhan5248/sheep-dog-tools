@@ -12,7 +12,6 @@ import org.farhan.mbt.cucumber.Step;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.helper.StepHelper;
-import org.farhan.mbt.CucumberStandaloneSetup;
 import org.farhan.mbt.core.ConverterNew;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
@@ -69,16 +68,17 @@ public class ConvertCucumberToUML extends ConverterNew {
 	}
 
 	public String convertObject(String tags, String path, String content) throws Exception {
-		srcObj = new CucumberFeatureWrapper(path);
+		srcObj = (CucumberFeatureWrapper) srcPrj.createObject(path);
 		srcObj.parse(content);
 		if (isFileSelected(srcObj, tags)) {
-			srcPrj.getObjects(srcPrj.TEST_CASES).add(srcObj);
-			tgtObj = (UMLClassWrapper) tgtPrj.createObject(convertPath(path));
+			tgtObj = (UMLClassWrapper) tgtPrj.createObject(convertSrcPath(path));
 			tgtObj.setFeatureName(srcObj.getFeatureName());
 			tgtObj.setFeatureTags(srcObj.getFeatureTags());
 			tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
 			convertAbstractScenarioList();
 			tgtPrj.save();
+		} else {
+			srcPrj.deleteObject(srcObj);
 		}
 		return "";
 	}
@@ -142,7 +142,8 @@ public class ConvertCucumberToUML extends ConverterNew {
 		// TODO in the future, these two lines should be moved out of this method.
 		// Instead the 2nd layer of feature files should be parsed if feature files are
 		// being used instead of asciidoctor files
-		tgtObj2 = (UMLClassWrapper) tgtPrj.createObject(getStepObjName(stepSrc.getName()));
+		tgtObj2 = (UMLClassWrapper) tgtPrj
+				.createObject(convertSrcPath(getStepObjName(stepSrc.getName()), srcPrj.TEST_OBJECTS));
 		tgtObj2.createStepDefinition(srcObj.getStep(stepSrc));
 
 		if (srcObj.hasDocString(stepSrc)) {
@@ -199,13 +200,14 @@ public class ConvertCucumberToUML extends ConverterNew {
 		String objectName = getObjectName(stepName);
 		String objectType = Utilities.upperFirst(StepHelper.getObjectType(stepName));
 		String componentName = getComponentName(stepName);
-		return srcPrj.TEST_OBJECTS + "/" + componentName + "/" + objectName + objectType + ".java";
+		return srcPrj.getDir(srcPrj.TEST_OBJECTS) + "/" + componentName + "/" + objectName + objectType + ".java";
 	}
 
 	@Override
 	public void initProjects() throws Exception {
 		srcPrj = new CucumberProject(this.tags, this.fa);
+		srcPrj.load();
 		tgtPrj = new UMLProject(this.tags, this.fa);
-		CucumberStandaloneSetup.doSetup();
+		tgtPrj.load();
 	}
 }

@@ -27,4 +27,6 @@ public abstract class ConvertibleProject {
 	public abstract void load() throws Exception;
 
 	public abstract void save() throws Exception;
+
+	public abstract void deleteObject(ConvertibleObject srcObj);
 }

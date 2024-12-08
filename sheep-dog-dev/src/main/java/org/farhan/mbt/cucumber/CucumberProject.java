@@ -2,6 +2,7 @@ package org.farhan.mbt.cucumber;
 
 import java.util.ArrayList;
 
+import org.farhan.mbt.CucumberStandaloneSetup;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.ObjectRepository;
@@ -23,6 +24,13 @@ public class CucumberProject extends ConvertibleProject {
 	@Override
 	public ConvertibleObject createObject(String path) {
 		ConvertibleObject aConvertibleObject = getObject(path);
+		try {
+			// TODO calculate an actual checksum for later
+			fa.put(tags, path, "sha checksum");
+		} catch (Exception e) {
+			// TODO do something better
+			return null;
+		}
 		if (aConvertibleObject != null) {
 			return aConvertibleObject;
 		} else {
@@ -113,10 +121,18 @@ public class CucumberProject extends ConvertibleProject {
 
 	@Override
 	public void load() throws Exception {
+		CucumberStandaloneSetup.doSetup();
 	}
 
 	@Override
 	public void save() throws Exception {
+	}
+
+	@Override
+	public void deleteObject(ConvertibleObject srcObj) {
+		firstLayerObjects.remove(srcObj);
+		secondLayerObjects.remove(srcObj);
+		thirdLayerObjects.remove(srcObj);
 	}
 
 }
