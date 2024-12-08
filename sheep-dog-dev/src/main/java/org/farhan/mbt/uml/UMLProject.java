@@ -120,7 +120,6 @@ public class UMLProject extends ConvertibleProject {
 
 	@Override
 	public ConvertibleObject createObject(String qualifiedName) {
-
 		Class theClass = (Class) getPackagedElement(qualifiedName, null);
 		if (theClass == null) {
 			theClass = addClassWithPackages(qualifiedName);
@@ -188,6 +187,6 @@ public class UMLProject extends ConvertibleProject {
 	@Override
 	public void deleteObject(ConvertibleObject srcObj) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

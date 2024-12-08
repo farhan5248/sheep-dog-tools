@@ -133,22 +133,7 @@ public class ConvertUMLToCucumber extends ConverterNew {
 		return name;
 	}
 
-	private String getPath(String tgtLayer) {
-		String path = srcObj.getQualifiedName();
-		String[] pathParts = path.split("::");
-		String componentName = pathParts[2];
-		path = path.replace("pst::" + srcPrj.TEST_OBJECTS + "::" + componentName, "::" + componentName.toLowerCase());
 
-		if (tgtLayer.contentEquals(tgtPrj.TEST_STEPS)) {
-			String objectName = pathParts[pathParts.length - 1];
-			path = path.replace(objectName, Utilities.upperFirst(componentName) + objectName + "Steps");
-		}
-
-		path = path.replace("::", "/");
-		path = tgtPrj.getDir(tgtLayer) + path + tgtPrj.getFileExt(tgtLayer);
-
-		return path;
-	}
 
 	@Override
 	public void initProjects() throws Exception {

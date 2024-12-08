@@ -2,6 +2,9 @@ package org.farhan.mbt.core;
 
 import java.util.ArrayList;
 
+import org.farhan.mbt.uml.UMLClassWrapper;
+import org.farhan.mbt.uml.UMLProject;
+
 public abstract class Converter {
 
 	protected String tags = "";
@@ -23,7 +26,7 @@ public abstract class Converter {
 	}
 
 	protected abstract ArrayList<ConvertibleObject> getFeatures(String layer);
-	
+
 	public abstract void initProjects() throws Exception;
 
 	protected abstract void load() throws Exception;

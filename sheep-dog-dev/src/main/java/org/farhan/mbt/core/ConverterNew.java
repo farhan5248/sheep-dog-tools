@@ -2,8 +2,8 @@ package org.farhan.mbt.core;
 
 import java.util.ArrayList;
 
-import org.farhan.mbt.cucumber.AbstractScenario;
-import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
+import org.farhan.mbt.uml.UMLClassWrapper;
+import org.farhan.mbt.uml.UMLProject;
 
 public abstract class ConverterNew {
 
@@ -15,6 +15,47 @@ public abstract class ConverterNew {
 	public ConverterNew(String tags, ObjectRepository fa) {
 		this.tags = tags;
 		this.fa = fa;
+	}
+
+	public ArrayList<String> getObjectNames() {
+		// TODO this is temp hack until I figure out how to manage the objects, the
+		// project files and model better
+		ArrayList<String> objects = new ArrayList<String>();
+		if (srcPrj instanceof UMLProject) {
+			for (ConvertibleObject co : srcPrj.getObjects(srcPrj.TEST_CASES)) {
+				objects.add(getPath((UMLClassWrapper) co, srcPrj.TEST_CASES));
+			}
+			for (ConvertibleObject co : srcPrj.getObjects(srcPrj.TEST_OBJECTS)) {
+				objects.add(getPath((UMLClassWrapper) co, srcPrj.TEST_STEPS));
+				objects.add(getPath((UMLClassWrapper) co, srcPrj.TEST_OBJECTS));
+			}
+		}
+		return objects;
+	}
+
+	private String getPath(UMLClassWrapper srcObj, String tgtLayer) {
+		String path = srcObj.getQualifiedName();
+		String[] pathParts = path.split("::");
+		String componentName = pathParts[2];
+		String objectName = pathParts[pathParts.length - 1];
+
+		if (tgtLayer.contentEquals(tgtPrj.TEST_CASES)) {
+			path = path.replace("pst::" + srcPrj.TEST_CASES, "");
+		}
+		if (tgtLayer.contentEquals(tgtPrj.TEST_STEPS)) {
+			path = path.replace("pst::" + srcPrj.TEST_OBJECTS + "::" + componentName,
+					"::" + componentName.toLowerCase());
+			path = path.replace(objectName, Utilities.upperFirst(componentName) + objectName + "Steps");
+		}
+		if (tgtLayer.contentEquals(tgtPrj.TEST_OBJECTS)) {
+			path = path.replace("pst::" + srcPrj.TEST_OBJECTS + "::" + componentName,
+					"::" + componentName.toLowerCase());
+		}
+
+		path = path.replace("::", "/");
+		path = tgtPrj.getDir(tgtLayer) + path + tgtPrj.getFileExt(tgtLayer);
+
+		return path;
 	}
 
 	public abstract String convertObject(String tags, String path, String content) throws Exception;
@@ -50,7 +91,22 @@ public abstract class ConverterNew {
 		qualifiedName = qualifiedName.replace(filesPrj.getFileExt(layer), "");
 		qualifiedName = qualifiedName.replace(filesPrj.getDir(layer), "");
 		qualifiedName = qualifiedName.replace("/", "::");
-		qualifiedName = "pst::" + layer + qualifiedName;
+
+		// TODO yet another temp hack. The uml model doesn't currently have a layer for
+		// every file system layer so layers 2 and 3 have to be mapped to the objects
+		// layer. I think I need 5 layers:
+		// test cases - src
+		// test objects - src
+		// test object steps - tgt
+		// test object interfaces - tgt
+		// test object data - tgt
+
+		if (layer.contentEquals(filesPrj.TEST_CASES)) {
+			qualifiedName = "pst::" + modelPrj.TEST_CASES + qualifiedName;
+		} else {
+			qualifiedName = "pst::" + modelPrj.TEST_OBJECTS + qualifiedName;
+		}
+
 		return qualifiedName;
 	}
 }

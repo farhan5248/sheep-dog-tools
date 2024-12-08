@@ -65,12 +65,10 @@ public abstract class GoalObject extends TestObject {
 					}
 				}
 			} else {
-				for (int i = 0; i < 4; i++) {
-					for (String fileName : or.list(tags, dirs[i], "")) {
-						String content = mojo.convertObject(tags, fileName, sr.get(fileName));
-						if (!content.isEmpty()) {
-							sr.put(fileName, content);
-						}
+				for (String fileName : mojo.getObjectNames()) {
+					String content = mojo.convertObject(tags, fileName, sr.contains(fileName) ? sr.get(fileName) : "");
+					if (!content.isEmpty()) {
+						sr.put(fileName, content);
 					}
 				}
 			}
