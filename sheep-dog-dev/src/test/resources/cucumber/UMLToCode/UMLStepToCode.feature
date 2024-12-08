@@ -1,3 +1,4 @@
+@debug
 Feature: UML Step To Code
 
   Background: Create a feature file
@@ -38,7 +39,6 @@ Feature: UML Step To Code
           | Submit | And The something/Object page is empty   |
           | Submit | * The something/Object page is empty     |
 
-@debug
   Scenario: Create new java methods for layer 2
 
      When The mbt-transformer plugin, cucumber-to-uml goal is executed

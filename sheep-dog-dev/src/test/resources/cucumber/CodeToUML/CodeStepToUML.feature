@@ -27,10 +27,10 @@ Feature: Code Step To UML
           | specs::Process::Submit | The blah application, Asterisk page is empty |
       And The uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name                                                          |
-          | objects::blah::GivenPage::The blah application, Given page is empty       |
-          | objects::blah::WhenPage::The blah application, When page is empty         |
-          | objects::blah::ThenPage::The blah application, Then page is empty         |
-          | objects::blah::AndPage::The blah application, And page is empty           |
-          | objects::blah::ButPage::The blah application, But page is empty           |
-          | objects::blah::AsteriskPage::The blah application, Asterisk page is empty |
+          | objects::Blah::GivenPage::The blah application, Given page is empty       |
+          | objects::Blah::WhenPage::The blah application, When page is empty         |
+          | objects::Blah::ThenPage::The blah application, Then page is empty         |
+          | objects::Blah::AndPage::The blah application, And page is empty           |
+          | objects::Blah::ButPage::The blah application, But page is empty           |
+          | objects::Blah::AsteriskPage::The blah application, Asterisk page is empty |
 

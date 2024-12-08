@@ -9,12 +9,12 @@ import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.NamedElement;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.mbt.uml.UMLProject;
+import org.farhan.mbt.core.UMLModel;
 import org.junit.jupiter.api.Assertions;
 
 public abstract class UMLFileObject extends FileObject {
 
-	private UMLProject project;
+	private UMLModel project;
 
 	protected void assertClassAnnotationDetailExists(String className, String annotationName, String annotationDetail) {
 		assertClassExists(className);
@@ -125,8 +125,8 @@ public abstract class UMLFileObject extends FileObject {
 
 	protected void assertObjectExists() {
 		try {
-			project = new UMLProject(getGoalClass("ToUml").attributes.get("tags"), new FileObjectRepository());
-			project.load();
+			project = new UMLModel(getGoalClass("ToUml").attributes.get("tags"), new FileObjectRepository());
+			project.init();
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
 		}

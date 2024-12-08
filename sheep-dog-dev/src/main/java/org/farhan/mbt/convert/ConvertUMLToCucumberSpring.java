@@ -12,7 +12,8 @@ public class ConvertUMLToCucumberSpring extends ConvertUMLToCucumber {
 	@Override
 	public void initProjects() throws Exception {
 		super.initProjects();
-		tgtPrj = new CucumberSpringProject(this.tags, this.fa);
+		project = new CucumberSpringProject(this.tags, this.fa);
+		project.init();
 	}
 
 }

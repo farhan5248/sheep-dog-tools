@@ -33,7 +33,17 @@ public class AsciiDoctorProject extends ConvertibleProject {
 
 	@Override
 	public String getDir(String layer) {
-		return "src/test/resources/asciidoc";
+		// TODO rethink what these directories should be after creating the adoc editor
+		switch (layer) {
+		case TEST_CASES:
+			return "src/test/resources/asciidoc";
+		case TEST_STEPS:
+			return "src/test/resources/asciidoc/" + TEST_STEPS;
+		case TEST_OBJECTS:
+			return "src/test/resources/asciidoc/" + TEST_OBJECTS;
+		default:
+			return "";
+		}
 	}
 
 	@Override
@@ -53,11 +63,7 @@ public class AsciiDoctorProject extends ConvertibleProject {
 	}
 
 	@Override
-	public void load() throws Exception {
-	}
-
-	@Override
-	public void save() throws Exception {
+	public void init() throws Exception {
 	}
 
 	@Override

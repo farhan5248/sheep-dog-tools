@@ -1,4 +1,4 @@
-package org.farhan.mbt.uml;
+package org.farhan.mbt.core;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -22,11 +22,8 @@ import org.eclipse.uml2.uml.PackageableElement;
 import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
-import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.mbt.core.ObjectRepository;
 
-public class UMLProject extends ConvertibleProject {
+public class UMLModel extends ConvertibleProject {
 
 	// TODO maybe just make one list and filter it by layer?
 	private ArrayList<ConvertibleObject> firstLayerObjects;
@@ -35,7 +32,7 @@ public class UMLProject extends ConvertibleProject {
 
 	private Model theSystem;
 
-	public UMLProject(String tags, ObjectRepository fa) {
+	public UMLModel(String tags, ObjectRepository fa) {
 		super(fa);
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
 		testObjects = new ArrayList<ConvertibleObject>();
@@ -53,7 +50,7 @@ public class UMLProject extends ConvertibleProject {
 	}
 
 	@Override
-	public void load() throws Exception {
+	public void init() throws Exception {
 		String path = getDir("") + theSystem.getName() + getFileExt("");
 		if (fa.contains(tags, path)) {
 			URI uri = URI.createFileURI(path);
@@ -62,30 +59,17 @@ public class UMLProject extends ConvertibleProject {
 			InputStream content = new ByteArrayInputStream(fa.get(tags, path).getBytes(StandardCharsets.UTF_8));
 			resource.load(content, Collections.EMPTY_MAP);
 			theSystem = (Model) resource.getContents().getFirst();
-			ArrayList<Class> objects = getPackagedClasses(theSystem.getNestedPackage(TEST_CASES));
+			ArrayList<Class> objects = getPackagedElements(theSystem.getNestedPackage(TEST_CASES));
 			for (Class c : objects) {
 				createObject(c.getQualifiedName());
 			}
-			objects = getPackagedClasses(theSystem.getNestedPackage(TEST_OBJECTS));
+			objects = getPackagedElements(theSystem.getNestedPackage(TEST_OBJECTS));
 			for (Class c : objects) {
 				createObject(c.getQualifiedName());
 			}
 		}
 	}
 
-	private ArrayList<Class> getPackagedClasses(Package aPackage) {
-		ArrayList<Class> classes = new ArrayList<Class>();
-		for (PackageableElement pe : aPackage.getPackagedElements()) {
-			if (pe instanceof Class) {
-				classes.add((Class) pe);
-			} else if (pe instanceof Package) {
-				classes.addAll(getPackagedClasses((Package) pe));
-			}
-		}
-		return classes;
-	}
-
-	@Override
 	public void save() throws Exception {
 		String path = getDir("") + theSystem.getName() + getFileExt("");
 		URI uri = URI.createFileURI(path);
@@ -122,7 +106,7 @@ public class UMLProject extends ConvertibleProject {
 	public ConvertibleObject createObject(String qualifiedName) {
 		Class theClass = (Class) getPackagedElement(qualifiedName, null);
 		if (theClass == null) {
-			theClass = addClassWithPackages(qualifiedName);
+			theClass = addClass(qualifiedName);
 		}
 		UMLClassWrapper ucw = new UMLClassWrapper(this, theClass);
 		if (qualifiedName.startsWith("pst::" + TEST_CASES)) {
@@ -135,7 +119,7 @@ public class UMLProject extends ConvertibleProject {
 		return ucw;
 	}
 
-	private Class addClassWithPackages(String qualifiedName) {
+	private Class addClass(String qualifiedName) {
 		Class theClass = null;
 		Package owningPackage = theSystem;
 		String[] qualifiedNameParts = qualifiedName.replace(theSystem.getQualifiedName() + "::", "").split("::");
@@ -157,6 +141,18 @@ public class UMLProject extends ConvertibleProject {
 		return thePackage;
 	}
 
+	private ArrayList<Class> getPackagedElements(Package aPackage) {
+		ArrayList<Class> classes = new ArrayList<Class>();
+		for (PackageableElement pe : aPackage.getPackagedElements()) {
+			if (pe instanceof Class) {
+				classes.add((Class) pe);
+			} else if (pe instanceof Package) {
+				classes.addAll(getPackagedElements((Package) pe));
+			}
+		}
+		return classes;
+	}
+
 	public PackageableElement getPackagedElement(String qualifiedName, Package nestingPackage) {
 		if (nestingPackage == null) {
 			nestingPackage = theSystem;
@@ -168,13 +164,13 @@ public class UMLProject extends ConvertibleProject {
 					return anElement;
 				}
 			} else {
-				if (pe.getQualifiedName().toLowerCase().contentEquals(qualifiedName.toLowerCase())) {
+				if (pe.getQualifiedName().contentEquals(qualifiedName)) {
 					return pe;
 				}
 				if (pe instanceof Class) {
 					Class c = (Class) pe;
 					for (Behavior b : c.getOwnedBehaviors()) {
-						if (b.getQualifiedName().toLowerCase().contentEquals(qualifiedName.toLowerCase())) {
+						if (b.getQualifiedName().contentEquals(qualifiedName)) {
 							return b;
 						}
 					}

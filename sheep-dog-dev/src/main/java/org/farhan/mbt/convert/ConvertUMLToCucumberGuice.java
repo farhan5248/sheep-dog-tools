@@ -12,6 +12,7 @@ public class ConvertUMLToCucumberGuice extends ConvertUMLToCucumber {
 	@Override
 	public void initProjects() throws Exception {
 		super.initProjects();
-		tgtPrj = new CucumberGuiceProject(this.tags, this.fa);
+		project = new CucumberGuiceProject(this.tags, this.fa);
+		project.init();
 	}
 }

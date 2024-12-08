@@ -8,11 +8,10 @@ import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
-import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ObjectRepository;
+import org.farhan.mbt.core.UMLClassWrapper;
+import org.farhan.mbt.core.UMLModel;
 import org.farhan.mbt.core.Converter;
-import org.farhan.mbt.uml.UMLClassWrapper;
-import org.farhan.mbt.uml.UMLProject;
 
 public class ConvertUMLToAsciidoctor extends Converter {
 
@@ -58,16 +57,6 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		tgtObj.createExamplesRow(examples, examplesRow);
 	}
 
-	@Override
-	protected void convertFeature(ConvertibleObject theObject) throws Exception {
-		srcObj = (UMLClassWrapper) theObject;
-		tgtObj = (AsciiDoctorAdocWrapper) tgtPrj.createObject(convertQualifiedName(srcObj.getQualifiedName()));
-		tgtObj.setFeatureName(srcObj.getFeatureName());
-		tgtObj.setFeatureTags(srcObj.getFeatureTags());
-		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
-		convertAbstractScenarioList();
-	}
-
 	private void convertScenario(Interaction abstractScenario) {
 		Section scenario = tgtObj.createScenario(srcObj.getScenarioName(abstractScenario));
 		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(abstractScenario));
@@ -108,23 +97,25 @@ public class ConvertUMLToAsciidoctor extends Converter {
 	}
 
 	@Override
-	protected ArrayList<ConvertibleObject> getFeatures(String layer) {
-		return srcPrj.getObjects(layer);
-	}
-
-	@Override
 	public void initProjects() throws Exception {
-		srcPrj = new UMLProject(this.tags, this.fa);
-		tgtPrj = new AsciiDoctorProject(this.tags, this.fa);
+		model = new UMLModel(this.tags, this.fa);
+		model.init();
+		project = new AsciiDoctorProject(this.tags, this.fa);
+		project.init();
 	}
 
 	@Override
-	protected void load() throws Exception {
-		srcPrj.load();
-	}
+	public String convertObject(String tags, String path, String content) throws Exception {
 
-	@Override
-	public void save() throws Exception {
-		tgtPrj.save();
+		srcObj = (UMLClassWrapper) model.createObject(findQualifiedName(path));
+
+		tgtObj = (AsciiDoctorAdocWrapper) project.createObject(path);
+		tgtObj.parse(content);
+
+		tgtObj.setFeatureName(srcObj.getFeatureName());
+		tgtObj.setFeatureTags(srcObj.getFeatureTags());
+		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
+		convertAbstractScenarioList();
+		return tgtObj.toString();
 	}
 }

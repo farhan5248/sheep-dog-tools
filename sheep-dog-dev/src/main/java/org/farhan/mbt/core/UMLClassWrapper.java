@@ -1,4 +1,4 @@
-package org.farhan.mbt.uml;
+package org.farhan.mbt.core;
 
 import java.util.ArrayList;
 import java.util.Map.Entry;
@@ -11,14 +11,12 @@ import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.ObjectRepository;
 
 public class UMLClassWrapper implements ConvertibleObject {
 
 	private Class theClass;
 
-	public UMLClassWrapper(UMLProject umlProject, Class theClass) {
+	public UMLClassWrapper(UMLModel umlProject, Class theClass) {
 		this.theClass = theClass;
 	}
 

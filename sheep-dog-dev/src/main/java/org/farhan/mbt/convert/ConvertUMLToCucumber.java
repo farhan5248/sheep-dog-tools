@@ -11,17 +11,16 @@ import org.farhan.mbt.cucumber.Scenario;
 import org.farhan.mbt.cucumber.ScenarioOutline;
 import org.farhan.mbt.cucumber.Step;
 import org.farhan.mbt.core.ObjectRepository;
-import org.farhan.mbt.CucumberStandaloneSetup;
-import org.farhan.mbt.core.ConverterNew;
+import org.farhan.mbt.core.UMLClassWrapper;
+import org.farhan.mbt.core.UMLModel;
+import org.farhan.mbt.core.Converter;
 import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberJavaWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
-import org.farhan.mbt.uml.UMLClassWrapper;
-import org.farhan.mbt.uml.UMLProject;
 import org.farhan.helper.StepHelper;
 
-public class ConvertUMLToCucumber extends ConverterNew {
+public class ConvertUMLToCucumber extends Converter {
 
 	private String lastComponent = "InitialComponent";
 
@@ -133,22 +132,20 @@ public class ConvertUMLToCucumber extends ConverterNew {
 		return name;
 	}
 
-
-
 	@Override
 	public void initProjects() throws Exception {
-		srcPrj = new UMLProject(this.tags, this.fa);
-		srcPrj.load();
-		tgtPrj = new CucumberProject(this.tags, this.fa);
-		tgtPrj.load();
+		model = new UMLModel(this.tags, this.fa);
+		model.init();
+		project = new CucumberProject(this.tags, this.fa);
+		project.init();
 	}
 
 	@Override
 	public String convertObject(String tags, String path, String content) throws Exception {
 
-		if (path.startsWith(tgtPrj.getDir(tgtPrj.TEST_CASES))) {
+		if (path.startsWith(project.getDir(project.TEST_CASES))) {
 			return convertFeature(tags, path, content);
-		} else if (path.startsWith(tgtPrj.getDir(tgtPrj.TEST_STEPS))) {
+		} else if (path.startsWith(project.getDir(project.TEST_STEPS))) {
 			return convertObjectSteps(tags, path, content);
 		} else {
 			return convertObjectFields(tags, path, content);
@@ -157,9 +154,9 @@ public class ConvertUMLToCucumber extends ConverterNew {
 
 	private String convertFeature(String tags, String path, String content) throws Exception {
 
-		srcObj = (UMLClassWrapper) srcPrj.createObject(convertTgtPath(path));
+		srcObj = (UMLClassWrapper) model.createObject(findQualifiedName(path));
 
-		tgtObj = (CucumberFeatureWrapper) tgtPrj.createObject(path);
+		tgtObj = (CucumberFeatureWrapper) project.createObject(path);
 		tgtObj.parse(content);
 
 		tgtObj.setFeatureName(srcObj.getFeatureName());
@@ -170,9 +167,9 @@ public class ConvertUMLToCucumber extends ConverterNew {
 	}
 
 	private String convertObjectSteps(String tags, String path, String content) throws Exception {
-		srcObj = (UMLClassWrapper) srcPrj.createObject(convertTgtPath(path));
+		srcObj = (UMLClassWrapper) model.createObject(findQualifiedName(path));
 
-		tgtObj2 = (CucumberJavaWrapper) tgtPrj.createObject(path);
+		tgtObj2 = (CucumberJavaWrapper) project.createObject(path);
 		tgtObj2.parse(content);
 
 		convertStepDefinitionList();
@@ -180,9 +177,9 @@ public class ConvertUMLToCucumber extends ConverterNew {
 	}
 
 	private String convertObjectFields(String tags, String path, String content) throws Exception {
-		srcObj = (UMLClassWrapper) srcPrj.createObject(convertTgtPath(path));
+		srcObj = (UMLClassWrapper) model.createObject(findQualifiedName(path));
 
-		tgtObj2 = (CucumberJavaWrapper) tgtPrj.createObject(path);
+		tgtObj2 = (CucumberJavaWrapper) project.createObject(path);
 		tgtObj2.parse(content);
 
 		convertStepDefinitionList();

@@ -16,7 +16,7 @@ public class CucumberToUmlGoalImpl extends GoalObject implements CucumberToUmlGo
 
 	@Override
 	public void transition() {
-		runGoalNew("org.farhan.mbt.convert.ConvertCucumberToUML");
+		runGoal("org.farhan.mbt.convert.ConvertCucumberToUML");
 	}
 
 }

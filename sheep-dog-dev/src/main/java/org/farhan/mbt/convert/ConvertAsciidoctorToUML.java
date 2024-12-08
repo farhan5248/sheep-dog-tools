@@ -5,17 +5,17 @@ import org.asciidoctor.ast.Section;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
-import org.farhan.mbt.uml.UMLClassWrapper;
-import org.farhan.mbt.uml.UMLProject;
 import org.farhan.helper.StepHelper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ObjectRepository;
+import org.farhan.mbt.core.UMLClassWrapper;
+import org.farhan.mbt.core.UMLModel;
 import org.farhan.mbt.core.Utilities;
-import org.farhan.mbt.core.ConverterNew;
+import org.farhan.mbt.core.Converter;
 
-public class ConvertAsciidoctorToUML extends ConverterNew {
+public class ConvertAsciidoctorToUML extends Converter {
 
 	private AsciiDoctorAdocWrapper srcObj;
 	private UMLClassWrapper tgtObj;
@@ -61,17 +61,17 @@ public class ConvertAsciidoctorToUML extends ConverterNew {
 
 	@Override
 	public String convertObject(String tags, String path, String content) throws Exception {
-		srcObj = (AsciiDoctorAdocWrapper) srcPrj.createObject(path);
+		srcObj = (AsciiDoctorAdocWrapper) project.createObject(path);
 		srcObj.parse(content);
 		if (isFileSelected(srcObj, tags)) {
-			tgtObj = (UMLClassWrapper) tgtPrj.createObject(convertSrcPath(srcObj.getFileName()));
+			tgtObj = (UMLClassWrapper) model.createObject(convertSrcPath(srcObj.getFileName()));
 			tgtObj.setFeatureName(srcObj.getFeatureName());
 			tgtObj.setFeatureTags(srcObj.getFeatureTags());
 			tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
 			convertAbstractScenarioList();
-			tgtPrj.save();
+			model.save();
 		} else {
-			srcPrj.deleteObject(srcObj);
+			project.deleteObject(srcObj);
 		}
 		return "";
 	}
@@ -133,7 +133,8 @@ public class ConvertAsciidoctorToUML extends ConverterNew {
 	private void convertStep(Interaction abstractScenario, Section stepSrc) {
 		Message step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
 
-		UMLClassWrapper stpObj = (UMLClassWrapper) tgtPrj.createObject(getStepObjName(stepSrc.getTitle()));
+		UMLClassWrapper stpObj = (UMLClassWrapper) model
+				.createObject(convertSrcPath(getStepObjName(stepSrc.getTitle()), project.TEST_OBJECTS));
 		stpObj.createStepDefinition(srcObj.getStep(stepSrc));
 
 		if (srcObj.hasDocString(stepSrc)) {
@@ -150,7 +151,7 @@ public class ConvertAsciidoctorToUML extends ConverterNew {
 		String objectName = getObjectName(stepName);
 		String objectType = Utilities.upperFirst(StepHelper.getObjectType(stepName));
 		String componentName = getComponentName(stepName);
-		return srcPrj.TEST_OBJECTS + "/" + componentName + "/" + objectName + objectType + ".adoc";
+		return project.getDir(project.TEST_OBJECTS) + "/" + componentName + "/" + objectName + objectType + ".asciidoc";
 	}
 
 	protected String getComponentName(String step) {
@@ -189,10 +190,10 @@ public class ConvertAsciidoctorToUML extends ConverterNew {
 
 	@Override
 	public void initProjects() throws Exception {
-		srcPrj = new AsciiDoctorProject(this.tags, this.fa);
-		srcPrj.load();
-		tgtPrj = new UMLProject(this.tags, this.fa);
-		tgtPrj.load();
+		project = new AsciiDoctorProject(this.tags, this.fa);
+		project.init();
+		model = new UMLModel(this.tags, this.fa);
+		model.init();
 	}
 
 }

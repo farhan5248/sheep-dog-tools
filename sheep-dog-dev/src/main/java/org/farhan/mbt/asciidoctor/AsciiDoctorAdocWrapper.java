@@ -362,7 +362,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	@Override
 	public void save(ObjectRepository fa) throws Exception {
-		String fileContents = docToString();
+		String fileContents = toString();
 		fa.put(ConvertibleProject.tags, thePath, fileContents);
 	}
 
@@ -421,7 +421,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return text.replace("&#8217;", "'").replace("|", "\\|");
 	}
 
-	private String docToString() {
+	public String toString() {
 		String text = "";
 		if (theDoc.getAttribute("tags") != null) {
 			text += ":tags: " + theDoc.getAttribute("tags") + "\n";

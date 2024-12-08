@@ -120,12 +120,8 @@ public class CucumberProject extends ConvertibleProject {
 	}
 
 	@Override
-	public void load() throws Exception {
+	public void init() throws Exception {
 		CucumberStandaloneSetup.doSetup();
-	}
-
-	@Override
-	public void save() throws Exception {
 	}
 
 	@Override
