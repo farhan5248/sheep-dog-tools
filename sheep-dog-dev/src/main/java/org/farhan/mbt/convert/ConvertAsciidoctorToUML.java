@@ -61,7 +61,8 @@ public class ConvertAsciidoctorToUML extends Converter {
 	}
 
 	@Override
-	public String convertObject(String tags, String path, String content) throws Exception {
+	public String convertObject(String path, String content) throws Exception {
+		initProjects();
 		srcObj = (AsciiDoctorAdocWrapper) project.createObject(path);
 		srcObj.parse(content);
 		if (isFileSelected(srcObj, tags)) {
@@ -75,40 +76,6 @@ public class ConvertAsciidoctorToUML extends Converter {
 			project.deleteObject(srcObj);
 		}
 		return "";
-	}
-
-	// TODO abstract away the Feature/Adoc specific stuff, perhaps make a SourceFile
-	// interfaces with Test case etc
-	private boolean isFileSelected(ConvertibleObject convertibleFile, String tags) throws Exception {
-
-		AsciiDoctorAdocWrapper ufw = (AsciiDoctorAdocWrapper) convertibleFile;
-		if (isTagged(ufw.getFeatureTags(), tags)) {
-			return true;
-		}
-		for (Section a : ufw.getAbstractScenarioList()) {
-			if (ufw.isScenarioOutline(a)) {
-				if (isTagged(ufw.getScenarioOutlineTags(a), tags)) {
-					return true;
-				}
-			} else if (!ufw.isBackground(a)) {
-				if (isTagged(ufw.getScenarioTags(a), tags)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	private boolean isTagged(ArrayList<String> tags, String tag) {
-		if (tag.isEmpty()) {
-			return true;
-		}
-		for (String t : tags) {
-			if (t.trim().contentEquals(tag)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	private void convertScenario(Section abstractScenario) {
@@ -145,15 +112,14 @@ public class ConvertAsciidoctorToUML extends Converter {
 		}
 	}
 
-	// TODO these are duplicates of cucumber to uml converter. Also in the future
-	// when there's a layer 2 for adoc this won't be needed. Instead the layer 2
-	// will be read directly. This should also already exist in the sheep-dog-test
-	// library so perhaps first refactor to use that?
-	private String getStepObjName(String stepName) {
-		String objectName = getObjectName(stepName);
-		String objectType = StringUtils.capitalize(StepHelper.getObjectType(stepName));
-		String componentName = getComponentName(stepName);
-		return project.getDir(project.TEST_OBJECTS) + "/" + componentName + "/" + objectName + objectType + ".asciidoc";
+	private void convertStepList(Interaction abstractScenario, ArrayList<Section> stepList) {
+		for (Section step : stepList) {
+			convertStep(abstractScenario, step);
+		}
+	}
+
+	private void convertStepTable(Message step, Section stepSrc) {
+		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
 	}
 
 	protected String getComponentName(String step) {
@@ -180,22 +146,56 @@ public class ConvertAsciidoctorToUML extends Converter {
 		return name;
 	}
 
-	private void convertStepList(Interaction abstractScenario, ArrayList<Section> stepList) {
-		for (Section step : stepList) {
-			convertStep(abstractScenario, step);
-		}
+	// TODO these are duplicates of cucumber to uml converter. Also in the future
+	// when there's a layer 2 for adoc this won't be needed. Instead the layer 2
+	// will be read directly. This should also already exist in the sheep-dog-test
+	// library so perhaps first refactor to use that?
+	private String getStepObjName(String stepName) {
+		String objectName = getObjectName(stepName);
+		String objectType = StringUtils.capitalize(StepHelper.getObjectType(stepName));
+		String componentName = getComponentName(stepName);
+		return project.getDir(project.TEST_OBJECTS) + "/" + componentName + "/" + objectName + objectType + ".asciidoc";
 	}
 
-	private void convertStepTable(Message step, Section stepSrc) {
-		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
-	}
-
-	@Override
-	public void initProjects() throws Exception {
+	protected void initProjects() throws Exception {
 		project = new AsciiDoctorProject(this.tags, this.fa);
 		project.init();
 		model = new UMLModel(this.tags, this.fa);
 		model.init();
+	}
+
+	// TODO abstract away the Feature/Adoc specific stuff, perhaps make a SourceFile
+	// interfaces with Test case etc
+	private boolean isFileSelected(ConvertibleObject convertibleFile, String tags) throws Exception {
+
+		AsciiDoctorAdocWrapper ufw = (AsciiDoctorAdocWrapper) convertibleFile;
+		if (isTagged(ufw.getFeatureTags(), tags)) {
+			return true;
+		}
+		for (Section a : ufw.getAbstractScenarioList()) {
+			if (ufw.isScenarioOutline(a)) {
+				if (isTagged(ufw.getScenarioOutlineTags(a), tags)) {
+					return true;
+				}
+			} else if (!ufw.isBackground(a)) {
+				if (isTagged(ufw.getScenarioTags(a), tags)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean isTagged(ArrayList<String> tags, String tag) {
+		if (tag.isEmpty()) {
+			return true;
+		}
+		for (String t : tags) {
+			if (t.trim().contentEquals(tag)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

@@ -68,7 +68,9 @@ public class ConvertCucumberToUML extends Converter {
 		tgtObj.createExamplesRow(examples, examplesRow);
 	}
 
-	public String convertObject(String tags, String path, String content) throws Exception {
+	@Override
+	public String convertObject(String path, String content) throws Exception {
+		initProjects();
 		srcObj = (CucumberFeatureWrapper) project.createObject(path);
 		srcObj.parse(content);
 		if (isFileSelected(srcObj, tags)) {
@@ -82,40 +84,6 @@ public class ConvertCucumberToUML extends Converter {
 			project.deleteObject(srcObj);
 		}
 		return "";
-	}
-
-	// TODO abstract away the Feature/Adoc specific stuff, perhaps make a SourceFile
-	// interfaces with Test case etc
-	private boolean isFileSelected(ConvertibleObject convertibleFile, String tag) throws Exception {
-
-		CucumberFeatureWrapper ufw = (CucumberFeatureWrapper) convertibleFile;
-		if (isTagged(ufw.getFeatureTags(), tag)) {
-			return true;
-		}
-		for (AbstractScenario a : ufw.getAbstractScenarioList()) {
-			if (ufw.isScenarioOutline(a)) {
-				if (isTagged(ufw.getScenarioOutlineTags(a), tag)) {
-					return true;
-				}
-			} else if (!ufw.isBackground(a)) {
-				if (isTagged(ufw.getScenarioTags(a), tag)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	private boolean isTagged(ArrayList<String> tags, String tag) {
-		if (tag.isEmpty()) {
-			return true;
-		}
-		for (String t : tags) {
-			if (t.trim().contentEquals(tag)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	private void convertScenario(AbstractScenario abstractScenario) {
@@ -202,11 +170,44 @@ public class ConvertCucumberToUML extends Converter {
 		return project.getDir(project.TEST_OBJECTS) + "/" + componentName + "/" + objectName + objectType + ".java";
 	}
 
-	@Override
-	public void initProjects() throws Exception {
+	protected void initProjects() throws Exception {
 		project = new CucumberProject(this.tags, this.fa);
 		project.init();
 		model = new UMLModel(this.tags, this.fa);
 		model.init();
+	}
+
+	// TODO abstract away the Feature/Adoc specific stuff, perhaps make a SourceFile
+	// interfaces with Test case etc
+	private boolean isFileSelected(ConvertibleObject convertibleFile, String tag) throws Exception {
+
+		CucumberFeatureWrapper ufw = (CucumberFeatureWrapper) convertibleFile;
+		if (isTagged(ufw.getFeatureTags(), tag)) {
+			return true;
+		}
+		for (AbstractScenario a : ufw.getAbstractScenarioList()) {
+			if (ufw.isScenarioOutline(a)) {
+				if (isTagged(ufw.getScenarioOutlineTags(a), tag)) {
+					return true;
+				}
+			} else if (!ufw.isBackground(a)) {
+				if (isTagged(ufw.getScenarioTags(a), tag)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean isTagged(ArrayList<String> tags, String tag) {
+		if (tag.isEmpty()) {
+			return true;
+		}
+		for (String t : tags) {
+			if (t.trim().contentEquals(tag)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

@@ -17,7 +17,10 @@ public abstract class Converter {
 		this.fa = fa;
 	}
 
-	public ArrayList<String> getObjectNames() {
+	protected abstract void initProjects() throws Exception;
+
+	public ArrayList<String> getObjectNames() throws Exception {
+		initProjects();
 		// TODO this is temp hack until I figure out how to manage the objects, the
 		// project files and model better
 		ArrayList<String> objects = new ArrayList<String>();
@@ -60,9 +63,7 @@ public abstract class Converter {
 		return path;
 	}
 
-	public abstract String convertObject(String tags, String path, String content) throws Exception;
-
-	public abstract void initProjects() throws Exception;
+	public abstract String convertObject(String path, String content) throws Exception;
 
 	// TODO this is temp until I delete the second layer of feature files
 	protected String convertSrcPath(String path, String layer) {

@@ -51,17 +51,16 @@ public abstract class MBTMojo extends AbstractMojo {
 			Class<?> mojoClass = Class.forName(goal);
 			Converter mojo = (Converter) mojoClass.getConstructor(String.class, ObjectRepository.class)
 					.newInstance(tags, or);
-			mojo.initProjects();
 
 			if (mojo.getClass().getName().endsWith("ToUML")) {
 				for (int i = 0; i < 2; i++) {
 					for (String fileName : sr.list(dirs[i], "")) {
-						mojo.convertObject(tags, fileName, sr.get(fileName));
+						mojo.convertObject(fileName, sr.get(fileName));
 					}
 				}
 			} else {
 				for (String fileName : mojo.getObjectNames()) {
-					String content = mojo.convertObject(tags, fileName, sr.contains(fileName) ? sr.get(fileName) : "");
+					String content = mojo.convertObject(fileName, sr.contains(fileName) ? sr.get(fileName) : "");
 					if (!content.isEmpty()) {
 						sr.put(fileName, content);
 					}

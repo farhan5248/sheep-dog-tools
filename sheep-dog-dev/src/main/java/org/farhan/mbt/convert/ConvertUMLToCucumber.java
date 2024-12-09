@@ -65,6 +65,52 @@ public class ConvertUMLToCucumber extends Converter {
 		tgtObj.createExamplesRow(examples, examplesRow);
 	}
 
+	private String convertFeature(String tags, String path, String content) throws Exception {
+
+		srcObj = (UMLClassWrapper) model.createObject(findQualifiedName(path));
+
+		tgtObj = (CucumberFeatureWrapper) project.createObject(path);
+		tgtObj.parse(content);
+
+		tgtObj.setFeatureName(srcObj.getFeatureName());
+		tgtObj.setFeatureTags(srcObj.getFeatureTags());
+		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
+		convertAbstractScenarioList();
+		return tgtObj.toString();
+	}
+
+	@Override
+	public String convertObject(String path, String content) throws Exception {
+		initProjects();
+		if (path.startsWith(project.getDir(project.TEST_CASES))) {
+			return convertFeature(tags, path, content);
+		} else if (path.startsWith(project.getDir(project.TEST_STEPS))) {
+			return convertObjectSteps(tags, path, content);
+		} else {
+			return convertObjectFields(tags, path, content);
+		}
+	}
+
+	private String convertObjectFields(String tags, String path, String content) throws Exception {
+		srcObj = (UMLClassWrapper) model.createObject(findQualifiedName(path));
+
+		tgtObj2 = (CucumberJavaWrapper) project.createObject(path);
+		tgtObj2.parse(content);
+
+		convertStepDefinitionList();
+		return tgtObj2.toString();
+	}
+
+	private String convertObjectSteps(String tags, String path, String content) throws Exception {
+		srcObj = (UMLClassWrapper) model.createObject(findQualifiedName(path));
+
+		tgtObj2 = (CucumberJavaWrapper) project.createObject(path);
+		tgtObj2.parse(content);
+
+		convertStepDefinitionList();
+		return tgtObj2.toString();
+	}
+
 	protected void convertScenario(Interaction srcScenario) throws Exception {
 		Scenario scenario = tgtObj.createScenario(srcObj.getScenarioName(srcScenario));
 		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(srcScenario));
@@ -94,17 +140,17 @@ public class ConvertUMLToCucumber extends Converter {
 		}
 	}
 
-	private void convertStepDefinitionList() throws Exception {
-		for (Interaction stepDefinition : srcObj.getStepDefinitionList()) {
-			convertStepDefinition(stepDefinition);
-		}
-	}
-
 	private void convertStepDefinition(Interaction stepDefinition) throws Exception {
 		String stepDefinitionName = srcObj.getStepDefinitionName(stepDefinition);
 		tgtObj2.createStepDefinition(stepDefinitionName);
 		tgtObj2.setStepDefinitionParameters(stepDefinitionName,
 				srcObj.getStepDefinitionParameterList(stepDefinitionName));
+	}
+
+	private void convertStepDefinitionList() throws Exception {
+		for (Interaction stepDefinition : srcObj.getStepDefinitionList()) {
+			convertStepDefinition(stepDefinition);
+		}
 	}
 
 	protected void convertStepList(AbstractScenario abstractScenario, ArrayList<Message> stepList,
@@ -131,57 +177,10 @@ public class ConvertUMLToCucumber extends Converter {
 		return name;
 	}
 
-	@Override
-	public void initProjects() throws Exception {
+	protected void initProjects() throws Exception {
 		model = new UMLModel(this.tags, this.fa);
 		model.init();
 		project = new CucumberProject(this.tags, this.fa);
 		project.init();
-	}
-
-	@Override
-	public String convertObject(String tags, String path, String content) throws Exception {
-
-		if (path.startsWith(project.getDir(project.TEST_CASES))) {
-			return convertFeature(tags, path, content);
-		} else if (path.startsWith(project.getDir(project.TEST_STEPS))) {
-			return convertObjectSteps(tags, path, content);
-		} else {
-			return convertObjectFields(tags, path, content);
-		}
-	}
-
-	private String convertFeature(String tags, String path, String content) throws Exception {
-
-		srcObj = (UMLClassWrapper) model.createObject(findQualifiedName(path));
-
-		tgtObj = (CucumberFeatureWrapper) project.createObject(path);
-		tgtObj.parse(content);
-
-		tgtObj.setFeatureName(srcObj.getFeatureName());
-		tgtObj.setFeatureTags(srcObj.getFeatureTags());
-		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
-		convertAbstractScenarioList();
-		return tgtObj.toString();
-	}
-
-	private String convertObjectSteps(String tags, String path, String content) throws Exception {
-		srcObj = (UMLClassWrapper) model.createObject(findQualifiedName(path));
-
-		tgtObj2 = (CucumberJavaWrapper) project.createObject(path);
-		tgtObj2.parse(content);
-
-		convertStepDefinitionList();
-		return tgtObj2.toString();
-	}
-
-	private String convertObjectFields(String tags, String path, String content) throws Exception {
-		srcObj = (UMLClassWrapper) model.createObject(findQualifiedName(path));
-
-		tgtObj2 = (CucumberJavaWrapper) project.createObject(path);
-		tgtObj2.parse(content);
-
-		convertStepDefinitionList();
-		return tgtObj2.toString();
 	}
 }

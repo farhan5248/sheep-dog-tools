@@ -15,12 +15,13 @@ import org.farhan.mbt.core.Converter;
 
 public class ConvertUMLToAsciidoctor extends Converter {
 
+	private UMLClassWrapper srcObj;
+
+	private AsciiDoctorAdocWrapper tgtObj;
+
 	public ConvertUMLToAsciidoctor(String tags, ObjectRepository fa) {
 		super(tags, fa);
 	}
-
-	private UMLClassWrapper srcObj;
-	private AsciiDoctorAdocWrapper tgtObj;
 
 	protected void convertAbstractScenarioList() throws Exception {
 		for (Interaction abstractScenario : srcObj.getAbstractScenarioList()) {
@@ -55,6 +56,21 @@ public class ConvertUMLToAsciidoctor extends Converter {
 
 	private void convertExamplesRow(Section examples, ArrayList<String> examplesRow) {
 		tgtObj.createExamplesRow(examples, examplesRow);
+	}
+
+	@Override
+	public String convertObject(String path, String content) throws Exception {
+		initProjects();
+		srcObj = (UMLClassWrapper) model.createObject(findQualifiedName(path));
+
+		tgtObj = (AsciiDoctorAdocWrapper) project.createObject(path);
+		tgtObj.parse(content);
+
+		tgtObj.setFeatureName(srcObj.getFeatureName());
+		tgtObj.setFeatureTags(srcObj.getFeatureTags());
+		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
+		convertAbstractScenarioList();
+		return tgtObj.toString();
 	}
 
 	private void convertScenario(Interaction abstractScenario) {
@@ -96,26 +112,10 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
 	}
 
-	@Override
-	public void initProjects() throws Exception {
+	protected void initProjects() throws Exception {
 		model = new UMLModel(this.tags, this.fa);
 		model.init();
 		project = new AsciiDoctorProject(this.tags, this.fa);
 		project.init();
-	}
-
-	@Override
-	public String convertObject(String tags, String path, String content) throws Exception {
-
-		srcObj = (UMLClassWrapper) model.createObject(findQualifiedName(path));
-
-		tgtObj = (AsciiDoctorAdocWrapper) project.createObject(path);
-		tgtObj.parse(content);
-
-		tgtObj.setFeatureName(srcObj.getFeatureName());
-		tgtObj.setFeatureTags(srcObj.getFeatureTags());
-		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
-		convertAbstractScenarioList();
-		return tgtObj.toString();
 	}
 }
