@@ -17,7 +17,6 @@ import org.asciidoctor.jruby.extension.internal.JRubyProcessor;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.ObjectRepository;
-import org.farhan.mbt.core.Utilities;
 
 public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
@@ -257,11 +256,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return thePath;
 	}
 
-	public String getFileName() {
-		// TODO this is a duplicate of getPath, delete it
-		return thePath;
-	}
-
 	public String getScenarioDescription(Section scenario) {
 		return getAbstractScenarioDescription(scenario);
 	}
@@ -358,12 +352,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public void save(ObjectRepository fa) throws Exception {
-		String fileContents = toString();
-		fa.put(ConvertibleProject.tags, thePath, fileContents);
 	}
 
 	public void setBackgroundDescription(Section background, String backgroundDescription) {
@@ -516,7 +504,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	public void setFeatureTags(ArrayList<String> featureTags) {
 		if (!featureTags.isEmpty()) {
-			theDoc.getAttributes().put("tags", Utilities.listAsCsv(featureTags));
+			theDoc.getAttributes().put("tags", listAsCsv(featureTags));
 		}
 	}
 
@@ -538,13 +526,21 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	public void setScenarioOutlineTags(Section scenarioOutline, ArrayList<String> scenarioOutlineTags) {
 		if (!scenarioOutlineTags.isEmpty()) {
-			scenarioOutline.getAttributes().put("tags", Utilities.listAsCsv(scenarioOutlineTags));
+			scenarioOutline.getAttributes().put("tags", listAsCsv(scenarioOutlineTags));
 		}
 	}
 
 	public void setScenarioTags(Section scenario, ArrayList<String> scenarioTags) {
 		if (!scenarioTags.isEmpty()) {
-			scenario.getAttributes().put("tags", Utilities.listAsCsv(scenarioTags));
+			scenario.getAttributes().put("tags", listAsCsv(scenarioTags));
 		}
+	}
+
+	private String listAsCsv(ArrayList<String> list) {
+		String csv = "";
+		for (String listItem : list) {
+			csv += "," + listItem;
+		}
+		return csv.replaceFirst(",", "");
 	}
 }

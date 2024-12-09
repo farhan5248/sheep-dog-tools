@@ -93,11 +93,12 @@ public abstract class TestObject {
 			// against an individual field. That would imply that there are methods per
 			// combination of fields. If that's the case, then how to prevent an explosion
 			// of methods? Perhaps when specifying something doesn't exist, the mere
-			// presence of the negative won't or isn't should indicate that one method
+			// presence of the negative (won't or isn't) should indicate that one method
 			// should be generated. Then this method would look for that method alone.
 			for (String s : row.keySet()) {
 
-				// TODO this if statement is a temp hack until negative code is generated
+				// TODO remove this if statement after implementing negative code generation for
+				// won't or isn't
 				if (negativeTest) {
 					this.getClass()
 							.getMethod(operation + cleanName(sectionName) + cleanName(s) + "Negative", HashMap.class)

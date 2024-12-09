@@ -2,6 +2,7 @@ package org.farhan.mbt.core;
 
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.StringUtils;
 import org.farhan.mbt.cucumber.CucumberProject;
 
 public abstract class Converter {
@@ -35,7 +36,7 @@ public abstract class Converter {
 	}
 
 	private String getPath(UMLClassWrapper srcObj, String tgtLayer) {
-		String path = srcObj.getQualifiedName();
+		String path = srcObj.getPath();
 		String[] pathParts = path.split("::");
 		String componentName = pathParts[2];
 		String objectName = pathParts[pathParts.length - 1];
@@ -46,7 +47,7 @@ public abstract class Converter {
 		if (tgtLayer.contentEquals(model.TEST_STEPS)) {
 			path = path.replace("pst::" + model.TEST_OBJECTS + "::" + componentName,
 					"::" + componentName.toLowerCase());
-			path = path.replace(objectName, Utilities.upperFirst(componentName) + objectName + "Steps");
+			path = path.replace(objectName, StringUtils.capitalize(componentName) + objectName + "Steps");
 		}
 		if (tgtLayer.contentEquals(model.TEST_OBJECTS)) {
 			path = path.replace("pst::" + model.TEST_OBJECTS + "::" + componentName,
@@ -65,11 +66,12 @@ public abstract class Converter {
 
 	// TODO this is temp until I delete the second layer of feature files
 	protected String convertSrcPath(String path, String layer) {
-		return convertPath(path, project, model, layer);
-	}
-
-	protected String convertSrcPath(String path) {
-		return convertPath(path, project, model);
+		String qualifiedName = path.replace(",", "").trim();
+		qualifiedName = qualifiedName.replace(project.getFileExt(layer), "");
+		qualifiedName = qualifiedName.replace(project.getDir(layer), "");
+		qualifiedName = qualifiedName.replace("/", "::");
+		qualifiedName = "pst::" + layer + qualifiedName;
+		return qualifiedName;
 	}
 
 	protected String findQualifiedName(String path) {
@@ -79,38 +81,26 @@ public abstract class Converter {
 		// relationship
 		for (ConvertibleObject co : model.getObjects(model.TEST_CASES)) {
 			if (getPath((UMLClassWrapper) co, project.TEST_CASES).contentEquals(path)) {
-				return ((UMLClassWrapper) co).getQualifiedName();
+				return ((UMLClassWrapper) co).getPath();
 			}
 		}
 		for (ConvertibleObject co : model.getObjects(model.TEST_OBJECTS)) {
 			if (getPath((UMLClassWrapper) co, project.TEST_STEPS).contentEquals(path)) {
-				return ((UMLClassWrapper) co).getQualifiedName();
+				return ((UMLClassWrapper) co).getPath();
 			}
 			if (getPath((UMLClassWrapper) co, project.TEST_OBJECTS).contentEquals(path)) {
-				return ((UMLClassWrapper) co).getQualifiedName();
+				return ((UMLClassWrapper) co).getPath();
 			}
 		}
 		return null;
 	}
 
-	private String convertPath(String path, ConvertibleProject filesPrj, ConvertibleProject modelPrj) {
-		String layer = "";
-		if (path.startsWith(filesPrj.getDir(filesPrj.TEST_OBJECTS))) {
-			layer = filesPrj.TEST_OBJECTS;
-		} else if (path.startsWith(filesPrj.getDir(filesPrj.TEST_STEPS))) {
-			layer = filesPrj.TEST_STEPS;
-		} else if (path.startsWith(filesPrj.getDir(filesPrj.TEST_CASES))) {
-			layer = filesPrj.TEST_CASES;
+	protected String removeDelimiterAndCapitalize(String text, String delimiter) {
+		String[] nameParts = text.split(delimiter);
+		text = "";
+		for (String s : nameParts) {
+			text += StringUtils.capitalize(s);
 		}
-		return convertPath(path, filesPrj, modelPrj, layer);
-	}
-
-	private String convertPath(String path, ConvertibleProject filesPrj, ConvertibleProject modelPrj, String layer) {
-		String qualifiedName = path.replace(",", "").trim();
-		qualifiedName = qualifiedName.replace(filesPrj.getFileExt(layer), "");
-		qualifiedName = qualifiedName.replace(filesPrj.getDir(layer), "");
-		qualifiedName = qualifiedName.replace("/", "::");
-		qualifiedName = "pst::" + layer + qualifiedName;
-		return qualifiedName;
+		return text;
 	}
 }

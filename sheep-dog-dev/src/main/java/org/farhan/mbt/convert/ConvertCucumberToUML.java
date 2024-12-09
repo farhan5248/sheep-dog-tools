@@ -1,6 +1,8 @@
 package org.farhan.mbt.convert;
 
 import java.util.ArrayList;
+
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
@@ -12,7 +14,6 @@ import org.farhan.mbt.cucumber.Step;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.UMLClassWrapper;
 import org.farhan.mbt.core.UMLModel;
-import org.farhan.mbt.core.Utilities;
 import org.farhan.helper.StepHelper;
 import org.farhan.mbt.core.Converter;
 import org.farhan.mbt.core.ConvertibleObject;
@@ -71,7 +72,7 @@ public class ConvertCucumberToUML extends Converter {
 		srcObj = (CucumberFeatureWrapper) project.createObject(path);
 		srcObj.parse(content);
 		if (isFileSelected(srcObj, tags)) {
-			tgtObj = (UMLClassWrapper) model.createObject(convertSrcPath(path));
+			tgtObj = (UMLClassWrapper) model.createObject(convertSrcPath(path, project.TEST_CASES));
 			tgtObj.setFeatureName(srcObj.getFeatureName());
 			tgtObj.setFeatureTags(srcObj.getFeatureTags());
 			tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
@@ -140,8 +141,8 @@ public class ConvertCucumberToUML extends Converter {
 		Message step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
 
 		// TODO in the future, these two lines should be moved out of this method.
-		// Instead the 2nd layer of feature files should be parsed if feature files are
-		// being used instead of asciidoctor files
+		// Instead there should be a convertStepDefinition method used when parsing the
+		// layer 2 asciidoctor files
 		tgtObj2 = (UMLClassWrapper) model
 				.createObject(convertSrcPath(getStepObjName(stepSrc.getName()), project.TEST_OBJECTS));
 		tgtObj2.createStepDefinition(srcObj.getStep(stepSrc));
@@ -174,9 +175,9 @@ public class ConvertCucumberToUML extends Converter {
 		if (name.isEmpty()) {
 			name = lastComponent;
 		} else {
-			name = Utilities.removeDelimiterAndCapitalize(name, "\\.");
-			name = Utilities.removeDelimiterAndCapitalize(name, "\\-");
-			name = Utilities.removeDelimiterAndCapitalize(name, " ");
+			name = removeDelimiterAndCapitalize(name, "\\.");
+			name = removeDelimiterAndCapitalize(name, "\\-");
+			name = removeDelimiterAndCapitalize(name, " ");
 			lastComponent = name;
 		}
 		return name;
@@ -186,19 +187,17 @@ public class ConvertCucumberToUML extends Converter {
 		String name = StepHelper.getObjectName(step);
 		String nameParts[] = name.split("/");
 		name = nameParts[nameParts.length - 1];
-		name = Utilities.removeDelimiterAndCapitalize(name, "\\.");
-		name = Utilities.removeDelimiterAndCapitalize(name, "\\-");
-		name = Utilities.removeDelimiterAndCapitalize(name, " ");
-		name = Utilities.upperFirst(name);
+		name = removeDelimiterAndCapitalize(name, "\\.");
+		name = removeDelimiterAndCapitalize(name, "\\-");
+		name = removeDelimiterAndCapitalize(name, " ");
+		name = StringUtils.capitalize(name);
 		return name;
 	}
 
-	// TODO each converter needs its own object name converter? If each step is a
-	// valid according to StepHelper, then when creating elements in the UML model,
-	// it should handle name conversions
+	// TODO see comment in ConvertAsciidoctorToUML for getStepObjName
 	private String getStepObjName(String stepName) {
 		String objectName = getObjectName(stepName);
-		String objectType = Utilities.upperFirst(StepHelper.getObjectType(stepName));
+		String objectType = StringUtils.capitalize(StepHelper.getObjectType(stepName));
 		String componentName = getComponentName(stepName);
 		return project.getDir(project.TEST_OBJECTS) + "/" + componentName + "/" + objectName + objectType + ".java";
 	}

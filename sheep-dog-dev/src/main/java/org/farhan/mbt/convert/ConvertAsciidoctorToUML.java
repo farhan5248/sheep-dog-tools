@@ -1,6 +1,8 @@
 package org.farhan.mbt.convert;
 
 import java.util.ArrayList;
+
+import org.apache.commons.lang3.StringUtils;
 import org.asciidoctor.ast.Section;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
@@ -12,7 +14,6 @@ import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.UMLClassWrapper;
 import org.farhan.mbt.core.UMLModel;
-import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.core.Converter;
 
 public class ConvertAsciidoctorToUML extends Converter {
@@ -64,7 +65,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		srcObj = (AsciiDoctorAdocWrapper) project.createObject(path);
 		srcObj.parse(content);
 		if (isFileSelected(srcObj, tags)) {
-			tgtObj = (UMLClassWrapper) model.createObject(convertSrcPath(srcObj.getFileName()));
+			tgtObj = (UMLClassWrapper) model.createObject(convertSrcPath(path, project.TEST_CASES));
 			tgtObj.setFeatureName(srcObj.getFeatureName());
 			tgtObj.setFeatureTags(srcObj.getFeatureTags());
 			tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
@@ -144,12 +145,13 @@ public class ConvertAsciidoctorToUML extends Converter {
 		}
 	}
 
-	// TODO these are duplicates of cuke to uml converter. Also in the future when
-	// there's a layer 2 for adoc this won't be needed. Instead the layer 2 will be
-	// read directly
+	// TODO these are duplicates of cucumber to uml converter. Also in the future
+	// when there's a layer 2 for adoc this won't be needed. Instead the layer 2
+	// will be read directly. This should also already exist in the sheep-dog-test
+	// library so perhaps first refactor to use that?
 	private String getStepObjName(String stepName) {
 		String objectName = getObjectName(stepName);
-		String objectType = Utilities.upperFirst(StepHelper.getObjectType(stepName));
+		String objectType = StringUtils.capitalize(StepHelper.getObjectType(stepName));
 		String componentName = getComponentName(stepName);
 		return project.getDir(project.TEST_OBJECTS) + "/" + componentName + "/" + objectName + objectType + ".asciidoc";
 	}
@@ -159,9 +161,9 @@ public class ConvertAsciidoctorToUML extends Converter {
 		if (name.isEmpty()) {
 			name = lastComponent;
 		} else {
-			name = Utilities.removeDelimiterAndCapitalize(name, "\\.");
-			name = Utilities.removeDelimiterAndCapitalize(name, "\\-");
-			name = Utilities.removeDelimiterAndCapitalize(name, " ");
+			name = removeDelimiterAndCapitalize(name, "\\.");
+			name = removeDelimiterAndCapitalize(name, "\\-");
+			name = removeDelimiterAndCapitalize(name, " ");
 			lastComponent = name;
 		}
 		return name;
@@ -171,10 +173,10 @@ public class ConvertAsciidoctorToUML extends Converter {
 		String name = StepHelper.getObjectName(step);
 		String nameParts[] = name.split("/");
 		name = nameParts[nameParts.length - 1];
-		name = Utilities.removeDelimiterAndCapitalize(name, "\\.");
-		name = Utilities.removeDelimiterAndCapitalize(name, "\\-");
-		name = Utilities.removeDelimiterAndCapitalize(name, " ");
-		name = Utilities.upperFirst(name);
+		name = removeDelimiterAndCapitalize(name, "\\.");
+		name = removeDelimiterAndCapitalize(name, "\\-");
+		name = removeDelimiterAndCapitalize(name, " ");
+		name = StringUtils.capitalize(name);
 		return name;
 	}
 

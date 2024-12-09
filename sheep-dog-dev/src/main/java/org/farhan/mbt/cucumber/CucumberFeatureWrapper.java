@@ -177,7 +177,6 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		String indent = "          ";
 		for (Line l : stepSrc.getTheDocString().getLines()) {
 			if (l.getName() != null) {
-				// TODO maybe there's no need to replace the indent
 				text += "\n" + l.getName().replaceFirst(indent, "");
 			} else {
 				text += "\n";
@@ -329,23 +328,8 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		theFeature = (Feature) resource.getContents().get(0);
 	}
 
-	@Override
-	public void save(ObjectRepository fa) throws Exception {
-		URI uri = URI.createFileURI(thePath);
-		// TODO isn't this done in the initProjects?
-		CucumberStandaloneSetup.doSetup();
-		Resource resource = new ResourceSetImpl().createResource(uri);
-		resource.getContents().add(theFeature);
-		Map<Object, Object> options = SaveOptions.newBuilder().format().getOptions().toOptionsMap();
-		OutputStream os = new ByteArrayOutputStream();
-		resource.save(os, options);
-		fa.put(ConvertibleProject.tags, thePath, os.toString());
-	}
-
 	public String toString() {
 		URI uri = URI.createFileURI(thePath);
-		// TODO isn't this done in the initProjects?
-		CucumberStandaloneSetup.doSetup();
 		Resource resource = new ResourceSetImpl().createResource(uri);
 		resource.getContents().add(theFeature);
 		Map<Object, Object> options = SaveOptions.newBuilder().format().getOptions().toOptionsMap();

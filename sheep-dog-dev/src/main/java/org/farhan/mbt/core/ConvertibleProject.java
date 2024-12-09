@@ -16,7 +16,7 @@ public abstract class ConvertibleProject {
 		this.fa = fa;
 	}
 
-	public abstract ConvertibleObject createObject(String name);
+	public abstract ConvertibleObject createObject(String name) throws Exception;
 
 	public abstract void deleteObject(ConvertibleObject srcObj);
 

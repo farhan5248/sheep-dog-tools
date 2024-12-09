@@ -25,7 +25,7 @@ import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 
 public class UMLModel extends ConvertibleProject {
 
-	// TODO maybe just make one list and filter it by layer?
+	// TODO maybe just make one list and filter it by startsWith?
 	private ArrayList<ConvertibleObject> firstLayerObjects;
 	private ArrayList<ConvertibleObject> testObjects;
 	private ArrayList<ConvertibleObject> testSteps;

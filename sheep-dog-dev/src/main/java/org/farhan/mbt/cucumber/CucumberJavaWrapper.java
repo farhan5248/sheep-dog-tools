@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.ObjectRepository;
-import org.farhan.mbt.core.Utilities;
+import org.apache.commons.lang3.StringUtils;
 import org.farhan.helper.StepHelper;
 
 import com.github.javaparser.JavaParser;
@@ -132,7 +132,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 
 	protected String getCallForInputOutputsForState(String step) throws Exception {
 
-		return "." + getSetOrAssert(step) + "InputOutputs(\"" + Utilities.upperFirst(StepHelper.getStateType(step))
+		return "." + getSetOrAssert(step) + "InputOutputs(\"" + StringUtils.capitalize(StepHelper.getStateType(step))
 				+ "\"" + getSectionArg(step) + ")";
 	}
 
@@ -156,7 +156,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 			lastComponent = name;
 		}
 		name = removeSpecialChars(name);
-		return Utilities.upperFirst(name) + "Factory";
+		return StringUtils.capitalize(name) + "Factory";
 	}
 
 	protected String getInterfaceName(String step) {
@@ -164,7 +164,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		String nameParts[] = name.split("/");
 		name = nameParts[nameParts.length - 1];
 		name = removeSpecialChars(name);
-		name = name + Utilities.upperFirst(StepHelper.getObjectType(step));
+		name = name + StringUtils.capitalize(StepHelper.getObjectType(step));
 		return name;
 	}
 
@@ -186,7 +186,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 
 	protected String getMethodNameForStepObj(String step) throws Exception {
 		return getSetOrAssert(step) + getSection(step)
-				+ Utilities.removeDelimiterAndCapitalize(StepHelper.getStateType(step), " ");
+				+ removeDelimiterAndCapitalize(StepHelper.getStateType(step), " ");
 	}
 
 	protected String getPackageDeclaration() {
@@ -208,7 +208,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 			return "";
 		}
 		if (!sectionName.isEmpty()) {
-			String section = Utilities.upperFirst(sectionName) + Utilities.upperFirst(sectionType);
+			String section = StringUtils.capitalize(sectionName) + StringUtils.capitalize(sectionType);
 			return section.replace(" ", "");
 		} else {
 			return "";
@@ -289,20 +289,24 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		}
 	}
 
-	protected String removeSpecialChars(String text) {
-		text = Utilities.removeDelimiterAndCapitalize(text, " ");
-		text = Utilities.removeDelimiterAndCapitalize(text, "\\.");
-		text = Utilities.removeDelimiterAndCapitalize(text, "\\-");
-		text = Utilities.removeDelimiterAndCapitalize(text, "/");
-		text = Utilities.removeDelimiterAndCapitalize(text, ",");
+	protected String removeDelimiterAndCapitalize(String text, String delimiter) {
+		String[] nameParts = text.split(delimiter);
+		text = "";
+		for (String s : nameParts) {
+			text += StringUtils.capitalize(s);
+		}
 		return text;
 	}
 
-	@Override
-	public void save(ObjectRepository fa) throws Exception {
-		fa.put(ConvertibleProject.tags, thePath, theJavaClass.toString());
+	protected String removeSpecialChars(String text) {
+		text = removeDelimiterAndCapitalize(text, " ");
+		text = removeDelimiterAndCapitalize(text, "\\.");
+		text = removeDelimiterAndCapitalize(text, "\\-");
+		text = removeDelimiterAndCapitalize(text, "/");
+		text = removeDelimiterAndCapitalize(text, ",");
+		return text;
 	}
-	
+
 	public String toString() {
 		return theJavaClass.toString();
 	}
@@ -345,7 +349,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 			aMethod = getMethod(getSetOrAssert(stepDefinitionName) + getSection(stepDefinitionName) + "Content");
 		} else {
 			aMethod = getMethod(getSetOrAssert(stepDefinitionName) + getSection(stepDefinitionName)
-					+ Utilities.upperFirst(removeSpecialChars(param)));
+					+ StringUtils.capitalize(removeSpecialChars(param)));
 		}
 		aMethod.removeBody();
 		addParameter(aMethod, "HashMap<String, String>", "keyMap");

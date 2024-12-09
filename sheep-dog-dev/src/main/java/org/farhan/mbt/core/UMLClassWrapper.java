@@ -141,7 +141,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 
 	public Interaction createStepDefinition(String stepName) {
 		String keyword = stepName.split(" ")[0];
-		// TODO this should be an operation in the future?
 		Interaction stepDefinition = createInteraction(theClass, stepName.substring(keyword.length() + 1), "");
 		// TODO rename "StepDefinition" to something better
 		createAnnotation(stepDefinition, "StepDefinition", "Keyword", keyword);
@@ -276,10 +275,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 
 	@Override
 	public String getPath() {
-		return null;
-	}
-
-	public String getQualifiedName() {
 		return theClass.getQualifiedName();
 	}
 
@@ -395,11 +390,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 
 	@Override
 	public void parse(String text) throws Exception {
-		// Individual objects are not stored separately so this is not needed.
-	}
-
-	@Override
-	public void save(ObjectRepository fa) throws Exception {
 		// Individual objects are not stored separately so this is not needed.
 	}
 

@@ -12,8 +12,7 @@ public class CucumberSpringJavaWrapper extends CucumberJavaWrapper {
 		if (!isStepObj()) {
 			getType().addExtendedType("TestSteps");
 			theJavaClass.addImport("org.farhan.common.TestSteps");
-
-			// TODO create a test for this in UMLStepToCode
+			// TODO create a test for constructor creation
 			ConstructorDeclaration constructor = getType().addConstructor(Modifier.Keyword.PUBLIC);
 			String[] pathParts = thePath.split("/");
 			constructor.addAndGetParameter(pathParts[pathParts.length - 1].replace("Steps.java", ""), "object");

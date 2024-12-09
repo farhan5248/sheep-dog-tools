@@ -3,8 +3,9 @@ package org.farhan.mbt.core;
 import java.util.ArrayList;
 
 public interface ObjectRepository {
-	
-	// TODO rename list to getModelObjectsSteps, getModelTestCases, getModelObjectFields and remove the constants
+
+	// TODO I don't think the filetype will matter in the future, that filtering is
+	// done by the transformation code
 	public final String JAVA = ".java";
 	public final String FEATURE = ".feature";
 	public final String ASCIIDOC = ".asciidoc";

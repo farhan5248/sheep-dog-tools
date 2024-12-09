@@ -14,7 +14,6 @@ import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.UMLClassWrapper;
 import org.farhan.mbt.core.UMLModel;
 import org.farhan.mbt.core.Converter;
-import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberJavaWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
@@ -124,9 +123,9 @@ public class ConvertUMLToCucumber extends Converter {
 		if (name.isEmpty()) {
 			name = lastComponent;
 		} else {
-			name = Utilities.removeDelimiterAndCapitalize(name, "\\.");
-			name = Utilities.removeDelimiterAndCapitalize(name, "\\-");
-			name = Utilities.removeDelimiterAndCapitalize(name, " ");
+			name = removeDelimiterAndCapitalize(name, "\\.");
+			name = removeDelimiterAndCapitalize(name, "\\-");
+			name = removeDelimiterAndCapitalize(name, " ");
 			lastComponent = name;
 		}
 		return name;

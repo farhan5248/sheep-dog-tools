@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import org.asciidoctor.ast.Section;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
-import org.farhan.mbt.core.Utilities;
 import org.junit.jupiter.api.Assertions;
 
 public class AdocFileObject extends FileObject {

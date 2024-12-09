@@ -18,15 +18,10 @@ public class AsciiDoctorProject extends ConvertibleProject {
 	}
 
 	@Override
-	public ConvertibleObject createObject(String path) {
+	public ConvertibleObject createObject(String path) throws Exception {
 		AsciiDoctorAdocWrapper cff = new AsciiDoctorAdocWrapper(path);
-		try {
-			// TODO calculate an actual checksum for later
-			fa.put(tags, path, "sha checksum");
-		} catch (Exception e) {
-			// TODO do something better
-			return null;
-		}
+		// TODO calculate an actual checksum for later
+		fa.put(tags, path, "sha checksum");
 		firstLayerObjects.add(cff);
 		return cff;
 	}

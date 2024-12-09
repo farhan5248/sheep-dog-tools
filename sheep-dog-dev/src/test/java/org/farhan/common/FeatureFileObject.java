@@ -8,7 +8,6 @@ import org.farhan.mbt.cucumber.Examples;
 import org.farhan.mbt.cucumber.Row;
 import org.farhan.mbt.cucumber.Scenario;
 import org.farhan.mbt.cucumber.Step;
-import org.farhan.mbt.core.Utilities;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
 import org.junit.jupiter.api.Assertions;
@@ -17,6 +16,14 @@ public class FeatureFileObject extends FileObject {
 
 	private CucumberProject project;
 	private CucumberFeatureWrapper wrapper;
+
+	private String listAsCsv(ArrayList<String> list) {
+		String csv = "";
+		for (String listItem : list) {
+			csv += "," + listItem;
+		}
+		return csv.replaceFirst(",", "");
+	}
 
 	protected void assertAbstractScenarioDescription(String name, String description) {
 		Assertions.assertEquals(description, wrapper.getScenarioDescription(getAbstractScenario(name)));
@@ -35,9 +42,9 @@ public class FeatureFileObject extends FileObject {
 	protected void assertAbstractScenarioTags(String name, String tags) {
 		AbstractScenario abstractScenario = getAbstractScenario(name);
 		if (abstractScenario instanceof Scenario) {
-			Assertions.assertEquals(tags, Utilities.listAsCsv(wrapper.getScenarioTags(abstractScenario)));
+			Assertions.assertEquals(tags, listAsCsv(wrapper.getScenarioTags(abstractScenario)));
 		} else {
-			Assertions.assertEquals(tags, Utilities.listAsCsv(wrapper.getScenarioOutlineTags(abstractScenario)));
+			Assertions.assertEquals(tags, listAsCsv(wrapper.getScenarioOutlineTags(abstractScenario)));
 		}
 	}
 
@@ -56,7 +63,7 @@ public class FeatureFileObject extends FileObject {
 	}
 
 	protected void assertFeatureTags(String name, String tags) {
-		Assertions.assertEquals(tags, Utilities.listAsCsv(wrapper.getFeatureTags()));
+		Assertions.assertEquals(tags, listAsCsv(wrapper.getFeatureTags()));
 	}
 
 	protected void assertObjectExists() {
