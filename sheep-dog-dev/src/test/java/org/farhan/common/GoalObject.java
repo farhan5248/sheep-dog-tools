@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Assertions;
 
 public abstract class GoalObject extends TestObject {
 
-	protected String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/",
-			"src/test/java/org/farhan/stepdefs/", "src/test/java/org/farhan/objects/" };
+	protected String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/" };
 	protected ObjectRepository or;
 	protected SourceRepository sr;
 	protected String tags;
@@ -27,8 +26,9 @@ public abstract class GoalObject extends TestObject {
 					.newInstance(tags, or);
 
 			if (mojo.getClass().getName().endsWith("ToUML")) {
-				for (int i = 0; i < 2; i++) {
-					for (String fileName : sr.list(dirs[i], "")) {
+				mojo.clearObjects();
+				for (String dir : dirs) {
+					for (String fileName : sr.list(dir, "")) {
 						mojo.convertObject(fileName, sr.get(fileName));
 					}
 				}

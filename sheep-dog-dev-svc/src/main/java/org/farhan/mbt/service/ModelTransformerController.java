@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationListener;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +38,37 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	@Autowired
 	public ModelTransformerController(ObjectRepository fa) {
 		this.fa = fa;
+	}
+
+	@DeleteMapping("/clearConvertAsciidoctorToUMLObjects")
+	public ModelTransformerResponse clearConvertAsciidoctorToUMLObjects(
+			@RequestParam(value = "tags", defaultValue = "") String tags) {
+		logger.info("Starting clearConvertAsciidoctorToUMLObjects");
+		logger.info("tags:" + tags);
+		ModelTransformerResponse mtr = clearObjects(new ConvertAsciidoctorToUML(tags, fa));
+		logger.debug("response: " + mtr.toString());
+		logger.info("Ending clearConvertAsciidoctorToUMLObjects");
+		return mtr;
+	}
+
+	@DeleteMapping("/clearConvertCucumberToUMLObjects")
+	public ModelTransformerResponse clearConvertCucumberToUMLObjects(
+			@RequestParam(value = "tags", defaultValue = "") String tags) {
+		logger.info("Starting clearConvertCucumberToUMLObjects");
+		logger.info("tags:" + tags);
+		ModelTransformerResponse mtr = clearObjects(new ConvertAsciidoctorToUML(tags, fa));
+		logger.debug("response: " + mtr.toString());
+		logger.info("Ending clearConvertCucumberToUMLObjects");
+		return mtr;
+	}
+
+	private ModelTransformerResponse clearObjects(Converter mojo) {
+		try {
+			mojo.clearObjects();
+		} catch (Exception e) {
+			logger.error(getStackTraceAsString(e));
+		}
+		return new ModelTransformerResponse("", "");
 	}
 
 	private ModelTransformerResponse convertObject(Converter mojo, String fileName, String contents) {
@@ -59,16 +91,6 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 		return mtr;
 	}
 
-	@GetMapping("/getConvertUMLToCucumberObjectNames")
-	public ModelTransformerResponse getConvertUMLToCucumberObjectNames(
-			@RequestParam(value = "tags", defaultValue = "") String tags) {
-		logger.info("Starting getConvertUMLToCucumberObjectNames");
-		ModelTransformerResponse mtr = getObjectNames(new ConvertUMLToCucumber(tags, fa), tags);
-		logger.debug("response: " + mtr.toString());
-		logger.info("Ending getConvertUMLToCucumberObjectNames");
-		return mtr;
-	}
-
 	@GetMapping("/getConvertUMLToCucumberGuiceObjectNames")
 	public ModelTransformerResponse getConvertUMLToCucumberGuiceObjectNames(
 			@RequestParam(value = "tags", defaultValue = "") String tags) {
@@ -76,6 +98,16 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 		ModelTransformerResponse mtr = getObjectNames(new ConvertUMLToCucumberGuice(tags, fa), tags);
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending getConvertUMLToCucumberGuiceObjectNames");
+		return mtr;
+	}
+
+	@GetMapping("/getConvertUMLToCucumberObjectNames")
+	public ModelTransformerResponse getConvertUMLToCucumberObjectNames(
+			@RequestParam(value = "tags", defaultValue = "") String tags) {
+		logger.info("Starting getConvertUMLToCucumberObjectNames");
+		ModelTransformerResponse mtr = getObjectNames(new ConvertUMLToCucumber(tags, fa), tags);
+		logger.debug("response: " + mtr.toString());
+		logger.info("Ending getConvertUMLToCucumberObjectNames");
 		return mtr;
 	}
 

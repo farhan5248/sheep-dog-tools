@@ -62,4 +62,9 @@ public class H2ObjectRepository implements ObjectRepository {
 		return results.size() != 0;
 	}
 
+	@Override
+	public void clear(String tags) {
+		jdbcTemplate.update("delete from model_source_files where file_name like '" + tags + "/%'");
+	}
+
 }

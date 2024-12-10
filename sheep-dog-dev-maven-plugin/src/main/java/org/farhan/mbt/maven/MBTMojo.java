@@ -44,8 +44,7 @@ public abstract class MBTMojo extends AbstractMojo {
 		ObjectRepository or = new FileObjectRepository(baseDir);
 		SourceRepository sr = new SourceRepository(baseDir);
 		// TODO make these configurable Maven properties
-		String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/",
-				"src/test/java/org/farhan/objects/", "src/test/java/org/farhan/stepdefs/" };
+		String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/" };
 		try {
 
 			Class<?> mojoClass = Class.forName(goal);
@@ -53,8 +52,9 @@ public abstract class MBTMojo extends AbstractMojo {
 					.newInstance(tags, or);
 
 			if (mojo.getClass().getName().endsWith("ToUML")) {
-				for (int i = 0; i < 2; i++) {
-					for (String fileName : sr.list(dirs[i], "")) {
+				mojo.clearObjects();
+				for (String dir : dirs) {
+					for (String fileName : sr.list(dir, "")) {
 						mojo.convertObject(fileName, sr.get(fileName));
 					}
 				}

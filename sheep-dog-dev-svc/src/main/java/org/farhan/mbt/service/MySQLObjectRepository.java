@@ -61,4 +61,9 @@ public class MySQLObjectRepository implements ObjectRepository {
 		return results.size() != 0;
 	}
 
+	@Override
+	public void clear(String tags) {
+		jdbcTemplate.update("delete from Model_Source_Files where file_name like '" + tags + "/%'");
+	}
+
 }

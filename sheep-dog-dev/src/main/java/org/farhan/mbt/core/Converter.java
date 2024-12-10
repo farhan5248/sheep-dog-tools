@@ -19,6 +19,10 @@ public abstract class Converter {
 
 	protected abstract void initProjects() throws Exception;
 
+	public void clearObjects() throws Exception {
+		fa.clear(tags);
+	}
+
 	public ArrayList<String> getObjectNames() throws Exception {
 		initProjects();
 		// TODO this is temp hack until I figure out how to manage the objects, the

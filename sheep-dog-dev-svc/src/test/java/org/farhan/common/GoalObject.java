@@ -41,17 +41,21 @@ public class GoalObject extends TestObject {
 		}
 	}
 
+	private void clearObjects(String goal) {
+		TreeMap<String, String> parameters = new TreeMap<String, String>();
+		parameters.put("tags", attributes.get("tags"));
+		restTemplate.delete(getHost() + "clear" + goal + "Objects?tags={tags}", parameters);
+	}
+
 	protected void runGoal(String goal) {
 
 		SourceRepository sr = new SourceRepository();
-		String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/",
-				"src/test/java/org/farhan/objects/", "src/test/java/org/farhan/stepdefs/" };
-
+		String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/" };
 		try {
-
 			if (goal.endsWith("ToUML")) {
-				for (int i = 0; i < 2; i++) {
-					for (String fileName : sr.list(dirs[i], "")) {
+				clearObjects(goal);
+				for (String dir : dirs) {
+					for (String fileName : sr.list(dir, "")) {
 						convertObject(goal, fileName, sr.get(fileName));
 					}
 				}

@@ -17,4 +17,6 @@ public interface ObjectRepository {
 	public void put(String tags, String path, String content) throws Exception;
 
 	public boolean contains(String tags, String path);
+	
+	public void clear(String tags);
 }

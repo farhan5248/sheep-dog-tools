@@ -66,4 +66,21 @@ public class FileObjectRepository implements ObjectRepository {
 		pw.close();
 	}
 
+	@Override
+	public void clear(String tags) {
+		deleteDir(new File(BASEDIR + tags + "/"));
+	}
+
+	public void deleteDir(File aDir) {
+		if (aDir.exists()) {
+			for (String s : aDir.list()) {
+				File f = new File(aDir.getAbsolutePath() + File.separator + s);
+				if (f.isDirectory()) {
+					deleteDir(f);
+				}
+				f.delete();
+			}
+		}
+	}
+
 }
