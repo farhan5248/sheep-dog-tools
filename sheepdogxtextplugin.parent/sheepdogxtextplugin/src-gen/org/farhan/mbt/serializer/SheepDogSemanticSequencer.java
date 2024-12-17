@@ -15,9 +15,30 @@ import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.farhan.mbt.services.SheepDogGrammarAccess;
-import org.farhan.mbt.sheepDog.Greeting;
-import org.farhan.mbt.sheepDog.Model;
+import org.farhan.mbt.sheepDog.And;
+import org.farhan.mbt.sheepDog.Asterisk;
+import org.farhan.mbt.sheepDog.Background;
+import org.farhan.mbt.sheepDog.But;
+import org.farhan.mbt.sheepDog.Cell;
+import org.farhan.mbt.sheepDog.DocString;
+import org.farhan.mbt.sheepDog.Examples;
+import org.farhan.mbt.sheepDog.ExamplesTable;
+import org.farhan.mbt.sheepDog.Feature;
+import org.farhan.mbt.sheepDog.Given;
+import org.farhan.mbt.sheepDog.Line;
+import org.farhan.mbt.sheepDog.ParametersTable;
+import org.farhan.mbt.sheepDog.Row;
+import org.farhan.mbt.sheepDog.Scenario;
+import org.farhan.mbt.sheepDog.ScenarioOutline;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
+import org.farhan.mbt.sheepDog.Statement;
+import org.farhan.mbt.sheepDog.StepDefinition;
+import org.farhan.mbt.sheepDog.StepObject;
+import org.farhan.mbt.sheepDog.StepParameters;
+import org.farhan.mbt.sheepDog.StepTable;
+import org.farhan.mbt.sheepDog.Tag;
+import org.farhan.mbt.sheepDog.Then;
+import org.farhan.mbt.sheepDog.When;
 
 @SuppressWarnings("all")
 public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequencer {
@@ -33,11 +54,74 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == SheepDogPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case SheepDogPackage.GREETING:
-				sequence_Greeting(context, (Greeting) semanticObject); 
+			case SheepDogPackage.AND:
+				sequence_And(context, (And) semanticObject); 
 				return; 
-			case SheepDogPackage.MODEL:
-				sequence_Model(context, (Model) semanticObject); 
+			case SheepDogPackage.ASTERISK:
+				sequence_Asterisk(context, (Asterisk) semanticObject); 
+				return; 
+			case SheepDogPackage.BACKGROUND:
+				sequence_Background(context, (Background) semanticObject); 
+				return; 
+			case SheepDogPackage.BUT:
+				sequence_But(context, (But) semanticObject); 
+				return; 
+			case SheepDogPackage.CELL:
+				sequence_Cell(context, (Cell) semanticObject); 
+				return; 
+			case SheepDogPackage.DOC_STRING:
+				sequence_DocString(context, (DocString) semanticObject); 
+				return; 
+			case SheepDogPackage.EXAMPLES:
+				sequence_Examples(context, (Examples) semanticObject); 
+				return; 
+			case SheepDogPackage.EXAMPLES_TABLE:
+				sequence_ExamplesTable(context, (ExamplesTable) semanticObject); 
+				return; 
+			case SheepDogPackage.FEATURE:
+				sequence_Feature(context, (Feature) semanticObject); 
+				return; 
+			case SheepDogPackage.GIVEN:
+				sequence_Given(context, (Given) semanticObject); 
+				return; 
+			case SheepDogPackage.LINE:
+				sequence_Line(context, (Line) semanticObject); 
+				return; 
+			case SheepDogPackage.PARAMETERS_TABLE:
+				sequence_ParametersTable(context, (ParametersTable) semanticObject); 
+				return; 
+			case SheepDogPackage.ROW:
+				sequence_Row(context, (Row) semanticObject); 
+				return; 
+			case SheepDogPackage.SCENARIO:
+				sequence_Scenario(context, (Scenario) semanticObject); 
+				return; 
+			case SheepDogPackage.SCENARIO_OUTLINE:
+				sequence_ScenarioOutline(context, (ScenarioOutline) semanticObject); 
+				return; 
+			case SheepDogPackage.STATEMENT:
+				sequence_Statement(context, (Statement) semanticObject); 
+				return; 
+			case SheepDogPackage.STEP_DEFINITION:
+				sequence_StepDefinition(context, (StepDefinition) semanticObject); 
+				return; 
+			case SheepDogPackage.STEP_OBJECT:
+				sequence_StepObject(context, (StepObject) semanticObject); 
+				return; 
+			case SheepDogPackage.STEP_PARAMETERS:
+				sequence_StepParameters(context, (StepParameters) semanticObject); 
+				return; 
+			case SheepDogPackage.STEP_TABLE:
+				sequence_StepTable(context, (StepTable) semanticObject); 
+				return; 
+			case SheepDogPackage.TAG:
+				sequence_Tag(context, (Tag) semanticObject); 
+				return; 
+			case SheepDogPackage.THEN:
+				sequence_Then(context, (Then) semanticObject); 
+				return; 
+			case SheepDogPackage.WHEN:
+				sequence_When(context, (When) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -47,19 +131,79 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Greeting returns Greeting
+	 *     Step returns And
+	 *     And returns And
 	 *
 	 * Constraint:
-	 *     name=ID
+	 *     (name=Phrase (theStepTable=StepTable | theDocString=DocString)?)
 	 * </pre>
 	 */
-	protected void sequence_Greeting(ISerializationContext context, Greeting semanticObject) {
+	protected void sequence_And(ISerializationContext context, And semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Step returns Asterisk
+	 *     Asterisk returns Asterisk
+	 *
+	 * Constraint:
+	 *     (name=Phrase (theStepTable=StepTable | theDocString=DocString)?)
+	 * </pre>
+	 */
+	protected void sequence_Asterisk(ISerializationContext context, Asterisk semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     AbstractScenario returns Background
+	 *     Background returns Background
+	 *
+	 * Constraint:
+	 *     (name=Phrase statements+=Statement* steps+=Step*)
+	 * </pre>
+	 */
+	protected void sequence_Background(ISerializationContext context, Background semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Step returns But
+	 *     But returns But
+	 *
+	 * Constraint:
+	 *     (name=Phrase (theStepTable=StepTable | theDocString=DocString)?)
+	 * </pre>
+	 */
+	protected void sequence_But(ISerializationContext context, But semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Cell returns Cell
+	 *
+	 * Constraint:
+	 *     name=Phrase
+	 * </pre>
+	 */
+	protected void sequence_Cell(ISerializationContext context, Cell semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, SheepDogPackage.Literals.GREETING__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.GREETING__NAME));
+			if (transientValues.isValueTransient(semanticObject, SheepDogPackage.Literals.CELL__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.CELL__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getCellAccess().getNamePhraseParserRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
@@ -67,13 +211,276 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Model returns Model
+	 *     DocString returns DocString
 	 *
 	 * Constraint:
-	 *     greetings+=Greeting+
+	 *     lines+=Line+
 	 * </pre>
 	 */
-	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
+	protected void sequence_DocString(ISerializationContext context, DocString semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ExamplesTable returns ExamplesTable
+	 *
+	 * Constraint:
+	 *     rows+=Row+
+	 * </pre>
+	 */
+	protected void sequence_ExamplesTable(ISerializationContext context, ExamplesTable semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Examples returns Examples
+	 *
+	 * Constraint:
+	 *     (tags+=Tag* name=Phrase statements+=Statement* theExamplesTable=ExamplesTable)
+	 * </pre>
+	 */
+	protected void sequence_Examples(ISerializationContext context, Examples semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Model returns Feature
+	 *     Feature returns Feature
+	 *
+	 * Constraint:
+	 *     (tags+=Tag* name=Phrase statements+=Statement* abstractScenarios+=AbstractScenario*)
+	 * </pre>
+	 */
+	protected void sequence_Feature(ISerializationContext context, Feature semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Step returns Given
+	 *     Given returns Given
+	 *
+	 * Constraint:
+	 *     (name=Phrase (theStepTable=StepTable | theDocString=DocString)?)
+	 * </pre>
+	 */
+	protected void sequence_Given(ISerializationContext context, Given semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Line returns Line
+	 *
+	 * Constraint:
+	 *     name=LineBits
+	 * </pre>
+	 */
+	protected void sequence_Line(ISerializationContext context, Line semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SheepDogPackage.Literals.LINE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.LINE__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getLineAccess().getNameLineBitsParserRuleCall_0_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ParametersTable returns ParametersTable
+	 *
+	 * Constraint:
+	 *     rows+=Row+
+	 * </pre>
+	 */
+	protected void sequence_ParametersTable(ISerializationContext context, ParametersTable semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Row returns Row
+	 *
+	 * Constraint:
+	 *     cells+=Cell+
+	 * </pre>
+	 */
+	protected void sequence_Row(ISerializationContext context, Row semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     AbstractScenario returns ScenarioOutline
+	 *     ScenarioOutline returns ScenarioOutline
+	 *
+	 * Constraint:
+	 *     (tags+=Tag* name=Phrase statements+=Statement* steps+=Step* examples+=Examples+)
+	 * </pre>
+	 */
+	protected void sequence_ScenarioOutline(ISerializationContext context, ScenarioOutline semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     AbstractScenario returns Scenario
+	 *     Scenario returns Scenario
+	 *
+	 * Constraint:
+	 *     (tags+=Tag* name=Phrase statements+=Statement* steps+=Step*)
+	 * </pre>
+	 */
+	protected void sequence_Scenario(ISerializationContext context, Scenario semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Statement returns Statement
+	 *
+	 * Constraint:
+	 *     name=Phrase
+	 * </pre>
+	 */
+	protected void sequence_Statement(ISerializationContext context, Statement semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SheepDogPackage.Literals.STATEMENT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.STATEMENT__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getStatementAccess().getNamePhraseParserRuleCall_0_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     StepDefinition returns StepDefinition
+	 *
+	 * Constraint:
+	 *     (name=Phrase statements+=Statement* stepParameters+=StepParameters*)
+	 * </pre>
+	 */
+	protected void sequence_StepDefinition(ISerializationContext context, StepDefinition semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Model returns StepObject
+	 *     StepObject returns StepObject
+	 *
+	 * Constraint:
+	 *     (name=Phrase statements+=Statement* stepDefinitions+=StepDefinition*)
+	 * </pre>
+	 */
+	protected void sequence_StepObject(ISerializationContext context, StepObject semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     StepParameters returns StepParameters
+	 *
+	 * Constraint:
+	 *     (name=Phrase statements+=Statement* parametersTable=ParametersTable)
+	 * </pre>
+	 */
+	protected void sequence_StepParameters(ISerializationContext context, StepParameters semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     StepTable returns StepTable
+	 *
+	 * Constraint:
+	 *     rows+=Row+
+	 * </pre>
+	 */
+	protected void sequence_StepTable(ISerializationContext context, StepTable semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Tag returns Tag
+	 *
+	 * Constraint:
+	 *     name=ID
+	 * </pre>
+	 */
+	protected void sequence_Tag(ISerializationContext context, Tag semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SheepDogPackage.Literals.TAG__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.TAG__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getTagAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Step returns Then
+	 *     Then returns Then
+	 *
+	 * Constraint:
+	 *     (name=Phrase (theStepTable=StepTable | theDocString=DocString)?)
+	 * </pre>
+	 */
+	protected void sequence_Then(ISerializationContext context, Then semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Step returns When
+	 *     When returns When
+	 *
+	 * Constraint:
+	 *     (name=Phrase (theStepTable=StepTable | theDocString=DocString)?)
+	 * </pre>
+	 */
+	protected void sequence_When(ISerializationContext context, When semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

@@ -66,7 +66,31 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
     switch (eClass.getClassifierID())
     {
       case SheepDogPackage.MODEL: return createModel();
-      case SheepDogPackage.GREETING: return createGreeting();
+      case SheepDogPackage.STEP_OBJECT: return createStepObject();
+      case SheepDogPackage.STEP_DEFINITION: return createStepDefinition();
+      case SheepDogPackage.STEP_PARAMETERS: return createStepParameters();
+      case SheepDogPackage.PARAMETERS_TABLE: return createParametersTable();
+      case SheepDogPackage.FEATURE: return createFeature();
+      case SheepDogPackage.ABSTRACT_SCENARIO: return createAbstractScenario();
+      case SheepDogPackage.BACKGROUND: return createBackground();
+      case SheepDogPackage.SCENARIO: return createScenario();
+      case SheepDogPackage.SCENARIO_OUTLINE: return createScenarioOutline();
+      case SheepDogPackage.EXAMPLES: return createExamples();
+      case SheepDogPackage.EXAMPLES_TABLE: return createExamplesTable();
+      case SheepDogPackage.STEP_TABLE: return createStepTable();
+      case SheepDogPackage.ROW: return createRow();
+      case SheepDogPackage.CELL: return createCell();
+      case SheepDogPackage.STEP: return createStep();
+      case SheepDogPackage.DOC_STRING: return createDocString();
+      case SheepDogPackage.GIVEN: return createGiven();
+      case SheepDogPackage.WHEN: return createWhen();
+      case SheepDogPackage.THEN: return createThen();
+      case SheepDogPackage.AND: return createAnd();
+      case SheepDogPackage.BUT: return createBut();
+      case SheepDogPackage.ASTERISK: return createAsterisk();
+      case SheepDogPackage.STATEMENT: return createStatement();
+      case SheepDogPackage.TAG: return createTag();
+      case SheepDogPackage.LINE: return createLine();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -90,10 +114,298 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
    * @generated
    */
   @Override
-  public Greeting createGreeting()
+  public StepObject createStepObject()
   {
-    GreetingImpl greeting = new GreetingImpl();
-    return greeting;
+    StepObjectImpl stepObject = new StepObjectImpl();
+    return stepObject;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public StepDefinition createStepDefinition()
+  {
+    StepDefinitionImpl stepDefinition = new StepDefinitionImpl();
+    return stepDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public StepParameters createStepParameters()
+  {
+    StepParametersImpl stepParameters = new StepParametersImpl();
+    return stepParameters;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ParametersTable createParametersTable()
+  {
+    ParametersTableImpl parametersTable = new ParametersTableImpl();
+    return parametersTable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Feature createFeature()
+  {
+    FeatureImpl feature = new FeatureImpl();
+    return feature;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public AbstractScenario createAbstractScenario()
+  {
+    AbstractScenarioImpl abstractScenario = new AbstractScenarioImpl();
+    return abstractScenario;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Background createBackground()
+  {
+    BackgroundImpl background = new BackgroundImpl();
+    return background;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Scenario createScenario()
+  {
+    ScenarioImpl scenario = new ScenarioImpl();
+    return scenario;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ScenarioOutline createScenarioOutline()
+  {
+    ScenarioOutlineImpl scenarioOutline = new ScenarioOutlineImpl();
+    return scenarioOutline;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Examples createExamples()
+  {
+    ExamplesImpl examples = new ExamplesImpl();
+    return examples;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ExamplesTable createExamplesTable()
+  {
+    ExamplesTableImpl examplesTable = new ExamplesTableImpl();
+    return examplesTable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public StepTable createStepTable()
+  {
+    StepTableImpl stepTable = new StepTableImpl();
+    return stepTable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Row createRow()
+  {
+    RowImpl row = new RowImpl();
+    return row;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Cell createCell()
+  {
+    CellImpl cell = new CellImpl();
+    return cell;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Step createStep()
+  {
+    StepImpl step = new StepImpl();
+    return step;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public DocString createDocString()
+  {
+    DocStringImpl docString = new DocStringImpl();
+    return docString;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Given createGiven()
+  {
+    GivenImpl given = new GivenImpl();
+    return given;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public When createWhen()
+  {
+    WhenImpl when = new WhenImpl();
+    return when;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Then createThen()
+  {
+    ThenImpl then = new ThenImpl();
+    return then;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public And createAnd()
+  {
+    AndImpl and = new AndImpl();
+    return and;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public But createBut()
+  {
+    ButImpl but = new ButImpl();
+    return but;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Asterisk createAsterisk()
+  {
+    AsteriskImpl asterisk = new AsteriskImpl();
+    return asterisk;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Statement createStatement()
+  {
+    StatementImpl statement = new StatementImpl();
+    return statement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Tag createTag()
+  {
+    TagImpl tag = new TagImpl();
+    return tag;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Line createLine()
+  {
+    LineImpl line = new LineImpl();
+    return line;
   }
 
   /**

@@ -3,57 +3,55 @@
  */
 package org.farhan.mbt.sheepDog.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import java.util.Collection;
+
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.farhan.mbt.sheepDog.Greeting;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.farhan.mbt.sheepDog.ParametersTable;
+import org.farhan.mbt.sheepDog.Row;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Greeting</b></em>'.
+ * An implementation of the model object '<em><b>Parameters Table</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.GreetingImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.ParametersTableImpl#getRows <em>Rows</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeting
+public class ParametersTableImpl extends MinimalEObjectImpl.Container implements ParametersTable
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getRows() <em>Rows</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getRows()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
+  protected EList<Row> rows;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected GreetingImpl()
+  protected ParametersTableImpl()
   {
     super();
   }
@@ -66,7 +64,7 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
   @Override
   protected EClass eStaticClass()
   {
-    return SheepDogPackage.Literals.GREETING;
+    return SheepDogPackage.Literals.PARAMETERS_TABLE;
   }
 
   /**
@@ -75,9 +73,13 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
    * @generated
    */
   @Override
-  public String getName()
+  public EList<Row> getRows()
   {
-    return name;
+    if (rows == null)
+    {
+      rows = new EObjectContainmentEList<Row>(Row.class, this, SheepDogPackage.PARAMETERS_TABLE__ROWS);
+    }
+    return rows;
   }
 
   /**
@@ -86,12 +88,14 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
    * @generated
    */
   @Override
-  public void setName(String newName)
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.GREETING__NAME, oldName, name));
+    switch (featureID)
+    {
+      case SheepDogPackage.PARAMETERS_TABLE__ROWS:
+        return ((InternalEList<?>)getRows()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -104,8 +108,8 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
   {
     switch (featureID)
     {
-      case SheepDogPackage.GREETING__NAME:
-        return getName();
+      case SheepDogPackage.PARAMETERS_TABLE__ROWS:
+        return getRows();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -115,13 +119,15 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case SheepDogPackage.GREETING__NAME:
-        setName((String)newValue);
+      case SheepDogPackage.PARAMETERS_TABLE__ROWS:
+        getRows().clear();
+        getRows().addAll((Collection<? extends Row>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,8 +143,8 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
   {
     switch (featureID)
     {
-      case SheepDogPackage.GREETING__NAME:
-        setName(NAME_EDEFAULT);
+      case SheepDogPackage.PARAMETERS_TABLE__ROWS:
+        getRows().clear();
         return;
     }
     super.eUnset(featureID);
@@ -154,27 +160,10 @@ public class GreetingImpl extends MinimalEObjectImpl.Container implements Greeti
   {
     switch (featureID)
     {
-      case SheepDogPackage.GREETING__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case SheepDogPackage.PARAMETERS_TABLE__ROWS:
+        return rows != null && !rows.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
-  }
-
-} //GreetingImpl
+} //ParametersTableImpl

@@ -7,21 +7,21 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Greeting</b></em>'.
+ * A representation of the model object '<em><b>Statement</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.Greeting#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.Statement#getName <em>Name</em>}</li>
  * </ul>
  *
- * @see org.farhan.mbt.sheepDog.SheepDogPackage#getGreeting()
+ * @see org.farhan.mbt.sheepDog.SheepDogPackage#getStatement()
  * @model
  * @generated
  */
-public interface Greeting extends EObject
+public interface Statement extends EObject
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -29,14 +29,14 @@ public interface Greeting extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getGreeting_Name()
+   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getStatement_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.farhan.mbt.sheepDog.Greeting#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.farhan.mbt.sheepDog.Statement#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -45,4 +45,4 @@ public interface Greeting extends EObject
    */
   void setName(String value);
 
-} // Greeting
+} // Statement

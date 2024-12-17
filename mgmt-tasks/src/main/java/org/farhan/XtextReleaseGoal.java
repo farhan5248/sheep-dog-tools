@@ -2,7 +2,6 @@ package org.farhan;
 
 import java.io.File;
 import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -12,25 +11,37 @@ import java.util.stream.Collectors;
 
 public class XtextReleaseGoal {
 
-	private static File rootDir = new File("C:\\Users\\Farhan\\git\\lean-sheep-dog-tools\\sheepdogxtextcukeplugin.parent");
+	private static File rootDir;
+	private static String template = "C:\\Users\\Farhan\\git\\lean-sheep-dog-tools\\template.parent";
+	private static String project;
+	private static String automation = "sheepdogxtextcukeplugin";
+	private static String documentation = "sheepdogxtextplugin";
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
 		String currentVersion = "1.1.0";
 		String nextVersion = "1.2.0";
 		String currentSheepDogTestVersion = "1.4";
 		String nextSheepDogTestVersion = "1.5";
 
-        // updateToRelease(currentVersion, currentSheepDogTestVersion);
+		// project = automation;
+		// currentVersion = "1.1.0";
+		// nextVersion = "1.2.0";
+		// project = documentation;
+		// currentVersion = "1.0.0";
+		// nextVersion = "1.1.0";
+		rootDir = new File(template.replace("template", project));
+		// updateToRelease(currentVersion, currentSheepDogTestVersion);
 		// Run mvn install
 		// Run git add and git commit
 		// Run git tag
-		// updateToSnapshot(currentVersion, nextVersion, currentSheepDogTestVersion, nextSheepDogTestVersion);
+		// updateToSnapshot(currentVersion, nextVersion, currentSheepDogTestVersion,
+		// nextSheepDogTestVersion);
 		// Run mvn install
 		// Run git add and git commit
 	}
 
-	private static void updateToSnapshot(String cv, String nv, String csdtv, String nsdtv) {
+	private static void updateToSnapshot(String cv, String nv, String csdtv, String nsdtv) throws Exception {
 		updateVersion("<sheep-dog-test.version>", csdtv + "</sheep-dog-test.version>",
 				nsdtv + "-SNAPSHOT</sheep-dog-test.version>", "pom.xml");
 		updateVersion("<version>", cv + "</version>", nv + "-SNAPSHOT</version>", "pom.xml");
@@ -39,33 +50,26 @@ public class XtextReleaseGoal {
 		System.out.println("[maven-release-plugin] prepare for next development iteration");
 	}
 
-	private static void updateToRelease(String cv, String csdtv) {
+	private static void updateToRelease(String cv, String csdtv) throws Exception {
 		updateVersion("<sheep-dog-test.version>", csdtv + "-SNAPSHOT</sheep-dog-test.version>",
 				csdtv + "</sheep-dog-test.version>", "pom.xml");
 		updateVersion("<version>", cv + "-SNAPSHOT</version>", cv + "</version>", "pom.xml");
 		updateVersion("Bundle-Version: ", cv + ".qualifier", cv + "", "MANIFEST.MF");
 		updateVersion("version=\"", cv + ".qualifier\"", cv + "\"", "feature.xml");
-		System.out.println("[maven-release-plugin] prepare release sheepdogxtextcukeplugin-" + cv);
-		System.out.println("sheepdogxtextcukeplugin-" + cv);
+		System.out.println("[maven-release-plugin] prepare release " + project + "-" + cv);
+		System.out.println(project + "-" + cv);
 	}
 
-	private static void updateVersion(String start, String currentVersionEnd, String nextVersionEnd, String fileName) {
+	private static void updateVersion(String start, String currentVersionEnd, String nextVersionEnd, String fileName)
+			throws Exception {
 		String currentVersionSearchTerm = start + currentVersionEnd;
 		String nextVersionSearchTerm = start + nextVersionEnd;
 
 		ArrayList<File> fileList = recursivelyListFiles(rootDir, fileName);
-
 		List<File> filteredList = fileList.stream().filter(f -> (f.getName().contentEquals(fileName)))
 				.collect(Collectors.toList());
-		filteredList.stream().forEach(f -> {
-			// System.out.println(f.getAbsolutePath());
-		});
 		for (File f : filteredList) {
-			try {
-				writeFile(f, readFile(f).replace(currentVersionSearchTerm, nextVersionSearchTerm));
-			} catch (Exception e) {
-				System.out.println(getStackTraceAsString(e));
-			}
+			writeFile(f, readFile(f).replace(currentVersionSearchTerm, nextVersionSearchTerm));
 		}
 	}
 
@@ -100,15 +104,7 @@ public class XtextReleaseGoal {
 		return theFiles;
 	}
 
-	private static String getStackTraceAsString(Exception e) {
-		StringWriter sw = new StringWriter();
-		e.printStackTrace(new PrintWriter(sw));
-		String exceptionAsString = sw.toString();
-		return exceptionAsString;
-	}
-
 	private static void writeFile(File aFile, String content) throws Exception {
-		aFile.getParentFile().mkdirs();
 		PrintWriter aPrintWriter = new PrintWriter(aFile, StandardCharsets.UTF_8);
 		aPrintWriter.print(content);
 		aPrintWriter.flush();
@@ -116,7 +112,6 @@ public class XtextReleaseGoal {
 	}
 
 	private static String readFile(File aFile) throws Exception {
-		String content = new String(Files.readAllBytes(Paths.get(aFile.toURI())), StandardCharsets.UTF_8);
-		return content;
+		return new String(Files.readAllBytes(Paths.get(aFile.toURI())), StandardCharsets.UTF_8);
 	}
 }
