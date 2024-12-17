@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: sheepdogxtextplugin
+Bundle-ManifestVersion: 2
+Bundle-Name: sheepdogxtextplugin
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: sheepdogxtextplugin; singleton:=true
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: lib/sheep-dog-test.jar,
+ .
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.16.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.36.0",
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Export-Package: org.farhan.mbt.formatting2,
+ org.farhan.mbt.services,
+ org.farhan.mbt.scoping,
+ org.farhan.mbt.parser.antlr,
+ org.farhan.mbt.parser.antlr.internal,
+ org.farhan.mbt,
+ org.farhan.mbt.sheepDog.impl,
+ org.farhan.mbt.sheepDog.util,
+ org.farhan.mbt.validation,
+ org.farhan.mbt.sheepDog,
+ org.farhan.mbt.generator,
+ org.farhan.mbt.serializer
+Import-Package: org.apache.log4j
