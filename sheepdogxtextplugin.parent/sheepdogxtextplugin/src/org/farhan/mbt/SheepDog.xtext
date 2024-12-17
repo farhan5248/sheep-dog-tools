@@ -1,117 +1,62 @@
-grammar org.farhan.mbt.SheepDog with org.eclipse.xtext.common.Terminals
+grammar org.farhan.mbt.SheepDog hidden(WS, SL_COMMENT)
 
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 generate sheepDog "http://www.farhan.org/mbt/SheepDog"
 
 Model:
-	Feature | StepObject;
-
-StepObject:
-	'Object:' name=Phrase EOL
-	statements+=Statement*
-	stepDefinitions+=StepDefinition*;
-
-StepDefinition:
-	'Definition:' name=Phrase EOL
-	statements+=Statement*
-	stepParameters+=StepParameters*;
-
-StepParameters:
-	'Parameters:' name=Phrase EOL
-	statements+=Statement*
-	parametersTable=ParametersTable;
-
-ParametersTable:
-	rows+=Row+;
+	StepObject | Feature;
 
 Feature:
-	(tags+=Tag+ EOL)?
-	'Feature:' name=Phrase EOL
+	tags=FeatureTags?
+	'=' name=Phrase EOL
 	statements+=Statement*
-	abstractScenarios+=AbstractScenario*;
-
-// TODO add parameters to step, cell, line tokens
-// This has the side effect of allowing more than 1 Background.
-// Also it allows it to be anywhere, like at the begining or end.
-// I'm doing it this way to make the formatting code simpler by having less duplication
-AbstractScenario:
-	Background | Scenario | ScenarioOutline;
+	background=Background?
+	scenarios+=Scenario*;
 
 Background:
-	'Background:' name=Phrase EOL
+	'[background="true"]' EOL
+	'==' name=Phrase EOL
 	statements+=Statement*
 	steps+=Step*;
 
 Scenario:
-	(tags+=Tag+ EOL)?
-	'Scenario:' name=Phrase EOL
-	statements+=Statement*
-	steps+=Step*;
-
-ScenarioOutline:
-	(tags+=Tag+ EOL)?
-	'Scenario Outline:' name=Phrase EOL
+	tags=ScenarioTags?
+	'==' name=Phrase EOL
 	statements+=Statement*
 	steps+=Step*
 	examples+=Examples+;
 
 Examples:
-	(tags+=Tag+ EOL)?
-	'Examples:' name=Phrase EOL
+	'[examples="true"]' EOL
+	'===' name=Phrase EOL
 	statements+=Statement*
-	theExamplesTable=ExamplesTable;
+	theExamplesTable=Table;
 
-ExamplesTable:
-	rows+=Row+;
+ScenarioTags:
+	'[tags="' name=Phrase '"]' EOL;
 
-StepTable:
-	rows+=Row+;
-
-Row:
-	cells+=Cell+ '|' EOL;
-
-Cell:
-	'|' name=Phrase;
+FeatureTags:
+	':tags:' name=Phrase EOL;
 
 Step:
-	Given | When | Then | And | But | Asterisk;
-
-DocString:
-	'"""' EOL
-	lines+=Line+
-	'"""' EOL;
+	Given | When | Then;
 
 Given:
-	'Given' name=Phrase EOL
-	(theStepTable=StepTable | theDocString=DocString)?;
+	'===' 'Given' name=Phrase EOL
+	(theStepTable=Table | theDocString=DocString)?;
 
 When:
-	'When' name=Phrase EOL
-	(theStepTable=StepTable | theDocString=DocString)?;
+	'===' 'When' name=Phrase EOL
+	(theStepTable=Table | theDocString=DocString)?;
 
 Then:
-	'Then' name=Phrase EOL
-	(theStepTable=StepTable | theDocString=DocString)?;
+	'===' 'Then' name=Phrase EOL
+	(theStepTable=Table | theDocString=DocString)?;
 
-And:
-	'And' name=Phrase EOL
-	(theStepTable=StepTable | theDocString=DocString)?;
-
-But:
-	'But' name=Phrase EOL
-	(theStepTable=StepTable | theDocString=DocString)?;
-
-Asterisk:
-	'*' name=Phrase EOL
-	(theStepTable=StepTable | theDocString=DocString)?;
-
-Statement:
-	name=Phrase EOL;
-
-Phrase:
-	TEXT_LITERAL+;
-
-Tag:
-	'@' name=ID;
+DocString:
+	'----' EOL
+	lines+=Line+
+	'----' EOL;
 
 Line:
 	name=LineBits EOL;
@@ -119,13 +64,47 @@ Line:
 LineBits:
 	TEXT_LITERAL*;
 
+// TODO this is duplicate of StepTable
+Table:
+	'[options="header"]' EOL
+	'|===' EOL
+	rows+=Row+
+	'|===' EOL;
+
+Row:
+	cells+=Cell+ EOL;
+
+Cell:
+	'|' name=Phrase;
+
+Statement:
+	name=Phrase EOL;
+
+Phrase:
+	TEXT_LITERAL+;
+
 TEXT_LITERAL:
 	WORD
 	| ID
 	| STRING;
 
+StepObject:
+	'=' name=Phrase EOL
+	statements+=Statement*
+	stepDefinitions+=StepDefinition*;
+
+StepDefinition:
+	'==' name=Phrase EOL
+	statements+=Statement*
+	stepParameters+=StepParameters*;
+
+StepParameters:
+	'===' name=Phrase EOL
+	statements+=Statement*
+	parametersTable=Table;
+
 terminal ID:
-	('0'..'9' | 'a'..'z' | 'A'..'Z' | '_' | '-' | '.')+;
+	('0'..'9' | 'a'..'z' | 'A'..'Z' | '_' | '-' | '.' | ',')+;
 
 terminal WORD:
 	!('@' | '|' | ' ' | '\t' | '\n' | '\r')

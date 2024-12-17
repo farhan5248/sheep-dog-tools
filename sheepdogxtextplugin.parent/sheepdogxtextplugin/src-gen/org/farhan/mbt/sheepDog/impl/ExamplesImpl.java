@@ -20,10 +20,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.farhan.mbt.sheepDog.Examples;
-import org.farhan.mbt.sheepDog.ExamplesTable;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
 import org.farhan.mbt.sheepDog.Statement;
-import org.farhan.mbt.sheepDog.Tag;
+import org.farhan.mbt.sheepDog.Table;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +32,6 @@ import org.farhan.mbt.sheepDog.Tag;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.ExamplesImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.farhan.mbt.sheepDog.impl.ExamplesImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.farhan.mbt.sheepDog.impl.ExamplesImpl#getStatements <em>Statements</em>}</li>
  *   <li>{@link org.farhan.mbt.sheepDog.impl.ExamplesImpl#getTheExamplesTable <em>The Examples Table</em>}</li>
@@ -43,16 +41,6 @@ import org.farhan.mbt.sheepDog.Tag;
  */
 public class ExamplesImpl extends MinimalEObjectImpl.Container implements Examples
 {
-  /**
-   * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTags()
-   * @generated
-   * @ordered
-   */
-  protected EList<Tag> tags;
-
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -91,7 +79,7 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
    * @generated
    * @ordered
    */
-  protected ExamplesTable theExamplesTable;
+  protected Table theExamplesTable;
 
   /**
    * <!-- begin-user-doc -->
@@ -112,21 +100,6 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
   protected EClass eStaticClass()
   {
     return SheepDogPackage.Literals.EXAMPLES;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<Tag> getTags()
-  {
-    if (tags == null)
-    {
-      tags = new EObjectContainmentEList<Tag>(Tag.class, this, SheepDogPackage.EXAMPLES__TAGS);
-    }
-    return tags;
   }
 
   /**
@@ -175,7 +148,7 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
    * @generated
    */
   @Override
-  public ExamplesTable getTheExamplesTable()
+  public Table getTheExamplesTable()
   {
     return theExamplesTable;
   }
@@ -185,9 +158,9 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTheExamplesTable(ExamplesTable newTheExamplesTable, NotificationChain msgs)
+  public NotificationChain basicSetTheExamplesTable(Table newTheExamplesTable, NotificationChain msgs)
   {
-    ExamplesTable oldTheExamplesTable = theExamplesTable;
+    Table oldTheExamplesTable = theExamplesTable;
     theExamplesTable = newTheExamplesTable;
     if (eNotificationRequired())
     {
@@ -203,7 +176,7 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
    * @generated
    */
   @Override
-  public void setTheExamplesTable(ExamplesTable newTheExamplesTable)
+  public void setTheExamplesTable(Table newTheExamplesTable)
   {
     if (newTheExamplesTable != theExamplesTable)
     {
@@ -229,8 +202,6 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
   {
     switch (featureID)
     {
-      case SheepDogPackage.EXAMPLES__TAGS:
-        return ((InternalEList<?>)getTags()).basicRemove(otherEnd, msgs);
       case SheepDogPackage.EXAMPLES__STATEMENTS:
         return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
       case SheepDogPackage.EXAMPLES__THE_EXAMPLES_TABLE:
@@ -249,8 +220,6 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
   {
     switch (featureID)
     {
-      case SheepDogPackage.EXAMPLES__TAGS:
-        return getTags();
       case SheepDogPackage.EXAMPLES__NAME:
         return getName();
       case SheepDogPackage.EXAMPLES__STATEMENTS:
@@ -272,10 +241,6 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
   {
     switch (featureID)
     {
-      case SheepDogPackage.EXAMPLES__TAGS:
-        getTags().clear();
-        getTags().addAll((Collection<? extends Tag>)newValue);
-        return;
       case SheepDogPackage.EXAMPLES__NAME:
         setName((String)newValue);
         return;
@@ -284,7 +249,7 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
         getStatements().addAll((Collection<? extends Statement>)newValue);
         return;
       case SheepDogPackage.EXAMPLES__THE_EXAMPLES_TABLE:
-        setTheExamplesTable((ExamplesTable)newValue);
+        setTheExamplesTable((Table)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -300,9 +265,6 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
   {
     switch (featureID)
     {
-      case SheepDogPackage.EXAMPLES__TAGS:
-        getTags().clear();
-        return;
       case SheepDogPackage.EXAMPLES__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -310,7 +272,7 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
         getStatements().clear();
         return;
       case SheepDogPackage.EXAMPLES__THE_EXAMPLES_TABLE:
-        setTheExamplesTable((ExamplesTable)null);
+        setTheExamplesTable((Table)null);
         return;
     }
     super.eUnset(featureID);
@@ -326,8 +288,6 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
   {
     switch (featureID)
     {
-      case SheepDogPackage.EXAMPLES__TAGS:
-        return tags != null && !tags.isEmpty();
       case SheepDogPackage.EXAMPLES__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case SheepDogPackage.EXAMPLES__STATEMENTS:

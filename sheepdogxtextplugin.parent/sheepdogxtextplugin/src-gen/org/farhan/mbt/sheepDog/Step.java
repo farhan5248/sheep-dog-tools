@@ -52,12 +52,12 @@ public interface Step extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>The Step Table</em>' containment reference.
-   * @see #setTheStepTable(StepTable)
+   * @see #setTheStepTable(Table)
    * @see org.farhan.mbt.sheepDog.SheepDogPackage#getStep_TheStepTable()
    * @model containment="true"
    * @generated
    */
-  StepTable getTheStepTable();
+  Table getTheStepTable();
 
   /**
    * Sets the value of the '{@link org.farhan.mbt.sheepDog.Step#getTheStepTable <em>The Step Table</em>}' containment reference.
@@ -67,7 +67,7 @@ public interface Step extends EObject
    * @see #getTheStepTable()
    * @generated
    */
-  void setTheStepTable(StepTable value);
+  void setTheStepTable(Table value);
 
   /**
    * Returns the value of the '<em><b>The Doc String</b></em>' containment reference.

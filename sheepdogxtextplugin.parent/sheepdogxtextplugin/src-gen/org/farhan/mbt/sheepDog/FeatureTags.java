@@ -7,21 +7,21 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Tag</b></em>'.
+ * A representation of the model object '<em><b>Feature Tags</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.Tag#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.FeatureTags#getName <em>Name</em>}</li>
  * </ul>
  *
- * @see org.farhan.mbt.sheepDog.SheepDogPackage#getTag()
+ * @see org.farhan.mbt.sheepDog.SheepDogPackage#getFeatureTags()
  * @model
  * @generated
  */
-public interface Tag extends EObject
+public interface FeatureTags extends EObject
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -29,14 +29,14 @@ public interface Tag extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getTag_Name()
+   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getFeatureTags_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.farhan.mbt.sheepDog.Tag#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.farhan.mbt.sheepDog.FeatureTags#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -45,4 +45,4 @@ public interface Tag extends EObject
    */
   void setName(String value);
 
-} // Tag
+} // FeatureTags

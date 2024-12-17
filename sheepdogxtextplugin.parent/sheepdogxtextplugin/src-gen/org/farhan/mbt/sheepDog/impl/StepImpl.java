@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.farhan.mbt.sheepDog.DocString;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
 import org.farhan.mbt.sheepDog.Step;
-import org.farhan.mbt.sheepDog.StepTable;
+import org.farhan.mbt.sheepDog.Table;
 
 /**
  * <!-- begin-user-doc -->
@@ -62,7 +62,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * @generated
    * @ordered
    */
-  protected StepTable theStepTable;
+  protected Table theStepTable;
 
   /**
    * The cached value of the '{@link #getTheDocString() <em>The Doc String</em>}' containment reference.
@@ -126,7 +126,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * @generated
    */
   @Override
-  public StepTable getTheStepTable()
+  public Table getTheStepTable()
   {
     return theStepTable;
   }
@@ -136,9 +136,9 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTheStepTable(StepTable newTheStepTable, NotificationChain msgs)
+  public NotificationChain basicSetTheStepTable(Table newTheStepTable, NotificationChain msgs)
   {
-    StepTable oldTheStepTable = theStepTable;
+    Table oldTheStepTable = theStepTable;
     theStepTable = newTheStepTable;
     if (eNotificationRequired())
     {
@@ -154,7 +154,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * @generated
    */
   @Override
-  public void setTheStepTable(StepTable newTheStepTable)
+  public void setTheStepTable(Table newTheStepTable)
   {
     if (newTheStepTable != theStepTable)
     {
@@ -272,7 +272,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
         setName((String)newValue);
         return;
       case SheepDogPackage.STEP__THE_STEP_TABLE:
-        setTheStepTable((StepTable)newValue);
+        setTheStepTable((Table)newValue);
         return;
       case SheepDogPackage.STEP__THE_DOC_STRING:
         setTheDocString((DocString)newValue);
@@ -295,7 +295,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
         setName(NAME_EDEFAULT);
         return;
       case SheepDogPackage.STEP__THE_STEP_TABLE:
-        setTheStepTable((StepTable)null);
+        setTheStepTable((Table)null);
         return;
       case SheepDogPackage.STEP__THE_DOC_STRING:
         setTheDocString((DocString)null);

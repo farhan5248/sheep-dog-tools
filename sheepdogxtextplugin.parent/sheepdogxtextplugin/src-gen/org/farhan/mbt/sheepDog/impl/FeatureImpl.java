@@ -5,6 +5,7 @@ package org.farhan.mbt.sheepDog.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -12,13 +13,16 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.farhan.mbt.sheepDog.AbstractScenario;
+import org.farhan.mbt.sheepDog.Background;
 import org.farhan.mbt.sheepDog.Feature;
+import org.farhan.mbt.sheepDog.FeatureTags;
+import org.farhan.mbt.sheepDog.Scenario;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
-import org.farhan.mbt.sheepDog.Tag;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +33,8 @@ import org.farhan.mbt.sheepDog.Tag;
  * </p>
  * <ul>
  *   <li>{@link org.farhan.mbt.sheepDog.impl.FeatureImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.FeatureImpl#getAbstractScenarios <em>Abstract Scenarios</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.FeatureImpl#getBackground <em>Background</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.FeatureImpl#getScenarios <em>Scenarios</em>}</li>
  * </ul>
  *
  * @generated
@@ -37,24 +42,34 @@ import org.farhan.mbt.sheepDog.Tag;
 public class FeatureImpl extends ModelImpl implements Feature
 {
   /**
-   * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference list.
+   * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getTags()
    * @generated
    * @ordered
    */
-  protected EList<Tag> tags;
+  protected FeatureTags tags;
 
   /**
-   * The cached value of the '{@link #getAbstractScenarios() <em>Abstract Scenarios</em>}' containment reference list.
+   * The cached value of the '{@link #getBackground() <em>Background</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAbstractScenarios()
+   * @see #getBackground()
    * @generated
    * @ordered
    */
-  protected EList<AbstractScenario> abstractScenarios;
+  protected Background background;
+
+  /**
+   * The cached value of the '{@link #getScenarios() <em>Scenarios</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getScenarios()
+   * @generated
+   * @ordered
+   */
+  protected EList<Scenario> scenarios;
 
   /**
    * <!-- begin-user-doc -->
@@ -83,12 +98,8 @@ public class FeatureImpl extends ModelImpl implements Feature
    * @generated
    */
   @Override
-  public EList<Tag> getTags()
+  public FeatureTags getTags()
   {
-    if (tags == null)
-    {
-      tags = new EObjectContainmentEList<Tag>(Tag.class, this, SheepDogPackage.FEATURE__TAGS);
-    }
     return tags;
   }
 
@@ -97,14 +108,103 @@ public class FeatureImpl extends ModelImpl implements Feature
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public EList<AbstractScenario> getAbstractScenarios()
+  public NotificationChain basicSetTags(FeatureTags newTags, NotificationChain msgs)
   {
-    if (abstractScenarios == null)
+    FeatureTags oldTags = tags;
+    tags = newTags;
+    if (eNotificationRequired())
     {
-      abstractScenarios = new EObjectContainmentEList<AbstractScenario>(AbstractScenario.class, this, SheepDogPackage.FEATURE__ABSTRACT_SCENARIOS);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.FEATURE__TAGS, oldTags, newTags);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
     }
-    return abstractScenarios;
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setTags(FeatureTags newTags)
+  {
+    if (newTags != tags)
+    {
+      NotificationChain msgs = null;
+      if (tags != null)
+        msgs = ((InternalEObject)tags).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.FEATURE__TAGS, null, msgs);
+      if (newTags != null)
+        msgs = ((InternalEObject)newTags).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.FEATURE__TAGS, null, msgs);
+      msgs = basicSetTags(newTags, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.FEATURE__TAGS, newTags, newTags));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Background getBackground()
+  {
+    return background;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetBackground(Background newBackground, NotificationChain msgs)
+  {
+    Background oldBackground = background;
+    background = newBackground;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.FEATURE__BACKGROUND, oldBackground, newBackground);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setBackground(Background newBackground)
+  {
+    if (newBackground != background)
+    {
+      NotificationChain msgs = null;
+      if (background != null)
+        msgs = ((InternalEObject)background).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.FEATURE__BACKGROUND, null, msgs);
+      if (newBackground != null)
+        msgs = ((InternalEObject)newBackground).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.FEATURE__BACKGROUND, null, msgs);
+      msgs = basicSetBackground(newBackground, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.FEATURE__BACKGROUND, newBackground, newBackground));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EList<Scenario> getScenarios()
+  {
+    if (scenarios == null)
+    {
+      scenarios = new EObjectContainmentEList<Scenario>(Scenario.class, this, SheepDogPackage.FEATURE__SCENARIOS);
+    }
+    return scenarios;
   }
 
   /**
@@ -118,9 +218,11 @@ public class FeatureImpl extends ModelImpl implements Feature
     switch (featureID)
     {
       case SheepDogPackage.FEATURE__TAGS:
-        return ((InternalEList<?>)getTags()).basicRemove(otherEnd, msgs);
-      case SheepDogPackage.FEATURE__ABSTRACT_SCENARIOS:
-        return ((InternalEList<?>)getAbstractScenarios()).basicRemove(otherEnd, msgs);
+        return basicSetTags(null, msgs);
+      case SheepDogPackage.FEATURE__BACKGROUND:
+        return basicSetBackground(null, msgs);
+      case SheepDogPackage.FEATURE__SCENARIOS:
+        return ((InternalEList<?>)getScenarios()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -137,8 +239,10 @@ public class FeatureImpl extends ModelImpl implements Feature
     {
       case SheepDogPackage.FEATURE__TAGS:
         return getTags();
-      case SheepDogPackage.FEATURE__ABSTRACT_SCENARIOS:
-        return getAbstractScenarios();
+      case SheepDogPackage.FEATURE__BACKGROUND:
+        return getBackground();
+      case SheepDogPackage.FEATURE__SCENARIOS:
+        return getScenarios();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -155,12 +259,14 @@ public class FeatureImpl extends ModelImpl implements Feature
     switch (featureID)
     {
       case SheepDogPackage.FEATURE__TAGS:
-        getTags().clear();
-        getTags().addAll((Collection<? extends Tag>)newValue);
+        setTags((FeatureTags)newValue);
         return;
-      case SheepDogPackage.FEATURE__ABSTRACT_SCENARIOS:
-        getAbstractScenarios().clear();
-        getAbstractScenarios().addAll((Collection<? extends AbstractScenario>)newValue);
+      case SheepDogPackage.FEATURE__BACKGROUND:
+        setBackground((Background)newValue);
+        return;
+      case SheepDogPackage.FEATURE__SCENARIOS:
+        getScenarios().clear();
+        getScenarios().addAll((Collection<? extends Scenario>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -177,10 +283,13 @@ public class FeatureImpl extends ModelImpl implements Feature
     switch (featureID)
     {
       case SheepDogPackage.FEATURE__TAGS:
-        getTags().clear();
+        setTags((FeatureTags)null);
         return;
-      case SheepDogPackage.FEATURE__ABSTRACT_SCENARIOS:
-        getAbstractScenarios().clear();
+      case SheepDogPackage.FEATURE__BACKGROUND:
+        setBackground((Background)null);
+        return;
+      case SheepDogPackage.FEATURE__SCENARIOS:
+        getScenarios().clear();
         return;
     }
     super.eUnset(featureID);
@@ -197,9 +306,11 @@ public class FeatureImpl extends ModelImpl implements Feature
     switch (featureID)
     {
       case SheepDogPackage.FEATURE__TAGS:
-        return tags != null && !tags.isEmpty();
-      case SheepDogPackage.FEATURE__ABSTRACT_SCENARIOS:
-        return abstractScenarios != null && !abstractScenarios.isEmpty();
+        return tags != null;
+      case SheepDogPackage.FEATURE__BACKGROUND:
+        return background != null;
+      case SheepDogPackage.FEATURE__SCENARIOS:
+        return scenarios != null && !scenarios.isEmpty();
     }
     return super.eIsSet(featureID);
   }

@@ -66,12 +66,12 @@ public interface StepParameters extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Parameters Table</em>' containment reference.
-   * @see #setParametersTable(ParametersTable)
+   * @see #setParametersTable(Table)
    * @see org.farhan.mbt.sheepDog.SheepDogPackage#getStepParameters_ParametersTable()
    * @model containment="true"
    * @generated
    */
-  ParametersTable getParametersTable();
+  Table getParametersTable();
 
   /**
    * Sets the value of the '{@link org.farhan.mbt.sheepDog.StepParameters#getParametersTable <em>Parameters Table</em>}' containment reference.
@@ -81,6 +81,6 @@ public interface StepParameters extends EObject
    * @see #getParametersTable()
    * @generated
    */
-  void setParametersTable(ParametersTable value);
+  void setParametersTable(Table value);
 
 } // StepParameters

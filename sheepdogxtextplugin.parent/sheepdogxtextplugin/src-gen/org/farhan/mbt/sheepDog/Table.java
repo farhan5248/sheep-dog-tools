@@ -9,21 +9,21 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Parameters Table</b></em>'.
+ * A representation of the model object '<em><b>Table</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.ParametersTable#getRows <em>Rows</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.Table#getRows <em>Rows</em>}</li>
  * </ul>
  *
- * @see org.farhan.mbt.sheepDog.SheepDogPackage#getParametersTable()
+ * @see org.farhan.mbt.sheepDog.SheepDogPackage#getTable()
  * @model
  * @generated
  */
-public interface ParametersTable extends EObject
+public interface Table extends EObject
 {
   /**
    * Returns the value of the '<em><b>Rows</b></em>' containment reference list.
@@ -31,10 +31,10 @@ public interface ParametersTable extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Rows</em>' containment reference list.
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getParametersTable_Rows()
+   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getTable_Rows()
    * @model containment="true"
    * @generated
    */
   EList<Row> getRows();
 
-} // ParametersTable
+} // Table

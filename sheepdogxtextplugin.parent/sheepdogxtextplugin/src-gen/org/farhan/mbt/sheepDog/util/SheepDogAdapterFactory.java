@@ -81,34 +81,9 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
         return createModelAdapter();
       }
       @Override
-      public Adapter caseStepObject(StepObject object)
-      {
-        return createStepObjectAdapter();
-      }
-      @Override
-      public Adapter caseStepDefinition(StepDefinition object)
-      {
-        return createStepDefinitionAdapter();
-      }
-      @Override
-      public Adapter caseStepParameters(StepParameters object)
-      {
-        return createStepParametersAdapter();
-      }
-      @Override
-      public Adapter caseParametersTable(ParametersTable object)
-      {
-        return createParametersTableAdapter();
-      }
-      @Override
       public Adapter caseFeature(Feature object)
       {
         return createFeatureAdapter();
-      }
-      @Override
-      public Adapter caseAbstractScenario(AbstractScenario object)
-      {
-        return createAbstractScenarioAdapter();
       }
       @Override
       public Adapter caseBackground(Background object)
@@ -121,44 +96,24 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
         return createScenarioAdapter();
       }
       @Override
-      public Adapter caseScenarioOutline(ScenarioOutline object)
-      {
-        return createScenarioOutlineAdapter();
-      }
-      @Override
       public Adapter caseExamples(Examples object)
       {
         return createExamplesAdapter();
       }
       @Override
-      public Adapter caseExamplesTable(ExamplesTable object)
+      public Adapter caseScenarioTags(ScenarioTags object)
       {
-        return createExamplesTableAdapter();
+        return createScenarioTagsAdapter();
       }
       @Override
-      public Adapter caseStepTable(StepTable object)
+      public Adapter caseFeatureTags(FeatureTags object)
       {
-        return createStepTableAdapter();
-      }
-      @Override
-      public Adapter caseRow(Row object)
-      {
-        return createRowAdapter();
-      }
-      @Override
-      public Adapter caseCell(Cell object)
-      {
-        return createCellAdapter();
+        return createFeatureTagsAdapter();
       }
       @Override
       public Adapter caseStep(Step object)
       {
         return createStepAdapter();
-      }
-      @Override
-      public Adapter caseDocString(DocString object)
-      {
-        return createDocStringAdapter();
       }
       @Override
       public Adapter caseGiven(Given object)
@@ -176,19 +131,29 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
         return createThenAdapter();
       }
       @Override
-      public Adapter caseAnd(And object)
+      public Adapter caseDocString(DocString object)
       {
-        return createAndAdapter();
+        return createDocStringAdapter();
       }
       @Override
-      public Adapter caseBut(But object)
+      public Adapter caseLine(Line object)
       {
-        return createButAdapter();
+        return createLineAdapter();
       }
       @Override
-      public Adapter caseAsterisk(Asterisk object)
+      public Adapter caseTable(Table object)
       {
-        return createAsteriskAdapter();
+        return createTableAdapter();
+      }
+      @Override
+      public Adapter caseRow(Row object)
+      {
+        return createRowAdapter();
+      }
+      @Override
+      public Adapter caseCell(Cell object)
+      {
+        return createCellAdapter();
       }
       @Override
       public Adapter caseStatement(Statement object)
@@ -196,14 +161,19 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
         return createStatementAdapter();
       }
       @Override
-      public Adapter caseTag(Tag object)
+      public Adapter caseStepObject(StepObject object)
       {
-        return createTagAdapter();
+        return createStepObjectAdapter();
       }
       @Override
-      public Adapter caseLine(Line object)
+      public Adapter caseStepDefinition(StepDefinition object)
       {
-        return createLineAdapter();
+        return createStepDefinitionAdapter();
+      }
+      @Override
+      public Adapter caseStepParameters(StepParameters object)
+      {
+        return createStepParametersAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -243,66 +213,6 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.StepObject <em>Step Object</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.mbt.sheepDog.StepObject
-   * @generated
-   */
-  public Adapter createStepObjectAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.StepDefinition <em>Step Definition</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.mbt.sheepDog.StepDefinition
-   * @generated
-   */
-  public Adapter createStepDefinitionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.StepParameters <em>Step Parameters</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.mbt.sheepDog.StepParameters
-   * @generated
-   */
-  public Adapter createStepParametersAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.ParametersTable <em>Parameters Table</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.mbt.sheepDog.ParametersTable
-   * @generated
-   */
-  public Adapter createParametersTableAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.Feature <em>Feature</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -313,21 +223,6 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createFeatureAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.AbstractScenario <em>Abstract Scenario</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.mbt.sheepDog.AbstractScenario
-   * @generated
-   */
-  public Adapter createAbstractScenarioAdapter()
   {
     return null;
   }
@@ -363,21 +258,6 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.ScenarioOutline <em>Scenario Outline</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.mbt.sheepDog.ScenarioOutline
-   * @generated
-   */
-  public Adapter createScenarioOutlineAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.Examples <em>Examples</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -393,61 +273,31 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.ExamplesTable <em>Examples Table</em>}'.
+   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.ScenarioTags <em>Scenario Tags</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.farhan.mbt.sheepDog.ExamplesTable
+   * @see org.farhan.mbt.sheepDog.ScenarioTags
    * @generated
    */
-  public Adapter createExamplesTableAdapter()
+  public Adapter createScenarioTagsAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.StepTable <em>Step Table</em>}'.
+   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.FeatureTags <em>Feature Tags</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.farhan.mbt.sheepDog.StepTable
+   * @see org.farhan.mbt.sheepDog.FeatureTags
    * @generated
    */
-  public Adapter createStepTableAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.Row <em>Row</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.mbt.sheepDog.Row
-   * @generated
-   */
-  public Adapter createRowAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.Cell <em>Cell</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.mbt.sheepDog.Cell
-   * @generated
-   */
-  public Adapter createCellAdapter()
+  public Adapter createFeatureTagsAdapter()
   {
     return null;
   }
@@ -463,21 +313,6 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createStepAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.DocString <em>Doc String</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.mbt.sheepDog.DocString
-   * @generated
-   */
-  public Adapter createDocStringAdapter()
   {
     return null;
   }
@@ -528,46 +363,76 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.And <em>And</em>}'.
+   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.DocString <em>Doc String</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.farhan.mbt.sheepDog.And
+   * @see org.farhan.mbt.sheepDog.DocString
    * @generated
    */
-  public Adapter createAndAdapter()
+  public Adapter createDocStringAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.But <em>But</em>}'.
+   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.Line <em>Line</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.farhan.mbt.sheepDog.But
+   * @see org.farhan.mbt.sheepDog.Line
    * @generated
    */
-  public Adapter createButAdapter()
+  public Adapter createLineAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.Asterisk <em>Asterisk</em>}'.
+   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.Table <em>Table</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.farhan.mbt.sheepDog.Asterisk
+   * @see org.farhan.mbt.sheepDog.Table
    * @generated
    */
-  public Adapter createAsteriskAdapter()
+  public Adapter createTableAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.Row <em>Row</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.mbt.sheepDog.Row
+   * @generated
+   */
+  public Adapter createRowAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.Cell <em>Cell</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.mbt.sheepDog.Cell
+   * @generated
+   */
+  public Adapter createCellAdapter()
   {
     return null;
   }
@@ -588,31 +453,46 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.Tag <em>Tag</em>}'.
+   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.StepObject <em>Step Object</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.farhan.mbt.sheepDog.Tag
+   * @see org.farhan.mbt.sheepDog.StepObject
    * @generated
    */
-  public Adapter createTagAdapter()
+  public Adapter createStepObjectAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.Line <em>Line</em>}'.
+   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.StepDefinition <em>Step Definition</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.farhan.mbt.sheepDog.Line
+   * @see org.farhan.mbt.sheepDog.StepDefinition
    * @generated
    */
-  public Adapter createLineAdapter()
+  public Adapter createStepDefinitionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.StepParameters <em>Step Parameters</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.mbt.sheepDog.StepParameters
+   * @generated
+   */
+  public Adapter createStepParametersAdapter()
   {
     return null;
   }

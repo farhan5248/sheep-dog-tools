@@ -17,24 +17,24 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.farhan.mbt.sheepDog.ParametersTable;
 import org.farhan.mbt.sheepDog.Row;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
+import org.farhan.mbt.sheepDog.Table;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Parameters Table</b></em>'.
+ * An implementation of the model object '<em><b>Table</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.ParametersTableImpl#getRows <em>Rows</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.TableImpl#getRows <em>Rows</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ParametersTableImpl extends MinimalEObjectImpl.Container implements ParametersTable
+public class TableImpl extends MinimalEObjectImpl.Container implements Table
 {
   /**
    * The cached value of the '{@link #getRows() <em>Rows</em>}' containment reference list.
@@ -51,7 +51,7 @@ public class ParametersTableImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ParametersTableImpl()
+  protected TableImpl()
   {
     super();
   }
@@ -64,7 +64,7 @@ public class ParametersTableImpl extends MinimalEObjectImpl.Container implements
   @Override
   protected EClass eStaticClass()
   {
-    return SheepDogPackage.Literals.PARAMETERS_TABLE;
+    return SheepDogPackage.Literals.TABLE;
   }
 
   /**
@@ -77,7 +77,7 @@ public class ParametersTableImpl extends MinimalEObjectImpl.Container implements
   {
     if (rows == null)
     {
-      rows = new EObjectContainmentEList<Row>(Row.class, this, SheepDogPackage.PARAMETERS_TABLE__ROWS);
+      rows = new EObjectContainmentEList<Row>(Row.class, this, SheepDogPackage.TABLE__ROWS);
     }
     return rows;
   }
@@ -92,7 +92,7 @@ public class ParametersTableImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case SheepDogPackage.PARAMETERS_TABLE__ROWS:
+      case SheepDogPackage.TABLE__ROWS:
         return ((InternalEList<?>)getRows()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -108,7 +108,7 @@ public class ParametersTableImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case SheepDogPackage.PARAMETERS_TABLE__ROWS:
+      case SheepDogPackage.TABLE__ROWS:
         return getRows();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -125,7 +125,7 @@ public class ParametersTableImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case SheepDogPackage.PARAMETERS_TABLE__ROWS:
+      case SheepDogPackage.TABLE__ROWS:
         getRows().clear();
         getRows().addAll((Collection<? extends Row>)newValue);
         return;
@@ -143,7 +143,7 @@ public class ParametersTableImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case SheepDogPackage.PARAMETERS_TABLE__ROWS:
+      case SheepDogPackage.TABLE__ROWS:
         getRows().clear();
         return;
     }
@@ -160,10 +160,10 @@ public class ParametersTableImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case SheepDogPackage.PARAMETERS_TABLE__ROWS:
+      case SheepDogPackage.TABLE__ROWS:
         return rows != null && !rows.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //ParametersTableImpl
+} //TableImpl

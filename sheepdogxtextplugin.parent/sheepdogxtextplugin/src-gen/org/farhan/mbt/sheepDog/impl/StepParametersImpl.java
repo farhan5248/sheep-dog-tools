@@ -19,10 +19,10 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.farhan.mbt.sheepDog.ParametersTable;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
 import org.farhan.mbt.sheepDog.Statement;
 import org.farhan.mbt.sheepDog.StepParameters;
+import org.farhan.mbt.sheepDog.Table;
 
 /**
  * <!-- begin-user-doc -->
@@ -79,7 +79,7 @@ public class StepParametersImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    * @ordered
    */
-  protected ParametersTable parametersTable;
+  protected Table parametersTable;
 
   /**
    * <!-- begin-user-doc -->
@@ -148,7 +148,7 @@ public class StepParametersImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public ParametersTable getParametersTable()
+  public Table getParametersTable()
   {
     return parametersTable;
   }
@@ -158,9 +158,9 @@ public class StepParametersImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetParametersTable(ParametersTable newParametersTable, NotificationChain msgs)
+  public NotificationChain basicSetParametersTable(Table newParametersTable, NotificationChain msgs)
   {
-    ParametersTable oldParametersTable = parametersTable;
+    Table oldParametersTable = parametersTable;
     parametersTable = newParametersTable;
     if (eNotificationRequired())
     {
@@ -176,7 +176,7 @@ public class StepParametersImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public void setParametersTable(ParametersTable newParametersTable)
+  public void setParametersTable(Table newParametersTable)
   {
     if (newParametersTable != parametersTable)
     {
@@ -249,7 +249,7 @@ public class StepParametersImpl extends MinimalEObjectImpl.Container implements 
         getStatements().addAll((Collection<? extends Statement>)newValue);
         return;
       case SheepDogPackage.STEP_PARAMETERS__PARAMETERS_TABLE:
-        setParametersTable((ParametersTable)newValue);
+        setParametersTable((Table)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -272,7 +272,7 @@ public class StepParametersImpl extends MinimalEObjectImpl.Container implements 
         getStatements().clear();
         return;
       case SheepDogPackage.STEP_PARAMETERS__PARAMETERS_TABLE:
-        setParametersTable((ParametersTable)null);
+        setParametersTable((Table)null);
         return;
     }
     super.eUnset(featureID);

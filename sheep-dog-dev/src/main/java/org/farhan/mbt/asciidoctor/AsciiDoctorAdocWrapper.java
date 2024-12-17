@@ -15,8 +15,6 @@ import org.asciidoctor.ast.StructuralNode;
 import org.asciidoctor.ast.Table;
 import org.asciidoctor.jruby.extension.internal.JRubyProcessor;
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.mbt.core.ObjectRepository;
 
 public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
