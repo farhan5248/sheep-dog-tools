@@ -3,13 +3,13 @@ package org.farhan.mbt.tests.formatting;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
 import org.eclipse.xtext.testing.formatter.FormatterTestRequest;
-import org.farhan.mbt.tests.CucumberInjectorProvider;
+import org.farhan.mbt.tests.SheepDogInjectorProvider;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(InjectionExtension.class)
-@InjectWith(CucumberInjectorProvider.class)
-public class CucumberFormattingTest extends FormattingTest {
+@InjectWith(SheepDogInjectorProvider.class)
+public class SheepDogFormattingTest extends FormattingTest {
 
 	@Test
 	public void formatCompleteFile() {

@@ -1,3 +1,4 @@
+// TODO try using the built in terminals instead and override them
 grammar org.farhan.mbt.SheepDog hidden(WS, SL_COMMENT)
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
@@ -6,51 +7,65 @@ generate sheepDog "http://www.farhan.org/mbt/SheepDog"
 Model:
 	StepObject | Feature;
 
-Feature:
-	tags=FeatureTags?
-	'=' name=Phrase EOL
+StepObject:
+	'=' 'Object:' name=Title
 	statements+=Statement*
-	background=Background?
-	scenarios+=Scenario*;
+	stepDefinitions+=StepDefinition*;
+
+StepDefinition:
+	'==' 'Definition:' name=Title
+	statements+=Statement*
+	stepParameters+=StepParameters*;
+
+StepParameters:
+	'===' 'Parameters:' name=Title
+	statements+=Statement*
+	parametersTable=Table;
+
+Feature:
+	'=' 'Feature:' name=Title
+	statements+=Statement*
+	abstractScenarios+=AbstractScenario*;
+
+AbstractScenario:
+	Background | Scenario;
 
 Background:
-	'[background="true"]' EOL
-	'==' name=Phrase EOL
+	(tags=Tags)?
+	'==' 'Background:' name=Title
 	statements+=Statement*
 	steps+=Step*;
 
 Scenario:
-	tags=ScenarioTags?
-	'==' name=Phrase EOL
+	(tags=Tags)?
+	'==' 'Scenario:' name=Title
 	statements+=Statement*
 	steps+=Step*
-	examples+=Examples+;
+	examples+=Examples*;
 
 Examples:
-	'[examples="true"]' EOL
-	'===' name=Phrase EOL
+	(tags=Tags)?
+	'===' 'Examples:' name=Title
 	statements+=Statement*
 	theExamplesTable=Table;
 
-ScenarioTags:
-	'[tags="' name=Phrase '"]' EOL;
-
-FeatureTags:
-	':tags:' name=Phrase EOL;
-
 Step:
-	Given | When | Then;
+	Given | When | Then | And;
 
 Given:
-	'===' 'Given' name=Phrase EOL
+	'===' 'Given' name=Title
 	(theStepTable=Table | theDocString=DocString)?;
 
 When:
-	'===' 'When' name=Phrase EOL
+	'===' 'When' name=Title
 	(theStepTable=Table | theDocString=DocString)?;
 
 Then:
-	'===' 'Then' name=Phrase EOL
+	'===' 'Then' name=Title
+	(theStepTable=Table | theDocString=DocString)?;
+
+And:
+	'===' 'And' name=Title
 	(theStepTable=Table | theDocString=DocString)?;
 
 DocString:
@@ -58,13 +73,6 @@ DocString:
 	lines+=Line+
 	'----' EOL;
 
-Line:
-	name=LineBits EOL;
-
-LineBits:
-	TEXT_LITERAL*;
-
-// TODO this is duplicate of StepTable
 Table:
 	'[options="header"]' EOL
 	'|===' EOL
@@ -74,41 +82,31 @@ Table:
 Row:
 	cells+=Cell+ EOL;
 
-Cell:
-	'|' name=Phrase;
+Tags:
+	'[tags="' TEXT_LITERAL+ '"]' EOL;
+
+Title:
+	TEXT_LITERAL+ EOL;
 
 Statement:
-	name=Phrase EOL;
+	TEXT_LITERAL+ EOL;
 
-Phrase:
-	TEXT_LITERAL+;
+Line:
+	TEXT_LITERAL* EOL;
+
+Cell:
+	'|' TEXT_LITERAL*;
 
 TEXT_LITERAL:
 	WORD
 	| ID
 	| STRING;
 
-StepObject:
-	'=' name=Phrase EOL
-	statements+=Statement*
-	stepDefinitions+=StepDefinition*;
-
-StepDefinition:
-	'==' name=Phrase EOL
-	statements+=Statement*
-	stepParameters+=StepParameters*;
-
-StepParameters:
-	'===' name=Phrase EOL
-	statements+=Statement*
-	parametersTable=Table;
-
 terminal ID:
 	('0'..'9' | 'a'..'z' | 'A'..'Z' | '_' | '-' | '.' | ',')+;
 
 terminal WORD:
-	!('@' | '|' | ' ' | '\t' | '\n' | '\r')
-	!(' ' | '\t' | '\n' | '\r')*;
+	!('|' | ' ' | '\t' | '\n' | '\r') !(' ' | '\t' | '\n' | '\r')*;
 
 // Not sure how this is helping, will remove it
 terminal STRING:

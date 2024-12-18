@@ -50,16 +50,16 @@ public interface StepParameters extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
-   * The list contents are of type {@link org.farhan.mbt.sheepDog.Statement}.
+   * Returns the value of the '<em><b>Statements</b></em>' attribute list.
+   * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Statements</em>' containment reference list.
+   * @return the value of the '<em>Statements</em>' attribute list.
    * @see org.farhan.mbt.sheepDog.SheepDogPackage#getStepParameters_Statements()
-   * @model containment="true"
+   * @model unique="false"
    * @generated
    */
-  EList<Statement> getStatements();
+  EList<String> getStatements();
 
   /**
    * Returns the value of the '<em><b>Parameters Table</b></em>' containment reference.

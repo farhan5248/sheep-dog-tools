@@ -10,21 +10,18 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.farhan.mbt.sheepDog.AbstractScenario;
+import org.farhan.mbt.sheepDog.And;
 import org.farhan.mbt.sheepDog.Background;
-import org.farhan.mbt.sheepDog.Cell;
 import org.farhan.mbt.sheepDog.DocString;
 import org.farhan.mbt.sheepDog.Examples;
 import org.farhan.mbt.sheepDog.Feature;
-import org.farhan.mbt.sheepDog.FeatureTags;
 import org.farhan.mbt.sheepDog.Given;
-import org.farhan.mbt.sheepDog.Line;
 import org.farhan.mbt.sheepDog.Model;
 import org.farhan.mbt.sheepDog.Row;
 import org.farhan.mbt.sheepDog.Scenario;
-import org.farhan.mbt.sheepDog.ScenarioTags;
 import org.farhan.mbt.sheepDog.SheepDogFactory;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
-import org.farhan.mbt.sheepDog.Statement;
 import org.farhan.mbt.sheepDog.Step;
 import org.farhan.mbt.sheepDog.StepDefinition;
 import org.farhan.mbt.sheepDog.StepObject;
@@ -53,7 +50,35 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass stepObjectEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass stepDefinitionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass stepParametersEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass featureEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass abstractScenarioEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -75,20 +100,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   private EClass examplesEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass scenarioTagsEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass featureTagsEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -123,14 +134,14 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass docStringEClass = null;
+  private EClass andEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass lineEClass = null;
+  private EClass docStringEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -145,41 +156,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   private EClass rowEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass cellEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass statementEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass stepObjectEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass stepDefinitionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass stepParametersEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -271,9 +247,119 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getModel_Statements()
+  public EAttribute getModel_Statements()
   {
-    return (EReference)modelEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getStepObject()
+  {
+    return stepObjectEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getStepObject_StepDefinitions()
+  {
+    return (EReference)stepObjectEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getStepDefinition()
+  {
+    return stepDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getStepDefinition_Name()
+  {
+    return (EAttribute)stepDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getStepDefinition_Statements()
+  {
+    return (EAttribute)stepDefinitionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getStepDefinition_StepParameters()
+  {
+    return (EReference)stepDefinitionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getStepParameters()
+  {
+    return stepParametersEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getStepParameters_Name()
+  {
+    return (EAttribute)stepParametersEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getStepParameters_Statements()
+  {
+    return (EAttribute)stepParametersEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getStepParameters_ParametersTable()
+  {
+    return (EReference)stepParametersEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -293,7 +379,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getFeature_Tags()
+  public EReference getFeature_AbstractScenarios()
   {
     return (EReference)featureEClass.getEStructuralFeatures().get(0);
   }
@@ -304,9 +390,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getFeature_Background()
+  public EClass getAbstractScenario()
   {
-    return (EReference)featureEClass.getEStructuralFeatures().get(1);
+    return abstractScenarioEClass;
   }
 
   /**
@@ -315,9 +401,42 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getFeature_Scenarios()
+  public EAttribute getAbstractScenario_Tags()
   {
-    return (EReference)featureEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)abstractScenarioEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getAbstractScenario_Name()
+  {
+    return (EAttribute)abstractScenarioEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getAbstractScenario_Statements()
+  {
+    return (EAttribute)abstractScenarioEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getAbstractScenario_Steps()
+  {
+    return (EReference)abstractScenarioEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -337,39 +456,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EAttribute getBackground_Name()
-  {
-    return (EAttribute)backgroundEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getBackground_Statements()
-  {
-    return (EReference)backgroundEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getBackground_Steps()
-  {
-    return (EReference)backgroundEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getScenario()
   {
     return scenarioEClass;
@@ -381,53 +467,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getScenario_Tags()
-  {
-    return (EReference)scenarioEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getScenario_Name()
-  {
-    return (EAttribute)scenarioEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getScenario_Statements()
-  {
-    return (EReference)scenarioEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getScenario_Steps()
-  {
-    return (EReference)scenarioEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EReference getScenario_Examples()
   {
-    return (EReference)scenarioEClass.getEStructuralFeatures().get(4);
+    return (EReference)scenarioEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -447,7 +489,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EAttribute getExamples_Name()
+  public EAttribute getExamples_Tags()
   {
     return (EAttribute)examplesEClass.getEStructuralFeatures().get(0);
   }
@@ -458,9 +500,20 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getExamples_Statements()
+  public EAttribute getExamples_Name()
   {
-    return (EReference)examplesEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)examplesEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getExamples_Statements()
+  {
+    return (EAttribute)examplesEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -471,51 +524,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
   @Override
   public EReference getExamples_TheExamplesTable()
   {
-    return (EReference)examplesEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getScenarioTags()
-  {
-    return scenarioTagsEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getScenarioTags_Name()
-  {
-    return (EAttribute)scenarioTagsEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getFeatureTags()
-  {
-    return featureTagsEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getFeatureTags_Name()
-  {
-    return (EAttribute)featureTagsEClass.getEStructuralFeatures().get(0);
+    return (EReference)examplesEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -601,6 +610,17 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
+  public EClass getAnd()
+  {
+    return andEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getDocString()
   {
     return docStringEClass;
@@ -612,31 +632,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getDocString_Lines()
+  public EAttribute getDocString_Lines()
   {
-    return (EReference)docStringEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getLine()
-  {
-    return lineEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getLine_Name()
-  {
-    return (EAttribute)lineEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)docStringEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -678,163 +676,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getRow_Cells()
+  public EAttribute getRow_Cells()
   {
-    return (EReference)rowEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getCell()
-  {
-    return cellEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getCell_Name()
-  {
-    return (EAttribute)cellEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getStatement()
-  {
-    return statementEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getStatement_Name()
-  {
-    return (EAttribute)statementEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getStepObject()
-  {
-    return stepObjectEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getStepObject_StepDefinitions()
-  {
-    return (EReference)stepObjectEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getStepDefinition()
-  {
-    return stepDefinitionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getStepDefinition_Name()
-  {
-    return (EAttribute)stepDefinitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getStepDefinition_Statements()
-  {
-    return (EReference)stepDefinitionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getStepDefinition_StepParameters()
-  {
-    return (EReference)stepDefinitionEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getStepParameters()
-  {
-    return stepParametersEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getStepParameters_Name()
-  {
-    return (EAttribute)stepParametersEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getStepParameters_Statements()
-  {
-    return (EReference)stepParametersEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getStepParameters_ParametersTable()
-  {
-    return (EReference)stepParametersEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)rowEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -870,35 +714,40 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
     // Create classes and their features
     modelEClass = createEClass(MODEL);
     createEAttribute(modelEClass, MODEL__NAME);
-    createEReference(modelEClass, MODEL__STATEMENTS);
+    createEAttribute(modelEClass, MODEL__STATEMENTS);
+
+    stepObjectEClass = createEClass(STEP_OBJECT);
+    createEReference(stepObjectEClass, STEP_OBJECT__STEP_DEFINITIONS);
+
+    stepDefinitionEClass = createEClass(STEP_DEFINITION);
+    createEAttribute(stepDefinitionEClass, STEP_DEFINITION__NAME);
+    createEAttribute(stepDefinitionEClass, STEP_DEFINITION__STATEMENTS);
+    createEReference(stepDefinitionEClass, STEP_DEFINITION__STEP_PARAMETERS);
+
+    stepParametersEClass = createEClass(STEP_PARAMETERS);
+    createEAttribute(stepParametersEClass, STEP_PARAMETERS__NAME);
+    createEAttribute(stepParametersEClass, STEP_PARAMETERS__STATEMENTS);
+    createEReference(stepParametersEClass, STEP_PARAMETERS__PARAMETERS_TABLE);
 
     featureEClass = createEClass(FEATURE);
-    createEReference(featureEClass, FEATURE__TAGS);
-    createEReference(featureEClass, FEATURE__BACKGROUND);
-    createEReference(featureEClass, FEATURE__SCENARIOS);
+    createEReference(featureEClass, FEATURE__ABSTRACT_SCENARIOS);
+
+    abstractScenarioEClass = createEClass(ABSTRACT_SCENARIO);
+    createEAttribute(abstractScenarioEClass, ABSTRACT_SCENARIO__TAGS);
+    createEAttribute(abstractScenarioEClass, ABSTRACT_SCENARIO__NAME);
+    createEAttribute(abstractScenarioEClass, ABSTRACT_SCENARIO__STATEMENTS);
+    createEReference(abstractScenarioEClass, ABSTRACT_SCENARIO__STEPS);
 
     backgroundEClass = createEClass(BACKGROUND);
-    createEAttribute(backgroundEClass, BACKGROUND__NAME);
-    createEReference(backgroundEClass, BACKGROUND__STATEMENTS);
-    createEReference(backgroundEClass, BACKGROUND__STEPS);
 
     scenarioEClass = createEClass(SCENARIO);
-    createEReference(scenarioEClass, SCENARIO__TAGS);
-    createEAttribute(scenarioEClass, SCENARIO__NAME);
-    createEReference(scenarioEClass, SCENARIO__STATEMENTS);
-    createEReference(scenarioEClass, SCENARIO__STEPS);
     createEReference(scenarioEClass, SCENARIO__EXAMPLES);
 
     examplesEClass = createEClass(EXAMPLES);
+    createEAttribute(examplesEClass, EXAMPLES__TAGS);
     createEAttribute(examplesEClass, EXAMPLES__NAME);
-    createEReference(examplesEClass, EXAMPLES__STATEMENTS);
+    createEAttribute(examplesEClass, EXAMPLES__STATEMENTS);
     createEReference(examplesEClass, EXAMPLES__THE_EXAMPLES_TABLE);
-
-    scenarioTagsEClass = createEClass(SCENARIO_TAGS);
-    createEAttribute(scenarioTagsEClass, SCENARIO_TAGS__NAME);
-
-    featureTagsEClass = createEClass(FEATURE_TAGS);
-    createEAttribute(featureTagsEClass, FEATURE_TAGS__NAME);
 
     stepEClass = createEClass(STEP);
     createEAttribute(stepEClass, STEP__NAME);
@@ -911,36 +760,16 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
 
     thenEClass = createEClass(THEN);
 
-    docStringEClass = createEClass(DOC_STRING);
-    createEReference(docStringEClass, DOC_STRING__LINES);
+    andEClass = createEClass(AND);
 
-    lineEClass = createEClass(LINE);
-    createEAttribute(lineEClass, LINE__NAME);
+    docStringEClass = createEClass(DOC_STRING);
+    createEAttribute(docStringEClass, DOC_STRING__LINES);
 
     tableEClass = createEClass(TABLE);
     createEReference(tableEClass, TABLE__ROWS);
 
     rowEClass = createEClass(ROW);
-    createEReference(rowEClass, ROW__CELLS);
-
-    cellEClass = createEClass(CELL);
-    createEAttribute(cellEClass, CELL__NAME);
-
-    statementEClass = createEClass(STATEMENT);
-    createEAttribute(statementEClass, STATEMENT__NAME);
-
-    stepObjectEClass = createEClass(STEP_OBJECT);
-    createEReference(stepObjectEClass, STEP_OBJECT__STEP_DEFINITIONS);
-
-    stepDefinitionEClass = createEClass(STEP_DEFINITION);
-    createEAttribute(stepDefinitionEClass, STEP_DEFINITION__NAME);
-    createEReference(stepDefinitionEClass, STEP_DEFINITION__STATEMENTS);
-    createEReference(stepDefinitionEClass, STEP_DEFINITION__STEP_PARAMETERS);
-
-    stepParametersEClass = createEClass(STEP_PARAMETERS);
-    createEAttribute(stepParametersEClass, STEP_PARAMETERS__NAME);
-    createEReference(stepParametersEClass, STEP_PARAMETERS__STATEMENTS);
-    createEReference(stepParametersEClass, STEP_PARAMETERS__PARAMETERS_TABLE);
+    createEAttribute(rowEClass, ROW__CELLS);
   }
 
   /**
@@ -972,44 +801,52 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    stepObjectEClass.getESuperTypes().add(this.getModel());
     featureEClass.getESuperTypes().add(this.getModel());
+    backgroundEClass.getESuperTypes().add(this.getAbstractScenario());
+    scenarioEClass.getESuperTypes().add(this.getAbstractScenario());
     givenEClass.getESuperTypes().add(this.getStep());
     whenEClass.getESuperTypes().add(this.getStep());
     thenEClass.getESuperTypes().add(this.getStep());
-    stepObjectEClass.getESuperTypes().add(this.getModel());
+    andEClass.getESuperTypes().add(this.getStep());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getModel_Statements(), this.getStatement(), null, "statements", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_Statements(), ecorePackage.getEString(), "statements", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(stepObjectEClass, StepObject.class, "StepObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getStepObject_StepDefinitions(), this.getStepDefinition(), null, "stepDefinitions", null, 0, -1, StepObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(stepDefinitionEClass, StepDefinition.class, "StepDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getStepDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, StepDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getStepDefinition_Statements(), ecorePackage.getEString(), "statements", null, 0, -1, StepDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStepDefinition_StepParameters(), this.getStepParameters(), null, "stepParameters", null, 0, -1, StepDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(stepParametersEClass, StepParameters.class, "StepParameters", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getStepParameters_Name(), ecorePackage.getEString(), "name", null, 0, 1, StepParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getStepParameters_Statements(), ecorePackage.getEString(), "statements", null, 0, -1, StepParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStepParameters_ParametersTable(), this.getTable(), null, "parametersTable", null, 0, 1, StepParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(featureEClass, Feature.class, "Feature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getFeature_Tags(), this.getFeatureTags(), null, "tags", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFeature_Background(), this.getBackground(), null, "background", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getFeature_Scenarios(), this.getScenario(), null, "scenarios", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getFeature_AbstractScenarios(), this.getAbstractScenario(), null, "abstractScenarios", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(abstractScenarioEClass, AbstractScenario.class, "AbstractScenario", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAbstractScenario_Tags(), ecorePackage.getEString(), "tags", null, 0, 1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAbstractScenario_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAbstractScenario_Statements(), ecorePackage.getEString(), "statements", null, 0, -1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAbstractScenario_Steps(), this.getStep(), null, "steps", null, 0, -1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(backgroundEClass, Background.class, "Background", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getBackground_Name(), ecorePackage.getEString(), "name", null, 0, 1, Background.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getBackground_Statements(), this.getStatement(), null, "statements", null, 0, -1, Background.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getBackground_Steps(), this.getStep(), null, "steps", null, 0, -1, Background.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(scenarioEClass, Scenario.class, "Scenario", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getScenario_Tags(), this.getScenarioTags(), null, "tags", null, 0, 1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getScenario_Name(), ecorePackage.getEString(), "name", null, 0, 1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getScenario_Statements(), this.getStatement(), null, "statements", null, 0, -1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getScenario_Steps(), this.getStep(), null, "steps", null, 0, -1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getScenario_Examples(), this.getExamples(), null, "examples", null, 0, -1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(examplesEClass, Examples.class, "Examples", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getExamples_Tags(), ecorePackage.getEString(), "tags", null, 0, 1, Examples.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getExamples_Name(), ecorePackage.getEString(), "name", null, 0, 1, Examples.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getExamples_Statements(), this.getStatement(), null, "statements", null, 0, -1, Examples.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getExamples_Statements(), ecorePackage.getEString(), "statements", null, 0, -1, Examples.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getExamples_TheExamplesTable(), this.getTable(), null, "theExamplesTable", null, 0, 1, Examples.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(scenarioTagsEClass, ScenarioTags.class, "ScenarioTags", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getScenarioTags_Name(), ecorePackage.getEString(), "name", null, 0, 1, ScenarioTags.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(featureTagsEClass, FeatureTags.class, "FeatureTags", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getFeatureTags_Name(), ecorePackage.getEString(), "name", null, 0, 1, FeatureTags.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stepEClass, Step.class, "Step", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStep_Name(), ecorePackage.getEString(), "name", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1022,36 +859,16 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
 
     initEClass(thenEClass, Then.class, "Then", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(docStringEClass, DocString.class, "DocString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getDocString_Lines(), this.getLine(), null, "lines", null, 0, -1, DocString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(andEClass, And.class, "And", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(lineEClass, Line.class, "Line", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getLine_Name(), ecorePackage.getEString(), "name", null, 0, 1, Line.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(docStringEClass, DocString.class, "DocString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getDocString_Lines(), ecorePackage.getEString(), "lines", null, 0, -1, DocString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(tableEClass, Table.class, "Table", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTable_Rows(), this.getRow(), null, "rows", null, 0, -1, Table.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(rowEClass, Row.class, "Row", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getRow_Cells(), this.getCell(), null, "cells", null, 0, -1, Row.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(cellEClass, Cell.class, "Cell", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getCell_Name(), ecorePackage.getEString(), "name", null, 0, 1, Cell.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(statementEClass, Statement.class, "Statement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getStatement_Name(), ecorePackage.getEString(), "name", null, 0, 1, Statement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(stepObjectEClass, StepObject.class, "StepObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getStepObject_StepDefinitions(), this.getStepDefinition(), null, "stepDefinitions", null, 0, -1, StepObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(stepDefinitionEClass, StepDefinition.class, "StepDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getStepDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, StepDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStepDefinition_Statements(), this.getStatement(), null, "statements", null, 0, -1, StepDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStepDefinition_StepParameters(), this.getStepParameters(), null, "stepParameters", null, 0, -1, StepDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(stepParametersEClass, StepParameters.class, "StepParameters", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getStepParameters_Name(), ecorePackage.getEString(), "name", null, 0, 1, StepParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStepParameters_Statements(), this.getStatement(), null, "statements", null, 0, -1, StepParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStepParameters_ParametersTable(), this.getTable(), null, "parametersTable", null, 0, 1, StepParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getRow_Cells(), ecorePackage.getEString(), "cells", null, 0, -1, Row.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

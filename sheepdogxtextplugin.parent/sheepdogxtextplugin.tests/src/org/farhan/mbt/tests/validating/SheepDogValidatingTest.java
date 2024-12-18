@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.util.Set;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
-import org.farhan.mbt.cucumber.CucumberPackage;
-import org.farhan.mbt.tests.CucumberInjectorProvider;
-import org.farhan.mbt.validation.CucumberValidator;
+import org.farhan.mbt.sheepDog.SheepDogPackage;
+import org.farhan.mbt.tests.SheepDogInjectorProvider;
+import org.farhan.mbt.validation.SheepDogValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -18,7 +18,7 @@ import com.google.common.reflect.ClassPath.ClassInfo;
 
 @ExtendWith(InjectionExtension.class)
 @InjectWith(SheepDogInjectorProvider.class)
-public class CucumberValidatingTest extends ValidatingTest {
+public class SheepDogValidatingTest extends ValidatingTest {
 
 	public ClassInfo getClassInPackage(String rootPkg, String testObjName) throws IOException {
 
@@ -171,7 +171,7 @@ public class CucumberValidatingTest extends ValidatingTest {
 	public void validateCaptialStart() throws Exception {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Feature: basic scenario Test\n");
-		validationTestHelper.assertWarning(parseFeatureHelper.parse(sb), CucumberPackage.Literals.FEATURE,
-				CucumberValidator.INVALID_NAME, "Name should start with a capital");
+		validationTestHelper.assertWarning(parseFeatureHelper.parse(sb), SheepDogPackage.Literals.FEATURE,
+				SheepDogValidator.INVALID_NAME, "Name should start with a capital");
 	}
 }

@@ -16,11 +16,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.farhan.mbt.sheepDog.SheepDogPackage;
-import org.farhan.mbt.sheepDog.Statement;
 import org.farhan.mbt.sheepDog.StepDefinition;
 import org.farhan.mbt.sheepDog.StepParameters;
 
@@ -62,14 +62,14 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
+   * The cached value of the '{@link #getStatements() <em>Statements</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getStatements()
    * @generated
    * @ordered
    */
-  protected EList<Statement> statements;
+  protected EList<String> statements;
 
   /**
    * The cached value of the '{@link #getStepParameters() <em>Step Parameters</em>}' containment reference list.
@@ -133,11 +133,11 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public EList<Statement> getStatements()
+  public EList<String> getStatements()
   {
     if (statements == null)
     {
-      statements = new EObjectContainmentEList<Statement>(Statement.class, this, SheepDogPackage.STEP_DEFINITION__STATEMENTS);
+      statements = new EDataTypeEList<String>(String.class, this, SheepDogPackage.STEP_DEFINITION__STATEMENTS);
     }
     return statements;
   }
@@ -167,8 +167,6 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
   {
     switch (featureID)
     {
-      case SheepDogPackage.STEP_DEFINITION__STATEMENTS:
-        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
       case SheepDogPackage.STEP_DEFINITION__STEP_PARAMETERS:
         return ((InternalEList<?>)getStepParameters()).basicRemove(otherEnd, msgs);
     }
@@ -211,7 +209,7 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
         return;
       case SheepDogPackage.STEP_DEFINITION__STATEMENTS:
         getStatements().clear();
-        getStatements().addAll((Collection<? extends Statement>)newValue);
+        getStatements().addAll((Collection<? extends String>)newValue);
         return;
       case SheepDogPackage.STEP_DEFINITION__STEP_PARAMETERS:
         getStepParameters().clear();
@@ -277,6 +275,8 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
+    result.append(", statements: ");
+    result.append(statements);
     result.append(')');
     return result.toString();
   }

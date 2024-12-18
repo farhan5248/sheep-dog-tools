@@ -17,28 +17,30 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.farhan.mbt.sheepDog.Examples;
+import org.farhan.mbt.sheepDog.AbstractScenario;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
-import org.farhan.mbt.sheepDog.Table;
+import org.farhan.mbt.sheepDog.Step;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Examples</b></em>'.
+ * An implementation of the model object '<em><b>Abstract Scenario</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.ExamplesImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.ExamplesImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.ExamplesImpl#getStatements <em>Statements</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.ExamplesImpl#getTheExamplesTable <em>The Examples Table</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.AbstractScenarioImpl#getTags <em>Tags</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.AbstractScenarioImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.AbstractScenarioImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.AbstractScenarioImpl#getSteps <em>Steps</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ExamplesImpl extends MinimalEObjectImpl.Container implements Examples
+public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implements AbstractScenario
 {
   /**
    * The default value of the '{@link #getTags() <em>Tags</em>}' attribute.
@@ -91,21 +93,21 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
   protected EList<String> statements;
 
   /**
-   * The cached value of the '{@link #getTheExamplesTable() <em>The Examples Table</em>}' containment reference.
+   * The cached value of the '{@link #getSteps() <em>Steps</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTheExamplesTable()
+   * @see #getSteps()
    * @generated
    * @ordered
    */
-  protected Table theExamplesTable;
+  protected EList<Step> steps;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ExamplesImpl()
+  protected AbstractScenarioImpl()
   {
     super();
   }
@@ -118,7 +120,7 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
   @Override
   protected EClass eStaticClass()
   {
-    return SheepDogPackage.Literals.EXAMPLES;
+    return SheepDogPackage.Literals.ABSTRACT_SCENARIO;
   }
 
   /**
@@ -143,7 +145,7 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
     String oldTags = tags;
     tags = newTags;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.EXAMPLES__TAGS, oldTags, tags));
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.ABSTRACT_SCENARIO__TAGS, oldTags, tags));
   }
 
   /**
@@ -168,7 +170,7 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.EXAMPLES__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.ABSTRACT_SCENARIO__NAME, oldName, name));
   }
 
   /**
@@ -181,7 +183,7 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
   {
     if (statements == null)
     {
-      statements = new EDataTypeEList<String>(String.class, this, SheepDogPackage.EXAMPLES__STATEMENTS);
+      statements = new EDataTypeEList<String>(String.class, this, SheepDogPackage.ABSTRACT_SCENARIO__STATEMENTS);
     }
     return statements;
   }
@@ -192,48 +194,13 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
    * @generated
    */
   @Override
-  public Table getTheExamplesTable()
+  public EList<Step> getSteps()
   {
-    return theExamplesTable;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetTheExamplesTable(Table newTheExamplesTable, NotificationChain msgs)
-  {
-    Table oldTheExamplesTable = theExamplesTable;
-    theExamplesTable = newTheExamplesTable;
-    if (eNotificationRequired())
+    if (steps == null)
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.EXAMPLES__THE_EXAMPLES_TABLE, oldTheExamplesTable, newTheExamplesTable);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
+      steps = new EObjectContainmentEList<Step>(Step.class, this, SheepDogPackage.ABSTRACT_SCENARIO__STEPS);
     }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setTheExamplesTable(Table newTheExamplesTable)
-  {
-    if (newTheExamplesTable != theExamplesTable)
-    {
-      NotificationChain msgs = null;
-      if (theExamplesTable != null)
-        msgs = ((InternalEObject)theExamplesTable).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.EXAMPLES__THE_EXAMPLES_TABLE, null, msgs);
-      if (newTheExamplesTable != null)
-        msgs = ((InternalEObject)newTheExamplesTable).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.EXAMPLES__THE_EXAMPLES_TABLE, null, msgs);
-      msgs = basicSetTheExamplesTable(newTheExamplesTable, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.EXAMPLES__THE_EXAMPLES_TABLE, newTheExamplesTable, newTheExamplesTable));
+    return steps;
   }
 
   /**
@@ -246,8 +213,8 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
   {
     switch (featureID)
     {
-      case SheepDogPackage.EXAMPLES__THE_EXAMPLES_TABLE:
-        return basicSetTheExamplesTable(null, msgs);
+      case SheepDogPackage.ABSTRACT_SCENARIO__STEPS:
+        return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -262,14 +229,14 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
   {
     switch (featureID)
     {
-      case SheepDogPackage.EXAMPLES__TAGS:
+      case SheepDogPackage.ABSTRACT_SCENARIO__TAGS:
         return getTags();
-      case SheepDogPackage.EXAMPLES__NAME:
+      case SheepDogPackage.ABSTRACT_SCENARIO__NAME:
         return getName();
-      case SheepDogPackage.EXAMPLES__STATEMENTS:
+      case SheepDogPackage.ABSTRACT_SCENARIO__STATEMENTS:
         return getStatements();
-      case SheepDogPackage.EXAMPLES__THE_EXAMPLES_TABLE:
-        return getTheExamplesTable();
+      case SheepDogPackage.ABSTRACT_SCENARIO__STEPS:
+        return getSteps();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -285,18 +252,19 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
   {
     switch (featureID)
     {
-      case SheepDogPackage.EXAMPLES__TAGS:
+      case SheepDogPackage.ABSTRACT_SCENARIO__TAGS:
         setTags((String)newValue);
         return;
-      case SheepDogPackage.EXAMPLES__NAME:
+      case SheepDogPackage.ABSTRACT_SCENARIO__NAME:
         setName((String)newValue);
         return;
-      case SheepDogPackage.EXAMPLES__STATEMENTS:
+      case SheepDogPackage.ABSTRACT_SCENARIO__STATEMENTS:
         getStatements().clear();
         getStatements().addAll((Collection<? extends String>)newValue);
         return;
-      case SheepDogPackage.EXAMPLES__THE_EXAMPLES_TABLE:
-        setTheExamplesTable((Table)newValue);
+      case SheepDogPackage.ABSTRACT_SCENARIO__STEPS:
+        getSteps().clear();
+        getSteps().addAll((Collection<? extends Step>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -312,17 +280,17 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
   {
     switch (featureID)
     {
-      case SheepDogPackage.EXAMPLES__TAGS:
+      case SheepDogPackage.ABSTRACT_SCENARIO__TAGS:
         setTags(TAGS_EDEFAULT);
         return;
-      case SheepDogPackage.EXAMPLES__NAME:
+      case SheepDogPackage.ABSTRACT_SCENARIO__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case SheepDogPackage.EXAMPLES__STATEMENTS:
+      case SheepDogPackage.ABSTRACT_SCENARIO__STATEMENTS:
         getStatements().clear();
         return;
-      case SheepDogPackage.EXAMPLES__THE_EXAMPLES_TABLE:
-        setTheExamplesTable((Table)null);
+      case SheepDogPackage.ABSTRACT_SCENARIO__STEPS:
+        getSteps().clear();
         return;
     }
     super.eUnset(featureID);
@@ -338,14 +306,14 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
   {
     switch (featureID)
     {
-      case SheepDogPackage.EXAMPLES__TAGS:
+      case SheepDogPackage.ABSTRACT_SCENARIO__TAGS:
         return TAGS_EDEFAULT == null ? tags != null : !TAGS_EDEFAULT.equals(tags);
-      case SheepDogPackage.EXAMPLES__NAME:
+      case SheepDogPackage.ABSTRACT_SCENARIO__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case SheepDogPackage.EXAMPLES__STATEMENTS:
+      case SheepDogPackage.ABSTRACT_SCENARIO__STATEMENTS:
         return statements != null && !statements.isEmpty();
-      case SheepDogPackage.EXAMPLES__THE_EXAMPLES_TABLE:
-        return theExamplesTable != null;
+      case SheepDogPackage.ABSTRACT_SCENARIO__STEPS:
+        return steps != null && !steps.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -371,4 +339,4 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
     return result.toString();
   }
 
-} //ExamplesImpl
+} //AbstractScenarioImpl

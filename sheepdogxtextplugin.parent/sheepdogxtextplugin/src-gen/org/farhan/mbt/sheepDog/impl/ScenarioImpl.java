@@ -5,7 +5,6 @@ package org.farhan.mbt.sheepDog.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -13,18 +12,12 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.farhan.mbt.sheepDog.Examples;
 import org.farhan.mbt.sheepDog.Scenario;
-import org.farhan.mbt.sheepDog.ScenarioTags;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
-import org.farhan.mbt.sheepDog.Statement;
-import org.farhan.mbt.sheepDog.Step;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,67 +27,13 @@ import org.farhan.mbt.sheepDog.Step;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.ScenarioImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.ScenarioImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.ScenarioImpl#getStatements <em>Statements</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.ScenarioImpl#getSteps <em>Steps</em>}</li>
  *   <li>{@link org.farhan.mbt.sheepDog.impl.ScenarioImpl#getExamples <em>Examples</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenario
+public class ScenarioImpl extends AbstractScenarioImpl implements Scenario
 {
-  /**
-   * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTags()
-   * @generated
-   * @ordered
-   */
-  protected ScenarioTags tags;
-
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getStatements()
-   * @generated
-   * @ordered
-   */
-  protected EList<Statement> statements;
-
-  /**
-   * The cached value of the '{@link #getSteps() <em>Steps</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getSteps()
-   * @generated
-   * @ordered
-   */
-  protected EList<Step> steps;
-
   /**
    * The cached value of the '{@link #getExamples() <em>Examples</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -132,111 +71,6 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
    * @generated
    */
   @Override
-  public ScenarioTags getTags()
-  {
-    return tags;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetTags(ScenarioTags newTags, NotificationChain msgs)
-  {
-    ScenarioTags oldTags = tags;
-    tags = newTags;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.SCENARIO__TAGS, oldTags, newTags);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setTags(ScenarioTags newTags)
-  {
-    if (newTags != tags)
-    {
-      NotificationChain msgs = null;
-      if (tags != null)
-        msgs = ((InternalEObject)tags).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.SCENARIO__TAGS, null, msgs);
-      if (newTags != null)
-        msgs = ((InternalEObject)newTags).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.SCENARIO__TAGS, null, msgs);
-      msgs = basicSetTags(newTags, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.SCENARIO__TAGS, newTags, newTags));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.SCENARIO__NAME, oldName, name));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<Statement> getStatements()
-  {
-    if (statements == null)
-    {
-      statements = new EObjectContainmentEList<Statement>(Statement.class, this, SheepDogPackage.SCENARIO__STATEMENTS);
-    }
-    return statements;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<Step> getSteps()
-  {
-    if (steps == null)
-    {
-      steps = new EObjectContainmentEList<Step>(Step.class, this, SheepDogPackage.SCENARIO__STEPS);
-    }
-    return steps;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EList<Examples> getExamples()
   {
     if (examples == null)
@@ -256,12 +90,6 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
   {
     switch (featureID)
     {
-      case SheepDogPackage.SCENARIO__TAGS:
-        return basicSetTags(null, msgs);
-      case SheepDogPackage.SCENARIO__STATEMENTS:
-        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
-      case SheepDogPackage.SCENARIO__STEPS:
-        return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
       case SheepDogPackage.SCENARIO__EXAMPLES:
         return ((InternalEList<?>)getExamples()).basicRemove(otherEnd, msgs);
     }
@@ -278,14 +106,6 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
   {
     switch (featureID)
     {
-      case SheepDogPackage.SCENARIO__TAGS:
-        return getTags();
-      case SheepDogPackage.SCENARIO__NAME:
-        return getName();
-      case SheepDogPackage.SCENARIO__STATEMENTS:
-        return getStatements();
-      case SheepDogPackage.SCENARIO__STEPS:
-        return getSteps();
       case SheepDogPackage.SCENARIO__EXAMPLES:
         return getExamples();
     }
@@ -303,20 +123,6 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
   {
     switch (featureID)
     {
-      case SheepDogPackage.SCENARIO__TAGS:
-        setTags((ScenarioTags)newValue);
-        return;
-      case SheepDogPackage.SCENARIO__NAME:
-        setName((String)newValue);
-        return;
-      case SheepDogPackage.SCENARIO__STATEMENTS:
-        getStatements().clear();
-        getStatements().addAll((Collection<? extends Statement>)newValue);
-        return;
-      case SheepDogPackage.SCENARIO__STEPS:
-        getSteps().clear();
-        getSteps().addAll((Collection<? extends Step>)newValue);
-        return;
       case SheepDogPackage.SCENARIO__EXAMPLES:
         getExamples().clear();
         getExamples().addAll((Collection<? extends Examples>)newValue);
@@ -335,18 +141,6 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
   {
     switch (featureID)
     {
-      case SheepDogPackage.SCENARIO__TAGS:
-        setTags((ScenarioTags)null);
-        return;
-      case SheepDogPackage.SCENARIO__NAME:
-        setName(NAME_EDEFAULT);
-        return;
-      case SheepDogPackage.SCENARIO__STATEMENTS:
-        getStatements().clear();
-        return;
-      case SheepDogPackage.SCENARIO__STEPS:
-        getSteps().clear();
-        return;
       case SheepDogPackage.SCENARIO__EXAMPLES:
         getExamples().clear();
         return;
@@ -364,35 +158,10 @@ public class ScenarioImpl extends MinimalEObjectImpl.Container implements Scenar
   {
     switch (featureID)
     {
-      case SheepDogPackage.SCENARIO__TAGS:
-        return tags != null;
-      case SheepDogPackage.SCENARIO__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case SheepDogPackage.SCENARIO__STATEMENTS:
-        return statements != null && !statements.isEmpty();
-      case SheepDogPackage.SCENARIO__STEPS:
-        return steps != null && !steps.isEmpty();
       case SheepDogPackage.SCENARIO__EXAMPLES:
         return examples != null && !examples.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
   }
 
 } //ScenarioImpl

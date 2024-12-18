@@ -26,15 +26,15 @@ import org.eclipse.emf.ecore.EObject;
 public interface DocString extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Lines</b></em>' containment reference list.
-   * The list contents are of type {@link org.farhan.mbt.sheepDog.Line}.
+   * Returns the value of the '<em><b>Lines</b></em>' attribute list.
+   * The list contents are of type {@link java.lang.String}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Lines</em>' containment reference list.
+   * @return the value of the '<em>Lines</em>' attribute list.
    * @see org.farhan.mbt.sheepDog.SheepDogPackage#getDocString_Lines()
-   * @model containment="true"
+   * @model unique="false"
    * @generated
    */
-  EList<Line> getLines();
+  EList<String> getLines();
 
 } // DocString

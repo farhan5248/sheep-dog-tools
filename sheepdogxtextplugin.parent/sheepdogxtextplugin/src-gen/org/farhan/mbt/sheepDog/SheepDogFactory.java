@@ -33,6 +33,33 @@ public interface SheepDogFactory extends EFactory
   Model createModel();
 
   /**
+   * Returns a new object of class '<em>Step Object</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Step Object</em>'.
+   * @generated
+   */
+  StepObject createStepObject();
+
+  /**
+   * Returns a new object of class '<em>Step Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Step Definition</em>'.
+   * @generated
+   */
+  StepDefinition createStepDefinition();
+
+  /**
+   * Returns a new object of class '<em>Step Parameters</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Step Parameters</em>'.
+   * @generated
+   */
+  StepParameters createStepParameters();
+
+  /**
    * Returns a new object of class '<em>Feature</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -40,6 +67,15 @@ public interface SheepDogFactory extends EFactory
    * @generated
    */
   Feature createFeature();
+
+  /**
+   * Returns a new object of class '<em>Abstract Scenario</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Abstract Scenario</em>'.
+   * @generated
+   */
+  AbstractScenario createAbstractScenario();
 
   /**
    * Returns a new object of class '<em>Background</em>'.
@@ -67,24 +103,6 @@ public interface SheepDogFactory extends EFactory
    * @generated
    */
   Examples createExamples();
-
-  /**
-   * Returns a new object of class '<em>Scenario Tags</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Scenario Tags</em>'.
-   * @generated
-   */
-  ScenarioTags createScenarioTags();
-
-  /**
-   * Returns a new object of class '<em>Feature Tags</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Feature Tags</em>'.
-   * @generated
-   */
-  FeatureTags createFeatureTags();
 
   /**
    * Returns a new object of class '<em>Step</em>'.
@@ -123,6 +141,15 @@ public interface SheepDogFactory extends EFactory
   Then createThen();
 
   /**
+   * Returns a new object of class '<em>And</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>And</em>'.
+   * @generated
+   */
+  And createAnd();
+
+  /**
    * Returns a new object of class '<em>Doc String</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -130,15 +157,6 @@ public interface SheepDogFactory extends EFactory
    * @generated
    */
   DocString createDocString();
-
-  /**
-   * Returns a new object of class '<em>Line</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Line</em>'.
-   * @generated
-   */
-  Line createLine();
 
   /**
    * Returns a new object of class '<em>Table</em>'.
@@ -157,51 +175,6 @@ public interface SheepDogFactory extends EFactory
    * @generated
    */
   Row createRow();
-
-  /**
-   * Returns a new object of class '<em>Cell</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Cell</em>'.
-   * @generated
-   */
-  Cell createCell();
-
-  /**
-   * Returns a new object of class '<em>Statement</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Statement</em>'.
-   * @generated
-   */
-  Statement createStatement();
-
-  /**
-   * Returns a new object of class '<em>Step Object</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Step Object</em>'.
-   * @generated
-   */
-  StepObject createStepObject();
-
-  /**
-   * Returns a new object of class '<em>Step Definition</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Step Definition</em>'.
-   * @generated
-   */
-  StepDefinition createStepDefinition();
-
-  /**
-   * Returns a new object of class '<em>Step Parameters</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Step Parameters</em>'.
-   * @generated
-   */
-  StepParameters createStepParameters();
 
   /**
    * Returns the package supported by this factory.

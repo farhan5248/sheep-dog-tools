@@ -14,9 +14,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.Feature#getTags <em>Tags</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.Feature#getBackground <em>Background</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.Feature#getScenarios <em>Scenarios</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.Feature#getAbstractScenarios <em>Abstract Scenarios</em>}</li>
  * </ul>
  *
  * @see org.farhan.mbt.sheepDog.SheepDogPackage#getFeature()
@@ -26,59 +24,15 @@ import org.eclipse.emf.common.util.EList;
 public interface Feature extends Model
 {
   /**
-   * Returns the value of the '<em><b>Tags</b></em>' containment reference.
+   * Returns the value of the '<em><b>Abstract Scenarios</b></em>' containment reference list.
+   * The list contents are of type {@link org.farhan.mbt.sheepDog.AbstractScenario}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Tags</em>' containment reference.
-   * @see #setTags(FeatureTags)
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getFeature_Tags()
+   * @return the value of the '<em>Abstract Scenarios</em>' containment reference list.
+   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getFeature_AbstractScenarios()
    * @model containment="true"
    * @generated
    */
-  FeatureTags getTags();
-
-  /**
-   * Sets the value of the '{@link org.farhan.mbt.sheepDog.Feature#getTags <em>Tags</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Tags</em>' containment reference.
-   * @see #getTags()
-   * @generated
-   */
-  void setTags(FeatureTags value);
-
-  /**
-   * Returns the value of the '<em><b>Background</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Background</em>' containment reference.
-   * @see #setBackground(Background)
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getFeature_Background()
-   * @model containment="true"
-   * @generated
-   */
-  Background getBackground();
-
-  /**
-   * Sets the value of the '{@link org.farhan.mbt.sheepDog.Feature#getBackground <em>Background</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Background</em>' containment reference.
-   * @see #getBackground()
-   * @generated
-   */
-  void setBackground(Background value);
-
-  /**
-   * Returns the value of the '<em><b>Scenarios</b></em>' containment reference list.
-   * The list contents are of type {@link org.farhan.mbt.sheepDog.Scenario}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Scenarios</em>' containment reference list.
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getFeature_Scenarios()
-   * @model containment="true"
-   * @generated
-   */
-  EList<Scenario> getScenarios();
+  EList<AbstractScenario> getAbstractScenarios();
 
 } // Feature

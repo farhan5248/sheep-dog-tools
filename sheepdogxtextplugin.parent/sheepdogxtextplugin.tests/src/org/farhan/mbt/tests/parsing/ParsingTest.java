@@ -5,8 +5,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.farhan.mbt.cucumber.Feature;
-import org.farhan.mbt.cucumber.StepObject;
+import org.farhan.mbt.sheepDog.Feature;
+import org.farhan.mbt.sheepDog.StepObject;
 import org.junit.jupiter.api.Assertions;
 
 import com.google.inject.Inject;

@@ -5,19 +5,14 @@ package org.farhan.mbt.sheepDog.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
-import org.farhan.mbt.sheepDog.Cell;
 import org.farhan.mbt.sheepDog.Row;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
 
@@ -37,14 +32,14 @@ import org.farhan.mbt.sheepDog.SheepDogPackage;
 public class RowImpl extends MinimalEObjectImpl.Container implements Row
 {
   /**
-   * The cached value of the '{@link #getCells() <em>Cells</em>}' containment reference list.
+   * The cached value of the '{@link #getCells() <em>Cells</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getCells()
    * @generated
    * @ordered
    */
-  protected EList<Cell> cells;
+  protected EList<String> cells;
 
   /**
    * <!-- begin-user-doc -->
@@ -73,29 +68,13 @@ public class RowImpl extends MinimalEObjectImpl.Container implements Row
    * @generated
    */
   @Override
-  public EList<Cell> getCells()
+  public EList<String> getCells()
   {
     if (cells == null)
     {
-      cells = new EObjectContainmentEList<Cell>(Cell.class, this, SheepDogPackage.ROW__CELLS);
+      cells = new EDataTypeEList<String>(String.class, this, SheepDogPackage.ROW__CELLS);
     }
     return cells;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case SheepDogPackage.ROW__CELLS:
-        return ((InternalEList<?>)getCells()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -127,7 +106,7 @@ public class RowImpl extends MinimalEObjectImpl.Container implements Row
     {
       case SheepDogPackage.ROW__CELLS:
         getCells().clear();
-        getCells().addAll((Collection<? extends Cell>)newValue);
+        getCells().addAll((Collection<? extends String>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -164,6 +143,23 @@ public class RowImpl extends MinimalEObjectImpl.Container implements Row
         return cells != null && !cells.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (cells: ");
+    result.append(cells);
+    result.append(')');
+    return result.toString();
   }
 
 } //RowImpl

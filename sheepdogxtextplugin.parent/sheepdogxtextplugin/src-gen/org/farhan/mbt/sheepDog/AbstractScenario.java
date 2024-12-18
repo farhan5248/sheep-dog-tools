@@ -9,24 +9,24 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Examples</b></em>'.
+ * A representation of the model object '<em><b>Abstract Scenario</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.Examples#getTags <em>Tags</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.Examples#getName <em>Name</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.Examples#getStatements <em>Statements</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.Examples#getTheExamplesTable <em>The Examples Table</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.AbstractScenario#getTags <em>Tags</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.AbstractScenario#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.AbstractScenario#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.AbstractScenario#getSteps <em>Steps</em>}</li>
  * </ul>
  *
- * @see org.farhan.mbt.sheepDog.SheepDogPackage#getExamples()
+ * @see org.farhan.mbt.sheepDog.SheepDogPackage#getAbstractScenario()
  * @model
  * @generated
  */
-public interface Examples extends EObject
+public interface AbstractScenario extends EObject
 {
   /**
    * Returns the value of the '<em><b>Tags</b></em>' attribute.
@@ -34,14 +34,14 @@ public interface Examples extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Tags</em>' attribute.
    * @see #setTags(String)
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getExamples_Tags()
+   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getAbstractScenario_Tags()
    * @model
    * @generated
    */
   String getTags();
 
   /**
-   * Sets the value of the '{@link org.farhan.mbt.sheepDog.Examples#getTags <em>Tags</em>}' attribute.
+   * Sets the value of the '{@link org.farhan.mbt.sheepDog.AbstractScenario#getTags <em>Tags</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Tags</em>' attribute.
@@ -56,14 +56,14 @@ public interface Examples extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getExamples_Name()
+   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getAbstractScenario_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.farhan.mbt.sheepDog.Examples#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.farhan.mbt.sheepDog.AbstractScenario#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -78,32 +78,22 @@ public interface Examples extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Statements</em>' attribute list.
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getExamples_Statements()
+   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getAbstractScenario_Statements()
    * @model unique="false"
    * @generated
    */
   EList<String> getStatements();
 
   /**
-   * Returns the value of the '<em><b>The Examples Table</b></em>' containment reference.
+   * Returns the value of the '<em><b>Steps</b></em>' containment reference list.
+   * The list contents are of type {@link org.farhan.mbt.sheepDog.Step}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>The Examples Table</em>' containment reference.
-   * @see #setTheExamplesTable(Table)
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getExamples_TheExamplesTable()
+   * @return the value of the '<em>Steps</em>' containment reference list.
+   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getAbstractScenario_Steps()
    * @model containment="true"
    * @generated
    */
-  Table getTheExamplesTable();
+  EList<Step> getSteps();
 
-  /**
-   * Sets the value of the '{@link org.farhan.mbt.sheepDog.Examples#getTheExamplesTable <em>The Examples Table</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>The Examples Table</em>' containment reference.
-   * @see #getTheExamplesTable()
-   * @generated
-   */
-  void setTheExamplesTable(Table value);
-
-} // Examples
+} // AbstractScenario

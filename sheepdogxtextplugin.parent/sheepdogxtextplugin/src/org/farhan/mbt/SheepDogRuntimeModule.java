@@ -3,9 +3,41 @@
  */
 package org.farhan.mbt;
 
+import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.parser.antlr.LexerBindings;
+import org.eclipse.xtext.parser.antlr.LexerProvider;
+import org.farhan.mbt.parser.antlr.MySheepDogParser;
+import org.farhan.mbt.parser.antlr.internal.InternalSheepDogLexer;
+import org.farhan.mbt.parser.antlr.internal.MySheepDogLexer;
+
+import com.google.inject.Binder;
+import com.google.inject.Provider;
+import com.google.inject.name.Names;
 
 /**
- * Use this class to register components to be used at runtime / without the Equinox extension registry.
+ * Use this class to register components to be used at runtime / without the
+ * Equinox extension registry.
  */
 public class SheepDogRuntimeModule extends AbstractSheepDogRuntimeModule {
+
+	@Override
+	public Class<? extends IParser> bindIParser() {
+		return MySheepDogParser.class;
+	}
+
+	@Override
+	public Class<? extends Lexer> bindLexer() {
+		return MySheepDogLexer.class;
+	}
+
+	@Override
+	public Provider<? extends InternalSheepDogLexer> provideInternalSheepDogLexer() {
+		return LexerProvider.create(MySheepDogLexer.class);
+	}
+
+	@Override
+	public void configureRuntimeLexer(Binder binder) {
+		binder.bind(Lexer.class).annotatedWith(Names.named(LexerBindings.RUNTIME)).to(MySheepDogLexer.class);
+	}
 }

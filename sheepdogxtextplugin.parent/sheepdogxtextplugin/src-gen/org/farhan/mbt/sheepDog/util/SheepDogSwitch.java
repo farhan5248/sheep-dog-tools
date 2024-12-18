@@ -80,6 +80,28 @@ public class SheepDogSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case SheepDogPackage.STEP_OBJECT:
+      {
+        StepObject stepObject = (StepObject)theEObject;
+        T result = caseStepObject(stepObject);
+        if (result == null) result = caseModel(stepObject);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SheepDogPackage.STEP_DEFINITION:
+      {
+        StepDefinition stepDefinition = (StepDefinition)theEObject;
+        T result = caseStepDefinition(stepDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SheepDogPackage.STEP_PARAMETERS:
+      {
+        StepParameters stepParameters = (StepParameters)theEObject;
+        T result = caseStepParameters(stepParameters);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case SheepDogPackage.FEATURE:
       {
         Feature feature = (Feature)theEObject;
@@ -88,10 +110,18 @@ public class SheepDogSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case SheepDogPackage.ABSTRACT_SCENARIO:
+      {
+        AbstractScenario abstractScenario = (AbstractScenario)theEObject;
+        T result = caseAbstractScenario(abstractScenario);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case SheepDogPackage.BACKGROUND:
       {
         Background background = (Background)theEObject;
         T result = caseBackground(background);
+        if (result == null) result = caseAbstractScenario(background);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -99,6 +129,7 @@ public class SheepDogSwitch<T> extends Switch<T>
       {
         Scenario scenario = (Scenario)theEObject;
         T result = caseScenario(scenario);
+        if (result == null) result = caseAbstractScenario(scenario);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -106,20 +137,6 @@ public class SheepDogSwitch<T> extends Switch<T>
       {
         Examples examples = (Examples)theEObject;
         T result = caseExamples(examples);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case SheepDogPackage.SCENARIO_TAGS:
-      {
-        ScenarioTags scenarioTags = (ScenarioTags)theEObject;
-        T result = caseScenarioTags(scenarioTags);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case SheepDogPackage.FEATURE_TAGS:
-      {
-        FeatureTags featureTags = (FeatureTags)theEObject;
-        T result = caseFeatureTags(featureTags);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -154,17 +171,18 @@ public class SheepDogSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case SheepDogPackage.AND:
+      {
+        And and = (And)theEObject;
+        T result = caseAnd(and);
+        if (result == null) result = caseStep(and);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case SheepDogPackage.DOC_STRING:
       {
         DocString docString = (DocString)theEObject;
         T result = caseDocString(docString);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case SheepDogPackage.LINE:
-      {
-        Line line = (Line)theEObject;
-        T result = caseLine(line);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -179,42 +197,6 @@ public class SheepDogSwitch<T> extends Switch<T>
       {
         Row row = (Row)theEObject;
         T result = caseRow(row);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case SheepDogPackage.CELL:
-      {
-        Cell cell = (Cell)theEObject;
-        T result = caseCell(cell);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case SheepDogPackage.STATEMENT:
-      {
-        Statement statement = (Statement)theEObject;
-        T result = caseStatement(statement);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case SheepDogPackage.STEP_OBJECT:
-      {
-        StepObject stepObject = (StepObject)theEObject;
-        T result = caseStepObject(stepObject);
-        if (result == null) result = caseModel(stepObject);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case SheepDogPackage.STEP_DEFINITION:
-      {
-        StepDefinition stepDefinition = (StepDefinition)theEObject;
-        T result = caseStepDefinition(stepDefinition);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case SheepDogPackage.STEP_PARAMETERS:
-      {
-        StepParameters stepParameters = (StepParameters)theEObject;
-        T result = caseStepParameters(stepParameters);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -239,6 +221,54 @@ public class SheepDogSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Step Object</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Step Object</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseStepObject(StepObject object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Step Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Step Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseStepDefinition(StepDefinition object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Step Parameters</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Step Parameters</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseStepParameters(StepParameters object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Feature</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -250,6 +280,22 @@ public class SheepDogSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseFeature(Feature object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Abstract Scenario</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Abstract Scenario</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAbstractScenario(AbstractScenario object)
   {
     return null;
   }
@@ -298,38 +344,6 @@ public class SheepDogSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseExamples(Examples object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Scenario Tags</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Scenario Tags</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseScenarioTags(ScenarioTags object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Feature Tags</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Feature Tags</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseFeatureTags(FeatureTags object)
   {
     return null;
   }
@@ -399,6 +413,22 @@ public class SheepDogSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>And</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>And</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAnd(And object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Doc String</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -410,22 +440,6 @@ public class SheepDogSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseDocString(DocString object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Line</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Line</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseLine(Line object)
   {
     return null;
   }
@@ -458,86 +472,6 @@ public class SheepDogSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseRow(Row object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Cell</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Cell</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseCell(Cell object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Statement</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Statement</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseStatement(Statement object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Step Object</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Step Object</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseStepObject(StepObject object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Step Definition</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Step Definition</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseStepDefinition(StepDefinition object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Step Parameters</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Step Parameters</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseStepParameters(StepParameters object)
   {
     return null;
   }

@@ -5,13 +5,13 @@ package org.farhan.mbt.tests.parsing;
 
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
-import org.farhan.mbt.tests.CucumberInjectorProvider;
+import org.farhan.mbt.tests.SheepDogInjectorProvider;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith(InjectionExtension.class)
-@InjectWith(CucumberInjectorProvider.class)
-public class CucumberParsingTest extends ParsingTest {
+@InjectWith(SheepDogInjectorProvider.class)
+public class SheepDogParsingTest extends ParsingTest {
 
 	@Test
 	public void parseCompleteFile() throws Exception {

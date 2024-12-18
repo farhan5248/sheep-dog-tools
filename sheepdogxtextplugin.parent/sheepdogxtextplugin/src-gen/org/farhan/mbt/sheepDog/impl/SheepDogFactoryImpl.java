@@ -66,25 +66,22 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
     switch (eClass.getClassifierID())
     {
       case SheepDogPackage.MODEL: return createModel();
+      case SheepDogPackage.STEP_OBJECT: return createStepObject();
+      case SheepDogPackage.STEP_DEFINITION: return createStepDefinition();
+      case SheepDogPackage.STEP_PARAMETERS: return createStepParameters();
       case SheepDogPackage.FEATURE: return createFeature();
+      case SheepDogPackage.ABSTRACT_SCENARIO: return createAbstractScenario();
       case SheepDogPackage.BACKGROUND: return createBackground();
       case SheepDogPackage.SCENARIO: return createScenario();
       case SheepDogPackage.EXAMPLES: return createExamples();
-      case SheepDogPackage.SCENARIO_TAGS: return createScenarioTags();
-      case SheepDogPackage.FEATURE_TAGS: return createFeatureTags();
       case SheepDogPackage.STEP: return createStep();
       case SheepDogPackage.GIVEN: return createGiven();
       case SheepDogPackage.WHEN: return createWhen();
       case SheepDogPackage.THEN: return createThen();
+      case SheepDogPackage.AND: return createAnd();
       case SheepDogPackage.DOC_STRING: return createDocString();
-      case SheepDogPackage.LINE: return createLine();
       case SheepDogPackage.TABLE: return createTable();
       case SheepDogPackage.ROW: return createRow();
-      case SheepDogPackage.CELL: return createCell();
-      case SheepDogPackage.STATEMENT: return createStatement();
-      case SheepDogPackage.STEP_OBJECT: return createStepObject();
-      case SheepDogPackage.STEP_DEFINITION: return createStepDefinition();
-      case SheepDogPackage.STEP_PARAMETERS: return createStepParameters();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -108,10 +105,58 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
    * @generated
    */
   @Override
+  public StepObject createStepObject()
+  {
+    StepObjectImpl stepObject = new StepObjectImpl();
+    return stepObject;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public StepDefinition createStepDefinition()
+  {
+    StepDefinitionImpl stepDefinition = new StepDefinitionImpl();
+    return stepDefinition;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public StepParameters createStepParameters()
+  {
+    StepParametersImpl stepParameters = new StepParametersImpl();
+    return stepParameters;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Feature createFeature()
   {
     FeatureImpl feature = new FeatureImpl();
     return feature;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public AbstractScenario createAbstractScenario()
+  {
+    AbstractScenarioImpl abstractScenario = new AbstractScenarioImpl();
+    return abstractScenario;
   }
 
   /**
@@ -148,30 +193,6 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
   {
     ExamplesImpl examples = new ExamplesImpl();
     return examples;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ScenarioTags createScenarioTags()
-  {
-    ScenarioTagsImpl scenarioTags = new ScenarioTagsImpl();
-    return scenarioTags;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public FeatureTags createFeatureTags()
-  {
-    FeatureTagsImpl featureTags = new FeatureTagsImpl();
-    return featureTags;
   }
 
   /**
@@ -228,10 +249,10 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
    * @generated
    */
   @Override
-  public DocString createDocString()
+  public And createAnd()
   {
-    DocStringImpl docString = new DocStringImpl();
-    return docString;
+    AndImpl and = new AndImpl();
+    return and;
   }
 
   /**
@@ -240,10 +261,10 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
    * @generated
    */
   @Override
-  public Line createLine()
+  public DocString createDocString()
   {
-    LineImpl line = new LineImpl();
-    return line;
+    DocStringImpl docString = new DocStringImpl();
+    return docString;
   }
 
   /**
@@ -268,66 +289,6 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
   {
     RowImpl row = new RowImpl();
     return row;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Cell createCell()
-  {
-    CellImpl cell = new CellImpl();
-    return cell;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Statement createStatement()
-  {
-    StatementImpl statement = new StatementImpl();
-    return statement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public StepObject createStepObject()
-  {
-    StepObjectImpl stepObject = new StepObjectImpl();
-    return stepObject;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public StepDefinition createStepDefinition()
-  {
-    StepDefinitionImpl stepDefinition = new StepDefinitionImpl();
-    return stepDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public StepParameters createStepParameters()
-  {
-    StepParametersImpl stepParameters = new StepParametersImpl();
-    return stepParameters;
   }
 
   /**

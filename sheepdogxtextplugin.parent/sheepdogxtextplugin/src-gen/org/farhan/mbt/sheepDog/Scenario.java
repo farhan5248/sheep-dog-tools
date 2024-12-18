@@ -5,8 +5,6 @@ package org.farhan.mbt.sheepDog;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Scenario</b></em>'.
@@ -16,10 +14,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.Scenario#getTags <em>Tags</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.Scenario#getName <em>Name</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.Scenario#getStatements <em>Statements</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.Scenario#getSteps <em>Steps</em>}</li>
  *   <li>{@link org.farhan.mbt.sheepDog.Scenario#getExamples <em>Examples</em>}</li>
  * </ul>
  *
@@ -27,76 +21,8 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Scenario extends EObject
+public interface Scenario extends AbstractScenario
 {
-  /**
-   * Returns the value of the '<em><b>Tags</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Tags</em>' containment reference.
-   * @see #setTags(ScenarioTags)
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getScenario_Tags()
-   * @model containment="true"
-   * @generated
-   */
-  ScenarioTags getTags();
-
-  /**
-   * Sets the value of the '{@link org.farhan.mbt.sheepDog.Scenario#getTags <em>Tags</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Tags</em>' containment reference.
-   * @see #getTags()
-   * @generated
-   */
-  void setTags(ScenarioTags value);
-
-  /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getScenario_Name()
-   * @model
-   * @generated
-   */
-  String getName();
-
-  /**
-   * Sets the value of the '{@link org.farhan.mbt.sheepDog.Scenario#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
-  void setName(String value);
-
-  /**
-   * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
-   * The list contents are of type {@link org.farhan.mbt.sheepDog.Statement}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Statements</em>' containment reference list.
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getScenario_Statements()
-   * @model containment="true"
-   * @generated
-   */
-  EList<Statement> getStatements();
-
-  /**
-   * Returns the value of the '<em><b>Steps</b></em>' containment reference list.
-   * The list contents are of type {@link org.farhan.mbt.sheepDog.Step}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Steps</em>' containment reference list.
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getScenario_Steps()
-   * @model containment="true"
-   * @generated
-   */
-  EList<Step> getSteps();
-
   /**
    * Returns the value of the '<em><b>Examples</b></em>' containment reference list.
    * The list contents are of type {@link org.farhan.mbt.sheepDog.Examples}.

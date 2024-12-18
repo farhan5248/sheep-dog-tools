@@ -5,24 +5,24 @@ package org.farhan.mbt.sheepDog.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.farhan.mbt.sheepDog.Background;
+import org.farhan.mbt.sheepDog.And;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Background</b></em>'.
+ * An implementation of the model object '<em><b>And</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class BackgroundImpl extends AbstractScenarioImpl implements Background
+public class AndImpl extends StepImpl implements And
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected BackgroundImpl()
+  protected AndImpl()
   {
     super();
   }
@@ -35,7 +35,7 @@ public class BackgroundImpl extends AbstractScenarioImpl implements Background
   @Override
   protected EClass eStaticClass()
   {
-    return SheepDogPackage.Literals.BACKGROUND;
+    return SheepDogPackage.Literals.AND;
   }
 
-} //BackgroundImpl
+} //AndImpl
