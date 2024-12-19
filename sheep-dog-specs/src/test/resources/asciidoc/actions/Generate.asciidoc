@@ -1,7 +1,6 @@
-:tags: sheep-dog-test
-= Generate
+= Feature: Generate
 
-== The object doesn't exist
+== Scenario: The object doesn't exist
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -21,7 +20,7 @@
 | daily batchjob/Input file.feature| is present
 |===
 
-== The object step definition doesn't exist
+== Scenario: The object step definition doesn't exist
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -49,7 +48,7 @@
 | daily batchjob/Input file.feature| is present
 |===
 
-== The object step definition parameter set doesn't exist
+== Scenario: The object step definition parameter set doesn't exist
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 

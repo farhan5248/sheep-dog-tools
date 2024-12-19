@@ -1,7 +1,6 @@
-:tags: sheep-dog-dev
-= UML Scenario To Code
+= Feature: UML Scenario To Code
 
-== No tags, no statements, one step
+== Scenario: No tags, no statements, one step
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -26,7 +25,7 @@ Feature: Process
 | Submit| Given The blah application, something/Object1 page is empty
 |===
 
-== One tag, one statement, one step
+== Scenario: One tag, one statement, one step
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -54,7 +53,7 @@ Feature: Process
 | Submit| tag1| Desc line 1
 |===
 
-== Two tags, two statements, two steps
+== Scenario: Two tags, two statements, two steps
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -92,8 +91,7 @@ Feature: Process
 | Submit| Given The blah application, something/Object{Index} page is empty
 |===
 
-[examples="true"]
-=== Indices
+=== Examples: Indices
 
 [options="header"]
 |===
@@ -102,7 +100,7 @@ Feature: Process
 | 2
 |===
 
-== Three tags, three statements, three steps
+== Scenario: Three tags, three statements, three steps
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -142,8 +140,7 @@ Feature: Process
 | Submit| Given The blah application, something/Object{Index} page is empty
 |===
 
-[examples="true"]
-=== Indices
+=== Examples: Indices
 
 [options="header"]
 |===

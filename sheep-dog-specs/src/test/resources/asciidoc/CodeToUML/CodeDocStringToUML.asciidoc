@@ -1,7 +1,6 @@
-:tags: sheep-dog-dev
-= Convert Doc String To UML
+= Feature: Convert Doc String To UML
 
-== One line
+== Scenario: One line
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -28,7 +27,7 @@ Feature: Process
 | specs::Process::Submit| The Object page is created as follows| docString| 0 -} text1
 |===
 
-== Empty Lines
+== Scenario: Empty Lines
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 

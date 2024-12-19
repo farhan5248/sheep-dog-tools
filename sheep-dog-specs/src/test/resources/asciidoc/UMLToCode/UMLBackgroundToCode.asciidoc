@@ -1,7 +1,6 @@
-:tags: sheep-dog-dev
-= UML Background To Code
+= Feature: UML Background To Code
 
-== No statement, one step, one scenario
+== Scenario: No statement, one step, one scenario
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -37,7 +36,7 @@ Feature: Process
 | Submit| Given The Object1 page is valid
 |===
 
-== One statement, one step, one scenario
+== Scenario: One statement, one step, one scenario
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -66,7 +65,7 @@ Feature: Process
 | Setup| Desc line 1
 |===
 
-== No statement, one step, two scenarios
+== Scenario: No statement, one step, two scenarios
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -106,7 +105,7 @@ Feature: Process
 | Submit 2| Given The Object2 page is valid
 |===
 
-== No statement, one step, three scenarios
+== Scenario: No statement, one step, three scenarios
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -150,7 +149,7 @@ Feature: Process
 | Submit 3| Given The Object3 page is valid
 |===
 
-== No statement, two steps, one scenario
+== Scenario: No statement, two steps, one scenario
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -179,8 +178,7 @@ Feature: Process
 | Setup| Given The Object{Index} page is valid
 |===
 
-[examples="true"]
-=== Indices
+=== Examples: Indices
 
 [options="header"]
 |===
@@ -189,7 +187,7 @@ Feature: Process
 | 2
 |===
 
-== No statement, three steps, one scenario
+== Scenario: No statement, three steps, one scenario
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -219,8 +217,7 @@ Feature: Process
 | Setup| Given The Object{Index} page is valid
 |===
 
-[examples="true"]
-=== Indices
+=== Examples: Indices
 
 [options="header"]
 |===

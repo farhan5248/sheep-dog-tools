@@ -1,14 +1,13 @@
-:tags: sheep-dog-dev
-= Document Step To UML
+= Feature: Document Step To UML
 
-== Convert step keywords
+== Scenario: Convert step keywords
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
-== Submit
+== Scenario: Submit
 
 === Given The Given page is empty
 ===  When The When page is empty

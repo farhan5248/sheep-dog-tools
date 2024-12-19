@@ -1,7 +1,6 @@
-:tags: sheep-dog-dev
-= UML Examples Table To Document
+= Feature: UML Examples Table To Document
 
-== One row, one cell
+== Scenario: One row, one cell
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -33,7 +32,7 @@ Feature: Process
 | Submit| Examples 1| v1
 |===
 
-== Two rows, two cells
+== Scenario: Two rows, two cells
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -67,7 +66,7 @@ Feature: Process
 | Submit| Examples 1| v3, v4
 |===
 
-== Three rows, three cells
+== Scenario: Three rows, three cells
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 

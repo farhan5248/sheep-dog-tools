@@ -2688,14 +2688,14 @@ rule__Tags__Group__1__Impl
 :
 (
 	(
-		{ before(grammarAccess.getTagsAccess().getWORDTerminalRuleCall_1()); }
-		(RULE_WORD)
-		{ after(grammarAccess.getTagsAccess().getWORDTerminalRuleCall_1()); }
+		{ before(grammarAccess.getTagsAccess().getTAGWORDTerminalRuleCall_1()); }
+		(RULE_TAGWORD)
+		{ after(grammarAccess.getTagsAccess().getTAGWORDTerminalRuleCall_1()); }
 	)
 	(
-		{ before(grammarAccess.getTagsAccess().getWORDTerminalRuleCall_1()); }
-		(RULE_WORD)*
-		{ after(grammarAccess.getTagsAccess().getWORDTerminalRuleCall_1()); }
+		{ before(grammarAccess.getTagsAccess().getTAGWORDTerminalRuleCall_1()); }
+		(RULE_TAGWORD)*
+		{ after(grammarAccess.getTagsAccess().getTAGWORDTerminalRuleCall_1()); }
 	)
 )
 ;
@@ -2977,9 +2977,9 @@ rule__Cell__Group__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getCellAccess().getWORDTerminalRuleCall_1()); }
-	(RULE_WORD)*
-	{ after(grammarAccess.getCellAccess().getWORDTerminalRuleCall_1()); }
+	{ before(grammarAccess.getCellAccess().getCELLWORDTerminalRuleCall_1()); }
+	(RULE_CELLWORD)*
+	{ after(grammarAccess.getCellAccess().getCELLWORDTerminalRuleCall_1()); }
 )
 ;
 finally {
@@ -3587,7 +3587,11 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-RULE_WORD : ~(('"'|' '|'\t'|'\r'|'\n'|'#'|'|'));
+RULE_TAGWORD : ~((' '|'\t'|'\r'|'\n'|'#'|'"'))+;
+
+RULE_CELLWORD : ~((' '|'\t'|'\r'|'\n'|'#'|'|'))+;
+
+RULE_WORD : ~((' '|'\t'|'\r'|'\n'|'#'))+;
 
 RULE_WS : (' '|'\t'|'\r')+;
 

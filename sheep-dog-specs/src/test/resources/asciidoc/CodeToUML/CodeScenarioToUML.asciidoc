@@ -1,7 +1,6 @@
-:tags: sheep-dog-dev
-= Code Scenario To UML
+= Feature: Code Scenario To UML
 
-== No tags, no statements, one step
+== Scenario: No tags, no statements, one step
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -24,7 +23,7 @@ Feature: Process
 | specs::Process::Submit| The blah application, something/Object1 page is empty
 |===
 
-== One tag, one statement, one step
+== Scenario: One tag, one statement, one step
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -58,7 +57,7 @@ Feature: Process
 | specs::Process::Submit| Desc line 1
 |===
 
-== Two tags, two statements, two steps
+== Scenario: Two tags, two statements, two steps
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -102,8 +101,7 @@ Feature: Process
 | specs::Process::Submit| The blah application, something/Object{Index} page is empty
 |===
 
-[examples="true"]
-=== Indices
+=== Examples: Indices
 
 [options="header"]
 |===
@@ -112,7 +110,7 @@ Feature: Process
 | 2
 |===
 
-== Three tags, three statements, three steps
+== Scenario: Three tags, three statements, three steps
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -158,8 +156,7 @@ Feature: Process
 | specs::Process::Submit| The blah application, something/Object{Index} page is empty
 |===
 
-[examples="true"]
-=== Indices
+=== Examples: Indices
 
 [options="header"]
 |===
@@ -169,7 +166,7 @@ Feature: Process
 | 3
 |===
 
-== Selected tags
+== Scenario: Selected tags
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -205,7 +202,7 @@ Feature: Process
 | specs::Process::Submit
 |===
 
-=== But The target/mbt/tag1/uml/pst.uml file Interaction section won't be created as follows
+=== And The target/mbt/tag1/uml/pst.uml file Interaction section won't be created as follows
 
 [options="header"]
 |===

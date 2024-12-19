@@ -1,14 +1,13 @@
-:tags: sheep-dog-dev
-= Document Scenario Outline To UML
+= Feature: Document Scenario Outline To UML
 
-== No tags, no statement, one step, one example
+== Scenario: No tags, no statement, one step, one example
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
-== Submit
+== Scenario: Submit
 
 === Given The Object page is created as follows
 
@@ -18,8 +17,7 @@
 | {h3}
 |===
 
-[examples="true"]
-=== Examples 1
+=== Examples: Examples 1
 
 [options="header"]
 |===
@@ -50,15 +48,15 @@
 | specs::Process::Submit| Examples 1| 1 -} v31\|
 |===
 
-== One tag, one statement, one step, one example
+== Scenario: One tag, one statement, one step, one example
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
 [tags="tag1"]
-== Submit
+== Scenario: Submit
 
 Desc line 1
 
@@ -70,8 +68,7 @@ Desc line 1
 | {h3}
 |===
 
-[examples="true"]
-=== Examples 1
+=== Examples: Examples 1
 
 [options="header"]
 |===
@@ -100,15 +97,15 @@ Desc line 1
 | specs::Process::Submit| Desc line 1
 |===
 
-== Two tags, two statements, two steps, two examples
+== Scenario: Two tags, two statements, two steps, two examples
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
 [tags="tag1,tag2"]
-== Submit
+== Scenario: Submit
 
 Desc line 1
 Desc line 2
@@ -129,8 +126,7 @@ Desc line 2
 | {h3}
 |===
 
-[examples="true"]
-=== Examples 1
+=== Examples: Examples 1
 
 [options="header"]
 |===
@@ -138,8 +134,7 @@ Desc line 2
 | v31
 |===
 
-[examples="true"]
-=== Examples 2
+=== Examples: Examples 2
 
 [options="header"]
 |===
@@ -185,8 +180,7 @@ Desc line 2
 | specs::Process::Submit| Examples {Index}| 1 -} v3{Index}\|
 |===
 
-[examples="true"]
-=== Indices
+=== Examples: Indices
 
 [options="header"]
 |===
@@ -195,15 +189,15 @@ Desc line 2
 | 2
 |===
 
-== Three tags, three statements, three steps, three examples
+== Scenario: Three tags, three statements, three steps, three examples
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
 [tags="tag1,tag2,tag3"]
-== Submit
+== Scenario: Submit
 
 Desc line 1
 Desc line 2
@@ -233,8 +227,7 @@ Desc line 3
 | {h3}
 |===
 
-[examples="true"]
-=== Examples 1
+=== Examples: Examples 1
 
 [options="header"]
 |===
@@ -242,16 +235,14 @@ Desc line 3
 | v31
 |===
 
-[examples="true"]
-=== Examples 2
+=== Examples: Examples 2
 
 [options="header"]
 |===
 | h3
 | v32
 |===
-[examples="true"]
-=== Examples 3
+=== Examples: Examples 3
 
 [options="header"]
 |===
@@ -297,8 +288,7 @@ Desc line 3
 | specs::Process::Submit| Examples {Index}| 1 -} v3{Index}\|
 |===
 
-[examples="true"]
-=== Indices
+=== Examples: Indices
 
 [options="header"]
 |===
@@ -308,20 +298,19 @@ Desc line 3
 | 3
 |===
 
-== Selected tags
+== Scenario: Selected tags
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
 [tags="tag1"]
-== Submit
+== Scenario: Submit
 
 === Given The Object1 page is empty
 
-[examples="true"]
-=== Examples 1
+=== Examples: Examples 1
 
 [options="header"]
 |===
@@ -330,12 +319,11 @@ Desc line 3
 |===
 
 [tags="tag2"]
-== Submit2
+== Scenario: Submit2
 
 === Given The Object1 page is empty
 
-[examples="true"]
-=== Examples 1
+=== Examples: Examples 1
 
 [options="header"]
 |===
@@ -362,7 +350,7 @@ Desc line 3
 | specs::Process::Submit
 |===
 
-=== But The target/mbt/tag1/uml/pst.uml file Interaction section won't be created as follows
+=== And The target/mbt/tag1/uml/pst.uml file Interaction section won't be created as follows
 
 [options="header"]
 |===

@@ -1,7 +1,6 @@
-:tags: sheep-dog-test
-= Propose Predicate
+= Feature: Propose Predicate
 
-== No predicate no definition
+== Scenario: No predicate no definition
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -21,7 +20,7 @@
 | The daily batchjob, Input file is| is| is
 |===
 
-== No predicate has definition has description
+== Scenario: No predicate has definition has description
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -49,7 +48,7 @@
 | The daily batchjob, Input file is present| is present| Creates empty file
 |===
 
-== Has predicate no definition
+== Scenario: Has predicate no definition
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -69,7 +68,7 @@
 | The daily batchjob, Input file is present as follows| as follows
 |===
 
-== Has predicate has definition
+== Scenario: Has predicate has definition
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 

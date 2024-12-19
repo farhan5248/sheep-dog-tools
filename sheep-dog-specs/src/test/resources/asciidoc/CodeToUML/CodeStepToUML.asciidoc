@@ -1,7 +1,6 @@
-:tags: sheep-dog-dev
-= Code Step To UML
+= Feature: Code Step To UML
 
-== Convert step keywords
+== Scenario: Convert step keywords
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 

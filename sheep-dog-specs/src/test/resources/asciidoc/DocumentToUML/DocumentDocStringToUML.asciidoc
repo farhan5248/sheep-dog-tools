@@ -1,20 +1,19 @@
-:tags: sheep-dog-dev
-= Document DocString To UML
+= Feature: Document DocString To UML
 
-== One line
+== Scenario: One line
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
-== Submit
+== Scenario: Submit
 
 === Given The Object page is created as follows
 
-----
+\----
 text1
-----
+\----
 ----
 
 === When The mbt-transformer plugin, asciidoctor-to-uml goal is executed

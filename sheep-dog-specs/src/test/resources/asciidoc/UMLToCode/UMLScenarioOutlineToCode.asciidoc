@@ -1,7 +1,6 @@
-:tags: sheep-dog-dev
-= UML Scenario Outline To Code
+= Feature: UML Scenario Outline To Code
 
-== No tags, no statement, one step, one example
+== Scenario: No tags, no statement, one step, one example
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -42,7 +41,7 @@ Feature: Process
 | Submit| Examples 1| \| v31 \|
 |===
 
-== One tag, one statement, one step, one example
+== Scenario: One tag, one statement, one step, one example
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -75,7 +74,7 @@ Feature: Process
 | Submit| tag1| Desc line 1
 |===
 
-== Two tags, two statements, two steps, two examples
+== Scenario: Two tags, two statements, two steps, two examples
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -133,8 +132,7 @@ Feature: Process
 | Submit| Examples {Index}| \| v3{Index} \|
 |===
 
-[examples="true"]
-=== Indices
+=== Examples: Indices
 
 [options="header"]
 |===
@@ -143,7 +141,7 @@ Feature: Process
 | 2
 |===
 
-== Three tags, three statements, three steps, three examples
+== Scenario: Three tags, three statements, three steps, three examples
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -209,8 +207,7 @@ Feature: Process
 | Submit| Examples {Index}| \| v3{Index} \|
 |===
 
-[examples="true"]
-=== Indices
+=== Examples: Indices
 
 [options="header"]
 |===

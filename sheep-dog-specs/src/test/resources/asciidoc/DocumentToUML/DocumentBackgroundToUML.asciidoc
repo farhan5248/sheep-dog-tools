@@ -1,19 +1,18 @@
-:tags: sheep-dog-dev
-= Document Background To UML
+= Feature: Document Background To UML
 
-== No statement, one step, one scenario
+== Scenario: No statement, one step, one scenario
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
 [background="true"]
-== Setup
+== Scenario: Setup
 
 === Given The Object0 page is valid
 
-== Submit
+== Scenario: Submit
 
 === Given The Object1 page is valid
 ----
@@ -31,20 +30,20 @@
 | specs::Process::Submit| The Object1 page is valid
 |===
 
-== No statement, two steps, one scenario
+== Scenario: No statement, two steps, one scenario
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
 [background="true"]
-== Setup
+== Scenario: Setup
 
 === Given The Object1 page is valid
 === Given The Object2 page is valid
 
-== Submit
+== Scenario: Submit
 
 === Given The Object page is valid
 ----
@@ -63,21 +62,21 @@
 | specs::Process::Submit| The Object page is valid
 |===
 
-== No statement, three steps, one scenario
+== Scenario: No statement, three steps, one scenario
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
 [background="true"]
-== Setup
+== Scenario: Setup
 
 === Given The Object1 page is valid
 === Given The Object2 page is valid
 === Given The Object3 page is valid
 
-== Submit
+== Scenario: Submit
 
 === Given The Object page is valid
 ----
@@ -97,21 +96,21 @@
 | specs::Process::Submit| The Object page is valid
 |===
 
-== One statement, one step, one scenario
+== Scenario: One statement, one step, one scenario
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
 [background="true"]
-== Setup
+== Scenario: Setup
 
 Desc line 1
 
 === Given The Object0 page is valid
 
-== Submit
+== Scenario: Submit
 
 === Given The Object1 page is valid
 ----
@@ -128,23 +127,23 @@ Desc line 1
 | specs::Process::Setup| Desc line 1
 |===
 
-== No statement, one step, two scenarios
+== Scenario: No statement, one step, two scenarios
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
 [background="true"]
-== Setup
+== Scenario: Setup
 
 === Given The Object0 page is valid
 
-== Submit 1
+== Scenario: Submit 1
 
 === Given The Object1 page is valid
 
-== Submit 2
+== Scenario: Submit 2
 
 === Given The Object2 page is valid
 ----
@@ -163,27 +162,27 @@ Desc line 1
 | specs::Process::Submit 2| The Object2 page is valid
 |===
 
-== No statement, one step, three scenarios
+== Scenario: No statement, one step, three scenarios
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
 [background="true"]
-== Setup
+== Scenario: Setup
 
 === Given The Object0 page is valid
 
-== Submit 1
+== Scenario: Submit 1
 
 === Given The Object1 page is valid
 
-== Submit 2
+== Scenario: Submit 2
 
 === Given The Object2 page is valid
 
-== Submit 3
+== Scenario: Submit 3
 
 === Given The Object3 page is valid
 ----

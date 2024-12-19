@@ -1,20 +1,6 @@
-ifdef::env-github[]
-:tip-caption: :bulb:
-:note-caption: :information_source:
-:important-caption: :heavy_exclamation_mark:
-:caution-caption: :fire:
-:warning-caption: :warning:
-endif::[]
+= Feature: Code To Document
 
-:tags: sheep-dog-dev,sheep-dog-dev-maven-plugin,sheep-dog-dev-svc,sheep-dog-dev-svc-maven-plugin
-= Code To Document
-
-[NOTE]
-===
-TODO make test for the specific mappings
-===
-
-== Create an adoc file from feature file
+== Scenario: Create an adoc file from feature file
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/app/Process.feature file is created as follows
 
@@ -76,13 +62,12 @@ Feature: Process
 === Then The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows
 
 ----
-:tags: tag1
-= Process
+= Feature: Process
 
 Desc 1
 
 [tags="tag2"]
-== Story One
+== Scenario: Story One
 
 Desc 2
 
@@ -98,14 +83,14 @@ Desc 2
 
 === Then The Search application, Logout page is created as follows
 
-----
+\----
   text1
   
   text2
-----
+\----
 
 [tags="tag3"]
-== Story Two
+== Scenario: Story Two
 
 Desc 3
 
@@ -121,8 +106,7 @@ Desc 3
 
 === Then The Search application, Logout page is invalid
 
-[examples="true"]
-=== Some data
+=== Examples: Some data
 
 [options="header"]
 |===

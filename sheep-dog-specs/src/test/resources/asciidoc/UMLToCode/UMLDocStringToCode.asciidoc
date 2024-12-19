@@ -1,7 +1,6 @@
-:tags: sheep-dog-dev
-= UML Doc String To Code
+= Feature: UML Doc String To Code
 
-== One line
+== Scenario: One line
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -30,7 +29,7 @@ Feature: Process
 | Submit| Given The Object page is created as follows| text1
 |===
 
-== Layer 2
+== Scenario: Layer 2
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -70,7 +69,7 @@ Feature: Process
 | theBlahApplicationObjectPageIsCreatedAsFollows| BlahFactory.get("ObjectPage").setInputOutputs("Content", docString);
 |===
 
-== Layer 3
+== Scenario: Layer 3
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 

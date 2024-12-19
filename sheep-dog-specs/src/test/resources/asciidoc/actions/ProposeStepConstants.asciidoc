@@ -1,7 +1,6 @@
-:tags: sheep-dog-test
-= Propose Step Constants
+= Feature: Propose Step Constants
 
-== Component types
+== Scenario: Component types
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -21,7 +20,7 @@
 | The blah application,| blah application
 |===
 
-== Object types
+== Scenario: Object types
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -41,7 +40,7 @@
 | The blah plugin, blah file| blah file
 |===
 
-== State modality absent no details
+== Scenario: State modality absent no details
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -62,7 +61,7 @@
 | The blah plugin, blah file details| details name| Specify section etc
 |===
 
-== State modality absent incomplete details
+== Scenario: State modality absent incomplete details
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -82,7 +81,7 @@
 | The blah plugin, blah file heading section| section
 |===
 
-== State modality absent has details
+== Scenario: State modality absent has details
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -102,7 +101,7 @@
 | The blah plugin, blah file heading section is| is
 |===
 
-== State modality present has details
+== Scenario: State modality present has details
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -122,7 +121,7 @@
 | The blah plugin, blah file heading section is created| attribute name| Specify created etc
 |===
 
-== State modality present no attribute
+== Scenario: State modality present no attribute
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -142,7 +141,7 @@
 | The blah plugin, blah file is created| attribute name| Specify created etc
 |===
 
-== State modality present no attachments
+== Scenario: State modality present no attachments
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -162,7 +161,7 @@
 | The blah plugin, blah file is created with| with
 |===
 
-== State modality present has attachments
+== Scenario: State modality present has attachments
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 

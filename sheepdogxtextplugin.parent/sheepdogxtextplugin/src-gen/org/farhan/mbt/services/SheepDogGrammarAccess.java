@@ -766,22 +766,22 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.Tags");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTagsKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cWORDTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final RuleCall cTAGWORDTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Keyword cQuotationMarkRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final RuleCall cEOLTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//Tags:
-		//    '[tags="' WORD+ '"]' EOL;
+		//    '[tags="' TAGWORD+ '"]' EOL;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'[tags="' WORD+ '"]' EOL
+		//'[tags="' TAGWORD+ '"]' EOL
 		public Group getGroup() { return cGroup; }
 		
 		//'[tags="'
 		public Keyword getTagsKeyword_0() { return cTagsKeyword_0; }
 		
-		//WORD+
-		public RuleCall getWORDTerminalRuleCall_1() { return cWORDTerminalRuleCall_1; }
+		//TAGWORD+
+		public RuleCall getTAGWORDTerminalRuleCall_1() { return cTAGWORDTerminalRuleCall_1; }
 		
 		//'"]'
 		public Keyword getQuotationMarkRightSquareBracketKeyword_2() { return cQuotationMarkRightSquareBracketKeyword_2; }
@@ -850,20 +850,20 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.Cell");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cVerticalLineKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cWORDTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final RuleCall cCELLWORDTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
 		//Cell:
-		//    '|' WORD*;
+		//    '|' CELLWORD*;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'|' WORD*
+		//'|' CELLWORD*
 		public Group getGroup() { return cGroup; }
 		
 		//'|'
 		public Keyword getVerticalLineKeyword_0() { return cVerticalLineKeyword_0; }
 		
-		//WORD*
-		public RuleCall getWORDTerminalRuleCall_1() { return cWORDTerminalRuleCall_1; }
+		//CELLWORD*
+		public RuleCall getCELLWORDTerminalRuleCall_1() { return cCELLWORDTerminalRuleCall_1; }
 	}
 	
 	
@@ -889,6 +889,8 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	private final StatementElements pStatement;
 	private final LineElements pLine;
 	private final CellElements pCell;
+	private final TerminalRule tTAGWORD;
+	private final TerminalRule tCELLWORD;
 	private final TerminalRule tWORD;
 	private final TerminalRule tWS;
 	private final TerminalRule tSL_COMMENT;
@@ -921,6 +923,8 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		this.pStatement = new StatementElements();
 		this.pLine = new LineElements();
 		this.pCell = new CellElements();
+		this.tTAGWORD = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.TAGWORD");
+		this.tCELLWORD = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.CELLWORD");
 		this.tWORD = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.WORD");
 		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.WS");
 		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.SL_COMMENT");
@@ -1148,7 +1152,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//Tags:
-	//    '[tags="' WORD+ '"]' EOL;
+	//    '[tags="' TAGWORD+ '"]' EOL;
 	public TagsElements getTagsAccess() {
 		return pTags;
 	}
@@ -1188,7 +1192,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//Cell:
-	//    '|' WORD*;
+	//    '|' CELLWORD*;
 	public CellElements getCellAccess() {
 		return pCell;
 	}
@@ -1197,8 +1201,20 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return getCellAccess().getRule();
 	}
 	
+	//terminal TAGWORD:
+	//    !(' ' | '\t' | '\r' | '\n' | '#' | '"')+;
+	public TerminalRule getTAGWORDRule() {
+		return tTAGWORD;
+	}
+	
+	//terminal CELLWORD:
+	//    !(' ' | '\t' | '\r' | '\n' | '#' | '|')+;
+	public TerminalRule getCELLWORDRule() {
+		return tCELLWORD;
+	}
+	
 	//terminal WORD:
-	//    !('"' | ' ' | '\t' | '\r' | '\n' | '#' | '|');
+	//    !(' ' | '\t' | '\r' | '\n' | '#')+;
 	public TerminalRule getWORDRule() {
 		return tWORD;
 	}

@@ -1,14 +1,13 @@
-:tags: sheep-dog-dev
-= Document Examples Table To UML
+= Feature: Document Examples Table To UML
 
-== One row, one cell
+== Scenario: One row, one cell
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
-== Submit
+== Scenario: Submit
 
 === Given The Object page is created as follows
 
@@ -18,8 +17,7 @@
 | {h1}
 |===
 
-[examples="true"]
-=== Examples 1
+=== Examples: Examples 1
 
 [options="header"]
 |===
@@ -41,14 +39,14 @@
 | specs::Process::Submit| Examples 1| 1 -} v1\|
 |===
 
-== Two rows, two cells
+== Scenario: Two rows, two cells
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
-== Submit
+== Scenario: Submit
 
 === Given The Object page is created as follows
 
@@ -58,8 +56,7 @@
 | {h1} | {h2}
 |===
 
-[examples="true"]
-=== Examples 1
+=== Examples: Examples 1
 
 [options="header"]
 |===
@@ -83,14 +80,14 @@
 | specs::Process::Submit| Examples 1| 2 -} v3\|v4\|
 |===
 
-== Three rows, three cells
+== Scenario: Three rows, three cells
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
-== Submit
+== Scenario: Submit
 
 === Given The Object page is created as follows
 
@@ -100,8 +97,7 @@
 | {h1} | {h2} | {h3}
 |===
 
-[examples="true"]
-=== Examples 1
+=== Examples: Examples 1
 
 [options="header"]
 |===

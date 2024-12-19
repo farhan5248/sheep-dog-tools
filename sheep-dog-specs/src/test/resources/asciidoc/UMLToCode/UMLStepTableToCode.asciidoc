@@ -1,7 +1,6 @@
-:tags: sheep-dog-dev
-= UML Step Table To Code
+= Feature: UML Step Table To Code
 
-== One row, one cell
+== Scenario: One row, one cell
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -29,7 +28,7 @@ Feature: Process
 | Submit| Given The Object page is created as follows| \| v1 \|
 |===
 
-== Two rows, two cells
+== Scenario: Two rows, two cells
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -60,7 +59,7 @@ Feature: Process
 | Submit| Given The Object page is created as follows| \| v3 \| v4 \|
 |===
 
-== Three rows, three cells
+== Scenario: Three rows, three cells
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -93,7 +92,7 @@ Feature: Process
 | Submit| Given The Object page is created as follows| \| v7 \| v8 \| v9 \|
 |===
 
-== Layer 2
+== Scenario: Layer 2
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -166,7 +165,7 @@ Feature: Process
 | theBlahApplicationObjectPageTopSectionWillBeCreatedAsFollows| BlahFactory.get("ObjectPage").assertInputOutputs(dataTable, "TopSection");
 |===
 
-== Layer 3
+== Scenario: Layer 3
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -221,7 +220,7 @@ Feature: Process
 | assertTopSectionH2| keyMap| HashMap{String,String}
 |===
 
-== Escaped cell data
+== Scenario: Escaped cell data
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 

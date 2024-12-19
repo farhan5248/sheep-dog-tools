@@ -1,8 +1,7 @@
-:tags: sheep-dog-dev
-= UML Step To Code
+= Feature: UML Step To Code
 
 [background="true"]
-== Create a feature file
+== Scenario: Create a feature file
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -14,7 +13,7 @@ Feature: Process
     Given The blah application, Object page is empty
 ----
 
-== Convert step keywords
+== Scenario: Convert step keywords
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -50,7 +49,7 @@ Feature: Process
 | Submit| * The something/Object page is empty
 |===
 
-== Create new java methods for layer 2
+== Scenario: Create new java methods for layer 2
 
 === When The mbt-transformer plugin, cucumber-to-uml goal is executed
 
@@ -68,7 +67,7 @@ Feature: Process
 | theBlahApplicationObjectPageIsEmpty| BlahFactory.get("ObjectPage").setInputOutputs("Empty");
 |===
 
-== Create new java methods for layer 3
+== Scenario: Create new java methods for layer 3
 
 === When The mbt-transformer plugin, cucumber-to-uml goal is executed
 
@@ -108,7 +107,7 @@ Feature: Process
 | setEmpty| keyMap| HashMap{String,String}
 |===
 
-== Preserve existing java methods for layer 2
+== Scenario: Preserve existing java methods for layer 2
 
 === And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows
 
@@ -145,7 +144,7 @@ public class BlahObjectPageSteps {
 | theBlahApplicationObjectPageIsEmpty
 |===
 
-== Preserve existing java methods for layer 3
+== Scenario: Preserve existing java methods for layer 3
 
 === And The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file is created as follows
 

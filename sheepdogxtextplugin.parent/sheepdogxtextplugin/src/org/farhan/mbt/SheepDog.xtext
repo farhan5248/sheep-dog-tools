@@ -83,7 +83,7 @@ Row:
 	cells+=Cell+ EOL;
 
 Tags:
-	'[tags="' WORD+ '"]' EOL;
+	'[tags="' TAGWORD+ '"]' EOL;
 
 Title:
 	WORD+ EOL;
@@ -95,10 +95,16 @@ Line:
 	WORD* EOL;
 
 Cell:
-	'|' WORD*;
+	'|' CELLWORD*;
+
+terminal TAGWORD:
+	!(' ' | '\t' | '\r' | '\n' | '#' | '"')+;
+
+terminal CELLWORD:
+	!(' ' | '\t' | '\r' | '\n' | '#' | '|')+;
 
 terminal WORD:
-	!('"' | ' ' | '\t' | '\r' | '\n' | '#' | '|');
+	!(' ' | '\t' | '\r' | '\n' | '#')+;
 
 terminal WS:
 	(' ' | '\t' | '\r')+;

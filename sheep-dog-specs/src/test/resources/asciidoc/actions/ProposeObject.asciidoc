@@ -1,15 +1,6 @@
-ifdef::env-github[]
-:tip-caption: :bulb:
-:note-caption: :information_source:
-:important-caption: :heavy_exclamation_mark:
-:caution-caption: :fire:
-:warning-caption: :warning:
-endif::[]
+= Feature: Propose Object
 
-:tags: sheep-dog-test
-= Propose Object
-
-== No object no component has previous in background
+== Scenario: No object no component has previous in background
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file background steps snippet is created as follows
 
@@ -37,12 +28,7 @@ endif::[]
 | The Input file| Input file
 |===
 
-== No object no component no previous no component objects
-
-[NOTE]
-===
-TODO make this an outline with various steps like "The" or "The batchjob" etc
-===
+== Scenario: No object no component no previous no component objects
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -56,7 +42,7 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 
 === Then The suggestion dialog will be empty
 
-== No object no component no previous has component objects
+== Scenario: No object no component no previous has component objects
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -84,7 +70,7 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 | The daily batchjob,| daily batchjob
 |===
 
-== No object no component has previous no component objects
+== Scenario: No object no component has previous no component objects
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -105,7 +91,7 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 | The Input file| Input file
 |===
 
-== No object no component has previous has component objects
+== Scenario: No object no component has previous has component objects
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -135,7 +121,7 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 | The daily batchjob,| daily batchjob
 |===
 
-== No object has component no previous no component objects
+== Scenario: No object has component no previous no component objects
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -149,7 +135,7 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 
 === Then The suggestion dialog will be empty
 
-== No object has component no previous has component objects
+== Scenario: No object has component no previous has component objects
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -177,7 +163,7 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 | The daily batchjob, Input file| Input file
 |===
 
-== No object has component has previous no component objects
+== Scenario: No object has component has previous no component objects
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -198,7 +184,7 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 | The Input file| Input file
 |===
 
-== No object has component has previous has component objects
+== Scenario: No object has component has previous has component objects
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -227,7 +213,7 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 | The Input file| Input file
 |===
 
-== Has object no component no previous no component objects
+== Scenario: Has object no component no previous no component objects
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -247,13 +233,7 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 | The Input file is| is
 |===
 
-== Has object no component no previous has component objects
-
-
-[NOTE]
-===
-TODO the assertion should be that is present won't be suggested because this step has no component
-===
+== Scenario: Has object no component no previous has component objects
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -281,7 +261,7 @@ TODO the assertion should be that is present won't be suggested because this ste
 | The Input file is| is
 |===
 
-== Has object no component has previous no component objects
+== Scenario: Has object no component has previous no component objects
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -302,7 +282,7 @@ TODO the assertion should be that is present won't be suggested because this ste
 | The Input file is| is
 |===
 
-== Has object no component has previous has component objects
+== Scenario: Has object no component has previous has component objects
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -331,7 +311,7 @@ TODO the assertion should be that is present won't be suggested because this ste
 | The Input file is present| is present
 |===
 
-== Has object has component no previous no component objects
+== Scenario: Has object has component no previous no component objects
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -351,7 +331,7 @@ TODO the assertion should be that is present won't be suggested because this ste
 | The daily batchjob, Input file is| is
 |===
 
-== Has object has component no previous has component objects
+== Scenario: Has object has component no previous has component objects
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -379,7 +359,7 @@ TODO the assertion should be that is present won't be suggested because this ste
 | The daily batchjob, Input file is present| is present
 |===
 
-== Has object has component has previous no component objects
+== Scenario: Has object has component has previous no component objects
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -400,7 +380,7 @@ TODO the assertion should be that is present won't be suggested because this ste
 | The daily batchjob, Input file is| is
 |===
 
-== Has object has component has previous has component objects
+== Scenario: Has object has component has previous has component objects
 
 === Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 

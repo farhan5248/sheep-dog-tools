@@ -1,7 +1,6 @@
-:tags: sheep-dog-dev
-= UML Feature To Code
+= Feature: UML Feature To Code
 
-== No tags, no statements
+== Scenario: No tags, no statements
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -23,7 +22,7 @@ Feature: Process
 | Process
 |===
 
-== One tag, one statement
+== Scenario: One tag, one statement
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -47,7 +46,7 @@ Feature: Process
 | Process| tag1| Desc line 1
 |===
 
-== Two tags, two statements
+== Scenario: Two tags, two statements
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -72,7 +71,7 @@ Feature: Process
 | Process| tag1,tag2| Desc line 1\nDesc line 2
 |===
 
-== Three tags, three statements
+== Scenario: Three tags, three statements
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 

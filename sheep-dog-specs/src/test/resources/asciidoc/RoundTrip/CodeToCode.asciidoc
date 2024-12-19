@@ -1,8 +1,6 @@
-:tags: sheep-dog-dev,sheep-dog-dev-maven-plugin,sheep-dog-dev-svc,sheep-dog-dev-svc-maven-plugin
-= Code To Code
+= Feature: Code To Code
 
-[background="true"]
-== Create a feature file
+== Background: Create a feature file
 
 The formatting of the data and example tables is intentionally different to make sure that the file is regenerated
 
@@ -74,7 +72,7 @@ public class BlahObjectPageSteps {
 
 === And The mbt-transformer plugin, uml-to-cucumber goal is executed
 
-== Convert class to feature from graph
+== Scenario: Convert class to feature from graph
 
 === Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be created as follows
 
@@ -114,7 +112,7 @@ Feature: This is a feature
           | v31 | v41 |
 ----
 
-== Java file is preserved
+== Scenario: Java file is preserved
 
 === Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
 

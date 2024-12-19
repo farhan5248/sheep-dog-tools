@@ -1,7 +1,6 @@
-:tags: sheep-dog-dev
-= UML Step To Document
+= Feature: UML Step To Document
 
-== Convert step keywords
+== Scenario: Convert step keywords
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -37,7 +36,7 @@ Feature: Process
 | Submit| * The Object page is empty
 |===
 
-== Convert apostrophes
+== Scenario: Convert apostrophes
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 

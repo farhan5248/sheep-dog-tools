@@ -1,7 +1,6 @@
-:tags: sheep-dog-dev
-= Code Scenario Outline To UML
+= Feature: Code Scenario Outline To UML
 
-== No tags, no statement, one step, one example
+== Scenario: No tags, no statement, one step, one example
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -40,7 +39,7 @@ Feature: Process
 | specs::Process::Submit| Examples 1| 1 -} v31\|
 |===
 
-== One tag, one statement, one step, one example
+== Scenario: One tag, one statement, one step, one example
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -81,7 +80,7 @@ Feature: Process
 | specs::Process::Submit| Desc line 1
 |===
 
-== Two tags, two statements, two steps, two examples
+== Scenario: Two tags, two statements, two steps, two examples
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -148,8 +147,7 @@ Feature: Process
 | specs::Process::Submit| Examples {Index}| 1 -} v3{Index}\|
 |===
 
-[examples="true"]
-=== Indices
+=== Examples: Indices
 
 [options="header"]
 |===
@@ -158,7 +156,7 @@ Feature: Process
 | 2
 |===
 
-== Three tags, three statements, three steps, three examples
+== Scenario: Three tags, three statements, three steps, three examples
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -230,8 +228,7 @@ Feature: Process
 | specs::Process::Submit| Examples {Index}| 1 -} v3{Index}\|
 |===
 
-[examples="true"]
-=== Indices
+=== Examples: Indices
 
 [options="header"]
 |===
@@ -241,7 +238,7 @@ Feature: Process
 | 3
 |===
 
-== Selected tags
+== Scenario: Selected tags
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -283,7 +280,7 @@ Feature: Process
 | specs::Process::Submit
 |===
 
-=== But The target/mbt/tag1/uml/pst.uml file Interaction section won't be created as follows
+=== And The target/mbt/tag1/uml/pst.uml file Interaction section won't be created as follows
 
 [options="header"]
 |===

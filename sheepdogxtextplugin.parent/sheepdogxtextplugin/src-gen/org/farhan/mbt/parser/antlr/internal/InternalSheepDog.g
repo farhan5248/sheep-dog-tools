@@ -1378,12 +1378,12 @@ ruleTags returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 			newLeafNode(kw, grammarAccess.getTagsAccess().getTagsKeyword_0());
 		}
 		(
-			this_WORD_1=RULE_WORD
+			this_TAGWORD_1=RULE_TAGWORD
 			{
-				$current.merge(this_WORD_1);
+				$current.merge(this_TAGWORD_1);
 			}
 			{
-				newLeafNode(this_WORD_1, grammarAccess.getTagsAccess().getWORDTerminalRuleCall_1());
+				newLeafNode(this_TAGWORD_1, grammarAccess.getTagsAccess().getTAGWORDTerminalRuleCall_1());
 			}
 		)+
 		kw='"]'
@@ -1528,18 +1528,22 @@ ruleCell returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 			newLeafNode(kw, grammarAccess.getCellAccess().getVerticalLineKeyword_0());
 		}
 		(
-			this_WORD_1=RULE_WORD
+			this_CELLWORD_1=RULE_CELLWORD
 			{
-				$current.merge(this_WORD_1);
+				$current.merge(this_CELLWORD_1);
 			}
 			{
-				newLeafNode(this_WORD_1, grammarAccess.getCellAccess().getWORDTerminalRuleCall_1());
+				newLeafNode(this_CELLWORD_1, grammarAccess.getCellAccess().getCELLWORDTerminalRuleCall_1());
 			}
 		)*
 	)
 ;
 
-RULE_WORD : ~(('"'|' '|'\t'|'\r'|'\n'|'#'|'|'));
+RULE_TAGWORD : ~((' '|'\t'|'\r'|'\n'|'#'|'"'))+;
+
+RULE_CELLWORD : ~((' '|'\t'|'\r'|'\n'|'#'|'|'))+;
+
+RULE_WORD : ~((' '|'\t'|'\r'|'\n'|'#'))+;
 
 RULE_WS : (' '|'\t'|'\r')+;
 

@@ -1,7 +1,6 @@
-:tags: sheep-dog-dev
-= UML DocString To Document
+= Feature: UML DocString To Document
 
-== One line
+== Scenario: One line
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 

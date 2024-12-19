@@ -1,7 +1,6 @@
-:tags: sheep-dog-dev
-= Code Background To UML
+= Feature: Code Background To UML
 
-== No statement, one step, one scenario
+== Scenario: No statement, one step, one scenario
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -28,7 +27,7 @@ Feature: Process
 | specs::Process::Submit| The Object1 page is valid
 |===
 
-== One statement, one step, one scenario
+== Scenario: One statement, one step, one scenario
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -55,7 +54,7 @@ Feature: Process
 | specs::Process::Setup| Desc line 1
 |===
 
-== One statement, one step, two scenarios
+== Scenario: One statement, one step, two scenarios
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -87,7 +86,7 @@ Feature: Process
 | specs::Process::Submit 2| The Object2 page is valid
 |===
 
-== One statement, one step, three scenarios
+== Scenario: One statement, one step, three scenarios
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -123,7 +122,7 @@ Feature: Process
 | specs::Process::Submit 3| The Object3 page is valid
 |===
 
-== No statement, two steps, one scenario
+== Scenario: No statement, two steps, one scenario
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -151,8 +150,7 @@ Feature: Process
 | specs::Process::Submit| The Object page is valid
 |===
 
-[examples="true"]
-=== Indices
+=== Examples: Indices
 
 [options="header"]
 |===
@@ -161,7 +159,7 @@ Feature: Process
 | 2
 |===
 
-== No statement, three steps, one scenario
+== Scenario: No statement, three steps, one scenario
 
 === Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -190,8 +188,7 @@ Feature: Process
 | specs::Process::Submit| The Object page is valid
 |===
 
-[examples="true"]
-=== Indices
+=== Examples: Indices
 
 [options="header"]
 |===

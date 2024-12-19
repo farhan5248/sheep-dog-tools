@@ -1,14 +1,13 @@
-:tags: sheep-dog-dev
-= Document Scenario To UML
+= Feature: Document Scenario To UML
 
-== No tags, no statements, one step
+== Scenario: No tags, no statements, one step
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
-== Submit
+== Scenario: Submit
 
 === Given The Object1 page is empty
 ----
@@ -25,15 +24,15 @@
 | specs::Process::Submit| The Object1 page is empty
 |===
 
-== One tag, one statement, one step
+== Scenario: One tag, one statement, one step
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
 [tags="tag1"]
-== Submit
+== Scenario: Submit
 
 Desc line 1
 
@@ -60,15 +59,15 @@ Desc line 1
 | specs::Process::Submit| Desc line 1
 |===
 
-== Two tags, two statements, two steps
+== Scenario: Two tags, two statements, two steps
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
 [tags="tag1,tag2"]
-== Submit
+== Scenario: Submit
 
 Desc line 1
 Desc line 2
@@ -108,15 +107,15 @@ Desc line 2
 | specs::Process::Submit| The Object2 page is empty
 |===
 
-== Three tags, three statements, three steps
+== Scenario: Three tags, three statements, three steps
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
 [tags="tag1,tag2,tag3"]
-== Submit
+== Scenario: Submit
 
 Desc line 1
 Desc line 2
@@ -161,20 +160,20 @@ Desc line 3
 | specs::Process::Submit| The Object3 page is empty
 |===
 
-== Selected tags
+== Scenario: Selected tags
 
 === Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Process
+= Feature: Process
 
 [tags="tag1"]
-== Submit
+== Scenario: Submit
 
 === Given The Object1 page is empty
 
 [tags="tag2"]
-== Submit2
+== Scenario: Submit2
 
 === Given The Object1 page is empty
 ----
@@ -197,7 +196,7 @@ Desc line 3
 | specs::Process::Submit
 |===
 
-=== But The target/mbt/tag1/uml/pst.uml file Interaction section won't be created as follows
+=== And The target/mbt/tag1/uml/pst.uml file Interaction section won't be created as follows
 
 [options="header"]
 |===
