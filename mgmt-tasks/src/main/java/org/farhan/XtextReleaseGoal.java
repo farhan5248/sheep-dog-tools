@@ -28,15 +28,14 @@ public class XtextReleaseGoal {
 		// currentVersion = "1.1.0";
 		// nextVersion = "1.2.0";
 		// project = documentation;
-		// currentVersion = "1.0.0";
-		// nextVersion = "1.1.0";
+		// currentVersion = "1.1.0";
+		// nextVersion = "1.2.0";
 		rootDir = new File(template.replace("template", project));
 		// updateToRelease(currentVersion, currentSheepDogTestVersion);
 		// Run mvn install
 		// Run git add and git commit
 		// Run git tag
-		// updateToSnapshot(currentVersion, nextVersion, currentSheepDogTestVersion,
-		// nextSheepDogTestVersion);
+		// updateToSnapshot(currentVersion, nextVersion, currentSheepDogTestVersion, nextSheepDogTestVersion);
 		// Run mvn install
 		// Run git add and git commit
 	}
