@@ -22,11 +22,10 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalSheepDogParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_WORD", "RULE_ID", "RULE_STRING", "RULE_EOL", "RULE_WS", "RULE_SL_COMMENT", "'='", "'Object:'", "'=='", "'Definition:'", "'==='", "'Parameters:'", "'Feature:'", "'Background:'", "'Scenario:'", "'Examples:'", "'Given'", "'When'", "'Then'", "'And'", "'----'", "'[options=\"header\"]'", "'|==='", "'[tags=\"'", "'\"]'", "'|'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_EOL", "RULE_WORD", "RULE_WS", "RULE_SL_COMMENT", "'='", "'Object:'", "'=='", "'Definition:'", "'==='", "'Parameters:'", "'Feature:'", "'Background:'", "'Scenario:'", "'Examples:'", "'Given'", "'When'", "'Then'", "'And'", "'----'", "'[options=\"header\"]'", "'|==='", "'[tags=\"'", "'\"]'", "'|'"
     };
-    public static final int RULE_WORD=4;
-    public static final int RULE_STRING=6;
-    public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_WORD=5;
+    public static final int RULE_SL_COMMENT=7;
     public static final int T__19=19;
     public static final int T__15=15;
     public static final int T__16=16;
@@ -38,13 +37,12 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
     public static final int T__14=14;
     public static final int EOF=-1;
     public static final int T__10=10;
-    public static final int RULE_ID=5;
-    public static final int RULE_EOL=7;
-    public static final int RULE_WS=8;
+    public static final int T__9=9;
+    public static final int T__8=8;
+    public static final int RULE_EOL=4;
+    public static final int RULE_WS=6;
     public static final int T__26=26;
     public static final int T__27=27;
-    public static final int T__28=28;
-    public static final int T__29=29;
     public static final int T__22=22;
     public static final int T__23=23;
     public static final int T__24=24;
@@ -1781,101 +1779,24 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
     // $ANTLR end "ruleCell"
 
 
-    // $ANTLR start "entryRuleTEXT_LITERAL"
-    // InternalSheepDog.g:603:1: entryRuleTEXT_LITERAL : ruleTEXT_LITERAL EOF ;
-    public final void entryRuleTEXT_LITERAL() throws RecognitionException {
-        try {
-            // InternalSheepDog.g:604:1: ( ruleTEXT_LITERAL EOF )
-            // InternalSheepDog.g:605:1: ruleTEXT_LITERAL EOF
-            {
-             before(grammarAccess.getTEXT_LITERALRule()); 
-            pushFollow(FOLLOW_1);
-            ruleTEXT_LITERAL();
-
-            state._fsp--;
-
-             after(grammarAccess.getTEXT_LITERALRule()); 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-        }
-        return ;
-    }
-    // $ANTLR end "entryRuleTEXT_LITERAL"
-
-
-    // $ANTLR start "ruleTEXT_LITERAL"
-    // InternalSheepDog.g:612:1: ruleTEXT_LITERAL : ( ( rule__TEXT_LITERAL__Alternatives ) ) ;
-    public final void ruleTEXT_LITERAL() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalSheepDog.g:616:2: ( ( ( rule__TEXT_LITERAL__Alternatives ) ) )
-            // InternalSheepDog.g:617:2: ( ( rule__TEXT_LITERAL__Alternatives ) )
-            {
-            // InternalSheepDog.g:617:2: ( ( rule__TEXT_LITERAL__Alternatives ) )
-            // InternalSheepDog.g:618:3: ( rule__TEXT_LITERAL__Alternatives )
-            {
-             before(grammarAccess.getTEXT_LITERALAccess().getAlternatives()); 
-            // InternalSheepDog.g:619:3: ( rule__TEXT_LITERAL__Alternatives )
-            // InternalSheepDog.g:619:4: rule__TEXT_LITERAL__Alternatives
-            {
-            pushFollow(FOLLOW_2);
-            rule__TEXT_LITERAL__Alternatives();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getTEXT_LITERALAccess().getAlternatives()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "ruleTEXT_LITERAL"
-
-
     // $ANTLR start "rule__Model__Alternatives"
-    // InternalSheepDog.g:627:1: rule__Model__Alternatives : ( ( ruleStepObject ) | ( ruleFeature ) );
+    // InternalSheepDog.g:602:1: rule__Model__Alternatives : ( ( ruleStepObject ) | ( ruleFeature ) );
     public final void rule__Model__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:631:1: ( ( ruleStepObject ) | ( ruleFeature ) )
+            // InternalSheepDog.g:606:1: ( ( ruleStepObject ) | ( ruleFeature ) )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
-            if ( (LA1_0==10) ) {
+            if ( (LA1_0==8) ) {
                 int LA1_1 = input.LA(2);
 
-                if ( (LA1_1==11) ) {
+                if ( (LA1_1==9) ) {
                     alt1=1;
                 }
-                else if ( (LA1_1==16) ) {
+                else if ( (LA1_1==14) ) {
                     alt1=2;
                 }
                 else {
@@ -1893,10 +1814,10 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             }
             switch (alt1) {
                 case 1 :
-                    // InternalSheepDog.g:632:2: ( ruleStepObject )
+                    // InternalSheepDog.g:607:2: ( ruleStepObject )
                     {
-                    // InternalSheepDog.g:632:2: ( ruleStepObject )
-                    // InternalSheepDog.g:633:3: ruleStepObject
+                    // InternalSheepDog.g:607:2: ( ruleStepObject )
+                    // InternalSheepDog.g:608:3: ruleStepObject
                     {
                      before(grammarAccess.getModelAccess().getStepObjectParserRuleCall_0()); 
                     pushFollow(FOLLOW_2);
@@ -1912,10 +1833,10 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                     }
                     break;
                 case 2 :
-                    // InternalSheepDog.g:638:2: ( ruleFeature )
+                    // InternalSheepDog.g:613:2: ( ruleFeature )
                     {
-                    // InternalSheepDog.g:638:2: ( ruleFeature )
-                    // InternalSheepDog.g:639:3: ruleFeature
+                    // InternalSheepDog.g:613:2: ( ruleFeature )
+                    // InternalSheepDog.g:614:3: ruleFeature
                     {
                      before(grammarAccess.getModelAccess().getFeatureParserRuleCall_1()); 
                     pushFollow(FOLLOW_2);
@@ -1948,21 +1869,21 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__AbstractScenario__Alternatives"
-    // InternalSheepDog.g:648:1: rule__AbstractScenario__Alternatives : ( ( ruleBackground ) | ( ruleScenario ) );
+    // InternalSheepDog.g:623:1: rule__AbstractScenario__Alternatives : ( ( ruleBackground ) | ( ruleScenario ) );
     public final void rule__AbstractScenario__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:652:1: ( ( ruleBackground ) | ( ruleScenario ) )
+            // InternalSheepDog.g:627:1: ( ( ruleBackground ) | ( ruleScenario ) )
             int alt2=2;
             alt2 = dfa2.predict(input);
             switch (alt2) {
                 case 1 :
-                    // InternalSheepDog.g:653:2: ( ruleBackground )
+                    // InternalSheepDog.g:628:2: ( ruleBackground )
                     {
-                    // InternalSheepDog.g:653:2: ( ruleBackground )
-                    // InternalSheepDog.g:654:3: ruleBackground
+                    // InternalSheepDog.g:628:2: ( ruleBackground )
+                    // InternalSheepDog.g:629:3: ruleBackground
                     {
                      before(grammarAccess.getAbstractScenarioAccess().getBackgroundParserRuleCall_0()); 
                     pushFollow(FOLLOW_2);
@@ -1978,10 +1899,10 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                     }
                     break;
                 case 2 :
-                    // InternalSheepDog.g:659:2: ( ruleScenario )
+                    // InternalSheepDog.g:634:2: ( ruleScenario )
                     {
-                    // InternalSheepDog.g:659:2: ( ruleScenario )
-                    // InternalSheepDog.g:660:3: ruleScenario
+                    // InternalSheepDog.g:634:2: ( ruleScenario )
+                    // InternalSheepDog.g:635:3: ruleScenario
                     {
                      before(grammarAccess.getAbstractScenarioAccess().getScenarioParserRuleCall_1()); 
                     pushFollow(FOLLOW_2);
@@ -2014,34 +1935,34 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Step__Alternatives"
-    // InternalSheepDog.g:669:1: rule__Step__Alternatives : ( ( ruleGiven ) | ( ruleWhen ) | ( ruleThen ) | ( ruleAnd ) );
+    // InternalSheepDog.g:644:1: rule__Step__Alternatives : ( ( ruleGiven ) | ( ruleWhen ) | ( ruleThen ) | ( ruleAnd ) );
     public final void rule__Step__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:673:1: ( ( ruleGiven ) | ( ruleWhen ) | ( ruleThen ) | ( ruleAnd ) )
+            // InternalSheepDog.g:648:1: ( ( ruleGiven ) | ( ruleWhen ) | ( ruleThen ) | ( ruleAnd ) )
             int alt3=4;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==14) ) {
+            if ( (LA3_0==12) ) {
                 switch ( input.LA(2) ) {
-                case 23:
+                case 21:
                     {
                     alt3=4;
                     }
                     break;
-                case 21:
+                case 19:
                     {
                     alt3=2;
                     }
                     break;
-                case 22:
+                case 20:
                     {
                     alt3=3;
                     }
                     break;
-                case 20:
+                case 18:
                     {
                     alt3=1;
                     }
@@ -2062,10 +1983,10 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             }
             switch (alt3) {
                 case 1 :
-                    // InternalSheepDog.g:674:2: ( ruleGiven )
+                    // InternalSheepDog.g:649:2: ( ruleGiven )
                     {
-                    // InternalSheepDog.g:674:2: ( ruleGiven )
-                    // InternalSheepDog.g:675:3: ruleGiven
+                    // InternalSheepDog.g:649:2: ( ruleGiven )
+                    // InternalSheepDog.g:650:3: ruleGiven
                     {
                      before(grammarAccess.getStepAccess().getGivenParserRuleCall_0()); 
                     pushFollow(FOLLOW_2);
@@ -2081,10 +2002,10 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                     }
                     break;
                 case 2 :
-                    // InternalSheepDog.g:680:2: ( ruleWhen )
+                    // InternalSheepDog.g:655:2: ( ruleWhen )
                     {
-                    // InternalSheepDog.g:680:2: ( ruleWhen )
-                    // InternalSheepDog.g:681:3: ruleWhen
+                    // InternalSheepDog.g:655:2: ( ruleWhen )
+                    // InternalSheepDog.g:656:3: ruleWhen
                     {
                      before(grammarAccess.getStepAccess().getWhenParserRuleCall_1()); 
                     pushFollow(FOLLOW_2);
@@ -2100,10 +2021,10 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                     }
                     break;
                 case 3 :
-                    // InternalSheepDog.g:686:2: ( ruleThen )
+                    // InternalSheepDog.g:661:2: ( ruleThen )
                     {
-                    // InternalSheepDog.g:686:2: ( ruleThen )
-                    // InternalSheepDog.g:687:3: ruleThen
+                    // InternalSheepDog.g:661:2: ( ruleThen )
+                    // InternalSheepDog.g:662:3: ruleThen
                     {
                      before(grammarAccess.getStepAccess().getThenParserRuleCall_2()); 
                     pushFollow(FOLLOW_2);
@@ -2119,10 +2040,10 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                     }
                     break;
                 case 4 :
-                    // InternalSheepDog.g:692:2: ( ruleAnd )
+                    // InternalSheepDog.g:667:2: ( ruleAnd )
                     {
-                    // InternalSheepDog.g:692:2: ( ruleAnd )
-                    // InternalSheepDog.g:693:3: ruleAnd
+                    // InternalSheepDog.g:667:2: ( ruleAnd )
+                    // InternalSheepDog.g:668:3: ruleAnd
                     {
                      before(grammarAccess.getStepAccess().getAndParserRuleCall_3()); 
                     pushFollow(FOLLOW_2);
@@ -2155,20 +2076,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__Alternatives_3"
-    // InternalSheepDog.g:702:1: rule__Given__Alternatives_3 : ( ( ( rule__Given__TheStepTableAssignment_3_0 ) ) | ( ( rule__Given__TheDocStringAssignment_3_1 ) ) );
+    // InternalSheepDog.g:677:1: rule__Given__Alternatives_3 : ( ( ( rule__Given__TheStepTableAssignment_3_0 ) ) | ( ( rule__Given__TheDocStringAssignment_3_1 ) ) );
     public final void rule__Given__Alternatives_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:706:1: ( ( ( rule__Given__TheStepTableAssignment_3_0 ) ) | ( ( rule__Given__TheDocStringAssignment_3_1 ) ) )
+            // InternalSheepDog.g:681:1: ( ( ( rule__Given__TheStepTableAssignment_3_0 ) ) | ( ( rule__Given__TheDocStringAssignment_3_1 ) ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
-            if ( (LA4_0==25) ) {
+            if ( (LA4_0==23) ) {
                 alt4=1;
             }
-            else if ( (LA4_0==24) ) {
+            else if ( (LA4_0==22) ) {
                 alt4=2;
             }
             else {
@@ -2179,14 +2100,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             }
             switch (alt4) {
                 case 1 :
-                    // InternalSheepDog.g:707:2: ( ( rule__Given__TheStepTableAssignment_3_0 ) )
+                    // InternalSheepDog.g:682:2: ( ( rule__Given__TheStepTableAssignment_3_0 ) )
                     {
-                    // InternalSheepDog.g:707:2: ( ( rule__Given__TheStepTableAssignment_3_0 ) )
-                    // InternalSheepDog.g:708:3: ( rule__Given__TheStepTableAssignment_3_0 )
+                    // InternalSheepDog.g:682:2: ( ( rule__Given__TheStepTableAssignment_3_0 ) )
+                    // InternalSheepDog.g:683:3: ( rule__Given__TheStepTableAssignment_3_0 )
                     {
                      before(grammarAccess.getGivenAccess().getTheStepTableAssignment_3_0()); 
-                    // InternalSheepDog.g:709:3: ( rule__Given__TheStepTableAssignment_3_0 )
-                    // InternalSheepDog.g:709:4: rule__Given__TheStepTableAssignment_3_0
+                    // InternalSheepDog.g:684:3: ( rule__Given__TheStepTableAssignment_3_0 )
+                    // InternalSheepDog.g:684:4: rule__Given__TheStepTableAssignment_3_0
                     {
                     pushFollow(FOLLOW_2);
                     rule__Given__TheStepTableAssignment_3_0();
@@ -2204,14 +2125,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                     }
                     break;
                 case 2 :
-                    // InternalSheepDog.g:713:2: ( ( rule__Given__TheDocStringAssignment_3_1 ) )
+                    // InternalSheepDog.g:688:2: ( ( rule__Given__TheDocStringAssignment_3_1 ) )
                     {
-                    // InternalSheepDog.g:713:2: ( ( rule__Given__TheDocStringAssignment_3_1 ) )
-                    // InternalSheepDog.g:714:3: ( rule__Given__TheDocStringAssignment_3_1 )
+                    // InternalSheepDog.g:688:2: ( ( rule__Given__TheDocStringAssignment_3_1 ) )
+                    // InternalSheepDog.g:689:3: ( rule__Given__TheDocStringAssignment_3_1 )
                     {
                      before(grammarAccess.getGivenAccess().getTheDocStringAssignment_3_1()); 
-                    // InternalSheepDog.g:715:3: ( rule__Given__TheDocStringAssignment_3_1 )
-                    // InternalSheepDog.g:715:4: rule__Given__TheDocStringAssignment_3_1
+                    // InternalSheepDog.g:690:3: ( rule__Given__TheDocStringAssignment_3_1 )
+                    // InternalSheepDog.g:690:4: rule__Given__TheDocStringAssignment_3_1
                     {
                     pushFollow(FOLLOW_2);
                     rule__Given__TheDocStringAssignment_3_1();
@@ -2246,20 +2167,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__Alternatives_3"
-    // InternalSheepDog.g:723:1: rule__When__Alternatives_3 : ( ( ( rule__When__TheStepTableAssignment_3_0 ) ) | ( ( rule__When__TheDocStringAssignment_3_1 ) ) );
+    // InternalSheepDog.g:698:1: rule__When__Alternatives_3 : ( ( ( rule__When__TheStepTableAssignment_3_0 ) ) | ( ( rule__When__TheDocStringAssignment_3_1 ) ) );
     public final void rule__When__Alternatives_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:727:1: ( ( ( rule__When__TheStepTableAssignment_3_0 ) ) | ( ( rule__When__TheDocStringAssignment_3_1 ) ) )
+            // InternalSheepDog.g:702:1: ( ( ( rule__When__TheStepTableAssignment_3_0 ) ) | ( ( rule__When__TheDocStringAssignment_3_1 ) ) )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( (LA5_0==25) ) {
+            if ( (LA5_0==23) ) {
                 alt5=1;
             }
-            else if ( (LA5_0==24) ) {
+            else if ( (LA5_0==22) ) {
                 alt5=2;
             }
             else {
@@ -2270,14 +2191,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             }
             switch (alt5) {
                 case 1 :
-                    // InternalSheepDog.g:728:2: ( ( rule__When__TheStepTableAssignment_3_0 ) )
+                    // InternalSheepDog.g:703:2: ( ( rule__When__TheStepTableAssignment_3_0 ) )
                     {
-                    // InternalSheepDog.g:728:2: ( ( rule__When__TheStepTableAssignment_3_0 ) )
-                    // InternalSheepDog.g:729:3: ( rule__When__TheStepTableAssignment_3_0 )
+                    // InternalSheepDog.g:703:2: ( ( rule__When__TheStepTableAssignment_3_0 ) )
+                    // InternalSheepDog.g:704:3: ( rule__When__TheStepTableAssignment_3_0 )
                     {
                      before(grammarAccess.getWhenAccess().getTheStepTableAssignment_3_0()); 
-                    // InternalSheepDog.g:730:3: ( rule__When__TheStepTableAssignment_3_0 )
-                    // InternalSheepDog.g:730:4: rule__When__TheStepTableAssignment_3_0
+                    // InternalSheepDog.g:705:3: ( rule__When__TheStepTableAssignment_3_0 )
+                    // InternalSheepDog.g:705:4: rule__When__TheStepTableAssignment_3_0
                     {
                     pushFollow(FOLLOW_2);
                     rule__When__TheStepTableAssignment_3_0();
@@ -2295,14 +2216,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                     }
                     break;
                 case 2 :
-                    // InternalSheepDog.g:734:2: ( ( rule__When__TheDocStringAssignment_3_1 ) )
+                    // InternalSheepDog.g:709:2: ( ( rule__When__TheDocStringAssignment_3_1 ) )
                     {
-                    // InternalSheepDog.g:734:2: ( ( rule__When__TheDocStringAssignment_3_1 ) )
-                    // InternalSheepDog.g:735:3: ( rule__When__TheDocStringAssignment_3_1 )
+                    // InternalSheepDog.g:709:2: ( ( rule__When__TheDocStringAssignment_3_1 ) )
+                    // InternalSheepDog.g:710:3: ( rule__When__TheDocStringAssignment_3_1 )
                     {
                      before(grammarAccess.getWhenAccess().getTheDocStringAssignment_3_1()); 
-                    // InternalSheepDog.g:736:3: ( rule__When__TheDocStringAssignment_3_1 )
-                    // InternalSheepDog.g:736:4: rule__When__TheDocStringAssignment_3_1
+                    // InternalSheepDog.g:711:3: ( rule__When__TheDocStringAssignment_3_1 )
+                    // InternalSheepDog.g:711:4: rule__When__TheDocStringAssignment_3_1
                     {
                     pushFollow(FOLLOW_2);
                     rule__When__TheDocStringAssignment_3_1();
@@ -2337,20 +2258,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__Alternatives_3"
-    // InternalSheepDog.g:744:1: rule__Then__Alternatives_3 : ( ( ( rule__Then__TheStepTableAssignment_3_0 ) ) | ( ( rule__Then__TheDocStringAssignment_3_1 ) ) );
+    // InternalSheepDog.g:719:1: rule__Then__Alternatives_3 : ( ( ( rule__Then__TheStepTableAssignment_3_0 ) ) | ( ( rule__Then__TheDocStringAssignment_3_1 ) ) );
     public final void rule__Then__Alternatives_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:748:1: ( ( ( rule__Then__TheStepTableAssignment_3_0 ) ) | ( ( rule__Then__TheDocStringAssignment_3_1 ) ) )
+            // InternalSheepDog.g:723:1: ( ( ( rule__Then__TheStepTableAssignment_3_0 ) ) | ( ( rule__Then__TheDocStringAssignment_3_1 ) ) )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
-            if ( (LA6_0==25) ) {
+            if ( (LA6_0==23) ) {
                 alt6=1;
             }
-            else if ( (LA6_0==24) ) {
+            else if ( (LA6_0==22) ) {
                 alt6=2;
             }
             else {
@@ -2361,14 +2282,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             }
             switch (alt6) {
                 case 1 :
-                    // InternalSheepDog.g:749:2: ( ( rule__Then__TheStepTableAssignment_3_0 ) )
+                    // InternalSheepDog.g:724:2: ( ( rule__Then__TheStepTableAssignment_3_0 ) )
                     {
-                    // InternalSheepDog.g:749:2: ( ( rule__Then__TheStepTableAssignment_3_0 ) )
-                    // InternalSheepDog.g:750:3: ( rule__Then__TheStepTableAssignment_3_0 )
+                    // InternalSheepDog.g:724:2: ( ( rule__Then__TheStepTableAssignment_3_0 ) )
+                    // InternalSheepDog.g:725:3: ( rule__Then__TheStepTableAssignment_3_0 )
                     {
                      before(grammarAccess.getThenAccess().getTheStepTableAssignment_3_0()); 
-                    // InternalSheepDog.g:751:3: ( rule__Then__TheStepTableAssignment_3_0 )
-                    // InternalSheepDog.g:751:4: rule__Then__TheStepTableAssignment_3_0
+                    // InternalSheepDog.g:726:3: ( rule__Then__TheStepTableAssignment_3_0 )
+                    // InternalSheepDog.g:726:4: rule__Then__TheStepTableAssignment_3_0
                     {
                     pushFollow(FOLLOW_2);
                     rule__Then__TheStepTableAssignment_3_0();
@@ -2386,14 +2307,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                     }
                     break;
                 case 2 :
-                    // InternalSheepDog.g:755:2: ( ( rule__Then__TheDocStringAssignment_3_1 ) )
+                    // InternalSheepDog.g:730:2: ( ( rule__Then__TheDocStringAssignment_3_1 ) )
                     {
-                    // InternalSheepDog.g:755:2: ( ( rule__Then__TheDocStringAssignment_3_1 ) )
-                    // InternalSheepDog.g:756:3: ( rule__Then__TheDocStringAssignment_3_1 )
+                    // InternalSheepDog.g:730:2: ( ( rule__Then__TheDocStringAssignment_3_1 ) )
+                    // InternalSheepDog.g:731:3: ( rule__Then__TheDocStringAssignment_3_1 )
                     {
                      before(grammarAccess.getThenAccess().getTheDocStringAssignment_3_1()); 
-                    // InternalSheepDog.g:757:3: ( rule__Then__TheDocStringAssignment_3_1 )
-                    // InternalSheepDog.g:757:4: rule__Then__TheDocStringAssignment_3_1
+                    // InternalSheepDog.g:732:3: ( rule__Then__TheDocStringAssignment_3_1 )
+                    // InternalSheepDog.g:732:4: rule__Then__TheDocStringAssignment_3_1
                     {
                     pushFollow(FOLLOW_2);
                     rule__Then__TheDocStringAssignment_3_1();
@@ -2428,20 +2349,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__Alternatives_3"
-    // InternalSheepDog.g:765:1: rule__And__Alternatives_3 : ( ( ( rule__And__TheStepTableAssignment_3_0 ) ) | ( ( rule__And__TheDocStringAssignment_3_1 ) ) );
+    // InternalSheepDog.g:740:1: rule__And__Alternatives_3 : ( ( ( rule__And__TheStepTableAssignment_3_0 ) ) | ( ( rule__And__TheDocStringAssignment_3_1 ) ) );
     public final void rule__And__Alternatives_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:769:1: ( ( ( rule__And__TheStepTableAssignment_3_0 ) ) | ( ( rule__And__TheDocStringAssignment_3_1 ) ) )
+            // InternalSheepDog.g:744:1: ( ( ( rule__And__TheStepTableAssignment_3_0 ) ) | ( ( rule__And__TheDocStringAssignment_3_1 ) ) )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
-            if ( (LA7_0==25) ) {
+            if ( (LA7_0==23) ) {
                 alt7=1;
             }
-            else if ( (LA7_0==24) ) {
+            else if ( (LA7_0==22) ) {
                 alt7=2;
             }
             else {
@@ -2452,14 +2373,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             }
             switch (alt7) {
                 case 1 :
-                    // InternalSheepDog.g:770:2: ( ( rule__And__TheStepTableAssignment_3_0 ) )
+                    // InternalSheepDog.g:745:2: ( ( rule__And__TheStepTableAssignment_3_0 ) )
                     {
-                    // InternalSheepDog.g:770:2: ( ( rule__And__TheStepTableAssignment_3_0 ) )
-                    // InternalSheepDog.g:771:3: ( rule__And__TheStepTableAssignment_3_0 )
+                    // InternalSheepDog.g:745:2: ( ( rule__And__TheStepTableAssignment_3_0 ) )
+                    // InternalSheepDog.g:746:3: ( rule__And__TheStepTableAssignment_3_0 )
                     {
                      before(grammarAccess.getAndAccess().getTheStepTableAssignment_3_0()); 
-                    // InternalSheepDog.g:772:3: ( rule__And__TheStepTableAssignment_3_0 )
-                    // InternalSheepDog.g:772:4: rule__And__TheStepTableAssignment_3_0
+                    // InternalSheepDog.g:747:3: ( rule__And__TheStepTableAssignment_3_0 )
+                    // InternalSheepDog.g:747:4: rule__And__TheStepTableAssignment_3_0
                     {
                     pushFollow(FOLLOW_2);
                     rule__And__TheStepTableAssignment_3_0();
@@ -2477,14 +2398,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                     }
                     break;
                 case 2 :
-                    // InternalSheepDog.g:776:2: ( ( rule__And__TheDocStringAssignment_3_1 ) )
+                    // InternalSheepDog.g:751:2: ( ( rule__And__TheDocStringAssignment_3_1 ) )
                     {
-                    // InternalSheepDog.g:776:2: ( ( rule__And__TheDocStringAssignment_3_1 ) )
-                    // InternalSheepDog.g:777:3: ( rule__And__TheDocStringAssignment_3_1 )
+                    // InternalSheepDog.g:751:2: ( ( rule__And__TheDocStringAssignment_3_1 ) )
+                    // InternalSheepDog.g:752:3: ( rule__And__TheDocStringAssignment_3_1 )
                     {
                      before(grammarAccess.getAndAccess().getTheDocStringAssignment_3_1()); 
-                    // InternalSheepDog.g:778:3: ( rule__And__TheDocStringAssignment_3_1 )
-                    // InternalSheepDog.g:778:4: rule__And__TheDocStringAssignment_3_1
+                    // InternalSheepDog.g:753:3: ( rule__And__TheDocStringAssignment_3_1 )
+                    // InternalSheepDog.g:753:4: rule__And__TheDocStringAssignment_3_1
                     {
                     pushFollow(FOLLOW_2);
                     rule__And__TheDocStringAssignment_3_1();
@@ -2518,110 +2439,15 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
     // $ANTLR end "rule__And__Alternatives_3"
 
 
-    // $ANTLR start "rule__TEXT_LITERAL__Alternatives"
-    // InternalSheepDog.g:786:1: rule__TEXT_LITERAL__Alternatives : ( ( RULE_WORD ) | ( RULE_ID ) | ( RULE_STRING ) );
-    public final void rule__TEXT_LITERAL__Alternatives() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalSheepDog.g:790:1: ( ( RULE_WORD ) | ( RULE_ID ) | ( RULE_STRING ) )
-            int alt8=3;
-            switch ( input.LA(1) ) {
-            case RULE_WORD:
-                {
-                alt8=1;
-                }
-                break;
-            case RULE_ID:
-                {
-                alt8=2;
-                }
-                break;
-            case RULE_STRING:
-                {
-                alt8=3;
-                }
-                break;
-            default:
-                NoViableAltException nvae =
-                    new NoViableAltException("", 8, 0, input);
-
-                throw nvae;
-            }
-
-            switch (alt8) {
-                case 1 :
-                    // InternalSheepDog.g:791:2: ( RULE_WORD )
-                    {
-                    // InternalSheepDog.g:791:2: ( RULE_WORD )
-                    // InternalSheepDog.g:792:3: RULE_WORD
-                    {
-                     before(grammarAccess.getTEXT_LITERALAccess().getWORDTerminalRuleCall_0()); 
-                    match(input,RULE_WORD,FOLLOW_2); 
-                     after(grammarAccess.getTEXT_LITERALAccess().getWORDTerminalRuleCall_0()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // InternalSheepDog.g:797:2: ( RULE_ID )
-                    {
-                    // InternalSheepDog.g:797:2: ( RULE_ID )
-                    // InternalSheepDog.g:798:3: RULE_ID
-                    {
-                     before(grammarAccess.getTEXT_LITERALAccess().getIDTerminalRuleCall_1()); 
-                    match(input,RULE_ID,FOLLOW_2); 
-                     after(grammarAccess.getTEXT_LITERALAccess().getIDTerminalRuleCall_1()); 
-
-                    }
-
-
-                    }
-                    break;
-                case 3 :
-                    // InternalSheepDog.g:803:2: ( RULE_STRING )
-                    {
-                    // InternalSheepDog.g:803:2: ( RULE_STRING )
-                    // InternalSheepDog.g:804:3: RULE_STRING
-                    {
-                     before(grammarAccess.getTEXT_LITERALAccess().getSTRINGTerminalRuleCall_2()); 
-                    match(input,RULE_STRING,FOLLOW_2); 
-                     after(grammarAccess.getTEXT_LITERALAccess().getSTRINGTerminalRuleCall_2()); 
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__TEXT_LITERAL__Alternatives"
-
-
     // $ANTLR start "rule__StepObject__Group__0"
-    // InternalSheepDog.g:813:1: rule__StepObject__Group__0 : rule__StepObject__Group__0__Impl rule__StepObject__Group__1 ;
+    // InternalSheepDog.g:761:1: rule__StepObject__Group__0 : rule__StepObject__Group__0__Impl rule__StepObject__Group__1 ;
     public final void rule__StepObject__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:817:1: ( rule__StepObject__Group__0__Impl rule__StepObject__Group__1 )
-            // InternalSheepDog.g:818:2: rule__StepObject__Group__0__Impl rule__StepObject__Group__1
+            // InternalSheepDog.g:765:1: ( rule__StepObject__Group__0__Impl rule__StepObject__Group__1 )
+            // InternalSheepDog.g:766:2: rule__StepObject__Group__0__Impl rule__StepObject__Group__1
             {
             pushFollow(FOLLOW_3);
             rule__StepObject__Group__0__Impl();
@@ -2652,20 +2478,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepObject__Group__0__Impl"
-    // InternalSheepDog.g:825:1: rule__StepObject__Group__0__Impl : ( '=' ) ;
+    // InternalSheepDog.g:773:1: rule__StepObject__Group__0__Impl : ( '=' ) ;
     public final void rule__StepObject__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:829:1: ( ( '=' ) )
-            // InternalSheepDog.g:830:1: ( '=' )
+            // InternalSheepDog.g:777:1: ( ( '=' ) )
+            // InternalSheepDog.g:778:1: ( '=' )
             {
-            // InternalSheepDog.g:830:1: ( '=' )
-            // InternalSheepDog.g:831:2: '='
+            // InternalSheepDog.g:778:1: ( '=' )
+            // InternalSheepDog.g:779:2: '='
             {
              before(grammarAccess.getStepObjectAccess().getEqualsSignKeyword_0()); 
-            match(input,10,FOLLOW_2); 
+            match(input,8,FOLLOW_2); 
              after(grammarAccess.getStepObjectAccess().getEqualsSignKeyword_0()); 
 
             }
@@ -2689,14 +2515,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepObject__Group__1"
-    // InternalSheepDog.g:840:1: rule__StepObject__Group__1 : rule__StepObject__Group__1__Impl rule__StepObject__Group__2 ;
+    // InternalSheepDog.g:788:1: rule__StepObject__Group__1 : rule__StepObject__Group__1__Impl rule__StepObject__Group__2 ;
     public final void rule__StepObject__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:844:1: ( rule__StepObject__Group__1__Impl rule__StepObject__Group__2 )
-            // InternalSheepDog.g:845:2: rule__StepObject__Group__1__Impl rule__StepObject__Group__2
+            // InternalSheepDog.g:792:1: ( rule__StepObject__Group__1__Impl rule__StepObject__Group__2 )
+            // InternalSheepDog.g:793:2: rule__StepObject__Group__1__Impl rule__StepObject__Group__2
             {
             pushFollow(FOLLOW_4);
             rule__StepObject__Group__1__Impl();
@@ -2727,20 +2553,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepObject__Group__1__Impl"
-    // InternalSheepDog.g:852:1: rule__StepObject__Group__1__Impl : ( 'Object:' ) ;
+    // InternalSheepDog.g:800:1: rule__StepObject__Group__1__Impl : ( 'Object:' ) ;
     public final void rule__StepObject__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:856:1: ( ( 'Object:' ) )
-            // InternalSheepDog.g:857:1: ( 'Object:' )
+            // InternalSheepDog.g:804:1: ( ( 'Object:' ) )
+            // InternalSheepDog.g:805:1: ( 'Object:' )
             {
-            // InternalSheepDog.g:857:1: ( 'Object:' )
-            // InternalSheepDog.g:858:2: 'Object:'
+            // InternalSheepDog.g:805:1: ( 'Object:' )
+            // InternalSheepDog.g:806:2: 'Object:'
             {
              before(grammarAccess.getStepObjectAccess().getObjectKeyword_1()); 
-            match(input,11,FOLLOW_2); 
+            match(input,9,FOLLOW_2); 
              after(grammarAccess.getStepObjectAccess().getObjectKeyword_1()); 
 
             }
@@ -2764,14 +2590,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepObject__Group__2"
-    // InternalSheepDog.g:867:1: rule__StepObject__Group__2 : rule__StepObject__Group__2__Impl rule__StepObject__Group__3 ;
+    // InternalSheepDog.g:815:1: rule__StepObject__Group__2 : rule__StepObject__Group__2__Impl rule__StepObject__Group__3 ;
     public final void rule__StepObject__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:871:1: ( rule__StepObject__Group__2__Impl rule__StepObject__Group__3 )
-            // InternalSheepDog.g:872:2: rule__StepObject__Group__2__Impl rule__StepObject__Group__3
+            // InternalSheepDog.g:819:1: ( rule__StepObject__Group__2__Impl rule__StepObject__Group__3 )
+            // InternalSheepDog.g:820:2: rule__StepObject__Group__2__Impl rule__StepObject__Group__3
             {
             pushFollow(FOLLOW_5);
             rule__StepObject__Group__2__Impl();
@@ -2802,21 +2628,21 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepObject__Group__2__Impl"
-    // InternalSheepDog.g:879:1: rule__StepObject__Group__2__Impl : ( ( rule__StepObject__NameAssignment_2 ) ) ;
+    // InternalSheepDog.g:827:1: rule__StepObject__Group__2__Impl : ( ( rule__StepObject__NameAssignment_2 ) ) ;
     public final void rule__StepObject__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:883:1: ( ( ( rule__StepObject__NameAssignment_2 ) ) )
-            // InternalSheepDog.g:884:1: ( ( rule__StepObject__NameAssignment_2 ) )
+            // InternalSheepDog.g:831:1: ( ( ( rule__StepObject__NameAssignment_2 ) ) )
+            // InternalSheepDog.g:832:1: ( ( rule__StepObject__NameAssignment_2 ) )
             {
-            // InternalSheepDog.g:884:1: ( ( rule__StepObject__NameAssignment_2 ) )
-            // InternalSheepDog.g:885:2: ( rule__StepObject__NameAssignment_2 )
+            // InternalSheepDog.g:832:1: ( ( rule__StepObject__NameAssignment_2 ) )
+            // InternalSheepDog.g:833:2: ( rule__StepObject__NameAssignment_2 )
             {
              before(grammarAccess.getStepObjectAccess().getNameAssignment_2()); 
-            // InternalSheepDog.g:886:2: ( rule__StepObject__NameAssignment_2 )
-            // InternalSheepDog.g:886:3: rule__StepObject__NameAssignment_2
+            // InternalSheepDog.g:834:2: ( rule__StepObject__NameAssignment_2 )
+            // InternalSheepDog.g:834:3: rule__StepObject__NameAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__StepObject__NameAssignment_2();
@@ -2849,14 +2675,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepObject__Group__3"
-    // InternalSheepDog.g:894:1: rule__StepObject__Group__3 : rule__StepObject__Group__3__Impl rule__StepObject__Group__4 ;
+    // InternalSheepDog.g:842:1: rule__StepObject__Group__3 : rule__StepObject__Group__3__Impl rule__StepObject__Group__4 ;
     public final void rule__StepObject__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:898:1: ( rule__StepObject__Group__3__Impl rule__StepObject__Group__4 )
-            // InternalSheepDog.g:899:2: rule__StepObject__Group__3__Impl rule__StepObject__Group__4
+            // InternalSheepDog.g:846:1: ( rule__StepObject__Group__3__Impl rule__StepObject__Group__4 )
+            // InternalSheepDog.g:847:2: rule__StepObject__Group__3__Impl rule__StepObject__Group__4
             {
             pushFollow(FOLLOW_5);
             rule__StepObject__Group__3__Impl();
@@ -2887,33 +2713,33 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepObject__Group__3__Impl"
-    // InternalSheepDog.g:906:1: rule__StepObject__Group__3__Impl : ( ( rule__StepObject__StatementsAssignment_3 )* ) ;
+    // InternalSheepDog.g:854:1: rule__StepObject__Group__3__Impl : ( ( rule__StepObject__StatementsAssignment_3 )* ) ;
     public final void rule__StepObject__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:910:1: ( ( ( rule__StepObject__StatementsAssignment_3 )* ) )
-            // InternalSheepDog.g:911:1: ( ( rule__StepObject__StatementsAssignment_3 )* )
+            // InternalSheepDog.g:858:1: ( ( ( rule__StepObject__StatementsAssignment_3 )* ) )
+            // InternalSheepDog.g:859:1: ( ( rule__StepObject__StatementsAssignment_3 )* )
             {
-            // InternalSheepDog.g:911:1: ( ( rule__StepObject__StatementsAssignment_3 )* )
-            // InternalSheepDog.g:912:2: ( rule__StepObject__StatementsAssignment_3 )*
+            // InternalSheepDog.g:859:1: ( ( rule__StepObject__StatementsAssignment_3 )* )
+            // InternalSheepDog.g:860:2: ( rule__StepObject__StatementsAssignment_3 )*
             {
              before(grammarAccess.getStepObjectAccess().getStatementsAssignment_3()); 
-            // InternalSheepDog.g:913:2: ( rule__StepObject__StatementsAssignment_3 )*
-            loop9:
+            // InternalSheepDog.g:861:2: ( rule__StepObject__StatementsAssignment_3 )*
+            loop8:
             do {
-                int alt9=2;
-                int LA9_0 = input.LA(1);
+                int alt8=2;
+                int LA8_0 = input.LA(1);
 
-                if ( ((LA9_0>=RULE_WORD && LA9_0<=RULE_STRING)) ) {
-                    alt9=1;
+                if ( (LA8_0==RULE_WORD) ) {
+                    alt8=1;
                 }
 
 
-                switch (alt9) {
+                switch (alt8) {
             	case 1 :
-            	    // InternalSheepDog.g:913:3: rule__StepObject__StatementsAssignment_3
+            	    // InternalSheepDog.g:861:3: rule__StepObject__StatementsAssignment_3
             	    {
             	    pushFollow(FOLLOW_6);
             	    rule__StepObject__StatementsAssignment_3();
@@ -2925,7 +2751,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop9;
+            	    break loop8;
                 }
             } while (true);
 
@@ -2952,14 +2778,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepObject__Group__4"
-    // InternalSheepDog.g:921:1: rule__StepObject__Group__4 : rule__StepObject__Group__4__Impl ;
+    // InternalSheepDog.g:869:1: rule__StepObject__Group__4 : rule__StepObject__Group__4__Impl ;
     public final void rule__StepObject__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:925:1: ( rule__StepObject__Group__4__Impl )
-            // InternalSheepDog.g:926:2: rule__StepObject__Group__4__Impl
+            // InternalSheepDog.g:873:1: ( rule__StepObject__Group__4__Impl )
+            // InternalSheepDog.g:874:2: rule__StepObject__Group__4__Impl
             {
             pushFollow(FOLLOW_2);
             rule__StepObject__Group__4__Impl();
@@ -2985,33 +2811,33 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepObject__Group__4__Impl"
-    // InternalSheepDog.g:932:1: rule__StepObject__Group__4__Impl : ( ( rule__StepObject__StepDefinitionsAssignment_4 )* ) ;
+    // InternalSheepDog.g:880:1: rule__StepObject__Group__4__Impl : ( ( rule__StepObject__StepDefinitionsAssignment_4 )* ) ;
     public final void rule__StepObject__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:936:1: ( ( ( rule__StepObject__StepDefinitionsAssignment_4 )* ) )
-            // InternalSheepDog.g:937:1: ( ( rule__StepObject__StepDefinitionsAssignment_4 )* )
+            // InternalSheepDog.g:884:1: ( ( ( rule__StepObject__StepDefinitionsAssignment_4 )* ) )
+            // InternalSheepDog.g:885:1: ( ( rule__StepObject__StepDefinitionsAssignment_4 )* )
             {
-            // InternalSheepDog.g:937:1: ( ( rule__StepObject__StepDefinitionsAssignment_4 )* )
-            // InternalSheepDog.g:938:2: ( rule__StepObject__StepDefinitionsAssignment_4 )*
+            // InternalSheepDog.g:885:1: ( ( rule__StepObject__StepDefinitionsAssignment_4 )* )
+            // InternalSheepDog.g:886:2: ( rule__StepObject__StepDefinitionsAssignment_4 )*
             {
              before(grammarAccess.getStepObjectAccess().getStepDefinitionsAssignment_4()); 
-            // InternalSheepDog.g:939:2: ( rule__StepObject__StepDefinitionsAssignment_4 )*
-            loop10:
+            // InternalSheepDog.g:887:2: ( rule__StepObject__StepDefinitionsAssignment_4 )*
+            loop9:
             do {
-                int alt10=2;
-                int LA10_0 = input.LA(1);
+                int alt9=2;
+                int LA9_0 = input.LA(1);
 
-                if ( (LA10_0==12) ) {
-                    alt10=1;
+                if ( (LA9_0==10) ) {
+                    alt9=1;
                 }
 
 
-                switch (alt10) {
+                switch (alt9) {
             	case 1 :
-            	    // InternalSheepDog.g:939:3: rule__StepObject__StepDefinitionsAssignment_4
+            	    // InternalSheepDog.g:887:3: rule__StepObject__StepDefinitionsAssignment_4
             	    {
             	    pushFollow(FOLLOW_7);
             	    rule__StepObject__StepDefinitionsAssignment_4();
@@ -3023,7 +2849,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop10;
+            	    break loop9;
                 }
             } while (true);
 
@@ -3050,14 +2876,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepDefinition__Group__0"
-    // InternalSheepDog.g:948:1: rule__StepDefinition__Group__0 : rule__StepDefinition__Group__0__Impl rule__StepDefinition__Group__1 ;
+    // InternalSheepDog.g:896:1: rule__StepDefinition__Group__0 : rule__StepDefinition__Group__0__Impl rule__StepDefinition__Group__1 ;
     public final void rule__StepDefinition__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:952:1: ( rule__StepDefinition__Group__0__Impl rule__StepDefinition__Group__1 )
-            // InternalSheepDog.g:953:2: rule__StepDefinition__Group__0__Impl rule__StepDefinition__Group__1
+            // InternalSheepDog.g:900:1: ( rule__StepDefinition__Group__0__Impl rule__StepDefinition__Group__1 )
+            // InternalSheepDog.g:901:2: rule__StepDefinition__Group__0__Impl rule__StepDefinition__Group__1
             {
             pushFollow(FOLLOW_8);
             rule__StepDefinition__Group__0__Impl();
@@ -3088,20 +2914,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepDefinition__Group__0__Impl"
-    // InternalSheepDog.g:960:1: rule__StepDefinition__Group__0__Impl : ( '==' ) ;
+    // InternalSheepDog.g:908:1: rule__StepDefinition__Group__0__Impl : ( '==' ) ;
     public final void rule__StepDefinition__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:964:1: ( ( '==' ) )
-            // InternalSheepDog.g:965:1: ( '==' )
+            // InternalSheepDog.g:912:1: ( ( '==' ) )
+            // InternalSheepDog.g:913:1: ( '==' )
             {
-            // InternalSheepDog.g:965:1: ( '==' )
-            // InternalSheepDog.g:966:2: '=='
+            // InternalSheepDog.g:913:1: ( '==' )
+            // InternalSheepDog.g:914:2: '=='
             {
              before(grammarAccess.getStepDefinitionAccess().getEqualsSignEqualsSignKeyword_0()); 
-            match(input,12,FOLLOW_2); 
+            match(input,10,FOLLOW_2); 
              after(grammarAccess.getStepDefinitionAccess().getEqualsSignEqualsSignKeyword_0()); 
 
             }
@@ -3125,14 +2951,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepDefinition__Group__1"
-    // InternalSheepDog.g:975:1: rule__StepDefinition__Group__1 : rule__StepDefinition__Group__1__Impl rule__StepDefinition__Group__2 ;
+    // InternalSheepDog.g:923:1: rule__StepDefinition__Group__1 : rule__StepDefinition__Group__1__Impl rule__StepDefinition__Group__2 ;
     public final void rule__StepDefinition__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:979:1: ( rule__StepDefinition__Group__1__Impl rule__StepDefinition__Group__2 )
-            // InternalSheepDog.g:980:2: rule__StepDefinition__Group__1__Impl rule__StepDefinition__Group__2
+            // InternalSheepDog.g:927:1: ( rule__StepDefinition__Group__1__Impl rule__StepDefinition__Group__2 )
+            // InternalSheepDog.g:928:2: rule__StepDefinition__Group__1__Impl rule__StepDefinition__Group__2
             {
             pushFollow(FOLLOW_4);
             rule__StepDefinition__Group__1__Impl();
@@ -3163,20 +2989,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepDefinition__Group__1__Impl"
-    // InternalSheepDog.g:987:1: rule__StepDefinition__Group__1__Impl : ( 'Definition:' ) ;
+    // InternalSheepDog.g:935:1: rule__StepDefinition__Group__1__Impl : ( 'Definition:' ) ;
     public final void rule__StepDefinition__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:991:1: ( ( 'Definition:' ) )
-            // InternalSheepDog.g:992:1: ( 'Definition:' )
+            // InternalSheepDog.g:939:1: ( ( 'Definition:' ) )
+            // InternalSheepDog.g:940:1: ( 'Definition:' )
             {
-            // InternalSheepDog.g:992:1: ( 'Definition:' )
-            // InternalSheepDog.g:993:2: 'Definition:'
+            // InternalSheepDog.g:940:1: ( 'Definition:' )
+            // InternalSheepDog.g:941:2: 'Definition:'
             {
              before(grammarAccess.getStepDefinitionAccess().getDefinitionKeyword_1()); 
-            match(input,13,FOLLOW_2); 
+            match(input,11,FOLLOW_2); 
              after(grammarAccess.getStepDefinitionAccess().getDefinitionKeyword_1()); 
 
             }
@@ -3200,14 +3026,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepDefinition__Group__2"
-    // InternalSheepDog.g:1002:1: rule__StepDefinition__Group__2 : rule__StepDefinition__Group__2__Impl rule__StepDefinition__Group__3 ;
+    // InternalSheepDog.g:950:1: rule__StepDefinition__Group__2 : rule__StepDefinition__Group__2__Impl rule__StepDefinition__Group__3 ;
     public final void rule__StepDefinition__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1006:1: ( rule__StepDefinition__Group__2__Impl rule__StepDefinition__Group__3 )
-            // InternalSheepDog.g:1007:2: rule__StepDefinition__Group__2__Impl rule__StepDefinition__Group__3
+            // InternalSheepDog.g:954:1: ( rule__StepDefinition__Group__2__Impl rule__StepDefinition__Group__3 )
+            // InternalSheepDog.g:955:2: rule__StepDefinition__Group__2__Impl rule__StepDefinition__Group__3
             {
             pushFollow(FOLLOW_9);
             rule__StepDefinition__Group__2__Impl();
@@ -3238,21 +3064,21 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepDefinition__Group__2__Impl"
-    // InternalSheepDog.g:1014:1: rule__StepDefinition__Group__2__Impl : ( ( rule__StepDefinition__NameAssignment_2 ) ) ;
+    // InternalSheepDog.g:962:1: rule__StepDefinition__Group__2__Impl : ( ( rule__StepDefinition__NameAssignment_2 ) ) ;
     public final void rule__StepDefinition__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1018:1: ( ( ( rule__StepDefinition__NameAssignment_2 ) ) )
-            // InternalSheepDog.g:1019:1: ( ( rule__StepDefinition__NameAssignment_2 ) )
+            // InternalSheepDog.g:966:1: ( ( ( rule__StepDefinition__NameAssignment_2 ) ) )
+            // InternalSheepDog.g:967:1: ( ( rule__StepDefinition__NameAssignment_2 ) )
             {
-            // InternalSheepDog.g:1019:1: ( ( rule__StepDefinition__NameAssignment_2 ) )
-            // InternalSheepDog.g:1020:2: ( rule__StepDefinition__NameAssignment_2 )
+            // InternalSheepDog.g:967:1: ( ( rule__StepDefinition__NameAssignment_2 ) )
+            // InternalSheepDog.g:968:2: ( rule__StepDefinition__NameAssignment_2 )
             {
              before(grammarAccess.getStepDefinitionAccess().getNameAssignment_2()); 
-            // InternalSheepDog.g:1021:2: ( rule__StepDefinition__NameAssignment_2 )
-            // InternalSheepDog.g:1021:3: rule__StepDefinition__NameAssignment_2
+            // InternalSheepDog.g:969:2: ( rule__StepDefinition__NameAssignment_2 )
+            // InternalSheepDog.g:969:3: rule__StepDefinition__NameAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__StepDefinition__NameAssignment_2();
@@ -3285,14 +3111,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepDefinition__Group__3"
-    // InternalSheepDog.g:1029:1: rule__StepDefinition__Group__3 : rule__StepDefinition__Group__3__Impl rule__StepDefinition__Group__4 ;
+    // InternalSheepDog.g:977:1: rule__StepDefinition__Group__3 : rule__StepDefinition__Group__3__Impl rule__StepDefinition__Group__4 ;
     public final void rule__StepDefinition__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1033:1: ( rule__StepDefinition__Group__3__Impl rule__StepDefinition__Group__4 )
-            // InternalSheepDog.g:1034:2: rule__StepDefinition__Group__3__Impl rule__StepDefinition__Group__4
+            // InternalSheepDog.g:981:1: ( rule__StepDefinition__Group__3__Impl rule__StepDefinition__Group__4 )
+            // InternalSheepDog.g:982:2: rule__StepDefinition__Group__3__Impl rule__StepDefinition__Group__4
             {
             pushFollow(FOLLOW_9);
             rule__StepDefinition__Group__3__Impl();
@@ -3323,33 +3149,33 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepDefinition__Group__3__Impl"
-    // InternalSheepDog.g:1041:1: rule__StepDefinition__Group__3__Impl : ( ( rule__StepDefinition__StatementsAssignment_3 )* ) ;
+    // InternalSheepDog.g:989:1: rule__StepDefinition__Group__3__Impl : ( ( rule__StepDefinition__StatementsAssignment_3 )* ) ;
     public final void rule__StepDefinition__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1045:1: ( ( ( rule__StepDefinition__StatementsAssignment_3 )* ) )
-            // InternalSheepDog.g:1046:1: ( ( rule__StepDefinition__StatementsAssignment_3 )* )
+            // InternalSheepDog.g:993:1: ( ( ( rule__StepDefinition__StatementsAssignment_3 )* ) )
+            // InternalSheepDog.g:994:1: ( ( rule__StepDefinition__StatementsAssignment_3 )* )
             {
-            // InternalSheepDog.g:1046:1: ( ( rule__StepDefinition__StatementsAssignment_3 )* )
-            // InternalSheepDog.g:1047:2: ( rule__StepDefinition__StatementsAssignment_3 )*
+            // InternalSheepDog.g:994:1: ( ( rule__StepDefinition__StatementsAssignment_3 )* )
+            // InternalSheepDog.g:995:2: ( rule__StepDefinition__StatementsAssignment_3 )*
             {
              before(grammarAccess.getStepDefinitionAccess().getStatementsAssignment_3()); 
-            // InternalSheepDog.g:1048:2: ( rule__StepDefinition__StatementsAssignment_3 )*
-            loop11:
+            // InternalSheepDog.g:996:2: ( rule__StepDefinition__StatementsAssignment_3 )*
+            loop10:
             do {
-                int alt11=2;
-                int LA11_0 = input.LA(1);
+                int alt10=2;
+                int LA10_0 = input.LA(1);
 
-                if ( ((LA11_0>=RULE_WORD && LA11_0<=RULE_STRING)) ) {
-                    alt11=1;
+                if ( (LA10_0==RULE_WORD) ) {
+                    alt10=1;
                 }
 
 
-                switch (alt11) {
+                switch (alt10) {
             	case 1 :
-            	    // InternalSheepDog.g:1048:3: rule__StepDefinition__StatementsAssignment_3
+            	    // InternalSheepDog.g:996:3: rule__StepDefinition__StatementsAssignment_3
             	    {
             	    pushFollow(FOLLOW_6);
             	    rule__StepDefinition__StatementsAssignment_3();
@@ -3361,7 +3187,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop11;
+            	    break loop10;
                 }
             } while (true);
 
@@ -3388,14 +3214,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepDefinition__Group__4"
-    // InternalSheepDog.g:1056:1: rule__StepDefinition__Group__4 : rule__StepDefinition__Group__4__Impl ;
+    // InternalSheepDog.g:1004:1: rule__StepDefinition__Group__4 : rule__StepDefinition__Group__4__Impl ;
     public final void rule__StepDefinition__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1060:1: ( rule__StepDefinition__Group__4__Impl )
-            // InternalSheepDog.g:1061:2: rule__StepDefinition__Group__4__Impl
+            // InternalSheepDog.g:1008:1: ( rule__StepDefinition__Group__4__Impl )
+            // InternalSheepDog.g:1009:2: rule__StepDefinition__Group__4__Impl
             {
             pushFollow(FOLLOW_2);
             rule__StepDefinition__Group__4__Impl();
@@ -3421,33 +3247,33 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepDefinition__Group__4__Impl"
-    // InternalSheepDog.g:1067:1: rule__StepDefinition__Group__4__Impl : ( ( rule__StepDefinition__StepParametersAssignment_4 )* ) ;
+    // InternalSheepDog.g:1015:1: rule__StepDefinition__Group__4__Impl : ( ( rule__StepDefinition__StepParametersAssignment_4 )* ) ;
     public final void rule__StepDefinition__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1071:1: ( ( ( rule__StepDefinition__StepParametersAssignment_4 )* ) )
-            // InternalSheepDog.g:1072:1: ( ( rule__StepDefinition__StepParametersAssignment_4 )* )
+            // InternalSheepDog.g:1019:1: ( ( ( rule__StepDefinition__StepParametersAssignment_4 )* ) )
+            // InternalSheepDog.g:1020:1: ( ( rule__StepDefinition__StepParametersAssignment_4 )* )
             {
-            // InternalSheepDog.g:1072:1: ( ( rule__StepDefinition__StepParametersAssignment_4 )* )
-            // InternalSheepDog.g:1073:2: ( rule__StepDefinition__StepParametersAssignment_4 )*
+            // InternalSheepDog.g:1020:1: ( ( rule__StepDefinition__StepParametersAssignment_4 )* )
+            // InternalSheepDog.g:1021:2: ( rule__StepDefinition__StepParametersAssignment_4 )*
             {
              before(grammarAccess.getStepDefinitionAccess().getStepParametersAssignment_4()); 
-            // InternalSheepDog.g:1074:2: ( rule__StepDefinition__StepParametersAssignment_4 )*
-            loop12:
+            // InternalSheepDog.g:1022:2: ( rule__StepDefinition__StepParametersAssignment_4 )*
+            loop11:
             do {
-                int alt12=2;
-                int LA12_0 = input.LA(1);
+                int alt11=2;
+                int LA11_0 = input.LA(1);
 
-                if ( (LA12_0==14) ) {
-                    alt12=1;
+                if ( (LA11_0==12) ) {
+                    alt11=1;
                 }
 
 
-                switch (alt12) {
+                switch (alt11) {
             	case 1 :
-            	    // InternalSheepDog.g:1074:3: rule__StepDefinition__StepParametersAssignment_4
+            	    // InternalSheepDog.g:1022:3: rule__StepDefinition__StepParametersAssignment_4
             	    {
             	    pushFollow(FOLLOW_10);
             	    rule__StepDefinition__StepParametersAssignment_4();
@@ -3459,7 +3285,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop12;
+            	    break loop11;
                 }
             } while (true);
 
@@ -3486,14 +3312,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepParameters__Group__0"
-    // InternalSheepDog.g:1083:1: rule__StepParameters__Group__0 : rule__StepParameters__Group__0__Impl rule__StepParameters__Group__1 ;
+    // InternalSheepDog.g:1031:1: rule__StepParameters__Group__0 : rule__StepParameters__Group__0__Impl rule__StepParameters__Group__1 ;
     public final void rule__StepParameters__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1087:1: ( rule__StepParameters__Group__0__Impl rule__StepParameters__Group__1 )
-            // InternalSheepDog.g:1088:2: rule__StepParameters__Group__0__Impl rule__StepParameters__Group__1
+            // InternalSheepDog.g:1035:1: ( rule__StepParameters__Group__0__Impl rule__StepParameters__Group__1 )
+            // InternalSheepDog.g:1036:2: rule__StepParameters__Group__0__Impl rule__StepParameters__Group__1
             {
             pushFollow(FOLLOW_11);
             rule__StepParameters__Group__0__Impl();
@@ -3524,20 +3350,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepParameters__Group__0__Impl"
-    // InternalSheepDog.g:1095:1: rule__StepParameters__Group__0__Impl : ( '===' ) ;
+    // InternalSheepDog.g:1043:1: rule__StepParameters__Group__0__Impl : ( '===' ) ;
     public final void rule__StepParameters__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1099:1: ( ( '===' ) )
-            // InternalSheepDog.g:1100:1: ( '===' )
+            // InternalSheepDog.g:1047:1: ( ( '===' ) )
+            // InternalSheepDog.g:1048:1: ( '===' )
             {
-            // InternalSheepDog.g:1100:1: ( '===' )
-            // InternalSheepDog.g:1101:2: '==='
+            // InternalSheepDog.g:1048:1: ( '===' )
+            // InternalSheepDog.g:1049:2: '==='
             {
              before(grammarAccess.getStepParametersAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
-            match(input,14,FOLLOW_2); 
+            match(input,12,FOLLOW_2); 
              after(grammarAccess.getStepParametersAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
 
             }
@@ -3561,14 +3387,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepParameters__Group__1"
-    // InternalSheepDog.g:1110:1: rule__StepParameters__Group__1 : rule__StepParameters__Group__1__Impl rule__StepParameters__Group__2 ;
+    // InternalSheepDog.g:1058:1: rule__StepParameters__Group__1 : rule__StepParameters__Group__1__Impl rule__StepParameters__Group__2 ;
     public final void rule__StepParameters__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1114:1: ( rule__StepParameters__Group__1__Impl rule__StepParameters__Group__2 )
-            // InternalSheepDog.g:1115:2: rule__StepParameters__Group__1__Impl rule__StepParameters__Group__2
+            // InternalSheepDog.g:1062:1: ( rule__StepParameters__Group__1__Impl rule__StepParameters__Group__2 )
+            // InternalSheepDog.g:1063:2: rule__StepParameters__Group__1__Impl rule__StepParameters__Group__2
             {
             pushFollow(FOLLOW_4);
             rule__StepParameters__Group__1__Impl();
@@ -3599,20 +3425,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepParameters__Group__1__Impl"
-    // InternalSheepDog.g:1122:1: rule__StepParameters__Group__1__Impl : ( 'Parameters:' ) ;
+    // InternalSheepDog.g:1070:1: rule__StepParameters__Group__1__Impl : ( 'Parameters:' ) ;
     public final void rule__StepParameters__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1126:1: ( ( 'Parameters:' ) )
-            // InternalSheepDog.g:1127:1: ( 'Parameters:' )
+            // InternalSheepDog.g:1074:1: ( ( 'Parameters:' ) )
+            // InternalSheepDog.g:1075:1: ( 'Parameters:' )
             {
-            // InternalSheepDog.g:1127:1: ( 'Parameters:' )
-            // InternalSheepDog.g:1128:2: 'Parameters:'
+            // InternalSheepDog.g:1075:1: ( 'Parameters:' )
+            // InternalSheepDog.g:1076:2: 'Parameters:'
             {
              before(grammarAccess.getStepParametersAccess().getParametersKeyword_1()); 
-            match(input,15,FOLLOW_2); 
+            match(input,13,FOLLOW_2); 
              after(grammarAccess.getStepParametersAccess().getParametersKeyword_1()); 
 
             }
@@ -3636,14 +3462,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepParameters__Group__2"
-    // InternalSheepDog.g:1137:1: rule__StepParameters__Group__2 : rule__StepParameters__Group__2__Impl rule__StepParameters__Group__3 ;
+    // InternalSheepDog.g:1085:1: rule__StepParameters__Group__2 : rule__StepParameters__Group__2__Impl rule__StepParameters__Group__3 ;
     public final void rule__StepParameters__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1141:1: ( rule__StepParameters__Group__2__Impl rule__StepParameters__Group__3 )
-            // InternalSheepDog.g:1142:2: rule__StepParameters__Group__2__Impl rule__StepParameters__Group__3
+            // InternalSheepDog.g:1089:1: ( rule__StepParameters__Group__2__Impl rule__StepParameters__Group__3 )
+            // InternalSheepDog.g:1090:2: rule__StepParameters__Group__2__Impl rule__StepParameters__Group__3
             {
             pushFollow(FOLLOW_12);
             rule__StepParameters__Group__2__Impl();
@@ -3674,21 +3500,21 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepParameters__Group__2__Impl"
-    // InternalSheepDog.g:1149:1: rule__StepParameters__Group__2__Impl : ( ( rule__StepParameters__NameAssignment_2 ) ) ;
+    // InternalSheepDog.g:1097:1: rule__StepParameters__Group__2__Impl : ( ( rule__StepParameters__NameAssignment_2 ) ) ;
     public final void rule__StepParameters__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1153:1: ( ( ( rule__StepParameters__NameAssignment_2 ) ) )
-            // InternalSheepDog.g:1154:1: ( ( rule__StepParameters__NameAssignment_2 ) )
+            // InternalSheepDog.g:1101:1: ( ( ( rule__StepParameters__NameAssignment_2 ) ) )
+            // InternalSheepDog.g:1102:1: ( ( rule__StepParameters__NameAssignment_2 ) )
             {
-            // InternalSheepDog.g:1154:1: ( ( rule__StepParameters__NameAssignment_2 ) )
-            // InternalSheepDog.g:1155:2: ( rule__StepParameters__NameAssignment_2 )
+            // InternalSheepDog.g:1102:1: ( ( rule__StepParameters__NameAssignment_2 ) )
+            // InternalSheepDog.g:1103:2: ( rule__StepParameters__NameAssignment_2 )
             {
              before(grammarAccess.getStepParametersAccess().getNameAssignment_2()); 
-            // InternalSheepDog.g:1156:2: ( rule__StepParameters__NameAssignment_2 )
-            // InternalSheepDog.g:1156:3: rule__StepParameters__NameAssignment_2
+            // InternalSheepDog.g:1104:2: ( rule__StepParameters__NameAssignment_2 )
+            // InternalSheepDog.g:1104:3: rule__StepParameters__NameAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__StepParameters__NameAssignment_2();
@@ -3721,14 +3547,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepParameters__Group__3"
-    // InternalSheepDog.g:1164:1: rule__StepParameters__Group__3 : rule__StepParameters__Group__3__Impl rule__StepParameters__Group__4 ;
+    // InternalSheepDog.g:1112:1: rule__StepParameters__Group__3 : rule__StepParameters__Group__3__Impl rule__StepParameters__Group__4 ;
     public final void rule__StepParameters__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1168:1: ( rule__StepParameters__Group__3__Impl rule__StepParameters__Group__4 )
-            // InternalSheepDog.g:1169:2: rule__StepParameters__Group__3__Impl rule__StepParameters__Group__4
+            // InternalSheepDog.g:1116:1: ( rule__StepParameters__Group__3__Impl rule__StepParameters__Group__4 )
+            // InternalSheepDog.g:1117:2: rule__StepParameters__Group__3__Impl rule__StepParameters__Group__4
             {
             pushFollow(FOLLOW_12);
             rule__StepParameters__Group__3__Impl();
@@ -3759,33 +3585,33 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepParameters__Group__3__Impl"
-    // InternalSheepDog.g:1176:1: rule__StepParameters__Group__3__Impl : ( ( rule__StepParameters__StatementsAssignment_3 )* ) ;
+    // InternalSheepDog.g:1124:1: rule__StepParameters__Group__3__Impl : ( ( rule__StepParameters__StatementsAssignment_3 )* ) ;
     public final void rule__StepParameters__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1180:1: ( ( ( rule__StepParameters__StatementsAssignment_3 )* ) )
-            // InternalSheepDog.g:1181:1: ( ( rule__StepParameters__StatementsAssignment_3 )* )
+            // InternalSheepDog.g:1128:1: ( ( ( rule__StepParameters__StatementsAssignment_3 )* ) )
+            // InternalSheepDog.g:1129:1: ( ( rule__StepParameters__StatementsAssignment_3 )* )
             {
-            // InternalSheepDog.g:1181:1: ( ( rule__StepParameters__StatementsAssignment_3 )* )
-            // InternalSheepDog.g:1182:2: ( rule__StepParameters__StatementsAssignment_3 )*
+            // InternalSheepDog.g:1129:1: ( ( rule__StepParameters__StatementsAssignment_3 )* )
+            // InternalSheepDog.g:1130:2: ( rule__StepParameters__StatementsAssignment_3 )*
             {
              before(grammarAccess.getStepParametersAccess().getStatementsAssignment_3()); 
-            // InternalSheepDog.g:1183:2: ( rule__StepParameters__StatementsAssignment_3 )*
-            loop13:
+            // InternalSheepDog.g:1131:2: ( rule__StepParameters__StatementsAssignment_3 )*
+            loop12:
             do {
-                int alt13=2;
-                int LA13_0 = input.LA(1);
+                int alt12=2;
+                int LA12_0 = input.LA(1);
 
-                if ( ((LA13_0>=RULE_WORD && LA13_0<=RULE_STRING)) ) {
-                    alt13=1;
+                if ( (LA12_0==RULE_WORD) ) {
+                    alt12=1;
                 }
 
 
-                switch (alt13) {
+                switch (alt12) {
             	case 1 :
-            	    // InternalSheepDog.g:1183:3: rule__StepParameters__StatementsAssignment_3
+            	    // InternalSheepDog.g:1131:3: rule__StepParameters__StatementsAssignment_3
             	    {
             	    pushFollow(FOLLOW_6);
             	    rule__StepParameters__StatementsAssignment_3();
@@ -3797,7 +3623,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop13;
+            	    break loop12;
                 }
             } while (true);
 
@@ -3824,14 +3650,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepParameters__Group__4"
-    // InternalSheepDog.g:1191:1: rule__StepParameters__Group__4 : rule__StepParameters__Group__4__Impl ;
+    // InternalSheepDog.g:1139:1: rule__StepParameters__Group__4 : rule__StepParameters__Group__4__Impl ;
     public final void rule__StepParameters__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1195:1: ( rule__StepParameters__Group__4__Impl )
-            // InternalSheepDog.g:1196:2: rule__StepParameters__Group__4__Impl
+            // InternalSheepDog.g:1143:1: ( rule__StepParameters__Group__4__Impl )
+            // InternalSheepDog.g:1144:2: rule__StepParameters__Group__4__Impl
             {
             pushFollow(FOLLOW_2);
             rule__StepParameters__Group__4__Impl();
@@ -3857,21 +3683,21 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepParameters__Group__4__Impl"
-    // InternalSheepDog.g:1202:1: rule__StepParameters__Group__4__Impl : ( ( rule__StepParameters__ParametersTableAssignment_4 ) ) ;
+    // InternalSheepDog.g:1150:1: rule__StepParameters__Group__4__Impl : ( ( rule__StepParameters__ParametersTableAssignment_4 ) ) ;
     public final void rule__StepParameters__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1206:1: ( ( ( rule__StepParameters__ParametersTableAssignment_4 ) ) )
-            // InternalSheepDog.g:1207:1: ( ( rule__StepParameters__ParametersTableAssignment_4 ) )
+            // InternalSheepDog.g:1154:1: ( ( ( rule__StepParameters__ParametersTableAssignment_4 ) ) )
+            // InternalSheepDog.g:1155:1: ( ( rule__StepParameters__ParametersTableAssignment_4 ) )
             {
-            // InternalSheepDog.g:1207:1: ( ( rule__StepParameters__ParametersTableAssignment_4 ) )
-            // InternalSheepDog.g:1208:2: ( rule__StepParameters__ParametersTableAssignment_4 )
+            // InternalSheepDog.g:1155:1: ( ( rule__StepParameters__ParametersTableAssignment_4 ) )
+            // InternalSheepDog.g:1156:2: ( rule__StepParameters__ParametersTableAssignment_4 )
             {
              before(grammarAccess.getStepParametersAccess().getParametersTableAssignment_4()); 
-            // InternalSheepDog.g:1209:2: ( rule__StepParameters__ParametersTableAssignment_4 )
-            // InternalSheepDog.g:1209:3: rule__StepParameters__ParametersTableAssignment_4
+            // InternalSheepDog.g:1157:2: ( rule__StepParameters__ParametersTableAssignment_4 )
+            // InternalSheepDog.g:1157:3: rule__StepParameters__ParametersTableAssignment_4
             {
             pushFollow(FOLLOW_2);
             rule__StepParameters__ParametersTableAssignment_4();
@@ -3904,14 +3730,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__Group__0"
-    // InternalSheepDog.g:1218:1: rule__Feature__Group__0 : rule__Feature__Group__0__Impl rule__Feature__Group__1 ;
+    // InternalSheepDog.g:1166:1: rule__Feature__Group__0 : rule__Feature__Group__0__Impl rule__Feature__Group__1 ;
     public final void rule__Feature__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1222:1: ( rule__Feature__Group__0__Impl rule__Feature__Group__1 )
-            // InternalSheepDog.g:1223:2: rule__Feature__Group__0__Impl rule__Feature__Group__1
+            // InternalSheepDog.g:1170:1: ( rule__Feature__Group__0__Impl rule__Feature__Group__1 )
+            // InternalSheepDog.g:1171:2: rule__Feature__Group__0__Impl rule__Feature__Group__1
             {
             pushFollow(FOLLOW_13);
             rule__Feature__Group__0__Impl();
@@ -3942,20 +3768,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__Group__0__Impl"
-    // InternalSheepDog.g:1230:1: rule__Feature__Group__0__Impl : ( '=' ) ;
+    // InternalSheepDog.g:1178:1: rule__Feature__Group__0__Impl : ( '=' ) ;
     public final void rule__Feature__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1234:1: ( ( '=' ) )
-            // InternalSheepDog.g:1235:1: ( '=' )
+            // InternalSheepDog.g:1182:1: ( ( '=' ) )
+            // InternalSheepDog.g:1183:1: ( '=' )
             {
-            // InternalSheepDog.g:1235:1: ( '=' )
-            // InternalSheepDog.g:1236:2: '='
+            // InternalSheepDog.g:1183:1: ( '=' )
+            // InternalSheepDog.g:1184:2: '='
             {
              before(grammarAccess.getFeatureAccess().getEqualsSignKeyword_0()); 
-            match(input,10,FOLLOW_2); 
+            match(input,8,FOLLOW_2); 
              after(grammarAccess.getFeatureAccess().getEqualsSignKeyword_0()); 
 
             }
@@ -3979,14 +3805,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__Group__1"
-    // InternalSheepDog.g:1245:1: rule__Feature__Group__1 : rule__Feature__Group__1__Impl rule__Feature__Group__2 ;
+    // InternalSheepDog.g:1193:1: rule__Feature__Group__1 : rule__Feature__Group__1__Impl rule__Feature__Group__2 ;
     public final void rule__Feature__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1249:1: ( rule__Feature__Group__1__Impl rule__Feature__Group__2 )
-            // InternalSheepDog.g:1250:2: rule__Feature__Group__1__Impl rule__Feature__Group__2
+            // InternalSheepDog.g:1197:1: ( rule__Feature__Group__1__Impl rule__Feature__Group__2 )
+            // InternalSheepDog.g:1198:2: rule__Feature__Group__1__Impl rule__Feature__Group__2
             {
             pushFollow(FOLLOW_4);
             rule__Feature__Group__1__Impl();
@@ -4017,20 +3843,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__Group__1__Impl"
-    // InternalSheepDog.g:1257:1: rule__Feature__Group__1__Impl : ( 'Feature:' ) ;
+    // InternalSheepDog.g:1205:1: rule__Feature__Group__1__Impl : ( 'Feature:' ) ;
     public final void rule__Feature__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1261:1: ( ( 'Feature:' ) )
-            // InternalSheepDog.g:1262:1: ( 'Feature:' )
+            // InternalSheepDog.g:1209:1: ( ( 'Feature:' ) )
+            // InternalSheepDog.g:1210:1: ( 'Feature:' )
             {
-            // InternalSheepDog.g:1262:1: ( 'Feature:' )
-            // InternalSheepDog.g:1263:2: 'Feature:'
+            // InternalSheepDog.g:1210:1: ( 'Feature:' )
+            // InternalSheepDog.g:1211:2: 'Feature:'
             {
              before(grammarAccess.getFeatureAccess().getFeatureKeyword_1()); 
-            match(input,16,FOLLOW_2); 
+            match(input,14,FOLLOW_2); 
              after(grammarAccess.getFeatureAccess().getFeatureKeyword_1()); 
 
             }
@@ -4054,14 +3880,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__Group__2"
-    // InternalSheepDog.g:1272:1: rule__Feature__Group__2 : rule__Feature__Group__2__Impl rule__Feature__Group__3 ;
+    // InternalSheepDog.g:1220:1: rule__Feature__Group__2 : rule__Feature__Group__2__Impl rule__Feature__Group__3 ;
     public final void rule__Feature__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1276:1: ( rule__Feature__Group__2__Impl rule__Feature__Group__3 )
-            // InternalSheepDog.g:1277:2: rule__Feature__Group__2__Impl rule__Feature__Group__3
+            // InternalSheepDog.g:1224:1: ( rule__Feature__Group__2__Impl rule__Feature__Group__3 )
+            // InternalSheepDog.g:1225:2: rule__Feature__Group__2__Impl rule__Feature__Group__3
             {
             pushFollow(FOLLOW_14);
             rule__Feature__Group__2__Impl();
@@ -4092,21 +3918,21 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__Group__2__Impl"
-    // InternalSheepDog.g:1284:1: rule__Feature__Group__2__Impl : ( ( rule__Feature__NameAssignment_2 ) ) ;
+    // InternalSheepDog.g:1232:1: rule__Feature__Group__2__Impl : ( ( rule__Feature__NameAssignment_2 ) ) ;
     public final void rule__Feature__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1288:1: ( ( ( rule__Feature__NameAssignment_2 ) ) )
-            // InternalSheepDog.g:1289:1: ( ( rule__Feature__NameAssignment_2 ) )
+            // InternalSheepDog.g:1236:1: ( ( ( rule__Feature__NameAssignment_2 ) ) )
+            // InternalSheepDog.g:1237:1: ( ( rule__Feature__NameAssignment_2 ) )
             {
-            // InternalSheepDog.g:1289:1: ( ( rule__Feature__NameAssignment_2 ) )
-            // InternalSheepDog.g:1290:2: ( rule__Feature__NameAssignment_2 )
+            // InternalSheepDog.g:1237:1: ( ( rule__Feature__NameAssignment_2 ) )
+            // InternalSheepDog.g:1238:2: ( rule__Feature__NameAssignment_2 )
             {
              before(grammarAccess.getFeatureAccess().getNameAssignment_2()); 
-            // InternalSheepDog.g:1291:2: ( rule__Feature__NameAssignment_2 )
-            // InternalSheepDog.g:1291:3: rule__Feature__NameAssignment_2
+            // InternalSheepDog.g:1239:2: ( rule__Feature__NameAssignment_2 )
+            // InternalSheepDog.g:1239:3: rule__Feature__NameAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__Feature__NameAssignment_2();
@@ -4139,14 +3965,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__Group__3"
-    // InternalSheepDog.g:1299:1: rule__Feature__Group__3 : rule__Feature__Group__3__Impl rule__Feature__Group__4 ;
+    // InternalSheepDog.g:1247:1: rule__Feature__Group__3 : rule__Feature__Group__3__Impl rule__Feature__Group__4 ;
     public final void rule__Feature__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1303:1: ( rule__Feature__Group__3__Impl rule__Feature__Group__4 )
-            // InternalSheepDog.g:1304:2: rule__Feature__Group__3__Impl rule__Feature__Group__4
+            // InternalSheepDog.g:1251:1: ( rule__Feature__Group__3__Impl rule__Feature__Group__4 )
+            // InternalSheepDog.g:1252:2: rule__Feature__Group__3__Impl rule__Feature__Group__4
             {
             pushFollow(FOLLOW_14);
             rule__Feature__Group__3__Impl();
@@ -4177,33 +4003,33 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__Group__3__Impl"
-    // InternalSheepDog.g:1311:1: rule__Feature__Group__3__Impl : ( ( rule__Feature__StatementsAssignment_3 )* ) ;
+    // InternalSheepDog.g:1259:1: rule__Feature__Group__3__Impl : ( ( rule__Feature__StatementsAssignment_3 )* ) ;
     public final void rule__Feature__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1315:1: ( ( ( rule__Feature__StatementsAssignment_3 )* ) )
-            // InternalSheepDog.g:1316:1: ( ( rule__Feature__StatementsAssignment_3 )* )
+            // InternalSheepDog.g:1263:1: ( ( ( rule__Feature__StatementsAssignment_3 )* ) )
+            // InternalSheepDog.g:1264:1: ( ( rule__Feature__StatementsAssignment_3 )* )
             {
-            // InternalSheepDog.g:1316:1: ( ( rule__Feature__StatementsAssignment_3 )* )
-            // InternalSheepDog.g:1317:2: ( rule__Feature__StatementsAssignment_3 )*
+            // InternalSheepDog.g:1264:1: ( ( rule__Feature__StatementsAssignment_3 )* )
+            // InternalSheepDog.g:1265:2: ( rule__Feature__StatementsAssignment_3 )*
             {
              before(grammarAccess.getFeatureAccess().getStatementsAssignment_3()); 
-            // InternalSheepDog.g:1318:2: ( rule__Feature__StatementsAssignment_3 )*
-            loop14:
+            // InternalSheepDog.g:1266:2: ( rule__Feature__StatementsAssignment_3 )*
+            loop13:
             do {
-                int alt14=2;
-                int LA14_0 = input.LA(1);
+                int alt13=2;
+                int LA13_0 = input.LA(1);
 
-                if ( ((LA14_0>=RULE_WORD && LA14_0<=RULE_STRING)) ) {
-                    alt14=1;
+                if ( (LA13_0==RULE_WORD) ) {
+                    alt13=1;
                 }
 
 
-                switch (alt14) {
+                switch (alt13) {
             	case 1 :
-            	    // InternalSheepDog.g:1318:3: rule__Feature__StatementsAssignment_3
+            	    // InternalSheepDog.g:1266:3: rule__Feature__StatementsAssignment_3
             	    {
             	    pushFollow(FOLLOW_6);
             	    rule__Feature__StatementsAssignment_3();
@@ -4215,7 +4041,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop14;
+            	    break loop13;
                 }
             } while (true);
 
@@ -4242,14 +4068,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__Group__4"
-    // InternalSheepDog.g:1326:1: rule__Feature__Group__4 : rule__Feature__Group__4__Impl ;
+    // InternalSheepDog.g:1274:1: rule__Feature__Group__4 : rule__Feature__Group__4__Impl ;
     public final void rule__Feature__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1330:1: ( rule__Feature__Group__4__Impl )
-            // InternalSheepDog.g:1331:2: rule__Feature__Group__4__Impl
+            // InternalSheepDog.g:1278:1: ( rule__Feature__Group__4__Impl )
+            // InternalSheepDog.g:1279:2: rule__Feature__Group__4__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Feature__Group__4__Impl();
@@ -4275,33 +4101,33 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__Group__4__Impl"
-    // InternalSheepDog.g:1337:1: rule__Feature__Group__4__Impl : ( ( rule__Feature__AbstractScenariosAssignment_4 )* ) ;
+    // InternalSheepDog.g:1285:1: rule__Feature__Group__4__Impl : ( ( rule__Feature__AbstractScenariosAssignment_4 )* ) ;
     public final void rule__Feature__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1341:1: ( ( ( rule__Feature__AbstractScenariosAssignment_4 )* ) )
-            // InternalSheepDog.g:1342:1: ( ( rule__Feature__AbstractScenariosAssignment_4 )* )
+            // InternalSheepDog.g:1289:1: ( ( ( rule__Feature__AbstractScenariosAssignment_4 )* ) )
+            // InternalSheepDog.g:1290:1: ( ( rule__Feature__AbstractScenariosAssignment_4 )* )
             {
-            // InternalSheepDog.g:1342:1: ( ( rule__Feature__AbstractScenariosAssignment_4 )* )
-            // InternalSheepDog.g:1343:2: ( rule__Feature__AbstractScenariosAssignment_4 )*
+            // InternalSheepDog.g:1290:1: ( ( rule__Feature__AbstractScenariosAssignment_4 )* )
+            // InternalSheepDog.g:1291:2: ( rule__Feature__AbstractScenariosAssignment_4 )*
             {
              before(grammarAccess.getFeatureAccess().getAbstractScenariosAssignment_4()); 
-            // InternalSheepDog.g:1344:2: ( rule__Feature__AbstractScenariosAssignment_4 )*
-            loop15:
+            // InternalSheepDog.g:1292:2: ( rule__Feature__AbstractScenariosAssignment_4 )*
+            loop14:
             do {
-                int alt15=2;
-                int LA15_0 = input.LA(1);
+                int alt14=2;
+                int LA14_0 = input.LA(1);
 
-                if ( (LA15_0==12||LA15_0==27) ) {
-                    alt15=1;
+                if ( (LA14_0==10||LA14_0==25) ) {
+                    alt14=1;
                 }
 
 
-                switch (alt15) {
+                switch (alt14) {
             	case 1 :
-            	    // InternalSheepDog.g:1344:3: rule__Feature__AbstractScenariosAssignment_4
+            	    // InternalSheepDog.g:1292:3: rule__Feature__AbstractScenariosAssignment_4
             	    {
             	    pushFollow(FOLLOW_15);
             	    rule__Feature__AbstractScenariosAssignment_4();
@@ -4313,7 +4139,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop15;
+            	    break loop14;
                 }
             } while (true);
 
@@ -4340,14 +4166,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Background__Group__0"
-    // InternalSheepDog.g:1353:1: rule__Background__Group__0 : rule__Background__Group__0__Impl rule__Background__Group__1 ;
+    // InternalSheepDog.g:1301:1: rule__Background__Group__0 : rule__Background__Group__0__Impl rule__Background__Group__1 ;
     public final void rule__Background__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1357:1: ( rule__Background__Group__0__Impl rule__Background__Group__1 )
-            // InternalSheepDog.g:1358:2: rule__Background__Group__0__Impl rule__Background__Group__1
+            // InternalSheepDog.g:1305:1: ( rule__Background__Group__0__Impl rule__Background__Group__1 )
+            // InternalSheepDog.g:1306:2: rule__Background__Group__0__Impl rule__Background__Group__1
             {
             pushFollow(FOLLOW_16);
             rule__Background__Group__0__Impl();
@@ -4378,29 +4204,29 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Background__Group__0__Impl"
-    // InternalSheepDog.g:1365:1: rule__Background__Group__0__Impl : ( ( rule__Background__TagsAssignment_0 )? ) ;
+    // InternalSheepDog.g:1313:1: rule__Background__Group__0__Impl : ( ( rule__Background__TagsAssignment_0 )? ) ;
     public final void rule__Background__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1369:1: ( ( ( rule__Background__TagsAssignment_0 )? ) )
-            // InternalSheepDog.g:1370:1: ( ( rule__Background__TagsAssignment_0 )? )
+            // InternalSheepDog.g:1317:1: ( ( ( rule__Background__TagsAssignment_0 )? ) )
+            // InternalSheepDog.g:1318:1: ( ( rule__Background__TagsAssignment_0 )? )
             {
-            // InternalSheepDog.g:1370:1: ( ( rule__Background__TagsAssignment_0 )? )
-            // InternalSheepDog.g:1371:2: ( rule__Background__TagsAssignment_0 )?
+            // InternalSheepDog.g:1318:1: ( ( rule__Background__TagsAssignment_0 )? )
+            // InternalSheepDog.g:1319:2: ( rule__Background__TagsAssignment_0 )?
             {
              before(grammarAccess.getBackgroundAccess().getTagsAssignment_0()); 
-            // InternalSheepDog.g:1372:2: ( rule__Background__TagsAssignment_0 )?
-            int alt16=2;
-            int LA16_0 = input.LA(1);
+            // InternalSheepDog.g:1320:2: ( rule__Background__TagsAssignment_0 )?
+            int alt15=2;
+            int LA15_0 = input.LA(1);
 
-            if ( (LA16_0==27) ) {
-                alt16=1;
+            if ( (LA15_0==25) ) {
+                alt15=1;
             }
-            switch (alt16) {
+            switch (alt15) {
                 case 1 :
-                    // InternalSheepDog.g:1372:3: rule__Background__TagsAssignment_0
+                    // InternalSheepDog.g:1320:3: rule__Background__TagsAssignment_0
                     {
                     pushFollow(FOLLOW_2);
                     rule__Background__TagsAssignment_0();
@@ -4436,14 +4262,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Background__Group__1"
-    // InternalSheepDog.g:1380:1: rule__Background__Group__1 : rule__Background__Group__1__Impl rule__Background__Group__2 ;
+    // InternalSheepDog.g:1328:1: rule__Background__Group__1 : rule__Background__Group__1__Impl rule__Background__Group__2 ;
     public final void rule__Background__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1384:1: ( rule__Background__Group__1__Impl rule__Background__Group__2 )
-            // InternalSheepDog.g:1385:2: rule__Background__Group__1__Impl rule__Background__Group__2
+            // InternalSheepDog.g:1332:1: ( rule__Background__Group__1__Impl rule__Background__Group__2 )
+            // InternalSheepDog.g:1333:2: rule__Background__Group__1__Impl rule__Background__Group__2
             {
             pushFollow(FOLLOW_17);
             rule__Background__Group__1__Impl();
@@ -4474,20 +4300,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Background__Group__1__Impl"
-    // InternalSheepDog.g:1392:1: rule__Background__Group__1__Impl : ( '==' ) ;
+    // InternalSheepDog.g:1340:1: rule__Background__Group__1__Impl : ( '==' ) ;
     public final void rule__Background__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1396:1: ( ( '==' ) )
-            // InternalSheepDog.g:1397:1: ( '==' )
+            // InternalSheepDog.g:1344:1: ( ( '==' ) )
+            // InternalSheepDog.g:1345:1: ( '==' )
             {
-            // InternalSheepDog.g:1397:1: ( '==' )
-            // InternalSheepDog.g:1398:2: '=='
+            // InternalSheepDog.g:1345:1: ( '==' )
+            // InternalSheepDog.g:1346:2: '=='
             {
              before(grammarAccess.getBackgroundAccess().getEqualsSignEqualsSignKeyword_1()); 
-            match(input,12,FOLLOW_2); 
+            match(input,10,FOLLOW_2); 
              after(grammarAccess.getBackgroundAccess().getEqualsSignEqualsSignKeyword_1()); 
 
             }
@@ -4511,14 +4337,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Background__Group__2"
-    // InternalSheepDog.g:1407:1: rule__Background__Group__2 : rule__Background__Group__2__Impl rule__Background__Group__3 ;
+    // InternalSheepDog.g:1355:1: rule__Background__Group__2 : rule__Background__Group__2__Impl rule__Background__Group__3 ;
     public final void rule__Background__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1411:1: ( rule__Background__Group__2__Impl rule__Background__Group__3 )
-            // InternalSheepDog.g:1412:2: rule__Background__Group__2__Impl rule__Background__Group__3
+            // InternalSheepDog.g:1359:1: ( rule__Background__Group__2__Impl rule__Background__Group__3 )
+            // InternalSheepDog.g:1360:2: rule__Background__Group__2__Impl rule__Background__Group__3
             {
             pushFollow(FOLLOW_4);
             rule__Background__Group__2__Impl();
@@ -4549,20 +4375,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Background__Group__2__Impl"
-    // InternalSheepDog.g:1419:1: rule__Background__Group__2__Impl : ( 'Background:' ) ;
+    // InternalSheepDog.g:1367:1: rule__Background__Group__2__Impl : ( 'Background:' ) ;
     public final void rule__Background__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1423:1: ( ( 'Background:' ) )
-            // InternalSheepDog.g:1424:1: ( 'Background:' )
+            // InternalSheepDog.g:1371:1: ( ( 'Background:' ) )
+            // InternalSheepDog.g:1372:1: ( 'Background:' )
             {
-            // InternalSheepDog.g:1424:1: ( 'Background:' )
-            // InternalSheepDog.g:1425:2: 'Background:'
+            // InternalSheepDog.g:1372:1: ( 'Background:' )
+            // InternalSheepDog.g:1373:2: 'Background:'
             {
              before(grammarAccess.getBackgroundAccess().getBackgroundKeyword_2()); 
-            match(input,17,FOLLOW_2); 
+            match(input,15,FOLLOW_2); 
              after(grammarAccess.getBackgroundAccess().getBackgroundKeyword_2()); 
 
             }
@@ -4586,14 +4412,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Background__Group__3"
-    // InternalSheepDog.g:1434:1: rule__Background__Group__3 : rule__Background__Group__3__Impl rule__Background__Group__4 ;
+    // InternalSheepDog.g:1382:1: rule__Background__Group__3 : rule__Background__Group__3__Impl rule__Background__Group__4 ;
     public final void rule__Background__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1438:1: ( rule__Background__Group__3__Impl rule__Background__Group__4 )
-            // InternalSheepDog.g:1439:2: rule__Background__Group__3__Impl rule__Background__Group__4
+            // InternalSheepDog.g:1386:1: ( rule__Background__Group__3__Impl rule__Background__Group__4 )
+            // InternalSheepDog.g:1387:2: rule__Background__Group__3__Impl rule__Background__Group__4
             {
             pushFollow(FOLLOW_9);
             rule__Background__Group__3__Impl();
@@ -4624,21 +4450,21 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Background__Group__3__Impl"
-    // InternalSheepDog.g:1446:1: rule__Background__Group__3__Impl : ( ( rule__Background__NameAssignment_3 ) ) ;
+    // InternalSheepDog.g:1394:1: rule__Background__Group__3__Impl : ( ( rule__Background__NameAssignment_3 ) ) ;
     public final void rule__Background__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1450:1: ( ( ( rule__Background__NameAssignment_3 ) ) )
-            // InternalSheepDog.g:1451:1: ( ( rule__Background__NameAssignment_3 ) )
+            // InternalSheepDog.g:1398:1: ( ( ( rule__Background__NameAssignment_3 ) ) )
+            // InternalSheepDog.g:1399:1: ( ( rule__Background__NameAssignment_3 ) )
             {
-            // InternalSheepDog.g:1451:1: ( ( rule__Background__NameAssignment_3 ) )
-            // InternalSheepDog.g:1452:2: ( rule__Background__NameAssignment_3 )
+            // InternalSheepDog.g:1399:1: ( ( rule__Background__NameAssignment_3 ) )
+            // InternalSheepDog.g:1400:2: ( rule__Background__NameAssignment_3 )
             {
              before(grammarAccess.getBackgroundAccess().getNameAssignment_3()); 
-            // InternalSheepDog.g:1453:2: ( rule__Background__NameAssignment_3 )
-            // InternalSheepDog.g:1453:3: rule__Background__NameAssignment_3
+            // InternalSheepDog.g:1401:2: ( rule__Background__NameAssignment_3 )
+            // InternalSheepDog.g:1401:3: rule__Background__NameAssignment_3
             {
             pushFollow(FOLLOW_2);
             rule__Background__NameAssignment_3();
@@ -4671,14 +4497,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Background__Group__4"
-    // InternalSheepDog.g:1461:1: rule__Background__Group__4 : rule__Background__Group__4__Impl rule__Background__Group__5 ;
+    // InternalSheepDog.g:1409:1: rule__Background__Group__4 : rule__Background__Group__4__Impl rule__Background__Group__5 ;
     public final void rule__Background__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1465:1: ( rule__Background__Group__4__Impl rule__Background__Group__5 )
-            // InternalSheepDog.g:1466:2: rule__Background__Group__4__Impl rule__Background__Group__5
+            // InternalSheepDog.g:1413:1: ( rule__Background__Group__4__Impl rule__Background__Group__5 )
+            // InternalSheepDog.g:1414:2: rule__Background__Group__4__Impl rule__Background__Group__5
             {
             pushFollow(FOLLOW_9);
             rule__Background__Group__4__Impl();
@@ -4709,33 +4535,33 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Background__Group__4__Impl"
-    // InternalSheepDog.g:1473:1: rule__Background__Group__4__Impl : ( ( rule__Background__StatementsAssignment_4 )* ) ;
+    // InternalSheepDog.g:1421:1: rule__Background__Group__4__Impl : ( ( rule__Background__StatementsAssignment_4 )* ) ;
     public final void rule__Background__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1477:1: ( ( ( rule__Background__StatementsAssignment_4 )* ) )
-            // InternalSheepDog.g:1478:1: ( ( rule__Background__StatementsAssignment_4 )* )
+            // InternalSheepDog.g:1425:1: ( ( ( rule__Background__StatementsAssignment_4 )* ) )
+            // InternalSheepDog.g:1426:1: ( ( rule__Background__StatementsAssignment_4 )* )
             {
-            // InternalSheepDog.g:1478:1: ( ( rule__Background__StatementsAssignment_4 )* )
-            // InternalSheepDog.g:1479:2: ( rule__Background__StatementsAssignment_4 )*
+            // InternalSheepDog.g:1426:1: ( ( rule__Background__StatementsAssignment_4 )* )
+            // InternalSheepDog.g:1427:2: ( rule__Background__StatementsAssignment_4 )*
             {
              before(grammarAccess.getBackgroundAccess().getStatementsAssignment_4()); 
-            // InternalSheepDog.g:1480:2: ( rule__Background__StatementsAssignment_4 )*
-            loop17:
+            // InternalSheepDog.g:1428:2: ( rule__Background__StatementsAssignment_4 )*
+            loop16:
             do {
-                int alt17=2;
-                int LA17_0 = input.LA(1);
+                int alt16=2;
+                int LA16_0 = input.LA(1);
 
-                if ( ((LA17_0>=RULE_WORD && LA17_0<=RULE_STRING)) ) {
-                    alt17=1;
+                if ( (LA16_0==RULE_WORD) ) {
+                    alt16=1;
                 }
 
 
-                switch (alt17) {
+                switch (alt16) {
             	case 1 :
-            	    // InternalSheepDog.g:1480:3: rule__Background__StatementsAssignment_4
+            	    // InternalSheepDog.g:1428:3: rule__Background__StatementsAssignment_4
             	    {
             	    pushFollow(FOLLOW_6);
             	    rule__Background__StatementsAssignment_4();
@@ -4747,7 +4573,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop17;
+            	    break loop16;
                 }
             } while (true);
 
@@ -4774,14 +4600,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Background__Group__5"
-    // InternalSheepDog.g:1488:1: rule__Background__Group__5 : rule__Background__Group__5__Impl ;
+    // InternalSheepDog.g:1436:1: rule__Background__Group__5 : rule__Background__Group__5__Impl ;
     public final void rule__Background__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1492:1: ( rule__Background__Group__5__Impl )
-            // InternalSheepDog.g:1493:2: rule__Background__Group__5__Impl
+            // InternalSheepDog.g:1440:1: ( rule__Background__Group__5__Impl )
+            // InternalSheepDog.g:1441:2: rule__Background__Group__5__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Background__Group__5__Impl();
@@ -4807,33 +4633,33 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Background__Group__5__Impl"
-    // InternalSheepDog.g:1499:1: rule__Background__Group__5__Impl : ( ( rule__Background__StepsAssignment_5 )* ) ;
+    // InternalSheepDog.g:1447:1: rule__Background__Group__5__Impl : ( ( rule__Background__StepsAssignment_5 )* ) ;
     public final void rule__Background__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1503:1: ( ( ( rule__Background__StepsAssignment_5 )* ) )
-            // InternalSheepDog.g:1504:1: ( ( rule__Background__StepsAssignment_5 )* )
+            // InternalSheepDog.g:1451:1: ( ( ( rule__Background__StepsAssignment_5 )* ) )
+            // InternalSheepDog.g:1452:1: ( ( rule__Background__StepsAssignment_5 )* )
             {
-            // InternalSheepDog.g:1504:1: ( ( rule__Background__StepsAssignment_5 )* )
-            // InternalSheepDog.g:1505:2: ( rule__Background__StepsAssignment_5 )*
+            // InternalSheepDog.g:1452:1: ( ( rule__Background__StepsAssignment_5 )* )
+            // InternalSheepDog.g:1453:2: ( rule__Background__StepsAssignment_5 )*
             {
              before(grammarAccess.getBackgroundAccess().getStepsAssignment_5()); 
-            // InternalSheepDog.g:1506:2: ( rule__Background__StepsAssignment_5 )*
-            loop18:
+            // InternalSheepDog.g:1454:2: ( rule__Background__StepsAssignment_5 )*
+            loop17:
             do {
-                int alt18=2;
-                int LA18_0 = input.LA(1);
+                int alt17=2;
+                int LA17_0 = input.LA(1);
 
-                if ( (LA18_0==14) ) {
-                    alt18=1;
+                if ( (LA17_0==12) ) {
+                    alt17=1;
                 }
 
 
-                switch (alt18) {
+                switch (alt17) {
             	case 1 :
-            	    // InternalSheepDog.g:1506:3: rule__Background__StepsAssignment_5
+            	    // InternalSheepDog.g:1454:3: rule__Background__StepsAssignment_5
             	    {
             	    pushFollow(FOLLOW_10);
             	    rule__Background__StepsAssignment_5();
@@ -4845,7 +4671,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop18;
+            	    break loop17;
                 }
             } while (true);
 
@@ -4872,14 +4698,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__Group__0"
-    // InternalSheepDog.g:1515:1: rule__Scenario__Group__0 : rule__Scenario__Group__0__Impl rule__Scenario__Group__1 ;
+    // InternalSheepDog.g:1463:1: rule__Scenario__Group__0 : rule__Scenario__Group__0__Impl rule__Scenario__Group__1 ;
     public final void rule__Scenario__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1519:1: ( rule__Scenario__Group__0__Impl rule__Scenario__Group__1 )
-            // InternalSheepDog.g:1520:2: rule__Scenario__Group__0__Impl rule__Scenario__Group__1
+            // InternalSheepDog.g:1467:1: ( rule__Scenario__Group__0__Impl rule__Scenario__Group__1 )
+            // InternalSheepDog.g:1468:2: rule__Scenario__Group__0__Impl rule__Scenario__Group__1
             {
             pushFollow(FOLLOW_16);
             rule__Scenario__Group__0__Impl();
@@ -4910,29 +4736,29 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__Group__0__Impl"
-    // InternalSheepDog.g:1527:1: rule__Scenario__Group__0__Impl : ( ( rule__Scenario__TagsAssignment_0 )? ) ;
+    // InternalSheepDog.g:1475:1: rule__Scenario__Group__0__Impl : ( ( rule__Scenario__TagsAssignment_0 )? ) ;
     public final void rule__Scenario__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1531:1: ( ( ( rule__Scenario__TagsAssignment_0 )? ) )
-            // InternalSheepDog.g:1532:1: ( ( rule__Scenario__TagsAssignment_0 )? )
+            // InternalSheepDog.g:1479:1: ( ( ( rule__Scenario__TagsAssignment_0 )? ) )
+            // InternalSheepDog.g:1480:1: ( ( rule__Scenario__TagsAssignment_0 )? )
             {
-            // InternalSheepDog.g:1532:1: ( ( rule__Scenario__TagsAssignment_0 )? )
-            // InternalSheepDog.g:1533:2: ( rule__Scenario__TagsAssignment_0 )?
+            // InternalSheepDog.g:1480:1: ( ( rule__Scenario__TagsAssignment_0 )? )
+            // InternalSheepDog.g:1481:2: ( rule__Scenario__TagsAssignment_0 )?
             {
              before(grammarAccess.getScenarioAccess().getTagsAssignment_0()); 
-            // InternalSheepDog.g:1534:2: ( rule__Scenario__TagsAssignment_0 )?
-            int alt19=2;
-            int LA19_0 = input.LA(1);
+            // InternalSheepDog.g:1482:2: ( rule__Scenario__TagsAssignment_0 )?
+            int alt18=2;
+            int LA18_0 = input.LA(1);
 
-            if ( (LA19_0==27) ) {
-                alt19=1;
+            if ( (LA18_0==25) ) {
+                alt18=1;
             }
-            switch (alt19) {
+            switch (alt18) {
                 case 1 :
-                    // InternalSheepDog.g:1534:3: rule__Scenario__TagsAssignment_0
+                    // InternalSheepDog.g:1482:3: rule__Scenario__TagsAssignment_0
                     {
                     pushFollow(FOLLOW_2);
                     rule__Scenario__TagsAssignment_0();
@@ -4968,14 +4794,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__Group__1"
-    // InternalSheepDog.g:1542:1: rule__Scenario__Group__1 : rule__Scenario__Group__1__Impl rule__Scenario__Group__2 ;
+    // InternalSheepDog.g:1490:1: rule__Scenario__Group__1 : rule__Scenario__Group__1__Impl rule__Scenario__Group__2 ;
     public final void rule__Scenario__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1546:1: ( rule__Scenario__Group__1__Impl rule__Scenario__Group__2 )
-            // InternalSheepDog.g:1547:2: rule__Scenario__Group__1__Impl rule__Scenario__Group__2
+            // InternalSheepDog.g:1494:1: ( rule__Scenario__Group__1__Impl rule__Scenario__Group__2 )
+            // InternalSheepDog.g:1495:2: rule__Scenario__Group__1__Impl rule__Scenario__Group__2
             {
             pushFollow(FOLLOW_18);
             rule__Scenario__Group__1__Impl();
@@ -5006,20 +4832,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__Group__1__Impl"
-    // InternalSheepDog.g:1554:1: rule__Scenario__Group__1__Impl : ( '==' ) ;
+    // InternalSheepDog.g:1502:1: rule__Scenario__Group__1__Impl : ( '==' ) ;
     public final void rule__Scenario__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1558:1: ( ( '==' ) )
-            // InternalSheepDog.g:1559:1: ( '==' )
+            // InternalSheepDog.g:1506:1: ( ( '==' ) )
+            // InternalSheepDog.g:1507:1: ( '==' )
             {
-            // InternalSheepDog.g:1559:1: ( '==' )
-            // InternalSheepDog.g:1560:2: '=='
+            // InternalSheepDog.g:1507:1: ( '==' )
+            // InternalSheepDog.g:1508:2: '=='
             {
              before(grammarAccess.getScenarioAccess().getEqualsSignEqualsSignKeyword_1()); 
-            match(input,12,FOLLOW_2); 
+            match(input,10,FOLLOW_2); 
              after(grammarAccess.getScenarioAccess().getEqualsSignEqualsSignKeyword_1()); 
 
             }
@@ -5043,14 +4869,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__Group__2"
-    // InternalSheepDog.g:1569:1: rule__Scenario__Group__2 : rule__Scenario__Group__2__Impl rule__Scenario__Group__3 ;
+    // InternalSheepDog.g:1517:1: rule__Scenario__Group__2 : rule__Scenario__Group__2__Impl rule__Scenario__Group__3 ;
     public final void rule__Scenario__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1573:1: ( rule__Scenario__Group__2__Impl rule__Scenario__Group__3 )
-            // InternalSheepDog.g:1574:2: rule__Scenario__Group__2__Impl rule__Scenario__Group__3
+            // InternalSheepDog.g:1521:1: ( rule__Scenario__Group__2__Impl rule__Scenario__Group__3 )
+            // InternalSheepDog.g:1522:2: rule__Scenario__Group__2__Impl rule__Scenario__Group__3
             {
             pushFollow(FOLLOW_4);
             rule__Scenario__Group__2__Impl();
@@ -5081,20 +4907,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__Group__2__Impl"
-    // InternalSheepDog.g:1581:1: rule__Scenario__Group__2__Impl : ( 'Scenario:' ) ;
+    // InternalSheepDog.g:1529:1: rule__Scenario__Group__2__Impl : ( 'Scenario:' ) ;
     public final void rule__Scenario__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1585:1: ( ( 'Scenario:' ) )
-            // InternalSheepDog.g:1586:1: ( 'Scenario:' )
+            // InternalSheepDog.g:1533:1: ( ( 'Scenario:' ) )
+            // InternalSheepDog.g:1534:1: ( 'Scenario:' )
             {
-            // InternalSheepDog.g:1586:1: ( 'Scenario:' )
-            // InternalSheepDog.g:1587:2: 'Scenario:'
+            // InternalSheepDog.g:1534:1: ( 'Scenario:' )
+            // InternalSheepDog.g:1535:2: 'Scenario:'
             {
              before(grammarAccess.getScenarioAccess().getScenarioKeyword_2()); 
-            match(input,18,FOLLOW_2); 
+            match(input,16,FOLLOW_2); 
              after(grammarAccess.getScenarioAccess().getScenarioKeyword_2()); 
 
             }
@@ -5118,14 +4944,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__Group__3"
-    // InternalSheepDog.g:1596:1: rule__Scenario__Group__3 : rule__Scenario__Group__3__Impl rule__Scenario__Group__4 ;
+    // InternalSheepDog.g:1544:1: rule__Scenario__Group__3 : rule__Scenario__Group__3__Impl rule__Scenario__Group__4 ;
     public final void rule__Scenario__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1600:1: ( rule__Scenario__Group__3__Impl rule__Scenario__Group__4 )
-            // InternalSheepDog.g:1601:2: rule__Scenario__Group__3__Impl rule__Scenario__Group__4
+            // InternalSheepDog.g:1548:1: ( rule__Scenario__Group__3__Impl rule__Scenario__Group__4 )
+            // InternalSheepDog.g:1549:2: rule__Scenario__Group__3__Impl rule__Scenario__Group__4
             {
             pushFollow(FOLLOW_19);
             rule__Scenario__Group__3__Impl();
@@ -5156,21 +4982,21 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__Group__3__Impl"
-    // InternalSheepDog.g:1608:1: rule__Scenario__Group__3__Impl : ( ( rule__Scenario__NameAssignment_3 ) ) ;
+    // InternalSheepDog.g:1556:1: rule__Scenario__Group__3__Impl : ( ( rule__Scenario__NameAssignment_3 ) ) ;
     public final void rule__Scenario__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1612:1: ( ( ( rule__Scenario__NameAssignment_3 ) ) )
-            // InternalSheepDog.g:1613:1: ( ( rule__Scenario__NameAssignment_3 ) )
+            // InternalSheepDog.g:1560:1: ( ( ( rule__Scenario__NameAssignment_3 ) ) )
+            // InternalSheepDog.g:1561:1: ( ( rule__Scenario__NameAssignment_3 ) )
             {
-            // InternalSheepDog.g:1613:1: ( ( rule__Scenario__NameAssignment_3 ) )
-            // InternalSheepDog.g:1614:2: ( rule__Scenario__NameAssignment_3 )
+            // InternalSheepDog.g:1561:1: ( ( rule__Scenario__NameAssignment_3 ) )
+            // InternalSheepDog.g:1562:2: ( rule__Scenario__NameAssignment_3 )
             {
              before(grammarAccess.getScenarioAccess().getNameAssignment_3()); 
-            // InternalSheepDog.g:1615:2: ( rule__Scenario__NameAssignment_3 )
-            // InternalSheepDog.g:1615:3: rule__Scenario__NameAssignment_3
+            // InternalSheepDog.g:1563:2: ( rule__Scenario__NameAssignment_3 )
+            // InternalSheepDog.g:1563:3: rule__Scenario__NameAssignment_3
             {
             pushFollow(FOLLOW_2);
             rule__Scenario__NameAssignment_3();
@@ -5203,14 +5029,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__Group__4"
-    // InternalSheepDog.g:1623:1: rule__Scenario__Group__4 : rule__Scenario__Group__4__Impl rule__Scenario__Group__5 ;
+    // InternalSheepDog.g:1571:1: rule__Scenario__Group__4 : rule__Scenario__Group__4__Impl rule__Scenario__Group__5 ;
     public final void rule__Scenario__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1627:1: ( rule__Scenario__Group__4__Impl rule__Scenario__Group__5 )
-            // InternalSheepDog.g:1628:2: rule__Scenario__Group__4__Impl rule__Scenario__Group__5
+            // InternalSheepDog.g:1575:1: ( rule__Scenario__Group__4__Impl rule__Scenario__Group__5 )
+            // InternalSheepDog.g:1576:2: rule__Scenario__Group__4__Impl rule__Scenario__Group__5
             {
             pushFollow(FOLLOW_19);
             rule__Scenario__Group__4__Impl();
@@ -5241,33 +5067,33 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__Group__4__Impl"
-    // InternalSheepDog.g:1635:1: rule__Scenario__Group__4__Impl : ( ( rule__Scenario__StatementsAssignment_4 )* ) ;
+    // InternalSheepDog.g:1583:1: rule__Scenario__Group__4__Impl : ( ( rule__Scenario__StatementsAssignment_4 )* ) ;
     public final void rule__Scenario__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1639:1: ( ( ( rule__Scenario__StatementsAssignment_4 )* ) )
-            // InternalSheepDog.g:1640:1: ( ( rule__Scenario__StatementsAssignment_4 )* )
+            // InternalSheepDog.g:1587:1: ( ( ( rule__Scenario__StatementsAssignment_4 )* ) )
+            // InternalSheepDog.g:1588:1: ( ( rule__Scenario__StatementsAssignment_4 )* )
             {
-            // InternalSheepDog.g:1640:1: ( ( rule__Scenario__StatementsAssignment_4 )* )
-            // InternalSheepDog.g:1641:2: ( rule__Scenario__StatementsAssignment_4 )*
+            // InternalSheepDog.g:1588:1: ( ( rule__Scenario__StatementsAssignment_4 )* )
+            // InternalSheepDog.g:1589:2: ( rule__Scenario__StatementsAssignment_4 )*
             {
              before(grammarAccess.getScenarioAccess().getStatementsAssignment_4()); 
-            // InternalSheepDog.g:1642:2: ( rule__Scenario__StatementsAssignment_4 )*
-            loop20:
+            // InternalSheepDog.g:1590:2: ( rule__Scenario__StatementsAssignment_4 )*
+            loop19:
             do {
-                int alt20=2;
-                int LA20_0 = input.LA(1);
+                int alt19=2;
+                int LA19_0 = input.LA(1);
 
-                if ( ((LA20_0>=RULE_WORD && LA20_0<=RULE_STRING)) ) {
-                    alt20=1;
+                if ( (LA19_0==RULE_WORD) ) {
+                    alt19=1;
                 }
 
 
-                switch (alt20) {
+                switch (alt19) {
             	case 1 :
-            	    // InternalSheepDog.g:1642:3: rule__Scenario__StatementsAssignment_4
+            	    // InternalSheepDog.g:1590:3: rule__Scenario__StatementsAssignment_4
             	    {
             	    pushFollow(FOLLOW_6);
             	    rule__Scenario__StatementsAssignment_4();
@@ -5279,7 +5105,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop20;
+            	    break loop19;
                 }
             } while (true);
 
@@ -5306,14 +5132,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__Group__5"
-    // InternalSheepDog.g:1650:1: rule__Scenario__Group__5 : rule__Scenario__Group__5__Impl rule__Scenario__Group__6 ;
+    // InternalSheepDog.g:1598:1: rule__Scenario__Group__5 : rule__Scenario__Group__5__Impl rule__Scenario__Group__6 ;
     public final void rule__Scenario__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1654:1: ( rule__Scenario__Group__5__Impl rule__Scenario__Group__6 )
-            // InternalSheepDog.g:1655:2: rule__Scenario__Group__5__Impl rule__Scenario__Group__6
+            // InternalSheepDog.g:1602:1: ( rule__Scenario__Group__5__Impl rule__Scenario__Group__6 )
+            // InternalSheepDog.g:1603:2: rule__Scenario__Group__5__Impl rule__Scenario__Group__6
             {
             pushFollow(FOLLOW_19);
             rule__Scenario__Group__5__Impl();
@@ -5344,39 +5170,39 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__Group__5__Impl"
-    // InternalSheepDog.g:1662:1: rule__Scenario__Group__5__Impl : ( ( rule__Scenario__StepsAssignment_5 )* ) ;
+    // InternalSheepDog.g:1610:1: rule__Scenario__Group__5__Impl : ( ( rule__Scenario__StepsAssignment_5 )* ) ;
     public final void rule__Scenario__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1666:1: ( ( ( rule__Scenario__StepsAssignment_5 )* ) )
-            // InternalSheepDog.g:1667:1: ( ( rule__Scenario__StepsAssignment_5 )* )
+            // InternalSheepDog.g:1614:1: ( ( ( rule__Scenario__StepsAssignment_5 )* ) )
+            // InternalSheepDog.g:1615:1: ( ( rule__Scenario__StepsAssignment_5 )* )
             {
-            // InternalSheepDog.g:1667:1: ( ( rule__Scenario__StepsAssignment_5 )* )
-            // InternalSheepDog.g:1668:2: ( rule__Scenario__StepsAssignment_5 )*
+            // InternalSheepDog.g:1615:1: ( ( rule__Scenario__StepsAssignment_5 )* )
+            // InternalSheepDog.g:1616:2: ( rule__Scenario__StepsAssignment_5 )*
             {
              before(grammarAccess.getScenarioAccess().getStepsAssignment_5()); 
-            // InternalSheepDog.g:1669:2: ( rule__Scenario__StepsAssignment_5 )*
-            loop21:
+            // InternalSheepDog.g:1617:2: ( rule__Scenario__StepsAssignment_5 )*
+            loop20:
             do {
-                int alt21=2;
-                int LA21_0 = input.LA(1);
+                int alt20=2;
+                int LA20_0 = input.LA(1);
 
-                if ( (LA21_0==14) ) {
-                    int LA21_2 = input.LA(2);
+                if ( (LA20_0==12) ) {
+                    int LA20_2 = input.LA(2);
 
-                    if ( ((LA21_2>=20 && LA21_2<=23)) ) {
-                        alt21=1;
+                    if ( ((LA20_2>=18 && LA20_2<=21)) ) {
+                        alt20=1;
                     }
 
 
                 }
 
 
-                switch (alt21) {
+                switch (alt20) {
             	case 1 :
-            	    // InternalSheepDog.g:1669:3: rule__Scenario__StepsAssignment_5
+            	    // InternalSheepDog.g:1617:3: rule__Scenario__StepsAssignment_5
             	    {
             	    pushFollow(FOLLOW_10);
             	    rule__Scenario__StepsAssignment_5();
@@ -5388,7 +5214,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop21;
+            	    break loop20;
                 }
             } while (true);
 
@@ -5415,14 +5241,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__Group__6"
-    // InternalSheepDog.g:1677:1: rule__Scenario__Group__6 : rule__Scenario__Group__6__Impl ;
+    // InternalSheepDog.g:1625:1: rule__Scenario__Group__6 : rule__Scenario__Group__6__Impl ;
     public final void rule__Scenario__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1681:1: ( rule__Scenario__Group__6__Impl )
-            // InternalSheepDog.g:1682:2: rule__Scenario__Group__6__Impl
+            // InternalSheepDog.g:1629:1: ( rule__Scenario__Group__6__Impl )
+            // InternalSheepDog.g:1630:2: rule__Scenario__Group__6__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Scenario__Group__6__Impl();
@@ -5448,27 +5274,27 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__Group__6__Impl"
-    // InternalSheepDog.g:1688:1: rule__Scenario__Group__6__Impl : ( ( rule__Scenario__ExamplesAssignment_6 )* ) ;
+    // InternalSheepDog.g:1636:1: rule__Scenario__Group__6__Impl : ( ( rule__Scenario__ExamplesAssignment_6 )* ) ;
     public final void rule__Scenario__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1692:1: ( ( ( rule__Scenario__ExamplesAssignment_6 )* ) )
-            // InternalSheepDog.g:1693:1: ( ( rule__Scenario__ExamplesAssignment_6 )* )
+            // InternalSheepDog.g:1640:1: ( ( ( rule__Scenario__ExamplesAssignment_6 )* ) )
+            // InternalSheepDog.g:1641:1: ( ( rule__Scenario__ExamplesAssignment_6 )* )
             {
-            // InternalSheepDog.g:1693:1: ( ( rule__Scenario__ExamplesAssignment_6 )* )
-            // InternalSheepDog.g:1694:2: ( rule__Scenario__ExamplesAssignment_6 )*
+            // InternalSheepDog.g:1641:1: ( ( rule__Scenario__ExamplesAssignment_6 )* )
+            // InternalSheepDog.g:1642:2: ( rule__Scenario__ExamplesAssignment_6 )*
             {
              before(grammarAccess.getScenarioAccess().getExamplesAssignment_6()); 
-            // InternalSheepDog.g:1695:2: ( rule__Scenario__ExamplesAssignment_6 )*
-            loop22:
+            // InternalSheepDog.g:1643:2: ( rule__Scenario__ExamplesAssignment_6 )*
+            loop21:
             do {
-                int alt22=2;
-                alt22 = dfa22.predict(input);
-                switch (alt22) {
+                int alt21=2;
+                alt21 = dfa21.predict(input);
+                switch (alt21) {
             	case 1 :
-            	    // InternalSheepDog.g:1695:3: rule__Scenario__ExamplesAssignment_6
+            	    // InternalSheepDog.g:1643:3: rule__Scenario__ExamplesAssignment_6
             	    {
             	    pushFollow(FOLLOW_20);
             	    rule__Scenario__ExamplesAssignment_6();
@@ -5480,7 +5306,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop22;
+            	    break loop21;
                 }
             } while (true);
 
@@ -5507,14 +5333,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__Group__0"
-    // InternalSheepDog.g:1704:1: rule__Examples__Group__0 : rule__Examples__Group__0__Impl rule__Examples__Group__1 ;
+    // InternalSheepDog.g:1652:1: rule__Examples__Group__0 : rule__Examples__Group__0__Impl rule__Examples__Group__1 ;
     public final void rule__Examples__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1708:1: ( rule__Examples__Group__0__Impl rule__Examples__Group__1 )
-            // InternalSheepDog.g:1709:2: rule__Examples__Group__0__Impl rule__Examples__Group__1
+            // InternalSheepDog.g:1656:1: ( rule__Examples__Group__0__Impl rule__Examples__Group__1 )
+            // InternalSheepDog.g:1657:2: rule__Examples__Group__0__Impl rule__Examples__Group__1
             {
             pushFollow(FOLLOW_21);
             rule__Examples__Group__0__Impl();
@@ -5545,29 +5371,29 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__Group__0__Impl"
-    // InternalSheepDog.g:1716:1: rule__Examples__Group__0__Impl : ( ( rule__Examples__TagsAssignment_0 )? ) ;
+    // InternalSheepDog.g:1664:1: rule__Examples__Group__0__Impl : ( ( rule__Examples__TagsAssignment_0 )? ) ;
     public final void rule__Examples__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1720:1: ( ( ( rule__Examples__TagsAssignment_0 )? ) )
-            // InternalSheepDog.g:1721:1: ( ( rule__Examples__TagsAssignment_0 )? )
+            // InternalSheepDog.g:1668:1: ( ( ( rule__Examples__TagsAssignment_0 )? ) )
+            // InternalSheepDog.g:1669:1: ( ( rule__Examples__TagsAssignment_0 )? )
             {
-            // InternalSheepDog.g:1721:1: ( ( rule__Examples__TagsAssignment_0 )? )
-            // InternalSheepDog.g:1722:2: ( rule__Examples__TagsAssignment_0 )?
+            // InternalSheepDog.g:1669:1: ( ( rule__Examples__TagsAssignment_0 )? )
+            // InternalSheepDog.g:1670:2: ( rule__Examples__TagsAssignment_0 )?
             {
              before(grammarAccess.getExamplesAccess().getTagsAssignment_0()); 
-            // InternalSheepDog.g:1723:2: ( rule__Examples__TagsAssignment_0 )?
-            int alt23=2;
-            int LA23_0 = input.LA(1);
+            // InternalSheepDog.g:1671:2: ( rule__Examples__TagsAssignment_0 )?
+            int alt22=2;
+            int LA22_0 = input.LA(1);
 
-            if ( (LA23_0==27) ) {
-                alt23=1;
+            if ( (LA22_0==25) ) {
+                alt22=1;
             }
-            switch (alt23) {
+            switch (alt22) {
                 case 1 :
-                    // InternalSheepDog.g:1723:3: rule__Examples__TagsAssignment_0
+                    // InternalSheepDog.g:1671:3: rule__Examples__TagsAssignment_0
                     {
                     pushFollow(FOLLOW_2);
                     rule__Examples__TagsAssignment_0();
@@ -5603,14 +5429,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__Group__1"
-    // InternalSheepDog.g:1731:1: rule__Examples__Group__1 : rule__Examples__Group__1__Impl rule__Examples__Group__2 ;
+    // InternalSheepDog.g:1679:1: rule__Examples__Group__1 : rule__Examples__Group__1__Impl rule__Examples__Group__2 ;
     public final void rule__Examples__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1735:1: ( rule__Examples__Group__1__Impl rule__Examples__Group__2 )
-            // InternalSheepDog.g:1736:2: rule__Examples__Group__1__Impl rule__Examples__Group__2
+            // InternalSheepDog.g:1683:1: ( rule__Examples__Group__1__Impl rule__Examples__Group__2 )
+            // InternalSheepDog.g:1684:2: rule__Examples__Group__1__Impl rule__Examples__Group__2
             {
             pushFollow(FOLLOW_22);
             rule__Examples__Group__1__Impl();
@@ -5641,20 +5467,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__Group__1__Impl"
-    // InternalSheepDog.g:1743:1: rule__Examples__Group__1__Impl : ( '===' ) ;
+    // InternalSheepDog.g:1691:1: rule__Examples__Group__1__Impl : ( '===' ) ;
     public final void rule__Examples__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1747:1: ( ( '===' ) )
-            // InternalSheepDog.g:1748:1: ( '===' )
+            // InternalSheepDog.g:1695:1: ( ( '===' ) )
+            // InternalSheepDog.g:1696:1: ( '===' )
             {
-            // InternalSheepDog.g:1748:1: ( '===' )
-            // InternalSheepDog.g:1749:2: '==='
+            // InternalSheepDog.g:1696:1: ( '===' )
+            // InternalSheepDog.g:1697:2: '==='
             {
              before(grammarAccess.getExamplesAccess().getEqualsSignEqualsSignEqualsSignKeyword_1()); 
-            match(input,14,FOLLOW_2); 
+            match(input,12,FOLLOW_2); 
              after(grammarAccess.getExamplesAccess().getEqualsSignEqualsSignEqualsSignKeyword_1()); 
 
             }
@@ -5678,14 +5504,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__Group__2"
-    // InternalSheepDog.g:1758:1: rule__Examples__Group__2 : rule__Examples__Group__2__Impl rule__Examples__Group__3 ;
+    // InternalSheepDog.g:1706:1: rule__Examples__Group__2 : rule__Examples__Group__2__Impl rule__Examples__Group__3 ;
     public final void rule__Examples__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1762:1: ( rule__Examples__Group__2__Impl rule__Examples__Group__3 )
-            // InternalSheepDog.g:1763:2: rule__Examples__Group__2__Impl rule__Examples__Group__3
+            // InternalSheepDog.g:1710:1: ( rule__Examples__Group__2__Impl rule__Examples__Group__3 )
+            // InternalSheepDog.g:1711:2: rule__Examples__Group__2__Impl rule__Examples__Group__3
             {
             pushFollow(FOLLOW_4);
             rule__Examples__Group__2__Impl();
@@ -5716,20 +5542,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__Group__2__Impl"
-    // InternalSheepDog.g:1770:1: rule__Examples__Group__2__Impl : ( 'Examples:' ) ;
+    // InternalSheepDog.g:1718:1: rule__Examples__Group__2__Impl : ( 'Examples:' ) ;
     public final void rule__Examples__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1774:1: ( ( 'Examples:' ) )
-            // InternalSheepDog.g:1775:1: ( 'Examples:' )
+            // InternalSheepDog.g:1722:1: ( ( 'Examples:' ) )
+            // InternalSheepDog.g:1723:1: ( 'Examples:' )
             {
-            // InternalSheepDog.g:1775:1: ( 'Examples:' )
-            // InternalSheepDog.g:1776:2: 'Examples:'
+            // InternalSheepDog.g:1723:1: ( 'Examples:' )
+            // InternalSheepDog.g:1724:2: 'Examples:'
             {
              before(grammarAccess.getExamplesAccess().getExamplesKeyword_2()); 
-            match(input,19,FOLLOW_2); 
+            match(input,17,FOLLOW_2); 
              after(grammarAccess.getExamplesAccess().getExamplesKeyword_2()); 
 
             }
@@ -5753,14 +5579,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__Group__3"
-    // InternalSheepDog.g:1785:1: rule__Examples__Group__3 : rule__Examples__Group__3__Impl rule__Examples__Group__4 ;
+    // InternalSheepDog.g:1733:1: rule__Examples__Group__3 : rule__Examples__Group__3__Impl rule__Examples__Group__4 ;
     public final void rule__Examples__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1789:1: ( rule__Examples__Group__3__Impl rule__Examples__Group__4 )
-            // InternalSheepDog.g:1790:2: rule__Examples__Group__3__Impl rule__Examples__Group__4
+            // InternalSheepDog.g:1737:1: ( rule__Examples__Group__3__Impl rule__Examples__Group__4 )
+            // InternalSheepDog.g:1738:2: rule__Examples__Group__3__Impl rule__Examples__Group__4
             {
             pushFollow(FOLLOW_12);
             rule__Examples__Group__3__Impl();
@@ -5791,21 +5617,21 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__Group__3__Impl"
-    // InternalSheepDog.g:1797:1: rule__Examples__Group__3__Impl : ( ( rule__Examples__NameAssignment_3 ) ) ;
+    // InternalSheepDog.g:1745:1: rule__Examples__Group__3__Impl : ( ( rule__Examples__NameAssignment_3 ) ) ;
     public final void rule__Examples__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1801:1: ( ( ( rule__Examples__NameAssignment_3 ) ) )
-            // InternalSheepDog.g:1802:1: ( ( rule__Examples__NameAssignment_3 ) )
+            // InternalSheepDog.g:1749:1: ( ( ( rule__Examples__NameAssignment_3 ) ) )
+            // InternalSheepDog.g:1750:1: ( ( rule__Examples__NameAssignment_3 ) )
             {
-            // InternalSheepDog.g:1802:1: ( ( rule__Examples__NameAssignment_3 ) )
-            // InternalSheepDog.g:1803:2: ( rule__Examples__NameAssignment_3 )
+            // InternalSheepDog.g:1750:1: ( ( rule__Examples__NameAssignment_3 ) )
+            // InternalSheepDog.g:1751:2: ( rule__Examples__NameAssignment_3 )
             {
              before(grammarAccess.getExamplesAccess().getNameAssignment_3()); 
-            // InternalSheepDog.g:1804:2: ( rule__Examples__NameAssignment_3 )
-            // InternalSheepDog.g:1804:3: rule__Examples__NameAssignment_3
+            // InternalSheepDog.g:1752:2: ( rule__Examples__NameAssignment_3 )
+            // InternalSheepDog.g:1752:3: rule__Examples__NameAssignment_3
             {
             pushFollow(FOLLOW_2);
             rule__Examples__NameAssignment_3();
@@ -5838,14 +5664,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__Group__4"
-    // InternalSheepDog.g:1812:1: rule__Examples__Group__4 : rule__Examples__Group__4__Impl rule__Examples__Group__5 ;
+    // InternalSheepDog.g:1760:1: rule__Examples__Group__4 : rule__Examples__Group__4__Impl rule__Examples__Group__5 ;
     public final void rule__Examples__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1816:1: ( rule__Examples__Group__4__Impl rule__Examples__Group__5 )
-            // InternalSheepDog.g:1817:2: rule__Examples__Group__4__Impl rule__Examples__Group__5
+            // InternalSheepDog.g:1764:1: ( rule__Examples__Group__4__Impl rule__Examples__Group__5 )
+            // InternalSheepDog.g:1765:2: rule__Examples__Group__4__Impl rule__Examples__Group__5
             {
             pushFollow(FOLLOW_12);
             rule__Examples__Group__4__Impl();
@@ -5876,33 +5702,33 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__Group__4__Impl"
-    // InternalSheepDog.g:1824:1: rule__Examples__Group__4__Impl : ( ( rule__Examples__StatementsAssignment_4 )* ) ;
+    // InternalSheepDog.g:1772:1: rule__Examples__Group__4__Impl : ( ( rule__Examples__StatementsAssignment_4 )* ) ;
     public final void rule__Examples__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1828:1: ( ( ( rule__Examples__StatementsAssignment_4 )* ) )
-            // InternalSheepDog.g:1829:1: ( ( rule__Examples__StatementsAssignment_4 )* )
+            // InternalSheepDog.g:1776:1: ( ( ( rule__Examples__StatementsAssignment_4 )* ) )
+            // InternalSheepDog.g:1777:1: ( ( rule__Examples__StatementsAssignment_4 )* )
             {
-            // InternalSheepDog.g:1829:1: ( ( rule__Examples__StatementsAssignment_4 )* )
-            // InternalSheepDog.g:1830:2: ( rule__Examples__StatementsAssignment_4 )*
+            // InternalSheepDog.g:1777:1: ( ( rule__Examples__StatementsAssignment_4 )* )
+            // InternalSheepDog.g:1778:2: ( rule__Examples__StatementsAssignment_4 )*
             {
              before(grammarAccess.getExamplesAccess().getStatementsAssignment_4()); 
-            // InternalSheepDog.g:1831:2: ( rule__Examples__StatementsAssignment_4 )*
-            loop24:
+            // InternalSheepDog.g:1779:2: ( rule__Examples__StatementsAssignment_4 )*
+            loop23:
             do {
-                int alt24=2;
-                int LA24_0 = input.LA(1);
+                int alt23=2;
+                int LA23_0 = input.LA(1);
 
-                if ( ((LA24_0>=RULE_WORD && LA24_0<=RULE_STRING)) ) {
-                    alt24=1;
+                if ( (LA23_0==RULE_WORD) ) {
+                    alt23=1;
                 }
 
 
-                switch (alt24) {
+                switch (alt23) {
             	case 1 :
-            	    // InternalSheepDog.g:1831:3: rule__Examples__StatementsAssignment_4
+            	    // InternalSheepDog.g:1779:3: rule__Examples__StatementsAssignment_4
             	    {
             	    pushFollow(FOLLOW_6);
             	    rule__Examples__StatementsAssignment_4();
@@ -5914,7 +5740,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop24;
+            	    break loop23;
                 }
             } while (true);
 
@@ -5941,14 +5767,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__Group__5"
-    // InternalSheepDog.g:1839:1: rule__Examples__Group__5 : rule__Examples__Group__5__Impl ;
+    // InternalSheepDog.g:1787:1: rule__Examples__Group__5 : rule__Examples__Group__5__Impl ;
     public final void rule__Examples__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1843:1: ( rule__Examples__Group__5__Impl )
-            // InternalSheepDog.g:1844:2: rule__Examples__Group__5__Impl
+            // InternalSheepDog.g:1791:1: ( rule__Examples__Group__5__Impl )
+            // InternalSheepDog.g:1792:2: rule__Examples__Group__5__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Examples__Group__5__Impl();
@@ -5974,21 +5800,21 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__Group__5__Impl"
-    // InternalSheepDog.g:1850:1: rule__Examples__Group__5__Impl : ( ( rule__Examples__TheExamplesTableAssignment_5 ) ) ;
+    // InternalSheepDog.g:1798:1: rule__Examples__Group__5__Impl : ( ( rule__Examples__TheExamplesTableAssignment_5 ) ) ;
     public final void rule__Examples__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1854:1: ( ( ( rule__Examples__TheExamplesTableAssignment_5 ) ) )
-            // InternalSheepDog.g:1855:1: ( ( rule__Examples__TheExamplesTableAssignment_5 ) )
+            // InternalSheepDog.g:1802:1: ( ( ( rule__Examples__TheExamplesTableAssignment_5 ) ) )
+            // InternalSheepDog.g:1803:1: ( ( rule__Examples__TheExamplesTableAssignment_5 ) )
             {
-            // InternalSheepDog.g:1855:1: ( ( rule__Examples__TheExamplesTableAssignment_5 ) )
-            // InternalSheepDog.g:1856:2: ( rule__Examples__TheExamplesTableAssignment_5 )
+            // InternalSheepDog.g:1803:1: ( ( rule__Examples__TheExamplesTableAssignment_5 ) )
+            // InternalSheepDog.g:1804:2: ( rule__Examples__TheExamplesTableAssignment_5 )
             {
              before(grammarAccess.getExamplesAccess().getTheExamplesTableAssignment_5()); 
-            // InternalSheepDog.g:1857:2: ( rule__Examples__TheExamplesTableAssignment_5 )
-            // InternalSheepDog.g:1857:3: rule__Examples__TheExamplesTableAssignment_5
+            // InternalSheepDog.g:1805:2: ( rule__Examples__TheExamplesTableAssignment_5 )
+            // InternalSheepDog.g:1805:3: rule__Examples__TheExamplesTableAssignment_5
             {
             pushFollow(FOLLOW_2);
             rule__Examples__TheExamplesTableAssignment_5();
@@ -6021,14 +5847,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__Group__0"
-    // InternalSheepDog.g:1866:1: rule__Given__Group__0 : rule__Given__Group__0__Impl rule__Given__Group__1 ;
+    // InternalSheepDog.g:1814:1: rule__Given__Group__0 : rule__Given__Group__0__Impl rule__Given__Group__1 ;
     public final void rule__Given__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1870:1: ( rule__Given__Group__0__Impl rule__Given__Group__1 )
-            // InternalSheepDog.g:1871:2: rule__Given__Group__0__Impl rule__Given__Group__1
+            // InternalSheepDog.g:1818:1: ( rule__Given__Group__0__Impl rule__Given__Group__1 )
+            // InternalSheepDog.g:1819:2: rule__Given__Group__0__Impl rule__Given__Group__1
             {
             pushFollow(FOLLOW_23);
             rule__Given__Group__0__Impl();
@@ -6059,20 +5885,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__Group__0__Impl"
-    // InternalSheepDog.g:1878:1: rule__Given__Group__0__Impl : ( '===' ) ;
+    // InternalSheepDog.g:1826:1: rule__Given__Group__0__Impl : ( '===' ) ;
     public final void rule__Given__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1882:1: ( ( '===' ) )
-            // InternalSheepDog.g:1883:1: ( '===' )
+            // InternalSheepDog.g:1830:1: ( ( '===' ) )
+            // InternalSheepDog.g:1831:1: ( '===' )
             {
-            // InternalSheepDog.g:1883:1: ( '===' )
-            // InternalSheepDog.g:1884:2: '==='
+            // InternalSheepDog.g:1831:1: ( '===' )
+            // InternalSheepDog.g:1832:2: '==='
             {
              before(grammarAccess.getGivenAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
-            match(input,14,FOLLOW_2); 
+            match(input,12,FOLLOW_2); 
              after(grammarAccess.getGivenAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
 
             }
@@ -6096,14 +5922,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__Group__1"
-    // InternalSheepDog.g:1893:1: rule__Given__Group__1 : rule__Given__Group__1__Impl rule__Given__Group__2 ;
+    // InternalSheepDog.g:1841:1: rule__Given__Group__1 : rule__Given__Group__1__Impl rule__Given__Group__2 ;
     public final void rule__Given__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1897:1: ( rule__Given__Group__1__Impl rule__Given__Group__2 )
-            // InternalSheepDog.g:1898:2: rule__Given__Group__1__Impl rule__Given__Group__2
+            // InternalSheepDog.g:1845:1: ( rule__Given__Group__1__Impl rule__Given__Group__2 )
+            // InternalSheepDog.g:1846:2: rule__Given__Group__1__Impl rule__Given__Group__2
             {
             pushFollow(FOLLOW_4);
             rule__Given__Group__1__Impl();
@@ -6134,20 +5960,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__Group__1__Impl"
-    // InternalSheepDog.g:1905:1: rule__Given__Group__1__Impl : ( 'Given' ) ;
+    // InternalSheepDog.g:1853:1: rule__Given__Group__1__Impl : ( 'Given' ) ;
     public final void rule__Given__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1909:1: ( ( 'Given' ) )
-            // InternalSheepDog.g:1910:1: ( 'Given' )
+            // InternalSheepDog.g:1857:1: ( ( 'Given' ) )
+            // InternalSheepDog.g:1858:1: ( 'Given' )
             {
-            // InternalSheepDog.g:1910:1: ( 'Given' )
-            // InternalSheepDog.g:1911:2: 'Given'
+            // InternalSheepDog.g:1858:1: ( 'Given' )
+            // InternalSheepDog.g:1859:2: 'Given'
             {
              before(grammarAccess.getGivenAccess().getGivenKeyword_1()); 
-            match(input,20,FOLLOW_2); 
+            match(input,18,FOLLOW_2); 
              after(grammarAccess.getGivenAccess().getGivenKeyword_1()); 
 
             }
@@ -6171,14 +5997,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__Group__2"
-    // InternalSheepDog.g:1920:1: rule__Given__Group__2 : rule__Given__Group__2__Impl rule__Given__Group__3 ;
+    // InternalSheepDog.g:1868:1: rule__Given__Group__2 : rule__Given__Group__2__Impl rule__Given__Group__3 ;
     public final void rule__Given__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1924:1: ( rule__Given__Group__2__Impl rule__Given__Group__3 )
-            // InternalSheepDog.g:1925:2: rule__Given__Group__2__Impl rule__Given__Group__3
+            // InternalSheepDog.g:1872:1: ( rule__Given__Group__2__Impl rule__Given__Group__3 )
+            // InternalSheepDog.g:1873:2: rule__Given__Group__2__Impl rule__Given__Group__3
             {
             pushFollow(FOLLOW_24);
             rule__Given__Group__2__Impl();
@@ -6209,21 +6035,21 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__Group__2__Impl"
-    // InternalSheepDog.g:1932:1: rule__Given__Group__2__Impl : ( ( rule__Given__NameAssignment_2 ) ) ;
+    // InternalSheepDog.g:1880:1: rule__Given__Group__2__Impl : ( ( rule__Given__NameAssignment_2 ) ) ;
     public final void rule__Given__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1936:1: ( ( ( rule__Given__NameAssignment_2 ) ) )
-            // InternalSheepDog.g:1937:1: ( ( rule__Given__NameAssignment_2 ) )
+            // InternalSheepDog.g:1884:1: ( ( ( rule__Given__NameAssignment_2 ) ) )
+            // InternalSheepDog.g:1885:1: ( ( rule__Given__NameAssignment_2 ) )
             {
-            // InternalSheepDog.g:1937:1: ( ( rule__Given__NameAssignment_2 ) )
-            // InternalSheepDog.g:1938:2: ( rule__Given__NameAssignment_2 )
+            // InternalSheepDog.g:1885:1: ( ( rule__Given__NameAssignment_2 ) )
+            // InternalSheepDog.g:1886:2: ( rule__Given__NameAssignment_2 )
             {
              before(grammarAccess.getGivenAccess().getNameAssignment_2()); 
-            // InternalSheepDog.g:1939:2: ( rule__Given__NameAssignment_2 )
-            // InternalSheepDog.g:1939:3: rule__Given__NameAssignment_2
+            // InternalSheepDog.g:1887:2: ( rule__Given__NameAssignment_2 )
+            // InternalSheepDog.g:1887:3: rule__Given__NameAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__Given__NameAssignment_2();
@@ -6256,14 +6082,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__Group__3"
-    // InternalSheepDog.g:1947:1: rule__Given__Group__3 : rule__Given__Group__3__Impl ;
+    // InternalSheepDog.g:1895:1: rule__Given__Group__3 : rule__Given__Group__3__Impl ;
     public final void rule__Given__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1951:1: ( rule__Given__Group__3__Impl )
-            // InternalSheepDog.g:1952:2: rule__Given__Group__3__Impl
+            // InternalSheepDog.g:1899:1: ( rule__Given__Group__3__Impl )
+            // InternalSheepDog.g:1900:2: rule__Given__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Given__Group__3__Impl();
@@ -6289,29 +6115,29 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__Group__3__Impl"
-    // InternalSheepDog.g:1958:1: rule__Given__Group__3__Impl : ( ( rule__Given__Alternatives_3 )? ) ;
+    // InternalSheepDog.g:1906:1: rule__Given__Group__3__Impl : ( ( rule__Given__Alternatives_3 )? ) ;
     public final void rule__Given__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1962:1: ( ( ( rule__Given__Alternatives_3 )? ) )
-            // InternalSheepDog.g:1963:1: ( ( rule__Given__Alternatives_3 )? )
+            // InternalSheepDog.g:1910:1: ( ( ( rule__Given__Alternatives_3 )? ) )
+            // InternalSheepDog.g:1911:1: ( ( rule__Given__Alternatives_3 )? )
             {
-            // InternalSheepDog.g:1963:1: ( ( rule__Given__Alternatives_3 )? )
-            // InternalSheepDog.g:1964:2: ( rule__Given__Alternatives_3 )?
+            // InternalSheepDog.g:1911:1: ( ( rule__Given__Alternatives_3 )? )
+            // InternalSheepDog.g:1912:2: ( rule__Given__Alternatives_3 )?
             {
              before(grammarAccess.getGivenAccess().getAlternatives_3()); 
-            // InternalSheepDog.g:1965:2: ( rule__Given__Alternatives_3 )?
-            int alt25=2;
-            int LA25_0 = input.LA(1);
+            // InternalSheepDog.g:1913:2: ( rule__Given__Alternatives_3 )?
+            int alt24=2;
+            int LA24_0 = input.LA(1);
 
-            if ( ((LA25_0>=24 && LA25_0<=25)) ) {
-                alt25=1;
+            if ( ((LA24_0>=22 && LA24_0<=23)) ) {
+                alt24=1;
             }
-            switch (alt25) {
+            switch (alt24) {
                 case 1 :
-                    // InternalSheepDog.g:1965:3: rule__Given__Alternatives_3
+                    // InternalSheepDog.g:1913:3: rule__Given__Alternatives_3
                     {
                     pushFollow(FOLLOW_2);
                     rule__Given__Alternatives_3();
@@ -6347,14 +6173,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__Group__0"
-    // InternalSheepDog.g:1974:1: rule__When__Group__0 : rule__When__Group__0__Impl rule__When__Group__1 ;
+    // InternalSheepDog.g:1922:1: rule__When__Group__0 : rule__When__Group__0__Impl rule__When__Group__1 ;
     public final void rule__When__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1978:1: ( rule__When__Group__0__Impl rule__When__Group__1 )
-            // InternalSheepDog.g:1979:2: rule__When__Group__0__Impl rule__When__Group__1
+            // InternalSheepDog.g:1926:1: ( rule__When__Group__0__Impl rule__When__Group__1 )
+            // InternalSheepDog.g:1927:2: rule__When__Group__0__Impl rule__When__Group__1
             {
             pushFollow(FOLLOW_25);
             rule__When__Group__0__Impl();
@@ -6385,20 +6211,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__Group__0__Impl"
-    // InternalSheepDog.g:1986:1: rule__When__Group__0__Impl : ( '===' ) ;
+    // InternalSheepDog.g:1934:1: rule__When__Group__0__Impl : ( '===' ) ;
     public final void rule__When__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:1990:1: ( ( '===' ) )
-            // InternalSheepDog.g:1991:1: ( '===' )
+            // InternalSheepDog.g:1938:1: ( ( '===' ) )
+            // InternalSheepDog.g:1939:1: ( '===' )
             {
-            // InternalSheepDog.g:1991:1: ( '===' )
-            // InternalSheepDog.g:1992:2: '==='
+            // InternalSheepDog.g:1939:1: ( '===' )
+            // InternalSheepDog.g:1940:2: '==='
             {
              before(grammarAccess.getWhenAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
-            match(input,14,FOLLOW_2); 
+            match(input,12,FOLLOW_2); 
              after(grammarAccess.getWhenAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
 
             }
@@ -6422,14 +6248,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__Group__1"
-    // InternalSheepDog.g:2001:1: rule__When__Group__1 : rule__When__Group__1__Impl rule__When__Group__2 ;
+    // InternalSheepDog.g:1949:1: rule__When__Group__1 : rule__When__Group__1__Impl rule__When__Group__2 ;
     public final void rule__When__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2005:1: ( rule__When__Group__1__Impl rule__When__Group__2 )
-            // InternalSheepDog.g:2006:2: rule__When__Group__1__Impl rule__When__Group__2
+            // InternalSheepDog.g:1953:1: ( rule__When__Group__1__Impl rule__When__Group__2 )
+            // InternalSheepDog.g:1954:2: rule__When__Group__1__Impl rule__When__Group__2
             {
             pushFollow(FOLLOW_4);
             rule__When__Group__1__Impl();
@@ -6460,20 +6286,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__Group__1__Impl"
-    // InternalSheepDog.g:2013:1: rule__When__Group__1__Impl : ( 'When' ) ;
+    // InternalSheepDog.g:1961:1: rule__When__Group__1__Impl : ( 'When' ) ;
     public final void rule__When__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2017:1: ( ( 'When' ) )
-            // InternalSheepDog.g:2018:1: ( 'When' )
+            // InternalSheepDog.g:1965:1: ( ( 'When' ) )
+            // InternalSheepDog.g:1966:1: ( 'When' )
             {
-            // InternalSheepDog.g:2018:1: ( 'When' )
-            // InternalSheepDog.g:2019:2: 'When'
+            // InternalSheepDog.g:1966:1: ( 'When' )
+            // InternalSheepDog.g:1967:2: 'When'
             {
              before(grammarAccess.getWhenAccess().getWhenKeyword_1()); 
-            match(input,21,FOLLOW_2); 
+            match(input,19,FOLLOW_2); 
              after(grammarAccess.getWhenAccess().getWhenKeyword_1()); 
 
             }
@@ -6497,14 +6323,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__Group__2"
-    // InternalSheepDog.g:2028:1: rule__When__Group__2 : rule__When__Group__2__Impl rule__When__Group__3 ;
+    // InternalSheepDog.g:1976:1: rule__When__Group__2 : rule__When__Group__2__Impl rule__When__Group__3 ;
     public final void rule__When__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2032:1: ( rule__When__Group__2__Impl rule__When__Group__3 )
-            // InternalSheepDog.g:2033:2: rule__When__Group__2__Impl rule__When__Group__3
+            // InternalSheepDog.g:1980:1: ( rule__When__Group__2__Impl rule__When__Group__3 )
+            // InternalSheepDog.g:1981:2: rule__When__Group__2__Impl rule__When__Group__3
             {
             pushFollow(FOLLOW_24);
             rule__When__Group__2__Impl();
@@ -6535,21 +6361,21 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__Group__2__Impl"
-    // InternalSheepDog.g:2040:1: rule__When__Group__2__Impl : ( ( rule__When__NameAssignment_2 ) ) ;
+    // InternalSheepDog.g:1988:1: rule__When__Group__2__Impl : ( ( rule__When__NameAssignment_2 ) ) ;
     public final void rule__When__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2044:1: ( ( ( rule__When__NameAssignment_2 ) ) )
-            // InternalSheepDog.g:2045:1: ( ( rule__When__NameAssignment_2 ) )
+            // InternalSheepDog.g:1992:1: ( ( ( rule__When__NameAssignment_2 ) ) )
+            // InternalSheepDog.g:1993:1: ( ( rule__When__NameAssignment_2 ) )
             {
-            // InternalSheepDog.g:2045:1: ( ( rule__When__NameAssignment_2 ) )
-            // InternalSheepDog.g:2046:2: ( rule__When__NameAssignment_2 )
+            // InternalSheepDog.g:1993:1: ( ( rule__When__NameAssignment_2 ) )
+            // InternalSheepDog.g:1994:2: ( rule__When__NameAssignment_2 )
             {
              before(grammarAccess.getWhenAccess().getNameAssignment_2()); 
-            // InternalSheepDog.g:2047:2: ( rule__When__NameAssignment_2 )
-            // InternalSheepDog.g:2047:3: rule__When__NameAssignment_2
+            // InternalSheepDog.g:1995:2: ( rule__When__NameAssignment_2 )
+            // InternalSheepDog.g:1995:3: rule__When__NameAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__When__NameAssignment_2();
@@ -6582,14 +6408,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__Group__3"
-    // InternalSheepDog.g:2055:1: rule__When__Group__3 : rule__When__Group__3__Impl ;
+    // InternalSheepDog.g:2003:1: rule__When__Group__3 : rule__When__Group__3__Impl ;
     public final void rule__When__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2059:1: ( rule__When__Group__3__Impl )
-            // InternalSheepDog.g:2060:2: rule__When__Group__3__Impl
+            // InternalSheepDog.g:2007:1: ( rule__When__Group__3__Impl )
+            // InternalSheepDog.g:2008:2: rule__When__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__When__Group__3__Impl();
@@ -6615,29 +6441,29 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__Group__3__Impl"
-    // InternalSheepDog.g:2066:1: rule__When__Group__3__Impl : ( ( rule__When__Alternatives_3 )? ) ;
+    // InternalSheepDog.g:2014:1: rule__When__Group__3__Impl : ( ( rule__When__Alternatives_3 )? ) ;
     public final void rule__When__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2070:1: ( ( ( rule__When__Alternatives_3 )? ) )
-            // InternalSheepDog.g:2071:1: ( ( rule__When__Alternatives_3 )? )
+            // InternalSheepDog.g:2018:1: ( ( ( rule__When__Alternatives_3 )? ) )
+            // InternalSheepDog.g:2019:1: ( ( rule__When__Alternatives_3 )? )
             {
-            // InternalSheepDog.g:2071:1: ( ( rule__When__Alternatives_3 )? )
-            // InternalSheepDog.g:2072:2: ( rule__When__Alternatives_3 )?
+            // InternalSheepDog.g:2019:1: ( ( rule__When__Alternatives_3 )? )
+            // InternalSheepDog.g:2020:2: ( rule__When__Alternatives_3 )?
             {
              before(grammarAccess.getWhenAccess().getAlternatives_3()); 
-            // InternalSheepDog.g:2073:2: ( rule__When__Alternatives_3 )?
-            int alt26=2;
-            int LA26_0 = input.LA(1);
+            // InternalSheepDog.g:2021:2: ( rule__When__Alternatives_3 )?
+            int alt25=2;
+            int LA25_0 = input.LA(1);
 
-            if ( ((LA26_0>=24 && LA26_0<=25)) ) {
-                alt26=1;
+            if ( ((LA25_0>=22 && LA25_0<=23)) ) {
+                alt25=1;
             }
-            switch (alt26) {
+            switch (alt25) {
                 case 1 :
-                    // InternalSheepDog.g:2073:3: rule__When__Alternatives_3
+                    // InternalSheepDog.g:2021:3: rule__When__Alternatives_3
                     {
                     pushFollow(FOLLOW_2);
                     rule__When__Alternatives_3();
@@ -6673,14 +6499,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__Group__0"
-    // InternalSheepDog.g:2082:1: rule__Then__Group__0 : rule__Then__Group__0__Impl rule__Then__Group__1 ;
+    // InternalSheepDog.g:2030:1: rule__Then__Group__0 : rule__Then__Group__0__Impl rule__Then__Group__1 ;
     public final void rule__Then__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2086:1: ( rule__Then__Group__0__Impl rule__Then__Group__1 )
-            // InternalSheepDog.g:2087:2: rule__Then__Group__0__Impl rule__Then__Group__1
+            // InternalSheepDog.g:2034:1: ( rule__Then__Group__0__Impl rule__Then__Group__1 )
+            // InternalSheepDog.g:2035:2: rule__Then__Group__0__Impl rule__Then__Group__1
             {
             pushFollow(FOLLOW_26);
             rule__Then__Group__0__Impl();
@@ -6711,20 +6537,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__Group__0__Impl"
-    // InternalSheepDog.g:2094:1: rule__Then__Group__0__Impl : ( '===' ) ;
+    // InternalSheepDog.g:2042:1: rule__Then__Group__0__Impl : ( '===' ) ;
     public final void rule__Then__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2098:1: ( ( '===' ) )
-            // InternalSheepDog.g:2099:1: ( '===' )
+            // InternalSheepDog.g:2046:1: ( ( '===' ) )
+            // InternalSheepDog.g:2047:1: ( '===' )
             {
-            // InternalSheepDog.g:2099:1: ( '===' )
-            // InternalSheepDog.g:2100:2: '==='
+            // InternalSheepDog.g:2047:1: ( '===' )
+            // InternalSheepDog.g:2048:2: '==='
             {
              before(grammarAccess.getThenAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
-            match(input,14,FOLLOW_2); 
+            match(input,12,FOLLOW_2); 
              after(grammarAccess.getThenAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
 
             }
@@ -6748,14 +6574,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__Group__1"
-    // InternalSheepDog.g:2109:1: rule__Then__Group__1 : rule__Then__Group__1__Impl rule__Then__Group__2 ;
+    // InternalSheepDog.g:2057:1: rule__Then__Group__1 : rule__Then__Group__1__Impl rule__Then__Group__2 ;
     public final void rule__Then__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2113:1: ( rule__Then__Group__1__Impl rule__Then__Group__2 )
-            // InternalSheepDog.g:2114:2: rule__Then__Group__1__Impl rule__Then__Group__2
+            // InternalSheepDog.g:2061:1: ( rule__Then__Group__1__Impl rule__Then__Group__2 )
+            // InternalSheepDog.g:2062:2: rule__Then__Group__1__Impl rule__Then__Group__2
             {
             pushFollow(FOLLOW_4);
             rule__Then__Group__1__Impl();
@@ -6786,20 +6612,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__Group__1__Impl"
-    // InternalSheepDog.g:2121:1: rule__Then__Group__1__Impl : ( 'Then' ) ;
+    // InternalSheepDog.g:2069:1: rule__Then__Group__1__Impl : ( 'Then' ) ;
     public final void rule__Then__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2125:1: ( ( 'Then' ) )
-            // InternalSheepDog.g:2126:1: ( 'Then' )
+            // InternalSheepDog.g:2073:1: ( ( 'Then' ) )
+            // InternalSheepDog.g:2074:1: ( 'Then' )
             {
-            // InternalSheepDog.g:2126:1: ( 'Then' )
-            // InternalSheepDog.g:2127:2: 'Then'
+            // InternalSheepDog.g:2074:1: ( 'Then' )
+            // InternalSheepDog.g:2075:2: 'Then'
             {
              before(grammarAccess.getThenAccess().getThenKeyword_1()); 
-            match(input,22,FOLLOW_2); 
+            match(input,20,FOLLOW_2); 
              after(grammarAccess.getThenAccess().getThenKeyword_1()); 
 
             }
@@ -6823,14 +6649,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__Group__2"
-    // InternalSheepDog.g:2136:1: rule__Then__Group__2 : rule__Then__Group__2__Impl rule__Then__Group__3 ;
+    // InternalSheepDog.g:2084:1: rule__Then__Group__2 : rule__Then__Group__2__Impl rule__Then__Group__3 ;
     public final void rule__Then__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2140:1: ( rule__Then__Group__2__Impl rule__Then__Group__3 )
-            // InternalSheepDog.g:2141:2: rule__Then__Group__2__Impl rule__Then__Group__3
+            // InternalSheepDog.g:2088:1: ( rule__Then__Group__2__Impl rule__Then__Group__3 )
+            // InternalSheepDog.g:2089:2: rule__Then__Group__2__Impl rule__Then__Group__3
             {
             pushFollow(FOLLOW_24);
             rule__Then__Group__2__Impl();
@@ -6861,21 +6687,21 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__Group__2__Impl"
-    // InternalSheepDog.g:2148:1: rule__Then__Group__2__Impl : ( ( rule__Then__NameAssignment_2 ) ) ;
+    // InternalSheepDog.g:2096:1: rule__Then__Group__2__Impl : ( ( rule__Then__NameAssignment_2 ) ) ;
     public final void rule__Then__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2152:1: ( ( ( rule__Then__NameAssignment_2 ) ) )
-            // InternalSheepDog.g:2153:1: ( ( rule__Then__NameAssignment_2 ) )
+            // InternalSheepDog.g:2100:1: ( ( ( rule__Then__NameAssignment_2 ) ) )
+            // InternalSheepDog.g:2101:1: ( ( rule__Then__NameAssignment_2 ) )
             {
-            // InternalSheepDog.g:2153:1: ( ( rule__Then__NameAssignment_2 ) )
-            // InternalSheepDog.g:2154:2: ( rule__Then__NameAssignment_2 )
+            // InternalSheepDog.g:2101:1: ( ( rule__Then__NameAssignment_2 ) )
+            // InternalSheepDog.g:2102:2: ( rule__Then__NameAssignment_2 )
             {
              before(grammarAccess.getThenAccess().getNameAssignment_2()); 
-            // InternalSheepDog.g:2155:2: ( rule__Then__NameAssignment_2 )
-            // InternalSheepDog.g:2155:3: rule__Then__NameAssignment_2
+            // InternalSheepDog.g:2103:2: ( rule__Then__NameAssignment_2 )
+            // InternalSheepDog.g:2103:3: rule__Then__NameAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__Then__NameAssignment_2();
@@ -6908,14 +6734,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__Group__3"
-    // InternalSheepDog.g:2163:1: rule__Then__Group__3 : rule__Then__Group__3__Impl ;
+    // InternalSheepDog.g:2111:1: rule__Then__Group__3 : rule__Then__Group__3__Impl ;
     public final void rule__Then__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2167:1: ( rule__Then__Group__3__Impl )
-            // InternalSheepDog.g:2168:2: rule__Then__Group__3__Impl
+            // InternalSheepDog.g:2115:1: ( rule__Then__Group__3__Impl )
+            // InternalSheepDog.g:2116:2: rule__Then__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Then__Group__3__Impl();
@@ -6941,29 +6767,29 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__Group__3__Impl"
-    // InternalSheepDog.g:2174:1: rule__Then__Group__3__Impl : ( ( rule__Then__Alternatives_3 )? ) ;
+    // InternalSheepDog.g:2122:1: rule__Then__Group__3__Impl : ( ( rule__Then__Alternatives_3 )? ) ;
     public final void rule__Then__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2178:1: ( ( ( rule__Then__Alternatives_3 )? ) )
-            // InternalSheepDog.g:2179:1: ( ( rule__Then__Alternatives_3 )? )
+            // InternalSheepDog.g:2126:1: ( ( ( rule__Then__Alternatives_3 )? ) )
+            // InternalSheepDog.g:2127:1: ( ( rule__Then__Alternatives_3 )? )
             {
-            // InternalSheepDog.g:2179:1: ( ( rule__Then__Alternatives_3 )? )
-            // InternalSheepDog.g:2180:2: ( rule__Then__Alternatives_3 )?
+            // InternalSheepDog.g:2127:1: ( ( rule__Then__Alternatives_3 )? )
+            // InternalSheepDog.g:2128:2: ( rule__Then__Alternatives_3 )?
             {
              before(grammarAccess.getThenAccess().getAlternatives_3()); 
-            // InternalSheepDog.g:2181:2: ( rule__Then__Alternatives_3 )?
-            int alt27=2;
-            int LA27_0 = input.LA(1);
+            // InternalSheepDog.g:2129:2: ( rule__Then__Alternatives_3 )?
+            int alt26=2;
+            int LA26_0 = input.LA(1);
 
-            if ( ((LA27_0>=24 && LA27_0<=25)) ) {
-                alt27=1;
+            if ( ((LA26_0>=22 && LA26_0<=23)) ) {
+                alt26=1;
             }
-            switch (alt27) {
+            switch (alt26) {
                 case 1 :
-                    // InternalSheepDog.g:2181:3: rule__Then__Alternatives_3
+                    // InternalSheepDog.g:2129:3: rule__Then__Alternatives_3
                     {
                     pushFollow(FOLLOW_2);
                     rule__Then__Alternatives_3();
@@ -6999,14 +6825,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__Group__0"
-    // InternalSheepDog.g:2190:1: rule__And__Group__0 : rule__And__Group__0__Impl rule__And__Group__1 ;
+    // InternalSheepDog.g:2138:1: rule__And__Group__0 : rule__And__Group__0__Impl rule__And__Group__1 ;
     public final void rule__And__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2194:1: ( rule__And__Group__0__Impl rule__And__Group__1 )
-            // InternalSheepDog.g:2195:2: rule__And__Group__0__Impl rule__And__Group__1
+            // InternalSheepDog.g:2142:1: ( rule__And__Group__0__Impl rule__And__Group__1 )
+            // InternalSheepDog.g:2143:2: rule__And__Group__0__Impl rule__And__Group__1
             {
             pushFollow(FOLLOW_27);
             rule__And__Group__0__Impl();
@@ -7037,20 +6863,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__Group__0__Impl"
-    // InternalSheepDog.g:2202:1: rule__And__Group__0__Impl : ( '===' ) ;
+    // InternalSheepDog.g:2150:1: rule__And__Group__0__Impl : ( '===' ) ;
     public final void rule__And__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2206:1: ( ( '===' ) )
-            // InternalSheepDog.g:2207:1: ( '===' )
+            // InternalSheepDog.g:2154:1: ( ( '===' ) )
+            // InternalSheepDog.g:2155:1: ( '===' )
             {
-            // InternalSheepDog.g:2207:1: ( '===' )
-            // InternalSheepDog.g:2208:2: '==='
+            // InternalSheepDog.g:2155:1: ( '===' )
+            // InternalSheepDog.g:2156:2: '==='
             {
              before(grammarAccess.getAndAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
-            match(input,14,FOLLOW_2); 
+            match(input,12,FOLLOW_2); 
              after(grammarAccess.getAndAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
 
             }
@@ -7074,14 +6900,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__Group__1"
-    // InternalSheepDog.g:2217:1: rule__And__Group__1 : rule__And__Group__1__Impl rule__And__Group__2 ;
+    // InternalSheepDog.g:2165:1: rule__And__Group__1 : rule__And__Group__1__Impl rule__And__Group__2 ;
     public final void rule__And__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2221:1: ( rule__And__Group__1__Impl rule__And__Group__2 )
-            // InternalSheepDog.g:2222:2: rule__And__Group__1__Impl rule__And__Group__2
+            // InternalSheepDog.g:2169:1: ( rule__And__Group__1__Impl rule__And__Group__2 )
+            // InternalSheepDog.g:2170:2: rule__And__Group__1__Impl rule__And__Group__2
             {
             pushFollow(FOLLOW_4);
             rule__And__Group__1__Impl();
@@ -7112,20 +6938,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__Group__1__Impl"
-    // InternalSheepDog.g:2229:1: rule__And__Group__1__Impl : ( 'And' ) ;
+    // InternalSheepDog.g:2177:1: rule__And__Group__1__Impl : ( 'And' ) ;
     public final void rule__And__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2233:1: ( ( 'And' ) )
-            // InternalSheepDog.g:2234:1: ( 'And' )
+            // InternalSheepDog.g:2181:1: ( ( 'And' ) )
+            // InternalSheepDog.g:2182:1: ( 'And' )
             {
-            // InternalSheepDog.g:2234:1: ( 'And' )
-            // InternalSheepDog.g:2235:2: 'And'
+            // InternalSheepDog.g:2182:1: ( 'And' )
+            // InternalSheepDog.g:2183:2: 'And'
             {
              before(grammarAccess.getAndAccess().getAndKeyword_1()); 
-            match(input,23,FOLLOW_2); 
+            match(input,21,FOLLOW_2); 
              after(grammarAccess.getAndAccess().getAndKeyword_1()); 
 
             }
@@ -7149,14 +6975,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__Group__2"
-    // InternalSheepDog.g:2244:1: rule__And__Group__2 : rule__And__Group__2__Impl rule__And__Group__3 ;
+    // InternalSheepDog.g:2192:1: rule__And__Group__2 : rule__And__Group__2__Impl rule__And__Group__3 ;
     public final void rule__And__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2248:1: ( rule__And__Group__2__Impl rule__And__Group__3 )
-            // InternalSheepDog.g:2249:2: rule__And__Group__2__Impl rule__And__Group__3
+            // InternalSheepDog.g:2196:1: ( rule__And__Group__2__Impl rule__And__Group__3 )
+            // InternalSheepDog.g:2197:2: rule__And__Group__2__Impl rule__And__Group__3
             {
             pushFollow(FOLLOW_24);
             rule__And__Group__2__Impl();
@@ -7187,21 +7013,21 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__Group__2__Impl"
-    // InternalSheepDog.g:2256:1: rule__And__Group__2__Impl : ( ( rule__And__NameAssignment_2 ) ) ;
+    // InternalSheepDog.g:2204:1: rule__And__Group__2__Impl : ( ( rule__And__NameAssignment_2 ) ) ;
     public final void rule__And__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2260:1: ( ( ( rule__And__NameAssignment_2 ) ) )
-            // InternalSheepDog.g:2261:1: ( ( rule__And__NameAssignment_2 ) )
+            // InternalSheepDog.g:2208:1: ( ( ( rule__And__NameAssignment_2 ) ) )
+            // InternalSheepDog.g:2209:1: ( ( rule__And__NameAssignment_2 ) )
             {
-            // InternalSheepDog.g:2261:1: ( ( rule__And__NameAssignment_2 ) )
-            // InternalSheepDog.g:2262:2: ( rule__And__NameAssignment_2 )
+            // InternalSheepDog.g:2209:1: ( ( rule__And__NameAssignment_2 ) )
+            // InternalSheepDog.g:2210:2: ( rule__And__NameAssignment_2 )
             {
              before(grammarAccess.getAndAccess().getNameAssignment_2()); 
-            // InternalSheepDog.g:2263:2: ( rule__And__NameAssignment_2 )
-            // InternalSheepDog.g:2263:3: rule__And__NameAssignment_2
+            // InternalSheepDog.g:2211:2: ( rule__And__NameAssignment_2 )
+            // InternalSheepDog.g:2211:3: rule__And__NameAssignment_2
             {
             pushFollow(FOLLOW_2);
             rule__And__NameAssignment_2();
@@ -7234,14 +7060,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__Group__3"
-    // InternalSheepDog.g:2271:1: rule__And__Group__3 : rule__And__Group__3__Impl ;
+    // InternalSheepDog.g:2219:1: rule__And__Group__3 : rule__And__Group__3__Impl ;
     public final void rule__And__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2275:1: ( rule__And__Group__3__Impl )
-            // InternalSheepDog.g:2276:2: rule__And__Group__3__Impl
+            // InternalSheepDog.g:2223:1: ( rule__And__Group__3__Impl )
+            // InternalSheepDog.g:2224:2: rule__And__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__And__Group__3__Impl();
@@ -7267,29 +7093,29 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__Group__3__Impl"
-    // InternalSheepDog.g:2282:1: rule__And__Group__3__Impl : ( ( rule__And__Alternatives_3 )? ) ;
+    // InternalSheepDog.g:2230:1: rule__And__Group__3__Impl : ( ( rule__And__Alternatives_3 )? ) ;
     public final void rule__And__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2286:1: ( ( ( rule__And__Alternatives_3 )? ) )
-            // InternalSheepDog.g:2287:1: ( ( rule__And__Alternatives_3 )? )
+            // InternalSheepDog.g:2234:1: ( ( ( rule__And__Alternatives_3 )? ) )
+            // InternalSheepDog.g:2235:1: ( ( rule__And__Alternatives_3 )? )
             {
-            // InternalSheepDog.g:2287:1: ( ( rule__And__Alternatives_3 )? )
-            // InternalSheepDog.g:2288:2: ( rule__And__Alternatives_3 )?
+            // InternalSheepDog.g:2235:1: ( ( rule__And__Alternatives_3 )? )
+            // InternalSheepDog.g:2236:2: ( rule__And__Alternatives_3 )?
             {
              before(grammarAccess.getAndAccess().getAlternatives_3()); 
-            // InternalSheepDog.g:2289:2: ( rule__And__Alternatives_3 )?
-            int alt28=2;
-            int LA28_0 = input.LA(1);
+            // InternalSheepDog.g:2237:2: ( rule__And__Alternatives_3 )?
+            int alt27=2;
+            int LA27_0 = input.LA(1);
 
-            if ( ((LA28_0>=24 && LA28_0<=25)) ) {
-                alt28=1;
+            if ( ((LA27_0>=22 && LA27_0<=23)) ) {
+                alt27=1;
             }
-            switch (alt28) {
+            switch (alt27) {
                 case 1 :
-                    // InternalSheepDog.g:2289:3: rule__And__Alternatives_3
+                    // InternalSheepDog.g:2237:3: rule__And__Alternatives_3
                     {
                     pushFollow(FOLLOW_2);
                     rule__And__Alternatives_3();
@@ -7325,14 +7151,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__DocString__Group__0"
-    // InternalSheepDog.g:2298:1: rule__DocString__Group__0 : rule__DocString__Group__0__Impl rule__DocString__Group__1 ;
+    // InternalSheepDog.g:2246:1: rule__DocString__Group__0 : rule__DocString__Group__0__Impl rule__DocString__Group__1 ;
     public final void rule__DocString__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2302:1: ( rule__DocString__Group__0__Impl rule__DocString__Group__1 )
-            // InternalSheepDog.g:2303:2: rule__DocString__Group__0__Impl rule__DocString__Group__1
+            // InternalSheepDog.g:2250:1: ( rule__DocString__Group__0__Impl rule__DocString__Group__1 )
+            // InternalSheepDog.g:2251:2: rule__DocString__Group__0__Impl rule__DocString__Group__1
             {
             pushFollow(FOLLOW_28);
             rule__DocString__Group__0__Impl();
@@ -7363,20 +7189,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__DocString__Group__0__Impl"
-    // InternalSheepDog.g:2310:1: rule__DocString__Group__0__Impl : ( '----' ) ;
+    // InternalSheepDog.g:2258:1: rule__DocString__Group__0__Impl : ( '----' ) ;
     public final void rule__DocString__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2314:1: ( ( '----' ) )
-            // InternalSheepDog.g:2315:1: ( '----' )
+            // InternalSheepDog.g:2262:1: ( ( '----' ) )
+            // InternalSheepDog.g:2263:1: ( '----' )
             {
-            // InternalSheepDog.g:2315:1: ( '----' )
-            // InternalSheepDog.g:2316:2: '----'
+            // InternalSheepDog.g:2263:1: ( '----' )
+            // InternalSheepDog.g:2264:2: '----'
             {
              before(grammarAccess.getDocStringAccess().getHyphenMinusHyphenMinusHyphenMinusHyphenMinusKeyword_0()); 
-            match(input,24,FOLLOW_2); 
+            match(input,22,FOLLOW_2); 
              after(grammarAccess.getDocStringAccess().getHyphenMinusHyphenMinusHyphenMinusHyphenMinusKeyword_0()); 
 
             }
@@ -7400,14 +7226,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__DocString__Group__1"
-    // InternalSheepDog.g:2325:1: rule__DocString__Group__1 : rule__DocString__Group__1__Impl rule__DocString__Group__2 ;
+    // InternalSheepDog.g:2273:1: rule__DocString__Group__1 : rule__DocString__Group__1__Impl rule__DocString__Group__2 ;
     public final void rule__DocString__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2329:1: ( rule__DocString__Group__1__Impl rule__DocString__Group__2 )
-            // InternalSheepDog.g:2330:2: rule__DocString__Group__1__Impl rule__DocString__Group__2
+            // InternalSheepDog.g:2277:1: ( rule__DocString__Group__1__Impl rule__DocString__Group__2 )
+            // InternalSheepDog.g:2278:2: rule__DocString__Group__1__Impl rule__DocString__Group__2
             {
             pushFollow(FOLLOW_29);
             rule__DocString__Group__1__Impl();
@@ -7438,17 +7264,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__DocString__Group__1__Impl"
-    // InternalSheepDog.g:2337:1: rule__DocString__Group__1__Impl : ( RULE_EOL ) ;
+    // InternalSheepDog.g:2285:1: rule__DocString__Group__1__Impl : ( RULE_EOL ) ;
     public final void rule__DocString__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2341:1: ( ( RULE_EOL ) )
-            // InternalSheepDog.g:2342:1: ( RULE_EOL )
+            // InternalSheepDog.g:2289:1: ( ( RULE_EOL ) )
+            // InternalSheepDog.g:2290:1: ( RULE_EOL )
             {
-            // InternalSheepDog.g:2342:1: ( RULE_EOL )
-            // InternalSheepDog.g:2343:2: RULE_EOL
+            // InternalSheepDog.g:2290:1: ( RULE_EOL )
+            // InternalSheepDog.g:2291:2: RULE_EOL
             {
              before(grammarAccess.getDocStringAccess().getEOLTerminalRuleCall_1()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -7475,14 +7301,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__DocString__Group__2"
-    // InternalSheepDog.g:2352:1: rule__DocString__Group__2 : rule__DocString__Group__2__Impl rule__DocString__Group__3 ;
+    // InternalSheepDog.g:2300:1: rule__DocString__Group__2 : rule__DocString__Group__2__Impl rule__DocString__Group__3 ;
     public final void rule__DocString__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2356:1: ( rule__DocString__Group__2__Impl rule__DocString__Group__3 )
-            // InternalSheepDog.g:2357:2: rule__DocString__Group__2__Impl rule__DocString__Group__3
+            // InternalSheepDog.g:2304:1: ( rule__DocString__Group__2__Impl rule__DocString__Group__3 )
+            // InternalSheepDog.g:2305:2: rule__DocString__Group__2__Impl rule__DocString__Group__3
             {
             pushFollow(FOLLOW_30);
             rule__DocString__Group__2__Impl();
@@ -7513,24 +7339,24 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__DocString__Group__2__Impl"
-    // InternalSheepDog.g:2364:1: rule__DocString__Group__2__Impl : ( ( ( rule__DocString__LinesAssignment_2 ) ) ( ( rule__DocString__LinesAssignment_2 )* ) ) ;
+    // InternalSheepDog.g:2312:1: rule__DocString__Group__2__Impl : ( ( ( rule__DocString__LinesAssignment_2 ) ) ( ( rule__DocString__LinesAssignment_2 )* ) ) ;
     public final void rule__DocString__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2368:1: ( ( ( ( rule__DocString__LinesAssignment_2 ) ) ( ( rule__DocString__LinesAssignment_2 )* ) ) )
-            // InternalSheepDog.g:2369:1: ( ( ( rule__DocString__LinesAssignment_2 ) ) ( ( rule__DocString__LinesAssignment_2 )* ) )
+            // InternalSheepDog.g:2316:1: ( ( ( ( rule__DocString__LinesAssignment_2 ) ) ( ( rule__DocString__LinesAssignment_2 )* ) ) )
+            // InternalSheepDog.g:2317:1: ( ( ( rule__DocString__LinesAssignment_2 ) ) ( ( rule__DocString__LinesAssignment_2 )* ) )
             {
-            // InternalSheepDog.g:2369:1: ( ( ( rule__DocString__LinesAssignment_2 ) ) ( ( rule__DocString__LinesAssignment_2 )* ) )
-            // InternalSheepDog.g:2370:2: ( ( rule__DocString__LinesAssignment_2 ) ) ( ( rule__DocString__LinesAssignment_2 )* )
+            // InternalSheepDog.g:2317:1: ( ( ( rule__DocString__LinesAssignment_2 ) ) ( ( rule__DocString__LinesAssignment_2 )* ) )
+            // InternalSheepDog.g:2318:2: ( ( rule__DocString__LinesAssignment_2 ) ) ( ( rule__DocString__LinesAssignment_2 )* )
             {
-            // InternalSheepDog.g:2370:2: ( ( rule__DocString__LinesAssignment_2 ) )
-            // InternalSheepDog.g:2371:3: ( rule__DocString__LinesAssignment_2 )
+            // InternalSheepDog.g:2318:2: ( ( rule__DocString__LinesAssignment_2 ) )
+            // InternalSheepDog.g:2319:3: ( rule__DocString__LinesAssignment_2 )
             {
              before(grammarAccess.getDocStringAccess().getLinesAssignment_2()); 
-            // InternalSheepDog.g:2372:3: ( rule__DocString__LinesAssignment_2 )
-            // InternalSheepDog.g:2372:4: rule__DocString__LinesAssignment_2
+            // InternalSheepDog.g:2320:3: ( rule__DocString__LinesAssignment_2 )
+            // InternalSheepDog.g:2320:4: rule__DocString__LinesAssignment_2
             {
             pushFollow(FOLLOW_31);
             rule__DocString__LinesAssignment_2();
@@ -7544,24 +7370,24 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
             }
 
-            // InternalSheepDog.g:2375:2: ( ( rule__DocString__LinesAssignment_2 )* )
-            // InternalSheepDog.g:2376:3: ( rule__DocString__LinesAssignment_2 )*
+            // InternalSheepDog.g:2323:2: ( ( rule__DocString__LinesAssignment_2 )* )
+            // InternalSheepDog.g:2324:3: ( rule__DocString__LinesAssignment_2 )*
             {
              before(grammarAccess.getDocStringAccess().getLinesAssignment_2()); 
-            // InternalSheepDog.g:2377:3: ( rule__DocString__LinesAssignment_2 )*
-            loop29:
+            // InternalSheepDog.g:2325:3: ( rule__DocString__LinesAssignment_2 )*
+            loop28:
             do {
-                int alt29=2;
-                int LA29_0 = input.LA(1);
+                int alt28=2;
+                int LA28_0 = input.LA(1);
 
-                if ( ((LA29_0>=RULE_WORD && LA29_0<=RULE_EOL)) ) {
-                    alt29=1;
+                if ( ((LA28_0>=RULE_EOL && LA28_0<=RULE_WORD)) ) {
+                    alt28=1;
                 }
 
 
-                switch (alt29) {
+                switch (alt28) {
             	case 1 :
-            	    // InternalSheepDog.g:2377:4: rule__DocString__LinesAssignment_2
+            	    // InternalSheepDog.g:2325:4: rule__DocString__LinesAssignment_2
             	    {
             	    pushFollow(FOLLOW_31);
             	    rule__DocString__LinesAssignment_2();
@@ -7573,7 +7399,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop29;
+            	    break loop28;
                 }
             } while (true);
 
@@ -7603,14 +7429,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__DocString__Group__3"
-    // InternalSheepDog.g:2386:1: rule__DocString__Group__3 : rule__DocString__Group__3__Impl rule__DocString__Group__4 ;
+    // InternalSheepDog.g:2334:1: rule__DocString__Group__3 : rule__DocString__Group__3__Impl rule__DocString__Group__4 ;
     public final void rule__DocString__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2390:1: ( rule__DocString__Group__3__Impl rule__DocString__Group__4 )
-            // InternalSheepDog.g:2391:2: rule__DocString__Group__3__Impl rule__DocString__Group__4
+            // InternalSheepDog.g:2338:1: ( rule__DocString__Group__3__Impl rule__DocString__Group__4 )
+            // InternalSheepDog.g:2339:2: rule__DocString__Group__3__Impl rule__DocString__Group__4
             {
             pushFollow(FOLLOW_28);
             rule__DocString__Group__3__Impl();
@@ -7641,20 +7467,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__DocString__Group__3__Impl"
-    // InternalSheepDog.g:2398:1: rule__DocString__Group__3__Impl : ( '----' ) ;
+    // InternalSheepDog.g:2346:1: rule__DocString__Group__3__Impl : ( '----' ) ;
     public final void rule__DocString__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2402:1: ( ( '----' ) )
-            // InternalSheepDog.g:2403:1: ( '----' )
+            // InternalSheepDog.g:2350:1: ( ( '----' ) )
+            // InternalSheepDog.g:2351:1: ( '----' )
             {
-            // InternalSheepDog.g:2403:1: ( '----' )
-            // InternalSheepDog.g:2404:2: '----'
+            // InternalSheepDog.g:2351:1: ( '----' )
+            // InternalSheepDog.g:2352:2: '----'
             {
              before(grammarAccess.getDocStringAccess().getHyphenMinusHyphenMinusHyphenMinusHyphenMinusKeyword_3()); 
-            match(input,24,FOLLOW_2); 
+            match(input,22,FOLLOW_2); 
              after(grammarAccess.getDocStringAccess().getHyphenMinusHyphenMinusHyphenMinusHyphenMinusKeyword_3()); 
 
             }
@@ -7678,14 +7504,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__DocString__Group__4"
-    // InternalSheepDog.g:2413:1: rule__DocString__Group__4 : rule__DocString__Group__4__Impl ;
+    // InternalSheepDog.g:2361:1: rule__DocString__Group__4 : rule__DocString__Group__4__Impl ;
     public final void rule__DocString__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2417:1: ( rule__DocString__Group__4__Impl )
-            // InternalSheepDog.g:2418:2: rule__DocString__Group__4__Impl
+            // InternalSheepDog.g:2365:1: ( rule__DocString__Group__4__Impl )
+            // InternalSheepDog.g:2366:2: rule__DocString__Group__4__Impl
             {
             pushFollow(FOLLOW_2);
             rule__DocString__Group__4__Impl();
@@ -7711,17 +7537,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__DocString__Group__4__Impl"
-    // InternalSheepDog.g:2424:1: rule__DocString__Group__4__Impl : ( RULE_EOL ) ;
+    // InternalSheepDog.g:2372:1: rule__DocString__Group__4__Impl : ( RULE_EOL ) ;
     public final void rule__DocString__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2428:1: ( ( RULE_EOL ) )
-            // InternalSheepDog.g:2429:1: ( RULE_EOL )
+            // InternalSheepDog.g:2376:1: ( ( RULE_EOL ) )
+            // InternalSheepDog.g:2377:1: ( RULE_EOL )
             {
-            // InternalSheepDog.g:2429:1: ( RULE_EOL )
-            // InternalSheepDog.g:2430:2: RULE_EOL
+            // InternalSheepDog.g:2377:1: ( RULE_EOL )
+            // InternalSheepDog.g:2378:2: RULE_EOL
             {
              before(grammarAccess.getDocStringAccess().getEOLTerminalRuleCall_4()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -7748,14 +7574,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Table__Group__0"
-    // InternalSheepDog.g:2440:1: rule__Table__Group__0 : rule__Table__Group__0__Impl rule__Table__Group__1 ;
+    // InternalSheepDog.g:2388:1: rule__Table__Group__0 : rule__Table__Group__0__Impl rule__Table__Group__1 ;
     public final void rule__Table__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2444:1: ( rule__Table__Group__0__Impl rule__Table__Group__1 )
-            // InternalSheepDog.g:2445:2: rule__Table__Group__0__Impl rule__Table__Group__1
+            // InternalSheepDog.g:2392:1: ( rule__Table__Group__0__Impl rule__Table__Group__1 )
+            // InternalSheepDog.g:2393:2: rule__Table__Group__0__Impl rule__Table__Group__1
             {
             pushFollow(FOLLOW_28);
             rule__Table__Group__0__Impl();
@@ -7786,20 +7612,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Table__Group__0__Impl"
-    // InternalSheepDog.g:2452:1: rule__Table__Group__0__Impl : ( '[options=\"header\"]' ) ;
+    // InternalSheepDog.g:2400:1: rule__Table__Group__0__Impl : ( '[options=\"header\"]' ) ;
     public final void rule__Table__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2456:1: ( ( '[options=\"header\"]' ) )
-            // InternalSheepDog.g:2457:1: ( '[options=\"header\"]' )
+            // InternalSheepDog.g:2404:1: ( ( '[options=\"header\"]' ) )
+            // InternalSheepDog.g:2405:1: ( '[options=\"header\"]' )
             {
-            // InternalSheepDog.g:2457:1: ( '[options=\"header\"]' )
-            // InternalSheepDog.g:2458:2: '[options=\"header\"]'
+            // InternalSheepDog.g:2405:1: ( '[options=\"header\"]' )
+            // InternalSheepDog.g:2406:2: '[options=\"header\"]'
             {
              before(grammarAccess.getTableAccess().getOptionsHeaderKeyword_0()); 
-            match(input,25,FOLLOW_2); 
+            match(input,23,FOLLOW_2); 
              after(grammarAccess.getTableAccess().getOptionsHeaderKeyword_0()); 
 
             }
@@ -7823,14 +7649,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Table__Group__1"
-    // InternalSheepDog.g:2467:1: rule__Table__Group__1 : rule__Table__Group__1__Impl rule__Table__Group__2 ;
+    // InternalSheepDog.g:2415:1: rule__Table__Group__1 : rule__Table__Group__1__Impl rule__Table__Group__2 ;
     public final void rule__Table__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2471:1: ( rule__Table__Group__1__Impl rule__Table__Group__2 )
-            // InternalSheepDog.g:2472:2: rule__Table__Group__1__Impl rule__Table__Group__2
+            // InternalSheepDog.g:2419:1: ( rule__Table__Group__1__Impl rule__Table__Group__2 )
+            // InternalSheepDog.g:2420:2: rule__Table__Group__1__Impl rule__Table__Group__2
             {
             pushFollow(FOLLOW_32);
             rule__Table__Group__1__Impl();
@@ -7861,17 +7687,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Table__Group__1__Impl"
-    // InternalSheepDog.g:2479:1: rule__Table__Group__1__Impl : ( RULE_EOL ) ;
+    // InternalSheepDog.g:2427:1: rule__Table__Group__1__Impl : ( RULE_EOL ) ;
     public final void rule__Table__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2483:1: ( ( RULE_EOL ) )
-            // InternalSheepDog.g:2484:1: ( RULE_EOL )
+            // InternalSheepDog.g:2431:1: ( ( RULE_EOL ) )
+            // InternalSheepDog.g:2432:1: ( RULE_EOL )
             {
-            // InternalSheepDog.g:2484:1: ( RULE_EOL )
-            // InternalSheepDog.g:2485:2: RULE_EOL
+            // InternalSheepDog.g:2432:1: ( RULE_EOL )
+            // InternalSheepDog.g:2433:2: RULE_EOL
             {
              before(grammarAccess.getTableAccess().getEOLTerminalRuleCall_1()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -7898,14 +7724,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Table__Group__2"
-    // InternalSheepDog.g:2494:1: rule__Table__Group__2 : rule__Table__Group__2__Impl rule__Table__Group__3 ;
+    // InternalSheepDog.g:2442:1: rule__Table__Group__2 : rule__Table__Group__2__Impl rule__Table__Group__3 ;
     public final void rule__Table__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2498:1: ( rule__Table__Group__2__Impl rule__Table__Group__3 )
-            // InternalSheepDog.g:2499:2: rule__Table__Group__2__Impl rule__Table__Group__3
+            // InternalSheepDog.g:2446:1: ( rule__Table__Group__2__Impl rule__Table__Group__3 )
+            // InternalSheepDog.g:2447:2: rule__Table__Group__2__Impl rule__Table__Group__3
             {
             pushFollow(FOLLOW_28);
             rule__Table__Group__2__Impl();
@@ -7936,20 +7762,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Table__Group__2__Impl"
-    // InternalSheepDog.g:2506:1: rule__Table__Group__2__Impl : ( '|===' ) ;
+    // InternalSheepDog.g:2454:1: rule__Table__Group__2__Impl : ( '|===' ) ;
     public final void rule__Table__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2510:1: ( ( '|===' ) )
-            // InternalSheepDog.g:2511:1: ( '|===' )
+            // InternalSheepDog.g:2458:1: ( ( '|===' ) )
+            // InternalSheepDog.g:2459:1: ( '|===' )
             {
-            // InternalSheepDog.g:2511:1: ( '|===' )
-            // InternalSheepDog.g:2512:2: '|==='
+            // InternalSheepDog.g:2459:1: ( '|===' )
+            // InternalSheepDog.g:2460:2: '|==='
             {
              before(grammarAccess.getTableAccess().getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_2()); 
-            match(input,26,FOLLOW_2); 
+            match(input,24,FOLLOW_2); 
              after(grammarAccess.getTableAccess().getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_2()); 
 
             }
@@ -7973,14 +7799,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Table__Group__3"
-    // InternalSheepDog.g:2521:1: rule__Table__Group__3 : rule__Table__Group__3__Impl rule__Table__Group__4 ;
+    // InternalSheepDog.g:2469:1: rule__Table__Group__3 : rule__Table__Group__3__Impl rule__Table__Group__4 ;
     public final void rule__Table__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2525:1: ( rule__Table__Group__3__Impl rule__Table__Group__4 )
-            // InternalSheepDog.g:2526:2: rule__Table__Group__3__Impl rule__Table__Group__4
+            // InternalSheepDog.g:2473:1: ( rule__Table__Group__3__Impl rule__Table__Group__4 )
+            // InternalSheepDog.g:2474:2: rule__Table__Group__3__Impl rule__Table__Group__4
             {
             pushFollow(FOLLOW_33);
             rule__Table__Group__3__Impl();
@@ -8011,17 +7837,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Table__Group__3__Impl"
-    // InternalSheepDog.g:2533:1: rule__Table__Group__3__Impl : ( RULE_EOL ) ;
+    // InternalSheepDog.g:2481:1: rule__Table__Group__3__Impl : ( RULE_EOL ) ;
     public final void rule__Table__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2537:1: ( ( RULE_EOL ) )
-            // InternalSheepDog.g:2538:1: ( RULE_EOL )
+            // InternalSheepDog.g:2485:1: ( ( RULE_EOL ) )
+            // InternalSheepDog.g:2486:1: ( RULE_EOL )
             {
-            // InternalSheepDog.g:2538:1: ( RULE_EOL )
-            // InternalSheepDog.g:2539:2: RULE_EOL
+            // InternalSheepDog.g:2486:1: ( RULE_EOL )
+            // InternalSheepDog.g:2487:2: RULE_EOL
             {
              before(grammarAccess.getTableAccess().getEOLTerminalRuleCall_3()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -8048,14 +7874,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Table__Group__4"
-    // InternalSheepDog.g:2548:1: rule__Table__Group__4 : rule__Table__Group__4__Impl rule__Table__Group__5 ;
+    // InternalSheepDog.g:2496:1: rule__Table__Group__4 : rule__Table__Group__4__Impl rule__Table__Group__5 ;
     public final void rule__Table__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2552:1: ( rule__Table__Group__4__Impl rule__Table__Group__5 )
-            // InternalSheepDog.g:2553:2: rule__Table__Group__4__Impl rule__Table__Group__5
+            // InternalSheepDog.g:2500:1: ( rule__Table__Group__4__Impl rule__Table__Group__5 )
+            // InternalSheepDog.g:2501:2: rule__Table__Group__4__Impl rule__Table__Group__5
             {
             pushFollow(FOLLOW_32);
             rule__Table__Group__4__Impl();
@@ -8086,24 +7912,24 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Table__Group__4__Impl"
-    // InternalSheepDog.g:2560:1: rule__Table__Group__4__Impl : ( ( ( rule__Table__RowsAssignment_4 ) ) ( ( rule__Table__RowsAssignment_4 )* ) ) ;
+    // InternalSheepDog.g:2508:1: rule__Table__Group__4__Impl : ( ( ( rule__Table__RowsAssignment_4 ) ) ( ( rule__Table__RowsAssignment_4 )* ) ) ;
     public final void rule__Table__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2564:1: ( ( ( ( rule__Table__RowsAssignment_4 ) ) ( ( rule__Table__RowsAssignment_4 )* ) ) )
-            // InternalSheepDog.g:2565:1: ( ( ( rule__Table__RowsAssignment_4 ) ) ( ( rule__Table__RowsAssignment_4 )* ) )
+            // InternalSheepDog.g:2512:1: ( ( ( ( rule__Table__RowsAssignment_4 ) ) ( ( rule__Table__RowsAssignment_4 )* ) ) )
+            // InternalSheepDog.g:2513:1: ( ( ( rule__Table__RowsAssignment_4 ) ) ( ( rule__Table__RowsAssignment_4 )* ) )
             {
-            // InternalSheepDog.g:2565:1: ( ( ( rule__Table__RowsAssignment_4 ) ) ( ( rule__Table__RowsAssignment_4 )* ) )
-            // InternalSheepDog.g:2566:2: ( ( rule__Table__RowsAssignment_4 ) ) ( ( rule__Table__RowsAssignment_4 )* )
+            // InternalSheepDog.g:2513:1: ( ( ( rule__Table__RowsAssignment_4 ) ) ( ( rule__Table__RowsAssignment_4 )* ) )
+            // InternalSheepDog.g:2514:2: ( ( rule__Table__RowsAssignment_4 ) ) ( ( rule__Table__RowsAssignment_4 )* )
             {
-            // InternalSheepDog.g:2566:2: ( ( rule__Table__RowsAssignment_4 ) )
-            // InternalSheepDog.g:2567:3: ( rule__Table__RowsAssignment_4 )
+            // InternalSheepDog.g:2514:2: ( ( rule__Table__RowsAssignment_4 ) )
+            // InternalSheepDog.g:2515:3: ( rule__Table__RowsAssignment_4 )
             {
              before(grammarAccess.getTableAccess().getRowsAssignment_4()); 
-            // InternalSheepDog.g:2568:3: ( rule__Table__RowsAssignment_4 )
-            // InternalSheepDog.g:2568:4: rule__Table__RowsAssignment_4
+            // InternalSheepDog.g:2516:3: ( rule__Table__RowsAssignment_4 )
+            // InternalSheepDog.g:2516:4: rule__Table__RowsAssignment_4
             {
             pushFollow(FOLLOW_34);
             rule__Table__RowsAssignment_4();
@@ -8117,24 +7943,24 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
             }
 
-            // InternalSheepDog.g:2571:2: ( ( rule__Table__RowsAssignment_4 )* )
-            // InternalSheepDog.g:2572:3: ( rule__Table__RowsAssignment_4 )*
+            // InternalSheepDog.g:2519:2: ( ( rule__Table__RowsAssignment_4 )* )
+            // InternalSheepDog.g:2520:3: ( rule__Table__RowsAssignment_4 )*
             {
              before(grammarAccess.getTableAccess().getRowsAssignment_4()); 
-            // InternalSheepDog.g:2573:3: ( rule__Table__RowsAssignment_4 )*
-            loop30:
+            // InternalSheepDog.g:2521:3: ( rule__Table__RowsAssignment_4 )*
+            loop29:
             do {
-                int alt30=2;
-                int LA30_0 = input.LA(1);
+                int alt29=2;
+                int LA29_0 = input.LA(1);
 
-                if ( (LA30_0==29) ) {
-                    alt30=1;
+                if ( (LA29_0==27) ) {
+                    alt29=1;
                 }
 
 
-                switch (alt30) {
+                switch (alt29) {
             	case 1 :
-            	    // InternalSheepDog.g:2573:4: rule__Table__RowsAssignment_4
+            	    // InternalSheepDog.g:2521:4: rule__Table__RowsAssignment_4
             	    {
             	    pushFollow(FOLLOW_34);
             	    rule__Table__RowsAssignment_4();
@@ -8146,7 +7972,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop30;
+            	    break loop29;
                 }
             } while (true);
 
@@ -8176,14 +8002,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Table__Group__5"
-    // InternalSheepDog.g:2582:1: rule__Table__Group__5 : rule__Table__Group__5__Impl rule__Table__Group__6 ;
+    // InternalSheepDog.g:2530:1: rule__Table__Group__5 : rule__Table__Group__5__Impl rule__Table__Group__6 ;
     public final void rule__Table__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2586:1: ( rule__Table__Group__5__Impl rule__Table__Group__6 )
-            // InternalSheepDog.g:2587:2: rule__Table__Group__5__Impl rule__Table__Group__6
+            // InternalSheepDog.g:2534:1: ( rule__Table__Group__5__Impl rule__Table__Group__6 )
+            // InternalSheepDog.g:2535:2: rule__Table__Group__5__Impl rule__Table__Group__6
             {
             pushFollow(FOLLOW_28);
             rule__Table__Group__5__Impl();
@@ -8214,20 +8040,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Table__Group__5__Impl"
-    // InternalSheepDog.g:2594:1: rule__Table__Group__5__Impl : ( '|===' ) ;
+    // InternalSheepDog.g:2542:1: rule__Table__Group__5__Impl : ( '|===' ) ;
     public final void rule__Table__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2598:1: ( ( '|===' ) )
-            // InternalSheepDog.g:2599:1: ( '|===' )
+            // InternalSheepDog.g:2546:1: ( ( '|===' ) )
+            // InternalSheepDog.g:2547:1: ( '|===' )
             {
-            // InternalSheepDog.g:2599:1: ( '|===' )
-            // InternalSheepDog.g:2600:2: '|==='
+            // InternalSheepDog.g:2547:1: ( '|===' )
+            // InternalSheepDog.g:2548:2: '|==='
             {
              before(grammarAccess.getTableAccess().getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_5()); 
-            match(input,26,FOLLOW_2); 
+            match(input,24,FOLLOW_2); 
              after(grammarAccess.getTableAccess().getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_5()); 
 
             }
@@ -8251,14 +8077,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Table__Group__6"
-    // InternalSheepDog.g:2609:1: rule__Table__Group__6 : rule__Table__Group__6__Impl ;
+    // InternalSheepDog.g:2557:1: rule__Table__Group__6 : rule__Table__Group__6__Impl ;
     public final void rule__Table__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2613:1: ( rule__Table__Group__6__Impl )
-            // InternalSheepDog.g:2614:2: rule__Table__Group__6__Impl
+            // InternalSheepDog.g:2561:1: ( rule__Table__Group__6__Impl )
+            // InternalSheepDog.g:2562:2: rule__Table__Group__6__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Table__Group__6__Impl();
@@ -8284,17 +8110,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Table__Group__6__Impl"
-    // InternalSheepDog.g:2620:1: rule__Table__Group__6__Impl : ( RULE_EOL ) ;
+    // InternalSheepDog.g:2568:1: rule__Table__Group__6__Impl : ( RULE_EOL ) ;
     public final void rule__Table__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2624:1: ( ( RULE_EOL ) )
-            // InternalSheepDog.g:2625:1: ( RULE_EOL )
+            // InternalSheepDog.g:2572:1: ( ( RULE_EOL ) )
+            // InternalSheepDog.g:2573:1: ( RULE_EOL )
             {
-            // InternalSheepDog.g:2625:1: ( RULE_EOL )
-            // InternalSheepDog.g:2626:2: RULE_EOL
+            // InternalSheepDog.g:2573:1: ( RULE_EOL )
+            // InternalSheepDog.g:2574:2: RULE_EOL
             {
              before(grammarAccess.getTableAccess().getEOLTerminalRuleCall_6()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -8321,14 +8147,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Row__Group__0"
-    // InternalSheepDog.g:2636:1: rule__Row__Group__0 : rule__Row__Group__0__Impl rule__Row__Group__1 ;
+    // InternalSheepDog.g:2584:1: rule__Row__Group__0 : rule__Row__Group__0__Impl rule__Row__Group__1 ;
     public final void rule__Row__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2640:1: ( rule__Row__Group__0__Impl rule__Row__Group__1 )
-            // InternalSheepDog.g:2641:2: rule__Row__Group__0__Impl rule__Row__Group__1
+            // InternalSheepDog.g:2588:1: ( rule__Row__Group__0__Impl rule__Row__Group__1 )
+            // InternalSheepDog.g:2589:2: rule__Row__Group__0__Impl rule__Row__Group__1
             {
             pushFollow(FOLLOW_28);
             rule__Row__Group__0__Impl();
@@ -8359,24 +8185,24 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Row__Group__0__Impl"
-    // InternalSheepDog.g:2648:1: rule__Row__Group__0__Impl : ( ( ( rule__Row__CellsAssignment_0 ) ) ( ( rule__Row__CellsAssignment_0 )* ) ) ;
+    // InternalSheepDog.g:2596:1: rule__Row__Group__0__Impl : ( ( ( rule__Row__CellsAssignment_0 ) ) ( ( rule__Row__CellsAssignment_0 )* ) ) ;
     public final void rule__Row__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2652:1: ( ( ( ( rule__Row__CellsAssignment_0 ) ) ( ( rule__Row__CellsAssignment_0 )* ) ) )
-            // InternalSheepDog.g:2653:1: ( ( ( rule__Row__CellsAssignment_0 ) ) ( ( rule__Row__CellsAssignment_0 )* ) )
+            // InternalSheepDog.g:2600:1: ( ( ( ( rule__Row__CellsAssignment_0 ) ) ( ( rule__Row__CellsAssignment_0 )* ) ) )
+            // InternalSheepDog.g:2601:1: ( ( ( rule__Row__CellsAssignment_0 ) ) ( ( rule__Row__CellsAssignment_0 )* ) )
             {
-            // InternalSheepDog.g:2653:1: ( ( ( rule__Row__CellsAssignment_0 ) ) ( ( rule__Row__CellsAssignment_0 )* ) )
-            // InternalSheepDog.g:2654:2: ( ( rule__Row__CellsAssignment_0 ) ) ( ( rule__Row__CellsAssignment_0 )* )
+            // InternalSheepDog.g:2601:1: ( ( ( rule__Row__CellsAssignment_0 ) ) ( ( rule__Row__CellsAssignment_0 )* ) )
+            // InternalSheepDog.g:2602:2: ( ( rule__Row__CellsAssignment_0 ) ) ( ( rule__Row__CellsAssignment_0 )* )
             {
-            // InternalSheepDog.g:2654:2: ( ( rule__Row__CellsAssignment_0 ) )
-            // InternalSheepDog.g:2655:3: ( rule__Row__CellsAssignment_0 )
+            // InternalSheepDog.g:2602:2: ( ( rule__Row__CellsAssignment_0 ) )
+            // InternalSheepDog.g:2603:3: ( rule__Row__CellsAssignment_0 )
             {
              before(grammarAccess.getRowAccess().getCellsAssignment_0()); 
-            // InternalSheepDog.g:2656:3: ( rule__Row__CellsAssignment_0 )
-            // InternalSheepDog.g:2656:4: rule__Row__CellsAssignment_0
+            // InternalSheepDog.g:2604:3: ( rule__Row__CellsAssignment_0 )
+            // InternalSheepDog.g:2604:4: rule__Row__CellsAssignment_0
             {
             pushFollow(FOLLOW_34);
             rule__Row__CellsAssignment_0();
@@ -8390,24 +8216,24 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
             }
 
-            // InternalSheepDog.g:2659:2: ( ( rule__Row__CellsAssignment_0 )* )
-            // InternalSheepDog.g:2660:3: ( rule__Row__CellsAssignment_0 )*
+            // InternalSheepDog.g:2607:2: ( ( rule__Row__CellsAssignment_0 )* )
+            // InternalSheepDog.g:2608:3: ( rule__Row__CellsAssignment_0 )*
             {
              before(grammarAccess.getRowAccess().getCellsAssignment_0()); 
-            // InternalSheepDog.g:2661:3: ( rule__Row__CellsAssignment_0 )*
-            loop31:
+            // InternalSheepDog.g:2609:3: ( rule__Row__CellsAssignment_0 )*
+            loop30:
             do {
-                int alt31=2;
-                int LA31_0 = input.LA(1);
+                int alt30=2;
+                int LA30_0 = input.LA(1);
 
-                if ( (LA31_0==29) ) {
-                    alt31=1;
+                if ( (LA30_0==27) ) {
+                    alt30=1;
                 }
 
 
-                switch (alt31) {
+                switch (alt30) {
             	case 1 :
-            	    // InternalSheepDog.g:2661:4: rule__Row__CellsAssignment_0
+            	    // InternalSheepDog.g:2609:4: rule__Row__CellsAssignment_0
             	    {
             	    pushFollow(FOLLOW_34);
             	    rule__Row__CellsAssignment_0();
@@ -8419,7 +8245,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	    break;
 
             	default :
-            	    break loop31;
+            	    break loop30;
                 }
             } while (true);
 
@@ -8449,14 +8275,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Row__Group__1"
-    // InternalSheepDog.g:2670:1: rule__Row__Group__1 : rule__Row__Group__1__Impl ;
+    // InternalSheepDog.g:2618:1: rule__Row__Group__1 : rule__Row__Group__1__Impl ;
     public final void rule__Row__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2674:1: ( rule__Row__Group__1__Impl )
-            // InternalSheepDog.g:2675:2: rule__Row__Group__1__Impl
+            // InternalSheepDog.g:2622:1: ( rule__Row__Group__1__Impl )
+            // InternalSheepDog.g:2623:2: rule__Row__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Row__Group__1__Impl();
@@ -8482,17 +8308,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Row__Group__1__Impl"
-    // InternalSheepDog.g:2681:1: rule__Row__Group__1__Impl : ( RULE_EOL ) ;
+    // InternalSheepDog.g:2629:1: rule__Row__Group__1__Impl : ( RULE_EOL ) ;
     public final void rule__Row__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2685:1: ( ( RULE_EOL ) )
-            // InternalSheepDog.g:2686:1: ( RULE_EOL )
+            // InternalSheepDog.g:2633:1: ( ( RULE_EOL ) )
+            // InternalSheepDog.g:2634:1: ( RULE_EOL )
             {
-            // InternalSheepDog.g:2686:1: ( RULE_EOL )
-            // InternalSheepDog.g:2687:2: RULE_EOL
+            // InternalSheepDog.g:2634:1: ( RULE_EOL )
+            // InternalSheepDog.g:2635:2: RULE_EOL
             {
              before(grammarAccess.getRowAccess().getEOLTerminalRuleCall_1()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -8519,14 +8345,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tags__Group__0"
-    // InternalSheepDog.g:2697:1: rule__Tags__Group__0 : rule__Tags__Group__0__Impl rule__Tags__Group__1 ;
+    // InternalSheepDog.g:2645:1: rule__Tags__Group__0 : rule__Tags__Group__0__Impl rule__Tags__Group__1 ;
     public final void rule__Tags__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2701:1: ( rule__Tags__Group__0__Impl rule__Tags__Group__1 )
-            // InternalSheepDog.g:2702:2: rule__Tags__Group__0__Impl rule__Tags__Group__1
+            // InternalSheepDog.g:2649:1: ( rule__Tags__Group__0__Impl rule__Tags__Group__1 )
+            // InternalSheepDog.g:2650:2: rule__Tags__Group__0__Impl rule__Tags__Group__1
             {
             pushFollow(FOLLOW_4);
             rule__Tags__Group__0__Impl();
@@ -8557,20 +8383,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tags__Group__0__Impl"
-    // InternalSheepDog.g:2709:1: rule__Tags__Group__0__Impl : ( '[tags=\"' ) ;
+    // InternalSheepDog.g:2657:1: rule__Tags__Group__0__Impl : ( '[tags=\"' ) ;
     public final void rule__Tags__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2713:1: ( ( '[tags=\"' ) )
-            // InternalSheepDog.g:2714:1: ( '[tags=\"' )
+            // InternalSheepDog.g:2661:1: ( ( '[tags=\"' ) )
+            // InternalSheepDog.g:2662:1: ( '[tags=\"' )
             {
-            // InternalSheepDog.g:2714:1: ( '[tags=\"' )
-            // InternalSheepDog.g:2715:2: '[tags=\"'
+            // InternalSheepDog.g:2662:1: ( '[tags=\"' )
+            // InternalSheepDog.g:2663:2: '[tags=\"'
             {
              before(grammarAccess.getTagsAccess().getTagsKeyword_0()); 
-            match(input,27,FOLLOW_2); 
+            match(input,25,FOLLOW_2); 
              after(grammarAccess.getTagsAccess().getTagsKeyword_0()); 
 
             }
@@ -8594,14 +8420,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tags__Group__1"
-    // InternalSheepDog.g:2724:1: rule__Tags__Group__1 : rule__Tags__Group__1__Impl rule__Tags__Group__2 ;
+    // InternalSheepDog.g:2672:1: rule__Tags__Group__1 : rule__Tags__Group__1__Impl rule__Tags__Group__2 ;
     public final void rule__Tags__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2728:1: ( rule__Tags__Group__1__Impl rule__Tags__Group__2 )
-            // InternalSheepDog.g:2729:2: rule__Tags__Group__1__Impl rule__Tags__Group__2
+            // InternalSheepDog.g:2676:1: ( rule__Tags__Group__1__Impl rule__Tags__Group__2 )
+            // InternalSheepDog.g:2677:2: rule__Tags__Group__1__Impl rule__Tags__Group__2
             {
             pushFollow(FOLLOW_35);
             rule__Tags__Group__1__Impl();
@@ -8632,71 +8458,63 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tags__Group__1__Impl"
-    // InternalSheepDog.g:2736:1: rule__Tags__Group__1__Impl : ( ( ( ruleTEXT_LITERAL ) ) ( ( ruleTEXT_LITERAL )* ) ) ;
+    // InternalSheepDog.g:2684:1: rule__Tags__Group__1__Impl : ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) ) ;
     public final void rule__Tags__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2740:1: ( ( ( ( ruleTEXT_LITERAL ) ) ( ( ruleTEXT_LITERAL )* ) ) )
-            // InternalSheepDog.g:2741:1: ( ( ( ruleTEXT_LITERAL ) ) ( ( ruleTEXT_LITERAL )* ) )
+            // InternalSheepDog.g:2688:1: ( ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) ) )
+            // InternalSheepDog.g:2689:1: ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) )
             {
-            // InternalSheepDog.g:2741:1: ( ( ( ruleTEXT_LITERAL ) ) ( ( ruleTEXT_LITERAL )* ) )
-            // InternalSheepDog.g:2742:2: ( ( ruleTEXT_LITERAL ) ) ( ( ruleTEXT_LITERAL )* )
+            // InternalSheepDog.g:2689:1: ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) )
+            // InternalSheepDog.g:2690:2: ( ( RULE_WORD ) ) ( ( RULE_WORD )* )
             {
-            // InternalSheepDog.g:2742:2: ( ( ruleTEXT_LITERAL ) )
-            // InternalSheepDog.g:2743:3: ( ruleTEXT_LITERAL )
+            // InternalSheepDog.g:2690:2: ( ( RULE_WORD ) )
+            // InternalSheepDog.g:2691:3: ( RULE_WORD )
             {
-             before(grammarAccess.getTagsAccess().getTEXT_LITERALParserRuleCall_1()); 
-            // InternalSheepDog.g:2744:3: ( ruleTEXT_LITERAL )
-            // InternalSheepDog.g:2744:4: ruleTEXT_LITERAL
+             before(grammarAccess.getTagsAccess().getWORDTerminalRuleCall_1()); 
+            // InternalSheepDog.g:2692:3: ( RULE_WORD )
+            // InternalSheepDog.g:2692:4: RULE_WORD
             {
-            pushFollow(FOLLOW_6);
-            ruleTEXT_LITERAL();
-
-            state._fsp--;
-
+            match(input,RULE_WORD,FOLLOW_6); 
 
             }
 
-             after(grammarAccess.getTagsAccess().getTEXT_LITERALParserRuleCall_1()); 
+             after(grammarAccess.getTagsAccess().getWORDTerminalRuleCall_1()); 
 
             }
 
-            // InternalSheepDog.g:2747:2: ( ( ruleTEXT_LITERAL )* )
-            // InternalSheepDog.g:2748:3: ( ruleTEXT_LITERAL )*
+            // InternalSheepDog.g:2695:2: ( ( RULE_WORD )* )
+            // InternalSheepDog.g:2696:3: ( RULE_WORD )*
             {
-             before(grammarAccess.getTagsAccess().getTEXT_LITERALParserRuleCall_1()); 
-            // InternalSheepDog.g:2749:3: ( ruleTEXT_LITERAL )*
-            loop32:
+             before(grammarAccess.getTagsAccess().getWORDTerminalRuleCall_1()); 
+            // InternalSheepDog.g:2697:3: ( RULE_WORD )*
+            loop31:
             do {
-                int alt32=2;
-                int LA32_0 = input.LA(1);
+                int alt31=2;
+                int LA31_0 = input.LA(1);
 
-                if ( ((LA32_0>=RULE_WORD && LA32_0<=RULE_STRING)) ) {
-                    alt32=1;
+                if ( (LA31_0==RULE_WORD) ) {
+                    alt31=1;
                 }
 
 
-                switch (alt32) {
+                switch (alt31) {
             	case 1 :
-            	    // InternalSheepDog.g:2749:4: ruleTEXT_LITERAL
+            	    // InternalSheepDog.g:2697:4: RULE_WORD
             	    {
-            	    pushFollow(FOLLOW_6);
-            	    ruleTEXT_LITERAL();
-
-            	    state._fsp--;
-
+            	    match(input,RULE_WORD,FOLLOW_6); 
 
             	    }
             	    break;
 
             	default :
-            	    break loop32;
+            	    break loop31;
                 }
             } while (true);
 
-             after(grammarAccess.getTagsAccess().getTEXT_LITERALParserRuleCall_1()); 
+             after(grammarAccess.getTagsAccess().getWORDTerminalRuleCall_1()); 
 
             }
 
@@ -8722,14 +8540,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tags__Group__2"
-    // InternalSheepDog.g:2758:1: rule__Tags__Group__2 : rule__Tags__Group__2__Impl rule__Tags__Group__3 ;
+    // InternalSheepDog.g:2706:1: rule__Tags__Group__2 : rule__Tags__Group__2__Impl rule__Tags__Group__3 ;
     public final void rule__Tags__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2762:1: ( rule__Tags__Group__2__Impl rule__Tags__Group__3 )
-            // InternalSheepDog.g:2763:2: rule__Tags__Group__2__Impl rule__Tags__Group__3
+            // InternalSheepDog.g:2710:1: ( rule__Tags__Group__2__Impl rule__Tags__Group__3 )
+            // InternalSheepDog.g:2711:2: rule__Tags__Group__2__Impl rule__Tags__Group__3
             {
             pushFollow(FOLLOW_28);
             rule__Tags__Group__2__Impl();
@@ -8760,20 +8578,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tags__Group__2__Impl"
-    // InternalSheepDog.g:2770:1: rule__Tags__Group__2__Impl : ( '\"]' ) ;
+    // InternalSheepDog.g:2718:1: rule__Tags__Group__2__Impl : ( '\"]' ) ;
     public final void rule__Tags__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2774:1: ( ( '\"]' ) )
-            // InternalSheepDog.g:2775:1: ( '\"]' )
+            // InternalSheepDog.g:2722:1: ( ( '\"]' ) )
+            // InternalSheepDog.g:2723:1: ( '\"]' )
             {
-            // InternalSheepDog.g:2775:1: ( '\"]' )
-            // InternalSheepDog.g:2776:2: '\"]'
+            // InternalSheepDog.g:2723:1: ( '\"]' )
+            // InternalSheepDog.g:2724:2: '\"]'
             {
              before(grammarAccess.getTagsAccess().getQuotationMarkRightSquareBracketKeyword_2()); 
-            match(input,28,FOLLOW_2); 
+            match(input,26,FOLLOW_2); 
              after(grammarAccess.getTagsAccess().getQuotationMarkRightSquareBracketKeyword_2()); 
 
             }
@@ -8797,14 +8615,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tags__Group__3"
-    // InternalSheepDog.g:2785:1: rule__Tags__Group__3 : rule__Tags__Group__3__Impl ;
+    // InternalSheepDog.g:2733:1: rule__Tags__Group__3 : rule__Tags__Group__3__Impl ;
     public final void rule__Tags__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2789:1: ( rule__Tags__Group__3__Impl )
-            // InternalSheepDog.g:2790:2: rule__Tags__Group__3__Impl
+            // InternalSheepDog.g:2737:1: ( rule__Tags__Group__3__Impl )
+            // InternalSheepDog.g:2738:2: rule__Tags__Group__3__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Tags__Group__3__Impl();
@@ -8830,17 +8648,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Tags__Group__3__Impl"
-    // InternalSheepDog.g:2796:1: rule__Tags__Group__3__Impl : ( RULE_EOL ) ;
+    // InternalSheepDog.g:2744:1: rule__Tags__Group__3__Impl : ( RULE_EOL ) ;
     public final void rule__Tags__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2800:1: ( ( RULE_EOL ) )
-            // InternalSheepDog.g:2801:1: ( RULE_EOL )
+            // InternalSheepDog.g:2748:1: ( ( RULE_EOL ) )
+            // InternalSheepDog.g:2749:1: ( RULE_EOL )
             {
-            // InternalSheepDog.g:2801:1: ( RULE_EOL )
-            // InternalSheepDog.g:2802:2: RULE_EOL
+            // InternalSheepDog.g:2749:1: ( RULE_EOL )
+            // InternalSheepDog.g:2750:2: RULE_EOL
             {
              before(grammarAccess.getTagsAccess().getEOLTerminalRuleCall_3()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -8867,14 +8685,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Title__Group__0"
-    // InternalSheepDog.g:2812:1: rule__Title__Group__0 : rule__Title__Group__0__Impl rule__Title__Group__1 ;
+    // InternalSheepDog.g:2760:1: rule__Title__Group__0 : rule__Title__Group__0__Impl rule__Title__Group__1 ;
     public final void rule__Title__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2816:1: ( rule__Title__Group__0__Impl rule__Title__Group__1 )
-            // InternalSheepDog.g:2817:2: rule__Title__Group__0__Impl rule__Title__Group__1
+            // InternalSheepDog.g:2764:1: ( rule__Title__Group__0__Impl rule__Title__Group__1 )
+            // InternalSheepDog.g:2765:2: rule__Title__Group__0__Impl rule__Title__Group__1
             {
             pushFollow(FOLLOW_28);
             rule__Title__Group__0__Impl();
@@ -8905,71 +8723,63 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Title__Group__0__Impl"
-    // InternalSheepDog.g:2824:1: rule__Title__Group__0__Impl : ( ( ( ruleTEXT_LITERAL ) ) ( ( ruleTEXT_LITERAL )* ) ) ;
+    // InternalSheepDog.g:2772:1: rule__Title__Group__0__Impl : ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) ) ;
     public final void rule__Title__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2828:1: ( ( ( ( ruleTEXT_LITERAL ) ) ( ( ruleTEXT_LITERAL )* ) ) )
-            // InternalSheepDog.g:2829:1: ( ( ( ruleTEXT_LITERAL ) ) ( ( ruleTEXT_LITERAL )* ) )
+            // InternalSheepDog.g:2776:1: ( ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) ) )
+            // InternalSheepDog.g:2777:1: ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) )
             {
-            // InternalSheepDog.g:2829:1: ( ( ( ruleTEXT_LITERAL ) ) ( ( ruleTEXT_LITERAL )* ) )
-            // InternalSheepDog.g:2830:2: ( ( ruleTEXT_LITERAL ) ) ( ( ruleTEXT_LITERAL )* )
+            // InternalSheepDog.g:2777:1: ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) )
+            // InternalSheepDog.g:2778:2: ( ( RULE_WORD ) ) ( ( RULE_WORD )* )
             {
-            // InternalSheepDog.g:2830:2: ( ( ruleTEXT_LITERAL ) )
-            // InternalSheepDog.g:2831:3: ( ruleTEXT_LITERAL )
+            // InternalSheepDog.g:2778:2: ( ( RULE_WORD ) )
+            // InternalSheepDog.g:2779:3: ( RULE_WORD )
             {
-             before(grammarAccess.getTitleAccess().getTEXT_LITERALParserRuleCall_0()); 
-            // InternalSheepDog.g:2832:3: ( ruleTEXT_LITERAL )
-            // InternalSheepDog.g:2832:4: ruleTEXT_LITERAL
+             before(grammarAccess.getTitleAccess().getWORDTerminalRuleCall_0()); 
+            // InternalSheepDog.g:2780:3: ( RULE_WORD )
+            // InternalSheepDog.g:2780:4: RULE_WORD
             {
-            pushFollow(FOLLOW_6);
-            ruleTEXT_LITERAL();
-
-            state._fsp--;
-
+            match(input,RULE_WORD,FOLLOW_6); 
 
             }
 
-             after(grammarAccess.getTitleAccess().getTEXT_LITERALParserRuleCall_0()); 
+             after(grammarAccess.getTitleAccess().getWORDTerminalRuleCall_0()); 
 
             }
 
-            // InternalSheepDog.g:2835:2: ( ( ruleTEXT_LITERAL )* )
-            // InternalSheepDog.g:2836:3: ( ruleTEXT_LITERAL )*
+            // InternalSheepDog.g:2783:2: ( ( RULE_WORD )* )
+            // InternalSheepDog.g:2784:3: ( RULE_WORD )*
             {
-             before(grammarAccess.getTitleAccess().getTEXT_LITERALParserRuleCall_0()); 
-            // InternalSheepDog.g:2837:3: ( ruleTEXT_LITERAL )*
-            loop33:
+             before(grammarAccess.getTitleAccess().getWORDTerminalRuleCall_0()); 
+            // InternalSheepDog.g:2785:3: ( RULE_WORD )*
+            loop32:
             do {
-                int alt33=2;
-                int LA33_0 = input.LA(1);
+                int alt32=2;
+                int LA32_0 = input.LA(1);
 
-                if ( ((LA33_0>=RULE_WORD && LA33_0<=RULE_STRING)) ) {
-                    alt33=1;
+                if ( (LA32_0==RULE_WORD) ) {
+                    alt32=1;
                 }
 
 
-                switch (alt33) {
+                switch (alt32) {
             	case 1 :
-            	    // InternalSheepDog.g:2837:4: ruleTEXT_LITERAL
+            	    // InternalSheepDog.g:2785:4: RULE_WORD
             	    {
-            	    pushFollow(FOLLOW_6);
-            	    ruleTEXT_LITERAL();
-
-            	    state._fsp--;
-
+            	    match(input,RULE_WORD,FOLLOW_6); 
 
             	    }
             	    break;
 
             	default :
-            	    break loop33;
+            	    break loop32;
                 }
             } while (true);
 
-             after(grammarAccess.getTitleAccess().getTEXT_LITERALParserRuleCall_0()); 
+             after(grammarAccess.getTitleAccess().getWORDTerminalRuleCall_0()); 
 
             }
 
@@ -8995,14 +8805,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Title__Group__1"
-    // InternalSheepDog.g:2846:1: rule__Title__Group__1 : rule__Title__Group__1__Impl ;
+    // InternalSheepDog.g:2794:1: rule__Title__Group__1 : rule__Title__Group__1__Impl ;
     public final void rule__Title__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2850:1: ( rule__Title__Group__1__Impl )
-            // InternalSheepDog.g:2851:2: rule__Title__Group__1__Impl
+            // InternalSheepDog.g:2798:1: ( rule__Title__Group__1__Impl )
+            // InternalSheepDog.g:2799:2: rule__Title__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Title__Group__1__Impl();
@@ -9028,17 +8838,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Title__Group__1__Impl"
-    // InternalSheepDog.g:2857:1: rule__Title__Group__1__Impl : ( RULE_EOL ) ;
+    // InternalSheepDog.g:2805:1: rule__Title__Group__1__Impl : ( RULE_EOL ) ;
     public final void rule__Title__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2861:1: ( ( RULE_EOL ) )
-            // InternalSheepDog.g:2862:1: ( RULE_EOL )
+            // InternalSheepDog.g:2809:1: ( ( RULE_EOL ) )
+            // InternalSheepDog.g:2810:1: ( RULE_EOL )
             {
-            // InternalSheepDog.g:2862:1: ( RULE_EOL )
-            // InternalSheepDog.g:2863:2: RULE_EOL
+            // InternalSheepDog.g:2810:1: ( RULE_EOL )
+            // InternalSheepDog.g:2811:2: RULE_EOL
             {
              before(grammarAccess.getTitleAccess().getEOLTerminalRuleCall_1()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -9065,14 +8875,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Statement__Group__0"
-    // InternalSheepDog.g:2873:1: rule__Statement__Group__0 : rule__Statement__Group__0__Impl rule__Statement__Group__1 ;
+    // InternalSheepDog.g:2821:1: rule__Statement__Group__0 : rule__Statement__Group__0__Impl rule__Statement__Group__1 ;
     public final void rule__Statement__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2877:1: ( rule__Statement__Group__0__Impl rule__Statement__Group__1 )
-            // InternalSheepDog.g:2878:2: rule__Statement__Group__0__Impl rule__Statement__Group__1
+            // InternalSheepDog.g:2825:1: ( rule__Statement__Group__0__Impl rule__Statement__Group__1 )
+            // InternalSheepDog.g:2826:2: rule__Statement__Group__0__Impl rule__Statement__Group__1
             {
             pushFollow(FOLLOW_28);
             rule__Statement__Group__0__Impl();
@@ -9103,71 +8913,63 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Statement__Group__0__Impl"
-    // InternalSheepDog.g:2885:1: rule__Statement__Group__0__Impl : ( ( ( ruleTEXT_LITERAL ) ) ( ( ruleTEXT_LITERAL )* ) ) ;
+    // InternalSheepDog.g:2833:1: rule__Statement__Group__0__Impl : ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) ) ;
     public final void rule__Statement__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2889:1: ( ( ( ( ruleTEXT_LITERAL ) ) ( ( ruleTEXT_LITERAL )* ) ) )
-            // InternalSheepDog.g:2890:1: ( ( ( ruleTEXT_LITERAL ) ) ( ( ruleTEXT_LITERAL )* ) )
+            // InternalSheepDog.g:2837:1: ( ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) ) )
+            // InternalSheepDog.g:2838:1: ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) )
             {
-            // InternalSheepDog.g:2890:1: ( ( ( ruleTEXT_LITERAL ) ) ( ( ruleTEXT_LITERAL )* ) )
-            // InternalSheepDog.g:2891:2: ( ( ruleTEXT_LITERAL ) ) ( ( ruleTEXT_LITERAL )* )
+            // InternalSheepDog.g:2838:1: ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) )
+            // InternalSheepDog.g:2839:2: ( ( RULE_WORD ) ) ( ( RULE_WORD )* )
             {
-            // InternalSheepDog.g:2891:2: ( ( ruleTEXT_LITERAL ) )
-            // InternalSheepDog.g:2892:3: ( ruleTEXT_LITERAL )
+            // InternalSheepDog.g:2839:2: ( ( RULE_WORD ) )
+            // InternalSheepDog.g:2840:3: ( RULE_WORD )
             {
-             before(grammarAccess.getStatementAccess().getTEXT_LITERALParserRuleCall_0()); 
-            // InternalSheepDog.g:2893:3: ( ruleTEXT_LITERAL )
-            // InternalSheepDog.g:2893:4: ruleTEXT_LITERAL
+             before(grammarAccess.getStatementAccess().getWORDTerminalRuleCall_0()); 
+            // InternalSheepDog.g:2841:3: ( RULE_WORD )
+            // InternalSheepDog.g:2841:4: RULE_WORD
             {
-            pushFollow(FOLLOW_6);
-            ruleTEXT_LITERAL();
-
-            state._fsp--;
-
+            match(input,RULE_WORD,FOLLOW_6); 
 
             }
 
-             after(grammarAccess.getStatementAccess().getTEXT_LITERALParserRuleCall_0()); 
+             after(grammarAccess.getStatementAccess().getWORDTerminalRuleCall_0()); 
 
             }
 
-            // InternalSheepDog.g:2896:2: ( ( ruleTEXT_LITERAL )* )
-            // InternalSheepDog.g:2897:3: ( ruleTEXT_LITERAL )*
+            // InternalSheepDog.g:2844:2: ( ( RULE_WORD )* )
+            // InternalSheepDog.g:2845:3: ( RULE_WORD )*
             {
-             before(grammarAccess.getStatementAccess().getTEXT_LITERALParserRuleCall_0()); 
-            // InternalSheepDog.g:2898:3: ( ruleTEXT_LITERAL )*
-            loop34:
+             before(grammarAccess.getStatementAccess().getWORDTerminalRuleCall_0()); 
+            // InternalSheepDog.g:2846:3: ( RULE_WORD )*
+            loop33:
             do {
-                int alt34=2;
-                int LA34_0 = input.LA(1);
+                int alt33=2;
+                int LA33_0 = input.LA(1);
 
-                if ( ((LA34_0>=RULE_WORD && LA34_0<=RULE_STRING)) ) {
-                    alt34=1;
+                if ( (LA33_0==RULE_WORD) ) {
+                    alt33=1;
                 }
 
 
-                switch (alt34) {
+                switch (alt33) {
             	case 1 :
-            	    // InternalSheepDog.g:2898:4: ruleTEXT_LITERAL
+            	    // InternalSheepDog.g:2846:4: RULE_WORD
             	    {
-            	    pushFollow(FOLLOW_6);
-            	    ruleTEXT_LITERAL();
-
-            	    state._fsp--;
-
+            	    match(input,RULE_WORD,FOLLOW_6); 
 
             	    }
             	    break;
 
             	default :
-            	    break loop34;
+            	    break loop33;
                 }
             } while (true);
 
-             after(grammarAccess.getStatementAccess().getTEXT_LITERALParserRuleCall_0()); 
+             after(grammarAccess.getStatementAccess().getWORDTerminalRuleCall_0()); 
 
             }
 
@@ -9193,14 +8995,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Statement__Group__1"
-    // InternalSheepDog.g:2907:1: rule__Statement__Group__1 : rule__Statement__Group__1__Impl ;
+    // InternalSheepDog.g:2855:1: rule__Statement__Group__1 : rule__Statement__Group__1__Impl ;
     public final void rule__Statement__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2911:1: ( rule__Statement__Group__1__Impl )
-            // InternalSheepDog.g:2912:2: rule__Statement__Group__1__Impl
+            // InternalSheepDog.g:2859:1: ( rule__Statement__Group__1__Impl )
+            // InternalSheepDog.g:2860:2: rule__Statement__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Statement__Group__1__Impl();
@@ -9226,17 +9028,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Statement__Group__1__Impl"
-    // InternalSheepDog.g:2918:1: rule__Statement__Group__1__Impl : ( RULE_EOL ) ;
+    // InternalSheepDog.g:2866:1: rule__Statement__Group__1__Impl : ( RULE_EOL ) ;
     public final void rule__Statement__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2922:1: ( ( RULE_EOL ) )
-            // InternalSheepDog.g:2923:1: ( RULE_EOL )
+            // InternalSheepDog.g:2870:1: ( ( RULE_EOL ) )
+            // InternalSheepDog.g:2871:1: ( RULE_EOL )
             {
-            // InternalSheepDog.g:2923:1: ( RULE_EOL )
-            // InternalSheepDog.g:2924:2: RULE_EOL
+            // InternalSheepDog.g:2871:1: ( RULE_EOL )
+            // InternalSheepDog.g:2872:2: RULE_EOL
             {
              before(grammarAccess.getStatementAccess().getEOLTerminalRuleCall_1()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -9263,14 +9065,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Line__Group__0"
-    // InternalSheepDog.g:2934:1: rule__Line__Group__0 : rule__Line__Group__0__Impl rule__Line__Group__1 ;
+    // InternalSheepDog.g:2882:1: rule__Line__Group__0 : rule__Line__Group__0__Impl rule__Line__Group__1 ;
     public final void rule__Line__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2938:1: ( rule__Line__Group__0__Impl rule__Line__Group__1 )
-            // InternalSheepDog.g:2939:2: rule__Line__Group__0__Impl rule__Line__Group__1
+            // InternalSheepDog.g:2886:1: ( rule__Line__Group__0__Impl rule__Line__Group__1 )
+            // InternalSheepDog.g:2887:2: rule__Line__Group__0__Impl rule__Line__Group__1
             {
             pushFollow(FOLLOW_29);
             rule__Line__Group__0__Impl();
@@ -9301,49 +9103,45 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Line__Group__0__Impl"
-    // InternalSheepDog.g:2946:1: rule__Line__Group__0__Impl : ( ( ruleTEXT_LITERAL )* ) ;
+    // InternalSheepDog.g:2894:1: rule__Line__Group__0__Impl : ( ( RULE_WORD )* ) ;
     public final void rule__Line__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2950:1: ( ( ( ruleTEXT_LITERAL )* ) )
-            // InternalSheepDog.g:2951:1: ( ( ruleTEXT_LITERAL )* )
+            // InternalSheepDog.g:2898:1: ( ( ( RULE_WORD )* ) )
+            // InternalSheepDog.g:2899:1: ( ( RULE_WORD )* )
             {
-            // InternalSheepDog.g:2951:1: ( ( ruleTEXT_LITERAL )* )
-            // InternalSheepDog.g:2952:2: ( ruleTEXT_LITERAL )*
+            // InternalSheepDog.g:2899:1: ( ( RULE_WORD )* )
+            // InternalSheepDog.g:2900:2: ( RULE_WORD )*
             {
-             before(grammarAccess.getLineAccess().getTEXT_LITERALParserRuleCall_0()); 
-            // InternalSheepDog.g:2953:2: ( ruleTEXT_LITERAL )*
-            loop35:
+             before(grammarAccess.getLineAccess().getWORDTerminalRuleCall_0()); 
+            // InternalSheepDog.g:2901:2: ( RULE_WORD )*
+            loop34:
             do {
-                int alt35=2;
-                int LA35_0 = input.LA(1);
+                int alt34=2;
+                int LA34_0 = input.LA(1);
 
-                if ( ((LA35_0>=RULE_WORD && LA35_0<=RULE_STRING)) ) {
-                    alt35=1;
+                if ( (LA34_0==RULE_WORD) ) {
+                    alt34=1;
                 }
 
 
-                switch (alt35) {
+                switch (alt34) {
             	case 1 :
-            	    // InternalSheepDog.g:2953:3: ruleTEXT_LITERAL
+            	    // InternalSheepDog.g:2901:3: RULE_WORD
             	    {
-            	    pushFollow(FOLLOW_6);
-            	    ruleTEXT_LITERAL();
-
-            	    state._fsp--;
-
+            	    match(input,RULE_WORD,FOLLOW_6); 
 
             	    }
             	    break;
 
             	default :
-            	    break loop35;
+            	    break loop34;
                 }
             } while (true);
 
-             after(grammarAccess.getLineAccess().getTEXT_LITERALParserRuleCall_0()); 
+             after(grammarAccess.getLineAccess().getWORDTerminalRuleCall_0()); 
 
             }
 
@@ -9366,14 +9164,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Line__Group__1"
-    // InternalSheepDog.g:2961:1: rule__Line__Group__1 : rule__Line__Group__1__Impl ;
+    // InternalSheepDog.g:2909:1: rule__Line__Group__1 : rule__Line__Group__1__Impl ;
     public final void rule__Line__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2965:1: ( rule__Line__Group__1__Impl )
-            // InternalSheepDog.g:2966:2: rule__Line__Group__1__Impl
+            // InternalSheepDog.g:2913:1: ( rule__Line__Group__1__Impl )
+            // InternalSheepDog.g:2914:2: rule__Line__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Line__Group__1__Impl();
@@ -9399,17 +9197,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Line__Group__1__Impl"
-    // InternalSheepDog.g:2972:1: rule__Line__Group__1__Impl : ( RULE_EOL ) ;
+    // InternalSheepDog.g:2920:1: rule__Line__Group__1__Impl : ( RULE_EOL ) ;
     public final void rule__Line__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2976:1: ( ( RULE_EOL ) )
-            // InternalSheepDog.g:2977:1: ( RULE_EOL )
+            // InternalSheepDog.g:2924:1: ( ( RULE_EOL ) )
+            // InternalSheepDog.g:2925:1: ( RULE_EOL )
             {
-            // InternalSheepDog.g:2977:1: ( RULE_EOL )
-            // InternalSheepDog.g:2978:2: RULE_EOL
+            // InternalSheepDog.g:2925:1: ( RULE_EOL )
+            // InternalSheepDog.g:2926:2: RULE_EOL
             {
              before(grammarAccess.getLineAccess().getEOLTerminalRuleCall_1()); 
             match(input,RULE_EOL,FOLLOW_2); 
@@ -9436,14 +9234,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Cell__Group__0"
-    // InternalSheepDog.g:2988:1: rule__Cell__Group__0 : rule__Cell__Group__0__Impl rule__Cell__Group__1 ;
+    // InternalSheepDog.g:2936:1: rule__Cell__Group__0 : rule__Cell__Group__0__Impl rule__Cell__Group__1 ;
     public final void rule__Cell__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:2992:1: ( rule__Cell__Group__0__Impl rule__Cell__Group__1 )
-            // InternalSheepDog.g:2993:2: rule__Cell__Group__0__Impl rule__Cell__Group__1
+            // InternalSheepDog.g:2940:1: ( rule__Cell__Group__0__Impl rule__Cell__Group__1 )
+            // InternalSheepDog.g:2941:2: rule__Cell__Group__0__Impl rule__Cell__Group__1
             {
             pushFollow(FOLLOW_4);
             rule__Cell__Group__0__Impl();
@@ -9474,20 +9272,20 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Cell__Group__0__Impl"
-    // InternalSheepDog.g:3000:1: rule__Cell__Group__0__Impl : ( '|' ) ;
+    // InternalSheepDog.g:2948:1: rule__Cell__Group__0__Impl : ( '|' ) ;
     public final void rule__Cell__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3004:1: ( ( '|' ) )
-            // InternalSheepDog.g:3005:1: ( '|' )
+            // InternalSheepDog.g:2952:1: ( ( '|' ) )
+            // InternalSheepDog.g:2953:1: ( '|' )
             {
-            // InternalSheepDog.g:3005:1: ( '|' )
-            // InternalSheepDog.g:3006:2: '|'
+            // InternalSheepDog.g:2953:1: ( '|' )
+            // InternalSheepDog.g:2954:2: '|'
             {
              before(grammarAccess.getCellAccess().getVerticalLineKeyword_0()); 
-            match(input,29,FOLLOW_2); 
+            match(input,27,FOLLOW_2); 
              after(grammarAccess.getCellAccess().getVerticalLineKeyword_0()); 
 
             }
@@ -9511,14 +9309,14 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Cell__Group__1"
-    // InternalSheepDog.g:3015:1: rule__Cell__Group__1 : rule__Cell__Group__1__Impl ;
+    // InternalSheepDog.g:2963:1: rule__Cell__Group__1 : rule__Cell__Group__1__Impl ;
     public final void rule__Cell__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3019:1: ( rule__Cell__Group__1__Impl )
-            // InternalSheepDog.g:3020:2: rule__Cell__Group__1__Impl
+            // InternalSheepDog.g:2967:1: ( rule__Cell__Group__1__Impl )
+            // InternalSheepDog.g:2968:2: rule__Cell__Group__1__Impl
             {
             pushFollow(FOLLOW_2);
             rule__Cell__Group__1__Impl();
@@ -9544,49 +9342,45 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Cell__Group__1__Impl"
-    // InternalSheepDog.g:3026:1: rule__Cell__Group__1__Impl : ( ( ruleTEXT_LITERAL )* ) ;
+    // InternalSheepDog.g:2974:1: rule__Cell__Group__1__Impl : ( ( RULE_WORD )* ) ;
     public final void rule__Cell__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3030:1: ( ( ( ruleTEXT_LITERAL )* ) )
-            // InternalSheepDog.g:3031:1: ( ( ruleTEXT_LITERAL )* )
+            // InternalSheepDog.g:2978:1: ( ( ( RULE_WORD )* ) )
+            // InternalSheepDog.g:2979:1: ( ( RULE_WORD )* )
             {
-            // InternalSheepDog.g:3031:1: ( ( ruleTEXT_LITERAL )* )
-            // InternalSheepDog.g:3032:2: ( ruleTEXT_LITERAL )*
+            // InternalSheepDog.g:2979:1: ( ( RULE_WORD )* )
+            // InternalSheepDog.g:2980:2: ( RULE_WORD )*
             {
-             before(grammarAccess.getCellAccess().getTEXT_LITERALParserRuleCall_1()); 
-            // InternalSheepDog.g:3033:2: ( ruleTEXT_LITERAL )*
-            loop36:
+             before(grammarAccess.getCellAccess().getWORDTerminalRuleCall_1()); 
+            // InternalSheepDog.g:2981:2: ( RULE_WORD )*
+            loop35:
             do {
-                int alt36=2;
-                int LA36_0 = input.LA(1);
+                int alt35=2;
+                int LA35_0 = input.LA(1);
 
-                if ( ((LA36_0>=RULE_WORD && LA36_0<=RULE_STRING)) ) {
-                    alt36=1;
+                if ( (LA35_0==RULE_WORD) ) {
+                    alt35=1;
                 }
 
 
-                switch (alt36) {
+                switch (alt35) {
             	case 1 :
-            	    // InternalSheepDog.g:3033:3: ruleTEXT_LITERAL
+            	    // InternalSheepDog.g:2981:3: RULE_WORD
             	    {
-            	    pushFollow(FOLLOW_6);
-            	    ruleTEXT_LITERAL();
-
-            	    state._fsp--;
-
+            	    match(input,RULE_WORD,FOLLOW_6); 
 
             	    }
             	    break;
 
             	default :
-            	    break loop36;
+            	    break loop35;
                 }
             } while (true);
 
-             after(grammarAccess.getCellAccess().getTEXT_LITERALParserRuleCall_1()); 
+             after(grammarAccess.getCellAccess().getWORDTerminalRuleCall_1()); 
 
             }
 
@@ -9609,17 +9403,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepObject__NameAssignment_2"
-    // InternalSheepDog.g:3042:1: rule__StepObject__NameAssignment_2 : ( ruleTitle ) ;
+    // InternalSheepDog.g:2990:1: rule__StepObject__NameAssignment_2 : ( ruleTitle ) ;
     public final void rule__StepObject__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3046:1: ( ( ruleTitle ) )
-            // InternalSheepDog.g:3047:2: ( ruleTitle )
+            // InternalSheepDog.g:2994:1: ( ( ruleTitle ) )
+            // InternalSheepDog.g:2995:2: ( ruleTitle )
             {
-            // InternalSheepDog.g:3047:2: ( ruleTitle )
-            // InternalSheepDog.g:3048:3: ruleTitle
+            // InternalSheepDog.g:2995:2: ( ruleTitle )
+            // InternalSheepDog.g:2996:3: ruleTitle
             {
              before(grammarAccess.getStepObjectAccess().getNameTitleParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -9650,17 +9444,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepObject__StatementsAssignment_3"
-    // InternalSheepDog.g:3057:1: rule__StepObject__StatementsAssignment_3 : ( ruleStatement ) ;
+    // InternalSheepDog.g:3005:1: rule__StepObject__StatementsAssignment_3 : ( ruleStatement ) ;
     public final void rule__StepObject__StatementsAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3061:1: ( ( ruleStatement ) )
-            // InternalSheepDog.g:3062:2: ( ruleStatement )
+            // InternalSheepDog.g:3009:1: ( ( ruleStatement ) )
+            // InternalSheepDog.g:3010:2: ( ruleStatement )
             {
-            // InternalSheepDog.g:3062:2: ( ruleStatement )
-            // InternalSheepDog.g:3063:3: ruleStatement
+            // InternalSheepDog.g:3010:2: ( ruleStatement )
+            // InternalSheepDog.g:3011:3: ruleStatement
             {
              before(grammarAccess.getStepObjectAccess().getStatementsStatementParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -9691,17 +9485,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepObject__StepDefinitionsAssignment_4"
-    // InternalSheepDog.g:3072:1: rule__StepObject__StepDefinitionsAssignment_4 : ( ruleStepDefinition ) ;
+    // InternalSheepDog.g:3020:1: rule__StepObject__StepDefinitionsAssignment_4 : ( ruleStepDefinition ) ;
     public final void rule__StepObject__StepDefinitionsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3076:1: ( ( ruleStepDefinition ) )
-            // InternalSheepDog.g:3077:2: ( ruleStepDefinition )
+            // InternalSheepDog.g:3024:1: ( ( ruleStepDefinition ) )
+            // InternalSheepDog.g:3025:2: ( ruleStepDefinition )
             {
-            // InternalSheepDog.g:3077:2: ( ruleStepDefinition )
-            // InternalSheepDog.g:3078:3: ruleStepDefinition
+            // InternalSheepDog.g:3025:2: ( ruleStepDefinition )
+            // InternalSheepDog.g:3026:3: ruleStepDefinition
             {
              before(grammarAccess.getStepObjectAccess().getStepDefinitionsStepDefinitionParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -9732,17 +9526,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepDefinition__NameAssignment_2"
-    // InternalSheepDog.g:3087:1: rule__StepDefinition__NameAssignment_2 : ( ruleTitle ) ;
+    // InternalSheepDog.g:3035:1: rule__StepDefinition__NameAssignment_2 : ( ruleTitle ) ;
     public final void rule__StepDefinition__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3091:1: ( ( ruleTitle ) )
-            // InternalSheepDog.g:3092:2: ( ruleTitle )
+            // InternalSheepDog.g:3039:1: ( ( ruleTitle ) )
+            // InternalSheepDog.g:3040:2: ( ruleTitle )
             {
-            // InternalSheepDog.g:3092:2: ( ruleTitle )
-            // InternalSheepDog.g:3093:3: ruleTitle
+            // InternalSheepDog.g:3040:2: ( ruleTitle )
+            // InternalSheepDog.g:3041:3: ruleTitle
             {
              before(grammarAccess.getStepDefinitionAccess().getNameTitleParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -9773,17 +9567,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepDefinition__StatementsAssignment_3"
-    // InternalSheepDog.g:3102:1: rule__StepDefinition__StatementsAssignment_3 : ( ruleStatement ) ;
+    // InternalSheepDog.g:3050:1: rule__StepDefinition__StatementsAssignment_3 : ( ruleStatement ) ;
     public final void rule__StepDefinition__StatementsAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3106:1: ( ( ruleStatement ) )
-            // InternalSheepDog.g:3107:2: ( ruleStatement )
+            // InternalSheepDog.g:3054:1: ( ( ruleStatement ) )
+            // InternalSheepDog.g:3055:2: ( ruleStatement )
             {
-            // InternalSheepDog.g:3107:2: ( ruleStatement )
-            // InternalSheepDog.g:3108:3: ruleStatement
+            // InternalSheepDog.g:3055:2: ( ruleStatement )
+            // InternalSheepDog.g:3056:3: ruleStatement
             {
              before(grammarAccess.getStepDefinitionAccess().getStatementsStatementParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -9814,17 +9608,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepDefinition__StepParametersAssignment_4"
-    // InternalSheepDog.g:3117:1: rule__StepDefinition__StepParametersAssignment_4 : ( ruleStepParameters ) ;
+    // InternalSheepDog.g:3065:1: rule__StepDefinition__StepParametersAssignment_4 : ( ruleStepParameters ) ;
     public final void rule__StepDefinition__StepParametersAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3121:1: ( ( ruleStepParameters ) )
-            // InternalSheepDog.g:3122:2: ( ruleStepParameters )
+            // InternalSheepDog.g:3069:1: ( ( ruleStepParameters ) )
+            // InternalSheepDog.g:3070:2: ( ruleStepParameters )
             {
-            // InternalSheepDog.g:3122:2: ( ruleStepParameters )
-            // InternalSheepDog.g:3123:3: ruleStepParameters
+            // InternalSheepDog.g:3070:2: ( ruleStepParameters )
+            // InternalSheepDog.g:3071:3: ruleStepParameters
             {
              before(grammarAccess.getStepDefinitionAccess().getStepParametersStepParametersParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -9855,17 +9649,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepParameters__NameAssignment_2"
-    // InternalSheepDog.g:3132:1: rule__StepParameters__NameAssignment_2 : ( ruleTitle ) ;
+    // InternalSheepDog.g:3080:1: rule__StepParameters__NameAssignment_2 : ( ruleTitle ) ;
     public final void rule__StepParameters__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3136:1: ( ( ruleTitle ) )
-            // InternalSheepDog.g:3137:2: ( ruleTitle )
+            // InternalSheepDog.g:3084:1: ( ( ruleTitle ) )
+            // InternalSheepDog.g:3085:2: ( ruleTitle )
             {
-            // InternalSheepDog.g:3137:2: ( ruleTitle )
-            // InternalSheepDog.g:3138:3: ruleTitle
+            // InternalSheepDog.g:3085:2: ( ruleTitle )
+            // InternalSheepDog.g:3086:3: ruleTitle
             {
              before(grammarAccess.getStepParametersAccess().getNameTitleParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -9896,17 +9690,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepParameters__StatementsAssignment_3"
-    // InternalSheepDog.g:3147:1: rule__StepParameters__StatementsAssignment_3 : ( ruleStatement ) ;
+    // InternalSheepDog.g:3095:1: rule__StepParameters__StatementsAssignment_3 : ( ruleStatement ) ;
     public final void rule__StepParameters__StatementsAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3151:1: ( ( ruleStatement ) )
-            // InternalSheepDog.g:3152:2: ( ruleStatement )
+            // InternalSheepDog.g:3099:1: ( ( ruleStatement ) )
+            // InternalSheepDog.g:3100:2: ( ruleStatement )
             {
-            // InternalSheepDog.g:3152:2: ( ruleStatement )
-            // InternalSheepDog.g:3153:3: ruleStatement
+            // InternalSheepDog.g:3100:2: ( ruleStatement )
+            // InternalSheepDog.g:3101:3: ruleStatement
             {
              before(grammarAccess.getStepParametersAccess().getStatementsStatementParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -9937,17 +9731,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__StepParameters__ParametersTableAssignment_4"
-    // InternalSheepDog.g:3162:1: rule__StepParameters__ParametersTableAssignment_4 : ( ruleTable ) ;
+    // InternalSheepDog.g:3110:1: rule__StepParameters__ParametersTableAssignment_4 : ( ruleTable ) ;
     public final void rule__StepParameters__ParametersTableAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3166:1: ( ( ruleTable ) )
-            // InternalSheepDog.g:3167:2: ( ruleTable )
+            // InternalSheepDog.g:3114:1: ( ( ruleTable ) )
+            // InternalSheepDog.g:3115:2: ( ruleTable )
             {
-            // InternalSheepDog.g:3167:2: ( ruleTable )
-            // InternalSheepDog.g:3168:3: ruleTable
+            // InternalSheepDog.g:3115:2: ( ruleTable )
+            // InternalSheepDog.g:3116:3: ruleTable
             {
              before(grammarAccess.getStepParametersAccess().getParametersTableTableParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -9978,17 +9772,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__NameAssignment_2"
-    // InternalSheepDog.g:3177:1: rule__Feature__NameAssignment_2 : ( ruleTitle ) ;
+    // InternalSheepDog.g:3125:1: rule__Feature__NameAssignment_2 : ( ruleTitle ) ;
     public final void rule__Feature__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3181:1: ( ( ruleTitle ) )
-            // InternalSheepDog.g:3182:2: ( ruleTitle )
+            // InternalSheepDog.g:3129:1: ( ( ruleTitle ) )
+            // InternalSheepDog.g:3130:2: ( ruleTitle )
             {
-            // InternalSheepDog.g:3182:2: ( ruleTitle )
-            // InternalSheepDog.g:3183:3: ruleTitle
+            // InternalSheepDog.g:3130:2: ( ruleTitle )
+            // InternalSheepDog.g:3131:3: ruleTitle
             {
              before(grammarAccess.getFeatureAccess().getNameTitleParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -10019,17 +9813,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__StatementsAssignment_3"
-    // InternalSheepDog.g:3192:1: rule__Feature__StatementsAssignment_3 : ( ruleStatement ) ;
+    // InternalSheepDog.g:3140:1: rule__Feature__StatementsAssignment_3 : ( ruleStatement ) ;
     public final void rule__Feature__StatementsAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3196:1: ( ( ruleStatement ) )
-            // InternalSheepDog.g:3197:2: ( ruleStatement )
+            // InternalSheepDog.g:3144:1: ( ( ruleStatement ) )
+            // InternalSheepDog.g:3145:2: ( ruleStatement )
             {
-            // InternalSheepDog.g:3197:2: ( ruleStatement )
-            // InternalSheepDog.g:3198:3: ruleStatement
+            // InternalSheepDog.g:3145:2: ( ruleStatement )
+            // InternalSheepDog.g:3146:3: ruleStatement
             {
              before(grammarAccess.getFeatureAccess().getStatementsStatementParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -10060,17 +9854,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Feature__AbstractScenariosAssignment_4"
-    // InternalSheepDog.g:3207:1: rule__Feature__AbstractScenariosAssignment_4 : ( ruleAbstractScenario ) ;
+    // InternalSheepDog.g:3155:1: rule__Feature__AbstractScenariosAssignment_4 : ( ruleAbstractScenario ) ;
     public final void rule__Feature__AbstractScenariosAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3211:1: ( ( ruleAbstractScenario ) )
-            // InternalSheepDog.g:3212:2: ( ruleAbstractScenario )
+            // InternalSheepDog.g:3159:1: ( ( ruleAbstractScenario ) )
+            // InternalSheepDog.g:3160:2: ( ruleAbstractScenario )
             {
-            // InternalSheepDog.g:3212:2: ( ruleAbstractScenario )
-            // InternalSheepDog.g:3213:3: ruleAbstractScenario
+            // InternalSheepDog.g:3160:2: ( ruleAbstractScenario )
+            // InternalSheepDog.g:3161:3: ruleAbstractScenario
             {
              before(grammarAccess.getFeatureAccess().getAbstractScenariosAbstractScenarioParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -10101,17 +9895,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Background__TagsAssignment_0"
-    // InternalSheepDog.g:3222:1: rule__Background__TagsAssignment_0 : ( ruleTags ) ;
+    // InternalSheepDog.g:3170:1: rule__Background__TagsAssignment_0 : ( ruleTags ) ;
     public final void rule__Background__TagsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3226:1: ( ( ruleTags ) )
-            // InternalSheepDog.g:3227:2: ( ruleTags )
+            // InternalSheepDog.g:3174:1: ( ( ruleTags ) )
+            // InternalSheepDog.g:3175:2: ( ruleTags )
             {
-            // InternalSheepDog.g:3227:2: ( ruleTags )
-            // InternalSheepDog.g:3228:3: ruleTags
+            // InternalSheepDog.g:3175:2: ( ruleTags )
+            // InternalSheepDog.g:3176:3: ruleTags
             {
              before(grammarAccess.getBackgroundAccess().getTagsTagsParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -10142,17 +9936,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Background__NameAssignment_3"
-    // InternalSheepDog.g:3237:1: rule__Background__NameAssignment_3 : ( ruleTitle ) ;
+    // InternalSheepDog.g:3185:1: rule__Background__NameAssignment_3 : ( ruleTitle ) ;
     public final void rule__Background__NameAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3241:1: ( ( ruleTitle ) )
-            // InternalSheepDog.g:3242:2: ( ruleTitle )
+            // InternalSheepDog.g:3189:1: ( ( ruleTitle ) )
+            // InternalSheepDog.g:3190:2: ( ruleTitle )
             {
-            // InternalSheepDog.g:3242:2: ( ruleTitle )
-            // InternalSheepDog.g:3243:3: ruleTitle
+            // InternalSheepDog.g:3190:2: ( ruleTitle )
+            // InternalSheepDog.g:3191:3: ruleTitle
             {
              before(grammarAccess.getBackgroundAccess().getNameTitleParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -10183,17 +9977,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Background__StatementsAssignment_4"
-    // InternalSheepDog.g:3252:1: rule__Background__StatementsAssignment_4 : ( ruleStatement ) ;
+    // InternalSheepDog.g:3200:1: rule__Background__StatementsAssignment_4 : ( ruleStatement ) ;
     public final void rule__Background__StatementsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3256:1: ( ( ruleStatement ) )
-            // InternalSheepDog.g:3257:2: ( ruleStatement )
+            // InternalSheepDog.g:3204:1: ( ( ruleStatement ) )
+            // InternalSheepDog.g:3205:2: ( ruleStatement )
             {
-            // InternalSheepDog.g:3257:2: ( ruleStatement )
-            // InternalSheepDog.g:3258:3: ruleStatement
+            // InternalSheepDog.g:3205:2: ( ruleStatement )
+            // InternalSheepDog.g:3206:3: ruleStatement
             {
              before(grammarAccess.getBackgroundAccess().getStatementsStatementParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -10224,17 +10018,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Background__StepsAssignment_5"
-    // InternalSheepDog.g:3267:1: rule__Background__StepsAssignment_5 : ( ruleStep ) ;
+    // InternalSheepDog.g:3215:1: rule__Background__StepsAssignment_5 : ( ruleStep ) ;
     public final void rule__Background__StepsAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3271:1: ( ( ruleStep ) )
-            // InternalSheepDog.g:3272:2: ( ruleStep )
+            // InternalSheepDog.g:3219:1: ( ( ruleStep ) )
+            // InternalSheepDog.g:3220:2: ( ruleStep )
             {
-            // InternalSheepDog.g:3272:2: ( ruleStep )
-            // InternalSheepDog.g:3273:3: ruleStep
+            // InternalSheepDog.g:3220:2: ( ruleStep )
+            // InternalSheepDog.g:3221:3: ruleStep
             {
              before(grammarAccess.getBackgroundAccess().getStepsStepParserRuleCall_5_0()); 
             pushFollow(FOLLOW_2);
@@ -10265,17 +10059,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__TagsAssignment_0"
-    // InternalSheepDog.g:3282:1: rule__Scenario__TagsAssignment_0 : ( ruleTags ) ;
+    // InternalSheepDog.g:3230:1: rule__Scenario__TagsAssignment_0 : ( ruleTags ) ;
     public final void rule__Scenario__TagsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3286:1: ( ( ruleTags ) )
-            // InternalSheepDog.g:3287:2: ( ruleTags )
+            // InternalSheepDog.g:3234:1: ( ( ruleTags ) )
+            // InternalSheepDog.g:3235:2: ( ruleTags )
             {
-            // InternalSheepDog.g:3287:2: ( ruleTags )
-            // InternalSheepDog.g:3288:3: ruleTags
+            // InternalSheepDog.g:3235:2: ( ruleTags )
+            // InternalSheepDog.g:3236:3: ruleTags
             {
              before(grammarAccess.getScenarioAccess().getTagsTagsParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -10306,17 +10100,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__NameAssignment_3"
-    // InternalSheepDog.g:3297:1: rule__Scenario__NameAssignment_3 : ( ruleTitle ) ;
+    // InternalSheepDog.g:3245:1: rule__Scenario__NameAssignment_3 : ( ruleTitle ) ;
     public final void rule__Scenario__NameAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3301:1: ( ( ruleTitle ) )
-            // InternalSheepDog.g:3302:2: ( ruleTitle )
+            // InternalSheepDog.g:3249:1: ( ( ruleTitle ) )
+            // InternalSheepDog.g:3250:2: ( ruleTitle )
             {
-            // InternalSheepDog.g:3302:2: ( ruleTitle )
-            // InternalSheepDog.g:3303:3: ruleTitle
+            // InternalSheepDog.g:3250:2: ( ruleTitle )
+            // InternalSheepDog.g:3251:3: ruleTitle
             {
              before(grammarAccess.getScenarioAccess().getNameTitleParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -10347,17 +10141,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__StatementsAssignment_4"
-    // InternalSheepDog.g:3312:1: rule__Scenario__StatementsAssignment_4 : ( ruleStatement ) ;
+    // InternalSheepDog.g:3260:1: rule__Scenario__StatementsAssignment_4 : ( ruleStatement ) ;
     public final void rule__Scenario__StatementsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3316:1: ( ( ruleStatement ) )
-            // InternalSheepDog.g:3317:2: ( ruleStatement )
+            // InternalSheepDog.g:3264:1: ( ( ruleStatement ) )
+            // InternalSheepDog.g:3265:2: ( ruleStatement )
             {
-            // InternalSheepDog.g:3317:2: ( ruleStatement )
-            // InternalSheepDog.g:3318:3: ruleStatement
+            // InternalSheepDog.g:3265:2: ( ruleStatement )
+            // InternalSheepDog.g:3266:3: ruleStatement
             {
              before(grammarAccess.getScenarioAccess().getStatementsStatementParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -10388,17 +10182,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__StepsAssignment_5"
-    // InternalSheepDog.g:3327:1: rule__Scenario__StepsAssignment_5 : ( ruleStep ) ;
+    // InternalSheepDog.g:3275:1: rule__Scenario__StepsAssignment_5 : ( ruleStep ) ;
     public final void rule__Scenario__StepsAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3331:1: ( ( ruleStep ) )
-            // InternalSheepDog.g:3332:2: ( ruleStep )
+            // InternalSheepDog.g:3279:1: ( ( ruleStep ) )
+            // InternalSheepDog.g:3280:2: ( ruleStep )
             {
-            // InternalSheepDog.g:3332:2: ( ruleStep )
-            // InternalSheepDog.g:3333:3: ruleStep
+            // InternalSheepDog.g:3280:2: ( ruleStep )
+            // InternalSheepDog.g:3281:3: ruleStep
             {
              before(grammarAccess.getScenarioAccess().getStepsStepParserRuleCall_5_0()); 
             pushFollow(FOLLOW_2);
@@ -10429,17 +10223,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Scenario__ExamplesAssignment_6"
-    // InternalSheepDog.g:3342:1: rule__Scenario__ExamplesAssignment_6 : ( ruleExamples ) ;
+    // InternalSheepDog.g:3290:1: rule__Scenario__ExamplesAssignment_6 : ( ruleExamples ) ;
     public final void rule__Scenario__ExamplesAssignment_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3346:1: ( ( ruleExamples ) )
-            // InternalSheepDog.g:3347:2: ( ruleExamples )
+            // InternalSheepDog.g:3294:1: ( ( ruleExamples ) )
+            // InternalSheepDog.g:3295:2: ( ruleExamples )
             {
-            // InternalSheepDog.g:3347:2: ( ruleExamples )
-            // InternalSheepDog.g:3348:3: ruleExamples
+            // InternalSheepDog.g:3295:2: ( ruleExamples )
+            // InternalSheepDog.g:3296:3: ruleExamples
             {
              before(grammarAccess.getScenarioAccess().getExamplesExamplesParserRuleCall_6_0()); 
             pushFollow(FOLLOW_2);
@@ -10470,17 +10264,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__TagsAssignment_0"
-    // InternalSheepDog.g:3357:1: rule__Examples__TagsAssignment_0 : ( ruleTags ) ;
+    // InternalSheepDog.g:3305:1: rule__Examples__TagsAssignment_0 : ( ruleTags ) ;
     public final void rule__Examples__TagsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3361:1: ( ( ruleTags ) )
-            // InternalSheepDog.g:3362:2: ( ruleTags )
+            // InternalSheepDog.g:3309:1: ( ( ruleTags ) )
+            // InternalSheepDog.g:3310:2: ( ruleTags )
             {
-            // InternalSheepDog.g:3362:2: ( ruleTags )
-            // InternalSheepDog.g:3363:3: ruleTags
+            // InternalSheepDog.g:3310:2: ( ruleTags )
+            // InternalSheepDog.g:3311:3: ruleTags
             {
              before(grammarAccess.getExamplesAccess().getTagsTagsParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -10511,17 +10305,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__NameAssignment_3"
-    // InternalSheepDog.g:3372:1: rule__Examples__NameAssignment_3 : ( ruleTitle ) ;
+    // InternalSheepDog.g:3320:1: rule__Examples__NameAssignment_3 : ( ruleTitle ) ;
     public final void rule__Examples__NameAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3376:1: ( ( ruleTitle ) )
-            // InternalSheepDog.g:3377:2: ( ruleTitle )
+            // InternalSheepDog.g:3324:1: ( ( ruleTitle ) )
+            // InternalSheepDog.g:3325:2: ( ruleTitle )
             {
-            // InternalSheepDog.g:3377:2: ( ruleTitle )
-            // InternalSheepDog.g:3378:3: ruleTitle
+            // InternalSheepDog.g:3325:2: ( ruleTitle )
+            // InternalSheepDog.g:3326:3: ruleTitle
             {
              before(grammarAccess.getExamplesAccess().getNameTitleParserRuleCall_3_0()); 
             pushFollow(FOLLOW_2);
@@ -10552,17 +10346,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__StatementsAssignment_4"
-    // InternalSheepDog.g:3387:1: rule__Examples__StatementsAssignment_4 : ( ruleStatement ) ;
+    // InternalSheepDog.g:3335:1: rule__Examples__StatementsAssignment_4 : ( ruleStatement ) ;
     public final void rule__Examples__StatementsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3391:1: ( ( ruleStatement ) )
-            // InternalSheepDog.g:3392:2: ( ruleStatement )
+            // InternalSheepDog.g:3339:1: ( ( ruleStatement ) )
+            // InternalSheepDog.g:3340:2: ( ruleStatement )
             {
-            // InternalSheepDog.g:3392:2: ( ruleStatement )
-            // InternalSheepDog.g:3393:3: ruleStatement
+            // InternalSheepDog.g:3340:2: ( ruleStatement )
+            // InternalSheepDog.g:3341:3: ruleStatement
             {
              before(grammarAccess.getExamplesAccess().getStatementsStatementParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -10593,17 +10387,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Examples__TheExamplesTableAssignment_5"
-    // InternalSheepDog.g:3402:1: rule__Examples__TheExamplesTableAssignment_5 : ( ruleTable ) ;
+    // InternalSheepDog.g:3350:1: rule__Examples__TheExamplesTableAssignment_5 : ( ruleTable ) ;
     public final void rule__Examples__TheExamplesTableAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3406:1: ( ( ruleTable ) )
-            // InternalSheepDog.g:3407:2: ( ruleTable )
+            // InternalSheepDog.g:3354:1: ( ( ruleTable ) )
+            // InternalSheepDog.g:3355:2: ( ruleTable )
             {
-            // InternalSheepDog.g:3407:2: ( ruleTable )
-            // InternalSheepDog.g:3408:3: ruleTable
+            // InternalSheepDog.g:3355:2: ( ruleTable )
+            // InternalSheepDog.g:3356:3: ruleTable
             {
              before(grammarAccess.getExamplesAccess().getTheExamplesTableTableParserRuleCall_5_0()); 
             pushFollow(FOLLOW_2);
@@ -10634,17 +10428,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__NameAssignment_2"
-    // InternalSheepDog.g:3417:1: rule__Given__NameAssignment_2 : ( ruleTitle ) ;
+    // InternalSheepDog.g:3365:1: rule__Given__NameAssignment_2 : ( ruleTitle ) ;
     public final void rule__Given__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3421:1: ( ( ruleTitle ) )
-            // InternalSheepDog.g:3422:2: ( ruleTitle )
+            // InternalSheepDog.g:3369:1: ( ( ruleTitle ) )
+            // InternalSheepDog.g:3370:2: ( ruleTitle )
             {
-            // InternalSheepDog.g:3422:2: ( ruleTitle )
-            // InternalSheepDog.g:3423:3: ruleTitle
+            // InternalSheepDog.g:3370:2: ( ruleTitle )
+            // InternalSheepDog.g:3371:3: ruleTitle
             {
              before(grammarAccess.getGivenAccess().getNameTitleParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -10675,17 +10469,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__TheStepTableAssignment_3_0"
-    // InternalSheepDog.g:3432:1: rule__Given__TheStepTableAssignment_3_0 : ( ruleTable ) ;
+    // InternalSheepDog.g:3380:1: rule__Given__TheStepTableAssignment_3_0 : ( ruleTable ) ;
     public final void rule__Given__TheStepTableAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3436:1: ( ( ruleTable ) )
-            // InternalSheepDog.g:3437:2: ( ruleTable )
+            // InternalSheepDog.g:3384:1: ( ( ruleTable ) )
+            // InternalSheepDog.g:3385:2: ( ruleTable )
             {
-            // InternalSheepDog.g:3437:2: ( ruleTable )
-            // InternalSheepDog.g:3438:3: ruleTable
+            // InternalSheepDog.g:3385:2: ( ruleTable )
+            // InternalSheepDog.g:3386:3: ruleTable
             {
              before(grammarAccess.getGivenAccess().getTheStepTableTableParserRuleCall_3_0_0()); 
             pushFollow(FOLLOW_2);
@@ -10716,17 +10510,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Given__TheDocStringAssignment_3_1"
-    // InternalSheepDog.g:3447:1: rule__Given__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
+    // InternalSheepDog.g:3395:1: rule__Given__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
     public final void rule__Given__TheDocStringAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3451:1: ( ( ruleDocString ) )
-            // InternalSheepDog.g:3452:2: ( ruleDocString )
+            // InternalSheepDog.g:3399:1: ( ( ruleDocString ) )
+            // InternalSheepDog.g:3400:2: ( ruleDocString )
             {
-            // InternalSheepDog.g:3452:2: ( ruleDocString )
-            // InternalSheepDog.g:3453:3: ruleDocString
+            // InternalSheepDog.g:3400:2: ( ruleDocString )
+            // InternalSheepDog.g:3401:3: ruleDocString
             {
              before(grammarAccess.getGivenAccess().getTheDocStringDocStringParserRuleCall_3_1_0()); 
             pushFollow(FOLLOW_2);
@@ -10757,17 +10551,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__NameAssignment_2"
-    // InternalSheepDog.g:3462:1: rule__When__NameAssignment_2 : ( ruleTitle ) ;
+    // InternalSheepDog.g:3410:1: rule__When__NameAssignment_2 : ( ruleTitle ) ;
     public final void rule__When__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3466:1: ( ( ruleTitle ) )
-            // InternalSheepDog.g:3467:2: ( ruleTitle )
+            // InternalSheepDog.g:3414:1: ( ( ruleTitle ) )
+            // InternalSheepDog.g:3415:2: ( ruleTitle )
             {
-            // InternalSheepDog.g:3467:2: ( ruleTitle )
-            // InternalSheepDog.g:3468:3: ruleTitle
+            // InternalSheepDog.g:3415:2: ( ruleTitle )
+            // InternalSheepDog.g:3416:3: ruleTitle
             {
              before(grammarAccess.getWhenAccess().getNameTitleParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -10798,17 +10592,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__TheStepTableAssignment_3_0"
-    // InternalSheepDog.g:3477:1: rule__When__TheStepTableAssignment_3_0 : ( ruleTable ) ;
+    // InternalSheepDog.g:3425:1: rule__When__TheStepTableAssignment_3_0 : ( ruleTable ) ;
     public final void rule__When__TheStepTableAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3481:1: ( ( ruleTable ) )
-            // InternalSheepDog.g:3482:2: ( ruleTable )
+            // InternalSheepDog.g:3429:1: ( ( ruleTable ) )
+            // InternalSheepDog.g:3430:2: ( ruleTable )
             {
-            // InternalSheepDog.g:3482:2: ( ruleTable )
-            // InternalSheepDog.g:3483:3: ruleTable
+            // InternalSheepDog.g:3430:2: ( ruleTable )
+            // InternalSheepDog.g:3431:3: ruleTable
             {
              before(grammarAccess.getWhenAccess().getTheStepTableTableParserRuleCall_3_0_0()); 
             pushFollow(FOLLOW_2);
@@ -10839,17 +10633,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__When__TheDocStringAssignment_3_1"
-    // InternalSheepDog.g:3492:1: rule__When__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
+    // InternalSheepDog.g:3440:1: rule__When__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
     public final void rule__When__TheDocStringAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3496:1: ( ( ruleDocString ) )
-            // InternalSheepDog.g:3497:2: ( ruleDocString )
+            // InternalSheepDog.g:3444:1: ( ( ruleDocString ) )
+            // InternalSheepDog.g:3445:2: ( ruleDocString )
             {
-            // InternalSheepDog.g:3497:2: ( ruleDocString )
-            // InternalSheepDog.g:3498:3: ruleDocString
+            // InternalSheepDog.g:3445:2: ( ruleDocString )
+            // InternalSheepDog.g:3446:3: ruleDocString
             {
              before(grammarAccess.getWhenAccess().getTheDocStringDocStringParserRuleCall_3_1_0()); 
             pushFollow(FOLLOW_2);
@@ -10880,17 +10674,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__NameAssignment_2"
-    // InternalSheepDog.g:3507:1: rule__Then__NameAssignment_2 : ( ruleTitle ) ;
+    // InternalSheepDog.g:3455:1: rule__Then__NameAssignment_2 : ( ruleTitle ) ;
     public final void rule__Then__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3511:1: ( ( ruleTitle ) )
-            // InternalSheepDog.g:3512:2: ( ruleTitle )
+            // InternalSheepDog.g:3459:1: ( ( ruleTitle ) )
+            // InternalSheepDog.g:3460:2: ( ruleTitle )
             {
-            // InternalSheepDog.g:3512:2: ( ruleTitle )
-            // InternalSheepDog.g:3513:3: ruleTitle
+            // InternalSheepDog.g:3460:2: ( ruleTitle )
+            // InternalSheepDog.g:3461:3: ruleTitle
             {
              before(grammarAccess.getThenAccess().getNameTitleParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -10921,17 +10715,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__TheStepTableAssignment_3_0"
-    // InternalSheepDog.g:3522:1: rule__Then__TheStepTableAssignment_3_0 : ( ruleTable ) ;
+    // InternalSheepDog.g:3470:1: rule__Then__TheStepTableAssignment_3_0 : ( ruleTable ) ;
     public final void rule__Then__TheStepTableAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3526:1: ( ( ruleTable ) )
-            // InternalSheepDog.g:3527:2: ( ruleTable )
+            // InternalSheepDog.g:3474:1: ( ( ruleTable ) )
+            // InternalSheepDog.g:3475:2: ( ruleTable )
             {
-            // InternalSheepDog.g:3527:2: ( ruleTable )
-            // InternalSheepDog.g:3528:3: ruleTable
+            // InternalSheepDog.g:3475:2: ( ruleTable )
+            // InternalSheepDog.g:3476:3: ruleTable
             {
              before(grammarAccess.getThenAccess().getTheStepTableTableParserRuleCall_3_0_0()); 
             pushFollow(FOLLOW_2);
@@ -10962,17 +10756,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Then__TheDocStringAssignment_3_1"
-    // InternalSheepDog.g:3537:1: rule__Then__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
+    // InternalSheepDog.g:3485:1: rule__Then__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
     public final void rule__Then__TheDocStringAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3541:1: ( ( ruleDocString ) )
-            // InternalSheepDog.g:3542:2: ( ruleDocString )
+            // InternalSheepDog.g:3489:1: ( ( ruleDocString ) )
+            // InternalSheepDog.g:3490:2: ( ruleDocString )
             {
-            // InternalSheepDog.g:3542:2: ( ruleDocString )
-            // InternalSheepDog.g:3543:3: ruleDocString
+            // InternalSheepDog.g:3490:2: ( ruleDocString )
+            // InternalSheepDog.g:3491:3: ruleDocString
             {
              before(grammarAccess.getThenAccess().getTheDocStringDocStringParserRuleCall_3_1_0()); 
             pushFollow(FOLLOW_2);
@@ -11003,17 +10797,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__NameAssignment_2"
-    // InternalSheepDog.g:3552:1: rule__And__NameAssignment_2 : ( ruleTitle ) ;
+    // InternalSheepDog.g:3500:1: rule__And__NameAssignment_2 : ( ruleTitle ) ;
     public final void rule__And__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3556:1: ( ( ruleTitle ) )
-            // InternalSheepDog.g:3557:2: ( ruleTitle )
+            // InternalSheepDog.g:3504:1: ( ( ruleTitle ) )
+            // InternalSheepDog.g:3505:2: ( ruleTitle )
             {
-            // InternalSheepDog.g:3557:2: ( ruleTitle )
-            // InternalSheepDog.g:3558:3: ruleTitle
+            // InternalSheepDog.g:3505:2: ( ruleTitle )
+            // InternalSheepDog.g:3506:3: ruleTitle
             {
              before(grammarAccess.getAndAccess().getNameTitleParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -11044,17 +10838,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__TheStepTableAssignment_3_0"
-    // InternalSheepDog.g:3567:1: rule__And__TheStepTableAssignment_3_0 : ( ruleTable ) ;
+    // InternalSheepDog.g:3515:1: rule__And__TheStepTableAssignment_3_0 : ( ruleTable ) ;
     public final void rule__And__TheStepTableAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3571:1: ( ( ruleTable ) )
-            // InternalSheepDog.g:3572:2: ( ruleTable )
+            // InternalSheepDog.g:3519:1: ( ( ruleTable ) )
+            // InternalSheepDog.g:3520:2: ( ruleTable )
             {
-            // InternalSheepDog.g:3572:2: ( ruleTable )
-            // InternalSheepDog.g:3573:3: ruleTable
+            // InternalSheepDog.g:3520:2: ( ruleTable )
+            // InternalSheepDog.g:3521:3: ruleTable
             {
              before(grammarAccess.getAndAccess().getTheStepTableTableParserRuleCall_3_0_0()); 
             pushFollow(FOLLOW_2);
@@ -11085,17 +10879,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__And__TheDocStringAssignment_3_1"
-    // InternalSheepDog.g:3582:1: rule__And__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
+    // InternalSheepDog.g:3530:1: rule__And__TheDocStringAssignment_3_1 : ( ruleDocString ) ;
     public final void rule__And__TheDocStringAssignment_3_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3586:1: ( ( ruleDocString ) )
-            // InternalSheepDog.g:3587:2: ( ruleDocString )
+            // InternalSheepDog.g:3534:1: ( ( ruleDocString ) )
+            // InternalSheepDog.g:3535:2: ( ruleDocString )
             {
-            // InternalSheepDog.g:3587:2: ( ruleDocString )
-            // InternalSheepDog.g:3588:3: ruleDocString
+            // InternalSheepDog.g:3535:2: ( ruleDocString )
+            // InternalSheepDog.g:3536:3: ruleDocString
             {
              before(grammarAccess.getAndAccess().getTheDocStringDocStringParserRuleCall_3_1_0()); 
             pushFollow(FOLLOW_2);
@@ -11126,17 +10920,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__DocString__LinesAssignment_2"
-    // InternalSheepDog.g:3597:1: rule__DocString__LinesAssignment_2 : ( ruleLine ) ;
+    // InternalSheepDog.g:3545:1: rule__DocString__LinesAssignment_2 : ( ruleLine ) ;
     public final void rule__DocString__LinesAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3601:1: ( ( ruleLine ) )
-            // InternalSheepDog.g:3602:2: ( ruleLine )
+            // InternalSheepDog.g:3549:1: ( ( ruleLine ) )
+            // InternalSheepDog.g:3550:2: ( ruleLine )
             {
-            // InternalSheepDog.g:3602:2: ( ruleLine )
-            // InternalSheepDog.g:3603:3: ruleLine
+            // InternalSheepDog.g:3550:2: ( ruleLine )
+            // InternalSheepDog.g:3551:3: ruleLine
             {
              before(grammarAccess.getDocStringAccess().getLinesLineParserRuleCall_2_0()); 
             pushFollow(FOLLOW_2);
@@ -11167,17 +10961,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Table__RowsAssignment_4"
-    // InternalSheepDog.g:3612:1: rule__Table__RowsAssignment_4 : ( ruleRow ) ;
+    // InternalSheepDog.g:3560:1: rule__Table__RowsAssignment_4 : ( ruleRow ) ;
     public final void rule__Table__RowsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3616:1: ( ( ruleRow ) )
-            // InternalSheepDog.g:3617:2: ( ruleRow )
+            // InternalSheepDog.g:3564:1: ( ( ruleRow ) )
+            // InternalSheepDog.g:3565:2: ( ruleRow )
             {
-            // InternalSheepDog.g:3617:2: ( ruleRow )
-            // InternalSheepDog.g:3618:3: ruleRow
+            // InternalSheepDog.g:3565:2: ( ruleRow )
+            // InternalSheepDog.g:3566:3: ruleRow
             {
              before(grammarAccess.getTableAccess().getRowsRowParserRuleCall_4_0()); 
             pushFollow(FOLLOW_2);
@@ -11208,17 +11002,17 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Row__CellsAssignment_0"
-    // InternalSheepDog.g:3627:1: rule__Row__CellsAssignment_0 : ( ruleCell ) ;
+    // InternalSheepDog.g:3575:1: rule__Row__CellsAssignment_0 : ( ruleCell ) ;
     public final void rule__Row__CellsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3631:1: ( ( ruleCell ) )
-            // InternalSheepDog.g:3632:2: ( ruleCell )
+            // InternalSheepDog.g:3579:1: ( ( ruleCell ) )
+            // InternalSheepDog.g:3580:2: ( ruleCell )
             {
-            // InternalSheepDog.g:3632:2: ( ruleCell )
-            // InternalSheepDog.g:3633:3: ruleCell
+            // InternalSheepDog.g:3580:2: ( ruleCell )
+            // InternalSheepDog.g:3581:3: ruleCell
             {
              before(grammarAccess.getRowAccess().getCellsCellParserRuleCall_0_0()); 
             pushFollow(FOLLOW_2);
@@ -11251,25 +11045,21 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     protected DFA2 dfa2 = new DFA2(this);
-    protected DFA22 dfa22 = new DFA22(this);
-    static final String dfa_1s = "\15\uffff";
-    static final String dfa_2s = "\1\14\1\4\1\21\3\4\2\uffff\3\4\1\7\1\14";
-    static final String dfa_3s = "\1\33\1\6\1\22\3\34\2\uffff\3\34\1\7\1\14";
-    static final String dfa_4s = "\6\uffff\1\1\1\2\5\uffff";
-    static final String dfa_5s = "\15\uffff}>";
+    protected DFA21 dfa21 = new DFA21(this);
+    static final String dfa_1s = "\11\uffff";
+    static final String dfa_2s = "\1\12\1\5\1\17\1\5\2\uffff\1\5\1\4\1\12";
+    static final String dfa_3s = "\1\31\1\5\1\20\1\32\2\uffff\1\32\1\4\1\12";
+    static final String dfa_4s = "\4\uffff\1\1\1\2\3\uffff";
+    static final String dfa_5s = "\11\uffff}>";
     static final String[] dfa_6s = {
             "\1\2\16\uffff\1\1",
-            "\1\3\1\4\1\5",
-            "\1\6\1\7",
-            "\1\10\1\11\1\12\25\uffff\1\13",
-            "\1\10\1\11\1\12\25\uffff\1\13",
-            "\1\10\1\11\1\12\25\uffff\1\13",
+            "\1\3",
+            "\1\4\1\5",
+            "\1\6\24\uffff\1\7",
             "",
             "",
-            "\1\10\1\11\1\12\25\uffff\1\13",
-            "\1\10\1\11\1\12\25\uffff\1\13",
-            "\1\10\1\11\1\12\25\uffff\1\13",
-            "\1\14",
+            "\1\6\24\uffff\1\7",
+            "\1\10",
             "\1\2"
     };
 
@@ -11294,27 +11084,23 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             this.transition = dfa_6;
         }
         public String getDescription() {
-            return "648:1: rule__AbstractScenario__Alternatives : ( ( ruleBackground ) | ( ruleScenario ) );";
+            return "623:1: rule__AbstractScenario__Alternatives : ( ( ruleBackground ) | ( ruleScenario ) );";
         }
     }
-    static final String dfa_7s = "\14\uffff";
-    static final String dfa_8s = "\1\1\13\uffff";
-    static final String dfa_9s = "\1\14\1\uffff\1\4\1\uffff\6\4\1\7\1\14";
-    static final String dfa_10s = "\1\33\1\uffff\1\6\1\uffff\6\34\1\7\1\16";
-    static final String dfa_11s = "\1\uffff\1\2\1\uffff\1\1\10\uffff";
-    static final String dfa_12s = "\14\uffff}>";
+    static final String dfa_7s = "\10\uffff";
+    static final String dfa_8s = "\1\1\7\uffff";
+    static final String dfa_9s = "\1\12\1\uffff\1\5\1\uffff\2\5\1\4\1\12";
+    static final String dfa_10s = "\1\31\1\uffff\1\5\1\uffff\2\32\1\4\1\14";
+    static final String dfa_11s = "\1\uffff\1\2\1\uffff\1\1\4\uffff";
+    static final String dfa_12s = "\10\uffff}>";
     static final String[] dfa_13s = {
             "\1\1\1\uffff\1\3\14\uffff\1\2",
             "",
-            "\1\4\1\5\1\6",
+            "\1\4",
             "",
-            "\1\7\1\10\1\11\25\uffff\1\12",
-            "\1\7\1\10\1\11\25\uffff\1\12",
-            "\1\7\1\10\1\11\25\uffff\1\12",
-            "\1\7\1\10\1\11\25\uffff\1\12",
-            "\1\7\1\10\1\11\25\uffff\1\12",
-            "\1\7\1\10\1\11\25\uffff\1\12",
-            "\1\13",
+            "\1\5\24\uffff\1\6",
+            "\1\5\24\uffff\1\6",
+            "\1\7",
             "\1\1\1\uffff\1\3"
     };
 
@@ -11326,11 +11112,11 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
     static final short[] dfa_12 = DFA.unpackEncodedString(dfa_12s);
     static final short[][] dfa_13 = unpackEncodedStringArray(dfa_13s);
 
-    class DFA22 extends DFA {
+    class DFA21 extends DFA {
 
-        public DFA22(BaseRecognizer recognizer) {
+        public DFA21(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
-            this.decisionNumber = 22;
+            this.decisionNumber = 21;
             this.eot = dfa_7;
             this.eof = dfa_8;
             this.min = dfa_9;
@@ -11340,45 +11126,45 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             this.transition = dfa_13;
         }
         public String getDescription() {
-            return "()* loopback of 1695:2: ( rule__Scenario__ExamplesAssignment_6 )*";
+            return "()* loopback of 1643:2: ( rule__Scenario__ExamplesAssignment_6 )*";
         }
     }
  
 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000070L});
-    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000001070L});
-    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000072L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000001002L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000004070L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000002000070L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000008001070L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000008001002L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000008001000L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000008004070L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000008004002L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000008004000L});
-    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000003000070L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000000080L});
-    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x00000000000000F0L});
-    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x00000000000000F2L});
-    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000020000002L});
-    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000420L});
+    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000022L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000402L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000001020L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000001002L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000800020L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000002000420L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000002000402L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000002000400L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000002001020L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000002001002L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000002001000L});
+    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000000C00020L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000000000030L});
+    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000000000000032L});
+    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000008000002L});
+    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000004000000L});
 
 }

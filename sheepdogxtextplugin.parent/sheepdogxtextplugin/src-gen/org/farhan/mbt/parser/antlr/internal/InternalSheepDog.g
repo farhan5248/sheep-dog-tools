@@ -1378,15 +1378,12 @@ ruleTags returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 			newLeafNode(kw, grammarAccess.getTagsAccess().getTagsKeyword_0());
 		}
 		(
+			this_WORD_1=RULE_WORD
 			{
-				newCompositeNode(grammarAccess.getTagsAccess().getTEXT_LITERALParserRuleCall_1());
-			}
-			this_TEXT_LITERAL_1=ruleTEXT_LITERAL
-			{
-				$current.merge(this_TEXT_LITERAL_1);
+				$current.merge(this_WORD_1);
 			}
 			{
-				afterParserOrEnumRuleCall();
+				newLeafNode(this_WORD_1, grammarAccess.getTagsAccess().getWORDTerminalRuleCall_1());
 			}
 		)+
 		kw='"]'
@@ -1421,15 +1418,12 @@ ruleTitle returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 }:
 	(
 		(
+			this_WORD_0=RULE_WORD
 			{
-				newCompositeNode(grammarAccess.getTitleAccess().getTEXT_LITERALParserRuleCall_0());
-			}
-			this_TEXT_LITERAL_0=ruleTEXT_LITERAL
-			{
-				$current.merge(this_TEXT_LITERAL_0);
+				$current.merge(this_WORD_0);
 			}
 			{
-				afterParserOrEnumRuleCall();
+				newLeafNode(this_WORD_0, grammarAccess.getTitleAccess().getWORDTerminalRuleCall_0());
 			}
 		)+
 		this_EOL_1=RULE_EOL
@@ -1459,15 +1453,12 @@ ruleStatement returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken
 }:
 	(
 		(
+			this_WORD_0=RULE_WORD
 			{
-				newCompositeNode(grammarAccess.getStatementAccess().getTEXT_LITERALParserRuleCall_0());
-			}
-			this_TEXT_LITERAL_0=ruleTEXT_LITERAL
-			{
-				$current.merge(this_TEXT_LITERAL_0);
+				$current.merge(this_WORD_0);
 			}
 			{
-				afterParserOrEnumRuleCall();
+				newLeafNode(this_WORD_0, grammarAccess.getStatementAccess().getWORDTerminalRuleCall_0());
 			}
 		)+
 		this_EOL_1=RULE_EOL
@@ -1497,15 +1488,12 @@ ruleLine returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 }:
 	(
 		(
+			this_WORD_0=RULE_WORD
 			{
-				newCompositeNode(grammarAccess.getLineAccess().getTEXT_LITERALParserRuleCall_0());
-			}
-			this_TEXT_LITERAL_0=ruleTEXT_LITERAL
-			{
-				$current.merge(this_TEXT_LITERAL_0);
+				$current.merge(this_WORD_0);
 			}
 			{
-				afterParserOrEnumRuleCall();
+				newLeafNode(this_WORD_0, grammarAccess.getLineAccess().getWORDTerminalRuleCall_0());
 			}
 		)*
 		this_EOL_1=RULE_EOL
@@ -1540,67 +1528,18 @@ ruleCell returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 			newLeafNode(kw, grammarAccess.getCellAccess().getVerticalLineKeyword_0());
 		}
 		(
+			this_WORD_1=RULE_WORD
 			{
-				newCompositeNode(grammarAccess.getCellAccess().getTEXT_LITERALParserRuleCall_1());
-			}
-			this_TEXT_LITERAL_1=ruleTEXT_LITERAL
-			{
-				$current.merge(this_TEXT_LITERAL_1);
+				$current.merge(this_WORD_1);
 			}
 			{
-				afterParserOrEnumRuleCall();
+				newLeafNode(this_WORD_1, grammarAccess.getCellAccess().getWORDTerminalRuleCall_1());
 			}
 		)*
 	)
 ;
 
-// Entry rule entryRuleTEXT_LITERAL
-entryRuleTEXT_LITERAL returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getTEXT_LITERALRule()); }
-	iv_ruleTEXT_LITERAL=ruleTEXT_LITERAL
-	{ $current=$iv_ruleTEXT_LITERAL.current.getText(); }
-	EOF;
-
-// Rule TEXT_LITERAL
-ruleTEXT_LITERAL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		this_WORD_0=RULE_WORD
-		{
-			$current.merge(this_WORD_0);
-		}
-		{
-			newLeafNode(this_WORD_0, grammarAccess.getTEXT_LITERALAccess().getWORDTerminalRuleCall_0());
-		}
-		    |
-		this_ID_1=RULE_ID
-		{
-			$current.merge(this_ID_1);
-		}
-		{
-			newLeafNode(this_ID_1, grammarAccess.getTEXT_LITERALAccess().getIDTerminalRuleCall_1());
-		}
-		    |
-		this_STRING_2=RULE_STRING
-		{
-			$current.merge(this_STRING_2);
-		}
-		{
-			newLeafNode(this_STRING_2, grammarAccess.getTEXT_LITERALAccess().getSTRINGTerminalRuleCall_2());
-		}
-	)
-;
-
-RULE_ID : ('0'..'9'|'a'..'z'|'A'..'Z'|'_'|'-'|'.'|',')+;
-
-RULE_WORD : ~(('@'|'|'|' '|'\t'|'\n'|'\r')) ~((' '|'\t'|'\n'|'\r'))*;
-
-RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'"'|'\r'|'\n')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'\''|'\r'|'\n')))* '\'');
+RULE_WORD : ~(('"'|' '|'\t'|'\r'|'\n'|'#'|'|'));
 
 RULE_WS : (' '|'\t'|'\r')+;
 

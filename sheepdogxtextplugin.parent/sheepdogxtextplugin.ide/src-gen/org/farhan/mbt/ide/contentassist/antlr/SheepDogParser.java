@@ -38,7 +38,6 @@ public class SheepDogParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getWhenAccess().getAlternatives_3(), "rule__When__Alternatives_3");
 			builder.put(grammarAccess.getThenAccess().getAlternatives_3(), "rule__Then__Alternatives_3");
 			builder.put(grammarAccess.getAndAccess().getAlternatives_3(), "rule__And__Alternatives_3");
-			builder.put(grammarAccess.getTEXT_LITERALAccess().getAlternatives(), "rule__TEXT_LITERAL__Alternatives");
 			builder.put(grammarAccess.getStepObjectAccess().getGroup(), "rule__StepObject__Group__0");
 			builder.put(grammarAccess.getStepDefinitionAccess().getGroup(), "rule__StepDefinition__Group__0");
 			builder.put(grammarAccess.getStepParametersAccess().getGroup(), "rule__StepParameters__Group__0");
