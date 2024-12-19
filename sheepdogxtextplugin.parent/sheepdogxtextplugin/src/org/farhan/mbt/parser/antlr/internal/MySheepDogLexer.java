@@ -35,7 +35,7 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 			}
 			i++;
 		}
-		System.out.println(">>>" + s + "<<<");
+		// System.out.println(">>>" + s + "<<<");
 		return true;
 	}
 
@@ -46,9 +46,6 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 		// This is a hack, ideally the xtext grammar file needs to be defined better,
 		// when I have more time I'll review the need to do this but for now I figured
 		// it'd be a good example on how to hack the lexer for newbies
-		int l = input.getLine();
-		int c = input.getCharPositionInLine();
-
 		if (isKeyword("===")) {
 			mT__12();// InternalSheepDog.g:15:9: '==='
 		} else if (isKeyword("==")) {
