@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 
+import org.farhan.mbt.sheepDog.AbstractScenarioTags;
 import org.farhan.mbt.sheepDog.Examples;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
 import org.farhan.mbt.sheepDog.Table;
@@ -41,24 +42,14 @@ import org.farhan.mbt.sheepDog.Table;
 public class ExamplesImpl extends MinimalEObjectImpl.Container implements Examples
 {
   /**
-   * The default value of the '{@link #getTags() <em>Tags</em>}' attribute.
+   * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getTags()
    * @generated
    * @ordered
    */
-  protected static final String TAGS_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getTags() <em>Tags</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTags()
-   * @generated
-   * @ordered
-   */
-  protected String tags = TAGS_EDEFAULT;
+  protected AbstractScenarioTags tags;
 
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -127,7 +118,7 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
    * @generated
    */
   @Override
-  public String getTags()
+  public AbstractScenarioTags getTags()
   {
     return tags;
   }
@@ -137,13 +128,38 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setTags(String newTags)
+  public NotificationChain basicSetTags(AbstractScenarioTags newTags, NotificationChain msgs)
   {
-    String oldTags = tags;
+    AbstractScenarioTags oldTags = tags;
     tags = newTags;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.EXAMPLES__TAGS, oldTags, tags));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.EXAMPLES__TAGS, oldTags, newTags);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setTags(AbstractScenarioTags newTags)
+  {
+    if (newTags != tags)
+    {
+      NotificationChain msgs = null;
+      if (tags != null)
+        msgs = ((InternalEObject)tags).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.EXAMPLES__TAGS, null, msgs);
+      if (newTags != null)
+        msgs = ((InternalEObject)newTags).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.EXAMPLES__TAGS, null, msgs);
+      msgs = basicSetTags(newTags, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.EXAMPLES__TAGS, newTags, newTags));
   }
 
   /**
@@ -246,6 +262,8 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
   {
     switch (featureID)
     {
+      case SheepDogPackage.EXAMPLES__TAGS:
+        return basicSetTags(null, msgs);
       case SheepDogPackage.EXAMPLES__THE_EXAMPLES_TABLE:
         return basicSetTheExamplesTable(null, msgs);
     }
@@ -286,7 +304,7 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
     switch (featureID)
     {
       case SheepDogPackage.EXAMPLES__TAGS:
-        setTags((String)newValue);
+        setTags((AbstractScenarioTags)newValue);
         return;
       case SheepDogPackage.EXAMPLES__NAME:
         setName((String)newValue);
@@ -313,7 +331,7 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
     switch (featureID)
     {
       case SheepDogPackage.EXAMPLES__TAGS:
-        setTags(TAGS_EDEFAULT);
+        setTags((AbstractScenarioTags)null);
         return;
       case SheepDogPackage.EXAMPLES__NAME:
         setName(NAME_EDEFAULT);
@@ -339,7 +357,7 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
     switch (featureID)
     {
       case SheepDogPackage.EXAMPLES__TAGS:
-        return TAGS_EDEFAULT == null ? tags != null : !TAGS_EDEFAULT.equals(tags);
+        return tags != null;
       case SheepDogPackage.EXAMPLES__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case SheepDogPackage.EXAMPLES__STATEMENTS:
@@ -361,9 +379,7 @@ public class ExamplesImpl extends MinimalEObjectImpl.Container implements Exampl
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (tags: ");
-    result.append(tags);
-    result.append(", name: ");
+    result.append(" (name: ");
     result.append(name);
     result.append(", statements: ");
     result.append(statements);

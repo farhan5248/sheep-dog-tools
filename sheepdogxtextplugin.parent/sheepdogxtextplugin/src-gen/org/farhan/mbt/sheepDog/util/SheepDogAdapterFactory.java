@@ -161,6 +161,21 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
         return createRowAdapter();
       }
       @Override
+      public Adapter caseFeatureTags(FeatureTags object)
+      {
+        return createFeatureTagsAdapter();
+      }
+      @Override
+      public Adapter caseAbstractScenarioTags(AbstractScenarioTags object)
+      {
+        return createAbstractScenarioTagsAdapter();
+      }
+      @Override
+      public Adapter caseCell(Cell object)
+      {
+        return createCellAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -433,6 +448,51 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createRowAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.FeatureTags <em>Feature Tags</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.mbt.sheepDog.FeatureTags
+   * @generated
+   */
+  public Adapter createFeatureTagsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.AbstractScenarioTags <em>Abstract Scenario Tags</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.mbt.sheepDog.AbstractScenarioTags
+   * @generated
+   */
+  public Adapter createAbstractScenarioTagsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.farhan.mbt.sheepDog.Cell <em>Cell</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.mbt.sheepDog.Cell
+   * @generated
+   */
+  public Adapter createCellAdapter()
   {
     return null;
   }

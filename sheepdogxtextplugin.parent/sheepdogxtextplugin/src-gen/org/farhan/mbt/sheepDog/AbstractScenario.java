@@ -29,26 +29,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface AbstractScenario extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Tags</b></em>' attribute.
+   * Returns the value of the '<em><b>Tags</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Tags</em>' attribute.
-   * @see #setTags(String)
+   * @return the value of the '<em>Tags</em>' containment reference.
+   * @see #setTags(AbstractScenarioTags)
    * @see org.farhan.mbt.sheepDog.SheepDogPackage#getAbstractScenario_Tags()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  String getTags();
+  AbstractScenarioTags getTags();
 
   /**
-   * Sets the value of the '{@link org.farhan.mbt.sheepDog.AbstractScenario#getTags <em>Tags</em>}' attribute.
+   * Sets the value of the '{@link org.farhan.mbt.sheepDog.AbstractScenario#getTags <em>Tags</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Tags</em>' attribute.
+   * @param value the new value of the '<em>Tags</em>' containment reference.
    * @see #getTags()
    * @generated
    */
-  void setTags(String value);
+  void setTags(AbstractScenarioTags value);
 
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

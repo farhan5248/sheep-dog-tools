@@ -3,55 +3,57 @@
  */
 package org.farhan.mbt.sheepDog.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.farhan.mbt.sheepDog.Cell;
-import org.farhan.mbt.sheepDog.Row;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Row</b></em>'.
+ * An implementation of the model object '<em><b>Cell</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.RowImpl#getCells <em>Cells</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.CellImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class RowImpl extends MinimalEObjectImpl.Container implements Row
+public class CellImpl extends MinimalEObjectImpl.Container implements Cell
 {
   /**
-   * The cached value of the '{@link #getCells() <em>Cells</em>}' containment reference list.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCells()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected EList<Cell> cells;
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected RowImpl()
+  protected CellImpl()
   {
     super();
   }
@@ -64,7 +66,7 @@ public class RowImpl extends MinimalEObjectImpl.Container implements Row
   @Override
   protected EClass eStaticClass()
   {
-    return SheepDogPackage.Literals.ROW;
+    return SheepDogPackage.Literals.CELL;
   }
 
   /**
@@ -73,13 +75,9 @@ public class RowImpl extends MinimalEObjectImpl.Container implements Row
    * @generated
    */
   @Override
-  public EList<Cell> getCells()
+  public String getName()
   {
-    if (cells == null)
-    {
-      cells = new EObjectContainmentEList<Cell>(Cell.class, this, SheepDogPackage.ROW__CELLS);
-    }
-    return cells;
+    return name;
   }
 
   /**
@@ -88,14 +86,12 @@ public class RowImpl extends MinimalEObjectImpl.Container implements Row
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  public void setName(String newName)
   {
-    switch (featureID)
-    {
-      case SheepDogPackage.ROW__CELLS:
-        return ((InternalEList<?>)getCells()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.CELL__NAME, oldName, name));
   }
 
   /**
@@ -108,8 +104,8 @@ public class RowImpl extends MinimalEObjectImpl.Container implements Row
   {
     switch (featureID)
     {
-      case SheepDogPackage.ROW__CELLS:
-        return getCells();
+      case SheepDogPackage.CELL__NAME:
+        return getName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,15 +115,13 @@ public class RowImpl extends MinimalEObjectImpl.Container implements Row
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case SheepDogPackage.ROW__CELLS:
-        getCells().clear();
-        getCells().addAll((Collection<? extends Cell>)newValue);
+      case SheepDogPackage.CELL__NAME:
+        setName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,8 +137,8 @@ public class RowImpl extends MinimalEObjectImpl.Container implements Row
   {
     switch (featureID)
     {
-      case SheepDogPackage.ROW__CELLS:
-        getCells().clear();
+      case SheepDogPackage.CELL__NAME:
+        setName(NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -160,10 +154,27 @@ public class RowImpl extends MinimalEObjectImpl.Container implements Row
   {
     switch (featureID)
     {
-      case SheepDogPackage.ROW__CELLS:
-        return cells != null && !cells.isEmpty();
+      case SheepDogPackage.CELL__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
   }
 
-} //RowImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
+  }
+
+} //CellImpl

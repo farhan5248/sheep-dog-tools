@@ -139,12 +139,16 @@ ruleStepObject returns [EObject current=null]
 				}
 			)
 		)
+		this_EOL_3=RULE_EOL
+		{
+			newLeafNode(this_EOL_3, grammarAccess.getStepObjectAccess().getEOLTerminalRuleCall_3());
+		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getStepObjectAccess().getStatementsStatementParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getStepObjectAccess().getStatementsStatementParserRuleCall_4_0());
 				}
-				lv_statements_3_0=ruleStatement
+				lv_statements_4_0=ruleStatement
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getStepObjectRule());
@@ -152,7 +156,7 @@ ruleStepObject returns [EObject current=null]
 					add(
 						$current,
 						"statements",
-						lv_statements_3_0,
+						lv_statements_4_0,
 						"org.farhan.mbt.SheepDog.Statement");
 					afterParserOrEnumRuleCall();
 				}
@@ -161,9 +165,9 @@ ruleStepObject returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getStepObjectAccess().getStepDefinitionsStepDefinitionParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getStepObjectAccess().getStepDefinitionsStepDefinitionParserRuleCall_5_0());
 				}
-				lv_stepDefinitions_4_0=ruleStepDefinition
+				lv_stepDefinitions_5_0=ruleStepDefinition
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getStepObjectRule());
@@ -171,7 +175,7 @@ ruleStepObject returns [EObject current=null]
 					add(
 						$current,
 						"stepDefinitions",
-						lv_stepDefinitions_4_0,
+						lv_stepDefinitions_5_0,
 						"org.farhan.mbt.SheepDog.StepDefinition");
 					afterParserOrEnumRuleCall();
 				}
@@ -223,12 +227,16 @@ ruleStepDefinition returns [EObject current=null]
 				}
 			)
 		)
+		this_EOL_3=RULE_EOL
+		{
+			newLeafNode(this_EOL_3, grammarAccess.getStepDefinitionAccess().getEOLTerminalRuleCall_3());
+		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getStepDefinitionAccess().getStatementsStatementParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getStepDefinitionAccess().getStatementsStatementParserRuleCall_4_0());
 				}
-				lv_statements_3_0=ruleStatement
+				lv_statements_4_0=ruleStatement
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getStepDefinitionRule());
@@ -236,7 +244,7 @@ ruleStepDefinition returns [EObject current=null]
 					add(
 						$current,
 						"statements",
-						lv_statements_3_0,
+						lv_statements_4_0,
 						"org.farhan.mbt.SheepDog.Statement");
 					afterParserOrEnumRuleCall();
 				}
@@ -245,9 +253,9 @@ ruleStepDefinition returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getStepDefinitionAccess().getStepParametersStepParametersParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getStepDefinitionAccess().getStepParametersStepParametersParserRuleCall_5_0());
 				}
-				lv_stepParameters_4_0=ruleStepParameters
+				lv_stepParameters_5_0=ruleStepParameters
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getStepDefinitionRule());
@@ -255,7 +263,7 @@ ruleStepDefinition returns [EObject current=null]
 					add(
 						$current,
 						"stepParameters",
-						lv_stepParameters_4_0,
+						lv_stepParameters_5_0,
 						"org.farhan.mbt.SheepDog.StepParameters");
 					afterParserOrEnumRuleCall();
 				}
@@ -307,12 +315,16 @@ ruleStepParameters returns [EObject current=null]
 				}
 			)
 		)
+		this_EOL_3=RULE_EOL
+		{
+			newLeafNode(this_EOL_3, grammarAccess.getStepParametersAccess().getEOLTerminalRuleCall_3());
+		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getStepParametersAccess().getStatementsStatementParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getStepParametersAccess().getStatementsStatementParserRuleCall_4_0());
 				}
-				lv_statements_3_0=ruleStatement
+				lv_statements_4_0=ruleStatement
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getStepParametersRule());
@@ -320,7 +332,7 @@ ruleStepParameters returns [EObject current=null]
 					add(
 						$current,
 						"statements",
-						lv_statements_3_0,
+						lv_statements_4_0,
 						"org.farhan.mbt.SheepDog.Statement");
 					afterParserOrEnumRuleCall();
 				}
@@ -329,9 +341,9 @@ ruleStepParameters returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getStepParametersAccess().getParametersTableTableParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getStepParametersAccess().getParametersTableTableParserRuleCall_5_0());
 				}
-				lv_parametersTable_4_0=ruleTable
+				lv_parametersTable_5_0=ruleTable
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getStepParametersRule());
@@ -339,7 +351,7 @@ ruleStepParameters returns [EObject current=null]
 					set(
 						$current,
 						"parametersTable",
-						lv_parametersTable_4_0,
+						lv_parametersTable_5_0,
 						"org.farhan.mbt.SheepDog.Table");
 					afterParserOrEnumRuleCall();
 				}
@@ -364,20 +376,39 @@ ruleFeature returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='='
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getFeatureAccess().getTagsFeatureTagsParserRuleCall_0_0());
+				}
+				lv_tags_0_0=ruleFeatureTags
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getFeatureRule());
+					}
+					set(
+						$current,
+						"tags",
+						lv_tags_0_0,
+						"org.farhan.mbt.SheepDog.FeatureTags");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		otherlv_1='='
 		{
-			newLeafNode(otherlv_0, grammarAccess.getFeatureAccess().getEqualsSignKeyword_0());
+			newLeafNode(otherlv_1, grammarAccess.getFeatureAccess().getEqualsSignKeyword_1());
 		}
-		otherlv_1='Feature:'
+		otherlv_2='Feature:'
 		{
-			newLeafNode(otherlv_1, grammarAccess.getFeatureAccess().getFeatureKeyword_1());
+			newLeafNode(otherlv_2, grammarAccess.getFeatureAccess().getFeatureKeyword_2());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getFeatureAccess().getNameTitleParserRuleCall_2_0());
+					newCompositeNode(grammarAccess.getFeatureAccess().getNameTitleParserRuleCall_3_0());
 				}
-				lv_name_2_0=ruleTitle
+				lv_name_3_0=ruleTitle
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getFeatureRule());
@@ -385,18 +416,22 @@ ruleFeature returns [EObject current=null]
 					set(
 						$current,
 						"name",
-						lv_name_2_0,
+						lv_name_3_0,
 						"org.farhan.mbt.SheepDog.Title");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
+		this_EOL_4=RULE_EOL
+		{
+			newLeafNode(this_EOL_4, grammarAccess.getFeatureAccess().getEOLTerminalRuleCall_4());
+		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getFeatureAccess().getStatementsStatementParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getFeatureAccess().getStatementsStatementParserRuleCall_5_0());
 				}
-				lv_statements_3_0=ruleStatement
+				lv_statements_5_0=ruleStatement
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getFeatureRule());
@@ -404,7 +439,7 @@ ruleFeature returns [EObject current=null]
 					add(
 						$current,
 						"statements",
-						lv_statements_3_0,
+						lv_statements_5_0,
 						"org.farhan.mbt.SheepDog.Statement");
 					afterParserOrEnumRuleCall();
 				}
@@ -413,9 +448,9 @@ ruleFeature returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getFeatureAccess().getAbstractScenariosAbstractScenarioParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getFeatureAccess().getAbstractScenariosAbstractScenarioParserRuleCall_6_0());
 				}
-				lv_abstractScenarios_4_0=ruleAbstractScenario
+				lv_abstractScenarios_6_0=ruleAbstractScenario
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getFeatureRule());
@@ -423,7 +458,7 @@ ruleFeature returns [EObject current=null]
 					add(
 						$current,
 						"abstractScenarios",
-						lv_abstractScenarios_4_0,
+						lv_abstractScenarios_6_0,
 						"org.farhan.mbt.SheepDog.AbstractScenario");
 					afterParserOrEnumRuleCall();
 				}
@@ -487,9 +522,9 @@ ruleBackground returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getBackgroundAccess().getTagsTagsParserRuleCall_0_0());
+					newCompositeNode(grammarAccess.getBackgroundAccess().getTagsAbstractScenarioTagsParserRuleCall_0_0());
 				}
-				lv_tags_0_0=ruleTags
+				lv_tags_0_0=ruleAbstractScenarioTags
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getBackgroundRule());
@@ -498,7 +533,7 @@ ruleBackground returns [EObject current=null]
 						$current,
 						"tags",
 						lv_tags_0_0,
-						"org.farhan.mbt.SheepDog.Tags");
+						"org.farhan.mbt.SheepDog.AbstractScenarioTags");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -530,12 +565,16 @@ ruleBackground returns [EObject current=null]
 				}
 			)
 		)
+		this_EOL_4=RULE_EOL
+		{
+			newLeafNode(this_EOL_4, grammarAccess.getBackgroundAccess().getEOLTerminalRuleCall_4());
+		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getBackgroundAccess().getStatementsStatementParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getBackgroundAccess().getStatementsStatementParserRuleCall_5_0());
 				}
-				lv_statements_4_0=ruleStatement
+				lv_statements_5_0=ruleStatement
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getBackgroundRule());
@@ -543,7 +582,7 @@ ruleBackground returns [EObject current=null]
 					add(
 						$current,
 						"statements",
-						lv_statements_4_0,
+						lv_statements_5_0,
 						"org.farhan.mbt.SheepDog.Statement");
 					afterParserOrEnumRuleCall();
 				}
@@ -552,9 +591,9 @@ ruleBackground returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getBackgroundAccess().getStepsStepParserRuleCall_5_0());
+					newCompositeNode(grammarAccess.getBackgroundAccess().getStepsStepParserRuleCall_6_0());
 				}
-				lv_steps_5_0=ruleStep
+				lv_steps_6_0=ruleStep
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getBackgroundRule());
@@ -562,7 +601,7 @@ ruleBackground returns [EObject current=null]
 					add(
 						$current,
 						"steps",
-						lv_steps_5_0,
+						lv_steps_6_0,
 						"org.farhan.mbt.SheepDog.Step");
 					afterParserOrEnumRuleCall();
 				}
@@ -590,9 +629,9 @@ ruleScenario returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getScenarioAccess().getTagsTagsParserRuleCall_0_0());
+					newCompositeNode(grammarAccess.getScenarioAccess().getTagsAbstractScenarioTagsParserRuleCall_0_0());
 				}
-				lv_tags_0_0=ruleTags
+				lv_tags_0_0=ruleAbstractScenarioTags
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getScenarioRule());
@@ -601,7 +640,7 @@ ruleScenario returns [EObject current=null]
 						$current,
 						"tags",
 						lv_tags_0_0,
-						"org.farhan.mbt.SheepDog.Tags");
+						"org.farhan.mbt.SheepDog.AbstractScenarioTags");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -633,12 +672,16 @@ ruleScenario returns [EObject current=null]
 				}
 			)
 		)
+		this_EOL_4=RULE_EOL
+		{
+			newLeafNode(this_EOL_4, grammarAccess.getScenarioAccess().getEOLTerminalRuleCall_4());
+		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getScenarioAccess().getStatementsStatementParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getScenarioAccess().getStatementsStatementParserRuleCall_5_0());
 				}
-				lv_statements_4_0=ruleStatement
+				lv_statements_5_0=ruleStatement
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getScenarioRule());
@@ -646,7 +689,7 @@ ruleScenario returns [EObject current=null]
 					add(
 						$current,
 						"statements",
-						lv_statements_4_0,
+						lv_statements_5_0,
 						"org.farhan.mbt.SheepDog.Statement");
 					afterParserOrEnumRuleCall();
 				}
@@ -655,9 +698,9 @@ ruleScenario returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getScenarioAccess().getStepsStepParserRuleCall_5_0());
+					newCompositeNode(grammarAccess.getScenarioAccess().getStepsStepParserRuleCall_6_0());
 				}
-				lv_steps_5_0=ruleStep
+				lv_steps_6_0=ruleStep
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getScenarioRule());
@@ -665,7 +708,7 @@ ruleScenario returns [EObject current=null]
 					add(
 						$current,
 						"steps",
-						lv_steps_5_0,
+						lv_steps_6_0,
 						"org.farhan.mbt.SheepDog.Step");
 					afterParserOrEnumRuleCall();
 				}
@@ -674,9 +717,9 @@ ruleScenario returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getScenarioAccess().getExamplesExamplesParserRuleCall_6_0());
+					newCompositeNode(grammarAccess.getScenarioAccess().getExamplesExamplesParserRuleCall_7_0());
 				}
-				lv_examples_6_0=ruleExamples
+				lv_examples_7_0=ruleExamples
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getScenarioRule());
@@ -684,7 +727,7 @@ ruleScenario returns [EObject current=null]
 					add(
 						$current,
 						"examples",
-						lv_examples_6_0,
+						lv_examples_7_0,
 						"org.farhan.mbt.SheepDog.Examples");
 					afterParserOrEnumRuleCall();
 				}
@@ -712,9 +755,9 @@ ruleExamples returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getExamplesAccess().getTagsTagsParserRuleCall_0_0());
+					newCompositeNode(grammarAccess.getExamplesAccess().getTagsAbstractScenarioTagsParserRuleCall_0_0());
 				}
-				lv_tags_0_0=ruleTags
+				lv_tags_0_0=ruleAbstractScenarioTags
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getExamplesRule());
@@ -723,7 +766,7 @@ ruleExamples returns [EObject current=null]
 						$current,
 						"tags",
 						lv_tags_0_0,
-						"org.farhan.mbt.SheepDog.Tags");
+						"org.farhan.mbt.SheepDog.AbstractScenarioTags");
 					afterParserOrEnumRuleCall();
 				}
 			)
@@ -755,12 +798,16 @@ ruleExamples returns [EObject current=null]
 				}
 			)
 		)
+		this_EOL_4=RULE_EOL
+		{
+			newLeafNode(this_EOL_4, grammarAccess.getExamplesAccess().getEOLTerminalRuleCall_4());
+		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getExamplesAccess().getStatementsStatementParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getExamplesAccess().getStatementsStatementParserRuleCall_5_0());
 				}
-				lv_statements_4_0=ruleStatement
+				lv_statements_5_0=ruleStatement
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getExamplesRule());
@@ -768,7 +815,7 @@ ruleExamples returns [EObject current=null]
 					add(
 						$current,
 						"statements",
-						lv_statements_4_0,
+						lv_statements_5_0,
 						"org.farhan.mbt.SheepDog.Statement");
 					afterParserOrEnumRuleCall();
 				}
@@ -777,9 +824,9 @@ ruleExamples returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getExamplesAccess().getTheExamplesTableTableParserRuleCall_5_0());
+					newCompositeNode(grammarAccess.getExamplesAccess().getTheExamplesTableTableParserRuleCall_6_0());
 				}
-				lv_theExamplesTable_5_0=ruleTable
+				lv_theExamplesTable_6_0=ruleTable
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getExamplesRule());
@@ -787,7 +834,7 @@ ruleExamples returns [EObject current=null]
 					set(
 						$current,
 						"theExamplesTable",
-						lv_theExamplesTable_5_0,
+						lv_theExamplesTable_6_0,
 						"org.farhan.mbt.SheepDog.Table");
 					afterParserOrEnumRuleCall();
 				}
@@ -893,13 +940,17 @@ ruleGiven returns [EObject current=null]
 				}
 			)
 		)
+		this_EOL_3=RULE_EOL
+		{
+			newLeafNode(this_EOL_3, grammarAccess.getGivenAccess().getEOLTerminalRuleCall_3());
+		}
 		(
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getGivenAccess().getTheStepTableTableParserRuleCall_3_0_0());
+						newCompositeNode(grammarAccess.getGivenAccess().getTheStepTableTableParserRuleCall_4_0_0());
 					}
-					lv_theStepTable_3_0=ruleTable
+					lv_theStepTable_4_0=ruleTable
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getGivenRule());
@@ -907,7 +958,7 @@ ruleGiven returns [EObject current=null]
 						set(
 							$current,
 							"theStepTable",
-							lv_theStepTable_3_0,
+							lv_theStepTable_4_0,
 							"org.farhan.mbt.SheepDog.Table");
 						afterParserOrEnumRuleCall();
 					}
@@ -917,9 +968,9 @@ ruleGiven returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getGivenAccess().getTheDocStringDocStringParserRuleCall_3_1_0());
+						newCompositeNode(grammarAccess.getGivenAccess().getTheDocStringDocStringParserRuleCall_4_1_0());
 					}
-					lv_theDocString_4_0=ruleDocString
+					lv_theDocString_5_0=ruleDocString
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getGivenRule());
@@ -927,7 +978,7 @@ ruleGiven returns [EObject current=null]
 						set(
 							$current,
 							"theDocString",
-							lv_theDocString_4_0,
+							lv_theDocString_5_0,
 							"org.farhan.mbt.SheepDog.DocString");
 						afterParserOrEnumRuleCall();
 					}
@@ -980,13 +1031,17 @@ ruleWhen returns [EObject current=null]
 				}
 			)
 		)
+		this_EOL_3=RULE_EOL
+		{
+			newLeafNode(this_EOL_3, grammarAccess.getWhenAccess().getEOLTerminalRuleCall_3());
+		}
 		(
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getWhenAccess().getTheStepTableTableParserRuleCall_3_0_0());
+						newCompositeNode(grammarAccess.getWhenAccess().getTheStepTableTableParserRuleCall_4_0_0());
 					}
-					lv_theStepTable_3_0=ruleTable
+					lv_theStepTable_4_0=ruleTable
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getWhenRule());
@@ -994,7 +1049,7 @@ ruleWhen returns [EObject current=null]
 						set(
 							$current,
 							"theStepTable",
-							lv_theStepTable_3_0,
+							lv_theStepTable_4_0,
 							"org.farhan.mbt.SheepDog.Table");
 						afterParserOrEnumRuleCall();
 					}
@@ -1004,9 +1059,9 @@ ruleWhen returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getWhenAccess().getTheDocStringDocStringParserRuleCall_3_1_0());
+						newCompositeNode(grammarAccess.getWhenAccess().getTheDocStringDocStringParserRuleCall_4_1_0());
 					}
-					lv_theDocString_4_0=ruleDocString
+					lv_theDocString_5_0=ruleDocString
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getWhenRule());
@@ -1014,7 +1069,7 @@ ruleWhen returns [EObject current=null]
 						set(
 							$current,
 							"theDocString",
-							lv_theDocString_4_0,
+							lv_theDocString_5_0,
 							"org.farhan.mbt.SheepDog.DocString");
 						afterParserOrEnumRuleCall();
 					}
@@ -1067,13 +1122,17 @@ ruleThen returns [EObject current=null]
 				}
 			)
 		)
+		this_EOL_3=RULE_EOL
+		{
+			newLeafNode(this_EOL_3, grammarAccess.getThenAccess().getEOLTerminalRuleCall_3());
+		}
 		(
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getThenAccess().getTheStepTableTableParserRuleCall_3_0_0());
+						newCompositeNode(grammarAccess.getThenAccess().getTheStepTableTableParserRuleCall_4_0_0());
 					}
-					lv_theStepTable_3_0=ruleTable
+					lv_theStepTable_4_0=ruleTable
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getThenRule());
@@ -1081,7 +1140,7 @@ ruleThen returns [EObject current=null]
 						set(
 							$current,
 							"theStepTable",
-							lv_theStepTable_3_0,
+							lv_theStepTable_4_0,
 							"org.farhan.mbt.SheepDog.Table");
 						afterParserOrEnumRuleCall();
 					}
@@ -1091,9 +1150,9 @@ ruleThen returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getThenAccess().getTheDocStringDocStringParserRuleCall_3_1_0());
+						newCompositeNode(grammarAccess.getThenAccess().getTheDocStringDocStringParserRuleCall_4_1_0());
 					}
-					lv_theDocString_4_0=ruleDocString
+					lv_theDocString_5_0=ruleDocString
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getThenRule());
@@ -1101,7 +1160,7 @@ ruleThen returns [EObject current=null]
 						set(
 							$current,
 							"theDocString",
-							lv_theDocString_4_0,
+							lv_theDocString_5_0,
 							"org.farhan.mbt.SheepDog.DocString");
 						afterParserOrEnumRuleCall();
 					}
@@ -1154,13 +1213,17 @@ ruleAnd returns [EObject current=null]
 				}
 			)
 		)
+		this_EOL_3=RULE_EOL
+		{
+			newLeafNode(this_EOL_3, grammarAccess.getAndAccess().getEOLTerminalRuleCall_3());
+		}
 		(
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getAndAccess().getTheStepTableTableParserRuleCall_3_0_0());
+						newCompositeNode(grammarAccess.getAndAccess().getTheStepTableTableParserRuleCall_4_0_0());
 					}
-					lv_theStepTable_3_0=ruleTable
+					lv_theStepTable_4_0=ruleTable
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getAndRule());
@@ -1168,7 +1231,7 @@ ruleAnd returns [EObject current=null]
 						set(
 							$current,
 							"theStepTable",
-							lv_theStepTable_3_0,
+							lv_theStepTable_4_0,
 							"org.farhan.mbt.SheepDog.Table");
 						afterParserOrEnumRuleCall();
 					}
@@ -1178,9 +1241,9 @@ ruleAnd returns [EObject current=null]
 			(
 				(
 					{
-						newCompositeNode(grammarAccess.getAndAccess().getTheDocStringDocStringParserRuleCall_3_1_0());
+						newCompositeNode(grammarAccess.getAndAccess().getTheDocStringDocStringParserRuleCall_4_1_0());
 					}
-					lv_theDocString_4_0=ruleDocString
+					lv_theDocString_5_0=ruleDocString
 					{
 						if ($current==null) {
 							$current = createModelElementForParent(grammarAccess.getAndRule());
@@ -1188,7 +1251,7 @@ ruleAnd returns [EObject current=null]
 						set(
 							$current,
 							"theDocString",
-							lv_theDocString_4_0,
+							lv_theDocString_5_0,
 							"org.farhan.mbt.SheepDog.DocString");
 						afterParserOrEnumRuleCall();
 					}
@@ -1356,15 +1419,15 @@ ruleRow returns [EObject current=null]
 	)
 ;
 
-// Entry rule entryRuleTags
-entryRuleTags returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getTagsRule()); }
-	iv_ruleTags=ruleTags
-	{ $current=$iv_ruleTags.current.getText(); }
+// Entry rule entryRuleFeatureTags
+entryRuleFeatureTags returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getFeatureTagsRule()); }
+	iv_ruleFeatureTags=ruleFeatureTags
+	{ $current=$iv_ruleFeatureTags.current; }
 	EOF;
 
-// Rule Tags
-ruleTags returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+// Rule FeatureTags
+ruleFeatureTags returns [EObject current=null]
 @init {
 	enterRule();
 }
@@ -1372,32 +1435,123 @@ ruleTags returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	leaveRule();
 }:
 	(
-		kw='[tags="'
+		otherlv_0=':tags:'
 		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getTagsAccess().getTagsKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getFeatureTagsAccess().getTagsKeyword_0());
 		}
 		(
-			this_TAGWORD_1=RULE_TAGWORD
-			{
-				$current.merge(this_TAGWORD_1);
-			}
-			{
-				newLeafNode(this_TAGWORD_1, grammarAccess.getTagsAccess().getTAGWORDTerminalRuleCall_1());
-			}
-		)+
-		kw='"]'
+			(
+				lv_name_1_0=RULE_TAGWORD
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getFeatureTagsAccess().getNameTAGWORDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getFeatureTagsRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.farhan.mbt.SheepDog.TAGWORD");
+				}
+			)
+		)
+		this_EOL_2=RULE_EOL
 		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getTagsAccess().getQuotationMarkRightSquareBracketKeyword_2());
+			newLeafNode(this_EOL_2, grammarAccess.getFeatureTagsAccess().getEOLTerminalRuleCall_2());
+		}
+	)
+;
+
+// Entry rule entryRuleAbstractScenarioTags
+entryRuleAbstractScenarioTags returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getAbstractScenarioTagsRule()); }
+	iv_ruleAbstractScenarioTags=ruleAbstractScenarioTags
+	{ $current=$iv_ruleAbstractScenarioTags.current; }
+	EOF;
+
+// Rule AbstractScenarioTags
+ruleAbstractScenarioTags returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='[tags="'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getAbstractScenarioTagsAccess().getTagsKeyword_0());
+		}
+		(
+			(
+				lv_name_1_0=RULE_TAGWORD
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getAbstractScenarioTagsAccess().getNameTAGWORDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getAbstractScenarioTagsRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.farhan.mbt.SheepDog.TAGWORD");
+				}
+			)
+		)
+		otherlv_2='"]'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getAbstractScenarioTagsAccess().getQuotationMarkRightSquareBracketKeyword_2());
 		}
 		this_EOL_3=RULE_EOL
 		{
-			$current.merge(this_EOL_3);
+			newLeafNode(this_EOL_3, grammarAccess.getAbstractScenarioTagsAccess().getEOLTerminalRuleCall_3());
 		}
+	)
+;
+
+// Entry rule entryRuleCell
+entryRuleCell returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getCellRule()); }
+	iv_ruleCell=ruleCell
+	{ $current=$iv_ruleCell.current; }
+	EOF;
+
+// Rule Cell
+ruleCell returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='|'
 		{
-			newLeafNode(this_EOL_3, grammarAccess.getTagsAccess().getEOLTerminalRuleCall_3());
+			newLeafNode(otherlv_0, grammarAccess.getCellAccess().getVerticalLineKeyword_0());
 		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getCellAccess().getNameTitleParserRuleCall_1_0());
+				}
+				lv_name_1_0=ruleTitle
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getCellRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.farhan.mbt.SheepDog.Title");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
 	)
 ;
 
@@ -1417,23 +1571,14 @@ ruleTitle returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	leaveRule();
 }:
 	(
-		(
-			this_WORD_0=RULE_WORD
-			{
-				$current.merge(this_WORD_0);
-			}
-			{
-				newLeafNode(this_WORD_0, grammarAccess.getTitleAccess().getWORDTerminalRuleCall_0());
-			}
-		)+
-		this_EOL_1=RULE_EOL
+		this_WORD_0=RULE_WORD
 		{
-			$current.merge(this_EOL_1);
+			$current.merge(this_WORD_0);
 		}
 		{
-			newLeafNode(this_EOL_1, grammarAccess.getTitleAccess().getEOLTerminalRuleCall_1());
+			newLeafNode(this_WORD_0, grammarAccess.getTitleAccess().getWORDTerminalRuleCall());
 		}
-	)
+	)+
 ;
 
 // Entry rule entryRuleStatement
@@ -1460,7 +1605,7 @@ ruleStatement returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken
 			{
 				newLeafNode(this_WORD_0, grammarAccess.getStatementAccess().getWORDTerminalRuleCall_0());
 			}
-		)+
+		)*
 		this_EOL_1=RULE_EOL
 		{
 			$current.merge(this_EOL_1);
@@ -1506,42 +1651,7 @@ ruleLine returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	)
 ;
 
-// Entry rule entryRuleCell
-entryRuleCell returns [String current=null]:
-	{ newCompositeNode(grammarAccess.getCellRule()); }
-	iv_ruleCell=ruleCell
-	{ $current=$iv_ruleCell.current.getText(); }
-	EOF;
-
-// Rule Cell
-ruleCell returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		kw='|'
-		{
-			$current.merge(kw);
-			newLeafNode(kw, grammarAccess.getCellAccess().getVerticalLineKeyword_0());
-		}
-		(
-			this_CELLWORD_1=RULE_CELLWORD
-			{
-				$current.merge(this_CELLWORD_1);
-			}
-			{
-				newLeafNode(this_CELLWORD_1, grammarAccess.getCellAccess().getCELLWORDTerminalRuleCall_1());
-			}
-		)*
-	)
-;
-
 RULE_TAGWORD : ~((' '|'\t'|'\r'|'\n'|'#'|'"'))+;
-
-RULE_CELLWORD : ~((' '|'\t'|'\r'|'\n'|'#'|'|'))+;
 
 RULE_WORD : ~((' '|'\t'|'\r'|'\n'|'#'))+;
 

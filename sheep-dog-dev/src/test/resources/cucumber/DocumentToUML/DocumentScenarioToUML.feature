@@ -5,9 +5,9 @@ Feature: Document Scenario To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Process
+          = Feature: Process
           
-          == Submit
+          == Scenario: Submit
           
           === Given The Object1 page is empty
           """
@@ -21,10 +21,10 @@ Feature: Document Scenario To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Process
+          = Feature: Process
           
           [tags="tag1"]
-          == Submit
+          == Scenario: Submit
           
           Desc line 1
           
@@ -43,10 +43,10 @@ Feature: Document Scenario To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Process
+          = Feature: Process
           
           [tags="tag1,tag2"]
-          == Submit
+          == Scenario: Submit
           
           Desc line 1
           Desc line 2
@@ -73,10 +73,10 @@ Feature: Document Scenario To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Process
+          = Feature: Process
           
           [tags="tag1,tag2,tag3"]
-          == Submit
+          == Scenario: Submit
           
           Desc line 1
           Desc line 2
@@ -108,15 +108,15 @@ Feature: Document Scenario To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Process
+          = Feature: Process
           
           [tags="tag1"]
-          == Submit
+          == Scenario: Submit
           
           === Given The Object1 page is empty
           
           [tags="tag2"]
-          == Submit2
+          == Scenario: Submit2
           
           === Given The Object1 page is empty
           """

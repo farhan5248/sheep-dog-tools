@@ -8,22 +8,23 @@ Model:
 	StepObject | Feature;
 
 StepObject:
-	'=' 'Object:' name=Title
+	'=' 'Object:' name=Title EOL
 	statements+=Statement*
 	stepDefinitions+=StepDefinition*;
 
 StepDefinition:
-	'==' 'Definition:' name=Title
+	'==' 'Definition:' name=Title EOL
 	statements+=Statement*
 	stepParameters+=StepParameters*;
 
 StepParameters:
-	'===' 'Parameters:' name=Title
+	'===' 'Parameters:' name=Title EOL
 	statements+=Statement*
 	parametersTable=Table;
 
 Feature:
-	'=' 'Feature:' name=Title
+	(tags=FeatureTags)?
+	'=' 'Feature:' name=Title EOL
 	statements+=Statement*
 	abstractScenarios+=AbstractScenario*;
 
@@ -31,21 +32,21 @@ AbstractScenario:
 	Background | Scenario;
 
 Background:
-	(tags=Tags)?
-	'==' 'Background:' name=Title
+	(tags=AbstractScenarioTags)?
+	'==' 'Background:' name=Title EOL
 	statements+=Statement*
 	steps+=Step*;
 
 Scenario:
-	(tags=Tags)?
-	'==' 'Scenario:' name=Title
+	(tags=AbstractScenarioTags)?
+	'==' 'Scenario:' name=Title EOL
 	statements+=Statement*
 	steps+=Step*
 	examples+=Examples*;
 
 Examples:
-	(tags=Tags)?
-	'===' 'Examples:' name=Title
+	(tags=AbstractScenarioTags)?
+	'===' 'Examples:' name=Title EOL
 	statements+=Statement*
 	theExamplesTable=Table;
 
@@ -53,19 +54,19 @@ Step:
 	Given | When | Then | And;
 
 Given:
-	'===' 'Given' name=Title
+	'===' 'Given' name=Title EOL
 	(theStepTable=Table | theDocString=DocString)?;
 
 When:
-	'===' 'When' name=Title
+	'===' 'When' name=Title EOL
 	(theStepTable=Table | theDocString=DocString)?;
 
 Then:
-	'===' 'Then' name=Title
+	'===' 'Then' name=Title EOL
 	(theStepTable=Table | theDocString=DocString)?;
 
 And:
-	'===' 'And' name=Title
+	'===' 'And' name=Title EOL
 	(theStepTable=Table | theDocString=DocString)?;
 
 DocString:
@@ -82,26 +83,27 @@ Table:
 Row:
 	cells+=Cell+ EOL;
 
-Tags:
-	'[tags="' TAGWORD+ '"]' EOL;
+FeatureTags:
+	':tags:' name=TAGWORD EOL;
+
+AbstractScenarioTags:
+	'[tags="' name=TAGWORD '"]' EOL;
+
+Cell:
+	'|' name=Title;
 
 Title:
-	WORD+ EOL;
+	WORD+;
 
+// TODO these two are duplicates
 Statement:
-	WORD+ EOL;
+	WORD* EOL;
 
 Line:
 	WORD* EOL;
 
-Cell:
-	'|' CELLWORD*;
-
 terminal TAGWORD:
 	!(' ' | '\t' | '\r' | '\n' | '#' | '"')+;
-
-terminal CELLWORD:
-	!(' ' | '\t' | '\r' | '\n' | '#' | '|')+;
 
 terminal WORD:
 	!(' ' | '\t' | '\r' | '\n' | '#')+;

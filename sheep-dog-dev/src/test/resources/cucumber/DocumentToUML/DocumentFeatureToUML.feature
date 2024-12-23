@@ -5,7 +5,7 @@ Feature: Document Feature To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Process
+          = Feature: Process
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
@@ -18,11 +18,11 @@ Feature: Document Feature To UML
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           :tags: tag1
-          = Process
+          = Feature: Process
           
           Desc line 1
           
-          == Story One
+          == Scenario: Story One
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
@@ -38,12 +38,12 @@ Feature: Document Feature To UML
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           :tags: tag1,tag2
-          = Process
+          = Feature: Process
           
           Desc line 1
           Desc line 2
           
-          == Story One
+          == Scenario: Story One
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
@@ -60,13 +60,13 @@ Feature: Document Feature To UML
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           :tags: tag1,tag2,tag3
-          = Process
+          = Feature: Process
           
           Desc line 1
           Desc line 2
           Desc line 3
           
-          == Story One
+          == Scenario: Story One
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
@@ -84,12 +84,12 @@ Feature: Document Feature To UML
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           :tags: tag1
-          = Process
+          = Feature: Process
           """
       And The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
           """
           :tags: tag2
-          = Process
+          = Feature: Process
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
           | Tags |

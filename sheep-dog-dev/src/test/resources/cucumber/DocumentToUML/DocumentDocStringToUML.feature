@@ -5,9 +5,9 @@ Feature: Document DocString To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Process
+          = Feature: Process
           
-          == Submit
+          == Scenario: Submit
           
           === Given The Object page is created as follows
           

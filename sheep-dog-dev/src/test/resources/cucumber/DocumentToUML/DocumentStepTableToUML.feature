@@ -5,16 +5,16 @@ Feature: Document Step Table To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Process
+          = Feature: Process
           
-          == Submit
+          == Scenario: Submit
           
           === Given The Object page is created as follows
           
           [options="header"]
           |===
-          |h1
-          |v1
+          | h1
+          | v1
           |===
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
@@ -28,17 +28,17 @@ Feature: Document Step Table To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Process
+          = Feature: Process
           
-          == Submit
+          == Scenario: Submit
           
           === Given The Object page is created as follows
           
           [options="header"]
           |===
-          |h1 |h2
-          |v1 |v2
-          |v3 |v4
+          | h1 | h2
+          | v1 | v2
+          | v3 | v4
           |===
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
@@ -53,18 +53,18 @@ Feature: Document Step Table To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Process
+          = Feature: Process
           
-          == Submit
+          == Scenario: Submit
           
           === Given The Object page is created as follows
           
           [options="header"]
           |===
-          |h1 |h2 |h3
-          |v1 |v2 |v3
-          |v4 |v5 |v6
-          |v7 |v8 |v9
+          | h1 | h2 | h3
+          | v1 | v2 | v3
+          | v4 | v5 | v6
+          | v7 | v8 | v9
           |===
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
@@ -80,9 +80,9 @@ Feature: Document Step Table To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Process
+          = Feature: Process
           
-          == Submit
+          == Scenario: Submit
           
           === Given The Object page is created as follows
           

@@ -5,6 +5,7 @@ package org.farhan.mbt.sheepDog.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -12,11 +13,14 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.farhan.mbt.sheepDog.AbstractScenario;
 import org.farhan.mbt.sheepDog.Feature;
+import org.farhan.mbt.sheepDog.FeatureTags;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
 
 /**
@@ -27,6 +31,7 @@ import org.farhan.mbt.sheepDog.SheepDogPackage;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.FeatureImpl#getTags <em>Tags</em>}</li>
  *   <li>{@link org.farhan.mbt.sheepDog.impl.FeatureImpl#getAbstractScenarios <em>Abstract Scenarios</em>}</li>
  * </ul>
  *
@@ -34,6 +39,16 @@ import org.farhan.mbt.sheepDog.SheepDogPackage;
  */
 public class FeatureImpl extends ModelImpl implements Feature
 {
+  /**
+   * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTags()
+   * @generated
+   * @ordered
+   */
+  protected FeatureTags tags;
+
   /**
    * The cached value of the '{@link #getAbstractScenarios() <em>Abstract Scenarios</em>}' containment reference list.
    * <!-- begin-user-doc -->
@@ -71,6 +86,56 @@ public class FeatureImpl extends ModelImpl implements Feature
    * @generated
    */
   @Override
+  public FeatureTags getTags()
+  {
+    return tags;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetTags(FeatureTags newTags, NotificationChain msgs)
+  {
+    FeatureTags oldTags = tags;
+    tags = newTags;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.FEATURE__TAGS, oldTags, newTags);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setTags(FeatureTags newTags)
+  {
+    if (newTags != tags)
+    {
+      NotificationChain msgs = null;
+      if (tags != null)
+        msgs = ((InternalEObject)tags).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.FEATURE__TAGS, null, msgs);
+      if (newTags != null)
+        msgs = ((InternalEObject)newTags).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.FEATURE__TAGS, null, msgs);
+      msgs = basicSetTags(newTags, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.FEATURE__TAGS, newTags, newTags));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EList<AbstractScenario> getAbstractScenarios()
   {
     if (abstractScenarios == null)
@@ -90,6 +155,8 @@ public class FeatureImpl extends ModelImpl implements Feature
   {
     switch (featureID)
     {
+      case SheepDogPackage.FEATURE__TAGS:
+        return basicSetTags(null, msgs);
       case SheepDogPackage.FEATURE__ABSTRACT_SCENARIOS:
         return ((InternalEList<?>)getAbstractScenarios()).basicRemove(otherEnd, msgs);
     }
@@ -106,6 +173,8 @@ public class FeatureImpl extends ModelImpl implements Feature
   {
     switch (featureID)
     {
+      case SheepDogPackage.FEATURE__TAGS:
+        return getTags();
       case SheepDogPackage.FEATURE__ABSTRACT_SCENARIOS:
         return getAbstractScenarios();
     }
@@ -123,6 +192,9 @@ public class FeatureImpl extends ModelImpl implements Feature
   {
     switch (featureID)
     {
+      case SheepDogPackage.FEATURE__TAGS:
+        setTags((FeatureTags)newValue);
+        return;
       case SheepDogPackage.FEATURE__ABSTRACT_SCENARIOS:
         getAbstractScenarios().clear();
         getAbstractScenarios().addAll((Collection<? extends AbstractScenario>)newValue);
@@ -141,6 +213,9 @@ public class FeatureImpl extends ModelImpl implements Feature
   {
     switch (featureID)
     {
+      case SheepDogPackage.FEATURE__TAGS:
+        setTags((FeatureTags)null);
+        return;
       case SheepDogPackage.FEATURE__ABSTRACT_SCENARIOS:
         getAbstractScenarios().clear();
         return;
@@ -158,6 +233,8 @@ public class FeatureImpl extends ModelImpl implements Feature
   {
     switch (featureID)
     {
+      case SheepDogPackage.FEATURE__TAGS:
+        return tags != null;
       case SheepDogPackage.FEATURE__ABSTRACT_SCENARIOS:
         return abstractScenarios != null && !abstractScenarios.isEmpty();
     }

@@ -3,6 +3,7 @@ package org.farhan.mbt.asciidoctor;
 
 import java.util.ArrayList;
 
+import org.farhan.mbt.SheepDogStandaloneSetup;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.ObjectRepository;
@@ -59,6 +60,7 @@ public class AsciiDoctorProject extends ConvertibleProject {
 
 	@Override
 	public void init() throws Exception {
+		SheepDogStandaloneSetup.doSetup();
 	}
 
 	@Override

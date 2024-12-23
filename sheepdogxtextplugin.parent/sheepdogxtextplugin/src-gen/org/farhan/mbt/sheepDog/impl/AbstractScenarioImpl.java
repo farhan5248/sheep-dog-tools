@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.farhan.mbt.sheepDog.AbstractScenario;
+import org.farhan.mbt.sheepDog.AbstractScenarioTags;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
 import org.farhan.mbt.sheepDog.Step;
 
@@ -43,24 +44,14 @@ import org.farhan.mbt.sheepDog.Step;
 public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implements AbstractScenario
 {
   /**
-   * The default value of the '{@link #getTags() <em>Tags</em>}' attribute.
+   * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getTags()
    * @generated
    * @ordered
    */
-  protected static final String TAGS_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getTags() <em>Tags</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTags()
-   * @generated
-   * @ordered
-   */
-  protected String tags = TAGS_EDEFAULT;
+  protected AbstractScenarioTags tags;
 
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -129,7 +120,7 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
    * @generated
    */
   @Override
-  public String getTags()
+  public AbstractScenarioTags getTags()
   {
     return tags;
   }
@@ -139,13 +130,38 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public void setTags(String newTags)
+  public NotificationChain basicSetTags(AbstractScenarioTags newTags, NotificationChain msgs)
   {
-    String oldTags = tags;
+    AbstractScenarioTags oldTags = tags;
     tags = newTags;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.ABSTRACT_SCENARIO__TAGS, oldTags, tags));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.ABSTRACT_SCENARIO__TAGS, oldTags, newTags);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setTags(AbstractScenarioTags newTags)
+  {
+    if (newTags != tags)
+    {
+      NotificationChain msgs = null;
+      if (tags != null)
+        msgs = ((InternalEObject)tags).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.ABSTRACT_SCENARIO__TAGS, null, msgs);
+      if (newTags != null)
+        msgs = ((InternalEObject)newTags).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.ABSTRACT_SCENARIO__TAGS, null, msgs);
+      msgs = basicSetTags(newTags, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.ABSTRACT_SCENARIO__TAGS, newTags, newTags));
   }
 
   /**
@@ -213,6 +229,8 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
+      case SheepDogPackage.ABSTRACT_SCENARIO__TAGS:
+        return basicSetTags(null, msgs);
       case SheepDogPackage.ABSTRACT_SCENARIO__STEPS:
         return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
     }
@@ -253,7 +271,7 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
     switch (featureID)
     {
       case SheepDogPackage.ABSTRACT_SCENARIO__TAGS:
-        setTags((String)newValue);
+        setTags((AbstractScenarioTags)newValue);
         return;
       case SheepDogPackage.ABSTRACT_SCENARIO__NAME:
         setName((String)newValue);
@@ -281,7 +299,7 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
     switch (featureID)
     {
       case SheepDogPackage.ABSTRACT_SCENARIO__TAGS:
-        setTags(TAGS_EDEFAULT);
+        setTags((AbstractScenarioTags)null);
         return;
       case SheepDogPackage.ABSTRACT_SCENARIO__NAME:
         setName(NAME_EDEFAULT);
@@ -307,7 +325,7 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
     switch (featureID)
     {
       case SheepDogPackage.ABSTRACT_SCENARIO__TAGS:
-        return TAGS_EDEFAULT == null ? tags != null : !TAGS_EDEFAULT.equals(tags);
+        return tags != null;
       case SheepDogPackage.ABSTRACT_SCENARIO__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case SheepDogPackage.ABSTRACT_SCENARIO__STATEMENTS:
@@ -329,9 +347,7 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (tags: ");
-    result.append(tags);
-    result.append(", name: ");
+    result.append(" (name: ");
     result.append(name);
     result.append(", statements: ");
     result.append(statements);

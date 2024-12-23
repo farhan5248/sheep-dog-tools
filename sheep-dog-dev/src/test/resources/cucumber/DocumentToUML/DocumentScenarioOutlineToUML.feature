@@ -5,9 +5,9 @@ Feature: Document Scenario Outline To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Process
+          = Feature: Process
           
-          == Submit
+          == Scenario: Submit
           
           === Given The Object page is created as follows
           
@@ -17,8 +17,7 @@ Feature: Document Scenario Outline To UML
           | {h3}
           |===
           
-          [examples="true"]
-          === Examples 1
+          === Examples: Examples 1
           
           [options="header"]
           |===
@@ -41,10 +40,10 @@ Feature: Document Scenario Outline To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Process
+          = Feature: Process
           
           [tags="tag1"]
-          == Submit
+          == Scenario: Submit
           
           Desc line 1
           
@@ -56,8 +55,7 @@ Feature: Document Scenario Outline To UML
           | {h3}
           |===
           
-          [examples="true"]
-          === Examples 1
+          === Examples: Examples 1
           
           [options="header"]
           |===
@@ -78,10 +76,10 @@ Feature: Document Scenario Outline To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Process
+          = Feature: Process
           
           [tags="tag1,tag2"]
-          == Submit
+          == Scenario: Submit
           
           Desc line 1
           Desc line 2
@@ -102,8 +100,7 @@ Feature: Document Scenario Outline To UML
           | {h3}
           |===
           
-          [examples="true"]
-          === Examples 1
+          === Examples: Examples 1
           
           [options="header"]
           |===
@@ -111,8 +108,7 @@ Feature: Document Scenario Outline To UML
           | v31
           |===
           
-          [examples="true"]
-          === Examples 2
+          === Examples: Examples 2
           
           [options="header"]
           |===
@@ -146,10 +142,10 @@ Feature: Document Scenario Outline To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Process
+          = Feature: Process
           
           [tags="tag1,tag2,tag3"]
-          == Submit
+          == Scenario: Submit
           
           Desc line 1
           Desc line 2
@@ -179,8 +175,7 @@ Feature: Document Scenario Outline To UML
           | {h3}
           |===
           
-          [examples="true"]
-          === Examples 1
+          === Examples: Examples 1
           
           [options="header"]
           |===
@@ -188,16 +183,15 @@ Feature: Document Scenario Outline To UML
           | v31
           |===
           
-          [examples="true"]
-          === Examples 2
+          === Examples: Examples 2
           
           [options="header"]
           |===
           | h3
           | v32
           |===
-          [examples="true"]
-          === Examples 3
+          
+          === Examples: Examples 3
           
           [options="header"]
           |===
@@ -232,15 +226,14 @@ Feature: Document Scenario Outline To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Process
+          = Feature: Process
           
           [tags="tag1"]
-          == Submit
+          == Scenario: Submit
           
           === Given The Object1 page is empty
           
-          [examples="true"]
-          === Examples 1
+          === Examples: Examples 1
           
           [options="header"]
           |===
@@ -249,12 +242,11 @@ Feature: Document Scenario Outline To UML
           |===
           
           [tags="tag2"]
-          == Submit2
+          == Scenario: Submit2
           
           === Given The Object1 page is empty
           
-          [examples="true"]
-          === Examples 1
+          === Examples: Examples 1
           
           [options="header"]
           |===

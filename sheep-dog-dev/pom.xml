@@ -10,6 +10,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>21</java.version>
 		<sheepdogxtextcukeplugin.version>1.2.0-SNAPSHOT</sheepdogxtextcukeplugin.version>
+		<sheepdogxtextplugin.version>1.2.0-SNAPSHOT</sheepdogxtextplugin.version>
 	</properties>
 
 	<scm>
@@ -209,6 +210,18 @@
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>xbase.lib</artifactId>
 			<version>2.33.0.v20231121-0955</version>
+		</dependency>
+		<!-- Xtext AsciiDoctor -->
+		<dependency>
+			<groupId>org.farhan</groupId>
+			<artifactId>sheepdogxtextplugin</artifactId>
+			<version>${sheepdogxtextplugin.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.mortbay.jasper</groupId>
+					<artifactId>apache-jsp</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!-- Xtext Cucumber -->
 		<dependency>

@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import org.asciidoctor.ast.Section;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
+import org.farhan.mbt.sheepDog.AbstractScenario;
+import org.farhan.mbt.sheepDog.Cell;
+import org.farhan.mbt.sheepDog.Examples;
+import org.farhan.mbt.sheepDog.Row;
+import org.farhan.mbt.sheepDog.Step;
 import org.junit.jupiter.api.Assertions;
 
 public class AdocFileObject extends FileObject {
 
-	private AsciiDoctorProject project;
 	private AsciiDoctorAdocWrapper wrapper;
 
 	protected void assertAbstractScenarioDescription(String name, String description) {
@@ -25,7 +29,7 @@ public class AdocFileObject extends FileObject {
 	}
 
 	protected void assertAbstractScenarioTags(String name, String tags) {
-		Section abstractScenario = getAbstractScenario(name);
+		AbstractScenario abstractScenario = getAbstractScenario(name);
 		Assertions.assertEquals(tags, Utilities.listAsCsv(wrapper.getAbstractScenarioTags(abstractScenario)));
 	}
 
@@ -73,8 +77,8 @@ public class AdocFileObject extends FileObject {
 		Assertions.assertTrue(getStep(name, stepName) != null, "Step " + stepName + " doesn't exist");
 	}
 
-	private Section getAbstractScenario(String name) {
-		for (Section s : wrapper.getAbstractScenarioList()) {
+	private AbstractScenario getAbstractScenario(String name) {
+		for (AbstractScenario s : wrapper.getAbstractScenarioList()) {
 			if (wrapper.getScenarioName(s).contentEquals(name)) {
 				return s;
 			}
@@ -82,8 +86,8 @@ public class AdocFileObject extends FileObject {
 		return null;
 	}
 
-	private Section getExamples(String name, String examplesName) {
-		for (Section e : wrapper.getExamplesList(getAbstractScenario(name))) {
+	private Examples getExamples(String name, String examplesName) {
+		for (Examples e : wrapper.getExamplesList(getAbstractScenario(name))) {
 			if (wrapper.getExamplesName(e).contentEquals(examplesName)) {
 				return e;
 			}
@@ -91,7 +95,7 @@ public class AdocFileObject extends FileObject {
 		return null;
 	}
 
-	private ArrayList<String> getExamplesRow(Section examples, String rowName) {
+	private ArrayList<String> getExamplesRow(Examples examples, String rowName) {
 		wrapper.getExamplesRowList(examples);
 		ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
 		ArrayList<String> row = new ArrayList<String>();
@@ -99,11 +103,11 @@ public class AdocFileObject extends FileObject {
 		for (String colName : wrapper.getExamplesTable(examples)) {
 			row.add(colName);
 		}
-		for (ArrayList<String> r : wrapper.getExamplesRowList(examples)) {
+		for (Row r : wrapper.getExamplesRowList(examples)) {
 			row = new ArrayList<String>();
 			table.add(row);
-			for (String c : r) {
-				row.add(c);
+			for (Cell c : r.getCells()) {
+				row.add(c.getName());
 			}
 		}
 		for (ArrayList<String> cellList : table) {
@@ -119,7 +123,7 @@ public class AdocFileObject extends FileObject {
 		return null;
 	}
 
-	private ArrayList<String> getRow(Section step, String csvRow) {
+	private ArrayList<String> getRow(Step step, String csvRow) {
 		csvRow = csvRow.replaceAll(" +", " ");
 		for (ArrayList<String> row : wrapper.getStepTable(step)) {
 			// convert it to csv
@@ -136,8 +140,8 @@ public class AdocFileObject extends FileObject {
 		return null;
 	}
 
-	private Section getStep(String name, String stepName) {
-		for (Section s : wrapper.getStepList(getAbstractScenario(name))) {
+	private Step getStep(String name, String stepName) {
+		for (Step s : wrapper.getStepList(getAbstractScenario(name))) {
 			if (wrapper.getStep(s).contentEquals(stepName)) {
 				return s;
 			}
