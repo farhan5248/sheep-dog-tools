@@ -19,5 +19,5 @@ Feature: UML DocString To Document
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps Doc String section will be created as follows
           | Name   | Step                                        | Content |
-          | Submit | Given The Object page is created as follows | text1   |
+          | Submit | Given The Object page is created as follows | text1\n |
 

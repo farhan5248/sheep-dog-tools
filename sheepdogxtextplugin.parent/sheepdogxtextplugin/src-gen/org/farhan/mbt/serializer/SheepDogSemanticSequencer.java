@@ -110,7 +110,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     AbstractScenarioTags returns AbstractScenarioTags
 	 *
 	 * Constraint:
-	 *     name=TAGWORD
+	 *     name=WORD
 	 * </pre>
 	 */
 	protected void sequence_AbstractScenarioTags(ISerializationContext context, AbstractScenarioTags semanticObject) {
@@ -119,7 +119,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.ABSTRACT_SCENARIO_TAGS__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAbstractScenarioTagsAccess().getNameTAGWORDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getAbstractScenarioTagsAccess().getNameWORDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	
@@ -208,7 +208,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     FeatureTags returns FeatureTags
 	 *
 	 * Constraint:
-	 *     name=TAGWORD
+	 *     name=WORD
 	 * </pre>
 	 */
 	protected void sequence_FeatureTags(ISerializationContext context, FeatureTags semanticObject) {
@@ -217,7 +217,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.FEATURE_TAGS__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getFeatureTagsAccess().getNameTAGWORDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getFeatureTagsAccess().getNameWORDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
 	

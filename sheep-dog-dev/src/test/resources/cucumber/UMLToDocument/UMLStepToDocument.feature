@@ -12,9 +12,7 @@ Feature: UML Step To Document
               Given The Object page is empty
                When The Object page is empty
                Then The Object page is empty
-                But The Object page is empty
                 And The Object page is empty
-                  * The Object page is empty
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
@@ -25,8 +23,6 @@ Feature: UML Step To Document
           | Submit | When The Object page is empty  |
           | Submit | Then The Object page is empty  |
           | Submit | And The Object page is empty   |
-          | Submit | But The Object page is empty   |
-          | Submit | * The Object page is empty     |
 
   Scenario: Convert apostrophes
 

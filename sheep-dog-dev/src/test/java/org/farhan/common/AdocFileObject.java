@@ -1,9 +1,7 @@
 package org.farhan.common;
 
 import java.util.ArrayList;
-import org.asciidoctor.ast.Section;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
-import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.sheepDog.AbstractScenario;
 import org.farhan.mbt.sheepDog.Cell;
 import org.farhan.mbt.sheepDog.Examples;

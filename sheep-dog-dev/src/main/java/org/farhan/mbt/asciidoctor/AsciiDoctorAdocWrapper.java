@@ -1,24 +1,22 @@
 package org.farhan.mbt.asciidoctor;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 
-import org.asciidoctor.Options;
-import org.asciidoctor.Asciidoctor.Factory;
-import org.asciidoctor.ast.Block;
-import org.asciidoctor.ast.Document;
-import org.asciidoctor.ast.Section;
-import org.asciidoctor.ast.StructuralNode;
-import org.asciidoctor.jruby.extension.internal.JRubyProcessor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.impl.RuleCallImpl;
 import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
+import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.sheepDog.AbstractScenario;
 import org.farhan.mbt.sheepDog.AbstractScenarioTags;
@@ -34,8 +32,6 @@ import org.farhan.mbt.sheepDog.Step;
 
 public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
-	private JRubyProcessor jrp;
-	private Document theDoc;
 	private Feature theFeature;
 	private String thePath;
 
@@ -44,88 +40,120 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		String[] pathParts = thePath.split("/");
 		theFeature = SheepDogFactory.eINSTANCE.createFeature();
 		theFeature.setName(pathParts[pathParts.length - 1].replace(".asciidoc", ""));
-		theDoc = Factory.create().load("= " + pathParts[pathParts.length - 1], Options.builder().build());
-		jrp = new JRubyProcessor();
 	}
 
-	public Section createBackground(String name) {
-		Section background = jrp.createSection(theDoc);
-		background.getAttributes().put("background", "true");
-		background.setTitle(name);
-		theDoc.getBlocks().add(background);
+	public Background createBackground(String backgroundName) {
+		deleteAbstractScenario(backgroundName);
+		Background background = SheepDogFactory.eINSTANCE.createBackground();
+		background.setName(backgroundName);
+		theFeature.getAbstractScenarios().add(background);
 		return background;
 	}
 
-	public void createDocString(Section step, String content) {
-		Block docString = jrp.createBlock(step, "listing", "");
-		step.getBlocks().add(docString);
-		docString.setSource(content);
+	private void deleteAbstractScenario(String name) {
+		EList<AbstractScenario> list = theFeature.getAbstractScenarios();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getName().contentEquals(name)) {
+				list.remove(i);
+				return;
+			}
+		}
 	}
 
-	public Section createExamples(Section scenarioOutline, String examplesName) {
-		Section examples = jrp.createSection(scenarioOutline);
-		examples.getAttributes().put("examples", "true");
-		examples.setTitle(examplesName);
-		scenarioOutline.getBlocks().add(examples);
+	public void createDocString(Step step, String docString) {
+		step.setTheDocString(SheepDogFactory.eINSTANCE.createDocString());
+		for (String l : docString.split("\n")) {
+			step.getTheDocString().getLines().add(l + "\n");
+		}
+	}
+
+	public Examples createExamples(Scenario abstractScenario, String examplesName) {
+		Examples examples = SheepDogFactory.eINSTANCE.createExamples();
+		examples.setName(examplesName);
+		abstractScenario.getExamples().add(examples);
 		return examples;
 	}
 
-	public void createExamplesRow(Section examples, ArrayList<String> examplesRow) {
-
+	public void createExamplesRow(Examples examples, ArrayList<String> examplesRow) {
+		Row row = SheepDogFactory.eINSTANCE.createRow();
+		for (String srcCell : examplesRow) {
+			Cell cell = SheepDogFactory.eINSTANCE.createCell();
+			cell.setName(srcCell);
+			row.getCells().add(cell);
+		}
+		examples.getTheExamplesTable().getRows().add(row);
 	}
 
-	public void createExamplesTable(Section examples, ArrayList<String> headers) {
-
+	public void createExamplesTable(Examples examples, ArrayList<String> headers) {
+		examples.setTheExamplesTable(SheepDogFactory.eINSTANCE.createTable());
+		Row row = SheepDogFactory.eINSTANCE.createRow();
+		for (String srcCell : headers) {
+			Cell cell = SheepDogFactory.eINSTANCE.createCell();
+			cell.setName(srcCell);
+			row.getCells().add(cell);
+		}
+		examples.getTheExamplesTable().getRows().add(row);
 	}
 
-	public Section createScenario(String scenarioName) {
-		Section scenario = jrp.createSection(theDoc);
-		scenario.setTitle(scenarioName);
-		theDoc.getBlocks().add(scenario);
+	public Scenario createScenario(String scenarioName) {
+		deleteAbstractScenario(scenarioName);
+		Scenario scenario = SheepDogFactory.eINSTANCE.createScenario();
+		scenario.setName(scenarioName);
+		theFeature.getAbstractScenarios().add(scenario);
 		return scenario;
 	}
 
-	public Section createScenarioOutline(String scenarioName) {
-		Section scenarioOutline = jrp.createSection(theDoc);
-		scenarioOutline.setTitle(scenarioName);
-		theDoc.getBlocks().add(scenarioOutline);
-		return scenarioOutline;
+	// TODO duplicate of createScenario
+	public Scenario createScenarioOutline(String scenarioName) {
+		deleteAbstractScenario(scenarioName);
+		Scenario scenario = SheepDogFactory.eINSTANCE.createScenario();
+		scenario.setName(scenarioName);
+		theFeature.getAbstractScenarios().add(scenario);
+		return scenario;
 	}
 
-	public Section createStep(Section abstractScenario, String stepName) {
-		Section step = jrp.createSection(abstractScenario);
-		step.setTitle(stepName);
-		abstractScenario.getBlocks().add(step);
+	public Step createStep(AbstractScenario abstractScenario, String name) {
+		String keyword = name.split(" ")[0];
+		Step step = null;
+		switch (keyword) {
+		case "Given":
+			step = SheepDogFactory.eINSTANCE.createGiven();
+			break;
+		case "When":
+			step = SheepDogFactory.eINSTANCE.createWhen();
+			break;
+		case "Then":
+			step = SheepDogFactory.eINSTANCE.createThen();
+			break;
+		case "And":
+			step = SheepDogFactory.eINSTANCE.createAnd();
+			break;
+		}
+		step.setName(name.substring(keyword.length() + 1));
+		abstractScenario.getSteps().add(step);
 		return step;
 	}
 
-	public void createStepTable(Section step, ArrayList<ArrayList<String>> stepTableRowList) {
-
+	public void createStepTable(Step step, ArrayList<ArrayList<String>> stepTableRowList) {
+		step.setTheStepTable(SheepDogFactory.eINSTANCE.createTable());
+		for (ArrayList<String> srcRow : stepTableRowList) {
+			Row row = SheepDogFactory.eINSTANCE.createRow();
+			for (String srcCell : srcRow) {
+				Cell cell = SheepDogFactory.eINSTANCE.createCell();
+				cell.setName(srcCell);
+				row.getCells().add(cell);
+			}
+			step.getTheStepTable().getRows().add(row);
+		}
 	}
 
 	@Override
 	public Object get() {
-		return theDoc;
-	}
-
-	public String getAbstractScenarioDescription(StructuralNode testCaseOrTestSuite) {
-		String text = "";
-		for (StructuralNode sn : testCaseOrTestSuite.getBlocks()) {
-			if (sn instanceof Block) {
-				text += "\n\n" + ((Block) sn).getSource();
-			} else {
-				break;
-			}
-		}
-		return text.trim();
+		return theFeature;
 	}
 
 	public EList<AbstractScenario> getAbstractScenarioList() {
 		return theFeature.getAbstractScenarios();
-	}
-
-	public String getAbstractScenarioName(Section abstractScenario) {
-		return substitute(abstractScenario.getTitle());
 	}
 
 	public ArrayList<String> getAbstractScenarioTags(AbstractScenario abstractScenario) {
@@ -148,13 +176,9 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	public String getDocString(Step step) {
 		String text = "";
 		for (String l : step.getTheDocString().getLines()) {
-			if (l != null) {
-				text += "\n" + l;
-			} else {
-				text += "\n";
-			}
+			text += l;
 		}
-		return text.replaceFirst("\n", "");
+		return text;
 	}
 
 	public EList<Examples> getExamplesList(AbstractScenario abstractScenario) {
@@ -294,16 +318,17 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return false;
 	}
 
-	public void setBackgroundDescription(Section background, String backgroundDescription) {
-		background.getBlocks().add(jrp.createBlock(background, "paragraph", backgroundDescription));
+	public void setBackgroundDescription(Background background, String backgroundDescription) {
+		setDescription(background, backgroundDescription);
 	}
 
-	public void setBackgroundName(Section background, String name) {
-		background.setTitle(name);
-	}
-
-	public void setExamplesName(Section examples, String examplesName) {
-		examples.setTitle(examplesName);
+	// TODO duplicate of setFeatureDescription?
+	private void setDescription(AbstractScenario abstractScenario, String scenarioDescription) {
+		if (!scenarioDescription.isEmpty()) {
+			for (String line : scenarioDescription.split("\n")) {
+				abstractScenario.getStatements().add(line + "\n");
+			}
+		}
 	}
 
 	public String getFeatureDescription() {
@@ -319,10 +344,12 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	public void setFeatureDescription(String featureDescription) {
-		StructuralNode preamble = jrp.createBlock(theDoc, "preamble", "");
-		theDoc.getBlocks().add(preamble);
-		Block paragraph = jrp.createBlock(preamble, "paragraph", featureDescription);
-		preamble.getBlocks().add(paragraph);
+		if (!featureDescription.isEmpty()) {
+			theFeature.getStatements().clear();
+			for (String line : featureDescription.split("\n")) {
+				theFeature.getStatements().add(line + "\n");
+			}
+		}
 	}
 
 	@Override
@@ -342,46 +369,64 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	public String toString() {
-
-		return "";
+		URI uri = URI.createFileURI(thePath);
+		Resource resource = new ResourceSetImpl().createResource(uri);
+		resource.getContents().add(theFeature);
+		Map<Object, Object> options = SaveOptions.newBuilder().format().getOptions().toOptionsMap();
+		OutputStream os = new ByteArrayOutputStream();
+		try {
+			resource.save(os, options);
+		} catch (IOException e) {
+			return null;
+		}
+		return os.toString();
 	}
 
 	public void setFeatureName(String featureName) {
-		theDoc.setTitle(featureName);
+		theFeature.setName(featureName);
 	}
 
-	public void setFeatureTags(ArrayList<String> featureTags) {
-		if (!featureTags.isEmpty()) {
-			theDoc.getAttributes().put("tags", listAsCsv(featureTags));
+	public void setFeatureTags(ArrayList<String> tags) {
+		if (tags.isEmpty()) {
+			return;
 		}
-	}
-
-	public void setScenarioDescription(Section scenario, String scenarioDescription) {
-		scenario.getBlocks().add(jrp.createBlock(scenario, "paragraph", scenarioDescription));
-	}
-
-	public void setScenarioName(Section scenario, String scenarioName) {
-		scenario.setTitle(scenarioName);
-	}
-
-	public void setScenarioOutlineDescription(Section scenarioOutline, String scenarioOutlineDescription) {
-		scenarioOutline.getBlocks().add(jrp.createBlock(scenarioOutline, "paragraph", scenarioOutlineDescription));
-	}
-
-	public void setScenarioOutlineName(Section scenarioOutline, String scenarioOutlineName) {
-		scenarioOutline.setTitle(scenarioOutlineName);
-	}
-
-	public void setScenarioOutlineTags(Section scenarioOutline, ArrayList<String> scenarioOutlineTags) {
-		if (!scenarioOutlineTags.isEmpty()) {
-			scenarioOutline.getAttributes().put("tags", listAsCsv(scenarioOutlineTags));
+		theFeature.setTags(SheepDogFactory.eINSTANCE.createFeatureTags());
+		String tagList = "";
+		for (String t : tags) {
+			tagList += "," + t;
 		}
+		tagList = tagList.replaceFirst(",", "");
+		theFeature.getTags().setName(tagList);
 	}
 
-	public void setScenarioTags(Section scenario, ArrayList<String> scenarioTags) {
-		if (!scenarioTags.isEmpty()) {
-			scenario.getAttributes().put("tags", listAsCsv(scenarioTags));
+	public void setScenarioDescription(Scenario scenario, String scenarioDescription) {
+		setDescription(scenario, scenarioDescription);
+	}
+
+	public void setScenarioOutlineDescription(Scenario scenarioOutline, String scenarioOutlineDescription) {
+		setDescription(scenarioOutline, scenarioOutlineDescription);
+	}
+
+	public void setScenarioOutlineTags(Scenario scenarioOutline, ArrayList<String> scenarioOutlineTags) {
+		setTags(scenarioOutline, scenarioOutlineTags);
+	}
+
+	public void setScenarioTags(Scenario scenario, ArrayList<String> scenarioTags) {
+		setTags(scenario, scenarioTags);
+	}
+
+	// TODO perhaps duplicate of setFeatureTags?
+	private void setTags(Scenario scenario, ArrayList<String> tags) {
+		if (tags.isEmpty()) {
+			return;
 		}
+		scenario.setTags(SheepDogFactory.eINSTANCE.createAbstractScenarioTags());
+		String tagList = "";
+		for (String t : tags) {
+			tagList += "," + t;
+		}
+		tagList = tagList.replaceFirst(",", "");
+		scenario.getTags().setName(tagList);
 	}
 
 	private String listAsCsv(ArrayList<String> list) {

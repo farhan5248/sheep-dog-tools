@@ -3970,9 +3970,9 @@ rule__FeatureTags__NameAssignment_1
 	}
 :
 	(
-		{ before(grammarAccess.getFeatureTagsAccess().getNameTAGWORDTerminalRuleCall_1_0()); }
-		RULE_TAGWORD
-		{ after(grammarAccess.getFeatureTagsAccess().getNameTAGWORDTerminalRuleCall_1_0()); }
+		{ before(grammarAccess.getFeatureTagsAccess().getNameWORDTerminalRuleCall_1_0()); }
+		RULE_WORD
+		{ after(grammarAccess.getFeatureTagsAccess().getNameWORDTerminalRuleCall_1_0()); }
 	)
 ;
 finally {
@@ -3985,9 +3985,9 @@ rule__AbstractScenarioTags__NameAssignment_1
 	}
 :
 	(
-		{ before(grammarAccess.getAbstractScenarioTagsAccess().getNameTAGWORDTerminalRuleCall_1_0()); }
-		RULE_TAGWORD
-		{ after(grammarAccess.getAbstractScenarioTagsAccess().getNameTAGWORDTerminalRuleCall_1_0()); }
+		{ before(grammarAccess.getAbstractScenarioTagsAccess().getNameWORDTerminalRuleCall_1_0()); }
+		RULE_WORD
+		{ after(grammarAccess.getAbstractScenarioTagsAccess().getNameWORDTerminalRuleCall_1_0()); }
 	)
 ;
 finally {
@@ -4011,7 +4011,7 @@ finally {
 
 RULE_TAGWORD : ~((' '|'\t'|'\r'|'\n'|'#'|'"'))+;
 
-RULE_WORD : ~((' '|'\t'|'\r'|'\n'|'#'))+;
+RULE_WORD : ~((' '|'\t'|'\r'|'\n'|'#'|'"'))+;
 
 RULE_WS : (' '|'\t'|'\r')+;
 

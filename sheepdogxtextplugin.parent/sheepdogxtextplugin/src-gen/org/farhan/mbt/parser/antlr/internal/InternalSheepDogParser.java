@@ -21,9 +21,9 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalSheepDogParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_EOL", "RULE_TAGWORD", "RULE_WORD", "RULE_WS", "RULE_SL_COMMENT", "'='", "'Object:'", "'=='", "'Definition:'", "'==='", "'Parameters:'", "'Feature:'", "'Background:'", "'Scenario:'", "'Examples:'", "'Given'", "'When'", "'Then'", "'And'", "'----'", "'[options=\"header\"]'", "'|==='", "':tags:'", "'[tags=\"'", "'\"]'", "'|'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_EOL", "RULE_WORD", "RULE_TAGWORD", "RULE_WS", "RULE_SL_COMMENT", "'='", "'Object:'", "'=='", "'Definition:'", "'==='", "'Parameters:'", "'Feature:'", "'Background:'", "'Scenario:'", "'Examples:'", "'Given'", "'When'", "'Then'", "'And'", "'----'", "'[options=\"header\"]'", "'|==='", "':tags:'", "'[tags=\"'", "'\"]'", "'|'"
     };
-    public static final int RULE_WORD=6;
+    public static final int RULE_WORD=5;
     public static final int RULE_SL_COMMENT=8;
     public static final int T__19=19;
     public static final int T__15=15;
@@ -39,7 +39,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
     public static final int T__9=9;
     public static final int RULE_EOL=4;
     public static final int RULE_WS=7;
-    public static final int RULE_TAGWORD=5;
+    public static final int RULE_TAGWORD=6;
     public static final int T__26=26;
     public static final int T__27=27;
     public static final int T__28=28;
@@ -341,7 +341,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( (LA2_0==RULE_EOL||LA2_0==RULE_WORD) ) {
+                if ( ((LA2_0>=RULE_EOL && LA2_0<=RULE_WORD)) ) {
                     alt2=1;
                 }
 
@@ -565,7 +565,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
                 int alt4=2;
                 int LA4_0 = input.LA(1);
 
-                if ( (LA4_0==RULE_EOL||LA4_0==RULE_WORD) ) {
+                if ( ((LA4_0>=RULE_EOL && LA4_0<=RULE_WORD)) ) {
                     alt4=1;
                 }
 
@@ -789,7 +789,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
                 int alt6=2;
                 int LA6_0 = input.LA(1);
 
-                if ( (LA6_0==RULE_EOL||LA6_0==RULE_WORD) ) {
+                if ( ((LA6_0>=RULE_EOL && LA6_0<=RULE_WORD)) ) {
                     alt6=1;
                 }
 
@@ -1039,7 +1039,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
                 int alt8=2;
                 int LA8_0 = input.LA(1);
 
-                if ( (LA8_0==RULE_EOL||LA8_0==RULE_WORD) ) {
+                if ( ((LA8_0>=RULE_EOL && LA8_0<=RULE_WORD)) ) {
                     alt8=1;
                 }
 
@@ -1213,7 +1213,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
             if ( (LA10_0==27) ) {
                 int LA10_1 = input.LA(2);
 
-                if ( (LA10_1==RULE_TAGWORD) ) {
+                if ( (LA10_1==RULE_WORD) ) {
                     int LA10_3 = input.LA(3);
 
                     if ( (LA10_3==28) ) {
@@ -1501,7 +1501,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
                 int alt12=2;
                 int LA12_0 = input.LA(1);
 
-                if ( (LA12_0==RULE_EOL||LA12_0==RULE_WORD) ) {
+                if ( ((LA12_0>=RULE_EOL && LA12_0<=RULE_WORD)) ) {
                     alt12=1;
                 }
 
@@ -1771,7 +1771,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
                 int alt15=2;
                 int LA15_0 = input.LA(1);
 
-                if ( (LA15_0==RULE_EOL||LA15_0==RULE_WORD) ) {
+                if ( ((LA15_0>=RULE_EOL && LA15_0<=RULE_WORD)) ) {
                     alt15=1;
                 }
 
@@ -1878,7 +1878,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
                 if ( (LA17_0==27) ) {
                     int LA17_2 = input.LA(2);
 
-                    if ( (LA17_2==RULE_TAGWORD) ) {
+                    if ( (LA17_2==RULE_WORD) ) {
                         int LA17_4 = input.LA(3);
 
                         if ( (LA17_4==28) ) {
@@ -2121,7 +2121,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
                 int alt19=2;
                 int LA19_0 = input.LA(1);
 
-                if ( (LA19_0==RULE_EOL||LA19_0==RULE_WORD) ) {
+                if ( ((LA19_0>=RULE_EOL && LA19_0<=RULE_WORD)) ) {
                     alt19=1;
                 }
 
@@ -3338,7 +3338,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
                 int alt25=2;
                 int LA25_0 = input.LA(1);
 
-                if ( (LA25_0==RULE_EOL||LA25_0==RULE_WORD) ) {
+                if ( ((LA25_0>=RULE_EOL && LA25_0<=RULE_WORD)) ) {
                     alt25=1;
                 }
 
@@ -3747,7 +3747,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFeatureTags"
-    // InternalSheepDog.g:1430:1: ruleFeatureTags returns [EObject current=null] : (otherlv_0= ':tags:' ( (lv_name_1_0= RULE_TAGWORD ) ) this_EOL_2= RULE_EOL ) ;
+    // InternalSheepDog.g:1430:1: ruleFeatureTags returns [EObject current=null] : (otherlv_0= ':tags:' ( (lv_name_1_0= RULE_WORD ) ) this_EOL_2= RULE_EOL ) ;
     public final EObject ruleFeatureTags() throws RecognitionException {
         EObject current = null;
 
@@ -3759,25 +3759,25 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalSheepDog.g:1436:2: ( (otherlv_0= ':tags:' ( (lv_name_1_0= RULE_TAGWORD ) ) this_EOL_2= RULE_EOL ) )
-            // InternalSheepDog.g:1437:2: (otherlv_0= ':tags:' ( (lv_name_1_0= RULE_TAGWORD ) ) this_EOL_2= RULE_EOL )
+            // InternalSheepDog.g:1436:2: ( (otherlv_0= ':tags:' ( (lv_name_1_0= RULE_WORD ) ) this_EOL_2= RULE_EOL ) )
+            // InternalSheepDog.g:1437:2: (otherlv_0= ':tags:' ( (lv_name_1_0= RULE_WORD ) ) this_EOL_2= RULE_EOL )
             {
-            // InternalSheepDog.g:1437:2: (otherlv_0= ':tags:' ( (lv_name_1_0= RULE_TAGWORD ) ) this_EOL_2= RULE_EOL )
-            // InternalSheepDog.g:1438:3: otherlv_0= ':tags:' ( (lv_name_1_0= RULE_TAGWORD ) ) this_EOL_2= RULE_EOL
+            // InternalSheepDog.g:1437:2: (otherlv_0= ':tags:' ( (lv_name_1_0= RULE_WORD ) ) this_EOL_2= RULE_EOL )
+            // InternalSheepDog.g:1438:3: otherlv_0= ':tags:' ( (lv_name_1_0= RULE_WORD ) ) this_EOL_2= RULE_EOL
             {
-            otherlv_0=(Token)match(input,26,FOLLOW_35); 
+            otherlv_0=(Token)match(input,26,FOLLOW_4); 
 
             			newLeafNode(otherlv_0, grammarAccess.getFeatureTagsAccess().getTagsKeyword_0());
             		
-            // InternalSheepDog.g:1442:3: ( (lv_name_1_0= RULE_TAGWORD ) )
-            // InternalSheepDog.g:1443:4: (lv_name_1_0= RULE_TAGWORD )
+            // InternalSheepDog.g:1442:3: ( (lv_name_1_0= RULE_WORD ) )
+            // InternalSheepDog.g:1443:4: (lv_name_1_0= RULE_WORD )
             {
-            // InternalSheepDog.g:1443:4: (lv_name_1_0= RULE_TAGWORD )
-            // InternalSheepDog.g:1444:5: lv_name_1_0= RULE_TAGWORD
+            // InternalSheepDog.g:1443:4: (lv_name_1_0= RULE_WORD )
+            // InternalSheepDog.g:1444:5: lv_name_1_0= RULE_WORD
             {
-            lv_name_1_0=(Token)match(input,RULE_TAGWORD,FOLLOW_5); 
+            lv_name_1_0=(Token)match(input,RULE_WORD,FOLLOW_5); 
 
-            					newLeafNode(lv_name_1_0, grammarAccess.getFeatureTagsAccess().getNameTAGWORDTerminalRuleCall_1_0());
+            					newLeafNode(lv_name_1_0, grammarAccess.getFeatureTagsAccess().getNameWORDTerminalRuleCall_1_0());
             				
 
             					if (current==null) {
@@ -3787,7 +3787,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
             						current,
             						"name",
             						lv_name_1_0,
-            						"org.farhan.mbt.SheepDog.TAGWORD");
+            						"org.farhan.mbt.SheepDog.WORD");
             				
 
             }
@@ -3858,7 +3858,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAbstractScenarioTags"
-    // InternalSheepDog.g:1475:1: ruleAbstractScenarioTags returns [EObject current=null] : (otherlv_0= '[tags=\"' ( (lv_name_1_0= RULE_TAGWORD ) ) otherlv_2= '\"]' this_EOL_3= RULE_EOL ) ;
+    // InternalSheepDog.g:1475:1: ruleAbstractScenarioTags returns [EObject current=null] : (otherlv_0= '[tags=\"' ( (lv_name_1_0= RULE_WORD ) ) otherlv_2= '\"]' this_EOL_3= RULE_EOL ) ;
     public final EObject ruleAbstractScenarioTags() throws RecognitionException {
         EObject current = null;
 
@@ -3871,25 +3871,25 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalSheepDog.g:1481:2: ( (otherlv_0= '[tags=\"' ( (lv_name_1_0= RULE_TAGWORD ) ) otherlv_2= '\"]' this_EOL_3= RULE_EOL ) )
-            // InternalSheepDog.g:1482:2: (otherlv_0= '[tags=\"' ( (lv_name_1_0= RULE_TAGWORD ) ) otherlv_2= '\"]' this_EOL_3= RULE_EOL )
+            // InternalSheepDog.g:1481:2: ( (otherlv_0= '[tags=\"' ( (lv_name_1_0= RULE_WORD ) ) otherlv_2= '\"]' this_EOL_3= RULE_EOL ) )
+            // InternalSheepDog.g:1482:2: (otherlv_0= '[tags=\"' ( (lv_name_1_0= RULE_WORD ) ) otherlv_2= '\"]' this_EOL_3= RULE_EOL )
             {
-            // InternalSheepDog.g:1482:2: (otherlv_0= '[tags=\"' ( (lv_name_1_0= RULE_TAGWORD ) ) otherlv_2= '\"]' this_EOL_3= RULE_EOL )
-            // InternalSheepDog.g:1483:3: otherlv_0= '[tags=\"' ( (lv_name_1_0= RULE_TAGWORD ) ) otherlv_2= '\"]' this_EOL_3= RULE_EOL
+            // InternalSheepDog.g:1482:2: (otherlv_0= '[tags=\"' ( (lv_name_1_0= RULE_WORD ) ) otherlv_2= '\"]' this_EOL_3= RULE_EOL )
+            // InternalSheepDog.g:1483:3: otherlv_0= '[tags=\"' ( (lv_name_1_0= RULE_WORD ) ) otherlv_2= '\"]' this_EOL_3= RULE_EOL
             {
-            otherlv_0=(Token)match(input,27,FOLLOW_35); 
+            otherlv_0=(Token)match(input,27,FOLLOW_4); 
 
             			newLeafNode(otherlv_0, grammarAccess.getAbstractScenarioTagsAccess().getTagsKeyword_0());
             		
-            // InternalSheepDog.g:1487:3: ( (lv_name_1_0= RULE_TAGWORD ) )
-            // InternalSheepDog.g:1488:4: (lv_name_1_0= RULE_TAGWORD )
+            // InternalSheepDog.g:1487:3: ( (lv_name_1_0= RULE_WORD ) )
+            // InternalSheepDog.g:1488:4: (lv_name_1_0= RULE_WORD )
             {
-            // InternalSheepDog.g:1488:4: (lv_name_1_0= RULE_TAGWORD )
-            // InternalSheepDog.g:1489:5: lv_name_1_0= RULE_TAGWORD
+            // InternalSheepDog.g:1488:4: (lv_name_1_0= RULE_WORD )
+            // InternalSheepDog.g:1489:5: lv_name_1_0= RULE_WORD
             {
-            lv_name_1_0=(Token)match(input,RULE_TAGWORD,FOLLOW_36); 
+            lv_name_1_0=(Token)match(input,RULE_WORD,FOLLOW_35); 
 
-            					newLeafNode(lv_name_1_0, grammarAccess.getAbstractScenarioTagsAccess().getNameTAGWORDTerminalRuleCall_1_0());
+            					newLeafNode(lv_name_1_0, grammarAccess.getAbstractScenarioTagsAccess().getNameWORDTerminalRuleCall_1_0());
             				
 
             					if (current==null) {
@@ -3899,7 +3899,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
             						current,
             						"name",
             						lv_name_1_0,
-            						"org.farhan.mbt.SheepDog.TAGWORD");
+            						"org.farhan.mbt.SheepDog.WORD");
             				
 
             }
@@ -4115,7 +4115,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // InternalSheepDog.g:1574:3: this_WORD_0= RULE_WORD
             	    {
-            	    this_WORD_0=(Token)match(input,RULE_WORD,FOLLOW_37); 
+            	    this_WORD_0=(Token)match(input,RULE_WORD,FOLLOW_36); 
 
             	    			current.merge(this_WORD_0);
             	    		
@@ -4389,39 +4389,38 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000400L});
-    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000852L});
+    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000832L});
     public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000802L});
     public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000002052L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000002032L});
     public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000002002L});
     public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000001000050L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000001000030L});
     public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000000200L});
     public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000008000852L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000008000832L});
     public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000008000802L});
     public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000000800L});
     public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000010000L});
     public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000008002052L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000008002032L});
     public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000008002002L});
     public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000000002000L});
     public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000000040000L});
     public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000001800052L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000001800032L});
     public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000000100000L});
     public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000000200000L});
     public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000000000050L});
-    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000000800050L});
+    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000000000030L});
+    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000000800030L});
     public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000000002000000L});
     public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000020000000L});
     public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000000022000000L});
     public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000020000010L});
-    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x0000000000000042L});
+    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000000000022L});
 
 }

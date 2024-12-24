@@ -1441,9 +1441,9 @@ ruleFeatureTags returns [EObject current=null]
 		}
 		(
 			(
-				lv_name_1_0=RULE_TAGWORD
+				lv_name_1_0=RULE_WORD
 				{
-					newLeafNode(lv_name_1_0, grammarAccess.getFeatureTagsAccess().getNameTAGWORDTerminalRuleCall_1_0());
+					newLeafNode(lv_name_1_0, grammarAccess.getFeatureTagsAccess().getNameWORDTerminalRuleCall_1_0());
 				}
 				{
 					if ($current==null) {
@@ -1453,7 +1453,7 @@ ruleFeatureTags returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_1_0,
-						"org.farhan.mbt.SheepDog.TAGWORD");
+						"org.farhan.mbt.SheepDog.WORD");
 				}
 			)
 		)
@@ -1486,9 +1486,9 @@ ruleAbstractScenarioTags returns [EObject current=null]
 		}
 		(
 			(
-				lv_name_1_0=RULE_TAGWORD
+				lv_name_1_0=RULE_WORD
 				{
-					newLeafNode(lv_name_1_0, grammarAccess.getAbstractScenarioTagsAccess().getNameTAGWORDTerminalRuleCall_1_0());
+					newLeafNode(lv_name_1_0, grammarAccess.getAbstractScenarioTagsAccess().getNameWORDTerminalRuleCall_1_0());
 				}
 				{
 					if ($current==null) {
@@ -1498,7 +1498,7 @@ ruleAbstractScenarioTags returns [EObject current=null]
 						$current,
 						"name",
 						lv_name_1_0,
-						"org.farhan.mbt.SheepDog.TAGWORD");
+						"org.farhan.mbt.SheepDog.WORD");
 				}
 			)
 		)
@@ -1653,7 +1653,7 @@ ruleLine returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 
 RULE_TAGWORD : ~((' '|'\t'|'\r'|'\n'|'#'|'"'))+;
 
-RULE_WORD : ~((' '|'\t'|'\r'|'\n'|'#'))+;
+RULE_WORD : ~((' '|'\t'|'\r'|'\n'|'#'|'"'))+;
 
 RULE_WS : (' '|'\t'|'\r')+;
 

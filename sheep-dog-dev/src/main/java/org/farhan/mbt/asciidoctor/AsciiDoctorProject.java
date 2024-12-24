@@ -20,6 +20,7 @@ public class AsciiDoctorProject extends ConvertibleProject {
 
 	@Override
 	public ConvertibleObject createObject(String path) throws Exception {
+		// TODO make this mimic the CucumberProject implementation
 		AsciiDoctorAdocWrapper cff = new AsciiDoctorAdocWrapper(path);
 		// TODO calculate an actual checksum for later
 		fa.put(tags, path, "sha checksum");

@@ -84,10 +84,10 @@ Row:
 	cells+=Cell+ EOL;
 
 FeatureTags:
-	':tags:' name=TAGWORD EOL;
+	':tags:' name=WORD EOL;
 
 AbstractScenarioTags:
-	'[tags="' name=TAGWORD '"]' EOL;
+	'[tags="' name=WORD '"]' EOL;
 
 Cell:
 	'|' name=Title;
@@ -106,7 +106,7 @@ terminal TAGWORD:
 	!(' ' | '\t' | '\r' | '\n' | '#' | '"')+;
 
 terminal WORD:
-	!(' ' | '\t' | '\r' | '\n' | '#')+;
+	!(' ' | '\t' | '\r' | '\n' | '#' | '"')+;
 
 terminal WS:
 	(' ' | '\t' | '\r')+;

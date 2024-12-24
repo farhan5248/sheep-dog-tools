@@ -821,24 +821,24 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTagsKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameTAGWORDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final RuleCall cNameWORDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final RuleCall cEOLTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//FeatureTags:
-		//    ':tags:' name=TAGWORD EOL;
+		//    ':tags:' name=WORD EOL;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//':tags:' name=TAGWORD EOL
+		//':tags:' name=WORD EOL
 		public Group getGroup() { return cGroup; }
 		
 		//':tags:'
 		public Keyword getTagsKeyword_0() { return cTagsKeyword_0; }
 		
-		//name=TAGWORD
+		//name=WORD
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
-		//TAGWORD
-		public RuleCall getNameTAGWORDTerminalRuleCall_1_0() { return cNameTAGWORDTerminalRuleCall_1_0; }
+		//WORD
+		public RuleCall getNameWORDTerminalRuleCall_1_0() { return cNameWORDTerminalRuleCall_1_0; }
 		
 		//EOL
 		public RuleCall getEOLTerminalRuleCall_2() { return cEOLTerminalRuleCall_2; }
@@ -848,25 +848,25 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTagsKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameTAGWORDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final RuleCall cNameWORDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cQuotationMarkRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final RuleCall cEOLTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//AbstractScenarioTags:
-		//    '[tags="' name=TAGWORD '"]' EOL;
+		//    '[tags="' name=WORD '"]' EOL;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'[tags="' name=TAGWORD '"]' EOL
+		//'[tags="' name=WORD '"]' EOL
 		public Group getGroup() { return cGroup; }
 		
 		//'[tags="'
 		public Keyword getTagsKeyword_0() { return cTagsKeyword_0; }
 		
-		//name=TAGWORD
+		//name=WORD
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 		
-		//TAGWORD
-		public RuleCall getNameTAGWORDTerminalRuleCall_1_0() { return cNameTAGWORDTerminalRuleCall_1_0; }
+		//WORD
+		public RuleCall getNameWORDTerminalRuleCall_1_0() { return cNameWORDTerminalRuleCall_1_0; }
 		
 		//'"]'
 		public Keyword getQuotationMarkRightSquareBracketKeyword_2() { return cQuotationMarkRightSquareBracketKeyword_2; }
@@ -1235,7 +1235,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//FeatureTags:
-	//    ':tags:' name=TAGWORD EOL;
+	//    ':tags:' name=WORD EOL;
 	public FeatureTagsElements getFeatureTagsAccess() {
 		return pFeatureTags;
 	}
@@ -1245,7 +1245,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//AbstractScenarioTags:
-	//    '[tags="' name=TAGWORD '"]' EOL;
+	//    '[tags="' name=WORD '"]' EOL;
 	public AbstractScenarioTagsElements getAbstractScenarioTagsAccess() {
 		return pAbstractScenarioTags;
 	}
@@ -1302,7 +1302,7 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//terminal WORD:
-	//    !(' ' | '\t' | '\r' | '\n' | '#')+;
+	//    !(' ' | '\t' | '\r' | '\n' | '#' | '"')+;
 	public TerminalRule getWORDRule() {
 		return tWORD;
 	}

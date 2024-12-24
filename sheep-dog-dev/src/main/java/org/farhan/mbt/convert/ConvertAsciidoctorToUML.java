@@ -3,7 +3,6 @@ package org.farhan.mbt.convert;
 import java.util.ArrayList;
 
 import org.apache.commons.lang3.StringUtils;
-import org.asciidoctor.ast.Section;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
