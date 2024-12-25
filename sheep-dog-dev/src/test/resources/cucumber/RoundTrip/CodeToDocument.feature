@@ -43,6 +43,12 @@ Feature: Code To Document
           
                     | ins |
                     |   4 |
+          
+              Examples: Dataset 2
+          
+                    | ins |
+                    |   5 |
+                    |   6 |
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed with
           | Tags |
@@ -53,23 +59,22 @@ Feature: Code To Document
      Then The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows
           """
           :tags: tag1
-          = Process
+          = Feature: Process
           
           Desc 1
           
           [tags="tag2"]
-          == Story One
+          == Scenario: Story One
           
           Desc 2
           
           === Given The Search application, Login page is valid
-          
           === When The Search application, Home page is created as follows
           
           [options="header"]
           |===
-          | grp| ins
-          | 10| 5
+          | grp | ins
+          | 10 | 5
           |===
           
           === Then The Search application, Logout page is created as follows
@@ -81,29 +86,36 @@ Feature: Code To Document
           ----
           
           [tags="tag3"]
-          == Story Two
+          == Scenario: Story Two
           
           Desc 3
           
           === Given The Search application, Login page is invalid
-          
           === When The Search application, Home page is created as follows
           
           [options="header"]
           |===
-          | grp| ins
-          | 8| {ins}
+          | grp | ins
+          | 8 | {ins}
           |===
           
           === Then The Search application, Logout page is invalid
           
-          [examples="true"]
-          === Some data
+          === Examples: Some data
           
           [options="header"]
           |===
           | ins
           | 4
+          |===
+          
+          === Examples: Dataset 2
+          
+          [options="header"]
+          |===
+          | ins
+          | 5
+          | 6
           |===
           """
 

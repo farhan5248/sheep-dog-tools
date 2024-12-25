@@ -140,6 +140,8 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 			Row row = SheepDogFactory.eINSTANCE.createRow();
 			for (String srcCell : srcRow) {
 				Cell cell = SheepDogFactory.eINSTANCE.createCell();
+				srcCell = srcCell.replace("<", "{").replace(">", "}");
+				srcCell = srcCell.replace("\\|", "|");				
 				cell.setName(srcCell);
 				row.getCells().add(cell);
 			}
