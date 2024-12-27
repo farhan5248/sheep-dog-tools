@@ -73,16 +73,16 @@ public interface Examples extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Statements</b></em>' attribute list.
-   * The list contents are of type {@link java.lang.String}.
+   * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
+   * The list contents are of type {@link org.farhan.mbt.sheepDog.Statement}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Statements</em>' attribute list.
+   * @return the value of the '<em>Statements</em>' containment reference list.
    * @see org.farhan.mbt.sheepDog.SheepDogPackage#getExamples_Statements()
-   * @model unique="false"
+   * @model containment="true"
    * @generated
    */
-  EList<String> getStatements();
+  EList<Statement> getStatements();
 
   /**
    * Returns the value of the '<em><b>The Examples Table</b></em>' containment reference.

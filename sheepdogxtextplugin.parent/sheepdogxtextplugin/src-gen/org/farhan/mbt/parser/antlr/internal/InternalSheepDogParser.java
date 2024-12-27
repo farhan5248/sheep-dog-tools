@@ -277,7 +277,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         Token this_EOL_3=null;
         AntlrDatatypeRuleToken lv_name_2_0 = null;
 
-        AntlrDatatypeRuleToken lv_statements_4_0 = null;
+        EObject lv_statements_4_0 = null;
 
         EObject lv_stepDefinitions_5_0 = null;
 
@@ -341,7 +341,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( ((LA2_0>=RULE_EOL && LA2_0<=RULE_WORD)) ) {
+                if ( (LA2_0==RULE_WORD) ) {
                     alt2=1;
                 }
 
@@ -501,7 +501,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         Token this_EOL_3=null;
         AntlrDatatypeRuleToken lv_name_2_0 = null;
 
-        AntlrDatatypeRuleToken lv_statements_4_0 = null;
+        EObject lv_statements_4_0 = null;
 
         EObject lv_stepParameters_5_0 = null;
 
@@ -565,7 +565,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
                 int alt4=2;
                 int LA4_0 = input.LA(1);
 
-                if ( ((LA4_0>=RULE_EOL && LA4_0<=RULE_WORD)) ) {
+                if ( (LA4_0==RULE_WORD) ) {
                     alt4=1;
                 }
 
@@ -725,7 +725,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         Token this_EOL_3=null;
         AntlrDatatypeRuleToken lv_name_2_0 = null;
 
-        AntlrDatatypeRuleToken lv_statements_4_0 = null;
+        EObject lv_statements_4_0 = null;
 
         EObject lv_parametersTable_5_0 = null;
 
@@ -789,7 +789,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
                 int alt6=2;
                 int LA6_0 = input.LA(1);
 
-                if ( ((LA6_0>=RULE_EOL && LA6_0<=RULE_WORD)) ) {
+                if ( (LA6_0==RULE_WORD) ) {
                     alt6=1;
                 }
 
@@ -933,7 +933,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
         AntlrDatatypeRuleToken lv_name_3_0 = null;
 
-        AntlrDatatypeRuleToken lv_statements_5_0 = null;
+        EObject lv_statements_5_0 = null;
 
         EObject lv_abstractScenarios_6_0 = null;
 
@@ -1039,7 +1039,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
                 int alt8=2;
                 int LA8_0 = input.LA(1);
 
-                if ( ((LA8_0>=RULE_EOL && LA8_0<=RULE_WORD)) ) {
+                if ( (LA8_0==RULE_WORD) ) {
                     alt8=1;
                 }
 
@@ -1395,7 +1395,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
         AntlrDatatypeRuleToken lv_name_3_0 = null;
 
-        AntlrDatatypeRuleToken lv_statements_5_0 = null;
+        EObject lv_statements_5_0 = null;
 
         EObject lv_steps_6_0 = null;
 
@@ -1501,7 +1501,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
                 int alt12=2;
                 int LA12_0 = input.LA(1);
 
-                if ( ((LA12_0>=RULE_EOL && LA12_0<=RULE_WORD)) ) {
+                if ( (LA12_0==RULE_WORD) ) {
                     alt12=1;
                 }
 
@@ -1663,7 +1663,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
         AntlrDatatypeRuleToken lv_name_3_0 = null;
 
-        AntlrDatatypeRuleToken lv_statements_5_0 = null;
+        EObject lv_statements_5_0 = null;
 
         EObject lv_steps_6_0 = null;
 
@@ -1771,7 +1771,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
                 int alt15=2;
                 int LA15_0 = input.LA(1);
 
-                if ( ((LA15_0>=RULE_EOL && LA15_0<=RULE_WORD)) ) {
+                if ( (LA15_0==RULE_WORD) ) {
                     alt15=1;
                 }
 
@@ -2015,7 +2015,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
         AntlrDatatypeRuleToken lv_name_3_0 = null;
 
-        AntlrDatatypeRuleToken lv_statements_5_0 = null;
+        EObject lv_statements_5_0 = null;
 
         EObject lv_theExamplesTable_6_0 = null;
 
@@ -2121,7 +2121,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
                 int alt19=2;
                 int LA19_0 = input.LA(1);
 
-                if ( ((LA19_0>=RULE_EOL && LA19_0<=RULE_WORD)) ) {
+                if ( (LA19_0==RULE_WORD) ) {
                     alt19=1;
                 }
 
@@ -3310,7 +3310,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         Token this_EOL_1=null;
         Token otherlv_3=null;
         Token this_EOL_4=null;
-        AntlrDatatypeRuleToken lv_lines_2_0 = null;
+        EObject lv_lines_2_0 = null;
 
 
 
@@ -3327,7 +3327,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_0, grammarAccess.getDocStringAccess().getHyphenMinusHyphenMinusHyphenMinusHyphenMinusKeyword_0());
             		
-            this_EOL_1=(Token)match(input,RULE_EOL,FOLLOW_29); 
+            this_EOL_1=(Token)match(input,RULE_EOL,FOLLOW_4); 
 
             			newLeafNode(this_EOL_1, grammarAccess.getDocStringAccess().getEOLTerminalRuleCall_1());
             		
@@ -3338,7 +3338,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
                 int alt25=2;
                 int LA25_0 = input.LA(1);
 
-                if ( ((LA25_0>=RULE_EOL && LA25_0<=RULE_WORD)) ) {
+                if ( (LA25_0==RULE_WORD) ) {
                     alt25=1;
                 }
 
@@ -3353,7 +3353,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
             	    					newCompositeNode(grammarAccess.getDocStringAccess().getLinesLineParserRuleCall_2_0());
             	    				
-            	    pushFollow(FOLLOW_30);
+            	    pushFollow(FOLLOW_29);
             	    lv_lines_2_0=ruleLine();
 
             	    state._fsp--;
@@ -3479,7 +3479,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_0, grammarAccess.getTableAccess().getOptionsHeaderKeyword_0());
             		
-            this_EOL_1=(Token)match(input,RULE_EOL,FOLLOW_31); 
+            this_EOL_1=(Token)match(input,RULE_EOL,FOLLOW_30); 
 
             			newLeafNode(this_EOL_1, grammarAccess.getTableAccess().getEOLTerminalRuleCall_1());
             		
@@ -3487,7 +3487,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
             			newLeafNode(otherlv_2, grammarAccess.getTableAccess().getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_2());
             		
-            this_EOL_3=(Token)match(input,RULE_EOL,FOLLOW_32); 
+            this_EOL_3=(Token)match(input,RULE_EOL,FOLLOW_31); 
 
             			newLeafNode(this_EOL_3, grammarAccess.getTableAccess().getEOLTerminalRuleCall_3());
             		
@@ -3513,7 +3513,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
             	    					newCompositeNode(grammarAccess.getTableAccess().getRowsRowParserRuleCall_4_0());
             	    				
-            	    pushFollow(FOLLOW_33);
+            	    pushFollow(FOLLOW_32);
             	    lv_rows_4_0=ruleRow();
 
             	    state._fsp--;
@@ -3652,7 +3652,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
             	    					newCompositeNode(grammarAccess.getRowAccess().getCellsCellParserRuleCall_0_0());
             	    				
-            	    pushFollow(FOLLOW_34);
+            	    pushFollow(FOLLOW_33);
             	    lv_cells_0_0=ruleCell();
 
             	    state._fsp--;
@@ -3887,7 +3887,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
             // InternalSheepDog.g:1488:4: (lv_name_1_0= RULE_WORD )
             // InternalSheepDog.g:1489:5: lv_name_1_0= RULE_WORD
             {
-            lv_name_1_0=(Token)match(input,RULE_WORD,FOLLOW_35); 
+            lv_name_1_0=(Token)match(input,RULE_WORD,FOLLOW_34); 
 
             					newLeafNode(lv_name_1_0, grammarAccess.getAbstractScenarioTagsAccess().getNameWORDTerminalRuleCall_1_0());
             				
@@ -4049,8 +4049,232 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleCell"
 
 
+    // $ANTLR start "entryRuleStatement"
+    // InternalSheepDog.g:1559:1: entryRuleStatement returns [EObject current=null] : iv_ruleStatement= ruleStatement EOF ;
+    public final EObject entryRuleStatement() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleStatement = null;
+
+
+        try {
+            // InternalSheepDog.g:1559:50: (iv_ruleStatement= ruleStatement EOF )
+            // InternalSheepDog.g:1560:2: iv_ruleStatement= ruleStatement EOF
+            {
+             newCompositeNode(grammarAccess.getStatementRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleStatement=ruleStatement();
+
+            state._fsp--;
+
+             current =iv_ruleStatement; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleStatement"
+
+
+    // $ANTLR start "ruleStatement"
+    // InternalSheepDog.g:1566:1: ruleStatement returns [EObject current=null] : ( ( (lv_name_0_0= ruleTitle ) ) this_EOL_1= RULE_EOL ) ;
+    public final EObject ruleStatement() throws RecognitionException {
+        EObject current = null;
+
+        Token this_EOL_1=null;
+        AntlrDatatypeRuleToken lv_name_0_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSheepDog.g:1572:2: ( ( ( (lv_name_0_0= ruleTitle ) ) this_EOL_1= RULE_EOL ) )
+            // InternalSheepDog.g:1573:2: ( ( (lv_name_0_0= ruleTitle ) ) this_EOL_1= RULE_EOL )
+            {
+            // InternalSheepDog.g:1573:2: ( ( (lv_name_0_0= ruleTitle ) ) this_EOL_1= RULE_EOL )
+            // InternalSheepDog.g:1574:3: ( (lv_name_0_0= ruleTitle ) ) this_EOL_1= RULE_EOL
+            {
+            // InternalSheepDog.g:1574:3: ( (lv_name_0_0= ruleTitle ) )
+            // InternalSheepDog.g:1575:4: (lv_name_0_0= ruleTitle )
+            {
+            // InternalSheepDog.g:1575:4: (lv_name_0_0= ruleTitle )
+            // InternalSheepDog.g:1576:5: lv_name_0_0= ruleTitle
+            {
+
+            					newCompositeNode(grammarAccess.getStatementAccess().getNameTitleParserRuleCall_0_0());
+            				
+            pushFollow(FOLLOW_5);
+            lv_name_0_0=ruleTitle();
+
+            state._fsp--;
+
+
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getStatementRule());
+            					}
+            					set(
+            						current,
+            						"name",
+            						lv_name_0_0,
+            						"org.farhan.mbt.SheepDog.Title");
+            					afterParserOrEnumRuleCall();
+            				
+
+            }
+
+
+            }
+
+            this_EOL_1=(Token)match(input,RULE_EOL,FOLLOW_2); 
+
+            			newLeafNode(this_EOL_1, grammarAccess.getStatementAccess().getEOLTerminalRuleCall_1());
+            		
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleStatement"
+
+
+    // $ANTLR start "entryRuleLine"
+    // InternalSheepDog.g:1601:1: entryRuleLine returns [EObject current=null] : iv_ruleLine= ruleLine EOF ;
+    public final EObject entryRuleLine() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleLine = null;
+
+
+        try {
+            // InternalSheepDog.g:1601:45: (iv_ruleLine= ruleLine EOF )
+            // InternalSheepDog.g:1602:2: iv_ruleLine= ruleLine EOF
+            {
+             newCompositeNode(grammarAccess.getLineRule()); 
+            pushFollow(FOLLOW_1);
+            iv_ruleLine=ruleLine();
+
+            state._fsp--;
+
+             current =iv_ruleLine; 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleLine"
+
+
+    // $ANTLR start "ruleLine"
+    // InternalSheepDog.g:1608:1: ruleLine returns [EObject current=null] : ( ( (lv_name_0_0= ruleTitle ) ) this_EOL_1= RULE_EOL ) ;
+    public final EObject ruleLine() throws RecognitionException {
+        EObject current = null;
+
+        Token this_EOL_1=null;
+        AntlrDatatypeRuleToken lv_name_0_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalSheepDog.g:1614:2: ( ( ( (lv_name_0_0= ruleTitle ) ) this_EOL_1= RULE_EOL ) )
+            // InternalSheepDog.g:1615:2: ( ( (lv_name_0_0= ruleTitle ) ) this_EOL_1= RULE_EOL )
+            {
+            // InternalSheepDog.g:1615:2: ( ( (lv_name_0_0= ruleTitle ) ) this_EOL_1= RULE_EOL )
+            // InternalSheepDog.g:1616:3: ( (lv_name_0_0= ruleTitle ) ) this_EOL_1= RULE_EOL
+            {
+            // InternalSheepDog.g:1616:3: ( (lv_name_0_0= ruleTitle ) )
+            // InternalSheepDog.g:1617:4: (lv_name_0_0= ruleTitle )
+            {
+            // InternalSheepDog.g:1617:4: (lv_name_0_0= ruleTitle )
+            // InternalSheepDog.g:1618:5: lv_name_0_0= ruleTitle
+            {
+
+            					newCompositeNode(grammarAccess.getLineAccess().getNameTitleParserRuleCall_0_0());
+            				
+            pushFollow(FOLLOW_5);
+            lv_name_0_0=ruleTitle();
+
+            state._fsp--;
+
+
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getLineRule());
+            					}
+            					set(
+            						current,
+            						"name",
+            						lv_name_0_0,
+            						"org.farhan.mbt.SheepDog.Title");
+            					afterParserOrEnumRuleCall();
+            				
+
+            }
+
+
+            }
+
+            this_EOL_1=(Token)match(input,RULE_EOL,FOLLOW_2); 
+
+            			newLeafNode(this_EOL_1, grammarAccess.getLineAccess().getEOLTerminalRuleCall_1());
+            		
+
+            }
+
+
+            }
+
+
+            	leaveRule();
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleLine"
+
+
     // $ANTLR start "entryRuleTitle"
-    // InternalSheepDog.g:1559:1: entryRuleTitle returns [String current=null] : iv_ruleTitle= ruleTitle EOF ;
+    // InternalSheepDog.g:1643:1: entryRuleTitle returns [String current=null] : iv_ruleTitle= ruleTitle EOF ;
     public final String entryRuleTitle() throws RecognitionException {
         String current = null;
 
@@ -4058,8 +4282,8 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalSheepDog.g:1559:45: (iv_ruleTitle= ruleTitle EOF )
-            // InternalSheepDog.g:1560:2: iv_ruleTitle= ruleTitle EOF
+            // InternalSheepDog.g:1643:45: (iv_ruleTitle= ruleTitle EOF )
+            // InternalSheepDog.g:1644:2: iv_ruleTitle= ruleTitle EOF
             {
              newCompositeNode(grammarAccess.getTitleRule()); 
             pushFollow(FOLLOW_1);
@@ -4086,7 +4310,7 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTitle"
-    // InternalSheepDog.g:1566:1: ruleTitle returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_WORD_0= RULE_WORD )+ ;
+    // InternalSheepDog.g:1650:1: ruleTitle returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_WORD_0= RULE_WORD )+ ;
     public final AntlrDatatypeRuleToken ruleTitle() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -4096,10 +4320,10 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalSheepDog.g:1572:2: ( (this_WORD_0= RULE_WORD )+ )
-            // InternalSheepDog.g:1573:2: (this_WORD_0= RULE_WORD )+
+            // InternalSheepDog.g:1656:2: ( (this_WORD_0= RULE_WORD )+ )
+            // InternalSheepDog.g:1657:2: (this_WORD_0= RULE_WORD )+
             {
-            // InternalSheepDog.g:1573:2: (this_WORD_0= RULE_WORD )+
+            // InternalSheepDog.g:1657:2: (this_WORD_0= RULE_WORD )+
             int cnt28=0;
             loop28:
             do {
@@ -4113,9 +4337,9 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
 
                 switch (alt28) {
             	case 1 :
-            	    // InternalSheepDog.g:1574:3: this_WORD_0= RULE_WORD
+            	    // InternalSheepDog.g:1658:3: this_WORD_0= RULE_WORD
             	    {
-            	    this_WORD_0=(Token)match(input,RULE_WORD,FOLLOW_36); 
+            	    this_WORD_0=(Token)match(input,RULE_WORD,FOLLOW_35); 
 
             	    			current.merge(this_WORD_0);
             	    		
@@ -4153,234 +4377,6 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
     }
     // $ANTLR end "ruleTitle"
 
-
-    // $ANTLR start "entryRuleStatement"
-    // InternalSheepDog.g:1585:1: entryRuleStatement returns [String current=null] : iv_ruleStatement= ruleStatement EOF ;
-    public final String entryRuleStatement() throws RecognitionException {
-        String current = null;
-
-        AntlrDatatypeRuleToken iv_ruleStatement = null;
-
-
-        try {
-            // InternalSheepDog.g:1585:49: (iv_ruleStatement= ruleStatement EOF )
-            // InternalSheepDog.g:1586:2: iv_ruleStatement= ruleStatement EOF
-            {
-             newCompositeNode(grammarAccess.getStatementRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleStatement=ruleStatement();
-
-            state._fsp--;
-
-             current =iv_ruleStatement.getText(); 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleStatement"
-
-
-    // $ANTLR start "ruleStatement"
-    // InternalSheepDog.g:1592:1: ruleStatement returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (this_WORD_0= RULE_WORD )* this_EOL_1= RULE_EOL ) ;
-    public final AntlrDatatypeRuleToken ruleStatement() throws RecognitionException {
-        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
-
-        Token this_WORD_0=null;
-        Token this_EOL_1=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalSheepDog.g:1598:2: ( ( (this_WORD_0= RULE_WORD )* this_EOL_1= RULE_EOL ) )
-            // InternalSheepDog.g:1599:2: ( (this_WORD_0= RULE_WORD )* this_EOL_1= RULE_EOL )
-            {
-            // InternalSheepDog.g:1599:2: ( (this_WORD_0= RULE_WORD )* this_EOL_1= RULE_EOL )
-            // InternalSheepDog.g:1600:3: (this_WORD_0= RULE_WORD )* this_EOL_1= RULE_EOL
-            {
-            // InternalSheepDog.g:1600:3: (this_WORD_0= RULE_WORD )*
-            loop29:
-            do {
-                int alt29=2;
-                int LA29_0 = input.LA(1);
-
-                if ( (LA29_0==RULE_WORD) ) {
-                    alt29=1;
-                }
-
-
-                switch (alt29) {
-            	case 1 :
-            	    // InternalSheepDog.g:1601:4: this_WORD_0= RULE_WORD
-            	    {
-            	    this_WORD_0=(Token)match(input,RULE_WORD,FOLLOW_29); 
-
-            	    				current.merge(this_WORD_0);
-            	    			
-
-            	    				newLeafNode(this_WORD_0, grammarAccess.getStatementAccess().getWORDTerminalRuleCall_0());
-            	    			
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop29;
-                }
-            } while (true);
-
-            this_EOL_1=(Token)match(input,RULE_EOL,FOLLOW_2); 
-
-            			current.merge(this_EOL_1);
-            		
-
-            			newLeafNode(this_EOL_1, grammarAccess.getStatementAccess().getEOLTerminalRuleCall_1());
-            		
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleStatement"
-
-
-    // $ANTLR start "entryRuleLine"
-    // InternalSheepDog.g:1620:1: entryRuleLine returns [String current=null] : iv_ruleLine= ruleLine EOF ;
-    public final String entryRuleLine() throws RecognitionException {
-        String current = null;
-
-        AntlrDatatypeRuleToken iv_ruleLine = null;
-
-
-        try {
-            // InternalSheepDog.g:1620:44: (iv_ruleLine= ruleLine EOF )
-            // InternalSheepDog.g:1621:2: iv_ruleLine= ruleLine EOF
-            {
-             newCompositeNode(grammarAccess.getLineRule()); 
-            pushFollow(FOLLOW_1);
-            iv_ruleLine=ruleLine();
-
-            state._fsp--;
-
-             current =iv_ruleLine.getText(); 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleLine"
-
-
-    // $ANTLR start "ruleLine"
-    // InternalSheepDog.g:1627:1: ruleLine returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (this_WORD_0= RULE_WORD )* this_EOL_1= RULE_EOL ) ;
-    public final AntlrDatatypeRuleToken ruleLine() throws RecognitionException {
-        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
-
-        Token this_WORD_0=null;
-        Token this_EOL_1=null;
-
-
-        	enterRule();
-
-        try {
-            // InternalSheepDog.g:1633:2: ( ( (this_WORD_0= RULE_WORD )* this_EOL_1= RULE_EOL ) )
-            // InternalSheepDog.g:1634:2: ( (this_WORD_0= RULE_WORD )* this_EOL_1= RULE_EOL )
-            {
-            // InternalSheepDog.g:1634:2: ( (this_WORD_0= RULE_WORD )* this_EOL_1= RULE_EOL )
-            // InternalSheepDog.g:1635:3: (this_WORD_0= RULE_WORD )* this_EOL_1= RULE_EOL
-            {
-            // InternalSheepDog.g:1635:3: (this_WORD_0= RULE_WORD )*
-            loop30:
-            do {
-                int alt30=2;
-                int LA30_0 = input.LA(1);
-
-                if ( (LA30_0==RULE_WORD) ) {
-                    alt30=1;
-                }
-
-
-                switch (alt30) {
-            	case 1 :
-            	    // InternalSheepDog.g:1636:4: this_WORD_0= RULE_WORD
-            	    {
-            	    this_WORD_0=(Token)match(input,RULE_WORD,FOLLOW_29); 
-
-            	    				current.merge(this_WORD_0);
-            	    			
-
-            	    				newLeafNode(this_WORD_0, grammarAccess.getLineAccess().getWORDTerminalRuleCall_0());
-            	    			
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop30;
-                }
-            } while (true);
-
-            this_EOL_1=(Token)match(input,RULE_EOL,FOLLOW_2); 
-
-            			current.merge(this_EOL_1);
-            		
-
-            			newLeafNode(this_EOL_1, grammarAccess.getLineAccess().getEOLTerminalRuleCall_1());
-            		
-
-            }
-
-
-            }
-
-
-            	leaveRule();
-
-        }
-
-            catch (RecognitionException re) {
-                recover(input,re);
-                appendSkippedTokens();
-            }
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleLine"
-
     // Delegated rules
 
 
@@ -4391,36 +4387,35 @@ public class InternalSheepDogParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000400L});
     public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000832L});
+    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000822L});
     public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000802L});
     public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000002032L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000002022L});
     public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000002002L});
     public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000001000030L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000001000020L});
     public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000000200L});
     public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000008000832L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000008000822L});
     public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000008000802L});
     public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000000800L});
     public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000010000L});
     public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000008002032L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000008002022L});
     public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000008002002L});
     public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000000002000L});
     public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000000040000L});
     public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000001800032L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000001800022L});
     public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000000100000L});
     public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000000200000L});
     public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000000800030L});
-    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000000022000000L});
-    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000020000010L});
-    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000000000022L});
+    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000000800020L});
+    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000022000000L});
+    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000000020000010L});
+    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000000000022L});
 
 }

@@ -16,13 +16,13 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EDataTypeEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.farhan.mbt.sheepDog.AbstractScenario;
 import org.farhan.mbt.sheepDog.AbstractScenarioTags;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
+import org.farhan.mbt.sheepDog.Statement;
 import org.farhan.mbt.sheepDog.Step;
 
 /**
@@ -74,14 +74,14 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getStatements() <em>Statements</em>}' attribute list.
+   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getStatements()
    * @generated
    * @ordered
    */
-  protected EList<String> statements;
+  protected EList<Statement> statements;
 
   /**
    * The cached value of the '{@link #getSteps() <em>Steps</em>}' containment reference list.
@@ -195,11 +195,11 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
    * @generated
    */
   @Override
-  public EList<String> getStatements()
+  public EList<Statement> getStatements()
   {
     if (statements == null)
     {
-      statements = new EDataTypeEList<String>(String.class, this, SheepDogPackage.ABSTRACT_SCENARIO__STATEMENTS);
+      statements = new EObjectContainmentEList<Statement>(Statement.class, this, SheepDogPackage.ABSTRACT_SCENARIO__STATEMENTS);
     }
     return statements;
   }
@@ -231,6 +231,8 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
     {
       case SheepDogPackage.ABSTRACT_SCENARIO__TAGS:
         return basicSetTags(null, msgs);
+      case SheepDogPackage.ABSTRACT_SCENARIO__STATEMENTS:
+        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
       case SheepDogPackage.ABSTRACT_SCENARIO__STEPS:
         return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
     }
@@ -278,7 +280,7 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
         return;
       case SheepDogPackage.ABSTRACT_SCENARIO__STATEMENTS:
         getStatements().clear();
-        getStatements().addAll((Collection<? extends String>)newValue);
+        getStatements().addAll((Collection<? extends Statement>)newValue);
         return;
       case SheepDogPackage.ABSTRACT_SCENARIO__STEPS:
         getSteps().clear();
@@ -349,8 +351,6 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (name: ");
     result.append(name);
-    result.append(", statements: ");
-    result.append(statements);
     result.append(')');
     return result.toString();
   }

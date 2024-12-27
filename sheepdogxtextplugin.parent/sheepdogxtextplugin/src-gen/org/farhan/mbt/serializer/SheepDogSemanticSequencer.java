@@ -24,9 +24,11 @@ import org.farhan.mbt.sheepDog.Examples;
 import org.farhan.mbt.sheepDog.Feature;
 import org.farhan.mbt.sheepDog.FeatureTags;
 import org.farhan.mbt.sheepDog.Given;
+import org.farhan.mbt.sheepDog.Line;
 import org.farhan.mbt.sheepDog.Row;
 import org.farhan.mbt.sheepDog.Scenario;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
+import org.farhan.mbt.sheepDog.Statement;
 import org.farhan.mbt.sheepDog.StepDefinition;
 import org.farhan.mbt.sheepDog.StepObject;
 import org.farhan.mbt.sheepDog.StepParameters;
@@ -75,11 +77,17 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 			case SheepDogPackage.GIVEN:
 				sequence_Given(context, (Given) semanticObject); 
 				return; 
+			case SheepDogPackage.LINE:
+				sequence_Line(context, (Line) semanticObject); 
+				return; 
 			case SheepDogPackage.ROW:
 				sequence_Row(context, (Row) semanticObject); 
 				return; 
 			case SheepDogPackage.SCENARIO:
 				sequence_Scenario(context, (Scenario) semanticObject); 
+				return; 
+			case SheepDogPackage.STATEMENT:
+				sequence_Statement(context, (Statement) semanticObject); 
 				return; 
 			case SheepDogPackage.STEP_DEFINITION:
 				sequence_StepDefinition(context, (StepDefinition) semanticObject); 
@@ -255,6 +263,26 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     Line returns Line
+	 *
+	 * Constraint:
+	 *     name=Title
+	 * </pre>
+	 */
+	protected void sequence_Line(ISerializationContext context, Line semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SheepDogPackage.Literals.LINE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.LINE__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getLineAccess().getNameTitleParserRuleCall_0_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
 	 *     Row returns Row
 	 *
 	 * Constraint:
@@ -278,6 +306,26 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 */
 	protected void sequence_Scenario(ISerializationContext context, Scenario semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Statement returns Statement
+	 *
+	 * Constraint:
+	 *     name=Title
+	 * </pre>
+	 */
+	protected void sequence_Statement(ISerializationContext context, Statement semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SheepDogPackage.Literals.STATEMENT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.STATEMENT__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getStatementAccess().getNameTitleParserRuleCall_0_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	

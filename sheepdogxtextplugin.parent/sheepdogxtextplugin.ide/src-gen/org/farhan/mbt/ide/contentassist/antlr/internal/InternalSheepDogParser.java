@@ -1627,12 +1627,166 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
     // $ANTLR end "ruleCell"
 
 
+    // $ANTLR start "entryRuleStatement"
+    // InternalSheepDog.g:553:1: entryRuleStatement : ruleStatement EOF ;
+    public final void entryRuleStatement() throws RecognitionException {
+        try {
+            // InternalSheepDog.g:554:1: ( ruleStatement EOF )
+            // InternalSheepDog.g:555:1: ruleStatement EOF
+            {
+             before(grammarAccess.getStatementRule()); 
+            pushFollow(FOLLOW_1);
+            ruleStatement();
+
+            state._fsp--;
+
+             after(grammarAccess.getStatementRule()); 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return ;
+    }
+    // $ANTLR end "entryRuleStatement"
+
+
+    // $ANTLR start "ruleStatement"
+    // InternalSheepDog.g:562:1: ruleStatement : ( ( rule__Statement__Group__0 ) ) ;
+    public final void ruleStatement() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalSheepDog.g:566:2: ( ( ( rule__Statement__Group__0 ) ) )
+            // InternalSheepDog.g:567:2: ( ( rule__Statement__Group__0 ) )
+            {
+            // InternalSheepDog.g:567:2: ( ( rule__Statement__Group__0 ) )
+            // InternalSheepDog.g:568:3: ( rule__Statement__Group__0 )
+            {
+             before(grammarAccess.getStatementAccess().getGroup()); 
+            // InternalSheepDog.g:569:3: ( rule__Statement__Group__0 )
+            // InternalSheepDog.g:569:4: rule__Statement__Group__0
+            {
+            pushFollow(FOLLOW_2);
+            rule__Statement__Group__0();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getStatementAccess().getGroup()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "ruleStatement"
+
+
+    // $ANTLR start "entryRuleLine"
+    // InternalSheepDog.g:578:1: entryRuleLine : ruleLine EOF ;
+    public final void entryRuleLine() throws RecognitionException {
+        try {
+            // InternalSheepDog.g:579:1: ( ruleLine EOF )
+            // InternalSheepDog.g:580:1: ruleLine EOF
+            {
+             before(grammarAccess.getLineRule()); 
+            pushFollow(FOLLOW_1);
+            ruleLine();
+
+            state._fsp--;
+
+             after(grammarAccess.getLineRule()); 
+            match(input,EOF,FOLLOW_2); 
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return ;
+    }
+    // $ANTLR end "entryRuleLine"
+
+
+    // $ANTLR start "ruleLine"
+    // InternalSheepDog.g:587:1: ruleLine : ( ( rule__Line__Group__0 ) ) ;
+    public final void ruleLine() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalSheepDog.g:591:2: ( ( ( rule__Line__Group__0 ) ) )
+            // InternalSheepDog.g:592:2: ( ( rule__Line__Group__0 ) )
+            {
+            // InternalSheepDog.g:592:2: ( ( rule__Line__Group__0 ) )
+            // InternalSheepDog.g:593:3: ( rule__Line__Group__0 )
+            {
+             before(grammarAccess.getLineAccess().getGroup()); 
+            // InternalSheepDog.g:594:3: ( rule__Line__Group__0 )
+            // InternalSheepDog.g:594:4: rule__Line__Group__0
+            {
+            pushFollow(FOLLOW_2);
+            rule__Line__Group__0();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getLineAccess().getGroup()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "ruleLine"
+
+
     // $ANTLR start "entryRuleTitle"
-    // InternalSheepDog.g:553:1: entryRuleTitle : ruleTitle EOF ;
+    // InternalSheepDog.g:603:1: entryRuleTitle : ruleTitle EOF ;
     public final void entryRuleTitle() throws RecognitionException {
         try {
-            // InternalSheepDog.g:554:1: ( ruleTitle EOF )
-            // InternalSheepDog.g:555:1: ruleTitle EOF
+            // InternalSheepDog.g:604:1: ( ruleTitle EOF )
+            // InternalSheepDog.g:605:1: ruleTitle EOF
             {
              before(grammarAccess.getTitleRule()); 
             pushFollow(FOLLOW_1);
@@ -1658,24 +1812,24 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "ruleTitle"
-    // InternalSheepDog.g:562:1: ruleTitle : ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) ) ;
+    // InternalSheepDog.g:612:1: ruleTitle : ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) ) ;
     public final void ruleTitle() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:566:2: ( ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) ) )
-            // InternalSheepDog.g:567:2: ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) )
+            // InternalSheepDog.g:616:2: ( ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) ) )
+            // InternalSheepDog.g:617:2: ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) )
             {
-            // InternalSheepDog.g:567:2: ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) )
-            // InternalSheepDog.g:568:3: ( ( RULE_WORD ) ) ( ( RULE_WORD )* )
+            // InternalSheepDog.g:617:2: ( ( ( RULE_WORD ) ) ( ( RULE_WORD )* ) )
+            // InternalSheepDog.g:618:3: ( ( RULE_WORD ) ) ( ( RULE_WORD )* )
             {
-            // InternalSheepDog.g:568:3: ( ( RULE_WORD ) )
-            // InternalSheepDog.g:569:4: ( RULE_WORD )
+            // InternalSheepDog.g:618:3: ( ( RULE_WORD ) )
+            // InternalSheepDog.g:619:4: ( RULE_WORD )
             {
              before(grammarAccess.getTitleAccess().getWORDTerminalRuleCall()); 
-            // InternalSheepDog.g:570:4: ( RULE_WORD )
-            // InternalSheepDog.g:570:5: RULE_WORD
+            // InternalSheepDog.g:620:4: ( RULE_WORD )
+            // InternalSheepDog.g:620:5: RULE_WORD
             {
             match(input,RULE_WORD,FOLLOW_3); 
 
@@ -1685,11 +1839,11 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
             }
 
-            // InternalSheepDog.g:573:3: ( ( RULE_WORD )* )
-            // InternalSheepDog.g:574:4: ( RULE_WORD )*
+            // InternalSheepDog.g:623:3: ( ( RULE_WORD )* )
+            // InternalSheepDog.g:624:4: ( RULE_WORD )*
             {
              before(grammarAccess.getTitleAccess().getWORDTerminalRuleCall()); 
-            // InternalSheepDog.g:575:4: ( RULE_WORD )*
+            // InternalSheepDog.g:625:4: ( RULE_WORD )*
             loop1:
             do {
                 int alt1=2;
@@ -1702,7 +1856,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalSheepDog.g:575:5: RULE_WORD
+            	    // InternalSheepDog.g:625:5: RULE_WORD
             	    {
             	    match(input,RULE_WORD,FOLLOW_3); 
 
@@ -1739,160 +1893,6 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
     // $ANTLR end "ruleTitle"
 
 
-    // $ANTLR start "entryRuleStatement"
-    // InternalSheepDog.g:585:1: entryRuleStatement : ruleStatement EOF ;
-    public final void entryRuleStatement() throws RecognitionException {
-        try {
-            // InternalSheepDog.g:586:1: ( ruleStatement EOF )
-            // InternalSheepDog.g:587:1: ruleStatement EOF
-            {
-             before(grammarAccess.getStatementRule()); 
-            pushFollow(FOLLOW_1);
-            ruleStatement();
-
-            state._fsp--;
-
-             after(grammarAccess.getStatementRule()); 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-        }
-        return ;
-    }
-    // $ANTLR end "entryRuleStatement"
-
-
-    // $ANTLR start "ruleStatement"
-    // InternalSheepDog.g:594:1: ruleStatement : ( ( rule__Statement__Group__0 ) ) ;
-    public final void ruleStatement() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalSheepDog.g:598:2: ( ( ( rule__Statement__Group__0 ) ) )
-            // InternalSheepDog.g:599:2: ( ( rule__Statement__Group__0 ) )
-            {
-            // InternalSheepDog.g:599:2: ( ( rule__Statement__Group__0 ) )
-            // InternalSheepDog.g:600:3: ( rule__Statement__Group__0 )
-            {
-             before(grammarAccess.getStatementAccess().getGroup()); 
-            // InternalSheepDog.g:601:3: ( rule__Statement__Group__0 )
-            // InternalSheepDog.g:601:4: rule__Statement__Group__0
-            {
-            pushFollow(FOLLOW_2);
-            rule__Statement__Group__0();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getStatementAccess().getGroup()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "ruleStatement"
-
-
-    // $ANTLR start "entryRuleLine"
-    // InternalSheepDog.g:610:1: entryRuleLine : ruleLine EOF ;
-    public final void entryRuleLine() throws RecognitionException {
-        try {
-            // InternalSheepDog.g:611:1: ( ruleLine EOF )
-            // InternalSheepDog.g:612:1: ruleLine EOF
-            {
-             before(grammarAccess.getLineRule()); 
-            pushFollow(FOLLOW_1);
-            ruleLine();
-
-            state._fsp--;
-
-             after(grammarAccess.getLineRule()); 
-            match(input,EOF,FOLLOW_2); 
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-        }
-        return ;
-    }
-    // $ANTLR end "entryRuleLine"
-
-
-    // $ANTLR start "ruleLine"
-    // InternalSheepDog.g:619:1: ruleLine : ( ( rule__Line__Group__0 ) ) ;
-    public final void ruleLine() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-        	
-        try {
-            // InternalSheepDog.g:623:2: ( ( ( rule__Line__Group__0 ) ) )
-            // InternalSheepDog.g:624:2: ( ( rule__Line__Group__0 ) )
-            {
-            // InternalSheepDog.g:624:2: ( ( rule__Line__Group__0 ) )
-            // InternalSheepDog.g:625:3: ( rule__Line__Group__0 )
-            {
-             before(grammarAccess.getLineAccess().getGroup()); 
-            // InternalSheepDog.g:626:3: ( rule__Line__Group__0 )
-            // InternalSheepDog.g:626:4: rule__Line__Group__0
-            {
-            pushFollow(FOLLOW_2);
-            rule__Line__Group__0();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getLineAccess().getGroup()); 
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "ruleLine"
-
-
     // $ANTLR start "rule__Model__Alternatives"
     // InternalSheepDog.g:634:1: rule__Model__Alternatives : ( ( ruleStepObject ) | ( ruleFeature ) );
     public final void rule__Model__Alternatives() throws RecognitionException {
@@ -1907,11 +1907,11 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             if ( (LA2_0==9) ) {
                 int LA2_1 = input.LA(2);
 
-                if ( (LA2_1==15) ) {
-                    alt2=2;
-                }
-                else if ( (LA2_1==10) ) {
+                if ( (LA2_1==10) ) {
                     alt2=1;
+                }
+                else if ( (LA2_1==15) ) {
+                    alt2=2;
                 }
                 else {
                     NoViableAltException nvae =
@@ -3003,7 +3003,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                 int alt9=2;
                 int LA9_0 = input.LA(1);
 
-                if ( ((LA9_0>=RULE_WORD && LA9_0<=RULE_EOL)) ) {
+                if ( (LA9_0==RULE_WORD) ) {
                     alt9=1;
                 }
 
@@ -3012,7 +3012,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // InternalSheepDog.g:920:3: rule__StepObject__StatementsAssignment_4
             	    {
-            	    pushFollow(FOLLOW_8);
+            	    pushFollow(FOLLOW_3);
             	    rule__StepObject__StatementsAssignment_4();
 
             	    state._fsp--;
@@ -3110,7 +3110,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // InternalSheepDog.g:946:3: rule__StepObject__StepDefinitionsAssignment_5
             	    {
-            	    pushFollow(FOLLOW_9);
+            	    pushFollow(FOLLOW_8);
             	    rule__StepObject__StepDefinitionsAssignment_5();
 
             	    state._fsp--;
@@ -3156,7 +3156,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:959:1: ( rule__StepDefinition__Group__0__Impl rule__StepDefinition__Group__1 )
             // InternalSheepDog.g:960:2: rule__StepDefinition__Group__0__Impl rule__StepDefinition__Group__1
             {
-            pushFollow(FOLLOW_10);
+            pushFollow(FOLLOW_9);
             rule__StepDefinition__Group__0__Impl();
 
             state._fsp--;
@@ -3391,7 +3391,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1040:1: ( rule__StepDefinition__Group__3__Impl rule__StepDefinition__Group__4 )
             // InternalSheepDog.g:1041:2: rule__StepDefinition__Group__3__Impl rule__StepDefinition__Group__4
             {
-            pushFollow(FOLLOW_11);
+            pushFollow(FOLLOW_10);
             rule__StepDefinition__Group__3__Impl();
 
             state._fsp--;
@@ -3466,7 +3466,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1067:1: ( rule__StepDefinition__Group__4__Impl rule__StepDefinition__Group__5 )
             // InternalSheepDog.g:1068:2: rule__StepDefinition__Group__4__Impl rule__StepDefinition__Group__5
             {
-            pushFollow(FOLLOW_11);
+            pushFollow(FOLLOW_10);
             rule__StepDefinition__Group__4__Impl();
 
             state._fsp--;
@@ -3514,7 +3514,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                 int alt11=2;
                 int LA11_0 = input.LA(1);
 
-                if ( ((LA11_0>=RULE_WORD && LA11_0<=RULE_EOL)) ) {
+                if ( (LA11_0==RULE_WORD) ) {
                     alt11=1;
                 }
 
@@ -3523,7 +3523,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // InternalSheepDog.g:1082:3: rule__StepDefinition__StatementsAssignment_4
             	    {
-            	    pushFollow(FOLLOW_8);
+            	    pushFollow(FOLLOW_3);
             	    rule__StepDefinition__StatementsAssignment_4();
 
             	    state._fsp--;
@@ -3621,7 +3621,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // InternalSheepDog.g:1108:3: rule__StepDefinition__StepParametersAssignment_5
             	    {
-            	    pushFollow(FOLLOW_12);
+            	    pushFollow(FOLLOW_11);
             	    rule__StepDefinition__StepParametersAssignment_5();
 
             	    state._fsp--;
@@ -3667,7 +3667,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1121:1: ( rule__StepParameters__Group__0__Impl rule__StepParameters__Group__1 )
             // InternalSheepDog.g:1122:2: rule__StepParameters__Group__0__Impl rule__StepParameters__Group__1
             {
-            pushFollow(FOLLOW_13);
+            pushFollow(FOLLOW_12);
             rule__StepParameters__Group__0__Impl();
 
             state._fsp--;
@@ -3902,7 +3902,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1202:1: ( rule__StepParameters__Group__3__Impl rule__StepParameters__Group__4 )
             // InternalSheepDog.g:1203:2: rule__StepParameters__Group__3__Impl rule__StepParameters__Group__4
             {
-            pushFollow(FOLLOW_14);
+            pushFollow(FOLLOW_13);
             rule__StepParameters__Group__3__Impl();
 
             state._fsp--;
@@ -3977,7 +3977,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1229:1: ( rule__StepParameters__Group__4__Impl rule__StepParameters__Group__5 )
             // InternalSheepDog.g:1230:2: rule__StepParameters__Group__4__Impl rule__StepParameters__Group__5
             {
-            pushFollow(FOLLOW_14);
+            pushFollow(FOLLOW_13);
             rule__StepParameters__Group__4__Impl();
 
             state._fsp--;
@@ -4025,7 +4025,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                 int alt13=2;
                 int LA13_0 = input.LA(1);
 
-                if ( ((LA13_0>=RULE_WORD && LA13_0<=RULE_EOL)) ) {
+                if ( (LA13_0==RULE_WORD) ) {
                     alt13=1;
                 }
 
@@ -4034,7 +4034,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // InternalSheepDog.g:1244:3: rule__StepParameters__StatementsAssignment_4
             	    {
-            	    pushFollow(FOLLOW_8);
+            	    pushFollow(FOLLOW_3);
             	    rule__StepParameters__StatementsAssignment_4();
 
             	    state._fsp--;
@@ -4160,7 +4160,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1283:1: ( rule__Feature__Group__0__Impl rule__Feature__Group__1 )
             // InternalSheepDog.g:1284:2: rule__Feature__Group__0__Impl rule__Feature__Group__1
             {
-            pushFollow(FOLLOW_15);
+            pushFollow(FOLLOW_14);
             rule__Feature__Group__0__Impl();
 
             state._fsp--;
@@ -4256,7 +4256,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1310:1: ( rule__Feature__Group__1__Impl rule__Feature__Group__2 )
             // InternalSheepDog.g:1311:2: rule__Feature__Group__1__Impl rule__Feature__Group__2
             {
-            pushFollow(FOLLOW_16);
+            pushFollow(FOLLOW_15);
             rule__Feature__Group__1__Impl();
 
             state._fsp--;
@@ -4491,7 +4491,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1391:1: ( rule__Feature__Group__4__Impl rule__Feature__Group__5 )
             // InternalSheepDog.g:1392:2: rule__Feature__Group__4__Impl rule__Feature__Group__5
             {
-            pushFollow(FOLLOW_17);
+            pushFollow(FOLLOW_16);
             rule__Feature__Group__4__Impl();
 
             state._fsp--;
@@ -4566,7 +4566,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1418:1: ( rule__Feature__Group__5__Impl rule__Feature__Group__6 )
             // InternalSheepDog.g:1419:2: rule__Feature__Group__5__Impl rule__Feature__Group__6
             {
-            pushFollow(FOLLOW_17);
+            pushFollow(FOLLOW_16);
             rule__Feature__Group__5__Impl();
 
             state._fsp--;
@@ -4614,7 +4614,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                 int alt15=2;
                 int LA15_0 = input.LA(1);
 
-                if ( ((LA15_0>=RULE_WORD && LA15_0<=RULE_EOL)) ) {
+                if ( (LA15_0==RULE_WORD) ) {
                     alt15=1;
                 }
 
@@ -4623,7 +4623,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // InternalSheepDog.g:1433:3: rule__Feature__StatementsAssignment_5
             	    {
-            	    pushFollow(FOLLOW_8);
+            	    pushFollow(FOLLOW_3);
             	    rule__Feature__StatementsAssignment_5();
 
             	    state._fsp--;
@@ -4721,7 +4721,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // InternalSheepDog.g:1459:3: rule__Feature__AbstractScenariosAssignment_6
             	    {
-            	    pushFollow(FOLLOW_18);
+            	    pushFollow(FOLLOW_17);
             	    rule__Feature__AbstractScenariosAssignment_6();
 
             	    state._fsp--;
@@ -4767,7 +4767,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1472:1: ( rule__Background__Group__0__Impl rule__Background__Group__1 )
             // InternalSheepDog.g:1473:2: rule__Background__Group__0__Impl rule__Background__Group__1
             {
-            pushFollow(FOLLOW_19);
+            pushFollow(FOLLOW_18);
             rule__Background__Group__0__Impl();
 
             state._fsp--;
@@ -4863,7 +4863,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1499:1: ( rule__Background__Group__1__Impl rule__Background__Group__2 )
             // InternalSheepDog.g:1500:2: rule__Background__Group__1__Impl rule__Background__Group__2
             {
-            pushFollow(FOLLOW_20);
+            pushFollow(FOLLOW_19);
             rule__Background__Group__1__Impl();
 
             state._fsp--;
@@ -5098,7 +5098,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1580:1: ( rule__Background__Group__4__Impl rule__Background__Group__5 )
             // InternalSheepDog.g:1581:2: rule__Background__Group__4__Impl rule__Background__Group__5
             {
-            pushFollow(FOLLOW_11);
+            pushFollow(FOLLOW_10);
             rule__Background__Group__4__Impl();
 
             state._fsp--;
@@ -5173,7 +5173,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1607:1: ( rule__Background__Group__5__Impl rule__Background__Group__6 )
             // InternalSheepDog.g:1608:2: rule__Background__Group__5__Impl rule__Background__Group__6
             {
-            pushFollow(FOLLOW_11);
+            pushFollow(FOLLOW_10);
             rule__Background__Group__5__Impl();
 
             state._fsp--;
@@ -5221,7 +5221,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                 int alt18=2;
                 int LA18_0 = input.LA(1);
 
-                if ( ((LA18_0>=RULE_WORD && LA18_0<=RULE_EOL)) ) {
+                if ( (LA18_0==RULE_WORD) ) {
                     alt18=1;
                 }
 
@@ -5230,7 +5230,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // InternalSheepDog.g:1622:3: rule__Background__StatementsAssignment_5
             	    {
-            	    pushFollow(FOLLOW_8);
+            	    pushFollow(FOLLOW_3);
             	    rule__Background__StatementsAssignment_5();
 
             	    state._fsp--;
@@ -5328,7 +5328,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // InternalSheepDog.g:1648:3: rule__Background__StepsAssignment_6
             	    {
-            	    pushFollow(FOLLOW_12);
+            	    pushFollow(FOLLOW_11);
             	    rule__Background__StepsAssignment_6();
 
             	    state._fsp--;
@@ -5374,7 +5374,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1661:1: ( rule__Scenario__Group__0__Impl rule__Scenario__Group__1 )
             // InternalSheepDog.g:1662:2: rule__Scenario__Group__0__Impl rule__Scenario__Group__1
             {
-            pushFollow(FOLLOW_19);
+            pushFollow(FOLLOW_18);
             rule__Scenario__Group__0__Impl();
 
             state._fsp--;
@@ -5470,7 +5470,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1688:1: ( rule__Scenario__Group__1__Impl rule__Scenario__Group__2 )
             // InternalSheepDog.g:1689:2: rule__Scenario__Group__1__Impl rule__Scenario__Group__2
             {
-            pushFollow(FOLLOW_21);
+            pushFollow(FOLLOW_20);
             rule__Scenario__Group__1__Impl();
 
             state._fsp--;
@@ -5705,7 +5705,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1769:1: ( rule__Scenario__Group__4__Impl rule__Scenario__Group__5 )
             // InternalSheepDog.g:1770:2: rule__Scenario__Group__4__Impl rule__Scenario__Group__5
             {
-            pushFollow(FOLLOW_22);
+            pushFollow(FOLLOW_21);
             rule__Scenario__Group__4__Impl();
 
             state._fsp--;
@@ -5780,7 +5780,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1796:1: ( rule__Scenario__Group__5__Impl rule__Scenario__Group__6 )
             // InternalSheepDog.g:1797:2: rule__Scenario__Group__5__Impl rule__Scenario__Group__6
             {
-            pushFollow(FOLLOW_22);
+            pushFollow(FOLLOW_21);
             rule__Scenario__Group__5__Impl();
 
             state._fsp--;
@@ -5828,7 +5828,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                 int alt21=2;
                 int LA21_0 = input.LA(1);
 
-                if ( ((LA21_0>=RULE_WORD && LA21_0<=RULE_EOL)) ) {
+                if ( (LA21_0==RULE_WORD) ) {
                     alt21=1;
                 }
 
@@ -5837,7 +5837,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // InternalSheepDog.g:1811:3: rule__Scenario__StatementsAssignment_5
             	    {
-            	    pushFollow(FOLLOW_8);
+            	    pushFollow(FOLLOW_3);
             	    rule__Scenario__StatementsAssignment_5();
 
             	    state._fsp--;
@@ -5883,7 +5883,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1823:1: ( rule__Scenario__Group__6__Impl rule__Scenario__Group__7 )
             // InternalSheepDog.g:1824:2: rule__Scenario__Group__6__Impl rule__Scenario__Group__7
             {
-            pushFollow(FOLLOW_22);
+            pushFollow(FOLLOW_21);
             rule__Scenario__Group__6__Impl();
 
             state._fsp--;
@@ -5946,7 +5946,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // InternalSheepDog.g:1838:3: rule__Scenario__StepsAssignment_6
             	    {
-            	    pushFollow(FOLLOW_12);
+            	    pushFollow(FOLLOW_11);
             	    rule__Scenario__StepsAssignment_6();
 
             	    state._fsp--;
@@ -6071,7 +6071,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // InternalSheepDog.g:1864:3: rule__Scenario__ExamplesAssignment_7
             	    {
-            	    pushFollow(FOLLOW_23);
+            	    pushFollow(FOLLOW_22);
             	    rule__Scenario__ExamplesAssignment_7();
 
             	    state._fsp--;
@@ -6117,7 +6117,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1877:1: ( rule__Examples__Group__0__Impl rule__Examples__Group__1 )
             // InternalSheepDog.g:1878:2: rule__Examples__Group__0__Impl rule__Examples__Group__1
             {
-            pushFollow(FOLLOW_24);
+            pushFollow(FOLLOW_23);
             rule__Examples__Group__0__Impl();
 
             state._fsp--;
@@ -6213,7 +6213,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1904:1: ( rule__Examples__Group__1__Impl rule__Examples__Group__2 )
             // InternalSheepDog.g:1905:2: rule__Examples__Group__1__Impl rule__Examples__Group__2
             {
-            pushFollow(FOLLOW_25);
+            pushFollow(FOLLOW_24);
             rule__Examples__Group__1__Impl();
 
             state._fsp--;
@@ -6448,7 +6448,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1985:1: ( rule__Examples__Group__4__Impl rule__Examples__Group__5 )
             // InternalSheepDog.g:1986:2: rule__Examples__Group__4__Impl rule__Examples__Group__5
             {
-            pushFollow(FOLLOW_14);
+            pushFollow(FOLLOW_13);
             rule__Examples__Group__4__Impl();
 
             state._fsp--;
@@ -6523,7 +6523,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2012:1: ( rule__Examples__Group__5__Impl rule__Examples__Group__6 )
             // InternalSheepDog.g:2013:2: rule__Examples__Group__5__Impl rule__Examples__Group__6
             {
-            pushFollow(FOLLOW_14);
+            pushFollow(FOLLOW_13);
             rule__Examples__Group__5__Impl();
 
             state._fsp--;
@@ -6571,7 +6571,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                 int alt25=2;
                 int LA25_0 = input.LA(1);
 
-                if ( ((LA25_0>=RULE_WORD && LA25_0<=RULE_EOL)) ) {
+                if ( (LA25_0==RULE_WORD) ) {
                     alt25=1;
                 }
 
@@ -6580,7 +6580,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // InternalSheepDog.g:2027:3: rule__Examples__StatementsAssignment_5
             	    {
-            	    pushFollow(FOLLOW_8);
+            	    pushFollow(FOLLOW_3);
             	    rule__Examples__StatementsAssignment_5();
 
             	    state._fsp--;
@@ -6706,7 +6706,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2066:1: ( rule__Given__Group__0__Impl rule__Given__Group__1 )
             // InternalSheepDog.g:2067:2: rule__Given__Group__0__Impl rule__Given__Group__1
             {
-            pushFollow(FOLLOW_26);
+            pushFollow(FOLLOW_25);
             rule__Given__Group__0__Impl();
 
             state._fsp--;
@@ -6941,7 +6941,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2147:1: ( rule__Given__Group__3__Impl rule__Given__Group__4 )
             // InternalSheepDog.g:2148:2: rule__Given__Group__3__Impl rule__Given__Group__4
             {
-            pushFollow(FOLLOW_27);
+            pushFollow(FOLLOW_26);
             rule__Given__Group__3__Impl();
 
             state._fsp--;
@@ -7107,7 +7107,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2201:1: ( rule__When__Group__0__Impl rule__When__Group__1 )
             // InternalSheepDog.g:2202:2: rule__When__Group__0__Impl rule__When__Group__1
             {
-            pushFollow(FOLLOW_28);
+            pushFollow(FOLLOW_27);
             rule__When__Group__0__Impl();
 
             state._fsp--;
@@ -7342,7 +7342,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2282:1: ( rule__When__Group__3__Impl rule__When__Group__4 )
             // InternalSheepDog.g:2283:2: rule__When__Group__3__Impl rule__When__Group__4
             {
-            pushFollow(FOLLOW_27);
+            pushFollow(FOLLOW_26);
             rule__When__Group__3__Impl();
 
             state._fsp--;
@@ -7508,7 +7508,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2336:1: ( rule__Then__Group__0__Impl rule__Then__Group__1 )
             // InternalSheepDog.g:2337:2: rule__Then__Group__0__Impl rule__Then__Group__1
             {
-            pushFollow(FOLLOW_29);
+            pushFollow(FOLLOW_28);
             rule__Then__Group__0__Impl();
 
             state._fsp--;
@@ -7743,7 +7743,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2417:1: ( rule__Then__Group__3__Impl rule__Then__Group__4 )
             // InternalSheepDog.g:2418:2: rule__Then__Group__3__Impl rule__Then__Group__4
             {
-            pushFollow(FOLLOW_27);
+            pushFollow(FOLLOW_26);
             rule__Then__Group__3__Impl();
 
             state._fsp--;
@@ -7909,7 +7909,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2471:1: ( rule__And__Group__0__Impl rule__And__Group__1 )
             // InternalSheepDog.g:2472:2: rule__And__Group__0__Impl rule__And__Group__1
             {
-            pushFollow(FOLLOW_30);
+            pushFollow(FOLLOW_29);
             rule__And__Group__0__Impl();
 
             state._fsp--;
@@ -8144,7 +8144,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2552:1: ( rule__And__Group__3__Impl rule__And__Group__4 )
             // InternalSheepDog.g:2553:2: rule__And__Group__3__Impl rule__And__Group__4
             {
-            pushFollow(FOLLOW_27);
+            pushFollow(FOLLOW_26);
             rule__And__Group__3__Impl();
 
             state._fsp--;
@@ -8385,7 +8385,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2633:1: ( rule__DocString__Group__1__Impl rule__DocString__Group__2 )
             // InternalSheepDog.g:2634:2: rule__DocString__Group__1__Impl rule__DocString__Group__2
             {
-            pushFollow(FOLLOW_31);
+            pushFollow(FOLLOW_5);
             rule__DocString__Group__1__Impl();
 
             state._fsp--;
@@ -8460,7 +8460,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2660:1: ( rule__DocString__Group__2__Impl rule__DocString__Group__3 )
             // InternalSheepDog.g:2661:2: rule__DocString__Group__2__Impl rule__DocString__Group__3
             {
-            pushFollow(FOLLOW_32);
+            pushFollow(FOLLOW_30);
             rule__DocString__Group__2__Impl();
 
             state._fsp--;
@@ -8508,7 +8508,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2676:3: ( rule__DocString__LinesAssignment_2 )
             // InternalSheepDog.g:2676:4: rule__DocString__LinesAssignment_2
             {
-            pushFollow(FOLLOW_8);
+            pushFollow(FOLLOW_3);
             rule__DocString__LinesAssignment_2();
 
             state._fsp--;
@@ -8530,7 +8530,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                 int alt30=2;
                 int LA30_0 = input.LA(1);
 
-                if ( ((LA30_0>=RULE_WORD && LA30_0<=RULE_EOL)) ) {
+                if ( (LA30_0==RULE_WORD) ) {
                     alt30=1;
                 }
 
@@ -8539,7 +8539,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // InternalSheepDog.g:2681:4: rule__DocString__LinesAssignment_2
             	    {
-            	    pushFollow(FOLLOW_8);
+            	    pushFollow(FOLLOW_3);
             	    rule__DocString__LinesAssignment_2();
 
             	    state._fsp--;
@@ -8808,7 +8808,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2775:1: ( rule__Table__Group__1__Impl rule__Table__Group__2 )
             // InternalSheepDog.g:2776:2: rule__Table__Group__1__Impl rule__Table__Group__2
             {
-            pushFollow(FOLLOW_33);
+            pushFollow(FOLLOW_31);
             rule__Table__Group__1__Impl();
 
             state._fsp--;
@@ -8958,7 +8958,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2829:1: ( rule__Table__Group__3__Impl rule__Table__Group__4 )
             // InternalSheepDog.g:2830:2: rule__Table__Group__3__Impl rule__Table__Group__4
             {
-            pushFollow(FOLLOW_34);
+            pushFollow(FOLLOW_32);
             rule__Table__Group__3__Impl();
 
             state._fsp--;
@@ -9033,7 +9033,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2856:1: ( rule__Table__Group__4__Impl rule__Table__Group__5 )
             // InternalSheepDog.g:2857:2: rule__Table__Group__4__Impl rule__Table__Group__5
             {
-            pushFollow(FOLLOW_33);
+            pushFollow(FOLLOW_31);
             rule__Table__Group__4__Impl();
 
             state._fsp--;
@@ -9081,7 +9081,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2872:3: ( rule__Table__RowsAssignment_4 )
             // InternalSheepDog.g:2872:4: rule__Table__RowsAssignment_4
             {
-            pushFollow(FOLLOW_35);
+            pushFollow(FOLLOW_33);
             rule__Table__RowsAssignment_4();
 
             state._fsp--;
@@ -9112,7 +9112,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // InternalSheepDog.g:2877:4: rule__Table__RowsAssignment_4
             	    {
-            	    pushFollow(FOLLOW_35);
+            	    pushFollow(FOLLOW_33);
             	    rule__Table__RowsAssignment_4();
 
             	    state._fsp--;
@@ -9354,7 +9354,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2960:3: ( rule__Row__CellsAssignment_0 )
             // InternalSheepDog.g:2960:4: rule__Row__CellsAssignment_0
             {
-            pushFollow(FOLLOW_35);
+            pushFollow(FOLLOW_33);
             rule__Row__CellsAssignment_0();
 
             state._fsp--;
@@ -9385,7 +9385,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // InternalSheepDog.g:2965:4: rule__Row__CellsAssignment_0
             	    {
-            	    pushFollow(FOLLOW_35);
+            	    pushFollow(FOLLOW_33);
             	    rule__Row__CellsAssignment_0();
 
             	    state._fsp--;
@@ -9809,7 +9809,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:3113:1: ( rule__AbstractScenarioTags__Group__1__Impl rule__AbstractScenarioTags__Group__2 )
             // InternalSheepDog.g:3114:2: rule__AbstractScenarioTags__Group__1__Impl rule__AbstractScenarioTags__Group__2
             {
-            pushFollow(FOLLOW_36);
+            pushFollow(FOLLOW_34);
             rule__AbstractScenarioTags__Group__1__Impl();
 
             state._fsp--;
@@ -10194,7 +10194,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:3248:1: ( rule__Statement__Group__0__Impl rule__Statement__Group__1 )
             // InternalSheepDog.g:3249:2: rule__Statement__Group__0__Impl rule__Statement__Group__1
             {
-            pushFollow(FOLLOW_31);
+            pushFollow(FOLLOW_6);
             rule__Statement__Group__0__Impl();
 
             state._fsp--;
@@ -10223,45 +10223,31 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Statement__Group__0__Impl"
-    // InternalSheepDog.g:3256:1: rule__Statement__Group__0__Impl : ( ( RULE_WORD )* ) ;
+    // InternalSheepDog.g:3256:1: rule__Statement__Group__0__Impl : ( ( rule__Statement__NameAssignment_0 ) ) ;
     public final void rule__Statement__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3260:1: ( ( ( RULE_WORD )* ) )
-            // InternalSheepDog.g:3261:1: ( ( RULE_WORD )* )
+            // InternalSheepDog.g:3260:1: ( ( ( rule__Statement__NameAssignment_0 ) ) )
+            // InternalSheepDog.g:3261:1: ( ( rule__Statement__NameAssignment_0 ) )
             {
-            // InternalSheepDog.g:3261:1: ( ( RULE_WORD )* )
-            // InternalSheepDog.g:3262:2: ( RULE_WORD )*
+            // InternalSheepDog.g:3261:1: ( ( rule__Statement__NameAssignment_0 ) )
+            // InternalSheepDog.g:3262:2: ( rule__Statement__NameAssignment_0 )
             {
-             before(grammarAccess.getStatementAccess().getWORDTerminalRuleCall_0()); 
-            // InternalSheepDog.g:3263:2: ( RULE_WORD )*
-            loop33:
-            do {
-                int alt33=2;
-                int LA33_0 = input.LA(1);
+             before(grammarAccess.getStatementAccess().getNameAssignment_0()); 
+            // InternalSheepDog.g:3263:2: ( rule__Statement__NameAssignment_0 )
+            // InternalSheepDog.g:3263:3: rule__Statement__NameAssignment_0
+            {
+            pushFollow(FOLLOW_2);
+            rule__Statement__NameAssignment_0();
 
-                if ( (LA33_0==RULE_WORD) ) {
-                    alt33=1;
-                }
+            state._fsp--;
 
 
-                switch (alt33) {
-            	case 1 :
-            	    // InternalSheepDog.g:3263:3: RULE_WORD
-            	    {
-            	    match(input,RULE_WORD,FOLLOW_3); 
+            }
 
-            	    }
-            	    break;
-
-            	default :
-            	    break loop33;
-                }
-            } while (true);
-
-             after(grammarAccess.getStatementAccess().getWORDTerminalRuleCall_0()); 
+             after(grammarAccess.getStatementAccess().getNameAssignment_0()); 
 
             }
 
@@ -10363,7 +10349,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:3302:1: ( rule__Line__Group__0__Impl rule__Line__Group__1 )
             // InternalSheepDog.g:3303:2: rule__Line__Group__0__Impl rule__Line__Group__1
             {
-            pushFollow(FOLLOW_31);
+            pushFollow(FOLLOW_6);
             rule__Line__Group__0__Impl();
 
             state._fsp--;
@@ -10392,45 +10378,31 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start "rule__Line__Group__0__Impl"
-    // InternalSheepDog.g:3310:1: rule__Line__Group__0__Impl : ( ( RULE_WORD )* ) ;
+    // InternalSheepDog.g:3310:1: rule__Line__Group__0__Impl : ( ( rule__Line__NameAssignment_0 ) ) ;
     public final void rule__Line__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
         	
         try {
-            // InternalSheepDog.g:3314:1: ( ( ( RULE_WORD )* ) )
-            // InternalSheepDog.g:3315:1: ( ( RULE_WORD )* )
+            // InternalSheepDog.g:3314:1: ( ( ( rule__Line__NameAssignment_0 ) ) )
+            // InternalSheepDog.g:3315:1: ( ( rule__Line__NameAssignment_0 ) )
             {
-            // InternalSheepDog.g:3315:1: ( ( RULE_WORD )* )
-            // InternalSheepDog.g:3316:2: ( RULE_WORD )*
+            // InternalSheepDog.g:3315:1: ( ( rule__Line__NameAssignment_0 ) )
+            // InternalSheepDog.g:3316:2: ( rule__Line__NameAssignment_0 )
             {
-             before(grammarAccess.getLineAccess().getWORDTerminalRuleCall_0()); 
-            // InternalSheepDog.g:3317:2: ( RULE_WORD )*
-            loop34:
-            do {
-                int alt34=2;
-                int LA34_0 = input.LA(1);
+             before(grammarAccess.getLineAccess().getNameAssignment_0()); 
+            // InternalSheepDog.g:3317:2: ( rule__Line__NameAssignment_0 )
+            // InternalSheepDog.g:3317:3: rule__Line__NameAssignment_0
+            {
+            pushFollow(FOLLOW_2);
+            rule__Line__NameAssignment_0();
 
-                if ( (LA34_0==RULE_WORD) ) {
-                    alt34=1;
-                }
+            state._fsp--;
 
 
-                switch (alt34) {
-            	case 1 :
-            	    // InternalSheepDog.g:3317:3: RULE_WORD
-            	    {
-            	    match(input,RULE_WORD,FOLLOW_3); 
+            }
 
-            	    }
-            	    break;
-
-            	default :
-            	    break loop34;
-                }
-            } while (true);
-
-             after(grammarAccess.getLineAccess().getWORDTerminalRuleCall_0()); 
+             after(grammarAccess.getLineAccess().getNameAssignment_0()); 
 
             }
 
@@ -12317,6 +12289,88 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
     }
     // $ANTLR end "rule__Cell__NameAssignment_1"
 
+
+    // $ANTLR start "rule__Statement__NameAssignment_0"
+    // InternalSheepDog.g:4012:1: rule__Statement__NameAssignment_0 : ( ruleTitle ) ;
+    public final void rule__Statement__NameAssignment_0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalSheepDog.g:4016:1: ( ( ruleTitle ) )
+            // InternalSheepDog.g:4017:2: ( ruleTitle )
+            {
+            // InternalSheepDog.g:4017:2: ( ruleTitle )
+            // InternalSheepDog.g:4018:3: ruleTitle
+            {
+             before(grammarAccess.getStatementAccess().getNameTitleParserRuleCall_0_0()); 
+            pushFollow(FOLLOW_2);
+            ruleTitle();
+
+            state._fsp--;
+
+             after(grammarAccess.getStatementAccess().getNameTitleParserRuleCall_0_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Statement__NameAssignment_0"
+
+
+    // $ANTLR start "rule__Line__NameAssignment_0"
+    // InternalSheepDog.g:4027:1: rule__Line__NameAssignment_0 : ( ruleTitle ) ;
+    public final void rule__Line__NameAssignment_0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+        	
+        try {
+            // InternalSheepDog.g:4031:1: ( ( ruleTitle ) )
+            // InternalSheepDog.g:4032:2: ( ruleTitle )
+            {
+            // InternalSheepDog.g:4032:2: ( ruleTitle )
+            // InternalSheepDog.g:4033:3: ruleTitle
+            {
+             before(grammarAccess.getLineAccess().getNameTitleParserRuleCall_0_0()); 
+            pushFollow(FOLLOW_2);
+            ruleTitle();
+
+            state._fsp--;
+
+             after(grammarAccess.getLineAccess().getNameTitleParserRuleCall_0_0()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__Line__NameAssignment_0"
+
     // Delegated rules
 
 
@@ -12328,35 +12382,33 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000400L});
     public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000830L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000032L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000000802L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000002030L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000002002L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000001000030L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000008000830L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000008000802L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000008000800L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000008002030L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000008002002L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000008002000L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000001800030L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x0000000020000002L});
-    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000810L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000802L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000002010L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000002002L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000001000010L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000008000810L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000008000802L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000008000800L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000008002010L});
+    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000008002002L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000008002000L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000001800010L});
+    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000000020000002L});
+    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000010000000L});
 
 }

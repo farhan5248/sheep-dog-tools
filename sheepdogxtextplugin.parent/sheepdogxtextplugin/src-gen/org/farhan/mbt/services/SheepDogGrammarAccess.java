@@ -897,6 +897,53 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		//Title
 		public RuleCall getNameTitleParserRuleCall_1_0() { return cNameTitleParserRuleCall_1_0; }
 	}
+	public class StatementElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.Statement");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameTitleParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final RuleCall cEOLTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		
+		//// TODO these two are duplicates
+		//Statement:
+		//    name=Title EOL;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//name=Title EOL
+		public Group getGroup() { return cGroup; }
+		
+		//name=Title
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+		
+		//Title
+		public RuleCall getNameTitleParserRuleCall_0_0() { return cNameTitleParserRuleCall_0_0; }
+		
+		//EOL
+		public RuleCall getEOLTerminalRuleCall_1() { return cEOLTerminalRuleCall_1; }
+	}
+	public class LineElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.Line");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cNameTitleParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
+		private final RuleCall cEOLTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		
+		//Line:
+		//    name=Title EOL;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//name=Title EOL
+		public Group getGroup() { return cGroup; }
+		
+		//name=Title
+		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+		
+		//Title
+		public RuleCall getNameTitleParserRuleCall_0_0() { return cNameTitleParserRuleCall_0_0; }
+		
+		//EOL
+		public RuleCall getEOLTerminalRuleCall_1() { return cEOLTerminalRuleCall_1; }
+	}
 	public class TitleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.Title");
 		private final RuleCall cWORDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
@@ -907,45 +954,6 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		
 		//WORD+
 		public RuleCall getWORDTerminalRuleCall() { return cWORDTerminalRuleCall; }
-	}
-	public class StatementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.Statement");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cWORDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final RuleCall cEOLTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		
-		//// TODO these two are duplicates
-		//Statement:
-		//    WORD* EOL;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//WORD* EOL
-		public Group getGroup() { return cGroup; }
-		
-		//WORD*
-		public RuleCall getWORDTerminalRuleCall_0() { return cWORDTerminalRuleCall_0; }
-		
-		//EOL
-		public RuleCall getEOLTerminalRuleCall_1() { return cEOLTerminalRuleCall_1; }
-	}
-	public class LineElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.Line");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cWORDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final RuleCall cEOLTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		
-		//Line:
-		//    WORD* EOL;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//WORD* EOL
-		public Group getGroup() { return cGroup; }
-		
-		//WORD*
-		public RuleCall getWORDTerminalRuleCall_0() { return cWORDTerminalRuleCall_0; }
-		
-		//EOL
-		public RuleCall getEOLTerminalRuleCall_1() { return cEOLTerminalRuleCall_1; }
 	}
 	
 	
@@ -969,9 +977,9 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	private final FeatureTagsElements pFeatureTags;
 	private final AbstractScenarioTagsElements pAbstractScenarioTags;
 	private final CellElements pCell;
-	private final TitleElements pTitle;
 	private final StatementElements pStatement;
 	private final LineElements pLine;
+	private final TitleElements pTitle;
 	private final TerminalRule tTAGWORD;
 	private final TerminalRule tWORD;
 	private final TerminalRule tWS;
@@ -1003,9 +1011,9 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		this.pFeatureTags = new FeatureTagsElements();
 		this.pAbstractScenarioTags = new AbstractScenarioTagsElements();
 		this.pCell = new CellElements();
-		this.pTitle = new TitleElements();
 		this.pStatement = new StatementElements();
 		this.pLine = new LineElements();
+		this.pTitle = new TitleElements();
 		this.tTAGWORD = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.TAGWORD");
 		this.tWORD = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.WORD");
 		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.WS");
@@ -1264,19 +1272,9 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return getCellAccess().getRule();
 	}
 	
-	//Title:
-	//    WORD+;
-	public TitleElements getTitleAccess() {
-		return pTitle;
-	}
-	
-	public ParserRule getTitleRule() {
-		return getTitleAccess().getRule();
-	}
-	
 	//// TODO these two are duplicates
 	//Statement:
-	//    WORD* EOL;
+	//    name=Title EOL;
 	public StatementElements getStatementAccess() {
 		return pStatement;
 	}
@@ -1286,13 +1284,23 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//Line:
-	//    WORD* EOL;
+	//    name=Title EOL;
 	public LineElements getLineAccess() {
 		return pLine;
 	}
 	
 	public ParserRule getLineRule() {
 		return getLineAccess().getRule();
+	}
+	
+	//Title:
+	//    WORD+;
+	public TitleElements getTitleAccess() {
+		return pTitle;
+	}
+	
+	public ParserRule getTitleRule() {
+		return getTitleAccess().getRule();
 	}
 	
 	//terminal TAGWORD:

@@ -3,55 +3,57 @@
  */
 package org.farhan.mbt.sheepDog.impl;
 
-import java.util.Collection;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.farhan.mbt.sheepDog.DocString;
 import org.farhan.mbt.sheepDog.Line;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Doc String</b></em>'.
+ * An implementation of the model object '<em><b>Line</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.DocStringImpl#getLines <em>Lines</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.LineImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class DocStringImpl extends MinimalEObjectImpl.Container implements DocString
+public class LineImpl extends MinimalEObjectImpl.Container implements Line
 {
   /**
-   * The cached value of the '{@link #getLines() <em>Lines</em>}' containment reference list.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getLines()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected EList<Line> lines;
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected DocStringImpl()
+  protected LineImpl()
   {
     super();
   }
@@ -64,7 +66,7 @@ public class DocStringImpl extends MinimalEObjectImpl.Container implements DocSt
   @Override
   protected EClass eStaticClass()
   {
-    return SheepDogPackage.Literals.DOC_STRING;
+    return SheepDogPackage.Literals.LINE;
   }
 
   /**
@@ -73,13 +75,9 @@ public class DocStringImpl extends MinimalEObjectImpl.Container implements DocSt
    * @generated
    */
   @Override
-  public EList<Line> getLines()
+  public String getName()
   {
-    if (lines == null)
-    {
-      lines = new EObjectContainmentEList<Line>(Line.class, this, SheepDogPackage.DOC_STRING__LINES);
-    }
-    return lines;
+    return name;
   }
 
   /**
@@ -88,14 +86,12 @@ public class DocStringImpl extends MinimalEObjectImpl.Container implements DocSt
    * @generated
    */
   @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  public void setName(String newName)
   {
-    switch (featureID)
-    {
-      case SheepDogPackage.DOC_STRING__LINES:
-        return ((InternalEList<?>)getLines()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.LINE__NAME, oldName, name));
   }
 
   /**
@@ -108,8 +104,8 @@ public class DocStringImpl extends MinimalEObjectImpl.Container implements DocSt
   {
     switch (featureID)
     {
-      case SheepDogPackage.DOC_STRING__LINES:
-        return getLines();
+      case SheepDogPackage.LINE__NAME:
+        return getName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,15 +115,13 @@ public class DocStringImpl extends MinimalEObjectImpl.Container implements DocSt
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case SheepDogPackage.DOC_STRING__LINES:
-        getLines().clear();
-        getLines().addAll((Collection<? extends Line>)newValue);
+      case SheepDogPackage.LINE__NAME:
+        setName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,8 +137,8 @@ public class DocStringImpl extends MinimalEObjectImpl.Container implements DocSt
   {
     switch (featureID)
     {
-      case SheepDogPackage.DOC_STRING__LINES:
-        getLines().clear();
+      case SheepDogPackage.LINE__NAME:
+        setName(NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -160,10 +154,27 @@ public class DocStringImpl extends MinimalEObjectImpl.Container implements DocSt
   {
     switch (featureID)
     {
-      case SheepDogPackage.DOC_STRING__LINES:
-        return lines != null && !lines.isEmpty();
+      case SheepDogPackage.LINE__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
   }
 
-} //DocStringImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
+  }
+
+} //LineImpl

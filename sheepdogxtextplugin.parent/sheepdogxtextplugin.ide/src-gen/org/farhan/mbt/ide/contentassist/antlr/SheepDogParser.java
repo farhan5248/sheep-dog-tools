@@ -101,6 +101,8 @@ public class SheepDogParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getFeatureTagsAccess().getNameAssignment_1(), "rule__FeatureTags__NameAssignment_1");
 			builder.put(grammarAccess.getAbstractScenarioTagsAccess().getNameAssignment_1(), "rule__AbstractScenarioTags__NameAssignment_1");
 			builder.put(grammarAccess.getCellAccess().getNameAssignment_1(), "rule__Cell__NameAssignment_1");
+			builder.put(grammarAccess.getStatementAccess().getNameAssignment_0(), "rule__Statement__NameAssignment_0");
+			builder.put(grammarAccess.getLineAccess().getNameAssignment_0(), "rule__Line__NameAssignment_0");
 		}
 	}
 	

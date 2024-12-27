@@ -85,6 +85,8 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
       case SheepDogPackage.FEATURE_TAGS: return createFeatureTags();
       case SheepDogPackage.ABSTRACT_SCENARIO_TAGS: return createAbstractScenarioTags();
       case SheepDogPackage.CELL: return createCell();
+      case SheepDogPackage.STATEMENT: return createStatement();
+      case SheepDogPackage.LINE: return createLine();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -328,6 +330,30 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
   {
     CellImpl cell = new CellImpl();
     return cell;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Statement createStatement()
+  {
+    StatementImpl statement = new StatementImpl();
+    return statement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Line createLine()
+  {
+    LineImpl line = new LineImpl();
+    return line;
   }
 
   /**

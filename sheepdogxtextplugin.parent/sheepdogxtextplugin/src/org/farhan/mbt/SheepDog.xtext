@@ -92,15 +92,15 @@ AbstractScenarioTags:
 Cell:
 	'|' name=Title;
 
-Title:
-	WORD+;
-
 // TODO these two are duplicates
 Statement:
-	WORD* EOL;
+	name=Title EOL;
 
 Line:
-	WORD* EOL;
+	name=Title EOL;
+
+Title:
+	WORD+;
 
 terminal TAGWORD:
 	!(' ' | '\t' | '\r' | '\n' | '#' | '"')+;

@@ -3,14 +3,48 @@
  */
 package org.farhan.mbt.formatting2;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.AbstractJavaFormatter;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
-import org.farhan.mbt.sheepDog.Model;
+import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.farhan.mbt.services.SheepDogGrammarAccess;
+import org.farhan.mbt.sheepDog.Feature;
+import org.farhan.mbt.sheepDog.StepObject;
+
+import com.google.inject.Inject;
 
 public class SheepDogFormatter extends AbstractJavaFormatter {
 
-	protected void format(Model model, IFormattableDocument doc) {
+	@Inject
+	SheepDogGrammarAccess ga;
 
+	protected void format(Feature theFeature, IFormattableDocument doc) {
+
+		FeatureFormatter formatter = new FeatureFormatter(theFeature);
+		formatter.setIndent(0);
+		formatter.format(doc, ga, this);
 	}
 
+	protected void format(StepObject theStepObject, IFormattableDocument doc) {
+
+		StepObjectFormatter formatter = new StepObjectFormatter(theStepObject);
+		formatter.setIndent(0);
+		formatter.format(doc, ga, this);
+	}
+
+	public ISemanticRegion getRegion(EObject eo, RuleCall ruleCall) {
+		return regionFor(eo).ruleCall(ruleCall);
+	}
+
+	public ISemanticRegion getRegion(EObject eo, Keyword keyword) {
+		// You can also search for the keyword using keyword("Feature:");
+		return regionFor(eo).keyword(keyword);
+	}
+
+	public ISemanticRegion getRegion(EObject eo, Assignment assignment) {
+		return regionFor(eo).assignment(assignment);
+	}
 }

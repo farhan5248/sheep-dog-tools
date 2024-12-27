@@ -497,10 +497,10 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = RULE_TAGWORD;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:4012:14: ( (~ ( ( ' ' | '\\t' | '\\r' | '\\n' | '#' | '\"' ) ) )+ )
-            // InternalSheepDog.g:4012:16: (~ ( ( ' ' | '\\t' | '\\r' | '\\n' | '#' | '\"' ) ) )+
+            // InternalSheepDog.g:4042:14: ( (~ ( ( ' ' | '\\t' | '\\r' | '\\n' | '#' | '\"' ) ) )+ )
+            // InternalSheepDog.g:4042:16: (~ ( ( ' ' | '\\t' | '\\r' | '\\n' | '#' | '\"' ) ) )+
             {
-            // InternalSheepDog.g:4012:16: (~ ( ( ' ' | '\\t' | '\\r' | '\\n' | '#' | '\"' ) ) )+
+            // InternalSheepDog.g:4042:16: (~ ( ( ' ' | '\\t' | '\\r' | '\\n' | '#' | '\"' ) ) )+
             int cnt1=0;
             loop1:
             do {
@@ -514,7 +514,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalSheepDog.g:4012:16: ~ ( ( ' ' | '\\t' | '\\r' | '\\n' | '#' | '\"' ) )
+            	    // InternalSheepDog.g:4042:16: ~ ( ( ' ' | '\\t' | '\\r' | '\\n' | '#' | '\"' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\b')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\u001F')||input.LA(1)=='!'||(input.LA(1)>='$' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -554,10 +554,10 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = RULE_WORD;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:4014:11: ( (~ ( ( ' ' | '\\t' | '\\r' | '\\n' | '#' | '\"' ) ) )+ )
-            // InternalSheepDog.g:4014:13: (~ ( ( ' ' | '\\t' | '\\r' | '\\n' | '#' | '\"' ) ) )+
+            // InternalSheepDog.g:4044:11: ( (~ ( ( ' ' | '\\t' | '\\r' | '\\n' | '#' | '\"' ) ) )+ )
+            // InternalSheepDog.g:4044:13: (~ ( ( ' ' | '\\t' | '\\r' | '\\n' | '#' | '\"' ) ) )+
             {
-            // InternalSheepDog.g:4014:13: (~ ( ( ' ' | '\\t' | '\\r' | '\\n' | '#' | '\"' ) ) )+
+            // InternalSheepDog.g:4044:13: (~ ( ( ' ' | '\\t' | '\\r' | '\\n' | '#' | '\"' ) ) )+
             int cnt2=0;
             loop2:
             do {
@@ -571,7 +571,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalSheepDog.g:4014:13: ~ ( ( ' ' | '\\t' | '\\r' | '\\n' | '#' | '\"' ) )
+            	    // InternalSheepDog.g:4044:13: ~ ( ( ' ' | '\\t' | '\\r' | '\\n' | '#' | '\"' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\b')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\u001F')||input.LA(1)=='!'||(input.LA(1)>='$' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -611,10 +611,10 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:4016:9: ( ( ' ' | '\\t' | '\\r' )+ )
-            // InternalSheepDog.g:4016:11: ( ' ' | '\\t' | '\\r' )+
+            // InternalSheepDog.g:4046:9: ( ( ' ' | '\\t' | '\\r' )+ )
+            // InternalSheepDog.g:4046:11: ( ' ' | '\\t' | '\\r' )+
             {
-            // InternalSheepDog.g:4016:11: ( ' ' | '\\t' | '\\r' )+
+            // InternalSheepDog.g:4046:11: ( ' ' | '\\t' | '\\r' )+
             int cnt3=0;
             loop3:
             do {
@@ -668,11 +668,11 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:4018:17: ( '#' (~ ( '\\n' ) )* RULE_EOL )
-            // InternalSheepDog.g:4018:19: '#' (~ ( '\\n' ) )* RULE_EOL
+            // InternalSheepDog.g:4048:17: ( '#' (~ ( '\\n' ) )* RULE_EOL )
+            // InternalSheepDog.g:4048:19: '#' (~ ( '\\n' ) )* RULE_EOL
             {
             match('#'); 
-            // InternalSheepDog.g:4018:23: (~ ( '\\n' ) )*
+            // InternalSheepDog.g:4048:23: (~ ( '\\n' ) )*
             loop4:
             do {
                 int alt4=2;
@@ -685,7 +685,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalSheepDog.g:4018:23: ~ ( '\\n' )
+            	    // InternalSheepDog.g:4048:23: ~ ( '\\n' )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -722,10 +722,10 @@ public class InternalSheepDogLexer extends Lexer {
         try {
             int _type = RULE_EOL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSheepDog.g:4020:10: ( ( '\\n' )+ )
-            // InternalSheepDog.g:4020:12: ( '\\n' )+
+            // InternalSheepDog.g:4050:10: ( ( '\\n' )+ )
+            // InternalSheepDog.g:4050:12: ( '\\n' )+
             {
-            // InternalSheepDog.g:4020:12: ( '\\n' )+
+            // InternalSheepDog.g:4050:12: ( '\\n' )+
             int cnt5=0;
             loop5:
             do {
@@ -739,7 +739,7 @@ public class InternalSheepDogLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // InternalSheepDog.g:4020:12: '\\n'
+            	    // InternalSheepDog.g:4050:12: '\\n'
             	    {
             	    match('\n'); 
 
