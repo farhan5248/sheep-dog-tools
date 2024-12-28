@@ -31,14 +31,15 @@ public abstract class StepFormatter extends Formatter {
 		formatKeywordTrailingSpace(df.getRegion(theStep, getKeyword(a)), doc);
 		formatTitleNoSpace(df.getRegion(theStep, getPhraseRuleCall(a)), doc);
 		formatEOL2RuleCall(df.getRegion(theStep, getEOLRuleCall(a)), doc);
-		/*
-		 * if (theStep.getTheStepTable() != null) { StepTableFormatter formatter = new
-		 * StepTableFormatter(theStep.getTheStepTable()); formatter.setIndent(10);
-		 * formatter.isEOLDouble(isLast); formatter.format(doc, ga, df); } if
-		 * (theStep.getTheDocString() != null) { DocStringFormatter formatter2 = new
-		 * DocStringFormatter(theStep.getTheDocString()); formatter2.setIndent(10);
-		 * formatter2.isEOLDouble(isLast); formatter2.format(doc, ga, df); }
-		 */
+
+		if (theStep.getTheStepTable() != null) {
+			TableFormatter formatter = new TableFormatter(theStep.getTheStepTable());
+			formatter.format(doc, ga, df);
+		}
+		if (theStep.getTheDocString() != null) {
+			DocStringFormatter formatter2 = new DocStringFormatter(theStep.getTheDocString());
+			formatter2.format(doc, ga, df);
+		}
 	}
 
 }

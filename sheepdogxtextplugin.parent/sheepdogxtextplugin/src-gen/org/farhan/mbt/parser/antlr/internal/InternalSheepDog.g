@@ -1665,9 +1665,7 @@ ruleTitle returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 	)+
 ;
 
-RULE_TAGWORD : ~((' '|'\t'|'\r'|'\n'|'#'|'"'))+;
-
-RULE_WORD : ~((' '|'\t'|'\r'|'\n'|'#'|'"'))+;
+RULE_WORD : ~((' '|'\t'|'\r'|'\n'|'#'|'"'|'|'))+;
 
 RULE_WS : (' '|'\t'|'\r')+;
 

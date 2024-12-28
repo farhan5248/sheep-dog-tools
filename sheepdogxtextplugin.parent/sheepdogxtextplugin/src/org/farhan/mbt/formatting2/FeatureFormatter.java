@@ -19,8 +19,7 @@ public class FeatureFormatter extends Formatter {
 
 	private AbstractScenarioFormatter newAbstractScenarioFormatter(AbstractScenario s) {
 		if (s instanceof Background) {
-			// return new BackgroundFormatter((Background) s);
-			return null;
+			return new BackgroundFormatter((Background) s);
 		} else {
 			return new ScenarioFormatter((Scenario) s);
 		}

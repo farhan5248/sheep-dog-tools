@@ -980,7 +980,6 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	private final StatementElements pStatement;
 	private final LineElements pLine;
 	private final TitleElements pTitle;
-	private final TerminalRule tTAGWORD;
 	private final TerminalRule tWORD;
 	private final TerminalRule tWS;
 	private final TerminalRule tSL_COMMENT;
@@ -1014,7 +1013,6 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		this.pStatement = new StatementElements();
 		this.pLine = new LineElements();
 		this.pTitle = new TitleElements();
-		this.tTAGWORD = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.TAGWORD");
 		this.tWORD = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.WORD");
 		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.WS");
 		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.SL_COMMENT");
@@ -1303,14 +1301,8 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return getTitleAccess().getRule();
 	}
 	
-	//terminal TAGWORD:
-	//    !(' ' | '\t' | '\r' | '\n' | '#' | '"')+;
-	public TerminalRule getTAGWORDRule() {
-		return tTAGWORD;
-	}
-	
 	//terminal WORD:
-	//    !(' ' | '\t' | '\r' | '\n' | '#' | '"')+;
+	//    !(' ' | '\t' | '\r' | '\n' | '#' | '"' | '|')+;
 	public TerminalRule getWORDRule() {
 		return tWORD;
 	}

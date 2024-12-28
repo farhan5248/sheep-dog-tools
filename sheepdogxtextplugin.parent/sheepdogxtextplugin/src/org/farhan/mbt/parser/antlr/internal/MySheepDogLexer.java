@@ -49,7 +49,7 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 		// it'd be a good example on how to hack the lexer for newbies
 
 		if (isKeyword("----")) {
-			mT__23();// InternalSheepDog.g:25:9: '----'
+			mT__22();// InternalSheepDog.g:25:9: '----'
 			isDocString = !isDocString;
 		} else if (isKeyword("#")) {
 			mRULE_SL_COMMENT();
@@ -63,59 +63,59 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 		} else if (isDocString) {
 			mRULE_WORD();
 		} else if (isKeyword("===")) {
-			mT__13();// InternalSheepDog.g:15:9: '==='
+			mT__12();// InternalSheepDog.g:15:9: '==='
 		} else if (isKeyword("==")) {
-			mT__11();// InternalSheepDog.g:13:9: '=='
+			mT__10();// InternalSheepDog.g:13:9: '=='
 		} else if (isKeyword("=")) {
-			mT__9();// InternalSheepDog.g:11:9: '='
+			mT__8();// InternalSheepDog.g:11:9: '='
 		} else if (isKeyword("|===")) {
-			mT__25();// InternalSheepDog.g:27:9: '|==='
+			mT__24();// InternalSheepDog.g:27:9: '|==='
 		} else if (isKeyword("|")) {
-			mT__29();// InternalSheepDog.g:30:9: '|'
+			mT__28();// InternalSheepDog.g:30:9: '|'
 			isCell = true;
 		} else if (isCell) {
 			mRULE_WORD();
 		} else if (isKeyword("[options=\"header\"]")) {
-			mT__24();// InternalSheepDog.g:26:9: '[options=\"header\"]'
+			mT__23();// InternalSheepDog.g:26:9: '[options=\"header\"]'
 		} else if (isKeyword("[tags=\"")) {
-			mT__27();// InternalSheepDog.g:28:9: '[tags=\"'
+			mT__26();// InternalSheepDog.g:28:9: '[tags=\"'
 			isTag = true;
 		} else if (isKeyword("\"]")) {
-			mT__28();// InternalSheepDog.g:29:9: '\"]'
+			mT__27();// InternalSheepDog.g:29:9: '\"]'
 			isTag = false;
 		} else if (isKeyword(":tags:")) {
-			mT__26();// InternalSheepDog.g:28:7: ( ':tags:' )
+			mT__25();// InternalSheepDog.g:28:7: ( ':tags:' )
 			isTag = true;
 		} else if (isTag) {
 			// TODO remove isTag because TAGWORD is removed
 			mRULE_WORD();
 		} else if (isKeyword("Object:")) {
-			mT__10();// InternalSheepDog.g:12:9: 'Object:'
+			mT__9();// InternalSheepDog.g:12:9: 'Object:'
 		} else if (isKeyword("Definition:")) {
-			mT__12();// InternalSheepDog.g:14:9: 'Definition:'
+			mT__11();// InternalSheepDog.g:14:9: 'Definition:'
 		} else if (isKeyword("Parameters:")) {
-			mT__14();// InternalSheepDog.g:16:9: 'Parameters:'
+			mT__13();// InternalSheepDog.g:16:9: 'Parameters:'
 		} else if (isKeyword("Feature:")) {
-			mT__15();// InternalSheepDog.g:17:9: 'Feature:'
+			mT__14();// InternalSheepDog.g:17:9: 'Feature:'
 		} else if (isKeyword("Background:")) {
-			mT__16();// InternalSheepDog.g:18:9: 'Background:'
+			mT__15();// InternalSheepDog.g:18:9: 'Background:'
 		} else if (isKeyword("Scenario:")) {
-			mT__17();// InternalSheepDog.g:19:9: 'Scenario:'
+			mT__16();// InternalSheepDog.g:19:9: 'Scenario:'
 		} else if (isKeyword("Examples:")) {
-			mT__18();// InternalSheepDog.g:20:9: 'Examples:'
+			mT__17();// InternalSheepDog.g:20:9: 'Examples:'
 		} else if (isTitle) {
 			mRULE_WORD();
 		} else if (isKeyword("Given")) {
-			mT__19();// InternalSheepDog.g:21:9: 'Given'
+			mT__18();// InternalSheepDog.g:21:9: 'Given'
 			isTitle = true;
 		} else if (isKeyword("When")) {
-			mT__20();// InternalSheepDog.g:22:9: 'When'
+			mT__19();// InternalSheepDog.g:22:9: 'When'
 			isTitle = true;
 		} else if (isKeyword("Then")) {
-			mT__21();// InternalSheepDog.g:23:9: 'Then'
+			mT__20();// InternalSheepDog.g:23:9: 'Then'
 			isTitle = true;
 		} else if (isKeyword("And")) {
-			mT__22();// InternalSheepDog.g:24:9: 'And'
+			mT__21();// InternalSheepDog.g:24:9: 'And'
 			isTitle = true;
 		} else {
 			mRULE_WORD();

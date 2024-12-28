@@ -4039,9 +4039,7 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-RULE_TAGWORD : ~((' '|'\t'|'\r'|'\n'|'#'|'"'))+;
-
-RULE_WORD : ~((' '|'\t'|'\r'|'\n'|'#'|'"'))+;
+RULE_WORD : ~((' '|'\t'|'\r'|'\n'|'#'|'"'|'|'))+;
 
 RULE_WS : (' '|'\t'|'\r')+;
 

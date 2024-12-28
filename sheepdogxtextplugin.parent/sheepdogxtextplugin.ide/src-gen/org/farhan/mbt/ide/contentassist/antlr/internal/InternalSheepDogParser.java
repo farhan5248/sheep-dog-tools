@@ -22,10 +22,10 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalSheepDogParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_WORD", "RULE_EOL", "RULE_TAGWORD", "RULE_WS", "RULE_SL_COMMENT", "'='", "'Object:'", "'=='", "'Definition:'", "'==='", "'Parameters:'", "'Feature:'", "'Background:'", "'Scenario:'", "'Examples:'", "'Given'", "'When'", "'Then'", "'And'", "'----'", "'[options=\"header\"]'", "'|==='", "':tags:'", "'[tags=\"'", "'\"]'", "'|'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_WORD", "RULE_EOL", "RULE_WS", "RULE_SL_COMMENT", "'='", "'Object:'", "'=='", "'Definition:'", "'==='", "'Parameters:'", "'Feature:'", "'Background:'", "'Scenario:'", "'Examples:'", "'Given'", "'When'", "'Then'", "'And'", "'----'", "'[options=\"header\"]'", "'|==='", "':tags:'", "'[tags=\"'", "'\"]'", "'|'"
     };
     public static final int RULE_WORD=4;
-    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_SL_COMMENT=7;
     public static final int T__19=19;
     public static final int T__15=15;
     public static final int T__16=16;
@@ -38,13 +38,12 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
     public static final int EOF=-1;
     public static final int T__10=10;
     public static final int T__9=9;
+    public static final int T__8=8;
     public static final int RULE_EOL=5;
-    public static final int RULE_WS=7;
-    public static final int RULE_TAGWORD=6;
+    public static final int RULE_WS=6;
     public static final int T__26=26;
     public static final int T__27=27;
     public static final int T__28=28;
-    public static final int T__29=29;
     public static final int T__22=22;
     public static final int T__23=23;
     public static final int T__24=24;
@@ -1904,13 +1903,13 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             int alt2=2;
             int LA2_0 = input.LA(1);
 
-            if ( (LA2_0==9) ) {
+            if ( (LA2_0==8) ) {
                 int LA2_1 = input.LA(2);
 
-                if ( (LA2_1==10) ) {
+                if ( (LA2_1==9) ) {
                     alt2=1;
                 }
-                else if ( (LA2_1==15) ) {
+                else if ( (LA2_1==14) ) {
                     alt2=2;
                 }
                 else {
@@ -1920,7 +1919,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                     throw nvae;
                 }
             }
-            else if ( (LA2_0==26) ) {
+            else if ( (LA2_0==25) ) {
                 alt2=2;
             }
             else {
@@ -1996,25 +1995,25 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==27) ) {
+            if ( (LA3_0==26) ) {
                 int LA3_1 = input.LA(2);
 
                 if ( (LA3_1==RULE_WORD) ) {
                     int LA3_3 = input.LA(3);
 
-                    if ( (LA3_3==28) ) {
+                    if ( (LA3_3==27) ) {
                         int LA3_6 = input.LA(4);
 
                         if ( (LA3_6==RULE_EOL) ) {
                             int LA3_7 = input.LA(5);
 
-                            if ( (LA3_7==11) ) {
+                            if ( (LA3_7==10) ) {
                                 int LA3_2 = input.LA(6);
 
-                                if ( (LA3_2==17) ) {
+                                if ( (LA3_2==16) ) {
                                     alt3=2;
                                 }
-                                else if ( (LA3_2==16) ) {
+                                else if ( (LA3_2==15) ) {
                                     alt3=1;
                                 }
                                 else {
@@ -2052,13 +2051,13 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                     throw nvae;
                 }
             }
-            else if ( (LA3_0==11) ) {
+            else if ( (LA3_0==10) ) {
                 int LA3_2 = input.LA(2);
 
-                if ( (LA3_2==17) ) {
+                if ( (LA3_2==16) ) {
                     alt3=2;
                 }
-                else if ( (LA3_2==16) ) {
+                else if ( (LA3_2==15) ) {
                     alt3=1;
                 }
                 else {
@@ -2141,24 +2140,24 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             int alt4=4;
             int LA4_0 = input.LA(1);
 
-            if ( (LA4_0==13) ) {
+            if ( (LA4_0==12) ) {
                 switch ( input.LA(2) ) {
-                case 21:
+                case 20:
                     {
                     alt4=3;
                     }
                     break;
-                case 22:
+                case 21:
                     {
                     alt4=4;
                     }
                     break;
-                case 19:
+                case 18:
                     {
                     alt4=1;
                     }
                     break;
-                case 20:
+                case 19:
                     {
                     alt4=2;
                     }
@@ -2282,10 +2281,10 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( (LA5_0==24) ) {
+            if ( (LA5_0==23) ) {
                 alt5=1;
             }
-            else if ( (LA5_0==23) ) {
+            else if ( (LA5_0==22) ) {
                 alt5=2;
             }
             else {
@@ -2373,10 +2372,10 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             int alt6=2;
             int LA6_0 = input.LA(1);
 
-            if ( (LA6_0==24) ) {
+            if ( (LA6_0==23) ) {
                 alt6=1;
             }
-            else if ( (LA6_0==23) ) {
+            else if ( (LA6_0==22) ) {
                 alt6=2;
             }
             else {
@@ -2464,10 +2463,10 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             int alt7=2;
             int LA7_0 = input.LA(1);
 
-            if ( (LA7_0==24) ) {
+            if ( (LA7_0==23) ) {
                 alt7=1;
             }
-            else if ( (LA7_0==23) ) {
+            else if ( (LA7_0==22) ) {
                 alt7=2;
             }
             else {
@@ -2555,10 +2554,10 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             int alt8=2;
             int LA8_0 = input.LA(1);
 
-            if ( (LA8_0==24) ) {
+            if ( (LA8_0==23) ) {
                 alt8=1;
             }
-            else if ( (LA8_0==23) ) {
+            else if ( (LA8_0==22) ) {
                 alt8=2;
             }
             else {
@@ -2687,7 +2686,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:811:2: '='
             {
              before(grammarAccess.getStepObjectAccess().getEqualsSignKeyword_0()); 
-            match(input,9,FOLLOW_2); 
+            match(input,8,FOLLOW_2); 
              after(grammarAccess.getStepObjectAccess().getEqualsSignKeyword_0()); 
 
             }
@@ -2762,7 +2761,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:838:2: 'Object:'
             {
              before(grammarAccess.getStepObjectAccess().getObjectKeyword_1()); 
-            match(input,10,FOLLOW_2); 
+            match(input,9,FOLLOW_2); 
              after(grammarAccess.getStepObjectAccess().getObjectKeyword_1()); 
 
             }
@@ -3101,7 +3100,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                 int alt10=2;
                 int LA10_0 = input.LA(1);
 
-                if ( (LA10_0==11) ) {
+                if ( (LA10_0==10) ) {
                     alt10=1;
                 }
 
@@ -3198,7 +3197,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:973:2: '=='
             {
              before(grammarAccess.getStepDefinitionAccess().getEqualsSignEqualsSignKeyword_0()); 
-            match(input,11,FOLLOW_2); 
+            match(input,10,FOLLOW_2); 
              after(grammarAccess.getStepDefinitionAccess().getEqualsSignEqualsSignKeyword_0()); 
 
             }
@@ -3273,7 +3272,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1000:2: 'Definition:'
             {
              before(grammarAccess.getStepDefinitionAccess().getDefinitionKeyword_1()); 
-            match(input,12,FOLLOW_2); 
+            match(input,11,FOLLOW_2); 
              after(grammarAccess.getStepDefinitionAccess().getDefinitionKeyword_1()); 
 
             }
@@ -3612,7 +3611,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                 int alt12=2;
                 int LA12_0 = input.LA(1);
 
-                if ( (LA12_0==13) ) {
+                if ( (LA12_0==12) ) {
                     alt12=1;
                 }
 
@@ -3709,7 +3708,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1135:2: '==='
             {
              before(grammarAccess.getStepParametersAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
-            match(input,13,FOLLOW_2); 
+            match(input,12,FOLLOW_2); 
              after(grammarAccess.getStepParametersAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
 
             }
@@ -3784,7 +3783,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1162:2: 'Parameters:'
             {
              before(grammarAccess.getStepParametersAccess().getParametersKeyword_1()); 
-            match(input,14,FOLLOW_2); 
+            match(input,13,FOLLOW_2); 
              after(grammarAccess.getStepParametersAccess().getParametersKeyword_1()); 
 
             }
@@ -4206,7 +4205,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             int alt14=2;
             int LA14_0 = input.LA(1);
 
-            if ( (LA14_0==26) ) {
+            if ( (LA14_0==25) ) {
                 alt14=1;
             }
             switch (alt14) {
@@ -4298,7 +4297,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1324:2: '='
             {
              before(grammarAccess.getFeatureAccess().getEqualsSignKeyword_1()); 
-            match(input,9,FOLLOW_2); 
+            match(input,8,FOLLOW_2); 
              after(grammarAccess.getFeatureAccess().getEqualsSignKeyword_1()); 
 
             }
@@ -4373,7 +4372,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1351:2: 'Feature:'
             {
              before(grammarAccess.getFeatureAccess().getFeatureKeyword_2()); 
-            match(input,15,FOLLOW_2); 
+            match(input,14,FOLLOW_2); 
              after(grammarAccess.getFeatureAccess().getFeatureKeyword_2()); 
 
             }
@@ -4712,7 +4711,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                 int alt16=2;
                 int LA16_0 = input.LA(1);
 
-                if ( (LA16_0==11||LA16_0==27) ) {
+                if ( (LA16_0==10||LA16_0==26) ) {
                     alt16=1;
                 }
 
@@ -4813,7 +4812,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             int alt17=2;
             int LA17_0 = input.LA(1);
 
-            if ( (LA17_0==27) ) {
+            if ( (LA17_0==26) ) {
                 alt17=1;
             }
             switch (alt17) {
@@ -4905,7 +4904,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1513:2: '=='
             {
              before(grammarAccess.getBackgroundAccess().getEqualsSignEqualsSignKeyword_1()); 
-            match(input,11,FOLLOW_2); 
+            match(input,10,FOLLOW_2); 
              after(grammarAccess.getBackgroundAccess().getEqualsSignEqualsSignKeyword_1()); 
 
             }
@@ -4980,7 +4979,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1540:2: 'Background:'
             {
              before(grammarAccess.getBackgroundAccess().getBackgroundKeyword_2()); 
-            match(input,16,FOLLOW_2); 
+            match(input,15,FOLLOW_2); 
              after(grammarAccess.getBackgroundAccess().getBackgroundKeyword_2()); 
 
             }
@@ -5319,7 +5318,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                 int alt19=2;
                 int LA19_0 = input.LA(1);
 
-                if ( (LA19_0==13) ) {
+                if ( (LA19_0==12) ) {
                     alt19=1;
                 }
 
@@ -5420,7 +5419,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             int alt20=2;
             int LA20_0 = input.LA(1);
 
-            if ( (LA20_0==27) ) {
+            if ( (LA20_0==26) ) {
                 alt20=1;
             }
             switch (alt20) {
@@ -5512,7 +5511,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1702:2: '=='
             {
              before(grammarAccess.getScenarioAccess().getEqualsSignEqualsSignKeyword_1()); 
-            match(input,11,FOLLOW_2); 
+            match(input,10,FOLLOW_2); 
              after(grammarAccess.getScenarioAccess().getEqualsSignEqualsSignKeyword_1()); 
 
             }
@@ -5587,7 +5586,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1729:2: 'Scenario:'
             {
              before(grammarAccess.getScenarioAccess().getScenarioKeyword_2()); 
-            match(input,17,FOLLOW_2); 
+            match(input,16,FOLLOW_2); 
              after(grammarAccess.getScenarioAccess().getScenarioKeyword_2()); 
 
             }
@@ -5931,10 +5930,10 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                 int alt22=2;
                 int LA22_0 = input.LA(1);
 
-                if ( (LA22_0==13) ) {
+                if ( (LA22_0==12) ) {
                     int LA22_2 = input.LA(2);
 
-                    if ( ((LA22_2>=19 && LA22_2<=22)) ) {
+                    if ( ((LA22_2>=18 && LA22_2<=21)) ) {
                         alt22=1;
                     }
 
@@ -6035,19 +6034,19 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                 int alt23=2;
                 int LA23_0 = input.LA(1);
 
-                if ( (LA23_0==27) ) {
+                if ( (LA23_0==26) ) {
                     int LA23_2 = input.LA(2);
 
                     if ( (LA23_2==RULE_WORD) ) {
                         int LA23_4 = input.LA(3);
 
-                        if ( (LA23_4==28) ) {
+                        if ( (LA23_4==27) ) {
                             int LA23_5 = input.LA(4);
 
                             if ( (LA23_5==RULE_EOL) ) {
                                 int LA23_6 = input.LA(5);
 
-                                if ( (LA23_6==13) ) {
+                                if ( (LA23_6==12) ) {
                                     alt23=1;
                                 }
 
@@ -6062,7 +6061,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
 
 
                 }
-                else if ( (LA23_0==13) ) {
+                else if ( (LA23_0==12) ) {
                     alt23=1;
                 }
 
@@ -6163,7 +6162,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             int alt24=2;
             int LA24_0 = input.LA(1);
 
-            if ( (LA24_0==27) ) {
+            if ( (LA24_0==26) ) {
                 alt24=1;
             }
             switch (alt24) {
@@ -6255,7 +6254,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1918:2: '==='
             {
              before(grammarAccess.getExamplesAccess().getEqualsSignEqualsSignEqualsSignKeyword_1()); 
-            match(input,13,FOLLOW_2); 
+            match(input,12,FOLLOW_2); 
              after(grammarAccess.getExamplesAccess().getEqualsSignEqualsSignEqualsSignKeyword_1()); 
 
             }
@@ -6330,7 +6329,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:1945:2: 'Examples:'
             {
              before(grammarAccess.getExamplesAccess().getExamplesKeyword_2()); 
-            match(input,18,FOLLOW_2); 
+            match(input,17,FOLLOW_2); 
              after(grammarAccess.getExamplesAccess().getExamplesKeyword_2()); 
 
             }
@@ -6748,7 +6747,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2080:2: '==='
             {
              before(grammarAccess.getGivenAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
-            match(input,13,FOLLOW_2); 
+            match(input,12,FOLLOW_2); 
              after(grammarAccess.getGivenAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
 
             }
@@ -6823,7 +6822,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2107:2: 'Given'
             {
              before(grammarAccess.getGivenAccess().getGivenKeyword_1()); 
-            match(input,19,FOLLOW_2); 
+            match(input,18,FOLLOW_2); 
              after(grammarAccess.getGivenAccess().getGivenKeyword_1()); 
 
             }
@@ -7057,7 +7056,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             int alt26=2;
             int LA26_0 = input.LA(1);
 
-            if ( ((LA26_0>=23 && LA26_0<=24)) ) {
+            if ( ((LA26_0>=22 && LA26_0<=23)) ) {
                 alt26=1;
             }
             switch (alt26) {
@@ -7149,7 +7148,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2215:2: '==='
             {
              before(grammarAccess.getWhenAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
-            match(input,13,FOLLOW_2); 
+            match(input,12,FOLLOW_2); 
              after(grammarAccess.getWhenAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
 
             }
@@ -7224,7 +7223,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2242:2: 'When'
             {
              before(grammarAccess.getWhenAccess().getWhenKeyword_1()); 
-            match(input,20,FOLLOW_2); 
+            match(input,19,FOLLOW_2); 
              after(grammarAccess.getWhenAccess().getWhenKeyword_1()); 
 
             }
@@ -7458,7 +7457,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             int alt27=2;
             int LA27_0 = input.LA(1);
 
-            if ( ((LA27_0>=23 && LA27_0<=24)) ) {
+            if ( ((LA27_0>=22 && LA27_0<=23)) ) {
                 alt27=1;
             }
             switch (alt27) {
@@ -7550,7 +7549,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2350:2: '==='
             {
              before(grammarAccess.getThenAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
-            match(input,13,FOLLOW_2); 
+            match(input,12,FOLLOW_2); 
              after(grammarAccess.getThenAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
 
             }
@@ -7625,7 +7624,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2377:2: 'Then'
             {
              before(grammarAccess.getThenAccess().getThenKeyword_1()); 
-            match(input,21,FOLLOW_2); 
+            match(input,20,FOLLOW_2); 
              after(grammarAccess.getThenAccess().getThenKeyword_1()); 
 
             }
@@ -7859,7 +7858,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             int alt28=2;
             int LA28_0 = input.LA(1);
 
-            if ( ((LA28_0>=23 && LA28_0<=24)) ) {
+            if ( ((LA28_0>=22 && LA28_0<=23)) ) {
                 alt28=1;
             }
             switch (alt28) {
@@ -7951,7 +7950,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2485:2: '==='
             {
              before(grammarAccess.getAndAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
-            match(input,13,FOLLOW_2); 
+            match(input,12,FOLLOW_2); 
              after(grammarAccess.getAndAccess().getEqualsSignEqualsSignEqualsSignKeyword_0()); 
 
             }
@@ -8026,7 +8025,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2512:2: 'And'
             {
              before(grammarAccess.getAndAccess().getAndKeyword_1()); 
-            match(input,22,FOLLOW_2); 
+            match(input,21,FOLLOW_2); 
              after(grammarAccess.getAndAccess().getAndKeyword_1()); 
 
             }
@@ -8260,7 +8259,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             int alt29=2;
             int LA29_0 = input.LA(1);
 
-            if ( ((LA29_0>=23 && LA29_0<=24)) ) {
+            if ( ((LA29_0>=22 && LA29_0<=23)) ) {
                 alt29=1;
             }
             switch (alt29) {
@@ -8352,7 +8351,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2620:2: '----'
             {
              before(grammarAccess.getDocStringAccess().getHyphenMinusHyphenMinusHyphenMinusHyphenMinusKeyword_0()); 
-            match(input,23,FOLLOW_2); 
+            match(input,22,FOLLOW_2); 
              after(grammarAccess.getDocStringAccess().getHyphenMinusHyphenMinusHyphenMinusHyphenMinusKeyword_0()); 
 
             }
@@ -8630,7 +8629,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2708:2: '----'
             {
              before(grammarAccess.getDocStringAccess().getHyphenMinusHyphenMinusHyphenMinusHyphenMinusKeyword_3()); 
-            match(input,23,FOLLOW_2); 
+            match(input,22,FOLLOW_2); 
              after(grammarAccess.getDocStringAccess().getHyphenMinusHyphenMinusHyphenMinusHyphenMinusKeyword_3()); 
 
             }
@@ -8775,7 +8774,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2762:2: '[options=\"header\"]'
             {
              before(grammarAccess.getTableAccess().getOptionsHeaderKeyword_0()); 
-            match(input,24,FOLLOW_2); 
+            match(input,23,FOLLOW_2); 
              after(grammarAccess.getTableAccess().getOptionsHeaderKeyword_0()); 
 
             }
@@ -8925,7 +8924,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2816:2: '|==='
             {
              before(grammarAccess.getTableAccess().getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_2()); 
-            match(input,25,FOLLOW_2); 
+            match(input,24,FOLLOW_2); 
              after(grammarAccess.getTableAccess().getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_2()); 
 
             }
@@ -9103,7 +9102,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                 int alt31=2;
                 int LA31_0 = input.LA(1);
 
-                if ( (LA31_0==29) ) {
+                if ( (LA31_0==28) ) {
                     alt31=1;
                 }
 
@@ -9203,7 +9202,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:2904:2: '|==='
             {
              before(grammarAccess.getTableAccess().getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_5()); 
-            match(input,25,FOLLOW_2); 
+            match(input,24,FOLLOW_2); 
              after(grammarAccess.getTableAccess().getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_5()); 
 
             }
@@ -9376,7 +9375,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
                 int alt32=2;
                 int LA32_0 = input.LA(1);
 
-                if ( (LA32_0==29) ) {
+                if ( (LA32_0==28) ) {
                     alt32=1;
                 }
 
@@ -9546,7 +9545,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:3019:2: ':tags:'
             {
              before(grammarAccess.getFeatureTagsAccess().getTagsKeyword_0()); 
-            match(input,26,FOLLOW_2); 
+            match(input,25,FOLLOW_2); 
              after(grammarAccess.getFeatureTagsAccess().getTagsKeyword_0()); 
 
             }
@@ -9776,7 +9775,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:3100:2: '[tags=\"'
             {
              before(grammarAccess.getAbstractScenarioTagsAccess().getTagsKeyword_0()); 
-            match(input,27,FOLLOW_2); 
+            match(input,26,FOLLOW_2); 
              after(grammarAccess.getAbstractScenarioTagsAccess().getTagsKeyword_0()); 
 
             }
@@ -9936,7 +9935,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:3154:2: '\"]'
             {
              before(grammarAccess.getAbstractScenarioTagsAccess().getQuotationMarkRightSquareBracketKeyword_2()); 
-            match(input,28,FOLLOW_2); 
+            match(input,27,FOLLOW_2); 
              after(grammarAccess.getAbstractScenarioTagsAccess().getQuotationMarkRightSquareBracketKeyword_2()); 
 
             }
@@ -10081,7 +10080,7 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
             // InternalSheepDog.g:3208:2: '|'
             {
              before(grammarAccess.getCellAccess().getVerticalLineKeyword_0()); 
-            match(input,29,FOLLOW_2); 
+            match(input,28,FOLLOW_2); 
              after(grammarAccess.getCellAccess().getVerticalLineKeyword_0()); 
 
             }
@@ -12379,36 +12378,36 @@ public class InternalSheepDogParser extends AbstractInternalContentAssistParser 
     public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000200L});
     public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000810L});
-    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000802L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000002010L});
-    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000002002L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000001000010L});
-    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000008000810L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000008000802L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000008000800L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000008002010L});
-    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000008002002L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000008002000L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000001800010L});
-    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000000020000002L});
-    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000410L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000402L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000001010L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000001002L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000800010L});
+    public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000004000410L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000004000402L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000004000400L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000004001010L});
+    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000004001002L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000004001000L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000000C00010L});
+    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000000010000002L});
+    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000000008000000L});
 
 }
