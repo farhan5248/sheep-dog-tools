@@ -102,9 +102,6 @@ Line:
 Title:
 	WORD+;
 
-terminal TAGWORD:
-	!(' ' | '\t' | '\r' | '\n' | '#' | '"')+;
-
 terminal WORD:
 	!(' ' | '\t' | '\r' | '\n' | '#' | '"')+;
 

@@ -6,6 +6,7 @@ import org.farhan.mbt.services.SheepDogGrammarAccess.FeatureElements;
 import org.farhan.mbt.sheepDog.AbstractScenario;
 import org.farhan.mbt.sheepDog.Background;
 import org.farhan.mbt.sheepDog.Feature;
+import org.farhan.mbt.sheepDog.Scenario;
 import org.farhan.mbt.sheepDog.Statement;
 
 public class FeatureFormatter extends Formatter {
@@ -21,8 +22,7 @@ public class FeatureFormatter extends Formatter {
 			// return new BackgroundFormatter((Background) s);
 			return null;
 		} else {
-			// return new ScenarioFormatter((Scenario) s);
-			return null;
+			return new ScenarioFormatter((Scenario) s);
 		}
 	}
 
@@ -39,16 +39,13 @@ public class FeatureFormatter extends Formatter {
 		formatTitleNoSpace(df.getRegion(theFeature, a.getNameTitleParserRuleCall_3_0()), doc);
 		formatEOL2RuleCall(df.getRegion(theFeature, a.getEOLTerminalRuleCall_4()), doc);
 		for (Statement s : theFeature.getStatements()) {
-
 			StatementFormatter formatter = new StatementFormatter(s);
 			formatter.isLast(isLastElement(s, theFeature.getStatements()));
 			formatter.format(doc, ga, df);
 		}
 		for (AbstractScenario s : theFeature.getAbstractScenarios()) {
-
 			AbstractScenarioFormatter formatter = newAbstractScenarioFormatter(s);
-			// formatter.setIndent(2);
-			// formatter.format(doc, ga, df);
+			formatter.format(doc, ga, df);
 		}
 	}
 

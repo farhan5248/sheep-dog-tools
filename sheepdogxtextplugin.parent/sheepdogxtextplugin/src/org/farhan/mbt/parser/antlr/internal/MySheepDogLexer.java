@@ -87,7 +87,7 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 			mT__26();// InternalSheepDog.g:28:7: ( ':tags:' )
 			isTag = true;
 		} else if (isTag) {
-			// TODO remove tagword definition in xtext file
+			// TODO remove isTag because TAGWORD is removed
 			mRULE_WORD();
 		} else if (isKeyword("Object:")) {
 			mT__10();// InternalSheepDog.g:12:9: 'Object:'

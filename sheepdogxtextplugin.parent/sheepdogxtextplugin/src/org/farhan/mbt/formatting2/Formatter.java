@@ -86,7 +86,7 @@ public class Formatter {
 	}
 
 	protected void formatEOL12RuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
-
+		// TODO do I even need this method?
 		if (isLast && isLastEOLDouble) {
 			formatEOL2RuleCall(iSR, doc);
 		} else {
