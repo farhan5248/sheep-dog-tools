@@ -1,4 +1,4 @@
-package org.farhan.mbt.formatting2;
+package org.farhan.mbt.formatting2.sheepDog;
 
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.ITextReplacerContext;

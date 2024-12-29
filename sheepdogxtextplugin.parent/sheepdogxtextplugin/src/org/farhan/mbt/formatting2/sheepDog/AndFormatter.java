@@ -1,41 +1,41 @@
-package org.farhan.mbt.formatting2;
+package org.farhan.mbt.formatting2.sheepDog;
 
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractParserRuleElementFinder;
 import org.farhan.mbt.services.SheepDogGrammarAccess;
-import org.farhan.mbt.services.SheepDogGrammarAccess.ThenElements;
-import org.farhan.mbt.sheepDog.Then;
+import org.farhan.mbt.services.SheepDogGrammarAccess.AndElements;
+import org.farhan.mbt.sheepDog.And;
 
-public class ThenFormatter extends StepFormatter {
+public class AndFormatter extends StepFormatter {
 
-	public ThenFormatter(Then theStep) {
+	public AndFormatter(And theStep) {
 		super(theStep);
 	}
 
 	@Override
 	protected AbstractParserRuleElementFinder getAccess(SheepDogGrammarAccess ga) {
-		return ga.getThenAccess();
+		return ga.getAndAccess();
 	}
 
 	@Override
 	protected Keyword getEqualsKeyword(AbstractParserRuleElementFinder a) {
-		return ((ThenElements) a).getEqualsSignEqualsSignEqualsSignKeyword_0();
+		return ((AndElements) a).getEqualsSignEqualsSignEqualsSignKeyword_0();
 	}
 
 	@Override
 	protected Keyword getKeyword(AbstractParserRuleElementFinder a) {
-		return ((ThenElements) a).getThenKeyword_1();
+		return ((AndElements) a).getAndKeyword_1();
 	}
 
 	@Override
 	protected RuleCall getEOLRuleCall(AbstractParserRuleElementFinder a) {
-		return ((ThenElements) a).getEOLTerminalRuleCall_3();
+		return ((AndElements) a).getEOLTerminalRuleCall_3();
 	}
 
 	@Override
 	protected RuleCall getPhraseRuleCall(AbstractParserRuleElementFinder a) {
-		return ((ThenElements) a).getNameTitleParserRuleCall_2_0();
+		return ((AndElements) a).getNameTitleParserRuleCall_2_0();
 	}
 
 }

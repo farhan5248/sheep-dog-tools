@@ -25,9 +25,11 @@ import org.farhan.mbt.sheepDog.Cell;
 import org.farhan.mbt.sheepDog.Examples;
 import org.farhan.mbt.sheepDog.Feature;
 import org.farhan.mbt.sheepDog.FeatureTags;
+import org.farhan.mbt.sheepDog.Line;
 import org.farhan.mbt.sheepDog.Row;
 import org.farhan.mbt.sheepDog.Scenario;
 import org.farhan.mbt.sheepDog.SheepDogFactory;
+import org.farhan.mbt.sheepDog.Statement;
 import org.farhan.mbt.sheepDog.Step;
 
 public class AsciiDoctorAdocWrapper implements ConvertibleObject {
@@ -63,7 +65,10 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	public void createDocString(Step step, String docString) {
 		step.setTheDocString(SheepDogFactory.eINSTANCE.createDocString());
 		for (String l : docString.split("\n")) {
-			step.getTheDocString().getLines().add(l + "\n");
+			Line line = SheepDogFactory.eINSTANCE.createLine();
+			// TODO get the EOL keyword
+			line.setName(l + "\n");
+			step.getTheDocString().getLines().add(line);
 		}
 	}
 
@@ -141,7 +146,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 			for (String srcCell : srcRow) {
 				Cell cell = SheepDogFactory.eINSTANCE.createCell();
 				srcCell = srcCell.replace("<", "{").replace(">", "}");
-				srcCell = srcCell.replace("\\|", "|");				
 				cell.setName(srcCell);
 				row.getCells().add(cell);
 			}
@@ -176,9 +180,15 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	public String getDocString(Step step) {
+		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) step.eAdapters().getFirst();
+		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
+		String keywordString = rc.getRule().getName();
+		
+		
 		String text = "";
-		for (String l : step.getTheDocString().getLines()) {
-			text += l;
+		for (Line l : step.getTheDocString().getLines()) {
+			// TODO get the EOL keyword
+			text += l.getName() + "\n";
 		}
 		return text;
 	}
@@ -294,11 +304,27 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		for (Row r : step.getTheStepTable().getRows()) {
 			row = new ArrayList<String>();
 			for (Cell c : r.getCells()) {
-				row.add(c.getName());
+				// TODO Because | can't be escaped currently, I need this hack for now.
+				// if it's just \, then treat that as \| and append it to the previous cell.
+				if (c.getName() == null) {
+					// this is a side effect of \| being treated as \ and | which leaves a null cell
+					// value so it can be ignored for now
+					continue;
+				}
+				if (c.getName().endsWith("\\")) {
+					if (row.isEmpty()) {
+						row.add(c.getName() + "|");
+					} else {
+						row.add(row.removeLast() + " " + c.getName() + "|");
+					}
+				} else {
+					row.add(c.getName());
+				}
 			}
 			stepTableRowList.add(row);
 		}
 		return stepTableRowList;
+
 	}
 
 	public boolean hasDocString(Step step) {
@@ -328,7 +354,11 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	private void setDescription(AbstractScenario abstractScenario, String scenarioDescription) {
 		if (!scenarioDescription.isEmpty()) {
 			for (String line : scenarioDescription.split("\n")) {
-				abstractScenario.getStatements().add(line + "\n");
+				Statement statement = SheepDogFactory.eINSTANCE.createStatement();
+				// TODO test what happens if there's multiple \n, don't assume there's just one.
+				// Then create the EOL like Given is created
+				statement.setName(line + "\n");
+				abstractScenario.getStatements().add(statement);
 			}
 		}
 	}
@@ -337,10 +367,10 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return convertStatementsToString(theFeature.getStatements());
 	}
 
-	private String convertStatementsToString(EList<String> eList) {
+	private String convertStatementsToString(EList<Statement> statements) {
 		String contents = "";
-		for (String s : eList) {
-			contents += s;
+		for (Statement s : statements) {
+			contents += s.getName() + "\n";
 		}
 		return contents.trim();
 	}
@@ -349,7 +379,9 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		if (!featureDescription.isEmpty()) {
 			theFeature.getStatements().clear();
 			for (String line : featureDescription.split("\n")) {
-				theFeature.getStatements().add(line + "\n");
+				Statement statement = SheepDogFactory.eINSTANCE.createStatement();
+				statement.setName(line);
+				theFeature.getStatements().add(statement);
 			}
 		}
 	}
@@ -364,10 +396,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		InputStream content = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
 		resource.load(content, Collections.EMPTY_MAP);
 		theFeature = (Feature) resource.getContents().get(0);
-	}
-
-	private String substitute(String text) {
-		return text.replace("&#8217;", "'").replace("|", "\\|");
 	}
 
 	public String toString() {
@@ -429,13 +457,5 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		}
 		tagList = tagList.replaceFirst(",", "");
 		scenario.getTags().setName(tagList);
-	}
-
-	private String listAsCsv(ArrayList<String> list) {
-		String csv = "";
-		for (String listItem : list) {
-			csv += "," + listItem;
-		}
-		return csv.replaceFirst(",", "");
 	}
 }

@@ -10,6 +10,8 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.AbstractJavaFormatter;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.farhan.mbt.formatting2.sheepDog.FeatureFormatter;
+import org.farhan.mbt.formatting2.sheepDog.StepObjectFormatter;
 import org.farhan.mbt.services.SheepDogGrammarAccess;
 import org.farhan.mbt.sheepDog.Feature;
 import org.farhan.mbt.sheepDog.StepObject;

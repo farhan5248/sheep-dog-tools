@@ -71,6 +71,8 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 		} else if (isKeyword("|===")) {
 			mT__24();// InternalSheepDog.g:27:9: '|==='
 		} else if (isKeyword("|")) {
+			// TODO need to figure out how to escape characters so that \| can be one token.
+			// Right now it can't be cause WORD can't include |. 
 			mT__28();// InternalSheepDog.g:30:9: '|'
 			isCell = true;
 		} else if (isCell) {

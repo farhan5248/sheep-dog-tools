@@ -1,48 +1,52 @@
-package org.farhan.mbt.formatting2;
+package org.farhan.mbt.formatting2.sheepDog;
 
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractParserRuleElementFinder;
+import org.farhan.mbt.formatting2.SheepDogFormatter;
 import org.farhan.mbt.services.SheepDogGrammarAccess;
-import org.farhan.mbt.services.SheepDogGrammarAccess.BackgroundElements;
-import org.farhan.mbt.sheepDog.Background;
+import org.farhan.mbt.services.SheepDogGrammarAccess.ScenarioElements;
+import org.farhan.mbt.sheepDog.Examples;
+import org.farhan.mbt.sheepDog.Scenario;
 
-public class BackgroundFormatter extends AbstractScenarioFormatter {
+public class ScenarioFormatter extends AbstractScenarioFormatter {
 
-	public BackgroundFormatter(Background theBackground) {
-		super(theBackground);
+	public ScenarioFormatter(Scenario theScenario) {
+		super(theScenario);
 	}
 
 	@Override
 	protected AbstractParserRuleElementFinder getAccess(SheepDogGrammarAccess ga) {
-		return ga.getBackgroundAccess();
+		return ga.getScenarioAccess();
 	}
 
 	@Override
 	protected void formatExamples(IFormattableDocument doc, SheepDogGrammarAccess ga, SheepDogFormatter df) {
-		// TODO Auto-generated method stub
-
+		for (Examples e : ((Scenario) theAbstractScenario).getExamples()) {
+			ExampleFormatter formatter = new ExampleFormatter(e);
+			formatter.format(doc, ga, df);
+		}
 	}
 
 	@Override
 	protected Keyword getKeyword(AbstractParserRuleElementFinder a) {
-		return ((BackgroundElements) a).getBackgroundKeyword_2();
+		return ((ScenarioElements) a).getScenarioKeyword_2();
 	}
 
 	@Override
 	protected RuleCall getEOLRuleCall(AbstractParserRuleElementFinder a) {
-		return ((BackgroundElements) a).getEOLTerminalRuleCall_4();
+		return ((ScenarioElements) a).getEOLTerminalRuleCall_4();
 	}
 
 	@Override
 	protected RuleCall getTitleRuleCall(AbstractParserRuleElementFinder a) {
-		return ((BackgroundElements) a).getNameTitleParserRuleCall_3_0();
+		return ((ScenarioElements) a).getNameTitleParserRuleCall_3_0();
 	}
 
 	@Override
 	protected Keyword getEqualsKeyword(AbstractParserRuleElementFinder a) {
-		return ((BackgroundElements) a).getEqualsSignEqualsSignKeyword_1();
+		return ((ScenarioElements) a).getEqualsSignEqualsSignKeyword_1();
 	}
 
 }

@@ -1,6 +1,7 @@
-package org.farhan.mbt.formatting2;
+package org.farhan.mbt.formatting2.sheepDog;
 
 import org.eclipse.xtext.formatting2.IFormattableDocument;
+import org.farhan.mbt.formatting2.SheepDogFormatter;
 import org.farhan.mbt.services.SheepDogGrammarAccess;
 import org.farhan.mbt.sheepDog.StepObject;
 

@@ -1,4 +1,4 @@
-package org.farhan.mbt.formatting2;
+package org.farhan.mbt.formatting2.sheepDog;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -27,7 +27,7 @@ public class Formatter {
 		this.isLastEOLDouble = isEOLDouble;
 	}
 
-	protected void setIndent(int indentCnt) {
+	public void setIndent(int indentCnt) {
 		this.indentCnt = indentCnt;
 	}
 

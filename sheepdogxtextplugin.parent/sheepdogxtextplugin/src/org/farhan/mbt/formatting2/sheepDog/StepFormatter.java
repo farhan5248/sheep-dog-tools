@@ -1,9 +1,10 @@
-package org.farhan.mbt.formatting2;
+package org.farhan.mbt.formatting2.sheepDog;
 
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractParserRuleElementFinder;
+import org.farhan.mbt.formatting2.SheepDogFormatter;
 import org.farhan.mbt.services.SheepDogGrammarAccess;
 import org.farhan.mbt.sheepDog.Step;
 
