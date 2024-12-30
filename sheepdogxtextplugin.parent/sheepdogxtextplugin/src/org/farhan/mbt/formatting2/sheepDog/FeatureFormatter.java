@@ -36,7 +36,7 @@ public class FeatureFormatter extends Formatter {
 
 		formatKeywordTrailingSpace(df.getRegion(theFeature, a.getEqualsSignKeyword_1()), doc);
 		formatKeywordTrailingSpace(df.getRegion(theFeature, a.getFeatureKeyword_2()), doc);
-		formatTitleNoSpace(df.getRegion(theFeature, a.getNameTitleParserRuleCall_3_0()), doc);
+		formatTitle(df.getRegion(theFeature, a.getNameTitleParserRuleCall_3_0()), doc);
 		formatEOL2RuleCall(df.getRegion(theFeature, a.getEOLTerminalRuleCall_4()), doc);
 		for (Statement s : theFeature.getStatements()) {
 			StatementFormatter formatter = new StatementFormatter(s);

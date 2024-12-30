@@ -58,7 +58,7 @@ Feature: Code To Document
           | tag1 |
      Then The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows
           """
-          :tags: tag1
+          :tags:tag1
           = Feature: Process
           
           Desc 1
@@ -69,12 +69,13 @@ Feature: Code To Document
           Desc 2
           
           === Given The Search application, Login page is valid
+          
           === When The Search application, Home page is created as follows
           
           [options="header"]
           |===
           | grp | ins
-          | 10 | 5
+          | 10  | 5  
           |===
           
           === Then The Search application, Logout page is created as follows
@@ -91,12 +92,13 @@ Feature: Code To Document
           Desc 3
           
           === Given The Search application, Login page is invalid
+          
           === When The Search application, Home page is created as follows
           
           [options="header"]
           |===
-          | grp | ins
-          | 8 | {ins}
+          | grp | ins  
+          | 8   | {ins}
           |===
           
           === Then The Search application, Logout page is invalid
@@ -106,7 +108,7 @@ Feature: Code To Document
           [options="header"]
           |===
           | ins
-          | 4
+          | 4  
           |===
           
           === Examples: Dataset 2
@@ -114,8 +116,8 @@ Feature: Code To Document
           [options="header"]
           |===
           | ins
-          | 5
-          | 6
+          | 5  
+          | 6  
           |===
           """
 

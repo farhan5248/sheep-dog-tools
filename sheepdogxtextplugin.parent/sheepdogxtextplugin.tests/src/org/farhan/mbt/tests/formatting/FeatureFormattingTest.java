@@ -19,6 +19,7 @@ public class FeatureFormattingTest extends FormattingTest {
 		sb.append("\n");
 		sb.append("This is the description\n");
 		sb.append("This is the second line of the description\n");
+		sb.append("\n");
 		assertNoFeatureErrors(sb);
 		return sb;
 	}

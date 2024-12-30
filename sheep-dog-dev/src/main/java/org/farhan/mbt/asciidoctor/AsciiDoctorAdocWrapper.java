@@ -15,7 +15,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.impl.RuleCallImpl;
+import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
+import org.eclipse.xtext.nodemodel.impl.HiddenLeafNode;
+import org.eclipse.xtext.nodemodel.impl.LeafNode;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.sheepDog.AbstractScenario;
@@ -64,10 +67,10 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	public void createDocString(Step step, String docString) {
 		step.setTheDocString(SheepDogFactory.eINSTANCE.createDocString());
-		for (String l : docString.split("\n")) {
+		String[] lines = docString.split("\n");
+		for (int i = 0; i < lines.length; i++) {
 			Line line = SheepDogFactory.eINSTANCE.createLine();
-			// TODO get the EOL keyword
-			line.setName(l + "\n");
+			line.setName(lines[i]);
 			step.getTheDocString().getLines().add(line);
 		}
 	}
@@ -180,15 +183,27 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	public String getDocString(Step step) {
-		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) step.eAdapters().getFirst();
-		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
-		String keywordString = rc.getRule().getName();
-		
-		
+
 		String text = "";
 		for (Line l : step.getTheDocString().getLines()) {
-			// TODO get the EOL keyword
-			text += l.getName() + "\n";
+
+			CompositeNodeWithSemanticElement cnwse = (CompositeNodeWithSemanticElement) l.eAdapters().getFirst();
+			CompositeNode cn = (CompositeNode) cnwse.getFirstChild();
+
+			// pad ws
+			if (cn.getFirstChild() instanceof HiddenLeafNode) {
+				for (int i = 0; i < cn.getFirstChild().getLength(); i++) {
+					text += " ";
+				}
+			}
+
+			text += l.getName();
+			// pad eol
+			if (cn.getFirstChild() instanceof LeafNode) {
+				for (int i = 0; i < cn.getNextSibling().getLength(); i++) {
+					text += "\n";
+				}
+			}
 		}
 		return text;
 	}
@@ -357,7 +372,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 				Statement statement = SheepDogFactory.eINSTANCE.createStatement();
 				// TODO test what happens if there's multiple \n, don't assume there's just one.
 				// Then create the EOL like Given is created
-				statement.setName(line + "\n");
+				statement.setName(line);
 				abstractScenario.getStatements().add(statement);
 			}
 		}

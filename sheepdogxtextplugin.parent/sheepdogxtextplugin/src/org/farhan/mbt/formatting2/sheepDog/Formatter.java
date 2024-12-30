@@ -4,6 +4,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
+import org.eclipse.xtext.formatting2.regionaccess.ITextSegment;
 
 public class Formatter {
 
@@ -13,7 +14,6 @@ public class Formatter {
 	// belongs to the last Row
 	protected static boolean isLast;
 	protected static boolean isFirst;
-	protected boolean isLastEOLDouble = true;
 
 	protected void isLast(boolean isLast) {
 		Formatter.isLast = isLast;
@@ -21,10 +21,6 @@ public class Formatter {
 
 	protected void isFirst(boolean isFirst) {
 		Formatter.isFirst = isFirst;
-	}
-
-	protected void isLastEOLDouble(boolean isEOLDouble) {
-		this.isLastEOLDouble = isEOLDouble;
 	}
 
 	public void setIndent(int indentCnt) {
@@ -53,7 +49,7 @@ public class Formatter {
 		return o.equals(l.get(firstIndex));
 	}
 
-	protected void replace(IFormattableDocument doc, ISemanticRegion iSR, String replacement) {
+	protected void replace(IFormattableDocument doc, ITextSegment iSR, String replacement) {
 		doc.addReplacer(new TextReplacer(doc, iSR, replacement));
 	}
 
@@ -69,15 +65,24 @@ public class Formatter {
 		replace(doc, iSR, getIndent() + iSR.getText());
 	}
 
+	protected void formatTitle(ISemanticRegion iSR, IFormattableDocument doc) {
+		doc.append(iSR, it -> it.noSpace());
+	}
+
 	protected void formatTitleNoSpace(ISemanticRegion iSR, IFormattableDocument doc) {
+		doc.prepend(iSR, it -> it.noSpace());
 		doc.append(iSR, it -> it.noSpace());
 	}
 
 	protected void formatEOL1RuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
+		doc.prepend(iSR, it -> it.noSpace());
+		doc.append(iSR, it -> it.noSpace());
 		replace(doc, iSR, "\n");
 	}
 
 	protected void formatEOL2RuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
+		doc.prepend(iSR, it -> it.noSpace());
+		doc.append(iSR, it -> it.noSpace());
 		replace(doc, iSR, "\n\n");
 	}
 
@@ -85,9 +90,13 @@ public class Formatter {
 		replace(doc, iSR, iSR.getText().replaceAll("[\n]{2,}", "\n\n"));
 	}
 
+	protected void formatEOLnRuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
+		doc.prepend(iSR, it -> it.noSpace());
+		doc.append(iSR, it -> it.noSpace());
+	}
+
 	protected void formatEOL12RuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
-		// TODO do I even need this method?
-		if (isLast && isLastEOLDouble) {
+		if (isLast) {
 			formatEOL2RuleCall(iSR, doc);
 		} else {
 			formatEOL1RuleCall(iSR, doc);

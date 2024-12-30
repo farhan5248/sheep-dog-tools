@@ -17,7 +17,7 @@ public class FeatureTagsFormatter extends Formatter {
 	public void format(IFormattableDocument doc, SheepDogGrammarAccess ga, SheepDogFormatter df) {
 		FeatureTagsElements a = ga.getFeatureTagsAccess();
 		formatKeywordNoSpace(df.getRegion(tags, a.getTagsKeyword_0()), doc);
-		formatTitleNoSpace(df.getRegion(tags, a.getNameWORDTerminalRuleCall_1_0()), doc);
+		formatTitle(df.getRegion(tags, a.getNameWORDTerminalRuleCall_1_0()), doc);
 		formatEOL1RuleCall(df.getRegion(tags, a.getEOLTerminalRuleCall_2()), doc);
 	}
 }

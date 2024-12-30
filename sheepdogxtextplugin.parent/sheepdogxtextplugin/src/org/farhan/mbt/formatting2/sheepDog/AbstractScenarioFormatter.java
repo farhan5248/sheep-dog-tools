@@ -54,7 +54,7 @@ public abstract class AbstractScenarioFormatter extends Formatter {
 
 		formatKeywordTrailingSpace(df.getRegion(theAbstractScenario, getEqualsKeyword(a)), doc);
 		formatKeywordTrailingSpace(df.getRegion(theAbstractScenario, getKeyword(a)), doc);
-		formatTitleNoSpace(df.getRegion(theAbstractScenario, getTitleRuleCall(a)), doc);
+		formatTitle(df.getRegion(theAbstractScenario, getTitleRuleCall(a)), doc);
 		formatEOL2RuleCall(df.getRegion(theAbstractScenario, getEOLRuleCall(a)), doc);
 		for (Statement s : theAbstractScenario.getStatements()) {
 			StatementFormatter formatter = new StatementFormatter(s);

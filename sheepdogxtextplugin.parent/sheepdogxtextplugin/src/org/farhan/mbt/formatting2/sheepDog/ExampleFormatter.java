@@ -24,7 +24,7 @@ public class ExampleFormatter extends Formatter {
 
 		formatKeywordTrailingSpace(df.getRegion(theExamples, a.getEqualsSignEqualsSignEqualsSignKeyword_1()), doc);
 		formatKeywordTrailingSpace(df.getRegion(theExamples, a.getExamplesKeyword_2()), doc);
-		formatTitleNoSpace(df.getRegion(theExamples, a.getNameTitleParserRuleCall_3_0()), doc);
+		formatTitle(df.getRegion(theExamples, a.getNameTitleParserRuleCall_3_0()), doc);
 		formatEOL2RuleCall(df.getRegion(theExamples, a.getEOLTerminalRuleCall_4()), doc);
 
 		for (Statement s : theExamples.getStatements()) {
