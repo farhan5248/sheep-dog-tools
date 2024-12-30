@@ -19,8 +19,8 @@ public class XtextReleaseGoal {
 
 	public static void main(String[] args) throws Exception {
 
-		String currentVersion = "1.1.0";
-		String nextVersion = "1.2.0";
+		String currentVersion;
+		String nextVersion;
 		String currentSheepDogTestVersion = "1.4";
 		String nextSheepDogTestVersion = "1.5";
 
@@ -28,8 +28,8 @@ public class XtextReleaseGoal {
 		// currentVersion = "1.1.0";
 		// nextVersion = "1.2.0";
 		// project = documentation;
-		// currentVersion = "1.1.0";
-		// nextVersion = "1.2.0";
+		// currentVersion = "1.2.0";
+		// nextVersion = "1.3.0";
 		rootDir = new File(template.replace("template", project));
 		// updateToRelease(currentVersion, currentSheepDogTestVersion);
 		// Run mvn install
