@@ -4,6 +4,12 @@
 package org.farhan.mbt.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
+import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+import org.farhan.mbt.ui.syntaxcoloring.SheepDogAntlrTokenToAttributeIdMapper;
+import org.farhan.mbt.ui.syntaxcoloring.SheepDogHighlightingConfiguration;
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
@@ -12,5 +18,17 @@ public class SheepDogUiModule extends AbstractSheepDogUiModule {
 
 	public SheepDogUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
+	}
+
+	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return SheepDogHighlightingConfiguration.class;
+	}
+
+	public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
+		return SheepDogAntlrTokenToAttributeIdMapper.class;
+	}
+
+	public Class<? extends IContextualOutputConfigurationProvider> bindIContextualOutputConfigurationProvider() {
+		return EclipseOutputConfigurationProvider.class;
 	}
 }
