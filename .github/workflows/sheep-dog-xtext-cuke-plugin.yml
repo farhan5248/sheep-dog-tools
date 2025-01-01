@@ -1,4 +1,4 @@
-name: Publish Sheep Dog Test
+name: Publish Sheep Dog Xtext Cucumber Plugin
 
 on:
   workflow_dispatch:
@@ -22,7 +22,7 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
     - name: Build with Maven
-      working-directory: ./sheep-dog-test
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      working-directory: ./sheepdogxtextcukeplugin.parent
+      run: mvn install -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
