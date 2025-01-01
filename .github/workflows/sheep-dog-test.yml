@@ -18,7 +18,7 @@ jobs:
         cache: maven
     - name: Build with Maven
       working-directory: ./sheep-dog-test
-      run: mvn clean deploy
+      run: mvn clean install
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Update dependency graph
