@@ -20,7 +20,7 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
     - name: Set up Maven
-      uses: actions/setup-maven@v3
+      uses: stCarolas/setup-maven@v5
       with:
         maven-version: '3.9.0'
     - name: Run Maven
