@@ -2,8 +2,6 @@ name: Publish Sheep Dog Xtext Plugin
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "main" ]
 
 jobs:
   build:
@@ -21,7 +19,11 @@ jobs:
         cache: maven
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
-    - name: Build with Maven
+    - name: Set up Maven
+      uses: stCarolas/setup-maven@v5
+      with:
+        maven-version: '3.9.0'
+    - name: Run Maven
       working-directory: ./sheepdogxtextplugin.parent
       run: mvn install -s $GITHUB_WORKSPACE/settings.xml
       env:
