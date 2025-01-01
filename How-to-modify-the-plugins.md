@@ -45,7 +45,7 @@ The `stripVersion` is needed to make updating the `build.properties` less tediou
 				<stripVersion>true</stripVersion>
 				<includeGroupIds>org.farhan</includeGroupIds>
 				<outputDirectory>
-					${project.basedir}/../cucumberxtexteditor/lib/</outputDirectory>
+					${project.basedir}/../${project.artifactId}/lib/</outputDirectory>
 			</configuration>
 		</execution>
 	</executions>

@@ -77,7 +77,7 @@
 							<stripVersion>true</stripVersion>
 							<includeGroupIds>org.farhan</includeGroupIds>
 							<outputDirectory>
-								${project.basedir}/../cucumberxtexteditor/lib/</outputDirectory>
+								${project.basedir}/../${project.artifactId}/lib/</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
