@@ -2,8 +2,6 @@ name: Publish Sheep Dog Dev
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "main" ]
 
 jobs:
   build:
@@ -22,6 +20,9 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
     - name: Build with Maven
+      uses: actions/setup-maven@v3
+      with:
+        maven-version: '3.9.0'
       working-directory: ./sheep-dog-dev
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       env:
