@@ -6,12 +6,12 @@ Feature: Document To Code
     Given The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
           """
           :tags: tag1
-          = Process
+          = Feature: Process
           
           Desc 1
           
           [tags="tag2"]
-          == Story One
+          == Scenario: Story One
           
           Desc 2
           
@@ -20,20 +20,20 @@ Feature: Document To Code
           
           [options="header"]
           |===
-          | grp| ins
-          | 10| 5
+          | grp | ins
+          | 10 | 5
           |===
           
           === Then The Search application, Logout page is created as follows
           
           ----
             text1
-            
+          
             text2
           ----
           
           [tags="tag3"]
-          == Story Two
+          == Scenario: Story Two
           
           Desc 3
           
@@ -42,22 +42,21 @@ Feature: Document To Code
           
           [options="header"]
           |===
-          | grp| ins
-          | 8| {ins}
+          | grp | ins
+          | 8 | {ins}
           |===
           
           === Then The Search application, Logout page is invalid
           
-          [examples="true"]
-          === Some data
+          === Examples: Some data
           
           [options="header"]
           |===
           | ins
           | 4
           |===
-          [examples="true"]
-          === Dataset 2
+          
+          === Examples: Dataset 2
           
           [options="header"]
           |===

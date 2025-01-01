@@ -1,10 +1,11 @@
+@debug
 Feature: Dependency Injection
 
   Background: Create a feature file
 
     Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
-          @tag1 @tag2
+          @tag1
           Feature: Process
           
             Scenario: Submit
@@ -43,15 +44,14 @@ Feature: Dependency Injection
           }
           """
 
-@debug
   Scenario: Guice Java file is generated
 
      When The mbt-transformer plugin, cucumber-to-uml goal is executed with
           | Tags |
-          | tag2 |
+          | tag1 |
       And The mbt-transformer plugin, uml-to-cucumber-guice goal is executed with
           | Tags |
-          | tag2 |
+          | tag1 |
      Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.blah;
