@@ -231,7 +231,36 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
+	<scm>
+		<connection>scm:git:https://github.com/farhan5248/sheep-dog-tools</connection>
+		<tag>HEAD</tag>
+	</scm>
+	
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<url>https://maven.pkg.github.com/farhan5248/sheep-dog-tools</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</distributionManagement>
+	
 	<repositories>
+		<repository>
+			<id>github</id>
+			<url>https://maven.pkg.github.com/farhan5248/sheep-dog-tools</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
 		<repository>
 			<id>codehaus-snapshots</id>
 			<name>disable dead 'Codehaus Snapshots' repository, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478</name>
