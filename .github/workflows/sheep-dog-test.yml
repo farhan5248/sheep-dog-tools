@@ -19,3 +19,5 @@ jobs:
     - name: Build with Maven
       working-directory: ./sheep-dog-test
       run: mvn clean deploy
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
