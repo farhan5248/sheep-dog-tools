@@ -6,11 +6,70 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
-    - name: Checkout LATEST
-      uses: actions/checkout@v4
-    - name: Run Sheep Dog Test
-      run: | 
-       gh workflow run "Publish Sheep Dog Test"
+    - uses: actions/checkout@v4
+
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+        settings-path: ${{ github.workspace }} # location for the settings.xml file
+
+    - name: Set up Maven
+      uses: stCarolas/setup-maven@v5
+      with:
+        maven-version: '3.9.9'
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ vars.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Run Maven sheep-dog-test
+      working-directory: ./sheep-dog-test
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Run Maven sheepdogxtextcukeplugin.parent
+      working-directory: ./sheepdogxtextcukeplugin.parent
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Run Maven sheepdogxtextplugin.parent
+      working-directory: ./sheepdogxtextplugin.parent
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Run Maven sheep-dog-dev
+      working-directory: ./sheep-dog-dev
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Run Maven sheep-dog-dev-maven-plugin
+      working-directory: ./sheep-dog-dev-maven-plugin
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Run Maven sheep-dog-dev-svc
+      working-directory: ./sheep-dog-dev-svc
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Run Maven sheep-dog-dev-svc-maven-plugin
+      working-directory: ./sheep-dog-dev-svc-maven-plugin
+      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
