@@ -11,6 +11,6 @@ jobs:
       uses: actions/checkout@v4
     - name: Run Sheep Dog Test
       run: | 
-       gh workflow run "Publish Sheep Dog Test 1"
+       gh workflow run "Publish Sheep Dog Test"
       env:
         GITHUB_TOKEN: ${{ github.token }}
