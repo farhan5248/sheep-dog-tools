@@ -205,7 +205,7 @@
 						<image>
 							<build>
 								<contextDir>${project.basedir}</contextDir>
-								<dockerFile>docker\springboot.dockerfile</dockerFile>
+								<dockerFile>docker/springboot.dockerfile</dockerFile>
 							</build>
 							<alias>${project.artifactId}</alias>
 							<name>farhan5248/${project.artifactId}</name>
