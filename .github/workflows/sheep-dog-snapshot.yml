@@ -1,4 +1,4 @@
-name: Sheep Dog Stack Snapshot Build
+name: Publish Sheep Dog Snapshot
 
 on:
   workflow_dispatch:
@@ -6,8 +6,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
+    - uses: actions/checkout@v4
     - uses: ./sheep-dog-test
