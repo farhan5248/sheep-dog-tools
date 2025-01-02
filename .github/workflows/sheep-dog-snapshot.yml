@@ -7,5 +7,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout LATEST
     - uses: actions/checkout@v4
-    - uses: ./.github/workflows/sheep-dog-test
+    - name: Run Sheep Dog Test
+      run: | 
+       gh workflow run sheep-dog-test
