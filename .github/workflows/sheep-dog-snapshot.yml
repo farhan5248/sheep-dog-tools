@@ -12,3 +12,5 @@ jobs:
     - name: Run Sheep Dog Test
       run: | 
        gh workflow run sheep-dog-test
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
