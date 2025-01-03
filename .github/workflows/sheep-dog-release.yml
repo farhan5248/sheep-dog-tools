@@ -7,15 +7,31 @@ on:
 jobs:
   sheep-dog-test:
     uses: ./.github/workflows/sheep-dog-test.yml
+    with:
+      permissions:
+        contents: read
+        packages: write
 
   sheep-dog-xtext-plugin:
     needs: [sheep-dog-test]
     uses: ./.github/workflows/sheep-dog-xtext-plugin.yml
+    with:
+      permissions:
+        contents: read
+        packages: write
 
   sheep-dog-xtext-cuke-plugin:
     needs: [sheep-dog-test]
     uses: ./.github/workflows/sheep-dog-xtext-cuke-plugin.yml
-    
+    with:
+      permissions:
+        contents: read
+        packages: write
+
   sheep-dog-dev:
     needs: [sheep-dog-xtext-plugin, sheep-dog-xtext-cuke-plugin]
     uses: ./.github/workflows/sheep-dog-dev.yml
+    with:
+      permissions:
+        contents: read
+        packages: write
