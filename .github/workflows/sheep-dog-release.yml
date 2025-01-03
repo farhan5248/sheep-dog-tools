@@ -2,8 +2,6 @@ name: Publish Sheep Dog Release
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "main" ]
 
 jobs:
   sheep-dog-test:
