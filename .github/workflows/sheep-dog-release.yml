@@ -46,6 +46,7 @@ jobs:
       contents: read
       packages: write
     uses: ./.github/workflows/sheep-dog-dev-svc.yml
+    secrets: inherit
 
   sheep-dog-dev-svc-maven-plugin:
     needs: [sheep-dog-dev-svc]
