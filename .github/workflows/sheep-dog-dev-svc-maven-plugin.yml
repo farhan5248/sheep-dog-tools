@@ -2,11 +2,6 @@ name: Publish Sheep Dog Dev Service Maven Plugin
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: [Publish Sheep Dog Dev Service]
-    branches: [main]
-    types:
-      - success
 jobs:
   build:
     runs-on: ubuntu-latest

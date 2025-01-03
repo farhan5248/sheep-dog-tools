@@ -2,9 +2,6 @@ name: Publish Sheep Dog Test
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "main" ]
-
 jobs:
   build:
     runs-on: ubuntu-latest

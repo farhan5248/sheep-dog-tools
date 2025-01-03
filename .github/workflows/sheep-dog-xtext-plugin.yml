@@ -2,11 +2,6 @@ name: Publish Sheep Dog Xtext Plugin
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: [Publish Sheep Dog Test]
-    branches: [main]
-    types:
-      - success
 jobs:
   build:
     runs-on: ubuntu-latest

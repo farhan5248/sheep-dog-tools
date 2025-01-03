@@ -1,0 +1,22 @@
+name: Publish Sheep Dog Snapshot
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+jobs:
+  sheep-dog-test:
+    uses: ./.github/workflows/sheep-dog-test.yml@main
+
+  sheep-dog-xtext-plugin:
+    needs: [sheep-dog-test]
+    uses: ./.github/workflows/sheep-dog-xtext-plugin.yml@main
+
+  sheep-dog-xtext-cuke-plugin:
+    needs: [sheep-dog-test]
+    uses: ./.github/workflows/sheep-dog-xtext-cuke-plugin.yml@main
+    
+  sheep-dog-xtext-cuke-plugin:
+    needs: [sheep-dog-xtext-plugin, sheep-dog-xtext-cuke-plugin]
+    uses: ./.github/workflows/sheep-dog-dev.yml@main
+    
