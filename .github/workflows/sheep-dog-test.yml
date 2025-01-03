@@ -2,6 +2,7 @@ name: Publish Sheep Dog Test
 
 on:
   workflow_dispatch:
+  workflow_call:
 jobs:
   build:
     runs-on: ubuntu-latest

@@ -2,6 +2,7 @@ name: Publish Sheep Dog Xtext Plugin
 
 on:
   workflow_dispatch:
+  workflow_call:
 jobs:
   build:
     runs-on: ubuntu-latest
