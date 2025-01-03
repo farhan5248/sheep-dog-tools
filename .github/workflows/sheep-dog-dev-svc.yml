@@ -2,7 +2,11 @@ name: Publish Sheep Dog Dev Service
 
 on:
   workflow_dispatch:
-
+  workflow_run:
+    workflows: [Publish Sheep Dog Dev]
+    branches: [main]
+    types:
+      - success
 jobs:
   build:
     runs-on: ubuntu-latest
