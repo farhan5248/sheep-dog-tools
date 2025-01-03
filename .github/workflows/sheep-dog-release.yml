@@ -6,17 +6,16 @@ on:
     branches: [ "main" ]
 jobs:
   sheep-dog-test:
-    uses: ./.github/workflows/sheep-dog-test.yml@main
+    uses: ./.github/workflows/sheep-dog-test.yml
 
   sheep-dog-xtext-plugin:
     needs: [sheep-dog-test]
-    uses: ./.github/workflows/sheep-dog-xtext-plugin.yml@main
+    uses: ./.github/workflows/sheep-dog-xtext-plugin.yml
 
   sheep-dog-xtext-cuke-plugin:
     needs: [sheep-dog-test]
-    uses: ./.github/workflows/sheep-dog-xtext-cuke-plugin.yml@main
+    uses: ./.github/workflows/sheep-dog-xtext-cuke-plugin.yml
     
-  sheep-dog-xtext-cuke-plugin:
+  sheep-dog-dev:
     needs: [sheep-dog-xtext-plugin, sheep-dog-xtext-cuke-plugin]
-    uses: ./.github/workflows/sheep-dog-dev.yml@main
-    
+    uses: ./.github/workflows/sheep-dog-dev.yml
