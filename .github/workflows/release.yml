@@ -24,8 +24,10 @@ jobs:
       with:
         maven-version: '3.9.9'
     - name: Run Maven
-      working-directory: ./sheep-dog-mgmt-maven-plugin
+      working-directory: ./sheep-dog-mgmt-maven-plugin # TODO needs to be a parameter
       run: |
        mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=false -DallowDowngrade=true -s $GITHUB_WORKSPACE/settings.xml
+       mvn org.farhan:sheep-dog-mgmt-maven-plugin:1.5:prepare -DpreparationGoals=clean,deploy -s $GITHUB_WORKSPACE/settings.xml # TODO needs to be an if statement
+       mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
