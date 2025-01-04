@@ -28,6 +28,10 @@ public class PrepareMojo extends AbstractMojo {
 	@Parameter(property = "preparationGoals", defaultValue = "deploy")
 	public String preparationGoals;
 
+	// TODO this is ugly, perhaps I should split this into two goals so that I don't need to pass the Github stuff this way
+	@Parameter(property = "settings", defaultValue = "")
+	public String settings;
+
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		try {
@@ -66,7 +70,15 @@ public class PrepareMojo extends AbstractMojo {
 
 	private void mvnPhase(String preparationGoals) throws Exception {
 		String[] goals = preparationGoals.split(",");
-		String[] mvnCommand = new String[goals.length + 1];
+		String[] mvnCommand;
+		
+		if (settings.isEmpty()) {
+			mvnCommand = new String[goals.length + 1];
+		} else {
+			mvnCommand = new String[goals.length + 3];
+			mvnCommand[goals.length + 1] = "-s";
+			mvnCommand[goals.length + 2] = settings;
+		}
 		mvnCommand[0] = "mvn";
 		for (int i = 0; i < goals.length; i++) {
 			mvnCommand[i + 1] = goals[i];
