@@ -2,6 +2,14 @@ name: Release
 
 on:
   workflow_dispatch:
+    inputs:
+      choice:
+        description: 'Release plugin organisation'
+        required: true
+        type: choice
+        options:
+          - Maven
+          - Sheep
   workflow_call:
 jobs:
   build:
