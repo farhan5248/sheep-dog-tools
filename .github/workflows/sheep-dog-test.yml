@@ -26,7 +26,7 @@ jobs:
     - name: Run Maven
       working-directory: ./sheep-dog-test
       run: |
-        echo "##[set-output name=MAVEN_OPTS] -s $GITHUB_WORKSPACE/settings.xml"
+        export MAVEN_OPTS="-s $GITHUB_WORKSPACE/settings.xml"
         mvn deploy
       env:
         GITHUB_TOKEN: ${{ github.token }}
