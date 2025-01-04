@@ -31,6 +31,10 @@ jobs:
       uses: stCarolas/setup-maven@v5
       with:
         maven-version: '3.9.9'
+    - name: Configure Git User
+      run: |
+        git config --local user.name "${{ secrets.ACTIONS_BOT_NAME }}"
+        git config --local user.email "${{ secrets.ACTIONS_BOT_EMAIL }}"
     - name: Run Maven
       working-directory: ./sheepdogxtextplugin.parent
       run: |
