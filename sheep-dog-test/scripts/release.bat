@@ -5,6 +5,5 @@ call mvn -B release:prepare -DcheckModificationExcludeList=pom.xml -Dpreparation
 call mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true
 call git add pom.xml
 call git commit -m "Upgrading dependency versions"
-call mvn clean install -DskipTests
-call mvn clean
+call mvn deploy
 cd scripts 
