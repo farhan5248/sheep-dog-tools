@@ -9,18 +9,18 @@
 	</parent>
 	<groupId>org.farhan</groupId>
 	<artifactId>sheep-dog-dev-svc</artifactId>
-	<version>1.6-SNAPSHOT</version>
+	<version>1.6</version>
 	<name>Lean Sheep Dog Tools for Developers Service</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>21</java.version>
-		<sheep-dog-dev.version>1.25-SNAPSHOT</sheep-dog-dev.version>
+		<sheep-dog-dev.version>1.25</sheep-dog-dev.version>
 	</properties>
 
 	<scm>
 		<connection>scm:git:https://github.com/farhan5248/sheep-dog-tools</connection>
-		<tag>sheep-dog-dev-svc-1.0</tag>
+		<tag>sheep-dog-dev-svc-1.6</tag>
 	</scm>
 
 	<repositories>
