@@ -42,7 +42,7 @@ jobs:
         mvn -B release:prepare -DcheckModificationExcludeList=pom.xml -DpreparationGoals=deploy -s $GITHUB_WORKSPACE/settings.xml
         mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true -s $GITHUB_WORKSPACE/settings.xml
         mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-        if [[ `git status --porcelain` ]]; then
+        if [[ $(git status --porcelain | wc -l) -gt 0 ]]; then
           git add pom.xml
           git commit -m "Upgrading dependency versions"
           git push
