@@ -38,9 +38,9 @@ jobs:
     - name: Run Maven
       working-directory: ./sheep-dog-mgmt-maven-plugin
       run: |
-        mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=false -DallowDowngrade=true -s $GITHUB_WORKSPACE/settings.xml
+        mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=false -DallowDowngrade=true
         mvn -B release:prepare -DcheckModificationExcludeList=pom.xml -DpreparationGoals=deploy -s $GITHUB_WORKSPACE/settings.xml
-        mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true -s $GITHUB_WORKSPACE/settings.xml
+        mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true
         mvn deploy -s $GITHUB_WORKSPACE/settings.xml
         if [[ $(git status --porcelain --untracked-files=no | wc -l) -gt 0 ]]; then
           git add pom.xml
