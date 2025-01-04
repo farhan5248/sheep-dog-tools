@@ -36,10 +36,14 @@ jobs:
         git config --local user.name "${{ secrets.ACTIONS_BOT_NAME }}"
         git config --local user.email "${{ secrets.ACTIONS_BOT_EMAIL }}"
     - name: Run Maven
-      working-directory: ./sheepdogxtextplugin.parent
+      working-directory: ./sheep-dog-mgmt-maven-plugin
       run: |
        mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=false -DallowDowngrade=true -s $GITHUB_WORKSPACE/settings.xml
-       mvn org.farhan:sheep-dog-mgmt-maven-plugin:1.6-SNAPSHOT:prepare -DpreparationGoals=clean,deploy -Dsettings=$GITHUB_WORKSPACE/settings.xml
+       mvn -B release:prepare -DcheckModificationExcludeList=pom.xml -DpreparationGoals=deploy -s $GITHUB_WORKSPACE/settings.xml
        mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true -s $GITHUB_WORKSPACE/settings.xml
+       mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+       git add pom.xml
+       git commit -m "Upgrading dependency versions"
+       git push
       env:
         GITHUB_TOKEN: ${{ github.token }}
