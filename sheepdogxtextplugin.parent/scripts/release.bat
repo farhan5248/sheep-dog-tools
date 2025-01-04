@@ -8,5 +8,4 @@ call mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapsh
 call git add pom.xml
 call git commit -m "Upgrading dependency versions"
 call mvn install -DskipTests
-call mvn clean
 cd scripts 
