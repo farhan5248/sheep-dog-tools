@@ -32,11 +32,10 @@ jobs:
       with:
         maven-version: '3.9.9'
     - name: Run Maven
-      working-directory: ./sheepdogxtextplugin.parent # TODO needs to be a parameter
+      working-directory: ./sheepdogxtextplugin.parent
       run: |
        mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=false -DallowDowngrade=true -s $GITHUB_WORKSPACE/settings.xml
-       mvn org.farhan:sheep-dog-mgmt-maven-plugin:1.5:prepare -DpreparationGoals=clean,deploy -s $GITHUB_WORKSPACE/settings.xml # TODO needs to be an if statement
+       mvn org.farhan:sheep-dog-mgmt-maven-plugin:1.6-SNAPSHOT:prepare -DpreparationGoals=clean,deploy -s $GITHUB_WORKSPACE/settings.xml
        mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true -s $GITHUB_WORKSPACE/settings.xml
-       # need git add, commit, push
       env:
         GITHUB_TOKEN: ${{ github.token }}

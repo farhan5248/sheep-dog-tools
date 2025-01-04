@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import org.apache.maven.plugin.AbstractMojo;
@@ -115,10 +114,16 @@ public class PrepareMojo extends AbstractMojo {
 	}
 
 	protected void gitCommit(String message) throws Exception {
-		String[] addCommand = { "git", "add", "*" };
-		runCommand(addCommand);
-		String[] commitCommand = { "git", "commit", "-m", message };
-		runCommand(commitCommand);
+		try {
+			String[] addCommand = { "git", "add", "*" };
+			runCommand(addCommand);
+			String[] commitCommand = { "git", "commit", "-m", message };
+			runCommand(commitCommand);
+		} catch (Exception e) {
+			String[] addCommand = { "git", "status" };
+			runCommand(addCommand);
+			throw new Exception(e);
+		}
 	}
 
 	protected void gitTag(String tag) throws Exception {
@@ -135,6 +140,10 @@ public class PrepareMojo extends AbstractMojo {
 			getLog().info(line);
 		}
 		if (process.waitFor() != 0) {
+			reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+			while ((line = reader.readLine()) != null) {
+				getLog().error(line);
+			}
 			throw new Exception("Command line execution failed");
 		}
 	}
