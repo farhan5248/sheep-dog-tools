@@ -65,7 +65,7 @@ jobs:
         mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true
         mvn deploy
         if [[ $(git status --porcelain --untracked-files=no | wc -l) -gt 0 ]]; then
-          git add *.xml
+          git add *
           git commit -m "Upgrading dependency versions"
         fi
         git push
