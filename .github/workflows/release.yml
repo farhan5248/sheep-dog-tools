@@ -47,15 +47,21 @@ jobs:
       run: |
         git config --local user.name "${{ secrets.ACTIONS_BOT_NAME }}"
         git config --local user.email "${{ secrets.ACTIONS_BOT_EMAIL }}"
-    - name: Run Maven
+    - name: Update to Release versions
       working-directory: ./${{ inputs.project }}
       run: |
         mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=false -DallowDowngrade=true
-        if [ ${{ inputs.project }} == Maven ]; then
+    - name: Run Maven Release
+      working-directory: ./${{ inputs.project }}
+      run: |
+        if [ ${{ inputs.plugin }} == Maven ]; then
           mvn -B release:prepare -DcheckModificationExcludeList=pom.xml -DpreparationGoals=deploy -s $GITHUB_WORKSPACE/settings.xml
         else
-          mvn org.farhan:sheep-dog-mgmt-maven-plugin:1.13-SNAPSHOT:prepare -DpreparationGoals=deploy -s $GITHUB_WORKSPACE/settings.xml
+          mvn org.farhan:sheep-dog-mgmt-maven-plugin:1.14-SNAPSHOT:prepare -DpreparationGoals=deploy -s $GITHUB_WORKSPACE/settings.xml
         fi
+    - name: Update to SNAPSHOT versions
+      working-directory: ./${{ inputs.project }}
+      run: |
         mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true
         mvn deploy -s $GITHUB_WORKSPACE/settings.xml
         if [[ $(git status --porcelain --untracked-files=no | wc -l) -gt 0 ]]; then
