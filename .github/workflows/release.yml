@@ -13,8 +13,8 @@ on:
           - sheep-dog-dev-svc
           - sheep-dog-dev-svc-maven-plugin
           - sheep-dog-test
-          - sheep-dog-xtext-cuke-plugin
-          - sheep-dog-xtext-plugin
+          - sheepdogxtextcukeplugin.parent
+          - sheepdogxtextplugin.parent
       plugin:
         description: 'Release plugin organisation'
         required: true
