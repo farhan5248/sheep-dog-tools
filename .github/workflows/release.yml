@@ -3,14 +3,25 @@ name: Release
 on:
   workflow_dispatch:
     inputs:
-      choice:
+      project:
+        description: 'Project'
+        required: true
+        type: choice
+        options:
+          - sheep-dog-dev
+          - sheep-dog-dev-maven-plugin
+          - sheep-dog-dev-dev-svc
+          - sheep-dog-dev-dev-svc-maven-plugin
+          - sheep-dog-dev-test
+          - sheep-dog-dev-xtext-cuke-plugin
+          - sheep-dog-dev-xtext-plugin
+      plugin:
         description: 'Release plugin organisation'
         required: true
         type: choice
         options:
           - Maven
           - Sheep
-  workflow_call:
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -36,7 +47,7 @@ jobs:
         git config --local user.name "${{ secrets.ACTIONS_BOT_NAME }}"
         git config --local user.email "${{ secrets.ACTIONS_BOT_EMAIL }}"
     - name: Run Maven
-      working-directory: ./sheep-dog-mgmt-maven-plugin
+      working-directory: ./${{ inputs.project }}
       run: |
         mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=false -DallowDowngrade=true
         mvn -B release:prepare -DcheckModificationExcludeList=pom.xml -DpreparationGoals=deploy -s $GITHUB_WORKSPACE/settings.xml
