@@ -55,7 +55,7 @@ jobs:
         if [ ${{ inputs.plugin }} == Maven ]; then
           mvn -B release:prepare -DcheckModificationExcludeList=pom.xml -DpreparationGoals=deploy
         else
-          mvn org.farhan:sheep-dog-mgmt-maven-plugin:1.14-SNAPSHOT:prepare -DpreparationGoals=deploy
+          mvn org.farhan:sheep-dog-mgmt-maven-plugin:1.13:prepare -DpreparationGoals=deploy
         fi
       env:
         GITHUB_TOKEN: ${{ github.token }}
@@ -65,7 +65,7 @@ jobs:
         mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true
         mvn deploy
         if [[ $(git status --porcelain --untracked-files=no | wc -l) -gt 0 ]]; then
-          git add pom.xml
+          git add *.xml
           git commit -m "Upgrading dependency versions"
         fi
         git push

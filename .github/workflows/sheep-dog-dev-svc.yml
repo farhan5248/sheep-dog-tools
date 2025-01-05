@@ -17,8 +17,6 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
-        server-id: github
-        settings-path: ${{ github.workspace }}
     - name: Set up Maven
       uses: stCarolas/setup-maven@v5
       with:
@@ -30,6 +28,6 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Run Maven
       working-directory: ./sheep-dog-dev-svc
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+      run: mvn deploy
       env:
         GITHUB_TOKEN: ${{ github.token }}

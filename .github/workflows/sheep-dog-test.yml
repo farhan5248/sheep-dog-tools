@@ -17,8 +17,6 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
-        server-id: github
-        settings-path: ${{ github.workspace }}
     - name: Set up Maven
       uses: stCarolas/setup-maven@v5
       with:
@@ -26,6 +24,6 @@ jobs:
     - name: Run Maven
       working-directory: ./sheep-dog-test
       run: |
-        mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        mvn deploy
       env:
         GITHUB_TOKEN: ${{ github.token }}
