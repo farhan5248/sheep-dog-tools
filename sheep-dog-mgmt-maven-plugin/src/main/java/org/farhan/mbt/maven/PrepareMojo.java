@@ -67,7 +67,11 @@ public class PrepareMojo extends AbstractMojo {
 	private void mvnPhase(String preparationGoals) throws Exception {
 		String[] goals = preparationGoals.split(",");
 		String[] mvnCommand = new String[goals.length + 1];
-		mvnCommand[0] = "mvn";
+        if (System.getProperty("os.name").toLowerCase().contains("win")) {
+    		mvnCommand[0] = "mvn.cmd";
+        } else {
+    		mvnCommand[0] = "mvn";
+        }
 		for (int i = 0; i < goals.length; i++) {
 			mvnCommand[i + 1] = goals[i];
 		}
