@@ -28,10 +28,6 @@ public class PrepareMojo extends AbstractMojo {
 	@Parameter(property = "preparationGoals", defaultValue = "deploy")
 	public String preparationGoals;
 
-	// TODO this is ugly, perhaps I should split this into two goals so that I don't need to pass the Github stuff this way
-	@Parameter(property = "settings", defaultValue = "")
-	public String settings;
-
 	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		try {
