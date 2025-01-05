@@ -70,15 +70,7 @@ public class PrepareMojo extends AbstractMojo {
 
 	private void mvnPhase(String preparationGoals) throws Exception {
 		String[] goals = preparationGoals.split(",");
-		String[] mvnCommand;
-		
-		if (settings.isEmpty()) {
-			mvnCommand = new String[goals.length + 1];
-		} else {
-			mvnCommand = new String[goals.length + 3];
-			mvnCommand[goals.length + 1] = "-s";
-			mvnCommand[goals.length + 2] = settings;
-		}
+		String[] mvnCommand = new String[goals.length + 1];
 		mvnCommand[0] = "mvn";
 		for (int i = 0; i < goals.length; i++) {
 			mvnCommand[i + 1] = goals[i];
