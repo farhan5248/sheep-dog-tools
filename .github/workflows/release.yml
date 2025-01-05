@@ -10,11 +10,11 @@ on:
         options:
           - sheep-dog-dev
           - sheep-dog-dev-maven-plugin
-          - sheep-dog-dev-dev-svc
-          - sheep-dog-dev-dev-svc-maven-plugin
-          - sheep-dog-dev-test
-          - sheep-dog-dev-xtext-cuke-plugin
-          - sheep-dog-dev-xtext-plugin
+          - sheep-dog-dev-svc
+          - sheep-dog-dev-svc-maven-plugin
+          - sheep-dog-test
+          - sheep-dog-xtext-cuke-plugin
+          - sheep-dog-xtext-plugin
       plugin:
         description: 'Release plugin organisation'
         required: true
