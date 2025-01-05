@@ -37,8 +37,6 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
-        server-id: github
-        settings-path: ${{ github.workspace }}
     - name: Set up Maven
       uses: stCarolas/setup-maven@v5
       with:
@@ -55,9 +53,9 @@ jobs:
       working-directory: ./${{ inputs.project }}
       run: |
         if [ ${{ inputs.plugin }} == Maven ]; then
-          mvn -B release:prepare -DcheckModificationExcludeList=pom.xml -DpreparationGoals=deploy -s $GITHUB_WORKSPACE/settings.xml
+          mvn -B release:prepare -DcheckModificationExcludeList=pom.xml -DpreparationGoals=deploy
         else
-          mvn org.farhan:sheep-dog-mgmt-maven-plugin:1.14-SNAPSHOT:prepare -DpreparationGoals=deploy -s $GITHUB_WORKSPACE/settings.xml
+          mvn org.farhan:sheep-dog-mgmt-maven-plugin:1.14-SNAPSHOT:prepare -DpreparationGoals=deploy
         fi
       env:
         GITHUB_TOKEN: ${{ github.token }}
@@ -65,7 +63,7 @@ jobs:
       working-directory: ./${{ inputs.project }}
       run: |
         mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true
-        mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+        mvn deploy
         if [[ $(git status --porcelain --untracked-files=no | wc -l) -gt 0 ]]; then
           git add pom.xml
           git commit -m "Upgrading dependency versions"
