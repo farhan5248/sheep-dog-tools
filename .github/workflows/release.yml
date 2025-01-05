@@ -53,7 +53,7 @@ jobs:
         if [ ${{ inputs.project }} == Maven ]; then
           mvn -B release:prepare -DcheckModificationExcludeList=pom.xml -DpreparationGoals=deploy -s $GITHUB_WORKSPACE/settings.xml
         else
-          mvn org.farhan:sheep-dog-mgmt-maven-plugin:1.6-SNAPSHOT:prepare -DpreparationGoals=deploy -Dsettings=$GITHUB_WORKSPACE/settings.xml
+          mvn org.farhan:sheep-dog-mgmt-maven-plugin:1.13-SNAPSHOT:prepare -DpreparationGoals=deploy -Dsettings=$GITHUB_WORKSPACE/settings.xml
         fi
         mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true
         mvn deploy -s $GITHUB_WORKSPACE/settings.xml
