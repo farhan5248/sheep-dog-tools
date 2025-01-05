@@ -59,6 +59,8 @@ jobs:
         else
           mvn org.farhan:sheep-dog-mgmt-maven-plugin:1.14-SNAPSHOT:prepare -DpreparationGoals=deploy -s $GITHUB_WORKSPACE/settings.xml
         fi
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
     - name: Update to SNAPSHOT versions
       working-directory: ./${{ inputs.project }}
       run: |
