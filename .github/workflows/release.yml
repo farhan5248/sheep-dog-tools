@@ -41,33 +41,32 @@ jobs:
       uses: stCarolas/setup-maven@v5
       with:
         maven-version: '3.9.9'
-    - name: Configure Git User
+    - name: Set up Git
       run: |
         git config --local user.name "${{ secrets.ACTIONS_BOT_NAME }}"
         git config --local user.email "${{ secrets.ACTIONS_BOT_EMAIL }}"
-    - name: Update to Release versions
+    - name: Publish Release version
       working-directory: ./${{ inputs.project }}
       run: |
         mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=false -DallowDowngrade=true
-    - name: Run Maven Release
-      working-directory: ./${{ inputs.project }}
       run: |
         if [ ${{ inputs.plugin }} == Maven ]; then
           mvn -B release:prepare -DcheckModificationExcludeList=pom.xml -DpreparationGoals=deploy
         else
           mvn org.farhan:sheep-dog-mgmt-maven-plugin:1.14:prepare -DpreparationGoals=deploy
         fi
+      git push
       env:
         GITHUB_TOKEN: ${{ github.token }}
-    - name: Update to SNAPSHOT versions
+    - name: Publish SNAPSHOT version
       working-directory: ./${{ inputs.project }}
       run: |
         mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true
-        mvn deploy
         if [[ $(git status --porcelain --untracked-files=no | wc -l) -gt 0 ]]; then
           git add *
           git commit -m "Upgrading dependency versions"
+          git push
         fi
-        git push
+        mvn deploy -DskipTests
       env:
         GITHUB_TOKEN: ${{ github.token }}
