@@ -21,3 +21,4 @@ release.properties
 **/*.lnk
 **/*.idea
 *.env
+/lean-sheep-dog-tools.theia-workspace
