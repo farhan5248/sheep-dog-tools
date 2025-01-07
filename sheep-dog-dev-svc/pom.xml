@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -16,6 +18,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>21</java.version>
 		<sheep-dog-dev.version>1.26-SNAPSHOT</sheep-dog-dev.version>
+		<docker.registry.github>ghcr.io</docker.registry.github>
+		<docker.registry.dockerhub>docker.io</docker.registry.dockerhub>
 	</properties>
 
 	<scm>
@@ -207,8 +211,18 @@
 								<contextDir>${project.basedir}</contextDir>
 								<dockerFile>docker/springboot.dockerfile</dockerFile>
 							</build>
-							<alias>${project.artifactId}</alias>
-							<name>farhan5248/${project.artifactId}</name>
+							<alias>${docker.registry.dockerhub}/${project.artifactId}</alias>
+							<name>${docker.registry.dockerhub}/farhan5248/${project.artifactId}</name>
+							<registry>${docker.registry.dockerhub}</registry>
+						</image>
+						<image>
+							<build>
+								<contextDir>${project.basedir}</contextDir>
+								<dockerFile>docker/springboot.dockerfile</dockerFile>
+							</build>
+							<alias>${docker.registry.github}/${project.artifactId}</alias>
+							<name>${docker.registry.github}/farhan5248/${project.artifactId}</name>
+							<registry>${docker.registry.github}</registry>
 						</image>
 					</images>
 				</configuration>
