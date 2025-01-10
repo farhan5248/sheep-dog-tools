@@ -67,14 +67,14 @@ apt-get install sudo
 apt-get install -y curl
 
 useradd -m -s /bin/bash -G sudo actions-runner
-passwd actions-runner                         
+echo "actions-runner:actions-runner" | chpasswd
 sudo su - actions-runner
 
 mkdir actions-runner && cd actions-runner
 curl -o actions-runner-linux-x64-2.321.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.321.0/actions-runner-linux-x64-2.321.0.tar.gz
 tar xzf ./actions-runner-linux-x64-2.321.0.tar.gz
 sudo ./bin/installdependencies.sh
-./config.sh --url https://github.com/farhan5248/sheep-dog-tools --token <github-token> --labels "farhan5248-ubuntu"
+#./config.sh --url https://github.com/farhan5248/sheep-dog-tools --token <github-token> --labels "farhan5248-ubuntu"
 #./run.sh &
 
 docker commit ubuntu-runner farhan5248/ubuntu-runner:latest
@@ -83,3 +83,10 @@ docker push farhan5248/ubuntu-runner:latest
 docker container run --name="ubuntu-runner" --rm -d -t farhan5248/ubuntu-runner:latest /bin/bash
 sudo su - actions-runner
 ./actions-runner/run.sh
+
+
+docker image build --pull --rm -f "ubuntu-runner.dockerfile" -t farhan5248/ubuntu-runner .
+docker container run --name="ubuntu-runner-1" -e GITHUB_TOKEN="AILOBAUDOMNHNNHWS6BEKTLHQAY5W" -d -t farhan5248/ubuntu-runner:latest
+docker container exec -it ubuntu-runner-1 /bin/bash 
+docker container run --name="ubuntu-runner-2" -e GITHUB_TOKEN="AILOBATCIJT2RORYLM5MZPDHQF2ZU" -d -t farhan5248/ubuntu-runner:latest
+docker container exec -it ubuntu-runner-2 /bin/bash 
