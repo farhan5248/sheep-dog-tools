@@ -86,7 +86,5 @@ sudo su - actions-runner
 
 
 docker image build --pull --rm -f "ubuntu-runner.dockerfile" -t farhan5248/ubuntu-runner .
-docker container run --name="ubuntu-runner-1" -e GITHUB_TOKEN="AILOBAUDOMNHNNHWS6BEKTLHQAY5W" -d -t farhan5248/ubuntu-runner:latest
+docker container run --name="ubuntu-runner-1" -e GITHUB_TOKEN="" -d -t farhan5248/ubuntu-runner:latest
 docker container exec -it ubuntu-runner-1 /bin/bash 
-docker container run --name="ubuntu-runner-2" -e GITHUB_TOKEN="AILOBATCIJT2RORYLM5MZPDHQF2ZU" -d -t farhan5248/ubuntu-runner:latest
-docker container exec -it ubuntu-runner-2 /bin/bash 
