@@ -1,90 +1,60 @@
-publish ports				-p/--publish
-set os variables			-e/--env
-delete after running		--rm
-start in background			-d/--detach
-allocate Interactive TTY	-ti
-volume mount				-v
-all containers				-a
-stop after					-t
-
-
-docker container create --name="sheep-dog-svc-lcl" --hostname="mbt.sheepdog.org" -v "C:\Users\Farhan\git\lean-sheep-dog-tools\sheep-dog-svc\target:/target" --rm -p 8080:8080 farhan5248/sheep-dog-svc:latest
-docker container run --name="sheep-dog-svc-lcl" --hostname="mbt.sheepdog.org" -v "C:\Users\Farhan\git\lean-sheep-dog-tools\sheep-dog-svc\target:/target" --rm -d -p 8080:8080 farhan5248/sheep-dog-svc:latest
-docker container ls -a
-docker container pause
-docker container unpause
-docker container stop -t 25 sheep-dog-svc-lcl
-docker container kill
-docker container start --restart=on-failure:2 farhan5248/sheep-dog-svc:latest
-
-
+# Vanilla Ubuntu
+docker container run --rm ubuntu:latest /bin/bash -c "/bin/cat /etc/passwd | wc -l"
 docker container run --rm -ti ubuntu:latest /bin/bash
-docker container run --rm -d -t ubuntu:latest /bin/bash
-docker container run --rm ubuntu:22.04 /bin/bash -c "/bin/cat /etc/passwd | wc -l"
-docker container exec -it sheep-dog-svc-lcl /bin/sh
-docker container run --rm -d --name nginx-test --rm nginx:latest
-docker container logs nginx-test
+docker container run --name local-ubuntu -d ubuntu:latest
+docker container exec -it local-ubuntu /bin/bash 
+docker container stop local-ubuntu
+docker commit local-ubuntu -t farhan5248/ubuntu-runner:latest
+docker push farhan5248/ubuntu-runner:latest
 
-
-docker logs -f mycontainer
-
+# MySQL Healthcheck
 docker image build -f mysql.dockerfile -t farhan5248/sheep-dog-dev-db:latest .
 docker run --name sheep-dog-dev-db -e MYSQL_ROOT_PASSWORD=mbt-pass -p 3306:3306 -d farhan5248/sheep-dog-dev-db:latest
+docker container stop -t 1 sheep-dog-dev-db
+docker container start --restart=on-failure:2 sheep-dog-dev-db
 
-docker run --detach --name sheep-dog-dev-mq -p 61616:61616 -p 8161:8161 --rm apache/activemq-artemis:latest-alpine
-docker run -e ARTEMIS_USER=artemis -e ARTEMIS_PASSWORD=artemis --name sheep-dog-dev-mq -it -p 61616:61616 -p 8161:8161 apache/activemq-artemis:latest-alpine
-docker run -it -p 61616:61616 -p 8161:8161 -v <broker folder on host>:/var/lib/artemis-instance apache/activemq-artemis:latest-alpine
+# ActiveMQ
+docker container run --name sheep-dog-dev-mq -p 61616:61616 -p 8161:8161 -d apache/activemq-artemis:latest-alpine
+docker container run --name sheep-dog-dev-mq -p 61616:61616 -p 8161:8161 -e ARTEMIS_USER=artemis -e ARTEMIS_PASSWORD=artemis apache/activemq-artemis:latest-alpine
+docker container run --name sheep-dog-dev-mq -p 61616:61616 -p 8161:8161 -v <broker folder on host>:/var/lib/artemis-instance apache/activemq-artemis:latest-alpine
 
-docker login
-docker image build --build-arg email=farhan.sheikh.5248@gmail.com -t farhan5248/sheep-dog-dev-svc:latest .
-docker image push farhan5248/sheep-dog-svc:latest
-docker image ls
-docker image rm farhan5248/sheep-dog-svc:latest
-docker system prune
-
+# Docker Compose
 docker compose config
 docker compose build
 docker compose up -d
 docker compose -p "sheep-dog-dev" up -d
 docker compose -f docker-compose-defaults.yaml up -d
 docker compose run --rm -d sheep-dog-dev-svc-lcl
-docker compose logs 
-docker compose top
 docker compose exec sheep-dog-svc-lcl /bin/sh
 docker compose start
 docker compose stop
-docker compose pause
-docker compose unpause
 docker compose down
 
+# Minikube
+minikube start
+minikube dashboard --url
+minikube service kubernetes-bootcamp --url
+minikube stop
 
-Ubuntu Github runner
-docker container run --name="ubuntu-runner"-d -t ubuntu:latest
-docker container exec -it ubuntu-runner /bin/bash 
+# Kubectl
+kubectl proxy
+kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
+kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080
+kubectl expose deployment/kubernetes-bootcamp --type="LoadBalancer" --port 8080
+kubectl get deployments
+kubectl get pods
+kubectl get pods -l app=kubernetes-bootcamp
+kubectl describe pods
+kubectl get services
+kubectl get services -l app=kubernetes-bootcamp
+kubectl logs kubernetes-bootcamp-68cfbdbb99-r8m86
+kubectl exec -ti kubernetes-bootcamp-68cfbdbb99-r8m86 -- bash
+kubectl scale deployments/kubernetes-bootcamp --replicas=4
+kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=docker.io/jocatalin/kubernetes-bootcamp:v2
+kubectl delete service kubernetes-bootcamp
+kubectl delete deployment kubernetes-bootcamp
 
-apt-get update
-apt-get install sudo
-apt-get install -y curl
+kubectl apply -f docker/deployment.yaml
 
-useradd -m -s /bin/bash -G sudo actions-runner
-echo "actions-runner:actions-runner" | chpasswd
-sudo su - actions-runner
-
-mkdir actions-runner && cd actions-runner
-curl -o actions-runner-linux-x64-2.321.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.321.0/actions-runner-linux-x64-2.321.0.tar.gz
-tar xzf ./actions-runner-linux-x64-2.321.0.tar.gz
-sudo ./bin/installdependencies.sh
-#./config.sh --url https://github.com/farhan5248/sheep-dog-tools --token <github-token> --labels "farhan5248-ubuntu"
-#./run.sh &
-
-docker commit ubuntu-runner farhan5248/ubuntu-runner:latest
-docker push farhan5248/ubuntu-runner:latest
-
-docker container run --name="ubuntu-runner" --rm -d -t farhan5248/ubuntu-runner:latest /bin/bash
-sudo su - actions-runner
-./actions-runner/run.sh
-
-
-docker image build --pull --rm -f "ubuntu-runner.dockerfile" -t farhan5248/ubuntu-runner .
-docker container run --name="ubuntu-runner-1" -e GITHUB_TOKEN="" -d -t farhan5248/ubuntu-runner:latest
-docker container exec -it ubuntu-runner-1 /bin/bash 
+curl http://localhost:8001/version
+curl http://localhost:8001/api/v1/namespaces/default/pods/kubernetes-bootcamp-68cfbdbb99-r8m86:8080/proxy/
