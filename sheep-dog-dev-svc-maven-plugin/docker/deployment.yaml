@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: sheep-dog-dev
+  name: sheep-dog-dev-db
   labels:
     app: sheep-dog-dev
 spec:
@@ -12,6 +12,18 @@ spec:
       port: 3306
       targetPort: 3306
       nodePort: 30306
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sheep-dog-dev-svc
+  labels:
+    app: sheep-dog-dev
+spec:
+  selector:
+    app: sheep-dog-dev
+  ports:
     - name: sheep-dog-dev-svc
       port: 8080
       targetPort: 8080
@@ -38,19 +50,29 @@ spec:
           image: farhan5248/sheep-dog-dev-db:latest
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: mbt-pass
+              value: root
           ports:
             - containerPort: 3306
+          livenessProbe:
+            exec:
+              command: 
+              - bash
+              - -c
+              - "mysql -u root -p$$MYSQL_ROOT_PASSWORD -e 'SELECT 1;'"
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
         - name: sheep-dog-dev-svc
           image: farhan5248/sheep-dog-dev-svc:latest
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:mysql://sheep-dog-dev:3306/mbt
+              value: jdbc:mysql://sheep-dog-dev-db:3306/mbt
           ports:
             - containerPort: 8080
           livenessProbe:
             httpGet:
-              path: /getFileList
+              path: /actuator/health
               port: 8080
             initialDelaySeconds: 10
             periodSeconds: 10

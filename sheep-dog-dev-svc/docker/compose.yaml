@@ -5,7 +5,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     healthcheck:
-      test: "mysql --user=root --password=$$MYSQL_ROOT_PASSWORD --execute \"SHOW DATABASES;\" || exit 1"
+      test: "mysql -u root -p$$MYSQL_ROOT_PASSWORD -e 'SELECT 1;'"
       interval: 10s
       timeout: 10s
       retries: 5
