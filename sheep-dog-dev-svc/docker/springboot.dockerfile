@@ -1,5 +1,6 @@
 FROM eclipse-temurin:21-jdk-alpine
 LABEL "maintainer"=farhan.sheikh.5248@gmail.com
+RUN apk --no-cache add curl
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
 # Extract layers from jar for better caching

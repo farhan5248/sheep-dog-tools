@@ -3,9 +3,15 @@ services:
     image: farhan5248/sheep-dog-dev-db:latest
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: mbt-pass
+      MYSQL_ROOT_PASSWORD: root
+    healthcheck:
+      test: "mysql --user=root --password=$$MYSQL_ROOT_PASSWORD --execute \"SHOW DATABASES;\" || exit 1"
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
     ports:
-     - 3307:3306
+      - 3307:3306
     labels:
       stack.name: "sheep-dog-dev-stack"
     networks:
@@ -27,7 +33,7 @@ services:
     image: farhan5248/sheep-dog-dev-svc:latest
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8087/getFileList"]
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
       interval: 10s
       timeout: 5s
       retries: 3
