@@ -8,7 +8,7 @@ permissions:
   packages: write
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: [farhan5248-runners, Linux]
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 21
