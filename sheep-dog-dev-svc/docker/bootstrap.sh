@@ -15,10 +15,8 @@ if [ $cnt -eq 0 ]; then
   echo "CREATE USER 'mbt'@'%' IDENTIFIED BY 'mbt';" | mysql -u root -proot
   echo "Creating MBT database"
   echo "CREATE DATABASE mbt;" | mysql -u root -proot
-  echo "Granting all privileges on ANY database to ROOT user"
-  echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root';" | mysql -u root -proot
   echo "Granting all privileges on MBT database to MBT user"
-  echo "GRANT ALL PRIVILEGES ON mbt.* TO 'mbt'@'%' IDENTIFIED BY 'mbt';" | mysql -u root -proot
+  echo "GRANT ALL PRIVILEGES ON mbt.* TO 'mbt'@'%';" | mysql -u root -proot
 fi
 
 exit 0

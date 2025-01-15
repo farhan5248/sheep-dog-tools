@@ -54,9 +54,10 @@ kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=docker.io/
 kubectl delete service kubernetes-bootcamp
 kubectl delete deployment kubernetes-bootcamp
 
+minikube start --driver docker --static-ip 192.168.49.2
 kubectl create namespace sheep-dog-dev
 kubectl apply -f docker/deployment.yaml
-kubectl logs sheep-dog-dev-6c977549d7-pkp29 -n sheep-dog-dev -c sheep-dog-dev-svc
+kubectl logs -n sheep-dog-dev -c sheep-dog-dev-svc sheep-dog-dev-6b9b78d5cd-nzssh
 minikube service -n sheep-dog-dev --all --url
 
 curl http://localhost:8001/version
