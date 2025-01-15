@@ -51,6 +51,7 @@ spec:
       containers:
         - name: sheep-dog-dev-db
           image: farhan5248/sheep-dog-dev-db:latest
+          imagePullPolicy: "Always"
           env:
             - name: MYSQL_ROOT_PASSWORD
               value: root
@@ -68,6 +69,7 @@ spec:
             failureThreshold: 3
         - name: sheep-dog-dev-svc
           image: farhan5248/sheep-dog-dev-svc:latest
+          imagePullPolicy: "Always"
           env:
             - name: SPRING_DATASOURCE_URL
               value: jdbc:mysql://sheep-dog-dev-db:3306/mbt
