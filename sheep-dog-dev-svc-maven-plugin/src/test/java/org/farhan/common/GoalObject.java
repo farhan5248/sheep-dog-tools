@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Value;
 
 public abstract class GoalObject extends TestObject {
 
-	@Value("${server.host:sheep-dog-dev-svc}")
+	@Value("${sheepdog.host:sheep-dog-dev-svc}")
 	private String serverHost;
 	
-	@Value("${server.port:30080}")
+	@Value("${sheepdog.port:30080}")
 	private int serverPort;
+
+	@Value("${sheepdog.timeout:120000}")
+	private int timeout;
 
 	public GoalObject() {
 		attributes.put("tags", "");
@@ -24,6 +27,7 @@ public abstract class GoalObject extends TestObject {
 			mojo.baseDir = "target/src-gen/";
 			mojo.host = serverHost;
 			mojo.port = serverPort;
+			mojo.timeout = timeout;
 			mojo.execute();
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));

@@ -7,6 +7,9 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 public abstract class MBTMojo extends AbstractMojo {
@@ -26,6 +29,9 @@ public abstract class MBTMojo extends AbstractMojo {
 		RestClientConfig config = new RestClientConfig();
 		this.restTemplate = config.restTemplate();
 	}
+
+	@Parameter(property = "timeout", defaultValue = "120000")
+	public int timeout;
 
 	/**
 	 * The tag of the selected edges.
@@ -69,6 +75,31 @@ public abstract class MBTMojo extends AbstractMojo {
 		}
 	}
 
+	private void waitForService() throws MojoExecutionException {
+		long startTime = System.currentTimeMillis();
+		while (System.currentTimeMillis() - startTime < timeout) {
+			try {
+				ResponseEntity<String> response = restTemplate.getForEntity(getHost() + "actuator/health", String.class);
+				if (response.getStatusCode() == HttpStatus.OK && 
+					response.getBody().contains("\"status\":\"UP\"")) {
+					return;
+				}
+			} catch (Exception e) {
+				long timeLeft = (timeout - (System.currentTimeMillis() - startTime)) / 1000;
+				getLog().info("Service not ready yet, " + timeLeft + " seconds remaining");
+			}
+			
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+				throw new MojoExecutionException("Interrupted while waiting for service", e);
+			}
+		}
+		
+		throw new MojoExecutionException("Service did not become available within " + timeout + " milliseconds");
+	}
+
 	public void execute(String goal) throws MojoExecutionException {
 		getLog().info("Starting execute");
 		getLog().info("tag: " + tag);
@@ -81,6 +112,7 @@ public abstract class MBTMojo extends AbstractMojo {
 		// TODO make these configurable Maven properties
 		String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/" };
 		try {
+			waitForService();
 			if (goal.endsWith("ToUML")) {
 				clearObjects(goal);
 				for (String dir : dirs) {
