@@ -76,15 +76,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.mysql</groupId>
-			<artifactId>mysql-connector-j</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
@@ -216,13 +207,13 @@
 							<goal>exec</goal>
 						</goals>
 						<configuration>
-							<executable>docker</executable>
+							<!-- TODO: add profile to select whether to start port-forwarding -->
+							<executable>kubectl</executable>
 							<arguments>
-								<argument>compose</argument>
-								<argument>up</argument>
-								<argument>-d</argument>
+								<argument>apply</argument>
+								<argument>-f</argument>
+								<argument>docker/deployment.yaml</argument>
 							</arguments>
-							<workingDirectory>../sheep-dog-dev-svc/docker</workingDirectory>
 						</configuration>
 					</execution>
 					<execution>
@@ -232,12 +223,12 @@
 							<goal>exec</goal>
 						</goals>
 						<configuration>
-							<executable>docker</executable>
+							<executable>kubectl</executable>
 							<arguments>
-								<argument>compose</argument>
-								<argument>down</argument>
+								<argument>delete</argument>
+								<argument>namespace</argument>
+								<argument>sheep-dog-dev</argument>
 							</arguments>
-							<workingDirectory>../sheep-dog-dev-svc/docker</workingDirectory>
 						</configuration>
 					</execution>
 				</executions>

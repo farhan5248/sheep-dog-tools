@@ -32,8 +32,11 @@ public abstract class MBTMojo extends AbstractMojo {
 	@Parameter(property = "port", defaultValue = "8080")
 	public int port;
 
+	@Parameter(property = "host", defaultValue = "sheep-dog-dev-svc")
+	public String host;
+
 	private String getHost() {
-		return "http://localhost:" + port + "/";
+		return "http://" + host + ":" + port + "/";
 	}
 
 	private final RestTemplate restTemplate = new RestTemplate();

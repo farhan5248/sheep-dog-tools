@@ -8,15 +8,18 @@ import org.springframework.web.client.RestTemplate;
 
 public class GoalObject extends TestObject {
 
-	@Value("${server.port}")
-	private int port;
+	@Value("${server.host:localhost}")
+	private String serverHost;
+
+	@Value("${server.port:8080}")
+	private int serverPort;
 
 	public GoalObject() {
 		attributes.put("tags", "");
 	}
 
 	private String getHost() {
-		return "http://localhost:" + port + "/";
+		return "http://" + serverHost + ":" + serverPort + "/";
 	}
 
 	private final RestTemplate restTemplate = new RestTemplate();

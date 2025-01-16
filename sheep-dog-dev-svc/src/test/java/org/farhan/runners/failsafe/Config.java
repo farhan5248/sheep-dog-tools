@@ -40,13 +40,6 @@ public class Config {
 	@Before
 	public void before() {
 		deleteDir(new File("target/src-gen/"));
-		jdbcTemplate.execute(
-				"CREATE TABLE IF NOT EXISTS Model_Source_Files ( file_name VARCHAR(200) NULL, file_content TEXT NULL );");
-	}
-
-	@After
-	public void after() {
-		jdbcTemplate.execute("DROP TABLE Model_Source_Files;");
 	}
 
 }

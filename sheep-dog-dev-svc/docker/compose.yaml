@@ -11,7 +11,7 @@ services:
       retries: 5
       start_period: 20s
     ports:
-      - 3307:3306
+      - 30306:3306
     labels:
       stack.name: "sheep-dog-dev-stack"
     networks:
@@ -23,8 +23,8 @@ services:
       ARTEMIS_USER: artemis
       ARTEMIS_PASSWORD: artemis
     ports:
-      - 61617:61616
-      - 8167:8161
+      - 30616:61616
+      - 30161:8161
     labels:
       stack.name: "sheep-dog-dev-stack"
     networks:
@@ -43,7 +43,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://sheep-dog-dev-db:3306/mbt
     ports:
-      - 8087:8080
+      - 30080:8080
     labels:
       stack.name: "sheep-dog-dev-stack"
     networks:
