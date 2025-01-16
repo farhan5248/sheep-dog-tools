@@ -19,8 +19,12 @@ public abstract class MBTMojo extends AbstractMojo {
 
 	public String baseDir = "";
 
+	private final RestTemplate restTemplate;
+
 	public MBTMojo() {
 		baseDir = new File("").getAbsolutePath();
+		RestClientConfig config = new RestClientConfig();
+		this.restTemplate = config.restTemplate();
 	}
 
 	/**
@@ -38,8 +42,6 @@ public abstract class MBTMojo extends AbstractMojo {
 	private String getHost() {
 		return "http://" + host + ":" + port + "/";
 	}
-
-	private final RestTemplate restTemplate = new RestTemplate();
 
 	private void clearObjects(String goal) {
 		TreeMap<String, String> parameters = new TreeMap<String, String>();
