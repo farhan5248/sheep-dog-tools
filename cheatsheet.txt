@@ -7,7 +7,7 @@ docker container stop local-ubuntu
 docker commit local-ubuntu -t farhan5248/ubuntu-runner:latest
 docker push farhan5248/ubuntu-runner:latest
 
-# MySQL Healthcheck
+# MySQL
 docker image build -f mysql.dockerfile -t farhan5248/sheep-dog-dev-db:latest .
 docker run --name sheep-dog-dev-db -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -d farhan5248/sheep-dog-dev-db:latest
 docker container stop -t 1 sheep-dog-dev-db
@@ -33,34 +33,28 @@ docker compose down
 # Minikube
 minikube start
 minikube dashboard
-minikube service kubernetes-bootcamp
+minikube service --all --url -n sheep-dog-dev
 minikube stop
 
 # Kubectl
-kubectl proxy
+kubectl create namespace sheep-dog-dev
+kubectl delete namespace sheep-dog-dev
 kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
 kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080
 kubectl expose deployment/kubernetes-bootcamp --type="LoadBalancer" --port 8080
 kubectl get deployments
-kubectl get pods
 kubectl get pods -l app=kubernetes-bootcamp
 kubectl describe pods
-kubectl get services
 kubectl get services -l app=kubernetes-bootcamp
 kubectl logs -n sheep-dog-dev -c sheep-dog-dev-svc sheep-dog-dev-6b9b78d5cd-nzssh
-kubectl exec -ti sheep-dog-dev-6b9b78d5cd-s9vkq -n sheep-dog-dev -- bash
-kubectl scale deployments/kubernetes-bootcamp --replicas=4
+kubectl exec -ti -n sheep-dog-dev sheep-dog-dev-6b9b78d5cd-s9vkq -- bash
+kubectl scale deployments/sheep-dog-dev --replicas=4
 kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=docker.io/jocatalin/kubernetes-bootcamp:v2
 kubectl delete service kubernetes-bootcamp
 kubectl delete deployment kubernetes-bootcamp
 
-
+# Local Kubernetes
 minikube start --driver docker --static-ip 192.168.49.2
-kubectl create namespace sheep-dog-dev
 kubectl apply -f docker/deployment.yaml
 kubectl port-forward -n sheep-dog-dev svc/sheep-dog-dev-db 30306:3306
 kubectl port-forward -n sheep-dog-dev svc/sheep-dog-dev-svc 30080:8080
-kubectl delete namespace sheep-dog-dev
-
-curl http://localhost:8001/version
-curl http://localhost:8001/api/v1/namespaces/default/pods/kubernetes-bootcamp-68cfbdbb99-r8m86:8080/proxy/
