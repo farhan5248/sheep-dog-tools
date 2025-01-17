@@ -28,10 +28,14 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Setup Kubernetes Secrets
-        working-directory: ./sheep-dog-dev-svc-maven-plugin
+      - name: Create K8s Secrets
         run: |
-          echo ${{ secrets.KUBE_SECRETS }} > docker/secrets.yaml
+          kubectl create secret generic sheep-dog-dev-secrets \
+            --from-literal=MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }} \
+            --from-literal=ARTEMIS_USER=${{ secrets.ARTEMIS_USER }} \
+            --from-literal=ARTEMIS_PASSWORD=${{ secrets.ARTEMIS_PASSWORD }} \
+            -n sheep-dog-dev \
+            --dry-run=client -o yaml | kubectl apply -f -
       - name: Run Maven
         working-directory: ./sheep-dog-dev-svc-maven-plugin
         run: mvn deploy
