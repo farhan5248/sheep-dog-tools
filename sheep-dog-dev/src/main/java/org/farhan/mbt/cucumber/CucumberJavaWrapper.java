@@ -7,8 +7,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.mbt.core.ObjectRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.farhan.helper.StepHelper;
 

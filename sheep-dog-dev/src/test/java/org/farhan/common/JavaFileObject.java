@@ -1,7 +1,6 @@
 package org.farhan.common;
 
 import org.farhan.mbt.cucumber.CucumberJavaWrapper;
-import org.farhan.mbt.cucumber.CucumberProject;
 import org.junit.jupiter.api.Assertions;
 
 import com.github.javaparser.ast.CompilationUnit;
@@ -13,7 +12,6 @@ import com.github.javaparser.ast.stmt.Statement;
 
 public class JavaFileObject extends FileObject {
 
-	private CucumberProject project;
 	private CucumberJavaWrapper wrapper;
 
 	protected void assertImportExists(String importName) {

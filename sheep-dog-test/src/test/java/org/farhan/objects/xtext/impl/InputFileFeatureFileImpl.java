@@ -64,6 +64,7 @@ public class InputFileFeatureFileImpl extends TestObject implements InputFileFea
 	public void setParameters(HashMap<String, String> keyMap) {
 		try {
 			getEclipseMock().createStepObject(keyMap.get("Object Name"));
+			@SuppressWarnings("unchecked")
 			ArrayList<ArrayList<String>> stepDefinitionList = (ArrayList<ArrayList<String>>) getEclipseMock()
 					.createStepDefinition(keyMap.get("Step Definition Name"));
 			ArrayList<String> parameters = new ArrayList<String>();

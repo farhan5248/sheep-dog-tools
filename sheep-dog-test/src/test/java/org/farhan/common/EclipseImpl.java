@@ -151,11 +151,13 @@ public class EclipseImpl implements ILanguageAccess {
 		return this.stepObject.get(stepDefinition.toString());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public String getStepDefinitionParametersString(Object parameters) {
 		return cellsToString((ArrayList<String>) parameters);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public String getStepDefinitionParametersStringUnsorted(Object parameters) {
 		String cellsAsString = "| ";

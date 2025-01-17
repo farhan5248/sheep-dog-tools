@@ -1,6 +1,5 @@
 package org.farhan.runners.failsafe;
 
-import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.spring.CucumberContextConfiguration;
 
@@ -10,7 +9,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.farhan.mbt.service.RestServiceApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 @ComponentScan(basePackages = "org.farhan")
 @EnableAutoConfiguration
@@ -18,12 +16,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @CucumberContextConfiguration
 @SpringBootTest(classes = RestServiceApplication.class)
 public class Config {
-
-	private JdbcTemplate jdbcTemplate;
-
-	public Config(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
 
 	public void deleteDir(File aDir) {
 		if (aDir.exists()) {

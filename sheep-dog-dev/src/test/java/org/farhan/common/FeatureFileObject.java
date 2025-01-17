@@ -9,12 +9,10 @@ import org.farhan.mbt.cucumber.Row;
 import org.farhan.mbt.cucumber.Scenario;
 import org.farhan.mbt.cucumber.Step;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
-import org.farhan.mbt.cucumber.CucumberProject;
 import org.junit.jupiter.api.Assertions;
 
 public class FeatureFileObject extends FileObject {
 
-	private CucumberProject project;
 	private CucumberFeatureWrapper wrapper;
 
 	private String listAsCsv(ArrayList<String> list) {
