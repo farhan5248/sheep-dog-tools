@@ -20,5 +20,6 @@ release.properties
 **/*.releaseBackup
 **/*.lnk
 **/*.idea
-*.env
-/lean-sheep-dog-tools.theia-workspace
+**/secrets.yaml
+**/*.env
+**/*.theia-workspace

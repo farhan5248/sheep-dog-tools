@@ -32,6 +32,10 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ github.token }}
+    - name: Setup Docker Secrets
+      working-directory: ./sheep-dog-dev-svc
+      run: |
+        echo ${{ secrets.DOCKER_SECRETS }} > docker/.env
     - name: Run Maven
       working-directory: ./sheep-dog-dev-svc
       run: mvn deploy

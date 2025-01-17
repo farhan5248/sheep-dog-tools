@@ -3,7 +3,7 @@ services:
     image: farhan5248/sheep-dog-dev-db:latest
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     healthcheck:
       test: "mysql -u root -p$$MYSQL_ROOT_PASSWORD -e 'SELECT 1;'"
       interval: 10s
@@ -20,8 +20,8 @@ services:
     image: apache/activemq-artemis:latest-alpine
     restart: unless-stopped
     environment:
-      ARTEMIS_USER: artemis
-      ARTEMIS_PASSWORD: artemis
+      ARTEMIS_USER: ${ARTEMIS_USER}
+      ARTEMIS_PASSWORD: ${ARTEMIS_PASSWORD}
     ports:
       - 30616:61616
       - 30161:8161

@@ -59,7 +59,10 @@ spec:
           imagePullPolicy: "Always"
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: root
+              valueFrom:
+                secretKeyRef:
+                  name: sheep-dog-dev-secrets
+                  key: MYSQL_ROOT_PASSWORD
           ports:
             - containerPort: 3306
           livenessProbe:
