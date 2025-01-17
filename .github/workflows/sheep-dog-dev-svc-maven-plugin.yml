@@ -30,6 +30,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Create K8s Secrets
         run: |
+          kubectl create namespace sheep-dog-dev
           kubectl create secret generic sheep-dog-dev-secrets \
             --from-literal=MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }} \
             --from-literal=ARTEMIS_USER=${{ secrets.ARTEMIS_USER }} \
