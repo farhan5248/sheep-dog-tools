@@ -36,6 +36,8 @@ jobs:
       working-directory: ./sheep-dog-dev-svc
       run: |
         echo ${{ secrets.DOCKER_SECRETS }} > docker/.env
+        echo "hello" > docker/hello.env
+        echo "world" >> docker/world.env
     - name: Run Maven
       working-directory: ./sheep-dog-dev-svc
       run: mvn deploy
