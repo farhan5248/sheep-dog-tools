@@ -25,7 +25,7 @@ on:
           - Sheep
 jobs:
   build:
-    runs-on: farhan5248-runners
+    runs-on: [farhan5248-runners, linux]
     permissions:
       contents: write
       packages: write
