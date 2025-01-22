@@ -67,14 +67,21 @@ spec:
             - containerPort: 3306
           livenessProbe:
             exec:
-              command: 
-              - bash
-              - -c
-              - "mysql -u root -p$$MYSQL_ROOT_PASSWORD -e 'SELECT 1;'"
+              command:
+                - bash
+                - -c
+                - "mysql -u root -p$$MYSQL_ROOT_PASSWORD -e 'SELECT 1;'"
             initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 3
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
         - name: sheep-dog-dev-svc
           image: farhan5248/sheep-dog-dev-svc:latest
           imagePullPolicy: "Always"
@@ -91,3 +98,10 @@ spec:
             periodSeconds: 10
             timeoutSeconds: 5
             failureThreshold: 3
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"

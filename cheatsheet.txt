@@ -42,9 +42,10 @@ kubectl delete namespace sheep-dog-dev
 kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
 kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080
 kubectl expose deployment/kubernetes-bootcamp --type="LoadBalancer" --port 8080
-kubectl get deployments
-kubectl get pods -l app=kubernetes-bootcamp
-kubectl describe pods
+kubectl get deployments -L canary
+kubectl get pods --selector="app=bandicoot,ver=2"
+kubectl get pods -l 'ver=2,!canary'
+kubectl get pods --selector="app in (alpaca,bandicoot)"
 kubectl get services -l app=kubernetes-bootcamp
 kubectl logs -n sheep-dog-dev -c sheep-dog-dev-svc sheep-dog-dev-6b9b78d5cd-nzssh
 kubectl exec -ti -n sheep-dog-dev sheep-dog-dev-6b9b78d5cd-s9vkq -- bash
