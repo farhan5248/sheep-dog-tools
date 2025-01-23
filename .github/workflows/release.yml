@@ -72,7 +72,8 @@ jobs:
     - name: Publish SNAPSHOT version
       working-directory: ./${{ inputs.project }}
       run: |
-        mvn clean release:clean
+        git reset --hard HEAD
+        git clean -fdx
         mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true
         if [[ $(git status --porcelain --untracked-files=no | wc -l) -gt 0 ]]; then
           git add *
