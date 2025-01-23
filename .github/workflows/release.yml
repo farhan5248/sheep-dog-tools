@@ -63,7 +63,7 @@ jobs:
         else
           mvn org.farhan:sheep-dog-mgmt-maven-plugin:1.14:prepare -DpreparationGoals=deploy
         fi
-        git push
+        git push --follow-tags
       env:
         GITHUB_TOKEN: ${{ github.token }}
         MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
