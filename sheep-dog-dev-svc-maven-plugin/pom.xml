@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -188,8 +190,6 @@
 					<execution>
 						<id>help-mojo</id>
 						<goals>
-							<!-- good practice is to generate help mojo for
-							plugin -->
 							<goal>helpmojo</goal>
 						</goals>
 					</execution>
@@ -212,7 +212,6 @@
 							<goal>exec</goal>
 						</goals>
 						<configuration>
-							<!-- TODO: add profile to select whether to start port-forwarding -->
 							<executable>kubectl</executable>
 							<arguments>
 								<argument>apply</argument>
@@ -222,7 +221,7 @@
 						</configuration>
 					</execution>
 					<execution>
-						<id>stop-stack</id>
+						<id>delete-namespace</id>
 						<phase>post-integration-test</phase>
 						<goals>
 							<goal>exec</goal>
@@ -231,7 +230,9 @@
 							<executable>kubectl</executable>
 							<arguments>
 								<argument>delete</argument>
-								<argument>namespace</argument>
+								<argument>deployment</argument>
+								<argument>-n</argument>
+								<argument>sheep-dog-dev</argument>
 								<argument>sheep-dog-dev</argument>
 							</arguments>
 						</configuration>

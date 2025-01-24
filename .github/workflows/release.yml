@@ -44,15 +44,6 @@ jobs:
       run: |
         git config --local user.name "${{ secrets.ACTIONS_BOT_NAME }}"
         git config --local user.email "${{ secrets.ACTIONS_BOT_EMAIL }}"
-    - name: Create K8s Secrets
-      run: |
-        kubectl create namespace sheep-dog-dev --dry-run=client -o yaml | kubectl apply -f -
-        kubectl create secret generic sheep-dog-dev-secrets \
-          --from-literal=MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }} \
-          --from-literal=ARTEMIS_USER=${{ secrets.ARTEMIS_USER }} \
-          --from-literal=ARTEMIS_PASSWORD=${{ secrets.ARTEMIS_PASSWORD }} \
-          -n sheep-dog-dev \
-          --dry-run=client -o yaml | kubectl apply -f -
     - name: Publish Release version
       working-directory: ./${{ inputs.project }}
       run: |
@@ -65,9 +56,6 @@ jobs:
         git push --follow-tags
       env:
         GITHUB_TOKEN: ${{ github.token }}
-        MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-        ARTEMIS_USER: ${{ secrets.ARTEMIS_USER }}
-        ARTEMIS_PASSWORD: ${{ secrets.ARTEMIS_PASSWORD }}
     - name: Publish SNAPSHOT version
       working-directory: ./${{ inputs.project }}
       run: |
@@ -82,6 +70,3 @@ jobs:
         mvn deploy -DskipTests
       env:
         GITHUB_TOKEN: ${{ github.token }}
-        MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-        ARTEMIS_USER: ${{ secrets.ARTEMIS_USER }}
-        ARTEMIS_PASSWORD: ${{ secrets.ARTEMIS_PASSWORD }}
