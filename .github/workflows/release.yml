@@ -4,10 +4,12 @@ on:
   workflow_call:
     inputs:
       project:
-        description: 'Project'
         required: true
         type: string
-  workflow_dispatch:
+      plugin:
+        required: true
+        type: string
+    workflow_dispatch:
     inputs:
       project:
         description: 'Project'

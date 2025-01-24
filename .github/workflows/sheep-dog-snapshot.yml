@@ -64,10 +64,9 @@ jobs:
 
   merge-branch:
     needs: [sheep-dog-dev-svc-maven-plugin, sheep-dog-dev-maven-plugin]
-    runs-on: [farhan5248-runners, linux]
+    runs-on: [farhan5248-runners]
     permissions:
       contents: write
-      packages: write
     steps:
       - uses: actions/checkout@v4
       - name: Merge develop into main

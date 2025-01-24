@@ -20,4 +20,5 @@ jobs:
     uses: ./.github/workflows/release.yml
     with:
       project: 'sheepdogxtextplugin.parent'
+      plugin: 'Sheep'
     secrets: inherit

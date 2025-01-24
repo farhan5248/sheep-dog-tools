@@ -20,4 +20,5 @@ jobs:
     uses: ./.github/workflows/release.yml
     with:
       project: 'sheep-dog-dev'
+      plugin: 'Maven'
     secrets: inherit

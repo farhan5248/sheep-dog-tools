@@ -2,7 +2,7 @@ name: Publish Sheep Dog Dev Service Release
 
 on:
   workflow_run:
-    workflows: ["Publish Sheep Dog Dev Maven Plugin Release"]
+    workflows: ["Publish Sheep Dog Dev Release"]
     types:
       - completed
   workflow_dispatch:
@@ -20,4 +20,5 @@ jobs:
     uses: ./.github/workflows/release.yml
     with:
       project: 'sheep-dog-dev-svc'
+      plugin: 'Maven'
     secrets: inherit
