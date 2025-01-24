@@ -3,7 +3,7 @@ name: Publish Sheep Dog Snapshot
 on:
   workflow_dispatch:
   push:
-    branches: [ "main" ]
+    branches: [ "develop" ]
     paths:
       - '.github/**'
       - '**/docker/**'
