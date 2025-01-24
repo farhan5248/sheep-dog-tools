@@ -15,7 +15,9 @@ permissions:
 
 jobs:
   sheep-dog-test:
-    uses: ./.github/workflows/sheep-dog-test.yml
+    uses: ./.github/workflows/snapshot.yml
+    with:
+      project: "sheep-dog-test"
 
   sheep-dog-xtext-plugin:
     needs: [sheep-dog-test]
