@@ -9,8 +9,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>21</java.version>
-		<sheepdogxtextcukeplugin.version>1.8.0</sheepdogxtextcukeplugin.version>
-		<sheepdogxtextplugin.version>1.14.0</sheepdogxtextplugin.version>
+		<sheepdogxtextcukeplugin.version>1.9.0-SNAPSHOT</sheepdogxtextcukeplugin.version>
+		<sheepdogxtextplugin.version>1.15.0-SNAPSHOT</sheepdogxtextplugin.version>
 	</properties>
 
 	<scm>
