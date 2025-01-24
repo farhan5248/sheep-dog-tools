@@ -215,25 +215,8 @@
 							<executable>kubectl</executable>
 							<arguments>
 								<argument>apply</argument>
-								<argument>-f</argument>
-								<argument>docker/deployment.yaml</argument>
-							</arguments>
-						</configuration>
-					</execution>
-					<execution>
-						<id>delete-namespace</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<executable>kubectl</executable>
-							<arguments>
-								<argument>delete</argument>
-								<argument>deployment</argument>
-								<argument>-n</argument>
-								<argument>sheep-dog-dev</argument>
-								<argument>sheep-dog-dev</argument>
+								<argument>-k</argument>
+								<argument>docker/overlays/failsafe</argument>
 							</arguments>
 						</configuration>
 					</execution>
