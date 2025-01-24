@@ -24,14 +24,14 @@ jobs:
     needs: [sheep-dog-test]
     uses: ./.github/workflows/snapshot.yml
     with:
-      project: 'sheep-dog-xtext-plugin'
+      project: 'sheep-dog-xtext-plugin.parent'
     secrets: inherit
 
   sheep-dog-xtext-cuke-plugin:
     needs: [sheep-dog-test]
     uses: ./.github/workflows/snapshot.yml
     with:
-      project: 'sheep-dog-xtext-cuke-plugin'
+      project: 'sheep-dog-xtext-cuke-plugin.parent'
     secrets: inherit
 
   sheep-dog-dev:
