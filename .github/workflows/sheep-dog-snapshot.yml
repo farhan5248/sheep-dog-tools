@@ -17,7 +17,7 @@ jobs:
   sheep-dog-test:
     uses: ./.github/workflows/snapshot.yml
     with:
-      project: "sheep-dog-test"
+      project: 'sheep-dog-test'
 
   sheep-dog-xtext-plugin:
     needs: [sheep-dog-test]
