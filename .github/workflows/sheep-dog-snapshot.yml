@@ -61,3 +61,19 @@ jobs:
     with:
       project: 'sheep-dog-dev-svc-maven-plugin'   
     secrets: inherit
+
+  merge-branch:
+    needs: [sheep-dog-dev-svc-maven-plugin, sheep-dog-dev-maven-plugin]
+    runs-on: [farhan5248-runners, linux]
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Merge develop into main
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          target_branch: main
+          message: Merge develop into main
+          github_token: ${{ github.token }}
