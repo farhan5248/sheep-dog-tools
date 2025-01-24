@@ -9,7 +9,7 @@ on:
       plugin:
         required: true
         type: string
-    workflow_dispatch:
+  workflow_dispatch:
     inputs:
       project:
         description: 'Project'
