@@ -21,26 +21,36 @@ jobs:
 
   sheep-dog-xtext-plugin:
     needs: [sheep-dog-test]
-    uses: ./.github/workflows/sheep-dog-xtext-plugin.yml
+    uses: ./.github/workflows/snapshot.yml
+    with:
+      project: 'sheep-dog-xtext-plugin'
 
   sheep-dog-xtext-cuke-plugin:
     needs: [sheep-dog-test]
-    uses: ./.github/workflows/sheep-dog-xtext-cuke-plugin.yml
+    uses: ./.github/workflows/snapshot.yml
+    with:
+      project: 'sheep-dog-xtext-cuke-plugin'
 
   sheep-dog-dev:
     needs: [sheep-dog-xtext-plugin, sheep-dog-xtext-cuke-plugin]
-    uses: ./.github/workflows/sheep-dog-dev.yml
+    uses: ./.github/workflows/snapshot.yml
+    with:
+      project: 'sheep-dog-dev'
 
   sheep-dog-dev-maven-plugin:
     needs: [sheep-dog-dev]
-    uses: ./.github/workflows/sheep-dog-dev-maven-plugin.yml
+    uses: ./.github/workflows/snapshot.yml
+    with:
+      project: 'sheep-dog-dev-maven-plugin'
 
   sheep-dog-dev-svc:
     needs: [sheep-dog-dev]
-    uses: ./.github/workflows/sheep-dog-dev-svc.yml
-    secrets: inherit
+    uses: ./.github/workflows/snapshot.yml
+    with:
+      project: 'sheep-dog-dev-svc'
 
   sheep-dog-dev-svc-maven-plugin:
     needs: [sheep-dog-dev-svc]
-    uses: ./.github/workflows/sheep-dog-dev-svc-maven-plugin.yml    
-    secrets: inherit
+    uses: ./.github/workflows/snapshot.yml
+    with:
+      project: 'sheep-dog-dev-svc-maven-plugin'   
