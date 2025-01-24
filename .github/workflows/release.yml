@@ -1,6 +1,12 @@
 name: Release
 
 on:
+  workflow_call:
+    inputs:
+      project:
+        description: 'Project'
+        required: true
+        type: string
   workflow_dispatch:
     inputs:
       project:
