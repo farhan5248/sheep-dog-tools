@@ -3,7 +3,7 @@ name: Publish Sheep Dog Snapshot
 on:
   workflow_dispatch:
   push:
-    branches: [ "main" ]
+    branches: [ "develop" ]
     paths:
       - '.github/**'
       - '**/docker/**'
@@ -15,30 +15,65 @@ permissions:
 
 jobs:
   sheep-dog-test:
-    uses: ./.github/workflows/sheep-dog-test.yml
+    uses: ./.github/workflows/snapshot.yml
+    with:
+      project: 'sheep-dog-test'
+    secrets: inherit
 
   sheep-dog-xtext-plugin:
     needs: [sheep-dog-test]
-    uses: ./.github/workflows/sheep-dog-xtext-plugin.yml
+    uses: ./.github/workflows/snapshot.yml
+    with:
+      project: 'sheepdogxtextplugin.parent'
+    secrets: inherit
 
   sheep-dog-xtext-cuke-plugin:
     needs: [sheep-dog-test]
-    uses: ./.github/workflows/sheep-dog-xtext-cuke-plugin.yml
+    uses: ./.github/workflows/snapshot.yml
+    with:
+      project: 'sheepdogxtextcukeplugin.parent'
+    secrets: inherit
 
   sheep-dog-dev:
     needs: [sheep-dog-xtext-plugin, sheep-dog-xtext-cuke-plugin]
-    uses: ./.github/workflows/sheep-dog-dev.yml
+    uses: ./.github/workflows/snapshot.yml
+    with:
+      project: 'sheep-dog-dev'
+    secrets: inherit
 
   sheep-dog-dev-maven-plugin:
     needs: [sheep-dog-dev]
-    uses: ./.github/workflows/sheep-dog-dev-maven-plugin.yml
+    uses: ./.github/workflows/snapshot.yml
+    with:
+      project: 'sheep-dog-dev-maven-plugin'
+    secrets: inherit
 
   sheep-dog-dev-svc:
     needs: [sheep-dog-dev]
-    uses: ./.github/workflows/sheep-dog-dev-svc.yml
+    uses: ./.github/workflows/snapshot.yml
+    with:
+      project: 'sheep-dog-dev-svc'
     secrets: inherit
 
   sheep-dog-dev-svc-maven-plugin:
     needs: [sheep-dog-dev-svc]
-    uses: ./.github/workflows/sheep-dog-dev-svc-maven-plugin.yml    
+    uses: ./.github/workflows/snapshot.yml
+    with:
+      project: 'sheep-dog-dev-svc-maven-plugin'   
     secrets: inherit
+
+  merge-branch:
+    needs: [sheep-dog-dev-svc-maven-plugin, sheep-dog-dev-maven-plugin]
+    runs-on: [farhan5248-runners, linux]
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Merge develop into main
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          target_branch: main
+          message: Merge develop into main
+          github_token: ${{ github.token }}

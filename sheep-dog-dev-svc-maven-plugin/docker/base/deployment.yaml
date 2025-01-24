@@ -1,47 +1,7 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: sheep-dog-dev
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: sheep-dog-dev-db
-  namespace: sheep-dog-dev
-  labels:
-    app: sheep-dog-dev
-spec:
-  selector:
-    app: sheep-dog-dev
-  ports:
-    - name: sheep-dog-dev-db
-      port: 3306
-      targetPort: 3306
-      nodePort: 30306
-  type: NodePort
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: sheep-dog-dev-svc
-  namespace: sheep-dog-dev
-  labels:
-    app: sheep-dog-dev
-spec:
-  selector:
-    app: sheep-dog-dev
-  ports:
-    - name: sheep-dog-dev-svc
-      port: 8080
-      targetPort: 8080
-      nodePort: 30080
-  type: NodePort
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sheep-dog-dev
-  namespace: sheep-dog-dev
   labels:
     app: sheep-dog-dev
 spec:

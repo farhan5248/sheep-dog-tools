@@ -33,7 +33,7 @@ docker compose down
 # Minikube
 minikube start
 minikube dashboard
-minikube service --all --url -n sheep-dog-dev
+minikube service --all --url -n failsafe
 minikube stop
 
 # Kubectl
@@ -47,15 +47,20 @@ kubectl get pods --selector="app=bandicoot,ver=2"
 kubectl get pods -l 'ver=2,!canary'
 kubectl get pods --selector="app in (alpaca,bandicoot)"
 kubectl get services -l app=kubernetes-bootcamp
-kubectl logs -n sheep-dog-dev -c sheep-dog-dev-svc sheep-dog-dev-6b9b78d5cd-nzssh
-kubectl exec -ti -n sheep-dog-dev sheep-dog-dev-6b9b78d5cd-s9vkq -- bash
+kubectl logs -n failsafe -c sheep-dog-dev-svc sheep-dog-dev-6b9b78d5cd-nzssh
+kubectl exec -ti -n failsafe sheep-dog-dev-6b9b78d5cd-s9vkq -- bash
 kubectl scale deployments/sheep-dog-dev --replicas=4
 kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=docker.io/jocatalin/kubernetes-bootcamp:v2
 kubectl delete service kubernetes-bootcamp
 kubectl delete deployment kubernetes-bootcamp
 
+kubectl create namespace failsafe
+kubectl get all --namespace=sheep-dog-dev -o yaml > sheep-dog-dev-resources.yaml
+kubectl apply -f sheep-dog-dev-resources.yaml --namespace=failsafe
+kubectl delete namespace sheep-dog-dev
+
 # Local Kubernetes
 minikube start --driver docker --static-ip 192.168.49.2
 kubectl apply -f docker/deployment.yaml
-kubectl port-forward -n sheep-dog-dev svc/sheep-dog-dev-db 30306:3306
-kubectl port-forward -n sheep-dog-dev svc/sheep-dog-dev-svc 30080:8080
+kubectl port-forward -n failsafe svc/sheep-dog-dev-db 30306:3306
+kubectl port-forward -n failsafe svc/sheep-dog-dev-svc 30080:8080
