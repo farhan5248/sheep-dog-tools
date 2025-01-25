@@ -19,6 +19,7 @@ jobs:
     secrets: inherit
 
   sheep-dog-xtext-plugin:
+    needs: [sheep-dog-test]
     uses: ./.github/workflows/release.yml
     with:
       project: 'sheepdogxtextplugin.parent'
@@ -26,6 +27,7 @@ jobs:
     secrets: inherit
   
   sheep-dog-xtext-cuke-plugin:
+    needs: [sheep-dog-test]
     uses: ./.github/workflows/release.yml
     with:
       project: 'sheepdogxtextcukeplugin.parent'
@@ -33,6 +35,7 @@ jobs:
     secrets: inherit
 
   sheep-dog-dev:
+    needs: [sheep-dog-xtext-plugin, sheep-dog-xtext-cuke-plugin]
     uses: ./.github/workflows/release.yml
     with:
       project: 'sheep-dog-dev'
@@ -40,6 +43,7 @@ jobs:
     secrets: inherit
 
   sheep-dog-dev-maven-plugin:
+    needs: [sheep-dog-dev]
     uses: ./.github/workflows/release.yml
     with:
       project: 'sheep-dog-dev-maven-plugin'
@@ -47,6 +51,7 @@ jobs:
     secrets: inherit    
 
   sheep-dog-dev-svc:
+    needs: [sheep-dog-dev]
     uses: ./.github/workflows/release.yml
     with:
       project: 'sheep-dog-dev-svc'
@@ -54,6 +59,7 @@ jobs:
     secrets: inherit
   
   sheep-dog-dev-svc-maven-plugin:
+    needs: [sheep-dog-dev-svc]
     uses: ./.github/workflows/release.yml
     with:
       project: 'sheep-dog-dev-svc-maven-plugin'

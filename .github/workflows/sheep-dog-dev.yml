@@ -19,6 +19,7 @@ jobs:
     secrets: inherit
 
   sheep-dog-dev-maven-plugin:
+    needs: [sheep-dog-dev]
     uses: ./.github/workflows/release.yml
     with:
       project: 'sheep-dog-dev-maven-plugin'
@@ -26,6 +27,7 @@ jobs:
     secrets: inherit    
 
   sheep-dog-dev-svc:
+    needs: [sheep-dog-dev]
     uses: ./.github/workflows/release.yml
     with:
       project: 'sheep-dog-dev-svc'
@@ -33,8 +35,9 @@ jobs:
     secrets: inherit
   
   sheep-dog-dev-svc-maven-plugin:
+    needs: [sheep-dog-dev-svc]
     uses: ./.github/workflows/release.yml
     with:
       project: 'sheep-dog-dev-svc-maven-plugin'
       plugin: 'Maven'
-    secrets: inherit        
+    secrets: inherit            
