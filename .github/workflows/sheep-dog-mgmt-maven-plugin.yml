@@ -2,26 +2,19 @@ name: Publish Sheep Dog Management Maven Plugin
 
 on:
   workflow_dispatch:
-  workflow_call:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'sheep-dog-mgmt-maven-plugin/**'
+    paths-ignore:
+      - 'scripts/**'
 permissions:
-  contents: read
+  contents: write
   packages: write
 jobs:
-  build:
-    runs-on: farhan5248-runners
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 21
-      uses: actions/setup-java@v4
-      with:
-        java-version: '21'
-        distribution: 'temurin'
-    - name: Set up Maven
-      uses: stCarolas/setup-maven@v5
-      with:
-        maven-version: '3.9.9'
-    - name: Run Maven
-      working-directory: ./sheep-dog-mgmt-maven-plugin
-      run: mvn deploy
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+  sheep-dog-test:
+    uses: ./.github/workflows/release.yml
+    with:
+      project: 'sheep-dog-mgmt-maven-plugin'
+      plugin: 'Maven'
+    secrets: inherit

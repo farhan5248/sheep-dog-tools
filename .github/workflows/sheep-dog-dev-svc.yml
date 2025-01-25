@@ -2,10 +2,6 @@ name: Publish Sheep Dog Dev Service Release
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "main" ]
-    paths:
-      - 'sheep-dog-dev-svc/**'
 permissions:
   contents: write
   packages: write

@@ -2,10 +2,6 @@ name: Publish Sheep Dog Xtext Cucumber Release
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "main" ]
-    paths:
-      - 'sheepdogxtextcukeplugin.parent/**'
 permissions:
   contents: write
   packages: write

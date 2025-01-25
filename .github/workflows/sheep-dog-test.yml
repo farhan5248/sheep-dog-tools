@@ -2,10 +2,6 @@ name: Publish Sheep Dog Test Release
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "main" ]
-    paths:
-      - 'sheep-dog-test/**'
 permissions:
   contents: write
   packages: write

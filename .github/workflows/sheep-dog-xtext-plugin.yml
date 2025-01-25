@@ -2,10 +2,6 @@ name: Publish Sheep Dog Xtext Plugin Release
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "main" ]
-    paths:
-      - 'sheepdogxtextplugin.parent/**'
 permissions:
   contents: write
   packages: write
