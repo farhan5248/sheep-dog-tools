@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>org.farhan</groupId>
 	<artifactId>sheep-dog-dev-svc</artifactId>
-	<version>1.9</version>
+	<version>1.10-SNAPSHOT</version>
 	<name>Lean Sheep Dog Tools for Developers Service</name>
 
 	<properties>
@@ -22,7 +22,7 @@
 
 	<scm>
 		<connection>scm:git:https://github.com/farhan5248/sheep-dog-tools</connection>
-		<tag>sheep-dog-dev-svc-1.9</tag>
+		<tag>sheep-dog-dev-svc-1.0</tag>
 	</scm>
 
 	<repositories>
