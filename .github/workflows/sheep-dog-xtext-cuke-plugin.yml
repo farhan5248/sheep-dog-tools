@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   sheep-dog-xtext-cuke-plugin:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event.workflow_run.conclusion == 'success' }}
     uses: ./.github/workflows/release.yml
     with:
       project: 'sheepdogxtextcukeplugin.parent'
