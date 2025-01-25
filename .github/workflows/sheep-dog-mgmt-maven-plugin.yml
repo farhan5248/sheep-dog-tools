@@ -2,12 +2,6 @@ name: Publish Sheep Dog Management Maven Plugin
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "main" ]
-    paths:
-      - 'sheep-dog-mgmt-maven-plugin/**'
-    paths-ignore:
-      - 'scripts/**'
 permissions:
   contents: write
   packages: write
