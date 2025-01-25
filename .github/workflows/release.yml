@@ -64,6 +64,9 @@ jobs:
         git push --follow-tags
       env:
         GITHUB_TOKEN: ${{ github.token }}
+        MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+        ARTEMIS_USER: ${{ secrets.ARTEMIS_USER }}
+        ARTEMIS_PASSWORD: ${{ secrets.ARTEMIS_PASSWORD }}
     - name: Publish SNAPSHOT version
       working-directory: ./${{ inputs.project }}
       run: |
@@ -78,3 +81,6 @@ jobs:
         mvn deploy -DskipTests
       env:
         GITHUB_TOKEN: ${{ github.token }}
+        MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+        ARTEMIS_USER: ${{ secrets.ARTEMIS_USER }}
+        ARTEMIS_PASSWORD: ${{ secrets.ARTEMIS_PASSWORD }}

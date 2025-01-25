@@ -1,4 +1,4 @@
-name: Snapshot
+name: Snapshot Docker
 
 on:
   workflow_call:
@@ -17,12 +17,14 @@ on:
           - sheep-dog-mgmt-maven-plugin
           - sheep-dog-dev
           - sheep-dog-dev-maven-plugin
+          - sheep-dog-dev-svc
+          - sheep-dog-dev-svc-maven-plugin
           - sheep-dog-test
           - sheepdogxtextcukeplugin.parent
           - sheepdogxtextplugin.parent
 jobs:
   build:
-    runs-on: [farhan5248-runners]
+    runs-on: [farhan5248-runners, linux]
     permissions:
       contents: read
       packages: write
@@ -37,9 +39,23 @@ jobs:
       uses: stCarolas/setup-maven@v5
       with:
         maven-version: '3.9.9'
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ vars.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ github.token }}
     - name: Run Maven
       working-directory: ./${{ inputs.project }}
       run: |
         mvn deploy
       env:
         GITHUB_TOKEN: ${{ github.token }}
+        MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+        ARTEMIS_USER: ${{ secrets.ARTEMIS_USER }}
+        ARTEMIS_PASSWORD: ${{ secrets.ARTEMIS_PASSWORD }}

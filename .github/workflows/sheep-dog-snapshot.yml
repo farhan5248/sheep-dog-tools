@@ -50,14 +50,14 @@ jobs:
 
   sheep-dog-dev-svc:
     needs: [sheep-dog-dev]
-    uses: ./.github/workflows/snapshot.yml
+    uses: ./.github/workflows/snapshot-docker.yml
     with:
       project: 'sheep-dog-dev-svc'
     secrets: inherit
 
   sheep-dog-dev-svc-maven-plugin:
     needs: [sheep-dog-dev-svc]
-    uses: ./.github/workflows/snapshot.yml
+    uses: ./.github/workflows/snapshot-docker.yml
     with:
       project: 'sheep-dog-dev-svc-maven-plugin'   
     secrets: inherit
