@@ -1,10 +1,6 @@
 name: Publish Sheep Dog Dev Maven Plugin Release
 
 on:
-  workflow_run:
-    workflows: ["Publish Sheep Dog Dev Release"]
-    types:
-      - completed
   workflow_dispatch:
   push:
     branches: [ "main" ]
@@ -16,7 +12,6 @@ permissions:
 
 jobs:
   sheep-dog-dev-maven-plugin:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event.workflow_run.conclusion == 'success' }}
     uses: ./.github/workflows/release.yml
     with:
       project: 'sheep-dog-dev-maven-plugin'

@@ -55,6 +55,7 @@ jobs:
     - name: Publish Release version
       working-directory: ./${{ inputs.project }}
       run: |
+        git pull
         mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=false -DallowDowngrade=true
         if [ ${{ inputs.plugin }} == Maven ]; then
           mvn -B release:prepare -DcheckModificationExcludeList=pom.xml -DpreparationGoals=deploy
