@@ -241,7 +241,7 @@
 								<dockerFile>docker/springboot.dockerfile</dockerFile>
 							</build>
 							<alias>${docker.registry.dockerhub}/${project.artifactId}</alias>
-							<name>${docker.registry.dockerhub}/farhan5248/${project.artifactId}</name>
+							<name>${docker.registry.dockerhub}/farhan5248/%a:%l</name>
 							<registry>${docker.registry.dockerhub}</registry>
 						</image>
 						<image>
@@ -250,7 +250,7 @@
 								<dockerFile>docker/springboot.dockerfile</dockerFile>
 							</build>
 							<alias>${docker.registry.github}/${project.artifactId}</alias>
-							<name>${docker.registry.github}/farhan5248/${project.artifactId}</name>
+							<name>${docker.registry.github}/farhan5248/%a:%l</name>
 							<registry>${docker.registry.github}</registry>
 						</image>
 					</images>
