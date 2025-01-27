@@ -62,5 +62,6 @@ kubectl delete namespace sheep-dog-dev
 # Local Kubernetes
 minikube start --driver docker --static-ip 192.168.49.2
 kubectl apply -f docker/deployment.yaml
+kubectl apply -k overlays/failsafe
 kubectl port-forward -n failsafe svc/sheep-dog-dev-db 30306:3306
 kubectl port-forward -n failsafe svc/sheep-dog-dev-svc 30080:8080
