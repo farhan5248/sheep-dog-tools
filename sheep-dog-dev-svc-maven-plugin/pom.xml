@@ -218,6 +218,23 @@
 							</arguments>
 						</configuration>
 					</execution>
+					<execution>
+						<id>stop-stack</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>kubectl</executable>
+							<arguments>
+								<argument>delete</argument>
+								<argument>deployment</argument>
+								<argument>sheep-dog-dev</argument>
+								<argument>-n</argument>
+								<argument>failsafe</argument>
+							</arguments>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 		</plugins>

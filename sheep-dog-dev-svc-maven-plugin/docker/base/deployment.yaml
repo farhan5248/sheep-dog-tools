@@ -25,6 +25,9 @@ spec:
                   key: MYSQL_ROOT_PASSWORD
           ports:
             - containerPort: 3306
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: sheep-dog-dev-storage
           livenessProbe:
             exec:
               command:
@@ -65,3 +68,7 @@ spec:
             requests:
               memory: "256Mi"
               cpu: "250m"
+      volumes:
+        - name: sheep-dog-dev-storage
+          persistentVolumeClaim:
+            claimName: sheep-dog-dev-db-pvc
