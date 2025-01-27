@@ -24,5 +24,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Deploy to Kubernetes
-      run: |
-        kubectl apply -k overlays/${{ inputs.namespace }}
+    working-directory: ./sheep-dog-specs
+    run: |
+        kubectl apply -k docker/overlays/${{ inputs.namespace }}
