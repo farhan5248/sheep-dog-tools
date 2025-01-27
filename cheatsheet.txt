@@ -57,7 +57,7 @@ kubectl delete deployment kubernetes-bootcamp
 kubectl create namespace failsafe
 kubectl get all --namespace=sheep-dog-dev -o yaml > sheep-dog-dev-resources.yaml
 kubectl apply -f sheep-dog-dev-resources.yaml --namespace=failsafe
-kubectl delete namespace sheep-dog-dev
+kubectl delete all -l app=sheep-dog-dev -n failsafe
 
 # Local Kubernetes
 minikube start --driver docker --static-ip 192.168.49.2
