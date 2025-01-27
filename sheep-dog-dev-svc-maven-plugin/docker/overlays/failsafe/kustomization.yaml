@@ -2,7 +2,11 @@ namespace: failsafe
 resources:
   - ../../../../sheep-dog-specs/docker/base
 patches:
-  - path: service-patch.yaml
+  - path: service-patch-svc.yaml
     target:
       kind: Service
       name: sheep-dog-dev-svc
+  - path: service-patch-db.yaml
+    target:
+      kind: Service
+      name: sheep-dog-dev-db
