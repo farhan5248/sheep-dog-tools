@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sheep-dog-dev
+  name: sheep-dog-dev-db
   labels:
     app: sheep-dog-dev
 spec:
   selector:
     matchLabels:
-      app: sheep-dog-dev
+      app: sheep-dog-dev-db
   template:
     metadata:
       labels:
-        app: sheep-dog-dev
+        app: sheep-dog-dev-db
     spec:
       containers:
         - name: sheep-dog-dev-db
@@ -45,6 +45,27 @@ spec:
             requests:
               memory: "256Mi"
               cpu: "250m"
+      volumes:
+        - name: sheep-dog-dev-storage
+          persistentVolumeClaim:
+            claimName: sheep-dog-dev-db-pvc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sheep-dog-dev-svc
+  labels:
+    app: sheep-dog-dev
+spec:
+  selector:
+    matchLabels:
+      app: sheep-dog-dev-svc
+  template:
+    metadata:
+      labels:
+        app: sheep-dog-dev-svc
+    spec:
+      containers:
         - name: sheep-dog-dev-svc
           image: farhan5248/sheep-dog-dev-svc:latest
           imagePullPolicy: "Always"
@@ -68,7 +89,3 @@ spec:
             requests:
               memory: "256Mi"
               cpu: "250m"
-      volumes:
-        - name: sheep-dog-dev-storage
-          persistentVolumeClaim:
-            claimName: sheep-dog-dev-db-pvc

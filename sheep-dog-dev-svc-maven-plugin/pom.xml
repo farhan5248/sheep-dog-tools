@@ -228,8 +228,9 @@
 							<executable>kubectl</executable>
 							<arguments>
 								<argument>delete</argument>
-								<argument>deployment</argument>
-								<argument>sheep-dog-dev</argument>
+								<argument>all</argument>
+								<argument>-l</argument>
+								<argument>app=sheep-dog-dev</argument>
 								<argument>-n</argument>
 								<argument>failsafe</argument>
 							</arguments>
