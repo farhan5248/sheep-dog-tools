@@ -1,0 +1,12 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sheep-dog-dev-ingress
+  labels:
+    app: sheep-dog-dev
+spec:
+  defaultBackend:
+    service:
+      name: sheep-dog-dev-nginx-svc
+      port:
+        number: 8080
