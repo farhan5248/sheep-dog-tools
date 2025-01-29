@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Ingress
+metadata:
+  name: sheep-dog-dev-ingress
+spec:
+  rules:
+    - host: test.sheepdogdev.io
