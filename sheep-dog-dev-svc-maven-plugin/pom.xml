@@ -228,7 +228,7 @@
 							<executable>kubectl</executable>
 							<arguments>
 								<argument>delete</argument>
-								<argument>all,pvc</argument>
+								<argument>deployments</argument>
 								<argument>-l</argument>
 								<argument>app=sheep-dog-dev</argument>
 								<argument>-n</argument>
