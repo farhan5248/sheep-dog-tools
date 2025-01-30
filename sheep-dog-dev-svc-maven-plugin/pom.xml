@@ -221,7 +221,7 @@
 							<arguments>
 								<argument>apply</argument>
 								<argument>-k</argument>
-								<argument>docker/overlays/failsafe</argument>
+								<argument>../sheep-dog-specs/docker/overlays/failsafe</argument>
 							</arguments>
 						</configuration>
 					</execution>

@@ -4,25 +4,36 @@ import java.util.TreeMap;
 import org.farhan.mbt.service.ModelTransformerResponse;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 public class GoalObject extends TestObject {
 
-	@Value("${server.host:localhost}")
-	private String serverHost;
-
-	@Value("${server.port:8080}")
-	private int serverPort;
+	private final RestTemplate restTemplate = new RestTemplate();
 
 	public GoalObject() {
 		attributes.put("tags", "");
 	}
 
+	@Value("${sheepdog.host:dev.sheepdogdev.io}")
+	private String serverHost;
+
+	@Value("${sheepdog.port:80}")
+	private int serverPort;
+
+	@Value("${sheepdog.timeout:120000}")
+	private int timeout;
+
 	private String getHost() {
 		return "http://" + serverHost + ":" + serverPort + "/";
 	}
 
-	private final RestTemplate restTemplate = new RestTemplate();
+	private void clearObjects(String goal) {
+		TreeMap<String, String> parameters = new TreeMap<String, String>();
+		parameters.put("tags", attributes.get("tags"));
+		restTemplate.delete(getHost() + "clear" + goal + "Objects?tags={tags}", parameters);
+	}
 
 	private String convertObject(String goal, String fileName, String contents) {
 		TreeMap<String, String> parameters = new TreeMap<String, String>();
@@ -44,10 +55,30 @@ public class GoalObject extends TestObject {
 		}
 	}
 
-	private void clearObjects(String goal) {
-		TreeMap<String, String> parameters = new TreeMap<String, String>();
-		parameters.put("tags", attributes.get("tags"));
-		restTemplate.delete(getHost() + "clear" + goal + "Objects?tags={tags}", parameters);
+	private void waitForService() throws Exception {
+		long startTime = System.currentTimeMillis();
+		while (System.currentTimeMillis() - startTime < timeout) {
+			try {
+				ResponseEntity<String> response = restTemplate.getForEntity(getHost() + "actuator/health",
+						String.class);
+				if (response.getStatusCode() == HttpStatus.OK &&
+						response.getBody().contains("\"status\":\"UP\"")) {
+					return;
+				}
+			} catch (Exception e) {
+				long timeLeft = (timeout - (System.currentTimeMillis() - startTime)) / 1000;
+				System.out.println("Service not ready yet, " + timeLeft + " seconds remaining");
+			}
+
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+				throw new Exception("Interrupted while waiting for service", e);
+			}
+		}
+
+		throw new Exception("Service did not become available within " + timeout + " milliseconds");
 	}
 
 	protected void runGoal(String goal) {
@@ -55,6 +86,7 @@ public class GoalObject extends TestObject {
 		SourceRepository sr = new SourceRepository();
 		String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/" };
 		try {
+			waitForService();
 			if (goal.endsWith("ToUML")) {
 				clearObjects(goal);
 				for (String dir : dirs) {

@@ -9,7 +9,7 @@ public abstract class GoalObject extends TestObject {
 	@Value("${sheepdog.host:sheep-dog-dev-svc}")
 	private String serverHost;
 	
-	@Value("${sheepdog.port:30080}")
+	@Value("${sheepdog.port:80}")
 	private int serverPort;
 
 	@Value("${sheepdog.timeout:120000}")

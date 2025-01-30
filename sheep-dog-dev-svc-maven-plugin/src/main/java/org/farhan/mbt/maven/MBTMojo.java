@@ -29,20 +29,17 @@ public abstract class MBTMojo extends AbstractMojo {
 		this.restTemplate = config.restTemplate();
 	}
 
-	@Parameter(property = "timeout", defaultValue = "120000")
-	public int timeout;
-
-	/**
-	 * The tag of the selected edges.
-	 */
 	@Parameter(property = "tag", defaultValue = "")
 	public String tag;
 
-	@Parameter(property = "port", defaultValue = "8080")
+	@Parameter(property = "host", defaultValue = "sheepdogdev.io")
+	public String host;
+
+	@Parameter(property = "port", defaultValue = "80")
 	public int port;
 
-	@Parameter(property = "host", defaultValue = "sheep-dog-dev-svc")
-	public String host;
+	@Parameter(property = "timeout", defaultValue = "120000")
+	public int timeout;
 
 	private String getHost() {
 		return "http://" + host + ":" + port + "/";

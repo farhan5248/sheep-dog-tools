@@ -281,13 +281,12 @@
 							<goal>exec</goal>
 						</goals>
 						<configuration>
-							<executable>docker</executable>
+							<executable>kubectl</executable>
 							<arguments>
-								<argument>compose</argument>
-								<argument>up</argument>
-								<argument>-d</argument>
+								<argument>apply</argument>
+								<argument>-k</argument>
+								<argument>../sheep-dog-specs/docker/overlays/failsafe</argument>
 							</arguments>
-							<workingDirectory>${project.basedir}/docker</workingDirectory>
 						</configuration>
 					</execution>
 					<execution>
@@ -297,12 +296,15 @@
 							<goal>exec</goal>
 						</goals>
 						<configuration>
-							<executable>docker</executable>
+							<executable>kubectl</executable>
 							<arguments>
-								<argument>compose</argument>
-								<argument>down</argument>
+								<argument>delete</argument>
+								<argument>deployments</argument>
+								<argument>-l</argument>
+								<argument>app=sheep-dog-dev</argument>
+								<argument>-n</argument>
+								<argument>failsafe</argument>
 							</arguments>
-							<workingDirectory>${project.basedir}/docker</workingDirectory>
 						</configuration>
 					</execution>
 				</executions>
