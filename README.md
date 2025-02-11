@@ -13,9 +13,9 @@ These are the 4 projects.
 
 I've tried to document and develop these projects for folks who are new to Xtext and Maven plugin development. 
 I'd read the pages in this order.
-1. [How to create the plugins](How-to-create-the-plugins)
-2. [How to build the plugins](How-to-build-the-plugins)
-2. [How to run the plugins](How-to-run-the-plugins)
-4. [How to modify the plugins](How-to-modify-the-plugins)
-5. [How to test the plugins](How-to-test-the-plugins)
-6. [How to release the plugins](How-to-release-the-plugins)
+1. [How to create the plugins](How-to-create-the-plugins.md)
+2. [How to build the plugins](How-to-build-the-plugins.md)
+2. [How to run the plugins](How-to-run-the-plugins.md)
+4. [How to modify the plugins](How-to-modify-the-plugins.md)
+5. [How to test the plugins](How-to-test-the-plugins.md)
+6. [How to release the plugins](How-to-release-the-plugins.md)

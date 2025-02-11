@@ -50,4 +50,6 @@ public interface ILanguageAccess {
 
 	public void saveObject(Object thObject, Map<Object, Object> options) throws Exception;
 
+	public String getFileExtension();
+
 }

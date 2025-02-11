@@ -3,6 +3,21 @@
  */
 package org.farhan.mbt.validation;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
+import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.CheckType;
+import org.farhan.mbt.LanguageAccessImpl;
+import org.farhan.mbt.sheepDog.AbstractScenario;
+import org.farhan.mbt.sheepDog.Cell;
+import org.farhan.mbt.sheepDog.SheepDogPackage;
+import org.farhan.mbt.sheepDog.Feature;
+import org.farhan.mbt.sheepDog.Step;
+import org.farhan.mbt.sheepDog.Table;
+import org.farhan.helper.StepDefinitionHelper;
+
+
 /**
  * This class contains custom validation rules.
  *
@@ -12,5 +27,78 @@ package org.farhan.mbt.validation;
 public class SheepDogValidator extends AbstractSheepDogValidator {
 
 	public static final String INVALID_NAME = "invalidName";
+	public static final String INVALID_HEADER = "invalidHeader";
+	public static final String INVALID_STEP_TYPE = "invalidStepType";
+	public static final String MISSING_STEP_DEF = "missingStepDefinition";
+	public static final String MISSING_COMPONENT = "missingInitialComponent";
 
+	private void logError(Exception e, String name) {
+		// TODO inject the logger instead
+		System.out.println("There was a problem listing directories for: " + name);
+		StringWriter sw = new StringWriter();
+		e.printStackTrace(new PrintWriter(sw));
+		System.out.println(sw.toString());
+	}
+
+	@Check(CheckType.FAST)
+	public void checkStepName(Step step) {
+		try {
+			if (step.getName() != null) {
+				String problems = StepDefinitionHelper.validateError(new LanguageAccessImpl(step));
+				if (!problems.isEmpty()) {
+					error(problems, SheepDogPackage.Literals.STEP__NAME, INVALID_NAME);
+				} else {
+					problems = StepDefinitionHelper.validateWarning(new LanguageAccessImpl(step));
+					if (!problems.isEmpty()) {
+						warning(problems, SheepDogPackage.Literals.STEP__NAME, MISSING_STEP_DEF,
+								getAlternateObjects(new LanguageAccessImpl(step)));
+					}
+				}
+			}
+		} catch (Exception e) {
+			logError(e, step.getName());
+		}
+	}
+
+	public String[] getAlternateObjects(LanguageAccessImpl la) throws Exception {
+		Object[] alternateProposals = StepDefinitionHelper.getAlternateObjects(la);
+		String[] alternates = new String[alternateProposals.length];
+		for (int i = 0; i < alternates.length; i++) {
+			alternates[i] = alternateProposals[i].toString();
+		}
+		return alternates;
+	}
+
+	@Check(CheckType.FAST)
+	public void checkStepTableName(Table stepTable) {
+		// TODO Add table column row validation, each row should have the max number of
+		// columns
+		// TODO make tests for this
+		if (stepTable.getRows() != null) {
+			if (stepTable.getRows().size() > 0) {
+				for (Cell header : stepTable.getRows().get(0).getCells()) {
+					if (!Character.isUpperCase(header.getName().charAt(0))) {
+						warning("Table header names should start with a capital: " + header.getName(),
+								SheepDogPackage.Literals.TABLE__ROWS, INVALID_HEADER, header.getName());
+					}
+				}
+			}
+		}
+	}
+
+	@Check(CheckType.NORMAL)
+	public void checkScenario(AbstractScenario abstractScenario) {
+		if (!Character.isUpperCase(abstractScenario.getName().charAt(0))) {
+			warning("Scenario name should start with a capital", SheepDogPackage.Literals.ABSTRACT_SCENARIO__NAME,
+					INVALID_NAME);
+		}
+	}
+
+	@Check(CheckType.EXPENSIVE)
+	public void checkFeature(Feature feature) {
+		// TODO validate that feature file name and feature name are the same.
+		if (!Character.isUpperCase(feature.getName().charAt(0))) {
+			warning("Feature name should start with a capital", SheepDogPackage.Literals.MODEL__NAME, INVALID_NAME);
+		}
+	}
 }

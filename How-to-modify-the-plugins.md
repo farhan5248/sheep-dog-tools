@@ -2,11 +2,28 @@
 
 Once you've the initial project created and can run it, you can start to modify it.
 
+TODO add a list of common files needed or doublecheck the order in which these steps must be done.
+
+
+## Grammar Definition
+
+There's keywords, terminals and types. You define types using keyword, terminals and types.
+
+1. Keywords are literal strings like `Given:`. 
+2. Terminals are like literals, they're defined with regular expressions.
+3. Types have assignments, keywords and terminals.
+
+When creating your `.xtext` file you need to keep an eye on the generated Java classes.
+Like I first tried having one `Step` keyword with `(Given|When|Then|And|But|*)` but then I didn't get a Java class per keyword, just one for `Step`.
+So I guess you have to balance that duplication in your `.xtext` file.
+The other reason for not having `(Given|When|Then|And|But|*)` is that when you create a feature file, the API automatically picks the keyword. In this case, it'll always pick `Given` and there's no simple way to override it that I know of currently.
+
 
 ## Add dependencies
 
-If you want to add dependencies, you don't add them like you would normally. 
-Here's what I did.
+If you want to add dependencies, you don't add them like you would in a standard Maven project, there's some Eclipse specific steps. 
+
+### External jars
 
 Create a `lib` directory under the `cucumberxtexteditor` directory
 
@@ -83,18 +100,22 @@ The `MANIFEST.MF`, `build.properties` and `classpath` files should all have a re
 Rebuild the project and then you can use the jar in your code.
 Run `mvn generate-sources` to test it out as well.
 
-## Grammar Definition
+### Add these files 
 
-There's keywords, terminals and types. You define types using keyword, terminals and types.
+```
+cucumberxtexteditor/src/org/farhan/mbt/LanguageAccessImpl.java
+```
 
-1. Keywords are literal strings like `Given:`. 
-2. Terminals are like literals, they're defined with regular expressions.
-3. Types have assignments, keywords and terminals.
+### Eclipse IDE jars
 
-When creating your `.xtext` file you need to keep an eye on the generated Java classes.
-Like I first tried having one `Step` keyword with `(Given|When|Then|And|But|*)` but then I didn't get a Java class per keyword, just one for `Step`.
-So I guess you have to balance that duplication in your `.xtext` file.
-The other reason for not having `(Given|When|Then|And|But|*)` is that when you create a feature file, the API automatically picks the keyword. In this case, it'll always pick `Given` and there's no simple way to override it that I know of currently.
+You might need to reference jars available to the plugin only when running in the IDE.
+These are to access the file system etc.
+
+In META-INF/MANIFEST.MF/Dependencies/org.eclipse.xtext.builder
+
+### Expose packages to downstream jars
+
+In META-INF/MANIFEST.MF/Runtime/org.farhan.*
 
 
 ## Code Generation
@@ -104,6 +125,14 @@ The other reason for not having `(Given|When|Then|And|But|*)` is that when you c
 ```
 cucumberxtexteditor/src/org/farhan/generator/CucumberGenerator.xtend
 ```
+
+### Add these files
+
+```
+cucumberxtexteditor/src/org/farhan/generator/SheepDogOutputConfigurationProvider.java
+```
+
+Modify the org.farhan.mbt.SheepDogRuntimeModule.java
 
 ### Java vs Xtend Generator
 
@@ -135,22 +164,6 @@ There's a way to add documentation which I'll code later.
 ```
 cucumberxtexteditor/src/org/farhan/formatting2/CucumberFormatter.java
 ```
-
-## Quick Fix
-
-### Initial Generated Files
-
-```
-cucumberxtexteditor.ui/src/org/farhan/ui/quickfix/CucumberQuickfixProvider.java
-```
-
-### Usage
-
-With this you can modify the file itself or by generating code.
-It's like when using the Java editor you can create a class that doesn't exist or change the method name or type itself.
-For now I haven't done anything special with the file modification quick fix.
-What I want to do is have it suggest a qualified name for those that don't have a component specified.
-Another quick fix is to rename an object path if there's already an object defined but with a different path.
 
 ## Syntax-Colouring
 
@@ -277,9 +290,10 @@ In this example, I'm assigning the tag name the same colour as the keyword `@`.
 				CucumberHighlightingConfiguration.TAG_ID);
 	}
 ``` 
-# Validation
 
-## Initial Generated Files
+## Validation
+
+### Initial Generated Files
 
 ```
 cucumberxtexteditor/src/org/farhan/validation/CucumberValidator.java
@@ -289,3 +303,19 @@ cucumberxtexteditor/src/org/farhan/validation/CucumberValidator.java
 
 There's 3 types of checks, `FAST`, `NORMAL`, `EXPENSIVE`.
 They're triggered when the file is modified, when it's saved and when you select the `Validate` menu item respectively.
+
+## Quick Fix
+
+### Initial Generated Files
+
+```
+cucumberxtexteditor.ui/src/org/farhan/ui/quickfix/CucumberQuickfixProvider.java
+```
+
+### Usage
+
+With this you can modify the file itself or by generating code.
+It's like when using the Java editor you can create a class that doesn't exist or change the method name or type itself.
+For now I haven't done anything special with the file modification quick fix.
+What I want to do is have it suggest a qualified name for those that don't have a component specified.
+Another quick fix is to rename an object path if there's already an object defined but with a different path.

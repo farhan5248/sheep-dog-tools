@@ -14,18 +14,22 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.ecore,
  org.eclipse.xtext.xbase.lib;bundle-version="2.36.0",
  org.eclipse.emf.common,
- org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ org.eclipse.xtext.builder;bundle-version="2.36.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-21
-Export-Package: org.farhan.mbt.formatting2,
- org.farhan.mbt.services,
- org.farhan.mbt.scoping,
+Export-Package: org.farhan.common,
+ org.farhan.helper,
+ org.farhan.mbt,
+ org.farhan.mbt.formatting2,
+ org.farhan.mbt.formatting2.sheepDog,
+ org.farhan.mbt.generator,
  org.farhan.mbt.parser.antlr,
  org.farhan.mbt.parser.antlr.internal,
- org.farhan.mbt,
+ org.farhan.mbt.scoping,
+ org.farhan.mbt.serializer,
+ org.farhan.mbt.services,
+ org.farhan.mbt.sheepDog,
  org.farhan.mbt.sheepDog.impl,
  org.farhan.mbt.sheepDog.util,
- org.farhan.mbt.validation,
- org.farhan.mbt.sheepDog,
- org.farhan.mbt.generator,
- org.farhan.mbt.serializer
+ org.farhan.mbt.validation
 Import-Package: org.apache.log4j

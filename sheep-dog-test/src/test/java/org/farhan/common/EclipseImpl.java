@@ -245,4 +245,9 @@ public class EclipseImpl implements ILanguageAccess {
 	public void setValidationMessage(String message) {
 		this.validationMessage = message;
 	}
+
+	@Override
+	public String getFileExtension() {
+		return ".feature";
+	}
 }

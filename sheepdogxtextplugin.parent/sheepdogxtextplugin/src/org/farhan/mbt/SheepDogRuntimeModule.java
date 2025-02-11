@@ -3,16 +3,19 @@
  */
 package org.farhan.mbt;
 
+import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerBindings;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
+import org.farhan.mbt.generator.SheepDogOutputConfigurationProvider;
 import org.farhan.mbt.parser.antlr.MySheepDogParser;
 import org.farhan.mbt.parser.antlr.internal.InternalSheepDogLexer;
 import org.farhan.mbt.parser.antlr.internal.MySheepDogLexer;
 
 import com.google.inject.Binder;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 import com.google.inject.name.Names;
 
 /**
@@ -24,6 +27,13 @@ public class SheepDogRuntimeModule extends AbstractSheepDogRuntimeModule {
 	@Override
 	public Class<? extends IParser> bindIParser() {
 		return MySheepDogParser.class;
+	}
+	
+	@Override
+	public void configure(Binder binder) {
+		super.configure(binder);
+		binder.bind(IOutputConfigurationProvider.class).to(SheepDogOutputConfigurationProvider.class)
+				.in(Singleton.class);
 	}
 
 	@Override

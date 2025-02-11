@@ -1,4 +1,4 @@
-package org.farhan.helper;
+package org.farhan.mbt;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,20 +16,21 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.farhan.mbt.cucumber.AbstractScenario;
-import org.farhan.mbt.cucumber.Background;
-import org.farhan.mbt.cucumber.Cell;
-import org.farhan.mbt.cucumber.CucumberFactory;
-import org.farhan.mbt.cucumber.Feature;
-import org.farhan.mbt.cucumber.ParametersTable;
-import org.farhan.mbt.cucumber.Row;
-import org.farhan.mbt.cucumber.Statement;
-import org.farhan.mbt.cucumber.Step;
-import org.farhan.mbt.cucumber.StepDefinition;
-import org.farhan.mbt.cucumber.StepObject;
-import org.farhan.mbt.cucumber.StepTable;
-import org.farhan.mbt.cucumber.StepParameters;
-import org.farhan.mbt.generator.CucumberOutputConfigurationProvider;
+import org.farhan.mbt.sheepDog.AbstractScenario;
+import org.farhan.mbt.sheepDog.Background;
+import org.farhan.mbt.sheepDog.Cell;
+import org.farhan.mbt.sheepDog.SheepDogFactory;
+import org.farhan.mbt.sheepDog.Feature;
+import org.farhan.mbt.sheepDog.Table;
+import org.farhan.mbt.sheepDog.Row;
+import org.farhan.mbt.sheepDog.Statement;
+import org.farhan.mbt.sheepDog.Step;
+import org.farhan.mbt.sheepDog.StepDefinition;
+import org.farhan.mbt.sheepDog.StepObject;
+import org.farhan.mbt.sheepDog.StepParameters;
+import org.farhan.helper.ILanguageAccess;
+import org.farhan.helper.StepHelper;
+import org.farhan.mbt.generator.SheepDogOutputConfigurationProvider;
 
 public class LanguageAccessImpl implements ILanguageAccess {
 
@@ -69,7 +70,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	@Override
 	public Object createStepDefinition(Object stepObject, String predicate) {
 		StepDefinition stepDefinition;
-		stepDefinition = CucumberFactory.eINSTANCE.createStepDefinition();
+		stepDefinition = SheepDogFactory.eINSTANCE.createStepDefinition();
 		stepDefinition.setName(predicate);
 		((StepObject) stepObject).getStepDefinitions().add(stepDefinition);
 		return stepDefinition;
@@ -79,24 +80,24 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		// If the step doesn't have a step table, then don't do anything
 
 		StepDefinition so = (StepDefinition) stepDefinition;
-		StepParameters parameters = CucumberFactory.eINSTANCE.createStepParameters();
+		StepParameters parameters = SheepDogFactory.eINSTANCE.createStepParameters();
 		parameters.setName(Integer.toString(so.getStepParameters().size() + 1));
 		so.getStepParameters().add(parameters);
 
-		ParametersTable parametersTable = CucumberFactory.eINSTANCE.createParametersTable();
-		parameters.setParametersTable(parametersTable);
+		Table Table = SheepDogFactory.eINSTANCE.createTable();
+		parameters.setParametersTable(Table);
 
-		Row row = CucumberFactory.eINSTANCE.createRow();
-		parametersTable.getRows().add(row);
+		Row row = SheepDogFactory.eINSTANCE.createRow();
+		Table.getRows().add(row);
 		for (Cell srcCell : getHeader()) {
-			Cell cell = CucumberFactory.eINSTANCE.createCell();
+			Cell cell = SheepDogFactory.eINSTANCE.createCell();
 			cell.setName(srcCell.getName());
 			row.getCells().add(cell);
 		}
 	}
 
 	private Object createStepObject() {
-		StepObject stepObject = CucumberFactory.eINSTANCE.createStepObject();
+		StepObject stepObject = SheepDogFactory.eINSTANCE.createStepObject();
 		stepObject.setName(StepHelper.getObject(getStepName()));
 		return stepObject;
 	}
@@ -140,7 +141,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	@Override
 	public ArrayList<String> getFiles() throws Exception {
 		IFolder folder = getProject()
-				.getFolder(CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory());
+				.getFolder(SheepDogOutputConfigurationProvider.stepDefsOutput.getOutputDirectory());
 		ArrayList<String> components = new ArrayList<String>();
 		for (IResource ir : folder.members()) {
 			components.add(ir.getName());
@@ -151,7 +152,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	@Override
 	public ArrayList<String> getFilesRecursively(String component) throws Exception {
 		IFolder folder = getProject()
-				.getFolder(CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory() + "/" + component);
+				.getFolder(SheepDogOutputConfigurationProvider.stepDefsOutput.getOutputDirectory() + "/" + component);
 
 		ArrayList<String> components = new ArrayList<String>();
 		for (String stepDefObjectResource : getFolderResources(folder)) {
@@ -162,10 +163,10 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	}
 
 	private List<Cell> getHeader() {
-		StepTable stepTable = step.getTheStepTable();
-		if (stepTable != null) {
-			if (stepTable.getRows().size() > 0) {
-				return stepTable.getRows().get(0).getCells();
+		Table Table = step.getTheStepTable();
+		if (Table != null) {
+			if (Table.getRows().size() > 0) {
+				return Table.getRows().get(0).getCells();
 			} else {
 				return null;
 			}
@@ -182,7 +183,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	}
 
 	private String getOutputName() {
-		return CucumberOutputConfigurationProvider.stepDefsOutput.getOutputDirectory();
+		return SheepDogOutputConfigurationProvider.stepDefsOutput.getOutputDirectory();
 	}
 
 	public ArrayList<Object> getPreviousSteps() {
@@ -313,7 +314,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 
 	@Override
 	public String getFileExtension() {
-		return ".feature";
+		return ".asciidoc";
 	}
 
 }
