@@ -10,9 +10,9 @@ Feature: Process
   Scenario: Submit
 
     Given The Object page is created as follows
-          \"\"\"
+          """
           text1
-          \"\"\"
+          """
 ----
 
 === When The mbt-transformer plugin, cucumber-to-uml goal is executed
@@ -39,10 +39,10 @@ Feature: Process
   Scenario: Submit
 
     Given The blah application, Object page is created as follows
-          \"\"\"
+          """
           text1
           text2
-          \"\"\"
+          """
 ----
 
 === When The mbt-transformer plugin, cucumber-to-uml goal is executed
@@ -79,10 +79,10 @@ Feature: Process
   Scenario: Submit
 
     Given The blah application, Object page is created as follows
-          \"\"\"
+          """
           text1
           text2
-          \"\"\"
+          """
 ----
 
 === When The mbt-transformer plugin, cucumber-to-uml goal is executed

@@ -53,18 +53,18 @@ public class DocStringFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("=== Given do step one\n");
 			sb.append("\n");
-			sb.append(" ---- \n");
+			sb.append("----\n");
 			sb.append("Line1 \n");
 			sb.append("\n");
 			sb.append("\n");
 			sb.append("  Line2 \n");
 			sb.append("\n");
 			sb.append("\n");
-			sb.append(" ---- \n");
+			sb.append("----\n");
 			sb.append("\n");
 			assertNoFeatureErrors(sb);
 			it.setToBeFormatted(sb.toString());
-			it.setExpectation(getExpected().toString());
+			it.setExpectation(sb.toString());
 		});
 	}
 }

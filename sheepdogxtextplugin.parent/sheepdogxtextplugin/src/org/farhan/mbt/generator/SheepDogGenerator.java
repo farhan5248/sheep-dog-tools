@@ -3,28 +3,62 @@
  */
 package org.farhan.mbt.generator;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.resource.SaveOptions;
+import org.farhan.mbt.LanguageAccessImpl;
+import org.farhan.helper.StepDefinitionHelper;
+import org.farhan.mbt.sheepDog.AbstractScenario;
+import org.farhan.mbt.sheepDog.Feature;
+import org.farhan.mbt.sheepDog.Step;
 
 /**
  * Generates code from your model files on save.
  * 
- * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
+ * See
+ * https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 public class SheepDogGenerator extends AbstractGenerator {
 
 	@Override
-	public void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-//		Iterator<Greeting> filtered = Iterators.filter(resource.getAllContents(), Greeting.class);
-//		Iterator<String> names = Iterators.transform(filtered, new Function<Greeting, String>() {
-//
-//			@Override
-//			public String apply(Greeting greeting) {
-//				return greeting.getName();
-//			}
-//		});
-//		fsa.generateFile("greetings.txt", "People to greet: " + IteratorExtensions.join(names, ", "));
+	public void beforeGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
+	}
+
+	@Override
+	public void afterGenerate(Resource input, IFileSystemAccess2 fsa, IGeneratorContext context) {
+	}
+
+	@Override
+	public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
+
+		if (resource.getContents().get(0) instanceof Feature) {
+			Feature theFeature = (Feature) resource.getContents().get(0);
+			for (AbstractScenario scenario : theFeature.getAbstractScenarios()) {
+				for (Step step : scenario.getSteps()) {
+					doGenerate(step);
+				}
+			}
+		}
+	}
+
+	public static void doGenerate(Step step) {
+		try {
+			StepDefinitionHelper.generate(new LanguageAccessImpl(step),
+					SaveOptions.newBuilder().format().getOptions().toOptionsMap());
+		} catch (Exception e) {
+			logError(e, step);
+		}
+	}
+
+	private static void logError(Exception e, Step step) {
+		// TODO inject the logger instead
+		System.out.println("There was a problem generating for step: " + step.getName());
+		StringWriter sw = new StringWriter();
+		System.out.println(sw.toString());
+		e.printStackTrace(new PrintWriter(sw));
 	}
 }

@@ -17,10 +17,9 @@ public class StatementFormatter extends Formatter {
 
 	public void format(IFormattableDocument doc, SheepDogGrammarAccess ga, SheepDogFormatter df) {
 		StatementElements a = ga.getStatementAccess();
-		formatTitle(df.getRegion(theStatement, a.getNameTitleParserRuleCall_0_0()), doc);
+		formatTitleNoSpace(df.getRegion(theStatement, a.getNameTitleParserRuleCall_0_0()), doc);
 		formatEOL12RuleCall(df.getRegion(theStatement, a.getEOLTerminalRuleCall_1()), doc);
 	}
-	
 
 	protected void formatEOL12RuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
 		if (isLast) {
@@ -28,11 +27,6 @@ public class StatementFormatter extends Formatter {
 		} else {
 			formatEOL2MaxRuleCall(iSR, doc);
 		}
-	}
-
-	protected void formatTitle(ISemanticRegion iSR, IFormattableDocument doc) {
-		doc.prepend(iSR, it -> it.noSpace());
-		doc.append(iSR, it -> it.noSpace());
 	}
 
 }

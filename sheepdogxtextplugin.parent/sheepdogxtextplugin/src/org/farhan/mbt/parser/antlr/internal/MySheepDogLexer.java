@@ -49,8 +49,7 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 		// it'd be a good example on how to hack the lexer for newbies
 
 		if (isKeyword("----")) {
-			mT__22();// InternalSheepDog.g:25:9: '----'
-			isDocString = !isDocString;
+			mRULE_RAWTEXT();// ( '----' RULE_EOL ( . )+ '----' RULE_EOL )
 		} else if (isKeyword("#")) {
 			mRULE_SL_COMMENT();
 		} else if (isKeyword("\n")) {
@@ -60,64 +59,59 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 			isTitle = false;
 		} else if (isKeyword(" ") || isKeyword("\t") || isKeyword("\r")) {
 			mRULE_WS();
-		} else if (isDocString) {
-			mRULE_WORD();
-		} else if (isKeyword("===")) {
-			mT__12();// InternalSheepDog.g:15:9: '==='
-		} else if (isKeyword("==")) {
-			mT__10();// InternalSheepDog.g:13:9: '=='
-		} else if (isKeyword("=")) {
-			mT__8();// InternalSheepDog.g:11:9: '='
 		} else if (isKeyword("|===")) {
-			mT__24();// InternalSheepDog.g:27:9: '|==='
+			mT__25();// '|==='
 		} else if (isKeyword("|")) {
-			// TODO need to figure out how to escape characters so that \| can be one token.
-			// Right now it can't be cause WORD can't include |. 
-			mT__28();// InternalSheepDog.g:30:9: '|'
+			mT__29();// '|'
 			isCell = true;
-		} else if (isCell) {
-			mRULE_WORD();
 		} else if (isKeyword("[options=\"header\"]")) {
-			mT__23();// InternalSheepDog.g:26:9: '[options=\"header\"]'
+			mT__24();// '[options=\"header\"]'
 		} else if (isKeyword("[tags=\"")) {
-			mT__26();// InternalSheepDog.g:28:9: '[tags=\"'
+			mT__27();// '[tags=\"'
 			isTag = true;
 		} else if (isKeyword("\"]")) {
-			mT__27();// InternalSheepDog.g:29:9: '\"]'
+			mT__28();// '\"]'
 			isTag = false;
 		} else if (isKeyword(":tags:")) {
-			mT__25();// InternalSheepDog.g:28:7: ( ':tags:' )
+			mT__26();// ( ':tags:' )
 			isTag = true;
-		} else if (isTag) {
-			// TODO remove isTag because TAGWORD is removed
+		} else if (isCell) {
 			mRULE_WORD();
+		} else if (isTag) {
+			mRULE_TAGWORD();
+		} else if (isKeyword("===")) {
+			mT__14();// '==='
+		} else if (isKeyword("==")) {
+			mT__12();// '=='
+		} else if (isKeyword("=")) {
+			mT__10();// '='
 		} else if (isKeyword("Object:")) {
-			mT__9();// InternalSheepDog.g:12:9: 'Object:'
+			mT__11();// 'Object:'
 		} else if (isKeyword("Definition:")) {
-			mT__11();// InternalSheepDog.g:14:9: 'Definition:'
+			mT__13();// 'Definition:'
 		} else if (isKeyword("Parameters:")) {
-			mT__13();// InternalSheepDog.g:16:9: 'Parameters:'
+			mT__15();// 'Parameters:'
 		} else if (isKeyword("Feature:")) {
-			mT__14();// InternalSheepDog.g:17:9: 'Feature:'
+			mT__16();// 'Feature:'
 		} else if (isKeyword("Background:")) {
-			mT__15();// InternalSheepDog.g:18:9: 'Background:'
+			mT__17();// 'Background:'
 		} else if (isKeyword("Scenario:")) {
-			mT__16();// InternalSheepDog.g:19:9: 'Scenario:'
+			mT__18();// 'Scenario:'
 		} else if (isKeyword("Examples:")) {
-			mT__17();// InternalSheepDog.g:20:9: 'Examples:'
+			mT__19();// 'Examples:'
 		} else if (isTitle) {
 			mRULE_WORD();
 		} else if (isKeyword("Given")) {
-			mT__18();// InternalSheepDog.g:21:9: 'Given'
+			mT__20();// 'Given'
 			isTitle = true;
 		} else if (isKeyword("When")) {
-			mT__19();// InternalSheepDog.g:22:9: 'When'
+			mT__21();// 'When'
 			isTitle = true;
 		} else if (isKeyword("Then")) {
-			mT__20();// InternalSheepDog.g:23:9: 'Then'
+			mT__22();// 'Then'
 			isTitle = true;
 		} else if (isKeyword("And")) {
-			mT__21();// InternalSheepDog.g:24:9: 'And'
+			mT__23();// 'And'
 			isTitle = true;
 		} else {
 			mRULE_WORD();

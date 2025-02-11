@@ -100,11 +100,11 @@ Feature: Process
           | grp | ins |
           | 10  | 5   |
      Then The Search application, Logout page is created as follows
-          \"\"\"
+          """
             text1
           
             text2
-          \"\"\"
+          """
 
   @tag3
   Scenario Outline: Story Two

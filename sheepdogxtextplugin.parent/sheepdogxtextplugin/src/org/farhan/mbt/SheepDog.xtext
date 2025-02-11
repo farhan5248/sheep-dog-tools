@@ -71,9 +71,7 @@ And:
 	(theStepTable=Table | theDocString=DocString)?;
 
 DocString:
-	'----' EOL
-	lines+=Line+
-	'----' EOL;
+	name=RAWTEXT EOL;
 
 Table:
 	'[options="header"]' EOL
@@ -85,33 +83,37 @@ Row:
 	cells+=Cell+ EOL;
 
 FeatureTags:
-	':tags:' name=WORD EOL;
+	':tags:' name=TAGWORD EOL;
 
 AbstractScenarioTags:
-	'[tags="' name=WORD '"]' EOL;
+	'[tags="' name=TAGWORD '"]' EOL;
 
 Cell:
 	'|' name=Title;
 
-// TODO these two are duplicates
 Statement:
 	name=Title EOL;
 
-Line:
-	name=Title EOL;
-
+// TODO maybe I don't need Title and can ignore the warnings about it being used in a loop
 Title:
 	WORD+;
 
+terminal TAGWORD:
+	!(' ' | '\t' | '\r' | '\n' | '"')*;
+
+// TODO look at fragments to handle escape characters etc instead of this and to handle re-using ' ' | '\t' | '\r' | '\n'
 terminal WORD:
-	!(' ' | '\t' | '\r' | '\n' | '#' | '"' | '|')+;
+	!(' ' | '\t' | '\r' | '\n' | '|' | '#')
+	!(' ' | '\t' | '\r' | '\n')*;
 
 terminal WS:
 	(' ' | '\t' | '\r')+;
 
-// single line comment
 terminal SL_COMMENT:
 	'#' !('\n')* EOL;
 
 terminal EOL:
 	('\n')+;
+
+terminal RAWTEXT:
+	'----' '\n' (.)+ '\n' '----';

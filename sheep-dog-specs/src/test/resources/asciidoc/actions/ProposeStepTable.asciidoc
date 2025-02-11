@@ -6,7 +6,7 @@
 
 [options="header"]
 |===
-| Step Name
+| Step Name                     
 | The daily batchjob, Input file
 |===
 
@@ -20,7 +20,7 @@
 
 [options="header"]
 |===
-| Step Name
+| Step Name                                           
 | The daily batchjob, Input file is created as follows
 |===
 
@@ -34,7 +34,7 @@
 
 [options="header"]
 |===
-| Step Name
+| Step Name                                           
 | The daily batchjob, Input file is created as follows
 |===
 
@@ -42,8 +42,8 @@
 
 [options="header"]
 |===
-| Object Name| Step Definition Name
-| daily batchjob/Input file.feature| is present
+| Object Name                       | Step Definition Name
+| daily batchjob/Input file.feature | is present          
 |===
 
 === When The step table proposal action is performed
@@ -56,7 +56,7 @@
 
 [options="header"]
 |===
-| Step Name
+| Step Name                                           
 | The daily batchjob, Input file is created as follows
 |===
 
@@ -64,8 +64,8 @@
 
 [options="header"]
 |===
-| Object Name| Step Definition Name| Parameters
-| daily batchjob/Input file.feature| is created as follows| H1
+| Object Name                       | Step Definition Name  | Parameters
+| daily batchjob/Input file.feature | is created as follows | H1        
 |===
 
 === When The step table proposal action is performed
@@ -74,6 +74,7 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| \| H1 \|| \| H1 \|
+| Suggestion | Suggestion Name
+| \| H1 \|   | \| Header 1 \|       
 |===
+

@@ -82,9 +82,35 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("|===\n");
 		assertFeatureErrors(sb);
 	}
+	
+	@Test
+	public void parseStepWithTableEscape() throws Exception {
+		StringBuilder sb = new StringBuilder();
+		sb.append("= Feature: This\n");
+		sb.append("== Scenario: Submit\n");
+		sb.append("=== Given do\n");
+		sb.append("[options=\"header\"]\n");
+		sb.append("|===\n");
+		sb.append("| Suggestion | Suggestion Name\n");
+		sb.append("| \\| H1 \\| | \\| H1 \\|\n");
+		sb.append("|===\n");
+		assertNoFeatureErrors(sb);
+	}
 
 	@Test
 	public void parseStepWithDocString() throws Exception {
+		StringBuilder sb = new StringBuilder();
+		sb.append("= Feature: This is a test feature\n");
+		sb.append("== Scenario: Submit a drug claim\n");
+		sb.append("=== Given do step one\n");
+		sb.append("----\n");
+		sb.append("Line1\n");
+		sb.append("----\n");
+		assertNoFeatureErrors(sb);
+	}
+	
+	@Test
+	public void parseStepWithDocStringEscape() throws Exception {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Feature: This is a test feature\n");
 		sb.append("== Scenario: Submit a drug claim\n");
@@ -103,8 +129,8 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("=== Given do step one\n");
 		sb.append("----\n");
 		sb.append("Line1\n");
-		sb.append("Line2\n");
-		sb.append("Line3\n");
+		sb.append("Line2\n\n\n");
+		sb.append("Line3\n\n");
 		sb.append("----\n");
 		assertNoFeatureErrors(sb);
 	}
