@@ -21,8 +21,8 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Step
-| Submit| Given The blah application, something/Object1 page is empty
+| Name | Step
+| Submit | Given The blah application, something/Object1 page is empty
 |===
 
 == Scenario: One tag, one statement, one step
@@ -49,8 +49,8 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Tags| Description
-| Submit| tag1| Desc line 1
+| Name | Tags | Description
+| Submit | tag1 | Desc line 1
 |===
 
 == Scenario: Two tags, two statements, two steps
@@ -79,16 +79,16 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Tags| Description
-| Submit| tag1,tag2| Desc line 1\nDesc line 2
+| Name | Tags | Description
+| Submit | tag1,tag2 | Desc line 1\nDesc line 2
 |===
 
 === And: The mbt-transformer plugin, Process.feature file Scenarios Steps section will be created as follows
 
 [options="header"]
 |===
-| Name| Step
-| Submit| Given The blah application, something/Object{Index} page is empty
+| Name | Step
+| Submit | Given The blah application, something/Object{Index} page is empty
 |===
 
 === Examples: Indices
@@ -128,16 +128,16 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Tags| Description
-| Submit| tag1,tag2,tag3| Desc line 1\nDesc line 2\nDesc line 3
+| Name | Tags | Description
+| Submit | tag1,tag2,tag3 | Desc line 1\nDesc line 2\nDesc line 3
 |===
 
 === And: The mbt-transformer plugin, Process.feature file Scenarios Steps section will be created as follows
 
 [options="header"]
 |===
-| Name| Step
-| Submit| Given The blah application, something/Object{Index} page is empty
+| Name | Step
+| Submit | Given The blah application, something/Object{Index} page is empty
 |===
 
 === Examples: Indices

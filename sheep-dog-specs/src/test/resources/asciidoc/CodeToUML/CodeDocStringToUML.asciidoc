@@ -23,8 +23,8 @@ Feature: Process
 
 [options="header"]
 |===
-| Interaction Name| Message| Argument Name| Annotation Detail
-| specs::Process::Submit| The Object page is created as follows| docString| 0 -} text1
+| Interaction Name | Message | Argument Name | Annotation Detail
+| specs::Process::Submit | The Object page is created as follows | docString | 0 -} text1
 |===
 
 == Scenario: Empty Lines
@@ -57,7 +57,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Interaction Name| Message| Argument Name| Annotation Detail
-| specs::Process::Submit| The Object page is created as follows| docString| 2 -} text1
-| specs::Process::Submit| The Object page is created as follows| docString| 5 -} text2
+| Interaction Name | Message | Argument Name | Annotation Detail
+| specs::Process::Submit | The Object page is created as follows | docString | 2 -} text1
+| specs::Process::Submit | The Object page is created as follows | docString | 5 -} text2
 |===

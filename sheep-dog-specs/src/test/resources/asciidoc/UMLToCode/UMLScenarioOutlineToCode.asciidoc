@@ -16,7 +16,6 @@ Feature: Process
       | h3  |
       | v31 |
 ----
-
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
 === And: The mbt-transformer plugin, uml-to-cucumber goal is executed
@@ -27,18 +26,18 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Step
-| Submit| Given The Object page is created as follows
-| Submit| Given The Object page is created as follows
+| Name   | Step                                       
+| Submit | Given The Object page is created as follows
+| Submit | Given The Object page is created as follows
 |===
 
 === And: The mbt-transformer plugin, Process.feature file Scenario Outline Examples Table section will be created as follows
 
 [options="header"]
 |===
-| Name| Examples| Row
-| Submit| Examples 1| \| h3 \|
-| Submit| Examples 1| \| v31 \|
+| Name   | Examples   | Row      
+| Submit | Examples 1 | \| h3 \| 
+| Submit | Examples 1 | \| v31 \|
 |===
 
 == Scenario: One tag, one statement, one step, one example
@@ -59,7 +58,6 @@ Feature: Process
       | h3  |
       | v31 |
 ----
-
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
 === And: The mbt-transformer plugin, uml-to-cucumber goal is executed
@@ -70,8 +68,8 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Tags| Description
-| Submit| tag1| Desc line 1
+| Name   | Tags | Description
+| Submit | tag1 | Desc line 1
 |===
 
 == Scenario: Two tags, two statements, two steps, two examples
@@ -100,7 +98,6 @@ Feature: Process
       | h3  |
       | v32 |
 ----
-
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
 === And: The mbt-transformer plugin, uml-to-cucumber goal is executed
@@ -111,25 +108,25 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Tags| Description
-| Submit| tag1,tag2| Desc line 1\nDesc line 2
+| Name   | Tags      | Description             
+| Submit | tag1,tag2 | Desc line 1\nDesc line 2
 |===
 
 === And: The mbt-transformer plugin, Process.feature file Scenario Outline Steps Data Table section will be created as follows
 
 [options="header"]
 |===
-| Name| Step
-| Submit| Given The Object{Index} page is created as follows
+| Name   | Step                                              
+| Submit | Given The Object{Index} page is created as follows
 |===
 
 === And: The mbt-transformer plugin, Process.feature file Scenario Outline Examples Table section will be created as follows
 
 [options="header"]
 |===
-| Name| Examples| Row
-| Submit| Examples {Index}| \| h3 \|
-| Submit| Examples {Index}| \| v3{Index} \|
+| Name   | Examples         | Row            
+| Submit | Examples {Index} | \| h3 \|       
+| Submit | Examples {Index} | \| v3{Index} \|
 |===
 
 === Examples: Indices
@@ -137,8 +134,8 @@ Feature: Process
 [options="header"]
 |===
 | Index
-| 1
-| 2
+| 1    
+| 2    
 |===
 
 == Scenario: Three tags, three statements, three steps, three examples
@@ -175,7 +172,6 @@ Feature: Process
       | h3  |
       | v33 |
 ----
-
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
 === And: The mbt-transformer plugin, uml-to-cucumber goal is executed
@@ -186,25 +182,25 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Tags| Description
-| Submit| tag1,tag2,tag3| Desc line 1\nDesc line 2\nDesc line 3
+| Name   | Tags           | Description                          
+| Submit | tag1,tag2,tag3 | Desc line 1\nDesc line 2\nDesc line 3
 |===
 
 === And: The mbt-transformer plugin, Process.feature file Scenario Outline Steps Data Table section will be created as follows
 
 [options="header"]
 |===
-| Name| Step
-| Submit| Given The Object{Index} page is created as follows
+| Name   | Step                                              
+| Submit | Given The Object{Index} page is created as follows
 |===
 
 === And: The mbt-transformer plugin, Process.feature file Scenario Outline Examples Table section will be created as follows
 
 [options="header"]
 |===
-| Name| Examples| Row
-| Submit| Examples {Index}| \| h3 \|
-| Submit| Examples {Index}| \| v3{Index} \|
+| Name   | Examples         | Row            
+| Submit | Examples {Index} | \| h3 \|       
+| Submit | Examples {Index} | \| v3{Index} \|
 |===
 
 === Examples: Indices
@@ -212,7 +208,8 @@ Feature: Process
 [options="header"]
 |===
 | Index
-| 1
-| 2
-| 3
+| 1    
+| 2    
+| 3    
 |===
+

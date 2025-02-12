@@ -14,8 +14,8 @@
 
 [options="header"]
 |===
-| Object Name| Object Description
-| daily batchjob/Input file.feature| Description
+| Object Name | Object Description
+| daily batchjob/Input file.feature | Description
 |===
 
 === When: The suggestion action is performed
@@ -24,8 +24,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name| Suggestion Description
-| The daily batchjob,| daily batchjob| daily batchjob
+| Suggestion | Suggestion Name | Suggestion Description
+| The daily batchjob, | daily batchjob | daily batchjob
 |===
 
 == Scenario: Documentation for component object
@@ -42,8 +42,8 @@
 
 [options="header"]
 |===
-| Object Name| Object Description
-| daily batchjob/Input file.feature| Description\n
+| Object Name | Object Description
+| daily batchjob/Input file.feature | Description\n
 |===
 
 === When: The suggestion action is performed
@@ -52,8 +52,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name| Suggestion Description
-| The daily batchjob, Input file| Input file| Description\n
+| Suggestion | Suggestion Name | Suggestion Description
+| The daily batchjob, Input file | Input file | Description\n
 |===
 
 == Scenario: Documentation for previous object which doesn't exist
@@ -73,8 +73,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name| Suggestion Description
-| The Input file| Input file| Referred in: The daily batchjob, Input file is present
+| Suggestion | Suggestion Name | Suggestion Description
+| The Input file | Input file | Referred in: The daily batchjob, Input file is present
 |===
 
 == Scenario: Documentation for previous object which exists and has no doc
@@ -92,8 +92,8 @@
 
 [options="header"]
 |===
-| Object Name| Object Description
-| daily batchjob/Input file.feature| empty
+| Object Name | Object Description
+| daily batchjob/Input file.feature | empty
 |===
 
 === When: The suggestion action is performed
@@ -102,8 +102,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name| Suggestion Description
-| The Input file| Input file| Referred in: The daily batchjob, Input file is present
+| Suggestion | Suggestion Name | Suggestion Description
+| The Input file | Input file | Referred in: The daily batchjob, Input file is present
 |===
 
 == Scenario: Documentation for previous object which exists and has doc
@@ -121,8 +121,8 @@
 
 [options="header"]
 |===
-| Object Name| Object Description
-| daily batchjob/Input file.feature| Description
+| Object Name | Object Description
+| daily batchjob/Input file.feature | Description
 |===
 
 === When: The suggestion action is performed
@@ -131,6 +131,6 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name| Suggestion Description
-| The Input file| Input file| Referred in: The daily batchjob, Input file is present
+| Suggestion | Suggestion Name | Suggestion Description
+| The Input file | Input file | Referred in: The daily batchjob, Input file is present
 |===

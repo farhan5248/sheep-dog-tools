@@ -75,6 +75,6 @@
 [options="header"]
 |===
 | Suggestion | Suggestion Name
-| \| H1 \|   | \| Header 1 \|       
+| \| H1 \|   | \| Header 1 \| 
 |===
 

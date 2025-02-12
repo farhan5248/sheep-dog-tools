@@ -25,6 +25,6 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Step| Content
-| Submit| Given The Object page is created as follows| text1
+| Name | Step | Content
+| Submit | Given The Object page is created as follows | text1
 |===

@@ -27,9 +27,9 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Examples| Row
-| Submit| Examples 1| h1
-| Submit| Examples 1| v1
+| Name | Examples | Row
+| Submit | Examples 1 | h1
+| Submit | Examples 1 | v1
 |===
 
 == Scenario: Two rows, two cells
@@ -60,10 +60,10 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Examples| Row
-| Submit| Examples 1| h1, h2
-| Submit| Examples 1| v1, v2
-| Submit| Examples 1| v3, v4
+| Name | Examples | Row
+| Submit | Examples 1 | h1, h2
+| Submit | Examples 1 | v1, v2
+| Submit | Examples 1 | v3, v4
 |===
 
 == Scenario: Three rows, three cells
@@ -95,9 +95,9 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Examples| Row
-| Submit| Examples 1| h1, h2, h3
-| Submit| Examples 1| v1, v2, v3
-| Submit| Examples 1| v4, v5, v6
-| Submit| Examples 1| v7, v8, v9
+| Name | Examples | Row
+| Submit | Examples 1 | h1, h2, h3
+| Submit | Examples 1 | v1, v2, v3
+| Submit | Examples 1 | v4, v5, v6
+| Submit | Examples 1 | v7, v8, v9
 |===

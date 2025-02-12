@@ -22,9 +22,9 @@ Feature: Process
 
 [options="header"]
 |===
-| Interaction Name| Message
-| specs::Process::Setup| The Object0 page is valid
-| specs::Process::Submit| The Object1 page is valid
+| Interaction Name | Message
+| specs::Process::Setup | The Object0 page is valid
+| specs::Process::Submit | The Object1 page is valid
 |===
 
 == Scenario: One statement, one step, one scenario
@@ -50,8 +50,8 @@ Feature: Process
 
 [options="header"]
 |===
-| Interaction Name| Comment
-| specs::Process::Setup| Desc line 1
+| Interaction Name | Comment
+| specs::Process::Setup | Desc line 1
 |===
 
 == Scenario: One statement, one step, two scenarios
@@ -80,10 +80,10 @@ Feature: Process
 
 [options="header"]
 |===
-| Interaction Name| Message
-| specs::Process::Setup| The Object0 page is valid
-| specs::Process::Submit 1| The Object1 page is valid
-| specs::Process::Submit 2| The Object2 page is valid
+| Interaction Name | Message
+| specs::Process::Setup | The Object0 page is valid
+| specs::Process::Submit 1 | The Object1 page is valid
+| specs::Process::Submit 2 | The Object2 page is valid
 |===
 
 == Scenario: One statement, one step, three scenarios
@@ -115,11 +115,11 @@ Feature: Process
 
 [options="header"]
 |===
-| Interaction Name| Message
-| specs::Process::Setup| The Object0 page is valid
-| specs::Process::Submit 1| The Object1 page is valid
-| specs::Process::Submit 2| The Object2 page is valid
-| specs::Process::Submit 3| The Object3 page is valid
+| Interaction Name | Message
+| specs::Process::Setup | The Object0 page is valid
+| specs::Process::Submit 1 | The Object1 page is valid
+| specs::Process::Submit 2 | The Object2 page is valid
+| specs::Process::Submit 3 | The Object3 page is valid
 |===
 
 == Scenario: No statement, two steps, one scenario
@@ -145,9 +145,9 @@ Feature: Process
 
 [options="header"]
 |===
-| Interaction Name| Message
-| specs::Process::Setup| The Object{Index} page is valid
-| specs::Process::Submit| The Object page is valid
+| Interaction Name | Message
+| specs::Process::Setup | The Object{Index} page is valid
+| specs::Process::Submit | The Object page is valid
 |===
 
 === Examples: Indices
@@ -183,9 +183,9 @@ Feature: Process
 
 [options="header"]
 |===
-| Interaction Name| Message
-| specs::Process::Setup| The Object{Index} page is valid
-| specs::Process::Submit| The Object page is valid
+| Interaction Name | Message
+| specs::Process::Setup | The Object{Index} page is valid
+| specs::Process::Submit | The Object page is valid
 |===
 
 === Examples: Indices

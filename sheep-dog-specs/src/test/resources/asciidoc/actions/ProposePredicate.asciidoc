@@ -16,8 +16,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name| Suggestion Description
-| The daily batchjob, Input file is| is| is
+| Suggestion | Suggestion Name | Suggestion Description
+| The daily batchjob, Input file is | is | is
 |===
 
 == Scenario: No predicate has definition has description
@@ -34,8 +34,8 @@
 
 [options="header"]
 |===
-| Object Name| Step Definition Name| Step Definition Description
-| daily batchjob/Input file.feature| is present| Creates empty file
+| Object Name | Step Definition Name | Step Definition Description
+| daily batchjob/Input file.feature | is present | Creates empty file
 |===
 
 === When: The suggestion action is performed
@@ -44,8 +44,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name| Suggestion Description
-| The daily batchjob, Input file is present| is present| Creates empty file
+| Suggestion | Suggestion Name | Suggestion Description
+| The daily batchjob, Input file is present | is present | Creates empty file
 |===
 
 == Scenario: Has predicate no definition
@@ -64,8 +64,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The daily batchjob, Input file is present as follows| as follows
+| Suggestion | Suggestion Name
+| The daily batchjob, Input file is present as follows | as follows
 |===
 
 == Scenario: Has predicate has definition
@@ -82,8 +82,8 @@
 
 [options="header"]
 |===
-| Object Name| Step Definition Name
-| daily batchjob/Input file.feature| is present
+| Object Name | Step Definition Name
+| daily batchjob/Input file.feature | is present
 |===
 
 === When: The suggestion action is performed
@@ -92,6 +92,6 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The daily batchjob, Input file is present| is present
+| Suggestion | Suggestion Name
+| The daily batchjob, Input file is present | is present
 |===

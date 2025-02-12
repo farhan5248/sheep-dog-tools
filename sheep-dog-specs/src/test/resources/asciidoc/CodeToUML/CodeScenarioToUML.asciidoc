@@ -19,8 +19,8 @@ Feature: Process
 
 [options="header"]
 |===
-| Interaction Name| Message
-| specs::Process::Submit| The blah application, something/Object1 page is empty
+| Interaction Name | Message
+| specs::Process::Submit | The blah application, something/Object1 page is empty
 |===
 
 == Scenario: One tag, one statement, one step
@@ -45,16 +45,16 @@ Feature: Process
 
 [options="header"]
 |===
-| Interaction Name| Annotation Name| Annotation Detail
-| specs::Process::Submit| tags| tag1
+| Interaction Name | Annotation Name | Annotation Detail
+| specs::Process::Submit | tags | tag1
 |===
 
 === And: The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
 
 [options="header"]
 |===
-| Interaction Name| Comment
-| specs::Process::Submit| Desc line 1
+| Interaction Name | Comment
+| specs::Process::Submit | Desc line 1
 |===
 
 == Scenario: Two tags, two statements, two steps
@@ -81,24 +81,24 @@ Feature: Process
 
 [options="header"]
 |===
-| Interaction Name| Annotation Name| Annotation Detail
-| specs::Process::Submit| tags| tag{Index}
+| Interaction Name | Annotation Name | Annotation Detail
+| specs::Process::Submit | tags | tag{Index}
 |===
 
 === And: The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
 
 [options="header"]
 |===
-| Interaction Name| Comment
-| specs::Process::Submit| Desc line 1\nDesc line 2
+| Interaction Name | Comment
+| specs::Process::Submit | Desc line 1\nDesc line 2
 |===
 
 === And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
-| Interaction Name| Message
-| specs::Process::Submit| The blah application, something/Object{Index} page is empty
+| Interaction Name | Message
+| specs::Process::Submit | The blah application, something/Object{Index} page is empty
 |===
 
 === Examples: Indices
@@ -136,24 +136,24 @@ Feature: Process
 
 [options="header"]
 |===
-| Interaction Name| Annotation Name| Annotation Detail
-| specs::Process::Submit| tags| tag{Index}
+| Interaction Name | Annotation Name | Annotation Detail
+| specs::Process::Submit | tags | tag{Index}
 |===
 
 === And: The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
 
 [options="header"]
 |===
-| Interaction Name| Comment
-| specs::Process::Submit| Desc line 1\nDesc line 2\nDesc line 3
+| Interaction Name | Comment
+| specs::Process::Submit | Desc line 1\nDesc line 2\nDesc line 3
 |===
 
 === And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
-| Interaction Name| Message
-| specs::Process::Submit| The blah application, something/Object{Index} page is empty
+| Interaction Name | Message
+| specs::Process::Submit | The blah application, something/Object{Index} page is empty
 |===
 
 === Examples: Indices

@@ -6,7 +6,7 @@
 
 [options="header"]
 |===
-| Step Name
+| Step Name                                
 | The daily batchjob, Input file is present
 |===
 
@@ -15,7 +15,7 @@
 [options="header"]
 |===
 | Step Name
-| empty
+| empty    
 |===
 
 === When: The suggestion action is performed
@@ -24,8 +24,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The Input file| Input file
+| Suggestion     | Suggestion Name
+| The Input file | Input file     
 |===
 
 == Scenario: No object no component no previous no component objects
@@ -35,7 +35,7 @@
 [options="header"]
 |===
 | Step Name
-| empty
+| empty    
 |===
 
 === When: The suggestion action is performed
@@ -49,15 +49,15 @@
 [options="header"]
 |===
 | Step Name
-| empty
+| empty    
 |===
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
 [options="header"]
 |===
-| Object Name| Step Definition Name
-| daily batchjob/Input file.feature| is present
+| Object Name                       | Step Definition Name
+| daily batchjob/Input file.feature | is present          
 |===
 
 === When: The suggestion action is performed
@@ -66,8 +66,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The daily batchjob,| daily batchjob
+| Suggestion | Suggestion Name        
+| The daily batchjob, | daily batchjob
 |===
 
 == Scenario: No object no component has previous no component objects
@@ -76,9 +76,9 @@
 
 [options="header"]
 |===
-| Step Name
+| Step Name                                
 | The daily batchjob, Input file is present
-| empty
+| empty                                    
 |===
 
 === When: The suggestion action is performed
@@ -87,8 +87,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The Input file| Input file
+| Suggestion | Suggestion Name
+| The Input file | Input file 
 |===
 
 == Scenario: No object no component has previous has component objects
@@ -97,17 +97,17 @@
 
 [options="header"]
 |===
-| Step Name
+| Step Name                                
 | The daily batchjob, Input file is present
-| empty
+| empty                                    
 |===
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
 [options="header"]
 |===
-| Object Name| Step Definition Name
-| daily batchjob/Input file.feature| is present
+| Object Name | Step Definition Name            
+| daily batchjob/Input file.feature | is present
 |===
 
 === When: The suggestion action is performed
@@ -116,9 +116,9 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The Input file| Input file
-| The daily batchjob,| daily batchjob
+| Suggestion | Suggestion Name        
+| The Input file | Input file         
+| The daily batchjob, | daily batchjob
 |===
 
 == Scenario: No object has component no previous no component objects
@@ -127,7 +127,7 @@
 
 [options="header"]
 |===
-| Step Name
+| Step Name          
 | The daily batchjob,
 |===
 
@@ -141,7 +141,7 @@
 
 [options="header"]
 |===
-| Step Name
+| Step Name          
 | The daily batchjob,
 |===
 
@@ -149,8 +149,8 @@
 
 [options="header"]
 |===
-| Object Name| Step Definition Name
-| daily batchjob/Input file.feature| is present
+| Object Name | Step Definition Name            
+| daily batchjob/Input file.feature | is present
 |===
 
 === When: The suggestion action is performed
@@ -159,8 +159,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The daily batchjob, Input file| Input file
+| Suggestion | Suggestion Name               
+| The daily batchjob, Input file | Input file
 |===
 
 == Scenario: No object has component has previous no component objects
@@ -169,9 +169,9 @@
 
 [options="header"]
 |===
-| Step Name
+| Step Name                                
 | The daily batchjob, Input file is present
-| The daily batchjob,
+| The daily batchjob,                      
 |===
 
 === When: The suggestion action is performed
@@ -180,8 +180,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The Input file| Input file
+| Suggestion | Suggestion Name
+| The Input file | Input file 
 |===
 
 == Scenario: No object has component has previous has component objects
@@ -190,17 +190,17 @@
 
 [options="header"]
 |===
-| Step Name
+| Step Name                                
 | The daily batchjob, Input file is present
-| The daily batchjob,
+| The daily batchjob,                      
 |===
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
 [options="header"]
 |===
-| Object Name| Step Definition Name
-| daily batchjob/Input file.feature| is present
+| Object Name | Step Definition Name            
+| daily batchjob/Input file.feature | is present
 |===
 
 === When: The suggestion action is performed
@@ -209,8 +209,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The Input file| Input file
+| Suggestion | Suggestion Name
+| The Input file | Input file 
 |===
 
 == Scenario: Has object no component no previous no component objects
@@ -219,7 +219,7 @@
 
 [options="header"]
 |===
-| Step Name
+| Step Name     
 | The Input file
 |===
 
@@ -229,8 +229,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The Input file is| is
+| Suggestion | Suggestion Name
+| The Input file is | is      
 |===
 
 == Scenario: Has object no component no previous has component objects
@@ -239,7 +239,7 @@
 
 [options="header"]
 |===
-| Step Name
+| Step Name     
 | The Input file
 |===
 
@@ -247,8 +247,8 @@
 
 [options="header"]
 |===
-| Object Name| Step Definition Name
-| daily batchjob/Input file.feature| is present
+| Object Name | Step Definition Name            
+| daily batchjob/Input file.feature | is present
 |===
 
 === When: The suggestion action is performed
@@ -257,8 +257,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The Input file is| is
+| Suggestion | Suggestion Name
+| The Input file is | is      
 |===
 
 == Scenario: Has object no component has previous no component objects
@@ -267,9 +267,9 @@
 
 [options="header"]
 |===
-| Step Name
+| Step Name                                
 | The daily batchjob, Input file is present
-| The Input file
+| The Input file                           
 |===
 
 === When: The suggestion action is performed
@@ -278,8 +278,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The Input file is| is
+| Suggestion | Suggestion Name
+| The Input file is | is      
 |===
 
 == Scenario: Has object no component has previous has component objects
@@ -288,17 +288,17 @@
 
 [options="header"]
 |===
-| Step Name
+| Step Name                                
 | The daily batchjob, Input file is present
-| The Input file
+| The Input file                           
 |===
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
 [options="header"]
 |===
-| Object Name| Step Definition Name
-| daily batchjob/Input file.feature| is present
+| Object Name | Step Definition Name            
+| daily batchjob/Input file.feature | is present
 |===
 
 === When: The suggestion action is performed
@@ -307,8 +307,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The Input file is present| is present
+| Suggestion | Suggestion Name          
+| The Input file is present | is present
 |===
 
 == Scenario: Has object has component no previous no component objects
@@ -317,7 +317,7 @@
 
 [options="header"]
 |===
-| Step Name
+| Step Name                     
 | The daily batchjob, Input file
 |===
 
@@ -327,8 +327,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The daily batchjob, Input file is| is
+| Suggestion | Suggestion Name          
+| The daily batchjob, Input file is | is
 |===
 
 == Scenario: Has object has component no previous has component objects
@@ -337,7 +337,7 @@
 
 [options="header"]
 |===
-| Step Name
+| Step Name                     
 | The daily batchjob, Input file
 |===
 
@@ -345,8 +345,8 @@
 
 [options="header"]
 |===
-| Object Name| Step Definition Name
-| daily batchjob/Input file.feature| is present
+| Object Name | Step Definition Name            
+| daily batchjob/Input file.feature | is present
 |===
 
 === When: The suggestion action is performed
@@ -355,8 +355,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The daily batchjob, Input file is present| is present
+| Suggestion | Suggestion Name                          
+| The daily batchjob, Input file is present | is present
 |===
 
 == Scenario: Has object has component has previous no component objects
@@ -365,9 +365,9 @@
 
 [options="header"]
 |===
-| Step Name
+| Step Name                                
 | The daily batchjob, Input file is present
-| The daily batchjob, Input file
+| The daily batchjob, Input file           
 |===
 
 === When: The suggestion action is performed
@@ -376,8 +376,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The daily batchjob, Input file is| is
+| Suggestion | Suggestion Name          
+| The daily batchjob, Input file is | is
 |===
 
 == Scenario: Has object has component has previous has component objects
@@ -386,17 +386,17 @@
 
 [options="header"]
 |===
-| Step Name
+| Step Name                                
 | The daily batchjob, Input file is present
-| The daily batchjob, Input file
+| The daily batchjob, Input file           
 |===
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
 [options="header"]
 |===
-| Object Name| Step Definition Name
-| daily batchjob/Input file.feature| is present
+| Object Name | Step Definition Name            
+| daily batchjob/Input file.feature | is present
 |===
 
 === When: The suggestion action is performed
@@ -405,6 +405,7 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The daily batchjob, Input file is present| is present
+| Suggestion | Suggestion Name                          
+| The daily batchjob, Input file is present | is present
 |===
+

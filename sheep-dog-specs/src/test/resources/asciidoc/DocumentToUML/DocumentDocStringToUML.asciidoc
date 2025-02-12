@@ -24,6 +24,6 @@ text1
 
 [options="header"]
 |===
-| Interaction Name| Message| Argument Name| Annotation Detail
-| specs::Process::Submit| The Object page is created as follows| docString| 0 -} text1
+| Interaction Name | Message | Argument Name | Annotation Detail
+| specs::Process::Submit | The Object page is created as follows | docString | 0 -} text1
 |===

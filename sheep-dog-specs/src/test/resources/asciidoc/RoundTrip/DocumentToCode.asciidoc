@@ -21,8 +21,8 @@ Desc 2
 
 [options="header"]
 |===
-| grp| ins
-| 10| 5
+| grp | ins
+| 10 | 5
 |===
 
 === Then: The Search application, Logout page is created as follows
@@ -43,8 +43,8 @@ Desc 3
 
 [options="header"]
 |===
-| grp| ins
-| 8| {ins}
+| grp | ins
+| 8 | {ins}
 |===
 
 === Then: The Search application, Logout page is invalid

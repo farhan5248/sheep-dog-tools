@@ -39,13 +39,13 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Step
-| Submit| Given The something/Object page is empty
-| Submit| When The something/Object page is empty
-| Submit| Then The something/Object page is empty
-| Submit| But The something/Object page is empty
-| Submit| And The something/Object page is empty
-| Submit| * The something/Object page is empty
+| Name | Step
+| Submit | Given The something/Object page is empty
+| Submit | When The something/Object page is empty
+| Submit | Then The something/Object page is empty
+| Submit | But The something/Object page is empty
+| Submit | And The something/Object page is empty
+| Submit | * The something/Object page is empty
 |===
 
 == Scenario: Create new java methods for layer 2
@@ -60,10 +60,10 @@ Feature: Process
 
 [options="header"]
 |===
-| Method Name| Statement
-| theBlahApplicationObjectPageIsEmpty| BlahFactory.get("ObjectPage").setComponent("blah");
-| theBlahApplicationObjectPageIsEmpty| BlahFactory.get("ObjectPage").setPath("Object");
-| theBlahApplicationObjectPageIsEmpty| BlahFactory.get("ObjectPage").setInputOutputs("Empty");
+| Method Name | Statement
+| theBlahApplicationObjectPageIsEmpty | BlahFactory.get("ObjectPage").setComponent("blah");
+| theBlahApplicationObjectPageIsEmpty | BlahFactory.get("ObjectPage").setPath("Object");
+| theBlahApplicationObjectPageIsEmpty | BlahFactory.get("ObjectPage").setInputOutputs("Empty");
 |===
 
 == Scenario: Create new java methods for layer 3
@@ -78,8 +78,8 @@ Feature: Process
 
 [options="header"]
 |===
-| Interface Name| Package
-| ObjectPage| org.farhan.objects.blah
+| Interface Name | Package
+| ObjectPage | org.farhan.objects.blah
 |===
 
 === And: The mbt-transformer plugin, ObjectPage.java file Object section will be created as follows
@@ -94,16 +94,16 @@ Feature: Process
 
 [options="header"]
 |===
-| Method Name| Visibility| Return Type
-| setEmpty| public| void
+| Method Name | Visibility | Return Type
+| setEmpty | public | void
 |===
 
 === And: The mbt-transformer plugin, ObjectPage.java file Fields section will be created as follows
 
 [options="header"]
 |===
-| Method Name| Parameter Name| Parameter Type
-| setEmpty| keyMap| HashMap{String,String}
+| Method Name | Parameter Name | Parameter Type
+| setEmpty | keyMap | HashMap{String,String}
 |===
 
 == Scenario: Preserve existing java methods for layer 2

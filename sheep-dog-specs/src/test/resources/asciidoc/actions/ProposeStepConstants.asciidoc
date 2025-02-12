@@ -16,8 +16,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The blah application,| blah application
+| Suggestion | Suggestion Name
+| The blah application, | blah application
 |===
 
 == Scenario: Object types
@@ -36,8 +36,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The blah plugin, blah file| blah file
+| Suggestion | Suggestion Name
+| The blah plugin, blah file | blah file
 |===
 
 == Scenario: State modality absent no details
@@ -56,9 +56,9 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name| Suggestion Description
-| The blah plugin, blah file is| is| is
-| The blah plugin, blah file details| details name| Specify section etc
+| Suggestion | Suggestion Name | Suggestion Description
+| The blah plugin, blah file is | is | is
+| The blah plugin, blah file details | details name | Specify section etc
 |===
 
 == Scenario: State modality absent incomplete details
@@ -77,8 +77,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The blah plugin, blah file heading section| section
+| Suggestion | Suggestion Name
+| The blah plugin, blah file heading section | section
 |===
 
 == Scenario: State modality absent has details
@@ -97,8 +97,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The blah plugin, blah file heading section is| is
+| Suggestion | Suggestion Name
+| The blah plugin, blah file heading section is | is
 |===
 
 == Scenario: State modality present has details
@@ -117,8 +117,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name| Suggestion Description
-| The blah plugin, blah file heading section is created| attribute name| Specify created etc
+| Suggestion | Suggestion Name | Suggestion Description
+| The blah plugin, blah file heading section is created | attribute name | Specify created etc
 |===
 
 == Scenario: State modality present no attribute
@@ -137,8 +137,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name| Suggestion Description
-| The blah plugin, blah file is created| attribute name| Specify created etc
+| Suggestion | Suggestion Name | Suggestion Description
+| The blah plugin, blah file is created | attribute name | Specify created etc
 |===
 
 == Scenario: State modality present no attachments
@@ -157,8 +157,8 @@
 
 [options="header"]
 |===
-| Suggestion| Suggestion Name
-| The blah plugin, blah file is created with| with
+| Suggestion | Suggestion Name
+| The blah plugin, blah file is created with | with
 |===
 
 == Scenario: State modality present has attachments

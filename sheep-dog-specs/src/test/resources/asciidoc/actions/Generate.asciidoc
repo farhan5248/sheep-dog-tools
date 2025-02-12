@@ -16,8 +16,8 @@
 
 [options="header"]
 |===
-| Object Name| Step Definition Name
-| daily batchjob/Input file.feature| is present
+| Object Name | Step Definition Name
+| daily batchjob/Input file.feature | is present
 |===
 
 == Scenario: The object step definition doesn't exist
@@ -34,8 +34,8 @@
 
 [options="header"]
 |===
-| Object Name| Step Definition Name
-| daily batchjob/Input file.feature| is absent
+| Object Name | Step Definition Name
+| daily batchjob/Input file.feature | is absent
 |===
 
 === When: The generation action is performed
@@ -44,8 +44,8 @@
 
 [options="header"]
 |===
-| Object Name| Step Definition Name
-| daily batchjob/Input file.feature| is present
+| Object Name | Step Definition Name
+| daily batchjob/Input file.feature | is present
 |===
 
 == Scenario: The object step definition parameter set doesn't exist
@@ -54,16 +54,16 @@
 
 [options="header"]
 |===
-| Step Name| Headers
-| The daily batchjob, Input file is present| New Header
+| Step Name | Headers
+| The daily batchjob, Input file is present | New Header
 |===
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
 [options="header"]
 |===
-| Object Name| Step Definition Name| Parameters
-| daily batchjob/Input file.feature| is present| Old Header
+| Object Name | Step Definition Name | Parameters
+| daily batchjob/Input file.feature | is present | Old Header
 |===
 
 === When: The generation action is performed
@@ -72,6 +72,6 @@
 
 [options="header"]
 |===
-| Object Name| Step Definition Name| Parameters
-| daily batchjob/Input file.feature| is present| New Header
+| Object Name | Step Definition Name | Parameters
+| daily batchjob/Input file.feature | is present | New Header
 |===

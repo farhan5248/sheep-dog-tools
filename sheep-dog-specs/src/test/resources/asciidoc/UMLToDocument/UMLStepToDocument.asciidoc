@@ -27,13 +27,13 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Step
-| Submit| Given The Object page is empty
-| Submit| When The Object page is empty
-| Submit| Then The Object page is empty
-| Submit| And The Object page is empty
-| Submit| But The Object page is empty
-| Submit| * The Object page is empty
+| Name | Step
+| Submit | Given The Object page is empty
+| Submit | When The Object page is empty
+| Submit | Then The Object page is empty
+| Submit | And The Object page is empty
+| Submit | But The Object page is empty
+| Submit | * The Object page is empty
 |===
 
 == Scenario: Convert apostrophes
@@ -58,6 +58,6 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Step
-| Submit's| Given The Object page isn't empty
+| Name | Step
+| Submit's | Given The Object page isn't empty
 |===

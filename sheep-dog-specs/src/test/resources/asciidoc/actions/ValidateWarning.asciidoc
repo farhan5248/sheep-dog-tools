@@ -34,8 +34,8 @@
 
 [options="header"]
 |===
-| Object Name| Step Definition Name
-| daily batchjob/Input file.feature| is absent
+| Object Name | Step Definition Name
+| daily batchjob/Input file.feature | is absent
 |===
 
 === When: The validation action is performed
@@ -54,16 +54,16 @@
 
 [options="header"]
 |===
-| Step Name| Headers
-| The daily batchjob, Input file is present| New Header
+| Step Name | Headers
+| The daily batchjob, Input file is present | New Header
 |===
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
 [options="header"]
 |===
-| Object Name| Step Definition Name| Parameters
-| daily batchjob/Input file.feature| is present| Old Header
+| Object Name | Step Definition Name | Parameters
+| daily batchjob/Input file.feature | is present | Old Header
 |===
 
 === When: The validation action is performed
@@ -90,8 +90,8 @@
 
 [options="header"]
 |===
-| Object Name| Step Definition Name
-| daily batchjob/app/Input file.feature| is present
+| Object Name | Step Definition Name
+| daily batchjob/app/Input file.feature | is present
 |===
 
 === When: The validation action is performed

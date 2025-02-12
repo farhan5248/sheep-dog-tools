@@ -25,24 +25,24 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Description
-| Setup| Desc line 1
+| Name | Description
+| Setup | Desc line 1
 |===
 
 === And: The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
 
 [options="header"]
 |===
-| Name| Step
-| Setup| Given The Object0 page is valid
+| Name | Step
+| Setup | Given The Object0 page is valid
 |===
 
 === And: The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
 
 [options="header"]
 |===
-| Name| Step
-| Submit| Given The Object1 page is valid
+| Name | Step
+| Submit | Given The Object1 page is valid
 |===
 
 == Scenario: No statement, one step, one scenario
@@ -69,16 +69,16 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Step
-| Setup| Given The Object0 page is valid
+| Name | Step
+| Setup | Given The Object0 page is valid
 |===
 
 === And: The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
 
 [options="header"]
 |===
-| Name| Step
-| Submit| Given The Object1 page is valid
+| Name | Step
+| Submit | Given The Object1 page is valid
 |===
 
 == Scenario: No statement, one step, two scenarios
@@ -108,17 +108,17 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Step
-| Setup| Given The Object0 page is valid
+| Name | Step
+| Setup | Given The Object0 page is valid
 |===
 
 === And: The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
 
 [options="header"]
 |===
-| Name| Step
-| Submit 1| Given The Object1 page is valid
-| Submit 2| Given The Object2 page is valid
+| Name | Step
+| Submit 1 | Given The Object1 page is valid
+| Submit 2 | Given The Object2 page is valid
 |===
 
 == Scenario: No statement, one step, three scenarios
@@ -151,18 +151,18 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Step
-| Setup| Given The Object0 page is valid
+| Name | Step
+| Setup | Given The Object0 page is valid
 |===
 
 === And: The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
 
 [options="header"]
 |===
-| Name| Step
-| Submit 1| Given The Object1 page is valid
-| Submit 2| Given The Object2 page is valid
-| Submit 3| Given The Object3 page is valid
+| Name | Step
+| Submit 1 | Given The Object1 page is valid
+| Submit 2 | Given The Object2 page is valid
+| Submit 3 | Given The Object3 page is valid
 |===
 
 == Scenario: No statement, two steps, one scenario
@@ -190,17 +190,17 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Step
-| Setup| Given The Object1 page is valid
-| Setup| Given The Object2 page is valid
+| Name | Step
+| Setup | Given The Object1 page is valid
+| Setup | Given The Object2 page is valid
 |===
 
 === And: The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
 
 [options="header"]
 |===
-| Name| Step
-| Submit| Given The Object page is valid
+| Name | Step
+| Submit | Given The Object page is valid
 |===
 
 == Scenario: No statement, three steps, one scenario
@@ -229,16 +229,16 @@ Feature: Process
 
 [options="header"]
 |===
-| Name| Step
-| Setup| Given The Object1 page is valid
-| Setup| Given The Object2 page is valid
-| Setup| Given The Object3 page is valid
+| Name | Step
+| Setup | Given The Object1 page is valid
+| Setup | Given The Object2 page is valid
+| Setup | Given The Object3 page is valid
 |===
 
 === And: The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
 
 [options="header"]
 |===
-| Name| Step
-| Submit| Given The Object page is valid
+| Name | Step
+| Submit | Given The Object page is valid
 |===

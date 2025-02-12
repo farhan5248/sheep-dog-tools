@@ -43,6 +43,34 @@
 | Method Name
 |===
 
+=== Parameters: 6
+
+[options="header"]
+|===
+| Method Name | Statement
+|===
+
+=== Parameters: 7
+
+[options="header"]
+|===
+| Method Name | Parameter Name | Parameter Type
+|===
+
+=== Parameters: 8
+
+[options="header"]
+|===
+| Method Name | Visibility | Return Type
+|===
+
+=== Parameters: 9
+
+[options="header"]
+|===
+| Method Name | Annotation
+|===
+
 == Definition: Object section will be created as follows
 
 === Parameters: 1
@@ -57,5 +85,12 @@
 [options="header"]
 |===
 | Import
+|===
+
+=== Parameters: 3
+
+[options="header"]
+|===
+| Interface Name | Package
 |===
 

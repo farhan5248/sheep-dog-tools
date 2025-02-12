@@ -15,6 +15,13 @@
 | Name| Examples| Row
 |===
 
+=== Parameters: 2
+
+[options="header"]
+|===
+| Name | Examples | Row
+|===
+
 == Definition: Scenarios Steps section will be created as follows
 
 === Parameters: 1
@@ -22,6 +29,13 @@
 [options="header"]
 |===
 | Name| Step
+|===
+
+=== Parameters: 2
+
+[options="header"]
+|===
+| Name | Step
 |===
 
 == Definition: Scenarios section will be created as follows
@@ -33,6 +47,13 @@
 | Name| Tags| Description
 |===
 
+=== Parameters: 2
+
+[options="header"]
+|===
+| Name | Tags | Description
+|===
+
 == Definition: Scenario Steps Doc String section will be created as follows
 
 === Parameters: 1
@@ -40,6 +61,13 @@
 [options="header"]
 |===
 | Name| Step| Content
+|===
+
+=== Parameters: 2
+
+[options="header"]
+|===
+| Name | Step | Content
 |===
 
 == Definition: Background Steps section will be created as follows
@@ -51,6 +79,13 @@
 | Name| Step
 |===
 
+=== Parameters: 2
+
+[options="header"]
+|===
+| Name | Step
+|===
+
 == Definition: Background section will be created as follows
 
 === Parameters: 1
@@ -58,6 +93,13 @@
 [options="header"]
 |===
 | Name| Description
+|===
+
+=== Parameters: 2
+
+[options="header"]
+|===
+| Name | Description
 |===
 
 == Definition: Scenario Steps Data Table section will be created as follows
@@ -69,6 +111,13 @@
 | Name| Step| Row
 |===
 
+=== Parameters: 2
+
+[options="header"]
+|===
+| Name | Step | Row
+|===
+
 == Definition: Scenario Outline Steps Data Table section will be created as follows
 
 === Parameters: 1
@@ -78,6 +127,13 @@
 | Name| Step
 |===
 
+=== Parameters: 2
+
+[options="header"]
+|===
+| Name | Step
+|===
+
 == Definition: Scenario Outlines section will be created as follows
 
 === Parameters: 1
@@ -85,6 +141,13 @@
 [options="header"]
 |===
 | Name| Tags| Description
+|===
+
+=== Parameters: 2
+
+[options="header"]
+|===
+| Name | Tags | Description
 |===
 
 == Definition: Feature section will be created as follows
@@ -101,5 +164,12 @@
 [options="header"]
 |===
 | Name| Tags| Statements
+|===
+
+=== Parameters: 3
+
+[options="header"]
+|===
+| Name | Tags | Statements
 |===
 

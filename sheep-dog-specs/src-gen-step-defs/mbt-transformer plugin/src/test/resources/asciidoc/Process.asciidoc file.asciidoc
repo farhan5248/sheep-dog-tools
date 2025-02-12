@@ -20,6 +20,13 @@
 | Name| Tags| Statements
 |===
 
+=== Parameters: 3
+
+[options="header"]
+|===
+| Name | Tags | Statements
+|===
+
 == Definition: Scenarios Steps Step Table section will be created as follows
 
 === Parameters: 1
@@ -27,6 +34,13 @@
 [options="header"]
 |===
 | Name| Step| Row
+|===
+
+=== Parameters: 2
+
+[options="header"]
+|===
+| Name | Step | Row
 |===
 
 == Definition: Scenarios Steps section will be created as follows
@@ -38,6 +52,13 @@
 | Name| Step
 |===
 
+=== Parameters: 2
+
+[options="header"]
+|===
+| Name | Step
+|===
+
 == Definition: Scenario Outline Examples Table section will be created as follows
 
 === Parameters: 1
@@ -45,6 +66,13 @@
 [options="header"]
 |===
 | Name| Examples| Row
+|===
+
+=== Parameters: 2
+
+[options="header"]
+|===
+| Name | Examples | Row
 |===
 
 == Definition: Scenarios section will be created as follows
@@ -56,6 +84,13 @@
 | Name| Tags| Description
 |===
 
+=== Parameters: 2
+
+[options="header"]
+|===
+| Name | Tags | Description
+|===
+
 == Definition: Scenarios Steps Doc String section will be created as follows
 
 === Parameters: 1
@@ -63,6 +98,13 @@
 [options="header"]
 |===
 | Name| Step| Content
+|===
+
+=== Parameters: 2
+
+[options="header"]
+|===
+| Name | Step | Content
 |===
 
 == Definition: Background section will be created as follows
@@ -74,6 +116,13 @@
 | Name| Description
 |===
 
+=== Parameters: 2
+
+[options="header"]
+|===
+| Name | Description
+|===
+
 == Definition: Background Steps section will be created as follows
 
 === Parameters: 1
@@ -81,5 +130,12 @@
 [options="header"]
 |===
 | Name| Step
+|===
+
+=== Parameters: 2
+
+[options="header"]
+|===
+| Name | Step
 |===
 

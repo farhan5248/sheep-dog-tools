@@ -18,6 +18,13 @@
 | Import
 |===
 
+=== Parameters: 3
+
+[options="header"]
+|===
+| Interface Name | Package
+|===
+
 == Definition: Fields section will be created as follows
 
 === Parameters: 1
@@ -39,6 +46,20 @@
 [options="header"]
 |===
 | Method Name
+|===
+
+=== Parameters: 4
+
+[options="header"]
+|===
+| Method Name | Visibility | Return Type
+|===
+
+=== Parameters: 5
+
+[options="header"]
+|===
+| Method Name | Parameter Name | Parameter Type
 |===
 
 == Definition: is created as follows
