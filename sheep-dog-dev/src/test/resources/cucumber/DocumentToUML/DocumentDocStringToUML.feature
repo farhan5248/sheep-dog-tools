@@ -9,7 +9,7 @@ Feature: Document DocString To UML
           
           == Scenario: Submit
           
-          === Given:: The Object page is created as follows
+          === Given: The Object page is created as follows
           
           ----
           text1

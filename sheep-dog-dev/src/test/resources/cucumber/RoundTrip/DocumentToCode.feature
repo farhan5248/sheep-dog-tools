@@ -15,7 +15,7 @@ Feature: Document To Code
           
           Desc 2
           
-          === Given:: The Search application, Login page is valid
+          === Given: The Search application, Login page is valid
           === When: The Search application, Home page is created as follows
           
           [options="header"]
@@ -24,7 +24,7 @@ Feature: Document To Code
           | 10 | 5
           |===
           
-          === Then:: The Search application, Logout page is created as follows
+          === Then: The Search application, Logout page is created as follows
           
           ----
             text1
@@ -37,7 +37,7 @@ Feature: Document To Code
           
           Desc 3
           
-          === Given:: The Search application, Login page is invalid
+          === Given: The Search application, Login page is invalid
           === When: The Search application, Home page is created as follows
           
           [options="header"]
@@ -46,7 +46,7 @@ Feature: Document To Code
           | 8 | {ins}
           |===
           
-          === Then:: The Search application, Logout page is invalid
+          === Then: The Search application, Logout page is invalid
           
           === Examples: Some data
           

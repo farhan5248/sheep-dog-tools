@@ -10,7 +10,7 @@ Feature: Multiple Tags
           [tags="tag1"]
           == Scenario: Submit
           
-          === Given:: The Object1 page is empty
+          === Given: The Object1 page is empty
           """
     Given The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
           """
@@ -19,7 +19,7 @@ Feature: Multiple Tags
           [tags="tag2"]
           == Scenario: Submit2
           
-          === Given:: The Object1 page is empty
+          === Given: The Object1 page is empty
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
           | Tags |
