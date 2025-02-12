@@ -45,7 +45,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 			@RequestParam(value = "tags", defaultValue = "") String tags) {
 		logger.info("Starting clearConvertAsciidoctorToUMLObjects");
 		logger.info("tags:" + tags);
-		ModelTransformerResponse mtr = clearObjects(new ConvertAsciidoctorToUML(tags, fa));
+		ModelTransformerResponse mtr = clearObjects(new ConvertAsciidoctorToUML(tags, fa, new LoggerImpl(logger)));
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending clearConvertAsciidoctorToUMLObjects");
 		return mtr;
@@ -56,7 +56,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 			@RequestParam(value = "tags", defaultValue = "") String tags) {
 		logger.info("Starting clearConvertCucumberToUMLObjects");
 		logger.info("tags:" + tags);
-		ModelTransformerResponse mtr = clearObjects(new ConvertAsciidoctorToUML(tags, fa));
+		ModelTransformerResponse mtr = clearObjects(new ConvertAsciidoctorToUML(tags, fa, new LoggerImpl(logger)));
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending clearConvertCucumberToUMLObjects");
 		return mtr;
@@ -85,7 +85,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	public ModelTransformerResponse getConvertUMLToAsciidoctorObjectNames(
 			@RequestParam(value = "tags", defaultValue = "") String tags) {
 		logger.info("Starting getConvertUMLToAsciidoctorObjectNames");
-		ModelTransformerResponse mtr = getObjectNames(new ConvertUMLToAsciidoctor(tags, fa), tags);
+		ModelTransformerResponse mtr = getObjectNames(new ConvertUMLToAsciidoctor(tags, fa, new LoggerImpl(logger)), tags);
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending getConvertUMLToAsciidoctorObjectNames");
 		return mtr;
@@ -95,7 +95,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	public ModelTransformerResponse getConvertUMLToCucumberGuiceObjectNames(
 			@RequestParam(value = "tags", defaultValue = "") String tags) {
 		logger.info("Starting getConvertUMLToCucumberGuiceObjectNames");
-		ModelTransformerResponse mtr = getObjectNames(new ConvertUMLToCucumberGuice(tags, fa), tags);
+		ModelTransformerResponse mtr = getObjectNames(new ConvertUMLToCucumberGuice(tags, fa, new LoggerImpl(logger)), tags);
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending getConvertUMLToCucumberGuiceObjectNames");
 		return mtr;
@@ -105,7 +105,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	public ModelTransformerResponse getConvertUMLToCucumberObjectNames(
 			@RequestParam(value = "tags", defaultValue = "") String tags) {
 		logger.info("Starting getConvertUMLToCucumberObjectNames");
-		ModelTransformerResponse mtr = getObjectNames(new ConvertUMLToCucumber(tags, fa), tags);
+		ModelTransformerResponse mtr = getObjectNames(new ConvertUMLToCucumber(tags, fa, new LoggerImpl(logger)), tags);
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending getConvertUMLToCucumberObjectNames");
 		return mtr;
@@ -115,7 +115,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	public ModelTransformerResponse getConvertUMLToCucumberSpringObjectNames(
 			@RequestParam(value = "tags", defaultValue = "") String tags) {
 		logger.info("Starting getConvertUMLToCucumberSpringObjectNames");
-		ModelTransformerResponse mtr = getObjectNames(new ConvertUMLToCucumberSpring(tags, fa), tags);
+		ModelTransformerResponse mtr = getObjectNames(new ConvertUMLToCucumberSpring(tags, fa, new LoggerImpl(logger)), tags);
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending getConvertUMLToCucumberSpringObjectNames");
 		return mtr;
@@ -161,7 +161,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 		logger.info("Starting runConvertAsciidoctorToUML");
 		logger.info("tags:" + tags);
 		logger.info("fileName:" + fileName);
-		ModelTransformerResponse mtr = convertObject(new ConvertAsciidoctorToUML(tags, fa), fileName, contents);
+		ModelTransformerResponse mtr = convertObject(new ConvertAsciidoctorToUML(tags, fa, new LoggerImpl(logger)), fileName, contents);
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending runConvertAsciidoctorToUML");
 		return mtr;
@@ -174,7 +174,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 		logger.info("Starting runConvertCucumberToUML");
 		logger.info("tags:" + tags);
 		logger.info("fileName:" + fileName);
-		ModelTransformerResponse mtr = convertObject(new ConvertCucumberToUML(tags, fa), fileName, contents);
+		ModelTransformerResponse mtr = convertObject(new ConvertCucumberToUML(tags, fa, new LoggerImpl(logger)), fileName, contents);
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending runConvertCucumberToUML");
 		return mtr;
@@ -187,7 +187,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 		logger.info("Starting runConvertUMLToAsciidoctor");
 		logger.info("tags:" + tags);
 		logger.info("fileName:" + fileName);
-		ModelTransformerResponse mtr = convertObject(new ConvertUMLToAsciidoctor(tags, fa), fileName, contents);
+		ModelTransformerResponse mtr = convertObject(new ConvertUMLToAsciidoctor(tags, fa, new LoggerImpl(logger)), fileName, contents);
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending runConvertUMLToAsciidoctor");
 		return mtr;
@@ -200,7 +200,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 		logger.info("Starting runConvertUMLToCucumber");
 		logger.info("tags:" + tags);
 		logger.info("fileName:" + fileName);
-		ModelTransformerResponse mtr = convertObject(new ConvertUMLToCucumber(tags, fa), fileName, contents);
+		ModelTransformerResponse mtr = convertObject(new ConvertUMLToCucumber(tags, fa, new LoggerImpl(logger)), fileName, contents);
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending runConvertUMLToCucumber");
 		return mtr;
@@ -213,7 +213,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 		logger.info("Starting runConvertUMLToCucumberGuice");
 		logger.info("tags:" + tags);
 		logger.info("fileName:" + fileName);
-		ModelTransformerResponse mtr = convertObject(new ConvertUMLToCucumberGuice(tags, fa), fileName, contents);
+		ModelTransformerResponse mtr = convertObject(new ConvertUMLToCucumberGuice(tags, fa, new LoggerImpl(logger)), fileName, contents);
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending runConvertUMLToCucumberGuice");
 		return mtr;
@@ -226,7 +226,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 		logger.info("Starting runConvertUMLToCucumberSpring");
 		logger.info("tags:" + tags);
 		logger.info("fileName:" + fileName);
-		ModelTransformerResponse mtr = convertObject(new ConvertUMLToCucumberSpring(tags, fa), fileName, contents);
+		ModelTransformerResponse mtr = convertObject(new ConvertUMLToCucumberSpring(tags, fa, new LoggerImpl(logger)), fileName, contents);
 		logger.debug("response: " + mtr.toString());
 		logger.info("Ending runConvertUMLToCucumberSpring");
 		return mtr;
