@@ -2,7 +2,7 @@
 
 == Scenario: Convert step keywords
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -16,11 +16,11 @@ Feature: Process
     * The blah application, Asterisk page is empty
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
 
-=== And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===

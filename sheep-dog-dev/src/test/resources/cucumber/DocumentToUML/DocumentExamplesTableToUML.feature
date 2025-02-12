@@ -9,7 +9,7 @@ Feature: Document Examples Table To UML
           
           == Scenario: Submit
           
-          === Given The Object page is created as follows
+          === Given:: The Object page is created as follows
           
           [options="header"]
           |===
@@ -40,7 +40,7 @@ Feature: Document Examples Table To UML
           
           == Scenario: Submit
           
-          === Given The Object page is created as follows
+          === Given:: The Object page is created as follows
           
           [options="header"]
           |===
@@ -73,7 +73,7 @@ Feature: Document Examples Table To UML
           
           == Scenario: Submit
           
-          === Given The Object page is created as follows
+          === Given:: The Object page is created as follows
           
           [options="header"]
           |===

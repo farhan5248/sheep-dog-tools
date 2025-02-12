@@ -9,7 +9,7 @@ Feature: Document Scenario Outline To UML
           
           == Scenario: Submit
           
-          === Given The Object page is created as follows
+          === Given:: The Object page is created as follows
           
           [options="header"]
           |===
@@ -47,7 +47,7 @@ Feature: Document Scenario Outline To UML
           
           Desc line 1
           
-          === Given The Object page is created as follows
+          === Given:: The Object page is created as follows
           
           [options="header"]
           |===
@@ -84,7 +84,7 @@ Feature: Document Scenario Outline To UML
           Desc line 1
           Desc line 2
           
-          === Given The Object1 page is created as follows
+          === Given:: The Object1 page is created as follows
           
           [options="header"]
           |===
@@ -92,7 +92,7 @@ Feature: Document Scenario Outline To UML
           | {h3}
           |===
           
-          === Given The Object2 page is created as follows
+          === Given:: The Object2 page is created as follows
           
           [options="header"]
           |===
@@ -151,7 +151,7 @@ Feature: Document Scenario Outline To UML
           Desc line 2
           Desc line 3
           
-          === Given The Object1 page is created as follows
+          === Given:: The Object1 page is created as follows
           
           [options="header"]
           |===
@@ -159,7 +159,7 @@ Feature: Document Scenario Outline To UML
           | {h3}
           |===
           
-          === Given The Object2 page is created as follows
+          === Given:: The Object2 page is created as follows
           
           [options="header"]
           |===
@@ -167,7 +167,7 @@ Feature: Document Scenario Outline To UML
           | {h3}
           |===
           
-          === Given The Object3 page is created as follows
+          === Given:: The Object3 page is created as follows
           
           [options="header"]
           |===
@@ -231,7 +231,7 @@ Feature: Document Scenario Outline To UML
           [tags="tag1"]
           == Scenario: Submit
           
-          === Given The Object1 page is empty
+          === Given:: The Object1 page is empty
           
           === Examples: Examples 1
           
@@ -244,7 +244,7 @@ Feature: Document Scenario Outline To UML
           [tags="tag2"]
           == Scenario: Submit2
           
-          === Given The Object1 page is empty
+          === Given:: The Object1 page is empty
           
           === Examples: Examples 1
           

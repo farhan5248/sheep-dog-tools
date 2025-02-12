@@ -55,19 +55,19 @@ Step:
 	Given | When | Then | And;
 
 Given:
-	'===' 'Given' name=Title EOL
+	'===' 'Given:' name=Title EOL
 	(theStepTable=Table | theDocString=DocString)?;
 
 When:
-	'===' 'When' name=Title EOL
+	'===' 'When:' name=Title EOL
 	(theStepTable=Table | theDocString=DocString)?;
 
 Then:
-	'===' 'Then' name=Title EOL
+	'===' 'Then:' name=Title EOL
 	(theStepTable=Table | theDocString=DocString)?;
 
 And:
-	'===' 'And' name=Title EOL
+	'===' 'And:' name=Title EOL
 	(theStepTable=Table | theDocString=DocString)?;
 
 DocString:
@@ -83,10 +83,10 @@ Row:
 	cells+=Cell+ EOL;
 
 FeatureTags:
-	':tags:' name=TAGWORD EOL;
+	':tags:' name=WORD EOL;
 
 AbstractScenarioTags:
-	'[tags="' name=TAGWORD '"]' EOL;
+	'[tags=' name=WORD ']' EOL;
 
 Cell:
 	'|' name=Title;
@@ -98,13 +98,10 @@ Statement:
 Title:
 	WORD+;
 
-terminal TAGWORD:
-	!(' ' | '\t' | '\r' | '\n' | '"')*;
-
 // TODO look at fragments to handle escape characters etc instead of this and to handle re-using ' ' | '\t' | '\r' | '\n'
 terminal WORD:
-	!(' ' | '\t' | '\r' | '\n' | '|' | '#')
-	!(' ' | '\t' | '\r' | '\n')*;
+	!(' ' | '\t' | '\r' | '\n' | '[' | ']' | '|' | '#')
+	!(' ' | '\t' | '\r' | '\n' | '[' | ']')*;
 
 terminal WS:
 	(' ' | '\t' | '\r')+;

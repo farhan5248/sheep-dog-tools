@@ -18,145 +18,6 @@ Like I first tried having one `Step` keyword with `(Given|When|Then|And|But|*)` 
 So I guess you have to balance that duplication in your `.xtext` file.
 The other reason for not having `(Given|When|Then|And|But|*)` is that when you create a feature file, the API automatically picks the keyword. In this case, it'll always pick `Given` and there's no simple way to override it that I know of currently.
 
-
-## Add dependencies
-
-If you want to add dependencies, you don't add them like you would in a standard Maven project, there's some Eclipse specific steps. 
-
-### External jars
-
-Create a `lib` directory under the `cucumberxtexteditor` directory
-
-Add the `sheep-dog-test` or your dependent jar to the pom
-
-```
-<properties>
-	<sheep-dog-test.version>1.2-SNAPSHOT</sheep-dog-test.version>
-</properties>
-
-<dependencies>
-	<dependency>
-		<groupId>org.farhan</groupId>
-		<artifactId>sheep-dog-test</artifactId>
-		<version>${sheep-dog-test.version}</version>
-	</dependency>
-</dependencies>
-```
-
-Add the `maven-dependency-plugin` to copy the jars you want into the `lib` directory.
-The `stripVersion` is needed to make updating the `build.properties` less tedious.
-
-```
-<plugin>
-	<groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-dependency-plugin</artifactId>
-	<version>3.6.1</version>
-	<executions>
-		<execution>
-			<id>copy</id>
-			<phase>initialize</phase>
-			<goals>
-				<goal>copy-dependencies</goal>
-			</goals>
-			<configuration>
-				<stripVersion>true</stripVersion>
-				<includeGroupIds>org.farhan</includeGroupIds>
-				<outputDirectory>
-					${project.basedir}/../${project.artifactId}/lib/</outputDirectory>
-			</configuration>
-		</execution>
-	</executions>
-</plugin>
-```
-
-Update the `maven-clean-plugin` to delete the jars before downloading them again. 
-Even though the `copy` goal above will overwrite the jar, the `clean` phase will remove previous versions.
-
-```
-  <plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-clean-plugin</artifactId>
-    <configuration>
-      <filesets combine.children="append">
-...
-        <fileset>
-          <directory>
-            ${project.basedir}/../cucumberxtexteditor/lib/</directory>
-          <includes>
-            <include>**/*</include>
-          </includes>
-        </fileset>
-...
-      </filesets>
-    </configuration>
-  </plugin>
-```
-
-Initially, copy the jar into the lib directory for the next steps.
-Open the `MANIFEST.MF` file in the `cucumberxtexteditor\META-INF` directory. 
-In the `Runtime` tab, `Classpath` section, click on `Add` to add the jar to the list. 
-In the `Build` tab, `Binary Build` section, put a check next to the jar in the list. 
-The `MANIFEST.MF`, `build.properties` and `classpath` files should all have a reference to the jar now.
-Rebuild the project and then you can use the jar in your code.
-Run `mvn generate-sources` to test it out as well.
-
-### Add these files 
-
-```
-cucumberxtexteditor/src/org/farhan/mbt/LanguageAccessImpl.java
-```
-
-### Eclipse IDE jars
-
-You might need to reference jars available to the plugin only when running in the IDE.
-These are to access the file system etc.
-
-In META-INF/MANIFEST.MF/Dependencies/org.eclipse.xtext.builder
-
-### Expose packages to downstream jars
-
-In META-INF/MANIFEST.MF/Runtime/org.farhan.*
-
-
-## Code Generation
-
-### Initial Generated Files
-
-```
-cucumberxtexteditor/src/org/farhan/generator/CucumberGenerator.xtend
-```
-
-### Add these files
-
-```
-cucumberxtexteditor/src/org/farhan/generator/SheepDogOutputConfigurationProvider.java
-```
-
-Modify the org.farhan.mbt.SheepDogRuntimeModule.java
-
-### Java vs Xtend Generator
-
-The goal of these example projects is to make it easier to start using Xtext.
-Because of that I took the generated `CucumberGenerator.java` file and replaced the `CucumberGenerator.xtend` file.
-Later if you like, you can work with Xtend but I generally have stayed away from it.
-You'll find the `CucumberGenerator.java` in the `src-gen` source folder.
-
-
-## Content Assist
-
-### Initial Generated Files
-
-```
-cucumberxtexteditor.ui/src/org/farhan/ui/contentassist/CucumberProposalProvider.java
-```
-
-### Usage
-
-The content assist is triggered when you press `CTRL+SPACE`.
-I haven't figured out how to have it appear automatically like when you press `.` in Java and suggestions pop up. I'll look into that.
-There's a way to add documentation which I'll code later.
-
-
 ## Formatting
 
 ### Initial Generated Files
@@ -291,6 +152,128 @@ In this example, I'm assigning the tag name the same colour as the keyword `@`.
 	}
 ``` 
 
+## Add dependencies
+
+If you want to add dependencies, you don't add them like you would in a standard Maven project, there's some Eclipse specific steps. 
+
+### External jars
+
+Create a `lib` directory under the `cucumberxtexteditor` directory
+
+Add the `sheep-dog-test` or your dependent jar to the pom
+
+```
+<properties>
+	<sheep-dog-test.version>1.2-SNAPSHOT</sheep-dog-test.version>
+</properties>
+
+<dependencies>
+	<dependency>
+		<groupId>org.farhan</groupId>
+		<artifactId>sheep-dog-test</artifactId>
+		<version>${sheep-dog-test.version}</version>
+	</dependency>
+</dependencies>
+```
+
+Add the `maven-dependency-plugin` to copy the jars you want into the `lib` directory.
+The `stripVersion` is needed to make updating the `build.properties` less tedious.
+
+```
+<plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-dependency-plugin</artifactId>
+	<version>3.6.1</version>
+	<executions>
+		<execution>
+			<id>copy</id>
+			<phase>initialize</phase>
+			<goals>
+				<goal>copy-dependencies</goal>
+			</goals>
+			<configuration>
+				<stripVersion>true</stripVersion>
+				<includeGroupIds>org.farhan</includeGroupIds>
+				<outputDirectory>
+					${project.basedir}/../${project.artifactId}/lib/</outputDirectory>
+			</configuration>
+		</execution>
+	</executions>
+</plugin>
+```
+
+Update the `maven-clean-plugin` to delete the jars before downloading them again. 
+Even though the `copy` goal above will overwrite the jar, the `clean` phase will remove previous versions.
+
+```
+  <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-clean-plugin</artifactId>
+    <configuration>
+      <filesets combine.children="append">
+...
+        <fileset>
+          <directory>
+            ${project.basedir}/../cucumberxtexteditor/lib/</directory>
+          <includes>
+            <include>**/*</include>
+          </includes>
+        </fileset>
+...
+      </filesets>
+    </configuration>
+  </plugin>
+```
+
+Initially, copy the jar into the lib directory for the next steps.
+Open the `MANIFEST.MF` file in the `cucumberxtexteditor\META-INF` directory. 
+In the `Runtime` tab, `Classpath` section, click on `Add` to add the jar to the list. 
+In the `Build` tab, `Binary Build` section, put a check next to the jar in the list. 
+The `MANIFEST.MF`, `build.properties` and `classpath` files should all have a reference to the jar now.
+Rebuild the project and then you can use the jar in your code.
+Run `mvn generate-sources` to test it out as well.
+
+### Add these files 
+
+```
+cucumberxtexteditor/src/org/farhan/mbt/LanguageAccessImpl.java
+```
+
+### Eclipse IDE jars
+
+You might need to reference jars available to the plugin only when running in the IDE.
+These are to access the file system etc.
+
+In META-INF/MANIFEST.MF/Dependencies/org.eclipse.xtext.builder
+
+### Expose packages to downstream jars
+
+In META-INF/MANIFEST.MF/Runtime/org.farhan.*
+
+
+## Code Generation
+
+### Initial Generated Files
+
+```
+cucumberxtexteditor/src/org/farhan/generator/CucumberGenerator.xtend
+```
+
+### Add these files
+
+```
+cucumberxtexteditor/src/org/farhan/generator/SheepDogOutputConfigurationProvider.java
+```
+
+Modify the org.farhan.mbt.SheepDogRuntimeModule.java
+
+### Java vs Xtend Generator
+
+The goal of these example projects is to make it easier to start using Xtext.
+Because of that I took the generated `CucumberGenerator.java` file and replaced the `CucumberGenerator.xtend` file.
+Later if you like, you can work with Xtend but I generally have stayed away from it.
+You'll find the `CucumberGenerator.java` in the `src-gen` source folder.
+
 ## Validation
 
 ### Initial Generated Files
@@ -303,6 +286,20 @@ cucumberxtexteditor/src/org/farhan/validation/CucumberValidator.java
 
 There's 3 types of checks, `FAST`, `NORMAL`, `EXPENSIVE`.
 They're triggered when the file is modified, when it's saved and when you select the `Validate` menu item respectively.
+
+## Content Assist
+
+### Initial Generated Files
+
+```
+cucumberxtexteditor.ui/src/org/farhan/ui/contentassist/CucumberProposalProvider.java
+```
+
+### Usage
+
+The content assist is triggered when you press `CTRL+SPACE`.
+I haven't figured out how to have it appear automatically like when you press `.` in Java and suggestions pop up. I'll look into that.
+There's a way to add documentation which I'll code later.
 
 ## Quick Fix
 

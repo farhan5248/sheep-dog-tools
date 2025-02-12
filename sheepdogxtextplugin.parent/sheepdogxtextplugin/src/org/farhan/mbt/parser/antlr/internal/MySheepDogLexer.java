@@ -11,9 +11,6 @@ import java.util.ArrayList;
 public class MySheepDogLexer extends InternalSheepDogLexer {
 
 	// TODO maybe these should all be one flag called escapeKeyword?
-	private boolean isDocString = false;
-	private boolean isCell = false;
-	private boolean isTag = false;
 	private boolean isTitle = false;
 
 	public MySheepDogLexer() {
@@ -54,64 +51,54 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 			mRULE_SL_COMMENT();
 		} else if (isKeyword("\n")) {
 			mRULE_EOL();
-			isTag = false;
-			isCell = false;
 			isTitle = false;
 		} else if (isKeyword(" ") || isKeyword("\t") || isKeyword("\r")) {
 			mRULE_WS();
 		} else if (isKeyword("|===")) {
-			mT__25();// '|==='
+			mT__24();// '|==='
 		} else if (isKeyword("|")) {
-			mT__29();// '|'
-			isCell = true;
+			mT__28();// '|'
 		} else if (isKeyword("[options=\"header\"]")) {
-			mT__24();// '[options=\"header\"]'
-		} else if (isKeyword("[tags=\"")) {
-			mT__27();// '[tags=\"'
-			isTag = true;
-		} else if (isKeyword("\"]")) {
-			mT__28();// '\"]'
-			isTag = false;
+			mT__23();// '[options=\"header\"]'
+		} else if (isKeyword("[tags=")) {
+			mT__26();// '[tags='
+		} else if (isKeyword("]")) {
+			mT__27();// ']'
 		} else if (isKeyword(":tags:")) {
-			mT__26();// ( ':tags:' )
-			isTag = true;
-		} else if (isCell) {
-			mRULE_WORD();
-		} else if (isTag) {
-			mRULE_TAGWORD();
+			mT__25();// ( ':tags:' )
 		} else if (isKeyword("===")) {
-			mT__14();// '==='
+			mT__13();// '==='
 		} else if (isKeyword("==")) {
-			mT__12();// '=='
+			mT__11();// '=='
 		} else if (isKeyword("=")) {
-			mT__10();// '='
+			mT__9();// '='
 		} else if (isKeyword("Object:")) {
-			mT__11();// 'Object:'
+			mT__10();// 'Object:'
 		} else if (isKeyword("Definition:")) {
-			mT__13();// 'Definition:'
+			mT__12();// 'Definition:'
 		} else if (isKeyword("Parameters:")) {
-			mT__15();// 'Parameters:'
+			mT__14();// 'Parameters:'
 		} else if (isKeyword("Feature:")) {
-			mT__16();// 'Feature:'
+			mT__15();// 'Feature:'
 		} else if (isKeyword("Background:")) {
-			mT__17();// 'Background:'
+			mT__16();// 'Background:'
 		} else if (isKeyword("Scenario:")) {
-			mT__18();// 'Scenario:'
+			mT__17();// 'Scenario:'
 		} else if (isKeyword("Examples:")) {
-			mT__19();// 'Examples:'
+			mT__18();// 'Examples:'
 		} else if (isTitle) {
 			mRULE_WORD();
-		} else if (isKeyword("Given")) {
-			mT__20();// 'Given'
+		} else if (isKeyword("Given:")) {
+			mT__19();// 'Given'
 			isTitle = true;
-		} else if (isKeyword("When")) {
-			mT__21();// 'When'
+		} else if (isKeyword("When:")) {
+			mT__20();// 'When'
 			isTitle = true;
-		} else if (isKeyword("Then")) {
-			mT__22();// 'Then'
+		} else if (isKeyword("Then:")) {
+			mT__21();// 'Then'
 			isTitle = true;
-		} else if (isKeyword("And")) {
-			mT__23();// 'And'
+		} else if (isKeyword("And:")) {
+			mT__22();// 'And'
 			isTitle = true;
 		} else {
 			mRULE_WORD();

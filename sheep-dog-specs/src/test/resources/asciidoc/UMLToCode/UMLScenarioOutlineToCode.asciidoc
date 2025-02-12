@@ -2,7 +2,7 @@
 
 == Scenario: No tags, no statement, one step, one example
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -17,13 +17,13 @@ Feature: Process
       | v31 |
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== And The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
 
-=== Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+=== Then: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
 
-=== And The mbt-transformer plugin, Process.feature file Scenario Outline Steps Data Table section will be created as follows
+=== And: The mbt-transformer plugin, Process.feature file Scenario Outline Steps Data Table section will be created as follows
 
 [options="header"]
 |===
@@ -32,7 +32,7 @@ Feature: Process
 | Submit| Given The Object page is created as follows
 |===
 
-=== And The mbt-transformer plugin, Process.feature file Scenario Outline Examples Table section will be created as follows
+=== And: The mbt-transformer plugin, Process.feature file Scenario Outline Examples Table section will be created as follows
 
 [options="header"]
 |===
@@ -43,7 +43,7 @@ Feature: Process
 
 == Scenario: One tag, one statement, one step, one example
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -60,13 +60,13 @@ Feature: Process
       | v31 |
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== And The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
 
-=== Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+=== Then: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
 
-=== And The mbt-transformer plugin, Process.feature file Scenario Outlines section will be created as follows
+=== And: The mbt-transformer plugin, Process.feature file Scenario Outlines section will be created as follows
 
 [options="header"]
 |===
@@ -76,7 +76,7 @@ Feature: Process
 
 == Scenario: Two tags, two statements, two steps, two examples
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -101,13 +101,13 @@ Feature: Process
       | v32 |
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== And The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
 
-=== Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+=== Then: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
 
-=== And The mbt-transformer plugin, Process.feature file Scenario Outlines section will be created as follows
+=== And: The mbt-transformer plugin, Process.feature file Scenario Outlines section will be created as follows
 
 [options="header"]
 |===
@@ -115,7 +115,7 @@ Feature: Process
 | Submit| tag1,tag2| Desc line 1\nDesc line 2
 |===
 
-=== And The mbt-transformer plugin, Process.feature file Scenario Outline Steps Data Table section will be created as follows
+=== And: The mbt-transformer plugin, Process.feature file Scenario Outline Steps Data Table section will be created as follows
 
 [options="header"]
 |===
@@ -123,7 +123,7 @@ Feature: Process
 | Submit| Given The Object{Index} page is created as follows
 |===
 
-=== And The mbt-transformer plugin, Process.feature file Scenario Outline Examples Table section will be created as follows
+=== And: The mbt-transformer plugin, Process.feature file Scenario Outline Examples Table section will be created as follows
 
 [options="header"]
 |===
@@ -143,7 +143,7 @@ Feature: Process
 
 == Scenario: Three tags, three statements, three steps, three examples
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -176,13 +176,13 @@ Feature: Process
       | v33 |
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== And The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
 
-=== Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+=== Then: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
 
-=== And The mbt-transformer plugin, Process.feature file Scenario Outlines section will be created as follows
+=== And: The mbt-transformer plugin, Process.feature file Scenario Outlines section will be created as follows
 
 [options="header"]
 |===
@@ -190,7 +190,7 @@ Feature: Process
 | Submit| tag1,tag2,tag3| Desc line 1\nDesc line 2\nDesc line 3
 |===
 
-=== And The mbt-transformer plugin, Process.feature file Scenario Outline Steps Data Table section will be created as follows
+=== And: The mbt-transformer plugin, Process.feature file Scenario Outline Steps Data Table section will be created as follows
 
 [options="header"]
 |===
@@ -198,7 +198,7 @@ Feature: Process
 | Submit| Given The Object{Index} page is created as follows
 |===
 
-=== And The mbt-transformer plugin, Process.feature file Scenario Outline Examples Table section will be created as follows
+=== And: The mbt-transformer plugin, Process.feature file Scenario Outline Examples Table section will be created as follows
 
 [options="header"]
 |===

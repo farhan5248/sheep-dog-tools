@@ -84,7 +84,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	private void convertScenario(AbstractScenario abstractScenario) {
 		Interaction scenario = tgtObj.createScenario(srcObj.getScenarioName(abstractScenario));
-		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(abstractScenario));
+		tgtObj.setScenarioTags(scenario, srcObj.getAbstractScenarioTags(abstractScenario));
 		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(abstractScenario));
 		convertStepList(scenario, srcObj.getStepList(abstractScenario));
 	}
@@ -92,7 +92,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 	private void convertScenarioOutline(AbstractScenario abstractScenario) {
 
 		Interaction scenarioOutline = tgtObj.createScenarioOutline(srcObj.getScenarioOutlineName(abstractScenario));
-		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
+		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getAbstractScenarioTags(abstractScenario));
 		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
 		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario));
 
@@ -178,11 +178,11 @@ public class ConvertAsciidoctorToUML extends Converter {
 		}
 		for (AbstractScenario a : ufw.getAbstractScenarioList()) {
 			if (ufw.isScenarioOutline(a)) {
-				if (isTagged(ufw.getScenarioOutlineTags(a), tags)) {
+				if (isTagged(ufw.getAbstractScenarioTags(a), tags)) {
 					return true;
 				}
 			} else if (!ufw.isBackground(a)) {
-				if (isTagged(ufw.getScenarioTags(a), tags)) {
+				if (isTagged(ufw.getAbstractScenarioTags(a), tags)) {
 					return true;
 				}
 			}

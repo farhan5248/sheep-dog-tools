@@ -26,11 +26,11 @@ public class SheepDogAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToA
 		case "'==='":
 			return SheepDogHighlightingConfiguration.KEYWORD_OBJ_ID;
 		case "'Object:'":
-			return SheepDogHighlightingConfiguration.KEYWORD_OBJ_ID;
+			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
 		case "'Definition:'":
-			return SheepDogHighlightingConfiguration.KEYWORD_OBJ_ID;
+			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
 		case "'Parameters:'":
-			return SheepDogHighlightingConfiguration.KEYWORD_OBJ_ID;
+			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
 		case "'Feature:'":
 			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
 		case "'Background:'":
@@ -39,13 +39,13 @@ public class SheepDogAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToA
 			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
 		case "'Examples:'":
 			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
-		case "'Given'":
+		case "'Given:'":
 			return SheepDogHighlightingConfiguration.KEYWORD_GWT_ID;
-		case "'When'":
+		case "'When:'":
 			return SheepDogHighlightingConfiguration.KEYWORD_GWT_ID;
-		case "'Then'":
+		case "'Then:'":
 			return SheepDogHighlightingConfiguration.KEYWORD_GWT_ID;
-		case "'And'":
+		case "'And:'":
 			return SheepDogHighlightingConfiguration.KEYWORD_GWT_ID;
 		case "'[options=\"header\"]'":
 			return SheepDogHighlightingConfiguration.DOC_ID;
@@ -55,9 +55,9 @@ public class SheepDogAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToA
 			return SheepDogHighlightingConfiguration.DOC_ID;
 		case "'----'":
 			return SheepDogHighlightingConfiguration.DOC_ID;
-		case "'[tags=\"'":
+		case "'[tags='":
 			return SheepDogHighlightingConfiguration.TAG_ID;
-		case "'\"]'":
+		case "']'":
 			return SheepDogHighlightingConfiguration.TAG_ID;
 		case "':tags:'":
 			return SheepDogHighlightingConfiguration.TAG_ID;

@@ -2,7 +2,7 @@
 
 == Scenario: No statement, one step, one scenario
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Feature: Process
@@ -10,18 +10,18 @@
 [background="true"]
 == Scenario: Setup
 
-=== Given The Object0 page is valid
+=== Given: The Object0 page is valid
 
 == Scenario: Submit
 
-=== Given The Object1 page is valid
+=== Given: The Object1 page is valid
 ----
 
-=== When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
 
-=== And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
@@ -32,7 +32,7 @@
 
 == Scenario: No statement, two steps, one scenario
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Feature: Process
@@ -40,19 +40,19 @@
 [background="true"]
 == Scenario: Setup
 
-=== Given The Object1 page is valid
-=== Given The Object2 page is valid
+=== Given: The Object1 page is valid
+=== Given: The Object2 page is valid
 
 == Scenario: Submit
 
-=== Given The Object page is valid
+=== Given: The Object page is valid
 ----
 
-=== When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
 
-=== And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
@@ -64,7 +64,7 @@
 
 == Scenario: No statement, three steps, one scenario
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Feature: Process
@@ -72,20 +72,20 @@
 [background="true"]
 == Scenario: Setup
 
-=== Given The Object1 page is valid
-=== Given The Object2 page is valid
-=== Given The Object3 page is valid
+=== Given: The Object1 page is valid
+=== Given: The Object2 page is valid
+=== Given: The Object3 page is valid
 
 == Scenario: Submit
 
-=== Given The Object page is valid
+=== Given: The Object page is valid
 ----
 
-=== When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
 
-=== And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
@@ -98,7 +98,7 @@
 
 == Scenario: One statement, one step, one scenario
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Feature: Process
@@ -108,18 +108,18 @@
 
 Desc line 1
 
-=== Given The Object0 page is valid
+=== Given: The Object0 page is valid
 
 == Scenario: Submit
 
-=== Given The Object1 page is valid
+=== Given: The Object1 page is valid
 ----
 
-=== When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
 
-=== And The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
 
 [options="header"]
 |===
@@ -129,7 +129,7 @@ Desc line 1
 
 == Scenario: No statement, one step, two scenarios
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Feature: Process
@@ -137,22 +137,22 @@ Desc line 1
 [background="true"]
 == Scenario: Setup
 
-=== Given The Object0 page is valid
+=== Given: The Object0 page is valid
 
 == Scenario: Submit 1
 
-=== Given The Object1 page is valid
+=== Given: The Object1 page is valid
 
 == Scenario: Submit 2
 
-=== Given The Object2 page is valid
+=== Given: The Object2 page is valid
 ----
 
-=== When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
 
-=== And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
@@ -164,7 +164,7 @@ Desc line 1
 
 == Scenario: No statement, one step, three scenarios
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Feature: Process
@@ -172,26 +172,26 @@ Desc line 1
 [background="true"]
 == Scenario: Setup
 
-=== Given The Object0 page is valid
+=== Given: The Object0 page is valid
 
 == Scenario: Submit 1
 
-=== Given The Object1 page is valid
+=== Given: The Object1 page is valid
 
 == Scenario: Submit 2
 
-=== Given The Object2 page is valid
+=== Given: The Object2 page is valid
 
 == Scenario: Submit 3
 
-=== Given The Object3 page is valid
+=== Given: The Object3 page is valid
 ----
 
-=== When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
 
-=== And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===

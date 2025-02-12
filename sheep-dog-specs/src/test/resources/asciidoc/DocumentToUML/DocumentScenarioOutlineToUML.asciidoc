@@ -2,14 +2,14 @@
 
 == Scenario: No tags, no statement, one step, one example
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Feature: Process
 
 == Scenario: Submit
 
-=== Given The Object page is created as follows
+=== Given: The Object page is created as follows
 
 [options="header"]
 |===
@@ -26,11 +26,11 @@
 |===
 ----
 
-=== When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
 
-=== And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
@@ -39,7 +39,7 @@
 | specs::Process::Submit| The Object page is created as follows| dataTable| 1 -} {h3} \|
 |===
 
-=== And The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
 
 [options="header"]
 |===
@@ -50,7 +50,7 @@
 
 == Scenario: One tag, one statement, one step, one example
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Feature: Process
@@ -60,7 +60,7 @@
 
 Desc line 1
 
-=== Given The Object page is created as follows
+=== Given: The Object page is created as follows
 
 [options="header"]
 |===
@@ -77,11 +77,11 @@ Desc line 1
 |===
 ----
 
-=== When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
 
-=== And The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
 
 [options="header"]
 |===
@@ -89,7 +89,7 @@ Desc line 1
 | specs::Process::Submit| tags| tag1
 |===
 
-=== And The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
 
 [options="header"]
 |===
@@ -99,7 +99,7 @@ Desc line 1
 
 == Scenario: Two tags, two statements, two steps, two examples
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Feature: Process
@@ -110,7 +110,7 @@ Desc line 1
 Desc line 1
 Desc line 2
 
-=== Given The Object1 page is created as follows
+=== Given: The Object1 page is created as follows
 
 [options="header"]
 |===
@@ -118,7 +118,7 @@ Desc line 2
 | {h3}
 |===
 
-=== Given The Object2 page is created as follows
+=== Given: The Object2 page is created as follows
 
 [options="header"]
 |===
@@ -143,11 +143,11 @@ Desc line 2
 |===
 ----
 
-=== When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
 
-=== And The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
 
 [options="header"]
 |===
@@ -155,7 +155,7 @@ Desc line 2
 | specs::Process::Submit| tags| tag{Index}
 |===
 
-=== And The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
 
 [options="header"]
 |===
@@ -163,7 +163,7 @@ Desc line 2
 | specs::Process::Submit| Desc line 1\nDesc line 2
 |===
 
-=== And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
@@ -171,7 +171,7 @@ Desc line 2
 | specs::Process::Submit| The Object{Index} page is created as follows
 |===
 
-=== And The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
 
 [options="header"]
 |===
@@ -191,7 +191,7 @@ Desc line 2
 
 == Scenario: Three tags, three statements, three steps, three examples
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Feature: Process
@@ -203,7 +203,7 @@ Desc line 1
 Desc line 2
 Desc line 3
 
-=== Given The Object1 page is created as follows
+=== Given: The Object1 page is created as follows
 
 [options="header"]
 |===
@@ -211,7 +211,7 @@ Desc line 3
 | {h3}
 |===
 
-=== Given The Object2 page is created as follows
+=== Given: The Object2 page is created as follows
 
 [options="header"]
 |===
@@ -219,7 +219,7 @@ Desc line 3
 | {h3}
 |===
 
-=== Given The Object3 page is created as follows
+=== Given: The Object3 page is created as follows
 
 [options="header"]
 |===
@@ -251,11 +251,11 @@ Desc line 3
 |===
 ----
 
-=== When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
 
-=== And The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
 
 [options="header"]
 |===
@@ -263,7 +263,7 @@ Desc line 3
 | specs::Process::Submit| tags| tag{Index}
 |===
 
-=== And The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
 
 [options="header"]
 |===
@@ -271,7 +271,7 @@ Desc line 3
 | specs::Process::Submit| Desc line 1\nDesc line 2\nDesc line 3
 |===
 
-=== And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
@@ -279,7 +279,7 @@ Desc line 3
 | specs::Process::Submit| The Object{Index} page is created as follows
 |===
 
-=== And The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
 
 [options="header"]
 |===
@@ -300,7 +300,7 @@ Desc line 3
 
 == Scenario: Selected tags
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Feature: Process
@@ -308,7 +308,7 @@ Desc line 3
 [tags="tag1"]
 == Scenario: Submit
 
-=== Given The Object1 page is empty
+=== Given: The Object1 page is empty
 
 === Examples: Examples 1
 
@@ -321,7 +321,7 @@ Desc line 3
 [tags="tag2"]
 == Scenario: Submit2
 
-=== Given The Object1 page is empty
+=== Given: The Object1 page is empty
 
 === Examples: Examples 1
 
@@ -332,7 +332,7 @@ Desc line 3
 |===
 ----
 
-=== When The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
+=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
 
 [options="header"]
 |===
@@ -340,9 +340,9 @@ Desc line 3
 | tag1
 |===
 
-=== Then The mbt-transformer plugin, target/mbt/tag1/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/tag1/uml/pst.uml file will be present
 
-=== And The target/mbt/tag1/uml/pst.uml file Interaction section will be created as follows
+=== And: The target/mbt/tag1/uml/pst.uml file Interaction section will be created as follows
 
 [options="header"]
 |===
@@ -350,7 +350,7 @@ Desc line 3
 | specs::Process::Submit
 |===
 
-=== And The target/mbt/tag1/uml/pst.uml file Interaction section won't be created as follows
+=== And: The target/mbt/tag1/uml/pst.uml file Interaction section won't be created as follows
 
 [options="header"]
 |===

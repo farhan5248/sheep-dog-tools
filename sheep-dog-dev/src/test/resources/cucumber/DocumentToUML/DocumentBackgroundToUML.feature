@@ -9,11 +9,11 @@ Feature: Document Background To UML
           
           == Background: Setup
           
-          === Given The Object0 page is valid
+          === Given:: The Object0 page is valid
           
           == Scenario: Submit
           
-          === Given The Object1 page is valid
+          === Given:: The Object1 page is valid
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
@@ -30,12 +30,12 @@ Feature: Document Background To UML
           
           == Background: Setup
           
-          === Given The Object1 page is valid
-          === Given The Object2 page is valid
+          === Given:: The Object1 page is valid
+          === Given:: The Object2 page is valid
           
           == Scenario: Submit
           
-          === Given The Object page is valid
+          === Given:: The Object page is valid
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
@@ -53,13 +53,13 @@ Feature: Document Background To UML
           
           == Background: Setup
           
-          === Given The Object1 page is valid
-          === Given The Object2 page is valid
-          === Given The Object3 page is valid
+          === Given:: The Object1 page is valid
+          === Given:: The Object2 page is valid
+          === Given:: The Object3 page is valid
           
           == Scenario: Submit
           
-          === Given The Object page is valid
+          === Given:: The Object page is valid
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
@@ -80,11 +80,11 @@ Feature: Document Background To UML
           
           Desc line 1
           
-          === Given The Object0 page is valid
+          === Given:: The Object0 page is valid
           
           == Scenario: Submit
           
-          === Given The Object1 page is valid
+          === Given:: The Object1 page is valid
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
@@ -100,15 +100,15 @@ Feature: Document Background To UML
           
           == Background: Setup
           
-          === Given The Object0 page is valid
+          === Given:: The Object0 page is valid
           
           == Scenario: Submit 1
           
-          === Given The Object1 page is valid
+          === Given:: The Object1 page is valid
           
           == Scenario: Submit 2
           
-          === Given The Object2 page is valid
+          === Given:: The Object2 page is valid
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
@@ -126,19 +126,19 @@ Feature: Document Background To UML
           
           == Background: Setup
           
-          === Given The Object0 page is valid
+          === Given:: The Object0 page is valid
           
           == Scenario: Submit 1
           
-          === Given The Object1 page is valid
+          === Given:: The Object1 page is valid
           
           == Scenario: Submit 2
           
-          === Given The Object2 page is valid
+          === Given:: The Object2 page is valid
           
           == Scenario: Submit 3
           
-          === Given The Object3 page is valid
+          === Given:: The Object3 page is valid
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present

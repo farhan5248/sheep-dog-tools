@@ -2,7 +2,7 @@
 
 == Scenario: The object doesn't exist
 
-=== Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
+=== Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
 [options="header"]
 |===
@@ -10,9 +10,9 @@
 | The daily batchjob, Input file is present
 |===
 
-=== When The generation action is performed
+=== When: The generation action is performed
 
-=== Then The src-gen-step-defs/daily batchjob/Input file.feature file will be created as follows
+=== Then: The src-gen-step-defs/daily batchjob/Input file.feature file will be created as follows
 
 [options="header"]
 |===
@@ -22,7 +22,7 @@
 
 == Scenario: The object step definition doesn't exist
 
-=== Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
+=== Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
 [options="header"]
 |===
@@ -30,7 +30,7 @@
 | The daily batchjob, Input file is present
 |===
 
-=== And The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
+=== And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
 [options="header"]
 |===
@@ -38,9 +38,9 @@
 | daily batchjob/Input file.feature| is absent
 |===
 
-=== When The generation action is performed
+=== When: The generation action is performed
 
-=== Then The src-gen-step-defs/daily batchjob/Input file.feature file will be created as follows
+=== Then: The src-gen-step-defs/daily batchjob/Input file.feature file will be created as follows
 
 [options="header"]
 |===
@@ -50,7 +50,7 @@
 
 == Scenario: The object step definition parameter set doesn't exist
 
-=== Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
+=== Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
 [options="header"]
 |===
@@ -58,7 +58,7 @@
 | The daily batchjob, Input file is present| New Header
 |===
 
-=== And The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
+=== And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
 [options="header"]
 |===
@@ -66,9 +66,9 @@
 | daily batchjob/Input file.feature| is present| Old Header
 |===
 
-=== When The generation action is performed
+=== When: The generation action is performed
 
-=== Then The src-gen-step-defs/daily batchjob/Input file.feature file will be created as follows
+=== Then: The src-gen-step-defs/daily batchjob/Input file.feature file will be created as follows
 
 [options="header"]
 |===

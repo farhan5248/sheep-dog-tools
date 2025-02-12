@@ -2,7 +2,7 @@
 
 == Scenario: Convert step keywords
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -17,13 +17,13 @@ Feature: Process
         * The Object page is empty
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+=== And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+=== Then: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
 
-=== And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
+=== And: The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
 
 [options="header"]
 |===
@@ -38,7 +38,7 @@ Feature: Process
 
 == Scenario: Convert apostrophes
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -48,13 +48,13 @@ Feature: Process
     Given The Object page isn't empty
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+=== And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+=== Then: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
 
-=== And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
+=== And: The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
 
 [options="header"]
 |===

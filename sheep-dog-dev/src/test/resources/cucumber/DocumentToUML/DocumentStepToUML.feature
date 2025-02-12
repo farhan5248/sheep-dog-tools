@@ -9,10 +9,10 @@ Feature: Document Step To UML
           
           == Scenario: Submit
           
-          === Given The blah application, Given page is empty
-          === When The blah application, When page is empty
-          === Then The blah application, Then page is empty
-          === And The blah application, And page is empty
+          === Given:: The blah application, Given page is empty
+          === When: The blah application, When page is empty
+          === Then:: The blah application, Then page is empty
+          === And: The blah application, And page is empty
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present

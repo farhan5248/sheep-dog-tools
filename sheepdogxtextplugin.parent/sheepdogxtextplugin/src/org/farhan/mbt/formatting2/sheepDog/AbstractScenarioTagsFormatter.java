@@ -17,8 +17,8 @@ public class AbstractScenarioTagsFormatter extends Formatter {
 	public void format(IFormattableDocument doc, SheepDogGrammarAccess ga, SheepDogFormatter df) {
 		AbstractScenarioTagsElements a = ga.getAbstractScenarioTagsAccess();
 		formatKeywordNoSpace(df.getRegion(tags, a.getTagsKeyword_0()), doc);
-		formatTitle(df.getRegion(tags, a.getNameTAGWORDTerminalRuleCall_1_0()), doc);
-		formatKeywordNoSpace(df.getRegion(tags, a.getQuotationMarkRightSquareBracketKeyword_2()), doc);
+		formatTitle(df.getRegion(tags, a.getNameWORDTerminalRuleCall_1_0()), doc);
+		formatKeywordNoSpace(df.getRegion(tags, a.getRightSquareBracketKeyword_2()), doc);
 		formatEOL1RuleCall(df.getRegion(tags, a.getEOLTerminalRuleCall_3()), doc);
 	}
 }

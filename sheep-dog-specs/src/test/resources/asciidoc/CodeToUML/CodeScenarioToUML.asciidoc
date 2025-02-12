@@ -2,7 +2,7 @@
 
 == Scenario: No tags, no statements, one step
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -11,11 +11,11 @@ Feature: Process
     Given The blah application, something/Object1 page is empty
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
 
-=== And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
@@ -25,7 +25,7 @@ Feature: Process
 
 == Scenario: One tag, one statement, one step
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -37,11 +37,11 @@ Feature: Process
     Given The blah application, something/Object1 page is empty
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
 
-=== And The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
 
 [options="header"]
 |===
@@ -49,7 +49,7 @@ Feature: Process
 | specs::Process::Submit| tags| tag1
 |===
 
-=== And The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
 
 [options="header"]
 |===
@@ -59,7 +59,7 @@ Feature: Process
 
 == Scenario: Two tags, two statements, two steps
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -73,11 +73,11 @@ Feature: Process
     Given The blah application, something/Object2 page is empty
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
 
-=== And The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
 
 [options="header"]
 |===
@@ -85,7 +85,7 @@ Feature: Process
 | specs::Process::Submit| tags| tag{Index}
 |===
 
-=== And The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
 
 [options="header"]
 |===
@@ -93,7 +93,7 @@ Feature: Process
 | specs::Process::Submit| Desc line 1\nDesc line 2
 |===
 
-=== And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
@@ -112,7 +112,7 @@ Feature: Process
 
 == Scenario: Three tags, three statements, three steps
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -128,11 +128,11 @@ Feature: Process
     Given The blah application, something/Object3 page is empty
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
 
-=== And The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Annotations section will be created as follows
 
 [options="header"]
 |===
@@ -140,7 +140,7 @@ Feature: Process
 | specs::Process::Submit| tags| tag{Index}
 |===
 
-=== And The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
 
 [options="header"]
 |===
@@ -148,7 +148,7 @@ Feature: Process
 | specs::Process::Submit| Desc line 1\nDesc line 2\nDesc line 3
 |===
 
-=== And The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
@@ -168,7 +168,7 @@ Feature: Process
 
 == Scenario: Selected tags
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -184,7 +184,7 @@ Feature: Process
     Given The Object1 page is empty
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed with
+=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed with
 
 [options="header"]
 |===
@@ -192,9 +192,9 @@ Feature: Process
 | tag1
 |===
 
-=== Then The mbt-transformer plugin, target/mbt/tag1/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/tag1/uml/pst.uml file will be present
 
-=== And The target/mbt/tag1/uml/pst.uml file Interaction section will be created as follows
+=== And: The target/mbt/tag1/uml/pst.uml file Interaction section will be created as follows
 
 [options="header"]
 |===
@@ -202,7 +202,7 @@ Feature: Process
 | specs::Process::Submit
 |===
 
-=== And The target/mbt/tag1/uml/pst.uml file Interaction section won't be created as follows
+=== And: The target/mbt/tag1/uml/pst.uml file Interaction section won't be created as follows
 
 [options="header"]
 |===

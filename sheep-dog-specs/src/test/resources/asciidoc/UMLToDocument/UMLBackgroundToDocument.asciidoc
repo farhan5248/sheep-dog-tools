@@ -2,7 +2,7 @@
 
 == Scenario: One statement, one step, one scenario
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -15,13 +15,13 @@ Feature: Process
      Given The Object1 page is valid
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+=== And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+=== Then: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
 
-=== And The mbt-transformer plugin, Process.asciidoc file Background section will be created as follows
+=== And: The mbt-transformer plugin, Process.asciidoc file Background section will be created as follows
 
 [options="header"]
 |===
@@ -29,7 +29,7 @@ Feature: Process
 | Setup| Desc line 1
 |===
 
-=== And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
+=== And: The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
 
 [options="header"]
 |===
@@ -37,7 +37,7 @@ Feature: Process
 | Setup| Given The Object0 page is valid
 |===
 
-=== And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
+=== And: The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
 
 [options="header"]
 |===
@@ -47,7 +47,7 @@ Feature: Process
 
 == Scenario: No statement, one step, one scenario
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -59,13 +59,13 @@ Feature: Process
      Given The Object1 page is valid
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+=== And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+=== Then: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
 
-=== And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
+=== And: The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
 
 [options="header"]
 |===
@@ -73,7 +73,7 @@ Feature: Process
 | Setup| Given The Object0 page is valid
 |===
 
-=== And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
+=== And: The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
 
 [options="header"]
 |===
@@ -83,7 +83,7 @@ Feature: Process
 
 == Scenario: No statement, one step, two scenarios
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -98,13 +98,13 @@ Feature: Process
      Given The Object2 page is valid
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+=== And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+=== Then: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
 
-=== And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
+=== And: The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
 
 [options="header"]
 |===
@@ -112,7 +112,7 @@ Feature: Process
 | Setup| Given The Object0 page is valid
 |===
 
-=== And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
+=== And: The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
 
 [options="header"]
 |===
@@ -123,7 +123,7 @@ Feature: Process
 
 == Scenario: No statement, one step, three scenarios
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -141,13 +141,13 @@ Feature: Process
      Given The Object3 page is valid
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+=== And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+=== Then: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
 
-=== And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
+=== And: The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
 
 [options="header"]
 |===
@@ -155,7 +155,7 @@ Feature: Process
 | Setup| Given The Object0 page is valid
 |===
 
-=== And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
+=== And: The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
 
 [options="header"]
 |===
@@ -167,7 +167,7 @@ Feature: Process
 
 == Scenario: No statement, two steps, one scenario
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -180,13 +180,13 @@ Feature: Process
      Given The Object page is valid
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+=== And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+=== Then: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
 
-=== And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
+=== And: The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
 
 [options="header"]
 |===
@@ -195,7 +195,7 @@ Feature: Process
 | Setup| Given The Object2 page is valid
 |===
 
-=== And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
+=== And: The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
 
 [options="header"]
 |===
@@ -205,7 +205,7 @@ Feature: Process
 
 == Scenario: No statement, three steps, one scenario
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -219,13 +219,13 @@ Feature: Process
      Given The Object page is valid
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+=== And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+=== Then: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
 
-=== And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
+=== And: The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
 
 [options="header"]
 |===
@@ -235,7 +235,7 @@ Feature: Process
 | Setup| Given The Object3 page is valid
 |===
 
-=== And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
+=== And: The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
 
 [options="header"]
 |===

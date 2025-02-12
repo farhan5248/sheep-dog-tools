@@ -2,7 +2,7 @@
 
 == Scenario: Create an adoc file from feature file
 
-=== Given The mbt-transformer plugin, src/test/resources/cucumber/app/Process.feature file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/cucumber/app/Process.feature file is created as follows
 
 ----
 @tag1
@@ -43,7 +43,7 @@ Feature: Process
           |   4 |
 ----
 
-=== When The mbt-transformer plugin, cucumber-to-uml goal is executed with
+=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed with
 
 [options="header"]
 |===
@@ -51,7 +51,7 @@ Feature: Process
 | tag1
 |===
 
-=== And The mbt-transformer plugin, uml-to-asciidoctor goal is executed with
+=== And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed with
 
 [options="header"]
 |===
@@ -59,7 +59,7 @@ Feature: Process
 | tag1
 |===
 
-=== Then The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows
+=== Then: The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows
 
 ----
 = Feature: Process
@@ -71,9 +71,9 @@ Desc 1
 
 Desc 2
 
-=== Given The Search application, Login page is valid
+=== Given: The Search application, Login page is valid
 
-=== When The Search application, Home page is created as follows
+=== When: The Search application, Home page is created as follows
 
 [options="header"]
 |===
@@ -81,7 +81,7 @@ Desc 2
 | 10| 5
 |===
 
-=== Then The Search application, Logout page is created as follows
+=== Then: The Search application, Logout page is created as follows
 
 \----
   text1
@@ -94,9 +94,9 @@ Desc 2
 
 Desc 3
 
-=== Given The Search application, Login page is invalid
+=== Given: The Search application, Login page is invalid
 
-=== When The Search application, Home page is created as follows
+=== When: The Search application, Home page is created as follows
 
 [options="header"]
 |===
@@ -104,7 +104,7 @@ Desc 3
 | 8| {ins}
 |===
 
-=== Then The Search application, Logout page is invalid
+=== Then: The Search application, Logout page is invalid
 
 === Examples: Some data
 

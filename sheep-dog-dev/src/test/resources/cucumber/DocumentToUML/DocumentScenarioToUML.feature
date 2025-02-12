@@ -9,7 +9,7 @@ Feature: Document Scenario To UML
           
           == Scenario: Submit
           
-          === Given The Object1 page is empty
+          === Given:: The Object1 page is empty
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
@@ -28,7 +28,7 @@ Feature: Document Scenario To UML
           
           Desc line 1
           
-          === Given The Object1 page is empty
+          === Given:: The Object1 page is empty
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
@@ -51,9 +51,9 @@ Feature: Document Scenario To UML
           Desc line 1
           Desc line 2
           
-          === Given The Object1 page is empty
+          === Given:: The Object1 page is empty
           
-          === Given The Object2 page is empty
+          === Given:: The Object2 page is empty
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
@@ -82,11 +82,11 @@ Feature: Document Scenario To UML
           Desc line 2
           Desc line 3
           
-          === Given The Object1 page is empty
+          === Given:: The Object1 page is empty
           
-          === Given The Object2 page is empty
+          === Given:: The Object2 page is empty
           
-          === Given The Object3 page is empty
+          === Given:: The Object3 page is empty
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
@@ -113,12 +113,12 @@ Feature: Document Scenario To UML
           [tags="tag1"]
           == Scenario: Submit
           
-          === Given The Object1 page is empty
+          === Given:: The Object1 page is empty
           
           [tags="tag2"]
           == Scenario: Submit2
           
-          === Given The Object1 page is empty
+          === Given:: The Object1 page is empty
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
           | Tags |

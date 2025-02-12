@@ -2,7 +2,7 @@
 
 == Scenario: Invalid step
 
-=== Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
+=== Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
 [options="header"]
 |===
@@ -10,13 +10,13 @@
 | The daily batchjob, Input file
 |===
 
-=== When The step table proposal action is performed
+=== When: The step table proposal action is performed
 
-=== Then The suggestion dialog will be empty
+=== Then: The suggestion dialog will be empty
 
 == Scenario: Valid step but no object
 
-=== Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
+=== Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
 [options="header"]
 |===
@@ -24,13 +24,13 @@
 | The daily batchjob, Input file is created as follows
 |===
 
-=== When The step table proposal action is performed
+=== When: The step table proposal action is performed
 
-=== Then The suggestion dialog will be empty
+=== Then: The suggestion dialog will be empty
 
 == Scenario: Valid step has object but no definition
 
-=== Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
+=== Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
 [options="header"]
 |===
@@ -38,7 +38,7 @@
 | The daily batchjob, Input file is created as follows
 |===
 
-=== And The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
+=== And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
 [options="header"]
 |===
@@ -46,13 +46,13 @@
 | daily batchjob/Input file.feature | is present          
 |===
 
-=== When The step table proposal action is performed
+=== When: The step table proposal action is performed
 
-=== Then The suggestion dialog will be empty
+=== Then: The suggestion dialog will be empty
 
 == Scenario: Valid step has object has definition has parameters
 
-=== Given The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
+=== Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
 [options="header"]
 |===
@@ -60,7 +60,7 @@
 | The daily batchjob, Input file is created as follows
 |===
 
-=== And The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
+=== And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
 [options="header"]
 |===
@@ -68,9 +68,9 @@
 | daily batchjob/Input file.feature | is created as follows | H1        
 |===
 
-=== When The step table proposal action is performed
+=== When: The step table proposal action is performed
 
-=== Then The suggestion dialog will be set as follows
+=== Then: The suggestion dialog will be set as follows
 
 [options="header"]
 |===

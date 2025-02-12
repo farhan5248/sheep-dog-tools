@@ -15,10 +15,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.impl.RuleCallImpl;
-import org.eclipse.xtext.nodemodel.impl.CompositeNode;
 import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
-import org.eclipse.xtext.nodemodel.impl.HiddenLeafNode;
-import org.eclipse.xtext.nodemodel.impl.LeafNode;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.sheepDog.AbstractScenario;
@@ -28,7 +25,6 @@ import org.farhan.mbt.sheepDog.Cell;
 import org.farhan.mbt.sheepDog.Examples;
 import org.farhan.mbt.sheepDog.Feature;
 import org.farhan.mbt.sheepDog.FeatureTags;
-import org.farhan.mbt.sheepDog.Line;
 import org.farhan.mbt.sheepDog.Row;
 import org.farhan.mbt.sheepDog.Scenario;
 import org.farhan.mbt.sheepDog.SheepDogFactory;
@@ -47,6 +43,14 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		theFeature.setName(pathParts[pathParts.length - 1].replace(".asciidoc", ""));
 	}
 
+	private String convertStatementsToString(EList<Statement> statements) {
+		String contents = "";
+		for (Statement s : statements) {
+			contents += s.getName() + "\n";
+		}
+		return contents.trim();
+	}
+
 	public Background createBackground(String backgroundName) {
 		deleteAbstractScenario(backgroundName);
 		Background background = SheepDogFactory.eINSTANCE.createBackground();
@@ -55,24 +59,9 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return background;
 	}
 
-	private void deleteAbstractScenario(String name) {
-		EList<AbstractScenario> list = theFeature.getAbstractScenarios();
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getName().contentEquals(name)) {
-				list.remove(i);
-				return;
-			}
-		}
-	}
-
 	public void createDocString(Step step, String docString) {
 		step.setTheDocString(SheepDogFactory.eINSTANCE.createDocString());
-		String[] lines = docString.split("\n");
-		for (int i = 0; i < lines.length; i++) {
-			Line line = SheepDogFactory.eINSTANCE.createLine();
-			line.setName(lines[i]);
-			step.getTheDocString().getLines().add(line);
-		}
+		step.getTheDocString().setName("----\n" + docString + "\n----");
 	}
 
 	public Examples createExamples(Scenario abstractScenario, String examplesName) {
@@ -156,6 +145,16 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		}
 	}
 
+	private void deleteAbstractScenario(String name) {
+		EList<AbstractScenario> list = theFeature.getAbstractScenarios();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getName().contentEquals(name)) {
+				list.remove(i);
+				return;
+			}
+		}
+	}
+
 	@Override
 	public Object get() {
 		return theFeature;
@@ -174,6 +173,16 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		}
 	}
 
+	private ArrayList<String> getTags(String tagList) {
+		ArrayList<String> tags = new ArrayList<String>();
+		if (tagList != null) {
+			for (String t : tagList.replace("\"", "").split(",")) {
+				tags.add(t);
+			}
+		}
+		return tags;
+	}
+
 	public String getBackgroundDescription(AbstractScenario abstractScenario) {
 		return convertStatementsToString(abstractScenario.getStatements());
 	}
@@ -183,29 +192,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	public String getDocString(Step step) {
-
-		String text = "";
-		for (Line l : step.getTheDocString().getLines()) {
-
-			CompositeNodeWithSemanticElement cnwse = (CompositeNodeWithSemanticElement) l.eAdapters().getFirst();
-			CompositeNode cn = (CompositeNode) cnwse.getFirstChild();
-
-			// pad ws
-			if (cn.getFirstChild() instanceof HiddenLeafNode) {
-				for (int i = 0; i < cn.getFirstChild().getLength(); i++) {
-					text += " ";
-				}
-			}
-
-			text += l.getName();
-			// pad eol
-			if (cn.getFirstChild() instanceof LeafNode) {
-				for (int i = 0; i < cn.getNextSibling().getLength(); i++) {
-					text += "\n";
-				}
-			}
-		}
-		return text;
+		return step.getTheDocString().getName().replaceFirst("----\n", "").replaceFirst("\n----", "");
 	}
 
 	public EList<Examples> getExamplesList(AbstractScenario abstractScenario) {
@@ -214,13 +201,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	public String getExamplesName(Examples examples) {
 		return examples.getName();
-	}
-
-	public ArrayList<Row> getExamplesRowList(Examples examples) {
-		ArrayList<Row> body = new ArrayList<Row>();
-		body.addAll(examples.getTheExamplesTable().getRows());
-		body.remove(0);
-		return body;
 	}
 
 	public ArrayList<String> getExamplesRow(Examples examples, Row examplesRow) {
@@ -232,12 +212,23 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return row;
 	}
 
+	public ArrayList<Row> getExamplesRowList(Examples examples) {
+		ArrayList<Row> body = new ArrayList<Row>();
+		body.addAll(examples.getTheExamplesTable().getRows());
+		body.remove(0);
+		return body;
+	}
+
 	public ArrayList<String> getExamplesTable(Examples examples) {
 		ArrayList<String> header = new ArrayList<String>();
 		for (Cell c : examples.getTheExamplesTable().getRows().getFirst().getCells()) {
 			header.add(c.getName());
 		}
 		return header;
+	}
+
+	public String getFeatureDescription() {
+		return convertStatementsToString(theFeature.getStatements());
 	}
 
 	public String getFeatureName() {
@@ -251,16 +242,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		} else {
 			return new ArrayList<String>();
 		}
-	}
-
-	private ArrayList<String> getTags(String tagList) {
-		ArrayList<String> tags = new ArrayList<String>();
-		if (tagList != null) {
-			for (String t : tagList.split(",")) {
-				tags.add(t);
-			}
-		}
-		return tags;
 	}
 
 	@Override
@@ -282,24 +263,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	public String getScenarioOutlineName(AbstractScenario abstractScenario) {
 		return abstractScenario.getName();
-	}
-
-	public ArrayList<String> getScenarioOutlineTags(AbstractScenario abstractScenario) {
-		AbstractScenarioTags tags = abstractScenario.getTags();
-		if (tags != null) {
-			return getTags(tags.getName());
-		} else {
-			return new ArrayList<String>();
-		}
-	}
-
-	public ArrayList<String> getScenarioTags(AbstractScenario scenario) {
-		AbstractScenarioTags tags = scenario.getTags();
-		if (tags != null) {
-			return getTags(tags.getName());
-		} else {
-			return new ArrayList<String>();
-		}
 	}
 
 	public String getStep(Step step) {
@@ -361,6 +324,18 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return false;
 	}
 
+	@Override
+	public void parse(String text) throws Exception {
+		if (text.isEmpty()) {
+			return;
+		}
+		URI uri = URI.createFileURI(thePath);
+		Resource resource = new ResourceSetImpl().createResource(uri);
+		InputStream content = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
+		resource.load(content, Collections.EMPTY_MAP);
+		theFeature = (Feature) resource.getContents().get(0);
+	}
+
 	public void setBackgroundDescription(Background background, String backgroundDescription) {
 		setDescription(background, backgroundDescription);
 	}
@@ -378,18 +353,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		}
 	}
 
-	public String getFeatureDescription() {
-		return convertStatementsToString(theFeature.getStatements());
-	}
-
-	private String convertStatementsToString(EList<Statement> statements) {
-		String contents = "";
-		for (Statement s : statements) {
-			contents += s.getName() + "\n";
-		}
-		return contents.trim();
-	}
-
 	public void setFeatureDescription(String featureDescription) {
 		if (!featureDescription.isEmpty()) {
 			theFeature.getStatements().clear();
@@ -399,32 +362,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 				theFeature.getStatements().add(statement);
 			}
 		}
-	}
-
-	@Override
-	public void parse(String text) throws Exception {
-		if (text.isEmpty()) {
-			return;
-		}
-		URI uri = URI.createFileURI(thePath);
-		Resource resource = new ResourceSetImpl().createResource(uri);
-		InputStream content = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
-		resource.load(content, Collections.EMPTY_MAP);
-		theFeature = (Feature) resource.getContents().get(0);
-	}
-
-	public String toString() {
-		URI uri = URI.createFileURI(thePath);
-		Resource resource = new ResourceSetImpl().createResource(uri);
-		resource.getContents().add(theFeature);
-		Map<Object, Object> options = SaveOptions.newBuilder().format().getOptions().toOptionsMap();
-		OutputStream os = new ByteArrayOutputStream();
-		try {
-			resource.save(os, options);
-		} catch (IOException e) {
-			return null;
-		}
-		return os.toString();
 	}
 
 	public void setFeatureName(String featureName) {
@@ -471,6 +408,20 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 			tagList += "," + t;
 		}
 		tagList = tagList.replaceFirst(",", "");
-		scenario.getTags().setName(tagList);
+		scenario.getTags().setName("\"" + tagList + "\"");
+	}
+
+	public String toString() {
+		URI uri = URI.createFileURI(thePath);
+		Resource resource = new ResourceSetImpl().createResource(uri);
+		resource.getContents().add(theFeature);
+		Map<Object, Object> options = SaveOptions.newBuilder().format().getOptions().toOptionsMap();
+		OutputStream os = new ByteArrayOutputStream();
+		try {
+			resource.save(os, options);
+		} catch (IOException e) {
+			return null;
+		}
+		return os.toString();
 	}
 }

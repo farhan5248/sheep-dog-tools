@@ -18,7 +18,7 @@ public class ExamplesFormattingTest extends FormattingTest {
 		sb.append("\n");
 		sb.append("== Scenario: Submit a claim\n");
 		sb.append("\n");
-		sb.append("=== Given do step one\n");
+		sb.append("=== Given:: do step one\n");
 		sb.append("\n");
 		sb.append("[tags=\"tag1\"]\n");
 		sb.append("=== Examples: Describe what this data is about\n");
@@ -54,9 +54,9 @@ public class ExamplesFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("== Scenario: Submit a claim\n");
 			sb.append("\n");
-			sb.append("=== Given do step one\n");
+			sb.append("=== Given:: do step one\n");
 			sb.append("\n");
-			sb.append(" [tags=\" tag1 \"] \n");
+			sb.append(" [tags=\"tag1\"] \n");
 			sb.append(" ===  Examples:  Describe what this data is about \n");
 			sb.append("\n");
 			sb.append(" Basic EDI claim \n");
@@ -83,7 +83,7 @@ public class ExamplesFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("== Scenario: Submit a claim\n");
 			sb.append("\n");
-			sb.append("=== Given do step one\n");
+			sb.append("=== Given:: do step one\n");
 			sb.append("\n");
 			sb.append("[tags=\"tag1\"]\n");
 			sb.append("===Examples:Describe what this data is about\n");
@@ -112,7 +112,7 @@ public class ExamplesFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("== Scenario: Submit a claim\n");
 			sb.append("\n");
-			sb.append("=== Given do step one\n");
+			sb.append("=== Given:: do step one\n");
 			sb.append("\n");
 			sb.append("[tags=\"tag1\"]\n");
 			sb.append("=== Examples: Describe what this data is about\n");

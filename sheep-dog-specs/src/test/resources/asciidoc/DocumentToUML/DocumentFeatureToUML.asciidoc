@@ -2,17 +2,17 @@
 
 == Scenario: No tags, no statements
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Feature: Process
 ----
 
-=== When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
 
-=== And The target/mbt/uml/pst.uml file Class section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Class section will be created as follows
 
 [options="header"]
 |===
@@ -22,7 +22,7 @@
 
 == Scenario: One tag, one statement
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Feature: Process
@@ -32,11 +32,11 @@ Desc line 1
 == Scenario: Story One
 ----
 
-=== When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
 
-=== And The target/mbt/uml/pst.uml file Class Annotations section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Class Annotations section will be created as follows
 
 [options="header"]
 |===
@@ -44,7 +44,7 @@ Desc line 1
 | specs::Process| tags| tag1
 |===
 
-=== And The target/mbt/uml/pst.uml file Class Comments section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Class Comments section will be created as follows
 
 [options="header"]
 |===
@@ -54,7 +54,7 @@ Desc line 1
 
 == Scenario: Two tags, two statements
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Feature: Process
@@ -65,11 +65,11 @@ Desc line 2
 == Scenario: Story One
 ----
 
-=== When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
 
-=== And The target/mbt/uml/pst.uml file Class Annotations section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Class Annotations section will be created as follows
 
 [options="header"]
 |===
@@ -78,7 +78,7 @@ Desc line 2
 | specs::Process| tags| tag2
 |===
 
-=== And The target/mbt/uml/pst.uml file Class Comments section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Class Comments section will be created as follows
 
 [options="header"]
 |===
@@ -88,7 +88,7 @@ Desc line 2
 
 == Scenario: Three tags, three statements
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Feature: Process
@@ -100,11 +100,11 @@ Desc line 3
 == Scenario: Story One
 ----
 
-=== When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
 
-=== And The target/mbt/uml/pst.uml file Class Annotations section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Class Annotations section will be created as follows
 
 [options="header"]
 |===
@@ -114,7 +114,7 @@ Desc line 3
 | specs::Process| tags| tag3
 |===
 
-=== And The target/mbt/uml/pst.uml file Class Comments section will be created as follows
+=== And: The target/mbt/uml/pst.uml file Class Comments section will be created as follows
 
 [options="header"]
 |===
@@ -124,19 +124,19 @@ Desc line 3
 
 == Scenario: Selected tags
 
-=== Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Feature: Process
 ----
 
-=== And The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
 
 ----
 = Feature: Process
 ----
 
-=== When The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
+=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
 
 [options="header"]
 |===
@@ -144,9 +144,9 @@ Desc line 3
 | tag1
 |===
 
-=== Then The mbt-transformer plugin, target/mbt/tag1/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, target/mbt/tag1/uml/pst.uml file will be present
 
-=== And The target/mbt/tag1/uml/pst.uml file Class section will be created as follows
+=== And: The target/mbt/tag1/uml/pst.uml file Class section will be created as follows
 
 [options="header"]
 |===
@@ -154,7 +154,7 @@ Desc line 3
 | specs::Process
 |===
 
-=== And The target/mbt/tag1/uml/pst.uml file Class section won't be created as follows
+=== And: The target/mbt/tag1/uml/pst.uml file Class section won't be created as follows
 
 [options="header"]
 |===
