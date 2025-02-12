@@ -61,7 +61,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	public void createDocString(Step step, String docString) {
 		step.setTheDocString(SheepDogFactory.eINSTANCE.createDocString());
-		step.getTheDocString().setName("----\n" + docString + "\n----");
+		step.getTheDocString().setName("----\n" + docString.replace("----", "\\----") + "\n----");
 	}
 
 	public Examples createExamples(Scenario abstractScenario, String examplesName) {

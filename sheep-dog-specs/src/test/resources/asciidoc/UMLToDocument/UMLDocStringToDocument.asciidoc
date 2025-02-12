@@ -1,3 +1,4 @@
+:tags:debug
 = Feature: UML DocString To Document
 
 == Scenario: One line
@@ -10,9 +11,9 @@ Feature: Process
   Scenario: Submit
 
     Given The Object page is created as follows
-          """
+          \"\"\"
           text1
-          """
+          \"\"\"
 ----
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
@@ -25,6 +26,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step | Content
-| Submit | Given The Object page is created as follows | text1
+| Name   | Step                                        | Content
+| Submit | Given The Object page is created as follows | text1  
 |===
+

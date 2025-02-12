@@ -1,3 +1,4 @@
+:tags:debug
 = Feature: Document Background To UML
 
 == Scenario: No statement, one step, one scenario
@@ -7,8 +8,7 @@
 ----
 = Feature: Process
 
-[background="true"]
-== Scenario: Setup
+== Background: Setup
 
 === Given: The Object0 page is valid
 
@@ -19,14 +19,14 @@
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
 
-=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
-| Interaction Name | Message
-| specs::Process::Setup | The Object0 page is valid
+| Interaction Name       | Message                  
+| specs::Process::Setup  | The Object0 page is valid
 | specs::Process::Submit | The Object1 page is valid
 |===
 
@@ -37,8 +37,7 @@
 ----
 = Feature: Process
 
-[background="true"]
-== Scenario: Setup
+== Background: Setup
 
 === Given: The Object1 page is valid
 === Given: The Object2 page is valid
@@ -50,16 +49,16 @@
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
 
-=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
-| Interaction Name | Message
-| specs::Process::Setup | The Object1 page is valid
-| specs::Process::Setup | The Object2 page is valid
-| specs::Process::Submit | The Object page is valid
+| Interaction Name       | Message                  
+| specs::Process::Setup  | The Object1 page is valid
+| specs::Process::Setup  | The Object2 page is valid
+| specs::Process::Submit | The Object page is valid 
 |===
 
 == Scenario: No statement, three steps, one scenario
@@ -69,8 +68,7 @@
 ----
 = Feature: Process
 
-[background="true"]
-== Scenario: Setup
+== Background: Setup
 
 === Given: The Object1 page is valid
 === Given: The Object2 page is valid
@@ -83,17 +81,17 @@
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
 
-=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
-| Interaction Name | Message
-| specs::Process::Setup | The Object1 page is valid
-| specs::Process::Setup | The Object2 page is valid
-| specs::Process::Setup | The Object3 page is valid
-| specs::Process::Submit | The Object page is valid
+| Interaction Name       | Message                  
+| specs::Process::Setup  | The Object1 page is valid
+| specs::Process::Setup  | The Object2 page is valid
+| specs::Process::Setup  | The Object3 page is valid
+| specs::Process::Submit | The Object page is valid 
 |===
 
 == Scenario: One statement, one step, one scenario
@@ -103,8 +101,7 @@
 ----
 = Feature: Process
 
-[background="true"]
-== Scenario: Setup
+== Background: Setup
 
 Desc line 1
 
@@ -117,13 +114,13 @@ Desc line 1
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
 
-=== And: The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
+=== And: The uml/pst.uml file Interaction Comments section will be created as follows
 
 [options="header"]
 |===
-| Interaction Name | Comment
+| Interaction Name      | Comment    
 | specs::Process::Setup | Desc line 1
 |===
 
@@ -134,8 +131,7 @@ Desc line 1
 ----
 = Feature: Process
 
-[background="true"]
-== Scenario: Setup
+== Background: Setup
 
 === Given: The Object0 page is valid
 
@@ -150,14 +146,14 @@ Desc line 1
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
 
-=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
-| Interaction Name | Message
-| specs::Process::Setup | The Object0 page is valid
+| Interaction Name         | Message                  
+| specs::Process::Setup    | The Object0 page is valid
 | specs::Process::Submit 1 | The Object1 page is valid
 | specs::Process::Submit 2 | The Object2 page is valid
 |===
@@ -169,8 +165,7 @@ Desc line 1
 ----
 = Feature: Process
 
-[background="true"]
-== Scenario: Setup
+== Background: Setup
 
 === Given: The Object0 page is valid
 
@@ -189,15 +184,16 @@ Desc line 1
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
 
-=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
-| Interaction Name | Message
-| specs::Process::Setup | The Object0 page is valid
+| Interaction Name         | Message                  
+| specs::Process::Setup    | The Object0 page is valid
 | specs::Process::Submit 1 | The Object1 page is valid
 | specs::Process::Submit 2 | The Object2 page is valid
 | specs::Process::Submit 3 | The Object3 page is valid
 |===
+

@@ -1,3 +1,4 @@
+:tags:debug
 = Feature: UML Background To Document
 
 == Scenario: One statement, one step, one scenario
@@ -25,7 +26,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Description
+| Name  | Description
 | Setup | Desc line 1
 |===
 
@@ -33,7 +34,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name  | Step                           
 | Setup | Given The Object0 page is valid
 |===
 
@@ -41,7 +42,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name   | Step                           
 | Submit | Given The Object1 page is valid
 |===
 
@@ -69,7 +70,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name  | Step                           
 | Setup | Given The Object0 page is valid
 |===
 
@@ -77,7 +78,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name   | Step                           
 | Submit | Given The Object1 page is valid
 |===
 
@@ -108,7 +109,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name  | Step                           
 | Setup | Given The Object0 page is valid
 |===
 
@@ -116,7 +117,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name     | Step                           
 | Submit 1 | Given The Object1 page is valid
 | Submit 2 | Given The Object2 page is valid
 |===
@@ -151,7 +152,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name  | Step                           
 | Setup | Given The Object0 page is valid
 |===
 
@@ -159,7 +160,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name     | Step                           
 | Submit 1 | Given The Object1 page is valid
 | Submit 2 | Given The Object2 page is valid
 | Submit 3 | Given The Object3 page is valid
@@ -190,7 +191,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name  | Step                           
 | Setup | Given The Object1 page is valid
 | Setup | Given The Object2 page is valid
 |===
@@ -199,7 +200,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name   | Step                          
 | Submit | Given The Object page is valid
 |===
 
@@ -229,7 +230,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name  | Step                           
 | Setup | Given The Object1 page is valid
 | Setup | Given The Object2 page is valid
 | Setup | Given The Object3 page is valid
@@ -239,6 +240,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name   | Step                          
 | Submit | Given The Object page is valid
 |===
+

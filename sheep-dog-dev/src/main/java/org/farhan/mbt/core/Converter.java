@@ -11,10 +11,12 @@ public abstract class Converter {
 	protected ConvertibleProject project;
 	protected UMLModel model;
 	protected ObjectRepository fa;
+	protected Logger log;
 
-	public Converter(String tags, ObjectRepository fa) {
+	public Converter(String tags, ObjectRepository fa, Logger log) {
 		this.tags = tags;
 		this.fa = fa;
+		this.log = log;
 	}
 
 	protected abstract void initProjects() throws Exception;

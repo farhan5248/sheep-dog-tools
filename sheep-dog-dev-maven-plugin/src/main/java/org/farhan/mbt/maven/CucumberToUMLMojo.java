@@ -12,6 +12,6 @@ import org.apache.maven.plugins.annotations.Mojo;
 public class CucumberToUMLMojo extends MBTMojo {
 
 	public void execute() throws MojoExecutionException {
-		super.execute("org.farhan.mbt.convert.ConvertCucumberToUML");
+		super.execute("org.farhan.mbt.convert.ConvertCucumberToUML", "src/test/resources/cucumber/");
 	}
 }

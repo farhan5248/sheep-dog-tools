@@ -190,7 +190,7 @@ Feature: Code Scenario Outline To UML
       And The uml/pst.uml file Interaction section will be created as follows
           | Interaction Name       |
           | specs::Process::Submit |
-      But The uml/pst.uml file Interaction section won't be created as follows
+      And The uml/pst.uml file Interaction section won't be created as follows
           | Interaction Name        |
           | specs::Process::Submit2 |
 

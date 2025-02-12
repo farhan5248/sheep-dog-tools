@@ -94,12 +94,4 @@ public class Formatter {
 		doc.prepend(iSR, it -> it.noSpace());
 		doc.append(iSR, it -> it.noSpace());
 	}
-
-	protected void formatEOL12RuleCall(ISemanticRegion iSR, IFormattableDocument doc) {
-		if (isLast) {
-			formatEOL2RuleCall(iSR, doc);
-		} else {
-			formatEOL1RuleCall(iSR, doc);
-		}
-	}
 }

@@ -1,3 +1,4 @@
+:tags:debug
 = Feature: UML Scenario Outline To Code
 
 == Scenario: No tags, no statement, one step, one example
@@ -16,6 +17,7 @@ Feature: Process
       | h3  |
       | v31 |
 ----
+
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
 === And: The mbt-transformer plugin, uml-to-cucumber goal is executed
@@ -58,6 +60,7 @@ Feature: Process
       | h3  |
       | v31 |
 ----
+
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
 === And: The mbt-transformer plugin, uml-to-cucumber goal is executed
@@ -98,6 +101,7 @@ Feature: Process
       | h3  |
       | v32 |
 ----
+
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
 === And: The mbt-transformer plugin, uml-to-cucumber goal is executed
@@ -172,6 +176,7 @@ Feature: Process
       | h3  |
       | v33 |
 ----
+
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
 === And: The mbt-transformer plugin, uml-to-cucumber goal is executed

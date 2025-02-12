@@ -1,3 +1,4 @@
+:tags:debug
 = Feature: UML Step To Document
 
 == Scenario: Convert step keywords
@@ -12,9 +13,7 @@ Feature: Process
     Given The Object page is empty
      When The Object page is empty
      Then The Object page is empty
-      But The Object page is empty
       And The Object page is empty
-        * The Object page is empty
 ----
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
@@ -27,13 +26,11 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name   | Step                          
 | Submit | Given The Object page is empty
-| Submit | When The Object page is empty
-| Submit | Then The Object page is empty
-| Submit | And The Object page is empty
-| Submit | But The Object page is empty
-| Submit | * The Object page is empty
+| Submit | When The Object page is empty 
+| Submit | Then The Object page is empty 
+| Submit | And The Object page is empty  
 |===
 
 == Scenario: Convert apostrophes
@@ -58,6 +55,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name     | Step                             
 | Submit's | Given The Object page isn't empty
 |===
+

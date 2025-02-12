@@ -11,6 +11,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import org.farhan.mbt.core.Converter;
+import org.farhan.mbt.core.Logger;
 import org.farhan.mbt.core.ObjectRepository;
 
 public abstract class MBTMojo extends AbstractMojo {
@@ -33,7 +34,7 @@ public abstract class MBTMojo extends AbstractMojo {
 	@Parameter(property = "tag", defaultValue = "")
 	public String tags;
 
-	public void execute(String goal) throws MojoExecutionException {
+	public void execute(String goal, String dir) throws MojoExecutionException {
 		getLog().info("Starting execute");
 		getLog().info("tag: " + tags);
 		getLog().info("baseDir: " + baseDir);
@@ -43,20 +44,16 @@ public abstract class MBTMojo extends AbstractMojo {
 		}
 		ObjectRepository or = new FileObjectRepository(baseDir);
 		SourceRepository sr = new SourceRepository(baseDir);
-		// TODO make these configurable Maven properties
-		String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/" };
 		try {
 
 			Class<?> mojoClass = Class.forName(goal);
-			Converter mojo = (Converter) mojoClass.getConstructor(String.class, ObjectRepository.class)
-					.newInstance(tags, or);
+			Converter mojo = (Converter) mojoClass.getConstructor(String.class, ObjectRepository.class, Logger.class)
+					.newInstance(tags, or, new LoggerImpl(getLog()));
 
 			if (mojo.getClass().getName().endsWith("ToUML")) {
 				mojo.clearObjects();
-				for (String dir : dirs) {
-					for (String fileName : sr.list(dir, "")) {
-						mojo.convertObject(fileName, sr.get(fileName));
-					}
+				for (String fileName : sr.list(dir, "")) {
+					mojo.convertObject(fileName, sr.get(fileName));
 				}
 			} else {
 				for (String fileName : mojo.getObjectNames()) {

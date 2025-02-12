@@ -1,3 +1,4 @@
+:tags:debug
 = Feature: UML Scenario Outline To Document
 
 == Scenario: No tags, no statement, one step, one example
@@ -27,7 +28,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name   | Step                                       
 | Submit | Given The Object page is created as follows
 |===
 
@@ -35,8 +36,8 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Examples | Row
-| Submit | Examples 1 | h3
+| Name   | Examples   | Row
+| Submit | Examples 1 | h3 
 | Submit | Examples 1 | v31
 |===
 
@@ -69,7 +70,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Tags | Description
+| Name   | Tags | Description
 | Submit | tag1 | Desc line 1
 |===
 
@@ -110,7 +111,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Tags | Description
+| Name   | Tags      | Description             
 | Submit | tag1,tag2 | Desc line 1\nDesc line 2
 |===
 
@@ -118,7 +119,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name   | Step                                        
 | Submit | Given The Object1 page is created as follows
 | Submit | Given The Object2 page is created as follows
 |===
@@ -127,10 +128,10 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Examples | Row
-| Submit | Examples 1 | h3
+| Name   | Examples   | Row
+| Submit | Examples 1 | h3 
 | Submit | Examples 1 | v31
-| Submit | Examples 2 | h3
+| Submit | Examples 2 | h3 
 | Submit | Examples 2 | v32
 |===
 
@@ -179,7 +180,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Tags | Description
+| Name   | Tags           | Description                          
 | Submit | tag1,tag2,tag3 | Desc line 1\nDesc line 2\nDesc line 3
 |===
 
@@ -187,7 +188,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name   | Step                                        
 | Submit | Given The Object1 page is created as follows
 | Submit | Given The Object2 page is created as follows
 | Submit | Given The Object3 page is created as follows
@@ -197,11 +198,12 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Examples | Row
-| Submit | Examples 1 | h3
+| Name   | Examples   | Row
+| Submit | Examples 1 | h3 
 | Submit | Examples 1 | v31
-| Submit | Examples 2 | h3
+| Submit | Examples 2 | h3 
 | Submit | Examples 2 | v32
-| Submit | Examples 3 | h3
+| Submit | Examples 3 | h3 
 | Submit | Examples 3 | v33
 |===
+

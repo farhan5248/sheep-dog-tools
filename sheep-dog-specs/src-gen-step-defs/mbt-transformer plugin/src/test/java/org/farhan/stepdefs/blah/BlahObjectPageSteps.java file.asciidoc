@@ -71,6 +71,13 @@
 | Method Name | Annotation
 |===
 
+=== Parameters: 10
+
+[options="header"]
+|===
+| Method Name | Annotation | Visibility | Return Type
+|===
+
 == Definition: Object section will be created as follows
 
 === Parameters: 1
@@ -92,5 +99,40 @@
 [options="header"]
 |===
 | Interface Name | Package
+|===
+
+=== Parameters: 4
+
+[options="header"]
+|===
+| Class Name | Package
+|===
+
+=== Parameters: 5
+
+[options="header"]
+|===
+| Extends
+|===
+
+=== Parameters: 6
+
+[options="header"]
+|===
+| Constructor Name | Statement
+|===
+
+=== Parameters: 7
+
+[options="header"]
+|===
+| Class Annotation
+|===
+
+=== Parameters: 8
+
+[options="header"]
+|===
+| Constructor Name | Constructor Annotation
 |===
 

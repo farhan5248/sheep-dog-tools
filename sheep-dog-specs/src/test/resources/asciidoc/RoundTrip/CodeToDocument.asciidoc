@@ -1,4 +1,7 @@
+:tags:debug
 = Feature: Code To Document
+
+TODO make test for the specific mappings
 
 == Scenario: Create an adoc file from feature file
 
@@ -20,11 +23,11 @@ Feature: Process
           | grp | ins |
           |  10 |   5 |
      Then The Search application, Logout page is created as follows
-          """
+          \"\"\"
             text1
             
             text2
-          """
+          \"\"\"
 
   @tag3
   Scenario Outline: Story Two
@@ -41,6 +44,12 @@ Feature: Process
 
           | ins |
           |   4 |
+
+    Examples: Dataset 2
+
+          | ins |
+          |   5 |
+          |   6 |
 ----
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed with
@@ -62,6 +71,7 @@ Feature: Process
 === Then: The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows
 
 ----
+:tags:tag1
 = Feature: Process
 
 Desc 1
@@ -78,7 +88,7 @@ Desc 2
 [options="header"]
 |===
 | grp | ins
-| 10 | 5
+| 10  | 5  
 |===
 
 === Then: The Search application, Logout page is created as follows
@@ -100,8 +110,8 @@ Desc 3
 
 [options="header"]
 |===
-| grp | ins
-| 8 | {ins}
+| grp | ins  
+| 8   | {ins}
 |===
 
 === Then: The Search application, Logout page is invalid
@@ -111,6 +121,16 @@ Desc 3
 [options="header"]
 |===
 | ins
-| 4
+| 4  
+|===
+
+=== Examples: Dataset 2
+
+[options="header"]
+|===
+| ins
+| 5  
+| 6  
 |===
 ----
+

@@ -98,7 +98,7 @@ Feature: Document Feature To UML
       And The uml/pst.uml file Class section will be created as follows
           | Class Name     |
           | specs::Process |
-      But The uml/pst.uml file Class section won't be created as follows
+      And The uml/pst.uml file Class section won't be created as follows
           | Class Name          |
           | specs::app::Process |
 

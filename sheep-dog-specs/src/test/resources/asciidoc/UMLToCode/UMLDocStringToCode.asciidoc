@@ -1,3 +1,4 @@
+:tags:debug
 = Feature: UML Doc String To Code
 
 == Scenario: One line
@@ -10,9 +11,9 @@ Feature: Process
   Scenario: Submit
 
     Given The Object page is created as follows
-          """
+          \"\"\"
           text1
-          """
+          \"\"\"
 ----
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
@@ -25,8 +26,8 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step | Content
-| Submit | Given The Object page is created as follows | text1
+| Name   | Step                                        | Content
+| Submit | Given The Object page is created as follows | text1  
 |===
 
 == Scenario: Layer 2
@@ -39,10 +40,10 @@ Feature: Process
   Scenario: Submit
 
     Given The blah application, Object page is created as follows
-          """
+          \"\"\"
           text1
           text2
-          """
+          \"\"\"
 ----
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
@@ -55,17 +56,17 @@ Feature: Process
 
 [options="header"]
 |===
-| Method Name | Parameter Name | Parameter Type
-| theBlahApplicationObjectPageIsCreatedAsFollows | docString | String
+| Method Name                                    | Parameter Name | Parameter Type
+| theBlahApplicationObjectPageIsCreatedAsFollows | docString      | String        
 |===
 
 === And: The mbt-transformer plugin, BlahObjectPageSteps.java file Fields section will be created as follows
 
 [options="header"]
 |===
-| Method Name | Statement
-| theBlahApplicationObjectPageIsCreatedAsFollows | BlahFactory.get("ObjectPage").setComponent("blah");
-| theBlahApplicationObjectPageIsCreatedAsFollows | BlahFactory.get("ObjectPage").setPath("Object");
+| Method Name                                    | Statement                                                           
+| theBlahApplicationObjectPageIsCreatedAsFollows | BlahFactory.get("ObjectPage").setComponent("blah");                 
+| theBlahApplicationObjectPageIsCreatedAsFollows | BlahFactory.get("ObjectPage").setPath("Object");                    
 | theBlahApplicationObjectPageIsCreatedAsFollows | BlahFactory.get("ObjectPage").setInputOutputs("Content", docString);
 |===
 
@@ -79,10 +80,10 @@ Feature: Process
   Scenario: Submit
 
     Given The blah application, Object page is created as follows
-          """
+          \"\"\"
           text1
           text2
-          """
+          \"\"\"
 ----
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
@@ -95,15 +96,15 @@ Feature: Process
 
 [options="header"]
 |===
-| Interface Name | Package
-| ObjectPage | org.farhan.objects.blah
+| Interface Name | Package                
+| ObjectPage     | org.farhan.objects.blah
 |===
 
 === And: The mbt-transformer plugin, ObjectPage.java file Object section will be created as follows
 
 [options="header"]
 |===
-| Import
+| Import           
 | java.util.HashMap
 |===
 
@@ -112,13 +113,14 @@ Feature: Process
 [options="header"]
 |===
 | Method Name | Visibility | Return Type
-| setContent | public | void
+| setContent  | public     | void       
 |===
 
 === And: The mbt-transformer plugin, ObjectPage.java file Fields section will be created as follows
 
 [options="header"]
 |===
-| Method Name | Parameter Name | Parameter Type
-| setContent | keyMap | HashMap{String,String}
+| Method Name | Parameter Name | Parameter Type        
+| setContent  | keyMap         | HashMap{String,String}
 |===
+

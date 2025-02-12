@@ -2,6 +2,7 @@ package org.farhan.common;
 
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.Converter;
+import org.farhan.mbt.core.Logger;
 import org.junit.jupiter.api.Assertions;
 
 public abstract class GoalObject extends TestObject {
@@ -9,11 +10,13 @@ public abstract class GoalObject extends TestObject {
 	protected String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/" };
 	protected ObjectRepository or;
 	protected SourceRepository sr;
+	protected LoggerImpl log;
 	protected String tags;
 
 	public GoalObject() {
 		or = new FileObjectRepository();
 		sr = new SourceRepository();
+		log = new LoggerImpl();
 		attributes.put("tags", "");
 	}
 
@@ -22,8 +25,8 @@ public abstract class GoalObject extends TestObject {
 		try {
 			tags = attributes.get("tags");
 			Class<?> mojoClass = Class.forName(goal);
-			Converter mojo = (Converter) mojoClass.getConstructor(String.class, ObjectRepository.class)
-					.newInstance(tags, or);
+			Converter mojo = (Converter) mojoClass.getConstructor(String.class, ObjectRepository.class, Logger.class)
+					.newInstance(tags, or, log);
 
 			if (mojo.getClass().getName().endsWith("ToUML")) {
 				mojo.clearObjects();

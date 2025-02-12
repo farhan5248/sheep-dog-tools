@@ -17,6 +17,7 @@ import org.farhan.mbt.core.UMLModel;
 import org.farhan.helper.StepHelper;
 import org.farhan.mbt.core.Converter;
 import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.Logger;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
 
@@ -27,12 +28,13 @@ public class ConvertCucumberToUML extends Converter {
 	private UMLClassWrapper tgtObj2;
 	private String lastComponent = "InitialComponent";
 
-	public ConvertCucumberToUML(String tags, ObjectRepository fa) {
-		super(tags, fa);
+	public ConvertCucumberToUML(String tags, ObjectRepository fa, Logger log) {
+		super(tags, fa, log);
 	}
 
 	protected void convertAbstractScenarioList() throws Exception {
 		for (AbstractScenario abstractScenario : srcObj.getAbstractScenarioList()) {
+			log.debug("test case: " + abstractScenario.getName());
 			if (srcObj.isBackground(abstractScenario)) {
 				convertBackground(abstractScenario);
 			} else if (srcObj.isScenarioOutline(abstractScenario)) {
@@ -70,6 +72,7 @@ public class ConvertCucumberToUML extends Converter {
 
 	@Override
 	public String convertObject(String path, String content) throws Exception {
+		log.debug("test suite: " + path);
 		initProjects();
 		srcObj = (CucumberFeatureWrapper) project.createObject(path);
 		srcObj.parse(content);
@@ -125,6 +128,7 @@ public class ConvertCucumberToUML extends Converter {
 	private void convertStepList(Interaction abstractScenario, EList<Step> stepList,
 			AbstractScenario abstractScenarioSrc) {
 		for (Step step : stepList) {
+			log.debug("test step: " + step.getName());
 			convertStep(abstractScenario, step, abstractScenarioSrc);
 		}
 	}

@@ -1,3 +1,4 @@
+:tags:debug
 = Feature: UML Scenario To Code
 
 == Scenario: No tags, no statements, one step
@@ -21,7 +22,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name   | Step                                                       
 | Submit | Given The blah application, something/Object1 page is empty
 |===
 
@@ -49,7 +50,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Tags | Description
+| Name   | Tags | Description
 | Submit | tag1 | Desc line 1
 |===
 
@@ -79,7 +80,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Tags | Description
+| Name   | Tags      | Description             
 | Submit | tag1,tag2 | Desc line 1\nDesc line 2
 |===
 
@@ -87,7 +88,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name   | Step                                                             
 | Submit | Given The blah application, something/Object{Index} page is empty
 |===
 
@@ -96,8 +97,8 @@ Feature: Process
 [options="header"]
 |===
 | Index
-| 1
-| 2
+| 1    
+| 2    
 |===
 
 == Scenario: Three tags, three statements, three steps
@@ -128,7 +129,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Tags | Description
+| Name   | Tags           | Description                          
 | Submit | tag1,tag2,tag3 | Desc line 1\nDesc line 2\nDesc line 3
 |===
 
@@ -136,7 +137,7 @@ Feature: Process
 
 [options="header"]
 |===
-| Name | Step
+| Name   | Step                                                             
 | Submit | Given The blah application, something/Object{Index} page is empty
 |===
 
@@ -145,7 +146,8 @@ Feature: Process
 [options="header"]
 |===
 | Index
-| 1
-| 2
-| 3
+| 1    
+| 2    
+| 3    
 |===
+

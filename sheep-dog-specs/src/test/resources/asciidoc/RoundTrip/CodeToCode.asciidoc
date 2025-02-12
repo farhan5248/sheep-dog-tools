@@ -1,3 +1,4 @@
+:tags:debug
 = Feature: Code To Code
 
 == Background: Create a feature file
@@ -13,11 +14,11 @@ Feature: This is a feature
   Background: Setup
 
     Given The blah application, something/Object page is created as follows
-          """
+          \"\"\"
           Text 1
           
           Text 2
-          """
+          \"\"\"
 
   @tag1
   Scenario: Submit One
@@ -70,9 +71,15 @@ public class BlahObjectPageSteps {
 | tag1
 |===
 
-=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed with
 
-== Scenario: Convert class to feature from graph
+[options="header"]
+|===
+| Tags
+| tag1
+|===
+
+== Scenario: Feature file is preserved
 
 === Then: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be created as follows
 
@@ -83,11 +90,11 @@ Feature: This is a feature
   Background: Setup
 
     Given The blah application, something/Object page is created as follows
-          """
+          \"\"\"
           Text 1
           
           Text 2
-          """
+          \"\"\"
 
   @tag1
   Scenario: Submit One
@@ -140,3 +147,4 @@ public class BlahObjectPageSteps {
     }
 }
 ----
+

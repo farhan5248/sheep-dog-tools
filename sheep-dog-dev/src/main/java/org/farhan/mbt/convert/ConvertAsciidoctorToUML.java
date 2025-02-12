@@ -11,6 +11,7 @@ import org.farhan.helper.StepHelper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.Logger;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.UMLClassWrapper;
 import org.farhan.mbt.core.UMLModel;
@@ -26,12 +27,13 @@ public class ConvertAsciidoctorToUML extends Converter {
 	private UMLClassWrapper tgtObj;
 	private String lastComponent = "InitialComponent";
 
-	public ConvertAsciidoctorToUML(String tags, ObjectRepository fa) {
-		super(tags, fa);
+	public ConvertAsciidoctorToUML(String tags, ObjectRepository fa, Logger log) {
+		super(tags, fa, log);
 	}
 
 	protected void convertAbstractScenarioList() throws Exception {
 		for (AbstractScenario abstractScenario : srcObj.getAbstractScenarioList()) {
+			log.debug("test case: " + abstractScenario.getName());
 			if (srcObj.isBackground(abstractScenario)) {
 				convertBackground(abstractScenario);
 			} else if (srcObj.isScenarioOutline(abstractScenario)) {
@@ -66,6 +68,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	@Override
 	public String convertObject(String path, String content) throws Exception {
+		log.debug("test suite: " + path);
 		initProjects();
 		srcObj = (AsciiDoctorAdocWrapper) project.createObject(path);
 		srcObj.parse(content);
@@ -118,6 +121,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	private void convertStepList(Interaction abstractScenario, EList<Step> stepList) {
 		for (Step step : stepList) {
+			log.debug("test step: " + step.getName());
 			convertStep(abstractScenario, step);
 		}
 	}

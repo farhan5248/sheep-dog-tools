@@ -16,19 +16,20 @@ import org.farhan.mbt.sheepDog.Examples;
 import org.farhan.mbt.sheepDog.Scenario;
 import org.farhan.mbt.sheepDog.Step;
 import org.farhan.mbt.core.Converter;
+import org.farhan.mbt.core.Logger;
 
 public class ConvertUMLToAsciidoctor extends Converter {
 
 	private UMLClassWrapper srcObj;
-
 	private AsciiDoctorAdocWrapper tgtObj;
 
-	public ConvertUMLToAsciidoctor(String tags, ObjectRepository fa) {
-		super(tags, fa);
+	public ConvertUMLToAsciidoctor(String tags, ObjectRepository fa, Logger log) {
+		super(tags, fa, log);
 	}
 
 	protected void convertAbstractScenarioList() throws Exception {
 		for (Interaction abstractScenario : srcObj.getAbstractScenarioList()) {
+			log.debug("test case: " + abstractScenario.getName());
 			if (srcObj.isBackground(abstractScenario)) {
 				convertBackground(abstractScenario);
 			} else if (srcObj.isScenarioOutline(abstractScenario)) {
@@ -64,6 +65,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 
 	@Override
 	public String convertObject(String path, String content) throws Exception {
+		log.debug("test suite: " + path);
 		initProjects();
 		srcObj = (UMLClassWrapper) model.createObject(findQualifiedName(path));
 
@@ -108,6 +110,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 
 	private void convertStepList(AbstractScenario abstractScenario, ArrayList<Message> stepList) {
 		for (Message step : stepList) {
+			log.debug("test step: " + step.getName());
 			convertStep(abstractScenario, step);
 		}
 	}

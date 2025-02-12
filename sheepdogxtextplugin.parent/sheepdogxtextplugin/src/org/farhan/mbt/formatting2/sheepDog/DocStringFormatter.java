@@ -17,7 +17,7 @@ public class DocStringFormatter extends Formatter {
 	public void format(IFormattableDocument doc, SheepDogGrammarAccess ga, SheepDogFormatter df) {
 		DocStringElements a = ga.getDocStringAccess();
 		formatTitleNoSpace(df.getRegion(theDocString, a.getNameRAWTEXTTerminalRuleCall_0_0()), doc);
-		formatEOL12RuleCall(df.getRegion(theDocString, a.getEOLTerminalRuleCall_1()), doc);
+		formatEOL2RuleCall(df.getRegion(theDocString, a.getEOLTerminalRuleCall_1()), doc);
 	}
 
 }

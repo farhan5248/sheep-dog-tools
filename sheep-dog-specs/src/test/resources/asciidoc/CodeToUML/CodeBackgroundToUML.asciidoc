@@ -1,3 +1,4 @@
+:tags:debug
 = Feature: Code Background To UML
 
 == Scenario: No statement, one step, one scenario
@@ -16,14 +17,14 @@ Feature: Process
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
 
-=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
-| Interaction Name | Message
-| specs::Process::Setup | The Object0 page is valid
+| Interaction Name       | Message                  
+| specs::Process::Setup  | The Object0 page is valid
 | specs::Process::Submit | The Object1 page is valid
 |===
 
@@ -44,13 +45,13 @@ Feature: Process
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
 
-=== And: The target/mbt/uml/pst.uml file Interaction Comments section will be created as follows
+=== And: The uml/pst.uml file Interaction Comments section will be created as follows
 
 [options="header"]
 |===
-| Interaction Name | Comment
+| Interaction Name      | Comment    
 | specs::Process::Setup | Desc line 1
 |===
 
@@ -74,14 +75,14 @@ Feature: Process
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
 
-=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
-| Interaction Name | Message
-| specs::Process::Setup | The Object0 page is valid
+| Interaction Name         | Message                  
+| specs::Process::Setup    | The Object0 page is valid
 | specs::Process::Submit 1 | The Object1 page is valid
 | specs::Process::Submit 2 | The Object2 page is valid
 |===
@@ -109,14 +110,14 @@ Feature: Process
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
 
-=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
-| Interaction Name | Message
-| specs::Process::Setup | The Object0 page is valid
+| Interaction Name         | Message                  
+| specs::Process::Setup    | The Object0 page is valid
 | specs::Process::Submit 1 | The Object1 page is valid
 | specs::Process::Submit 2 | The Object2 page is valid
 | specs::Process::Submit 3 | The Object3 page is valid
@@ -139,15 +140,15 @@ Feature: Process
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
 
-=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
-| Interaction Name | Message
-| specs::Process::Setup | The Object{Index} page is valid
-| specs::Process::Submit | The Object page is valid
+| Interaction Name       | Message                        
+| specs::Process::Setup  | The Object{Index} page is valid
+| specs::Process::Submit | The Object page is valid       
 |===
 
 === Examples: Indices
@@ -155,8 +156,8 @@ Feature: Process
 [options="header"]
 |===
 | Index
-| 1
-| 2
+| 1    
+| 2    
 |===
 
 == Scenario: No statement, three steps, one scenario
@@ -177,15 +178,15 @@ Feature: Process
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, target/mbt/uml/pst.uml file will be present
+=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
 
-=== And: The target/mbt/uml/pst.uml file Interaction Messages section will be created as follows
+=== And: The uml/pst.uml file Interaction Messages section will be created as follows
 
 [options="header"]
 |===
-| Interaction Name | Message
-| specs::Process::Setup | The Object{Index} page is valid
-| specs::Process::Submit | The Object page is valid
+| Interaction Name       | Message                        
+| specs::Process::Setup  | The Object{Index} page is valid
+| specs::Process::Submit | The Object page is valid       
 |===
 
 === Examples: Indices
@@ -193,7 +194,8 @@ Feature: Process
 [options="header"]
 |===
 | Index
-| 1
-| 2
-| 3
+| 1    
+| 2    
+| 3    
 |===
+
