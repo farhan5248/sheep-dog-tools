@@ -18,7 +18,7 @@ public class StepFormattingTest extends FormattingTest {
 		sb.append("\n");
 		sb.append("== Scenario: Submit a claim\n");
 		sb.append("\n");
-		sb.append("=== Given:: do step one\n");
+		sb.append("=== Given: do step one\n");
 		sb.append("\n");
 		sb.append("=== When: do step three\n");
 		sb.append("\n");
@@ -82,7 +82,7 @@ public class StepFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("== Scenario: Submit a claim\n");
 			sb.append("\n");
-			sb.append("=== Given:: do step one\n");
+			sb.append("=== Given: do step one\n");
 			sb.append("\n");
 			sb.append("\n");
 			sb.append("=== When: do step three\n");

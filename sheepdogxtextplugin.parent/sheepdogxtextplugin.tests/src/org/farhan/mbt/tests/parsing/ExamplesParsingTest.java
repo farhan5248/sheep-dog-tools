@@ -18,7 +18,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Feature: This is a test feature\n");
 		sb.append("== Scenario: Submit a claim\n");
-		sb.append("=== Given:: do step one\n");
+		sb.append("=== Given: do step one\n");
 		sb.append("=== Examples: Describe what this data is about\n");
 		sb.append("[options=\"header\"]\n");
 		sb.append("|===\n");
@@ -32,7 +32,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Feature: This is a test feature\n");
 		sb.append("== Scenario: Submit a claim\n");
-		sb.append("=== Given:: do step one\n");
+		sb.append("=== Given: do step one\n");
 		sb.append("=== Examples:\n");
 		sb.append("[options=\"header\"]\n");
 		sb.append("|===\n");
@@ -46,7 +46,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Feature: This is a test feature\n");
 		sb.append("== Scenario: Submit a claim\n");
-		sb.append("=== Given:: do step one\n");
+		sb.append("=== Given: do step one\n");
 		sb.append("=== Examples: Describe what this data is about");
 		assertFeatureErrors(sb);
 	}
@@ -56,7 +56,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Feature: This is a test feature\n");
 		sb.append("== Scenario: Submit a claim\n");
-		sb.append("=== Given:: do step one\n");
+		sb.append("=== Given: do step one\n");
 		sb.append("[tags=\"tag1\"]\n");
 		sb.append("=== Examples: Describe what this data is about\n");
 		sb.append("[options=\"header\"]\n");
@@ -71,7 +71,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Feature: This is a test feature\n");
 		sb.append("== Scenario: Submit a claim\n");
-		sb.append("=== Given:: do step one\n");
+		sb.append("=== Given: do step one\n");
 		sb.append("=== Examples: Describe what this data is about\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("[options=\"header\"]\n");
@@ -86,7 +86,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Feature: This is a test feature\n");
 		sb.append("== Scenario: Submit a claim\n");
-		sb.append("=== Given:: do step one\n");
+		sb.append("=== Given: do step one\n");
 		sb.append("=== Examples: Describe what this data is about\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
@@ -102,7 +102,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Feature: This is a test feature\n");
 		sb.append("== Scenario: Submit a claim\n");
-		sb.append("=== Given:: do step one\n");
+		sb.append("=== Given: do step one\n");
 		sb.append("=== Examples: Describe what this data is about\n");
 		sb.append("Basic EDI claim");
 		assertFeatureErrors(sb);
@@ -113,7 +113,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Feature: This is a test feature\n");
 		sb.append("== Scenario: Submit a claim\n");
-		sb.append("=== Given:: do step one\n");
+		sb.append("=== Given: do step one\n");
 		sb.append("=== Examples: Describe what this data is about\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("[options=\"header\"]\n");
@@ -130,7 +130,7 @@ public class ExamplesParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Feature: This is a test feature\n");
 		sb.append("== Scenario: Submit a claim\n");
-		sb.append("=== Given:: do step one\n");
+		sb.append("=== Given: do step one\n");
 		sb.append("[tags=\"tag1,tag2\"]\n");
 		sb.append("=== Examples: Describe what this data is about\n");
 		sb.append("Basic EDI claim\n");

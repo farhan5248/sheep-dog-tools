@@ -29,7 +29,7 @@ public class SheepDogParsingTest extends ParsingTest {
 		sb.append("Next setup their family\n");
 		sb.append("\n");
 
-		sb.append("=== Given:: do step one\n");
+		sb.append("=== Given: do step one\n");
 		sb.append("----\n");
 		sb.append("Line1\n");
 		sb.append("Line2\n");
@@ -50,7 +50,7 @@ public class SheepDogParsingTest extends ParsingTest {
 		sb.append("|   data1 |   data2 \n");
 		sb.append("|===\n");
 
-		sb.append("=== Then:: do step four\n");
+		sb.append("=== Then: do step four\n");
 		sb.append("[options=\"header\"]\n");
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
@@ -69,8 +69,8 @@ public class SheepDogParsingTest extends ParsingTest {
 		sb.append("\n");
 		sb.append("=== And: do step two\n");
 		sb.append("=== When: do step three\n");
-		sb.append("=== Then:: do step four\n");
-		sb.append("=== Given:: do step six\n");
+		sb.append("=== Then: do step four\n");
+		sb.append("=== Given: do step six\n");
 		sb.append("----\n");
 		sb.append(" Line1\n");
 		sb.append(" Line2 \n");
@@ -81,7 +81,7 @@ public class SheepDogParsingTest extends ParsingTest {
 		sb.append("[tags=\"tag1,tag2,tag3\"]\n");
 		sb.append("== Scenario: Submit a dental claim\n");
 		sb.append("\n");
-		sb.append("=== Given:: do step one\n");
+		sb.append("=== Given: do step one\n");
 		sb.append("=== And: do step two\n");
 		sb.append("[options=\"header\"]\n");
 		sb.append("|===\n");
@@ -89,7 +89,7 @@ public class SheepDogParsingTest extends ParsingTest {
 		sb.append("|   data1 |   data2 \n");
 		sb.append("|===\n");
 		sb.append("=== When: do step three\n");
-		sb.append("=== Then:: do step four\n");
+		sb.append("=== Then: do step four\n");
 		sb.append("\n");
 
 		sb.append("[tags=\"tag1,tag2,tag3\"]\n");
@@ -108,10 +108,10 @@ public class SheepDogParsingTest extends ParsingTest {
 		sb.append("[tags=\"tag1,tag2,tag3\"]\n");
 		sb.append("==  Scenario: Submit a dental claim\n");
 		sb.append("\n");
-		sb.append("=== Given:: do step one\n");
+		sb.append("=== Given: do step one\n");
 		sb.append("=== And: do step two\n");
 		sb.append("=== When: do step three\n");
-		sb.append("=== Then:: do step four\n");
+		sb.append("=== Then: do step four\n");
 		sb.append("\n");
 
 		sb.append("[tags=\"tag1,tag2,tag3\"]\n");

@@ -95,7 +95,7 @@ public class ParametersParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Object: This is a test StepObject\n");
 		sb.append("== Definition: Submit a claim\n");
-		sb.append("=== Given:: do step one\n");
+		sb.append("=== Given: do step one\n");
 		sb.append("=== Parameters: Describe what this data is about\n");
 		sb.append("Basic EDI claim");
 		assertStepObjectErrors(sb);
