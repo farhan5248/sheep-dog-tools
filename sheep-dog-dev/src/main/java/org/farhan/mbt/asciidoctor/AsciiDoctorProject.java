@@ -10,31 +10,9 @@ import org.farhan.mbt.core.ObjectRepository;
 
 public class AsciiDoctorProject extends ConvertibleProject {
 
-	protected ArrayList<ConvertibleObject> firstLayerObjects;
-	protected ArrayList<ConvertibleObject> secondLayerObjects;
-
 	public AsciiDoctorProject(String tags, ObjectRepository fa) {
 		super(fa);
-		firstLayerObjects = new ArrayList<ConvertibleObject>();
-		secondLayerObjects = new ArrayList<ConvertibleObject>();
 		ConvertibleProject.tags = tags;
-	}
-
-	private ConvertibleObject getObject(String path) {
-		if (path.startsWith(getDir(TEST_CASES))) {
-			for (ConvertibleObject obj : firstLayerObjects) {
-				if (obj.getPath().contentEquals(path)) {
-					return obj;
-				}
-			}
-		} else if (path.startsWith(getDir(TEST_STEPS))) {
-			for (ConvertibleObject obj : secondLayerObjects) {
-				if (obj.getPath().contentEquals(path)) {
-					return obj;
-				}
-			}
-		}
-		return null;
 	}
 
 	@Override

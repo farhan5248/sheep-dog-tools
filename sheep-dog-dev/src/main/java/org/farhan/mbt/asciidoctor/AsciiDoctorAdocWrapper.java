@@ -30,15 +30,20 @@ import org.farhan.mbt.sheepDog.Scenario;
 import org.farhan.mbt.sheepDog.SheepDogFactory;
 import org.farhan.mbt.sheepDog.Statement;
 import org.farhan.mbt.sheepDog.Step;
+import org.farhan.mbt.sheepDog.StepDefinition;
+import org.farhan.mbt.sheepDog.StepObject;
+import org.farhan.mbt.sheepDog.StepParameters;
 
 public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	private Feature theFeature;
+	private StepObject theStepObject;
 	private String thePath;
 
 	public AsciiDoctorAdocWrapper(String thePath) {
 		this.thePath = thePath;
 		String[] pathParts = thePath.split("/");
+		// TODO don't assume it's a feature, it could be a StepObject
 		theFeature = SheepDogFactory.eINSTANCE.createFeature();
 		theFeature.setName(pathParts[pathParts.length - 1].replace(".asciidoc", ""));
 	}
@@ -173,16 +178,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		}
 	}
 
-	private ArrayList<String> getTags(String tagList) {
-		ArrayList<String> tags = new ArrayList<String>();
-		if (tagList != null) {
-			for (String t : tagList.replace("\"", "").split(",")) {
-				tags.add(t);
-			}
-		}
-		return tags;
-	}
-
 	public String getBackgroundDescription(AbstractScenario abstractScenario) {
 		return convertStatementsToString(abstractScenario.getStatements());
 	}
@@ -272,8 +267,60 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return keywordString + " " + step.getName();
 	}
 
+	public String getStepDefinitionDescription(StepDefinition stepDefinitionSrc) {
+		return convertStatementsToString(stepDefinitionSrc.getStatements());
+	}
+
+	public EList<StepDefinition> getStepDefinitionList() {
+		return theStepObject.getStepDefinitions();
+	}
+
+	public String getStepDefinitionName(StepDefinition stepDefinitionSrc) {
+		return stepDefinitionSrc.getName();
+	}
+
 	public EList<Step> getStepList(AbstractScenario abstractScenario) {
 		return abstractScenario.getSteps();
+	}
+
+	public String getStepObjectDescription() {
+		return convertStatementsToString(theStepObject.getStatements());
+	}
+
+	public String getStepObjectName() {
+		return theStepObject.getName();
+	}
+
+	public EList<StepParameters> getStepParametersList(StepDefinition stepDefinitionSrc) {
+		return stepDefinitionSrc.getStepParameters();
+	}
+
+	public String getStepParametersName(StepParameters stepParametersSrc) {
+		return stepParametersSrc.getName();
+	}
+
+	public ArrayList<String> getStepParametersRow(StepParameters stepParametersSrc, Row parametersRow) {
+		ArrayList<String> row = new ArrayList<String>();
+		EList<Cell> header = stepParametersSrc.getParametersTable().getRows().getFirst().getCells();
+		for (int i = 0; i < header.size(); i++) {
+			row.add(parametersRow.getCells().get(i).getName());
+		}
+		return row;
+	}
+
+	public ArrayList<Row> getStepParametersRowList(StepParameters stepParametersSrc) {
+		ArrayList<Row> body = new ArrayList<Row>();
+		body.addAll(stepParametersSrc.getParametersTable().getRows());
+		body.remove(0);
+		return body;
+	}
+
+	public ArrayList<String> getStepParametersTable(StepParameters stepParametersSrc) {
+		ArrayList<String> header = new ArrayList<String>();
+		for (Cell c : stepParametersSrc.getParametersTable().getRows().getFirst().getCells()) {
+			header.add(c.getName());
+		}
+		return header;
 	}
 
 	public ArrayList<ArrayList<String>> getStepTable(Step step) {
@@ -303,6 +350,16 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		}
 		return stepTableRowList;
 
+	}
+
+	private ArrayList<String> getTags(String tagList) {
+		ArrayList<String> tags = new ArrayList<String>();
+		if (tagList != null) {
+			for (String t : tagList.replace("\"", "").split(",")) {
+				tags.add(t);
+			}
+		}
+		return tags;
 	}
 
 	public boolean hasDocString(Step step) {

@@ -85,7 +85,11 @@ public abstract class Converter {
 		// TODO temp hack. If I only keep the two source adoc layers as UML classes and
 		// want to have "view" for the other layers, then I'll probably have to use
 		// similar approaches to find a matching object because of the one to many
-		// relationship
+		// relationship.
+		// Instead of this, consider setting the path when the UMLClassWrapper is
+		// created. thePath is already an attribute in the AsciiDoctorWrapper for eg.
+		// If that's done, then this method can be deleted. When doing that
+		// the logic in getPath in this class can be moved to the UMLModel class
 		for (ConvertibleObject co : model.getObjects(model.TEST_CASES)) {
 			if (getPath((UMLClassWrapper) co, project.TEST_CASES).contentEquals(path)) {
 				return ((UMLClassWrapper) co).getPath();

@@ -19,6 +19,8 @@ import org.farhan.mbt.sheepDog.AbstractScenario;
 import org.farhan.mbt.sheepDog.Examples;
 import org.farhan.mbt.sheepDog.Row;
 import org.farhan.mbt.sheepDog.Step;
+import org.farhan.mbt.sheepDog.StepDefinition;
+import org.farhan.mbt.sheepDog.StepParameters;
 import org.farhan.mbt.core.Converter;
 
 public class ConvertAsciidoctorToUML extends Converter {
@@ -44,6 +46,13 @@ public class ConvertAsciidoctorToUML extends Converter {
 		}
 	}
 
+	private void convertStepDefinitionList() {
+		for (StepDefinition abstractScenario : srcObj.getStepDefinitionList()) {
+			log.debug("step definition: " + abstractScenario.getName());
+			convertStepDefinition(abstractScenario);
+		}
+	}
+
 	private void convertBackground(AbstractScenario abstractScenario) {
 		Interaction background = tgtObj.createBackground(srcObj.getBackgroundName(abstractScenario));
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
@@ -54,35 +63,44 @@ public class ConvertAsciidoctorToUML extends Converter {
 		tgtObj.createDocString(step, srcObj.getDocString(stepSrc));
 	}
 
-	private void convertExamples(Interaction abstractScenario, Examples examples2) {
-		EAnnotation examples = tgtObj.createExamples(abstractScenario, srcObj.getExamplesName(examples2));
-		tgtObj.createExamplesTable(examples, srcObj.getExamplesTable(examples2));
-		for (Row examplesRow : srcObj.getExamplesRowList(examples2)) {
-			convertExamplesRow(examples, srcObj.getExamplesRow(examples2, examplesRow));
+	private void convertStepParameters(Interaction stepDefinition, StepParameters stepParametersSrc) {
+		EAnnotation stepParameters = tgtObj.createStepParameters(stepDefinition,
+				srcObj.getStepParametersName(stepParametersSrc));
+		tgtObj.createStepParametersTable(stepParameters, srcObj.getStepParametersTable(stepParametersSrc));
+		for (Row row : srcObj.getStepParametersRowList(stepParametersSrc)) {
+			tgtObj.createStepParametersRow(stepParameters, srcObj.getStepParametersRow(stepParametersSrc, row));
 		}
 	}
 
-	private void convertExamplesRow(EAnnotation examples, ArrayList<String> examplesRow) {
-		tgtObj.createExamplesRow(examples, examplesRow);
+	private void convertExamples(Interaction abstractScenario, Examples examplesSrc) {
+		EAnnotation examples = tgtObj.createExamples(abstractScenario, srcObj.getExamplesName(examplesSrc));
+		tgtObj.createExamplesTable(examples, srcObj.getExamplesTable(examplesSrc));
+		for (Row row : srcObj.getExamplesRowList(examplesSrc)) {
+			tgtObj.createExamplesRow(examples, srcObj.getExamplesRow(examplesSrc, row));
+		}
 	}
 
 	@Override
 	public String convertObject(String path, String content) throws Exception {
-		log.debug("test suite: " + path);
 		initProjects();
 		srcObj = (AsciiDoctorAdocWrapper) project.createObject(path);
 		srcObj.parse(content);
 		if (isFileSelected(srcObj, tags)) {
 			if (!path.startsWith(project.getDir(project.TEST_CASES))) {
-				
+				log.debug("step object: " + path);
+				tgtObj = (UMLClassWrapper) model.createObject(convertSrcPath(path, project.TEST_STEPS));
+				tgtObj.setStepObjectName(srcObj.getStepObjectName());
+				tgtObj.setStepObjectDescription(srcObj.getStepObjectDescription());
+				convertStepDefinitionList();
 			} else {
+				log.debug("test suite: " + path);
 				tgtObj = (UMLClassWrapper) model.createObject(convertSrcPath(path, project.TEST_CASES));
 				tgtObj.setFeatureName(srcObj.getFeatureName());
 				tgtObj.setFeatureTags(srcObj.getFeatureTags());
 				tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
 				convertAbstractScenarioList();
-				model.save();
 			}
+			model.save();
 		} else {
 			project.deleteObject(srcObj);
 		}
@@ -94,6 +112,12 @@ public class ConvertAsciidoctorToUML extends Converter {
 		tgtObj.setScenarioTags(scenario, srcObj.getAbstractScenarioTags(abstractScenario));
 		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(abstractScenario));
 		convertStepList(scenario, srcObj.getStepList(abstractScenario));
+	}
+
+	private void convertStepDefinition(StepDefinition stepDefinitionSrc) {
+		Interaction stepDefinition = tgtObj.createStepDefinition(srcObj.getStepDefinitionName(stepDefinitionSrc));
+		tgtObj.setStepDefinitionDescription(stepDefinition, srcObj.getStepDefinitionDescription(stepDefinitionSrc));
+		convertStepParametersList(stepDefinition, srcObj.getStepParametersList(stepDefinitionSrc));
 	}
 
 	private void convertScenarioOutline(AbstractScenario abstractScenario) {
@@ -127,6 +151,13 @@ public class ConvertAsciidoctorToUML extends Converter {
 		for (Step step : stepList) {
 			log.debug("test step: " + step.getName());
 			convertStep(abstractScenario, step);
+		}
+	}
+
+	private void convertStepParametersList(Interaction stepDefinition, EList<StepParameters> stepParametersList) {
+		for (StepParameters stepParameters : stepParametersList) {
+			log.debug("step parameter: " + stepParameters.getName());
+			convertStepParameters(stepDefinition, stepParameters);
 		}
 	}
 
@@ -181,19 +212,25 @@ public class ConvertAsciidoctorToUML extends Converter {
 	private boolean isFileSelected(ConvertibleObject convertibleFile, String tags) throws Exception {
 
 		AsciiDoctorAdocWrapper ufw = (AsciiDoctorAdocWrapper) convertibleFile;
-		if (isTagged(ufw.getFeatureTags(), tags)) {
-			return true;
-		}
-		for (AbstractScenario a : ufw.getAbstractScenarioList()) {
-			if (ufw.isScenarioOutline(a)) {
-				if (isTagged(ufw.getAbstractScenarioTags(a), tags)) {
-					return true;
-				}
-			} else if (!ufw.isBackground(a)) {
-				if (isTagged(ufw.getAbstractScenarioTags(a), tags)) {
-					return true;
+		if (ufw.getPath().startsWith(project.getDir(project.TEST_CASES))) {
+			if (isTagged(ufw.getFeatureTags(), tags)) {
+				return true;
+			}
+			for (AbstractScenario a : ufw.getAbstractScenarioList()) {
+				if (ufw.isScenarioOutline(a)) {
+					if (isTagged(ufw.getAbstractScenarioTags(a), tags)) {
+						return true;
+					}
+				} else if (!ufw.isBackground(a)) {
+					if (isTagged(ufw.getAbstractScenarioTags(a), tags)) {
+						return true;
+					}
 				}
 			}
+		} else {
+			// TODO make tests for when a layer 2 file not referenced.
+			return project.getObject(ufw.getPath()) != null;
+
 		}
 		return false;
 	}

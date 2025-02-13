@@ -98,7 +98,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 			value += e + "|";
 		}
 		examples.getDetails().put(String.valueOf(examples.getDetails().size()), value);
-
 	}
 
 	public void createExamplesTable(EAnnotation examples, ArrayList<String> headers) {
@@ -397,9 +396,8 @@ public class UMLClassWrapper implements ConvertibleObject {
 		background.createOwnedComment().setBody(backgroundDescription);
 	}
 
-	public void setFeatureDescription(String featureDescription) {
-		theClass.createOwnedComment().setBody(featureDescription);
-
+	public void setFeatureDescription(String description) {
+		theClass.createOwnedComment().setBody(description);
 	}
 
 	public void setFeatureName(String featureName) {
@@ -436,6 +434,38 @@ public class UMLClassWrapper implements ConvertibleObject {
 				createAnnotation(abstractScenario, "tags", t);
 			}
 		}
+	}
+
+	public void setStepObjectName(String StepObjectName) {
+		createAnnotation(theClass, "title", StepObjectName);
+	}
+
+	public void setStepObjectDescription(String description) {
+		theClass.createOwnedComment().setBody(description);
+	}
+
+	public void setStepDefinitionDescription(Interaction stepDefinition, String description) {
+		stepDefinition.createOwnedComment().setBody(description);
+	}
+
+	public EAnnotation createStepParameters(Interaction stepDefinition, String name) {
+		return createAnnotation(stepDefinition, name);
+	}
+
+	public void createStepParametersTable(EAnnotation stepParameters, ArrayList<String> headers) {
+		String value = "";
+		for (String e : headers) {
+			value += e + "|";
+		}
+		stepParameters.getDetails().put("0", value);
+	}
+
+	public void createStepParametersRow(EAnnotation stepParameters, ArrayList<String> stepParametersRow) {
+		String value = "";
+		for (String e : stepParametersRow) {
+			value += e + "|";
+		}
+		stepParameters.getDetails().put(String.valueOf(stepParameters.getDetails().size()), value);
 	}
 
 }

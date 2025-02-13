@@ -9,15 +9,8 @@ import org.farhan.mbt.core.ObjectRepository;
 
 public class CucumberProject extends ConvertibleProject {
 
-	protected ArrayList<ConvertibleObject> firstLayerObjects;
-	protected ArrayList<ConvertibleObject> secondLayerObjects;
-	protected ArrayList<ConvertibleObject> thirdLayerObjects;
-
 	public CucumberProject(String tags, ObjectRepository fa) {
 		super(fa);
-		firstLayerObjects = new ArrayList<ConvertibleObject>();
-		secondLayerObjects = new ArrayList<ConvertibleObject>();
-		thirdLayerObjects = new ArrayList<ConvertibleObject>();
 		ConvertibleProject.tags = tags;
 	}
 
@@ -70,29 +63,6 @@ public class CucumberProject extends ConvertibleProject {
 		} else {
 			return ".java";
 		}
-	}
-
-	private ConvertibleObject getObject(String path) {
-		if (path.startsWith(getDir(TEST_CASES))) {
-			for (ConvertibleObject obj : firstLayerObjects) {
-				if (obj.getPath().contentEquals(path)) {
-					return obj;
-				}
-			}
-		} else if (path.startsWith(getDir(TEST_STEPS))) {
-			for (ConvertibleObject obj : secondLayerObjects) {
-				if (obj.getPath().contentEquals(path)) {
-					return obj;
-				}
-			}
-		} else if (path.startsWith(getDir(TEST_OBJECTS))) {
-			for (ConvertibleObject obj : thirdLayerObjects) {
-				if (obj.getPath().contentEquals(path)) {
-					return obj;
-				}
-			}
-		}
-		return null;
 	}
 
 	@Override

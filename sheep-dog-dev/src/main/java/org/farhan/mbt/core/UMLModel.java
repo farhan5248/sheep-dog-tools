@@ -25,18 +25,10 @@ import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 
 public class UMLModel extends ConvertibleProject {
 
-	// TODO maybe just make one list and filter it by startsWith?
-	private ArrayList<ConvertibleObject> firstLayerObjects;
-	private ArrayList<ConvertibleObject> testObjects;
-	private ArrayList<ConvertibleObject> testSteps;
-
 	private Model theSystem;
 
 	public UMLModel(String tags, ObjectRepository fa) {
 		super(fa);
-		firstLayerObjects = new ArrayList<ConvertibleObject>();
-		testObjects = new ArrayList<ConvertibleObject>();
-		testSteps = new ArrayList<ConvertibleObject>();
 		theSystem = UMLFactory.eINSTANCE.createModel();
 		theSystem.setName("pst");
 		theSystem.createNestedPackage(TEST_CASES);
@@ -96,7 +88,7 @@ public class UMLModel extends ConvertibleProject {
 		if (layer.equalsIgnoreCase(TEST_CASES)) {
 			return firstLayerObjects;
 		} else if (layer.equalsIgnoreCase(TEST_OBJECTS)) {
-			return testObjects;
+			return secondLayerObjects;
 		} else {
 			return null;
 		}
@@ -112,9 +104,9 @@ public class UMLModel extends ConvertibleProject {
 		if (qualifiedName.startsWith("pst::" + TEST_CASES)) {
 			firstLayerObjects.add(ucw);
 		} else if (qualifiedName.startsWith("pst::" + TEST_OBJECTS)) {
-			testObjects.add(ucw);
+			secondLayerObjects.add(ucw);
 		} else if (qualifiedName.startsWith("pst::" + TEST_STEPS)) {
-			testSteps.add(ucw);
+			thirdLayerObjects.add(ucw);
 		}
 		return ucw;
 	}
