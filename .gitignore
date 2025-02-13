@@ -24,6 +24,5 @@ release.properties
 **/*.env
 **/*.theia-workspace
 **/*.classpath
-**/*.project
-**/*.settings
+sheep-dog-dev-svc-maven-plugin/.classpath
 .vscode/settings.json
