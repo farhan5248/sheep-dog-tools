@@ -9,7 +9,7 @@ Feature: Document Scenario Outline To UML
           
           == Scenario: Submit
           
-          === Given: The Object page is created as follows
+          === Given: The web application, Object page is created as follows
           
           |===
           | h1
@@ -26,9 +26,9 @@ Feature: Document Scenario Outline To UML
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
       And The uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name       | Message                               | Argument Name | Annotation Detail |
-          | specs::Process::Submit | The Object page is created as follows | dataTable     | 0 -> h1 \|        |
-          | specs::Process::Submit | The Object page is created as follows | dataTable     | 1 -> <h3> \|      |
+          | Interaction Name       | Message                                                | Argument Name | Annotation Detail |
+          | specs::Process::Submit | The web application, Object page is created as follows | dataTable     | 0 -> h1 \|        |
+          | specs::Process::Submit | The web application, Object page is created as follows | dataTable     | 1 -> <h3> \|      |
       And The uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | Examples 1      | 0 -> h3\|         |
@@ -45,7 +45,7 @@ Feature: Document Scenario Outline To UML
           
           Desc line 1
           
-          === Given: The Object page is created as follows
+          === Given: The web application, Object page is created as follows
           
           |===
           | h1
@@ -80,14 +80,14 @@ Feature: Document Scenario Outline To UML
           Desc line 1
           Desc line 2
           
-          === Given: The Object1 page is created as follows
+          === Given: The web application, Object1 page is created as follows
           
           |===
           | h1
           | {h3}
           |===
           
-          === Given: The Object2 page is created as follows
+          === Given: The web application, Object2 page is created as follows
           
           |===
           | h1
@@ -117,8 +117,8 @@ Feature: Document Scenario Outline To UML
           | Interaction Name       | Comment                  |
           | specs::Process::Submit | Desc line 1\nDesc line 2 |
       And The uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name       | Message                                      |
-          | specs::Process::Submit | The Object<Index> page is created as follows |
+          | Interaction Name       | Message                                                       |
+          | specs::Process::Submit | The web application, Object<Index> page is created as follows |
       And The uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name  | Annotation Detail |
           | specs::Process::Submit | Examples <Index> | 0 -> h3\|         |
@@ -143,21 +143,21 @@ Feature: Document Scenario Outline To UML
           Desc line 2
           Desc line 3
           
-          === Given: The Object1 page is created as follows
+          === Given: The web application, Object1 page is created as follows
           
           |===
           | h1
           | {h3}
           |===
           
-          === Given: The Object2 page is created as follows
+          === Given: The web application, Object2 page is created as follows
           
           |===
           | h1
           | {h3}
           |===
           
-          === Given: The Object3 page is created as follows
+          === Given: The web application, Object3 page is created as follows
           
           |===
           | h1
@@ -194,8 +194,8 @@ Feature: Document Scenario Outline To UML
           | Interaction Name       | Comment                               |
           | specs::Process::Submit | Desc line 1\nDesc line 2\nDesc line 3 |
       And The uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name       | Message                                      |
-          | specs::Process::Submit | The Object<Index> page is created as follows |
+          | Interaction Name       | Message                                                       |
+          | specs::Process::Submit | The web application, Object<Index> page is created as follows |
       And The uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name  | Annotation Detail |
           | specs::Process::Submit | Examples <Index> | 0 -> h3\|         |
@@ -217,7 +217,7 @@ Feature: Document Scenario Outline To UML
           [tags="tag1"]
           == Scenario: Submit
           
-          === Given: The Object1 page is empty
+          === Given: The web application, Object1 page is empty
           
           === Examples: Examples 1
           
@@ -229,7 +229,7 @@ Feature: Document Scenario Outline To UML
           [tags="tag2"]
           == Scenario: Submit2
           
-          === Given: The Object1 page is empty
+          === Given: The web application, Object1 page is empty
           
           === Examples: Examples 1
           

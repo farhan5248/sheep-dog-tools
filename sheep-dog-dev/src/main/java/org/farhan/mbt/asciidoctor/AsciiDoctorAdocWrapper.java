@@ -390,7 +390,12 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		Resource resource = new ResourceSetImpl().createResource(uri);
 		InputStream content = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
 		resource.load(content, Collections.EMPTY_MAP);
-		theFeature = (Feature) resource.getContents().get(0);
+		Object o = resource.getContents().get(0);
+		if (o instanceof Feature) {
+			theFeature = (Feature) resource.getContents().get(0);
+		} else {
+			theStepObject = (StepObject) resource.getContents().get(0);
+		}
 	}
 
 	public void setBackgroundDescription(Background background, String backgroundDescription) {

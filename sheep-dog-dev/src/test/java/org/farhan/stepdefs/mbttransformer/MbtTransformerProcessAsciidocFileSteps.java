@@ -8,11 +8,11 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class MbtTransformerProcessAsciidocFileSteps  extends TestSteps{
+public class MbtTransformerProcessAsciidocFileSteps extends TestSteps {
 
     @Inject
     public MbtTransformerProcessAsciidocFileSteps(ProcessAsciidocFile object) {
-    	super(object);
+        super(object);
     }
 
     @Given("^The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows$")

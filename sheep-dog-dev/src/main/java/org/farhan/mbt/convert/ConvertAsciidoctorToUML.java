@@ -86,7 +86,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		srcObj = (AsciiDoctorAdocWrapper) project.createObject(path);
 		srcObj.parse(content);
 		if (isFileSelected(srcObj, tags)) {
-			if (!path.startsWith(project.getDir(project.TEST_CASES))) {
+			if (path.startsWith(project.getDir(project.TEST_STEPS))) {
 				log.debug("step object: " + path);
 				tgtObj = (UMLClassWrapper) model.createObject(convertSrcPath(path, project.TEST_STEPS));
 				tgtObj.setStepObjectName(srcObj.getStepObjectName());
@@ -115,7 +115,11 @@ public class ConvertAsciidoctorToUML extends Converter {
 	}
 
 	private void convertStepDefinition(StepDefinition stepDefinitionSrc) {
-		Interaction stepDefinition = tgtObj.createStepDefinition(srcObj.getStepDefinitionName(stepDefinitionSrc));
+		// TODO the Given + is a temp hack. Technically it doesn't matter, only the uml
+		// to cucumber should add the Given. Delete this after generating code from adoc
+		// and not feature files.
+		Interaction stepDefinition = tgtObj
+				.createStepDefinition("Given " + srcObj.getStepDefinitionName(stepDefinitionSrc));
 		tgtObj.setStepDefinitionDescription(stepDefinition, srcObj.getStepDefinitionDescription(stepDefinitionSrc));
 		convertStepParametersList(stepDefinition, srcObj.getStepParametersList(stepDefinitionSrc));
 	}
@@ -136,6 +140,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 	private void convertStep(Interaction abstractScenario, Step stepSrc) {
 		Message step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
 
+		// TODO Instead of creating the object, add the name to a list
 		UMLClassWrapper stpObj = (UMLClassWrapper) model
 				.createObject(convertSrcPath(getStepObjName(stepSrc.getName()), project.TEST_OBJECTS));
 		stpObj.createStepDefinition(srcObj.getStep(stepSrc));
@@ -189,10 +194,8 @@ public class ConvertAsciidoctorToUML extends Converter {
 		return name;
 	}
 
-	// TODO these are duplicates of cucumber to uml converter. Also in the future
-	// when there's a layer 2 for adoc this won't be needed. Instead the layer 2
-	// will be read directly. This should also already exist in the sheep-dog-test
-	// library so perhaps first refactor to use that?
+	// TODO these are duplicates of cucumber to uml converter. This exists in the
+	// sheep-dog-test library so perhaps first refactor to use that?
 	private String getStepObjName(String stepName) {
 		String objectName = getObjectName(stepName);
 		String objectType = StringUtils.capitalize(StepHelper.getObjectType(stepName));
@@ -229,6 +232,8 @@ public class ConvertAsciidoctorToUML extends Converter {
 			}
 		} else {
 			// TODO make tests for when a layer 2 file not referenced.
+			// TODO this won't work, a list of layer two files need to be referenced so
+			// create those when parsing each step
 			return project.getObject(ufw.getPath()) != null;
 
 		}

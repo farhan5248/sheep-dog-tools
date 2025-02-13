@@ -16,7 +16,7 @@ public class MbtTransformerPstUmlFileSteps extends TestSteps {
 	}
 
 	@Given("^The mbt-transformer plugin, uml/pst.uml file will be present$")
-	public void theMbtTransformerPluginTargetMbtUmlPstUmlFileWillBePresent() {
+	public void theMbtTransformerPluginUmlPstUmlFileWillBePresent() {
 		object.setComponent("mbt-transformer");
 		object.setPath("uml/pst.uml");
 		object.assertInputOutputs("Present");
@@ -84,5 +84,4 @@ public class MbtTransformerPstUmlFileSteps extends TestSteps {
 		object.setPath("uml/pst.uml");
 		object.assertInputOutputs(dataTable, "InteractionSection");
 	}
-
 }

@@ -8,11 +8,11 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class MbtTransformerBlahObjectPageStepsJavaFileSteps  extends TestSteps{
+public class MbtTransformerBlahObjectPageStepsJavaFileSteps extends TestSteps {
 
     @Inject
     public MbtTransformerBlahObjectPageStepsJavaFileSteps(BlahObjectPageStepsJavaFile object) {
-    	super(object);
+        super(object);
     }
 
     @Given("^The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows$")

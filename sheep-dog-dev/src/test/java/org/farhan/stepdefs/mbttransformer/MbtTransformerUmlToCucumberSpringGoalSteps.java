@@ -24,9 +24,9 @@ public class MbtTransformerUmlToCucumberSpringGoalSteps extends TestSteps {
 
     @Given("^The mbt-transformer plugin, uml-to-cucumber-spring goal is executed with$")
     public void theMbtTransformerPluginUmlToCucumberSpringGoalIsExecutedWith(DataTable dataTable) {
-    	object.setComponent("mbt-transformer");
-    	object.setPath("uml-to-cucumber-spring");
-    	object.setInputOutputs(dataTable);
-    	object.transition();
+        object.setComponent("mbt-transformer");
+        object.setPath("uml-to-cucumber-spring");
+        object.setInputOutputs(dataTable);
+        object.transition();
     }
 }

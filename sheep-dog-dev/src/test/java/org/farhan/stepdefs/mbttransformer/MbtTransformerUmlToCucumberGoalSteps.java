@@ -8,11 +8,11 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class MbtTransformerUmlToCucumberGoalSteps  extends TestSteps{
+public class MbtTransformerUmlToCucumberGoalSteps extends TestSteps {
 
     @Inject
     public MbtTransformerUmlToCucumberGoalSteps(UmlToCucumberGoal object) {
-    	super(object);
+        super(object);
     }
 
     @Given("^The mbt-transformer plugin, uml-to-cucumber goal is executed$")

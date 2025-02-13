@@ -8,11 +8,11 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class MbtTransformerProcessFeatureFileSteps  extends TestSteps{
+public class MbtTransformerProcessFeatureFileSteps extends TestSteps {
 
     @Inject
     public MbtTransformerProcessFeatureFileSteps(ProcessFeatureFile object) {
-    	super(object);
+        super(object);
     }
 
     @Given("^The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows$")
