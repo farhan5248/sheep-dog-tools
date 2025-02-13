@@ -23,15 +23,16 @@ public class CucumberProject extends ConvertibleProject {
 
 	@Override
 	public ConvertibleObject createObject(String path) throws Exception {
-		ConvertibleObject aConvertibleObject = getObject(path);
 		// TODO calculate an actual checksum
 		fa.put(tags, path, "sha checksum");
+		ConvertibleObject aConvertibleObject = getObject(path);
 		if (aConvertibleObject != null) {
 			return aConvertibleObject;
 		} else {
-			if (!path.endsWith(getFileExt(TEST_CASES))) {
+
+			if (!path.startsWith(getDir(TEST_CASES))) {
 				aConvertibleObject = createJavaWrapper(path);
-				if (path.contains(TEST_STEPS)) {
+				if (path.startsWith(getDir(TEST_STEPS))) {
 					secondLayerObjects.add(aConvertibleObject);
 				} else {
 					thirdLayerObjects.add(aConvertibleObject);
@@ -71,25 +72,23 @@ public class CucumberProject extends ConvertibleProject {
 		}
 	}
 
-	public ConvertibleObject getObject(String name) {
-		if (name.startsWith(getDir(TEST_CASES))) {
+	private ConvertibleObject getObject(String path) {
+		if (path.startsWith(getDir(TEST_CASES))) {
 			for (ConvertibleObject obj : firstLayerObjects) {
-				if (obj.getPath().contentEquals(name)) {
+				if (obj.getPath().contentEquals(path)) {
 					return obj;
 				}
 			}
-		} else {
-			if (name.startsWith(getDir(TEST_STEPS))) {
-				for (ConvertibleObject obj : secondLayerObjects) {
-					if (obj.getPath().contentEquals(name)) {
-						return obj;
-					}
+		} else if (path.startsWith(getDir(TEST_STEPS))) {
+			for (ConvertibleObject obj : secondLayerObjects) {
+				if (obj.getPath().contentEquals(path)) {
+					return obj;
 				}
-			} else if (name.startsWith(getDir(TEST_OBJECTS))) {
-				for (ConvertibleObject obj : thirdLayerObjects) {
-					if (obj.getPath().contentEquals(name)) {
-						return obj;
-					}
+			}
+		} else if (path.startsWith(getDir(TEST_OBJECTS))) {
+			for (ConvertibleObject obj : thirdLayerObjects) {
+				if (obj.getPath().contentEquals(path)) {
+					return obj;
 				}
 			}
 		}

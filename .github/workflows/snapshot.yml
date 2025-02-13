@@ -40,6 +40,6 @@ jobs:
     - name: Run Maven
       working-directory: ./${{ inputs.project }}
       run: |
-        mvn deploy
+        mvn -U deploy
       env:
         GITHUB_TOKEN: ${{ github.token }}

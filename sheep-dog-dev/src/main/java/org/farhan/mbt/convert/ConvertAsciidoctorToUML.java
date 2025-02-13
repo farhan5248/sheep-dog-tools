@@ -73,12 +73,16 @@ public class ConvertAsciidoctorToUML extends Converter {
 		srcObj = (AsciiDoctorAdocWrapper) project.createObject(path);
 		srcObj.parse(content);
 		if (isFileSelected(srcObj, tags)) {
-			tgtObj = (UMLClassWrapper) model.createObject(convertSrcPath(path, project.TEST_CASES));
-			tgtObj.setFeatureName(srcObj.getFeatureName());
-			tgtObj.setFeatureTags(srcObj.getFeatureTags());
-			tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
-			convertAbstractScenarioList();
-			model.save();
+			if (!path.startsWith(project.getDir(project.TEST_CASES))) {
+				
+			} else {
+				tgtObj = (UMLClassWrapper) model.createObject(convertSrcPath(path, project.TEST_CASES));
+				tgtObj.setFeatureName(srcObj.getFeatureName());
+				tgtObj.setFeatureTags(srcObj.getFeatureTags());
+				tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
+				convertAbstractScenarioList();
+				model.save();
+			}
 		} else {
 			project.deleteObject(srcObj);
 		}

@@ -10,27 +10,54 @@ import org.farhan.mbt.core.ObjectRepository;
 
 public class AsciiDoctorProject extends ConvertibleProject {
 
-	private static ArrayList<ConvertibleObject> firstLayerObjects;
+	protected ArrayList<ConvertibleObject> firstLayerObjects;
+	protected ArrayList<ConvertibleObject> secondLayerObjects;
 
 	public AsciiDoctorProject(String tags, ObjectRepository fa) {
 		super(fa);
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
+		secondLayerObjects = new ArrayList<ConvertibleObject>();
 		ConvertibleProject.tags = tags;
+	}
+
+	private ConvertibleObject getObject(String path) {
+		if (path.startsWith(getDir(TEST_CASES))) {
+			for (ConvertibleObject obj : firstLayerObjects) {
+				if (obj.getPath().contentEquals(path)) {
+					return obj;
+				}
+			}
+		} else if (path.startsWith(getDir(TEST_STEPS))) {
+			for (ConvertibleObject obj : secondLayerObjects) {
+				if (obj.getPath().contentEquals(path)) {
+					return obj;
+				}
+			}
+		}
+		return null;
 	}
 
 	@Override
 	public ConvertibleObject createObject(String path) throws Exception {
-		// TODO make this mimic the CucumberProject implementation
-		AsciiDoctorAdocWrapper cff = new AsciiDoctorAdocWrapper(path);
-		// TODO calculate an actual checksum for later
+
+		// TODO calculate an actual checksum
 		fa.put(tags, path, "sha checksum");
-		firstLayerObjects.add(cff);
-		return cff;
+		ConvertibleObject aConvertibleObject = getObject(path);
+		if (aConvertibleObject != null) {
+			return aConvertibleObject;
+		} else {
+			aConvertibleObject = new AsciiDoctorAdocWrapper(path);
+			if (!path.startsWith(getDir(TEST_CASES))) {
+				secondLayerObjects.add(aConvertibleObject);
+			} else {
+				firstLayerObjects.add(aConvertibleObject);
+			}
+			return aConvertibleObject;
+		}
 	}
 
 	@Override
 	public String getDir(String layer) {
-		// TODO rethink what these directories should be after creating the adoc editor
 		switch (layer) {
 		case TEST_CASES:
 			return "src/test/resources/asciidoc";
@@ -39,7 +66,7 @@ public class AsciiDoctorProject extends ConvertibleProject {
 		case TEST_OBJECTS:
 			return "src/test/resources/asciidoc/" + TEST_OBJECTS;
 		default:
-			return "";
+			return "src/test/resources/asciidoc";
 		}
 	}
 
