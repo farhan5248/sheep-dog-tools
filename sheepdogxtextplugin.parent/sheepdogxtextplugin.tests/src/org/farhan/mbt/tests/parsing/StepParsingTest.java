@@ -49,7 +49,7 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("= Feature: This is a test feature\n");
 		sb.append("== Scenario: Submit a drug claim\n");
 		sb.append("=== Given: do step one\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|===\n");
@@ -62,7 +62,7 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("= Feature: This is a test feature\n");
 		sb.append("== Scenario: Submit a drug claim\n");
 		sb.append("=== Given: do step one\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|   data1 |   data2 \n");
@@ -76,7 +76,7 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("= Feature: This is a test feature\n");
 		sb.append("== Scenario: Submit a drug claim\n");
 		sb.append("=== Given: do step one\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2");
 		sb.append("|===\n");
@@ -89,7 +89,7 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("= Feature: This\n");
 		sb.append("== Scenario: Submit\n");
 		sb.append("=== Given: do\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Suggestion | Suggestion Name\n");
 		sb.append("| \\| H1 \\| | \\| H1 \\|\n");
@@ -176,25 +176,25 @@ public class StepParsingTest extends ParsingTest {
 		sb.append("= Feature: This is a test feature\n");
 		sb.append("== Scenario: Submit a drug claim\n");
 		sb.append("=== Given: do step one\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|   data1 |   data2 \n");
 		sb.append("|===\n");
 		sb.append("=== When: do step three\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|   data1 |   data2 \n");
 		sb.append("|===\n");
 		sb.append("=== Then: do step four\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|   data1 |   data2 \n");
 		sb.append("|===\n");
 		sb.append("=== And: do step two\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|   data1 |   data2 \n");

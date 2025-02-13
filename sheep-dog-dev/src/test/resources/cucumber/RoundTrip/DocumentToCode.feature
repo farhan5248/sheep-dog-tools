@@ -18,7 +18,6 @@ Feature: Document To Code
           === Given: The Search application, Login page is valid
           === When: The Search application, Home page is created as follows
           
-          [options="header"]
           |===
           | grp | ins
           | 10 | 5
@@ -40,7 +39,6 @@ Feature: Document To Code
           === Given: The Search application, Login page is invalid
           === When: The Search application, Home page is created as follows
           
-          [options="header"]
           |===
           | grp | ins
           | 8 | {ins}
@@ -50,7 +48,6 @@ Feature: Document To Code
           
           === Examples: Some data
           
-          [options="header"]
           |===
           | ins
           | 4
@@ -58,7 +55,6 @@ Feature: Document To Code
           
           === Examples: Dataset 2
           
-          [options="header"]
           |===
           | ins
           | 5

@@ -74,7 +74,6 @@ DocString:
 	name=RAWTEXT EOL;
 
 Table:
-	'[options="header"]' EOL
 	'|===' EOL
 	rows+=Row+
 	'|===' EOL;

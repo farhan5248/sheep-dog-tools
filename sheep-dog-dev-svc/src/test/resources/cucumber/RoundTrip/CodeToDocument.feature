@@ -72,7 +72,6 @@ Feature: Code To Document
           
           === When: The Search application, Home page is created as follows
           
-          [options="header"]
           |===
           | grp | ins
           | 10  | 5  
@@ -95,7 +94,6 @@ Feature: Code To Document
           
           === When: The Search application, Home page is created as follows
           
-          [options="header"]
           |===
           | grp | ins  
           | 8   | {ins}
@@ -105,7 +103,6 @@ Feature: Code To Document
           
           === Examples: Some data
           
-          [options="header"]
           |===
           | ins
           | 4  
@@ -113,7 +110,6 @@ Feature: Code To Document
           
           === Examples: Dataset 2
           
-          [options="header"]
           |===
           | ins
           | 5  

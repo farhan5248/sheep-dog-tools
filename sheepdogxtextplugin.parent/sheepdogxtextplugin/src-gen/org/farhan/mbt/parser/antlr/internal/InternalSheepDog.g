@@ -1318,28 +1318,20 @@ ruleTable returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		otherlv_0='[options="header"]'
+		otherlv_0='|==='
 		{
-			newLeafNode(otherlv_0, grammarAccess.getTableAccess().getOptionsHeaderKeyword_0());
+			newLeafNode(otherlv_0, grammarAccess.getTableAccess().getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_0());
 		}
 		this_EOL_1=RULE_EOL
 		{
 			newLeafNode(this_EOL_1, grammarAccess.getTableAccess().getEOLTerminalRuleCall_1());
 		}
-		otherlv_2='|==='
-		{
-			newLeafNode(otherlv_2, grammarAccess.getTableAccess().getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_2());
-		}
-		this_EOL_3=RULE_EOL
-		{
-			newLeafNode(this_EOL_3, grammarAccess.getTableAccess().getEOLTerminalRuleCall_3());
-		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getTableAccess().getRowsRowParserRuleCall_4_0());
+					newCompositeNode(grammarAccess.getTableAccess().getRowsRowParserRuleCall_2_0());
 				}
-				lv_rows_4_0=ruleRow
+				lv_rows_2_0=ruleRow
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTableRule());
@@ -1347,19 +1339,19 @@ ruleTable returns [EObject current=null]
 					add(
 						$current,
 						"rows",
-						lv_rows_4_0,
+						lv_rows_2_0,
 						"org.farhan.mbt.SheepDog.Row");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)+
-		otherlv_5='|==='
+		otherlv_3='|==='
 		{
-			newLeafNode(otherlv_5, grammarAccess.getTableAccess().getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_5());
+			newLeafNode(otherlv_3, grammarAccess.getTableAccess().getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_3());
 		}
-		this_EOL_6=RULE_EOL
+		this_EOL_4=RULE_EOL
 		{
-			newLeafNode(this_EOL_6, grammarAccess.getTableAccess().getEOLTerminalRuleCall_6());
+			newLeafNode(this_EOL_4, grammarAccess.getTableAccess().getEOLTerminalRuleCall_4());
 		}
 	)
 ;

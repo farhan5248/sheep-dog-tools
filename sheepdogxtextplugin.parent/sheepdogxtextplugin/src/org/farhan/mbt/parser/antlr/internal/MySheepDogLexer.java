@@ -55,17 +55,15 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 		} else if (isKeyword(" ") || isKeyword("\t") || isKeyword("\r")) {
 			mRULE_WS();
 		} else if (isKeyword("|===")) {
-			mT__24();// '|==='
+			mT__23();// '|==='
 		} else if (isKeyword("|")) {
-			mT__28();// '|'
-		} else if (isKeyword("[options=\"header\"]")) {
-			mT__23();// '[options=\"header\"]'
+			mT__27();// '|'
 		} else if (isKeyword("[tags=")) {
-			mT__26();// '[tags='
+			mT__25();// '[tags='
 		} else if (isKeyword("]")) {
-			mT__27();// ']'
+			mT__26();// ']'
 		} else if (isKeyword(":tags:")) {
-			mT__25();// ( ':tags:' )
+			mT__24();// ( ':tags:' )
 		} else if (isKeyword("===")) {
 			mT__13();// '==='
 		} else if (isKeyword("==")) {

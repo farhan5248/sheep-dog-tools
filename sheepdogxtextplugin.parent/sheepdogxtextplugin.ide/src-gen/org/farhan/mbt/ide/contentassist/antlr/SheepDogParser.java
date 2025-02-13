@@ -95,7 +95,7 @@ public class SheepDogParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getAndAccess().getTheStepTableAssignment_4_0(), "rule__And__TheStepTableAssignment_4_0");
 			builder.put(grammarAccess.getAndAccess().getTheDocStringAssignment_4_1(), "rule__And__TheDocStringAssignment_4_1");
 			builder.put(grammarAccess.getDocStringAccess().getNameAssignment_0(), "rule__DocString__NameAssignment_0");
-			builder.put(grammarAccess.getTableAccess().getRowsAssignment_4(), "rule__Table__RowsAssignment_4");
+			builder.put(grammarAccess.getTableAccess().getRowsAssignment_2(), "rule__Table__RowsAssignment_2");
 			builder.put(grammarAccess.getRowAccess().getCellsAssignment_0(), "rule__Row__CellsAssignment_0");
 			builder.put(grammarAccess.getFeatureTagsAccess().getNameAssignment_1(), "rule__FeatureTags__NameAssignment_1");
 			builder.put(grammarAccess.getAbstractScenarioTagsAccess().getNameAssignment_1(), "rule__AbstractScenarioTags__NameAssignment_1");

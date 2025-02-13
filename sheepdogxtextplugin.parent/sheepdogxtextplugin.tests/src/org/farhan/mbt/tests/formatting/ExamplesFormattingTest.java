@@ -26,7 +26,6 @@ public class ExamplesFormattingTest extends FormattingTest {
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
 		sb.append("\n");
-		sb.append("[options=\"header\"]\n");
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2\n");
 		sb.append("| data1   | data2  \n");
@@ -62,7 +61,6 @@ public class ExamplesFormattingTest extends FormattingTest {
 			sb.append(" Basic EDI claim \n");
 			sb.append(" No deductible \n");
 			sb.append("\n");
-			sb.append(" [options=\"header\"] \n");
 			sb.append(" |=== \n");
 			sb.append(" | Header1 | Header2 \n");
 			sb.append(" | data1   | data2   \n");
@@ -91,7 +89,7 @@ public class ExamplesFormattingTest extends FormattingTest {
 			sb.append("Basic EDI claim\n");
 			sb.append("No deductible\n");
 			sb.append("\n");
-			sb.append("[options=\"header\"]\n");
+	
 			sb.append("|===\n");
 			sb.append("|Header1 |Header2\n");
 			sb.append("|data1 |data2\n");
@@ -122,7 +120,7 @@ public class ExamplesFormattingTest extends FormattingTest {
 			sb.append("No deductible\n");
 			sb.append("\n");
 			sb.append("\n");
-			sb.append("[options=\"header\"]\n");
+	
 			sb.append("\n");
 			sb.append("|===\n");
 			sb.append("\n");

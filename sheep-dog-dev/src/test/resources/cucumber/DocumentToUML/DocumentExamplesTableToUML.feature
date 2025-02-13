@@ -11,7 +11,6 @@ Feature: Document Examples Table To UML
           
           === Given: The Object page is created as follows
           
-          [options="header"]
           |===
           | h1
           | {h1}
@@ -19,7 +18,6 @@ Feature: Document Examples Table To UML
           
           === Examples: Examples 1
           
-          [options="header"]
           |===
           | h1
           | v1
@@ -42,7 +40,6 @@ Feature: Document Examples Table To UML
           
           === Given: The Object page is created as follows
           
-          [options="header"]
           |===
           | h1 | h2
           | {h1} | {h2}
@@ -50,7 +47,6 @@ Feature: Document Examples Table To UML
           
           === Examples: Examples 1
           
-          [options="header"]
           |===
           | h1 | h2
           | v1 | v2
@@ -75,7 +71,6 @@ Feature: Document Examples Table To UML
           
           === Given: The Object page is created as follows
           
-          [options="header"]
           |===
           | h1 | h2 | h3
           | {h1} | {h2} | {h3}
@@ -83,7 +78,6 @@ Feature: Document Examples Table To UML
           
           === Examples: Examples 1
           
-          [options="header"]
           |===
           | h1 | h2 | h3
           | v1 | v2 | v3

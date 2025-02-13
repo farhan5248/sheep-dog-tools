@@ -19,7 +19,7 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 		sb.append("= Feature: This is a test feature\n");
 		sb.append("== Scenario: Submit a claim\n");
 		sb.append("=== Examples: Describe what this data is about\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|===\n");
@@ -49,7 +49,7 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 		sb.append("[tags=\"tag1\"]\n");
 		sb.append("== Scenario: Submit a claim\n");
 		sb.append("=== Examples: Describe what this data is about\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|===\n");
@@ -63,7 +63,7 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 		sb.append("== Scenario: Submit a claim\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("=== Examples: Describe what this data is about\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|===\n");
@@ -78,7 +78,7 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
 		sb.append("=== Examples: Describe what this data is about\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|===\n");
@@ -102,7 +102,7 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 		sb.append("=== Given: do step one\n");
 		sb.append("=== When: do step three\n");
 		sb.append("=== Examples: Describe what this data is about\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|===\n");
@@ -120,7 +120,7 @@ public class ScenarioOutlineParsingTest extends ParsingTest {
 		sb.append("=== Given: do step one\n");
 		sb.append("=== When: do step three\n");
 		sb.append("=== Examples: Describe what this data is about\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|===\n");

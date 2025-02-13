@@ -11,7 +11,6 @@ Feature: Document Scenario Outline To UML
           
           === Given: The Object page is created as follows
           
-          [options="header"]
           |===
           | h1
           | {h3}
@@ -19,7 +18,6 @@ Feature: Document Scenario Outline To UML
           
           === Examples: Examples 1
           
-          [options="header"]
           |===
           | h3
           | v31
@@ -49,7 +47,6 @@ Feature: Document Scenario Outline To UML
           
           === Given: The Object page is created as follows
           
-          [options="header"]
           |===
           | h1
           | {h3}
@@ -57,7 +54,6 @@ Feature: Document Scenario Outline To UML
           
           === Examples: Examples 1
           
-          [options="header"]
           |===
           | h3
           | v31
@@ -86,7 +82,6 @@ Feature: Document Scenario Outline To UML
           
           === Given: The Object1 page is created as follows
           
-          [options="header"]
           |===
           | h1
           | {h3}
@@ -94,7 +89,6 @@ Feature: Document Scenario Outline To UML
           
           === Given: The Object2 page is created as follows
           
-          [options="header"]
           |===
           | h1
           | {h3}
@@ -102,7 +96,6 @@ Feature: Document Scenario Outline To UML
           
           === Examples: Examples 1
           
-          [options="header"]
           |===
           | h3
           | v31
@@ -110,7 +103,6 @@ Feature: Document Scenario Outline To UML
           
           === Examples: Examples 2
           
-          [options="header"]
           |===
           | h3
           | v32
@@ -153,7 +145,6 @@ Feature: Document Scenario Outline To UML
           
           === Given: The Object1 page is created as follows
           
-          [options="header"]
           |===
           | h1
           | {h3}
@@ -161,7 +152,6 @@ Feature: Document Scenario Outline To UML
           
           === Given: The Object2 page is created as follows
           
-          [options="header"]
           |===
           | h1
           | {h3}
@@ -169,7 +159,6 @@ Feature: Document Scenario Outline To UML
           
           === Given: The Object3 page is created as follows
           
-          [options="header"]
           |===
           | h1
           | {h3}
@@ -177,7 +166,6 @@ Feature: Document Scenario Outline To UML
           
           === Examples: Examples 1
           
-          [options="header"]
           |===
           | h3
           | v31
@@ -185,7 +173,6 @@ Feature: Document Scenario Outline To UML
           
           === Examples: Examples 2
           
-          [options="header"]
           |===
           | h3
           | v32
@@ -193,7 +180,6 @@ Feature: Document Scenario Outline To UML
           
           === Examples: Examples 3
           
-          [options="header"]
           |===
           | h3
           | v33
@@ -235,7 +221,6 @@ Feature: Document Scenario Outline To UML
           
           === Examples: Examples 1
           
-          [options="header"]
           |===
           | h3
           | v31
@@ -248,7 +233,6 @@ Feature: Document Scenario Outline To UML
           
           === Examples: Examples 1
           
-          [options="header"]
           |===
           | h3
           | v31

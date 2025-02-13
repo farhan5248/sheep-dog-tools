@@ -11,7 +11,6 @@ Feature: Document Step Table To UML
           
           === Given: The Object page is created as follows
           
-          [options="header"]
           |===
           | h1
           | v1
@@ -34,7 +33,6 @@ Feature: Document Step Table To UML
           
           === Given: The Object page is created as follows
           
-          [options="header"]
           |===
           | h1 | h2
           | v1 | v2
@@ -59,7 +57,6 @@ Feature: Document Step Table To UML
           
           === Given: The Object page is created as follows
           
-          [options="header"]
           |===
           | h1 | h2 | h3
           | v1 | v2 | v3
@@ -86,7 +83,6 @@ Feature: Document Step Table To UML
           
           === Given: The Object page is created as follows
           
-          [options="header"]
           |===
           | h1
           | \| v1 \|

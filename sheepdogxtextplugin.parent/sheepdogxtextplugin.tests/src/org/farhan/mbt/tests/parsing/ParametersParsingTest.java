@@ -19,7 +19,7 @@ public class ParametersParsingTest extends ParsingTest {
 		sb.append("= Object: This is a test StepObject\n");
 		sb.append("== Definition: Submit a claim\n");
 		sb.append("=== Parameters: Describe what this data is about\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|===\n");
@@ -32,7 +32,7 @@ public class ParametersParsingTest extends ParsingTest {
 		sb.append("= Object: This is a test StepObject\n");
 		sb.append("== Definition: Submit a claim\n");
 		sb.append("=== Parameters:\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|===\n");
@@ -54,7 +54,7 @@ public class ParametersParsingTest extends ParsingTest {
 		sb.append("= Object: This is a test StepObject\n");
 		sb.append("== Definition: Submit a claim\n");
 		sb.append("=== Parameters: Describe what this data is about\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|===\n");
@@ -68,7 +68,7 @@ public class ParametersParsingTest extends ParsingTest {
 		sb.append("== Definition: Submit a claim\n");
 		sb.append("=== Parameters: Describe what this data is about\n");
 		sb.append("Basic EDI claim\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|===\n");
@@ -83,7 +83,7 @@ public class ParametersParsingTest extends ParsingTest {
 		sb.append("=== Parameters: Describe what this data is about\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|===\n");
@@ -108,7 +108,7 @@ public class ParametersParsingTest extends ParsingTest {
 		sb.append("== Definition: Submit a claim\n");
 		sb.append("=== Parameters: Describe what this data is about\n");
 		sb.append("Basic EDI claim\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|   data1 |   data2 \n");
@@ -125,7 +125,7 @@ public class ParametersParsingTest extends ParsingTest {
 		sb.append("=== Parameters: Describe what this data is about\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
-		sb.append("[options=\"header\"]\n");
+
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|   data1 |   data2 \n");

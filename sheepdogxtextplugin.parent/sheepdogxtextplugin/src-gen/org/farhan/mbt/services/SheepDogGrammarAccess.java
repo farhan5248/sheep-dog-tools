@@ -732,51 +732,41 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	public class TableElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.Table");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cOptionsHeaderKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cVerticalLineEqualsSignEqualsSignEqualsSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cEOLTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		private final Keyword cVerticalLineEqualsSignEqualsSignEqualsSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final RuleCall cEOLTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
-		private final Assignment cRowsAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cRowsRowParserRuleCall_4_0 = (RuleCall)cRowsAssignment_4.eContents().get(0);
-		private final Keyword cVerticalLineEqualsSignEqualsSignEqualsSignKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final RuleCall cEOLTerminalRuleCall_6 = (RuleCall)cGroup.eContents().get(6);
+		private final Assignment cRowsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cRowsRowParserRuleCall_2_0 = (RuleCall)cRowsAssignment_2.eContents().get(0);
+		private final Keyword cVerticalLineEqualsSignEqualsSignEqualsSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final RuleCall cEOLTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
 		
 		//Table:
-		//    '[options="header"]' EOL
 		//    '|===' EOL
 		//    rows+=Row+
 		//    '|===' EOL;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'[options="header"]' EOL
 		//'|===' EOL
 		//rows+=Row+
 		//'|===' EOL
 		public Group getGroup() { return cGroup; }
 		
-		//'[options="header"]'
-		public Keyword getOptionsHeaderKeyword_0() { return cOptionsHeaderKeyword_0; }
+		//'|==='
+		public Keyword getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_0() { return cVerticalLineEqualsSignEqualsSignEqualsSignKeyword_0; }
 		
 		//EOL
 		public RuleCall getEOLTerminalRuleCall_1() { return cEOLTerminalRuleCall_1; }
 		
-		//'|==='
-		public Keyword getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_2() { return cVerticalLineEqualsSignEqualsSignEqualsSignKeyword_2; }
-		
-		//EOL
-		public RuleCall getEOLTerminalRuleCall_3() { return cEOLTerminalRuleCall_3; }
-		
 		//rows+=Row+
-		public Assignment getRowsAssignment_4() { return cRowsAssignment_4; }
+		public Assignment getRowsAssignment_2() { return cRowsAssignment_2; }
 		
 		//Row
-		public RuleCall getRowsRowParserRuleCall_4_0() { return cRowsRowParserRuleCall_4_0; }
+		public RuleCall getRowsRowParserRuleCall_2_0() { return cRowsRowParserRuleCall_2_0; }
 		
 		//'|==='
-		public Keyword getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_5() { return cVerticalLineEqualsSignEqualsSignEqualsSignKeyword_5; }
+		public Keyword getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_3() { return cVerticalLineEqualsSignEqualsSignEqualsSignKeyword_3; }
 		
 		//EOL
-		public RuleCall getEOLTerminalRuleCall_6() { return cEOLTerminalRuleCall_6; }
+		public RuleCall getEOLTerminalRuleCall_4() { return cEOLTerminalRuleCall_4; }
 	}
 	public class RowElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.farhan.mbt.SheepDog.Row");
@@ -1179,7 +1169,6 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 	}
 	
 	//Table:
-	//    '[options="header"]' EOL
 	//    '|===' EOL
 	//    rows+=Row+
 	//    '|===' EOL;
