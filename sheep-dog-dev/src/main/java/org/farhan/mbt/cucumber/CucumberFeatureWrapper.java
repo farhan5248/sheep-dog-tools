@@ -114,6 +114,7 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 	public Step createStep(AbstractScenario abstractScenario, String name) {
 		String keyword = name.split(" ")[0];
 		Step step = null;
+		// TODO delete the first 4 case statements after adoc migration is done
 		switch (keyword) {
 		case "Given":
 			step = CucumberFactory.eINSTANCE.createGiven();
@@ -124,14 +125,20 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		case "Then":
 			step = CucumberFactory.eINSTANCE.createThen();
 			break;
-		case "But":
-			step = CucumberFactory.eINSTANCE.createBut();
-			break;
 		case "And":
 			step = CucumberFactory.eINSTANCE.createAnd();
 			break;
-		case "*":
-			step = CucumberFactory.eINSTANCE.createAsterisk();
+		case "Given:":
+			step = CucumberFactory.eINSTANCE.createGiven();
+			break;
+		case "When:":
+			step = CucumberFactory.eINSTANCE.createWhen();
+			break;
+		case "Then:":
+			step = CucumberFactory.eINSTANCE.createThen();
+			break;
+		case "And:":
+			step = CucumberFactory.eINSTANCE.createAnd();
 			break;
 		}
 		step.setName(name.substring(keyword.length() + 1));

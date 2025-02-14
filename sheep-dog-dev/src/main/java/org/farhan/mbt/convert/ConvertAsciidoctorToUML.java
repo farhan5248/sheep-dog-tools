@@ -28,9 +28,11 @@ public class ConvertAsciidoctorToUML extends Converter {
 	private AsciiDoctorAdocWrapper srcObj;
 	private UMLClassWrapper tgtObj;
 	private String lastComponent = "InitialComponent";
+	private ArrayList<String> stepObjects;
 
 	public ConvertAsciidoctorToUML(String tags, ObjectRepository fa, Logger log) {
 		super(tags, fa, log);
+		stepObjects = new ArrayList<String>();
 	}
 
 	protected void convertAbstractScenarioList() throws Exception {
@@ -46,13 +48,6 @@ public class ConvertAsciidoctorToUML extends Converter {
 		}
 	}
 
-	private void convertStepDefinitionList() {
-		for (StepDefinition abstractScenario : srcObj.getStepDefinitionList()) {
-			log.debug("step definition: " + abstractScenario.getName());
-			convertStepDefinition(abstractScenario);
-		}
-	}
-
 	private void convertBackground(AbstractScenario abstractScenario) {
 		Interaction background = tgtObj.createBackground(srcObj.getBackgroundName(abstractScenario));
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
@@ -61,15 +56,6 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	private void convertDocString(Message step, Step stepSrc) {
 		tgtObj.createDocString(step, srcObj.getDocString(stepSrc));
-	}
-
-	private void convertStepParameters(Interaction stepDefinition, StepParameters stepParametersSrc) {
-		EAnnotation stepParameters = tgtObj.createStepParameters(stepDefinition,
-				srcObj.getStepParametersName(stepParametersSrc));
-		tgtObj.createStepParametersTable(stepParameters, srcObj.getStepParametersTable(stepParametersSrc));
-		for (Row row : srcObj.getStepParametersRowList(stepParametersSrc)) {
-			tgtObj.createStepParametersRow(stepParameters, srcObj.getStepParametersRow(stepParametersSrc, row));
-		}
 	}
 
 	private void convertExamples(Interaction abstractScenario, Examples examplesSrc) {
@@ -114,16 +100,6 @@ public class ConvertAsciidoctorToUML extends Converter {
 		convertStepList(scenario, srcObj.getStepList(abstractScenario));
 	}
 
-	private void convertStepDefinition(StepDefinition stepDefinitionSrc) {
-		// TODO the Given + is a temp hack. Technically it doesn't matter, only the uml
-		// to cucumber should add the Given. Delete this after generating code from adoc
-		// and not feature files.
-		Interaction stepDefinition = tgtObj
-				.createStepDefinition("Given " + srcObj.getStepDefinitionName(stepDefinitionSrc));
-		tgtObj.setStepDefinitionDescription(stepDefinition, srcObj.getStepDefinitionDescription(stepDefinitionSrc));
-		convertStepParametersList(stepDefinition, srcObj.getStepParametersList(stepDefinitionSrc));
-	}
-
 	private void convertScenarioOutline(AbstractScenario abstractScenario) {
 
 		Interaction scenarioOutline = tgtObj.createScenarioOutline(srcObj.getScenarioOutlineName(abstractScenario));
@@ -140,10 +116,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 	private void convertStep(Interaction abstractScenario, Step stepSrc) {
 		Message step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
 
-		// TODO Instead of creating the object, add the name to a list
-		UMLClassWrapper stpObj = (UMLClassWrapper) model
-				.createObject(convertSrcPath(getStepObjName(stepSrc.getName()), project.TEST_OBJECTS));
-		stpObj.createStepDefinition(srcObj.getStep(stepSrc));
+		stepObjects.add(getStepObjName(stepSrc.getName()));
 
 		if (srcObj.hasDocString(stepSrc)) {
 			convertDocString(step, stepSrc);
@@ -152,10 +125,36 @@ public class ConvertAsciidoctorToUML extends Converter {
 		}
 	}
 
+	private void convertStepDefinition(StepDefinition stepDefinitionSrc) {
+		// TODO the Given + is a temp hack. Technically it doesn't matter, only the uml
+		// to cucumber should add the Given. Delete this after generating code from adoc
+		// and not feature files.
+		Interaction stepDefinition = tgtObj
+				.createStepDefinition("Given " + srcObj.getStepDefinitionName(stepDefinitionSrc));
+		tgtObj.setStepDefinitionDescription(stepDefinition, srcObj.getStepDefinitionDescription(stepDefinitionSrc));
+		convertStepParametersList(stepDefinition, srcObj.getStepParametersList(stepDefinitionSrc));
+	}
+
+	private void convertStepDefinitionList() {
+		for (StepDefinition abstractScenario : srcObj.getStepDefinitionList()) {
+			log.debug("step definition: " + abstractScenario.getName());
+			convertStepDefinition(abstractScenario);
+		}
+	}
+
 	private void convertStepList(Interaction abstractScenario, EList<Step> stepList) {
 		for (Step step : stepList) {
 			log.debug("test step: " + step.getName());
 			convertStep(abstractScenario, step);
+		}
+	}
+
+	private void convertStepParameters(Interaction stepDefinition, StepParameters stepParametersSrc) {
+		EAnnotation stepParameters = tgtObj.createStepParameters(stepDefinition,
+				srcObj.getStepParametersName(stepParametersSrc));
+		tgtObj.createStepParametersTable(stepParameters, srcObj.getStepParametersTable(stepParametersSrc));
+		for (Row row : srcObj.getStepParametersRowList(stepParametersSrc)) {
+			tgtObj.createStepParametersRow(stepParameters, srcObj.getStepParametersRow(stepParametersSrc, row));
 		}
 	}
 
@@ -231,11 +230,11 @@ public class ConvertAsciidoctorToUML extends Converter {
 				}
 			}
 		} else {
-			// TODO make tests for when a layer 2 file not referenced.
-			// TODO this won't work, a list of layer two files need to be referenced so
-			// create those when parsing each step
-			return project.getObject(ufw.getPath()) != null;
-
+			for (String path : stepObjects) {
+				if (ufw.getPath().contentEquals(path)) {
+					return true;
+				}
+			}
 		}
 		return false;
 	}

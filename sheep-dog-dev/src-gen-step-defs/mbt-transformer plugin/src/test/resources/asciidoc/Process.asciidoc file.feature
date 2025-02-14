@@ -56,3 +56,9 @@ Object: src/test/resources/asciidoc/Process.asciidoc file
 
           | Name | Step | Content |
 
+  Definition: Object section will be created as follows
+
+    Parameters: 1
+
+          | Name | Statements |
+

@@ -7,6 +7,8 @@ import org.farhan.mbt.sheepDog.Cell;
 import org.farhan.mbt.sheepDog.Examples;
 import org.farhan.mbt.sheepDog.Row;
 import org.farhan.mbt.sheepDog.Step;
+import org.farhan.mbt.sheepDog.StepDefinition;
+import org.farhan.mbt.sheepDog.StepParameters;
 import org.junit.jupiter.api.Assertions;
 
 public class AdocFileObject extends FileObject {
@@ -70,9 +72,36 @@ public class AdocFileObject extends FileObject {
 				"Row " + rowName + " doesn't exist");
 	}
 
+	protected void assertStepDefinitionDescription(String name, String description) {
+		Assertions.assertEquals(description, wrapper.getStepDefinitionDescription(getStepDefinition(name)));
+	}
+
+	protected void assertStepDefinitionExists(String name) {
+		Assertions.assertTrue(getStepDefinition(name) != null, "Step Definition " + name + " doesn't exist");
+	}
+
+	protected void assertStepDefinitionParametersExists(String string, String string2) {
+		// TODO Auto-generated method stub
+
+	}
+
+	protected void assertStepDefinitionParametersTableRowExists(String name, String parametersName, String rowName) {
+		assertStepDefinitionParametersExists(name, parametersName);
+		Assertions.assertTrue(getParametersRow(getParameters(name, parametersName), rowName) != null,
+				"Row " + rowName + " doesn't exist");
+	}
+
 	protected void assertStepExists(String name, String stepName) {
 		assertAbstractScenarioExists(name);
 		Assertions.assertTrue(getStep(name, stepName) != null, "Step " + stepName + " doesn't exist");
+	}
+
+	protected void assertStepObjectName(String name) {
+		Assertions.assertEquals(name, wrapper.getStepObjectName());
+	}
+
+	protected void assertStepObjectStatements(String name, String statements) {
+		Assertions.assertEquals(statements, wrapper.getStepObjectDescription());
 	}
 
 	private AbstractScenario getAbstractScenario(String name) {
@@ -94,14 +123,31 @@ public class AdocFileObject extends FileObject {
 	}
 
 	private ArrayList<String> getExamplesRow(Examples examples, String rowName) {
-		wrapper.getExamplesRowList(examples);
+		return getRow(wrapper.getExamplesRowList(examples), wrapper.getExamplesTable(examples), rowName);
+	}
+
+	private StepParameters getParameters(String name, String parametersName) {
+		for (StepParameters e : wrapper.getStepParametersList(getStepDefinition(name))) {
+			if (wrapper.getStepParametersName(e).contentEquals(parametersName)) {
+				return e;
+			}
+		}
+		return null;
+	}
+
+	private ArrayList<String> getParametersRow(StepParameters parameters, String rowName) {
+		return getRow(wrapper.getStepParametersRowList(parameters), wrapper.getStepParametersTable(parameters),
+				rowName);
+	}
+
+	private ArrayList<String> getRow(ArrayList<Row> rows, ArrayList<String> header, String rowName) {
 		ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
 		ArrayList<String> row = new ArrayList<String>();
 		table.add(row);
-		for (String colName : wrapper.getExamplesTable(examples)) {
+		for (String colName : header) {
 			row.add(colName);
 		}
-		for (Row r : wrapper.getExamplesRowList(examples)) {
+		for (Row r : rows) {
 			row = new ArrayList<String>();
 			table.add(row);
 			for (Cell c : r.getCells()) {
@@ -141,6 +187,15 @@ public class AdocFileObject extends FileObject {
 	private Step getStep(String name, String stepName) {
 		for (Step s : wrapper.getStepList(getAbstractScenario(name))) {
 			if (wrapper.getStep(s).contentEquals(stepName)) {
+				return s;
+			}
+		}
+		return null;
+	}
+
+	private StepDefinition getStepDefinition(String name) {
+		for (StepDefinition s : wrapper.getStepDefinitionList()) {
+			if (wrapper.getStepDefinitionName(s).contentEquals(name)) {
 				return s;
 			}
 		}

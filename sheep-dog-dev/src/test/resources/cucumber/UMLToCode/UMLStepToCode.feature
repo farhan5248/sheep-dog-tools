@@ -23,9 +23,7 @@ Feature: UML Step To Code
               Given The something/Object page is empty
                When The something/Object page is empty
                Then The something/Object page is empty
-                But The something/Object page is empty
                 And The something/Object page is empty
-                  * The something/Object page is empty
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
@@ -35,9 +33,7 @@ Feature: UML Step To Code
           | Submit | Given The something/Object page is empty |
           | Submit | When The something/Object page is empty  |
           | Submit | Then The something/Object page is empty  |
-          | Submit | But The something/Object page is empty   |
           | Submit | And The something/Object page is empty   |
-          | Submit | * The something/Object page is empty     |
 
   Scenario: Create new java methods for layer 2
 

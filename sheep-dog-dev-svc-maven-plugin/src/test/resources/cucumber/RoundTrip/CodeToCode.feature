@@ -26,9 +26,7 @@ Feature: Code To Code
           
                When The blah application, something/Object page is empty
                Then The blah application, something/Object page is empty
-                But The blah application, something/Object page is empty
                 And The blah application, something/Object page is empty
-                  * The blah application, something/Object page is empty
           
             Scenario Outline: Submit Several
           
@@ -89,9 +87,7 @@ Feature: Code To Code
           
                When The blah application, something/Object page is empty
                Then The blah application, something/Object page is empty
-                But The blah application, something/Object page is empty
                 And The blah application, something/Object page is empty
-                  * The blah application, something/Object page is empty
           
             Scenario Outline: Submit Several
           

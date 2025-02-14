@@ -3,11 +3,11 @@ Feature: UML Feature To Document
 
   Scenario: No tags, no statements
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          Feature: Process
+          = Feature: Process
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed
+     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Feature section will be created as follows
@@ -16,13 +16,16 @@ Feature: UML Feature To Document
 
   Scenario: One tag, one statement
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          @tag1
-          Feature: Process
-            Desc line 1
+          :tags: tag1
+          = Feature: Process
+          
+          Desc line 1
+          
+          == Scenario: Story One
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed
+     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Feature section will be created as follows
@@ -31,14 +34,17 @@ Feature: UML Feature To Document
 
   Scenario: Two tags, two statements
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          @tag1 @tag2
-          Feature: Process
-            Desc line 1
-            Desc line 2
+          :tags: tag1,tag2
+          = Feature: Process
+          
+          Desc line 1
+          Desc line 2
+          
+          == Scenario: Story One
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed
+     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Feature section will be created as follows
@@ -47,15 +53,18 @@ Feature: UML Feature To Document
 
   Scenario: Three tags, three statements
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          @tag1 @tag2 @tag3
-          Feature: Process
-            Desc line 1
-            Desc line 2
-            Desc line 3
+          :tags: tag1,tag2,tag3
+          = Feature: Process
+          
+          Desc line 1
+          Desc line 2
+          Desc line 3
+          
+          == Scenario: Story One
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed
+     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Feature section will be created as follows

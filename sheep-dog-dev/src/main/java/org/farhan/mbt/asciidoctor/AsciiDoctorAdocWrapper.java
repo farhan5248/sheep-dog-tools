@@ -117,6 +117,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	public Step createStep(AbstractScenario abstractScenario, String name) {
 		String keyword = name.split(" ")[0];
 		Step step = null;
+		// TODO delete the first 4 case statements after adoc migration is done
 		switch (keyword) {
 		case "Given":
 			step = SheepDogFactory.eINSTANCE.createGiven();
@@ -128,6 +129,18 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 			step = SheepDogFactory.eINSTANCE.createThen();
 			break;
 		case "And":
+			step = SheepDogFactory.eINSTANCE.createAnd();
+			break;
+		case "Given:":
+			step = SheepDogFactory.eINSTANCE.createGiven();
+			break;
+		case "When:":
+			step = SheepDogFactory.eINSTANCE.createWhen();
+			break;
+		case "Then:":
+			step = SheepDogFactory.eINSTANCE.createThen();
+			break;
+		case "And:":
 			step = SheepDogFactory.eINSTANCE.createAnd();
 			break;
 		}
@@ -264,7 +277,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) step.eAdapters().getFirst();
 		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
 		String keywordString = rc.getRule().getName();
-		return keywordString + " " + step.getName();
+		return keywordString + ": " + step.getName();
 	}
 
 	public String getStepDefinitionDescription(StepDefinition stepDefinitionSrc) {
@@ -486,4 +499,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		}
 		return os.toString();
 	}
+
+
 }

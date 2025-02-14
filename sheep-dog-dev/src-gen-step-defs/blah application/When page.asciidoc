@@ -1,0 +1,4 @@
+= Object: When page
+
+== Definition: is empty
+

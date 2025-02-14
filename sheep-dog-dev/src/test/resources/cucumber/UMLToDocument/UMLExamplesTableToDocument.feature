@@ -3,20 +3,27 @@ Feature: UML Examples Table To Document
 
   Scenario: One row, one cell
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          Feature: Process
+          = Feature: Process
           
-            Scenario Outline: Submit
-              Given The Object page is created as follows
-                | h1   |
-                | <h1> |
+          == Scenario: Submit
           
-              Examples: Examples 1
-                | h1 |
-                | v1 |
+          === Given: The Object page is created as follows
+          
+          |===
+          | h1
+          | {h1}
+          |===
+          
+          === Examples: Examples 1
+          
+          |===
+          | h1
+          | v1
+          |===
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed
+     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Scenario Outline Examples Table section will be created as follows
@@ -26,21 +33,28 @@ Feature: UML Examples Table To Document
 
   Scenario: Two rows, two cells
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          Feature: Process
+          = Feature: Process
           
-            Scenario Outline: Submit
-              Given The Object page is created as follows
-                | h1   | h2   |
-                | <h1> | <h2> |
+          == Scenario: Submit
           
-              Examples: Examples 1
-                    | h1 | h2 |
-                    | v1 | v2 |
-                    | v3 | v4 |
+          === Given: The Object page is created as follows
+          
+          |===
+          | h1 | h2
+          | {h1} | {h2}
+          |===
+          
+          === Examples: Examples 1
+          
+          |===
+          | h1 | h2
+          | v1 | v2
+          | v3 | v4
+          |===
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed
+     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Scenario Outline Examples Table section will be created as follows
@@ -51,22 +65,29 @@ Feature: UML Examples Table To Document
 
   Scenario: Three rows, three cells
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          Feature: Process
+          = Feature: Process
           
-            Scenario Outline: Submit
-              Given The Object page is created as follows
-                | h1   | h2   | h3   |
-                | <h1> | <h2> | <h3> |
+          == Scenario: Submit
           
-              Examples: Examples 1
-                    | h1 | h2 | h3 |
-                    | v1 | v2 | v3 |
-                    | v4 | v5 | v6 |
-                    | v7 | v8 | v9 |
+          === Given: The Object page is created as follows
+          
+          |===
+          | h1 | h2 | h3
+          | {h1} | {h2} | {h3}
+          |===
+          
+          === Examples: Examples 1
+          
+          |===
+          | h1 | h2 | h3
+          | v1 | v2 | v3
+          | v4 | v5 | v6
+          | v7 | v8 | v9
+          |===
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed
+     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Scenario Outline Examples Table section will be created as follows

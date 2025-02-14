@@ -58,6 +58,10 @@ Object: src/test/resources/cucumber/Process.feature file
 
           | Name | Tags | Statements |
 
+    Parameters: 3
+
+          | Name | Statements |
+
   Definition: Scenario Outline Steps Data Table section will be created as follows
 
     Parameters: 1

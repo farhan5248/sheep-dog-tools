@@ -23,3 +23,19 @@ Feature: Document Step To UML
           | specs::Process::Submit | The blah application, Then page is empty  |
           | specs::Process::Submit | The blah application, And page is empty   |
 
+  Scenario: Convert apostrophes
+
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+          """
+          = Feature: Process
+          
+          == Scenario: Submit's'
+          
+          === Given: The blah application, Given page isn't empty
+          """
+     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+     Then The mbt-transformer plugin, uml/pst.uml file will be present
+      And The uml/pst.uml file Interaction Messages section will be created as follows
+          | Interaction Name          | Message                                      |
+          | specs::Process::Submit's' | The blah application, Given page isn't empty |
+
