@@ -9,13 +9,13 @@ Feature: Document Scenario To UML
           
           == Scenario: Submit
           
-          === Given: The web application, Object1 page is empty
+          === Given: The blah application, Object1 page is empty
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
       And The uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name       | Message                                    |
-          | specs::Process::Submit | The web application, Object1 page is empty |
+          | Interaction Name       | Message                                     |
+          | specs::Process::Submit | The blah application, Object1 page is empty |
 
   Scenario: One tag, one statement, one step
 
@@ -28,7 +28,7 @@ Feature: Document Scenario To UML
           
           Desc line 1
           
-          === Given: The web application, Object1 page is empty
+          === Given: The blah application, Object1 page is empty
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
@@ -51,9 +51,9 @@ Feature: Document Scenario To UML
           Desc line 1
           Desc line 2
           
-          === Given: The web application, Object1 page is empty
+          === Given: The blah application, Object1 page is empty
           
-          === Given: The web application, Object2 page is empty
+          === Given: The blah application, Object2 page is empty
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
@@ -65,9 +65,9 @@ Feature: Document Scenario To UML
           | Interaction Name       | Comment                  |
           | specs::Process::Submit | Desc line 1\nDesc line 2 |
       And The uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name       | Message                                    |
-          | specs::Process::Submit | The web application, Object1 page is empty |
-          | specs::Process::Submit | The web application, Object2 page is empty |
+          | Interaction Name       | Message                                     |
+          | specs::Process::Submit | The blah application, Object1 page is empty |
+          | specs::Process::Submit | The blah application, Object2 page is empty |
 
   Scenario: Three tags, three statements, three steps
 
@@ -82,11 +82,11 @@ Feature: Document Scenario To UML
           Desc line 2
           Desc line 3
           
-          === Given: The web application, Object1 page is empty
+          === Given: The blah application, Object1 page is empty
           
-          === Given: The web application, Object2 page is empty
+          === Given: The blah application, Object2 page is empty
           
-          === Given: The web application, Object3 page is empty
+          === Given: The blah application, Object3 page is empty
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
@@ -99,10 +99,10 @@ Feature: Document Scenario To UML
           | Interaction Name       | Comment                               |
           | specs::Process::Submit | Desc line 1\nDesc line 2\nDesc line 3 |
       And The uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name       | Message                                    |
-          | specs::Process::Submit | The web application, Object1 page is empty |
-          | specs::Process::Submit | The web application, Object2 page is empty |
-          | specs::Process::Submit | The web application, Object3 page is empty |
+          | Interaction Name       | Message                                     |
+          | specs::Process::Submit | The blah application, Object1 page is empty |
+          | specs::Process::Submit | The blah application, Object2 page is empty |
+          | specs::Process::Submit | The blah application, Object3 page is empty |
 
   Scenario: Selected tags
 
@@ -113,12 +113,12 @@ Feature: Document Scenario To UML
           [tags="tag1"]
           == Scenario: Submit
           
-          === Given: The web application, Object1 page is empty
+          === Given: The blah application, Object1 page is empty
           
           [tags="tag2"]
           == Scenario: Submit2
           
-          === Given: The web application, Object1 page is empty
+          === Given: The blah application, Object1 page is empty
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
           | Tags |

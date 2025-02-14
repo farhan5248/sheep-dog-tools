@@ -5,6 +5,7 @@ import org.farhan.objects.mbttransformer.AsciidoctorToUmlGoal;
 import org.farhan.objects.mbttransformer.BlahObjectPageStepsJavaFile;
 import org.farhan.objects.mbttransformer.CucumberToUmlGoal;
 import org.farhan.objects.mbttransformer.Object1PageAsciidocFile;
+import org.farhan.objects.mbttransformer.ObjectPageAsciidocFile;
 import org.farhan.objects.mbttransformer.ObjectPageJavaFile;
 import org.farhan.objects.mbttransformer.ProcessAsciidocFile;
 import org.farhan.objects.mbttransformer.ProcessFeatureFile;
@@ -68,6 +69,8 @@ public final class Config extends AbstractModule implements InjectorSource {
 		bind(ObjectPageJavaFile.class).to(ObjectPageJavaFileImpl.class);
 		bind(ProcessAsciidocFile.class).to(ProcessAsciidocFileImpl.class);
 		bind(Object1PageAsciidocFile.class).to(Object1PageAsciidocFileImpl.class);
+		// TODO rename Object1 to Object
+		bind(ObjectPageAsciidocFile.class).to(Object1PageAsciidocFileImpl.class);
 		bind(ProcessFeatureFile.class).to(ProcessFeatureFileImpl.class);
 		bind(PstUmlFile.class).to(PstUmlFileImpl.class);
 		bind(UmlToAsciidoctorGoal.class).to(UmlToAsciidoctorGoalImpl.class);

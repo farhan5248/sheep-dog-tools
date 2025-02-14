@@ -49,4 +49,18 @@ public class MbtTransformerObject1PageAsciidocFileSteps extends TestSteps {
         object.setPath("Object1 page.asciidoc");
         object.assertInputOutputs(dataTable, "StepDefinitionSection");
     }
+
+    @Given("^The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc file is created as follows$")
+    public void theMbtTransformerPluginSrcTestResourcesAsciidocStepdefsBlahApplicationObject1PageAsciidocFileIsCreatedAsFollows(String docString) {
+        object.setComponent("mbt-transformer");
+        object.setPath("src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc");
+        object.setInputOutputs("Content", docString);
+    }
+
+    @Given("^The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc file will be present$")
+    public void theMbtTransformerPluginSrcTestResourcesAsciidocStepdefsBlahApplicationObject1PageAsciidocFileWillBePresent() {
+        object.setComponent("mbt-transformer");
+        object.setPath("src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc");
+        object.assertInputOutputs("Present");
+    }
 }

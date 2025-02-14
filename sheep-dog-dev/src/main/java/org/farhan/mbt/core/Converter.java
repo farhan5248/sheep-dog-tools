@@ -36,7 +36,9 @@ public abstract class Converter {
 		// TODO another hack until I implement more layers in the uml model or create
 		// different models. There shouldn't be a reference to Cucumber Project here.
 		if (project instanceof CucumberProject) {
-			for (ConvertibleObject co : model.getObjects(model.TEST_OBJECTS)) {
+			for (ConvertibleObject co : model.getObjects(model.TEST_STEPS)) {
+				// TODO I think I need to store the 3rd layer in asciidoc as well so that
+				// there's specs, behaviours, structure
 				objects.add(getPath((UMLClassWrapper) co, model.TEST_STEPS));
 				objects.add(getPath((UMLClassWrapper) co, model.TEST_OBJECTS));
 			}
@@ -44,7 +46,7 @@ public abstract class Converter {
 		return objects;
 	}
 
-	private String getPath(UMLClassWrapper srcObj, String tgtLayer) {
+	protected String getPath(UMLClassWrapper srcObj, String tgtLayer) {
 		String path = srcObj.getPath();
 		String[] pathParts = path.split("::");
 		String componentName = pathParts[2];
@@ -54,13 +56,11 @@ public abstract class Converter {
 			path = path.replace("pst::" + model.TEST_CASES, "");
 		}
 		if (tgtLayer.contentEquals(model.TEST_STEPS)) {
-			path = path.replace("pst::" + model.TEST_OBJECTS + "::" + componentName,
-					"::" + componentName.toLowerCase());
+			path = path.replace("pst::" + model.TEST_STEPS + "::" + componentName, "::" + componentName.toLowerCase());
 			path = path.replace(objectName, StringUtils.capitalize(componentName) + objectName + "Steps");
 		}
 		if (tgtLayer.contentEquals(model.TEST_OBJECTS)) {
-			path = path.replace("pst::" + model.TEST_OBJECTS + "::" + componentName,
-					"::" + componentName.toLowerCase());
+			path = path.replace("pst::" + model.TEST_STEPS + "::" + componentName, "::" + componentName.toLowerCase());
 		}
 
 		path = path.replace("::", "/");
@@ -95,7 +95,7 @@ public abstract class Converter {
 				return ((UMLClassWrapper) co).getPath();
 			}
 		}
-		for (ConvertibleObject co : model.getObjects(model.TEST_OBJECTS)) {
+		for (ConvertibleObject co : model.getObjects(model.TEST_STEPS)) {
 			if (getPath((UMLClassWrapper) co, project.TEST_STEPS).contentEquals(path)) {
 				return ((UMLClassWrapper) co).getPath();
 			}

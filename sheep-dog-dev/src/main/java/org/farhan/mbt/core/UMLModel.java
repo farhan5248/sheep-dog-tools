@@ -32,7 +32,7 @@ public class UMLModel extends ConvertibleProject {
 		theSystem = UMLFactory.eINSTANCE.createModel();
 		theSystem.setName("pst");
 		theSystem.createNestedPackage(TEST_CASES);
-		theSystem.createNestedPackage(TEST_OBJECTS);
+		theSystem.createNestedPackage(TEST_STEPS);
 		ConvertibleProject.tags = tags;
 	}
 
@@ -55,7 +55,7 @@ public class UMLModel extends ConvertibleProject {
 			for (Class c : objects) {
 				createObject(c.getQualifiedName());
 			}
-			objects = getPackagedElements(theSystem.getNestedPackage(TEST_OBJECTS));
+			objects = getPackagedElements(theSystem.getNestedPackage(TEST_STEPS));
 			for (Class c : objects) {
 				createObject(c.getQualifiedName());
 			}
@@ -87,10 +87,10 @@ public class UMLModel extends ConvertibleProject {
 	public ArrayList<ConvertibleObject> getObjects(String layer) {
 		if (layer.equalsIgnoreCase(TEST_CASES)) {
 			return firstLayerObjects;
-		} else if (layer.equalsIgnoreCase(TEST_OBJECTS)) {
+		} else if (layer.equalsIgnoreCase(TEST_STEPS)) {
 			return secondLayerObjects;
 		} else {
-			return null;
+			return thirdLayerObjects;
 		}
 	}
 
@@ -101,12 +101,12 @@ public class UMLModel extends ConvertibleProject {
 			theClass = addClass(qualifiedName);
 		}
 		UMLClassWrapper ucw = new UMLClassWrapper(this, theClass);
-		if (qualifiedName.startsWith("pst::" + TEST_CASES)) {
-			firstLayerObjects.add(ucw);
-		} else if (qualifiedName.startsWith("pst::" + TEST_OBJECTS)) {
-			secondLayerObjects.add(ucw);
-		} else if (qualifiedName.startsWith("pst::" + TEST_STEPS)) {
+		if (qualifiedName.startsWith("pst::" + TEST_OBJECTS)) {
 			thirdLayerObjects.add(ucw);
+		} else if (qualifiedName.startsWith("pst::" + TEST_STEPS)) {
+			secondLayerObjects.add(ucw);
+		} else if (qualifiedName.startsWith("pst::" + TEST_CASES)) {
+			firstLayerObjects.add(ucw);
 		}
 		return ucw;
 	}

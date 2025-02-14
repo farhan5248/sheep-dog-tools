@@ -1,9 +1,11 @@
 @debug
 Feature: UML Step Definition To Document
 
+  TODO there's no test for no parameters and docstring vs datatable. Other tests implicitly cover docstring as a special parameter with the name content
+
   Scenario: No statement, one step parameter
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/web application/Object1 page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc file is created as follows
           """
           = Object: Object1 page
           
@@ -17,14 +19,14 @@ Feature: UML Step Definition To Document
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/web application/Object1 page.asciidoc file will be present
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc file will be present
       And The mbt-transformer plugin, Object1 page.asciidoc file Step Definition Parameters Table section will be created as follows
           | Name                  | Parameters | Row |
           | is created as follows | 1          | h1  |
 
   Scenario: One statement, one step parameter
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/web application/Object1 page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc file is created as follows
           """
           = Object: Object1 page
           
@@ -40,14 +42,14 @@ Feature: UML Step Definition To Document
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/web application/Object1 page.asciidoc file will be present
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc file will be present
       And The mbt-transformer plugin, Object1 page.asciidoc file Step Definition section will be created as follows
           | Name                  | Description |
           | is created as follows | Desc line 1 |
 
   Scenario Outline: Two statements, two step parameters
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/web application/Object1 page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc file is created as follows
           """
           = Object: Object1 page
           
@@ -70,7 +72,7 @@ Feature: UML Step Definition To Document
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/web application/Object1 page.asciidoc file will be present
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc file will be present
       And The mbt-transformer plugin, Object1 page.asciidoc file Step Definition section will be created as follows
           | Name                  | Description              |
           | is created as follows | Desc line 1\nDesc line 2 |
@@ -86,7 +88,7 @@ Feature: UML Step Definition To Document
 
   Scenario Outline: Three statements, three step parameters
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/web application/Object1 page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc file is created as follows
           """
           = Object: Object1 page
           
@@ -116,7 +118,7 @@ Feature: UML Step Definition To Document
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/web application/Object1 page.asciidoc file will be present
+     Then The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc file will be present
       And The mbt-transformer plugin, Object1 page.asciidoc file Step Definition section will be created as follows
           | Name                  | Description                           |
           | is created as follows | Desc line 1\nDesc line 2\nDesc line 3 |

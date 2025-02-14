@@ -1,9 +1,11 @@
 @debug
 Feature: Document Step Definition To UML
 
+  TODO add tests for document parameters
+
   Scenario: No statement, one step parameter
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/web application/Object1 page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc file is created as follows
           """
           = Object: Object1 page
           
@@ -18,12 +20,12 @@ Feature: Document Step Definition To UML
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
       And The uml/pst.uml file Interaction Annotations section will be created as follows
-          | Interaction Name                                               | Annotation Name | Annotation Detail |
-          | stepdefs::web application::Object1 page::is created as follows | 1               | 0 -> h1\|         |
+          | Interaction Name                                                | Annotation Name | Annotation Detail |
+          | stepdefs::blah application::Object1 page::is created as follows | 1               | 0 -> h1\|         |
 
   Scenario: One statement, one step parameter
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/web application/Object1 page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc file is created as follows
           """
           = Object: Object1 page
           
@@ -40,12 +42,12 @@ Feature: Document Step Definition To UML
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
       And The uml/pst.uml file Interaction Comments section will be created as follows
-          | Interaction Name                                               | Comment     |
-          | stepdefs::web application::Object1 page::is created as follows | Desc line 1 |
+          | Interaction Name                                                | Comment     |
+          | stepdefs::blah application::Object1 page::is created as follows | Desc line 1 |
 
   Scenario Outline: Two statements, two step parameters
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/web application/Object1 page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc file is created as follows
           """
           = Object: Object1 page
           
@@ -69,11 +71,11 @@ Feature: Document Step Definition To UML
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
       And The uml/pst.uml file Interaction Comments section will be created as follows
-          | Interaction Name                                               | Comment                  |
-          | stepdefs::web application::Object1 page::is created as follows | Desc line 1\nDesc line 2 |
+          | Interaction Name                                                | Comment                  |
+          | stepdefs::blah application::Object1 page::is created as follows | Desc line 1\nDesc line 2 |
       And The uml/pst.uml file Interaction Annotations section will be created as follows
-          | Interaction Name                                               | Annotation Name | Annotation Detail |
-          | stepdefs::web application::Object1 page::is created as follows | <Index>         | 0 -> h<Index>\|   |
+          | Interaction Name                                                | Annotation Name | Annotation Detail |
+          | stepdefs::blah application::Object1 page::is created as follows | <Index>         | 0 -> h<Index>\|   |
 
     Examples: Indices
 
@@ -83,7 +85,7 @@ Feature: Document Step Definition To UML
 
   Scenario Outline: Three statements, three step parameters
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/web application/Object1 page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc file is created as follows
           """
           = Object: Object1 page
           
@@ -114,11 +116,11 @@ Feature: Document Step Definition To UML
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
       And The uml/pst.uml file Interaction Comments section will be created as follows
-          | Interaction Name                                               | Comment                               |
-          | stepdefs::web application::Object1 page::is created as follows | Desc line 1\nDesc line 2\nDesc line 3 |
+          | Interaction Name                                                | Comment                               |
+          | stepdefs::blah application::Object1 page::is created as follows | Desc line 1\nDesc line 2\nDesc line 3 |
       And The uml/pst.uml file Interaction Annotations section will be created as follows
-          | Interaction Name                                               | Annotation Name | Annotation Detail |
-          | stepdefs::web application::Object1 page::is created as follows | <Index>         | 0 -> h<Index>\|   |
+          | Interaction Name                                                | Annotation Name | Annotation Detail |
+          | stepdefs::blah application::Object1 page::is created as follows | <Index>         | 0 -> h<Index>\|   |
 
     Examples: Indices
 

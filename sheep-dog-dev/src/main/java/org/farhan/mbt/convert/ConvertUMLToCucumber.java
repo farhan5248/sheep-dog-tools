@@ -1,6 +1,8 @@
 package org.farhan.mbt.convert;
 
 import java.util.ArrayList;
+
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
@@ -187,4 +189,36 @@ public class ConvertUMLToCucumber extends Converter {
 		project = new CucumberProject(this.tags, this.fa);
 		project.init();
 	}
+
+	protected String getPath(UMLClassWrapper srcObj, String tgtLayer) {
+		String path = srcObj.getPath();
+		String[] pathParts = path.split("::");
+		String componentName = pathParts[2];
+		String objectName = pathParts[pathParts.length - 1];
+		// TODO this is basically a duplicate of the parent. Is it worth having both
+		// directions in one converter and then put these methods only in the
+		// converters?
+		String newComponentName = componentName.replaceFirst("\\s[^\\s]+$", "");
+		String newObjectName = removeDelimiterAndCapitalize(objectName, " ");
+
+		if (tgtLayer.contentEquals(model.TEST_CASES)) {
+			path = path.replace("pst::" + model.TEST_CASES, "");
+		}
+		if (tgtLayer.contentEquals(model.TEST_STEPS)) {
+			path = path.replace("pst::" + model.TEST_STEPS + "::" + componentName,
+					"::" + newComponentName.toLowerCase());
+			path = path.replace(objectName, StringUtils.capitalize(newComponentName) + newObjectName + "Steps");
+		}
+		if (tgtLayer.contentEquals(model.TEST_OBJECTS)) {
+			path = path.replace("pst::" + model.TEST_STEPS + "::" + componentName,
+					"::" + newComponentName.toLowerCase());
+			path = path.replace(objectName, newObjectName);
+		}
+
+		path = path.replace("::", "/");
+		path = project.getDir(tgtLayer) + path + project.getFileExt(tgtLayer);
+
+		return path;
+	}
+
 }

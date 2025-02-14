@@ -5,7 +5,7 @@ Feature: Document StepObject To UML
 
   Scenario: No statements
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/web application/Object1 page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc file is created as follows
           """
           = Object: Object1 page
           
@@ -14,12 +14,12 @@ Feature: Document StepObject To UML
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
       And The uml/pst.uml file Class section will be created as follows
-          | Class Name                              |
-          | stepdefs::web application::Object1 page |
+          | Class Name                               |
+          | stepdefs::blah application::Object1 page |
 
   Scenario: One statement
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/web application/Object1 page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc file is created as follows
           """
           = Object: Object1 page
           
@@ -30,12 +30,12 @@ Feature: Document StepObject To UML
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
       And The uml/pst.uml file Class Comments section will be created as follows
-          | Class Name                              | Comment     |
-          | stepdefs::web application::Object1 page | Desc line 1 |
+          | Class Name                               | Comment     |
+          | stepdefs::blah application::Object1 page | Desc line 1 |
 
   Scenario: Two statements
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/web application/Object1 page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc file is created as follows
           """
           = Object: Object1 page
           
@@ -47,12 +47,12 @@ Feature: Document StepObject To UML
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
       And The uml/pst.uml file Class Comments section will be created as follows
-          | Class Name                              | Comment                  |
-          | stepdefs::web application::Object1 page | Desc line 1\nDesc line 2 |
+          | Class Name                               | Comment                  |
+          | stepdefs::blah application::Object1 page | Desc line 1\nDesc line 2 |
 
   Scenario: Three statements
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/web application/Object1 page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object1 page.asciidoc file is created as follows
           """
           = Object: Object1 page
           
@@ -65,6 +65,6 @@ Feature: Document StepObject To UML
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
       And The uml/pst.uml file Class Comments section will be created as follows
-          | Class Name                              | Comment                               |
-          | stepdefs::web application::Object1 page | Desc line 1\nDesc line 2\nDesc line 3 |
+          | Class Name                               | Comment                               |
+          | stepdefs::blah application::Object1 page | Desc line 1\nDesc line 2\nDesc line 3 |
 

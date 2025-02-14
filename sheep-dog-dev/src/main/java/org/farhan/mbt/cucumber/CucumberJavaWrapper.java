@@ -55,24 +55,30 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		}
 	}
 
-	protected MethodDeclaration createStepDefinitionForStepDef(String step) throws Exception {
-		theJavaClass.addImport(getFactoryImport(step));
-		MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(step));
+	protected MethodDeclaration createStepDefinitionForStepDef(String stepDefinitionName) throws Exception {
+		// TODO stepDefinitionName used to be step. Now that it's not, there's no
+		// component or object information in the step. To get that, the model will have
+		// all the information.
+		// What it won't have is full path for an object vs just the object name.
+		// When creating the uml model, update each step with the full name
+		theJavaClass.addImport(getFactoryImport(stepDefinitionName));
+		MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(stepDefinitionName));
 		{
 			if (aMethod.getAnnotations().isEmpty()) {
-				aMethod.addSingleMemberAnnotation("Given", "\"^" + step + "$\"");
+				aMethod.addSingleMemberAnnotation("Given", "\"^" + stepDefinitionName + "$\"");
 			}
 		}
 		BlockStmt body = aMethod.getBody().get();
 		if (body.isEmpty()) {
 			body = aMethod.createBody();
-			body.addStatement(getCallForFactory(step) + getCallForComponent(step) + ";");
-			body.addStatement(getCallForFactory(step) + getCallForPath(step) + ";");
-			if (StepHelper.isEdge(step)) {
-				body.addStatement(getCallForFactory(step) + getCallForTransition() + ";");
+			body.addStatement(getCallForFactory(stepDefinitionName) + getCallForComponent(stepDefinitionName) + ";");
+			body.addStatement(getCallForFactory(stepDefinitionName) + getCallForPath(stepDefinitionName) + ";");
+			if (StepHelper.isEdge(stepDefinitionName)) {
+				body.addStatement(getCallForFactory(stepDefinitionName) + getCallForTransition() + ";");
 			} else {
-				if (StepHelper.getAttachment(step).isEmpty()) {
-					body.addStatement(getCallForFactory(step) + getCallForInputOutputsForState(step) + ";");
+				if (StepHelper.getAttachment(stepDefinitionName).isEmpty()) {
+					body.addStatement(getCallForFactory(stepDefinitionName)
+							+ getCallForInputOutputsForState(stepDefinitionName) + ";");
 				}
 			}
 		}

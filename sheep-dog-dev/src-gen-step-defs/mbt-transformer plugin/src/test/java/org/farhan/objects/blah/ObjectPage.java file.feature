@@ -26,5 +26,9 @@ Object: src/test/java/org/farhan/objects/blah/ObjectPage.java file
 
           | Method Name |
 
+    Parameters: 4
+
+          | Method Name | Visibility | Return Type | Parameter Name | Parameter Type |
+
   Definition: is created as follows
 

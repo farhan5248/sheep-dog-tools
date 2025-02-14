@@ -4,10 +4,13 @@ import java.util.HashMap;
 
 import org.farhan.common.AdocFileObject;
 import org.farhan.objects.mbttransformer.Object1PageAsciidocFile;
+import org.farhan.objects.mbttransformer.ObjectPageAsciidocFile;
+
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class Object1PageAsciidocFileImpl extends AdocFileObject implements Object1PageAsciidocFile {
+public class Object1PageAsciidocFileImpl extends AdocFileObject
+		implements Object1PageAsciidocFile, ObjectPageAsciidocFile {
 
 	@Override
 	public void assertObjectSectionName(HashMap<String, String> keyMap) {
