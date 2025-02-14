@@ -1,6 +1,8 @@
 @debug
 Feature: Preserve Existing Methods
 
+  TODO start with adoc file and feature and java code and then make sure methods are preserved
+
   Background: Create a feature file
 
     Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows

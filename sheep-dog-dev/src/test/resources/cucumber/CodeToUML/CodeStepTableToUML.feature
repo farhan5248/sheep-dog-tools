@@ -18,9 +18,6 @@ Feature: Convert Step Table To UML
           | Interaction Name       | Message                               | Argument Name | Annotation Detail |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 0 -> h1 \|        |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 1 -> v1 \|        |
-      And The uml/pst.uml file Interaction Annotations section will be created as follows
-          | Interaction Name                                                             | Annotation Name | Annotation Detail |
-          | objects::InitialComponent::ObjectPage::The Object page is created as follows | parameters      | h1                |
 
   Scenario: Two rows, two cells
 
@@ -42,10 +39,6 @@ Feature: Convert Step Table To UML
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 0 -> h1 \|h2 \|   |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 1 -> v1 \|v2 \|   |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 2 -> v3 \|v4 \|   |
-      And The uml/pst.uml file Interaction Annotations section will be created as follows
-          | Interaction Name                                                             | Annotation Name | Annotation Detail |
-          | objects::InitialComponent::ObjectPage::The Object page is created as follows | parameters      | h1                |
-          | objects::InitialComponent::ObjectPage::The Object page is created as follows | parameters      | h2                |
 
   Scenario: Three rows, three cells
 
@@ -69,27 +62,4 @@ Feature: Convert Step Table To UML
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 1 -> v1 \|v2 \|v3 \| |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 2 -> v4 \|v5 \|v6 \| |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 3 -> v7 \|v8 \|v9 \| |
-      And The uml/pst.uml file Interaction Annotations section will be created as follows
-          | Interaction Name                                                             | Annotation Name | Annotation Detail |
-          | objects::InitialComponent::ObjectPage::The Object page is created as follows | parameters      | h1                |
-          | objects::InitialComponent::ObjectPage::The Object page is created as follows | parameters      | h2                |
-          | objects::InitialComponent::ObjectPage::The Object page is created as follows | parameters      | h3                |
-
-  Scenario: Escaped cell data
-
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
-          """
-          Feature: Process
-          
-            Scenario: Submit
-              Given The Object page is created as follows
-                    | h1       |
-                    | \| v1 \| |
-          """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Interaction Messages section will be created as follows
-          | Interaction Name       | Message                               | Argument Name | Annotation Detail    |
-          | specs::Process::Submit | The Object page is created as follows | dataTable     | 0 -> h1 \|           |
-          | specs::Process::Submit | The Object page is created as follows | dataTable     | 1 -> \\\| v1 \\\| \| |
 

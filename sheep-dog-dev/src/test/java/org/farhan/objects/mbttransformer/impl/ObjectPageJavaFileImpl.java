@@ -3,11 +3,16 @@ package org.farhan.objects.mbttransformer.impl;
 import java.util.HashMap;
 
 import org.farhan.common.JavaFileObject;
+import org.farhan.objects.mbttransformer.HomePageJavaFile;
+import org.farhan.objects.mbttransformer.LoginPageJavaFile;
+import org.farhan.objects.mbttransformer.LogoutPageJavaFile;
 import org.farhan.objects.mbttransformer.ObjectPageJavaFile;
 
 import io.cucumber.guice.ScenarioScoped;
+
 @ScenarioScoped
-public class ObjectPageJavaFileImpl extends JavaFileObject implements ObjectPageJavaFile {
+public class ObjectPageJavaFileImpl extends JavaFileObject
+		implements ObjectPageJavaFile, HomePageJavaFile, LoginPageJavaFile, LogoutPageJavaFile {
 
 	public void assertContent(HashMap<String, String> keyMap) {
 		assertContent(keyMap.get("Content"));

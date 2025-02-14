@@ -3,12 +3,16 @@ package org.farhan.objects.mbttransformer.impl;
 import java.util.HashMap;
 
 import org.farhan.common.JavaFileObject;
+import org.farhan.objects.mbttransformer.BlahHomePageStepsJavaFile;
+import org.farhan.objects.mbttransformer.BlahLoginPageStepsJavaFile;
+import org.farhan.objects.mbttransformer.BlahLogoutPageStepsJavaFile;
 import org.farhan.objects.mbttransformer.BlahObjectPageStepsJavaFile;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class BlahObjectPageStepsJavaFileImpl extends JavaFileObject implements BlahObjectPageStepsJavaFile {
+public class BlahObjectPageStepsJavaFileImpl extends JavaFileObject implements BlahObjectPageStepsJavaFile,
+		BlahHomePageStepsJavaFile, BlahLoginPageStepsJavaFile, BlahLogoutPageStepsJavaFile {
 
 	public void assertContent(HashMap<String, String> keyMap) {
 		assertContent(keyMap.get("Content"));

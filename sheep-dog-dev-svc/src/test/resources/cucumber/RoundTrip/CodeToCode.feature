@@ -39,24 +39,6 @@ Feature: Code To Code
                     |  h3 |  h4 |
                     | v31 | v41 |
           """
-      And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows
-          """
-          package org.farhan.stepdefs.blah;
-          
-          import io.cucumber.java.en.Given;
-          import io.cucumber.datatable.DataTable;
-          import org.farhan.common.BlahFactory;
-          
-          public class BlahObjectPageSteps {
-          
-              @Given("^The blah application, something/Object page is empty$")
-              public void theBlahApplicationSomethingObjectPageIsEmpty() {
-                  BlahFactory.get("ObjectPage").setComponent("blah");
-                  BlahFactory.get("ObjectPage").setPath("something/Object");
-                  BlahFactory.get("ObjectPage").setInputOutputs("Empty");
-              }
-          }
-          """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed with
           | Tags |
           | tag1 |
@@ -99,33 +81,5 @@ Feature: Code To Code
           
                     | h3  | h4  |
                     | v31 | v41 |
-          """
-
-  Scenario: Java file is preserved
-
-     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
-          """
-          package org.farhan.stepdefs.blah;
-          
-          import io.cucumber.java.en.Given;
-          import io.cucumber.datatable.DataTable;
-          import org.farhan.common.BlahFactory;
-          
-          public class BlahObjectPageSteps {
-          
-              @Given("^The blah application, something/Object page is empty$")
-              public void theBlahApplicationSomethingObjectPageIsEmpty() {
-                  BlahFactory.get("ObjectPage").setComponent("blah");
-                  BlahFactory.get("ObjectPage").setPath("something/Object");
-                  BlahFactory.get("ObjectPage").setInputOutputs("Empty");
-              }
-          
-              @Given("^The blah application, something/Object page is created as follows$")
-              public void theBlahApplicationSomethingObjectPageIsCreatedAsFollows(String docString) {
-                  BlahFactory.get("ObjectPage").setComponent("blah");
-                  BlahFactory.get("ObjectPage").setPath("something/Object");
-                  BlahFactory.get("ObjectPage").setInputOutputs("Content", docString);
-              }
-          }
           """
 

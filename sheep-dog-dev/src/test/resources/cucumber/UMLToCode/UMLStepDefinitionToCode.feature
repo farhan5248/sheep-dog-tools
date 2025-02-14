@@ -46,7 +46,7 @@ Feature: UML Step Definition To Code
           | Content
           |===
           """
-      And The mbt-transformer plugin, cucumber-to-uml goal is executed
+      And The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
   Scenario: Layer 2 without parameters without DI
 

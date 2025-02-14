@@ -25,7 +25,6 @@ public class ConvertCucumberToUML extends Converter {
 
 	private CucumberFeatureWrapper srcObj;
 	private UMLClassWrapper tgtObj;
-	private UMLClassWrapper tgtObj2;
 	private String lastComponent = "InitialComponent";
 
 	public ConvertCucumberToUML(String tags, ObjectRepository fa, Logger log) {
@@ -53,9 +52,6 @@ public class ConvertCucumberToUML extends Converter {
 
 	private void convertDocString(Message step, Step stepSrc) {
 		tgtObj.createDocString(step, srcObj.getDocString(stepSrc));
-
-		Interaction stepDef = tgtObj2.createStepDefinition(srcObj.getStep(stepSrc));
-		tgtObj2.createStepDefinitionParameter(stepDef, "Content");
 	}
 
 	private void convertExamples(Interaction scenarioOutline, Examples examplesSrc) {
@@ -111,13 +107,6 @@ public class ConvertCucumberToUML extends Converter {
 	private void convertStep(Interaction abstractScenario, Step stepSrc, AbstractScenario abstractScenarioSrc) {
 		Message step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
 
-		// TODO in the future, these two lines should be moved out of this method.
-		// Instead there should be a convertStepDefinition method used when parsing the
-		// layer 2 asciidoctor files
-		tgtObj2 = (UMLClassWrapper) model
-				.createObject(convertSrcPath(getStepObjName(stepSrc.getName()), project.TEST_OBJECTS));
-		tgtObj2.createStepDefinition(srcObj.getStep(stepSrc));
-
 		if (srcObj.hasDocString(stepSrc)) {
 			convertDocString(step, stepSrc);
 		} else if (srcObj.hasStepTable(stepSrc)) {
@@ -135,11 +124,6 @@ public class ConvertCucumberToUML extends Converter {
 
 	private void convertStepTable(Message step, Step stepSrc, AbstractScenario abstractScenarioSrc) {
 		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
-
-		Interaction stepDef = tgtObj2.createStepDefinition(srcObj.getStep(stepSrc));
-		for (String param : srcObj.getStepTable(stepSrc).getFirst()) {
-			tgtObj2.createStepDefinitionParameter(stepDef, param);
-		}
 	}
 
 	protected String getComponentName(String step) {
@@ -153,25 +137,6 @@ public class ConvertCucumberToUML extends Converter {
 			lastComponent = name;
 		}
 		return name;
-	}
-
-	private String getObjectName(String step) {
-		String name = StepHelper.getObjectName(step);
-		String nameParts[] = name.split("/");
-		name = nameParts[nameParts.length - 1];
-		name = removeDelimiterAndCapitalize(name, "\\.");
-		name = removeDelimiterAndCapitalize(name, "\\-");
-		name = removeDelimiterAndCapitalize(name, " ");
-		name = StringUtils.capitalize(name);
-		return name;
-	}
-
-	// TODO see comment in ConvertAsciidoctorToUML for getStepObjName
-	private String getStepObjName(String stepName) {
-		String objectName = getObjectName(stepName);
-		String objectType = StringUtils.capitalize(StepHelper.getObjectType(stepName));
-		String componentName = getComponentName(stepName);
-		return project.getDir(project.TEST_OBJECTS) + "/" + componentName + "/" + objectName + objectType + ".java";
 	}
 
 	protected void initProjects() throws Exception {

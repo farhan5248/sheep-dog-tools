@@ -145,11 +145,23 @@ public class ConvertUMLToCucumber extends Converter {
 		}
 	}
 
-	private void convertStepDefinition(Interaction stepDefinition) throws Exception {
+	private String getStep(Interaction stepDefinition) {
 		String stepDefinitionName = srcObj.getStepDefinitionName(stepDefinition);
-		tgtObj2.createStepDefinition(stepDefinitionName);
-		tgtObj2.setStepDefinitionParameters(stepDefinitionName,
-				srcObj.getStepDefinitionParameterList(stepDefinitionName));
+		String component = srcObj.getPath().replace("pst::stepdefs::", "").split("::")[0];
+		String object = srcObj.getPath().split("::" + component + "::")[1].replace("::", "/");
+		return "The " + component + ", " + object + " " + stepDefinitionName;
+	}
+
+	private void convertStepDefinition(Interaction stepDefinition) throws Exception {
+		String step = getStep(stepDefinition);
+		tgtObj2.createStepDefinition(step);
+
+		ArrayList<String> parametersList = srcObj.getStepDefinitionParameterList(stepDefinition);
+		convertStepParameters(stepDefinition, parametersList);
+	}
+
+	private void convertStepParameters(Interaction stepDefinition, ArrayList<String> parametersSrc) throws Exception {
+		tgtObj2.setStepDefinitionParameters(getStep(stepDefinition), parametersSrc);
 	}
 
 	private void convertStepDefinitionList() throws Exception {
@@ -195,9 +207,8 @@ public class ConvertUMLToCucumber extends Converter {
 		String[] pathParts = path.split("::");
 		String componentName = pathParts[2];
 		String objectName = pathParts[pathParts.length - 1];
-		// TODO this is basically a duplicate of the parent. Is it worth having both
-		// directions in one converter and then put these methods only in the
-		// converters?
+		// TODO this is basically a duplicate of the parent. put each method in a
+		// [Cucumber|AsciiDoctor]PathConverter class
 		String newComponentName = componentName.replaceFirst("\\s[^\\s]+$", "");
 		String newObjectName = removeDelimiterAndCapitalize(objectName, " ");
 

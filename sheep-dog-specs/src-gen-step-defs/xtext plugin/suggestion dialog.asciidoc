@@ -1,0 +1,20 @@
+= Object: suggestion dialog
+
+== Definition: will be set as follows
+
+=== Parameters: 1
+
+[options="header"]
+|===
+| Suggestion | Suggestion Name | Suggestion Description
+|===
+
+=== Parameters: 2
+
+[options="header"]
+|===
+| Suggestion | Suggestion Name
+|===
+
+== Definition: will be empty
+

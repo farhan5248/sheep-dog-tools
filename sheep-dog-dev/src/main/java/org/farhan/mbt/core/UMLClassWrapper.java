@@ -254,6 +254,10 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return theClass.getEAnnotations().getFirst().getDetails().get(0).getKey();
 	}
 
+	public String getStepObjectName() {
+		return theClass.getEAnnotations().getFirst().getDetails().get(0).getKey();
+	}
+
 	public ArrayList<String> getFeatureTags() {
 		ArrayList<String> tags = new ArrayList<String>();
 		if (theClass.getEAnnotations().size() == 2) {
@@ -317,16 +321,20 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return stepDef.getName();
 	}
 
-	public ArrayList<String> getStepDefinitionParameterList(String stepDefinitionName) {
+	public ArrayList<String> getStepDefinitionParameterList(Interaction stepDefinition) {
 
-		Interaction stepDefinition = createInteraction(theClass, stepDefinitionName, "");
-		ArrayList<String> parameters = new ArrayList<String>();
-		if (stepDefinition.getEAnnotation("parameters") != null) {
-			for (Entry<String, String> t : stepDefinition.getEAnnotation("parameters").getDetails()) {
-				parameters.add(t.getKey());
+		ArrayList<String> parametersList = new ArrayList<String>();
+		for (EAnnotation a : stepDefinition.getEAnnotations()) {
+			if (!a.getSource().contentEquals("StepDefinition")) {
+				// TODO use a.getDetails().values() but do the split first
+				for (String s : a.getDetails().getFirst().getValue().split("\\|")) {
+					if (!parametersList.contains(s.trim())) {
+						parametersList.add(s.trim());
+					}
+				}
 			}
 		}
-		return parameters;
+		return parametersList;
 	}
 
 	public ArrayList<Message> getStepList(Interaction abstractScenario) {
