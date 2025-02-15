@@ -26,3 +26,5 @@ Object: src/test/resources/asciidoc/stepdefs/blah application/Object page.asciid
 
           | Name | Statements |
 
+  Definition: will be created as follows
+

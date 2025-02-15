@@ -1,10 +1,10 @@
+:tags:debug
 = Feature: Propose Object
 
 == Scenario: No object no component has previous in background
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file background steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name                                
 | The daily batchjob, Input file is present
@@ -12,7 +12,6 @@
 
 === And: The Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name
 | empty    
@@ -22,7 +21,6 @@
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
 | Suggestion     | Suggestion Name
 | The Input file | Input file     
@@ -30,9 +28,10 @@
 
 == Scenario: No object no component no previous no component objects
 
+TODO make this an outline with various steps like "The" or "The batchjob" etc
+
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name
 | empty    
@@ -46,7 +45,6 @@
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name
 | empty    
@@ -54,7 +52,6 @@
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
-[options="header"]
 |===
 | Object Name                       | Step Definition Name
 | daily batchjob/Input file.feature | is present          
@@ -64,17 +61,15 @@
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name        
-| The daily batchjob, | daily batchjob
+| Suggestion          | Suggestion Name
+| The daily batchjob, | daily batchjob 
 |===
 
 == Scenario: No object no component has previous no component objects
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name                                
 | The daily batchjob, Input file is present
@@ -85,17 +80,15 @@
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name
-| The Input file | Input file 
+| Suggestion     | Suggestion Name
+| The Input file | Input file     
 |===
 
 == Scenario: No object no component has previous has component objects
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name                                
 | The daily batchjob, Input file is present
@@ -104,28 +97,25 @@
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
-[options="header"]
 |===
-| Object Name | Step Definition Name            
-| daily batchjob/Input file.feature | is present
+| Object Name                       | Step Definition Name
+| daily batchjob/Input file.feature | is present          
 |===
 
 === When: The suggestion action is performed
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name        
-| The Input file | Input file         
-| The daily batchjob, | daily batchjob
+| Suggestion          | Suggestion Name
+| The Input file      | Input file     
+| The daily batchjob, | daily batchjob 
 |===
 
 == Scenario: No object has component no previous no component objects
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name          
 | The daily batchjob,
@@ -139,7 +129,6 @@
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name          
 | The daily batchjob,
@@ -147,27 +136,24 @@
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
-[options="header"]
 |===
-| Object Name | Step Definition Name            
-| daily batchjob/Input file.feature | is present
+| Object Name                       | Step Definition Name
+| daily batchjob/Input file.feature | is present          
 |===
 
 === When: The suggestion action is performed
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name               
-| The daily batchjob, Input file | Input file
+| Suggestion                     | Suggestion Name
+| The daily batchjob, Input file | Input file     
 |===
 
 == Scenario: No object has component has previous no component objects
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name                                
 | The daily batchjob, Input file is present
@@ -178,17 +164,15 @@
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name
-| The Input file | Input file 
+| Suggestion     | Suggestion Name
+| The Input file | Input file     
 |===
 
 == Scenario: No object has component has previous has component objects
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name                                
 | The daily batchjob, Input file is present
@@ -197,27 +181,24 @@
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
-[options="header"]
 |===
-| Object Name | Step Definition Name            
-| daily batchjob/Input file.feature | is present
+| Object Name                       | Step Definition Name
+| daily batchjob/Input file.feature | is present          
 |===
 
 === When: The suggestion action is performed
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name
-| The Input file | Input file 
+| Suggestion     | Suggestion Name
+| The Input file | Input file     
 |===
 
 == Scenario: Has object no component no previous no component objects
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name     
 | The Input file
@@ -227,17 +208,17 @@
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name
-| The Input file is | is      
+| Suggestion        | Suggestion Name
+| The Input file is | is             
 |===
 
 == Scenario: Has object no component no previous has component objects
 
+TODO the assertion should be that is present won't be suggested because this step has no component
+
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name     
 | The Input file
@@ -245,27 +226,24 @@
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
-[options="header"]
 |===
-| Object Name | Step Definition Name            
-| daily batchjob/Input file.feature | is present
+| Object Name                       | Step Definition Name
+| daily batchjob/Input file.feature | is present          
 |===
 
 === When: The suggestion action is performed
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name
-| The Input file is | is      
+| Suggestion        | Suggestion Name
+| The Input file is | is             
 |===
 
 == Scenario: Has object no component has previous no component objects
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name                                
 | The daily batchjob, Input file is present
@@ -276,17 +254,15 @@
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name
-| The Input file is | is      
+| Suggestion        | Suggestion Name
+| The Input file is | is             
 |===
 
 == Scenario: Has object no component has previous has component objects
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name                                
 | The daily batchjob, Input file is present
@@ -295,27 +271,24 @@
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
-[options="header"]
 |===
-| Object Name | Step Definition Name            
-| daily batchjob/Input file.feature | is present
+| Object Name                       | Step Definition Name
+| daily batchjob/Input file.feature | is present          
 |===
 
 === When: The suggestion action is performed
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name          
-| The Input file is present | is present
+| Suggestion                | Suggestion Name
+| The Input file is present | is present     
 |===
 
 == Scenario: Has object has component no previous no component objects
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name                     
 | The daily batchjob, Input file
@@ -325,17 +298,15 @@
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name          
-| The daily batchjob, Input file is | is
+| Suggestion                        | Suggestion Name
+| The daily batchjob, Input file is | is             
 |===
 
 == Scenario: Has object has component no previous has component objects
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name                     
 | The daily batchjob, Input file
@@ -343,27 +314,24 @@
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
-[options="header"]
 |===
-| Object Name | Step Definition Name            
-| daily batchjob/Input file.feature | is present
+| Object Name                       | Step Definition Name
+| daily batchjob/Input file.feature | is present          
 |===
 
 === When: The suggestion action is performed
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name                          
-| The daily batchjob, Input file is present | is present
+| Suggestion                                | Suggestion Name
+| The daily batchjob, Input file is present | is present     
 |===
 
 == Scenario: Has object has component has previous no component objects
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name                                
 | The daily batchjob, Input file is present
@@ -374,17 +342,15 @@
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name          
-| The daily batchjob, Input file is | is
+| Suggestion                        | Suggestion Name
+| The daily batchjob, Input file is | is             
 |===
 
 == Scenario: Has object has component has previous has component objects
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name                                
 | The daily batchjob, Input file is present
@@ -393,19 +359,17 @@
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
-[options="header"]
 |===
-| Object Name | Step Definition Name            
-| daily batchjob/Input file.feature | is present
+| Object Name                       | Step Definition Name
+| daily batchjob/Input file.feature | is present          
 |===
 
 === When: The suggestion action is performed
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name                          
-| The daily batchjob, Input file is present | is present
+| Suggestion                                | Suggestion Name
+| The daily batchjob, Input file is present | is present     
 |===
 

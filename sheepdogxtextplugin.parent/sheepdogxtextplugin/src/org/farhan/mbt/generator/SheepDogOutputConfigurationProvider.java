@@ -27,12 +27,11 @@ public class SheepDogOutputConfigurationProvider implements IOutputConfiguration
 
 		stepDefsOutput = new OutputConfiguration("STEP_DEFS");
 		stepDefsOutput.setDescription("Step Definitions");
-		stepDefsOutput.setOutputDirectory("./src-gen-step-defs");
-		stepDefsOutput.setOverrideExistingResources(false);
+		stepDefsOutput.setOutputDirectory("./src/test/resources/asciidoc/stepdefs");
+		stepDefsOutput.setOverrideExistingResources(true);
 		stepDefsOutput.setCreateOutputDirectory(true);
 		stepDefsOutput.setCleanUpDerivedResources(false);
-		// TODO maybe set this to false in the future
-		stepDefsOutput.setSetDerivedProperty(true);
+		stepDefsOutput.setSetDerivedProperty(false);
 		set.add(stepDefsOutput);
 		return set;
 	}

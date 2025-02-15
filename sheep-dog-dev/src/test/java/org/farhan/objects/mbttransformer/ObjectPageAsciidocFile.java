@@ -21,4 +21,6 @@ public interface ObjectPageAsciidocFile {
     public void assertObjectSectionName(HashMap<String, String> keyMap);
 
     public void assertObjectSectionStatements(HashMap<String, String> keyMap);
+
+    public void assertContent(HashMap<String, String> keyMap);
 }

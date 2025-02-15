@@ -24,7 +24,6 @@ Feature: Process
 
 === And: The uml/pst.uml file Interaction Annotations section will be created as follows
 
-[options="header"]
 |===
 | Interaction Name       | Annotation Name | Annotation Detail
 | specs::Process::Submit | Examples 1      | 0 -} h1\|        
@@ -55,7 +54,6 @@ Feature: Process
 
 === And: The uml/pst.uml file Interaction Annotations section will be created as follows
 
-[options="header"]
 |===
 | Interaction Name       | Annotation Name | Annotation Detail
 | specs::Process::Submit | Examples 1      | 0 -} h1\|h2\|    
@@ -88,7 +86,6 @@ Feature: Process
 
 === And: The uml/pst.uml file Interaction Annotations section will be created as follows
 
-[options="header"]
 |===
 | Interaction Name       | Annotation Name | Annotation Detail
 | specs::Process::Submit | Examples 1      | 0 -} h1\|h2\|h3\|

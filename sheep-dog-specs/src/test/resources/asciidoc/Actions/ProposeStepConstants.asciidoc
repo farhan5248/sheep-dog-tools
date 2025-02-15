@@ -1,22 +1,21 @@
+:tags:debug
 = Feature: Propose Step Constants
 
 == Scenario: Component types
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name
-| The blah
+| The blah 
 |===
 
 === When: The suggestion action is performed
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name
+| Suggestion            | Suggestion Name 
 | The blah application, | blah application
 |===
 
@@ -24,9 +23,8 @@
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
-| Step Name
+| Step Name            
 | The blah plugin, blah
 |===
 
@@ -34,19 +32,17 @@
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name
-| The blah plugin, blah file | blah file
+| Suggestion                 | Suggestion Name
+| The blah plugin, blah file | blah file      
 |===
 
 == Scenario: State modality absent no details
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
-| Step Name
+| Step Name                 
 | The blah plugin, blah file
 |===
 
@@ -54,20 +50,18 @@
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name | Suggestion Description
-| The blah plugin, blah file is | is | is
-| The blah plugin, blah file details | details name | Specify section etc
+| Suggestion                         | Suggestion Name | Suggestion Description
+| The blah plugin, blah file is      | is              | is                    
+| The blah plugin, blah file details | details name    | Specify section etc   
 |===
 
 == Scenario: State modality absent incomplete details
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
-| Step Name
+| Step Name                         
 | The blah plugin, blah file heading
 |===
 
@@ -75,19 +69,17 @@
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name
-| The blah plugin, blah file heading section | section
+| Suggestion                                 | Suggestion Name
+| The blah plugin, blah file heading section | section        
 |===
 
 == Scenario: State modality absent has details
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
-| Step Name
+| Step Name                                 
 | The blah plugin, blah file heading section
 |===
 
@@ -95,19 +87,17 @@
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name
-| The blah plugin, blah file heading section is | is
+| Suggestion                                    | Suggestion Name
+| The blah plugin, blah file heading section is | is             
 |===
 
 == Scenario: State modality present has details
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
-| Step Name
+| Step Name                                    
 | The blah plugin, blah file heading section is
 |===
 
@@ -115,19 +105,17 @@
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name | Suggestion Description
-| The blah plugin, blah file heading section is created | attribute name | Specify created etc
+| Suggestion                                            | Suggestion Name | Suggestion Description
+| The blah plugin, blah file heading section is created | attribute name  | Specify created etc   
 |===
 
 == Scenario: State modality present no attribute
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
-| Step Name
+| Step Name                    
 | The blah plugin, blah file is
 |===
 
@@ -135,19 +123,17 @@
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name | Suggestion Description
-| The blah plugin, blah file is created | attribute name | Specify created etc
+| Suggestion                            | Suggestion Name | Suggestion Description
+| The blah plugin, blah file is created | attribute name  | Specify created etc   
 |===
 
 == Scenario: State modality present no attachments
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
-| Step Name
+| Step Name                            
 | The blah plugin, blah file is created
 |===
 
@@ -155,22 +141,21 @@
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name
-| The blah plugin, blah file is created with | with
+| Suggestion                                 | Suggestion Name
+| The blah plugin, blah file is created with | with           
 |===
 
 == Scenario: State modality present has attachments
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
-| Step Name
+| Step Name                                 
 | The blah plugin, blah file is created with
 |===
 
 === When: The suggestion action is performed
 
 === Then: The suggestion dialog will be empty
+

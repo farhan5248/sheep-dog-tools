@@ -12,7 +12,6 @@
 
 === Given: The Object page is created as follows
 
-[options="header"]
 |===
 | h1
 | {h1}
@@ -20,7 +19,6 @@
 
 === Examples: Examples 1
 
-[options="header"]
 |===
 | h1
 | v1
@@ -33,7 +31,6 @@
 
 === And: The uml/pst.uml file Interaction Annotations section will be created as follows
 
-[options="header"]
 |===
 | Interaction Name       | Annotation Name | Annotation Detail
 | specs::Process::Submit | Examples 1      | 0 -} h1\|        
@@ -51,7 +48,6 @@
 
 === Given: The Object page is created as follows
 
-[options="header"]
 |===
 | h1 | h2
 | {h1} | {h2}
@@ -59,7 +55,6 @@
 
 === Examples: Examples 1
 
-[options="header"]
 |===
 | h1 | h2
 | v1 | v2
@@ -73,7 +68,6 @@
 
 === And: The uml/pst.uml file Interaction Annotations section will be created as follows
 
-[options="header"]
 |===
 | Interaction Name       | Annotation Name | Annotation Detail
 | specs::Process::Submit | Examples 1      | 0 -} h1\|h2\|    
@@ -92,7 +86,6 @@
 
 === Given: The Object page is created as follows
 
-[options="header"]
 |===
 | h1 | h2 | h3
 | {h1} | {h2} | {h3}
@@ -100,7 +93,6 @@
 
 === Examples: Examples 1
 
-[options="header"]
 |===
 | h1 | h2 | h3
 | v1 | v2 | v3
@@ -115,7 +107,6 @@
 
 === And: The uml/pst.uml file Interaction Annotations section will be created as follows
 
-[options="header"]
 |===
 | Interaction Name       | Annotation Name | Annotation Detail
 | specs::Process::Submit | Examples 1      | 0 -} h1\|h2\|h3\|

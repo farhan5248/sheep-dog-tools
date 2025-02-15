@@ -1,10 +1,10 @@
+:tags:debug
 = Feature: Propose Step Table
 
 == Scenario: Invalid step
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name                     
 | The daily batchjob, Input file
@@ -18,7 +18,6 @@
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name                                           
 | The daily batchjob, Input file is created as follows
@@ -32,7 +31,6 @@
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name                                           
 | The daily batchjob, Input file is created as follows
@@ -40,7 +38,6 @@
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
-[options="header"]
 |===
 | Object Name                       | Step Definition Name
 | daily batchjob/Input file.feature | is present          
@@ -54,7 +51,6 @@
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name                                           
 | The daily batchjob, Input file is created as follows
@@ -62,7 +58,6 @@
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
-[options="header"]
 |===
 | Object Name                       | Step Definition Name  | Parameters
 | daily batchjob/Input file.feature | is created as follows | H1        
@@ -72,9 +67,8 @@
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
 | Suggestion | Suggestion Name
-| \| H1 \|   | \| Header 1 \| 
+| \| H1 \|   | \| H1 \|       
 |===
 

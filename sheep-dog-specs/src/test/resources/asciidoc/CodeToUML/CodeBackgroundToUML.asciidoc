@@ -21,7 +21,6 @@ Feature: Process
 
 === And: The uml/pst.uml file Interaction Messages section will be created as follows
 
-[options="header"]
 |===
 | Interaction Name       | Message                  
 | specs::Process::Setup  | The Object0 page is valid
@@ -49,7 +48,6 @@ Feature: Process
 
 === And: The uml/pst.uml file Interaction Comments section will be created as follows
 
-[options="header"]
 |===
 | Interaction Name      | Comment    
 | specs::Process::Setup | Desc line 1
@@ -79,7 +77,6 @@ Feature: Process
 
 === And: The uml/pst.uml file Interaction Messages section will be created as follows
 
-[options="header"]
 |===
 | Interaction Name         | Message                  
 | specs::Process::Setup    | The Object0 page is valid
@@ -114,7 +111,6 @@ Feature: Process
 
 === And: The uml/pst.uml file Interaction Messages section will be created as follows
 
-[options="header"]
 |===
 | Interaction Name         | Message                  
 | specs::Process::Setup    | The Object0 page is valid
@@ -144,7 +140,6 @@ Feature: Process
 
 === And: The uml/pst.uml file Interaction Messages section will be created as follows
 
-[options="header"]
 |===
 | Interaction Name       | Message                        
 | specs::Process::Setup  | The Object{Index} page is valid
@@ -153,7 +148,6 @@ Feature: Process
 
 === Examples: Indices
 
-[options="header"]
 |===
 | Index
 | 1    
@@ -182,7 +176,6 @@ Feature: Process
 
 === And: The uml/pst.uml file Interaction Messages section will be created as follows
 
-[options="header"]
 |===
 | Interaction Name       | Message                        
 | specs::Process::Setup  | The Object{Index} page is valid
@@ -191,7 +184,6 @@ Feature: Process
 
 === Examples: Indices
 
-[options="header"]
 |===
 | Index
 | 1    

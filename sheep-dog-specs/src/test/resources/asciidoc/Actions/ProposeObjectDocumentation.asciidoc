@@ -1,136 +1,124 @@
+:tags:debug
 = Feature: Propose Object Documentation
 
 == Scenario: Documentation for component
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
 | Step Name
-| empty
+| empty    
 |===
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
-[options="header"]
 |===
-| Object Name | Object Description
-| daily batchjob/Input file.feature | Description
+| Object Name                       | Object Description
+| daily batchjob/Input file.feature | Description       
 |===
 
 === When: The suggestion action is performed
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name | Suggestion Description
-| The daily batchjob, | daily batchjob | daily batchjob
+| Suggestion          | Suggestion Name | Suggestion Description
+| The daily batchjob, | daily batchjob  | daily batchjob        
 |===
 
 == Scenario: Documentation for component object
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
-| Step Name
+| Step Name          
 | The daily batchjob,
 |===
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
-[options="header"]
 |===
-| Object Name | Object Description
-| daily batchjob/Input file.feature | Description\n
+| Object Name                       | Object Description
+| daily batchjob/Input file.feature | Description\n     
 |===
 
 === When: The suggestion action is performed
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name | Suggestion Description
-| The daily batchjob, Input file | Input file | Description\n
+| Suggestion                     | Suggestion Name | Suggestion Description
+| The daily batchjob, Input file | Input file      | Description\n         
 |===
 
 == Scenario: Documentation for previous object which doesn't exist
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
-| Step Name
+| Step Name                                
 | The daily batchjob, Input file is present
-| empty
+| empty                                    
 |===
 
 === When: The suggestion action is performed
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name | Suggestion Description
-| The Input file | Input file | Referred in: The daily batchjob, Input file is present
+| Suggestion     | Suggestion Name | Suggestion Description                                
+| The Input file | Input file      | Referred in: The daily batchjob, Input file is present
 |===
 
 == Scenario: Documentation for previous object which exists and has no doc
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
-| Step Name
+| Step Name                                
 | The daily batchjob, Input file is present
-| empty
+| empty                                    
 |===
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
-[options="header"]
 |===
-| Object Name | Object Description
-| daily batchjob/Input file.feature | empty
+| Object Name                       | Object Description
+| daily batchjob/Input file.feature | empty             
 |===
 
 === When: The suggestion action is performed
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name | Suggestion Description
-| The Input file | Input file | Referred in: The daily batchjob, Input file is present
+| Suggestion     | Suggestion Name | Suggestion Description                                
+| The Input file | Input file      | Referred in: The daily batchjob, Input file is present
 |===
 
 == Scenario: Documentation for previous object which exists and has doc
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
-| Step Name
+| Step Name                                
 | The daily batchjob, Input file is present
-| empty
+| empty                                    
 |===
 
 === And: The src-gen-step-defs/daily batchjob/Input file.feature file is created as follows
 
-[options="header"]
 |===
-| Object Name | Object Description
-| daily batchjob/Input file.feature | Description
+| Object Name                       | Object Description
+| daily batchjob/Input file.feature | Description       
 |===
 
 === When: The suggestion action is performed
 
 === Then: The suggestion dialog will be set as follows
 
-[options="header"]
 |===
-| Suggestion | Suggestion Name | Suggestion Description
-| The Input file | Input file | Referred in: The daily batchjob, Input file is present
+| Suggestion     | Suggestion Name | Suggestion Description                                
+| The Input file | Input file      | Referred in: The daily batchjob, Input file is present
 |===
+

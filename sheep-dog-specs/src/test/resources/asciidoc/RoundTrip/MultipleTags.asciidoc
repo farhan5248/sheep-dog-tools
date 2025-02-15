@@ -27,7 +27,6 @@
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
 
-[options="header"]
 |===
 | Tags
 | tag1
@@ -35,7 +34,6 @@
 
 === And: The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
 
-[options="header"]
 |===
 | Tags
 | tag2
@@ -43,7 +41,6 @@
 
 === And: The mbt-transformer plugin, uml-to-cucumber goal is executed with
 
-[options="header"]
 |===
 | Tags
 | tag1

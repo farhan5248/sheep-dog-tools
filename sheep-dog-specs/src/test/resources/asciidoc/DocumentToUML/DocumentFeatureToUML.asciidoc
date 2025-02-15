@@ -15,7 +15,6 @@
 
 === And: The uml/pst.uml file Class section will be created as follows
 
-[options="header"]
 |===
 | Class Name    
 | specs::Process
@@ -40,7 +39,6 @@ Desc line 1
 
 === And: The uml/pst.uml file Class Annotations section will be created as follows
 
-[options="header"]
 |===
 | Class Name     | Annotation Name | Annotation Detail
 | specs::Process | tags            | tag1             
@@ -48,7 +46,6 @@ Desc line 1
 
 === And: The uml/pst.uml file Class Comments section will be created as follows
 
-[options="header"]
 |===
 | Class Name     | Comment    
 | specs::Process | Desc line 1
@@ -74,7 +71,6 @@ Desc line 2
 
 === And: The uml/pst.uml file Class Annotations section will be created as follows
 
-[options="header"]
 |===
 | Class Name     | Annotation Name | Annotation Detail
 | specs::Process | tags            | tag1             
@@ -83,7 +79,6 @@ Desc line 2
 
 === And: The uml/pst.uml file Class Comments section will be created as follows
 
-[options="header"]
 |===
 | Class Name     | Comment                 
 | specs::Process | Desc line 1\nDesc line 2
@@ -110,7 +105,6 @@ Desc line 3
 
 === And: The uml/pst.uml file Class Annotations section will be created as follows
 
-[options="header"]
 |===
 | Class Name     | Annotation Name | Annotation Detail
 | specs::Process | tags            | tag1             
@@ -120,7 +114,6 @@ Desc line 3
 
 === And: The uml/pst.uml file Class Comments section will be created as follows
 
-[options="header"]
 |===
 | Class Name     | Comment                              
 | specs::Process | Desc line 1\nDesc line 2\nDesc line 3
@@ -144,7 +137,6 @@ Desc line 3
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
 
-[options="header"]
 |===
 | Tags
 | tag1
@@ -154,7 +146,6 @@ Desc line 3
 
 === And: The uml/pst.uml file Class section will be created as follows
 
-[options="header"]
 |===
 | Class Name    
 | specs::Process
@@ -162,7 +153,6 @@ Desc line 3
 
 === And: The uml/pst.uml file Class section won't be created as follows
 
-[options="header"]
 |===
 | Class Name         
 | specs::app::Process

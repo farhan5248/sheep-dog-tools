@@ -1,29 +1,27 @@
+:tags:debug
 = Feature: Validate Error
 
 == Scenario: No steps have a component
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
-| Step Name
-| The Input file is present
+| Step Name                   
+| The Input file is present   
 | The Input file is downloaded
 |===
 
 === When: The scenario validation action is performed as follows
 
-[options="header"]
 |===
 | Selected Step
-| 1
+| 1            
 |===
 
 === Then: The scenario validation dialog will be set as follows
 
-[options="header"]
 |===
-| Message
+| Message                             
 | The first step must have a component
 |===
 
@@ -31,26 +29,23 @@
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
-| Step Name
-| The Input file is present
+| Step Name                                   
+| The Input file is present                   
 | The daily batchjob, Input file is downloaded
 |===
 
 === When: The scenario validation action is performed as follows
 
-[options="header"]
 |===
 | Selected Step
-| 1
+| 1            
 |===
 
 === Then: The scenario validation dialog will be set as follows
 
-[options="header"]
 |===
-| Message
+| Message                             
 | The first step must have a component
 |===
 
@@ -58,19 +53,18 @@
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
-[options="header"]
 |===
-| Step Name
+| Step Name                                
 | The daily batchjob, Input file is present
-| The Input file is downloaded
+| The Input file is downloaded             
 |===
 
 === When: The scenario validation action is performed as follows
 
-[options="header"]
 |===
 | Selected Step
-| 1
+| 1            
 |===
 
 === Then: The scenario validation dialog will be empty
+

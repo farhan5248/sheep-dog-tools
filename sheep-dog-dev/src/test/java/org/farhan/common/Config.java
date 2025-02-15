@@ -2,17 +2,8 @@ package org.farhan.common;
 
 import java.io.File;
 import org.farhan.objects.mbttransformer.AsciidoctorToUmlGoal;
-import org.farhan.objects.mbttransformer.BlahHomePageStepsJavaFile;
-import org.farhan.objects.mbttransformer.BlahLoginPageStepsJavaFile;
-import org.farhan.objects.mbttransformer.BlahLogoutPageStepsJavaFile;
 import org.farhan.objects.mbttransformer.BlahObjectPageStepsJavaFile;
 import org.farhan.objects.mbttransformer.CucumberToUmlGoal;
-import org.farhan.objects.mbttransformer.HomePageAsciidocFile;
-import org.farhan.objects.mbttransformer.HomePageJavaFile;
-import org.farhan.objects.mbttransformer.LoginPageAsciidocFile;
-import org.farhan.objects.mbttransformer.LoginPageJavaFile;
-import org.farhan.objects.mbttransformer.LogoutPageAsciidocFile;
-import org.farhan.objects.mbttransformer.LogoutPageJavaFile;
 import org.farhan.objects.mbttransformer.ObjectPageAsciidocFile;
 import org.farhan.objects.mbttransformer.ObjectPageJavaFile;
 import org.farhan.objects.mbttransformer.ProcessAsciidocFile;
@@ -73,19 +64,10 @@ public final class Config extends AbstractModule implements InjectorSource {
 	protected void configure() {
 		bind(AsciidoctorToUmlGoal.class).to(AsciidoctorToUmlGoalImpl.class);
 		bind(BlahObjectPageStepsJavaFile.class).to(BlahObjectPageStepsJavaFileImpl.class);
-		bind(BlahHomePageStepsJavaFile.class).to(BlahObjectPageStepsJavaFileImpl.class);
-		bind(BlahLoginPageStepsJavaFile.class).to(BlahObjectPageStepsJavaFileImpl.class);
-		bind(BlahLogoutPageStepsJavaFile.class).to(BlahObjectPageStepsJavaFileImpl.class);
 		bind(CucumberToUmlGoal.class).to(CucumberToUmlGoalImpl.class);
 		bind(ObjectPageJavaFile.class).to(ObjectPageJavaFileImpl.class);
-		bind(HomePageJavaFile.class).to(ObjectPageJavaFileImpl.class);
-		bind(LoginPageJavaFile.class).to(ObjectPageJavaFileImpl.class);
-		bind(LogoutPageJavaFile.class).to(ObjectPageJavaFileImpl.class);
 		bind(ProcessAsciidocFile.class).to(ProcessAsciidocFileImpl.class);
 		bind(ObjectPageAsciidocFile.class).to(ObjectPageAsciidocFileImpl.class);
-		bind(HomePageAsciidocFile.class).to(ObjectPageAsciidocFileImpl.class);
-		bind(LoginPageAsciidocFile.class).to(ObjectPageAsciidocFileImpl.class);
-		bind(LogoutPageAsciidocFile.class).to(ObjectPageAsciidocFileImpl.class);
 		bind(ProcessFeatureFile.class).to(ProcessFeatureFileImpl.class);
 		bind(PstUmlFile.class).to(PstUmlFileImpl.class);
 		bind(UmlToAsciidoctorGoal.class).to(UmlToAsciidoctorGoalImpl.class);

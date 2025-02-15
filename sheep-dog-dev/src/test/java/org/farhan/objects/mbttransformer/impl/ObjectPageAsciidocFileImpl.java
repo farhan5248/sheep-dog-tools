@@ -3,16 +3,12 @@ package org.farhan.objects.mbttransformer.impl;
 import java.util.HashMap;
 
 import org.farhan.common.AdocFileObject;
-import org.farhan.objects.mbttransformer.HomePageAsciidocFile;
-import org.farhan.objects.mbttransformer.LoginPageAsciidocFile;
-import org.farhan.objects.mbttransformer.LogoutPageAsciidocFile;
 import org.farhan.objects.mbttransformer.ObjectPageAsciidocFile;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ObjectPageAsciidocFileImpl extends AdocFileObject
-		implements ObjectPageAsciidocFile, HomePageAsciidocFile, LoginPageAsciidocFile, LogoutPageAsciidocFile {
+public class ObjectPageAsciidocFileImpl extends AdocFileObject implements ObjectPageAsciidocFile {
 
 	@Override
 	public void assertObjectSectionName(HashMap<String, String> keyMap) {
@@ -57,6 +53,11 @@ public class ObjectPageAsciidocFileImpl extends AdocFileObject
 	@Override
 	public void setContent(HashMap<String, String> keyMap) {
 		setContent(keyMap.get("Content"));
+	}
+
+	@Override
+	public void assertContent(HashMap<String, String> keyMap) {
+		assertContent(keyMap.get("Content"));
 	}
 
 }

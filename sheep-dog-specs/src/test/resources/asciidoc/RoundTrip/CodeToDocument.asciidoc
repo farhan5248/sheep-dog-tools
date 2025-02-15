@@ -54,7 +54,6 @@ Feature: Process
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed with
 
-[options="header"]
 |===
 | Tags
 | tag1
@@ -62,7 +61,6 @@ Feature: Process
 
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed with
 
-[options="header"]
 |===
 | Tags
 | tag1
@@ -85,7 +83,6 @@ Desc 2
 
 === When: The Search application, Home page is created as follows
 
-[options="header"]
 |===
 | grp | ins
 | 10  | 5  
@@ -108,7 +105,6 @@ Desc 3
 
 === When: The Search application, Home page is created as follows
 
-[options="header"]
 |===
 | grp | ins  
 | 8   | {ins}
@@ -118,7 +114,6 @@ Desc 3
 
 === Examples: Some data
 
-[options="header"]
 |===
 | ins
 | 4  
@@ -126,7 +121,6 @@ Desc 3
 
 === Examples: Dataset 2
 
-[options="header"]
 |===
 | ins
 | 5  
