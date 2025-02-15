@@ -1,8 +1,8 @@
-package org.farhan.objects.mbttransformer;
+package org.farhan.objects.mbttransformer.src.test.resources.asciidoc.app;
 
 import java.util.HashMap;
 
-public interface ProcessFeatureFile {
+public interface ProcessAsciidocFile {
 
     public void assertBackgroundSectionDescription(HashMap<String, String> keyMap);
 
@@ -28,37 +28,27 @@ public interface ProcessFeatureFile {
 
     public void assertScenarioOutlineExamplesTableSectionRow(HashMap<String, String> keyMap);
 
-    public void assertScenarioOutlinesSectionDescription(HashMap<String, String> keyMap);
-
-    public void assertScenarioOutlinesSectionName(HashMap<String, String> keyMap);
-
-    public void assertScenarioOutlinesSectionTags(HashMap<String, String> keyMap);
-
-    public void assertScenarioOutlineStepsDataTableSectionName(HashMap<String, String> keyMap);
-
-    public void assertScenarioOutlineStepsDataTableSectionStep(HashMap<String, String> keyMap);
-
     public void assertScenariosSectionDescription(HashMap<String, String> keyMap);
 
     public void assertScenariosSectionName(HashMap<String, String> keyMap);
 
     public void assertScenariosSectionTags(HashMap<String, String> keyMap);
 
+    public void assertScenariosStepsDocStringSectionContent(HashMap<String, String> keyMap);
+
+    public void assertScenariosStepsDocStringSectionName(HashMap<String, String> keyMap);
+
+    public void assertScenariosStepsDocStringSectionStep(HashMap<String, String> keyMap);
+
     public void assertScenariosStepsSectionName(HashMap<String, String> keyMap);
 
     public void assertScenariosStepsSectionStep(HashMap<String, String> keyMap);
 
-    public void assertScenarioStepsDataTableSectionName(HashMap<String, String> keyMap);
+    public void assertScenariosStepsStepTableSectionName(HashMap<String, String> keyMap);
 
-    public void assertScenarioStepsDataTableSectionRow(HashMap<String, String> keyMap);
+    public void assertScenariosStepsStepTableSectionRow(HashMap<String, String> keyMap);
 
-    public void assertScenarioStepsDataTableSectionStep(HashMap<String, String> keyMap);
-
-    public void assertScenarioStepsDocStringSectionContent(HashMap<String, String> keyMap);
-
-    public void assertScenarioStepsDocStringSectionName(HashMap<String, String> keyMap);
-
-    public void assertScenarioStepsDocStringSectionStep(HashMap<String, String> keyMap);
+    public void assertScenariosStepsStepTableSectionStep(HashMap<String, String> keyMap);
 
     public void setContent(HashMap<String, String> keyMap);
 }

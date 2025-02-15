@@ -1,10 +1,12 @@
-package org.farhan.stepdefs.mbttransformer;
+package org.farhan.stepdefs.mbttransformer.src.test.resources.asciidoc.stepdefs.blahapplication;
 
 import io.cucumber.java.en.Given;
 import org.farhan.common.TestSteps;
+import org.farhan.objects.mbttransformer.src.test.resources.asciidoc.stepdefs.blahapplication.ObjectPageAsciidocFile;
+
 import io.cucumber.guice.ScenarioScoped;
 import com.google.inject.Inject;
-import org.farhan.objects.mbttransformer.ObjectPageAsciidocFile;
+
 import io.cucumber.datatable.DataTable;
 
 @ScenarioScoped

@@ -2,13 +2,7 @@ package org.farhan.common;
 
 import java.io.File;
 import org.farhan.objects.mbttransformer.AsciidoctorToUmlGoal;
-import org.farhan.objects.mbttransformer.BlahObjectPageStepsJavaFile;
 import org.farhan.objects.mbttransformer.CucumberToUmlGoal;
-import org.farhan.objects.mbttransformer.ObjectPageAsciidocFile;
-import org.farhan.objects.mbttransformer.ObjectPageJavaFile;
-import org.farhan.objects.mbttransformer.ProcessAsciidocFile;
-import org.farhan.objects.mbttransformer.ProcessFeatureFile;
-import org.farhan.objects.mbttransformer.PstUmlFile;
 import org.farhan.objects.mbttransformer.UmlToAsciidoctorGoal;
 import org.farhan.objects.mbttransformer.UmlToCucumberGoal;
 import org.farhan.objects.mbttransformer.UmlToCucumberGuiceGoal;
@@ -25,6 +19,12 @@ import org.farhan.objects.mbttransformer.impl.UmlToAsciidoctorGoalImpl;
 import org.farhan.objects.mbttransformer.impl.UmlToCucumberGoalImpl;
 import org.farhan.objects.mbttransformer.impl.UmlToCucumberGuiceGoalImpl;
 import org.farhan.objects.mbttransformer.impl.UmlToCucumberSpringGoalImpl;
+import org.farhan.objects.mbttransformer.src.test.java.org.farhan.objects.blah.ObjectPageJavaFile;
+import org.farhan.objects.mbttransformer.src.test.java.org.farhan.stepdefs.blah.BlahObjectPageStepsJavaFile;
+import org.farhan.objects.mbttransformer.src.test.resources.asciidoc.app.ProcessAsciidocFile;
+import org.farhan.objects.mbttransformer.src.test.resources.asciidoc.stepdefs.blahapplication.ObjectPageAsciidocFile;
+import org.farhan.objects.mbttransformer.src.test.resources.cucumber.app.ProcessFeatureFile;
+import org.farhan.objects.mbttransformer.uml.PstUmlFile;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;

@@ -3,7 +3,7 @@ package org.farhan.objects.mbttransformer.impl;
 import java.util.HashMap;
 
 import org.farhan.common.JavaFileObject;
-import org.farhan.objects.mbttransformer.ObjectPageJavaFile;
+import org.farhan.objects.mbttransformer.src.test.java.org.farhan.objects.blah.ObjectPageJavaFile;
 
 import io.cucumber.guice.ScenarioScoped;
 

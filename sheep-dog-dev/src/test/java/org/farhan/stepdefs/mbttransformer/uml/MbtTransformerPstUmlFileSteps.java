@@ -1,7 +1,8 @@
-package org.farhan.stepdefs.mbttransformer;
+package org.farhan.stepdefs.mbttransformer.uml;
 
 import org.farhan.common.TestSteps;
-import org.farhan.objects.mbttransformer.PstUmlFile;
+import org.farhan.objects.mbttransformer.uml.PstUmlFile;
+
 import com.google.inject.Inject;
 import io.cucumber.java.en.Given;
 import io.cucumber.datatable.DataTable;

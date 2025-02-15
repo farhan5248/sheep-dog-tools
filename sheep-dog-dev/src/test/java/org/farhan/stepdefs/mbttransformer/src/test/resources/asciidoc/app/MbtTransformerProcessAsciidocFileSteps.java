@@ -1,7 +1,8 @@
-package org.farhan.stepdefs.mbttransformer;
+package org.farhan.stepdefs.mbttransformer.src.test.resources.asciidoc.app;
 
 import org.farhan.common.TestSteps;
-import org.farhan.objects.mbttransformer.ProcessAsciidocFile;
+import org.farhan.objects.mbttransformer.src.test.resources.asciidoc.app.ProcessAsciidocFile;
+
 import com.google.inject.Inject;
 import io.cucumber.java.en.Given;
 import io.cucumber.datatable.DataTable;

@@ -3,7 +3,7 @@ package org.farhan.objects.mbttransformer.impl;
 import java.util.HashMap;
 
 import org.farhan.common.AdocFileObject;
-import org.farhan.objects.mbttransformer.ProcessAsciidocFile;
+import org.farhan.objects.mbttransformer.src.test.resources.asciidoc.app.ProcessAsciidocFile;
 
 import io.cucumber.guice.ScenarioScoped;
 

@@ -164,6 +164,7 @@ public class ConvertUMLToCucumber extends Converter {
 
 	private void convertStepDefinitionList() throws Exception {
 		for (Interaction stepDefinition : srcObj.getStepDefinitionList()) {
+			log.debug("step definition: " + stepDefinition.getName());
 			convertStepDefinition(stepDefinition);
 		}
 	}
@@ -192,17 +193,28 @@ public class ConvertUMLToCucumber extends Converter {
 		// TODO this is basically a duplicate of the parent. put each method in a
 		// [Cucumber|AsciiDoctor]PathConverter class
 		String path = srcObj.getPath();
+		String[] pathParts = path.split("::");
+		String componentName = pathParts[2];
+		String objectName = pathParts[pathParts.length - 1];
 		String newComponentName = getComponentName(srcObj.getPath());
 		String newObjectName = getObjectName(srcObj.getPath());
 
 		if (tgtLayer.contentEquals(model.TEST_CASES)) {
 			path = path.replace("pst::" + model.TEST_CASES, "");
-		}
-		if (tgtLayer.contentEquals(model.TEST_STEPS)) {
-			path = "::" + newComponentName.toLowerCase() + "::" + newComponentName + newObjectName + "Steps";
-		}
-		if (tgtLayer.contentEquals(model.TEST_OBJECTS)) {
-			path = "::" + newComponentName.toLowerCase() + "::" + newObjectName;
+		} else {
+			if (tgtLayer.contentEquals(model.TEST_STEPS)) {
+				path = path.replace("pst::" + model.TEST_STEPS + "::" + componentName,
+						"::" + newComponentName.toLowerCase());
+				path = path.replaceFirst(objectName + "$", newComponentName + newObjectName + "Steps");
+
+			}
+			if (tgtLayer.contentEquals(model.TEST_OBJECTS)) {
+				path = path.replace("pst::" + model.TEST_STEPS + "::" + componentName,
+						"::" + newComponentName.toLowerCase());
+				path = path.replaceFirst(objectName + "$", newObjectName);
+			}
+			path = path.replace(" ", "");
+			path = path.replace("-", "");
 		}
 
 		path = path.replace("::", "/");

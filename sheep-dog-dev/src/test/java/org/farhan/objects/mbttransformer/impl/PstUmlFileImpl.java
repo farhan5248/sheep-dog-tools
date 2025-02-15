@@ -3,7 +3,7 @@ package org.farhan.objects.mbttransformer.impl;
 import java.util.HashMap;
 
 import org.farhan.common.UMLFileObject;
-import org.farhan.objects.mbttransformer.PstUmlFile;
+import org.farhan.objects.mbttransformer.uml.PstUmlFile;
 
 import io.cucumber.guice.ScenarioScoped;
 @ScenarioScoped

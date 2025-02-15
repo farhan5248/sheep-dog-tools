@@ -1,7 +1,8 @@
-package org.farhan.stepdefs.mbttransformer;
+package org.farhan.stepdefs.mbttransformer.src.test.java.org.farhan.objects.blah;
 
 import org.farhan.common.TestSteps;
-import org.farhan.objects.mbttransformer.ObjectPageJavaFile;
+import org.farhan.objects.mbttransformer.src.test.java.org.farhan.objects.blah.ObjectPageJavaFile;
+
 import com.google.inject.Inject;
 import io.cucumber.java.en.Given;
 import io.cucumber.datatable.DataTable;

@@ -1,4 +1,4 @@
-package org.farhan.objects.mbttransformer;
+package org.farhan.objects.mbttransformer.src.test.resources.asciidoc.stepdefs.blahapplication;
 
 import java.util.HashMap;
 
