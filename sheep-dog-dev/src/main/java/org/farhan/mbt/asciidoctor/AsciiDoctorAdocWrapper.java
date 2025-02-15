@@ -200,7 +200,8 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	public String getDocString(Step step) {
-		return step.getTheDocString().getName().replaceFirst("----\n", "").replaceFirst("\n----", "");
+		return step.getTheDocString().getName().replaceFirst("^----\n", "").replaceFirst("\n----$", "")
+				.replace("\\----", "----");
 	}
 
 	public EList<Examples> getExamplesList(AbstractScenario abstractScenario) {
@@ -499,6 +500,5 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		}
 		return os.toString();
 	}
-
 
 }

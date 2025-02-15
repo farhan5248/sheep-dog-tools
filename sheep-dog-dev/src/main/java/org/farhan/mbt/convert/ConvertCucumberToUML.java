@@ -2,7 +2,6 @@ package org.farhan.mbt.convert;
 
 import java.util.ArrayList;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
@@ -73,7 +72,7 @@ public class ConvertCucumberToUML extends Converter {
 		srcObj = (CucumberFeatureWrapper) project.createObject(path);
 		srcObj.parse(content);
 		if (isFileSelected(srcObj, tags)) {
-			tgtObj = (UMLClassWrapper) model.createObject(convertSrcPath(path, project.TEST_CASES));
+			tgtObj = (UMLClassWrapper) model.createObject(convertFromPath(path, project.TEST_CASES));
 			tgtObj.setFeatureName(srcObj.getFeatureName());
 			tgtObj.setFeatureTags(srcObj.getFeatureTags());
 			tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
@@ -126,20 +125,7 @@ public class ConvertCucumberToUML extends Converter {
 		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
 	}
 
-	protected String getComponentName(String step) {
-		String name = StepHelper.getComponentName(step);
-		if (name.isEmpty()) {
-			name = lastComponent;
-		} else {
-			name = removeDelimiterAndCapitalize(name, "\\.");
-			name = removeDelimiterAndCapitalize(name, "\\-");
-			name = removeDelimiterAndCapitalize(name, " ");
-			lastComponent = name;
-		}
-		return name;
-	}
-
-	protected void initProjects() throws Exception {
+	public void initProjects() throws Exception {
 		project = new CucumberProject(this.tags, this.fa);
 		project.init();
 		model = new UMLModel(this.tags, this.fa);

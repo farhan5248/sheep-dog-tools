@@ -74,13 +74,13 @@ public class ConvertAsciidoctorToUML extends Converter {
 		if (isFileSelected(srcObj, tags)) {
 			if (path.startsWith(project.getDir(project.TEST_STEPS))) {
 				log.debug("step object: " + path);
-				tgtObj = (UMLClassWrapper) model.createObject(convertSrcPath(path, project.TEST_STEPS));
+				tgtObj = (UMLClassWrapper) model.createObject(convertFromPath(path, project.TEST_STEPS));
 				tgtObj.setStepObjectName(srcObj.getStepObjectName());
 				tgtObj.setStepObjectDescription(srcObj.getStepObjectDescription());
 				convertStepDefinitionList();
 			} else {
 				log.debug("test suite: " + path);
-				tgtObj = (UMLClassWrapper) model.createObject(convertSrcPath(path, project.TEST_CASES));
+				tgtObj = (UMLClassWrapper) model.createObject(convertFromPath(path, project.TEST_CASES));
 				tgtObj.setFeatureName(srcObj.getFeatureName());
 				tgtObj.setFeatureTags(srcObj.getFeatureTags());
 				tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
@@ -169,7 +169,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
 	}
 
-	protected String getComponentName(String step) {
+	private String getComponentName(String step) {
 		String name = StepHelper.getComponentName(step);
 		if (name.isEmpty()) {
 			name = lastComponent;
@@ -202,7 +202,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		return project.getDir(project.TEST_OBJECTS) + "/" + componentName + "/" + objectName + objectType + ".asciidoc";
 	}
 
-	protected void initProjects() throws Exception {
+	public void initProjects() throws Exception {
 		project = new AsciiDoctorProject(this.tags, this.fa);
 		project.init();
 		model = new UMLModel(this.tags, this.fa);

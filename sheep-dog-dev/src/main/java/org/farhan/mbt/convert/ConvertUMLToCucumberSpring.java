@@ -11,7 +11,7 @@ public class ConvertUMLToCucumberSpring extends ConvertUMLToCucumber {
 		super(tags, fa, log);
 	}
 
-	protected void initProjects() throws Exception {
+	public void initProjects() throws Exception {
 		model = new UMLModel(this.tags, this.fa);
 		model.init();
 		project = new CucumberSpringProject(this.tags, this.fa);

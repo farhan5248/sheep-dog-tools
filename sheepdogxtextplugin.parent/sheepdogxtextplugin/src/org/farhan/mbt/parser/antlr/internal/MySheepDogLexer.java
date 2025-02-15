@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class MySheepDogLexer extends InternalSheepDogLexer {
 
 	// TODO maybe these should all be one flag called escapeKeyword?
-	private boolean isTitle = false;
+	private boolean nextTokenIsWORD = false;
 
 	public MySheepDogLexer() {
 	}
@@ -51,25 +51,28 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 			mRULE_SL_COMMENT();
 		} else if (isKeyword("\n")) {
 			mRULE_EOL();
-			isTitle = false;
+			nextTokenIsWORD = false;
 		} else if (isKeyword(" ") || isKeyword("\t") || isKeyword("\r")) {
 			mRULE_WS();
 		} else if (isKeyword("|===")) {
 			mT__23();// '|==='
-		} else if (isKeyword("|")) {
-			mT__27();// '|'
+		} else if (isKeyword(":tags:")) {
+			mT__24();// ( ':tags:' )
 		} else if (isKeyword("[tags=")) {
 			mT__25();// '[tags='
 		} else if (isKeyword("]")) {
 			mT__26();// ']'
-		} else if (isKeyword(":tags:")) {
-			mT__24();// ( ':tags:' )
 		} else if (isKeyword("===")) {
 			mT__13();// '==='
 		} else if (isKeyword("==")) {
 			mT__11();// '=='
 		} else if (isKeyword("=")) {
 			mT__9();// '='
+		} else if (isKeyword("|")) {
+			mT__27();// '|'
+			nextTokenIsWORD = true;
+		} else if (nextTokenIsWORD) {
+			mRULE_WORD();
 		} else if (isKeyword("Object:")) {
 			mT__10();// 'Object:'
 		} else if (isKeyword("Definition:")) {
@@ -84,20 +87,14 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 			mT__17();// 'Scenario:'
 		} else if (isKeyword("Examples:")) {
 			mT__18();// 'Examples:'
-		} else if (isTitle) {
-			mRULE_WORD();
 		} else if (isKeyword("Given:")) {
 			mT__19();// 'Given'
-			isTitle = true;
 		} else if (isKeyword("When:")) {
 			mT__20();// 'When'
-			isTitle = true;
 		} else if (isKeyword("Then:")) {
 			mT__21();// 'Then'
-			isTitle = true;
 		} else if (isKeyword("And:")) {
 			mT__22();// 'And'
-			isTitle = true;
 		} else {
 			mRULE_WORD();
 		}

@@ -119,7 +119,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
 	}
 
-	protected void initProjects() throws Exception {
+	public void initProjects() throws Exception {
 		model = new UMLModel(this.tags, this.fa);
 		model.init();
 		project = new AsciiDoctorProject(this.tags, this.fa);

@@ -19,7 +19,7 @@ public abstract class Converter {
 		this.log = log;
 	}
 
-	protected abstract void initProjects() throws Exception;
+	public abstract void initProjects() throws Exception;
 
 	public void clearObjects() throws Exception {
 		fa.clear(tags);
@@ -38,7 +38,7 @@ public abstract class Converter {
 		if (project instanceof CucumberProject) {
 			for (ConvertibleObject co : model.getObjects(model.TEST_STEPS)) {
 				// TODO I think I need to store the 3rd layer in asciidoc as well so that
-				// there's specs, behaviours, structure
+				// there's specs, behaviours, structures
 				objects.add(getPath((UMLClassWrapper) co, model.TEST_STEPS));
 				objects.add(getPath((UMLClassWrapper) co, model.TEST_OBJECTS));
 			}
@@ -71,11 +71,11 @@ public abstract class Converter {
 
 	public abstract String convertObject(String path, String content) throws Exception;
 
-	// TODO this is temp until I delete the second layer of feature files
-	protected String convertSrcPath(String path, String layer) {
+	// TODO this is temp until I delete the second layer of feature files.
+	protected String convertFromPath(String path, String layer) {
 		String qualifiedName = path.replace(",", "").trim();
-		qualifiedName = qualifiedName.replace(project.getFileExt(layer), "");
-		qualifiedName = qualifiedName.replace(project.getDir(layer), "");
+		qualifiedName = qualifiedName.replaceFirst(project.getFileExt(layer) + "$", "");
+		qualifiedName = qualifiedName.replaceFirst("^" + project.getDir(layer), "");
 		qualifiedName = qualifiedName.replace("/", "::");
 		qualifiedName = "pst::" + layer + qualifiedName;
 		return qualifiedName;

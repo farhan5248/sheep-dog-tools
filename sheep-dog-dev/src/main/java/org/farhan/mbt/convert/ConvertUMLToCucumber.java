@@ -2,7 +2,6 @@ package org.farhan.mbt.convert;
 
 import java.util.ArrayList;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
@@ -20,11 +19,8 @@ import org.farhan.mbt.core.Logger;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberJavaWrapper;
 import org.farhan.mbt.cucumber.CucumberProject;
-import org.farhan.helper.StepHelper;
 
 public class ConvertUMLToCucumber extends Converter {
-
-	private String lastComponent = "InitialComponent";
 
 	private UMLClassWrapper srcObj;
 	private CucumberFeatureWrapper tgtObj;
@@ -85,13 +81,15 @@ public class ConvertUMLToCucumber extends Converter {
 
 	@Override
 	public String convertObject(String path, String content) throws Exception {
-		log.debug("test suite: " + path);
 		initProjects();
 		if (path.startsWith(project.getDir(project.TEST_CASES))) {
+			log.debug("test suite: " + path);
 			return convertFeature(tags, path, content);
 		} else if (path.startsWith(project.getDir(project.TEST_STEPS))) {
+			log.debug("step object: " + path);
 			return convertObjectSteps(tags, path, content);
 		} else {
+			log.debug("step object: " + path);
 			return convertObjectFields(tags, path, content);
 		}
 	}
@@ -182,20 +180,7 @@ public class ConvertUMLToCucumber extends Converter {
 		tgtObj.createStepTable(step, srcObj.getStepTable(srcStep));
 	}
 
-	protected String getComponentName(String step) {
-		String name = StepHelper.getComponentName(step);
-		if (name.isEmpty()) {
-			name = lastComponent;
-		} else {
-			name = removeDelimiterAndCapitalize(name, "\\.");
-			name = removeDelimiterAndCapitalize(name, "\\-");
-			name = removeDelimiterAndCapitalize(name, " ");
-			lastComponent = name;
-		}
-		return name;
-	}
-
-	protected void initProjects() throws Exception {
+	public void initProjects() throws Exception {
 		model = new UMLModel(this.tags, this.fa);
 		model.init();
 		project = new CucumberProject(this.tags, this.fa);
@@ -203,33 +188,45 @@ public class ConvertUMLToCucumber extends Converter {
 	}
 
 	protected String getPath(UMLClassWrapper srcObj, String tgtLayer) {
-		String path = srcObj.getPath();
-		String[] pathParts = path.split("::");
-		String componentName = pathParts[2];
-		String objectName = pathParts[pathParts.length - 1];
+
 		// TODO this is basically a duplicate of the parent. put each method in a
 		// [Cucumber|AsciiDoctor]PathConverter class
-		String newComponentName = componentName.replaceFirst("\\s[^\\s]+$", "");
-		String newObjectName = removeDelimiterAndCapitalize(objectName, " ");
+		String path = srcObj.getPath();
+		String newComponentName = getComponentName(srcObj.getPath());
+		String newObjectName = getObjectName(srcObj.getPath());
 
 		if (tgtLayer.contentEquals(model.TEST_CASES)) {
 			path = path.replace("pst::" + model.TEST_CASES, "");
 		}
 		if (tgtLayer.contentEquals(model.TEST_STEPS)) {
-			path = path.replace("pst::" + model.TEST_STEPS + "::" + componentName,
-					"::" + newComponentName.toLowerCase());
-			path = path.replace(objectName, StringUtils.capitalize(newComponentName) + newObjectName + "Steps");
+			path = "::" + newComponentName.toLowerCase() + "::" + newComponentName + newObjectName + "Steps";
 		}
 		if (tgtLayer.contentEquals(model.TEST_OBJECTS)) {
-			path = path.replace("pst::" + model.TEST_STEPS + "::" + componentName,
-					"::" + newComponentName.toLowerCase());
-			path = path.replace(objectName, newObjectName);
+			path = "::" + newComponentName.toLowerCase() + "::" + newObjectName;
 		}
 
 		path = path.replace("::", "/");
 		path = project.getDir(tgtLayer) + path + project.getFileExt(tgtLayer);
 
 		return path;
+	}
+
+	private String getComponentName(String path) {
+		String[] pathParts = path.split("::");
+		String name = pathParts[2].replaceFirst("\\s[^\\s]+$", "");
+		name = removeDelimiterAndCapitalize(name, "\\.");
+		name = removeDelimiterAndCapitalize(name, "\\-");
+		name = removeDelimiterAndCapitalize(name, " ");
+		return name;
+	}
+
+	private String getObjectName(String path) {
+		String[] pathParts = path.split("::");
+		String name = pathParts[pathParts.length - 1];
+		name = removeDelimiterAndCapitalize(name, "\\.");
+		name = removeDelimiterAndCapitalize(name, "\\-");
+		name = removeDelimiterAndCapitalize(name, " ");
+		return name;
 	}
 
 }
