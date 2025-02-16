@@ -1,0 +1,4 @@
+= Object: Given page
+
+== Definition: isn't empty
+

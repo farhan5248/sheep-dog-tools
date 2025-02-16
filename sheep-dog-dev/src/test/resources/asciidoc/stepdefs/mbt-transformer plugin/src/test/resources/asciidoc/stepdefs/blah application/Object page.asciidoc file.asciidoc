@@ -2,25 +2,21 @@
 
 == Definition: is created as follows
 
-== Definition: will be present
-
-== Definition: Step Definition Parameters Table section will be created as follows
-
 === Parameters: 1
 
 |===
-| Name | Parameters | Row
+| Content
 |===
 
 == Definition: will be created as follows
 
-== Definition: Step Definition section will be created as follows
-
 === Parameters: 1
 
 |===
-| Name | Description
+| Content
 |===
+
+== Definition: will be present
 
 == Definition: Object section will be created as follows
 
@@ -34,5 +30,21 @@
 
 |===
 | Name | Statements
+|===
+
+== Definition: Step Definition Parameters Table section will be created as follows
+
+=== Parameters: 1
+
+|===
+| Name | Parameters | Row
+|===
+
+== Definition: Step Definition section will be created as follows
+
+=== Parameters: 1
+
+|===
+| Name | Description
 |===
 

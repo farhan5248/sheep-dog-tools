@@ -2,23 +2,13 @@
 
 == Definition: is created as follows
 
+=== Parameters: 1
+
+|===
+| Content
+|===
+
 == Definition: will be present
-
-== Definition: Background section will be created as follows
-
-=== Parameters: 1
-
-|===
-| Name | Description
-|===
-
-== Definition: Background Steps section will be created as follows
-
-=== Parameters: 1
-
-|===
-| Name | Step
-|===
 
 == Definition: Scenarios Steps section will be created as follows
 
@@ -34,6 +24,22 @@
 
 |===
 | Name | Tags | Description
+|===
+
+== Definition: Background section will be created as follows
+
+=== Parameters: 1
+
+|===
+| Name | Description
+|===
+
+== Definition: Background Steps section will be created as follows
+
+=== Parameters: 1
+
+|===
+| Name | Step
 |===
 
 == Definition: Feature section will be created as follows

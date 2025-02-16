@@ -89,10 +89,18 @@ public class LanguageAccessImpl implements ILanguageAccess {
 
 		Row row = SheepDogFactory.eINSTANCE.createRow();
 		Table.getRows().add(row);
-		for (Cell srcCell : getHeader()) {
+		if (getHeader() == null) {
+			// TODO there's no automated test for this..
+			// This is a docstring and also the abuse of this method :P
 			Cell cell = SheepDogFactory.eINSTANCE.createCell();
-			cell.setName(srcCell.getName());
+			cell.setName("Content");
 			row.getCells().add(cell);
+		} else {
+			for (Cell srcCell : getHeader()) {
+				Cell cell = SheepDogFactory.eINSTANCE.createCell();
+				cell.setName(srcCell.getName());
+				row.getCells().add(cell);
+			}
 		}
 	}
 
@@ -291,7 +299,12 @@ public class LanguageAccessImpl implements ILanguageAccess {
 
 	@Override
 	public String getStepParametersString() {
-		return cellsToString(getHeader());
+		List<Cell> header = getHeader();
+		if (header == null) {
+			return "| Content |";
+		} else {
+			return cellsToString(getHeader());
+		}
 	}
 
 	public Resource getStepResource() {
@@ -299,10 +312,14 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	}
 
 	public boolean hasParameters(Object stepDefinition) {
+		// TODO why is stepDefinition passed in when it's not used?
 		if (step.getTheStepTable() != null) {
 			if (step.getTheStepTable().getRows().size() > 0) {
 				return true;
 			}
+		}
+		if (step.getTheDocString() != null) {
+			return true;
 		}
 		return false;
 	}
