@@ -32,7 +32,7 @@ Feature: Dependency Injection
           
           public class BlahObjectPageSteps extends TestSteps {
           
-              public BlahObjectPageSteps(BlahObjectPage object) {
+              public BlahObjectPageSteps(ObjectPage object) {
                   super(object);
               }
           
@@ -63,7 +63,7 @@ Feature: Dependency Injection
           public class BlahObjectPageSteps extends TestSteps {
           
               @Inject
-              public BlahObjectPageSteps(BlahObjectPage object) {
+              public BlahObjectPageSteps(ObjectPage object) {
                   super(object);
               }
           

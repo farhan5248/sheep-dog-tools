@@ -38,7 +38,7 @@ import org.farhan.objects.blah.ObjectPage;
 
 public class BlahObjectPageSteps extends TestSteps {
 
-    public BlahObjectPageSteps(BlahObjectPage object) {
+    public BlahObjectPageSteps(ObjectPage object) {
         super(object);
     }
 
@@ -72,7 +72,7 @@ import org.farhan.objects.blah.ObjectPage;
 public class BlahObjectPageSteps extends TestSteps {
 
     @Inject
-    public BlahObjectPageSteps(BlahObjectPage object) {
+    public BlahObjectPageSteps(ObjectPage object) {
         super(object);
     }
 

@@ -26,6 +26,8 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 
 	public CucumberJavaWrapper(String thePath) {
 		this.thePath = thePath;
+		// TODO if the contents are parsed in, then this might create duplication. So
+		// maybe move this out or check if these elements exist
 		theJavaClass = new CompilationUnit();
 		theJavaClass.setStorage(Paths.get(thePath));
 		ClassOrInterfaceDeclaration javaClassType = new ClassOrInterfaceDeclaration();
@@ -59,13 +61,11 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 
 		theJavaClass.addImport(getFactoryImport(step));
 		MethodDeclaration aMethod = getMethod(getMethodNameForStepDef(step));
-		{
+		BlockStmt body = aMethod.getBody().get();
+		if (body.isEmpty()) {
 			if (aMethod.getAnnotations().isEmpty()) {
 				aMethod.addSingleMemberAnnotation("Given", "\"^" + step + "$\"");
 			}
-		}
-		BlockStmt body = aMethod.getBody().get();
-		if (body.isEmpty()) {
 			body = aMethod.createBody();
 			body.addStatement(getCallForFactory(step) + getCallForComponent(step) + ";");
 			body.addStatement(getCallForFactory(step) + getCallForPath(step) + ";");
@@ -252,12 +252,6 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		return (ClassOrInterfaceDeclaration) theJavaClass.getType(0);
 	}
 
-	private boolean isDocString(String param) {
-		// TODO think of a better way of handling docstring vs table than relying on the
-		// presence of a field
-		return param.contentEquals("Content");
-	}
-
 	protected boolean isStepObj() {
 		if (getType().getName().asString().endsWith("Steps")) {
 			return false;
@@ -307,25 +301,29 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	public String toString() {
+		// TODO sort all the imports and methods before conversion or sort them as
+		// they're added.
 		return theJavaClass.toString();
 	}
 
 	public void setStepDefinitionParameters(String stepDefinitionName, ArrayList<String> paramList) throws Exception {
-		for (String param : paramList) {
-			if (isStepObj()) {
-				setStepDefinitionParametersForStepObj(stepDefinitionName, param);
-			} else {
-				setStepDefinitionParametersForStepDef(stepDefinitionName, param);
-			}
+		if (paramList.isEmpty()) {
+			return;
+		}
+		if (isStepObj()) {
+			setStepDefinitionParametersForStepObj(stepDefinitionName, paramList);
+		} else {
+			setStepDefinitionParametersForStepDef(stepDefinitionName, paramList);
 		}
 	}
 
-	private void setStepDefinitionParametersForStepDef(String stepDefinitionName, String param) throws Exception {
+	private void setStepDefinitionParametersForStepDef(String stepDefinitionName, ArrayList<String> paramList)
+			throws Exception {
 		MethodDeclaration aMethod;
 		aMethod = getMethod(getMethodNameForStepDef(stepDefinitionName));
 		BlockStmt body = aMethod.getBody().get();
 		String statement;
-		if (isDocString(param)) {
+		if (paramList.size() == 1 && paramList.get(0).contentEquals("Content")) {
 			addParameter(aMethod, "String", "docString");
 			statement = getCallForFactory(stepDefinitionName) + getCallForInputOutputsForDocString(stepDefinitionName)
 					+ ";";
@@ -342,15 +340,15 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 		}
 	}
 
-	private void setStepDefinitionParametersForStepObj(String stepDefinitionName, String param) throws Exception {
+	private void setStepDefinitionParametersForStepObj(String stepDefinitionName, ArrayList<String> paramList)
+			throws Exception {
 		MethodDeclaration aMethod;
-		if (isDocString(param)) {
-			aMethod = getMethod(getSetOrAssert(stepDefinitionName) + getSection(stepDefinitionName) + "Content");
-		} else {
+
+		for (String param : paramList) {
 			aMethod = getMethod(getSetOrAssert(stepDefinitionName) + getSection(stepDefinitionName)
 					+ StringUtils.capitalize(removeSpecialChars(param)));
+			aMethod.removeBody();
+			addParameter(aMethod, "HashMap<String, String>", "keyMap");
 		}
-		aMethod.removeBody();
-		addParameter(aMethod, "HashMap<String, String>", "keyMap");
 	}
 }
