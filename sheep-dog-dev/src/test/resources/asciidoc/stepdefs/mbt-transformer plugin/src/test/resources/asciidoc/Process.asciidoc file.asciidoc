@@ -1,31 +1,5 @@
 = Object: src/test/resources/asciidoc/Process.asciidoc file
 
-== Definition: is created as follows
-
-=== Parameters: 1
-
-|===
-| Content
-|===
-
-== Definition: will be present
-
-== Definition: Scenarios Steps section will be created as follows
-
-=== Parameters: 1
-
-|===
-| Name | Step
-|===
-
-== Definition: Scenarios section will be created as follows
-
-=== Parameters: 1
-
-|===
-| Name | Tags | Description
-|===
-
 == Definition: Background section will be created as follows
 
 === Parameters: 1
@@ -56,12 +30,12 @@
 | Name | Tags | Statements
 |===
 
-== Definition: Scenarios Steps Step Table section will be created as follows
+== Definition: is created as follows
 
 === Parameters: 1
 
 |===
-| Name | Step | Row
+| Content
 |===
 
 == Definition: Scenario Outline Examples Table section will be created as follows
@@ -72,6 +46,14 @@
 | Name | Examples | Row
 |===
 
+== Definition: Scenarios section will be created as follows
+
+=== Parameters: 1
+
+|===
+| Name | Tags | Description
+|===
+
 == Definition: Scenarios Steps Doc String section will be created as follows
 
 === Parameters: 1
@@ -79,4 +61,22 @@
 |===
 | Name | Step | Content
 |===
+
+== Definition: Scenarios Steps section will be created as follows
+
+=== Parameters: 1
+
+|===
+| Name | Step
+|===
+
+== Definition: Scenarios Steps Step Table section will be created as follows
+
+=== Parameters: 1
+
+|===
+| Name | Step | Row
+|===
+
+== Definition: will be present
 

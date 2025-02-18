@@ -1,35 +1,11 @@
 = Object: uml/pst.uml file
 
-== Definition: will be present
-
-== Definition: Interaction Messages section will be created as follows
+== Definition: Class Annotations section will be created as follows
 
 === Parameters: 1
 
 |===
-| Interaction Name | Message
-|===
-
-=== Parameters: 2
-
-|===
-| Interaction Name | Message | Argument Name | Annotation Detail
-|===
-
-== Definition: Interaction Annotations section will be created as follows
-
-=== Parameters: 1
-
-|===
-| Interaction Name | Annotation Name | Annotation Detail
-|===
-
-== Definition: Class section will be created as follows
-
-=== Parameters: 1
-
-|===
-| Class Name
+| Class Name | Annotation Name | Annotation Detail
 |===
 
 == Definition: Class Comments section will be created as follows
@@ -40,20 +16,12 @@
 | Class Name | Comment
 |===
 
-== Definition: Interaction Comments section will be created as follows
+== Definition: Class section will be created as follows
 
 === Parameters: 1
 
 |===
-| Interaction Name | Comment
-|===
-
-== Definition: Class Annotations section will be created as follows
-
-=== Parameters: 1
-
-|===
-| Class Name | Annotation Name | Annotation Detail
+| Class Name
 |===
 
 == Definition: Class section won't be created as follows
@@ -62,6 +30,36 @@
 
 |===
 | Class Name
+|===
+
+== Definition: Interaction Annotations section will be created as follows
+
+=== Parameters: 1
+
+|===
+| Interaction Name | Annotation Name | Annotation Detail
+|===
+
+== Definition: Interaction Comments section will be created as follows
+
+=== Parameters: 1
+
+|===
+| Interaction Name | Comment
+|===
+
+== Definition: Interaction Messages section will be created as follows
+
+=== Parameters: 1
+
+|===
+| Interaction Name | Message | Argument Name | Annotation Detail
+|===
+
+=== Parameters: 2
+
+|===
+| Interaction Name | Message
 |===
 
 == Definition: Interaction section will be created as follows
@@ -79,4 +77,6 @@
 |===
 | Interaction Name
 |===
+
+== Definition: will be present
 

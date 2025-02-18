@@ -2,9 +2,12 @@ package org.farhan.mbt;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -72,7 +75,16 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		StepDefinition stepDefinition;
 		stepDefinition = SheepDogFactory.eINSTANCE.createStepDefinition();
 		stepDefinition.setName(predicate);
-		((StepObject) stepObject).getStepDefinitions().add(stepDefinition);
+		EList<StepDefinition> list = ((StepObject) stepObject).getStepDefinitions();
+		list.add(stepDefinition);
+
+		TreeMap<String, StepDefinition> sorted = new TreeMap<String, StepDefinition>();
+		for (int i = list.size(); i > 0; i--) {
+			sorted.put(list.get(i - 1).getName().toLowerCase(), list.removeLast());
+		}
+		for (String name : sorted.keySet()) {
+			list.add(sorted.get(name));
+		}
 		return stepDefinition;
 	}
 
@@ -144,6 +156,11 @@ public class LanguageAccessImpl implements ILanguageAccess {
 			}
 		}
 		return steps;
+	}
+
+	@Override
+	public String getFileExtension() {
+		return ".asciidoc";
 	}
 
 	@Override
@@ -327,11 +344,6 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	@Override
 	public void saveObject(Object theObject, Map<Object, Object> options) throws Exception {
 		((EObject) theObject).eResource().save(options);
-	}
-
-	@Override
-	public String getFileExtension() {
-		return ".asciidoc";
 	}
 
 }

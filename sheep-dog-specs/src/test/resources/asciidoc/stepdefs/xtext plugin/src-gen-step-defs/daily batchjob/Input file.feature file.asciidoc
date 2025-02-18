@@ -5,7 +5,7 @@
 === Parameters: 1
 
 |===
-| Object Name | Object Description
+| Object Name | Step Definition Name | Step Definition Description
 |===
 
 === Parameters: 2
@@ -23,7 +23,7 @@
 === Parameters: 4
 
 |===
-| Object Name | Step Definition Name | Step Definition Description
+| Object Name | Object Description
 |===
 
 == Definition: will be created as follows

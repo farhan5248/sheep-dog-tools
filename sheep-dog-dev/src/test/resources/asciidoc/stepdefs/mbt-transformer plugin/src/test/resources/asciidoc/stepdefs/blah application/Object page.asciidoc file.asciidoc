@@ -8,16 +8,6 @@
 | Content
 |===
 
-== Definition: will be created as follows
-
-=== Parameters: 1
-
-|===
-| Content
-|===
-
-== Definition: will be present
-
 == Definition: Object section will be created as follows
 
 === Parameters: 1
@@ -47,4 +37,14 @@
 |===
 | Name | Description
 |===
+
+== Definition: will be created as follows
+
+=== Parameters: 1
+
+|===
+| Content
+|===
+
+== Definition: will be present
 

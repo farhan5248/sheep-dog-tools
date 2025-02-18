@@ -1,5 +1,13 @@
 = Object: src/test/resources/cucumber/Process.feature file
 
+== Definition: background steps snippet is created as follows
+
+=== Parameters: 1
+
+|===
+| Step Name
+|===
+
 == Definition: steps snippet is created as follows
 
 === Parameters: 1
@@ -12,13 +20,5 @@
 
 |===
 | Step Name | Headers
-|===
-
-== Definition: background steps snippet is created as follows
-
-=== Parameters: 1
-
-|===
-| Step Name
 |===
 
