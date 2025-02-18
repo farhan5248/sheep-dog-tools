@@ -1,9 +1,9 @@
 package org.farhan.stepdefs.mbttransformer;
 
+import com.google.inject.Inject;
+import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Given;
 import org.farhan.common.TestSteps;
-import io.cucumber.guice.ScenarioScoped;
-import com.google.inject.Inject;
 import org.farhan.objects.mbttransformer.UmlToCucumberSpringGoal;
 
 @ScenarioScoped

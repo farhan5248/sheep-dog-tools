@@ -2,6 +2,9 @@ package org.farhan.mbt.core;
 
 import java.util.ArrayList;
 import java.util.Map.Entry;
+import java.util.TreeMap;
+
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Behavior;
@@ -143,6 +146,16 @@ public class UMLClassWrapper implements ConvertibleObject {
 		Interaction stepDefinition = createInteraction(theClass, stepName.substring(keyword.length() + 1), "");
 		// TODO rename "StepDefinition" to something better
 		createAnnotation(stepDefinition, "StepDefinition", "Keyword", keyword);
+		// TODO make tests for this by doing adoc(undorted) uml adoc (sorted)
+		TreeMap<String, Interaction> sorted = new TreeMap<String, Interaction>();
+		EList<Behavior> behaviors = theClass.getOwnedBehaviors();
+		for (int i = behaviors.size(); i > 0; i--) {
+			sorted.put(behaviors.get(i - 1).getName(), (Interaction) behaviors.get(i - 1));
+			behaviors.removeLast();
+		}
+		for (String name : sorted.keySet()) {
+			behaviors.add(sorted.get(name));
+		}
 		return stepDefinition;
 	}
 
@@ -150,6 +163,26 @@ public class UMLClassWrapper implements ConvertibleObject {
 		if (!parameterName.isEmpty()) {
 			createAnnotation(stepDef, "parameters", parameterName);
 		}
+	}
+
+	public EAnnotation createStepParameters(Interaction stepDefinition, String name) {
+		return createAnnotation(stepDefinition, name);
+	}
+
+	public void createStepParametersRow(EAnnotation stepParameters, ArrayList<String> stepParametersRow) {
+		String value = "";
+		for (String e : stepParametersRow) {
+			value += e + "|";
+		}
+		stepParameters.getDetails().put(String.valueOf(stepParameters.getDetails().size()), value);
+	}
+
+	public void createStepParametersTable(EAnnotation stepParameters, ArrayList<String> headers) {
+		String value = "";
+		for (String e : headers) {
+			value += e + "|";
+		}
+		stepParameters.getDetails().put("0", value);
 	}
 
 	public void createStepTable(Message step, ArrayList<ArrayList<String>> stepTableRowList) {
@@ -254,10 +287,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return theClass.getEAnnotations().getFirst().getDetails().get(0).getKey();
 	}
 
-	public String getStepObjectName() {
-		return theClass.getEAnnotations().getFirst().getDetails().get(0).getKey();
-	}
-
 	public ArrayList<String> getFeatureTags() {
 		ArrayList<String> tags = new ArrayList<String>();
 		if (theClass.getEAnnotations().size() == 2) {
@@ -266,14 +295,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 			}
 		}
 		return tags;
-	}
-
-	public ArrayList<Interaction> getStepDefinitionList() {
-		ArrayList<Interaction> steps = new ArrayList<Interaction>();
-		for (Behavior b : theClass.getOwnedBehaviors()) {
-			steps.add((Interaction) b);
-		}
-		return steps;
 	}
 
 	@Override
@@ -317,6 +338,14 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return keyword + " " + name;
 	}
 
+	public ArrayList<Interaction> getStepDefinitionList() {
+		ArrayList<Interaction> steps = new ArrayList<Interaction>();
+		for (Behavior b : theClass.getOwnedBehaviors()) {
+			steps.add((Interaction) b);
+		}
+		return steps;
+	}
+
 	public String getStepDefinitionName(Interaction stepDef) {
 		return stepDef.getName();
 	}
@@ -347,6 +376,10 @@ public class UMLClassWrapper implements ConvertibleObject {
 
 	public String getStepName(Message step) {
 		return step.getName();
+	}
+
+	public String getStepObjectName() {
+		return theClass.getEAnnotations().getFirst().getDetails().get(0).getKey();
 	}
 
 	public ArrayList<ArrayList<String>> getStepTable(Message stepSrc) {
@@ -436,44 +469,24 @@ public class UMLClassWrapper implements ConvertibleObject {
 		setTags(abstractScenario, tags);
 	}
 
-	private void setTags(Interaction abstractScenario, ArrayList<String> tags) {
-		if (!tags.isEmpty()) {
-			for (String t : tags) {
-				createAnnotation(abstractScenario, "tags", t);
-			}
-		}
-	}
-
-	public void setStepObjectName(String StepObjectName) {
-		createAnnotation(theClass, "title", StepObjectName);
+	public void setStepDefinitionDescription(Interaction stepDefinition, String description) {
+		stepDefinition.createOwnedComment().setBody(description);
 	}
 
 	public void setStepObjectDescription(String description) {
 		theClass.createOwnedComment().setBody(description);
 	}
 
-	public void setStepDefinitionDescription(Interaction stepDefinition, String description) {
-		stepDefinition.createOwnedComment().setBody(description);
+	public void setStepObjectName(String StepObjectName) {
+		createAnnotation(theClass, "title", StepObjectName);
 	}
 
-	public EAnnotation createStepParameters(Interaction stepDefinition, String name) {
-		return createAnnotation(stepDefinition, name);
-	}
-
-	public void createStepParametersTable(EAnnotation stepParameters, ArrayList<String> headers) {
-		String value = "";
-		for (String e : headers) {
-			value += e + "|";
+	private void setTags(Interaction abstractScenario, ArrayList<String> tags) {
+		if (!tags.isEmpty()) {
+			for (String t : tags) {
+				createAnnotation(abstractScenario, "tags", t);
+			}
 		}
-		stepParameters.getDetails().put("0", value);
-	}
-
-	public void createStepParametersRow(EAnnotation stepParameters, ArrayList<String> stepParametersRow) {
-		String value = "";
-		for (String e : stepParametersRow) {
-			value += e + "|";
-		}
-		stepParameters.getDetails().put(String.valueOf(stepParameters.getDetails().size()), value);
 	}
 
 }

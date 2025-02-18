@@ -1,11 +1,11 @@
 package org.farhan.stepdefs.mbttransformer.src.test.resources.asciidoc.stepdefs.blahapplication;
 
+import com.google.inject.Inject;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Given;
 import org.farhan.common.TestSteps;
 import org.farhan.objects.mbttransformer.src.test.resources.asciidoc.stepdefs.blahapplication.ObjectPageAsciidocFile;
-import io.cucumber.guice.ScenarioScoped;
-import com.google.inject.Inject;
-import io.cucumber.datatable.DataTable;
 
 @ScenarioScoped
 public class MbtTransformerObjectPageAsciidocFileSteps extends TestSteps {

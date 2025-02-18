@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 import org.farhan.mbt.core.ConvertibleObject;
 import org.apache.commons.lang3.StringUtils;
@@ -301,8 +302,15 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	}
 
 	public String toString() {
-		// TODO sort all the imports and methods before conversion or sort them as
-		// they're added.
+		// TODO make tests for this
+		TreeSet<String> sorted = new TreeSet<String>();
+		for (int i = theJavaClass.getImports().size(); i > 0; i--) {
+			sorted.add(theJavaClass.getImports().get(i - 1).getNameAsString());
+			theJavaClass.getImports().remove(i - 1);
+		}
+		for (String name : sorted) {
+			theJavaClass.addImport(name);
+		}
 		return theJavaClass.toString();
 	}
 
