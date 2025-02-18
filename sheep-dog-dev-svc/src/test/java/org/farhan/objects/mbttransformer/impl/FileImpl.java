@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import org.farhan.common.FileObject;
 import org.farhan.objects.mbttransformer.BlahObjectPageStepsJavaFile;
+import org.farhan.objects.mbttransformer.ObjectPageAsciidocFile;
+import org.farhan.objects.mbttransformer.ObjectPageJavaFile;
 import org.farhan.objects.mbttransformer.ProcessAsciidocFile;
 import org.farhan.objects.mbttransformer.ProcessFeatureFile;
 import org.springframework.context.annotation.Scope;
@@ -12,7 +14,8 @@ import static io.cucumber.spring.CucumberTestContext.SCOPE_CUCUMBER_GLUE;
 
 @Component
 @Scope(SCOPE_CUCUMBER_GLUE)
-public class FileImpl extends FileObject implements BlahObjectPageStepsJavaFile, ProcessAsciidocFile, ProcessFeatureFile {
+public class FileImpl extends FileObject implements BlahObjectPageStepsJavaFile, ProcessAsciidocFile,
+		ProcessFeatureFile, ObjectPageAsciidocFile, ObjectPageJavaFile {
 
 	@Override
 	public void assertContent(HashMap<String, String> keyMap) {

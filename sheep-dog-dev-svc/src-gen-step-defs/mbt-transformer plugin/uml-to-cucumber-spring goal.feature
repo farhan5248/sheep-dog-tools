@@ -6,3 +6,5 @@ Object: uml-to-cucumber-spring goal
 
           | Tags |
 
+  Definition: is executed
+

@@ -192,7 +192,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	protected String getPackageDeclaration() {
 		String packageName = thePath.replaceAll("\\" + "/" + "[^\\" + "/" + "]*$", "");
 		packageName = packageName.replace("/", ".");
-		packageName = packageName.replaceFirst("^.*org.farhan", "org.farhan");
+		packageName = packageName.replaceFirst("^src\\.test\\.java\\.org\\.farhan", "org.farhan");
 		return packageName;
 	}
 

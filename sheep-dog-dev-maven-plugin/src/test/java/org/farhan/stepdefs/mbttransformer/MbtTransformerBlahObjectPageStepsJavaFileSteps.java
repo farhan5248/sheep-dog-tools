@@ -1,11 +1,11 @@
 package org.farhan.stepdefs.mbttransformer;
 
+import com.google.inject.Inject;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.guice.ScenarioScoped;
+import io.cucumber.java.en.Given;
 import org.farhan.common.TestSteps;
 import org.farhan.objects.mbttransformer.BlahObjectPageStepsJavaFile;
-import com.google.inject.Inject;
-import io.cucumber.java.en.Given;
-import io.cucumber.guice.ScenarioScoped;
-import io.cucumber.datatable.DataTable;
 
 @ScenarioScoped
 public class MbtTransformerBlahObjectPageStepsJavaFileSteps extends TestSteps {
@@ -13,6 +13,13 @@ public class MbtTransformerBlahObjectPageStepsJavaFileSteps extends TestSteps {
     @Inject
     public MbtTransformerBlahObjectPageStepsJavaFileSteps(BlahObjectPageStepsJavaFile object) {
         super(object);
+    }
+
+    @Given("^The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Fields section will be created as follows$")
+    public void theMbtTransformerPluginSrcTestJavaOrgFarhanStepdefsBlahBlahObjectPageStepsJavaFileFieldsSectionWillBeCreatedAsFollows(DataTable dataTable) {
+        object.setComponent("mbt-transformer");
+        object.setPath("src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java");
+        object.assertInputOutputs(dataTable, "FieldsSection");
     }
 
     @Given("^The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows$")
@@ -34,12 +41,5 @@ public class MbtTransformerBlahObjectPageStepsJavaFileSteps extends TestSteps {
         object.setComponent("mbt-transformer");
         object.setPath("src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java");
         object.assertInputOutputs("Present");
-    }
-
-    @Given("^The mbt-transformer plugin, BlahObjectPageSteps.java file Fields section will be created as follows$")
-    public void theMbtTransformerPluginBlahObjectPageStepsJavaFileFieldsSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.setComponent("mbt-transformer");
-        object.setPath("BlahObjectPageSteps.java");
-        object.assertInputOutputs(dataTable, "FieldsSection");
     }
 }

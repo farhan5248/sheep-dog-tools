@@ -1,11 +1,11 @@
 package org.farhan.stepdefs.mbttransformer;
 
+import com.google.inject.Inject;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Given;
 import org.farhan.common.TestSteps;
-import io.cucumber.guice.ScenarioScoped;
-import com.google.inject.Inject;
 import org.farhan.objects.mbttransformer.ObjectPageJavaFile;
-import io.cucumber.datatable.DataTable;
 
 @ScenarioScoped
 public class MbtTransformerObjectPageJavaFileSteps extends TestSteps {
@@ -13,6 +13,13 @@ public class MbtTransformerObjectPageJavaFileSteps extends TestSteps {
     @Inject
     public MbtTransformerObjectPageJavaFileSteps(ObjectPageJavaFile object) {
         super(object);
+    }
+
+    @Given("^The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file Fields section will be created as follows$")
+    public void theMbtTransformerPluginSrcTestJavaOrgFarhanObjectsBlahObjectPageJavaFileFieldsSectionWillBeCreatedAsFollows(DataTable dataTable) {
+        object.setComponent("mbt-transformer");
+        object.setPath("src/test/java/org/farhan/objects/blah/ObjectPage.java");
+        object.assertInputOutputs(dataTable, "FieldsSection");
     }
 
     @Given("^The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file is created as follows$")

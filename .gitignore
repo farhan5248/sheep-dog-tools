@@ -23,6 +23,5 @@ release.properties
 **/secrets.yaml
 **/*.env
 **/*.theia-workspace
-**/*.classpath
 sheep-dog-dev-svc-maven-plugin/.classpath
 .vscode/settings.json

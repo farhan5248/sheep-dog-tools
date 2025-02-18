@@ -6,3 +6,5 @@ Object: uml-to-cucumber-guice goal
 
           | Tags |
 
+  Definition: is executed
+

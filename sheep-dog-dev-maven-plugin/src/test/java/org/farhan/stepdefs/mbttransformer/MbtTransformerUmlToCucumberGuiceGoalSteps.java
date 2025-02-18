@@ -1,11 +1,11 @@
 package org.farhan.stepdefs.mbttransformer;
 
-import org.farhan.common.TestSteps;
-import org.farhan.objects.mbttransformer.UmlToCucumberGuiceGoal;
 import com.google.inject.Inject;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Given;
+import org.farhan.common.TestSteps;
+import org.farhan.objects.mbttransformer.UmlToCucumberGuiceGoal;
 
 @ScenarioScoped
 public class MbtTransformerUmlToCucumberGuiceGoalSteps extends TestSteps {
