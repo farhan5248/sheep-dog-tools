@@ -55,4 +55,9 @@ public class SourceRepository {
 		path = BASEDIR + "/" + path;
 		return new File(path).exists();
 	}
+
+	public void delete(String path) {
+		path = BASEDIR + "/" + path;
+		new File(path).delete();
+	}
 }

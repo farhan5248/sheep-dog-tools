@@ -77,4 +77,11 @@ public class MbtTransformerObjectPageAsciidocFileSteps extends TestSteps {
         object.setPath("src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc");
         object.assertInputOutputs("Present");
     }
+
+    @Given("^The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted$")
+    public void theMbtTransformerPluginSrcTestResourcesAsciidocStepdefsBlahApplicationObjectPageAsciidocFileIsDeleted() {
+        object.setComponent("mbt-transformer");
+        object.setPath("src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc");
+        object.setInputOutputs("Deleted");
+    }
 }

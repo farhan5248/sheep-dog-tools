@@ -130,4 +130,9 @@ public class ProcessAsciidocFileImpl extends AdocFileObject implements ProcessAs
 		setContent(keyMap.get("Content"));
 	}
 
+	@Override
+	public void setDeleted(HashMap<String, String> keyMap) {
+		deleteObject();
+	}
+
 }

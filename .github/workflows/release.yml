@@ -73,8 +73,8 @@ jobs:
       working-directory: ./${{ inputs.project }}
       run: |
         git reset --hard HEAD
-        mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true
         git clean -fdx
+        mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true
         if [[ $(git status --porcelain --untracked-files=no | wc -l) -gt 0 ]]; then
           git add *
           git commit -m "Upgrading dependency versions"

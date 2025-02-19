@@ -133,10 +133,6 @@ Feature: Document To Document
           """
           = Object: Object page
           
-          == Definition: is valid
-          
-          == Definition: is invalid
-          
           == Definition: is created as follows
           
           === Parameters: 1
@@ -150,5 +146,9 @@ Feature: Document To Document
           |===
           | Content
           |===
+          
+          == Definition: is invalid
+          
+          == Definition: is valid
           """
 

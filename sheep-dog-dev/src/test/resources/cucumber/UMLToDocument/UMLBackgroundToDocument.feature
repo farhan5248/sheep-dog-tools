@@ -15,9 +15,10 @@ Feature: UML Background To Document
           
           == Scenario: Submit
           
-          === Given: The Object1 page is valid
+          === Given: The Object page is valid
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Background section will be created as follows
@@ -27,8 +28,8 @@ Feature: UML Background To Document
           | Name  | Step                             |
           | Setup | Given: The Object0 page is valid |
       And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
-          | Name   | Step                             |
-          | Submit | Given: The Object1 page is valid |
+          | Name   | Step                            |
+          | Submit | Given: The Object page is valid |
 
   Scenario: No statement, one step, one scenario
 
@@ -42,17 +43,18 @@ Feature: UML Background To Document
           
           == Scenario: Submit
           
-          === Given: The Object1 page is valid
+          === Given: The Object page is valid
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
           | Name  | Step                             |
           | Setup | Given: The Object0 page is valid |
       And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
-          | Name   | Step                             |
-          | Submit | Given: The Object1 page is valid |
+          | Name   | Step                            |
+          | Submit | Given: The Object page is valid |
 
   Scenario: No statement, one step, two scenarios
 
@@ -66,13 +68,14 @@ Feature: UML Background To Document
           
           == Scenario: Submit 1
           
-          === Given: The Object1 page is valid
+          === Given: The Object page is valid
           
           == Scenario: Submit 2
           
           === Given: The Object2 page is valid
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
@@ -80,7 +83,7 @@ Feature: UML Background To Document
           | Setup | Given: The Object0 page is valid |
       And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
           | Name     | Step                             |
-          | Submit 1 | Given: The Object1 page is valid |
+          | Submit 1 | Given: The Object page is valid  |
           | Submit 2 | Given: The Object2 page is valid |
 
   Scenario: No statement, one step, three scenarios
@@ -95,7 +98,7 @@ Feature: UML Background To Document
           
           == Scenario: Submit 1
           
-          === Given: The Object1 page is valid
+          === Given: The Object page is valid
           
           == Scenario: Submit 2
           
@@ -106,6 +109,7 @@ Feature: UML Background To Document
           === Given: The Object3 page is valid
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
@@ -113,7 +117,7 @@ Feature: UML Background To Document
           | Setup | Given: The Object0 page is valid |
       And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
           | Name     | Step                             |
-          | Submit 1 | Given: The Object1 page is valid |
+          | Submit 1 | Given: The Object page is valid  |
           | Submit 2 | Given: The Object2 page is valid |
           | Submit 3 | Given: The Object3 page is valid |
 
@@ -125,7 +129,7 @@ Feature: UML Background To Document
           
           == Background: Setup
           
-          === Given: The Object1 page is valid
+          === Given: The Object page is valid
           === Given: The Object2 page is valid
           
           == Scenario: Submit
@@ -133,11 +137,12 @@ Feature: UML Background To Document
           === Given: The Object page is valid
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
           | Name  | Step                             |
-          | Setup | Given: The Object1 page is valid |
+          | Setup | Given: The Object page is valid  |
           | Setup | Given: The Object2 page is valid |
       And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                            |
@@ -151,7 +156,7 @@ Feature: UML Background To Document
           
           == Background: Setup
           
-          === Given: The Object1 page is valid
+          === Given: The Object page is valid
           === Given: The Object2 page is valid
           === Given: The Object3 page is valid
           
@@ -160,11 +165,12 @@ Feature: UML Background To Document
           === Given: The Object page is valid
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
           | Name  | Step                             |
-          | Setup | Given: The Object1 page is valid |
+          | Setup | Given: The Object page is valid  |
           | Setup | Given: The Object2 page is valid |
           | Setup | Given: The Object3 page is valid |
       And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows

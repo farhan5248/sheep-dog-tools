@@ -217,7 +217,7 @@ Feature: Document Scenario Outline To UML
           [tags="tag1"]
           == Scenario: Submit
           
-          === Given: The blah application, Object1 page is empty
+          === Given: The blah application, Object page is empty
           
           === Examples: Examples 1
           
@@ -229,7 +229,7 @@ Feature: Document Scenario Outline To UML
           [tags="tag2"]
           == Scenario: Submit2
           
-          === Given: The blah application, Object1 page is empty
+          === Given: The blah application, Object page is empty
           
           === Examples: Examples 1
           

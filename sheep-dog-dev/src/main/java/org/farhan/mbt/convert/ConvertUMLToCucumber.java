@@ -147,23 +147,33 @@ public class ConvertUMLToCucumber extends Converter {
 		}
 	}
 
-	private String getStep(Interaction stepDefinition) {
+	private String addComponentObjectToStep(Interaction stepDefinition) {
 		String stepDefinitionName = srcObj.getStepDefinitionName(stepDefinition);
 		String component = srcObj.getPath().replace("pst::stepdefs::", "").split("::")[0];
 		String object = srcObj.getPath().split("::" + component + "::")[1].replace("::", "/");
 		return "The " + component + ", " + object + " " + stepDefinitionName;
 	}
 
-	private void convertStepDefinition(Interaction stepDefinition) throws Exception {
-		String step = getStep(stepDefinition);
-		tgtObj2.createStepDefinition(step);
+	private void convertStepDefinition(Interaction stepDefinitionSrc) throws Exception {
+		String stepDefinitionName = addComponentObjectToStep(stepDefinitionSrc);
+		tgtObj2.createStepDefinition(stepDefinitionName);
 
-		ArrayList<String> parametersList = srcObj.getStepDefinitionParameterList(stepDefinition);
-		convertStepParameters(stepDefinition, parametersList);
+		ArrayList<EAnnotation> parametersList = srcObj.getStepDefinitionParameterList(stepDefinitionSrc);
+		convertStepParameters(stepDefinitionSrc, parametersList);
 	}
 
-	private void convertStepParameters(Interaction stepDefinition, ArrayList<String> parametersSrc) throws Exception {
-		tgtObj2.setStepDefinitionParameters(getStep(stepDefinition), parametersSrc);
+	private void convertStepParameters(Interaction stepDefinition, ArrayList<EAnnotation> parametersList)
+			throws Exception {
+
+		ArrayList<String> parametersListMerged = new ArrayList<String>();
+		for (EAnnotation a : parametersList) {
+			for (String s : a.getDetails().getFirst().getValue().split("\\|")) {
+				if (!parametersListMerged.contains(s.trim())) {
+					parametersListMerged.add(s.trim());
+				}
+			}
+		}
+		tgtObj2.setStepDefinitionParameters(addComponentObjectToStep(stepDefinition), parametersListMerged);
 	}
 
 	private void convertStepDefinitionList() throws Exception {
@@ -200,11 +210,9 @@ public class ConvertUMLToCucumber extends Converter {
 		for (ConvertibleObject co : model.getObjects(model.TEST_CASES)) {
 			objects.add(pathConverter.createFilePath(co.getPath(), model.TEST_CASES));
 		}
-		if (project instanceof CucumberProject) {
-			for (ConvertibleObject co : model.getObjects(model.TEST_STEPS)) {
-				objects.add(pathConverter.createFilePath(co.getPath(), model.TEST_STEPS));
-				objects.add(pathConverter.createFilePath(co.getPath(), model.TEST_OBJECTS));
-			}
+		for (ConvertibleObject co : model.getObjects(model.TEST_STEPS)) {
+			objects.add(pathConverter.createFilePath(co.getPath(), model.TEST_STEPS));
+			objects.add(pathConverter.createFilePath(co.getPath(), model.TEST_OBJECTS));
 		}
 		return objects;
 	}

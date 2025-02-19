@@ -15,6 +15,7 @@ Feature: UML Step To Document
           === And: The blah application, And page is empty
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
@@ -35,6 +36,7 @@ Feature: UML Step To Document
           === Given: The blah application, Given page isn't empty
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows

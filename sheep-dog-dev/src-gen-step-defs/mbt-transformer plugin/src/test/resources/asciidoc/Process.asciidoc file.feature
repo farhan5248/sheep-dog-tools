@@ -62,3 +62,5 @@ Object: src/test/resources/asciidoc/Process.asciidoc file
 
           | Name | Statements |
 
+  Definition: is deleted
+

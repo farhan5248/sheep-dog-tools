@@ -141,4 +141,10 @@ public abstract class TestObject {
 
 	public void transition() {
 	}
+
+	public void setInputOutputs(String key) {
+		HashMap<String, String> row = new HashMap<String, String>();
+		row.put(key, "true");
+		processInputOutputs(row, "set", "", false);
+	}
 }

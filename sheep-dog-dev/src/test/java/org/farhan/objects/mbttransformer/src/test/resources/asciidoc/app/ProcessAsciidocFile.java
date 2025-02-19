@@ -51,4 +51,6 @@ public interface ProcessAsciidocFile {
     public void assertScenariosStepsStepTableSectionStep(HashMap<String, String> keyMap);
 
     public void setContent(HashMap<String, String> keyMap);
+
+    public void setDeleted(HashMap<String, String> keyMap);
 }

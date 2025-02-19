@@ -2,12 +2,12 @@ package org.farhan.mbt.convert;
 
 import java.util.ArrayList;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
-import org.farhan.helper.StepHelper;
+import org.farhan.helper.StepDefinitionHelper;
+import org.farhan.mbt.LanguageAccessImpl;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorPathConverter;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
@@ -28,9 +28,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	private AsciiDoctorAdocWrapper srcObj;
 	private UMLClassWrapper tgtObj;
-	// TODO delete lastComponent after using sheep-dog-test get component name
-	private String lastComponent = "InitialComponent";
-	private ArrayList<String> stepObjects;
+	private static ArrayList<String> stepObjects;
 	protected AsciiDoctorPathConverter pathConverter;
 
 	public ConvertAsciidoctorToUML(String tags, ObjectRepository fa, Logger log) {
@@ -118,7 +116,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 	private void convertStep(Interaction abstractScenario, Step stepSrc) {
 		Message step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
 
-		stepObjects.add(getStepObjName(stepSrc.getName()));
+		stepObjects.add(StepDefinitionHelper.getStepObjectQualifiedName(new LanguageAccessImpl(stepSrc)));
 
 		if (srcObj.hasDocString(stepSrc)) {
 			convertDocString(step, stepSrc);
@@ -171,39 +169,6 @@ public class ConvertAsciidoctorToUML extends Converter {
 		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
 	}
 
-	private String getComponentName(String step) {
-		String name = StepHelper.getComponentName(step);
-		if (name.isEmpty()) {
-			name = lastComponent;
-		} else {
-			name = removeDelimiterAndCapitalize(name, "\\.");
-			name = removeDelimiterAndCapitalize(name, "\\-");
-			name = removeDelimiterAndCapitalize(name, " ");
-			lastComponent = name;
-		}
-		return name;
-	}
-
-	private String getObjectName(String step) {
-		String name = StepHelper.getObjectName(step);
-		String nameParts[] = name.split("/");
-		name = nameParts[nameParts.length - 1];
-		name = removeDelimiterAndCapitalize(name, "\\.");
-		name = removeDelimiterAndCapitalize(name, "\\-");
-		name = removeDelimiterAndCapitalize(name, " ");
-		name = StringUtils.capitalize(name);
-		return name;
-	}
-
-	// TODO these are duplicates of cucumber to uml converter. This exists in the
-	// sheep-dog-test library so perhaps first refactor to use that?
-	private String getStepObjName(String stepName) {
-		String objectName = getObjectName(stepName);
-		String objectType = StringUtils.capitalize(StepHelper.getObjectType(stepName));
-		String componentName = getComponentName(stepName);
-		return project.getDir(project.TEST_OBJECTS) + "/" + componentName + "/" + objectName + objectType + ".asciidoc";
-	}
-
 	public void initProjects() throws Exception {
 		project = new AsciiDoctorProject(this.tags, this.fa);
 		project.init();
@@ -217,7 +182,13 @@ public class ConvertAsciidoctorToUML extends Converter {
 	private boolean isFileSelected(ConvertibleObject convertibleFile, String tags) throws Exception {
 
 		AsciiDoctorAdocWrapper ufw = (AsciiDoctorAdocWrapper) convertibleFile;
-		if (ufw.getPath().startsWith(project.getDir(project.TEST_CASES))) {
+		if (ufw.getPath().startsWith(project.getDir(project.TEST_STEPS))) {
+			for (String path : stepObjects) {
+				if (ufw.getPath().contentEquals(project.getDir(project.TEST_STEPS) + "/" + path)) {
+					return true;
+				}
+			}
+		} else {
 			if (isTagged(ufw.getFeatureTags(), tags)) {
 				return true;
 			}
@@ -230,12 +201,6 @@ public class ConvertAsciidoctorToUML extends Converter {
 					if (isTagged(ufw.getAbstractScenarioTags(a), tags)) {
 						return true;
 					}
-				}
-			}
-		} else {
-			for (String path : stepObjects) {
-				if (ufw.getPath().contentEquals(path)) {
-					return true;
 				}
 			}
 		}

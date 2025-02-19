@@ -2,7 +2,6 @@ package org.farhan.mbt.convert;
 
 import java.util.ArrayList;
 
-import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
@@ -17,6 +16,8 @@ import org.farhan.mbt.sheepDog.Background;
 import org.farhan.mbt.sheepDog.Examples;
 import org.farhan.mbt.sheepDog.Scenario;
 import org.farhan.mbt.sheepDog.Step;
+import org.farhan.mbt.sheepDog.StepDefinition;
+import org.farhan.mbt.sheepDog.StepParameters;
 import org.farhan.mbt.core.Converter;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Logger;
@@ -31,7 +32,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		super(tags, fa, log);
 	}
 
-	protected void convertAbstractScenarioList() throws Exception {
+	private void convertAbstractScenarioList() throws Exception {
 		for (Interaction abstractScenario : srcObj.getAbstractScenarioList()) {
 			log.debug("test case: " + abstractScenario.getName());
 			if (srcObj.isBackground(abstractScenario)) {
@@ -67,15 +68,10 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		tgtObj.createExamplesRow(examples, examplesRow);
 	}
 
-	@Override
-	public String convertObject(String path, String content) throws Exception {
-		log.debug("test suite: " + path);
-		initProjects();
+	private String convertFeature(String tags, String path, String content) throws Exception {
 		srcObj = (UMLClassWrapper) model.createObject(pathConverter.getUMLPath(path));
-
 		tgtObj = (AsciiDoctorAdocWrapper) project.createObject(path);
 		tgtObj.parse(content);
-
 		tgtObj.setFeatureName(srcObj.getFeatureName());
 		tgtObj.setFeatureTags(srcObj.getFeatureTags());
 		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
@@ -83,13 +79,16 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		return tgtObj.toString();
 	}
 
-	public ArrayList<String> getObjectNames() throws Exception {
+	@Override
+	public String convertObject(String path, String content) throws Exception {
 		initProjects();
-		ArrayList<String> objects = new ArrayList<String>();
-		for (ConvertibleObject co : model.getObjects(model.TEST_CASES)) {
-			objects.add(pathConverter.createFilePath(co.getPath(), model.TEST_CASES));
+		if (path.startsWith(project.getDir(project.TEST_STEPS))) {
+			log.debug("step object: " + path);
+			return convertStepObject(tags, path, content);
+		} else {
+			log.debug("test suite: " + path);
+			return convertFeature(tags, path, content);
 		}
-		return objects;
 	}
 
 	private void convertScenario(Interaction abstractScenario) {
@@ -121,6 +120,24 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		}
 	}
 
+	private void convertStepDefinition(Interaction stepDefinitionSrc) throws Exception {
+		StepDefinition stepDefinition = tgtObj.createStepDefinition(srcObj.getStepDefinitionName(stepDefinitionSrc));
+		tgtObj.setStepDefinitionDescription(stepDefinition, srcObj.getStepDefinitionDescription(stepDefinitionSrc));
+
+		ArrayList<EAnnotation> parametersList = srcObj.getStepDefinitionParameterList(stepDefinitionSrc);
+		for (EAnnotation parameters : parametersList) {
+			convertStepParameters(stepDefinition, parameters);
+		}
+
+	}
+
+	private void convertStepDefinitionList() throws Exception {
+		for (Interaction stepDefinition : srcObj.getStepDefinitionList()) {
+			log.debug("step definition: " + stepDefinition.getName());
+			convertStepDefinition(stepDefinition);
+		}
+	}
+
 	private void convertStepList(AbstractScenario abstractScenario, ArrayList<Message> stepList) {
 		for (Message step : stepList) {
 			log.debug("test step: " + step.getName());
@@ -128,8 +145,44 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		}
 	}
 
+	private String convertStepObject(String tags, String path, String content) throws Exception {
+		srcObj = (UMLClassWrapper) model.createObject(pathConverter.getUMLPath(path));
+		tgtObj = (AsciiDoctorAdocWrapper) project.createObject(path);
+		tgtObj.parse(content);
+		tgtObj.setStepObjectName(srcObj.getStepObjectName());
+		tgtObj.setStepObjectDescription(srcObj.getStepObjectDescription());
+		convertStepDefinitionList();
+		return tgtObj.toString();
+	}
+
+	private void convertStepParameters(StepDefinition stepDefinition, EAnnotation parametersSrc) throws Exception {
+
+		StepParameters stepParameters = tgtObj.createStepParameters(stepDefinition,
+				srcObj.getStepParametersName(parametersSrc));
+		tgtObj.createStepParametersTable(stepParameters, srcObj.getStepParametersTable(parametersSrc));
+		for (ArrayList<String> stepParametersRow : srcObj.getStepParametersRowList(parametersSrc)) {
+			convertStepParametersRow(stepParameters, stepParametersRow);
+		}
+	}
+
+	private void convertStepParametersRow(StepParameters stepParameters, ArrayList<String> stepParametersRow) {
+		tgtObj.createStepParametersRow(stepParameters, stepParametersRow);
+	}
+
 	private void convertStepTable(Step step, Message stepSrc) {
 		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
+	}
+
+	public ArrayList<String> getObjectNames() throws Exception {
+		initProjects();
+		ArrayList<String> objects = new ArrayList<String>();
+		for (ConvertibleObject co : model.getObjects(model.TEST_CASES)) {
+			objects.add(pathConverter.createFilePath(co.getPath(), model.TEST_CASES));
+		}
+		for (ConvertibleObject co : model.getObjects(model.TEST_STEPS)) {
+			objects.add(pathConverter.createFilePath(co.getPath(), model.TEST_STEPS));
+		}
+		return objects;
 	}
 
 	public void initProjects() throws Exception {

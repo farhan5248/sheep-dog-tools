@@ -1,5 +1,6 @@
 package org.farhan.common;
 
+import java.io.File;
 import java.util.ArrayList;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.sheepDog.AbstractScenario;
@@ -49,6 +50,15 @@ public class AdocFileObject extends FileObject {
 
 	protected void assertFeatureTags(String name, String tags) {
 		Assertions.assertEquals(tags, Utilities.listAsCsv(wrapper.getFeatureTags()));
+	}
+
+	protected void deleteObject() {
+		super.assertObjectExists();
+		try {
+			sr.delete(attributes.get("path"));
+		} catch (Exception e) {
+			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
+		}
 	}
 
 	protected void assertObjectExists() {

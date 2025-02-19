@@ -119,7 +119,7 @@ Feature: Document To Code
                     | 5   |
                     | 6   |
           """
-      And The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file is created as follows
+      And The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be created as follows
           """
           package org.farhan.objects.blah;
           
@@ -131,20 +131,20 @@ Feature: Document To Code
           
               public void setIns(HashMap<String, String> keyMap);
           
-              public void setValid(HashMap<String, String> keyMap);
+              public void setContent(HashMap<String, String> keyMap);
           
               public void setInvalid(HashMap<String, String> keyMap);
           
-              public void setContent(HashMap<String, String> keyMap);
+              public void setValid(HashMap<String, String> keyMap);
           }
           """
-      And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows
+      And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.blah;
           
+          import io.cucumber.datatable.DataTable;
           import io.cucumber.java.en.Given;
           import org.farhan.common.BlahFactory;
-          import io.cucumber.datatable.DataTable;
           
           public class BlahObjectPageSteps {
           
@@ -155,11 +155,11 @@ Feature: Document To Code
                   BlahFactory.get("ObjectPage").setInputOutputs(dataTable);
               }
           
-              @Given("^The blah application, Object page is valid$")
-              public void theBlahApplicationObjectPageIsValid() {
+              @Given("^The blah application, Object page is created as follows$")
+              public void theBlahApplicationObjectPageIsCreatedAsFollows(String docString) {
                   BlahFactory.get("ObjectPage").setComponent("blah");
                   BlahFactory.get("ObjectPage").setPath("Object");
-                  BlahFactory.get("ObjectPage").setInputOutputs("Valid");
+                  BlahFactory.get("ObjectPage").setInputOutputs("Content", docString);
               }
           
               @Given("^The blah application, Object page is invalid$")
@@ -169,11 +169,11 @@ Feature: Document To Code
                   BlahFactory.get("ObjectPage").setInputOutputs("Invalid");
               }
           
-              @Given("^The blah application, Object page is created as follows$")
-              public void theBlahApplicationObjectPageIsCreatedAsFollows(String docString) {
+              @Given("^The blah application, Object page is valid$")
+              public void theBlahApplicationObjectPageIsValid() {
                   BlahFactory.get("ObjectPage").setComponent("blah");
                   BlahFactory.get("ObjectPage").setPath("Object");
-                  BlahFactory.get("ObjectPage").setInputOutputs("Content", docString);
+                  BlahFactory.get("ObjectPage").setInputOutputs("Valid");
               }
           }
           """

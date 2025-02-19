@@ -28,3 +28,5 @@ Object: src/test/resources/asciidoc/stepdefs/blah application/Object page.asciid
 
   Definition: will be created as follows
 
+  Definition: is deleted
+

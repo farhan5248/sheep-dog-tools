@@ -5,9 +5,17 @@ Feature: Document Step Definition To UML
 
   Scenario: No statement, one step parameter
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Object: Object1 page
+          = Feature: Process
+          
+          == Scenario: Submit
+          
+          === Given: The blah application, Object page is empty
+          """
+      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+          """
+          = Object: Object page
           
           == Definition: is created as follows
           
@@ -25,9 +33,17 @@ Feature: Document Step Definition To UML
 
   Scenario: One statement, one step parameter
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Object: Object1 page
+          = Feature: Process
+          
+          == Scenario: Submit
+          
+          === Given: The blah application, Object page is empty
+          """
+      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+          """
+          = Object: Object page
           
           == Definition: is created as follows
           
@@ -47,9 +63,17 @@ Feature: Document Step Definition To UML
 
   Scenario Outline: Two statements, two step parameters
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Object: Object1 page
+          = Feature: Process
+          
+          == Scenario: Submit
+          
+          === Given: The blah application, Object page is empty
+          """
+      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+          """
+          = Object: Object page
           
           == Definition: is created as follows
           
@@ -85,9 +109,17 @@ Feature: Document Step Definition To UML
 
   Scenario Outline: Three statements, three step parameters
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Object: Object1 page
+          = Feature: Process
+          
+          == Scenario: Submit
+          
+          === Given: The blah application, Object page is empty
+          """
+      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+          """
+          = Object: Object page
           
           == Definition: is created as follows
           

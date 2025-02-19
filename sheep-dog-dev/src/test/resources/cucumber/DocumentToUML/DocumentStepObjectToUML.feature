@@ -5,9 +5,17 @@ Feature: Document StepObject To UML
 
   Scenario: No statements
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Object: Object1 page
+          = Feature: Process
+          
+          == Scenario: Submit
+          
+          === Given: The blah application, Object page is empty
+          """
+      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+          """
+          = Object: Object page
           
           == Definition: is empty
           """
@@ -19,9 +27,17 @@ Feature: Document StepObject To UML
 
   Scenario: One statement
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Object: Object1 page
+          = Feature: Process
+          
+          == Scenario: Submit
+          
+          === Given: The blah application, Object page is empty
+          """
+      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+          """
+          = Object: Object page
           
           Desc line 1
           
@@ -35,9 +51,17 @@ Feature: Document StepObject To UML
 
   Scenario: Two statements
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Object: Object1 page
+          = Feature: Process
+          
+          == Scenario: Submit
+          
+          === Given: The blah application, Object page is empty
+          """
+      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+          """
+          = Object: Object page
           
           Desc line 1
           Desc line 2
@@ -52,9 +76,17 @@ Feature: Document StepObject To UML
 
   Scenario: Three statements
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Object: Object1 page
+          = Feature: Process
+          
+          == Scenario: Submit
+          
+          === Given: The blah application, Object page is empty
+          """
+      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+          """
+          = Object: Object page
           
           Desc line 1
           Desc line 2

@@ -14,6 +14,7 @@ import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.ValueSpecification;
+import org.farhan.mbt.sheepDog.StepDefinition;
 
 public class UMLClassWrapper implements ConvertibleObject {
 
@@ -314,10 +315,7 @@ public class UMLClassWrapper implements ConvertibleObject {
 	}
 
 	public String getScenarioOutlineDescription(Interaction abstractScenario) {
-		if (abstractScenario.getOwnedComments().size() > 0) {
-			return abstractScenario.getOwnedComments().get(0).getBody();
-		}
-		return "";
+		return getScenarioDescription(abstractScenario);
 	}
 
 	public String getScenarioOutlineName(Interaction abstractScenario) {
@@ -338,6 +336,13 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return keyword + " " + name;
 	}
 
+	public String getStepDefinitionDescription(Interaction stepDefinition) {
+		if (stepDefinition.getOwnedComments().size() > 0) {
+			return stepDefinition.getOwnedComments().get(0).getBody();
+		}
+		return "";
+	}
+
 	public ArrayList<Interaction> getStepDefinitionList() {
 		ArrayList<Interaction> steps = new ArrayList<Interaction>();
 		for (Behavior b : theClass.getOwnedBehaviors()) {
@@ -350,17 +355,12 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return stepDef.getName();
 	}
 
-	public ArrayList<String> getStepDefinitionParameterList(Interaction stepDefinition) {
+	public ArrayList<EAnnotation> getStepDefinitionParameterList(Interaction stepDefinition) {
 
-		ArrayList<String> parametersList = new ArrayList<String>();
+		ArrayList<EAnnotation> parametersList = new ArrayList<EAnnotation>();
 		for (EAnnotation a : stepDefinition.getEAnnotations()) {
 			if (!a.getSource().contentEquals("StepDefinition")) {
-				// TODO use a.getDetails().values() but do the split first
-				for (String s : a.getDetails().getFirst().getValue().split("\\|")) {
-					if (!parametersList.contains(s.trim())) {
-						parametersList.add(s.trim());
-					}
-				}
+				parametersList.add(a);
 			}
 		}
 		return parametersList;
@@ -378,8 +378,42 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return step.getName();
 	}
 
+	public String getStepObjectDescription() {
+		if (theClass.getOwnedComments().size() > 0) {
+			return theClass.getOwnedComments().get(0).getBody();
+		}
+		return "";
+	}
+
 	public String getStepObjectName() {
 		return theClass.getEAnnotations().getFirst().getDetails().get(0).getKey();
+	}
+
+	public String getStepParametersName(EAnnotation parametersSrc) {
+		return parametersSrc.getSource();
+	}
+
+	public ArrayList<ArrayList<String>> getStepParametersRowList(EAnnotation parametersSrc) {
+		ArrayList<ArrayList<String>> rowList = new ArrayList<ArrayList<String>>();
+		int rowCnt = parametersSrc.getDetails().size();
+		for (int i = 1; i < rowCnt; i++) {
+			String[] row = parametersSrc.getDetails().get(i).getValue().split("\\|");
+			ArrayList<String> cellList = new ArrayList<String>();
+			int cellCnt = row.length;
+			for (int j = 0; j < cellCnt; j++) {
+				cellList.add(row[j]);
+			}
+			rowList.add(cellList);
+		}
+		return rowList;
+	}
+
+	public ArrayList<String> getStepParametersTable(EAnnotation parametersSrc) {
+		ArrayList<String> paramNames = new ArrayList<String>();
+		for (String cell : parametersSrc.getDetails().getFirst().getValue().split("\\|")) {
+			paramNames.add(cell);
+		}
+		return paramNames;
 	}
 
 	public ArrayList<ArrayList<String>> getStepTable(Message stepSrc) {

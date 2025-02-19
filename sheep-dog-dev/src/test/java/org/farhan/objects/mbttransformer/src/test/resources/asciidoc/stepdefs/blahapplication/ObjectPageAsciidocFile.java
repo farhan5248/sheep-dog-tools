@@ -23,4 +23,6 @@ public interface ObjectPageAsciidocFile {
     public void assertStepDefinitionSectionName(HashMap<String, String> keyMap);
 
     public void setContent(HashMap<String, String> keyMap);
+
+    public void setDeleted(HashMap<String, String> keyMap);
 }

@@ -17,6 +17,7 @@ Feature: UML Step Table To Document
           |===
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps Step Table section will be created as follows
@@ -41,6 +42,7 @@ Feature: UML Step Table To Document
           |===
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps Step Table section will be created as follows
@@ -67,6 +69,7 @@ Feature: UML Step Table To Document
           |===
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps Step Table section will be created as follows
@@ -92,6 +95,7 @@ Feature: UML Step Table To Document
           |===
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps Step Table section will be created as follows

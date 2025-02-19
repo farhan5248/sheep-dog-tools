@@ -46,17 +46,12 @@ public class AsciiDoctorPathConverter {
 	}
 
 	public String createFilePath(String umlPath, String layer) {
-		String[] pathParts = umlPath.split("::");
-		String componentName = pathParts[2];
-		String objectName = pathParts[pathParts.length - 1];
 
 		if (layer.contentEquals(model.TEST_CASES)) {
 			umlPath = umlPath.replace("pst::" + model.TEST_CASES, "");
 		}
 		if (layer.contentEquals(model.TEST_STEPS)) {
-			umlPath = umlPath.replace("pst::" + model.TEST_STEPS + "::" + componentName,
-					"::" + componentName.toLowerCase());
-			umlPath = umlPath.replace(objectName, StringUtils.capitalize(componentName) + objectName + "Steps");
+			umlPath = umlPath.replace("pst::" + model.TEST_STEPS, "");
 		}
 		umlPath = umlPath.replace("::", "/");
 		umlPath = project.getDir(layer) + umlPath + project.getFileExt(layer);

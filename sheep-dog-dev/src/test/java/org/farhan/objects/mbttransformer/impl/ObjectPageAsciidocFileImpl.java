@@ -60,4 +60,9 @@ public class ObjectPageAsciidocFileImpl extends AdocFileObject implements Object
 		assertContent(keyMap.get("Content"));
 	}
 
+	@Override
+	public void setDeleted(HashMap<String, String> keyMap) {
+		deleteObject();
+	}
+
 }

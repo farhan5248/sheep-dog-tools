@@ -229,7 +229,7 @@ public class StepDefinitionHelper {
 		return null;
 	}
 
-	private static String getStepObjectQualifiedName(ILanguageAccess la) {
+	public static String getStepObjectQualifiedName(ILanguageAccess la) {
 		String component = StepHelper.getComponent(la.getStepName());
 		String object = StepHelper.getObject(la.getStepName());
 

@@ -3,9 +3,17 @@ Feature: UML Step Parameters Table To Document
 
   Scenario: One cell
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Object: Object1 page
+          = Feature: Process
+          
+          == Scenario: Submit
+          
+          === Given: The blah application, Object page is empty
+          """
+      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+          """
+          = Object: Object page
           
           == Definition: is created as follows
           
@@ -18,6 +26,7 @@ Feature: UML Step Parameters Table To Document
           |===
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
       And The mbt-transformer plugin, Object page.asciidoc file Step Definition Parameters Table section will be created as follows
@@ -26,9 +35,17 @@ Feature: UML Step Parameters Table To Document
 
   Scenario: Two cells
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Object: Object1 page
+          = Feature: Process
+          
+          == Scenario: Submit
+          
+          === Given: The blah application, Object page is empty
+          """
+      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+          """
+          = Object: Object page
           
           == Definition: is created as follows
           
@@ -41,6 +58,7 @@ Feature: UML Step Parameters Table To Document
           |===
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
       And The mbt-transformer plugin, Object page.asciidoc file Step Definition Parameters Table section will be created as follows
@@ -49,9 +67,17 @@ Feature: UML Step Parameters Table To Document
 
   Scenario: Three cells
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Object: Object1 page
+          = Feature: Process
+          
+          == Scenario: Submit
+          
+          === Given: The blah application, Object page is empty
+          """
+      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+          """
+          = Object: Object page
           
           == Definition: is created as follows
           
@@ -64,6 +90,7 @@ Feature: UML Step Parameters Table To Document
           |===
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
       And The mbt-transformer plugin, Object page.asciidoc file Step Definition Parameters Table section will be created as follows
