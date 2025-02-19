@@ -11,13 +11,16 @@ import org.farhan.mbt.cucumber.Examples;
 import org.farhan.mbt.cucumber.Scenario;
 import org.farhan.mbt.cucumber.ScenarioOutline;
 import org.farhan.mbt.cucumber.Step;
+
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.UMLClassWrapper;
 import org.farhan.mbt.core.UMLModel;
 import org.farhan.mbt.core.Converter;
+import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Logger;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
 import org.farhan.mbt.cucumber.CucumberJavaWrapper;
+import org.farhan.mbt.cucumber.CucumberPathConverter;
 import org.farhan.mbt.cucumber.CucumberProject;
 
 public class ConvertUMLToCucumber extends Converter {
@@ -25,6 +28,7 @@ public class ConvertUMLToCucumber extends Converter {
 	private UMLClassWrapper srcObj;
 	private CucumberFeatureWrapper tgtObj;
 	private CucumberJavaWrapper tgtObj2;
+	protected CucumberPathConverter pathConverter;
 
 	public ConvertUMLToCucumber(String tags, ObjectRepository fa, Logger log) {
 		super(tags, fa, log);
@@ -67,7 +71,7 @@ public class ConvertUMLToCucumber extends Converter {
 
 	private String convertFeature(String tags, String path, String content) throws Exception {
 
-		srcObj = (UMLClassWrapper) model.createObject(findQualifiedName(path));
+		srcObj = (UMLClassWrapper) model.createObject(pathConverter.getUMLPath(path));
 
 		tgtObj = (CucumberFeatureWrapper) project.createObject(path);
 		tgtObj.parse(content);
@@ -95,7 +99,7 @@ public class ConvertUMLToCucumber extends Converter {
 	}
 
 	private String convertObjectFields(String tags, String path, String content) throws Exception {
-		srcObj = (UMLClassWrapper) model.createObject(findQualifiedName(path));
+		srcObj = (UMLClassWrapper) model.createObject(pathConverter.getUMLPath(path));
 
 		tgtObj2 = (CucumberJavaWrapper) project.createObject(path);
 		tgtObj2.parse(content);
@@ -105,7 +109,7 @@ public class ConvertUMLToCucumber extends Converter {
 	}
 
 	private String convertObjectSteps(String tags, String path, String content) throws Exception {
-		srcObj = (UMLClassWrapper) model.createObject(findQualifiedName(path));
+		srcObj = (UMLClassWrapper) model.createObject(pathConverter.getUMLPath(path));
 
 		tgtObj2 = (CucumberJavaWrapper) project.createObject(path);
 		tgtObj2.parse(content);
@@ -183,62 +187,25 @@ public class ConvertUMLToCucumber extends Converter {
 
 	public void initProjects() throws Exception {
 		model = new UMLModel(this.tags, this.fa);
-		model.init();
 		project = new CucumberProject(this.tags, this.fa);
+		model.init();
 		project.init();
+		this.pathConverter = new CucumberPathConverter(model, (CucumberProject) project);
 	}
 
-	protected String getPath(UMLClassWrapper srcObj, String tgtLayer) {
-
-		// TODO this is basically a duplicate of the parent. put each method in a
-		// [Cucumber|AsciiDoctor]PathConverter class
-		String path = srcObj.getPath();
-		String[] pathParts = path.split("::");
-		String componentName = pathParts[2];
-		String objectName = pathParts[pathParts.length - 1];
-		String newComponentName = getComponentName(srcObj.getPath());
-		String newObjectName = getObjectName(srcObj.getPath());
-
-		if (tgtLayer.contentEquals(model.TEST_CASES)) {
-			path = path.replace("pst::" + model.TEST_CASES, "");
-		} else {
-			if (tgtLayer.contentEquals(model.TEST_STEPS)) {
-				path = path.replace("pst::" + model.TEST_STEPS + "::" + componentName,
-						"::" + newComponentName.toLowerCase());
-				path = path.replaceFirst(objectName + "$", newComponentName + newObjectName + "Steps");
-
-			}
-			if (tgtLayer.contentEquals(model.TEST_OBJECTS)) {
-				path = path.replace("pst::" + model.TEST_STEPS + "::" + componentName,
-						"::" + newComponentName.toLowerCase());
-				path = path.replaceFirst(objectName + "$", newObjectName);
-			}
-			path = path.replace(" ", "");
-			path = path.replace("-", "");
+	@Override
+	public ArrayList<String> getObjectNames() throws Exception {
+		initProjects();
+		ArrayList<String> objects = new ArrayList<String>();
+		for (ConvertibleObject co : model.getObjects(model.TEST_CASES)) {
+			objects.add(pathConverter.createFilePath(co.getPath(), model.TEST_CASES));
 		}
-
-		path = path.replace("::", "/");
-		path = project.getDir(tgtLayer) + path + project.getFileExt(tgtLayer);
-
-		return path;
+		if (project instanceof CucumberProject) {
+			for (ConvertibleObject co : model.getObjects(model.TEST_STEPS)) {
+				objects.add(pathConverter.createFilePath(co.getPath(), model.TEST_STEPS));
+				objects.add(pathConverter.createFilePath(co.getPath(), model.TEST_OBJECTS));
+			}
+		}
+		return objects;
 	}
-
-	private String getComponentName(String path) {
-		String[] pathParts = path.split("::");
-		String name = pathParts[2].replaceFirst("\\s[^\\s]+$", "");
-		name = removeDelimiterAndCapitalize(name, "\\.");
-		name = removeDelimiterAndCapitalize(name, "\\-");
-		name = removeDelimiterAndCapitalize(name, " ");
-		return name;
-	}
-
-	private String getObjectName(String path) {
-		String[] pathParts = path.split("::");
-		String name = pathParts[pathParts.length - 1];
-		name = removeDelimiterAndCapitalize(name, "\\.");
-		name = removeDelimiterAndCapitalize(name, "\\-");
-		name = removeDelimiterAndCapitalize(name, " ");
-		return name;
-	}
-
 }

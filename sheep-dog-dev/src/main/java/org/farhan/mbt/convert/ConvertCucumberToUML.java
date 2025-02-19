@@ -13,18 +13,18 @@ import org.farhan.mbt.cucumber.Step;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.UMLClassWrapper;
 import org.farhan.mbt.core.UMLModel;
-import org.farhan.helper.StepHelper;
 import org.farhan.mbt.core.Converter;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Logger;
 import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
+import org.farhan.mbt.cucumber.CucumberPathConverter;
 import org.farhan.mbt.cucumber.CucumberProject;
 
 public class ConvertCucumberToUML extends Converter {
 
 	private CucumberFeatureWrapper srcObj;
 	private UMLClassWrapper tgtObj;
-	private String lastComponent = "InitialComponent";
+	protected CucumberPathConverter pathConverter;
 
 	public ConvertCucumberToUML(String tags, ObjectRepository fa, Logger log) {
 		super(tags, fa, log);
@@ -72,7 +72,7 @@ public class ConvertCucumberToUML extends Converter {
 		srcObj = (CucumberFeatureWrapper) project.createObject(path);
 		srcObj.parse(content);
 		if (isFileSelected(srcObj, tags)) {
-			tgtObj = (UMLClassWrapper) model.createObject(convertFromPath(path, project.TEST_CASES));
+			tgtObj = (UMLClassWrapper) model.createObject(pathConverter.createUMLPath(path));
 			tgtObj.setFeatureName(srcObj.getFeatureName());
 			tgtObj.setFeatureTags(srcObj.getFeatureTags());
 			tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
@@ -127,9 +127,10 @@ public class ConvertCucumberToUML extends Converter {
 
 	public void initProjects() throws Exception {
 		project = new CucumberProject(this.tags, this.fa);
-		project.init();
 		model = new UMLModel(this.tags, this.fa);
+		project.init();
 		model.init();
+		this.pathConverter = new CucumberPathConverter(model, (CucumberProject) project);
 	}
 
 	// TODO abstract away the Feature/Adoc specific stuff, perhaps make a SourceFile

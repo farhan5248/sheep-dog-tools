@@ -72,15 +72,14 @@ public class ConvertAsciidoctorToUML extends Converter {
 		srcObj = (AsciiDoctorAdocWrapper) project.createObject(path);
 		srcObj.parse(content);
 		if (isFileSelected(srcObj, tags)) {
+			tgtObj = (UMLClassWrapper) model.createObject(createUMLPath(path));
 			if (path.startsWith(project.getDir(project.TEST_STEPS))) {
 				log.debug("step object: " + path);
-				tgtObj = (UMLClassWrapper) model.createObject(convertFromPath(path, project.TEST_STEPS));
 				tgtObj.setStepObjectName(srcObj.getStepObjectName());
 				tgtObj.setStepObjectDescription(srcObj.getStepObjectDescription());
 				convertStepDefinitionList();
 			} else {
 				log.debug("test suite: " + path);
-				tgtObj = (UMLClassWrapper) model.createObject(convertFromPath(path, project.TEST_CASES));
 				tgtObj.setFeatureName(srcObj.getFeatureName());
 				tgtObj.setFeatureTags(srcObj.getFeatureTags());
 				tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
@@ -249,6 +248,24 @@ public class ConvertAsciidoctorToUML extends Converter {
 			}
 		}
 		return false;
+	}
+
+	public String createUMLPath(String path) {
+		// TODO move to Asciidoctor to UML converter
+		String projectLayer, modelLayer;
+		if (path.startsWith(project.getDir(project.TEST_STEPS))) {
+			projectLayer = project.TEST_STEPS;
+			modelLayer = model.TEST_STEPS;
+		} else {
+			projectLayer = project.TEST_CASES;
+			modelLayer = model.TEST_CASES;
+		}
+		String qualifiedName = path.replace(",", "").trim();
+		qualifiedName = qualifiedName.replaceFirst(project.getFileExt(projectLayer) + "$", "");
+		qualifiedName = qualifiedName.replaceFirst("^" + project.getDir(projectLayer), "");
+		qualifiedName = qualifiedName.replace("/", "::");
+		qualifiedName = "pst::" + modelLayer + qualifiedName;
+		return qualifiedName;
 	}
 
 }

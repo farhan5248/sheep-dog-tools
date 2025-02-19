@@ -2,6 +2,7 @@ package org.farhan.mbt.convert;
 
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
@@ -16,6 +17,7 @@ import org.farhan.mbt.sheepDog.Examples;
 import org.farhan.mbt.sheepDog.Scenario;
 import org.farhan.mbt.sheepDog.Step;
 import org.farhan.mbt.core.Converter;
+import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Logger;
 
 public class ConvertUMLToAsciidoctor extends Converter {
@@ -67,7 +69,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 	public String convertObject(String path, String content) throws Exception {
 		log.debug("test suite: " + path);
 		initProjects();
-		srcObj = (UMLClassWrapper) model.createObject(findQualifiedName(path));
+		srcObj = (UMLClassWrapper) model.createObject(getUMLPath(path));
 
 		tgtObj = (AsciiDoctorAdocWrapper) project.createObject(path);
 		tgtObj.parse(content);
@@ -77,6 +79,15 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
 		convertAbstractScenarioList();
 		return tgtObj.toString();
+	}
+
+	public ArrayList<String> getObjectNames() throws Exception {
+		initProjects();
+		ArrayList<String> objects = new ArrayList<String>();
+		for (ConvertibleObject co : model.getObjects(model.TEST_CASES)) {
+			objects.add(createFilePath(co.getPath(), model.TEST_CASES));
+		}
+		return objects;
 	}
 
 	private void convertScenario(Interaction abstractScenario) {
@@ -124,5 +135,39 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		model.init();
 		project = new AsciiDoctorProject(this.tags, this.fa);
 		project.init();
+	}
+
+	public String getUMLPath(String path) {
+		for (ConvertibleObject co : model.getObjects(model.TEST_CASES)) {
+			if (createFilePath(co.getPath(), project.TEST_CASES).contentEquals(path)) {
+				return co.getPath();
+			}
+		}
+		for (ConvertibleObject co : model.getObjects(model.TEST_STEPS)) {
+			if (createFilePath(co.getPath(), project.TEST_STEPS).contentEquals(path)) {
+				return co.getPath();
+			}
+		}
+		return null;
+	}
+
+	public String createFilePath(String umlPath, String layer) {
+		// TODO move this to AsciiddoctorPathConverter
+		String[] pathParts = umlPath.split("::");
+		String componentName = pathParts[2];
+		String objectName = pathParts[pathParts.length - 1];
+
+		if (layer.contentEquals(model.TEST_CASES)) {
+			umlPath = umlPath.replace("pst::" + model.TEST_CASES, "");
+		}
+		if (layer.contentEquals(model.TEST_STEPS)) {
+			umlPath = umlPath.replace("pst::" + model.TEST_STEPS + "::" + componentName,
+					"::" + componentName.toLowerCase());
+			umlPath = umlPath.replace(objectName, StringUtils.capitalize(componentName) + objectName + "Steps");
+		}
+		umlPath = umlPath.replace("::", "/");
+		umlPath = project.getDir(layer) + umlPath + project.getFileExt(layer);
+
+		return umlPath;
 	}
 }
