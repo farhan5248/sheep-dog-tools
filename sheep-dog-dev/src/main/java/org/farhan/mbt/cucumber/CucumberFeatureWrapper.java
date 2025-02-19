@@ -26,9 +26,11 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 
 	public CucumberFeatureWrapper(String thePath) {
 		this.thePath = thePath;
-		String[] pathParts = thePath.split("/");
 		theFeature = CucumberFactory.eINSTANCE.createFeature();
-		theFeature.setName(pathParts[pathParts.length - 1].replace(".feature", ""));
+		{
+			String[] pathParts = thePath.split("/");
+			theFeature.setName(pathParts[pathParts.length - 1].replace(".feature", ""));
+		}
 	}
 
 	private String convertStatementsToString(EList<Statement> eList) {
@@ -239,10 +241,6 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		return thePath;
 	}
 
-	public String getFileName() {
-		return thePath;
-	}
-
 	public String getScenarioDescription(AbstractScenario abstractScenario) {
 		return convertStatementsToString(abstractScenario.getStatements());
 	}
@@ -273,6 +271,7 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) step.eAdapters().getFirst();
 		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
 		String keywordString = rc.getRule().getName();
+		// TODO delete this, there's no asterisk
 		if (keywordString.contentEquals("Asterisk")) {
 			keywordString = "*";
 		}
@@ -322,14 +321,18 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 
 	@Override
 	public void parse(String text) throws Exception {
-		if (text.isEmpty()) {
-			return;
+		try {
+			if (text.isEmpty()) {
+				return;
+			}
+			URI uri = URI.createFileURI(thePath);
+			Resource resource = new ResourceSetImpl().createResource(uri);
+			InputStream content = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
+			resource.load(content, Collections.EMPTY_MAP);
+			theFeature = (Feature) resource.getContents().get(0);
+		} catch (Exception e) {
+			throw new Exception("There was a problem parsing file: " + thePath);
 		}
-		URI uri = URI.createFileURI(thePath);
-		Resource resource = new ResourceSetImpl().createResource(uri);
-		InputStream content = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
-		resource.load(content, Collections.EMPTY_MAP);
-		theFeature = (Feature) resource.getContents().get(0);
 	}
 
 	public String toString() {

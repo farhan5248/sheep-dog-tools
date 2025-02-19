@@ -9,6 +9,7 @@ import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.farhan.helper.StepHelper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
+import org.farhan.mbt.asciidoctor.AsciiDoctorPathConverter;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Logger;
@@ -27,8 +28,10 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	private AsciiDoctorAdocWrapper srcObj;
 	private UMLClassWrapper tgtObj;
+	// TODO delete lastComponent after using sheep-dog-test get component name
 	private String lastComponent = "InitialComponent";
 	private ArrayList<String> stepObjects;
+	protected AsciiDoctorPathConverter pathConverter;
 
 	public ConvertAsciidoctorToUML(String tags, ObjectRepository fa, Logger log) {
 		super(tags, fa, log);
@@ -72,7 +75,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		srcObj = (AsciiDoctorAdocWrapper) project.createObject(path);
 		srcObj.parse(content);
 		if (isFileSelected(srcObj, tags)) {
-			tgtObj = (UMLClassWrapper) model.createObject(createUMLPath(path));
+			tgtObj = (UMLClassWrapper) model.createObject(pathConverter.createUMLPath(path));
 			if (path.startsWith(project.getDir(project.TEST_STEPS))) {
 				log.debug("step object: " + path);
 				tgtObj.setStepObjectName(srcObj.getStepObjectName());
@@ -206,6 +209,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		project.init();
 		model = new UMLModel(this.tags, this.fa);
 		model.init();
+		this.pathConverter = new AsciiDoctorPathConverter(model, (AsciiDoctorProject) project);
 	}
 
 	// TODO abstract away the Feature/Adoc specific stuff, perhaps make a SourceFile
@@ -248,24 +252,6 @@ public class ConvertAsciidoctorToUML extends Converter {
 			}
 		}
 		return false;
-	}
-
-	public String createUMLPath(String path) {
-		// TODO move to Asciidoctor to UML converter
-		String projectLayer, modelLayer;
-		if (path.startsWith(project.getDir(project.TEST_STEPS))) {
-			projectLayer = project.TEST_STEPS;
-			modelLayer = model.TEST_STEPS;
-		} else {
-			projectLayer = project.TEST_CASES;
-			modelLayer = model.TEST_CASES;
-		}
-		String qualifiedName = path.replace(",", "").trim();
-		qualifiedName = qualifiedName.replaceFirst(project.getFileExt(projectLayer) + "$", "");
-		qualifiedName = qualifiedName.replaceFirst("^" + project.getDir(projectLayer), "");
-		qualifiedName = qualifiedName.replace("/", "::");
-		qualifiedName = "pst::" + modelLayer + qualifiedName;
-		return qualifiedName;
 	}
 
 }

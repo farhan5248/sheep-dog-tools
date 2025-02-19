@@ -10,6 +10,7 @@ import org.farhan.mbt.cucumber.AbstractScenario;
 import org.farhan.mbt.cucumber.Examples;
 import org.farhan.mbt.cucumber.Row;
 import org.farhan.mbt.cucumber.Step;
+import org.farhan.mbt.sheepDog.SheepDogFactory;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.UMLClassWrapper;
 import org.farhan.mbt.core.UMLModel;
@@ -104,13 +105,19 @@ public class ConvertCucumberToUML extends Converter {
 	}
 
 	private void convertStep(Interaction abstractScenario, Step stepSrc, AbstractScenario abstractScenarioSrc) {
-		Message step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
+		Message step = tgtObj.createStep(abstractScenario, convertStepKeyword(srcObj.getStep(stepSrc)));
 
 		if (srcObj.hasDocString(stepSrc)) {
 			convertDocString(step, stepSrc);
 		} else if (srcObj.hasStepTable(stepSrc)) {
 			convertStepTable(step, stepSrc, abstractScenarioSrc);
 		}
+	}
+
+	private String convertStepKeyword(String step) {
+		String keyword = step.split(" ")[0];
+		step.replace(keyword, keyword + ":");
+		return step.replaceFirst("^" + keyword, keyword + ":");
 	}
 
 	private void convertStepList(Interaction abstractScenario, EList<Step> stepList,

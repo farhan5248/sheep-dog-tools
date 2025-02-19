@@ -28,12 +28,14 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 	public CucumberJavaWrapper(String thePath) {
 		this.thePath = thePath;
 		// TODO if the contents are parsed in, then this might create duplication. So
-		// maybe move this out or check if these elements exist
+		// move this out or check if these elements exist
 		theJavaClass = new CompilationUnit();
 		theJavaClass.setStorage(Paths.get(thePath));
 		ClassOrInterfaceDeclaration javaClassType = new ClassOrInterfaceDeclaration();
-		String[] pathParts = thePath.split("/");
-		javaClassType.setName(pathParts[pathParts.length - 1].replace(".java", ""));
+		{
+			String[] pathParts = thePath.split("/");
+			javaClassType.setName(pathParts[pathParts.length - 1].replace(".java", ""));
+		}
 		javaClassType.setPublic(true);
 		theJavaClass.addType(javaClassType);
 		theJavaClass.setPackageDeclaration(getPackageDeclaration());
@@ -279,7 +281,7 @@ public class CucumberJavaWrapper implements ConvertibleObject {
 				theJavaClass = new JavaParser().parse(content).getResult().get();
 			}
 		} catch (Exception e) {
-			throw new Exception("There was a problem loading file: " + thePath);
+			throw new Exception("There was a problem parsing file: " + thePath);
 		}
 	}
 

@@ -7,6 +7,7 @@ import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
+import org.farhan.mbt.asciidoctor.AsciiDoctorPathConverter;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.UMLClassWrapper;
@@ -24,6 +25,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 
 	private UMLClassWrapper srcObj;
 	private AsciiDoctorAdocWrapper tgtObj;
+	protected AsciiDoctorPathConverter pathConverter;
 
 	public ConvertUMLToAsciidoctor(String tags, ObjectRepository fa, Logger log) {
 		super(tags, fa, log);
@@ -69,7 +71,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 	public String convertObject(String path, String content) throws Exception {
 		log.debug("test suite: " + path);
 		initProjects();
-		srcObj = (UMLClassWrapper) model.createObject(getUMLPath(path));
+		srcObj = (UMLClassWrapper) model.createObject(pathConverter.getUMLPath(path));
 
 		tgtObj = (AsciiDoctorAdocWrapper) project.createObject(path);
 		tgtObj.parse(content);
@@ -85,7 +87,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		initProjects();
 		ArrayList<String> objects = new ArrayList<String>();
 		for (ConvertibleObject co : model.getObjects(model.TEST_CASES)) {
-			objects.add(createFilePath(co.getPath(), model.TEST_CASES));
+			objects.add(pathConverter.createFilePath(co.getPath(), model.TEST_CASES));
 		}
 		return objects;
 	}
@@ -135,39 +137,6 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		model.init();
 		project = new AsciiDoctorProject(this.tags, this.fa);
 		project.init();
-	}
-
-	public String getUMLPath(String path) {
-		for (ConvertibleObject co : model.getObjects(model.TEST_CASES)) {
-			if (createFilePath(co.getPath(), project.TEST_CASES).contentEquals(path)) {
-				return co.getPath();
-			}
-		}
-		for (ConvertibleObject co : model.getObjects(model.TEST_STEPS)) {
-			if (createFilePath(co.getPath(), project.TEST_STEPS).contentEquals(path)) {
-				return co.getPath();
-			}
-		}
-		return null;
-	}
-
-	public String createFilePath(String umlPath, String layer) {
-		// TODO move this to AsciiddoctorPathConverter
-		String[] pathParts = umlPath.split("::");
-		String componentName = pathParts[2];
-		String objectName = pathParts[pathParts.length - 1];
-
-		if (layer.contentEquals(model.TEST_CASES)) {
-			umlPath = umlPath.replace("pst::" + model.TEST_CASES, "");
-		}
-		if (layer.contentEquals(model.TEST_STEPS)) {
-			umlPath = umlPath.replace("pst::" + model.TEST_STEPS + "::" + componentName,
-					"::" + componentName.toLowerCase());
-			umlPath = umlPath.replace(objectName, StringUtils.capitalize(componentName) + objectName + "Steps");
-		}
-		umlPath = umlPath.replace("::", "/");
-		umlPath = project.getDir(layer) + umlPath + project.getFileExt(layer);
-
-		return umlPath;
+		this.pathConverter = new AsciiDoctorPathConverter(model, (AsciiDoctorProject) project);
 	}
 }

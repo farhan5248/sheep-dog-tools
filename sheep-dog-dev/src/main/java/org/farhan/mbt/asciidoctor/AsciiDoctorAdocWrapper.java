@@ -42,10 +42,14 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	public AsciiDoctorAdocWrapper(String thePath) {
 		this.thePath = thePath;
-		String[] pathParts = thePath.split("/");
-		// TODO don't assume it's a feature, it could be a StepObject
+		// TODO don't assume it's a feature, it could be a StepObject. Mimic the Java
+		// Wrapper and how it handles interfaces vs classes. There's currently no code
+		// for UML to Asciidoctor.
 		theFeature = SheepDogFactory.eINSTANCE.createFeature();
-		theFeature.setName(pathParts[pathParts.length - 1].replace(".asciidoc", ""));
+		{
+			String[] pathParts = thePath.split("/");
+			theFeature.setName(pathParts[pathParts.length - 1].replace(".asciidoc", ""));
+		}
 	}
 
 	private String convertStatementsToString(EList<Statement> statements) {
@@ -105,32 +109,14 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return scenario;
 	}
 
-	// TODO duplicate of createScenario
 	public Scenario createScenarioOutline(String scenarioName) {
-		deleteAbstractScenario(scenarioName);
-		Scenario scenario = SheepDogFactory.eINSTANCE.createScenario();
-		scenario.setName(scenarioName);
-		theFeature.getAbstractScenarios().add(scenario);
-		return scenario;
+		return createScenario(scenarioName);
 	}
 
 	public Step createStep(AbstractScenario abstractScenario, String name) {
 		String keyword = name.split(" ")[0];
 		Step step = null;
-		// TODO delete the first 4 case statements after adoc migration is done
 		switch (keyword) {
-		case "Given":
-			step = SheepDogFactory.eINSTANCE.createGiven();
-			break;
-		case "When":
-			step = SheepDogFactory.eINSTANCE.createWhen();
-			break;
-		case "Then":
-			step = SheepDogFactory.eINSTANCE.createThen();
-			break;
-		case "And":
-			step = SheepDogFactory.eINSTANCE.createAnd();
-			break;
 		case "Given:":
 			step = SheepDogFactory.eINSTANCE.createGiven();
 			break;
@@ -343,22 +329,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		for (Row r : step.getTheStepTable().getRows()) {
 			row = new ArrayList<String>();
 			for (Cell c : r.getCells()) {
-				// TODO Because | can't be escaped currently, I need this hack for now.
-				// if it's just \, then treat that as \| and append it to the previous cell.
-				if (c.getName() == null) {
-					// this is a side effect of \| being treated as \ and | which leaves a null cell
-					// value so it can be ignored for now
-					continue;
-				}
-				if (c.getName().endsWith("\\")) {
-					if (row.isEmpty()) {
-						row.add(c.getName() + "|");
-					} else {
-						row.add(row.removeLast() + " " + c.getName() + "|");
-					}
-				} else {
-					row.add(c.getName());
-				}
+				row.add(c.getName());
 			}
 			stepTableRowList.add(row);
 		}
@@ -397,18 +368,22 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	@Override
 	public void parse(String text) throws Exception {
-		if (text.isEmpty()) {
-			return;
-		}
-		URI uri = URI.createFileURI(thePath);
-		Resource resource = new ResourceSetImpl().createResource(uri);
-		InputStream content = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
-		resource.load(content, Collections.EMPTY_MAP);
-		Object o = resource.getContents().get(0);
-		if (o instanceof Feature) {
-			theFeature = (Feature) resource.getContents().get(0);
-		} else {
-			theStepObject = (StepObject) resource.getContents().get(0);
+		try {
+			if (text.isEmpty()) {
+				return;
+			}
+			URI uri = URI.createFileURI(thePath);
+			Resource resource = new ResourceSetImpl().createResource(uri);
+			InputStream content = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
+			resource.load(content, Collections.EMPTY_MAP);
+			Object o = resource.getContents().get(0);
+			if (o instanceof Feature) {
+				theFeature = (Feature) resource.getContents().get(0);
+			} else {
+				theStepObject = (StepObject) resource.getContents().get(0);
+			}
+		} catch (Exception e) {
+			throw new Exception("There was a problem parsing file: " + thePath);
 		}
 	}
 
