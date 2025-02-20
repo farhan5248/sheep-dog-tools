@@ -10,7 +10,6 @@ import org.farhan.mbt.cucumber.AbstractScenario;
 import org.farhan.mbt.cucumber.Examples;
 import org.farhan.mbt.cucumber.Row;
 import org.farhan.mbt.cucumber.Step;
-import org.farhan.mbt.sheepDog.SheepDogFactory;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.UMLClassWrapper;
 import org.farhan.mbt.core.UMLModel;

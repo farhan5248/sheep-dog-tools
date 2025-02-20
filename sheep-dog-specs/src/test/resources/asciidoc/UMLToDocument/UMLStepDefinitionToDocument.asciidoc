@@ -5,10 +5,20 @@ TODO there's no test for no parameters and docstring vs datatable. Other tests i
 
 == Scenario: No statement, one step parameter
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Object: Object1 page
+= Feature: Process
+
+== Scenario: Submit
+
+=== Given: The blah application, Object page is empty
+----
+
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+
+----
+= Object: Object page
 
 == Definition: is created as follows
 
@@ -20,6 +30,8 @@ TODO there's no test for no parameters and docstring vs datatable. Other tests i
 ----
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
 
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
@@ -34,10 +46,20 @@ TODO there's no test for no parameters and docstring vs datatable. Other tests i
 
 == Scenario: One statement, one step parameter
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Object: Object1 page
+= Feature: Process
+
+== Scenario: Submit
+
+=== Given: The blah application, Object page is empty
+----
+
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+
+----
+= Object: Object page
 
 == Definition: is created as follows
 
@@ -52,6 +74,8 @@ Desc line 1
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
+
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
 === Then: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
@@ -65,10 +89,20 @@ Desc line 1
 
 == Scenario: Two statements, two step parameters
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Object: Object1 page
+= Feature: Process
+
+== Scenario: Submit
+
+=== Given: The blah application, Object page is empty
+----
+
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+
+----
+= Object: Object page
 
 == Definition: is created as follows
 
@@ -89,6 +123,8 @@ Desc line 2
 ----
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
 
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
@@ -118,10 +154,20 @@ Desc line 2
 
 == Scenario: Three statements, three step parameters
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Object: Object1 page
+= Feature: Process
+
+== Scenario: Submit
+
+=== Given: The blah application, Object page is empty
+----
+
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+
+----
+= Object: Object page
 
 == Definition: is created as follows
 
@@ -149,6 +195,8 @@ Desc line 3
 ----
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
 
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 

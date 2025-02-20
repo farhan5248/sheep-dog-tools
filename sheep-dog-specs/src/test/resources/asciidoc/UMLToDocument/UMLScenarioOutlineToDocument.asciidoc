@@ -27,6 +27,8 @@
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
+
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
 === Then: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
@@ -75,6 +77,8 @@ Desc line 1
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
+
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
 === Then: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
@@ -99,7 +103,7 @@ Desc line 1
 Desc line 1
 Desc line 2
 
-=== Given: The blah application, Object1 page is created as follows
+=== Given: The blah application, Object page is created as follows
 
 |===
 | h1
@@ -130,6 +134,8 @@ Desc line 2
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
+
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
 === Then: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
@@ -145,7 +151,7 @@ Desc line 2
 
 |===
 | Name   | Step                                                           
-| Submit | Given: The blah application, Object1 page is created as follows
+| Submit | Given: The blah application, Object page is created as follows 
 | Submit | Given: The blah application, Object2 page is created as follows
 |===
 
@@ -173,7 +179,7 @@ Desc line 1
 Desc line 2
 Desc line 3
 
-=== Given: The blah application, Object1 page is created as follows
+=== Given: The blah application, Object page is created as follows
 
 |===
 | h1
@@ -218,6 +224,8 @@ Desc line 3
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
+
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
 === Then: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
@@ -233,7 +241,7 @@ Desc line 3
 
 |===
 | Name   | Step                                                           
-| Submit | Given: The blah application, Object1 page is created as follows
+| Submit | Given: The blah application, Object page is created as follows 
 | Submit | Given: The blah application, Object2 page is created as follows
 | Submit | Given: The blah application, Object3 page is created as follows
 |===

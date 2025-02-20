@@ -142,10 +142,6 @@ Desc 3
 ----
 = Object: Object page
 
-== Definition: is valid
-
-== Definition: is invalid
-
 == Definition: is created as follows
 
 === Parameters: 1
@@ -159,5 +155,9 @@ Desc 3
 |===
 | Content
 |===
+
+== Definition: is invalid
+
+== Definition: is valid
 ----
 

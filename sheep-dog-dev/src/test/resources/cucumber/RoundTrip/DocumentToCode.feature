@@ -155,13 +155,6 @@ Feature: Document To Code
                   BlahFactory.get("ObjectPage").setInputOutputs(dataTable);
               }
           
-              @Given("^The blah application, Object page is created as follows$")
-              public void theBlahApplicationObjectPageIsCreatedAsFollows(String docString) {
-                  BlahFactory.get("ObjectPage").setComponent("blah");
-                  BlahFactory.get("ObjectPage").setPath("Object");
-                  BlahFactory.get("ObjectPage").setInputOutputs("Content", docString);
-              }
-          
               @Given("^The blah application, Object page is invalid$")
               public void theBlahApplicationObjectPageIsInvalid() {
                   BlahFactory.get("ObjectPage").setComponent("blah");

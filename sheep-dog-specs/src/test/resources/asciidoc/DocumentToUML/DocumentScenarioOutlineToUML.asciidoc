@@ -282,7 +282,7 @@ Desc line 3
 [tags="tag1"]
 == Scenario: Submit
 
-=== Given: The blah application, Object1 page is empty
+=== Given: The blah application, Object page is empty
 
 === Examples: Examples 1
 
@@ -294,7 +294,7 @@ Desc line 3
 [tags="tag2"]
 == Scenario: Submit2
 
-=== Given: The blah application, Object1 page is empty
+=== Given: The blah application, Object page is empty
 
 === Examples: Examples 1
 

@@ -16,10 +16,12 @@ Desc line 1
 
 == Scenario: Submit
 
-=== Given: The Object1 page is valid
+=== Given: The Object page is valid
 ----
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
 
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
@@ -42,8 +44,8 @@ Desc line 1
 === And: The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
 
 |===
-| Name   | Step                            
-| Submit | Given: The Object1 page is valid
+| Name   | Step                           
+| Submit | Given: The Object page is valid
 |===
 
 == Scenario: No statement, one step, one scenario
@@ -59,10 +61,12 @@ Desc line 1
 
 == Scenario: Submit
 
-=== Given: The Object1 page is valid
+=== Given: The Object page is valid
 ----
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
 
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
@@ -78,8 +82,8 @@ Desc line 1
 === And: The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
 
 |===
-| Name   | Step                            
-| Submit | Given: The Object1 page is valid
+| Name   | Step                           
+| Submit | Given: The Object page is valid
 |===
 
 == Scenario: No statement, one step, two scenarios
@@ -95,7 +99,7 @@ Desc line 1
 
 == Scenario: Submit 1
 
-=== Given: The Object1 page is valid
+=== Given: The Object page is valid
 
 == Scenario: Submit 2
 
@@ -103,6 +107,8 @@ Desc line 1
 ----
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
 
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
@@ -119,7 +125,7 @@ Desc line 1
 
 |===
 | Name     | Step                            
-| Submit 1 | Given: The Object1 page is valid
+| Submit 1 | Given: The Object page is valid 
 | Submit 2 | Given: The Object2 page is valid
 |===
 
@@ -136,7 +142,7 @@ Desc line 1
 
 == Scenario: Submit 1
 
-=== Given: The Object1 page is valid
+=== Given: The Object page is valid
 
 == Scenario: Submit 2
 
@@ -148,6 +154,8 @@ Desc line 1
 ----
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
 
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
@@ -164,7 +172,7 @@ Desc line 1
 
 |===
 | Name     | Step                            
-| Submit 1 | Given: The Object1 page is valid
+| Submit 1 | Given: The Object page is valid 
 | Submit 2 | Given: The Object2 page is valid
 | Submit 3 | Given: The Object3 page is valid
 |===
@@ -178,7 +186,7 @@ Desc line 1
 
 == Background: Setup
 
-=== Given: The Object1 page is valid
+=== Given: The Object page is valid
 === Given: The Object2 page is valid
 
 == Scenario: Submit
@@ -188,6 +196,8 @@ Desc line 1
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
+
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
 === Then: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
@@ -196,7 +206,7 @@ Desc line 1
 
 |===
 | Name  | Step                            
-| Setup | Given: The Object1 page is valid
+| Setup | Given: The Object page is valid 
 | Setup | Given: The Object2 page is valid
 |===
 
@@ -216,7 +226,7 @@ Desc line 1
 
 == Background: Setup
 
-=== Given: The Object1 page is valid
+=== Given: The Object page is valid
 === Given: The Object2 page is valid
 === Given: The Object3 page is valid
 
@@ -227,6 +237,8 @@ Desc line 1
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
+
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
 === Then: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
@@ -235,7 +247,7 @@ Desc line 1
 
 |===
 | Name  | Step                            
-| Setup | Given: The Object1 page is valid
+| Setup | Given: The Object page is valid 
 | Setup | Given: The Object2 page is valid
 | Setup | Given: The Object3 page is valid
 |===

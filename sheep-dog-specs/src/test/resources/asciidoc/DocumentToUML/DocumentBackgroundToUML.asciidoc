@@ -16,7 +16,7 @@ Desc line 1
 
 == Scenario: Submit
 
-=== Given: The Object1 page is valid
+=== Given: The Object page is valid
 ----
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
@@ -43,7 +43,7 @@ Desc line 1
 
 == Scenario: Submit
 
-=== Given: The Object1 page is valid
+=== Given: The Object page is valid
 ----
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
@@ -55,7 +55,7 @@ Desc line 1
 |===
 | Interaction Name       | Message                  
 | specs::Process::Setup  | The Object0 page is valid
-| specs::Process::Submit | The Object1 page is valid
+| specs::Process::Submit | The Object page is valid 
 |===
 
 == Scenario: No statement, one step, two scenarios
@@ -71,7 +71,7 @@ Desc line 1
 
 == Scenario: Submit 1
 
-=== Given: The Object1 page is valid
+=== Given: The Object page is valid
 
 == Scenario: Submit 2
 
@@ -87,7 +87,7 @@ Desc line 1
 |===
 | Interaction Name         | Message                  
 | specs::Process::Setup    | The Object0 page is valid
-| specs::Process::Submit 1 | The Object1 page is valid
+| specs::Process::Submit 1 | The Object page is valid 
 | specs::Process::Submit 2 | The Object2 page is valid
 |===
 
@@ -104,7 +104,7 @@ Desc line 1
 
 == Scenario: Submit 1
 
-=== Given: The Object1 page is valid
+=== Given: The Object page is valid
 
 == Scenario: Submit 2
 
@@ -124,7 +124,7 @@ Desc line 1
 |===
 | Interaction Name         | Message                  
 | specs::Process::Setup    | The Object0 page is valid
-| specs::Process::Submit 1 | The Object1 page is valid
+| specs::Process::Submit 1 | The Object page is valid 
 | specs::Process::Submit 2 | The Object2 page is valid
 | specs::Process::Submit 3 | The Object3 page is valid
 |===
@@ -138,7 +138,7 @@ Desc line 1
 
 == Background: Setup
 
-=== Given: The Object1 page is valid
+=== Given: The Object page is valid
 === Given: The Object2 page is valid
 
 == Scenario: Submit
@@ -154,7 +154,7 @@ Desc line 1
 
 |===
 | Interaction Name       | Message                  
-| specs::Process::Setup  | The Object1 page is valid
+| specs::Process::Setup  | The Object page is valid 
 | specs::Process::Setup  | The Object2 page is valid
 | specs::Process::Submit | The Object page is valid 
 |===
@@ -168,7 +168,7 @@ Desc line 1
 
 == Background: Setup
 
-=== Given: The Object1 page is valid
+=== Given: The Object page is valid
 === Given: The Object2 page is valid
 === Given: The Object3 page is valid
 
@@ -185,7 +185,7 @@ Desc line 1
 
 |===
 | Interaction Name       | Message                  
-| specs::Process::Setup  | The Object1 page is valid
+| specs::Process::Setup  | The Object page is valid 
 | specs::Process::Setup  | The Object2 page is valid
 | specs::Process::Setup  | The Object3 page is valid
 | specs::Process::Submit | The Object page is valid 

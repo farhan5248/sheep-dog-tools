@@ -10,6 +10,13 @@ public class MbtTransformerObjectPageJavaFileSteps extends TestSteps {
     public MbtTransformerObjectPageJavaFileSteps(ObjectPageJavaFile object) {
         super(object);
     }
+    
+    @Given("^The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be created as follows$")
+    public void theMbtTransformerPluginSrcTestJavaOrgFarhanObjectsBlahObjectPageJavaFileWillBeCreatedAsFollows(String docString) {
+        object.setComponent("mbt-transformer");
+        object.setPath("src/test/java/org/farhan/objects/blah/ObjectPage.java");
+        object.assertInputOutputs("Content", docString);
+    }
 
     @Given("^The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file Fields section will be created as follows$")
     public void theMbtTransformerPluginSrcTestJavaOrgFarhanObjectsBlahObjectPageJavaFileFieldsSectionWillBeCreatedAsFollows(DataTable dataTable) {

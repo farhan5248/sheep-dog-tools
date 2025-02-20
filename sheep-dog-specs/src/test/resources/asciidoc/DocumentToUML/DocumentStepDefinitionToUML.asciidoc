@@ -5,10 +5,20 @@ TODO add tests for document parameters
 
 == Scenario: No statement, one step parameter
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Object: Object1 page
+= Feature: Process
+
+== Scenario: Submit
+
+=== Given: The blah application, Object page is empty
+----
+
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+
+----
+= Object: Object page
 
 == Definition: is created as follows
 
@@ -32,10 +42,20 @@ TODO add tests for document parameters
 
 == Scenario: One statement, one step parameter
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Object: Object1 page
+= Feature: Process
+
+== Scenario: Submit
+
+=== Given: The blah application, Object page is empty
+----
+
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+
+----
+= Object: Object page
 
 == Definition: is created as follows
 
@@ -61,10 +81,20 @@ Desc line 1
 
 == Scenario: Two statements, two step parameters
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Object: Object1 page
+= Feature: Process
+
+== Scenario: Submit
+
+=== Given: The blah application, Object page is empty
+----
+
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+
+----
+= Object: Object page
 
 == Definition: is created as follows
 
@@ -112,10 +142,20 @@ Desc line 2
 
 == Scenario: Three statements, three step parameters
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Object: Object1 page
+= Feature: Process
+
+== Scenario: Submit
+
+=== Given: The blah application, Object page is empty
+----
+
+=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+
+----
+= Object: Object page
 
 == Definition: is created as follows
 

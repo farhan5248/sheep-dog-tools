@@ -28,12 +28,12 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	private AsciiDoctorAdocWrapper srcObj;
 	private UMLClassWrapper tgtObj;
-	private static ArrayList<String> stepObjects;
+	private static ArrayList<String> stepObjects = new ArrayList<String>();
 	protected AsciiDoctorPathConverter pathConverter;
 
 	public ConvertAsciidoctorToUML(String tags, ObjectRepository fa, Logger log) {
 		super(tags, fa, log);
-		stepObjects = new ArrayList<String>();
+
 	}
 
 	protected void convertAbstractScenarioList() throws Exception {
