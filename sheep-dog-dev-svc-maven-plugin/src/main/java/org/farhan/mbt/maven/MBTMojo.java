@@ -1,6 +1,7 @@
 package org.farhan.mbt.maven;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import org.apache.maven.plugin.AbstractMojo;
@@ -75,16 +76,16 @@ public abstract class MBTMojo extends AbstractMojo {
 		long startTime = System.currentTimeMillis();
 		while (System.currentTimeMillis() - startTime < timeout) {
 			try {
-				ResponseEntity<String> response = restTemplate.getForEntity(getHost() + "actuator/health", String.class);
-				if (response.getStatusCode() == HttpStatus.OK && 
-					response.getBody().contains("\"status\":\"UP\"")) {
+				ResponseEntity<String> response = restTemplate.getForEntity(getHost() + "actuator/health",
+						String.class);
+				if (response.getStatusCode() == HttpStatus.OK && response.getBody().contains("\"status\":\"UP\"")) {
 					return;
 				}
 			} catch (Exception e) {
 				long timeLeft = (timeout - (System.currentTimeMillis() - startTime)) / 1000;
 				getLog().info("Service not ready yet, " + timeLeft + " seconds remaining");
 			}
-			
+
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
@@ -92,7 +93,7 @@ public abstract class MBTMojo extends AbstractMojo {
 				throw new MojoExecutionException("Interrupted while waiting for service", e);
 			}
 		}
-		
+
 		throw new MojoExecutionException("Service did not become available within " + timeout + " milliseconds");
 	}
 
@@ -105,14 +106,22 @@ public abstract class MBTMojo extends AbstractMojo {
 			baseDir += "/";
 		}
 		SourceRepository sr = new SourceRepository(baseDir);
-		// TODO make these configurable Maven properties
+		// TODO get the layer 1 directory from the converter
 		String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/" };
 		try {
 			waitForService();
 			if (goal.endsWith("ToUML")) {
 				clearObjects(goal);
 				for (String dir : dirs) {
+					ArrayList<String> tempFiles = new ArrayList<String>();
 					for (String fileName : sr.list(dir, "")) {
+						if (fileName.startsWith(dir + "stepdefs")) {
+							tempFiles.add(fileName);
+						} else {
+							convertObject(goal, fileName, sr.get(fileName));
+						}
+					}
+					for (String fileName : tempFiles) {
 						convertObject(goal, fileName, sr.get(fileName));
 					}
 				}

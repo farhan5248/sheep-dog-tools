@@ -33,7 +33,11 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	public ConvertAsciidoctorToUML(String tags, ObjectRepository fa, Logger log) {
 		super(tags, fa, log);
-
+	}
+	
+	public void clearObjects() throws Exception {
+		fa.clear(tags);
+		stepObjects.clear();
 	}
 
 	protected void convertAbstractScenarioList() throws Exception {

@@ -1,6 +1,9 @@
 package org.farhan.common;
 
 import org.farhan.mbt.core.ObjectRepository;
+
+import java.util.ArrayList;
+
 import org.farhan.mbt.core.Converter;
 import org.farhan.mbt.core.Logger;
 import org.junit.jupiter.api.Assertions;
@@ -31,7 +34,15 @@ public abstract class GoalObject extends TestObject {
 			if (mojo.getClass().getName().endsWith("ToUML")) {
 				mojo.clearObjects();
 				for (String dir : dirs) {
+					ArrayList<String> tempFiles = new ArrayList<String>();
 					for (String fileName : sr.list(dir, "")) {
+						if (fileName.startsWith(dir + "stepdefs")) {
+							tempFiles.add(fileName);
+						} else {
+							mojo.convertObject(fileName, sr.get(fileName));
+						}
+					}
+					for (String fileName : tempFiles) {
 						mojo.convertObject(fileName, sr.get(fileName));
 					}
 				}

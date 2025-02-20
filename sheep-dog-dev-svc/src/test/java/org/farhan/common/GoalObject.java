@@ -1,5 +1,6 @@
 package org.farhan.common;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
 import org.farhan.mbt.service.ModelTransformerResponse;
 import org.junit.jupiter.api.Assertions;
@@ -90,7 +91,15 @@ public class GoalObject extends TestObject {
 			if (goal.endsWith("ToUML")) {
 				clearObjects(goal);
 				for (String dir : dirs) {
+					ArrayList<String> tempFiles = new ArrayList<String>();
 					for (String fileName : sr.list(dir, "")) {
+						if (fileName.startsWith(dir + "stepdefs")) {
+							tempFiles.add(fileName);
+						} else {
+							convertObject(goal, fileName, sr.get(fileName));
+						}
+					}
+					for (String fileName : tempFiles) {
 						convertObject(goal, fileName, sr.get(fileName));
 					}
 				}

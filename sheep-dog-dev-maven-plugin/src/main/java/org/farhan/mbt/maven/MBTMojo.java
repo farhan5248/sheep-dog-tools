@@ -52,7 +52,15 @@ public abstract class MBTMojo extends AbstractMojo {
 
 			if (mojo.getClass().getName().endsWith("ToUML")) {
 				mojo.clearObjects();
+				ArrayList<String> tempFiles = new ArrayList<String>();
 				for (String fileName : sr.list(dir, "")) {
+					if (fileName.startsWith(dir + "stepdefs")) {
+						tempFiles.add(fileName);
+					} else {
+						mojo.convertObject(fileName, sr.get(fileName));
+					}
+				}
+				for (String fileName : tempFiles) {
 					mojo.convertObject(fileName, sr.get(fileName));
 				}
 			} else {
