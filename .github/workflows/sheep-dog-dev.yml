@@ -39,7 +39,7 @@ jobs:
     secrets: inherit      
     
   merge-into-develop:
-    needs: [deploy-to-minikube]
+    needs: [sheep-dog-dev-svc-maven-plugin]
     uses: ./.github/workflows/merge.yml
     with:
       source: 'main'
