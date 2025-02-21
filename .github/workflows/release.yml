@@ -55,6 +55,8 @@ jobs:
     - name: Publish Release version
       working-directory: ./${{ inputs.project }}
       run: |
+        git reset --hard HEAD
+        git clean -fdx
         git pull
         mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=false -DallowDowngrade=true
         if [ ${{ inputs.plugin }} == Maven ]; then
@@ -72,9 +74,8 @@ jobs:
     - name: Publish SNAPSHOT version
       working-directory: ./${{ inputs.project }}
       run: |
-        git reset --hard HEAD
-        git clean -fdx
         mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true
+        git clean -fdx
         if [[ $(git status --porcelain --untracked-files=no | wc -l) -gt 0 ]]; then
           git add *
           git commit -m "Upgrading dependency versions"
