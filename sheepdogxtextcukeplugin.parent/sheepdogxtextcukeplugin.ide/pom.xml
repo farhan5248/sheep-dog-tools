@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.farhan</groupId>
 		<artifactId>sheepdogxtextcukeplugin.parent</artifactId>
-		<version>1.11.0</version>
+		<version>1.12.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>sheepdogxtextcukeplugin.ide</artifactId>
 	<packaging>eclipse-plugin</packaging>
