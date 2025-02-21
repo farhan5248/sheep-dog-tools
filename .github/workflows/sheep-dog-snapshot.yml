@@ -72,4 +72,7 @@ jobs:
   merge-into-main:
     needs: [deploy-to-minikube]
     uses: ./.github/workflows/merge.yml
+    with:
+      source: 'develop'
+      target: 'main'
     secrets: inherit

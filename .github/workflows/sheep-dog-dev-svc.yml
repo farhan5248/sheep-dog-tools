@@ -20,4 +20,12 @@ jobs:
     with:
       project: 'sheep-dog-dev-svc-maven-plugin'
       plugin: 'Maven'
-    secrets: inherit    
+    secrets: inherit   
+         
+  merge-into-develop:
+    needs: [deploy-to-minikube]
+    uses: ./.github/workflows/merge.yml
+    with:
+      source: 'main'
+      target: 'develop'
+    secrets: inherit  

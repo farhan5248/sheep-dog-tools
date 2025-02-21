@@ -80,6 +80,7 @@ jobs:
           git commit -m "Upgrading dependency versions"
           git push
         fi
+        mvn clean deploy -DskipTests
       env:
         GITHUB_TOKEN: ${{ github.token }}
         MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
