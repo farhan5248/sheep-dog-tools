@@ -2,6 +2,15 @@ name: Merge
 
 on:
   workflow_call:
+    inputs:
+      source:
+        description: 'source'
+        required: true
+        type: string
+      target:
+        description: 'target'
+        required: true
+        type: string
   workflow_dispatch:
     inputs:
       source:
