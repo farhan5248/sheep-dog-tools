@@ -63,14 +63,14 @@ jobs:
     secrets: inherit
 
   deploy-to-minikube:
-    needs: [sheep-dog-dev-svc-maven-plugin, sheep-dog-dev-maven-plugin]
+    needs: [sheep-dog-dev-svc-maven-plugin]
     uses: ./.github/workflows/deploy.yml
     with:
       namespace: 'snapshot'   
     secrets: inherit
   
   merge-into-main:
-    needs: [deploy-to-minikube]
+    needs: [sheep-dog-dev-svc-maven-plugin, sheep-dog-dev-maven-plugin]
     uses: ./.github/workflows/merge.yml
     with:
       source: 'develop'

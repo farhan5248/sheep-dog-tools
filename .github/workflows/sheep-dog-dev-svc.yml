@@ -21,6 +21,13 @@ jobs:
       project: 'sheep-dog-dev-svc-maven-plugin'
       plugin: 'Maven'
     secrets: inherit   
+
+  deploy-to-minikube:
+    needs: [sheep-dog-dev-svc]
+    uses: ./.github/workflows/deploy.yml
+    with:
+      namespace: 'release'   
+    secrets: inherit
          
   merge-into-develop:
     needs: [deploy-to-minikube]
