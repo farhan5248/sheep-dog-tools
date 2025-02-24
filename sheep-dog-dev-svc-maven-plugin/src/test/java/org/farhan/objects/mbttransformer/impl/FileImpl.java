@@ -3,11 +3,11 @@ package org.farhan.objects.mbttransformer.impl;
 import java.util.HashMap;
 
 import org.farhan.common.FileObject;
-import org.farhan.objects.mbttransformer.BlahObjectPageStepsJavaFile;
-import org.farhan.objects.mbttransformer.ObjectPageAsciidocFile;
-import org.farhan.objects.mbttransformer.ObjectPageJavaFile;
-import org.farhan.objects.mbttransformer.ProcessAsciidocFile;
-import org.farhan.objects.mbttransformer.ProcessFeatureFile;
+import org.farhan.objects.mbttransformer.src.test.java.org.farhan.objects.blah.ObjectPageJavaFile;
+import org.farhan.objects.mbttransformer.src.test.java.org.farhan.stepdefs.blah.BlahObjectPageStepsJavaFile;
+import org.farhan.objects.mbttransformer.src.test.resources.asciidoc.ProcessAsciidocFile;
+import org.farhan.objects.mbttransformer.src.test.resources.asciidoc.stepdefs.blahapplication.ObjectPageAsciidocFile;
+import org.farhan.objects.mbttransformer.src.test.resources.cucumber.ProcessFeatureFile;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import static io.cucumber.spring.CucumberTestContext.SCOPE_CUCUMBER_GLUE;

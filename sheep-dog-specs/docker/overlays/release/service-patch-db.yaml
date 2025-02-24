@@ -7,3 +7,4 @@ spec:
     - name: sheep-dog-dev-db
       port: 3306
       nodePort: 30326
+  type: NodePort	  
