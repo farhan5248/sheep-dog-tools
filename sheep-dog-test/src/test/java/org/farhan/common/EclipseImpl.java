@@ -157,16 +157,6 @@ public class EclipseImpl implements ILanguageAccess {
 		return cellsToString((ArrayList<String>) parameters);
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public String getStepDefinitionParametersStringUnsorted(Object parameters) {
-		String cellsAsString = "| ";
-		for (String cell : (ArrayList<String>) parameters) {
-			cellsAsString += cell + " | ";
-		}
-		return cellsAsString.trim();
-	}
-
 	@Override
 	public List<?> getStepDefinitions(Object stepObject) {
 		ArrayList<String> stepDefinitionNames = new ArrayList<String>();

@@ -18,7 +18,7 @@ public class StepDefinitionHelper {
 		for (String alternateName : la.getFilesRecursively(nameParts[0])) {
 			if (!alternateName.contentEquals(qualifiedName)
 					&& alternateName.endsWith(nameParts[nameParts.length - 1])) {
-				alternateName = alternateName.replaceFirst(la.getFileExtension()+"$", "");
+				alternateName = alternateName.replaceFirst(la.getFileExtension() + "$", "");
 				alternateName = alternateName.replaceFirst(nameParts[0] + "/", "");
 				alternateNames.add(la.getStepName().replace(objectName, alternateName));
 			}
@@ -78,7 +78,7 @@ public class StepDefinitionHelper {
 		Proposal proposal;
 		for (String fileName : la.getFilesRecursively(component)) {
 			proposal = new Proposal();
-			proposal.setDisplay(fileName.replace(component + "/", "").replaceFirst(la.getFileExtension()+"$", ""));
+			proposal.setDisplay(fileName.replace(component + "/", "").replaceFirst(la.getFileExtension() + "$", ""));
 			proposal.setDocumentation(la.getStepObjectDescription(fileName));
 			proposal.setReplacement("The " + component + ", " + proposal.getDisplay());
 			proposals.add(proposal);
@@ -296,7 +296,7 @@ public class StepDefinitionHelper {
 				Object stepDefinition = getStepDefinition(stepObject, getPredicate(la.getStepName()), la);
 				if (stepDefinition != null) {
 					for (Object parameters : la.getStepDefinitionParameters(stepDefinition)) {
-						String paramSetString = la.getStepDefinitionParametersStringUnsorted((Object) parameters);
+						String paramSetString = la.getStepDefinitionParametersString((Object) parameters);
 						proposal = new Proposal();
 						proposal.setDisplay(paramSetString);
 						proposal.setDocumentation(paramSetString);

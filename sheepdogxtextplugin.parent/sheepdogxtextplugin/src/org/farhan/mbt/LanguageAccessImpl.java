@@ -54,17 +54,21 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		this.step = step;
 	}
 
-	private String cellsToString(List<Cell> cells) {
-		String cellsAsString = "| ";
+	private String cellsToString(List<Cell> cells, boolean sorted) {
+		String cellsAsString = "|===\n";
 		List<String> sortedCells = new ArrayList<String>();
 		for (Cell cell : cells) {
-			sortedCells.add(cell.getName());
+			if (cell.getName() != null) {
+				sortedCells.add(cell.getName());
+			}
 		}
-		Collections.sort(sortedCells);
+		if (sorted) {
+			Collections.sort(sortedCells);
+		}
 		for (String cell : sortedCells) {
-			cellsAsString += cell + " | ";
+			cellsAsString += "| " + cell;
 		}
-		return cellsAsString.trim();
+		return cellsAsString + "\n|===";
 	}
 
 	@Override
@@ -86,8 +90,6 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	}
 
 	public void createStepDefinitionParameters(Object stepDefinition) {
-		// If the step doesn't have a step table, then don't do anything
-
 		StepDefinition so = (StepDefinition) stepDefinition;
 		StepParameters parameters = SheepDogFactory.eINSTANCE.createStepParameters();
 		parameters.setName(Integer.toString(so.getStepParameters().size() + 1));
@@ -188,6 +190,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		Table Table = step.getTheStepTable();
 		if (Table != null) {
 			if (Table.getRows().size() > 0) {
+				// TODO if this is sorted then there's no need to sort it in cellToString
 				return Table.getRows().get(0).getCells();
 			} else {
 				return null;
@@ -262,17 +265,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	@Override
 	public String getStepDefinitionParametersString(Object parameters) {
 		StepParameters e = (StepParameters) parameters;
-		return cellsToString(e.getParametersTable().getRows().get(0).getCells());
-	}
-
-	@Override
-	public String getStepDefinitionParametersStringUnsorted(Object parameters) {
-		StepParameters e = (StepParameters) parameters;
-		String cellsAsString = "| ";
-		for (Cell cell : e.getParametersTable().getRows().get(0).getCells()) {
-			cellsAsString += cell.getName() + " | ";
-		}
-		return cellsAsString.trim();
+		return cellsToString(e.getParametersTable().getRows().get(0).getCells(), true);
 	}
 
 	public EList<?> getStepDefinitions(Object stepObject) {
@@ -315,9 +308,11 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	public String getStepParametersString() {
 		List<Cell> header = getHeader();
 		if (header == null) {
-			return "| Content |";
+			// TODO it's better to create a single cell with the content than hardcoding it
+			// this way
+			return "|===\n| Content\n|===";
 		} else {
-			return cellsToString(getHeader());
+			return cellsToString(getHeader(), true);
 		}
 	}
 

@@ -30,8 +30,6 @@ public interface ILanguageAccess {
 
 	public List<?> getStepDefinitionParameters(Object stepDefinition);
 
-	public String getStepDefinitionParametersStringUnsorted(Object parameters);
-
 	public String getStepDefinitionParametersString(Object parameters);
 
 	public List<?> getStepDefinitions(Object stepObject);
