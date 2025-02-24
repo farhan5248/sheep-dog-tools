@@ -242,16 +242,6 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		return cellsToString(e.getParametersTable().getRows().get(0).getCells());
 	}
 
-	@Override
-	public String getStepDefinitionParametersStringUnsorted(Object parameters) {
-		StepParameters e = (StepParameters) parameters;
-		String cellsAsString = "| ";
-		for (Cell cell : e.getParametersTable().getRows().get(0).getCells()) {
-			cellsAsString += cell.getName() + " | ";
-		}
-		return cellsAsString.trim();
-	}
-
 	public EList<?> getStepDefinitions(Object stepObject) {
 		return ((StepObject) stepObject).getStepDefinitions();
 	}
