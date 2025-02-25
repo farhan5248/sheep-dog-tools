@@ -5,7 +5,6 @@ Feature: Document To Document
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
           """
-          :tags: tag1
           = Feature: Process
           
           Desc 1
@@ -80,7 +79,6 @@ Feature: Document To Document
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows
           """
-          :tags:tag1
           = Feature: Process
           
           Desc 1

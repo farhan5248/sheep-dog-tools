@@ -14,7 +14,6 @@ public class FeatureFormattingTest extends FormattingTest {
 	private StringBuilder getExpected() {
 
 		StringBuilder sb = new StringBuilder();
-		sb.append(":tags:tag1,tag2,tag3\n");
 		sb.append("= Feature: This is a test feature\n");
 		sb.append("\n");
 		sb.append("This is the description\n");
@@ -27,7 +26,6 @@ public class FeatureFormattingTest extends FormattingTest {
 	private StringBuilder getExpected2() {
 
 		StringBuilder sb = new StringBuilder();
-		sb.append(":tags:tag1,tag2,tag3\n");
 		sb.append("= Feature: This is a test feature\n");
 		sb.append("\n");
 		sb.append("This is the description\n");
@@ -52,7 +50,6 @@ public class FeatureFormattingTest extends FormattingTest {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
-			sb.append(" :tags: tag1,tag2,tag3 \n");
 			sb.append(" =  Feature:  This is a test feature \n");
 			sb.append(" This is the description \n");
 			sb.append(" This is the second line of the description \n");
@@ -67,7 +64,6 @@ public class FeatureFormattingTest extends FormattingTest {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
-			sb.append(":tags:tag1,tag2,tag3\n");
 			sb.append("= Feature: This is a test feature\n");
 			sb.append("This is the description\n");
 			sb.append("This is the second line of the description\n");
@@ -82,9 +78,6 @@ public class FeatureFormattingTest extends FormattingTest {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
-			sb.append(":tags:tag1,tag2,tag3\n");
-			sb.append("\n");
-			sb.append("\n");
 			sb.append("= Feature: This is a test feature\n");
 			sb.append("\n");
 			sb.append("\n");

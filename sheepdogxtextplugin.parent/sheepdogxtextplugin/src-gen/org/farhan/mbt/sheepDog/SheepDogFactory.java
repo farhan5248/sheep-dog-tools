@@ -177,15 +177,6 @@ public interface SheepDogFactory extends EFactory
   Row createRow();
 
   /**
-   * Returns a new object of class '<em>Feature Tags</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Feature Tags</em>'.
-   * @generated
-   */
-  FeatureTags createFeatureTags();
-
-  /**
    * Returns a new object of class '<em>Abstract Scenario Tags</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

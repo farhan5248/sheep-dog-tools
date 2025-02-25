@@ -23,7 +23,6 @@ StepParameters:
 	parametersTable=Table;
 
 Feature:
-	(tags=FeatureTags)?
 	'=' 'Feature:' name=Title EOL
 	statements+=Statement*
 	abstractScenarios+=AbstractScenario*;
@@ -80,9 +79,6 @@ Table:
 
 Row:
 	cells+=Cell+ EOL;
-
-FeatureTags:
-	':tags:' name=WORD EOL;
 
 AbstractScenarioTags:
 	'[tags=' name=WORD ']' EOL;

@@ -47,6 +47,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 
 	private void convertBackground(Interaction abstractScenario) {
 		Background background = tgtObj.createBackground(srcObj.getBackgroundName(abstractScenario));
+		tgtObj.setBackgroundTags(background, srcObj.getBackgroundTags(abstractScenario));
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
 		convertStepList(background, srcObj.getStepList(abstractScenario));
 	}
@@ -73,7 +74,6 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		tgtObj = (AsciiDoctorAdocWrapper) project.createObject(path);
 		tgtObj.parse(content);
 		tgtObj.setFeatureName(srcObj.getFeatureName());
-		tgtObj.setFeatureTags(srcObj.getFeatureTags());
 		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
 		convertAbstractScenarioList();
 		return tgtObj.toString();

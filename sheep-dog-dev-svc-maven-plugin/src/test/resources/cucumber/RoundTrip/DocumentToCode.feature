@@ -5,11 +5,13 @@ Feature: Document To Code
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
           """
-          :tags: tag1
           = Feature: Process
           
           Desc 1
           
+          [tags="tag1"]
+          == Background: Setup
+
           [tags="tag2"]
           == Scenario: Story One
           
@@ -85,6 +87,8 @@ Feature: Document To Code
           
             Desc 1
           
+            Background: Setup
+
             @tag2
             Scenario: Story One
           

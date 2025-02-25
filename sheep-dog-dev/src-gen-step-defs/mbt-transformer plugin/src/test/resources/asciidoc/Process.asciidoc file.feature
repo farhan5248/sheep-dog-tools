@@ -14,6 +14,10 @@ Object: src/test/resources/asciidoc/Process.asciidoc file
 
           | Name | Tags | Statements |
 
+    Parameters: 3
+
+          | Name | Statements |
+
   Definition: Scenarios Steps Step Table section will be created as follows
 
     Parameters: 1

@@ -34,7 +34,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 	public ConvertAsciidoctorToUML(String tags, ObjectRepository fa, Logger log) {
 		super(tags, fa, log);
 	}
-	
+
 	public void clearObjects() throws Exception {
 		fa.clear(tags);
 		stepObjects.clear();
@@ -55,6 +55,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	private void convertBackground(AbstractScenario abstractScenario) {
 		Interaction background = tgtObj.createBackground(srcObj.getBackgroundName(abstractScenario));
+		tgtObj.setBackgroundTags(background, srcObj.getAbstractScenarioTags(abstractScenario));
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
 		convertStepList(background, srcObj.getStepList(abstractScenario));
 	}
@@ -86,7 +87,6 @@ public class ConvertAsciidoctorToUML extends Converter {
 			} else {
 				log.debug("test suite: " + path);
 				tgtObj.setFeatureName(srcObj.getFeatureName());
-				tgtObj.setFeatureTags(srcObj.getFeatureTags());
 				tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
 				convertAbstractScenarioList();
 			}
@@ -193,18 +193,12 @@ public class ConvertAsciidoctorToUML extends Converter {
 				}
 			}
 		} else {
-			if (isTagged(ufw.getFeatureTags(), tags)) {
+			if (tags.isEmpty()) {
 				return true;
 			}
 			for (AbstractScenario a : ufw.getAbstractScenarioList()) {
-				if (ufw.isScenarioOutline(a)) {
-					if (isTagged(ufw.getAbstractScenarioTags(a), tags)) {
-						return true;
-					}
-				} else if (!ufw.isBackground(a)) {
-					if (isTagged(ufw.getAbstractScenarioTags(a), tags)) {
-						return true;
-					}
+				if (isTagged(ufw.getAbstractScenarioTags(a), tags)) {
+					return true;
 				}
 			}
 		}
@@ -212,9 +206,6 @@ public class ConvertAsciidoctorToUML extends Converter {
 	}
 
 	private boolean isTagged(ArrayList<String> tags, String tag) {
-		if (tag.isEmpty()) {
-			return true;
-		}
 		for (String t : tags) {
 			if (t.trim().contentEquals(tag)) {
 				return true;

@@ -82,7 +82,6 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
       case SheepDogPackage.DOC_STRING: return createDocString();
       case SheepDogPackage.TABLE: return createTable();
       case SheepDogPackage.ROW: return createRow();
-      case SheepDogPackage.FEATURE_TAGS: return createFeatureTags();
       case SheepDogPackage.ABSTRACT_SCENARIO_TAGS: return createAbstractScenarioTags();
       case SheepDogPackage.CELL: return createCell();
       case SheepDogPackage.STATEMENT: return createStatement();
@@ -293,18 +292,6 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
   {
     RowImpl row = new RowImpl();
     return row;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public FeatureTags createFeatureTags()
-  {
-    FeatureTagsImpl featureTags = new FeatureTagsImpl();
-    return featureTags;
   }
 
   /**

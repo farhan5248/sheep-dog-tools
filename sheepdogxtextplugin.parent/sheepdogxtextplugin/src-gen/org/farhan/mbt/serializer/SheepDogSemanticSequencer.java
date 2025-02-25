@@ -22,7 +22,6 @@ import org.farhan.mbt.sheepDog.Cell;
 import org.farhan.mbt.sheepDog.DocString;
 import org.farhan.mbt.sheepDog.Examples;
 import org.farhan.mbt.sheepDog.Feature;
-import org.farhan.mbt.sheepDog.FeatureTags;
 import org.farhan.mbt.sheepDog.Given;
 import org.farhan.mbt.sheepDog.Row;
 import org.farhan.mbt.sheepDog.Scenario;
@@ -69,9 +68,6 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 				return; 
 			case SheepDogPackage.FEATURE:
 				sequence_Feature(context, (Feature) semanticObject); 
-				return; 
-			case SheepDogPackage.FEATURE_TAGS:
-				sequence_FeatureTags(context, (FeatureTags) semanticObject); 
 				return; 
 			case SheepDogPackage.GIVEN:
 				sequence_Given(context, (Given) semanticObject); 
@@ -215,31 +211,11 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     FeatureTags returns FeatureTags
-	 *
-	 * Constraint:
-	 *     name=WORD
-	 * </pre>
-	 */
-	protected void sequence_FeatureTags(ISerializationContext context, FeatureTags semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, SheepDogPackage.Literals.FEATURE_TAGS__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.FEATURE_TAGS__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getFeatureTagsAccess().getNameWORDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
 	 *     Model returns Feature
 	 *     Feature returns Feature
 	 *
 	 * Constraint:
-	 *     (tags=FeatureTags? name=Title statements+=Statement* abstractScenarios+=AbstractScenario*)
+	 *     (name=Title statements+=Statement* abstractScenarios+=AbstractScenario*)
 	 * </pre>
 	 */
 	protected void sequence_Feature(ISerializationContext context, Feature semanticObject) {

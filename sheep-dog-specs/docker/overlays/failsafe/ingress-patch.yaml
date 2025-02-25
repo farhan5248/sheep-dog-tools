@@ -4,4 +4,4 @@ metadata:
   name: sheep-dog-dev-ingress
 spec:
   rules:
-    - host: test.sheepdogdev.io
+    - host: dev.sheepdogdev.io

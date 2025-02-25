@@ -49,6 +49,7 @@ public class ConvertUMLToCucumber extends Converter {
 
 	protected void convertBackground(Interaction abstractScenario) throws Exception {
 		Background background = tgtObj.createBackground(srcObj.getBackgroundName(abstractScenario));
+		tgtObj.setFeatureTags(srcObj.getBackgroundTags(abstractScenario));
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
 		convertStepList(background, srcObj.getStepList(abstractScenario), abstractScenario);
 	}
@@ -77,7 +78,6 @@ public class ConvertUMLToCucumber extends Converter {
 		tgtObj.parse(content);
 
 		tgtObj.setFeatureName(srcObj.getFeatureName());
-		tgtObj.setFeatureTags(srcObj.getFeatureTags());
 		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
 		convertAbstractScenarioList();
 		return tgtObj.toString();

@@ -18,7 +18,6 @@ import org.farhan.mbt.sheepDog.Cell;
 import org.farhan.mbt.sheepDog.DocString;
 import org.farhan.mbt.sheepDog.Examples;
 import org.farhan.mbt.sheepDog.Feature;
-import org.farhan.mbt.sheepDog.FeatureTags;
 import org.farhan.mbt.sheepDog.Given;
 import org.farhan.mbt.sheepDog.Model;
 import org.farhan.mbt.sheepDog.Row;
@@ -160,13 +159,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   private EClass rowEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass featureTagsEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -411,20 +403,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getFeature_Tags()
-  {
-    return (EReference)featureEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EReference getFeature_AbstractScenarios()
   {
-    return (EReference)featureEClass.getEStructuralFeatures().get(1);
+    return (EReference)featureEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -730,28 +711,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EClass getFeatureTags()
-  {
-    return featureTagsEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getFeatureTags_Name()
-  {
-    return (EAttribute)featureTagsEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getAbstractScenarioTags()
   {
     return abstractScenarioTagsEClass;
@@ -861,7 +820,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
     createEReference(stepParametersEClass, STEP_PARAMETERS__PARAMETERS_TABLE);
 
     featureEClass = createEClass(FEATURE);
-    createEReference(featureEClass, FEATURE__TAGS);
     createEReference(featureEClass, FEATURE__ABSTRACT_SCENARIOS);
 
     abstractScenarioEClass = createEClass(ABSTRACT_SCENARIO);
@@ -902,9 +860,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
 
     rowEClass = createEClass(ROW);
     createEReference(rowEClass, ROW__CELLS);
-
-    featureTagsEClass = createEClass(FEATURE_TAGS);
-    createEAttribute(featureTagsEClass, FEATURE_TAGS__NAME);
 
     abstractScenarioTagsEClass = createEClass(ABSTRACT_SCENARIO_TAGS);
     createEAttribute(abstractScenarioTagsEClass, ABSTRACT_SCENARIO_TAGS__NAME);
@@ -973,7 +928,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
     initEReference(getStepParameters_ParametersTable(), this.getTable(), null, "parametersTable", null, 0, 1, StepParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(featureEClass, Feature.class, "Feature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getFeature_Tags(), this.getFeatureTags(), null, "tags", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getFeature_AbstractScenarios(), this.getAbstractScenario(), null, "abstractScenarios", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(abstractScenarioEClass, AbstractScenario.class, "AbstractScenario", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1014,9 +968,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
 
     initEClass(rowEClass, Row.class, "Row", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getRow_Cells(), this.getCell(), null, "cells", null, 0, -1, Row.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(featureTagsEClass, FeatureTags.class, "FeatureTags", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getFeatureTags_Name(), ecorePackage.getEString(), "name", null, 0, 1, FeatureTags.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(abstractScenarioTagsEClass, AbstractScenarioTags.class, "AbstractScenarioTags", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAbstractScenarioTags_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractScenarioTags.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

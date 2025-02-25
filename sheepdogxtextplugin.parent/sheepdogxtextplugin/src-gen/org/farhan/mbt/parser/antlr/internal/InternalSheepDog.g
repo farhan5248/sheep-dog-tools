@@ -376,39 +376,20 @@ ruleFeature returns [EObject current=null]
 	leaveRule();
 }:
 	(
-		(
-			(
-				{
-					newCompositeNode(grammarAccess.getFeatureAccess().getTagsFeatureTagsParserRuleCall_0_0());
-				}
-				lv_tags_0_0=ruleFeatureTags
-				{
-					if ($current==null) {
-						$current = createModelElementForParent(grammarAccess.getFeatureRule());
-					}
-					set(
-						$current,
-						"tags",
-						lv_tags_0_0,
-						"org.farhan.mbt.SheepDog.FeatureTags");
-					afterParserOrEnumRuleCall();
-				}
-			)
-		)?
-		otherlv_1='='
+		otherlv_0='='
 		{
-			newLeafNode(otherlv_1, grammarAccess.getFeatureAccess().getEqualsSignKeyword_1());
+			newLeafNode(otherlv_0, grammarAccess.getFeatureAccess().getEqualsSignKeyword_0());
 		}
-		otherlv_2='Feature:'
+		otherlv_1='Feature:'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getFeatureAccess().getFeatureKeyword_2());
+			newLeafNode(otherlv_1, grammarAccess.getFeatureAccess().getFeatureKeyword_1());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getFeatureAccess().getNameTitleParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getFeatureAccess().getNameTitleParserRuleCall_2_0());
 				}
-				lv_name_3_0=ruleTitle
+				lv_name_2_0=ruleTitle
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getFeatureRule());
@@ -416,22 +397,22 @@ ruleFeature returns [EObject current=null]
 					set(
 						$current,
 						"name",
-						lv_name_3_0,
+						lv_name_2_0,
 						"org.farhan.mbt.SheepDog.Title");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)
-		this_EOL_4=RULE_EOL
+		this_EOL_3=RULE_EOL
 		{
-			newLeafNode(this_EOL_4, grammarAccess.getFeatureAccess().getEOLTerminalRuleCall_4());
+			newLeafNode(this_EOL_3, grammarAccess.getFeatureAccess().getEOLTerminalRuleCall_3());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getFeatureAccess().getStatementsStatementParserRuleCall_5_0());
+					newCompositeNode(grammarAccess.getFeatureAccess().getStatementsStatementParserRuleCall_4_0());
 				}
-				lv_statements_5_0=ruleStatement
+				lv_statements_4_0=ruleStatement
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getFeatureRule());
@@ -439,7 +420,7 @@ ruleFeature returns [EObject current=null]
 					add(
 						$current,
 						"statements",
-						lv_statements_5_0,
+						lv_statements_4_0,
 						"org.farhan.mbt.SheepDog.Statement");
 					afterParserOrEnumRuleCall();
 				}
@@ -448,9 +429,9 @@ ruleFeature returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getFeatureAccess().getAbstractScenariosAbstractScenarioParserRuleCall_6_0());
+					newCompositeNode(grammarAccess.getFeatureAccess().getAbstractScenariosAbstractScenarioParserRuleCall_5_0());
 				}
-				lv_abstractScenarios_6_0=ruleAbstractScenario
+				lv_abstractScenarios_5_0=ruleAbstractScenario
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getFeatureRule());
@@ -458,7 +439,7 @@ ruleFeature returns [EObject current=null]
 					add(
 						$current,
 						"abstractScenarios",
-						lv_abstractScenarios_6_0,
+						lv_abstractScenarios_5_0,
 						"org.farhan.mbt.SheepDog.AbstractScenario");
 					afterParserOrEnumRuleCall();
 				}
@@ -1394,51 +1375,6 @@ ruleRow returns [EObject current=null]
 		this_EOL_1=RULE_EOL
 		{
 			newLeafNode(this_EOL_1, grammarAccess.getRowAccess().getEOLTerminalRuleCall_1());
-		}
-	)
-;
-
-// Entry rule entryRuleFeatureTags
-entryRuleFeatureTags returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getFeatureTagsRule()); }
-	iv_ruleFeatureTags=ruleFeatureTags
-	{ $current=$iv_ruleFeatureTags.current; }
-	EOF;
-
-// Rule FeatureTags
-ruleFeatureTags returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		otherlv_0=':tags:'
-		{
-			newLeafNode(otherlv_0, grammarAccess.getFeatureTagsAccess().getTagsKeyword_0());
-		}
-		(
-			(
-				lv_name_1_0=RULE_WORD
-				{
-					newLeafNode(lv_name_1_0, grammarAccess.getFeatureTagsAccess().getNameWORDTerminalRuleCall_1_0());
-				}
-				{
-					if ($current==null) {
-						$current = createModelElement(grammarAccess.getFeatureTagsRule());
-					}
-					setWithLastConsumed(
-						$current,
-						"name",
-						lv_name_1_0,
-						"org.farhan.mbt.SheepDog.WORD");
-				}
-			)
-		)
-		this_EOL_2=RULE_EOL
-		{
-			newLeafNode(this_EOL_2, grammarAccess.getFeatureTagsAccess().getEOLTerminalRuleCall_2());
 		}
 	)
 ;

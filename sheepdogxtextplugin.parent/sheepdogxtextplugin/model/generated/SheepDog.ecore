@@ -25,8 +25,6 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Feature" eSuperTypes="#//Model">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tags" eType="#//FeatureTags"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="abstractScenarios" upperBound="-1"
         eType="#//AbstractScenario" containment="true"/>
   </eClassifiers>
@@ -74,9 +72,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="Row">
     <eStructuralFeatures xsi:type="ecore:EReference" name="cells" upperBound="-1"
         eType="#//Cell" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FeatureTags">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractScenarioTags">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

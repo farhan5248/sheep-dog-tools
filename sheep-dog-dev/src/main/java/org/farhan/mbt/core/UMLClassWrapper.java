@@ -14,7 +14,6 @@ import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.ValueSpecification;
-import org.farhan.mbt.sheepDog.StepDefinition;
 
 public class UMLClassWrapper implements ConvertibleObject {
 
@@ -229,6 +228,10 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return abstractScenario.getName();
 	}
 
+	public ArrayList<String> getBackgroundTags(Interaction abstractScenario) {
+		return getTags(abstractScenario);
+	}
+
 	public String getDocString(Message step) {
 		ValueSpecification vs = (LiteralString) step.getArgument("docString", null);
 		EMap<String, String> docString = vs.getEAnnotation("docString").getDetails();
@@ -286,16 +289,6 @@ public class UMLClassWrapper implements ConvertibleObject {
 
 	public String getFeatureName() {
 		return theClass.getEAnnotations().getFirst().getDetails().get(0).getKey();
-	}
-
-	public ArrayList<String> getFeatureTags() {
-		ArrayList<String> tags = new ArrayList<String>();
-		if (theClass.getEAnnotations().size() == 2) {
-			for (Entry<String, String> t : theClass.getEAnnotations().getLast().getDetails()) {
-				tags.add(t.getKey());
-			}
-		}
-		return tags;
 	}
 
 	@Override
@@ -471,20 +464,16 @@ public class UMLClassWrapper implements ConvertibleObject {
 		background.createOwnedComment().setBody(backgroundDescription);
 	}
 
+	public void setBackgroundTags(Interaction abstractScenario, ArrayList<String> tags) {
+		setTags(abstractScenario, tags);
+	}
+
 	public void setFeatureDescription(String description) {
 		theClass.createOwnedComment().setBody(description);
 	}
 
 	public void setFeatureName(String featureName) {
 		createAnnotation(theClass, "title", featureName);
-	}
-
-	public void setFeatureTags(ArrayList<String> featureTags) {
-		if (!featureTags.isEmpty()) {
-			for (String t : featureTags) {
-				createAnnotation(theClass, "tags", t);
-			}
-		}
 	}
 
 	public void setScenarioDescription(Interaction scenario, String scenarioDescription) {

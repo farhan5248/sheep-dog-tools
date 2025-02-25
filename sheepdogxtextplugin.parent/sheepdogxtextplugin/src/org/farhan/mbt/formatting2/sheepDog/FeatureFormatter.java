@@ -29,15 +29,10 @@ public class FeatureFormatter extends Formatter {
 	public void format(IFormattableDocument doc, SheepDogGrammarAccess ga, SheepDogFormatter df) {
 		FeatureElements a = ga.getFeatureAccess();
 
-		if (theFeature.getTags() != null) {
-			FeatureTagsFormatter formatter = new FeatureTagsFormatter(theFeature.getTags());
-			formatter.format(doc, ga, df);
-		}
-
-		formatKeywordTrailingSpace(df.getRegion(theFeature, a.getEqualsSignKeyword_1()), doc);
-		formatKeywordTrailingSpace(df.getRegion(theFeature, a.getFeatureKeyword_2()), doc);
-		formatTitle(df.getRegion(theFeature, a.getNameTitleParserRuleCall_3_0()), doc);
-		formatEOL2RuleCall(df.getRegion(theFeature, a.getEOLTerminalRuleCall_4()), doc);
+		formatKeywordTrailingSpace(df.getRegion(theFeature, a.getEqualsSignKeyword_0()), doc);
+		formatKeywordTrailingSpace(df.getRegion(theFeature, a.getFeatureKeyword_1()), doc);
+		formatTitle(df.getRegion(theFeature, a.getNameTitleParserRuleCall_2_0()), doc);
+		formatEOL2RuleCall(df.getRegion(theFeature, a.getEOLTerminalRuleCall_3()), doc);
 		for (Statement s : theFeature.getStatements()) {
 			StatementFormatter formatter = new StatementFormatter(s);
 			formatter.isLast(isLastElement(s, theFeature.getStatements()));

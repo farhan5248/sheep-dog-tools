@@ -24,7 +24,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepParameters/parametersTable"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//Feature">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Feature/tags"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Feature/abstractScenarios"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//AbstractScenario">
@@ -60,9 +59,6 @@
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//Row">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Row/cells"/>
-    </genClasses>
-    <genClasses ecoreClass="SheepDog.ecore#//FeatureTags">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//FeatureTags/name"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//AbstractScenarioTags">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//AbstractScenarioTags/name"/>

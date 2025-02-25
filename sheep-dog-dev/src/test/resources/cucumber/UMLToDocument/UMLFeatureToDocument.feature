@@ -15,11 +15,10 @@ Feature: UML Feature To Document
           | Name    |
           | Process |
 
-  Scenario: One tag, one statement
+  Scenario: One statement
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          :tags: tag1
           = Feature: Process
           
           Desc line 1
@@ -31,14 +30,13 @@ Feature: UML Feature To Document
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Feature section will be created as follows
-          | Name    | Tags | Statements  |
-          | Process | tag1 | Desc line 1 |
+          | Name    | Statements  |
+          | Process | Desc line 1 |
 
-  Scenario: Two tags, two statements
+  Scenario: Two statements
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          :tags: tag1,tag2
           = Feature: Process
           
           Desc line 1
@@ -51,14 +49,13 @@ Feature: UML Feature To Document
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Feature section will be created as follows
-          | Name    | Tags      | Statements               |
-          | Process | tag1,tag2 | Desc line 1\nDesc line 2 |
+          | Name    | Statements               |
+          | Process | Desc line 1\nDesc line 2 |
 
   Scenario: Three tags, three statements
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          :tags: tag1,tag2,tag3
           = Feature: Process
           
           Desc line 1
@@ -72,6 +69,6 @@ Feature: UML Feature To Document
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The mbt-transformer plugin, Process.asciidoc file Feature section will be created as follows
-          | Name    | Tags           | Statements                            |
-          | Process | tag1,tag2,tag3 | Desc line 1\nDesc line 2\nDesc line 3 |
+          | Name    | Statements                            |
+          | Process | Desc line 1\nDesc line 2\nDesc line 3 |
 

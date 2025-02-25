@@ -200,13 +200,6 @@ public class SheepDogSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case SheepDogPackage.FEATURE_TAGS:
-      {
-        FeatureTags featureTags = (FeatureTags)theEObject;
-        T result = caseFeatureTags(featureTags);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case SheepDogPackage.ABSTRACT_SCENARIO_TAGS:
       {
         AbstractScenarioTags abstractScenarioTags = (AbstractScenarioTags)theEObject;
@@ -500,22 +493,6 @@ public class SheepDogSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseRow(Row object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Feature Tags</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Feature Tags</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseFeatureTags(FeatureTags object)
   {
     return null;
   }

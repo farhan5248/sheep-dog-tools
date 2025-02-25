@@ -46,11 +46,6 @@ public class ProcessAsciidocFileImpl extends AdocFileObject implements ProcessAs
 	}
 
 	@Override
-	public void assertFeatureSectionTags(HashMap<String, String> keyMap) {
-		assertFeatureTags(keyMap.get("Name"), keyMap.get("Tags"));
-	}
-
-	@Override
 	public void assertPresent(HashMap<String, String> keyMap) {
 		assertObjectExists();
 	}

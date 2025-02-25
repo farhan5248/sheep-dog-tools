@@ -45,6 +45,7 @@ public class ConvertCucumberToUML extends Converter {
 
 	private void convertBackground(AbstractScenario abstractScenario) {
 		Interaction background = tgtObj.createBackground(srcObj.getBackgroundName(abstractScenario));
+		tgtObj.setBackgroundTags(background, srcObj.getFeatureTags());
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
 		convertStepList(background, srcObj.getStepList(abstractScenario), abstractScenario);
 	}
@@ -74,7 +75,6 @@ public class ConvertCucumberToUML extends Converter {
 		if (isFileSelected(srcObj, tags)) {
 			tgtObj = (UMLClassWrapper) model.createObject(pathConverter.createUMLPath(path));
 			tgtObj.setFeatureName(srcObj.getFeatureName());
-			tgtObj.setFeatureTags(srcObj.getFeatureTags());
 			tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
 			convertAbstractScenarioList();
 			model.save();

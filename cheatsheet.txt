@@ -47,7 +47,7 @@ kubectl get pods --selector="app=bandicoot,ver=2"
 kubectl get pods -l 'ver=2,!canary'
 kubectl get pods --selector="app in (alpaca,bandicoot)"
 kubectl get services -l app=kubernetes-bootcamp
-kubectl logs -n failsafe -c sheep-dog-dev-svc sheep-dog-dev-6b9b78d5cd-nzssh
+kubectl logs -n release -c sheep-dog-dev-svc sheep-dog-dev-svc-6596487776-m7hns
 kubectl exec -ti -n failsafe sheep-dog-dev-6b9b78d5cd-s9vkq -- bash
 kubectl scale deployments/sheep-dog-dev --replicas=4
 kubectl set image deployments/kubernetes-bootcamp kubernetes-bootcamp=docker.io/jocatalin/kubernetes-bootcamp:v2

@@ -261,22 +261,13 @@ public interface SheepDogPackage extends EPackage
   int FEATURE__STATEMENTS = MODEL__STATEMENTS;
 
   /**
-   * The feature id for the '<em><b>Tags</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FEATURE__TAGS = MODEL_FEATURE_COUNT + 0;
-
-  /**
    * The feature id for the '<em><b>Abstract Scenarios</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FEATURE__ABSTRACT_SCENARIOS = MODEL_FEATURE_COUNT + 1;
+  int FEATURE__ABSTRACT_SCENARIOS = MODEL_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Feature</em>' class.
@@ -285,7 +276,7 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FEATURE_FEATURE_COUNT = MODEL_FEATURE_COUNT + 2;
+  int FEATURE_FEATURE_COUNT = MODEL_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.AbstractScenarioImpl <em>Abstract Scenario</em>}' class.
@@ -831,34 +822,6 @@ public interface SheepDogPackage extends EPackage
   int ROW_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.FeatureTagsImpl <em>Feature Tags</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.farhan.mbt.sheepDog.impl.FeatureTagsImpl
-   * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getFeatureTags()
-   * @generated
-   */
-  int FEATURE_TAGS = 17;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FEATURE_TAGS__NAME = 0;
-
-  /**
-   * The number of structural features of the '<em>Feature Tags</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FEATURE_TAGS_FEATURE_COUNT = 1;
-
-  /**
    * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.AbstractScenarioTagsImpl <em>Abstract Scenario Tags</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -866,7 +829,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getAbstractScenarioTags()
    * @generated
    */
-  int ABSTRACT_SCENARIO_TAGS = 18;
+  int ABSTRACT_SCENARIO_TAGS = 17;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -894,7 +857,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getCell()
    * @generated
    */
-  int CELL = 19;
+  int CELL = 18;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -922,7 +885,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getStatement()
    * @generated
    */
-  int STATEMENT = 20;
+  int STATEMENT = 19;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1091,17 +1054,6 @@ public interface SheepDogPackage extends EPackage
    * @generated
    */
   EClass getFeature();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.farhan.mbt.sheepDog.Feature#getTags <em>Tags</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Tags</em>'.
-   * @see org.farhan.mbt.sheepDog.Feature#getTags()
-   * @see #getFeature()
-   * @generated
-   */
-  EReference getFeature_Tags();
 
   /**
    * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.Feature#getAbstractScenarios <em>Abstract Scenarios</em>}'.
@@ -1400,27 +1352,6 @@ public interface SheepDogPackage extends EPackage
   EReference getRow_Cells();
 
   /**
-   * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.FeatureTags <em>Feature Tags</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Feature Tags</em>'.
-   * @see org.farhan.mbt.sheepDog.FeatureTags
-   * @generated
-   */
-  EClass getFeatureTags();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.farhan.mbt.sheepDog.FeatureTags#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.farhan.mbt.sheepDog.FeatureTags#getName()
-   * @see #getFeatureTags()
-   * @generated
-   */
-  EAttribute getFeatureTags_Name();
-
-  /**
    * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.AbstractScenarioTags <em>Abstract Scenario Tags</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1627,14 +1558,6 @@ public interface SheepDogPackage extends EPackage
      * @generated
      */
     EClass FEATURE = eINSTANCE.getFeature();
-
-    /**
-     * The meta object literal for the '<em><b>Tags</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference FEATURE__TAGS = eINSTANCE.getFeature_Tags();
 
     /**
      * The meta object literal for the '<em><b>Abstract Scenarios</b></em>' containment reference list feature.
@@ -1883,24 +1806,6 @@ public interface SheepDogPackage extends EPackage
      * @generated
      */
     EReference ROW__CELLS = eINSTANCE.getRow_Cells();
-
-    /**
-     * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.FeatureTagsImpl <em>Feature Tags</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.farhan.mbt.sheepDog.impl.FeatureTagsImpl
-     * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getFeatureTags()
-     * @generated
-     */
-    EClass FEATURE_TAGS = eINSTANCE.getFeatureTags();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute FEATURE_TAGS__NAME = eINSTANCE.getFeatureTags_Name();
 
     /**
      * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.AbstractScenarioTagsImpl <em>Abstract Scenario Tags</em>}' class.

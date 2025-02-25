@@ -56,12 +56,10 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 			mRULE_WS();
 		} else if (isKeyword("|===")) {
 			mT__23();// '|==='
-		} else if (isKeyword(":tags:")) {
-			mT__24();// ( ':tags:' )
 		} else if (isKeyword("[tags=")) {
-			mT__25();// '[tags='
+			mT__24();// '[tags='
 		} else if (isKeyword("]")) {
-			mT__26();// ']'
+			mT__25();// ']'
 		} else if (isKeyword("===")) {
 			mT__13();// '==='
 		} else if (isKeyword("==")) {
@@ -69,7 +67,7 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 		} else if (isKeyword("=")) {
 			mT__9();// '='
 		} else if (isKeyword("|")) {
-			mT__27();// '|'
+			mT__26();// '|'
 			nextTokenIsWORD = true;
 		} else if (nextTokenIsWORD) {
 			mRULE_WORD();

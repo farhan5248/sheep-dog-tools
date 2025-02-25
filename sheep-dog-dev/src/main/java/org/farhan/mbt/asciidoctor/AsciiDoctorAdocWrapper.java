@@ -24,7 +24,6 @@ import org.farhan.mbt.sheepDog.Background;
 import org.farhan.mbt.sheepDog.Cell;
 import org.farhan.mbt.sheepDog.Examples;
 import org.farhan.mbt.sheepDog.Feature;
-import org.farhan.mbt.sheepDog.FeatureTags;
 import org.farhan.mbt.sheepDog.Row;
 import org.farhan.mbt.sheepDog.Scenario;
 import org.farhan.mbt.sheepDog.SheepDogFactory;
@@ -280,15 +279,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return theFeature.getName();
 	}
 
-	public ArrayList<String> getFeatureTags() {
-		FeatureTags tags = theFeature.getTags();
-		if (tags != null) {
-			return getTags(tags.getName());
-		} else {
-			return new ArrayList<String>();
-		}
-	}
-
 	@Override
 	public String getPath() {
 		return thePath;
@@ -477,19 +467,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		theFeature.setName(featureName);
 	}
 
-	public void setFeatureTags(ArrayList<String> tags) {
-		if (tags.isEmpty()) {
-			return;
-		}
-		theFeature.setTags(SheepDogFactory.eINSTANCE.createFeatureTags());
-		String tagList = "";
-		for (String t : tags) {
-			tagList += "," + t;
-		}
-		tagList = tagList.replaceFirst(",", "");
-		theFeature.getTags().setName(tagList);
-	}
-
 	public void setScenarioDescription(Scenario scenario, String scenarioDescription) {
 		setDescription(scenario, scenarioDescription);
 	}
@@ -534,7 +511,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	}
 
 	// TODO perhaps duplicate of setFeatureTags?
-	private void setTags(Scenario scenario, ArrayList<String> tags) {
+	private void setTags(AbstractScenario scenario, ArrayList<String> tags) {
 		if (tags.isEmpty()) {
 			return;
 		}
@@ -563,6 +540,10 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 			return null;
 		}
 		return os.toString();
+	}
+
+	public void setBackgroundTags(Background background, ArrayList<String> backgroundTags) {
+		setTags(background, backgroundTags);
 	}
 
 }

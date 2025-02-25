@@ -35,14 +35,6 @@ public class FeatureParsingTest extends ParsingTest {
 	}
 
 	@Test
-	public void parseFeatureWithTags() throws Exception {
-		StringBuilder sb = new StringBuilder();
-		sb.append(":tags:tag1\n");
-		sb.append("= Feature: This is a test feature\n");
-		assertNoFeatureErrors(sb);
-	}
-
-	@Test
 	public void parseFeatureWithDescription() throws Exception {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Feature: This is a test feature\n");
@@ -62,7 +54,6 @@ public class FeatureParsingTest extends ParsingTest {
 	@Test
 	public void parseFeatureWithEverything() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append(":tags:tag1,tag2,tag3\n");
 		sb.append("= Feature: This is a test feature\n");
 		sb.append("This is the description\n");
 		sb.append("This is the second line of the description\n");
