@@ -8,7 +8,8 @@ import org.farhan.objects.mbttransformer.src.test.resources.asciidoc.app.Process
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ProcessAsciidocFileImpl extends AdocFileObject implements ProcessAsciidocFile {
+public class ProcessAsciidocFileImpl extends AdocFileObject implements ProcessAsciidocFile,
+		org.farhan.objects.mbttransformer.src.test.resources.asciidoc.ProcessAsciidocFile {
 
 	@Override
 	public void assertBackgroundSectionDescription(HashMap<String, String> keyMap) {

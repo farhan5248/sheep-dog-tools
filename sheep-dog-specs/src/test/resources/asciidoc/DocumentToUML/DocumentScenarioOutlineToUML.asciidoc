@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: Document Scenario Outline To UML
 
 == Scenario: No tags, no statement, one step, one example

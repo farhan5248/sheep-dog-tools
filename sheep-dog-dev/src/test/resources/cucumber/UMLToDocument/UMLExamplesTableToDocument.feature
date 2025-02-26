@@ -27,7 +27,7 @@ Feature: UML Examples Table To Document
       And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, Process.asciidoc file Scenario Outline Examples Table section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row |
           | Submit | Examples 1 | h1  |
           | Submit | Examples 1 | v1  |
@@ -59,7 +59,7 @@ Feature: UML Examples Table To Document
       And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, Process.asciidoc file Scenario Outline Examples Table section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row    |
           | Submit | Examples 1 | h1, h2 |
           | Submit | Examples 1 | v1, v2 |
@@ -93,7 +93,7 @@ Feature: UML Examples Table To Document
       And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, Process.asciidoc file Scenario Outline Examples Table section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row        |
           | Submit | Examples 1 | h1, h2, h3 |
           | Submit | Examples 1 | v1, v2, v3 |

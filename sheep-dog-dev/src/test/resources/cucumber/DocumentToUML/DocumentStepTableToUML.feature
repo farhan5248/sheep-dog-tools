@@ -18,7 +18,7 @@ Feature: Document Step Table To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Interaction Messages section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                               | Argument Name | Annotation Detail |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 0 -> h1 \|        |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 1 -> v1 \|        |
@@ -41,7 +41,7 @@ Feature: Document Step Table To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Interaction Messages section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                               | Argument Name | Annotation Detail |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 0 -> h1 \|h2 \|   |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 1 -> v1 \|v2 \|   |
@@ -66,7 +66,7 @@ Feature: Document Step Table To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Interaction Messages section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                               | Argument Name | Annotation Detail    |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 0 -> h1 \|h2 \|h3 \| |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 1 -> v1 \|v2 \|v3 \| |
@@ -90,7 +90,7 @@ Feature: Document Step Table To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Interaction Messages section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                               | Argument Name | Annotation Detail    |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 0 -> h1 \|           |
           | specs::Process::Submit | The Object page is created as follows | dataTable     | 1 -> \\\| v1 \\\| \| |

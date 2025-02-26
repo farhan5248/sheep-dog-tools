@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: UML Step Parameters Table To Code
 
 == Scenario: Three cells

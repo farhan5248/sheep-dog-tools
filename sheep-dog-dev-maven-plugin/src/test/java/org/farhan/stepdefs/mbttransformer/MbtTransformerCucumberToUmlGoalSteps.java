@@ -22,11 +22,4 @@ public class MbtTransformerCucumberToUmlGoalSteps extends TestSteps {
         object.setInputOutputs(dataTable);
         object.transition();
     }
-
-    @Given("^The mbt-transformer plugin, cucumber-to-uml goal is executed$")
-    public void theMbtTransformerPluginCucumberToUmlGoalIsExecuted() {
-        object.setComponent("mbt-transformer");
-        object.setPath("cucumber-to-uml");
-        object.transition();
-    }
 }

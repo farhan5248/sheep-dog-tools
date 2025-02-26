@@ -1,6 +1,6 @@
-:tags:debug
 = Feature: Preserve Methods
 
+[tags="debug"]
 == Background: Create an asciidoc file
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows

@@ -1,7 +1,6 @@
 package org.farhan.stepdefs.mbttransformer;
 
 import com.google.inject.Inject;
-import io.cucumber.datatable.DataTable;
 import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Given;
 import org.farhan.common.TestSteps;
@@ -19,14 +18,6 @@ public class MbtTransformerUmlToCucumberGuiceGoalSteps extends TestSteps {
     public void theMbtTransformerPluginUmlToCucumberGuiceGoalIsExecuted() {
         object.setComponent("mbt-transformer");
         object.setPath("uml-to-cucumber-guice");
-        object.transition();
-    }
-
-    @Given("^The mbt-transformer plugin, uml-to-cucumber-guice goal is executed with$")
-    public void theMbtTransformerPluginUmlToCucumberGuiceGoalIsExecutedWith(DataTable dataTable) {
-        object.setComponent("mbt-transformer");
-        object.setPath("uml-to-cucumber-guice");
-        object.setInputOutputs(dataTable);
         object.transition();
     }
 }

@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: UML Step Object To Document
 
 == Scenario: No statements

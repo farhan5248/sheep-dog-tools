@@ -25,7 +25,7 @@ Feature: Document Examples Table To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Interaction Annotations section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | Examples 1      | 0 -> h1\|         |
           | specs::Process::Submit | Examples 1      | 1 -> v1\|         |
@@ -55,7 +55,7 @@ Feature: Document Examples Table To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Interaction Annotations section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | Examples 1      | 0 -> h1\|h2\|     |
           | specs::Process::Submit | Examples 1      | 1 -> v1\|v2\|     |
@@ -87,7 +87,7 @@ Feature: Document Examples Table To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Interaction Annotations section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | Examples 1      | 0 -> h1\|h2\|h3\| |
           | specs::Process::Submit | Examples 1      | 1 -> v1\|v2\|v3\| |

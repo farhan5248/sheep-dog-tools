@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: Convert Step Table To UML
 
 == Scenario: One row, one cell

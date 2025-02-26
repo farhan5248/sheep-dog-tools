@@ -1,6 +1,0 @@
-= Object: Given page
-
-== Definition: is empty
-
-== Definition: isn't empty
-

@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: Code Scenario To UML
 
 == Scenario: No tags, no statements, one step

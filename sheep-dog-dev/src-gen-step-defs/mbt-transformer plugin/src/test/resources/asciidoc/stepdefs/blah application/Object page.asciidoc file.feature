@@ -2,6 +2,8 @@ Object: src/test/resources/asciidoc/stepdefs/blah application/Object page.asciid
 
   Definition: is created as follows
 
+  Definition: is deleted
+
   Definition: will be present
 
   Definition: Step Definition Parameters Table section will be created as follows
@@ -16,6 +18,8 @@ Object: src/test/resources/asciidoc/stepdefs/blah application/Object page.asciid
 
           | Name | Description |
 
+  Definition: will be created as follows
+
   Definition: Object section will be created as follows
 
     Parameters: 1
@@ -25,8 +29,4 @@ Object: src/test/resources/asciidoc/stepdefs/blah application/Object page.asciid
     Parameters: 2
 
           | Name | Statements |
-
-  Definition: will be created as follows
-
-  Definition: is deleted
 

@@ -10,7 +10,7 @@ Feature: UML Feature To Code
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file Feature section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Feature section will be created as follows
           | Name    |
           | Process |
 
@@ -28,7 +28,7 @@ Feature: UML Feature To Code
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file Feature section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Feature section will be created as follows
           | Name    | Tags | Statements  |
           | Process | tag1 | Desc line 1 |
 
@@ -47,7 +47,7 @@ Feature: UML Feature To Code
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file Feature section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Feature section will be created as follows
           | Name    | Tags      | Statements               |
           | Process | tag1,tag2 | Desc line 1\nDesc line 2 |
 
@@ -67,7 +67,7 @@ Feature: UML Feature To Code
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file Feature section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Feature section will be created as follows
           | Name    | Tags           | Statements                            |
           | Process | tag1,tag2,tag3 | Desc line 1\nDesc line 2\nDesc line 3 |
 

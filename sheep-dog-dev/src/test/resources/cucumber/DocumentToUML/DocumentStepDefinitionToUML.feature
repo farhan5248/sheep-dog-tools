@@ -27,7 +27,7 @@ Feature: Document Step Definition To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Interaction Annotations section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name                                               | Annotation Name | Annotation Detail |
           | stepdefs::blah application::Object page::is created as follows | 1               | 0 -> h1\|         |
 
@@ -57,7 +57,7 @@ Feature: Document Step Definition To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Interaction Comments section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name                                               | Comment     |
           | stepdefs::blah application::Object page::is created as follows | Desc line 1 |
 
@@ -94,10 +94,10 @@ Feature: Document Step Definition To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Interaction Comments section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name                                               | Comment                  |
           | stepdefs::blah application::Object page::is created as follows | Desc line 1\nDesc line 2 |
-      And The uml/pst.uml file Interaction Annotations section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name                                               | Annotation Name | Annotation Detail |
           | stepdefs::blah application::Object page::is created as follows | <Index>         | 0 -> h<Index>\|   |
 
@@ -147,10 +147,10 @@ Feature: Document Step Definition To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Interaction Comments section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name                                               | Comment                               |
           | stepdefs::blah application::Object page::is created as follows | Desc line 1\nDesc line 2\nDesc line 3 |
-      And The uml/pst.uml file Interaction Annotations section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name                                               | Annotation Name | Annotation Detail |
           | stepdefs::blah application::Object page::is created as follows | <Index>         | 0 -> h<Index>\|   |
 

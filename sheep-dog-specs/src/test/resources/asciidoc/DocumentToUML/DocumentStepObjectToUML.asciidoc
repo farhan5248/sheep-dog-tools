@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: Document StepObject To UML
 
 I need a test here for selected tags that tests only objects referenced in a selected test case are reversed

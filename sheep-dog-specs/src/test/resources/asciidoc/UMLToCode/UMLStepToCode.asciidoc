@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: UML Step To Code
 
 == Scenario: Convert step keywords

@@ -3,17 +3,19 @@ package org.farhan.objects.mbttransformer.impl;
 import java.util.HashMap;
 
 import org.farhan.common.FileObject;
-import org.farhan.objects.mbttransformer.BlahObjectPageStepsJavaFile;
-import org.farhan.objects.mbttransformer.ObjectPageAsciidocFile;
-import org.farhan.objects.mbttransformer.ObjectPageJavaFile;
-import org.farhan.objects.mbttransformer.ProcessAsciidocFile;
-import org.farhan.objects.mbttransformer.ProcessFeatureFile;
+import org.farhan.objects.mbttransformer.src.test.java.org.farhan.objects.blah.ObjectPageJavaFile;
+import org.farhan.objects.mbttransformer.src.test.java.org.farhan.stepdefs.blah.BlahObjectPageStepsJavaFile;
+import org.farhan.objects.mbttransformer.src.test.resources.asciidoc.app.ProcessAsciidocFile;
+import org.farhan.objects.mbttransformer.src.test.resources.asciidoc.stepdefs.blahapplication.ObjectPageAsciidocFile;
+import org.farhan.objects.mbttransformer.src.test.resources.cucumber.app.ProcessFeatureFile;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class FileImpl extends FileObject implements BlahObjectPageStepsJavaFile, ObjectPageJavaFile,
-		ObjectPageAsciidocFile, ProcessAsciidocFile, ProcessFeatureFile {
+public class FileImpl extends FileObject
+		implements BlahObjectPageStepsJavaFile, ObjectPageJavaFile, ObjectPageAsciidocFile, ProcessAsciidocFile,
+		ProcessFeatureFile, org.farhan.objects.mbttransformer.src.test.resources.asciidoc.ProcessAsciidocFile,
+		org.farhan.objects.mbttransformer.src.test.resources.cucumber.ProcessFeatureFile {
 
 	@Override
 	public void assertContent(HashMap<String, String> keyMap) {
@@ -27,14 +29,12 @@ public class FileImpl extends FileObject implements BlahObjectPageStepsJavaFile,
 
 	@Override
 	public void assertPresent(HashMap<String, String> keyMap) {
-		// TODO Auto-generated method stub
-
+		// TODO Remove the feature files that result in this being generated
 	}
 
 	@Override
 	public void assertFieldsSectionMethodName(HashMap<String, String> keyMap) {
-		// TODO Auto-generated method stub
-
+		// TODO Remove the feature files that result in this being generated
 	}
 
 }

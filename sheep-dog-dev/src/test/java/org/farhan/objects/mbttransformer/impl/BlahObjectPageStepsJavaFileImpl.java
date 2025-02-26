@@ -56,11 +56,6 @@ public class BlahObjectPageStepsJavaFileImpl extends JavaFileObject implements B
 	}
 
 	@Override
-	public void assertObjectSectionInterfaceName(HashMap<String, String> keyMap) {
-		assertInterfaceNameIs(keyMap.get("Interface Name"));
-	}
-
-	@Override
 	public void assertObjectSectionPackage(HashMap<String, String> keyMap) {
 		assertPackage(keyMap.get("Package"));
 	}

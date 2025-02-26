@@ -19,7 +19,7 @@ Feature: UML Step Table To Code
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file Scenario Steps Data Table section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Scenario Steps Data Table section will be created as follows
           | Name   | Step                                                         | Row      |
           | Submit | Given The Unknown service, Object page is created as follows | \| h1 \| |
           | Submit | Given The Unknown service, Object page is created as follows | \| v1 \| |
@@ -43,7 +43,7 @@ Feature: UML Step Table To Code
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file Scenario Steps Data Table section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Scenario Steps Data Table section will be created as follows
           | Name   | Step                                                         | Row            |
           | Submit | Given The Unknown service, Object page is created as follows | \| h1 \| h2 \| |
           | Submit | Given The Unknown service, Object page is created as follows | \| v1 \| v2 \| |
@@ -69,7 +69,7 @@ Feature: UML Step Table To Code
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file Scenario Steps Data Table section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Scenario Steps Data Table section will be created as follows
           | Name   | Step                                                         | Row                  |
           | Submit | Given The Unknown service, Object page is created as follows | \| h1 \| h2 \| h3 \| |
           | Submit | Given The Unknown service, Object page is created as follows | \| v1 \| v2 \| v3 \| |
@@ -94,7 +94,7 @@ Feature: UML Step Table To Code
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file Scenario Steps Data Table section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Scenario Steps Data Table section will be created as follows
           | Name   | Step                                                         | Row                |
           | Submit | Given The Unknown service, Object page is created as follows | \| h1 \|           |
           | Submit | Given The Unknown service, Object page is created as follows | \| \\\| v1 \\\| \| |

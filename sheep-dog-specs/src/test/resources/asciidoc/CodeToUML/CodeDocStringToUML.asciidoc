@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: Convert Doc String To UML
 
 == Scenario: One line

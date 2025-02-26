@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: Code To Document
 
 TODO make test for the specific mappings
@@ -14,6 +13,7 @@ Feature: Process
   Desc 1
 
   Background: Setup
+
   @tag2
   Scenario: Story One
 
@@ -76,6 +76,7 @@ Desc 1
 
 [tags="tag1"]
 == Background: Setup
+
 [tags="tag2"]
 == Scenario: Story One
 

@@ -1,38 +1,16 @@
 Object: src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file
 
-  Definition: is created as follows
-
-  Definition: will be created as follows
-
   Definition: will be present
-
-  Definition: Fields section will be created as follows
-
-    Parameters: 1
-
-          | Method Name | Parameter Name | Parameter Type |
-
-    Parameters: 2
-
-          | Method Name | Statement |
-
-    Parameters: 3
-
-          | Method Name | Annotation | Visibility | Return Type |
-
-    Parameters: 4
-
-          | Method Name |
 
   Definition: Object section will be created as follows
 
     Parameters: 1
 
-          | Class Name | Package |
+          | Import |
 
     Parameters: 2
 
-          | Import |
+          | Class Name | Package |
 
     Parameters: 3
 
@@ -49,4 +27,26 @@ Object: src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file
     Parameters: 6
 
           | Constructor Name | Constructor Annotation |
+
+  Definition: will be created as follows
+
+  Definition: is created as follows
+
+  Definition: Fields section will be created as follows
+
+    Parameters: 1
+
+          | Method Name |
+
+    Parameters: 2
+
+          | Method Name | Annotation | Visibility | Return Type |
+
+    Parameters: 3
+
+          | Method Name | Statement |
+
+    Parameters: 4
+
+          | Method Name | Parameter Name | Parameter Type |
 

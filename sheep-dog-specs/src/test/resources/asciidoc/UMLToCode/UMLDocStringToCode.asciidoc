@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: UML Doc String To Code
 
 == Scenario: One line
@@ -26,7 +25,7 @@ text1
 === And: The mbt-transformer plugin, Process.feature file Scenario Steps Doc String section will be created as follows
 
 |===
-| Name   | Step                                        | Content
-| Submit | Given The Object page is created as follows | text1  
+| Name   | Step                                                         | Content
+| Submit | Given The Unknown service, Object page is created as follows | text1  
 |===
 

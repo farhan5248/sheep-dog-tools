@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: UML DocString To Document
 
 == Scenario: One line

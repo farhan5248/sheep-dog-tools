@@ -1,8 +1,8 @@
-:tags:debug
 = Feature: UML Step Object To Code
 
 TODO map uml layer 2 documentation to java code
 
+[tags="debug"]
 == Background: Create model
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows

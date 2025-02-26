@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public interface UmlToCucumberGoal {
 
-    public void setTags(HashMap<String, String> keyMap);
+	public void setTags(HashMap<String, String> keyMap);
 
-    public void transition();
+	public void transition();
 }

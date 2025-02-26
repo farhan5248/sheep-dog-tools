@@ -1,6 +1,6 @@
-:tags:debug
 = Feature: Dependency Injection
 
+[tags="debug"]
 == Background: Create a feature file
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows

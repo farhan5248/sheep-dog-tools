@@ -13,7 +13,7 @@ Feature: Code To Document
             Desc 1
           
             Background: Setup
-
+          
             @tag2
             Scenario: Story One
           
@@ -66,7 +66,7 @@ Feature: Code To Document
           
           [tags="tag1"]
           == Background: Setup
-
+          
           [tags="tag2"]
           == Scenario: Story One
           

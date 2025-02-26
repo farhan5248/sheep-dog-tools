@@ -2,8 +2,6 @@ Object: src/test/resources/cucumber/Process.feature file
 
   Definition: is created as follows
 
-  Definition: will be created as follows
-
   Definition: will be present
 
   Definition: Scenario Outline Examples Table section will be created as follows
@@ -12,11 +10,13 @@ Object: src/test/resources/cucumber/Process.feature file
 
           | Name | Examples | Row |
 
-  Definition: Scenario Steps Doc String section will be created as follows
+  Definition: Scenario Steps Data Table section will be created as follows
 
     Parameters: 1
 
-          | Name | Step | Content |
+          | Name | Step | Row |
+
+  Definition: will be created as follows
 
   Definition: Scenarios Steps section will be created as follows
 
@@ -30,37 +30,23 @@ Object: src/test/resources/cucumber/Process.feature file
 
           | Name | Tags | Description |
 
-  Definition: Background Steps section will be created as follows
-
-    Parameters: 1
-
-          | Name | Step |
-
   Definition: Background section will be created as follows
 
     Parameters: 1
 
           | Name | Description |
 
-  Definition: Scenario Steps Data Table section will be created as follows
+  Definition: Background Steps section will be created as follows
 
     Parameters: 1
 
-          | Name | Step | Row |
+          | Name | Step |
 
-  Definition: Feature section will be created as follows
+  Definition: Scenario Steps Doc String section will be created as follows
 
     Parameters: 1
 
-          | Name |
-
-    Parameters: 2
-
-          | Name | Tags | Statements |
-
-    Parameters: 3
-
-          | Name | Statements |
+          | Name | Step | Content |
 
   Definition: Scenario Outline Steps Data Table section will be created as follows
 
@@ -73,4 +59,14 @@ Object: src/test/resources/cucumber/Process.feature file
     Parameters: 1
 
           | Name | Tags | Description |
+
+  Definition: Feature section will be created as follows
+
+    Parameters: 1
+
+          | Name |
+
+    Parameters: 2
+
+          | Name | Tags | Statements |
 

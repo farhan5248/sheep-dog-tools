@@ -1,6 +1,6 @@
-:tags:debug
 = Feature: Code To Code
 
+[tags="debug"]
 == Background: Create a feature file
 
 The formatting of the data and example tables is intentionally different to make sure that the file is regenerated

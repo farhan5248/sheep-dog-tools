@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: Document Step Definition To UML
 
 TODO add tests for document parameters

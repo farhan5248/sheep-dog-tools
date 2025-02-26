@@ -27,7 +27,7 @@ Feature: Document Step Parameters Table To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Interaction Annotations section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name                                               | Annotation Name | Annotation Detail |
           | stepdefs::blah application::Object page::is created as follows | 1               | 0 -> h1\|         |
 
@@ -57,7 +57,7 @@ Feature: Document Step Parameters Table To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Interaction Annotations section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name                                               | Annotation Name | Annotation Detail |
           | stepdefs::blah application::Object page::is created as follows | 1               | 0 -> h1\|h2\|     |
 
@@ -87,7 +87,7 @@ Feature: Document Step Parameters Table To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Interaction Annotations section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name                                               | Annotation Name | Annotation Detail |
           | stepdefs::blah application::Object page::is created as follows | 1               | 0 -> h1\|h2\|h3\| |
 

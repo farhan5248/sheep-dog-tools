@@ -1,6 +1,6 @@
-:tags:debug
 = Feature: UML Step Definition To Code
 
+[tags="debug"]
 == Background: Create model
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows

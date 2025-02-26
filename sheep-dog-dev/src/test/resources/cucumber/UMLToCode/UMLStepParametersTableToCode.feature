@@ -43,7 +43,7 @@ Feature: UML Step Parameters Table To Code
       And The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      When The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
-      And The mbt-transformer plugin, ObjectPage.java file Fields section will be created as follows
+      And The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file Fields section will be created as follows
           | Method Name        | Visibility | Return Type | Parameter Name | Parameter Type         |
           | assertTopSectionH1 | public     | void        | keyMap         | HashMap<String,String> |
           | assertTopSectionH2 | public     | void        | keyMap         | HashMap<String,String> |

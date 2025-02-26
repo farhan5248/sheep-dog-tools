@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: Code Examples Table To UML
 
 == Scenario: One row, one cell

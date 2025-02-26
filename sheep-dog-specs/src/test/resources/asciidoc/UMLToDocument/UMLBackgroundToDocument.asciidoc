@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: UML Background To Document
 
 == Scenario: One statement, one step, one scenario

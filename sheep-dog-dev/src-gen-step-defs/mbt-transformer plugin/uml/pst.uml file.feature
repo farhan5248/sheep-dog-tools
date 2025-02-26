@@ -6,51 +6,23 @@ Object: uml/pst.uml file
 
     Parameters: 1
 
-          | Interaction Name | Message |
+          | Interaction Name | Message | Argument Name | Annotation Detail |
 
     Parameters: 2
 
-          | Interaction Name | Message | Argument Name | Annotation Detail |
-
-    Parameters: 3
-
-          | Interaction Name |
-
-  Definition: Interaction Comments section will be created as follows
-
-    Parameters: 1
-
-          | Interaction Name | Comment |
-
-  Definition: Class section will be created as follows
-
-    Parameters: 1
-
-          | Class Name |
-
-  Definition: Class Annotations section will be created as follows
-
-    Parameters: 1
-
-          | Class Name | Annotation Name | Annotation Detail |
-
-  Definition: Class Comments section will be created as follows
-
-    Parameters: 1
-
-          | Class Name | Comment |
-
-  Definition: Class section won't be created as follows
-
-    Parameters: 1
-
-          | Class Name |
+          | Interaction Name | Message |
 
   Definition: Interaction Annotations section will be created as follows
 
     Parameters: 1
 
           | Interaction Name | Annotation Name | Annotation Detail |
+
+  Definition: Interaction Comments section will be created as follows
+
+    Parameters: 1
+
+          | Interaction Name | Comment |
 
   Definition: Interaction section will be created as follows
 
@@ -63,4 +35,22 @@ Object: uml/pst.uml file
     Parameters: 1
 
           | Interaction Name |
+
+  Definition: Class section will be created as follows
+
+    Parameters: 1
+
+          | Class Name |
+
+  Definition: Class Comments section will be created as follows
+
+    Parameters: 1
+
+          | Class Name | Comment |
+
+  Definition: Class section won't be created as follows
+
+    Parameters: 1
+
+          | Class Name |
 

@@ -21,7 +21,7 @@ Feature: UML Step Object To Document
       And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
-      And The mbt-transformer plugin, Object page.asciidoc file Object section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Object section will be created as follows
           | Name        |
           | Object page |
 
@@ -47,7 +47,7 @@ Feature: UML Step Object To Document
       And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
-      And The mbt-transformer plugin, Object page.asciidoc file Object section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Object section will be created as follows
           | Name        | Statements  |
           | Object page | Desc line 1 |
 
@@ -74,7 +74,7 @@ Feature: UML Step Object To Document
       And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
-      And The mbt-transformer plugin, Object page.asciidoc file Object section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Object section will be created as follows
           | Name        | Statements               |
           | Object page | Desc line 1\nDesc line 2 |
 
@@ -102,7 +102,7 @@ Feature: UML Step Object To Document
       And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
-      And The mbt-transformer plugin, Object page.asciidoc file Object section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Object section will be created as follows
           | Name        | Statements                            |
           | Object page | Desc line 1\nDesc line 2\nDesc line 3 |
 

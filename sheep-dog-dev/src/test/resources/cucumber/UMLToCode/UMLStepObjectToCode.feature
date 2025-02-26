@@ -25,10 +25,10 @@ Feature: UML Step Object To Code
 
      When The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
-      And The mbt-transformer plugin, BlahObjectPageSteps.java file Object section will be created as follows
+      And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Object section will be created as follows
           | Import                    |
           | io.cucumber.java.en.Given |
-      And The mbt-transformer plugin, BlahObjectPageSteps.java file Object section will be created as follows
+      And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Object section will be created as follows
           | Class Name          | Package                  |
           | BlahObjectPageSteps | org.farhan.stepdefs.blah |
 
@@ -36,10 +36,10 @@ Feature: UML Step Object To Code
 
      When The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
-      And The mbt-transformer plugin, ObjectPage.java file Object section will be created as follows
+      And The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file Object section will be created as follows
           | Import            |
           | java.util.HashMap |
-      And The mbt-transformer plugin, ObjectPage.java file Object section will be created as follows
+      And The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file Object section will be created as follows
           | Interface Name | Package                 |
           | ObjectPage     | org.farhan.objects.blah |
 

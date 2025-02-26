@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: UML Step Table To Document
 
 == Scenario: One row, one cell

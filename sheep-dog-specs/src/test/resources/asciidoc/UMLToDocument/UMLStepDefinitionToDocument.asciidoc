@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: UML Step Definition To Document
 
 TODO there's no test for no parameters and docstring vs datatable. Other tests implicitly cover docstring as a special parameter with the name content

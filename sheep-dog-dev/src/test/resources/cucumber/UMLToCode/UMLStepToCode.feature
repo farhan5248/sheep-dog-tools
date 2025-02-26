@@ -17,7 +17,7 @@ Feature: UML Step To Code
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file Scenarios Steps section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Scenarios Steps section will be created as follows
           | Name   | Step                                            |
           | Submit | Given The blah application, Given page is empty |
           | Submit | When The blah application, When page is empty   |
@@ -37,7 +37,7 @@ Feature: UML Step To Code
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, Process.feature file Scenarios Steps section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Scenarios Steps section will be created as follows
           | Name      | Step                                               |
           | Submit's' | Given The blah application, Given page isn't empty |
 

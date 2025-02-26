@@ -9,7 +9,7 @@ Feature: Code Feature To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Class section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Class section will be created as follows
           | Class Name     |
           | specs::Process |
 
@@ -26,10 +26,10 @@ Feature: Code Feature To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Class Comments section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment     |
           | specs::Process | Desc line 1 |
-      And The uml/pst.uml file Interaction Annotations section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name      | Annotation Name | Annotation Detail |
           | specs::Process::Setup | tags            | tag1              |
 
@@ -47,10 +47,10 @@ Feature: Code Feature To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Class Comments section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment                  |
           | specs::Process | Desc line 1\nDesc line 2 |
-      And The uml/pst.uml file Interaction Annotations section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name      | Annotation Name | Annotation Detail |
           | specs::Process::Setup | tags            | tag1              |
           | specs::Process::Setup | tags            | tag2              |
@@ -70,10 +70,10 @@ Feature: Code Feature To UML
           """
      When The mbt-transformer plugin, cucumber-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Class Comments section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment                               |
           | specs::Process | Desc line 1\nDesc line 2\nDesc line 3 |
-      And The uml/pst.uml file Interaction Annotations section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name      | Annotation Name | Annotation Detail |
           | specs::Process::Setup | tags            | tag1              |
           | specs::Process::Setup | tags            | tag2              |
@@ -95,10 +95,10 @@ Feature: Code Feature To UML
           | Tags |
           | tag1 |
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Class section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Class section will be created as follows
           | Class Name     |
           | specs::Process |
-      And The uml/pst.uml file Class section won't be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Class section won't be created as follows
           | Class Name          |
           | specs::app::Process |
 

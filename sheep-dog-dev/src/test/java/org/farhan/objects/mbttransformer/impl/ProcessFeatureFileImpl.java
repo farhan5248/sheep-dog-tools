@@ -6,8 +6,10 @@ import org.farhan.common.FeatureFileObject;
 import org.farhan.objects.mbttransformer.src.test.resources.cucumber.app.ProcessFeatureFile;
 
 import io.cucumber.guice.ScenarioScoped;
+
 @ScenarioScoped
-public class ProcessFeatureFileImpl extends FeatureFileObject implements ProcessFeatureFile {
+public class ProcessFeatureFileImpl extends FeatureFileObject implements ProcessFeatureFile,
+		org.farhan.objects.mbttransformer.src.test.resources.cucumber.ProcessFeatureFile {
 
 	@Override
 	public void assertBackgroundSectionDescription(HashMap<String, String> keyMap) {

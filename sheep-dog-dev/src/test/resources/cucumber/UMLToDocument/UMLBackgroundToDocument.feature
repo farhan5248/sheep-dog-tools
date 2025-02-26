@@ -21,13 +21,13 @@ Feature: UML Background To Document
       And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, Process.asciidoc file Background section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Background section will be created as follows
           | Name  | Description |
           | Setup | Desc line 1 |
-      And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
           | Name  | Step                             |
           | Setup | Given: The Object0 page is valid |
-      And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                            |
           | Submit | Given: The Object page is valid |
 
@@ -49,10 +49,10 @@ Feature: UML Background To Document
       And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
           | Name  | Step                             |
           | Setup | Given: The Object0 page is valid |
-      And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                            |
           | Submit | Given: The Object page is valid |
 
@@ -78,10 +78,10 @@ Feature: UML Background To Document
       And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
           | Name  | Step                             |
           | Setup | Given: The Object0 page is valid |
-      And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
           | Name     | Step                             |
           | Submit 1 | Given: The Object page is valid  |
           | Submit 2 | Given: The Object2 page is valid |
@@ -112,10 +112,10 @@ Feature: UML Background To Document
       And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
           | Name  | Step                             |
           | Setup | Given: The Object0 page is valid |
-      And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
           | Name     | Step                             |
           | Submit 1 | Given: The Object page is valid  |
           | Submit 2 | Given: The Object2 page is valid |
@@ -140,11 +140,11 @@ Feature: UML Background To Document
       And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
           | Name  | Step                             |
           | Setup | Given: The Object page is valid  |
           | Setup | Given: The Object2 page is valid |
-      And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                            |
           | Submit | Given: The Object page is valid |
 
@@ -168,12 +168,12 @@ Feature: UML Background To Document
       And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
      Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, Process.asciidoc file Background Steps section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
           | Name  | Step                             |
           | Setup | Given: The Object page is valid  |
           | Setup | Given: The Object2 page is valid |
           | Setup | Given: The Object3 page is valid |
-      And The mbt-transformer plugin, Process.asciidoc file Scenarios Steps section will be created as follows
+      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                            |
           | Submit | Given: The Object page is valid |
 

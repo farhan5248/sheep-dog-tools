@@ -41,7 +41,7 @@ Feature: Preserve Methods
           """
      When The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
-      And The mbt-transformer plugin, BlahObjectPageSteps.java file Fields section will be created as follows
+      And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Fields section will be created as follows
           | Method Name                           |
           | theBlahApplicationObjectPageIsInvalid |
           | theBlahApplicationObjectPageIsEmpty   |
@@ -61,7 +61,7 @@ Feature: Preserve Methods
           """
      When The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
-      And The mbt-transformer plugin, ObjectPage.java file Fields section will be created as follows
+      And The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file Fields section will be created as follows
           | Method Name     |
           | assertIsInvalid |
           | setEmpty        |

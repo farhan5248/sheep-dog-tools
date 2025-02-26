@@ -16,7 +16,7 @@ Feature: Document Step To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Interaction Messages section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                   |
           | specs::Process::Submit | The blah application, Given page is empty |
           | specs::Process::Submit | The blah application, When page is empty  |
@@ -35,7 +35,7 @@ Feature: Document Step To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Interaction Messages section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name          | Message                                      |
           | specs::Process::Submit's' | The blah application, Given page isn't empty |
 

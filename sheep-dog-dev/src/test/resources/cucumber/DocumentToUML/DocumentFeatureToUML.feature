@@ -9,7 +9,7 @@ Feature: Document Feature To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Class section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Class section will be created as follows
           | Class Name     |
           | specs::Process |
 
@@ -25,7 +25,7 @@ Feature: Document Feature To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Class Comments section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment     |
           | specs::Process | Desc line 1 |
 
@@ -42,7 +42,7 @@ Feature: Document Feature To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Class Comments section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment                  |
           | specs::Process | Desc line 1\nDesc line 2 |
 
@@ -60,7 +60,7 @@ Feature: Document Feature To UML
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The uml/pst.uml file Class Comments section will be created as follows
+      And The mbt-transformer plugin, uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment                               |
           | specs::Process | Desc line 1\nDesc line 2\nDesc line 3 |
 

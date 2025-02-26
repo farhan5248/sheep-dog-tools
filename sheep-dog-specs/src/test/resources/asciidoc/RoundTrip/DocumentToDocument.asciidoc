@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: Document To Document
 
 == Scenario: Create an adoc file from adoc file
@@ -6,7 +5,6 @@
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
 
 ----
-:tags: tag1
 = Feature: Process
 
 Desc 1
@@ -87,7 +85,6 @@ Desc 3
 === Then: The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows
 
 ----
-:tags:tag1
 = Feature: Process
 
 Desc 1
