@@ -19,7 +19,7 @@ Feature: Document To Code
           
           === Given: The blah application, Object page is valid
           
-          === Then: The blah application, Object page is created as follows
+          === Then: The Object page is created as follows
           
           ----
             text1
@@ -34,7 +34,7 @@ Feature: Document To Code
           
           === Given: The blah application, Object page is invalid
           
-          === When: The blah application, Object page is created as follows
+          === When: The Object page is created as follows
           
           |===
           | grp | ins

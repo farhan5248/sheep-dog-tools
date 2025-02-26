@@ -42,11 +42,11 @@ Feature: UML Background To Code
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
       And The mbt-transformer plugin, Process.feature file Background Steps section will be created as follows
-          | Name  | Step                            |
-          | Setup | Given The Object0 page is valid |
+          | Name  | Step                                             |
+          | Setup | Given The Unknown service, Object0 page is valid |
       And The mbt-transformer plugin, Process.feature file Scenarios Steps section will be created as follows
-          | Name   | Step                            |
-          | Submit | Given The Object1 page is valid |
+          | Name   | Step                                             |
+          | Submit | Given The Unknown service, Object1 page is valid |
 
   Scenario: No statement, one step, two scenarios
 
@@ -70,12 +70,12 @@ Feature: UML Background To Code
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
       And The mbt-transformer plugin, Process.feature file Background Steps section will be created as follows
-          | Name  | Step                            |
-          | Setup | Given The Object0 page is valid |
+          | Name  | Step                                             |
+          | Setup | Given The Unknown service, Object0 page is valid |
       And The mbt-transformer plugin, Process.feature file Scenarios Steps section will be created as follows
-          | Name     | Step                            |
-          | Submit 1 | Given The Object1 page is valid |
-          | Submit 2 | Given The Object2 page is valid |
+          | Name     | Step                                             |
+          | Submit 1 | Given The Unknown service, Object1 page is valid |
+          | Submit 2 | Given The Unknown service, Object2 page is valid |
 
   Scenario: No statement, one step, three scenarios
 
@@ -103,13 +103,13 @@ Feature: UML Background To Code
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
       And The mbt-transformer plugin, Process.feature file Background Steps section will be created as follows
-          | Name  | Step                            |
-          | Setup | Given The Object0 page is valid |
+          | Name  | Step                                             |
+          | Setup | Given The Unknown service, Object0 page is valid |
       And The mbt-transformer plugin, Process.feature file Scenarios Steps section will be created as follows
-          | Name     | Step                            |
-          | Submit 1 | Given The Object1 page is valid |
-          | Submit 2 | Given The Object2 page is valid |
-          | Submit 3 | Given The Object3 page is valid |
+          | Name     | Step                                             |
+          | Submit 1 | Given The Unknown service, Object1 page is valid |
+          | Submit 2 | Given The Unknown service, Object2 page is valid |
+          | Submit 3 | Given The Unknown service, Object3 page is valid |
 
   Scenario Outline: No statement, two steps, one scenario
 
@@ -130,8 +130,8 @@ Feature: UML Background To Code
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
       And The mbt-transformer plugin, Process.feature file Background Steps section will be created as follows
-          | Name  | Step                                  |
-          | Setup | Given The Object<Index> page is valid |
+          | Name  | Step                                                   |
+          | Setup | Given The Unknown service, Object<Index> page is valid |
 
     Examples: Indices
 
@@ -159,8 +159,8 @@ Feature: UML Background To Code
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
       And The mbt-transformer plugin, Process.feature file Background Steps section will be created as follows
-          | Name  | Step                                  |
-          | Setup | Given The Object<Index> page is valid |
+          | Name  | Step                                                   |
+          | Setup | Given The Unknown service, Object<Index> page is valid |
 
     Examples: Indices
 

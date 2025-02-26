@@ -139,7 +139,7 @@ public class ConvertUMLToCucumber extends Converter {
 	}
 
 	protected void convertStep(AbstractScenario abstractScenario, Message srcStep) throws Exception {
-		Step tgtStep = tgtObj.createStep(abstractScenario, srcObj.getStep(srcStep));
+		Step tgtStep = tgtObj.createStep(abstractScenario, srcObj.getStepNameLong(srcStep));
 		if (srcObj.hasDocString(srcStep)) {
 			convertDocString(tgtStep, srcStep);
 		} else if (srcObj.hasStepTable(srcStep)) {
@@ -147,22 +147,13 @@ public class ConvertUMLToCucumber extends Converter {
 		}
 	}
 
-	private String addComponentObjectToStep(Interaction stepDefinition) {
-		String stepDefinitionName = srcObj.getStepDefinitionName(stepDefinition);
-		String component = srcObj.getPath().replace("pst::stepdefs::", "").split("::")[0];
-		String object = srcObj.getPath().split("::" + component + "::")[1].replace("::", "/");
-		return "The " + component + ", " + object + " " + stepDefinitionName;
-	}
-
 	private void convertStepDefinition(Interaction stepDefinitionSrc) throws Exception {
-		String stepDefinitionName = addComponentObjectToStep(stepDefinitionSrc);
-		tgtObj2.createStepDefinition(stepDefinitionName);
-
+		tgtObj2.createStepDefinition(srcObj.getStepDefinitionNameLong(stepDefinitionSrc));
 		ArrayList<EAnnotation> parametersList = srcObj.getStepDefinitionParameterList(stepDefinitionSrc);
 		convertStepParameters(stepDefinitionSrc, parametersList);
 	}
 
-	private void convertStepParameters(Interaction stepDefinition, ArrayList<EAnnotation> parametersList)
+	private void convertStepParameters(Interaction stepDefinitionSrc, ArrayList<EAnnotation> parametersList)
 			throws Exception {
 
 		ArrayList<String> parametersListMerged = new ArrayList<String>();
@@ -173,7 +164,7 @@ public class ConvertUMLToCucumber extends Converter {
 				}
 			}
 		}
-		tgtObj2.setStepDefinitionParameters(addComponentObjectToStep(stepDefinition), parametersListMerged);
+		tgtObj2.setStepDefinitionParameters(srcObj.getStepDefinitionNameLong(stepDefinitionSrc), parametersListMerged);
 	}
 
 	private void convertStepDefinitionList() throws Exception {

@@ -19,6 +19,6 @@ Feature: UML Doc String To Code
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
       And The mbt-transformer plugin, Process.feature file Scenario Steps Doc String section will be created as follows
-          | Name   | Step                                        | Content |
-          | Submit | Given The Object page is created as follows | text1   |
+          | Name   | Step                                                         | Content |
+          | Submit | Given The Unknown service, Object page is created as follows | text1   |
 

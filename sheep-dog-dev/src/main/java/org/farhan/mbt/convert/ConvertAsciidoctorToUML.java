@@ -118,7 +118,9 @@ public class ConvertAsciidoctorToUML extends Converter {
 	}
 
 	private void convertStep(Interaction abstractScenario, Step stepSrc) {
+
 		Message step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
+		tgtObj.setStepNameLong(step, srcObj.getStepNameLong(stepSrc));
 
 		stepObjects.add(StepDefinitionHelper.getStepObjectQualifiedName(new LanguageAccessImpl(stepSrc)));
 
@@ -130,11 +132,8 @@ public class ConvertAsciidoctorToUML extends Converter {
 	}
 
 	private void convertStepDefinition(StepDefinition stepDefinitionSrc) {
-		// TODO the Given + is a temp hack. Technically it doesn't matter, only the uml
-		// to cucumber should add the Given. Delete this after generating code from adoc
-		// and not feature files.
-		Interaction stepDefinition = tgtObj
-				.createStepDefinition("Given " + srcObj.getStepDefinitionName(stepDefinitionSrc));
+		Interaction stepDefinition = tgtObj.createStepDefinition(srcObj.getStepDefinitionName(stepDefinitionSrc));
+		tgtObj.setStepDefinitionNameLong(stepDefinition, srcObj.getStepDefinitionNameLong(stepDefinitionSrc));
 		tgtObj.setStepDefinitionDescription(stepDefinition, srcObj.getStepDefinitionDescription(stepDefinitionSrc));
 		convertStepParametersList(stepDefinition, srcObj.getStepParametersList(stepDefinitionSrc));
 	}

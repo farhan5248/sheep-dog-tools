@@ -105,6 +105,7 @@ public class ConvertCucumberToUML extends Converter {
 
 	private void convertStep(Interaction abstractScenario, Step stepSrc, AbstractScenario abstractScenarioSrc) {
 		Message step = tgtObj.createStep(abstractScenario, convertStepKeyword(srcObj.getStep(stepSrc)));
+		tgtObj.setStepNameLong(step, convertStepKeyword(srcObj.getStepNameLong(stepSrc)));
 
 		if (srcObj.hasDocString(stepSrc)) {
 			convertDocString(step, stepSrc);

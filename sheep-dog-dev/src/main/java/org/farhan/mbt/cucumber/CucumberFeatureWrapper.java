@@ -116,20 +116,7 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 	public Step createStep(AbstractScenario abstractScenario, String name) {
 		String keyword = name.split(" ")[0];
 		Step step = null;
-		// TODO delete the first 4 case statements after adoc migration is done
 		switch (keyword) {
-		case "Given":
-			step = CucumberFactory.eINSTANCE.createGiven();
-			break;
-		case "When":
-			step = CucumberFactory.eINSTANCE.createWhen();
-			break;
-		case "Then":
-			step = CucumberFactory.eINSTANCE.createThen();
-			break;
-		case "And":
-			step = CucumberFactory.eINSTANCE.createAnd();
-			break;
 		case "Given:":
 			step = CucumberFactory.eINSTANCE.createGiven();
 			break;
@@ -271,10 +258,6 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) step.eAdapters().getFirst();
 		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
 		String keywordString = rc.getRule().getName();
-		// TODO delete this, there's no asterisk
-		if (keywordString.contentEquals("Asterisk")) {
-			keywordString = "*";
-		}
 		return keywordString + " " + step.getName();
 	}
 
@@ -407,6 +390,10 @@ public class CucumberFeatureWrapper implements ConvertibleObject {
 				tagList.add(tag);
 			}
 		}
+	}
+
+	public String getStepNameLong(Step stepSrc) {
+		return getStep(stepSrc);
 	}
 
 }

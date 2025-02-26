@@ -138,15 +138,13 @@ public class UMLClassWrapper implements ConvertibleObject {
 		String keyword = stepName.split(" ")[0];
 		Message step = abstractScenario.createMessage(stepName.substring(keyword.length() + 1));
 		createAnnotation(step, "Step", "Keyword", keyword);
+		createAnnotation(step, "Step", "LongName", keyword);
 		return step;
 	}
 
 	public Interaction createStepDefinition(String stepName) {
-		String keyword = stepName.split(" ")[0];
-		Interaction stepDefinition = createInteraction(theClass, stepName.substring(keyword.length() + 1), "");
-		// TODO rename "StepDefinition" to something better
-		createAnnotation(stepDefinition, "StepDefinition", "Keyword", keyword);
-		// TODO make tests for this by doing adoc(undorted) uml adoc (sorted)
+		Interaction stepDefinition = createInteraction(theClass, stepName, "");
+		// TODO make tests for this by doing adoc(unsorted) uml adoc (sorted)
 		TreeMap<String, Interaction> sorted = new TreeMap<String, Interaction>();
 		EList<Behavior> behaviors = theClass.getOwnedBehaviors();
 		for (int i = behaviors.size(); i > 0; i--) {
@@ -512,4 +510,19 @@ public class UMLClassWrapper implements ConvertibleObject {
 		}
 	}
 
+	public String getStepDefinitionNameLong(Interaction stepDefinitionSrc) {
+		return stepDefinitionSrc.getEAnnotation("StepDefinition").getDetails().get("LongName");
+	}
+
+	public void setStepDefinitionNameLong(Interaction stepDefinition, String stepDefinitionNameLong) {
+		createAnnotation(stepDefinition, "StepDefinition", "LongName", stepDefinitionNameLong);
+	}
+
+	public void setStepNameLong(Message step, String stepNameLong) {
+		createAnnotation(step, "Step", "LongName", stepNameLong);
+	}
+
+	public String getStepNameLong(Message srcStep) {
+		return srcStep.getEAnnotation("Step").getDetails().get("LongName");
+	}
 }

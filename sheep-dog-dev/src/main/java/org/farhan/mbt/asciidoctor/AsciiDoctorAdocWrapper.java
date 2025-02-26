@@ -17,6 +17,9 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.impl.RuleCallImpl;
 import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
 import org.eclipse.xtext.resource.SaveOptions;
+import org.farhan.helper.StepDefinitionHelper;
+import org.farhan.helper.StepHelper;
+import org.farhan.mbt.LanguageAccessImpl;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.sheepDog.AbstractScenario;
 import org.farhan.mbt.sheepDog.AbstractScenarioTags;
@@ -544,6 +547,24 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	public void setBackgroundTags(Background background, ArrayList<String> backgroundTags) {
 		setTags(background, backgroundTags);
+	}
+
+	public String getStepDefinitionNameLong(StepDefinition stepDefinitionSrc) {
+		String noRoot = getPath().replaceFirst("^src/test/resources/asciidoc/stepdefs/", "");
+		String component = noRoot.split("/")[0];
+		String object = noRoot.replaceFirst("^" + component + "/", "").replaceFirst(".asciidoc$", "");
+		return "The " + component + ", " + object + " " + stepDefinitionSrc.getName();
+	}
+
+	public String getStepNameLong(Step stepSrc) {
+		String stepObjectNameLong = StepDefinitionHelper.getStepObjectQualifiedName(new LanguageAccessImpl(stepSrc));
+		String component = stepObjectNameLong.split("/")[0];
+		String object = stepObjectNameLong.replaceFirst("^" + component + "/", "").replaceFirst(".asciidoc$", "");
+		String stepNameLong = "The " + component + ", " + object + " " + StepHelper.getPredicate(stepSrc.getName());
+		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) stepSrc.eAdapters().getFirst();
+		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
+		String keywordString = rc.getRule().getName();
+		return keywordString + ": " + stepNameLong;
 	}
 
 }
