@@ -13,8 +13,8 @@ import org.farhan.mbt.cucumber.ScenarioOutline;
 import org.farhan.mbt.cucumber.Step;
 
 import org.farhan.mbt.core.ObjectRepository;
-import org.farhan.mbt.core.UMLClassWrapper;
-import org.farhan.mbt.core.UMLModel;
+import org.farhan.mbt.core.TestSuite;
+import org.farhan.mbt.core.TestProject;
 import org.farhan.mbt.core.Converter;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Logger;
@@ -25,7 +25,7 @@ import org.farhan.mbt.cucumber.CucumberProject;
 
 public class ConvertUMLToCucumber extends Converter {
 
-	private UMLClassWrapper srcObj;
+	private TestSuite srcObj;
 	private CucumberFeatureWrapper tgtObj;
 	private CucumberJavaWrapper tgtObj2;
 	protected CucumberPathConverter pathConverter;
@@ -72,9 +72,9 @@ public class ConvertUMLToCucumber extends Converter {
 
 	private String convertFeature(String tags, String path, String content) throws Exception {
 
-		srcObj = (UMLClassWrapper) model.createObject(pathConverter.getUMLPath(path));
+		srcObj = (TestSuite) model.addObject(pathConverter.getUMLPath(path));
 
-		tgtObj = (CucumberFeatureWrapper) project.createObject(path);
+		tgtObj = (CucumberFeatureWrapper) project.addObject(path);
 		tgtObj.parse(content);
 
 		tgtObj.setFeatureName(srcObj.getFeatureName());
@@ -84,7 +84,7 @@ public class ConvertUMLToCucumber extends Converter {
 	}
 
 	@Override
-	public String convertObject(String path, String content) throws Exception {
+	public String convertFile(String path, String content) throws Exception {
 		initProjects();
 		if (path.startsWith(project.getDir(project.TEST_CASES))) {
 			log.debug("test suite: " + path);
@@ -99,9 +99,9 @@ public class ConvertUMLToCucumber extends Converter {
 	}
 
 	private String convertObjectFields(String tags, String path, String content) throws Exception {
-		srcObj = (UMLClassWrapper) model.createObject(pathConverter.getUMLPath(path));
+		srcObj = (TestSuite) model.addObject(pathConverter.getUMLPath(path));
 
-		tgtObj2 = (CucumberJavaWrapper) project.createObject(path);
+		tgtObj2 = (CucumberJavaWrapper) project.addObject(path);
 		tgtObj2.parse(content);
 
 		convertStepDefinitionList();
@@ -109,9 +109,9 @@ public class ConvertUMLToCucumber extends Converter {
 	}
 
 	private String convertObjectSteps(String tags, String path, String content) throws Exception {
-		srcObj = (UMLClassWrapper) model.createObject(pathConverter.getUMLPath(path));
+		srcObj = (TestSuite) model.addObject(pathConverter.getUMLPath(path));
 
-		tgtObj2 = (CucumberJavaWrapper) project.createObject(path);
+		tgtObj2 = (CucumberJavaWrapper) project.addObject(path);
 		tgtObj2.parse(content);
 
 		convertStepDefinitionList();
@@ -187,7 +187,7 @@ public class ConvertUMLToCucumber extends Converter {
 	}
 
 	public void initProjects() throws Exception {
-		model = new UMLModel(this.tags, this.fa);
+		model = new TestProject(this.tags, this.fa);
 		project = new CucumberProject(this.tags, this.fa);
 		model.init();
 		project.init();
@@ -195,7 +195,7 @@ public class ConvertUMLToCucumber extends Converter {
 	}
 
 	@Override
-	public ArrayList<String> getObjectNames() throws Exception {
+	public ArrayList<String> getFileNames() throws Exception {
 		initProjects();
 		ArrayList<String> objects = new ArrayList<String>();
 		for (ConvertibleObject co : model.getObjects(model.TEST_CASES)) {

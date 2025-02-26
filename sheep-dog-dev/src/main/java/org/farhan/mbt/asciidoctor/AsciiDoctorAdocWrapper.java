@@ -402,13 +402,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return abstractScenario instanceof Background;
 	}
 
-	public boolean isScenarioOutline(AbstractScenario abstractScenario) {
-		if (abstractScenario instanceof Scenario) {
-			return !((Scenario) abstractScenario).getExamples().isEmpty();
-		}
-		return false;
-	}
-
 	private boolean isStepDef() {
 		if (thePath.startsWith("src/test/resources/asciidoc/stepdefs/")) {
 			return true;

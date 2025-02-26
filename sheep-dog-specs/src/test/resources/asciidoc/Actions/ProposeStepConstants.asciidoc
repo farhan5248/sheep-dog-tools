@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: Propose Step Constants
 
 == Scenario: Component types

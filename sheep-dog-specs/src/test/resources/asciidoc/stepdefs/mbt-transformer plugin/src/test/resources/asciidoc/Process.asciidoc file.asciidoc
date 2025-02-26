@@ -30,6 +30,12 @@
 | Name | Tags | Statements
 |===
 
+=== Parameters: 3
+
+|===
+| Name | Statements
+|===
+
 == Definition: is created as follows
 
 === Parameters: 1

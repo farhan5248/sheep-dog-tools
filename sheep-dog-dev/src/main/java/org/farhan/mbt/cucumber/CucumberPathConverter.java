@@ -1,14 +1,14 @@
 package org.farhan.mbt.cucumber;
 
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.UMLModel;
+import org.farhan.mbt.core.TestProject;
 
 public class CucumberPathConverter {
 
-	private UMLModel model;
+	private TestProject model;
 	private CucumberProject project;
 
-	public CucumberPathConverter(UMLModel model, CucumberProject project) {
+	public CucumberPathConverter(TestProject model, CucumberProject project) {
 		this.model = model;
 		this.project = project;
 	}

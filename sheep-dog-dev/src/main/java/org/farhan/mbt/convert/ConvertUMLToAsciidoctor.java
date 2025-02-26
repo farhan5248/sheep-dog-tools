@@ -9,8 +9,8 @@ import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
 import org.farhan.mbt.asciidoctor.AsciiDoctorPathConverter;
 import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
 import org.farhan.mbt.core.ObjectRepository;
-import org.farhan.mbt.core.UMLClassWrapper;
-import org.farhan.mbt.core.UMLModel;
+import org.farhan.mbt.core.TestSuite;
+import org.farhan.mbt.core.TestProject;
 import org.farhan.mbt.sheepDog.AbstractScenario;
 import org.farhan.mbt.sheepDog.Background;
 import org.farhan.mbt.sheepDog.Examples;
@@ -24,7 +24,7 @@ import org.farhan.mbt.core.Logger;
 
 public class ConvertUMLToAsciidoctor extends Converter {
 
-	private UMLClassWrapper srcObj;
+	private TestSuite srcObj;
 	private AsciiDoctorAdocWrapper tgtObj;
 	protected AsciiDoctorPathConverter pathConverter;
 
@@ -70,8 +70,8 @@ public class ConvertUMLToAsciidoctor extends Converter {
 	}
 
 	private String convertFeature(String tags, String path, String content) throws Exception {
-		srcObj = (UMLClassWrapper) model.createObject(pathConverter.getUMLPath(path));
-		tgtObj = (AsciiDoctorAdocWrapper) project.createObject(path);
+		srcObj = (TestSuite) model.addObject(pathConverter.findUMLPath(path));
+		tgtObj = (AsciiDoctorAdocWrapper) project.addObject(path);
 		tgtObj.parse(content);
 		tgtObj.setFeatureName(srcObj.getFeatureName());
 		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
@@ -80,7 +80,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 	}
 
 	@Override
-	public String convertObject(String path, String content) throws Exception {
+	public String convertFile(String path, String content) throws Exception {
 		initProjects();
 		if (path.startsWith(project.getDir(project.TEST_STEPS))) {
 			log.debug("step object: " + path);
@@ -146,8 +146,8 @@ public class ConvertUMLToAsciidoctor extends Converter {
 	}
 
 	private String convertStepObject(String tags, String path, String content) throws Exception {
-		srcObj = (UMLClassWrapper) model.createObject(pathConverter.getUMLPath(path));
-		tgtObj = (AsciiDoctorAdocWrapper) project.createObject(path);
+		srcObj = (TestSuite) model.addObject(pathConverter.findUMLPath(path));
+		tgtObj = (AsciiDoctorAdocWrapper) project.addObject(path);
 		tgtObj.parse(content);
 		tgtObj.setStepObjectName(srcObj.getStepObjectName());
 		tgtObj.setStepObjectDescription(srcObj.getStepObjectDescription());
@@ -173,20 +173,20 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
 	}
 
-	public ArrayList<String> getObjectNames() throws Exception {
+	public ArrayList<String> getFileNames() throws Exception {
 		initProjects();
 		ArrayList<String> objects = new ArrayList<String>();
 		for (ConvertibleObject co : model.getObjects(model.TEST_CASES)) {
-			objects.add(pathConverter.createFilePath(co.getPath(), model.TEST_CASES));
+			objects.add(pathConverter.convertFilePath(co.getPath(), model.TEST_CASES));
 		}
 		for (ConvertibleObject co : model.getObjects(model.TEST_STEPS)) {
-			objects.add(pathConverter.createFilePath(co.getPath(), model.TEST_STEPS));
+			objects.add(pathConverter.convertFilePath(co.getPath(), model.TEST_STEPS));
 		}
 		return objects;
 	}
 
 	public void initProjects() throws Exception {
-		model = new UMLModel(this.tags, this.fa);
+		model = new TestProject(this.tags, this.fa);
 		model.init();
 		project = new AsciiDoctorProject(this.tags, this.fa);
 		project.init();

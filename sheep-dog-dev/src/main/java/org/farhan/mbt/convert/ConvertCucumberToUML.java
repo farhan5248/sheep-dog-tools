@@ -11,8 +11,8 @@ import org.farhan.mbt.cucumber.Examples;
 import org.farhan.mbt.cucumber.Row;
 import org.farhan.mbt.cucumber.Step;
 import org.farhan.mbt.core.ObjectRepository;
-import org.farhan.mbt.core.UMLClassWrapper;
-import org.farhan.mbt.core.UMLModel;
+import org.farhan.mbt.core.TestSuite;
+import org.farhan.mbt.core.TestProject;
 import org.farhan.mbt.core.Converter;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Logger;
@@ -23,7 +23,7 @@ import org.farhan.mbt.cucumber.CucumberProject;
 public class ConvertCucumberToUML extends Converter {
 
 	private CucumberFeatureWrapper srcObj;
-	private UMLClassWrapper tgtObj;
+	private TestSuite tgtObj;
 	protected CucumberPathConverter pathConverter;
 
 	public ConvertCucumberToUML(String tags, ObjectRepository fa, Logger log) {
@@ -44,36 +44,36 @@ public class ConvertCucumberToUML extends Converter {
 	}
 
 	private void convertBackground(AbstractScenario abstractScenario) {
-		Interaction background = tgtObj.createBackground(srcObj.getBackgroundName(abstractScenario));
+		Interaction background = tgtObj.addBackground(srcObj.getBackgroundName(abstractScenario));
 		tgtObj.setBackgroundTags(background, srcObj.getFeatureTags());
 		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
 		convertStepList(background, srcObj.getStepList(abstractScenario), abstractScenario);
 	}
 
 	private void convertDocString(Message step, Step stepSrc) {
-		tgtObj.createDocString(step, srcObj.getDocString(stepSrc));
+		tgtObj.addDocString(step, srcObj.getDocString(stepSrc));
 	}
 
 	private void convertExamples(Interaction scenarioOutline, Examples examplesSrc) {
-		EAnnotation examples = tgtObj.createExamples(scenarioOutline, srcObj.getExamplesName(examplesSrc));
-		tgtObj.createExamplesTable(examples, srcObj.getExamplesTable(examplesSrc));
+		EAnnotation examples = tgtObj.addExamples(scenarioOutline, srcObj.getExamplesName(examplesSrc));
+		tgtObj.addExamplesTable(examples, srcObj.getExamplesTable(examplesSrc));
 		for (Row examplesRow : srcObj.getExamplesRowList(examplesSrc)) {
 			convertExamplesRow(examples, srcObj.getExamplesRow(examplesSrc, examplesRow));
 		}
 	}
 
 	private void convertExamplesRow(EAnnotation examples, ArrayList<String> examplesRow) {
-		tgtObj.createExamplesRow(examples, examplesRow);
+		tgtObj.addExamplesRow(examples, examplesRow);
 	}
 
 	@Override
-	public String convertObject(String path, String content) throws Exception {
+	public String convertFile(String path, String content) throws Exception {
 		log.debug("test suite: " + path);
 		initProjects();
-		srcObj = (CucumberFeatureWrapper) project.createObject(path);
+		srcObj = (CucumberFeatureWrapper) project.addObject(path);
 		srcObj.parse(content);
 		if (isFileSelected(srcObj, tags)) {
-			tgtObj = (UMLClassWrapper) model.createObject(pathConverter.createUMLPath(path));
+			tgtObj = (TestSuite) model.addObject(pathConverter.createUMLPath(path));
 			tgtObj.setFeatureName(srcObj.getFeatureName());
 			tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
 			convertAbstractScenarioList();
@@ -85,14 +85,14 @@ public class ConvertCucumberToUML extends Converter {
 	}
 
 	private void convertScenario(AbstractScenario abstractScenario) {
-		Interaction scenario = tgtObj.createScenario(srcObj.getScenarioName(abstractScenario));
+		Interaction scenario = tgtObj.addScenario(srcObj.getScenarioName(abstractScenario));
 		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(abstractScenario));
 		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(abstractScenario));
 		convertStepList(scenario, srcObj.getStepList(abstractScenario), abstractScenario);
 	}
 
 	private void convertScenarioOutline(AbstractScenario abstractScenario) {
-		Interaction scenarioOutline = tgtObj.createScenarioOutline(srcObj.getScenarioOutlineName(abstractScenario));
+		Interaction scenarioOutline = tgtObj.addScenarioOutline(srcObj.getScenarioOutlineName(abstractScenario));
 		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
 		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
 		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario), abstractScenario);
@@ -104,7 +104,7 @@ public class ConvertCucumberToUML extends Converter {
 	}
 
 	private void convertStep(Interaction abstractScenario, Step stepSrc, AbstractScenario abstractScenarioSrc) {
-		Message step = tgtObj.createStep(abstractScenario, convertStepKeyword(srcObj.getStep(stepSrc)));
+		Message step = tgtObj.addStep(abstractScenario, convertStepKeyword(srcObj.getStep(stepSrc)));
 		tgtObj.setStepNameLong(step, convertStepKeyword(srcObj.getStepNameLong(stepSrc)));
 
 		if (srcObj.hasDocString(stepSrc)) {
@@ -129,12 +129,12 @@ public class ConvertCucumberToUML extends Converter {
 	}
 
 	private void convertStepTable(Message step, Step stepSrc, AbstractScenario abstractScenarioSrc) {
-		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
+		tgtObj.addStepTable(step, srcObj.getStepTable(stepSrc));
 	}
 
 	public void initProjects() throws Exception {
 		project = new CucumberProject(this.tags, this.fa);
-		model = new UMLModel(this.tags, this.fa);
+		model = new TestProject(this.tags, this.fa);
 		project.init();
 		model.init();
 		this.pathConverter = new CucumberPathConverter(model, (CucumberProject) project);

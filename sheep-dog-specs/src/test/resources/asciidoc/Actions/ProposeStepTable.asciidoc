@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: Propose Step Table
 
 == Scenario: Invalid step

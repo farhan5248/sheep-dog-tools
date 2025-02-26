@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: Propose Object Documentation
 
 == Scenario: Documentation for component

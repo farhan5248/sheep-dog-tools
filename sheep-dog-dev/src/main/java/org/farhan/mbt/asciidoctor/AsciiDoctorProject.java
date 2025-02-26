@@ -16,7 +16,7 @@ public class AsciiDoctorProject extends ConvertibleProject {
 	}
 
 	@Override
-	public ConvertibleObject createObject(String path) throws Exception {
+	public ConvertibleObject addObject(String path) throws Exception {
 
 		// TODO calculate an actual checksum
 		fa.put(tags, path, "sha checksum");

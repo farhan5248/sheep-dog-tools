@@ -15,11 +15,11 @@ import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.ValueSpecification;
 
-public class UMLClassWrapper implements ConvertibleObject {
+public class TestSuite implements ConvertibleObject {
 
 	private Class theClass;
 
-	public UMLClassWrapper(UMLModel umlProject, Class theClass) {
+	public TestSuite(TestProject umlProject, Class theClass) {
 		this.theClass = theClass;
 	}
 
@@ -42,7 +42,7 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return a;
 	}
 
-	protected EAnnotation createAnnotation(Interaction anInteraction, String name, String key, String value) {
+	private EAnnotation createAnnotation(Interaction anInteraction, String name, String key, String value) {
 		EAnnotation a = createAnnotation(anInteraction, name);
 		a.getDetails().put(key, value);
 		return a;
@@ -77,13 +77,13 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return ls;
 	}
 
-	public Interaction createBackground(String name) {
-		Interaction scenario = createInteraction(theClass, name, "");
+	public Interaction addBackground(String name) {
+		Interaction scenario = addAbstractScenario(theClass, name, "");
 		createAnnotation(scenario, "background");
 		return scenario;
 	}
 
-	public void createDocString(Message step, String content) {
+	public void addDocString(Message step, String content) {
 		ValueSpecification vs = createArgument(step, "docString", "");
 		String[] lines = content.split("\n");
 		for (int i = 0; i < lines.length; i++) {
@@ -91,11 +91,11 @@ public class UMLClassWrapper implements ConvertibleObject {
 		}
 	}
 
-	public EAnnotation createExamples(Interaction scenarioOutline, String name) {
+	public EAnnotation addExamples(Interaction scenarioOutline, String name) {
 		return createAnnotation(scenarioOutline, name);
 	}
 
-	public void createExamplesRow(EAnnotation examples, ArrayList<String> examplesRow) {
+	public void addExamplesRow(EAnnotation examples, ArrayList<String> examplesRow) {
 		String value = "";
 		for (String e : examplesRow) {
 			value += e + "|";
@@ -103,7 +103,7 @@ public class UMLClassWrapper implements ConvertibleObject {
 		examples.getDetails().put(String.valueOf(examples.getDetails().size()), value);
 	}
 
-	public void createExamplesTable(EAnnotation examples, ArrayList<String> headers) {
+	public void addExamplesTable(EAnnotation examples, ArrayList<String> headers) {
 		String value = "";
 		for (String e : headers) {
 			value += e + "|";
@@ -111,7 +111,7 @@ public class UMLClassWrapper implements ConvertibleObject {
 		examples.getDetails().put("0", value);
 	}
 
-	private Interaction createInteraction(Class theClass, String interactionName, String annotationName) {
+	private Interaction addAbstractScenario(Class theClass, String interactionName, String annotationName) {
 		Interaction anInteraction = (Interaction) theClass.getOwnedBehavior(interactionName);
 		if (anInteraction == null) {
 			anInteraction = UMLFactory.eINSTANCE.createInteraction();
@@ -124,17 +124,17 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return anInteraction;
 	}
 
-	public Interaction createScenario(String name) {
-		Interaction scenario = createInteraction(theClass, name, "");
+	public Interaction addScenario(String name) {
+		Interaction scenario = addAbstractScenario(theClass, name, "");
 		return scenario;
 	}
 
-	public Interaction createScenarioOutline(String name) {
-		Interaction scenario = createInteraction(theClass, name, "");
+	public Interaction addScenarioOutline(String name) {
+		Interaction scenario = addAbstractScenario(theClass, name, "");
 		return scenario;
 	}
 
-	public Message createStep(Interaction abstractScenario, String stepName) {
+	public Message addStep(Interaction abstractScenario, String stepName) {
 		String keyword = stepName.split(" ")[0];
 		Message step = abstractScenario.createMessage(stepName.substring(keyword.length() + 1));
 		createAnnotation(step, "Step", "Keyword", keyword);
@@ -142,8 +142,8 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return step;
 	}
 
-	public Interaction createStepDefinition(String stepName) {
-		Interaction stepDefinition = createInteraction(theClass, stepName, "");
+	public Interaction addStepDefinition(String stepName) {
+		Interaction stepDefinition = addAbstractScenario(theClass, stepName, "");
 		// TODO make tests for this by doing adoc(unsorted) uml adoc (sorted)
 		TreeMap<String, Interaction> sorted = new TreeMap<String, Interaction>();
 		EList<Behavior> behaviors = theClass.getOwnedBehaviors();
@@ -157,17 +157,11 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return stepDefinition;
 	}
 
-	public void createStepDefinitionParameter(Interaction stepDef, String parameterName) {
-		if (!parameterName.isEmpty()) {
-			createAnnotation(stepDef, "parameters", parameterName);
-		}
-	}
-
-	public EAnnotation createStepParameters(Interaction stepDefinition, String name) {
+	public EAnnotation addStepParameters(Interaction stepDefinition, String name) {
 		return createAnnotation(stepDefinition, name);
 	}
 
-	public void createStepParametersRow(EAnnotation stepParameters, ArrayList<String> stepParametersRow) {
+	public void addStepParametersRow(EAnnotation stepParameters, ArrayList<String> stepParametersRow) {
 		String value = "";
 		for (String e : stepParametersRow) {
 			value += e + "|";
@@ -175,7 +169,7 @@ public class UMLClassWrapper implements ConvertibleObject {
 		stepParameters.getDetails().put(String.valueOf(stepParameters.getDetails().size()), value);
 	}
 
-	public void createStepParametersTable(EAnnotation stepParameters, ArrayList<String> headers) {
+	public void addStepParametersTable(EAnnotation stepParameters, ArrayList<String> headers) {
 		String value = "";
 		for (String e : headers) {
 			value += e + "|";
@@ -183,7 +177,7 @@ public class UMLClassWrapper implements ConvertibleObject {
 		stepParameters.getDetails().put("0", value);
 	}
 
-	public void createStepTable(Message step, ArrayList<ArrayList<String>> stepTableRowList) {
+	public void addStepTable(Message step, ArrayList<ArrayList<String>> stepTableRowList) {
 		ValueSpecification table = createArgument(step, "dataTable", "");
 		// header
 		String row = "";
@@ -346,6 +340,10 @@ public class UMLClassWrapper implements ConvertibleObject {
 		return stepDef.getName();
 	}
 
+	public String getStepDefinitionNameLong(Interaction stepDefinitionSrc) {
+		return stepDefinitionSrc.getEAnnotation("StepDefinition").getDetails().get("LongName");
+	}
+
 	public ArrayList<EAnnotation> getStepDefinitionParameterList(Interaction stepDefinition) {
 
 		ArrayList<EAnnotation> parametersList = new ArrayList<EAnnotation>();
@@ -367,6 +365,10 @@ public class UMLClassWrapper implements ConvertibleObject {
 
 	public String getStepName(Message step) {
 		return step.getName();
+	}
+
+	public String getStepNameLong(Message srcStep) {
+		return srcStep.getEAnnotation("Step").getDetails().get("LongName");
 	}
 
 	public String getStepObjectDescription() {
@@ -494,6 +496,14 @@ public class UMLClassWrapper implements ConvertibleObject {
 		stepDefinition.createOwnedComment().setBody(description);
 	}
 
+	public void setStepDefinitionNameLong(Interaction stepDefinition, String stepDefinitionNameLong) {
+		createAnnotation(stepDefinition, "StepDefinition", "LongName", stepDefinitionNameLong);
+	}
+
+	public void setStepNameLong(Message step, String stepNameLong) {
+		createAnnotation(step, "Step", "LongName", stepNameLong);
+	}
+
 	public void setStepObjectDescription(String description) {
 		theClass.createOwnedComment().setBody(description);
 	}
@@ -508,21 +518,5 @@ public class UMLClassWrapper implements ConvertibleObject {
 				createAnnotation(abstractScenario, "tags", t);
 			}
 		}
-	}
-
-	public String getStepDefinitionNameLong(Interaction stepDefinitionSrc) {
-		return stepDefinitionSrc.getEAnnotation("StepDefinition").getDetails().get("LongName");
-	}
-
-	public void setStepDefinitionNameLong(Interaction stepDefinition, String stepDefinitionNameLong) {
-		createAnnotation(stepDefinition, "StepDefinition", "LongName", stepDefinitionNameLong);
-	}
-
-	public void setStepNameLong(Message step, String stepNameLong) {
-		createAnnotation(step, "Step", "LongName", stepNameLong);
-	}
-
-	public String getStepNameLong(Message srcStep) {
-		return srcStep.getEAnnotation("Step").getDetails().get("LongName");
 	}
 }

@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: Generate
 
 == Scenario: The object doesn't exist

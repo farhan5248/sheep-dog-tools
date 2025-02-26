@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: Validate Error
 
 == Scenario: No steps have a component

@@ -23,7 +23,7 @@ public abstract class ConvertibleProject {
 		this.fa = fa;
 	}
 
-	public abstract ConvertibleObject createObject(String path) throws Exception;
+	public abstract ConvertibleObject addObject(String path) throws Exception;
 
 	public abstract void deleteObject(ConvertibleObject srcObj);
 

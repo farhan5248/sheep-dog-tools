@@ -23,16 +23,16 @@ import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 
-public class UMLModel extends ConvertibleProject {
+public class TestProject extends ConvertibleProject {
 
-	private Model theSystem;
+	private Model theModel;
 
-	public UMLModel(String tags, ObjectRepository fa) {
+	public TestProject(String tags, ObjectRepository fa) {
 		super(fa);
-		theSystem = UMLFactory.eINSTANCE.createModel();
-		theSystem.setName("pst");
-		theSystem.createNestedPackage(TEST_CASES);
-		theSystem.createNestedPackage(TEST_STEPS);
+		theModel = UMLFactory.eINSTANCE.createModel();
+		theModel.setName("pst");
+		theModel.createNestedPackage(TEST_CASES);
+		theModel.createNestedPackage(TEST_STEPS);
 		ConvertibleProject.tags = tags;
 	}
 
@@ -43,32 +43,32 @@ public class UMLModel extends ConvertibleProject {
 
 	@Override
 	public void init() throws Exception {
-		String path = getDir("") + theSystem.getName() + getFileExt("");
+		String path = getDir("") + theModel.getName() + getFileExt("");
 		if (fa.contains(tags, path)) {
 			URI uri = URI.createFileURI(path);
 			ResourceSet resourceSet = UMLResourcesUtil.init(new ResourceSetImpl());
 			Resource resource = resourceSet.createResource(uri);
 			InputStream content = new ByteArrayInputStream(fa.get(tags, path).getBytes(StandardCharsets.UTF_8));
 			resource.load(content, Collections.EMPTY_MAP);
-			theSystem = (Model) resource.getContents().getFirst();
-			ArrayList<Class> objects = getPackagedElements(theSystem.getNestedPackage(TEST_CASES));
+			theModel = (Model) resource.getContents().getFirst();
+			ArrayList<Class> objects = getPackagedElements(theModel.getNestedPackage(TEST_CASES));
 			for (Class c : objects) {
-				createObject(c.getQualifiedName());
+				addObject(c.getQualifiedName());
 			}
-			objects = getPackagedElements(theSystem.getNestedPackage(TEST_STEPS));
+			objects = getPackagedElements(theModel.getNestedPackage(TEST_STEPS));
 			for (Class c : objects) {
-				createObject(c.getQualifiedName());
+				addObject(c.getQualifiedName());
 			}
 		}
 	}
 
 	public void save() throws Exception {
-		String path = getDir("") + theSystem.getName() + getFileExt("");
+		String path = getDir("") + theModel.getName() + getFileExt("");
 		URI uri = URI.createFileURI(path);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		UMLResourcesUtil.init(resourceSet);
 		XMLResource resource = (XMLResource) resourceSet.createResource(uri);
-		resource.getContents().add(theSystem);
+		resource.getContents().add(theModel);
 		// Looks like I have this for interaction message signatures that point nowhere
 		// This option lets files get saved with referenced to non-existing objects
 		Map<Object, Object> options = resource.getDefaultSaveOptions();
@@ -95,12 +95,12 @@ public class UMLModel extends ConvertibleProject {
 	}
 
 	@Override
-	public ConvertibleObject createObject(String qualifiedName) {
+	public ConvertibleObject addObject(String qualifiedName) {
 		Class theClass = (Class) getPackagedElement(qualifiedName, null);
 		if (theClass == null) {
 			theClass = addClass(qualifiedName);
 		}
-		UMLClassWrapper ucw = new UMLClassWrapper(this, theClass);
+		TestSuite ucw = new TestSuite(this, theClass);
 		if (qualifiedName.startsWith("pst::" + TEST_OBJECTS)) {
 			thirdLayerObjects.add(ucw);
 		} else if (qualifiedName.startsWith("pst::" + TEST_STEPS)) {
@@ -113,8 +113,8 @@ public class UMLModel extends ConvertibleProject {
 
 	private Class addClass(String qualifiedName) {
 		Class theClass = null;
-		Package owningPackage = theSystem;
-		String[] qualifiedNameParts = qualifiedName.replace(theSystem.getQualifiedName() + "::", "").split("::");
+		Package owningPackage = theModel;
+		String[] qualifiedNameParts = qualifiedName.replace(theModel.getQualifiedName() + "::", "").split("::");
 		for (int i = 0; i < qualifiedNameParts.length; i++) {
 			if (i == qualifiedNameParts.length - 1) {
 				theClass = owningPackage.createOwnedClass(qualifiedNameParts[i], false);
@@ -147,7 +147,7 @@ public class UMLModel extends ConvertibleProject {
 
 	public PackageableElement getPackagedElement(String qualifiedName, Package nestingPackage) {
 		if (nestingPackage == null) {
-			nestingPackage = theSystem;
+			nestingPackage = theModel;
 		}
 		for (PackageableElement pe : nestingPackage.getPackagedElements()) {
 			if (pe instanceof Package) {

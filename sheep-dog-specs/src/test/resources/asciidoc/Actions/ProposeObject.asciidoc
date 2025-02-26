@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: Propose Object
 
 == Scenario: No object no component has previous in background

@@ -1,4 +1,3 @@
-:tags:debug
 = Feature: Validate Warning
 
 == Scenario: This object doesn't exist validation

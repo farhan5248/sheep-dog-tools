@@ -1,20 +1,19 @@
 package org.farhan.mbt.asciidoctor;
 
-import org.apache.commons.lang3.StringUtils;
 import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.UMLModel;
+import org.farhan.mbt.core.TestProject;
 
 public class AsciiDoctorPathConverter {
 
-	private UMLModel model;
+	private TestProject model;
 	private AsciiDoctorProject project;
 
-	public AsciiDoctorPathConverter(UMLModel model, AsciiDoctorProject project) {
+	public AsciiDoctorPathConverter(TestProject model, AsciiDoctorProject project) {
 		this.model = model;
 		this.project = project;
 	}
 
-	public String createUMLPath(String path) {
+	public String convertUMLPath(String path) {
 		String projectLayer, modelLayer;
 		if (path.startsWith(project.getDir(project.TEST_STEPS))) {
 			projectLayer = project.TEST_STEPS;
@@ -31,21 +30,21 @@ public class AsciiDoctorPathConverter {
 		return qualifiedName;
 	}
 
-	public String getUMLPath(String path) {
+	public String findUMLPath(String path) {
 		for (ConvertibleObject co : model.getObjects(model.TEST_CASES)) {
-			if (createFilePath(co.getPath(), project.TEST_CASES).contentEquals(path)) {
+			if (convertFilePath(co.getPath(), project.TEST_CASES).contentEquals(path)) {
 				return co.getPath();
 			}
 		}
 		for (ConvertibleObject co : model.getObjects(model.TEST_STEPS)) {
-			if (createFilePath(co.getPath(), project.TEST_STEPS).contentEquals(path)) {
+			if (convertFilePath(co.getPath(), project.TEST_STEPS).contentEquals(path)) {
 				return co.getPath();
 			}
 		}
 		return null;
 	}
 
-	public String createFilePath(String umlPath, String layer) {
+	public String convertFilePath(String umlPath, String layer) {
 
 		if (layer.contentEquals(model.TEST_CASES)) {
 			umlPath = umlPath.replace("pst::" + model.TEST_CASES, "");
