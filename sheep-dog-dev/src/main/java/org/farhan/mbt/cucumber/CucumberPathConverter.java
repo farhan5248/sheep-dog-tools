@@ -6,14 +6,14 @@ import org.farhan.mbt.core.TestProject;
 public class CucumberPathConverter {
 
 	private TestProject model;
-	private CucumberProject project;
+	private CucumberTestProject project;
 
-	public CucumberPathConverter(TestProject model, CucumberProject project) {
+	public CucumberPathConverter(TestProject model, CucumberTestProject project) {
 		this.model = model;
 		this.project = project;
 	}
 
-	public String createUMLPath(String path) {
+	public String convertUMLPath(String path) {
 		String qualifiedName = path.replace(",", "").trim();
 		qualifiedName = qualifiedName.replaceFirst(project.getFileExt(project.TEST_CASES) + "$", "");
 		qualifiedName = qualifiedName.replaceFirst("^" + project.getDir(project.TEST_CASES), "");
@@ -22,39 +22,39 @@ public class CucumberPathConverter {
 		return qualifiedName;
 	}
 
-	public String getUMLPath(String path) {
+	public String findUMLPath(String path) {
 		for (ConvertibleObject co : model.getObjects(model.TEST_CASES)) {
-			if (createFilePath(co.getPath(), project.TEST_CASES).contentEquals(path)) {
+			if (convertFilePath(co.getPath(), project.TEST_CASES).contentEquals(path)) {
 				return co.getPath();
 			}
 		}
 		for (ConvertibleObject co : model.getObjects(model.TEST_STEPS)) {
-			if (createFilePath(co.getPath(), project.TEST_STEPS).contentEquals(path)) {
+			if (convertFilePath(co.getPath(), project.TEST_STEPS).contentEquals(path)) {
 				return co.getPath();
 			}
-			if (createFilePath(co.getPath(), project.TEST_OBJECTS).contentEquals(path)) {
+			if (convertFilePath(co.getPath(), project.TEST_OBJECTS).contentEquals(path)) {
 				return co.getPath();
 			}
 		}
 		return null;
 	}
 
-	public String createFilePath(String path, String layer) {
+	public String convertFilePath(String path, String layer) {
 		String[] pathParts = path.split("::");
 		String componentName = pathParts[2];
 		String objectName = pathParts[pathParts.length - 1];
 		String newComponentName = getComponentName(path);
 		String newObjectName = getObjectName(path);
 
-		if (layer.contentEquals(model.TEST_CASES)) {
+		if (layer.contentEquals(project.TEST_CASES)) {
 			path = path.replace("pst::" + model.TEST_CASES, "");
 		} else {
-			if (layer.contentEquals(model.TEST_STEPS)) {
+			if (layer.contentEquals(project.TEST_STEPS)) {
 				path = path.replace("pst::" + model.TEST_STEPS + "::" + componentName,
 						"::" + newComponentName.toLowerCase());
 				path = path.replaceFirst(objectName + "$", newComponentName + newObjectName + "Steps");
 			}
-			if (layer.contentEquals(model.TEST_OBJECTS)) {
+			if (layer.contentEquals(project.TEST_OBJECTS)) {
 				path = path.replace("pst::" + model.TEST_STEPS + "::" + componentName,
 						"::" + newComponentName.toLowerCase());
 				path = path.replaceFirst(objectName + "$", newObjectName);

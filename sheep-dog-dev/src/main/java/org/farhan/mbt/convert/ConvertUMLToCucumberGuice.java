@@ -3,9 +3,9 @@ package org.farhan.mbt.convert;
 import org.farhan.mbt.core.Logger;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.TestProject;
-import org.farhan.mbt.cucumber.CucumberGuiceProject;
+import org.farhan.mbt.cucumber.CucumberGuiceTestProject;
 import org.farhan.mbt.cucumber.CucumberPathConverter;
-import org.farhan.mbt.cucumber.CucumberProject;
+import org.farhan.mbt.cucumber.CucumberTestProject;
 
 public class ConvertUMLToCucumberGuice extends ConvertUMLToCucumber {
 
@@ -14,10 +14,10 @@ public class ConvertUMLToCucumberGuice extends ConvertUMLToCucumber {
 	}
 
 	public void initProjects() throws Exception {
-		model = new TestProject(this.tags, this.fa);
-		project = new CucumberGuiceProject(this.tags, this.fa);
-		model.init();
+		testProject = new TestProject(this.tags, this.fa);
+		project = new CucumberGuiceTestProject(this.tags, this.fa);
+		testProject.init();
 		project.init();
-		this.pathConverter = new CucumberPathConverter(model, (CucumberProject) project);
+		this.pathConverter = new CucumberPathConverter(testProject, (CucumberTestProject) project);
 	}
 }

@@ -23,12 +23,20 @@ import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 
-public class TestProject extends ConvertibleProject {
+public class TestProject {
 
+	protected ObjectRepository fa;
+	public static String tags = "";
+	public final String TEST_CASES = "specs";
+	public final String TEST_STEPS = "stepdefs";
 	private Model theModel;
+	protected ArrayList<ConvertibleObject> firstLayerObjects;
+	protected ArrayList<ConvertibleObject> secondLayerObjects;
 
 	public TestProject(String tags, ObjectRepository fa) {
-		super(fa);
+		firstLayerObjects = new ArrayList<ConvertibleObject>();
+		secondLayerObjects = new ArrayList<ConvertibleObject>();
+		this.fa = fa;
 		theModel = UMLFactory.eINSTANCE.createModel();
 		theModel.setName("pst");
 		theModel.createNestedPackage(TEST_CASES);
@@ -36,14 +44,12 @@ public class TestProject extends ConvertibleProject {
 		ConvertibleProject.tags = tags;
 	}
 
-	@Override
-	public String getDir(String layer) {
+	public String getDir() {
 		return "uml/";
 	}
 
-	@Override
 	public void init() throws Exception {
-		String path = getDir("") + theModel.getName() + getFileExt("");
+		String path = getDir() + theModel.getName() + "." + UMLResource.FILE_EXTENSION;
 		if (fa.contains(tags, path)) {
 			URI uri = URI.createFileURI(path);
 			ResourceSet resourceSet = UMLResourcesUtil.init(new ResourceSetImpl());
@@ -53,17 +59,17 @@ public class TestProject extends ConvertibleProject {
 			theModel = (Model) resource.getContents().getFirst();
 			ArrayList<Class> objects = getPackagedElements(theModel.getNestedPackage(TEST_CASES));
 			for (Class c : objects) {
-				addObject(c.getQualifiedName());
+				addTestSuite(c.getQualifiedName());
 			}
 			objects = getPackagedElements(theModel.getNestedPackage(TEST_STEPS));
 			for (Class c : objects) {
-				addObject(c.getQualifiedName());
+				addStepObject(c.getQualifiedName());
 			}
 		}
 	}
 
 	public void save() throws Exception {
-		String path = getDir("") + theModel.getName() + getFileExt("");
+		String path = getDir() + theModel.getName() + "." + UMLResource.FILE_EXTENSION;
 		URI uri = URI.createFileURI(path);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		UMLResourcesUtil.init(resourceSet);
@@ -78,36 +84,42 @@ public class TestProject extends ConvertibleProject {
 		fa.put(tags, path, os.toString());
 	}
 
-	@Override
-	public String getFileExt(String layer) {
-		return "." + UMLResource.FILE_EXTENSION;
-	}
-
-	@Override
 	public ArrayList<ConvertibleObject> getObjects(String layer) {
-		if (layer.equalsIgnoreCase(TEST_CASES)) {
-			return firstLayerObjects;
-		} else if (layer.equalsIgnoreCase(TEST_STEPS)) {
+		if (layer.equalsIgnoreCase(TEST_STEPS)) {
 			return secondLayerObjects;
 		} else {
-			return thirdLayerObjects;
+			return firstLayerObjects;
 		}
 	}
 
-	@Override
-	public ConvertibleObject addObject(String qualifiedName) {
+	public ConvertibleObject getObject(String qualifiedName) {
 		Class theClass = (Class) getPackagedElement(qualifiedName, null);
 		if (theClass == null) {
-			theClass = addClass(qualifiedName);
+			return null;
+		} else {
+			// TODO this will be a problem if the object is not in the first layer
+			return new TestSuite(theClass);
 		}
-		TestSuite ucw = new TestSuite(this, theClass);
-		if (qualifiedName.startsWith("pst::" + TEST_OBJECTS)) {
-			thirdLayerObjects.add(ucw);
-		} else if (qualifiedName.startsWith("pst::" + TEST_STEPS)) {
-			secondLayerObjects.add(ucw);
-		} else if (qualifiedName.startsWith("pst::" + TEST_CASES)) {
-			firstLayerObjects.add(ucw);
+	}
+
+	private ConvertibleObject addObject(String qualifiedName) {
+		// TODO split TestSuite into 2 and then delete this method
+		TestSuite ucw = (TestSuite) getObject(qualifiedName);
+		if (ucw == null) {
+			ucw = new TestSuite(addClass(qualifiedName));
 		}
+		return ucw;
+	}
+
+	public TestSuite addStepObject(String qualifiedName) {
+		TestSuite ucw = (TestSuite) addObject(qualifiedName);
+		secondLayerObjects.add(ucw);
+		return ucw;
+	}
+
+	public TestSuite addTestSuite(String qualifiedName) {
+		TestSuite ucw = (TestSuite) addObject(qualifiedName);
+		firstLayerObjects.add(ucw);
 		return ucw;
 	}
 
@@ -170,11 +182,5 @@ public class TestProject extends ConvertibleProject {
 			}
 		}
 		return null;
-	}
-
-	@Override
-	public void deleteObject(ConvertibleObject srcObj) {
-		// TODO Auto-generated method stub
-
 	}
 }

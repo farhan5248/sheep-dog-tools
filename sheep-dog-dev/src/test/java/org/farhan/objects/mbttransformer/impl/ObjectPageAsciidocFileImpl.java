@@ -22,7 +22,7 @@ public class ObjectPageAsciidocFileImpl extends AdocFileObject implements Object
 
 	@Override
 	public void assertPresent(HashMap<String, String> keyMap) {
-		assertObjectExists();
+		assertStepObjectExists();
 	}
 
 	@Override

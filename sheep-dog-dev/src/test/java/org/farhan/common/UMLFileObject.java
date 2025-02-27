@@ -123,7 +123,7 @@ public abstract class UMLFileObject extends FileObject {
 
 	}
 
-	protected void assertObjectExists() {
+	protected void assertFileExists() {
 		try {
 			project = new TestProject(getGoalClass("ToUml").attributes.get("tags"), new FileObjectRepository());
 			project.init();

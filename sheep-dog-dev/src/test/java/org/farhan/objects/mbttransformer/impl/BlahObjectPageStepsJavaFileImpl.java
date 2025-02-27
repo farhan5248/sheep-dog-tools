@@ -62,7 +62,7 @@ public class BlahObjectPageStepsJavaFileImpl extends JavaFileObject implements B
 
 	@Override
 	public void assertPresent(HashMap<String, String> keyMap) {
-		assertObjectExists();
+		assertFileExists();
 	}
 
 	public void setContent(HashMap<String, String> keyMap) {

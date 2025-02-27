@@ -48,7 +48,7 @@ public class ProcessAsciidocFileImpl extends AdocFileObject implements ProcessAs
 
 	@Override
 	public void assertPresent(HashMap<String, String> keyMap) {
-		assertObjectExists();
+		assertTestSuiteExists();
 	}
 
 	@Override

@@ -33,29 +33,21 @@ import org.farhan.mbt.sheepDog.SheepDogFactory;
 import org.farhan.mbt.sheepDog.Statement;
 import org.farhan.mbt.sheepDog.Step;
 import org.farhan.mbt.sheepDog.StepDefinition;
-import org.farhan.mbt.sheepDog.StepObject;
 import org.farhan.mbt.sheepDog.StepParameters;
 
-public class AsciiDoctorAdocWrapper implements ConvertibleObject {
+public class AsciiDoctorTestSuite implements ConvertibleObject {
 
 	private Feature theFeature;
-	private StepObject theStepObject;
 	private String thePath;
 
-	public AsciiDoctorAdocWrapper(String thePath) {
+	public AsciiDoctorTestSuite(String thePath) {
 		this.thePath = thePath;
 		// TODO don't assume it's a feature, it could be a StepObject. Mimic the Java
-		// Wrapper and how it handles interfaces vs classes. There's currently no code
-		// for UML to Asciidoctor.
+		// Wrapper and how it handles interfaces vs classes.
 		String[] pathParts = thePath.split("/");
 		String name = pathParts[pathParts.length - 1].replace(".asciidoc", "");
-		if (isStepDef()) {
-			theStepObject = SheepDogFactory.eINSTANCE.createStepObject();
-			theStepObject.setName(name);
-		} else {
-			theFeature = SheepDogFactory.eINSTANCE.createFeature();
-			theFeature.setName(name);
-		}
+		theFeature = SheepDogFactory.eINSTANCE.createFeature();
+		theFeature.setName(name);
 	}
 
 	private String convertStatementsToString(EList<Statement> statements) {
@@ -141,42 +133,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return step;
 	}
 
-	public StepDefinition createStepDefinition(String stepDefinitionName) {
-		deleteStepDefinition(stepDefinitionName);
-		StepDefinition stepDefinition = SheepDogFactory.eINSTANCE.createStepDefinition();
-		stepDefinition.setName(stepDefinitionName);
-		theStepObject.getStepDefinitions().add(stepDefinition);
-		return stepDefinition;
-	}
-
-	public StepParameters createStepParameters(StepDefinition stepDefinition, String stepParametersName) {
-		StepParameters stepParameters = SheepDogFactory.eINSTANCE.createStepParameters();
-		stepParameters.setName(stepParametersName);
-		stepDefinition.getStepParameters().add(stepParameters);
-		return stepParameters;
-	}
-
-	public void createStepParametersRow(StepParameters stepParameters, ArrayList<String> stepParametersRow) {
-		Row row = SheepDogFactory.eINSTANCE.createRow();
-		for (String srcCell : stepParametersRow) {
-			Cell cell = SheepDogFactory.eINSTANCE.createCell();
-			cell.setName(srcCell);
-			row.getCells().add(cell);
-		}
-		stepParameters.getParametersTable().getRows().add(row);
-	}
-
-	public void createStepParametersTable(StepParameters stepParameters, ArrayList<String> headers) {
-		stepParameters.setParametersTable(SheepDogFactory.eINSTANCE.createTable());
-		Row row = SheepDogFactory.eINSTANCE.createRow();
-		for (String srcCell : headers) {
-			Cell cell = SheepDogFactory.eINSTANCE.createCell();
-			cell.setName(srcCell);
-			row.getCells().add(cell);
-		}
-		stepParameters.getParametersTable().getRows().add(row);
-	}
-
 	public void createStepTable(Step step, ArrayList<ArrayList<String>> stepTableRowList) {
 		step.setTheStepTable(SheepDogFactory.eINSTANCE.createTable());
 		for (ArrayList<String> srcRow : stepTableRowList) {
@@ -193,16 +149,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 
 	private void deleteAbstractScenario(String name) {
 		EList<AbstractScenario> list = theFeature.getAbstractScenarios();
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getName().contentEquals(name)) {
-				list.remove(i);
-				return;
-			}
-		}
-	}
-
-	private void deleteStepDefinition(String name) {
-		EList<StepDefinition> list = theStepObject.getStepDefinitions();
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getName().contentEquals(name)) {
 				list.remove(i);
@@ -314,24 +260,12 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return convertStatementsToString(stepDefinitionSrc.getStatements());
 	}
 
-	public EList<StepDefinition> getStepDefinitionList() {
-		return theStepObject.getStepDefinitions();
-	}
-
 	public String getStepDefinitionName(StepDefinition stepDefinitionSrc) {
 		return stepDefinitionSrc.getName();
 	}
 
 	public EList<Step> getStepList(AbstractScenario abstractScenario) {
 		return abstractScenario.getSteps();
-	}
-
-	public String getStepObjectDescription() {
-		return convertStatementsToString(theStepObject.getStatements());
-	}
-
-	public String getStepObjectName() {
-		return theStepObject.getName();
 	}
 
 	public EList<StepParameters> getStepParametersList(StepDefinition stepDefinitionSrc) {
@@ -402,14 +336,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		return abstractScenario instanceof Background;
 	}
 
-	private boolean isStepDef() {
-		if (thePath.startsWith("src/test/resources/asciidoc/stepdefs/")) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	@Override
 	public void parse(String text) throws Exception {
 		try {
@@ -420,12 +346,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 			Resource resource = new ResourceSetImpl().createResource(uri);
 			InputStream content = new ByteArrayInputStream(text.getBytes(StandardCharsets.UTF_8));
 			resource.load(content, Collections.EMPTY_MAP);
-			Object o = resource.getContents().get(0);
-			if (o instanceof Feature) {
-				theFeature = (Feature) resource.getContents().get(0);
-			} else {
-				theStepObject = (StepObject) resource.getContents().get(0);
-			}
+			theFeature = (Feature) resource.getContents().get(0);
 		} catch (Exception e) {
 			throw new Exception("There was a problem parsing file: " + thePath);
 		}
@@ -435,13 +356,11 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		setDescription(background, backgroundDescription);
 	}
 
-	// TODO duplicate of setFeatureDescription?
 	private void setDescription(AbstractScenario abstractScenario, String scenarioDescription) {
 		if (!scenarioDescription.isEmpty()) {
+			abstractScenario.getStatements().clear();
 			for (String line : scenarioDescription.split("\n")) {
 				Statement statement = SheepDogFactory.eINSTANCE.createStatement();
-				// TODO test what happens if there's multiple \n, don't assume there's just one.
-				// Then create the EOL like Given is created
 				statement.setName(line);
 				abstractScenario.getStatements().add(statement);
 			}
@@ -491,22 +410,6 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 		}
 	}
 
-	public void setStepObjectDescription(String stepObjectDescription) {
-		if (!stepObjectDescription.isEmpty()) {
-			theStepObject.getStatements().clear();
-			for (String line : stepObjectDescription.split("\n")) {
-				Statement statement = SheepDogFactory.eINSTANCE.createStatement();
-				statement.setName(line);
-				theStepObject.getStatements().add(statement);
-			}
-		}
-	}
-
-	public void setStepObjectName(String stepObjectName) {
-		theStepObject.setName(stepObjectName);
-	}
-
-	// TODO perhaps duplicate of setFeatureTags?
 	private void setTags(AbstractScenario scenario, ArrayList<String> tags) {
 		if (tags.isEmpty()) {
 			return;
@@ -523,11 +426,7 @@ public class AsciiDoctorAdocWrapper implements ConvertibleObject {
 	public String toString() {
 		URI uri = URI.createFileURI(thePath);
 		Resource resource = new ResourceSetImpl().createResource(uri);
-		if (theFeature != null) {
-			resource.getContents().add(theFeature);
-		} else {
-			resource.getContents().add(theStepObject);
-		}
+		resource.getContents().add(theFeature);
 		Map<Object, Object> options = SaveOptions.newBuilder().format().getOptions().toOptionsMap();
 		OutputStream os = new ByteArrayOutputStream();
 		try {

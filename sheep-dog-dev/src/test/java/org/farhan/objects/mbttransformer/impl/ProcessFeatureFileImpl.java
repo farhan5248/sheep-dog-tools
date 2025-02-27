@@ -52,7 +52,7 @@ public class ProcessFeatureFileImpl extends FeatureFileObject implements Process
 
 	@Override
 	public void assertPresent(HashMap<String, String> keyMap) {
-		assertObjectExists();
+		assertFileExists();
 	}
 
 	@Override

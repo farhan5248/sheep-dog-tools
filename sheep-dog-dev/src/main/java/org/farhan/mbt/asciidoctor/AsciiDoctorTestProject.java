@@ -8,9 +8,9 @@ import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.ObjectRepository;
 
-public class AsciiDoctorProject extends ConvertibleProject {
+public class AsciiDoctorTestProject extends ConvertibleProject {
 
-	public AsciiDoctorProject(String tags, ObjectRepository fa) {
+	public AsciiDoctorTestProject(String tags, ObjectRepository fa) {
 		super(fa);
 		ConvertibleProject.tags = tags;
 	}
@@ -20,17 +20,18 @@ public class AsciiDoctorProject extends ConvertibleProject {
 
 		// TODO calculate an actual checksum
 		fa.put(tags, path, "sha checksum");
-		ConvertibleObject aConvertibleObject = getObject(path);
-		if (aConvertibleObject != null) {
-			return aConvertibleObject;
+		ConvertibleObject co = getObject(path);
+		if (co != null) {
+			return co;
 		} else {
-			aConvertibleObject = new AsciiDoctorAdocWrapper(path);
-			if (!path.startsWith(getDir(TEST_CASES))) {
-				secondLayerObjects.add(aConvertibleObject);
+			if (path.startsWith(getDir(TEST_STEPS))) {
+				co = new AsciiDoctorStepObject(path);
+				secondLayerObjects.add(co);
 			} else {
-				firstLayerObjects.add(aConvertibleObject);
+				co = new AsciiDoctorTestSuite(path);
+				firstLayerObjects.add(co);
 			}
-			return aConvertibleObject;
+			return co;
 		}
 	}
 
@@ -55,6 +56,7 @@ public class AsciiDoctorProject extends ConvertibleProject {
 
 	@Override
 	public ArrayList<ConvertibleObject> getObjects(String layer) {
+		// TODO nothing uses this so return null?
 		ArrayList<ConvertibleObject> layerFiles = null;
 		switch (layer) {
 		case TEST_CASES:

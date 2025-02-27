@@ -6,7 +6,7 @@ public abstract class Converter {
 
 	protected String tags = "";
 	protected ConvertibleProject project;
-	protected TestProject model;
+	protected TestProject testProject;
 	protected ObjectRepository fa;
 	protected Logger log;
 
@@ -24,7 +24,8 @@ public abstract class Converter {
 
 	public ArrayList<String> getFileNames() throws Exception {
 		// TODO this is temp hack until I figure out how to manage the objects, the
-		// project files and model better
+		// project files and model better. This only applies to converters that
+		// transform the model into files
 		return null;
 	}
 

@@ -16,13 +16,13 @@ import org.farhan.mbt.core.TestProject;
 import org.farhan.mbt.core.Converter;
 import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Logger;
-import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
+import org.farhan.mbt.cucumber.CucumberFeature;
 import org.farhan.mbt.cucumber.CucumberPathConverter;
-import org.farhan.mbt.cucumber.CucumberProject;
+import org.farhan.mbt.cucumber.CucumberTestProject;
 
 public class ConvertCucumberToUML extends Converter {
 
-	private CucumberFeatureWrapper srcObj;
+	private CucumberFeature srcObj;
 	private TestSuite tgtObj;
 	protected CucumberPathConverter pathConverter;
 
@@ -70,14 +70,14 @@ public class ConvertCucumberToUML extends Converter {
 	public String convertFile(String path, String content) throws Exception {
 		log.debug("test suite: " + path);
 		initProjects();
-		srcObj = (CucumberFeatureWrapper) project.addObject(path);
+		srcObj = (CucumberFeature) project.addObject(path);
 		srcObj.parse(content);
 		if (isFileSelected(srcObj, tags)) {
-			tgtObj = (TestSuite) model.addObject(pathConverter.createUMLPath(path));
+			tgtObj = (TestSuite) testProject.addTestSuite(pathConverter.convertUMLPath(path));
 			tgtObj.setFeatureName(srcObj.getFeatureName());
 			tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
 			convertAbstractScenarioList();
-			model.save();
+			testProject.save();
 		} else {
 			project.deleteObject(srcObj);
 		}
@@ -133,18 +133,18 @@ public class ConvertCucumberToUML extends Converter {
 	}
 
 	public void initProjects() throws Exception {
-		project = new CucumberProject(this.tags, this.fa);
-		model = new TestProject(this.tags, this.fa);
+		project = new CucumberTestProject(this.tags, this.fa);
+		testProject = new TestProject(this.tags, this.fa);
 		project.init();
-		model.init();
-		this.pathConverter = new CucumberPathConverter(model, (CucumberProject) project);
+		testProject.init();
+		this.pathConverter = new CucumberPathConverter(testProject, (CucumberTestProject) project);
 	}
 
 	// TODO abstract away the Feature/Adoc specific stuff, perhaps make a SourceFile
 	// interfaces with Test case etc
 	private boolean isFileSelected(ConvertibleObject convertibleFile, String tag) throws Exception {
 
-		CucumberFeatureWrapper ufw = (CucumberFeatureWrapper) convertibleFile;
+		CucumberFeature ufw = (CucumberFeature) convertibleFile;
 		if (isTagged(ufw.getFeatureTags(), tag)) {
 			return true;
 		}

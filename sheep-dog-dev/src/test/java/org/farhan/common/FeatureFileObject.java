@@ -8,12 +8,12 @@ import org.farhan.mbt.cucumber.Examples;
 import org.farhan.mbt.cucumber.Row;
 import org.farhan.mbt.cucumber.Scenario;
 import org.farhan.mbt.cucumber.Step;
-import org.farhan.mbt.cucumber.CucumberFeatureWrapper;
+import org.farhan.mbt.cucumber.CucumberFeature;
 import org.junit.jupiter.api.Assertions;
 
 public class FeatureFileObject extends FileObject {
 
-	private CucumberFeatureWrapper wrapper;
+	private CucumberFeature wrapper;
 
 	private String listAsCsv(ArrayList<String> list) {
 		String csv = "";
@@ -64,10 +64,10 @@ public class FeatureFileObject extends FileObject {
 		Assertions.assertEquals(tags, listAsCsv(wrapper.getFeatureTags()));
 	}
 
-	protected void assertObjectExists() {
-		super.assertObjectExists();
+	protected void assertFileExists() {
+		super.assertFileExists();
 		try {
-			wrapper = new CucumberFeatureWrapper(attributes.get("path"));
+			wrapper = new CucumberFeature(attributes.get("path"));
 			wrapper.parse(sr.get(attributes.get("path")));
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));

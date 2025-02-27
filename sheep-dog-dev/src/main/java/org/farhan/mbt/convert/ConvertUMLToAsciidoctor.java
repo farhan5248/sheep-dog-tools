@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
-import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
+import org.farhan.mbt.asciidoctor.AsciiDoctorTestSuite;
 import org.farhan.mbt.asciidoctor.AsciiDoctorPathConverter;
-import org.farhan.mbt.asciidoctor.AsciiDoctorProject;
+import org.farhan.mbt.asciidoctor.AsciiDoctorTestProject;
+import org.farhan.mbt.asciidoctor.AsciiDoctorStepObject;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.TestSuite;
 import org.farhan.mbt.core.TestProject;
@@ -25,7 +26,8 @@ import org.farhan.mbt.core.Logger;
 public class ConvertUMLToAsciidoctor extends Converter {
 
 	private TestSuite srcObj;
-	private AsciiDoctorAdocWrapper tgtObj;
+	private AsciiDoctorTestSuite tgtObj;
+	private AsciiDoctorStepObject tgtObj2;
 	protected AsciiDoctorPathConverter pathConverter;
 
 	public ConvertUMLToAsciidoctor(String tags, ObjectRepository fa, Logger log) {
@@ -70,8 +72,8 @@ public class ConvertUMLToAsciidoctor extends Converter {
 	}
 
 	private String convertFeature(String tags, String path, String content) throws Exception {
-		srcObj = (TestSuite) model.addObject(pathConverter.findUMLPath(path));
-		tgtObj = (AsciiDoctorAdocWrapper) project.addObject(path);
+		srcObj = (TestSuite) testProject.getObject(pathConverter.findUMLPath(path));
+		tgtObj = (AsciiDoctorTestSuite) project.addObject(path);
 		tgtObj.parse(content);
 		tgtObj.setFeatureName(srcObj.getFeatureName());
 		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
@@ -121,14 +123,13 @@ public class ConvertUMLToAsciidoctor extends Converter {
 	}
 
 	private void convertStepDefinition(Interaction stepDefinitionSrc) throws Exception {
-		StepDefinition stepDefinition = tgtObj.createStepDefinition(srcObj.getStepDefinitionName(stepDefinitionSrc));
-		tgtObj.setStepDefinitionDescription(stepDefinition, srcObj.getStepDefinitionDescription(stepDefinitionSrc));
+		StepDefinition stepDefinition = tgtObj2.createStepDefinition(srcObj.getStepDefinitionName(stepDefinitionSrc));
+		tgtObj2.setStepDefinitionDescription(stepDefinition, srcObj.getStepDefinitionDescription(stepDefinitionSrc));
 
 		ArrayList<EAnnotation> parametersList = srcObj.getStepDefinitionParameterList(stepDefinitionSrc);
 		for (EAnnotation parameters : parametersList) {
 			convertStepParameters(stepDefinition, parameters);
 		}
-
 	}
 
 	private void convertStepDefinitionList() throws Exception {
@@ -146,27 +147,27 @@ public class ConvertUMLToAsciidoctor extends Converter {
 	}
 
 	private String convertStepObject(String tags, String path, String content) throws Exception {
-		srcObj = (TestSuite) model.addObject(pathConverter.findUMLPath(path));
-		tgtObj = (AsciiDoctorAdocWrapper) project.addObject(path);
-		tgtObj.parse(content);
-		tgtObj.setStepObjectName(srcObj.getStepObjectName());
-		tgtObj.setStepObjectDescription(srcObj.getStepObjectDescription());
+		srcObj = (TestSuite) testProject.getObject(pathConverter.findUMLPath(path));
+		tgtObj2 = (AsciiDoctorStepObject) project.addObject(path);
+		tgtObj2.parse(content);
+		tgtObj2.setStepObjectName(srcObj.getStepObjectName());
+		tgtObj2.setStepObjectDescription(srcObj.getStepObjectDescription());
 		convertStepDefinitionList();
-		return tgtObj.toString();
+		return tgtObj2.toString();
 	}
 
 	private void convertStepParameters(StepDefinition stepDefinition, EAnnotation parametersSrc) throws Exception {
 
-		StepParameters stepParameters = tgtObj.createStepParameters(stepDefinition,
+		StepParameters stepParameters = tgtObj2.createStepParameters(stepDefinition,
 				srcObj.getStepParametersName(parametersSrc));
-		tgtObj.createStepParametersTable(stepParameters, srcObj.getStepParametersTable(parametersSrc));
+		tgtObj2.createStepParametersTable(stepParameters, srcObj.getStepParametersTable(parametersSrc));
 		for (ArrayList<String> stepParametersRow : srcObj.getStepParametersRowList(parametersSrc)) {
 			convertStepParametersRow(stepParameters, stepParametersRow);
 		}
 	}
 
 	private void convertStepParametersRow(StepParameters stepParameters, ArrayList<String> stepParametersRow) {
-		tgtObj.createStepParametersRow(stepParameters, stepParametersRow);
+		tgtObj2.createStepParametersRow(stepParameters, stepParametersRow);
 	}
 
 	private void convertStepTable(Step step, Message stepSrc) {
@@ -176,20 +177,20 @@ public class ConvertUMLToAsciidoctor extends Converter {
 	public ArrayList<String> getFileNames() throws Exception {
 		initProjects();
 		ArrayList<String> objects = new ArrayList<String>();
-		for (ConvertibleObject co : model.getObjects(model.TEST_CASES)) {
-			objects.add(pathConverter.convertFilePath(co.getPath(), model.TEST_CASES));
+		for (ConvertibleObject co : testProject.getObjects(testProject.TEST_CASES)) {
+			objects.add(pathConverter.convertFilePath(co.getPath(), testProject.TEST_CASES));
 		}
-		for (ConvertibleObject co : model.getObjects(model.TEST_STEPS)) {
-			objects.add(pathConverter.convertFilePath(co.getPath(), model.TEST_STEPS));
+		for (ConvertibleObject co : testProject.getObjects(testProject.TEST_STEPS)) {
+			objects.add(pathConverter.convertFilePath(co.getPath(), testProject.TEST_STEPS));
 		}
 		return objects;
 	}
 
 	public void initProjects() throws Exception {
-		model = new TestProject(this.tags, this.fa);
-		model.init();
-		project = new AsciiDoctorProject(this.tags, this.fa);
+		testProject = new TestProject(this.tags, this.fa);
+		testProject.init();
+		project = new AsciiDoctorTestProject(this.tags, this.fa);
 		project.init();
-		this.pathConverter = new AsciiDoctorPathConverter(model, (AsciiDoctorProject) project);
+		this.pathConverter = new AsciiDoctorPathConverter(testProject, (AsciiDoctorTestProject) project);
 	}
 }

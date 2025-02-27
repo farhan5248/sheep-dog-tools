@@ -1,7 +1,9 @@
 package org.farhan.common;
 
 import java.util.ArrayList;
-import org.farhan.mbt.asciidoctor.AsciiDoctorAdocWrapper;
+
+import org.farhan.mbt.asciidoctor.AsciiDoctorStepObject;
+import org.farhan.mbt.asciidoctor.AsciiDoctorTestSuite;
 import org.farhan.mbt.sheepDog.AbstractScenario;
 import org.farhan.mbt.sheepDog.Cell;
 import org.farhan.mbt.sheepDog.Examples;
@@ -13,10 +15,11 @@ import org.junit.jupiter.api.Assertions;
 
 public class AdocFileObject extends FileObject {
 
-	private AsciiDoctorAdocWrapper wrapper;
+	private AsciiDoctorTestSuite testSuite;
+	private AsciiDoctorStepObject stepObject;
 
 	protected void assertAbstractScenarioDescription(String name, String description) {
-		Assertions.assertEquals(description, wrapper.getScenarioDescription(getAbstractScenario(name)));
+		Assertions.assertEquals(description, testSuite.getScenarioDescription(getAbstractScenario(name)));
 	}
 
 	protected void assertAbstractScenarioExists(String name) {
@@ -30,25 +33,25 @@ public class AdocFileObject extends FileObject {
 
 	protected void assertAbstractScenarioTags(String name, String tags) {
 		AbstractScenario abstractScenario = getAbstractScenario(name);
-		Assertions.assertEquals(tags, Utilities.listAsCsv(wrapper.getAbstractScenarioTags(abstractScenario)));
+		Assertions.assertEquals(tags, Utilities.listAsCsv(testSuite.getAbstractScenarioTags(abstractScenario)));
 	}
 
 	protected void assertDocString(String name, String stepName, String content) {
 		assertAbstractScenarioExists(name);
 		assertStepExists(name, stepName);
-		Assertions.assertEquals(content, wrapper.getDocString(getStep(name, stepName)));
+		Assertions.assertEquals(content, testSuite.getDocString(getStep(name, stepName)));
 	}
 
 	protected void assertFeatureName(String name) {
-		Assertions.assertEquals(name, wrapper.getFeatureName());
+		Assertions.assertEquals(name, testSuite.getFeatureName());
 	}
 
 	protected void assertFeatureStatements(String name, String statements) {
-		Assertions.assertEquals(statements, wrapper.getFeatureDescription());
+		Assertions.assertEquals(statements, testSuite.getFeatureDescription());
 	}
 
 	protected void deleteObject() {
-		super.assertObjectExists();
+		super.assertFileExists();
 		try {
 			sr.delete(attributes.get("path"));
 		} catch (Exception e) {
@@ -56,11 +59,21 @@ public class AdocFileObject extends FileObject {
 		}
 	}
 
-	protected void assertObjectExists() {
-		super.assertObjectExists();
+	protected void assertTestSuiteExists() {
+		super.assertFileExists();
 		try {
-			wrapper = new AsciiDoctorAdocWrapper(attributes.get("path"));
-			wrapper.parse(sr.get(attributes.get("path")));
+			testSuite = new AsciiDoctorTestSuite(attributes.get("path"));
+			testSuite.parse(sr.get(attributes.get("path")));
+		} catch (Exception e) {
+			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
+		}
+	}
+
+	protected void assertStepObjectExists() {
+		super.assertFileExists();
+		try {
+			stepObject = new AsciiDoctorStepObject(attributes.get("path"));
+			stepObject.parse(sr.get(attributes.get("path")));
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
 		}
@@ -78,7 +91,7 @@ public class AdocFileObject extends FileObject {
 	}
 
 	protected void assertStepDefinitionDescription(String name, String description) {
-		Assertions.assertEquals(description, wrapper.getStepDefinitionDescription(getStepDefinition(name)));
+		Assertions.assertEquals(description, stepObject.getStepDefinitionDescription(getStepDefinition(name)));
 	}
 
 	protected void assertStepDefinitionExists(String name) {
@@ -102,16 +115,16 @@ public class AdocFileObject extends FileObject {
 	}
 
 	protected void assertStepObjectName(String name) {
-		Assertions.assertEquals(name, wrapper.getStepObjectName());
+		Assertions.assertEquals(name, stepObject.getStepObjectName());
 	}
 
 	protected void assertStepObjectStatements(String name, String statements) {
-		Assertions.assertEquals(statements, wrapper.getStepObjectDescription());
+		Assertions.assertEquals(statements, stepObject.getStepObjectDescription());
 	}
 
 	private AbstractScenario getAbstractScenario(String name) {
-		for (AbstractScenario s : wrapper.getAbstractScenarioList()) {
-			if (wrapper.getScenarioName(s).contentEquals(name)) {
+		for (AbstractScenario s : testSuite.getAbstractScenarioList()) {
+			if (testSuite.getScenarioName(s).contentEquals(name)) {
 				return s;
 			}
 		}
@@ -119,8 +132,8 @@ public class AdocFileObject extends FileObject {
 	}
 
 	private Examples getExamples(String name, String examplesName) {
-		for (Examples e : wrapper.getExamplesList(getAbstractScenario(name))) {
-			if (wrapper.getExamplesName(e).contentEquals(examplesName)) {
+		for (Examples e : testSuite.getExamplesList(getAbstractScenario(name))) {
+			if (testSuite.getExamplesName(e).contentEquals(examplesName)) {
 				return e;
 			}
 		}
@@ -128,12 +141,12 @@ public class AdocFileObject extends FileObject {
 	}
 
 	private ArrayList<String> getExamplesRow(Examples examples, String rowName) {
-		return getRow(wrapper.getExamplesRowList(examples), wrapper.getExamplesTable(examples), rowName);
+		return getRow(testSuite.getExamplesRowList(examples), testSuite.getExamplesTable(examples), rowName);
 	}
 
 	private StepParameters getParameters(String name, String parametersName) {
-		for (StepParameters e : wrapper.getStepParametersList(getStepDefinition(name))) {
-			if (wrapper.getStepParametersName(e).contentEquals(parametersName)) {
+		for (StepParameters e : stepObject.getStepParametersList(getStepDefinition(name))) {
+			if (stepObject.getStepParametersName(e).contentEquals(parametersName)) {
 				return e;
 			}
 		}
@@ -141,7 +154,7 @@ public class AdocFileObject extends FileObject {
 	}
 
 	private ArrayList<String> getParametersRow(StepParameters parameters, String rowName) {
-		return getRow(wrapper.getStepParametersRowList(parameters), wrapper.getStepParametersTable(parameters),
+		return getRow(stepObject.getStepParametersRowList(parameters), stepObject.getStepParametersTable(parameters),
 				rowName);
 	}
 
@@ -174,7 +187,7 @@ public class AdocFileObject extends FileObject {
 
 	private ArrayList<String> getRow(Step step, String csvRow) {
 		csvRow = csvRow.replaceAll(" +", " ");
-		for (ArrayList<String> row : wrapper.getStepTable(step)) {
+		for (ArrayList<String> row : testSuite.getStepTable(step)) {
 			// convert it to csv
 			String rowCsv = "";
 			for (String cell : row) {
@@ -190,8 +203,8 @@ public class AdocFileObject extends FileObject {
 	}
 
 	private Step getStep(String name, String stepName) {
-		for (Step s : wrapper.getStepList(getAbstractScenario(name))) {
-			if (wrapper.getStep(s).contentEquals(stepName)) {
+		for (Step s : testSuite.getStepList(getAbstractScenario(name))) {
+			if (testSuite.getStep(s).contentEquals(stepName)) {
 				return s;
 			}
 		}
@@ -199,8 +212,8 @@ public class AdocFileObject extends FileObject {
 	}
 
 	private StepDefinition getStepDefinition(String name) {
-		for (StepDefinition s : wrapper.getStepDefinitionList()) {
-			if (wrapper.getStepDefinitionName(s).contentEquals(name)) {
+		for (StepDefinition s : stepObject.getStepDefinitionList()) {
+			if (stepObject.getStepDefinitionName(s).contentEquals(name)) {
 				return s;
 			}
 		}

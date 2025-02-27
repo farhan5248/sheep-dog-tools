@@ -19,13 +19,14 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.Statement;
 
-public class CucumberJavaWrapper implements ConvertibleObject {
+public class CucumberClassAndInterface implements ConvertibleObject {
 
+	// TODO split this into CucumberClass and CucumberInterface
 	protected static String lastComponent = "InitialComponent";
 	protected String thePath;
 	protected CompilationUnit theJavaClass;
 
-	public CucumberJavaWrapper(String thePath) {
+	public CucumberClassAndInterface(String thePath) {
 		this.thePath = thePath;
 		// TODO if the contents are parsed in, then this might create duplication. So
 		// move this out or check if these elements exist

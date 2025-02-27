@@ -17,9 +17,10 @@ import org.eclipse.uml2.uml.ValueSpecification;
 
 public class TestSuite implements ConvertibleObject {
 
+	// TODO split ClassWrapper into StepObject and TestSuite
 	private Class theClass;
 
-	public TestSuite(TestProject umlProject, Class theClass) {
+	public TestSuite(Class theClass) {
 		this.theClass = theClass;
 	}
 
@@ -361,10 +362,6 @@ public class TestSuite implements ConvertibleObject {
 			stepList.add(m);
 		}
 		return stepList;
-	}
-
-	public String getStepName(Message step) {
-		return step.getName();
 	}
 
 	public String getStepNameLong(Message srcStep) {

@@ -7,9 +7,9 @@ import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.ConvertibleProject;
 import org.farhan.mbt.core.ObjectRepository;
 
-public class CucumberProject extends ConvertibleProject {
+public class CucumberTestProject extends ConvertibleProject {
 
-	public CucumberProject(String tags, ObjectRepository fa) {
+	public CucumberTestProject(String tags, ObjectRepository fa) {
 		super(fa);
 		ConvertibleProject.tags = tags;
 	}
@@ -31,7 +31,7 @@ public class CucumberProject extends ConvertibleProject {
 					thirdLayerObjects.add(aConvertibleObject);
 				}
 			} else {
-				aConvertibleObject = new CucumberFeatureWrapper(path);
+				aConvertibleObject = new CucumberFeature(path);
 				firstLayerObjects.add(aConvertibleObject);
 			}
 			return aConvertibleObject;
@@ -39,7 +39,7 @@ public class CucumberProject extends ConvertibleProject {
 	}
 
 	protected ConvertibleObject createJavaWrapper(String path) {
-		return new CucumberJavaWrapper(path);
+		return new CucumberClassAndInterface(path);
 	}
 
 	@Override

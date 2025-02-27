@@ -19,12 +19,12 @@ import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.mbt.core.ConvertibleObject;
 
-public class CucumberFeatureWrapper implements ConvertibleObject {
+public class CucumberFeature implements ConvertibleObject {
 
 	private Feature theFeature;
 	private String thePath;
 
-	public CucumberFeatureWrapper(String thePath) {
+	public CucumberFeature(String thePath) {
 		this.thePath = thePath;
 		theFeature = CucumberFactory.eINSTANCE.createFeature();
 		{

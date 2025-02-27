@@ -4,8 +4,8 @@ import org.farhan.mbt.core.Logger;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.TestProject;
 import org.farhan.mbt.cucumber.CucumberPathConverter;
-import org.farhan.mbt.cucumber.CucumberProject;
-import org.farhan.mbt.cucumber.CucumberSpringProject;
+import org.farhan.mbt.cucumber.CucumberTestProject;
+import org.farhan.mbt.cucumber.CucumberSpringTestProject;
 
 public class ConvertUMLToCucumberSpring extends ConvertUMLToCucumber {
 
@@ -14,11 +14,11 @@ public class ConvertUMLToCucumberSpring extends ConvertUMLToCucumber {
 	}
 
 	public void initProjects() throws Exception {
-		model = new TestProject(this.tags, this.fa);
-		project = new CucumberSpringProject(this.tags, this.fa);
-		model.init();
+		testProject = new TestProject(this.tags, this.fa);
+		project = new CucumberSpringTestProject(this.tags, this.fa);
+		testProject.init();
 		project.init();
-		this.pathConverter = new CucumberPathConverter(model, (CucumberProject) project);
+		this.pathConverter = new CucumberPathConverter(testProject, (CucumberTestProject) project);
 	}
 
 }

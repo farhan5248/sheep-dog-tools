@@ -6,7 +6,7 @@ public abstract class FileObject extends TestObject {
 
 	protected SourceRepository sr = new SourceRepository();
 
-	protected void assertObjectExists() {
+	protected void assertFileExists() {
 		try {
 			Assertions.assertTrue(sr.contains(attributes.get("path")),
 					"The file (" + attributes.get("path") + ") isn't present");

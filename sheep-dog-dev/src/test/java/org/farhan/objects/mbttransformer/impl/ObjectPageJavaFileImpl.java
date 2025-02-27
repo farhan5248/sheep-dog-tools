@@ -58,7 +58,7 @@ public class ObjectPageJavaFileImpl extends JavaFileObject
 
 	@Override
 	public void assertPresent(HashMap<String, String> keyMap) {
-		assertObjectExists();
+		assertFileExists();
 	}
 
 	public void setContent(HashMap<String, String> keyMap) {

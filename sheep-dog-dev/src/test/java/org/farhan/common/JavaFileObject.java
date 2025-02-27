@@ -1,6 +1,6 @@
 package org.farhan.common;
 
-import org.farhan.mbt.cucumber.CucumberJavaWrapper;
+import org.farhan.mbt.cucumber.CucumberClassAndInterface;
 import org.junit.jupiter.api.Assertions;
 
 import com.github.javaparser.ast.CompilationUnit;
@@ -12,7 +12,7 @@ import com.github.javaparser.ast.stmt.Statement;
 
 public class JavaFileObject extends FileObject {
 
-	private CucumberJavaWrapper wrapper;
+	private CucumberClassAndInterface wrapper;
 
 	protected void assertImportExists(String importName) {
 		Assertions.assertTrue(getImport(importName) != null, "Import " + importName + " doesn't exist");
@@ -90,10 +90,10 @@ public class JavaFileObject extends FileObject {
 		Assertions.assertTrue(getStatement(methodName, statement) != null, "Statement " + statement + " doesn't exist");
 	}
 
-	protected void assertObjectExists() {
-		super.assertObjectExists();
+	protected void assertFileExists() {
+		super.assertFileExists();
 		try {
-			wrapper = new CucumberJavaWrapper(attributes.get("path"));
+			wrapper = new CucumberClassAndInterface(attributes.get("path"));
 			wrapper.parse(sr.get(attributes.get("path")));
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));

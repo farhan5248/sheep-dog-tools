@@ -6,9 +6,9 @@ import org.farhan.mbt.core.TestProject;
 public class AsciiDoctorPathConverter {
 
 	private TestProject model;
-	private AsciiDoctorProject project;
+	private AsciiDoctorTestProject project;
 
-	public AsciiDoctorPathConverter(TestProject model, AsciiDoctorProject project) {
+	public AsciiDoctorPathConverter(TestProject model, AsciiDoctorTestProject project) {
 		this.model = model;
 		this.project = project;
 	}
