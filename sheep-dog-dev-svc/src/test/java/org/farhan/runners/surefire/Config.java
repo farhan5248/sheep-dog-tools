@@ -30,7 +30,6 @@ public class Config {
 
 	@Before
 	public void before() {
-		// TODO delete the database table contents before running
 		deleteDir(new File("target/src-gen/"));
 	}
 }

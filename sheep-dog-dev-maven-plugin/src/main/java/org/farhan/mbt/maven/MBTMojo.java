@@ -51,21 +51,21 @@ public abstract class MBTMojo extends AbstractMojo {
 					.newInstance(tags, or, new LoggerImpl(getLog()));
 
 			if (mojo.getClass().getName().endsWith("ToUML")) {
-				mojo.clearObjects();
+				mojo.clearProjects();
 				ArrayList<String> tempFiles = new ArrayList<String>();
 				for (String fileName : sr.list(dir, "")) {
 					if (fileName.startsWith(dir + "stepdefs")) {
 						tempFiles.add(fileName);
 					} else {
-						mojo.convertObject(fileName, sr.get(fileName));
+						mojo.convertFile(fileName, sr.get(fileName));
 					}
 				}
 				for (String fileName : tempFiles) {
-					mojo.convertObject(fileName, sr.get(fileName));
+					mojo.convertFile(fileName, sr.get(fileName));
 				}
 			} else {
-				for (String fileName : mojo.getObjectNames()) {
-					String content = mojo.convertObject(fileName, sr.contains(fileName) ? sr.get(fileName) : "");
+				for (String fileName : mojo.getFileNames()) {
+					String content = mojo.convertFile(fileName, sr.contains(fileName) ? sr.get(fileName) : "");
 					if (!content.isEmpty()) {
 						sr.put(fileName, content);
 					}

@@ -18,7 +18,20 @@
 		<connection>scm:git:https://github.com/farhan5248/sheep-dog-tools</connection>
 		<tag>sheep-dog-dev-maven-plugin-1.0</tag>
 	</scm>
-
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>github</id>
+			<url>https://maven.pkg.github.com/farhan5248/sheep-dog-tools</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	
 	<repositories>
 		<repository>
 			<id>github</id>

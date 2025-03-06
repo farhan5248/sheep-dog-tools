@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public abstract class ConvertibleProject {
 
 	protected ObjectRepository fa;
-	public static String tags = "";
+	public String tags = "";
 	// TODO replace TEST_STEPS with OBJECT_STEPS and create OBJECT_FIELDS
 	// TODO maybe move these into an enumeration constant
 	public final String TEST_CASES = "specs";
@@ -16,11 +16,12 @@ public abstract class ConvertibleProject {
 	protected ArrayList<ConvertibleObject> secondLayerObjects;
 	protected ArrayList<ConvertibleObject> thirdLayerObjects;
 
-	public ConvertibleProject(ObjectRepository fa) {
+	public ConvertibleProject(String tags, ObjectRepository fa) {
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
 		secondLayerObjects = new ArrayList<ConvertibleObject>();
 		thirdLayerObjects = new ArrayList<ConvertibleObject>();
 		this.fa = fa;
+		this.tags = tags;
 	}
 
 	public abstract ConvertibleObject addObject(String path) throws Exception;

@@ -11,8 +11,7 @@ import org.farhan.mbt.core.ObjectRepository;
 public class AsciiDoctorTestProject extends ConvertibleProject {
 
 	public AsciiDoctorTestProject(String tags, ObjectRepository fa) {
-		super(fa);
-		ConvertibleProject.tags = tags;
+		super(tags, fa);
 	}
 
 	@Override

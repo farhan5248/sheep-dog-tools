@@ -64,7 +64,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 
 	private ModelTransformerResponse clearObjects(Converter mojo) {
 		try {
-			mojo.clearObjects();
+			mojo.clearProjects();
 		} catch (Exception e) {
 			logger.error(getStackTraceAsString(e));
 		}
@@ -74,7 +74,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 	private ModelTransformerResponse convertObject(Converter mojo, String fileName, String contents) {
 		try {
 			return new ModelTransformerResponse(fileName,
-					mojo.convertObject(fileName, contents == null ? "" : contents));
+					mojo.convertFile(fileName, contents == null ? "" : contents));
 		} catch (Exception e) {
 			logger.error(getStackTraceAsString(e));
 		}
@@ -128,7 +128,7 @@ public class ModelTransformerController implements ApplicationListener<Applicati
 			// TODO this is temp, there should be a separate class like the ObjectRepository
 			// if not the object repo itself. For a given tag, it should keep track of the
 			// source files and output files checksums
-			for (String fileName : (mojo).getObjectNames()) {
+			for (String fileName : (mojo).getFileNames()) {
 				// TODO append to a string list for now but later make a proper JSON object
 				fileList += "\n" + fileName;
 			}

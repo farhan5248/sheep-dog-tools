@@ -27,12 +27,6 @@
 === Parameters: 2
 
 |===
-| Name | Tags | Statements
-|===
-
-=== Parameters: 3
-
-|===
 | Name | Statements
 |===
 

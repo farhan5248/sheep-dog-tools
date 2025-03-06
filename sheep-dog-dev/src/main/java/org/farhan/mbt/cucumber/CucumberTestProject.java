@@ -10,8 +10,7 @@ import org.farhan.mbt.core.ObjectRepository;
 public class CucumberTestProject extends ConvertibleProject {
 
 	public CucumberTestProject(String tags, ObjectRepository fa) {
-		super(fa);
-		ConvertibleProject.tags = tags;
+		super(tags, fa);
 	}
 
 	@Override

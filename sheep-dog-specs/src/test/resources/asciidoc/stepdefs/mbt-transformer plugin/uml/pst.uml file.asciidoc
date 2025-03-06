@@ -1,16 +1,12 @@
 = Object: uml/pst.uml file
 
-== Definition: Class Annotations section will be created as follows
-
-=== Parameters: 1
-
-|===
-| Class Name | Annotation Name | Annotation Detail
-|===
-
 == Definition: Class Comments section will be created as follows
 
+The UML class comments are mapped to the Javadoc sections or cucumber Feature descriptions
+
 === Parameters: 1
+
+Specify the comment and the class to which it belong
 
 |===
 | Class Name | Comment

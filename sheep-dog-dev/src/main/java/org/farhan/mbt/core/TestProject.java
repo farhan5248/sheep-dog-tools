@@ -26,7 +26,7 @@ import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 public class TestProject {
 
 	protected ObjectRepository fa;
-	public static String tags = "";
+	public String tags = "";
 	public final String TEST_CASES = "specs";
 	public final String TEST_STEPS = "stepdefs";
 	private Model theModel;
@@ -37,11 +37,11 @@ public class TestProject {
 		firstLayerObjects = new ArrayList<ConvertibleObject>();
 		secondLayerObjects = new ArrayList<ConvertibleObject>();
 		this.fa = fa;
+		this.tags = tags;
 		theModel = UMLFactory.eINSTANCE.createModel();
 		theModel.setName("pst");
 		theModel.createNestedPackage(TEST_CASES);
 		theModel.createNestedPackage(TEST_STEPS);
-		ConvertibleProject.tags = tags;
 	}
 
 	public String getDir() {
