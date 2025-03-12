@@ -27,7 +27,6 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	private static ArrayList<String> stepObjects = new ArrayList<String>();
 	protected AsciiDoctorPathConverter pathConverter;
-
 	// TODO Don't save tgt/src objects as attributes, pass them along to each
 	// method. Do this when moving to the Test* or Step* classes
 	private AsciiDoctorTestSuite srcObjTestSuite;
@@ -38,8 +37,9 @@ public class ConvertAsciidoctorToUML extends Converter {
 		super(tags, fa, log);
 	}
 
+	@Override
 	public void clearProjects() throws Exception {
-		fa.clear(tags);
+		fa.clear(tag);
 		stepObjects.clear();
 	}
 
@@ -56,16 +56,18 @@ public class ConvertAsciidoctorToUML extends Converter {
 			if (isStepObjectSelected()) {
 				convertStepObject();
 				testProject.save();
+			} else {
+				srcProject.deleteObject(srcObjStepObject);
 			}
-			srcProject.deleteObject(srcObjStepObject);
 		} else {
 			srcObjTestSuite = (AsciiDoctorTestSuite) srcProject.addObject(path);
 			srcObjTestSuite.parse(content);
 			if (isTestSuiteSelected()) {
 				convertTestSuite();
 				testProject.save();
+			} else {
+				srcProject.deleteObject(srcObjTestSuite);
 			}
-			srcProject.deleteObject(srcObjTestSuite);
 		}
 		return "";
 	}
@@ -171,9 +173,9 @@ public class ConvertAsciidoctorToUML extends Converter {
 	}
 
 	public void initProjects() throws Exception {
-		srcProject = new AsciiDoctorTestProject(this.tags, this.fa);
+		srcProject = new AsciiDoctorTestProject(this.tag, this.fa);
+		testProject = new TestProject(this.tag, this.fa);
 		srcProject.init();
-		testProject = new TestProject(this.tags, this.fa);
 		testProject.init();
 		pathConverter = new AsciiDoctorPathConverter(testProject, (AsciiDoctorTestProject) srcProject);
 	}
@@ -188,11 +190,11 @@ public class ConvertAsciidoctorToUML extends Converter {
 	}
 
 	private boolean isTestSuiteSelected() throws Exception {
-		boolean selected = tags.isEmpty();
+		boolean selected = tag.isEmpty();
 		if (!selected) {
 			for (AbstractScenario a : srcObjTestSuite.getAbstractScenarioList()) {
 				for (String t : srcObjTestSuite.getAbstractScenarioTags(a)) {
-					if (t.trim().contentEquals(tags)) {
+					if (t.trim().contentEquals(tag)) {
 						return true;
 					}
 				}

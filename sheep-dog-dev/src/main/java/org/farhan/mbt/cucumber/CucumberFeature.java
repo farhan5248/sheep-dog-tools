@@ -254,11 +254,8 @@ public class CucumberFeature implements ConvertibleObject {
 		return getTags(scenario.getTags());
 	}
 
-	public String getStep(Step step) {
-		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) step.eAdapters().getFirst();
-		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
-		String keywordString = rc.getRule().getName();
-		return keywordString + " " + step.getName();
+	public String getStepName(Step step) {
+		return getStepKeyword(step) + " " + step.getName();
 	}
 
 	public EList<Step> getStepList(AbstractScenario abstractScenario) {
@@ -393,7 +390,14 @@ public class CucumberFeature implements ConvertibleObject {
 	}
 
 	public String getStepNameLong(Step stepSrc) {
-		return getStep(stepSrc);
+		return getStepName(stepSrc);
+	}
+
+	public String getStepKeyword(Step step) {
+		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) step.eAdapters().getFirst();
+		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
+		String keywordString = rc.getRule().getName();
+		return keywordString;
 	}
 
 }

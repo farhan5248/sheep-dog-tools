@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public abstract class Converter {
 
-	protected String tags = "";
+	protected String tag = "";
 	protected ConvertibleProject srcProject;
 	protected TestProject testProject;
 	protected ObjectRepository fa;
 	protected Logger log;
 
 	public Converter(String tags, ObjectRepository fa, Logger log) {
-		this.tags = tags;
+		this.tag = tags;
 		this.fa = fa;
 		this.log = log;
 	}
@@ -19,7 +19,7 @@ public abstract class Converter {
 	public abstract void initProjects() throws Exception;
 
 	public void clearProjects() throws Exception {
-		fa.clear(tags);
+		fa.clear(tag);
 	}
 
 	public ArrayList<String> getFileNames() throws Exception {

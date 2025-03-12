@@ -66,11 +66,9 @@ public class TestSuite implements ConvertibleObject {
 	}
 
 	public Message addStep(Interaction abstractScenario, String stepName) {
+
 		String keyword = stepName.split(" ")[0];
 		Message step = abstractScenario.createMessage(stepName.substring(keyword.length() + 1));
-		// TODO delete annotation setting after cuke to uml refactoring
-		createAnnotation(step, "Step", "Keyword", keyword);
-		createAnnotation(step, "Step", "LongName", keyword);
 		return step;
 	}
 
@@ -476,10 +474,17 @@ public class TestSuite implements ConvertibleObject {
 	}
 
 	public void setStepKeyword(Message step, String keyword) {
+		if (!keyword.endsWith(":")) {
+			keyword += ":";
+		}
 		createAnnotation(step, "Step", "Keyword", keyword);
 	}
 
 	public void setStepNameLong(Message step, String stepNameLong) {
+		String keyword = stepNameLong.split(" ")[0];
+		if (!keyword.endsWith(":")) {
+			stepNameLong = stepNameLong.replaceFirst("^" + keyword, keyword + ":");
+		}
 		createAnnotation(step, "Step", "LongName", stepNameLong);
 	}
 

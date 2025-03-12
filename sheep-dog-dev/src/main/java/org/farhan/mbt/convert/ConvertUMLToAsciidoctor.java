@@ -86,10 +86,10 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		initProjects();
 		if (path.startsWith(srcProject.getDir(srcProject.TEST_STEPS))) {
 			log.debug("step object: " + path);
-			return convertStepObject(tags, path, content);
+			return convertStepObject(tag, path, content);
 		} else {
 			log.debug("test suite: " + path);
-			return convertFeature(tags, path, content);
+			return convertFeature(tag, path, content);
 		}
 	}
 
@@ -187,9 +187,9 @@ public class ConvertUMLToAsciidoctor extends Converter {
 	}
 
 	public void initProjects() throws Exception {
-		testProject = new TestProject(this.tags, this.fa);
+		testProject = new TestProject(this.tag, this.fa);
 		testProject.init();
-		srcProject = new AsciiDoctorTestProject(this.tags, this.fa);
+		srcProject = new AsciiDoctorTestProject(this.tag, this.fa);
 		srcProject.init();
 		this.pathConverter = new AsciiDoctorPathConverter(testProject, (AsciiDoctorTestProject) srcProject);
 	}

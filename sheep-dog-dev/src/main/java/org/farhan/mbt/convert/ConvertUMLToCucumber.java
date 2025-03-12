@@ -88,13 +88,13 @@ public class ConvertUMLToCucumber extends Converter {
 		initProjects();
 		if (path.startsWith(srcProject.getDir(srcProject.TEST_CASES))) {
 			log.debug("test suite: " + path);
-			return convertFeature(tags, path, content);
+			return convertFeature(tag, path, content);
 		} else if (path.startsWith(srcProject.getDir(srcProject.TEST_STEPS))) {
 			log.debug("step object: " + path);
-			return convertObjectSteps(tags, path, content);
+			return convertObjectSteps(tag, path, content);
 		} else {
 			log.debug("step object: " + path);
-			return convertObjectFields(tags, path, content);
+			return convertObjectFields(tag, path, content);
 		}
 	}
 
@@ -187,8 +187,8 @@ public class ConvertUMLToCucumber extends Converter {
 	}
 
 	public void initProjects() throws Exception {
-		testProject = new TestProject(this.tags, this.fa);
-		srcProject = new CucumberTestProject(this.tags, this.fa);
+		testProject = new TestProject(this.tag, this.fa);
+		srcProject = new CucumberTestProject(this.tag, this.fa);
 		testProject.init();
 		srcProject.init();
 		this.pathConverter = new CucumberPathConverter(testProject, (CucumberTestProject) srcProject);

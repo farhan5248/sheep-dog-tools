@@ -145,7 +145,7 @@ public class FeatureFileObject extends FileObject {
 
 	private Step getStep(String name, String stepName) {
 		for (Step s : wrapper.getStepList(getAbstractScenario(name))) {
-			if (wrapper.getStep(s).contentEquals(stepName)) {
+			if (wrapper.getStepName(s).contentEquals(stepName)) {
 				return s;
 			}
 		}

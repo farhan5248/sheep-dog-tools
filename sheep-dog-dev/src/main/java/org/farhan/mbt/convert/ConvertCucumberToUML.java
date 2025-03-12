@@ -1,20 +1,18 @@
 package org.farhan.mbt.convert;
 
-import java.util.ArrayList;
-
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 import org.farhan.mbt.cucumber.AbstractScenario;
 import org.farhan.mbt.cucumber.Examples;
 import org.farhan.mbt.cucumber.Row;
+import org.farhan.mbt.cucumber.Scenario;
+import org.farhan.mbt.cucumber.ScenarioOutline;
 import org.farhan.mbt.cucumber.Step;
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.TestSuite;
 import org.farhan.mbt.core.TestProject;
 import org.farhan.mbt.core.Converter;
-import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Logger;
 import org.farhan.mbt.cucumber.CucumberFeature;
 import org.farhan.mbt.cucumber.CucumberPathConverter;
@@ -22,152 +20,143 @@ import org.farhan.mbt.cucumber.CucumberTestProject;
 
 public class ConvertCucumberToUML extends Converter {
 
-	private CucumberFeature srcObj;
-	private TestSuite tgtObj;
 	protected CucumberPathConverter pathConverter;
+	private CucumberFeature srcObjTestSuite;
+	private TestSuite tgtObj;
 
 	public ConvertCucumberToUML(String tags, ObjectRepository fa, Logger log) {
 		super(tags, fa, log);
 	}
 
-	protected void convertAbstractScenarioList() throws Exception {
-		for (AbstractScenario abstractScenario : srcObj.getAbstractScenarioList()) {
-			log.debug("test case: " + abstractScenario.getName());
-			if (srcObj.isBackground(abstractScenario)) {
-				convertBackground(abstractScenario);
-			} else if (srcObj.isScenarioOutline(abstractScenario)) {
-				convertScenarioOutline(abstractScenario);
-			} else {
-				convertScenario(abstractScenario);
-			}
-		}
-	}
-
-	private void convertBackground(AbstractScenario abstractScenario) {
-		Interaction background = tgtObj.addBackground(srcObj.getBackgroundName(abstractScenario));
-		tgtObj.setBackgroundTags(background, srcObj.getFeatureTags());
-		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
-		convertStepList(background, srcObj.getStepList(abstractScenario), abstractScenario);
-	}
-
-	private void convertDocString(Message step, Step stepSrc) {
-		tgtObj.setDocString(step, srcObj.getDocString(stepSrc));
-	}
-
-	private void convertExamples(Interaction scenarioOutline, Examples examplesSrc) {
-		EAnnotation examples = tgtObj.addExamples(scenarioOutline, srcObj.getExamplesName(examplesSrc));
-		tgtObj.setExamplesTable(examples, srcObj.getExamplesTable(examplesSrc));
-		for (Row examplesRow : srcObj.getExamplesRowList(examplesSrc)) {
-			convertExamplesRow(examples, srcObj.getExamplesRow(examplesSrc, examplesRow));
-		}
-	}
-
-	private void convertExamplesRow(EAnnotation examples, ArrayList<String> examplesRow) {
-		tgtObj.addExamplesRow(examples, examplesRow);
-	}
-
 	@Override
 	public String convertFile(String path, String content) throws Exception {
-		log.debug("test suite: " + path);
 		initProjects();
-		srcObj = (CucumberFeature) srcProject.addObject(path);
-		srcObj.parse(content);
-		if (isFileSelected(srcObj, tags)) {
-			tgtObj = (TestSuite) testProject.addTestSuite(pathConverter.convertUMLPath(path));
-			tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
-			convertAbstractScenarioList();
+		srcObjTestSuite = (CucumberFeature) srcProject.addObject(path);
+		srcObjTestSuite.parse(content);
+		if (isTestSuiteSelected()) {
+			convertTestSuite();
 			testProject.save();
 		} else {
-			srcProject.deleteObject(srcObj);
+			srcProject.deleteObject(srcObjTestSuite);
 		}
 		return "";
 	}
 
-	private void convertScenario(AbstractScenario abstractScenario) {
-		Interaction scenario = tgtObj.addScenario(srcObj.getScenarioName(abstractScenario));
-		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(abstractScenario));
-		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(abstractScenario));
-		convertStepList(scenario, srcObj.getStepList(abstractScenario), abstractScenario);
+	private void convertStepData(Message step, Step srcStep, AbstractScenario srcAbstractScenario) {
+		tgtObj.setStepTable(step, srcObjTestSuite.getStepTable(srcStep));
 	}
 
-	private void convertScenarioOutline(AbstractScenario abstractScenario) {
-		Interaction scenarioOutline = tgtObj.addScenarioOutline(srcObj.getScenarioOutlineName(abstractScenario));
-		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
-		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
-		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario), abstractScenario);
+	private void convertStepText(Message step, Step srcStep) {
+		tgtObj.setDocString(step, srcObjTestSuite.getDocString(srcStep));
+	}
 
-		EList<Examples> examplesList = srcObj.getExamplesList(abstractScenario);
-		for (Examples examples : examplesList) {
-			convertExamples(scenarioOutline, examples);
+	private void convertTestCase(AbstractScenario srcAbstractScenario) {
+		log.debug("test case: " + srcAbstractScenario.getName());
+		Interaction scenario = tgtObj.addScenario(srcObjTestSuite.getScenarioName(srcAbstractScenario));
+		tgtObj.setScenarioTags(scenario, srcObjTestSuite.getScenarioTags(srcAbstractScenario));
+		tgtObj.setScenarioDescription(scenario, srcObjTestSuite.getScenarioDescription(srcAbstractScenario));
+		for (Step srcStep : srcObjTestSuite.getStepList(srcAbstractScenario)) {
+			convertTestStep(scenario, srcStep, srcAbstractScenario);
 		}
 	}
 
-	private void convertStep(Interaction abstractScenario, Step stepSrc, AbstractScenario abstractScenarioSrc) {
-		Message step = tgtObj.addStep(abstractScenario, convertStepKeyword(srcObj.getStep(stepSrc)));
-		tgtObj.setStepNameLong(step, convertStepKeyword(srcObj.getStepNameLong(stepSrc)));
-
-		if (srcObj.hasDocString(stepSrc)) {
-			convertDocString(step, stepSrc);
-		} else if (srcObj.hasStepTable(stepSrc)) {
-			convertStepTable(step, stepSrc, abstractScenarioSrc);
+	private void convertTestCaseWithTestData(AbstractScenario srcAbstractScenario) {
+		log.debug("test case: " + srcAbstractScenario.getName());
+		Interaction scenarioOutline = tgtObj
+				.addScenarioOutline(srcObjTestSuite.getScenarioOutlineName(srcAbstractScenario));
+		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObjTestSuite.getScenarioOutlineTags(srcAbstractScenario));
+		tgtObj.setScenarioOutlineDescription(scenarioOutline,
+				srcObjTestSuite.getScenarioOutlineDescription(srcAbstractScenario));
+		for (Step srcStep : srcObjTestSuite.getStepList(srcAbstractScenario)) {
+			convertTestStep(scenarioOutline, srcStep, srcAbstractScenario);
+		}
+		for (Examples srcExamples : srcObjTestSuite.getExamplesList(srcAbstractScenario)) {
+			convertTestData(scenarioOutline, srcExamples);
 		}
 	}
 
-	private String convertStepKeyword(String step) {
-		String keyword = step.split(" ")[0];
-		return step.replaceFirst("^" + keyword, keyword + ":");
-	}
-
-	private void convertStepList(Interaction abstractScenario, EList<Step> stepList,
-			AbstractScenario abstractScenarioSrc) {
-		for (Step step : stepList) {
-			log.debug("test step: " + step.getName());
-			convertStep(abstractScenario, step, abstractScenarioSrc);
+	private void convertTestData(Interaction scenarioOutline, Examples srcExamples) {
+		log.debug("test data: " + srcExamples.getName());
+		EAnnotation examples = tgtObj.addExamples(scenarioOutline, srcObjTestSuite.getExamplesName(srcExamples));
+		// TODO add examples description
+		tgtObj.setExamplesTable(examples, srcObjTestSuite.getExamplesTable(srcExamples));
+		for (Row row : srcObjTestSuite.getExamplesRowList(srcExamples)) {
+			tgtObj.addExamplesRow(examples, srcObjTestSuite.getExamplesRow(srcExamples, row));
 		}
 	}
 
-	private void convertStepTable(Message step, Step stepSrc, AbstractScenario abstractScenarioSrc) {
-		tgtObj.setStepTable(step, srcObj.getStepTable(stepSrc));
+	private void convertTestSetup(AbstractScenario srcAbstractScenario) {
+		log.debug("test setup: " + srcAbstractScenario.getName());
+		Interaction background = tgtObj.addBackground(srcObjTestSuite.getBackgroundName(srcAbstractScenario));
+		tgtObj.setBackgroundTags(background, srcObjTestSuite.getFeatureTags());
+		tgtObj.setBackgroundDescription(background, srcObjTestSuite.getBackgroundDescription(srcAbstractScenario));
+		for (Step srcStep : srcObjTestSuite.getStepList(srcAbstractScenario)) {
+			convertTestStep(background, srcStep, srcAbstractScenario);
+		}
+	}
+
+	private void convertTestStep(Interaction abstractScenario, Step srcStep, AbstractScenario srcAbstractScenario) {
+		log.debug("test step: " + srcStep.getName());
+		Message step = tgtObj.addStep(abstractScenario, srcObjTestSuite.getStepName(srcStep));
+		tgtObj.setStepKeyword(step, srcObjTestSuite.getStepKeyword(srcStep));
+		tgtObj.setStepNameLong(step, srcObjTestSuite.getStepNameLong(srcStep));
+
+		if (srcObjTestSuite.hasDocString(srcStep)) {
+			convertStepText(step, srcStep);
+		} else if (srcObjTestSuite.hasStepTable(srcStep)) {
+			convertStepData(step, srcStep, srcAbstractScenario);
+		}
+	}
+
+	private void convertTestSuite() {
+		log.debug("test suite: " + srcObjTestSuite.getPath());
+		tgtObj = (TestSuite) testProject.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
+		tgtObj.setFeatureDescription(srcObjTestSuite.getFeatureDescription());
+		for (AbstractScenario as : srcObjTestSuite.getAbstractScenarioList()) {
+			if (srcObjTestSuite.isBackground(as)) {
+				convertTestSetup(as);
+			} else if (srcObjTestSuite.isScenarioOutline(as)) {
+				convertTestCaseWithTestData(as);
+			} else {
+				convertTestCase(as);
+			}
+		}
 	}
 
 	public void initProjects() throws Exception {
-		srcProject = new CucumberTestProject(this.tags, this.fa);
-		testProject = new TestProject(this.tags, this.fa);
+		srcProject = new CucumberTestProject(this.tag, this.fa);
+		testProject = new TestProject(this.tag, this.fa);
 		srcProject.init();
 		testProject.init();
 		this.pathConverter = new CucumberPathConverter(testProject, (CucumberTestProject) srcProject);
 	}
 
-	// TODO abstract away the Feature/Adoc specific stuff, perhaps make a SourceFile
-	// interfaces with Test case etc
-	private boolean isFileSelected(ConvertibleObject convertibleFile, String tag) throws Exception {
-
-		CucumberFeature ufw = (CucumberFeature) convertibleFile;
-		if (isTagged(ufw.getFeatureTags(), tag)) {
-			return true;
-		}
-		for (AbstractScenario a : ufw.getAbstractScenarioList()) {
-			if (ufw.isScenarioOutline(a)) {
-				if (isTagged(ufw.getScenarioOutlineTags(a), tag)) {
-					return true;
-				}
-			} else if (!ufw.isBackground(a)) {
-				if (isTagged(ufw.getScenarioTags(a), tag)) {
+	private boolean isTestSuiteSelected() throws Exception {
+		boolean selected = tag.isEmpty();
+		if (!selected) {
+			for (String t : srcObjTestSuite.getFeatureTags()) {
+				if (t.trim().contentEquals(tag)) {
 					return true;
 				}
 			}
-		}
-		return false;
-	}
-
-	private boolean isTagged(ArrayList<String> tags, String tag) {
-		if (tag.isEmpty()) {
-			return true;
-		}
-		for (String t : tags) {
-			if (t.trim().contentEquals(tag)) {
-				return true;
+			for (AbstractScenario a : srcObjTestSuite.getAbstractScenarioList()) {
+				if (a instanceof Scenario) {
+					for (String t : srcObjTestSuite.getScenarioTags(a)) {
+						if (t.trim().contentEquals(tag)) {
+							return true;
+						}
+					}
+				}
+				if (a instanceof ScenarioOutline) {
+					for (String t : srcObjTestSuite.getScenarioOutlineTags(a)) {
+						if (t.trim().contentEquals(tag)) {
+							return true;
+						}
+					}
+				}
 			}
+		} else {
+			return true;
 		}
 		return false;
 	}
