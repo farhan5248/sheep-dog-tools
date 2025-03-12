@@ -8,7 +8,7 @@ Feature: Code To Code
     Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
           """
           @tag2 @tag3
-          Feature: This is a feature
+          Feature: Process
           
             Background: Setup
           
@@ -51,7 +51,7 @@ Feature: Code To Code
      Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be created as follows
           """
           @tag2 @tag3
-          Feature: This is a feature
+          Feature: Process
           
             Background: Setup
           

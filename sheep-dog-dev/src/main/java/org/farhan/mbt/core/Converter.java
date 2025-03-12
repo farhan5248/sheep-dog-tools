@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public abstract class Converter {
 
 	protected String tags = "";
-	protected ConvertibleProject project;
+	protected ConvertibleProject srcProject;
 	protected TestProject testProject;
 	protected ObjectRepository fa;
 	protected Logger log;

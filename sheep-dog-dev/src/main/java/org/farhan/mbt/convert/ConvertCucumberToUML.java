@@ -51,12 +51,12 @@ public class ConvertCucumberToUML extends Converter {
 	}
 
 	private void convertDocString(Message step, Step stepSrc) {
-		tgtObj.addDocString(step, srcObj.getDocString(stepSrc));
+		tgtObj.setDocString(step, srcObj.getDocString(stepSrc));
 	}
 
 	private void convertExamples(Interaction scenarioOutline, Examples examplesSrc) {
 		EAnnotation examples = tgtObj.addExamples(scenarioOutline, srcObj.getExamplesName(examplesSrc));
-		tgtObj.addExamplesTable(examples, srcObj.getExamplesTable(examplesSrc));
+		tgtObj.setExamplesTable(examples, srcObj.getExamplesTable(examplesSrc));
 		for (Row examplesRow : srcObj.getExamplesRowList(examplesSrc)) {
 			convertExamplesRow(examples, srcObj.getExamplesRow(examplesSrc, examplesRow));
 		}
@@ -70,16 +70,15 @@ public class ConvertCucumberToUML extends Converter {
 	public String convertFile(String path, String content) throws Exception {
 		log.debug("test suite: " + path);
 		initProjects();
-		srcObj = (CucumberFeature) project.addObject(path);
+		srcObj = (CucumberFeature) srcProject.addObject(path);
 		srcObj.parse(content);
 		if (isFileSelected(srcObj, tags)) {
 			tgtObj = (TestSuite) testProject.addTestSuite(pathConverter.convertUMLPath(path));
-			tgtObj.setFeatureName(srcObj.getFeatureName());
 			tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
 			convertAbstractScenarioList();
 			testProject.save();
 		} else {
-			project.deleteObject(srcObj);
+			srcProject.deleteObject(srcObj);
 		}
 		return "";
 	}
@@ -116,7 +115,6 @@ public class ConvertCucumberToUML extends Converter {
 
 	private String convertStepKeyword(String step) {
 		String keyword = step.split(" ")[0];
-		step.replace(keyword, keyword + ":");
 		return step.replaceFirst("^" + keyword, keyword + ":");
 	}
 
@@ -129,15 +127,15 @@ public class ConvertCucumberToUML extends Converter {
 	}
 
 	private void convertStepTable(Message step, Step stepSrc, AbstractScenario abstractScenarioSrc) {
-		tgtObj.addStepTable(step, srcObj.getStepTable(stepSrc));
+		tgtObj.setStepTable(step, srcObj.getStepTable(stepSrc));
 	}
 
 	public void initProjects() throws Exception {
-		project = new CucumberTestProject(this.tags, this.fa);
+		srcProject = new CucumberTestProject(this.tags, this.fa);
 		testProject = new TestProject(this.tags, this.fa);
-		project.init();
+		srcProject.init();
 		testProject.init();
-		this.pathConverter = new CucumberPathConverter(testProject, (CucumberTestProject) project);
+		this.pathConverter = new CucumberPathConverter(testProject, (CucumberTestProject) srcProject);
 	}
 
 	// TODO abstract away the Feature/Adoc specific stuff, perhaps make a SourceFile

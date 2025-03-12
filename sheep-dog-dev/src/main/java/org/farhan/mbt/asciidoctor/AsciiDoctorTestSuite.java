@@ -249,11 +249,8 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		return abstractScenario.getName();
 	}
 
-	public String getStep(Step step) {
-		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) step.eAdapters().getFirst();
-		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
-		String keywordString = rc.getRule().getName();
-		return keywordString + ": " + step.getName();
+	public String getStepName(Step step) {
+		return getStepKeyword(step) + " " + step.getName();
 	}
 
 	public String getStepDefinitionDescription(StepDefinition stepDefinitionSrc) {
@@ -448,15 +445,18 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		return "The " + component + ", " + object + " " + stepDefinitionSrc.getName();
 	}
 
-	public String getStepNameLong(Step stepSrc) {
-		String stepObjectNameLong = StepDefinitionHelper.getStepObjectQualifiedName(new LanguageAccessImpl(stepSrc));
+	public String getStepNameLong(Step step) {
+		String stepObjectNameLong = StepDefinitionHelper.getStepObjectQualifiedName(new LanguageAccessImpl(step));
 		String component = stepObjectNameLong.split("/")[0];
 		String object = stepObjectNameLong.replaceFirst("^" + component + "/", "").replaceFirst(".asciidoc$", "");
-		String stepNameLong = "The " + component + ", " + object + " " + StepHelper.getPredicate(stepSrc.getName());
-		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) stepSrc.eAdapters().getFirst();
+		String stepNameLong = "The " + component + ", " + object + " " + StepHelper.getPredicate(step.getName());
+		return getStepKeyword(step) + " " + stepNameLong;
+	}
+
+	public String getStepKeyword(Step step) {
+		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) step.eAdapters().getFirst();
 		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
-		String keywordString = rc.getRule().getName();
-		return keywordString + ": " + stepNameLong;
+		return rc.getRule().getName() + ":";
 	}
 
 }

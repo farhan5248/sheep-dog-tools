@@ -24,6 +24,91 @@ public class TestSuite implements ConvertibleObject {
 		this.theClass = theClass;
 	}
 
+	private Interaction addAbstractScenario(Class theClass, String interactionName, String annotationName) {
+		Interaction anInteraction = (Interaction) theClass.getOwnedBehavior(interactionName);
+		if (anInteraction == null) {
+			anInteraction = UMLFactory.eINSTANCE.createInteraction();
+			anInteraction.setName(interactionName);
+			theClass.setClassifierBehavior(anInteraction);
+		}
+		if (!annotationName.isEmpty()) {
+			createAnnotation(anInteraction, annotationName);
+		}
+		return anInteraction;
+	}
+
+	public Interaction addBackground(String name) {
+		Interaction scenario = addAbstractScenario(theClass, name, "");
+		createAnnotation(scenario, "background");
+		return scenario;
+	}
+
+	public EAnnotation addExamples(Interaction scenarioOutline, String name) {
+		return createAnnotation(scenarioOutline, name);
+	}
+
+	public void addExamplesRow(EAnnotation examples, ArrayList<String> examplesRow) {
+		String value = "";
+		for (String e : examplesRow) {
+			value += e + "|";
+		}
+		examples.getDetails().put(String.valueOf(examples.getDetails().size()), value);
+	}
+
+	public Interaction addScenario(String name) {
+		Interaction scenario = addAbstractScenario(theClass, name, "");
+		return scenario;
+	}
+
+	public Interaction addScenarioOutline(String name) {
+		Interaction scenario = addAbstractScenario(theClass, name, "");
+		return scenario;
+	}
+
+	public Message addStep(Interaction abstractScenario, String stepName) {
+		String keyword = stepName.split(" ")[0];
+		Message step = abstractScenario.createMessage(stepName.substring(keyword.length() + 1));
+		// TODO delete annotation setting after cuke to uml refactoring
+		createAnnotation(step, "Step", "Keyword", keyword);
+		createAnnotation(step, "Step", "LongName", keyword);
+		return step;
+	}
+
+	public Interaction addStepDefinition(String stepName) {
+		Interaction stepDefinition = addAbstractScenario(theClass, stepName, "");
+		// TODO make tests for this by doing adoc(unsorted) uml adoc (sorted)
+		TreeMap<String, Interaction> sorted = new TreeMap<String, Interaction>();
+		EList<Behavior> behaviors = theClass.getOwnedBehaviors();
+		for (int i = behaviors.size(); i > 0; i--) {
+			sorted.put(behaviors.get(i - 1).getName(), (Interaction) behaviors.get(i - 1));
+			behaviors.removeLast();
+		}
+		for (String name : sorted.keySet()) {
+			behaviors.add(sorted.get(name));
+		}
+		return stepDefinition;
+	}
+
+	public EAnnotation addStepParameters(Interaction stepDefinition, String name) {
+		return createAnnotation(stepDefinition, name);
+	}
+
+	public void addStepParametersRow(EAnnotation stepParameters, ArrayList<String> stepParametersRow) {
+		String value = "";
+		for (String e : stepParametersRow) {
+			value += e + "|";
+		}
+		stepParameters.getDetails().put(String.valueOf(stepParameters.getDetails().size()), value);
+	}
+
+	public void addStepParametersTable(EAnnotation stepParameters, ArrayList<String> headers) {
+		String value = "";
+		for (String e : headers) {
+			value += e + "|";
+		}
+		stepParameters.getDetails().put("0", value);
+	}
+
 	private EAnnotation createAnnotation(Class className, String name, String key) {
 		EAnnotation a = className.getEAnnotation(name);
 		if (a == null) {
@@ -76,125 +161,6 @@ public class TestSuite implements ConvertibleObject {
 			ls.setValue(value);
 		}
 		return ls;
-	}
-
-	public Interaction addBackground(String name) {
-		Interaction scenario = addAbstractScenario(theClass, name, "");
-		createAnnotation(scenario, "background");
-		return scenario;
-	}
-
-	public void addDocString(Message step, String content) {
-		ValueSpecification vs = createArgument(step, "docString", "");
-		String[] lines = content.split("\n");
-		for (int i = 0; i < lines.length; i++) {
-			createAnnotation(vs, "docString", String.valueOf(i), lines[i]);
-		}
-	}
-
-	public EAnnotation addExamples(Interaction scenarioOutline, String name) {
-		return createAnnotation(scenarioOutline, name);
-	}
-
-	public void addExamplesRow(EAnnotation examples, ArrayList<String> examplesRow) {
-		String value = "";
-		for (String e : examplesRow) {
-			value += e + "|";
-		}
-		examples.getDetails().put(String.valueOf(examples.getDetails().size()), value);
-	}
-
-	public void addExamplesTable(EAnnotation examples, ArrayList<String> headers) {
-		String value = "";
-		for (String e : headers) {
-			value += e + "|";
-		}
-		examples.getDetails().put("0", value);
-	}
-
-	private Interaction addAbstractScenario(Class theClass, String interactionName, String annotationName) {
-		Interaction anInteraction = (Interaction) theClass.getOwnedBehavior(interactionName);
-		if (anInteraction == null) {
-			anInteraction = UMLFactory.eINSTANCE.createInteraction();
-			anInteraction.setName(interactionName);
-			theClass.setClassifierBehavior(anInteraction);
-		}
-		if (!annotationName.isEmpty()) {
-			createAnnotation(anInteraction, annotationName);
-		}
-		return anInteraction;
-	}
-
-	public Interaction addScenario(String name) {
-		Interaction scenario = addAbstractScenario(theClass, name, "");
-		return scenario;
-	}
-
-	public Interaction addScenarioOutline(String name) {
-		Interaction scenario = addAbstractScenario(theClass, name, "");
-		return scenario;
-	}
-
-	public Message addStep(Interaction abstractScenario, String stepName) {
-		String keyword = stepName.split(" ")[0];
-		Message step = abstractScenario.createMessage(stepName.substring(keyword.length() + 1));
-		createAnnotation(step, "Step", "Keyword", keyword);
-		createAnnotation(step, "Step", "LongName", keyword);
-		return step;
-	}
-
-	public Interaction addStepDefinition(String stepName) {
-		Interaction stepDefinition = addAbstractScenario(theClass, stepName, "");
-		// TODO make tests for this by doing adoc(unsorted) uml adoc (sorted)
-		TreeMap<String, Interaction> sorted = new TreeMap<String, Interaction>();
-		EList<Behavior> behaviors = theClass.getOwnedBehaviors();
-		for (int i = behaviors.size(); i > 0; i--) {
-			sorted.put(behaviors.get(i - 1).getName(), (Interaction) behaviors.get(i - 1));
-			behaviors.removeLast();
-		}
-		for (String name : sorted.keySet()) {
-			behaviors.add(sorted.get(name));
-		}
-		return stepDefinition;
-	}
-
-	public EAnnotation addStepParameters(Interaction stepDefinition, String name) {
-		return createAnnotation(stepDefinition, name);
-	}
-
-	public void addStepParametersRow(EAnnotation stepParameters, ArrayList<String> stepParametersRow) {
-		String value = "";
-		for (String e : stepParametersRow) {
-			value += e + "|";
-		}
-		stepParameters.getDetails().put(String.valueOf(stepParameters.getDetails().size()), value);
-	}
-
-	public void addStepParametersTable(EAnnotation stepParameters, ArrayList<String> headers) {
-		String value = "";
-		for (String e : headers) {
-			value += e + "|";
-		}
-		stepParameters.getDetails().put("0", value);
-	}
-
-	public void addStepTable(Message step, ArrayList<ArrayList<String>> stepTableRowList) {
-		ValueSpecification table = createArgument(step, "dataTable", "");
-		// header
-		String row = "";
-		for (int i = 0; i < stepTableRowList.get(0).size(); i++) {
-			row += stepTableRowList.get(0).get(i) + " |";
-		}
-		createAnnotation(table, "dataTable", String.valueOf(0), row);
-		// body
-		for (int i = 1; i < stepTableRowList.size(); i++) {
-			row = "";
-			ArrayList<String> bodyRow = stepTableRowList.get(i);
-			for (int j = 0; j < bodyRow.size(); j++) {
-				row += stepTableRowList.get(i).get(j).replace("{", "<").replace("}", ">") + " |";
-			}
-			createAnnotation(table, "dataTable", String.valueOf(i), row);
-		}
 	}
 
 	@Override
@@ -281,7 +247,7 @@ public class TestSuite implements ConvertibleObject {
 	}
 
 	public String getFeatureName() {
-		return theClass.getEAnnotations().getFirst().getDetails().get(0).getKey();
+		return theClass.getName();
 	}
 
 	@Override
@@ -465,12 +431,24 @@ public class TestSuite implements ConvertibleObject {
 		setTags(abstractScenario, tags);
 	}
 
-	public void setFeatureDescription(String description) {
-		theClass.createOwnedComment().setBody(description);
+	public void setDocString(Message step, String content) {
+		ValueSpecification vs = createArgument(step, "docString", "");
+		String[] lines = content.split("\n");
+		for (int i = 0; i < lines.length; i++) {
+			createAnnotation(vs, "docString", String.valueOf(i), lines[i]);
+		}
 	}
 
-	public void setFeatureName(String featureName) {
-		createAnnotation(theClass, "title", featureName);
+	public void setExamplesTable(EAnnotation examples, ArrayList<String> headers) {
+		String value = "";
+		for (String e : headers) {
+			value += e + "|";
+		}
+		examples.getDetails().put("0", value);
+	}
+
+	public void setFeatureDescription(String description) {
+		theClass.createOwnedComment().setBody(description);
 	}
 
 	public void setScenarioDescription(Interaction scenario, String scenarioDescription) {
@@ -497,6 +475,10 @@ public class TestSuite implements ConvertibleObject {
 		createAnnotation(stepDefinition, "StepDefinition", "LongName", stepDefinitionNameLong);
 	}
 
+	public void setStepKeyword(Message step, String keyword) {
+		createAnnotation(step, "Step", "Keyword", keyword);
+	}
+
 	public void setStepNameLong(Message step, String stepNameLong) {
 		createAnnotation(step, "Step", "LongName", stepNameLong);
 	}
@@ -507,6 +489,25 @@ public class TestSuite implements ConvertibleObject {
 
 	public void setStepObjectName(String StepObjectName) {
 		createAnnotation(theClass, "title", StepObjectName);
+	}
+
+	public void setStepTable(Message step, ArrayList<ArrayList<String>> stepTableRowList) {
+		ValueSpecification table = createArgument(step, "dataTable", "");
+		// header
+		String row = "";
+		for (int i = 0; i < stepTableRowList.get(0).size(); i++) {
+			row += stepTableRowList.get(0).get(i) + " |";
+		}
+		createAnnotation(table, "dataTable", String.valueOf(0), row);
+		// body
+		for (int i = 1; i < stepTableRowList.size(); i++) {
+			row = "";
+			ArrayList<String> bodyRow = stepTableRowList.get(i);
+			for (int j = 0; j < bodyRow.size(); j++) {
+				row += stepTableRowList.get(i).get(j).replace("{", "<").replace("}", ">") + " |";
+			}
+			createAnnotation(table, "dataTable", String.valueOf(i), row);
+		}
 	}
 
 	private void setTags(Interaction abstractScenario, ArrayList<String> tags) {

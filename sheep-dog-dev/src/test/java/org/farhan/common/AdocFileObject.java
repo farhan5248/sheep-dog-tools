@@ -204,7 +204,7 @@ public class AdocFileObject extends FileObject {
 
 	private Step getStep(String name, String stepName) {
 		for (Step s : testSuite.getStepList(getAbstractScenario(name))) {
-			if (testSuite.getStep(s).contentEquals(stepName)) {
+			if (testSuite.getStepName(s).contentEquals(stepName)) {
 				return s;
 			}
 		}

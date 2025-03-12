@@ -74,7 +74,7 @@ public class ConvertUMLToCucumber extends Converter {
 
 		srcObj = (TestSuite) testProject.getObject(pathConverter.findUMLPath(path));
 
-		tgtObj = (CucumberFeature) project.addObject(path);
+		tgtObj = (CucumberFeature) srcProject.addObject(path);
 		tgtObj.parse(content);
 
 		tgtObj.setFeatureName(srcObj.getFeatureName());
@@ -86,10 +86,10 @@ public class ConvertUMLToCucumber extends Converter {
 	@Override
 	public String convertFile(String path, String content) throws Exception {
 		initProjects();
-		if (path.startsWith(project.getDir(project.TEST_CASES))) {
+		if (path.startsWith(srcProject.getDir(srcProject.TEST_CASES))) {
 			log.debug("test suite: " + path);
 			return convertFeature(tags, path, content);
-		} else if (path.startsWith(project.getDir(project.TEST_STEPS))) {
+		} else if (path.startsWith(srcProject.getDir(srcProject.TEST_STEPS))) {
 			log.debug("step object: " + path);
 			return convertObjectSteps(tags, path, content);
 		} else {
@@ -101,7 +101,7 @@ public class ConvertUMLToCucumber extends Converter {
 	private String convertObjectFields(String tags, String path, String content) throws Exception {
 		srcObj = (TestSuite) testProject.getObject(pathConverter.findUMLPath(path));
 
-		tgtObj2 = (CucumberClassAndInterface) project.addObject(path);
+		tgtObj2 = (CucumberClassAndInterface) srcProject.addObject(path);
 		tgtObj2.parse(content);
 
 		convertStepDefinitionList();
@@ -111,7 +111,7 @@ public class ConvertUMLToCucumber extends Converter {
 	private String convertObjectSteps(String tags, String path, String content) throws Exception {
 		srcObj = (TestSuite) testProject.getObject(pathConverter.findUMLPath(path));
 
-		tgtObj2 = (CucumberClassAndInterface) project.addObject(path);
+		tgtObj2 = (CucumberClassAndInterface) srcProject.addObject(path);
 		tgtObj2.parse(content);
 
 		convertStepDefinitionList();
@@ -188,10 +188,10 @@ public class ConvertUMLToCucumber extends Converter {
 
 	public void initProjects() throws Exception {
 		testProject = new TestProject(this.tags, this.fa);
-		project = new CucumberTestProject(this.tags, this.fa);
+		srcProject = new CucumberTestProject(this.tags, this.fa);
 		testProject.init();
-		project.init();
-		this.pathConverter = new CucumberPathConverter(testProject, (CucumberTestProject) project);
+		srcProject.init();
+		this.pathConverter = new CucumberPathConverter(testProject, (CucumberTestProject) srcProject);
 	}
 
 	@Override
@@ -199,11 +199,11 @@ public class ConvertUMLToCucumber extends Converter {
 		initProjects();
 		ArrayList<String> objects = new ArrayList<String>();
 		for (ConvertibleObject co : testProject.getObjects(testProject.TEST_CASES)) {
-			objects.add(pathConverter.convertFilePath(co.getPath(), project.TEST_CASES));
+			objects.add(pathConverter.convertFilePath(co.getPath(), srcProject.TEST_CASES));
 		}
 		for (ConvertibleObject co : testProject.getObjects(testProject.TEST_STEPS)) {
-			objects.add(pathConverter.convertFilePath(co.getPath(), project.TEST_STEPS));
-			objects.add(pathConverter.convertFilePath(co.getPath(), project.TEST_OBJECTS));
+			objects.add(pathConverter.convertFilePath(co.getPath(), srcProject.TEST_STEPS));
+			objects.add(pathConverter.convertFilePath(co.getPath(), srcProject.TEST_OBJECTS));
 		}
 		return objects;
 	}

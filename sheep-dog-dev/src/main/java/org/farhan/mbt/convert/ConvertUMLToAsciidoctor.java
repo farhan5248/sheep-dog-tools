@@ -73,7 +73,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 
 	private String convertFeature(String tags, String path, String content) throws Exception {
 		srcObj = (TestSuite) testProject.getObject(pathConverter.findUMLPath(path));
-		tgtObj = (AsciiDoctorTestSuite) project.addObject(path);
+		tgtObj = (AsciiDoctorTestSuite) srcProject.addObject(path);
 		tgtObj.parse(content);
 		tgtObj.setFeatureName(srcObj.getFeatureName());
 		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
@@ -84,7 +84,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 	@Override
 	public String convertFile(String path, String content) throws Exception {
 		initProjects();
-		if (path.startsWith(project.getDir(project.TEST_STEPS))) {
+		if (path.startsWith(srcProject.getDir(srcProject.TEST_STEPS))) {
 			log.debug("step object: " + path);
 			return convertStepObject(tags, path, content);
 		} else {
@@ -148,7 +148,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 
 	private String convertStepObject(String tags, String path, String content) throws Exception {
 		srcObj = (TestSuite) testProject.getObject(pathConverter.findUMLPath(path));
-		tgtObj2 = (AsciiDoctorStepObject) project.addObject(path);
+		tgtObj2 = (AsciiDoctorStepObject) srcProject.addObject(path);
 		tgtObj2.parse(content);
 		tgtObj2.setStepObjectName(srcObj.getStepObjectName());
 		tgtObj2.setStepObjectDescription(srcObj.getStepObjectDescription());
@@ -189,8 +189,8 @@ public class ConvertUMLToAsciidoctor extends Converter {
 	public void initProjects() throws Exception {
 		testProject = new TestProject(this.tags, this.fa);
 		testProject.init();
-		project = new AsciiDoctorTestProject(this.tags, this.fa);
-		project.init();
-		this.pathConverter = new AsciiDoctorPathConverter(testProject, (AsciiDoctorTestProject) project);
+		srcProject = new AsciiDoctorTestProject(this.tags, this.fa);
+		srcProject.init();
+		this.pathConverter = new AsciiDoctorPathConverter(testProject, (AsciiDoctorTestProject) srcProject);
 	}
 }

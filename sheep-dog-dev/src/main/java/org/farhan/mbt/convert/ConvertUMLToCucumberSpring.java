@@ -15,10 +15,10 @@ public class ConvertUMLToCucumberSpring extends ConvertUMLToCucumber {
 
 	public void initProjects() throws Exception {
 		testProject = new TestProject(this.tags, this.fa);
-		project = new CucumberSpringTestProject(this.tags, this.fa);
+		srcProject = new CucumberSpringTestProject(this.tags, this.fa);
 		testProject.init();
-		project.init();
-		this.pathConverter = new CucumberPathConverter(testProject, (CucumberTestProject) project);
+		srcProject.init();
+		this.pathConverter = new CucumberPathConverter(testProject, (CucumberTestProject) srcProject);
 	}
 
 }
