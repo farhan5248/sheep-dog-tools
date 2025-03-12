@@ -49,25 +49,10 @@ public class ConvertAsciidoctorToUML extends Converter {
 		// service, then the client will call initObjects once and then call
 		// convertObject multiple times
 		initProjects();
-
-		if (path.startsWith(srcProject.getDir(srcProject.TEST_STEPS))) {
-			srcObjStepObject = (AsciiDoctorStepObject) srcProject.addObject(path);
-			srcObjStepObject.parse(content);
-			if (isStepObjectSelected()) {
-				convertStepObject();
-				testProject.save();
-			} else {
-				srcProject.deleteObject(srcObjStepObject);
-			}
+		if (path.startsWith(project.getDir(project.TEST_STEPS))) {
+			convertStepObject(path, content);
 		} else {
-			srcObjTestSuite = (AsciiDoctorTestSuite) srcProject.addObject(path);
-			srcObjTestSuite.parse(content);
-			if (isTestSuiteSelected()) {
-				convertTestSuite();
-				testProject.save();
-			} else {
-				srcProject.deleteObject(srcObjTestSuite);
-			}
+			convertTestSuite(path, content);
 		}
 		return "";
 	}
@@ -83,18 +68,25 @@ public class ConvertAsciidoctorToUML extends Converter {
 		tgtObj.setStepDefinitionNameLong(stepDefinition, srcObjStepObject.getStepDefinitionNameLong(srcStepDefinition));
 		tgtObj.setStepDefinitionDescription(stepDefinition,
 				srcObjStepObject.getStepDefinitionDescription(srcStepDefinition));
-		for (StepParameters stepParametersSrc : srcObjStepObject.getStepParametersList(srcStepDefinition)) {
-			convertStepParameters(stepDefinition, stepParametersSrc);
+		for (StepParameters sp : srcObjStepObject.getStepParametersList(srcStepDefinition)) {
+			convertStepParameters(stepDefinition, sp);
 		}
 	}
 
-	private void convertStepObject() throws Exception {
-		log.debug("step object: " + srcObjStepObject.getPath());
-		tgtObj = (TestSuite) testProject.addStepObject(pathConverter.convertUMLPath(srcObjStepObject.getPath()));
-		tgtObj.setStepObjectName(srcObjStepObject.getStepObjectName());
-		tgtObj.setStepObjectDescription(srcObjStepObject.getStepObjectDescription());
-		for (StepDefinition sd : srcObjStepObject.getStepDefinitionList()) {
-			convertStepDefinition(sd);
+	private void convertStepObject(String path, String content) throws Exception {
+		log.debug("step object: " + path);
+		srcObjStepObject = (AsciiDoctorStepObject) project.addObject(path);
+		srcObjStepObject.parse(content);
+		if (isStepObjectSelected()) {
+			tgtObj = (TestSuite) model.addStepObject(pathConverter.convertUMLPath(srcObjStepObject.getPath()));
+			tgtObj.setStepObjectName(srcObjStepObject.getStepObjectName());
+			tgtObj.setStepObjectDescription(srcObjStepObject.getStepObjectDescription());
+			for (StepDefinition sd : srcObjStepObject.getStepDefinitionList()) {
+				convertStepDefinition(sd);
+			}
+			model.save();
+		} else {
+			project.deleteObject(srcObjStepObject);
 		}
 	}
 
@@ -151,7 +143,6 @@ public class ConvertAsciidoctorToUML extends Converter {
 		Message step = tgtObj.addStep(abstractScenario, srcObjTestSuite.getStepName(srcStep));
 		tgtObj.setStepKeyword(step, srcObjTestSuite.getStepKeyword(srcStep));
 		tgtObj.setStepNameLong(step, srcObjTestSuite.getStepNameLong(srcStep));
-
 		if (srcObjTestSuite.hasDocString(srcStep)) {
 			convertStepText(step, srcStep);
 		} else if (srcObjTestSuite.hasStepTable(srcStep)) {
@@ -159,30 +150,37 @@ public class ConvertAsciidoctorToUML extends Converter {
 		}
 	}
 
-	private void convertTestSuite() throws Exception {
-		log.debug("test suite: " + srcObjTestSuite.getPath());
-		tgtObj = (TestSuite) testProject.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
-		tgtObj.setFeatureDescription(srcObjTestSuite.getFeatureDescription());
-		for (AbstractScenario as : srcObjTestSuite.getAbstractScenarioList()) {
-			if (srcObjTestSuite.isBackground(as)) {
-				convertTestSetup(as);
-			} else {
-				convertTestCase(as);
+	private void convertTestSuite(String path, String content) throws Exception {
+		log.debug("test suite: " + path);
+		srcObjTestSuite = (AsciiDoctorTestSuite) project.addObject(path);
+		srcObjTestSuite.parse(content);
+		if (isTestSuiteSelected()) {
+			tgtObj = (TestSuite) model.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
+			tgtObj.setFeatureDescription(srcObjTestSuite.getFeatureDescription());
+			for (AbstractScenario as : srcObjTestSuite.getAbstractScenarioList()) {
+				if (srcObjTestSuite.isBackground(as)) {
+					convertTestSetup(as);
+				} else {
+					convertTestCase(as);
+				}
 			}
+			model.save();
+		} else {
+			project.deleteObject(srcObjTestSuite);
 		}
 	}
 
 	public void initProjects() throws Exception {
-		srcProject = new AsciiDoctorTestProject(this.tag, this.fa);
-		testProject = new TestProject(this.tag, this.fa);
-		srcProject.init();
-		testProject.init();
-		pathConverter = new AsciiDoctorPathConverter(testProject, (AsciiDoctorTestProject) srcProject);
+		project = new AsciiDoctorTestProject(this.tag, this.fa);
+		model = new TestProject(this.tag, this.fa);
+		project.init();
+		model.init();
+		pathConverter = new AsciiDoctorPathConverter(model, (AsciiDoctorTestProject) project);
 	}
 
 	private boolean isStepObjectSelected() {
 		for (String s : stepObjects) {
-			if (srcObjStepObject.getPath().contentEquals(srcProject.getDir(srcProject.TEST_STEPS) + "/" + s)) {
+			if (srcObjStepObject.getPath().contentEquals(project.getDir(project.TEST_STEPS) + "/" + s)) {
 				return true;
 			}
 		}

@@ -25,135 +25,54 @@ import org.farhan.mbt.cucumber.CucumberTestProject;
 
 public class ConvertUMLToCucumber extends Converter {
 
-	private TestSuite srcObj;
-	private CucumberFeature tgtObj;
-	private CucumberClassAndInterface tgtObj2;
+	protected TestSuite srcObj;
+	protected CucumberFeature tgtObjTestSuite;
+	protected CucumberClassAndInterface tgtObjStepObject;
 	protected CucumberPathConverter pathConverter;
 
 	public ConvertUMLToCucumber(String tags, ObjectRepository fa, Logger log) {
 		super(tags, fa, log);
 	}
 
-	protected void convertAbstractScenarioList() throws Exception {
-		for (Interaction abstractScenario : srcObj.getAbstractScenarioList()) {
-			log.debug("test case: " + abstractScenario.getName());
-			if (srcObj.isBackground(abstractScenario)) {
-				convertBackground(abstractScenario);
-			} else if (srcObj.isScenarioOutline(abstractScenario)) {
-				convertScenarioOutline(abstractScenario);
-			} else {
-				convertScenario(abstractScenario);
-			}
-		}
-	}
-
-	protected void convertBackground(Interaction abstractScenario) throws Exception {
-		Background background = tgtObj.createBackground(srcObj.getBackgroundName(abstractScenario));
-		tgtObj.setFeatureTags(srcObj.getBackgroundTags(abstractScenario));
-		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
-		convertStepList(background, srcObj.getStepList(abstractScenario), abstractScenario);
-	}
-
-	protected void convertDocString(Step step, Message srcStep) throws Exception {
-		tgtObj.createDocString(step, srcObj.getDocString(srcStep));
-	}
-
-	protected void convertExamples(ScenarioOutline scenarioOutline, EAnnotation examplesSrc) {
-		Examples examples = tgtObj.createExamples(scenarioOutline, srcObj.getExamplesName(examplesSrc));
-		tgtObj.createExamplesTable(examples, srcObj.getExamplesTable(examplesSrc));
-		for (ArrayList<String> examplesRow : srcObj.getExamplesRowList(examplesSrc)) {
-			convertExamplesRow(examples, examplesRow);
-		}
-	}
-
-	protected void convertExamplesRow(Examples examples, ArrayList<String> examplesRow) {
-		tgtObj.createExamplesRow(examples, examplesRow);
-	}
-
-	private String convertFeature(String tags, String path, String content) throws Exception {
-
-		srcObj = (TestSuite) testProject.getObject(pathConverter.findUMLPath(path));
-
-		tgtObj = (CucumberFeature) srcProject.addObject(path);
-		tgtObj.parse(content);
-
-		tgtObj.setFeatureName(srcObj.getFeatureName());
-		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
-		convertAbstractScenarioList();
-		return tgtObj.toString();
-	}
-
 	@Override
 	public String convertFile(String path, String content) throws Exception {
 		initProjects();
-		if (path.startsWith(srcProject.getDir(srcProject.TEST_CASES))) {
-			log.debug("test suite: " + path);
-			return convertFeature(tag, path, content);
-		} else if (path.startsWith(srcProject.getDir(srcProject.TEST_STEPS))) {
-			log.debug("step object: " + path);
-			return convertObjectSteps(tag, path, content);
+		if (path.startsWith(project.getDir(project.TEST_STEPS))
+				|| path.startsWith(project.getDir(project.TEST_OBJECTS))) {
+			return convertStepObject(tag, path, content);
 		} else {
-			log.debug("step object: " + path);
-			return convertObjectFields(tag, path, content);
+			return convertTestSuite(tag, path, content);
 		}
 	}
 
-	private String convertObjectFields(String tags, String path, String content) throws Exception {
-		srcObj = (TestSuite) testProject.getObject(pathConverter.findUMLPath(path));
-
-		tgtObj2 = (CucumberClassAndInterface) srcProject.addObject(path);
-		tgtObj2.parse(content);
-
-		convertStepDefinitionList();
-		return tgtObj2.toString();
+	protected void convertStepData(Step step, Message srcStep) throws Exception {
+		tgtObjTestSuite.setStepTable(step, srcObj.getStepTable(srcStep));
 	}
 
-	private String convertObjectSteps(String tags, String path, String content) throws Exception {
-		srcObj = (TestSuite) testProject.getObject(pathConverter.findUMLPath(path));
-
-		tgtObj2 = (CucumberClassAndInterface) srcProject.addObject(path);
-		tgtObj2.parse(content);
-
-		convertStepDefinitionList();
-		return tgtObj2.toString();
-	}
-
-	protected void convertScenario(Interaction srcScenario) throws Exception {
-		Scenario scenario = tgtObj.createScenario(srcObj.getScenarioName(srcScenario));
-		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(srcScenario));
-		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(srcScenario));
-		convertStepList(scenario, srcObj.getStepList(srcScenario), srcScenario);
-	}
-
-	protected void convertScenarioOutline(Interaction abstractScenario) throws Exception {
-
-		ScenarioOutline scenarioOutline = tgtObj.createScenarioOutline(srcObj.getScenarioOutlineName(abstractScenario));
-		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
-		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
-		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario), abstractScenario);
-
-		ArrayList<EAnnotation> examplesList = srcObj.getExamplesList(abstractScenario);
-		for (EAnnotation examples : examplesList) {
-			convertExamples(scenarioOutline, examples);
-		}
-	}
-
-	protected void convertStep(AbstractScenario abstractScenario, Message srcStep) throws Exception {
-		Step tgtStep = tgtObj.createStep(abstractScenario, srcObj.getStepNameLong(srcStep));
-		if (srcObj.hasDocString(srcStep)) {
-			convertDocString(tgtStep, srcStep);
-		} else if (srcObj.hasStepTable(srcStep)) {
-			convertStepTable(tgtStep, srcStep);
-		}
-	}
-
-	private void convertStepDefinition(Interaction stepDefinitionSrc) throws Exception {
-		tgtObj2.createStepDefinition(srcObj.getStepDefinitionNameLong(stepDefinitionSrc));
-		ArrayList<EAnnotation> parametersList = srcObj.getStepDefinitionParameterList(stepDefinitionSrc);
+	protected void convertStepDefinition(Interaction stepDefinitionSrc) throws Exception {
+		tgtObjStepObject.createStepDefinition(srcObj.getStepDefinitionNameLong(stepDefinitionSrc));
+		ArrayList<EAnnotation> parametersList = srcObj.getStepParametersList(stepDefinitionSrc);
 		convertStepParameters(stepDefinitionSrc, parametersList);
 	}
 
-	private void convertStepParameters(Interaction stepDefinitionSrc, ArrayList<EAnnotation> parametersList)
+	protected void convertStepDefinitionList() throws Exception {
+		for (Interaction stepDefinition : srcObj.getStepDefinitionList()) {
+			log.debug("step definition: " + stepDefinition.getName());
+			convertStepDefinition(stepDefinition);
+		}
+	}
+
+	protected String convertStepObject(String tags, String path, String content) throws Exception {
+		srcObj = (TestSuite) model.getObject(pathConverter.findUMLPath(path));
+
+		tgtObjStepObject = (CucumberClassAndInterface) project.addObject(path);
+		tgtObjStepObject.parse(content);
+
+		convertStepDefinitionList();
+		return tgtObjStepObject.toString();
+	}
+
+	protected void convertStepParameters(Interaction stepDefinitionSrc, ArrayList<EAnnotation> parametersList)
 			throws Exception {
 
 		ArrayList<String> parametersListMerged = new ArrayList<String>();
@@ -164,47 +83,105 @@ public class ConvertUMLToCucumber extends Converter {
 				}
 			}
 		}
-		tgtObj2.setStepDefinitionParameters(srcObj.getStepDefinitionNameLong(stepDefinitionSrc), parametersListMerged);
+		tgtObjStepObject.setStepDefinitionParameters(srcObj.getStepDefinitionNameLong(stepDefinitionSrc), parametersListMerged);
 	}
 
-	private void convertStepDefinitionList() throws Exception {
-		for (Interaction stepDefinition : srcObj.getStepDefinitionList()) {
-			log.debug("step definition: " + stepDefinition.getName());
-			convertStepDefinition(stepDefinition);
+	protected void convertStepText(Step step, Message srcStep) throws Exception {
+		tgtObjTestSuite.setDocString(step, srcObj.getDocString(srcStep));
+	}
+
+	protected void convertTestCase(Interaction srcAbstractScenario) throws Exception {
+		log.debug("test case: " + srcAbstractScenario.getName());
+		Scenario scenario = tgtObjTestSuite.addScenario(srcObj.getScenarioName(srcAbstractScenario));
+		tgtObjTestSuite.setScenarioTags(scenario, srcObj.getScenarioTags(srcAbstractScenario));
+		tgtObjTestSuite.setScenarioDescription(scenario, srcObj.getScenarioDescription(srcAbstractScenario));
+		for (Message srcStep : srcObj.getStepList(srcAbstractScenario)) {
+			convertTestStep(scenario, srcStep);
 		}
 	}
 
-	protected void convertStepList(AbstractScenario abstractScenario, ArrayList<Message> stepList,
-			Interaction srcScenario) throws Exception {
-		for (Message step : stepList) {
-			log.debug("test step: " + step.getName());
-			convertStep(abstractScenario, step);
+	protected void convertTestCaseWithData(Interaction srcAbstractScenario) throws Exception {
+		log.debug("test case: " + srcAbstractScenario.getName());
+		ScenarioOutline scenarioOutline = tgtObjTestSuite.addScenarioOutline(srcObj.getScenarioOutlineName(srcAbstractScenario));
+		tgtObjTestSuite.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(srcAbstractScenario));
+		tgtObjTestSuite.setScenarioOutlineDescription(scenarioOutline,
+				srcObj.getScenarioOutlineDescription(srcAbstractScenario));
+		for (Message srcStep : srcObj.getStepList(srcAbstractScenario)) {
+			convertTestStep(scenarioOutline, srcStep);
+		}
+		for (EAnnotation srcExamples : srcObj.getExamplesList(srcAbstractScenario)) {
+			convertTestData(scenarioOutline, srcExamples);
 		}
 	}
 
-	protected void convertStepTable(Step step, Message srcStep) throws Exception {
-		tgtObj.createStepTable(step, srcObj.getStepTable(srcStep));
+	protected void convertTestData(ScenarioOutline scenarioOutline, EAnnotation srcExamples) {
+		log.debug("test data: " + srcExamples.getSource());
+		Examples examples = tgtObjTestSuite.addExamples(scenarioOutline, srcObj.getExamplesName(srcExamples));
+		// TODO add examples description
+		tgtObjTestSuite.setExamplesTable(examples, srcObj.getExamplesTable(srcExamples));
+		for (ArrayList<String> row : srcObj.getExamplesRowList(srcExamples)) {
+			tgtObjTestSuite.addExamplesRow(examples, row);
+		}
 	}
 
-	public void initProjects() throws Exception {
-		testProject = new TestProject(this.tag, this.fa);
-		srcProject = new CucumberTestProject(this.tag, this.fa);
-		testProject.init();
-		srcProject.init();
-		this.pathConverter = new CucumberPathConverter(testProject, (CucumberTestProject) srcProject);
+	protected void convertTestSetup(Interaction srcAbstractScenario) throws Exception {
+		log.debug("test setup: " + srcAbstractScenario.getName());
+		Background background = tgtObjTestSuite.addBackground(srcObj.getBackgroundName(srcAbstractScenario));
+		tgtObjTestSuite.setFeatureTags(srcObj.getFeatureTags(srcAbstractScenario));
+		tgtObjTestSuite.setBackgroundDescription(background, srcObj.getBackgroundDescription(srcAbstractScenario));
+		for (Message srcStep : srcObj.getStepList(srcAbstractScenario)) {
+			convertTestStep(background, srcStep);
+		}
+	}
+
+	protected void convertTestStep(AbstractScenario abstractScenario, Message srcStep) throws Exception {
+		log.debug("test step: " + srcStep.getName());
+		Step step = tgtObjTestSuite.addStep(abstractScenario, srcObj.getStepNameLong(srcStep));
+		if (srcObj.hasDocString(srcStep)) {
+			convertStepText(step, srcStep);
+		} else if (srcObj.hasStepTable(srcStep)) {
+			convertStepData(step, srcStep);
+		}
+	}
+
+	protected String convertTestSuite(String tags, String path, String content) throws Exception {
+		log.debug("test suite: " + path);
+		srcObj = (TestSuite) model.getObject(pathConverter.findUMLPath(path));
+		tgtObjTestSuite = (CucumberFeature) project.addObject(path);
+		tgtObjTestSuite.parse(content);
+		tgtObjTestSuite.setFeatureName(srcObj.getFeatureName());
+		tgtObjTestSuite.setFeatureDescription(srcObj.getFeatureDescription());
+		for (Interaction as : srcObj.getAbstractScenarioList()) {
+			if (srcObj.isBackground(as)) {
+				convertTestSetup(as);
+			} else if (srcObj.isScenarioOutline(as)) {
+				convertTestCaseWithData(as);
+			} else {
+				convertTestCase(as);
+			}
+		}
+		return tgtObjTestSuite.toString();
 	}
 
 	@Override
 	public ArrayList<String> getFileNames() throws Exception {
 		initProjects();
 		ArrayList<String> objects = new ArrayList<String>();
-		for (ConvertibleObject co : testProject.getObjects(testProject.TEST_CASES)) {
-			objects.add(pathConverter.convertFilePath(co.getPath(), srcProject.TEST_CASES));
+		for (ConvertibleObject co : model.getObjects(model.TEST_CASES)) {
+			objects.add(pathConverter.convertFilePath(co.getPath(), project.TEST_CASES));
 		}
-		for (ConvertibleObject co : testProject.getObjects(testProject.TEST_STEPS)) {
-			objects.add(pathConverter.convertFilePath(co.getPath(), srcProject.TEST_STEPS));
-			objects.add(pathConverter.convertFilePath(co.getPath(), srcProject.TEST_OBJECTS));
+		for (ConvertibleObject co : model.getObjects(model.TEST_STEPS)) {
+			objects.add(pathConverter.convertFilePath(co.getPath(), project.TEST_STEPS));
+			objects.add(pathConverter.convertFilePath(co.getPath(), project.TEST_OBJECTS));
 		}
 		return objects;
+	}
+
+	public void initProjects() throws Exception {
+		model = new TestProject(this.tag, this.fa);
+		project = new CucumberTestProject(this.tag, this.fa);
+		model.init();
+		project.init();
+		this.pathConverter = new CucumberPathConverter(model, (CucumberTestProject) project);
 	}
 }

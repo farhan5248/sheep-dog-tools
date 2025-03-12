@@ -50,15 +50,7 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		theFeature.setName(name);
 	}
 
-	private String convertStatementsToString(EList<Statement> statements) {
-		String contents = "";
-		for (Statement s : statements) {
-			contents += s.getName() + "\n";
-		}
-		return contents.trim();
-	}
-
-	public Background createBackground(String backgroundName) {
+	public Background addBackground(String backgroundName) {
 		deleteAbstractScenario(backgroundName);
 		Background background = SheepDogFactory.eINSTANCE.createBackground();
 		background.setName(backgroundName);
@@ -66,19 +58,14 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		return background;
 	}
 
-	public void createDocString(Step step, String docString) {
-		step.setTheDocString(SheepDogFactory.eINSTANCE.createDocString());
-		step.getTheDocString().setName("----\n" + docString.replace("----", "\\----") + "\n----");
-	}
-
-	public Examples createExamples(Scenario abstractScenario, String examplesName) {
+	public Examples addExamples(Scenario abstractScenario, String examplesName) {
 		Examples examples = SheepDogFactory.eINSTANCE.createExamples();
 		examples.setName(examplesName);
 		abstractScenario.getExamples().add(examples);
 		return examples;
 	}
 
-	public void createExamplesRow(Examples examples, ArrayList<String> examplesRow) {
+	public void addExamplesRow(Examples examples, ArrayList<String> examplesRow) {
 		Row row = SheepDogFactory.eINSTANCE.createRow();
 		for (String srcCell : examplesRow) {
 			Cell cell = SheepDogFactory.eINSTANCE.createCell();
@@ -88,7 +75,7 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		examples.getTheExamplesTable().getRows().add(row);
 	}
 
-	public void createExamplesTable(Examples examples, ArrayList<String> headers) {
+	public void setExamplesTable(Examples examples, ArrayList<String> headers) {
 		examples.setTheExamplesTable(SheepDogFactory.eINSTANCE.createTable());
 		Row row = SheepDogFactory.eINSTANCE.createRow();
 		for (String srcCell : headers) {
@@ -99,7 +86,7 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		examples.getTheExamplesTable().getRows().add(row);
 	}
 
-	public Scenario createScenario(String scenarioName) {
+	public Scenario addScenario(String scenarioName) {
 		deleteAbstractScenario(scenarioName);
 		Scenario scenario = SheepDogFactory.eINSTANCE.createScenario();
 		scenario.setName(scenarioName);
@@ -107,11 +94,7 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		return scenario;
 	}
 
-	public Scenario createScenarioOutline(String scenarioName) {
-		return createScenario(scenarioName);
-	}
-
-	public Step createStep(AbstractScenario abstractScenario, String name) {
+	public Step addStep(AbstractScenario abstractScenario, String name) {
 		String keyword = name.split(" ")[0];
 		Step step = null;
 		switch (keyword) {
@@ -131,6 +114,18 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		step.setName(name.substring(keyword.length() + 1));
 		abstractScenario.getSteps().add(step);
 		return step;
+	}
+
+	private String convertStatementsToString(EList<Statement> statements) {
+		String contents = "";
+		for (Statement s : statements) {
+			contents += s.getName() + "\n";
+		}
+		return contents.trim();
+	}
+
+	public Scenario createScenarioOutline(String scenarioName) {
+		return addScenario(scenarioName);
 	}
 
 	public void createStepTable(Step step, ArrayList<ArrayList<String>> stepTableRowList) {
@@ -249,10 +244,6 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		return abstractScenario.getName();
 	}
 
-	public String getStepName(Step step) {
-		return getStepKeyword(step) + " " + step.getName();
-	}
-
 	public String getStepDefinitionDescription(StepDefinition stepDefinitionSrc) {
 		return convertStatementsToString(stepDefinitionSrc.getStatements());
 	}
@@ -261,8 +252,33 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		return stepDefinitionSrc.getName();
 	}
 
+	public String getStepDefinitionNameLong(StepDefinition stepDefinitionSrc) {
+		String noRoot = getPath().replaceFirst("^src/test/resources/asciidoc/stepdefs/", "");
+		String component = noRoot.split("/")[0];
+		String object = noRoot.replaceFirst("^" + component + "/", "").replaceFirst(".asciidoc$", "");
+		return "The " + component + ", " + object + " " + stepDefinitionSrc.getName();
+	}
+
+	public String getStepKeyword(Step step) {
+		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) step.eAdapters().getFirst();
+		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
+		return rc.getRule().getName() + ":";
+	}
+
 	public EList<Step> getStepList(AbstractScenario abstractScenario) {
 		return abstractScenario.getSteps();
+	}
+
+	public String getStepName(Step step) {
+		return getStepKeyword(step) + " " + step.getName();
+	}
+
+	public String getStepNameLong(Step step) {
+		String stepObjectNameLong = StepDefinitionHelper.getStepObjectQualifiedName(new LanguageAccessImpl(step));
+		String component = stepObjectNameLong.split("/")[0];
+		String object = stepObjectNameLong.replaceFirst("^" + component + "/", "").replaceFirst(".asciidoc$", "");
+		String stepNameLong = "The " + component + ", " + object + " " + StepHelper.getPredicate(step.getName());
+		return getStepKeyword(step) + " " + stepNameLong;
 	}
 
 	public EList<StepParameters> getStepParametersList(StepDefinition stepDefinitionSrc) {
@@ -353,6 +369,10 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		setDescription(background, backgroundDescription);
 	}
 
+	public void setBackgroundTags(Background background, ArrayList<String> backgroundTags) {
+		setTags(background, backgroundTags);
+	}
+
 	private void setDescription(AbstractScenario abstractScenario, String scenarioDescription) {
 		if (!scenarioDescription.isEmpty()) {
 			abstractScenario.getStatements().clear();
@@ -362,6 +382,11 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 				abstractScenario.getStatements().add(statement);
 			}
 		}
+	}
+
+	public void setDocString(Step step, String docString) {
+		step.setTheDocString(SheepDogFactory.eINSTANCE.createDocString());
+		step.getTheDocString().setName("----\n" + docString.replace("----", "\\----") + "\n----");
 	}
 
 	public void setFeatureDescription(String featureDescription) {
@@ -432,31 +457,6 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 			return null;
 		}
 		return os.toString();
-	}
-
-	public void setBackgroundTags(Background background, ArrayList<String> backgroundTags) {
-		setTags(background, backgroundTags);
-	}
-
-	public String getStepDefinitionNameLong(StepDefinition stepDefinitionSrc) {
-		String noRoot = getPath().replaceFirst("^src/test/resources/asciidoc/stepdefs/", "");
-		String component = noRoot.split("/")[0];
-		String object = noRoot.replaceFirst("^" + component + "/", "").replaceFirst(".asciidoc$", "");
-		return "The " + component + ", " + object + " " + stepDefinitionSrc.getName();
-	}
-
-	public String getStepNameLong(Step step) {
-		String stepObjectNameLong = StepDefinitionHelper.getStepObjectQualifiedName(new LanguageAccessImpl(step));
-		String component = stepObjectNameLong.split("/")[0];
-		String object = stepObjectNameLong.replaceFirst("^" + component + "/", "").replaceFirst(".asciidoc$", "");
-		String stepNameLong = "The " + component + ", " + object + " " + StepHelper.getPredicate(step.getName());
-		return getStepKeyword(step) + " " + stepNameLong;
-	}
-
-	public String getStepKeyword(Step step) {
-		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) step.eAdapters().getFirst();
-		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
-		return rc.getRule().getName() + ":";
 	}
 
 }

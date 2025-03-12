@@ -33,15 +33,7 @@ public class CucumberFeature implements ConvertibleObject {
 		}
 	}
 
-	private String convertStatementsToString(EList<Statement> eList) {
-		String contents = "";
-		for (Statement s : eList) {
-			contents += s.getName() + "\n";
-		}
-		return contents.trim();
-	}
-
-	public Background createBackground(String backgroundName) {
+	public Background addBackground(String backgroundName) {
 		deleteAbstractScenario(backgroundName);
 		Background background = CucumberFactory.eINSTANCE.createBackground();
 		background.setName(backgroundName);
@@ -49,24 +41,14 @@ public class CucumberFeature implements ConvertibleObject {
 		return background;
 	}
 
-	public void createDocString(Step step, String docString) {
-		step.setTheDocString(CucumberFactory.eINSTANCE.createDocString());
-		for (String l : docString.split("\n")) {
-			Line line = CucumberFactory.eINSTANCE.createLine();
-			// Add hidden text
-			line.setName("          " + l);
-			step.getTheDocString().getLines().add(line);
-		}
-	}
-
-	public Examples createExamples(ScenarioOutline scenarioOutline, String examplesName) {
+	public Examples addExamples(ScenarioOutline scenarioOutline, String examplesName) {
 		Examples examples = CucumberFactory.eINSTANCE.createExamples();
 		examples.setName(examplesName);
 		scenarioOutline.getExamples().add(examples);
 		return examples;
 	}
 
-	public void createExamplesRow(Examples examples, ArrayList<String> examplesRow) {
+	public void addExamplesRow(Examples examples, ArrayList<String> examplesRow) {
 		Row row = CucumberFactory.eINSTANCE.createRow();
 		for (String srcCell : examplesRow) {
 			Cell cell = CucumberFactory.eINSTANCE.createCell();
@@ -76,18 +58,7 @@ public class CucumberFeature implements ConvertibleObject {
 		examples.getTheExamplesTable().getRows().add(row);
 	}
 
-	public void createExamplesTable(Examples examples, ArrayList<String> headers) {
-		examples.setTheExamplesTable(CucumberFactory.eINSTANCE.createExamplesTable());
-		Row row = CucumberFactory.eINSTANCE.createRow();
-		for (String srcCell : headers) {
-			Cell cell = CucumberFactory.eINSTANCE.createCell();
-			cell.setName(srcCell);
-			row.getCells().add(cell);
-		}
-		examples.getTheExamplesTable().getRows().add(row);
-	}
-
-	public Scenario createScenario(String scenarioName) {
+	public Scenario addScenario(String scenarioName) {
 		deleteAbstractScenario(scenarioName);
 		Scenario scenario = CucumberFactory.eINSTANCE.createScenario();
 		scenario.setName(scenarioName);
@@ -95,17 +66,7 @@ public class CucumberFeature implements ConvertibleObject {
 		return scenario;
 	}
 
-	private void deleteAbstractScenario(String name) {
-		EList<AbstractScenario> list = theFeature.getAbstractScenarios();
-		for (int i = 0; i < list.size(); i++) {
-			if (list.get(i).getName().contentEquals(name)) {
-				list.remove(i);
-				return;
-			}
-		}
-	}
-
-	public ScenarioOutline createScenarioOutline(String scenarioOutlineName) {
+	public ScenarioOutline addScenarioOutline(String scenarioOutlineName) {
 		deleteAbstractScenario(scenarioOutlineName);
 		ScenarioOutline scenarioOutline = CucumberFactory.eINSTANCE.createScenarioOutline();
 		scenarioOutline.setName(scenarioOutlineName);
@@ -113,7 +74,7 @@ public class CucumberFeature implements ConvertibleObject {
 		return scenarioOutline;
 	}
 
-	public Step createStep(AbstractScenario abstractScenario, String name) {
+	public Step addStep(AbstractScenario abstractScenario, String name) {
 		String keyword = name.split(" ")[0];
 		Step step = null;
 		switch (keyword) {
@@ -135,16 +96,21 @@ public class CucumberFeature implements ConvertibleObject {
 		return step;
 	}
 
-	public void createStepTable(Step step, ArrayList<ArrayList<String>> stepTableRowList) {
-		step.setTheStepTable(CucumberFactory.eINSTANCE.createStepTable());
-		for (ArrayList<String> srcRow : stepTableRowList) {
-			Row row = CucumberFactory.eINSTANCE.createRow();
-			for (String srcCell : srcRow) {
-				Cell cell = CucumberFactory.eINSTANCE.createCell();
-				cell.setName(srcCell);
-				row.getCells().add(cell);
+	private String convertStatementsToString(EList<Statement> eList) {
+		String contents = "";
+		for (Statement s : eList) {
+			contents += s.getName() + "\n";
+		}
+		return contents.trim();
+	}
+
+	private void deleteAbstractScenario(String name) {
+		EList<AbstractScenario> list = theFeature.getAbstractScenarios();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getName().contentEquals(name)) {
+				list.remove(i);
+				return;
 			}
-			step.getTheStepTable().getRows().add(row);
 		}
 	}
 
@@ -254,12 +220,23 @@ public class CucumberFeature implements ConvertibleObject {
 		return getTags(scenario.getTags());
 	}
 
-	public String getStepName(Step step) {
-		return getStepKeyword(step) + " " + step.getName();
+	public String getStepKeyword(Step step) {
+		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) step.eAdapters().getFirst();
+		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
+		String keywordString = rc.getRule().getName();
+		return keywordString;
 	}
 
 	public EList<Step> getStepList(AbstractScenario abstractScenario) {
 		return abstractScenario.getSteps();
+	}
+
+	public String getStepName(Step step) {
+		return getStepKeyword(step) + " " + step.getName();
+	}
+
+	public String getStepNameLong(Step stepSrc) {
+		return getStepName(stepSrc);
 	}
 
 	public ArrayList<ArrayList<String>> getStepTable(Step stepSrc) {
@@ -315,20 +292,6 @@ public class CucumberFeature implements ConvertibleObject {
 		}
 	}
 
-	public String toString() {
-		URI uri = URI.createFileURI(thePath);
-		Resource resource = new ResourceSetImpl().createResource(uri);
-		resource.getContents().add(theFeature);
-		Map<Object, Object> options = SaveOptions.newBuilder().format().getOptions().toOptionsMap();
-		OutputStream os = new ByteArrayOutputStream();
-		try {
-			resource.save(os, options);
-		} catch (IOException e) {
-			return null;
-		}
-		return os.toString();
-	}
-
 	public void setBackgroundDescription(Background background, String backgroundDescription) {
 		setDescription(background, backgroundDescription);
 	}
@@ -341,6 +304,27 @@ public class CucumberFeature implements ConvertibleObject {
 				abstractScenario.getStatements().add(s);
 			}
 		}
+	}
+
+	public void setDocString(Step step, String docString) {
+		step.setTheDocString(CucumberFactory.eINSTANCE.createDocString());
+		for (String l : docString.split("\n")) {
+			Line line = CucumberFactory.eINSTANCE.createLine();
+			// Add hidden text
+			line.setName("          " + l);
+			step.getTheDocString().getLines().add(line);
+		}
+	}
+
+	public void setExamplesTable(Examples examples, ArrayList<String> headers) {
+		examples.setTheExamplesTable(CucumberFactory.eINSTANCE.createExamplesTable());
+		Row row = CucumberFactory.eINSTANCE.createRow();
+		for (String srcCell : headers) {
+			Cell cell = CucumberFactory.eINSTANCE.createCell();
+			cell.setName(srcCell);
+			row.getCells().add(cell);
+		}
+		examples.getTheExamplesTable().getRows().add(row);
 	}
 
 	public void setFeatureDescription(String featureDescription) {
@@ -378,6 +362,19 @@ public class CucumberFeature implements ConvertibleObject {
 		setTags(scenario.getTags(), scenarioTags);
 	}
 
+	public void setStepTable(Step step, ArrayList<ArrayList<String>> stepTableRowList) {
+		step.setTheStepTable(CucumberFactory.eINSTANCE.createStepTable());
+		for (ArrayList<String> srcRow : stepTableRowList) {
+			Row row = CucumberFactory.eINSTANCE.createRow();
+			for (String srcCell : srcRow) {
+				Cell cell = CucumberFactory.eINSTANCE.createCell();
+				cell.setName(srcCell);
+				row.getCells().add(cell);
+			}
+			step.getTheStepTable().getRows().add(row);
+		}
+	}
+
 	private void setTags(EList<Tag> tagList, ArrayList<String> tags) {
 		if (!tags.isEmpty()) {
 			tagList.clear();
@@ -389,15 +386,18 @@ public class CucumberFeature implements ConvertibleObject {
 		}
 	}
 
-	public String getStepNameLong(Step stepSrc) {
-		return getStepName(stepSrc);
-	}
-
-	public String getStepKeyword(Step step) {
-		CompositeNodeWithSemanticElement keyword = (CompositeNodeWithSemanticElement) step.eAdapters().getFirst();
-		RuleCallImpl rc = (RuleCallImpl) keyword.getGrammarElement();
-		String keywordString = rc.getRule().getName();
-		return keywordString;
+	public String toString() {
+		URI uri = URI.createFileURI(thePath);
+		Resource resource = new ResourceSetImpl().createResource(uri);
+		resource.getContents().add(theFeature);
+		Map<Object, Object> options = SaveOptions.newBuilder().format().getOptions().toOptionsMap();
+		OutputStream os = new ByteArrayOutputStream();
+		try {
+			resource.save(os, options);
+		} catch (IOException e) {
+			return null;
+		}
+		return os.toString();
 	}
 
 }

@@ -31,14 +31,7 @@ public class ConvertCucumberToUML extends Converter {
 	@Override
 	public String convertFile(String path, String content) throws Exception {
 		initProjects();
-		srcObjTestSuite = (CucumberFeature) srcProject.addObject(path);
-		srcObjTestSuite.parse(content);
-		if (isTestSuiteSelected()) {
-			convertTestSuite();
-			testProject.save();
-		} else {
-			srcProject.deleteObject(srcObjTestSuite);
-		}
+		convertTestSuite(path, content);
 		return "";
 	}
 
@@ -81,6 +74,9 @@ public class ConvertCucumberToUML extends Converter {
 		// TODO add examples description
 		tgtObj.setExamplesTable(examples, srcObjTestSuite.getExamplesTable(srcExamples));
 		for (Row row : srcObjTestSuite.getExamplesRowList(srcExamples)) {
+			// TODO there shouldn't be a getExamplesRow method. This method should just
+			// convert Row to ArrayList<String>. Maybe this is resolved when converting to
+			// Step* and Test* classes.
 			tgtObj.addExamplesRow(examples, srcObjTestSuite.getExamplesRow(srcExamples, row));
 		}
 	}
@@ -108,27 +104,35 @@ public class ConvertCucumberToUML extends Converter {
 		}
 	}
 
-	private void convertTestSuite() {
-		log.debug("test suite: " + srcObjTestSuite.getPath());
-		tgtObj = (TestSuite) testProject.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
-		tgtObj.setFeatureDescription(srcObjTestSuite.getFeatureDescription());
-		for (AbstractScenario as : srcObjTestSuite.getAbstractScenarioList()) {
-			if (srcObjTestSuite.isBackground(as)) {
-				convertTestSetup(as);
-			} else if (srcObjTestSuite.isScenarioOutline(as)) {
-				convertTestCaseWithTestData(as);
-			} else {
-				convertTestCase(as);
+	private void convertTestSuite(String path, String content) throws Exception {
+		log.debug("test suite: " + path);
+		srcObjTestSuite = (CucumberFeature) project.addObject(path);
+		srcObjTestSuite.parse(content);
+		if (isTestSuiteSelected()) {
+			tgtObj = (TestSuite) model.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
+			tgtObj.setFeatureDescription(srcObjTestSuite.getFeatureDescription());
+			for (AbstractScenario as : srcObjTestSuite.getAbstractScenarioList()) {
+				if (srcObjTestSuite.isBackground(as)) {
+					convertTestSetup(as);
+				} else if (srcObjTestSuite.isScenarioOutline(as)) {
+					convertTestCaseWithTestData(as);
+				} else {
+					convertTestCase(as);
+				}
 			}
+			model.save();
+		} else {
+			project.deleteObject(srcObjTestSuite);
 		}
+
 	}
 
 	public void initProjects() throws Exception {
-		srcProject = new CucumberTestProject(this.tag, this.fa);
-		testProject = new TestProject(this.tag, this.fa);
-		srcProject.init();
-		testProject.init();
-		this.pathConverter = new CucumberPathConverter(testProject, (CucumberTestProject) srcProject);
+		project = new CucumberTestProject(this.tag, this.fa);
+		model = new TestProject(this.tag, this.fa);
+		project.init();
+		model.init();
+		this.pathConverter = new CucumberPathConverter(model, (CucumberTestProject) project);
 	}
 
 	private boolean isTestSuiteSelected() throws Exception {

@@ -185,7 +185,7 @@ public class TestSuite implements ConvertibleObject {
 		return abstractScenario.getName();
 	}
 
-	public ArrayList<String> getBackgroundTags(Interaction abstractScenario) {
+	public ArrayList<String> getFeatureTags(Interaction abstractScenario) {
 		return getTags(abstractScenario);
 	}
 
@@ -280,10 +280,8 @@ public class TestSuite implements ConvertibleObject {
 		return getTags(abstractScenario);
 	}
 
-	public String getStep(Message step) {
-		String name = step.getName();
-		String keyword = step.getEAnnotation("Step").getDetails().get("Keyword");
-		return keyword + " " + name;
+	public String getStepName(Message step) {
+		return getStepKeyword(step) + " " + step.getName();
 	}
 
 	public String getStepDefinitionDescription(Interaction stepDefinition) {
@@ -309,7 +307,7 @@ public class TestSuite implements ConvertibleObject {
 		return stepDefinitionSrc.getEAnnotation("StepDefinition").getDetails().get("LongName");
 	}
 
-	public ArrayList<EAnnotation> getStepDefinitionParameterList(Interaction stepDefinition) {
+	public ArrayList<EAnnotation> getStepParametersList(Interaction stepDefinition) {
 
 		ArrayList<EAnnotation> parametersList = new ArrayList<EAnnotation>();
 		for (EAnnotation a : stepDefinition.getEAnnotations()) {
@@ -340,7 +338,7 @@ public class TestSuite implements ConvertibleObject {
 	}
 
 	public String getStepObjectName() {
-		return theClass.getEAnnotations().getFirst().getDetails().get(0).getKey();
+		return theClass.getName();
 	}
 
 	public String getStepParametersName(EAnnotation parametersSrc) {
@@ -521,5 +519,9 @@ public class TestSuite implements ConvertibleObject {
 				createAnnotation(abstractScenario, "tags", t);
 			}
 		}
+	}
+
+	public String getStepKeyword(Message step) {
+		return step.getEAnnotation("Step").getDetails().get("Keyword");
 	}
 }

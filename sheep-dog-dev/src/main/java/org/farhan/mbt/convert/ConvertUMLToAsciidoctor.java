@@ -25,172 +25,159 @@ import org.farhan.mbt.core.Logger;
 
 public class ConvertUMLToAsciidoctor extends Converter {
 
-	private TestSuite srcObj;
-	private AsciiDoctorTestSuite tgtObj;
-	private AsciiDoctorStepObject tgtObj2;
 	protected AsciiDoctorPathConverter pathConverter;
+	private TestSuite srcObj;
+	private AsciiDoctorTestSuite tgtObjTestSuite;
+	private AsciiDoctorStepObject tgtObjStepObject;
 
 	public ConvertUMLToAsciidoctor(String tags, ObjectRepository fa, Logger log) {
 		super(tags, fa, log);
 	}
 
-	private void convertAbstractScenarioList() throws Exception {
-		for (Interaction abstractScenario : srcObj.getAbstractScenarioList()) {
-			log.debug("test case: " + abstractScenario.getName());
-			if (srcObj.isBackground(abstractScenario)) {
-				convertBackground(abstractScenario);
-			} else if (srcObj.isScenarioOutline(abstractScenario)) {
-				convertScenarioOutline(abstractScenario);
-			} else {
-				convertScenario(abstractScenario);
-			}
-		}
-	}
-
-	private void convertBackground(Interaction abstractScenario) {
-		Background background = tgtObj.createBackground(srcObj.getBackgroundName(abstractScenario));
-		tgtObj.setBackgroundTags(background, srcObj.getBackgroundTags(abstractScenario));
-		tgtObj.setBackgroundDescription(background, srcObj.getBackgroundDescription(abstractScenario));
-		convertStepList(background, srcObj.getStepList(abstractScenario));
-	}
-
-	private void convertDocString(Step step, Message stepSrc) {
-		tgtObj.createDocString(step, srcObj.getDocString(stepSrc));
-	}
-
-	private void convertExamples(Scenario abstractScenario, EAnnotation examplesSrc) {
-
-		Examples examples = tgtObj.createExamples(abstractScenario, srcObj.getExamplesName(examplesSrc));
-		tgtObj.createExamplesTable(examples, srcObj.getExamplesTable(examplesSrc));
-		for (ArrayList<String> examplesRow : srcObj.getExamplesRowList(examplesSrc)) {
-			convertExamplesRow(examples, examplesRow);
-		}
-	}
-
-	private void convertExamplesRow(Examples examples, ArrayList<String> examplesRow) {
-		tgtObj.createExamplesRow(examples, examplesRow);
-	}
-
-	private String convertFeature(String tags, String path, String content) throws Exception {
-		srcObj = (TestSuite) testProject.getObject(pathConverter.findUMLPath(path));
-		tgtObj = (AsciiDoctorTestSuite) srcProject.addObject(path);
-		tgtObj.parse(content);
-		tgtObj.setFeatureName(srcObj.getFeatureName());
-		tgtObj.setFeatureDescription(srcObj.getFeatureDescription());
-		convertAbstractScenarioList();
-		return tgtObj.toString();
-	}
-
 	@Override
 	public String convertFile(String path, String content) throws Exception {
 		initProjects();
-		if (path.startsWith(srcProject.getDir(srcProject.TEST_STEPS))) {
-			log.debug("step object: " + path);
-			return convertStepObject(tag, path, content);
+		if (path.startsWith(project.getDir(project.TEST_STEPS))) {
+			return convertStepObject(path, content);
 		} else {
-			log.debug("test suite: " + path);
-			return convertFeature(tag, path, content);
+			return convertTestSuite(path, content);
 		}
 	}
 
-	private void convertScenario(Interaction abstractScenario) {
-		Scenario scenario = tgtObj.createScenario(srcObj.getScenarioName(abstractScenario));
-		tgtObj.setScenarioTags(scenario, srcObj.getScenarioTags(abstractScenario));
-		tgtObj.setScenarioDescription(scenario, srcObj.getScenarioDescription(abstractScenario));
-		convertStepList(scenario, srcObj.getStepList(abstractScenario));
+	private void convertStepData(Step step, Message srcStep) {
+		tgtObjTestSuite.createStepTable(step, srcObj.getStepTable(srcStep));
 	}
 
-	private void convertScenarioOutline(Interaction abstractScenario) {
+	private void convertStepDefinition(Interaction srcStepDefinition) throws Exception {
+		log.debug("step definition: " + srcStepDefinition.getName());
+		StepDefinition stepDefinition = tgtObjStepObject
+				.addStepDefinition(srcObj.getStepDefinitionName(srcStepDefinition));
+		tgtObjStepObject.setStepDefinitionDescription(stepDefinition,
+				srcObj.getStepDefinitionDescription(srcStepDefinition));
 
-		Scenario scenarioOutline = tgtObj.createScenarioOutline(srcObj.getScenarioOutlineName(abstractScenario));
-		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(abstractScenario));
-		tgtObj.setScenarioOutlineDescription(scenarioOutline, srcObj.getScenarioOutlineDescription(abstractScenario));
-		convertStepList(scenarioOutline, srcObj.getStepList(abstractScenario));
-
-		ArrayList<EAnnotation> examplesList = srcObj.getExamplesList(abstractScenario);
-		for (EAnnotation examples : examplesList) {
-			convertExamples(scenarioOutline, examples);
+		for (EAnnotation sp : srcObj.getStepParametersList(srcStepDefinition)) {
+			convertStepParameters(stepDefinition, sp);
 		}
 	}
 
-	private void convertStep(AbstractScenario abstractScenario, Message stepSrc) {
-		Step step = tgtObj.createStep(abstractScenario, srcObj.getStep(stepSrc));
-		if (srcObj.hasDocString(stepSrc)) {
-			convertDocString(step, stepSrc);
-		} else if (srcObj.hasStepTable(stepSrc)) {
-			convertStepTable(step, stepSrc);
+	private String convertStepObject(String path, String content) throws Exception {
+		log.debug("step object: " + path);
+		srcObj = (TestSuite) model.getObject(pathConverter.findUMLPath(path));
+		tgtObjStepObject = (AsciiDoctorStepObject) project.addObject(path);
+		tgtObjStepObject.parse(content);
+		tgtObjStepObject.setStepObjectName(srcObj.getStepObjectName());
+		tgtObjStepObject.setStepObjectDescription(srcObj.getStepObjectDescription());
+		for (Interaction sd : srcObj.getStepDefinitionList()) {
+			convertStepDefinition(sd);
+		}
+		return tgtObjStepObject.toString();
+	}
+
+	private void convertStepParameters(StepDefinition stepDefinition, EAnnotation srcStepParameters) throws Exception {
+		log.debug("step parameter: " + srcStepParameters.getSource());
+		StepParameters stepParameters = tgtObjStepObject.addStepParameters(stepDefinition,
+				srcObj.getStepParametersName(srcStepParameters));
+		tgtObjStepObject.addStepParametersTable(stepParameters, srcObj.getStepParametersTable(srcStepParameters));
+		for (ArrayList<String> row : srcObj.getStepParametersRowList(srcStepParameters)) {
+			tgtObjStepObject.createStepParametersRow(stepParameters, row);
 		}
 	}
 
-	private void convertStepDefinition(Interaction stepDefinitionSrc) throws Exception {
-		StepDefinition stepDefinition = tgtObj2.createStepDefinition(srcObj.getStepDefinitionName(stepDefinitionSrc));
-		tgtObj2.setStepDefinitionDescription(stepDefinition, srcObj.getStepDefinitionDescription(stepDefinitionSrc));
+	private void convertStepText(Step step, Message srcStep) {
+		tgtObjTestSuite.setDocString(step, srcObj.getDocString(srcStep));
+	}
 
-		ArrayList<EAnnotation> parametersList = srcObj.getStepDefinitionParameterList(stepDefinitionSrc);
-		for (EAnnotation parameters : parametersList) {
-			convertStepParameters(stepDefinition, parameters);
+	private void convertTestCase(Interaction srcAbstractScenario) {
+		log.debug("test case: " + srcAbstractScenario.getName());
+		Scenario scenario = tgtObjTestSuite.addScenario(srcObj.getScenarioName(srcAbstractScenario));
+		tgtObjTestSuite.setScenarioTags(scenario, srcObj.getScenarioTags(srcAbstractScenario));
+		tgtObjTestSuite.setScenarioDescription(scenario, srcObj.getScenarioDescription(srcAbstractScenario));
+		for (Message srcStep : srcObj.getStepList(srcAbstractScenario)) {
+			convertTestStep(scenario, srcStep);
 		}
 	}
 
-	private void convertStepDefinitionList() throws Exception {
-		for (Interaction stepDefinition : srcObj.getStepDefinitionList()) {
-			log.debug("step definition: " + stepDefinition.getName());
-			convertStepDefinition(stepDefinition);
+	private void convertTestCaseWithData(Interaction srcAbstractScenario) {
+		log.debug("test case: " + srcAbstractScenario.getName());
+		Scenario scenarioOutline = tgtObjTestSuite
+				.createScenarioOutline(srcObj.getScenarioOutlineName(srcAbstractScenario));
+		tgtObjTestSuite.setScenarioOutlineTags(scenarioOutline, srcObj.getScenarioOutlineTags(srcAbstractScenario));
+		tgtObjTestSuite.setScenarioOutlineDescription(scenarioOutline,
+				srcObj.getScenarioOutlineDescription(srcAbstractScenario));
+		for (Message srcStep : srcObj.getStepList(srcAbstractScenario)) {
+			convertTestStep(scenarioOutline, srcStep);
+		}
+		for (EAnnotation srcExamples : srcObj.getExamplesList(srcAbstractScenario)) {
+			convertTestData(scenarioOutline, srcExamples);
 		}
 	}
 
-	private void convertStepList(AbstractScenario abstractScenario, ArrayList<Message> stepList) {
-		for (Message step : stepList) {
-			log.debug("test step: " + step.getName());
-			convertStep(abstractScenario, step);
+	private void convertTestData(Scenario abstractScenario, EAnnotation srcExamples) {
+		log.debug("test data: " + srcExamples.getSource());
+		Examples examples = tgtObjTestSuite.addExamples(abstractScenario, srcObj.getExamplesName(srcExamples));
+		// TODO add examples description
+		tgtObjTestSuite.setExamplesTable(examples, srcObj.getExamplesTable(srcExamples));
+		for (ArrayList<String> row : srcObj.getExamplesRowList(srcExamples)) {
+			tgtObjTestSuite.addExamplesRow(examples, row);
 		}
 	}
 
-	private String convertStepObject(String tags, String path, String content) throws Exception {
-		srcObj = (TestSuite) testProject.getObject(pathConverter.findUMLPath(path));
-		tgtObj2 = (AsciiDoctorStepObject) srcProject.addObject(path);
-		tgtObj2.parse(content);
-		tgtObj2.setStepObjectName(srcObj.getStepObjectName());
-		tgtObj2.setStepObjectDescription(srcObj.getStepObjectDescription());
-		convertStepDefinitionList();
-		return tgtObj2.toString();
-	}
-
-	private void convertStepParameters(StepDefinition stepDefinition, EAnnotation parametersSrc) throws Exception {
-
-		StepParameters stepParameters = tgtObj2.createStepParameters(stepDefinition,
-				srcObj.getStepParametersName(parametersSrc));
-		tgtObj2.createStepParametersTable(stepParameters, srcObj.getStepParametersTable(parametersSrc));
-		for (ArrayList<String> stepParametersRow : srcObj.getStepParametersRowList(parametersSrc)) {
-			convertStepParametersRow(stepParameters, stepParametersRow);
+	private void convertTestSetup(Interaction srcAbstractScenario) {
+		log.debug("test setup: " + srcAbstractScenario.getName());
+		Background background = tgtObjTestSuite.addBackground(srcObj.getBackgroundName(srcAbstractScenario));
+		tgtObjTestSuite.setBackgroundTags(background, srcObj.getFeatureTags(srcAbstractScenario));
+		tgtObjTestSuite.setBackgroundDescription(background, srcObj.getBackgroundDescription(srcAbstractScenario));
+		for (Message srcStep : srcObj.getStepList(srcAbstractScenario)) {
+			convertTestStep(background, srcStep);
 		}
 	}
 
-	private void convertStepParametersRow(StepParameters stepParameters, ArrayList<String> stepParametersRow) {
-		tgtObj2.createStepParametersRow(stepParameters, stepParametersRow);
+	private void convertTestStep(AbstractScenario abstractScenario, Message srcStep) {
+		log.debug("test step: " + srcStep.getName());
+		Step step = tgtObjTestSuite.addStep(abstractScenario, srcObj.getStepName(srcStep));
+		if (srcObj.hasDocString(srcStep)) {
+			convertStepText(step, srcStep);
+		} else if (srcObj.hasStepTable(srcStep)) {
+			convertStepData(step, srcStep);
+		}
 	}
 
-	private void convertStepTable(Step step, Message stepSrc) {
-		tgtObj.createStepTable(step, srcObj.getStepTable(stepSrc));
+	private String convertTestSuite(String path, String content) throws Exception {
+		log.debug("test suite: " + path);
+		srcObj = (TestSuite) model.getObject(pathConverter.findUMLPath(path));
+		tgtObjTestSuite = (AsciiDoctorTestSuite) project.addObject(path);
+		tgtObjTestSuite.parse(content);
+		tgtObjTestSuite.setFeatureName(srcObj.getFeatureName());
+		tgtObjTestSuite.setFeatureDescription(srcObj.getFeatureDescription());
+		for (Interaction as : srcObj.getAbstractScenarioList()) {
+			if (srcObj.isBackground(as)) {
+				convertTestSetup(as);
+			} else if (srcObj.isScenarioOutline(as)) {
+				convertTestCaseWithData(as);
+			} else {
+				convertTestCase(as);
+			}
+		}
+		return tgtObjTestSuite.toString();
 	}
 
 	public ArrayList<String> getFileNames() throws Exception {
 		initProjects();
 		ArrayList<String> objects = new ArrayList<String>();
-		for (ConvertibleObject co : testProject.getObjects(testProject.TEST_CASES)) {
-			objects.add(pathConverter.convertFilePath(co.getPath(), testProject.TEST_CASES));
+		for (ConvertibleObject co : model.getObjects(model.TEST_CASES)) {
+			objects.add(pathConverter.convertFilePath(co.getPath(), model.TEST_CASES));
 		}
-		for (ConvertibleObject co : testProject.getObjects(testProject.TEST_STEPS)) {
-			objects.add(pathConverter.convertFilePath(co.getPath(), testProject.TEST_STEPS));
+		for (ConvertibleObject co : model.getObjects(model.TEST_STEPS)) {
+			objects.add(pathConverter.convertFilePath(co.getPath(), model.TEST_STEPS));
 		}
 		return objects;
 	}
 
 	public void initProjects() throws Exception {
-		testProject = new TestProject(this.tag, this.fa);
-		testProject.init();
-		srcProject = new AsciiDoctorTestProject(this.tag, this.fa);
-		srcProject.init();
-		this.pathConverter = new AsciiDoctorPathConverter(testProject, (AsciiDoctorTestProject) srcProject);
+		project = new AsciiDoctorTestProject(this.tag, this.fa);
+		model = new TestProject(this.tag, this.fa);
+		project.init();
+		model.init();
+		this.pathConverter = new AsciiDoctorPathConverter(model, (AsciiDoctorTestProject) project);
 	}
 }

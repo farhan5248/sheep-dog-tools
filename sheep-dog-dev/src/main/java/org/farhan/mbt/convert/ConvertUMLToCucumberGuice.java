@@ -14,10 +14,10 @@ public class ConvertUMLToCucumberGuice extends ConvertUMLToCucumber {
 	}
 
 	public void initProjects() throws Exception {
-		testProject = new TestProject(this.tag, this.fa);
-		srcProject = new CucumberGuiceTestProject(this.tag, this.fa);
-		testProject.init();
-		srcProject.init();
-		this.pathConverter = new CucumberPathConverter(testProject, (CucumberTestProject) srcProject);
+		model = new TestProject(this.tag, this.fa);
+		project = new CucumberGuiceTestProject(this.tag, this.fa);
+		model.init();
+		project.init();
+		this.pathConverter = new CucumberPathConverter(model, (CucumberTestProject) project);
 	}
 }

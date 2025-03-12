@@ -45,7 +45,7 @@ public class AsciiDoctorStepObject implements ConvertibleObject {
 		return contents.trim();
 	}
 
-	public StepDefinition createStepDefinition(String stepDefinitionName) {
+	public StepDefinition addStepDefinition(String stepDefinitionName) {
 		deleteStepDefinition(stepDefinitionName);
 		StepDefinition stepDefinition = SheepDogFactory.eINSTANCE.createStepDefinition();
 		stepDefinition.setName(stepDefinitionName);
@@ -53,7 +53,7 @@ public class AsciiDoctorStepObject implements ConvertibleObject {
 		return stepDefinition;
 	}
 
-	public StepParameters createStepParameters(StepDefinition stepDefinition, String stepParametersName) {
+	public StepParameters addStepParameters(StepDefinition stepDefinition, String stepParametersName) {
 		StepParameters stepParameters = SheepDogFactory.eINSTANCE.createStepParameters();
 		stepParameters.setName(stepParametersName);
 		stepDefinition.getStepParameters().add(stepParameters);
@@ -70,7 +70,7 @@ public class AsciiDoctorStepObject implements ConvertibleObject {
 		stepParameters.getParametersTable().getRows().add(row);
 	}
 
-	public void createStepParametersTable(StepParameters stepParameters, ArrayList<String> headers) {
+	public void addStepParametersTable(StepParameters stepParameters, ArrayList<String> headers) {
 		stepParameters.setParametersTable(SheepDogFactory.eINSTANCE.createTable());
 		Row row = SheepDogFactory.eINSTANCE.createRow();
 		for (String srcCell : headers) {
