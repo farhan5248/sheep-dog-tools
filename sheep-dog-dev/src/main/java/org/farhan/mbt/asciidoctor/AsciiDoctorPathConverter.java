@@ -1,7 +1,9 @@
 package org.farhan.mbt.asciidoctor;
 
 import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.core.StepObject;
 import org.farhan.mbt.core.TestProject;
+import org.farhan.mbt.core.TestSuite;
 
 public class AsciiDoctorPathConverter {
 
@@ -31,14 +33,14 @@ public class AsciiDoctorPathConverter {
 	}
 
 	public String findUMLPath(String path) {
-		for (ConvertibleObject co : model.getObjects(model.TEST_CASES)) {
-			if (convertFilePath(co.getPath(), project.TEST_CASES).contentEquals(path)) {
-				return co.getPath();
+		for (TestSuite co : model.getTestSuiteList()) {
+			if (convertFilePath(co.getUmlElement().getQualifiedName(), project.TEST_CASES).contentEquals(path)) {
+				return co.getUmlElement().getQualifiedName();
 			}
 		}
-		for (ConvertibleObject co : model.getObjects(model.TEST_STEPS)) {
-			if (convertFilePath(co.getPath(), project.TEST_STEPS).contentEquals(path)) {
-				return co.getPath();
+		for (StepObject co : model.getStepObjectList()) {
+			if (convertFilePath(co.getUmlElement().getQualifiedName(), project.TEST_STEPS).contentEquals(path)) {
+				return co.getUmlElement().getQualifiedName();
 			}
 		}
 		return null;

@@ -29,73 +29,65 @@ public class TestProject {
 	public String tags = "";
 	public final String TEST_CASES = "specs";
 	public final String TEST_STEPS = "stepdefs";
-	// TODO change to private after refactoring of Test*
-	// TODO rename to umlElement
-	Model theModel;
-	protected ArrayList<ConvertibleObject> firstLayerObjects;
-	protected ArrayList<ConvertibleObject> secondLayerObjects;
+	private Model umlElement;
+	protected ArrayList<TestSuite> firstLayerObjects;
+	protected ArrayList<StepObject> secondLayerObjects;
 
 	public TestProject(String tags, ObjectRepository fa) {
-		firstLayerObjects = new ArrayList<ConvertibleObject>();
-		secondLayerObjects = new ArrayList<ConvertibleObject>();
+		firstLayerObjects = new ArrayList<TestSuite>();
+		secondLayerObjects = new ArrayList<StepObject>();
 		this.fa = fa;
 		this.tags = tags;
-		theModel = UMLFactory.eINSTANCE.createModel();
-		theModel.setName("pst");
-		theModel.createNestedPackage(TEST_CASES);
-		theModel.createNestedPackage(TEST_STEPS);
+		umlElement = UMLFactory.eINSTANCE.createModel();
+		umlElement.setName("pst");
+		umlElement.createNestedPackage(TEST_CASES);
+		umlElement.createNestedPackage(TEST_STEPS);
 	}
 
-	private ConvertibleObject addObject(String qualifiedName) {
-		// TODO split TestSuite into 2 and then delete this method
-		TestSuite ucw = (TestSuite) getObject(qualifiedName);
-		if (ucw == null) {
-			ucw = new TestSuite(qualifiedName, this);
+	public StepObject addStepObject(String qualifiedName) {
+		if (getPackagedElement(qualifiedName, null) == null) {
+			StepObject stepObject = new StepObject(qualifiedName, this);
+			secondLayerObjects.add(stepObject);
+			return stepObject;
 		}
-		return ucw;
-	}
-
-	public TestSuite addStepObject(String qualifiedName) {
-		TestSuite ucw = (TestSuite) addObject(qualifiedName);
-		secondLayerObjects.add(ucw);
-		return ucw;
+		return null;
 	}
 
 	public TestSuite addTestSuite(String qualifiedName) {
-		TestSuite ucw = (TestSuite) getObject(qualifiedName);
-		if (ucw == null) {
-			ucw = new TestSuite(qualifiedName, this);
-			firstLayerObjects.add(ucw);
-			ucw.setParent(this);
+		if (getPackagedElement(qualifiedName, null) == null) {
+			TestSuite testSuite = new TestSuite(qualifiedName, this);
+			firstLayerObjects.add(testSuite);
+			return testSuite;
 		}
-		return ucw;
+		return null;
 	}
 
 	public String getDir() {
 		return "uml/";
 	}
 
-	public ConvertibleObject getObject(String qualifiedName) {
+	public TestSuite getTestSuite(String qualifiedName) {
+		// TODO split into getTestSuite and getStepObject
+		// I'm not sure this even works right now, it doesn't make sense.
 		Class theClass = (Class) getPackagedElement(qualifiedName, null);
 		if (theClass == null) {
 			return null;
 		} else {
-			// TODO this will be a problem if the object is not in the first layer
 			return new TestSuite(qualifiedName, this);
 		}
 	}
 
-	public ArrayList<ConvertibleObject> getObjects(String layer) {
-		if (layer.equalsIgnoreCase(TEST_STEPS)) {
-			return secondLayerObjects;
-		} else {
-			return firstLayerObjects;
-		}
+	public ArrayList<TestSuite> getTestSuiteList() {
+		return firstLayerObjects;
+	}
+
+	public ArrayList<StepObject> getStepObjectList() {
+		return secondLayerObjects;
 	}
 
 	public PackageableElement getPackagedElement(String qualifiedName, Package nestingPackage) {
 		if (nestingPackage == null) {
-			nestingPackage = theModel;
+			nestingPackage = umlElement;
 		}
 		for (PackageableElement pe : nestingPackage.getPackagedElements()) {
 			if (pe instanceof Package) {
@@ -133,19 +125,19 @@ public class TestProject {
 	}
 
 	public void init() throws Exception {
-		String path = getDir() + theModel.getName() + "." + UMLResource.FILE_EXTENSION;
+		String path = getDir() + umlElement.getName() + "." + UMLResource.FILE_EXTENSION;
 		if (fa.contains(tags, path)) {
 			URI uri = URI.createFileURI(path);
 			ResourceSet resourceSet = UMLResourcesUtil.init(new ResourceSetImpl());
 			Resource resource = resourceSet.createResource(uri);
 			InputStream content = new ByteArrayInputStream(fa.get(tags, path).getBytes(StandardCharsets.UTF_8));
 			resource.load(content, Collections.EMPTY_MAP);
-			theModel = (Model) resource.getContents().getFirst();
-			ArrayList<Class> objects = getPackagedElements(theModel.getNestedPackage(TEST_CASES));
+			umlElement = (Model) resource.getContents().getFirst();
+			ArrayList<Class> objects = getPackagedElements(umlElement.getNestedPackage(TEST_CASES));
 			for (Class c : objects) {
 				addTestSuite(c.getQualifiedName());
 			}
-			objects = getPackagedElements(theModel.getNestedPackage(TEST_STEPS));
+			objects = getPackagedElements(umlElement.getNestedPackage(TEST_STEPS));
 			for (Class c : objects) {
 				addStepObject(c.getQualifiedName());
 			}
@@ -153,12 +145,12 @@ public class TestProject {
 	}
 
 	public void save() throws Exception {
-		String path = getDir() + theModel.getName() + "." + UMLResource.FILE_EXTENSION;
+		String path = getDir() + umlElement.getName() + "." + UMLResource.FILE_EXTENSION;
 		URI uri = URI.createFileURI(path);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		UMLResourcesUtil.init(resourceSet);
 		XMLResource resource = (XMLResource) resourceSet.createResource(uri);
-		resource.getContents().add(theModel);
+		resource.getContents().add(umlElement);
 		// Looks like I have this for interaction message signatures that point nowhere
 		// This option lets files get saved with referenced to non-existing objects
 		Map<Object, Object> options = resource.getDefaultSaveOptions();
@@ -166,5 +158,9 @@ public class TestProject {
 		OutputStream os = new ByteArrayOutputStream();
 		resource.save(os, options);
 		fa.put(tags, path, os.toString());
+	}
+
+	public Model getUmlElement() {
+		return umlElement;
 	}
 }

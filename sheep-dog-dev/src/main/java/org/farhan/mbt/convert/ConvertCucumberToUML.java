@@ -47,18 +47,18 @@ public class ConvertCucumberToUML extends Converter {
 
 	private void convertTestCase(AbstractScenario srcTestSuite, TestSuite testSuite) {
 		log.debug("test case: " + srcTestSuite.getName());
-		TestCase testCase = testSuite.addScenario(srcObjTestSuite.getScenarioName(srcTestSuite));
-		testCase.setScenarioTags(srcObjTestSuite.getScenarioTags(srcTestSuite));
-		testCase.setScenarioDescription(srcObjTestSuite.getScenarioDescription(srcTestSuite));
+		TestCase testCase = testSuite.addTestCase(srcObjTestSuite.getScenarioName(srcTestSuite));
+		testCase.setTags(srcObjTestSuite.getScenarioTags(srcTestSuite));
+		testCase.setDescription(srcObjTestSuite.getScenarioDescription(srcTestSuite));
 		for (Step srcStep : srcObjTestSuite.getStepList(srcTestSuite)) {
-			convertTestStep(testCase.umlElement, srcStep, srcTestSuite);
+			convertTestStep(testCase.getUmlElement(), srcStep, srcTestSuite);
 		}
 	}
 
 	private void convertTestCaseWithTestData(AbstractScenario srcAbstractScenario, TestSuite testSuite) {
 		log.debug("test case: " + srcAbstractScenario.getName());
 		Interaction scenarioOutline = tgtObj
-				.addScenarioOutline(srcObjTestSuite.getScenarioOutlineName(srcAbstractScenario));
+				.addTestCaseWithData(srcObjTestSuite.getScenarioOutlineName(srcAbstractScenario));
 		tgtObj.setScenarioOutlineTags(scenarioOutline, srcObjTestSuite.getScenarioOutlineTags(srcAbstractScenario));
 		tgtObj.setScenarioOutlineDescription(scenarioOutline,
 				srcObjTestSuite.getScenarioOutlineDescription(srcAbstractScenario));
@@ -72,7 +72,7 @@ public class ConvertCucumberToUML extends Converter {
 
 	private void convertTestData(Interaction scenarioOutline, Examples srcExamples) {
 		log.debug("test data: " + srcExamples.getName());
-		EAnnotation examples = tgtObj.addExamples(scenarioOutline, srcObjTestSuite.getExamplesName(srcExamples));
+		EAnnotation examples = tgtObj.addTestData(scenarioOutline, srcObjTestSuite.getExamplesName(srcExamples));
 		// TODO add examples description
 		tgtObj.setExamplesTable(examples, srcObjTestSuite.getExamplesTable(srcExamples));
 		for (Row row : srcObjTestSuite.getExamplesRowList(srcExamples)) {
@@ -85,11 +85,11 @@ public class ConvertCucumberToUML extends Converter {
 
 	private void convertTestSetup(AbstractScenario srcAbstractScenario, TestSuite testSuite) {
 		log.debug("test setup: " + srcAbstractScenario.getName());
-		TestSetup background = testSuite.addBackground(srcObjTestSuite.getBackgroundName(srcAbstractScenario));
-		background.setBackgroundTags(background, srcObjTestSuite.getFeatureTags());
-		background.setBackgroundDescription(background, srcObjTestSuite.getBackgroundDescription(srcAbstractScenario));
+		TestSetup background = testSuite.addTestSetup(srcObjTestSuite.getBackgroundName(srcAbstractScenario));
+		background.setTags(srcObjTestSuite.getFeatureTags());
+		background.setDescription(srcObjTestSuite.getBackgroundDescription(srcAbstractScenario));
 		for (Step srcStep : srcObjTestSuite.getStepList(srcAbstractScenario)) {
-			convertTestStep(background.umlElement, srcStep, srcAbstractScenario);
+			convertTestStep(background.getUmlElement(), srcStep, srcAbstractScenario);
 		}
 	}
 

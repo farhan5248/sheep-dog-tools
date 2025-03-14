@@ -1,5 +1,5 @@
 package org.farhan.mbt.core;
 
-public class StepText {
+public class StepText extends UMLElement {
 
 }

@@ -10,6 +10,7 @@ import org.farhan.mbt.asciidoctor.AsciiDoctorPathConverter;
 import org.farhan.mbt.asciidoctor.AsciiDoctorTestProject;
 import org.farhan.mbt.asciidoctor.AsciiDoctorStepObject;
 import org.farhan.mbt.core.ObjectRepository;
+import org.farhan.mbt.core.StepObject;
 import org.farhan.mbt.core.TestSuite;
 import org.farhan.mbt.core.TestProject;
 import org.farhan.mbt.sheepDog.AbstractScenario;
@@ -62,7 +63,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 
 	private String convertStepObject(String path, String content) throws Exception {
 		log.debug("step object: " + path);
-		srcObj = (TestSuite) model.getObject(pathConverter.findUMLPath(path));
+		srcObj = (TestSuite) model.getTestSuite(pathConverter.findUMLPath(path));
 		tgtObjStepObject = (AsciiDoctorStepObject) project.addFile(path);
 		tgtObjStepObject.parse(content);
 		tgtObjStepObject.setStepObjectName(srcObj.getStepObjectName());
@@ -144,7 +145,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 
 	private String convertTestSuite(String path, String content) throws Exception {
 		log.debug("test suite: " + path);
-		srcObj = (TestSuite) model.getObject(pathConverter.findUMLPath(path));
+		srcObj = (TestSuite) model.getTestSuite(pathConverter.findUMLPath(path));
 		tgtObjTestSuite = (AsciiDoctorTestSuite) project.addFile(path);
 		tgtObjTestSuite.parse(content);
 		tgtObjTestSuite.setFeatureName(srcObj.getFeatureName());
@@ -164,11 +165,11 @@ public class ConvertUMLToAsciidoctor extends Converter {
 	public ArrayList<String> getFileNames() throws Exception {
 		initProjects();
 		ArrayList<String> objects = new ArrayList<String>();
-		for (ConvertibleObject co : model.getObjects(model.TEST_CASES)) {
-			objects.add(pathConverter.convertFilePath(co.getPath(), model.TEST_CASES));
+		for (TestSuite co : model.getTestSuiteList()) {
+			objects.add(pathConverter.convertFilePath(co.getUmlElement().getQualifiedName(), model.TEST_CASES));
 		}
-		for (ConvertibleObject co : model.getObjects(model.TEST_STEPS)) {
-			objects.add(pathConverter.convertFilePath(co.getPath(), model.TEST_STEPS));
+		for (StepObject co : model.getStepObjectList()) {
+			objects.add(pathConverter.convertFilePath(co.getUmlElement().getQualifiedName(), model.TEST_STEPS));
 		}
 		return objects;
 	}

@@ -2,31 +2,32 @@ package org.farhan.mbt.core;
 
 import java.util.ArrayList;
 
-import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.ValueSpecification;
 
-public class TestStep {
+public class TestStep extends UMLElement {
 
-	public Message umlElement;
-	private TestStepParent parent;
+	private Message umlElement;
 
-	public TestStep(String name, TestStepParent parent) {
-		this.parent = parent;
+	public TestStep(String name, UMLElement parent) {
 		String keyword = name.split(" ")[0];
-		umlElement = this.parent.getUmlElement().createMessage(name.substring(keyword.length() + 1));
+		if (parent instanceof TestCase) {
+			umlElement = ((TestCase) parent).getUmlElement().createMessage(name.substring(keyword.length() + 1));
+		} else {
+			umlElement = ((TestSetup) parent).getUmlElement().createMessage(name.substring(keyword.length() + 1));
+		}
 	}
 
-	public void setStepKeyword(String keyword) {
+	public void setKeyword(String keyword) {
 		if (!keyword.endsWith(":")) {
 			keyword += ":";
 		}
 		createAnnotation(umlElement, "Step", "Keyword", keyword);
 	}
 
-	public void setStepNameLong(String stepNameLong) {
+	public void setNameLong(String stepNameLong) {
 		String keyword = stepNameLong.split(" ")[0];
 		if (!keyword.endsWith(":")) {
 			stepNameLong = stepNameLong.replaceFirst("^" + keyword, keyword + ":");
@@ -34,16 +35,7 @@ public class TestStep {
 		createAnnotation(umlElement, "Step", "LongName", stepNameLong);
 	}
 
-	private EAnnotation createAnnotation(Message aMessage, String name, String key, String value) {
-		EAnnotation a = aMessage.getEAnnotation(name);
-		if (a == null) {
-			a = aMessage.createEAnnotation(name);
-		}
-		a.getDetails().put(key, value);
-		return a;
-	}
-
-	public void setDocString(String content) {
+	public void setStepText(String content) {
 		ValueSpecification vs = createArgument("docString", "");
 		String[] lines = content.split("\n");
 		for (int i = 0; i < lines.length; i++) {
@@ -51,27 +43,7 @@ public class TestStep {
 		}
 	}
 
-	private ValueSpecification createArgument(String name, String value) {
-		LiteralString ls = (LiteralString) umlElement.getArgument(name, null);
-		if (ls == null) {
-			ls = UMLFactory.eINSTANCE.createLiteralString();
-			ls = (LiteralString) umlElement.createArgument(name, null, ls.eClass());
-			ls.setName(name);
-			ls.setValue(value);
-		}
-		return ls;
-	}
-
-	private EAnnotation createAnnotation(ValueSpecification vs, String name, String key, String value) {
-		EAnnotation a = vs.getEAnnotation(name);
-		if (a == null) {
-			a = vs.createEAnnotation(name);
-		}
-		a.getDetails().put(key, value);
-		return a;
-	}
-
-	public void setStepTable(ArrayList<ArrayList<String>> stepTableRowList) {
+	public void setStepData(ArrayList<ArrayList<String>> stepTableRowList) {
 		ValueSpecification table = createArgument("dataTable", "");
 		// header
 		String row = "";
@@ -88,6 +60,17 @@ public class TestStep {
 			}
 			createAnnotation(table, "dataTable", String.valueOf(i), row);
 		}
+	}
+
+	private ValueSpecification createArgument(String name, String value) {
+		LiteralString ls = (LiteralString) umlElement.getArgument(name, null);
+		if (ls == null) {
+			ls = UMLFactory.eINSTANCE.createLiteralString();
+			ls = (LiteralString) umlElement.createArgument(name, null, ls.eClass());
+			ls.setName(name);
+			ls.setValue(value);
+		}
+		return ls;
 	}
 
 }

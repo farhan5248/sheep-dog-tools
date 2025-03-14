@@ -12,46 +12,21 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
-import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.ValueSpecification;
 
-public class TestSuite implements ConvertibleObject {
+public class TestSuite extends UMLElement {
 
-	private Class theClass;
-	private TestProject parent;
+	private Class umlElement;
 	private TestSetup testSetup;
+	private ArrayList<TestCase> testCaseList;
 
 	public TestSuite(String name, TestProject parent) {
-		this.parent = parent;
-		this.theClass = addClass(name);
+		this.testCaseList = new ArrayList<TestCase>();
+		this.umlElement = addClass(name, parent.getUmlElement());
 	}
 
-	private Class addClass(String qualifiedName) {
-		Class theClass = null;
-		Package owningPackage = parent.theModel;
-		String[] qualifiedNameParts = qualifiedName.replace(parent.theModel.getQualifiedName() + "::", "").split("::");
-		for (int i = 0; i < qualifiedNameParts.length; i++) {
-			if (i == qualifiedNameParts.length - 1) {
-				theClass = owningPackage.createOwnedClass(qualifiedNameParts[i], false);
-			} else {
-				// TODO should this instead be parent.addPackage otherwise there's duplication
-				// between this and StepObject
-				owningPackage = addPackage(owningPackage, qualifiedNameParts[i]);
-			}
-		}
-		return theClass;
-	}
-
-	private Package addPackage(Package nestingPackage, String name) {
-		Package thePackage = nestingPackage.getNestedPackage(name);
-		if (thePackage == null) {
-			thePackage = nestingPackage.createNestedPackage(name);
-		}
-		return thePackage;
-	}
-
-	private Interaction addAbstractScenario(Class theClass, String interactionName, String annotationName) {
+	private Interaction addAbstractTestCase(Class theClass, String interactionName, String annotationName) {
 		Interaction anInteraction = (Interaction) theClass.getOwnedBehavior(interactionName);
 		if (anInteraction == null) {
 			anInteraction = UMLFactory.eINSTANCE.createInteraction();
@@ -64,12 +39,12 @@ public class TestSuite implements ConvertibleObject {
 		return anInteraction;
 	}
 
-	public TestSetup addBackground(String name) {
+	public TestSetup addTestSetup(String name) {
 		testSetup = new TestSetup(name, this);
 		return testSetup;
 	}
 
-	public EAnnotation addExamples(Interaction scenarioOutline, String name) {
+	public EAnnotation addTestData(Interaction scenarioOutline, String name) {
 		return createAnnotation(scenarioOutline, name);
 	}
 
@@ -81,15 +56,15 @@ public class TestSuite implements ConvertibleObject {
 		examples.getDetails().put(String.valueOf(examples.getDetails().size()), value);
 	}
 
-	public TestCase addScenario(String name) {
-		
+	// TODO rename to addTestCase, remove Cucumber style names
+	public TestCase addTestCase(String name) {
 		TestCase testCase = new TestCase(name, this);
+		testCaseList.add(testCase);
 		return testCase;
-
 	}
 
-	public Interaction addScenarioOutline(String name) {
-		Interaction scenario = addAbstractScenario(theClass, name, "");
+	public Interaction addTestCaseWithData(String name) {
+		Interaction scenario = addAbstractTestCase(umlElement, name, "");
 		return scenario;
 	}
 
@@ -101,10 +76,10 @@ public class TestSuite implements ConvertibleObject {
 	}
 
 	public Interaction addStepDefinition(String stepName) {
-		Interaction stepDefinition = addAbstractScenario(theClass, stepName, "");
+		Interaction stepDefinition = addAbstractTestCase(umlElement, stepName, "");
 		// TODO make tests for this by doing adoc(unsorted) uml adoc (sorted)
 		TreeMap<String, Interaction> sorted = new TreeMap<String, Interaction>();
-		EList<Behavior> behaviors = theClass.getOwnedBehaviors();
+		EList<Behavior> behaviors = umlElement.getOwnedBehaviors();
 		for (int i = behaviors.size(); i > 0; i--) {
 			sorted.put(behaviors.get(i - 1).getName(), (Interaction) behaviors.get(i - 1));
 			behaviors.removeLast();
@@ -135,46 +110,11 @@ public class TestSuite implements ConvertibleObject {
 		stepParameters.getDetails().put("0", value);
 	}
 
-	private EAnnotation createAnnotation(Class className, String name, String key) {
-		EAnnotation a = className.getEAnnotation(name);
-		if (a == null) {
-			a = className.createEAnnotation(name);
-		}
-		if (!key.isEmpty()) {
-			a.getDetails().put(key, "");
-		}
-		return a;
-	}
-
 	private EAnnotation createAnnotation(Interaction anInteraction, String name) {
 		EAnnotation a = anInteraction.getEAnnotation(name);
 		if (a == null) {
 			a = anInteraction.createEAnnotation(name);
 		}
-		return a;
-	}
-
-	private EAnnotation createAnnotation(Interaction anInteraction, String name, String key, String value) {
-		EAnnotation a = createAnnotation(anInteraction, name);
-		a.getDetails().put(key, value);
-		return a;
-	}
-
-	private EAnnotation createAnnotation(Message aMessage, String name, String key, String value) {
-		EAnnotation a = aMessage.getEAnnotation(name);
-		if (a == null) {
-			a = aMessage.createEAnnotation(name);
-		}
-		a.getDetails().put(key, value);
-		return a;
-	}
-
-	private EAnnotation createAnnotation(ValueSpecification vs, String name, String key, String value) {
-		EAnnotation a = vs.getEAnnotation(name);
-		if (a == null) {
-			a = vs.createEAnnotation(name);
-		}
-		a.getDetails().put(key, value);
 		return a;
 	}
 
@@ -189,15 +129,13 @@ public class TestSuite implements ConvertibleObject {
 		return ls;
 	}
 
-	@Override
-	public Object get() {
-		// TODO remove override and change type to Class
-		return theClass;
+	public Class getUmlElement() {
+		return umlElement;
 	}
 
 	public ArrayList<Interaction> getAbstractScenarioList() {
 		ArrayList<Interaction> abstractScenarioList = new ArrayList<Interaction>();
-		for (Behavior b : theClass.getOwnedBehaviors()) {
+		for (Behavior b : umlElement.getOwnedBehaviors()) {
 			abstractScenarioList.add((Interaction) b);
 		}
 		return abstractScenarioList;
@@ -267,19 +205,14 @@ public class TestSuite implements ConvertibleObject {
 	}
 
 	public String getFeatureDescription() {
-		if (theClass.getOwnedComments().size() > 0) {
-			return theClass.getOwnedComments().get(0).getBody();
+		if (umlElement.getOwnedComments().size() > 0) {
+			return umlElement.getOwnedComments().get(0).getBody();
 		}
 		return "";
 	}
 
 	public String getFeatureName() {
-		return theClass.getName();
-	}
-
-	@Override
-	public String getPath() {
-		return theClass.getQualifiedName();
+		return umlElement.getName();
 	}
 
 	public String getScenarioDescription(Interaction abstractScenario) {
@@ -322,7 +255,7 @@ public class TestSuite implements ConvertibleObject {
 
 	public ArrayList<Interaction> getStepDefinitionList() {
 		ArrayList<Interaction> steps = new ArrayList<Interaction>();
-		for (Behavior b : theClass.getOwnedBehaviors()) {
+		for (Behavior b : umlElement.getOwnedBehaviors()) {
 			steps.add((Interaction) b);
 		}
 		return steps;
@@ -360,14 +293,14 @@ public class TestSuite implements ConvertibleObject {
 	}
 
 	public String getStepObjectDescription() {
-		if (theClass.getOwnedComments().size() > 0) {
-			return theClass.getOwnedComments().get(0).getBody();
+		if (umlElement.getOwnedComments().size() > 0) {
+			return umlElement.getOwnedComments().get(0).getBody();
 		}
 		return "";
 	}
 
 	public String getStepObjectName() {
-		return theClass.getName();
+		return umlElement.getName();
 	}
 
 	public String getStepParametersName(EAnnotation parametersSrc) {
@@ -443,11 +376,6 @@ public class TestSuite implements ConvertibleObject {
 		return false;
 	}
 
-	@Override
-	public void parse(String text) throws Exception {
-		// Individual objects are not stored separately so this is not needed.
-	}
-
 	public void setDocString(Message step, String content) {
 		ValueSpecification vs = createArgument(step, "docString", "");
 		String[] lines = content.split("\n");
@@ -465,7 +393,7 @@ public class TestSuite implements ConvertibleObject {
 	}
 
 	public void setFeatureDescription(String description) {
-		theClass.createOwnedComment().setBody(description);
+		umlElement.createOwnedComment().setBody(description);
 	}
 
 	public void setScenarioDescription(Interaction scenario, String scenarioDescription) {
@@ -508,11 +436,11 @@ public class TestSuite implements ConvertibleObject {
 	}
 
 	public void setStepObjectDescription(String description) {
-		theClass.createOwnedComment().setBody(description);
+		umlElement.createOwnedComment().setBody(description);
 	}
 
 	public void setStepObjectName(String StepObjectName) {
-		createAnnotation(theClass, "title", StepObjectName);
+		createAnnotation(umlElement, "title", StepObjectName);
 	}
 
 	public void setStepTable(Message step, ArrayList<ArrayList<String>> stepTableRowList) {
@@ -546,7 +474,4 @@ public class TestSuite implements ConvertibleObject {
 		return step.getEAnnotation("Step").getDetails().get("Keyword");
 	}
 
-	public void setParent(TestProject testProject) {
-		this.parent = testProject;
-	}
 }

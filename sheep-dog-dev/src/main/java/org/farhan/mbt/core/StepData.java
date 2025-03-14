@@ -1,5 +1,5 @@
 package org.farhan.mbt.core;
 
-public class StepData {
+public class StepData extends UMLElement {
 
 }
