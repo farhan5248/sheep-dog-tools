@@ -14,7 +14,7 @@ public class CucumberTestProject extends ConvertibleProject {
 	}
 
 	@Override
-	public ConvertibleObject addObject(String path) throws Exception {
+	public ConvertibleObject addFile(String path) throws Exception {
 		// TODO calculate an actual checksum
 		fa.put(tags, path, "sha checksum");
 		ConvertibleObject aConvertibleObject = getObject(path);

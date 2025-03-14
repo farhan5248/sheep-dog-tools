@@ -13,6 +13,9 @@ import org.farhan.mbt.asciidoctor.AsciiDoctorTestProject;
 import org.farhan.mbt.asciidoctor.AsciiDoctorStepObject;
 import org.farhan.mbt.core.Logger;
 import org.farhan.mbt.core.ObjectRepository;
+import org.farhan.mbt.core.TestCase;
+import org.farhan.mbt.core.TestSetup;
+import org.farhan.mbt.core.TestStep;
 import org.farhan.mbt.core.TestSuite;
 import org.farhan.mbt.core.TestProject;
 import org.farhan.mbt.sheepDog.AbstractScenario;
@@ -54,6 +57,8 @@ public class ConvertAsciidoctorToUML extends Converter {
 		} else {
 			convertTestSuite(path, content);
 		}
+		// TODO this method shouldn't return empty string, there needs to be the
+		// equivalent of PUT (void) and GET (String) return types
 		return "";
 	}
 
@@ -75,7 +80,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	private void convertStepObject(String path, String content) throws Exception {
 		log.debug("step object: " + path);
-		srcObjStepObject = (AsciiDoctorStepObject) project.addObject(path);
+		srcObjStepObject = (AsciiDoctorStepObject) project.addFile(path);
 		srcObjStepObject.parse(content);
 		if (isStepObjectSelected()) {
 			tgtObj = (TestSuite) model.addStepObject(pathConverter.convertUMLPath(srcObjStepObject.getPath()));
@@ -104,16 +109,16 @@ public class ConvertAsciidoctorToUML extends Converter {
 		tgtObj.setDocString(step, srcObjTestSuite.getDocString(srcStep));
 	}
 
-	private void convertTestCase(AbstractScenario srcAbstractScenario) {
-		log.debug("test case: " + srcAbstractScenario.getName());
-		Interaction scenario = tgtObj.addScenario(srcObjTestSuite.getScenarioName(srcAbstractScenario));
-		tgtObj.setScenarioTags(scenario, srcObjTestSuite.getAbstractScenarioTags(srcAbstractScenario));
-		tgtObj.setScenarioDescription(scenario, srcObjTestSuite.getScenarioDescription(srcAbstractScenario));
-		for (Step srcStep : srcObjTestSuite.getStepList(srcAbstractScenario)) {
-			convertTestStep(scenario, srcStep);
+	private void convertTestCase(AbstractScenario srcTestSuite, TestSuite testSuite) {
+		log.debug("test case: " + srcTestSuite.getName());
+		TestCase testCase = testSuite.addScenario(srcObjTestSuite.getScenarioName(srcTestSuite));
+		testCase.setScenarioTags(srcObjTestSuite.getAbstractScenarioTags(srcTestSuite));
+		testCase.setScenarioDescription(srcObjTestSuite.getScenarioDescription(srcTestSuite));
+		for (Step srcStep : srcObjTestSuite.getStepList(srcTestSuite)) {
+			convertTestStep(testCase.addStep(srcObjTestSuite.getStepName(srcStep)), srcStep);
 		}
-		for (Examples srcExamples : srcObjTestSuite.getExamplesList(srcAbstractScenario)) {
-			convertTestData(scenario, srcExamples);
+		for (Examples srcExamples : srcObjTestSuite.getExamplesList(srcTestSuite)) {
+			convertTestData(testCase.umlElement, srcExamples);
 		}
 	}
 
@@ -127,13 +132,24 @@ public class ConvertAsciidoctorToUML extends Converter {
 		}
 	}
 
-	private void convertTestSetup(AbstractScenario srcAbstractScenario) {
-		log.debug("test setup: " + srcAbstractScenario.getName());
-		Interaction background = tgtObj.addBackground(srcObjTestSuite.getBackgroundName(srcAbstractScenario));
-		tgtObj.setBackgroundTags(background, srcObjTestSuite.getAbstractScenarioTags(srcAbstractScenario));
-		tgtObj.setBackgroundDescription(background, srcObjTestSuite.getBackgroundDescription(srcAbstractScenario));
-		for (Step srcStep : srcObjTestSuite.getStepList(srcAbstractScenario)) {
-			convertTestStep(background, srcStep);
+	private void convertTestSetup(AbstractScenario srcBackground, TestSetup background) {
+		log.debug("test setup: " + srcBackground.getName());
+		background.setBackgroundTags(background, srcObjTestSuite.getAbstractScenarioTags(srcBackground));
+		background.setBackgroundDescription(background, srcObjTestSuite.getBackgroundDescription(srcBackground));
+		for (Step srcStep : srcObjTestSuite.getStepList(srcBackground)) {
+			convertTestStep(background.addStep(srcObjTestSuite.getStepName(srcStep)), srcStep);
+		}
+	}
+
+	private void convertTestStep(TestStep step, Step srcStep) {
+		log.debug("test step: " + srcStep.getName());
+		stepObjects.add(StepDefinitionHelper.getStepObjectQualifiedName(new LanguageAccessImpl(srcStep)));
+		step.setStepKeyword(srcObjTestSuite.getStepKeyword(srcStep));
+		step.setStepNameLong(srcObjTestSuite.getStepNameLong(srcStep));
+		if (srcObjTestSuite.hasDocString(srcStep)) {
+			step.setDocString(srcObjTestSuite.getDocString(srcStep));
+		} else if (srcObjTestSuite.hasStepTable(srcStep)) {
+			step.setStepTable(srcObjTestSuite.getStepTable(srcStep));
 		}
 	}
 
@@ -152,16 +168,18 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	private void convertTestSuite(String path, String content) throws Exception {
 		log.debug("test suite: " + path);
-		srcObjTestSuite = (AsciiDoctorTestSuite) project.addObject(path);
+		srcObjTestSuite = (AsciiDoctorTestSuite) project.addFile(path);
 		srcObjTestSuite.parse(content);
 		if (isTestSuiteSelected()) {
-			tgtObj = (TestSuite) model.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
-			tgtObj.setFeatureDescription(srcObjTestSuite.getFeatureDescription());
-			for (AbstractScenario as : srcObjTestSuite.getAbstractScenarioList()) {
-				if (srcObjTestSuite.isBackground(as)) {
-					convertTestSetup(as);
+			TestSuite testSuite = model.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
+			this.tgtObj = testSuite;
+			testSuite.setFeatureDescription(srcObjTestSuite.getFeatureDescription());
+			for (AbstractScenario srcTestSuite : srcObjTestSuite.getAbstractScenarioList()) {
+				if (srcObjTestSuite.isBackground(srcTestSuite)) {
+					convertTestSetup(srcTestSuite,
+							testSuite.addBackground(srcObjTestSuite.getBackgroundName(srcTestSuite)));
 				} else {
-					convertTestCase(as);
+					convertTestCase(srcTestSuite, testSuite);
 				}
 			}
 			model.save();

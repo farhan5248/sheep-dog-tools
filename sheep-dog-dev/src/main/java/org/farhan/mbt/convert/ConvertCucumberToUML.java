@@ -10,8 +10,10 @@ import org.farhan.mbt.cucumber.Scenario;
 import org.farhan.mbt.cucumber.ScenarioOutline;
 import org.farhan.mbt.cucumber.Step;
 import org.farhan.mbt.core.ObjectRepository;
+import org.farhan.mbt.core.TestCase;
 import org.farhan.mbt.core.TestSuite;
 import org.farhan.mbt.core.TestProject;
+import org.farhan.mbt.core.TestSetup;
 import org.farhan.mbt.core.Converter;
 import org.farhan.mbt.core.Logger;
 import org.farhan.mbt.cucumber.CucumberFeature;
@@ -43,17 +45,17 @@ public class ConvertCucumberToUML extends Converter {
 		tgtObj.setDocString(step, srcObjTestSuite.getDocString(srcStep));
 	}
 
-	private void convertTestCase(AbstractScenario srcAbstractScenario) {
-		log.debug("test case: " + srcAbstractScenario.getName());
-		Interaction scenario = tgtObj.addScenario(srcObjTestSuite.getScenarioName(srcAbstractScenario));
-		tgtObj.setScenarioTags(scenario, srcObjTestSuite.getScenarioTags(srcAbstractScenario));
-		tgtObj.setScenarioDescription(scenario, srcObjTestSuite.getScenarioDescription(srcAbstractScenario));
-		for (Step srcStep : srcObjTestSuite.getStepList(srcAbstractScenario)) {
-			convertTestStep(scenario, srcStep, srcAbstractScenario);
+	private void convertTestCase(AbstractScenario srcTestSuite, TestSuite testSuite) {
+		log.debug("test case: " + srcTestSuite.getName());
+		TestCase testCase = testSuite.addScenario(srcObjTestSuite.getScenarioName(srcTestSuite));
+		testCase.setScenarioTags(srcObjTestSuite.getScenarioTags(srcTestSuite));
+		testCase.setScenarioDescription(srcObjTestSuite.getScenarioDescription(srcTestSuite));
+		for (Step srcStep : srcObjTestSuite.getStepList(srcTestSuite)) {
+			convertTestStep(testCase.umlElement, srcStep, srcTestSuite);
 		}
 	}
 
-	private void convertTestCaseWithTestData(AbstractScenario srcAbstractScenario) {
+	private void convertTestCaseWithTestData(AbstractScenario srcAbstractScenario, TestSuite testSuite) {
 		log.debug("test case: " + srcAbstractScenario.getName());
 		Interaction scenarioOutline = tgtObj
 				.addScenarioOutline(srcObjTestSuite.getScenarioOutlineName(srcAbstractScenario));
@@ -81,13 +83,13 @@ public class ConvertCucumberToUML extends Converter {
 		}
 	}
 
-	private void convertTestSetup(AbstractScenario srcAbstractScenario) {
+	private void convertTestSetup(AbstractScenario srcAbstractScenario, TestSuite testSuite) {
 		log.debug("test setup: " + srcAbstractScenario.getName());
-		Interaction background = tgtObj.addBackground(srcObjTestSuite.getBackgroundName(srcAbstractScenario));
-		tgtObj.setBackgroundTags(background, srcObjTestSuite.getFeatureTags());
-		tgtObj.setBackgroundDescription(background, srcObjTestSuite.getBackgroundDescription(srcAbstractScenario));
+		TestSetup background = testSuite.addBackground(srcObjTestSuite.getBackgroundName(srcAbstractScenario));
+		background.setBackgroundTags(background, srcObjTestSuite.getFeatureTags());
+		background.setBackgroundDescription(background, srcObjTestSuite.getBackgroundDescription(srcAbstractScenario));
 		for (Step srcStep : srcObjTestSuite.getStepList(srcAbstractScenario)) {
-			convertTestStep(background, srcStep, srcAbstractScenario);
+			convertTestStep(background.umlElement, srcStep, srcAbstractScenario);
 		}
 	}
 
@@ -106,18 +108,20 @@ public class ConvertCucumberToUML extends Converter {
 
 	private void convertTestSuite(String path, String content) throws Exception {
 		log.debug("test suite: " + path);
-		srcObjTestSuite = (CucumberFeature) project.addObject(path);
+
+		srcObjTestSuite = (CucumberFeature) project.addFile(path);
 		srcObjTestSuite.parse(content);
 		if (isTestSuiteSelected()) {
-			tgtObj = (TestSuite) model.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
-			tgtObj.setFeatureDescription(srcObjTestSuite.getFeatureDescription());
+			TestSuite testSuite = model.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
+			this.tgtObj = testSuite;
+			testSuite.setFeatureDescription(srcObjTestSuite.getFeatureDescription());
 			for (AbstractScenario as : srcObjTestSuite.getAbstractScenarioList()) {
 				if (srcObjTestSuite.isBackground(as)) {
-					convertTestSetup(as);
+					convertTestSetup(as, testSuite);
 				} else if (srcObjTestSuite.isScenarioOutline(as)) {
-					convertTestCaseWithTestData(as);
+					convertTestCaseWithTestData(as, testSuite);
 				} else {
-					convertTestCase(as);
+					convertTestCase(as, testSuite);
 				}
 			}
 			model.save();

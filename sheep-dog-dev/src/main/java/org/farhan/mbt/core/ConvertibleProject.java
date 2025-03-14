@@ -24,7 +24,7 @@ public abstract class ConvertibleProject {
 		this.tags = tags;
 	}
 
-	public abstract ConvertibleObject addObject(String path) throws Exception;
+	public abstract ConvertibleObject addFile(String path) throws Exception;
 
 	public abstract void deleteObject(ConvertibleObject srcObj);
 

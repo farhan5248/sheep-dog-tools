@@ -29,7 +29,9 @@ public class TestProject {
 	public String tags = "";
 	public final String TEST_CASES = "specs";
 	public final String TEST_STEPS = "stepdefs";
-	private Model theModel;
+	// TODO change to private after refactoring of Test*
+	// TODO rename to umlElement
+	Model theModel;
 	protected ArrayList<ConvertibleObject> firstLayerObjects;
 	protected ArrayList<ConvertibleObject> secondLayerObjects;
 
@@ -44,35 +46,13 @@ public class TestProject {
 		theModel.createNestedPackage(TEST_STEPS);
 	}
 
-	private Class addClass(String qualifiedName) {
-		Class theClass = null;
-		Package owningPackage = theModel;
-		String[] qualifiedNameParts = qualifiedName.replace(theModel.getQualifiedName() + "::", "").split("::");
-		for (int i = 0; i < qualifiedNameParts.length; i++) {
-			if (i == qualifiedNameParts.length - 1) {
-				theClass = owningPackage.createOwnedClass(qualifiedNameParts[i], false);
-			} else {
-				owningPackage = addPackage(owningPackage, qualifiedNameParts[i]);
-			}
-		}
-		return theClass;
-	}
-
 	private ConvertibleObject addObject(String qualifiedName) {
 		// TODO split TestSuite into 2 and then delete this method
 		TestSuite ucw = (TestSuite) getObject(qualifiedName);
 		if (ucw == null) {
-			ucw = new TestSuite(addClass(qualifiedName));
+			ucw = new TestSuite(qualifiedName, this);
 		}
 		return ucw;
-	}
-
-	private Package addPackage(Package nestingPackage, String name) {
-		Package thePackage = nestingPackage.getNestedPackage(name);
-		if (thePackage == null) {
-			thePackage = nestingPackage.createNestedPackage(name);
-		}
-		return thePackage;
 	}
 
 	public TestSuite addStepObject(String qualifiedName) {
@@ -82,8 +62,12 @@ public class TestProject {
 	}
 
 	public TestSuite addTestSuite(String qualifiedName) {
-		TestSuite ucw = (TestSuite) addObject(qualifiedName);
-		firstLayerObjects.add(ucw);
+		TestSuite ucw = (TestSuite) getObject(qualifiedName);
+		if (ucw == null) {
+			ucw = new TestSuite(qualifiedName, this);
+			firstLayerObjects.add(ucw);
+			ucw.setParent(this);
+		}
 		return ucw;
 	}
 
@@ -97,7 +81,7 @@ public class TestProject {
 			return null;
 		} else {
 			// TODO this will be a problem if the object is not in the first layer
-			return new TestSuite(theClass);
+			return new TestSuite(qualifiedName, this);
 		}
 	}
 

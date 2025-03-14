@@ -63,7 +63,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 	private String convertStepObject(String path, String content) throws Exception {
 		log.debug("step object: " + path);
 		srcObj = (TestSuite) model.getObject(pathConverter.findUMLPath(path));
-		tgtObjStepObject = (AsciiDoctorStepObject) project.addObject(path);
+		tgtObjStepObject = (AsciiDoctorStepObject) project.addFile(path);
 		tgtObjStepObject.parse(content);
 		tgtObjStepObject.setStepObjectName(srcObj.getStepObjectName());
 		tgtObjStepObject.setStepObjectDescription(srcObj.getStepObjectDescription());
@@ -145,7 +145,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 	private String convertTestSuite(String path, String content) throws Exception {
 		log.debug("test suite: " + path);
 		srcObj = (TestSuite) model.getObject(pathConverter.findUMLPath(path));
-		tgtObjTestSuite = (AsciiDoctorTestSuite) project.addObject(path);
+		tgtObjTestSuite = (AsciiDoctorTestSuite) project.addFile(path);
 		tgtObjTestSuite.parse(content);
 		tgtObjTestSuite.setFeatureName(srcObj.getFeatureName());
 		tgtObjTestSuite.setFeatureDescription(srcObj.getFeatureDescription());

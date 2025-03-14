@@ -12,16 +12,43 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
+import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.ValueSpecification;
 
 public class TestSuite implements ConvertibleObject {
 
-	// TODO split ClassWrapper into StepObject and TestSuite
 	private Class theClass;
+	private TestProject parent;
+	private TestSetup testSetup;
 
-	public TestSuite(Class theClass) {
-		this.theClass = theClass;
+	public TestSuite(String name, TestProject parent) {
+		this.parent = parent;
+		this.theClass = addClass(name);
+	}
+
+	private Class addClass(String qualifiedName) {
+		Class theClass = null;
+		Package owningPackage = parent.theModel;
+		String[] qualifiedNameParts = qualifiedName.replace(parent.theModel.getQualifiedName() + "::", "").split("::");
+		for (int i = 0; i < qualifiedNameParts.length; i++) {
+			if (i == qualifiedNameParts.length - 1) {
+				theClass = owningPackage.createOwnedClass(qualifiedNameParts[i], false);
+			} else {
+				// TODO should this instead be parent.addPackage otherwise there's duplication
+				// between this and StepObject
+				owningPackage = addPackage(owningPackage, qualifiedNameParts[i]);
+			}
+		}
+		return theClass;
+	}
+
+	private Package addPackage(Package nestingPackage, String name) {
+		Package thePackage = nestingPackage.getNestedPackage(name);
+		if (thePackage == null) {
+			thePackage = nestingPackage.createNestedPackage(name);
+		}
+		return thePackage;
 	}
 
 	private Interaction addAbstractScenario(Class theClass, String interactionName, String annotationName) {
@@ -37,10 +64,9 @@ public class TestSuite implements ConvertibleObject {
 		return anInteraction;
 	}
 
-	public Interaction addBackground(String name) {
-		Interaction scenario = addAbstractScenario(theClass, name, "");
-		createAnnotation(scenario, "background");
-		return scenario;
+	public TestSetup addBackground(String name) {
+		testSetup = new TestSetup(name, this);
+		return testSetup;
 	}
 
 	public EAnnotation addExamples(Interaction scenarioOutline, String name) {
@@ -55,9 +81,11 @@ public class TestSuite implements ConvertibleObject {
 		examples.getDetails().put(String.valueOf(examples.getDetails().size()), value);
 	}
 
-	public Interaction addScenario(String name) {
-		Interaction scenario = addAbstractScenario(theClass, name, "");
-		return scenario;
+	public TestCase addScenario(String name) {
+		
+		TestCase testCase = new TestCase(name, this);
+		return testCase;
+
 	}
 
 	public Interaction addScenarioOutline(String name) {
@@ -163,6 +191,7 @@ public class TestSuite implements ConvertibleObject {
 
 	@Override
 	public Object get() {
+		// TODO remove override and change type to Class
 		return theClass;
 	}
 
@@ -419,14 +448,6 @@ public class TestSuite implements ConvertibleObject {
 		// Individual objects are not stored separately so this is not needed.
 	}
 
-	public void setBackgroundDescription(Interaction background, String backgroundDescription) {
-		background.createOwnedComment().setBody(backgroundDescription);
-	}
-
-	public void setBackgroundTags(Interaction abstractScenario, ArrayList<String> tags) {
-		setTags(abstractScenario, tags);
-	}
-
 	public void setDocString(Message step, String content) {
 		ValueSpecification vs = createArgument(step, "docString", "");
 		String[] lines = content.split("\n");
@@ -523,5 +544,9 @@ public class TestSuite implements ConvertibleObject {
 
 	public String getStepKeyword(Message step) {
 		return step.getEAnnotation("Step").getDetails().get("Keyword");
+	}
+
+	public void setParent(TestProject testProject) {
+		this.parent = testProject;
 	}
 }

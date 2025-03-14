@@ -65,7 +65,7 @@ public class ConvertUMLToCucumber extends Converter {
 	protected String convertStepObject(String tags, String path, String content) throws Exception {
 		srcObj = (TestSuite) model.getObject(pathConverter.findUMLPath(path));
 
-		tgtObjStepObject = (CucumberClassAndInterface) project.addObject(path);
+		tgtObjStepObject = (CucumberClassAndInterface) project.addFile(path);
 		tgtObjStepObject.parse(content);
 
 		convertStepDefinitionList();
@@ -147,7 +147,7 @@ public class ConvertUMLToCucumber extends Converter {
 	protected String convertTestSuite(String tags, String path, String content) throws Exception {
 		log.debug("test suite: " + path);
 		srcObj = (TestSuite) model.getObject(pathConverter.findUMLPath(path));
-		tgtObjTestSuite = (CucumberFeature) project.addObject(path);
+		tgtObjTestSuite = (CucumberFeature) project.addFile(path);
 		tgtObjTestSuite.parse(content);
 		tgtObjTestSuite.setFeatureName(srcObj.getFeatureName());
 		tgtObjTestSuite.setFeatureDescription(srcObj.getFeatureDescription());
