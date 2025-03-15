@@ -58,7 +58,7 @@ public class TestCase extends UMLElement {
 		return umlElement.getEAnnotation("background") != null;
 	}
 
-	public boolean isScenarioOutline() {
+	public boolean hasTestData() {
 		// if there's an annotation not called tags or background
 		for (EAnnotation a : umlElement.getEAnnotations()) {
 			if (!a.getSource().contentEquals("tags") && !a.getSource().contentEquals("background")) {

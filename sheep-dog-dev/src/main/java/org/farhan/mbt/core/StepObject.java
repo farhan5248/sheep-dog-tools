@@ -55,4 +55,8 @@ public class StepObject extends UMLElement {
 		return stepDefinitionList;
 	}
 
+	public String getNameLong() {
+		return umlElement.getEAnnotation("StepDefinition").getDetails().get("LongName");
+	}
+
 }

@@ -1,6 +1,5 @@
 package org.farhan.mbt.cucumber;
 
-import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.StepObject;
 import org.farhan.mbt.core.TestProject;
 import org.farhan.mbt.core.TestSuite;
@@ -25,12 +24,12 @@ public class CucumberPathConverter {
 	}
 
 	public String findUMLPath(String path) {
-		for (StepObject co : model.getStepObjectList()) {
+		for (TestSuite co : model.getTestSuiteList()) {
 			if (convertFilePath(co.getUmlElement().getQualifiedName(), project.TEST_CASES).contentEquals(path)) {
 				return co.getUmlElement().getQualifiedName();
 			}
 		}
-		for (TestSuite co : model.getTestSuiteList()) {
+		for (StepObject co : model.getStepObjectList()) {
 			if (convertFilePath(co.getUmlElement().getQualifiedName(), project.TEST_STEPS).contentEquals(path)) {
 				return co.getUmlElement().getQualifiedName();
 			}

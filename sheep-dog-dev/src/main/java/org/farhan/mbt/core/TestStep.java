@@ -95,7 +95,7 @@ public class TestStep extends UMLElement {
 		return umlElement.getArgument("dataTable", null) != null;
 	}
 
-	public String getDocString() {
+	public String getStepText() {
 		ValueSpecification vs = (LiteralString) umlElement.getArgument("docString", null);
 		EMap<String, String> docString = vs.getEAnnotation("docString").getDetails();
 		String content = "";
@@ -106,7 +106,7 @@ public class TestStep extends UMLElement {
 		return content;
 	}
 
-	public ArrayList<ArrayList<String>> getStepTable() {
+	public ArrayList<ArrayList<String>> getStepData() {
 		ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
 		ArrayList<String> row;
 		ValueSpecification vs = (LiteralString) umlElement.getArgument("dataTable", null);
@@ -118,6 +118,10 @@ public class TestStep extends UMLElement {
 			table.add(row);
 		}
 		return table;
+	}
+
+	public String getNameLong() {
+		return umlElement.getEAnnotation("Step").getDetails().get("LongName");
 	}
 
 }

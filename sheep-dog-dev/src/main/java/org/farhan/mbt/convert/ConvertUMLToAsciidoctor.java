@@ -55,7 +55,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 
 	private String convertStepObject(String path, String content) throws Exception {
 		log.debug("step object: " + path);
-		StepObject srcStepObject = (StepObject) model.getStepObject(pathConverter.findUMLPath(path));
+		StepObject srcStepObject = model.getStepObject(pathConverter.findUMLPath(path));
 		tgtObjStepObject = (AsciiDoctorStepObject) project.addFile(path);
 		tgtObjStepObject.parse(content);
 		tgtObjStepObject.setStepObjectName(srcStepObject.getName());
@@ -70,9 +70,6 @@ public class ConvertUMLToAsciidoctor extends Converter {
 			org.farhan.mbt.core.StepParameters srcStepParameters) throws Exception {
 		log.debug("step parameter: " + srcStepParameters.getName());
 		tgtObjStepObject.addStepParametersTable(stepParameters, srcStepParameters.getTable());
-		for (ArrayList<String> row : srcStepParameters.getRowList()) {
-			tgtObjStepObject.createStepParametersRow(stepParameters, row);
-		}
 	}
 
 	private void convertTestCase(Scenario scenario, TestCase srcTestCase) {
@@ -108,9 +105,9 @@ public class ConvertUMLToAsciidoctor extends Converter {
 	private void convertTestStep(Step step, TestStep srcStep) {
 		log.debug("test step: " + srcStep.getName());
 		if (srcStep.hasDocString()) {
-			tgtObjTestSuite.setDocString(step, srcStep.getDocString());
+			tgtObjTestSuite.setDocString(step, srcStep.getStepText());
 		} else if (srcStep.hasStepTable()) {
-			tgtObjTestSuite.createStepTable(step, srcStep.getStepTable());
+			tgtObjTestSuite.createStepTable(step, srcStep.getStepData());
 		}
 	}
 
@@ -119,8 +116,8 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		TestSuite srcTestSuite = model.getTestSuite(pathConverter.findUMLPath(path));
 		tgtObjTestSuite = (AsciiDoctorTestSuite) project.addFile(path);
 		tgtObjTestSuite.parse(content);
-		tgtObjTestSuite.setFeatureName(srcTestSuite.getFeatureName());
-		tgtObjTestSuite.setFeatureDescription(srcTestSuite.getFeatureDescription());
+		tgtObjTestSuite.setFeatureName(srcTestSuite.getName());
+		tgtObjTestSuite.setFeatureDescription(srcTestSuite.getDescription());
 
 		if (srcTestSuite.hasTestSetup()) {
 			convertTestSetup(tgtObjTestSuite.addBackground(srcTestSuite.getTestSetup().getName()),

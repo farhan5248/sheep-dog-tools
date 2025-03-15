@@ -88,9 +88,6 @@ public class ConvertAsciidoctorToUML extends Converter {
 			StepParameters srcStepParameters) {
 		log.debug("step parameter: " + srcStepParameters.getName());
 		stepParameters.addTable(srcObjStepObject.getStepParametersTable(srcStepParameters));
-		for (Row row : srcObjStepObject.getStepParametersRowList(srcStepParameters)) {
-			stepParameters.addRow(srcObjStepObject.getStepParametersRow(srcStepParameters, row));
-		}
 	}
 
 	private void convertTestCase(AbstractScenario srcTestCase, TestCase testCase) {

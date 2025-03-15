@@ -53,7 +53,7 @@ public class CucumberClassAndInterface implements ConvertibleObject {
 		}
 	}
 
-	public MethodDeclaration createStepDefinition(String step) throws Exception {
+	public MethodDeclaration addStepDefinition(String step) throws Exception {
 		if (isStepObj()) {
 			return createStepDefinitionForStepObj(step);
 		} else {
@@ -317,21 +317,22 @@ public class CucumberClassAndInterface implements ConvertibleObject {
 		return theJavaClass.toString();
 	}
 
-	public void setStepDefinitionParameters(String stepDefinitionName, ArrayList<String> paramList) throws Exception {
+	public void addStepParameters(MethodDeclaration stepDefinition, ArrayList<String> paramList) throws Exception {
 		if (paramList.isEmpty()) {
 			return;
 		}
 		if (isStepObj()) {
-			setStepDefinitionParametersForStepObj(stepDefinitionName, paramList);
+			setStepDefinitionParametersForStepObj(stepDefinition, paramList);
 		} else {
-			setStepDefinitionParametersForStepDef(stepDefinitionName, paramList);
+			setStepDefinitionParametersForStepDef(stepDefinition, paramList);
 		}
 	}
 
-	private void setStepDefinitionParametersForStepDef(String stepDefinitionName, ArrayList<String> paramList)
+	private void setStepDefinitionParametersForStepDef(MethodDeclaration aMethod, ArrayList<String> paramList)
 			throws Exception {
 		MethodDeclaration aMethod;
 		aMethod = getMethod(getMethodNameForStepDef(stepDefinitionName));
+		// TODO get the stepDefinitionName from the method annotation value
 		BlockStmt body = aMethod.getBody().get();
 		String statement;
 		if (paramList.size() == 1 && paramList.get(0).contentEquals("Content")) {
@@ -351,9 +352,8 @@ public class CucumberClassAndInterface implements ConvertibleObject {
 		}
 	}
 
-	private void setStepDefinitionParametersForStepObj(String stepDefinitionName, ArrayList<String> paramList)
+	private void setStepDefinitionParametersForStepObj(MethodDeclaration aMethod, ArrayList<String> paramList)
 			throws Exception {
-		MethodDeclaration aMethod;
 
 		for (String param : paramList) {
 			aMethod = getMethod(getSetOrAssert(stepDefinitionName) + getSection(stepDefinitionName)

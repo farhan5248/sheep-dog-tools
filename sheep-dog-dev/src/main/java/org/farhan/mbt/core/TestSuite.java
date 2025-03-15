@@ -190,14 +190,14 @@ public class TestSuite extends UMLElement {
 		return paramNames;
 	}
 
-	public String getFeatureDescription() {
+	public String getDescription() {
 		if (umlElement.getOwnedComments().size() > 0) {
 			return umlElement.getOwnedComments().get(0).getBody();
 		}
 		return "";
 	}
 
-	public String getFeatureName() {
+	public String getName() {
 		return umlElement.getName();
 	}
 
