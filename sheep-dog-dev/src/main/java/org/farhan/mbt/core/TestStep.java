@@ -1,7 +1,9 @@
 package org.farhan.mbt.core;
 
 import java.util.ArrayList;
+import java.util.Map.Entry;
 
+import org.eclipse.emf.common.util.EMap;
 import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.UMLFactory;
@@ -18,6 +20,10 @@ public class TestStep extends UMLElement {
 		} else {
 			umlElement = ((TestSetup) parent).getUmlElement().createMessage(name.substring(keyword.length() + 1));
 		}
+	}
+
+	public TestStep(Message umlElement, UMLElement parent) {
+		this.umlElement = umlElement;
 	}
 
 	public void setKeyword(String keyword) {
@@ -71,6 +77,47 @@ public class TestStep extends UMLElement {
 			ls.setValue(value);
 		}
 		return ls;
+	}
+
+	public String getName() {
+		return getKeyword() + " " + umlElement.getName();
+	}
+
+	public String getKeyword() {
+		return umlElement.getEAnnotation("Step").getDetails().get("Keyword");
+	}
+
+	public boolean hasDocString() {
+		return umlElement.getArgument("docString", null) != null;
+	}
+
+	public boolean hasStepTable() {
+		return umlElement.getArgument("dataTable", null) != null;
+	}
+
+	public String getDocString() {
+		ValueSpecification vs = (LiteralString) umlElement.getArgument("docString", null);
+		EMap<String, String> docString = vs.getEAnnotation("docString").getDetails();
+		String content = "";
+		for (int i = 0; i < docString.keySet().size(); i++) {
+			content += "\n" + docString.get(i).getValue();
+		}
+		content = content.replaceFirst("\n", "");
+		return content;
+	}
+
+	public ArrayList<ArrayList<String>> getStepTable() {
+		ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
+		ArrayList<String> row;
+		ValueSpecification vs = (LiteralString) umlElement.getArgument("dataTable", null);
+		for (Entry<String, String> r : vs.getEAnnotation("dataTable").getDetails()) {
+			row = new ArrayList<String>();
+			for (String cell : r.getValue().split(" \\|")) {
+				row.add(cell);
+			}
+			table.add(row);
+		}
+		return table;
 	}
 
 }

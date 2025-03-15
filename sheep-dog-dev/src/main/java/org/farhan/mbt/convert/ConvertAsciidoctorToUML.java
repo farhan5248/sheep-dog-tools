@@ -142,13 +142,12 @@ public class ConvertAsciidoctorToUML extends Converter {
 		if (isTestSuiteSelected()) {
 			TestSuite testSuite = model.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
 			testSuite.setFeatureDescription(srcObjTestSuite.getFeatureDescription());
-			for (AbstractScenario srcTestSuite : srcObjTestSuite.getAbstractScenarioList()) {
-				if (srcObjTestSuite.isBackground(srcTestSuite)) {
-					convertTestSetup(srcTestSuite,
-							testSuite.addTestSetup(srcObjTestSuite.getBackgroundName(srcTestSuite)));
+			for (AbstractScenario srcTestCase : srcObjTestSuite.getAbstractScenarioList()) {
+				if (srcObjTestSuite.isBackground(srcTestCase)) {
+					convertTestSetup(srcTestCase,
+							testSuite.addTestSetup(srcObjTestSuite.getBackgroundName(srcTestCase)));
 				} else {
-
-					convertTestCase(srcTestSuite, testSuite.addTestCase(srcObjTestSuite.getScenarioName(srcTestSuite)));
+					convertTestCase(srcTestCase, testSuite.addTestCase(srcObjTestSuite.getScenarioName(srcTestCase)));
 				}
 			}
 			model.save();

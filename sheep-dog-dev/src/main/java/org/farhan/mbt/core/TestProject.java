@@ -66,25 +66,6 @@ public class TestProject {
 		return "uml/";
 	}
 
-	public TestSuite getTestSuite(String qualifiedName) {
-		// TODO split into getTestSuite and getStepObject
-		// I'm not sure this even works right now, it doesn't make sense.
-		Class theClass = (Class) getPackagedElement(qualifiedName, null);
-		if (theClass == null) {
-			return null;
-		} else {
-			return new TestSuite(qualifiedName, this);
-		}
-	}
-
-	public ArrayList<TestSuite> getTestSuiteList() {
-		return firstLayerObjects;
-	}
-
-	public ArrayList<StepObject> getStepObjectList() {
-		return secondLayerObjects;
-	}
-
 	public PackageableElement getPackagedElement(String qualifiedName, Package nestingPackage) {
 		if (nestingPackage == null) {
 			nestingPackage = umlElement;
@@ -124,6 +105,36 @@ public class TestProject {
 		return classes;
 	}
 
+	public StepObject getStepObject(String qualifiedName) {
+		for (StepObject so : secondLayerObjects) {
+			if (so.getUmlElement().getQualifiedName().contentEquals(qualifiedName)) {
+				return so;
+			}
+		}
+		return null;
+	}
+
+	public ArrayList<StepObject> getStepObjectList() {
+		return secondLayerObjects;
+	}
+
+	public TestSuite getTestSuite(String qualifiedName) {
+		for (TestSuite ts : firstLayerObjects) {
+			if (ts.getUmlElement().getQualifiedName().contentEquals(qualifiedName)) {
+				return ts;
+			}
+		}
+		return null;
+	}
+
+	public ArrayList<TestSuite> getTestSuiteList() {
+		return firstLayerObjects;
+	}
+
+	public Model getUmlElement() {
+		return umlElement;
+	}
+
 	public void init() throws Exception {
 		String path = getDir() + umlElement.getName() + "." + UMLResource.FILE_EXTENSION;
 		if (fa.contains(tags, path)) {
@@ -135,11 +146,11 @@ public class TestProject {
 			umlElement = (Model) resource.getContents().getFirst();
 			ArrayList<Class> objects = getPackagedElements(umlElement.getNestedPackage(TEST_CASES));
 			for (Class c : objects) {
-				addTestSuite(c.getQualifiedName());
+				firstLayerObjects.add(new TestSuite(c, this));
 			}
 			objects = getPackagedElements(umlElement.getNestedPackage(TEST_STEPS));
 			for (Class c : objects) {
-				addStepObject(c.getQualifiedName());
+				secondLayerObjects.add(new StepObject(c, this));
 			}
 		}
 	}
@@ -158,9 +169,5 @@ public class TestProject {
 		OutputStream os = new ByteArrayOutputStream();
 		resource.save(os, options);
 		fa.put(tags, path, os.toString());
-	}
-
-	public Model getUmlElement() {
-		return umlElement;
 	}
 }

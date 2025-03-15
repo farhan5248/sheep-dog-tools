@@ -21,8 +21,15 @@ public class TestSuite extends UMLElement {
 	private TestSetup testSetup;
 	private ArrayList<TestCase> testCaseList;
 
+	public TestSuite(Class umlElement, TestProject parent) {
+		testCaseList = new ArrayList<TestCase>();
+		testSetup = null;
+		this.umlElement = umlElement;
+	}
+
 	public TestSuite(String name, TestProject parent) {
-		this.testCaseList = new ArrayList<TestCase>();
+		testCaseList = new ArrayList<TestCase>();
+		testSetup = null;
 		this.umlElement = addClass(name, parent.getUmlElement());
 	}
 
@@ -39,33 +46,12 @@ public class TestSuite extends UMLElement {
 		return anInteraction;
 	}
 
-	public TestSetup addTestSetup(String name) {
-		testSetup = new TestSetup(name, this);
-		return testSetup;
-	}
-
-	public EAnnotation addTestData(Interaction scenarioOutline, String name) {
-		return createAnnotation(scenarioOutline, name);
-	}
-
 	public void addExamplesRow(EAnnotation examples, ArrayList<String> examplesRow) {
 		String value = "";
 		for (String e : examplesRow) {
 			value += e + "|";
 		}
 		examples.getDetails().put(String.valueOf(examples.getDetails().size()), value);
-	}
-
-	// TODO rename to addTestCase, remove Cucumber style names
-	public TestCase addTestCase(String name) {
-		TestCase testCase = new TestCase(name, this);
-		testCaseList.add(testCase);
-		return testCase;
-	}
-
-	public Interaction addTestCaseWithData(String name) {
-		Interaction scenario = addAbstractTestCase(umlElement, name, "");
-		return scenario;
 	}
 
 	public Message addStep(Interaction abstractScenario, String stepName) {
@@ -110,6 +96,22 @@ public class TestSuite extends UMLElement {
 		stepParameters.getDetails().put("0", value);
 	}
 
+	// TODO rename to addTestCase, remove Cucumber style names
+	public TestCase addTestCase(String name) {
+		TestCase testCase = new TestCase(name, this);
+		testCaseList.add(testCase);
+		return testCase;
+	}
+
+	public EAnnotation addTestData(Interaction scenarioOutline, String name) {
+		return createAnnotation(scenarioOutline, name);
+	}
+
+	public TestSetup addTestSetup(String name) {
+		testSetup = new TestSetup(name, this);
+		return testSetup;
+	}
+
 	private EAnnotation createAnnotation(Interaction anInteraction, String name) {
 		EAnnotation a = anInteraction.getEAnnotation(name);
 		if (a == null) {
@@ -129,18 +131,6 @@ public class TestSuite extends UMLElement {
 		return ls;
 	}
 
-	public Class getUmlElement() {
-		return umlElement;
-	}
-
-	public ArrayList<Interaction> getAbstractScenarioList() {
-		ArrayList<Interaction> abstractScenarioList = new ArrayList<Interaction>();
-		for (Behavior b : umlElement.getOwnedBehaviors()) {
-			abstractScenarioList.add((Interaction) b);
-		}
-		return abstractScenarioList;
-	}
-
 	public String getBackgroundDescription(Interaction abstractScenario) {
 		if (abstractScenario.getOwnedComments().size() > 0) {
 			return abstractScenario.getOwnedComments().get(0).getBody();
@@ -150,10 +140,6 @@ public class TestSuite extends UMLElement {
 
 	public String getBackgroundName(Interaction abstractScenario) {
 		return abstractScenario.getName();
-	}
-
-	public ArrayList<String> getFeatureTags(Interaction abstractScenario) {
-		return getTags(abstractScenario);
 	}
 
 	public String getDocString(Message step) {
@@ -215,6 +201,10 @@ public class TestSuite extends UMLElement {
 		return umlElement.getName();
 	}
 
+	public ArrayList<String> getFeatureTags(Interaction abstractScenario) {
+		return getTags(abstractScenario);
+	}
+
 	public String getScenarioDescription(Interaction abstractScenario) {
 		if (abstractScenario.getOwnedComments().size() > 0) {
 			return abstractScenario.getOwnedComments().get(0).getBody();
@@ -242,10 +232,6 @@ public class TestSuite extends UMLElement {
 		return getTags(abstractScenario);
 	}
 
-	public String getStepName(Message step) {
-		return getStepKeyword(step) + " " + step.getName();
-	}
-
 	public String getStepDefinitionDescription(Interaction stepDefinition) {
 		if (stepDefinition.getOwnedComments().size() > 0) {
 			return stepDefinition.getOwnedComments().get(0).getBody();
@@ -269,15 +255,8 @@ public class TestSuite extends UMLElement {
 		return stepDefinitionSrc.getEAnnotation("StepDefinition").getDetails().get("LongName");
 	}
 
-	public ArrayList<EAnnotation> getStepParametersList(Interaction stepDefinition) {
-
-		ArrayList<EAnnotation> parametersList = new ArrayList<EAnnotation>();
-		for (EAnnotation a : stepDefinition.getEAnnotations()) {
-			if (!a.getSource().contentEquals("StepDefinition")) {
-				parametersList.add(a);
-			}
-		}
-		return parametersList;
+	public String getStepKeyword(Message step) {
+		return step.getEAnnotation("Step").getDetails().get("Keyword");
 	}
 
 	public ArrayList<Message> getStepList(Interaction abstractScenario) {
@@ -286,6 +265,10 @@ public class TestSuite extends UMLElement {
 			stepList.add(m);
 		}
 		return stepList;
+	}
+
+	public String getStepName(Message step) {
+		return getStepKeyword(step) + " " + step.getName();
 	}
 
 	public String getStepNameLong(Message srcStep) {
@@ -301,6 +284,17 @@ public class TestSuite extends UMLElement {
 
 	public String getStepObjectName() {
 		return umlElement.getName();
+	}
+
+	public ArrayList<EAnnotation> getStepParametersList(Interaction stepDefinition) {
+
+		ArrayList<EAnnotation> parametersList = new ArrayList<EAnnotation>();
+		for (EAnnotation a : stepDefinition.getEAnnotations()) {
+			if (!a.getSource().contentEquals("StepDefinition")) {
+				parametersList.add(a);
+			}
+		}
+		return parametersList;
 	}
 
 	public String getStepParametersName(EAnnotation parametersSrc) {
@@ -352,6 +346,21 @@ public class TestSuite extends UMLElement {
 			}
 		}
 		return tags;
+	}
+
+	public ArrayList<TestCase> getTestCaseList() {
+		if (testCaseList.isEmpty()) {
+			for (Behavior b : umlElement.getOwnedBehaviors()) {
+				if (!isBackground((Interaction) b)) {
+					testCaseList.add(new TestCase((Interaction) b));
+				}
+			}
+		}
+		return testCaseList;
+	}
+
+	public Class getUmlElement() {
+		return umlElement;
 	}
 
 	public boolean hasDocString(Message step) {
@@ -470,8 +479,19 @@ public class TestSuite extends UMLElement {
 		}
 	}
 
-	public String getStepKeyword(Message step) {
-		return step.getEAnnotation("Step").getDetails().get("Keyword");
+	public TestSetup getTestSetup() {
+		if (testSetup == null) {
+			for (Behavior b : umlElement.getOwnedBehaviors()) {
+				if (isBackground((Interaction) b)) {
+					testSetup = new TestSetup((Interaction) b, this);
+				}
+			}
+		}
+		return testSetup;
+	}
+
+	public boolean hasTestSetup() {
+		return getTestSetup() != null;
 	}
 
 }

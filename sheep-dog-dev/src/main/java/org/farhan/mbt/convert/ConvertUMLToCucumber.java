@@ -14,10 +14,10 @@ import org.farhan.mbt.cucumber.Step;
 
 import org.farhan.mbt.core.ObjectRepository;
 import org.farhan.mbt.core.StepObject;
+import org.farhan.mbt.core.TestCase;
 import org.farhan.mbt.core.TestSuite;
 import org.farhan.mbt.core.TestProject;
 import org.farhan.mbt.core.Converter;
-import org.farhan.mbt.core.ConvertibleObject;
 import org.farhan.mbt.core.Logger;
 import org.farhan.mbt.cucumber.CucumberFeature;
 import org.farhan.mbt.cucumber.CucumberClassAndInterface;
@@ -154,13 +154,13 @@ public class ConvertUMLToCucumber extends Converter {
 		tgtObjTestSuite.parse(content);
 		tgtObjTestSuite.setFeatureName(srcObj.getFeatureName());
 		tgtObjTestSuite.setFeatureDescription(srcObj.getFeatureDescription());
-		for (Interaction as : srcObj.getAbstractScenarioList()) {
-			if (srcObj.isBackground(as)) {
-				convertTestSetup(as);
-			} else if (srcObj.isScenarioOutline(as)) {
-				convertTestCaseWithData(as);
+		for (TestCase as : srcObj.getTestCaseList()) {
+			if (srcObj.isBackground(as.getUmlElement())) {
+				convertTestSetup(as.getUmlElement());
+			} else if (srcObj.isScenarioOutline(as.getUmlElement())) {
+				convertTestCaseWithData(as.getUmlElement());
 			} else {
-				convertTestCase(as);
+				convertTestCase(as.getUmlElement());
 			}
 		}
 		return tgtObjTestSuite.toString();

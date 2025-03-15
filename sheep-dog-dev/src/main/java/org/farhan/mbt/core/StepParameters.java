@@ -12,6 +12,10 @@ public class StepParameters extends UMLElement {
 		umlElement = createAnnotation(parent.getUmlElement(), name);
 	}
 
+	public StepParameters(EAnnotation umlElement, StepDefinition parent) {
+		this.umlElement = umlElement;
+	}
+
 	public void addRow(ArrayList<String> stepParametersRow) {
 		String value = "";
 		for (String e : stepParametersRow) {
@@ -26,5 +30,32 @@ public class StepParameters extends UMLElement {
 			value += e + "|";
 		}
 		umlElement.getDetails().put("0", value);
+	}
+
+	public String getName() {
+		return umlElement.getSource();
+	}
+
+	public ArrayList<String> getTable() {
+		ArrayList<String> paramNames = new ArrayList<String>();
+		for (String cell : umlElement.getDetails().getFirst().getValue().split("\\|")) {
+			paramNames.add(cell);
+		}
+		return paramNames;
+	}
+
+	public ArrayList<ArrayList<String>> getRowList() {
+		ArrayList<ArrayList<String>> rowList = new ArrayList<ArrayList<String>>();
+		int rowCnt = umlElement.getDetails().size();
+		for (int i = 1; i < rowCnt; i++) {
+			String[] row = umlElement.getDetails().get(i).getValue().split("\\|");
+			ArrayList<String> cellList = new ArrayList<String>();
+			int cellCnt = row.length;
+			for (int j = 0; j < cellCnt; j++) {
+				cellList.add(row[j]);
+			}
+			rowList.add(cellList);
+		}
+		return rowList;
 	}
 }

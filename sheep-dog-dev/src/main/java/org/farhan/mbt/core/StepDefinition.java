@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Behavior;
-import org.eclipse.uml2.uml.BehavioredClassifier;
 import org.eclipse.uml2.uml.Interaction;
 
 public class StepDefinition extends UMLElement {
@@ -28,6 +28,11 @@ public class StepDefinition extends UMLElement {
 		}
 	}
 
+	public StepDefinition(Interaction umlElement, StepObject parent) {
+		stepParametersList = new ArrayList<StepParameters>();
+		this.umlElement = umlElement;
+	}
+
 	public void setDescription(String description) {
 		umlElement.createOwnedComment().setBody(description);
 	}
@@ -44,5 +49,27 @@ public class StepDefinition extends UMLElement {
 
 	public Interaction getUmlElement() {
 		return umlElement;
+	}
+
+	public String getName() {
+		return umlElement.getName();
+	}
+
+	public String getDescription(StepDefinition srcStepDefinition) {
+		if (umlElement.getOwnedComments().size() > 0) {
+			return umlElement.getOwnedComments().get(0).getBody();
+		}
+		return "";
+	}
+
+	public ArrayList<StepParameters> getStepParametersList() {
+		if (stepParametersList.isEmpty()) {
+			for (EAnnotation a : umlElement.getEAnnotations()) {
+				if (!a.getSource().contentEquals("StepDefinition")) {
+					stepParametersList.add(new StepParameters(a, this));
+				}
+			}
+		}
+		return stepParametersList;
 	}
 }
