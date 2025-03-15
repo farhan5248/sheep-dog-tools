@@ -20,7 +20,7 @@ import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.helper.StepDefinitionHelper;
 import org.farhan.helper.StepHelper;
 import org.farhan.mbt.LanguageAccessImpl;
-import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.convert.ConvertibleObject;
 import org.farhan.mbt.sheepDog.AbstractScenario;
 import org.farhan.mbt.sheepDog.AbstractScenarioTags;
 import org.farhan.mbt.sheepDog.Background;

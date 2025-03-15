@@ -3,9 +3,9 @@ package org.farhan.mbt.cucumber;
 import java.util.ArrayList;
 
 import org.farhan.mbt.CucumberStandaloneSetup;
-import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.ConvertibleProject;
-import org.farhan.mbt.core.ObjectRepository;
+import org.farhan.mbt.convert.ConvertibleObject;
+import org.farhan.mbt.convert.ConvertibleProject;
+import org.farhan.mbt.convert.ObjectRepository;
 
 public class CucumberTestProject extends ConvertibleProject {
 

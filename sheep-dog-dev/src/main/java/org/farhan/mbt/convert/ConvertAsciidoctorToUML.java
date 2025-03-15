@@ -8,16 +8,13 @@ import org.farhan.mbt.asciidoctor.AsciiDoctorTestSuite;
 import org.farhan.mbt.asciidoctor.AsciiDoctorPathConverter;
 import org.farhan.mbt.asciidoctor.AsciiDoctorTestProject;
 import org.farhan.mbt.asciidoctor.AsciiDoctorStepObject;
-import org.farhan.mbt.core.Converter;
-import org.farhan.mbt.core.Logger;
-import org.farhan.mbt.core.ObjectRepository;
-import org.farhan.mbt.core.StepObject;
-import org.farhan.mbt.core.TestCase;
-import org.farhan.mbt.core.TestData;
-import org.farhan.mbt.core.TestSetup;
-import org.farhan.mbt.core.TestStep;
-import org.farhan.mbt.core.TestSuite;
-import org.farhan.mbt.core.TestProject;
+import org.farhan.mbt.core.UMLStepObject;
+import org.farhan.mbt.core.UMLTestCase;
+import org.farhan.mbt.core.UMLTestData;
+import org.farhan.mbt.core.UMLTestSetup;
+import org.farhan.mbt.core.UMLTestStep;
+import org.farhan.mbt.core.UMLTestSuite;
+import org.farhan.mbt.core.UMLTestProject;
 import org.farhan.mbt.sheepDog.AbstractScenario;
 import org.farhan.mbt.sheepDog.Examples;
 import org.farhan.mbt.sheepDog.Row;
@@ -58,7 +55,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		return "";
 	}
 
-	private void convertStepDefinition(org.farhan.mbt.core.StepDefinition stepDefinition,
+	private void convertStepDefinition(org.farhan.mbt.core.UMLStepDefinition stepDefinition,
 			StepDefinition srcStepDefinition) {
 		log.debug("step definition: " + srcStepDefinition.getName());
 		stepDefinition.setNameLong(srcObjStepObject.getStepDefinitionNameLong(srcStepDefinition));
@@ -73,7 +70,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		srcObjStepObject = (AsciiDoctorStepObject) project.addFile(path);
 		srcObjStepObject.parse(content);
 		if (isStepObjectSelected()) {
-			StepObject stepObject = model.addStepObject(pathConverter.convertUMLPath(srcObjStepObject.getPath()));
+			UMLStepObject stepObject = model.addStepObject(pathConverter.convertUMLPath(srcObjStepObject.getPath()));
 			stepObject.setDescription(srcObjStepObject.getStepObjectDescription());
 			for (StepDefinition sd : srcObjStepObject.getStepDefinitionList()) {
 				convertStepDefinition(stepObject.addStepDefinition(srcObjStepObject.getStepDefinitionName(sd)), sd);
@@ -84,13 +81,13 @@ public class ConvertAsciidoctorToUML extends Converter {
 		}
 	}
 
-	private void convertStepParameters(org.farhan.mbt.core.StepParameters stepParameters,
+	private void convertStepParameters(org.farhan.mbt.core.UMLStepParameters stepParameters,
 			StepParameters srcStepParameters) {
 		log.debug("step parameter: " + srcStepParameters.getName());
 		stepParameters.addTable(srcObjStepObject.getStepParametersTable(srcStepParameters));
 	}
 
-	private void convertTestCase(AbstractScenario srcTestCase, TestCase testCase) {
+	private void convertTestCase(AbstractScenario srcTestCase, UMLTestCase testCase) {
 		log.debug("test case: " + srcTestCase.getName());
 		testCase.setTags(srcObjTestSuite.getAbstractScenarioTags(srcTestCase));
 		testCase.setDescription(srcObjTestSuite.getScenarioDescription(srcTestCase));
@@ -102,7 +99,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		}
 	}
 
-	private void convertTestData(TestData examples, Examples srcExamples) {
+	private void convertTestData(UMLTestData examples, Examples srcExamples) {
 		log.debug("test data: " + srcExamples.getName());
 		// TODO add examples description
 		examples.setTable(srcObjTestSuite.getExamplesTable(srcExamples));
@@ -111,7 +108,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		}
 	}
 
-	private void convertTestSetup(AbstractScenario srcBackground, TestSetup background) {
+	private void convertTestSetup(AbstractScenario srcBackground, UMLTestSetup background) {
 		log.debug("test setup: " + srcBackground.getName());
 		background.setTags(srcObjTestSuite.getAbstractScenarioTags(srcBackground));
 		background.setDescription(srcObjTestSuite.getBackgroundDescription(srcBackground));
@@ -120,7 +117,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		}
 	}
 
-	private void convertTestStep(TestStep step, Step srcStep) {
+	private void convertTestStep(UMLTestStep step, Step srcStep) {
 		log.debug("test step: " + srcStep.getName());
 		stepObjects.add(StepDefinitionHelper.getStepObjectQualifiedName(new LanguageAccessImpl(srcStep)));
 		step.setKeyword(srcObjTestSuite.getStepKeyword(srcStep));
@@ -137,8 +134,8 @@ public class ConvertAsciidoctorToUML extends Converter {
 		srcObjTestSuite = (AsciiDoctorTestSuite) project.addFile(path);
 		srcObjTestSuite.parse(content);
 		if (isTestSuiteSelected()) {
-			TestSuite testSuite = model.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
-			testSuite.setFeatureDescription(srcObjTestSuite.getFeatureDescription());
+			UMLTestSuite testSuite = model.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
+			testSuite.setDescription(srcObjTestSuite.getFeatureDescription());
 			for (AbstractScenario srcTestCase : srcObjTestSuite.getAbstractScenarioList()) {
 				if (srcObjTestSuite.isBackground(srcTestCase)) {
 					convertTestSetup(srcTestCase,
@@ -155,7 +152,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	public void initProjects() throws Exception {
 		project = new AsciiDoctorTestProject(this.tag, this.fa);
-		model = new TestProject(this.tag, this.fa);
+		model = new UMLTestProject(this.tag, this.fa);
 		project.init();
 		model.init();
 		pathConverter = new AsciiDoctorPathConverter(model, (AsciiDoctorTestProject) project);

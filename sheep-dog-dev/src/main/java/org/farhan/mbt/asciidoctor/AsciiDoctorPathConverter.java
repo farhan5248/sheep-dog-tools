@@ -1,16 +1,15 @@
 package org.farhan.mbt.asciidoctor;
 
-import org.farhan.mbt.core.ConvertibleObject;
-import org.farhan.mbt.core.StepObject;
-import org.farhan.mbt.core.TestProject;
-import org.farhan.mbt.core.TestSuite;
+import org.farhan.mbt.core.UMLStepObject;
+import org.farhan.mbt.core.UMLTestProject;
+import org.farhan.mbt.core.UMLTestSuite;
 
 public class AsciiDoctorPathConverter {
 
-	private TestProject model;
+	private UMLTestProject model;
 	private AsciiDoctorTestProject project;
 
-	public AsciiDoctorPathConverter(TestProject model, AsciiDoctorTestProject project) {
+	public AsciiDoctorPathConverter(UMLTestProject model, AsciiDoctorTestProject project) {
 		this.model = model;
 		this.project = project;
 	}
@@ -33,12 +32,12 @@ public class AsciiDoctorPathConverter {
 	}
 
 	public String findUMLPath(String path) {
-		for (TestSuite co : model.getTestSuiteList()) {
+		for (UMLTestSuite co : model.getTestSuiteList()) {
 			if (convertFilePath(co.getUmlElement().getQualifiedName(), project.TEST_CASES).contentEquals(path)) {
 				return co.getUmlElement().getQualifiedName();
 			}
 		}
-		for (StepObject co : model.getStepObjectList()) {
+		for (UMLStepObject co : model.getStepObjectList()) {
 			if (convertFilePath(co.getUmlElement().getQualifiedName(), project.TEST_STEPS).contentEquals(path)) {
 				return co.getUmlElement().getQualifiedName();
 			}

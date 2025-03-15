@@ -8,21 +8,21 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 
-public class TestCase extends UMLElement {
+public class UMLTestCase extends UMLElement {
 
 	private Interaction umlElement;
-	private ArrayList<TestStep> testStepList;
-	private ArrayList<TestData> testDataList;
+	private ArrayList<UMLTestStep> testStepList;
+	private ArrayList<UMLTestData> testDataList;
 
-	public TestCase(String name, TestSuite parent) {
-		testStepList = new ArrayList<TestStep>();
-		testDataList = new ArrayList<TestData>();
+	public UMLTestCase(String name, UMLTestSuite parent) {
+		testStepList = new ArrayList<UMLTestStep>();
+		testDataList = new ArrayList<UMLTestData>();
 		umlElement = addInteraction((Class) parent.getUmlElement(), name, "");
 	}
 
-	public TestCase(Interaction umlElement) {
-		testStepList = new ArrayList<TestStep>();
-		testDataList = new ArrayList<TestData>();
+	public UMLTestCase(Interaction umlElement) {
+		testStepList = new ArrayList<UMLTestStep>();
+		testDataList = new ArrayList<UMLTestData>();
 		this.umlElement = umlElement;
 	}
 
@@ -38,8 +38,8 @@ public class TestCase extends UMLElement {
 		umlElement.createOwnedComment().setBody(scenarioDescription);
 	}
 
-	public TestStep addTestStep(String name) {
-		TestStep testStep = new TestStep(name, this);
+	public UMLTestStep addTestStep(String name) {
+		UMLTestStep testStep = new UMLTestStep(name, this);
 		testStepList.add(testStep);
 		return testStep;
 	}
@@ -48,8 +48,8 @@ public class TestCase extends UMLElement {
 		return umlElement;
 	}
 
-	public TestData addTestData(String name) {
-		TestData testData = new TestData(name, this);
+	public UMLTestData addTestData(String name) {
+		UMLTestData testData = new UMLTestData(name, this);
 		testDataList.add(testData);
 		return testData;
 	}
@@ -89,20 +89,20 @@ public class TestCase extends UMLElement {
 		return "";
 	}
 
-	public ArrayList<TestStep> getTestStepList() {
+	public ArrayList<UMLTestStep> getTestStepList() {
 		if (testStepList.isEmpty()) {
 			for (Message m : umlElement.getMessages()) {
-				testStepList.add(new TestStep(m, this));
+				testStepList.add(new UMLTestStep(m, this));
 			}
 		}
 		return testStepList;
 	}
 
-	public ArrayList<TestData> getTestDataList() {
+	public ArrayList<UMLTestData> getTestDataList() {
 		if (testDataList.isEmpty()) {
 			for (EAnnotation a : umlElement.getEAnnotations()) {
 				if (!a.getSource().contentEquals("tags")) {
-					testDataList.add(new TestData(a, this));
+					testDataList.add(new UMLTestData(a, this));
 				}
 			}
 		}

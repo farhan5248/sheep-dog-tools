@@ -3,14 +3,14 @@ package org.farhan.mbt.service;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.farhan.mbt.core.Converter;
+import org.farhan.mbt.convert.Converter;
 import org.farhan.mbt.convert.ConvertAsciidoctorToUML;
 import org.farhan.mbt.convert.ConvertCucumberToUML;
 import org.farhan.mbt.convert.ConvertUMLToAsciidoctor;
 import org.farhan.mbt.convert.ConvertUMLToCucumber;
 import org.farhan.mbt.convert.ConvertUMLToCucumberGuice;
 import org.farhan.mbt.convert.ConvertUMLToCucumberSpring;
-import org.farhan.mbt.core.ObjectRepository;
+import org.farhan.mbt.convert.ObjectRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

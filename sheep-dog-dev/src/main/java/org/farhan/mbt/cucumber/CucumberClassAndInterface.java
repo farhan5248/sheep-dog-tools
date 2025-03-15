@@ -7,9 +7,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
-import org.farhan.mbt.core.ConvertibleObject;
 import org.apache.commons.lang3.StringUtils;
 import org.farhan.helper.StepHelper;
+import org.farhan.mbt.convert.ConvertibleObject;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
@@ -317,22 +317,21 @@ public class CucumberClassAndInterface implements ConvertibleObject {
 		return theJavaClass.toString();
 	}
 
-	public void addStepParameters(MethodDeclaration stepDefinition, ArrayList<String> paramList) throws Exception {
+	public void addStepParameters(String stepDefinitionName, ArrayList<String> paramList) throws Exception {
 		if (paramList.isEmpty()) {
 			return;
 		}
 		if (isStepObj()) {
-			setStepDefinitionParametersForStepObj(stepDefinition, paramList);
+			setStepDefinitionParametersForStepObj(stepDefinitionName, paramList);
 		} else {
-			setStepDefinitionParametersForStepDef(stepDefinition, paramList);
+			setStepDefinitionParametersForStepDef(stepDefinitionName, paramList);
 		}
 	}
 
-	private void setStepDefinitionParametersForStepDef(MethodDeclaration aMethod, ArrayList<String> paramList)
+	private void setStepDefinitionParametersForStepDef(String stepDefinitionName, ArrayList<String> paramList)
 			throws Exception {
 		MethodDeclaration aMethod;
 		aMethod = getMethod(getMethodNameForStepDef(stepDefinitionName));
-		// TODO get the stepDefinitionName from the method annotation value
 		BlockStmt body = aMethod.getBody().get();
 		String statement;
 		if (paramList.size() == 1 && paramList.get(0).contentEquals("Content")) {
@@ -352,8 +351,9 @@ public class CucumberClassAndInterface implements ConvertibleObject {
 		}
 	}
 
-	private void setStepDefinitionParametersForStepObj(MethodDeclaration aMethod, ArrayList<String> paramList)
+	private void setStepDefinitionParametersForStepObj(String stepDefinitionName, ArrayList<String> paramList)
 			throws Exception {
+		MethodDeclaration aMethod;
 
 		for (String param : paramList) {
 			aMethod = getMethod(getSetOrAssert(stepDefinitionName) + getSection(stepDefinitionName)

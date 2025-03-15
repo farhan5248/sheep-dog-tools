@@ -4,32 +4,32 @@ import java.util.ArrayList;
 
 import org.eclipse.emf.ecore.EAnnotation;
 
-public class StepParameters extends UMLElement {
+public class UMLTestData extends UMLElement {
 
 	private EAnnotation umlElement;
 
-	public StepParameters(String name, StepDefinition parent) {
+	public UMLTestData(String name, UMLTestCase parent) {
 		umlElement = createAnnotation(parent.getUmlElement(), name);
 	}
 
-	public StepParameters(EAnnotation umlElement, StepDefinition parent) {
+	public UMLTestData(EAnnotation umlElement, UMLTestCase parent) {
 		this.umlElement = umlElement;
 	}
 
-	public void addRow(ArrayList<String> stepParametersRow) {
-		String value = "";
-		for (String e : stepParametersRow) {
-			value += e + "|";
-		}
-		umlElement.getDetails().put(String.valueOf(umlElement.getDetails().size()), value);
-	}
-
-	public void addTable(ArrayList<String> headers) {
+	public void setTable(ArrayList<String> headers) {
 		String value = "";
 		for (String e : headers) {
 			value += e + "|";
 		}
 		umlElement.getDetails().put("0", value);
+	}
+
+	public void addRow(ArrayList<String> examplesRow) {
+		String value = "";
+		for (String e : examplesRow) {
+			value += e + "|";
+		}
+		umlElement.getDetails().put(String.valueOf(umlElement.getDetails().size()), value);
 	}
 
 	public String getName() {
@@ -45,7 +45,7 @@ public class StepParameters extends UMLElement {
 	}
 
 	public ArrayList<ArrayList<String>> getRowList() {
-		ArrayList<ArrayList<String>> rowList = new ArrayList<ArrayList<String>>();
+		ArrayList<ArrayList<String>> examplesRowList = new ArrayList<ArrayList<String>>();
 		int rowCnt = umlElement.getDetails().size();
 		for (int i = 1; i < rowCnt; i++) {
 			String[] row = umlElement.getDetails().get(i).getValue().split("\\|");
@@ -54,8 +54,9 @@ public class StepParameters extends UMLElement {
 			for (int j = 0; j < cellCnt; j++) {
 				cellList.add(row[j]);
 			}
-			rowList.add(cellList);
+			examplesRowList.add(cellList);
 		}
-		return rowList;
+		return examplesRowList;
 	}
+
 }

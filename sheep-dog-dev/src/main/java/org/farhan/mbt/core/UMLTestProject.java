@@ -22,20 +22,21 @@ import org.eclipse.uml2.uml.PackageableElement;
 import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
+import org.farhan.mbt.convert.ObjectRepository;
 
-public class TestProject {
+public class UMLTestProject {
 
 	protected ObjectRepository fa;
 	public String tags = "";
 	public final String TEST_CASES = "specs";
 	public final String TEST_STEPS = "stepdefs";
 	private Model umlElement;
-	protected ArrayList<TestSuite> firstLayerObjects;
-	protected ArrayList<StepObject> secondLayerObjects;
+	protected ArrayList<UMLTestSuite> firstLayerObjects;
+	protected ArrayList<UMLStepObject> secondLayerObjects;
 
-	public TestProject(String tags, ObjectRepository fa) {
-		firstLayerObjects = new ArrayList<TestSuite>();
-		secondLayerObjects = new ArrayList<StepObject>();
+	public UMLTestProject(String tags, ObjectRepository fa) {
+		firstLayerObjects = new ArrayList<UMLTestSuite>();
+		secondLayerObjects = new ArrayList<UMLStepObject>();
 		this.fa = fa;
 		this.tags = tags;
 		umlElement = UMLFactory.eINSTANCE.createModel();
@@ -44,18 +45,18 @@ public class TestProject {
 		umlElement.createNestedPackage(TEST_STEPS);
 	}
 
-	public StepObject addStepObject(String qualifiedName) {
+	public UMLStepObject addStepObject(String qualifiedName) {
 		if (getPackagedElement(qualifiedName, null) == null) {
-			StepObject stepObject = new StepObject(qualifiedName, this);
+			UMLStepObject stepObject = new UMLStepObject(qualifiedName, this);
 			secondLayerObjects.add(stepObject);
 			return stepObject;
 		}
 		return null;
 	}
 
-	public TestSuite addTestSuite(String qualifiedName) {
+	public UMLTestSuite addTestSuite(String qualifiedName) {
 		if (getPackagedElement(qualifiedName, null) == null) {
-			TestSuite testSuite = new TestSuite(qualifiedName, this);
+			UMLTestSuite testSuite = new UMLTestSuite(qualifiedName, this);
 			firstLayerObjects.add(testSuite);
 			return testSuite;
 		}
@@ -105,8 +106,8 @@ public class TestProject {
 		return classes;
 	}
 
-	public StepObject getStepObject(String qualifiedName) {
-		for (StepObject so : secondLayerObjects) {
+	public UMLStepObject getStepObject(String qualifiedName) {
+		for (UMLStepObject so : secondLayerObjects) {
 			if (so.getUmlElement().getQualifiedName().contentEquals(qualifiedName)) {
 				return so;
 			}
@@ -114,12 +115,12 @@ public class TestProject {
 		return null;
 	}
 
-	public ArrayList<StepObject> getStepObjectList() {
+	public ArrayList<UMLStepObject> getStepObjectList() {
 		return secondLayerObjects;
 	}
 
-	public TestSuite getTestSuite(String qualifiedName) {
-		for (TestSuite ts : firstLayerObjects) {
+	public UMLTestSuite getTestSuite(String qualifiedName) {
+		for (UMLTestSuite ts : firstLayerObjects) {
 			if (ts.getUmlElement().getQualifiedName().contentEquals(qualifiedName)) {
 				return ts;
 			}
@@ -127,7 +128,7 @@ public class TestProject {
 		return null;
 	}
 
-	public ArrayList<TestSuite> getTestSuiteList() {
+	public ArrayList<UMLTestSuite> getTestSuiteList() {
 		return firstLayerObjects;
 	}
 
@@ -146,11 +147,11 @@ public class TestProject {
 			umlElement = (Model) resource.getContents().getFirst();
 			ArrayList<Class> objects = getPackagedElements(umlElement.getNestedPackage(TEST_CASES));
 			for (Class c : objects) {
-				firstLayerObjects.add(new TestSuite(c, this));
+				firstLayerObjects.add(new UMLTestSuite(c, this));
 			}
 			objects = getPackagedElements(umlElement.getNestedPackage(TEST_STEPS));
 			for (Class c : objects) {
-				secondLayerObjects.add(new StepObject(c, this));
+				secondLayerObjects.add(new UMLStepObject(c, this));
 			}
 		}
 	}

@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.resource.SaveOptions;
-import org.farhan.mbt.core.ConvertibleObject;
+import org.farhan.mbt.convert.ConvertibleObject;
 import org.farhan.mbt.sheepDog.Cell;
 import org.farhan.mbt.sheepDog.Row;
 import org.farhan.mbt.sheepDog.SheepDogFactory;

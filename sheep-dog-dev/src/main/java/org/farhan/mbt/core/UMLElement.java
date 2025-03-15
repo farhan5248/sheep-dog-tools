@@ -1,12 +1,9 @@
 package org.farhan.mbt.core;
 
-import java.util.ArrayList;
-
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.BehavioredClassifier;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
-import org.eclipse.uml2.uml.LiteralString;
 import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Package;

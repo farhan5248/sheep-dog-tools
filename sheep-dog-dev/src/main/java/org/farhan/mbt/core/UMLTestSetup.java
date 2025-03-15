@@ -7,19 +7,19 @@ import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
 import org.eclipse.uml2.uml.Message;
 
-public class TestSetup extends UMLElement {
+public class UMLTestSetup extends UMLElement {
 
 	private Interaction umlElement;
-	private ArrayList<TestStep> testStepList;
+	private ArrayList<UMLTestStep> testStepList;
 
-	public TestSetup(String name, TestSuite parent) {
-		testStepList = new ArrayList<TestStep>();
+	public UMLTestSetup(String name, UMLTestSuite parent) {
+		testStepList = new ArrayList<UMLTestStep>();
 		umlElement = addInteraction((Class) parent.getUmlElement(), name, "");
 		createAnnotation(umlElement, "background", "");
 	}
 
-	public TestSetup(Interaction umlElement, TestSuite parent) {
-		testStepList = new ArrayList<TestStep>();
+	public UMLTestSetup(Interaction umlElement, UMLTestSuite parent) {
+		testStepList = new ArrayList<UMLTestStep>();
 		this.umlElement = umlElement;
 	}
 
@@ -35,8 +35,8 @@ public class TestSetup extends UMLElement {
 		}
 	}
 
-	public TestStep addTestStep(String name) {
-		TestStep testStep = new TestStep(name, this);
+	public UMLTestStep addTestStep(String name) {
+		UMLTestStep testStep = new UMLTestStep(name, this);
 		testStepList.add(testStep);
 		return testStep;
 	}
@@ -66,10 +66,10 @@ public class TestSetup extends UMLElement {
 		return "";
 	}
 
-	public ArrayList<TestStep> getTestStepList() {
+	public ArrayList<UMLTestStep> getTestStepList() {
 		if (testStepList.isEmpty()) {
 			for (Message m : umlElement.getMessages()) {
-				testStepList.add(new TestStep(m, this));
+				testStepList.add(new UMLTestStep(m, this));
 			}
 		}
 		return testStepList;

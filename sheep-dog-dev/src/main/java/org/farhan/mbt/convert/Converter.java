@@ -1,12 +1,14 @@
-package org.farhan.mbt.core;
+package org.farhan.mbt.convert;
 
 import java.util.ArrayList;
+
+import org.farhan.mbt.core.UMLTestProject;
 
 public abstract class Converter {
 
 	protected String tag = "";
 	protected ConvertibleProject project;
-	protected TestProject model;
+	protected UMLTestProject model;
 	protected ObjectRepository fa;
 	protected Logger log;
 

@@ -8,13 +8,13 @@ import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.uml2.uml.Behavior;
 import org.eclipse.uml2.uml.Interaction;
 
-public class StepDefinition extends UMLElement {
+public class UMLStepDefinition extends UMLElement {
 
 	private Interaction umlElement;
-	private ArrayList<StepParameters> stepParametersList;
+	private ArrayList<UMLStepParameters> stepParametersList;
 
-	public StepDefinition(String name, StepObject parent) {
-		stepParametersList = new ArrayList<StepParameters>();
+	public UMLStepDefinition(String name, UMLStepObject parent) {
+		stepParametersList = new ArrayList<UMLStepParameters>();
 		umlElement = addInteraction(parent.getUmlElement(), name, "");
 		// TODO make tests for this by doing adoc(unsorted) uml adoc (sorted)
 		TreeMap<String, Interaction> sorted = new TreeMap<String, Interaction>();
@@ -28,8 +28,8 @@ public class StepDefinition extends UMLElement {
 		}
 	}
 
-	public StepDefinition(Interaction umlElement, StepObject parent) {
-		stepParametersList = new ArrayList<StepParameters>();
+	public UMLStepDefinition(Interaction umlElement, UMLStepObject parent) {
+		stepParametersList = new ArrayList<UMLStepParameters>();
 		this.umlElement = umlElement;
 	}
 
@@ -41,8 +41,8 @@ public class StepDefinition extends UMLElement {
 		createAnnotation(umlElement, "StepDefinition", "LongName", stepDefinitionNameLong);
 	}
 
-	public StepParameters addStepParameters(String name) {
-		StepParameters stepParameters = new StepParameters(name, this);
+	public UMLStepParameters addStepParameters(String name) {
+		UMLStepParameters stepParameters = new UMLStepParameters(name, this);
 		stepParametersList.add(stepParameters);
 		return stepParameters;
 	}
@@ -55,21 +55,25 @@ public class StepDefinition extends UMLElement {
 		return umlElement.getName();
 	}
 
-	public String getDescription(StepDefinition srcStepDefinition) {
+	public String getDescription(UMLStepDefinition srcStepDefinition) {
 		if (umlElement.getOwnedComments().size() > 0) {
 			return umlElement.getOwnedComments().get(0).getBody();
 		}
 		return "";
 	}
 
-	public ArrayList<StepParameters> getStepParametersList() {
+	public ArrayList<UMLStepParameters> getStepParametersList() {
 		if (stepParametersList.isEmpty()) {
 			for (EAnnotation a : umlElement.getEAnnotations()) {
 				if (!a.getSource().contentEquals("StepDefinition")) {
-					stepParametersList.add(new StepParameters(a, this));
+					stepParametersList.add(new UMLStepParameters(a, this));
 				}
 			}
 		}
 		return stepParametersList;
+	}
+
+	public String getNameLong() {
+		return umlElement.getEAnnotation("StepDefinition").getDetails().get("LongName");
 	}
 }

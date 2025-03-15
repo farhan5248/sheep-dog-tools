@@ -9,20 +9,20 @@ import org.eclipse.uml2.uml.Message;
 import org.eclipse.uml2.uml.UMLFactory;
 import org.eclipse.uml2.uml.ValueSpecification;
 
-public class TestStep extends UMLElement {
+public class UMLTestStep extends UMLElement {
 
 	private Message umlElement;
 
-	public TestStep(String name, UMLElement parent) {
+	public UMLTestStep(String name, UMLElement parent) {
 		String keyword = name.split(" ")[0];
-		if (parent instanceof TestCase) {
-			umlElement = ((TestCase) parent).getUmlElement().createMessage(name.substring(keyword.length() + 1));
+		if (parent instanceof UMLTestCase) {
+			umlElement = ((UMLTestCase) parent).getUmlElement().createMessage(name.substring(keyword.length() + 1));
 		} else {
-			umlElement = ((TestSetup) parent).getUmlElement().createMessage(name.substring(keyword.length() + 1));
+			umlElement = ((UMLTestSetup) parent).getUmlElement().createMessage(name.substring(keyword.length() + 1));
 		}
 	}
 
-	public TestStep(Message umlElement, UMLElement parent) {
+	public UMLTestStep(Message umlElement, UMLElement parent) {
 		this.umlElement = umlElement;
 	}
 

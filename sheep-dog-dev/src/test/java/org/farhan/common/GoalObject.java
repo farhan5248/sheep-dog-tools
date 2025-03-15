@@ -1,11 +1,10 @@
 package org.farhan.common;
 
-import org.farhan.mbt.core.ObjectRepository;
-
 import java.util.ArrayList;
 
-import org.farhan.mbt.core.Converter;
-import org.farhan.mbt.core.Logger;
+import org.farhan.mbt.convert.Converter;
+import org.farhan.mbt.convert.Logger;
+import org.farhan.mbt.convert.ObjectRepository;
 import org.junit.jupiter.api.Assertions;
 
 public abstract class GoalObject extends TestObject {

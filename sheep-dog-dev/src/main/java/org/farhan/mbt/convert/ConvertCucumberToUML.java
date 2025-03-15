@@ -6,15 +6,12 @@ import org.farhan.mbt.cucumber.Row;
 import org.farhan.mbt.cucumber.Scenario;
 import org.farhan.mbt.cucumber.ScenarioOutline;
 import org.farhan.mbt.cucumber.Step;
-import org.farhan.mbt.core.ObjectRepository;
-import org.farhan.mbt.core.TestCase;
-import org.farhan.mbt.core.TestData;
-import org.farhan.mbt.core.TestSuite;
-import org.farhan.mbt.core.TestProject;
-import org.farhan.mbt.core.TestSetup;
-import org.farhan.mbt.core.TestStep;
-import org.farhan.mbt.core.Converter;
-import org.farhan.mbt.core.Logger;
+import org.farhan.mbt.core.UMLTestCase;
+import org.farhan.mbt.core.UMLTestData;
+import org.farhan.mbt.core.UMLTestSuite;
+import org.farhan.mbt.core.UMLTestProject;
+import org.farhan.mbt.core.UMLTestSetup;
+import org.farhan.mbt.core.UMLTestStep;
 import org.farhan.mbt.cucumber.CucumberFeature;
 import org.farhan.mbt.cucumber.CucumberPathConverter;
 import org.farhan.mbt.cucumber.CucumberTestProject;
@@ -35,7 +32,7 @@ public class ConvertCucumberToUML extends Converter {
 		return "";
 	}
 
-	private void convertTestCase(AbstractScenario srcTestCase, TestCase testCase) {
+	private void convertTestCase(AbstractScenario srcTestCase, UMLTestCase testCase) {
 		log.debug("test case: " + srcTestCase.getName());
 		testCase.setTags(srcObjTestSuite.getScenarioTags(srcTestCase));
 		testCase.setDescription(srcObjTestSuite.getScenarioDescription(srcTestCase));
@@ -44,7 +41,7 @@ public class ConvertCucumberToUML extends Converter {
 		}
 	}
 
-	private void convertTestCaseWithTestData(AbstractScenario srcTestCase, TestCase testCase) {
+	private void convertTestCaseWithTestData(AbstractScenario srcTestCase, UMLTestCase testCase) {
 		log.debug("test case: " + srcTestCase.getName());
 		testCase.setTags(srcObjTestSuite.getScenarioOutlineTags(srcTestCase));
 		testCase.setDescription(srcObjTestSuite.getScenarioOutlineDescription(srcTestCase));
@@ -56,7 +53,7 @@ public class ConvertCucumberToUML extends Converter {
 		}
 	}
 
-	private void convertTestData(TestData examples, Examples srcExamples) {
+	private void convertTestData(UMLTestData examples, Examples srcExamples) {
 		log.debug("test data: " + srcExamples.getName());
 		// TODO add examples description
 		examples.setTable(srcObjTestSuite.getExamplesTable(srcExamples));
@@ -65,9 +62,9 @@ public class ConvertCucumberToUML extends Converter {
 		}
 	}
 
-	private void convertTestSetup(AbstractScenario srcAbstractScenario, TestSuite testSuite) {
+	private void convertTestSetup(AbstractScenario srcAbstractScenario, UMLTestSuite testSuite) {
 		log.debug("test setup: " + srcAbstractScenario.getName());
-		TestSetup background = testSuite.addTestSetup(srcObjTestSuite.getBackgroundName(srcAbstractScenario));
+		UMLTestSetup background = testSuite.addTestSetup(srcObjTestSuite.getBackgroundName(srcAbstractScenario));
 		background.setTags(srcObjTestSuite.getFeatureTags());
 		background.setDescription(srcObjTestSuite.getBackgroundDescription(srcAbstractScenario));
 		for (Step srcStep : srcObjTestSuite.getStepList(srcAbstractScenario)) {
@@ -75,7 +72,7 @@ public class ConvertCucumberToUML extends Converter {
 		}
 	}
 
-	private void convertTestStep(TestStep step, Step srcStep) {
+	private void convertTestStep(UMLTestStep step, Step srcStep) {
 		log.debug("test step: " + srcStep.getName());
 		step.setKeyword(srcObjTestSuite.getStepKeyword(srcStep));
 		step.setNameLong(srcObjTestSuite.getStepNameLong(srcStep));
@@ -92,8 +89,8 @@ public class ConvertCucumberToUML extends Converter {
 		srcObjTestSuite = (CucumberFeature) project.addFile(path);
 		srcObjTestSuite.parse(content);
 		if (isTestSuiteSelected()) {
-			TestSuite testSuite = model.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
-			testSuite.setFeatureDescription(srcObjTestSuite.getFeatureDescription());
+			UMLTestSuite testSuite = model.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
+			testSuite.setDescription(srcObjTestSuite.getFeatureDescription());
 			for (AbstractScenario as : srcObjTestSuite.getAbstractScenarioList()) {
 				if (srcObjTestSuite.isBackground(as)) {
 					convertTestSetup(as, testSuite);
@@ -112,7 +109,7 @@ public class ConvertCucumberToUML extends Converter {
 
 	public void initProjects() throws Exception {
 		project = new CucumberTestProject(this.tag, this.fa);
-		model = new TestProject(this.tag, this.fa);
+		model = new UMLTestProject(this.tag, this.fa);
 		project.init();
 		model.init();
 		this.pathConverter = new CucumberPathConverter(model, (CucumberTestProject) project);
