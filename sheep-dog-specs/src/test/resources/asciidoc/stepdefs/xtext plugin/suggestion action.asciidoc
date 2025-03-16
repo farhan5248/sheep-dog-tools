@@ -1,4 +1,4 @@
-= Object: suggestion action
+= Step-Object: suggestion action
 
-== Definition: is performed
+== Step-Definition: is performed
 

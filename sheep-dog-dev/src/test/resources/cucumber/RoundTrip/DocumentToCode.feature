@@ -5,15 +5,15 @@ Feature: Document To Code
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           Desc 1
           
           [tags="tag1"]
-          == Background: Setup
+          == Test-Setup: Setup
 
           [tags="tag2"]
-          == Scenario: Story One
+          == Test-Case: Story One
           
           Desc 2
           
@@ -28,7 +28,7 @@ Feature: Document To Code
           ----
           
           [tags="tag3"]
-          == Scenario: Story Two
+          == Test-Case: Story Two
           
           Desc 3
           
@@ -41,14 +41,14 @@ Feature: Document To Code
           | 8 | {ins}
           |===
           
-          === Examples: Some data
+          === Test-Data: Some data
           
           |===
           | ins
           | 4
           |===
           
-          === Examples: Dataset 2
+          === Test-Data: Dataset 2
           
           |===
           | ins
@@ -58,21 +58,21 @@ Feature: Document To Code
           """
       And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
-          = Object: Object page
+          = Step-Object: Object page
           
-          == Definition: is valid
+          == Step-Definition: is valid
           
-          == Definition: is invalid
+          == Step-Definition: is invalid
           
-          == Definition: is created as follows
+          == Step-Definition: is created as follows
           
-          === Parameters: 1
+          === Step-Parameters: 1
           
           |===
           | grp | ins
           |===
           
-          === Parameters: 2
+          === Step-Parameters: 2
           
           |===
           | Content

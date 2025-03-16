@@ -14,10 +14,10 @@ public class BackgroundFormattingTest extends FormattingTest {
 	private StringBuilder getExpected() {
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
+		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("\n");
 		sb.append("[tags=\"tag1\"]\n");
-		sb.append("== Background: Submit a claim\n");
+		sb.append("== Test-Setup: Submit a claim\n");
 		sb.append("\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
@@ -42,10 +42,10 @@ public class BackgroundFormattingTest extends FormattingTest {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
-			sb.append("=  Feature: This is a test feature\n");
+			sb.append("=  Test-Suite: This is a test feature\n");
 			sb.append("\n");
 			sb.append("[tags=\"tag1\"]\n");
-			sb.append(" ==  Background:  Submit a claim \n");
+			sb.append(" ==  Test-Setup:  Submit a claim \n");
 			sb.append("\n");
 			sb.append(" Basic EDI claim \n");
 			sb.append(" No deductible \n");
@@ -63,10 +63,10 @@ public class BackgroundFormattingTest extends FormattingTest {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
-			sb.append("=Feature:This is a test feature\n");
+			sb.append("=Test-Suite:This is a test feature\n");
 			sb.append("\n");
 			sb.append("[tags=\"tag1\"]\n");
-			sb.append("==Background:Submit a claim\n");
+			sb.append("==Test-Setup:Submit a claim\n");
 			sb.append("\n");
 			sb.append("Basic EDI claim\n");
 			sb.append("No deductible\n");
@@ -84,12 +84,12 @@ public class BackgroundFormattingTest extends FormattingTest {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
-			sb.append("= Feature: This is a test feature\n");
+			sb.append("= Test-Suite: This is a test feature\n");
 			sb.append("\n");
 			sb.append("\n");
 			sb.append("[tags=\"tag1\"]\n");
 			sb.append("\n");
-			sb.append("== Background: Submit a claim\n");
+			sb.append("== Test-Setup: Submit a claim\n");
 			sb.append("\n");
 			sb.append("\n");
 			sb.append("Basic EDI claim\n");

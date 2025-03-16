@@ -15,41 +15,41 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.farhan.mbt.sheepDog.AbstractScenario;
-import org.farhan.mbt.sheepDog.Feature;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
+import org.farhan.mbt.sheepDog.TestStepContainer;
+import org.farhan.mbt.sheepDog.TestSuite;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Feature</b></em>'.
+ * An implementation of the model object '<em><b>Test Suite</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.FeatureImpl#getAbstractScenarios <em>Abstract Scenarios</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.TestSuiteImpl#getTestStepContainerList <em>Test Step Container List</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class FeatureImpl extends ModelImpl implements Feature
+public class TestSuiteImpl extends ModelImpl implements TestSuite
 {
   /**
-   * The cached value of the '{@link #getAbstractScenarios() <em>Abstract Scenarios</em>}' containment reference list.
+   * The cached value of the '{@link #getTestStepContainerList() <em>Test Step Container List</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getAbstractScenarios()
+   * @see #getTestStepContainerList()
    * @generated
    * @ordered
    */
-  protected EList<AbstractScenario> abstractScenarios;
+  protected EList<TestStepContainer> testStepContainerList;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected FeatureImpl()
+  protected TestSuiteImpl()
   {
     super();
   }
@@ -62,7 +62,7 @@ public class FeatureImpl extends ModelImpl implements Feature
   @Override
   protected EClass eStaticClass()
   {
-    return SheepDogPackage.Literals.FEATURE;
+    return SheepDogPackage.Literals.TEST_SUITE;
   }
 
   /**
@@ -71,13 +71,13 @@ public class FeatureImpl extends ModelImpl implements Feature
    * @generated
    */
   @Override
-  public EList<AbstractScenario> getAbstractScenarios()
+  public EList<TestStepContainer> getTestStepContainerList()
   {
-    if (abstractScenarios == null)
+    if (testStepContainerList == null)
     {
-      abstractScenarios = new EObjectContainmentEList<AbstractScenario>(AbstractScenario.class, this, SheepDogPackage.FEATURE__ABSTRACT_SCENARIOS);
+      testStepContainerList = new EObjectContainmentEList<TestStepContainer>(TestStepContainer.class, this, SheepDogPackage.TEST_SUITE__TEST_STEP_CONTAINER_LIST);
     }
-    return abstractScenarios;
+    return testStepContainerList;
   }
 
   /**
@@ -90,8 +90,8 @@ public class FeatureImpl extends ModelImpl implements Feature
   {
     switch (featureID)
     {
-      case SheepDogPackage.FEATURE__ABSTRACT_SCENARIOS:
-        return ((InternalEList<?>)getAbstractScenarios()).basicRemove(otherEnd, msgs);
+      case SheepDogPackage.TEST_SUITE__TEST_STEP_CONTAINER_LIST:
+        return ((InternalEList<?>)getTestStepContainerList()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -106,8 +106,8 @@ public class FeatureImpl extends ModelImpl implements Feature
   {
     switch (featureID)
     {
-      case SheepDogPackage.FEATURE__ABSTRACT_SCENARIOS:
-        return getAbstractScenarios();
+      case SheepDogPackage.TEST_SUITE__TEST_STEP_CONTAINER_LIST:
+        return getTestStepContainerList();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -123,9 +123,9 @@ public class FeatureImpl extends ModelImpl implements Feature
   {
     switch (featureID)
     {
-      case SheepDogPackage.FEATURE__ABSTRACT_SCENARIOS:
-        getAbstractScenarios().clear();
-        getAbstractScenarios().addAll((Collection<? extends AbstractScenario>)newValue);
+      case SheepDogPackage.TEST_SUITE__TEST_STEP_CONTAINER_LIST:
+        getTestStepContainerList().clear();
+        getTestStepContainerList().addAll((Collection<? extends TestStepContainer>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -141,8 +141,8 @@ public class FeatureImpl extends ModelImpl implements Feature
   {
     switch (featureID)
     {
-      case SheepDogPackage.FEATURE__ABSTRACT_SCENARIOS:
-        getAbstractScenarios().clear();
+      case SheepDogPackage.TEST_SUITE__TEST_STEP_CONTAINER_LIST:
+        getTestStepContainerList().clear();
         return;
     }
     super.eUnset(featureID);
@@ -158,10 +158,10 @@ public class FeatureImpl extends ModelImpl implements Feature
   {
     switch (featureID)
     {
-      case SheepDogPackage.FEATURE__ABSTRACT_SCENARIOS:
-        return abstractScenarios != null && !abstractScenarios.isEmpty();
+      case SheepDogPackage.TEST_SUITE__TEST_STEP_CONTAINER_LIST:
+        return testStepContainerList != null && !testStepContainerList.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //FeatureImpl
+} //TestSuiteImpl

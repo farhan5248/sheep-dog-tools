@@ -1,6 +1,6 @@
-= Feature: Convert Doc String To UML
+= Test-Suite: Convert Doc String To UML
 
-== Scenario: One line
+== Test-Case: One line
 
 === Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -26,7 +26,7 @@ Feature: Process
 | specs::Process::Submit | The Object page is created as follows | docString     | 0 -} text1       
 |===
 
-== Scenario: Empty Lines
+== Test-Case: Empty Lines
 
 === Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 

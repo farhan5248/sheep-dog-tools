@@ -8,60 +8,60 @@
       fileExtensions="asciidoc" ecorePackage="SheepDog.ecore#/">
     <genClasses ecoreClass="SheepDog.ecore#//Model">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//Model/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Model/statements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Model/statementList"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//StepObject">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepObject/stepDefinitions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepObject/stepDefinitionList"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//StepDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//StepDefinition/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepDefinition/statements"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepDefinition/stepParameters"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepDefinition/statementList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepDefinition/stepParameterList"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//StepParameters">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//StepParameters/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepParameters/statements"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepParameters/parametersTable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepParameters/statementList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//StepParameters/table"/>
     </genClasses>
-    <genClasses ecoreClass="SheepDog.ecore#//Feature">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Feature/abstractScenarios"/>
+    <genClasses ecoreClass="SheepDog.ecore#//TestSuite">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestSuite/testStepContainerList"/>
     </genClasses>
-    <genClasses ecoreClass="SheepDog.ecore#//AbstractScenario">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//AbstractScenario/tags"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//AbstractScenario/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//AbstractScenario/statements"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//AbstractScenario/steps"/>
+    <genClasses ecoreClass="SheepDog.ecore#//TestStepContainer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestStepContainer/tagList"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//TestStepContainer/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestStepContainer/statementList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestStepContainer/testStepList"/>
     </genClasses>
-    <genClasses ecoreClass="SheepDog.ecore#//Background"/>
-    <genClasses ecoreClass="SheepDog.ecore#//Scenario">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Scenario/examples"/>
+    <genClasses ecoreClass="SheepDog.ecore#//TestSetup"/>
+    <genClasses ecoreClass="SheepDog.ecore#//TestCase">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestCase/testDataList"/>
     </genClasses>
-    <genClasses ecoreClass="SheepDog.ecore#//Examples">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Examples/tags"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//Examples/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Examples/statements"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Examples/theExamplesTable"/>
+    <genClasses ecoreClass="SheepDog.ecore#//TestData">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestData/tagList"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//TestData/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestData/statementList"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestData/table"/>
     </genClasses>
-    <genClasses ecoreClass="SheepDog.ecore#//Step">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//Step/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Step/theStepTable"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Step/theDocString"/>
+    <genClasses ecoreClass="SheepDog.ecore#//TestStep">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//TestStep/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestStep/table"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestStep/text"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//Given"/>
     <genClasses ecoreClass="SheepDog.ecore#//When"/>
     <genClasses ecoreClass="SheepDog.ecore#//Then"/>
     <genClasses ecoreClass="SheepDog.ecore#//And"/>
-    <genClasses ecoreClass="SheepDog.ecore#//DocString">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//DocString/name"/>
+    <genClasses ecoreClass="SheepDog.ecore#//Text">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//Text/name"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//Table">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Table/rows"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Table/rowList"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//Row">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Row/cells"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Row/cellList"/>
     </genClasses>
-    <genClasses ecoreClass="SheepDog.ecore#//AbstractScenarioTags">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//AbstractScenarioTags/name"/>
+    <genClasses ecoreClass="SheepDog.ecore#//Tags">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//Tags/name"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//Cell">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//Cell/name"/>

@@ -16,13 +16,13 @@ public class SheepDogParsingTest extends ParsingTest {
 	@Test
 	public void parseCompleteFile() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
+		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("\n");
 		sb.append("This is the description\n");
 		sb.append("This is the second line of the description\n");
 		sb.append("\n");
 
-		sb.append("== Background: Setup a cardholder\n");
+		sb.append("== Test-Setup: Setup a cardholder\n");
 		sb.append("\n");
 		sb.append("First setup a group\n");
 		sb.append("Next setup the cardholder\n");
@@ -59,13 +59,13 @@ public class SheepDogParsingTest extends ParsingTest {
 		sb.append("\n");
 
 		sb.append("[tags=\"tag1,tag2,tag3\"]\n");
-		sb.append("== Scenario: Submit a claim\n");
+		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("\n");
 		sb.append("=== And: do step two\n");
 		sb.append("\n");
 
 		sb.append("[tags=\"tag1,tag2,tag3\"]\n");
-		sb.append("== Scenario: Submit a drug claim\n");
+		sb.append("== Test-Case: Submit a drug claim\n");
 		sb.append("\n");
 		sb.append("=== And: do step two\n");
 		sb.append("=== When: do step three\n");
@@ -79,7 +79,7 @@ public class SheepDogParsingTest extends ParsingTest {
 		sb.append("\n");
 
 		sb.append("[tags=\"tag1,tag2,tag3\"]\n");
-		sb.append("== Scenario: Submit a dental claim\n");
+		sb.append("== Test-Case: Submit a dental claim\n");
 		sb.append("\n");
 		sb.append("=== Given: do step one\n");
 		sb.append("=== And: do step two\n");
@@ -93,7 +93,7 @@ public class SheepDogParsingTest extends ParsingTest {
 		sb.append("\n");
 
 		sb.append("[tags=\"tag1,tag2,tag3\"]\n");
-		sb.append("=== Examples: Describe what this data is about\n");
+		sb.append("=== Test-Data: Describe what this data is about\n");
 		sb.append("\n");
 		sb.append("Put some explanation here.\n");
 		sb.append("\n");
@@ -106,7 +106,7 @@ public class SheepDogParsingTest extends ParsingTest {
 		sb.append("\n");
 
 		sb.append("[tags=\"tag1,tag2,tag3\"]\n");
-		sb.append("==  Scenario: Submit a dental claim\n");
+		sb.append("==  Test-Case: Submit a dental claim\n");
 		sb.append("\n");
 		sb.append("=== Given: do step one\n");
 		sb.append("=== And: do step two\n");
@@ -115,7 +115,7 @@ public class SheepDogParsingTest extends ParsingTest {
 		sb.append("\n");
 
 		sb.append("[tags=\"tag1,tag2,tag3\"]\n");
-		sb.append("=== Examples: Describe what this data is about as well\n");
+		sb.append("=== Test-Data: Describe what this data is about as well\n");
 		sb.append("\n");
 		sb.append("Put some explanation here.\n");
 		sb.append("\n");
@@ -128,7 +128,7 @@ public class SheepDogParsingTest extends ParsingTest {
 		sb.append("\n");
 
 		sb.append("[tags=\"tag1,tag2,tag3\"]\n");
-		sb.append("=== Examples: Describe this data too\n");
+		sb.append("=== Test-Data: Describe this data too\n");
 		sb.append("\n");
 
 		sb.append("|===\n");

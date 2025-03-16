@@ -1,10 +1,10 @@
-= Object: uml-to-asciidoctor goal
+= Step-Object: uml-to-asciidoctor goal
 
-== Definition: is executed
+== Step-Definition: is executed
 
-== Definition: is executed with
+== Step-Definition: is executed with
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | Tags

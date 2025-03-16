@@ -1,6 +1,6 @@
-= Feature: Validate Warning
+= Test-Suite: Validate Warning
 
-== Scenario: This object doesn't exist validation
+== Test-Case: This object doesn't exist validation
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -18,7 +18,7 @@
 | This object doesn't exist for: daily batchjob/Input file.feature
 |===
 
-== Scenario: This object step definition doesn't exist validation
+== Test-Case: This object step definition doesn't exist validation
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -43,7 +43,7 @@
 | This object step definition doesn't exist for: daily batchjob/Input file.feature
 |===
 
-== Scenario: This object step definition parameter set doesn't exist validation
+== Test-Case: This object step definition parameter set doesn't exist validation
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -68,7 +68,7 @@
 | This object step definition parameter set doesn't exist for: daily batchjob/Input file.feature
 |===
 
-== Scenario: This object doesn't exist and there is an alternate
+== Test-Case: This object doesn't exist and there is an alternate
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 

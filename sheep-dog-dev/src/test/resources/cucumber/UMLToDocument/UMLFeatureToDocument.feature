@@ -5,7 +5,7 @@ Feature: UML Feature To Document
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
@@ -19,11 +19,11 @@ Feature: UML Feature To Document
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           Desc line 1
           
-          == Scenario: Story One
+          == Test-Case: Story One
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
@@ -37,12 +37,12 @@ Feature: UML Feature To Document
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           Desc line 1
           Desc line 2
           
-          == Scenario: Story One
+          == Test-Case: Story One
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
@@ -56,13 +56,13 @@ Feature: UML Feature To Document
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           Desc line 1
           Desc line 2
           Desc line 3
           
-          == Scenario: Story One
+          == Test-Case: Story One
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted

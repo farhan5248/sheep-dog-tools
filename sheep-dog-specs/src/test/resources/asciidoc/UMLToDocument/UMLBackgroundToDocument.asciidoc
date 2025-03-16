@@ -1,19 +1,19 @@
-= Feature: UML Background To Document
+= Test-Suite: UML Background To Document
 
-== Scenario: One statement, one step, one scenario
+== Test-Case: One statement, one step, one scenario
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Background: Setup
+== Test-Setup: Setup
 
 Desc line 1
 
 === Given: The Object0 page is valid
 
-== Scenario: Submit
+== Test-Case: Submit
 
 === Given: The Object page is valid
 ----
@@ -47,18 +47,18 @@ Desc line 1
 | Submit | Given: The Object page is valid
 |===
 
-== Scenario: No statement, one step, one scenario
+== Test-Case: No statement, one step, one scenario
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Background: Setup
+== Test-Setup: Setup
 
 === Given: The Object0 page is valid
 
-== Scenario: Submit
+== Test-Case: Submit
 
 === Given: The Object page is valid
 ----
@@ -85,22 +85,22 @@ Desc line 1
 | Submit | Given: The Object page is valid
 |===
 
-== Scenario: No statement, one step, two scenarios
+== Test-Case: No statement, one step, two scenarios
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Background: Setup
+== Test-Setup: Setup
 
 === Given: The Object0 page is valid
 
-== Scenario: Submit 1
+== Test-Case: Submit 1
 
 === Given: The Object page is valid
 
-== Scenario: Submit 2
+== Test-Case: Submit 2
 
 === Given: The Object2 page is valid
 ----
@@ -128,26 +128,26 @@ Desc line 1
 | Submit 2 | Given: The Object2 page is valid
 |===
 
-== Scenario: No statement, one step, three scenarios
+== Test-Case: No statement, one step, three scenarios
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Background: Setup
+== Test-Setup: Setup
 
 === Given: The Object0 page is valid
 
-== Scenario: Submit 1
+== Test-Case: Submit 1
 
 === Given: The Object page is valid
 
-== Scenario: Submit 2
+== Test-Case: Submit 2
 
 === Given: The Object2 page is valid
 
-== Scenario: Submit 3
+== Test-Case: Submit 3
 
 === Given: The Object3 page is valid
 ----
@@ -176,19 +176,19 @@ Desc line 1
 | Submit 3 | Given: The Object3 page is valid
 |===
 
-== Scenario: No statement, two steps, one scenario
+== Test-Case: No statement, two steps, one scenario
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Background: Setup
+== Test-Setup: Setup
 
 === Given: The Object page is valid
 === Given: The Object2 page is valid
 
-== Scenario: Submit
+== Test-Case: Submit
 
 === Given: The Object page is valid
 ----
@@ -216,20 +216,20 @@ Desc line 1
 | Submit | Given: The Object page is valid
 |===
 
-== Scenario: No statement, three steps, one scenario
+== Test-Case: No statement, three steps, one scenario
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Background: Setup
+== Test-Setup: Setup
 
 === Given: The Object page is valid
 === Given: The Object2 page is valid
 === Given: The Object3 page is valid
 
-== Scenario: Submit
+== Test-Case: Submit
 
 === Given: The Object page is valid
 ----

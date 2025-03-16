@@ -16,35 +16,35 @@ public class ObjectParsingTest extends ParsingTest {
 	@Test
 	public void parseStepObjectWithName() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Object: This is a test StepObject\n");
+		sb.append("= Step-Object: This is a test StepObject\n");
 		assertNoStepObjectErrors(sb);
 	}
 
 	@Test
 	public void parseStepObjectWithoutName() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Object:\n");
+		sb.append("= Step-Object:\n");
 		assertStepObjectErrors(sb);
 	}
 
 	@Test
 	public void parseStepObjectWithoutNameEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Object: This is a test StepObject");
+		sb.append("= Step-Object: This is a test StepObject");
 		assertStepObjectErrors(sb);
 	}
 
 	@Test
 	public void parseStepObjectWithTags() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Object: This is a test StepObject\n");
+		sb.append("= Step-Object: This is a test StepObject\n");
 		assertNoStepObjectErrors(sb);
 	}
 
 	@Test
 	public void parseStepObjectWithDescription() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Object: This is a test StepObject\n");
+		sb.append("= Step-Object: This is a test StepObject\n");
 		sb.append("This is the description\n");
 		sb.append("This is the second line of the description\n");
 		assertNoStepObjectErrors(sb);
@@ -53,7 +53,7 @@ public class ObjectParsingTest extends ParsingTest {
 	@Test
 	public void parseStepObjectWithoutDescriptionEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Object: This is a test StepObject\n");
+		sb.append("= Step-Object: This is a test StepObject\n");
 		sb.append("This is the description");
 		assertStepObjectErrors(sb);
 	}
@@ -61,7 +61,7 @@ public class ObjectParsingTest extends ParsingTest {
 	@Test
 	public void parseStepObjectWithEverything() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Object: This is a test StepObject\n");
+		sb.append("= Step-Object: This is a test StepObject\n");
 		sb.append("This is the description\n");
 		sb.append("This is the second line of the description\n");
 		assertNoStepObjectErrors(sb);

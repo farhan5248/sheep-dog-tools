@@ -16,10 +16,10 @@ public class ExamplesParsingTest extends ParsingTest {
 	@Test
 	public void parseExamplesWithName() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("=== Given: do step one\n");
-		sb.append("=== Examples: Describe what this data is about\n");
+		sb.append("=== Test-Data: Describe what this data is about\n");
 
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
@@ -30,10 +30,10 @@ public class ExamplesParsingTest extends ParsingTest {
 	@Test
 	public void parseExamplesWithoutName() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("=== Given: do step one\n");
-		sb.append("=== Examples:\n");
+		sb.append("=== Test-Data:\n");
 
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
@@ -44,21 +44,21 @@ public class ExamplesParsingTest extends ParsingTest {
 	@Test
 	public void parseExamplesWithoutNameEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("=== Given: do step one\n");
-		sb.append("=== Examples: Describe what this data is about");
+		sb.append("=== Test-Data: Describe what this data is about");
 		assertFeatureErrors(sb);
 	}
 
 	@Test
 	public void parseExamplesWithTags() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("=== Given: do step one\n");
 		sb.append("[tags=\"tag1\"]\n");
-		sb.append("=== Examples: Describe what this data is about\n");
+		sb.append("=== Test-Data: Describe what this data is about\n");
 
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
@@ -69,10 +69,10 @@ public class ExamplesParsingTest extends ParsingTest {
 	@Test
 	public void parseExamplesWithDescription() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("=== Given: do step one\n");
-		sb.append("=== Examples: Describe what this data is about\n");
+		sb.append("=== Test-Data: Describe what this data is about\n");
 		sb.append("Basic EDI claim\n");
 
 		sb.append("|===\n");
@@ -84,10 +84,10 @@ public class ExamplesParsingTest extends ParsingTest {
 	@Test
 	public void parseExamplesWithMultilineDescription() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("=== Given: do step one\n");
-		sb.append("=== Examples: Describe what this data is about\n");
+		sb.append("=== Test-Data: Describe what this data is about\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
 
@@ -100,10 +100,10 @@ public class ExamplesParsingTest extends ParsingTest {
 	@Test
 	public void parseExamplesWithoutDescriptionEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("=== Given: do step one\n");
-		sb.append("=== Examples: Describe what this data is about\n");
+		sb.append("=== Test-Data: Describe what this data is about\n");
 		sb.append("Basic EDI claim");
 		assertFeatureErrors(sb);
 	}
@@ -111,10 +111,10 @@ public class ExamplesParsingTest extends ParsingTest {
 	@Test
 	public void parseExamplesWithRows() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("=== Given: do step one\n");
-		sb.append("=== Examples: Describe what this data is about\n");
+		sb.append("=== Test-Data: Describe what this data is about\n");
 		sb.append("Basic EDI claim\n");
 
 		sb.append("|===\n");
@@ -128,11 +128,11 @@ public class ExamplesParsingTest extends ParsingTest {
 	@Test
 	public void parseExamplesWithEverything() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("=== Given: do step one\n");
 		sb.append("[tags=\"tag1,tag2\"]\n");
-		sb.append("=== Examples: Describe what this data is about\n");
+		sb.append("=== Test-Data: Describe what this data is about\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
 

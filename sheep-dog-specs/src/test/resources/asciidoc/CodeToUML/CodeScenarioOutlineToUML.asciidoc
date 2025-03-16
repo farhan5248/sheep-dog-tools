@@ -1,6 +1,6 @@
-= Feature: Code Scenario Outline To UML
+= Test-Suite: Code Scenario Outline To UML
 
-== Scenario: No tags, no statement, one step, one example
+== Test-Case: No tags, no statement, one step, one example
 
 === Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -37,7 +37,7 @@ Feature: Process
 | specs::Process::Submit | Examples 1      | 1 -} v31\|       
 |===
 
-== Scenario: One tag, one statement, one step, one example
+== Test-Case: One tag, one statement, one step, one example
 
 === Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -76,7 +76,7 @@ Feature: Process
 | specs::Process::Submit | Desc line 1
 |===
 
-== Scenario: Two tags, two statements, two steps, two examples
+== Test-Case: Two tags, two statements, two steps, two examples
 
 === Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -139,7 +139,7 @@ Feature: Process
 | specs::Process::Submit | Examples {Index} | 1 -} v3{Index}\| 
 |===
 
-=== Examples: Indices
+=== Test-Data: Indices
 
 |===
 | Index
@@ -147,7 +147,7 @@ Feature: Process
 | 2    
 |===
 
-== Scenario: Three tags, three statements, three steps, three examples
+== Test-Case: Three tags, three statements, three steps, three examples
 
 === Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -215,7 +215,7 @@ Feature: Process
 | specs::Process::Submit | Examples {Index} | 1 -} v3{Index}\| 
 |===
 
-=== Examples: Indices
+=== Test-Data: Indices
 
 |===
 | Index
@@ -224,7 +224,7 @@ Feature: Process
 | 3    
 |===
 
-== Scenario: Selected tags
+== Test-Case: Selected tags
 
 === Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 

@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.farhan.mbt.sheepDog.Model#getName <em>Name</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.Model#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.Model#getStatementList <em>Statement List</em>}</li>
  * </ul>
  *
  * @see org.farhan.mbt.sheepDog.SheepDogPackage#getModel()
@@ -49,15 +49,15 @@ public interface Model extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Statement List</b></em>' containment reference list.
    * The list contents are of type {@link org.farhan.mbt.sheepDog.Statement}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Statements</em>' containment reference list.
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getModel_Statements()
+   * @return the value of the '<em>Statement List</em>' containment reference list.
+   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getModel_StatementList()
    * @model containment="true"
    * @generated
    */
-  EList<Statement> getStatements();
+  EList<Statement> getStatementList();
 
 } // Model

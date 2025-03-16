@@ -60,15 +60,15 @@ Feature: Code To Document
           | tag1 |
      Then The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           Desc 1
           
           [tags="tag1"]
-          == Background: Setup
+          == Test-Setup: Setup
           
           [tags="tag2"]
-          == Scenario: Story One
+          == Test-Case: Story One
           
           Desc 2
           
@@ -90,7 +90,7 @@ Feature: Code To Document
           ----
           
           [tags="tag3"]
-          == Scenario: Story Two
+          == Test-Case: Story Two
           
           Desc 3
           
@@ -105,14 +105,14 @@ Feature: Code To Document
           
           === Then: The Search application, Logout page is invalid
           
-          === Examples: Some data
+          === Test-Data: Some data
           
           |===
           | ins
           | 4  
           |===
           
-          === Examples: Dataset 2
+          === Test-Data: Dataset 2
           
           |===
           | ins

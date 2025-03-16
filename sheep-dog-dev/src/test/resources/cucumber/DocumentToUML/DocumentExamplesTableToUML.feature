@@ -5,9 +5,9 @@ Feature: Document Examples Table To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
-          == Scenario: Submit
+          == Test-Case: Submit
           
           === Given: The Object page is created as follows
           
@@ -16,7 +16,7 @@ Feature: Document Examples Table To UML
           | {h1}
           |===
           
-          === Examples: Examples 1
+          === Test-Data: Examples 1
           
           |===
           | h1
@@ -34,9 +34,9 @@ Feature: Document Examples Table To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
-          == Scenario: Submit
+          == Test-Case: Submit
           
           === Given: The Object page is created as follows
           
@@ -45,7 +45,7 @@ Feature: Document Examples Table To UML
           | {h1} | {h2}
           |===
           
-          === Examples: Examples 1
+          === Test-Data: Examples 1
           
           |===
           | h1 | h2
@@ -65,9 +65,9 @@ Feature: Document Examples Table To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
-          == Scenario: Submit
+          == Test-Case: Submit
           
           === Given: The Object page is created as follows
           
@@ -76,7 +76,7 @@ Feature: Document Examples Table To UML
           | {h1} | {h2} | {h3}
           |===
           
-          === Examples: Examples 1
+          === Test-Data: Examples 1
           
           |===
           | h1 | h2 | h3

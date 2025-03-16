@@ -14,7 +14,7 @@ public class ObjectFormattingTest extends FormattingTest {
 	private StringBuilder getExpected() {
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Object: This is a test StepObject\n");
+		sb.append("= Step-Object: This is a test StepObject\n");
 		sb.append("\n");
 		sb.append("This is the description\n");
 		sb.append("This is the second line of the description\n");
@@ -26,7 +26,7 @@ public class ObjectFormattingTest extends FormattingTest {
 	private StringBuilder getExpected2() {
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Object: This is a test StepObject\n");
+		sb.append("= Step-Object: This is a test StepObject\n");
 		sb.append("\n");
 		sb.append("This is the description\n");
 		sb.append("\n");
@@ -50,7 +50,7 @@ public class ObjectFormattingTest extends FormattingTest {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
-			sb.append(" =  Object:  This is a test StepObject \n");
+			sb.append(" =  Step-Object:  This is a test StepObject \n");
 			sb.append(" This is the description \n");
 			sb.append(" This is the second line of the description \n");
 			assertNoStepObjectErrors(sb);
@@ -64,7 +64,7 @@ public class ObjectFormattingTest extends FormattingTest {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
-			sb.append("= Object: This is a test StepObject\n");
+			sb.append("= Step-Object: This is a test StepObject\n");
 			sb.append("This is the description\n");
 			sb.append("This is the second line of the description\n");
 			assertNoStepObjectErrors(sb);
@@ -78,7 +78,7 @@ public class ObjectFormattingTest extends FormattingTest {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
-			sb.append("= Object: This is a test StepObject\n");
+			sb.append("= Step-Object: This is a test StepObject\n");
 			sb.append("\n");
 			sb.append("\n");
 			sb.append("This is the description\n");

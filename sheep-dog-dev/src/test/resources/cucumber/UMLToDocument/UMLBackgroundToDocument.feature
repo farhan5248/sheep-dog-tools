@@ -5,15 +5,15 @@ Feature: UML Background To Document
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
-          == Background: Setup
+          == Test-Setup: Setup
           
           Desc line 1
           
           === Given: The Object0 page is valid
           
-          == Scenario: Submit
+          == Test-Case: Submit
           
           === Given: The Object page is valid
           """
@@ -35,13 +35,13 @@ Feature: UML Background To Document
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
-          == Background: Setup
+          == Test-Setup: Setup
           
           === Given: The Object0 page is valid
           
-          == Scenario: Submit
+          == Test-Case: Submit
           
           === Given: The Object page is valid
           """
@@ -60,17 +60,17 @@ Feature: UML Background To Document
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
-          == Background: Setup
+          == Test-Setup: Setup
           
           === Given: The Object0 page is valid
           
-          == Scenario: Submit 1
+          == Test-Case: Submit 1
           
           === Given: The Object page is valid
           
-          == Scenario: Submit 2
+          == Test-Case: Submit 2
           
           === Given: The Object2 page is valid
           """
@@ -90,21 +90,21 @@ Feature: UML Background To Document
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
-          == Background: Setup
+          == Test-Setup: Setup
           
           === Given: The Object0 page is valid
           
-          == Scenario: Submit 1
+          == Test-Case: Submit 1
           
           === Given: The Object page is valid
           
-          == Scenario: Submit 2
+          == Test-Case: Submit 2
           
           === Given: The Object2 page is valid
           
-          == Scenario: Submit 3
+          == Test-Case: Submit 3
           
           === Given: The Object3 page is valid
           """
@@ -125,14 +125,14 @@ Feature: UML Background To Document
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
-          == Background: Setup
+          == Test-Setup: Setup
           
           === Given: The Object page is valid
           === Given: The Object2 page is valid
           
-          == Scenario: Submit
+          == Test-Case: Submit
           
           === Given: The Object page is valid
           """
@@ -152,15 +152,15 @@ Feature: UML Background To Document
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
-          == Background: Setup
+          == Test-Setup: Setup
           
           === Given: The Object page is valid
           === Given: The Object2 page is valid
           === Given: The Object3 page is valid
           
-          == Scenario: Submit
+          == Test-Case: Submit
           
           === Given: The Object page is valid
           """

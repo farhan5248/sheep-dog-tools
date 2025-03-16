@@ -7,7 +7,7 @@ import org.farhan.mbt.services.SheepDogGrammarAccess;
 import org.farhan.mbt.services.SheepDogGrammarAccess.AndElements;
 import org.farhan.mbt.sheepDog.And;
 
-public class AndFormatter extends StepFormatter {
+public class AndFormatter extends TestStepFormatter {
 
 	public AndFormatter(And theStep) {
 		super(theStep);

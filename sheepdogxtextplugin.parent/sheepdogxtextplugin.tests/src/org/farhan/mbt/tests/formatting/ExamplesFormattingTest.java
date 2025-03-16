@@ -14,14 +14,14 @@ public class ExamplesFormattingTest extends FormattingTest {
 	private StringBuilder getExpected() {
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
+		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("\n");
-		sb.append("== Scenario: Submit a claim\n");
+		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("\n");
 		sb.append("=== Given: do step one\n");
 		sb.append("\n");
 		sb.append("[tags=\"tag1\"]\n");
-		sb.append("=== Examples: Describe what this data is about\n");
+		sb.append("=== Test-Data: Describe what this data is about\n");
 		sb.append("\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
@@ -49,14 +49,14 @@ public class ExamplesFormattingTest extends FormattingTest {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
-			sb.append("= Feature: This is a test feature\n");
+			sb.append("= Test-Suite: This is a test feature\n");
 			sb.append("\n");
-			sb.append("== Scenario: Submit a claim\n");
+			sb.append("== Test-Case: Submit a claim\n");
 			sb.append("\n");
 			sb.append("=== Given: do step one\n");
 			sb.append("\n");
 			sb.append(" [tags=\"tag1\"] \n");
-			sb.append(" ===  Examples:  Describe what this data is about \n");
+			sb.append(" ===  Test-Data:  Describe what this data is about \n");
 			sb.append("\n");
 			sb.append(" Basic EDI claim \n");
 			sb.append(" No deductible \n");
@@ -77,14 +77,14 @@ public class ExamplesFormattingTest extends FormattingTest {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
-			sb.append("= Feature: This is a test feature\n");
+			sb.append("= Test-Suite: This is a test feature\n");
 			sb.append("\n");
-			sb.append("== Scenario: Submit a claim\n");
+			sb.append("== Test-Case: Submit a claim\n");
 			sb.append("\n");
 			sb.append("=== Given: do step one\n");
 			sb.append("\n");
 			sb.append("[tags=\"tag1\"]\n");
-			sb.append("===Examples:Describe what this data is about\n");
+			sb.append("===Test-Data:Describe what this data is about\n");
 			sb.append("\n");
 			sb.append("Basic EDI claim\n");
 			sb.append("No deductible\n");
@@ -106,14 +106,14 @@ public class ExamplesFormattingTest extends FormattingTest {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
-			sb.append("= Feature: This is a test feature\n");
+			sb.append("= Test-Suite: This is a test feature\n");
 			sb.append("\n");
-			sb.append("== Scenario: Submit a claim\n");
+			sb.append("== Test-Case: Submit a claim\n");
 			sb.append("\n");
 			sb.append("=== Given: do step one\n");
 			sb.append("\n");
 			sb.append("[tags=\"tag1\"]\n");
-			sb.append("=== Examples: Describe what this data is about\n");
+			sb.append("=== Test-Data: Describe what this data is about\n");
 			sb.append("\n");
 			sb.append("\n");
 			sb.append("Basic EDI claim\n");

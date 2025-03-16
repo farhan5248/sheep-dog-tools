@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.StepObject#getStepDefinitions <em>Step Definitions</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.StepObject#getStepDefinitionList <em>Step Definition List</em>}</li>
  * </ul>
  *
  * @see org.farhan.mbt.sheepDog.SheepDogPackage#getStepObject()
@@ -24,15 +24,15 @@ import org.eclipse.emf.common.util.EList;
 public interface StepObject extends Model
 {
   /**
-   * Returns the value of the '<em><b>Step Definitions</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Step Definition List</b></em>' containment reference list.
    * The list contents are of type {@link org.farhan.mbt.sheepDog.StepDefinition}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Step Definitions</em>' containment reference list.
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getStepObject_StepDefinitions()
+   * @return the value of the '<em>Step Definition List</em>' containment reference list.
+   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getStepObject_StepDefinitionList()
    * @model containment="true"
    * @generated
    */
-  EList<StepDefinition> getStepDefinitions();
+  EList<StepDefinition> getStepDefinitionList();
 
 } // StepObject

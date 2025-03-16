@@ -15,7 +15,7 @@ import org.farhan.mbt.sheepDog.Then;
  *
  * @generated
  */
-public class ThenImpl extends StepImpl implements Then
+public class ThenImpl extends TestStepImpl implements Then
 {
   /**
    * <!-- begin-user-doc -->

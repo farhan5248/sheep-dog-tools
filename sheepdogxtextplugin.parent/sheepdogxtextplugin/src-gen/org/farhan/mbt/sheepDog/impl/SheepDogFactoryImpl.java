@@ -69,20 +69,20 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
       case SheepDogPackage.STEP_OBJECT: return createStepObject();
       case SheepDogPackage.STEP_DEFINITION: return createStepDefinition();
       case SheepDogPackage.STEP_PARAMETERS: return createStepParameters();
-      case SheepDogPackage.FEATURE: return createFeature();
-      case SheepDogPackage.ABSTRACT_SCENARIO: return createAbstractScenario();
-      case SheepDogPackage.BACKGROUND: return createBackground();
-      case SheepDogPackage.SCENARIO: return createScenario();
-      case SheepDogPackage.EXAMPLES: return createExamples();
-      case SheepDogPackage.STEP: return createStep();
+      case SheepDogPackage.TEST_SUITE: return createTestSuite();
+      case SheepDogPackage.TEST_STEP_CONTAINER: return createTestStepContainer();
+      case SheepDogPackage.TEST_SETUP: return createTestSetup();
+      case SheepDogPackage.TEST_CASE: return createTestCase();
+      case SheepDogPackage.TEST_DATA: return createTestData();
+      case SheepDogPackage.TEST_STEP: return createTestStep();
       case SheepDogPackage.GIVEN: return createGiven();
       case SheepDogPackage.WHEN: return createWhen();
       case SheepDogPackage.THEN: return createThen();
       case SheepDogPackage.AND: return createAnd();
-      case SheepDogPackage.DOC_STRING: return createDocString();
+      case SheepDogPackage.TEXT: return createText();
       case SheepDogPackage.TABLE: return createTable();
       case SheepDogPackage.ROW: return createRow();
-      case SheepDogPackage.ABSTRACT_SCENARIO_TAGS: return createAbstractScenarioTags();
+      case SheepDogPackage.TAGS: return createTags();
       case SheepDogPackage.CELL: return createCell();
       case SheepDogPackage.STATEMENT: return createStatement();
       default:
@@ -144,10 +144,10 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
    * @generated
    */
   @Override
-  public Feature createFeature()
+  public TestSuite createTestSuite()
   {
-    FeatureImpl feature = new FeatureImpl();
-    return feature;
+    TestSuiteImpl testSuite = new TestSuiteImpl();
+    return testSuite;
   }
 
   /**
@@ -156,10 +156,10 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
    * @generated
    */
   @Override
-  public AbstractScenario createAbstractScenario()
+  public TestStepContainer createTestStepContainer()
   {
-    AbstractScenarioImpl abstractScenario = new AbstractScenarioImpl();
-    return abstractScenario;
+    TestStepContainerImpl testStepContainer = new TestStepContainerImpl();
+    return testStepContainer;
   }
 
   /**
@@ -168,10 +168,10 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
    * @generated
    */
   @Override
-  public Background createBackground()
+  public TestSetup createTestSetup()
   {
-    BackgroundImpl background = new BackgroundImpl();
-    return background;
+    TestSetupImpl testSetup = new TestSetupImpl();
+    return testSetup;
   }
 
   /**
@@ -180,10 +180,10 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
    * @generated
    */
   @Override
-  public Scenario createScenario()
+  public TestCase createTestCase()
   {
-    ScenarioImpl scenario = new ScenarioImpl();
-    return scenario;
+    TestCaseImpl testCase = new TestCaseImpl();
+    return testCase;
   }
 
   /**
@@ -192,10 +192,10 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
    * @generated
    */
   @Override
-  public Examples createExamples()
+  public TestData createTestData()
   {
-    ExamplesImpl examples = new ExamplesImpl();
-    return examples;
+    TestDataImpl testData = new TestDataImpl();
+    return testData;
   }
 
   /**
@@ -204,10 +204,10 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
    * @generated
    */
   @Override
-  public Step createStep()
+  public TestStep createTestStep()
   {
-    StepImpl step = new StepImpl();
-    return step;
+    TestStepImpl testStep = new TestStepImpl();
+    return testStep;
   }
 
   /**
@@ -264,10 +264,10 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
    * @generated
    */
   @Override
-  public DocString createDocString()
+  public Text createText()
   {
-    DocStringImpl docString = new DocStringImpl();
-    return docString;
+    TextImpl text = new TextImpl();
+    return text;
   }
 
   /**
@@ -300,10 +300,10 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
    * @generated
    */
   @Override
-  public AbstractScenarioTags createAbstractScenarioTags()
+  public Tags createTags()
   {
-    AbstractScenarioTagsImpl abstractScenarioTags = new AbstractScenarioTagsImpl();
-    return abstractScenarioTags;
+    TagsImpl tags = new TagsImpl();
+    return tags;
   }
 
   /**

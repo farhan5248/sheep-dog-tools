@@ -16,8 +16,8 @@ public class StepParsingTest extends ParsingTest {
 	@Test
 	public void parseStepWithName() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a drug claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a drug claim\n");
 		sb.append("=== Given: do step one\n");
 		sb.append("=== When: do step three\n");
 		sb.append("=== Then: do step four\n");
@@ -28,8 +28,8 @@ public class StepParsingTest extends ParsingTest {
 	@Test
 	public void parseStepWithoutName() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a drug claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a drug claim\n");
 		sb.append("=== Given:\n");
 		assertFeatureErrors(sb);
 	}
@@ -37,8 +37,8 @@ public class StepParsingTest extends ParsingTest {
 	@Test
 	public void parseStepWithoutNameEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a drug claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a drug claim\n");
 		sb.append("=== Given: do step one");
 		assertFeatureErrors(sb);
 	}
@@ -46,8 +46,8 @@ public class StepParsingTest extends ParsingTest {
 	@Test
 	public void parseStepWithTable() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a drug claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a drug claim\n");
 		sb.append("=== Given: do step one\n");
 
 		sb.append("|===\n");
@@ -59,8 +59,8 @@ public class StepParsingTest extends ParsingTest {
 	@Test
 	public void parseStepWithMultirowTable() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a drug claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a drug claim\n");
 		sb.append("=== Given: do step one\n");
 
 		sb.append("|===\n");
@@ -73,8 +73,8 @@ public class StepParsingTest extends ParsingTest {
 	@Test
 	public void parseStepWithoutTableEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a drug claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a drug claim\n");
 		sb.append("=== Given: do step one\n");
 
 		sb.append("|===\n");
@@ -86,8 +86,8 @@ public class StepParsingTest extends ParsingTest {
 	@Test
 	public void parseStepWithTableEscape() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This\n");
-		sb.append("== Scenario: Submit\n");
+		sb.append("= Test-Suite: This\n");
+		sb.append("== Test-Case: Submit\n");
 		sb.append("=== Given: do\n");
 
 		sb.append("|===\n");
@@ -100,8 +100,8 @@ public class StepParsingTest extends ParsingTest {
 	@Test
 	public void parseStepWithDocString() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a drug claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a drug claim\n");
 		sb.append("=== Given: do step one\n");
 		sb.append("----\n");
 		sb.append("Line1\n");
@@ -112,8 +112,8 @@ public class StepParsingTest extends ParsingTest {
 	@Test
 	public void parseStepWithDocStringEscape() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a drug claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a drug claim\n");
 		sb.append("=== Given: do step one\n");
 		sb.append("----\n");
 		sb.append("Line1\n");
@@ -124,8 +124,8 @@ public class StepParsingTest extends ParsingTest {
 	@Test
 	public void parseStepWithMultilineDocString() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a drug claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a drug claim\n");
 		sb.append("=== Given: do step one\n");
 		sb.append("----\n");
 		sb.append("Line1\n");
@@ -138,8 +138,8 @@ public class StepParsingTest extends ParsingTest {
 	@Test
 	public void parseStepWithoutDocStringEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a drug claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a drug claim\n");
 		sb.append("=== Given: do step one\n");
 		sb.append("----\n");
 		sb.append("Line1");
@@ -150,8 +150,8 @@ public class StepParsingTest extends ParsingTest {
 	@Test
 	public void parseStepWithDocStringEmpty() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a drug claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a drug claim\n");
 		sb.append("=== Given: do step one\n");
 		sb.append("----\n");
 		sb.append("----\n");
@@ -163,8 +163,8 @@ public class StepParsingTest extends ParsingTest {
 	// when testing in Eclipse it doesn't
 	public void parseStepWithDocStringIncomplete() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a drug claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a drug claim\n");
 		sb.append("=== Given: do step one\n");
 		sb.append("----\n");
 		assertFeatureErrors(sb);
@@ -173,8 +173,8 @@ public class StepParsingTest extends ParsingTest {
 	@Test
 	public void parseStepWithEverything() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a drug claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a drug claim\n");
 		sb.append("=== Given: do step one\n");
 
 		sb.append("|===\n");

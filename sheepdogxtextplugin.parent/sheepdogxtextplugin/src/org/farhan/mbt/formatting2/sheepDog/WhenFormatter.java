@@ -7,7 +7,7 @@ import org.farhan.mbt.services.SheepDogGrammarAccess;
 import org.farhan.mbt.services.SheepDogGrammarAccess.WhenElements;
 import org.farhan.mbt.sheepDog.When;
 
-public class WhenFormatter extends StepFormatter {
+public class WhenFormatter extends TestStepFormatter {
 
 	public WhenFormatter(When theStep) {
 		super(theStep);

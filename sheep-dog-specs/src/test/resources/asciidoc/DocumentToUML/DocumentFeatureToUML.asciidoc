@@ -1,11 +1,11 @@
-= Feature: Document Feature To UML
+= Test-Suite: Document Feature To UML
 
-== Scenario: No statements
+== Test-Case: No statements
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 ----
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
@@ -19,16 +19,16 @@
 | specs::Process
 |===
 
-== Scenario: One statement
+== Test-Case: One statement
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
 Desc line 1
 
-== Scenario: Story One
+== Test-Case: Story One
 ----
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
@@ -42,17 +42,17 @@ Desc line 1
 | specs::Process | Desc line 1
 |===
 
-== Scenario: Two tags, two statements
+== Test-Case: Two tags, two statements
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
 Desc line 1
 Desc line 2
 
-== Scenario: Story One
+== Test-Case: Story One
 ----
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
@@ -66,18 +66,18 @@ Desc line 2
 | specs::Process | Desc line 1\nDesc line 2
 |===
 
-== Scenario: Three tags, three statements
+== Test-Case: Three tags, three statements
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
 Desc line 1
 Desc line 2
 Desc line 3
 
-== Scenario: Story One
+== Test-Case: Story One
 ----
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed

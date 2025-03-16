@@ -10,26 +10,26 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.farhan.mbt.sheepDog.AbstractScenario;
-import org.farhan.mbt.sheepDog.AbstractScenarioTags;
 import org.farhan.mbt.sheepDog.And;
-import org.farhan.mbt.sheepDog.Background;
 import org.farhan.mbt.sheepDog.Cell;
-import org.farhan.mbt.sheepDog.DocString;
-import org.farhan.mbt.sheepDog.Examples;
-import org.farhan.mbt.sheepDog.Feature;
 import org.farhan.mbt.sheepDog.Given;
 import org.farhan.mbt.sheepDog.Model;
 import org.farhan.mbt.sheepDog.Row;
-import org.farhan.mbt.sheepDog.Scenario;
 import org.farhan.mbt.sheepDog.SheepDogFactory;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
 import org.farhan.mbt.sheepDog.Statement;
-import org.farhan.mbt.sheepDog.Step;
 import org.farhan.mbt.sheepDog.StepDefinition;
 import org.farhan.mbt.sheepDog.StepObject;
 import org.farhan.mbt.sheepDog.StepParameters;
 import org.farhan.mbt.sheepDog.Table;
+import org.farhan.mbt.sheepDog.Tags;
+import org.farhan.mbt.sheepDog.TestCase;
+import org.farhan.mbt.sheepDog.TestData;
+import org.farhan.mbt.sheepDog.TestSetup;
+import org.farhan.mbt.sheepDog.TestStep;
+import org.farhan.mbt.sheepDog.TestStepContainer;
+import org.farhan.mbt.sheepDog.TestSuite;
+import org.farhan.mbt.sheepDog.Text;
 import org.farhan.mbt.sheepDog.Then;
 import org.farhan.mbt.sheepDog.When;
 
@@ -74,42 +74,42 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass featureEClass = null;
+  private EClass testSuiteEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass abstractScenarioEClass = null;
+  private EClass testStepContainerEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass backgroundEClass = null;
+  private EClass testSetupEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass scenarioEClass = null;
+  private EClass testCaseEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass examplesEClass = null;
+  private EClass testDataEClass = null;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass stepEClass = null;
+  private EClass testStepEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -144,7 +144,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass docStringEClass = null;
+  private EClass textEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -165,7 +165,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass abstractScenarioTagsEClass = null;
+  private EClass tagsEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -271,7 +271,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getModel_Statements()
+  public EReference getModel_StatementList()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -293,7 +293,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getStepObject_StepDefinitions()
+  public EReference getStepObject_StepDefinitionList()
   {
     return (EReference)stepObjectEClass.getEStructuralFeatures().get(0);
   }
@@ -326,7 +326,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getStepDefinition_Statements()
+  public EReference getStepDefinition_StatementList()
   {
     return (EReference)stepDefinitionEClass.getEStructuralFeatures().get(1);
   }
@@ -337,7 +337,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getStepDefinition_StepParameters()
+  public EReference getStepDefinition_StepParameterList()
   {
     return (EReference)stepDefinitionEClass.getEStructuralFeatures().get(2);
   }
@@ -370,7 +370,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getStepParameters_Statements()
+  public EReference getStepParameters_StatementList()
   {
     return (EReference)stepParametersEClass.getEStructuralFeatures().get(1);
   }
@@ -381,7 +381,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getStepParameters_ParametersTable()
+  public EReference getStepParameters_Table()
   {
     return (EReference)stepParametersEClass.getEStructuralFeatures().get(2);
   }
@@ -392,9 +392,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EClass getFeature()
+  public EClass getTestSuite()
   {
-    return featureEClass;
+    return testSuiteEClass;
   }
 
   /**
@@ -403,9 +403,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getFeature_AbstractScenarios()
+  public EReference getTestSuite_TestStepContainerList()
   {
-    return (EReference)featureEClass.getEStructuralFeatures().get(0);
+    return (EReference)testSuiteEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -414,9 +414,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EClass getAbstractScenario()
+  public EClass getTestStepContainer()
   {
-    return abstractScenarioEClass;
+    return testStepContainerEClass;
   }
 
   /**
@@ -425,9 +425,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getAbstractScenario_Tags()
+  public EReference getTestStepContainer_TagList()
   {
-    return (EReference)abstractScenarioEClass.getEStructuralFeatures().get(0);
+    return (EReference)testStepContainerEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -436,9 +436,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EAttribute getAbstractScenario_Name()
+  public EAttribute getTestStepContainer_Name()
   {
-    return (EAttribute)abstractScenarioEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)testStepContainerEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -447,9 +447,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getAbstractScenario_Statements()
+  public EReference getTestStepContainer_StatementList()
   {
-    return (EReference)abstractScenarioEClass.getEStructuralFeatures().get(2);
+    return (EReference)testStepContainerEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -458,9 +458,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getAbstractScenario_Steps()
+  public EReference getTestStepContainer_TestStepList()
   {
-    return (EReference)abstractScenarioEClass.getEStructuralFeatures().get(3);
+    return (EReference)testStepContainerEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -469,9 +469,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EClass getBackground()
+  public EClass getTestSetup()
   {
-    return backgroundEClass;
+    return testSetupEClass;
   }
 
   /**
@@ -480,9 +480,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EClass getScenario()
+  public EClass getTestCase()
   {
-    return scenarioEClass;
+    return testCaseEClass;
   }
 
   /**
@@ -491,9 +491,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getScenario_Examples()
+  public EReference getTestCase_TestDataList()
   {
-    return (EReference)scenarioEClass.getEStructuralFeatures().get(0);
+    return (EReference)testCaseEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -502,9 +502,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EClass getExamples()
+  public EClass getTestData()
   {
-    return examplesEClass;
+    return testDataEClass;
   }
 
   /**
@@ -513,9 +513,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getExamples_Tags()
+  public EReference getTestData_TagList()
   {
-    return (EReference)examplesEClass.getEStructuralFeatures().get(0);
+    return (EReference)testDataEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -524,9 +524,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EAttribute getExamples_Name()
+  public EAttribute getTestData_Name()
   {
-    return (EAttribute)examplesEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)testDataEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -535,9 +535,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getExamples_Statements()
+  public EReference getTestData_StatementList()
   {
-    return (EReference)examplesEClass.getEStructuralFeatures().get(2);
+    return (EReference)testDataEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -546,9 +546,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getExamples_TheExamplesTable()
+  public EReference getTestData_Table()
   {
-    return (EReference)examplesEClass.getEStructuralFeatures().get(3);
+    return (EReference)testDataEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -557,9 +557,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EClass getStep()
+  public EClass getTestStep()
   {
-    return stepEClass;
+    return testStepEClass;
   }
 
   /**
@@ -568,9 +568,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EAttribute getStep_Name()
+  public EAttribute getTestStep_Name()
   {
-    return (EAttribute)stepEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)testStepEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -579,9 +579,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getStep_TheStepTable()
+  public EReference getTestStep_Table()
   {
-    return (EReference)stepEClass.getEStructuralFeatures().get(1);
+    return (EReference)testStepEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -590,9 +590,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getStep_TheDocString()
+  public EReference getTestStep_Text()
   {
-    return (EReference)stepEClass.getEStructuralFeatures().get(2);
+    return (EReference)testStepEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -645,9 +645,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EClass getDocString()
+  public EClass getText()
   {
-    return docStringEClass;
+    return textEClass;
   }
 
   /**
@@ -656,9 +656,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EAttribute getDocString_Name()
+  public EAttribute getText_Name()
   {
-    return (EAttribute)docStringEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)textEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -678,7 +678,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getTable_Rows()
+  public EReference getTable_RowList()
   {
     return (EReference)tableEClass.getEStructuralFeatures().get(0);
   }
@@ -700,7 +700,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getRow_Cells()
+  public EReference getRow_CellList()
   {
     return (EReference)rowEClass.getEStructuralFeatures().get(0);
   }
@@ -711,9 +711,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EClass getAbstractScenarioTags()
+  public EClass getTags()
   {
-    return abstractScenarioTagsEClass;
+    return tagsEClass;
   }
 
   /**
@@ -722,9 +722,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EAttribute getAbstractScenarioTags_Name()
+  public EAttribute getTags_Name()
   {
-    return (EAttribute)abstractScenarioTagsEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)tagsEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -804,45 +804,45 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
     // Create classes and their features
     modelEClass = createEClass(MODEL);
     createEAttribute(modelEClass, MODEL__NAME);
-    createEReference(modelEClass, MODEL__STATEMENTS);
+    createEReference(modelEClass, MODEL__STATEMENT_LIST);
 
     stepObjectEClass = createEClass(STEP_OBJECT);
-    createEReference(stepObjectEClass, STEP_OBJECT__STEP_DEFINITIONS);
+    createEReference(stepObjectEClass, STEP_OBJECT__STEP_DEFINITION_LIST);
 
     stepDefinitionEClass = createEClass(STEP_DEFINITION);
     createEAttribute(stepDefinitionEClass, STEP_DEFINITION__NAME);
-    createEReference(stepDefinitionEClass, STEP_DEFINITION__STATEMENTS);
-    createEReference(stepDefinitionEClass, STEP_DEFINITION__STEP_PARAMETERS);
+    createEReference(stepDefinitionEClass, STEP_DEFINITION__STATEMENT_LIST);
+    createEReference(stepDefinitionEClass, STEP_DEFINITION__STEP_PARAMETER_LIST);
 
     stepParametersEClass = createEClass(STEP_PARAMETERS);
     createEAttribute(stepParametersEClass, STEP_PARAMETERS__NAME);
-    createEReference(stepParametersEClass, STEP_PARAMETERS__STATEMENTS);
-    createEReference(stepParametersEClass, STEP_PARAMETERS__PARAMETERS_TABLE);
+    createEReference(stepParametersEClass, STEP_PARAMETERS__STATEMENT_LIST);
+    createEReference(stepParametersEClass, STEP_PARAMETERS__TABLE);
 
-    featureEClass = createEClass(FEATURE);
-    createEReference(featureEClass, FEATURE__ABSTRACT_SCENARIOS);
+    testSuiteEClass = createEClass(TEST_SUITE);
+    createEReference(testSuiteEClass, TEST_SUITE__TEST_STEP_CONTAINER_LIST);
 
-    abstractScenarioEClass = createEClass(ABSTRACT_SCENARIO);
-    createEReference(abstractScenarioEClass, ABSTRACT_SCENARIO__TAGS);
-    createEAttribute(abstractScenarioEClass, ABSTRACT_SCENARIO__NAME);
-    createEReference(abstractScenarioEClass, ABSTRACT_SCENARIO__STATEMENTS);
-    createEReference(abstractScenarioEClass, ABSTRACT_SCENARIO__STEPS);
+    testStepContainerEClass = createEClass(TEST_STEP_CONTAINER);
+    createEReference(testStepContainerEClass, TEST_STEP_CONTAINER__TAG_LIST);
+    createEAttribute(testStepContainerEClass, TEST_STEP_CONTAINER__NAME);
+    createEReference(testStepContainerEClass, TEST_STEP_CONTAINER__STATEMENT_LIST);
+    createEReference(testStepContainerEClass, TEST_STEP_CONTAINER__TEST_STEP_LIST);
 
-    backgroundEClass = createEClass(BACKGROUND);
+    testSetupEClass = createEClass(TEST_SETUP);
 
-    scenarioEClass = createEClass(SCENARIO);
-    createEReference(scenarioEClass, SCENARIO__EXAMPLES);
+    testCaseEClass = createEClass(TEST_CASE);
+    createEReference(testCaseEClass, TEST_CASE__TEST_DATA_LIST);
 
-    examplesEClass = createEClass(EXAMPLES);
-    createEReference(examplesEClass, EXAMPLES__TAGS);
-    createEAttribute(examplesEClass, EXAMPLES__NAME);
-    createEReference(examplesEClass, EXAMPLES__STATEMENTS);
-    createEReference(examplesEClass, EXAMPLES__THE_EXAMPLES_TABLE);
+    testDataEClass = createEClass(TEST_DATA);
+    createEReference(testDataEClass, TEST_DATA__TAG_LIST);
+    createEAttribute(testDataEClass, TEST_DATA__NAME);
+    createEReference(testDataEClass, TEST_DATA__STATEMENT_LIST);
+    createEReference(testDataEClass, TEST_DATA__TABLE);
 
-    stepEClass = createEClass(STEP);
-    createEAttribute(stepEClass, STEP__NAME);
-    createEReference(stepEClass, STEP__THE_STEP_TABLE);
-    createEReference(stepEClass, STEP__THE_DOC_STRING);
+    testStepEClass = createEClass(TEST_STEP);
+    createEAttribute(testStepEClass, TEST_STEP__NAME);
+    createEReference(testStepEClass, TEST_STEP__TABLE);
+    createEReference(testStepEClass, TEST_STEP__TEXT);
 
     givenEClass = createEClass(GIVEN);
 
@@ -852,17 +852,17 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
 
     andEClass = createEClass(AND);
 
-    docStringEClass = createEClass(DOC_STRING);
-    createEAttribute(docStringEClass, DOC_STRING__NAME);
+    textEClass = createEClass(TEXT);
+    createEAttribute(textEClass, TEXT__NAME);
 
     tableEClass = createEClass(TABLE);
-    createEReference(tableEClass, TABLE__ROWS);
+    createEReference(tableEClass, TABLE__ROW_LIST);
 
     rowEClass = createEClass(ROW);
-    createEReference(rowEClass, ROW__CELLS);
+    createEReference(rowEClass, ROW__CELL_LIST);
 
-    abstractScenarioTagsEClass = createEClass(ABSTRACT_SCENARIO_TAGS);
-    createEAttribute(abstractScenarioTagsEClass, ABSTRACT_SCENARIO_TAGS__NAME);
+    tagsEClass = createEClass(TAGS);
+    createEAttribute(tagsEClass, TAGS__NAME);
 
     cellEClass = createEClass(CELL);
     createEAttribute(cellEClass, CELL__NAME);
@@ -901,56 +901,56 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
 
     // Add supertypes to classes
     stepObjectEClass.getESuperTypes().add(this.getModel());
-    featureEClass.getESuperTypes().add(this.getModel());
-    backgroundEClass.getESuperTypes().add(this.getAbstractScenario());
-    scenarioEClass.getESuperTypes().add(this.getAbstractScenario());
-    givenEClass.getESuperTypes().add(this.getStep());
-    whenEClass.getESuperTypes().add(this.getStep());
-    thenEClass.getESuperTypes().add(this.getStep());
-    andEClass.getESuperTypes().add(this.getStep());
+    testSuiteEClass.getESuperTypes().add(this.getModel());
+    testSetupEClass.getESuperTypes().add(this.getTestStepContainer());
+    testCaseEClass.getESuperTypes().add(this.getTestStepContainer());
+    givenEClass.getESuperTypes().add(this.getTestStep());
+    whenEClass.getESuperTypes().add(this.getTestStep());
+    thenEClass.getESuperTypes().add(this.getTestStep());
+    andEClass.getESuperTypes().add(this.getTestStep());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getModel_Statements(), this.getStatement(), null, "statements", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_StatementList(), this.getStatement(), null, "statementList", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stepObjectEClass, StepObject.class, "StepObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getStepObject_StepDefinitions(), this.getStepDefinition(), null, "stepDefinitions", null, 0, -1, StepObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStepObject_StepDefinitionList(), this.getStepDefinition(), null, "stepDefinitionList", null, 0, -1, StepObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stepDefinitionEClass, StepDefinition.class, "StepDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStepDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, StepDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStepDefinition_Statements(), this.getStatement(), null, "statements", null, 0, -1, StepDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStepDefinition_StepParameters(), this.getStepParameters(), null, "stepParameters", null, 0, -1, StepDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStepDefinition_StatementList(), this.getStatement(), null, "statementList", null, 0, -1, StepDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStepDefinition_StepParameterList(), this.getStepParameters(), null, "stepParameterList", null, 0, -1, StepDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stepParametersEClass, StepParameters.class, "StepParameters", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getStepParameters_Name(), ecorePackage.getEString(), "name", null, 0, 1, StepParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStepParameters_Statements(), this.getStatement(), null, "statements", null, 0, -1, StepParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStepParameters_ParametersTable(), this.getTable(), null, "parametersTable", null, 0, 1, StepParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStepParameters_StatementList(), this.getStatement(), null, "statementList", null, 0, -1, StepParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getStepParameters_Table(), this.getTable(), null, "table", null, 0, 1, StepParameters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(featureEClass, Feature.class, "Feature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getFeature_AbstractScenarios(), this.getAbstractScenario(), null, "abstractScenarios", null, 0, -1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(testSuiteEClass, TestSuite.class, "TestSuite", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getTestSuite_TestStepContainerList(), this.getTestStepContainer(), null, "testStepContainerList", null, 0, -1, TestSuite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(abstractScenarioEClass, AbstractScenario.class, "AbstractScenario", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getAbstractScenario_Tags(), this.getAbstractScenarioTags(), null, "tags", null, 0, 1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getAbstractScenario_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAbstractScenario_Statements(), this.getStatement(), null, "statements", null, 0, -1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getAbstractScenario_Steps(), this.getStep(), null, "steps", null, 0, -1, AbstractScenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(testStepContainerEClass, TestStepContainer.class, "TestStepContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getTestStepContainer_TagList(), this.getTags(), null, "tagList", null, 0, 1, TestStepContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTestStepContainer_Name(), ecorePackage.getEString(), "name", null, 0, 1, TestStepContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTestStepContainer_StatementList(), this.getStatement(), null, "statementList", null, 0, -1, TestStepContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTestStepContainer_TestStepList(), this.getTestStep(), null, "testStepList", null, 0, -1, TestStepContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(backgroundEClass, Background.class, "Background", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEClass(testSetupEClass, TestSetup.class, "TestSetup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(scenarioEClass, Scenario.class, "Scenario", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getScenario_Examples(), this.getExamples(), null, "examples", null, 0, -1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(testCaseEClass, TestCase.class, "TestCase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getTestCase_TestDataList(), this.getTestData(), null, "testDataList", null, 0, -1, TestCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(examplesEClass, Examples.class, "Examples", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getExamples_Tags(), this.getAbstractScenarioTags(), null, "tags", null, 0, 1, Examples.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getExamples_Name(), ecorePackage.getEString(), "name", null, 0, 1, Examples.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getExamples_Statements(), this.getStatement(), null, "statements", null, 0, -1, Examples.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getExamples_TheExamplesTable(), this.getTable(), null, "theExamplesTable", null, 0, 1, Examples.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(testDataEClass, TestData.class, "TestData", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getTestData_TagList(), this.getTags(), null, "tagList", null, 0, 1, TestData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTestData_Name(), ecorePackage.getEString(), "name", null, 0, 1, TestData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTestData_StatementList(), this.getStatement(), null, "statementList", null, 0, -1, TestData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTestData_Table(), this.getTable(), null, "table", null, 0, 1, TestData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(stepEClass, Step.class, "Step", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getStep_Name(), ecorePackage.getEString(), "name", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStep_TheStepTable(), this.getTable(), null, "theStepTable", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStep_TheDocString(), this.getDocString(), null, "theDocString", null, 0, 1, Step.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(testStepEClass, TestStep.class, "TestStep", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTestStep_Name(), ecorePackage.getEString(), "name", null, 0, 1, TestStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTestStep_Table(), this.getTable(), null, "table", null, 0, 1, TestStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTestStep_Text(), this.getText(), null, "text", null, 0, 1, TestStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(givenEClass, Given.class, "Given", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -960,17 +960,17 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
 
     initEClass(andEClass, And.class, "And", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(docStringEClass, DocString.class, "DocString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getDocString_Name(), ecorePackage.getEString(), "name", null, 0, 1, DocString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(textEClass, Text.class, "Text", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getText_Name(), ecorePackage.getEString(), "name", null, 0, 1, Text.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(tableEClass, Table.class, "Table", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTable_Rows(), this.getRow(), null, "rows", null, 0, -1, Table.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTable_RowList(), this.getRow(), null, "rowList", null, 0, -1, Table.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(rowEClass, Row.class, "Row", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getRow_Cells(), this.getCell(), null, "cells", null, 0, -1, Row.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRow_CellList(), this.getCell(), null, "cellList", null, 0, -1, Row.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(abstractScenarioTagsEClass, AbstractScenarioTags.class, "AbstractScenarioTags", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAbstractScenarioTags_Name(), ecorePackage.getEString(), "name", null, 0, 1, AbstractScenarioTags.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(tagsEClass, Tags.class, "Tags", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTags_Name(), ecorePackage.getEString(), "name", null, 0, 1, Tags.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(cellEClass, Cell.class, "Cell", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getCell_Name(), ecorePackage.getEString(), "name", null, 0, 1, Cell.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

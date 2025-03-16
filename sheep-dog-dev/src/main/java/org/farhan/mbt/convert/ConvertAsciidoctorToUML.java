@@ -15,12 +15,14 @@ import org.farhan.mbt.core.UMLTestSetup;
 import org.farhan.mbt.core.UMLTestStep;
 import org.farhan.mbt.core.UMLTestSuite;
 import org.farhan.mbt.core.UMLTestProject;
-import org.farhan.mbt.sheepDog.AbstractScenario;
-import org.farhan.mbt.sheepDog.Examples;
+import org.farhan.mbt.sheepDog.TestStepContainer;
+import org.farhan.mbt.sheepDog.TestData;
 import org.farhan.mbt.sheepDog.Row;
-import org.farhan.mbt.sheepDog.Step;
+import org.farhan.mbt.sheepDog.TestStep;
 import org.farhan.mbt.sheepDog.StepDefinition;
 import org.farhan.mbt.sheepDog.StepParameters;
+import org.farhan.mbt.sheepDog.TestData;
+import org.farhan.mbt.sheepDog.TestStep;
 
 public class ConvertAsciidoctorToUML extends Converter {
 
@@ -87,19 +89,19 @@ public class ConvertAsciidoctorToUML extends Converter {
 		stepParameters.addTable(srcObjStepObject.getStepParametersTable(srcStepParameters));
 	}
 
-	private void convertTestCase(AbstractScenario srcTestCase, UMLTestCase testCase) {
+	private void convertTestCase(TestStepContainer srcTestCase, UMLTestCase testCase) {
 		log.debug("test case: " + srcTestCase.getName());
 		testCase.setTags(srcObjTestSuite.getAbstractScenarioTags(srcTestCase));
 		testCase.setDescription(srcObjTestSuite.getScenarioDescription(srcTestCase));
-		for (Step srcStep : srcObjTestSuite.getStepList(srcTestCase)) {
+		for (TestStep srcStep : srcObjTestSuite.getStepList(srcTestCase)) {
 			convertTestStep(testCase.addTestStep(srcObjTestSuite.getStepName(srcStep)), srcStep);
 		}
-		for (Examples srcExamples : srcObjTestSuite.getExamplesList(srcTestCase)) {
+		for (TestData srcExamples : srcObjTestSuite.getExamplesList(srcTestCase)) {
 			convertTestData(testCase.addTestData(srcObjTestSuite.getExamplesName(srcExamples)), srcExamples);
 		}
 	}
 
-	private void convertTestData(UMLTestData examples, Examples srcExamples) {
+	private void convertTestData(UMLTestData examples, TestData srcExamples) {
 		log.debug("test data: " + srcExamples.getName());
 		// TODO add examples description
 		examples.setTable(srcObjTestSuite.getExamplesTable(srcExamples));
@@ -108,16 +110,16 @@ public class ConvertAsciidoctorToUML extends Converter {
 		}
 	}
 
-	private void convertTestSetup(AbstractScenario srcBackground, UMLTestSetup background) {
+	private void convertTestSetup(TestStepContainer srcBackground, UMLTestSetup background) {
 		log.debug("test setup: " + srcBackground.getName());
 		background.setTags(srcObjTestSuite.getAbstractScenarioTags(srcBackground));
 		background.setDescription(srcObjTestSuite.getBackgroundDescription(srcBackground));
-		for (Step srcStep : srcObjTestSuite.getStepList(srcBackground)) {
+		for (TestStep srcStep : srcObjTestSuite.getStepList(srcBackground)) {
 			convertTestStep(background.addTestStep(srcObjTestSuite.getStepName(srcStep)), srcStep);
 		}
 	}
 
-	private void convertTestStep(UMLTestStep step, Step srcStep) {
+	private void convertTestStep(UMLTestStep step, TestStep srcStep) {
 		log.debug("test step: " + srcStep.getName());
 		stepObjects.add(StepDefinitionHelper.getStepObjectQualifiedName(new LanguageAccessImpl(srcStep)));
 		step.setKeyword(srcObjTestSuite.getStepKeyword(srcStep));
@@ -136,7 +138,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		if (isTestSuiteSelected()) {
 			UMLTestSuite testSuite = model.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
 			testSuite.setDescription(srcObjTestSuite.getFeatureDescription());
-			for (AbstractScenario srcTestCase : srcObjTestSuite.getAbstractScenarioList()) {
+			for (TestStepContainer srcTestCase : srcObjTestSuite.getAbstractScenarioList()) {
 				if (srcObjTestSuite.isBackground(srcTestCase)) {
 					convertTestSetup(srcTestCase,
 							testSuite.addTestSetup(srcObjTestSuite.getBackgroundName(srcTestCase)));
@@ -170,7 +172,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 	private boolean isTestSuiteSelected() throws Exception {
 		boolean selected = tag.isEmpty();
 		if (!selected) {
-			for (AbstractScenario a : srcObjTestSuite.getAbstractScenarioList()) {
+			for (TestStepContainer a : srcObjTestSuite.getAbstractScenarioList()) {
 				for (String t : srcObjTestSuite.getAbstractScenarioTags(a)) {
 					if (t.trim().contentEquals(tag)) {
 						return true;

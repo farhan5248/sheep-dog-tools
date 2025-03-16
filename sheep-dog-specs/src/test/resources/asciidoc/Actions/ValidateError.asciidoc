@@ -1,6 +1,6 @@
-= Feature: Validate Error
+= Test-Suite: Validate Error
 
-== Scenario: No steps have a component
+== Test-Case: No steps have a component
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -24,7 +24,7 @@
 | The first step must have a component
 |===
 
-== Scenario: First step doesn't have a component
+== Test-Case: First step doesn't have a component
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -48,7 +48,7 @@
 | The first step must have a component
 |===
 
-== Scenario: First step does have a component
+== Test-Case: First step does have a component
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 

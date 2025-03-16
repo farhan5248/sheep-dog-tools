@@ -21,10 +21,10 @@ public class TableFormatter extends Formatter {
 				doc);
 		formatEOL1RuleCall(df.getRegion(theStepTable, a.getEOLTerminalRuleCall_1()), doc);
 
-		for (Row r : theStepTable.getRows()) {
+		for (Row r : theStepTable.getRowList()) {
 			RowFormatter formatter = new RowFormatter(r);
-			formatter.isLast(isLastElement(r, theStepTable.getRows()));
-			formatter.isFirst(isFirstElement(r, theStepTable.getRows()));
+			formatter.isLast(isLastElement(r, theStepTable.getRowList()));
+			formatter.isFirst(isFirstElement(r, theStepTable.getRowList()));
 			formatter.format(doc, ga, df);
 		}
 		formatKeywordNoSpace(df.getRegion(theStepTable, a.getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_3()),

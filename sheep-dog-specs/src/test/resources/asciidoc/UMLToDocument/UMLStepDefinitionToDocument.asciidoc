@@ -1,15 +1,15 @@
-= Feature: UML Step Definition To Document
+= Test-Suite: UML Step Definition To Document
 
 TODO there's no test for no parameters and docstring vs datatable. Other tests implicitly cover docstring as a special parameter with the name content
 
-== Scenario: No statement, one step parameter
+== Test-Case: No statement, one step parameter
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Scenario: Submit
+== Test-Case: Submit
 
 === Given: The blah application, Object page is empty
 ----
@@ -17,11 +17,11 @@ TODO there's no test for no parameters and docstring vs datatable. Other tests i
 === And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
 ----
-= Object: Object page
+= Step-Object: Object page
 
-== Definition: is created as follows
+== Step-Definition: is created as follows
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | h1
@@ -43,14 +43,14 @@ TODO there's no test for no parameters and docstring vs datatable. Other tests i
 | is created as follows | 1          | h1 
 |===
 
-== Scenario: One statement, one step parameter
+== Test-Case: One statement, one step parameter
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Scenario: Submit
+== Test-Case: Submit
 
 === Given: The blah application, Object page is empty
 ----
@@ -58,13 +58,13 @@ TODO there's no test for no parameters and docstring vs datatable. Other tests i
 === And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
 ----
-= Object: Object page
+= Step-Object: Object page
 
-== Definition: is created as follows
+== Step-Definition: is created as follows
 
 Desc line 1
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | h1
@@ -86,14 +86,14 @@ Desc line 1
 | is created as follows | Desc line 1
 |===
 
-== Scenario: Two statements, two step parameters
+== Test-Case: Two statements, two step parameters
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Scenario: Submit
+== Test-Case: Submit
 
 === Given: The blah application, Object page is empty
 ----
@@ -101,20 +101,20 @@ Desc line 1
 === And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
 ----
-= Object: Object page
+= Step-Object: Object page
 
-== Definition: is created as follows
+== Step-Definition: is created as follows
 
 Desc line 1
 Desc line 2
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | h1
 |===
 
-=== Parameters: 2
+=== Step-Parameters: 2
 
 |===
 | h2
@@ -143,7 +143,7 @@ Desc line 2
 | is created as follows | {Index}    | h{Index}
 |===
 
-=== Examples: Indices
+=== Test-Data: Indices
 
 |===
 | Index
@@ -151,14 +151,14 @@ Desc line 2
 | 2    
 |===
 
-== Scenario: Three statements, three step parameters
+== Test-Case: Three statements, three step parameters
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Scenario: Submit
+== Test-Case: Submit
 
 === Given: The blah application, Object page is empty
 ----
@@ -166,27 +166,27 @@ Desc line 2
 === And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
 ----
-= Object: Object page
+= Step-Object: Object page
 
-== Definition: is created as follows
+== Step-Definition: is created as follows
 
 Desc line 1
 Desc line 2
 Desc line 3
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | h1
 |===
 
-=== Parameters: 2
+=== Step-Parameters: 2
 
 |===
 | h2
 |===
 
-=== Parameters: 3
+=== Step-Parameters: 3
 
 |===
 | h3
@@ -215,7 +215,7 @@ Desc line 3
 | is created as follows | {Index}    | h{Index}
 |===
 
-=== Examples: Indices
+=== Test-Data: Indices
 
 |===
 | Index

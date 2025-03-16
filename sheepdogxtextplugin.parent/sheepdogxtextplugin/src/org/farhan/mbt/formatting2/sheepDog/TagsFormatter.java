@@ -3,19 +3,19 @@ package org.farhan.mbt.formatting2.sheepDog;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.farhan.mbt.formatting2.SheepDogFormatter;
 import org.farhan.mbt.services.SheepDogGrammarAccess;
-import org.farhan.mbt.services.SheepDogGrammarAccess.AbstractScenarioTagsElements;
-import org.farhan.mbt.sheepDog.AbstractScenarioTags;
+import org.farhan.mbt.services.SheepDogGrammarAccess.TagsElements;
+import org.farhan.mbt.sheepDog.Tags;
 
-public class AbstractScenarioTagsFormatter extends Formatter {
+public class TagsFormatter extends Formatter {
 
-	private AbstractScenarioTags tags;
+	private Tags tags;
 
-	public AbstractScenarioTagsFormatter(AbstractScenarioTags tags) {
+	public TagsFormatter(Tags tags) {
 		this.tags = tags;
 	}
 
 	public void format(IFormattableDocument doc, SheepDogGrammarAccess ga, SheepDogFormatter df) {
-		AbstractScenarioTagsElements a = ga.getAbstractScenarioTagsAccess();
+		TagsElements a = ga.getTagsAccess();
 		formatKeywordNoSpace(df.getRegion(tags, a.getTagsKeyword_0()), doc);
 		formatTitle(df.getRegion(tags, a.getNameWORDTerminalRuleCall_1_0()), doc);
 		formatKeywordNoSpace(df.getRegion(tags, a.getRightSquareBracketKeyword_2()), doc);

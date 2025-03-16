@@ -1,16 +1,16 @@
-= Feature: UML Step Object To Code
+= Test-Suite: UML Step Object To Code
 
 TODO map uml layer 2 documentation to java code
 
 [tags="debug"]
-== Background: Create model
+== Test-Setup: Create model
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Scenario: Submit
+== Test-Case: Submit
 
 === Given: The blah application, Object page is empty
 ----
@@ -18,14 +18,14 @@ TODO map uml layer 2 documentation to java code
 === And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
 ----
-= Object: Object page
+= Step-Object: Object page
 
-== Definition: is empty
+== Step-Definition: is empty
 ----
 
 === And: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-== Scenario: No statements layer 2
+== Test-Case: No statements layer 2
 
 === When: The mbt-transformer plugin, uml-to-cucumber goal is executed
 
@@ -45,7 +45,7 @@ TODO map uml layer 2 documentation to java code
 | BlahObjectPageSteps | org.farhan.stepdefs.blah
 |===
 
-== Scenario: No statements layer 3
+== Test-Case: No statements layer 3
 
 === When: The mbt-transformer plugin, uml-to-cucumber goal is executed
 

@@ -71,19 +71,19 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 			nextTokenIsWORD = true;
 		} else if (nextTokenIsWORD) {
 			mRULE_WORD();
-		} else if (isKeyword("Object:")) {
+		} else if (isKeyword("Step-Object:")) {
 			mT__10();// 'Object:'
-		} else if (isKeyword("Definition:")) {
+		} else if (isKeyword("Step-Definition:")) {
 			mT__12();// 'Definition:'
-		} else if (isKeyword("Parameters:")) {
+		} else if (isKeyword("Step-Parameters:")) {
 			mT__14();// 'Parameters:'
-		} else if (isKeyword("Feature:")) {
+		} else if (isKeyword("Test-Suite:")) {
 			mT__15();// 'Feature:'
-		} else if (isKeyword("Background:")) {
+		} else if (isKeyword("Test-Setup:")) {
 			mT__16();// 'Background:'
-		} else if (isKeyword("Scenario:")) {
+		} else if (isKeyword("Test-Case:")) {
 			mT__17();// 'Scenario:'
-		} else if (isKeyword("Examples:")) {
+		} else if (isKeyword("Test-Data:")) {
 			mT__18();// 'Examples:'
 		} else if (isKeyword("Given:")) {
 			mT__19();// 'Given'

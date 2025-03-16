@@ -5,9 +5,9 @@ Feature: UML Step To Code
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
-          == Scenario: Submit
+          == Test-Case: Submit
           
           === Given: The blah application, Given page is empty
           === When: The blah application, When page is empty
@@ -28,9 +28,9 @@ Feature: UML Step To Code
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
-          == Scenario: Submit's'
+          == Test-Case: Submit's'
           
           === Given: The blah application, Given page isn't empty
           """

@@ -15,41 +15,41 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.farhan.mbt.sheepDog.Examples;
-import org.farhan.mbt.sheepDog.Scenario;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
+import org.farhan.mbt.sheepDog.TestCase;
+import org.farhan.mbt.sheepDog.TestData;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Scenario</b></em>'.
+ * An implementation of the model object '<em><b>Test Case</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.ScenarioImpl#getExamples <em>Examples</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.TestCaseImpl#getTestDataList <em>Test Data List</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ScenarioImpl extends AbstractScenarioImpl implements Scenario
+public class TestCaseImpl extends TestStepContainerImpl implements TestCase
 {
   /**
-   * The cached value of the '{@link #getExamples() <em>Examples</em>}' containment reference list.
+   * The cached value of the '{@link #getTestDataList() <em>Test Data List</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getExamples()
+   * @see #getTestDataList()
    * @generated
    * @ordered
    */
-  protected EList<Examples> examples;
+  protected EList<TestData> testDataList;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ScenarioImpl()
+  protected TestCaseImpl()
   {
     super();
   }
@@ -62,7 +62,7 @@ public class ScenarioImpl extends AbstractScenarioImpl implements Scenario
   @Override
   protected EClass eStaticClass()
   {
-    return SheepDogPackage.Literals.SCENARIO;
+    return SheepDogPackage.Literals.TEST_CASE;
   }
 
   /**
@@ -71,13 +71,13 @@ public class ScenarioImpl extends AbstractScenarioImpl implements Scenario
    * @generated
    */
   @Override
-  public EList<Examples> getExamples()
+  public EList<TestData> getTestDataList()
   {
-    if (examples == null)
+    if (testDataList == null)
     {
-      examples = new EObjectContainmentEList<Examples>(Examples.class, this, SheepDogPackage.SCENARIO__EXAMPLES);
+      testDataList = new EObjectContainmentEList<TestData>(TestData.class, this, SheepDogPackage.TEST_CASE__TEST_DATA_LIST);
     }
-    return examples;
+    return testDataList;
   }
 
   /**
@@ -90,8 +90,8 @@ public class ScenarioImpl extends AbstractScenarioImpl implements Scenario
   {
     switch (featureID)
     {
-      case SheepDogPackage.SCENARIO__EXAMPLES:
-        return ((InternalEList<?>)getExamples()).basicRemove(otherEnd, msgs);
+      case SheepDogPackage.TEST_CASE__TEST_DATA_LIST:
+        return ((InternalEList<?>)getTestDataList()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -106,8 +106,8 @@ public class ScenarioImpl extends AbstractScenarioImpl implements Scenario
   {
     switch (featureID)
     {
-      case SheepDogPackage.SCENARIO__EXAMPLES:
-        return getExamples();
+      case SheepDogPackage.TEST_CASE__TEST_DATA_LIST:
+        return getTestDataList();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -123,9 +123,9 @@ public class ScenarioImpl extends AbstractScenarioImpl implements Scenario
   {
     switch (featureID)
     {
-      case SheepDogPackage.SCENARIO__EXAMPLES:
-        getExamples().clear();
-        getExamples().addAll((Collection<? extends Examples>)newValue);
+      case SheepDogPackage.TEST_CASE__TEST_DATA_LIST:
+        getTestDataList().clear();
+        getTestDataList().addAll((Collection<? extends TestData>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -141,8 +141,8 @@ public class ScenarioImpl extends AbstractScenarioImpl implements Scenario
   {
     switch (featureID)
     {
-      case SheepDogPackage.SCENARIO__EXAMPLES:
-        getExamples().clear();
+      case SheepDogPackage.TEST_CASE__TEST_DATA_LIST:
+        getTestDataList().clear();
         return;
     }
     super.eUnset(featureID);
@@ -158,10 +158,10 @@ public class ScenarioImpl extends AbstractScenarioImpl implements Scenario
   {
     switch (featureID)
     {
-      case SheepDogPackage.SCENARIO__EXAMPLES:
-        return examples != null && !examples.isEmpty();
+      case SheepDogPackage.TEST_CASE__TEST_DATA_LIST:
+        return testDataList != null && !testDataList.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //ScenarioImpl
+} //TestCaseImpl

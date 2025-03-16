@@ -49,14 +49,14 @@ public class AsciiDoctorStepObject implements ConvertibleObject {
 		deleteStepDefinition(stepDefinitionName);
 		StepDefinition stepDefinition = SheepDogFactory.eINSTANCE.createStepDefinition();
 		stepDefinition.setName(stepDefinitionName);
-		theStepObject.getStepDefinitions().add(stepDefinition);
+		theStepObject.getStepDefinitionList().add(stepDefinition);
 		return stepDefinition;
 	}
 
 	public StepParameters addStepParameters(StepDefinition stepDefinition, String stepParametersName) {
 		StepParameters stepParameters = SheepDogFactory.eINSTANCE.createStepParameters();
 		stepParameters.setName(stepParametersName);
-		stepDefinition.getStepParameters().add(stepParameters);
+		stepDefinition.getStepParameterList().add(stepParameters);
 		return stepParameters;
 	}
 
@@ -65,24 +65,24 @@ public class AsciiDoctorStepObject implements ConvertibleObject {
 		for (String srcCell : stepParametersRow) {
 			Cell cell = SheepDogFactory.eINSTANCE.createCell();
 			cell.setName(srcCell);
-			row.getCells().add(cell);
+			row.getCellList().add(cell);
 		}
-		stepParameters.getParametersTable().getRows().add(row);
+		stepParameters.getTable().getRowList().add(row);
 	}
 
 	public void addStepParametersTable(StepParameters stepParameters, ArrayList<String> headers) {
-		stepParameters.setParametersTable(SheepDogFactory.eINSTANCE.createTable());
+		stepParameters.setTable(SheepDogFactory.eINSTANCE.createTable());
 		Row row = SheepDogFactory.eINSTANCE.createRow();
 		for (String srcCell : headers) {
 			Cell cell = SheepDogFactory.eINSTANCE.createCell();
 			cell.setName(srcCell);
-			row.getCells().add(cell);
+			row.getCellList().add(cell);
 		}
-		stepParameters.getParametersTable().getRows().add(row);
+		stepParameters.getTable().getRowList().add(row);
 	}
 
 	private void deleteStepDefinition(String name) {
-		EList<StepDefinition> list = theStepObject.getStepDefinitions();
+		EList<StepDefinition> list = theStepObject.getStepDefinitionList();
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getName().contentEquals(name)) {
 				list.remove(i);
@@ -102,11 +102,11 @@ public class AsciiDoctorStepObject implements ConvertibleObject {
 	}
 
 	public String getStepDefinitionDescription(StepDefinition stepDefinitionSrc) {
-		return convertStatementsToString(stepDefinitionSrc.getStatements());
+		return convertStatementsToString(stepDefinitionSrc.getStatementList());
 	}
 
 	public EList<StepDefinition> getStepDefinitionList() {
-		return theStepObject.getStepDefinitions();
+		return theStepObject.getStepDefinitionList();
 	}
 
 	public String getStepDefinitionName(StepDefinition stepDefinitionSrc) {
@@ -114,7 +114,7 @@ public class AsciiDoctorStepObject implements ConvertibleObject {
 	}
 
 	public String getStepObjectDescription() {
-		return convertStatementsToString(theStepObject.getStatements());
+		return convertStatementsToString(theStepObject.getStatementList());
 	}
 
 	public String getStepObjectName() {
@@ -122,7 +122,7 @@ public class AsciiDoctorStepObject implements ConvertibleObject {
 	}
 
 	public EList<StepParameters> getStepParametersList(StepDefinition stepDefinitionSrc) {
-		return stepDefinitionSrc.getStepParameters();
+		return stepDefinitionSrc.getStepParameterList();
 	}
 
 	public String getStepParametersName(StepParameters stepParametersSrc) {
@@ -131,23 +131,23 @@ public class AsciiDoctorStepObject implements ConvertibleObject {
 
 	public ArrayList<String> getStepParametersRow(StepParameters stepParametersSrc, Row parametersRow) {
 		ArrayList<String> row = new ArrayList<String>();
-		EList<Cell> header = stepParametersSrc.getParametersTable().getRows().getFirst().getCells();
+		EList<Cell> header = stepParametersSrc.getTable().getRowList().getFirst().getCellList();
 		for (int i = 0; i < header.size(); i++) {
-			row.add(parametersRow.getCells().get(i).getName());
+			row.add(parametersRow.getCellList().get(i).getName());
 		}
 		return row;
 	}
 
 	public ArrayList<Row> getStepParametersRowList(StepParameters stepParametersSrc) {
 		ArrayList<Row> body = new ArrayList<Row>();
-		body.addAll(stepParametersSrc.getParametersTable().getRows());
+		body.addAll(stepParametersSrc.getTable().getRowList());
 		body.remove(0);
 		return body;
 	}
 
 	public ArrayList<String> getStepParametersTable(StepParameters stepParametersSrc) {
 		ArrayList<String> header = new ArrayList<String>();
-		for (Cell c : stepParametersSrc.getParametersTable().getRows().getFirst().getCells()) {
+		for (Cell c : stepParametersSrc.getTable().getRowList().getFirst().getCellList()) {
 			header.add(c.getName());
 		}
 		return header;
@@ -174,18 +174,18 @@ public class AsciiDoctorStepObject implements ConvertibleObject {
 			for (String line : stepDefinitionDescription.split("\n")) {
 				Statement statement = SheepDogFactory.eINSTANCE.createStatement();
 				statement.setName(line);
-				stepDefinition.getStatements().add(statement);
+				stepDefinition.getStatementList().add(statement);
 			}
 		}
 	}
 
 	public void setStepObjectDescription(String stepObjectDescription) {
 		if (!stepObjectDescription.isEmpty()) {
-			theStepObject.getStatements().clear();
+			theStepObject.getStatementList().clear();
 			for (String line : stepObjectDescription.split("\n")) {
 				Statement statement = SheepDogFactory.eINSTANCE.createStatement();
 				statement.setName(line);
-				theStepObject.getStatements().add(statement);
+				theStepObject.getStatementList().add(statement);
 			}
 		}
 	}

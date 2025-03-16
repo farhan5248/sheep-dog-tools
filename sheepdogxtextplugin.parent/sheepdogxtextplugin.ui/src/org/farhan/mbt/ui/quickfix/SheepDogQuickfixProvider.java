@@ -13,37 +13,40 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
-import org.farhan.mbt.sheepDog.Step;
+import org.farhan.mbt.sheepDog.TestStep;
 import org.farhan.mbt.generator.SheepDogGenerator;
 import org.farhan.mbt.validation.SheepDogValidator;
 
 /**
  * Custom quickfixes.
  *
- * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#quick-fixes
+ * See
+ * https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#quick-fixes
  */
 public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(SheepDogValidator.MISSING_STEP_DEF)
 	public void createDefinition(final Issue issue, IssueResolutionAcceptor acceptor) {
 
-		acceptor.accept(issue, "Create definition", "Create a step definition in the step object", "upcase.png",
+		acceptor.accept(issue, "Create definition", "Create a TestStep definition in the TestStep object", "upcase.png",
 				new IModification() {
 					public void apply(IModificationContext context) throws BadLocationException {
 						Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
-						Step step = (Step) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
-						SheepDogGenerator.doGenerate(step);
+						TestStep TestStep = (TestStep) resource
+								.getEObject(issue.getUriToProblem().toString().split("#")[1]);
+						SheepDogGenerator.doGenerate(TestStep);
 					}
 				});
 
 		for (String issueData : issue.getData()) {
-			acceptor.accept(issue, "Rename step object to: " + issueData, "Rename the step object to an existing one",
-					"upcase.png", new IModification() {
+			acceptor.accept(issue, "Rename TestStep object to: " + issueData,
+					"Rename the TestStep object to an existing one", "upcase.png", new IModification() {
 						public void apply(IModificationContext context) throws BadLocationException {
 							Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
-							Step step = (Step) resource.getEObject(issue.getUriToProblem().toString().split("#")[1]);
+							TestStep TestStep = (TestStep) resource
+									.getEObject(issue.getUriToProblem().toString().split("#")[1]);
 							IXtextDocument xtextDocument = context.getXtextDocument();
-							xtextDocument.replace(issue.getOffset(), step.getName().length(), issueData);
+							xtextDocument.replace(issue.getOffset(), TestStep.getName().length(), issueData);
 						}
 					});
 		}
@@ -61,8 +64,8 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 	}
 
 	@Fix(SheepDogValidator.INVALID_HEADER)
-	public void capitalizeStepTableName(final Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, "Capitalize step table name", "Capitalize the step table name.", "upcase.png",
+	public void capitalizeTestStepTableName(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Capitalize TestStep table name", "Capitalize the TestStep table name.", "upcase.png",
 				new IModification() {
 					public void apply(IModificationContext context) throws BadLocationException {
 						IXtextDocument xtextDocument = context.getXtextDocument();

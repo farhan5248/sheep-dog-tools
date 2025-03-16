@@ -6,18 +6,18 @@ import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractParserRuleElementFinder;
 import org.farhan.mbt.formatting2.SheepDogFormatter;
 import org.farhan.mbt.services.SheepDogGrammarAccess;
-import org.farhan.mbt.services.SheepDogGrammarAccess.BackgroundElements;
-import org.farhan.mbt.sheepDog.Background;
+import org.farhan.mbt.services.SheepDogGrammarAccess.TestSetupElements;
+import org.farhan.mbt.sheepDog.TestSetup;
 
-public class BackgroundFormatter extends AbstractScenarioFormatter {
+public class TestSetupFormatter extends TestStepContainerFormatter {
 
-	public BackgroundFormatter(Background theBackground) {
+	public TestSetupFormatter(TestSetup theBackground) {
 		super(theBackground);
 	}
 
 	@Override
 	protected AbstractParserRuleElementFinder getAccess(SheepDogGrammarAccess ga) {
-		return ga.getBackgroundAccess();
+		return ga.getTestSetupAccess();
 	}
 
 	@Override
@@ -28,22 +28,22 @@ public class BackgroundFormatter extends AbstractScenarioFormatter {
 
 	@Override
 	protected Keyword getKeyword(AbstractParserRuleElementFinder a) {
-		return ((BackgroundElements) a).getBackgroundKeyword_2();
+		return ((TestSetupElements) a).getTestSetupKeyword_2();
 	}
 
 	@Override
 	protected RuleCall getEOLRuleCall(AbstractParserRuleElementFinder a) {
-		return ((BackgroundElements) a).getEOLTerminalRuleCall_4();
+		return ((TestSetupElements) a).getEOLTerminalRuleCall_4();
 	}
 
 	@Override
 	protected RuleCall getTitleRuleCall(AbstractParserRuleElementFinder a) {
-		return ((BackgroundElements) a).getNameTitleParserRuleCall_3_0();
+		return ((TestSetupElements) a).getNameTitleParserRuleCall_3_0();
 	}
 
 	@Override
 	protected Keyword getEqualsKeyword(AbstractParserRuleElementFinder a) {
-		return ((BackgroundElements) a).getEqualsSignEqualsSignKeyword_1();
+		return ((TestSetupElements) a).getEqualsSignEqualsSignKeyword_1();
 	}
 
 }

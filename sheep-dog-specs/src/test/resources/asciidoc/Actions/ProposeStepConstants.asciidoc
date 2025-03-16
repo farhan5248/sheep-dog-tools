@@ -1,6 +1,6 @@
-= Feature: Propose Step Constants
+= Test-Suite: Propose Step Constants
 
-== Scenario: Component types
+== Test-Case: Component types
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -18,7 +18,7 @@
 | The blah application, | blah application
 |===
 
-== Scenario: Object types
+== Test-Case: Object types
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -36,7 +36,7 @@
 | The blah plugin, blah file | blah file      
 |===
 
-== Scenario: State modality absent no details
+== Test-Case: State modality absent no details
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -55,7 +55,7 @@
 | The blah plugin, blah file details | details name    | Specify section etc   
 |===
 
-== Scenario: State modality absent incomplete details
+== Test-Case: State modality absent incomplete details
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -73,7 +73,7 @@
 | The blah plugin, blah file heading section | section        
 |===
 
-== Scenario: State modality absent has details
+== Test-Case: State modality absent has details
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -91,7 +91,7 @@
 | The blah plugin, blah file heading section is | is             
 |===
 
-== Scenario: State modality present has details
+== Test-Case: State modality present has details
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -109,7 +109,7 @@
 | The blah plugin, blah file heading section is created | attribute name  | Specify created etc   
 |===
 
-== Scenario: State modality present no attribute
+== Test-Case: State modality present no attribute
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -127,7 +127,7 @@
 | The blah plugin, blah file is created | attribute name  | Specify created etc   
 |===
 
-== Scenario: State modality present no attachments
+== Test-Case: State modality present no attachments
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -145,7 +145,7 @@
 | The blah plugin, blah file is created with | with           
 |===
 
-== Scenario: State modality present has attachments
+== Test-Case: State modality present has attachments
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 

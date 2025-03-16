@@ -15,7 +15,7 @@ import org.farhan.mbt.sheepDog.SheepDogPackage;
  *
  * @generated
  */
-public class GivenImpl extends StepImpl implements Given
+public class GivenImpl extends TestStepImpl implements Given
 {
   /**
    * <!-- begin-user-doc -->

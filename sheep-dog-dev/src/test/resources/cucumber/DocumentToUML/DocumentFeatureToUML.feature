@@ -5,7 +5,7 @@ Feature: Document Feature To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
@@ -17,11 +17,11 @@ Feature: Document Feature To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           Desc line 1
           
-          == Scenario: Story One
+          == Test-Case: Story One
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
@@ -33,12 +33,12 @@ Feature: Document Feature To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           Desc line 1
           Desc line 2
           
-          == Scenario: Story One
+          == Test-Case: Story One
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present
@@ -50,13 +50,13 @@ Feature: Document Feature To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           Desc line 1
           Desc line 2
           Desc line 3
           
-          == Scenario: Story One
+          == Test-Case: Story One
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
      Then The mbt-transformer plugin, uml/pst.uml file will be present

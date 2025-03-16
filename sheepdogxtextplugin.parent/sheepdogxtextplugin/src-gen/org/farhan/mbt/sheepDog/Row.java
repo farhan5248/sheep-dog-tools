@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.Row#getCells <em>Cells</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.Row#getCellList <em>Cell List</em>}</li>
  * </ul>
  *
  * @see org.farhan.mbt.sheepDog.SheepDogPackage#getRow()
@@ -26,15 +26,15 @@ import org.eclipse.emf.ecore.EObject;
 public interface Row extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Cells</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Cell List</b></em>' containment reference list.
    * The list contents are of type {@link org.farhan.mbt.sheepDog.Cell}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Cells</em>' containment reference list.
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getRow_Cells()
+   * @return the value of the '<em>Cell List</em>' containment reference list.
+   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getRow_CellList()
    * @model containment="true"
    * @generated
    */
-  EList<Cell> getCells();
+  EList<Cell> getCellList();
 
 } // Row

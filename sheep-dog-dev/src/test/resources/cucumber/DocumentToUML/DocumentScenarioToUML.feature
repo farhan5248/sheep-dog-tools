@@ -5,9 +5,9 @@ Feature: Document Scenario To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
-          == Scenario: Submit
+          == Test-Case: Submit
           
           === Given: The blah application, Object page is empty
           """
@@ -21,10 +21,10 @@ Feature: Document Scenario To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           [tags="tag1"]
-          == Scenario: Submit
+          == Test-Case: Submit
           
           Desc line 1
           
@@ -43,10 +43,10 @@ Feature: Document Scenario To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           [tags="tag1,tag2"]
-          == Scenario: Submit
+          == Test-Case: Submit
           
           Desc line 1
           Desc line 2
@@ -73,10 +73,10 @@ Feature: Document Scenario To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           [tags="tag1,tag2,tag3"]
-          == Scenario: Submit
+          == Test-Case: Submit
           
           Desc line 1
           Desc line 2
@@ -108,15 +108,15 @@ Feature: Document Scenario To UML
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           [tags="tag1"]
-          == Scenario: Submit
+          == Test-Case: Submit
           
           === Given: The blah application, Object page is empty
           
           [tags="tag2"]
-          == Scenario: Submit2
+          == Test-Case: Submit2
           
           === Given: The blah application, Object page is empty
           """

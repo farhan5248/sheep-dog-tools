@@ -10,10 +10,10 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.formatting2.AbstractJavaFormatter;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
-import org.farhan.mbt.formatting2.sheepDog.FeatureFormatter;
+import org.farhan.mbt.formatting2.sheepDog.TestSuiteFormatter;
 import org.farhan.mbt.formatting2.sheepDog.StepObjectFormatter;
 import org.farhan.mbt.services.SheepDogGrammarAccess;
-import org.farhan.mbt.sheepDog.Feature;
+import org.farhan.mbt.sheepDog.TestSuite;
 import org.farhan.mbt.sheepDog.StepObject;
 
 import com.google.inject.Inject;
@@ -23,9 +23,9 @@ public class SheepDogFormatter extends AbstractJavaFormatter {
 	@Inject
 	SheepDogGrammarAccess ga;
 
-	protected void format(Feature theFeature, IFormattableDocument doc) {
+	protected void format(TestSuite theFeature, IFormattableDocument doc) {
 
-		FeatureFormatter formatter = new FeatureFormatter(theFeature);
+		TestSuiteFormatter formatter = new TestSuiteFormatter(theFeature);
 		formatter.setIndent(0);
 		formatter.format(doc, ga, this);
 	}

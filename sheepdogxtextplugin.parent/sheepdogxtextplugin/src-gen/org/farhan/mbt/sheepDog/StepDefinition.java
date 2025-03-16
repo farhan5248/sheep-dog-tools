@@ -17,8 +17,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.farhan.mbt.sheepDog.StepDefinition#getName <em>Name</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.StepDefinition#getStatements <em>Statements</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.StepDefinition#getStepParameters <em>Step Parameters</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.StepDefinition#getStatementList <em>Statement List</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.StepDefinition#getStepParameterList <em>Step Parameter List</em>}</li>
  * </ul>
  *
  * @see org.farhan.mbt.sheepDog.SheepDogPackage#getStepDefinition()
@@ -50,27 +50,27 @@ public interface StepDefinition extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Statement List</b></em>' containment reference list.
    * The list contents are of type {@link org.farhan.mbt.sheepDog.Statement}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Statements</em>' containment reference list.
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getStepDefinition_Statements()
+   * @return the value of the '<em>Statement List</em>' containment reference list.
+   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getStepDefinition_StatementList()
    * @model containment="true"
    * @generated
    */
-  EList<Statement> getStatements();
+  EList<Statement> getStatementList();
 
   /**
-   * Returns the value of the '<em><b>Step Parameters</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Step Parameter List</b></em>' containment reference list.
    * The list contents are of type {@link org.farhan.mbt.sheepDog.StepParameters}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Step Parameters</em>' containment reference list.
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getStepDefinition_StepParameters()
+   * @return the value of the '<em>Step Parameter List</em>' containment reference list.
+   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getStepDefinition_StepParameterList()
    * @model containment="true"
    * @generated
    */
-  EList<StepParameters> getStepParameters();
+  EList<StepParameters> getStepParameterList();
 
 } // StepDefinition

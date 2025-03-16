@@ -1,4 +1,4 @@
-= Object: step table proposal action
+= Step-Object: step table proposal action
 
-== Definition: is performed
+== Step-Definition: is performed
 

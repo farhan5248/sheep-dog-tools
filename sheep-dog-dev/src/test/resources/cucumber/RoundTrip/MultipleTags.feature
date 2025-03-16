@@ -5,19 +5,19 @@ Feature: Multiple Tags
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           [tags="tag1"]
-          == Scenario: Submit
+          == Test-Case: Submit
           
           === Given: The Object1 page is empty
           """
     Given The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           [tags="tag2"]
-          == Scenario: Submit2
+          == Test-Case: Submit2
           
           === Given: The Object1 page is empty
           """

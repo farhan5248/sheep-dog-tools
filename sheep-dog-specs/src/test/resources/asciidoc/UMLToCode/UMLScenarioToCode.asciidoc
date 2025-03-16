@@ -1,13 +1,13 @@
-= Feature: UML Scenario To Code
+= Test-Suite: UML Scenario To Code
 
-== Scenario: No tags, no statements, one step
+== Test-Case: No tags, no statements, one step
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Scenario: Submit
+== Test-Case: Submit
 
 === Given: The blah application, Object1 page is empty
 ----
@@ -25,15 +25,15 @@
 | Submit | Given The blah application, Object1 page is empty
 |===
 
-== Scenario: One tag, one statement, one step
+== Test-Case: One tag, one statement, one step
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
 [tags="tag1"]
-== Scenario: Submit
+== Test-Case: Submit
 
 Desc line 1
 
@@ -53,15 +53,15 @@ Desc line 1
 | Submit | tag1 | Desc line 1
 |===
 
-== Scenario: Two tags, two statements, two steps
+== Test-Case: Two tags, two statements, two steps
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
 [tags="tag1,tag2"]
-== Scenario: Submit
+== Test-Case: Submit
 
 Desc line 1
 Desc line 2
@@ -91,7 +91,7 @@ Desc line 2
 | Submit | Given The blah application, Object{Index} page is empty
 |===
 
-=== Examples: Indices
+=== Test-Data: Indices
 
 |===
 | Index
@@ -99,15 +99,15 @@ Desc line 2
 | 2    
 |===
 
-== Scenario: Three tags, three statements, three steps
+== Test-Case: Three tags, three statements, three steps
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
 [tags="tag1,tag2,tag3"]
-== Scenario: Submit
+== Test-Case: Submit
 
 Desc line 1
 Desc line 2
@@ -140,7 +140,7 @@ Desc line 3
 | Submit | Given The blah application, Object{Index} page is empty
 |===
 
-=== Examples: Indices
+=== Test-Data: Indices
 
 |===
 | Index

@@ -16,15 +16,15 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.farhan.mbt.sheepDog.AbstractScenario;
-import org.farhan.mbt.sheepDog.Background;
+import org.farhan.mbt.sheepDog.TestStepContainer;
+import org.farhan.mbt.sheepDog.TestSetup;
 import org.farhan.mbt.sheepDog.Cell;
 import org.farhan.mbt.sheepDog.SheepDogFactory;
-import org.farhan.mbt.sheepDog.Feature;
+import org.farhan.mbt.sheepDog.TestSuite;
 import org.farhan.mbt.sheepDog.Table;
 import org.farhan.mbt.sheepDog.Row;
 import org.farhan.mbt.sheepDog.Statement;
-import org.farhan.mbt.sheepDog.Step;
+import org.farhan.mbt.sheepDog.TestStep;
 import org.farhan.mbt.sheepDog.StepDefinition;
 import org.farhan.mbt.sheepDog.StepObject;
 import org.farhan.mbt.sheepDog.StepParameters;
@@ -48,9 +48,9 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		return files;
 	}
 
-	Step step;
+	TestStep step;
 
-	public LanguageAccessImpl(Step step) {
+	public LanguageAccessImpl(TestStep step) {
 		this.step = step;
 	}
 
@@ -76,7 +76,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		StepDefinition stepDefinition;
 		stepDefinition = SheepDogFactory.eINSTANCE.createStepDefinition();
 		stepDefinition.setName(predicate);
-		EList<StepDefinition> list = ((StepObject) stepObject).getStepDefinitions();
+		EList<StepDefinition> list = ((StepObject) stepObject).getStepDefinitionList();
 		list.add(stepDefinition);
 
 		TreeMap<String, StepDefinition> sorted = new TreeMap<String, StepDefinition>();
@@ -92,25 +92,25 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	public void createStepDefinitionParameters(Object stepDefinition) {
 		StepDefinition so = (StepDefinition) stepDefinition;
 		StepParameters parameters = SheepDogFactory.eINSTANCE.createStepParameters();
-		parameters.setName(Integer.toString(so.getStepParameters().size() + 1));
-		so.getStepParameters().add(parameters);
+		parameters.setName(Integer.toString(so.getStepParameterList().size() + 1));
+		so.getStepParameterList().add(parameters);
 
-		Table Table = SheepDogFactory.eINSTANCE.createTable();
-		parameters.setParametersTable(Table);
+		Table table = SheepDogFactory.eINSTANCE.createTable();
+		parameters.setTable(table);
 
 		Row row = SheepDogFactory.eINSTANCE.createRow();
-		Table.getRows().add(row);
+		table.getRowList().add(row);
 		if (getHeader() == null) {
 			// TODO there's no automated test for this..
 			// This is a docstring and also the abuse of this method :P
 			Cell cell = SheepDogFactory.eINSTANCE.createCell();
 			cell.setName("Content");
-			row.getCells().add(cell);
+			row.getCellList().add(cell);
 		} else {
 			for (Cell srcCell : getHeader()) {
 				Cell cell = SheepDogFactory.eINSTANCE.createCell();
 				cell.setName(srcCell.getName());
-				row.getCells().add(cell);
+				row.getCellList().add(cell);
 			}
 		}
 	}
@@ -135,9 +135,9 @@ public class LanguageAccessImpl implements ILanguageAccess {
 
 	@Override
 	public ArrayList<Object> getAllSteps() {
-		AbstractScenario as = (AbstractScenario) step.eContainer();
+		TestStepContainer as = (TestStepContainer) step.eContainer();
 		ArrayList<Object> stepNames = new ArrayList<Object>();
-		for (Step s : as.getSteps()) {
+		for (TestStep s : as.getTestStepList()) {
 			if (s.getName() != null) {
 				stepNames.add(s);
 			}
@@ -148,9 +148,9 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	@Override
 	public ArrayList<Object> getBackgroundSteps() {
 		ArrayList<Object> steps = new ArrayList<Object>();
-		Feature feature = (Feature) step.eContainer().eContainer();
-		if (feature.getAbstractScenarios().getFirst() instanceof Background) {
-			for (Step s : feature.getAbstractScenarios().getFirst().getSteps()) {
+		TestSuite feature = (TestSuite) step.eContainer().eContainer();
+		if (feature.getTestStepContainerList().getFirst() instanceof TestSetup) {
+			for (TestStep s : feature.getTestStepContainerList().getFirst().getTestStepList()) {
 				steps.add(s);
 			}
 		}
@@ -187,11 +187,11 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	}
 
 	private List<Cell> getHeader() {
-		Table Table = step.getTheStepTable();
-		if (Table != null) {
-			if (Table.getRows().size() > 0) {
+		Table table = step.getTable();
+		if (table != null) {
+			if (table.getRowList().size() > 0) {
 				// TODO if this is sorted then there's no need to sort it in cellToString
-				return Table.getRows().get(0).getCells();
+				return table.getRowList().get(0).getCellList();
 			} else {
 				return null;
 			}
@@ -212,9 +212,9 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	}
 
 	public ArrayList<Object> getPreviousSteps() {
-		AbstractScenario as = (AbstractScenario) step.eContainer();
+		TestStepContainer as = (TestStepContainer) step.eContainer();
 		ArrayList<Object> steps = new ArrayList<Object>();
-		for (Step s : as.getSteps()) {
+		for (TestStep s : as.getTestStepList()) {
 			if (s.getName() != null) {
 				if (s.equals(step)) {
 					break;
@@ -245,7 +245,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		String description = "";
 		if (stepDefinition instanceof StepDefinition) {
 			StepDefinition as = (StepDefinition) stepDefinition;
-			for (Statement s : as.getStatements()) {
+			for (Statement s : as.getStatementList()) {
 				description += s.getName() + "\n";
 			}
 		}
@@ -259,17 +259,17 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	@Override
 	public List<?> getStepDefinitionParameters(Object stepDefinition) {
 		StepDefinition so = (StepDefinition) stepDefinition;
-		return so.getStepParameters();
+		return so.getStepParameterList();
 	}
 
 	@Override
 	public String getStepDefinitionParametersString(Object parameters) {
 		StepParameters e = (StepParameters) parameters;
-		return cellsToString(e.getParametersTable().getRows().get(0).getCells(), true);
+		return cellsToString(e.getTable().getRowList().get(0).getCellList(), true);
 	}
 
 	public EList<?> getStepDefinitions(Object stepObject) {
-		return ((StepObject) stepObject).getStepDefinitions();
+		return ((StepObject) stepObject).getStepDefinitionList();
 	}
 
 	public String getStepName() {
@@ -278,15 +278,15 @@ public class LanguageAccessImpl implements ILanguageAccess {
 
 	@Override
 	public String getStepName(Object step) {
-		return ((Step) step).getName();
+		return ((TestStep) step).getName();
 	}
 
 	@Override
 	public Object getStepObject(String objectQualifiedName) throws Exception {
-		Resource theResource = new ResourceSetImpl().createResource(getObjectURI(objectQualifiedName));
-		if (new ResourceSetImpl().getURIConverter().exists(theResource.getURI(), null)) {
-			theResource.load(new HashMap());
-			return theResource.getContents().get(0);
+		Resource resource = new ResourceSetImpl().createResource(getObjectURI(objectQualifiedName));
+		if (new ResourceSetImpl().getURIConverter().exists(resource.getURI(), null)) {
+			resource.load(new HashMap());
+			return resource.getContents().get(0);
 		} else {
 			return null;
 		}
@@ -297,7 +297,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		StepObject stepObject = (StepObject) getStepObject(objectQualifiedName);
 		String description = "";
 		if (stepObject != null) {
-			for (Statement s : stepObject.getStatements()) {
+			for (Statement s : stepObject.getStatementList()) {
 				description += s.getName() + "\n";
 			}
 		}
@@ -322,12 +322,12 @@ public class LanguageAccessImpl implements ILanguageAccess {
 
 	public boolean hasParameters(Object stepDefinition) {
 		// TODO why is stepDefinition passed in when it's not used?
-		if (step.getTheStepTable() != null) {
-			if (step.getTheStepTable().getRows().size() > 0) {
+		if (step.getTable() != null) {
+			if (step.getTable().getRowList().size() > 0) {
 				return true;
 			}
 		}
-		if (step.getTheDocString() != null) {
+		if (step.getText() != null) {
 			return true;
 		}
 		return false;

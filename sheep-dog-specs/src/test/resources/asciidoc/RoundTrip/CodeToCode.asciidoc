@@ -1,7 +1,7 @@
-= Feature: Code To Code
+= Test-Suite: Code To Code
 
 [tags="debug"]
-== Background: Create a feature file
+== Test-Setup: Create a feature file
 
 The formatting of the data and example tables is intentionally different to make sure that the file is regenerated
 
@@ -55,7 +55,7 @@ Feature: This is a feature
 | tag1
 |===
 
-== Scenario: Feature file is preserved
+== Test-Case: Feature file is preserved
 
 === Then: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be created as follows
 

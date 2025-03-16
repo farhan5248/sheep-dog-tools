@@ -17,10 +17,10 @@ public class RowFormatter extends Formatter {
 
 	public void format(IFormattableDocument doc, SheepDogGrammarAccess ga, SheepDogFormatter df) {
 		RowElements a = ga.getRowAccess();
-		for (Cell c : theRow.getCells()) {
+		for (Cell c : theRow.getCellList()) {
 			CellFormatter formatter = new CellFormatter(c);
-			formatter.isLast(isLastElement(c, theRow.getCells()));
-			formatter.isFirst(isFirstElement(c, theRow.getCells()));
+			formatter.isLast(isLastElement(c, theRow.getCellList()));
+			formatter.isFirst(isFirstElement(c, theRow.getCellList()));
 			formatter.format(doc, ga, df);
 		}
 		formatEOL1RuleCall(df.getRegion(theRow, a.getEOLTerminalRuleCall_1()), doc);

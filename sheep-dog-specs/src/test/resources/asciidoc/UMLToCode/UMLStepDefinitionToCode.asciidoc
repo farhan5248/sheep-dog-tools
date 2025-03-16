@@ -1,14 +1,14 @@
-= Feature: UML Step Definition To Code
+= Test-Suite: UML Step Definition To Code
 
 [tags="debug"]
-== Background: Create model
+== Test-Setup: Create model
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Scenario: Submit
+== Test-Case: Submit
 
 === Given: The blah application, Object page is empty
 
@@ -29,21 +29,21 @@ text1
 === And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
 ----
-= Object: Object page
+= Step-Object: Object page
 
-== Definition: is empty
+== Step-Definition: is empty
 
-== Definition: Top section will be created as follows
+== Step-Definition: Top section will be created as follows
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | h1
 |===
 
-== Definition: is created as follows
+== Step-Definition: is created as follows
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | Content
@@ -52,7 +52,7 @@ text1
 
 === And: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-== Scenario: Layer 2 without parameters without DI
+== Test-Case: Layer 2 without parameters without DI
 
 === When: The mbt-transformer plugin, uml-to-cucumber goal is executed
 
@@ -81,7 +81,7 @@ text1
 | theBlahApplicationObjectPageIsEmpty | BlahFactory.get("ObjectPage").setInputOutputs("Empty");
 |===
 
-== Scenario: Layer 2 with datatable without DI
+== Test-Case: Layer 2 with datatable without DI
 
 === When: The mbt-transformer plugin, uml-to-cucumber goal is executed
 
@@ -110,7 +110,7 @@ text1
 | theBlahApplicationObjectPageTopSectionWillBeCreatedAsFollows | BlahFactory.get("ObjectPage").assertInputOutputs(dataTable, "TopSection");
 |===
 
-== Scenario: Layer 2 with docstring without DI
+== Test-Case: Layer 2 with docstring without DI
 
 === When: The mbt-transformer plugin, uml-to-cucumber goal is executed
 
@@ -132,7 +132,7 @@ text1
 | theBlahApplicationObjectPageIsCreatedAsFollows | BlahFactory.get("ObjectPage").setInputOutputs("Content", docString);
 |===
 
-== Scenario: Layer 3
+== Test-Case: Layer 3
 
 === When: The mbt-transformer plugin, uml-to-cucumber goal is executed
 
@@ -159,7 +159,7 @@ text1
 | setContent  | public     | void        | keyMap         | HashMap{String,String}
 |===
 
-== Scenario: Layer 2 without parameters with spring
+== Test-Case: Layer 2 without parameters with spring
 
 === When: The mbt-transformer plugin, uml-to-cucumber-spring goal is executed
 
@@ -196,7 +196,7 @@ text1
 | theBlahApplicationObjectPageIsEmpty | object.setInputOutputs("Empty");
 |===
 
-== Scenario: Layer 2 without parameters with guice
+== Test-Case: Layer 2 without parameters with guice
 
 === When: The mbt-transformer plugin, uml-to-cucumber-guice goal is executed
 

@@ -1,11 +1,11 @@
-= Feature: UML Feature To Code
+= Test-Suite: UML Feature To Code
 
-== Scenario: No tags, no statements
+== Test-Case: No tags, no statements
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 ----
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
@@ -21,17 +21,17 @@
 | Process
 |===
 
-== Scenario: One tag, one statement
+== Test-Case: One tag, one statement
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
 Desc line 1
 
 [tags="tag1"]
-== Background: Story One
+== Test-Setup: Story One
 ----
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
@@ -47,18 +47,18 @@ Desc line 1
 | Process | tag1 | Desc line 1
 |===
 
-== Scenario: Two tags, two statements
+== Test-Case: Two tags, two statements
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
 Desc line 1
 Desc line 2
 
 [tags="tag1,tag2"]
-== Background: Story One
+== Test-Setup: Story One
 ----
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
@@ -74,19 +74,19 @@ Desc line 2
 | Process | tag1,tag2 | Desc line 1\nDesc line 2
 |===
 
-== Scenario: Three tags, three statements
+== Test-Case: Three tags, three statements
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
 Desc line 1
 Desc line 2
 Desc line 3
 
 [tags="tag1,tag2,tag3"]
-== Background: Story One
+== Test-Setup: Story One
 ----
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed

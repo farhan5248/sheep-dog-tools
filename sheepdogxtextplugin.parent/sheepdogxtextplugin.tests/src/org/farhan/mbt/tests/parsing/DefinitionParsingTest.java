@@ -16,9 +16,9 @@ public class DefinitionParsingTest extends ParsingTest {
 	@Test
 	public void parseScenarioOutlineWithName() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Object: This is a test StepObject\n");
-		sb.append("== Definition: Submit a claim\n");
-		sb.append("=== Parameters: Describe what this data is about\n");
+		sb.append("= Step-Object: This is a test StepObject\n");
+		sb.append("== Step-Definition: Submit a claim\n");
+		sb.append("=== Step-Parameters: Describe what this data is about\n");
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|===\n");
@@ -28,25 +28,25 @@ public class DefinitionParsingTest extends ParsingTest {
 	@Test
 	public void parseScenarioOutlineWithoutName() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Object: This is a test StepObject\n");
-		sb.append("== Definition:");
+		sb.append("= Step-Object: This is a test StepObject\n");
+		sb.append("== Step-Definition:");
 		assertStepObjectErrors(sb);
 	}
 
 	@Test
 	public void parseScenarioOutlineWithoutNameEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Object: This is a test StepObject\n");
-		sb.append("== Definition: Submit a claim");
+		sb.append("= Step-Object: This is a test StepObject\n");
+		sb.append("== Step-Definition: Submit a claim");
 		assertStepObjectErrors(sb);
 	}
 
 	@Test
 	public void parseScenarioOutlineWithTags() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Object: This is a test StepObject\n");
-		sb.append("== Definition: Submit a claim\n");
-		sb.append("=== Parameters: Describe what this data is about\n");
+		sb.append("= Step-Object: This is a test StepObject\n");
+		sb.append("== Step-Definition: Submit a claim\n");
+		sb.append("=== Step-Parameters: Describe what this data is about\n");
 
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
@@ -57,10 +57,10 @@ public class DefinitionParsingTest extends ParsingTest {
 	@Test
 	public void parseScenarioOutlineWithDescription() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Object: This is a test StepObject\n");
-		sb.append("== Definition: Submit a claim\n");
+		sb.append("= Step-Object: This is a test StepObject\n");
+		sb.append("== Step-Definition: Submit a claim\n");
 		sb.append("Basic EDI claim\n");
-		sb.append("=== Parameters: Describe what this data is about\n");
+		sb.append("=== Step-Parameters: Describe what this data is about\n");
 
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
@@ -71,11 +71,11 @@ public class DefinitionParsingTest extends ParsingTest {
 	@Test
 	public void parseScenarioOutlineWithMultilineDescription() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Object: This is a test StepObject\n");
-		sb.append("== Definition: Submit a claim\n");
+		sb.append("= Step-Object: This is a test StepObject\n");
+		sb.append("== Step-Definition: Submit a claim\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
-		sb.append("=== Parameters: Describe what this data is about\n");
+		sb.append("=== Step-Parameters: Describe what this data is about\n");
 
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
@@ -86,8 +86,8 @@ public class DefinitionParsingTest extends ParsingTest {
 	@Test
 	public void parseScenarioOutlineWithoutDescriptionEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Object: This is a test StepObject\n");
-		sb.append("== Definition: Submit a claim\n");
+		sb.append("= Step-Object: This is a test StepObject\n");
+		sb.append("== Step-Definition: Submit a claim\n");
 		sb.append("Basic EDI claim");
 		assertStepObjectErrors(sb);
 	}
@@ -95,9 +95,9 @@ public class DefinitionParsingTest extends ParsingTest {
 	@Test
 	public void parseScenarioOutlineWithSteps() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Object: This is a test StepObject\n");
-		sb.append("== Definition: Submit a claim\n");
-		sb.append("=== Parameters: Describe what this data is about\n");
+		sb.append("= Step-Object: This is a test StepObject\n");
+		sb.append("== Step-Definition: Submit a claim\n");
+		sb.append("=== Step-Parameters: Describe what this data is about\n");
 
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
@@ -108,11 +108,11 @@ public class DefinitionParsingTest extends ParsingTest {
 	@Test
 	public void parseScenarioOutlineWithEverything() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Object: This is a test StepObject\n");
-		sb.append("== Definition: Submit a claim\n");
+		sb.append("= Step-Object: This is a test StepObject\n");
+		sb.append("== Step-Definition: Submit a claim\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
-		sb.append("=== Parameters: Describe what this data is about\n");
+		sb.append("=== Step-Parameters: Describe what this data is about\n");
 
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");

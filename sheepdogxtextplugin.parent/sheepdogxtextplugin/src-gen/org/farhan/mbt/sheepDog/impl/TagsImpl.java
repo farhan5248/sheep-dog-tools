@@ -10,23 +10,23 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.farhan.mbt.sheepDog.DocString;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
+import org.farhan.mbt.sheepDog.Tags;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Doc String</b></em>'.
+ * An implementation of the model object '<em><b>Tags</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.DocStringImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.TagsImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class DocStringImpl extends MinimalEObjectImpl.Container implements DocString
+public class TagsImpl extends MinimalEObjectImpl.Container implements Tags
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -53,7 +53,7 @@ public class DocStringImpl extends MinimalEObjectImpl.Container implements DocSt
    * <!-- end-user-doc -->
    * @generated
    */
-  protected DocStringImpl()
+  protected TagsImpl()
   {
     super();
   }
@@ -66,7 +66,7 @@ public class DocStringImpl extends MinimalEObjectImpl.Container implements DocSt
   @Override
   protected EClass eStaticClass()
   {
-    return SheepDogPackage.Literals.DOC_STRING;
+    return SheepDogPackage.Literals.TAGS;
   }
 
   /**
@@ -91,7 +91,7 @@ public class DocStringImpl extends MinimalEObjectImpl.Container implements DocSt
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.DOC_STRING__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.TAGS__NAME, oldName, name));
   }
 
   /**
@@ -104,7 +104,7 @@ public class DocStringImpl extends MinimalEObjectImpl.Container implements DocSt
   {
     switch (featureID)
     {
-      case SheepDogPackage.DOC_STRING__NAME:
+      case SheepDogPackage.TAGS__NAME:
         return getName();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -120,7 +120,7 @@ public class DocStringImpl extends MinimalEObjectImpl.Container implements DocSt
   {
     switch (featureID)
     {
-      case SheepDogPackage.DOC_STRING__NAME:
+      case SheepDogPackage.TAGS__NAME:
         setName((String)newValue);
         return;
     }
@@ -137,7 +137,7 @@ public class DocStringImpl extends MinimalEObjectImpl.Container implements DocSt
   {
     switch (featureID)
     {
-      case SheepDogPackage.DOC_STRING__NAME:
+      case SheepDogPackage.TAGS__NAME:
         setName(NAME_EDEFAULT);
         return;
     }
@@ -154,7 +154,7 @@ public class DocStringImpl extends MinimalEObjectImpl.Container implements DocSt
   {
     switch (featureID)
     {
-      case SheepDogPackage.DOC_STRING__NAME:
+      case SheepDogPackage.TAGS__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
@@ -177,4 +177,4 @@ public class DocStringImpl extends MinimalEObjectImpl.Container implements DocSt
     return result.toString();
   }
 
-} //DocStringImpl
+} //TagsImpl

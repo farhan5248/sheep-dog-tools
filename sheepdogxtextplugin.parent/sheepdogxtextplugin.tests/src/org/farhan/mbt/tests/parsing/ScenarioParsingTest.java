@@ -16,41 +16,41 @@ public class ScenarioParsingTest extends ParsingTest {
 	@Test
 	public void parseScenarioWithName() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a claim\n");
 		assertNoFeatureErrors(sb);
 	}
 
 	@Test
 	public void parseScenarioWithoutName() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario:");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case:");
 		assertFeatureErrors(sb);
 	}
 
 	@Test
 	public void parseScenarioWithoutNameEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a claim");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a claim");
 		assertFeatureErrors(sb);
 	}
 
 	@Test
 	public void parseScenarioWithTags() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
+		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("[tags=\"tag1\"]\n");
-		sb.append("== Scenario: Submit a claim\n");
+		sb.append("== Test-Case: Submit a claim\n");
 		assertNoFeatureErrors(sb);
 	}
 
 	@Test
 	public void parseScenarioWithDescription() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("Basic EDI claim\n");
 		assertNoFeatureErrors(sb);
 	}
@@ -58,8 +58,8 @@ public class ScenarioParsingTest extends ParsingTest {
 	@Test
 	public void parseScenarioWithMultilineDescription() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
 		assertNoFeatureErrors(sb);
@@ -68,8 +68,8 @@ public class ScenarioParsingTest extends ParsingTest {
 	@Test
 	public void parseScenarioWithoutDescriptionEOL() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("Basic EDI claim");
 		assertFeatureErrors(sb);
 	}
@@ -77,8 +77,8 @@ public class ScenarioParsingTest extends ParsingTest {
 	@Test
 	public void parseScenarioWithSteps() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
-		sb.append("== Scenario: Submit a claim\n");
+		sb.append("= Test-Suite: This is a test feature\n");
+		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("=== Given: do step one\n");
 		sb.append("=== When: do step three\n");
 		assertNoFeatureErrors(sb);
@@ -87,9 +87,9 @@ public class ScenarioParsingTest extends ParsingTest {
 	@Test
 	public void parseScenarioWithEverything() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
+		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("[tags=\"tag1\"]\n");
-		sb.append("== Scenario: Submit a claim\n");
+		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
 		sb.append("=== Given: do step one\n");

@@ -17,8 +17,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.farhan.mbt.sheepDog.StepParameters#getName <em>Name</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.StepParameters#getStatements <em>Statements</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.StepParameters#getParametersTable <em>Parameters Table</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.StepParameters#getStatementList <em>Statement List</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.StepParameters#getTable <em>Table</em>}</li>
  * </ul>
  *
  * @see org.farhan.mbt.sheepDog.SheepDogPackage#getStepParameters()
@@ -50,37 +50,37 @@ public interface StepParameters extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Statement List</b></em>' containment reference list.
    * The list contents are of type {@link org.farhan.mbt.sheepDog.Statement}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Statements</em>' containment reference list.
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getStepParameters_Statements()
+   * @return the value of the '<em>Statement List</em>' containment reference list.
+   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getStepParameters_StatementList()
    * @model containment="true"
    * @generated
    */
-  EList<Statement> getStatements();
+  EList<Statement> getStatementList();
 
   /**
-   * Returns the value of the '<em><b>Parameters Table</b></em>' containment reference.
+   * Returns the value of the '<em><b>Table</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Parameters Table</em>' containment reference.
-   * @see #setParametersTable(Table)
-   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getStepParameters_ParametersTable()
+   * @return the value of the '<em>Table</em>' containment reference.
+   * @see #setTable(Table)
+   * @see org.farhan.mbt.sheepDog.SheepDogPackage#getStepParameters_Table()
    * @model containment="true"
    * @generated
    */
-  Table getParametersTable();
+  Table getTable();
 
   /**
-   * Sets the value of the '{@link org.farhan.mbt.sheepDog.StepParameters#getParametersTable <em>Parameters Table</em>}' containment reference.
+   * Sets the value of the '{@link org.farhan.mbt.sheepDog.StepParameters#getTable <em>Table</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Parameters Table</em>' containment reference.
-   * @see #getParametersTable()
+   * @param value the new value of the '<em>Table</em>' containment reference.
+   * @see #getTable()
    * @generated
    */
-  void setParametersTable(Table value);
+  void setTable(Table value);
 
 } // StepParameters

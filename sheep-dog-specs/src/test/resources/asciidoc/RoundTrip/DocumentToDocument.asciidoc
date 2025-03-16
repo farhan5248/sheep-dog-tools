@@ -1,16 +1,16 @@
-= Feature: Document To Document
+= Test-Suite: Document To Document
 
-== Scenario: Create an adoc file from adoc file
+== Test-Case: Create an adoc file from adoc file
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
 Desc 1
 
 [tags="tag2"]
-== Scenario: Story One
+== Test-Case: Story One
 
 Desc 2
 
@@ -25,7 +25,7 @@ Desc 2
 \----
 
 [tags="tag3"]
-== Scenario: Story Two
+== Test-Case: Story Two
 
 Desc 3
 
@@ -38,14 +38,14 @@ Desc 3
 | 8 | {ins}
 |===
 
-=== Examples: Some data
+=== Test-Data: Some data
 
 |===
 | ins
 | 4
 |===
 
-=== Examples: Dataset 2
+=== Test-Data: Dataset 2
 
 |===
 | ins
@@ -57,21 +57,21 @@ Desc 3
 === And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
 ----
-= Object: Object page
+= Step-Object: Object page
 
-== Definition: is valid
+== Step-Definition: is valid
 
-== Definition: is invalid
+== Step-Definition: is invalid
 
-== Definition: is created as follows
+== Step-Definition: is created as follows
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | grp | ins
 |===
 
-=== Parameters: 2
+=== Step-Parameters: 2
 
 |===
 | Content
@@ -85,12 +85,12 @@ Desc 3
 === Then: The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
 Desc 1
 
 [tags="tag2"]
-== Scenario: Story One
+== Test-Case: Story One
 
 Desc 2
 
@@ -105,7 +105,7 @@ Desc 2
 \----
 
 [tags="tag3"]
-== Scenario: Story Two
+== Test-Case: Story Two
 
 Desc 3
 
@@ -118,14 +118,14 @@ Desc 3
 | 8   | {ins}
 |===
 
-=== Examples: Some data
+=== Test-Data: Some data
 
 |===
 | ins
 | 4  
 |===
 
-=== Examples: Dataset 2
+=== Test-Data: Dataset 2
 
 |===
 | ins
@@ -137,24 +137,24 @@ Desc 3
 === And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be created as follows
 
 ----
-= Object: Object page
+= Step-Object: Object page
 
-== Definition: is created as follows
+== Step-Definition: is created as follows
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | grp | ins
 |===
 
-=== Parameters: 2
+=== Step-Parameters: 2
 
 |===
 | Content
 |===
 
-== Definition: is invalid
+== Step-Definition: is invalid
 
-== Definition: is valid
+== Step-Definition: is valid
 ----
 

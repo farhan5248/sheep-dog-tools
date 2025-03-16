@@ -1,16 +1,16 @@
-= Object: suggestion dialog
+= Step-Object: suggestion dialog
 
-== Definition: will be empty
+== Step-Definition: will be empty
 
-== Definition: will be set as follows
+== Step-Definition: will be set as follows
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | Suggestion | Suggestion Name
 |===
 
-=== Parameters: 2
+=== Step-Parameters: 2
 
 |===
 | Suggestion | Suggestion Name | Suggestion Description

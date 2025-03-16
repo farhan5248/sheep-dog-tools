@@ -14,6 +14,6 @@ package org.farhan.mbt.sheepDog;
  * @model
  * @generated
  */
-public interface Given extends Step
+public interface Given extends TestStep
 {
 } // Given

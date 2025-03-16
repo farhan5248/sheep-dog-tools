@@ -1,8 +1,8 @@
-= Object: scenario validation action
+= Step-Object: scenario validation action
 
-== Definition: is performed as follows
+== Step-Definition: is performed as follows
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | Selected Step

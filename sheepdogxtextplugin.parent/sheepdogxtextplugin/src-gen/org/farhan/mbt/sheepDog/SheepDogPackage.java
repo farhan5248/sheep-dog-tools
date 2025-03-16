@@ -77,13 +77,13 @@ public interface SheepDogPackage extends EPackage
   int MODEL__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+   * The feature id for the '<em><b>Statement List</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__STATEMENTS = 1;
+  int MODEL__STATEMENT_LIST = 1;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -114,22 +114,22 @@ public interface SheepDogPackage extends EPackage
   int STEP_OBJECT__NAME = MODEL__NAME;
 
   /**
-   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+   * The feature id for the '<em><b>Statement List</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STEP_OBJECT__STATEMENTS = MODEL__STATEMENTS;
+  int STEP_OBJECT__STATEMENT_LIST = MODEL__STATEMENT_LIST;
 
   /**
-   * The feature id for the '<em><b>Step Definitions</b></em>' containment reference list.
+   * The feature id for the '<em><b>Step Definition List</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STEP_OBJECT__STEP_DEFINITIONS = MODEL_FEATURE_COUNT + 0;
+  int STEP_OBJECT__STEP_DEFINITION_LIST = MODEL_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Step Object</em>' class.
@@ -160,22 +160,22 @@ public interface SheepDogPackage extends EPackage
   int STEP_DEFINITION__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+   * The feature id for the '<em><b>Statement List</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STEP_DEFINITION__STATEMENTS = 1;
+  int STEP_DEFINITION__STATEMENT_LIST = 1;
 
   /**
-   * The feature id for the '<em><b>Step Parameters</b></em>' containment reference list.
+   * The feature id for the '<em><b>Step Parameter List</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STEP_DEFINITION__STEP_PARAMETERS = 2;
+  int STEP_DEFINITION__STEP_PARAMETER_LIST = 2;
 
   /**
    * The number of structural features of the '<em>Step Definition</em>' class.
@@ -206,22 +206,22 @@ public interface SheepDogPackage extends EPackage
   int STEP_PARAMETERS__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+   * The feature id for the '<em><b>Statement List</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STEP_PARAMETERS__STATEMENTS = 1;
+  int STEP_PARAMETERS__STATEMENT_LIST = 1;
 
   /**
-   * The feature id for the '<em><b>Parameters Table</b></em>' containment reference.
+   * The feature id for the '<em><b>Table</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STEP_PARAMETERS__PARAMETERS_TABLE = 2;
+  int STEP_PARAMETERS__TABLE = 2;
 
   /**
    * The number of structural features of the '<em>Step Parameters</em>' class.
@@ -233,14 +233,14 @@ public interface SheepDogPackage extends EPackage
   int STEP_PARAMETERS_FEATURE_COUNT = 3;
 
   /**
-   * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.FeatureImpl <em>Feature</em>}' class.
+   * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.TestSuiteImpl <em>Test Suite</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.farhan.mbt.sheepDog.impl.FeatureImpl
-   * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getFeature()
+   * @see org.farhan.mbt.sheepDog.impl.TestSuiteImpl
+   * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getTestSuite()
    * @generated
    */
-  int FEATURE = 4;
+  int TEST_SUITE = 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -249,53 +249,53 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int FEATURE__NAME = MODEL__NAME;
+  int TEST_SUITE__NAME = MODEL__NAME;
 
   /**
-   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+   * The feature id for the '<em><b>Statement List</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FEATURE__STATEMENTS = MODEL__STATEMENTS;
+  int TEST_SUITE__STATEMENT_LIST = MODEL__STATEMENT_LIST;
 
   /**
-   * The feature id for the '<em><b>Abstract Scenarios</b></em>' containment reference list.
+   * The feature id for the '<em><b>Test Step Container List</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FEATURE__ABSTRACT_SCENARIOS = MODEL_FEATURE_COUNT + 0;
+  int TEST_SUITE__TEST_STEP_CONTAINER_LIST = MODEL_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Feature</em>' class.
+   * The number of structural features of the '<em>Test Suite</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FEATURE_FEATURE_COUNT = MODEL_FEATURE_COUNT + 1;
+  int TEST_SUITE_FEATURE_COUNT = MODEL_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.AbstractScenarioImpl <em>Abstract Scenario</em>}' class.
+   * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.TestStepContainerImpl <em>Test Step Container</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.farhan.mbt.sheepDog.impl.AbstractScenarioImpl
-   * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getAbstractScenario()
+   * @see org.farhan.mbt.sheepDog.impl.TestStepContainerImpl
+   * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getTestStepContainer()
    * @generated
    */
-  int ABSTRACT_SCENARIO = 5;
+  int TEST_STEP_CONTAINER = 5;
 
   /**
-   * The feature id for the '<em><b>Tags</b></em>' containment reference.
+   * The feature id for the '<em><b>Tag List</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ABSTRACT_SCENARIO__TAGS = 0;
+  int TEST_STEP_CONTAINER__TAG_LIST = 0;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -304,53 +304,53 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ABSTRACT_SCENARIO__NAME = 1;
+  int TEST_STEP_CONTAINER__NAME = 1;
 
   /**
-   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+   * The feature id for the '<em><b>Statement List</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ABSTRACT_SCENARIO__STATEMENTS = 2;
+  int TEST_STEP_CONTAINER__STATEMENT_LIST = 2;
 
   /**
-   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
+   * The feature id for the '<em><b>Test Step List</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ABSTRACT_SCENARIO__STEPS = 3;
+  int TEST_STEP_CONTAINER__TEST_STEP_LIST = 3;
 
   /**
-   * The number of structural features of the '<em>Abstract Scenario</em>' class.
+   * The number of structural features of the '<em>Test Step Container</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ABSTRACT_SCENARIO_FEATURE_COUNT = 4;
+  int TEST_STEP_CONTAINER_FEATURE_COUNT = 4;
 
   /**
-   * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.BackgroundImpl <em>Background</em>}' class.
+   * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.TestSetupImpl <em>Test Setup</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.farhan.mbt.sheepDog.impl.BackgroundImpl
-   * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getBackground()
+   * @see org.farhan.mbt.sheepDog.impl.TestSetupImpl
+   * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getTestSetup()
    * @generated
    */
-  int BACKGROUND = 6;
+  int TEST_SETUP = 6;
 
   /**
-   * The feature id for the '<em><b>Tags</b></em>' containment reference.
+   * The feature id for the '<em><b>Tag List</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int BACKGROUND__TAGS = ABSTRACT_SCENARIO__TAGS;
+  int TEST_SETUP__TAG_LIST = TEST_STEP_CONTAINER__TAG_LIST;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -359,53 +359,53 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BACKGROUND__NAME = ABSTRACT_SCENARIO__NAME;
+  int TEST_SETUP__NAME = TEST_STEP_CONTAINER__NAME;
 
   /**
-   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+   * The feature id for the '<em><b>Statement List</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int BACKGROUND__STATEMENTS = ABSTRACT_SCENARIO__STATEMENTS;
+  int TEST_SETUP__STATEMENT_LIST = TEST_STEP_CONTAINER__STATEMENT_LIST;
 
   /**
-   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
+   * The feature id for the '<em><b>Test Step List</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int BACKGROUND__STEPS = ABSTRACT_SCENARIO__STEPS;
+  int TEST_SETUP__TEST_STEP_LIST = TEST_STEP_CONTAINER__TEST_STEP_LIST;
 
   /**
-   * The number of structural features of the '<em>Background</em>' class.
+   * The number of structural features of the '<em>Test Setup</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int BACKGROUND_FEATURE_COUNT = ABSTRACT_SCENARIO_FEATURE_COUNT + 0;
+  int TEST_SETUP_FEATURE_COUNT = TEST_STEP_CONTAINER_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.ScenarioImpl <em>Scenario</em>}' class.
+   * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.TestCaseImpl <em>Test Case</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.farhan.mbt.sheepDog.impl.ScenarioImpl
-   * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getScenario()
+   * @see org.farhan.mbt.sheepDog.impl.TestCaseImpl
+   * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getTestCase()
    * @generated
    */
-  int SCENARIO = 7;
+  int TEST_CASE = 7;
 
   /**
-   * The feature id for the '<em><b>Tags</b></em>' containment reference.
+   * The feature id for the '<em><b>Tag List</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SCENARIO__TAGS = ABSTRACT_SCENARIO__TAGS;
+  int TEST_CASE__TAG_LIST = TEST_STEP_CONTAINER__TAG_LIST;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -414,62 +414,62 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SCENARIO__NAME = ABSTRACT_SCENARIO__NAME;
+  int TEST_CASE__NAME = TEST_STEP_CONTAINER__NAME;
 
   /**
-   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+   * The feature id for the '<em><b>Statement List</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SCENARIO__STATEMENTS = ABSTRACT_SCENARIO__STATEMENTS;
+  int TEST_CASE__STATEMENT_LIST = TEST_STEP_CONTAINER__STATEMENT_LIST;
 
   /**
-   * The feature id for the '<em><b>Steps</b></em>' containment reference list.
+   * The feature id for the '<em><b>Test Step List</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SCENARIO__STEPS = ABSTRACT_SCENARIO__STEPS;
+  int TEST_CASE__TEST_STEP_LIST = TEST_STEP_CONTAINER__TEST_STEP_LIST;
 
   /**
-   * The feature id for the '<em><b>Examples</b></em>' containment reference list.
+   * The feature id for the '<em><b>Test Data List</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SCENARIO__EXAMPLES = ABSTRACT_SCENARIO_FEATURE_COUNT + 0;
+  int TEST_CASE__TEST_DATA_LIST = TEST_STEP_CONTAINER_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Scenario</em>' class.
+   * The number of structural features of the '<em>Test Case</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SCENARIO_FEATURE_COUNT = ABSTRACT_SCENARIO_FEATURE_COUNT + 1;
+  int TEST_CASE_FEATURE_COUNT = TEST_STEP_CONTAINER_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.ExamplesImpl <em>Examples</em>}' class.
+   * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.TestDataImpl <em>Test Data</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.farhan.mbt.sheepDog.impl.ExamplesImpl
-   * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getExamples()
+   * @see org.farhan.mbt.sheepDog.impl.TestDataImpl
+   * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getTestData()
    * @generated
    */
-  int EXAMPLES = 8;
+  int TEST_DATA = 8;
 
   /**
-   * The feature id for the '<em><b>Tags</b></em>' containment reference.
+   * The feature id for the '<em><b>Tag List</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EXAMPLES__TAGS = 0;
+  int TEST_DATA__TAG_LIST = 0;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -478,44 +478,44 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EXAMPLES__NAME = 1;
+  int TEST_DATA__NAME = 1;
 
   /**
-   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+   * The feature id for the '<em><b>Statement List</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EXAMPLES__STATEMENTS = 2;
+  int TEST_DATA__STATEMENT_LIST = 2;
 
   /**
-   * The feature id for the '<em><b>The Examples Table</b></em>' containment reference.
+   * The feature id for the '<em><b>Table</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EXAMPLES__THE_EXAMPLES_TABLE = 3;
+  int TEST_DATA__TABLE = 3;
 
   /**
-   * The number of structural features of the '<em>Examples</em>' class.
+   * The number of structural features of the '<em>Test Data</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EXAMPLES_FEATURE_COUNT = 4;
+  int TEST_DATA_FEATURE_COUNT = 4;
 
   /**
-   * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.StepImpl <em>Step</em>}' class.
+   * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.TestStepImpl <em>Test Step</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.farhan.mbt.sheepDog.impl.StepImpl
-   * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getStep()
+   * @see org.farhan.mbt.sheepDog.impl.TestStepImpl
+   * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getTestStep()
    * @generated
    */
-  int STEP = 9;
+  int TEST_STEP = 9;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -524,34 +524,34 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STEP__NAME = 0;
+  int TEST_STEP__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>The Step Table</b></em>' containment reference.
+   * The feature id for the '<em><b>Table</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STEP__THE_STEP_TABLE = 1;
+  int TEST_STEP__TABLE = 1;
 
   /**
-   * The feature id for the '<em><b>The Doc String</b></em>' containment reference.
+   * The feature id for the '<em><b>Text</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STEP__THE_DOC_STRING = 2;
+  int TEST_STEP__TEXT = 2;
 
   /**
-   * The number of structural features of the '<em>Step</em>' class.
+   * The number of structural features of the '<em>Test Step</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STEP_FEATURE_COUNT = 3;
+  int TEST_STEP_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.GivenImpl <em>Given</em>}' class.
@@ -570,25 +570,25 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GIVEN__NAME = STEP__NAME;
+  int GIVEN__NAME = TEST_STEP__NAME;
 
   /**
-   * The feature id for the '<em><b>The Step Table</b></em>' containment reference.
+   * The feature id for the '<em><b>Table</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GIVEN__THE_STEP_TABLE = STEP__THE_STEP_TABLE;
+  int GIVEN__TABLE = TEST_STEP__TABLE;
 
   /**
-   * The feature id for the '<em><b>The Doc String</b></em>' containment reference.
+   * The feature id for the '<em><b>Text</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GIVEN__THE_DOC_STRING = STEP__THE_DOC_STRING;
+  int GIVEN__TEXT = TEST_STEP__TEXT;
 
   /**
    * The number of structural features of the '<em>Given</em>' class.
@@ -597,7 +597,7 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GIVEN_FEATURE_COUNT = STEP_FEATURE_COUNT + 0;
+  int GIVEN_FEATURE_COUNT = TEST_STEP_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.WhenImpl <em>When</em>}' class.
@@ -616,25 +616,25 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WHEN__NAME = STEP__NAME;
+  int WHEN__NAME = TEST_STEP__NAME;
 
   /**
-   * The feature id for the '<em><b>The Step Table</b></em>' containment reference.
+   * The feature id for the '<em><b>Table</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WHEN__THE_STEP_TABLE = STEP__THE_STEP_TABLE;
+  int WHEN__TABLE = TEST_STEP__TABLE;
 
   /**
-   * The feature id for the '<em><b>The Doc String</b></em>' containment reference.
+   * The feature id for the '<em><b>Text</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int WHEN__THE_DOC_STRING = STEP__THE_DOC_STRING;
+  int WHEN__TEXT = TEST_STEP__TEXT;
 
   /**
    * The number of structural features of the '<em>When</em>' class.
@@ -643,7 +643,7 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int WHEN_FEATURE_COUNT = STEP_FEATURE_COUNT + 0;
+  int WHEN_FEATURE_COUNT = TEST_STEP_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.ThenImpl <em>Then</em>}' class.
@@ -662,25 +662,25 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int THEN__NAME = STEP__NAME;
+  int THEN__NAME = TEST_STEP__NAME;
 
   /**
-   * The feature id for the '<em><b>The Step Table</b></em>' containment reference.
+   * The feature id for the '<em><b>Table</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int THEN__THE_STEP_TABLE = STEP__THE_STEP_TABLE;
+  int THEN__TABLE = TEST_STEP__TABLE;
 
   /**
-   * The feature id for the '<em><b>The Doc String</b></em>' containment reference.
+   * The feature id for the '<em><b>Text</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int THEN__THE_DOC_STRING = STEP__THE_DOC_STRING;
+  int THEN__TEXT = TEST_STEP__TEXT;
 
   /**
    * The number of structural features of the '<em>Then</em>' class.
@@ -689,7 +689,7 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int THEN_FEATURE_COUNT = STEP_FEATURE_COUNT + 0;
+  int THEN_FEATURE_COUNT = TEST_STEP_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.AndImpl <em>And</em>}' class.
@@ -708,25 +708,25 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int AND__NAME = STEP__NAME;
+  int AND__NAME = TEST_STEP__NAME;
 
   /**
-   * The feature id for the '<em><b>The Step Table</b></em>' containment reference.
+   * The feature id for the '<em><b>Table</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int AND__THE_STEP_TABLE = STEP__THE_STEP_TABLE;
+  int AND__TABLE = TEST_STEP__TABLE;
 
   /**
-   * The feature id for the '<em><b>The Doc String</b></em>' containment reference.
+   * The feature id for the '<em><b>Text</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int AND__THE_DOC_STRING = STEP__THE_DOC_STRING;
+  int AND__TEXT = TEST_STEP__TEXT;
 
   /**
    * The number of structural features of the '<em>And</em>' class.
@@ -735,17 +735,17 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int AND_FEATURE_COUNT = STEP_FEATURE_COUNT + 0;
+  int AND_FEATURE_COUNT = TEST_STEP_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.DocStringImpl <em>Doc String</em>}' class.
+   * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.TextImpl <em>Text</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.farhan.mbt.sheepDog.impl.DocStringImpl
-   * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getDocString()
+   * @see org.farhan.mbt.sheepDog.impl.TextImpl
+   * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getText()
    * @generated
    */
-  int DOC_STRING = 14;
+  int TEXT = 14;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -754,16 +754,16 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DOC_STRING__NAME = 0;
+  int TEXT__NAME = 0;
 
   /**
-   * The number of structural features of the '<em>Doc String</em>' class.
+   * The number of structural features of the '<em>Text</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DOC_STRING_FEATURE_COUNT = 1;
+  int TEXT_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.TableImpl <em>Table</em>}' class.
@@ -776,13 +776,13 @@ public interface SheepDogPackage extends EPackage
   int TABLE = 15;
 
   /**
-   * The feature id for the '<em><b>Rows</b></em>' containment reference list.
+   * The feature id for the '<em><b>Row List</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TABLE__ROWS = 0;
+  int TABLE__ROW_LIST = 0;
 
   /**
    * The number of structural features of the '<em>Table</em>' class.
@@ -804,13 +804,13 @@ public interface SheepDogPackage extends EPackage
   int ROW = 16;
 
   /**
-   * The feature id for the '<em><b>Cells</b></em>' containment reference list.
+   * The feature id for the '<em><b>Cell List</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ROW__CELLS = 0;
+  int ROW__CELL_LIST = 0;
 
   /**
    * The number of structural features of the '<em>Row</em>' class.
@@ -822,14 +822,14 @@ public interface SheepDogPackage extends EPackage
   int ROW_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.AbstractScenarioTagsImpl <em>Abstract Scenario Tags</em>}' class.
+   * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.TagsImpl <em>Tags</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.farhan.mbt.sheepDog.impl.AbstractScenarioTagsImpl
-   * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getAbstractScenarioTags()
+   * @see org.farhan.mbt.sheepDog.impl.TagsImpl
+   * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getTags()
    * @generated
    */
-  int ABSTRACT_SCENARIO_TAGS = 17;
+  int TAGS = 17;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -838,16 +838,16 @@ public interface SheepDogPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ABSTRACT_SCENARIO_TAGS__NAME = 0;
+  int TAGS__NAME = 0;
 
   /**
-   * The number of structural features of the '<em>Abstract Scenario Tags</em>' class.
+   * The number of structural features of the '<em>Tags</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ABSTRACT_SCENARIO_TAGS_FEATURE_COUNT = 1;
+  int TAGS_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.farhan.mbt.sheepDog.impl.CellImpl <em>Cell</em>}' class.
@@ -928,15 +928,15 @@ public interface SheepDogPackage extends EPackage
   EAttribute getModel_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.Model#getStatements <em>Statements</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.Model#getStatementList <em>Statement List</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Statements</em>'.
-   * @see org.farhan.mbt.sheepDog.Model#getStatements()
+   * @return the meta object for the containment reference list '<em>Statement List</em>'.
+   * @see org.farhan.mbt.sheepDog.Model#getStatementList()
    * @see #getModel()
    * @generated
    */
-  EReference getModel_Statements();
+  EReference getModel_StatementList();
 
   /**
    * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.StepObject <em>Step Object</em>}'.
@@ -949,15 +949,15 @@ public interface SheepDogPackage extends EPackage
   EClass getStepObject();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.StepObject#getStepDefinitions <em>Step Definitions</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.StepObject#getStepDefinitionList <em>Step Definition List</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Step Definitions</em>'.
-   * @see org.farhan.mbt.sheepDog.StepObject#getStepDefinitions()
+   * @return the meta object for the containment reference list '<em>Step Definition List</em>'.
+   * @see org.farhan.mbt.sheepDog.StepObject#getStepDefinitionList()
    * @see #getStepObject()
    * @generated
    */
-  EReference getStepObject_StepDefinitions();
+  EReference getStepObject_StepDefinitionList();
 
   /**
    * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.StepDefinition <em>Step Definition</em>}'.
@@ -981,26 +981,26 @@ public interface SheepDogPackage extends EPackage
   EAttribute getStepDefinition_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.StepDefinition#getStatements <em>Statements</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.StepDefinition#getStatementList <em>Statement List</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Statements</em>'.
-   * @see org.farhan.mbt.sheepDog.StepDefinition#getStatements()
+   * @return the meta object for the containment reference list '<em>Statement List</em>'.
+   * @see org.farhan.mbt.sheepDog.StepDefinition#getStatementList()
    * @see #getStepDefinition()
    * @generated
    */
-  EReference getStepDefinition_Statements();
+  EReference getStepDefinition_StatementList();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.StepDefinition#getStepParameters <em>Step Parameters</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.StepDefinition#getStepParameterList <em>Step Parameter List</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Step Parameters</em>'.
-   * @see org.farhan.mbt.sheepDog.StepDefinition#getStepParameters()
+   * @return the meta object for the containment reference list '<em>Step Parameter List</em>'.
+   * @see org.farhan.mbt.sheepDog.StepDefinition#getStepParameterList()
    * @see #getStepDefinition()
    * @generated
    */
-  EReference getStepDefinition_StepParameters();
+  EReference getStepDefinition_StepParameterList();
 
   /**
    * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.StepParameters <em>Step Parameters</em>}'.
@@ -1024,229 +1024,229 @@ public interface SheepDogPackage extends EPackage
   EAttribute getStepParameters_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.StepParameters#getStatements <em>Statements</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.StepParameters#getStatementList <em>Statement List</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Statements</em>'.
-   * @see org.farhan.mbt.sheepDog.StepParameters#getStatements()
+   * @return the meta object for the containment reference list '<em>Statement List</em>'.
+   * @see org.farhan.mbt.sheepDog.StepParameters#getStatementList()
    * @see #getStepParameters()
    * @generated
    */
-  EReference getStepParameters_Statements();
+  EReference getStepParameters_StatementList();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.farhan.mbt.sheepDog.StepParameters#getParametersTable <em>Parameters Table</em>}'.
+   * Returns the meta object for the containment reference '{@link org.farhan.mbt.sheepDog.StepParameters#getTable <em>Table</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Parameters Table</em>'.
-   * @see org.farhan.mbt.sheepDog.StepParameters#getParametersTable()
+   * @return the meta object for the containment reference '<em>Table</em>'.
+   * @see org.farhan.mbt.sheepDog.StepParameters#getTable()
    * @see #getStepParameters()
    * @generated
    */
-  EReference getStepParameters_ParametersTable();
+  EReference getStepParameters_Table();
 
   /**
-   * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.Feature <em>Feature</em>}'.
+   * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.TestSuite <em>Test Suite</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Feature</em>'.
-   * @see org.farhan.mbt.sheepDog.Feature
+   * @return the meta object for class '<em>Test Suite</em>'.
+   * @see org.farhan.mbt.sheepDog.TestSuite
    * @generated
    */
-  EClass getFeature();
+  EClass getTestSuite();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.Feature#getAbstractScenarios <em>Abstract Scenarios</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.TestSuite#getTestStepContainerList <em>Test Step Container List</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Abstract Scenarios</em>'.
-   * @see org.farhan.mbt.sheepDog.Feature#getAbstractScenarios()
-   * @see #getFeature()
+   * @return the meta object for the containment reference list '<em>Test Step Container List</em>'.
+   * @see org.farhan.mbt.sheepDog.TestSuite#getTestStepContainerList()
+   * @see #getTestSuite()
    * @generated
    */
-  EReference getFeature_AbstractScenarios();
+  EReference getTestSuite_TestStepContainerList();
 
   /**
-   * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.AbstractScenario <em>Abstract Scenario</em>}'.
+   * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.TestStepContainer <em>Test Step Container</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Abstract Scenario</em>'.
-   * @see org.farhan.mbt.sheepDog.AbstractScenario
+   * @return the meta object for class '<em>Test Step Container</em>'.
+   * @see org.farhan.mbt.sheepDog.TestStepContainer
    * @generated
    */
-  EClass getAbstractScenario();
+  EClass getTestStepContainer();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.farhan.mbt.sheepDog.AbstractScenario#getTags <em>Tags</em>}'.
+   * Returns the meta object for the containment reference '{@link org.farhan.mbt.sheepDog.TestStepContainer#getTagList <em>Tag List</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Tags</em>'.
-   * @see org.farhan.mbt.sheepDog.AbstractScenario#getTags()
-   * @see #getAbstractScenario()
+   * @return the meta object for the containment reference '<em>Tag List</em>'.
+   * @see org.farhan.mbt.sheepDog.TestStepContainer#getTagList()
+   * @see #getTestStepContainer()
    * @generated
    */
-  EReference getAbstractScenario_Tags();
+  EReference getTestStepContainer_TagList();
 
   /**
-   * Returns the meta object for the attribute '{@link org.farhan.mbt.sheepDog.AbstractScenario#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.farhan.mbt.sheepDog.AbstractScenario#getName()
-   * @see #getAbstractScenario()
-   * @generated
-   */
-  EAttribute getAbstractScenario_Name();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.AbstractScenario#getStatements <em>Statements</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Statements</em>'.
-   * @see org.farhan.mbt.sheepDog.AbstractScenario#getStatements()
-   * @see #getAbstractScenario()
-   * @generated
-   */
-  EReference getAbstractScenario_Statements();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.AbstractScenario#getSteps <em>Steps</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Steps</em>'.
-   * @see org.farhan.mbt.sheepDog.AbstractScenario#getSteps()
-   * @see #getAbstractScenario()
-   * @generated
-   */
-  EReference getAbstractScenario_Steps();
-
-  /**
-   * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.Background <em>Background</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Background</em>'.
-   * @see org.farhan.mbt.sheepDog.Background
-   * @generated
-   */
-  EClass getBackground();
-
-  /**
-   * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.Scenario <em>Scenario</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Scenario</em>'.
-   * @see org.farhan.mbt.sheepDog.Scenario
-   * @generated
-   */
-  EClass getScenario();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.Scenario#getExamples <em>Examples</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Examples</em>'.
-   * @see org.farhan.mbt.sheepDog.Scenario#getExamples()
-   * @see #getScenario()
-   * @generated
-   */
-  EReference getScenario_Examples();
-
-  /**
-   * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.Examples <em>Examples</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Examples</em>'.
-   * @see org.farhan.mbt.sheepDog.Examples
-   * @generated
-   */
-  EClass getExamples();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.farhan.mbt.sheepDog.Examples#getTags <em>Tags</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Tags</em>'.
-   * @see org.farhan.mbt.sheepDog.Examples#getTags()
-   * @see #getExamples()
-   * @generated
-   */
-  EReference getExamples_Tags();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.farhan.mbt.sheepDog.Examples#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.farhan.mbt.sheepDog.TestStepContainer#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.farhan.mbt.sheepDog.Examples#getName()
-   * @see #getExamples()
+   * @see org.farhan.mbt.sheepDog.TestStepContainer#getName()
+   * @see #getTestStepContainer()
    * @generated
    */
-  EAttribute getExamples_Name();
+  EAttribute getTestStepContainer_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.Examples#getStatements <em>Statements</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.TestStepContainer#getStatementList <em>Statement List</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Statements</em>'.
-   * @see org.farhan.mbt.sheepDog.Examples#getStatements()
-   * @see #getExamples()
+   * @return the meta object for the containment reference list '<em>Statement List</em>'.
+   * @see org.farhan.mbt.sheepDog.TestStepContainer#getStatementList()
+   * @see #getTestStepContainer()
    * @generated
    */
-  EReference getExamples_Statements();
+  EReference getTestStepContainer_StatementList();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.farhan.mbt.sheepDog.Examples#getTheExamplesTable <em>The Examples Table</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.TestStepContainer#getTestStepList <em>Test Step List</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>The Examples Table</em>'.
-   * @see org.farhan.mbt.sheepDog.Examples#getTheExamplesTable()
-   * @see #getExamples()
+   * @return the meta object for the containment reference list '<em>Test Step List</em>'.
+   * @see org.farhan.mbt.sheepDog.TestStepContainer#getTestStepList()
+   * @see #getTestStepContainer()
    * @generated
    */
-  EReference getExamples_TheExamplesTable();
+  EReference getTestStepContainer_TestStepList();
 
   /**
-   * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.Step <em>Step</em>}'.
+   * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.TestSetup <em>Test Setup</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Step</em>'.
-   * @see org.farhan.mbt.sheepDog.Step
+   * @return the meta object for class '<em>Test Setup</em>'.
+   * @see org.farhan.mbt.sheepDog.TestSetup
    * @generated
    */
-  EClass getStep();
+  EClass getTestSetup();
 
   /**
-   * Returns the meta object for the attribute '{@link org.farhan.mbt.sheepDog.Step#getName <em>Name</em>}'.
+   * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.TestCase <em>Test Case</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Test Case</em>'.
+   * @see org.farhan.mbt.sheepDog.TestCase
+   * @generated
+   */
+  EClass getTestCase();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.TestCase#getTestDataList <em>Test Data List</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Test Data List</em>'.
+   * @see org.farhan.mbt.sheepDog.TestCase#getTestDataList()
+   * @see #getTestCase()
+   * @generated
+   */
+  EReference getTestCase_TestDataList();
+
+  /**
+   * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.TestData <em>Test Data</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Test Data</em>'.
+   * @see org.farhan.mbt.sheepDog.TestData
+   * @generated
+   */
+  EClass getTestData();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.farhan.mbt.sheepDog.TestData#getTagList <em>Tag List</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Tag List</em>'.
+   * @see org.farhan.mbt.sheepDog.TestData#getTagList()
+   * @see #getTestData()
+   * @generated
+   */
+  EReference getTestData_TagList();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.farhan.mbt.sheepDog.TestData#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.farhan.mbt.sheepDog.Step#getName()
-   * @see #getStep()
+   * @see org.farhan.mbt.sheepDog.TestData#getName()
+   * @see #getTestData()
    * @generated
    */
-  EAttribute getStep_Name();
+  EAttribute getTestData_Name();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.farhan.mbt.sheepDog.Step#getTheStepTable <em>The Step Table</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.TestData#getStatementList <em>Statement List</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>The Step Table</em>'.
-   * @see org.farhan.mbt.sheepDog.Step#getTheStepTable()
-   * @see #getStep()
+   * @return the meta object for the containment reference list '<em>Statement List</em>'.
+   * @see org.farhan.mbt.sheepDog.TestData#getStatementList()
+   * @see #getTestData()
    * @generated
    */
-  EReference getStep_TheStepTable();
+  EReference getTestData_StatementList();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.farhan.mbt.sheepDog.Step#getTheDocString <em>The Doc String</em>}'.
+   * Returns the meta object for the containment reference '{@link org.farhan.mbt.sheepDog.TestData#getTable <em>Table</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>The Doc String</em>'.
-   * @see org.farhan.mbt.sheepDog.Step#getTheDocString()
-   * @see #getStep()
+   * @return the meta object for the containment reference '<em>Table</em>'.
+   * @see org.farhan.mbt.sheepDog.TestData#getTable()
+   * @see #getTestData()
    * @generated
    */
-  EReference getStep_TheDocString();
+  EReference getTestData_Table();
+
+  /**
+   * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.TestStep <em>Test Step</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Test Step</em>'.
+   * @see org.farhan.mbt.sheepDog.TestStep
+   * @generated
+   */
+  EClass getTestStep();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.farhan.mbt.sheepDog.TestStep#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.farhan.mbt.sheepDog.TestStep#getName()
+   * @see #getTestStep()
+   * @generated
+   */
+  EAttribute getTestStep_Name();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.farhan.mbt.sheepDog.TestStep#getTable <em>Table</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Table</em>'.
+   * @see org.farhan.mbt.sheepDog.TestStep#getTable()
+   * @see #getTestStep()
+   * @generated
+   */
+  EReference getTestStep_Table();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.farhan.mbt.sheepDog.TestStep#getText <em>Text</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Text</em>'.
+   * @see org.farhan.mbt.sheepDog.TestStep#getText()
+   * @see #getTestStep()
+   * @generated
+   */
+  EReference getTestStep_Text();
 
   /**
    * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.Given <em>Given</em>}'.
@@ -1289,25 +1289,25 @@ public interface SheepDogPackage extends EPackage
   EClass getAnd();
 
   /**
-   * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.DocString <em>Doc String</em>}'.
+   * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.Text <em>Text</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Doc String</em>'.
-   * @see org.farhan.mbt.sheepDog.DocString
+   * @return the meta object for class '<em>Text</em>'.
+   * @see org.farhan.mbt.sheepDog.Text
    * @generated
    */
-  EClass getDocString();
+  EClass getText();
 
   /**
-   * Returns the meta object for the attribute '{@link org.farhan.mbt.sheepDog.DocString#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.farhan.mbt.sheepDog.Text#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.farhan.mbt.sheepDog.DocString#getName()
-   * @see #getDocString()
+   * @see org.farhan.mbt.sheepDog.Text#getName()
+   * @see #getText()
    * @generated
    */
-  EAttribute getDocString_Name();
+  EAttribute getText_Name();
 
   /**
    * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.Table <em>Table</em>}'.
@@ -1320,15 +1320,15 @@ public interface SheepDogPackage extends EPackage
   EClass getTable();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.Table#getRows <em>Rows</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.Table#getRowList <em>Row List</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Rows</em>'.
-   * @see org.farhan.mbt.sheepDog.Table#getRows()
+   * @return the meta object for the containment reference list '<em>Row List</em>'.
+   * @see org.farhan.mbt.sheepDog.Table#getRowList()
    * @see #getTable()
    * @generated
    */
-  EReference getTable_Rows();
+  EReference getTable_RowList();
 
   /**
    * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.Row <em>Row</em>}'.
@@ -1341,36 +1341,36 @@ public interface SheepDogPackage extends EPackage
   EClass getRow();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.Row#getCells <em>Cells</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.farhan.mbt.sheepDog.Row#getCellList <em>Cell List</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Cells</em>'.
-   * @see org.farhan.mbt.sheepDog.Row#getCells()
+   * @return the meta object for the containment reference list '<em>Cell List</em>'.
+   * @see org.farhan.mbt.sheepDog.Row#getCellList()
    * @see #getRow()
    * @generated
    */
-  EReference getRow_Cells();
+  EReference getRow_CellList();
 
   /**
-   * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.AbstractScenarioTags <em>Abstract Scenario Tags</em>}'.
+   * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.Tags <em>Tags</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Abstract Scenario Tags</em>'.
-   * @see org.farhan.mbt.sheepDog.AbstractScenarioTags
+   * @return the meta object for class '<em>Tags</em>'.
+   * @see org.farhan.mbt.sheepDog.Tags
    * @generated
    */
-  EClass getAbstractScenarioTags();
+  EClass getTags();
 
   /**
-   * Returns the meta object for the attribute '{@link org.farhan.mbt.sheepDog.AbstractScenarioTags#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.farhan.mbt.sheepDog.Tags#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.farhan.mbt.sheepDog.AbstractScenarioTags#getName()
-   * @see #getAbstractScenarioTags()
+   * @see org.farhan.mbt.sheepDog.Tags#getName()
+   * @see #getTags()
    * @generated
    */
-  EAttribute getAbstractScenarioTags_Name();
+  EAttribute getTags_Name();
 
   /**
    * Returns the meta object for class '{@link org.farhan.mbt.sheepDog.Cell <em>Cell</em>}'.
@@ -1456,12 +1456,12 @@ public interface SheepDogPackage extends EPackage
     EAttribute MODEL__NAME = eINSTANCE.getModel_Name();
 
     /**
-     * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Statement List</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference MODEL__STATEMENTS = eINSTANCE.getModel_Statements();
+    EReference MODEL__STATEMENT_LIST = eINSTANCE.getModel_StatementList();
 
     /**
      * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.StepObjectImpl <em>Step Object</em>}' class.
@@ -1474,12 +1474,12 @@ public interface SheepDogPackage extends EPackage
     EClass STEP_OBJECT = eINSTANCE.getStepObject();
 
     /**
-     * The meta object literal for the '<em><b>Step Definitions</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Step Definition List</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference STEP_OBJECT__STEP_DEFINITIONS = eINSTANCE.getStepObject_StepDefinitions();
+    EReference STEP_OBJECT__STEP_DEFINITION_LIST = eINSTANCE.getStepObject_StepDefinitionList();
 
     /**
      * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.StepDefinitionImpl <em>Step Definition</em>}' class.
@@ -1500,20 +1500,20 @@ public interface SheepDogPackage extends EPackage
     EAttribute STEP_DEFINITION__NAME = eINSTANCE.getStepDefinition_Name();
 
     /**
-     * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Statement List</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference STEP_DEFINITION__STATEMENTS = eINSTANCE.getStepDefinition_Statements();
+    EReference STEP_DEFINITION__STATEMENT_LIST = eINSTANCE.getStepDefinition_StatementList();
 
     /**
-     * The meta object literal for the '<em><b>Step Parameters</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Step Parameter List</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference STEP_DEFINITION__STEP_PARAMETERS = eINSTANCE.getStepDefinition_StepParameters();
+    EReference STEP_DEFINITION__STEP_PARAMETER_LIST = eINSTANCE.getStepDefinition_StepParameterList();
 
     /**
      * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.StepParametersImpl <em>Step Parameters</em>}' class.
@@ -1534,126 +1534,56 @@ public interface SheepDogPackage extends EPackage
     EAttribute STEP_PARAMETERS__NAME = eINSTANCE.getStepParameters_Name();
 
     /**
-     * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Statement List</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference STEP_PARAMETERS__STATEMENTS = eINSTANCE.getStepParameters_Statements();
+    EReference STEP_PARAMETERS__STATEMENT_LIST = eINSTANCE.getStepParameters_StatementList();
 
     /**
-     * The meta object literal for the '<em><b>Parameters Table</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Table</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference STEP_PARAMETERS__PARAMETERS_TABLE = eINSTANCE.getStepParameters_ParametersTable();
+    EReference STEP_PARAMETERS__TABLE = eINSTANCE.getStepParameters_Table();
 
     /**
-     * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.FeatureImpl <em>Feature</em>}' class.
+     * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.TestSuiteImpl <em>Test Suite</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.farhan.mbt.sheepDog.impl.FeatureImpl
-     * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getFeature()
+     * @see org.farhan.mbt.sheepDog.impl.TestSuiteImpl
+     * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getTestSuite()
      * @generated
      */
-    EClass FEATURE = eINSTANCE.getFeature();
+    EClass TEST_SUITE = eINSTANCE.getTestSuite();
 
     /**
-     * The meta object literal for the '<em><b>Abstract Scenarios</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Test Step Container List</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference FEATURE__ABSTRACT_SCENARIOS = eINSTANCE.getFeature_AbstractScenarios();
+    EReference TEST_SUITE__TEST_STEP_CONTAINER_LIST = eINSTANCE.getTestSuite_TestStepContainerList();
 
     /**
-     * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.AbstractScenarioImpl <em>Abstract Scenario</em>}' class.
+     * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.TestStepContainerImpl <em>Test Step Container</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.farhan.mbt.sheepDog.impl.AbstractScenarioImpl
-     * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getAbstractScenario()
+     * @see org.farhan.mbt.sheepDog.impl.TestStepContainerImpl
+     * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getTestStepContainer()
      * @generated
      */
-    EClass ABSTRACT_SCENARIO = eINSTANCE.getAbstractScenario();
+    EClass TEST_STEP_CONTAINER = eINSTANCE.getTestStepContainer();
 
     /**
-     * The meta object literal for the '<em><b>Tags</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Tag List</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ABSTRACT_SCENARIO__TAGS = eINSTANCE.getAbstractScenario_Tags();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ABSTRACT_SCENARIO__NAME = eINSTANCE.getAbstractScenario_Name();
-
-    /**
-     * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ABSTRACT_SCENARIO__STATEMENTS = eINSTANCE.getAbstractScenario_Statements();
-
-    /**
-     * The meta object literal for the '<em><b>Steps</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ABSTRACT_SCENARIO__STEPS = eINSTANCE.getAbstractScenario_Steps();
-
-    /**
-     * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.BackgroundImpl <em>Background</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.farhan.mbt.sheepDog.impl.BackgroundImpl
-     * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getBackground()
-     * @generated
-     */
-    EClass BACKGROUND = eINSTANCE.getBackground();
-
-    /**
-     * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.ScenarioImpl <em>Scenario</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.farhan.mbt.sheepDog.impl.ScenarioImpl
-     * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getScenario()
-     * @generated
-     */
-    EClass SCENARIO = eINSTANCE.getScenario();
-
-    /**
-     * The meta object literal for the '<em><b>Examples</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SCENARIO__EXAMPLES = eINSTANCE.getScenario_Examples();
-
-    /**
-     * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.ExamplesImpl <em>Examples</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.farhan.mbt.sheepDog.impl.ExamplesImpl
-     * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getExamples()
-     * @generated
-     */
-    EClass EXAMPLES = eINSTANCE.getExamples();
-
-    /**
-     * The meta object literal for the '<em><b>Tags</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference EXAMPLES__TAGS = eINSTANCE.getExamples_Tags();
+    EReference TEST_STEP_CONTAINER__TAG_LIST = eINSTANCE.getTestStepContainer_TagList();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1661,33 +1591,69 @@ public interface SheepDogPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EXAMPLES__NAME = eINSTANCE.getExamples_Name();
+    EAttribute TEST_STEP_CONTAINER__NAME = eINSTANCE.getTestStepContainer_Name();
 
     /**
-     * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Statement List</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EXAMPLES__STATEMENTS = eINSTANCE.getExamples_Statements();
+    EReference TEST_STEP_CONTAINER__STATEMENT_LIST = eINSTANCE.getTestStepContainer_StatementList();
 
     /**
-     * The meta object literal for the '<em><b>The Examples Table</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Test Step List</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EXAMPLES__THE_EXAMPLES_TABLE = eINSTANCE.getExamples_TheExamplesTable();
+    EReference TEST_STEP_CONTAINER__TEST_STEP_LIST = eINSTANCE.getTestStepContainer_TestStepList();
 
     /**
-     * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.StepImpl <em>Step</em>}' class.
+     * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.TestSetupImpl <em>Test Setup</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.farhan.mbt.sheepDog.impl.StepImpl
-     * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getStep()
+     * @see org.farhan.mbt.sheepDog.impl.TestSetupImpl
+     * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getTestSetup()
      * @generated
      */
-    EClass STEP = eINSTANCE.getStep();
+    EClass TEST_SETUP = eINSTANCE.getTestSetup();
+
+    /**
+     * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.TestCaseImpl <em>Test Case</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.farhan.mbt.sheepDog.impl.TestCaseImpl
+     * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getTestCase()
+     * @generated
+     */
+    EClass TEST_CASE = eINSTANCE.getTestCase();
+
+    /**
+     * The meta object literal for the '<em><b>Test Data List</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TEST_CASE__TEST_DATA_LIST = eINSTANCE.getTestCase_TestDataList();
+
+    /**
+     * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.TestDataImpl <em>Test Data</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.farhan.mbt.sheepDog.impl.TestDataImpl
+     * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getTestData()
+     * @generated
+     */
+    EClass TEST_DATA = eINSTANCE.getTestData();
+
+    /**
+     * The meta object literal for the '<em><b>Tag List</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TEST_DATA__TAG_LIST = eINSTANCE.getTestData_TagList();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1695,23 +1661,57 @@ public interface SheepDogPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute STEP__NAME = eINSTANCE.getStep_Name();
+    EAttribute TEST_DATA__NAME = eINSTANCE.getTestData_Name();
 
     /**
-     * The meta object literal for the '<em><b>The Step Table</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Statement List</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference STEP__THE_STEP_TABLE = eINSTANCE.getStep_TheStepTable();
+    EReference TEST_DATA__STATEMENT_LIST = eINSTANCE.getTestData_StatementList();
 
     /**
-     * The meta object literal for the '<em><b>The Doc String</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Table</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference STEP__THE_DOC_STRING = eINSTANCE.getStep_TheDocString();
+    EReference TEST_DATA__TABLE = eINSTANCE.getTestData_Table();
+
+    /**
+     * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.TestStepImpl <em>Test Step</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.farhan.mbt.sheepDog.impl.TestStepImpl
+     * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getTestStep()
+     * @generated
+     */
+    EClass TEST_STEP = eINSTANCE.getTestStep();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TEST_STEP__NAME = eINSTANCE.getTestStep_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Table</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TEST_STEP__TABLE = eINSTANCE.getTestStep_Table();
+
+    /**
+     * The meta object literal for the '<em><b>Text</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TEST_STEP__TEXT = eINSTANCE.getTestStep_Text();
 
     /**
      * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.GivenImpl <em>Given</em>}' class.
@@ -1754,14 +1754,14 @@ public interface SheepDogPackage extends EPackage
     EClass AND = eINSTANCE.getAnd();
 
     /**
-     * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.DocStringImpl <em>Doc String</em>}' class.
+     * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.TextImpl <em>Text</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.farhan.mbt.sheepDog.impl.DocStringImpl
-     * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getDocString()
+     * @see org.farhan.mbt.sheepDog.impl.TextImpl
+     * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getText()
      * @generated
      */
-    EClass DOC_STRING = eINSTANCE.getDocString();
+    EClass TEXT = eINSTANCE.getText();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1769,7 +1769,7 @@ public interface SheepDogPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute DOC_STRING__NAME = eINSTANCE.getDocString_Name();
+    EAttribute TEXT__NAME = eINSTANCE.getText_Name();
 
     /**
      * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.TableImpl <em>Table</em>}' class.
@@ -1782,12 +1782,12 @@ public interface SheepDogPackage extends EPackage
     EClass TABLE = eINSTANCE.getTable();
 
     /**
-     * The meta object literal for the '<em><b>Rows</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Row List</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference TABLE__ROWS = eINSTANCE.getTable_Rows();
+    EReference TABLE__ROW_LIST = eINSTANCE.getTable_RowList();
 
     /**
      * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.RowImpl <em>Row</em>}' class.
@@ -1800,22 +1800,22 @@ public interface SheepDogPackage extends EPackage
     EClass ROW = eINSTANCE.getRow();
 
     /**
-     * The meta object literal for the '<em><b>Cells</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Cell List</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ROW__CELLS = eINSTANCE.getRow_Cells();
+    EReference ROW__CELL_LIST = eINSTANCE.getRow_CellList();
 
     /**
-     * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.AbstractScenarioTagsImpl <em>Abstract Scenario Tags</em>}' class.
+     * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.TagsImpl <em>Tags</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.farhan.mbt.sheepDog.impl.AbstractScenarioTagsImpl
-     * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getAbstractScenarioTags()
+     * @see org.farhan.mbt.sheepDog.impl.TagsImpl
+     * @see org.farhan.mbt.sheepDog.impl.SheepDogPackageImpl#getTags()
      * @generated
      */
-    EClass ABSTRACT_SCENARIO_TAGS = eINSTANCE.getAbstractScenarioTags();
+    EClass TAGS = eINSTANCE.getTags();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1823,7 +1823,7 @@ public interface SheepDogPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ABSTRACT_SCENARIO_TAGS__NAME = eINSTANCE.getAbstractScenarioTags_Name();
+    EAttribute TAGS__NAME = eINSTANCE.getTags_Name();
 
     /**
      * The meta object literal for the '{@link org.farhan.mbt.sheepDog.impl.CellImpl <em>Cell</em>}' class.

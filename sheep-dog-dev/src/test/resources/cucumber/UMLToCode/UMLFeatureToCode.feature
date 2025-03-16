@@ -5,7 +5,7 @@ Feature: UML Feature To Code
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
@@ -18,12 +18,12 @@ Feature: UML Feature To Code
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           Desc line 1
           
           [tags="tag1"]
-          == Background: Story One
+          == Test-Setup: Story One
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
@@ -36,13 +36,13 @@ Feature: UML Feature To Code
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           Desc line 1
           Desc line 2
           
           [tags="tag1,tag2"]
-          == Background: Story One
+          == Test-Setup: Story One
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed
@@ -55,14 +55,14 @@ Feature: UML Feature To Code
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           Desc line 1
           Desc line 2
           Desc line 3
           
           [tags="tag1,tag2,tag3"]
-          == Background: Story One
+          == Test-Setup: Story One
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-cucumber goal is executed

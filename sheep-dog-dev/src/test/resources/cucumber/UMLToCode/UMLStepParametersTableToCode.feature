@@ -5,9 +5,9 @@ Feature: UML Step Parameters Table To Code
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
-          == Scenario: Submit
+          == Test-Case: Submit
           
           === Given: The blah application, Object page Top section will be created as follows
           
@@ -18,23 +18,23 @@ Feature: UML Step Parameters Table To Code
           """
       And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
-          = Object: Object page
+          = Step-Object: Object page
           
-          == Definition: Top section will be created as follows
+          == Step-Definition: Top section will be created as follows
           
-          === Parameters: 1
+          === Step-Parameters: 1
           
           |===
           | h1
           |===
           
-          === Parameters: 2
+          === Step-Parameters: 2
           
           |===
           | h1 | h2
           |===
           
-          === Parameters: 3
+          === Step-Parameters: 3
           
           |===
           | h1 | h2 | h3

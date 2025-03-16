@@ -1,40 +1,40 @@
-= Object: src-gen-step-defs/daily batchjob/Input file.feature file
+= Step-Object: src-gen-step-defs/daily batchjob/Input file.feature file
 
-== Definition: is created as follows
+== Step-Definition: is created as follows
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | Object Name | Object Description
 |===
 
-=== Parameters: 2
+=== Step-Parameters: 2
 
 |===
 | Object Name | Step Definition Name
 |===
 
-=== Parameters: 3
+=== Step-Parameters: 3
 
 |===
 | Object Name | Step Definition Name | Parameters
 |===
 
-=== Parameters: 4
+=== Step-Parameters: 4
 
 |===
 | Object Name | Step Definition Name | Step Definition Description
 |===
 
-== Definition: will be created as follows
+== Step-Definition: will be created as follows
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | Object Name | Step Definition Name
 |===
 
-=== Parameters: 2
+=== Step-Parameters: 2
 
 |===
 | Object Name | Step Definition Name | Parameters

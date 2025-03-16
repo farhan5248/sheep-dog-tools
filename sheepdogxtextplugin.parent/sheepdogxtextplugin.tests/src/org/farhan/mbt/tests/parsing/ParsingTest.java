@@ -5,7 +5,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.farhan.mbt.sheepDog.Feature;
+import org.farhan.mbt.sheepDog.TestSuite;
 import org.farhan.mbt.sheepDog.StepObject;
 import org.junit.jupiter.api.Assertions;
 
@@ -14,7 +14,7 @@ import com.google.inject.Inject;
 public class ParsingTest {
 
 	@Inject
-	protected ParseHelper<Feature> parseFeatureHelper;
+	protected ParseHelper<TestSuite> parseFeatureHelper;
 
 	@Inject
 	protected ParseHelper<StepObject> parseStepObjectHelper;
@@ -44,7 +44,7 @@ public class ParsingTest {
 	}
 
 	protected void assertNoFeatureErrors(StringBuilder sb) {
-		Feature result;
+		TestSuite result;
 		try {
 			result = parseFeatureHelper.parse(sb.toString());
 		} catch (Exception e) {
@@ -56,7 +56,7 @@ public class ParsingTest {
 	}
 
 	protected void assertFeatureErrors(StringBuilder sb) {
-		Feature result;
+		TestSuite result;
 		try {
 			result = parseFeatureHelper.parse(sb.toString());
 		} catch (Exception e) {

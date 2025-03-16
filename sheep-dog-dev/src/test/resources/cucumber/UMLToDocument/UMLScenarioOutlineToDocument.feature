@@ -5,9 +5,9 @@ Feature: UML Scenario Outline To Document
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
-          == Scenario: Submit
+          == Test-Case: Submit
           
           === Given: The blah application, Object page is created as follows
           
@@ -16,7 +16,7 @@ Feature: UML Scenario Outline To Document
           | {h3}
           |===
           
-          === Examples: Examples 1
+          === Test-Data: Examples 1
           
           |===
           | h3
@@ -39,10 +39,10 @@ Feature: UML Scenario Outline To Document
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           [tags="tag1"]
-          == Scenario: Submit
+          == Test-Case: Submit
           
           Desc line 1
           
@@ -53,7 +53,7 @@ Feature: UML Scenario Outline To Document
           | {h3}
           |===
           
-          === Examples: Examples 1
+          === Test-Data: Examples 1
           
           |===
           | h3
@@ -72,10 +72,10 @@ Feature: UML Scenario Outline To Document
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           [tags="tag1,tag2"]
-          == Scenario: Submit
+          == Test-Case: Submit
           
           Desc line 1
           Desc line 2
@@ -94,14 +94,14 @@ Feature: UML Scenario Outline To Document
           | {h3}
           |===
           
-          === Examples: Examples 1
+          === Test-Data: Examples 1
           
           |===
           | h3
           | v31
           |===
           
-          === Examples: Examples 2
+          === Test-Data: Examples 2
           
           |===
           | h3
@@ -130,10 +130,10 @@ Feature: UML Scenario Outline To Document
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
           [tags="tag1,tag2,tag3"]
-          == Scenario: Submit
+          == Test-Case: Submit
           
           Desc line 1
           Desc line 2
@@ -160,21 +160,21 @@ Feature: UML Scenario Outline To Document
           | {h3}
           |===
           
-          === Examples: Examples 1
+          === Test-Data: Examples 1
           
           |===
           | h3
           | v31
           |===
           
-          === Examples: Examples 2
+          === Test-Data: Examples 2
           
           |===
           | h3
           | v32
           |===
           
-          === Examples: Examples 3
+          === Test-Data: Examples 3
           
           |===
           | h3

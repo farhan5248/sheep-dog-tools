@@ -19,39 +19,39 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.farhan.mbt.sheepDog.AbstractScenario;
-import org.farhan.mbt.sheepDog.AbstractScenarioTags;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
 import org.farhan.mbt.sheepDog.Statement;
-import org.farhan.mbt.sheepDog.Step;
+import org.farhan.mbt.sheepDog.Tags;
+import org.farhan.mbt.sheepDog.TestStep;
+import org.farhan.mbt.sheepDog.TestStepContainer;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Abstract Scenario</b></em>'.
+ * An implementation of the model object '<em><b>Test Step Container</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.AbstractScenarioImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.AbstractScenarioImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.AbstractScenarioImpl#getStatements <em>Statements</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.AbstractScenarioImpl#getSteps <em>Steps</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.TestStepContainerImpl#getTagList <em>Tag List</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.TestStepContainerImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.TestStepContainerImpl#getStatementList <em>Statement List</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.TestStepContainerImpl#getTestStepList <em>Test Step List</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implements AbstractScenario
+public class TestStepContainerImpl extends MinimalEObjectImpl.Container implements TestStepContainer
 {
   /**
-   * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference.
+   * The cached value of the '{@link #getTagList() <em>Tag List</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTags()
+   * @see #getTagList()
    * @generated
    * @ordered
    */
-  protected AbstractScenarioTags tags;
+  protected Tags tagList;
 
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -74,31 +74,31 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
+   * The cached value of the '{@link #getStatementList() <em>Statement List</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStatements()
+   * @see #getStatementList()
    * @generated
    * @ordered
    */
-  protected EList<Statement> statements;
+  protected EList<Statement> statementList;
 
   /**
-   * The cached value of the '{@link #getSteps() <em>Steps</em>}' containment reference list.
+   * The cached value of the '{@link #getTestStepList() <em>Test Step List</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getSteps()
+   * @see #getTestStepList()
    * @generated
    * @ordered
    */
-  protected EList<Step> steps;
+  protected EList<TestStep> testStepList;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected AbstractScenarioImpl()
+  protected TestStepContainerImpl()
   {
     super();
   }
@@ -111,7 +111,7 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
   @Override
   protected EClass eStaticClass()
   {
-    return SheepDogPackage.Literals.ABSTRACT_SCENARIO;
+    return SheepDogPackage.Literals.TEST_STEP_CONTAINER;
   }
 
   /**
@@ -120,9 +120,9 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
    * @generated
    */
   @Override
-  public AbstractScenarioTags getTags()
+  public Tags getTagList()
   {
-    return tags;
+    return tagList;
   }
 
   /**
@@ -130,13 +130,13 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTags(AbstractScenarioTags newTags, NotificationChain msgs)
+  public NotificationChain basicSetTagList(Tags newTagList, NotificationChain msgs)
   {
-    AbstractScenarioTags oldTags = tags;
-    tags = newTags;
+    Tags oldTagList = tagList;
+    tagList = newTagList;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.ABSTRACT_SCENARIO__TAGS, oldTags, newTags);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_STEP_CONTAINER__TAG_LIST, oldTagList, newTagList);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -148,20 +148,20 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
    * @generated
    */
   @Override
-  public void setTags(AbstractScenarioTags newTags)
+  public void setTagList(Tags newTagList)
   {
-    if (newTags != tags)
+    if (newTagList != tagList)
     {
       NotificationChain msgs = null;
-      if (tags != null)
-        msgs = ((InternalEObject)tags).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.ABSTRACT_SCENARIO__TAGS, null, msgs);
-      if (newTags != null)
-        msgs = ((InternalEObject)newTags).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.ABSTRACT_SCENARIO__TAGS, null, msgs);
-      msgs = basicSetTags(newTags, msgs);
+      if (tagList != null)
+        msgs = ((InternalEObject)tagList).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.TEST_STEP_CONTAINER__TAG_LIST, null, msgs);
+      if (newTagList != null)
+        msgs = ((InternalEObject)newTagList).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.TEST_STEP_CONTAINER__TAG_LIST, null, msgs);
+      msgs = basicSetTagList(newTagList, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.ABSTRACT_SCENARIO__TAGS, newTags, newTags));
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_STEP_CONTAINER__TAG_LIST, newTagList, newTagList));
   }
 
   /**
@@ -186,7 +186,7 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.ABSTRACT_SCENARIO__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_STEP_CONTAINER__NAME, oldName, name));
   }
 
   /**
@@ -195,13 +195,13 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
    * @generated
    */
   @Override
-  public EList<Statement> getStatements()
+  public EList<Statement> getStatementList()
   {
-    if (statements == null)
+    if (statementList == null)
     {
-      statements = new EObjectContainmentEList<Statement>(Statement.class, this, SheepDogPackage.ABSTRACT_SCENARIO__STATEMENTS);
+      statementList = new EObjectContainmentEList<Statement>(Statement.class, this, SheepDogPackage.TEST_STEP_CONTAINER__STATEMENT_LIST);
     }
-    return statements;
+    return statementList;
   }
 
   /**
@@ -210,13 +210,13 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
    * @generated
    */
   @Override
-  public EList<Step> getSteps()
+  public EList<TestStep> getTestStepList()
   {
-    if (steps == null)
+    if (testStepList == null)
     {
-      steps = new EObjectContainmentEList<Step>(Step.class, this, SheepDogPackage.ABSTRACT_SCENARIO__STEPS);
+      testStepList = new EObjectContainmentEList<TestStep>(TestStep.class, this, SheepDogPackage.TEST_STEP_CONTAINER__TEST_STEP_LIST);
     }
-    return steps;
+    return testStepList;
   }
 
   /**
@@ -229,12 +229,12 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case SheepDogPackage.ABSTRACT_SCENARIO__TAGS:
-        return basicSetTags(null, msgs);
-      case SheepDogPackage.ABSTRACT_SCENARIO__STATEMENTS:
-        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
-      case SheepDogPackage.ABSTRACT_SCENARIO__STEPS:
-        return ((InternalEList<?>)getSteps()).basicRemove(otherEnd, msgs);
+      case SheepDogPackage.TEST_STEP_CONTAINER__TAG_LIST:
+        return basicSetTagList(null, msgs);
+      case SheepDogPackage.TEST_STEP_CONTAINER__STATEMENT_LIST:
+        return ((InternalEList<?>)getStatementList()).basicRemove(otherEnd, msgs);
+      case SheepDogPackage.TEST_STEP_CONTAINER__TEST_STEP_LIST:
+        return ((InternalEList<?>)getTestStepList()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -249,14 +249,14 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case SheepDogPackage.ABSTRACT_SCENARIO__TAGS:
-        return getTags();
-      case SheepDogPackage.ABSTRACT_SCENARIO__NAME:
+      case SheepDogPackage.TEST_STEP_CONTAINER__TAG_LIST:
+        return getTagList();
+      case SheepDogPackage.TEST_STEP_CONTAINER__NAME:
         return getName();
-      case SheepDogPackage.ABSTRACT_SCENARIO__STATEMENTS:
-        return getStatements();
-      case SheepDogPackage.ABSTRACT_SCENARIO__STEPS:
-        return getSteps();
+      case SheepDogPackage.TEST_STEP_CONTAINER__STATEMENT_LIST:
+        return getStatementList();
+      case SheepDogPackage.TEST_STEP_CONTAINER__TEST_STEP_LIST:
+        return getTestStepList();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -272,19 +272,19 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case SheepDogPackage.ABSTRACT_SCENARIO__TAGS:
-        setTags((AbstractScenarioTags)newValue);
+      case SheepDogPackage.TEST_STEP_CONTAINER__TAG_LIST:
+        setTagList((Tags)newValue);
         return;
-      case SheepDogPackage.ABSTRACT_SCENARIO__NAME:
+      case SheepDogPackage.TEST_STEP_CONTAINER__NAME:
         setName((String)newValue);
         return;
-      case SheepDogPackage.ABSTRACT_SCENARIO__STATEMENTS:
-        getStatements().clear();
-        getStatements().addAll((Collection<? extends Statement>)newValue);
+      case SheepDogPackage.TEST_STEP_CONTAINER__STATEMENT_LIST:
+        getStatementList().clear();
+        getStatementList().addAll((Collection<? extends Statement>)newValue);
         return;
-      case SheepDogPackage.ABSTRACT_SCENARIO__STEPS:
-        getSteps().clear();
-        getSteps().addAll((Collection<? extends Step>)newValue);
+      case SheepDogPackage.TEST_STEP_CONTAINER__TEST_STEP_LIST:
+        getTestStepList().clear();
+        getTestStepList().addAll((Collection<? extends TestStep>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -300,17 +300,17 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case SheepDogPackage.ABSTRACT_SCENARIO__TAGS:
-        setTags((AbstractScenarioTags)null);
+      case SheepDogPackage.TEST_STEP_CONTAINER__TAG_LIST:
+        setTagList((Tags)null);
         return;
-      case SheepDogPackage.ABSTRACT_SCENARIO__NAME:
+      case SheepDogPackage.TEST_STEP_CONTAINER__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case SheepDogPackage.ABSTRACT_SCENARIO__STATEMENTS:
-        getStatements().clear();
+      case SheepDogPackage.TEST_STEP_CONTAINER__STATEMENT_LIST:
+        getStatementList().clear();
         return;
-      case SheepDogPackage.ABSTRACT_SCENARIO__STEPS:
-        getSteps().clear();
+      case SheepDogPackage.TEST_STEP_CONTAINER__TEST_STEP_LIST:
+        getTestStepList().clear();
         return;
     }
     super.eUnset(featureID);
@@ -326,14 +326,14 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
   {
     switch (featureID)
     {
-      case SheepDogPackage.ABSTRACT_SCENARIO__TAGS:
-        return tags != null;
-      case SheepDogPackage.ABSTRACT_SCENARIO__NAME:
+      case SheepDogPackage.TEST_STEP_CONTAINER__TAG_LIST:
+        return tagList != null;
+      case SheepDogPackage.TEST_STEP_CONTAINER__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case SheepDogPackage.ABSTRACT_SCENARIO__STATEMENTS:
-        return statements != null && !statements.isEmpty();
-      case SheepDogPackage.ABSTRACT_SCENARIO__STEPS:
-        return steps != null && !steps.isEmpty();
+      case SheepDogPackage.TEST_STEP_CONTAINER__STATEMENT_LIST:
+        return statementList != null && !statementList.isEmpty();
+      case SheepDogPackage.TEST_STEP_CONTAINER__TEST_STEP_LIST:
+        return testStepList != null && !testStepList.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -355,4 +355,4 @@ public class AbstractScenarioImpl extends MinimalEObjectImpl.Container implement
     return result.toString();
   }
 
-} //AbstractScenarioImpl
+} //TestStepContainerImpl

@@ -1,14 +1,14 @@
-= Feature: Document Background To UML
+= Test-Suite: Document Background To UML
 
-== Scenario: One tag, one statement, one step
+== Test-Case: One tag, one statement, one step
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
 [tags="tag1"]
-== Background: Setup
+== Test-Setup: Setup
 
 Desc line 1
 
@@ -33,15 +33,15 @@ Desc line 1
 | specs::Process::Setup | Desc line 1
 |===
 
-== Scenario: Two tags, two statements, two steps
+== Test-Case: Two tags, two statements, two steps
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
 [tags="tag1,tag2"]
-== Background: Setup
+== Test-Setup: Setup
 
 Desc line 1
 Desc line 2
@@ -78,15 +78,15 @@ Desc line 2
 | specs::Process::Setup | The blah application, Object2 page is empty
 |===
 
-== Scenario: Three tags, three statements, three steps
+== Test-Case: Three tags, three statements, three steps
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
 [tags="tag1,tag2,tag3"]
-== Background: Setup
+== Test-Setup: Setup
 
 Desc line 1
 Desc line 2
@@ -128,18 +128,18 @@ Desc line 3
 | specs::Process::Setup | The blah application, Object3 page is empty
 |===
 
-== Scenario: No tags, no statements, one step
+== Test-Case: No tags, no statements, one step
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Background: Setup
+== Test-Setup: Setup
 
 === Given: The Object0 page is valid
 
-== Scenario: Submit
+== Test-Case: Submit
 
 === Given: The Object page is valid
 ----
@@ -156,22 +156,22 @@ Desc line 3
 | specs::Process::Submit | The Object page is valid 
 |===
 
-== Scenario: No statement, one step, two scenarios
+== Test-Case: No statement, one step, two scenarios
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Background: Setup
+== Test-Setup: Setup
 
 === Given: The Object0 page is valid
 
-== Scenario: Submit 1
+== Test-Case: Submit 1
 
 === Given: The Object page is valid
 
-== Scenario: Submit 2
+== Test-Case: Submit 2
 
 === Given: The Object2 page is valid
 ----
@@ -189,26 +189,26 @@ Desc line 3
 | specs::Process::Submit 2 | The Object2 page is valid
 |===
 
-== Scenario: No statement, one step, three scenarios
+== Test-Case: No statement, one step, three scenarios
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Background: Setup
+== Test-Setup: Setup
 
 === Given: The Object0 page is valid
 
-== Scenario: Submit 1
+== Test-Case: Submit 1
 
 === Given: The Object page is valid
 
-== Scenario: Submit 2
+== Test-Case: Submit 2
 
 === Given: The Object2 page is valid
 
-== Scenario: Submit 3
+== Test-Case: Submit 3
 
 === Given: The Object3 page is valid
 ----
@@ -227,19 +227,19 @@ Desc line 3
 | specs::Process::Submit 3 | The Object3 page is valid
 |===
 
-== Scenario: No statement, two steps, one scenario
+== Test-Case: No statement, two steps, one scenario
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Background: Setup
+== Test-Setup: Setup
 
 === Given: The Object page is valid
 === Given: The Object2 page is valid
 
-== Scenario: Submit
+== Test-Case: Submit
 
 === Given: The Object page is valid
 ----
@@ -257,20 +257,20 @@ Desc line 3
 | specs::Process::Submit | The Object page is valid 
 |===
 
-== Scenario: No statement, three steps, one scenario
+== Test-Case: No statement, three steps, one scenario
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Background: Setup
+== Test-Setup: Setup
 
 === Given: The Object page is valid
 === Given: The Object2 page is valid
 === Given: The Object3 page is valid
 
-== Scenario: Submit
+== Test-Case: Submit
 
 === Given: The Object page is valid
 ----
@@ -289,22 +289,22 @@ Desc line 3
 | specs::Process::Submit | The Object page is valid 
 |===
 
-== Scenario: Selected tags
+== Test-Case: Selected tags
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 [tags="tag1"]
-== Background: Data Setup
+== Test-Setup: Data Setup
 ----
 
 === And: The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 [tags="tag2"]
-== Background: Data Setup
+== Test-Setup: Data Setup
 ----
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed with

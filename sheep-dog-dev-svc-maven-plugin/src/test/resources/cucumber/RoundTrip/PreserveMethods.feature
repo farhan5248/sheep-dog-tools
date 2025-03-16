@@ -5,17 +5,17 @@ Feature: Preserve Methods
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
-          == Scenario: Submit
+          == Test-Case: Submit
           
           === Given: The blah application, Object page is empty
           """
       And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
-          = Object: Object page
+          = Step-Object: Object page
           
-          == Definition: is empty
+          == Step-Definition: is empty
           """
       And The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 

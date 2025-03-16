@@ -7,7 +7,7 @@ import org.farhan.mbt.services.SheepDogGrammarAccess;
 import org.farhan.mbt.services.SheepDogGrammarAccess.ThenElements;
 import org.farhan.mbt.sheepDog.Then;
 
-public class ThenFormatter extends StepFormatter {
+public class ThenFormatter extends TestStepFormatter {
 
 	public ThenFormatter(Then theStep) {
 		super(theStep);

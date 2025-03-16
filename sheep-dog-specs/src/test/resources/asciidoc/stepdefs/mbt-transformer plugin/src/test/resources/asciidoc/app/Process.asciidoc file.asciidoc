@@ -1,16 +1,16 @@
-= Object: src/test/resources/asciidoc/app/Process.asciidoc file
+= Step-Object: src/test/resources/asciidoc/app/Process.asciidoc file
 
-== Definition: is created as follows
+== Step-Definition: is created as follows
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | Content
 |===
 
-== Definition: will be created as follows
+== Step-Definition: will be created as follows
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | Content

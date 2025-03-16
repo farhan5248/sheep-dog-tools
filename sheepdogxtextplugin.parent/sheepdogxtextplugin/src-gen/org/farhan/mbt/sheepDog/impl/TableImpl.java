@@ -29,7 +29,7 @@ import org.farhan.mbt.sheepDog.Table;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.TableImpl#getRows <em>Rows</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.TableImpl#getRowList <em>Row List</em>}</li>
  * </ul>
  *
  * @generated
@@ -37,14 +37,14 @@ import org.farhan.mbt.sheepDog.Table;
 public class TableImpl extends MinimalEObjectImpl.Container implements Table
 {
   /**
-   * The cached value of the '{@link #getRows() <em>Rows</em>}' containment reference list.
+   * The cached value of the '{@link #getRowList() <em>Row List</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getRows()
+   * @see #getRowList()
    * @generated
    * @ordered
    */
-  protected EList<Row> rows;
+  protected EList<Row> rowList;
 
   /**
    * <!-- begin-user-doc -->
@@ -73,13 +73,13 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table
    * @generated
    */
   @Override
-  public EList<Row> getRows()
+  public EList<Row> getRowList()
   {
-    if (rows == null)
+    if (rowList == null)
     {
-      rows = new EObjectContainmentEList<Row>(Row.class, this, SheepDogPackage.TABLE__ROWS);
+      rowList = new EObjectContainmentEList<Row>(Row.class, this, SheepDogPackage.TABLE__ROW_LIST);
     }
-    return rows;
+    return rowList;
   }
 
   /**
@@ -92,8 +92,8 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table
   {
     switch (featureID)
     {
-      case SheepDogPackage.TABLE__ROWS:
-        return ((InternalEList<?>)getRows()).basicRemove(otherEnd, msgs);
+      case SheepDogPackage.TABLE__ROW_LIST:
+        return ((InternalEList<?>)getRowList()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -108,8 +108,8 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table
   {
     switch (featureID)
     {
-      case SheepDogPackage.TABLE__ROWS:
-        return getRows();
+      case SheepDogPackage.TABLE__ROW_LIST:
+        return getRowList();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -125,9 +125,9 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table
   {
     switch (featureID)
     {
-      case SheepDogPackage.TABLE__ROWS:
-        getRows().clear();
-        getRows().addAll((Collection<? extends Row>)newValue);
+      case SheepDogPackage.TABLE__ROW_LIST:
+        getRowList().clear();
+        getRowList().addAll((Collection<? extends Row>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,8 +143,8 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table
   {
     switch (featureID)
     {
-      case SheepDogPackage.TABLE__ROWS:
-        getRows().clear();
+      case SheepDogPackage.TABLE__ROW_LIST:
+        getRowList().clear();
         return;
     }
     super.eUnset(featureID);
@@ -160,8 +160,8 @@ public class TableImpl extends MinimalEObjectImpl.Container implements Table
   {
     switch (featureID)
     {
-      case SheepDogPackage.TABLE__ROWS:
-        return rows != null && !rows.isEmpty();
+      case SheepDogPackage.TABLE__ROW_LIST:
+        return rowList != null && !rowList.isEmpty();
     }
     return super.eIsSet(featureID);
   }

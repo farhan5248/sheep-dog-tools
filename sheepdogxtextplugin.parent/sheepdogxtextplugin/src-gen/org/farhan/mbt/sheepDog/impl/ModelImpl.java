@@ -32,7 +32,7 @@ import org.farhan.mbt.sheepDog.Statement;
  * </p>
  * <ul>
  *   <li>{@link org.farhan.mbt.sheepDog.impl.ModelImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.ModelImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.ModelImpl#getStatementList <em>Statement List</em>}</li>
  * </ul>
  *
  * @generated
@@ -60,14 +60,14 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
+   * The cached value of the '{@link #getStatementList() <em>Statement List</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStatements()
+   * @see #getStatementList()
    * @generated
    * @ordered
    */
-  protected EList<Statement> statements;
+  protected EList<Statement> statementList;
 
   /**
    * <!-- begin-user-doc -->
@@ -121,13 +121,13 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @generated
    */
   @Override
-  public EList<Statement> getStatements()
+  public EList<Statement> getStatementList()
   {
-    if (statements == null)
+    if (statementList == null)
     {
-      statements = new EObjectContainmentEList<Statement>(Statement.class, this, SheepDogPackage.MODEL__STATEMENTS);
+      statementList = new EObjectContainmentEList<Statement>(Statement.class, this, SheepDogPackage.MODEL__STATEMENT_LIST);
     }
-    return statements;
+    return statementList;
   }
 
   /**
@@ -140,8 +140,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case SheepDogPackage.MODEL__STATEMENTS:
-        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
+      case SheepDogPackage.MODEL__STATEMENT_LIST:
+        return ((InternalEList<?>)getStatementList()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -158,8 +158,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case SheepDogPackage.MODEL__NAME:
         return getName();
-      case SheepDogPackage.MODEL__STATEMENTS:
-        return getStatements();
+      case SheepDogPackage.MODEL__STATEMENT_LIST:
+        return getStatementList();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -178,9 +178,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case SheepDogPackage.MODEL__NAME:
         setName((String)newValue);
         return;
-      case SheepDogPackage.MODEL__STATEMENTS:
-        getStatements().clear();
-        getStatements().addAll((Collection<? extends Statement>)newValue);
+      case SheepDogPackage.MODEL__STATEMENT_LIST:
+        getStatementList().clear();
+        getStatementList().addAll((Collection<? extends Statement>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -199,8 +199,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case SheepDogPackage.MODEL__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case SheepDogPackage.MODEL__STATEMENTS:
-        getStatements().clear();
+      case SheepDogPackage.MODEL__STATEMENT_LIST:
+        getStatementList().clear();
         return;
     }
     super.eUnset(featureID);
@@ -218,8 +218,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case SheepDogPackage.MODEL__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case SheepDogPackage.MODEL__STATEMENTS:
-        return statements != null && !statements.isEmpty();
+      case SheepDogPackage.MODEL__STATEMENT_LIST:
+        return statementList != null && !statementList.isEmpty();
     }
     return super.eIsSet(featureID);
   }

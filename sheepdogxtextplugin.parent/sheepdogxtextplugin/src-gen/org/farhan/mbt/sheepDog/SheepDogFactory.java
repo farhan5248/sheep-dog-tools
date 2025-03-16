@@ -60,58 +60,58 @@ public interface SheepDogFactory extends EFactory
   StepParameters createStepParameters();
 
   /**
-   * Returns a new object of class '<em>Feature</em>'.
+   * Returns a new object of class '<em>Test Suite</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Feature</em>'.
+   * @return a new object of class '<em>Test Suite</em>'.
    * @generated
    */
-  Feature createFeature();
+  TestSuite createTestSuite();
 
   /**
-   * Returns a new object of class '<em>Abstract Scenario</em>'.
+   * Returns a new object of class '<em>Test Step Container</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Abstract Scenario</em>'.
+   * @return a new object of class '<em>Test Step Container</em>'.
    * @generated
    */
-  AbstractScenario createAbstractScenario();
+  TestStepContainer createTestStepContainer();
 
   /**
-   * Returns a new object of class '<em>Background</em>'.
+   * Returns a new object of class '<em>Test Setup</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Background</em>'.
+   * @return a new object of class '<em>Test Setup</em>'.
    * @generated
    */
-  Background createBackground();
+  TestSetup createTestSetup();
 
   /**
-   * Returns a new object of class '<em>Scenario</em>'.
+   * Returns a new object of class '<em>Test Case</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Scenario</em>'.
+   * @return a new object of class '<em>Test Case</em>'.
    * @generated
    */
-  Scenario createScenario();
+  TestCase createTestCase();
 
   /**
-   * Returns a new object of class '<em>Examples</em>'.
+   * Returns a new object of class '<em>Test Data</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Examples</em>'.
+   * @return a new object of class '<em>Test Data</em>'.
    * @generated
    */
-  Examples createExamples();
+  TestData createTestData();
 
   /**
-   * Returns a new object of class '<em>Step</em>'.
+   * Returns a new object of class '<em>Test Step</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Step</em>'.
+   * @return a new object of class '<em>Test Step</em>'.
    * @generated
    */
-  Step createStep();
+  TestStep createTestStep();
 
   /**
    * Returns a new object of class '<em>Given</em>'.
@@ -150,13 +150,13 @@ public interface SheepDogFactory extends EFactory
   And createAnd();
 
   /**
-   * Returns a new object of class '<em>Doc String</em>'.
+   * Returns a new object of class '<em>Text</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Doc String</em>'.
+   * @return a new object of class '<em>Text</em>'.
    * @generated
    */
-  DocString createDocString();
+  Text createText();
 
   /**
    * Returns a new object of class '<em>Table</em>'.
@@ -177,13 +177,13 @@ public interface SheepDogFactory extends EFactory
   Row createRow();
 
   /**
-   * Returns a new object of class '<em>Abstract Scenario Tags</em>'.
+   * Returns a new object of class '<em>Tags</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Abstract Scenario Tags</em>'.
+   * @return a new object of class '<em>Tags</em>'.
    * @generated
    */
-  AbstractScenarioTags createAbstractScenarioTags();
+  Tags createTags();
 
   /**
    * Returns a new object of class '<em>Cell</em>'.

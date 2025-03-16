@@ -1,22 +1,22 @@
-= Object: src/test/resources/cucumber/Process.feature file
+= Step-Object: src/test/resources/cucumber/Process.feature file
 
-== Definition: background steps snippet is created as follows
+== Step-Definition: background steps snippet is created as follows
 
-=== Parameters: 1
-
-|===
-| Step Name
-|===
-
-== Definition: steps snippet is created as follows
-
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | Step Name
 |===
 
-=== Parameters: 2
+== Step-Definition: steps snippet is created as follows
+
+=== Step-Parameters: 1
+
+|===
+| Step Name
+|===
+
+=== Step-Parameters: 2
 
 |===
 | Step Name | Headers

@@ -13,10 +13,10 @@ import org.farhan.mbt.core.UMLTestSuite;
 import org.farhan.mbt.core.UMLTestProject;
 import org.farhan.mbt.core.UMLTestSetup;
 import org.farhan.mbt.core.UMLTestStep;
-import org.farhan.mbt.sheepDog.Background;
-import org.farhan.mbt.sheepDog.Examples;
-import org.farhan.mbt.sheepDog.Scenario;
-import org.farhan.mbt.sheepDog.Step;
+import org.farhan.mbt.sheepDog.TestSetup;
+import org.farhan.mbt.sheepDog.TestData;
+import org.farhan.mbt.sheepDog.TestCase;
+import org.farhan.mbt.sheepDog.TestStep;
 import org.farhan.mbt.sheepDog.StepDefinition;
 import org.farhan.mbt.sheepDog.StepParameters;
 
@@ -69,7 +69,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		tgtObjStepObject.addStepParametersTable(stepParameters, srcStepParameters.getTable());
 	}
 
-	private void convertTestCase(Scenario scenario, UMLTestCase srcTestCase) {
+	private void convertTestCase(TestCase scenario, UMLTestCase srcTestCase) {
 		log.debug("test case: " + srcTestCase.getName());
 		tgtObjTestSuite.setScenarioTags(scenario, srcTestCase.getTags());
 		tgtObjTestSuite.setScenarioDescription(scenario, srcTestCase.getDescription());
@@ -81,7 +81,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		}
 	}
 
-	private void convertTestData(Examples examples, UMLTestData srcTestData) {
+	private void convertTestData(TestData examples, UMLTestData srcTestData) {
 		log.debug("test data: " + srcTestData.getName());
 		// TODO add examples description
 		tgtObjTestSuite.setExamplesTable(examples, srcTestData.getTable());
@@ -90,7 +90,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		}
 	}
 
-	private void convertTestSetup(Background background, UMLTestSetup srcTestSetup) {
+	private void convertTestSetup(TestSetup background, UMLTestSetup srcTestSetup) {
 		log.debug("test setup: " + srcTestSetup.getName());
 		tgtObjTestSuite.setBackgroundTags(background, srcTestSetup.getTags());
 		tgtObjTestSuite.setBackgroundDescription(background, srcTestSetup.getDescription());
@@ -99,7 +99,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 		}
 	}
 
-	private void convertTestStep(Step step, UMLTestStep srcStep) {
+	private void convertTestStep(TestStep step, UMLTestStep srcStep) {
 		log.debug("test step: " + srcStep.getName());
 		if (srcStep.hasDocString()) {
 			tgtObjTestSuite.setDocString(step, srcStep.getStepText());

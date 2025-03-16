@@ -17,7 +17,7 @@ import org.farhan.mbt.LanguageAccessImpl;
 import org.farhan.mbt.sheepDog.And;
 import org.farhan.mbt.sheepDog.Given;
 import org.farhan.mbt.sheepDog.Row;
-import org.farhan.mbt.sheepDog.Step;
+import org.farhan.mbt.sheepDog.TestStep;
 import org.farhan.mbt.sheepDog.Table;
 import org.farhan.mbt.sheepDog.Then;
 import org.farhan.mbt.sheepDog.When;
@@ -29,28 +29,28 @@ import org.farhan.mbt.sheepDog.When;
  */
 public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 
-	public void completeGiven_TheStepTable(Given step, Assignment assignment, ContentAssistContext context,
+	public void completeGiven_Table(Given step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeGiven_TheStepTable(step, assignment, context, acceptor);
-		completeTheStepTable(step, assignment, context, acceptor);
+		super.completeGiven_Table(step, assignment, context, acceptor);
+		completeTable(step, assignment, context, acceptor);
 	}
 
-	public void completeWhen_TheStepTable(When step, Assignment assignment, ContentAssistContext context,
+	public void completeWhen_Table(When step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeWhen_TheStepTable(step, assignment, context, acceptor);
-		completeTheStepTable(step, assignment, context, acceptor);
+		super.completeWhen_Table(step, assignment, context, acceptor);
+		completeTable(step, assignment, context, acceptor);
 	}
 
-	public void completeThen_TheStepTable(Then step, Assignment assignment, ContentAssistContext context,
+	public void completeThen_Table(Then step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeThen_TheStepTable(step, assignment, context, acceptor);
-		completeTheStepTable(step, assignment, context, acceptor);
+		super.completeThen_Table(step, assignment, context, acceptor);
+		completeTable(step, assignment, context, acceptor);
 	}
 
-	public void completeAnd_TheStepTable(And step, Assignment assignment, ContentAssistContext context,
+	public void completeAnd_Table(And step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.completeAnd_TheStepTable(step, assignment, context, acceptor);
-		completeTheStepTable(step, assignment, context, acceptor);
+		super.completeAnd_Table(step, assignment, context, acceptor);
+		completeTable(step, assignment, context, acceptor);
 	}
 
 	public void completeStepTable_Rows(Table stepTable, Assignment assignment, ContentAssistContext context,
@@ -88,7 +88,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 		completeName(step, assignment, context, acceptor);
 	}
 
-	private void completeTheStepTable(Step step, Assignment assignment, ContentAssistContext context,
+	private void completeTable(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
 			for (Entry<String, Proposal> p : StepDefinitionHelper.proposeStepTable(new LanguageAccessImpl(step))
@@ -105,7 +105,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 		}
 	}
 
-	private void completeName(Step step, Assignment assignment, ContentAssistContext context,
+	private void completeName(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
 			// TODO rename propose to proposeStep

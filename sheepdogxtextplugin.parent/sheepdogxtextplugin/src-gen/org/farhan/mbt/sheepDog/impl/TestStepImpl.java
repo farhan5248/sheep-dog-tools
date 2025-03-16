@@ -12,27 +12,27 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.farhan.mbt.sheepDog.DocString;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
-import org.farhan.mbt.sheepDog.Step;
 import org.farhan.mbt.sheepDog.Table;
+import org.farhan.mbt.sheepDog.TestStep;
+import org.farhan.mbt.sheepDog.Text;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Step</b></em>'.
+ * An implementation of the model object '<em><b>Test Step</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.StepImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.StepImpl#getTheStepTable <em>The Step Table</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.StepImpl#getTheDocString <em>The Doc String</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.TestStepImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.TestStepImpl#getTable <em>Table</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.TestStepImpl#getText <em>Text</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class StepImpl extends MinimalEObjectImpl.Container implements Step
+public class TestStepImpl extends MinimalEObjectImpl.Container implements TestStep
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -55,31 +55,31 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getTheStepTable() <em>The Step Table</em>}' containment reference.
+   * The cached value of the '{@link #getTable() <em>Table</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTheStepTable()
+   * @see #getTable()
    * @generated
    * @ordered
    */
-  protected Table theStepTable;
+  protected Table table;
 
   /**
-   * The cached value of the '{@link #getTheDocString() <em>The Doc String</em>}' containment reference.
+   * The cached value of the '{@link #getText() <em>Text</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTheDocString()
+   * @see #getText()
    * @generated
    * @ordered
    */
-  protected DocString theDocString;
+  protected Text text;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected StepImpl()
+  protected TestStepImpl()
   {
     super();
   }
@@ -92,7 +92,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
   @Override
   protected EClass eStaticClass()
   {
-    return SheepDogPackage.Literals.STEP;
+    return SheepDogPackage.Literals.TEST_STEP;
   }
 
   /**
@@ -117,7 +117,7 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.STEP__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_STEP__NAME, oldName, name));
   }
 
   /**
@@ -126,9 +126,9 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * @generated
    */
   @Override
-  public Table getTheStepTable()
+  public Table getTable()
   {
-    return theStepTable;
+    return table;
   }
 
   /**
@@ -136,13 +136,13 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTheStepTable(Table newTheStepTable, NotificationChain msgs)
+  public NotificationChain basicSetTable(Table newTable, NotificationChain msgs)
   {
-    Table oldTheStepTable = theStepTable;
-    theStepTable = newTheStepTable;
+    Table oldTable = table;
+    table = newTable;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.STEP__THE_STEP_TABLE, oldTheStepTable, newTheStepTable);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_STEP__TABLE, oldTable, newTable);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -154,20 +154,20 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * @generated
    */
   @Override
-  public void setTheStepTable(Table newTheStepTable)
+  public void setTable(Table newTable)
   {
-    if (newTheStepTable != theStepTable)
+    if (newTable != table)
     {
       NotificationChain msgs = null;
-      if (theStepTable != null)
-        msgs = ((InternalEObject)theStepTable).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.STEP__THE_STEP_TABLE, null, msgs);
-      if (newTheStepTable != null)
-        msgs = ((InternalEObject)newTheStepTable).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.STEP__THE_STEP_TABLE, null, msgs);
-      msgs = basicSetTheStepTable(newTheStepTable, msgs);
+      if (table != null)
+        msgs = ((InternalEObject)table).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.TEST_STEP__TABLE, null, msgs);
+      if (newTable != null)
+        msgs = ((InternalEObject)newTable).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.TEST_STEP__TABLE, null, msgs);
+      msgs = basicSetTable(newTable, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.STEP__THE_STEP_TABLE, newTheStepTable, newTheStepTable));
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_STEP__TABLE, newTable, newTable));
   }
 
   /**
@@ -176,9 +176,9 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * @generated
    */
   @Override
-  public DocString getTheDocString()
+  public Text getText()
   {
-    return theDocString;
+    return text;
   }
 
   /**
@@ -186,13 +186,13 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTheDocString(DocString newTheDocString, NotificationChain msgs)
+  public NotificationChain basicSetText(Text newText, NotificationChain msgs)
   {
-    DocString oldTheDocString = theDocString;
-    theDocString = newTheDocString;
+    Text oldText = text;
+    text = newText;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.STEP__THE_DOC_STRING, oldTheDocString, newTheDocString);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_STEP__TEXT, oldText, newText);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -204,20 +204,20 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
    * @generated
    */
   @Override
-  public void setTheDocString(DocString newTheDocString)
+  public void setText(Text newText)
   {
-    if (newTheDocString != theDocString)
+    if (newText != text)
     {
       NotificationChain msgs = null;
-      if (theDocString != null)
-        msgs = ((InternalEObject)theDocString).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.STEP__THE_DOC_STRING, null, msgs);
-      if (newTheDocString != null)
-        msgs = ((InternalEObject)newTheDocString).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.STEP__THE_DOC_STRING, null, msgs);
-      msgs = basicSetTheDocString(newTheDocString, msgs);
+      if (text != null)
+        msgs = ((InternalEObject)text).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.TEST_STEP__TEXT, null, msgs);
+      if (newText != null)
+        msgs = ((InternalEObject)newText).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.TEST_STEP__TEXT, null, msgs);
+      msgs = basicSetText(newText, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.STEP__THE_DOC_STRING, newTheDocString, newTheDocString));
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_STEP__TEXT, newText, newText));
   }
 
   /**
@@ -230,10 +230,10 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
   {
     switch (featureID)
     {
-      case SheepDogPackage.STEP__THE_STEP_TABLE:
-        return basicSetTheStepTable(null, msgs);
-      case SheepDogPackage.STEP__THE_DOC_STRING:
-        return basicSetTheDocString(null, msgs);
+      case SheepDogPackage.TEST_STEP__TABLE:
+        return basicSetTable(null, msgs);
+      case SheepDogPackage.TEST_STEP__TEXT:
+        return basicSetText(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -248,12 +248,12 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
   {
     switch (featureID)
     {
-      case SheepDogPackage.STEP__NAME:
+      case SheepDogPackage.TEST_STEP__NAME:
         return getName();
-      case SheepDogPackage.STEP__THE_STEP_TABLE:
-        return getTheStepTable();
-      case SheepDogPackage.STEP__THE_DOC_STRING:
-        return getTheDocString();
+      case SheepDogPackage.TEST_STEP__TABLE:
+        return getTable();
+      case SheepDogPackage.TEST_STEP__TEXT:
+        return getText();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -268,14 +268,14 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
   {
     switch (featureID)
     {
-      case SheepDogPackage.STEP__NAME:
+      case SheepDogPackage.TEST_STEP__NAME:
         setName((String)newValue);
         return;
-      case SheepDogPackage.STEP__THE_STEP_TABLE:
-        setTheStepTable((Table)newValue);
+      case SheepDogPackage.TEST_STEP__TABLE:
+        setTable((Table)newValue);
         return;
-      case SheepDogPackage.STEP__THE_DOC_STRING:
-        setTheDocString((DocString)newValue);
+      case SheepDogPackage.TEST_STEP__TEXT:
+        setText((Text)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -291,14 +291,14 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
   {
     switch (featureID)
     {
-      case SheepDogPackage.STEP__NAME:
+      case SheepDogPackage.TEST_STEP__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case SheepDogPackage.STEP__THE_STEP_TABLE:
-        setTheStepTable((Table)null);
+      case SheepDogPackage.TEST_STEP__TABLE:
+        setTable((Table)null);
         return;
-      case SheepDogPackage.STEP__THE_DOC_STRING:
-        setTheDocString((DocString)null);
+      case SheepDogPackage.TEST_STEP__TEXT:
+        setText((Text)null);
         return;
     }
     super.eUnset(featureID);
@@ -314,12 +314,12 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
   {
     switch (featureID)
     {
-      case SheepDogPackage.STEP__NAME:
+      case SheepDogPackage.TEST_STEP__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case SheepDogPackage.STEP__THE_STEP_TABLE:
-        return theStepTable != null;
-      case SheepDogPackage.STEP__THE_DOC_STRING:
-        return theDocString != null;
+      case SheepDogPackage.TEST_STEP__TABLE:
+        return table != null;
+      case SheepDogPackage.TEST_STEP__TEXT:
+        return text != null;
     }
     return super.eIsSet(featureID);
   }
@@ -341,4 +341,4 @@ public class StepImpl extends MinimalEObjectImpl.Container implements Step
     return result.toString();
   }
 
-} //StepImpl
+} //TestStepImpl

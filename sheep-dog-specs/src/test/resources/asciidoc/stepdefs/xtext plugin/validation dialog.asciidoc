@@ -1,8 +1,8 @@
-= Object: validation dialog
+= Step-Object: validation dialog
 
-== Definition: will be set as follows
+== Step-Definition: will be set as follows
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | Message

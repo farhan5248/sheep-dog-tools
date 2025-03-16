@@ -1,13 +1,13 @@
-= Feature: UML Step Parameters Table To Document
+= Test-Suite: UML Step Parameters Table To Document
 
-== Scenario: One cell
+== Test-Case: One cell
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Scenario: Submit
+== Test-Case: Submit
 
 === Given: The blah application, Object page is empty
 ----
@@ -15,13 +15,13 @@
 === And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
 ----
-= Object: Object page
+= Step-Object: Object page
 
-== Definition: is created as follows
+== Step-Definition: is created as follows
 
 Desc line 1
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | h1
@@ -43,14 +43,14 @@ Desc line 1
 | is created as follows | 1          | h1 
 |===
 
-== Scenario: Two cells
+== Test-Case: Two cells
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Scenario: Submit
+== Test-Case: Submit
 
 === Given: The blah application, Object page is empty
 ----
@@ -58,13 +58,13 @@ Desc line 1
 === And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
 ----
-= Object: Object page
+= Step-Object: Object page
 
-== Definition: is created as follows
+== Step-Definition: is created as follows
 
 Desc line 1
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | h1 | h2
@@ -86,14 +86,14 @@ Desc line 1
 | is created as follows | 1          | h1, h2
 |===
 
-== Scenario: Three cells
+== Test-Case: Three cells
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Scenario: Submit
+== Test-Case: Submit
 
 === Given: The blah application, Object page is empty
 ----
@@ -101,13 +101,13 @@ Desc line 1
 === And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
 ----
-= Object: Object page
+= Step-Object: Object page
 
-== Definition: is created as follows
+== Step-Definition: is created as follows
 
 Desc line 1
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | h1 | h2 | h3

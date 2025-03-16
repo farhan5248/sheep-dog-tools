@@ -33,8 +33,8 @@ import org.farhan.mbt.sheepDog.StepParameters;
  * </p>
  * <ul>
  *   <li>{@link org.farhan.mbt.sheepDog.impl.StepDefinitionImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.StepDefinitionImpl#getStatements <em>Statements</em>}</li>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.StepDefinitionImpl#getStepParameters <em>Step Parameters</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.StepDefinitionImpl#getStatementList <em>Statement List</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.StepDefinitionImpl#getStepParameterList <em>Step Parameter List</em>}</li>
  * </ul>
  *
  * @generated
@@ -62,24 +62,24 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
+   * The cached value of the '{@link #getStatementList() <em>Statement List</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStatements()
+   * @see #getStatementList()
    * @generated
    * @ordered
    */
-  protected EList<Statement> statements;
+  protected EList<Statement> statementList;
 
   /**
-   * The cached value of the '{@link #getStepParameters() <em>Step Parameters</em>}' containment reference list.
+   * The cached value of the '{@link #getStepParameterList() <em>Step Parameter List</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStepParameters()
+   * @see #getStepParameterList()
    * @generated
    * @ordered
    */
-  protected EList<StepParameters> stepParameters;
+  protected EList<StepParameters> stepParameterList;
 
   /**
    * <!-- begin-user-doc -->
@@ -133,13 +133,13 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public EList<Statement> getStatements()
+  public EList<Statement> getStatementList()
   {
-    if (statements == null)
+    if (statementList == null)
     {
-      statements = new EObjectContainmentEList<Statement>(Statement.class, this, SheepDogPackage.STEP_DEFINITION__STATEMENTS);
+      statementList = new EObjectContainmentEList<Statement>(Statement.class, this, SheepDogPackage.STEP_DEFINITION__STATEMENT_LIST);
     }
-    return statements;
+    return statementList;
   }
 
   /**
@@ -148,13 +148,13 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public EList<StepParameters> getStepParameters()
+  public EList<StepParameters> getStepParameterList()
   {
-    if (stepParameters == null)
+    if (stepParameterList == null)
     {
-      stepParameters = new EObjectContainmentEList<StepParameters>(StepParameters.class, this, SheepDogPackage.STEP_DEFINITION__STEP_PARAMETERS);
+      stepParameterList = new EObjectContainmentEList<StepParameters>(StepParameters.class, this, SheepDogPackage.STEP_DEFINITION__STEP_PARAMETER_LIST);
     }
-    return stepParameters;
+    return stepParameterList;
   }
 
   /**
@@ -167,10 +167,10 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
   {
     switch (featureID)
     {
-      case SheepDogPackage.STEP_DEFINITION__STATEMENTS:
-        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
-      case SheepDogPackage.STEP_DEFINITION__STEP_PARAMETERS:
-        return ((InternalEList<?>)getStepParameters()).basicRemove(otherEnd, msgs);
+      case SheepDogPackage.STEP_DEFINITION__STATEMENT_LIST:
+        return ((InternalEList<?>)getStatementList()).basicRemove(otherEnd, msgs);
+      case SheepDogPackage.STEP_DEFINITION__STEP_PARAMETER_LIST:
+        return ((InternalEList<?>)getStepParameterList()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -187,10 +187,10 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
     {
       case SheepDogPackage.STEP_DEFINITION__NAME:
         return getName();
-      case SheepDogPackage.STEP_DEFINITION__STATEMENTS:
-        return getStatements();
-      case SheepDogPackage.STEP_DEFINITION__STEP_PARAMETERS:
-        return getStepParameters();
+      case SheepDogPackage.STEP_DEFINITION__STATEMENT_LIST:
+        return getStatementList();
+      case SheepDogPackage.STEP_DEFINITION__STEP_PARAMETER_LIST:
+        return getStepParameterList();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -209,13 +209,13 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
       case SheepDogPackage.STEP_DEFINITION__NAME:
         setName((String)newValue);
         return;
-      case SheepDogPackage.STEP_DEFINITION__STATEMENTS:
-        getStatements().clear();
-        getStatements().addAll((Collection<? extends Statement>)newValue);
+      case SheepDogPackage.STEP_DEFINITION__STATEMENT_LIST:
+        getStatementList().clear();
+        getStatementList().addAll((Collection<? extends Statement>)newValue);
         return;
-      case SheepDogPackage.STEP_DEFINITION__STEP_PARAMETERS:
-        getStepParameters().clear();
-        getStepParameters().addAll((Collection<? extends StepParameters>)newValue);
+      case SheepDogPackage.STEP_DEFINITION__STEP_PARAMETER_LIST:
+        getStepParameterList().clear();
+        getStepParameterList().addAll((Collection<? extends StepParameters>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -234,11 +234,11 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
       case SheepDogPackage.STEP_DEFINITION__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case SheepDogPackage.STEP_DEFINITION__STATEMENTS:
-        getStatements().clear();
+      case SheepDogPackage.STEP_DEFINITION__STATEMENT_LIST:
+        getStatementList().clear();
         return;
-      case SheepDogPackage.STEP_DEFINITION__STEP_PARAMETERS:
-        getStepParameters().clear();
+      case SheepDogPackage.STEP_DEFINITION__STEP_PARAMETER_LIST:
+        getStepParameterList().clear();
         return;
     }
     super.eUnset(featureID);
@@ -256,10 +256,10 @@ public class StepDefinitionImpl extends MinimalEObjectImpl.Container implements 
     {
       case SheepDogPackage.STEP_DEFINITION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case SheepDogPackage.STEP_DEFINITION__STATEMENTS:
-        return statements != null && !statements.isEmpty();
-      case SheepDogPackage.STEP_DEFINITION__STEP_PARAMETERS:
-        return stepParameters != null && !stepParameters.isEmpty();
+      case SheepDogPackage.STEP_DEFINITION__STATEMENT_LIST:
+        return statementList != null && !statementList.isEmpty();
+      case SheepDogPackage.STEP_DEFINITION__STEP_PARAMETER_LIST:
+        return stepParameterList != null && !stepParameterList.isEmpty();
     }
     return super.eIsSet(featureID);
   }

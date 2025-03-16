@@ -5,21 +5,21 @@ Feature: UML Step Parameters Table To Document
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
-          == Scenario: Submit
+          == Test-Case: Submit
           
           === Given: The blah application, Object page is empty
           """
       And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
-          = Object: Object page
+          = Step-Object: Object page
           
-          == Definition: is created as follows
+          == Step-Definition: is created as follows
           
           Desc line 1
           
-          === Parameters: 1
+          === Step-Parameters: 1
           
           |===
           | h1
@@ -37,21 +37,21 @@ Feature: UML Step Parameters Table To Document
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
-          == Scenario: Submit
+          == Test-Case: Submit
           
           === Given: The blah application, Object page is empty
           """
       And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
-          = Object: Object page
+          = Step-Object: Object page
           
-          == Definition: is created as follows
+          == Step-Definition: is created as follows
           
           Desc line 1
           
-          === Parameters: 1
+          === Step-Parameters: 1
           
           |===
           | h1 | h2
@@ -69,21 +69,21 @@ Feature: UML Step Parameters Table To Document
 
     Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
-          = Feature: Process
+          = Test-Suite: Process
           
-          == Scenario: Submit
+          == Test-Case: Submit
           
           === Given: The blah application, Object page is empty
           """
       And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
-          = Object: Object page
+          = Step-Object: Object page
           
-          == Definition: is created as follows
+          == Step-Definition: is created as follows
           
           Desc line 1
           
-          === Parameters: 1
+          === Step-Parameters: 1
           
           |===
           | h1 | h2 | h3

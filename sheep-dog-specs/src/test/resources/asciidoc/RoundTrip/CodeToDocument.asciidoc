@@ -1,8 +1,8 @@
-= Feature: Code To Document
+= Test-Suite: Code To Document
 
 TODO make test for the specific mappings
 
-== Scenario: Create an adoc file from feature file
+== Test-Case: Create an adoc file from feature file
 
 === Given: The mbt-transformer plugin, src/test/resources/cucumber/app/Process.feature file is created as follows
 
@@ -70,15 +70,15 @@ Feature: Process
 === Then: The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
 Desc 1
 
 [tags="tag1"]
-== Background: Setup
+== Test-Setup: Setup
 
 [tags="tag2"]
-== Scenario: Story One
+== Test-Case: Story One
 
 Desc 2
 
@@ -100,7 +100,7 @@ Desc 2
 \----
 
 [tags="tag3"]
-== Scenario: Story Two
+== Test-Case: Story Two
 
 Desc 3
 
@@ -115,14 +115,14 @@ Desc 3
 
 === Then: The Search application, Logout page is invalid
 
-=== Examples: Some data
+=== Test-Data: Some data
 
 |===
 | ins
 | 4  
 |===
 
-=== Examples: Dataset 2
+=== Test-Data: Dataset 2
 
 |===
 | ins

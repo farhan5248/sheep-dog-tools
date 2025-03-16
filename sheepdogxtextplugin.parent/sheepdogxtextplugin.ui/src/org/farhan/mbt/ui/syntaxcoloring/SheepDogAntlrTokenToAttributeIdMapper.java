@@ -25,19 +25,19 @@ public class SheepDogAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToA
 			return SheepDogHighlightingConfiguration.KEYWORD_OBJ_ID;
 		case "'==='":
 			return SheepDogHighlightingConfiguration.KEYWORD_OBJ_ID;
-		case "'Object:'":
+		case "'Step-Object:'":
 			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
-		case "'Definition:'":
+		case "'Step-Definition:'":
 			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
-		case "'Parameters:'":
+		case "'Step-Parameters:'":
 			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
-		case "'Feature:'":
+		case "'Test-Suite:'":
 			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
-		case "'Background:'":
+		case "'Test-Setup:'":
 			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
-		case "'Scenario:'":
+		case "'Test-Case:'":
 			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
-		case "'Examples:'":
+		case "'Test-Data:'":
 			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
 		case "'Given:'":
 			return SheepDogHighlightingConfiguration.KEYWORD_GWT_ID;

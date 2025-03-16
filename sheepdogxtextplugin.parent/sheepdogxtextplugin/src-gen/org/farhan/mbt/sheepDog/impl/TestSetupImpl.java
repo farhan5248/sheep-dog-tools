@@ -5,24 +5,24 @@ package org.farhan.mbt.sheepDog.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.farhan.mbt.sheepDog.Background;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
+import org.farhan.mbt.sheepDog.TestSetup;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Background</b></em>'.
+ * An implementation of the model object '<em><b>Test Setup</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class BackgroundImpl extends AbstractScenarioImpl implements Background
+public class TestSetupImpl extends TestStepContainerImpl implements TestSetup
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected BackgroundImpl()
+  protected TestSetupImpl()
   {
     super();
   }
@@ -35,7 +35,7 @@ public class BackgroundImpl extends AbstractScenarioImpl implements Background
   @Override
   protected EClass eStaticClass()
   {
-    return SheepDogPackage.Literals.BACKGROUND;
+    return SheepDogPackage.Literals.TEST_SETUP;
   }
 
-} //BackgroundImpl
+} //TestSetupImpl

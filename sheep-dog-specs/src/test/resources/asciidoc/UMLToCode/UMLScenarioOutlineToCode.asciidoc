@@ -1,13 +1,13 @@
-= Feature: UML Scenario Outline To Code
+= Test-Suite: UML Scenario Outline To Code
 
-== Scenario: No tags, no statement, one step, one example
+== Test-Case: No tags, no statement, one step, one example
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Scenario: Submit
+== Test-Case: Submit
 
 === Given: The blah application, Object page is created as follows
 
@@ -16,7 +16,7 @@
 | {h3}
 |===
 
-=== Examples: Examples 1
+=== Test-Data: Examples 1
 
 |===
 | h3
@@ -46,15 +46,15 @@
 | Submit | Examples 1 | \| v31 \|
 |===
 
-== Scenario: One tag, one statement, one step, one example
+== Test-Case: One tag, one statement, one step, one example
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
 [tags="tag1"]
-== Scenario: Submit
+== Test-Case: Submit
 
 Desc line 1
 
@@ -65,7 +65,7 @@ Desc line 1
 | {h3}
 |===
 
-=== Examples: Examples 1
+=== Test-Data: Examples 1
 
 |===
 | h3
@@ -86,15 +86,15 @@ Desc line 1
 | Submit | tag1 | Desc line 1
 |===
 
-== Scenario: Two tags, two statements, two steps, two examples
+== Test-Case: Two tags, two statements, two steps, two examples
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
 [tags="tag1,tag2"]
-== Scenario: Submit
+== Test-Case: Submit
 
 Desc line 1
 Desc line 2
@@ -113,14 +113,14 @@ Desc line 2
 | {h3}
 |===
 
-=== Examples: Examples 1
+=== Test-Data: Examples 1
 
 |===
 | h3
 | v31
 |===
 
-=== Examples: Examples 2
+=== Test-Data: Examples 2
 
 |===
 | h3
@@ -156,7 +156,7 @@ Desc line 2
 | Submit | Examples {Index} | \| v3{Index} \|
 |===
 
-=== Examples: Indices
+=== Test-Data: Indices
 
 |===
 | Index
@@ -164,15 +164,15 @@ Desc line 2
 | 2    
 |===
 
-== Scenario: Three tags, three statements, three steps, three examples
+== Test-Case: Three tags, three statements, three steps, three examples
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
 [tags="tag1,tag2,tag3"]
-== Scenario: Submit
+== Test-Case: Submit
 
 Desc line 1
 Desc line 2
@@ -199,21 +199,21 @@ Desc line 3
 | {h3}
 |===
 
-=== Examples: Examples 1
+=== Test-Data: Examples 1
 
 |===
 | h3
 | v31
 |===
 
-=== Examples: Examples 2
+=== Test-Data: Examples 2
 
 |===
 | h3
 | v32
 |===
 
-=== Examples: Examples 3
+=== Test-Data: Examples 3
 
 |===
 | h3
@@ -249,7 +249,7 @@ Desc line 3
 | Submit | Examples {Index} | \| v3{Index} \|
 |===
 
-=== Examples: Indices
+=== Test-Data: Indices
 
 |===
 | Index

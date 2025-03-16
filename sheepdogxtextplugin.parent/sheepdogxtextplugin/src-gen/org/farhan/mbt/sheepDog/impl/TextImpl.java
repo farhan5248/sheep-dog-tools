@@ -10,23 +10,23 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.farhan.mbt.sheepDog.AbstractScenarioTags;
 import org.farhan.mbt.sheepDog.SheepDogPackage;
+import org.farhan.mbt.sheepDog.Text;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Abstract Scenario Tags</b></em>'.
+ * An implementation of the model object '<em><b>Text</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.AbstractScenarioTagsImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.TextImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class AbstractScenarioTagsImpl extends MinimalEObjectImpl.Container implements AbstractScenarioTags
+public class TextImpl extends MinimalEObjectImpl.Container implements Text
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -53,7 +53,7 @@ public class AbstractScenarioTagsImpl extends MinimalEObjectImpl.Container imple
    * <!-- end-user-doc -->
    * @generated
    */
-  protected AbstractScenarioTagsImpl()
+  protected TextImpl()
   {
     super();
   }
@@ -66,7 +66,7 @@ public class AbstractScenarioTagsImpl extends MinimalEObjectImpl.Container imple
   @Override
   protected EClass eStaticClass()
   {
-    return SheepDogPackage.Literals.ABSTRACT_SCENARIO_TAGS;
+    return SheepDogPackage.Literals.TEXT;
   }
 
   /**
@@ -91,7 +91,7 @@ public class AbstractScenarioTagsImpl extends MinimalEObjectImpl.Container imple
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.ABSTRACT_SCENARIO_TAGS__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEXT__NAME, oldName, name));
   }
 
   /**
@@ -104,7 +104,7 @@ public class AbstractScenarioTagsImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case SheepDogPackage.ABSTRACT_SCENARIO_TAGS__NAME:
+      case SheepDogPackage.TEXT__NAME:
         return getName();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -120,7 +120,7 @@ public class AbstractScenarioTagsImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case SheepDogPackage.ABSTRACT_SCENARIO_TAGS__NAME:
+      case SheepDogPackage.TEXT__NAME:
         setName((String)newValue);
         return;
     }
@@ -137,7 +137,7 @@ public class AbstractScenarioTagsImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case SheepDogPackage.ABSTRACT_SCENARIO_TAGS__NAME:
+      case SheepDogPackage.TEXT__NAME:
         setName(NAME_EDEFAULT);
         return;
     }
@@ -154,7 +154,7 @@ public class AbstractScenarioTagsImpl extends MinimalEObjectImpl.Container imple
   {
     switch (featureID)
     {
-      case SheepDogPackage.ABSTRACT_SCENARIO_TAGS__NAME:
+      case SheepDogPackage.TEXT__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
@@ -177,4 +177,4 @@ public class AbstractScenarioTagsImpl extends MinimalEObjectImpl.Container imple
     return result.toString();
   }
 
-} //AbstractScenarioTagsImpl
+} //TextImpl

@@ -6,13 +6,13 @@ import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractParserRuleElementFinder;
 import org.farhan.mbt.formatting2.SheepDogFormatter;
 import org.farhan.mbt.services.SheepDogGrammarAccess;
-import org.farhan.mbt.sheepDog.Step;
+import org.farhan.mbt.sheepDog.TestStep;
 
-public abstract class StepFormatter extends Formatter {
+public abstract class TestStepFormatter extends Formatter {
 
-	protected Step theStep;
+	protected TestStep theStep;
 
-	public StepFormatter(Step theStep) {
+	public TestStepFormatter(TestStep theStep) {
 		this.theStep = theStep;
 	}
 
@@ -33,12 +33,12 @@ public abstract class StepFormatter extends Formatter {
 		formatTitle(df.getRegion(theStep, getPhraseRuleCall(a)), doc);
 		formatEOL2RuleCall(df.getRegion(theStep, getEOLRuleCall(a)), doc);
 
-		if (theStep.getTheStepTable() != null) {
-			TableFormatter formatter = new TableFormatter(theStep.getTheStepTable());
+		if (theStep.getTable() != null) {
+			TableFormatter formatter = new TableFormatter(theStep.getTable());
 			formatter.format(doc, ga, df);
 		}
-		if (theStep.getTheDocString() != null) {
-			DocStringFormatter formatter2 = new DocStringFormatter(theStep.getTheDocString());
+		if (theStep.getText() != null) {
+			TextFormatter formatter2 = new TextFormatter(theStep.getText());
 			formatter2.format(doc, ga, df);
 		}
 	}

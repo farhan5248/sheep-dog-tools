@@ -1,6 +1,6 @@
-= Feature: Code Feature To UML
+= Test-Suite: Code Feature To UML
 
-== Scenario: No tags, no statements
+== Test-Case: No tags, no statements
 
 === Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -19,7 +19,7 @@ Feature: Process
 | specs::Process
 |===
 
-== Scenario: One tag, one statement
+== Test-Case: One tag, one statement
 
 === Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -50,7 +50,7 @@ Feature: Process
 | specs::Process::Setup | tags            | tag1             
 |===
 
-== Scenario: Two tags, two statements
+== Test-Case: Two tags, two statements
 
 === Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -83,7 +83,7 @@ Feature: Process
 | specs::Process::Setup | tags            | tag2             
 |===
 
-== Scenario: Three tags, three statements
+== Test-Case: Three tags, three statements
 
 === Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 
@@ -118,7 +118,7 @@ Feature: This is a test feature
 | specs::Process::Setup | tags            | tag3             
 |===
 
-== Scenario: Selected tags
+== Test-Case: Selected tags
 
 === Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
 

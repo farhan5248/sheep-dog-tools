@@ -6,22 +6,22 @@ import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.service.AbstractElementFinder.AbstractParserRuleElementFinder;
 import org.farhan.mbt.formatting2.SheepDogFormatter;
 import org.farhan.mbt.services.SheepDogGrammarAccess;
-import org.farhan.mbt.sheepDog.AbstractScenario;
+import org.farhan.mbt.sheepDog.TestStepContainer;
 import org.farhan.mbt.sheepDog.And;
 import org.farhan.mbt.sheepDog.Given;
 import org.farhan.mbt.sheepDog.Statement;
-import org.farhan.mbt.sheepDog.Step;
+import org.farhan.mbt.sheepDog.TestStep;
 import org.farhan.mbt.sheepDog.Then;
 import org.farhan.mbt.sheepDog.When;
 
-public abstract class AbstractScenarioFormatter extends Formatter {
-	protected AbstractScenario theAbstractScenario;
+public abstract class TestStepContainerFormatter extends Formatter {
+	protected TestStepContainer theAbstractScenario;
 
-	public AbstractScenarioFormatter(AbstractScenario theAbstractScenario) {
+	public TestStepContainerFormatter(TestStepContainer theAbstractScenario) {
 		this.theAbstractScenario = theAbstractScenario;
 	}
 
-	protected StepFormatter newStepFormatter(Step theStep) {
+	protected TestStepFormatter newStepFormatter(TestStep theStep) {
 		if (theStep instanceof Given) {
 			return new GivenFormatter((Given) theStep);
 		} else if (theStep instanceof When) {
@@ -47,8 +47,8 @@ public abstract class AbstractScenarioFormatter extends Formatter {
 
 	public void format(IFormattableDocument doc, SheepDogGrammarAccess ga, SheepDogFormatter df) {
 		AbstractParserRuleElementFinder a = getAccess(ga);
-		if (theAbstractScenario.getTags() != null) {
-			AbstractScenarioTagsFormatter formatter = new AbstractScenarioTagsFormatter(theAbstractScenario.getTags());
+		if (theAbstractScenario.getTagList() != null) {
+			TagsFormatter formatter = new TagsFormatter(theAbstractScenario.getTagList());
 			formatter.format(doc, ga, df);
 		}
 
@@ -56,14 +56,14 @@ public abstract class AbstractScenarioFormatter extends Formatter {
 		formatKeywordTrailingSpace(df.getRegion(theAbstractScenario, getKeyword(a)), doc);
 		formatTitle(df.getRegion(theAbstractScenario, getTitleRuleCall(a)), doc);
 		formatEOL2RuleCall(df.getRegion(theAbstractScenario, getEOLRuleCall(a)), doc);
-		for (Statement s : theAbstractScenario.getStatements()) {
+		for (Statement s : theAbstractScenario.getStatementList()) {
 			StatementFormatter formatter = new StatementFormatter(s);
-			formatter.isLast(isLastElement(s, theAbstractScenario.getStatements()));
+			formatter.isLast(isLastElement(s, theAbstractScenario.getStatementList()));
 			formatter.format(doc, ga, df);
 		}
-		for (Step s : theAbstractScenario.getSteps()) {
-			StepFormatter formatter = newStepFormatter(s);
-			formatter.isLast(isLastElement(s, theAbstractScenario.getSteps()));
+		for (TestStep s : theAbstractScenario.getTestStepList()) {
+			TestStepFormatter formatter = newStepFormatter(s);
+			formatter.isLast(isLastElement(s, theAbstractScenario.getTestStepList()));
 			// formatter.isLastEOLDouble(s.getTheStepTable() == null && s.getTheDocString() == null);
 			formatter.format(doc, ga, df);
 		}

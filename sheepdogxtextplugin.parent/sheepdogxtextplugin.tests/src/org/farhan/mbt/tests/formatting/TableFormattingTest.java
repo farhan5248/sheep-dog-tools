@@ -14,9 +14,9 @@ public class TableFormattingTest extends FormattingTest {
 	private StringBuilder getExpected() {
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Feature: This is a test feature\n");
+		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("\n");
-		sb.append("== Scenario: Submit a drug claim\n");
+		sb.append("== Test-Case: Submit a drug claim\n");
 		sb.append("\n");
 		sb.append("=== Given: do step one\n");
 		sb.append("\n");
@@ -43,9 +43,9 @@ public class TableFormattingTest extends FormattingTest {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
-			sb.append("= Feature: This is a test feature\n");
+			sb.append("= Test-Suite: This is a test feature\n");
 			sb.append("\n");
-			sb.append("== Scenario: Submit a drug claim\n");
+			sb.append("== Test-Case: Submit a drug claim\n");
 			sb.append("\n");
 			sb.append("=== Given: do step one\n");
 			sb.append("\n");

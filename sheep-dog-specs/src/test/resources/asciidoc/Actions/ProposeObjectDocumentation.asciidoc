@@ -1,6 +1,6 @@
-= Feature: Propose Object Documentation
+= Test-Suite: Propose Object Documentation
 
-== Scenario: Documentation for component
+== Test-Case: Documentation for component
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -25,7 +25,7 @@
 | The daily batchjob, | daily batchjob  | daily batchjob        
 |===
 
-== Scenario: Documentation for component object
+== Test-Case: Documentation for component object
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -50,7 +50,7 @@
 | The daily batchjob, Input file | Input file      | Description\n         
 |===
 
-== Scenario: Documentation for previous object which doesn't exist
+== Test-Case: Documentation for previous object which doesn't exist
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -69,7 +69,7 @@
 | The Input file | Input file      | Referred in: The daily batchjob, Input file is present
 |===
 
-== Scenario: Documentation for previous object which exists and has no doc
+== Test-Case: Documentation for previous object which exists and has no doc
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 
@@ -95,7 +95,7 @@
 | The Input file | Input file      | Referred in: The daily batchjob, Input file is present
 |===
 
-== Scenario: Documentation for previous object which exists and has doc
+== Test-Case: Documentation for previous object which exists and has doc
 
 === Given: The xtext plugin, src/test/resources/cucumber/Process.feature file steps snippet is created as follows
 

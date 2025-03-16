@@ -27,7 +27,7 @@ import org.farhan.mbt.sheepDog.StepObject;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.mbt.sheepDog.impl.StepObjectImpl#getStepDefinitions <em>Step Definitions</em>}</li>
+ *   <li>{@link org.farhan.mbt.sheepDog.impl.StepObjectImpl#getStepDefinitionList <em>Step Definition List</em>}</li>
  * </ul>
  *
  * @generated
@@ -35,14 +35,14 @@ import org.farhan.mbt.sheepDog.StepObject;
 public class StepObjectImpl extends ModelImpl implements StepObject
 {
   /**
-   * The cached value of the '{@link #getStepDefinitions() <em>Step Definitions</em>}' containment reference list.
+   * The cached value of the '{@link #getStepDefinitionList() <em>Step Definition List</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStepDefinitions()
+   * @see #getStepDefinitionList()
    * @generated
    * @ordered
    */
-  protected EList<StepDefinition> stepDefinitions;
+  protected EList<StepDefinition> stepDefinitionList;
 
   /**
    * <!-- begin-user-doc -->
@@ -71,13 +71,13 @@ public class StepObjectImpl extends ModelImpl implements StepObject
    * @generated
    */
   @Override
-  public EList<StepDefinition> getStepDefinitions()
+  public EList<StepDefinition> getStepDefinitionList()
   {
-    if (stepDefinitions == null)
+    if (stepDefinitionList == null)
     {
-      stepDefinitions = new EObjectContainmentEList<StepDefinition>(StepDefinition.class, this, SheepDogPackage.STEP_OBJECT__STEP_DEFINITIONS);
+      stepDefinitionList = new EObjectContainmentEList<StepDefinition>(StepDefinition.class, this, SheepDogPackage.STEP_OBJECT__STEP_DEFINITION_LIST);
     }
-    return stepDefinitions;
+    return stepDefinitionList;
   }
 
   /**
@@ -90,8 +90,8 @@ public class StepObjectImpl extends ModelImpl implements StepObject
   {
     switch (featureID)
     {
-      case SheepDogPackage.STEP_OBJECT__STEP_DEFINITIONS:
-        return ((InternalEList<?>)getStepDefinitions()).basicRemove(otherEnd, msgs);
+      case SheepDogPackage.STEP_OBJECT__STEP_DEFINITION_LIST:
+        return ((InternalEList<?>)getStepDefinitionList()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -106,8 +106,8 @@ public class StepObjectImpl extends ModelImpl implements StepObject
   {
     switch (featureID)
     {
-      case SheepDogPackage.STEP_OBJECT__STEP_DEFINITIONS:
-        return getStepDefinitions();
+      case SheepDogPackage.STEP_OBJECT__STEP_DEFINITION_LIST:
+        return getStepDefinitionList();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -123,9 +123,9 @@ public class StepObjectImpl extends ModelImpl implements StepObject
   {
     switch (featureID)
     {
-      case SheepDogPackage.STEP_OBJECT__STEP_DEFINITIONS:
-        getStepDefinitions().clear();
-        getStepDefinitions().addAll((Collection<? extends StepDefinition>)newValue);
+      case SheepDogPackage.STEP_OBJECT__STEP_DEFINITION_LIST:
+        getStepDefinitionList().clear();
+        getStepDefinitionList().addAll((Collection<? extends StepDefinition>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -141,8 +141,8 @@ public class StepObjectImpl extends ModelImpl implements StepObject
   {
     switch (featureID)
     {
-      case SheepDogPackage.STEP_OBJECT__STEP_DEFINITIONS:
-        getStepDefinitions().clear();
+      case SheepDogPackage.STEP_OBJECT__STEP_DEFINITION_LIST:
+        getStepDefinitionList().clear();
         return;
     }
     super.eUnset(featureID);
@@ -158,8 +158,8 @@ public class StepObjectImpl extends ModelImpl implements StepObject
   {
     switch (featureID)
     {
-      case SheepDogPackage.STEP_OBJECT__STEP_DEFINITIONS:
-        return stepDefinitions != null && !stepDefinitions.isEmpty();
+      case SheepDogPackage.STEP_OBJECT__STEP_DEFINITION_LIST:
+        return stepDefinitionList != null && !stepDefinitionList.isEmpty();
     }
     return super.eIsSet(featureID);
   }

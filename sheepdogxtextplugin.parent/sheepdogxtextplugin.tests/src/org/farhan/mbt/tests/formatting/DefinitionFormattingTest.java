@@ -14,9 +14,9 @@ public class DefinitionFormattingTest extends FormattingTest {
 	private StringBuilder getExpected() {
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("= Object: This is a test StepObject\n");
+		sb.append("= Step-Object: This is a test StepObject\n");
 		sb.append("\n");
-		sb.append("== Definition: Submit a claim\n");
+		sb.append("== Step-Definition: Submit a claim\n");
 		sb.append("\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
@@ -39,9 +39,9 @@ public class DefinitionFormattingTest extends FormattingTest {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
-			sb.append("=  Object: This is a test StepObject\n");
+			sb.append("=  Step-Object: This is a test StepObject\n");
 			sb.append("\n");
-			sb.append(" ==  Definition:  Submit a claim \n");
+			sb.append(" ==  Step-Definition:  Submit a claim \n");
 			sb.append("\n");
 			sb.append(" Basic EDI claim \n");
 			sb.append(" No deductible \n");
@@ -57,9 +57,9 @@ public class DefinitionFormattingTest extends FormattingTest {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
-			sb.append("=Object:This is a test StepObject\n");
+			sb.append("=Step-Object:This is a test StepObject\n");
 			sb.append("\n");
-			sb.append("==Definition:Submit a claim\n");
+			sb.append("==Step-Definition:Submit a claim\n");
 			sb.append("\n");
 			sb.append("Basic EDI claim\n");
 			sb.append("No deductible\n");
@@ -75,10 +75,10 @@ public class DefinitionFormattingTest extends FormattingTest {
 
 		assertFormatted((FormatterTestRequest it) -> {
 			StringBuilder sb = new StringBuilder();
-			sb.append("= Object: This is a test StepObject\n");
+			sb.append("= Step-Object: This is a test StepObject\n");
 			sb.append("\n");
 			sb.append("\n");
-			sb.append("== Definition: Submit a claim\n");
+			sb.append("== Step-Definition: Submit a claim\n");
 			sb.append("\n");
 			sb.append("\n");
 			sb.append("Basic EDI claim\n");

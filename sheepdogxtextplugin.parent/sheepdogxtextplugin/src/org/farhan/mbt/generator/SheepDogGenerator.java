@@ -12,9 +12,9 @@ import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.mbt.LanguageAccessImpl;
 import org.farhan.helper.StepDefinitionHelper;
-import org.farhan.mbt.sheepDog.AbstractScenario;
-import org.farhan.mbt.sheepDog.Feature;
-import org.farhan.mbt.sheepDog.Step;
+import org.farhan.mbt.sheepDog.TestStepContainer;
+import org.farhan.mbt.sheepDog.TestSuite;
+import org.farhan.mbt.sheepDog.TestStep;
 
 /**
  * Generates code from your model files on save.
@@ -35,17 +35,17 @@ public class SheepDogGenerator extends AbstractGenerator {
 	@Override
 	public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
 
-		if (resource.getContents().get(0) instanceof Feature) {
-			Feature theFeature = (Feature) resource.getContents().get(0);
-			for (AbstractScenario scenario : theFeature.getAbstractScenarios()) {
-				for (Step step : scenario.getSteps()) {
+		if (resource.getContents().get(0) instanceof TestSuite) {
+			TestSuite theTestSuite = (TestSuite) resource.getContents().get(0);
+			for (TestStepContainer scenario : theTestSuite.getTestStepContainerList()) {
+				for (TestStep step : scenario.getTestStepList()) {
 					doGenerate(step);
 				}
 			}
 		}
 	}
 
-	public static void doGenerate(Step step) {
+	public static void doGenerate(TestStep step) {
 		try {
 			StepDefinitionHelper.generate(new LanguageAccessImpl(step),
 					SaveOptions.newBuilder().format().getOptions().toOptionsMap());
@@ -54,7 +54,7 @@ public class SheepDogGenerator extends AbstractGenerator {
 		}
 	}
 
-	private static void logError(Exception e, Step step) {
+	private static void logError(Exception e, TestStep step) {
 		// TODO inject the logger instead
 		System.out.println("There was a problem generating for step: " + step.getName());
 		StringWriter sw = new StringWriter();

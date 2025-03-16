@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import org.farhan.mbt.asciidoctor.AsciiDoctorStepObject;
 import org.farhan.mbt.asciidoctor.AsciiDoctorTestSuite;
-import org.farhan.mbt.sheepDog.AbstractScenario;
+import org.farhan.mbt.sheepDog.TestStepContainer;
 import org.farhan.mbt.sheepDog.Cell;
-import org.farhan.mbt.sheepDog.Examples;
+import org.farhan.mbt.sheepDog.TestData;
 import org.farhan.mbt.sheepDog.Row;
-import org.farhan.mbt.sheepDog.Step;
+import org.farhan.mbt.sheepDog.TestStep;
 import org.farhan.mbt.sheepDog.StepDefinition;
 import org.farhan.mbt.sheepDog.StepParameters;
 import org.junit.jupiter.api.Assertions;
@@ -32,7 +32,7 @@ public class AdocFileObject extends FileObject {
 	}
 
 	protected void assertAbstractScenarioTags(String name, String tags) {
-		AbstractScenario abstractScenario = getAbstractScenario(name);
+		TestStepContainer abstractScenario = getAbstractScenario(name);
 		Assertions.assertEquals(tags, Utilities.listAsCsv(testSuite.getAbstractScenarioTags(abstractScenario)));
 	}
 
@@ -81,7 +81,7 @@ public class AdocFileObject extends FileObject {
 
 	protected void assertScenarioOutlineExamplesExists(String name, String examplesName) {
 		assertAbstractScenarioExists(name);
-		Assertions.assertTrue(getExamples(name, examplesName) != null, "Examples " + examplesName + " doesn't exist");
+		Assertions.assertTrue(getExamples(name, examplesName) != null, "TestData " + examplesName + " doesn't exist");
 	}
 
 	protected void assertScenarioOutlineExamplesTableRowExists(String name, String examplesName, String rowName) {
@@ -95,7 +95,7 @@ public class AdocFileObject extends FileObject {
 	}
 
 	protected void assertStepDefinitionExists(String name) {
-		Assertions.assertTrue(getStepDefinition(name) != null, "Step Definition " + name + " doesn't exist");
+		Assertions.assertTrue(getStepDefinition(name) != null, "TestStep Definition " + name + " doesn't exist");
 	}
 
 	protected void assertStepDefinitionParametersExists(String string, String string2) {
@@ -111,7 +111,7 @@ public class AdocFileObject extends FileObject {
 
 	protected void assertStepExists(String name, String stepName) {
 		assertAbstractScenarioExists(name);
-		Assertions.assertTrue(getStep(name, stepName) != null, "Step " + stepName + " doesn't exist");
+		Assertions.assertTrue(getStep(name, stepName) != null, "TestStep " + stepName + " doesn't exist");
 	}
 
 	protected void assertStepObjectName(String name) {
@@ -122,8 +122,8 @@ public class AdocFileObject extends FileObject {
 		Assertions.assertEquals(statements, stepObject.getStepObjectDescription());
 	}
 
-	private AbstractScenario getAbstractScenario(String name) {
-		for (AbstractScenario s : testSuite.getAbstractScenarioList()) {
+	private TestStepContainer getAbstractScenario(String name) {
+		for (TestStepContainer s : testSuite.getAbstractScenarioList()) {
 			if (testSuite.getScenarioName(s).contentEquals(name)) {
 				return s;
 			}
@@ -131,8 +131,8 @@ public class AdocFileObject extends FileObject {
 		return null;
 	}
 
-	private Examples getExamples(String name, String examplesName) {
-		for (Examples e : testSuite.getExamplesList(getAbstractScenario(name))) {
+	private TestData getExamples(String name, String examplesName) {
+		for (TestData e : testSuite.getExamplesList(getAbstractScenario(name))) {
 			if (testSuite.getExamplesName(e).contentEquals(examplesName)) {
 				return e;
 			}
@@ -140,7 +140,7 @@ public class AdocFileObject extends FileObject {
 		return null;
 	}
 
-	private ArrayList<String> getExamplesRow(Examples examples, String rowName) {
+	private ArrayList<String> getExamplesRow(TestData examples, String rowName) {
 		return getRow(testSuite.getExamplesRowList(examples), testSuite.getExamplesTable(examples), rowName);
 	}
 
@@ -168,7 +168,7 @@ public class AdocFileObject extends FileObject {
 		for (Row r : rows) {
 			row = new ArrayList<String>();
 			table.add(row);
-			for (Cell c : r.getCells()) {
+			for (Cell c : r.getCellList()) {
 				row.add(c.getName());
 			}
 		}
@@ -185,7 +185,7 @@ public class AdocFileObject extends FileObject {
 		return null;
 	}
 
-	private ArrayList<String> getRow(Step step, String csvRow) {
+	private ArrayList<String> getRow(TestStep step, String csvRow) {
 		csvRow = csvRow.replaceAll(" +", " ");
 		for (ArrayList<String> row : testSuite.getStepTable(step)) {
 			// convert it to csv
@@ -202,8 +202,8 @@ public class AdocFileObject extends FileObject {
 		return null;
 	}
 
-	private Step getStep(String name, String stepName) {
-		for (Step s : testSuite.getStepList(getAbstractScenario(name))) {
+	private TestStep getStep(String name, String stepName) {
+		for (TestStep s : testSuite.getStepList(getAbstractScenario(name))) {
 			if (testSuite.getStepName(s).contentEquals(stepName)) {
 				return s;
 			}

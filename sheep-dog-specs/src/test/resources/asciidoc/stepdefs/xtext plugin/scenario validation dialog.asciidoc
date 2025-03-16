@@ -1,10 +1,10 @@
-= Object: scenario validation dialog
+= Step-Object: scenario validation dialog
 
-== Definition: will be empty
+== Step-Definition: will be empty
 
-== Definition: will be set as follows
+== Step-Definition: will be set as follows
 
-=== Parameters: 1
+=== Step-Parameters: 1
 
 |===
 | Message

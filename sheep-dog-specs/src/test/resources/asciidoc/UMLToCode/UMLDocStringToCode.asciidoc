@@ -1,13 +1,13 @@
-= Feature: UML Doc String To Code
+= Test-Suite: UML Doc String To Code
 
-== Scenario: One line
+== Test-Case: One line
 
 === Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
-= Feature: Process
+= Test-Suite: Process
 
-== Scenario: Submit
+== Test-Case: Submit
 
 === Given: The Object page is created as follows
 

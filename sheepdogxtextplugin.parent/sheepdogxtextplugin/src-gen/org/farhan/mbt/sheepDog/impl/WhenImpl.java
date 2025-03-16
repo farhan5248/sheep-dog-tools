@@ -15,7 +15,7 @@ import org.farhan.mbt.sheepDog.When;
  *
  * @generated
  */
-public class WhenImpl extends StepImpl implements When
+public class WhenImpl extends TestStepImpl implements When
 {
   /**
    * <!-- begin-user-doc -->
