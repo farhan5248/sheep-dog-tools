@@ -3,8 +3,8 @@
 <plugin>
 	<extension point="org.eclipse.emf.ecore.generated_package">
 		<package
-			uri = "http://www.farhan.org/mbt/SheepDog"
-			class = "org.farhan.mbt.sheepDog.SheepDogPackage"
+			uri = "http://www.farhan.org/dsl/sheepdog"
+			class = "org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage"
 			genModel = "model/generated/SheepDog.genmodel" />
 	</extension>
 </plugin>

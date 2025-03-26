@@ -18,7 +18,7 @@ Require-Bundle: sheepdogxtextplugin,
  org.eclipse.xtext.builder
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-21
-Export-Package: sheepdogxtextplugin.ui.internal,
- org.farhan.mbt.ui.quickfix,
- org.farhan.mbt.ui.contentassist
+Export-Package: org.farhan.dsl.sheepdog.ui.quickfix,
+ sheepdogxtextplugin.ui.internal,
+ org.farhan.dsl.sheepdog.ui.contentassist
 Bundle-Activator: sheepdogxtextplugin.ui.internal.SheepdogxtextpluginActivator

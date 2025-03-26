@@ -11,5 +11,5 @@ Require-Bundle: sheepdogxtextplugin,
  org.eclipse.xtext.xbase.ide,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
 Bundle-RequiredExecutionEnvironment: JavaSE-21
-Export-Package: org.farhan.mbt.ide.contentassist.antlr,
- org.farhan.mbt.ide.contentassist.antlr.internal
+Export-Package: org.farhan.dsl.sheepdog.ide.contentassist.antlr,
+ org.farhan.dsl.sheepdog.ide.contentassist.antlr.internal
