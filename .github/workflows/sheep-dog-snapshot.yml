@@ -34,7 +34,7 @@ jobs:
     secrets: inherit
 
   sheep-dog-dev:
-    needs: [sheep-dog-xtext-plugin, sheep-dog-xtext-cuke-plugin]
+    needs: [sheep-dog-xtext-plugin, sheep-dog-cucumber]
     uses: ./.github/workflows/snapshot.yml
     with:
       project: 'sheep-dog-dev'
