@@ -2,7 +2,7 @@ package org.farhan.mbt.cucumber;
 
 import java.util.ArrayList;
 
-import org.farhan.mbt.CucumberStandaloneSetup;
+import org.farhan.dsl.cucumber.CucumberStandaloneSetup;
 import org.farhan.mbt.convert.ConvertibleObject;
 import org.farhan.mbt.convert.ConvertibleProject;
 import org.farhan.mbt.convert.ObjectRepository;

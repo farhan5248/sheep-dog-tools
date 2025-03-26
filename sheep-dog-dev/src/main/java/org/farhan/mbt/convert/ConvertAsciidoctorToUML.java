@@ -3,7 +3,7 @@ package org.farhan.mbt.convert;
 import java.util.ArrayList;
 
 import org.farhan.helper.StepDefinitionHelper;
-import org.farhan.mbt.LanguageAccessImpl;
+import org.farhan.dsl.sheepdog.LanguageAccessImpl;
 import org.farhan.mbt.asciidoctor.AsciiDoctorTestSuite;
 import org.farhan.mbt.asciidoctor.AsciiDoctorPathConverter;
 import org.farhan.mbt.asciidoctor.AsciiDoctorTestProject;
@@ -15,14 +15,14 @@ import org.farhan.mbt.core.UMLTestSetup;
 import org.farhan.mbt.core.UMLTestStep;
 import org.farhan.mbt.core.UMLTestSuite;
 import org.farhan.mbt.core.UMLTestProject;
-import org.farhan.mbt.sheepDog.TestStepContainer;
-import org.farhan.mbt.sheepDog.TestData;
-import org.farhan.mbt.sheepDog.Row;
-import org.farhan.mbt.sheepDog.TestStep;
-import org.farhan.mbt.sheepDog.StepDefinition;
-import org.farhan.mbt.sheepDog.StepParameters;
-import org.farhan.mbt.sheepDog.TestData;
-import org.farhan.mbt.sheepDog.TestStep;
+import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
+import org.farhan.dsl.sheepdog.sheepDog.TestData;
+import org.farhan.dsl.sheepdog.sheepDog.Row;
+import org.farhan.dsl.sheepdog.sheepDog.TestStep;
+import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
+import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
+import org.farhan.dsl.sheepdog.sheepDog.TestData;
+import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 
 public class ConvertAsciidoctorToUML extends Converter {
 

@@ -22,7 +22,7 @@ on:
           - sheep-dog-dev-svc
           - sheep-dog-dev-svc-maven-plugin
           - sheep-dog-test
-          - sheepdogxtextcukeplugin.parent
+          - sheepdogcucumber.parent
           - sheepdogxtextplugin.parent
       plugin:
         description: 'Release plugin organisation'

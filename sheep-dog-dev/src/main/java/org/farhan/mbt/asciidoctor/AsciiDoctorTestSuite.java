@@ -19,21 +19,21 @@ import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.helper.StepDefinitionHelper;
 import org.farhan.helper.StepHelper;
-import org.farhan.mbt.LanguageAccessImpl;
+import org.farhan.dsl.sheepdog.LanguageAccessImpl;
 import org.farhan.mbt.convert.ConvertibleObject;
-import org.farhan.mbt.sheepDog.TestStepContainer;
-import org.farhan.mbt.sheepDog.Tags;
-import org.farhan.mbt.sheepDog.TestSetup;
-import org.farhan.mbt.sheepDog.Cell;
-import org.farhan.mbt.sheepDog.TestData;
-import org.farhan.mbt.sheepDog.TestSuite;
-import org.farhan.mbt.sheepDog.Row;
-import org.farhan.mbt.sheepDog.TestCase;
-import org.farhan.mbt.sheepDog.SheepDogFactory;
-import org.farhan.mbt.sheepDog.Statement;
-import org.farhan.mbt.sheepDog.TestStep;
-import org.farhan.mbt.sheepDog.StepDefinition;
-import org.farhan.mbt.sheepDog.StepParameters;
+import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
+import org.farhan.dsl.sheepdog.sheepDog.Tags;
+import org.farhan.dsl.sheepdog.sheepDog.TestSetup;
+import org.farhan.dsl.sheepdog.sheepDog.Cell;
+import org.farhan.dsl.sheepdog.sheepDog.TestData;
+import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
+import org.farhan.dsl.sheepdog.sheepDog.Row;
+import org.farhan.dsl.sheepdog.sheepDog.TestCase;
+import org.farhan.dsl.sheepdog.sheepDog.SheepDogFactory;
+import org.farhan.dsl.sheepdog.sheepDog.Statement;
+import org.farhan.dsl.sheepdog.sheepDog.TestStep;
+import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
+import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 
 public class AsciiDoctorTestSuite implements ConvertibleObject {
 

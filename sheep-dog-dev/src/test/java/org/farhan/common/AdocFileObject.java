@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 import org.farhan.mbt.asciidoctor.AsciiDoctorStepObject;
 import org.farhan.mbt.asciidoctor.AsciiDoctorTestSuite;
-import org.farhan.mbt.sheepDog.TestStepContainer;
-import org.farhan.mbt.sheepDog.Cell;
-import org.farhan.mbt.sheepDog.TestData;
-import org.farhan.mbt.sheepDog.Row;
-import org.farhan.mbt.sheepDog.TestStep;
-import org.farhan.mbt.sheepDog.StepDefinition;
-import org.farhan.mbt.sheepDog.StepParameters;
+import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
+import org.farhan.dsl.sheepdog.sheepDog.Cell;
+import org.farhan.dsl.sheepdog.sheepDog.TestData;
+import org.farhan.dsl.sheepdog.sheepDog.Row;
+import org.farhan.dsl.sheepdog.sheepDog.TestStep;
+import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
+import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 import org.junit.jupiter.api.Assertions;
 
 public class AdocFileObject extends FileObject {

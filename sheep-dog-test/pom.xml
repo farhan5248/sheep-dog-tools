@@ -139,32 +139,6 @@
 	</dependencyManagement>
 
 	<dependencies>
-		<!-- Eclipse Common -->
-		<dependency>
-			<groupId>org.eclipse.core</groupId>
-			<artifactId>runtime</artifactId>
-			<version>3.29.0.v20230726-0617</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.emf</groupId>
-			<artifactId>ecore</artifactId>
-			<version>2.35.0.v20230829-0934</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.emf</groupId>
-			<artifactId>ecore.xmi</artifactId>
-			<version>2.35.0.v20230801-1141</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.emf</groupId>
-			<artifactId>mapping.ecore2xml</artifactId>
-			<version>2.12.0.v20230211-1150</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.emf</groupId>
-			<artifactId>common</artifactId>
-			<version>2.29.0.v20230916-0637</version>
-		</dependency>
 		<!-- Cucumber -->
 		<dependency>
 			<groupId>io.cucumber</groupId>

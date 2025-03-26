@@ -3,7 +3,7 @@ package org.farhan.mbt.asciidoctor;
 
 import java.util.ArrayList;
 
-import org.farhan.mbt.SheepDogStandaloneSetup;
+import org.farhan.dsl.sheepdog.SheepDogStandaloneSetup;
 import org.farhan.mbt.convert.ConvertibleObject;
 import org.farhan.mbt.convert.ConvertibleProject;
 import org.farhan.mbt.convert.ObjectRepository;

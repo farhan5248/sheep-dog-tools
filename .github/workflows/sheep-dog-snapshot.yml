@@ -27,11 +27,10 @@ jobs:
       project: 'sheepdogxtextplugin.parent'
     secrets: inherit
 
-  sheep-dog-xtext-cuke-plugin:
-    needs: [sheep-dog-test]
+  sheep-dog-cucumber:
     uses: ./.github/workflows/snapshot.yml
     with:
-      project: 'sheepdogxtextcukeplugin.parent'
+      project: 'sheepdogcucumber.parent'
     secrets: inherit
 
   sheep-dog-dev:

@@ -2,11 +2,11 @@ package org.farhan.mbt.convert;
 
 import java.util.ArrayList;
 
-import org.farhan.mbt.cucumber.Background;
-import org.farhan.mbt.cucumber.Examples;
-import org.farhan.mbt.cucumber.Scenario;
-import org.farhan.mbt.cucumber.ScenarioOutline;
-import org.farhan.mbt.cucumber.Step;
+import org.farhan.dsl.cucumber.cucumber.Background;
+import org.farhan.dsl.cucumber.cucumber.Examples;
+import org.farhan.dsl.cucumber.cucumber.Scenario;
+import org.farhan.dsl.cucumber.cucumber.ScenarioOutline;
+import org.farhan.dsl.cucumber.cucumber.Step;
 import com.github.javaparser.ast.body.MethodDeclaration;
 
 import org.farhan.mbt.core.UMLStepDefinition;

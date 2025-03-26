@@ -22,16 +22,8 @@ jobs:
       plugin: 'Sheep'
     secrets: inherit
   
-  sheep-dog-xtext-cuke-plugin:
-    needs: [sheep-dog-test]
-    uses: ./.github/workflows/release.yml
-    with:
-      project: 'sheepdogxtextcukeplugin.parent'
-      plugin: 'Sheep'
-    secrets: inherit
-
   sheep-dog-dev:
-    needs: [sheep-dog-xtext-plugin, sheep-dog-xtext-cuke-plugin]
+    needs: [sheep-dog-xtext-plugin]
     uses: ./.github/workflows/release.yml
     with:
       project: 'sheep-dog-dev'

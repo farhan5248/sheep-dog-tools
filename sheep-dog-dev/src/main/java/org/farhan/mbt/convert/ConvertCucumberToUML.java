@@ -1,11 +1,11 @@
 package org.farhan.mbt.convert;
 
-import org.farhan.mbt.cucumber.AbstractScenario;
-import org.farhan.mbt.cucumber.Examples;
-import org.farhan.mbt.cucumber.Row;
-import org.farhan.mbt.cucumber.Scenario;
-import org.farhan.mbt.cucumber.ScenarioOutline;
-import org.farhan.mbt.cucumber.Step;
+import org.farhan.dsl.cucumber.cucumber.AbstractScenario;
+import org.farhan.dsl.cucumber.cucumber.Examples;
+import org.farhan.dsl.cucumber.cucumber.Row;
+import org.farhan.dsl.cucumber.cucumber.Scenario;
+import org.farhan.dsl.cucumber.cucumber.ScenarioOutline;
+import org.farhan.dsl.cucumber.cucumber.Step;
 import org.farhan.mbt.core.UMLTestCase;
 import org.farhan.mbt.core.UMLTestData;
 import org.farhan.mbt.core.UMLTestSuite;

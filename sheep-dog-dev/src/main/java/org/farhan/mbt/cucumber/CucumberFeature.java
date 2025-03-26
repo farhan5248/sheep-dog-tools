@@ -17,6 +17,19 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.impl.RuleCallImpl;
 import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
 import org.eclipse.xtext.resource.SaveOptions;
+import org.farhan.dsl.cucumber.cucumber.AbstractScenario;
+import org.farhan.dsl.cucumber.cucumber.Background;
+import org.farhan.dsl.cucumber.cucumber.Cell;
+import org.farhan.dsl.cucumber.cucumber.CucumberFactory;
+import org.farhan.dsl.cucumber.cucumber.Examples;
+import org.farhan.dsl.cucumber.cucumber.Feature;
+import org.farhan.dsl.cucumber.cucumber.Line;
+import org.farhan.dsl.cucumber.cucumber.Row;
+import org.farhan.dsl.cucumber.cucumber.Scenario;
+import org.farhan.dsl.cucumber.cucumber.ScenarioOutline;
+import org.farhan.dsl.cucumber.cucumber.Statement;
+import org.farhan.dsl.cucumber.cucumber.Step;
+import org.farhan.dsl.cucumber.cucumber.Tag;
 import org.farhan.mbt.convert.ConvertibleObject;
 
 public class CucumberFeature implements ConvertibleObject {
