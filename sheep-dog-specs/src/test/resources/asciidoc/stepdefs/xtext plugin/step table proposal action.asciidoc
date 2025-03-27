@@ -1,4 +1,9 @@
 = Step-Object: step table proposal action
 
+This is triggered by CTRL+SPACE.
+This is similar to the suggestion action.
+In the future it'll be removed.
+
 == Step-Definition: is performed
 
+Calls the Java method that proposes step table headers.

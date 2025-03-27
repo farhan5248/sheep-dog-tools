@@ -185,23 +185,24 @@ public class StepDefinitionHelper {
 		allSteps.addAll(la.getPreviousSteps());
 
 		for (Object step : allSteps) {
+			if (la.getStepName() != null) {
+				// This suggestion is to make referring to the last fully qualified name less
+				// tedious. However it can only refer to the last object.
+				proposal = new Proposal();
+				proposal.setDisplay(getStepObjectWithoutPath(StepHelper.getObject(la.getStepName(step))));
+				proposal.setDocumentation("Referred in: " + la.getStepName(step));
+				proposal.setReplacement("The " + proposal.getDisplay());
+				proposals.put(proposal.getDisplay(), proposal);
 
-			// This suggestion is to make referring to the last fully qualified name less
-			// tedious. However it can only refer to the last object.
-			proposal = new Proposal();
-			proposal.setDisplay(getStepObjectWithoutPath(StepHelper.getObject(la.getStepName(step))));
-			proposal.setDocumentation("Referred in: " + la.getStepName(step));
-			proposal.setReplacement("The " + proposal.getDisplay());
-			proposals.put(proposal.getDisplay(), proposal);
-
-			// This proposal is to list the fully qualified name of an object in case two
-			// objects with the same simple name have different paths like a batch job file
-			// being moved between directories
-			proposal = new Proposal();
-			proposal.setDisplay(StepHelper.getObject(la.getStepName(step)));
-			proposal.setDocumentation("Referred in: " + la.getStepName(step));
-			proposal.setReplacement("The " + proposal.getDisplay());
-			proposals.put(proposal.getDisplay(), proposal);
+				// This proposal is to list the fully qualified name of an object in case two
+				// objects with the same simple name have different paths like a batch job file
+				// being moved between directories
+				proposal = new Proposal();
+				proposal.setDisplay(StepHelper.getObject(la.getStepName(step)));
+				proposal.setDocumentation("Referred in: " + la.getStepName(step));
+				proposal.setReplacement("The " + proposal.getDisplay());
+				proposals.put(proposal.getDisplay(), proposal);
+			}
 		}
 		return proposals.values();
 	}
