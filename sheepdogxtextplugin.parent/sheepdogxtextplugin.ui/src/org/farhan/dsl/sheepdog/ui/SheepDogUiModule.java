@@ -7,9 +7,11 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
 import org.eclipse.xtext.generator.IContextualOutputConfigurationProvider;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.farhan.dsl.sheepdog.ui.syntaxcoloring.SheepDogAntlrTokenToAttributeIdMapper;
 import org.farhan.dsl.sheepdog.ui.syntaxcoloring.SheepDogHighlightingConfiguration;
+import org.farhan.dsl.sheepdog.ui.syntaxcoloring.SheepDogSemanticHighlightingCalculator;
 
 /**
  * Use this class to register components to be used within the Eclipse IDE.
@@ -20,10 +22,6 @@ public class SheepDogUiModule extends AbstractSheepDogUiModule {
 		super(plugin);
 	}
 
-	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
-		return SheepDogHighlightingConfiguration.class;
-	}
-
 	public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
 		return SheepDogAntlrTokenToAttributeIdMapper.class;
 	}
@@ -31,4 +29,13 @@ public class SheepDogUiModule extends AbstractSheepDogUiModule {
 	public Class<? extends IContextualOutputConfigurationProvider> bindIContextualOutputConfigurationProvider() {
 		return EclipseOutputConfigurationProvider.class;
 	}
+
+	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return SheepDogHighlightingConfiguration.class;
+	}
+
+	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+		return SheepDogSemanticHighlightingCalculator.class;
+	}
+
 }

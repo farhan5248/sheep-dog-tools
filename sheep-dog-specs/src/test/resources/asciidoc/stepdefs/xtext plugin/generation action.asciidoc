@@ -5,3 +5,4 @@ This is triggered by the Build Project menu item or the quick fix options.
 == Step-Definition: is performed
 
 Calls the Java method that generates the files.
+

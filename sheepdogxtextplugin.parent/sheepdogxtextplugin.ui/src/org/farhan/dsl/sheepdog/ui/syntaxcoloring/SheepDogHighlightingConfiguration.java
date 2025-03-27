@@ -11,12 +11,13 @@ public class SheepDogHighlightingConfiguration implements IHighlightingConfigura
 	public static final String DEFAULT_ID = "default";
 	public static final String KEYWORD_FSE_ID = "keywordfse";
 	public static final String KEYWORD_GWT_ID = "keywordgwt";
+	public static final String KEYWORD_OBJ_ID = "keywordobj";
 	public static final String SL_COMMENT_ID = "comment";
 	public static final String STRING_ID = "string";
 	public static final String TAG_ID = "tag";
 	public static final String PARAMETER_ID = "parameter";
 	public static final String DOC_ID = "document";
-	public static final String KEYWORD_OBJ_ID = "keywordobj";
+	public static final String STATEMENT_ID = "statement";
 
 	@Override
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
@@ -27,8 +28,15 @@ public class SheepDogHighlightingConfiguration implements IHighlightingConfigura
 		acceptor.acceptDefaultHighlighting(SL_COMMENT_ID, "Comment", commentTextStyle());
 		acceptor.acceptDefaultHighlighting(STRING_ID, "String", stringTextStyle());
 		acceptor.acceptDefaultHighlighting(PARAMETER_ID, "Parameter", parameterTextStyle());
+		acceptor.acceptDefaultHighlighting(STATEMENT_ID, "Description", statementTextStyle());
 		acceptor.acceptDefaultHighlighting(TAG_ID, "Tag", tagTextStyle());
 		acceptor.acceptDefaultHighlighting(DOC_ID, "Document", documentTextStyle());
+	}
+
+	private TextStyle statementTextStyle() {
+		TextStyle textStyle = defaultTextStyle().copy();
+		textStyle.setColor(new RGB(64, 64, 64));
+		return textStyle;
 	}
 
 	public static TextStyle defaultTextStyle() {

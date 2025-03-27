@@ -1,5 +1,7 @@
 = Step-Object: uml/pst.uml file
 
+Represents the UML model derived from the test suites and step objects.
+
 == Step-Definition: Class Comments section will be created as follows
 
 The UML class comments are mapped to the Javadoc sections or cucumber Feature descriptions
