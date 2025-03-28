@@ -25,10 +25,6 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
 		if (resource == null || resource.getParseResult() == null || resource.getContents().size() <= 0) {
 			return;
 		}
-		// TODO review tags
-		// TODO review parameters
-		// TODO do tables step/testcase
-		// TODO do docstrings
 		if (resource.getContents().get(0) instanceof TestSuite) {
 			TestSuite testSuite = (TestSuite) resource.getContents().get(0);
 			for (Statement s : testSuite.getStatementList()) {
@@ -74,14 +70,12 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
 					for (Statement s : sp.getStatementList()) {
 						highlightStatement(s, acceptor, 0);
 					}
-					highlightStepParameter(sp, acceptor);
 				}
 			}
 		}
 	}
 
-	private void highlightParameters(TestStep testStep, IHighlightedPositionAcceptor acceptor, int current) {
-		// TODO this might not be valid, review asciidoc parameter syntax
+	private void highlightStepParameters(TestStep testStep, IHighlightedPositionAcceptor acceptor, int current) {
 		if (testStep != null) {
 			INode node = NodeModelUtils.getNode(testStep);
 			int start = node.getText().indexOf('<', current);
@@ -89,7 +83,7 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
 			if (start > 0 && stop > 0 && node.getText().charAt(start + 1) != ' ') {
 				acceptor.addPosition(node.getTotalOffset() + start, stop - start + 1,
 						SheepDogHighlightingConfiguration.PARAMETER_ID);
-				this.highlightParameters(testStep, acceptor, stop + 1);
+				this.highlightStepParameters(testStep, acceptor, stop + 1);
 			}
 		}
 	}
@@ -98,16 +92,17 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
 		if (statement != null) {
 			INode node = NodeModelUtils.getNode(statement);
 			int offset = node.getTotalOffset();
-			int length = node.getText().length();
-			if (offset > 0 && length > 0) {
-				acceptor.addPosition(offset, length, SheepDogHighlightingConfiguration.STATEMENT_ID);
+			for (String s : node.getText().split(" ")) {
+				if (s.startsWith("@")) {
+					acceptor.addPosition(offset + current, s.length(), SheepDogHighlightingConfiguration.TAG_ID);
+				} else if (s.startsWith("TODO")) {
+					acceptor.addPosition(offset + current, s.length(), SheepDogHighlightingConfiguration.TODO_ID);
+				} else {
+					acceptor.addPosition(offset + current, s.length(), SheepDogHighlightingConfiguration.STATEMENT_ID);
+				}
+				current += s.length() + 1;
 			}
-			// TODO, within this, split the text into tokens and check if starts with @,
-			// else starts with todo else it's STATEMENT_ID
 		}
-	}
-
-	private void highlightStepParameter(StepParameters stepParameter, IHighlightedPositionAcceptor acceptor) {
 	}
 
 	private void highlightTagList(Tags tag, IHighlightedPositionAcceptor acceptor) {
@@ -125,7 +120,8 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
 
 	private void highlightTestStep(TestStep testStep, IHighlightedPositionAcceptor acceptor) {
 		if (testStep.eContainer() instanceof TestCase && testStep.getName() != null) {
-			this.highlightParameters(testStep, acceptor, 0);
+			this.highlightStepParameters(testStep, acceptor, 0);
 		}
+		// TODO also handle table headers
 	}
 }

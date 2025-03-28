@@ -18,6 +18,7 @@ public class SheepDogHighlightingConfiguration implements IHighlightingConfigura
 	public static final String PARAMETER_ID = "parameter";
 	public static final String DOC_ID = "document";
 	public static final String STATEMENT_ID = "statement";
+	public static final String TODO_ID = "todo";
 
 	@Override
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
@@ -31,6 +32,14 @@ public class SheepDogHighlightingConfiguration implements IHighlightingConfigura
 		acceptor.acceptDefaultHighlighting(STATEMENT_ID, "Description", statementTextStyle());
 		acceptor.acceptDefaultHighlighting(TAG_ID, "Tag", tagTextStyle());
 		acceptor.acceptDefaultHighlighting(DOC_ID, "Document", documentTextStyle());
+		acceptor.acceptDefaultHighlighting(TODO_ID, "Todo", todoTextStyle());
+	}
+
+	private TextStyle todoTextStyle() {
+		TextStyle textStyle = defaultTextStyle().copy();
+		textStyle.setColor(new RGB(0, 0, 255));
+		textStyle.setStyle(SWT.BOLD);
+		return textStyle;
 	}
 
 	private TextStyle statementTextStyle() {
