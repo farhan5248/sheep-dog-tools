@@ -82,7 +82,7 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
 			int stop = node.getText().indexOf('>', start);
 			if (start > 0 && stop > 0 && node.getText().charAt(start + 1) != ' ') {
 				acceptor.addPosition(node.getTotalOffset() + start, stop - start + 1,
-						SheepDogHighlightingConfiguration.PARAMETER_ID);
+						SheepDogHighlightingConfiguration.TBL_ID);
 				this.highlightStepParameters(testStep, acceptor, stop + 1);
 			}
 		}

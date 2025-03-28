@@ -9,57 +9,52 @@ public class SheepDogAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToA
 		if (tokenName == null) {
 			return SheepDogHighlightingConfiguration.DEFAULT_ID;
 		}
-
 		switch (tokenName) {
 		case "RULE_EOL":
 			// nothing to do here
-		case "RULE_WORD":
-			return SheepDogHighlightingConfiguration.STRING_ID;
 		case "RULE_WS":
 			// nothing to do here
+		case "RULE_WORD":
+			return SheepDogHighlightingConfiguration.WORD_ID;
 		case "RULE_SL_COMMENT":
-			return SheepDogHighlightingConfiguration.SL_COMMENT_ID;
+			return SheepDogHighlightingConfiguration.COMMENT_ID;
+		case "RULE_RAWTEXT":
+			return SheepDogHighlightingConfiguration.DOC_ID;
 		case "'='":
-			return SheepDogHighlightingConfiguration.KEYWORD_OBJ_ID;
+			return SheepDogHighlightingConfiguration.KEYWORD_LVL_1;
 		case "'=='":
-			return SheepDogHighlightingConfiguration.KEYWORD_OBJ_ID;
+			return SheepDogHighlightingConfiguration.KEYWORD_LVL_2;
 		case "'==='":
-			return SheepDogHighlightingConfiguration.KEYWORD_OBJ_ID;
+			return SheepDogHighlightingConfiguration.KEYWORD_LVL_3;
 		case "'Step-Object:'":
-			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
+			return SheepDogHighlightingConfiguration.KEYWORD_LVL_1;
 		case "'Step-Definition:'":
-			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
+			return SheepDogHighlightingConfiguration.KEYWORD_LVL_2;
 		case "'Step-Parameters:'":
-			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
+			return SheepDogHighlightingConfiguration.KEYWORD_LVL_3;
 		case "'Test-Suite:'":
-			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
+			return SheepDogHighlightingConfiguration.KEYWORD_LVL_1;
 		case "'Test-Setup:'":
-			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
+			return SheepDogHighlightingConfiguration.KEYWORD_LVL_2;
 		case "'Test-Case:'":
-			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
+			return SheepDogHighlightingConfiguration.KEYWORD_LVL_2;
 		case "'Test-Data:'":
-			return SheepDogHighlightingConfiguration.KEYWORD_FSE_ID;
+			return SheepDogHighlightingConfiguration.KEYWORD_LVL_3;
 		case "'Given:'":
-			return SheepDogHighlightingConfiguration.KEYWORD_GWT_ID;
+			return SheepDogHighlightingConfiguration.KEYWORD_LVL_3;
 		case "'When:'":
-			return SheepDogHighlightingConfiguration.KEYWORD_GWT_ID;
+			return SheepDogHighlightingConfiguration.KEYWORD_LVL_3;
 		case "'Then:'":
-			return SheepDogHighlightingConfiguration.KEYWORD_GWT_ID;
+			return SheepDogHighlightingConfiguration.KEYWORD_LVL_3;
 		case "'And:'":
-			return SheepDogHighlightingConfiguration.KEYWORD_GWT_ID;
-		case "'[options=\"header\"]'":
-			return SheepDogHighlightingConfiguration.DOC_ID;
+			return SheepDogHighlightingConfiguration.KEYWORD_LVL_3;
 		case "'|==='":
-			return SheepDogHighlightingConfiguration.DOC_ID;
+			return SheepDogHighlightingConfiguration.TBL_ID;
 		case "'|'":
-			return SheepDogHighlightingConfiguration.DOC_ID;
-		case "'----'":
-			return SheepDogHighlightingConfiguration.DOC_ID;
+			return SheepDogHighlightingConfiguration.TBL_ID;
 		case "'[tags='":
 			return SheepDogHighlightingConfiguration.TAG_ID;
 		case "']'":
-			return SheepDogHighlightingConfiguration.TAG_ID;
-		case "':tags:'":
 			return SheepDogHighlightingConfiguration.TAG_ID;
 		default:
 			return SheepDogHighlightingConfiguration.DEFAULT_ID;
