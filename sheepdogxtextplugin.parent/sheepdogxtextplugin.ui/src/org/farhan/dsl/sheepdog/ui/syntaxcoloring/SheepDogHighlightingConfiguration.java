@@ -42,6 +42,7 @@ public class SheepDogHighlightingConfiguration implements IHighlightingConfigura
 		TextStyle textStyle = defaultTextStyle().copy();
 		textStyle.setColor(new RGB(0, 192, 192));
 		textStyle.setStyle(SWT.BOLD);
+		textStyle.setStyle(SWT.ITALIC);
 		return textStyle;
 	}
 

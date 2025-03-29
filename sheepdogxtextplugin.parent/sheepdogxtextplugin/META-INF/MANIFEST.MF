@@ -17,9 +17,7 @@ Require-Bundle: org.eclipse.xtext,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
  org.eclipse.xtext.builder;bundle-version="2.38.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-21
-Export-Package: org.farhan.common,
- org.farhan.helper,
- org.farhan.dsl.sheepdog,
+Export-Package: org.farhan.dsl.sheepdog,
  org.farhan.dsl.sheepdog.formatting2,
  org.farhan.dsl.sheepdog.generator,
  org.farhan.dsl.sheepdog.parser.antlr,
@@ -30,5 +28,6 @@ Export-Package: org.farhan.common,
  org.farhan.dsl.sheepdog.sheepDog,
  org.farhan.dsl.sheepdog.sheepDog.impl,
  org.farhan.dsl.sheepdog.sheepDog.util,
- org.farhan.dsl.sheepdog.validation
+ org.farhan.dsl.sheepdog.validation,
+ org.farhan.helper
 Import-Package: org.apache.log4j
