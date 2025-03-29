@@ -62,8 +62,13 @@ public final class Config extends AbstractModule implements InjectorSource {
 		bind(ProcessAsciidocFile.class).to(FileImpl.class);
 		bind(org.farhan.objects.mbttransformer.src.test.resources.asciidoc.ProcessAsciidocFile.class)
 				.to(FileImpl.class);
+		bind(org.farhan.objects.specprj.src.test.resources.asciidoc.app.ProcessAsciidocFile.class)
+		.to(FileImpl.class);
+		bind(org.farhan.objects.specprj.src.test.resources.asciidoc.ProcessAsciidocFile.class)
+		.to(FileImpl.class);
 		bind(ProcessFeatureFile.class).to(FileImpl.class);
 		bind(org.farhan.objects.mbttransformer.src.test.resources.cucumber.ProcessFeatureFile.class).to(FileImpl.class);
+		bind(org.farhan.objects.codeprj.src.test.resources.cucumber.ProcessFeatureFile.class).to(FileImpl.class);
 		bind(UmlToAsciidoctorGoal.class).to(UmlToAsciidoctorGoalImpl.class);
 		bind(UmlToCucumberGoal.class).to(UmlToCucumberGoalImpl.class);
 		bind(UmlToCucumberSpringGoal.class).to(UmlToCucumberSpringGoalImpl.class);

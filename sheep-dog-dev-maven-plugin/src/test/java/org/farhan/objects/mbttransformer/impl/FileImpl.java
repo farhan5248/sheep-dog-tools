@@ -15,7 +15,10 @@ import io.cucumber.guice.ScenarioScoped;
 public class FileImpl extends FileObject
 		implements BlahObjectPageStepsJavaFile, ObjectPageJavaFile, ObjectPageAsciidocFile, ProcessAsciidocFile,
 		ProcessFeatureFile, org.farhan.objects.mbttransformer.src.test.resources.asciidoc.ProcessAsciidocFile,
-		org.farhan.objects.mbttransformer.src.test.resources.cucumber.ProcessFeatureFile {
+		org.farhan.objects.mbttransformer.src.test.resources.cucumber.ProcessFeatureFile,
+		org.farhan.objects.codeprj.src.test.resources.cucumber.ProcessFeatureFile,
+		org.farhan.objects.specprj.src.test.resources.asciidoc.app.ProcessAsciidocFile,
+		org.farhan.objects.specprj.src.test.resources.asciidoc.ProcessAsciidocFile {
 
 	@Override
 	public void assertContent(HashMap<String, String> keyMap) {

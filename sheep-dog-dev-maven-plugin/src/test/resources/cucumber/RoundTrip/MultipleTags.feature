@@ -3,7 +3,7 @@ Feature: Multiple Tags
 
   Scenario: Create two models from different tags
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -12,7 +12,7 @@ Feature: Multiple Tags
           
           === Given: The Object1 page is empty
           """
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -30,7 +30,7 @@ Feature: Multiple Tags
       And The mbt-transformer plugin, uml-to-cucumber goal is executed with
           | Tags |
           | tag1 |
-     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be created as follows
+     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be created as follows
           """
           Feature: Process
           

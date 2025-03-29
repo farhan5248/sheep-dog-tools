@@ -283,6 +283,7 @@ public class StepDefinitionHelper {
 	}
 
 	private static String getStepObjectWithoutPath(String stepObject) {
+		// TODO rename to getStepObjectSimpleName
 		String[] objectParts = stepObject.split("/");
 		return objectParts[objectParts.length - 1];
 	}

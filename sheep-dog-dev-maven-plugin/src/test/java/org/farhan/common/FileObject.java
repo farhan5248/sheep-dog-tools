@@ -10,7 +10,7 @@ public abstract class FileObject extends TestObject {
 	protected void assertObjectExists() {
 		try {
 			Assertions.assertTrue(sr.contains(attributes.get("path")),
-					"The file (" + attributes.get("path") + ") isn't present");
+					"The file (" + attributes.get("component") + "/" + attributes.get("path") + ") isn't present");
 		} catch (Exception e) {
 			Assertions.fail(getStackTraceAsString(e));
 		}
@@ -18,7 +18,7 @@ public abstract class FileObject extends TestObject {
 
 	protected void setContent(String docString) {
 		try {
-			sr.put(attributes.get("path"), docString);
+			sr.put(attributes.get("component") + "/" + attributes.get("path"), docString);
 		} catch (Exception e) {
 			Assertions.fail(getStackTraceAsString(e));
 		}
@@ -26,7 +26,7 @@ public abstract class FileObject extends TestObject {
 
 	protected void assertContent(String docString) {
 		try {
-			String contents = sr.get(attributes.get("path"));
+			String contents = sr.get(attributes.get("component") + "/" + attributes.get("path"));
 			Assertions.assertEquals(docString, contents.replaceAll("\r", "").trim());
 		} catch (Exception e) {
 			Assertions.fail(getStackTraceAsString(e));

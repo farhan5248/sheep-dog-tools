@@ -50,7 +50,7 @@ public class StepHelper {
 	}
 
 	public static String[] getComponentTypes() {
-		String[] types = { "application", "service", "plugin", "batchjob" };
+		String[] types = { "application", "service", "plugin", "batchjob", "project" };
 		return types;
 	}
 

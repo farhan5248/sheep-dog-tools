@@ -216,6 +216,11 @@ public class VertexValidatorTest {
 	}
 
 	@Test
+	public void testAppRegexProject() {
+		Assertions.assertTrue(StepHelper.isValid("The Something1 project, Something2 file is present"));
+	}
+
+	@Test
 	public void testAppRegexService() {
 		Assertions.assertTrue(StepHelper.isValid("The Something1 service, Something2 file is empty"));
 	}

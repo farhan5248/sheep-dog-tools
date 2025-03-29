@@ -11,7 +11,7 @@ Feature: Document To Code
           
           [tags="tag1"]
           == Test-Setup: Setup
-
+          
           [tags="tag2"]
           == Test-Case: Story One
           
@@ -88,7 +88,7 @@ Feature: Document To Code
             Desc 1
           
             Background: Setup
-
+          
             @tag2
             Scenario: Story One
           

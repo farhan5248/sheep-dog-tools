@@ -42,6 +42,10 @@ public abstract class MBTMojo extends AbstractMojo {
 		if (!baseDir.endsWith("/")) {
 			baseDir += "/";
 		}
+		// TODO create a modelDir parameter, if it's empty, use the baseDir. It should
+		// be a relative path like baseDir/../sheep-dog-specs or a full path.
+		// TODO make a unit (non asciidoc) test for this, test both relative and
+		// complete paths
 		ObjectRepository or = new FileObjectRepository(baseDir);
 		SourceRepository sr = new SourceRepository(baseDir);
 		try {
