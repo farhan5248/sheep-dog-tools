@@ -2,7 +2,7 @@
 
 == Test-Case: One statement, one step, one scenario
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -22,9 +22,9 @@ Desc line 1
 
 === And: The mbt-transformer plugin, uml-to-cucumber goal is executed
 
-=== Then: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+=== Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
-=== And: The mbt-transformer plugin, Process.feature file Background section will be created as follows
+=== And: The code-prj project, Process.feature file Background section will be created as follows
 
 |===
 | Name  | Description
@@ -33,7 +33,7 @@ Desc line 1
 
 == Test-Case: No statement, one step, one scenario
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -51,16 +51,16 @@ Desc line 1
 
 === And: The mbt-transformer plugin, uml-to-cucumber goal is executed
 
-=== Then: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+=== Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
-=== And: The mbt-transformer plugin, Process.feature file Background Steps section will be created as follows
+=== And: The code-prj project, Process.feature file Background Steps section will be created as follows
 
 |===
 | Name  | Step                                            
 | Setup | Given The Unknown service, Object0 page is valid
 |===
 
-=== And: The mbt-transformer plugin, Process.feature file Scenarios Steps section will be created as follows
+=== And: The code-prj project, Process.feature file Scenarios Steps section will be created as follows
 
 |===
 | Name   | Step                                            
@@ -69,7 +69,7 @@ Desc line 1
 
 == Test-Case: No statement, one step, two scenarios
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -91,16 +91,16 @@ Desc line 1
 
 === And: The mbt-transformer plugin, uml-to-cucumber goal is executed
 
-=== Then: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+=== Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
-=== And: The mbt-transformer plugin, Process.feature file Background Steps section will be created as follows
+=== And: The code-prj project, Process.feature file Background Steps section will be created as follows
 
 |===
 | Name  | Step                                            
 | Setup | Given The Unknown service, Object0 page is valid
 |===
 
-=== And: The mbt-transformer plugin, Process.feature file Scenarios Steps section will be created as follows
+=== And: The code-prj project, Process.feature file Scenarios Steps section will be created as follows
 
 |===
 | Name     | Step                                            
@@ -110,7 +110,7 @@ Desc line 1
 
 == Test-Case: No statement, one step, three scenarios
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -136,16 +136,16 @@ Desc line 1
 
 === And: The mbt-transformer plugin, uml-to-cucumber goal is executed
 
-=== Then: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+=== Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
-=== And: The mbt-transformer plugin, Process.feature file Background Steps section will be created as follows
+=== And: The code-prj project, Process.feature file Background Steps section will be created as follows
 
 |===
 | Name  | Step                                            
 | Setup | Given The Unknown service, Object0 page is valid
 |===
 
-=== And: The mbt-transformer plugin, Process.feature file Scenarios Steps section will be created as follows
+=== And: The code-prj project, Process.feature file Scenarios Steps section will be created as follows
 
 |===
 | Name     | Step                                            
@@ -156,7 +156,7 @@ Desc line 1
 
 == Test-Case: No statement, two steps, one scenario
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -175,9 +175,9 @@ Desc line 1
 
 === And: The mbt-transformer plugin, uml-to-cucumber goal is executed
 
-=== Then: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+=== Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
-=== And: The mbt-transformer plugin, Process.feature file Background Steps section will be created as follows
+=== And: The code-prj project, Process.feature file Background Steps section will be created as follows
 
 |===
 | Name  | Step                                                  
@@ -194,7 +194,7 @@ Desc line 1
 
 == Test-Case: No statement, three steps, one scenario
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -214,9 +214,9 @@ Desc line 1
 
 === And: The mbt-transformer plugin, uml-to-cucumber goal is executed
 
-=== Then: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+=== Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
-=== And: The mbt-transformer plugin, Process.feature file Background Steps section will be created as follows
+=== And: The code-prj project, Process.feature file Background Steps section will be created as follows
 
 |===
 | Name  | Step                                                  

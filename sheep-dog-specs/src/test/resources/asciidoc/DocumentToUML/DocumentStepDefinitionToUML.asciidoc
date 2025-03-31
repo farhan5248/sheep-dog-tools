@@ -4,7 +4,7 @@ TODO add tests for document parameters
 
 == Test-Case: No statement, one step parameter
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -14,7 +14,7 @@ TODO add tests for document parameters
 === Given: The blah application, Object page is empty
 ----
 
-=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+=== And: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
 ----
 = Step-Object: Object page
@@ -30,7 +30,7 @@ TODO add tests for document parameters
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
+=== Then: The spec-prj project, uml/pst.uml file will be present
 
 === And: The uml/pst.uml file Interaction Annotations section will be created as follows
 
@@ -41,7 +41,7 @@ TODO add tests for document parameters
 
 == Test-Case: One statement, one step parameter
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -51,7 +51,7 @@ TODO add tests for document parameters
 === Given: The blah application, Object page is empty
 ----
 
-=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+=== And: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
 ----
 = Step-Object: Object page
@@ -69,7 +69,7 @@ Desc line 1
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
+=== Then: The spec-prj project, uml/pst.uml file will be present
 
 === And: The uml/pst.uml file Interaction Comments section will be created as follows
 
@@ -80,7 +80,7 @@ Desc line 1
 
 == Test-Case: Two statements, two step parameters
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -90,7 +90,7 @@ Desc line 1
 === Given: The blah application, Object page is empty
 ----
 
-=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+=== And: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
 ----
 = Step-Object: Object page
@@ -115,7 +115,7 @@ Desc line 2
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
+=== Then: The spec-prj project, uml/pst.uml file will be present
 
 === And: The uml/pst.uml file Interaction Comments section will be created as follows
 
@@ -141,7 +141,7 @@ Desc line 2
 
 == Test-Case: Three statements, three step parameters
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -151,7 +151,7 @@ Desc line 2
 === Given: The blah application, Object page is empty
 ----
 
-=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+=== And: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
 ----
 = Step-Object: Object page
@@ -183,7 +183,7 @@ Desc line 3
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
+=== Then: The spec-prj project, uml/pst.uml file will be present
 
 === And: The uml/pst.uml file Interaction Comments section will be created as follows
 

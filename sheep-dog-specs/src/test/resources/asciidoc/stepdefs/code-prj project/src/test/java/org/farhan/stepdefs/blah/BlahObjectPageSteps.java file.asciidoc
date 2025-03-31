@@ -8,12 +8,68 @@
 | Method Name
 |===
 
+=== Step-Parameters: 2
+
+|===
+| Method Name | Annotation | Visibility | Return Type
+|===
+
+=== Step-Parameters: 3
+
+|===
+| Method Name | Statement
+|===
+
+=== Step-Parameters: 4
+
+|===
+| Method Name | Parameter Name | Parameter Type
+|===
+
 == Step-Definition: is created as follows
 
 === Step-Parameters: 1
 
 |===
 | Content
+|===
+
+== Step-Definition: Object section will be created as follows
+
+=== Step-Parameters: 1
+
+|===
+| Import
+|===
+
+=== Step-Parameters: 2
+
+|===
+| Extends
+|===
+
+=== Step-Parameters: 3
+
+|===
+| Constructor Name | Statement
+|===
+
+=== Step-Parameters: 4
+
+|===
+| Class Annotation
+|===
+
+=== Step-Parameters: 5
+
+|===
+| Constructor Name | Constructor Annotation
+|===
+
+=== Step-Parameters: 6
+
+|===
+| Class Name | Package
 |===
 
 == Step-Definition: will be created as follows

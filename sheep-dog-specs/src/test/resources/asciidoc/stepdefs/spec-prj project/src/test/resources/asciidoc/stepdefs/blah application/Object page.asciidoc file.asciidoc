@@ -8,6 +8,38 @@
 | Content
 |===
 
+== Step-Definition: is deleted
+
+== Step-Definition: Object section will be created as follows
+
+=== Step-Parameters: 1
+
+|===
+| Name
+|===
+
+=== Step-Parameters: 2
+
+|===
+| Name | Statements
+|===
+
+== Step-Definition: Step Definition Parameters Table section will be created as follows
+
+=== Step-Parameters: 1
+
+|===
+| Name | Parameters | Row
+|===
+
+== Step-Definition: Step Definition section will be created as follows
+
+=== Step-Parameters: 1
+
+|===
+| Name | Description
+|===
+
 == Step-Definition: will be created as follows
 
 === Step-Parameters: 1
@@ -15,4 +47,6 @@
 |===
 | Content
 |===
+
+== Step-Definition: will be present
 

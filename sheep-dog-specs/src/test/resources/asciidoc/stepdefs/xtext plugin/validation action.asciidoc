@@ -1,4 +1,8 @@
 = Step-Object: validation action
 
+This is triggered by the Validate menu item, saving the file or editing its contents.
+
 == Step-Definition: is performed
+
+Calls the Java method that validates the file.
 

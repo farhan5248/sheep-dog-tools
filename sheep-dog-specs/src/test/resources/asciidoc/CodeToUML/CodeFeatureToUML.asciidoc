@@ -2,7 +2,7 @@
 
 == Test-Case: No tags, no statements
 
-=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -10,7 +10,7 @@ Feature: Process
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
+=== Then: The spec-prj project, uml/pst.uml file will be present
 
 === And: The uml/pst.uml file Class section will be created as follows
 
@@ -21,7 +21,7 @@ Feature: Process
 
 == Test-Case: One tag, one statement
 
-=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 @tag1
@@ -34,7 +34,7 @@ Feature: Process
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
+=== Then: The spec-prj project, uml/pst.uml file will be present
 
 === And: The uml/pst.uml file Class Comments section will be created as follows
 
@@ -52,7 +52,7 @@ Feature: Process
 
 == Test-Case: Two tags, two statements
 
-=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 @tag1 @tag2
@@ -66,7 +66,7 @@ Feature: Process
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
+=== Then: The spec-prj project, uml/pst.uml file will be present
 
 === And: The uml/pst.uml file Class Comments section will be created as follows
 
@@ -85,7 +85,7 @@ Feature: Process
 
 == Test-Case: Three tags, three statements
 
-=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 @tag1 @tag2 @tag3
@@ -100,7 +100,7 @@ Feature: This is a test feature
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
+=== Then: The spec-prj project, uml/pst.uml file will be present
 
 === And: The uml/pst.uml file Class Comments section will be created as follows
 
@@ -120,14 +120,14 @@ Feature: This is a test feature
 
 == Test-Case: Selected tags
 
-=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 @tag1
 Feature: Process
 ----
 
-=== And: The mbt-transformer plugin, src/test/resources/cucumber/app/Process.feature file is created as follows
+=== And: The code-prj project, src/test/resources/cucumber/app/Process.feature file is created as follows
 
 ----
 @tag2
@@ -141,7 +141,7 @@ Feature: Process
 | tag1
 |===
 
-=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
+=== Then: The spec-prj project, uml/pst.uml file will be present
 
 === And: The uml/pst.uml file Class section will be created as follows
 

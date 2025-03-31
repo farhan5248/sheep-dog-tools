@@ -2,7 +2,7 @@
 
 == Test-Case: One row, one cell
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -19,13 +19,13 @@
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
+=== And: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
 
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+=== Then: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
 
-=== And: The mbt-transformer plugin, Process.asciidoc file Scenarios Steps Step Table section will be created as follows
+=== And: The spec-prj project, Process.asciidoc file Scenarios Steps Step Table section will be created as follows
 
 |===
 | Name   | Step                                         | Row
@@ -35,7 +35,7 @@
 
 == Test-Case: Two rows, two cells
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -53,13 +53,13 @@
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
+=== And: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
 
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+=== Then: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
 
-=== And: The mbt-transformer plugin, Process.asciidoc file Scenarios Steps Step Table section will be created as follows
+=== And: The spec-prj project, Process.asciidoc file Scenarios Steps Step Table section will be created as follows
 
 |===
 | Name   | Step                                         | Row   
@@ -70,7 +70,7 @@
 
 == Test-Case: Three rows, three cells
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -89,13 +89,13 @@
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
+=== And: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
 
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+=== Then: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
 
-=== And: The mbt-transformer plugin, Process.asciidoc file Scenarios Steps Step Table section will be created as follows
+=== And: The spec-prj project, Process.asciidoc file Scenarios Steps Step Table section will be created as follows
 
 |===
 | Name   | Step                                         | Row       
@@ -107,7 +107,7 @@
 
 == Test-Case: Escaped cell data
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -124,13 +124,13 @@
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
+=== And: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
 
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
+=== Then: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
 
-=== And: The mbt-transformer plugin, Process.asciidoc file Scenarios Steps Step Table section will be created as follows
+=== And: The spec-prj project, Process.asciidoc file Scenarios Steps Step Table section will be created as follows
 
 |===
 | Name   | Step                                         | Row         

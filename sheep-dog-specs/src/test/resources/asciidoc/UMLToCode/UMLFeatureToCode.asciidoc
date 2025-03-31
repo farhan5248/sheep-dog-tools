@@ -2,7 +2,7 @@
 
 == Test-Case: No tags, no statements
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -12,9 +12,9 @@
 
 === And: The mbt-transformer plugin, uml-to-cucumber goal is executed
 
-=== Then: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+=== Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
-=== And: The mbt-transformer plugin, Process.feature file Feature section will be created as follows
+=== And: The code-prj project, Process.feature file Feature section will be created as follows
 
 |===
 | Name   
@@ -23,7 +23,7 @@
 
 == Test-Case: One tag, one statement
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -38,9 +38,9 @@ Desc line 1
 
 === And: The mbt-transformer plugin, uml-to-cucumber goal is executed
 
-=== Then: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+=== Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
-=== And: The mbt-transformer plugin, Process.feature file Feature section will be created as follows
+=== And: The code-prj project, Process.feature file Feature section will be created as follows
 
 |===
 | Name    | Tags | Statements 
@@ -49,7 +49,7 @@ Desc line 1
 
 == Test-Case: Two tags, two statements
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -65,9 +65,9 @@ Desc line 2
 
 === And: The mbt-transformer plugin, uml-to-cucumber goal is executed
 
-=== Then: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+=== Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
-=== And: The mbt-transformer plugin, Process.feature file Feature section will be created as follows
+=== And: The code-prj project, Process.feature file Feature section will be created as follows
 
 |===
 | Name    | Tags      | Statements              
@@ -76,7 +76,7 @@ Desc line 2
 
 == Test-Case: Three tags, three statements
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -93,9 +93,9 @@ Desc line 3
 
 === And: The mbt-transformer plugin, uml-to-cucumber goal is executed
 
-=== Then: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
+=== Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
-=== And: The mbt-transformer plugin, Process.feature file Feature section will be created as follows
+=== And: The code-prj project, Process.feature file Feature section will be created as follows
 
 |===
 | Name    | Tags           | Statements                           

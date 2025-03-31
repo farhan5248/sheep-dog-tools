@@ -2,7 +2,7 @@
 
 == Test-Case: One row, one cell
 
-=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -15,7 +15,7 @@ Feature: Process
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
+=== Then: The spec-prj project, uml/pst.uml file will be present
 
 === And: The uml/pst.uml file Interaction Messages section will be created as follows
 
@@ -27,7 +27,7 @@ Feature: Process
 
 == Test-Case: Two rows, two cells
 
-=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -42,7 +42,7 @@ Feature: Process
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
+=== Then: The spec-prj project, uml/pst.uml file will be present
 
 === And: The uml/pst.uml file Interaction Messages section will be created as follows
 
@@ -55,7 +55,7 @@ Feature: Process
 
 == Test-Case: Three rows, three cells
 
-=== Given: The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -71,7 +71,7 @@ Feature: Process
 
 === When: The mbt-transformer plugin, cucumber-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
+=== Then: The spec-prj project, uml/pst.uml file will be present
 
 === And: The uml/pst.uml file Interaction Messages section will be created as follows
 

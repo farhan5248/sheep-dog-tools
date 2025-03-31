@@ -2,7 +2,7 @@
 
 == Test-Case: No tags, no statements, one step
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -14,7 +14,7 @@
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
+=== Then: The spec-prj project, uml/pst.uml file will be present
 
 === And: The uml/pst.uml file Interaction Messages section will be created as follows
 
@@ -25,7 +25,7 @@
 
 == Test-Case: One tag, one statement, one step
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -40,7 +40,7 @@ Desc line 1
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
+=== Then: The spec-prj project, uml/pst.uml file will be present
 
 === And: The uml/pst.uml file Interaction Annotations section will be created as follows
 
@@ -58,7 +58,7 @@ Desc line 1
 
 == Test-Case: Two tags, two statements, two steps
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -76,7 +76,7 @@ Desc line 2
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
+=== Then: The spec-prj project, uml/pst.uml file will be present
 
 === And: The uml/pst.uml file Interaction Annotations section will be created as follows
 
@@ -103,7 +103,7 @@ Desc line 2
 
 == Test-Case: Three tags, three statements, three steps
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -124,7 +124,7 @@ Desc line 3
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
+=== Then: The spec-prj project, uml/pst.uml file will be present
 
 === And: The uml/pst.uml file Interaction Annotations section will be created as follows
 
@@ -153,7 +153,7 @@ Desc line 3
 
 == Test-Case: Selected tags
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -176,7 +176,7 @@ Desc line 3
 | tag1
 |===
 
-=== Then: The mbt-transformer plugin, uml/pst.uml file will be present
+=== Then: The spec-prj project, uml/pst.uml file will be present
 
 === And: The uml/pst.uml file Interaction section will be created as follows
 

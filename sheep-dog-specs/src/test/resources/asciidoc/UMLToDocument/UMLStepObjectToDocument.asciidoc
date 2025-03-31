@@ -2,7 +2,7 @@
 
 == Test-Case: No statements
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -12,7 +12,7 @@
 === Given: The blah application, Object page is empty
 ----
 
-=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+=== And: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
 ----
 = Step-Object: Object page
@@ -22,13 +22,13 @@
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
+=== And: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
 
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
+=== Then: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
 
-=== And: The mbt-transformer plugin, Object page.asciidoc file Object section will be created as follows
+=== And: The spec-prj project, Object page.asciidoc file Object section will be created as follows
 
 |===
 | Name       
@@ -37,7 +37,7 @@
 
 == Test-Case: One statement
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -47,7 +47,7 @@
 === Given: The blah application, Object page is empty
 ----
 
-=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+=== And: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
 ----
 = Step-Object: Object page
@@ -59,13 +59,13 @@ Desc line 1
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
+=== And: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
 
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
+=== Then: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
 
-=== And: The mbt-transformer plugin, Object page.asciidoc file Object section will be created as follows
+=== And: The spec-prj project, Object page.asciidoc file Object section will be created as follows
 
 |===
 | Name        | Statements 
@@ -74,7 +74,7 @@ Desc line 1
 
 == Test-Case: Two statements
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -84,7 +84,7 @@ Desc line 1
 === Given: The blah application, Object page is empty
 ----
 
-=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+=== And: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
 ----
 = Step-Object: Object page
@@ -97,13 +97,13 @@ Desc line 2
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
+=== And: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
 
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
+=== Then: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
 
-=== And: The mbt-transformer plugin, Object page.asciidoc file Object section will be created as follows
+=== And: The spec-prj project, Object page.asciidoc file Object section will be created as follows
 
 |===
 | Name        | Statements              
@@ -112,7 +112,7 @@ Desc line 2
 
 == Test-Case: Three statements
 
-=== Given: The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -122,7 +122,7 @@ Desc line 2
 === Given: The blah application, Object page is empty
 ----
 
-=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+=== And: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
 ----
 = Step-Object: Object page
@@ -136,13 +136,13 @@ Desc line 3
 
 === When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
+=== And: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
 
 === And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
 
-=== Then: The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
+=== Then: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
 
-=== And: The mbt-transformer plugin, Object page.asciidoc file Object section will be created as follows
+=== And: The spec-prj project, Object page.asciidoc file Object section will be created as follows
 
 |===
 | Name        | Statements                           
