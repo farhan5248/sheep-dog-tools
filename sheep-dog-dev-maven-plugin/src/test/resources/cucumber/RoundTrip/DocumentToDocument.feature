@@ -1,9 +1,9 @@
 @debug
-Feature: Document To Document
+Feature: DocumentToDocument
 
   Scenario: Create an adoc file from adoc file
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -53,7 +53,7 @@ Feature: Document To Document
           | 6
           |===
           """
-      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
           = Step-Object: Object page
           
@@ -77,7 +77,7 @@ Feature: Document To Document
           """
      When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
       And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows
+     Then The spec-prj project, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows
           """
           = Test-Suite: Process
           
@@ -127,7 +127,7 @@ Feature: Document To Document
           | 6  
           |===
           """
-      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be created as follows
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be created as follows
           """
           = Step-Object: Object page
           

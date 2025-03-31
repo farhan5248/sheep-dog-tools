@@ -14,11 +14,11 @@ import org.farhan.objects.mbttransformer.impl.UmlToAsciidoctorGoalImpl;
 import org.farhan.objects.mbttransformer.impl.UmlToCucumberGoalImpl;
 import org.farhan.objects.mbttransformer.impl.UmlToCucumberGuiceGoalImpl;
 import org.farhan.objects.mbttransformer.impl.UmlToCucumberSpringGoalImpl;
-import org.farhan.objects.mbttransformer.src.test.java.org.farhan.objects.blah.ObjectPageJavaFile;
-import org.farhan.objects.mbttransformer.src.test.java.org.farhan.stepdefs.blah.BlahObjectPageStepsJavaFile;
-import org.farhan.objects.mbttransformer.src.test.resources.asciidoc.app.ProcessAsciidocFile;
-import org.farhan.objects.mbttransformer.src.test.resources.asciidoc.stepdefs.blahapplication.ObjectPageAsciidocFile;
-import org.farhan.objects.mbttransformer.src.test.resources.cucumber.app.ProcessFeatureFile;
+import org.farhan.objects.codeprj.src.test.java.org.farhan.objects.blah.ObjectPageJavaFile;
+import org.farhan.objects.codeprj.src.test.java.org.farhan.stepdefs.blah.BlahObjectPageStepsJavaFile;
+import org.farhan.objects.codeprj.src.test.resources.cucumber.app.ProcessFeatureFile;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.app.ProcessAsciidocFile;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.blahapplication.ObjectPageAsciidocFile;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -35,20 +35,23 @@ public final class Config extends AbstractModule implements InjectorSource {
 		return "target/src-gen/";
 	}
 
-	public void deleteDir(File aDir) {
+	public void deleteDir(File aDir) throws Exception {
 		if (aDir.exists()) {
 			for (String s : aDir.list()) {
 				File f = new File(aDir.getAbsolutePath() + File.separator + s);
 				if (f.isDirectory()) {
 					deleteDir(f);
+				} else {
+					if (!f.delete()) {
+						throw new Exception("Failed to delete: " + f.getAbsolutePath());
+					}
 				}
-				f.delete();
 			}
 		}
 	}
 
 	@Before
-	public void before() {
+	public void before() throws Exception {
 		deleteDir(new File(getWorkingDir()));
 	}
 
@@ -60,14 +63,8 @@ public final class Config extends AbstractModule implements InjectorSource {
 		bind(CucumberToUmlGoal.class).to(CucumberToUmlGoalImpl.class);
 		bind(ObjectPageAsciidocFile.class).to(FileImpl.class);
 		bind(ProcessAsciidocFile.class).to(FileImpl.class);
-		bind(org.farhan.objects.mbttransformer.src.test.resources.asciidoc.ProcessAsciidocFile.class)
-				.to(FileImpl.class);
-		bind(org.farhan.objects.specprj.src.test.resources.asciidoc.app.ProcessAsciidocFile.class)
-		.to(FileImpl.class);
-		bind(org.farhan.objects.specprj.src.test.resources.asciidoc.ProcessAsciidocFile.class)
-		.to(FileImpl.class);
+		bind(org.farhan.objects.specprj.src.test.resources.asciidoc.ProcessAsciidocFile.class).to(FileImpl.class);
 		bind(ProcessFeatureFile.class).to(FileImpl.class);
-		bind(org.farhan.objects.mbttransformer.src.test.resources.cucumber.ProcessFeatureFile.class).to(FileImpl.class);
 		bind(org.farhan.objects.codeprj.src.test.resources.cucumber.ProcessFeatureFile.class).to(FileImpl.class);
 		bind(UmlToAsciidoctorGoal.class).to(UmlToAsciidoctorGoalImpl.class);
 		bind(UmlToCucumberGoal.class).to(UmlToCucumberGoalImpl.class);

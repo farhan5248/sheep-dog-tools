@@ -8,11 +8,3 @@
 | Content
 |===
 
-== Step-Definition: will be created as follows
-
-=== Step-Parameters: 1
-
-|===
-| Content
-|===
-

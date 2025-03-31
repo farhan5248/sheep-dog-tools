@@ -8,20 +8,6 @@
 | Method Name | Visibility | Return Type | Parameter Name | Parameter Type
 |===
 
-=== Step-Parameters: 2
-
-|===
-| Method Name
-|===
-
-== Step-Definition: is created as follows
-
-=== Step-Parameters: 1
-
-|===
-| Content
-|===
-
 == Step-Definition: Object section will be created as follows
 
 === Step-Parameters: 1
@@ -34,14 +20,6 @@
 
 |===
 | Interface Name | Package
-|===
-
-== Step-Definition: will be created as follows
-
-=== Step-Parameters: 1
-
-|===
-| Content
 |===
 
 == Step-Definition: will be present

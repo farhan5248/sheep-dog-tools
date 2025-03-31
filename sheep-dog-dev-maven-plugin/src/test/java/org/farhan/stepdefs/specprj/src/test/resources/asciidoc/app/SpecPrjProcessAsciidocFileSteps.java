@@ -20,4 +20,11 @@ public class SpecPrjProcessAsciidocFileSteps extends TestSteps {
         object.setPath("src/test/resources/asciidoc/app/Process.asciidoc");
         object.setInputOutputs("Content", docString);
     }
+
+    @Given("^The spec-prj project, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows$")
+    public void theSpecPrjProjectSrcTestResourcesAsciidocAppProcessAsciidocFileWillBeCreatedAsFollows(String docString) {
+        object.setComponent("spec-prj");
+        object.setPath("src/test/resources/asciidoc/app/Process.asciidoc");
+        object.assertInputOutputs("Content", docString);
+    }
 }

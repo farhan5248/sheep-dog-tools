@@ -14,6 +14,13 @@ public class CodePrjProcessFeatureFileSteps extends TestSteps {
         super(object);
     }
 
+    @Given("^The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows$")
+    public void theCodePrjProjectSrcTestResourcesCucumberProcessFeatureFileIsCreatedAsFollows(String docString) {
+        object.setComponent("code-prj");
+        object.setPath("src/test/resources/cucumber/Process.feature");
+        object.setInputOutputs("Content", docString);
+    }
+
     @Given("^The code-prj project, src/test/resources/cucumber/Process.feature file will be created as follows$")
     public void theCodePrjProjectSrcTestResourcesCucumberProcessFeatureFileWillBeCreatedAsFollows(String docString) {
         object.setComponent("code-prj");

@@ -21,8 +21,6 @@ import org.farhan.dsl.sheepdog.sheepDog.Row;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
-import org.farhan.dsl.sheepdog.sheepDog.TestData;
-import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 
 public class ConvertAsciidoctorToUML extends Converter {
 

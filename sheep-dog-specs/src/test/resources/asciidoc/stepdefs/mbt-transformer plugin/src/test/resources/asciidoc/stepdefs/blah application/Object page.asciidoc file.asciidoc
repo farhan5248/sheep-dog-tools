@@ -40,13 +40,5 @@
 | Name | Description
 |===
 
-== Step-Definition: will be created as follows
-
-=== Step-Parameters: 1
-
-|===
-| Content
-|===
-
 == Step-Definition: will be present
 

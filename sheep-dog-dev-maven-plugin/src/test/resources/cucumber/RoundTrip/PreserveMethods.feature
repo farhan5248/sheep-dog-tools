@@ -1,9 +1,9 @@
 @debug
-Feature: Preserve Methods
+Feature: PreserveMethods
 
   Background: Create an asciidoc file
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -11,7 +11,7 @@ Feature: Preserve Methods
           
           === Given: The blah application, Object page is empty
           """
-      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
           = Step-Object: Object page
           
@@ -21,7 +21,7 @@ Feature: Preserve Methods
 
   Scenario: Preserve existing java methods for layer 2
 
-      And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows
+      And The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows
           """
           package org.farhan.stepdefs.blah;
           
@@ -40,15 +40,15 @@ Feature: Preserve Methods
           }
           """
      When The mbt-transformer plugin, uml-to-cucumber goal is executed
-     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
-      And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Fields section will be created as follows
+     Then The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
+      And The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Fields section will be created as follows
           | Method Name                           |
           | theBlahApplicationObjectPageIsInvalid |
           | theBlahApplicationObjectPageIsEmpty   |
 
   Scenario: Preserve existing java methods for layer 3
 
-      And The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file is created as follows
+      And The code-prj project, src/test/java/org/farhan/objects/blah/ObjectPage.java file is created as follows
           """
           package org.farhan.objects.blah;
           
@@ -60,8 +60,8 @@ Feature: Preserve Methods
           }
           """
      When The mbt-transformer plugin, uml-to-cucumber goal is executed
-     Then The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
-      And The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file Fields section will be created as follows
+     Then The code-prj project, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
+      And The code-prj project, src/test/java/org/farhan/objects/blah/ObjectPage.java file Fields section will be created as follows
           | Method Name     |
           | assertIsInvalid |
           | setEmpty        |

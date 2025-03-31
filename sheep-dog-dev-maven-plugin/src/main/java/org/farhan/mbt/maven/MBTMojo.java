@@ -28,15 +28,9 @@ public abstract class MBTMojo extends AbstractMojo {
 		baseDir = new File("").getAbsolutePath();
 	}
 
-	/**
-	 * The tag of the selected paths
-	 */
 	@Parameter(property = "tag", defaultValue = "")
 	public String tags;
 
-	/**
-	 * The tag of the selected paths
-	 */
 	@Parameter(property = "repoDir", defaultValue = "")
 	public String repoDir;
 
@@ -44,6 +38,7 @@ public abstract class MBTMojo extends AbstractMojo {
 		getLog().info("Starting execute");
 		getLog().info("tag: " + tags);
 		getLog().info("baseDir: " + baseDir);
+		getLog().info("repoDir: " + repoDir);
 
 		if (!baseDir.endsWith("/")) {
 			baseDir += "/";

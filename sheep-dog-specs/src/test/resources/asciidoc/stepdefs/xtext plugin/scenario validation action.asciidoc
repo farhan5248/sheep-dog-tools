@@ -1,17 +1,8 @@
 = Step-Object: scenario validation action
 
-This is triggered by the Validate menu item, saving the file or editing its contents.
-This is similar to the validation action.
-In the future it'll be removed.
-
 == Step-Definition: is performed as follows
 
-Calls the Java method that validates the file.
-
 === Step-Parameters: 1
-
-The step that is passed to the validation method.
-Validation occurs on each step, one at a time.
 
 |===
 | Selected Step
