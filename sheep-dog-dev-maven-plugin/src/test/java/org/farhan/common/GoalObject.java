@@ -9,14 +9,17 @@ public abstract class GoalObject extends TestObject {
 		attributes.put("tags", "");
 	}
 
-	protected void runGoal(String goal) {
+	protected void runGoal(String goal, String baseDir) {
+		runGoal(goal, baseDir, "");
+	}
+
+	protected void runGoal(String goal, String baseDir, String repoDir) {
 		try {
 			Class<?> mojoClass = Class.forName(goal);
 			MBTMojo mojo = (MBTMojo) mojoClass.getConstructor().newInstance();
 			mojo.tags = attributes.get("tags");
-			// TODO this needs to include the component directory
-			mojo.baseDir = Config.getWorkingDir();
-			// TODO create a modelDir parameter
+			mojo.baseDir = baseDir;
+			mojo.repoDir = repoDir;
 			mojo.execute();
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));

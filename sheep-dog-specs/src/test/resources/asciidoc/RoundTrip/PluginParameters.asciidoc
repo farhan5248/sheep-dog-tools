@@ -1,4 +1,4 @@
-= Test-Suite: Multiple Tags
+= Test-Suite: Plugin Parameters
 
 == Test-Case: Create two models from different tags
 

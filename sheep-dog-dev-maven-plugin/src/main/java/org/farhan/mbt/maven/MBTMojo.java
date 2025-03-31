@@ -29,10 +29,16 @@ public abstract class MBTMojo extends AbstractMojo {
 	}
 
 	/**
-	 * The tag of the selected edges.
+	 * The tag of the selected paths
 	 */
 	@Parameter(property = "tag", defaultValue = "")
 	public String tags;
+
+	/**
+	 * The tag of the selected paths
+	 */
+	@Parameter(property = "repoDir", defaultValue = "")
+	public String repoDir;
 
 	public void execute(String goal, String dir) throws MojoExecutionException {
 		getLog().info("Starting execute");
@@ -42,11 +48,14 @@ public abstract class MBTMojo extends AbstractMojo {
 		if (!baseDir.endsWith("/")) {
 			baseDir += "/";
 		}
-		// TODO create a modelDir parameter, if it's empty, use the baseDir. It should
-		// be a relative path like baseDir/../sheep-dog-specs or a full path.
 		// TODO make a unit (non asciidoc) test for this, test both relative and
 		// complete paths
-		ObjectRepository or = new FileObjectRepository(baseDir);
+		if (repoDir.isEmpty()) {
+			repoDir = baseDir;
+		} else if (!repoDir.endsWith("/")) {
+			repoDir += "/";			
+		}
+		ObjectRepository or = new FileObjectRepository(repoDir);
 		SourceRepository sr = new SourceRepository(baseDir);
 		try {
 

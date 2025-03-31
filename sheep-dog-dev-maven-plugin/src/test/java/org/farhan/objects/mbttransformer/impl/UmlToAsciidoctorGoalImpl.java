@@ -2,6 +2,7 @@ package org.farhan.objects.mbttransformer.impl;
 
 import java.util.HashMap;
 
+import org.farhan.common.Config;
 import org.farhan.common.GoalObject;
 import org.farhan.objects.mbttransformer.UmlToAsciidoctorGoal;
 
@@ -10,7 +11,7 @@ import io.cucumber.guice.ScenarioScoped;
 public class UmlToAsciidoctorGoalImpl extends GoalObject implements UmlToAsciidoctorGoal {
 
 	public void transition() {
-		runGoal("org.farhan.mbt.maven.UMLToAsciiDoctorMojo");
+		runGoal("org.farhan.mbt.maven.UMLToAsciiDoctorMojo", Config.getWorkingDir() + "spec-prj/");
 	}
 
 	@Override
