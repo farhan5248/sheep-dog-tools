@@ -1,9 +1,9 @@
 @debug
-Feature: Document To Code
+Feature: DocumentToCode
 
   Scenario: Create a feature file from adoc file
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -11,7 +11,7 @@ Feature: Document To Code
           
           [tags="tag1"]
           == Test-Setup: Setup
-
+          
           [tags="tag2"]
           == Test-Case: Story One
           
@@ -56,7 +56,7 @@ Feature: Document To Code
           | 6
           |===
           """
-      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
           = Step-Object: Object page
           
@@ -78,9 +78,9 @@ Feature: Document To Code
           | Content
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-cucumber goal is executed
-     Then The mbt-transformer plugin, src/test/resources/cucumber/app/Process.feature file will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The maven plugin, uml-to-cucumber goal is executed
+     Then The code-prj project, src/test/resources/cucumber/app/Process.feature file will be created as follows
           """
           @tag1
           Feature: Process
@@ -88,7 +88,7 @@ Feature: Document To Code
             Desc 1
           
             Background: Setup
-
+          
             @tag2
             Scenario: Story One
           
@@ -123,7 +123,7 @@ Feature: Document To Code
                     | 5   |
                     | 6   |
           """
-      And The mbt-transformer plugin, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be created as follows
+      And The code-prj project, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be created as follows
           """
           package org.farhan.objects.blah;
           
@@ -142,7 +142,7 @@ Feature: Document To Code
               public void setValid(HashMap<String, String> keyMap);
           }
           """
-      And The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
+      And The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.blah;
           

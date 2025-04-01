@@ -1,21 +1,21 @@
 @debug
-Feature: Code Feature To UML
+Feature: CodeFeatureToUML
 
   Scenario: No tags, no statements
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The mbt-transformer plugin, uml/pst.uml file Class section will be created as follows
+     When The maven plugin, cucumber-to-uml goal is executed
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Class section will be created as follows
           | Class Name     |
           | specs::Process |
 
   Scenario: One tag, one statement
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
           """
           @tag1
           Feature: Process
@@ -24,18 +24,18 @@ Feature: Code Feature To UML
               Desc line 1
               Given The Object0 page is valid
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The mbt-transformer plugin, uml/pst.uml file Class Comments section will be created as follows
+     When The maven plugin, cucumber-to-uml goal is executed
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment     |
           | specs::Process | Desc line 1 |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name      | Annotation Name | Annotation Detail |
           | specs::Process::Setup | tags            | tag1              |
 
   Scenario: Two tags, two statements
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
           """
           @tag1 @tag2
           Feature: Process
@@ -45,19 +45,19 @@ Feature: Code Feature To UML
               Desc line 1
               Given The Object0 page is valid
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The mbt-transformer plugin, uml/pst.uml file Class Comments section will be created as follows
+     When The maven plugin, cucumber-to-uml goal is executed
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment                  |
           | specs::Process | Desc line 1\nDesc line 2 |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name      | Annotation Name | Annotation Detail |
           | specs::Process::Setup | tags            | tag1              |
           | specs::Process::Setup | tags            | tag2              |
 
   Scenario: Three tags, three statements
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
           """
           @tag1 @tag2 @tag3
           Feature: This is a test feature
@@ -68,12 +68,12 @@ Feature: Code Feature To UML
               Desc line 1
               Given The Object0 page is valid
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The mbt-transformer plugin, uml/pst.uml file Class Comments section will be created as follows
+     When The maven plugin, cucumber-to-uml goal is executed
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment                               |
           | specs::Process | Desc line 1\nDesc line 2\nDesc line 3 |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name      | Annotation Name | Annotation Detail |
           | specs::Process::Setup | tags            | tag1              |
           | specs::Process::Setup | tags            | tag2              |
@@ -81,24 +81,24 @@ Feature: Code Feature To UML
 
   Scenario: Selected tags
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
           """
           @tag1
           Feature: Process
           """
-      And The mbt-transformer plugin, src/test/resources/cucumber/app/Process.feature file is created as follows
+      And The code-prj project, src/test/resources/cucumber/app/Process.feature file is created as follows
           """
           @tag2
           Feature: Process
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed with
+     When The maven plugin, cucumber-to-uml goal is executed with
           | Tags |
           | tag1 |
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The mbt-transformer plugin, uml/pst.uml file Class section will be created as follows
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Class section will be created as follows
           | Class Name     |
           | specs::Process |
-      And The mbt-transformer plugin, uml/pst.uml file Class section won't be created as follows
+      And The spec-prj project, uml/pst.uml file Class section won't be created as follows
           | Class Name          |
           | specs::app::Process |
 

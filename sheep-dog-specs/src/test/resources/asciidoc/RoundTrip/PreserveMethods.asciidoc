@@ -54,8 +54,8 @@ public class BlahObjectPageSteps {
 ----
 package org.farhan.stepdefs.blah;
 
-import io.cucumber.java.en.Given;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Given;
 import org.farhan.common.BlahFactory;
 
 public class BlahObjectPageSteps {
@@ -87,7 +87,7 @@ import java.util.HashMap;
 
 public interface ObjectPage {
 
-    public void setInvalid();
+    public void setInvalid(HashMap<String, String> keyMap);
 }
 ----
 
@@ -104,9 +104,9 @@ import java.util.HashMap;
 
 public interface ObjectPage {
 
-    public void setInvalid();
+    public void setInvalid(HashMap<String, String> keyMap);
 
-    public void setEmpty();
+    public void setEmpty(HashMap<String, String> keyMap);
 }
 ----
 

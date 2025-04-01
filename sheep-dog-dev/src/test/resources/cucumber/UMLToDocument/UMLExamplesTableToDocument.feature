@@ -1,9 +1,9 @@
 @debug
-Feature: UML Examples Table To Document
+Feature: UMLExamplesTableToDocument
 
   Scenario: One row, one cell
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -23,18 +23,18 @@ Feature: UML Examples Table To Document
           | v1
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The maven plugin, uml-to-asciidoctor goal is executed
+     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row |
           | Submit | Examples 1 | h1  |
           | Submit | Examples 1 | v1  |
 
   Scenario: Two rows, two cells
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -55,11 +55,11 @@ Feature: UML Examples Table To Document
           | v3 | v4
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The maven plugin, uml-to-asciidoctor goal is executed
+     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row    |
           | Submit | Examples 1 | h1, h2 |
           | Submit | Examples 1 | v1, v2 |
@@ -67,7 +67,7 @@ Feature: UML Examples Table To Document
 
   Scenario: Three rows, three cells
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -89,11 +89,11 @@ Feature: UML Examples Table To Document
           | v7 | v8 | v9
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The maven plugin, uml-to-asciidoctor goal is executed
+     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row        |
           | Submit | Examples 1 | h1, h2, h3 |
           | Submit | Examples 1 | v1, v2, v3 |

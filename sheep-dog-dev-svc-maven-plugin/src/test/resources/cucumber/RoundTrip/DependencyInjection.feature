@@ -1,9 +1,9 @@
 @debug
-Feature: Dependency Injection
+Feature: DependencyInjection
 
   Background: Create a feature file
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -11,7 +11,7 @@ Feature: Dependency Injection
           
           === Given: The blah application, Object page is empty
           """
-      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
           = Step-Object: Object page
           
@@ -20,9 +20,9 @@ Feature: Dependency Injection
 
   Scenario: Spring Java file is generated
 
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-cucumber-spring goal is executed
-     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The maven plugin, uml-to-cucumber-spring goal is executed
+     Then The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.blah;
           
@@ -47,9 +47,9 @@ Feature: Dependency Injection
 
   Scenario: Guice Java file is generated
 
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-cucumber-guice goal is executed
-     Then The mbt-transformer plugin, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The maven plugin, uml-to-cucumber-guice goal is executed
+     Then The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.blah;
           

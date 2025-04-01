@@ -1,11 +1,11 @@
 @debug
-Feature: Code To Code
+Feature: CodeToCode
 
   Background: Create a feature file
 
     The formatting of the data and example tables is intentionally different to make sure that the file is regenerated
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
           """
           @tag2 @tag3
           Feature: Process
@@ -39,16 +39,16 @@ Feature: Code To Code
                     |  h3 |  h4 |
                     | v31 | v41 |
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed with
+     When The maven plugin, cucumber-to-uml goal is executed with
           | Tags |
           | tag1 |
-      And The mbt-transformer plugin, uml-to-cucumber goal is executed with
+      And The maven plugin, uml-to-cucumber goal is executed with
           | Tags |
           | tag1 |
 
   Scenario: Feature file is preserved
 
-     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be created as follows
+     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be created as follows
           """
           @tag2 @tag3
           Feature: Process

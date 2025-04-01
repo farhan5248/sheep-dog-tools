@@ -20,8 +20,8 @@ Feature: DependencyInjection
 
   Scenario: Spring Java file is generated
 
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-cucumber-spring goal is executed
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The maven plugin, uml-to-cucumber-spring goal is executed
      Then The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.blah;
@@ -47,8 +47,8 @@ Feature: DependencyInjection
 
   Scenario: Guice Java file is generated
 
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-cucumber-guice goal is executed
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The maven plugin, uml-to-cucumber-guice goal is executed
      Then The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
           """
           package org.farhan.stepdefs.blah;

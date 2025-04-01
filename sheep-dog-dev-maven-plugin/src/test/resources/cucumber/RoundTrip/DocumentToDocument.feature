@@ -75,8 +75,8 @@ Feature: DocumentToDocument
           | Content
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The maven plugin, uml-to-asciidoctor goal is executed
      Then The spec-prj project, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows
           """
           = Test-Suite: Process

@@ -1,9 +1,9 @@
 @debug
-Feature: UML Doc String To Code
+Feature: UMLDocStringToCode
 
   Scenario: One line
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -15,10 +15,10 @@ Feature: UML Doc String To Code
           text1
           ----
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-cucumber goal is executed
-     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Scenario Steps Doc String section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The maven plugin, uml-to-cucumber goal is executed
+     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
+      And The code-prj project, src/test/resources/cucumber/Process.feature file Scenario Steps Doc String section will be created as follows
           | Name   | Step                                                         | Content |
           | Submit | Given The Unknown service, Object page is created as follows | text1   |
 

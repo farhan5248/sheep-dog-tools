@@ -39,10 +39,10 @@ Feature: CodeToCode
                     |  h3 |  h4 |
                     | v31 | v41 |
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed with
+     When The maven plugin, cucumber-to-uml goal is executed with
           | Tags |
           | tag1 |
-      And The mbt-transformer plugin, uml-to-cucumber goal is executed with
+      And The maven plugin, uml-to-cucumber goal is executed with
           | Tags |
           | tag1 |
 

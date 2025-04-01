@@ -1,9 +1,9 @@
 @debug
-Feature: UML Step Table To Document
+Feature: UMLStepTableToDocument
 
   Scenario: One row, one cell
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -16,18 +16,18 @@ Feature: UML Step Table To Document
           | v1
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps Step Table section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The maven plugin, uml-to-asciidoctor goal is executed
+     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps Step Table section will be created as follows
           | Name   | Step                                         | Row |
           | Submit | Given: The Object page is created as follows | h1  |
           | Submit | Given: The Object page is created as follows | v1  |
 
   Scenario: Two rows, two cells
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -41,11 +41,11 @@ Feature: UML Step Table To Document
           | v3 | v4
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps Step Table section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The maven plugin, uml-to-asciidoctor goal is executed
+     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps Step Table section will be created as follows
           | Name   | Step                                         | Row    |
           | Submit | Given: The Object page is created as follows | h1, h2 |
           | Submit | Given: The Object page is created as follows | v1, v2 |
@@ -53,7 +53,7 @@ Feature: UML Step Table To Document
 
   Scenario: Three rows, three cells
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -68,11 +68,11 @@ Feature: UML Step Table To Document
           | v7 | v8 | v9
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps Step Table section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The maven plugin, uml-to-asciidoctor goal is executed
+     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps Step Table section will be created as follows
           | Name   | Step                                         | Row        |
           | Submit | Given: The Object page is created as follows | h1, h2, h3 |
           | Submit | Given: The Object page is created as follows | v1, v2, v3 |
@@ -81,7 +81,7 @@ Feature: UML Step Table To Document
 
   Scenario: Escaped cell data
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -94,11 +94,11 @@ Feature: UML Step Table To Document
           | \| v1 \|
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps Step Table section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The maven plugin, uml-to-asciidoctor goal is executed
+     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps Step Table section will be created as follows
           | Name   | Step                                         | Row          |
           | Submit | Given: The Object page is created as follows | h1           |
           | Submit | Given: The Object page is created as follows | \\\| v1 \\\| |

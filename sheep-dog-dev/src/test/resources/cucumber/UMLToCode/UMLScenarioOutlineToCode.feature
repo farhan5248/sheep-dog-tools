@@ -1,9 +1,9 @@
 @debug
-Feature: UML Scenario Outline To Code
+Feature: UMLScenarioOutlineToCode
 
   Scenario: No tags, no statement, one step, one example
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -23,21 +23,21 @@ Feature: UML Scenario Outline To Code
           | v31
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-cucumber goal is executed
-     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Scenario Outline Steps Data Table section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The maven plugin, uml-to-cucumber goal is executed
+     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
+      And The code-prj project, src/test/resources/cucumber/Process.feature file Scenario Outline Steps Data Table section will be created as follows
           | Name   | Step                                                          |
           | Submit | Given The blah application, Object page is created as follows |
           | Submit | Given The blah application, Object page is created as follows |
-      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Scenario Outline Examples Table section will be created as follows
+      And The code-prj project, src/test/resources/cucumber/Process.feature file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row       |
           | Submit | Examples 1 | \| h3 \|  |
           | Submit | Examples 1 | \| v31 \| |
 
   Scenario: One tag, one statement, one step, one example
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -60,16 +60,16 @@ Feature: UML Scenario Outline To Code
           | v31
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-cucumber goal is executed
-     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Scenario Outlines section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The maven plugin, uml-to-cucumber goal is executed
+     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
+      And The code-prj project, src/test/resources/cucumber/Process.feature file Scenario Outlines section will be created as follows
           | Name   | Tags | Description |
           | Submit | tag1 | Desc line 1 |
 
   Scenario Outline: Two tags, two statements, two steps, two examples
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -107,16 +107,16 @@ Feature: UML Scenario Outline To Code
           | v32
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-cucumber goal is executed
-     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Scenario Outlines section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The maven plugin, uml-to-cucumber goal is executed
+     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
+      And The code-prj project, src/test/resources/cucumber/Process.feature file Scenario Outlines section will be created as follows
           | Name   | Tags      | Description              |
           | Submit | tag1,tag2 | Desc line 1\nDesc line 2 |
-      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Scenario Outline Steps Data Table section will be created as follows
+      And The code-prj project, src/test/resources/cucumber/Process.feature file Scenario Outline Steps Data Table section will be created as follows
           | Name   | Step                                                                 |
           | Submit | Given The blah application, Object<Index> page is created as follows |
-      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Scenario Outline Examples Table section will be created as follows
+      And The code-prj project, src/test/resources/cucumber/Process.feature file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples         | Row             |
           | Submit | Examples <Index> | \| h3 \|        |
           | Submit | Examples <Index> | \| v3<Index> \| |
@@ -129,7 +129,7 @@ Feature: UML Scenario Outline To Code
 
   Scenario Outline: Three tags, three statements, three steps, three examples
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -182,16 +182,16 @@ Feature: UML Scenario Outline To Code
           | v33
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, uml-to-cucumber goal is executed
-     Then The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file will be present
-      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Scenario Outlines section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The maven plugin, uml-to-cucumber goal is executed
+     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
+      And The code-prj project, src/test/resources/cucumber/Process.feature file Scenario Outlines section will be created as follows
           | Name   | Tags           | Description                           |
           | Submit | tag1,tag2,tag3 | Desc line 1\nDesc line 2\nDesc line 3 |
-      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Scenario Outline Steps Data Table section will be created as follows
+      And The code-prj project, src/test/resources/cucumber/Process.feature file Scenario Outline Steps Data Table section will be created as follows
           | Name   | Step                                                                 |
           | Submit | Given The blah application, Object<Index> page is created as follows |
-      And The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file Scenario Outline Examples Table section will be created as follows
+      And The code-prj project, src/test/resources/cucumber/Process.feature file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples         | Row             |
           | Submit | Examples <Index> | \| h3 \|        |
           | Submit | Examples <Index> | \| v3<Index> \| |

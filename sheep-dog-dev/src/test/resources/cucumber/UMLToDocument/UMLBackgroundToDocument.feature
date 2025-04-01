@@ -1,9 +1,9 @@
 @debug
-Feature: UML Background To Document
+Feature: UMLBackgroundToDocument
 
   Scenario: One statement, one step, one scenario
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -17,23 +17,23 @@ Feature: UML Background To Document
           
           === Given: The Object page is valid
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Background section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The maven plugin, uml-to-asciidoctor goal is executed
+     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Background section will be created as follows
           | Name  | Description |
           | Setup | Desc line 1 |
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
           | Name  | Step                             |
           | Setup | Given: The Object0 page is valid |
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                            |
           | Submit | Given: The Object page is valid |
 
   Scenario: No statement, one step, one scenario
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -45,20 +45,20 @@ Feature: UML Background To Document
           
           === Given: The Object page is valid
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The maven plugin, uml-to-asciidoctor goal is executed
+     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
           | Name  | Step                             |
           | Setup | Given: The Object0 page is valid |
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                            |
           | Submit | Given: The Object page is valid |
 
   Scenario: No statement, one step, two scenarios
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -74,21 +74,21 @@ Feature: UML Background To Document
           
           === Given: The Object2 page is valid
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The maven plugin, uml-to-asciidoctor goal is executed
+     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
           | Name  | Step                             |
           | Setup | Given: The Object0 page is valid |
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
           | Name     | Step                             |
           | Submit 1 | Given: The Object page is valid  |
           | Submit 2 | Given: The Object2 page is valid |
 
   Scenario: No statement, one step, three scenarios
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -108,14 +108,14 @@ Feature: UML Background To Document
           
           === Given: The Object3 page is valid
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The maven plugin, uml-to-asciidoctor goal is executed
+     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
           | Name  | Step                             |
           | Setup | Given: The Object0 page is valid |
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
           | Name     | Step                             |
           | Submit 1 | Given: The Object page is valid  |
           | Submit 2 | Given: The Object2 page is valid |
@@ -123,7 +123,7 @@ Feature: UML Background To Document
 
   Scenario: No statement, two steps, one scenario
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -136,21 +136,21 @@ Feature: UML Background To Document
           
           === Given: The Object page is valid
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The maven plugin, uml-to-asciidoctor goal is executed
+     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
           | Name  | Step                             |
           | Setup | Given: The Object page is valid  |
           | Setup | Given: The Object2 page is valid |
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                            |
           | Submit | Given: The Object page is valid |
 
   Scenario: No statement, three steps, one scenario
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -164,16 +164,16 @@ Feature: UML Background To Document
           
           === Given: The Object page is valid
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The maven plugin, uml-to-asciidoctor goal is executed
+     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Background Steps section will be created as follows
           | Name  | Step                             |
           | Setup | Given: The Object page is valid  |
           | Setup | Given: The Object2 page is valid |
           | Setup | Given: The Object3 page is valid |
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                            |
           | Submit | Given: The Object page is valid |
 

@@ -1,29 +1,27 @@
 package org.farhan.common;
 
-import org.farhan.objects.xtext.DailyBatchjobFile;
-import org.farhan.objects.xtext.GenerationAction;
-import org.farhan.objects.xtext.InputFileFeatureFile;
-import org.farhan.objects.xtext.ProcessFeatureFile;
+import org.farhan.impl.GenerateStepDefinitionActionImpl;
+import org.farhan.impl.InputFileAsciidocFileImpl;
+import org.farhan.impl.Process2AsciidocFileImpl;
+import org.farhan.impl.ProposeContentDialogImpl;
+import org.farhan.impl.ProposeTestStepActionImpl;
+import org.farhan.impl.ProposeTestStepTableActionImpl;
+import org.farhan.impl.QuickfixDialogImpl;
+import org.farhan.impl.ValidateErrorActionImpl;
+import org.farhan.impl.ValidateErrorDialogImpl;
+import org.farhan.impl.ValidateWarningActionImpl;
+import org.farhan.impl.ValidateWarningDialogImpl;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.Process2AsciidocFile;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.app.InputFileAsciidocFile;
+import org.farhan.objects.xtext.GenerateStepDefinitionAction;
+import org.farhan.objects.xtext.ProposeContentDialog;
+import org.farhan.objects.xtext.ProposeTestStepAction;
+import org.farhan.objects.xtext.ProposeTestStepTableAction;
 import org.farhan.objects.xtext.QuickfixDialog;
-import org.farhan.objects.xtext.ScenarioValidationAction;
-import org.farhan.objects.xtext.ScenarioValidationDialog;
-import org.farhan.objects.xtext.StepTableProposalAction;
-import org.farhan.objects.xtext.SuggestionAction;
-import org.farhan.objects.xtext.SuggestionDialog;
-import org.farhan.objects.xtext.ValidationAction;
-import org.farhan.objects.xtext.ValidationDialog;
-import org.farhan.objects.xtext.impl.DailyBatchjobFileImpl;
-import org.farhan.objects.xtext.impl.GenerationActionImpl;
-import org.farhan.objects.xtext.impl.InputFileFeatureFileImpl;
-import org.farhan.objects.xtext.impl.ProcessFeatureFileImpl;
-import org.farhan.objects.xtext.impl.QuickfixDialogImpl;
-import org.farhan.objects.xtext.impl.ScenarioValidationActionImpl;
-import org.farhan.objects.xtext.impl.ScenarioValidationDialogImpl;
-import org.farhan.objects.xtext.impl.StepTableProposalActionImpl;
-import org.farhan.objects.xtext.impl.SuggestionActionImpl;
-import org.farhan.objects.xtext.impl.SuggestionDialogImpl;
-import org.farhan.objects.xtext.impl.ValidationActionImpl;
-import org.farhan.objects.xtext.impl.ValidationDialogImpl;
+import org.farhan.objects.xtext.ValidateErrorAction;
+import org.farhan.objects.xtext.ValidateErrorDialog;
+import org.farhan.objects.xtext.ValidateWarningAction;
+import org.farhan.objects.xtext.ValidateWarningDialog;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -32,27 +30,34 @@ import com.google.inject.Stage;
 
 import io.cucumber.guice.CucumberModules;
 import io.cucumber.guice.InjectorSource;
+import io.cucumber.java.Before;
 
 public final class GuiceConfig extends AbstractModule implements InjectorSource {
 
 	@Override
 	protected void configure() {
-		bind(DailyBatchjobFile.class).to(DailyBatchjobFileImpl.class);
-		bind(GenerationAction.class).to(GenerationActionImpl.class);
-		bind(InputFileFeatureFile.class).to(InputFileFeatureFileImpl.class);
-		bind(ProcessFeatureFile.class).to(ProcessFeatureFileImpl.class);
+		bind(GenerateStepDefinitionAction.class).to(GenerateStepDefinitionActionImpl.class);
+		bind(InputFileAsciidocFile.class).to(InputFileAsciidocFileImpl.class);
+		bind(org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.InputFileAsciidocFile.class)
+				.to(InputFileAsciidocFileImpl.class);
+		bind(Process2AsciidocFile.class).to(Process2AsciidocFileImpl.class);
 		bind(QuickfixDialog.class).to(QuickfixDialogImpl.class);
-		bind(ScenarioValidationAction.class).to(ScenarioValidationActionImpl.class);
-		bind(ScenarioValidationDialog.class).to(ScenarioValidationDialogImpl.class);
-		bind(StepTableProposalAction.class).to(StepTableProposalActionImpl.class);
-		bind(SuggestionAction.class).to(SuggestionActionImpl.class);
-		bind(SuggestionDialog.class).to(SuggestionDialogImpl.class);
-		bind(ValidationAction.class).to(ValidationActionImpl.class);
-		bind(ValidationDialog.class).to(ValidationDialogImpl.class);
+		bind(ValidateErrorAction.class).to(ValidateErrorActionImpl.class);
+		bind(ValidateErrorDialog.class).to(ValidateErrorDialogImpl.class);
+		bind(ProposeTestStepTableAction.class).to(ProposeTestStepTableActionImpl.class);
+		bind(ProposeTestStepAction.class).to(ProposeTestStepActionImpl.class);
+		bind(ProposeContentDialog.class).to(ProposeContentDialogImpl.class);
+		bind(ValidateWarningAction.class).to(ValidateWarningActionImpl.class);
+		bind(ValidateWarningDialog.class).to(ValidateWarningDialogImpl.class);
 	}
 
 	@Override
 	public Injector getInjector() {
 		return Guice.createInjector(Stage.DEVELOPMENT, CucumberModules.createScenarioModule(), new GuiceConfig());
+	}
+
+	@Before
+	public void deleteFiles() throws Exception {
+		TestObject.la = null;
 	}
 }

@@ -1,24 +1,24 @@
 @debug
-Feature: Code Scenario To UML
+Feature: CodeScenarioToUML
 
   Scenario: No tags, no statements, one step
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
             Scenario: Submit
               Given The blah application, something/Object1 page is empty
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Messages section will be created as follows
+     When The maven plugin, cucumber-to-uml goal is executed
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                               |
           | specs::Process::Submit | The blah application, something/Object1 page is empty |
 
   Scenario: One tag, one statement, one step
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -28,18 +28,18 @@ Feature: Code Scenario To UML
           
               Given The blah application, something/Object1 page is empty
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
+     When The maven plugin, cucumber-to-uml goal is executed
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | tags            | tag1              |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Comments section will be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name       | Comment     |
           | specs::Process::Submit | Desc line 1 |
 
   Scenario Outline: Two tags, two statements, two steps
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -51,15 +51,15 @@ Feature: Code Scenario To UML
               Given The blah application, something/Object1 page is empty
               Given The blah application, something/Object2 page is empty
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
+     When The maven plugin, cucumber-to-uml goal is executed
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | tags            | tag<Index>        |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Comments section will be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name       | Comment                  |
           | specs::Process::Submit | Desc line 1\nDesc line 2 |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Messages section will be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                                     |
           | specs::Process::Submit | The blah application, something/Object<Index> page is empty |
 
@@ -71,7 +71,7 @@ Feature: Code Scenario To UML
 
   Scenario Outline: Three tags, three statements, three steps
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -85,15 +85,15 @@ Feature: Code Scenario To UML
               Given The blah application, something/Object2 page is empty
               Given The blah application, something/Object3 page is empty
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
+     When The maven plugin, cucumber-to-uml goal is executed
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | tags            | tag<Index>        |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Comments section will be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name       | Comment                               |
           | specs::Process::Submit | Desc line 1\nDesc line 2\nDesc line 3 |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Messages section will be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                                     |
           | specs::Process::Submit | The blah application, something/Object<Index> page is empty |
 
@@ -106,7 +106,7 @@ Feature: Code Scenario To UML
 
   Scenario: Selected tags
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -120,14 +120,14 @@ Feature: Code Scenario To UML
           
               Given The Object1 page is empty
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed with
+     When The maven plugin, cucumber-to-uml goal is executed with
           | Tags |
           | tag1 |
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The mbt-transformer plugin, uml/pst.uml file Interaction section will be created as follows
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Interaction section will be created as follows
           | Interaction Name       |
           | specs::Process::Submit |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction section won't be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction section won't be created as follows
           | Interaction Name        |
           | specs::Process::Submit2 |
 

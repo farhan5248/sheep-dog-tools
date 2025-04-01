@@ -1,4 +1,0 @@
-= Step-Object: Given page
-
-== Step-Definition: isn't empty
-

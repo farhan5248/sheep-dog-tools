@@ -1,9 +1,9 @@
 @debug
-Feature: Document Scenario Outline To UML
+Feature: DocumentScenarioOutlineToUML
 
   Scenario: No tags, no statement, one step, one example
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -23,20 +23,20 @@ Feature: Document Scenario Outline To UML
           | v31
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Messages section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                                 | Argument Name | Annotation Detail |
           | specs::Process::Submit | The blah application, Object page is created as follows | dataTable     | 0 -> h1 \|        |
           | specs::Process::Submit | The blah application, Object page is created as follows | dataTable     | 1 -> <h3> \|      |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | Examples 1      | 0 -> h3\|         |
           | specs::Process::Submit | Examples 1      | 1 -> v31\|        |
 
   Scenario: One tag, one statement, one step, one example
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -59,18 +59,18 @@ Feature: Document Scenario Outline To UML
           | v31
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | tags            | tag1              |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Comments section will be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name       | Comment     |
           | specs::Process::Submit | Desc line 1 |
 
   Scenario Outline: Two tags, two statements, two steps, two examples
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -108,18 +108,18 @@ Feature: Document Scenario Outline To UML
           | v32
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | tags            | tag<Index>        |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Comments section will be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name       | Comment                  |
           | specs::Process::Submit | Desc line 1\nDesc line 2 |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Messages section will be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                                        |
           | specs::Process::Submit | The blah application, Object<Index> page is created as follows |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name  | Annotation Detail |
           | specs::Process::Submit | Examples <Index> | 0 -> h3\|         |
           | specs::Process::Submit | Examples <Index> | 1 -> v3<Index>\|  |
@@ -132,7 +132,7 @@ Feature: Document Scenario Outline To UML
 
   Scenario Outline: Three tags, three statements, three steps, three examples
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -185,18 +185,18 @@ Feature: Document Scenario Outline To UML
           | v33
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | tags            | tag<Index>        |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Comments section will be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name       | Comment                               |
           | specs::Process::Submit | Desc line 1\nDesc line 2\nDesc line 3 |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Messages section will be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                                        |
           | specs::Process::Submit | The blah application, Object<Index> page is created as follows |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name       | Annotation Name  | Annotation Detail |
           | specs::Process::Submit | Examples <Index> | 0 -> h3\|         |
           | specs::Process::Submit | Examples <Index> | 1 -> v3<Index>\|  |
@@ -210,7 +210,7 @@ Feature: Document Scenario Outline To UML
 
   Scenario: Selected tags
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -238,14 +238,14 @@ Feature: Document Scenario Outline To UML
           | v31
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
+     When The maven plugin, asciidoctor-to-uml goal is executed with
           | Tags |
           | tag1 |
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The mbt-transformer plugin, uml/pst.uml file Interaction section will be created as follows
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Interaction section will be created as follows
           | Interaction Name       |
           | specs::Process::Submit |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction section won't be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction section won't be created as follows
           | Interaction Name        |
           | specs::Process::Submit2 |
 

@@ -1,11 +1,11 @@
 @debug
-Feature: Document Step Definition To UML
+Feature: DocumentStepDefinitionToUML
 
   TODO add tests for document parameters
 
   Scenario: No statement, one step parameter
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -13,7 +13,7 @@ Feature: Document Step Definition To UML
           
           === Given: The blah application, Object page is empty
           """
-      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
           = Step-Object: Object page
           
@@ -25,15 +25,15 @@ Feature: Document Step Definition To UML
           | h1
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name                                               | Annotation Name | Annotation Detail |
           | stepdefs::blah application::Object page::is created as follows | 1               | 0 -> h1\|         |
 
   Scenario: One statement, one step parameter
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -41,7 +41,7 @@ Feature: Document Step Definition To UML
           
           === Given: The blah application, Object page is empty
           """
-      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
           = Step-Object: Object page
           
@@ -55,15 +55,15 @@ Feature: Document Step Definition To UML
           | h1
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Comments section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name                                               | Comment     |
           | stepdefs::blah application::Object page::is created as follows | Desc line 1 |
 
   Scenario Outline: Two statements, two step parameters
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -71,7 +71,7 @@ Feature: Document Step Definition To UML
           
           === Given: The blah application, Object page is empty
           """
-      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
           = Step-Object: Object page
           
@@ -92,12 +92,12 @@ Feature: Document Step Definition To UML
           | h2
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Comments section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name                                               | Comment                  |
           | stepdefs::blah application::Object page::is created as follows | Desc line 1\nDesc line 2 |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name                                               | Annotation Name | Annotation Detail |
           | stepdefs::blah application::Object page::is created as follows | <Index>         | 0 -> h<Index>\|   |
 
@@ -109,7 +109,7 @@ Feature: Document Step Definition To UML
 
   Scenario Outline: Three statements, three step parameters
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -117,7 +117,7 @@ Feature: Document Step Definition To UML
           
           === Given: The blah application, Object page is empty
           """
-      And The mbt-transformer plugin, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
           = Step-Object: Object page
           
@@ -145,12 +145,12 @@ Feature: Document Step Definition To UML
           | h3
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-     Then The mbt-transformer plugin, uml/pst.uml file will be present
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Comments section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+     Then The spec-prj project, uml/pst.uml file will be present
+      And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
           | Interaction Name                                               | Comment                               |
           | stepdefs::blah application::Object page::is created as follows | Desc line 1\nDesc line 2\nDesc line 3 |
-      And The mbt-transformer plugin, uml/pst.uml file Interaction Annotations section will be created as follows
+      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
           | Interaction Name                                               | Annotation Name | Annotation Detail |
           | stepdefs::blah application::Object page::is created as follows | <Index>         | 0 -> h<Index>\|   |
 

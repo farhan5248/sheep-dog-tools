@@ -17,7 +17,7 @@ Feature: PreserveMethods
           
           == Step-Definition: is empty
           """
-      And The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+      And The maven plugin, asciidoctor-to-uml goal is executed
 
   Scenario: Preserve existing java methods for layer 2
 
@@ -39,12 +39,33 @@ Feature: PreserveMethods
               }
           }
           """
-     When The mbt-transformer plugin, uml-to-cucumber goal is executed
+     When The maven plugin, uml-to-cucumber goal is executed
      Then The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
-      And The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Fields section will be created as follows
-          | Method Name                           |
-          | theBlahApplicationObjectPageIsInvalid |
-          | theBlahApplicationObjectPageIsEmpty   |
+      And The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
+          """
+          package org.farhan.stepdefs.blah;
+          
+          import io.cucumber.java.en.Given;
+          import io.cucumber.datatable.DataTable;
+          import org.farhan.common.BlahFactory;
+          
+          public class BlahObjectPageSteps {
+          
+              @Given("^The blah application, Object page is invalid$")
+              public void theBlahApplicationObjectPageIsInvalid() {
+                  BlahFactory.get("ObjectPage").setComponent("blah");
+                  BlahFactory.get("ObjectPage").setPath("Object");
+                  BlahFactory.get("ObjectPage").setInputOutputs("Invalid");
+              }
+          
+              @Given("^The blah application, Object page is empty$")
+              public void theBlahApplicationObjectPageIsEmpty() {
+                  BlahFactory.get("ObjectPage").setComponent("blah");
+                  BlahFactory.get("ObjectPage").setPath("Object");
+                  BlahFactory.get("ObjectPage").setInputOutputs("Empty");
+              }
+          }
+          """
 
   Scenario: Preserve existing java methods for layer 3
 
@@ -56,13 +77,22 @@ Feature: PreserveMethods
           
           public interface ObjectPage {
           
-              public void assertIsInvalid();
+              public void setInvalid();
           }
           """
-     When The mbt-transformer plugin, uml-to-cucumber goal is executed
+     When The maven plugin, uml-to-cucumber goal is executed
      Then The code-prj project, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
-      And The code-prj project, src/test/java/org/farhan/objects/blah/ObjectPage.java file Fields section will be created as follows
-          | Method Name     |
-          | assertIsInvalid |
-          | setEmpty        |
+      And The code-prj project, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be created as follows
+          """
+          package org.farhan.objects.blah;
+          
+          import java.util.HashMap;
+          
+          public interface ObjectPage {
+          
+              public void setInvalid();
+          
+              public void setEmpty();
+          }
+          """
 

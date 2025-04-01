@@ -1,5 +1,4 @@
 cd ..
 call mvn clean
-call mvn org.farhan:sheep-dog-dev-maven-plugin:1.17-SNAPSHOT:cucumber-to-uml -Dtag="%1"
-call mvn org.farhan:sheep-dog-dev-maven-plugin:1.17-SNAPSHOT:uml-to-asciidoctor -Dtag="%1"
+call mvn org.farhan:sheep-dog-dev-maven-plugin:1.20-SNAPSHOT:cucumber-to-uml -Dtag="%1" -DrepoDir=../sheep-dog-specs/
 cd scripts 

@@ -1,9 +1,9 @@
 @debug
-Feature: UML Scenario Outline To Document
+Feature: UMLScenarioOutlineToDocument
 
   Scenario: No tags, no statement, one step, one example
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -23,21 +23,21 @@ Feature: UML Scenario Outline To Document
           | v31
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The maven plugin, uml-to-asciidoctor goal is executed
+     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                                                           |
           | Submit | Given: The blah application, Object page is created as follows |
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row |
           | Submit | Examples 1 | h3  |
           | Submit | Examples 1 | v31 |
 
   Scenario: One tag, one statement, one step, one example
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -60,17 +60,17 @@ Feature: UML Scenario Outline To Document
           | v31
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The maven plugin, uml-to-asciidoctor goal is executed
+     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios section will be created as follows
           | Name   | Tags | Description |
           | Submit | tag1 | Desc line 1 |
 
   Scenario: Two tags, two statements, two steps, two examples
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -108,18 +108,18 @@ Feature: UML Scenario Outline To Document
           | v32
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The maven plugin, uml-to-asciidoctor goal is executed
+     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios section will be created as follows
           | Name   | Tags      | Description              |
           | Submit | tag1,tag2 | Desc line 1\nDesc line 2 |
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                                                            |
           | Submit | Given: The blah application, Object page is created as follows  |
           | Submit | Given: The blah application, Object2 page is created as follows |
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row |
           | Submit | Examples 1 | h3  |
           | Submit | Examples 1 | v31 |
@@ -128,7 +128,7 @@ Feature: UML Scenario Outline To Document
 
   Scenario: Three tags, three statements, three steps, three examples
 
-    Given The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -181,19 +181,19 @@ Feature: UML Scenario Outline To Document
           | v33
           |===
           """
-     When The mbt-transformer plugin, asciidoctor-to-uml goal is executed
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file is deleted
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios section will be created as follows
+     When The maven plugin, asciidoctor-to-uml goal is executed
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The maven plugin, uml-to-asciidoctor goal is executed
+     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios section will be created as follows
           | Name   | Tags           | Description                           |
           | Submit | tag1,tag2,tag3 | Desc line 1\nDesc line 2\nDesc line 3 |
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                                                            |
           | Submit | Given: The blah application, Object page is created as follows  |
           | Submit | Given: The blah application, Object2 page is created as follows |
           | Submit | Given: The blah application, Object3 page is created as follows |
-      And The mbt-transformer plugin, src/test/resources/asciidoc/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
+      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row |
           | Submit | Examples 1 | h3  |
           | Submit | Examples 1 | v31 |

@@ -1,30 +1,31 @@
 package org.farhan.common;
 
 import java.io.File;
-import org.farhan.objects.mbttransformer.AsciidoctorToUmlGoal;
-import org.farhan.objects.mbttransformer.CucumberToUmlGoal;
-import org.farhan.objects.mbttransformer.UmlToAsciidoctorGoal;
-import org.farhan.objects.mbttransformer.UmlToCucumberGoal;
-import org.farhan.objects.mbttransformer.UmlToCucumberGuiceGoal;
-import org.farhan.objects.mbttransformer.UmlToCucumberSpringGoal;
-import org.farhan.objects.mbttransformer.impl.AsciidoctorToUmlGoalImpl;
-import org.farhan.objects.mbttransformer.impl.BlahObjectPageStepsJavaFileImpl;
-import org.farhan.objects.mbttransformer.impl.CucumberToUmlGoalImpl;
-import org.farhan.objects.mbttransformer.impl.ObjectPageAsciidocFileImpl;
-import org.farhan.objects.mbttransformer.impl.ObjectPageJavaFileImpl;
-import org.farhan.objects.mbttransformer.impl.ProcessAsciidocFileImpl;
-import org.farhan.objects.mbttransformer.impl.ProcessFeatureFileImpl;
-import org.farhan.objects.mbttransformer.impl.PstUmlFileImpl;
-import org.farhan.objects.mbttransformer.impl.UmlToAsciidoctorGoalImpl;
-import org.farhan.objects.mbttransformer.impl.UmlToCucumberGoalImpl;
-import org.farhan.objects.mbttransformer.impl.UmlToCucumberGuiceGoalImpl;
-import org.farhan.objects.mbttransformer.impl.UmlToCucumberSpringGoalImpl;
-import org.farhan.objects.mbttransformer.src.test.java.org.farhan.objects.blah.ObjectPageJavaFile;
-import org.farhan.objects.mbttransformer.src.test.java.org.farhan.stepdefs.blah.BlahObjectPageStepsJavaFile;
-import org.farhan.objects.mbttransformer.src.test.resources.asciidoc.app.ProcessAsciidocFile;
-import org.farhan.objects.mbttransformer.src.test.resources.asciidoc.stepdefs.blahapplication.ObjectPageAsciidocFile;
-import org.farhan.objects.mbttransformer.src.test.resources.cucumber.app.ProcessFeatureFile;
-import org.farhan.objects.mbttransformer.uml.PstUmlFile;
+
+import org.farhan.impl.AsciidoctorToUmlGoalImpl;
+import org.farhan.impl.BlahObjectPageStepsJavaFileImpl;
+import org.farhan.impl.CucumberToUmlGoalImpl;
+import org.farhan.impl.ObjectPageAsciidocFileImpl;
+import org.farhan.impl.ObjectPageJavaFileImpl;
+import org.farhan.impl.ProcessAsciidocFileImpl;
+import org.farhan.impl.ProcessFeatureFileImpl;
+import org.farhan.impl.PstUmlFileImpl;
+import org.farhan.impl.UmlToAsciidoctorGoalImpl;
+import org.farhan.impl.UmlToCucumberGoalImpl;
+import org.farhan.impl.UmlToCucumberGuiceGoalImpl;
+import org.farhan.impl.UmlToCucumberSpringGoalImpl;
+import org.farhan.objects.maven.AsciidoctorToUmlGoal;
+import org.farhan.objects.maven.CucumberToUmlGoal;
+import org.farhan.objects.maven.UmlToAsciidoctorGoal;
+import org.farhan.objects.maven.UmlToCucumberGoal;
+import org.farhan.objects.maven.UmlToCucumberGuiceGoal;
+import org.farhan.objects.maven.UmlToCucumberSpringGoal;
+import org.farhan.objects.codeprj.src.test.java.org.farhan.objects.blah.ObjectPageJavaFile;
+import org.farhan.objects.codeprj.src.test.java.org.farhan.stepdefs.blah.BlahObjectPageStepsJavaFile;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.app.ProcessAsciidocFile;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.blahapplication.ObjectPageAsciidocFile;
+import org.farhan.objects.codeprj.src.test.resources.cucumber.app.ProcessFeatureFile;
+import org.farhan.objects.specprj.uml.PstUmlFile;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -67,11 +68,11 @@ public final class Config extends AbstractModule implements InjectorSource {
 		bind(CucumberToUmlGoal.class).to(CucumberToUmlGoalImpl.class);
 		bind(ObjectPageJavaFile.class).to(ObjectPageJavaFileImpl.class);
 		bind(ProcessAsciidocFile.class).to(ProcessAsciidocFileImpl.class);
-		bind(org.farhan.objects.mbttransformer.src.test.resources.asciidoc.ProcessAsciidocFile.class)
+		bind(org.farhan.objects.specprj.src.test.resources.asciidoc.ProcessAsciidocFile.class)
 				.to(ProcessAsciidocFileImpl.class);
 		bind(ObjectPageAsciidocFile.class).to(ObjectPageAsciidocFileImpl.class);
 		bind(ProcessFeatureFile.class).to(ProcessFeatureFileImpl.class);
-		bind(org.farhan.objects.mbttransformer.src.test.resources.cucumber.ProcessFeatureFile.class)
+		bind(org.farhan.objects.codeprj.src.test.resources.cucumber.ProcessFeatureFile.class)
 				.to(ProcessFeatureFileImpl.class);
 		bind(PstUmlFile.class).to(PstUmlFileImpl.class);
 		bind(UmlToAsciidoctorGoal.class).to(UmlToAsciidoctorGoalImpl.class);

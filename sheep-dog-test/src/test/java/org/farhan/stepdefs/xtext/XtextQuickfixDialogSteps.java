@@ -1,26 +1,24 @@
 package org.farhan.stepdefs.xtext;
 
-import org.farhan.common.TestObject;
-import org.farhan.objects.xtext.QuickfixDialog;
 import com.google.inject.Inject;
-import io.cucumber.java.en.Given;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.guice.ScenarioScoped;
+import io.cucumber.java.en.Given;
+import org.farhan.common.TestSteps;
+import org.farhan.objects.xtext.QuickfixDialog;
 
 @ScenarioScoped
-public class XtextQuickfixDialogSteps {
+public class XtextQuickfixDialogSteps extends TestSteps {
 
-	private TestObject object;
+    @Inject
+    public XtextQuickfixDialogSteps(QuickfixDialog object) {
+        super(object);
+    }
 
-	@Inject
-	public XtextQuickfixDialogSteps(QuickfixDialog object) {
-		this.object = (TestObject) object;
-	}
-
-	@Given("^The quickfix dialog will be set as follows$")
-	public void theQuickfixDialogWillBeSetAsFollows(DataTable dataTable) {
-		object.setComponent("xtext");
-		object.setPath("quickfix");
-		object.assertInputOutputs(dataTable);
-	}
+    @Given("^The xtext plugin, quickfix dialog will be set as follows$")
+    public void theXtextPluginQuickfixDialogWillBeSetAsFollows(DataTable dataTable) {
+        object.setComponent("xtext");
+        object.setPath("quickfix");
+        object.assertInputOutputs(dataTable);
+    }
 }

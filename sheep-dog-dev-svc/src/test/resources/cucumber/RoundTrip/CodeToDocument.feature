@@ -1,11 +1,11 @@
 @debug
-Feature: Code To Document
+Feature: CodeToDocument
 
   TODO make test for the specific mappings
 
   Scenario: Create an adoc file from feature file
 
-    Given The mbt-transformer plugin, src/test/resources/cucumber/app/Process.feature file is created as follows
+    Given The code-prj project, src/test/resources/cucumber/app/Process.feature file is created as follows
           """
           @tag1
           Feature: Process
@@ -52,13 +52,13 @@ Feature: Code To Document
                     |   5 |
                     |   6 |
           """
-     When The mbt-transformer plugin, cucumber-to-uml goal is executed with
+     When The maven plugin, cucumber-to-uml goal is executed with
           | Tags |
           | tag1 |
-      And The mbt-transformer plugin, uml-to-asciidoctor goal is executed with
+      And The maven plugin, uml-to-asciidoctor goal is executed with
           | Tags |
           | tag1 |
-     Then The mbt-transformer plugin, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows
+     Then The spec-prj project, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows
           """
           = Test-Suite: Process
           

@@ -1,22 +1,22 @@
 package org.farhan.common;
 
 import java.io.File;
-import org.farhan.objects.mbttransformer.AsciidoctorToUmlGoal;
-import org.farhan.objects.mbttransformer.CucumberToUmlGoal;
-import org.farhan.objects.mbttransformer.UmlToAsciidoctorGoal;
-import org.farhan.objects.mbttransformer.UmlToCucumberGoal;
-import org.farhan.objects.mbttransformer.UmlToCucumberGuiceGoal;
-import org.farhan.objects.mbttransformer.UmlToCucumberSpringGoal;
-import org.farhan.objects.mbttransformer.impl.AsciidoctorToUmlGoalImpl;
-import org.farhan.objects.mbttransformer.impl.CucumberToUmlGoalImpl;
-import org.farhan.objects.mbttransformer.impl.FileImpl;
-import org.farhan.objects.mbttransformer.impl.UmlToAsciidoctorGoalImpl;
-import org.farhan.objects.mbttransformer.impl.UmlToCucumberGoalImpl;
-import org.farhan.objects.mbttransformer.impl.UmlToCucumberGuiceGoalImpl;
-import org.farhan.objects.mbttransformer.impl.UmlToCucumberSpringGoalImpl;
+import org.farhan.impl.AsciidoctorToUmlGoalImpl;
+import org.farhan.impl.CucumberToUmlGoalImpl;
+import org.farhan.impl.FileImpl;
+import org.farhan.impl.UmlToAsciidoctorGoalImpl;
+import org.farhan.impl.UmlToCucumberGoalImpl;
+import org.farhan.impl.UmlToCucumberGuiceGoalImpl;
+import org.farhan.impl.UmlToCucumberSpringGoalImpl;
 import org.farhan.objects.codeprj.src.test.java.org.farhan.objects.blah.ObjectPageJavaFile;
 import org.farhan.objects.codeprj.src.test.java.org.farhan.stepdefs.blah.BlahObjectPageStepsJavaFile;
 import org.farhan.objects.codeprj.src.test.resources.cucumber.app.ProcessFeatureFile;
+import org.farhan.objects.maven.AsciidoctorToUmlGoal;
+import org.farhan.objects.maven.CucumberToUmlGoal;
+import org.farhan.objects.maven.UmlToAsciidoctorGoal;
+import org.farhan.objects.maven.UmlToCucumberGoal;
+import org.farhan.objects.maven.UmlToCucumberGuiceGoal;
+import org.farhan.objects.maven.UmlToCucumberSpringGoal;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.app.ProcessAsciidocFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.blahapplication.ObjectPageAsciidocFile;
 

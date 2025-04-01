@@ -19,7 +19,7 @@ public abstract class TestObject {
 	protected GoalObject getGoalClass(String contains) throws Exception {
 		for (Key<?> b : Config.classes.getBindings().keySet()) {
 			if (b.getTypeLiteral().toString().contains(contains)
-					&& b.getTypeLiteral().toString().startsWith("org.farhan.objects.mbttransformer.")) {
+					&& b.getTypeLiteral().toString().startsWith("org.farhan.objects.maven.")) {
 				GoalObject object = (GoalObject) Config.classes.getInstance(b);
 				if (object.attributes.size() > 1) {
 					return object;
