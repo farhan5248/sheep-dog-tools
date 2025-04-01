@@ -12,9 +12,9 @@
 === Given: The blah application, Object1 page is empty
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
@@ -40,9 +40,9 @@ Desc line 1
 === Given: The blah application, Object1 page is empty
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
@@ -71,9 +71,9 @@ Desc line 2
 === Given: The blah application, Object2 page is empty
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
@@ -120,9 +120,9 @@ Desc line 3
 === Given: The blah application, Object3 page is empty
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 

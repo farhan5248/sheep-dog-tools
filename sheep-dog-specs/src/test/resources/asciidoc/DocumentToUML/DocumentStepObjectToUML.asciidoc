@@ -22,7 +22,7 @@ I need a test here for selected tags that tests only objects referenced in a sel
 == Step-Definition: is empty
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -55,7 +55,7 @@ Desc line 1
 == Step-Definition: is empty
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -89,7 +89,7 @@ Desc line 2
 == Step-Definition: is empty
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -124,7 +124,7 @@ Desc line 3
 == Step-Definition: is empty
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 

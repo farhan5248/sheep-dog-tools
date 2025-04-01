@@ -8,9 +8,9 @@
 = Test-Suite: Process
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
@@ -34,9 +34,9 @@ Desc line 1
 == Test-Setup: Story One
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
@@ -61,9 +61,9 @@ Desc line 2
 == Test-Setup: Story One
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
@@ -89,9 +89,9 @@ Desc line 3
 == Test-Setup: Story One
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 

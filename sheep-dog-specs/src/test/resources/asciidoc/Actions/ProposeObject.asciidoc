@@ -16,9 +16,9 @@
 | empty    
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion     | Suggestion Name
@@ -36,9 +36,9 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 | empty    
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be empty
+=== Then: The xtext plugin, propose content dialog will be empty
 
 == Test-Case: No object no component no previous has component objects
 
@@ -56,9 +56,9 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 | daily batchjob/Input file.feature | is present          
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion          | Suggestion Name
@@ -75,9 +75,9 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 | empty                                    
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion     | Suggestion Name
@@ -101,9 +101,9 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 | daily batchjob/Input file.feature | is present          
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion          | Suggestion Name
@@ -120,9 +120,9 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 | The daily batchjob,
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be empty
+=== Then: The xtext plugin, propose content dialog will be empty
 
 == Test-Case: No object has component no previous has component objects
 
@@ -140,9 +140,9 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 | daily batchjob/Input file.feature | is present          
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion                     | Suggestion Name
@@ -159,9 +159,9 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 | The daily batchjob,                      
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion     | Suggestion Name
@@ -185,9 +185,9 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 | daily batchjob/Input file.feature | is present          
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion     | Suggestion Name
@@ -203,9 +203,9 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 | The Input file
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion        | Suggestion Name
@@ -230,9 +230,9 @@ TODO the assertion should be that is present won't be suggested because this ste
 | daily batchjob/Input file.feature | is present          
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion        | Suggestion Name
@@ -249,9 +249,9 @@ TODO the assertion should be that is present won't be suggested because this ste
 | The Input file                           
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion        | Suggestion Name
@@ -275,9 +275,9 @@ TODO the assertion should be that is present won't be suggested because this ste
 | daily batchjob/Input file.feature | is present          
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion                | Suggestion Name
@@ -293,9 +293,9 @@ TODO the assertion should be that is present won't be suggested because this ste
 | The daily batchjob, Input file
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion                        | Suggestion Name
@@ -318,9 +318,9 @@ TODO the assertion should be that is present won't be suggested because this ste
 | daily batchjob/Input file.feature | is present          
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion                                | Suggestion Name
@@ -337,9 +337,9 @@ TODO the assertion should be that is present won't be suggested because this ste
 | The daily batchjob, Input file           
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion                        | Suggestion Name
@@ -363,9 +363,9 @@ TODO the assertion should be that is present won't be suggested because this ste
 | daily batchjob/Input file.feature | is present          
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion                                | Suggestion Name

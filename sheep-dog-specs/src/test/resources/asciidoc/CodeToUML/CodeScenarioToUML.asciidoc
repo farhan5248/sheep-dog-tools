@@ -11,7 +11,7 @@ Feature: Process
     Given The blah application, something/Object1 page is empty
 ----
 
-=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The maven plugin, cucumber-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -36,7 +36,7 @@ Feature: Process
     Given The blah application, something/Object1 page is empty
 ----
 
-=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The maven plugin, cucumber-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -70,7 +70,7 @@ Feature: Process
     Given The blah application, something/Object2 page is empty
 ----
 
-=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The maven plugin, cucumber-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -121,7 +121,7 @@ Feature: Process
     Given The blah application, something/Object3 page is empty
 ----
 
-=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The maven plugin, cucumber-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -173,7 +173,7 @@ Feature: Process
     Given The Object1 page is empty
 ----
 
-=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed with
+=== When: The maven plugin, cucumber-to-uml goal is executed with
 
 |===
 | Tags

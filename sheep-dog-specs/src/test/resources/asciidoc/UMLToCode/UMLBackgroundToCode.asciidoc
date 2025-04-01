@@ -18,9 +18,9 @@ Desc line 1
 === Given: The Object1 page is valid
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
@@ -47,9 +47,9 @@ Desc line 1
 === Given: The Object1 page is valid
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
@@ -87,9 +87,9 @@ Desc line 1
 === Given: The Object2 page is valid
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
@@ -132,9 +132,9 @@ Desc line 1
 === Given: The Object3 page is valid
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
@@ -171,9 +171,9 @@ Desc line 1
 === Given: The Object page is valid
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
@@ -210,9 +210,9 @@ Desc line 1
 === Given: The Object page is valid
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 

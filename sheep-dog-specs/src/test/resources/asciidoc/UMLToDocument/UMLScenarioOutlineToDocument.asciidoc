@@ -24,11 +24,11 @@
 |===
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === And: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
 
-=== And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+=== And: The maven plugin, uml-to-asciidoctor goal is executed
 
 === Then: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
 
@@ -74,11 +74,11 @@ Desc line 1
 |===
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === And: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
 
-=== And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+=== And: The maven plugin, uml-to-asciidoctor goal is executed
 
 === Then: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
 
@@ -131,11 +131,11 @@ Desc line 2
 |===
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === And: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
 
-=== And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+=== And: The maven plugin, uml-to-asciidoctor goal is executed
 
 === Then: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
 
@@ -221,11 +221,11 @@ Desc line 3
 |===
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === And: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
 
-=== And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+=== And: The maven plugin, uml-to-asciidoctor goal is executed
 
 === Then: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
 

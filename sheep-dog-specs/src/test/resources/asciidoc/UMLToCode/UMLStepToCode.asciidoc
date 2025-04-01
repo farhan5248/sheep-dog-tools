@@ -15,9 +15,9 @@
 === And: The blah application, And page is empty
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 
@@ -43,9 +43,9 @@
 === Given: The blah application, Given page isn't empty
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
-=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== And: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/resources/cucumber/Process.feature file will be present
 

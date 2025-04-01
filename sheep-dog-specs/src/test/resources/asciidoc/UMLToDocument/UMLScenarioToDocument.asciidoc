@@ -12,11 +12,11 @@
 === Given: The blah application, Object page is empty
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === And: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
 
-=== And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+=== And: The maven plugin, uml-to-asciidoctor goal is executed
 
 === Then: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
 
@@ -42,11 +42,11 @@ Desc line 1
 === Given: The blah application, Object page is empty
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === And: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
 
-=== And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+=== And: The maven plugin, uml-to-asciidoctor goal is executed
 
 === Then: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
 
@@ -75,11 +75,11 @@ Desc line 2
 === Given: The blah application, Object2 page is empty
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === And: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
 
-=== And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+=== And: The maven plugin, uml-to-asciidoctor goal is executed
 
 === Then: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
 
@@ -119,11 +119,11 @@ Desc line 3
 === Given: The blah application, Object3 page is empty
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === And: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
 
-=== And: The mbt-transformer plugin, uml-to-asciidoctor goal is executed
+=== And: The maven plugin, uml-to-asciidoctor goal is executed
 
 === Then: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
 

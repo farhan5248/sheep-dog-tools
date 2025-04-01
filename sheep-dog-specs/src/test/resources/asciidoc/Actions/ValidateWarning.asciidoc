@@ -9,9 +9,9 @@
 | The daily batchjob, Input file is present
 |===
 
-=== When: The xtext plugin, validation action is performed
+=== When: The xtext plugin, validate warning action is performed
 
-=== Then: The xtext plugin, validation dialog will be set as follows
+=== Then: The xtext plugin, validate warning dialog will be set as follows
 
 |===
 | Message                                                         
@@ -34,9 +34,9 @@
 | daily batchjob/Input file.feature | is absent           
 |===
 
-=== When: The xtext plugin, validation action is performed
+=== When: The xtext plugin, validate warning action is performed
 
-=== Then: The xtext plugin, validation dialog will be set as follows
+=== Then: The xtext plugin, validate warning dialog will be set as follows
 
 |===
 | Message                                                                         
@@ -59,9 +59,9 @@
 | daily batchjob/Input file.feature | is present           | Old Header
 |===
 
-=== When: The xtext plugin, validation action is performed
+=== When: The xtext plugin, validate warning action is performed
 
-=== Then: The xtext plugin, validation dialog will be set as follows
+=== Then: The xtext plugin, validate warning dialog will be set as follows
 
 |===
 | Message                                                                                       
@@ -84,9 +84,9 @@
 | daily batchjob/app/Input file.feature | is present          
 |===
 
-=== When: The xtext plugin, validation action is performed
+=== When: The xtext plugin, validate warning action is performed
 
-=== Then: The xtext plugin, validation dialog will be set as follows
+=== Then: The xtext plugin, validate warning dialog will be set as follows
 
 |===
 | Message                                                         

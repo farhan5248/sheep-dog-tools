@@ -9,7 +9,7 @@
 | The daily batchjob, Input file is present
 |===
 
-=== When: The xtext plugin, generation action is performed
+=== When: The xtext plugin, generate step definition action is performed
 
 === Then: The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file will be created as follows
 
@@ -34,7 +34,7 @@
 | daily batchjob/Input file.feature | is absent           
 |===
 
-=== When: The xtext plugin, generation action is performed
+=== When: The xtext plugin, generate step definition action is performed
 
 === Then: The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file will be created as follows
 
@@ -59,7 +59,7 @@
 | daily batchjob/Input file.feature | is present           | Old Header
 |===
 
-=== When: The xtext plugin, generation action is performed
+=== When: The xtext plugin, generate step definition action is performed
 
 === Then: The spec-prj project, src/test/resources/asciidoc/stepdefs/daily batchjob/Input file.asciidoc file will be created as follows
 

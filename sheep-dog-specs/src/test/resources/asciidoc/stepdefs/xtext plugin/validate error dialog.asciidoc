@@ -1,8 +1,6 @@
-= Step-Object: scenario validation dialog
+= Step-Object: validate error dialog
 
-Displays the list of warnings or errors.
-This is similar to the validation dialog
-In the future it'll be removed.
+Displays the list of errors.
 
 == Step-Definition: will be empty
 

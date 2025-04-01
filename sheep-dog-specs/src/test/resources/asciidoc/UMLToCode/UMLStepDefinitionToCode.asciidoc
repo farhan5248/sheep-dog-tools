@@ -50,11 +50,11 @@ text1
 |===
 ----
 
-=== And: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== And: The maven plugin, asciidoctor-to-uml goal is executed
 
 == Test-Case: Layer 2 without parameters without DI
 
-=== When: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== When: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
 
@@ -83,7 +83,7 @@ text1
 
 == Test-Case: Layer 2 with datatable without DI
 
-=== When: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== When: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
 
@@ -112,7 +112,7 @@ text1
 
 == Test-Case: Layer 2 with docstring without DI
 
-=== When: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== When: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
 
@@ -134,7 +134,7 @@ text1
 
 == Test-Case: Layer 3
 
-=== When: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== When: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
 
@@ -161,7 +161,7 @@ text1
 
 == Test-Case: Layer 2 without parameters with spring
 
-=== When: The mbt-transformer plugin, uml-to-cucumber-spring goal is executed
+=== When: The maven plugin, uml-to-cucumber-spring goal is executed
 
 === Then: The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
 
@@ -198,7 +198,7 @@ text1
 
 == Test-Case: Layer 2 without parameters with guice
 
-=== When: The mbt-transformer plugin, uml-to-cucumber-guice goal is executed
+=== When: The maven plugin, uml-to-cucumber-guice goal is executed
 
 === Then: The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
 

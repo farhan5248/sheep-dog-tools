@@ -28,7 +28,7 @@ Desc line 1
 |===
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -67,7 +67,7 @@ Desc line 1
 |===
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -106,7 +106,7 @@ Desc line 1
 |===
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 

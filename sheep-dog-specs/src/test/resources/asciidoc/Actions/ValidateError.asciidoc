@@ -10,14 +10,14 @@
 | The Input file is downloaded
 |===
 
-=== When: The xtext plugin, scenario validation action is performed as follows
+=== When: The xtext plugin, validate error action is performed as follows
 
 |===
 | Selected Step
 | 1            
 |===
 
-=== Then: The xtext plugin, scenario validation dialog will be set as follows
+=== Then: The xtext plugin, validate error dialog will be set as follows
 
 |===
 | Message                             
@@ -34,14 +34,14 @@
 | The daily batchjob, Input file is downloaded
 |===
 
-=== When: The xtext plugin, scenario validation action is performed as follows
+=== When: The xtext plugin, validate error action is performed as follows
 
 |===
 | Selected Step
 | 1            
 |===
 
-=== Then: The xtext plugin, scenario validation dialog will be set as follows
+=== Then: The xtext plugin, validate error dialog will be set as follows
 
 |===
 | Message                             
@@ -58,12 +58,12 @@
 | The Input file is downloaded             
 |===
 
-=== When: The xtext plugin, scenario validation action is performed as follows
+=== When: The xtext plugin, validate error action is performed as follows
 
 |===
 | Selected Step
 | 1            
 |===
 
-=== Then: The xtext plugin, scenario validation dialog will be empty
+=== Then: The xtext plugin, validate error dialog will be empty
 

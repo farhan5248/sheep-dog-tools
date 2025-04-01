@@ -24,21 +24,21 @@
 === Given: The Object1 page is empty
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
+=== When: The maven plugin, asciidoctor-to-uml goal is executed with
 
 |===
 | Tags
 | tag1
 |===
 
-=== And: The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
+=== And: The maven plugin, asciidoctor-to-uml goal is executed with
 
 |===
 | Tags
 | tag2
 |===
 
-=== And: The mbt-transformer plugin, uml-to-cucumber goal is executed with
+=== And: The maven plugin, uml-to-cucumber goal is executed with
 
 |===
 | Tags

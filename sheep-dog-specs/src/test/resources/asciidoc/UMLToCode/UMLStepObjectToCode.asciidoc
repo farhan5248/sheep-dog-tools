@@ -23,11 +23,11 @@ TODO map uml layer 2 documentation to java code
 == Step-Definition: is empty
 ----
 
-=== And: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== And: The maven plugin, asciidoctor-to-uml goal is executed
 
 == Test-Case: No statements layer 2
 
-=== When: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== When: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
 
@@ -47,7 +47,7 @@ TODO map uml layer 2 documentation to java code
 
 == Test-Case: No statements layer 3
 
-=== When: The mbt-transformer plugin, uml-to-cucumber goal is executed
+=== When: The maven plugin, uml-to-cucumber goal is executed
 
 === Then: The code-prj project, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
 

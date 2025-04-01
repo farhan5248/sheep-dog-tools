@@ -9,9 +9,9 @@
 | The daily batchjob, Input file
 |===
 
-=== When: The xtext plugin, step table proposal action is performed
+=== When: The xtext plugin, propose test step table action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be empty
+=== Then: The xtext plugin, propose content dialog will be empty
 
 == Test-Case: Valid step but no object
 
@@ -22,9 +22,9 @@
 | The daily batchjob, Input file is created as follows
 |===
 
-=== When: The xtext plugin, step table proposal action is performed
+=== When: The xtext plugin, propose test step table action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be empty
+=== Then: The xtext plugin, propose content dialog will be empty
 
 == Test-Case: Valid step has object but no definition
 
@@ -42,9 +42,9 @@
 | daily batchjob/Input file.feature | is present          
 |===
 
-=== When: The xtext plugin, step table proposal action is performed
+=== When: The xtext plugin, propose test step table action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be empty
+=== Then: The xtext plugin, propose content dialog will be empty
 
 == Test-Case: Valid step has object has definition has parameters
 
@@ -62,9 +62,9 @@
 | daily batchjob/Input file.feature | is created as follows | H1        
 |===
 
-=== When: The xtext plugin, step table proposal action is performed
+=== When: The xtext plugin, propose test step table action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion | Suggestion Name

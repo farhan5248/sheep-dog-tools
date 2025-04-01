@@ -1,6 +1,6 @@
-= Step-Object: validation dialog
+= Step-Object: validate warning dialog
 
-Displays the list of warnings or errors.
+Displays the list of warnings.
 
 == Step-Definition: will be set as follows
 

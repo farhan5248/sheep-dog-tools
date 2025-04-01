@@ -14,7 +14,7 @@ Feature: Process
      Given The Object1 page is valid
 ----
 
-=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The maven plugin, cucumber-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -41,7 +41,7 @@ Feature: Process
      Given The Object1 page is valid
 ----
 
-=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The maven plugin, cucumber-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -70,7 +70,7 @@ Feature: Process
      Given The Object2 page is valid
 ----
 
-=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The maven plugin, cucumber-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -104,7 +104,7 @@ Feature: Process
      Given The Object3 page is valid
 ----
 
-=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The maven plugin, cucumber-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -133,7 +133,7 @@ Feature: Process
      Given The Object page is valid
 ----
 
-=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The maven plugin, cucumber-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -169,7 +169,7 @@ Feature: Process
      Given The Object page is valid
 ----
 
-=== When: The mbt-transformer plugin, cucumber-to-uml goal is executed
+=== When: The maven plugin, cucumber-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 

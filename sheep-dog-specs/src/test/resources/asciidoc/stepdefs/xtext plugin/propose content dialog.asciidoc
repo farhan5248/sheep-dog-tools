@@ -1,4 +1,4 @@
-= Step-Object: suggestion dialog
+= Step-Object: propose content dialog
 
 Displays the list of proposals.
 

@@ -16,9 +16,9 @@
 | daily batchjob/Input file.feature | Description       
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion          | Suggestion Name | Suggestion Description
@@ -41,9 +41,9 @@
 | daily batchjob/Input file.feature | Description\n     
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion                     | Suggestion Name | Suggestion Description
@@ -60,9 +60,9 @@
 | empty                                    
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion     | Suggestion Name | Suggestion Description                                
@@ -86,9 +86,9 @@
 | daily batchjob/Input file.feature | empty             
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion     | Suggestion Name | Suggestion Description                                
@@ -112,9 +112,9 @@
 | daily batchjob/Input file.feature | Description       
 |===
 
-=== When: The xtext plugin, suggestion action is performed
+=== When: The xtext plugin, propose test step action is performed
 
-=== Then: The xtext plugin, suggestion dialog will be set as follows
+=== Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
 | Suggestion     | Suggestion Name | Suggestion Description                                

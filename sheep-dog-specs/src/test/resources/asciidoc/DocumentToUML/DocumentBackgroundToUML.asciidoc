@@ -15,7 +15,7 @@ Desc line 1
 === Given: The Object0 page is valid
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -51,7 +51,7 @@ Desc line 2
 === Given: The blah application, Object2 page is empty
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -99,7 +99,7 @@ Desc line 3
 === Given: The blah application, Object3 page is empty
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -144,7 +144,7 @@ Desc line 3
 === Given: The Object page is valid
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -176,7 +176,7 @@ Desc line 3
 === Given: The Object2 page is valid
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -213,7 +213,7 @@ Desc line 3
 === Given: The Object3 page is valid
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -244,7 +244,7 @@ Desc line 3
 === Given: The Object page is valid
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -275,7 +275,7 @@ Desc line 3
 === Given: The Object page is valid
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed
+=== When: The maven plugin, asciidoctor-to-uml goal is executed
 
 === Then: The spec-prj project, uml/pst.uml file will be present
 
@@ -307,7 +307,7 @@ Desc line 3
 == Test-Setup: Data Setup
 ----
 
-=== When: The mbt-transformer plugin, asciidoctor-to-uml goal is executed with
+=== When: The maven plugin, asciidoctor-to-uml goal is executed with
 
 |===
 | Tags
