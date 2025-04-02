@@ -1,7 +1,8 @@
-@sheep-dog-dev
+@sheep-dog-dev @round-trip
 Feature: PluginParameters
 
   \@sheep-dog-dev
+  \@round-trip
 
   Scenario: Create two models from different tags
 

@@ -1,7 +1,8 @@
-@sheep-dog-dev
+@sheep-dog-dev @round-trip
 Feature: DocumentToCode
 
   \@sheep-dog-dev
+  \@round-trip
 
   Scenario: Create a feature file from adoc file
 

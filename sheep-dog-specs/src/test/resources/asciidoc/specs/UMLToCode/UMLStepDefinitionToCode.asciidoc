@@ -2,7 +2,6 @@
 
 @sheep-dog-dev
 
-[tags="debug"]
 == Test-Setup: Create model
 
 === Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows

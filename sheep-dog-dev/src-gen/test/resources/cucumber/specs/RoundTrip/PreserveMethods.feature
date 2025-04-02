@@ -1,7 +1,8 @@
-@sheep-dog-dev
+@sheep-dog-dev @round-trip
 Feature: PreserveMethods
 
   \@sheep-dog-dev
+  \@round-trip
 
   Background: Create an asciidoc file
 

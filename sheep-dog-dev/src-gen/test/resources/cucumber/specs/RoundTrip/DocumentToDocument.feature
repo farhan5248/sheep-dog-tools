@@ -1,7 +1,8 @@
-@sheep-dog-dev
+@sheep-dog-dev @round-trip
 Feature: DocumentToDocument
 
   \@sheep-dog-dev
+  \@round-trip
 
   Scenario: Create an adoc file from adoc file
 

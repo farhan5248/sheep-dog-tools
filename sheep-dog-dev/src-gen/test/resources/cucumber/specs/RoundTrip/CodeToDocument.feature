@@ -1,7 +1,8 @@
-@sheep-dog-dev
+@sheep-dog-dev @round-trip
 Feature: CodeToDocument
 
   \@sheep-dog-dev
+  \@round-trip
   TODO make test for the specific mappings
 
   Scenario: Create an adoc file from feature file

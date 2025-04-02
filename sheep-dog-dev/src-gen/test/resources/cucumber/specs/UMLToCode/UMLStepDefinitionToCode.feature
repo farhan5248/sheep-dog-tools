@@ -2,7 +2,6 @@
 Feature: UMLStepDefinitionToCode
 
   \@sheep-dog-dev
-  tags="debug"
 
   Background: Create model
 
