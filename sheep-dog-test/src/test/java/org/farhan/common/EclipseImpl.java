@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.farhan.helper.ILanguageAccess;
-import org.farhan.helper.Proposal;
+import org.farhan.dsl.common.ILanguageAccess;
+import org.farhan.dsl.common.Proposal;
 
 public class EclipseImpl implements ILanguageAccess {
 

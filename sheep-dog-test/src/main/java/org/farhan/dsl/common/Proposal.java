@@ -1,4 +1,4 @@
-package org.farhan.helper;
+package org.farhan.dsl.common;
 
 public class Proposal {
 

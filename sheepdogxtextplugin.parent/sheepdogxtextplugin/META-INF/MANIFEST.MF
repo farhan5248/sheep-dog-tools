@@ -29,5 +29,5 @@ Export-Package: org.farhan.dsl.sheepdog,
  org.farhan.dsl.sheepdog.sheepDog.impl,
  org.farhan.dsl.sheepdog.sheepDog.util,
  org.farhan.dsl.sheepdog.validation,
- org.farhan.helper
+ org.farhan.dsl.common
 Import-Package: org.apache.log4j

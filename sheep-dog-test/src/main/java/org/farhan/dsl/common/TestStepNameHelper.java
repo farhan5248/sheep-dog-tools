@@ -1,9 +1,9 @@
-package org.farhan.helper;
+package org.farhan.dsl.common;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StepHelper {
+public class TestStepNameHelper {
 
 	private static final String NAME_REGEX = "[^,]";
 	private static final String COMPONENT_REGEX = "(( " + NAME_REGEX + "+)" + getComponentRegex() + ",)?";

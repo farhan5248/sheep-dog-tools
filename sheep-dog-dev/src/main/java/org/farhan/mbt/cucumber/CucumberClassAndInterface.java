@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.TreeSet;
 
 import org.apache.commons.lang3.StringUtils;
-import org.farhan.helper.StepHelper;
+import org.farhan.dsl.common.TestStepNameHelper;
 import org.farhan.mbt.convert.ConvertibleObject;
 
 import com.github.javaparser.JavaParser;
@@ -73,10 +73,10 @@ public class CucumberClassAndInterface implements ConvertibleObject {
 			body = aMethod.createBody();
 			body.addStatement(getCallForFactory(step) + getCallForComponent(step) + ";");
 			body.addStatement(getCallForFactory(step) + getCallForPath(step) + ";");
-			if (StepHelper.isEdge(step)) {
+			if (TestStepNameHelper.isEdge(step)) {
 				body.addStatement(getCallForFactory(step) + getCallForTransition() + ";");
 			} else {
-				if (StepHelper.getAttachment(step).isEmpty()) {
+				if (TestStepNameHelper.getAttachment(step).isEmpty()) {
 					body.addStatement(getCallForFactory(step) + getCallForInputOutputsForState(step) + ";");
 				}
 			}
@@ -88,13 +88,13 @@ public class CucumberClassAndInterface implements ConvertibleObject {
 		if (theJavaClass.getImports().isEmpty()) {
 			theJavaClass.addImport("java.util.HashMap");
 		}
-		if (!StepHelper.isEdge(step) && StepHelper.getAttachment(step).isEmpty()) {
+		if (!TestStepNameHelper.isEdge(step) && TestStepNameHelper.getAttachment(step).isEmpty()) {
 			MethodDeclaration aMethod = getMethod(getMethodNameForStepObj(step));
 			aMethod.removeBody();
 			addParameter(aMethod, "HashMap<String, String>", "keyMap");
 			return aMethod;
 
-		} else if (StepHelper.isEdge(step)) {
+		} else if (TestStepNameHelper.isEdge(step)) {
 			return getMethod("transition").removeBody();
 		} else {
 			// data table or doc string will cover this
@@ -110,7 +110,7 @@ public class CucumberClassAndInterface implements ConvertibleObject {
 	}
 
 	protected String getCallForComponent(String step) {
-		String name = StepHelper.getComponentName(step);
+		String name = TestStepNameHelper.getComponentName(step);
 		if (name.isEmpty()) {
 			name = lastComponent;
 		} else {
@@ -135,12 +135,12 @@ public class CucumberClassAndInterface implements ConvertibleObject {
 
 	protected String getCallForInputOutputsForState(String step) throws Exception {
 
-		return "." + getSetOrAssert(step) + "InputOutputs(\"" + StringUtils.capitalize(StepHelper.getStateType(step))
+		return "." + getSetOrAssert(step) + "InputOutputs(\"" + StringUtils.capitalize(TestStepNameHelper.getStateType(step))
 				+ "\"" + getSectionArg(step) + ")";
 	}
 
 	protected String getCallForPath(String step) {
-		return ".setPath(\"" + StepHelper.getObjectName(step) + "\")";
+		return ".setPath(\"" + TestStepNameHelper.getObjectName(step) + "\")";
 	}
 
 	protected String getCallForTransition() {
@@ -152,7 +152,7 @@ public class CucumberClassAndInterface implements ConvertibleObject {
 	}
 
 	protected String getFactoryName(String step) {
-		String name = StepHelper.getComponentName(step);
+		String name = TestStepNameHelper.getComponentName(step);
 		if (name.isEmpty()) {
 			name = lastComponent;
 		} else {
@@ -163,11 +163,11 @@ public class CucumberClassAndInterface implements ConvertibleObject {
 	}
 
 	protected String getInterfaceName(String step) {
-		String name = StepHelper.getObjectName(step);
+		String name = TestStepNameHelper.getObjectName(step);
 		String nameParts[] = name.split("/");
 		name = nameParts[nameParts.length - 1];
 		name = removeSpecialChars(name);
-		name = name + StringUtils.capitalize(StepHelper.getObjectType(step));
+		name = name + StringUtils.capitalize(TestStepNameHelper.getObjectType(step));
 		return name;
 	}
 
@@ -189,7 +189,7 @@ public class CucumberClassAndInterface implements ConvertibleObject {
 
 	protected String getMethodNameForStepObj(String step) throws Exception {
 		return getSetOrAssert(step) + getSection(step)
-				+ removeDelimiterAndCapitalize(StepHelper.getStateType(step), " ");
+				+ removeDelimiterAndCapitalize(TestStepNameHelper.getStateType(step), " ");
 	}
 
 	protected String getPackageDeclaration() {
@@ -205,8 +205,8 @@ public class CucumberClassAndInterface implements ConvertibleObject {
 	}
 
 	protected String getSection(String step) {
-		String sectionName = StepHelper.getDetailsName(step);
-		String sectionType = StepHelper.getDetailsType(step);
+		String sectionName = TestStepNameHelper.getDetailsName(step);
+		String sectionType = TestStepNameHelper.getDetailsType(step);
 		if (sectionName == null) {
 			return "";
 		}
@@ -227,7 +227,7 @@ public class CucumberClassAndInterface implements ConvertibleObject {
 	}
 
 	protected String getSetOrAssert(String stepName) throws Exception {
-		String text = StepHelper.getStateModality(stepName);
+		String text = TestStepNameHelper.getStateModality(stepName);
 		String modality = "";
 		if (text.isEmpty()) {
 			modality = "set";

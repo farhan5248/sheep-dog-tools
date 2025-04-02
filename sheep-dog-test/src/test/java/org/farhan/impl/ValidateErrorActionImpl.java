@@ -3,8 +3,8 @@ package org.farhan.impl;
 import java.util.HashMap;
 
 import org.farhan.common.TestObject;
-import org.farhan.helper.StepDefinitionHelper;
-import org.farhan.helper.Utilities;
+import org.farhan.dsl.common.LanguageHelper;
+import org.farhan.dsl.common.Utilities;
 import org.farhan.objects.xtext.ValidateErrorAction;
 import org.junit.jupiter.api.Assertions;
 
@@ -15,7 +15,7 @@ public class ValidateErrorActionImpl extends TestObject implements ValidateError
 
 	public void transition() {
 		try {
-			getEclipseMock().setValidationMessage(StepDefinitionHelper.validateError(getEclipseMock()));
+			getEclipseMock().setValidationMessage(LanguageHelper.validateError(getEclipseMock()));
 		} catch (Exception e) {
 			Assertions.fail("There was an error executing the test step\n" + Utilities.getStackTraceAsString(e));
 		}

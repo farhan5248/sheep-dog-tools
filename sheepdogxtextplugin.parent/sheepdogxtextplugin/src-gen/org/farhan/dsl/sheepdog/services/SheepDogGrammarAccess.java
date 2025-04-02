@@ -410,7 +410,6 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		private final Assignment cTableAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cTableTableParserRuleCall_6_0 = (RuleCall)cTableAssignment_6.eContents().get(0);
 		
-		//// TODO this is confusing, examples has scenario tags? rename it
 		//TestData:
 		//    (tagList=Tags)?
 		//    '===' 'Test-Data:' name=Title EOL
@@ -1050,7 +1049,6 @@ public class SheepDogGrammarAccess extends AbstractElementFinder.AbstractGrammar
 		return getTestCaseAccess().getRule();
 	}
 	
-	//// TODO this is confusing, examples has scenario tags? rename it
 	//TestData:
 	//    (tagList=Tags)?
 	//    '===' 'Test-Data:' name=Title EOL

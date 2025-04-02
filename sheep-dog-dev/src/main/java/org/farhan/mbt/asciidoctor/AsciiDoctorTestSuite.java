@@ -17,8 +17,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.impl.RuleCallImpl;
 import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
 import org.eclipse.xtext.resource.SaveOptions;
-import org.farhan.helper.StepDefinitionHelper;
-import org.farhan.helper.StepHelper;
+import org.farhan.dsl.common.LanguageHelper;
+import org.farhan.dsl.common.TestStepNameHelper;
 import org.farhan.dsl.sheepdog.LanguageAccessImpl;
 import org.farhan.mbt.convert.ConvertibleObject;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
@@ -274,10 +274,10 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 	}
 
 	public String getStepNameLong(TestStep step) {
-		String stepObjectNameLong = StepDefinitionHelper.getStepObjectQualifiedName(new LanguageAccessImpl(step));
+		String stepObjectNameLong = LanguageHelper.getStepObjectQualifiedName(new LanguageAccessImpl(step));
 		String component = stepObjectNameLong.split("/")[0];
 		String object = stepObjectNameLong.replaceFirst("^" + component + "/", "").replaceFirst(".asciidoc$", "");
-		String stepNameLong = "The " + component + ", " + object + " " + StepHelper.getPredicate(step.getName());
+		String stepNameLong = "The " + component + ", " + object + " " + TestStepNameHelper.getPredicate(step.getName());
 		return getStepKeyword(step) + " " + stepNameLong;
 	}
 

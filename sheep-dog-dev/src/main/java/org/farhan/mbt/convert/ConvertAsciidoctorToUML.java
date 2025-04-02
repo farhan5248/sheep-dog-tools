@@ -2,7 +2,7 @@ package org.farhan.mbt.convert;
 
 import java.util.ArrayList;
 
-import org.farhan.helper.StepDefinitionHelper;
+import org.farhan.dsl.common.LanguageHelper;
 import org.farhan.dsl.sheepdog.LanguageAccessImpl;
 import org.farhan.mbt.asciidoctor.AsciiDoctorTestSuite;
 import org.farhan.mbt.asciidoctor.AsciiDoctorPathConverter;
@@ -119,7 +119,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	private void convertTestStep(UMLTestStep step, TestStep srcStep) {
 		log.debug("test step: " + srcStep.getName());
-		stepObjects.add(StepDefinitionHelper.getStepObjectQualifiedName(new LanguageAccessImpl(srcStep)));
+		stepObjects.add(LanguageHelper.getStepObjectQualifiedName(new LanguageAccessImpl(srcStep)));
 		step.setKeyword(srcObjTestSuite.getStepKeyword(srcStep));
 		step.setNameLong(srcObjTestSuite.getStepNameLong(srcStep));
 		if (srcObjTestSuite.hasDocString(srcStep)) {

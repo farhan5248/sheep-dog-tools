@@ -15,7 +15,7 @@ import org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage;
 import org.farhan.dsl.sheepdog.sheepDog.TestSuite;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
-import org.farhan.helper.StepDefinitionHelper;
+import org.farhan.dsl.common.*;
 
 /**
  * This class contains custom validation rules.
@@ -51,11 +51,11 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	public void checkStepName(TestStep step) {
 		try {
 			if (step.getName() != null) {
-				String problems = StepDefinitionHelper.validateError(new LanguageAccessImpl(step));
+				String problems = LanguageHelper.validateError(new LanguageAccessImpl(step));
 				if (!problems.isEmpty()) {
 					error(problems, SheepDogPackage.Literals.TEST_STEP__NAME, INVALID_NAME);
 				} else {
-					problems = StepDefinitionHelper.validateWarning(new LanguageAccessImpl(step));
+					problems = LanguageHelper.validateWarning(new LanguageAccessImpl(step));
 					if (!problems.isEmpty()) {
 						warning(problems, SheepDogPackage.Literals.TEST_STEP__NAME, MISSING_STEP_DEF,
 								getAlternateObjects(new LanguageAccessImpl(step)));
@@ -85,7 +85,7 @@ public class SheepDogValidator extends AbstractSheepDogValidator {
 	}
 
 	public String[] getAlternateObjects(LanguageAccessImpl la) throws Exception {
-		Object[] alternateProposals = StepDefinitionHelper.getAlternateObjects(la);
+		Object[] alternateProposals = LanguageHelper.getAlternateObjects(la);
 		String[] alternates = new String[alternateProposals.length];
 		for (int i = 0; i < alternates.length; i++) {
 			alternates[i] = alternateProposals[i].toString();

@@ -43,7 +43,6 @@ TestCase:
 	testStepList+=TestStep*
 	testDataList+=TestData*;
 
-// TODO this is confusing, examples has scenario tags? rename it
 TestData:
 	(tagList=Tags)?
 	'===' 'Test-Data:' name=Title EOL

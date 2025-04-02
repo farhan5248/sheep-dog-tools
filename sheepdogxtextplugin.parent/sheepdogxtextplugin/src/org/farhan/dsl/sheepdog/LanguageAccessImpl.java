@@ -29,8 +29,7 @@ import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 import org.farhan.dsl.sheepdog.generator.SheepDogOutputConfigurationProvider;
-import org.farhan.helper.ILanguageAccess;
-import org.farhan.helper.StepHelper;
+import org.farhan.dsl.common.*;
 
 public class LanguageAccessImpl implements ILanguageAccess {
 
@@ -117,7 +116,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 
 	private Object createStepObject() {
 		StepObject stepObject = SheepDogFactory.eINSTANCE.createStepObject();
-		stepObject.setName(StepHelper.getObject(getStepName()));
+		stepObject.setName(TestStepNameHelper.getObject(getStepName()));
 		return stepObject;
 	}
 

@@ -11,8 +11,7 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
-import org.farhan.helper.Proposal;
-import org.farhan.helper.StepDefinitionHelper;
+import org.farhan.dsl.common.*;
 import org.farhan.dsl.sheepdog.LanguageAccessImpl;
 import org.farhan.dsl.sheepdog.sheepDog.And;
 import org.farhan.dsl.sheepdog.sheepDog.Given;
@@ -91,7 +90,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	private void completeTable(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
-			for (Entry<String, Proposal> p : StepDefinitionHelper.proposeStepTable(new LanguageAccessImpl(step))
+			for (Entry<String, Proposal> p : LanguageHelper.proposeTestStepTable(new LanguageAccessImpl(step))
 					.entrySet()) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue().getReplacement(), p.getValue().getDisplay(), null, context);
@@ -109,7 +108,7 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 			ICompletionProposalAcceptor acceptor) {
 		try {
 			// TODO rename propose to proposeStep
-			for (Entry<String, Proposal> p : StepDefinitionHelper.propose(new LanguageAccessImpl(step)).entrySet()) {
+			for (Entry<String, Proposal> p : LanguageHelper.proposeTestStepName(new LanguageAccessImpl(step)).entrySet()) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue().getReplacement(), p.getValue().getDisplay(), null, context);
 				if (proposal != null) {

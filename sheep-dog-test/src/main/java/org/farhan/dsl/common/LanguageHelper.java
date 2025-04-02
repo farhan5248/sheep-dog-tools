@@ -1,19 +1,17 @@
-package org.farhan.helper;
+package org.farhan.dsl.common;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class StepDefinitionHelper {
+public class LanguageHelper {
 
 	public static Object[] getAlternateObjects(ILanguageAccess la) throws Exception {
 
-		// TODO change this to Proposal class for easier testing. The validator code has
-		// to convert this to a string anyways
 		String qualifiedName = getStepObjectQualifiedName(la);
 		String[] nameParts = qualifiedName.split("/");
-		String objectName = StepHelper.getObject(la.getStepName());
+		String objectName = TestStepNameHelper.getObject(la.getStepName());
 		ArrayList<String> alternateNames = new ArrayList<String>();
 		for (String alternateName : la.getFilesRecursively(nameParts[0])) {
 			if (!alternateName.contentEquals(qualifiedName)
@@ -27,7 +25,7 @@ public class StepDefinitionHelper {
 	}
 
 	private static Object createStepDefinition(Object stepObject, ILanguageAccess la) {
-		String predicate = getPredicate(la.getStepName());
+		String predicate = TestStepNameHelper.getPredicate(la.getStepName());
 		Object stepDef = getStepDefinition(stepObject, predicate, la);
 		if (stepDef == null) {
 			return la.createStepDefinition(stepObject, predicate);
@@ -36,7 +34,7 @@ public class StepDefinitionHelper {
 		}
 	}
 
-	private static void createStepDefinitionParameters(Object theStepDef, ILanguageAccess la) {
+	private static void createStepParameters(Object theStepDef, ILanguageAccess la) {
 		if (la.hasParameters(theStepDef)) {
 			String headersString = la.getStepParametersString();
 			for (Object parameters : la.getStepDefinitionParameters(theStepDef)) {
@@ -52,7 +50,7 @@ public class StepDefinitionHelper {
 	public static void generate(ILanguageAccess la, Map<Object, Object> options) throws Exception {
 		Object stepObject = la.createStepObject(getStepObjectQualifiedName(la));
 		Object stepDefinition = createStepDefinition(stepObject, la);
-		createStepDefinitionParameters(stepDefinition, la);
+		createStepParameters(stepDefinition, la);
 		la.saveObject(stepObject, options);
 	}
 
@@ -62,7 +60,7 @@ public class StepDefinitionHelper {
 		if (la.getStepName() != null) {
 			if (la.getStepName().startsWith("The ")) {
 				Proposal proposal;
-				for (String type : StepHelper.getComponentTypes()) {
+				for (String type : TestStepNameHelper.getComponentTypes()) {
 					proposal = new Proposal(la.getStepName().replace("The ", "") + " " + type, type,
 							la.getStepName() + " " + type + ",");
 					proposals.add(proposal);
@@ -90,11 +88,11 @@ public class StepDefinitionHelper {
 		ArrayList<Proposal> proposals = new ArrayList<Proposal>();
 		if (la.getStepName() != null) {
 			if (!la.getStepName().replaceFirst(".*,", "").isBlank()) {
-				for (String type : StepHelper.getObjectVertexTypes()) {
+				for (String type : TestStepNameHelper.getObjectVertexTypes()) {
 					proposals.add(new Proposal(la.getStepName().replaceFirst(".*, ", "") + " " + type, type,
 							la.getStepName() + " " + type));
 				}
-				for (String type : StepHelper.getObjectEdgeTypes()) {
+				for (String type : TestStepNameHelper.getObjectEdgeTypes()) {
 					proposals.add(new Proposal(la.getStepName().replaceFirst(".*, ", "") + " " + type, type,
 							la.getStepName() + " " + type));
 				}
@@ -106,22 +104,22 @@ public class StepDefinitionHelper {
 	private static ArrayList<Proposal> getObjectDefinitionCompletion(ILanguageAccess la) {
 		ArrayList<Proposal> proposals = new ArrayList<Proposal>();
 		if (la.getStepName() != null) {
-			String upToModality = StepHelper.getUpToModality(la.getStepName());
+			String upToModality = TestStepNameHelper.getUpToModality(la.getStepName());
 			if (upToModality.isBlank()) {
-				String predicate = StepHelper.getPredicate(la.getStepName());
+				String predicate = TestStepNameHelper.getPredicate(la.getStepName());
 				if (predicate.isEmpty()) {
 					// TODO in the future get a list of words from existing definitions
 					proposals.add(new Proposal("details name", "Specify section etc", la.getStepName() + " details"));
-					for (String type : StepHelper.getStateModalityTypes()) {
+					for (String type : TestStepNameHelper.getStateModalityTypes()) {
 						proposals.add(new Proposal(type, type, la.getStepName() + " " + type));
 					}
 				} else {
-					if (StepHelper.hasDetails(la.getStepName())) {
-						for (String type : StepHelper.getStateModalityTypes()) {
+					if (TestStepNameHelper.hasDetails(la.getStepName())) {
+						for (String type : TestStepNameHelper.getStateModalityTypes()) {
 							proposals.add(new Proposal(type, type, la.getStepName() + " " + type));
 						}
 					} else {
-						for (String type : StepHelper.getDetailTypes()) {
+						for (String type : TestStepNameHelper.getDetailTypes()) {
 							proposals.add(new Proposal(type, type, la.getStepName() + " " + type));
 						}
 					}
@@ -131,8 +129,8 @@ public class StepDefinitionHelper {
 					// TODO in the future get a list of words from existing definitions
 					proposals.add(new Proposal("attribute name", "Specify created etc", la.getStepName() + " created"));
 				} else {
-					if (StepHelper.getAttachment(la.getStepName()).isBlank()) {
-						for (String type : StepHelper.getAttachmentTypes()) {
+					if (TestStepNameHelper.getAttachment(la.getStepName()).isBlank()) {
+						for (String type : TestStepNameHelper.getAttachmentTypes()) {
 							proposals.add(new Proposal(type, type, la.getStepName() + " " + type));
 						}
 					}
@@ -146,8 +144,8 @@ public class StepDefinitionHelper {
 		ArrayList<Proposal> proposals = new ArrayList<Proposal>();
 		Proposal proposal;
 		String objectQualifiedName = getStepObjectQualifiedName(la);
-		String component = StepHelper.getComponent(la.getStepName());
-		String object = StepHelper.getObject(la.getStepName());
+		String component = TestStepNameHelper.getComponent(la.getStepName());
+		String object = TestStepNameHelper.getObject(la.getStepName());
 		if (la.getStepObject(objectQualifiedName) != null) {
 			Object stepObject = la.getStepObject(objectQualifiedName);
 			for (Object stepDef : la.getStepDefinitions(stepObject)) {
@@ -165,17 +163,6 @@ public class StepDefinitionHelper {
 		return proposals;
 	}
 
-	private static String getPredicate(String stepName) {
-		String component = StepHelper.getComponent(stepName);
-		String stepObject = StepHelper.getObject(stepName);
-		String predicate = stepName;
-		predicate = predicate.replaceFirst("^The ", "").trim();
-		predicate = predicate.replaceFirst("^" + component + ", ", "").trim();
-		predicate = predicate.replaceFirst("^" + stepObject, "").trim();
-		predicate = predicate.replaceFirst("^, ", "").trim();
-		return predicate;
-	}
-
 	private static Collection<Proposal> getPreviousObjects(ILanguageAccess la) {
 
 		TreeMap<String, Proposal> proposals = new TreeMap<String, Proposal>();
@@ -186,10 +173,12 @@ public class StepDefinitionHelper {
 
 		for (Object step : allSteps) {
 			if (la.getStepName() != null) {
+				String[] objectParts = TestStepNameHelper.getObject(la.getStepName(step)).split("/");
+				String name = objectParts[objectParts.length - 1];
 				// This suggestion is to make referring to the last fully qualified name less
 				// tedious. However it can only refer to the last object.
 				proposal = new Proposal();
-				proposal.setDisplay(getStepObjectWithoutPath(StepHelper.getObject(la.getStepName(step))));
+				proposal.setDisplay(name);
 				proposal.setDocumentation("Referred in: " + la.getStepName(step));
 				proposal.setReplacement("The " + proposal.getDisplay());
 				proposals.put(proposal.getDisplay(), proposal);
@@ -198,7 +187,7 @@ public class StepDefinitionHelper {
 				// objects with the same simple name have different paths like a batch job file
 				// being moved between directories
 				proposal = new Proposal();
-				proposal.setDisplay(StepHelper.getObject(la.getStepName(step)));
+				proposal.setDisplay(TestStepNameHelper.getObject(la.getStepName(step)));
 				proposal.setDocumentation("Referred in: " + la.getStepName(step));
 				proposal.setReplacement("The " + proposal.getDisplay());
 				proposals.put(proposal.getDisplay(), proposal);
@@ -231,8 +220,8 @@ public class StepDefinitionHelper {
 	}
 
 	public static String getStepObjectQualifiedName(ILanguageAccess la) {
-		String component = StepHelper.getComponent(la.getStepName());
-		String object = StepHelper.getObject(la.getStepName());
+		String component = TestStepNameHelper.getComponent(la.getStepName());
+		String object = TestStepNameHelper.getObject(la.getStepName());
 
 		// if there is a component and the object has a /, we're done
 		if (!component.isEmpty() && object.contains("/")) {
@@ -241,11 +230,12 @@ public class StepDefinitionHelper {
 		// Create a list of previous steps in reverse order
 		ArrayList<String> previousSteps = new ArrayList<String>();
 		String lastComponent = "Unknown service";
+		// TODO test that this checks previous steps in the test setup
 		for (Object aStep : la.getPreviousSteps()) {
 			previousSteps.add(0, la.getStepName(aStep));
 			// keep track of the last component to assign to undeclared object components
-			if (!StepHelper.getComponent(la.getStepName(aStep)).isEmpty()) {
-				lastComponent = StepHelper.getComponent(la.getStepName(aStep));
+			if (!TestStepNameHelper.getComponent(la.getStepName(aStep)).isEmpty()) {
+				lastComponent = TestStepNameHelper.getComponent(la.getStepName(aStep));
 			}
 		}
 		// search all previous steps for a more complete object path. While doing so,
@@ -254,8 +244,8 @@ public class StepDefinitionHelper {
 		String objectKey = objectParts[objectParts.length - 1];
 		for (String previousStep : previousSteps) {
 			// if the step has a matching object
-			String previousObject = StepHelper.getObject(previousStep);
-			String previousComponent = StepHelper.getComponent(previousStep);
+			String previousObject = TestStepNameHelper.getObject(previousStep);
+			String previousComponent = TestStepNameHelper.getComponent(previousStep);
 			if (previousObject.endsWith(objectKey)) {
 
 				// if the object doesn't have / and the matching object does. Set it
@@ -273,8 +263,6 @@ public class StepDefinitionHelper {
 			} else {
 			}
 		}
-		// TODO, in the future, get the background too if there is one and search there
-		// or throw an exception
 		if (component.isEmpty()) {
 			return lastComponent + "/" + object + la.getFileExtension();
 		} else {
@@ -282,20 +270,15 @@ public class StepDefinitionHelper {
 		}
 	}
 
-	private static String getStepObjectWithoutPath(String stepObject) {
-		// TODO rename to getStepObjectSimpleName
-		String[] objectParts = stepObject.split("/");
-		return objectParts[objectParts.length - 1];
-	}
-
-	public static TreeMap<String, Proposal> proposeStepTable(ILanguageAccess la) throws Exception {
+	public static TreeMap<String, Proposal> proposeTestStepTable(ILanguageAccess la) throws Exception {
 		TreeMap<String, Proposal> proposals = new TreeMap<String, Proposal>();
 		Proposal proposal;
-		if (StepHelper.isValid(la.getStepName())) {
+		if (TestStepNameHelper.isValid(la.getStepName())) {
 			String objectQualifiedName = getStepObjectQualifiedName(la);
 			Object stepObject = la.getStepObject(objectQualifiedName);
 			if (stepObject != null) {
-				Object stepDefinition = getStepDefinition(stepObject, getPredicate(la.getStepName()), la);
+				Object stepDefinition = getStepDefinition(stepObject, TestStepNameHelper.getPredicate(la.getStepName()),
+						la);
 				if (stepDefinition != null) {
 					for (Object parameters : la.getStepDefinitionParameters(stepDefinition)) {
 						String paramSetString = la.getStepDefinitionParametersString((Object) parameters);
@@ -311,13 +294,13 @@ public class StepDefinitionHelper {
 		return proposals;
 	}
 
-	public static TreeMap<String, Proposal> propose(ILanguageAccess la) throws Exception {
+	public static TreeMap<String, Proposal> proposeTestStepName(ILanguageAccess la) throws Exception {
 		TreeMap<String, Proposal> proposals = new TreeMap<String, Proposal>();
 		String component = "";
 		String object = "";
 		if (la.getStepName() != null) {
-			component = StepHelper.getComponent(la.getStepName());
-			object = StepHelper.getObject(la.getStepName());
+			component = TestStepNameHelper.getComponent(la.getStepName());
+			object = TestStepNameHelper.getObject(la.getStepName());
 		}
 		if (object.isEmpty()) {
 			if (component.isEmpty()) {
@@ -351,11 +334,11 @@ public class StepDefinitionHelper {
 
 	public static String validateError(ILanguageAccess la) throws Exception {
 
-		if (!StepHelper.isValid(la.getStepName())) {
-			return StepHelper.getErrorMessage();
+		if (!TestStepNameHelper.isValid(la.getStepName())) {
+			return TestStepNameHelper.getErrorMessage();
 		} else {
 			if (la.getAllSteps().getFirst().equals(la.getStep())) {
-				if (StepHelper.getComponent(la.getStepName()).isEmpty()) {
+				if (TestStepNameHelper.getComponent(la.getStepName()).isEmpty()) {
 					return "The first step must have a component";
 				}
 			}
@@ -371,7 +354,7 @@ public class StepDefinitionHelper {
 		}
 		// check if the keyword exists
 		Object stepObject = la.createStepObject(stepObjectQualifiedName);
-		Object theStepDef = getStepDefinition(stepObject, getPredicate(la.getStepName()), la);
+		Object theStepDef = getStepDefinition(stepObject, TestStepNameHelper.getPredicate(la.getStepName()), la);
 		if (theStepDef == null) {
 			return "This object step definition doesn't exist for: " + stepObjectQualifiedName;
 		}
