@@ -65,7 +65,6 @@ public class ConvertCucumberToUML extends Converter {
 	private void convertTestSetup(AbstractScenario srcAbstractScenario, UMLTestSuite testSuite) {
 		log.debug("test setup: " + srcAbstractScenario.getName());
 		UMLTestSetup background = testSuite.addTestSetup(srcObjTestSuite.getBackgroundName(srcAbstractScenario));
-		background.setTags(srcObjTestSuite.getFeatureTags());
 		background.setDescription(srcObjTestSuite.getBackgroundDescription(srcAbstractScenario));
 		for (Step srcStep : srcObjTestSuite.getStepList(srcAbstractScenario)) {
 			convertTestStep(background.addTestStep(srcObjTestSuite.getStepName(srcStep)), srcStep);
@@ -90,6 +89,7 @@ public class ConvertCucumberToUML extends Converter {
 		srcObjTestSuite.parse(content);
 		if (isTestSuiteSelected()) {
 			UMLTestSuite testSuite = model.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
+			testSuite.setTags(srcObjTestSuite.getFeatureTags());
 			testSuite.setDescription(srcObjTestSuite.getFeatureDescription());
 			for (AbstractScenario as : srcObjTestSuite.getAbstractScenarioList()) {
 				if (srcObjTestSuite.isBackground(as)) {

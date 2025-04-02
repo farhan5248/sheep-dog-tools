@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: DocumentExamplesTableToUML
+
+  \@sheep-dog-dev
 
   Scenario: One row, one cell
 

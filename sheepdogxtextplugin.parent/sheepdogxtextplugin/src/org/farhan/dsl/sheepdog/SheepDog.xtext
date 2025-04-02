@@ -31,20 +31,17 @@ TestStepContainer:
 	TestSetup | TestCase;
 
 TestSetup:
-	(tagList=Tags)?
 	'==' 'Test-Setup:' name=Title EOL
 	statementList+=Statement*
 	testStepList+=TestStep*;
 
 TestCase:
-	(tagList=Tags)?
 	'==' 'Test-Case:' name=Title EOL
 	statementList+=Statement*
 	testStepList+=TestStep*
 	testDataList+=TestData*;
 
 TestData:
-	(tagList=Tags)?
 	'===' 'Test-Data:' name=Title EOL
 	statementList+=Statement*
 	table=Table;
@@ -78,9 +75,6 @@ Table:
 
 Row:
 	cellList+=Cell+ EOL;
-
-Tags:
-	'[tags=' name=WORD ']' EOL;
 
 Cell:
 	'|' name=Title;

@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: CodeStepToUML
+
+  \@sheep-dog-dev
 
   Scenario: Convert step keywords
 

@@ -1,5 +1,7 @@
 = Test-Suite: Document Scenario Outline To UML
 
+@sheep-dog-dev
+
 == Test-Case: No tags, no statement, one step, one example
 
 === Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
@@ -51,9 +53,9 @@
 ----
 = Test-Suite: Process
 
-[tags="tag1"]
 == Test-Case: Submit
 
+@tag1
 Desc line 1
 
 === Given: The blah application, Object page is created as follows
@@ -86,7 +88,7 @@ Desc line 1
 
 |===
 | Interaction Name       | Comment    
-| specs::Process::Submit | Desc line 1
+| specs::Process::Submit | @tag1\nDesc line 1
 |===
 
 == Test-Case: Two tags, two statements, two steps, two examples
@@ -96,9 +98,9 @@ Desc line 1
 ----
 = Test-Suite: Process
 
-[tags="tag1,tag2"]
 == Test-Case: Submit
 
+@tag1 @tag2
 Desc line 1
 Desc line 2
 
@@ -146,7 +148,7 @@ Desc line 2
 
 |===
 | Interaction Name       | Comment                 
-| specs::Process::Submit | Desc line 1\nDesc line 2
+| specs::Process::Submit | @tag1 @tag2\nDesc line 1\nDesc line 2
 |===
 
 === And: The uml/pst.uml file Interaction Messages section will be created as follows
@@ -179,9 +181,9 @@ Desc line 2
 ----
 = Test-Suite: Process
 
-[tags="tag1,tag2,tag3"]
 == Test-Case: Submit
 
+@tag1 @tag2 @tag3
 Desc line 1
 Desc line 2
 Desc line 3
@@ -244,7 +246,7 @@ Desc line 3
 
 |===
 | Interaction Name       | Comment                              
-| specs::Process::Submit | Desc line 1\nDesc line 2\nDesc line 3
+| specs::Process::Submit | @tag1 @tag2 @tag3\nDesc line 1\nDesc line 2\nDesc line 3
 |===
 
 === And: The uml/pst.uml file Interaction Messages section will be created as follows
@@ -278,8 +280,9 @@ Desc line 3
 ----
 = Test-Suite: Process
 
-[tags="tag1"]
 == Test-Case: Submit
+
+@tag1
 
 === Given: The blah application, Object page is empty
 
@@ -290,8 +293,9 @@ Desc line 3
 | v31
 |===
 
-[tags="tag2"]
 == Test-Case: Submit2
+
+@tag2
 
 === Given: The blah application, Object page is empty
 

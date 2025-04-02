@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: UMLBackgroundToCode
+
+  \@sheep-dog-dev
 
   Scenario: One statement, one step, one scenario
 

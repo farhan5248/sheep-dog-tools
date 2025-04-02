@@ -1,5 +1,8 @@
-@debug
+@sheep-dog-dev @round-trip
 Feature: DependencyInjection
+
+  \@sheep-dog-dev
+  \@round-trip
 
   Background: Create a feature file
 

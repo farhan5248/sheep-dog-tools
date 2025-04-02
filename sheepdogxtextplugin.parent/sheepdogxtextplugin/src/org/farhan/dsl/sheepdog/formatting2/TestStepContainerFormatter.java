@@ -46,11 +46,6 @@ public abstract class TestStepContainerFormatter extends Formatter {
 
 	public void format(IFormattableDocument doc, SheepDogGrammarAccess ga, SheepDogFormatter df) {
 		AbstractParserRuleElementFinder a = getAccess(ga);
-		if (theAbstractScenario.getTagList() != null) {
-			TagsFormatter formatter = new TagsFormatter(theAbstractScenario.getTagList());
-			formatter.format(doc, ga, df);
-		}
-
 		formatKeywordTrailingSpace(df.getRegion(theAbstractScenario, getEqualsKeyword(a)), doc);
 		formatKeywordTrailingSpace(df.getRegion(theAbstractScenario, getKeyword(a)), doc);
 		formatTitle(df.getRegion(theAbstractScenario, getTitleRuleCall(a)), doc);

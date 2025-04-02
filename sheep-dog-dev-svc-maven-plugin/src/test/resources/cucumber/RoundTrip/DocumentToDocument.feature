@@ -1,5 +1,8 @@
-@debug
+@sheep-dog-dev @round-trip
 Feature: DocumentToDocument
+
+  \@sheep-dog-dev
+  \@round-trip
 
   Scenario: Create an adoc file from adoc file
 
@@ -9,9 +12,9 @@ Feature: DocumentToDocument
           
           Desc 1
           
-          [tags="tag2"]
           == Test-Case: Story One
           
+          @tag2
           Desc 2
           
           === Given: The blah application, Object page is valid
@@ -24,9 +27,9 @@ Feature: DocumentToDocument
             text2
           ----
           
-          [tags="tag3"]
           == Test-Case: Story Two
           
+          @tag3
           Desc 3
           
           === Given: The blah application, Object page is invalid
@@ -83,9 +86,9 @@ Feature: DocumentToDocument
           
           Desc 1
           
-          [tags="tag2"]
           == Test-Case: Story One
           
+          @tag2
           Desc 2
           
           === Given: The blah application, Object page is valid
@@ -98,9 +101,9 @@ Feature: DocumentToDocument
             text2
           ----
           
-          [tags="tag3"]
           == Test-Case: Story Two
           
+          @tag3
           Desc 3
           
           === Given: The blah application, Object page is invalid

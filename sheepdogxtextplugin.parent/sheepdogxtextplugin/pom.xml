@@ -86,7 +86,7 @@
 							<stripVersion>true</stripVersion>
 							<includeGroupIds>org.farhan</includeGroupIds>
 							<outputDirectory>
-								${basedir}/../${artifactId}/lib/</outputDirectory>
+								${basedir}/../${project.artifactId}/lib/</outputDirectory>
 						</configuration>
 					</execution>
 					<execution>
@@ -99,7 +99,7 @@
 							<stripVersion>true</stripVersion>
 							<includeGroupIds>org.farhan</includeGroupIds>
 							<outputDirectory>
-								${basedir}/../${artifactId}/lib/</outputDirectory>
+								${basedir}/../${project.artifactId}/lib/</outputDirectory>
 							<classifier>sources</classifier>
 						</configuration>
 					</execution>

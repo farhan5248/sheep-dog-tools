@@ -52,7 +52,6 @@ public class SheepDogParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getTextAccess().getGroup(), "rule__Text__Group__0");
 			builder.put(grammarAccess.getTableAccess().getGroup(), "rule__Table__Group__0");
 			builder.put(grammarAccess.getRowAccess().getGroup(), "rule__Row__Group__0");
-			builder.put(grammarAccess.getTagsAccess().getGroup(), "rule__Tags__Group__0");
 			builder.put(grammarAccess.getCellAccess().getGroup(), "rule__Cell__Group__0");
 			builder.put(grammarAccess.getStatementAccess().getGroup(), "rule__Statement__Group__0");
 			builder.put(grammarAccess.getStepObjectAccess().getNameAssignment_2(), "rule__StepObject__NameAssignment_2");
@@ -67,19 +66,16 @@ public class SheepDogParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getTestSuiteAccess().getNameAssignment_2(), "rule__TestSuite__NameAssignment_2");
 			builder.put(grammarAccess.getTestSuiteAccess().getStatementListAssignment_4(), "rule__TestSuite__StatementListAssignment_4");
 			builder.put(grammarAccess.getTestSuiteAccess().getTestStepContainerListAssignment_5(), "rule__TestSuite__TestStepContainerListAssignment_5");
-			builder.put(grammarAccess.getTestSetupAccess().getTagListAssignment_0(), "rule__TestSetup__TagListAssignment_0");
-			builder.put(grammarAccess.getTestSetupAccess().getNameAssignment_3(), "rule__TestSetup__NameAssignment_3");
-			builder.put(grammarAccess.getTestSetupAccess().getStatementListAssignment_5(), "rule__TestSetup__StatementListAssignment_5");
-			builder.put(grammarAccess.getTestSetupAccess().getTestStepListAssignment_6(), "rule__TestSetup__TestStepListAssignment_6");
-			builder.put(grammarAccess.getTestCaseAccess().getTagListAssignment_0(), "rule__TestCase__TagListAssignment_0");
-			builder.put(grammarAccess.getTestCaseAccess().getNameAssignment_3(), "rule__TestCase__NameAssignment_3");
-			builder.put(grammarAccess.getTestCaseAccess().getStatementListAssignment_5(), "rule__TestCase__StatementListAssignment_5");
-			builder.put(grammarAccess.getTestCaseAccess().getTestStepListAssignment_6(), "rule__TestCase__TestStepListAssignment_6");
-			builder.put(grammarAccess.getTestCaseAccess().getTestDataListAssignment_7(), "rule__TestCase__TestDataListAssignment_7");
-			builder.put(grammarAccess.getTestDataAccess().getTagListAssignment_0(), "rule__TestData__TagListAssignment_0");
-			builder.put(grammarAccess.getTestDataAccess().getNameAssignment_3(), "rule__TestData__NameAssignment_3");
-			builder.put(grammarAccess.getTestDataAccess().getStatementListAssignment_5(), "rule__TestData__StatementListAssignment_5");
-			builder.put(grammarAccess.getTestDataAccess().getTableAssignment_6(), "rule__TestData__TableAssignment_6");
+			builder.put(grammarAccess.getTestSetupAccess().getNameAssignment_2(), "rule__TestSetup__NameAssignment_2");
+			builder.put(grammarAccess.getTestSetupAccess().getStatementListAssignment_4(), "rule__TestSetup__StatementListAssignment_4");
+			builder.put(grammarAccess.getTestSetupAccess().getTestStepListAssignment_5(), "rule__TestSetup__TestStepListAssignment_5");
+			builder.put(grammarAccess.getTestCaseAccess().getNameAssignment_2(), "rule__TestCase__NameAssignment_2");
+			builder.put(grammarAccess.getTestCaseAccess().getStatementListAssignment_4(), "rule__TestCase__StatementListAssignment_4");
+			builder.put(grammarAccess.getTestCaseAccess().getTestStepListAssignment_5(), "rule__TestCase__TestStepListAssignment_5");
+			builder.put(grammarAccess.getTestCaseAccess().getTestDataListAssignment_6(), "rule__TestCase__TestDataListAssignment_6");
+			builder.put(grammarAccess.getTestDataAccess().getNameAssignment_2(), "rule__TestData__NameAssignment_2");
+			builder.put(grammarAccess.getTestDataAccess().getStatementListAssignment_4(), "rule__TestData__StatementListAssignment_4");
+			builder.put(grammarAccess.getTestDataAccess().getTableAssignment_5(), "rule__TestData__TableAssignment_5");
 			builder.put(grammarAccess.getGivenAccess().getNameAssignment_2(), "rule__Given__NameAssignment_2");
 			builder.put(grammarAccess.getGivenAccess().getTableAssignment_4_0(), "rule__Given__TableAssignment_4_0");
 			builder.put(grammarAccess.getGivenAccess().getTextAssignment_4_1(), "rule__Given__TextAssignment_4_1");
@@ -95,7 +91,6 @@ public class SheepDogParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getTextAccess().getNameAssignment_0(), "rule__Text__NameAssignment_0");
 			builder.put(grammarAccess.getTableAccess().getRowListAssignment_2(), "rule__Table__RowListAssignment_2");
 			builder.put(grammarAccess.getRowAccess().getCellListAssignment_0(), "rule__Row__CellListAssignment_0");
-			builder.put(grammarAccess.getTagsAccess().getNameAssignment_1(), "rule__Tags__NameAssignment_1");
 			builder.put(grammarAccess.getCellAccess().getNameAssignment_1(), "rule__Cell__NameAssignment_1");
 			builder.put(grammarAccess.getStatementAccess().getNameAssignment_0(), "rule__Statement__NameAssignment_0");
 		}

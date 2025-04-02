@@ -1,6 +1,8 @@
 = Test-Suite: Preserve Methods
 
-[tags="debug"]
+@sheep-dog-dev
+@round-trip
+
 == Test-Setup: Create an asciidoc file
 
 === Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows

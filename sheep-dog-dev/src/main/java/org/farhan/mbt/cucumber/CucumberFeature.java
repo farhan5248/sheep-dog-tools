@@ -313,7 +313,7 @@ public class CucumberFeature implements ConvertibleObject {
 		if (!scenarioDescription.isEmpty()) {
 			for (String line : scenarioDescription.split("\n")) {
 				Statement s = CucumberFactory.eINSTANCE.createStatement();
-				s.setName(line);
+				s.setName(line.replace("@", "\\@"));
 				abstractScenario.getStatements().add(s);
 			}
 		}
@@ -345,7 +345,7 @@ public class CucumberFeature implements ConvertibleObject {
 			theFeature.getStatements().clear();
 			for (String line : featureDescription.split("\n")) {
 				Statement s = CucumberFactory.eINSTANCE.createStatement();
-				s.setName(line);
+				s.setName(line.replace("@", "\\@"));
 				theFeature.getStatements().add(s);
 			}
 		}

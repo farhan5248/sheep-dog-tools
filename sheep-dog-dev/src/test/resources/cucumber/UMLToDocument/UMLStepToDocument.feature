@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: UMLStepToDocument
+
+  \@sheep-dog-dev
 
   Scenario: Convert step keywords
 

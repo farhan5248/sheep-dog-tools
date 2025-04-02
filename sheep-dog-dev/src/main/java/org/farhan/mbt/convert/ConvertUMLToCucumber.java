@@ -101,7 +101,6 @@ public class ConvertUMLToCucumber extends Converter {
 
 	protected void convertTestSetup(Background background, UMLTestSetup srcTestSetup) throws Exception {
 		log.debug("test setup: " + srcTestSetup.getName());
-		tgtObjTestSuite.setFeatureTags(srcTestSetup.getTags());
 		tgtObjTestSuite.setBackgroundDescription(background, srcTestSetup.getDescription());
 		for (UMLTestStep srcStep : srcTestSetup.getTestStepList()) {
 			convertTestStep(tgtObjTestSuite.addStep(background, srcStep.getNameLong()), srcStep);
@@ -123,6 +122,7 @@ public class ConvertUMLToCucumber extends Converter {
 		tgtObjTestSuite = (CucumberFeature) project.addFile(path);
 		tgtObjTestSuite.parse(content);
 		tgtObjTestSuite.setFeatureName(srcTestSuite.getName());
+		tgtObjTestSuite.setFeatureTags(srcTestSuite.getTags());
 		tgtObjTestSuite.setFeatureDescription(srcTestSuite.getDescription());
 
 		if (srcTestSuite.hasTestSetup()) {

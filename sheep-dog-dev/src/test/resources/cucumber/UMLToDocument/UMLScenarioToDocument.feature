@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: UMLScenarioToDocument
+
+  \@sheep-dog-dev
 
   Scenario: No tags, no statements, one step
 
@@ -25,9 +27,9 @@ Feature: UMLScenarioToDocument
           """
           = Test-Suite: Process
           
-          [tags="tag1"]
           == Test-Case: Submit
           
+          @tag1
           Desc line 1
           
           === Given: The blah application, Object page is empty
@@ -37,8 +39,8 @@ Feature: UMLScenarioToDocument
       And The maven plugin, uml-to-asciidoctor goal is executed
      Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios section will be created as follows
-          | Name   | Tags | Description |
-          | Submit | tag1 | Desc line 1 |
+          | Name   | Tags | Description        |
+          | Submit | tag1 | @tag1\nDesc line 1 |
 
   Scenario: Two tags, two statements, two steps
 
@@ -46,9 +48,9 @@ Feature: UMLScenarioToDocument
           """
           = Test-Suite: Process
           
-          [tags="tag1,tag2"]
           == Test-Case: Submit
           
+          @tag1 @tag2
           Desc line 1
           Desc line 2
           
@@ -61,8 +63,8 @@ Feature: UMLScenarioToDocument
       And The maven plugin, uml-to-asciidoctor goal is executed
      Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios section will be created as follows
-          | Name   | Tags      | Description              |
-          | Submit | tag1,tag2 | Desc line 1\nDesc line 2 |
+          | Name   | Tags      | Description                           |
+          | Submit | tag1,tag2 | @tag1 @tag2\nDesc line 1\nDesc line 2 |
       And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                                               |
           | Submit | Given: The blah application, Object page is empty  |
@@ -74,9 +76,9 @@ Feature: UMLScenarioToDocument
           """
           = Test-Suite: Process
           
-          [tags="tag1,tag2,tag3"]
           == Test-Case: Submit
           
+          @tag1 @tag2 @tag3
           Desc line 1
           Desc line 2
           Desc line 3
@@ -92,8 +94,8 @@ Feature: UMLScenarioToDocument
       And The maven plugin, uml-to-asciidoctor goal is executed
      Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
       And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios section will be created as follows
-          | Name   | Tags           | Description                           |
-          | Submit | tag1,tag2,tag3 | Desc line 1\nDesc line 2\nDesc line 3 |
+          | Name   | Tags           | Description                                              |
+          | Submit | tag1,tag2,tag3 | @tag1 @tag2 @tag3\nDesc line 1\nDesc line 2\nDesc line 3 |
       And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps section will be created as follows
           | Name   | Step                                               |
           | Submit | Given: The blah application, Object page is empty  |

@@ -1,5 +1,7 @@
 = Test-Suite: Propose Object Documentation
 
+@sheep-dog-test
+
 == Test-Case: Documentation for component
 
 === Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows

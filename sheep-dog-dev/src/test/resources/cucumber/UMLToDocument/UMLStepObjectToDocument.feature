@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: UMLStepObjectToDocument
+
+  \@sheep-dog-dev
 
   Scenario: No statements
 

@@ -1,5 +1,7 @@
 = Test-Suite: Propose Object
 
+@sheep-dog-test
+
 == Test-Case: No object no component has previous in background
 
 === Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file background steps snippet is created as follows

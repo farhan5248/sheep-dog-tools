@@ -30,22 +30,22 @@ public class TestCaseFormatter extends TestStepContainerFormatter {
 
 	@Override
 	protected Keyword getKeyword(AbstractParserRuleElementFinder a) {
-		return ((TestCaseElements) a).getTestCaseKeyword_2();
+		return ((TestCaseElements) a).getTestCaseKeyword_1();
 	}
 
 	@Override
 	protected RuleCall getEOLRuleCall(AbstractParserRuleElementFinder a) {
-		return ((TestCaseElements) a).getEOLTerminalRuleCall_4();
+		return ((TestCaseElements) a).getEOLTerminalRuleCall_3();
 	}
 
 	@Override
 	protected RuleCall getTitleRuleCall(AbstractParserRuleElementFinder a) {
-		return ((TestCaseElements) a).getNameTitleParserRuleCall_3_0();
+		return ((TestCaseElements) a).getNameTitleParserRuleCall_2_0();
 	}
 
 	@Override
 	protected Keyword getEqualsKeyword(AbstractParserRuleElementFinder a) {
-		return ((TestCaseElements) a).getEqualsSignEqualsSignKeyword_1();
+		return ((TestCaseElements) a).getEqualsSignEqualsSignKeyword_0();
 	}
 
 }

@@ -16,15 +16,10 @@ public class TestDataFormatter extends Formatter {
 
 	public void format(IFormattableDocument doc, SheepDogGrammarAccess ga, SheepDogFormatter df) {
 		TestDataElements a = ga.getTestDataAccess();
-		if (theTestData.getTagList() != null) {
-			TagsFormatter formatter = new TagsFormatter(theTestData.getTagList());
-			formatter.format(doc, ga, df);
-		}
-
-		formatKeywordTrailingSpace(df.getRegion(theTestData, a.getEqualsSignEqualsSignEqualsSignKeyword_1()), doc);
-		formatKeywordTrailingSpace(df.getRegion(theTestData, a.getTestDataKeyword_2()), doc);
-		formatTitle(df.getRegion(theTestData, a.getNameTitleParserRuleCall_3_0()), doc);
-		formatEOL2RuleCall(df.getRegion(theTestData, a.getEOLTerminalRuleCall_4()), doc);
+		formatKeywordTrailingSpace(df.getRegion(theTestData, a.getEqualsSignEqualsSignEqualsSignKeyword_0()), doc);
+		formatKeywordTrailingSpace(df.getRegion(theTestData, a.getTestDataKeyword_1()), doc);
+		formatTitle(df.getRegion(theTestData, a.getNameTitleParserRuleCall_2_0()), doc);
+		formatEOL2RuleCall(df.getRegion(theTestData, a.getEOLTerminalRuleCall_3()), doc);
 
 		for (Statement s : theTestData.getStatementList()) {
 			StatementFormatter formatter = new StatementFormatter(s);

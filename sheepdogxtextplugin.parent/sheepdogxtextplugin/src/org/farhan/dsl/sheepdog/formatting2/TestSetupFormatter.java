@@ -27,22 +27,22 @@ public class TestSetupFormatter extends TestStepContainerFormatter {
 
 	@Override
 	protected Keyword getKeyword(AbstractParserRuleElementFinder a) {
-		return ((TestSetupElements) a).getTestSetupKeyword_2();
+		return ((TestSetupElements) a).getTestSetupKeyword_1();
 	}
 
 	@Override
 	protected RuleCall getEOLRuleCall(AbstractParserRuleElementFinder a) {
-		return ((TestSetupElements) a).getEOLTerminalRuleCall_4();
+		return ((TestSetupElements) a).getEOLTerminalRuleCall_3();
 	}
 
 	@Override
 	protected RuleCall getTitleRuleCall(AbstractParserRuleElementFinder a) {
-		return ((TestSetupElements) a).getNameTitleParserRuleCall_3_0();
+		return ((TestSetupElements) a).getNameTitleParserRuleCall_2_0();
 	}
 
 	@Override
 	protected Keyword getEqualsKeyword(AbstractParserRuleElementFinder a) {
-		return ((TestSetupElements) a).getEqualsSignEqualsSignKeyword_1();
+		return ((TestSetupElements) a).getEqualsSignEqualsSignKeyword_0();
 	}
 
 }

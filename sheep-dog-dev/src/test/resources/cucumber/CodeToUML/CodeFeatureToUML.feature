@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: CodeFeatureToUML
+
+  \@sheep-dog-dev
 
   Scenario: No tags, no statements
 
@@ -20,18 +22,15 @@ Feature: CodeFeatureToUML
           @tag1
           Feature: Process
             Desc line 1
-            Background: Setup
-              Desc line 1
-              Given The Object0 page is valid
           """
      When The maven plugin, cucumber-to-uml goal is executed
      Then The spec-prj project, uml/pst.uml file will be present
       And The spec-prj project, uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment     |
           | specs::Process | Desc line 1 |
-      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
-          | Interaction Name      | Annotation Name | Annotation Detail |
-          | specs::Process::Setup | tags            | tag1              |
+      And The spec-prj project, uml/pst.uml file Class Annotations section will be created as follows
+          | Class Name     | Annotation Name | Annotation Detail |
+          | specs::Process | tags            | tag1              |
 
   Scenario: Two tags, two statements
 
@@ -41,19 +40,16 @@ Feature: CodeFeatureToUML
           Feature: Process
             Desc line 1
             Desc line 2
-            Background: Setup
-              Desc line 1
-              Given The Object0 page is valid
           """
      When The maven plugin, cucumber-to-uml goal is executed
      Then The spec-prj project, uml/pst.uml file will be present
       And The spec-prj project, uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment                  |
           | specs::Process | Desc line 1\nDesc line 2 |
-      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
-          | Interaction Name      | Annotation Name | Annotation Detail |
-          | specs::Process::Setup | tags            | tag1              |
-          | specs::Process::Setup | tags            | tag2              |
+      And The spec-prj project, uml/pst.uml file Class Annotations section will be created as follows
+          | Class Name     | Annotation Name | Annotation Detail |
+          | specs::Process | tags            | tag1              |
+          | specs::Process | tags            | tag2              |
 
   Scenario: Three tags, three statements
 
@@ -64,20 +60,17 @@ Feature: CodeFeatureToUML
             Desc line 1
             Desc line 2
             Desc line 3
-            Background: Setup
-              Desc line 1
-              Given The Object0 page is valid
           """
      When The maven plugin, cucumber-to-uml goal is executed
      Then The spec-prj project, uml/pst.uml file will be present
       And The spec-prj project, uml/pst.uml file Class Comments section will be created as follows
           | Class Name     | Comment                               |
           | specs::Process | Desc line 1\nDesc line 2\nDesc line 3 |
-      And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
-          | Interaction Name      | Annotation Name | Annotation Detail |
-          | specs::Process::Setup | tags            | tag1              |
-          | specs::Process::Setup | tags            | tag2              |
-          | specs::Process::Setup | tags            | tag3              |
+      And The spec-prj project, uml/pst.uml file Class Annotations section will be created as follows
+          | Class Name     | Annotation Name | Annotation Detail |
+          | specs::Process | tags            | tag1              |
+          | specs::Process | tags            | tag2              |
+          | specs::Process | tags            | tag3              |
 
   Scenario: Selected tags
 

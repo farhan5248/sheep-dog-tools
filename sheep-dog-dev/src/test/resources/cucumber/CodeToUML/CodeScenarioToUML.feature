@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: CodeScenarioToUML
+
+  \@sheep-dog-dev
 
   Scenario: No tags, no statements, one step
 

@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: DocumentBackgroundToUML
+
+  \@sheep-dog-dev
 
   Scenario: One tag, one statement, one step
 
@@ -7,9 +9,9 @@ Feature: DocumentBackgroundToUML
           """
           = Test-Suite: Process
           
-          [tags="tag1"]
           == Test-Setup: Setup
           
+          @tag1
           Desc line 1
           
           === Given: The Object0 page is valid
@@ -20,8 +22,8 @@ Feature: DocumentBackgroundToUML
           | Interaction Name      | Annotation Name | Annotation Detail |
           | specs::Process::Setup | tags            | tag1              |
       And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
-          | Interaction Name      | Comment     |
-          | specs::Process::Setup | Desc line 1 |
+          | Interaction Name      | Comment            |
+          | specs::Process::Setup | @tag1\nDesc line 1 |
 
   Scenario: Two tags, two statements, two steps
 
@@ -29,9 +31,9 @@ Feature: DocumentBackgroundToUML
           """
           = Test-Suite: Process
           
-          [tags="tag1,tag2"]
           == Test-Setup: Setup
           
+          @tag1 @tag2
           Desc line 1
           Desc line 2
           
@@ -46,8 +48,8 @@ Feature: DocumentBackgroundToUML
           | specs::Process::Setup | tags            | tag1              |
           | specs::Process::Setup | tags            | tag2              |
       And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
-          | Interaction Name      | Comment                  |
-          | specs::Process::Setup | Desc line 1\nDesc line 2 |
+          | Interaction Name      | Comment                               |
+          | specs::Process::Setup | @tag1 @tag2\nDesc line 1\nDesc line 2 |
       And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name      | Message                                     |
           | specs::Process::Setup | The blah application, Object page is empty  |
@@ -59,9 +61,9 @@ Feature: DocumentBackgroundToUML
           """
           = Test-Suite: Process
           
-          [tags="tag1,tag2,tag3"]
           == Test-Setup: Setup
           
+          @tag1 @tag2 @tag3
           Desc line 1
           Desc line 2
           Desc line 3
@@ -80,8 +82,8 @@ Feature: DocumentBackgroundToUML
           | specs::Process::Setup | tags            | tag2              |
           | specs::Process::Setup | tags            | tag3              |
       And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
-          | Interaction Name      | Comment                               |
-          | specs::Process::Setup | Desc line 1\nDesc line 2\nDesc line 3 |
+          | Interaction Name      | Comment                                                  |
+          | specs::Process::Setup | @tag1 @tag2 @tag3\nDesc line 1\nDesc line 2\nDesc line 3 |
       And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name      | Message                                     |
           | specs::Process::Setup | The blah application, Object page is empty  |
@@ -219,8 +221,10 @@ Feature: DocumentBackgroundToUML
     Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
-          [tags="tag1"]
+          
           == Test-Setup: Data Setup
+          
+          @tag1
           """
       And The spec-prj project, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
           """

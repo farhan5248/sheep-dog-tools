@@ -1,6 +1,8 @@
 = Test-Suite: Dependency Injection
 
-[tags="debug"]
+@sheep-dog-dev
+@round-trip
+
 == Test-Setup: Create a feature file
 
 === Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows

@@ -1,5 +1,8 @@
-@debug
+@sheep-dog-dev @round-trip
 Feature: PluginParameters
+
+  \@sheep-dog-dev
+  \@round-trip
 
   Scenario: Create two models from different tags
 
@@ -7,8 +10,9 @@ Feature: PluginParameters
           """
           = Test-Suite: Process
           
-          [tags="tag1"]
           == Test-Case: Submit
+          
+          @tag1
           
           === Given: The Object1 page is empty
           """
@@ -16,8 +20,9 @@ Feature: PluginParameters
           """
           = Test-Suite: Process
           
-          [tags="tag2"]
           == Test-Case: Submit2
+          
+          @tag2
           
           === Given: The Object1 page is empty
           """
@@ -36,6 +41,8 @@ Feature: PluginParameters
           
             @tag1
             Scenario: Submit
+          
+              \@tag1
           
               Given The Unknown service, Object1 page is empty
           """

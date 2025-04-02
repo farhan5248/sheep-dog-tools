@@ -1,5 +1,8 @@
-@debug
+@sheep-dog-dev @round-trip
 Feature: PreserveMethods
+
+  \@sheep-dog-dev
+  \@round-trip
 
   Background: Create an asciidoc file
 
@@ -45,8 +48,8 @@ Feature: PreserveMethods
           """
           package org.farhan.stepdefs.blah;
           
-          import io.cucumber.java.en.Given;
           import io.cucumber.datatable.DataTable;
+          import io.cucumber.java.en.Given;
           import org.farhan.common.BlahFactory;
           
           public class BlahObjectPageSteps {
@@ -77,7 +80,7 @@ Feature: PreserveMethods
           
           public interface ObjectPage {
           
-              public void setInvalid();
+              public void setInvalid(HashMap<String, String> keyMap);
           }
           """
      When The maven plugin, uml-to-cucumber goal is executed
@@ -90,9 +93,9 @@ Feature: PreserveMethods
           
           public interface ObjectPage {
           
-              public void setInvalid();
+              public void setInvalid(HashMap<String, String> keyMap);
           
-              public void setEmpty();
+              public void setEmpty(HashMap<String, String> keyMap);
           }
           """
 

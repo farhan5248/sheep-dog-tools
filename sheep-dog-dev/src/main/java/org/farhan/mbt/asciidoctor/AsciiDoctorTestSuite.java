@@ -18,11 +18,11 @@ import org.eclipse.xtext.impl.RuleCallImpl;
 import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.farhan.dsl.common.LanguageHelper;
+import org.farhan.dsl.common.StatementNameHelper;
 import org.farhan.dsl.common.TestStepNameHelper;
 import org.farhan.dsl.sheepdog.LanguageAccessImpl;
 import org.farhan.mbt.convert.ConvertibleObject;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
-import org.farhan.dsl.sheepdog.sheepDog.Tags;
 import org.farhan.dsl.sheepdog.sheepDog.TestSetup;
 import org.farhan.dsl.sheepdog.sheepDog.Cell;
 import org.farhan.dsl.sheepdog.sheepDog.TestData;
@@ -75,17 +75,6 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		examples.getTable().getRowList().add(row);
 	}
 
-	public void setExamplesTable(TestData examples, ArrayList<String> headers) {
-		examples.setTable(SheepDogFactory.eINSTANCE.createTable());
-		Row row = SheepDogFactory.eINSTANCE.createRow();
-		for (String srcCell : headers) {
-			Cell cell = SheepDogFactory.eINSTANCE.createCell();
-			cell.setName(srcCell);
-			row.getCellList().add(cell);
-		}
-		examples.getTable().getRowList().add(row);
-	}
-
 	public TestCase addScenario(String scenarioName) {
 		deleteAbstractScenario(scenarioName);
 		TestCase scenario = SheepDogFactory.eINSTANCE.createTestCase();
@@ -94,6 +83,7 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		return scenario;
 	}
 
+	@SuppressWarnings("null")
 	public TestStep addStep(TestStepContainer abstractScenario, String name) {
 		String keyword = name.split(" ")[0];
 		TestStep step = null;
@@ -162,12 +152,11 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 	}
 
 	public ArrayList<String> getAbstractScenarioTags(TestStepContainer abstractScenario) {
-		Tags tags = abstractScenario.getTagList();
-		if (tags != null) {
-			return getTags(tags.getName());
-		} else {
-			return new ArrayList<String>();
+		ArrayList<String> tags = new ArrayList<String>();
+		for (Statement s : abstractScenario.getStatementList()) {
+			tags.addAll(StatementNameHelper.getTags(s.getName()));
 		}
+		return tags;
 	}
 
 	public String getBackgroundDescription(TestStepContainer abstractScenario) {
@@ -221,6 +210,14 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 
 	public String getFeatureName() {
 		return theFeature.getName();
+	}
+
+	public ArrayList<String> getFeatureTags() {
+		ArrayList<String> tags = new ArrayList<String>();
+		for (Statement s : theFeature.getStatementList()) {
+			tags.addAll(StatementNameHelper.getTags(s.getName()));
+		}
+		return tags;
 	}
 
 	@Override
@@ -277,7 +274,8 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		String stepObjectNameLong = LanguageHelper.getStepObjectQualifiedName(new LanguageAccessImpl(step));
 		String component = stepObjectNameLong.split("/")[0];
 		String object = stepObjectNameLong.replaceFirst("^" + component + "/", "").replaceFirst(".asciidoc$", "");
-		String stepNameLong = "The " + component + ", " + object + " " + TestStepNameHelper.getPredicate(step.getName());
+		String stepNameLong = "The " + component + ", " + object + " "
+				+ TestStepNameHelper.getPredicate(step.getName());
 		return getStepKeyword(step) + " " + stepNameLong;
 	}
 
@@ -327,16 +325,6 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 
 	}
 
-	private ArrayList<String> getTags(String tagList) {
-		ArrayList<String> tags = new ArrayList<String>();
-		if (tagList != null) {
-			for (String t : tagList.replace("\"", "").split(",")) {
-				tags.add(t);
-			}
-		}
-		return tags;
-	}
-
 	public boolean hasDocString(TestStep step) {
 		return step.getText() != null;
 	}
@@ -369,10 +357,6 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		setDescription(background, backgroundDescription);
 	}
 
-	public void setBackgroundTags(TestSetup background, ArrayList<String> backgroundTags) {
-		setTags(background, backgroundTags);
-	}
-
 	private void setDescription(TestStepContainer abstractScenario, String scenarioDescription) {
 		if (!scenarioDescription.isEmpty()) {
 			abstractScenario.getStatementList().clear();
@@ -387,6 +371,17 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 	public void setDocString(TestStep step, String docString) {
 		step.setText(SheepDogFactory.eINSTANCE.createText());
 		step.getText().setName("----\n" + docString.replace("----", "\\----") + "\n----");
+	}
+
+	public void setExamplesTable(TestData examples, ArrayList<String> headers) {
+		examples.setTable(SheepDogFactory.eINSTANCE.createTable());
+		Row row = SheepDogFactory.eINSTANCE.createRow();
+		for (String srcCell : headers) {
+			Cell cell = SheepDogFactory.eINSTANCE.createCell();
+			cell.setName(srcCell);
+			row.getCellList().add(cell);
+		}
+		examples.getTable().getRowList().add(row);
 	}
 
 	public void setFeatureDescription(String featureDescription) {
@@ -412,14 +407,6 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		setDescription(scenarioOutline, scenarioOutlineDescription);
 	}
 
-	public void setScenarioOutlineTags(TestCase scenarioOutline, ArrayList<String> scenarioOutlineTags) {
-		setTags(scenarioOutline, scenarioOutlineTags);
-	}
-
-	public void setScenarioTags(TestCase scenario, ArrayList<String> scenarioTags) {
-		setTags(scenario, scenarioTags);
-	}
-
 	public void setStepDefinitionDescription(StepDefinition stepDefinition, String stepDefinitionDescription) {
 		if (!stepDefinitionDescription.isEmpty()) {
 			for (String line : stepDefinitionDescription.split("\n")) {
@@ -430,19 +417,6 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 				stepDefinition.getStatementList().add(statement);
 			}
 		}
-	}
-
-	private void setTags(TestStepContainer scenario, ArrayList<String> tags) {
-		if (tags.isEmpty()) {
-			return;
-		}
-		scenario.setTagList(SheepDogFactory.eINSTANCE.createTags());
-		String tagList = "";
-		for (String t : tags) {
-			tagList += "," + t;
-		}
-		tagList = tagList.replaceFirst(",", "");
-		scenario.getTagList().setName("\"" + tagList + "\"");
 	}
 
 	public String toString() {

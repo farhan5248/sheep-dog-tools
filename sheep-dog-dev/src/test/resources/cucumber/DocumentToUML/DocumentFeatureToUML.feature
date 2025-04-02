@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: DocumentFeatureToUML
+
+  \@sheep-dog-dev
 
   Scenario: No statements
 

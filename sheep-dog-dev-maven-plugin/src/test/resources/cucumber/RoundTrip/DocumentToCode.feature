@@ -1,5 +1,8 @@
-@debug
+@sheep-dog-dev @round-trip
 Feature: DocumentToCode
+
+  \@sheep-dog-dev
+  \@round-trip
 
   Scenario: Create a feature file from adoc file
 
@@ -7,14 +10,12 @@ Feature: DocumentToCode
           """
           = Test-Suite: Process
           
+          @tag1
           Desc 1
           
-          [tags="tag1"]
-          == Test-Setup: Setup
-          
-          [tags="tag2"]
           == Test-Case: Story One
           
+          @tag2
           Desc 2
           
           === Given: The blah application, Object page is valid
@@ -27,9 +28,9 @@ Feature: DocumentToCode
             text2
           ----
           
-          [tags="tag3"]
           == Test-Case: Story Two
           
+          @tag3
           Desc 3
           
           === Given: The blah application, Object page is invalid
@@ -85,13 +86,13 @@ Feature: DocumentToCode
           @tag1
           Feature: Process
           
+            \@tag1
             Desc 1
-          
-            Background: Setup
           
             @tag2
             Scenario: Story One
           
+              \@tag2
               Desc 2
           
               Given The blah application, Object page is valid
@@ -105,6 +106,7 @@ Feature: DocumentToCode
             @tag3
             Scenario Outline: Story Two
           
+              \@tag3
               Desc 3
           
               Given The blah application, Object page is invalid

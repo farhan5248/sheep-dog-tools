@@ -27,7 +27,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestSuite/testStepContainerList"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//TestStepContainer">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestStepContainer/tagList"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//TestStepContainer/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestStepContainer/statementList"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestStepContainer/testStepList"/>
@@ -37,7 +36,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestCase/testDataList"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//TestData">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestData/tagList"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//TestData/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestData/statementList"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//TestData/table"/>
@@ -59,9 +57,6 @@
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//Row">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SheepDog.ecore#//Row/cellList"/>
-    </genClasses>
-    <genClasses ecoreClass="SheepDog.ecore#//Tags">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//Tags/name"/>
     </genClasses>
     <genClasses ecoreClass="SheepDog.ecore#//Cell">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SheepDog.ecore#//Cell/name"/>

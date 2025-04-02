@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: UMLStepParametersTableToDocument
+
+  \@sheep-dog-dev
 
   Scenario: One cell
 

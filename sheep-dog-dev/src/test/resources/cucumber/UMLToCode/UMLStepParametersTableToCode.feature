@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: UMLStepParametersTableToCode
+
+  \@sheep-dog-dev
 
   Scenario: Three cells
 

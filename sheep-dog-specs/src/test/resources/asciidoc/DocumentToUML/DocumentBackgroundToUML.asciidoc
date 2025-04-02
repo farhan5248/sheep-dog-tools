@@ -1,5 +1,7 @@
 = Test-Suite: Document Background To UML
 
+@sheep-dog-dev
+
 == Test-Case: One tag, one statement, one step
 
 === Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
@@ -7,9 +9,9 @@
 ----
 = Test-Suite: Process
 
-[tags="tag1"]
 == Test-Setup: Setup
 
+@tag1
 Desc line 1
 
 === Given: The Object0 page is valid
@@ -30,7 +32,7 @@ Desc line 1
 
 |===
 | Interaction Name      | Comment    
-| specs::Process::Setup | Desc line 1
+| specs::Process::Setup | @tag1\nDesc line 1
 |===
 
 == Test-Case: Two tags, two statements, two steps
@@ -40,9 +42,9 @@ Desc line 1
 ----
 = Test-Suite: Process
 
-[tags="tag1,tag2"]
 == Test-Setup: Setup
 
+@tag1 @tag2
 Desc line 1
 Desc line 2
 
@@ -67,7 +69,7 @@ Desc line 2
 
 |===
 | Interaction Name      | Comment                 
-| specs::Process::Setup | Desc line 1\nDesc line 2
+| specs::Process::Setup | @tag1 @tag2\nDesc line 1\nDesc line 2
 |===
 
 === And: The uml/pst.uml file Interaction Messages section will be created as follows
@@ -85,9 +87,9 @@ Desc line 2
 ----
 = Test-Suite: Process
 
-[tags="tag1,tag2,tag3"]
 == Test-Setup: Setup
 
+@tag1 @tag2 @tag3
 Desc line 1
 Desc line 2
 Desc line 3
@@ -116,7 +118,7 @@ Desc line 3
 
 |===
 | Interaction Name      | Comment                              
-| specs::Process::Setup | Desc line 1\nDesc line 2\nDesc line 3
+| specs::Process::Setup | @tag1 @tag2 @tag3\nDesc line 1\nDesc line 2\nDesc line 3
 |===
 
 === And: The uml/pst.uml file Interaction Messages section will be created as follows
@@ -295,8 +297,10 @@ Desc line 3
 
 ----
 = Test-Suite: Process
-[tags="tag1"]
+
 == Test-Setup: Data Setup
+
+@tag1
 ----
 
 === And: The spec-prj project, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows

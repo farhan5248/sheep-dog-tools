@@ -7,7 +7,6 @@ import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
-import org.farhan.dsl.sheepdog.sheepDog.Tags;
 import org.farhan.dsl.sheepdog.sheepDog.TestCase;
 import org.farhan.dsl.sheepdog.sheepDog.TestData;
 import org.farhan.dsl.sheepdog.sheepDog.TestSetup;
@@ -40,7 +39,6 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
 					for (TestStep s : ts.getTestStepList()) {
 						highlightTestStep(s, acceptor);
 					}
-					highlightTagList(ts.getTagList(), acceptor);
 				} else if (child instanceof TestCase) {
 					TestCase tc = (TestCase) child;
 					for (Statement s : tc.getStatementList()) {
@@ -49,7 +47,6 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
 					for (TestStep s : tc.getTestStepList()) {
 						highlightTestStep(s, acceptor);
 					}
-					highlightTagList(tc.getTagList(), acceptor);
 					for (TestData example : tc.getTestDataList()) {
 						for (Statement s : example.getStatementList()) {
 							highlightStatement(s, acceptor, 0);
@@ -103,14 +100,6 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
 				}
 				current += s.length() + 1;
 			}
-		}
-	}
-
-	private void highlightTagList(Tags tag, IHighlightedPositionAcceptor acceptor) {
-		if (tag != null) {
-			INode node = NodeModelUtils.getNode(tag);
-			acceptor.addPosition(node.getTotalOffset(), node.getText().length(),
-					SheepDogHighlightingConfiguration.TAG_ID);
 		}
 	}
 

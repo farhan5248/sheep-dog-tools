@@ -1,5 +1,7 @@
 = Test-Suite: Validate Error
 
+@sheep-dog-test
+
 == Test-Case: No steps have a component
 
 === Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows

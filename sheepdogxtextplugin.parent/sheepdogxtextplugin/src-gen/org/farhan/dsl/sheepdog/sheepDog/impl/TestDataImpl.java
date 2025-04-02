@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage;
 import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
-import org.farhan.dsl.sheepdog.sheepDog.Tags;
 import org.farhan.dsl.sheepdog.sheepDog.TestData;
 
 /**
@@ -33,7 +32,6 @@ import org.farhan.dsl.sheepdog.sheepDog.TestData;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.TestDataImpl#getTagList <em>Tag List</em>}</li>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.TestDataImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.TestDataImpl#getStatementList <em>Statement List</em>}</li>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.TestDataImpl#getTable <em>Table</em>}</li>
@@ -43,16 +41,6 @@ import org.farhan.dsl.sheepdog.sheepDog.TestData;
  */
 public class TestDataImpl extends MinimalEObjectImpl.Container implements TestData
 {
-  /**
-   * The cached value of the '{@link #getTagList() <em>Tag List</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTagList()
-   * @generated
-   * @ordered
-   */
-  protected Tags tagList;
-
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -112,56 +100,6 @@ public class TestDataImpl extends MinimalEObjectImpl.Container implements TestDa
   protected EClass eStaticClass()
   {
     return SheepDogPackage.Literals.TEST_DATA;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Tags getTagList()
-  {
-    return tagList;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetTagList(Tags newTagList, NotificationChain msgs)
-  {
-    Tags oldTagList = tagList;
-    tagList = newTagList;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_DATA__TAG_LIST, oldTagList, newTagList);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setTagList(Tags newTagList)
-  {
-    if (newTagList != tagList)
-    {
-      NotificationChain msgs = null;
-      if (tagList != null)
-        msgs = ((InternalEObject)tagList).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.TEST_DATA__TAG_LIST, null, msgs);
-      if (newTagList != null)
-        msgs = ((InternalEObject)newTagList).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.TEST_DATA__TAG_LIST, null, msgs);
-      msgs = basicSetTagList(newTagList, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_DATA__TAG_LIST, newTagList, newTagList));
   }
 
   /**
@@ -264,8 +202,6 @@ public class TestDataImpl extends MinimalEObjectImpl.Container implements TestDa
   {
     switch (featureID)
     {
-      case SheepDogPackage.TEST_DATA__TAG_LIST:
-        return basicSetTagList(null, msgs);
       case SheepDogPackage.TEST_DATA__STATEMENT_LIST:
         return ((InternalEList<?>)getStatementList()).basicRemove(otherEnd, msgs);
       case SheepDogPackage.TEST_DATA__TABLE:
@@ -284,8 +220,6 @@ public class TestDataImpl extends MinimalEObjectImpl.Container implements TestDa
   {
     switch (featureID)
     {
-      case SheepDogPackage.TEST_DATA__TAG_LIST:
-        return getTagList();
       case SheepDogPackage.TEST_DATA__NAME:
         return getName();
       case SheepDogPackage.TEST_DATA__STATEMENT_LIST:
@@ -307,9 +241,6 @@ public class TestDataImpl extends MinimalEObjectImpl.Container implements TestDa
   {
     switch (featureID)
     {
-      case SheepDogPackage.TEST_DATA__TAG_LIST:
-        setTagList((Tags)newValue);
-        return;
       case SheepDogPackage.TEST_DATA__NAME:
         setName((String)newValue);
         return;
@@ -334,9 +265,6 @@ public class TestDataImpl extends MinimalEObjectImpl.Container implements TestDa
   {
     switch (featureID)
     {
-      case SheepDogPackage.TEST_DATA__TAG_LIST:
-        setTagList((Tags)null);
-        return;
       case SheepDogPackage.TEST_DATA__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -360,8 +288,6 @@ public class TestDataImpl extends MinimalEObjectImpl.Container implements TestDa
   {
     switch (featureID)
     {
-      case SheepDogPackage.TEST_DATA__TAG_LIST:
-        return tagList != null;
       case SheepDogPackage.TEST_DATA__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case SheepDogPackage.TEST_DATA__STATEMENT_LIST:

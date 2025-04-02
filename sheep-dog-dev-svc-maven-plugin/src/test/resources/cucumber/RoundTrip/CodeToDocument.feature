@@ -1,6 +1,8 @@
-@debug
+@sheep-dog-dev @round-trip
 Feature: CodeToDocument
 
+  \@sheep-dog-dev
+  \@round-trip
   TODO make test for the specific mappings
 
   Scenario: Create an adoc file from feature file
@@ -64,10 +66,8 @@ Feature: CodeToDocument
           
           Desc 1
           
-          [tags="tag1"]
           == Test-Setup: Setup
           
-          [tags="tag2"]
           == Test-Case: Story One
           
           Desc 2
@@ -89,7 +89,6 @@ Feature: CodeToDocument
             text2
           ----
           
-          [tags="tag3"]
           == Test-Case: Story Two
           
           Desc 3

@@ -14,7 +14,7 @@ import org.junit.platform.suite.api.Suite;
 @SelectClasspathResource("cucumber/UMLToCode/UMLStepTableToCode.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
-@IncludeTags("debug")
+@IncludeTags("sheep-dog-dev")
 public class UMLStepTableToCodeTest {
 
 }

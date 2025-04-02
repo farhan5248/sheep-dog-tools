@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: UMLScenarioOutlineToCode
+
+  \@sheep-dog-dev
 
   Scenario: No tags, no statement, one step, one example
 
@@ -41,9 +43,9 @@ Feature: UMLScenarioOutlineToCode
           """
           = Test-Suite: Process
           
-          [tags="tag1"]
           == Test-Case: Submit
           
+          @tag1
           Desc line 1
           
           === Given: The blah application, Object page is created as follows
@@ -64,8 +66,8 @@ Feature: UMLScenarioOutlineToCode
       And The maven plugin, uml-to-cucumber goal is executed
      Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
       And The code-prj project, src/test/resources/cucumber/Process.feature file Scenario Outlines section will be created as follows
-          | Name   | Tags | Description |
-          | Submit | tag1 | Desc line 1 |
+          | Name   | Tags | Description         |
+          | Submit | tag1 | \@tag1\nDesc line 1 |
 
   Scenario Outline: Two tags, two statements, two steps, two examples
 
@@ -73,9 +75,9 @@ Feature: UMLScenarioOutlineToCode
           """
           = Test-Suite: Process
           
-          [tags="tag1,tag2"]
           == Test-Case: Submit
           
+          @tag1 @tag2
           Desc line 1
           Desc line 2
           
@@ -111,8 +113,8 @@ Feature: UMLScenarioOutlineToCode
       And The maven plugin, uml-to-cucumber goal is executed
      Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
       And The code-prj project, src/test/resources/cucumber/Process.feature file Scenario Outlines section will be created as follows
-          | Name   | Tags      | Description              |
-          | Submit | tag1,tag2 | Desc line 1\nDesc line 2 |
+          | Name   | Tags      | Description                             |
+          | Submit | tag1,tag2 | \@tag1 \@tag2\nDesc line 1\nDesc line 2 |
       And The code-prj project, src/test/resources/cucumber/Process.feature file Scenario Outline Steps Data Table section will be created as follows
           | Name   | Step                                                                 |
           | Submit | Given The blah application, Object<Index> page is created as follows |
@@ -133,9 +135,9 @@ Feature: UMLScenarioOutlineToCode
           """
           = Test-Suite: Process
           
-          [tags="tag1,tag2,tag3"]
           == Test-Case: Submit
           
+          @tag1 @tag2 @tag3
           Desc line 1
           Desc line 2
           Desc line 3
@@ -186,8 +188,8 @@ Feature: UMLScenarioOutlineToCode
       And The maven plugin, uml-to-cucumber goal is executed
      Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
       And The code-prj project, src/test/resources/cucumber/Process.feature file Scenario Outlines section will be created as follows
-          | Name   | Tags           | Description                           |
-          | Submit | tag1,tag2,tag3 | Desc line 1\nDesc line 2\nDesc line 3 |
+          | Name   | Tags           | Description                                                 |
+          | Submit | tag1,tag2,tag3 | \@tag1 \@tag2 \@tag3\nDesc line 1\nDesc line 2\nDesc line 3 |
       And The code-prj project, src/test/resources/cucumber/Process.feature file Scenario Outline Steps Data Table section will be created as follows
           | Name   | Step                                                                 |
           | Submit | Given The blah application, Object<Index> page is created as follows |

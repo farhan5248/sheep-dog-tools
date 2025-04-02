@@ -1,7 +1,9 @@
-@debug
+@sheep-dog-dev
 Feature: UMLStepObjectToCode
 
+  \@sheep-dog-dev
   TODO map uml layer 2 documentation to java code
+  tags="debug"
 
   Background: Create model
 

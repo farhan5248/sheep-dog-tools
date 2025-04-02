@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: UMLDocStringToDocument
+
+  \@sheep-dog-dev
 
   Scenario: One line
 

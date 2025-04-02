@@ -16,7 +16,7 @@ public class StatementNameHelper {
 		TreeSet<String> tags = new TreeSet<String>();
 		for (String word : name.split(" ")) {
 			if (isTag(word)) {
-				tags.add(word);
+				tags.add(word.replace("@", ""));
 			}
 		}
 		return tags;

@@ -1,5 +1,7 @@
 = Test-Suite: Validate Warning
 
+@sheep-dog-test
+
 == Test-Case: This object doesn't exist validation
 
 === Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows

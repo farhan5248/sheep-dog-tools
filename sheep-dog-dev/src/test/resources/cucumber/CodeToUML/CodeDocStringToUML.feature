@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: CodeDocStringToUML
+
+  \@sheep-dog-dev
 
   Scenario: One line
 

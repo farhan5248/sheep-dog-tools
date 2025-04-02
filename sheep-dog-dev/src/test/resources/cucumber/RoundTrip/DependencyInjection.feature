@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: DependencyInjection
+
+  \@sheep-dog-dev
 
   Background: Create a feature file
 

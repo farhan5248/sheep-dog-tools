@@ -1,5 +1,7 @@
 = Test-Suite: Propose Step Constants
 
+@sheep-dog-test
+
 == Test-Case: Component types
 
 === Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows

@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: DocumentScenarioToUML
+
+  \@sheep-dog-dev
 
   Scenario: No tags, no statements, one step
 
@@ -23,9 +25,9 @@ Feature: DocumentScenarioToUML
           """
           = Test-Suite: Process
           
-          [tags="tag1"]
           == Test-Case: Submit
           
+          @tag1
           Desc line 1
           
           === Given: The blah application, Object page is empty
@@ -36,8 +38,8 @@ Feature: DocumentScenarioToUML
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | tags            | tag1              |
       And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
-          | Interaction Name       | Comment     |
-          | specs::Process::Submit | Desc line 1 |
+          | Interaction Name       | Comment            |
+          | specs::Process::Submit | @tag1\nDesc line 1 |
 
   Scenario: Two tags, two statements, two steps
 
@@ -45,9 +47,9 @@ Feature: DocumentScenarioToUML
           """
           = Test-Suite: Process
           
-          [tags="tag1,tag2"]
           == Test-Case: Submit
           
+          @tag1 @tag2
           Desc line 1
           Desc line 2
           
@@ -62,8 +64,8 @@ Feature: DocumentScenarioToUML
           | specs::Process::Submit | tags            | tag1              |
           | specs::Process::Submit | tags            | tag2              |
       And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
-          | Interaction Name       | Comment                  |
-          | specs::Process::Submit | Desc line 1\nDesc line 2 |
+          | Interaction Name       | Comment                               |
+          | specs::Process::Submit | @tag1 @tag2\nDesc line 1\nDesc line 2 |
       And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                     |
           | specs::Process::Submit | The blah application, Object page is empty  |
@@ -75,9 +77,9 @@ Feature: DocumentScenarioToUML
           """
           = Test-Suite: Process
           
-          [tags="tag1,tag2,tag3"]
           == Test-Case: Submit
           
+          @tag1 @tag2 @tag3
           Desc line 1
           Desc line 2
           Desc line 3
@@ -96,8 +98,8 @@ Feature: DocumentScenarioToUML
           | specs::Process::Submit | tags            | tag2              |
           | specs::Process::Submit | tags            | tag3              |
       And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
-          | Interaction Name       | Comment                               |
-          | specs::Process::Submit | Desc line 1\nDesc line 2\nDesc line 3 |
+          | Interaction Name       | Comment                                                  |
+          | specs::Process::Submit | @tag1 @tag2 @tag3\nDesc line 1\nDesc line 2\nDesc line 3 |
       And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                     |
           | specs::Process::Submit | The blah application, Object page is empty  |
@@ -110,13 +112,15 @@ Feature: DocumentScenarioToUML
           """
           = Test-Suite: Process
           
-          [tags="tag1"]
           == Test-Case: Submit
+          
+          @tag1
           
           === Given: The blah application, Object page is empty
           
-          [tags="tag2"]
           == Test-Case: Submit2
+          
+          @tag2
           
           === Given: The blah application, Object page is empty
           """

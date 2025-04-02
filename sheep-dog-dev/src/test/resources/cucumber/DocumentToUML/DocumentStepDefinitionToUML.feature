@@ -1,6 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: DocumentStepDefinitionToUML
 
+  \@sheep-dog-dev
   TODO add tests for document parameters
 
   Scenario: No statement, one step parameter

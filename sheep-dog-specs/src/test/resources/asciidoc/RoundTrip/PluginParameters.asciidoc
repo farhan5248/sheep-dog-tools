@@ -1,5 +1,8 @@
 = Test-Suite: Plugin Parameters
 
+@sheep-dog-dev
+@round-trip
+
 == Test-Case: Create two models from different tags
 
 === Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
@@ -7,8 +10,9 @@
 ----
 = Test-Suite: Process
 
-[tags="tag1"]
 == Test-Case: Submit
+
+@tag1
 
 === Given: The Object1 page is empty
 ----
@@ -18,8 +22,9 @@
 ----
 = Test-Suite: Process
 
-[tags="tag2"]
 == Test-Case: Submit2
+
+@tag2
 
 === Given: The Object1 page is empty
 ----
@@ -52,6 +57,8 @@ Feature: Process
 
   @tag1
   Scenario: Submit
+
+    \@tag1
 
     Given The Unknown service, Object1 page is empty
 ----

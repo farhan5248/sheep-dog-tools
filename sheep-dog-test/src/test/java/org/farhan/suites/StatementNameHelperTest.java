@@ -11,7 +11,7 @@ public class StatementNameHelperTest {
 	@Test
 	public void testGetTags() {
 		Assertions.assertTrue(
-				StatementNameHelper.getTags("@tag1 @tag2 @tag3").containsAll(Set.of("@tag1", "@tag2", "@tag3")));
+				StatementNameHelper.getTags("@tag1 @tag2 @tag3").containsAll(Set.of("tag1", "tag2", "tag3")));
 	}
 
 	@Test

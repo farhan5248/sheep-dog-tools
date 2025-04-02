@@ -71,7 +71,6 @@ public class ConvertUMLToAsciidoctor extends Converter {
 
 	private void convertTestCase(TestCase scenario, UMLTestCase srcTestCase) {
 		log.debug("test case: " + srcTestCase.getName());
-		tgtObjTestSuite.setScenarioTags(scenario, srcTestCase.getTags());
 		tgtObjTestSuite.setScenarioDescription(scenario, srcTestCase.getDescription());
 		for (UMLTestStep srcTestStep : srcTestCase.getTestStepList()) {
 			convertTestStep(tgtObjTestSuite.addStep(scenario, srcTestStep.getName()), srcTestStep);
@@ -92,7 +91,6 @@ public class ConvertUMLToAsciidoctor extends Converter {
 
 	private void convertTestSetup(TestSetup background, UMLTestSetup srcTestSetup) {
 		log.debug("test setup: " + srcTestSetup.getName());
-		tgtObjTestSuite.setBackgroundTags(background, srcTestSetup.getTags());
 		tgtObjTestSuite.setBackgroundDescription(background, srcTestSetup.getDescription());
 		for (UMLTestStep srcStep : srcTestSetup.getTestStepList()) {
 			convertTestStep(tgtObjTestSuite.addStep(background, srcStep.getName()), srcStep);

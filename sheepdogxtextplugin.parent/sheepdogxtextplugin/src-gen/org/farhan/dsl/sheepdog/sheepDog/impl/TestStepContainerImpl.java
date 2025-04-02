@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage;
 import org.farhan.dsl.sheepdog.sheepDog.Statement;
-import org.farhan.dsl.sheepdog.sheepDog.Tags;
 import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
 
@@ -33,7 +32,6 @@ import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.TestStepContainerImpl#getTagList <em>Tag List</em>}</li>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.TestStepContainerImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.TestStepContainerImpl#getStatementList <em>Statement List</em>}</li>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.impl.TestStepContainerImpl#getTestStepList <em>Test Step List</em>}</li>
@@ -43,16 +41,6 @@ import org.farhan.dsl.sheepdog.sheepDog.TestStepContainer;
  */
 public class TestStepContainerImpl extends MinimalEObjectImpl.Container implements TestStepContainer
 {
-  /**
-   * The cached value of the '{@link #getTagList() <em>Tag List</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getTagList()
-   * @generated
-   * @ordered
-   */
-  protected Tags tagList;
-
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -120,56 +108,6 @@ public class TestStepContainerImpl extends MinimalEObjectImpl.Container implemen
    * @generated
    */
   @Override
-  public Tags getTagList()
-  {
-    return tagList;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetTagList(Tags newTagList, NotificationChain msgs)
-  {
-    Tags oldTagList = tagList;
-    tagList = newTagList;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_STEP_CONTAINER__TAG_LIST, oldTagList, newTagList);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setTagList(Tags newTagList)
-  {
-    if (newTagList != tagList)
-    {
-      NotificationChain msgs = null;
-      if (tagList != null)
-        msgs = ((InternalEObject)tagList).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.TEST_STEP_CONTAINER__TAG_LIST, null, msgs);
-      if (newTagList != null)
-        msgs = ((InternalEObject)newTagList).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.TEST_STEP_CONTAINER__TAG_LIST, null, msgs);
-      msgs = basicSetTagList(newTagList, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.TEST_STEP_CONTAINER__TAG_LIST, newTagList, newTagList));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public String getName()
   {
     return name;
@@ -229,8 +167,6 @@ public class TestStepContainerImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case SheepDogPackage.TEST_STEP_CONTAINER__TAG_LIST:
-        return basicSetTagList(null, msgs);
       case SheepDogPackage.TEST_STEP_CONTAINER__STATEMENT_LIST:
         return ((InternalEList<?>)getStatementList()).basicRemove(otherEnd, msgs);
       case SheepDogPackage.TEST_STEP_CONTAINER__TEST_STEP_LIST:
@@ -249,8 +185,6 @@ public class TestStepContainerImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case SheepDogPackage.TEST_STEP_CONTAINER__TAG_LIST:
-        return getTagList();
       case SheepDogPackage.TEST_STEP_CONTAINER__NAME:
         return getName();
       case SheepDogPackage.TEST_STEP_CONTAINER__STATEMENT_LIST:
@@ -272,9 +206,6 @@ public class TestStepContainerImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case SheepDogPackage.TEST_STEP_CONTAINER__TAG_LIST:
-        setTagList((Tags)newValue);
-        return;
       case SheepDogPackage.TEST_STEP_CONTAINER__NAME:
         setName((String)newValue);
         return;
@@ -300,9 +231,6 @@ public class TestStepContainerImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case SheepDogPackage.TEST_STEP_CONTAINER__TAG_LIST:
-        setTagList((Tags)null);
-        return;
       case SheepDogPackage.TEST_STEP_CONTAINER__NAME:
         setName(NAME_EDEFAULT);
         return;
@@ -326,8 +254,6 @@ public class TestStepContainerImpl extends MinimalEObjectImpl.Container implemen
   {
     switch (featureID)
     {
-      case SheepDogPackage.TEST_STEP_CONTAINER__TAG_LIST:
-        return tagList != null;
       case SheepDogPackage.TEST_STEP_CONTAINER__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case SheepDogPackage.TEST_STEP_CONTAINER__STATEMENT_LIST:

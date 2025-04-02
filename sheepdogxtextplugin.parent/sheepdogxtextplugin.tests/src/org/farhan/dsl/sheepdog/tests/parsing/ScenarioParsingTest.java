@@ -41,8 +41,8 @@ public class ScenarioParsingTest extends ParsingTest {
 	public void parseScenarioWithTags() throws Exception {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
-		sb.append("[tags=\"tag1\"]\n");
 		sb.append("== Test-Case: Submit a claim\n");
+		sb.append("@tag1\n");
 		assertNoFeatureErrors(sb);
 	}
 
@@ -88,8 +88,8 @@ public class ScenarioParsingTest extends ParsingTest {
 	public void parseScenarioWithEverything() throws Exception {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
-		sb.append("[tags=\"tag1\"]\n");
 		sb.append("== Test-Case: Submit a claim\n");
+		sb.append("@tag1\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
 		sb.append("=== Given: do step one\n");

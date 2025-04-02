@@ -1,5 +1,7 @@
 = Test-Suite: Generate
 
+@sheep-dog-test
+
 == Test-Case: The object doesn't exist
 
 === Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows

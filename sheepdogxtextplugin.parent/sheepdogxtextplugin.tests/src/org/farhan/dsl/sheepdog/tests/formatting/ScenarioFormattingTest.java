@@ -16,9 +16,9 @@ public class ScenarioFormattingTest extends FormattingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("\n");
-		sb.append("[tags=\"tag1\"]\n");
 		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("\n");
+		sb.append("@tag1\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
 		sb.append("\n");
@@ -44,9 +44,9 @@ public class ScenarioFormattingTest extends FormattingTest {
 			StringBuilder sb = new StringBuilder();
 			sb.append("=  Test-Suite: This is a test feature\n");
 			sb.append("\n");
-			sb.append("[tags=\"tag1\"]\n");
 			sb.append(" ==  Test-Case:  Submit a claim \n");
 			sb.append("\n");
+			sb.append("@tag1\n");
 			sb.append(" Basic EDI claim \n");
 			sb.append(" No deductible \n");
 			sb.append("\n");
@@ -65,9 +65,9 @@ public class ScenarioFormattingTest extends FormattingTest {
 			StringBuilder sb = new StringBuilder();
 			sb.append("=Test-Suite:This is a test feature\n");
 			sb.append("\n");
-			sb.append("[tags=\"tag1\"]\n");
 			sb.append("==Test-Case:Submit a claim\n");
 			sb.append("\n");
+			sb.append("@tag1\n");
 			sb.append("Basic EDI claim\n");
 			sb.append("No deductible\n");
 			sb.append("\n");
@@ -87,11 +87,10 @@ public class ScenarioFormattingTest extends FormattingTest {
 			sb.append("= Test-Suite: This is a test feature\n");
 			sb.append("\n");
 			sb.append("\n");
-			sb.append("[tags=\"tag1\"]\n");
-			sb.append("\n");
 			sb.append("== Test-Case: Submit a claim\n");
 			sb.append("\n");
 			sb.append("\n");
+			sb.append("@tag1\n");
 			sb.append("Basic EDI claim\n");
 			sb.append("No deductible\n");
 			sb.append("\n");

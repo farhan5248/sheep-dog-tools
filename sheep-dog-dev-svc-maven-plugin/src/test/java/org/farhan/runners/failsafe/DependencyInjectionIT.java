@@ -14,6 +14,6 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 @SelectClasspathResource("cucumber/RoundTrip/DependencyInjection.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan.common,org.farhan.objects,org.farhan.stepdefs,org.farhan.runners.failsafe")
-@IncludeTags("debug")
+@IncludeTags("round-trip")
 public class DependencyInjectionIT {
 }

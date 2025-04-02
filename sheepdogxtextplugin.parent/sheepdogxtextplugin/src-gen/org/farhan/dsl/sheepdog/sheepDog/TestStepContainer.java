@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.TestStepContainer#getTagList <em>Tag List</em>}</li>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.TestStepContainer#getName <em>Name</em>}</li>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.TestStepContainer#getStatementList <em>Statement List</em>}</li>
  *   <li>{@link org.farhan.dsl.sheepdog.sheepDog.TestStepContainer#getTestStepList <em>Test Step List</em>}</li>
@@ -28,28 +27,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface TestStepContainer extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Tag List</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Tag List</em>' containment reference.
-   * @see #setTagList(Tags)
-   * @see org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage#getTestStepContainer_TagList()
-   * @model containment="true"
-   * @generated
-   */
-  Tags getTagList();
-
-  /**
-   * Sets the value of the '{@link org.farhan.dsl.sheepdog.sheepDog.TestStepContainer#getTagList <em>Tag List</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Tag List</em>' containment reference.
-   * @see #getTagList()
-   * @generated
-   */
-  void setTagList(Tags value);
-
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->

@@ -1,6 +1,8 @@
 package org.farhan.mbt.core;
 
 import java.util.ArrayList;
+import java.util.Map.Entry;
+
 import org.eclipse.uml2.uml.Behavior;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Interaction;
@@ -45,6 +47,16 @@ public class UMLTestSuite extends UMLElement {
 		return umlElement.getName();
 	}
 
+	public ArrayList<String> getTags() {
+		ArrayList<String> tags = new ArrayList<String>();
+		if (umlElement.getEAnnotation("tags") != null) {
+			for (Entry<String, String> t : umlElement.getEAnnotation("tags").getDetails()) {
+				tags.add(t.getKey());
+			}
+		}
+		return tags;
+	}
+
 	public ArrayList<UMLTestCase> getTestCaseList() {
 		if (testCaseList.isEmpty()) {
 			for (Behavior b : umlElement.getOwnedBehaviors()) {
@@ -77,6 +89,14 @@ public class UMLTestSuite extends UMLElement {
 
 	public void setDescription(String description) {
 		umlElement.createOwnedComment().setBody(description);
+	}
+	
+	public void setTags(ArrayList<String> tags) {
+		if (!tags.isEmpty()) {
+			for (String t : tags) {
+				createAnnotation(umlElement, "tags", t);
+			}
+		}
 	}
 
 }

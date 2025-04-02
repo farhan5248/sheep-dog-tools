@@ -135,6 +135,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		srcObjTestSuite.parse(content);
 		if (isTestSuiteSelected()) {
 			UMLTestSuite testSuite = model.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
+			testSuite.setTags(srcObjTestSuite.getFeatureTags());
 			testSuite.setDescription(srcObjTestSuite.getFeatureDescription());
 			for (TestStepContainer srcTestCase : srcObjTestSuite.getAbstractScenarioList()) {
 				if (srcObjTestSuite.isBackground(srcTestCase)) {
@@ -170,6 +171,13 @@ public class ConvertAsciidoctorToUML extends Converter {
 	private boolean isTestSuiteSelected() throws Exception {
 		boolean selected = tag.isEmpty();
 		if (!selected) {
+			// TODO this needs a test case
+			for (String t : srcObjTestSuite.getFeatureTags()) {
+				log.debug("feature tag: " + t);
+				if (t.trim().contentEquals(tag)) {
+					return true;
+				}
+			}
 			for (TestStepContainer a : srcObjTestSuite.getAbstractScenarioList()) {
 				for (String t : srcObjTestSuite.getAbstractScenarioTags(a)) {
 					if (t.trim().contentEquals(tag)) {

@@ -14,7 +14,7 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 @SelectClasspathResource("cucumber/DocumentToUML/DocumentStepParametersTableToUML.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
-@IncludeTags("debug")
+@IncludeTags("sheep-dog-dev")
 public class DocumentStepParametersTableToUMLTest {
 
 }

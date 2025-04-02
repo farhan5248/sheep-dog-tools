@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: CodeBackgroundToUML
+
+  \@sheep-dog-dev
 
   Scenario: No statement, one step, one scenario
 

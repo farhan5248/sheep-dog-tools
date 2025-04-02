@@ -1,6 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: DocumentStepObjectToUML
 
+  \@sheep-dog-dev
   I need a test here for selected tags that tests only objects referenced in a selected test case are reversed
 
   Scenario: No statements

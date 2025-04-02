@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: CodeToCode
+
+  \@sheep-dog-dev
 
   Background: Create a feature file
 

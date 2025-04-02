@@ -1,6 +1,8 @@
 = Test-Suite: Code To Code
 
-[tags="debug"]
+@sheep-dog-dev
+@round-trip
+
 == Test-Setup: Create a feature file
 
 The formatting of the data and example tables is intentionally different to make sure that the file is regenerated

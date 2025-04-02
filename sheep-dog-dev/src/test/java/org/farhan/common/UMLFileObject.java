@@ -151,6 +151,9 @@ public abstract class UMLFileObject extends FileObject {
 	}
 
 	private Entry<String, String> getAnnotationDetail(EAnnotation annotation, String annotationDetail) {
+		if (annotation.getDetails() == null) {
+			return null;
+		}
 		for (Entry<String, String> d : annotation.getDetails()) {
 			if (annotationDetail.contains(" -> ")) {
 				if (annotationDetail.contentEquals(d.getKey() + " -> " + d.getValue())) {

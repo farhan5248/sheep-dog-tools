@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: UMLExamplesTableToCode
+
+  \@sheep-dog-dev
 
   Scenario: One row, one cell
 

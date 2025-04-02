@@ -25,7 +25,6 @@ import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
-import org.farhan.dsl.sheepdog.sheepDog.Tags;
 import org.farhan.dsl.sheepdog.sheepDog.TestCase;
 import org.farhan.dsl.sheepdog.sheepDog.TestData;
 import org.farhan.dsl.sheepdog.sheepDog.TestSetup;
@@ -74,9 +73,6 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 				return; 
 			case SheepDogPackage.TABLE:
 				sequence_Table(context, (Table) semanticObject); 
-				return; 
-			case SheepDogPackage.TAGS:
-				sequence_Tags(context, (Tags) semanticObject); 
 				return; 
 			case SheepDogPackage.TEST_CASE:
 				sequence_TestCase(context, (TestCase) semanticObject); 
@@ -248,31 +244,11 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Tags returns Tags
-	 *
-	 * Constraint:
-	 *     name=WORD
-	 * </pre>
-	 */
-	protected void sequence_Tags(ISerializationContext context, Tags semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, SheepDogPackage.Literals.TAGS__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SheepDogPackage.Literals.TAGS__NAME));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTagsAccess().getNameWORDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
 	 *     TestStepContainer returns TestCase
 	 *     TestCase returns TestCase
 	 *
 	 * Constraint:
-	 *     (tagList=Tags? name=Title statementList+=Statement* testStepList+=TestStep* testDataList+=TestData*)
+	 *     (name=Title statementList+=Statement* testStepList+=TestStep* testDataList+=TestData*)
 	 * </pre>
 	 */
 	protected void sequence_TestCase(ISerializationContext context, TestCase semanticObject) {
@@ -286,7 +262,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     TestData returns TestData
 	 *
 	 * Constraint:
-	 *     (tagList=Tags? name=Title statementList+=Statement* table=Table)
+	 *     (name=Title statementList+=Statement* table=Table)
 	 * </pre>
 	 */
 	protected void sequence_TestData(ISerializationContext context, TestData semanticObject) {
@@ -301,7 +277,7 @@ public class SheepDogSemanticSequencer extends AbstractDelegatingSemanticSequenc
 	 *     TestSetup returns TestSetup
 	 *
 	 * Constraint:
-	 *     (tagList=Tags? name=Title statementList+=Statement* testStepList+=TestStep*)
+	 *     (name=Title statementList+=Statement* testStepList+=TestStep*)
 	 * </pre>
 	 */
 	protected void sequence_TestSetup(ISerializationContext context, TestSetup semanticObject) {

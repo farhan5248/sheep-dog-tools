@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: UMLFeatureToDocument
+
+  \@sheep-dog-dev
 
   Scenario: No tags, no statements
 

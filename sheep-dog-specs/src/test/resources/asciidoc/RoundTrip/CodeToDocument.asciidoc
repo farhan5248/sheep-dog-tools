@@ -1,5 +1,7 @@
 = Test-Suite: Code To Document
 
+@sheep-dog-dev
+@round-trip
 TODO make test for the specific mappings
 
 == Test-Case: Create an adoc file from feature file
@@ -74,10 +76,8 @@ Feature: Process
 
 Desc 1
 
-[tags="tag1"]
 == Test-Setup: Setup
 
-[tags="tag2"]
 == Test-Case: Story One
 
 Desc 2
@@ -99,7 +99,6 @@ Desc 2
   text2
 \----
 
-[tags="tag3"]
 == Test-Case: Story Two
 
 Desc 3

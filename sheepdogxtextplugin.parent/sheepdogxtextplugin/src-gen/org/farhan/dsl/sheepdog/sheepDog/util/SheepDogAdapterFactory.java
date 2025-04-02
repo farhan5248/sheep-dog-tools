@@ -161,11 +161,6 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
         return createRowAdapter();
       }
       @Override
-      public Adapter caseTags(Tags object)
-      {
-        return createTagsAdapter();
-      }
-      @Override
       public Adapter caseCell(Cell object)
       {
         return createCellAdapter();
@@ -448,21 +443,6 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createRowAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.farhan.dsl.sheepdog.sheepDog.Tags <em>Tags</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.farhan.dsl.sheepdog.sheepDog.Tags
-   * @generated
-   */
-  public Adapter createTagsAdapter()
   {
     return null;
   }

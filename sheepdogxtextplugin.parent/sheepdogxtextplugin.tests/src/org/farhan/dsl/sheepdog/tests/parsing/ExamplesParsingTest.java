@@ -57,8 +57,8 @@ public class ExamplesParsingTest extends ParsingTest {
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("=== Given: do step one\n");
-		sb.append("[tags=\"tag1\"]\n");
 		sb.append("=== Test-Data: Describe what this data is about\n");
+		sb.append("@tag1\n");
 
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
@@ -131,8 +131,8 @@ public class ExamplesParsingTest extends ParsingTest {
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a claim\n");
 		sb.append("=== Given: do step one\n");
-		sb.append("[tags=\"tag1,tag2\"]\n");
 		sb.append("=== Test-Data: Describe what this data is about\n");
+		sb.append("@tag1\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
 

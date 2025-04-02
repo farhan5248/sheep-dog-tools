@@ -1,5 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: DocumentScenarioOutlineToUML
+
+  \@sheep-dog-dev
 
   Scenario: No tags, no statement, one step, one example
 
@@ -40,9 +42,9 @@ Feature: DocumentScenarioOutlineToUML
           """
           = Test-Suite: Process
           
-          [tags="tag1"]
           == Test-Case: Submit
           
+          @tag1
           Desc line 1
           
           === Given: The blah application, Object page is created as follows
@@ -65,8 +67,8 @@ Feature: DocumentScenarioOutlineToUML
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | tags            | tag1              |
       And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
-          | Interaction Name       | Comment     |
-          | specs::Process::Submit | Desc line 1 |
+          | Interaction Name       | Comment            |
+          | specs::Process::Submit | @tag1\nDesc line 1 |
 
   Scenario Outline: Two tags, two statements, two steps, two examples
 
@@ -74,9 +76,9 @@ Feature: DocumentScenarioOutlineToUML
           """
           = Test-Suite: Process
           
-          [tags="tag1,tag2"]
           == Test-Case: Submit
           
+          @tag1 @tag2
           Desc line 1
           Desc line 2
           
@@ -114,8 +116,8 @@ Feature: DocumentScenarioOutlineToUML
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | tags            | tag<Index>        |
       And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
-          | Interaction Name       | Comment                  |
-          | specs::Process::Submit | Desc line 1\nDesc line 2 |
+          | Interaction Name       | Comment                               |
+          | specs::Process::Submit | @tag1 @tag2\nDesc line 1\nDesc line 2 |
       And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                                        |
           | specs::Process::Submit | The blah application, Object<Index> page is created as follows |
@@ -136,9 +138,9 @@ Feature: DocumentScenarioOutlineToUML
           """
           = Test-Suite: Process
           
-          [tags="tag1,tag2,tag3"]
           == Test-Case: Submit
           
+          @tag1 @tag2 @tag3
           Desc line 1
           Desc line 2
           Desc line 3
@@ -191,8 +193,8 @@ Feature: DocumentScenarioOutlineToUML
           | Interaction Name       | Annotation Name | Annotation Detail |
           | specs::Process::Submit | tags            | tag<Index>        |
       And The spec-prj project, uml/pst.uml file Interaction Comments section will be created as follows
-          | Interaction Name       | Comment                               |
-          | specs::Process::Submit | Desc line 1\nDesc line 2\nDesc line 3 |
+          | Interaction Name       | Comment                                                  |
+          | specs::Process::Submit | @tag1 @tag2 @tag3\nDesc line 1\nDesc line 2\nDesc line 3 |
       And The spec-prj project, uml/pst.uml file Interaction Messages section will be created as follows
           | Interaction Name       | Message                                                        |
           | specs::Process::Submit | The blah application, Object<Index> page is created as follows |
@@ -214,8 +216,9 @@ Feature: DocumentScenarioOutlineToUML
           """
           = Test-Suite: Process
           
-          [tags="tag1"]
           == Test-Case: Submit
+          
+          @tag1
           
           === Given: The blah application, Object page is empty
           
@@ -226,8 +229,9 @@ Feature: DocumentScenarioOutlineToUML
           | v31
           |===
           
-          [tags="tag2"]
           == Test-Case: Submit2
+          
+          @tag2
           
           === Given: The blah application, Object page is empty
           

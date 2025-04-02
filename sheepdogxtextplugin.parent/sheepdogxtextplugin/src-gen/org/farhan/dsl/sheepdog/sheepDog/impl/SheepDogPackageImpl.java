@@ -22,7 +22,6 @@ import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
-import org.farhan.dsl.sheepdog.sheepDog.Tags;
 import org.farhan.dsl.sheepdog.sheepDog.TestCase;
 import org.farhan.dsl.sheepdog.sheepDog.TestData;
 import org.farhan.dsl.sheepdog.sheepDog.TestSetup;
@@ -159,13 +158,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   private EClass rowEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass tagsEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -425,20 +417,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getTestStepContainer_TagList()
-  {
-    return (EReference)testStepContainerEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EAttribute getTestStepContainer_Name()
   {
-    return (EAttribute)testStepContainerEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)testStepContainerEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -449,7 +430,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
   @Override
   public EReference getTestStepContainer_StatementList()
   {
-    return (EReference)testStepContainerEClass.getEStructuralFeatures().get(2);
+    return (EReference)testStepContainerEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -460,7 +441,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
   @Override
   public EReference getTestStepContainer_TestStepList()
   {
-    return (EReference)testStepContainerEClass.getEStructuralFeatures().get(3);
+    return (EReference)testStepContainerEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -513,20 +494,9 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EReference getTestData_TagList()
-  {
-    return (EReference)testDataEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EAttribute getTestData_Name()
   {
-    return (EAttribute)testDataEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)testDataEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -537,7 +507,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
   @Override
   public EReference getTestData_StatementList()
   {
-    return (EReference)testDataEClass.getEStructuralFeatures().get(2);
+    return (EReference)testDataEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -548,7 +518,7 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
   @Override
   public EReference getTestData_Table()
   {
-    return (EReference)testDataEClass.getEStructuralFeatures().get(3);
+    return (EReference)testDataEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -711,28 +681,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
    * @generated
    */
   @Override
-  public EClass getTags()
-  {
-    return tagsEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getTags_Name()
-  {
-    return (EAttribute)tagsEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getCell()
   {
     return cellEClass;
@@ -823,7 +771,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
     createEReference(testSuiteEClass, TEST_SUITE__TEST_STEP_CONTAINER_LIST);
 
     testStepContainerEClass = createEClass(TEST_STEP_CONTAINER);
-    createEReference(testStepContainerEClass, TEST_STEP_CONTAINER__TAG_LIST);
     createEAttribute(testStepContainerEClass, TEST_STEP_CONTAINER__NAME);
     createEReference(testStepContainerEClass, TEST_STEP_CONTAINER__STATEMENT_LIST);
     createEReference(testStepContainerEClass, TEST_STEP_CONTAINER__TEST_STEP_LIST);
@@ -834,7 +781,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
     createEReference(testCaseEClass, TEST_CASE__TEST_DATA_LIST);
 
     testDataEClass = createEClass(TEST_DATA);
-    createEReference(testDataEClass, TEST_DATA__TAG_LIST);
     createEAttribute(testDataEClass, TEST_DATA__NAME);
     createEReference(testDataEClass, TEST_DATA__STATEMENT_LIST);
     createEReference(testDataEClass, TEST_DATA__TABLE);
@@ -860,9 +806,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
 
     rowEClass = createEClass(ROW);
     createEReference(rowEClass, ROW__CELL_LIST);
-
-    tagsEClass = createEClass(TAGS);
-    createEAttribute(tagsEClass, TAGS__NAME);
 
     cellEClass = createEClass(CELL);
     createEAttribute(cellEClass, CELL__NAME);
@@ -931,7 +874,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
     initEReference(getTestSuite_TestStepContainerList(), this.getTestStepContainer(), null, "testStepContainerList", null, 0, -1, TestSuite.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(testStepContainerEClass, TestStepContainer.class, "TestStepContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTestStepContainer_TagList(), this.getTags(), null, "tagList", null, 0, 1, TestStepContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTestStepContainer_Name(), ecorePackage.getEString(), "name", null, 0, 1, TestStepContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTestStepContainer_StatementList(), this.getStatement(), null, "statementList", null, 0, -1, TestStepContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTestStepContainer_TestStepList(), this.getTestStep(), null, "testStepList", null, 0, -1, TestStepContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -942,7 +884,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
     initEReference(getTestCase_TestDataList(), this.getTestData(), null, "testDataList", null, 0, -1, TestCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(testDataEClass, TestData.class, "TestData", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTestData_TagList(), this.getTags(), null, "tagList", null, 0, 1, TestData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTestData_Name(), ecorePackage.getEString(), "name", null, 0, 1, TestData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTestData_StatementList(), this.getStatement(), null, "statementList", null, 0, -1, TestData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTestData_Table(), this.getTable(), null, "table", null, 0, 1, TestData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -968,9 +909,6 @@ public class SheepDogPackageImpl extends EPackageImpl implements SheepDogPackage
 
     initEClass(rowEClass, Row.class, "Row", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getRow_CellList(), this.getCell(), null, "cellList", null, 0, -1, Row.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(tagsEClass, Tags.class, "Tags", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTags_Name(), ecorePackage.getEString(), "name", null, 0, 1, Tags.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(cellEClass, Cell.class, "Cell", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getCell_Name(), ecorePackage.getEString(), "name", null, 0, 1, Cell.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

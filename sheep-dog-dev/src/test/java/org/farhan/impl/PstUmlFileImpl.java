@@ -10,6 +10,22 @@ import io.cucumber.guice.ScenarioScoped;
 @ScenarioScoped
 public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 
+	@Override
+	public void assertClassAnnotationsSectionAnnotationDetail(HashMap<String, String> keyMap) {
+		assertClassAnnotationDetailExists(keyMap.get("Class Name"), keyMap.get("Annotation Name"),
+				keyMap.get("Annotation Detail"));
+	}
+
+	@Override
+	public void assertClassAnnotationsSectionAnnotationName(HashMap<String, String> keyMap) {
+		assertClassAnnotationNameExists(keyMap.get("Class Name"), keyMap.get("Annotation Name"));
+	}
+
+	@Override
+	public void assertClassAnnotationsSectionClassName(HashMap<String, String> keyMap) {
+		assertClassExists(keyMap.get("Class Name"));
+	}
+
 	public void assertClassClassName(HashMap<String, String> keyMap) {
 		assertClassExists(keyMap.get("Class Name"));
 	}
@@ -82,21 +98,21 @@ public class PstUmlFileImpl extends UMLFileObject implements PstUmlFile {
 	}
 
 	@Override
-	public void assertPresent(HashMap<String, String> keyMap) {
-		assertFileExists();
-	}
-
-	public void setPath(String path) {
-		attributes.put("path", path);
-	}
-
-	@Override
 	public void assertInteractionSectionInteractionName(HashMap<String, String> keyMap) {
 		assertInteractionExists(keyMap.get("Interaction Name"));
 	}
 
 	public void assertInteractionSectionInteractionNameNegative(HashMap<String, String> keyMap) {
 		assertInteractionNotExists(keyMap.get("Interaction Name"));
+	}
+
+	@Override
+	public void assertPresent(HashMap<String, String> keyMap) {
+		assertFileExists();
+	}
+
+	public void setPath(String path) {
+		attributes.put("path", path);
 	}
 
 }

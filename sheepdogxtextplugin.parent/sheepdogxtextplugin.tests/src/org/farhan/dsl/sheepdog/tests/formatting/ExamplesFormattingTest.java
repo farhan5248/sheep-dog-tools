@@ -20,9 +20,9 @@ public class ExamplesFormattingTest extends FormattingTest {
 		sb.append("\n");
 		sb.append("=== Given: do step one\n");
 		sb.append("\n");
-		sb.append("[tags=\"tag1\"]\n");
 		sb.append("=== Test-Data: Describe what this data is about\n");
 		sb.append("\n");
+		sb.append("@tag1\n");
 		sb.append("Basic EDI claim\n");
 		sb.append("No deductible\n");
 		sb.append("\n");
@@ -55,9 +55,9 @@ public class ExamplesFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("=== Given: do step one\n");
 			sb.append("\n");
-			sb.append(" [tags=\"tag1\"] \n");
 			sb.append(" ===  Test-Data:  Describe what this data is about \n");
 			sb.append("\n");
+			sb.append("@tag1\n");
 			sb.append(" Basic EDI claim \n");
 			sb.append(" No deductible \n");
 			sb.append("\n");
@@ -83,9 +83,9 @@ public class ExamplesFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("=== Given: do step one\n");
 			sb.append("\n");
-			sb.append("[tags=\"tag1\"]\n");
 			sb.append("===Test-Data:Describe what this data is about\n");
 			sb.append("\n");
+			sb.append("@tag1\n");
 			sb.append("Basic EDI claim\n");
 			sb.append("No deductible\n");
 			sb.append("\n");
@@ -112,15 +112,14 @@ public class ExamplesFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("=== Given: do step one\n");
 			sb.append("\n");
-			sb.append("[tags=\"tag1\"]\n");
 			sb.append("=== Test-Data: Describe what this data is about\n");
 			sb.append("\n");
 			sb.append("\n");
+			sb.append("@tag1\n");
 			sb.append("Basic EDI claim\n");
 			sb.append("No deductible\n");
 			sb.append("\n");
-			sb.append("\n");
-	
+			sb.append("\n");	
 			sb.append("\n");
 			sb.append("|===\n");
 			sb.append("\n");

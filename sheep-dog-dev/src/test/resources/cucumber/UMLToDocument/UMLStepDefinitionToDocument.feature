@@ -1,6 +1,7 @@
-@debug
+@sheep-dog-dev
 Feature: UMLStepDefinitionToDocument
 
+  \@sheep-dog-dev
   TODO there's no test for no parameters and docstring vs datatable. Other tests implicitly cover docstring as a special parameter with the name content
 
   Scenario: No statement, one step parameter
