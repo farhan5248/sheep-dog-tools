@@ -3,7 +3,7 @@ call git reset --hard HEAD
 call git clean -fdx
 call git pull
 call mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=false -DallowDowngrade=true
-call mvn -B release:prepare -DcheckModificationExcludeList=pom.xml -DpreparationGoals=deploy -DskipTests -Darguments=-DskipTests
+call mvn -B release:prepare -DcheckModificationExcludeList=pom.xml -DpreparationGoals=deploy -Darguments=-DskipTests
 call git push
 call git push --tags
 call mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=true
