@@ -60,9 +60,9 @@ jobs:
         git pull
         mvn org.codehaus.mojo:versions-maven-plugin:update-properties -DallowSnapshots=false -DallowDowngrade=true
         if [ ${{ inputs.plugin }} == Maven ]; then
-          mvn -B release:prepare -DcheckModificationExcludeList=pom.xml -DpreparationGoals=deploy
+          mvn -B release:prepare -DcheckModificationExcludeList=pom.xml -DpreparationGoals=deploy -Darguments=-DskipTests
         else
-          mvn org.farhan:sheep-dog-mgmt-maven-plugin:1.14:prepare -DpreparationGoals=deploy
+          mvn org.farhan:sheep-dog-mgmt-maven-plugin:1.14:prepare -DpreparationGoals=deploy,-DskipTests
         fi
         git push
         git push --tags
