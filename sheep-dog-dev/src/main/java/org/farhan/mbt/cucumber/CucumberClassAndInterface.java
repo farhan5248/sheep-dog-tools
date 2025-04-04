@@ -126,7 +126,16 @@ public class CucumberClassAndInterface implements ConvertibleObject {
 	}
 
 	protected String getCallForInputOutputsForDataTable(String step) throws Exception {
-		return "." + getSetOrAssert(step) + "InputOutputs(" + "dataTable" + getSectionArg(step) + ")";
+		return "." + getSetOrAssert(step) + "InputOutputs(" + "dataTable" + getSectionArg(step) + getNegativeArg(step)
+				+ ")";
+	}
+
+	private String getNegativeArg(String step) {
+		if (TestStepNameHelper.isNegativeStep(step)) {
+			return ", true";
+		} else {
+			return "";
+		}
 	}
 
 	protected String getCallForInputOutputsForDocString(String step) throws Exception {
@@ -135,8 +144,8 @@ public class CucumberClassAndInterface implements ConvertibleObject {
 
 	protected String getCallForInputOutputsForState(String step) throws Exception {
 
-		return "." + getSetOrAssert(step) + "InputOutputs(\"" + StringUtils.capitalize(TestStepNameHelper.getStateType(step))
-				+ "\"" + getSectionArg(step) + ")";
+		return "." + getSetOrAssert(step) + "InputOutputs(\""
+				+ StringUtils.capitalize(TestStepNameHelper.getStateType(step)) + "\"" + getSectionArg(step) + ")";
 	}
 
 	protected String getCallForPath(String step) {
@@ -355,11 +364,17 @@ public class CucumberClassAndInterface implements ConvertibleObject {
 			throws Exception {
 		MethodDeclaration aMethod;
 
-		for (String param : paramList) {
-			aMethod = getMethod(getSetOrAssert(stepDefinitionName) + getSection(stepDefinitionName)
-					+ StringUtils.capitalize(removeSpecialChars(param)));
+		if (TestStepNameHelper.isNegativeStep(stepDefinitionName)) {
+			aMethod = getMethod(getSetOrAssert(stepDefinitionName) + getSection(stepDefinitionName) + "Negative");
 			aMethod.removeBody();
 			addParameter(aMethod, "HashMap<String, String>", "keyMap");
+		} else {
+			for (String param : paramList) {
+				aMethod = getMethod(getSetOrAssert(stepDefinitionName) + getSection(stepDefinitionName)
+						+ StringUtils.capitalize(removeSpecialChars(param)));
+				aMethod.removeBody();
+				addParameter(aMethod, "HashMap<String, String>", "keyMap");
+			}
 		}
 	}
 }

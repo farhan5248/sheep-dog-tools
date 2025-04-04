@@ -20,6 +20,13 @@ Feature: UMLStepDefinitionToCode
           | v1
           |===
           
+          === Given: The blah application, Object page Top section won't be created as follows
+          
+          |===
+          | h1
+          | v1
+          |===
+          
           === Given: The blah application, Object page is created as follows
           
           ----
@@ -33,6 +40,14 @@ Feature: UMLStepDefinitionToCode
           == Step-Definition: is empty
           
           == Step-Definition: Top section will be created as follows
+          
+          === Step-Parameters: 1
+          
+          |===
+          | h1
+          |===
+          
+          == Step-Definition: Top section won't be created as follows
           
           === Step-Parameters: 1
           
@@ -82,6 +97,16 @@ Feature: UMLStepDefinitionToCode
           | theBlahApplicationObjectPageTopSectionWillBeCreatedAsFollows | BlahFactory.get("ObjectPage").setPath("Object");                           |
           | theBlahApplicationObjectPageTopSectionWillBeCreatedAsFollows | BlahFactory.get("ObjectPage").assertInputOutputs(dataTable, "TopSection"); |
 
+  Scenario: Layer 2 with datatable, negative without DI
+
+     When The maven plugin, uml-to-cucumber goal is executed
+     Then The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
+      And The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Fields section will be created as follows
+          | Method Name                                                  | Statement                                                                        |
+          | theBlahApplicationObjectPageTopSectionWontBeCreatedAsFollows | BlahFactory.get("ObjectPage").setComponent("blah");                              |
+          | theBlahApplicationObjectPageTopSectionWontBeCreatedAsFollows | BlahFactory.get("ObjectPage").setPath("Object");                                 |
+          | theBlahApplicationObjectPageTopSectionWontBeCreatedAsFollows | BlahFactory.get("ObjectPage").assertInputOutputs(dataTable, "TopSection", true); |
+
   Scenario: Layer 2 with docstring without DI
 
      When The maven plugin, uml-to-cucumber goal is executed
@@ -100,14 +125,11 @@ Feature: UMLStepDefinitionToCode
      When The maven plugin, uml-to-cucumber goal is executed
      Then The code-prj project, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
       And The code-prj project, src/test/java/org/farhan/objects/blah/ObjectPage.java file Fields section will be created as follows
-          | Method Name | Visibility | Return Type | Parameter Name | Parameter Type         |
-          | setEmpty    | public     | void        | keyMap         | HashMap<String,String> |
-      And The code-prj project, src/test/java/org/farhan/objects/blah/ObjectPage.java file Fields section will be created as follows
-          | Method Name        | Visibility | Return Type | Parameter Name | Parameter Type         |
-          | assertTopSectionH1 | public     | void        | keyMap         | HashMap<String,String> |
-      And The code-prj project, src/test/java/org/farhan/objects/blah/ObjectPage.java file Fields section will be created as follows
-          | Method Name | Visibility | Return Type | Parameter Name | Parameter Type         |
-          | setContent  | public     | void        | keyMap         | HashMap<String,String> |
+          | Method Name              | Visibility | Return Type | Parameter Name | Parameter Type         |
+          | setEmpty                 | public     | void        | keyMap         | HashMap<String,String> |
+          | assertTopSectionNegative | public     | void        | keyMap         | HashMap<String,String> |
+          | assertTopSectionH1       | public     | void        | keyMap         | HashMap<String,String> |
+          | setContent               | public     | void        | keyMap         | HashMap<String,String> |
 
   Scenario: Layer 2 without parameters with spring
 

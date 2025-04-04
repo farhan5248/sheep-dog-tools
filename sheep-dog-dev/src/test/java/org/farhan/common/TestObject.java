@@ -89,22 +89,12 @@ public abstract class TestObject {
 	private void processInputOutputs(HashMap<String, String> row, String operation, String sectionName,
 			boolean negativeTest) {
 		try {
-			// TODO I should have methods that operate against an entire row and those
-			// against an individual field. That would imply that there are methods per
-			// combination of fields. If that's the case, then how to prevent an explosion
-			// of methods? Perhaps when specifying something doesn't exist, the mere
-			// presence of the negative (won't or isn't) should indicate that one method
-			// should be generated. Then this method would look for that method alone.
-			for (String s : row.keySet()) {
-
-				// TODO remove this if statement after implementing negative code generation for
-				// won't or isn't
-				if (negativeTest) {
-					this.getClass()
-							.getMethod(operation + cleanName(sectionName) + cleanName(s) + "Negative", HashMap.class)
-							.invoke(this, row);
-				} else {
-					this.getClass().getMethod(operation + cleanName(sectionName) + cleanName(s), HashMap.class)
+			if (negativeTest) {
+				this.getClass().getMethod(operation + cleanName(sectionName) + "Negative", HashMap.class).invoke(this,
+						row);
+			} else {
+				for (String columnName : row.keySet()) {
+					this.getClass().getMethod(operation + cleanName(sectionName) + cleanName(columnName), HashMap.class)
 							.invoke(this, row);
 				}
 			}

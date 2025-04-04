@@ -15,6 +15,13 @@ public class SpecPrjPstUmlFileSteps extends TestSteps {
         super(object);
     }
 
+    @Given("^The spec-prj project, uml/pst.uml file Class Annotations section will be created as follows$")
+    public void theSpecPrjProjectUmlPstUmlFileClassAnnotationsSectionWillBeCreatedAsFollows(DataTable dataTable) {
+        object.setComponent("spec-prj");
+        object.setPath("uml/pst.uml");
+        object.assertInputOutputs(dataTable, "ClassAnnotationsSection");
+    }
+
     @Given("^The spec-prj project, uml/pst.uml file Class Comments section will be created as follows$")
     public void theSpecPrjProjectUmlPstUmlFileClassCommentsSectionWillBeCreatedAsFollows(DataTable dataTable) {
         object.setComponent("spec-prj");
@@ -76,12 +83,5 @@ public class SpecPrjPstUmlFileSteps extends TestSteps {
         object.setComponent("spec-prj");
         object.setPath("uml/pst.uml");
         object.assertInputOutputs("Present");
-    }
-
-    @Given("^The spec-prj project, uml/pst.uml file Class Annotations section will be created as follows$")
-    public void theSpecPrjProjectUmlPstUmlFileClassAnnotationsSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.setComponent("spec-prj");
-        object.setPath("uml/pst.uml");
-        object.assertInputOutputs(dataTable, "ClassAnnotationsSection");
     }
 }
