@@ -68,8 +68,7 @@ public class SpecPrjPstUmlFileSteps extends TestSteps {
     public void theSpecPrjProjectUmlPstUmlFileInteractionSectionWontBeCreatedAsFollows(DataTable dataTable) {
         object.setComponent("spec-prj");
         object.setPath("uml/pst.uml");
-        // TODO this needs to be true
-        object.assertInputOutputs(dataTable, "InteractionSection");
+        object.assertInputOutputs(dataTable, "InteractionSection", true);
     }
 
     @Given("^The spec-prj project, uml/pst.uml file will be present$")

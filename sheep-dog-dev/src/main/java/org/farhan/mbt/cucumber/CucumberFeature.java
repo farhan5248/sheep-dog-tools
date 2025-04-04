@@ -47,10 +47,10 @@ public class CucumberFeature implements ConvertibleObject {
 	}
 
 	public Background addBackground(String backgroundName) {
-		deleteAbstractScenario(backgroundName);
+		int position = deleteAbstractScenario(backgroundName);
 		Background background = CucumberFactory.eINSTANCE.createBackground();
 		background.setName(backgroundName);
-		theFeature.getAbstractScenarios().add(background);
+		theFeature.getAbstractScenarios().add(position, background);
 		return background;
 	}
 
@@ -72,18 +72,18 @@ public class CucumberFeature implements ConvertibleObject {
 	}
 
 	public Scenario addScenario(String scenarioName) {
-		deleteAbstractScenario(scenarioName);
+		int position = deleteAbstractScenario(scenarioName);
 		Scenario scenario = CucumberFactory.eINSTANCE.createScenario();
 		scenario.setName(scenarioName);
-		theFeature.getAbstractScenarios().add(scenario);
+		theFeature.getAbstractScenarios().add(position, scenario);
 		return scenario;
 	}
 
 	public ScenarioOutline addScenarioOutline(String scenarioOutlineName) {
-		deleteAbstractScenario(scenarioOutlineName);
+		int position = deleteAbstractScenario(scenarioOutlineName);
 		ScenarioOutline scenarioOutline = CucumberFactory.eINSTANCE.createScenarioOutline();
 		scenarioOutline.setName(scenarioOutlineName);
-		theFeature.getAbstractScenarios().add(scenarioOutline);
+		theFeature.getAbstractScenarios().add(position, scenarioOutline);
 		return scenarioOutline;
 	}
 
@@ -117,14 +117,15 @@ public class CucumberFeature implements ConvertibleObject {
 		return contents.trim();
 	}
 
-	private void deleteAbstractScenario(String name) {
+	private int deleteAbstractScenario(String name) {
 		EList<AbstractScenario> list = theFeature.getAbstractScenarios();
 		for (int i = 0; i < list.size(); i++) {
 			if (list.get(i).getName().contentEquals(name)) {
 				list.remove(i);
-				return;
+				return i;
 			}
 		}
+		return list.size();
 	}
 
 	@Override

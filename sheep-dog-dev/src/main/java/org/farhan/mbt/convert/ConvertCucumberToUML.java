@@ -87,17 +87,22 @@ public class ConvertCucumberToUML extends Converter {
 
 		srcObjTestSuite = (CucumberFeature) project.addFile(path);
 		srcObjTestSuite.parse(content);
-		if (isTestSuiteSelected()) {
+		if (tag.isEmpty() || isTestSuiteSelected() || isAnyTestCaseSelected()) {
 			UMLTestSuite testSuite = model.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
 			testSuite.setTags(srcObjTestSuite.getFeatureTags());
 			testSuite.setDescription(srcObjTestSuite.getFeatureDescription());
 			for (AbstractScenario as : srcObjTestSuite.getAbstractScenarioList()) {
 				if (srcObjTestSuite.isBackground(as)) {
 					convertTestSetup(as, testSuite);
-				} else if (srcObjTestSuite.isScenarioOutline(as)) {
-					convertTestCaseWithTestData(as, testSuite.addTestCase(srcObjTestSuite.getScenarioOutlineName(as)));
 				} else {
-					convertTestCase(as, testSuite.addTestCase(srcObjTestSuite.getScenarioName(as)));
+					if (tag.isEmpty() || isTestSuiteSelected() || isTestCaseSelected(as)) {
+						if (srcObjTestSuite.isScenarioOutline(as)) {
+							convertTestCaseWithTestData(as,
+									testSuite.addTestCase(srcObjTestSuite.getScenarioOutlineName(as)));
+						} else {
+							convertTestCase(as, testSuite.addTestCase(srcObjTestSuite.getScenarioName(as)));
+						}
+					}
 				}
 			}
 			model.save();
@@ -115,32 +120,39 @@ public class ConvertCucumberToUML extends Converter {
 		this.pathConverter = new CucumberPathConverter(model, (CucumberTestProject) project);
 	}
 
-	private boolean isTestSuiteSelected() throws Exception {
-		boolean selected = tag.isEmpty();
-		if (!selected) {
-			for (String t : srcObjTestSuite.getFeatureTags()) {
+	private boolean isAnyTestCaseSelected() {
+		for (AbstractScenario a : srcObjTestSuite.getAbstractScenarioList()) {
+			if (isTestCaseSelected(a)) {
+				return true;				
+			}
+		}
+		return false;
+	}
+
+	private boolean isTestCaseSelected(AbstractScenario as) {
+
+		if (as instanceof Scenario) {
+			for (String t : srcObjTestSuite.getScenarioTags(as)) {
 				if (t.trim().contentEquals(tag)) {
 					return true;
 				}
 			}
-			for (AbstractScenario a : srcObjTestSuite.getAbstractScenarioList()) {
-				if (a instanceof Scenario) {
-					for (String t : srcObjTestSuite.getScenarioTags(a)) {
-						if (t.trim().contentEquals(tag)) {
-							return true;
-						}
-					}
-				}
-				if (a instanceof ScenarioOutline) {
-					for (String t : srcObjTestSuite.getScenarioOutlineTags(a)) {
-						if (t.trim().contentEquals(tag)) {
-							return true;
-						}
-					}
+		}
+		if (as instanceof ScenarioOutline) {
+			for (String t : srcObjTestSuite.getScenarioOutlineTags(as)) {
+				if (t.trim().contentEquals(tag)) {
+					return true;
 				}
 			}
-		} else {
-			return true;
+		}
+		return false;
+	}
+
+	private boolean isTestSuiteSelected() throws Exception {
+		for (String t : srcObjTestSuite.getFeatureTags()) {
+			if (t.trim().contentEquals(tag)) {
+				return true;
+			}
 		}
 		return false;
 	}

@@ -133,7 +133,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		log.debug("test suite: " + path);
 		srcObjTestSuite = (AsciiDoctorTestSuite) project.addFile(path);
 		srcObjTestSuite.parse(content);
-		if (isTestSuiteSelected()) {
+		if (tag.isEmpty() || isTestSuiteSelected() || isAnyTestCaseSelected()) {
 			UMLTestSuite testSuite = model.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
 			testSuite.setTags(srcObjTestSuite.getFeatureTags());
 			testSuite.setDescription(srcObjTestSuite.getFeatureDescription());
@@ -141,7 +141,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 				if (srcObjTestSuite.isBackground(srcTestCase)) {
 					convertTestSetup(srcTestCase,
 							testSuite.addTestSetup(srcObjTestSuite.getBackgroundName(srcTestCase)));
-				} else {
+				} else if (tag.isEmpty() || isTestSuiteSelected() || isTestCaseSelected(srcTestCase)) {
 					convertTestCase(srcTestCase, testSuite.addTestCase(srcObjTestSuite.getScenarioName(srcTestCase)));
 				}
 			}
@@ -159,6 +159,15 @@ public class ConvertAsciidoctorToUML extends Converter {
 		pathConverter = new AsciiDoctorPathConverter(model, (AsciiDoctorTestProject) project);
 	}
 
+	private boolean isAnyTestCaseSelected() {
+		for (TestStepContainer a : srcObjTestSuite.getAbstractScenarioList()) {
+			if (isTestCaseSelected(a)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private boolean isStepObjectSelected() {
 		for (String s : stepObjects) {
 			if (srcObjStepObject.getPath().contentEquals(project.getDir(project.TEST_STEPS) + "/" + s)) {
@@ -168,25 +177,22 @@ public class ConvertAsciidoctorToUML extends Converter {
 		return false;
 	}
 
+	private boolean isTestCaseSelected(TestStepContainer a) {
+		for (String t : srcObjTestSuite.getAbstractScenarioTags(a)) {
+			if (t.trim().contentEquals(tag)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private boolean isTestSuiteSelected() throws Exception {
-		boolean selected = tag.isEmpty();
-		if (!selected) {
-			// TODO this needs a test case
-			for (String t : srcObjTestSuite.getFeatureTags()) {
-				log.debug("feature tag: " + t);
-				if (t.trim().contentEquals(tag)) {
-					return true;
-				}
+		// TODO this needs a test case
+		for (String t : srcObjTestSuite.getFeatureTags()) {
+			log.debug("feature tag: " + t);
+			if (t.trim().contentEquals(tag)) {
+				return true;
 			}
-			for (TestStepContainer a : srcObjTestSuite.getAbstractScenarioList()) {
-				for (String t : srcObjTestSuite.getAbstractScenarioTags(a)) {
-					if (t.trim().contentEquals(tag)) {
-						return true;
-					}
-				}
-			}
-		} else {
-			return true;
 		}
 		return false;
 	}
