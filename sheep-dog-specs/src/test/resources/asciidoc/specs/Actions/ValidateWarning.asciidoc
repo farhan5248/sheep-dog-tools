@@ -4,7 +4,7 @@
 
 == Test-Case: This object doesn't exist validation
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                
@@ -22,7 +22,7 @@
 
 == Test-Case: This object step definition doesn't exist validation
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                
@@ -47,7 +47,7 @@
 
 == Test-Case: This object step definition parameter set doesn't exist validation
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                 | Headers   
@@ -72,7 +72,7 @@
 
 == Test-Case: This object doesn't exist and there is an alternate
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                

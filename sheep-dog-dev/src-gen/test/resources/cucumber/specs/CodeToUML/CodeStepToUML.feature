@@ -5,7 +5,7 @@ Feature: CodeStepToUML
 
   Scenario: Convert step keywords
 
-    Given The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           

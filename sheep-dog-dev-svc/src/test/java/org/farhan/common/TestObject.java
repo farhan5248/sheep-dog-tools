@@ -112,4 +112,9 @@ public abstract class TestObject {
 
 	public void transition() {
 	}
+
+	public void setInputOutputs(String string) {
+		// TODO delete after implement #339
+		
+	}
 }

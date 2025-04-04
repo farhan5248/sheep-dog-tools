@@ -5,7 +5,7 @@ Feature: UMLStepToCode
 
   Scenario: Convert step keywords
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -18,8 +18,8 @@ Feature: UMLStepToCode
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
       And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
-      And The code-prj project, src/test/resources/cucumber/Process.feature file Scenarios Steps section will be created as follows
+     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenarios Steps section will be created as follows
           | Name   | Step                                            |
           | Submit | Given The blah application, Given page is empty |
           | Submit | When The blah application, When page is empty   |
@@ -28,7 +28,7 @@ Feature: UMLStepToCode
 
   Scenario: Convert apostrophes
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -38,8 +38,8 @@ Feature: UMLStepToCode
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
       And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
-      And The code-prj project, src/test/resources/cucumber/Process.feature file Scenarios Steps section will be created as follows
+     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenarios Steps section will be created as follows
           | Name      | Step                                               |
           | Submit's' | Given The blah application, Given page isn't empty |
 

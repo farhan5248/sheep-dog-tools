@@ -4,7 +4,7 @@
 
 == Test-Case: No tags, no statement, one step, one example
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -48,7 +48,7 @@
 
 == Test-Case: One tag, one statement, one step, one example
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -93,7 +93,7 @@ Desc line 1
 
 == Test-Case: Two tags, two statements, two steps, two examples
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -176,7 +176,7 @@ Desc line 2
 
 == Test-Case: Three tags, three statements, three steps, three examples
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -275,7 +275,7 @@ Desc line 3
 
 == Test-Case: Selected tags
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process

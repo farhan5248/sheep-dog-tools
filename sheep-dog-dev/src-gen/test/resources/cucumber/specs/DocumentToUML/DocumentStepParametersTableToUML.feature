@@ -5,7 +5,7 @@ Feature: DocumentStepParametersTableToUML
 
   Scenario: One cell
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -35,7 +35,7 @@ Feature: DocumentStepParametersTableToUML
 
   Scenario: Two cells
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -65,7 +65,7 @@ Feature: DocumentStepParametersTableToUML
 
   Scenario: Three cells
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           

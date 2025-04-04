@@ -4,7 +4,7 @@
 
 == Test-Case: Component types
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name
@@ -22,7 +22,7 @@
 
 == Test-Case: Object types
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name            
@@ -40,7 +40,7 @@
 
 == Test-Case: State modality absent no details
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                 
@@ -59,7 +59,7 @@
 
 == Test-Case: State modality absent incomplete details
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                         
@@ -77,7 +77,7 @@
 
 == Test-Case: State modality absent has details
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                 
@@ -95,7 +95,7 @@
 
 == Test-Case: State modality present has details
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                    
@@ -113,7 +113,7 @@
 
 == Test-Case: State modality present no attribute
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                    
@@ -131,7 +131,7 @@
 
 == Test-Case: State modality present no attachments
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                            
@@ -149,7 +149,7 @@
 
 == Test-Case: State modality present has attachments
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                 

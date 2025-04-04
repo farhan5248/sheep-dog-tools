@@ -10,14 +10,14 @@ import org.farhan.impl.UmlToCucumberGuiceGoalImpl;
 import org.farhan.impl.UmlToCucumberSpringGoalImpl;
 import org.farhan.objects.codeprj.src.test.java.org.farhan.objects.blah.ObjectPageJavaFile;
 import org.farhan.objects.codeprj.src.test.java.org.farhan.stepdefs.blah.BlahObjectPageStepsJavaFile;
-import org.farhan.objects.codeprj.src.test.resources.cucumber.app.ProcessFeatureFile;
+import org.farhan.objects.codeprj.src.test.resources.cucumber.specs.app.ProcessFeatureFile;
 import org.farhan.objects.maven.AsciidoctorToUmlGoal;
 import org.farhan.objects.maven.CucumberToUmlGoal;
 import org.farhan.objects.maven.UmlToAsciidoctorGoal;
 import org.farhan.objects.maven.UmlToCucumberGoal;
 import org.farhan.objects.maven.UmlToCucumberGuiceGoal;
 import org.farhan.objects.maven.UmlToCucumberSpringGoal;
-import org.farhan.objects.specprj.src.test.resources.asciidoc.app.ProcessAsciidocFile;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.app.ProcessAsciidocFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.blahapplication.ObjectPageAsciidocFile;
 
 import com.google.inject.AbstractModule;
@@ -63,9 +63,9 @@ public final class Config extends AbstractModule implements InjectorSource {
 		bind(CucumberToUmlGoal.class).to(CucumberToUmlGoalImpl.class);
 		bind(ObjectPageAsciidocFile.class).to(FileImpl.class);
 		bind(ProcessAsciidocFile.class).to(FileImpl.class);
-		bind(org.farhan.objects.specprj.src.test.resources.asciidoc.ProcessAsciidocFile.class).to(FileImpl.class);
+		bind(org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessAsciidocFile.class).to(FileImpl.class);
 		bind(ProcessFeatureFile.class).to(FileImpl.class);
-		bind(org.farhan.objects.codeprj.src.test.resources.cucumber.ProcessFeatureFile.class).to(FileImpl.class);
+		bind(org.farhan.objects.codeprj.src.test.resources.cucumber.specs.ProcessFeatureFile.class).to(FileImpl.class);
 		bind(UmlToAsciidoctorGoal.class).to(UmlToAsciidoctorGoalImpl.class);
 		bind(UmlToCucumberGoal.class).to(UmlToCucumberGoalImpl.class);
 		bind(UmlToCucumberSpringGoal.class).to(UmlToCucumberSpringGoalImpl.class);

@@ -4,7 +4,7 @@
 
 == Test-Case: One row, one cell
 
-=== Given: The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -29,7 +29,7 @@ Feature: Process
 
 == Test-Case: Two rows, two cells
 
-=== Given: The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
 
 ----
 Feature: Process
@@ -57,7 +57,7 @@ Feature: Process
 
 == Test-Case: Three rows, three cells
 
-=== Given: The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
+=== Given: The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
 
 ----
 Feature: Process

@@ -38,7 +38,7 @@ public class AsciiDoctorTestProject extends ConvertibleProject {
 	public String getDir(String layer) {
 		switch (layer) {
 		case TEST_CASES:
-			return "src/test/resources/asciidoc";
+			return "src/test/resources/asciidoc/" + TEST_CASES;
 		case TEST_STEPS:
 			return "src/test/resources/asciidoc/" + TEST_STEPS;
 		case TEST_OBJECTS:

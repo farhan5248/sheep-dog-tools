@@ -6,7 +6,7 @@ Feature: PreserveMethods
 
   Background: Create an asciidoc file
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           

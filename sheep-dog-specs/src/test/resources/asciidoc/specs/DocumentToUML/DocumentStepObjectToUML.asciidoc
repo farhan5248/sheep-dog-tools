@@ -5,7 +5,7 @@ I need a test here for selected tags that tests only objects referenced in a sel
 
 == Test-Case: No statements
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -36,7 +36,7 @@ I need a test here for selected tags that tests only objects referenced in a sel
 
 == Test-Case: One statement
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -69,7 +69,7 @@ Desc line 1
 
 == Test-Case: Two statements
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -103,7 +103,7 @@ Desc line 2
 
 == Test-Case: Three statements
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process

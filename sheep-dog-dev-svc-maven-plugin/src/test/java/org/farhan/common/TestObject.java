@@ -110,4 +110,9 @@ public abstract class TestObject {
 
 	public void transition() {
 	}
+
+	public void setInputOutputs(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -4,7 +4,7 @@
 
 == Test-Case: Documentation for component
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name
@@ -29,7 +29,7 @@
 
 == Test-Case: Documentation for component object
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name          
@@ -54,7 +54,7 @@
 
 == Test-Case: Documentation for previous object which doesn't exist
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                
@@ -73,7 +73,7 @@
 
 == Test-Case: Documentation for previous object which exists and has no doc
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                
@@ -99,7 +99,7 @@
 
 == Test-Case: Documentation for previous object which exists and has doc
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                

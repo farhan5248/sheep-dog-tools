@@ -22,9 +22,9 @@ import org.farhan.objects.maven.UmlToCucumberGuiceGoal;
 import org.farhan.objects.maven.UmlToCucumberSpringGoal;
 import org.farhan.objects.codeprj.src.test.java.org.farhan.objects.blah.ObjectPageJavaFile;
 import org.farhan.objects.codeprj.src.test.java.org.farhan.stepdefs.blah.BlahObjectPageStepsJavaFile;
-import org.farhan.objects.specprj.src.test.resources.asciidoc.app.ProcessAsciidocFile;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.app.ProcessAsciidocFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.blahapplication.ObjectPageAsciidocFile;
-import org.farhan.objects.codeprj.src.test.resources.cucumber.app.ProcessFeatureFile;
+import org.farhan.objects.codeprj.src.test.resources.cucumber.specs.app.ProcessFeatureFile;
 import org.farhan.objects.specprj.uml.PstUmlFile;
 
 import com.google.inject.AbstractModule;
@@ -68,11 +68,11 @@ public final class Config extends AbstractModule implements InjectorSource {
 		bind(CucumberToUmlGoal.class).to(CucumberToUmlGoalImpl.class);
 		bind(ObjectPageJavaFile.class).to(ObjectPageJavaFileImpl.class);
 		bind(ProcessAsciidocFile.class).to(ProcessAsciidocFileImpl.class);
-		bind(org.farhan.objects.specprj.src.test.resources.asciidoc.ProcessAsciidocFile.class)
+		bind(org.farhan.objects.specprj.src.test.resources.asciidoc.specs.ProcessAsciidocFile.class)
 				.to(ProcessAsciidocFileImpl.class);
 		bind(ObjectPageAsciidocFile.class).to(ObjectPageAsciidocFileImpl.class);
 		bind(ProcessFeatureFile.class).to(ProcessFeatureFileImpl.class);
-		bind(org.farhan.objects.codeprj.src.test.resources.cucumber.ProcessFeatureFile.class)
+		bind(org.farhan.objects.codeprj.src.test.resources.cucumber.specs.ProcessFeatureFile.class)
 				.to(ProcessFeatureFileImpl.class);
 		bind(PstUmlFile.class).to(PstUmlFileImpl.class);
 		bind(UmlToAsciidoctorGoal.class).to(UmlToAsciidoctorGoalImpl.class);

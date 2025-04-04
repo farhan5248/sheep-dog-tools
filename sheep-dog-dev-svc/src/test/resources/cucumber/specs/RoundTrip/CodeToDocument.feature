@@ -7,7 +7,7 @@ Feature: CodeToDocument
 
   Scenario: Create an adoc file from feature file
 
-    Given The code-prj project, src/test/resources/cucumber/app/Process.feature file is created as follows
+    Given The code-prj project, src/test/resources/cucumber/specs/app/Process.feature file is created as follows
           """
           @tag1
           Feature: Process
@@ -60,7 +60,7 @@ Feature: CodeToDocument
       And The maven plugin, uml-to-asciidoctor goal is executed with
           | Tags |
           | tag1 |
-     Then The spec-prj project, src/test/resources/asciidoc/app/Process.asciidoc file will be created as follows
+     Then The spec-prj project, src/test/resources/asciidoc/specs/app/Process.asciidoc file will be created as follows
           """
           = Test-Suite: Process
           

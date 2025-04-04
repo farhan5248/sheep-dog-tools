@@ -4,7 +4,7 @@
 
 == Test-Case: No steps have a component
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                   
@@ -28,7 +28,7 @@
 
 == Test-Case: First step doesn't have a component
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                   
@@ -52,7 +52,7 @@
 
 == Test-Case: First step does have a component
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                

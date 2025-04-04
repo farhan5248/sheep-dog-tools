@@ -5,7 +5,7 @@ Feature: UMLStepTableToDocument
 
   Scenario: One row, one cell
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -19,17 +19,17 @@ Feature: UMLStepTableToDocument
           |===
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
-      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is deleted
       And The maven plugin, uml-to-asciidoctor goal is executed
-     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps Step Table section will be created as follows
+     Then The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file Scenarios Steps Step Table section will be created as follows
           | Name   | Step                                         | Row |
           | Submit | Given: The Object page is created as follows | h1  |
           | Submit | Given: The Object page is created as follows | v1  |
 
   Scenario: Two rows, two cells
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -44,10 +44,10 @@ Feature: UMLStepTableToDocument
           |===
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
-      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is deleted
       And The maven plugin, uml-to-asciidoctor goal is executed
-     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps Step Table section will be created as follows
+     Then The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file Scenarios Steps Step Table section will be created as follows
           | Name   | Step                                         | Row    |
           | Submit | Given: The Object page is created as follows | h1, h2 |
           | Submit | Given: The Object page is created as follows | v1, v2 |
@@ -55,7 +55,7 @@ Feature: UMLStepTableToDocument
 
   Scenario: Three rows, three cells
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -71,10 +71,10 @@ Feature: UMLStepTableToDocument
           |===
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
-      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is deleted
       And The maven plugin, uml-to-asciidoctor goal is executed
-     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps Step Table section will be created as follows
+     Then The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file Scenarios Steps Step Table section will be created as follows
           | Name   | Step                                         | Row        |
           | Submit | Given: The Object page is created as follows | h1, h2, h3 |
           | Submit | Given: The Object page is created as follows | v1, v2, v3 |
@@ -83,7 +83,7 @@ Feature: UMLStepTableToDocument
 
   Scenario: Escaped cell data
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -97,10 +97,10 @@ Feature: UMLStepTableToDocument
           |===
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
-      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is deleted
+      And The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is deleted
       And The maven plugin, uml-to-asciidoctor goal is executed
-     Then The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file will be present
-      And The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file Scenarios Steps Step Table section will be created as follows
+     Then The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file will be present
+      And The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file Scenarios Steps Step Table section will be created as follows
           | Name   | Step                                         | Row          |
           | Submit | Given: The Object page is created as follows | h1           |
           | Submit | Given: The Object page is created as follows | \\\| v1 \\\| |

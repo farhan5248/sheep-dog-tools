@@ -5,7 +5,7 @@ Feature: DocumentScenarioOutlineToUML
 
   Scenario: No tags, no statement, one step, one example
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -38,7 +38,7 @@ Feature: DocumentScenarioOutlineToUML
 
   Scenario: One tag, one statement, one step, one example
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -72,7 +72,7 @@ Feature: DocumentScenarioOutlineToUML
 
   Scenario Outline: Two tags, two statements, two steps, two examples
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -134,7 +134,7 @@ Feature: DocumentScenarioOutlineToUML
 
   Scenario Outline: Three tags, three statements, three steps, three examples
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -212,7 +212,7 @@ Feature: DocumentScenarioOutlineToUML
 
   Scenario: Selected tags
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           

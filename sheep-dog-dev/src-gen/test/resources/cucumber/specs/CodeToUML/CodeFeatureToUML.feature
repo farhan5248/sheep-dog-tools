@@ -5,7 +5,7 @@ Feature: CodeFeatureToUML
 
   Scenario: No tags, no statements
 
-    Given The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           """
@@ -17,7 +17,7 @@ Feature: CodeFeatureToUML
 
   Scenario: One tag, one statement
 
-    Given The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           @tag1
           Feature: Process
@@ -34,7 +34,7 @@ Feature: CodeFeatureToUML
 
   Scenario: Two tags, two statements
 
-    Given The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           @tag1 @tag2
           Feature: Process
@@ -53,7 +53,7 @@ Feature: CodeFeatureToUML
 
   Scenario: Three tags, three statements
 
-    Given The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           @tag1 @tag2 @tag3
           Feature: This is a test feature
@@ -74,12 +74,12 @@ Feature: CodeFeatureToUML
 
   Scenario: Selected tags
 
-    Given The code-prj project, src/test/resources/cucumber/Process.feature file is created as follows
+    Given The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           @tag1
           Feature: Process
           """
-      And The code-prj project, src/test/resources/cucumber/app/Process.feature file is created as follows
+      And The code-prj project, src/test/resources/cucumber/specs/app/Process.feature file is created as follows
           """
           @tag2
           Feature: Process

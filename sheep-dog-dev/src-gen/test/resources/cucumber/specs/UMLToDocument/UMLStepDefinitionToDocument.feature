@@ -6,7 +6,7 @@ Feature: UMLStepDefinitionToDocument
 
   Scenario: No statement, one step parameter
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -36,7 +36,7 @@ Feature: UMLStepDefinitionToDocument
 
   Scenario: One statement, one step parameter
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -68,7 +68,7 @@ Feature: UMLStepDefinitionToDocument
 
   Scenario Outline: Two statements, two step parameters
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -116,7 +116,7 @@ Feature: UMLStepDefinitionToDocument
 
   Scenario Outline: Three statements, three step parameters
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           

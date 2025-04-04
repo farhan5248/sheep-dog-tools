@@ -5,7 +5,7 @@ Feature: DocumentBackgroundToUML
 
   Scenario: One tag, one statement, one step
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -27,7 +27,7 @@ Feature: DocumentBackgroundToUML
 
   Scenario: Two tags, two statements, two steps
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -57,7 +57,7 @@ Feature: DocumentBackgroundToUML
 
   Scenario: Three tags, three statements, three steps
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -92,7 +92,7 @@ Feature: DocumentBackgroundToUML
 
   Scenario: No tags, no statements, one step
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -113,7 +113,7 @@ Feature: DocumentBackgroundToUML
 
   Scenario: No statement, one step, two scenarios
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -139,7 +139,7 @@ Feature: DocumentBackgroundToUML
 
   Scenario: No statement, one step, three scenarios
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -170,7 +170,7 @@ Feature: DocumentBackgroundToUML
 
   Scenario: No statement, two steps, one scenario
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -193,7 +193,7 @@ Feature: DocumentBackgroundToUML
 
   Scenario: No statement, three steps, one scenario
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -218,7 +218,7 @@ Feature: DocumentBackgroundToUML
 
   Scenario: Selected tags
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -226,7 +226,7 @@ Feature: DocumentBackgroundToUML
           
           @tag1
           """
-      And The spec-prj project, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
+      And The spec-prj project, src/test/resources/asciidoc/specs/app/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           [tags="tag2"]

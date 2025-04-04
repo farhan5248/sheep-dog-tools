@@ -5,7 +5,7 @@ TODO add tests for document parameters
 
 == Test-Case: No statement, one step parameter
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -42,7 +42,7 @@ TODO add tests for document parameters
 
 == Test-Case: One statement, one step parameter
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -81,7 +81,7 @@ Desc line 1
 
 == Test-Case: Two statements, two step parameters
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process
@@ -142,7 +142,7 @@ Desc line 2
 
 == Test-Case: Three statements, three step parameters
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
 
 ----
 = Test-Suite: Process

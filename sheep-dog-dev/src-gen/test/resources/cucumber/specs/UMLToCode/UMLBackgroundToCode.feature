@@ -5,7 +5,7 @@ Feature: UMLBackgroundToCode
 
   Scenario: One statement, one step, one scenario
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -21,14 +21,14 @@ Feature: UMLBackgroundToCode
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
       And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
-      And The code-prj project, src/test/resources/cucumber/Process.feature file Background section will be created as follows
+     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Background section will be created as follows
           | Name  | Description |
           | Setup | Desc line 1 |
 
   Scenario: No statement, one step, one scenario
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -42,17 +42,17 @@ Feature: UMLBackgroundToCode
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
       And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
-      And The code-prj project, src/test/resources/cucumber/Process.feature file Background Steps section will be created as follows
+     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Background Steps section will be created as follows
           | Name  | Step                                             |
           | Setup | Given The Unknown service, Object0 page is valid |
-      And The code-prj project, src/test/resources/cucumber/Process.feature file Scenarios Steps section will be created as follows
+      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenarios Steps section will be created as follows
           | Name   | Step                                             |
           | Submit | Given The Unknown service, Object1 page is valid |
 
   Scenario: No statement, one step, two scenarios
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -70,18 +70,18 @@ Feature: UMLBackgroundToCode
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
       And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
-      And The code-prj project, src/test/resources/cucumber/Process.feature file Background Steps section will be created as follows
+     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Background Steps section will be created as follows
           | Name  | Step                                             |
           | Setup | Given The Unknown service, Object0 page is valid |
-      And The code-prj project, src/test/resources/cucumber/Process.feature file Scenarios Steps section will be created as follows
+      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenarios Steps section will be created as follows
           | Name     | Step                                             |
           | Submit 1 | Given The Unknown service, Object1 page is valid |
           | Submit 2 | Given The Unknown service, Object2 page is valid |
 
   Scenario: No statement, one step, three scenarios
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -103,11 +103,11 @@ Feature: UMLBackgroundToCode
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
       And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
-      And The code-prj project, src/test/resources/cucumber/Process.feature file Background Steps section will be created as follows
+     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Background Steps section will be created as follows
           | Name  | Step                                             |
           | Setup | Given The Unknown service, Object0 page is valid |
-      And The code-prj project, src/test/resources/cucumber/Process.feature file Scenarios Steps section will be created as follows
+      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenarios Steps section will be created as follows
           | Name     | Step                                             |
           | Submit 1 | Given The Unknown service, Object1 page is valid |
           | Submit 2 | Given The Unknown service, Object2 page is valid |
@@ -115,7 +115,7 @@ Feature: UMLBackgroundToCode
 
   Scenario Outline: No statement, two steps, one scenario
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -130,8 +130,8 @@ Feature: UMLBackgroundToCode
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
       And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
-      And The code-prj project, src/test/resources/cucumber/Process.feature file Background Steps section will be created as follows
+     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Background Steps section will be created as follows
           | Name  | Step                                                   |
           | Setup | Given The Unknown service, Object<Index> page is valid |
 
@@ -143,7 +143,7 @@ Feature: UMLBackgroundToCode
 
   Scenario Outline: No statement, three steps, one scenario
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -159,8 +159,8 @@ Feature: UMLBackgroundToCode
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
       And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
-      And The code-prj project, src/test/resources/cucumber/Process.feature file Background Steps section will be created as follows
+     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Background Steps section will be created as follows
           | Name  | Step                                                   |
           | Setup | Given The Unknown service, Object<Index> page is valid |
 

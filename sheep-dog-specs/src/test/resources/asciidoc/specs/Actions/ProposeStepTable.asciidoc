@@ -4,7 +4,7 @@
 
 == Test-Case: Invalid step
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                     
@@ -17,7 +17,7 @@
 
 == Test-Case: Valid step but no object
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                           
@@ -30,7 +30,7 @@
 
 == Test-Case: Valid step has object but no definition
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                           
@@ -50,7 +50,7 @@
 
 == Test-Case: Valid step has object has definition has parameters
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                           

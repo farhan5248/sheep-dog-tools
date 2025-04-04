@@ -88,6 +88,14 @@ public abstract class TestObject {
 		attributes.put("component", component);
 	}
 
+	public void setInputOutputs(String key) {
+		// TODO this isn't invoked, it exists because when UML step objects are
+		// converted to code, all keywords for that object are generated. There probably
+		// needs to be a filter on what gets included in the UML model. So in addition
+		// to tracking which level 2 objects are referrenced, also track which step defs
+		// are
+	}
+
 	public void setInputOutputs(DataTable dataTable) {
 		processInputOutputs(dataTable, "set", "");
 	}

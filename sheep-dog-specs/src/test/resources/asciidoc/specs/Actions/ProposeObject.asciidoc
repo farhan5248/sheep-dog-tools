@@ -4,7 +4,7 @@
 
 == Test-Case: No object no component has previous in background
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file background steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file background steps snippet is created as follows
 
 |===
 | Step Name                                
@@ -31,7 +31,7 @@
 
 TODO make this an outline with various steps like "The" or "The batchjob" etc
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name
@@ -44,7 +44,7 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 
 == Test-Case: No object no component no previous has component objects
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name
@@ -69,7 +69,7 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 
 == Test-Case: No object no component has previous no component objects
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                
@@ -88,7 +88,7 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 
 == Test-Case: No object no component has previous has component objects
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                
@@ -115,7 +115,7 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 
 == Test-Case: No object has component no previous no component objects
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name          
@@ -128,7 +128,7 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 
 == Test-Case: No object has component no previous has component objects
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name          
@@ -153,7 +153,7 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 
 == Test-Case: No object has component has previous no component objects
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                
@@ -172,7 +172,7 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 
 == Test-Case: No object has component has previous has component objects
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                
@@ -198,7 +198,7 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 
 == Test-Case: Has object no component no previous no component objects
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name     
@@ -218,7 +218,7 @@ TODO make this an outline with various steps like "The" or "The batchjob" etc
 
 TODO the assertion should be that is present won't be suggested because this step has no component
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name     
@@ -243,7 +243,7 @@ TODO the assertion should be that is present won't be suggested because this ste
 
 == Test-Case: Has object no component has previous no component objects
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                
@@ -262,7 +262,7 @@ TODO the assertion should be that is present won't be suggested because this ste
 
 == Test-Case: Has object no component has previous has component objects
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                
@@ -288,7 +288,7 @@ TODO the assertion should be that is present won't be suggested because this ste
 
 == Test-Case: Has object has component no previous no component objects
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                     
@@ -306,7 +306,7 @@ TODO the assertion should be that is present won't be suggested because this ste
 
 == Test-Case: Has object has component no previous has component objects
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                     
@@ -331,7 +331,7 @@ TODO the assertion should be that is present won't be suggested because this ste
 
 == Test-Case: Has object has component has previous no component objects
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                
@@ -350,7 +350,7 @@ TODO the assertion should be that is present won't be suggested because this ste
 
 == Test-Case: Has object has component has previous has component objects
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/Process2.asciidoc file steps snippet is created as follows
+=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows
 
 |===
 | Step Name                                

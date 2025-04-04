@@ -5,7 +5,7 @@ Feature: UMLStepTableToCode
 
   Scenario: One row, one cell
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -20,15 +20,15 @@ Feature: UMLStepTableToCode
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
       And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
-      And The code-prj project, src/test/resources/cucumber/Process.feature file Scenario Steps Data Table section will be created as follows
+     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenario Steps Data Table section will be created as follows
           | Name   | Step                                                         | Row      |
           | Submit | Given The Unknown service, Object page is created as follows | \| h1 \| |
           | Submit | Given The Unknown service, Object page is created as follows | \| v1 \| |
 
   Scenario: Two rows, two cells
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -44,8 +44,8 @@ Feature: UMLStepTableToCode
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
       And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
-      And The code-prj project, src/test/resources/cucumber/Process.feature file Scenario Steps Data Table section will be created as follows
+     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenario Steps Data Table section will be created as follows
           | Name   | Step                                                         | Row            |
           | Submit | Given The Unknown service, Object page is created as follows | \| h1 \| h2 \| |
           | Submit | Given The Unknown service, Object page is created as follows | \| v1 \| v2 \| |
@@ -53,7 +53,7 @@ Feature: UMLStepTableToCode
 
   Scenario: Three rows, three cells
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -70,8 +70,8 @@ Feature: UMLStepTableToCode
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
       And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
-      And The code-prj project, src/test/resources/cucumber/Process.feature file Scenario Steps Data Table section will be created as follows
+     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenario Steps Data Table section will be created as follows
           | Name   | Step                                                         | Row                  |
           | Submit | Given The Unknown service, Object page is created as follows | \| h1 \| h2 \| h3 \| |
           | Submit | Given The Unknown service, Object page is created as follows | \| v1 \| v2 \| v3 \| |
@@ -80,7 +80,7 @@ Feature: UMLStepTableToCode
 
   Scenario: Escaped cell data
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -95,8 +95,8 @@ Feature: UMLStepTableToCode
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
       And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be present
-      And The code-prj project, src/test/resources/cucumber/Process.feature file Scenario Steps Data Table section will be created as follows
+     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenario Steps Data Table section will be created as follows
           | Name   | Step                                                         | Row                |
           | Submit | Given The Unknown service, Object page is created as follows | \| h1 \|           |
           | Submit | Given The Unknown service, Object page is created as follows | \| \\\| v1 \\\| \| |

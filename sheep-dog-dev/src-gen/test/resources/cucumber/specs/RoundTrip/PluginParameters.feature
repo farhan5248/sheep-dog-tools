@@ -6,7 +6,7 @@ Feature: PluginParameters
 
   Scenario: Create two models from different tags
 
-    Given The spec-prj project, src/test/resources/asciidoc/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -16,7 +16,7 @@ Feature: PluginParameters
           
           === Given: The Object1 page is empty
           """
-    Given The spec-prj project, src/test/resources/asciidoc/app/Process.asciidoc file is created as follows
+    Given The spec-prj project, src/test/resources/asciidoc/specs/app/Process.asciidoc file is created as follows
           """
           = Test-Suite: Process
           
@@ -35,7 +35,7 @@ Feature: PluginParameters
       And The maven plugin, uml-to-cucumber goal is executed with
           | Tags |
           | tag1 |
-     Then The code-prj project, src/test/resources/cucumber/Process.feature file will be created as follows
+     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be created as follows
           """
           Feature: Process
           
