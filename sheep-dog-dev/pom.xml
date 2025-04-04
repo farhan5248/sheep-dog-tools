@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.farhan</groupId>
 	<artifactId>sheep-dog-dev</artifactId>
@@ -83,9 +85,8 @@
 				<version>3.2.2</version>
 				<configuration>
 					<properties>
-						<!-- Work around. Surefire does not include enough
-                             information to disambiguate between different
-                             examples and scenarios. -->
+						<!-- Work around. Surefire does not include enough information to disambiguate 
+							between different examples and scenarios. -->
 						<configurationParameters>
 							cucumber.junit-platform.naming-strategy=long
 						</configurationParameters>
@@ -101,6 +102,31 @@
 						<include>org.farhan:*:*</include>
 					</includes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.3.0</version>
+				<executions>
+					<execution>
+						<id>add-test-source</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>add-test-source</goal>
+							<goal>add-test-resource</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src-gen/test/java</source>
+							</sources>
+							<resources>
+								<resource>
+									<directory>src-gen/test/resources</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -202,8 +228,8 @@
 			<artifactId>uml</artifactId>
 			<version>5.5.0.v20210228-1829</version>
 		</dependency>
-		<!-- Eclipse Xtext - These incldue Eclipse plugin dependencies not in
-		the jar but provided by Eclipse -->
+		<!-- Eclipse Xtext - These incldue Eclipse plugin dependencies not in the 
+			jar but provided by Eclipse -->
 		<dependency>
 			<groupId>org.eclipse.equinox</groupId>
 			<artifactId>common</artifactId>
