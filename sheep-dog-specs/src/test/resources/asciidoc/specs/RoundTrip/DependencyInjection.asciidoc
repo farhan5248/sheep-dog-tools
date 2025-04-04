@@ -29,7 +29,7 @@
 
 === And: The maven plugin, uml-to-cucumber-spring goal is executed
 
-=== Then: The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
+=== Then: The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
 
 ----
 package org.farhan.stepdefs.blah;
@@ -59,7 +59,7 @@ public class BlahObjectPageSteps extends TestSteps {
 
 === And: The maven plugin, uml-to-cucumber-guice goal is executed
 
-=== Then: The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
+=== Then: The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
 
 ----
 package org.farhan.stepdefs.blah;

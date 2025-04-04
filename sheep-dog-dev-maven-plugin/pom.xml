@@ -180,6 +180,31 @@
 					</includes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.3.0</version>
+				<executions>
+					<execution>
+						<id>add-test-source</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>add-test-source</goal>
+							<goal>add-test-resource</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src-gen/test/java</source>
+							</sources>
+							<resources>
+								<resource>
+									<directory>src-gen/test/resources</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>

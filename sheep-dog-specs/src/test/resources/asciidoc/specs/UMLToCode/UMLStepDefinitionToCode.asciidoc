@@ -72,7 +72,7 @@ text1
 
 === When: The maven plugin, uml-to-cucumber goal is executed
 
-=== Then: The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
+=== Then: The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
 
 === And: The code-prj project, BlahObjectPageSteps.java file Object section will be created as follows
 
@@ -101,7 +101,7 @@ text1
 
 === When: The maven plugin, uml-to-cucumber goal is executed
 
-=== Then: The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
+=== Then: The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
 
 === And: The code-prj project, BlahObjectPageSteps.java file Object section will be created as follows
 
@@ -130,7 +130,7 @@ text1
 
 === When: The maven plugin, uml-to-cucumber goal is executed
 
-=== Then: The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
+=== Then: The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
 
 === And: The code-prj project, BlahObjectPageSteps.java file Fields section will be created as follows
 
@@ -145,7 +145,7 @@ text1
 
 === When: The maven plugin, uml-to-cucumber goal is executed
 
-=== Then: The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
+=== Then: The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
 
 === And: The code-prj project, BlahObjectPageSteps.java file Fields section will be created as follows
 
@@ -167,7 +167,7 @@ text1
 
 === When: The maven plugin, uml-to-cucumber goal is executed
 
-=== Then: The code-prj project, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
+=== Then: The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
 
 === And: The code-prj project, ObjectPage.java file Fields section will be created as follows
 
@@ -183,7 +183,7 @@ text1
 
 === When: The maven plugin, uml-to-cucumber-spring goal is executed
 
-=== Then: The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
+=== Then: The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
 
 === And: The code-prj project, BlahObjectPageSteps.java file Object section will be created as follows
 
@@ -220,7 +220,7 @@ text1
 
 === When: The maven plugin, uml-to-cucumber-guice goal is executed
 
-=== Then: The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
+=== Then: The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
 
 === And: The code-prj project, BlahObjectPageSteps.java file Object section will be created as follows
 

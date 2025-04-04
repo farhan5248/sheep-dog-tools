@@ -18,6 +18,6 @@ public class CucumberToUmlGoalImpl extends GoalObject implements CucumberToUmlGo
 
 	@Override
 	public void transition() {
-		runGoal("org.farhan.mbt.maven.CucumberToUMLMojo");
+		runGoal("org.farhan.mbt.maven.CucumberToUMLMojo", "target/src-gen/" + "code-prj/");
 	}
 }

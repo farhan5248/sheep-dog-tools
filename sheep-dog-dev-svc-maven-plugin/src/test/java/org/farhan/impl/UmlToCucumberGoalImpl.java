@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class UmlToCucumberGoalImpl extends GoalObject implements UmlToCucumberGoal {
 
 	public void transition() {
-		runGoal("org.farhan.mbt.maven.UMLToCucumberMojo");
+		runGoal("org.farhan.mbt.maven.UMLToCucumberMojo", "target/src-gen/" + "code-prj/");
 	}
 
 	@Override

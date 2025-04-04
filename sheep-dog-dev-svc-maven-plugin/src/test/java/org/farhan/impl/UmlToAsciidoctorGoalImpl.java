@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class UmlToAsciidoctorGoalImpl extends GoalObject implements UmlToAsciidoctorGoal {
 
 	public void transition() {
-		runGoal("org.farhan.mbt.maven.UMLToAsciiDoctorMojo");
+		runGoal("org.farhan.mbt.maven.UMLToAsciiDoctorMojo", "target/src-gen/" + "spec-prj/");
 	}
 
 	@Override

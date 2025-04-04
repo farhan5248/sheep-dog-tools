@@ -5,7 +5,7 @@ Feature: CodeDocStringToUML
 
   Scenario: One line
 
-    Given The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -24,7 +24,7 @@ Feature: CodeDocStringToUML
 
   Scenario: Empty Lines
 
-    Given The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           

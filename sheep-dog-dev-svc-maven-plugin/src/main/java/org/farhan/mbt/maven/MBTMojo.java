@@ -107,7 +107,7 @@ public abstract class MBTMojo extends AbstractMojo {
 		}
 		SourceRepository sr = new SourceRepository(baseDir);
 		// TODO get the layer 1 directory from the converter
-		String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/" };
+		String[] dirs = { "src/test/resources/asciidoc/", "src-gen/test/resources/cucumber/" };
 		try {
 			waitForService();
 			if (goal.endsWith("ToUML")) {

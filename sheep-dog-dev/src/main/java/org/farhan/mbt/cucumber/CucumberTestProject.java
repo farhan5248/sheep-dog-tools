@@ -45,11 +45,11 @@ public class CucumberTestProject extends ConvertibleProject {
 	public String getDir(String layer) {
 		switch (layer) {
 		case TEST_CASES:
-			return "src/test/resources/cucumber/" + TEST_CASES;
+			return "src-gen/test/resources/cucumber/" + TEST_CASES;
 		case TEST_STEPS:
-			return "src/test/java/org/farhan/" + TEST_STEPS;
+			return "src-gen/test/java/org/farhan/" + TEST_STEPS;
 		case TEST_OBJECTS:
-			return "src/test/java/org/farhan/" + TEST_OBJECTS;
+			return "src-gen/test/java/org/farhan/" + TEST_OBJECTS;
 		default:
 			return "";
 		}

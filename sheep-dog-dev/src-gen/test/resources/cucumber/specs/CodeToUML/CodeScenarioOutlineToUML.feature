@@ -5,7 +5,7 @@ Feature: CodeScenarioOutlineToUML
 
   Scenario: No tags, no statement, one step, one example
 
-    Given The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -31,7 +31,7 @@ Feature: CodeScenarioOutlineToUML
 
   Scenario: One tag, one statement, one step, one example
 
-    Given The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -59,7 +59,7 @@ Feature: CodeScenarioOutlineToUML
 
   Scenario Outline: Two tags, two statements, two steps, two examples
 
-    Given The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -109,7 +109,7 @@ Feature: CodeScenarioOutlineToUML
 
   Scenario Outline: Three tags, three statements, three steps, three examples
 
-    Given The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -165,7 +165,7 @@ Feature: CodeScenarioOutlineToUML
 
   Scenario: Selected tags
 
-    Given The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           

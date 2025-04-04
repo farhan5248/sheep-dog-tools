@@ -10,10 +10,10 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("cucumber/actions/ValidateError.feature")
+@SelectClasspathResource("cucumber/specs/actions/ValidateError.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
-@IncludeTags("debug")
+@IncludeTags("sheep-dog-test")
 public class ValidateErrorTest {
 
 }

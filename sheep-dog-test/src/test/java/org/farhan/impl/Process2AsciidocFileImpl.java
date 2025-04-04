@@ -3,7 +3,7 @@ package org.farhan.impl;
 import java.util.HashMap;
 
 import org.farhan.common.TestObject;
-import org.farhan.objects.specprj.src.test.resources.asciidoc.Process2AsciidocFile;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.Process2AsciidocFile;
 import io.cucumber.guice.ScenarioScoped;
 @ScenarioScoped
 public class Process2AsciidocFileImpl extends TestObject implements Process2AsciidocFile {

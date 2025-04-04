@@ -27,8 +27,8 @@ Feature: UMLExamplesTableToCode
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
       And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
-      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows
+     Then The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row      |
           | Submit | Examples 1 | \| h1 \| |
           | Submit | Examples 1 | \| v1 \| |
@@ -58,8 +58,8 @@ Feature: UMLExamplesTableToCode
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
       And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
-      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows
+     Then The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row            |
           | Submit | Examples 1 | \| h1 \| h2 \| |
           | Submit | Examples 1 | \| v1 \| v2 \| |
@@ -91,8 +91,8 @@ Feature: UMLExamplesTableToCode
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
       And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
-      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows
+     Then The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row                  |
           | Submit | Examples 1 | \| h1 \| h2 \| h3 \| |
           | Submit | Examples 1 | \| v1 \| v2 \| v3 \| |

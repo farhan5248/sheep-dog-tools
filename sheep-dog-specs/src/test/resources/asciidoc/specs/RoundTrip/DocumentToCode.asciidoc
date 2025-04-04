@@ -86,7 +86,7 @@ Desc 3
 
 === And: The maven plugin, uml-to-cucumber goal is executed
 
-=== Then: The code-prj project, src/test/resources/cucumber/specs/app/Process.feature file will be created as follows
+=== Then: The code-prj project, src-gen/test/resources/cucumber/specs/app/Process.feature file will be created as follows
 
 ----
 @tag1
@@ -132,7 +132,7 @@ Feature: Process
           | 6   |
 ----
 
-=== And: The code-prj project, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be created as follows
+=== And: The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file will be created as follows
 
 ----
 package org.farhan.objects.blah;
@@ -153,7 +153,7 @@ public interface ObjectPage {
 }
 ----
 
-=== And: The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
+=== And: The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be created as follows
 
 ----
 package org.farhan.stepdefs.blah;

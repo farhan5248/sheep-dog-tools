@@ -27,12 +27,12 @@ Feature: UMLScenarioOutlineToCode
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
       And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
-      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenario Outline Steps Data Table section will be created as follows
+     Then The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Steps Data Table section will be created as follows
           | Name   | Step                                                          |
           | Submit | Given The blah application, Object page is created as follows |
           | Submit | Given The blah application, Object page is created as follows |
-      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows
+      And The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples   | Row       |
           | Submit | Examples 1 | \| h3 \|  |
           | Submit | Examples 1 | \| v31 \| |
@@ -64,8 +64,8 @@ Feature: UMLScenarioOutlineToCode
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
       And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
-      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenario Outlines section will be created as follows
+     Then The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outlines section will be created as follows
           | Name   | Tags | Description         |
           | Submit | tag1 | \@tag1\nDesc line 1 |
 
@@ -111,14 +111,14 @@ Feature: UMLScenarioOutlineToCode
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
       And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
-      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenario Outlines section will be created as follows
+     Then The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outlines section will be created as follows
           | Name   | Tags      | Description                             |
           | Submit | tag1,tag2 | \@tag1 \@tag2\nDesc line 1\nDesc line 2 |
-      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenario Outline Steps Data Table section will be created as follows
+      And The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Steps Data Table section will be created as follows
           | Name   | Step                                                                 |
           | Submit | Given The blah application, Object<Index> page is created as follows |
-      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows
+      And The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples         | Row             |
           | Submit | Examples <Index> | \| h3 \|        |
           | Submit | Examples <Index> | \| v3<Index> \| |
@@ -186,14 +186,14 @@ Feature: UMLScenarioOutlineToCode
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
       And The maven plugin, uml-to-cucumber goal is executed
-     Then The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
-      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenario Outlines section will be created as follows
+     Then The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file will be present
+      And The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outlines section will be created as follows
           | Name   | Tags           | Description                                                 |
           | Submit | tag1,tag2,tag3 | \@tag1 \@tag2 \@tag3\nDesc line 1\nDesc line 2\nDesc line 3 |
-      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenario Outline Steps Data Table section will be created as follows
+      And The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Steps Data Table section will be created as follows
           | Name   | Step                                                                 |
           | Submit | Given The blah application, Object<Index> page is created as follows |
-      And The code-prj project, src/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows
+      And The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows
           | Name   | Examples         | Row             |
           | Submit | Examples <Index> | \| h3 \|        |
           | Submit | Examples <Index> | \| v3<Index> \| |

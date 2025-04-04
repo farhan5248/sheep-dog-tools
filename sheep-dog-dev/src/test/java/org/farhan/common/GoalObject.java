@@ -9,7 +9,8 @@ import org.junit.jupiter.api.Assertions;
 
 public abstract class GoalObject extends TestObject {
 
-	protected String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/" };
+	// TODO don't hardcode the directories?
+	protected String[] dirs = { "src/test/resources/asciidoc/", "src-gen/test/resources/cucumber/" };
 	protected ObjectRepository or;
 	protected SourceRepository sr;
 	protected LoggerImpl log;

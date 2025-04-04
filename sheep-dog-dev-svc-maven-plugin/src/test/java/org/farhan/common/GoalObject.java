@@ -19,12 +19,12 @@ public abstract class GoalObject extends TestObject {
 		attributes.put("tags", "");
 	}
 
-	protected void runGoal(String goal) {
+	protected void runGoal(String goal, String baseDir) {
 		try {
 			Class<?> mojoClass = Class.forName(goal);
 			MBTMojo mojo = (MBTMojo) mojoClass.getConstructor().newInstance();
 			mojo.tag = attributes.get("tags");
-			mojo.baseDir = "target/src-gen/";
+			mojo.baseDir = baseDir;
 			mojo.host = serverHost;
 			mojo.port = serverPort;
 			mojo.timeout = timeout;

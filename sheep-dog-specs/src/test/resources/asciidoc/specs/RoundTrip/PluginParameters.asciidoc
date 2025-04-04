@@ -50,7 +50,7 @@
 | tag1
 |===
 
-=== Then: The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be created as follows
+=== Then: The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file will be created as follows
 
 ----
 Feature: Process

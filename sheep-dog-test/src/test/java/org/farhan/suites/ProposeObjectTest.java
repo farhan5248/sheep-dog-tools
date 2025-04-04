@@ -10,10 +10,10 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("cucumber/actions/ProposeObject.feature")
+@SelectClasspathResource("cucumber/specs/actions/ProposeObject.feature")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.farhan")
-@IncludeTags("debug")
+@IncludeTags("sheep-dog-test")
 public class ProposeObjectTest {
 
 

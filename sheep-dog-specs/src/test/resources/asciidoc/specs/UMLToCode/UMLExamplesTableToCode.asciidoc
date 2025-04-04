@@ -30,7 +30,7 @@
 
 === And: The maven plugin, uml-to-cucumber goal is executed
 
-=== Then: The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
+=== Then: The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file will be present
 
 === And: The code-prj project, Process.feature file Scenario Outline Examples Table section will be created as follows
 
@@ -69,7 +69,7 @@
 
 === And: The maven plugin, uml-to-cucumber goal is executed
 
-=== Then: The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
+=== Then: The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file will be present
 
 === And: The code-prj project, Process.feature file Scenario Outline Examples Table section will be created as follows
 
@@ -110,7 +110,7 @@
 
 === And: The maven plugin, uml-to-cucumber goal is executed
 
-=== Then: The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
+=== Then: The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file will be present
 
 === And: The code-prj project, Process.feature file Scenario Outline Examples Table section will be created as follows
 

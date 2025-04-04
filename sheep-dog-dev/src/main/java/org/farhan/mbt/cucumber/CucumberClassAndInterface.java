@@ -202,10 +202,12 @@ public class CucumberClassAndInterface implements ConvertibleObject {
 	}
 
 	protected String getPackageDeclaration() {
-		String packageName = thePath.replaceAll("\\" + "/" + "[^\\" + "/" + "]*$", "");
+		String packageName;
+		packageName = thePath.replaceAll("\\" + "/" + "[^\\" + "/" + "]*$", "");
+		packageName = packageName.replace("-", "");
 		packageName = packageName.replace("/", ".");
-		packageName = packageName.replaceFirst("^src\\.test\\.java\\.org\\.farhan", "org.farhan");
-		return packageName;
+		packageName = packageName.replaceFirst("^srcgen\\.test\\.java\\.org\\.farhan", "org.farhan");
+		return packageName.toLowerCase();
 	}
 
 	@Override

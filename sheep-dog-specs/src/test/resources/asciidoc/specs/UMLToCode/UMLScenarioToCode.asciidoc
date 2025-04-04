@@ -18,7 +18,7 @@
 
 === And: The maven plugin, uml-to-cucumber goal is executed
 
-=== Then: The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
+=== Then: The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file will be present
 
 === And: The code-prj project, Process.feature file Scenarios Steps section will be created as follows
 
@@ -46,7 +46,7 @@ Desc line 1
 
 === And: The maven plugin, uml-to-cucumber goal is executed
 
-=== Then: The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
+=== Then: The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file will be present
 
 === And: The code-prj project, Process.feature file Scenarios section will be created as follows
 
@@ -77,7 +77,7 @@ Desc line 2
 
 === And: The maven plugin, uml-to-cucumber goal is executed
 
-=== Then: The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
+=== Then: The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file will be present
 
 === And: The code-prj project, Process.feature file Scenarios section will be created as follows
 
@@ -126,7 +126,7 @@ Desc line 3
 
 === And: The maven plugin, uml-to-cucumber goal is executed
 
-=== Then: The code-prj project, src/test/resources/cucumber/specs/Process.feature file will be present
+=== Then: The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file will be present
 
 === And: The code-prj project, Process.feature file Scenarios section will be created as follows
 

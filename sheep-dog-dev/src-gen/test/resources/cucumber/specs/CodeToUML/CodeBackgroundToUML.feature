@@ -5,7 +5,7 @@ Feature: CodeBackgroundToUML
 
   Scenario: No statement, one step, one scenario
 
-    Given The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -24,7 +24,7 @@ Feature: CodeBackgroundToUML
 
   Scenario: One statement, one step, one scenario
 
-    Given The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -43,7 +43,7 @@ Feature: CodeBackgroundToUML
 
   Scenario: One statement, one step, two scenarios
 
-    Given The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -67,7 +67,7 @@ Feature: CodeBackgroundToUML
 
   Scenario: One statement, one step, three scenarios
 
-    Given The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -95,7 +95,7 @@ Feature: CodeBackgroundToUML
 
   Scenario Outline: No statement, two steps, one scenario
 
-    Given The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           
@@ -121,7 +121,7 @@ Feature: CodeBackgroundToUML
 
   Scenario Outline: No statement, three steps, one scenario
 
-    Given The code-prj project, src/test/resources/cucumber/specs/Process.feature file is created as follows
+    Given The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
           """
           Feature: Process
           

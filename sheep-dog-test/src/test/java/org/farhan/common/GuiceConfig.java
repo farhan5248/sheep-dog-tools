@@ -11,7 +11,7 @@ import org.farhan.impl.ValidateErrorActionImpl;
 import org.farhan.impl.ValidateErrorDialogImpl;
 import org.farhan.impl.ValidateWarningActionImpl;
 import org.farhan.impl.ValidateWarningDialogImpl;
-import org.farhan.objects.specprj.src.test.resources.asciidoc.Process2AsciidocFile;
+import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.Process2AsciidocFile;
 import org.farhan.objects.specprj.src.test.resources.asciidoc.stepdefs.dailybatchjob.app.InputFileAsciidocFile;
 import org.farhan.objects.xtext.GenerateStepDefinitionAction;
 import org.farhan.objects.xtext.ProposeContentDialog;

@@ -85,7 +85,7 @@ public class GoalObject extends TestObject {
 	protected void runGoal(String goal) {
 
 		SourceRepository sr = new SourceRepository();
-		String[] dirs = { "src/test/resources/asciidoc/", "src/test/resources/cucumber/" };
+		String[] dirs = { "src/test/resources/asciidoc/", "src-gen/test/resources/cucumber/" };
 		try {
 			waitForService();
 			if (goal.endsWith("ToUML")) {

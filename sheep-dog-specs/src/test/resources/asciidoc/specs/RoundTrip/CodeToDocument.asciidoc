@@ -6,7 +6,7 @@ TODO make test for the specific mappings
 
 == Test-Case: Create an adoc file from feature file
 
-=== Given: The code-prj project, src/test/resources/cucumber/specs/app/Process.feature file is created as follows
+=== Given: The code-prj project, src-gen/test/resources/cucumber/specs/app/Process.feature file is created as follows
 
 ----
 @tag1

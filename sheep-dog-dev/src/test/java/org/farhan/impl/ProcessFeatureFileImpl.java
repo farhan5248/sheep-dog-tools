@@ -3,13 +3,13 @@ package org.farhan.impl;
 import java.util.HashMap;
 
 import org.farhan.common.FeatureFileObject;
-import org.farhan.objects.codeprj.src.test.resources.cucumber.specs.app.ProcessFeatureFile;
+import org.farhan.objects.codeprj.srcgen.test.resources.cucumber.specs.app.ProcessFeatureFile;
 
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
 public class ProcessFeatureFileImpl extends FeatureFileObject
-		implements ProcessFeatureFile, org.farhan.objects.codeprj.src.test.resources.cucumber.specs.ProcessFeatureFile {
+		implements ProcessFeatureFile, org.farhan.objects.codeprj.srcgen.test.resources.cucumber.specs.ProcessFeatureFile {
 
 	@Override
 	public void assertBackgroundSectionDescription(HashMap<String, String> keyMap) {

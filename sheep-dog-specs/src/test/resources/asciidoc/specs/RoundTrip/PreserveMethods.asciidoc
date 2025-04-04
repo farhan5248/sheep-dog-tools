@@ -27,7 +27,7 @@
 
 == Test-Case: Preserve existing java methods for layer 2
 
-=== And: The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows
+=== And: The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows
 
 ----
 package org.farhan.stepdefs.blah;
@@ -49,7 +49,7 @@ public class BlahObjectPageSteps {
 
 === When: The maven plugin, uml-to-cucumber goal is executed
 
-=== Then: The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
+=== Then: The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
 
 === And: The code-prj project, BlahObjectPageSteps.java file will be created as follows
 
@@ -80,7 +80,7 @@ public class BlahObjectPageSteps {
 
 == Test-Case: Preserve existing java methods for layer 3
 
-=== And: The code-prj project, src/test/java/org/farhan/objects/blah/ObjectPage.java file is created as follows
+=== And: The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file is created as follows
 
 ----
 package org.farhan.objects.blah;
@@ -95,7 +95,7 @@ public interface ObjectPage {
 
 === When: The maven plugin, uml-to-cucumber goal is executed
 
-=== Then: The code-prj project, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
+=== Then: The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
 
 === And: The code-prj project, ObjectPage.java file will be created as follows
 

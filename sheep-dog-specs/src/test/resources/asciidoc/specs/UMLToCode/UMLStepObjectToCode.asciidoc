@@ -30,7 +30,7 @@ TODO map uml layer 2 documentation to java code
 
 === When: The maven plugin, uml-to-cucumber goal is executed
 
-=== Then: The code-prj project, src/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
+=== Then: The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
 
 === And: The code-prj project, BlahObjectPageSteps.java file Object section will be created as follows
 
@@ -50,7 +50,7 @@ TODO map uml layer 2 documentation to java code
 
 === When: The maven plugin, uml-to-cucumber goal is executed
 
-=== Then: The code-prj project, src/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
+=== Then: The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
 
 === And: The code-prj project, ObjectPage.java file Object section will be created as follows
 

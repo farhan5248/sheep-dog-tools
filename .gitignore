@@ -1,5 +1,5 @@
-target
-bin
+**/target
+**/bin
 release.properties
 **/*._trace
 **/*.xtextbin

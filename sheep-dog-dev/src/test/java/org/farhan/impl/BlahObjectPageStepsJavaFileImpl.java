@@ -3,7 +3,7 @@ package org.farhan.impl;
 import java.util.HashMap;
 
 import org.farhan.common.JavaFileObject;
-import org.farhan.objects.codeprj.src.test.java.org.farhan.stepdefs.blah.BlahObjectPageStepsJavaFile;
+import org.farhan.objects.codeprj.srcgen.test.java.org.farhan.stepdefs.blah.BlahObjectPageStepsJavaFile;
 
 import io.cucumber.guice.ScenarioScoped;
 
