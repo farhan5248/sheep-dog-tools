@@ -23,10 +23,11 @@ public class CucumberTestProject extends ConvertibleProject {
 		} else {
 
 			if (!path.startsWith(getDir(TEST_CASES))) {
-				aConvertibleObject = createJavaWrapper(path);
 				if (path.startsWith(getDir(TEST_STEPS))) {
+					aConvertibleObject = createClass(path);
 					secondLayerObjects.add(aConvertibleObject);
 				} else {
+					aConvertibleObject = new CucumberInterface(path);
 					thirdLayerObjects.add(aConvertibleObject);
 				}
 			} else {
@@ -37,8 +38,8 @@ public class CucumberTestProject extends ConvertibleProject {
 		}
 	}
 
-	protected ConvertibleObject createJavaWrapper(String path) {
-		return new CucumberClassAndInterface(path);
+	protected ConvertibleObject createClass(String path) {
+		return new CucumberClass(path);
 	}
 
 	@Override

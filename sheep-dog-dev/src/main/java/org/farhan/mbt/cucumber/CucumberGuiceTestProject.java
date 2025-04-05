@@ -10,7 +10,7 @@ public class CucumberGuiceTestProject extends CucumberTestProject {
 	}
 
 	@Override
-	protected ConvertibleObject createJavaWrapper(String file) {
+	protected ConvertibleObject createClass(String file) {
 		return new CucumberGuiceClass(file);
 	}
 }

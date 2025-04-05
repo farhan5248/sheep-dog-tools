@@ -10,7 +10,7 @@ public class CucumberSpringTestProject extends CucumberTestProject {
 	}
 
 	@Override
-	protected ConvertibleObject createJavaWrapper(String path) {
+	protected ConvertibleObject createClass(String path) {
 		return new CucumberSpringClass(path);
 	}
 

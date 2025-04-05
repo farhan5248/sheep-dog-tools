@@ -18,7 +18,9 @@ import org.farhan.mbt.core.UMLTestProject;
 import org.farhan.mbt.core.UMLTestSetup;
 import org.farhan.mbt.core.UMLTestStep;
 import org.farhan.mbt.cucumber.CucumberFeature;
-import org.farhan.mbt.cucumber.CucumberClassAndInterface;
+import org.farhan.mbt.cucumber.CucumberClass;
+import org.farhan.mbt.cucumber.CucumberInterface;
+import org.farhan.mbt.cucumber.CucumberJava;
 import org.farhan.mbt.cucumber.CucumberPathConverter;
 import org.farhan.mbt.cucumber.CucumberTestProject;
 
@@ -26,7 +28,7 @@ public class ConvertUMLToCucumber extends Converter {
 
 	protected UMLTestSuite srcObj;
 	protected CucumberFeature tgtObjTestSuite;
-	protected CucumberClassAndInterface tgtObjStepObject;
+	protected CucumberJava tgtObjStepObject;
 	protected CucumberPathConverter pathConverter;
 
 	public ConvertUMLToCucumber(String tags, ObjectRepository fa, Logger log) {
@@ -36,11 +38,10 @@ public class ConvertUMLToCucumber extends Converter {
 	@Override
 	public String convertFile(String path, String content) throws Exception {
 		initProjects();
-		if (path.startsWith(project.getDir(project.TEST_STEPS))
-				|| path.startsWith(project.getDir(project.TEST_OBJECTS))) {
-			return convertStepObject(path, content);
-		} else {
+		if (path.startsWith(project.getDir(project.TEST_CASES))) {
 			return convertTestSuite(path, content);
+		} else {
+			return convertStepObject(path, content);
 		}
 	}
 
@@ -60,7 +61,11 @@ public class ConvertUMLToCucumber extends Converter {
 	protected String convertStepObject(String path, String content) throws Exception {
 		log.debug("step object: " + path);
 		UMLStepObject srcStepObject = model.getStepObject(pathConverter.findUMLPath(path));
-		tgtObjStepObject = (CucumberClassAndInterface) project.addFile(path);
+		if (path.startsWith(project.getDir(project.TEST_STEPS))) {
+			tgtObjStepObject = (CucumberClass) project.addFile(path);
+		} else {
+			tgtObjStepObject = (CucumberInterface) project.addFile(path);
+		}
 		tgtObjStepObject.parse(content);
 		for (UMLStepDefinition srcStepDefinition : srcStepObject.getStepDefinitionList()) {
 			convertStepDefinition(tgtObjStepObject.addStepDefinition(srcStepDefinition.getNameLong()),
