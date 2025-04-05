@@ -11,12 +11,12 @@ import io.cucumber.guice.ScenarioScoped;
 public class ObjectPageAsciidocFileImpl extends AdocFileObject implements ObjectPageAsciidocFile {
 
 	@Override
-	public void assertObjectSectionName(HashMap<String, String> keyMap) {
+	public void assertHeaderSectionName(HashMap<String, String> keyMap) {
 		assertStepObjectName(keyMap.get("Name"));
 	}
 
 	@Override
-	public void assertObjectSectionStatements(HashMap<String, String> keyMap) {
+	public void assertHeaderSectionStatements(HashMap<String, String> keyMap) {
 		assertStepObjectStatements(keyMap.get("Name"), keyMap.get("Statements"));
 	}
 

@@ -15,11 +15,11 @@ public class SpecPrjObjectPageAsciidocFileSteps extends TestSteps {
         super(object);
     }
 
-    @Given("^The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Object section will be created as follows$")
-    public void theSpecPrjProjectSrcTestResourcesAsciidocStepdefsBlahApplicationObjectPageAsciidocFileObjectSectionWillBeCreatedAsFollows(DataTable dataTable) {
+    @Given("^The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Header section will be created as follows$")
+    public void theSpecPrjProjectSrcTestResourcesAsciidocStepdefsBlahApplicationObjectPageAsciidocFileHeaderSectionWillBeCreatedAsFollows(DataTable dataTable) {
         object.setComponent("spec-prj");
         object.setPath("src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc");
-        object.assertInputOutputs(dataTable, "ObjectSection");
+        object.assertInputOutputs(dataTable, "HeaderSection");
     }
 
     @Given("^The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Step Definition Parameters Table section will be created as follows$")

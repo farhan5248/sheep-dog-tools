@@ -15,18 +15,18 @@ public class CodePrjObjectPageJavaFileSteps extends TestSteps {
         super(object);
     }
 
-    @Given("^The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file Fields section will be created as follows$")
-    public void theCodePrjProjectSrcGenTestJavaOrgFarhanObjectsBlahObjectPageJavaFileFieldsSectionWillBeCreatedAsFollows(DataTable dataTable) {
+    @Given("^The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file Header section will be created as follows$")
+    public void theCodePrjProjectSrcGenTestJavaOrgFarhanObjectsBlahObjectPageJavaFileHeaderSectionWillBeCreatedAsFollows(DataTable dataTable) {
         object.setComponent("code-prj");
         object.setPath("src-gen/test/java/org/farhan/objects/blah/ObjectPage.java");
-        object.assertInputOutputs(dataTable, "FieldsSection");
+        object.assertInputOutputs(dataTable, "HeaderSection");
     }
 
-    @Given("^The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file Object section will be created as follows$")
-    public void theCodePrjProjectSrcGenTestJavaOrgFarhanObjectsBlahObjectPageJavaFileObjectSectionWillBeCreatedAsFollows(DataTable dataTable) {
+    @Given("^The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file Methods section will be created as follows$")
+    public void theCodePrjProjectSrcGenTestJavaOrgFarhanObjectsBlahObjectPageJavaFileMethodsSectionWillBeCreatedAsFollows(DataTable dataTable) {
         object.setComponent("code-prj");
         object.setPath("src-gen/test/java/org/farhan/objects/blah/ObjectPage.java");
-        object.assertInputOutputs(dataTable, "ObjectSection");
+        object.assertInputOutputs(dataTable, "MethodsSection");
     }
 
     @Given("^The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file is created as follows$")

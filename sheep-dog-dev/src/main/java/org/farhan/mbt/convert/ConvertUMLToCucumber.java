@@ -7,8 +7,6 @@ import org.farhan.dsl.cucumber.cucumber.Examples;
 import org.farhan.dsl.cucumber.cucumber.Scenario;
 import org.farhan.dsl.cucumber.cucumber.ScenarioOutline;
 import org.farhan.dsl.cucumber.cucumber.Step;
-import com.github.javaparser.ast.body.MethodDeclaration;
-
 import org.farhan.mbt.core.UMLStepDefinition;
 import org.farhan.mbt.core.UMLStepObject;
 import org.farhan.mbt.core.UMLTestCase;
@@ -45,19 +43,6 @@ public class ConvertUMLToCucumber extends Converter {
 		}
 	}
 
-	protected void convertStepDefinition(MethodDeclaration stepDefinition, UMLStepDefinition srcStepDefinition)
-			throws Exception {
-		ArrayList<String> parametersListMerged = new ArrayList<String>();
-		for (org.farhan.mbt.core.UMLStepParameters a : srcStepDefinition.getStepParametersList()) {
-			for (String s : a.getUmlElement().getDetails().getFirst().getValue().split("\\|")) {
-				if (!parametersListMerged.contains(s.trim())) {
-					parametersListMerged.add(s.trim());
-				}
-			}
-		}
-		tgtObjStepObject.addStepParameters(srcStepDefinition.getNameLong(), parametersListMerged);
-	}
-
 	protected String convertStepObject(String path, String content) throws Exception {
 		log.debug("step object: " + path);
 		UMLStepObject srcStepObject = model.getStepObject(pathConverter.findUMLPath(path));
@@ -68,8 +53,16 @@ public class ConvertUMLToCucumber extends Converter {
 		}
 		tgtObjStepObject.parse(content);
 		for (UMLStepDefinition srcStepDefinition : srcStepObject.getStepDefinitionList()) {
-			convertStepDefinition(tgtObjStepObject.addStepDefinition(srcStepDefinition.getNameLong()),
-					srcStepDefinition);
+
+			ArrayList<String> parametersListMerged = new ArrayList<String>();
+			for (org.farhan.mbt.core.UMLStepParameters a : srcStepDefinition.getStepParametersList()) {
+				for (String s : a.getUmlElement().getDetails().getFirst().getValue().split("\\|")) {
+					if (!parametersListMerged.contains(s.trim())) {
+						parametersListMerged.add(s.trim());
+					}
+				}
+			}
+			tgtObjStepObject.addStepDefinition(srcStepDefinition.getNameLong(), parametersListMerged);
 		}
 		return tgtObjStepObject.toString();
 	}

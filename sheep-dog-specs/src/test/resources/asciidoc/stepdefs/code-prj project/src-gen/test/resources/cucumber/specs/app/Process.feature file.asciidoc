@@ -1,4 +1,4 @@
-= Step-Object: src/test/resources/cucumber/app/Process.feature file
+= Step-Object: src-gen/test/resources/cucumber/specs/app/Process.feature file
 
 == Step-Definition: is created as follows
 

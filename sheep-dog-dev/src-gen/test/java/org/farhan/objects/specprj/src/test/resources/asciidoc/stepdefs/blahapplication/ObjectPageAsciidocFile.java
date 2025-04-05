@@ -4,9 +4,9 @@ import java.util.HashMap;
 
 public interface ObjectPageAsciidocFile {
 
-    public void assertObjectSectionName(HashMap<String, String> keyMap);
+    public void assertHeaderSectionName(HashMap<String, String> keyMap);
 
-    public void assertObjectSectionStatements(HashMap<String, String> keyMap);
+    public void assertHeaderSectionStatements(HashMap<String, String> keyMap);
 
     public void assertStepDefinitionParametersTableSectionName(HashMap<String, String> keyMap);
 

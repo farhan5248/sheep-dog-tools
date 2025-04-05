@@ -1,4 +1,4 @@
-= Step-Object: src/test/resources/asciidoc/Process.asciidoc file
+= Step-Object: src/test/resources/asciidoc/specs/Process.asciidoc file
 
 == Step-Definition: Background section will be created as follows
 

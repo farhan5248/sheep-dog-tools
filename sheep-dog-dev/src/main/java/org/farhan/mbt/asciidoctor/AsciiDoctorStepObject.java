@@ -24,7 +24,7 @@ import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 
-public class AsciiDoctorStepObject extends AsciiDoctorAsciidoc implements ConvertibleObject {
+public class AsciiDoctorStepObject implements ConvertibleObject {
 
 	private StepObject theStepObject;
 	private String thePath;

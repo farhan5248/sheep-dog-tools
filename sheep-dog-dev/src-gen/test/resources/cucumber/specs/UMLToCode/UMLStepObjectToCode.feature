@@ -26,10 +26,10 @@ Feature: UMLStepObjectToCode
 
      When The maven plugin, uml-to-cucumber goal is executed
      Then The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
-      And The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Object section will be created as follows
+      And The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Header section will be created as follows
           | Import                    |
           | io.cucumber.java.en.Given |
-      And The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Object section will be created as follows
+      And The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Header section will be created as follows
           | Class Name          | Package                  |
           | BlahObjectPageSteps | org.farhan.stepdefs.blah |
 
@@ -37,10 +37,10 @@ Feature: UMLStepObjectToCode
 
      When The maven plugin, uml-to-cucumber goal is executed
      Then The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
-      And The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file Object section will be created as follows
+      And The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file Header section will be created as follows
           | Import            |
           | java.util.HashMap |
-      And The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file Object section will be created as follows
+      And The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file Header section will be created as follows
           | Interface Name | Package                 |
           | ObjectPage     | org.farhan.objects.blah |
 

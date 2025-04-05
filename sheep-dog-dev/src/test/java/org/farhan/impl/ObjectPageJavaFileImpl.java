@@ -16,43 +16,43 @@ public class ObjectPageJavaFileImpl extends JavaFileObject
 	}
 
 	@Override
-	public void assertFieldsSectionMethodName(HashMap<String, String> keyMap) {
+	public void assertMethodsSectionMethodName(HashMap<String, String> keyMap) {
 		assertMethodExists(keyMap.get("Method Name"));
 	}
 
 	@Override
-	public void assertFieldsSectionParameterName(HashMap<String, String> keyMap) {
+	public void assertMethodsSectionParameterName(HashMap<String, String> keyMap) {
 		assertMethodParameterExists(keyMap.get("Method Name"), keyMap.get("Parameter Name"));
 	}
 
 	@Override
-	public void assertFieldsSectionParameterType(HashMap<String, String> keyMap) {
+	public void assertMethodsSectionParameterType(HashMap<String, String> keyMap) {
 		assertMethodParameterType(keyMap.get("Method Name"), keyMap.get("Parameter Name"),
 				keyMap.get("Parameter Type"));
 	}
 
 	@Override
-	public void assertFieldsSectionReturnType(HashMap<String, String> keyMap) {
+	public void assertMethodsSectionReturnType(HashMap<String, String> keyMap) {
 		assertMethodReturnType(keyMap.get("Method Name"), keyMap.get("Return Type"));
 	}
 
 	@Override
-	public void assertFieldsSectionVisibility(HashMap<String, String> keyMap) {
+	public void assertMethodsSectionVisibility(HashMap<String, String> keyMap) {
 		assertMethodAccessSpecifier(keyMap.get("Method Name"), keyMap.get("Visibility"));
 	}
 
 	@Override
-	public void assertObjectSectionImport(HashMap<String, String> keyMap) {
+	public void assertHeaderSectionImport(HashMap<String, String> keyMap) {
 		assertImportExists(keyMap.get("Import"));
 	}
 
 	@Override
-	public void assertObjectSectionInterfaceName(HashMap<String, String> keyMap) {
+	public void assertHeaderSectionInterfaceName(HashMap<String, String> keyMap) {
 		assertInterfaceNameIs(keyMap.get("Interface Name"));
 	}
 
 	@Override
-	public void assertObjectSectionPackage(HashMap<String, String> keyMap) {
+	public void assertHeaderSectionPackage(HashMap<String, String> keyMap) {
 		assertPackage(keyMap.get("Package"));
 	}
 

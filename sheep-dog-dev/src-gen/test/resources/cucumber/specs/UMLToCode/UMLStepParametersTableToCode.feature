@@ -45,7 +45,7 @@ Feature: UMLStepParametersTableToCode
       And The maven plugin, asciidoctor-to-uml goal is executed
      When The maven plugin, uml-to-cucumber goal is executed
      Then The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file will be present
-      And The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file Fields section will be created as follows
+      And The code-prj project, src-gen/test/java/org/farhan/objects/blah/ObjectPage.java file Methods section will be created as follows
           | Method Name        | Visibility | Return Type | Parameter Name | Parameter Type         |
           | assertTopSectionH1 | public     | void        | keyMap         | HashMap<String,String> |
           | assertTopSectionH2 | public     | void        | keyMap         | HashMap<String,String> |

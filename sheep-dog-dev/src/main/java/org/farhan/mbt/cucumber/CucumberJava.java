@@ -43,9 +43,7 @@ public abstract class CucumberJava implements ConvertibleObject {
 		}
 	}
 
-	public abstract MethodDeclaration addStepDefinition(String step) throws Exception;
-
-	public abstract void addStepParameters(String stepDefinitionName, ArrayList<String> paramList) throws Exception;
+	public abstract void addStepDefinition(String name, ArrayList<String> paramList) throws Exception;
 
 	@Override
 	public Object get() {
@@ -102,15 +100,12 @@ public abstract class CucumberJava implements ConvertibleObject {
 	}
 
 	protected String convertToCamelCase(String text, String delimiter) {
-		if (text.contains(delimiter)) {
-			String[] nameParts = text.split(delimiter);
-			text = "";
-			for (String s : nameParts) {
-				text += StringUtils.capitalize(s);
-			}
-			text = StringUtils.uncapitalize(text);
+		String[] nameParts = text.split(delimiter);
+		text = "";
+		for (String s : nameParts) {
+			text += StringUtils.capitalize(s);
 		}
-		return text;
+		return StringUtils.uncapitalize(text);
 	}
 
 	protected String convertToPascalCase(String text) {

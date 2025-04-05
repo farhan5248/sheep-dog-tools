@@ -7,7 +7,6 @@ import org.farhan.dsl.common.TestStepNameHelper;
 
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.BlockStmt;
-import com.github.javaparser.ast.stmt.Statement;
 
 public class CucumberClass extends CucumberJava {
 	public CucumberClass(String thePath) {
@@ -15,50 +14,30 @@ public class CucumberClass extends CucumberJava {
 		theJavaClass.addImport("io.cucumber.java.en.Given");
 	}
 
-	public MethodDeclaration addStepDefinition(String step) throws Exception {
-		theJavaClass.addImport(getFactoryImport(step));
-		MethodDeclaration aMethod = addMethod(convertToCamelCase(step).replace("'", ""));
+	public void addStepDefinition(String name, ArrayList<String> paramList) throws Exception {
+		theJavaClass.addImport(getFactoryImport(name));
+		MethodDeclaration aMethod = addMethod(convertToCamelCase(name).replace("'", ""));
 		BlockStmt body = aMethod.getBody().get();
 		if (body.isEmpty()) {
 			if (aMethod.getAnnotations().isEmpty()) {
-				aMethod.addSingleMemberAnnotation("Given", "\"^" + step + "$\"");
+				aMethod.addSingleMemberAnnotation("Given", "\"^" + name + "$\"");
 			}
 			body = aMethod.createBody();
-			body.addStatement(getCallForFactory(step) + getCallForComponent(step) + ";");
-			body.addStatement(getCallForFactory(step) + getCallForPath(step) + ";");
-			if (TestStepNameHelper.isEdge(step)) {
-				body.addStatement(getCallForFactory(step) + getCallForTransition() + ";");
-			} else {
-				if (TestStepNameHelper.getAttachment(step).isEmpty()) {
-					body.addStatement(getCallForFactory(step) + getCallForInputOutputsForState(step) + ";");
-				}
+			body.addStatement(getCallForFactory(name) + getCallForComponent(name) + ";");
+			body.addStatement(getCallForFactory(name) + getCallForPath(name) + ";");
+			if (paramList.size() == 0 && !TestStepNameHelper.isEdge(name)) {
+				body.addStatement(getCallForFactory(name) + getCallForInputOutputsForState(name) + ";");
+			} else if (paramList.size() == 1 && paramList.get(0).contentEquals("Content")) {
+				addParameter(aMethod, "String", "docString");
+				body.addStatement(getCallForFactory(name) + getCallForInputOutputsForDocString(name) + ";");
+			} else if (paramList.size() >= 1) {
+				theJavaClass.addImport("io.cucumber.datatable.DataTable");
+				addParameter(aMethod, "DataTable", "dataTable");
+				body.addStatement(getCallForFactory(name) + getCallForInputOutputsForDataTable(name) + ";");
 			}
-		}
-		return aMethod;
-	}
-
-	public void addStepParameters(String step, ArrayList<String> paramList) throws Exception {
-		if (paramList.isEmpty()) {
-			return;
-		}
-		MethodDeclaration aMethod;
-		aMethod = addMethod(convertToCamelCase(step).replace("'", ""));
-		String statement;
-		if (paramList.size() == 1 && paramList.get(0).contentEquals("Content")) {
-			addParameter(aMethod, "String", "docString");
-			statement = getCallForFactory(step) + getCallForInputOutputsForDocString(step)
-					+ ";";
-		} else {
-			theJavaClass.addImport("io.cucumber.datatable.DataTable");
-			addParameter(aMethod, "DataTable", "dataTable");
-			statement = getCallForFactory(step) + getCallForInputOutputsForDataTable(step)
-					+ ";";
-		}
-		BlockStmt body = aMethod.getBody().get();
-		if (getStatement(body, statement) == null) {
-			body.addStatement(statement);
-			body.getStatements().add(2, body.getStatements().getLast().get());
-			body.getStatements().removeLast();
+			if (TestStepNameHelper.isEdge(name)) {
+				body.addStatement(getCallForFactory(name) + getCallForTransition() + ";");
+			}
 		}
 	}
 
@@ -67,7 +46,7 @@ public class CucumberClass extends CucumberJava {
 	}
 
 	protected String getCallForFactory(String step) {
-		String factoryName = getFactoryName(step);
+		String factoryName = convertToPascalCase(TestStepNameHelper.getComponentName(step)) + "Factory";
 		String interfaceName = getInterfaceName(step);
 		return factoryName + ".get(\"" + interfaceName + "\")";
 	}
@@ -78,13 +57,14 @@ public class CucumberClass extends CucumberJava {
 	}
 
 	private String getCallForInputOutputsForDocString(String step) throws Exception {
-		return "." + getSetOrAssert(step) + "InputOutputs(" + "\"Content\", docString" + getSectionArg(step) + ")";
+		return "." + getSetOrAssert(step) + "InputOutputs(" + "\"Content\", docString" + getSectionArg(step)
+				+ getNegativeArg(step) + ")";
 	}
 
 	private String getCallForInputOutputsForState(String step) throws Exception {
-
 		return "." + getSetOrAssert(step) + "InputOutputs(\""
-				+ StringUtils.capitalize(TestStepNameHelper.getStateType(step)) + "\"" + getSectionArg(step) + ")";
+				+ StringUtils.capitalize(TestStepNameHelper.getStateType(step)) + "\"" + getSectionArg(step)
+				+ getNegativeArg(step) + ")";
 	}
 
 	private String getCallForPath(String step) {
@@ -96,22 +76,13 @@ public class CucumberClass extends CucumberJava {
 	}
 
 	protected String getFactoryImport(String step) {
-		return "org.farhan.common." + getFactoryName(step);
-	}
-
-	private String getFactoryName(String step) {
-		String name = TestStepNameHelper.getComponentName(step);
-		name = convertToCamelCase(name);
-		return StringUtils.capitalize(name) + "Factory";
+		return "org.farhan.common." + convertToPascalCase(TestStepNameHelper.getComponentName(step)) + "Factory";
 	}
 
 	protected String getInterfaceName(String step) {
-		String name = TestStepNameHelper.getObjectName(step);
-		String nameParts[] = name.split("/");
-		name = nameParts[nameParts.length - 1];
-		name = convertToCamelCase(name);
-		name = name + StringUtils.capitalize(TestStepNameHelper.getObjectType(step));
-		return name;
+		String nameParts[] = TestStepNameHelper.getObjectName(step).split("/");
+		String name = nameParts[nameParts.length - 1];
+		return convertToPascalCase(name) + StringUtils.capitalize(TestStepNameHelper.getObjectType(step));
 	}
 
 	private String getNegativeArg(String step) {
@@ -140,14 +111,5 @@ public class CucumberClass extends CucumberJava {
 			section = ", \"" + section + "\"";
 		}
 		return section;
-	}
-
-	private Statement getStatement(BlockStmt body, String statement) {
-		for (Statement s : body.getStatements()) {
-			if (s.toString().contentEquals(statement)) {
-				return s;
-			}
-		}
-		return null;
 	}
 }

@@ -35,7 +35,7 @@ import org.farhan.dsl.sheepdog.sheepDog.TestStep;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 
-public class AsciiDoctorTestSuite extends AsciiDoctorAsciidoc implements ConvertibleObject {
+public class AsciiDoctorTestSuite implements ConvertibleObject {
 
 	private TestSuite theFeature;
 	private String thePath;

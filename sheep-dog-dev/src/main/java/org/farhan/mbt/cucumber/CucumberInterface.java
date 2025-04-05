@@ -14,46 +14,38 @@ public class CucumberInterface extends CucumberJava {
 		getType().setInterface(true);
 	}
 
-	public MethodDeclaration addStepDefinition(String step) throws Exception {
-		if (theJavaClass.getImports().isEmpty()) {
+	public MethodDeclaration addMethod(String methodName, boolean hasParams) {
+		MethodDeclaration aMethod = super.addMethod(methodName);
+		aMethod.removeBody();
+		if (hasParams) {
 			theJavaClass.addImport("java.util.HashMap");
-		}
-		if (!TestStepNameHelper.isEdge(step) && TestStepNameHelper.getAttachment(step).isEmpty()) {
-
-			MethodDeclaration aMethod = addMethod(
-					getSetOrAssert(step) + convertToPascalCase(TestStepNameHelper.getDetails(step))
-							+ convertToPascalCase(TestStepNameHelper.getStateType(step)));
-			aMethod.removeBody();
 			addParameter(aMethod, "HashMap<String, String>", "keyMap");
-			return aMethod;
-
-		} else if (TestStepNameHelper.isEdge(step)) {
-			return addMethod("transition").removeBody();
-		} else {
-			// data table or doc string will cover this
-			// TODO rename this to createStepForStepObjWithoutAttachment. have the converter
-			// call either this or a docstring or datatable method
-			return null;
 		}
+		return aMethod;
 	}
 
-	public void addStepParameters(String stepDefinitionName, ArrayList<String> paramList) throws Exception {
-		if (paramList.isEmpty()) {
-			return;
-		}
-		MethodDeclaration aMethod;
-		if (TestStepNameHelper.isNegativeStep(stepDefinitionName)) {
-			aMethod = addMethod(getSetOrAssert(stepDefinitionName)
-					+ convertToPascalCase(TestStepNameHelper.getDetails(stepDefinitionName)) + "Negative");
-			aMethod.removeBody();
-			addParameter(aMethod, "HashMap<String, String>", "keyMap");
-		} else {
+	public void addStepDefinition(String name, ArrayList<String> paramList) throws Exception {
+
+		if (TestStepNameHelper.isEdge(name)) {
+			addMethod("transition", false);
 			for (String param : paramList) {
-				aMethod = addMethod(getSetOrAssert(stepDefinitionName)
-						+ convertToPascalCase(TestStepNameHelper.getDetails(stepDefinitionName))
-						+ StringUtils.capitalize(convertToCamelCase(param)));
-				aMethod.removeBody();
-				addParameter(aMethod, "HashMap<String, String>", "keyMap");
+				addMethod(getSetOrAssert(name) + convertToPascalCase(TestStepNameHelper.getDetails(name))
+						+ StringUtils.capitalize(convertToCamelCase(param)), true);
+			}
+		} else {
+			if (TestStepNameHelper.isNegativeStep(name)) {
+				addMethod(getSetOrAssert(name) + convertToPascalCase(TestStepNameHelper.getDetails(name)) + "Negative",
+						true);
+			} else {
+				if (paramList.size() == 0) {
+					addMethod(getSetOrAssert(name) + convertToPascalCase(TestStepNameHelper.getDetails(name))
+							+ convertToPascalCase(TestStepNameHelper.getStateType(name)), true);
+				} else {
+					for (String param : paramList) {
+						addMethod(getSetOrAssert(name) + convertToPascalCase(TestStepNameHelper.getDetails(name))
+								+ StringUtils.capitalize(convertToCamelCase(param)), true);
+					}
+				}
 			}
 		}
 	}

@@ -4,21 +4,21 @@ import java.util.HashMap;
 
 public interface ObjectPageJavaFile {
 
-    public void assertFieldsSectionMethodName(HashMap<String, String> keyMap);
+    public void assertHeaderSectionImport(HashMap<String, String> keyMap);
 
-    public void assertFieldsSectionVisibility(HashMap<String, String> keyMap);
+    public void assertHeaderSectionInterfaceName(HashMap<String, String> keyMap);
 
-    public void assertFieldsSectionReturnType(HashMap<String, String> keyMap);
+    public void assertHeaderSectionPackage(HashMap<String, String> keyMap);
 
-    public void assertFieldsSectionParameterName(HashMap<String, String> keyMap);
+    public void assertMethodsSectionMethodName(HashMap<String, String> keyMap);
 
-    public void assertFieldsSectionParameterType(HashMap<String, String> keyMap);
+    public void assertMethodsSectionVisibility(HashMap<String, String> keyMap);
 
-    public void assertObjectSectionImport(HashMap<String, String> keyMap);
+    public void assertMethodsSectionReturnType(HashMap<String, String> keyMap);
 
-    public void assertObjectSectionInterfaceName(HashMap<String, String> keyMap);
+    public void assertMethodsSectionParameterName(HashMap<String, String> keyMap);
 
-    public void assertObjectSectionPackage(HashMap<String, String> keyMap);
+    public void assertMethodsSectionParameterType(HashMap<String, String> keyMap);
 
     public void setContent(HashMap<String, String> keyMap);
 

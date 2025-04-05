@@ -15,18 +15,18 @@ public class CodePrjBlahObjectPageStepsJavaFileSteps extends TestSteps {
         super(object);
     }
 
-    @Given("^The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Fields section will be created as follows$")
-    public void theCodePrjProjectSrcGenTestJavaOrgFarhanStepdefsBlahBlahObjectPageStepsJavaFileFieldsSectionWillBeCreatedAsFollows(DataTable dataTable) {
+    @Given("^The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Header section will be created as follows$")
+    public void theCodePrjProjectSrcGenTestJavaOrgFarhanStepdefsBlahBlahObjectPageStepsJavaFileHeaderSectionWillBeCreatedAsFollows(DataTable dataTable) {
         object.setComponent("code-prj");
         object.setPath("src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java");
-        object.assertInputOutputs(dataTable, "FieldsSection");
+        object.assertInputOutputs(dataTable, "HeaderSection");
     }
 
-    @Given("^The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Object section will be created as follows$")
-    public void theCodePrjProjectSrcGenTestJavaOrgFarhanStepdefsBlahBlahObjectPageStepsJavaFileObjectSectionWillBeCreatedAsFollows(DataTable dataTable) {
+    @Given("^The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows$")
+    public void theCodePrjProjectSrcGenTestJavaOrgFarhanStepdefsBlahBlahObjectPageStepsJavaFileMethodsSectionWillBeCreatedAsFollows(DataTable dataTable) {
         object.setComponent("code-prj");
         object.setPath("src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java");
-        object.assertInputOutputs(dataTable, "ObjectSection");
+        object.assertInputOutputs(dataTable, "MethodsSection");
     }
 
     @Given("^The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows$")

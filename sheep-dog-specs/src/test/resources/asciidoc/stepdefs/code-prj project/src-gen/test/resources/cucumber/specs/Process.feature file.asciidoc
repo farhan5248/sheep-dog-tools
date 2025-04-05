@@ -1,4 +1,4 @@
-= Step-Object: src/test/resources/cucumber/Process.feature file
+= Step-Object: src-gen/test/resources/cucumber/specs/Process.feature file
 
 == Step-Definition: Background section will be created as follows
 

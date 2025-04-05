@@ -10,7 +10,7 @@
 
 == Step-Definition: is deleted
 
-== Step-Definition: Object section will be created as follows
+== Step-Definition: Header section will be created as follows
 
 === Step-Parameters: 1
 

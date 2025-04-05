@@ -23,7 +23,7 @@ Feature: UMLStepObjectToDocument
       And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
       And The maven plugin, uml-to-asciidoctor goal is executed
      Then The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
-      And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Object section will be created as follows
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Header section will be created as follows
           | Name        |
           | Object page |
 
@@ -49,7 +49,7 @@ Feature: UMLStepObjectToDocument
       And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
       And The maven plugin, uml-to-asciidoctor goal is executed
      Then The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
-      And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Object section will be created as follows
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Header section will be created as follows
           | Name        | Statements  |
           | Object page | Desc line 1 |
 
@@ -76,7 +76,7 @@ Feature: UMLStepObjectToDocument
       And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
       And The maven plugin, uml-to-asciidoctor goal is executed
      Then The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
-      And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Object section will be created as follows
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Header section will be created as follows
           | Name        | Statements               |
           | Object page | Desc line 1\nDesc line 2 |
 
@@ -104,7 +104,7 @@ Feature: UMLStepObjectToDocument
       And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted
       And The maven plugin, uml-to-asciidoctor goal is executed
      Then The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present
-      And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Object section will be created as follows
+      And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Header section will be created as follows
           | Name        | Statements                            |
           | Object page | Desc line 1\nDesc line 2\nDesc line 3 |
 
