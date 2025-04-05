@@ -4,7 +4,7 @@ Feature: UMLStepDefinitionToDocument
   \@sheep-dog-dev
   TODO there's no test for no parameters and docstring vs datatable. Other tests implicitly cover docstring as a special parameter with the name content
 
-  Scenario: No statement, one step parameter
+  Background: Create a test case
 
     Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
@@ -12,8 +12,15 @@ Feature: UMLStepDefinitionToDocument
           
           == Test-Case: Submit
           
-          === Given: The blah application, Object page is empty
+          === Given: The blah application, Object page is created as follows
+          
+          |===
+          | h1
+          |===
           """
+
+  Scenario: No statement, one step parameter
+
       And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
           = Step-Object: Object page
@@ -36,14 +43,6 @@ Feature: UMLStepDefinitionToDocument
 
   Scenario: One statement, one step parameter
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
-          """
-          = Test-Suite: Process
-          
-          == Test-Case: Submit
-          
-          === Given: The blah application, Object page is empty
-          """
       And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
           = Step-Object: Object page
@@ -68,14 +67,6 @@ Feature: UMLStepDefinitionToDocument
 
   Scenario Outline: Two statements, two step parameters
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
-          """
-          = Test-Suite: Process
-          
-          == Test-Case: Submit
-          
-          === Given: The blah application, Object page is empty
-          """
       And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
           = Step-Object: Object page
@@ -116,14 +107,6 @@ Feature: UMLStepDefinitionToDocument
 
   Scenario Outline: Three statements, three step parameters
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
-          """
-          = Test-Suite: Process
-          
-          == Test-Case: Submit
-          
-          === Given: The blah application, Object page is empty
-          """
       And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
           = Step-Object: Object page

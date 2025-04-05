@@ -1,6 +1,5 @@
 package org.farhan.stepdefs.codeprj.srcgen.test.java.org.farhan.stepdefs.blah;
 
-import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import org.farhan.common.TestSteps;
 import org.farhan.objects.codeprj.srcgen.test.java.org.farhan.stepdefs.blah.BlahObjectPageStepsJavaFile;
@@ -9,20 +8,6 @@ public class CodePrjBlahObjectPageStepsJavaFileSteps extends TestSteps {
 
     public CodePrjBlahObjectPageStepsJavaFileSteps(BlahObjectPageStepsJavaFile object) {
         super(object);
-    }
-
-    @Given("^The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Fields section will be created as follows$")
-    public void theCodePrjProjectSrcGenTestJavaOrgFarhanStepdefsBlahBlahObjectPageStepsJavaFileFieldsSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.setComponent("code-prj");
-        object.setPath("src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java");
-        object.assertInputOutputs(dataTable, "FieldsSection");
-    }
-
-    @Given("^The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Object section will be created as follows$")
-    public void theCodePrjProjectSrcGenTestJavaOrgFarhanStepdefsBlahBlahObjectPageStepsJavaFileObjectSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.setComponent("code-prj");
-        object.setPath("src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java");
-        object.assertInputOutputs(dataTable, "ObjectSection");
     }
 
     @Given("^The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file is created as follows$")

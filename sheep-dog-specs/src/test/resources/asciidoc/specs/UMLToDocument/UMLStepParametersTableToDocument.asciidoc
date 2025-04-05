@@ -2,7 +2,7 @@
 
 @sheep-dog-dev
 
-== Test-Case: One cell
+== Test-Setup: Create a test case
 
 === Given: The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
 
@@ -11,8 +11,14 @@
 
 == Test-Case: Submit
 
-=== Given: The blah application, Object page is empty
+=== Given: The blah application, Object page is created as follows
+
+|===
+| h1
+|===
 ----
+
+== Test-Case: One cell
 
 === And: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
@@ -47,16 +53,6 @@ Desc line 1
 
 == Test-Case: Two cells
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
-
-----
-= Test-Suite: Process
-
-== Test-Case: Submit
-
-=== Given: The blah application, Object page is empty
-----
-
 === And: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 
 ----
@@ -89,16 +85,6 @@ Desc line 1
 |===
 
 == Test-Case: Three cells
-
-=== Given: The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
-
-----
-= Test-Suite: Process
-
-== Test-Case: Submit
-
-=== Given: The blah application, Object page is empty
-----
 
 === And: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
 

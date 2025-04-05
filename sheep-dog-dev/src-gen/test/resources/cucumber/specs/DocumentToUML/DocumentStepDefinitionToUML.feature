@@ -4,7 +4,7 @@ Feature: DocumentStepDefinitionToUML
   \@sheep-dog-dev
   TODO add tests for document parameters
 
-  Scenario: No statement, one step parameter
+  Background: Create a test case
 
     Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
           """
@@ -12,8 +12,15 @@ Feature: DocumentStepDefinitionToUML
           
           == Test-Case: Submit
           
-          === Given: The blah application, Object page is empty
+          === Given: The blah application, Object page is created as follows
+          
+          |===
+          | h1
+          |===
           """
+
+  Scenario: No statement, one step parameter
+
       And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
           = Step-Object: Object page
@@ -34,14 +41,6 @@ Feature: DocumentStepDefinitionToUML
 
   Scenario: One statement, one step parameter
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
-          """
-          = Test-Suite: Process
-          
-          == Test-Case: Submit
-          
-          === Given: The blah application, Object page is empty
-          """
       And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
           = Step-Object: Object page
@@ -64,14 +63,6 @@ Feature: DocumentStepDefinitionToUML
 
   Scenario Outline: Two statements, two step parameters
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
-          """
-          = Test-Suite: Process
-          
-          == Test-Case: Submit
-          
-          === Given: The blah application, Object page is empty
-          """
       And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
           = Step-Object: Object page
@@ -110,14 +101,6 @@ Feature: DocumentStepDefinitionToUML
 
   Scenario Outline: Three statements, three step parameters
 
-    Given The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows
-          """
-          = Test-Suite: Process
-          
-          == Test-Case: Submit
-          
-          === Given: The blah application, Object page is empty
-          """
       And The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
           """
           = Step-Object: Object page

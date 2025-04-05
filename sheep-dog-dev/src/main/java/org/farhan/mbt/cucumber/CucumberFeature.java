@@ -47,10 +47,10 @@ public class CucumberFeature implements ConvertibleObject {
 	}
 
 	public Background addBackground(String backgroundName) {
-		int position = deleteAbstractScenario(backgroundName);
+		deleteAbstractScenario(backgroundName);
 		Background background = CucumberFactory.eINSTANCE.createBackground();
 		background.setName(backgroundName);
-		theFeature.getAbstractScenarios().add(position, background);
+		theFeature.getAbstractScenarios().add(0, background);
 		return background;
 	}
 

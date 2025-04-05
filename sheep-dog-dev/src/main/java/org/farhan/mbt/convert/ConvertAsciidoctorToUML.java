@@ -1,7 +1,6 @@
 package org.farhan.mbt.convert;
 
-import java.util.ArrayList;
-
+import java.util.TreeSet;
 import org.farhan.dsl.common.LanguageHelper;
 import org.farhan.dsl.sheepdog.LanguageAccessImpl;
 import org.farhan.mbt.asciidoctor.AsciiDoctorTestSuite;
@@ -24,7 +23,9 @@ import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 
 public class ConvertAsciidoctorToUML extends Converter {
 
-	private static ArrayList<String> stepObjects = new ArrayList<String>();
+	// TODO why is this static?
+	private static TreeSet<String> stepObjects = new TreeSet<String>();
+	private static TreeSet<String> stepDefinitions = new TreeSet<String>();
 	protected AsciiDoctorPathConverter pathConverter;
 	private AsciiDoctorTestSuite srcObjTestSuite;
 	private AsciiDoctorStepObject srcObjStepObject;
@@ -37,6 +38,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 	public void clearProjects() throws Exception {
 		fa.clear(tag);
 		stepObjects.clear();
+		stepDefinitions.clear();
 	}
 
 	@Override
@@ -73,7 +75,9 @@ public class ConvertAsciidoctorToUML extends Converter {
 			UMLStepObject stepObject = model.addStepObject(pathConverter.convertUMLPath(srcObjStepObject.getPath()));
 			stepObject.setDescription(srcObjStepObject.getStepObjectDescription());
 			for (StepDefinition sd : srcObjStepObject.getStepDefinitionList()) {
-				convertStepDefinition(stepObject.addStepDefinition(srcObjStepObject.getStepDefinitionName(sd)), sd);
+				if (stepDefinitions.contains(srcObjStepObject.getStepDefinitionNameLong(sd))) {
+					convertStepDefinition(stepObject.addStepDefinition(srcObjStepObject.getStepDefinitionName(sd)), sd);
+				}
 			}
 			model.save();
 		} else {
@@ -122,6 +126,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		stepObjects.add(LanguageHelper.getStepObjectQualifiedName(new LanguageAccessImpl(srcStep)));
 		step.setKeyword(srcObjTestSuite.getStepKeyword(srcStep));
 		step.setNameLong(srcObjTestSuite.getStepNameLong(srcStep));
+		stepDefinitions.add(step.getNameLong().replaceFirst(step.getKeyword(), "").trim());
 		if (srcObjTestSuite.hasDocString(srcStep)) {
 			step.setStepText(srcObjTestSuite.getDocString(srcStep));
 		} else if (srcObjTestSuite.hasStepTable(srcStep)) {
