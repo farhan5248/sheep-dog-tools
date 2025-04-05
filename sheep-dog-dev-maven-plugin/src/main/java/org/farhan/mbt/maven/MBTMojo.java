@@ -65,10 +65,12 @@ public abstract class MBTMojo extends AbstractMojo {
 					if (fileName.startsWith(dir + "stepdefs")) {
 						tempFiles.add(fileName);
 					} else {
+						getLog().debug("fileName: " + fileName);
 						mojo.convertFile(fileName, sr.get(fileName));
 					}
 				}
 				for (String fileName : tempFiles) {
+					getLog().debug("fileName: " + fileName);
 					mojo.convertFile(fileName, sr.get(fileName));
 				}
 			} else {
