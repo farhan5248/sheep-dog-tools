@@ -7,6 +7,7 @@ import org.farhan.dsl.sheepdog.sheepDog.Statement;
 import org.farhan.dsl.sheepdog.sheepDog.StepDefinition;
 import org.farhan.dsl.sheepdog.sheepDog.StepObject;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
+import org.farhan.dsl.sheepdog.sheepDog.Table;
 import org.farhan.dsl.sheepdog.sheepDog.TestCase;
 import org.farhan.dsl.sheepdog.sheepDog.TestData;
 import org.farhan.dsl.sheepdog.sheepDog.TestSetup;
@@ -37,7 +38,8 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
 						highlightStatement(s, acceptor, 0);
 					}
 					for (TestStep s : ts.getTestStepList()) {
-						highlightTestStep(s, acceptor);
+						highlightStepParameters(s, acceptor, 0);
+						highlightTable(s.getTable(), acceptor);
 					}
 				} else if (child instanceof TestCase) {
 					TestCase tc = (TestCase) child;
@@ -45,13 +47,14 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
 						highlightStatement(s, acceptor, 0);
 					}
 					for (TestStep s : tc.getTestStepList()) {
-						highlightTestStep(s, acceptor);
+						highlightStepParameters(s, acceptor, 0);
+						highlightTable(s.getTable(), acceptor);
 					}
 					for (TestData example : tc.getTestDataList()) {
 						for (Statement s : example.getStatementList()) {
 							highlightStatement(s, acceptor, 0);
 						}
-						highlightTestData(example, acceptor);
+						highlightTable(example.getTable(), acceptor);
 					}
 				}
 			}
@@ -68,6 +71,7 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
 					for (Statement s : sp.getStatementList()) {
 						highlightStatement(s, acceptor, 0);
 					}
+					highlightTable(sp.getTable(), acceptor);
 				}
 			}
 		}
@@ -76,8 +80,8 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
 	private void highlightStepParameters(TestStep testStep, IHighlightedPositionAcceptor acceptor, int current) {
 		if (testStep != null) {
 			INode node = NodeModelUtils.getNode(testStep);
-			int start = node.getText().indexOf('<', current);
-			int stop = node.getText().indexOf('>', start);
+			int start = node.getText().indexOf('{', current);
+			int stop = node.getText().indexOf('}', start);
 			if (start > 0 && stop > 0 && node.getText().charAt(start + 1) != ' ') {
 				acceptor.addPosition(node.getTotalOffset() + start, stop - start + 1,
 						SheepDogHighlightingConfiguration.TBL_ID);
@@ -103,15 +107,13 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
 		}
 	}
 
-	private void highlightTestData(TestData example, IHighlightedPositionAcceptor acceptor) {
-		// TODO this is for example table mapping
-
-	}
-
-	private void highlightTestStep(TestStep testStep, IHighlightedPositionAcceptor acceptor) {
-		if (testStep.eContainer() instanceof TestCase && testStep.getName() != null) {
-			this.highlightStepParameters(testStep, acceptor, 0);
+	private void highlightTable(Table table, IHighlightedPositionAcceptor acceptor) {
+		if (table != null) {
+			if (table.getRowList().size() > 0) {
+				INode node = NodeModelUtils.getNode(table.getRowList().get(0));
+				acceptor.addPosition(node.getTotalOffset(), node.getLength(), SheepDogHighlightingConfiguration.TBL_ID);
+			}
 		}
-		// TODO also handle table headers
 	}
+
 }
