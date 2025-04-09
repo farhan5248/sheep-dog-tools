@@ -8,8 +8,9 @@ public class ValidatorTest {
 
 	@Test
 	public void testGetComponentObjectState() {
-		Assertions.assertTrue(TestStepNameHelper.getComponent("The Something1 application, Something2 request is executed with")
-				.contentEquals("Something1 application"));
+		Assertions.assertTrue(
+				TestStepNameHelper.getComponent("The Something1 application, Something2 request is executed with")
+						.contentEquals("Something1 application"));
 	}
 
 	@Test
@@ -20,14 +21,15 @@ public class ValidatorTest {
 
 	@Test
 	public void testGetComponent() {
-		Assertions.assertTrue(
-				TestStepNameHelper.getComponent("The Something1 application, ").contentEquals("Something1 application"));
+		Assertions.assertTrue(TestStepNameHelper.getComponent("The Something1 application, ")
+				.contentEquals("Something1 application"));
 	}
 
 	@Test
 	public void testGetObjectComponentState() {
-		Assertions.assertTrue(TestStepNameHelper.getObject("The Something1 application, Something2 request is executed with")
-				.contentEquals("Something2 request"));
+		Assertions.assertTrue(
+				TestStepNameHelper.getObject("The Something1 application, Something2 request is executed with")
+						.contentEquals("Something2 request"));
 	}
 
 	@Test
@@ -38,7 +40,8 @@ public class ValidatorTest {
 
 	@Test
 	public void testGetObject() {
-		Assertions.assertTrue(TestStepNameHelper.getObject("The Something2 request").contentEquals("Something2 request"));
+		Assertions
+				.assertTrue(TestStepNameHelper.getObject("The Something2 request").contentEquals("Something2 request"));
 	}
 
 	@Test
@@ -50,20 +53,18 @@ public class ValidatorTest {
 
 	@Test
 	public void testHasModalityWithDetails() {
-		Assertions.assertTrue(
-				TestStepNameHelper.getUpToModality("The Something1 application, Something2 request Something3 section is")
-						.contentEquals("The Something1 application, Something2 request Something3 section is"));
+		Assertions.assertTrue(TestStepNameHelper
+				.hasStateModality("The Something1 application, Something2 request Something3 section is"));
 	}
 
 	@Test
 	public void testHasModalityWithoutDetails() {
-		Assertions.assertTrue(TestStepNameHelper.getUpToModality("The Something1 application, Something2 request is")
-				.contentEquals("The Something1 application, Something2 request is"));
+		Assertions.assertTrue(TestStepNameHelper.hasStateModality("The Something1 application, Something2 request is"));
 	}
 
 	@Test
 	public void testHasModalityEmpty() {
-		Assertions.assertTrue(TestStepNameHelper.getUpToModality("The Something1 application, Something2 request").isEmpty());
+		Assertions.assertFalse(TestStepNameHelper.hasStateModality("The Something1 application, Something2 request"));
 	}
 
 	@Test
@@ -73,7 +74,7 @@ public class ValidatorTest {
 
 	@Test
 	public void testHasDetails() {
-		Assertions
-				.assertTrue(TestStepNameHelper.hasDetails("The Something1 application, Something2 request something section"));
+		Assertions.assertTrue(
+				TestStepNameHelper.hasDetails("The Something1 application, Something2 request something section"));
 	}
 }

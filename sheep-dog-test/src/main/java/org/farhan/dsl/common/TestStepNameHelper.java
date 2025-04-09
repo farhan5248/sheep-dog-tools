@@ -6,19 +6,16 @@ import java.util.regex.Pattern;
 public class TestStepNameHelper {
 
 	private static final String NAME_REGEX = "[^,]";
-	private static final String COMPONENT_REGEX = "(( " + NAME_REGEX + "+)" + getComponentRegex() + ",)?";
+	private static final String COMPONENT_REGEX = "( " + NAME_REGEX + "+)" + getComponentRegex() + ",";
 	private static final String OBJECT_REGEX = "(( " + NAME_REGEX + "+)(" + getObjectVertexRegex() + "|"
 			+ getObjectEdgeRegex() + "))";
-	private static final String DETAILS_REGEX = "(( " + NAME_REGEX + "+)" + getDetailRegex() + ")?";
+	private static final String DETAILS_REGEX = "( " + NAME_REGEX + "+)" + getDetailRegex();
 	private static final String STATE_REGEX = "(" + getStateModalityRegex() + getStateAttributeRegex()
 			+ getAttachmentRegex() + "?)";
-	private static final String TIME_REGEX = "( early| late| on time|( at| before| after| in| on)(.*))?";
-	private static final String PREDICATE_REGEX = "(" + DETAILS_REGEX + STATE_REGEX + TIME_REGEX + ")";
-	private static final String REGEX = "The" + COMPONENT_REGEX + OBJECT_REGEX + PREDICATE_REGEX;
-
-	private static String getStateAttributeRegex() {
-		return "( \\S+)";
-	}
+	private static final String TIME_REGEX = " early| late| on time|( at| before| after| in| on)(.*)";
+	private static final String PREDICATE_REGEX = "(" + "(" + DETAILS_REGEX + ")?" + STATE_REGEX + "(" + TIME_REGEX
+			+ ")?" + ")";
+	private static final String REGEX = "The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + PREDICATE_REGEX;
 
 	public static String getAttachment(String text) {
 		return getGroup(text, 16);
@@ -34,7 +31,7 @@ public class TestStepNameHelper {
 	}
 
 	public static String getComponent(String text) {
-		return getGroup("The" + COMPONENT_REGEX, text, 1).replace(",", "");
+		return getGroup("The" + "(" + COMPONENT_REGEX + ")", text, 1).replace(",", "");
 	}
 
 	public static String getComponentName(String text) {
@@ -75,11 +72,88 @@ public class TestStepNameHelper {
 		return types;
 	}
 
-	public static String getErrorMessage() {
-		String rules = "\nThe component is: " + COMPONENT_REGEX + "\nThe object is: " + OBJECT_REGEX
-				+ "\nThe details are: " + DETAILS_REGEX + "\nThe state is: " + STATE_REGEX + "\nThe Time is: "
-				+ TIME_REGEX;
-		return "This is an invalid statement. These are the rules:" + rules;
+	private static String getErrorMessage() {
+		return getErrorMessageComponent() + "\n\n" + getErrorMessageObject() + "\n\n" + getErrorMessageDetails()
+				+ "\n\n" + getErrorMessageState() + "\n\n" + getErrorMessageTime();
+	}
+
+	public static String getErrorMessage(String text) {
+		// TODO make tests for all of these documenting the message content
+
+		if (text == null) {
+			return getErrorMessage();
+		}
+
+		if (!hasObject(text)) {
+			if (!hasComponent(text)) {
+				return getErrorMessageComponent() + "\n\n" + getErrorMessageObject();
+			} else {
+				return getErrorMessageObject();
+			}
+		} else {
+			// There can't be a predicate since it's invalid so is there at least state
+			if (!hasState(text)) {
+				if (!hasDetails(text)) {
+					return getErrorMessageState() + "\n\n" + getErrorMessageDetails();
+				} else {
+					return getErrorMessageState();
+				}
+			} else {
+				// if there's a state but it's still invalid, the only part after that is time
+				// or
+				// "is as" which passes for "is present" etc
+				if (!hasTime(text)) {
+					return getErrorMessageTime();
+				} else {
+					// put all the error messages because there's something weird
+					return getErrorMessage();
+				}
+			}
+		}
+	}
+
+	private static String getErrorMessageComponent() {
+		return "Every test case must have at least one component specified."
+				+ "\nThis should be the first part of the test step name."
+				+ "\nThe component is optional, but if it is present, it must be followed by a comma."
+				+ "\n\nThe component regex is: " + COMPONENT_REGEX
+				+ "\nComponent ending words are: application, service, plugin, batchjob, project."
+				+ "\nExamples are: \"The something application,\" or \"The something service,\"";
+	}
+
+	private static String getErrorMessageDetails() {
+		return "After specifying the object, a predicate is specified."
+				+ "\nIt has 3 parts, details, state and time; details is optional."
+				+ "\nThis is used to specify a part in a document, like the header or body."
+				+ "\n\nThe details regex is: " + DETAILS_REGEX
+				+ "\nThe details ending words are: section, fragment, table, snippet, list."
+				+ "\nExamples are: \"Customer details section\" or \"Order History table\"";
+	}
+
+	private static String getErrorMessageObject() {
+		return "Every test step must have the object specified." + "\nThe object can have the complete path or not."
+				+ "\n\nThe object regex is: " + OBJECT_REGEX
+				+ "\nObject ending words are: file, page, response, dialog, directory, request, goal, job, action."
+				+ "\nExamples are: \"src/test/resources/file.txt file\" or \"Home page\"";
+	}
+
+	private static String getErrorMessageState() {
+		return "After specifying the object, a predicate is specified."
+				+ "\nIt has 3 parts, details, state and time; state is mandatory."
+				+ "\nThis part begins with words like is or isn't which get converted to setters or assertions in the test automation."
+				+ "\nNext it's followed by the state attribute which is optional and can be any word."
+				+ "\nThe last part is the attachment which is optional." + "\n\nThe state regex is: " + STATE_REGEX
+				+ "\nThe state starting words are: is, isn't, will be, won't be."
+				+ "\nExamples are: \"is present\" or \"will be created as follows\"";
+	}
+
+	private static String getErrorMessageTime() {
+		return "After specifying the object, a predicate is specified."
+				+ "\nIt has 3 parts, details, state and time; time is optional."
+				+ "\nA test step can end with the time specified."
+				+ "\nThis was useful running describing a sequence of steps like submitting an order before 5pm."
+				+ "\n\nThe time regex is: " + TIME_REGEX + "\nExamples are: \"after the next day\" or \"on time\""
+				+ "\nThe time endings are: early, late, on time, at, before, after, in, on.";
 	}
 
 	public static String getGroup(String text, int group) {
@@ -100,7 +174,7 @@ public class TestStepNameHelper {
 	}
 
 	public static String getObject(String text) {
-		return getGroup("The" + COMPONENT_REGEX + OBJECT_REGEX, text, 4);
+		return getGroup("The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX, text, 4);
 	}
 
 	private static String getObjectEdgeRegex() {
@@ -130,7 +204,7 @@ public class TestStepNameHelper {
 	}
 
 	public static String getPredicate(String text) {
-		return getGroup("The" + COMPONENT_REGEX + OBJECT_REGEX + "(.*)", text, 9);
+		return getGroup("The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + "(.*)", text, 9);
 	}
 
 	private static String getRegexFromTypes(String[] types) {
@@ -143,6 +217,10 @@ public class TestStepNameHelper {
 
 	public static String getState(String text) {
 		return getGroup(text, 13);
+	}
+
+	private static String getStateAttributeRegex() {
+		return "( \\S+)";
 	}
 
 	public static String getStateModality(String text) {
@@ -166,20 +244,49 @@ public class TestStepNameHelper {
 		return getGroup(text, 17);
 	}
 
-	public static boolean hasAttachment(String text) {
-		return !getAttachment(text).isEmpty();
-	}
-
 	public static boolean hasComponent(String text) {
-		return !getComponentName(text).isEmpty();
+		return !getGroup("The" + "(" + COMPONENT_REGEX + ")", text, 0).isBlank();
 	}
 
 	public static boolean hasDetails(String text) {
-		return !getGroup("The" + COMPONENT_REGEX + OBJECT_REGEX + DETAILS_REGEX, text, 9).isBlank();
+		return !getGroup("The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + "(" + "(" + DETAILS_REGEX + ")" + ")",
+				text, 0).isBlank();
 	}
 
-	public static String getUpToModality(String text) {
-		return getGroup("The" + COMPONENT_REGEX + OBJECT_REGEX + DETAILS_REGEX + getStateModalityRegex(), text, 0);
+	public static boolean hasObject(String text) {
+		return !getGroup("The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX, text, 0).isBlank();
+	}
+
+	public static boolean hasPredicate(String text) {
+		return !getGroup("The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + PREDICATE_REGEX, text, 0).isBlank();
+	}
+
+	public static boolean hasState(String text) {
+		return !getGroup("The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + "(" + "(" + DETAILS_REGEX + ")?"
+				+ STATE_REGEX + ")", text, 0).isBlank();
+	}
+
+	public static boolean hasStateAttachment(String text) {
+		return !getGroup(
+				"The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + "(" + "(" + DETAILS_REGEX + ")?" + "("
+						+ getStateModalityRegex() + getStateAttributeRegex() + getAttachmentRegex() + ")" + ")",
+				text, 0).isBlank();
+	}
+
+	public static boolean hasStateAttribute(String text) {
+		return !getGroup("The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + "(" + "(" + DETAILS_REGEX + ")?" + "("
+				+ getStateModalityRegex() + getStateAttributeRegex() + ")" + ")", text, 0).isBlank();
+	}
+
+	public static boolean hasStateModality(String text) {
+		return !getGroup("The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + "(" + "(" + DETAILS_REGEX + ")?" + "("
+				+ getStateModalityRegex() + ")" + ")", text, 0).isBlank();
+	}
+
+	public static boolean hasTime(String text) {
+		return !getGroup(
+				"The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + "(" + STATE_REGEX + "(" + TIME_REGEX + ")" + ")",
+				text, 0).isBlank();
 	}
 
 	public static boolean isEdge(String text) {

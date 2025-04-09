@@ -104,37 +104,35 @@ public class LanguageHelper {
 	private static ArrayList<Proposal> getObjectDefinitionCompletion(ILanguageAccess la) {
 		ArrayList<Proposal> proposals = new ArrayList<Proposal>();
 		if (la.getStepName() != null) {
-			String upToModality = TestStepNameHelper.getUpToModality(la.getStepName());
-			if (upToModality.isBlank()) {
-				String predicate = TestStepNameHelper.getPredicate(la.getStepName());
-				if (predicate.isEmpty()) {
-					// TODO in the future get a list of words from existing definitions
-					proposals.add(new Proposal("details name", "Specify section etc", la.getStepName() + " details"));
-					for (String type : TestStepNameHelper.getStateModalityTypes()) {
-						proposals.add(new Proposal(type, type, la.getStepName() + " " + type));
-					}
-				} else {
-					if (TestStepNameHelper.hasDetails(la.getStepName())) {
+			if (!TestStepNameHelper.hasState(la.getStepName())) {
+				if (!TestStepNameHelper.hasStateModality(la.getStepName())) {
+					if (!TestStepNameHelper.hasDetails(la.getStepName())) {
+						for (String type : TestStepNameHelper.getDetailTypes()) {
+							proposals.add(new Proposal(type, type, la.getStepName() + " " + type));
+						}
 						for (String type : TestStepNameHelper.getStateModalityTypes()) {
 							proposals.add(new Proposal(type, type, la.getStepName() + " " + type));
 						}
 					} else {
-						for (String type : TestStepNameHelper.getDetailTypes()) {
+						for (String type : TestStepNameHelper.getStateModalityTypes()) {
 							proposals.add(new Proposal(type, type, la.getStepName() + " " + type));
 						}
 					}
-				}
-			} else {
-				if (la.getStepName().replace(upToModality, "").isBlank()) {
-					// TODO in the future get a list of words from existing definitions
-					proposals.add(new Proposal("attribute name", "Specify created etc", la.getStepName() + " created"));
 				} else {
-					if (TestStepNameHelper.getAttachment(la.getStepName()).isBlank()) {
+					if (!TestStepNameHelper.hasStateAttachment(la.getStepName())) {
 						for (String type : TestStepNameHelper.getAttachmentTypes()) {
 							proposals.add(new Proposal(type, type, la.getStepName() + " " + type));
 						}
 					}
+					// TODO suggest state attribute from list of existing keywords in that object
 				}
+			} else {
+				if (!TestStepNameHelper.hasStateAttachment(la.getStepName())) {
+					for (String type : TestStepNameHelper.getAttachmentTypes()) {
+						proposals.add(new Proposal(type, type, la.getStepName() + " " + type));
+					}
+				}
+				// TODO suggest time
 			}
 		}
 		return proposals;
@@ -335,7 +333,7 @@ public class LanguageHelper {
 	public static String validateError(ILanguageAccess la) throws Exception {
 
 		if (!TestStepNameHelper.isValid(la.getStepName())) {
-			return TestStepNameHelper.getErrorMessage();
+			return TestStepNameHelper.getErrorMessage(la.getStepName());
 		} else {
 			if (la.getAllSteps().getFirst().equals(la.getStep())) {
 				if (TestStepNameHelper.getComponent(la.getStepName()).isEmpty()) {

@@ -107,7 +107,6 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	private void completeName(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
-			// TODO rename propose to proposeStep
 			for (Entry<String, Proposal> p : LanguageHelper.proposeTestStepName(new LanguageAccessImpl(step)).entrySet()) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue().getReplacement(), p.getValue().getDisplay(), null, context);
