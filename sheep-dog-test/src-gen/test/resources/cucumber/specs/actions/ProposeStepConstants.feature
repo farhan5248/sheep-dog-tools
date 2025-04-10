@@ -11,7 +11,7 @@ Feature: ProposeStepConstants
      When The xtext plugin, propose test step action is performed
      Then The xtext plugin, propose content dialog will be set as follows
           | Suggestion            | Suggestion Name  |
-          | The blah application, | blah application |
+          | The blah application, | The blah application |
 
   Scenario: Object types
 

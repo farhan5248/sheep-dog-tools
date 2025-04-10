@@ -61,8 +61,7 @@ public class LanguageHelper {
 			if (la.getStepName().startsWith("The ")) {
 				Proposal proposal;
 				for (String type : TestStepNameHelper.getComponentTypes()) {
-					proposal = new Proposal(la.getStepName().replace("The ", "") + " " + type, type,
-							la.getStepName() + " " + type + ",");
+					proposal = new Proposal(la.getStepName() + " " + type, type, la.getStepName() + " " + type + ",");
 					proposals.add(proposal);
 				}
 			}
@@ -174,7 +173,7 @@ public class LanguageHelper {
 				continue;
 			} else if (!TestStepNameHelper.isValid(la.getStepName(step))) {
 				continue;
-			} 
+			}
 			String[] objectParts = TestStepNameHelper.getObject(la.getStepName(step)).split("/");
 			String name = objectParts[objectParts.length - 1];
 			// This suggestion is to make referring to the last fully qualified name less

@@ -16,8 +16,8 @@
 === Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
-| Suggestion            | Suggestion Name 
-| The blah application, | blah application
+| Suggestion            | Suggestion Name     
+| The blah application, | The blah application
 |===
 
 == Test-Case: Object types
@@ -52,8 +52,8 @@
 === Then: The xtext plugin, propose content dialog will be set as follows
 
 |===
-| Suggestion                         | Suggestion Name | Suggestion Description
-| The blah plugin, blah file is      | is              | is                    
+| Suggestion                    | Suggestion Name | Suggestion Description
+| The blah plugin, blah file is | is              | is                    
 |===
 
 == Test-Case: State modality absent incomplete details
