@@ -11,7 +11,7 @@ Feature: ProposePredicate
      When The xtext plugin, propose test step action is performed
      Then The xtext plugin, propose content dialog will be set as follows
           | Suggestion                        | Suggestion Name | Suggestion Description |
-          | The daily batchjob, Input file is | is              | is                     |
+          | The daily batchjob, Input file is | is              | Maps to setter method                     |
 
   Scenario: No predicate has definition has description
 

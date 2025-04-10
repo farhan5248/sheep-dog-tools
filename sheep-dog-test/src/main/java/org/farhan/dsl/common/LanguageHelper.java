@@ -60,8 +60,10 @@ public class LanguageHelper {
 		if (la.getStepName() != null) {
 			if (la.getStepName().startsWith("The ")) {
 				Proposal proposal;
-				for (String type : TestStepNameHelper.getComponentTypes()) {
-					proposal = new Proposal(la.getStepName() + " " + type, type, la.getStepName() + " " + type + ",");
+				TreeMap<String, String> types = TestStepNameHelper.getComponentTypes();
+				for (String type : types.keySet()) {
+					proposal = new Proposal(la.getStepName() + " " + type, types.get(type),
+							la.getStepName() + " " + type + ",");
 					proposals.add(proposal);
 				}
 			}
@@ -84,15 +86,18 @@ public class LanguageHelper {
 	}
 
 	private static ArrayList<Proposal> getObjectCompletion(ILanguageAccess la) {
+		TreeMap<String, String> types;
 		ArrayList<Proposal> proposals = new ArrayList<Proposal>();
 		if (la.getStepName() != null) {
 			if (!la.getStepName().replaceFirst(".*,", "").isBlank()) {
-				for (String type : TestStepNameHelper.getObjectVertexTypes()) {
-					proposals.add(new Proposal(la.getStepName().replaceFirst(".*, ", "") + " " + type, type,
+				types = TestStepNameHelper.getObjectVertexTypes();
+				for (String type : types.keySet()) {
+					proposals.add(new Proposal(la.getStepName().replaceFirst(".*, ", "") + " " + type, types.get(type),
 							la.getStepName() + " " + type));
 				}
-				for (String type : TestStepNameHelper.getObjectEdgeTypes()) {
-					proposals.add(new Proposal(la.getStepName().replaceFirst(".*, ", "") + " " + type, type,
+				types = TestStepNameHelper.getObjectEdgeTypes();
+				for (String type : types.keySet()) {
+					proposals.add(new Proposal(la.getStepName().replaceFirst(".*, ", "") + " " + type, types.get(type),
 							la.getStepName() + " " + type));
 				}
 			}
@@ -101,34 +106,40 @@ public class LanguageHelper {
 	}
 
 	private static ArrayList<Proposal> getObjectDefinitionCompletion(ILanguageAccess la) {
+		TreeMap<String, String> types;
 		ArrayList<Proposal> proposals = new ArrayList<Proposal>();
 		if (la.getStepName() != null) {
 			if (!TestStepNameHelper.hasState(la.getStepName())) {
 				if (!TestStepNameHelper.hasStateModality(la.getStepName())) {
 					if (!TestStepNameHelper.hasDetails(la.getStepName())) {
-						for (String type : TestStepNameHelper.getDetailTypes()) {
-							proposals.add(new Proposal(type, type, la.getStepName() + " " + type));
+						types = TestStepNameHelper.getDetailTypes();
+						for (String type : types.keySet()) {
+							proposals.add(new Proposal(type, types.get(type), la.getStepName() + " " + type));
 						}
-						for (String type : TestStepNameHelper.getStateModalityTypes()) {
-							proposals.add(new Proposal(type, type, la.getStepName() + " " + type));
+						types = TestStepNameHelper.getStateModalityTypes();
+						for (String type : types.keySet()) {
+							proposals.add(new Proposal(type, types.get(type), la.getStepName() + " " + type));
 						}
 					} else {
-						for (String type : TestStepNameHelper.getStateModalityTypes()) {
-							proposals.add(new Proposal(type, type, la.getStepName() + " " + type));
+						types = TestStepNameHelper.getStateModalityTypes();
+						for (String type : types.keySet()) {
+							proposals.add(new Proposal(type, types.get(type), la.getStepName() + " " + type));
 						}
 					}
 				} else {
 					if (!TestStepNameHelper.hasStateAttachment(la.getStepName())) {
-						for (String type : TestStepNameHelper.getAttachmentTypes()) {
-							proposals.add(new Proposal(type, type, la.getStepName() + " " + type));
+						types = TestStepNameHelper.getAttachmentTypes();
+						for (String type : types.keySet()) {
+							proposals.add(new Proposal(type, types.get(type), la.getStepName() + " " + type));
 						}
 					}
 					// TODO suggest state attribute from list of existing keywords in that object
 				}
 			} else {
 				if (!TestStepNameHelper.hasStateAttachment(la.getStepName())) {
-					for (String type : TestStepNameHelper.getAttachmentTypes()) {
-						proposals.add(new Proposal(type, type, la.getStepName() + " " + type));
+					types = TestStepNameHelper.getAttachmentTypes();
+					for (String type : types.keySet()) {
+						proposals.add(new Proposal(type, types.get(type), la.getStepName() + " " + type));
 					}
 				}
 				// TODO suggest time

@@ -1,5 +1,7 @@
 package org.farhan.dsl.common;
 
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,8 +27,10 @@ public class TestStepNameHelper {
 		return getRegexFromTypes(getAttachmentTypes());
 	}
 
-	public static String[] getAttachmentTypes() {
-		String[] types = { "with", "as follows" };
+	public static TreeMap<String, String> getAttachmentTypes() {
+		TreeMap<String, String> types = new TreeMap<>();
+		types.put("with", "Used to specify plugin parameters");
+		types.put("as follows", "Used to specify data on a page or in a file");
 		return types;
 	}
 
@@ -46,8 +50,13 @@ public class TestStepNameHelper {
 		return getGroup(text, 3);
 	}
 
-	public static String[] getComponentTypes() {
-		String[] types = { "application", "service", "plugin", "batchjob", "project" };
+	public static TreeMap<String, String> getComponentTypes() {
+		TreeMap<String, String> types = new TreeMap<>();
+		types.put("application", "GUI web application");
+		types.put("service", "RESTful or SOAP webservice");
+		types.put("plugin", "Maven or Eclipse plugin");
+		types.put("batchjob", "EOD or ETL batchjob");
+		types.put("project", "Collection of files such as a Maven project");
 		return types;
 	}
 
@@ -67,8 +76,13 @@ public class TestStepNameHelper {
 		return getGroup(text, 12);
 	}
 
-	public static String[] getDetailTypes() {
-		String[] types = { "section", "fragment", "table", "snippet", "list" };
+	public static TreeMap<String, String> getDetailTypes() {
+		TreeMap<String, String> types = new TreeMap<>();
+		types.put("section", "Used to specify a part in a document");
+		types.put("fragment", "Used to specify a part in some code");
+		types.put("table", "Table in a document");
+		types.put("snippet", "Same as fragment");
+		types.put("list", "Same as table");
 		return types;
 	}
 
@@ -181,8 +195,12 @@ public class TestStepNameHelper {
 		return getRegexFromTypes(getObjectEdgeTypes());
 	}
 
-	public static String[] getObjectEdgeTypes() {
-		String[] types = { "request", "goal", "job", "action" };
+	public static TreeMap<String, String> getObjectEdgeTypes() {
+		TreeMap<String, String> types = new TreeMap<>();
+		types.put("request", "Web-service request");
+		types.put("goal", "Maven plugin goal");
+		types.put("job", "EOD or ETL batchjob");
+		types.put("action", "Eclipse plugin action");
 		return types;
 	}
 
@@ -198,8 +216,13 @@ public class TestStepNameHelper {
 		return getRegexFromTypes(getObjectVertexTypes());
 	}
 
-	public static String[] getObjectVertexTypes() {
-		String[] types = { "file", "page", "response", "dialog", "directory" };
+	public static TreeMap<String, String> getObjectVertexTypes() {
+		TreeMap<String, String> types = new TreeMap<>();
+		types.put("file", "Any sort of file");
+		types.put("page", "Web page");
+		types.put("response", "Web service response");
+		types.put("dialog", "Window dialog box");
+		types.put("directory", "File directory");
 		return types;
 	}
 
@@ -207,9 +230,9 @@ public class TestStepNameHelper {
 		return getGroup("The" + "(" + COMPONENT_REGEX + ")?" + OBJECT_REGEX + "(.*)", text, 9);
 	}
 
-	private static String getRegexFromTypes(String[] types) {
+	private static String getRegexFromTypes(TreeMap<String, String> types) {
 		String regex = "(";
-		for (String componentType : types) {
+		for (String componentType : types.keySet()) {
 			regex += " " + componentType + "|";
 		}
 		return regex.replaceAll("\\|$", ")");
@@ -231,8 +254,12 @@ public class TestStepNameHelper {
 		return getRegexFromTypes(getStateModalityTypes());
 	}
 
-	public static String[] getStateModalityTypes() {
-		String[] types = { "is", "isn't", "will be", "won't be" };
+	public static TreeMap<String, String> getStateModalityTypes() {
+		TreeMap<String, String> types = new TreeMap<>();
+		types.put("is", "Maps to setter method");
+		types.put("isn't", "Maps to setter method but used to remove something");
+		types.put("will be", "Maps to assertion method");
+		types.put("won't be", "Maps to assertion method for negative testing");
 		return types;
 	}
 

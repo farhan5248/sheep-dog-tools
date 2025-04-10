@@ -92,8 +92,10 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 		try {
 			for (Entry<String, Proposal> p : LanguageHelper.proposeTestStepTable(new LanguageAccessImpl(step))
 					.entrySet()) {
+				// TODO this is an ugly hack to make the table proposal work. The |=== shouldn't
+				// be hard-coded here.
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
-						p.getValue().getReplacement(), p.getValue().getDisplay(), null, context);
+						"|===\n" + p.getValue().getReplacement() + "\n|===", p.getValue().getDisplay(), null, context);
 				if (proposal != null) {
 					proposal.setAdditionalProposalInfo(p.getValue().getDocumentation());
 					acceptor.accept(proposal);
@@ -107,7 +109,8 @@ public class SheepDogProposalProvider extends AbstractSheepDogProposalProvider {
 	private void completeName(TestStep step, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		try {
-			for (Entry<String, Proposal> p : LanguageHelper.proposeTestStepName(new LanguageAccessImpl(step)).entrySet()) {
+			for (Entry<String, Proposal> p : LanguageHelper.proposeTestStepName(new LanguageAccessImpl(step))
+					.entrySet()) {
 				ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal(
 						p.getValue().getReplacement(), p.getValue().getDisplay(), null, context);
 				if (proposal != null) {

@@ -53,7 +53,7 @@
 
 |===
 | Suggestion                    | Suggestion Name | Suggestion Description
-| The blah plugin, blah file is | is              | is                    
+| The blah plugin, blah file is | is              | Maps to setter method 
 |===
 
 == Test-Case: State modality absent incomplete details

@@ -17,7 +17,7 @@
 
 |===
 | Suggestion                        | Suggestion Name | Suggestion Description
-| The daily batchjob, Input file is | is              | is                    
+| The daily batchjob, Input file is | is              | Maps to setter method 
 |===
 
 == Test-Case: No predicate has definition has description
