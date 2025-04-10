@@ -284,7 +284,8 @@ public class LanguageHelper {
 						String paramSetString = la.getStepDefinitionParametersString((Object) parameters);
 						proposal = new Proposal();
 						proposal.setDisplay(paramSetString);
-						proposal.setDocumentation(paramSetString);
+						// TODO make a test for getStepDefinitionParametersDocumentation
+						proposal.setDocumentation(la.getStepDefinitionParametersDocumentation((Object) parameters));
 						proposal.setReplacement(paramSetString);
 						proposals.put(proposal.getReplacement(), proposal);
 					}

@@ -156,6 +156,11 @@ public class EclipseImpl implements ILanguageAccess {
 		return this.stepObject.get(stepDefinition.toString());
 	}
 
+	@Override
+	public String getStepDefinitionParametersDocumentation(Object parameters) {
+		return getStepDefinitionParametersString(parameters);
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public String getStepDefinitionParametersString(Object parameters) {

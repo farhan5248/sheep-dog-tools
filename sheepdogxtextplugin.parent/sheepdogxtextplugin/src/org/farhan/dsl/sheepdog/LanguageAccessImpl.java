@@ -262,6 +262,17 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	}
 
 	@Override
+	public String getStepDefinitionParametersDocumentation(Object parameters) {
+		StepParameters e = (StepParameters) parameters;
+
+		String description = "";
+		for (Statement s : e.getStatementList()) {
+			description += s.getName() + "\n";
+		}
+		return description;
+	}
+
+	@Override
 	public String getStepDefinitionParametersString(Object parameters) {
 		StepParameters e = (StepParameters) parameters;
 		return cellsToString(e.getTable().getRowList().get(0).getCellList(), true);

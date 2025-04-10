@@ -50,4 +50,6 @@ public interface ILanguageAccess {
 
 	public String getFileExtension();
 
+	public String getStepDefinitionParametersDocumentation(Object parameters);
+
 }
