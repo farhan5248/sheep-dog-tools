@@ -170,26 +170,29 @@ public class LanguageHelper {
 		allSteps.addAll(la.getPreviousSteps());
 
 		for (Object step : allSteps) {
-			if (la.getStepName() != null) {
-				String[] objectParts = TestStepNameHelper.getObject(la.getStepName(step)).split("/");
-				String name = objectParts[objectParts.length - 1];
-				// This suggestion is to make referring to the last fully qualified name less
-				// tedious. However it can only refer to the last object.
-				proposal = new Proposal();
-				proposal.setDisplay(name);
-				proposal.setDocumentation("Referred in: " + la.getStepName(step));
-				proposal.setReplacement("The " + proposal.getDisplay());
-				proposals.put(proposal.getDisplay(), proposal);
+			if (la.getStepName() == null) {
+				continue;
+			} else if (!TestStepNameHelper.isValid(la.getStepName(step))) {
+				continue;
+			} 
+			String[] objectParts = TestStepNameHelper.getObject(la.getStepName(step)).split("/");
+			String name = objectParts[objectParts.length - 1];
+			// This suggestion is to make referring to the last fully qualified name less
+			// tedious. However it can only refer to the last object.
+			proposal = new Proposal();
+			proposal.setDisplay(name);
+			proposal.setDocumentation("Referred in: " + la.getStepName(step));
+			proposal.setReplacement("The " + proposal.getDisplay());
+			proposals.put(proposal.getDisplay(), proposal);
 
-				// This proposal is to list the fully qualified name of an object in case two
-				// objects with the same simple name have different paths like a batch job file
-				// being moved between directories
-				proposal = new Proposal();
-				proposal.setDisplay(TestStepNameHelper.getObject(la.getStepName(step)));
-				proposal.setDocumentation("Referred in: " + la.getStepName(step));
-				proposal.setReplacement("The " + proposal.getDisplay());
-				proposals.put(proposal.getDisplay(), proposal);
-			}
+			// This proposal is to list the fully qualified name of an object in case two
+			// objects with the same simple name have different paths like a batch job file
+			// being moved between directories
+			proposal = new Proposal();
+			proposal.setDisplay(TestStepNameHelper.getObject(la.getStepName(step)));
+			proposal.setDocumentation("Referred in: " + la.getStepName(step));
+			proposal.setReplacement("The " + proposal.getDisplay());
+			proposals.put(proposal.getDisplay(), proposal);
 		}
 		return proposals.values();
 	}
