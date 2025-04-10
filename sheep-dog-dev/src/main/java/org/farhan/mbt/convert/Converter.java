@@ -6,14 +6,14 @@ import org.farhan.mbt.core.UMLTestProject;
 
 public abstract class Converter {
 
-	protected String tag = "";
+	protected String tags = "";
 	protected ConvertibleProject project;
 	protected UMLTestProject model;
 	protected ObjectRepository fa;
 	protected Logger log;
 
 	public Converter(String tags, ObjectRepository fa, Logger log) {
-		this.tag = tags;
+		this.tags = tags;
 		this.fa = fa;
 		this.log = log;
 	}
@@ -21,7 +21,7 @@ public abstract class Converter {
 	public abstract void initProjects() throws Exception;
 
 	public void clearProjects() throws Exception {
-		fa.clear(tag);
+		fa.clear(tags);
 	}
 
 	public ArrayList<String> getFileNames() throws Exception {

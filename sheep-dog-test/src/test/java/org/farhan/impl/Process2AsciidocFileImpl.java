@@ -18,7 +18,7 @@ public class Process2AsciidocFileImpl extends TestObject implements Process2Asci
 	}
 
 	@Override
-	public void setBackgroundstepsSnippetStepName(HashMap<String, String> keyMap) {
+	public void setBackgroundStepsSnippetStepName(HashMap<String, String> keyMap) {
 		getEclipseMock().addBackgroundStep(getSpecial(keyMap.get("Step Name")));
 	}
 

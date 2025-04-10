@@ -30,8 +30,8 @@ public abstract class MBTMojo extends AbstractMojo {
 		this.restTemplate = config.restTemplate();
 	}
 
-	@Parameter(property = "tag", defaultValue = "")
-	public String tag;
+	@Parameter(property = "tags", defaultValue = "")
+	public String tags;
 
 	@Parameter(property = "host", defaultValue = "sheepdogdev.io")
 	public String host;
@@ -48,13 +48,13 @@ public abstract class MBTMojo extends AbstractMojo {
 
 	private void clearObjects(String goal) {
 		TreeMap<String, String> parameters = new TreeMap<String, String>();
-		parameters.put("tags", tag);
+		parameters.put("tags", tags);
 		restTemplate.delete(getHost() + "clear" + goal + "Objects?tags={tags}", parameters);
 	}
 
 	private String convertObject(String goal, String fileName, String contents) {
 		TreeMap<String, String> parameters = new TreeMap<String, String>();
-		parameters.put("tags", tag);
+		parameters.put("tags", tags);
 		parameters.put("fileName", fileName);
 		return restTemplate.postForObject(getHost() + "run" + goal + "?tags={tags}&fileName={fileName}", contents,
 				ModelTransformerResponse.class, parameters).content();
@@ -62,7 +62,7 @@ public abstract class MBTMojo extends AbstractMojo {
 
 	private String[] getObjectNames(String goal) {
 		TreeMap<String, String> parameters = new TreeMap<String, String>();
-		parameters.put("tags", tag);
+		parameters.put("tags", tags);
 		String fileList = restTemplate.getForObject(getHost() + "get" + goal + "ObjectNames?tags={tags}",
 				ModelTransformerResponse.class, parameters).fileName();
 		if (!fileList.isBlank()) {
@@ -99,7 +99,7 @@ public abstract class MBTMojo extends AbstractMojo {
 
 	public void execute(String goal) throws MojoExecutionException {
 		getLog().info("Starting execute");
-		getLog().info("tag: " + tag);
+		getLog().info("tags: " + tags);
 		getLog().info("baseDir: " + baseDir);
 
 		if (!baseDir.endsWith("/")) {

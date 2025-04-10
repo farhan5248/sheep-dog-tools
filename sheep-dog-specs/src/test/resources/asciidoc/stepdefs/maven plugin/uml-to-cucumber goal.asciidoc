@@ -1,6 +1,6 @@
 = Step-Object: uml-to-cucumber goal
 
-Calls the Maven plug-in goal that corresponds to mvn org.farhan:sheep-dog-dev-maven-plugin:uml-to-cucumber -Dtag=""
+Calls the Maven plug-in goal that corresponds to mvn org.farhan:sheep-dog-dev-maven-plugin:uml-to-cucumber -Dtags=""
 The uml-to-cucumber creates Cucumber for Java code with nothing for dependency injection.
 
 == Step-Definition: is executed

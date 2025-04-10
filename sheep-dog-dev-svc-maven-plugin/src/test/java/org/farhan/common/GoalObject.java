@@ -23,7 +23,7 @@ public abstract class GoalObject extends TestObject {
 		try {
 			Class<?> mojoClass = Class.forName(goal);
 			MBTMojo mojo = (MBTMojo) mojoClass.getConstructor().newInstance();
-			mojo.tag = attributes.get("tags");
+			mojo.tags = attributes.get("tags");
 			mojo.baseDir = baseDir;
 			mojo.host = serverHost;
 			mojo.port = serverPort;

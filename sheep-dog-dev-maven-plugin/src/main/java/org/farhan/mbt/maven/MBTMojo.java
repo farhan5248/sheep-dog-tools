@@ -28,7 +28,7 @@ public abstract class MBTMojo extends AbstractMojo {
 		baseDir = new File("").getAbsolutePath();
 	}
 
-	@Parameter(property = "tag", defaultValue = "")
+	@Parameter(property = "tags", defaultValue = "")
 	public String tags;
 
 	@Parameter(property = "repoDir", defaultValue = "")
@@ -36,7 +36,7 @@ public abstract class MBTMojo extends AbstractMojo {
 
 	public void execute(String goal, String dir) throws MojoExecutionException {
 		getLog().info("Starting execute");
-		getLog().info("tag: " + tags);
+		getLog().info("tags: " + tags);
 		getLog().info("baseDir: " + baseDir);
 		getLog().info("repoDir: " + repoDir);
 

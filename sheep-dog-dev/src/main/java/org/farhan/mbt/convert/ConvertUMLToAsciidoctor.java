@@ -138,8 +138,8 @@ public class ConvertUMLToAsciidoctor extends Converter {
 	}
 
 	public void initProjects() throws Exception {
-		project = new AsciiDoctorTestProject(this.tag, this.fa);
-		model = new UMLTestProject(this.tag, this.fa);
+		project = new AsciiDoctorTestProject(this.tags, this.fa);
+		model = new UMLTestProject(this.tags, this.fa);
 		project.init();
 		model.init();
 		this.pathConverter = new AsciiDoctorPathConverter(model, (AsciiDoctorTestProject) project);

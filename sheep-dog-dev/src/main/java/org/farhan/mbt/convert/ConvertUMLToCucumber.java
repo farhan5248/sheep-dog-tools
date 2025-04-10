@@ -152,8 +152,8 @@ public class ConvertUMLToCucumber extends Converter {
 	}
 
 	public void initProjects() throws Exception {
-		model = new UMLTestProject(this.tag, this.fa);
-		project = new CucumberTestProject(this.tag, this.fa);
+		model = new UMLTestProject(this.tags, this.fa);
+		project = new CucumberTestProject(this.tags, this.fa);
 		model.init();
 		project.init();
 		this.pathConverter = new CucumberPathConverter(model, (CucumberTestProject) project);

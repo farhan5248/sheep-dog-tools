@@ -87,7 +87,7 @@ public class ConvertCucumberToUML extends Converter {
 
 		srcObjTestSuite = (CucumberFeature) project.addFile(path);
 		srcObjTestSuite.parse(content);
-		if (tag.isEmpty() || isTestSuiteSelected() || isAnyTestCaseSelected()) {
+		if (tags.isEmpty() || isTestSuiteSelected() || isAnyTestCaseSelected()) {
 			UMLTestSuite testSuite = model.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
 			testSuite.setTags(srcObjTestSuite.getFeatureTags());
 			testSuite.setDescription(srcObjTestSuite.getFeatureDescription());
@@ -95,7 +95,7 @@ public class ConvertCucumberToUML extends Converter {
 				if (srcObjTestSuite.isBackground(as)) {
 					convertTestSetup(as, testSuite);
 				} else {
-					if (tag.isEmpty() || isTestSuiteSelected() || isTestCaseSelected(as)) {
+					if (tags.isEmpty() || isTestSuiteSelected() || isTestCaseSelected(as)) {
 						if (srcObjTestSuite.isScenarioOutline(as)) {
 							convertTestCaseWithTestData(as,
 									testSuite.addTestCase(srcObjTestSuite.getScenarioOutlineName(as)));
@@ -113,8 +113,8 @@ public class ConvertCucumberToUML extends Converter {
 	}
 
 	public void initProjects() throws Exception {
-		project = new CucumberTestProject(this.tag, this.fa);
-		model = new UMLTestProject(this.tag, this.fa);
+		project = new CucumberTestProject(this.tags, this.fa);
+		model = new UMLTestProject(this.tags, this.fa);
 		project.init();
 		model.init();
 		this.pathConverter = new CucumberPathConverter(model, (CucumberTestProject) project);
@@ -133,14 +133,14 @@ public class ConvertCucumberToUML extends Converter {
 
 		if (as instanceof Scenario) {
 			for (String t : srcObjTestSuite.getScenarioTags(as)) {
-				if (t.trim().contentEquals(tag)) {
+				if (t.trim().contentEquals(tags)) {
 					return true;
 				}
 			}
 		}
 		if (as instanceof ScenarioOutline) {
 			for (String t : srcObjTestSuite.getScenarioOutlineTags(as)) {
-				if (t.trim().contentEquals(tag)) {
+				if (t.trim().contentEquals(tags)) {
 					return true;
 				}
 			}
@@ -150,7 +150,7 @@ public class ConvertCucumberToUML extends Converter {
 
 	private boolean isTestSuiteSelected() throws Exception {
 		for (String t : srcObjTestSuite.getFeatureTags()) {
-			if (t.trim().contentEquals(tag)) {
+			if (t.trim().contentEquals(tags)) {
 				return true;
 			}
 		}

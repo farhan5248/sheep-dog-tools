@@ -19,7 +19,7 @@ public class SpecPrjProcess2AsciidocFileSteps extends TestSteps {
     public void theSpecPrjProjectSrcTestResourcesAsciidocSpecsProcess2AsciidocFileBackgroundStepsSnippetIsCreatedAsFollows(DataTable dataTable) {
         object.setComponent("spec-prj");
         object.setPath("src/test/resources/asciidoc/specs/Process2.asciidoc");
-        object.setInputOutputs(dataTable, "BackgroundstepsSnippet");
+        object.setInputOutputs(dataTable, "BackgroundStepsSnippet");
     }
 
     @Given("^The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows$")

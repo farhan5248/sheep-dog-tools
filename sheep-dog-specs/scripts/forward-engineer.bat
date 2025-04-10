@@ -1,4 +1,6 @@
 cd ..
 call mvn clean
-call mvn org.farhan:sheep-dog-dev-maven-plugin:1.23-SNAPSHOT:asciidoctor-to-uml -Dtag="%1" -DrepoDir=""
+call mvn org.farhan:sheep-dog-dev-maven-plugin:1.25-SNAPSHOT:asciidoctor-to-uml -Dtags="sheep-dog-dev" -DrepoDir=""
+call mvn org.farhan:sheep-dog-dev-maven-plugin:1.25-SNAPSHOT:asciidoctor-to-uml -Dtags="sheep-dog-test" -DrepoDir=""
+call mvn org.farhan:sheep-dog-dev-maven-plugin:1.25-SNAPSHOT:asciidoctor-to-uml -Dtags="round-trip" -DrepoDir=""
 cd scripts 

@@ -30,8 +30,8 @@ Feature: ProposeStepConstants
           | The blah plugin, blah file |
      When The xtext plugin, propose test step action is performed
      Then The xtext plugin, propose content dialog will be set as follows
-          | Suggestion                         | Suggestion Name | Suggestion Description |
-          | The blah plugin, blah file is      | is              | is                     |
+          | Suggestion                    | Suggestion Name | Suggestion Description |
+          | The blah plugin, blah file is | is              | is                     |
 
   Scenario: State modality absent incomplete details
 

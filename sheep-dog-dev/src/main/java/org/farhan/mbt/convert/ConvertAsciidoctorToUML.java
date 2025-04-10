@@ -36,7 +36,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	@Override
 	public void clearProjects() throws Exception {
-		fa.clear(tag);
+		fa.clear(tags);
 		stepObjects.clear();
 		stepDefinitions.clear();
 	}
@@ -138,7 +138,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		log.debug("test suite: " + path);
 		srcObjTestSuite = (AsciiDoctorTestSuite) project.addFile(path);
 		srcObjTestSuite.parse(content);
-		if (tag.isEmpty() || isTestSuiteSelected() || isAnyTestCaseSelected()) {
+		if (tags.isEmpty() || isTestSuiteSelected() || isAnyTestCaseSelected()) {
 			UMLTestSuite testSuite = model.addTestSuite(pathConverter.convertUMLPath(srcObjTestSuite.getPath()));
 			testSuite.setTags(srcObjTestSuite.getFeatureTags());
 			testSuite.setDescription(srcObjTestSuite.getFeatureDescription());
@@ -146,7 +146,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 				if (srcObjTestSuite.isBackground(srcTestCase)) {
 					convertTestSetup(srcTestCase,
 							testSuite.addTestSetup(srcObjTestSuite.getBackgroundName(srcTestCase)));
-				} else if (tag.isEmpty() || isTestSuiteSelected() || isTestCaseSelected(srcTestCase)) {
+				} else if (tags.isEmpty() || isTestSuiteSelected() || isTestCaseSelected(srcTestCase)) {
 					convertTestCase(srcTestCase, testSuite.addTestCase(srcObjTestSuite.getScenarioName(srcTestCase)));
 				}
 			}
@@ -157,8 +157,8 @@ public class ConvertAsciidoctorToUML extends Converter {
 	}
 
 	public void initProjects() throws Exception {
-		project = new AsciiDoctorTestProject(this.tag, this.fa);
-		model = new UMLTestProject(this.tag, this.fa);
+		project = new AsciiDoctorTestProject(this.tags, this.fa);
+		model = new UMLTestProject(this.tags, this.fa);
 		project.init();
 		model.init();
 		pathConverter = new AsciiDoctorPathConverter(model, (AsciiDoctorTestProject) project);
@@ -184,7 +184,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	private boolean isTestCaseSelected(TestStepContainer a) {
 		for (String t : srcObjTestSuite.getAbstractScenarioTags(a)) {
-			if (t.trim().contentEquals(tag)) {
+			if (t.trim().contentEquals(tags)) {
 				return true;
 			}
 		}
@@ -195,7 +195,7 @@ public class ConvertAsciidoctorToUML extends Converter {
 		// TODO this needs a test case
 		for (String t : srcObjTestSuite.getFeatureTags()) {
 			log.debug("feature tag: " + t);
-			if (t.trim().contentEquals(tag)) {
+			if (t.trim().contentEquals(tags)) {
 				return true;
 			}
 		}
