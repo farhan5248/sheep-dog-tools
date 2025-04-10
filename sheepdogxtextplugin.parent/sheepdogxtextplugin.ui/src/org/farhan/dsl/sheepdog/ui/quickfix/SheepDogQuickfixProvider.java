@@ -39,8 +39,8 @@ public class SheepDogQuickfixProvider extends DefaultQuickfixProvider {
 				});
 
 		for (String issueData : issue.getData()) {
-			acceptor.accept(issue, "Rename TestStep object to: " + issueData,
-					"Rename the TestStep object to an existing one", "upcase.png", new IModification() {
+			acceptor.accept(issue, "Rename object to: " + issueData, "Rename the object to an existing one",
+					"upcase.png", new IModification() {
 						public void apply(IModificationContext context) throws BadLocationException {
 							Resource resource = new ResourceSetImpl().getResource(issue.getUriToProblem(), true);
 							TestStep TestStep = (TestStep) resource

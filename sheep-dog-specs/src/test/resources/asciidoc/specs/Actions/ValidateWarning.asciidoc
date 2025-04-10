@@ -16,8 +16,8 @@
 === Then: The xtext plugin, validate warning dialog will be set as follows
 
 |===
-| Message                                                         
-| This object doesn't exist for: daily batchjob/Input file.feature
+| Message                                                                                 
+| daily batchjob/Input file.feature doesn't exist in src/test/resources/asciidoc/stepdefs/
 |===
 
 == Test-Case: This object step definition doesn't exist validation
@@ -41,8 +41,8 @@
 === Then: The xtext plugin, validate warning dialog will be set as follows
 
 |===
-| Message                                                                         
-| This object step definition doesn't exist for: daily batchjob/Input file.feature
+| Message                                                      
+| is present doesn't exist in daily batchjob/Input file.feature
 |===
 
 == Test-Case: This object step definition parameter set doesn't exist validation
@@ -66,8 +66,8 @@
 === Then: The xtext plugin, validate warning dialog will be set as follows
 
 |===
-| Message                                                                                       
-| This object step definition parameter set doesn't exist for: daily batchjob/Input file.feature
+| Message                                                                     
+| \| New Header doesn't exist in daily batchjob/Input file.feature for is present
 |===
 
 == Test-Case: This object doesn't exist and there is an alternate
@@ -92,7 +92,7 @@
 
 |===
 | Message                                                         
-| This object doesn't exist for: daily batchjob/Input file.feature
+| daily batchjob/Input file.feature doesn't exist in src/test/resources/asciidoc/stepdefs/
 |===
 
 === And: The xtext plugin, quickfix dialog will be set as follows

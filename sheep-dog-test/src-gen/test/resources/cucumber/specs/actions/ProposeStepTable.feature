@@ -41,5 +41,5 @@ Feature: ProposeStepTable
      When The xtext plugin, propose test step table action is performed
      Then The xtext plugin, propose content dialog will be set as follows
           | Suggestion | Suggestion Name |
-          | \| H1 \|   | \| H1 \|        |
+          | \| H1      | \| H1           |
 

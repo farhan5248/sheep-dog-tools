@@ -350,13 +350,14 @@ public class LanguageHelper {
 
 		String stepObjectQualifiedName = getStepObjectQualifiedName(la);
 		if (la.getStepObject(stepObjectQualifiedName) == null) {
-			return "This object doesn't exist for: " + stepObjectQualifiedName;
+			return stepObjectQualifiedName + " doesn't exist in src/test/resources/asciidoc/stepdefs/";
 		}
 		// check if the keyword exists
 		Object stepObject = la.createStepObject(stepObjectQualifiedName);
-		Object theStepDef = getStepDefinition(stepObject, TestStepNameHelper.getPredicate(la.getStepName()), la);
+		String predicate = TestStepNameHelper.getPredicate(la.getStepName());
+		Object theStepDef = getStepDefinition(stepObject, predicate, la);
 		if (theStepDef == null) {
-			return "This object step definition doesn't exist for: " + stepObjectQualifiedName;
+			return predicate + " doesn't exist in " + stepObjectQualifiedName;
 		}
 		// check if the parameters exist
 		if (la.hasParameters(theStepDef)) {
@@ -367,7 +368,8 @@ public class LanguageHelper {
 					return "";
 				}
 			}
-			return "This object step definition parameter set doesn't exist for: " + stepObjectQualifiedName;
+
+			return headersString + " doesn't exist in " + stepObjectQualifiedName + " for " + predicate;
 		}
 		return "";
 	}

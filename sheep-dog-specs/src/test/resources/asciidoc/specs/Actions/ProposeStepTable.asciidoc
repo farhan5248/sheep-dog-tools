@@ -70,6 +70,6 @@
 
 |===
 | Suggestion | Suggestion Name
-| \| H1 \|   | \| H1 \|       
+| \| H1      | \| H1          
 |===
 

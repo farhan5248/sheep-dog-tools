@@ -48,14 +48,14 @@ public class EclipseImpl implements ILanguageAccess {
 	}
 
 	private String cellsToString(List<String> cells) {
-		String cellsAsString = "| ";
+		String cellsAsString = "";
 		List<String> sortedCells = new ArrayList<String>();
 		for (String cell : cells) {
 			sortedCells.add(cell);
 		}
 		Collections.sort(sortedCells);
 		for (String cell : sortedCells) {
-			cellsAsString += cell + " | ";
+			cellsAsString += "| " + cell;
 		}
 		return cellsAsString.trim();
 	}
@@ -100,6 +100,11 @@ public class EclipseImpl implements ILanguageAccess {
 	@Override
 	public ArrayList<Object> getBackgroundSteps() {
 		return backgroundSteps;
+	}
+
+	@Override
+	public String getFileExtension() {
+		return ".feature";
 	}
 
 	@Override
@@ -234,10 +239,5 @@ public class EclipseImpl implements ILanguageAccess {
 
 	public void setValidationMessage(String message) {
 		this.validationMessage = message;
-	}
-
-	@Override
-	public String getFileExtension() {
-		return ".feature";
 	}
 }

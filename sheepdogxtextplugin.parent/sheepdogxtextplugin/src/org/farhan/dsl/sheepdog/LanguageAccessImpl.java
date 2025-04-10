@@ -54,7 +54,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	}
 
 	private String cellsToString(List<Cell> cells, boolean sorted) {
-		String cellsAsString = "|===\n";
+		String cellsAsString = "";
 		List<String> sortedCells = new ArrayList<String>();
 		for (Cell cell : cells) {
 			if (cell.getName() != null) {
@@ -67,7 +67,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		for (String cell : sortedCells) {
 			cellsAsString += "| " + cell;
 		}
-		return cellsAsString + "\n|===";
+		return cellsAsString;
 	}
 
 	@Override
@@ -309,7 +309,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		if (header == null) {
 			// TODO it's better to create a single cell with the content than hardcoding it
 			// this way
-			return "|===\n| Content\n|===";
+			return "| Content";
 		} else {
 			return cellsToString(getHeader(), true);
 		}

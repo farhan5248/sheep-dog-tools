@@ -10,8 +10,8 @@ Feature: ValidateWarning
           | The daily batchjob, Input file is present |
      When The xtext plugin, validate warning action is performed
      Then The xtext plugin, validate warning dialog will be set as follows
-          | Message                                                          |
-          | This object doesn't exist for: daily batchjob/Input file.feature |
+          | Message                                                                                  |
+          | daily batchjob/Input file.feature doesn't exist in src/test/resources/asciidoc/stepdefs/ |
 
   Scenario: This object step definition doesn't exist validation
 
@@ -23,8 +23,8 @@ Feature: ValidateWarning
           | daily batchjob/Input file.feature | is absent            |
      When The xtext plugin, validate warning action is performed
      Then The xtext plugin, validate warning dialog will be set as follows
-          | Message                                                                          |
-          | This object step definition doesn't exist for: daily batchjob/Input file.feature |
+          | Message                                                       |
+          | is present doesn't exist in daily batchjob/Input file.feature |
 
   Scenario: This object step definition parameter set doesn't exist validation
 
@@ -36,8 +36,8 @@ Feature: ValidateWarning
           | daily batchjob/Input file.feature | is present           | Old Header |
      When The xtext plugin, validate warning action is performed
      Then The xtext plugin, validate warning dialog will be set as follows
-          | Message                                                                                        |
-          | This object step definition parameter set doesn't exist for: daily batchjob/Input file.feature |
+          | Message                                                                         |
+          | \| New Header doesn't exist in daily batchjob/Input file.feature for is present |
 
   Scenario: This object doesn't exist and there is an alternate
 
@@ -49,8 +49,8 @@ Feature: ValidateWarning
           | daily batchjob/app/Input file.feature | is present           |
      When The xtext plugin, validate warning action is performed
      Then The xtext plugin, validate warning dialog will be set as follows
-          | Message                                                          |
-          | This object doesn't exist for: daily batchjob/Input file.feature |
+          | Message                                                                                  |
+          | daily batchjob/Input file.feature doesn't exist in src/test/resources/asciidoc/stepdefs/ |
       And The xtext plugin, quickfix dialog will be set as follows
           | Message                                       |
           | The daily batchjob, app/Input file is present |
