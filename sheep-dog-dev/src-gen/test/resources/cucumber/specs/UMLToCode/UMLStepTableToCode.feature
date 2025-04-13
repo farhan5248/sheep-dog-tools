@@ -11,8 +11,8 @@ Feature: UMLStepTableToCode
           
           == Test-Case: Submit
           
-          === Given: The Object page is created as follows
-          
+          * Given: The Object page is created as follows
+          +
           |===
           | h1
           | v1
@@ -34,8 +34,8 @@ Feature: UMLStepTableToCode
           
           == Test-Case: Submit
           
-          === Given: The Object page is created as follows
-          
+          * Given: The Object page is created as follows
+          +
           |===
           | h1 | h2
           | v1 | v2
@@ -59,8 +59,8 @@ Feature: UMLStepTableToCode
           
           == Test-Case: Submit
           
-          === Given: The Object page is created as follows
-          
+          * Given: The Object page is created as follows
+          +
           |===
           | h1 | h2 | h3
           | v1 | v2 | v3
@@ -86,8 +86,8 @@ Feature: UMLStepTableToCode
           
           == Test-Case: Submit
           
-          === Given: The Object page is created as follows
-          
+          * Given: The Object page is created as follows
+          +
           |===
           | h1
           | \| v1 \|

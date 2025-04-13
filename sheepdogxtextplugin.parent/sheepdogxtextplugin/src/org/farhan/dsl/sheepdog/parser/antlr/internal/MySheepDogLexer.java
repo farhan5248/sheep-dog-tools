@@ -53,16 +53,18 @@ public class MySheepDogLexer extends InternalSheepDogLexer {
 			nextTokenIsWORD = false;
 		} else if (isKeyword(" ") || isKeyword("\t") || isKeyword("\r")) {
 			mRULE_WS();
+		} else if (isKeyword("+")) {
+			mT__23();
 		} else if (isKeyword("|===")) {
-			mT__23();// '|==='
-		} else if (isKeyword("===")) {
-			mT__13();// '==='
+			mT__24();
+		} else if (isKeyword("*")) {
+			mT__13();
 		} else if (isKeyword("==")) {
-			mT__11();// '=='
+			mT__11();
 		} else if (isKeyword("=")) {
-			mT__9();// '='
+			mT__9();
 		} else if (isKeyword("|")) {
-			mT__24();// '|'
+			mT__25();
 			nextTokenIsWORD = true;
 		} else if (nextTokenIsWORD) {
 			mRULE_WORD();

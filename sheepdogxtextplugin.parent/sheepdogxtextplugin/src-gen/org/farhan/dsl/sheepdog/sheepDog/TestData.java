@@ -3,8 +3,6 @@
  */
 package org.farhan.dsl.sheepdog.sheepDog;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -50,16 +48,26 @@ public interface TestData extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Statement List</b></em>' containment reference list.
-   * The list contents are of type {@link org.farhan.dsl.sheepdog.sheepDog.Statement}.
+   * Returns the value of the '<em><b>Statement List</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Statement List</em>' containment reference list.
+   * @return the value of the '<em>Statement List</em>' containment reference.
+   * @see #setStatementList(StatementList)
    * @see org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage#getTestData_StatementList()
    * @model containment="true"
    * @generated
    */
-  EList<Statement> getStatementList();
+  StatementList getStatementList();
+
+  /**
+   * Sets the value of the '{@link org.farhan.dsl.sheepdog.sheepDog.TestData#getStatementList <em>Statement List</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Statement List</em>' containment reference.
+   * @see #getStatementList()
+   * @generated
+   */
+  void setStatementList(StatementList value);
 
   /**
    * Returns the value of the '<em><b>Table</b></em>' containment reference.

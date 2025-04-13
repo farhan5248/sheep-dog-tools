@@ -14,7 +14,7 @@ Feature: PluginParameters
           
           @tag1
           
-          === Given: The Object1 page is empty
+          * Given: The Object1 page is empty
           """
     Given The spec-prj project, src/test/resources/asciidoc/specs/app/Process.asciidoc file is created as follows
           """
@@ -24,7 +24,7 @@ Feature: PluginParameters
           
           @tag2
           
-          === Given: The Object1 page is empty
+          * Given: The Object1 page is empty
           """
      When The maven plugin, asciidoctor-to-uml goal is executed with
           | Tags |

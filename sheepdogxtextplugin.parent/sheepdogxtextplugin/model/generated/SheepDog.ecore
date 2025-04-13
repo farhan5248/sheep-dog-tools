@@ -19,8 +19,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StepParameters">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="statementList" upperBound="-1"
-        eType="#//Statement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statementList" eType="#//StatementList"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="#//Table"
         containment="true"/>
   </eClassifiers>
@@ -42,8 +42,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TestData">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="statementList" upperBound="-1"
-        eType="#//Statement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statementList" eType="#//StatementList"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="table" eType="#//Table"
         containment="true"/>
   </eClassifiers>
@@ -59,6 +59,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//TestStep"/>
   <eClassifiers xsi:type="ecore:EClass" name="Text">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StatementList">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statementList" upperBound="-1"
+        eType="#//Statement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Table">
     <eStructuralFeatures xsi:type="ecore:EReference" name="rowList" upperBound="-1"

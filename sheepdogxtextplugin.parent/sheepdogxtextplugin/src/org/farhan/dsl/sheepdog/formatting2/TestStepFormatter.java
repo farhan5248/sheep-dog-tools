@@ -30,8 +30,11 @@ public abstract class TestStepFormatter extends Formatter {
 		formatKeywordTrailingSpace(df.getRegion(theStep, getEqualsKeyword(a)), doc);
 		formatKeywordTrailingSpace(df.getRegion(theStep, getKeyword(a)), doc);
 		formatTitle(df.getRegion(theStep, getPhraseRuleCall(a)), doc);
-		formatEOL2RuleCall(df.getRegion(theStep, getEOLRuleCall(a)), doc);
-
+		if (theStep.getTable() != null || theStep.getText() != null) {
+			formatEOL1RuleCall(df.getRegion(theStep, getEOLRuleCall(a)), doc);
+		} else {
+			formatEOL2RuleCall(df.getRegion(theStep, getEOLRuleCall(a)), doc);
+		}
 		if (theStep.getTable() != null) {
 			TableFormatter formatter = new TableFormatter(theStep.getTable());
 			formatter.format(doc, ga, df);

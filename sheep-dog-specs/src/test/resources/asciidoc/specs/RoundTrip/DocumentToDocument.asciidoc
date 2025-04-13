@@ -5,8 +5,8 @@
 
 == Test-Case: Create an adoc file from adoc file
 
-=== Given: The spec-prj project, src/test/resources/asciidoc/specs/app/Process.asciidoc file is created as follows
-
+* Given: The spec-prj project, src/test/resources/asciidoc/specs/app/Process.asciidoc file is created as follows
++
 ----
 = Test-Suite: Process
 
@@ -17,10 +17,10 @@ Desc 1
 @tag2
 Desc 2
 
-=== Given: The blah application, Object page is valid
+* Given: The blah application, Object page is valid
 
-=== Then: The blah application, Object page is created as follows
-
+* Then: The blah application, Object page is created as follows
++
 \----
   text1
 
@@ -32,24 +32,24 @@ Desc 2
 @tag3
 Desc 3
 
-=== Given: The blah application, Object page is invalid
+* Given: The blah application, Object page is invalid
 
-=== When: The blah application, Object page is created as follows
-
+* When: The blah application, Object page is created as follows
++
 |===
 | grp | ins
 | 8 | {ins}
 |===
 
-=== Test-Data: Some data
-
+* Test-Data: Some data
++
 |===
 | ins
 | 4
 |===
 
-=== Test-Data: Dataset 2
-
+* Test-Data: Dataset 2
++
 |===
 | ins
 | 5
@@ -57,8 +57,8 @@ Desc 3
 |===
 ----
 
-=== And: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
-
+* And: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows
++
 ----
 = Step-Object: Object page
 
@@ -68,25 +68,25 @@ Desc 3
 
 == Step-Definition: is created as follows
 
-=== Step-Parameters: 1
-
+* Step-Parameters: 1
++
 |===
 | grp | ins
 |===
 
-=== Step-Parameters: 2
-
+* Step-Parameters: 2
++
 |===
 | Content
 |===
 ----
 
-=== When: The maven plugin, asciidoctor-to-uml goal is executed
+* When: The maven plugin, asciidoctor-to-uml goal is executed
 
-=== And: The maven plugin, uml-to-asciidoctor goal is executed
+* And: The maven plugin, uml-to-asciidoctor goal is executed
 
-=== Then: The spec-prj project, src/test/resources/asciidoc/specs/app/Process.asciidoc file will be created as follows
-
+* Then: The spec-prj project, src/test/resources/asciidoc/specs/app/Process.asciidoc file will be created as follows
++
 ----
 = Test-Suite: Process
 
@@ -97,9 +97,9 @@ Desc 1
 @tag2
 Desc 2
 
-=== Given: The blah application, Object page is valid
+* Given: The blah application, Object page is valid
 
-=== Then: The blah application, Object page is created as follows
+* Then: The blah application, Object page is created as follows
 
 \----
   text1
@@ -112,24 +112,24 @@ Desc 2
 @tag3
 Desc 3
 
-=== Given: The blah application, Object page is invalid
+* Given: The blah application, Object page is invalid
 
-=== When: The blah application, Object page is created as follows
-
+* When: The blah application, Object page is created as follows
++
 |===
 | grp | ins  
 | 8   | {ins}
 |===
 
-=== Test-Data: Some data
-
+* Test-Data: Some data
++
 |===
 | ins
 | 4  
 |===
 
-=== Test-Data: Dataset 2
-
+* Test-Data: Dataset 2
++
 |===
 | ins
 | 5  
@@ -137,21 +137,21 @@ Desc 3
 |===
 ----
 
-=== And: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be created as follows
-
+* And: The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be created as follows
++
 ----
 = Step-Object: Object page
 
 == Step-Definition: is created as follows
 
-=== Step-Parameters: 1
-
+* Step-Parameters: 1
++
 |===
 | grp | ins
 |===
 
-=== Step-Parameters: 2
-
+* Step-Parameters: 2
++
 |===
 | Content
 |===

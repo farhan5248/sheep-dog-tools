@@ -11,15 +11,15 @@ Feature: DocumentScenarioOutlineToUML
           
           == Test-Case: Submit
           
-          === Given: The blah application, Object page is created as follows
-          
+          * Given: The blah application, Object page is created as follows
+          +
           |===
           | h1
           | {h3}
           |===
           
-          === Test-Data: Examples 1
-          
+          * Test-Data: Examples 1
+          +
           |===
           | h3
           | v31
@@ -47,15 +47,15 @@ Feature: DocumentScenarioOutlineToUML
           @tag1
           Desc line 1
           
-          === Given: The blah application, Object page is created as follows
-          
+          * Given: The blah application, Object page is created as follows
+          +
           |===
           | h1
           | {h3}
           |===
           
-          === Test-Data: Examples 1
-          
+          * Test-Data: Examples 1
+          +
           |===
           | h3
           | v31
@@ -82,29 +82,29 @@ Feature: DocumentScenarioOutlineToUML
           Desc line 1
           Desc line 2
           
-          === Given: The blah application, Object1 page is created as follows
-          
+          * Given: The blah application, Object1 page is created as follows
+          +
           |===
           | h1
           | {h3}
           |===
           
-          === Given: The blah application, Object2 page is created as follows
-          
+          * Given: The blah application, Object2 page is created as follows
+          +
           |===
           | h1
           | {h3}
           |===
           
-          === Test-Data: Examples 1
-          
+          * Test-Data: Examples 1
+          +
           |===
           | h3
           | v31
           |===
           
-          === Test-Data: Examples 2
-          
+          * Test-Data: Examples 2
+          +
           |===
           | h3
           | v32
@@ -145,43 +145,43 @@ Feature: DocumentScenarioOutlineToUML
           Desc line 2
           Desc line 3
           
-          === Given: The blah application, Object1 page is created as follows
-          
+          * Given: The blah application, Object1 page is created as follows
+          +
           |===
           | h1
           | {h3}
           |===
           
-          === Given: The blah application, Object2 page is created as follows
-          
+          * Given: The blah application, Object2 page is created as follows
+          +
           |===
           | h1
           | {h3}
           |===
           
-          === Given: The blah application, Object3 page is created as follows
-          
+          * Given: The blah application, Object3 page is created as follows
+          +
           |===
           | h1
           | {h3}
           |===
           
-          === Test-Data: Examples 1
-          
+          * Test-Data: Examples 1
+          +
           |===
           | h3
           | v31
           |===
           
-          === Test-Data: Examples 2
-          
+          * Test-Data: Examples 2
+          +
           |===
           | h3
           | v32
           |===
           
-          === Test-Data: Examples 3
-          
+          * Test-Data: Examples 3
+          +
           |===
           | h3
           | v33
@@ -220,10 +220,10 @@ Feature: DocumentScenarioOutlineToUML
           
           @tag1
           
-          === Given: The blah application, Object page is empty
+          * Given: The blah application, Object page is empty
           
-          === Test-Data: Examples 1
-          
+          * Test-Data: Examples 1
+          +
           |===
           | h3
           | v31
@@ -233,10 +233,10 @@ Feature: DocumentScenarioOutlineToUML
           
           @tag2
           
-          === Given: The blah application, Object page is empty
+          * Given: The blah application, Object page is empty
           
-          === Test-Data: Examples 1
-          
+          * Test-Data: Examples 1
+          +
           |===
           | h3
           | v31

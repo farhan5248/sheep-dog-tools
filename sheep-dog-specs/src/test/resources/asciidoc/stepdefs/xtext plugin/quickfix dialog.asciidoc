@@ -6,10 +6,11 @@ Displays the list of fixes for a warning or error.
 
 Makes assertions about the dialog contents.
 
-=== Step-Parameters: 1
-
+* Step-Parameters: 1
++
 Makes the assertion that the following message will be displayed
 
++
 |===
 | Message
 |===

@@ -3,12 +3,8 @@
  */
 package org.farhan.dsl.sheepdog.sheepDog.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -16,11 +12,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.farhan.dsl.sheepdog.sheepDog.SheepDogPackage;
-import org.farhan.dsl.sheepdog.sheepDog.Statement;
+import org.farhan.dsl.sheepdog.sheepDog.StatementList;
 import org.farhan.dsl.sheepdog.sheepDog.StepParameters;
 import org.farhan.dsl.sheepdog.sheepDog.Table;
 
@@ -62,14 +55,14 @@ public class StepParametersImpl extends MinimalEObjectImpl.Container implements 
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getStatementList() <em>Statement List</em>}' containment reference list.
+   * The cached value of the '{@link #getStatementList() <em>Statement List</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getStatementList()
    * @generated
    * @ordered
    */
-  protected EList<Statement> statementList;
+  protected StatementList statementList;
 
   /**
    * The cached value of the '{@link #getTable() <em>Table</em>}' containment reference.
@@ -133,13 +126,48 @@ public class StepParametersImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public EList<Statement> getStatementList()
+  public StatementList getStatementList()
   {
-    if (statementList == null)
-    {
-      statementList = new EObjectContainmentEList<Statement>(Statement.class, this, SheepDogPackage.STEP_PARAMETERS__STATEMENT_LIST);
-    }
     return statementList;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetStatementList(StatementList newStatementList, NotificationChain msgs)
+  {
+    StatementList oldStatementList = statementList;
+    statementList = newStatementList;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SheepDogPackage.STEP_PARAMETERS__STATEMENT_LIST, oldStatementList, newStatementList);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setStatementList(StatementList newStatementList)
+  {
+    if (newStatementList != statementList)
+    {
+      NotificationChain msgs = null;
+      if (statementList != null)
+        msgs = ((InternalEObject)statementList).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.STEP_PARAMETERS__STATEMENT_LIST, null, msgs);
+      if (newStatementList != null)
+        msgs = ((InternalEObject)newStatementList).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SheepDogPackage.STEP_PARAMETERS__STATEMENT_LIST, null, msgs);
+      msgs = basicSetStatementList(newStatementList, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SheepDogPackage.STEP_PARAMETERS__STATEMENT_LIST, newStatementList, newStatementList));
   }
 
   /**
@@ -203,7 +231,7 @@ public class StepParametersImpl extends MinimalEObjectImpl.Container implements 
     switch (featureID)
     {
       case SheepDogPackage.STEP_PARAMETERS__STATEMENT_LIST:
-        return ((InternalEList<?>)getStatementList()).basicRemove(otherEnd, msgs);
+        return basicSetStatementList(null, msgs);
       case SheepDogPackage.STEP_PARAMETERS__TABLE:
         return basicSetTable(null, msgs);
     }
@@ -235,7 +263,6 @@ public class StepParametersImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -245,8 +272,7 @@ public class StepParametersImpl extends MinimalEObjectImpl.Container implements 
         setName((String)newValue);
         return;
       case SheepDogPackage.STEP_PARAMETERS__STATEMENT_LIST:
-        getStatementList().clear();
-        getStatementList().addAll((Collection<? extends Statement>)newValue);
+        setStatementList((StatementList)newValue);
         return;
       case SheepDogPackage.STEP_PARAMETERS__TABLE:
         setTable((Table)newValue);
@@ -269,7 +295,7 @@ public class StepParametersImpl extends MinimalEObjectImpl.Container implements 
         setName(NAME_EDEFAULT);
         return;
       case SheepDogPackage.STEP_PARAMETERS__STATEMENT_LIST:
-        getStatementList().clear();
+        setStatementList((StatementList)null);
         return;
       case SheepDogPackage.STEP_PARAMETERS__TABLE:
         setTable((Table)null);
@@ -291,7 +317,7 @@ public class StepParametersImpl extends MinimalEObjectImpl.Container implements 
       case SheepDogPackage.STEP_PARAMETERS__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case SheepDogPackage.STEP_PARAMETERS__STATEMENT_LIST:
-        return statementList != null && !statementList.isEmpty();
+        return statementList != null;
       case SheepDogPackage.STEP_PARAMETERS__TABLE:
         return table != null;
     }

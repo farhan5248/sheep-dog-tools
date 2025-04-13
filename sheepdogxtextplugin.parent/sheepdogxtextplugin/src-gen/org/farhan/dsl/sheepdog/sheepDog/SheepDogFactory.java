@@ -159,6 +159,15 @@ public interface SheepDogFactory extends EFactory
   Text createText();
 
   /**
+   * Returns a new object of class '<em>Statement List</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Statement List</em>'.
+   * @generated
+   */
+  StatementList createStatementList();
+
+  /**
    * Returns a new object of class '<em>Table</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

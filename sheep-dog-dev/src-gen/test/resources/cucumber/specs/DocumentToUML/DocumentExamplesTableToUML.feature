@@ -11,15 +11,15 @@ Feature: DocumentExamplesTableToUML
           
           == Test-Case: Submit
           
-          === Given: The Object page is created as follows
-          
+          * Given: The Object page is created as follows
+          +
           |===
           | h1
           | {h1}
           |===
           
-          === Test-Data: Examples 1
-          
+          * Test-Data: Examples 1
+          +
           |===
           | h1
           | v1
@@ -40,15 +40,15 @@ Feature: DocumentExamplesTableToUML
           
           == Test-Case: Submit
           
-          === Given: The Object page is created as follows
-          
+          * Given: The Object page is created as follows
+          +
           |===
           | h1 | h2
           | {h1} | {h2}
           |===
           
-          === Test-Data: Examples 1
-          
+          * Test-Data: Examples 1
+          +
           |===
           | h1 | h2
           | v1 | v2
@@ -71,15 +71,15 @@ Feature: DocumentExamplesTableToUML
           
           == Test-Case: Submit
           
-          === Given: The Object page is created as follows
-          
+          * Given: The Object page is created as follows
+          +
           |===
           | h1 | h2 | h3
           | {h1} | {h2} | {h3}
           |===
           
-          === Test-Data: Examples 1
-          
+          * Test-Data: Examples 1
+          +
           |===
           | h1 | h2 | h3
           | v1 | v2 | v3

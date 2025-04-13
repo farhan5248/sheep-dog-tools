@@ -206,7 +206,7 @@ public interface SheepDogPackage extends EPackage
   int STEP_PARAMETERS__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Statement List</b></em>' containment reference list.
+   * The feature id for the '<em><b>Statement List</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -445,7 +445,7 @@ public interface SheepDogPackage extends EPackage
   int TEST_DATA__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Statement List</b></em>' containment reference list.
+   * The feature id for the '<em><b>Statement List</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -730,6 +730,34 @@ public interface SheepDogPackage extends EPackage
   int TEXT_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.StatementListImpl <em>Statement List</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.farhan.dsl.sheepdog.sheepDog.impl.StatementListImpl
+   * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getStatementList()
+   * @generated
+   */
+  int STATEMENT_LIST = 15;
+
+  /**
+   * The feature id for the '<em><b>Statement List</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATEMENT_LIST__STATEMENT_LIST = 0;
+
+  /**
+   * The number of structural features of the '<em>Statement List</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATEMENT_LIST_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.TableImpl <em>Table</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -737,7 +765,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getTable()
    * @generated
    */
-  int TABLE = 15;
+  int TABLE = 16;
 
   /**
    * The feature id for the '<em><b>Row List</b></em>' containment reference list.
@@ -765,7 +793,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getRow()
    * @generated
    */
-  int ROW = 16;
+  int ROW = 17;
 
   /**
    * The feature id for the '<em><b>Cell List</b></em>' containment reference list.
@@ -793,7 +821,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getCell()
    * @generated
    */
-  int CELL = 17;
+  int CELL = 18;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -821,7 +849,7 @@ public interface SheepDogPackage extends EPackage
    * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getStatement()
    * @generated
    */
-  int STATEMENT = 18;
+  int STATEMENT = 19;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -960,10 +988,10 @@ public interface SheepDogPackage extends EPackage
   EAttribute getStepParameters_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.farhan.dsl.sheepdog.sheepDog.StepParameters#getStatementList <em>Statement List</em>}'.
+   * Returns the meta object for the containment reference '{@link org.farhan.dsl.sheepdog.sheepDog.StepParameters#getStatementList <em>Statement List</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Statement List</em>'.
+   * @return the meta object for the containment reference '<em>Statement List</em>'.
    * @see org.farhan.dsl.sheepdog.sheepDog.StepParameters#getStatementList()
    * @see #getStepParameters()
    * @generated
@@ -1098,10 +1126,10 @@ public interface SheepDogPackage extends EPackage
   EAttribute getTestData_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.farhan.dsl.sheepdog.sheepDog.TestData#getStatementList <em>Statement List</em>}'.
+   * Returns the meta object for the containment reference '{@link org.farhan.dsl.sheepdog.sheepDog.TestData#getStatementList <em>Statement List</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Statement List</em>'.
+   * @return the meta object for the containment reference '<em>Statement List</em>'.
    * @see org.farhan.dsl.sheepdog.sheepDog.TestData#getStatementList()
    * @see #getTestData()
    * @generated
@@ -1222,6 +1250,27 @@ public interface SheepDogPackage extends EPackage
    * @generated
    */
   EAttribute getText_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.farhan.dsl.sheepdog.sheepDog.StatementList <em>Statement List</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Statement List</em>'.
+   * @see org.farhan.dsl.sheepdog.sheepDog.StatementList
+   * @generated
+   */
+  EClass getStatementList();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.farhan.dsl.sheepdog.sheepDog.StatementList#getStatementList <em>Statement List</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Statement List</em>'.
+   * @see org.farhan.dsl.sheepdog.sheepDog.StatementList#getStatementList()
+   * @see #getStatementList()
+   * @generated
+   */
+  EReference getStatementList_StatementList();
 
   /**
    * Returns the meta object for class '{@link org.farhan.dsl.sheepdog.sheepDog.Table <em>Table</em>}'.
@@ -1427,7 +1476,7 @@ public interface SheepDogPackage extends EPackage
     EAttribute STEP_PARAMETERS__NAME = eINSTANCE.getStepParameters_Name();
 
     /**
-     * The meta object literal for the '<em><b>Statement List</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Statement List</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
@@ -1541,7 +1590,7 @@ public interface SheepDogPackage extends EPackage
     EAttribute TEST_DATA__NAME = eINSTANCE.getTestData_Name();
 
     /**
-     * The meta object literal for the '<em><b>Statement List</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Statement List</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
@@ -1647,6 +1696,24 @@ public interface SheepDogPackage extends EPackage
      * @generated
      */
     EAttribute TEXT__NAME = eINSTANCE.getText_Name();
+
+    /**
+     * The meta object literal for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.StatementListImpl <em>Statement List</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.farhan.dsl.sheepdog.sheepDog.impl.StatementListImpl
+     * @see org.farhan.dsl.sheepdog.sheepDog.impl.SheepDogPackageImpl#getStatementList()
+     * @generated
+     */
+    EClass STATEMENT_LIST = eINSTANCE.getStatementList();
+
+    /**
+     * The meta object literal for the '<em><b>Statement List</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference STATEMENT_LIST__STATEMENT_LIST = eINSTANCE.getStatementList_StatementList();
 
     /**
      * The meta object literal for the '{@link org.farhan.dsl.sheepdog.sheepDog.impl.TableImpl <em>Table</em>}' class.

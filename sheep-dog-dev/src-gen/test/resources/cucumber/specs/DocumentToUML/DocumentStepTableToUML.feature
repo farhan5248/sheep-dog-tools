@@ -11,8 +11,8 @@ Feature: DocumentStepTableToUML
           
           == Test-Case: Submit
           
-          === Given: The Object page is created as follows
-          
+          * Given: The Object page is created as follows
+          +
           |===
           | h1
           | v1
@@ -33,8 +33,8 @@ Feature: DocumentStepTableToUML
           
           == Test-Case: Submit
           
-          === Given: The Object page is created as follows
-          
+          * Given: The Object page is created as follows
+          +
           |===
           | h1 | h2
           | v1 | v2
@@ -57,8 +57,8 @@ Feature: DocumentStepTableToUML
           
           == Test-Case: Submit
           
-          === Given: The Object page is created as follows
-          
+          * Given: The Object page is created as follows
+          +
           |===
           | h1 | h2 | h3
           | v1 | v2 | v3
@@ -83,8 +83,8 @@ Feature: DocumentStepTableToUML
           
           == Test-Case: Submit
           
-          === Given: The Object page is created as follows
-          
+          * Given: The Object page is created as follows
+          +
           |===
           | h1
           | \| v1 \|

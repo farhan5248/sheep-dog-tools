@@ -18,10 +18,10 @@ public class StepParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a drug claim\n");
-		sb.append("=== Given: do step one\n");
-		sb.append("=== When: do step three\n");
-		sb.append("=== Then: do step four\n");
-		sb.append("=== And: do step two\n");
+		sb.append("* Given: do step one\n");
+		sb.append("* When: do step three\n");
+		sb.append("* Then: do step four\n");
+		sb.append("* And: do step two\n");
 		assertNoFeatureErrors(sb);
 	}
 
@@ -30,7 +30,7 @@ public class StepParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a drug claim\n");
-		sb.append("=== Given:\n");
+		sb.append("* Given:\n");
 		assertFeatureErrors(sb);
 	}
 
@@ -39,7 +39,7 @@ public class StepParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a drug claim\n");
-		sb.append("=== Given: do step one");
+		sb.append("* Given: do step one");
 		assertFeatureErrors(sb);
 	}
 
@@ -48,8 +48,8 @@ public class StepParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a drug claim\n");
-		sb.append("=== Given: do step one\n");
-
+		sb.append("* Given: do step one\n");
+		sb.append("+\n");
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|===\n");
@@ -61,8 +61,8 @@ public class StepParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a drug claim\n");
-		sb.append("=== Given: do step one\n");
-
+		sb.append("* Given: do step one\n");
+		sb.append("+\n");
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|   data1 |   data2 \n");
@@ -75,21 +75,21 @@ public class StepParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a drug claim\n");
-		sb.append("=== Given: do step one\n");
-
+		sb.append("* Given: do step one\n");
+		sb.append("+\n");
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2");
 		sb.append("|===\n");
 		assertFeatureErrors(sb);
 	}
-	
+
 	@Test
 	public void parseStepWithTableEscape() throws Exception {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This\n");
 		sb.append("== Test-Case: Submit\n");
-		sb.append("=== Given: do\n");
-
+		sb.append("* Given: do\n");
+		sb.append("+\n");
 		sb.append("|===\n");
 		sb.append("| Suggestion | Suggestion Name\n");
 		sb.append("| \\| H1 \\| | \\| H1 \\|\n");
@@ -102,19 +102,21 @@ public class StepParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a drug claim\n");
-		sb.append("=== Given: do step one\n");
+		sb.append("* Given: do step one\n");
+		sb.append("+\n");
 		sb.append("----\n");
 		sb.append("Line1\n");
 		sb.append("----\n");
 		assertNoFeatureErrors(sb);
 	}
-	
+
 	@Test
 	public void parseStepWithDocStringEscape() throws Exception {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a drug claim\n");
-		sb.append("=== Given: do step one\n");
+		sb.append("* Given: do step one\n");
+		sb.append("+\n");
 		sb.append("----\n");
 		sb.append("Line1\n");
 		sb.append("----\n");
@@ -126,7 +128,8 @@ public class StepParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a drug claim\n");
-		sb.append("=== Given: do step one\n");
+		sb.append("* Given: do step one\n");
+		sb.append("+\n");
 		sb.append("----\n");
 		sb.append("Line1\n");
 		sb.append("Line2\n\n\n");
@@ -140,7 +143,8 @@ public class StepParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a drug claim\n");
-		sb.append("=== Given: do step one\n");
+		sb.append("* Given: do step one\n");
+		sb.append("+\n");
 		sb.append("----\n");
 		sb.append("Line1");
 		sb.append("----\n");
@@ -152,7 +156,8 @@ public class StepParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a drug claim\n");
-		sb.append("=== Given: do step one\n");
+		sb.append("* Given: do step one\n");
+		sb.append("+\n");
 		sb.append("----\n");
 		sb.append("----\n");
 		assertFeatureErrors(sb);
@@ -165,7 +170,8 @@ public class StepParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a drug claim\n");
-		sb.append("=== Given: do step one\n");
+		sb.append("* Given: do step one\n");
+		sb.append("+\n");
 		sb.append("----\n");
 		assertFeatureErrors(sb);
 	}
@@ -175,43 +181,47 @@ public class StepParsingTest extends ParsingTest {
 		StringBuilder sb = new StringBuilder();
 		sb.append("= Test-Suite: This is a test feature\n");
 		sb.append("== Test-Case: Submit a drug claim\n");
-		sb.append("=== Given: do step one\n");
-
+		sb.append("* Given: do step one\n");
+		sb.append("+\n");
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|   data1 |   data2 \n");
 		sb.append("|===\n");
-		sb.append("=== When: do step three\n");
-
+		sb.append("* When: do step three\n");
+		sb.append("+\n");
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|   data1 |   data2 \n");
 		sb.append("|===\n");
-		sb.append("=== Then: do step four\n");
-
+		sb.append("* Then: do step four\n");
+		sb.append("+\n");
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|   data1 |   data2 \n");
 		sb.append("|===\n");
-		sb.append("=== And: do step two\n");
-
+		sb.append("* And: do step two\n");
+		sb.append("+\n");
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2 \n");
 		sb.append("|   data1 |   data2 \n");
 		sb.append("|===\n");
-		sb.append("=== Given: do step one\n");
+		sb.append("* Given: do step one\n");
+		sb.append("+\n");
 		sb.append("----\n");
 		sb.append("Line1\n");
 		sb.append("----\n");
-		sb.append("=== When: do step three\n");
+		sb.append("* When: do step three\n");
+		sb.append("+\n");
 		sb.append("----\n");
 		sb.append("Line1\n");
 		sb.append("----\n");
-		sb.append("=== Then: do step four\n");
+		sb.append("* Then: do step four\n");
+		sb.append("+\n");
 		sb.append("----\n");
 		sb.append("Line1\n");
 		sb.append("----\n");
-		sb.append("=== And: do step two\n");
+		sb.append("* And: do step two\n");
+		sb.append("+\n");
 		sb.append("----\n");
 		sb.append("Line1\n");
 		sb.append("----\n");

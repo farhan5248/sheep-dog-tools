@@ -7,8 +7,8 @@
 
 The formatting of the data and example tables is intentionally different to make sure that the file is regenerated
 
-=== Given: The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
-
+* Given: The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file is created as follows
++
 ----
 @tag2 @tag3
 Feature: Process
@@ -43,15 +43,15 @@ Feature: Process
           | v31 | v41 |
 ----
 
-=== When: The maven plugin, cucumber-to-uml goal is executed with
-
+* When: The maven plugin, cucumber-to-uml goal is executed with
++
 |===
 | Tags
 | tag1
 |===
 
-=== And: The maven plugin, uml-to-cucumber goal is executed with
-
+* And: The maven plugin, uml-to-cucumber goal is executed with
++
 |===
 | Tags
 | tag1
@@ -59,8 +59,8 @@ Feature: Process
 
 == Test-Case: Feature file is preserved
 
-=== Then: The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file will be created as follows
-
+* Then: The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file will be created as follows
++
 ----
 @tag2 @tag3
 Feature: Process

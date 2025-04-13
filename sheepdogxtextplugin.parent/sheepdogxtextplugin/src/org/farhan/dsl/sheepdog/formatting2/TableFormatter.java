@@ -16,9 +16,11 @@ public class TableFormatter extends Formatter {
 
 	public void format(IFormattableDocument doc, SheepDogGrammarAccess ga, SheepDogFormatter df) {
 		TableElements a = ga.getTableAccess();
-		formatKeywordNoSpace(df.getRegion(theStepTable, a.getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_0()),
-				doc);
+		formatKeywordNoSpace(df.getRegion(theStepTable, a.getPlusSignKeyword_0()), doc);
 		formatEOL1RuleCall(df.getRegion(theStepTable, a.getEOLTerminalRuleCall_1()), doc);
+		formatKeywordNoSpace(df.getRegion(theStepTable, a.getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_2()),
+				doc);
+		formatEOL1RuleCall(df.getRegion(theStepTable, a.getEOLTerminalRuleCall_3()), doc);
 
 		for (Row r : theStepTable.getRowList()) {
 			RowFormatter formatter = new RowFormatter(r);
@@ -26,9 +28,9 @@ public class TableFormatter extends Formatter {
 			formatter.isFirst(isFirstElement(r, theStepTable.getRowList()));
 			formatter.format(doc, ga, df);
 		}
-		formatKeywordNoSpace(df.getRegion(theStepTable, a.getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_3()),
+		formatKeywordNoSpace(df.getRegion(theStepTable, a.getVerticalLineEqualsSignEqualsSignEqualsSignKeyword_5()),
 				doc);
-		formatEOL2RuleCall(df.getRegion(theStepTable, a.getEOLTerminalRuleCall_4()), doc);
+		formatEOL2RuleCall(df.getRegion(theStepTable, a.getEOLTerminalRuleCall_6()), doc);
 	}
 
 }

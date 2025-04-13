@@ -11,8 +11,8 @@ Feature: UMLStepParametersTableToDocument
           
           == Test-Case: Submit
           
-          === Given: The blah application, Object page is created as follows
-          
+          * Given: The blah application, Object page is created as follows
+          +
           |===
           | h1
           |===
@@ -28,8 +28,8 @@ Feature: UMLStepParametersTableToDocument
           
           Desc line 1
           
-          === Step-Parameters: 1
-          
+          * Step-Parameters: 1
+          +
           |===
           | h1
           |===
@@ -52,8 +52,8 @@ Feature: UMLStepParametersTableToDocument
           
           Desc line 1
           
-          === Step-Parameters: 1
-          
+          * Step-Parameters: 1
+          +
           |===
           | h1 | h2
           |===
@@ -76,8 +76,8 @@ Feature: UMLStepParametersTableToDocument
           
           Desc line 1
           
-          === Step-Parameters: 1
-          
+          * Step-Parameters: 1
+          +
           |===
           | h1 | h2 | h3
           |===

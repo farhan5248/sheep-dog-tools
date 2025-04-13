@@ -151,6 +151,11 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
         return createTextAdapter();
       }
       @Override
+      public Adapter caseStatementList(StatementList object)
+      {
+        return createStatementListAdapter();
+      }
+      @Override
       public Adapter caseTable(Table object)
       {
         return createTableAdapter();
@@ -413,6 +418,21 @@ public class SheepDogAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createTextAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.farhan.dsl.sheepdog.sheepDog.StatementList <em>Statement List</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.farhan.dsl.sheepdog.sheepDog.StatementList
+   * @generated
+   */
+  public Adapter createStatementListAdapter()
   {
     return null;
   }

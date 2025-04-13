@@ -11,8 +11,8 @@ Feature: DocumentDocStringToUML
           
           == Test-Case: Submit
           
-          === Given: The Object page is created as follows
-          
+          * Given: The Object page is created as follows
+          +
           ----
           text1
           ----

@@ -14,7 +14,7 @@ Feature: DocumentBackgroundToUML
           @tag1
           Desc line 1
           
-          === Given: The Object0 page is valid
+          * Given: The Object0 page is valid
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
      Then The spec-prj project, uml/pst.uml file will be present
@@ -37,9 +37,9 @@ Feature: DocumentBackgroundToUML
           Desc line 1
           Desc line 2
           
-          === Given: The blah application, Object page is empty
+          * Given: The blah application, Object page is empty
           
-          === Given: The blah application, Object2 page is empty
+          * Given: The blah application, Object2 page is empty
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
      Then The spec-prj project, uml/pst.uml file will be present
@@ -68,11 +68,11 @@ Feature: DocumentBackgroundToUML
           Desc line 2
           Desc line 3
           
-          === Given: The blah application, Object page is empty
+          * Given: The blah application, Object page is empty
           
-          === Given: The blah application, Object2 page is empty
+          * Given: The blah application, Object2 page is empty
           
-          === Given: The blah application, Object3 page is empty
+          * Given: The blah application, Object3 page is empty
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
      Then The spec-prj project, uml/pst.uml file will be present
@@ -98,11 +98,11 @@ Feature: DocumentBackgroundToUML
           
           == Test-Setup: Setup
           
-          === Given: The Object0 page is valid
+          * Given: The Object0 page is valid
           
           == Test-Case: Submit
           
-          === Given: The Object page is valid
+          * Given: The Object page is valid
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
      Then The spec-prj project, uml/pst.uml file will be present
@@ -119,15 +119,15 @@ Feature: DocumentBackgroundToUML
           
           == Test-Setup: Setup
           
-          === Given: The Object0 page is valid
+          * Given: The Object0 page is valid
           
           == Test-Case: Submit 1
           
-          === Given: The Object page is valid
+          * Given: The Object page is valid
           
           == Test-Case: Submit 2
           
-          === Given: The Object2 page is valid
+          * Given: The Object2 page is valid
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
      Then The spec-prj project, uml/pst.uml file will be present
@@ -145,19 +145,19 @@ Feature: DocumentBackgroundToUML
           
           == Test-Setup: Setup
           
-          === Given: The Object0 page is valid
+          * Given: The Object0 page is valid
           
           == Test-Case: Submit 1
           
-          === Given: The Object page is valid
+          * Given: The Object page is valid
           
           == Test-Case: Submit 2
           
-          === Given: The Object2 page is valid
+          * Given: The Object2 page is valid
           
           == Test-Case: Submit 3
           
-          === Given: The Object3 page is valid
+          * Given: The Object3 page is valid
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
      Then The spec-prj project, uml/pst.uml file will be present
@@ -176,12 +176,12 @@ Feature: DocumentBackgroundToUML
           
           == Test-Setup: Setup
           
-          === Given: The Object page is valid
-          === Given: The Object2 page is valid
+          * Given: The Object page is valid
+          * Given: The Object2 page is valid
           
           == Test-Case: Submit
           
-          === Given: The Object page is valid
+          * Given: The Object page is valid
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
      Then The spec-prj project, uml/pst.uml file will be present
@@ -199,13 +199,13 @@ Feature: DocumentBackgroundToUML
           
           == Test-Setup: Setup
           
-          === Given: The Object page is valid
-          === Given: The Object2 page is valid
-          === Given: The Object3 page is valid
+          * Given: The Object page is valid
+          * Given: The Object2 page is valid
+          * Given: The Object3 page is valid
           
           == Test-Case: Submit
           
-          === Given: The Object page is valid
+          * Given: The Object page is valid
           """
      When The maven plugin, asciidoctor-to-uml goal is executed
      Then The spec-prj project, uml/pst.uml file will be present

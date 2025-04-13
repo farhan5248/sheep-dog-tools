@@ -269,7 +269,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		StepParameters e = (StepParameters) parameters;
 
 		String description = "";
-		for (Statement s : e.getStatementList()) {
+		for (Statement s : e.getStatementList().getStatementList()) {
 			description += s.getName() + "\n";
 		}
 		return description;

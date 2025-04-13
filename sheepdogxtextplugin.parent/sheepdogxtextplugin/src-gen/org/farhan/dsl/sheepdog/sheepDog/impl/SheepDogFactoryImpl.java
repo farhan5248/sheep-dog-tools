@@ -80,6 +80,7 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
       case SheepDogPackage.THEN: return createThen();
       case SheepDogPackage.AND: return createAnd();
       case SheepDogPackage.TEXT: return createText();
+      case SheepDogPackage.STATEMENT_LIST: return createStatementList();
       case SheepDogPackage.TABLE: return createTable();
       case SheepDogPackage.ROW: return createRow();
       case SheepDogPackage.CELL: return createCell();
@@ -267,6 +268,18 @@ public class SheepDogFactoryImpl extends EFactoryImpl implements SheepDogFactory
   {
     TextImpl text = new TextImpl();
     return text;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public StatementList createStatementList()
+  {
+    StatementListImpl statementList = new StatementListImpl();
+    return statementList;
   }
 
   /**

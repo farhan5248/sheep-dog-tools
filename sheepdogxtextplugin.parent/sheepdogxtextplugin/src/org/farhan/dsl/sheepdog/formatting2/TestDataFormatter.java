@@ -4,7 +4,6 @@ import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.farhan.dsl.sheepdog.services.SheepDogGrammarAccess;
 import org.farhan.dsl.sheepdog.services.SheepDogGrammarAccess.TestDataElements;
 import org.farhan.dsl.sheepdog.sheepDog.TestData;
-import org.farhan.dsl.sheepdog.sheepDog.Statement;
 
 public class TestDataFormatter extends Formatter {
 
@@ -16,14 +15,18 @@ public class TestDataFormatter extends Formatter {
 
 	public void format(IFormattableDocument doc, SheepDogGrammarAccess ga, SheepDogFormatter df) {
 		TestDataElements a = ga.getTestDataAccess();
-		formatKeywordTrailingSpace(df.getRegion(theTestData, a.getEqualsSignEqualsSignEqualsSignKeyword_0()), doc);
+		formatKeywordTrailingSpace(df.getRegion(theTestData, a.getAsteriskKeyword_0()), doc);
 		formatKeywordTrailingSpace(df.getRegion(theTestData, a.getTestDataKeyword_1()), doc);
 		formatTitle(df.getRegion(theTestData, a.getNameTitleParserRuleCall_2_0()), doc);
-		formatEOL2RuleCall(df.getRegion(theTestData, a.getEOLTerminalRuleCall_3()), doc);
 
-		for (Statement s : theTestData.getStatementList()) {
-			StatementFormatter formatter = new StatementFormatter(s);
-			formatter.isLast(isLastElement(s, theTestData.getStatementList()));
+		if (theTestData.getTable() != null || theTestData.getStatementList() != null) {
+			formatEOL1RuleCall(df.getRegion(theTestData, a.getEOLTerminalRuleCall_3()), doc);
+		} else {
+			formatEOL2RuleCall(df.getRegion(theTestData, a.getEOLTerminalRuleCall_3()), doc);
+		}
+
+		if (theTestData.getStatementList() != null) {
+			StatementListFormatter formatter = new StatementListFormatter(theTestData.getStatementList());
 			formatter.format(doc, ga, df);
 		}
 

@@ -18,8 +18,8 @@ public class TableFormattingTest extends FormattingTest {
 		sb.append("\n");
 		sb.append("== Test-Case: Submit a drug claim\n");
 		sb.append("\n");
-		sb.append("=== Given: do step one\n");
-		sb.append("\n");
+		sb.append("* Given: do step one\n");
+		sb.append("+\n");
 		sb.append("|===\n");
 		sb.append("| Header1 | Header2\n");
 		sb.append("| data1   | data2  \n");
@@ -47,8 +47,8 @@ public class TableFormattingTest extends FormattingTest {
 			sb.append("\n");
 			sb.append("== Test-Case: Submit a drug claim\n");
 			sb.append("\n");
-			sb.append("=== Given: do step one\n");
-			sb.append("\n");
+			sb.append("* Given: do step one\n");
+			sb.append("+\n");
 			sb.append(" |=== \n");
 			sb.append(" |  Header1  |  Header2   \n");
 			sb.append(" |  data1   |  data2     \n");
