@@ -12,55 +12,41 @@ public class SpecPrjObjectPageAsciidocFileSteps extends TestSteps {
 
     @Inject
     public SpecPrjObjectPageAsciidocFileSteps(ObjectPageAsciidocFile object) {
-        super(object);
+        super(object, "spec-prj", "src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc");
     }
 
     @Given("^The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Header section will be created as follows$")
-    public void theSpecPrjProjectSrcTestResourcesAsciidocStepdefsBlahApplicationObjectPageAsciidocFileHeaderSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.setComponent("spec-prj");
-        object.setPath("src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc");
+    public void headerSectionWillBeCreatedAsFollows(DataTable dataTable) {
         object.assertInputOutputs(dataTable, "HeaderSection");
     }
 
     @Given("^The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Step Definition Parameters Table section will be created as follows$")
-    public void theSpecPrjProjectSrcTestResourcesAsciidocStepdefsBlahApplicationObjectPageAsciidocFileStepDefinitionParametersTableSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.setComponent("spec-prj");
-        object.setPath("src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc");
+    public void stepDefinitionParametersTableSectionWillBeCreatedAsFollows(DataTable dataTable) {
         object.assertInputOutputs(dataTable, "StepDefinitionParametersTableSection");
     }
 
     @Given("^The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file Step Definition section will be created as follows$")
-    public void theSpecPrjProjectSrcTestResourcesAsciidocStepdefsBlahApplicationObjectPageAsciidocFileStepDefinitionSectionWillBeCreatedAsFollows(DataTable dataTable) {
-        object.setComponent("spec-prj");
-        object.setPath("src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc");
+    public void stepDefinitionSectionWillBeCreatedAsFollows(DataTable dataTable) {
         object.assertInputOutputs(dataTable, "StepDefinitionSection");
     }
 
     @Given("^The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is created as follows$")
-    public void theSpecPrjProjectSrcTestResourcesAsciidocStepdefsBlahApplicationObjectPageAsciidocFileIsCreatedAsFollows(String docString) {
-        object.setComponent("spec-prj");
-        object.setPath("src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc");
+    public void isCreatedAsFollows(String docString) {
         object.setInputOutputs("Content", docString);
     }
 
     @Given("^The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file is deleted$")
-    public void theSpecPrjProjectSrcTestResourcesAsciidocStepdefsBlahApplicationObjectPageAsciidocFileIsDeleted() {
-        object.setComponent("spec-prj");
-        object.setPath("src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc");
+    public void isDeleted() {
         object.setInputOutputs("Deleted");
     }
 
     @Given("^The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be created as follows$")
-    public void theSpecPrjProjectSrcTestResourcesAsciidocStepdefsBlahApplicationObjectPageAsciidocFileWillBeCreatedAsFollows(String docString) {
-        object.setComponent("spec-prj");
-        object.setPath("src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc");
+    public void willBeCreatedAsFollows(String docString) {
         object.assertInputOutputs("Content", docString);
     }
 
     @Given("^The spec-prj project, src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc file will be present$")
-    public void theSpecPrjProjectSrcTestResourcesAsciidocStepdefsBlahApplicationObjectPageAsciidocFileWillBePresent() {
-        object.setComponent("spec-prj");
-        object.setPath("src/test/resources/asciidoc/stepdefs/blah application/Object page.asciidoc");
+    public void willBePresent() {
         object.assertInputOutputs("Present");
     }
 }

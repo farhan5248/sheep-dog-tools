@@ -12,20 +12,16 @@ public class XtextProposeContentDialogSteps extends TestSteps {
 
     @Inject
     public XtextProposeContentDialogSteps(ProposeContentDialog object) {
-        super(object);
+        super(object, "xtext", "propose content");
     }
 
     @Given("^The xtext plugin, propose content dialog will be empty$")
-    public void theXtextPluginProposeContentDialogWillBeEmpty() {
-        object.setComponent("xtext");
-        object.setPath("propose content");
+    public void willBeEmpty() {
         object.assertInputOutputs("Empty");
     }
 
     @Given("^The xtext plugin, propose content dialog will be set as follows$")
-    public void theXtextPluginProposeContentDialogWillBeSetAsFollows(DataTable dataTable) {
-        object.setComponent("xtext");
-        object.setPath("propose content");
+    public void willBeSetAsFollows(DataTable dataTable) {
         object.assertInputOutputs(dataTable);
     }
 }

@@ -12,20 +12,16 @@ public class SpecPrjProcess2AsciidocFileSteps extends TestSteps {
 
     @Inject
     public SpecPrjProcess2AsciidocFileSteps(Process2AsciidocFile object) {
-        super(object);
+        super(object, "spec-prj", "src/test/resources/asciidoc/specs/Process2.asciidoc");
     }
 
     @Given("^The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file background steps snippet is created as follows$")
-    public void theSpecPrjProjectSrcTestResourcesAsciidocSpecsProcess2AsciidocFileBackgroundStepsSnippetIsCreatedAsFollows(DataTable dataTable) {
-        object.setComponent("spec-prj");
-        object.setPath("src/test/resources/asciidoc/specs/Process2.asciidoc");
+    public void backgroundStepsSnippetIsCreatedAsFollows(DataTable dataTable) {
         object.setInputOutputs(dataTable, "BackgroundStepsSnippet");
     }
 
     @Given("^The spec-prj project, src/test/resources/asciidoc/specs/Process2.asciidoc file steps snippet is created as follows$")
-    public void theSpecPrjProjectSrcTestResourcesAsciidocSpecsProcess2AsciidocFileStepsSnippetIsCreatedAsFollows(DataTable dataTable) {
-        object.setComponent("spec-prj");
-        object.setPath("src/test/resources/asciidoc/specs/Process2.asciidoc");
+    public void stepsSnippetIsCreatedAsFollows(DataTable dataTable) {
         object.setInputOutputs(dataTable, "StepsSnippet");
     }
 }

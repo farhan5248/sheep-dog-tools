@@ -11,13 +11,11 @@ public class XtextProposeTestStepTableActionSteps extends TestSteps {
 
     @Inject
     public XtextProposeTestStepTableActionSteps(ProposeTestStepTableAction object) {
-        super(object);
+        super(object, "xtext", "propose test step table");
     }
 
     @Given("^The xtext plugin, propose test step table action is performed$")
-    public void theXtextPluginProposeTestStepTableActionIsPerformed() {
-        object.setComponent("xtext");
-        object.setPath("propose test step table");
+    public void isPerformed() {
         object.transition();
     }
 }

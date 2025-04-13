@@ -11,13 +11,11 @@ public class XtextGenerateStepDefinitionActionSteps extends TestSteps {
 
     @Inject
     public XtextGenerateStepDefinitionActionSteps(GenerateStepDefinitionAction object) {
-        super(object);
+        super(object, "xtext", "generate step definition");
     }
 
     @Given("^The xtext plugin, generate step definition action is performed$")
-    public void theXtextPluginGenerateStepDefinitionActionIsPerformed() {
-        object.setComponent("xtext");
-        object.setPath("generate step definition");
+    public void isPerformed() {
         object.transition();
     }
 }

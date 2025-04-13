@@ -36,13 +36,11 @@ Feature: DependencyInjection
           public class BlahObjectPageSteps extends TestSteps {
           
               public BlahObjectPageSteps(ObjectPage object) {
-                  super(object);
+                  super(object, "blah", "Object");
               }
           
               @Given("^The blah application, Object page is empty$")
-              public void theBlahApplicationObjectPageIsEmpty() {
-                  object.setComponent("blah");
-                  object.setPath("Object");
+              public void isEmpty() {
                   object.setInputOutputs("Empty");
               }
           }
@@ -67,13 +65,11 @@ Feature: DependencyInjection
           
               @Inject
               public BlahObjectPageSteps(ObjectPage object) {
-                  super(object);
+                  super(object, "blah", "Object");
               }
           
               @Given("^The blah application, Object page is empty$")
-              public void theBlahApplicationObjectPageIsEmpty() {
-                  object.setComponent("blah");
-                  object.setPath("Object");
+              public void isEmpty() {
                   object.setInputOutputs("Empty");
               }
           }

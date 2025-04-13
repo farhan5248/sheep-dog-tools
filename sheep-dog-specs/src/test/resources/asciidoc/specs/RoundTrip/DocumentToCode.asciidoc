@@ -160,29 +160,27 @@ package org.farhan.stepdefs.blah;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
-import org.farhan.common.BlahFactory;
+import org.farhan.common.TestSteps;
 
-public class BlahObjectPageSteps {
+public class BlahObjectPageSteps extends TestSteps {
+
+    public BlahObjectPageSteps() {
+        super("ObjectPage", "blah", "Object");
+    }
 
     @Given("^The blah application, Object page is created as follows$")
-    public void theBlahApplicationObjectPageIsCreatedAsFollows(DataTable dataTable) {
-        BlahFactory.get("ObjectPage").setComponent("blah");
-        BlahFactory.get("ObjectPage").setPath("Object");
-        BlahFactory.get("ObjectPage").setInputOutputs(dataTable);
+    public void isCreatedAsFollows(DataTable dataTable) {
+        object.setInputOutputs(dataTable);
     }
 
     @Given("^The blah application, Object page is invalid$")
-    public void theBlahApplicationObjectPageIsInvalid() {
-        BlahFactory.get("ObjectPage").setComponent("blah");
-        BlahFactory.get("ObjectPage").setPath("Object");
-        BlahFactory.get("ObjectPage").setInputOutputs("Invalid");
+    public void isInvalid() {
+        object.setInputOutputs("Invalid");
     }
 
     @Given("^The blah application, Object page is valid$")
-    public void theBlahApplicationObjectPageIsValid() {
-        BlahFactory.get("ObjectPage").setComponent("blah");
-        BlahFactory.get("ObjectPage").setPath("Object");
-        BlahFactory.get("ObjectPage").setInputOutputs("Valid");
+    public void isValid() {
+        object.setInputOutputs("Valid");
     }
 }
 ----

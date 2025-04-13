@@ -12,13 +12,11 @@ public class XtextValidateWarningDialogSteps extends TestSteps {
 
     @Inject
     public XtextValidateWarningDialogSteps(ValidateWarningDialog object) {
-        super(object);
+        super(object, "xtext", "validate warning");
     }
 
     @Given("^The xtext plugin, validate warning dialog will be set as follows$")
-    public void theXtextPluginValidateWarningDialogWillBeSetAsFollows(DataTable dataTable) {
-        object.setComponent("xtext");
-        object.setPath("validate warning");
+    public void willBeSetAsFollows(DataTable dataTable) {
         object.assertInputOutputs(dataTable);
     }
 }

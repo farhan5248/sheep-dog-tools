@@ -28,14 +28,19 @@ Feature: PreserveMethods
           """
           package org.farhan.stepdefs.blah;
           
-          import io.cucumber.java.en.Given;
           import io.cucumber.datatable.DataTable;
+          import io.cucumber.java.en.Given;
           import org.farhan.common.BlahFactory;
           
           public class BlahObjectPageSteps {
           
               @Given("^The blah application, Object page is invalid$")
-              public void theBlahApplicationObjectPageIsInvalid() {
+          
+              public BlahObjectPageSteps() {
+                  super("ObjectPage", "blah", "Object");
+              }
+          
+              public void isInvalid() {
                   BlahFactory.get("ObjectPage").setComponent("blah");
                   BlahFactory.get("ObjectPage").setPath("Object");
                   BlahFactory.get("ObjectPage").setInputOutputs("Invalid");
@@ -55,17 +60,19 @@ Feature: PreserveMethods
           public class BlahObjectPageSteps {
           
               @Given("^The blah application, Object page is invalid$")
-              public void theBlahApplicationObjectPageIsInvalid() {
+              public BlahObjectPageSteps() {
+                  super("ObjectPage", "blah", "Object");
+              }
+          
+              public void isInvalid() {
                   BlahFactory.get("ObjectPage").setComponent("blah");
                   BlahFactory.get("ObjectPage").setPath("Object");
                   BlahFactory.get("ObjectPage").setInputOutputs("Invalid");
               }
           
               @Given("^The blah application, Object page is empty$")
-              public void theBlahApplicationObjectPageIsEmpty() {
-                  BlahFactory.get("ObjectPage").setComponent("blah");
-                  BlahFactory.get("ObjectPage").setPath("Object");
-                  BlahFactory.get("ObjectPage").setInputOutputs("Empty");
+              public void isEmpty() {
+                  object.setInputOutputs("Empty");
               }
           }
           """

@@ -12,13 +12,11 @@ public class XtextValidateErrorActionSteps extends TestSteps {
 
     @Inject
     public XtextValidateErrorActionSteps(ValidateErrorAction object) {
-        super(object);
+        super(object, "xtext", "validate error");
     }
 
     @Given("^The xtext plugin, validate error action is performed as follows$")
-    public void theXtextPluginValidateErrorActionIsPerformedAsFollows(DataTable dataTable) {
-        object.setComponent("xtext");
-        object.setPath("validate error");
+    public void isPerformedAsFollows(DataTable dataTable) {
         object.setInputOutputs(dataTable);
         object.transition();
     }

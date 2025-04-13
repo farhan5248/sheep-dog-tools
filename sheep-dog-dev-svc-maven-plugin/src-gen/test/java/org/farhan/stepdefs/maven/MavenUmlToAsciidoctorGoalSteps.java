@@ -8,20 +8,16 @@ import org.farhan.objects.maven.UmlToAsciidoctorGoal;
 public class MavenUmlToAsciidoctorGoalSteps extends TestSteps {
 
     public MavenUmlToAsciidoctorGoalSteps(UmlToAsciidoctorGoal object) {
-        super(object);
+        super(object, "maven", "uml-to-asciidoctor");
     }
 
     @Given("^The maven plugin, uml-to-asciidoctor goal is executed$")
-    public void theMavenPluginUmlToAsciidoctorGoalIsExecuted() {
-        object.setComponent("maven");
-        object.setPath("uml-to-asciidoctor");
+    public void isExecuted() {
         object.transition();
     }
 
     @Given("^The maven plugin, uml-to-asciidoctor goal is executed with$")
-    public void theMavenPluginUmlToAsciidoctorGoalIsExecutedWith(DataTable dataTable) {
-        object.setComponent("maven");
-        object.setPath("uml-to-asciidoctor");
+    public void isExecutedWith(DataTable dataTable) {
         object.setInputOutputs(dataTable);
         object.transition();
     }

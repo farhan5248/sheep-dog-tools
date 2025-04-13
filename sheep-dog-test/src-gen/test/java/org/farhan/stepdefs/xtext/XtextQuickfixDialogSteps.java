@@ -12,13 +12,11 @@ public class XtextQuickfixDialogSteps extends TestSteps {
 
     @Inject
     public XtextQuickfixDialogSteps(QuickfixDialog object) {
-        super(object);
+        super(object, "xtext", "quickfix");
     }
 
     @Given("^The xtext plugin, quickfix dialog will be set as follows$")
-    public void theXtextPluginQuickfixDialogWillBeSetAsFollows(DataTable dataTable) {
-        object.setComponent("xtext");
-        object.setPath("quickfix");
+    public void willBeSetAsFollows(DataTable dataTable) {
         object.assertInputOutputs(dataTable);
     }
 }

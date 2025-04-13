@@ -11,13 +11,11 @@ public class SpecPrjProcessAsciidocFileSteps extends TestSteps {
 
     @Inject
     public SpecPrjProcessAsciidocFileSteps(ProcessAsciidocFile object) {
-        super(object);
+        super(object, "spec-prj", "src/test/resources/asciidoc/specs/Process.asciidoc");
     }
 
     @Given("^The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file is created as follows$")
-    public void theSpecPrjProjectSrcTestResourcesAsciidocSpecsProcessAsciidocFileIsCreatedAsFollows(String docString) {
-        object.setComponent("spec-prj");
-        object.setPath("src/test/resources/asciidoc/specs/Process.asciidoc");
+    public void isCreatedAsFollows(String docString) {
         object.setInputOutputs("Content", docString);
     }
 }

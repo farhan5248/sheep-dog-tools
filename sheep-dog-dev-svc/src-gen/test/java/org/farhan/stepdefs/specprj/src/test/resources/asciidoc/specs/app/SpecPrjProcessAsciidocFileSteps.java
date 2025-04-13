@@ -7,20 +7,16 @@ import org.farhan.objects.specprj.src.test.resources.asciidoc.specs.app.ProcessA
 public class SpecPrjProcessAsciidocFileSteps extends TestSteps {
 
     public SpecPrjProcessAsciidocFileSteps(ProcessAsciidocFile object) {
-        super(object);
+        super(object, "spec-prj", "src/test/resources/asciidoc/specs/app/Process.asciidoc");
     }
 
     @Given("^The spec-prj project, src/test/resources/asciidoc/specs/app/Process.asciidoc file is created as follows$")
-    public void theSpecPrjProjectSrcTestResourcesAsciidocSpecsAppProcessAsciidocFileIsCreatedAsFollows(String docString) {
-        object.setComponent("spec-prj");
-        object.setPath("src/test/resources/asciidoc/specs/app/Process.asciidoc");
+    public void isCreatedAsFollows(String docString) {
         object.setInputOutputs("Content", docString);
     }
 
     @Given("^The spec-prj project, src/test/resources/asciidoc/specs/app/Process.asciidoc file will be created as follows$")
-    public void theSpecPrjProjectSrcTestResourcesAsciidocSpecsAppProcessAsciidocFileWillBeCreatedAsFollows(String docString) {
-        object.setComponent("spec-prj");
-        object.setPath("src/test/resources/asciidoc/specs/app/Process.asciidoc");
+    public void willBeCreatedAsFollows(String docString) {
         object.assertInputOutputs("Content", docString);
     }
 }

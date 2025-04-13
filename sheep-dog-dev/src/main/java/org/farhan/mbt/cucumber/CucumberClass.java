@@ -5,50 +5,56 @@ import java.util.ArrayList;
 import org.apache.commons.lang3.StringUtils;
 import org.farhan.dsl.common.TestStepNameHelper;
 
+import com.github.javaparser.ast.Modifier;
+import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.BlockStmt;
 
 public class CucumberClass extends CucumberJava {
+
 	public CucumberClass(String thePath) {
 		super(thePath);
+		getType().addExtendedType("TestSteps");
+
+		theJavaClass.addImport("org.farhan.common.TestSteps");
 		theJavaClass.addImport("io.cucumber.java.en.Given");
 	}
 
+	protected void addConstructor(String name) {
+		// TODO create no component, single component, component with package tests
+		if (getType().getConstructors().isEmpty()) {
+			ConstructorDeclaration constructor = getType().addConstructor(Modifier.Keyword.PUBLIC);
+			constructor.createBody()
+					.addStatement("super(\"" + getObjectNameFromPath(thePath) + "\",\""
+							+ TestStepNameHelper.getComponentName(name) + "\",\""
+							+ TestStepNameHelper.getObjectName(name) + "\");");
+		}
+	}
+
 	public void addStepDefinition(String name, ArrayList<String> paramList) throws Exception {
-		theJavaClass.addImport(getFactoryImport(name));
-		MethodDeclaration aMethod = addMethod(convertToCamelCase(name).replace("'", ""));
+		addConstructor(name);
+		MethodDeclaration aMethod = addMethod(
+				convertToCamelCase(TestStepNameHelper.getPredicate(name)).replace("'", ""));
 		BlockStmt body = aMethod.getBody().get();
 		if (body.isEmpty()) {
 			if (aMethod.getAnnotations().isEmpty()) {
 				aMethod.addSingleMemberAnnotation("Given", "\"^" + name + "$\"");
 			}
 			body = aMethod.createBody();
-			body.addStatement(getCallForFactory(name) + getCallForComponent(name) + ";");
-			body.addStatement(getCallForFactory(name) + getCallForPath(name) + ";");
 			if (paramList.size() == 0 && !TestStepNameHelper.isEdge(name)) {
-				body.addStatement(getCallForFactory(name) + getCallForInputOutputsForState(name) + ";");
+				body.addStatement("object" + getCallForInputOutputsForState(name) + ";");
 			} else if (paramList.size() == 1 && paramList.get(0).contentEquals("Content")) {
 				addParameter(aMethod, "String", "docString");
-				body.addStatement(getCallForFactory(name) + getCallForInputOutputsForDocString(name) + ";");
+				body.addStatement("object" + getCallForInputOutputsForDocString(name) + ";");
 			} else if (paramList.size() >= 1) {
 				theJavaClass.addImport("io.cucumber.datatable.DataTable");
 				addParameter(aMethod, "DataTable", "dataTable");
-				body.addStatement(getCallForFactory(name) + getCallForInputOutputsForDataTable(name) + ";");
+				body.addStatement("object" + getCallForInputOutputsForDataTable(name) + ";");
 			}
 			if (TestStepNameHelper.isEdge(name)) {
-				body.addStatement(getCallForFactory(name) + getCallForTransition() + ";");
+				body.addStatement("object" + getCallForTransition() + ";");
 			}
 		}
-	}
-
-	private String getCallForComponent(String step) {
-		return ".setComponent(\"" + TestStepNameHelper.getComponentName(step) + "\")";
-	}
-
-	protected String getCallForFactory(String step) {
-		String factoryName = convertToPascalCase(TestStepNameHelper.getComponentName(step)) + "Factory";
-		String interfaceName = getInterfaceName(step);
-		return factoryName + ".get(\"" + interfaceName + "\")";
 	}
 
 	private String getCallForInputOutputsForDataTable(String step) throws Exception {
@@ -67,16 +73,8 @@ public class CucumberClass extends CucumberJava {
 				+ getNegativeArg(step) + ")";
 	}
 
-	private String getCallForPath(String step) {
-		return ".setPath(\"" + TestStepNameHelper.getObjectName(step) + "\")";
-	}
-
 	private String getCallForTransition() {
 		return ".transition()";
-	}
-
-	protected String getFactoryImport(String step) {
-		return "org.farhan.common." + convertToPascalCase(TestStepNameHelper.getComponentName(step)) + "Factory";
 	}
 
 	protected String getInterfaceName(String step) {

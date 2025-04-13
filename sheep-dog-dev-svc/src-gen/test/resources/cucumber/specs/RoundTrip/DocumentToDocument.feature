@@ -94,7 +94,7 @@ Feature: DocumentToDocument
           * Given: The blah application, Object page is valid
           
           * Then: The blah application, Object page is created as follows
-          
+          +
           ----
             text1
           

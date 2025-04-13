@@ -11,13 +11,11 @@ public class XtextValidateWarningActionSteps extends TestSteps {
 
     @Inject
     public XtextValidateWarningActionSteps(ValidateWarningAction object) {
-        super(object);
+        super(object, "xtext", "validate warning");
     }
 
     @Given("^The xtext plugin, validate warning action is performed$")
-    public void theXtextPluginValidateWarningActionIsPerformed() {
-        object.setComponent("xtext");
-        object.setPath("validate warning");
+    public void isPerformed() {
         object.transition();
     }
 }

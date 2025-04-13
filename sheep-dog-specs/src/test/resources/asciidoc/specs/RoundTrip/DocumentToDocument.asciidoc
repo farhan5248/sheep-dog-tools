@@ -100,7 +100,7 @@ Desc 2
 * Given: The blah application, Object page is valid
 
 * Then: The blah application, Object page is created as follows
-
++
 \----
   text1
 

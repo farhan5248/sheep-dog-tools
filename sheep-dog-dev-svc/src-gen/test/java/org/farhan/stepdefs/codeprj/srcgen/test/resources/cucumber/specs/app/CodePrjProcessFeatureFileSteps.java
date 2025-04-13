@@ -7,20 +7,16 @@ import org.farhan.objects.codeprj.srcgen.test.resources.cucumber.specs.app.Proce
 public class CodePrjProcessFeatureFileSteps extends TestSteps {
 
     public CodePrjProcessFeatureFileSteps(ProcessFeatureFile object) {
-        super(object);
+        super(object, "code-prj", "src-gen/test/resources/cucumber/specs/app/Process.feature");
     }
 
     @Given("^The code-prj project, src-gen/test/resources/cucumber/specs/app/Process.feature file is created as follows$")
-    public void theCodePrjProjectSrcGenTestResourcesCucumberSpecsAppProcessFeatureFileIsCreatedAsFollows(String docString) {
-        object.setComponent("code-prj");
-        object.setPath("src-gen/test/resources/cucumber/specs/app/Process.feature");
+    public void isCreatedAsFollows(String docString) {
         object.setInputOutputs("Content", docString);
     }
 
     @Given("^The code-prj project, src-gen/test/resources/cucumber/specs/app/Process.feature file will be created as follows$")
-    public void theCodePrjProjectSrcGenTestResourcesCucumberSpecsAppProcessFeatureFileWillBeCreatedAsFollows(String docString) {
-        object.setComponent("code-prj");
-        object.setPath("src-gen/test/resources/cucumber/specs/app/Process.feature");
+    public void willBeCreatedAsFollows(String docString) {
         object.assertInputOutputs("Content", docString);
     }
 }

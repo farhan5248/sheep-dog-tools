@@ -28,7 +28,7 @@ Feature: UMLStepDefinitionToCode
           |===
           
           * Given: The blah application, Object page is created as follows
-          
+          +
           ----
           text1
           ----
@@ -69,17 +69,12 @@ Feature: UMLStepDefinitionToCode
 
      When The maven plugin, uml-to-cucumber goal is executed
      Then The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
-      And The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Header section will be created as follows
-          | Import                        |
-          | org.farhan.common.BlahFactory |
       And The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name                         | Annotation                                             | Visibility | Return Type |
-          | theBlahApplicationObjectPageIsEmpty | @Given("^The blah application, Object page is empty$") | public     | void        |
+          | Method Name | Annotation                                             | Visibility | Return Type |
+          | isEmpty     | @Given("^The blah application, Object page is empty$") | public     | void        |
       And The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name                         | Statement                                               |
-          | theBlahApplicationObjectPageIsEmpty | BlahFactory.get("ObjectPage").setComponent("blah");     |
-          | theBlahApplicationObjectPageIsEmpty | BlahFactory.get("ObjectPage").setPath("Object");        |
-          | theBlahApplicationObjectPageIsEmpty | BlahFactory.get("ObjectPage").setInputOutputs("Empty"); |
+          | Method Name | Statement                        |
+          | isEmpty     | object.setInputOutputs("Empty"); |
 
   Scenario: Layer 2 with datatable without DI
 
@@ -89,36 +84,30 @@ Feature: UMLStepDefinitionToCode
           | Import                          |
           | io.cucumber.datatable.DataTable |
       And The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name                                                  | Parameter Name | Parameter Type |
-          | theBlahApplicationObjectPageTopSectionWillBeCreatedAsFollows | dataTable      | DataTable      |
+          | Method Name                      | Parameter Name | Parameter Type |
+          | topSectionWillBeCreatedAsFollows | dataTable      | DataTable      |
       And The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name                                                  | Statement                                                                  |
-          | theBlahApplicationObjectPageTopSectionWillBeCreatedAsFollows | BlahFactory.get("ObjectPage").setComponent("blah");                        |
-          | theBlahApplicationObjectPageTopSectionWillBeCreatedAsFollows | BlahFactory.get("ObjectPage").setPath("Object");                           |
-          | theBlahApplicationObjectPageTopSectionWillBeCreatedAsFollows | BlahFactory.get("ObjectPage").assertInputOutputs(dataTable, "TopSection"); |
+          | Method Name                      | Statement                                           |
+          | topSectionWillBeCreatedAsFollows | object.assertInputOutputs(dataTable, "TopSection"); |
 
   Scenario: Layer 2 with datatable, negative without DI
 
      When The maven plugin, uml-to-cucumber goal is executed
      Then The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
       And The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name                                                  | Statement                                                                        |
-          | theBlahApplicationObjectPageTopSectionWontBeCreatedAsFollows | BlahFactory.get("ObjectPage").setComponent("blah");                              |
-          | theBlahApplicationObjectPageTopSectionWontBeCreatedAsFollows | BlahFactory.get("ObjectPage").setPath("Object");                                 |
-          | theBlahApplicationObjectPageTopSectionWontBeCreatedAsFollows | BlahFactory.get("ObjectPage").assertInputOutputs(dataTable, "TopSection", true); |
+          | Method Name                      | Statement                                                 |
+          | topSectionWontBeCreatedAsFollows | object.assertInputOutputs(dataTable, "TopSection", true); |
 
   Scenario: Layer 2 with docstring without DI
 
      When The maven plugin, uml-to-cucumber goal is executed
      Then The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file will be present
       And The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name                                    | Parameter Name | Parameter Type |
-          | theBlahApplicationObjectPageIsCreatedAsFollows | docString      | String         |
+          | Method Name        | Parameter Name | Parameter Type |
+          | isCreatedAsFollows | docString      | String         |
       And The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name                                    | Statement                                                            |
-          | theBlahApplicationObjectPageIsCreatedAsFollows | BlahFactory.get("ObjectPage").setComponent("blah");                  |
-          | theBlahApplicationObjectPageIsCreatedAsFollows | BlahFactory.get("ObjectPage").setPath("Object");                     |
-          | theBlahApplicationObjectPageIsCreatedAsFollows | BlahFactory.get("ObjectPage").setInputOutputs("Content", docString); |
+          | Method Name        | Statement                                     |
+          | isCreatedAsFollows | object.setInputOutputs("Content", docString); |
 
   Scenario: Layer 3
 
@@ -143,13 +132,11 @@ Feature: UMLStepDefinitionToCode
           | Extends   |
           | TestSteps |
       And The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Header section will be created as follows
-          | Constructor Name    | Statement      |
-          | BlahObjectPageSteps | super(object); |
+          | Constructor Name    | Statement                        |
+          | BlahObjectPageSteps | super(object, "blah", "Object"); |
       And The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name                         | Statement                        |
-          | theBlahApplicationObjectPageIsEmpty | object.setComponent("blah");     |
-          | theBlahApplicationObjectPageIsEmpty | object.setPath("Object");        |
-          | theBlahApplicationObjectPageIsEmpty | object.setInputOutputs("Empty"); |
+          | Method Name | Statement                        |
+          | isEmpty     | object.setInputOutputs("Empty"); |
 
   Scenario: Layer 2 without parameters with guice
 
@@ -166,8 +153,6 @@ Feature: UMLStepDefinitionToCode
           | Constructor Name    | Constructor Annotation |
           | BlahObjectPageSteps | Inject                 |
       And The code-prj project, src-gen/test/java/org/farhan/stepdefs/blah/BlahObjectPageSteps.java file Methods section will be created as follows
-          | Method Name                         | Statement                        |
-          | theBlahApplicationObjectPageIsEmpty | object.setComponent("blah");     |
-          | theBlahApplicationObjectPageIsEmpty | object.setPath("Object");        |
-          | theBlahApplicationObjectPageIsEmpty | object.setInputOutputs("Empty"); |
+          | Method Name | Statement                        |
+          | isEmpty     | object.setInputOutputs("Empty"); |
 
