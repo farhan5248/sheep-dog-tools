@@ -33,6 +33,8 @@ import org.farhan.dsl.common.*;
 
 public class LanguageAccessImpl implements ILanguageAccess {
 
+	public final static String STEP_PARAMETER_TEXT = "| Content";
+
 	private static ArrayList<String> getFolderResources(IFolder folder) throws Exception {
 		ArrayList<String> files = new ArrayList<String>();
 		if (folder.exists()) {
@@ -211,13 +213,14 @@ public class LanguageAccessImpl implements ILanguageAccess {
 	}
 
 	public ArrayList<Object> getPreviousSteps() {
+		// TODO add a test to make sure the previous steps only are returned
 		TestStepContainer as = (TestStepContainer) step.eContainer();
 		ArrayList<Object> steps = new ArrayList<Object>();
 		for (TestStep s : as.getTestStepList()) {
-			if (s.getName() != null) {
-				if (s.equals(step)) {
-					break;
-				} else {
+			if (s.equals(step)) {
+				break;
+			} else {
+				if (s.getName() != null) {
 					steps.add(s);
 				}
 			}
@@ -320,7 +323,7 @@ public class LanguageAccessImpl implements ILanguageAccess {
 		if (header == null) {
 			// TODO it's better to create a single cell with the content than hardcoding it
 			// this way
-			return "| Content";
+			return STEP_PARAMETER_TEXT;
 		} else {
 			return cellsToString(getHeader(), true);
 		}

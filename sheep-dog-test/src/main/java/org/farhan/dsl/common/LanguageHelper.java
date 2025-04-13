@@ -180,7 +180,8 @@ public class LanguageHelper {
 		allSteps.addAll(la.getPreviousSteps());
 
 		for (Object step : allSteps) {
-			if (la.getStepName() == null) {
+			// TODO make tests for this if statement
+			if (la.getStepName(step) == null) {
 				continue;
 			} else if (!TestStepNameHelper.isValid(la.getStepName(step))) {
 				continue;
@@ -281,9 +282,10 @@ public class LanguageHelper {
 		}
 	}
 
-	public static TreeMap<String, Proposal> proposeTestStepTable(ILanguageAccess la) throws Exception {
+	public static TreeMap<String, Proposal> proposeStepParameters(ILanguageAccess la) throws Exception {
 		TreeMap<String, Proposal> proposals = new TreeMap<String, Proposal>();
 		Proposal proposal;
+
 		if (TestStepNameHelper.isValid(la.getStepName())) {
 			String objectQualifiedName = getStepObjectQualifiedName(la);
 			Object stepObject = la.getStepObject(objectQualifiedName);

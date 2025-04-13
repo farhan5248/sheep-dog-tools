@@ -17,7 +17,7 @@ public class SheepDogHighlightingConfiguration implements IHighlightingConfigura
 	public static final String KEYWORD_LVL_1 = "keywordobj";
 	public static final String KEYWORD_LVL_2 = "keywordfse";
 	public static final String KEYWORD_LVL_3 = "keywordgwt";
-	public static final String DOC_ID = "document";
+	public static final String DOC_ID = "text";
 	public static final String TBL_ID = "table";
 
 	@Override
@@ -34,7 +34,7 @@ public class SheepDogHighlightingConfiguration implements IHighlightingConfigura
 		acceptor.acceptDefaultHighlighting(KEYWORD_LVL_2, "Level 2", keywordLevel2TextStyle());
 		acceptor.acceptDefaultHighlighting(KEYWORD_LVL_3, "Level 3", keywordLevel3TextStyle());
 
-		acceptor.acceptDefaultHighlighting(DOC_ID, "Document", documentTextStyle());
+		acceptor.acceptDefaultHighlighting(DOC_ID, "Text", documentTextStyle());
 		acceptor.acceptDefaultHighlighting(TBL_ID, "Table", tableTextStyle());
 	}
 
@@ -60,7 +60,7 @@ public class SheepDogHighlightingConfiguration implements IHighlightingConfigura
 
 	public static TextStyle documentTextStyle() {
 		TextStyle textStyle = defaultTextStyle().copy();
-		textStyle.setColor(new RGB(255, 201, 14));
+		textStyle.setColor(new RGB(128, 64, 0));
 		return textStyle;
 	}
 
@@ -93,7 +93,7 @@ public class SheepDogHighlightingConfiguration implements IHighlightingConfigura
 
 	public static TextStyle tagTextStyle() {
 		TextStyle textStyle = defaultTextStyle().copy();
-		textStyle.setColor(new RGB(153, 217, 234));
+		textStyle.setColor(new RGB(255, 201, 14));
 		textStyle.setStyle(SWT.BOLD);
 		return textStyle;
 	}

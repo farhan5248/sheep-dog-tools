@@ -38,7 +38,6 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
 						highlightStatement(s, acceptor, 0);
 					}
 					for (TestStep s : ts.getTestStepList()) {
-						highlightStepParameters(s, acceptor, 0);
 						highlightTable(s.getTable(), acceptor);
 					}
 				} else if (child instanceof TestCase) {
@@ -47,7 +46,9 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
 						highlightStatement(s, acceptor, 0);
 					}
 					for (TestStep s : tc.getTestStepList()) {
-						highlightStepParameters(s, acceptor, 0);
+						if (tc.getTestDataList().size() > 0) {
+							highlightStepParameters(s, acceptor, 0);
+						}
 						highlightTable(s.getTable(), acceptor);
 					}
 					for (TestData example : tc.getTestDataList()) {
@@ -80,6 +81,8 @@ public class SheepDogSemanticHighlightingCalculator implements ISemanticHighligh
 	private void highlightStepParameters(TestStep testStep, IHighlightedPositionAcceptor acceptor, int current) {
 		if (testStep != null) {
 			INode node = NodeModelUtils.getNode(testStep);
+			// TODO only highlight names referenced in the table header
+			// Right now this will highlight a multi-line string
 			int start = node.getText().indexOf('{', current);
 			int stop = node.getText().indexOf('}', start);
 			if (start > 0 && stop > 0 && node.getText().charAt(start + 1) != ' ') {
