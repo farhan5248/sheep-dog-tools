@@ -1,0 +1,11 @@
+= Test-Suite: Process
+
+== Test-Setup: Setup
+
+Desc line 1
+
+* Given: The Object0 page is valid
+
+== Test-Case: Submit
+
+* Given: The Object1 page is valid

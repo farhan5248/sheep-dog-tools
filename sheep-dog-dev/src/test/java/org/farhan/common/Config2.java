@@ -32,17 +32,8 @@ import org.farhan.objects.codeprj.srcgen.test.resources.cucumber.specs.app.Proce
 import org.farhan.objects.specprj.uml.PstUmlFile;
 
 import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Stage;
 
-import io.cucumber.guice.CucumberModules;
-import io.cucumber.guice.InjectorSource;
-import io.cucumber.java.Before;
-
-public final class Config extends AbstractModule implements InjectorSource {
-
-	public static Injector classes;
+public final class Config2 extends AbstractModule {
 
 	public static String getWorkingDir() {
 		return "target/src-gen/";
@@ -60,7 +51,6 @@ public final class Config extends AbstractModule implements InjectorSource {
 		}
 	}
 
-	@Before
 	public void deleteFiles() throws Exception {
 		deleteDir(new File(getWorkingDir()));
 	}
@@ -89,9 +79,4 @@ public final class Config extends AbstractModule implements InjectorSource {
 		bind(UmlToJunitGuiceGoal.class).to(UmlToJunitGuiceGoalImpl.class);
 	}
 
-	@Override
-	public Injector getInjector() {
-		classes = Guice.createInjector(Stage.DEVELOPMENT, CucumberModules.createScenarioModule(), new Config());
-		return classes;
-	}
 }

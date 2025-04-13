@@ -44,6 +44,10 @@ public abstract class TestObject {
 		processInputOutputs(dataTable, "assert", sectionName, false);
 	}
 
+	public void assertInputOutputs(List<List<String>> dataTable, String sectionName) {
+		processInputOutputs(dataTable, "assert", sectionName, false);
+	}
+
 	public void assertInputOutputs(DataTable dataTable, String sectionName, boolean negativeTest) {
 		processInputOutputs(dataTable, "assert", sectionName, negativeTest);
 	}
@@ -71,7 +75,11 @@ public abstract class TestObject {
 	}
 
 	private void processInputOutputs(DataTable dataTable, String operation, String sectionName, boolean negativeTest) {
-		List<List<String>> data = dataTable.asLists();
+		processInputOutputs(dataTable.asLists(), operation, sectionName, negativeTest);
+	}
+
+	private void processInputOutputs(List<List<String>> data, String operation, String sectionName,
+			boolean negativeTest) {
 
 		ArrayList<String> headers = new ArrayList<String>();
 		for (String cell : data.get(0)) {
