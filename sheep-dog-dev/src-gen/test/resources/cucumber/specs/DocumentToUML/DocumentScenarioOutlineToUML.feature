@@ -32,9 +32,8 @@ Feature: DocumentScenarioOutlineToUML
           | specs::Process::Submit | The blah application, Object page is created as follows | dataTable     | 0 -> h1 \|        |
           | specs::Process::Submit | The blah application, Object page is created as follows | dataTable     | 1 -> <h3> \|      |
       And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
-          | Interaction Name       | Annotation Name | Annotation Detail |
-          | specs::Process::Submit | Examples 1      | 0 -> h3\|         |
-          | specs::Process::Submit | Examples 1      | 1 -> v31\|        |
+          | Interaction Name       | Annotation Name | Annotation Detail   |
+          | specs::Process::Submit | Examples 1      | Data -> h3\|\nv31\| |
 
   Scenario: One tag, one statement, one step, one example
 
@@ -122,9 +121,8 @@ Feature: DocumentScenarioOutlineToUML
           | Interaction Name       | Message                                                        |
           | specs::Process::Submit | The blah application, Object<Index> page is created as follows |
       And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
-          | Interaction Name       | Annotation Name  | Annotation Detail |
-          | specs::Process::Submit | Examples <Index> | 0 -> h3\|         |
-          | specs::Process::Submit | Examples <Index> | 1 -> v3<Index>\|  |
+          | Interaction Name       | Annotation Name  | Annotation Detail         |
+          | specs::Process::Submit | Examples <Index> | Data -> h3\|\nv3<Index>\| |
 
     Examples: Indices
 
@@ -199,9 +197,8 @@ Feature: DocumentScenarioOutlineToUML
           | Interaction Name       | Message                                                        |
           | specs::Process::Submit | The blah application, Object<Index> page is created as follows |
       And The spec-prj project, uml/pst.uml file Interaction Annotations section will be created as follows
-          | Interaction Name       | Annotation Name  | Annotation Detail |
-          | specs::Process::Submit | Examples <Index> | 0 -> h3\|         |
-          | specs::Process::Submit | Examples <Index> | 1 -> v3<Index>\|  |
+          | Interaction Name       | Annotation Name  | Annotation Detail         |
+          | specs::Process::Submit | Examples <Index> | Data -> h3\|\nv3<Index>\| |
 
     Examples: Indices
 

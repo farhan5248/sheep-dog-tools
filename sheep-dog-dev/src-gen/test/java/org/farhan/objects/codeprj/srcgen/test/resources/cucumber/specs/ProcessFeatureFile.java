@@ -61,4 +61,6 @@ public interface ProcessFeatureFile {
     public void assertContent(HashMap<String, String> keyMap);
 
     public void assertPresent(HashMap<String, String> keyMap);
+
+    public void assertScenarioOutlineExamplesTableSectionTags(HashMap<String, String> keyMap);
 }

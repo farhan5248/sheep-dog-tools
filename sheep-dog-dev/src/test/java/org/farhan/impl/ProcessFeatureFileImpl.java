@@ -8,8 +8,8 @@ import org.farhan.objects.codeprj.srcgen.test.resources.cucumber.specs.app.Proce
 import io.cucumber.guice.ScenarioScoped;
 
 @ScenarioScoped
-public class ProcessFeatureFileImpl extends FeatureFileObject
-		implements ProcessFeatureFile, org.farhan.objects.codeprj.srcgen.test.resources.cucumber.specs.ProcessFeatureFile {
+public class ProcessFeatureFileImpl extends FeatureFileObject implements ProcessFeatureFile,
+		org.farhan.objects.codeprj.srcgen.test.resources.cucumber.specs.ProcessFeatureFile {
 
 	@Override
 	public void assertBackgroundSectionDescription(HashMap<String, String> keyMap) {
@@ -153,4 +153,10 @@ public class ProcessFeatureFileImpl extends FeatureFileObject
 	public void setContent(HashMap<String, String> keyMap) {
 		setContent(keyMap.get("Content"));
 	}
+
+	@Override
+	public void assertScenarioOutlineExamplesTableSectionTags(HashMap<String, String> keyMap) {
+		assertScenarioOutlineExamplesTableTagsExists(keyMap.get("Name"), keyMap.get("Examples"), keyMap.get("Tags"));
+	}
+
 }

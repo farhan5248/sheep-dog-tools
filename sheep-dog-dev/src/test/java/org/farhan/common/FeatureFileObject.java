@@ -64,6 +64,11 @@ public class FeatureFileObject extends FileObject {
 		Assertions.assertEquals(tags, listAsCsv(wrapper.getFeatureTags()));
 	}
 
+	protected void assertScenarioOutlineExamplesTableTagsExists(String name, String examplesName, String tags) {
+		assertScenarioOutlineExamplesExists(name, examplesName);
+		Assertions.assertEquals(tags, listAsCsv(wrapper.getExamplesTags(getExamples(name, examplesName))));
+	}
+
 	protected void assertFileExists() {
 		super.assertFileExists();
 		try {

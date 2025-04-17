@@ -191,6 +191,14 @@ public class CucumberFeature implements ConvertibleObject {
 		return header;
 	}
 
+	public ArrayList<String> getExamplesTags(Examples examples) {
+		ArrayList<String> tags = new ArrayList<String>();
+		for (Tag c : examples.getTags()) {
+			tags.add(c.getName());
+		}
+		return tags;
+	}
+
 	public String getFeatureDescription() {
 		return convertStatementsToString(theFeature.getStatements());
 	}
@@ -412,6 +420,14 @@ public class CucumberFeature implements ConvertibleObject {
 			return null;
 		}
 		return os.toString();
+	}
+
+	public void setExamplesTags(Examples examples, ArrayList<String> tags) {
+		for (String c : tags) {
+			Tag tag = CucumberFactory.eINSTANCE.createTag();
+			examples.getTags().add(tag);
+			tag.setName(c);
+		}
 	}
 
 }

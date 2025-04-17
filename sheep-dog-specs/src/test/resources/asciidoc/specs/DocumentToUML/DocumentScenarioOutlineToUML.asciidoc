@@ -41,9 +41,8 @@
 * And: The uml/pst.uml file Interaction Annotations section will be created as follows
 +
 |===
-| Interaction Name       | Annotation Name | Annotation Detail
-| specs::Process::Submit | Examples 1      | 0 -} h3\|        
-| specs::Process::Submit | Examples 1      | 1 -} v31\|       
+| Interaction Name       | Annotation Name | Annotation Detail  
+| specs::Process::Submit | Examples 1      | Data -} h3\|\nv31\|
 |===
 
 == Test-Case: One tag, one statement, one step, one example
@@ -87,7 +86,7 @@ Desc line 1
 * And: The uml/pst.uml file Interaction Comments section will be created as follows
 +
 |===
-| Interaction Name       | Comment    
+| Interaction Name       | Comment           
 | specs::Process::Submit | @tag1\nDesc line 1
 |===
 
@@ -147,7 +146,7 @@ Desc line 2
 * And: The uml/pst.uml file Interaction Comments section will be created as follows
 +
 |===
-| Interaction Name       | Comment                 
+| Interaction Name       | Comment                              
 | specs::Process::Submit | @tag1 @tag2\nDesc line 1\nDesc line 2
 |===
 
@@ -161,9 +160,8 @@ Desc line 2
 * And: The uml/pst.uml file Interaction Annotations section will be created as follows
 +
 |===
-| Interaction Name       | Annotation Name  | Annotation Detail
-| specs::Process::Submit | Examples {Index} | 0 -} h3\|        
-| specs::Process::Submit | Examples {Index} | 1 -} v3{Index}\| 
+| Interaction Name       | Annotation Name  | Annotation Detail        
+| specs::Process::Submit | Examples {Index} | Data -} h3\|\nv3{Index}\|
 |===
 
 * Test-Data: Indices
@@ -245,7 +243,7 @@ Desc line 3
 * And: The uml/pst.uml file Interaction Comments section will be created as follows
 +
 |===
-| Interaction Name       | Comment                              
+| Interaction Name       | Comment                                                 
 | specs::Process::Submit | @tag1 @tag2 @tag3\nDesc line 1\nDesc line 2\nDesc line 3
 |===
 
@@ -259,9 +257,8 @@ Desc line 3
 * And: The uml/pst.uml file Interaction Annotations section will be created as follows
 +
 |===
-| Interaction Name       | Annotation Name  | Annotation Detail
-| specs::Process::Submit | Examples {Index} | 0 -} h3\|        
-| specs::Process::Submit | Examples {Index} | 1 -} v3{Index}\| 
+| Interaction Name       | Annotation Name  | Annotation Detail        
+| specs::Process::Submit | Examples {Index} | Data -} h3\|\nv3{Index}\|
 |===
 
 * Test-Data: Indices

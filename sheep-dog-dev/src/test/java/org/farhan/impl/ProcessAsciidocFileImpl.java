@@ -131,4 +131,10 @@ public class ProcessAsciidocFileImpl extends AdocFileObject implements ProcessAs
 		deleteObject();
 	}
 
+	@Override
+	public void assertScenarioOutlineExamplesTableSectionTags(HashMap<String, String> keyMap) {
+		// TODO example tags are in the description generated from asciidoc. For
+		// additional tags not in the description, this should assert that it's there
+	}
+
 }

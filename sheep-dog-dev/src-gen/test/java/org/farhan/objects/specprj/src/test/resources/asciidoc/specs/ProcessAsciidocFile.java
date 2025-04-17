@@ -49,4 +49,6 @@ public interface ProcessAsciidocFile {
     public void setDeleted(HashMap<String, String> keyMap);
 
     public void assertPresent(HashMap<String, String> keyMap);
+
+    public void assertScenarioOutlineExamplesTableSectionTags(HashMap<String, String> keyMap);
 }

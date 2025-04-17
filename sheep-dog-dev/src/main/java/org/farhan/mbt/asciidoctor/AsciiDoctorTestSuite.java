@@ -204,6 +204,16 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 		return header;
 	}
 
+	public ArrayList<String> getExamplesTags(TestData examples) {
+		ArrayList<String> tags = new ArrayList<String>();
+		if (examples.getStatementList() != null) {
+			for (Statement s : examples.getStatementList().getStatementList()) {
+				tags.addAll(StatementNameHelper.getTags(s.getName()));
+			}
+		}
+		return tags;
+	}
+
 	public String getFeatureDescription() {
 		return convertStatementsToString(theFeature.getStatementList());
 	}
@@ -431,6 +441,12 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 			return null;
 		}
 		return os.toString();
+	}
+
+	public void setExamplesTags(TestData examples, ArrayList<String> tags) {
+
+		// TODO the tags should be in the example description. This method is for tags
+		// not in the source asciidoc files. It'll be addressed in another work-item
 	}
 
 }

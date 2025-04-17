@@ -82,6 +82,8 @@ Feature: UMLExamplesTableToCode
           
           * Test-Data: Examples 1
           +
+          @tag1 @tag2 @tag3
+          +
           |===
           | h1 | h2 | h3
           | v1 | v2 | v3
@@ -98,4 +100,7 @@ Feature: UMLExamplesTableToCode
           | Submit | Examples 1 | \| v1 \| v2 \| v3 \| |
           | Submit | Examples 1 | \| v4 \| v5 \| v6 \| |
           | Submit | Examples 1 | \| v7 \| v8 \| v9 \| |
+      And The code-prj project, src-gen/test/resources/cucumber/specs/Process.feature file Scenario Outline Examples Table section will be created as follows
+          | Name   | Examples   | Tags             |
+          | Submit | Examples 1 | tag1,tag2,tag3 |
 

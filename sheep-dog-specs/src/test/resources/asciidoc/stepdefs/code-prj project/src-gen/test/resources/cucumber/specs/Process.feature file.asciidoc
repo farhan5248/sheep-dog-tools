@@ -46,6 +46,12 @@
 | Name | Examples | Row
 |===
 
+* Step-Parameters: 2
++
+|===
+| Name | Examples | Tags
+|===
+
 == Step-Definition: Scenario Outline Steps Data Table section will be created as follows
 
 * Step-Parameters: 1

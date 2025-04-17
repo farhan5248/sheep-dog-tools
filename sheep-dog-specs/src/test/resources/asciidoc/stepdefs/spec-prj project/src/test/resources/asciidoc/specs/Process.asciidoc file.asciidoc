@@ -48,6 +48,12 @@
 | Name | Examples | Row
 |===
 
+* Step-Parameters: 2
++
+|===
+| Name | Examples | Tags
+|===
+
 == Step-Definition: Scenarios section will be created as follows
 
 * Step-Parameters: 1
