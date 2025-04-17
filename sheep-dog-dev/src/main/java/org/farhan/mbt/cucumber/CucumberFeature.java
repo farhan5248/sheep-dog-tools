@@ -322,11 +322,13 @@ public class CucumberFeature implements ConvertibleObject {
 		setDescription(background, backgroundDescription);
 	}
 
-	private void setDescription(AbstractScenario abstractScenario, String scenarioDescription) {
-		if (!scenarioDescription.isEmpty()) {
-			for (String line : scenarioDescription.split("\n")) {
+	private void setDescription(AbstractScenario abstractScenario, String description) {
+		if (!description.isEmpty()) {
+			for (String line : description.split("\n")) {
 				Statement s = CucumberFactory.eINSTANCE.createStatement();
-				s.setName(line.replace("@", "\\@"));
+				// TODO need test for this, reverse and then forward engineer any text with a
+				// tag in it
+				s.setName(line.replaceAll("(\\s*)([\\\\]*)@", "$1\\\\@"));
 				abstractScenario.getStatements().add(s);
 			}
 		}
@@ -366,7 +368,7 @@ public class CucumberFeature implements ConvertibleObject {
 			theFeature.getStatements().clear();
 			for (String line : featureDescription.split("\n")) {
 				Statement s = CucumberFactory.eINSTANCE.createStatement();
-				s.setName(line.replace("@", "\\@"));
+				s.setName(line.replaceAll("(\\s*)([\\\\]*)@", "$1\\\\@"));
 				theFeature.getStatements().add(s);
 			}
 		}
@@ -439,7 +441,7 @@ public class CucumberFeature implements ConvertibleObject {
 			examples.getStatements().clear();
 			for (String line : description.split("\n")) {
 				Statement s = CucumberFactory.eINSTANCE.createStatement();
-				s.setName(line.replace("@", "\\@"));
+				s.setName(line.replaceAll("(\\s*)([\\\\]*)@", "$1\\\\@"));
 				examples.getStatements().add(s);
 			}
 		}
