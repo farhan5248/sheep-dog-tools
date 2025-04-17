@@ -105,8 +105,8 @@ public class ConvertAsciidoctorToUML extends Converter {
 
 	private void convertTestData(UMLTestData examples, TestData srcExamples) {
 		log.debug("test data: " + srcExamples.getName());
-		// TODO add examples description
 		examples.setTags(srcObjTestSuite.getExamplesTags(srcExamples));
+		examples.setDescription(srcObjTestSuite.getExamplesDescription(srcExamples));
 		examples.setTable(srcObjTestSuite.getExamplesTable(srcExamples));
 		for (Row row : srcObjTestSuite.getExamplesRowList(srcExamples)) {
 			examples.addRow(srcObjTestSuite.getExamplesRow(srcExamples, row));

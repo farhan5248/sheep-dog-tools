@@ -85,6 +85,9 @@ Feature: UMLExamplesTableToDocument
           * Test-Data: Examples 1
           +
           @tag1 @tag2 @tag3
+          Desc1
+          Desc2
+          Desc3
           +
           |===
           | h1 | h2 | h3
@@ -104,6 +107,6 @@ Feature: UMLExamplesTableToDocument
           | Submit | Examples 1 | v4, v5, v6 |
           | Submit | Examples 1 | v7, v8, v9 |
       And The spec-prj project, src/test/resources/asciidoc/specs/Process.asciidoc file Scenario Outline Examples Table section will be created as follows
-          | Name   | Examples   | Tags             |
-          | Submit | Examples 1 | tag1, tag2, tag3 |
+          | Name   | Examples   | Tags           | Description         |
+          | Submit | Examples 1 | tag1,tag2,tag3 | @tag1 @tag2 @tag3\nDesc1\nDesc2\nDesc3 |
 

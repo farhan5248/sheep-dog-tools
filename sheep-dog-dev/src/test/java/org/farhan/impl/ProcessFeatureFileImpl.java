@@ -56,6 +56,12 @@ public class ProcessFeatureFileImpl extends FeatureFileObject implements Process
 	}
 
 	@Override
+	public void assertScenarioOutlineExamplesTableSectionDescription(HashMap<String, String> keyMap) {
+		assertScenarioOutlineExamplesTableDescription(keyMap.get("Name"), keyMap.get("Examples"),
+				keyMap.get("Description"));
+	}
+
+	@Override
 	public void assertScenarioOutlineExamplesTableSectionExamples(HashMap<String, String> keyMap) {
 		assertScenarioOutlineExamplesExists(keyMap.get("Name"), keyMap.get("Examples"));
 	}
@@ -68,6 +74,11 @@ public class ProcessFeatureFileImpl extends FeatureFileObject implements Process
 	@Override
 	public void assertScenarioOutlineExamplesTableSectionRow(HashMap<String, String> keyMap) {
 		assertScenarioOutlineExamplesTableRowExists(keyMap.get("Name"), keyMap.get("Examples"), keyMap.get("Row"));
+	}
+
+	@Override
+	public void assertScenarioOutlineExamplesTableSectionTags(HashMap<String, String> keyMap) {
+		assertScenarioOutlineExamplesTableTagsExists(keyMap.get("Name"), keyMap.get("Examples"), keyMap.get("Tags"));
 	}
 
 	@Override
@@ -152,11 +163,6 @@ public class ProcessFeatureFileImpl extends FeatureFileObject implements Process
 
 	public void setContent(HashMap<String, String> keyMap) {
 		setContent(keyMap.get("Content"));
-	}
-
-	@Override
-	public void assertScenarioOutlineExamplesTableSectionTags(HashMap<String, String> keyMap) {
-		assertScenarioOutlineExamplesTableTagsExists(keyMap.get("Name"), keyMap.get("Examples"), keyMap.get("Tags"));
 	}
 
 }

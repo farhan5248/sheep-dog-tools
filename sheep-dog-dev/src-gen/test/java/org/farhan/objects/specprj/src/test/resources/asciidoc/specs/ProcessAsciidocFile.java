@@ -51,4 +51,6 @@ public interface ProcessAsciidocFile {
     public void assertPresent(HashMap<String, String> keyMap);
 
     public void assertScenarioOutlineExamplesTableSectionTags(HashMap<String, String> keyMap);
+
+    public void assertScenarioOutlineExamplesTableSectionDescription(HashMap<String, String> keyMap);
 }

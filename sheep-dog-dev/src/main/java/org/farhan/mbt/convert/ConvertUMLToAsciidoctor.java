@@ -82,7 +82,7 @@ public class ConvertUMLToAsciidoctor extends Converter {
 
 	private void convertTestData(TestData examples, UMLTestData srcTestData) {
 		log.debug("test data: " + srcTestData.getName());
-		// TODO add examples description
+		tgtObjTestSuite.setExamplesDescription(examples, srcTestData.getDescription());
 		tgtObjTestSuite.setExamplesTags(examples, srcTestData.getTags());
 		tgtObjTestSuite.setExamplesTable(examples, srcTestData.getTable());
 		for (ArrayList<String> row : srcTestData.getRowList()) {

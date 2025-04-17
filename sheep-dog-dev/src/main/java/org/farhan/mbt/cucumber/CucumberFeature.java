@@ -158,6 +158,10 @@ public class CucumberFeature implements ConvertibleObject {
 		return text.replaceFirst("\n", "");
 	}
 
+	public String getExamplesDescription(Examples examples) {
+		return convertStatementsToString(examples.getStatements());
+	}
+
 	public EList<Examples> getExamplesList(AbstractScenario abstractScenario) {
 		ScenarioOutline scenarioOutline = (ScenarioOutline) abstractScenario;
 		return scenarioOutline.getExamples();
@@ -349,6 +353,14 @@ public class CucumberFeature implements ConvertibleObject {
 		examples.getTheExamplesTable().getRows().add(row);
 	}
 
+	public void setExamplesTags(Examples examples, ArrayList<String> tags) {
+		for (String c : tags) {
+			Tag tag = CucumberFactory.eINSTANCE.createTag();
+			examples.getTags().add(tag);
+			tag.setName(c);
+		}
+	}
+
 	public void setFeatureDescription(String featureDescription) {
 		if (!featureDescription.isEmpty()) {
 			theFeature.getStatements().clear();
@@ -422,11 +434,14 @@ public class CucumberFeature implements ConvertibleObject {
 		return os.toString();
 	}
 
-	public void setExamplesTags(Examples examples, ArrayList<String> tags) {
-		for (String c : tags) {
-			Tag tag = CucumberFactory.eINSTANCE.createTag();
-			examples.getTags().add(tag);
-			tag.setName(c);
+	public void setExamplesDescription(Examples examples, String description) {
+		if (!description.isEmpty()) {
+			examples.getStatements().clear();
+			for (String line : description.split("\n")) {
+				Statement s = CucumberFactory.eINSTANCE.createStatement();
+				s.setName(line.replace("@", "\\@"));
+				examples.getStatements().add(s);
+			}
 		}
 	}
 

@@ -59,6 +59,9 @@ Feature: CodeExamplesTableToUML
           
               @tag1 @tag2 @tag3
               Examples: Examples 1
+              Desc1
+              Desc2
+              Desc3
                     | h1 | h2 | h3 |
                     | v1 | v2 | v3 |
                     | v4 | v5 | v6 |
@@ -70,4 +73,5 @@ Feature: CodeExamplesTableToUML
           | Interaction Name       | Annotation Name | Annotation Detail                                              |
           | specs::Process::Submit | Examples 1      | Data -> h1\|h2\|h3\|\nv1\|v2\|v3\|\nv4\|v5\|v6\|\nv7\|v8\|v9\| |
           | specs::Process::Submit | Examples 1      | Tags -> tag1\ntag2\ntag3                                       |
+          | specs::Process::Submit | Examples 1      | Description -> Desc1\nDesc2\nDesc3                             |
 

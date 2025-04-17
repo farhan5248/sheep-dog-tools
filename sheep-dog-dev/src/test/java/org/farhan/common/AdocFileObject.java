@@ -51,38 +51,14 @@ public class AdocFileObject extends FileObject {
 		Assertions.assertEquals(statements, testSuite.getFeatureDescription());
 	}
 
-	protected void deleteObject() {
-		super.assertFileExists();
-		try {
-			sr.delete(attributes.get("path"));
-		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
-		}
-	}
-
-	protected void assertTestSuiteExists() {
-		super.assertFileExists();
-		try {
-			testSuite = new AsciiDoctorTestSuite(attributes.get("path"));
-			testSuite.parse(sr.get(attributes.get("path")));
-		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
-		}
-	}
-
-	protected void assertStepObjectExists() {
-		super.assertFileExists();
-		try {
-			stepObject = new AsciiDoctorStepObject(attributes.get("path"));
-			stepObject.parse(sr.get(attributes.get("path")));
-		} catch (Exception e) {
-			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
-		}
-	}
-
 	protected void assertScenarioOutlineExamplesExists(String name, String examplesName) {
 		assertAbstractScenarioExists(name);
 		Assertions.assertTrue(getExamples(name, examplesName) != null, "TestData " + examplesName + " doesn't exist");
+	}
+
+	protected void assertScenarioOutlineExamplesTableDescription(String name, String examplesName, String description) {
+		assertScenarioOutlineExamplesExists(name, examplesName);
+		Assertions.assertEquals(description, testSuite.getExamplesDescription(getExamples(name, examplesName)));
 	}
 
 	protected void assertScenarioOutlineExamplesTableRowExists(String name, String examplesName, String rowName) {
@@ -115,12 +91,41 @@ public class AdocFileObject extends FileObject {
 		Assertions.assertTrue(getStep(name, stepName) != null, "TestStep " + stepName + " doesn't exist");
 	}
 
+	protected void assertStepObjectExists() {
+		super.assertFileExists();
+		try {
+			stepObject = new AsciiDoctorStepObject(attributes.get("path"));
+			stepObject.parse(sr.get(attributes.get("path")));
+		} catch (Exception e) {
+			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
+		}
+	}
+
 	protected void assertStepObjectName(String name) {
 		Assertions.assertEquals(name, stepObject.getStepObjectName());
 	}
 
 	protected void assertStepObjectStatements(String name, String statements) {
 		Assertions.assertEquals(statements, stepObject.getStepObjectDescription());
+	}
+
+	protected void assertTestSuiteExists() {
+		super.assertFileExists();
+		try {
+			testSuite = new AsciiDoctorTestSuite(attributes.get("path"));
+			testSuite.parse(sr.get(attributes.get("path")));
+		} catch (Exception e) {
+			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
+		}
+	}
+
+	protected void deleteObject() {
+		super.assertFileExists();
+		try {
+			sr.delete(attributes.get("path"));
+		} catch (Exception e) {
+			Assertions.fail("There was an error executing the test step\n" + getStackTraceAsString(e));
+		}
 	}
 
 	private TestStepContainer getAbstractScenario(String name) {

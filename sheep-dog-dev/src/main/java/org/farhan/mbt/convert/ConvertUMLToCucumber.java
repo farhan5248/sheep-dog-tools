@@ -90,8 +90,8 @@ public class ConvertUMLToCucumber extends Converter {
 
 	protected void convertTestData(Examples examples, UMLTestData srcTestData) {
 		log.debug("test data: " + srcTestData.getName());
-		// TODO add examples description
 		tgtObjTestSuite.setExamplesTags(examples, srcTestData.getTags());
+		tgtObjTestSuite.setExamplesDescription(examples, srcTestData.getDescription());
 		tgtObjTestSuite.setExamplesTable(examples, srcTestData.getTable());
 		for (ArrayList<String> row : srcTestData.getRowList()) {
 			tgtObjTestSuite.addExamplesRow(examples, row);

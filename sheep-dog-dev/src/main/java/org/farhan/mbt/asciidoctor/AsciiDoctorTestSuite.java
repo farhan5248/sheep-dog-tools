@@ -444,9 +444,27 @@ public class AsciiDoctorTestSuite implements ConvertibleObject {
 	}
 
 	public void setExamplesTags(TestData examples, ArrayList<String> tags) {
-
 		// TODO the tags should be in the example description. This method is for tags
 		// not in the source asciidoc files. It'll be addressed in another work-item
+	}
+
+	public String getExamplesDescription(TestData examples) {
+		if (examples.getStatementList() != null) {
+			return convertStatementsToString(examples.getStatementList().getStatementList());
+		} else {
+			return "";
+		}
+	}
+
+	public void setExamplesDescription(TestData examples, String description) {
+		if (!description.isEmpty()) {
+			examples.setStatementList(SheepDogFactory.eINSTANCE.createStatementList());
+			for (String line : description.split("\n")) {
+				Statement statement = SheepDogFactory.eINSTANCE.createStatement();
+				statement.setName(line);
+				examples.getStatementList().getStatementList().add(statement);
+			}
+		}
 	}
 
 }

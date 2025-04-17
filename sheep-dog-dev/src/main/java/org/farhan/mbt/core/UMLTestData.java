@@ -98,4 +98,17 @@ public class UMLTestData extends UMLElement {
 		return paramNames;
 	}
 
+	public void setDescription(String description) {
+		umlElement.getDetails().put("Description", description);
+	}
+
+	public String getDescription() {
+		for (Entry<String, String> s : umlElement.getDetails().entrySet()) {
+			if (s.getKey().equals("Description")) {
+				return s.getValue();
+			}
+		}
+		return "";
+	}
+
 }
